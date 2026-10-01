@@ -1,0 +1,992 @@
+{
+ "chapter": "sup-l1-microeconomie-choix",
+ "lessons": [
+  {
+   "id": "sup-l1-microeconomie-rarete",
+   "title": "Rareté, agents économiques et coût d'opportunité",
+   "minutes": 40,
+   "programRef": "L1 — Introduction à l'économie : rareté, choix, agents (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir besoin, bien économique et rareté, et expliquer pourquoi la rareté oblige à choisir.",
+    "Identifier les grands agents économiques et leurs fonctions.",
+    "Calculer un coût d'opportunité à partir de données chiffrées.",
+    "Lire une frontière des possibilités de production et distinguer points atteignables et inatteignables."
+   ],
+   "exercises": [
+    "sup-l1-microeconomie-rarete-01",
+    "sup-l1-microeconomie-rarete-02",
+    "sup-l1-microeconomie-rarete-03",
+    "sup-l1-microeconomie-rarete-04",
+    "sup-l1-microeconomie-rarete-05",
+    "sup-l1-microeconomie-rarete-06",
+    "sup-l1-microeconomie-rarete-07"
+   ],
+   "selfCheck": [
+    "sup-l1-microeconomie-rarete-q1",
+    "sup-l1-microeconomie-rarete-q2",
+    "sup-l1-microeconomie-rarete-q3",
+    "sup-l1-microeconomie-rarete-q4",
+    "sup-l1-microeconomie-rarete-q5"
+   ],
+   "reviewNotes": [
+    "Vocabulaire des agents économiques : la liste (ménages, entreprises, administrations, institutions financières, reste du monde) suit un usage courant ; à confronter à la typologie utilisée dans le cours de l'établissement.",
+    "Tous les chiffres (kg, FCFA, heures) sont fictifs et choisis pour des calculs simples."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Besoin, bien, rareté",
+     "md": "Un **besoin** est un sentiment de manque que l'on cherche à combler. Un **bien** (ou un service) est un moyen de satisfaire un besoin. Un bien est dit **économique** lorsqu'il est produit ou obtenu au prix d'un effort et qu'il existe en quantité limitée : on doit donc payer, ou renoncer à autre chose, pour l'avoir."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La rareté",
+     "md": "Il y a **rareté** lorsque les ressources disponibles (travail, terre, capital, temps, revenu) sont **insuffisantes** pour satisfaire tous les besoins. La rareté ne signifie pas qu'un bien est « cher » ni « peu nombreux » en absolu : elle exprime l'écart entre des besoins illimités et des moyens limités. D'où la nécessité de **choisir**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les agents économiques",
+     "md": "Un **agent économique** est une unité qui prend des décisions économiques. On distingue :\n- les **ménages** : consomment, épargnent, offrent leur travail ;\n- les **entreprises** : produisent des biens et services ;\n- les **administrations publiques** : fournissent des services collectifs, prélèvent des impôts ;\n- les **institutions financières** : collectent l'épargne et accordent des crédits ;\n- le **reste du monde** : exportations et importations."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 120,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 57.25,
+        "text": "Ménages",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 30,
+        "w": 120,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 57.25,
+        "text": "Entreprises",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 175,
+        "w": 120,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 201.9,
+        "text": "Administrations",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 44,
+        "x2": 280,
+        "y2": 44,
+        "color": "green",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 36,
+        "text": "travail",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 62,
+        "x2": 140,
+        "y2": 62,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 84,
+        "text": "revenus",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 74,
+        "x2": 170,
+        "y2": 175,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 135,
+        "text": "impôts",
+        "size": 13,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 74,
+        "x2": 250,
+        "y2": 175,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 135,
+        "text": "taxes",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     },
+     "caption": "Les agents et quelques flux entre eux.",
+     "alt": "Schéma avec trois rectangles : Ménages (en haut à gauche), Entreprises (en haut à droite) et Administrations (en bas). Une flèche « travail » va des ménages vers les entreprises, une flèche « revenus » en sens inverse ; des flèches pointillées « impôts » et « taxes » vont vers les administrations."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Coût d'opportunité",
+     "md": "Choisir une option, c'est renoncer aux autres. Le **coût d'opportunité** d'un choix est la valeur de la **meilleure alternative abandonnée**. Il ne se limite pas à la dépense monétaire : il inclut le temps, le gain manqué, l'usage alternatif d'une ressource."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Coût d'opportunité en production",
+     "md": "Si, avec les mêmes ressources, on peut produire soit $a$ unités du bien A, soit $b$ unités du bien B, le coût d'opportunité d'une unité de B est, en unités de A :",
+     "tex": "\\text{CO(1 unité de B)} = \\frac{a}{b}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 3.5,
+      "ymin": 0,
+      "ymax": 7,
+      "grid": 1,
+      "xlabel": "tables par jour",
+      "ylabel": "chaises par jour",
+      "curves": [
+       {
+        "expr": "6-2*x",
+        "color": "blue",
+        "label": "frontière"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 6,
+        "label": "6 chaises",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3 tables",
+        "color": "red"
+       },
+       {
+        "x": 1,
+        "y": 4,
+        "label": "A (1 ; 4)",
+        "color": "green"
+       },
+       {
+        "x": 2,
+        "y": 3,
+        "label": "B (2 ; 3)",
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "Frontière des possibilités de production d'un atelier de menuiserie.",
+     "alt": "Droite décroissante du point (0 table ; 6 chaises) au point (3 tables ; 0 chaise). Le point A (1 table ; 4 chaises) est sur la droite, le point B (2 tables ; 3 chaises) est en dessous : il est atteignable mais n'utilise pas toutes les ressources."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — un atelier de menuiserie",
+     "statement": "Un atelier d'un quartier de Bafoussam peut fabriquer en une journée soit 6 chaises, soit 3 tables (pas les deux à plein). Quel est le coût d'opportunité d'une table ? D'une chaise ?",
+     "steps": [
+      {
+       "md": "Une table occupe les ressources de 2 chaises : renoncer à une table libère de quoi faire 2 chaises.",
+       "tex": "\\frac{6}{3} = 2"
+      },
+      {
+       "md": "Coût d'opportunité d'une table = **2 chaises**."
+      },
+      {
+       "md": "Inversement, une chaise coûte 3/6 = 0,5 table."
+      }
+     ],
+     "answer": "**1 table coûte 2 chaises ; 1 chaise coûte 0,5 table.** Les deux coûts sont inverses l'un de l'autre."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — lire la frontière",
+     "statement": "Avec la frontière ci-dessus (chaises = 6 − 2 × tables), l'atelier veut 1 table. Combien de chaises au maximum ? Le plan (2 tables ; 4 chaises) est-il réalisable ?",
+     "steps": [
+      {
+       "md": "Pour 1 table : chaises = 6 − 2 × 1 = 4.",
+       "tex": "6 - 2 \\times 1 = 4"
+      },
+      {
+       "md": "Pour 2 tables : chaises max = 6 − 2 × 2 = 2.",
+       "tex": "6 - 2 \\times 2 = 2"
+      },
+      {
+       "md": "Le plan demande 4 chaises, or le maximum est 2 : il est **hors de la frontière**, donc inatteignable avec ces ressources."
+      }
+     ],
+     "answer": "**4 chaises au maximum pour 1 table ; le plan (2 ; 4) est inatteignable.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **rareté** et **cherté** : l'eau de pluie peut être gratuite mais l'eau potable au robinet est un bien économique.\n- Croire que le coût d'opportunité est « ce que l'on paie » : c'est ce à quoi on **renonce**.\n- Inverser le rapport : le coût de B en unités de A est $a/b$, pas $b/a$.\n- Oublier qu'un point **à l'intérieur** de la frontière est atteignable mais gaspille des ressources."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Quand les ressources sont mal adaptées à chaque bien, la frontière est une courbe **concave** et le coût d'opportunité **croît** : on parle de coûts d'opportunité croissants.",
+      "Le coût d'opportunité est au cœur de l'idée d'**avantage comparatif** que l'on retrouve en commerce international.",
+      "Un déplacement **vers l'extérieur** de la frontière correspond à la croissance (plus de ressources, progrès technique)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-microeconomie-rarete-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur",
+   "title": "Utilité et choix du consommateur",
+   "minutes": 50,
+   "programRef": "L1 — Théorie du consommateur : contrainte budgétaire, utilité marginale (approche cardinale) (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Écrire et représenter la contrainte budgétaire de deux biens.",
+    "Distinguer utilité totale et utilité marginale ; énoncer la décroissance de l'utilité marginale.",
+    "Appliquer la règle d'égalisation des utilités marginales pondérées par les prix.",
+    "Déterminer le panier optimal à partir d'un tableau d'utilités marginales."
+   ],
+   "prerequisites": [
+    "sup-l1-microeconomie-rarete"
+   ],
+   "exercises": [
+    "sup-l1-microeconomie-consommateur-01",
+    "sup-l1-microeconomie-consommateur-02",
+    "sup-l1-microeconomie-consommateur-03",
+    "sup-l1-microeconomie-consommateur-04",
+    "sup-l1-microeconomie-consommateur-05",
+    "sup-l1-microeconomie-consommateur-06",
+    "sup-l1-microeconomie-consommateur-07"
+   ],
+   "selfCheck": [
+    "sup-l1-microeconomie-consommateur-q1",
+    "sup-l1-microeconomie-consommateur-q2",
+    "sup-l1-microeconomie-consommateur-q3",
+    "sup-l1-microeconomie-consommateur-q4",
+    "sup-l1-microeconomie-consommateur-q5"
+   ],
+   "reviewNotes": [
+    "Approche cardinale simplifiée (utilités marginales chiffrées) ; l'approche ordinale (courbes d'indifférence, TMS) n'est pas traitée ici.",
+    "Les tableaux d'utilité sont fictifs ; vérifier que la notation (Um, Um/p) correspond à celle du cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Utilité",
+     "md": "L'**utilité** mesure la satisfaction qu'un consommateur retire de la consommation d'un bien. L'**utilité totale** $U$ est la satisfaction de l'ensemble des unités consommées. L'**utilité marginale** $U_m$ est la satisfaction apportée par la **dernière unité** consommée :",
+     "tex": "U_m(q) = U(q) - U(q-1) \\approx \\frac{\\Delta U}{\\Delta q}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Utilité marginale décroissante",
+     "md": "Pour un bien donné, plus on consomme d'unités sur une courte période, plus la satisfaction apportée par chaque unité supplémentaire **diminue** : le premier verre d'eau après un match apporte plus que le cinquième. L'utilité totale augmente tant que $U_m > 0$, mais de plus en plus lentement."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Contrainte budgétaire",
+     "md": "Un consommateur de revenu $R$ achète deux biens $x$ et $y$ aux prix $p_x$ et $p_y$. Ses dépenses ne peuvent pas dépasser son revenu ; s'il dépense tout :",
+     "tex": "p_x \\, x + p_y \\, y = R"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Droite de budget",
+     "md": "On l'écrit $y = \\frac{R}{p_y} - \\frac{p_x}{p_y}\\,x$. Elle coupe l'axe des $y$ en $R/p_y$ et l'axe des $x$ en $R/p_x$. Sa **pente** est $-p_x/p_y$ : c'est le nombre d'unités de $y$ auxquelles on renonce pour une unité de $x$ de plus. Une hausse de $R$ la déplace parallèlement ; une hausse de $p_x$ la fait pivoter."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 22,
+      "ymin": 0,
+      "ymax": 10,
+      "grid": 2,
+      "xlabel": "riz (kg)",
+      "ylabel": "poisson (kg)",
+      "curves": [
+       {
+        "expr": "8.0-0.4*x",
+        "color": "blue",
+        "label": "droite de budget"
+       }
+      ],
+      "points": [
+       {
+        "x": 20,
+        "y": 0,
+        "label": "20 kg riz",
+        "color": "red"
+       },
+       {
+        "x": 0,
+        "y": 8,
+        "label": "8 kg poisson",
+        "color": "red"
+       },
+       {
+        "x": 10,
+        "y": 4,
+        "label": "panier C",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Droite de budget pour R = 12 000 FCFA, riz à 600 FCFA/kg, poisson à 1 500 FCFA/kg.",
+     "alt": "Droite décroissante de (0 kg de riz ; 8 kg de poisson) à (20 kg de riz ; 0 kg de poisson). Le panier C (10 kg de riz ; 4 kg de poisson) est sur la droite."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Équilibre du consommateur (approche cardinale)",
+     "md": "Le consommateur choisit le panier qui maximise son utilité totale **en épuisant son budget** et en égalisant l'utilité marginale **par franc dépensé** :",
+     "tex": "\\frac{U_{m,x}}{p_x} = \\frac{U_{m,y}}{p_y} \\quad \\text{et} \\quad p_x x + p_y y = R"
+    },
+    {
+     "type": "text",
+     "md": "Interprétation : si $U_{m,x}/p_x > U_{m,y}/p_y$, un franc de plus dépensé en $x$ rapporte davantage qu'un franc dépensé en $y$ ; il faut transférer du budget de $y$ vers $x$. Comme $U_m$ décroît avec la quantité, le transfert s'arrête quand les rapports deviennent égaux."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — contrainte budgétaire",
+     "statement": "Un ménage dispose de R = 12 000 FCFA pour acheter du riz (p = 600 FCFA/kg) et du poisson (p = 1 500 FCFA/kg). Détermine les paniers extrêmes, la pente et l'achat de poisson si le ménage prend 10 kg de riz.",
+     "steps": [
+      {
+       "md": "Tout en riz : 12 000 / 600 = 20 kg. Tout en poisson : 12 000 / 1 500 = 8 kg.",
+       "tex": "\\frac{12000}{600} = 20, \\quad \\frac{12000}{1500} = 8"
+      },
+      {
+       "md": "Pente = −p_x/p_y = −600/1 500 = −0,4 : un kg de riz de plus fait renoncer à 0,4 kg de poisson."
+      },
+      {
+       "md": "Pour 10 kg de riz : dépense riz = 6000. Reste 6000 FCFA, soit 4 kg de poisson.",
+       "tex": "y = \\frac{12000 - 600\\times 10}{1500} = 4"
+      }
+     ],
+     "answer": "**Paniers extrêmes : 20 kg de riz ou 8 kg de poisson ; avec 10 kg de riz, 4 kg de poisson.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — panier optimal",
+     "statement": "Revenu 10 (en milliers de FCFA). Bien A : prix 2. Bien B : prix 1. Utilités marginales de A : 24, 20, 16, 12, 8 (1re à 5e unité) ; de B : 14, 12, 10, 8, 6, … (suite 4, 2). Quel panier maximise l'utilité ?",
+     "steps": [
+      {
+       "md": "Calcule Um/p. Bien A (p = 2) : 1e : 24 → 12 ; 2e : 20 → 10 ; 3e : 16 → 8 ; 4e : 12 → 6 ; 5e : 8 → 4."
+      },
+      {
+       "md": "Bien B (p = 1) : 1e : 14 → 14 ; 2e : 12 → 12 ; 3e : 10 → 10 ; 4e : 8 → 8 ; 5e : 6 → 6."
+      },
+      {
+       "md": "On achète les « francs » les plus rentables : B1 (14), A1 et B2 (12), A2 et B3 (10), A3 et B4 (8). Coût : 2×3 + 1×4 = 10 = revenu."
+      },
+      {
+       "md": "Vérification : Um/p vaut 8 pour A3 et pour B4 ; les suivantes (A4 : 6, B5 : 6) sont inférieures. Utilité totale = 60 + 44 = 104."
+      }
+     ],
+     "answer": "**Panier optimal : 3 unités de A et 4 unités de B (utilité totale 104).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Comparer directement $U_{m,x}$ et $U_{m,y}$ **sans diviser par les prix** : c'est $U_m/p$ qui s'égalise.\n- Oublier la contrainte : égaliser les rapports ne suffit pas, il faut aussi **épuiser le budget**.\n- Confondre utilité marginale (dernière unité) et utilité totale (toutes les unités).\n- Se tromper de sens pour la pente : $-p_x/p_y$, pas $-p_y/p_x$."
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'approche **ordinale** remplace la mesure de l'utilité par un classement de paniers (courbes d'indifférence) ; l'optimum est alors la tangence entre une courbe d'indifférence et la droite de budget.",
+      "Une baisse du prix d'un bien produit un **effet de substitution** (on achète plus du bien devenu moins cher) et un **effet de revenu** (le pouvoir d'achat augmente).",
+      "Le « paradoxe de l'eau et du diamant » s'explique par l'utilité marginale : l'eau, abondante, a une utilité marginale faible bien que son utilité totale soit énorme."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-microeconomie-consommateur-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-microeconomie-rarete-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Un paysan peut cultiver soit 120 kg d'arachides, soit 60 kg de maïs sur sa parcelle. Quel est le coût d'opportunité d'un kg de maïs, en kg d'arachides ?",
+   "explanation": "Un kg de maïs mobilise la parcelle qui donnerait 120/60 = 2 kg d'arachides.",
+   "method": "Coût de B en unités de A = quantité de A / quantité de B.",
+   "mistakes": [
+    "Calculer 60/120 = 0,5, qui est le coût d'un kg d'arachides en maïs."
+   ],
+   "source": "Exercice original",
+   "answer": 2.0,
+   "tolerance": 0,
+   "unit": "kg d'arachides"
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Parmi ces biens, lequel est un bien économique ?",
+   "explanation": "Le sac de ciment est produit avec effort et existe en quantité limitée : il a un prix. Les autres sont disponibles librement dans la nature (au moins dans l'usage courant).",
+   "method": "Un bien économique est produit ou obtenu au prix d'un effort et n'est pas disponible à volonté.",
+   "mistakes": [
+    "Croire qu'un bien utile est toujours économique : il faut aussi qu'il soit limité."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "La lumière du soleil",
+    "Un sac de ciment",
+    "L'eau de pluie recueillie sans effort",
+    "L'air que l'on respire à l'extérieur"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Associe chaque agent à sa fonction principale.",
+   "explanation": "Chaque agent a une fonction dominante, même si un agent peut en avoir plusieurs (un ménage peut aussi épargner).",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Ménages",
+     "Consomment et offrent du travail"
+    ],
+    [
+     "Entreprises",
+     "Produisent des biens et services"
+    ],
+    [
+     "Administrations",
+     "Prélèvent des impôts et fournissent des services collectifs"
+    ],
+    [
+     "Institutions financières",
+     "Collectent l'épargne et accordent des crédits"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Un bien dont le prix est très bas n'est jamais concerné par la rareté.",
+   "explanation": "La rareté tient à la limitation des ressources par rapport aux besoins. Un bien bon marché reste rare dès lors qu'il faut des ressources pour le produire et que l'on doit choisir.",
+   "method": "Séparer prix (niveau) et rareté (limitation des ressources).",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Une étudiante peut soit garder des enfants pendant 4 heures à 1 500 FCFA l'heure, soit aller au cinéma (billet : 2 000 FCFA). Quel est le coût économique total de la sortie, en FCFA ?",
+   "explanation": "Coût explicite : billet = 2 000 FCFA. Coût d'opportunité du temps : 4 × 1 500 = 6 000 FCFA de gain manqué. Total : 2 000 + 6 000 = 8 000 FCFA.",
+   "method": "Additionner la dépense et la valeur de ce à quoi on renonce.",
+   "mistakes": [
+    "Ne compter que le billet."
+   ],
+   "source": "Exercice original",
+   "answer": 8000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Explique en quelques lignes pourquoi la rareté oblige un ménage camerounais à faire des choix, avec un exemple concret.",
+   "explanation": "Une bonne réponse oppose ressources limitées et besoins étendus, puis illustre le renoncement.",
+   "method": "Plan : ressources limitées, besoins étendus, choix, exemple.",
+   "source": "Exercice original",
+   "model": "Le revenu d'un ménage est limité alors que les besoins (nourriture, scolarité, santé, transport, loisirs) sont nombreux. Si un ménage consacre davantage aux frais de scolarité, il lui reste moins pour d'autres dépenses : chaque choix a un coût d'opportunité.",
+   "rubric": [
+    "Idée de ressources/revenu limités",
+    "Idée de besoins nombreux ou illimités",
+    "Un exemple concret",
+    "Notion de renoncement (coût d'opportunité)"
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Une exploitation agricole peut consacrer toute sa surface soit à 90 sacs de maïs, soit à 30 sacs de soja. On suppose une frontière de possibilités de production linéaire.",
+   "method": "Écrire l'équation de la frontière (maïs = 90 − 3 × soja), puis comparer le plan à cette frontière.",
+   "mistakes": [
+    "Diviser dans le mauvais sens.",
+    "Oublier de comparer le plan au maximum possible pour la quantité de soja donnée."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-microeconomie-rarete-07-a",
+     "points": 1,
+     "prompt": "Coût d'opportunité d'un sac de soja, en sacs de maïs ?",
+     "explanation": "90/30 = 3 sacs de maïs.",
+     "kind": "numeric",
+     "answer": 3.0,
+     "tolerance": 0,
+     "unit": "sacs de maïs"
+    },
+    {
+     "id": "sup-l1-microeconomie-rarete-07-b",
+     "points": 1,
+     "prompt": "Si l'exploitation produit 12 sacs de soja, combien de sacs de maïs peut-elle produire au maximum ?",
+     "explanation": "Maïs max = 90 − 3 × 12 = 54.",
+     "kind": "numeric",
+     "answer": 54.0,
+     "tolerance": 0,
+     "unit": "sacs"
+    },
+    {
+     "id": "sup-l1-microeconomie-rarete-07-c",
+     "points": 1,
+     "prompt": "Le plan « 20 sacs de soja et 40 sacs de maïs » est :",
+     "explanation": "Pour 20 sacs de soja, le maïs maximal est 90 − 3 × 20 = 30. Le plan demande 40 sacs de maïs, soit plus que 30 : il est hors de la frontière.",
+     "kind": "mcq",
+     "choices": [
+      "Atteignable à l'intérieur de la frontière",
+      "Impossible à situer",
+      "Inatteignable avec ces ressources",
+      "Atteignable sur la frontière"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Le coût d'opportunité d'un choix est :",
+   "choices": [
+    "La valeur de la meilleure alternative abandonnée",
+    "Le prix de vente du bien",
+    "La somme dépensée uniquement",
+    "Le total des coûts fixes"
+   ],
+   "answer": 0,
+   "explanation": "C'est ce à quoi l'on renonce de mieux.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "La rareté vient du fait que :",
+   "choices": [
+    "L'État fixe tous les prix",
+    "Les ressources sont limitées face à des besoins étendus",
+    "Les entreprises refusent de produire",
+    "Les biens sont toujours chers"
+   ],
+   "answer": 1,
+   "explanation": "Ressources limitées, besoins étendus.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Lequel de ces agents n'est PAS un agent économique au sens habituel ?",
+   "choices": [
+    "Une administration publique",
+    "Une entreprise",
+    "Un ménage",
+    "Le prix d'un bien"
+   ],
+   "answer": 3,
+   "explanation": "Un prix n'est pas un agent : il n'est pas une unité qui décide.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Un atelier fait soit 8 pagnes, soit 4 robes. Une robe coûte en pagnes :",
+   "choices": [
+    "4",
+    "0,5",
+    "2",
+    "8"
+   ],
+   "answer": 2,
+   "explanation": "8/4 = 2 pagnes.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-rarete-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-rarete",
+   "prompt": "Un point situé à l'intérieur de la frontière des possibilités de production est :",
+   "choices": [
+    "Inatteignable",
+    "Toujours optimal",
+    "Atteignable mais n'utilise pas toutes les ressources",
+    "Impossible à représenter"
+   ],
+   "answer": 2,
+   "explanation": "Il est réalisable, mais l'économie pourrait produire davantage.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "Revenu 9 000 FCFA ; bien x à 300 FCFA, bien y à 450 FCFA. Quelle quantité maximale de y peut-on acheter si l'on dépense tout en y ?",
+   "explanation": "9 000 / 450 = 20 unités.",
+   "method": "Quantité max de y = R / p_y.",
+   "source": "Exercice original",
+   "answer": 20.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "Avec les mêmes données (R = 9 000 ; p_x = 300 ; p_y = 450), combien d'unités de y reste-t-il possible d'acheter après avoir pris 15 unités de x ?",
+   "explanation": "Dépense en x : 15 × 300 = 4 500. Reste 4 500 FCFA ; 4 500 / 450 = 10 unités de y.",
+   "method": "Soustraire la dépense en x du revenu puis diviser par p_y.",
+   "mistakes": [
+    "Diviser R par p_y sans retirer la dépense en x."
+   ],
+   "source": "Exercice original",
+   "answer": 10.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "Quand la quantité consommée d'un bien augmente, l'utilité marginale décroît (toutes choses égales par ailleurs).",
+   "explanation": "C'est la loi de l'utilité marginale décroissante.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "À l'optimum d'un consommateur qui dépense tout son revenu en deux biens, on a :",
+   "explanation": "La règle est l'égalité des utilités marginales par franc dépensé.",
+   "method": "Penser « satisfaction par franc ».",
+   "mistakes": [
+    "Égaliser les utilités marginales sans tenir compte des prix."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Um_x = Um_y",
+    "Um_x × p_x = Um_y × p_y",
+    "Um_x/p_x = Um_y/p_y",
+    "p_x = p_y"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "Revenu 60 000 FCFA ; p_x = 2 000 ; p_y = 5 000. On cherche la pente de la droite de budget dans le plan (x en abscisse, y en ordonnée). Donne sa valeur (nombre négatif).",
+   "explanation": "Pente = −p_x/p_y = −2 000/5 000 = −0,4.",
+   "method": "Pente = − prix du bien en abscisse / prix du bien en ordonnée.",
+   "source": "Exercice original",
+   "answer": -0.4,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "Un consommateur constate que Um_x/p_x = 8 et Um_y/p_y = 5. Que doit-il faire pour augmenter son utilité sans dépenser plus ? Justifie.",
+   "explanation": "Il réalloue son budget vers le bien dont la satisfaction par franc est la plus élevée.",
+   "method": "Comparer Um/p puis raisonner sur l'évolution des Um.",
+   "source": "Exercice original",
+   "model": "Il doit acheter plus de x et moins de y : un franc dépensé en x apporte 8 unités de satisfaction contre 5 en y. En consommant plus de x, Um_x baisse ; en consommant moins de y, Um_y augmente, jusqu'à égalité des rapports.",
+   "rubric": [
+    "Conclusion : plus de x, moins de y",
+    "Comparaison 8 contre 5 par franc",
+    "Rôle de la décroissance de Um",
+    "Arrêt à l'égalité des rapports"
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "Un étudiant dispose de 12 (en centaines de FCFA) pour acheter des repas de type A (prix 3) et de type B (prix 1). Utilités marginales de A (1re à 5e unité) : 36, 30, 24, 18, 12. De B (1re à 6e) : 14, 11, 8, 6, 4, 2.",
+   "method": "Calculer Um/p pour chaque unité, classer, remplir le budget unité par unité, vérifier l'égalité des rapports à la marge.",
+   "mistakes": [
+    "Oublier de vérifier que tout le budget est dépensé.",
+    "Comparer des Um sans les diviser par les prix."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-microeconomie-consommateur-07-a",
+     "points": 1,
+     "prompt": "Quel est le nombre maximal de repas B (si tout le budget va en B) ?",
+     "explanation": "12/1 = 12.",
+     "kind": "numeric",
+     "answer": 12.0,
+     "tolerance": 0,
+     "unit": "repas"
+    },
+    {
+     "id": "sup-l1-microeconomie-consommateur-07-b",
+     "points": 2,
+     "prompt": "Combien de repas A l'étudiant achète-t-il à l'optimum ?",
+     "explanation": "On classe les Um/p. A : 12, 10, 8, 6, 4. B : 14, 11, 8, 6, 4, 2. On retient les rapports les plus forts tant que le budget le permet : l'optimum est 3 repas A et 3 repas B, dépense 12 = 12.",
+     "kind": "numeric",
+     "answer": 3.0,
+     "tolerance": 0,
+     "unit": "repas"
+    },
+    {
+     "id": "sup-l1-microeconomie-consommateur-07-c",
+     "points": 1,
+     "prompt": "Quelle est l'utilité totale à l'optimum ?",
+     "explanation": "90 (A) + 33 (B) = 123.",
+     "kind": "numeric",
+     "answer": 123.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "La pente de la droite de budget (x en abscisse) est :",
+   "choices": [
+    "−p_x/p_y",
+    "p_y/p_x",
+    "−R",
+    "R/p_x"
+   ],
+   "answer": 0,
+   "explanation": "Pente = −p_x/p_y.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "Une hausse du revenu R, prix inchangés, :",
+   "choices": [
+    "Déplace la droite de budget parallèlement vers l'extérieur",
+    "Fait pivoter la droite de budget",
+    "Rend la droite verticale",
+    "Réduit l'utilité marginale à zéro"
+   ],
+   "answer": 0,
+   "explanation": "Les intercepts R/p augmentent, la pente reste identique.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "L'utilité marginale est :",
+   "choices": [
+    "La satisfaction apportée par la dernière unité consommée",
+    "La satisfaction de toutes les unités",
+    "Le revenu restant",
+    "Le prix d'une unité"
+   ],
+   "answer": 0,
+   "explanation": "Variation d'utilité totale due à une unité de plus.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "Si Um_x/p_x > Um_y/p_y, le consommateur doit :",
+   "choices": [
+    "Épargner tout son revenu",
+    "Acheter plus de x",
+    "Ne rien changer",
+    "Acheter plus de y"
+   ],
+   "answer": 1,
+   "explanation": "Le franc dépensé en x rapporte davantage.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-consommateur-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-consommateur",
+   "prompt": "Avec R = 100, p_x = 5, la quantité maximale de x est :",
+   "choices": [
+    "5",
+    "20",
+    "95",
+    "500"
+   ],
+   "answer": 1,
+   "explanation": "100/5 = 20.",
+   "review": true
+  }
+ ]
+}

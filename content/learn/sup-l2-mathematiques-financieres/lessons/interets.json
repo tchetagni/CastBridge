@@ -1,0 +1,903 @@
+{
+ "chapter": "sup-l2-mathematiques-financieres-interets",
+ "lessons": [
+  {
+   "id": "sup-l2-mathematiques-financieres-simples",
+   "title": "Intérêts simples et escompte",
+   "minutes": 50,
+   "programRef": "L2 — Intérêts simples, escompte (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer l'intérêt simple et la valeur acquise d'un placement (durée en années, mois ou jours).",
+    "Passer d'un taux annuel à un taux périodique proportionnel.",
+    "Retrouver le capital, le taux ou la durée à partir de la formule.",
+    "Calculer l'escompte commercial d'un effet et son taux réel."
+   ],
+   "exercises": [
+    "sup-l2-mathematiques-financieres-simples-01",
+    "sup-l2-mathematiques-financieres-simples-02",
+    "sup-l2-mathematiques-financieres-simples-03",
+    "sup-l2-mathematiques-financieres-simples-04",
+    "sup-l2-mathematiques-financieres-simples-05",
+    "sup-l2-mathematiques-financieres-simples-06",
+    "sup-l2-mathematiques-financieres-simples-07",
+    "sup-l2-mathematiques-financieres-simples-08"
+   ],
+   "selfCheck": [
+    "sup-l2-mathematiques-financieres-simples-q1",
+    "sup-l2-mathematiques-financieres-simples-q2",
+    "sup-l2-mathematiques-financieres-simples-q3",
+    "sup-l2-mathematiques-financieres-simples-q4",
+    "sup-l2-mathematiques-financieres-simples-q5"
+   ],
+   "reviewNotes": [
+    "Convention de 360 jours pour les calculs en jours : donnée d'énoncé (à confronter à la convention du cours).",
+    "Escompte commercial seulement ; l'escompte rationnel et les commissions ne sont que mentionnés.",
+    "Tous les calculs ont été effectués par programme ; les arrondis sont à l'unité de FCFA."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Intérêt simple",
+     "md": "Un capital $C$ placé au taux annuel $t$ pendant $n$ années rapporte un **intérêt simple** proportionnel au capital, au taux et à la durée. Les intérêts ne produisent **pas** d'intérêts. La **valeur acquise** est le capital augmenté des intérêts.",
+     "tex": "I = C \\times t \\times n \\quad ; \\quad A = C + I = C\\,(1 + t\\,n)"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Unités de durée",
+     "md": "Le taux et la durée doivent être **exprimés dans la même unité de temps**. Durée en mois : $n = m/12$ année. Durée en jours : $n = j/360$ (année commerciale) ou $j/365$ (année civile) selon la convention de l'énoncé."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Taux proportionnels",
+     "md": "Deux taux relatifs à des périodes différentes sont **proportionnels** si leur rapport est celui des durées : un taux annuel $t$ correspond à un taux semestriel $t/2$, trimestriel $t/4$, mensuel $t/12$. En **intérêts simples**, les taux proportionnels sont aussi **équivalents** (ils donnent le même intérêt)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — durée en mois",
+     "statement": "On place 500 000 FCFA à 8 % l'an en intérêts simples pendant 9 mois. Calcule l'intérêt et la valeur acquise.",
+     "steps": [
+      {
+       "md": "Durée en années : 9/12 = 0,75."
+      },
+      {
+       "md": "I = 500 000 × 0,08 × 0,75 = 30 000.",
+       "tex": "I = 500000 \\times 0{,}08 \\times \\frac{9}{12} = 30000"
+      },
+      {
+       "md": "A = 500 000 + 30 000 = 530 000."
+      }
+     ],
+     "answer": "**Intérêt : 30 000 FCFA ; valeur acquise : 530 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — durée en jours",
+     "statement": "Convention de l'énoncé : année commerciale de 360 jours. Un capital de 1 200 000 FCFA est placé à 6 % l'an pendant 100 jours. Calcule l'intérêt simple.",
+     "steps": [
+      {
+       "md": "Durée : 100/360 année."
+      },
+      {
+       "md": "I = 1 200 000 × 0,06 × 100/360 = 20 000.",
+       "tex": "1200000 \\times 0{,}06 \\times \\frac{100}{360} = 20000"
+      }
+     ],
+     "answer": "**Intérêt : 20 000 FCFA ; valeur acquise : 1 220 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — retrouver le taux",
+     "statement": "Un capital de 400 000 FCFA a rapporté 24 000 FCFA d'intérêts simples en 9 mois. Quel est le taux annuel ?",
+     "steps": [
+      {
+       "md": "On isole t dans I = C·t·n :",
+       "tex": "t = \\frac{I}{C \\times n}"
+      },
+      {
+       "md": "n = 9/12 = 0,75 ; t = 24 000 / (400 000 × 0,75) = 24 000 / 300 000 = 0,08."
+      }
+     ],
+     "answer": "**Taux annuel : 8 %.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Escompte commercial",
+     "md": "L'**escompte** est la rémunération du banquier qui avance au porteur le montant d'un **effet de commerce** (traite) avant son échéance. L'**escompte commercial** est l'intérêt simple calculé sur la **valeur nominale** $V$ de l'effet, au taux d'escompte $t$, pour la durée restant à courir $j$ jours (jusqu'à l'échéance) :",
+     "tex": "e = V \\times t \\times \\frac{j}{360} \\quad ; \\quad V_{\\text{actuelle}} = V - e"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 170,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 90,
+        "x2": 410,
+        "y2": 90,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 90,
+        "r": 8,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 380,
+        "cy": 90,
+        "r": 8,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 70,
+        "text": "Escompte",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 70,
+        "text": "Échéance",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 125,
+        "text": "788 000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 125,
+        "text": "800 000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 125,
+        "text": "60 jours, escompte 12 000",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Escompte d'un effet de 800 000 FCFA à 60 jours de l'échéance (exemple 4).",
+     "alt": "Une flèche horizontale part de la date d'escompte (le porteur reçoit 788 000) vers l'échéance (le montant de l'effet est de 800 000). L'écart de 12 000 FCFA correspond à l'escompte pour 60 jours."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — escompte d'un effet",
+     "statement": "Convention de l'énoncé : année commerciale de 360 jours. Un effet de 800 000 FCFA est escompté 60 jours avant son échéance au taux de 9 % (escompte commercial). Calcule l'escompte, la valeur nette reçue et le taux réel d'escompte.",
+     "steps": [
+      {
+       "md": "e = 800 000 × 0,09 × 60/360 = 12 000.",
+       "tex": "e = 800000 \\times 0{,}09 \\times \\frac{60}{360} = 12000"
+      },
+      {
+       "md": "Valeur nette = 800 000 − 12 000 = 788 000."
+      },
+      {
+       "md": "Taux réel : l'intérêt de 12 000 est payé sur la somme effectivement avancée 788 000 : 12 000/788 000 × 360/60 = 9,14 %."
+      }
+     ],
+     "answer": "**Escompte : 12 000 ; net : 788 000 ; taux réel ≈ 9,14 % (> 9 %).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger les unités : taux annuel avec une durée en mois non convertie.\n- Prendre $n = 9$ au lieu de $9/12$.\n- Calculer l'escompte sur la valeur **nette** : en escompte commercial, on utilise la valeur **nominale**.\n- Oublier que le **taux réel** d'escompte est supérieur au taux affiché.\n- Confondre **valeur acquise** (capital + intérêts) et **intérêt**."
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'**escompte rationnel** se calcule sur la valeur actuelle ; il est un peu plus faible que l'escompte commercial.",
+      "Des **commissions** s'ajoutent à l'escompte pour donner le **coût total** (agios) de l'opération.",
+      "L'**équivalence de deux effets** s'étudie en comparant leurs valeurs actuelles à une même date."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-mathematiques-financieres-simples-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes",
+   "title": "Intérêts composés, taux équivalents et valeur actuelle",
+   "minutes": 55,
+   "programRef": "L2 — Intérêts composés, taux équivalents, actualisation (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer la valeur acquise d'un capital à intérêts composés.",
+    "Calculer la valeur actuelle d'une somme future et la durée d'un placement.",
+    "Distinguer taux proportionnel et taux équivalent et savoir les calculer.",
+    "Comparer intérêts simples et intérêts composés."
+   ],
+   "prerequisites": [
+    "sup-l2-mathematiques-financieres-simples"
+   ],
+   "exercises": [
+    "sup-l2-mathematiques-financieres-composes-01",
+    "sup-l2-mathematiques-financieres-composes-02",
+    "sup-l2-mathematiques-financieres-composes-03",
+    "sup-l2-mathematiques-financieres-composes-04",
+    "sup-l2-mathematiques-financieres-composes-05",
+    "sup-l2-mathematiques-financieres-composes-06",
+    "sup-l2-mathematiques-financieres-composes-07"
+   ],
+   "selfCheck": [
+    "sup-l2-mathematiques-financieres-composes-q1",
+    "sup-l2-mathematiques-financieres-composes-q2",
+    "sup-l2-mathematiques-financieres-composes-q3",
+    "sup-l2-mathematiques-financieres-composes-q4",
+    "sup-l2-mathematiques-financieres-composes-q5"
+   ],
+   "reviewNotes": [
+    "Les calculs de puissances non entières sont traités par la formule rationnelle (taux équivalent) ; la solution commerciale n'est pas présentée.",
+    "Calculs réalisés par programme et arrondis à l'unité de FCFA."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Intérêts composés",
+     "md": "En **intérêts composés**, les intérêts de chaque période sont ajoutés au capital et produisent à leur tour des intérêts (**capitalisation**). Pour un capital $C_0$ placé au taux $i$ par période pendant $n$ périodes :",
+     "tex": "C_n = C_0\\,(1 + i)^n"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Valeur actuelle",
+     "md": "L'**actualisation** est l'opération inverse : la valeur actuelle d'une somme $C_n$ disponible dans $n$ périodes est :",
+     "tex": "C_0 = C_n\\,(1 + i)^{-n} = \\frac{C_n}{(1 + i)^n}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Durée et taux",
+     "md": "On retrouve la durée et le taux par :",
+     "tex": "n = \\frac{\\ln(C_n / C_0)}{\\ln(1 + i)} \\qquad ; \\qquad i = \\left(\\frac{C_n}{C_0}\\right)^{1/n} - 1"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Taux proportionnel et taux équivalent",
+     "md": "Le taux **proportionnel** à un taux annuel $i$ pour $k$ périodes par an est $i/k$ (utilisé en intérêts simples). Le taux **équivalent** $i_k$ est celui qui, composé $k$ fois, donne la même valeur acquise que le taux annuel $i$ :",
+     "tex": "(1 + i_k)^k = 1 + i \\Rightarrow i_k = (1 + i)^{1/k} - 1"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 440,
+      "h": 280,
+      "xmin": 0,
+      "xmax": 20,
+      "ymin": 0,
+      "ymax": 480,
+      "grid": 5,
+      "xlabel": "années",
+      "ylabel": "valeur acquise (base 100)",
+      "curves": [
+       {
+        "expr": "100*(1+0.08*x)",
+        "color": "orange",
+        "label": "intérêts simples"
+       },
+       {
+        "expr": "100*1.08^x",
+        "color": "blue",
+        "label": "intérêts composés"
+       }
+      ]
+     },
+     "caption": "Capital 100 placé à 8 % : intérêts simples ou composés.",
+     "alt": "Deux courbes partant de 100 : la droite des intérêts simples croît linéairement (260 au bout de 20 ans) ; la courbe des intérêts composés croît de plus en plus vite (environ 466 au bout de 20 ans)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — valeur acquise",
+     "statement": "On place 2 000 000 FCFA à 7 % l'an, intérêts composés, pendant 5 ans. Calcule la valeur acquise et le total des intérêts.",
+     "steps": [
+      {
+       "md": "Facteur de capitalisation : 1,07^5 = 1,402552."
+      },
+      {
+       "md": "C5 = 2 000 000 × 1,07^5 = 2 805 103.",
+       "tex": "C_{5} = 2000000 \\times 1{,}07^{5} \\approx 2805103"
+      },
+      {
+       "md": "Intérêts = 2 805 103 − 2 000 000 = 805 103. (En intérêts simples : 700 000.)"
+      }
+     ],
+     "answer": "**Valeur acquise ≈ 2 805 103 FCFA ; intérêts ≈ 805 103 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — valeur actuelle",
+     "statement": "On te promet 3 000 000 FCFA dans 4 ans. Au taux d'actualisation de 6 % l'an (composé), quelle est la valeur actuelle de cette somme ?",
+     "steps": [
+      {
+       "md": "Facteur d'actualisation : 1,06^−4 = 0,792094."
+      },
+      {
+       "md": "V0 = 3 000 000 × 1,06^−4 = 2 376 281.",
+       "tex": "V_{0} = 3000000 \\times 1{,}06^{-4} \\approx 2376281"
+      },
+      {
+       "md": "Contrôle : 2 376 281 × 1,06^4 = 3 000 000 ≈ 3 000 000."
+      }
+     ],
+     "answer": "**Valeur actuelle ≈ 2 376 281 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — taux équivalents",
+     "statement": "Un taux annuel de 10 % est donné. Calcule le taux semestriel équivalent, le taux mensuel équivalent et compare avec le taux mensuel proportionnel.",
+     "steps": [
+      {
+       "md": "Semestriel : (1,10)^(1/2) − 1 = 4,8809 % (et non 5 %).",
+       "tex": "i_{2} = 1{,}10^{1/2} - 1"
+      },
+      {
+       "md": "Mensuel équivalent : (1,10)^(1/12) − 1 = 0,7974 %."
+      },
+      {
+       "md": "Mensuel proportionnel : 10 %/12 = 0,8333 %. Le taux proportionnel est plus grand que le taux équivalent : composé 12 fois, il donnerait 10,471 % > 10 %."
+      }
+     ],
+     "answer": "**i₂ ≈ 4,881 % ; i₁₂ ≈ 0,797 % (proportionnel : 0,833 %).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — durée de doublement",
+     "statement": "En combien de temps un capital double-t-il à 8 % l'an (composé) ?",
+     "steps": [
+      {
+       "md": "On cherche n tel que 1,08^n = 2.",
+       "tex": "1{,}08^{n} = 2"
+      },
+      {
+       "md": "n = ln 2 / ln 1,08 = 0,6931 / 0,0770 ≈ 9,01 ans.",
+       "tex": "n = \\frac{\\ln 2}{\\ln 1{,}08}"
+      }
+     ],
+     "answer": "**Environ 9,0 ans (un peu plus de 9 ans).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser le **taux proportionnel** à la place du taux **équivalent** dans une formule composée.\n- Mélanger les unités : $n$ doit compter le **même type de périodes** que le taux $i$.\n- Écrire $(1+i)\\times n$ au lieu de $(1+i)^n$.\n- Actualiser avec le **mauvais signe** d'exposant (multiplier au lieu de diviser).\n- Arrondir trop tôt les facteurs : garder au moins six décimales."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Sur 10 ans à 8 % pour 1 000 000 FCFA : intérêts simples → 1 800 000 ; intérêts composés → 2 158 925.",
+      "Le **taux effectif global** (TEG) tient compte des frais ; il dépasse le taux nominal.",
+      "Pour une durée non entière, on utilise soit la **formule rationnelle** (taux équivalent), soit une **convention commerciale** donnée par l'énoncé."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-mathematiques-financieres-composes-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "On place 750 000 FCFA à 7 % l'an en intérêts simples pendant 2 ans. Calcule l'intérêt.",
+   "explanation": "I = 750 000 × 0,07 × 2 = 105 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 105000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "On place 360 000 FCFA à 5 % l'an pendant 8 mois. Calcule la valeur acquise.",
+   "explanation": "I = 360 000 × 0,05 × 8/12 = 12 000 ; A = 372 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 372000.0,
+   "tolerance": 0.5,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "Un taux annuel de 12 % correspond, en intérêts simples, à un taux mensuel proportionnel de :",
+   "explanation": "12 %/12 = 1 % par mois.",
+   "source": "Exercice original",
+   "choices": [
+    "0,12 %",
+    "6 %",
+    "1 %",
+    "12 %"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "En intérêts simples, les intérêts produits la première année produisent eux-mêmes des intérêts la deuxième année.",
+   "explanation": "C'est la définition des intérêts composés ; en intérêts simples, seul le capital initial produit des intérêts.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "Un capital de 800 000 FCFA placé à 7 % l'an en intérêts simples devient 856 000 FCFA. Quelle est la durée (en années) ?",
+   "explanation": "I = 56 000 ; n = I/(C·t) = 56 000/(800 000 × 0,07) = 56 000/56 000 = 1 an.",
+   "method": "Isoler n : n = I/(C × t).",
+   "source": "Exercice original",
+   "answer": 1.0,
+   "tolerance": 0,
+   "unit": "an"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-06",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "Convention de l'énoncé : année commerciale de 360 jours. Un effet de 1 000 000 FCFA est escompté 45 jours avant l'échéance à 10 %. Calcule l'escompte commercial.",
+   "explanation": "e = 1 000 000 × 0,10 × 45/360 = 12 500 FCFA.",
+   "source": "Exercice original",
+   "answer": 12500.0,
+   "tolerance": 0.5,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-07",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "Pourquoi le taux réel d'escompte est-il supérieur au taux d'escompte affiché ?",
+   "explanation": "Le taux réel rapporte l'escompte à la somme effectivement reçue.",
+   "method": "Comparer la base de calcul des deux taux.",
+   "source": "Exercice original",
+   "model": "Le taux affiché s'applique à la valeur nominale de l'effet, alors que le porteur ne reçoit que la valeur nette (nominal − escompte). L'intérêt payé est donc rapporté à une somme plus faible : le taux réel, calculé sur la somme avancée, est plus élevé.",
+   "rubric": [
+    "Escompte calculé sur le nominal",
+    "Somme réellement avancée plus faible",
+    "Conclusion : taux réel > taux affiché"
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-08",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "Convention de l'énoncé : année commerciale de 360 jours. Un artisan de Bafoussam remet à sa banque un effet de 2 400 000 FCFA, à 90 jours de l'échéance, escompté au taux commercial de 8 %. La banque prélève en plus une commission fixe de 15 000 FCFA.",
+   "method": "Escompte sur le nominal ; net ; taux réel sur la somme reçue.",
+   "mistakes": [
+    "Calculer le taux réel sur le nominal."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-mathematiques-financieres-simples-08-a",
+     "points": 1,
+     "prompt": "Calcule l'escompte commercial.",
+     "explanation": "2 400 000 × 0,08 × 90/360 = 48 000.",
+     "kind": "numeric",
+     "answer": 48000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-simples-08-b",
+     "points": 1,
+     "prompt": "Calcule la somme nette reçue (escompte et commission déduits).",
+     "explanation": "2 400 000 − 48 000 − 15 000 = 2 337 000.",
+     "kind": "numeric",
+     "answer": 2337000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-simples-08-c",
+     "points": 1,
+     "prompt": "Calcule le taux annuel réel de l'opération, en % (escompte + commission, arrondi à 0,01).",
+     "explanation": "Coût total = 63 000 ; base = 2 337 000 ; taux = 63 000/2 337 000 × 360/90 = 10,78 %.",
+     "kind": "numeric",
+     "answer": 10.78,
+     "tolerance": 0.02
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-simples-08-d",
+     "points": 1,
+     "prompt": "Ce taux réel est :",
+     "explanation": "Base plus faible (somme nette) et commission en plus : le coût réel dépasse 8 %.",
+     "kind": "mcq",
+     "choices": [
+      "Nul",
+      "Égal à 8 %",
+      "Supérieur à 8 %",
+      "Inférieur à 8 %"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "En intérêts simples, I =",
+   "choices": [
+    "C × t × n",
+    "C × (1 + t)^n",
+    "C / (t × n)",
+    "C + t + n"
+   ],
+   "answer": 0,
+   "explanation": "Proportionnel à C, t et n.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "Un taux annuel de 6 % correspond à un taux semestriel proportionnel de :",
+   "choices": [
+    "6 %",
+    "0,5 %",
+    "3 %",
+    "12 %"
+   ],
+   "answer": 2,
+   "explanation": "6 %/2.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "L'escompte commercial se calcule sur :",
+   "choices": [
+    "La commission",
+    "La valeur nominale de l'effet",
+    "Le capital emprunté",
+    "La valeur nette"
+   ],
+   "answer": 1,
+   "explanation": "Nominal × t × j/360.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "Valeur acquise = ",
+   "choices": [
+    "C × t × n",
+    "C/(1 + tn)",
+    "C(1 + tn)",
+    "C − I"
+   ],
+   "answer": 2,
+   "explanation": "A = C + I.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-simples-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-simples",
+   "prompt": "Un capital de 100 000 à 12 % pendant 3 mois (simple) rapporte :",
+   "choices": [
+    "12 000",
+    "1 000",
+    "3 000",
+    "36 000"
+   ],
+   "answer": 2,
+   "explanation": "100 000 × 0,12 × 3/12.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "On place 1 000 000 FCFA à 5 % l'an en intérêts composés pendant 3 ans. Calcule la valeur acquise (arrondie à l'unité).",
+   "explanation": "1 000 000 × 1,05³ = 1 157 625 FCFA.",
+   "source": "Exercice original",
+   "answer": 1157625.0,
+   "tolerance": 1,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "Quelle valeur actuelle faut-il placer aujourd'hui à 8 % l'an pour disposer de 2 000 000 FCFA dans 2 ans ? (arrondi à l'unité)",
+   "explanation": "2 000 000 / 1,08² = 1 714 678 FCFA.",
+   "method": "Diviser par (1 + i)^n.",
+   "source": "Exercice original",
+   "answer": 1714678.0,
+   "tolerance": 1,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "Le taux semestriel équivalent à un taux annuel de 21 % est :",
+   "explanation": "(1,21)^(1/2) − 1 = 1,1 − 1 = 10 %.",
+   "source": "Exercice original",
+   "choices": [
+    "10 %",
+    "5,25 %",
+    "10,5 %",
+    "21 %"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "À taux annuel égal et pour une durée de plus d'un an, la valeur acquise en intérêts composés dépasse celle en intérêts simples.",
+   "explanation": "Les intérêts capitalisés produisent des intérêts : l'écart se creuse avec la durée.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "Un capital de 500 000 FCFA devient 665 500 FCFA en 3 ans en intérêts composés. Calcule le taux annuel, en % (arrondi à 0,01).",
+   "explanation": "(665 500/500 000)^(1/3) − 1 = 1,331^(1/3) − 1 = 1,10 − 1 = 10 %.",
+   "method": "i = (Cn/C0)^(1/n) − 1.",
+   "source": "Exercice original",
+   "answer": 10.0,
+   "tolerance": 0.01,
+   "unit": "%"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "Pourquoi un taux mensuel proportionnel à 12 % annuel (soit 1 % par mois) donne-t-il, en intérêts composés, plus que 12 % sur un an ? Quelle est la valeur obtenue ?",
+   "explanation": "1,01^12 ≈ 1,126825.",
+   "method": "Calculer le facteur annuel de la capitalisation mensuelle.",
+   "source": "Exercice original",
+   "model": "En composant 1 % douze fois, on obtient 1,01^12 = 1,1268 : les intérêts de chaque mois produisent des intérêts. Le taux annuel effectif est donc d'environ 12,68 %, supérieur à 12 %. Le taux mensuel équivalent à 12 % annuel est plus faible (environ 0,949 %).",
+   "rubric": [
+    "Capitalisation mensuelle",
+    "Calcul 1,01^12",
+    "Taux effectif d'environ 12,68 %",
+    "Distinction proportionnel/équivalent"
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "Une coopérative fictive place 4 000 000 FCFA à 9 % l'an (intérêts composés) pendant 6 ans. On compare avec un placement en intérêts simples au même taux.",
+   "method": "Facteurs de capitalisation et formule des taux équivalents.",
+   "mistakes": [
+    "Utiliser 4,5 % comme taux semestriel équivalent."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-mathematiques-financieres-composes-07-a",
+     "points": 1,
+     "prompt": "Valeur acquise en intérêts composés (arrondie à l'unité) ?",
+     "explanation": "4 000 000 × 1,09^6 = 6 708 400.",
+     "kind": "numeric",
+     "answer": 6708400.0,
+     "tolerance": 1
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-composes-07-b",
+     "points": 1,
+     "prompt": "Valeur acquise en intérêts simples ?",
+     "explanation": "4 000 000 × (1 + 0,09 × 6) = 6 160 000.",
+     "kind": "numeric",
+     "answer": 6160000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-composes-07-c",
+     "points": 1,
+     "prompt": "Écart entre les deux valeurs acquises (arrondi à l'unité) ?",
+     "explanation": "6 708 400 − 6 160 000 = 548 400.",
+     "kind": "numeric",
+     "answer": 548400.0,
+     "tolerance": 1
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-composes-07-d",
+     "points": 1,
+     "prompt": "Taux semestriel équivalent au taux annuel de 9 %, en % (arrondi à 0,01) ?",
+     "explanation": "1,09^(1/2) − 1 = 4,4031 % ≈ 4,4 %.",
+     "kind": "numeric",
+     "answer": 4.4,
+     "tolerance": 0.01
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "Avec des intérêts composés, C_n =",
+   "choices": [
+    "C0(1 + i)^n",
+    "C0(1 + in)",
+    "C0 / (1 + i)^n",
+    "C0 × i × n"
+   ],
+   "answer": 0,
+   "explanation": "Formule de capitalisation.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "La valeur actuelle d'une somme future C_n est :",
+   "choices": [
+    "C_n (1 + i)^n",
+    "C_n − n",
+    "C_n × i",
+    "C_n (1 + i)^(−n)"
+   ],
+   "answer": 3,
+   "explanation": "Actualisation.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "Le taux mensuel équivalent à un taux annuel i est :",
+   "choices": [
+    "i/12",
+    "(1 + i)^12 − 1",
+    "12i",
+    "(1 + i)^(1/12) − 1"
+   ],
+   "answer": 3,
+   "explanation": "(1 + i_12)^12 = 1 + i.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "1 000 à 10 % composé pendant 2 ans donnent :",
+   "choices": [
+    "1 200",
+    "1 210",
+    "1 021",
+    "1 100"
+   ],
+   "answer": 1,
+   "explanation": "1 000 × 1,1².",
+   "review": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-composes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-composes",
+   "prompt": "Un taux proportionnel mensuel de 1 % composé 12 fois donne un taux annuel :",
+   "choices": [
+    "Nul",
+    "Égal à 12 %",
+    "Inférieur à 12 %",
+    "Supérieur à 12 %"
+   ],
+   "answer": 3,
+   "explanation": "1,01^12 ≈ 1,1268.",
+   "review": true
+  }
+ ]
+}

@@ -1,0 +1,576 @@
+{
+ "chapter": "etp-gestion-entreprise-1re-entreprise",
+ "lessons": [
+  {
+   "id": "etp-gestion-entreprise-1re-organisation",
+   "title": "Types d'entreprises, fonctions et organigramme",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries G1/G2/G3 et STT (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Classer une entreprise selon son secteur, sa taille et son statut.",
+    "Citer les fonctions de l'entreprise et leur rôle.",
+    "Lire un organigramme hiérarchique.",
+    "Distinguer ligne hiérarchique et rattachement."
+   ],
+   "exercises": [
+    "etp-gestion-entreprise-1re-organisation-01",
+    "etp-gestion-entreprise-1re-organisation-02",
+    "etp-gestion-entreprise-1re-organisation-03",
+    "etp-gestion-entreprise-1re-organisation-04",
+    "etp-gestion-entreprise-1re-organisation-05",
+    "etp-gestion-entreprise-1re-organisation-06"
+   ],
+   "selfCheck": [
+    "etp-gestion-entreprise-1re-organisation-q1",
+    "etp-gestion-entreprise-1re-organisation-q2",
+    "etp-gestion-entreprise-1re-organisation-q3",
+    "etp-gestion-entreprise-1re-organisation-q4",
+    "etp-gestion-entreprise-1re-organisation-q5"
+   ],
+   "reviewNotes": [
+    "Les formes de sociétés (entreprise individuelle, SARL, société anonyme...) sont citées en termes généraux ; les règles précises relèvent du droit OHADA et ne sont pas traitées ici : à faire relire.",
+    "Aucun seuil de taille (chiffre d'affaires, effectif) n'est donné volontairement.",
+    "Entreprises fictives."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Entreprise",
+     "md": "Une **entreprise** est une organisation qui combine des moyens (personnes, machines, argent) pour **produire des biens ou des services** et les vendre, en vue de réaliser un **profit** ou de rendre un service."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les grands classements",
+     "md": "- **Selon le secteur** : primaire (agriculture, élevage, pêche), secondaire (transformation, construction), tertiaire (commerce, transport, banque, services).\n- **Selon la taille** : très petite, petite, moyenne, grande entreprise.\n- **Selon la propriété** : privée, publique (à l'État) ou mixte.\n- **Selon la forme juridique** : entreprise individuelle ou **société** (plusieurs associés).",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les fonctions de l'entreprise",
+     "md": "- **Approvisionnement** : acheter et stocker ce qu'il faut.\n- **Production** : fabriquer ou préparer.\n- **Commerciale** : vendre, faire connaître, suivre les clients.\n- **Financière et comptable** : trouver l'argent, enregistrer, payer.\n- **Ressources humaines** : recruter, former, rémunérer.\n- **Administrative / direction** : organiser, décider, contrôler."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Organigramme",
+     "md": "L'**organigramme** est un schéma qui représente la **structure** de l'entreprise : les services, les responsables et les liens hiérarchiques. On le lit de **haut en bas** : chaque responsable a autorité sur les postes placés sous lui."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 15,
+        "w": 160,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 41.9,
+        "text": "Directeur général",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 59,
+        "x2": 280,
+        "y2": 85,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 85,
+        "x2": 480,
+        "y2": 85,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 85,
+        "x2": 80,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 85,
+        "x2": 280,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 480,
+        "y1": 85,
+        "x2": 480,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 105,
+        "w": 120,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 131.2,
+        "text": "Direction commerciale",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 105,
+        "w": 120,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 131.2,
+        "text": "Direction financière",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 420,
+        "y": 105,
+        "w": 120,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 480.0,
+        "y": 131.2,
+        "text": "Direction technique",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 149,
+        "x2": 80,
+        "y2": 175,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 149,
+        "x2": 280,
+        "y2": 175,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 480,
+        "y1": 149,
+        "x2": 480,
+        "y2": 175,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 175,
+        "w": 120,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 199.55,
+        "text": "Service ventes",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 175,
+        "w": 120,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 199.55,
+        "text": "Comptabilité",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 420,
+        "y": 175,
+        "w": 120,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 480.0,
+        "y": 199.55,
+        "text": "Atelier",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Organigramme hiérarchique d'une entreprise fictive.",
+     "alt": "Un directeur général au sommet, relié à trois directions : commerciale, financière et technique ; chacune est reliée à un service : ventes, comptabilité et atelier."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Classer des entreprises",
+     "statement": "Entreprises fictives : une plantation de cacao, une boulangerie qui fabrique et vend son pain, une société de transport de voyageurs. Quel secteur ?",
+     "steps": [
+      {
+       "md": "La plantation produit des matières premières naturelles : **secteur primaire**."
+      },
+      {
+       "md": "La boulangerie transforme la farine en pain : **secteur secondaire** (elle vend aussi, mais son activité principale est la transformation)."
+      },
+      {
+       "md": "Le transport de voyageurs est un service : **secteur tertiaire**."
+      }
+     ],
+     "answer": "**Primaire, secondaire, tertiaire.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Lire un organigramme",
+     "statement": "Dans l'organigramme ci-dessus, de qui dépend le service comptabilité ? Combien de niveaux hiérarchiques ?",
+     "steps": [
+      {
+       "md": "La comptabilité est reliée à la direction financière, elle-même reliée au directeur général."
+      },
+      {
+       "md": "On compte trois niveaux : directeur général, directions, services."
+      }
+     ],
+     "answer": "**La comptabilité dépend de la direction financière ; il y a 3 niveaux.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre secteur tertiaire et commerce seulement : le tertiaire comprend aussi transport, banque, santé, éducation.\n- Lire un organigramme de bas en haut.\n- Croire qu'une petite entreprise n'a pas de fonctions : elles existent, mais une même personne peut en assurer plusieurs."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dans une très petite entreprise, le patron peut faire à lui seul approvisionnement, vente et comptabilité ; la division en fonctions se développe avec la taille.",
+      "Un organigramme peut aussi être fonctionnel (par services) ou par produits ou zones géographiques."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-gestion-entreprise-1re-organisation-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "Une entreprise de pêche appartient au secteur…",
+   "explanation": "La pêche prélève des ressources naturelles : secteur primaire.",
+   "source": "Exercice original",
+   "choices": [
+    "Primaire",
+    "Secondaire",
+    "Tertiaire",
+    "Public seulement"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "L'organigramme représente les liens hiérarchiques de l'entreprise.",
+   "explanation": "C'est son rôle principal.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "Associe chaque fonction à sa mission.",
+   "explanation": "Chaque fonction a une mission précise.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Approvisionnement",
+     "Acheter et stocker"
+    ],
+    [
+     "Commerciale",
+     "Vendre et suivre les clients"
+    ],
+    [
+     "Ressources humaines",
+     "Recruter et former le personnel"
+    ],
+    [
+     "Financière et comptable",
+     "Enregistrer et payer"
+    ]
+   ]
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "Une société de transport de marchandises appartient au secteur…",
+   "explanation": "Le transport est un service : secteur tertiaire.",
+   "source": "Exercice original",
+   "choices": [
+    "Primaire",
+    "Secondaire",
+    "Tertiaire",
+    "Aucun"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "Dessine (en mots) l'organigramme d'une petite entreprise de vente de matériel informatique avec un gérant, un service commercial et un service comptabilité.",
+   "explanation": "L'organigramme se lit de haut en bas.",
+   "source": "Exercice original",
+   "model": "Au sommet : le gérant. Sous lui deux services : le service commercial (vendeurs) et le service comptabilité (comptable). Le gérant a autorité sur les deux ; les vendeurs dépendent du chef commercial, le comptable du gérant.",
+   "rubric": [
+    "Un responsable au sommet.",
+    "Deux services rattachés.",
+    "Liens hiérarchiques clairement décrits."
+   ]
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "La société fictive « Kamga & Fils » fabrique des meubles à Yaoundé. Elle achète du bois, fabrique à l'atelier, vend en magasin et tient sa comptabilité. Le directeur a sous son autorité un responsable d'atelier, un responsable des ventes et une comptable.",
+   "method": "Lire la situation et identifier l'activité principale et les liens d'autorité.",
+   "mistakes": [
+    "Confondre secteur secondaire et tertiaire pour une entreprise qui fabrique et vend."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-gestion-entreprise-1re-organisation-06-a",
+     "points": 1,
+     "prompt": "Cette entreprise relève surtout du secteur…",
+     "explanation": "Elle transforme du bois en meubles : secteur secondaire.",
+     "kind": "mcq",
+     "choices": [
+      "Primaire",
+      "Secondaire",
+      "Tertiaire",
+      "Public"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-gestion-entreprise-1re-organisation-06-b",
+     "points": 1,
+     "prompt": "Acheter le bois relève de la fonction…",
+     "explanation": "Acheter et stocker les matières : approvisionnement.",
+     "kind": "mcq",
+     "choices": [
+      "Commerciale",
+      "Approvisionnement",
+      "Financière",
+      "Ressources humaines"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-gestion-entreprise-1re-organisation-06-c",
+     "points": 1,
+     "prompt": "Dans son organigramme, la comptable est placée au même niveau que le responsable d'atelier.",
+     "explanation": "Tous deux dépendent directement du directeur.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-gestion-entreprise-1re-organisation-06-d",
+     "points": 2,
+     "prompt": "Décris l'organigramme de cette entreprise en 2 ou 3 phrases.",
+     "explanation": "On place le directeur en haut et les trois responsables au niveau suivant.",
+     "kind": "open",
+     "model": "Le directeur est au sommet. Trois postes sont directement placés sous lui : le responsable d'atelier, le responsable des ventes et la comptable.",
+     "rubric": [
+      "Directeur au sommet.",
+      "Trois postes au niveau inférieur.",
+      "Liens hiérarchiques exprimés."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "Le secteur secondaire regroupe…",
+   "choices": [
+    "L'agriculture seulement",
+    "La transformation et la construction",
+    "Le commerce seulement",
+    "Les banques"
+   ],
+   "answer": 1,
+   "explanation": "Il transforme les matières."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "Une entreprise appartenant à l'État est…",
+   "choices": [
+    "Publique",
+    "Individuelle",
+    "Primaire",
+    "Familiale"
+   ],
+   "answer": 0,
+   "explanation": "C'est une entreprise publique."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "L'organigramme se lit…",
+   "choices": [
+    "De bas en haut",
+    "De gauche à droite seulement",
+    "Au hasard",
+    "De haut en bas"
+   ],
+   "answer": 3,
+   "explanation": "La hiérarchie descend du sommet."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "La fonction « ressources humaines » s'occupe de…",
+   "choices": [
+    "Fabriquer",
+    "Faire la publicité",
+    "Recruter et former",
+    "Payer l'électricité"
+   ],
+   "answer": 2,
+   "explanation": "Gestion du personnel."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-organisation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-organisation",
+   "prompt": "Une société est une entreprise…",
+   "choices": [
+    "Toujours publique",
+    "Avec plusieurs associés",
+    "Sans clients",
+    "Sans fonctions"
+   ],
+   "answer": 1,
+   "explanation": "Elle réunit plusieurs associés (par opposition à l'entreprise individuelle)."
+  }
+ ]
+}

@@ -1,0 +1,1803 @@
+{
+ "chapter": "sup-l1-algebre-systemes-matrices",
+ "lessons": [
+  {
+   "id": "sup-l1-algebre-systemes-pivot",
+   "title": "Systèmes linéaires et méthode du pivot",
+   "minutes": 45,
+   "programRef": "Algèbre linéaire de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître un système linéaire et son écriture avec une matrice augmentée.",
+    "Appliquer les opérations élémentaires sur les lignes.",
+    "Résoudre un système par la méthode du pivot de Gauss.",
+    "Discuter le nombre de solutions : aucune, une seule, une infinité."
+   ],
+   "exercises": [
+    "sup-l1-algebre-systemes-pivot-01",
+    "sup-l1-algebre-systemes-pivot-02",
+    "sup-l1-algebre-systemes-pivot-03",
+    "sup-l1-algebre-systemes-pivot-04",
+    "sup-l1-algebre-systemes-pivot-05",
+    "sup-l1-algebre-systemes-pivot-06"
+   ],
+   "selfCheck": [
+    "sup-l1-algebre-systemes-pivot-q1",
+    "sup-l1-algebre-systemes-pivot-q2",
+    "sup-l1-algebre-systemes-pivot-q3",
+    "sup-l1-algebre-systemes-pivot-q4",
+    "sup-l1-algebre-systemes-pivot-q5"
+   ],
+   "reviewNotes": [
+    "Chiffres fictifs (prix de produits de marché).",
+    "Vérifier avec l'enseignant si la forme échelonnée réduite doit être introduite dès la L1."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Système linéaire",
+     "md": "Un **système linéaire** de $m$ équations à $n$ inconnues est un ensemble d'équations où chaque inconnue apparaît au premier degré, comme $a_{1}x_{1}+\\dots+a_{n}x_{n}=b$. Une **solution** est un $n$-uplet qui vérifie toutes les équations. Un système est **homogène** si tous les seconds membres sont nuls ; il admet alors toujours la solution nulle."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Nombre de solutions",
+     "md": "Un système linéaire a **soit aucune solution** (système incompatible), **soit une solution unique**, **soit une infinité de solutions**. Il ne peut jamais avoir exactement deux solutions. Géométriquement, dans le plan : deux droites sécantes, parallèles distinctes ou confondues."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode du pivot de Gauss",
+     "md": "On travaille sur les lignes $L_i$ avec trois opérations qui **ne changent pas l'ensemble des solutions** : échanger deux lignes ($L_i↔L_j$) ; multiplier une ligne par un réel **non nul** ($L_i←λL_i$) ; ajouter à une ligne un multiple d'une autre ($L_i←L_i+μL_j$). Objectif : obtenir un système **triangulaire (échelonné)**, que l'on résout en **remontant** depuis la dernière équation."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": -1,
+      "xmax": 4,
+      "ymin": -1,
+      "ymax": 5,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "2x",
+        "color": "blue",
+        "label": "2x − y = 0"
+       },
+       {
+        "expr": "3-x",
+        "color": "red",
+        "label": "x + y = 3"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 2,
+        "label": "(1 ; 2)",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Deux droites sécantes : le système a une solution unique, le point (1 ; 2).",
+     "alt": "Une droite bleue passant par l'origine avec pente 2 et une droite rouge de pente −1 se coupent au point (1 ; 2)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — solution unique",
+     "statement": "Résoudre $x+y+z=6$, $2x-y+z=3$, $x+2y-z=2$.",
+     "steps": [
+      {
+       "md": "On élimine $x$ : $L_2←L_2-2L_1$ donne $-3y-z=-9$ ; $L_3←L_3-L_1$ donne $y-2z=-4$.",
+       "tex": "L_2: -3y - z = -9 \\,\\, L_3: y - 2z = -4"
+      },
+      {
+       "md": "On permute $L_2$ et $L_3$ puis on élimine $y$ : $L_3←L_3+3L_2$ donne $-7z=-21$.",
+       "tex": "-7z = -21"
+      },
+      {
+       "md": "Remontée : $z=3$ ; $y-2z=-4$ donne $y=2$ ; $x+y+z=6$ donne $x=1$."
+      },
+      {
+       "md": "Vérification dans la 2e équation : $2-2+3=3$ ✓."
+      }
+     ],
+     "answer": "**Solution : $(x,y,z)=(1\\,;2\\,;3)$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — infinité de solutions",
+     "statement": "Résoudre $x+2y=3$ et $2x+4y=6$.",
+     "steps": [
+      {
+       "md": "$L_2←L_2-2L_1$ donne $0=0$ : la seconde équation est redondante."
+      },
+      {
+       "md": "Il reste $x+2y=3$ : on pose $y=t$ (paramètre libre), donc $x=3-2t$.",
+       "tex": "x = 3 - 2t, \\quad y = t"
+      }
+     ],
+     "answer": "**Infinité de solutions : $(3-2t\\,;t)$, $t∈ℝ$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — système incompatible",
+     "statement": "Résoudre $x+y=1$ et $x+y=2$.",
+     "steps": [
+      {
+       "md": "$L_2←L_2-L_1$ donne $0=1$."
+      },
+      {
+       "md": "Cette égalité est impossible : aucune valeur de $x,y$ ne convient."
+      }
+     ],
+     "answer": "**Aucune solution.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Multiplier une ligne par 0 : l'opération n'est plus réversible.\n- Modifier une seule ligne « à moitié » : une opération doit porter sur **toute** l'équation, y compris le second membre.\n- Conclure trop vite à une solution unique quand une ligne devient $0=0$.\n- Ne pas vérifier la solution dans **toutes** les équations d'origine."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La **matrice augmentée** regroupe coefficients et seconds membres : on peut faire le pivot sans réécrire les inconnues.",
+      "Le nombre de paramètres libres est le nombre d'inconnues moins le nombre de pivots (le **rang**)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-algebre-systemes-pivot-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-matrices",
+   "title": "Matrices : opérations et transposée",
+   "minutes": 45,
+   "programRef": "Algèbre linéaire de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir une matrice, sa taille et ses coefficients.",
+    "Additionner, multiplier par un scalaire, multiplier deux matrices.",
+    "Reconnaître que le produit n'est pas commutatif.",
+    "Calculer et utiliser la transposée."
+   ],
+   "prerequisites": [
+    "sup-l1-algebre-systemes-pivot"
+   ],
+   "exercises": [
+    "sup-l1-algebre-matrices-01",
+    "sup-l1-algebre-matrices-02",
+    "sup-l1-algebre-matrices-03",
+    "sup-l1-algebre-matrices-04",
+    "sup-l1-algebre-matrices-05",
+    "sup-l1-algebre-matrices-06"
+   ],
+   "selfCheck": [
+    "sup-l1-algebre-matrices-q1",
+    "sup-l1-algebre-matrices-q2",
+    "sup-l1-algebre-matrices-q3",
+    "sup-l1-algebre-matrices-q4",
+    "sup-l1-algebre-matrices-q5"
+   ],
+   "reviewNotes": [
+    "Notation des matrices dans les énoncés textuels (lignes séparées par « ; ») : vérifier qu'elle est lisible dans l'application.",
+    "Chiffres fictifs (ventes de deux magasins)."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "On écrit une matrice ligne par ligne, les lignes étant séparées par « ; » : A = (1, 2 ; 3, 4) a pour lignes (1, 2) et (3, 4)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Matrice",
+     "md": "Une **matrice** de taille $m×n$ est un tableau de $m$ lignes et $n$ colonnes de réels. Le coefficient $a_{ij}$ est situé à la ligne $i$, colonne $j$. Cas particuliers : matrice **carrée** ($m=n$), **ligne**, **colonne**, **nulle**, **identité** $I_n$ (1 sur la diagonale, 0 ailleurs), **symétrique** ($a_{ij}=a_{ji}$)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Somme et multiple",
+     "md": "Les matrices de **même taille** s'additionnent coefficient par coefficient : $(A+B)_{ij}=a_{ij}+b_{ij}$. On multiplie par un scalaire en multipliant chaque coefficient : $(kA)_{ij}=k\\,a_{ij}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Produit matriciel",
+     "md": "Si $A$ est de taille $m×n$ et $B$ de taille $n×p$, le produit $AB$ est de taille $m×p$ avec $(AB)_{ij}=\\sum_{k=1}^{n}a_{ik}\\,b_{kj}$ : ligne $i$ de $A$ « fois » colonne $j$ de $B$. Le produit **n'est pas commutatif** en général, mais il est associatif et distributif ; $AI=IA=A$.",
+     "tex": "(AB)_{ij}=\\sum_{k=1}^{n}a_{ik}\\,b_{kj}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Transposée",
+     "md": "La **transposée** $A^{T}$ d'une matrice $A$ (taille $m×n$) est la matrice $n×m$ obtenue en échangeant lignes et colonnes : $(A^{T})_{ij}=a_{ji}$. Propriétés : $(A^{T})^{T}=A$ ; $(A+B)^{T}=A^{T}+B^{T}$ ; $(AB)^{T}=B^{T}A^{T}$ (l'ordre s'inverse)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 406,
+      "h": 112.77777777777777,
+      "items": [
+       {
+        "t": "line",
+        "x1": 16.0,
+        "y1": 28.388888888888886,
+        "x2": 16.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 16.0,
+        "y1": 28.388888888888886,
+        "x2": 23.0,
+        "y2": 28.388888888888886,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 16.0,
+        "y1": 84.38888888888889,
+        "x2": 23.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 28.388888888888886,
+        "x2": 100.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 93.0,
+        "y1": 28.388888888888886,
+        "x2": 100.0,
+        "y2": 28.388888888888886,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 93.0,
+        "y1": 84.38888888888889,
+        "x2": 100.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 48.33888888888889,
+        "text": "1",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 78.0,
+        "y": 48.33888888888889,
+        "text": "2",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 76.33888888888889,
+        "text": "3",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 78.0,
+        "y": 76.33888888888889,
+        "text": "4",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 130.5,
+        "y": 62.33888888888889,
+        "text": "×",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 161.0,
+        "y1": 28.388888888888886,
+        "x2": 161.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 161.0,
+        "y1": 28.388888888888886,
+        "x2": 168.0,
+        "y2": 28.388888888888886,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 161.0,
+        "y1": 84.38888888888889,
+        "x2": 168.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 245.0,
+        "y1": 28.388888888888886,
+        "x2": 245.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 238.0,
+        "y1": 28.388888888888886,
+        "x2": 245.0,
+        "y2": 28.388888888888886,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 238.0,
+        "y1": 84.38888888888889,
+        "x2": 245.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 183.0,
+        "y": 48.33888888888889,
+        "text": "0",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 223.0,
+        "y": 48.33888888888889,
+        "text": "1",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 183.0,
+        "y": 76.33888888888889,
+        "text": "-1",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 223.0,
+        "y": 76.33888888888889,
+        "text": "5",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 62.33888888888889,
+        "text": "=",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 306.0,
+        "y1": 28.388888888888886,
+        "x2": 306.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 306.0,
+        "y1": 28.388888888888886,
+        "x2": 313.0,
+        "y2": 28.388888888888886,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 306.0,
+        "y1": 84.38888888888889,
+        "x2": 313.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 390.0,
+        "y1": 28.388888888888886,
+        "x2": 390.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 383.0,
+        "y1": 28.388888888888886,
+        "x2": 390.0,
+        "y2": 28.388888888888886,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 383.0,
+        "y1": 84.38888888888889,
+        "x2": 390.0,
+        "y2": 84.38888888888889,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 328.0,
+        "y": 48.33888888888889,
+        "text": "-2",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 368.0,
+        "y": 48.33888888888889,
+        "text": "11",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 328.0,
+        "y": 76.33888888888889,
+        "text": "-4",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 368.0,
+        "y": 76.33888888888889,
+        "text": "23",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Produit AB pour A = (1, 2 ; 3, 4) et B = (0, 1 ; −1, 5).",
+     "alt": "Trois matrices 2×2 : A, B et le résultat AB dont les lignes sont (−2, 11) et (−4, 23)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — produit de deux matrices 2×2",
+     "statement": "Calculer $AB$ et $BA$ pour $A=(1,2\\,;3,4)$ et $B=(0,1\\,;-1,5)$.",
+     "steps": [
+      {
+       "md": "$AB$ : $1×0+2×(-1)=-2$ ; $1×1+2×5=11$ ; $3×0+4×(-1)=-4$ ; $3×1+4×5=23$."
+      },
+      {
+       "md": "$BA$ : $0×1+1×3=3$ ; $0×2+1×4=4$ ; $(-1)×1+5×3=14$ ; $(-1)×2+5×4=18$."
+      },
+      {
+       "md": "Les résultats sont différents : $AB=(-2,11\\,;-4,23)$ et $BA=(3,4\\,;14,18)$."
+      }
+     ],
+     "answer": "**$AB≠BA$ : le produit n'est pas commutatif.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 261,
+      "h": 90,
+      "items": [
+       {
+        "t": "line",
+        "x1": 16.0,
+        "y1": 17.0,
+        "x2": 16.0,
+        "y2": 73.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 16.0,
+        "y1": 17.0,
+        "x2": 23.0,
+        "y2": 17.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 16.0,
+        "y1": 73.0,
+        "x2": 23.0,
+        "y2": 73.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 17.0,
+        "x2": 100.0,
+        "y2": 73.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 93.0,
+        "y1": 17.0,
+        "x2": 100.0,
+        "y2": 17.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 93.0,
+        "y1": 73.0,
+        "x2": 100.0,
+        "y2": 73.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 36.95,
+        "text": "-2",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 78.0,
+        "y": 36.95,
+        "text": "11",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 64.95,
+        "text": "-4",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 78.0,
+        "y": 64.95,
+        "text": "23",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 130.5,
+        "y": 50.95,
+        "text": "≠",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 161.0,
+        "y1": 17.0,
+        "x2": 161.0,
+        "y2": 73.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 161.0,
+        "y1": 17.0,
+        "x2": 168.0,
+        "y2": 17.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 161.0,
+        "y1": 73.0,
+        "x2": 168.0,
+        "y2": 73.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 245.0,
+        "y1": 17.0,
+        "x2": 245.0,
+        "y2": 73.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 238.0,
+        "y1": 17.0,
+        "x2": 245.0,
+        "y2": 17.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 238.0,
+        "y1": 73.0,
+        "x2": 245.0,
+        "y2": 73.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 183.0,
+        "y": 36.95,
+        "text": "3",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 223.0,
+        "y": 36.95,
+        "text": "4",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 183.0,
+        "y": 64.95,
+        "text": "14",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 223.0,
+        "y": 64.95,
+        "text": "18",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — tailles différentes et transposée",
+     "statement": "Soit $M=(1,2,3\\,;4,5,6)$ de taille $2×3$ et $N=(1,0\\,;2,1\\,;0,3)$ de taille $3×2$. Calculer $MN$ et $M^{T}$.",
+     "steps": [
+      {
+       "md": "Tailles : $(2×3)(3×2)$, donc $MN$ est de taille $2×2$."
+      },
+      {
+       "md": "$MN$ : $1+4+0=5$ ; $0+2+9=11$ ; $4+10+0=14$ ; $0+5+18=23$."
+      },
+      {
+       "md": "$M^{T}=(1,4\\,;2,5\\,;3,6)$, de taille $3×2$."
+      }
+     ],
+     "answer": "**$MN=(5,11\\,;14,23)$.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Multiplier « coefficient par coefficient » : ce n'est **pas** le produit matriciel.\n- Oublier de vérifier que le nombre de colonnes de $A$ égale le nombre de lignes de $B$.\n- Écrire $(AB)^{T}=A^{T}B^{T}$ : c'est $B^{T}A^{T}$.\n- Penser que $AB=0$ implique $A=0$ ou $B=0$ (faux en général)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un système $AX=B$ s'écrit sous forme matricielle : $A$ contient les coefficients, $X$ les inconnues, $B$ les seconds membres.",
+      "La puissance $A^{n}$ n'a de sens que pour une matrice carrée."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-algebre-matrices-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse",
+   "title": "Déterminants et matrice inverse",
+   "minutes": 50,
+   "programRef": "Algèbre linéaire de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer un déterminant $2×2$ et $3×3$ (règle de Sarrus).",
+    "Caractériser l'inversibilité par le déterminant.",
+    "Calculer l'inverse d'une matrice $2×2$.",
+    "Résoudre un système $AX=B$ avec $A^{-1}$."
+   ],
+   "prerequisites": [
+    "sup-l1-algebre-matrices"
+   ],
+   "exercises": [
+    "sup-l1-algebre-determinants-inverse-01",
+    "sup-l1-algebre-determinants-inverse-02",
+    "sup-l1-algebre-determinants-inverse-03",
+    "sup-l1-algebre-determinants-inverse-04",
+    "sup-l1-algebre-determinants-inverse-05",
+    "sup-l1-algebre-determinants-inverse-06"
+   ],
+   "selfCheck": [
+    "sup-l1-algebre-determinants-inverse-q1",
+    "sup-l1-algebre-determinants-inverse-q2",
+    "sup-l1-algebre-determinants-inverse-q3",
+    "sup-l1-algebre-determinants-inverse-q4",
+    "sup-l1-algebre-determinants-inverse-q5"
+   ],
+   "reviewNotes": [
+    "Règle de Sarrus limitée au cas 3×3 ; vérifier si le développement par ligne doit aussi être présenté.",
+    "L'énoncé « $\\det(A+B)≠\\det A+\\det B$ » est donné en vrai/faux avec un contre-exemple."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "On écrit une matrice ligne par ligne, les lignes étant séparées par « ; » : A = (1, 2 ; 3, 4) a pour lignes (1, 2) et (3, 4)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Déterminant 2×2",
+     "md": "Pour $A=(a,b\\,;c,d)$ : $\\det A=ad-bc$. On a $\\det(AB)=\\det A\\,\\det B$ et $\\det(A^{T})=\\det A$.",
+     "tex": "\\det A = ad - bc"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Déterminant 3×3 : règle de Sarrus",
+     "md": "Pour $A=(a_{11},a_{12},a_{13}\\,;a_{21},a_{22},a_{23}\\,;a_{31},a_{32},a_{33})$, la somme des trois produits des « diagonales descendantes » $a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}$ moins la somme des trois « diagonales montantes » $a_{13}a_{22}a_{31}+a_{11}a_{23}a_{32}+a_{12}a_{21}a_{33}$. Cette règle ne marche **que** pour les matrices $3×3$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Inversibilité et inverse",
+     "md": "Une matrice carrée $A$ est **inversible** s'il existe $A^{-1}$ telle que $AA^{-1}=A^{-1}A=I$. Elle l'est **si et seulement si** $\\det A≠0$. Pour $2×2$ avec $\\det A≠0$ : $A^{-1}=\\frac{1}{ad-bc}(d,-b\\,;-c,a)$. Si $A$ est inversible, $AX=B$ a l'unique solution $X=A^{-1}B$.",
+     "tex": "A^{-1}=\\frac{1}{ad-bc}(d,-b\\,;-c,a)"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Inverse par pivot",
+     "md": "Pour inverser une matrice $n×n$, on écrit $(A\\,|\\,I)$ et on applique les opérations élémentaires sur les lignes jusqu'à obtenir $(I\\,|\\,A^{-1})$. Si l'on n'arrive pas à obtenir $I$ à gauche (ligne nulle), $A$ n'est pas inversible."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 349,
+      "h": 96.94444444444444,
+      "items": [
+       {
+        "t": "line",
+        "x1": 16.0,
+        "y1": 20.47222222222222,
+        "x2": 16.0,
+        "y2": 76.47222222222223,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 16.0,
+        "y1": 20.47222222222222,
+        "x2": 23.0,
+        "y2": 20.47222222222222,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 16.0,
+        "y1": 76.47222222222223,
+        "x2": 23.0,
+        "y2": 76.47222222222223,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 20.47222222222222,
+        "x2": 100.0,
+        "y2": 76.47222222222223,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 93.0,
+        "y1": 20.47222222222222,
+        "x2": 100.0,
+        "y2": 20.47222222222222,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 93.0,
+        "y1": 76.47222222222223,
+        "x2": 100.0,
+        "y2": 76.47222222222223,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 40.42222222222222,
+        "text": "2",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 78.0,
+        "y": 40.42222222222222,
+        "text": "1",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 68.42222222222222,
+        "text": "5",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 78.0,
+        "y": 68.42222222222222,
+        "text": "3",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 174.5,
+        "y": 54.42222222222222,
+        "text": "→ inverse",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 249.0,
+        "y1": 20.47222222222222,
+        "x2": 249.0,
+        "y2": 76.47222222222223,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 249.0,
+        "y1": 20.47222222222222,
+        "x2": 256.0,
+        "y2": 20.47222222222222,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 249.0,
+        "y1": 76.47222222222223,
+        "x2": 256.0,
+        "y2": 76.47222222222223,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 333.0,
+        "y1": 20.47222222222222,
+        "x2": 333.0,
+        "y2": 76.47222222222223,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 326.0,
+        "y1": 20.47222222222222,
+        "x2": 333.0,
+        "y2": 20.47222222222222,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 326.0,
+        "y1": 76.47222222222223,
+        "x2": 333.0,
+        "y2": 76.47222222222223,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 271.0,
+        "y": 40.42222222222222,
+        "text": "3",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 311.0,
+        "y": 40.42222222222222,
+        "text": "-1",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 271.0,
+        "y": 68.42222222222222,
+        "text": "-5",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 311.0,
+        "y": 68.42222222222222,
+        "text": "2",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Une matrice de déterminant 1 et son inverse.",
+     "alt": "La matrice (2, 1 ; 5, 3) à gauche, la matrice inverse (3, −1 ; −5, 2) à droite."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — inverse et système",
+     "statement": "Soit $A=(2,1\\,;5,3)$. Calculer $\\det A$ et $A^{-1}$, puis résoudre $2x+y=7$, $5x+3y=18$.",
+     "steps": [
+      {
+       "md": "$\\det A=2×3-1×5=1≠0$ : $A$ est inversible.",
+       "tex": "\\det A = 6 - 5 = 1"
+      },
+      {
+       "md": "$A^{-1}=\\frac{1}{1}(3,-1\\,;-5,2)$."
+      },
+      {
+       "md": "$X=A^{-1}B$ avec $B=(7\\,;18)$ : $x=3×7-1×18=3$ ; $y=-5×7+2×18=1$.",
+       "tex": "x = 21 - 18 = 3 \\quad y = -35 + 36 = 1"
+      }
+     ],
+     "answer": "**Solution : $(x,y)=(3\\,;1)$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Sarrus",
+     "statement": "Calculer $\\det S$ pour $S=(1,2,0\\,;3,1,2\\,;0,4,1)$.",
+     "steps": [
+      {
+       "md": "Diagonales descendantes : $1×1×1+2×2×0+0×3×4=1$."
+      },
+      {
+       "md": "Diagonales montantes : $0×1×0+1×2×4+2×3×1=14$."
+      },
+      {
+       "md": "Déterminant : $1-14=-13$."
+      }
+     ],
+     "answer": "**$\\det S=-13$ : $S$ est inversible.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — matrice non inversible",
+     "statement": "La matrice $T=(2,4\\,;1,2)$ est-elle inversible ?",
+     "steps": [
+      {
+       "md": "$\\det T=2×2-4×1=0$."
+      },
+      {
+       "md": "Un déterminant nul signifie que $T$ n'est pas inversible (les deux lignes sont proportionnelles)."
+      }
+     ],
+     "answer": "**Non inversible.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le facteur $\\frac{1}{\\det A}$ dans l'inverse $2×2$ ou se tromper de signes dans $(d,-b\\,;-c,a)$.\n- Appliquer Sarrus à une matrice $4×4$.\n- Écrire $\\det(A+B)=\\det A+\\det B$ : c'est faux ($\\det(AB)=\\det A\\det B$ est vrai).\n- Calculer $A^{-1}B$ au lieu de $BA^{-1}$ dans les systèmes écrits $AX=B$ : l'ordre compte."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le déterminant mesure aussi le facteur d'agrandissement des aires (2×2) ou des volumes (3×3).",
+      "Le développement suivant une ligne (cofacteurs) généralise le calcul à toute taille."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-algebre-determinants-inverse-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-algebre-systemes-pivot-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Résoudre $x+y=10$ et $x-y=2$. Donner $x$.",
+   "explanation": "En additionnant : $2x=12$, donc $x=6$ (et $y=4$).",
+   "source": "Exercice original",
+   "answer": 6,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Le système $x+y=1$, $2x+2y=3$ admet :",
+   "explanation": "$L_2-2L_1$ donne $0=1$ : impossible.",
+   "source": "Exercice original",
+   "choices": [
+    "aucune solution",
+    "une solution unique",
+    "une infinité de solutions",
+    "exactement deux solutions"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Un système homogène admet toujours au moins une solution.",
+   "explanation": "La solution nulle convient toujours (tous les seconds membres sont nuls).",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Résoudre $x+y+z=9$, $x-y+z=3$, $2x+y-z=3$. Donner $z$.",
+   "explanation": "$L_1-L_2$ : $2y=6$ donc $y=3$. Alors $x+z=6$ et $2x-z=0$ : en additionnant $3x=6$, $x=2$, $z=4$.",
+   "method": "Éliminer une inconnue de manière à retrouver un système plus petit.",
+   "mistakes": [
+    "Oublier de reporter la valeur de $y$ trouvée."
+   ],
+   "source": "Exercice original",
+   "answer": 4,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Associe chaque système à son nombre de solutions.",
+   "explanation": "Parallèles distinctes : aucune. Sécantes : une. Confondues : une infinité. Système homogène $x=0,y=0$ : seule la solution nulle.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "$x+y=2$ ; $x+y=5$",
+     "aucune solution"
+    ],
+    [
+     "$x+y=2$ ; $x-y=0$",
+     "une solution unique"
+    ],
+    [
+     "$x+y=2$ ; $2x+2y=4$",
+     "une infinité de solutions"
+    ],
+    [
+     "$x=0$ ; $y=0$ (homogène)",
+     "la solution nulle seulement"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Au marché, un commerçant fictif paie ses commandes (prix en milliers de FCFA) : A = 3 sacs de riz, 2 bidons d'huile, 1 sac de sucre pour 155 ; B = 1 sac de riz, 1 bidon d'huile, 2 sacs de sucre pour 105 ; C = 2 sacs de riz, 1 bidon d'huile, 1 sac de sucre pour 100. Soit $r$, $h$, $s$ les prix unitaires.",
+   "method": "Écrire le système, éliminer une inconnue, remonter, puis vérifier dans les trois commandes.",
+   "mistakes": [
+    "Inverser les coefficients (riz / huile / sucre)."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-algebre-systemes-pivot-06-a",
+     "points": 1,
+     "prompt": "Quel système traduit ces trois commandes ?",
+     "explanation": "On traduit chaque commande par une équation avec les bons coefficients et le bon total.",
+     "kind": "mcq",
+     "choices": [
+      "$3r+2h+s=105$ ; $r+h+2s=155$ ; $2r+h+s=100$",
+      "$3r+h+2s=155$ ; $r+h+2s=105$ ; $2r+h+s=100$",
+      "$r+2h+3s=155$ ; $2r+h+s=105$ ; $r+h+2s=100$",
+      "$3r+2h+s=155$ ; $r+h+2s=105$ ; $2r+h+s=100$"
+     ],
+     "answer": 3
+    },
+    {
+     "id": "sup-l1-algebre-systemes-pivot-06-b",
+     "points": 1,
+     "prompt": "Calculer $r$ (prix du sac de riz, en milliers de FCFA).",
+     "explanation": "$L_1-L_3$ donne $r+h=55$ ; avec la suite du pivot on obtient $r=20$.",
+     "kind": "numeric",
+     "answer": 20,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    },
+    {
+     "id": "sup-l1-algebre-systemes-pivot-06-c",
+     "points": 1,
+     "prompt": "Calculer $h$ (prix du bidon d'huile).",
+     "explanation": "Une fois $r=20$ : $h+2s=85$ et $h+s=60$, donc $s=25$ et $h=35$.",
+     "kind": "numeric",
+     "answer": 35,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    },
+    {
+     "id": "sup-l1-algebre-systemes-pivot-06-d",
+     "points": 1,
+     "prompt": "Calculer $s$ (prix du sac de sucre).",
+     "explanation": "$s=(h+2s)-(h+s)=85-60=25$.",
+     "kind": "numeric",
+     "answer": 25,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Une opération élémentaire autorisée est :",
+   "choices": [
+    "$L_2←0×L_2$",
+    "$L_2←L_2+3L_1$",
+    "$L_2←L_2^{2}$",
+    "supprimer le second membre"
+   ],
+   "answer": 1,
+   "explanation": "On peut ajouter un multiple d'une autre ligne.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Un système linéaire ne peut pas avoir :",
+   "choices": [
+    "aucune solution",
+    "exactement deux solutions",
+    "une solution",
+    "une infinité de solutions"
+   ],
+   "answer": 1,
+   "explanation": "Si deux solutions existent, toute la droite qui les joint est solution.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "La forme échelonnée sert à :",
+   "choices": [
+    "supprimer des inconnues",
+    "multiplier les solutions",
+    "changer les équations",
+    "résoudre en remontant"
+   ],
+   "answer": 3,
+   "explanation": "Chaque ligne est plus simple que la précédente.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Si une ligne devient $0=5$, le système est :",
+   "choices": [
+    "incompatible",
+    "à solution unique",
+    "homogène",
+    "redondant"
+   ],
+   "answer": 0,
+   "explanation": "Égalité impossible : aucune solution.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-systemes-pivot-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-systemes-pivot",
+   "prompt": "Si une ligne devient $0=0$, on :",
+   "choices": [
+    "conclut à l'impossibilité",
+    "la double",
+    "peut la supprimer",
+    "recommence au début"
+   ],
+   "answer": 2,
+   "explanation": "Elle n'apporte aucune information.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-matrices-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "Soit A = (2, 0 ; 1, 3) et B = (1, 4 ; 2, −1). Quel est le coefficient de la ligne 1, colonne 2 de AB ?",
+   "explanation": "$2×4+0×(-1)=8$.",
+   "method": "Ligne 1 de A fois colonne 2 de B.",
+   "mistakes": [
+    "Utiliser la ligne 2 ou la colonne 1."
+   ],
+   "source": "Exercice original",
+   "answer": 8,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-algebre-matrices-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "$A$ est de taille $2×3$ et $B$ de taille $3×4$. Le produit $AB$ est de taille :",
+   "explanation": "Le résultat a le nombre de lignes de $A$ et le nombre de colonnes de $B$.",
+   "source": "Exercice original",
+   "choices": [
+    "$3×3$",
+    "$2×3$",
+    "$4×2$",
+    "$2×4$"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-algebre-matrices-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "Pour deux matrices carrées $A$ et $B$ de même taille, on a toujours $AB=BA$.",
+   "explanation": "Faux : voir l'exemple 1 où $AB≠BA$.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-algebre-matrices-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "Soit A = (1, 2 ; 0, 1). Calculer $A^{5}$ et donner son coefficient ligne 1, colonne 2.",
+   "explanation": "$A^{2}=(1,4\\,;0,1)$, $A^{3}=(1,6\\,;0,1)$… on trouve $A^{n}=(1,2n\\,;0,1)$ ; pour $n=5$ : 10.",
+   "method": "Calculer $A^{2}$, $A^{3}$ et repérer la régularité.",
+   "mistakes": [
+    "Élever chaque coefficient à la puissance 5."
+   ],
+   "source": "Exercice original",
+   "answer": 10,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-algebre-matrices-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "Associe chaque matrice à la taille de sa transposée.",
+   "explanation": "La transposée échange le nombre de lignes et de colonnes.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "matrice $2×3$",
+     "$3×2$"
+    ],
+    [
+     "matrice ligne $1×4$",
+     "$4×1$"
+    ],
+    [
+     "matrice carrée $3×3$",
+     "$3×3$"
+    ],
+    [
+     "matrice colonne $5×1$",
+     "$1×5$"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-matrices-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "Deux magasins fictifs, Douala et Yaoundé, vendent trois articles. Les ventes d'une semaine (lignes : magasins ; colonnes : articles 1, 2, 3) sont V = (10, 5, 8 ; 7, 12, 4). Les prix (en FCFA) sont P = (1500 ; 2500 ; 4000), matrice colonne.",
+   "method": "Vérifier les tailles, puis faire ligne × colonne.",
+   "mistakes": [
+    "Multiplier P par V (tailles incompatibles dans cet ordre)."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-algebre-matrices-06-a",
+     "points": 1,
+     "prompt": "Quelle est la taille de $VP$ ?",
+     "explanation": "$(2×3)(3×1)$ donne $2×1$ : une recette par magasin.",
+     "kind": "mcq",
+     "choices": [
+      "$3×1$",
+      "$2×1$",
+      "$2×3$",
+      "$1×2$"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l1-algebre-matrices-06-b",
+     "points": 1,
+     "prompt": "Recette de la semaine du magasin de Douala (FCFA).",
+     "explanation": "$10×1500+5×2500+8×4000=15000+12500+32000=59500$.",
+     "kind": "numeric",
+     "answer": 59500,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l1-algebre-matrices-06-c",
+     "points": 1,
+     "prompt": "Recette de la semaine du magasin de Yaoundé (FCFA).",
+     "explanation": "$7×1500+12×2500+4×4000=10500+30000+16000=56500$.",
+     "kind": "numeric",
+     "answer": 56500,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l1-algebre-matrices-06-d",
+     "points": 1,
+     "prompt": "Recette totale des deux magasins (FCFA).",
+     "explanation": "$59500+56500=116000$.",
+     "kind": "numeric",
+     "answer": 116000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-matrices-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "L'identité $I_n$ vérifie, pour $A$ carrée $n×n$ :",
+   "choices": [
+    "$AI_n=0$",
+    "$AI_n=A^{T}$",
+    "$AI_n=I_nA=A$",
+    "$AI_n=2A$"
+   ],
+   "answer": 2,
+   "explanation": "C'est l'élément neutre du produit.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-matrices-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "Le produit $AB$ existe si :",
+   "choices": [
+    "le nombre de colonnes de $A$ égale le nombre de lignes de $B$",
+    "$A$ et $B$ ont la même taille",
+    "$A$ et $B$ sont carrées seulement",
+    "le nombre de lignes de $A$ égale celui de $B$"
+   ],
+   "answer": 0,
+   "explanation": "Condition de compatibilité des tailles.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-matrices-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "$(AB)^{T}$ vaut :",
+   "choices": [
+    "$A^{T}B^{T}$",
+    "$AB$",
+    "$B^{T}A^{T}$",
+    "$A^{T}+B^{T}$"
+   ],
+   "answer": 2,
+   "explanation": "La transposée inverse l'ordre des facteurs.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-matrices-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "La transposée de la matrice ligne (1, 2, 3) est :",
+   "choices": [
+    "la matrice colonne (1 ; 2 ; 3)",
+    "la matrice ligne (3, 2, 1)",
+    "la matrice nulle",
+    "la matrice identité"
+   ],
+   "answer": 0,
+   "explanation": "Lignes et colonnes sont échangées.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-matrices-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-matrices",
+   "prompt": "Une matrice symétrique vérifie :",
+   "choices": [
+    "$A^{T}=-A$",
+    "$A^{2}=A$",
+    "$A=I$",
+    "$A^{T}=A$"
+   ],
+   "answer": 3,
+   "explanation": "$a_{ij}=a_{ji}$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "Calculer le déterminant de (3, 5 ; 2, 4).",
+   "explanation": "$3×4-5×2=12-10=2$.",
+   "source": "Exercice original",
+   "answer": 2,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "La matrice (1, 2 ; 2, 4) est :",
+   "explanation": "$\\det=1×4-2×2=0$.",
+   "source": "Exercice original",
+   "choices": [
+    "inversible, de déterminant 8",
+    "non inversible",
+    "inversible, de déterminant 0",
+    "inversible, de déterminant −4"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "On a toujours $\\det(A+B)=\\det A+\\det B$.",
+   "explanation": "Faux : avec $A=B=I_2$, $\\det(A+B)=4$ alors que $\\det A+\\det B=2$.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "Calculer le déterminant de (2, 0, 1 ; 1, 3, 2 ; 0, 1, 4).",
+   "explanation": "Descendantes : $2×3×4+0×2×0+1×1×1=25$. Montantes : $1×3×0+2×2×1+0×1×4=4$. Résultat : 21.",
+   "method": "Règle de Sarrus.",
+   "mistakes": [
+    "Oublier un des six produits."
+   ],
+   "source": "Exercice original",
+   "answer": 21,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "Pour quelle valeur de $m$ la matrice (m, 2 ; 3, 6) n'est-elle pas inversible ?",
+   "explanation": "$\\det=6m-6=0$ ⇔ $m=1$.",
+   "source": "Exercice original",
+   "answer": 1,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "Un restaurant fictif de Garoua achète $x$ kg de poisson et $y$ kg de viande. Deux achats : $3x+2y=17$ (milliers de FCFA) et $4x+3y=23$. On pose A = (3, 2 ; 4, 3) et B = (17 ; 23).",
+   "method": "Calculer le déterminant, inverser, appliquer $X=A^{-1}B$, vérifier.",
+   "mistakes": [
+    "Se tromper dans les signes de $A^{-1}$."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-algebre-determinants-inverse-06-a",
+     "points": 1,
+     "prompt": "Calculer $\\det A$.",
+     "explanation": "$3×3-2×4=1$.",
+     "kind": "numeric",
+     "answer": 1,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-algebre-determinants-inverse-06-b",
+     "points": 1,
+     "prompt": "Quel est le coefficient ligne 1, colonne 2 de $A^{-1}$ ?",
+     "explanation": "$A^{-1}=(3,-2\\,;-4,3)$ car $\\det A=1$.",
+     "kind": "numeric",
+     "answer": -2,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-algebre-determinants-inverse-06-c",
+     "points": 1,
+     "prompt": "Calculer $x$.",
+     "explanation": "$x=3×17-2×23=51-46=5$.",
+     "kind": "numeric",
+     "answer": 5,
+     "tolerance": 0,
+     "unit": "kg"
+    },
+    {
+     "id": "sup-l1-algebre-determinants-inverse-06-d",
+     "points": 1,
+     "prompt": "Calculer $y$.",
+     "explanation": "$y=-4×17+3×23=-68+69=1$.",
+     "kind": "numeric",
+     "answer": 1,
+     "tolerance": 0,
+     "unit": "kg"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "Le déterminant de (a, b ; c, d) est :",
+   "choices": [
+    "$ad+bc$",
+    "$ad-bc$",
+    "$ac-bd$",
+    "$ab-cd$"
+   ],
+   "answer": 1,
+   "explanation": "Produit des diagonales : principale moins secondaire.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "Une matrice carrée est inversible si et seulement si son déterminant :",
+   "choices": [
+    "est nul",
+    "vaut 1",
+    "est positif",
+    "est non nul"
+   ],
+   "answer": 3,
+   "explanation": "$\\det A≠0$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "Si $A$ est inversible, la solution de $AX=B$ est :",
+   "choices": [
+    "$X=A^{-1}B$",
+    "$X=BA^{-1}$",
+    "$X=A^{T}B$",
+    "$X=B-A$"
+   ],
+   "answer": 0,
+   "explanation": "On multiplie à gauche des deux côtés par $A^{-1}$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "L'inverse de (2, 0 ; 0, 4) est :",
+   "choices": [
+    "(−2, 0 ; 0, −4)",
+    "(4, 0 ; 0, 2)",
+    "(0,5, 0 ; 0, 0,25)",
+    "(0,5, 0 ; 0, 4)"
+   ],
+   "answer": 2,
+   "explanation": "Pour une matrice diagonale, on inverse chaque terme diagonal.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-determinants-inverse-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-determinants-inverse",
+   "prompt": "La règle de Sarrus s'applique aux matrices :",
+   "choices": [
+    "$2×2$ seulement",
+    "$4×4$",
+    "de toute taille",
+    "$3×3$"
+   ],
+   "answer": 3,
+   "explanation": "Elle est propre au cas $3×3$.",
+   "review": true
+  }
+ ]
+}

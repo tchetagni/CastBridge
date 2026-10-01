@@ -1,0 +1,1146 @@
+{
+ "chapter": "sup-l1-statistiques-descriptives-series-simples",
+ "lessons": [
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux",
+   "title": "Séries statistiques, tableaux et indices simples",
+   "minutes": 40,
+   "programRef": "Statistiques descriptives de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer population, individu, caractère et modalité.",
+    "Construire un tableau d'effectifs, de fréquences et de fréquences cumulées.",
+    "Regrouper des données en classes et tracer un histogramme.",
+    "Calculer et interpréter un indice simple en base 100."
+   ],
+   "exercises": [
+    "sup-l1-statistiques-descriptives-series-tableaux-01",
+    "sup-l1-statistiques-descriptives-series-tableaux-02",
+    "sup-l1-statistiques-descriptives-series-tableaux-03",
+    "sup-l1-statistiques-descriptives-series-tableaux-04",
+    "sup-l1-statistiques-descriptives-series-tableaux-05",
+    "sup-l1-statistiques-descriptives-series-tableaux-06"
+   ],
+   "selfCheck": [
+    "sup-l1-statistiques-descriptives-series-tableaux-q1",
+    "sup-l1-statistiques-descriptives-series-tableaux-q2",
+    "sup-l1-statistiques-descriptives-series-tableaux-q3",
+    "sup-l1-statistiques-descriptives-series-tableaux-q4",
+    "sup-l1-statistiques-descriptives-series-tableaux-q5"
+   ],
+   "reviewNotes": [
+    "Données entièrement fictives.",
+    "Le nombre de classes n'est pas imposé par une règle (Sturges…) ici ; vérifier la convention enseignée."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "La **population** est l'ensemble étudié ; un **individu** en est un élément ; le **caractère** est ce qu'on observe. Il est **qualitatif** (couleur, ville) ou **quantitatif**, lui-même **discret** (valeurs isolées : nombre d'enfants) ou **continu** (toutes valeurs d'un intervalle : salaire, taille). Les valeurs possibles sont les **modalités**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Effectif et fréquence",
+     "md": "L'**effectif** $n_i$ d'une valeur est le nombre d'individus qui la prennent ; l'effectif total est $N=\\sum n_i$. La **fréquence** est $f_i=\\frac{n_i}{N}$ (somme égale à 1, ou 100 % en pourcentage). Les **effectifs (ou fréquences) cumulés croissants** s'obtiennent en additionnant successivement les effectifs (ou fréquences).",
+     "tex": "f_i=\\frac{n_i}{N}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Classes et histogramme",
+     "md": "Pour un caractère continu, on regroupe les valeurs en **classes** $[a\\,;b[$ de **centre** $\\frac{a+b}{2}$ et d'**amplitude** $b-a$. Dans un **histogramme**, c'est l'**aire** de chaque rectangle qui est proportionnelle à l'effectif ; si toutes les classes ont la même amplitude, la hauteur l'est aussi."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Indice simple",
+     "md": "Si une grandeur vaut $V_{0}$ à la date de base et $V_{t}$ à la date $t$, l'**indice simple** en base 100 est $I_{t}=\\frac{V_{t}}{V_{0}}×100$. Le **taux d'évolution** entre deux dates est $\\frac{V_{t}-V_{0}}{V_{0}}=\\frac{I_{t}-100}{100}$. Attention : on ne **additionne pas** des indices de dates différentes.",
+     "tex": "I_{t}=\\frac{V_{t}}{V_{0}}×100"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 250,
+      "bars": [
+       {
+        "label": "2-4",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "4-6",
+        "value": 14,
+        "color": "blue"
+       },
+       {
+        "label": "6-8",
+        "value": 17,
+        "color": "blue"
+       },
+       {
+        "label": "8-10",
+        "value": 9,
+        "color": "blue"
+       },
+       {
+        "label": "10-12",
+        "value": 4,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Histogramme des salaires journaliers (classes en milliers de FCFA), amplitudes égales. (unité : effectif (classes en milliers de FCFA))",
+     "alt": "Cinq barres : 6 vendeurs de 2 à 4 mille FCFA, 14 de 4 à 6, 17 de 6 à 8, 9 de 8 à 10 et 4 de 10 à 12."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — tableau d'une série discrète",
+     "statement": "On interroge 40 ménages fictifs sur le nombre d'enfants (0 à 5). Effectifs : 0 enfant(s) : 4, 1 enfant(s) : 9, 2 enfant(s) : 12, 3 enfant(s) : 8, 4 enfant(s) : 5, 5 enfant(s) : 2. Calculer fréquences et effectifs cumulés.",
+     "steps": [
+      {
+       "md": "$N=40$."
+      },
+      {
+       "md": "Fréquences $\\frac{n_i}{40}$ : 0 → 10,0 % ; 1 → 22,5 % ; 2 → 30,0 % ; 3 → 20,0 % ; 4 → 12,5 % ; 5 → 5,0 %."
+      },
+      {
+       "md": "Effectifs cumulés croissants : 4, 13, 25, 33, 38, 40."
+      }
+     ],
+     "answer": "**Exemple : 25 ménages sur 40 ont au plus 2 enfants, soit 62 %.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — classes",
+     "statement": "Pour la série des salaires (histogramme ci-dessus), donner le centre de la classe $[6000\\,;8000[$, sa fréquence et le pourcentage de vendeurs gagnant moins de 6 000 FCFA.",
+     "steps": [
+      {
+       "md": "Centre : $\\frac{6000+8000}{2}=7000$.",
+       "tex": "\\frac{6000+8000}{2} = 7000"
+      },
+      {
+       "md": "Fréquence : $\\frac{17}{50}=0{,}34$, soit 34 %.",
+       "tex": "\\frac{17}{50} = 0{,}34"
+      },
+      {
+       "md": "Moins de 6 000 FCFA : $6+14=20$ vendeurs, soit $\\frac{20}{50}=40$ %."
+      }
+     ],
+     "answer": "**Centre 7 000 ; fréquence 34 % ; 40 % gagnent moins de 6 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — indices",
+     "statement": "Le prix d'un sac de riz fictif est de 16 000 FCFA en 2020 (base 100), 17 600 en 2021 et 19 200 en 2022. Calculer les indices et le taux d'évolution de 2021 à 2022.",
+     "steps": [
+      {
+       "md": "$I_{2021}=\\frac{17600}{16000}×100=110$ et $I_{2022}=\\frac{19200}{16000}×100=120$.",
+       "tex": "I_{2022} = \\frac{19200}{16000}×100 = 120"
+      },
+      {
+       "md": "Taux 2021→2022 : $\\frac{19200-17600}{17600}=0{,}0909$, soit environ 9,09 %."
+      },
+      {
+       "md": "Piège : on ne dit pas « 120 − 110 = 10 % ». La différence d'indices est de 10 **points**."
+      }
+     ],
+     "answer": "**Indices 110 et 120 ; hausse de 9,09 % entre 2021 et 2022 (environ).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre effectif et fréquence, ou oublier que la somme des fréquences est 1.\n- Dans un histogramme à classes d'amplitudes **inégales**, prendre la hauteur égale à l'effectif : il faut une hauteur proportionnelle à l'effectif divisé par l'amplitude.\n- Confondre « points d'indice » et « pourcentage ».\n- Compter deux fois une valeur située à la frontière de deux classes."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les diagrammes en bâtons conviennent aux caractères discrets, les histogrammes aux caractères continus, les diagrammes circulaires aux caractères qualitatifs.",
+      "Les indices simples sont utilisés par les statisticiens pour suivre les prix ; l'indice des prix à la consommation est un indice **composé** (hors programme de cette fiche)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-statistiques-descriptives-series-tableaux-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles",
+   "title": "Moyenne, médiane, mode et quantiles",
+   "minutes": 45,
+   "programRef": "Statistiques descriptives de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une moyenne (simple, pondérée, par classes).",
+    "Déterminer médiane et mode.",
+    "Calculer des quartiles avec une convention précisée.",
+    "Choisir le résumé de position adapté à la série."
+   ],
+   "prerequisites": [
+    "sup-l1-statistiques-descriptives-series-tableaux"
+   ],
+   "exercises": [
+    "sup-l1-statistiques-descriptives-position-quantiles-01",
+    "sup-l1-statistiques-descriptives-position-quantiles-02",
+    "sup-l1-statistiques-descriptives-position-quantiles-03",
+    "sup-l1-statistiques-descriptives-position-quantiles-04",
+    "sup-l1-statistiques-descriptives-position-quantiles-05",
+    "sup-l1-statistiques-descriptives-position-quantiles-06"
+   ],
+   "selfCheck": [
+    "sup-l1-statistiques-descriptives-position-quantiles-q1",
+    "sup-l1-statistiques-descriptives-position-quantiles-q2",
+    "sup-l1-statistiques-descriptives-position-quantiles-q3",
+    "sup-l1-statistiques-descriptives-position-quantiles-q4",
+    "sup-l1-statistiques-descriptives-position-quantiles-q5"
+   ],
+   "reviewNotes": [
+    "Convention des quartiles (rang $n/4$ arrondi au supérieur) : plusieurs conventions existent ; adapter à celle du cours.",
+    "Médiane d'une série par classes : interpolation linéaire, à vérifier avec l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne",
+     "md": "Pour des valeurs $x_i$ d'effectifs $n_i$ ($N=\\sum n_i$) : $\\bar{x}=\\frac{1}{N}\\sum n_i\\,x_i$ (**moyenne pondérée**). Pour des données regroupées en classes, on remplace $x_i$ par le **centre** de la classe (approximation). La moyenne est sensible aux valeurs extrêmes.",
+     "tex": "\\bar{x}=\\frac{1}{N}\\sum n_i\\,x_i"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Médiane et mode",
+     "md": "La **médiane** partage la série ordonnée en deux moitiés d'effectifs égaux : pour $N$ impair c'est la valeur de rang $\\frac{N+1}{2}$ ; pour $N$ pair, la moyenne des valeurs de rang $\\frac{N}{2}$ et $\\frac{N}{2}+1$. Le **mode** est la valeur (ou la classe) d'effectif le plus grand. Une série peut avoir plusieurs modes."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Quartiles et quantiles",
+     "md": "Convention utilisée ici (série ordonnée de $n$ valeurs) : $Q_{1}$ est la valeur dont le rang est $\\frac{n}{4}$ arrondi à l'entier supérieur, et $Q_{3}$ celle dont le rang est $\\frac{3n}{4}$ arrondi à l'entier supérieur. L'**écart interquartile** est $Q_{3}-Q_{1}$. Plus généralement, le **quantile** d'ordre $p$ est la plus petite valeur dont la fréquence cumulée est $≥p$ (médiane : $p=0{,}5$ ; déciles : $p=0{,}1,\\dots,0{,}9$). **Autres conventions existent** : on suit celle du cours."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Quelle valeur centrale choisir ?",
+     "md": "La **moyenne** utilise toutes les valeurs mais est tirée par les valeurs extrêmes (ex. quelques gros salaires). La **médiane** est **robuste** : 50 % des individus sont au-dessous. Le **mode** convient aux caractères qualitatifs. Pour un revenu, on donne souvent la médiane en plus de la moyenne."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 250,
+      "bars": [
+       {
+        "label": "Min",
+        "value": 12,
+        "color": "grey"
+       },
+       {
+        "label": "Q1",
+        "value": 15,
+        "color": "blue"
+       },
+       {
+        "label": "Médiane",
+        "value": 20,
+        "color": "green"
+       },
+       {
+        "label": "Moyenne",
+        "value": 22.0,
+        "color": "orange"
+       },
+       {
+        "label": "Q3",
+        "value": 25,
+        "color": "blue"
+       },
+       {
+        "label": "Max",
+        "value": 40,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "Résumé de position de la série 12, 15, 15, 18, 20, 22, 25, 31, 40. (unité : valeur (série de 9 valeurs))",
+     "alt": "Barres pour le minimum 12, Q1 15, la médiane 20, la moyenne 22,0, Q3 25 et le maximum 40."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — moyenne pondérée, médiane, mode",
+     "statement": "Reprendre les 40 ménages (0 à 5 enfants, effectifs 4, 9, 12, 8, 5, 2). Calculer moyenne, médiane et mode.",
+     "steps": [
+      {
+       "md": "$\\sum n_i x_i=0+9+24+24+20+10=87$, donc $\\bar{x}=\\frac{87}{40}=2{,}175$.",
+       "tex": "\\bar{x} = \\frac{87}{40} = 2{,}175"
+      },
+      {
+       "md": "$N=40$ est pair : médiane = moyenne des valeurs de rang 20 et 21. Effectifs cumulés : 4, 13, 25 : ces deux valeurs sont dans la modalité « 2 »."
+      },
+      {
+       "md": "Mode : effectif maximal 12, donc 2 enfants."
+      }
+     ],
+     "answer": "**Moyenne 2,175 ; médiane 2 ; mode 2.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — série par classes",
+     "statement": "Pour les 50 salaires journaliers (classes de 2 000 à 12 000 FCFA, effectifs 6, 14, 17, 9, 4), calculer la moyenne approchée et la médiane par interpolation.",
+     "steps": [
+      {
+       "md": "Centres : 3000, 5000, 7000, 9000, 11000. $\\sum n_i x_i=18000+70000+119000+81000+44000=332000$.",
+       "tex": "\\bar{x}≈\\frac{332000}{50}=6640"
+      },
+      {
+       "md": "Médiane : rang $25$. Cumuls : 6, 20, 37 : elle est dans $[6000\\,;8000[$."
+      },
+      {
+       "md": "Interpolation : $6000+\\frac{25-20}{17}×2000≈6588$ FCFA."
+      }
+     ],
+     "answer": "**Moyenne ≈ 6 640 FCFA ; médiane ≈ 6588 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — quartiles d'une petite série",
+     "statement": "Série (9 valeurs, en milliers de FCFA) : 12, 15, 15, 18, 20, 22, 25, 31, 40. Calculer médiane, $Q_{1}$, $Q_{3}$ et moyenne.",
+     "steps": [
+      {
+       "md": "$n=9$ : médiane = valeur de rang 5, soit 20."
+      },
+      {
+       "md": "$\\frac{9}{4}=2{,}25$ arrondi à 3 : $Q_{1}$ = 3e valeur = 15 ; $\\frac{27}{4}=6{,}75$ arrondi à 7 : $Q_{3}$ = 7e valeur = 25.",
+       "tex": "Q_{1}=15 \\quad Q_{3}=25"
+      },
+      {
+       "md": "Moyenne : $\\frac{198}{9}=22$ : elle dépasse la médiane car la valeur 40 tire la moyenne vers le haut."
+      }
+     ],
+     "answer": "**Médiane 20 ; $Q_{1}=15$ ; $Q_{3}=25$ ; moyenne 22 ; écart interquartile 10.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer la moyenne des **modalités** sans les pondérer par les effectifs.\n- Oublier de **trier** avant de chercher la médiane ou les quartiles.\n- Confondre « valeur de rang $k$ » et « valeur $k$ ».\n- Donner le centre de classe comme si c'était la vraie moyenne : c'est une approximation."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour une distribution très asymétrique (revenus), on privilégie la médiane.",
+      "Le diagramme en boîte résume Min, $Q_1$, médiane, $Q_3$, Max."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-statistiques-descriptives-position-quantiles-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion",
+   "title": "Dispersion : variance et écart-type",
+   "minutes": 40,
+   "programRef": "Statistiques descriptives de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer l'étendue, la variance et l'écart-type.",
+    "Utiliser la formule $V=\\overline{x^{2}}-\\bar{x}^{2}$.",
+    "Comparer deux séries avec le coefficient de variation.",
+    "Interpréter un écart-type."
+   ],
+   "prerequisites": [
+    "sup-l1-statistiques-descriptives-position-quantiles"
+   ],
+   "exercises": [
+    "sup-l1-statistiques-descriptives-dispersion-01",
+    "sup-l1-statistiques-descriptives-dispersion-02",
+    "sup-l1-statistiques-descriptives-dispersion-03",
+    "sup-l1-statistiques-descriptives-dispersion-04",
+    "sup-l1-statistiques-descriptives-dispersion-05",
+    "sup-l1-statistiques-descriptives-dispersion-06"
+   ],
+   "selfCheck": [
+    "sup-l1-statistiques-descriptives-dispersion-q1",
+    "sup-l1-statistiques-descriptives-dispersion-q2",
+    "sup-l1-statistiques-descriptives-dispersion-q3",
+    "sup-l1-statistiques-descriptives-dispersion-q4",
+    "sup-l1-statistiques-descriptives-dispersion-q5"
+   ],
+   "reviewNotes": [
+    "Variance « de population » (division par $N$) : ne pas confondre avec la variance corrigée (division par $N-1$) vue en statistique inférentielle."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Variance et écart-type",
+     "md": "La **variance** d'une série est la moyenne des carrés des écarts à la moyenne : $V=\\frac{1}{N}\\sum n_i\\,(x_i-\\bar{x})^{2}$. L'**écart-type** est $\\sigma=\\sqrt{V}$ ; il s'exprime dans la même unité que les données. L'**étendue** est $\\text{Max}-\\text{Min}$.",
+     "tex": "V=\\frac{1}{N}\\sum n_i\\,(x_i-\\bar{x})^{2}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formule de König–Huygens",
+     "md": "$V=\\overline{x^{2}}-\\bar{x}^{2}$ : la variance est la **moyenne des carrés moins le carré de la moyenne**, avec $\\overline{x^{2}}=\\frac{1}{N}\\sum n_i\\,x_i^{2}$. Elle est plus rapide à calculer à la main. Comme $V≥0$, on doit toujours trouver $\\overline{x^{2}}≥\\bar{x}^{2}$.",
+     "tex": "V=\\overline{x^{2}}-\\bar{x}^{2}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Effet d'un changement de variable",
+     "md": "Si $y_i=a\\,x_i+b$, alors $\\bar{y}=a\\bar{x}+b$, $V(y)=a^{2}V(x)$ et $\\sigma_{y}=|a|\\,\\sigma_{x}$. **Ajouter une constante ne change pas la dispersion**, multiplier par $a$ multiplie l'écart-type par $|a|$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Coefficient de variation",
+     "md": "Le **coefficient de variation** $CV=\\frac{\\sigma}{\\bar{x}}$ (en %, pour $\\bar{x}>0$) permet de comparer la dispersion de séries d'unités ou de niveaux différents."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 320,
+      "h": 220,
+      "bars": [
+       {
+        "label": "Série A",
+        "value": 2.8284271247461903,
+        "color": "blue"
+       },
+       {
+        "label": "Série B",
+        "value": 6.2289646009589745,
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "Deux séries de même moyenne (14) mais de dispersions différentes. (unité : écart-type (moyenne 14 pour les deux))",
+     "alt": "Deux barres : écart-type de la série A environ 2,83 et de la série B environ 6,23."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — variance par König–Huygens",
+     "statement": "Avec les 40 ménages (nombre d'enfants, effectifs 4, 9, 12, 8, 5, 2 ; moyenne 2,175), calculer variance et écart-type.",
+     "steps": [
+      {
+       "md": "$\\sum n_i x_i^{2}=0+9+48+72+80+50=259$, donc $\\overline{x^{2}}=\\frac{259}{40}=6{,}475$.",
+       "tex": "\\overline{x^{2}} = 6{,}475"
+      },
+      {
+       "md": "$\\bar{x}^{2}=2{,}175^{2}=4{,}730625$.",
+       "tex": "\\bar{x}^{2}=4{,}730625"
+      },
+      {
+       "md": "$V=6{,}475-4{,}730625=1{,}744375$ ; $\\sigma=\\sqrt{V}≈1{,}321$."
+      }
+     ],
+     "answer": "**$V≈1{,}744$ ; $\\sigma≈1{,}32$ enfant.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — comparer deux séries",
+     "statement": "Séries A : 10, 12, 14, 16, 18 et B : 5, 10, 14, 18, 23. Comparer leurs dispersions.",
+     "steps": [
+      {
+       "md": "Les deux moyennes valent 14."
+      },
+      {
+       "md": "A : écarts $-4,-2,0,2,4$ ; $V_{A}=\\frac{16+4+0+4+16}{5}=8$ ; $\\sigma_{A}≈2{,}83$."
+      },
+      {
+       "md": "B : écarts $-9,-4,0,4,9$ ; $V_{B}=\\frac{81+16+0+16+81}{5}=194/5$ ; $\\sigma_{B}≈6{,}23$."
+      }
+     ],
+     "answer": "**B est plus dispersée que A (même moyenne, écart-type plus grand).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — changement de variable",
+     "statement": "Un fabricant fictif a une série de coûts $x$ (moyenne 40, écart-type 6 en milliers de FCFA). Chaque coût augmente de 5 puis est multiplié par 2 : $y=2x+10$. Donner moyenne et écart-type de $y$.",
+     "steps": [
+      {
+       "md": "$\\bar{y}=2×40+10=90$.",
+       "tex": "\\bar{y} = 2\\bar{x}+10 = 90"
+      },
+      {
+       "md": "$\\sigma_{y}=|2|×6=12$ : le $+10$ n'agit pas sur la dispersion.",
+       "tex": "\\sigma_{y} = 2\\sigma_{x} = 12"
+      }
+     ],
+     "answer": "**$\\bar{y}=90$ ; $\\sigma_{y}=12$.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la racine carrée : la variance est en unité **au carré**.\n- Oublier de retrancher $\\bar{x}^{2}$ dans König–Huygens (on obtiendrait $\\overline{x^{2}}$).\n- Trouver une variance **négative** : erreur de calcul certaine.\n- Diviser par $N-1$ au lieu de $N$ sans le préciser (convention de l'inférence)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Règle empirique pour des séries en forme de cloche : environ 68 % des valeurs sont à moins d'un écart-type de la moyenne (cette règle sera précisée avec la loi normale).",
+      "La variance est la « moment centré d'ordre 2 »."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-statistiques-descriptives-dispersion-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "Notes de 25 étudiants fictifs : [0;5[ : 3 ; [5;10[ : 7 ; [10;15[ : 10 ; [15;20] : 5. Quelle est la fréquence (en %) de la classe [10;15[ ?",
+   "explanation": "$\\frac{10}{25}=0{,}4$ soit 40 %.",
+   "source": "Exercice original",
+   "answer": 40.0,
+   "tolerance": 0.01,
+   "unit": "%"
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "Le centre de la classe $[5\\,;10[$ est :",
+   "explanation": "$\\frac{5+10}{2}=7{,}5$.",
+   "source": "Exercice original",
+   "choices": [
+    "7,5",
+    "5",
+    "10",
+    "2,5"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "La somme des fréquences relatives d'une série est toujours égale à 1.",
+   "explanation": "$\\sum \\frac{n_i}{N}=\\frac{N}{N}=1$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "Avec les notes ci-dessus, combien d'étudiants ont une note inférieure à 10 (effectif cumulé croissant) ?",
+   "explanation": "$3+7=10$.",
+   "source": "Exercice original",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "étudiants"
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "Le prix d'un article passe de 2 500 FCFA (base 100) à 2 750 FCFA. Quel est l'indice ?",
+   "explanation": "$\\frac{2750}{2500}×100=110$.",
+   "source": "Exercice original",
+   "answer": 110.0,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "Un atelier fictif a relevé le nombre de pannes mensuelles de ses 30 machines : 0 panne : 6 machines ; 1 : 10 ; 2 : 8 ; 3 : 4 ; 4 : 2.",
+   "method": "Calculer N, puis les fréquences ; cumuler dans l'ordre croissant.",
+   "mistakes": [
+    "Diviser par 5 (nombre de modalités) au lieu de $N=30$."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-statistiques-descriptives-series-tableaux-06-a",
+     "points": 1,
+     "prompt": "Calculer la fréquence (en %) des machines ayant exactement 2 pannes.",
+     "explanation": "$\\frac{8}{30}≈26{,}67$ %.",
+     "kind": "numeric",
+     "answer": 26.666666667,
+     "tolerance": 0.01,
+     "unit": "%"
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-series-tableaux-06-b",
+     "points": 1,
+     "prompt": "Quel est l'effectif cumulé croissant des machines ayant au plus 1 panne ?",
+     "explanation": "$6+10=16$.",
+     "kind": "numeric",
+     "answer": 16,
+     "tolerance": 0,
+     "unit": "machines"
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-series-tableaux-06-c",
+     "points": 1,
+     "prompt": "Quelle est la fréquence cumulée (en %) correspondant à « au plus 2 pannes » ?",
+     "explanation": "$\\frac{6+10+8}{30}=\\frac{24}{30}=80$ %.",
+     "kind": "numeric",
+     "answer": 80.0,
+     "tolerance": 0.01,
+     "unit": "%"
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-series-tableaux-06-d",
+     "points": 1,
+     "prompt": "Quel type de caractère est le nombre de pannes ?",
+     "explanation": "Il prend des valeurs entières isolées.",
+     "kind": "mcq",
+     "choices": [
+      "qualitatif",
+      "quantitatif continu",
+      "ni l'un ni l'autre",
+      "quantitatif discret"
+     ],
+     "answer": 3
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "La fréquence d'une modalité d'effectif 12 dans une série de 48 individus est :",
+   "choices": [
+    "0,12",
+    "0,25",
+    "4",
+    "0,48"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{12}{48}=0{,}25$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "Le salaire en FCFA est un caractère :",
+   "choices": [
+    "qualitatif",
+    "quantitatif continu",
+    "quantitatif discret strict",
+    "nominal"
+   ],
+   "answer": 1,
+   "explanation": "Il peut prendre toute valeur d'un intervalle (en théorie).",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "Si un prix passe de 100 (base) à 125, le taux d'évolution est :",
+   "choices": [
+    "125 %",
+    "0,25 %",
+    "12,5 %",
+    "25 %"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{125-100}{100}=25$ %.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "Dans un histogramme à classes d'égale amplitude, la hauteur est proportionnelle :",
+   "choices": [
+    "à l'effectif",
+    "à l'amplitude seulement",
+    "au centre",
+    "à la fréquence cumulée"
+   ],
+   "answer": 0,
+   "explanation": "L'aire est proportionnelle à l'effectif ; l'amplitude est constante.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-series-tableaux-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-series-tableaux",
+   "prompt": "Le dernier effectif cumulé croissant vaut toujours :",
+   "choices": [
+    "1",
+    "0",
+    "$N$",
+    "le mode"
+   ],
+   "answer": 2,
+   "explanation": "Tous les individus sont comptés.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "Quelle est la moyenne de 8, 10, 12, 14, 16 ?",
+   "explanation": "Somme $60$, divisée par 5 : $12$.",
+   "source": "Exercice original",
+   "answer": 12,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "Médiane de 3, 5, 7, 9 :",
+   "explanation": "$N=4$ pair : moyenne de 5 et 7.",
+   "source": "Exercice original",
+   "choices": [
+    "5",
+    "7",
+    "6,5",
+    "6"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "La moyenne est toujours égale à la médiane.",
+   "explanation": "Faux : sur 12, 15, 15, 18, 20, 22, 25, 31, 40, la moyenne est 22 et la médiane 20.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "Une classe a eu 2 notes de 10, 3 notes de 20 et 5 notes de 30 (sur un barème fictif). Calculer la moyenne.",
+   "explanation": "$\\frac{2×10+3×20+5×30}{10}=\\frac{230}{10}=23$.",
+   "source": "Exercice original",
+   "answer": 23.0,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "Série : 4, 6, 6, 7, 9, 10, 12, 15, 21, 30 (10 valeurs). Quelle est la valeur de $Q_{3}$ avec la convention du cours (rang $\\frac{3n}{4}$ arrondi à l'entier supérieur) ?",
+   "explanation": "$\\frac{30}{4}=7{,}5$ arrondi à l'entier supérieur : 8 ; la 8e valeur est 15.",
+   "method": "Trier, calculer le rang, lire la valeur.",
+   "mistakes": [
+    "Arrondir 7,5 à l'inférieur."
+   ],
+   "source": "Exercice original",
+   "answer": 15,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "Les salaires mensuels (en milliers de FCFA) de 7 employés d'une PME fictive sont : 60, 65, 70, 70, 75, 80, 300 (le dernier est celui du directeur).",
+   "method": "Trier ; calculer moyenne, médiane, mode ; comparer.",
+   "mistakes": [
+    "Ignorer l'effet de la valeur extrême."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-statistiques-descriptives-position-quantiles-06-a",
+     "points": 1,
+     "prompt": "Calculer la moyenne.",
+     "explanation": "Somme $=720$ ; $\\frac{720}{7}≈102{,}86$.",
+     "kind": "numeric",
+     "answer": 102.857142857,
+     "tolerance": 0.01,
+     "unit": "milliers de FCFA"
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-position-quantiles-06-b",
+     "points": 1,
+     "prompt": "Quelle est la médiane ?",
+     "explanation": "$N=7$ : 4e valeur = 70.",
+     "kind": "numeric",
+     "answer": 70,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-position-quantiles-06-c",
+     "points": 1,
+     "prompt": "Quel résumé décrit le mieux le salaire « typique » ?",
+     "explanation": "Une valeur extrême fait monter la moyenne ; la médiane reste à 70.",
+     "kind": "mcq",
+     "choices": [
+      "la moyenne, car elle utilise toutes les valeurs",
+      "la médiane, car la moyenne est tirée par 300",
+      "le mode, car il est unique",
+      "l'étendue"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-position-quantiles-06-d",
+     "points": 1,
+     "prompt": "Quel est le mode ?",
+     "explanation": "70 apparaît deux fois.",
+     "kind": "numeric",
+     "answer": 70,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "Pour un nombre pair de valeurs, la médiane est :",
+   "choices": [
+    "la plus petite des deux valeurs centrales",
+    "toujours une valeur de la série",
+    "la moyenne des deux valeurs centrales",
+    "le mode"
+   ],
+   "answer": 2,
+   "explanation": "Rang $\\frac{N}{2}$ et $\\frac{N}{2}+1$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "Le mode est :",
+   "choices": [
+    "la valeur la plus fréquente",
+    "la valeur centrale",
+    "la moyenne arrondie",
+    "la plus grande valeur"
+   ],
+   "answer": 0,
+   "explanation": "Effectif maximal.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "Une valeur extrême très grande influence surtout :",
+   "choices": [
+    "la médiane",
+    "le mode",
+    "la moyenne",
+    "le nombre de valeurs"
+   ],
+   "answer": 2,
+   "explanation": "La médiane est robuste.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "L'écart interquartile est :",
+   "choices": [
+    "$Q_{3}-Q_{1}$",
+    "$Q_{3}+Q_{1}$",
+    "Max − Min",
+    "$\\frac{Q_{3}}{Q_{1}}$"
+   ],
+   "answer": 0,
+   "explanation": "Il mesure la dispersion de la moitié centrale des données.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-position-quantiles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-position-quantiles",
+   "prompt": "Pour des données en classes, on utilise pour la moyenne :",
+   "choices": [
+    "la borne inférieure",
+    "l'effectif seulement",
+    "l'amplitude",
+    "le centre de chaque classe"
+   ],
+   "answer": 3,
+   "explanation": "Approximation usuelle.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "Série : 2, 4, 6. Calculer sa variance (division par $N$).",
+   "explanation": "Moyenne 4 ; $\\frac{4+0+4}{3}=\\frac{8}{3}≈2{,}67$.",
+   "source": "Exercice original",
+   "answer": 2.666666667,
+   "tolerance": 0.01
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "Si toutes les valeurs d'une série sont égales, l'écart-type vaut :",
+   "explanation": "Tous les écarts à la moyenne sont nuls.",
+   "source": "Exercice original",
+   "choices": [
+    "1",
+    "0",
+    "la moyenne",
+    "on ne peut pas savoir"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "Ajouter 100 à toutes les valeurs d'une série ne change pas son écart-type.",
+   "explanation": "$\\sigma_{y}=|a|\\sigma_{x}$ avec $a=1$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "Une série a pour moyenne 12 et pour moyenne des carrés 148. Quel est son écart-type ?",
+   "explanation": "$V=148-144=4$ ; $\\sigma=2$.",
+   "source": "Exercice original",
+   "answer": 2,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "On multiplie par 3 toutes les valeurs d'une série d'écart-type 4. Nouvel écart-type ?",
+   "explanation": "$\\sigma'=3×4=12$.",
+   "source": "Exercice original",
+   "answer": 12,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "On a relevé la taille de la commande (en dizaines d'unités) de 10 clients fictifs : 2 (1 fois), 4 (2 fois), 6 (4 fois), 8 (2 fois), 10 (1 fois).",
+   "method": "König–Huygens : moyenne des carrés moins carré de la moyenne.",
+   "mistakes": [
+    "Oublier de pondérer par les effectifs."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-statistiques-descriptives-dispersion-06-a",
+     "points": 1,
+     "prompt": "Calculer la moyenne.",
+     "explanation": "$\\frac{2+8+24+16+10}{10}=\\frac{60}{10}=6$.",
+     "kind": "numeric",
+     "answer": 6.0,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-dispersion-06-b",
+     "points": 1,
+     "prompt": "Calculer la moyenne des carrés $\\overline{x^{2}}$.",
+     "explanation": "$\\frac{4+32+144+128+100}{10}=\\frac{408}{10}=40{,}8$.",
+     "kind": "numeric",
+     "answer": 40.8,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-dispersion-06-c",
+     "points": 1,
+     "prompt": "Calculer la variance.",
+     "explanation": "$40{,}8-36=4{,}8$.",
+     "kind": "numeric",
+     "answer": 4.8,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-dispersion-06-d",
+     "points": 1,
+     "prompt": "Donner l'écart-type (arrondi au centième).",
+     "explanation": "$\\sqrt{4{,}8}≈2{,}19$.",
+     "kind": "numeric",
+     "answer": 2.19089023,
+     "tolerance": 0.01
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "La formule de König–Huygens est :",
+   "choices": [
+    "Carré de la moyenne moins moyenne des carrés",
+    "Moyenne des carrés moins carré de la moyenne",
+    "Moyenne des carrés plus carré de la moyenne",
+    "Racine carrée de la moyenne des carrés"
+   ],
+   "answer": 1,
+   "explanation": "Moyenne des carrés moins carré de la moyenne.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "L'unité de la variance d'une série en FCFA est :",
+   "choices": [
+    "FCFA",
+    "sans unité",
+    "pourcentage",
+    "FCFA au carré"
+   ],
+   "answer": 3,
+   "explanation": "L'écart-type revient à l'unité d'origine.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "Si $y=3x-7$, alors $\\sigma_{y}=$",
+   "choices": [
+    "$3\\sigma_{x}$",
+    "$3\\sigma_{x}-7$",
+    "$9\\sigma_{x}$",
+    "$\\sigma_{x}$"
+   ],
+   "answer": 0,
+   "explanation": "$|a|\\sigma_{x}$ avec $a=3$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "Un coefficient de variation élevé indique :",
+   "choices": [
+    "une forte moyenne",
+    "une série constante",
+    "une forte dispersion relative",
+    "une erreur de calcul"
+   ],
+   "answer": 2,
+   "explanation": "$CV=\\frac{\\sigma}{\\bar{x}}$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-dispersion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-dispersion",
+   "prompt": "Une variance peut-elle être négative ?",
+   "choices": [
+    "Oui si la moyenne est négative",
+    "Oui si $N$ est pair",
+    "Oui pour un caractère continu",
+    "Non, c'est une moyenne de carrés"
+   ],
+   "answer": 3,
+   "explanation": "$V≥0$.",
+   "review": true
+  }
+ ]
+}

@@ -1,0 +1,1307 @@
+{
+ "chapter": "etp-mecanique-dessin-1re-dessin",
+ "lessons": [
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation",
+   "title": "Normalisation du dessin : formats, échelles, traits, cotation",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Connaître les formats A et leur lien (A4, A3).",
+    "Utiliser une échelle pour passer des dimensions réelles au dessin et inversement.",
+    "Reconnaître les principaux types de traits et leur usage.",
+    "Lire et placer correctement une cote."
+   ],
+   "exercises": [
+    "etp-mecanique-dessin-1re-normalisation-01",
+    "etp-mecanique-dessin-1re-normalisation-02",
+    "etp-mecanique-dessin-1re-normalisation-03",
+    "etp-mecanique-dessin-1re-normalisation-04",
+    "etp-mecanique-dessin-1re-normalisation-05",
+    "etp-mecanique-dessin-1re-normalisation-06"
+   ],
+   "selfCheck": [
+    "etp-mecanique-dessin-1re-normalisation-q1",
+    "etp-mecanique-dessin-1re-normalisation-q2",
+    "etp-mecanique-dessin-1re-normalisation-q3",
+    "etp-mecanique-dessin-1re-normalisation-q4",
+    "etp-mecanique-dessin-1re-normalisation-q5"
+   ],
+   "reviewNotes": [
+    "Conventions de dessin (types de traits, cotation) à comparer avec la norme enseignée dans l'établissement.",
+    "Dimensions des formats A4/A3 (210 × 297 et 297 × 420 mm) à confirmer."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Pourquoi normaliser ?",
+     "md": "Un dessin technique est un langage commun entre le bureau d'études et l'atelier. Pour que tout le monde le lise de la même façon, on normalise les **formats** de feuille, les **échelles**, les **types de traits** et la **cotation**.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les formats A",
+     "md": "Les formats de la série A sont obtenus en **coupant en deux** le format précédent, côté le plus long. L'A4 mesure **210 × 297 mm** ; l'A3 mesure **297 × 420 mm** : un A3 contient exactement deux A4. Le rapport entre les côtés est le même pour tous les formats.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 294.0,
+        "h": 207.89999999999998,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 167.0,
+        "y1": 20,
+        "x2": 167.0,
+        "y2": 227.89999999999998,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 93.5,
+        "y": 123.94999999999999,
+        "text": "A4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 123.94999999999999,
+        "text": "A4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 93.5,
+        "y": 145.95,
+        "text": "210 × 297",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 145.95,
+        "text": "210 × 297",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 167.0,
+        "y": 247.89999999999998,
+        "text": "A3 : 420 × 297 mm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Un A3 se compose de deux A4 (dimensions en mm).",
+     "alt": "Un grand rectangle (A3, 420 par 297 mm) coupé en deux par un trait vertical : deux rectangles identiques A4 de 210 par 297 mm."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'échelle",
+     "md": "L'**échelle** est le rapport entre une longueur **sur le dessin** et la longueur **réelle** : échelle = dessin : réel. **1:1** : grandeur nature ; **1:2** : réduction (le dessin est 2 fois plus petit) ; **2:1** : agrandissement (2 fois plus grand).",
+     "tex": "\\text{longueur dessin} = \\text{échelle} \\times \\text{longueur réelle}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La cote ne dépend pas de l'échelle",
+     "md": "La **cote** inscrite sur le dessin est toujours la dimension **réelle** de la pièce (en mm, sans écrire l'unité), quelle que soit l'échelle. Une cote ne se mesure pas à la règle sur le dessin : on lit sa valeur."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 20,
+        "x2": 170,
+        "y2": 20,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 24,
+        "text": "Continu fort",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 44,
+        "text": "contours et arêtes vus",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 70,
+        "x2": 170,
+        "y2": 70,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 74,
+        "text": "Continu fin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 94,
+        "text": "cotes, rappels, hachures",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 120,
+        "x2": 40,
+        "y2": 120,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 44,
+        "y1": 120,
+        "x2": 46,
+        "y2": 120,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 120,
+        "x2": 80,
+        "y2": 120,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 84,
+        "y1": 120,
+        "x2": 86,
+        "y2": 120,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 120,
+        "x2": 120,
+        "y2": 120,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 124,
+        "y1": 120,
+        "x2": 126,
+        "y2": 120,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 120,
+        "x2": 160,
+        "y2": 120,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 164,
+        "y1": 120,
+        "x2": 166,
+        "y2": 120,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 124,
+        "text": "Mixte fin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 144,
+        "text": "axes de symétrie",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 170,
+        "x2": 24,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 32,
+        "y1": 170,
+        "x2": 46,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 54,
+        "y1": 170,
+        "x2": 68,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 76,
+        "y1": 170,
+        "x2": 90,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 98,
+        "y1": 170,
+        "x2": 112,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 170,
+        "x2": 134,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 142,
+        "y1": 170,
+        "x2": 156,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 164,
+        "y1": 170,
+        "x2": 170,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 174,
+        "text": "Interrompu",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 194,
+        "text": "contours cachés",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     },
+     "caption": "Quatre types de traits et leur usage.",
+     "alt": "Quatre lignes : trait fort continu pour les contours vus, trait fin continu pour les cotes et hachures, trait mixte fin (tiret long, point) pour les axes, trait interrompu en tirets courts pour les contours cachés.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Passer du réel au dessin",
+     "statement": "Une pièce mesure 120 mm. On la dessine à l'échelle 1:2. Quelle longueur trace-t-on ?",
+     "steps": [
+      {
+       "md": "Échelle 1:2 : le dessin est 2 fois plus petit.",
+       "tex": "\\frac{120}{2}"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "60\\ \\text{mm}"
+      }
+     ],
+     "answer": "**On trace 60 mm** ; la cote écrite reste 120."
+    },
+    {
+     "type": "example",
+     "title": "Passer du dessin au réel",
+     "statement": "Sur un dessin à l'échelle 1:5, un segment mesure 45 mm. Quelle est la longueur réelle ?",
+     "steps": [
+      {
+       "md": "Échelle 1:5 : le réel est 5 fois plus grand.",
+       "tex": "45 \\times 5"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "225\\ \\text{mm}"
+      }
+     ],
+     "answer": "**225 mm** (22,5 cm)."
+    },
+    {
+     "type": "example",
+     "title": "Agrandissement",
+     "statement": "Une vis de 8 mm est dessinée à l'échelle 5:1. Quelle longueur trace-t-on ?",
+     "steps": [
+      {
+       "md": "5:1 : agrandissement, on multiplie par 5.",
+       "tex": "8 \\times 5"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "40\\ \\text{mm}"
+      }
+     ],
+     "answer": "**40 mm** sur le dessin ; la cote reste 8."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire sur le dessin la longueur mesurée à la règle au lieu de la dimension réelle.\n- Confondre 1:2 (réduction) et 2:1 (agrandissement).\n- Dessiner les arêtes cachées en trait continu.\n- Tracer les axes en trait fort au lieu du trait mixte fin.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les échelles normalisées les plus courantes se déclinent en réductions (1:2, 1:5, 1:10…) et agrandissements (2:1, 5:1, 10:1…). Le choix dépend de la taille de la pièce et du format de feuille.",
+      "Un cartouche en bas du dessin indique le titre, l'échelle, le matériau et le nom du dessinateur."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-mecanique-dessin-1re-normalisation-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes",
+   "title": "Projection orthogonale, coupes et sections",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer le principe de la projection orthogonale et la disposition des vues.",
+    "Déduire les dimensions de chaque vue à partir des dimensions de la pièce.",
+    "Expliquer le rôle d'un plan de coupe et des hachures.",
+    "Distinguer une coupe d'une section."
+   ],
+   "prerequisites": [
+    "etp-mecanique-dessin-1re-normalisation"
+   ],
+   "exercises": [
+    "etp-mecanique-dessin-1re-projection-coupes-01",
+    "etp-mecanique-dessin-1re-projection-coupes-02",
+    "etp-mecanique-dessin-1re-projection-coupes-03",
+    "etp-mecanique-dessin-1re-projection-coupes-04",
+    "etp-mecanique-dessin-1re-projection-coupes-05",
+    "etp-mecanique-dessin-1re-projection-coupes-06"
+   ],
+   "selfCheck": [
+    "etp-mecanique-dessin-1re-projection-coupes-q1",
+    "etp-mecanique-dessin-1re-projection-coupes-q2",
+    "etp-mecanique-dessin-1re-projection-coupes-q3",
+    "etp-mecanique-dessin-1re-projection-coupes-q4",
+    "etp-mecanique-dessin-1re-projection-coupes-q5"
+   ],
+   "reviewNotes": [
+    "Disposition des vues décrite selon la méthode européenne (vue de dessus sous la vue de face, vue de gauche à droite de la vue de face) : à confirmer avec la convention enseignée.",
+    "Principe des hachures (traits fins à 45°) à vérifier."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Projection orthogonale",
+     "md": "On représente une pièce en 3 dimensions par plusieurs **vues** à plat. Chaque vue est obtenue en observant la pièce **perpendiculairement** à l'une de ses faces. Les vues les plus utilisées : **vue de face** (la plus informative), **vue de dessus** et **vue de gauche**.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Disposition des vues et correspondances",
+     "md": "Avec la disposition européenne : la vue de **dessus** est placée **sous** la vue de face ; la vue de **gauche** est placée **à droite** de la vue de face. Les vues sont alignées : la **largeur** est la même sur la face et le dessus ; la **hauteur** est la même sur la face et la gauche ; la **profondeur** est la même sur le dessus et la gauche.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 120,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 55,
+        "text": "Face",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 100,
+        "w": 120,
+        "h": 80,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 145,
+        "text": "Dessus",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 20,
+        "w": 80,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 55,
+        "text": "Gauche",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 14,
+        "text": "60",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 14,
+        "y": 50,
+        "text": "30",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Trois vues d'un bloc de 60 × 40 × 30 mm (échelle 2:1 sur l'écran).",
+     "alt": "Disposition : la vue de face (rectangle 60 par 30) en haut à gauche, la vue de dessus (60 par 40) sous elle, la vue de gauche (40 par 30) à droite de la face. Chaque vue a la même largeur ou hauteur que sa voisine."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Coupe et hachures",
+     "md": "Une **coupe** imagine la pièce **coupée par un plan** (le plan de coupe, repéré par des lettres A-A) : on enlève une partie pour **voir l'intérieur**. La matière touchée par le plan est couverte de **hachures** (traits fins parallèles, inclinés à 45°). Les parties vides (trous) ne sont pas hachurées.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Section",
+     "md": "Une **section** ne représente que la **surface coupée** (ce que le plan découpe), sans les parties situées derrière. Une **coupe** montre en plus ce qu'on voit au-delà du plan. La section est plus simple, la coupe plus riche.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 40,
+        "w": 80,
+        "h": 40,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 80,
+        "x2": 80,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 80,
+        "x2": 100,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 80,
+        "x2": 120,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 80,
+        "x2": 140,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 80,
+        "x2": 280,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 80,
+        "x2": 300,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 80,
+        "x2": 320,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 80,
+        "x2": 340,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 40,
+        "w": 80,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 40,
+        "x2": 160,
+        "y2": 40,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 40,
+        "x2": 360,
+        "y2": 40,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 40,
+        "x2": 160,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 40,
+        "x2": 240,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 28,
+        "x2": 200,
+        "y2": 92,
+        "color": "ink",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 118,
+        "text": "Coupe A-A : hachures de part et d'autre du trou",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Coupe d'une plaque percée : seule la matière est hachurée.",
+     "alt": "Un rectangle long représentant la plaque vue en coupe. Au milieu, un vide (le trou) sans hachures ; à gauche et à droite du vide, des traits obliques fins à 45° représentent la matière coupée."
+    },
+    {
+     "type": "example",
+     "title": "Dimensions des vues",
+     "statement": "Un bloc mesure 60 mm de long, 40 mm de profondeur et 30 mm de haut. Quelles sont les dimensions de ses trois vues ?",
+     "steps": [
+      {
+       "md": "Vue de face : longueur × hauteur.",
+       "tex": "60 \\times 30"
+      },
+      {
+       "md": "Vue de dessus : longueur × profondeur.",
+       "tex": "60 \\times 40"
+      },
+      {
+       "md": "Vue de gauche : profondeur × hauteur.",
+       "tex": "40 \\times 30"
+      }
+     ],
+     "answer": "**Face 60 × 30 ; dessus 60 × 40 ; gauche 40 × 30 (mm).**"
+    },
+    {
+     "type": "example",
+     "title": "Largeur hachurée",
+     "statement": "Une plaque de 80 mm de long, 10 mm d'épaisseur, est percée d'un trou de diamètre 20 mm en son centre. Dans la coupe passant par l'axe du trou, quelle est la largeur hachurée de chaque côté du trou ?",
+     "steps": [
+      {
+       "md": "Le trou occupe 20 mm au centre. Il reste de la matière de chaque côté : $80 - 20 = 60$ mm.",
+       "tex": "80 - 20 = 60"
+      },
+      {
+       "md": "Par symétrie, elle se répartit en deux zones égales.",
+       "tex": "\\frac{60}{2} = 30\\ \\text{mm}"
+      }
+     ],
+     "answer": "**30 mm de matière hachurée de chaque côté.**"
+    },
+    {
+     "type": "example",
+     "title": "Choisir la vue de face",
+     "statement": "On dessine une équerre en L. Quel critère guide le choix de la vue de face ?",
+     "steps": [
+      {
+       "md": "On choisit la face qui montre le plus de détails et la forme caractéristique de la pièce."
+      },
+      {
+       "md": "On limite ainsi le nombre de vues nécessaires et les traits interrompus."
+      }
+     ],
+     "answer": "**La vue de face est celle qui décrit le mieux la pièce.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mal aligner les vues : les dimensions communes doivent se correspondre.\n- Hachurer le vide (trou) au lieu de la matière.\n- Oublier les traits interrompus pour les arêtes cachées sur une vue non coupée.\n- Tracer les hachures dans des directions différentes sur une même pièce.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une coupe brisée ou une demi-coupe permettent de montrer plusieurs détails intérieurs sur la même vue.",
+      "Les hachures peuvent varier selon la matière, mais leur direction reste la même sur toutes les parties d'une même pièce."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-mecanique-dessin-1re-projection-coupes-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Échelle 1:10. Une poutre mesure 250 mm en réalité. Quelle longueur trace-t-on (mm) ?",
+   "explanation": "$250/10 = 25$ mm.",
+   "mistakes": [
+    "Multiplier par 10 au lieu de diviser."
+   ],
+   "source": "Exercice original",
+   "answer": 25.0,
+   "tolerance": 0,
+   "unit": "mm"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Quel type de trait représente un axe de symétrie ?",
+   "explanation": "Les axes se tracent en trait mixte fin (tiret long, point).",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Continu fort",
+    "Interrompu",
+    "Mixte fin",
+    "Continu fin avec hachures"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Sur un dessin à l'échelle 1:2, la cote inscrite est la moitié de la dimension réelle.",
+   "explanation": "La cote est toujours la dimension réelle ; seule la longueur tracée est réduite.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Sur un dessin à l'échelle 2:1, un segment mesure 30 mm. Quelle est sa longueur réelle (mm) ?",
+   "explanation": "Agrandissement : le réel est 2 fois plus petit : $30/2 = 15$ mm.",
+   "method": "1:n : réel = dessin × n ; n:1 : réel = dessin ÷ n.",
+   "source": "Exercice original",
+   "answer": 15.0,
+   "tolerance": 0,
+   "unit": "mm"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Associe chaque trait à son usage.",
+   "explanation": "Les usages suivent la convention de dessin enseignée.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Continu fort",
+     "contours vus"
+    ],
+    [
+     "Interrompu",
+     "contours cachés"
+    ],
+    [
+     "Mixte fin",
+     "axes"
+    ],
+    [
+     "Continu fin",
+     "lignes de cote"
+    ]
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Un atelier fait dessiner une planche de 360 mm de long. Le dessinateur choisit l'échelle 1:4 sur une feuille A4 (210 × 297 mm).",
+   "method": "Appliquer l'échelle dans le bon sens, puis comparer au format.",
+   "mistakes": [
+    "Inscrire la mesure du dessin au lieu de la dimension réelle."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-mecanique-dessin-1re-normalisation-06-a",
+     "points": 1,
+     "prompt": "Quelle longueur trace-t-on pour cette planche (mm) ?",
+     "explanation": "$360/4 = 90$ mm.",
+     "kind": "numeric",
+     "answer": 90.0,
+     "tolerance": 0,
+     "unit": "mm"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-normalisation-06-b",
+     "points": 1,
+     "prompt": "Le dessin tient dans la largeur de la feuille A4 en format portrait (210 mm).",
+     "explanation": "90 mm < 210 mm : oui.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-normalisation-06-c",
+     "points": 1,
+     "prompt": "Sur le dessin, une autre côte mesure 27 mm à la règle. Quelle est la dimension réelle (mm) ?",
+     "explanation": "$27 \\times 4 = 108$ mm.",
+     "kind": "numeric",
+     "answer": 108,
+     "tolerance": 0,
+     "unit": "mm"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-normalisation-06-d",
+     "points": 1,
+     "prompt": "Quelle valeur inscrit-on sur la cote correspondante ?",
+     "explanation": "On inscrit la dimension réelle : 108.",
+     "kind": "mcq",
+     "choices": [
+      "27",
+      "108",
+      "432",
+      "4"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Un format A3 est composé de :",
+   "choices": [
+    "un A4",
+    "deux A4",
+    "quatre A4",
+    "huit A4"
+   ],
+   "answer": 1,
+   "explanation": "L'A3 = 2 × A4."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Échelle 1:5 : une pièce de 100 mm est dessinée avec :",
+   "choices": [
+    "500 mm",
+    "20 mm",
+    "5 mm",
+    "100 mm"
+   ],
+   "answer": 1,
+   "explanation": "$100/5 = 20$ mm."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "L'échelle 10:1 est :",
+   "choices": [
+    "une réduction",
+    "la grandeur nature",
+    "un agrandissement",
+    "impossible"
+   ],
+   "answer": 2,
+   "explanation": "Le dessin est 10 fois plus grand."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Les contours cachés se dessinent en trait :",
+   "choices": [
+    "fort continu",
+    "interrompu",
+    "mixte fin",
+    "épais et pointillé gras"
+   ],
+   "answer": 1,
+   "explanation": "En trait interrompu."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-normalisation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-normalisation",
+   "prompt": "Une cote indique :",
+   "choices": [
+    "la mesure à la règle",
+    "la dimension réelle",
+    "l'échelle",
+    "le format"
+   ],
+   "answer": 1,
+   "explanation": "Toujours la dimension réelle."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Un bloc mesure 50 mm de long, 30 mm de profondeur, 20 mm de haut. Quelle est l'aire (mm²) du rectangle de la vue de dessus ?",
+   "explanation": "Dessus = longueur × profondeur = 50 × 30 = 1 500 mm².",
+   "source": "Exercice original",
+   "answer": 1500,
+   "tolerance": 0,
+   "unit": "mm²"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Dans la disposition européenne, la vue de dessus se place :",
+   "explanation": "Dessus sous la face, gauche à droite de la face.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "à droite de la vue de face",
+    "sous la vue de face",
+    "au-dessus de la vue de face",
+    "sur une autre feuille toujours"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Sur une coupe, on hachure les trous pour montrer qu'ils sont vides.",
+   "explanation": "On hachure la matière coupée, jamais le vide.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Quelle vue partage la même hauteur que la vue de face ?",
+   "explanation": "Face et gauche sont côte à côte : elles partagent la hauteur.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "La vue de dessus",
+    "La vue de gauche",
+    "Aucune",
+    "Seulement la coupe"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Une plaque de 100 mm de long a un trou de diamètre 30 mm au centre. Quelle largeur de matière hachurée de chaque côté du trou, en coupe par l'axe (mm) ?",
+   "explanation": "$(100 - 30)/2 = 35$ mm.",
+   "source": "Exercice original",
+   "answer": 35.0,
+   "tolerance": 0,
+   "unit": "mm"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Un bloc plein mesure 80 mm (longueur) × 50 mm (hauteur) × 30 mm (profondeur). On le dessine à l'échelle 1:2.",
+   "method": "Appliquer l'échelle à chaque dimension, sans changer les cotes.",
+   "mistakes": [
+    "Appliquer l'échelle aux cotes inscrites."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-mecanique-dessin-1re-projection-coupes-06-a",
+     "points": 1,
+     "prompt": "Longueur tracée de la vue de face (mm).",
+     "explanation": "$80/2 = 40$ mm.",
+     "kind": "numeric",
+     "answer": 40.0,
+     "tolerance": 0,
+     "unit": "mm"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-projection-coupes-06-b",
+     "points": 1,
+     "prompt": "Hauteur tracée de la vue de face (mm).",
+     "explanation": "$50/2 = 25$ mm.",
+     "kind": "numeric",
+     "answer": 25.0,
+     "tolerance": 0,
+     "unit": "mm"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-projection-coupes-06-c",
+     "points": 1,
+     "prompt": "Profondeur tracée sur la vue de dessus (mm).",
+     "explanation": "$30/2 = 15$ mm.",
+     "kind": "numeric",
+     "answer": 15.0,
+     "tolerance": 0,
+     "unit": "mm"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-projection-coupes-06-d",
+     "points": 1,
+     "prompt": "Quelle cote inscrit-on pour la longueur ?",
+     "explanation": "La cote est la dimension réelle : 80.",
+     "kind": "mcq",
+     "choices": [
+      "40",
+      "80",
+      "160",
+      "25"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "La projection orthogonale utilise :",
+   "choices": [
+    "des rayons obliques",
+    "des rayons perpendiculaires à la face observée",
+    "la perspective",
+    "des photographies"
+   ],
+   "answer": 1,
+   "explanation": "On observe perpendiculairement à la face."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Les hachures représentent :",
+   "choices": [
+    "le vide",
+    "la matière coupée",
+    "les arêtes cachées",
+    "les axes"
+   ],
+   "answer": 1,
+   "explanation": "La matière touchée par le plan de coupe."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Une section montre :",
+   "choices": [
+    "la surface coupée seule",
+    "toute la pièce",
+    "une vue en perspective",
+    "la cotation"
+   ],
+   "answer": 0,
+   "explanation": "Section = surface coupée seulement."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Les vues de face et de dessus ont en commun :",
+   "choices": [
+    "la hauteur",
+    "la largeur (longueur)",
+    "la profondeur",
+    "rien"
+   ],
+   "answer": 1,
+   "explanation": "Elles sont alignées verticalement : même longueur."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-projection-coupes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-projection-coupes",
+   "prompt": "Le plan de coupe est repéré par :",
+   "choices": [
+    "des lettres A-A",
+    "la couleur rouge",
+    "l'échelle",
+    "le format"
+   ],
+   "answer": 0,
+   "explanation": "On le repère par des lettres."
+  }
+ ]
+}

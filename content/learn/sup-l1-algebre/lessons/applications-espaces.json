@@ -1,0 +1,928 @@
+{
+ "chapter": "sup-l1-algebre-applications-espaces",
+ "lessons": [
+  {
+   "id": "sup-l1-algebre-leontief",
+   "title": "Application : le modèle de Leontief simplifié",
+   "minutes": 45,
+   "programRef": "Algèbre linéaire de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Comprendre le tableau des échanges entre secteurs.",
+    "Construire la matrice des coefficients techniques.",
+    "Résoudre $X=AX+D$ avec $(I-A)^{-1}$.",
+    "Interpréter le résultat (production nécessaire)."
+   ],
+   "prerequisites": [
+    "sup-l1-algebre-determinants-inverse"
+   ],
+   "exercises": [
+    "sup-l1-algebre-leontief-01",
+    "sup-l1-algebre-leontief-02",
+    "sup-l1-algebre-leontief-03",
+    "sup-l1-algebre-leontief-04",
+    "sup-l1-algebre-leontief-05",
+    "sup-l1-algebre-leontief-06"
+   ],
+   "selfCheck": [
+    "sup-l1-algebre-leontief-q1",
+    "sup-l1-algebre-leontief-q2",
+    "sup-l1-algebre-leontief-q3",
+    "sup-l1-algebre-leontief-q4",
+    "sup-l1-algebre-leontief-q5"
+   ],
+   "reviewNotes": [
+    "Modèle volontairement simplifié (2 secteurs) ; chiffres fictifs fournis par l'énoncé.",
+    "Vérifier avec l'enseignant l'énoncé sur la condition de productivité (sommes des colonnes de $A$ inférieures à 1)."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "On écrit une matrice ligne par ligne, les lignes étant séparées par « ; » : A = (1, 2 ; 3, 4) a pour lignes (1, 2) et (3, 4)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Idée du modèle",
+     "md": "Dans une économie à plusieurs secteurs, chaque secteur produit des biens qu'il vend aux autres secteurs (**consommations intermédiaires**) et au public (**demande finale** $D$). Le modèle de Leontief cherche la **production** $X$ qui satisfait à la fois la demande des autres secteurs et la demande finale."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Matrice des coefficients techniques",
+     "md": "Si $z_{ij}$ est la quantité de produit $i$ utilisée par le secteur $j$ et $x_{j}$ la production du secteur $j$, le **coefficient technique** est $a_{ij}=\\frac{z_{ij}}{x_{j}}$ : la quantité de produit $i$ nécessaire pour **une unité** produite par $j$. Ces coefficients forment la matrice $A$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Équation de Leontief",
+     "md": "Pour la production $X$, la demande finale $D$ et la matrice technique $A$ : $X=AX+D$, soit $(I-A)X=D$. Si $I-A$ est inversible, alors $X=(I-A)^{-1}D$. Une condition suffisante usuelle : la somme de chaque colonne de $A$ est strictement inférieure à 1.",
+     "tex": "X = AX + D \\;⇒\\; X = (I-A)^{-1}D"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 40,
+        "w": 120,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 70.25,
+        "text": "Agriculture",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 40,
+        "w": 120,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 70.25,
+        "text": "Industrie",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 55,
+        "x2": 250,
+        "y2": 55,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 45,
+        "text": "90",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 78,
+        "x2": 150,
+        "y2": 78,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 100,
+        "text": "80",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 90,
+        "x2": 90,
+        "y2": 160,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 180,
+        "text": "Demande finale : 70",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 90,
+        "x2": 310,
+        "y2": 160,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 180,
+        "text": "Demande finale : 190",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 225,
+        "text": "Flux en milliards de FCFA (exemple fictif)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Flux entre deux secteurs et vers la demande finale.",
+     "alt": "Deux rectangles Agriculture et Industrie reliés par deux flèches (90 de l'agriculture vers l'industrie, 80 dans l'autre sens) et deux flèches vers la demande finale, 70 pour l'agriculture et 190 pour l'industrie."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — coefficients techniques",
+     "statement": "Un pays fictif a deux secteurs. Le secteur 1 (agriculture) produit 200 ; il en utilise 40 lui-même, en vend 90 à l'industrie et le reste à la demande finale. Le secteur 2 (industrie) produit 300 ; il vend 80 à l'agriculture, en garde 30 pour lui et le reste est la demande finale (milliards de FCFA). Calculer $A$ et $D$.",
+     "steps": [
+      {
+       "md": "Coefficients : $a_{11}=\\frac{40}{200}=0{,}2$ ; $a_{12}=\\frac{90}{300}=0{,}3$.",
+       "tex": "a_{11}=0{,}2 \\quad a_{12}=0{,}3"
+      },
+      {
+       "md": "$a_{21}=\\frac{80}{200}=0{,}4$ ; $a_{22}=\\frac{30}{300}=0{,}1$.",
+       "tex": "a_{21}=0{,}4 \\quad a_{22}=0{,}1"
+      },
+      {
+       "md": "Demande finale : $200-(40+90)=70$ et $300-(80+30)=190$.",
+       "tex": "D=(70\\,;190)"
+      }
+     ],
+     "answer": "**$A=(0{,}2,0{,}3\\,;0{,}4,0{,}1)$, $D=(70\\,;190)$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — production nécessaire",
+     "statement": "Avec la même matrice $A$, la demande finale devient $D=(120\\,;180)$. Quelle production $X$ faut-il ?",
+     "steps": [
+      {
+       "md": "$I-A=(0{,}8,-0{,}3\\,;-0{,}4,0{,}9)$ et $\\det(I-A)=0{,}8×0{,}9-0{,}3×0{,}4=0{,}6$.",
+       "tex": "\\det(I-A) = 0{,}72 - 0{,}12 = 0{,}6"
+      },
+      {
+       "md": "$(I-A)^{-1}=\\frac{1}{0{,}6}(0{,}9,0{,}3\\,;0{,}4,0{,}8)$."
+      },
+      {
+       "md": "$x_{1}=\\frac{0{,}9×120+0{,}3×180}{0{,}6}=\\frac{162}{0{,}6}=270$ et $x_{2}=\\frac{0{,}4×120+0{,}8×180}{0{,}6}=\\frac{192}{0{,}6}=320$."
+      },
+      {
+       "md": "Vérification : $270-(0{,}2×270+0{,}3×320)=270-150=120$ ✓."
+      }
+     ],
+     "answer": "**$X=(270\\,;320)$ milliards de FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Diviser par la mauvaise production : $a_{ij}$ se calcule en divisant par $x_{j}$ (colonne), pas par $x_{i}$.\n- Résoudre $X=A^{-1}D$ au lieu de $(I-A)^{-1}D$.\n- Oublier que la production totale doit couvrir **à la fois** les besoins des secteurs et la demande finale.\n- Prendre $I-A$ avec les mauvais signes (les termes hors diagonale sont négatifs)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le modèle est une simplification : les coefficients sont supposés constants, sans substitutions ni stocks.",
+      "On peut aussi lire $(I-A)^{-1}$ colonne par colonne : combien faut-il produire au total pour livrer une unité de demande finale du secteur $j$ ?"
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-algebre-leontief-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels",
+   "title": "Espaces vectoriels : introduction",
+   "minutes": 45,
+   "programRef": "Algèbre linéaire de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir un espace vectoriel et un sous-espace vectoriel.",
+    "Reconnaître une famille libre ou liée.",
+    "Comprendre base et dimension dans $ℝ^{2}$ et $ℝ^{3}$.",
+    "Utiliser le déterminant pour tester la liberté."
+   ],
+   "prerequisites": [
+    "sup-l1-algebre-determinants-inverse"
+   ],
+   "exercises": [
+    "sup-l1-algebre-espaces-vectoriels-01",
+    "sup-l1-algebre-espaces-vectoriels-02",
+    "sup-l1-algebre-espaces-vectoriels-03",
+    "sup-l1-algebre-espaces-vectoriels-04",
+    "sup-l1-algebre-espaces-vectoriels-05",
+    "sup-l1-algebre-espaces-vectoriels-06"
+   ],
+   "selfCheck": [
+    "sup-l1-algebre-espaces-vectoriels-q1",
+    "sup-l1-algebre-espaces-vectoriels-q2",
+    "sup-l1-algebre-espaces-vectoriels-q3",
+    "sup-l1-algebre-espaces-vectoriels-q4",
+    "sup-l1-algebre-espaces-vectoriels-q5"
+   ],
+   "reviewNotes": [
+    "Introduction : axiomes résumés plutôt qu'énumérés ; vérifier le niveau de formalisme attendu.",
+    "Théorème de la dimension énoncé sans démonstration."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Espace vectoriel",
+     "md": "Un **espace vectoriel** (réel) est un ensemble $E$ muni d'une addition et d'une multiplication par les réels (scalaires), vérifiant les règles usuelles du calcul (commutativité et associativité de l'addition, vecteur nul, opposé, distributivités, $1·u=u$). Exemples : $ℝ^{n}$, l'ensemble des matrices $m×n$, l'ensemble des polynômes."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Sous-espace vectoriel",
+     "md": "Une partie $F$ de $E$ est un **sous-espace vectoriel** si : $F$ contient le vecteur nul ; $F$ est stable par addition ; $F$ est stable par multiplication par un scalaire. Exemple : $\\{(x,y,z)\\,:\\,x+y+z=0\\}$. Non-exemple : $\\{(x,y)\\,:\\,x+y=1\\}$ ne contient pas $(0,0)$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Combinaison linéaire, famille libre",
+     "md": "Une **combinaison linéaire** de $v_{1},\\dots,v_{k}$ est un vecteur $λ_{1}v_{1}+\\dots+λ_{k}v_{k}$. La famille $(v_{1},\\dots,v_{k})$ est **libre** si $λ_{1}v_{1}+\\dots+λ_{k}v_{k}=0$ n'a que la solution $λ_{1}=\\dots=λ_{k}=0$ ; sinon elle est **liée** (un vecteur est combinaison des autres). Elle est **génératrice** si tout vecteur de $E$ en est une combinaison linéaire."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Base et dimension",
+     "md": "Une **base** est une famille à la fois libre et génératrice. Dans un espace de dimension finie, **toutes les bases ont le même nombre d'éléments** : c'est la **dimension**. Ainsi $\\text{dim}\\, ℝ^{n}=n$ (base canonique). Toute famille de plus de $n$ vecteurs de $ℝ^{n}$ est liée ; $n$ vecteurs de $ℝ^{n}$ forment une base **si et seulement si** leur déterminant est non nul."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 360,
+        "y2": 200,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 40,
+        "y2": 20,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 200,
+        "y2": 120,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 112,
+        "text": "u",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 120,
+        "y2": 40,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 45,
+        "text": "v",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 220,
+        "text": "x",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 30,
+        "text": "y",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Deux vecteurs non alignés u et v engendrent tout le plan : ils forment une base de ℝ².",
+     "alt": "Un repère avec deux flèches issues de l'origine, u en rouge vers la droite et v en bleu vers le haut, non alignées."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — famille libre ou liée dans ℝ²",
+     "statement": "Les familles ((1,2),(2,4)) et ((1,2),(3,5)) sont-elles libres ?",
+     "steps": [
+      {
+       "md": "Première : $(2,4)=2×(1,2)$, donc $2(1,2)-(2,4)=0$ avec des coefficients non nuls : famille **liée**."
+      },
+      {
+       "md": "Seconde : $\\det\\,(1,2\\,;3,5)=1×5-2×3=-1≠0$.",
+       "tex": "\\det = 5 - 6 = -1"
+      },
+      {
+       "md": "Le déterminant est non nul : famille **libre**, et donc base de $ℝ^{2}$."
+      }
+     ],
+     "answer": "**Première liée ; seconde libre (base de $ℝ^{2}$).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — base de ℝ³",
+     "statement": "Les vecteurs $(1,0,1)$, $(0,1,1)$, $(1,1,0)$ forment-ils une base de $ℝ^{3}$ ?",
+     "steps": [
+      {
+       "md": "Descendantes (Sarrus) : $1×1×0+0×1×1+1×0×1=0$.",
+       "tex": "1·1·0 + 0·1·1 + 1·0·1 = 0"
+      },
+      {
+       "md": "Montantes : $1×1×1+1×1×1+0×0×0=2$."
+      },
+      {
+       "md": "Déterminant : $0-2=-2$, non nul."
+      }
+     ],
+     "answer": "**Oui : trois vecteurs de $ℝ^{3}$ de déterminant non nul forment une base.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — sous-espace et dimension",
+     "statement": "Montrer que $F=\\{(x,y,z)\\,:\\,x+y+z=0\\}$ est un sous-espace de $ℝ^{3}$ et donner sa dimension.",
+     "steps": [
+      {
+       "md": "$(0,0,0)∈F$ ; si $u,v∈F$ alors la somme vérifie encore $x+y+z=0$ ; un multiple aussi : $F$ est un sous-espace."
+      },
+      {
+       "md": "Tout $(x,y,z)∈F$ s'écrit $(x,y,-x-y)=x(1,0,-1)+y(0,1,-1)$.",
+       "tex": "(x,y,-x-y) = x(1,0,-1) + y(0,1,-1)"
+      },
+      {
+       "md": "Ces deux vecteurs sont non colinéaires donc libres : c'est une base de $F$."
+      }
+     ],
+     "answer": "**$\\text{dim}\\, F=2$** (un plan de $ℝ^{3}$)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de vérifier que le **vecteur nul** appartient au sous-espace.\n- Croire qu'une famille est libre parce qu'**aucun vecteur n'est nul** : $(1,2),(2,4)$ est liée.\n- Compter plus de $n$ vecteurs libres dans $ℝ^{n}$ : impossible.\n- Confondre « libre » et « génératrice » : une base est les deux à la fois."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le **rang** d'une matrice est la dimension de l'espace engendré par ses colonnes.",
+      "Le nombre de paramètres libres d'un système homogène est la dimension de l'espace des solutions."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-algebre-espaces-vectoriels-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-algebre-leontief-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "Avec A = (0,1, 0,2 ; 0,3, 0,4) et X = (100 ; 200), calculer la consommation intermédiaire du secteur 1, c'est-à-dire la première coordonnée de $AX$.",
+   "explanation": "$0{,}1×100+0{,}2×200=10+40=50$.",
+   "source": "Exercice original",
+   "answer": 50.0,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-algebre-leontief-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "Le coefficient $a_{21}=0{,}4$ signifie :",
+   "explanation": "$a_{ij}$ : quantité de produit $i$ par unité produite par $j$.",
+   "source": "Exercice original",
+   "choices": [
+    "le secteur 2 produit 40 % de la production totale",
+    "pour produire une unité du secteur 1, il faut 0,4 unité du produit du secteur 2",
+    "le secteur 1 vend 0,4 à la demande finale",
+    "la production du secteur 2 est de 0,4"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-algebre-leontief-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "Dans le modèle de Leontief, la production se calcule par $X=(I-A)^{-1}D$ lorsque $I-A$ est inversible.",
+   "explanation": "C'est la résolution de $(I-A)X=D$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-algebre-leontief-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "Pour A = (0,5, 0,2 ; 0,1, 0,6), calculer $\\det(I-A)$.",
+   "explanation": "$I-A=(0{,}5,-0{,}2\\,;-0{,}1,0{,}4)$ ; $0{,}5×0{,}4-0{,}2×0{,}1=0{,}18$.",
+   "mistakes": [
+    "Oublier les signes négatifs hors diagonale."
+   ],
+   "source": "Exercice original",
+   "answer": 0.18,
+   "tolerance": 0.0001
+  },
+  {
+   "id": "sup-l1-algebre-leontief-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "Toujours avec A = (0,5, 0,2 ; 0,1, 0,6), on veut D = (9 ; 18). Calculer la production $x_{2}$ du secteur 2.",
+   "explanation": "$(I-A)^{-1}=\\frac{1}{0{,}18}(0{,}4,0{,}2\\,;0{,}1,0{,}5)$ ; $x_{2}=\\frac{0{,}1×9+0{,}5×18}{0{,}18}=\\frac{9{,}9}{0{,}18}=55$ (et $x_{1}=40$).",
+   "source": "Exercice original",
+   "answer": 55,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-algebre-leontief-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "Une économie fictive a deux secteurs avec la matrice technique A = (0,3, 0,2 ; 0,1, 0,4) et la demande finale D = (80 ; 60) (milliards de FCFA).",
+   "method": "Former I−A, calculer son déterminant et son inverse, puis X=(I−A)^{-1}D ; contrôler par AX+D.",
+   "mistakes": [
+    "Se tromper dans l'inverse 2×2 (signes)."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-algebre-leontief-06-a",
+     "points": 1,
+     "prompt": "Calculer $\\det(I-A)$.",
+     "explanation": "$I-A=(0{,}7,-0{,}2\\,;-0{,}1,0{,}6)$ ; $0{,}42-0{,}02=0{,}40$.",
+     "kind": "numeric",
+     "answer": 0.4,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "sup-l1-algebre-leontief-06-b",
+     "points": 1,
+     "prompt": "Calculer la production $x_{1}$ du secteur 1.",
+     "explanation": "$(I-A)^{-1}=\\frac{1}{0{,}4}(0{,}6,0{,}2\\,;0{,}1,0{,}7)$ ; $x_{1}=\\frac{0{,}6×80+0{,}2×60}{0{,}4}=\\frac{60}{0{,}4}=150$.",
+     "kind": "numeric",
+     "answer": 150,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l1-algebre-leontief-06-c",
+     "points": 1,
+     "prompt": "Calculer la production $x_{2}$ du secteur 2.",
+     "explanation": "$x_{2}=\\frac{0{,}1×80+0{,}7×60}{0{,}4}=\\frac{50}{0{,}4}=125$.",
+     "kind": "numeric",
+     "answer": 125,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l1-algebre-leontief-06-d",
+     "points": 1,
+     "prompt": "Quelle est la consommation intermédiaire totale du secteur 1 (première coordonnée de $AX$) ?",
+     "explanation": "$0{,}3×150+0{,}2×125=45+25=70$ ; on retrouve $x_{1}-D_{1}=150-80=70$.",
+     "kind": "numeric",
+     "answer": 70,
+     "tolerance": 0.001
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-leontief-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "L'équation de Leontief s'écrit :",
+   "choices": [
+    "$X=AD+X$",
+    "$D=AX-X$",
+    "$X=AX+D$",
+    "$X=A+D$"
+   ],
+   "answer": 2,
+   "explanation": "Production = consommations intermédiaires + demande finale.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-leontief-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "La matrice $I-A$ doit être :",
+   "choices": [
+    "inversible",
+    "nulle",
+    "symétrique",
+    "égale à $A$"
+   ],
+   "answer": 0,
+   "explanation": "Pour écrire $X=(I-A)^{-1}D$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-leontief-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "La demande finale est :",
+   "choices": [
+    "la production totale",
+    "la consommation intermédiaire",
+    "la demande des ménages, de l'État, des exportations (hors secteurs)",
+    "le coût fixe"
+   ],
+   "answer": 2,
+   "explanation": "Ce qui sort du circuit productif.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-leontief-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "Le coefficient technique $a_{ij}$ est :",
+   "choices": [
+    "$\\frac{z_{ij}}{x_{j}}$",
+    "$\\frac{z_{ij}}{x_{i}}$",
+    "$z_{ij}x_{j}$",
+    "$x_{j}-z_{ij}$"
+   ],
+   "answer": 0,
+   "explanation": "On divise par la production du secteur qui utilise.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-leontief-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-leontief",
+   "prompt": "Si les colonnes de $A$ ont une somme inférieure à 1 :",
+   "choices": [
+    "il n'y a pas de demande finale",
+    "$A$ est inversible dans tous les cas",
+    "$X$ est négatif",
+    "le modèle est productif (condition usuelle)"
+   ],
+   "answer": 3,
+   "explanation": "Chaque secteur crée plus de valeur qu'il n'en consomme.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "La dimension de $ℝ^{3}$ est :",
+   "explanation": "Base canonique : trois vecteurs.",
+   "source": "Exercice original",
+   "choices": [
+    "1",
+    "3",
+    "2",
+    "9"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "Toute famille de 4 vecteurs de $ℝ^{3}$ est liée.",
+   "explanation": "Une famille libre de $ℝ^{3}$ a au plus 3 vecteurs.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "Pour quelle valeur de $m$ la famille ((1, 2), (3, m)) est-elle liée ?",
+   "explanation": "$\\det=1×m-2×3=m-6=0$ ⇔ $m=6$.",
+   "source": "Exercice original",
+   "answer": 6,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "Associe chaque espace à sa dimension.",
+   "explanation": "Plan : 2 paramètres ; droite : 1 ; vecteur nul seul : 0 ; $ℝ^{4}$ : 4.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "$\\{(x,y,z)\\,:\\,z=0\\}$",
+     "2"
+    ],
+    [
+     "$\\{(t,2t)\\,:\\,t∈ℝ\\}$",
+     "1"
+    ],
+    [
+     "$\\{(0,0,0)\\}$",
+     "0"
+    ],
+    [
+     "$ℝ^{4}$",
+     "4"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "Calculer le déterminant de la matrice dont les lignes sont (1, 0, 1), (0, 1, 1), (1, 1, 0).",
+   "explanation": "Descendantes : $0+0+0=0$ ; montantes : $1+0+1=2$ (avec $a_{13}a_{22}a_{31}=1$, $a_{11}a_{23}a_{32}=1$, $a_{12}a_{21}a_{33}=0$). Déterminant $0-2=-2$.",
+   "source": "Exercice original",
+   "answer": -2,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "On considère $F=\\{(x,y,z)∈ℝ^{3}\\,:\\,x-2y+z=0\\}$.",
+   "method": "Tester le vecteur nul et la stabilité ; paramétrer F pour la dimension.",
+   "mistakes": [
+    "Conclure à la dimension 3 parce que F ⊂ ℝ³."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-algebre-espaces-vectoriels-06-a",
+     "points": 1,
+     "prompt": "$F$ est-il un sous-espace vectoriel de $ℝ^{3}$ ?",
+     "explanation": "$(0,0,0)$ vérifie l'équation, et l'équation linéaire homogène est stable par somme et par multiple.",
+     "kind": "mcq",
+     "choices": [
+      "Non, car il ne contient pas $(0,0,0)$",
+      "Oui",
+      "Non, car il n'est pas stable par addition",
+      "Non, car il est infini"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l1-algebre-espaces-vectoriels-06-b",
+     "points": 1,
+     "prompt": "Le vecteur $(2,1,0)$ appartient-il à $F$ ?",
+     "explanation": "$2-2×1+0=0$.",
+     "kind": "mcq",
+     "choices": [
+      "Non, $x-2y+z=1$",
+      "Non, $x-2y+z=-2$",
+      "Non, $x-2y+z=3$",
+      "Oui"
+     ],
+     "answer": 3
+    },
+    {
+     "id": "sup-l1-algebre-espaces-vectoriels-06-c",
+     "points": 1,
+     "prompt": "Pour $x=3$ et $y=1$, quelle valeur de $z$ place $(3,1,z)$ dans $F$ ?",
+     "explanation": "$3-2+z=0$ donc $z=-1$.",
+     "kind": "numeric",
+     "answer": -1,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-algebre-espaces-vectoriels-06-d",
+     "points": 1,
+     "prompt": "Quelle est la dimension de $F$ ?",
+     "explanation": "Une équation indépendante dans $ℝ^{3}$ : $z=2y-x$, deux paramètres libres $x$ et $y$.",
+     "kind": "numeric",
+     "answer": 2,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "Un sous-espace vectoriel contient toujours :",
+   "choices": [
+    "le vecteur nul",
+    "le vecteur $(1,1,\\dots,1)$",
+    "au moins deux vecteurs non nuls",
+    "une base canonique"
+   ],
+   "answer": 0,
+   "explanation": "C'est la première condition.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "Une famille libre est une famille où :",
+   "choices": [
+    "tous les vecteurs sont nuls",
+    "il y a un seul vecteur",
+    "la seule combinaison nulle est celle à coefficients tous nuls",
+    "chaque vecteur est combinaison des autres"
+   ],
+   "answer": 2,
+   "explanation": "Définition de la liberté.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "$\\text{dim}\\, ℝ^{2}$ vaut :",
+   "choices": [
+    "1",
+    "4",
+    "infinie",
+    "2"
+   ],
+   "answer": 3,
+   "explanation": "Base canonique $(1,0),(0,1)$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "Trois vecteurs de $ℝ^{3}$ forment une base si leur déterminant est :",
+   "choices": [
+    "nul",
+    "non nul",
+    "égal à 1 exactement",
+    "positif"
+   ],
+   "answer": 1,
+   "explanation": "Déterminant non nul ⇔ famille libre à $n$ vecteurs dans $ℝ^{n}$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-algebre-espaces-vectoriels-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-algebre-espaces-vectoriels",
+   "prompt": "Une base est une famille :",
+   "choices": [
+    "libre seulement",
+    "génératrice seulement",
+    "libre et génératrice",
+    "formée de vecteurs unitaires"
+   ],
+   "answer": 2,
+   "explanation": "Définition.",
+   "review": true
+  }
+ ]
+}

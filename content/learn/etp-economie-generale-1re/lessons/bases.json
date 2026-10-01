@@ -1,0 +1,842 @@
+{
+ "chapter": "etp-economie-generale-1re-bases",
+ "lessons": [
+  {
+   "id": "etp-economie-generale-1re-besoins-agents",
+   "title": "Besoins, biens, agents économiques et circuit",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries G/STT (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer besoin, bien et service.",
+    "Classer des biens (consommation, équipement, libre, économique).",
+    "Identifier les agents économiques et leur rôle.",
+    "Lire le circuit économique simple (flux réels et monétaires)."
+   ],
+   "exercises": [
+    "etp-economie-generale-1re-besoins-agents-01",
+    "etp-economie-generale-1re-besoins-agents-02",
+    "etp-economie-generale-1re-besoins-agents-03",
+    "etp-economie-generale-1re-besoins-agents-04",
+    "etp-economie-generale-1re-besoins-agents-05",
+    "etp-economie-generale-1re-besoins-agents-06"
+   ],
+   "selfCheck": [
+    "etp-economie-generale-1re-besoins-agents-q1",
+    "etp-economie-generale-1re-besoins-agents-q2",
+    "etp-economie-generale-1re-besoins-agents-q3",
+    "etp-economie-generale-1re-besoins-agents-q4",
+    "etp-economie-generale-1re-besoins-agents-q5"
+   ],
+   "reviewNotes": [
+    "Classification des besoins et des biens : formulations courantes, à confirmer avec le cours.",
+    "Exemples fictifs ; aucune donnée statistique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Besoin",
+     "md": "Un **besoin** est un sentiment de manque que l'on cherche à satisfaire. Il peut être **primaire** (vital : manger, boire, se loger, se soigner), **secondaire** (confort, loisirs, communication) ; **individuel** ou **collectif** (sécurité, éducation, routes)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Biens et services",
+     "md": "- Un **bien** est un objet matériel qui satisfait un besoin ; un **service** est une activité (soin, transport, enseignement).\n- Un bien est **libre** s'il est disponible sans effort ni paiement (l'air) ; il est **économique** s'il est rare et a un prix.\n- **Consommation** : utilisé par les ménages. **Équipement (production)** : utilisé pour produire (machine, camion)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Rareté et choix",
+     "md": "Les ressources sont **limitées** alors que les besoins sont nombreux : il faut **choisir**. Choisir une chose, c'est renoncer à une autre : c'est le **coût d'opportunité**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Agents économiques",
+     "md": "Les **agents économiques** sont les acteurs de la vie économique : les **ménages** (consomment, travaillent, épargnent), les **entreprises** (produisent), l'**État et les administrations** (services publics, impôts), les **institutions financières** (banques, assurances) et le **reste du monde** (échanges avec l'étranger)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 100,
+        "w": 140,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 135.6,
+        "text": "Ménages",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 400,
+        "y": 100,
+        "w": 140,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 135.6,
+        "text": "Entreprises",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 115,
+        "x2": 400,
+        "y2": 115,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 105,
+        "text": "Dépenses de consommation",
+        "size": 13,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 400,
+        "y1": 145,
+        "x2": 160,
+        "y2": 145,
+        "color": "green",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 170,
+        "text": "Revenus (salaires, profits)",
+        "size": 13,
+        "color": "green",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 90,
+        "x2": 400,
+        "y2": 60,
+        "color": "orange",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 52,
+        "text": "Travail",
+        "size": 13,
+        "color": "orange",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 400,
+        "y1": 200,
+        "x2": 160,
+        "y2": 230,
+        "color": "orange",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 238,
+        "text": "Biens et services",
+        "size": 13,
+        "color": "orange",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Circuit économique simplifié.",
+     "alt": "Deux rectangles, ménages et entreprises. Flux monétaires : dépenses de consommation des ménages vers les entreprises, revenus des entreprises vers les ménages. Flux réels en pointillés : travail vers les entreprises, biens et services vers les ménages."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Classer des biens",
+     "statement": "Classer : le riz, un tracteur de ferme, une consultation médicale, l'air.",
+     "steps": [
+      {
+       "md": "Le riz est consommé par les ménages : **bien de consommation**, non durable."
+      },
+      {
+       "md": "Le tracteur sert à produire : **bien d'équipement**."
+      },
+      {
+       "md": "La consultation est une activité : **service**."
+      },
+      {
+       "md": "L'air est disponible sans effort ni prix : **bien libre**."
+      }
+     ],
+     "answer": "**Riz : consommation ; tracteur : équipement ; consultation : service ; air : bien libre.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Lire le circuit",
+     "statement": "Un ménage achète du pain pour 500 FCFA dans une boulangerie fictive, qui verse un salaire de 80 000 FCFA à un employé. Identifier les flux.",
+     "steps": [
+      {
+       "md": "Les 500 FCFA sont un **flux monétaire** du ménage vers l'entreprise (dépense de consommation) ; le pain est le **flux réel** inverse."
+      },
+      {
+       "md": "Le salaire de 80 000 FCFA est un **flux monétaire** de l'entreprise vers le ménage (revenu) ; le travail de l'employé est le flux réel inverse."
+      }
+     ],
+     "answer": "**Chaque flux monétaire est accompagné d'un flux réel dans l'autre sens.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre bien et service : un coiffeur rend un **service**, le shampoing est un **bien**.\n- Dire qu'un bien libre n'existe pas : l'air respirable en est un.\n- Oublier que l'État est aussi un agent économique."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La hiérarchie des besoins est parfois représentée en pyramide : on cherche d'abord à satisfaire les besoins vitaux avant les besoins de confort.",
+      "Le circuit réel est plus complet : il inclut aussi l'État, les banques et l'étranger."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-economie-generale-1re-besoins-agents-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus",
+   "title": "Production, valeur ajoutée, revenus, consommation et épargne",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries G/STT (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir production et consommations intermédiaires.",
+    "Calculer une valeur ajoutée.",
+    "Distinguer les types de revenus.",
+    "Calculer épargne et taux d'épargne à partir du revenu et de la consommation."
+   ],
+   "prerequisites": [
+    "etp-economie-generale-1re-besoins-agents"
+   ],
+   "exercises": [
+    "etp-economie-generale-1re-production-revenus-01",
+    "etp-economie-generale-1re-production-revenus-02",
+    "etp-economie-generale-1re-production-revenus-03",
+    "etp-economie-generale-1re-production-revenus-04",
+    "etp-economie-generale-1re-production-revenus-05",
+    "etp-economie-generale-1re-production-revenus-06"
+   ],
+   "selfCheck": [
+    "etp-economie-generale-1re-production-revenus-q1",
+    "etp-economie-generale-1re-production-revenus-q2",
+    "etp-economie-generale-1re-production-revenus-q3",
+    "etp-economie-generale-1re-production-revenus-q4",
+    "etp-economie-generale-1re-production-revenus-q5"
+   ],
+   "reviewNotes": [
+    "Définitions simplifiées de la valeur ajoutée ; chiffres fictifs.",
+    "Vérifier le vocabulaire (revenu disponible) avec le cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Production",
+     "md": "**Produire**, c'est créer des biens et des services en combinant des **facteurs de production** : le **travail** (les personnes), le **capital** (machines, locaux) et les **ressources naturelles**. Une entreprise utilise aussi des **consommations intermédiaires** (matières premières, énergie) qui sont transformées ou épuisées dans la production."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Valeur ajoutée",
+     "md": "La **valeur ajoutée** est la richesse créée par l'entreprise : **VA = production − consommations intermédiaires**.",
+     "tex": "VA = \\text{Production} - \\text{Consommations intermédiaires}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Revenus",
+     "md": "Les ménages reçoivent des **revenus du travail** (salaires), des **revenus de la propriété** (loyers, intérêts) et des **revenus de transfert** (allocations, aides). Le **revenu disponible** est ce qu'il reste à dépenser ou à épargner après impôts et cotisations."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Consommation et épargne",
+     "md": "**Épargne = revenu disponible − consommation.** Le **taux d'épargne** mesure la part du revenu épargnée : **épargne ÷ revenu × 100**.",
+     "tex": "S = R - C \\qquad \\text{taux d'épargne} = \\frac{S}{R} \\times 100"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Production",
+        "value": 600.0,
+        "color": "blue"
+       },
+       {
+        "label": "Conso. interm.",
+        "value": 350.0,
+        "color": "orange"
+       },
+       {
+        "label": "Valeur ajoutée",
+        "value": 250.0,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Valeur ajoutée d'une boulangerie fictive. (unité : milliers de FCFA)",
+     "alt": "Trois barres : production 600, consommations intermédiaires 350, valeur ajoutée 250 milliers de FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Valeur ajoutée",
+     "statement": "Une boulangerie fictive vend du pain pour 600 000 FCFA sur le mois. Elle a dépensé 350 000 FCFA en farine, sucre et énergie. Quelle est sa valeur ajoutée ?",
+     "steps": [
+      {
+       "md": "La production est le chiffre vendu : 600 000. Les consommations intermédiaires : 350 000."
+      },
+      {
+       "md": "VA = production − consommations intermédiaires :",
+       "tex": "600000 - 350000 = 250000"
+      }
+     ],
+     "answer": "**VA = 250 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Épargne et taux d'épargne",
+     "statement": "Un ménage fictif a un revenu disponible mensuel de 180 000 FCFA et consomme 135 000 FCFA. Quelle est son épargne ? Quel est son taux d'épargne ?",
+     "steps": [
+      {
+       "md": "Épargne :",
+       "tex": "180000 - 135000 = 45000"
+      },
+      {
+       "md": "Taux d'épargne :",
+       "tex": "\\frac{45000}{180000} \\times 100 = 25"
+      }
+     ],
+     "answer": "**Épargne 45 000 FCFA, soit 25 % du revenu.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Compter les achats intermédiaires comme une richesse créée : on les retire pour obtenir la valeur ajoutée.\n- Confondre revenu et revenu disponible.\n- Confondre épargne (somme non dépensée) et richesse totale."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La somme des valeurs ajoutées de toutes les entreprises d'un pays sert à mesurer la production nationale.",
+      "L'épargne peut être placée en banque, investie dans une activité ou thésaurisée (gardée sans la placer)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-economie-generale-1re-production-revenus-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Un camion utilisé par une entreprise pour livrer ses marchandises est…",
+   "explanation": "Il sert à produire : c'est un bien d'équipement.",
+   "source": "Exercice original",
+   "choices": [
+    "Un bien de consommation",
+    "Un bien d'équipement",
+    "Un bien libre",
+    "Un service"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Les ménages sont des agents économiques.",
+   "explanation": "Ils consomment, travaillent et épargnent.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Associe chaque agent économique à son rôle principal.",
+   "explanation": "Chaque agent joue un rôle propre dans le circuit.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Ménages",
+     "Consomment et fournissent du travail"
+    ],
+    [
+     "Entreprises",
+     "Produisent des biens et services"
+    ],
+    [
+     "État",
+     "Fournit des services publics et perçoit des impôts"
+    ],
+    [
+     "Banques",
+     "Reçoivent l'épargne et accordent des crédits"
+    ]
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Parmi ces besoins, lequel est secondaire ?",
+   "explanation": "Se nourrir, se soigner et se loger sont vitaux ; la musique est un besoin de confort.",
+   "source": "Exercice original",
+   "choices": [
+    "Se nourrir",
+    "Se soigner",
+    "Avoir un abri",
+    "Écouter de la musique"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Pourquoi dit-on que les ressources sont rares ? Illustre avec un exemple de choix d'un ménage.",
+   "explanation": "La rareté oblige à choisir.",
+   "source": "Exercice original",
+   "model": "Les besoins sont plus nombreux que les ressources disponibles : on ne peut pas tout acheter. Par exemple, un ménage qui a 50 000 FCFA doit choisir entre payer les frais de scolarité ou acheter un téléviseur ; choisir l'un, c'est renoncer à l'autre (coût d'opportunité).",
+   "rubric": [
+    "Ressources limitées face à des besoins nombreux.",
+    "Un exemple concret de choix.",
+    "Notion de renoncement (coût d'opportunité)."
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Une boutique fictive de couture à Douala vend des robes aux ménages, achète du tissu à un fournisseur et paie des impôts à l'État.",
+   "method": "Pour chaque élément, se demander qui l'utilise et pourquoi.",
+   "mistakes": [
+    "Confondre bien d'équipement et de consommation."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-economie-generale-1re-besoins-agents-06-a",
+     "points": 1,
+     "prompt": "Pour la boutique, une machine à coudre est…",
+     "explanation": "La machine sert à produire : bien d'équipement.",
+     "kind": "mcq",
+     "choices": [
+      "Un bien de consommation",
+      "Un bien d'équipement",
+      "Un service",
+      "Un bien libre"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-economie-generale-1re-besoins-agents-06-b",
+     "points": 1,
+     "prompt": "Pour un client qui l'achète, la robe est…",
+     "explanation": "Le client l'utilise pour son besoin : bien de consommation.",
+     "kind": "mcq",
+     "choices": [
+      "Un bien d'équipement",
+      "Un service",
+      "Un bien de consommation",
+      "Un impôt"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "etp-economie-generale-1re-besoins-agents-06-c",
+     "points": 1,
+     "prompt": "Le paiement des impôts est un flux monétaire entre l'entreprise et l'État.",
+     "explanation": "L'entreprise verse de l'argent à l'État, qui l'utilise pour financer les services publics.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-economie-generale-1re-besoins-agents-06-d",
+     "points": 2,
+     "prompt": "Cite deux agents économiques apparaissant dans la situation et décris un flux entre eux.",
+     "explanation": "Tout échange relie des agents par des flux monétaires et réels.",
+     "kind": "open",
+     "model": "La boutique (entreprise) et les ménages : les ménages paient les robes (flux monétaire), la boutique leur remet des robes (flux réel). On peut aussi citer l'État qui reçoit des impôts.",
+     "rubric": [
+      "Deux agents correctement nommés.",
+      "Un flux monétaire décrit.",
+      "Le flux réel associé."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Un bien économique est…",
+   "choices": [
+    "Toujours gratuit",
+    "Rare et payant",
+    "Un service",
+    "Un impôt"
+   ],
+   "answer": 1,
+   "explanation": "Il est rare, donc il a un prix."
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "L'enseignement est…",
+   "choices": [
+    "Un service",
+    "Un bien libre",
+    "Un bien d'équipement",
+    "Un revenu"
+   ],
+   "answer": 0,
+   "explanation": "C'est une activité : un service."
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Le coût d'opportunité est…",
+   "choices": [
+    "Le prix d'achat",
+    "Un impôt",
+    "Un salaire",
+    "Ce à quoi l'on renonce en choisissant"
+   ],
+   "answer": 3,
+   "explanation": "On renonce à la meilleure autre possibilité."
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Dans le circuit simple, les entreprises versent aux ménages…",
+   "choices": [
+    "Des impôts",
+    "Des dettes",
+    "Des revenus",
+    "Des devises"
+   ],
+   "answer": 2,
+   "explanation": "Salaires et autres revenus."
+  },
+  {
+   "id": "etp-economie-generale-1re-besoins-agents-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-besoins-agents",
+   "prompt": "Les banques sont…",
+   "choices": [
+    "Des ménages",
+    "Des institutions financières",
+    "Des biens",
+    "Des besoins"
+   ],
+   "answer": 1,
+   "explanation": "Elles reçoivent l'épargne et prêtent."
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "Production : 900 000 FCFA ; consommations intermédiaires : 500 000 FCFA. Valeur ajoutée ?",
+   "explanation": "900 000 − 500 000 = 400 000.",
+   "source": "Exercice original",
+   "answer": 400000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "Revenu disponible 150 000 FCFA, consommation 120 000 FCFA. Épargne ?",
+   "explanation": "150 000 − 120 000 = 30 000.",
+   "source": "Exercice original",
+   "answer": 30000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "Un loyer perçu par un propriétaire est un revenu de la propriété.",
+   "explanation": "Il rémunère la mise à disposition d'un bien.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "Un ménage a un revenu disponible de 240 000 FCFA et épargne 36 000 FCFA. Quel est son taux d'épargne (en %) ?",
+   "explanation": "36 000 ÷ 240 000 × 100 = 15 %.",
+   "source": "Exercice original",
+   "answer": 15,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "Associe chaque revenu à sa catégorie.",
+   "explanation": "Salaire : travail ; intérêts : propriété ; allocation : transfert.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Salaire d'un enseignant",
+     "Revenu du travail"
+    ],
+    [
+     "Intérêts d'un placement",
+     "Revenu de la propriété"
+    ],
+    [
+     "Allocation familiale",
+     "Revenu de transfert"
+    ]
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "Un atelier fictif de menuiserie à Bafoussam vend des meubles pour 1 500 000 FCFA par mois. Il achète du bois, de la colle et paie l'électricité pour 900 000 FCFA. Il verse 350 000 FCFA de salaires.",
+   "method": "Déduire les consommations intermédiaires de la production.",
+   "mistakes": [
+    "Retirer les salaires avant de calculer la valeur ajoutée."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-economie-generale-1re-production-revenus-06-a",
+     "points": 1,
+     "prompt": "Valeur ajoutée mensuelle (FCFA) ?",
+     "explanation": "1 500 000 − 900 000 = 600 000.",
+     "kind": "numeric",
+     "answer": 600000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-economie-generale-1re-production-revenus-06-b",
+     "points": 2,
+     "prompt": "Part de la valeur ajoutée qui reste après les salaires (FCFA) ?",
+     "explanation": "600 000 − 350 000 = 250 000 : elle sert à payer les autres charges et à rémunérer le propriétaire.",
+     "kind": "numeric",
+     "answer": 250000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-economie-generale-1re-production-revenus-06-c",
+     "points": 1,
+     "prompt": "Le bois et la colle sont…",
+     "explanation": "Ils sont transformés dans la production : consommations intermédiaires.",
+     "kind": "mcq",
+     "choices": [
+      "Du capital",
+      "Des consommations intermédiaires",
+      "Des revenus",
+      "Des biens libres"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-economie-generale-1re-production-revenus-06-d",
+     "points": 1,
+     "prompt": "Les salaires versés sont un revenu pour les ménages.",
+     "explanation": "Ce sont des revenus du travail.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "La valeur ajoutée est…",
+   "choices": [
+    "Production + salaires",
+    "Revenus − impôts",
+    "Production − consommations intermédiaires",
+    "Prix − marge"
+   ],
+   "answer": 2,
+   "explanation": "VA = production − CI."
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "L'épargne est…",
+   "choices": [
+    "Revenu + consommation",
+    "Revenu disponible − consommation",
+    "Consommation − revenu",
+    "Impôt"
+   ],
+   "answer": 1,
+   "explanation": "La partie du revenu non consommée."
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "Le travail, le capital et les ressources naturelles sont des…",
+   "choices": [
+    "Facteurs de production",
+    "Impôts",
+    "Revenus",
+    "Services publics"
+   ],
+   "answer": 0,
+   "explanation": "Ce sont les facteurs de production."
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "Un taux d'épargne de 20 % pour un revenu de 100 000 FCFA correspond à une épargne de…",
+   "choices": [
+    "2 000",
+    "200 000",
+    "80 000",
+    "20 000"
+   ],
+   "answer": 3,
+   "explanation": "100 000 × 0,20 = 20 000."
+  },
+  {
+   "id": "etp-economie-generale-1re-production-revenus-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-production-revenus",
+   "prompt": "Un salaire est un revenu…",
+   "choices": [
+    "De la propriété",
+    "De transfert",
+    "Du travail",
+    "Intermédiaire"
+   ],
+   "answer": 2,
+   "explanation": "Il rémunère le travail."
+  }
+ ]
+}

@@ -1,0 +1,1230 @@
+{
+ "chapter": "sup-l1-informatique-algorithmique-numeration-logique",
+ "lessons": [
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration",
+   "title": "Numération : binaire, octal et hexadécimal",
+   "minutes": 45,
+   "programRef": "Initiation à l'informatique de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer le principe d'un système de numération positionnel.",
+    "Convertir entre décimal, binaire, octal et hexadécimal.",
+    "Additionner deux nombres binaires.",
+    "Relier le nombre de bits à la quantité de valeurs représentables."
+   ],
+   "exercises": [
+    "sup-l1-informatique-algorithmique-numeration-01",
+    "sup-l1-informatique-algorithmique-numeration-02",
+    "sup-l1-informatique-algorithmique-numeration-03",
+    "sup-l1-informatique-algorithmique-numeration-04",
+    "sup-l1-informatique-algorithmique-numeration-05",
+    "sup-l1-informatique-algorithmique-numeration-06",
+    "sup-l1-informatique-algorithmique-numeration-07"
+   ],
+   "selfCheck": [
+    "sup-l1-informatique-algorithmique-numeration-q1",
+    "sup-l1-informatique-algorithmique-numeration-q2",
+    "sup-l1-informatique-algorithmique-numeration-q3",
+    "sup-l1-informatique-algorithmique-numeration-q4",
+    "sup-l1-informatique-algorithmique-numeration-q5"
+   ],
+   "reviewNotes": [
+    "Aucun fait réglementaire ; vérifier la notation des indices de base (ex. $1011_{2}$) avec l'enseignant.",
+    "Exemples de couleurs RGB : conventions usuelles, à confirmer selon le cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Système positionnel",
+     "md": "Dans une base $b$, un nombre s'écrit avec des chiffres de $0$ à $b-1$ et chaque position a un **poids** égal à une puissance de $b$ : $d_{n}d_{n-1}\\dots d_{0}$ vaut $d_{n}b^{n}+\\dots+d_{1}b+d_{0}$. En **binaire** ($b=2$) les chiffres sont des **bits** (0 ou 1) ; en **octal** ($b=8$) de 0 à 7 ; en **hexadécimal** ($b=16$) de 0 à 9 puis A=10, B=11, C=12, D=13, E=14, F=15. Un **octet** est un groupe de 8 bits."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Conversions",
+     "md": "- **Binaire → décimal** : additionner les poids $2^{k}$ des bits égaux à 1.\n- **Décimal → binaire** : divisions successives par 2 ; on lit les restes **de bas en haut**.\n- **Binaire → hexadécimal** : regrouper les bits **par 4** à partir de la droite ; **binaire → octal** : par **3**. L'opération inverse remplace chaque chiffre par son groupe de bits."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Capacité",
+     "md": "Avec $n$ bits on représente $2^{n}$ valeurs différentes : de $0$ à $2^{n}-1$ pour des entiers non signés. Un octet : $2^{8}=256$ valeurs, de 0 à 255. Table utile : $2^{4}=16$ (un chiffre hexadécimal), $2^{10}=1024$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 130,
+      "items": [
+       {
+        "t": "text",
+        "x": 42,
+        "y": 22,
+        "text": "128",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 35,
+        "w": 44,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 42.0,
+        "y": 61.3,
+        "text": "1",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 22,
+        "text": "64",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 68,
+        "y": 35,
+        "w": 44,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 61.3,
+        "text": "0",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 138,
+        "y": 22,
+        "text": "32",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 116,
+        "y": 35,
+        "w": 44,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 138.0,
+        "y": 61.3,
+        "text": "1",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 186,
+        "y": 22,
+        "text": "16",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 164,
+        "y": 35,
+        "w": 44,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 186.0,
+        "y": 61.3,
+        "text": "1",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 234,
+        "y": 22,
+        "text": "8",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 212,
+        "y": 35,
+        "w": 44,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 234.0,
+        "y": 61.3,
+        "text": "0",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 282,
+        "y": 22,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 35,
+        "w": 44,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 282.0,
+        "y": 61.3,
+        "text": "1",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 22,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 308,
+        "y": 35,
+        "w": 44,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 61.3,
+        "text": "1",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 378,
+        "y": 22,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 35,
+        "w": 44,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 378.0,
+        "y": 61.3,
+        "text": "0",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 112,
+        "text": "Poids des bits : 128 + 32 + 16 + 4 + 2 = 182",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "L'octet 10110110 et les poids de chacun de ses bits.",
+     "alt": "Huit cases contenant 1,0,1,1,0,1,1,0 au-dessus desquelles sont écrits les poids 128, 64, 32, 16, 8, 4, 2 et 1 ; les cases à 1 sont en bleu."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — décimal vers binaire",
+     "statement": "Convertir 45 en binaire.",
+     "steps": [
+      {
+       "md": "Divisions successives par 2 : $45=2×22+1$ ; $22=2×11+0$ ; $11=2×5+1$ ; $5=2×2+1$ ; $2=2×1+0$ ; $1=2×0+1$."
+      },
+      {
+       "md": "Restes lus de bas en haut : $1,0,1,1,0,1$.",
+       "tex": "45 = 101101_{2}"
+      },
+      {
+       "md": "Contrôle : $32+8+4+1=45$ ✓."
+      }
+     ],
+     "answer": "**$45=101101_{2}$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — binaire vers décimal et hexadécimal",
+     "statement": "Convertir $10110110_{2}$ en décimal et en hexadécimal.",
+     "steps": [
+      {
+       "md": "Poids des bits à 1 : $128+32+16+4+2=182$.",
+       "tex": "10110110_{2}=182"
+      },
+      {
+       "md": "Groupes de 4 bits : $1011$ et $0110$ ; $1011_{2}=11=B$ et $0110_{2}=6$.",
+       "tex": "1011|0110 → B6"
+      },
+      {
+       "md": "Contrôle : $11×16+6=182$ ✓."
+      }
+     ],
+     "answer": "**$10110110_{2}=182=B6_{16}$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — octal",
+     "statement": "Convertir $745_{8}$ en décimal puis en binaire.",
+     "steps": [
+      {
+       "md": "$7×64+4×8+5=448+32+5=485$.",
+       "tex": "745_{8}=7×8^{2}+4×8+5=485"
+      },
+      {
+       "md": "Chaque chiffre octal devient 3 bits : $7→111$, $4→100$, $5→101$."
+      },
+      {
+       "md": "Donc $745_{8}=111100101_{2}$ ; contrôle : 111100101."
+      }
+     ],
+     "answer": "**$745_{8}=485=111100101_{2}$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — addition binaire",
+     "statement": "Calculer $1011_{2}+0110_{2}$.",
+     "steps": [
+      {
+       "md": "On additionne colonne par colonne avec retenue ($1+1=10_{2}$) : bit 0 : $1+0=1$ ; bit 1 : $1+1=0$ retenue 1 ; bit 2 : $0+1+1=0$ retenue 1 ; bit 3 : $1+0+1=0$ retenue 1 ; nouvelle colonne : 1."
+      },
+      {
+       "md": "Résultat : $10001_{2}$. Contrôle : $11+6=17=17$ ✓."
+      }
+     ],
+     "answer": "**$1011_{2}+0110_{2}=10001_{2}$.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Lire les restes **de haut en bas** au lieu de bas en haut.\n- Confondre la lettre B (hexadécimal, 11) avec le chiffre 8.\n- Oublier de compléter à gauche par des 0 pour former des groupes de 4 (ou 3) bits.\n- Écrire un chiffre interdit dans une base (un « 8 » en octal, un « 2 » en binaire)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un octet permet de coder une composante de couleur : sur un écran, une couleur est souvent donnée par trois octets (rouge, vert, bleu), écrits en hexadécimal.",
+      "Les nombres négatifs sont représentés par la méthode du complément à 2 (hors de cette fiche)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-informatique-algorithmique-numeration-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "title": "Logique booléenne et tables de vérité",
+   "minutes": 40,
+   "programRef": "Initiation à l'informatique de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser les opérateurs NON, ET, OU, OU exclusif.",
+    "Construire la table de vérité d'une expression.",
+    "Appliquer les lois de De Morgan.",
+    "Traduire une condition d'un énoncé en expression booléenne."
+   ],
+   "prerequisites": [
+    "sup-l1-informatique-algorithmique-numeration"
+   ],
+   "exercises": [
+    "sup-l1-informatique-algorithmique-logique-booleenne-01",
+    "sup-l1-informatique-algorithmique-logique-booleenne-02",
+    "sup-l1-informatique-algorithmique-logique-booleenne-03",
+    "sup-l1-informatique-algorithmique-logique-booleenne-04",
+    "sup-l1-informatique-algorithmique-logique-booleenne-05",
+    "sup-l1-informatique-algorithmique-logique-booleenne-06"
+   ],
+   "selfCheck": [
+    "sup-l1-informatique-algorithmique-logique-booleenne-q1",
+    "sup-l1-informatique-algorithmique-logique-booleenne-q2",
+    "sup-l1-informatique-algorithmique-logique-booleenne-q3",
+    "sup-l1-informatique-algorithmique-logique-booleenne-q4",
+    "sup-l1-informatique-algorithmique-logique-booleenne-q5"
+   ],
+   "reviewNotes": [
+    "Notations : NON, ET, OU, XOR en toutes lettres (pas de symboles LaTeX spéciaux).",
+    "Exemples de systèmes d'alarme fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Variables et opérateurs booléens",
+     "md": "Une **variable booléenne** vaut **vrai (1)** ou **faux (0)**. Opérateurs : **NON A** inverse la valeur ; **A ET B** est vrai seulement si A et B sont tous deux vrais ; **A OU B** est faux seulement si A et B sont tous deux faux (**OU inclusif**) ; **A XOR B** (OU exclusif) est vrai si **exactement un** des deux est vrai."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Lois de De Morgan et règles",
+     "md": "NON(A ET B) = (NON A) OU (NON B) ; NON(A OU B) = (NON A) ET (NON B). Double négation : NON(NON A) = A. Distributivité : A ET (B OU C) = (A ET B) OU (A ET C). Éléments neutres : A ET 1 = A ; A OU 0 = A. Absorbants : A ET 0 = 0 ; A OU 1 = 1."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Table de vérité",
+     "md": "Pour $n$ variables, la table a $2^{n}$ lignes (toutes les combinaisons). On ajoute une colonne par sous-expression, des plus simples aux plus complexes, puis la colonne du résultat. Deux expressions sont **équivalentes** si leurs colonnes de résultat sont identiques."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "text",
+        "x": 50,
+        "y": 30,
+        "text": "A",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 30,
+        "text": "B",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 30,
+        "text": "A ET B",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 30,
+        "text": "A OU B",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 30,
+        "text": "A XOR B",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 42,
+        "x2": 410,
+        "y2": 42,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 72,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 72,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 72,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 72,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 72,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 110,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 110,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 110,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 110,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 110,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 148,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 148,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 148,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 148,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 148,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 186,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 186,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 186,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 186,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 186,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Tables de vérité de ET, OU et XOR pour deux variables.",
+     "alt": "Un tableau à cinq colonnes A, B, A ET B, A OU B, A XOR B et quatre lignes ; ET ne vaut 1 que pour A=B=1, XOR vaut 1 pour (0,1) et (1,0)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — table d'une expression",
+     "statement": "Construire la table de vérité de $E=(A \\text{ OU } B)\\text{ ET NON } C$.",
+     "steps": [
+      {
+       "md": "3 variables : $2^{3}=8$ lignes."
+      },
+      {
+       "md": "Pour chaque ligne, on calcule $A$ OU $B$, puis NON $C$, puis leur ET."
+      },
+      {
+       "md": "$E$ vaut 1 pour : (0,1,0) ; (1,0,0) ; (1,1,0)."
+      }
+     ],
+     "answer": "**$E$ est vrai pour 3 lignes sur 8.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — De Morgan",
+     "statement": "Vérifier que NON(A ET B) = NON A OU NON B.",
+     "steps": [
+      {
+       "md": "On calcule les 4 lignes : (0,0) → A ET B = 0, NON = 1 ; NON A OU NON B = 1."
+      },
+      {
+       "md": "(0,1) → 1 et 1 ; (1,0) → 1 et 1 ; (1,1) → A ET B = 1, NON = 0 ; NON A OU NON B = 0."
+      },
+      {
+       "md": "Les deux colonnes sont identiques : équivalence démontrée."
+      }
+     ],
+     "answer": "**Les deux expressions sont équivalentes.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — de l'énoncé à l'expression",
+     "statement": "« Une personne peut s'inscrire si elle a au moins 18 ans ET n'est pas déjà inscrite. » Écrire la condition et la tester pour une personne de 20 ans non inscrite.",
+     "steps": [
+      {
+       "md": "Posons $A$ : « âge ≥ 18 » et $B$ : « déjà inscrite ». Condition : $A$ ET NON $B$.",
+       "tex": "A ET NON B"
+      },
+      {
+       "md": "Pour 20 ans non inscrite : $A=1$, $B=0$, donc NON $B=1$ et $A$ ET NON $B=1$."
+      }
+     ],
+     "answer": "**Oui : elle peut s'inscrire.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre le **OU inclusif** (vrai si les deux sont vrais) et le **OU exclusif** (faux si les deux sont vrais). Dans le langage courant, « fromage ou dessert » est exclusif ; en logique, OU est inclusif.\n- Oublier de changer ET en OU (et inversement) en appliquant De Morgan.\n- Oublier des lignes dans la table : toujours $2^{n}$.\n- Mal placer les parenthèses : $A$ ET $B$ OU $C$ est ambigu."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les circuits électroniques réalisent ces opérateurs : portes ET, OU, NON, XOR.",
+      "Un additionneur binaire d'un bit utilise XOR (somme) et ET (retenue)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-informatique-algorithmique-logique-booleenne-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Convertir $1011_{2}$ en décimal.",
+   "explanation": "$8+0+2+1=11$.",
+   "source": "Exercice original",
+   "answer": 11,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "L'écriture binaire de 25 est :",
+   "explanation": "$16+8+1=25$ : bits $11001$.",
+   "source": "Exercice original",
+   "choices": [
+    "11001",
+    "10011",
+    "11010",
+    "10101"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "$FF_{16}$ vaut en décimal :",
+   "explanation": "$15×16+15=255$.",
+   "source": "Exercice original",
+   "choices": [
+    "256",
+    "15",
+    "225",
+    "255"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-04",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Avec 8 bits, on peut représenter 256 valeurs différentes.",
+   "explanation": "$2^{8}=256$ (de 0 à 255).",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Convertir $B7_{16}$ en décimal.",
+   "explanation": "$11×16+7=183$.",
+   "source": "Exercice original",
+   "answer": 183,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-06",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Combien de valeurs distinctes peut-on représenter avec 10 bits ?",
+   "explanation": "$2^{10}=1024$.",
+   "source": "Exercice original",
+   "answer": 1024,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Une couleur est codée par trois octets (rouge, vert, bleu). On considère la couleur fictive de composantes rouge $=FF_{16}$, vert $=80_{16}$, bleu $=00_{16}$.",
+   "method": "Convertir chaque chiffre hexadécimal puis appliquer les poids 16 et 1.",
+   "mistakes": [
+    "Confondre C (12) et E (14)."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-informatique-algorithmique-numeration-07-a",
+     "points": 1,
+     "prompt": "Valeur décimale de la composante rouge.",
+     "explanation": "$FF_{16}=15×16+15=255$.",
+     "kind": "numeric",
+     "answer": 255,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-numeration-07-b",
+     "points": 1,
+     "prompt": "Valeur décimale de la composante verte.",
+     "explanation": "$80_{16}=8×16+0=128$.",
+     "kind": "numeric",
+     "answer": 128,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-numeration-07-c",
+     "points": 1,
+     "prompt": "Combien de bits faut-il pour coder les trois composantes ?",
+     "explanation": "$3×8=24$ bits.",
+     "kind": "mcq",
+     "choices": [
+      "8",
+      "24",
+      "16",
+      "48"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-numeration-07-d",
+     "points": 1,
+     "prompt": "Écrire 200 en hexadécimal : donner le chiffre des « seizaines » (valeur décimale du premier chiffre hexadécimal).",
+     "explanation": "$200=12×16+8=C8_{16}$ : le premier chiffre est $C=12$.",
+     "kind": "numeric",
+     "answer": 12,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Le poids du bit de rang 5 (en partant de 0 à droite) est :",
+   "choices": [
+    "16",
+    "32",
+    "64",
+    "25"
+   ],
+   "answer": 1,
+   "explanation": "$2^{5}=32$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Pour convertir un nombre binaire en hexadécimal, on regroupe les bits par :",
+   "choices": [
+    "2",
+    "3",
+    "8",
+    "4"
+   ],
+   "answer": 3,
+   "explanation": "$2^{4}=16$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Le nombre de valeurs représentables avec 16 bits est :",
+   "choices": [
+    "65 536",
+    "1 024",
+    "16",
+    "256"
+   ],
+   "answer": 0,
+   "explanation": "$2^{16}=65\\,536$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Le chiffre A en hexadécimal vaut :",
+   "choices": [
+    "1",
+    "A en décimal n'existe pas",
+    "10",
+    "16"
+   ],
+   "answer": 2,
+   "explanation": "A=10, B=11, …, F=15.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-numeration-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-numeration",
+   "prompt": "Le chiffre le plus grand utilisable en octal est :",
+   "choices": [
+    "8",
+    "9",
+    "10",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "Les chiffres vont de 0 à $b-1=7$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-01",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "NON(A ET B) est équivalent à (NON A) OU (NON B).",
+   "explanation": "C'est une loi de De Morgan.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "Pour $A=1$ et $B=1$, la valeur de $A$ XOR $B$ est :",
+   "explanation": "Exactement un vrai est requis ; ici les deux sont vrais.",
+   "source": "Exercice original",
+   "choices": [
+    "1",
+    "0",
+    "2",
+    "indéfinie"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "Combien de lignes comporte la table de vérité d'une expression à 3 variables ?",
+   "explanation": "$2^{3}=8$.",
+   "source": "Exercice original",
+   "answer": 8,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "Combien de lignes de la table de $(A\\text{ OU }B)\\text{ ET NON }C$ valent 1 ?",
+   "explanation": "Il faut $C=0$ et ($A=1$ ou $B=1$) : 3 combinaisons de $(A,B)$ sur 4.",
+   "source": "Exercice original",
+   "answer": 3,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "Associe chaque opérateur à sa description.",
+   "explanation": "Descriptions standard des opérateurs.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "ET",
+     "vrai seulement si les deux entrées sont vraies"
+    ],
+    [
+     "OU",
+     "faux seulement si les deux entrées sont fausses"
+    ],
+    [
+     "XOR",
+     "vrai si exactement une entrée est vraie"
+    ],
+    [
+     "NON",
+     "inverse la valeur d'une entrée"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "Un système d'alarme fictif se déclenche si le système est armé ($C$) ET (la porte est ouverte ($A$) OU un mouvement est détecté ($B$)). L'expression est $S=C$ ET ($A$ OU $B$).",
+   "method": "Écrire la table, appliquer De Morgan pour la négation.",
+   "mistakes": [
+    "Ne pas inverser les opérateurs ET/OU en appliquant De Morgan."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-informatique-algorithmique-logique-booleenne-06-a",
+     "points": 1,
+     "prompt": "Pour combien de combinaisons $(A,B,C)$ l'alarme se déclenche-t-elle ?",
+     "explanation": "Il faut $C=1$ et ($A=1$ ou $B=1$) : 3 combinaisons de $(A,B)$.",
+     "kind": "numeric",
+     "answer": 3,
+     "tolerance": 0,
+     "unit": "combinaisons"
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-logique-booleenne-06-b",
+     "points": 1,
+     "prompt": "Valeur de $S$ pour $A=0$, $B=1$, $C=1$.",
+     "explanation": "$A$ OU $B=1$ et $C=1$ : $S=1$.",
+     "kind": "numeric",
+     "answer": 1,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-logique-booleenne-06-c",
+     "points": 1,
+     "prompt": "Valeur de $S$ pour $A=1$, $B=1$, $C=0$.",
+     "explanation": "$C=0$ : le ET est faux, $S=0$.",
+     "kind": "numeric",
+     "answer": 0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-logique-booleenne-06-d",
+     "points": 1,
+     "prompt": "Quelle expression est équivalente à NON $S$ ?",
+     "explanation": "De Morgan : NON(C ET X) = NON C OU NON X, et NON(A OU B) = NON A ET NON B.",
+     "kind": "mcq",
+     "choices": [
+      "(NON $C$) ET ((NON $A$) OU (NON $B$))",
+      "$C$ OU ($A$ ET $B$)",
+      "(NON $C$) OU ((NON $A$) ET (NON $B$))",
+      "NON $C$ ET NON $A$ ET NON $B$"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "A OU B est faux quand :",
+   "choices": [
+    "A et B sont tous deux faux",
+    "A est faux",
+    "B est faux",
+    "A et B sont tous deux vrais"
+   ],
+   "answer": 0,
+   "explanation": "OU inclusif.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "NON(NON A) vaut :",
+   "choices": [
+    "NON A",
+    "0",
+    "A",
+    "1"
+   ],
+   "answer": 2,
+   "explanation": "Double négation.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "Une table de vérité à 4 variables a :",
+   "choices": [
+    "16 lignes",
+    "8 lignes",
+    "4 lignes",
+    "24 lignes"
+   ],
+   "answer": 0,
+   "explanation": "$2^{4}=16$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "NON(A OU B) est équivalent à :",
+   "choices": [
+    "(NON A) OU (NON B)",
+    "A ET B",
+    "NON A OU B",
+    "(NON A) ET (NON B)"
+   ],
+   "answer": 3,
+   "explanation": "Seconde loi de De Morgan.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-logique-booleenne-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-logique-booleenne",
+   "prompt": "A ET 0 vaut :",
+   "choices": [
+    "A",
+    "0",
+    "1",
+    "NON A"
+   ],
+   "answer": 1,
+   "explanation": "0 est absorbant pour ET.",
+   "review": true
+  }
+ ]
+}

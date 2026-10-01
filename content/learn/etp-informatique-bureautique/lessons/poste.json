@@ -1,0 +1,936 @@
+{
+ "chapter": "etp-informatique-bureautique-poste",
+ "lessons": [
+  {
+   "id": "etp-informatique-bureautique-composants",
+   "title": "Les composants d'un ordinateur",
+   "minutes": 35,
+   "programRef": "Programme d'informatique / bureautique des séries tertiaires, classe de 2nde — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer matériel et logiciel.",
+    "Nommer le rôle du processeur, de la mémoire vive et du stockage.",
+    "Classer des périphériques d'entrée et de sortie.",
+    "Convertir octets, Ko, Mo, Go dans un problème simple."
+   ],
+   "exercises": [
+    "etp-informatique-bureautique-composants-01",
+    "etp-informatique-bureautique-composants-02",
+    "etp-informatique-bureautique-composants-03",
+    "etp-informatique-bureautique-composants-04",
+    "etp-informatique-bureautique-composants-05",
+    "etp-informatique-bureautique-composants-06"
+   ],
+   "selfCheck": [
+    "etp-informatique-bureautique-composants-q1",
+    "etp-informatique-bureautique-composants-q2",
+    "etp-informatique-bureautique-composants-q3",
+    "etp-informatique-bureautique-composants-q4",
+    "etp-informatique-bureautique-composants-q5"
+   ],
+   "reviewNotes": [
+    "Matière « sciences » choisie faute de matière informatique dans le catalogue.",
+    "Exercices de raisonnement sans capture d'écran ; les noms de menus varient selon le logiciel et la version : volontairement non cités.",
+    "Convention 1 Ko = 1 000 octets adoptée pour simplifier : à signaler à l'enseignant (existe aussi la valeur 1 024)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Matériel et logiciel",
+     "md": "Le **matériel** (hardware) est ce qu'on peut toucher : écran, clavier, unité centrale. Le **logiciel** (software) est l'ensemble des programmes : système d'exploitation, traitement de texte, navigateur. Sans logiciel, le matériel ne sait rien faire."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les organes principaux",
+     "md": "- **Processeur** : exécute les calculs et les instructions.\n- **Mémoire vive (RAM)** : mémoire de travail rapide, vidée à l'extinction.\n- **Stockage** (disque, SSD, clé USB) : conserve les fichiers, même éteint.\n- **Carte mère** : relie les composants.\n- **Alimentation** : fournit le courant."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Périphériques",
+     "md": "Les **périphériques d'entrée** envoient des informations à l'ordinateur (clavier, souris, micro, scanner). Les **périphériques de sortie** en reçoivent (écran, imprimante, haut-parleur). Certains font les deux (écran tactile, clé USB)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Unités de taille",
+     "md": "Un **octet** (o) est la petite unité de stockage. Pour simplifier dans ce cours : 1 Ko = 1 000 o ; 1 Mo = 1 000 Ko ; 1 Go = 1 000 Mo. (Dans la pratique, certains logiciels utilisent 1 024.)",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 70,
+        "w": 140,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 100.25,
+        "text": "Processeur",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 110,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 34.9,
+        "text": "Entrées",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 10,
+        "w": 110,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 34.9,
+        "text": "Sorties",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 140,
+        "w": 150,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 164.55,
+        "text": "RAM (mémoire vive)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 140,
+        "w": 150,
+        "h": 40,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 315.0,
+        "y": 164.9,
+        "text": "Stockage",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 40,
+        "x2": 140,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 70,
+        "x2": 280,
+        "y2": 40,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 140,
+        "x2": 175,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 140,
+        "x2": 225,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       }
+      ]
+     },
+     "caption": "Schéma simplifié d'un ordinateur.",
+     "alt": "Le processeur au centre ; en haut à gauche les entrées envoient vers lui, en haut à droite il envoie vers les sorties ; en bas la mémoire vive et le stockage échangent avec lui dans les deux sens."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — capacité",
+     "statement": "Une clé USB de 16 Go reçoit des photos de 4 Mo chacune (1 Go = 1 000 Mo). Combien de photos au maximum ?",
+     "steps": [
+      {
+       "md": "16 Go = 16 × 1 000 = 16 000 Mo."
+      },
+      {
+       "md": "Nombre de photos : 16 000 ÷ 4 = 4 000."
+      }
+     ],
+     "answer": "**4 000 photos.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — classement",
+     "statement": "Classer : clavier, imprimante, micro, haut-parleur, scanner.",
+     "steps": [
+      {
+       "md": "Entrée : clavier, micro, scanner (ils envoient des données)."
+      },
+      {
+       "md": "Sortie : imprimante, haut-parleur (ils restituent des données)."
+      }
+     ],
+     "answer": "**Entrées : clavier, micro, scanner ; sorties : imprimante, haut-parleur.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre mémoire vive (temporaire) et stockage (durable).\n- Confondre Ko et Mo : un facteur 1 000.\n- Croire que plus de RAM augmente la capacité de stockage."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche la quantité de RAM et de stockage de ton téléphone ou ordinateur.",
+      "Un octet et un bit ne sont pas la même unité : un octet vaut 8 bits."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-informatique-bureautique-composants-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte",
+   "title": "Fichiers, dossiers et traitement de texte",
+   "minutes": 40,
+   "programRef": "Programme d'informatique / bureautique des séries tertiaires, classe de 2nde — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Organiser ses fichiers en dossiers et sous-dossiers.",
+    "Lire un chemin d'accès et une extension.",
+    "Appliquer la mise en forme d'un document.",
+    "Concevoir un tableau dans un document."
+   ],
+   "prerequisites": [
+    "etp-informatique-bureautique-composants"
+   ],
+   "exercises": [
+    "etp-informatique-bureautique-fichiers-texte-01",
+    "etp-informatique-bureautique-fichiers-texte-02",
+    "etp-informatique-bureautique-fichiers-texte-03",
+    "etp-informatique-bureautique-fichiers-texte-04",
+    "etp-informatique-bureautique-fichiers-texte-05",
+    "etp-informatique-bureautique-fichiers-texte-06"
+   ],
+   "selfCheck": [
+    "etp-informatique-bureautique-fichiers-texte-q1",
+    "etp-informatique-bureautique-fichiers-texte-q2",
+    "etp-informatique-bureautique-fichiers-texte-q3",
+    "etp-informatique-bureautique-fichiers-texte-q4",
+    "etp-informatique-bureautique-fichiers-texte-q5"
+   ],
+   "reviewNotes": [
+    "Matière « sciences » choisie faute de matière informatique dans le catalogue.",
+    "Exercices de raisonnement sans capture d'écran ; les noms de menus varient selon le logiciel et la version : volontairement non cités.",
+    "Aucune capture : les gestes sont décrits en principes."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fichier, dossier, chemin",
+     "md": "Un **fichier** contient des données (texte, image, tableau). Un **dossier** regroupe des fichiers et d'autres dossiers (sous-dossiers). Le **chemin d'accès** décrit l'emplacement, par exemple : Documents / Classe / Maths / devoir.docx."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Extensions courantes",
+     "md": "L'**extension** (après le point) indique le type : .txt (texte simple), .docx (document de traitement de texte), .xlsx (classeur de tableur), .pdf (document figé), .jpg ou .png (image), .mp3 (son)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Actions sur les fichiers",
+     "md": "- **Copier** : crée un double, l'original reste.\n- **Couper** puis **coller** : déplace.\n- **Renommer** : change le nom (garder l'extension).\n- **Supprimer** : envoie à la corbeille, d'où l'on peut restaurer tant qu'elle n'est pas vidée."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mettre en forme un document",
+     "md": "Choisir une **police lisible** et une taille adaptée, mettre les titres en **gras**, **aligner** le texte, régler l'**interligne**, utiliser des **listes** à puces ou numérotées, insérer un **tableau** (lignes × colonnes) pour présenter des données. **Enregistrer** souvent, sous un nom clair."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 130,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 32.9,
+        "text": "Documents",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 60,
+        "w": 130,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 82.9,
+        "text": "Classe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 110,
+        "w": 130,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 135.0,
+        "y": 132.9,
+        "text": "Maths",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 110,
+        "w": 160,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 132.9,
+        "text": "devoir.docx",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 46,
+        "x2": 75,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 105,
+        "y1": 96,
+        "x2": 105,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 128,
+        "x2": 230,
+        "y2": 128,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Arborescence de dossiers.",
+     "alt": "Dossier Documents contenant le sous-dossier Classe, qui contient Maths ; une flèche pointe de Maths vers le fichier devoir.docx."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — lire un chemin",
+     "statement": "Chemin : Documents / Stage / Rapport / plan.docx. Que sont Stage, Rapport et plan.docx ?",
+     "steps": [
+      {
+       "md": "Documents, Stage et Rapport sont des dossiers emboîtés."
+      },
+      {
+       "md": "plan.docx est un fichier de traitement de texte dans le dossier Rapport."
+      }
+     ],
+     "answer": "**Deux sous-dossiers, un fichier .docx.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — tableau",
+     "statement": "On insère un tableau de 4 lignes et 3 colonnes. Combien a-t-il de cellules ?",
+     "steps": [
+      {
+       "md": "Chaque ligne contient 3 cellules."
+      },
+      {
+       "md": "4 × 3 = 12 cellules."
+      }
+     ],
+     "answer": "**12 cellules.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Enregistrer sous un nom comme « Document1 » : on ne le retrouve plus.\n- Changer l'extension en renommant : le fichier peut devenir illisible.\n- Mettre tout le texte en majuscules et en gras.\n- Oublier de sauvegarder avant de fermer."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Crée sur ton téléphone ou ordinateur un dossier par matière.",
+      "Donne aux fichiers un nom qui contient la date : 2026-10-rapport."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-informatique-bureautique-fichiers-texte-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-informatique-bureautique-composants-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "La mémoire vive (RAM) :",
+   "explanation": "Elle sert au travail en cours et se vide à l'extinction.",
+   "source": "Exercice original",
+   "choices": [
+    "garde les fichiers après extinction",
+    "est la mémoire de travail rapide",
+    "affiche l'image",
+    "imprime"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "Un clavier est un périphérique d'entrée.",
+   "explanation": "Il envoie des informations à l'ordinateur.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "Un logiciel est :",
+   "explanation": "Le logiciel est un programme.",
+   "source": "Exercice original",
+   "choices": [
+    "un composant qu'on touche",
+    "un programme",
+    "un câble",
+    "une prise"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "Combien de Mo dans 3 Go (1 Go = 1 000 Mo) ?",
+   "explanation": "3 × 1 000 = 3 000 Mo.",
+   "source": "Exercice original",
+   "answer": 3000,
+   "tolerance": 0,
+   "unit": "Mo"
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "Associe chaque composant à son rôle.",
+   "explanation": "Chaque organe a un rôle précis.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Processeur",
+     "Exécute les instructions"
+    ],
+    [
+     "RAM",
+     "Mémoire de travail rapide"
+    ],
+    [
+     "Disque ou SSD",
+     "Conserve les fichiers"
+    ],
+    [
+     "Écran",
+     "Affiche le résultat"
+    ]
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "Un disque de 500 Go contient déjà 320 Go de fichiers (1 Go = 1 000 Mo).",
+   "method": "Convertir dans la même unité avant de diviser.",
+   "mistakes": [
+    "Diviser des Mo par des Go."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-informatique-bureautique-composants-06-a",
+     "points": 1,
+     "prompt": "Espace libre en Go ?",
+     "explanation": "500 − 320 = 180 Go.",
+     "kind": "numeric",
+     "answer": 180,
+     "tolerance": 0,
+     "unit": "Go"
+    },
+    {
+     "id": "etp-informatique-bureautique-composants-06-b",
+     "points": 1,
+     "prompt": "Espace libre en Mo ?",
+     "explanation": "180 × 1 000 = 180 000 Mo.",
+     "kind": "numeric",
+     "answer": 180000,
+     "tolerance": 0,
+     "unit": "Mo"
+    },
+    {
+     "id": "etp-informatique-bureautique-composants-06-c",
+     "points": 2,
+     "prompt": "Combien de vidéos de 900 Mo peut-on encore enregistrer ?",
+     "explanation": "180 000 ÷ 900 = 200.",
+     "kind": "numeric",
+     "answer": 200,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-informatique-bureautique-composants-06-d",
+     "points": 1,
+     "prompt": "Ajouter de la mémoire vive augmente l'espace de stockage.",
+     "explanation": "La RAM est une mémoire de travail, pas de stockage.",
+     "kind": "truefalse",
+     "answer": false
+    }
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "Le processeur :",
+   "choices": [
+    "stocke les photos",
+    "exécute les calculs",
+    "imprime",
+    "refroidit"
+   ],
+   "answer": 1,
+   "explanation": "Il exécute les instructions."
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "Un écran est un périphérique :",
+   "choices": [
+    "d'entrée",
+    "de sortie",
+    "de stockage",
+    "aucun"
+   ],
+   "answer": 1,
+   "explanation": "Il restitue l'image."
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "1 Mo (convention du cours) vaut :",
+   "choices": [
+    "1 000 Ko",
+    "100 Ko",
+    "10 Ko",
+    "1 Go"
+   ],
+   "answer": 0,
+   "explanation": "1 Mo = 1 000 Ko."
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "Une clé USB sert à :",
+   "choices": [
+    "calculer",
+    "stocker des fichiers",
+    "afficher",
+    "imprimer"
+   ],
+   "answer": 1,
+   "explanation": "Elle conserve les fichiers."
+  },
+  {
+   "id": "etp-informatique-bureautique-composants-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-composants",
+   "prompt": "Un système d'exploitation est :",
+   "choices": [
+    "un composant",
+    "un programme de base",
+    "un câble",
+    "un port"
+   ],
+   "answer": 1,
+   "explanation": "C'est le logiciel qui gère l'ordinateur."
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Dans « rapport.pdf », .pdf est :",
+   "explanation": "Ce qui suit le point est l'extension.",
+   "source": "Exercice original",
+   "choices": [
+    "le nom",
+    "l'extension",
+    "le dossier",
+    "le chemin"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Copier un fichier supprime l'original.",
+   "explanation": "Seul « couper » le déplace ; copier garde l'original.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Pour présenter des prix et des quantités dans un document, on insère :",
+   "explanation": "Un tableau convient aux données en lignes et colonnes.",
+   "source": "Exercice original",
+   "choices": [
+    "une liste à puces",
+    "un tableau",
+    "un titre",
+    "une image"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Un tableau a 5 lignes et 4 colonnes. Nombre de cellules ?",
+   "explanation": "5 × 4 = 20.",
+   "source": "Exercice original",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "cellules"
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Associe extension et type.",
+   "explanation": "L'extension indique le type de fichier.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     ".xlsx",
+     "Tableur"
+    ],
+    [
+     ".jpg",
+     "Image"
+    ],
+    [
+     ".txt",
+     "Texte simple"
+    ],
+    [
+     ".mp3",
+     "Son"
+    ]
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Léa range ses fichiers : Documents / Lycée / Info / Devoirs / devoir1.docx.",
+   "method": "Compter les éléments du chemin, repérer l'extension.",
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-informatique-bureautique-fichiers-texte-06-a",
+     "points": 1,
+     "prompt": "Combien de dossiers sont dans le chemin ?",
+     "explanation": "Documents, Lycée, Info, Devoirs : quatre dossiers.",
+     "kind": "mcq",
+     "choices": [
+      "3",
+      "4",
+      "5",
+      "1"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-informatique-bureautique-fichiers-texte-06-b",
+     "points": 1,
+     "prompt": "devoir1.docx est un fichier.",
+     "explanation": "Il a une extension.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-informatique-bureautique-fichiers-texte-06-c",
+     "points": 2,
+     "prompt": "Propose trois conseils pour bien nommer et ranger ses fichiers.",
+     "explanation": "Un bon rangement fait gagner du temps.",
+     "kind": "open",
+     "model": "Un dossier par matière ; des noms clairs avec la date ; ne pas changer l'extension.",
+     "rubric": [
+      "Organisation par dossiers",
+      "Noms clairs",
+      "Prudence sur l'extension"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Un sous-dossier est :",
+   "choices": [
+    "un fichier",
+    "un dossier dans un dossier",
+    "une extension",
+    "un logiciel"
+   ],
+   "answer": 1,
+   "explanation": "Les dossiers peuvent être emboîtés."
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Supprimer un fichier l'envoie d'abord :",
+   "choices": [
+    "à la corbeille",
+    "au processeur",
+    "à l'imprimante",
+    "nulle part"
+   ],
+   "answer": 0,
+   "explanation": "On peut le restaurer tant que la corbeille n'est pas vidée."
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Enregistrer régulièrement permet de :",
+   "choices": [
+    "perdre moins de travail",
+    "ralentir",
+    "changer la police",
+    "supprimer"
+   ],
+   "answer": 0,
+   "explanation": "Cela protège contre les pannes."
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Aligner un titre au centre est :",
+   "choices": [
+    "une mise en forme",
+    "un virus",
+    "un fichier",
+    "une extension"
+   ],
+   "answer": 0,
+   "explanation": "Alignement."
+  },
+  {
+   "id": "etp-informatique-bureautique-fichiers-texte-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-fichiers-texte",
+   "prompt": "Le chemin d'accès indique :",
+   "choices": [
+    "l'emplacement du fichier",
+    "la taille",
+    "la date",
+    "le prix"
+   ],
+   "answer": 0,
+   "explanation": "Il décrit où se trouve le fichier."
+  }
+ ]
+}

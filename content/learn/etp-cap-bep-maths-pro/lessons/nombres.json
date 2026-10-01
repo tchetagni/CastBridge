@@ -1,0 +1,1003 @@
+{
+ "chapter": "etp-cap-bep-maths-pro-nombres",
+ "lessons": [
+  {
+   "id": "etp-cap-bep-maths-pro-unites",
+   "title": "Nombres décimaux et conversions d'unités",
+   "minutes": 35,
+   "programRef": "Programme de mathématiques de l'enseignement technique (CAP/BEP) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Lire, écrire et comparer des nombres décimaux.",
+    "Convertir des longueurs, masses et capacités avec un tableau.",
+    "Convertir des aires et des volumes.",
+    "Utiliser 1 L = 1 dm³ dans un problème d'atelier."
+   ],
+   "exercises": [
+    "etp-cap-bep-maths-pro-unites-01",
+    "etp-cap-bep-maths-pro-unites-02",
+    "etp-cap-bep-maths-pro-unites-03",
+    "etp-cap-bep-maths-pro-unites-04",
+    "etp-cap-bep-maths-pro-unites-05",
+    "etp-cap-bep-maths-pro-unites-06"
+   ],
+   "selfCheck": [
+    "etp-cap-bep-maths-pro-unites-q1",
+    "etp-cap-bep-maths-pro-unites-q2",
+    "etp-cap-bep-maths-pro-unites-q3",
+    "etp-cap-bep-maths-pro-unites-q4",
+    "etp-cap-bep-maths-pro-unites-q5"
+   ],
+   "reviewNotes": [
+    "Le catalogue n'a pas de niveau CAP/BEP : pack placé en 4e (à ajuster quand le catalogue sera étendu).",
+    "Vérifier que les liens entre litres et dm³ sont bien présentés comme des conventions du système métrique.",
+    "Contexte d'atelier fictif ; à adapter aux métiers de la classe."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nombre décimal",
+     "md": "Un **nombre décimal** s'écrit avec une virgule : la partie entière à gauche, la partie décimale à droite (dixièmes, centièmes, millièmes). Exemple : 12,375 a pour chiffre des dixièmes 3, des centièmes 7 et des millièmes 5."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Passer d'une unité à la suivante",
+     "md": "Pour les **longueurs**, les **masses** et les **capacités**, chaque unité vaut 10 fois la suivante. Passer à l'unité plus petite : on multiplie par 10 (on décale la virgule d'un rang vers la droite). Passer à l'unité plus grande : on divise par 10."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Utiliser le tableau de conversion",
+     "md": "1. Écrire le nombre dans le tableau, un chiffre par colonne, le chiffre des unités dans la colonne de l'unité de départ.\n2. Compléter par des zéros si besoin.\n3. Lire le nombre en plaçant la virgule après la colonne de l'unité d'arrivée."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Aires et volumes",
+     "md": "Pour les **aires**, chaque unité vaut **100** fois la suivante (une colonne = 2 chiffres). Pour les **volumes**, chaque unité vaut **1 000** fois la suivante (une colonne = 3 chiffres). Pour les liquides : **1 L = 1 dm³** et **1 mL = 1 cm³**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 15,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 64.9,
+        "text": "km",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 67,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 92.0,
+        "y": 64.9,
+        "text": "hm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 119,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 144.0,
+        "y": 64.9,
+        "text": "dam",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 171,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 196.0,
+        "y": 64.9,
+        "text": "m",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 223,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 248.0,
+        "y": 64.9,
+        "text": "dm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 275,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300.0,
+        "y": 64.9,
+        "text": "cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 327,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 352.0,
+        "y": 64.9,
+        "text": "mm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "Tableau des longueurs",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 110,
+        "x2": 380,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 135,
+        "text": "vers une unité plus petite : × 10 à chaque colonne",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 150,
+        "x2": 20,
+        "y2": 150,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 168,
+        "text": "vers une unité plus grande : ÷ 10",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Tableau des unités de longueur.",
+     "alt": "Sept cases alignées : km, hm, dam, m, dm, cm, mm. Une flèche vers la droite indique multiplier par 10 à chaque colonne, une flèche vers la gauche indique diviser par 10."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — longueur",
+     "statement": "Un tube mesure 3,45 m. Quelle est sa longueur en centimètres ?",
+     "steps": [
+      {
+       "md": "De m à cm, on descend de 2 colonnes : on multiplie par 10 deux fois, soit par 100."
+      },
+      {
+       "md": "3,45 × 100 = 345."
+      }
+     ],
+     "answer": "**3,45 m = 345 cm.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — capacité",
+     "statement": "Un bidon contient 2 500 mL de liquide. Combien de litres ?",
+     "steps": [
+      {
+       "md": "De mL à L, on remonte de 3 colonnes (mL, cL, dL, L) : on divise par 1 000."
+      },
+      {
+       "md": "2 500 ÷ 1 000 = 2,5."
+      }
+     ],
+     "answer": "**2 500 mL = 2,5 L.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — aire",
+     "statement": "Convertir 0,35 m² en cm².",
+     "steps": [
+      {
+       "md": "De m² à cm², on descend de 2 colonnes d'aire : on multiplie par 100 deux fois, soit par 10 000."
+      },
+      {
+       "md": "0,35 × 10 000 = 3 500."
+      }
+     ],
+     "answer": "**0,35 m² = 3 500 cm².**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Multiplier par 10 pour une aire au lieu de 100 : il faut 2 chiffres par colonne.\n- Oublier de compléter par des zéros : 4 m = 400 cm, pas 40 cm.\n- Mélanger le sens : vers une unité plus petite, le nombre devient plus grand."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche sur une étiquette de produit la contenance en cL ou mL et convertis-la en litres.",
+      "Le volume d'un cube de 10 cm de côté est 1 dm³ : c'est 1 L."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-cap-bep-maths-pro-unites-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite",
+   "title": "Proportionnalité, règle de trois et pourcentages",
+   "minutes": 40,
+   "programRef": "Programme de mathématiques de l'enseignement technique (CAP/BEP) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une situation de proportionnalité.",
+    "Appliquer la règle de trois.",
+    "Calculer un pourcentage, une remise, un prix après remise.",
+    "Ajouter une TVA dont le taux est donné."
+   ],
+   "prerequisites": [
+    "etp-cap-bep-maths-pro-unites"
+   ],
+   "exercises": [
+    "etp-cap-bep-maths-pro-proportionnalite-01",
+    "etp-cap-bep-maths-pro-proportionnalite-02",
+    "etp-cap-bep-maths-pro-proportionnalite-03",
+    "etp-cap-bep-maths-pro-proportionnalite-04",
+    "etp-cap-bep-maths-pro-proportionnalite-05",
+    "etp-cap-bep-maths-pro-proportionnalite-06"
+   ],
+   "selfCheck": [
+    "etp-cap-bep-maths-pro-proportionnalite-q1",
+    "etp-cap-bep-maths-pro-proportionnalite-q2",
+    "etp-cap-bep-maths-pro-proportionnalite-q3",
+    "etp-cap-bep-maths-pro-proportionnalite-q4",
+    "etp-cap-bep-maths-pro-proportionnalite-q5"
+   ],
+   "reviewNotes": [
+    "Le catalogue n'a pas de niveau CAP/BEP : pack placé en 4e (à ajuster quand le catalogue sera étendu).",
+    "Les taux (remises, TVA) sont des données d'énoncé fictives ; aucun taux réglementaire n'est affirmé.",
+    "Vérifier l'arrondi demandé dans les exercices."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Proportionnalité",
+     "md": "Deux grandeurs sont **proportionnelles** quand on passe de l'une à l'autre en multipliant par un même nombre, le **coefficient de proportionnalité**. Dans un tableau, toutes les colonnes donnent le même quotient."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Règle de trois",
+     "md": "On connaît une valeur, on cherche une autre :\n1. Ramener à **l'unité** (diviser) : prix d'un seul objet.\n2. Multiplier par la quantité cherchée.\nOn peut aussi utiliser le coefficient ou le produit en croix."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Pourcentage d'une quantité",
+     "md": "Prendre $t$ % d'une quantité $Q$ revient à calculer :",
+     "tex": "\\frac{t}{100} \\times Q"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Remise et majoration",
+     "md": "Prix après une **remise** de $t$ % : on retire $t$ % du prix, ou on multiplie par $1 - \\frac{t}{100}$. Prix **TTC** : on ajoute au prix hors taxe (HT) la taxe calculée avec le taux **fourni par l'énoncé**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — règle de trois",
+     "statement": "5 mètres de câble coûtent 3 750 FCFA. Combien coûtent 12 mètres ?",
+     "steps": [
+      {
+       "md": "Prix d'un mètre : 3 750 ÷ 5 = 750 FCFA."
+      },
+      {
+       "md": "Prix de 12 mètres : 12 × 750 = 1 800 FCFA."
+      }
+     ],
+     "answer": "**9 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — remise",
+     "statement": "Un outil coûte 45 000 FCFA. On suppose une remise de 15 %. Quel est le prix à payer ?",
+     "steps": [
+      {
+       "md": "Montant de la remise : 45 000 × 15 ÷ 100 = 6 750 FCFA."
+      },
+      {
+       "md": "Prix à payer : 45 000 − 6 750 = 38 250 FCFA."
+      }
+     ],
+     "answer": "**38 250 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — TVA donnée",
+     "statement": "Un article coûte 80 000 FCFA hors taxe. L'énoncé indique une TVA de 19,25 %. Quel est le prix TTC ?",
+     "steps": [
+      {
+       "md": "TVA : 80 000 × 19,25 ÷ 100 = 15 400 FCFA."
+      },
+      {
+       "md": "TTC : 80 000 + 15 400 = 95 400 FCFA."
+      }
+     ],
+     "answer": "**95 400 FCFA TTC** (avec le taux supposé par l'énoncé).",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 15,
+        "w": 120,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 40.25,
+        "text": "5 m",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 15,
+        "w": 110,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 40.25,
+        "text": "3 750 F",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 120,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 95.25,
+        "text": "12 m",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 70,
+        "w": 110,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 95.25,
+        "text": "?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 40,
+        "text": "÷ 5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 100,
+        "text": "× 12",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Tableau de proportionnalité (règle de trois).",
+     "alt": "Tableau à deux lignes : 5 m correspond à 3 750 francs ; 12 m correspond à un prix inconnu. On divise par 5 puis on multiplie par 12."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Appliquer une règle de trois à une situation qui n'est pas proportionnelle (ex. l'âge et la taille).\n- Confondre « remise de 15 % » et « soustraire 15 ».\n- Calculer la TVA sur le prix TTC au lieu du prix hors taxe."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour trouver un pourcentage entre deux quantités : (partie ÷ total) × 100.",
+      "Deux remises successives de 10 % ne valent pas 20 % : on applique la seconde au nouveau prix."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-cap-bep-maths-pro-proportionnalite-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-cap-bep-maths-pro-unites-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "Convertir 4,2 m en centimètres.",
+   "explanation": "4,2 × 100 = 420 cm.",
+   "method": "m → cm : × 100.",
+   "mistakes": [
+    "Écrire 42 cm en multipliant par 10 seulement."
+   ],
+   "source": "Exercice original",
+   "answer": 420,
+   "tolerance": 0,
+   "unit": "cm"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "0,75 kg en grammes vaut :",
+   "explanation": "1 kg = 1 000 g donc 0,75 × 1 000 = 750 g.",
+   "method": "kg → g : × 1 000.",
+   "source": "Exercice original",
+   "choices": [
+    "7,5 g",
+    "75 g",
+    "750 g",
+    "7 500 g"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "1 litre est égal à 1 dm³.",
+   "explanation": "C'est la correspondance entre capacité et volume : 1 L = 1 dm³.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "Convertir 3 m² en dm².",
+   "explanation": "m² → dm² : une colonne d'aire, × 100. 3 × 100 = 300 dm².",
+   "mistakes": [
+    "Multiplier par 10."
+   ],
+   "source": "Exercice original",
+   "answer": 300,
+   "tolerance": 0,
+   "unit": "dm²"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "Associe chaque mesure à sa conversion.",
+   "explanation": "2,5 L × 100 = 250 cL ; 1,2 km × 1 000 = 1 200 m ; 350 g ÷ 1 000 = 0,35 kg ; 1 cm³ = 1 mL.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "2,5 L",
+     "250 cL"
+    ],
+    [
+     "1,2 km",
+     "1 200 m"
+    ],
+    [
+     "350 g",
+     "0,35 kg"
+    ],
+    [
+     "4 cm³",
+     "4 mL"
+    ]
+   ]
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "À l'atelier, on prépare des découpes et des mélanges.",
+   "method": "Convertir d'abord toutes les mesures dans la même unité.",
+   "mistakes": [
+    "Diviser des cm par des m sans convertir."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-cap-bep-maths-pro-unites-06-a",
+     "points": 1,
+     "prompt": "Une barre mesure 2,4 m. Convertis sa longueur en centimètres.",
+     "explanation": "2,4 × 100 = 240 cm.",
+     "kind": "numeric",
+     "answer": 240,
+     "tolerance": 0,
+     "unit": "cm"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-unites-06-b",
+     "points": 2,
+     "prompt": "On y découpe des morceaux de 35 cm. Combien de morceaux entiers obtient-on ?",
+     "explanation": "240 ÷ 35 ≈ 6,86 : on peut couper 6 morceaux entiers (210 cm utilisés).",
+     "kind": "numeric",
+     "answer": 6,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-unites-06-c",
+     "points": 1,
+     "prompt": "Quelle longueur reste-t-il, en cm ?",
+     "explanation": "240 − 210 = 30 cm.",
+     "kind": "numeric",
+     "answer": 30,
+     "tolerance": 0,
+     "unit": "cm"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-unites-06-d",
+     "points": 1,
+     "prompt": "Avec un bidon de 3 L, combien de verres de 25 cL peut-on remplir ? (1 L = 100 cL)",
+     "explanation": "3 L = 300 cL ; 300 ÷ 25 = 12 verres.",
+     "kind": "numeric",
+     "answer": 12,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "Un chiffre des centièmes dans 5,382 est :",
+   "choices": [
+    "5",
+    "3",
+    "8",
+    "2"
+   ],
+   "answer": 2,
+   "explanation": "Après la virgule : 3 dixièmes, 8 centièmes, 2 millièmes."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "12 dm en mètres :",
+   "choices": [
+    "120 m",
+    "1,2 m",
+    "0,12 m",
+    "12 m"
+   ],
+   "answer": 1,
+   "explanation": "dm → m : on divise par 10 : 1,2 m."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "Pour passer de m³ à dm³ on multiplie par :",
+   "choices": [
+    "10",
+    "100",
+    "1 000",
+    "10 000"
+   ],
+   "answer": 2,
+   "explanation": "Pour les volumes, chaque unité vaut 1 000 fois la suivante."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "0,5 L équivaut à :",
+   "choices": [
+    "50 mL",
+    "500 mL",
+    "5 mL",
+    "5 000 mL"
+   ],
+   "answer": 1,
+   "explanation": "0,5 × 1 000 = 500 mL."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-unites-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-unites",
+   "prompt": "Quel nombre est le plus grand ?",
+   "choices": [
+    "3,09",
+    "3,9",
+    "3,089",
+    "3,10"
+   ],
+   "answer": 1,
+   "explanation": "3,9 = 3,900 ; c'est le plus grand."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "4 kg de riz coûtent 2 800 FCFA. Combien coûtent 7 kg ?",
+   "explanation": "1 kg = 2 800 ÷ 4 = 700 FCFA ; 7 × 700 = 4 900 FCFA.",
+   "source": "Exercice original",
+   "answer": 4900,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "Calculer 20 % de 35 000 FCFA.",
+   "explanation": "35 000 × 20 ÷ 100 = 7 000.",
+   "source": "Exercice original",
+   "answer": 7000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "Si 3 articles coûtent 600 FCFA, alors 6 articles coûtent 1 200 FCFA (prix identiques).",
+   "explanation": "6 = 2 × 3 donc le prix est doublé : 1 200 FCFA.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "Un pantalon à 18 000 FCFA est soldé de 25 %. Prix soldé :",
+   "explanation": "Remise 18 000 × 25 ÷ 100 = 4 500 ; prix 18 000 − 4 500 = 13 500 FCFA.",
+   "mistakes": [
+    "Donner le montant de la remise au lieu du prix à payer."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "4 500 FCFA",
+    "13 500 FCFA",
+    "17 975 FCFA",
+    "22 500 FCFA"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "Un article coûte 50 000 FCFA HT. Avec une TVA de 10 % (taux fictif), quel est le prix TTC ?",
+   "explanation": "TVA = 5 000 ; TTC = 55 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 55000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "Un atelier fictif achète du matériel. Les taux sont donnés par l'énoncé.",
+   "method": "Procéder par étapes : HT, remise, TVA, TTC.",
+   "mistakes": [
+    "Appliquer la TVA avant la remise sans le dire."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Taux de TVA supposé par l'énoncé : vérifier la présentation.",
+   "parts": [
+    {
+     "id": "etp-cap-bep-maths-pro-proportionnalite-06-a",
+     "points": 1,
+     "prompt": "12 vis identiques coûtent 1 800 FCFA. Prix de 20 vis ?",
+     "explanation": "1 vis = 150 FCFA ; 20 × 150 = 3 000 FCFA.",
+     "kind": "numeric",
+     "answer": 3000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-proportionnalite-06-b",
+     "points": 1,
+     "prompt": "Sur une commande de 120 000 FCFA HT, on suppose une remise de 5 %. Prix après remise ?",
+     "explanation": "Remise = 6 000 ; 120 000 − 6 000 = 114 000 FCFA.",
+     "kind": "numeric",
+     "answer": 114000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-proportionnalite-06-c",
+     "points": 2,
+     "prompt": "On ajoute une TVA supposée de 19,25 % sur ces 114 000 FCFA. Prix TTC (arrondi à l'unité) ?",
+     "explanation": "TVA = 114 000 × 0,1925 = 21 945 ; TTC = 135 945 FCFA.",
+     "kind": "numeric",
+     "answer": 135945,
+     "tolerance": 1,
+     "unit": "FCFA",
+     "review": true
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-proportionnalite-06-d",
+     "points": 1,
+     "prompt": "Sur 40 pièces, 6 sont défectueuses. Quel pourcentage ?",
+     "explanation": "6 ÷ 40 = 0,15 = 15 %.",
+     "kind": "numeric",
+     "answer": 15,
+     "tolerance": 0,
+     "unit": "%"
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "Le coefficient de proportionnalité entre 4 m et 3 000 FCFA est :",
+   "choices": [
+    "12 000",
+    "750",
+    "1 200",
+    "0,0013"
+   ],
+   "answer": 1,
+   "explanation": "3 000 ÷ 4 = 750 FCFA par mètre."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "10 % de 8 500 FCFA :",
+   "choices": [
+    "85 FCFA",
+    "850 FCFA",
+    "8 500 FCFA",
+    "1 700 FCFA"
+   ],
+   "answer": 1,
+   "explanation": "8 500 ÷ 10 = 850."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "Pour ajouter une TVA de t %, on calcule t % :",
+   "choices": [
+    "du prix TTC",
+    "du prix hors taxe",
+    "de la remise",
+    "du bénéfice"
+   ],
+   "answer": 1,
+   "explanation": "La TVA se calcule sur le prix hors taxe."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "Laquelle est une situation proportionnelle ?",
+   "choices": [
+    "L'âge et la taille d'un enfant",
+    "Le nombre de sacs et le poids total (sacs identiques)",
+    "Le jour de la semaine et la température",
+    "Le nombre d'élèves et la note"
+   ],
+   "answer": 1,
+   "explanation": "Des sacs identiques : le poids est proportionnel au nombre de sacs."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-proportionnalite-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-proportionnalite",
+   "prompt": "Une remise de 50 % divise le prix par :",
+   "choices": [
+    "2",
+    "5",
+    "0,5",
+    "50"
+   ],
+   "answer": 0,
+   "explanation": "Retirer la moitié revient à diviser par 2."
+  }
+ ]
+}

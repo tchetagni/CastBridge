@@ -1,0 +1,821 @@
+{
+ "chapter": "etp-esf-1re-famille",
+ "lessons": [
+  {
+   "id": "etp-esf-1re-budget-conso",
+   "title": "Budget familial et consommation",
+   "minutes": 45,
+   "programRef": "Programme d'économie sociale et familiale, classe de 1re — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Construire un budget familial équilibré.",
+    "Distinguer dépenses fixes et variables.",
+    "Comparer des produits (prix à l'unité).",
+    "Lire une étiquette et connaître ses réflexes de consommateur."
+   ],
+   "prerequisites": [
+    "etp-esf-1re-nutriments"
+   ],
+   "exercises": [
+    "etp-esf-1re-budget-conso-01",
+    "etp-esf-1re-budget-conso-02",
+    "etp-esf-1re-budget-conso-03",
+    "etp-esf-1re-budget-conso-04",
+    "etp-esf-1re-budget-conso-05",
+    "etp-esf-1re-budget-conso-06"
+   ],
+   "selfCheck": [
+    "etp-esf-1re-budget-conso-q1",
+    "etp-esf-1re-budget-conso-q2",
+    "etp-esf-1re-budget-conso-q3",
+    "etp-esf-1re-budget-conso-q4",
+    "etp-esf-1re-budget-conso-q5"
+   ],
+   "reviewNotes": [
+    "Matière « svt » choisie faute de matière économie sociale et familiale dans le catalogue.",
+    "Aucun chiffre nutritionnel ou sanitaire de référence n'est donné ; budgets et prix fictifs.",
+    "Droits du consommateur évoqués en termes généraux sans référence à un texte précis."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Budget",
+     "md": "Le **budget familial** compare les **recettes** (salaires, ventes, aides) aux **dépenses** sur une période. **Solde = recettes − dépenses.** Un solde positif permet d'**épargner**, un solde négatif est un **déficit**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dépenses fixes et variables",
+     "md": "Les dépenses **fixes** reviennent chaque mois pour un montant à peu près stable (loyer, abonnement). Les dépenses **variables** changent (alimentation, loisirs, santé). On distingue aussi **besoins** (indispensables) et **envies** (non indispensables) : on couvre les besoins d'abord."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Équilibrer un budget",
+     "md": "1. Lister toutes les recettes.\n2. Lister les dépenses fixes puis variables.\n3. Calculer le solde.\n4. S'il est négatif : réduire les envies, comparer les prix, chercher d'autres recettes.\n5. S'il est positif : prévoir une épargne pour les imprévus."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Consommer avec attention",
+     "md": "Lire l'**étiquette** (nature du produit, composition, quantité nette, date, prix). Comparer le **prix à l'unité** : prix ÷ quantité. Conserver le **ticket ou la facture**. Se méfier des publicités qui promettent trop."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Recettes",
+        "value": 180,
+        "color": "green"
+       },
+       {
+        "label": "Dépenses fixes",
+        "value": 85,
+        "color": "orange"
+       },
+       {
+        "label": "Dépenses variables",
+        "value": 80,
+        "color": "red"
+       },
+       {
+        "label": "Solde",
+        "value": 15,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Budget mensuel fictif. (unité : milliers de FCFA)",
+     "alt": "Quatre barres en milliers de FCFA : recettes 180, dépenses fixes 85, dépenses variables 80, solde 15."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — solde",
+     "statement": "Budget fictif : recettes 180 000 FCFA ; dépenses fixes : loyer 50 000, électricité et eau 15 000, transport 20 000 ; dépenses variables : alimentation 60 000, santé 8 000, divers 12 000. Quel solde ?",
+     "steps": [
+      {
+       "md": "Fixes : 50 000 + 15 000 + 20 000 = 85 000 ; variables : 60 000 + 8 000 + 12 000 = 80 000."
+      },
+      {
+       "md": "Dépenses : 165 000 ; solde : 180 000 − 165 000 = 15 000 FCFA."
+      }
+     ],
+     "answer": "**Solde de 15 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — prix à l'unité",
+     "statement": "Un sac de riz de 3 kg coûte 1 800 FCFA, un autre de 2 kg coûte 1 000 FCFA. Quel est le moins cher au kilo ?",
+     "steps": [
+      {
+       "md": "Premier : 1 800 ÷ 3 = 600 FCFA/kg ; second : 1 000 ÷ 2 = 500 FCFA/kg."
+      },
+      {
+       "md": "On compare les prix au kilo : le plus petit est le moins cher."
+      }
+     ],
+     "answer": "**Le sac de 3 kg (600 FCFA/kg contre 500).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier les petites dépenses : elles s'additionnent.\n- Confondre besoin et envie.\n- Comparer des prix sans tenir compte de la quantité.\n- Acheter une promotion dont on n'a pas besoin."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Tiens ton propre carnet de dépenses pendant une semaine.",
+      "Compare un même produit dans deux boutiques."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-esf-1re-budget-conso-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-esf-1re-puericulture",
+   "title": "Puériculture générale : hygiène et alimentation du nourrisson",
+   "minutes": 35,
+   "programRef": "Programme d'économie sociale et familiale, classe de 1re — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer les règles d'hygiène autour d'un nourrisson.",
+    "Citer les principes généraux de l'alimentation du nourrisson.",
+    "Reconnaître l'importance du suivi médical.",
+    "Savoir quand demander l'avis d'un agent de santé."
+   ],
+   "prerequisites": [
+    "etp-esf-1re-hygiene-entretien"
+   ],
+   "exercises": [
+    "etp-esf-1re-puericulture-01",
+    "etp-esf-1re-puericulture-02",
+    "etp-esf-1re-puericulture-03",
+    "etp-esf-1re-puericulture-04",
+    "etp-esf-1re-puericulture-05",
+    "etp-esf-1re-puericulture-06"
+   ],
+   "selfCheck": [
+    "etp-esf-1re-puericulture-q1",
+    "etp-esf-1re-puericulture-q2",
+    "etp-esf-1re-puericulture-q3",
+    "etp-esf-1re-puericulture-q4",
+    "etp-esf-1re-puericulture-q5"
+   ],
+   "reviewNotes": [
+    "Santé du nourrisson : tout le contenu est à faire relire par un agent de santé (infirmier, sage-femme, médecin) avant utilisation.",
+    "Matière « svt » choisie faute de matière économie sociale et familiale dans le catalogue.",
+    "Principes généraux seulement : aucune quantité, durée, fréquence ni calendrier n'est donné ; l'enseignant doit renvoyer aux recommandations officielles locales."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Puériculture",
+     "md": "La **puériculture** regroupe les soins et l'attention portés au jeune enfant pour sa santé et son développement : hygiène, alimentation, sommeil, éveil et suivi médical. Ce cours donne des **principes généraux** ; les consignes précises viennent des professionnels de santé.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Hygiène autour du bébé",
+     "md": "Se **laver les mains** avant de le toucher, de le nourrir ou de le changer. Garder propres le **lieu de change**, le **linge**, les **jouets** et la **literie**. Nettoyer soigneusement le matériel d'alimentation (biberons, tétines, cuillères). Utiliser une **eau propre**. Éloigner les personnes malades ou protéger le bébé.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Alimentation : principes",
+     "md": "Le **lait maternel** est l'aliment recommandé du nourrisson ; sa durée et la suite de l'alimentation se décident avec un **agent de santé**. Quand d'autres aliments sont introduits, on le fait **progressivement**, avec une **hygiène stricte**, en observant l'enfant. On ne force pas un enfant à manger.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Suivi et vigilance",
+     "md": "Le **carnet de santé** note la croissance, les vaccinations et les consultations. Les vaccinations suivent le **calendrier recommandé** par les services de santé. En cas de fièvre, de refus de s'alimenter, de pleurs inhabituels ou de tout signe inquiétant, il faut **consulter sans attendre** un agent de santé.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 40,
+        "w": 92,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 69.2,
+        "text": "Hygiène",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 106,
+        "y": 40,
+        "w": 92,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 152.0,
+        "y": 69.2,
+        "text": "Alimentation",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 204,
+        "y": 40,
+        "w": 92,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 69.2,
+        "text": "Sommeil et éveil",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 302,
+        "y": 40,
+        "w": 92,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 348.0,
+        "y": 69.2,
+        "text": "Suivi médical",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "Les quatre piliers de la petite enfance",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Les quatre piliers de la petite enfance.",
+     "alt": "Quatre cases alignées : hygiène, alimentation, sommeil et éveil, suivi médical.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — avant le change",
+     "statement": "Une maman prépare le change. Quelles précautions d'hygiène ?",
+     "steps": [
+      {
+       "md": "Elle se lave les mains et prépare le matériel propre à portée de main."
+      },
+      {
+       "md": "Après le change, elle se relave les mains et range le linge sale dans un récipient."
+      }
+     ],
+     "answer": "**Mains lavées avant et après, matériel propre.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — signe inquiétant",
+     "statement": "Un nourrisson refuse de s'alimenter depuis le matin et semble anormalement chaud. Que faire ?",
+     "steps": [
+      {
+       "md": "Ne pas attendre ni donner de médicament de sa propre initiative."
+      },
+      {
+       "md": "Consulter rapidement un agent de santé."
+      }
+     ],
+     "answer": "**Consulter sans attendre.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Ne pas laver ses mains avant de nourrir le bébé.\n- Donner un médicament sans avis.\n- Introduire des aliments sans avis ni progressivité.\n- Négliger le carnet de santé et les rendez-vous."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Repère le centre de santé le plus proche et ses horaires.",
+      "Demande à un agent de santé de présenter les gestes d'hygiène pour un bébé."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-esf-1re-puericulture-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-esf-1re-budget-conso-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Recettes 120 000 FCFA, dépenses 95 000 FCFA. Solde ?",
+   "explanation": "120 000 − 95 000 = 25 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 25000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Le loyer est une dépense fixe.",
+   "explanation": "Il revient chaque mois pour un montant stable.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Le prix à l'unité se calcule :",
+   "explanation": "Prix divisé par quantité.",
+   "source": "Exercice original",
+   "choices": [
+    "prix × quantité",
+    "prix ÷ quantité",
+    "quantité ÷ prix",
+    "prix + quantité"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Un bidon de 5 L coûte 4 500 FCFA. Prix du litre ?",
+   "explanation": "4 500 ÷ 5 = 900 FCFA.",
+   "source": "Exercice original",
+   "answer": 900,
+   "tolerance": 0,
+   "unit": "FCFA/L"
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Classe chaque dépense.",
+   "explanation": "Distinguer besoins, envies, fixe et variable.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Loyer",
+     "Dépense fixe"
+    ],
+    [
+     "Achat de légumes",
+     "Dépense variable"
+    ],
+    [
+     "Épargne",
+     "Solde utilisé pour prévoir"
+    ],
+    [
+     "Sortie au cinéma",
+     "Envie"
+    ]
+   ]
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Une famille fictive : recettes 150 000 FCFA ; dépenses fixes 70 000 ; dépenses variables 85 000 FCFA.",
+   "method": "Calculer le solde puis choisir des mesures réalistes.",
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-esf-1re-budget-conso-06-a",
+     "points": 1,
+     "prompt": "Total des dépenses ?",
+     "explanation": "70 000 + 85 000 = 155 000.",
+     "kind": "numeric",
+     "answer": 155000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-esf-1re-budget-conso-06-b",
+     "points": 1,
+     "prompt": "Solde ?",
+     "explanation": "150 000 − 155 000 = -5 000 FCFA (déficit).",
+     "kind": "numeric",
+     "answer": -5000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-esf-1re-budget-conso-06-c",
+     "points": 1,
+     "prompt": "Que faire en priorité ?",
+     "explanation": "On réduit d'abord le non indispensable.",
+     "kind": "mcq",
+     "choices": [
+      "Réduire les envies et comparer les prix",
+      "Emprunter pour acheter des envies",
+      "Ne rien changer",
+      "Arrêter de se nourrir"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-esf-1re-budget-conso-06-d",
+     "points": 2,
+     "prompt": "Propose deux moyens de rétablir l'équilibre.",
+     "explanation": "On agit sur les dépenses et/ou les recettes.",
+     "kind": "open",
+     "model": "Réduire les dépenses non indispensables et comparer les prix pour acheter moins cher ; augmenter les recettes par une activité complémentaire.",
+     "rubric": [
+      "Une réduction de dépenses",
+      "Une autre mesure réaliste"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Un solde négatif s'appelle :",
+   "choices": [
+    "un bénéfice",
+    "un déficit",
+    "une épargne",
+    "un revenu"
+   ],
+   "answer": 1,
+   "explanation": "Déficit."
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Le prix à l'unité sert à :",
+   "choices": [
+    "comparer",
+    "décorer",
+    "emballer",
+    "voler"
+   ],
+   "answer": 0,
+   "explanation": "Il compare des produits de quantités différentes."
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "L'épargne est :",
+   "choices": [
+    "une dépense obligatoire",
+    "une partie des recettes mise de côté",
+    "une dette",
+    "un impôt"
+   ],
+   "answer": 1,
+   "explanation": "On met de côté pour l'avenir."
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Pour comparer deux produits, il faut :",
+   "choices": [
+    "regarder la couleur",
+    "ramener à la même quantité",
+    "choisir au hasard",
+    "ignorer le prix"
+   ],
+   "answer": 1,
+   "explanation": "Même unité."
+  },
+  {
+   "id": "etp-esf-1re-budget-conso-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-budget-conso",
+   "prompt": "Un besoin est :",
+   "choices": [
+    "indispensable",
+    "toujours une envie",
+    "inutile",
+    "coûteux"
+   ],
+   "answer": 0,
+   "explanation": "Un besoin est indispensable."
+  },
+  {
+   "id": "etp-esf-1re-puericulture-01",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "On se lave les mains avant de nourrir un nourrisson.",
+   "explanation": "C'est une règle d'hygiène de base.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "etp-esf-1re-puericulture-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "Le carnet de santé sert à :",
+   "explanation": "Il suit la santé de l'enfant.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "noter la croissance et les vaccinations",
+    "dessiner",
+    "noter les achats",
+    "remplacer le médecin"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-esf-1re-puericulture-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "Face à un signe inquiétant, on peut attendre plusieurs jours sans consulter.",
+   "explanation": "Il faut consulter sans attendre.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "etp-esf-1re-puericulture-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "Associe chaque geste à son but.",
+   "explanation": "Chaque geste a un objectif de prévention.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Laver le biberon avec soin",
+     "Éviter les germes"
+    ],
+    [
+     "Peser et mesurer l'enfant au suivi",
+     "Suivre la croissance"
+    ],
+    [
+     "Vaccinations selon le calendrier",
+     "Protéger contre des maladies"
+    ],
+    [
+     "Introduire un nouvel aliment progressivement",
+     "Observer la tolérance"
+    ]
+   ]
+  },
+  {
+   "id": "etp-esf-1re-puericulture-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "Explique en quelques lignes pourquoi il faut demander l'avis d'un agent de santé pour l'alimentation d'un nourrisson.",
+   "explanation": "Le conseil d'un professionnel évite les erreurs.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Les besoins d'un nourrisson sont particuliers et ses défenses fragiles ; un agent de santé donne des conseils adaptés à l'enfant et aux recommandations officielles.",
+   "rubric": [
+    "Fragilité du nourrisson",
+    "Conseils adaptés",
+    "Recommandations officielles"
+   ]
+  },
+  {
+   "id": "etp-esf-1re-puericulture-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "Une jeune mère fictive prépare un biberon avec un matériel mal lavé, sans se laver les mains, avec une eau d'origine douteuse.",
+   "method": "Mains, matériel, eau, avis de santé.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "À faire relire par un agent de santé.",
+   "parts": [
+    {
+     "id": "etp-esf-1re-puericulture-06-a",
+     "points": 1,
+     "prompt": "Quel est le principal risque ?",
+     "explanation": "Mains, matériel et eau peuvent apporter des germes.",
+     "kind": "mcq",
+     "choices": [
+      "Une contamination par des germes",
+      "Aucun",
+      "Un excès de vitamines",
+      "La fatigue"
+     ],
+     "answer": 0,
+     "review": true
+    },
+    {
+     "id": "etp-esf-1re-puericulture-06-b",
+     "points": 1,
+     "prompt": "L'hygiène du matériel est essentielle.",
+     "explanation": "Elle protège un organisme fragile.",
+     "kind": "truefalse",
+     "answer": true,
+     "review": true
+    },
+    {
+     "id": "etp-esf-1re-puericulture-06-c",
+     "points": 2,
+     "prompt": "Propose trois conseils d'hygiène.",
+     "explanation": "Ces trois points réduisent le risque.",
+     "kind": "open",
+     "model": "Se laver les mains, nettoyer soigneusement le matériel, utiliser une eau propre.",
+     "rubric": [
+      "Mains",
+      "Matériel",
+      "Eau"
+     ],
+     "review": true
+    }
+   ]
+  },
+  {
+   "id": "etp-esf-1re-puericulture-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "La puériculture concerne :",
+   "choices": [
+    "l'entretien du jardin",
+    "les soins au jeune enfant",
+    "la mécanique",
+    "la comptabilité"
+   ],
+   "answer": 1,
+   "explanation": "Les soins et l'attention au jeune enfant.",
+   "review": true
+  },
+  {
+   "id": "etp-esf-1re-puericulture-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "Avant de nourrir un bébé, on :",
+   "choices": [
+    "se lave les mains",
+    "mange",
+    "écoute la radio",
+    "jette le biberon"
+   ],
+   "answer": 0,
+   "explanation": "Geste d'hygiène.",
+   "review": true
+  },
+  {
+   "id": "etp-esf-1re-puericulture-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "L'introduction d'un nouvel aliment se fait :",
+   "choices": [
+    "brutalement",
+    "progressivement",
+    "au hasard",
+    "sans surveillance"
+   ],
+   "answer": 1,
+   "explanation": "On observe la tolérance.",
+   "review": true
+  },
+  {
+   "id": "etp-esf-1re-puericulture-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "En cas de signe inquiétant :",
+   "choices": [
+    "on attend",
+    "on consulte sans attendre",
+    "on se moque",
+    "on ignore"
+   ],
+   "answer": 1,
+   "explanation": "Il vaut mieux consulter.",
+   "review": true
+  },
+  {
+   "id": "etp-esf-1re-puericulture-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-puericulture",
+   "prompt": "Les vaccinations suivent :",
+   "choices": [
+    "le calendrier recommandé",
+    "le hasard",
+    "la saison",
+    "l'humeur"
+   ],
+   "answer": 0,
+   "explanation": "Selon le calendrier des services de santé.",
+   "review": true
+  }
+ ]
+}

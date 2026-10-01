@@ -1,0 +1,871 @@
+{
+ "chapter": "sup-l1-microeconomie-marche",
+ "lessons": [
+  {
+   "id": "sup-l1-microeconomie-equilibre",
+   "title": "Demande, offre et équilibre de marché",
+   "minutes": 45,
+   "programRef": "L1 — Le marché : demande, offre, équilibre (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Énoncer les lois de la demande et de l'offre et distinguer mouvement le long d'une courbe et déplacement de la courbe.",
+    "Calculer le prix et la quantité d'équilibre à partir de fonctions linéaires.",
+    "Déterminer un excédent ou une pénurie pour un prix donné.",
+    "Prévoir qualitativement et chiffrer l'effet d'un déplacement de la demande."
+   ],
+   "prerequisites": [
+    "sup-l1-microeconomie-consommateur"
+   ],
+   "exercises": [
+    "sup-l1-microeconomie-equilibre-01",
+    "sup-l1-microeconomie-equilibre-02",
+    "sup-l1-microeconomie-equilibre-03",
+    "sup-l1-microeconomie-equilibre-04",
+    "sup-l1-microeconomie-equilibre-05",
+    "sup-l1-microeconomie-equilibre-06",
+    "sup-l1-microeconomie-equilibre-07"
+   ],
+   "selfCheck": [
+    "sup-l1-microeconomie-equilibre-q1",
+    "sup-l1-microeconomie-equilibre-q2",
+    "sup-l1-microeconomie-equilibre-q3",
+    "sup-l1-microeconomie-equilibre-q4",
+    "sup-l1-microeconomie-equilibre-q5"
+   ],
+   "reviewNotes": [
+    "Les fonctions de demande et d'offre sont linéaires et fictives ; vérifier la convention d'axes (prix en ordonnée) utilisée dans le cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Demande et offre",
+     "md": "La **demande** d'un bien est la quantité que les acheteurs sont prêts à acheter à chaque prix. L'**offre** est la quantité que les vendeurs sont prêts à vendre à chaque prix. Un **marché** est le lieu (physique ou non) où demande et offre se rencontrent et où se forme le prix."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Lois de la demande et de l'offre",
+     "md": "**Loi de la demande** : toutes choses égales par ailleurs, quand le prix augmente, la quantité demandée diminue. **Loi de l'offre** : quand le prix augmente, la quantité offerte augmente. Dans le plan (quantité en abscisse, prix en ordonnée), la demande est décroissante et l'offre croissante."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Fonctions linéaires et équilibre",
+     "md": "Avec $Q_d = a - bP$ et $Q_s = c + dP$ ($b, d > 0$), l'**équilibre** est le prix $P^*$ tel que $Q_d = Q_s$ ; on en déduit $Q^*$ :",
+     "tex": "a - bP^* = c + dP^* \\Rightarrow P^* = \\frac{a-c}{b+d}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 110,
+      "ymin": 0,
+      "ymax": 55,
+      "grid": 10,
+      "xlabel": "quantité (tonnes)",
+      "ylabel": "prix (milliers FCFA/t)",
+      "curves": [
+       {
+        "expr": "50-x/2",
+        "color": "blue",
+        "label": "demande"
+       },
+       {
+        "expr": "5+x/4",
+        "color": "red",
+        "label": "offre"
+       }
+      ],
+      "points": [
+       {
+        "x": 60,
+        "y": 20,
+        "label": "E (60 ; 20)",
+        "color": "green"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 20,
+        "x2": 60,
+        "y2": 20,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 60,
+        "y1": 0,
+        "x2": 60,
+        "y2": 20,
+        "color": "grey",
+        "dash": true
+       }
+      ]
+     },
+     "caption": "Équilibre sur un marché : Qd = 100 − 2P et Qs = −20 + 4P.",
+     "alt": "Une droite de demande décroissante et une droite d'offre croissante se coupent au point E (quantité 60 ; prix 20). Deux segments pointillés relient E aux axes."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Déplacement ou mouvement ?",
+     "md": "Une variation du **prix** du bien provoque un **mouvement le long** de la courbe. Une variation d'un autre facteur (revenu, goûts, prix d'un bien lié, nombre d'acheteurs pour la demande ; coût des intrants, technologie, nombre de vendeurs pour l'offre) **déplace la courbe** entière."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Excédent et pénurie",
+     "md": "À un prix supérieur au prix d'équilibre, $Q_s > Q_d$ : il y a un **excédent** (surplus), les vendeurs baissent leur prix. À un prix inférieur, $Q_d > Q_s$ : **pénurie**, le prix tend à monter. Le marché revient vers l'équilibre."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — trouver l'équilibre",
+     "statement": "Sur le marché d'un produit vivrier, Q_d = 100 − 2P et Q_s = −20 + 4P (P en milliers de FCFA par tonne, Q en tonnes). Détermine P∗ et Q∗.",
+     "steps": [
+      {
+       "md": "On pose Q_d = Q_s :",
+       "tex": "100 - 2P = -20 + 4P"
+      },
+      {
+       "md": "On regroupe : 120 = 6P, donc P∗ = 20.",
+       "tex": "P^* = \\frac{120}{6} = 20"
+      },
+      {
+       "md": "On remplace dans la demande : Q∗ = 100 − 2 × 20 = 60. Contrôle avec l'offre : −20 + 4 × 20 = 60.",
+       "tex": "Q^* = 100 - 2\\times 20 = 60"
+      }
+     ],
+     "answer": "**P* = 20 milliers de FCFA/t ; Q* = 60 t.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — prix imposé",
+     "statement": "Avec les mêmes fonctions, un prix de 30 est imposé comme minimum, puis un prix de 15 comme maximum. Que se passe-t-il ?",
+     "steps": [
+      {
+       "md": "À P = 30 : Q_d = 40, Q_s = 100. L'offre dépasse la demande de 60 t : **excédent**.",
+       "tex": "Q_s - Q_d = 100 - 40 = 60"
+      },
+      {
+       "md": "À P = 15 : Q_d = 70, Q_s = 40. La demande dépasse l'offre de 30 t : **pénurie**.",
+       "tex": "Q_d - Q_s = 70 - 40 = 30"
+      }
+     ],
+     "answer": "**Prix plancher 30 : excédent de 60 t. Prix plafond 15 : pénurie de 30 t.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — déplacement de la demande",
+     "statement": "Suite à une hausse des revenus, la demande devient Q_d = 130 − 2P ; l'offre est inchangée. Que deviennent P∗ et Q∗ ?",
+     "steps": [
+      {
+       "md": "On pose 130 − 2P = −20 + 4P, donc 150 = 6P et P∗ = 25.",
+       "tex": "P^* = \\frac{150}{6} = 25"
+      },
+      {
+       "md": "Q∗ = 130 − 2 × 25 = 80. Contrôle avec l'offre : −20 + 4 × 25 = 80.",
+       "tex": "Q^* = 80"
+      },
+      {
+       "md": "Comparaison avec l'ancien équilibre : prix 20 → 25, quantité 60 → 80. La demande se déplace vers la droite : prix et quantité augmentent."
+      }
+     ],
+     "answer": "**Nouvel équilibre : P∗ = 25 ; Q∗ = 80.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire qu'une hausse du revenu « fait monter la demande le long de la courbe » : c'est un **déplacement** de la courbe.\n- Se tromper de signe en regroupant : $a - bP = c + dP$ donne $P = (a - c)/(b + d)$.\n- Oublier de contrôler Q∗ dans **les deux** fonctions.\n- Confondre excédent (prix trop haut) et pénurie (prix trop bas)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un **prix plafond** inférieur à P∗ crée une pénurie et peut favoriser la file d'attente ou le marché parallèle ; un **prix plancher** supérieur à P∗ crée un excédent.",
+      "Une **taxe** sur les vendeurs déplace l'offre vers le haut ; son poids se partage entre acheteurs et vendeurs selon les élasticités.",
+      "Les marchés réels (vivrier, cacao, café) ont des offres saisonnières : l'offre peut se déplacer d'une saison à l'autre."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-microeconomie-equilibre-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites",
+   "title": "Élasticités-prix et élasticité-revenu",
+   "minutes": 45,
+   "programRef": "L1 — Élasticités de la demande (prix, revenu) (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une élasticité-prix de la demande à partir de variations relatives.",
+    "Interpréter le signe et la valeur (élastique, inélastique, unitaire).",
+    "Relier élasticité-prix et recette totale.",
+    "Calculer et interpréter une élasticité-revenu (bien normal, de luxe, inférieur)."
+   ],
+   "prerequisites": [
+    "sup-l1-microeconomie-equilibre"
+   ],
+   "exercises": [
+    "sup-l1-microeconomie-elasticites-01",
+    "sup-l1-microeconomie-elasticites-02",
+    "sup-l1-microeconomie-elasticites-03",
+    "sup-l1-microeconomie-elasticites-04",
+    "sup-l1-microeconomie-elasticites-05",
+    "sup-l1-microeconomie-elasticites-06",
+    "sup-l1-microeconomie-elasticites-07"
+   ],
+   "selfCheck": [
+    "sup-l1-microeconomie-elasticites-q1",
+    "sup-l1-microeconomie-elasticites-q2",
+    "sup-l1-microeconomie-elasticites-q3",
+    "sup-l1-microeconomie-elasticites-q4",
+    "sup-l1-microeconomie-elasticites-q5"
+   ],
+   "reviewNotes": [
+    "Convention de calcul : variations relatives par rapport à la valeur initiale (élasticité d'arc simplifiée) ; certains cours utilisent le point milieu. Préciser la convention de l'établissement.",
+    "Seuils d'interprétation des biens de luxe/nécessité à confronter au cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Élasticité-prix de la demande",
+     "md": "L'**élasticité-prix** mesure la sensibilité de la quantité demandée à une variation du prix : c'est le rapport entre la variation relative de la quantité et la variation relative du prix.",
+     "tex": "E_p = \\frac{\\Delta Q / Q}{\\Delta P / P}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Interprétation",
+     "md": "Pour un bien ordinaire $E_p < 0$ (prix et quantité varient en sens opposés) ; on raisonne souvent sur $|E_p|$ :\n- $|E_p| > 1$ : demande **élastique** (la quantité réagit plus que proportionnellement) ;\n- $|E_p| < 1$ : demande **inélastique** (réaction faible : biens de nécessité, peu de substituts) ;\n- $|E_p| = 1$ : élasticité **unitaire**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Élasticité et recette totale",
+     "md": "La **recette** (dépense des acheteurs) est $RT = P \\times Q$. Si $|E_p| > 1$, une hausse de prix **réduit** la recette ; si $|E_p| < 1$, une hausse de prix l'**augmente** ; si $|E_p| = 1$, la recette ne change pas (en première approximation). Les effets s'inversent pour une baisse de prix."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Élasticité en un point (demande linéaire)",
+     "md": "Pour $Q_d = a - bP$, l'élasticité au point $(P, Q)$ vaut :",
+     "tex": "E_p = -b \\times \\frac{P}{Q}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Élasticité-revenu",
+     "md": "L'**élasticité-revenu** compare la variation relative de la quantité demandée à celle du revenu $R$ :",
+     "tex": "E_R = \\frac{\\Delta Q / Q}{\\Delta R / R}"
+    },
+    {
+     "type": "text",
+     "md": "Si $E_R > 0$ : bien **normal** (la demande croît avec le revenu) ; si $E_R > 1$, c'est un bien **supérieur** ou de luxe (la part du budget augmente) ; si $0 < E_R < 1$, bien de nécessité ; si $E_R < 0$, bien **inférieur** (la demande baisse quand le revenu augmente)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Avant",
+        "value": 500000,
+        "color": "blue"
+       },
+       {
+        "label": "Après",
+        "value": 510000,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Recette totale avant et après la hausse du prix (exemple 1). (unité : FCFA)",
+     "alt": "Deux barres : recette avant 500 000 FCFA, recette après 510 000 FCFA, légèrement plus haute."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — élasticité-prix et recette",
+     "statement": "Le prix d'un sachet passe de 500 à 600 FCFA ; les ventes passent de 1 000 à 850 sachets par semaine. Calcule E_p et dis comment la recette évolue.",
+     "steps": [
+      {
+       "md": "Variation relative du prix : (600 − 500) / 500 = +20 %.",
+       "tex": "\\frac{600-500}{500} = 0{,}20"
+      },
+      {
+       "md": "Variation relative de la quantité : (850 − 1 000) / 1 000 = −15 %.",
+       "tex": "\\frac{850-1000}{1000} = -0{,}15"
+      },
+      {
+       "md": "E_p = −0,15 / 0,20 = −0,75 : |E_p| < 1, demande **inélastique**.",
+       "tex": "E_p = \\frac{-0{,}15}{0{,}20} = -0{,}75"
+      },
+      {
+       "md": "Recette avant : 500 × 1 000 = 500 000 FCFA ; après : 600 × 850 = 510 000 FCFA. La recette augmente de 10 000 FCFA."
+      }
+     ],
+     "answer": "**E_p = −0,75 (inélastique) ; la recette passe de 500 000 à 510 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — élasticité en un point",
+     "statement": "Demande Q_d = 100 − 2P. Calcule l'élasticité au prix P = 20, puis au prix P = 40.",
+     "steps": [
+      {
+       "md": "À P = 20 : Q = 100 − 40 = 60 ; E_p = −2 × 20/60 = −0,67 : inélastique.",
+       "tex": "E_p = -2\\times\\frac{20}{60}"
+      },
+      {
+       "md": "À P = 40 : Q = 100 − 80 = 20 ; E_p = −2 × 40/20 = −4 : élastique.",
+       "tex": "E_p = -2\\times\\frac{40}{20} = -4"
+      },
+      {
+       "md": "Sur une même droite de demande, l'élasticité (en valeur absolue) **augmente avec le prix** : elle n'est pas constante."
+      }
+     ],
+     "answer": "**E_p(20) ≈ −0,67 ; E_p(40) = −4.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — élasticité-revenu",
+     "statement": "Le revenu mensuel d'un ménage passe de 200 000 à 240 000 FCFA ; sa consommation de viande passe de 10 à 13 kg par mois. Calcule E_R.",
+     "steps": [
+      {
+       "md": "ΔR/R = (240 000 − 200 000) / 200 000 = +20 %.",
+       "tex": "\\frac{240000-200000}{200000} = 0{,}20"
+      },
+      {
+       "md": "ΔQ/Q = (13 − 10) / 10 = +30 %.",
+       "tex": "\\frac{13-10}{10} = 0{,}30"
+      },
+      {
+       "md": "E_R = 0,30 / 0,20 = 1,5 : bien **supérieur** pour ce ménage.",
+       "tex": "E_R = \\frac{0{,}30}{0{,}20} = 1{,}5"
+      }
+     ],
+     "answer": "**E_R = 1,5 : la consommation augmente plus vite que le revenu.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser les variations **absolues** (ΔQ/ΔP) au lieu des variations **relatives**.\n- Oublier le signe : l'élasticité-prix d'un bien ordinaire est négative.\n- Confondre **pente** de la demande et **élasticité** : la pente est la même partout sur une droite, pas l'élasticité.\n- Conclure sur la recette sans regarder si $|E_p|$ est supérieur ou inférieur à 1."
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'**élasticité-prix croisée** mesure la réaction de la demande d'un bien au prix d'un autre : positive pour des substituts, négative pour des compléments.",
+      "Les cas limites : demande **parfaitement inélastique** (courbe verticale, $E_p = 0$) et **parfaitement élastique** (courbe horizontale).",
+      "Les produits de première nécessité ont souvent une demande inélastique à court terme ; elle devient plus élastique à long terme quand les consommateurs trouvent des substituts."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-microeconomie-elasticites-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-microeconomie-equilibre-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Qd = 80 − P et Qs = 2P − 10 (P en centaines de FCFA). Calcule le prix d'équilibre.",
+   "explanation": "80 − P = 2P − 10 ⇒ 90 = 3P ⇒ P∗ = 30.",
+   "method": "Égaliser Qd et Qs et isoler P.",
+   "source": "Exercice original",
+   "answer": 30.0,
+   "tolerance": 0,
+   "unit": "centaines de FCFA"
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Avec Qd = 80 − P et Qs = 2P − 10, calcule la quantité d'équilibre.",
+   "explanation": "Q∗ = 80 − 30 = 50 ; contrôle : 2 × 30 − 10 = 50.",
+   "source": "Exercice original",
+   "answer": 50.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Une hausse du prix du transport fait augmenter les coûts de production de tomates. Quel effet qualitatif sur le marché ?",
+   "explanation": "Des coûts plus élevés réduisent l'offre à chaque prix : la courbe se déplace vers la gauche, le prix d'équilibre augmente et la quantité diminue.",
+   "method": "Identifier la courbe concernée, le sens du déplacement, puis le nouvel équilibre.",
+   "mistakes": [
+    "Confondre déplacement de l'offre et de la demande."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Déplacement de l'offre vers la droite : prix plus bas",
+    "Déplacement de l'offre vers la gauche : prix plus élevé, quantité plus faible",
+    "Déplacement de la demande vers la droite",
+    "Aucun effet"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Si le prix du marché est supérieur au prix d'équilibre, il y a une pénurie.",
+   "explanation": "Au-dessus de P∗, la quantité offerte dépasse la quantité demandée : c'est un excédent.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Qd = 100 − 2P ; Qs = −20 + 4P. Pour P = 40, calcule l'excédent (Qs − Qd).",
+   "explanation": "Qs = −20 + 4×40 = 140 ; Qd = 100 − 2×40 = 20 ; excédent = 120.",
+   "source": "Exercice original",
+   "answer": 120.0,
+   "tolerance": 0,
+   "unit": "tonnes"
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Une campagne de publicité réussie augmente la demande de jus de fruits local. Décris l'effet sur le prix et la quantité d'équilibre, en distinguant mouvement et déplacement.",
+   "explanation": "La publicité agit sur les goûts, donc déplace la demande ; l'offre ne se déplace pas, on se déplace le long d'elle.",
+   "method": "1) quelle courbe ? 2) quel sens ? 3) nouvel équilibre.",
+   "source": "Exercice original",
+   "model": "La demande se déplace vers la droite (plus d'acheteurs à chaque prix). À l'ancien prix il y a pénurie, le prix monte ; on se déplace ensuite le long de l'offre : prix et quantité d'équilibre augmentent.",
+   "rubric": [
+    "Déplacement de la demande vers la droite",
+    "Pénurie à l'ancien prix",
+    "Mouvement le long de l'offre",
+    "Prix et quantité en hausse"
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Sur le marché local de l'huile de palme, Q_d = 200 − 5P et Q_s = 40 + 3P (P en centaines de FCFA par litre, Q en litres par jour).",
+   "method": "Équilibre d'abord ; puis évaluer Qd et Qs au prix imposé.",
+   "mistakes": [
+    "Calculer l'écart dans le mauvais sens.",
+    "Oublier que le plafond (15) est inférieur à P∗ (20)."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-microeconomie-equilibre-07-a",
+     "points": 1,
+     "prompt": "Prix d'équilibre ?",
+     "explanation": "200 − 5P = 40 + 3P ⇒ 160 = 8P ⇒ P∗ = 20.",
+     "kind": "numeric",
+     "answer": 20.0,
+     "tolerance": 0,
+     "unit": "centaines de FCFA"
+    },
+    {
+     "id": "sup-l1-microeconomie-equilibre-07-b",
+     "points": 1,
+     "prompt": "Quantité d'équilibre ?",
+     "explanation": "Q∗ = 200 − 5 × 20 = 100 ; contrôle : 40 + 3 × 20 = 100.",
+     "kind": "numeric",
+     "answer": 100.0,
+     "tolerance": 0,
+     "unit": "litres"
+    },
+    {
+     "id": "sup-l1-microeconomie-equilibre-07-c",
+     "points": 1,
+     "prompt": "Les autorités plafonnent le prix à 15. Calcule la pénurie (Qd − Qs).",
+     "explanation": "Qd = 200 − 5×15 = 125 ; Qs = 40 + 3×15 = 85 ; pénurie = 40.",
+     "kind": "numeric",
+     "answer": 40.0,
+     "tolerance": 0,
+     "unit": "litres"
+    },
+    {
+     "id": "sup-l1-microeconomie-equilibre-07-d",
+     "points": 1,
+     "prompt": "Que peut provoquer durablement un prix plafond inférieur à l'équilibre ?",
+     "explanation": "Une pénurie persiste : les consommateurs rationnés cherchent d'autres moyens d'obtenir le bien (attente, marché parallèle).",
+     "kind": "mcq",
+     "choices": [
+      "Un excédent d'offre",
+      "Une baisse de la demande",
+      "Des files d'attente ou un marché parallèle",
+      "Une hausse de l'offre"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Toutes choses égales par ailleurs, la loi de la demande dit que :",
+   "choices": [
+    "Qd = Qs toujours",
+    "La demande ne dépend pas du prix",
+    "Quand P augmente, Qd diminue",
+    "Quand P augmente, Qd augmente"
+   ],
+   "answer": 2,
+   "explanation": "Relation inverse entre prix et quantité demandée.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Une hausse du revenu des ménages (bien normal) provoque :",
+   "choices": [
+    "Un mouvement le long de la demande",
+    "Un déplacement de l'offre vers la droite",
+    "Aucun effet",
+    "Un déplacement de la demande vers la droite"
+   ],
+   "answer": 3,
+   "explanation": "Le revenu est un facteur extérieur au prix : il déplace la courbe.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Si Qd < Qs, le prix tend à :",
+   "choices": [
+    "Monter",
+    "Rester constant",
+    "Devenir nul",
+    "Baisser"
+   ],
+   "answer": 3,
+   "explanation": "Excédent : les vendeurs baissent le prix.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Qd = 50 − P et Qs = 2P − 10. Le prix d'équilibre vaut :",
+   "choices": [
+    "10",
+    "20",
+    "40",
+    "30"
+   ],
+   "answer": 1,
+   "explanation": "50 − P = 2P − 10 ⇒ P = 20.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-equilibre-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-equilibre",
+   "prompt": "Un progrès technique qui baisse les coûts de production :",
+   "choices": [
+    "Déplace la demande vers la gauche",
+    "Déplace l'offre vers la droite",
+    "N'a pas d'effet",
+    "Déplace l'offre vers la gauche"
+   ],
+   "answer": 1,
+   "explanation": "Les vendeurs offrent davantage à chaque prix.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Le prix passe de 200 à 250 FCFA (+25 %) et la quantité demandée de 400 à 300 (−25 %). Calcule E_p.",
+   "explanation": "ΔP/P = +25 % ; ΔQ/Q = −25 % ; E_p = −0,25/0,25 = −1 : élasticité unitaire.",
+   "method": "Variations relatives puis rapport.",
+   "source": "Exercice original",
+   "answer": -1.0,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Une élasticité-prix de −2,5 signifie que la demande est :",
+   "explanation": "|−2,5| > 1 : la quantité varie plus que proportionnellement.",
+   "method": "Comparer |E| à 1.",
+   "source": "Exercice original",
+   "choices": [
+    "Parfaitement inélastique",
+    "Élastique",
+    "Unitaire",
+    "Inélastique"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Si la demande est inélastique, une hausse du prix augmente la recette totale.",
+   "explanation": "Quand |E_p| < 1, la baisse de quantité (en %) est plus faible que la hausse de prix (en %) : la recette augmente.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Demande Q_d = 120 − 3P. Calcule l'élasticité-prix au point P = 10 (arrondi à 0,01).",
+   "explanation": "Q = 120 − 30 = 90 ; E_p = −3 × 10/90 = −0,33.",
+   "method": "E_p = −b × P/Q avec Q calculée au prix donné.",
+   "mistakes": [
+    "Utiliser Q = 120 sans tenir compte du prix."
+   ],
+   "source": "Exercice original",
+   "answer": -0.333333333,
+   "tolerance": 0.01
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Une élasticité-revenu de −0,4 indique un bien :",
+   "explanation": "E_R < 0 : la demande diminue quand le revenu augmente : bien inférieur.",
+   "method": "Signe de E_R puis comparaison à 1.",
+   "mistakes": [
+    "Confondre bien inférieur et bien de mauvaise qualité : c'est un comportement de demande."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Supérieur (de luxe)",
+    "Complémentaire",
+    "De première nécessité",
+    "Inférieur"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Un commerçant dont la demande est élastique envisage d'augmenter ses prix de 10 %. Que prévois-tu pour sa recette ? Justifie sans calcul précis.",
+   "explanation": "Recette = P × Q ; avec |E| > 1, Q baisse proportionnellement davantage que P ne monte.",
+   "method": "Recette = P × Q ; comparer les variations relatives.",
+   "source": "Exercice original",
+   "model": "Si la demande est élastique (|E_p| > 1), la quantité vendue baisse de plus de 10 %. La hausse de 10 % du prix ne compense pas la perte de ventes : la recette diminue. Il a intérêt à baisser le prix ou à ne pas l'augmenter.",
+   "rubric": [
+    "Utilise |E_p| > 1",
+    "Compare variation du prix et des quantités",
+    "Conclusion : recette en baisse"
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Un grossiste vend de l'huile. À 800 FCFA le litre, il vend 500 litres par semaine ; à 1 000 FCFA le litre, il en vend 350.",
+   "method": "Variations relatives, E_p, recette avant/après, cohérence entre |E_p| et variation de recette.",
+   "mistakes": [
+    "Calculer une élasticité avec des variations absolues.",
+    "Oublier le signe négatif."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-microeconomie-elasticites-07-a",
+     "points": 1,
+     "prompt": "Variation relative du prix, en pourcentage ?",
+     "explanation": "(1000 − 800)/800 = 0,25 = +25 %.",
+     "kind": "numeric",
+     "answer": 25.0,
+     "tolerance": 0,
+     "unit": "%"
+    },
+    {
+     "id": "sup-l1-microeconomie-elasticites-07-b",
+     "points": 1,
+     "prompt": "Élasticité-prix (arrondi à 0,1) ?",
+     "explanation": "ΔQ/Q = (350 − 500)/500 = −0,30 ; E_p = −0,30/0,25 = −1,20 ≈ −1,2.",
+     "kind": "numeric",
+     "answer": -1.2,
+     "tolerance": 0.05
+    },
+    {
+     "id": "sup-l1-microeconomie-elasticites-07-c",
+     "points": 1,
+     "prompt": "Variation de la recette (nouvelle − ancienne), en FCFA ?",
+     "explanation": "Avant : 800×500 = 400 000 ; après : 1000×350 = 350 000 ; différence = −50 000.",
+     "kind": "numeric",
+     "answer": -50000.0,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l1-microeconomie-elasticites-07-d",
+     "points": 1,
+     "prompt": "Que dire de la demande sur cet intervalle ?",
+     "explanation": "|E_p| ≈ 1,2 > 1 : demande élastique ; la recette baisse (cohérent avec le calcul).",
+     "kind": "mcq",
+     "choices": [
+      "Inélastique, donc la recette augmente",
+      "Unitaire",
+      "Parfaitement inélastique",
+      "Élastique, donc la recette diminue"
+     ],
+     "answer": 3
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "L'élasticité-prix de la demande est le rapport entre :",
+   "choices": [
+    "ΔQ et ΔP",
+    "Le prix et la quantité",
+    "La recette et le prix",
+    "La variation relative de Q et la variation relative de P"
+   ],
+   "answer": 3,
+   "explanation": "Rapport de variations relatives.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Si |E_p| < 1 et que le prix baisse, la recette :",
+   "choices": [
+    "Diminue",
+    "Reste identique",
+    "Devient nulle",
+    "Augmente"
+   ],
+   "answer": 0,
+   "explanation": "Demande inélastique : baisse de prix ⇒ recette en baisse.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Un bien dont la demande baisse quand le revenu augmente est :",
+   "choices": [
+    "De luxe",
+    "Normal",
+    "Parfaitement élastique",
+    "Inférieur"
+   ],
+   "answer": 3,
+   "explanation": "E_R < 0.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Pour Q_d = 100 − 2P, l'élasticité au point P = 25 vaut :",
+   "choices": [
+    "−25",
+    "−2",
+    "−1",
+    "−0,5"
+   ],
+   "answer": 2,
+   "explanation": "Q = 50 ; E = −2 × 25/50 = −1.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-microeconomie-elasticites-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-elasticites",
+   "prompt": "Une demande parfaitement inélastique est représentée par une courbe :",
+   "choices": [
+    "Horizontale",
+    "Parabolique",
+    "Croissante",
+    "Verticale"
+   ],
+   "answer": 3,
+   "explanation": "La quantité ne dépend pas du prix.",
+   "review": true
+  }
+ ]
+}

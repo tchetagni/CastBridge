@@ -1,0 +1,562 @@
+{
+ "chapter": "sup-l1-comptabilite-generale-cadre",
+ "lessons": [
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat",
+   "title": "Cadre comptable, bilan et compte de résultat",
+   "minutes": 50,
+   "programRef": "L1 — Comptabilité générale : cadre, bilan, compte de résultat (SYSCOHADA révisé, termes généraux) (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer le rôle de la comptabilité générale et citer les grands principes comptables en termes généraux.",
+    "Construire un bilan (actif, passif) et vérifier l'égalité des totaux.",
+    "Calculer le résultat à partir des charges et des produits ; calculer une marge commerciale.",
+    "Distinguer les éléments du bilan (patrimoine) et ceux du compte de résultat (flux de l'exercice)."
+   ],
+   "exercises": [
+    "sup-l1-comptabilite-generale-bilan-resultat-01",
+    "sup-l1-comptabilite-generale-bilan-resultat-02",
+    "sup-l1-comptabilite-generale-bilan-resultat-03",
+    "sup-l1-comptabilite-generale-bilan-resultat-04",
+    "sup-l1-comptabilite-generale-bilan-resultat-05",
+    "sup-l1-comptabilite-generale-bilan-resultat-06",
+    "sup-l1-comptabilite-generale-bilan-resultat-07"
+   ],
+   "selfCheck": [
+    "sup-l1-comptabilite-generale-bilan-resultat-q1",
+    "sup-l1-comptabilite-generale-bilan-resultat-q2",
+    "sup-l1-comptabilite-generale-bilan-resultat-q3",
+    "sup-l1-comptabilite-generale-bilan-resultat-q4",
+    "sup-l1-comptabilite-generale-bilan-resultat-q5"
+   ],
+   "reviewNotes": [
+    "Cadre normatif : la comptabilité des entreprises de la zone OHADA est encadrée par l'Acte uniforme relatif au droit comptable et à l'information financière et par le SYSCOHADA révisé. Seule la présentation générale est donnée, sans numéro d'article ni de compte ; à faire relire par un enseignant de comptabilité.",
+    "Principes comptables : formulation courante (continuité, prudence, permanence des méthodes, indépendance des exercices, coût historique, image fidèle) ; vérifier la liste retenue dans le cours.",
+    "Chiffres fictifs ; présentation simplifiée du bilan (sans sous-totaux normalisés)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La comptabilité générale",
+     "md": "La **comptabilité générale** enregistre de façon chronologique, complète et justifiée (pièces comptables : factures, reçus, relevés) toutes les opérations d'une entité qui ont une traduction monétaire. Elle produit des états de synthèse destinés au dirigeant, aux associés, aux banques, à l'administration fiscale."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Cadre normatif (termes généraux)",
+     "md": "Dans les pays membres de l'OHADA (dont le Cameroun), la comptabilité des entreprises est organisée par l'**Acte uniforme OHADA relatif au droit comptable et à l'information financière** et par le plan comptable du **SYSCOHADA révisé**. Il fixe les règles de tenue des comptes, la présentation des états financiers et la terminologie.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Principes comptables (en termes généraux)",
+     "md": "Les comptes sont établis selon quelques principes largement admis :\n- **continuité d'exploitation** : l'entité est supposée poursuivre son activité ;\n- **prudence** : on ne comptabilise pas de profit incertain, mais on tient compte des pertes probables ;\n- **permanence des méthodes** : mêmes règles d'un exercice à l'autre ;\n- **indépendance des exercices** : les charges et produits sont rattachés à l'exercice qui les concerne ;\n- **coût historique** : évaluation à la valeur d'entrée ;\n- **image fidèle** : les comptes doivent refléter la situation réelle.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le bilan",
+     "md": "Le **bilan** est une photographie du patrimoine à une date. Il liste à gauche l'**actif** (ce que l'entité possède : immobilisations, stocks, créances, trésorerie) et à droite le **passif** (d'où viennent les ressources : capitaux propres et dettes). Il est **toujours équilibré** :",
+     "tex": "\\text{Actif} = \\text{Passif} = \\text{Capitaux propres} + \\text{Dettes}"
+    },
+    {
+     "type": "text",
+     "md": "Le **capital** est l'apport des associés ; il est augmenté des résultats non distribués et réduit des pertes. Les **dettes** regroupent les emprunts, les dettes envers les fournisseurs et les autres tiers. À l'actif, l'**actif immobilisé** (usage durable : matériel, bâtiments), l'**actif circulant** (stocks, créances clients) et la **trésorerie** (banque, caisse)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 190,
+        "h": 230,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 20,
+        "w": 190,
+        "h": 230,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 44,
+        "text": "ACTIF",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 44,
+        "text": "PASSIF",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 76,
+        "text": "Matériel : 2400 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 104,
+        "text": "Marchandises (stock) : 1500 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 132,
+        "text": "Clients : 600 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 160,
+        "text": "Banque : 900 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 188,
+        "text": "Caisse : 100 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 76,
+        "text": "Capital : 4000 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 104,
+        "text": "Emprunt bancaire : 1000 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 132,
+        "text": "Fournisseurs : 500 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 236,
+        "text": "Total : 5500 k",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 236,
+        "text": "Total : 5500 k",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Bilan de l'exemple 1 (montants en milliers de FCFA).",
+     "alt": "Deux colonnes : l'actif à gauche (matériel 2 400, marchandises 1 500, clients 600, banque 900, caisse 100) et le passif à droite (capital 4 000, emprunt 1 000, fournisseurs 500). Le total est de 5 500 de chaque côté."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — dresser un bilan",
+     "statement": "Une boutique fictive de Douala possède au 31 décembre : matériel 2 400 000 ; marchandises en stock 1 500 000 ; créances sur clients 600 000 ; solde en banque 900 000 ; caisse 100 000. Elle doit 500 000 à ses fournisseurs et 1 000 000 à une banque (emprunt). Quel est son capital (ses capitaux propres) ?",
+     "steps": [
+      {
+       "md": "Total de l'actif = 2 400 000 + 1 500 000 + 600 000 + 900 000 + 100 000 = 5 500 000."
+      },
+      {
+       "md": "Dettes = 1 000 000 + 500 000 = 1 500 000."
+      },
+      {
+       "md": "Capitaux propres = Actif − Dettes = 5 500 000 − 1 500 000 = 4 000 000.",
+       "tex": "\\text{Capitaux propres} = 5500000 - 1\\,500\\,000 = 4000000"
+      },
+      {
+       "md": "Bilan équilibré : passif = 4 000 000 + 1 500 000 = 5 500 000."
+      }
+     ],
+     "answer": "**Capitaux propres : 4 000 000 FCFA ; total du bilan : 5 500 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le compte de résultat",
+     "md": "Le **compte de résultat** récapitule les **charges** (consommations, salaires, loyers, dotations…) et les **produits** (ventes, prestations…) d'un **exercice** (en général une année). Sa différence est le **résultat** : un **bénéfice** si produits > charges, une **perte** sinon.",
+     "tex": "\\text{Résultat} = \\text{Produits} - \\text{Charges}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Marge commerciale",
+     "md": "Pour une entreprise commerciale, la **marge commerciale** est la différence entre les ventes de marchandises et le **coût d'achat des marchandises vendues** :",
+     "tex": "\\text{Marge commerciale} = \\text{Ventes de marchandises} - \\text{Coût d'achat des marchandises vendues}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 440,
+      "h": 250,
+      "bars": [
+       {
+        "label": "Ventes",
+        "value": 9000,
+        "color": "green"
+       },
+       {
+        "label": "Coût d'achat",
+        "value": 5400,
+        "color": "orange"
+       },
+       {
+        "label": "Autres charges",
+        "value": 2300,
+        "color": "red"
+       },
+       {
+        "label": "Résultat",
+        "value": 1300,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Du chiffre d'affaires au résultat (exemple 2, en milliers de FCFA).",
+     "alt": "Quatre barres : ventes 9 000, coût d'achat des marchandises vendues 5 400, autres charges 2 300 et résultat 1 300."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — résultat d'un exercice",
+     "statement": "Pour l'exercice : ventes de marchandises 9 000 000 ; coût d'achat des marchandises vendues 5 400 000 ; loyers 600 000 ; salaires 1 200 000 ; transports 200 000 ; charges diverses 300 000. Calcule la marge commerciale et le résultat.",
+     "steps": [
+      {
+       "md": "Marge commerciale = 9 000 000 − 5 400 000 = 3 600 000."
+      },
+      {
+       "md": "Autres charges = 600 000 + 1 200 000 + 200 000 + 300 000 = 2 300 000."
+      },
+      {
+       "md": "Résultat = marge − autres charges = 3 600 000 − 2 300 000 = 1 300 000 : bénéfice.",
+       "tex": "3600000 - 2300000 = 1300000"
+      }
+     ],
+     "answer": "**Marge commerciale : 3 600 000 ; résultat : bénéfice de 1 300 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **résultat** (flux de l'exercice) et **trésorerie** (solde en banque et en caisse) : un bénéfice n'est pas de l'argent disponible.\n- Mettre une **dette** à l'actif ou une **créance** au passif.\n- Inclure un **apport en capital** parmi les produits : c'est une ressource, non un produit.\n- Compter l'**achat d'un matériel** comme une charge de l'exercice : c'est une immobilisation (au bilan)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les **soldes intermédiaires de gestion** (marge commerciale, valeur ajoutée, excédent brut d'exploitation) décomposent la formation du résultat.",
+      "Les **états financiers** comprennent aussi un tableau des flux de trésorerie et des notes annexes (notions vues au niveau L2).",
+      "Une comptabilité tenue avec des **pièces justificatives** conservées permet le contrôle et la preuve."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-comptabilite-generale-bilan-resultat-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Actif total d'une entreprise : 8 000 000 FCFA ; dettes : 3 200 000 FCFA. Calcule les capitaux propres.",
+   "explanation": "Capitaux propres = actif − dettes = 8 000 000 − 3 200 000 = 4 800 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 4800000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Produits d'un exercice : 12 500 000 ; charges : 10 900 000. Calcule le résultat (positif = bénéfice).",
+   "explanation": "Résultat = produits − charges = 1 600 000 FCFA (bénéfice).",
+   "source": "Exercice original",
+   "answer": 1600000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Associe chaque élément à sa place dans les états de synthèse.",
+   "explanation": "Les stocks sont des biens possédés (actif) ; l'emprunt est une dette (passif) ; le loyer est une charge ; les ventes sont des produits.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Stock de marchandises",
+     "Actif du bilan"
+    ],
+    [
+     "Emprunt bancaire",
+     "Passif du bilan"
+    ],
+    [
+     "Loyer de l'exercice",
+     "Charge (compte de résultat)"
+    ],
+    [
+     "Ventes de l'exercice",
+     "Produit (compte de résultat)"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Une entreprise qui réalise un bénéfice a nécessairement plus d'argent en banque à la fin de l'exercice.",
+   "explanation": "Le bénéfice (produits − charges) n'est pas la variation de trésorerie : des ventes peuvent rester à encaisser, du matériel acheté, des dettes remboursées.",
+   "method": "Distinguer résultat et trésorerie.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Ventes de marchandises 4 800 000 ; coût d'achat des marchandises vendues 3 000 000. Calcule la marge commerciale.",
+   "explanation": "Marge commerciale = 4 800 000 − 3 000 000 = 1 800 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 1800000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Explique la différence entre le bilan et le compte de résultat (nature de l'information et date/période concernée).",
+   "explanation": "Le bilan est un stock, le compte de résultat un flux.",
+   "method": "Stock contre flux.",
+   "source": "Exercice original",
+   "model": "Le bilan est une photographie du patrimoine à une date donnée : ce que l'entité possède (actif) et d'où viennent ses ressources (passif). Le compte de résultat est un film de l'activité sur un exercice : il rassemble les charges et les produits et donne le résultat, qui vient ensuite modifier les capitaux propres.",
+   "rubric": [
+    "Bilan = situation à une date",
+    "Compte de résultat = flux sur une période",
+    "Lien : le résultat augmente ou diminue les capitaux propres"
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Au 31 décembre, une société fictive de Yaoundé a : terrain et bâtiment 6 000 000 ; matériel de transport 3 500 000 ; stock de marchandises 1 200 000 ; clients 800 000 ; banque 1 700 000 ; caisse 300 000. Ses dettes sont : emprunt 2 500 000 et fournisseurs 1 500 000. Au cours de l'exercice : ventes de marchandises 15 000 000 ; coût d'achat des marchandises vendues 9 000 000 ; autres charges 4 200 000.",
+   "method": "Totaliser l'actif, déduire les dettes, puis calculer marge et résultat.",
+   "mistakes": [
+    "Compter les dettes dans l'actif.",
+    "Oublier les autres charges."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-comptabilite-generale-bilan-resultat-07-a",
+     "points": 1,
+     "prompt": "Total de l'actif ?",
+     "explanation": "6 000 000 + 3 500 000 + 1 200 000 + 800 000 + 1 700 000 + 300 000 = 13 500 000.",
+     "kind": "numeric",
+     "answer": 13500000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-bilan-resultat-07-b",
+     "points": 1,
+     "prompt": "Capitaux propres ?",
+     "explanation": "Actif − dettes = 13 500 000 − 4 000 000 = 9 500 000.",
+     "kind": "numeric",
+     "answer": 9500000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-bilan-resultat-07-c",
+     "points": 1,
+     "prompt": "Marge commerciale ?",
+     "explanation": "15 000 000 − 9 000 000 = 6 000 000.",
+     "kind": "numeric",
+     "answer": 6000000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-bilan-resultat-07-d",
+     "points": 1,
+     "prompt": "Résultat de l'exercice ?",
+     "explanation": "6 000 000 − 4 200 000 = 1 800 000 : bénéfice.",
+     "kind": "numeric",
+     "answer": 1800000.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Le bilan est :",
+   "choices": [
+    "Le budget de l'année suivante",
+    "La liste des clients",
+    "Un flux sur une période",
+    "Une photographie du patrimoine à une date"
+   ],
+   "answer": 3,
+   "explanation": "Situation à une date donnée.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Capitaux propres =",
+   "choices": [
+    "Actif − dettes",
+    "Actif + dettes",
+    "Produits − charges",
+    "Dettes − actif"
+   ],
+   "answer": 0,
+   "explanation": "Actif = capitaux propres + dettes.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Le principe de prudence conduit à :",
+   "choices": [
+    "Ne pas comptabiliser de profit incertain mais tenir compte des pertes probables",
+    "Évaluer les stocks à la valeur marchande uniquement",
+    "Ne rien enregistrer",
+    "Cacher les pertes"
+   ],
+   "answer": 0,
+   "explanation": "Formulation courante du principe.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Un loyer payé pour l'exercice est :",
+   "choices": [
+    "Un capital",
+    "Une charge",
+    "Un produit",
+    "Un actif immobilisé"
+   ],
+   "answer": 1,
+   "explanation": "C'est une consommation de l'exercice.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-bilan-resultat-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-bilan-resultat",
+   "prompt": "Résultat = ",
+   "choices": [
+    "Charges − produits",
+    "Actif − passif",
+    "Produits − charges",
+    "Ventes + achats"
+   ],
+   "answer": 2,
+   "explanation": "Bénéfice si positif.",
+   "review": true
+  }
+ ]
+}

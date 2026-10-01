@@ -1,0 +1,781 @@
+{
+ "chapter": "etp-maths-techniques-1re-algebre",
+ "lessons": [
+  {
+   "id": "etp-maths-techniques-1re-second-degre",
+   "title": "Équations et trinômes du second degré",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître un trinôme du second degré et calculer son discriminant.",
+    "Résoudre une équation ax² + bx + c = 0 selon le signe de Δ.",
+    "Factoriser un trinôme et étudier son signe.",
+    "Mettre un problème concret en équation du second degré."
+   ],
+   "exercises": [
+    "etp-maths-techniques-1re-second-degre-01",
+    "etp-maths-techniques-1re-second-degre-02",
+    "etp-maths-techniques-1re-second-degre-03",
+    "etp-maths-techniques-1re-second-degre-04",
+    "etp-maths-techniques-1re-second-degre-05",
+    "etp-maths-techniques-1re-second-degre-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-1re-second-degre-q1",
+    "etp-maths-techniques-1re-second-degre-q2",
+    "etp-maths-techniques-1re-second-degre-q3",
+    "etp-maths-techniques-1re-second-degre-q4",
+    "etp-maths-techniques-1re-second-degre-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la cohérence des valeurs numériques des exercices (tous recalculés par script)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trinôme du second degré",
+     "md": "Un **trinôme du second degré** est une expression $ax^2 + bx + c$ avec $a \\neq 0$. Résoudre $ax^2 + bx + c = 0$ consiste à trouver ses **racines** (les valeurs de $x$ qui l'annulent). On calcule d'abord le **discriminant** :",
+     "tex": "\\Delta = b^2 - 4ac"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Résolution selon le signe de Δ",
+     "md": "- Si $\\Delta > 0$ : **deux racines** distinctes $x_1 = \\dfrac{-b - \\sqrt{\\Delta}}{2a}$ et $x_2 = \\dfrac{-b + \\sqrt{\\Delta}}{2a}$.\n- Si $\\Delta = 0$ : **une racine double** $x_0 = \\dfrac{-b}{2a}$.\n- Si $\\Delta < 0$ : **aucune racine réelle**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Factorisation et signe",
+     "md": "Si $\\Delta > 0$ : $ax^2+bx+c = a(x - x_1)(x - x_2)$. Le trinôme a le **signe de $a$ à l'extérieur des racines** et le signe contraire entre elles. Si $\\Delta < 0$, il a le signe de $a$ partout."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 260,
+      "xmin": -1,
+      "xmax": 6,
+      "ymin": -2,
+      "ymax": 8,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^2-5*x+6",
+        "color": "blue",
+        "label": "y = x²-5x+6"
+       }
+      ],
+      "points": [
+       {
+        "x": 2,
+        "y": 0,
+        "label": "2",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "La parabole y = x² − 5x + 6 coupe l'axe des abscisses en 2 et 3.",
+     "alt": "Une parabole tournée vers le haut qui coupe l'axe horizontal aux points d'abscisses 2 et 3 (les racines). Elle est sous l'axe entre 2 et 3 et au-dessus à l'extérieur."
+    },
+    {
+     "type": "example",
+     "title": "Deux racines",
+     "statement": "Résoudre $x^2 - 5x + 6 = 0$.",
+     "steps": [
+      {
+       "md": "Coefficients : $a = 1$, $b = -5$, $c = 6$. Discriminant :",
+       "tex": "\\Delta = (-5)^2 - 4 \\times 1 \\times 6 = 25 - 24 = 1"
+      },
+      {
+       "md": "$\\Delta > 0$ : deux racines, $\\sqrt{\\Delta} = 1$.",
+       "tex": "x_1 = \\frac{5 - 1}{2} = 2 \\;;\\; x_2 = \\frac{5 + 1}{2} = 3"
+      },
+      {
+       "md": "Vérification : $2 + 3 = 5 = -b/a$ et $2 \\times 3 = 6 = c/a$."
+      }
+     ],
+     "answer": "**S = {2 ; 3}.**"
+    },
+    {
+     "type": "example",
+     "title": "Racine double",
+     "statement": "Résoudre $x^2 - 6x + 9 = 0$.",
+     "steps": [
+      {
+       "md": "Discriminant :",
+       "tex": "\\Delta = 36 - 36 = 0"
+      },
+      {
+       "md": "$\\Delta = 0$ : racine double.",
+       "tex": "x_0 = \\frac{6}{2} = 3"
+      }
+     ],
+     "answer": "**S = {3}** (on reconnaît $(x-3)^2$)."
+    },
+    {
+     "type": "example",
+     "title": "Aucune racine",
+     "statement": "Résoudre $x^2 + x + 1 = 0$.",
+     "steps": [
+      {
+       "md": "Discriminant :",
+       "tex": "\\Delta = 1 - 4 = -3"
+      },
+      {
+       "md": "$\\Delta < 0$ : on ne peut pas extraire la racine carrée d'un nombre négatif dans $\\mathbb{R}$."
+      }
+     ],
+     "answer": "**Aucune solution réelle.**"
+    },
+    {
+     "type": "example",
+     "title": "Problème : un champ",
+     "statement": "Un champ rectangulaire a un périmètre de 28 m et une aire de 40 m². Quelles sont ses dimensions ?",
+     "steps": [
+      {
+       "md": "Soit $x$ la longueur ; la largeur est $14 - x$ (demi-périmètre 14). Aire :",
+       "tex": "x(14 - x) = 40 \\Rightarrow x^2 - 14x + 40 = 0"
+      },
+      {
+       "md": "Discriminant :",
+       "tex": "\\Delta = 196 - 160 = 36"
+      },
+      {
+       "md": "Racines : $\\sqrt{36} = 6$.",
+       "tex": "x = \\frac{14 \\pm 6}{2} \\Rightarrow 4 \\text{ ou } 10"
+      }
+     ],
+     "answer": "**4 m sur 10 m** (les deux racines donnent le même rectangle)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Se tromper de signe : si $b = -5$, alors $-b = +5$ et $b^2 = 25$ (pas −25).\n- Oublier le $2a$ au dénominateur, ou ne diviser que $\\sqrt{\\Delta}$ par $2a$.\n- Oublier de mettre sous la forme $ax^2+bx+c = 0$ (tout d'un côté) avant de lire $a$, $b$, $c$.\n- Conclure « pas de solution » quand $\\Delta < 0$ sans préciser « dans $\\mathbb{R}$ »."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Somme et produit des racines : $x_1 + x_2 = -b/a$ et $x_1 x_2 = c/a$ — utile pour vérifier ses résultats.",
+      "La forme canonique $a(x-\\alpha)^2 + \\beta$ donne le sommet de la parabole : $\\alpha = -b/(2a)$."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-1re-second-degre-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions",
+   "title": "Fonctions et variations simples",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une image et chercher un antécédent.",
+    "Étudier une fonction affine (pente, ordonnée à l'origine, variation).",
+    "Déterminer les variations d'une fonction du second degré à l'aide de son sommet.",
+    "Lire un graphique et modéliser un coût ou un bénéfice."
+   ],
+   "prerequisites": [
+    "etp-maths-techniques-1re-second-degre"
+   ],
+   "exercises": [
+    "etp-maths-techniques-1re-fonctions-01",
+    "etp-maths-techniques-1re-fonctions-02",
+    "etp-maths-techniques-1re-fonctions-03",
+    "etp-maths-techniques-1re-fonctions-04",
+    "etp-maths-techniques-1re-fonctions-05",
+    "etp-maths-techniques-1re-fonctions-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-1re-fonctions-q1",
+    "etp-maths-techniques-1re-fonctions-q2",
+    "etp-maths-techniques-1re-fonctions-q3",
+    "etp-maths-techniques-1re-fonctions-q4",
+    "etp-maths-techniques-1re-fonctions-q5"
+   ],
+   "reviewNotes": [
+    "Montants fictifs (FCFA) dans les exercices de coût et de bénéfice."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonction, image, antécédent",
+     "md": "Une **fonction** $f$ associe à chaque nombre $x$ d'un ensemble de définition **un seul** nombre $f(x)$, appelé son **image**. Si $f(a) = b$, alors $a$ est **un antécédent** de $b$. Sa représentation graphique est l'ensemble des points $(x\\,;\\,f(x))$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Sens de variation",
+     "md": "$f$ est **croissante** sur un intervalle si, quand $x$ augmente, $f(x)$ augmente ; **décroissante** si $f(x)$ diminue. On résume dans un **tableau de variation** (flèches ↗ ou ↘)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Fonction affine",
+     "md": "$f(x) = mx + p$ : le graphique est une **droite** de pente $m$ et d'ordonnée à l'origine $p$. Si $m > 0$, $f$ est croissante ; si $m < 0$, décroissante ; si $m = 0$, constante. La racine est $x = -p/m$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Fonction du second degré",
+     "md": "$f(x) = ax^2 + bx + c$ : le graphique est une **parabole** de sommet d'abscisse $\\alpha = -b/(2a)$. Si $a > 0$ : décroissante puis croissante (minimum au sommet). Si $a < 0$ : croissante puis décroissante (maximum)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 260,
+      "xmin": -1,
+      "xmax": 5,
+      "ymin": -4,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^2-4*x+1",
+        "color": "blue",
+        "label": "h(x)"
+       },
+       {
+        "expr": "-2*x+5",
+        "color": "red",
+        "label": "g(x)"
+       }
+      ],
+      "points": [
+       {
+        "x": 2,
+        "y": -3,
+        "label": "sommet",
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Parabole h(x) = x² − 4x + 1 (sommet en (2 ; −3)) et droite g(x) = −2x + 5.",
+     "alt": "Une parabole bleue tournée vers le haut dont le point le plus bas est (2 ; -3), et une droite rouge décroissante qui coupe l'axe vertical en 5."
+    },
+    {
+     "type": "example",
+     "title": "Image et antécédent",
+     "statement": "Soit $f(x) = 3x - 2$. Calculer $f(4)$ et l'antécédent de 7.",
+     "steps": [
+      {
+       "md": "Image de 4.",
+       "tex": "f(4) = 3 \\times 4 - 2 = 10"
+      },
+      {
+       "md": "Antécédent de 7 : on résout $3x - 2 = 7$.",
+       "tex": "3x = 9 \\Rightarrow x = 3"
+      }
+     ],
+     "answer": "**f(4) = 10 ; l'antécédent de 7 est 3.**"
+    },
+    {
+     "type": "example",
+     "title": "Variation d'une affine",
+     "statement": "Étudier $g(x) = -2x + 5$ : sens de variation et racine.",
+     "steps": [
+      {
+       "md": "Pente $m = -2 < 0$ : $g$ est décroissante."
+      },
+      {
+       "md": "Racine : $-2x + 5 = 0$.",
+       "tex": "x = \\frac{5}{2} = 2,5"
+      }
+     ],
+     "answer": "**g décroissante ; g(x) = 0 pour x = 2,5.**"
+    },
+    {
+     "type": "example",
+     "title": "Variation d'une parabole",
+     "statement": "Étudier $h(x) = x^2 - 4x + 1$.",
+     "steps": [
+      {
+       "md": "$a = 1 > 0$ : minimum au sommet. Abscisse :",
+       "tex": "\\alpha = \\frac{-(-4)}{2 \\times 1} = 2"
+      },
+      {
+       "md": "Ordonnée du sommet : $h(2) = 4 - 8 + 1$.",
+       "tex": "h(2) = -3"
+      },
+      {
+       "md": "Tableau : décroissante sur $]-\\infty\\,;\\,2]$, croissante sur $[2\\,;\\,+\\infty[$, minimum $-3$."
+      }
+     ],
+     "answer": "**Minimum -3 atteint en x = 2.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre image (on remplace $x$) et antécédent (on résout une équation).\n- Écrire que $f$ est croissante parce que $f(x)$ est positive : ce sont deux notions différentes.\n- Oublier que le sommet d'une parabole est à $x = -b/(2a)$ et non $b/(2a)$.\n- Lire une ordonnée à l'origine comme une racine."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une fonction peut ne pas être définie partout : $1/x$ n'existe pas en 0, $\\sqrt{x}$ n'existe pas pour $x < 0$.",
+      "Les variations se justifient aussi par le signe de la dérivée (voir la classe de terminale)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-1re-fonctions-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-maths-techniques-1re-second-degre-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "Calculer le discriminant de $2x^2 - 3x - 5$.",
+   "explanation": "$\\Delta = (-3)^2 - 4 \\times 2 \\times (-5) = 9 + 40 = 49$.",
+   "mistakes": [
+    "Oublier que −4ac devient +40 quand c est négatif."
+   ],
+   "source": "Exercice original",
+   "answer": 49,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "Donner la plus petite racine de $x^2 - 7x + 10 = 0$.",
+   "explanation": "$\\Delta = 49 - 40 = 9$ ; $x = (7 \\pm 3)/2$ : 2 et 5. La plus petite est 2.",
+   "source": "Exercice original",
+   "answer": 2,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "Si $\\Delta < 0$, l'équation du second degré :",
+   "explanation": "Pas de racine réelle quand le discriminant est négatif.",
+   "source": "Exercice original",
+   "choices": [
+    "a deux racines réelles",
+    "a une racine double",
+    "n'a pas de racine réelle",
+    "a toujours x = 0 pour solution"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "Résoudre $4x^2 - 12x + 9 = 0$ (donner la racine).",
+   "explanation": "$\\Delta = 144 - 144 = 0$ ; racine double $x = 12/8 = 1{,}5$.",
+   "source": "Exercice original",
+   "answer": 1.5,
+   "tolerance": 0.001
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "Quel est le signe de $x^2 - 5x + 6$ pour $x = 2{,}5$ ?",
+   "explanation": "2,5 est entre les racines 2 et 3 : signe contraire à $a = 1 > 0$, donc négatif. Vérification : $6{,}25 - 12{,}5 + 6 = -0{,}25$.",
+   "source": "Exercice original",
+   "choices": [
+    "Positif",
+    "Négatif",
+    "Nul",
+    "On ne peut pas savoir"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "Un terrain rectangulaire a un périmètre de 36 m. On cherche ses dimensions pour une aire de 80 m².",
+   "method": "Poser l'inconnue, écrire l'équation, calculer Δ, résoudre, interpréter.",
+   "mistakes": [
+    "Oublier que la largeur est 18 − x et non 36 − x."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-1re-second-degre-06-a",
+     "points": 1,
+     "prompt": "Si $x$ est la longueur, quelle équation traduit l'aire de 80 m² ?",
+     "explanation": "Largeur = 18 − x ; aire : x(18 − x) = 80, soit x² − 18x + 80 = 0.",
+     "kind": "mcq",
+     "choices": [
+      "x² − 18x + 80 = 0",
+      "x² + 18x − 80 = 0",
+      "x² − 36x + 80 = 0",
+      "x² − 9x + 80 = 0"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-maths-techniques-1re-second-degre-06-b",
+     "points": 1,
+     "prompt": "Calculer le discriminant.",
+     "explanation": "$\\Delta = 324 - 320 = 4$.",
+     "kind": "numeric",
+     "answer": 4.0,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-maths-techniques-1re-second-degre-06-c",
+     "points": 1,
+     "prompt": "Quelle est la plus grande dimension (m) ?",
+     "explanation": "$x = (18 \\pm 2)/2$ : 8 ou 10. La plus grande dimension est 10 m.",
+     "kind": "numeric",
+     "answer": 10.0,
+     "tolerance": 0,
+     "unit": "m"
+    },
+    {
+     "id": "etp-maths-techniques-1re-second-degre-06-d",
+     "points": 1,
+     "prompt": "On peut obtenir une aire de 85 m² avec ce même périmètre.",
+     "explanation": "$x^2 - 18x + 85 = 0$ a $\\Delta = 324 - 340 = -16 < 0$ : aucune solution. (L'aire maximale est 81 m², pour un carré de 9 m.)",
+     "kind": "truefalse",
+     "answer": false
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "Pour $x^2 - 4 = 0$, les solutions sont :",
+   "choices": [
+    "4 seulement",
+    "2 seulement",
+    "−2 et 2",
+    "aucune"
+   ],
+   "answer": 2,
+   "explanation": "$x^2 = 4$ donne $x = \\pm 2$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "Pour $ax^2+bx+c$, $\\Delta$ vaut :",
+   "choices": [
+    "b² − 4ac",
+    "b² + 4ac",
+    "4ac − b²",
+    "a² − 4bc"
+   ],
+   "answer": 0,
+   "explanation": "Formule du discriminant."
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "$\\Delta = 0$ entraîne :",
+   "choices": [
+    "deux racines",
+    "aucune racine",
+    "une racine double",
+    "x = 0"
+   ],
+   "answer": 2,
+   "explanation": "Une racine double $-b/(2a)$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "La somme des racines de $x^2 - 7x + 10$ est :",
+   "choices": [
+    "−7",
+    "10",
+    "7",
+    "−10"
+   ],
+   "answer": 2,
+   "explanation": "$-b/a = 7$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-second-degre-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-second-degre",
+   "prompt": "Pour $a > 0$ et $\\Delta < 0$, le trinôme est :",
+   "choices": [
+    "toujours négatif",
+    "toujours positif",
+    "nul",
+    "de signe variable"
+   ],
+   "answer": 1,
+   "explanation": "Signe de $a$ partout."
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "Soit $f(x) = 5x + 3$. Calculer $f(-2)$.",
+   "explanation": "$f(-2) = 5 \\times (-2) + 3 = -10 + 3 = -7$.",
+   "source": "Exercice original",
+   "answer": -7,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "La fonction $f(x) = -4x + 1$ est :",
+   "explanation": "Pente −4 < 0 : décroissante.",
+   "source": "Exercice original",
+   "choices": [
+    "croissante",
+    "décroissante",
+    "constante",
+    "du second degré"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "Trouver l'antécédent de 11 par $f(x) = 2x + 5$.",
+   "explanation": "$2x + 5 = 11$ donc $2x = 6$ et $x = 3$.",
+   "source": "Exercice original",
+   "answer": 3,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "Quelle est l'abscisse du sommet de $f(x) = 2x^2 - 8x + 3$ ?",
+   "explanation": "$\\alpha = -b/(2a) = 8/4 = 2$.",
+   "source": "Exercice original",
+   "answer": 2.0,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "Le minimum de $x^2 - 6x + 10$ vaut 1.",
+   "explanation": "Sommet en $x = 3$ ; $f(3) = 9 - 18 + 10 = 1$ ; comme $a > 0$, c'est un minimum.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "Un menuisier (entreprise fictive) fabrique des tables. Le coût de production de $x$ tables est $C(x) = 20\\,000 + 15\\,000x$ (FCFA). Il vend chaque table 25 000 FCFA : la recette est $R(x) = 25\\,000x$.",
+   "method": "Écrire chaque fonction, remplacer ou résoudre selon la question.",
+   "mistakes": [
+    "Oublier les coûts fixes (20 000) dans le bénéfice."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-1re-fonctions-06-a",
+     "points": 1,
+     "prompt": "Calculer le coût de production de 8 tables (FCFA).",
+     "explanation": "$C(8) = 20\\,000 + 15\\,000 \\times 8 = 140 000$ FCFA.",
+     "kind": "numeric",
+     "answer": 140000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-techniques-1re-fonctions-06-b",
+     "points": 1,
+     "prompt": "Le bénéfice $B(x) = R(x) - C(x)$ vaut :",
+     "explanation": "$25\\,000x - 20\\,000 - 15\\,000x = 10\\,000x - 20\\,000$.",
+     "kind": "mcq",
+     "choices": [
+      "10 000x − 20 000",
+      "40 000x + 20 000",
+      "10 000x + 20 000",
+      "−10 000x − 20 000"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-maths-techniques-1re-fonctions-06-c",
+     "points": 1,
+     "prompt": "Pour quel nombre de tables le bénéfice est-il nul (seuil de rentabilité) ?",
+     "explanation": "$10\\,000x - 20\\,000 = 0$ donc $x = 2$.",
+     "kind": "numeric",
+     "answer": 2.0,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-maths-techniques-1re-fonctions-06-d",
+     "points": 1,
+     "prompt": "Quel bénéfice pour 10 tables (FCFA) ?",
+     "explanation": "$B(10) = 100\\,000 - 20\\,000 = 80 000$ FCFA.",
+     "kind": "numeric",
+     "answer": 80000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-techniques-1re-fonctions-06-e",
+     "points": 1,
+     "prompt": "$B$ est croissante : plus on vend de tables, plus le bénéfice augmente.",
+     "explanation": "La pente $10\\,000 > 0$.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "L'image de 3 par $f(x) = x^2 - 1$ est :",
+   "choices": [
+    "8",
+    "2",
+    "5",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "$9 - 1 = 8$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "Une fonction affine de pente positive est :",
+   "choices": [
+    "décroissante",
+    "constante",
+    "croissante",
+    "non définie"
+   ],
+   "answer": 2,
+   "explanation": "Pente > 0 : croissante."
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "L'ordonnée à l'origine de $y = 3x + 7$ est :",
+   "choices": [
+    "3",
+    "−7/3",
+    "7",
+    "10"
+   ],
+   "answer": 2,
+   "explanation": "C'est $f(0) = 7$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "Une parabole avec $a < 0$ possède :",
+   "choices": [
+    "un minimum",
+    "un maximum",
+    "aucun extremum",
+    "deux sommets"
+   ],
+   "answer": 1,
+   "explanation": "Tournée vers le bas : maximum."
+  },
+  {
+   "id": "etp-maths-techniques-1re-fonctions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-fonctions",
+   "prompt": "Sommet de $x^2 + 6x$ :",
+   "choices": [
+    "x = −3",
+    "x = 3",
+    "x = 6",
+    "x = −6"
+   ],
+   "answer": 0,
+   "explanation": "$-6/2 = -3$."
+  }
+ ]
+}

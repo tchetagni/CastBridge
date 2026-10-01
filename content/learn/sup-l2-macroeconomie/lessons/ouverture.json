@@ -1,0 +1,426 @@
+{
+ "chapter": "sup-l2-macroeconomie-ouverture",
+ "lessons": [
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp",
+   "title": "Offre et demande agrégées, balance des paiements et taux de change",
+   "minutes": 55,
+   "programRef": "L2 — OA-DA (introduction), balance des paiements et taux de change (définitions) (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Interpréter les courbes d'offre et de demande agrégées et prévoir l'effet d'un choc.",
+    "Distinguer court terme et long terme dans OA-DA.",
+    "Décomposer la balance des paiements (compte courant, compte de capital, compte financier) et en lire le solde.",
+    "Calculer une variation du taux de change nominal et définir le taux de change réel."
+   ],
+   "prerequisites": [
+    "sup-l2-macroeconomie-is-lm"
+   ],
+   "exercises": [
+    "sup-l2-macroeconomie-oa-da-bp-01",
+    "sup-l2-macroeconomie-oa-da-bp-02",
+    "sup-l2-macroeconomie-oa-da-bp-03",
+    "sup-l2-macroeconomie-oa-da-bp-04",
+    "sup-l2-macroeconomie-oa-da-bp-05",
+    "sup-l2-macroeconomie-oa-da-bp-06",
+    "sup-l2-macroeconomie-oa-da-bp-07"
+   ],
+   "selfCheck": [
+    "sup-l2-macroeconomie-oa-da-bp-q1",
+    "sup-l2-macroeconomie-oa-da-bp-q2",
+    "sup-l2-macroeconomie-oa-da-bp-q3",
+    "sup-l2-macroeconomie-oa-da-bp-q4",
+    "sup-l2-macroeconomie-oa-da-bp-q5"
+   ],
+   "reviewNotes": [
+    "Introduction qualitative : les formes de OA et DA sont linéaires pour calcul ; la présentation de la balance des paiements suit le schéma général (compte courant, capital, financier) à confronter à la méthodologie du cours.",
+    "Mention du régime de change du FCFA : formulation générale, sans parité chiffrée ; à vérifier.",
+    "Aucun chiffre réel : toutes les valeurs sont fictives."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Demande agrégée (DA)",
+     "md": "La **demande agrégée** relie le niveau général des prix $P$ à la quantité totale de biens demandée $Y$. Elle est **décroissante** : quand $P$ monte, la valeur réelle de la monnaie détenue baisse (effet de richesse), les taux d'intérêt tendent à monter, et les produits nationaux deviennent plus chers à l'exportation. Elle se déplace avec $G$, $T$, $M$, la confiance, etc."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Offre agrégée (OA)",
+     "md": "L'**offre agrégée** relie $P$ à la production totale offerte. À **court terme**, les salaires et certains prix sont rigides : l'OA est **croissante**. À **long terme**, la production dépend du **potentiel** (travail, capital, technologie), pas du niveau des prix : l'OA est **verticale** au niveau $Y_p$ de production potentielle."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 440,
+      "h": 280,
+      "xmin": 500,
+      "xmax": 1500,
+      "ymin": 0,
+      "ymax": 6,
+      "grid": 250,
+      "xlabel": "production Y",
+      "ylabel": "niveau des prix P",
+      "curves": [
+       {
+        "expr": "(1200-x)/100",
+        "color": "blue",
+        "label": "DA"
+       },
+       {
+        "expr": "(x-700)/100",
+        "color": "red",
+        "label": "OA courte"
+       }
+      ],
+      "points": [
+       {
+        "x": 950,
+        "y": 2.5,
+        "label": "E0 (950 ; 2,5)",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Équilibre OA-DA de court terme.",
+     "alt": "La demande agrégée décroît et l'offre agrégée de court terme croît dans le plan production-prix. Elles se coupent au point E0 de coordonnées (950 ; 2,5)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — choc de demande",
+     "statement": "DA : Y = 1200 − 100P ; OA de court terme : Y = 700 + 100P. Calcule l'équilibre. Puis la DA se déplace à Y = 1300 − 100P (relance budgétaire) : nouvel équilibre ?",
+     "steps": [
+      {
+       "md": "Équilibre : 1200 − 100P = 700 + 100P ⇒ 500 = 200P ⇒ P = 2,5 ; Y = 1200 − 100×2,5 = 950."
+      },
+      {
+       "md": "Nouvelle DA : 1300 − 100P = 700 + 100P ⇒ P = 3 ; Y = 1000."
+      },
+      {
+       "md": "Effet : P passe de 2,5 à 3 (+20 %) et Y de 950 à 1000. Une partie de l'impulsion se traduit par des prix, une partie par de la production."
+      }
+     ],
+     "answer": "**E0 : (Y = 950, P = 2,5) ; après la relance : (Y = 1000, P = 3).**"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Chocs d'offre et long terme",
+     "md": "Un **choc d'offre défavorable** (hausse du prix de l'énergie importée) déplace l'OA vers la gauche : $P$ augmente et $Y$ diminue (**stagflation**). À long terme, avec une OA verticale, un choc de demande n'affecte que les **prix** ; la production revient à $Y_p$ quand les salaires et prix s'ajustent."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Balance des paiements",
+     "md": "La **balance des paiements** enregistre les transactions entre résidents et non-résidents sur une période. Trois grands comptes : le **compte des transactions courantes** (biens, services, revenus, transferts) ; le **compte de capital** ; le **compte financier** (investissements directs et de portefeuille, autres investissements, réserves). Par construction comptable, leur somme est **nulle** (aux erreurs et omissions près).",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — lecture d'une balance",
+     "statement": "Pays fictif : solde des biens −140, des services −60, des revenus −30, des transferts courants +90 ; compte de capital +30. En supposant erreurs et omissions nulles, quel est le solde du compte financier ?",
+     "steps": [
+      {
+       "md": "Compte courant = −140 + (−60) + (−30) + 90 = −140."
+      },
+      {
+       "md": "Somme des soldes nulle : courant + capital + financier = 0 ⇒ financier = −(−140 + 30) = 110.",
+       "tex": "\\text{financier} = -(-140 + 30) = 110"
+      },
+      {
+       "md": "Le pays est un emprunteur net : ses importations nettes de biens et services sont financées par des entrées nettes de capitaux de 110 (par exemple emprunts à l'étranger ou baisse de réserves)."
+      }
+     ],
+     "answer": "**Solde financier (entrées nettes) : +110.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Taux de change",
+     "md": "Le **taux de change nominal** est le prix d'une monnaie en unités d'une autre (par exemple le nombre de FCFA pour une unité de monnaie étrangère). Si la monnaie nationale perd de la valeur, c'est une **dépréciation** (régime flottant) ou une **dévaluation** (décision officielle en régime fixe) ; si elle en gagne, **appréciation** ou **réévaluation**. Le **taux de change réel** compare les prix : $e_r = e \\times \\frac{P^*}{P}$ (avec $e$ en monnaie nationale par unité étrangère)."
+    },
+    {
+     "type": "text",
+     "md": "Le régime de change du FCFA est un régime de **parité fixe** adossée à une monnaie étrangère, dans le cadre d'accords monétaires régionaux : les détails relèvent du cours ; ils ne sont pas détaillés ici.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — dépréciation",
+     "statement": "Le taux de change passe de 600 à 660 FCFA pour 1 unité de monnaie étrangère (UME). Un article vaut 30 000 FCFA. Quelle variation de valeur du FCFA ? Quel prix en UME avant/après ?",
+     "steps": [
+      {
+       "md": "Le FCFA vaut 0,00167 UME avant et 0,00152 après : variation = 600/660 − 1 ≈ −9,09 %."
+      },
+      {
+       "md": "L'UME s'apprécie de 660/600 − 1 = 10 %."
+      },
+      {
+       "md": "Prix de l'article en UME : avant 30 000/600 = 50,00 ; après 30 000/660 = 45,45 : il devient moins cher pour un acheteur étranger (compétitivité-prix)."
+      }
+     ],
+     "answer": "**Dépréciation du FCFA d'environ 9,1 % ; l'article passe de 50,00 à 45,45 UME.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire qu'une hausse du taux de change « coté en FCFA par devise » est une **appréciation** du FCFA : c'est l'inverse (il faut **plus** de FCFA pour une devise).\n- Confondre **compte courant** et **balance commerciale** (qui ne retient que les biens).\n- Oublier que la balance des paiements est équilibrée **comptablement**.\n- Croire que l'OA de long terme est croissante."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une dépréciation améliore la compétitivité-prix mais renchérit les importations ; l'effet sur le solde commercial dépend des élasticités (condition de Marshall-Lerner).",
+      "La **courbe J** décrit une détérioration initiale puis une amélioration du solde commercial après une dépréciation.",
+      "Le modèle de Mundell-Fleming prolonge IS-LM à l'économie ouverte."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-macroeconomie-oa-da-bp-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "À long terme, l'offre agrégée est :",
+   "explanation": "Elle dépend du potentiel de production.",
+   "source": "Exercice original",
+   "choices": [
+    "Horizontale",
+    "Verticale au niveau potentiel",
+    "Décroissante",
+    "Croissante"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "Un choc défavorable sur le prix de l'énergie importée déplace OA :",
+   "explanation": "Les coûts augmentent : moins d'offre à chaque niveau de prix.",
+   "source": "Exercice original",
+   "choices": [
+    "Seulement la DA",
+    "Vers la gauche",
+    "Pas du tout",
+    "Vers la droite"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "Si le taux de change passe de 600 à 700 FCFA pour une devise, le FCFA s'apprécie.",
+   "explanation": "Il faut plus de FCFA pour obtenir une devise : le FCFA se déprécie.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "DA : Y = 900 − 50P ; OA : Y = 500 + 50P. Calcule le niveau d'équilibre des prix P.",
+   "explanation": "900 − 50P = 500 + 50P ⇒ 400 = 100P ⇒ P = 4.",
+   "method": "Égaliser DA et OA.",
+   "source": "Exercice original",
+   "answer": 4.0,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "Solde courant = −80 ; compte de capital = +10 ; erreurs et omissions nulles. Solde du compte financier ?",
+   "explanation": "Somme nulle : financier = −(−80 + 10) = +70.",
+   "method": "courant + capital + financier = 0.",
+   "source": "Exercice original",
+   "answer": 70.0,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "Une dépréciation de la monnaie nationale améliore-t-elle toujours le solde commercial ? Discute brièvement.",
+   "explanation": "L'effet net dépend des élasticités et de l'horizon.",
+   "method": "Distinguer effet prix et effet volume.",
+   "source": "Exercice original",
+   "model": "Pas toujours. Elle rend les exportations moins chères (hausse des volumes) mais renchérit les importations. Si les volumes réagissent peu à court terme (faibles élasticités), la facture d'importation augmente davantage que les recettes d'exportation : le solde peut se dégrader avant de s'améliorer (courbe J).",
+   "rubric": [
+    "Effet prix et effet volume",
+    "Rôle des élasticités",
+    "Conclusion nuancée (court/long terme)"
+   ]
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "Dans une économie fictive, la demande agrégée est Y = 1000 − 40P et l'offre agrégée de court terme Y = 600 + 60P.",
+   "method": "Égaliser DA et OA, puis refaire avec la nouvelle DA.",
+   "mistakes": [
+    "Se tromper de signe en passant les termes d'un côté."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-macroeconomie-oa-da-bp-07-a",
+     "points": 1,
+     "prompt": "Niveau des prix d'équilibre ?",
+     "explanation": "1000 − 40P = 600 + 60P ⇒ 400 = 100P ⇒ P = 4.",
+     "kind": "numeric",
+     "answer": 4.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-macroeconomie-oa-da-bp-07-b",
+     "points": 1,
+     "prompt": "Production d'équilibre ?",
+     "explanation": "Y = 1000 − 40×4 = 840.",
+     "kind": "numeric",
+     "answer": 840.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-macroeconomie-oa-da-bp-07-c",
+     "points": 1,
+     "prompt": "Si la DA devient Y = 1 100 − 40P, quel est le nouveau niveau des prix ?",
+     "explanation": "1 100 − 40P = 600 + 60P ⇒ 500 = 100P ⇒ P = 5.",
+     "kind": "numeric",
+     "answer": 5.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-macroeconomie-oa-da-bp-07-d",
+     "points": 1,
+     "prompt": "Cette hausse de la DA correspond à :",
+     "explanation": "La DA se déplace vers la droite : P et Y augmentent, typique d'une relance.",
+     "kind": "mcq",
+     "choices": [
+      "Une baisse de l'investissement",
+      "Une relance (budgétaire ou monétaire)",
+      "Une dépréciation de la monnaie uniquement",
+      "Un choc d'offre défavorable"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "La demande agrégée est :",
+   "choices": [
+    "Verticale",
+    "Constante",
+    "Décroissante en P",
+    "Croissante en P"
+   ],
+   "answer": 2,
+   "explanation": "Plus P est élevé, moins la demande réelle est forte.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "La stagflation associe :",
+   "choices": [
+    "Hausse de la production et baisse des prix",
+    "Baisse de la production et hausse des prix",
+    "Hausse des deux",
+    "Baisse des deux"
+   ],
+   "answer": 1,
+   "explanation": "Stagnation + inflation.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "Un solde courant négatif doit être compensé comptablement par :",
+   "choices": [
+    "Une baisse de P",
+    "Un excédent budgétaire",
+    "Un solde combiné capital et financier positif",
+    "Aucune contrepartie"
+   ],
+   "answer": 2,
+   "explanation": "La somme des comptes est nulle.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "Une dévaluation est :",
+   "choices": [
+    "Une décision officielle de baisser la valeur de la monnaie en régime fixe",
+    "Une hausse du PIB",
+    "Une taxe",
+    "Une baisse des salaires"
+   ],
+   "answer": 0,
+   "explanation": "Définition.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-oa-da-bp-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-oa-da-bp",
+   "prompt": "Si la monnaie nationale se déprécie, les exportations nationales deviennent :",
+   "choices": [
+    "Plus chères pour les étrangers",
+    "Moins chères pour les étrangers",
+    "Gratuites",
+    "Interdites"
+   ],
+   "answer": 1,
+   "explanation": "Leur prix en monnaie étrangère baisse.",
+   "review": true
+  }
+ ]
+}

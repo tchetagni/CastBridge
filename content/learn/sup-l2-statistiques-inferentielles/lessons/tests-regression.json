@@ -1,0 +1,776 @@
+{
+ "chapter": "sup-l2-statistiques-inferentielles-tests-regression",
+ "lessons": [
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "title": "Tests d'hypothèses sur une moyenne et une proportion",
+   "minutes": 55,
+   "programRef": "Statistiques inférentielles de deuxième année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Formuler $H_{0}$ et $H_{1}$ et comprendre les deux types d'erreurs.",
+    "Réaliser un test bilatéral ou unilatéral sur une moyenne.",
+    "Réaliser un test sur une proportion.",
+    "Conclure correctement (rejeter / ne pas rejeter $H_{0}$)."
+   ],
+   "prerequisites": [
+    "sup-l2-statistiques-inferentielles-intervalles-confiance"
+   ],
+   "exercises": [
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-01",
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-02",
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-03",
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-04",
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-05",
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-06"
+   ],
+   "selfCheck": [
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-q1",
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-q2",
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-q3",
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-q4",
+    "sup-l2-statistiques-inferentielles-tests-hypotheses-q5"
+   ],
+   "reviewNotes": [
+    "Valeurs critiques fournies : 1,645 (unilatéral 5 %), 1,96 (bilatéral 5 %), 2,576 (bilatéral 1 %).",
+    "Convention de rédaction « ne pas rejeter $H_{0}$ » à harmoniser avec le cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hypothèses et erreurs",
+     "md": "Un **test** confronte une hypothèse nulle $H_{0}$ (statu quo, ex. $μ=μ_{0}$) à une hypothèse alternative $H_{1}$ ($μ≠μ_{0}$ : bilatéral ; $μ>μ_{0}$ ou $μ<μ_{0}$ : unilatéral). **Erreur de 1re espèce** : rejeter $H_{0}$ alors qu'elle est vraie ; son risque est $α$ (seuil, souvent 5 %). **Erreur de 2e espèce** : ne pas rejeter $H_{0}$ alors qu'elle est fausse ; risque $β$ (la puissance est $1-β$)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Déroulement d'un test",
+     "md": "1) Poser $H_{0}$, $H_{1}$ et choisir $α$. 2) Calculer la **statistique de test** sous $H_{0}$. 3) Comparer avec la **valeur critique** (région de rejet). 4) Conclure en phrase, dans le contexte. **Ne pas rejeter $H_{0}$ ne prouve pas** qu'elle est vraie : les données ne la contredisent pas assez."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Test sur une moyenne ($σ$ connu ou $n$ grand)",
+     "md": "Statistique : $z=\\frac{\\bar{x}-μ_{0}}{σ/\\sqrt{n}}$ (avec $s$ si $σ$ est inconnu et $n$ grand). Bilatéral au seuil 5 % : on rejette $H_{0}$ si $|z|>1{,}96$. Unilatéral à droite au seuil 5 % : on rejette si $z>1{,}645$ (à gauche : $z<-1{,}645$).",
+     "tex": "z=\\frac{\\bar{x}-μ_{0}}{σ/\\sqrt{n}}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Test sur une proportion",
+     "md": "Statistique sous $H_{0}:p=p_{0}$ : $z=\\frac{\\hat{p}-p_{0}}{\\sqrt{p_{0}(1-p_{0})/n}}$ (on utilise $p_{0}$, pas $\\hat{p}$, car on raisonne sous $H_{0}$). Mêmes règles de décision que pour la moyenne (conditions $np_{0}≥5$ et $n(1-p_{0})≥5$).",
+     "tex": "z=\\frac{\\hat{p}-p_{0}}{\\sqrt{p_{0}(1-p_{0})/n}}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": -4,
+      "xmax": 4,
+      "ymin": 0,
+      "ymax": 0.5,
+      "grid": 1,
+      "xlabel": "z",
+      "ylabel": "densité",
+      "curves": [
+       {
+        "expr": "exp(-x^2/2)/sqrt(2*pi)",
+        "color": "blue",
+        "label": "loi sous H0"
+       }
+      ],
+      "segments": [
+       {
+        "x1": -1.96,
+        "y1": 0,
+        "x2": -1.96,
+        "y2": 0.1,
+        "color": "red",
+        "dash": true
+       },
+       {
+        "x1": 1.96,
+        "y1": 0,
+        "x2": 1.96,
+        "y2": 0.1,
+        "color": "red",
+        "dash": true
+       }
+      ]
+     },
+     "caption": "Test bilatéral à 5 % : on rejette $H_{0}$ si $z$ tombe à gauche de −1,96 ou à droite de 1,96 (traits rouges).",
+     "alt": "Courbe en cloche centrée en 0 ; deux traits rouges verticaux en -1,96 et +1,96 délimitent les régions de rejet dans les queues."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — test sur une moyenne (rejet)",
+     "statement": "Une machine fictive est réglée pour remplir des sachets de 500 g ; on sait que $σ=8$ g. Un échantillon de 64 sachets donne $\\bar{x}=502{,}5$ g. Test bilatéral à 5 % (valeur critique 1,96).",
+     "steps": [
+      {
+       "md": "$H_{0}:μ=500$ ; $H_{1}:μ≠500$ ; $α=0{,}05$."
+      },
+      {
+       "md": "Erreur standard $\\frac{8}{\\sqrt{64}}=1$ ; $z=\\frac{502{,}5-500}{1}=2{,}5$.",
+       "tex": "z=\\frac{502{,}5-500}{1}=2{,}5"
+      },
+      {
+       "md": "$|z|=2{,}5>1{,}96$ : on est dans la région de rejet."
+      }
+     ],
+     "answer": "**On rejette $H_{0}$ au seuil de 5 % : le réglage semble déréglé.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — test sur une moyenne (non-rejet)",
+     "statement": "Même machine, mais $\\bar{x}=500{,}8$ g pour 64 sachets. Que conclure ?",
+     "steps": [
+      {
+       "md": "$z=\\frac{500{,}8-500}{1}=0{,}8$.",
+       "tex": "z=0{,}8"
+      },
+      {
+       "md": "$|z|=0{,}8<1{,}96$ : on ne rejette pas $H_{0}$."
+      }
+     ],
+     "answer": "**On ne rejette pas $H_{0}$ : l'écart observé peut s'expliquer par le hasard de l'échantillonnage.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — test sur une proportion",
+     "statement": "Une entreprise fictive affirme que 20 % de ses clients utilisent son application. Sur 200 clients, 52 l'utilisent. Test bilatéral à 5 % (valeur critique 1,96) de $H_{0}:p=0{,}2$.",
+     "steps": [
+      {
+       "md": "$\\hat{p}=\\frac{52}{200}=0{,}26$ ; conditions : $200×0{,}2=40≥5$, $200×0{,}8=160≥5$ ✓."
+      },
+      {
+       "md": "Erreur standard sous $H_{0}$ : $\\sqrt{\\frac{0{,}2×0{,}8}{200}}=\\sqrt{0{,}0008}≈0{,}0283$.",
+       "tex": "\\sqrt{\\frac{0{,}2×0{,}8}{200}}≈0{,}0283"
+      },
+      {
+       "md": "$z=\\frac{0{,}26-0{,}2}{0{,}0283}≈2{,}12$ ; $|z|>1{,}96$.",
+       "tex": "z≈2{,}12"
+      }
+     ],
+     "answer": "**On rejette $H_{0}$ au seuil de 5 % : la proportion semble différente de 20 %.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — test unilatéral et seuil",
+     "statement": "Mêmes données que l'exemple 1, mais $H_{1}:μ>500$ (on craint un sur-remplissage). À partir de quelle valeur de $\\bar{x}$ rejette-t-on $H_{0}$ au seuil de 5 % (valeur critique 1,645) ?",
+     "steps": [
+      {
+       "md": "On rejette si $z>1{,}645$, c'est-à-dire $\\bar{x}>500+1{,}645×\\frac{8}{\\sqrt{64}}$.",
+       "tex": "\\bar{x}>500+1{,}645×1"
+      },
+      {
+       "md": "Soit $\\bar{x}>501{,}645$ g."
+      }
+     ],
+     "answer": "**Seuil de rejet : $\\bar{x}>501{,}645$ g.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Conclure « $H_{0}$ est vraie » quand on ne rejette pas : on ne démontre jamais $H_{0}$.\n- Mélanger bilatéral (1,96) et unilatéral (1,645) au seuil 5 %.\n- Utiliser $\\hat{p}$ au lieu de $p_{0}$ dans l'erreur standard d'un test de proportion.\n- Choisir $H_{1}$ **après** avoir vu les données (biais)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La **p-valeur** est la probabilité, sous $H_{0}$, d'obtenir un résultat au moins aussi extrême que celui observé : plus elle est petite, plus les données contredisent $H_{0}$.",
+      "Diminuer $α$ diminue le risque de 1re espèce mais augmente le risque $β$ de 2e espèce."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-statistiques-inferentielles-tests-hypotheses-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "title": "Test du khi-deux (introduction) et régression linéaire simple",
+   "minutes": 55,
+   "programRef": "Statistiques inférentielles de deuxième année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer les effectifs théoriques et la statistique $χ^{2}$ d'un tableau de contingence.",
+    "Conclure sur l'indépendance de deux caractères avec une valeur critique fournie.",
+    "Interpréter la pente, l'ordonnée à l'origine et le coefficient de détermination d'une régression.",
+    "Calculer prévisions et résidus."
+   ],
+   "prerequisites": [
+    "sup-l2-statistiques-inferentielles-tests-hypotheses"
+   ],
+   "exercises": [
+    "sup-l2-statistiques-inferentielles-khi2-regression-01",
+    "sup-l2-statistiques-inferentielles-khi2-regression-02",
+    "sup-l2-statistiques-inferentielles-khi2-regression-03",
+    "sup-l2-statistiques-inferentielles-khi2-regression-04",
+    "sup-l2-statistiques-inferentielles-khi2-regression-05",
+    "sup-l2-statistiques-inferentielles-khi2-regression-06"
+   ],
+   "selfCheck": [
+    "sup-l2-statistiques-inferentielles-khi2-regression-q1",
+    "sup-l2-statistiques-inferentielles-khi2-regression-q2",
+    "sup-l2-statistiques-inferentielles-khi2-regression-q3",
+    "sup-l2-statistiques-inferentielles-khi2-regression-q4",
+    "sup-l2-statistiques-inferentielles-khi2-regression-q5"
+   ],
+   "reviewNotes": [
+    "Valeurs critiques du khi-deux fournies dans les énoncés (ddl 1 : 3,841 ; ddl 2 : 5,991 ; ddl 3 : 7,815 ; ddl 4 : 9,488 ; seuil 5 %) ; à comparer à la table du cours.",
+    "Fiche volontairement introductive : pas de tests sur la pente ni d'intervalles de prévision."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Statistique du khi-deux d'indépendance",
+     "md": "Pour un tableau de contingence, l'**effectif théorique** (sous l'hypothèse d'indépendance $H_{0}$) de la case $(i,j)$ est $E_{ij}=\\frac{(\\text{total ligne } i)×(\\text{total colonne } j)}{N}$. La statistique est $χ^{2}=\\sum \\frac{(O_{ij}-E_{ij})^{2}}{E_{ij}}$ où $O_{ij}$ est l'effectif observé. Les degrés de liberté sont $(r-1)(c-1)$ pour $r$ lignes et $c$ colonnes. On rejette $H_{0}$ si $χ^{2}$ dépasse la valeur critique. Condition usuelle : tous les $E_{ij}≥5$.",
+     "tex": "χ^{2}=\\sum \\frac{(O_{ij}-E_{ij})^{2}}{E_{ij}}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Régression linéaire simple",
+     "md": "Le modèle $y=a\\,x+b+\\text{erreur}$ décrit comment la variable expliquée $y$ dépend linéairement de la variable explicative $x$. La droite des moindres carrés a pour pente $a=\\frac{\\text{cov}(x,y)}{V(x)}$ et pour ordonnée $b=\\bar{y}-a\\bar{x}$. Le **résidu** de l'observation $i$ est $e_{i}=y_{i}-(ax_{i}+b)$ ; leur somme vaut 0."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Interprétation",
+     "md": "La **pente** $a$ est la variation moyenne de $y$ associée à une augmentation d'une unité de $x$. L'**ordonnée** $b$ est la valeur prévue pour $x=0$ (souvent sans sens concret si $x=0$ est hors des données). Le **coefficient de détermination** $R^{2}=r^{2}$ est la part de la variabilité de $y$ expliquée par la droite. Une **prévision** n'a de sens que dans (ou près de) l'étendue des $x$ observés."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 260,
+      "bars": [
+       {
+        "label": "Obs. mobile/ville",
+        "value": 60,
+        "color": "blue"
+       },
+       {
+        "label": "Théo. mobile/ville",
+        "value": 45,
+        "color": "orange"
+       },
+       {
+        "label": "Obs. mobile/campagne",
+        "value": 30,
+        "color": "blue"
+       },
+       {
+        "label": "Théo. mobile/campagne",
+        "value": 45,
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "Effectifs observés (bleu) et théoriques (orange) du paiement mobile selon la zone.",
+     "alt": "Quatre barres : 60 observés contre 45 attendus en ville, 30 observés contre 45 attendus en campagne."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — test d'indépendance",
+     "statement": "Enquête fictive sur 200 personnes : en ville, 60 paient par mobile et 40 en espèces ; en campagne, 30 par mobile et 70 en espèces. Le mode de paiement dépend-il de la zone ? Seuil 5 % ; pour 1 degré de liberté la valeur critique est 3,841.",
+     "steps": [
+      {
+       "md": "Totaux : lignes 100 et 100 ; colonnes 90 (mobile) et 110 (espèces) ; $N=200$."
+      },
+      {
+       "md": "Effectifs théoriques : $\\frac{100×90}{200}=45$ et $\\frac{100×110}{200}=55$ pour chaque ligne.",
+       "tex": "E=\\frac{100×90}{200}=45"
+      },
+      {
+       "md": "$χ^{2}=\\frac{15^{2}}{45}+\\frac{15^{2}}{55}+\\frac{15^{2}}{45}+\\frac{15^{2}}{55}=5+4{,}09+5+4{,}09≈18{,}18$.",
+       "tex": "χ^{2}≈18{,}18"
+      },
+      {
+       "md": "Degrés de liberté : $(2-1)(2-1)=1$ ; $18{,}18>3{,}841$ : on rejette l'indépendance."
+      }
+     ],
+     "answer": "**On rejette $H_{0}$ au seuil de 5 % : le mode de paiement semble lié à la zone.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — régression et interprétation",
+     "statement": "Cinq points de vente fictifs : publicité $x$ (milliers de FCFA) : 10, 20, 30, 40, 50 ; ventes $y$ (millions de FCFA) : 25, 31, 38, 47, 52. Déterminer la droite des moindres carrés, $R^{2}$, une prévision pour $x=60$ et les résidus.",
+     "steps": [
+      {
+       "md": "$\\bar{x}=30$, $\\bar{y}=38{,}6$. $\\sum(x_{i}-\\bar{x})(y_{i}-\\bar{y})=700$ et $\\sum(x_{i}-\\bar{x})^{2}=1000$.",
+       "tex": "a=\\frac{700}{1000}=0{,}7"
+      },
+      {
+       "md": "$b=38{,}6-0{,}7×30=17{,}6$ : droite $y=0{,}7x+17{,}6$.",
+       "tex": "y=0{,}7x+17{,}6"
+      },
+      {
+       "md": "$\\sum(y_{i}-\\bar{y})^{2}=493{,}2$ ; $R^{2}=\\frac{700^{2}}{1000×493{,}2}≈0{,}9935$.",
+       "tex": "R^{2}≈0{,}9935"
+      },
+      {
+       "md": "Prévision pour $x=60$ : $0{,}7×60+17{,}6=59{,}6$ (hors de l'étendue 10–50 : à prendre avec précaution)."
+      },
+      {
+       "md": "Résidus : $0{,}4$ ; $-0{,}6$ ; $-0{,}6$ ; $1{,}4$ ; $-0{,}6$ (somme nulle)."
+      }
+     ],
+     "answer": "**$y=0{,}7x+17{,}6$ ; $R^{2}≈0{,}994$ : 1 000 FCFA de publicité en plus sont associés en moyenne à 0,7 million de FCFA de ventes en plus.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser le $χ^{2}$ avec des **fréquences** ou des pourcentages au lieu d'effectifs.\n- Oublier de vérifier $E_{ij}≥5$.\n- Interpréter « $χ²$ significatif » comme une relation de cause à effet.\n- Extrapoler la droite de régression loin des données observées, ou interpréter l'ordonnée à l'origine quand $x=0$ n'a pas de sens."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le test du khi-deux existe aussi pour comparer une distribution observée à une distribution théorique (test d'adéquation).",
+      "Un $R^{2}$ élevé ne prouve ni la causalité, ni que la relation est réellement linéaire : on examine aussi les résidus."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-statistiques-inferentielles-khi2-regression-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "$H_{0}:μ=100$, $σ=5$, $n=25$, $\\bar{x}=102$. Calculer la statistique $z$.",
+   "explanation": "$z=\\frac{102-100}{5/5}=2$.",
+   "source": "Exercice original",
+   "answer": 2.0,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "Test bilatéral à 5 %, $z=1{,}2$ (valeur critique 1,96). Décision :",
+   "explanation": "$|1{,}2|<1{,}96$.",
+   "source": "Exercice original",
+   "choices": [
+    "on rejette $H_{0}$",
+    "on ne rejette pas $H_{0}$",
+    "on accepte $H_{1}$ avec certitude",
+    "le test est impossible"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "Ne pas rejeter $H_{0}$ prouve que $H_{0}$ est vraie.",
+   "explanation": "Faux : on n'a simplement pas assez d'éléments contre $H_{0}$.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "Test de $H_{0}:p=0{,}5$ avec $n=100$ et $\\hat{p}=0{,}45$. Calculer $z$.",
+   "explanation": "$z=\\frac{0{,}45-0{,}5}{\\sqrt{0{,}25/100}}=\\frac{-0{,}05}{0{,}05}=-1$.",
+   "source": "Exercice original",
+   "answer": -1,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "$H_{0}:μ=500$, $σ=8$, $n=64$, $H_{1}:μ>500$, seuil 5 % (valeur critique 1,645). Au-dessus de quelle moyenne $\\bar{x}$ rejette-t-on $H_{0}$ ?",
+   "explanation": "$500+1{,}645×1=501{,}645$.",
+   "source": "Exercice original",
+   "answer": 501.645,
+   "tolerance": 0.001,
+   "unit": "g"
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "Un fabricant fictif annonce que la durée de vie moyenne de ses batteries est de 12 heures ($σ=3$ h). Un échantillon de 36 batteries donne $\\bar{x}=11{,}2$ h. Test bilatéral de $H_{0}:μ=12$ au seuil de 5 % (valeur critique 1,96).",
+   "method": "Poser H0/H1, calculer z, comparer à la valeur critique, conclure.",
+   "mistakes": [
+    "Confondre « ne pas rejeter » et « prouver »."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-06-a",
+     "points": 1,
+     "prompt": "Calculer l'erreur standard $\\frac{σ}{\\sqrt{n}}$ (heures).",
+     "explanation": "$\\frac{3}{6}=0{,}5$.",
+     "kind": "numeric",
+     "answer": 0.5,
+     "tolerance": 0.001,
+     "unit": "h"
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-06-b",
+     "points": 1,
+     "prompt": "Calculer la statistique $z$.",
+     "explanation": "$z=\\frac{11{,}2-12}{0{,}5}=-1{,}6$.",
+     "kind": "numeric",
+     "answer": -1.6,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-06-c",
+     "points": 1,
+     "prompt": "Quelle est la décision ?",
+     "explanation": "$|-1{,}6|<1{,}96$ : pas de preuve suffisante contre l'annonce.",
+     "kind": "mcq",
+     "choices": [
+      "on rejette $H_{0}$",
+      "on ne rejette pas $H_{0}$",
+      "on rejette $H_{1}$ définitivement",
+      "on ne peut rien calculer"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-06-d",
+     "points": 1,
+     "prompt": "Si l'on avait obtenu $\\bar{x}=10{,}9$ h, quelle serait la valeur de $z$ ?",
+     "explanation": "$z=\\frac{10{,}9-12}{0{,}5}=-2{,}2$ ; $|z|>1{,}96$ : on rejetterait $H_{0}$.",
+     "kind": "numeric",
+     "answer": -2.2,
+     "tolerance": 0.001
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "L'erreur de 1re espèce consiste à :",
+   "choices": [
+    "ne pas rejeter $H_{0}$ alors qu'elle est fausse",
+    "calculer mal $z$",
+    "choisir $H_{1}$ après coup",
+    "rejeter $H_{0}$ alors qu'elle est vraie"
+   ],
+   "answer": 3,
+   "explanation": "Son risque est $α$.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "Le risque $α$ est souvent fixé à :",
+   "choices": [
+    "5 %",
+    "50 %",
+    "95 %",
+    "0 %"
+   ],
+   "answer": 0,
+   "explanation": "Valeur de convention (1 % et 10 % aussi utilisées).",
+   "review": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "Dans un test de proportion, l'erreur standard utilise :",
+   "choices": [
+    "$\\hat{p}$",
+    "$\\bar{x}$",
+    "$p_{0}$",
+    "$n$ seulement"
+   ],
+   "answer": 2,
+   "explanation": "On se place sous $H_{0}$.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "Test bilatéral à 5 % : on rejette $H_{0}$ si :",
+   "choices": [
+    "$z>1{,}645$ uniquement",
+    "$|z|<1{,}96$",
+    "$z=0$",
+    "$|z|>1{,}96$"
+   ],
+   "answer": 3,
+   "explanation": "Deux régions de rejet de 2,5 % chacune.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-tests-hypotheses",
+   "prompt": "Diminuer $α$ (de 5 % à 1 %) a pour effet :",
+   "choices": [
+    "de supprimer toute erreur",
+    "d'augmenter le risque de 2e espèce",
+    "de rendre $H_{1}$ vraie",
+    "d'augmenter $n$"
+   ],
+   "answer": 1,
+   "explanation": "Compromis entre les deux risques à $n$ fixé.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "Dans un tableau 2×2 de total 200, une ligne a pour total 100 et une colonne a pour total 90. Quel est l'effectif théorique de leur case ?",
+   "explanation": "$\\frac{100×90}{200}=45$.",
+   "source": "Exercice original",
+   "answer": 45,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "Combien de degrés de liberté pour un tableau de contingence à 3 lignes et 4 colonnes ?",
+   "explanation": "$(3-1)(4-1)=6$.",
+   "source": "Exercice original",
+   "choices": [
+    "12",
+    "7",
+    "6",
+    "5"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "La statistique $χ^{2}$ ne peut jamais être négative.",
+   "explanation": "C'est une somme de termes $\\frac{(O-E)^{2}}{E}≥0$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "Dans une case, l'effectif observé est 60 et l'effectif théorique 45. Quelle est sa contribution $\\frac{(O-E)^{2}}{E}$ au $χ^{2}$ ?",
+   "explanation": "$\\frac{15^{2}}{45}=\\frac{225}{45}=5$.",
+   "source": "Exercice original",
+   "answer": 5,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "Une régression donne $y=0{,}7x+17{,}6$. Quelle valeur prévoit-on pour $x=35$ ?",
+   "explanation": "$0{,}7×35+17{,}6=24{,}5+17{,}6=42{,}1$.",
+   "source": "Exercice original",
+   "answer": 42.1,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "Un restaurateur fictif relève, pour 6 semaines, le nombre de clients par jour $x$ (centaines) et son chiffre d'affaires $y$ (centaines de milliers de FCFA). La droite des moindres carrés obtenue est $y=2{,}5x+10$ avec $R^{2}=0{,}81$ et des valeurs de $x$ comprises entre 2 et 8.",
+   "method": "Interpréter la pente, appliquer la droite, lire $R^{2}$, rester prudent sur l'extrapolation.",
+   "mistakes": [
+    "Interpréter $R^{2}$ comme une probabilité."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-statistiques-inferentielles-khi2-regression-06-a",
+     "points": 1,
+     "prompt": "Quelle est la variation moyenne de $y$ associée à une hausse de 1 (centaine) de clients ?",
+     "explanation": "C'est la pente $a=2{,}5$ (centaines de milliers de FCFA).",
+     "kind": "numeric",
+     "answer": 2.5,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-khi2-regression-06-b",
+     "points": 1,
+     "prompt": "Quel chiffre d'affaires prévoit-on pour $x=6$ ?",
+     "explanation": "$2{,}5×6+10=25$.",
+     "kind": "numeric",
+     "answer": 25.0,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-khi2-regression-06-c",
+     "points": 1,
+     "prompt": "Quelle part (en %) de la variabilité de $y$ est expliquée par la droite ?",
+     "explanation": "$R^{2}=0{,}81$ : 81 %.",
+     "kind": "numeric",
+     "answer": 81,
+     "tolerance": 0.001,
+     "unit": "%"
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-khi2-regression-06-d",
+     "points": 1,
+     "prompt": "La prévision pour $x=20$ est-elle fiable ?",
+     "explanation": "On ne prévoit pas bien loin de l'étendue observée (2 à 8).",
+     "kind": "mcq",
+     "choices": [
+      "Non, $x=20$ est très loin des données (extrapolation)",
+      "Oui, car $R^{2}$ est élevé",
+      "Oui, car la pente est positive",
+      "Oui, car la droite est exacte"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "L'effectif théorique de la case $(i,j)$ vaut :",
+   "choices": [
+    "total ligne + total colonne",
+    "$N$ / nombre de cases",
+    "(total ligne × total colonne) / $N$",
+    "l'effectif observé"
+   ],
+   "answer": 2,
+   "explanation": "Sous l'hypothèse d'indépendance.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "Si $χ^{2}$ dépasse la valeur critique :",
+   "choices": [
+    "on rejette l'indépendance",
+    "on accepte l'indépendance",
+    "le test est invalide",
+    "on augmente $α$"
+   ],
+   "answer": 0,
+   "explanation": "Les écarts aux effectifs théoriques sont trop grands.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "Le coefficient de détermination $R^{2}$ mesure :",
+   "choices": [
+    "la pente",
+    "la probabilité que $H_{0}$ soit vraie",
+    "le nombre d'observations",
+    "la part de variabilité de $y$ expliquée par la droite"
+   ],
+   "answer": 3,
+   "explanation": "$R^{2}=r^{2}$.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "La somme des résidus des moindres carrés (avec ordonnée à l'origine) vaut :",
+   "choices": [
+    "1",
+    "0",
+    "$n$",
+    "$R^{2}$"
+   ],
+   "answer": 1,
+   "explanation": "Propriété de la droite qui passe par le point moyen.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-khi2-regression-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-khi2-regression",
+   "prompt": "Une corrélation forte entre $x$ et $y$ permet d'affirmer :",
+   "choices": [
+    "que $x$ cause $y$",
+    "qu'il existe une association linéaire, pas forcément une causalité",
+    "que $y$ cause $x$",
+    "que $R^{2}=0$"
+   ],
+   "answer": 1,
+   "explanation": "Corrélation n'est pas causalité.",
+   "review": true
+  }
+ ]
+}

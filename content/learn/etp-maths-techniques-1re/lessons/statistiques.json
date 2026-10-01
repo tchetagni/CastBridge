@@ -1,0 +1,360 @@
+{
+ "chapter": "etp-maths-techniques-1re-statistiques",
+ "lessons": [
+  {
+   "id": "etp-maths-techniques-1re-statistiques",
+   "title": "Statistiques descriptives : moyenne, médiane, écart-type",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une moyenne simple et pondérée.",
+    "Déterminer médiane, mode et étendue.",
+    "Calculer la variance et l'écart-type.",
+    "Lire et construire un histogramme."
+   ],
+   "exercises": [
+    "etp-maths-techniques-1re-statistiques-01",
+    "etp-maths-techniques-1re-statistiques-02",
+    "etp-maths-techniques-1re-statistiques-03",
+    "etp-maths-techniques-1re-statistiques-04",
+    "etp-maths-techniques-1re-statistiques-05",
+    "etp-maths-techniques-1re-statistiques-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-1re-statistiques-q1",
+    "etp-maths-techniques-1re-statistiques-q2",
+    "etp-maths-techniques-1re-statistiques-q3",
+    "etp-maths-techniques-1re-statistiques-q4",
+    "etp-maths-techniques-1re-statistiques-q5"
+   ],
+   "reviewNotes": [
+    "Convention : variance de la population (division par l'effectif total) ; vérifier celle utilisée en classe."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "Une **série statistique** est un ensemble de valeurs observées. L'**effectif** $n_i$ d'une valeur est le nombre de fois où elle apparaît ; l'**effectif total** est $N = \\sum n_i$. La **fréquence** est $n_i / N$ (souvent en %)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne",
+     "md": "La **moyenne** de la série est la somme des valeurs divisée par l'effectif total. Avec des effectifs (moyenne pondérée) :",
+     "tex": "\\overline{x} = \\frac{\\sum n_i x_i}{N}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Médiane, mode, étendue",
+     "md": "- La **médiane** partage la série ordonnée en deux moitiés de même effectif : valeur du milieu si $N$ est impair, moyenne des deux valeurs centrales si $N$ est pair.\n- Le **mode** est la valeur la plus fréquente.\n- L'**étendue** est la plus grande valeur moins la plus petite."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Variance et écart-type",
+     "md": "La **variance** $V$ est la moyenne des carrés des écarts à la moyenne ; l'**écart-type** $\\sigma$ en est la racine carrée. Plus $\\sigma$ est grand, plus les valeurs sont dispersées.",
+     "tex": "V = \\frac{\\sum n_i (x_i - \\overline{x})^2}{N} \\;\\; \\sigma = \\sqrt{V}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "8",
+        "value": 2,
+        "color": "blue"
+       },
+       {
+        "label": "10",
+        "value": 3,
+        "color": "blue"
+       },
+       {
+        "label": "12",
+        "value": 4,
+        "color": "green"
+       },
+       {
+        "label": "15",
+        "value": 1,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Effectifs des notes d'un contrôle (10 élèves).",
+     "alt": "Diagramme en barres : la note 8 a l'effectif 2, la note 10 l'effectif 3, la note 12 l'effectif 4 (le plus grand, en vert) et la note 15 l'effectif 1."
+    },
+    {
+     "type": "example",
+     "title": "Moyenne pondérée et médiane",
+     "statement": "Notes d'un contrôle : 8 (2 élèves), 10 (3), 12 (4), 15 (1). Calculer la moyenne et la médiane.",
+     "steps": [
+      {
+       "md": "Somme pondérée : $2\\times 8 + 3\\times 10 + 4 \\times 12 + 1 \\times 15$.",
+       "tex": "16 + 30 + 48 + 15 = 109"
+      },
+      {
+       "md": "Moyenne : on divise par $N = 10$.",
+       "tex": "\\overline{x} = \\frac{109}{10} = 10,9"
+      },
+      {
+       "md": "Série ordonnée : 8, 8, 10, 10, 10, 12, 12, 12, 12, 15. $N = 10$ est pair : médiane = moyenne des 5e et 6e valeurs (10 et 12).",
+       "tex": "M_e = \\frac{10 + 12}{2} = 11"
+      }
+     ],
+     "answer": "**Moyenne 10,9 ; médiane 11 ; mode 12 ; étendue 7.**"
+    },
+    {
+     "type": "example",
+     "title": "Écart-type",
+     "statement": "Salaires journaliers (FCFA, valeurs fictives) de 8 ouvriers : 3 000, 3 500, 3 500, 4 000, 4 500, 5 000, 5 500, 7 000. Calculer moyenne, variance et écart-type.",
+     "steps": [
+      {
+       "md": "Moyenne : $36\\,000 / 8$.",
+       "tex": "\\overline{x} = 4 500"
+      },
+      {
+       "md": "Écarts à la moyenne : −1 500, −1 000, −1 000, −500, 0, 500, 1 000, 2 500. Somme des carrés (en millions) : 2,25 + 1 + 1 + 0,25 + 0 + 0,25 + 1 + 6,25 = 12.",
+       "tex": "V = \\frac{12 000 000}{8} = 1 500 000"
+      },
+      {
+       "md": "Écart-type : racine carrée, arrondie.",
+       "tex": "\\sigma = \\sqrt{1 500 000} \\approx 1 225\\ \\text{FCFA}"
+      }
+     ],
+     "answer": "**Moyenne 4 500 FCFA ; écart-type ≈ 1 225 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de **ranger** la série avant de chercher la médiane.\n- Calculer la moyenne des valeurs sans tenir compte des effectifs.\n- Oublier la racine carrée : la variance n'est pas l'écart-type.\n- Confondre mode (valeur la plus fréquente) et effectif maximal."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour des données regroupées en classes, on utilise le **centre de classe** comme valeur approchée dans les calculs.",
+      "La moyenne est sensible aux valeurs extrêmes, la médiane beaucoup moins : pour des salaires, on donne souvent la médiane."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-1re-statistiques-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-maths-techniques-1re-statistiques-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "Calculer la moyenne de 12, 15, 9, 14 et 10.",
+   "explanation": "$(12+15+9+14+10)/5 = 60/5 = 12$.",
+   "source": "Exercice original",
+   "answer": 12.0,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "Quelle est la médiane de 7, 3, 9, 4, 12 ?",
+   "explanation": "Rangé : 3, 4, 7, 9, 12. $N = 5$ impair : la 3e valeur est 7.",
+   "source": "Exercice original",
+   "answer": 7,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "Dans la série 4, 6, 6, 7, 6, 9, le mode est :",
+   "explanation": "6 apparaît 3 fois.",
+   "source": "Exercice original",
+   "choices": [
+    "4",
+    "6",
+    "7",
+    "9"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "Notes : 10 (2 élèves) et 14 (3 élèves). Calculer la moyenne.",
+   "explanation": "$(20 + 42)/5 = 62/5 = 12{,}4$.",
+   "source": "Exercice original",
+   "answer": 12.4,
+   "tolerance": 0.001
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "L'étendue de 5, 8, 12, 20 est 15.",
+   "explanation": "$20 - 5 = 15$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "Un maçon relève la durée (en heures) de 5 chantiers : 10, 12, 12, 14, 16.",
+   "method": "Moyenne d'abord, puis les écarts, les carrés, la racine.",
+   "mistakes": [
+    "Oublier de diviser la somme des carrés par l'effectif."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-1re-statistiques-06-a",
+     "points": 1,
+     "prompt": "Moyenne (h).",
+     "explanation": "$64/5 = 12,8$ h.",
+     "kind": "numeric",
+     "answer": 12.8,
+     "tolerance": 0,
+     "unit": "h"
+    },
+    {
+     "id": "etp-maths-techniques-1re-statistiques-06-b",
+     "points": 1,
+     "prompt": "Médiane (h).",
+     "explanation": "Série déjà rangée, 5 valeurs : la 3e est 12.",
+     "kind": "numeric",
+     "answer": 12,
+     "tolerance": 0,
+     "unit": "h"
+    },
+    {
+     "id": "etp-maths-techniques-1re-statistiques-06-c",
+     "points": 1,
+     "prompt": "Variance (h²).",
+     "explanation": "Écarts : −2,8 ; −0,8 ; −0,8 ; 1,2 ; 3,2. Carrés : 7,84 ; 0,64 ; 0,64 ; 1,44 ; 10,24. Somme 20,8 ; $V = 20{,}8/5 = 4,16$.",
+     "kind": "numeric",
+     "answer": 4.16,
+     "tolerance": 0.01
+    },
+    {
+     "id": "etp-maths-techniques-1re-statistiques-06-d",
+     "points": 1,
+     "prompt": "Écart-type (h, arrondi au centième).",
+     "explanation": "$\\sigma = \\sqrt{4,16} \\approx 2,04$ h.",
+     "kind": "numeric",
+     "answer": 2.039607805,
+     "tolerance": 0.01,
+     "unit": "h"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "La médiane de 2, 4, 6, 8 est :",
+   "choices": [
+    "4",
+    "6",
+    "5",
+    "20"
+   ],
+   "answer": 2,
+   "explanation": "Moyenne de 4 et 6 : 5."
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "L'écart-type est :",
+   "choices": [
+    "le carré de la variance",
+    "la racine carrée de la variance",
+    "la moyenne",
+    "l'étendue"
+   ],
+   "answer": 1,
+   "explanation": "$\\sigma = \\sqrt{V}$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "Moyenne de 6 et 10 pondérée par les effectifs 1 et 3 :",
+   "choices": [
+    "8",
+    "9",
+    "7",
+    "16"
+   ],
+   "answer": 1,
+   "explanation": "$(6 + 30)/4 = 9$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "Une série ayant un grand écart-type est :",
+   "choices": [
+    "très dispersée",
+    "très concentrée",
+    "constante",
+    "sans moyenne"
+   ],
+   "answer": 0,
+   "explanation": "Grand écart-type : grande dispersion."
+  },
+  {
+   "id": "etp-maths-techniques-1re-statistiques-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-statistiques",
+   "prompt": "L'étendue de 12, 5, 9 est :",
+   "choices": [
+    "5",
+    "12",
+    "26",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "$12 - 5 = 7$."
+  }
+ ]
+}

@@ -1,0 +1,995 @@
+{
+ "chapter": "etp-genie-civil-materiaux-1re-grandeurs-beton",
+ "lessons": [
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs",
+   "title": "Aires, volumes et masse volumique en bâtiment",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, série F4 — génie civil (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer l'aire de surfaces usuelles (rectangle, triangle, cercle).",
+    "Calculer le volume d'une dalle, d'une semelle et d'un poteau cylindrique.",
+    "Convertir correctement m, cm, m² et m³, litres.",
+    "Utiliser la masse volumique ρ = m/V avec une valeur donnée."
+   ],
+   "exercises": [
+    "etp-genie-civil-materiaux-1re-grandeurs-01",
+    "etp-genie-civil-materiaux-1re-grandeurs-02",
+    "etp-genie-civil-materiaux-1re-grandeurs-03",
+    "etp-genie-civil-materiaux-1re-grandeurs-04",
+    "etp-genie-civil-materiaux-1re-grandeurs-05",
+    "etp-genie-civil-materiaux-1re-grandeurs-06"
+   ],
+   "selfCheck": [
+    "etp-genie-civil-materiaux-1re-grandeurs-q1",
+    "etp-genie-civil-materiaux-1re-grandeurs-q2",
+    "etp-genie-civil-materiaux-1re-grandeurs-q3",
+    "etp-genie-civil-materiaux-1re-grandeurs-q4",
+    "etp-genie-civil-materiaux-1re-grandeurs-q5"
+   ],
+   "reviewNotes": [
+    "Les masses volumiques utilisées (béton, etc.) sont des données d'énoncé fictives ou arrondies : elles ne constituent pas des valeurs de référence.",
+    "Vérifier les conversions d'unités (m³, litres)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Aires usuelles",
+     "md": "- Rectangle : $A = L \\times l$.\n- Triangle : $A = \\dfrac{b \\times h}{2}$.\n- Disque de rayon $r$ : $A = \\pi r^2$ (avec $\\pi \\approx 3{,}14$).\n- Trapèze de bases $B$ et $b$ et de hauteur $h$ : $A = \\dfrac{(B + b)\\times h}{2}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Volumes usuels",
+     "md": "Un volume est une surface de base multipliée par la hauteur (ou l'épaisseur) :",
+     "tex": "V_{\\text{dalle}} = L \\times l \\times e \\;\\; V_{\\text{cylindre}} = \\pi r^2 h"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Unités",
+     "md": "Toutes les longueurs doivent être dans **la même unité** avant de calculer. Pour le bâtiment on travaille en **mètres** : 25 cm = 0,25 m. Une aire se mesure en m², un volume en m³ et **1 m³ = 1 000 litres**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Masse volumique",
+     "md": "La **masse volumique** $\\rho$ (lettre grecque rhô) d'un matériau est sa masse par unité de volume. Elle s'exprime en kg/m³. Les valeurs utilisées dans les exercices sont **fournies par l'énoncé**.",
+     "tex": "\\rho = \\frac{m}{V} \\;\\; m = \\rho \\times V"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 200,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         90,
+         220,
+         90,
+         220,
+         150,
+         40,
+         150
+        ],
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         90,
+         220,
+         90,
+         260,
+         60,
+         80,
+         60
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         220,
+         90,
+         260,
+         60,
+         260,
+         120,
+         220,
+         150
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 175,
+        "text": "L = 5 m",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 8,
+        "y": 125,
+        "text": "e",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 165,
+        "y": 52,
+        "text": "l = 4 m",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 100,
+        "text": "e = 0,12 m",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Une dalle de 5 m × 4 m et de 12 cm d'épaisseur.",
+     "alt": "Un parallélépipède plat dessiné en perspective : la longueur de 5 m est sur la face avant, la largeur de 4 m sur la face supérieure, l'épaisseur e de 0,12 m sur le côté."
+    },
+    {
+     "type": "example",
+     "title": "Volume d'une dalle",
+     "statement": "Calculer le volume de béton d'une dalle de 5 m de long, 4 m de large et 12 cm d'épaisseur.",
+     "steps": [
+      {
+       "md": "Conversion : 12 cm = 0,12 m."
+      },
+      {
+       "md": "$V = L \\times l \\times e$.",
+       "tex": "V = 5 \\times 4 \\times 0,12 = 2,4\\ \\text{m}^3"
+      }
+     ],
+     "answer": "**V = 2,4 m³.**"
+    },
+    {
+     "type": "example",
+     "title": "Poteau cylindrique",
+     "statement": "Un poteau cylindrique de diamètre 30 cm et de hauteur 3 m. Volume (π ≈ 3,14) ?",
+     "steps": [
+      {
+       "md": "Rayon : $r = 30/2 = 15$ cm = 0,15 m.",
+       "tex": "r = 0,15\\ \\text{m}"
+      },
+      {
+       "md": "$V = \\pi r^2 h$.",
+       "tex": "V = 3,14 \\times 0,15^2 \\times 3 = 0,212\\ \\text{m}^3"
+      }
+     ],
+     "answer": "**V ≈ 0,212 m³ soit environ 212 litres.**"
+    },
+    {
+     "type": "example",
+     "title": "Masse d'une dalle",
+     "statement": "On donne, pour ce béton, $\\rho = 2\\,400$ kg/m³. Quelle est la masse de la dalle de 2,4 m³ (les 5 × 4 × 0,12 du premier exemple) ?",
+     "steps": [
+      {
+       "md": "$m = \\rho \\times V$.",
+       "tex": "m = 2400 \\times 2,4"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "m = 5 760\\ \\text{kg}"
+      }
+     ],
+     "answer": "**m = 5 760 kg, soit 5,76 tonnes.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger cm et m dans le même calcul (0,12 m et non 12).\n- Utiliser le diamètre à la place du rayon dans $\\pi r^2$.\n- Confondre aire (m²) et volume (m³).\n- Oublier que 1 m³ = 1 000 L, et non 100 L."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour une forme complexe (dalle avec un décrochement), on la décompose en formes simples et on additionne les volumes.",
+      "Pour les fondations, la tranchée creusée est un parallélépipède : volume = longueur × largeur × profondeur."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-genie-civil-materiaux-1re-grandeurs-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton",
+   "title": "Le béton : composition, proportions et quantités",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, série F4 — génie civil (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire la composition d'un béton.",
+    "Partager une quantité selon des proportions données (ciment : sable : gravier).",
+    "Calculer les quantités de matériaux et le nombre de sacs pour un volume de béton.",
+    "Interpréter un rapport eau/ciment donné."
+   ],
+   "prerequisites": [
+    "etp-genie-civil-materiaux-1re-grandeurs"
+   ],
+   "exercises": [
+    "etp-genie-civil-materiaux-1re-beton-01",
+    "etp-genie-civil-materiaux-1re-beton-02",
+    "etp-genie-civil-materiaux-1re-beton-03",
+    "etp-genie-civil-materiaux-1re-beton-04",
+    "etp-genie-civil-materiaux-1re-beton-05",
+    "etp-genie-civil-materiaux-1re-beton-06"
+   ],
+   "selfCheck": [
+    "etp-genie-civil-materiaux-1re-beton-q1",
+    "etp-genie-civil-materiaux-1re-beton-q2",
+    "etp-genie-civil-materiaux-1re-beton-q3",
+    "etp-genie-civil-materiaux-1re-beton-q4",
+    "etp-genie-civil-materiaux-1re-beton-q5"
+   ],
+   "reviewNotes": [
+    "AUCUN dosage normatif n'est affirmé dans cette fiche : toutes les proportions, masses de ciment par m³, rapport eau/ciment et tailles de sac sont des DONNÉES D'ÉNONCÉ fictives.",
+    "À relire par un enseignant de génie civil : la phrase sur l'effet d'un excès d'eau doit rester qualitative."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Composition",
+     "md": "Le **béton** est un mélange de **ciment** (liant), de **sable** et de **gravier** (granulats) et d'**eau**. Le ciment et l'eau forment une pâte qui durcit et lie les granulats. Les quantités de chaque constituant se définissent par un **dosage**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Dosage en proportions",
+     "md": "Un dosage en proportions s'écrit « ciment : sable : gravier = 1 : 2 : 4 » : pour **1 part** de ciment il y a **2 parts** de sable et **4 parts** de gravier. Les nombres sont **donnés par l'énoncé** ; ils ne sont pas à retenir comme règle. Méthode : 1) additionner les parts (ici $1 + 2 + 4 = 7$) ; 2) diviser le volume total par 7 pour obtenir la valeur d'une part ; 3) multiplier par les parts de chaque matériau."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Autres données utiles (fournies par l'énoncé)",
+     "md": "- **Masse de ciment par m³ de béton** : $m_{\\text{ciment}} = \\text{dosage} \\times V_{\\text{béton}}$.\n- **Nombre de sacs** = masse totale / masse d'un sac, **arrondi au nombre entier supérieur** (on ne peut pas acheter une fraction de sac).\n- **Rapport eau/ciment** $E/C$ : $m_{\\text{eau}} = E/C \\times m_{\\text{ciment}}$ (1 litre d'eau pèse 1 kg)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 10,
+        "w": 85,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 47.5,
+        "y": 32.25,
+        "text": "Ciment",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 52,
+        "w": 85,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 47.5,
+        "y": 74.25,
+        "text": "Sable",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 94,
+        "w": 85,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 47.5,
+        "y": 116.25,
+        "text": "Gravier",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 136,
+        "w": 85,
+        "h": 22,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 47.5,
+        "y": 151.9,
+        "text": "Eau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 55,
+        "w": 110,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 85.25,
+        "text": "Malaxage",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 55,
+        "w": 120,
+        "h": 50,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 370.0,
+        "y": 85.25,
+        "text": "Béton frais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 27,
+        "x2": 150,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 69,
+        "x2": 150,
+        "y2": 78,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 111,
+        "x2": 150,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 147,
+        "x2": 150,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 80,
+        "x2": 310,
+        "y2": 80,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Les constituants sont mélangés (malaxage) pour obtenir le béton frais.",
+     "alt": "Quatre rectangles à gauche (ciment, sable, gravier, eau) reliés par des flèches à un rectangle Malaxage, lui-même relié par une flèche à un rectangle Béton frais."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Ciment",
+        "value": 1,
+        "color": "grey"
+       },
+       {
+        "label": "Sable",
+        "value": 2,
+        "color": "orange"
+       },
+       {
+        "label": "Gravier",
+        "value": 4,
+        "color": "brown"
+       }
+      ]
+     },
+     "caption": "Un dosage 1 : 2 : 4 en parts de volume (donnée d'énoncé).",
+     "alt": "Diagramme en barres : ciment 1 part, sable 2 parts, gravier 4 parts."
+    },
+    {
+     "type": "example",
+     "title": "Partager en proportions",
+     "statement": "Pour réaliser la dalle de 2,4 m³, l'énoncé donne le dosage ciment : sable : gravier = 1 : 2 : 4 en volumes et indique qu'il faut 1,5 m³ de matériaux secs par m³ de béton. Quels volumes de chaque matériau ?",
+     "steps": [
+      {
+       "md": "Matériaux secs : $1{,}5 \\times 2{,}4$.",
+       "tex": "V_{sec} = 3,6\\ \\text{m}^3"
+      },
+      {
+       "md": "Nombre de parts : $1 + 2 + 4 = 7$ ; valeur d'une part.",
+       "tex": "\\frac{3,6}{7} \\approx 0,514\\ \\text{m}^3"
+      },
+      {
+       "md": "Chaque matériau.",
+       "tex": "\\text{ciment} \\approx 0,51 \\;;\\; \\text{sable} \\approx 1,03 \\;;\\; \\text{gravier} \\approx 2,06\\ \\text{m}^3"
+      }
+     ],
+     "answer": "**Ciment ≈ 0,51 m³, sable ≈ 1,03 m³, gravier ≈ 2,06 m³.**"
+    },
+    {
+     "type": "example",
+     "title": "Sacs de ciment et eau",
+     "statement": "Pour 2,4 m³ de béton, l'énoncé donne 350 kg de ciment par m³, des sacs de 50 kg, et un rapport E/C de 0,5. Combien de sacs et quelle quantité d'eau ?",
+     "steps": [
+      {
+       "md": "Masse de ciment.",
+       "tex": "350 \\times 2,4 = 840\\ \\text{kg}"
+      },
+      {
+       "md": "Sacs : $840 / 50 = 16{,}8$, arrondi au supérieur.",
+       "tex": "17\\ \\text{sacs}"
+      },
+      {
+       "md": "Eau : $E/C \\times$ masse de ciment, avec 1 L = 1 kg.",
+       "tex": "0,5 \\times 840 = 420\\ \\text{L}"
+      }
+     ],
+     "answer": "**17 sacs ; 420 L d'eau** (calculés avec 840 kg de ciment)."
+    },
+    {
+     "type": "example",
+     "title": "Nombre de brouettes",
+     "statement": "Une brouette contient 60 L (donnée de l'énoncé). Combien de brouettes pour le sable de l'exemple 1 ?",
+     "steps": [
+      {
+       "md": "Volume de sable en litres.",
+       "tex": "1,029\\ \\text{m}^3 = 1 029\\ \\text{L}"
+      },
+      {
+       "md": "Division, arrondie au supérieur.",
+       "tex": "\\frac{1 029}{60} \\approx 17,1 \\Rightarrow 18\\ \\text{brouettes}"
+      }
+     ],
+     "answer": "**18 brouettes.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Diviser par le nombre de matériaux (3) au lieu du nombre de **parts** (7).\n- Arrondir un nombre de sacs à l'entier le plus proche : on arrondit au **supérieur**.\n- Mélanger kg et m³ : le dosage en proportions est en volumes, le dosage en ciment par m³ est en masse.\n- Considérer qu'un excès d'eau améliore le béton : un excès d'eau le rend en général moins résistant (principe général, à discuter avec l'enseignant).",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dans la pratique, les dosages sont fixés par des normes et les cahiers des charges (non présentés ici) ; on doit s'y référer.",
+      "Le volume de béton obtenu est inférieur à la somme des volumes de matériaux secs : c'est pourquoi l'énoncé fournit le volume de matériaux secs nécessaire par m³."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-genie-civil-materiaux-1re-beton-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "Calculer l'aire d'une pièce rectangulaire de 6 m sur 4,5 m.",
+   "explanation": "$6 \\times 4{,}5 = 27$ m².",
+   "source": "Exercice original",
+   "answer": 27.0,
+   "tolerance": 0.01,
+   "unit": "m²"
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "Une semelle mesure 10 m de long, 0,5 m de large et 0,4 m de haut. Calculer son volume.",
+   "explanation": "$10 \\times 0{,}5 \\times 0{,}4 = 2$ m³.",
+   "source": "Exercice original",
+   "answer": 2.0,
+   "tolerance": 0.001,
+   "unit": "m³"
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "Un volume de 0,75 m³ correspond à :",
+   "explanation": "$0{,}75 \\times 1\\,000 = 750$ L.",
+   "source": "Exercice original",
+   "choices": [
+    "7,5 L",
+    "75 L",
+    "750 L",
+    "7 500 L"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "Un pignon a la forme d'un triangle de base 8 m et de hauteur 3 m. Quelle est son aire ?",
+   "explanation": "$A = (8 \\times 3)/2 = 12$ m².",
+   "source": "Exercice original",
+   "answer": 12.0,
+   "tolerance": 0,
+   "unit": "m²"
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "On donne $\\rho = 1\\,800$ kg/m³ pour un sable humide (donnée fictive). Quelle masse pour 0,5 m³ ?",
+   "explanation": "$m = \\rho V = 1\\,800 \\times 0{,}5 = 900$ kg.",
+   "source": "Exercice original",
+   "answer": 900.0,
+   "tolerance": 0,
+   "unit": "kg"
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "Un abri comprend une dalle de 4 m × 3 m × 10 cm et un poteau cylindrique de 40 cm de diamètre et 2,5 m de hauteur. On prend $\\pi \\approx 3{,}14$ et, pour ce béton, $\\rho = 2\\,400$ kg/m³ (données de l'énoncé).",
+   "method": "Convertir en mètres, calculer chaque volume, additionner, puis appliquer ρ.",
+   "mistakes": [
+    "Prendre 40 cm comme rayon."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-genie-civil-materiaux-1re-grandeurs-06-a",
+     "points": 1,
+     "prompt": "Volume de la dalle (m³).",
+     "explanation": "$4 \\times 3 \\times 0{,}10 = 1,2$ m³.",
+     "kind": "numeric",
+     "answer": 1.2,
+     "tolerance": 0.001,
+     "unit": "m³"
+    },
+    {
+     "id": "etp-genie-civil-materiaux-1re-grandeurs-06-b",
+     "points": 1,
+     "prompt": "Volume du poteau (m³, arrondi au millième).",
+     "explanation": "$r = 0{,}20$ m ; $V = 3{,}14 \\times 0{,}2^2 \\times 2{,}5 = 0,314$ m³.",
+     "kind": "numeric",
+     "answer": 0.314,
+     "tolerance": 0.001,
+     "unit": "m³"
+    },
+    {
+     "id": "etp-genie-civil-materiaux-1re-grandeurs-06-c",
+     "points": 1,
+     "prompt": "Volume total de béton (m³, arrondi au millième).",
+     "explanation": "$1,2 + 0,314 = 1,514$ m³.",
+     "kind": "numeric",
+     "answer": 1.514,
+     "tolerance": 0.001,
+     "unit": "m³"
+    },
+    {
+     "id": "etp-genie-civil-materiaux-1re-grandeurs-06-d",
+     "points": 1,
+     "prompt": "Masse de la dalle seule (kg).",
+     "explanation": "$2\\,400 \\times 1,2 = 2 880$ kg.",
+     "kind": "numeric",
+     "answer": 2880.0,
+     "tolerance": 0,
+     "unit": "kg"
+    }
+   ]
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "L'aire d'un disque de rayon $r$ est :",
+   "choices": [
+    "$2\\pi r$",
+    "$\\pi r^2$",
+    "$\\pi r^3$",
+    "$r^2/2$"
+   ],
+   "answer": 1,
+   "explanation": "$A = \\pi r^2$."
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "1 m³ vaut :",
+   "choices": [
+    "10 L",
+    "100 L",
+    "1 000 L",
+    "10 000 L"
+   ],
+   "answer": 2,
+   "explanation": "1 m³ = 1 000 L."
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "L'unité de la masse volumique est :",
+   "choices": [
+    "kg/m³",
+    "m³/kg",
+    "kg·m",
+    "N/m²"
+   ],
+   "answer": 0,
+   "explanation": "Masse sur volume."
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "Aire d'un triangle de base 6 m et de hauteur 4 m :",
+   "choices": [
+    "24 m²",
+    "10 m²",
+    "12 m²",
+    "20 m²"
+   ],
+   "answer": 2,
+   "explanation": "$6 \\times 4 / 2 = 12$."
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-grandeurs-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-grandeurs",
+   "prompt": "25 cm s'écrit en mètres :",
+   "choices": [
+    "25 m",
+    "2,5 m",
+    "0,25 m",
+    "0,025 m"
+   ],
+   "answer": 2,
+   "explanation": "25 cm = 0,25 m."
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "Dosage ciment : sable : gravier = 1 : 3 : 5 (donnée). Pour 18 m³ de matériaux secs, quel volume de sable ?",
+   "explanation": "Parts : $1 + 3 + 5 = 9$ ; une part : $18/9 = 2$ m³ ; sable : $3 \\times 2 = 6$ m³.",
+   "source": "Exercice original",
+   "answer": 6.0,
+   "tolerance": 0,
+   "unit": "m³"
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "On donne 300 kg de ciment par m³ de béton. Quelle masse de ciment pour 2 m³ ?",
+   "explanation": "$300 \\times 2 = 600$ kg.",
+   "source": "Exercice original",
+   "answer": 600,
+   "tolerance": 0,
+   "unit": "kg"
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "Il faut 17,2 sacs de ciment : combien en commande-t-on ?",
+   "explanation": "On arrondit au nombre entier supérieur : 18.",
+   "source": "Exercice original",
+   "choices": [
+    "17",
+    "17,2",
+    "18",
+    "16"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "Masse de ciment : 600 kg ; rapport E/C = 0,45 (donnée). Quelle quantité d'eau (litres) ?",
+   "explanation": "$0{,}45 \\times 600 = 270$ L.",
+   "source": "Exercice original",
+   "answer": 270.0,
+   "tolerance": 0,
+   "unit": "L"
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "Un dosage 1 : 2 : 4 signifie qu'il y a 1 kg de ciment pour 2 kg de sable et 4 kg de gravier, quelle que soit l'unité.",
+   "explanation": "Le dosage en proportions peut se donner en volumes ou en masses : l'énoncé précise l'unité. On ne peut pas supposer les kg.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "Six poteaux cylindriques de 30 cm de diamètre et de 3 m de hauteur sont coulés (π ≈ 3,14). L'énoncé donne 350 kg de ciment par m³ de béton et des sacs de 50 kg.",
+   "method": "Volume, masse de ciment, division par la masse d'un sac, arrondi supérieur.",
+   "mistakes": [
+    "Arrondir le nombre de sacs à l'entier inférieur."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Données d'énoncé (dosage, sacs) fictives.",
+   "parts": [
+    {
+     "id": "etp-genie-civil-materiaux-1re-beton-06-a",
+     "points": 1,
+     "prompt": "Volume d'un poteau (m³, arrondi au millième).",
+     "explanation": "$3{,}14 \\times 0{,}15^2 \\times 3 = 0,212$ m³.",
+     "kind": "numeric",
+     "answer": 0.21195,
+     "tolerance": 0.001,
+     "unit": "m³"
+    },
+    {
+     "id": "etp-genie-civil-materiaux-1re-beton-06-b",
+     "points": 1,
+     "prompt": "Volume total des 6 poteaux (m³, arrondi au centième).",
+     "explanation": "$6 \\times 0,212 = 1,272$ m³, soit environ 1,27 m³.",
+     "kind": "numeric",
+     "answer": 1.2717,
+     "tolerance": 0.01,
+     "unit": "m³"
+    },
+    {
+     "id": "etp-genie-civil-materiaux-1re-beton-06-c",
+     "points": 1,
+     "prompt": "Masse de ciment (kg, arrondie à l'unité), en utilisant le volume total non arrondi.",
+     "explanation": "$350 \\times 1,272 \\approx 445$ kg.",
+     "kind": "numeric",
+     "answer": 445.095,
+     "tolerance": 1,
+     "unit": "kg"
+    },
+    {
+     "id": "etp-genie-civil-materiaux-1re-beton-06-d",
+     "points": 1,
+     "prompt": "Nombre de sacs à commander.",
+     "explanation": "$445/50 \\approx 8,90$ : on arrondit au supérieur, soit 9 sacs.",
+     "kind": "numeric",
+     "answer": 9,
+     "tolerance": 0,
+     "unit": "sacs"
+    }
+   ]
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "Les granulats du béton sont :",
+   "choices": [
+    "le ciment et l'eau",
+    "le sable et le gravier",
+    "l'eau seulement",
+    "l'acier"
+   ],
+   "answer": 1,
+   "explanation": "Sable et gravier."
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "Dosage 1 : 2 : 3 (donnée). Nombre de parts total :",
+   "choices": [
+    "3",
+    "5",
+    "6",
+    "7"
+   ],
+   "answer": 2,
+   "explanation": "$1+2+3 = 6$."
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "Pour obtenir un nombre de sacs, on arrondit :",
+   "choices": [
+    "à l'entier le plus proche",
+    "à l'entier inférieur",
+    "à l'entier supérieur",
+    "au dixième"
+   ],
+   "answer": 2,
+   "explanation": "Il faut assez de sacs."
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "1 L d'eau a une masse de :",
+   "choices": [
+    "1 g",
+    "1 kg",
+    "10 kg",
+    "100 g"
+   ],
+   "answer": 1,
+   "explanation": "1 L d'eau = 1 kg."
+  },
+  {
+   "id": "etp-genie-civil-materiaux-1re-beton-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-genie-civil-materiaux-1re-beton",
+   "prompt": "Masse de ciment pour 3 m³ à 350 kg/m³ (donnée) :",
+   "choices": [
+    "105 kg",
+    "1 050 kg",
+    "350 kg",
+    "10 500 kg"
+   ],
+   "answer": 1,
+   "explanation": "$350 \\times 3 = 1\\,050$ kg."
+  }
+ ]
+}

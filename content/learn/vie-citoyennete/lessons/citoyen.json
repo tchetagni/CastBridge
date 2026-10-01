@@ -1,0 +1,931 @@
+{
+ "chapter": "vie-citoyennete-citoyen",
+ "lessons": [
+  {
+   "id": "vie-citoyennete-droits-devoirs",
+   "title": "Droits, devoirs et droits de l'enfant",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation à la citoyenneté (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer droits et devoirs et expliquer leur lien.",
+    "Citer des devoirs du citoyen : respect des lois, impôt, solidarité, vote.",
+    "Présenter en principe les droits de l'enfant.",
+    "Réagir à des situations d'atteinte aux droits."
+   ],
+   "exercises": [
+    "vie-citoyennete-droits-devoirs-01",
+    "vie-citoyennete-droits-devoirs-02",
+    "vie-citoyennete-droits-devoirs-03",
+    "vie-citoyennete-droits-devoirs-04",
+    "vie-citoyennete-droits-devoirs-05",
+    "vie-citoyennete-droits-devoirs-06"
+   ],
+   "selfCheck": [
+    "vie-citoyennete-droits-devoirs-q1",
+    "vie-citoyennete-droits-devoirs-q2",
+    "vie-citoyennete-droits-devoirs-q3",
+    "vie-citoyennete-droits-devoirs-q4",
+    "vie-citoyennete-droits-devoirs-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 4e par défaut (utile à tous les apprenants).",
+    "Institutions et textes : décrits en termes généraux, sans date, sans nom de personne ni article de la Constitution, sans chiffre ; à faire relire par un enseignant d'histoire-géographie ou d'éducation à la citoyenneté.",
+    "Vérifier la présentation des droits de l'enfant : principes généraux (santé, éducation, protection, expression), sans article ni date de convention.",
+    "Vérifier le droit de vote : formulé en principe, sans âge ni procédure.",
+    "Vérifier le ton sur la fiscalité : à quoi servent les impôts, sans taux."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Droits et devoirs",
+     "md": "Un **droit** est une liberté ou une protection reconnue à chacun (aller à l'école, être soigné, s'exprimer). Un **devoir** est une obligation envers les autres et envers la société (respecter la loi, contribuer aux charges communes). Droits et devoirs vont **ensemble** : mon droit s'arrête là où commence celui des autres."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Devoirs du citoyen",
+     "md": "- **Respecter les lois** et les règles communes.\n- **Contribuer** aux charges publiques : payer l'impôt qui finance écoles, routes et hôpitaux.\n- **Voter**, quand on est en âge et inscrit : choisir ses représentants (droit **et** responsabilité).\n- **Pratiquer la solidarité** : aider les plus fragiles.\n- **Respecter** les biens publics et l'environnement.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Droits de l'enfant (principes)",
+     "md": "Les enfants ont des droits reconnus par des textes internationaux et par les lois nationales. En principe : **vivre et être protégé** contre la violence et l'exploitation ; **être soigné** ; **aller à l'école** ; **avoir un nom et une nationalité** ; **s'exprimer** et être écouté selon son âge ; **jouer et se reposer**. L'**intérêt de l'enfant** doit guider les décisions qui le concernent.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 150,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 60.6,
+        "text": "Droits",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 30,
+        "w": 150,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 315.0,
+        "y": 60.6,
+        "text": "Devoirs",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 55,
+        "x2": 240,
+        "y2": 55,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 55,
+        "x2": 160,
+        "y2": 55,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 110,
+        "text": "école, santé, parole",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 110,
+        "text": "lois, impôt, solidarité",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 160,
+        "text": "Mon droit s'arrête là où",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 182,
+        "text": "commence celui des autres",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Droits et devoirs sont liés.",
+     "alt": "Deux rectangles Droits et Devoirs reliés par une double flèche ; sous chacun, des exemples ; en bas, une phrase sur les limites des droits.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Candidat A",
+        "value": 22,
+        "color": "blue"
+       },
+       {
+        "label": "Candidat B",
+        "value": 18,
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "Résultat fictif d'une élection de délégué de classe. (unité : voix)",
+     "alt": "Deux barres : candidat A 22 voix, candidat B 18 voix."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un vote de classe",
+     "statement": "Dans une classe de 40 élèves, tous ont voté. A a 22 voix et B 18 voix. Qui est élu ? Combien d'élèves ont voté pour lui ?",
+     "steps": [
+      {
+       "md": "On vérifie : 22 + 18 = 40 voix, soit 40 votants.",
+       "tex": "22 + 18 = 40"
+      },
+      {
+       "md": "A a plus de voix que B (22 > 18) : A est élu. Il a recueilli 55 % des voix (22 ÷ 40 = 0.55)."
+      }
+     ],
+     "answer": "**A est élu avec 22 voix sur 40.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un droit, un devoir",
+     "statement": "Awa dit : « J'ai le droit de jouer de la musique à fond, c'est mon droit. » Que lui répondre ?",
+     "steps": [
+      {
+       "md": "Elle a le droit de profiter de sa musique, mais ses voisins ont droit au repos et à la tranquillité."
+      },
+      {
+       "md": "Chacun a des droits **et** le devoir de respecter ceux des autres : elle baisse le volume."
+      }
+     ],
+     "answer": "**Les droits s'exercent dans le respect des autres.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Réclamer ses droits en oubliant ses devoirs.\n- Croire que seul l'État doit agir : chacun a un rôle.\n- Penser que les enfants n'ont pas de droits.\n- Croire que voter ne sert à rien.\n- Jeter les déchets en pensant que « ce n'est pas mon problème »."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Connais-tu un service public (école, centre de santé) financé par les contributions de tous ? Que se passerait-il sans lui ?",
+      "Rédige en équipe un petit « code de la classe » avec trois droits et trois devoirs."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-citoyennete-droits-devoirs-01"
+    }
+   ]
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement",
+   "title": "Civisme : corruption, vie scolaire et environnement",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation à la citoyenneté (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer ce qu'est la corruption et pourquoi elle est nuisible.",
+    "Respecter le règlement intérieur et lutter contre le harcèlement.",
+    "Adopter des gestes citoyens pour l'environnement.",
+    "Agir à son niveau pour le bien commun."
+   ],
+   "exercises": [
+    "vie-citoyennete-civisme-ecole-environnement-01",
+    "vie-citoyennete-civisme-ecole-environnement-02",
+    "vie-citoyennete-civisme-ecole-environnement-03",
+    "vie-citoyennete-civisme-ecole-environnement-04",
+    "vie-citoyennete-civisme-ecole-environnement-05",
+    "vie-citoyennete-civisme-ecole-environnement-06"
+   ],
+   "selfCheck": [
+    "vie-citoyennete-civisme-ecole-environnement-q1",
+    "vie-citoyennete-civisme-ecole-environnement-q2",
+    "vie-citoyennete-civisme-ecole-environnement-q3",
+    "vie-citoyennete-civisme-ecole-environnement-q4",
+    "vie-citoyennete-civisme-ecole-environnement-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 4e par défaut (utile à tous les apprenants).",
+    "Institutions et textes : décrits en termes généraux, sans date, sans nom de personne ni article de la Constitution, sans chiffre ; à faire relire par un enseignant d'histoire-géographie ou d'éducation à la citoyenneté.",
+    "Vérifier la définition générale de la corruption et les exemples scolaires : aucune loi, sanction ni chiffre n'est cité.",
+    "Vérifier les conseils sur le harcèlement (en parler à un adulte de confiance, ne pas se moquer) : principes généraux.",
+    "Vérifier les gestes écocitoyens : tri, eau, déchets, arbres, sans chiffre."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Corruption et civisme",
+     "md": "La **corruption** consiste à donner ou à recevoir de l'argent, un cadeau ou une faveur **pour obtenir un avantage injuste** ou contourner les règles (acheter une note, passer devant les autres, payer pour éviter une sanction). Elle fausse l'égalité, ruine la confiance et coûte à tout le monde. Le **civisme**, c'est se comporter en bon citoyen : honnêteté, respect, responsabilité.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Agir contre la corruption",
+     "md": "- Refuser de payer ou de recevoir pour un avantage injuste.\n- Respecter la file d'attente et les règles.\n- Demander des informations claires aux services concernés.\n- En parler à un adulte de confiance ou à une personne responsable.\n- Être un exemple d'honnêteté : tricher à un devoir est une petite corruption de l'effort.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Vie scolaire et harcèlement",
+     "md": "Le **règlement intérieur** de l'école fixe les droits et les devoirs des élèves : ponctualité, respect, tenue, propreté. Il garantit un climat de travail commun. Le **harcèlement** est un comportement répété (moqueries, humiliations, violences, messages blessants) envers une personne. Il fait souffrir et il est **inacceptable**. Si on en est victime ou témoin : ne pas rester seul, **en parler à un adulte de confiance**, soutenir la victime.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Gestes écocitoyens",
+     "md": "Protéger l'**environnement**, c'est protéger notre santé et notre avenir : ne pas jeter les déchets n'importe où, trier ou réutiliser, économiser l'eau, planter et entretenir des arbres, nettoyer les caniveaux, réutiliser les sachets. Les gestes de chacun s'additionnent : un quartier propre est le résultat d'un effort collectif."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 110,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 56.9,
+        "text": "Honnêteté",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 30,
+        "w": 110,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 56.9,
+        "text": "Respect",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 30,
+        "w": 110,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 56.9,
+        "text": "Solidarité",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 105,
+        "text": "pas de fraude",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 105,
+        "text": "règles, autres",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 105,
+        "text": "entraide",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 160,
+        "text": "Le civisme se vit à l'école, au quartier, au pays",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Trois valeurs du civisme.",
+     "alt": "Trois rectangles : honnêteté, respect, solidarité, chacun avec une phrase d'explication, et une phrase sur le civisme à l'école, au quartier, au pays."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Sans tri",
+        "value": 300,
+        "color": "red"
+       },
+       {
+        "label": "Avec réutilisation (moitié)",
+        "value": 150,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Effet d'un geste collectif sur les sachets jetés (chiffres fictifs).",
+     "alt": "Deux barres : 300 sachets jetés sans tri, 150 avec réutilisation de la moitié."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : proposer un pot-de-vin",
+     "statement": "Un élève propose de l'argent à un surveillant pour ne pas être puni d'un retard. Pourquoi est-ce de la corruption ?",
+     "steps": [
+      {
+       "md": "Il offre un avantage pour contourner une règle et éviter une sanction juste."
+      },
+      {
+       "md": "Cela fausse l'égalité entre élèves : les autres respectent la règle. Il doit assumer, et le surveillant doit refuser."
+      }
+     ],
+     "answer": "**C'est de la corruption : refuser et rester honnête.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : les déchets de l'école",
+     "statement": "Chaque jour de classe, 30 élèves jettent chacun 2 sachets, pendant 5 jours. Combien de sachets ? Et si la moitié est réutilisée ?",
+     "steps": [
+      {
+       "md": "Total = 30 × 2 × 5 = 300 sachets.",
+       "tex": "30 \\times 2 \\times 5"
+      },
+      {
+       "md": "Moitié réutilisée : 300 ÷ 2 = 150 sachets jetés en moins."
+      }
+     ],
+     "answer": "**300 sachets ; 150 de moins avec la réutilisation.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que « tout le monde le fait » justifie la corruption ou la triche.\n- Se moquer « pour rire » d'un camarade : c'est peut-être du harcèlement.\n- Ne rien dire face au harcèlement par peur.\n- Jeter ses déchets par terre parce que « quelqu'un nettoiera ».\n- Croire que l'environnement ne concerne pas les élèves."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Organise avec ta classe une journée de propreté dans la cour ou le quartier.",
+      "Rédige trois règles du « bien vivre ensemble » pour ta classe."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-citoyennete-civisme-ecole-environnement-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "vie-citoyennete-droits-devoirs-01",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Associe chaque élément à sa nature.",
+   "explanation": "Chacun relève des droits ou des devoirs.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Aller à l'école",
+     "Droit de l'enfant"
+    ],
+    [
+     "Respecter la loi",
+     "Devoir du citoyen"
+    ],
+    [
+     "Voter",
+     "Droit et responsabilité"
+    ]
+   ]
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Les enfants ont des droits : être protégés, soignés, scolarisés.",
+   "explanation": "Oui, en principe.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Payer l'impôt sert à…",
+   "explanation": "Écoles, routes, hôpitaux.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "financer des services utiles à tous",
+    "enrichir un seul voisin",
+    "supprimer les écoles",
+    "éviter les lois"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Dans une élection, A a 30 voix et B 10 voix. Quel pourcentage des voix pour A ?",
+   "explanation": "Total = 40 ; 30 ÷ 40 = 0.75, soit 75 %.",
+   "source": "Exercice original",
+   "answer": 75,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Choisis un droit de l'enfant et explique ce qu'un adulte doit faire pour le respecter.",
+   "explanation": "Un droit implique des responsabilités de la part des adultes.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Droit à l'éducation : les parents envoient l'enfant à l'école, les enseignants l'accueillent, l'État fournit des écoles.",
+   "rubric": [
+    "Un droit clair",
+    "Une action concrète"
+   ]
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Dans ton quartier, une petite fille est empêchée d'aller à l'école pour garder ses frères.",
+   "method": "Identifie le droit, puis l'action possible.",
+   "mistakes": [
+    "Ignorer la situation par indifférence."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Institutions et textes : décrits en termes généraux, sans date, sans nom de personne ni article de la Constitution, sans chiffre ; à faire relire par un enseignant d'histoire-géographie ou d'éducation à la citoyenneté.",
+   "parts": [
+    {
+     "id": "vie-citoyennete-droits-devoirs-06-a",
+     "points": 1,
+     "prompt": "Quel droit est concerné ?",
+     "explanation": "L'éducation est un droit de l'enfant.",
+     "kind": "mcq",
+     "choices": [
+      "Le droit de voter",
+      "Le droit à l'éducation",
+      "Le droit de voyager",
+      "Le droit de jouer au football"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "vie-citoyennete-droits-devoirs-06-b",
+     "points": 2,
+     "prompt": "Que peut faire un voisin responsable ?",
+     "explanation": "On agit avec respect et on cherche de l'aide.",
+     "kind": "open",
+     "model": "En parler avec la famille avec respect, informer le chef d'établissement, un travailleur social ou un adulte de confiance.",
+     "rubric": [
+      "Dialogue",
+      "Appel à un adulte compétent"
+     ]
+    },
+    {
+     "id": "vie-citoyennete-droits-devoirs-06-c",
+     "points": 1,
+     "prompt": "L'intérêt de l'enfant doit guider les décisions qui le concernent.",
+     "explanation": "Oui.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Un devoir est…",
+   "choices": [
+    "une liberté sans limite",
+    "une obligation envers les autres",
+    "un cadeau",
+    "un loisir"
+   ],
+   "answer": 1,
+   "explanation": "Devoirs et droits vont ensemble.",
+   "review": true
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Voter est…",
+   "choices": [
+    "un droit et une responsabilité",
+    "interdit",
+    "inutile",
+    "une punition"
+   ],
+   "answer": 0,
+   "explanation": "C'est un moyen de choisir ses représentants.",
+   "review": true
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Un droit de l'enfant est…",
+   "choices": [
+    "de conduire",
+    "de signer des contrats",
+    "de voter à tout âge",
+    "d'aller à l'école"
+   ],
+   "answer": 3,
+   "explanation": "L'éducation est un droit.",
+   "review": true
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "La solidarité consiste à…",
+   "choices": [
+    "ignorer les autres",
+    "être égoïste",
+    "aider les personnes fragiles",
+    "refuser de contribuer"
+   ],
+   "answer": 2,
+   "explanation": "C'est un devoir civique.",
+   "review": true
+  },
+  {
+   "id": "vie-citoyennete-droits-devoirs-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-droits-devoirs",
+   "prompt": "Mon droit s'arrête…",
+   "choices": [
+    "jamais",
+    "là où commence celui des autres",
+    "à la maison",
+    "à l'école"
+   ],
+   "answer": 1,
+   "explanation": "Chaque droit est limité par les droits des autres.",
+   "review": true
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-01",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Donner de l'argent pour être favorisé est de la corruption.",
+   "explanation": "Oui.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Que faire face à un camarade harcelé ?",
+   "explanation": "Ne pas laisser la victime seule.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Le soutenir et en parler à un adulte de confiance",
+    "Rire avec les autres",
+    "Ne rien voir",
+    "Répéter les moqueries"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Chaque élève d'une classe de 40 jette 1 sachet par jour. Combien de sachets en 5 jours ?",
+   "explanation": "40 × 5 = 200 sachets.",
+   "source": "Exercice original",
+   "answer": 200,
+   "tolerance": 0,
+   "unit": "sachets"
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Quelle attitude est écocitoyenne ?",
+   "explanation": "Trier et réutiliser protègent l'environnement.",
+   "source": "Exercice original",
+   "choices": [
+    "Jeter à la rue",
+    "Gaspiller l'eau",
+    "Trier ou réutiliser les déchets",
+    "Casser les arbres"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Un camarade te propose de copier sur toi pendant un devoir. Que réponds-tu ?",
+   "explanation": "Refuser la triche est un acte de civisme.",
+   "source": "Exercice original",
+   "model": "Je refuse poliment : c'est de la triche, injuste pour les autres et inutile pour lui ; je propose de l'aider à réviser.",
+   "rubric": [
+    "Refus clair",
+    "Argument d'honnêteté",
+    "Proposition d'aide"
+   ]
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Dans ton école, des élèves se moquent chaque jour d'un camarade timide et publient des messages méchants sur lui.",
+   "method": "Repère la répétition et la souffrance, puis agis avec un adulte de confiance.",
+   "mistakes": [
+    "Minimiser les faits."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Institutions et textes : décrits en termes généraux, sans date, sans nom de personne ni article de la Constitution, sans chiffre ; à faire relire par un enseignant d'histoire-géographie ou d'éducation à la citoyenneté.",
+   "parts": [
+    {
+     "id": "vie-citoyennete-civisme-ecole-environnement-06-a",
+     "points": 1,
+     "prompt": "Ce comportement est…",
+     "explanation": "Il est répété et blessant.",
+     "kind": "mcq",
+     "choices": [
+      "une plaisanterie amicale",
+      "un jeu",
+      "du harcèlement",
+      "un devoir"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "vie-citoyennete-civisme-ecole-environnement-06-b",
+     "points": 2,
+     "prompt": "Que peut faire un témoin ? Donne deux actions.",
+     "explanation": "Le témoin a un rôle important.",
+     "kind": "open",
+     "model": "Soutenir la victime, refuser de participer ou de relayer les messages, et prévenir un adulte de confiance.",
+     "rubric": [
+      "Soutien ou refus de participer",
+      "Alerte à un adulte"
+     ]
+    },
+    {
+     "id": "vie-citoyennete-civisme-ecole-environnement-06-c",
+     "points": 1,
+     "prompt": "Se taire par peur aide le harcèlement à continuer.",
+     "explanation": "Oui : le silence l'encourage.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "La corruption est…",
+   "choices": [
+    "un cadeau d'anniversaire",
+    "un avantage injuste obtenu contre un cadeau ou de l'argent",
+    "un impôt",
+    "une loi"
+   ],
+   "answer": 1,
+   "explanation": "Elle fausse l'égalité.",
+   "review": true
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Le règlement intérieur fixe…",
+   "choices": [
+    "les droits et devoirs des élèves",
+    "le prix des fournitures",
+    "les lois du pays",
+    "les jours fériés"
+   ],
+   "answer": 0,
+   "explanation": "Il organise la vie de l'école.",
+   "review": true
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Un geste écocitoyen est…",
+   "choices": [
+    "de jeter par terre",
+    "de brûler les sachets n'importe où",
+    "de gaspiller l'eau",
+    "de ramasser et trier les déchets"
+   ],
+   "answer": 3,
+   "explanation": "Chacun peut agir.",
+   "review": true
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Face au harcèlement, il faut…",
+   "choices": [
+    "se taire",
+    "se venger",
+    "en parler à un adulte de confiance",
+    "rire"
+   ],
+   "answer": 2,
+   "explanation": "On ne reste pas seul.",
+   "review": true
+  },
+  {
+   "id": "vie-citoyennete-civisme-ecole-environnement-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-citoyennete-civisme-ecole-environnement",
+   "prompt": "Le civisme, c'est…",
+   "choices": [
+    "ne penser qu'à soi",
+    "se comporter en bon citoyen",
+    "contourner les règles",
+    "éviter les autres"
+   ],
+   "answer": 1,
+   "explanation": "Honnêteté, respect, solidarité.",
+   "review": true
+  }
+ ]
+}

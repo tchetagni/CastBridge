@@ -1,0 +1,402 @@
+{
+ "chapter": "sup-l1-comptabilite-generale-tva",
+ "lessons": [
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations",
+   "title": "Opérations courantes et TVA",
+   "minutes": 55,
+   "programRef": "L1 — Opérations courantes et TVA (taux fourni par l'énoncé) (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer un montant hors taxes, une TVA et un montant TTC à partir d'un taux donné.",
+    "Enregistrer un achat et une vente avec TVA.",
+    "Calculer la TVA à décaisser ou le crédit de TVA.",
+    "Traiter une remise commerciale et un règlement."
+   ],
+   "prerequisites": [
+    "sup-l1-comptabilite-generale-journal-balance"
+   ],
+   "exercises": [
+    "sup-l1-comptabilite-generale-tva-operations-01",
+    "sup-l1-comptabilite-generale-tva-operations-02",
+    "sup-l1-comptabilite-generale-tva-operations-03",
+    "sup-l1-comptabilite-generale-tva-operations-04",
+    "sup-l1-comptabilite-generale-tva-operations-05",
+    "sup-l1-comptabilite-generale-tva-operations-06",
+    "sup-l1-comptabilite-generale-tva-operations-07"
+   ],
+   "selfCheck": [
+    "sup-l1-comptabilite-generale-tva-operations-q1",
+    "sup-l1-comptabilite-generale-tva-operations-q2",
+    "sup-l1-comptabilite-generale-tva-operations-q3",
+    "sup-l1-comptabilite-generale-tva-operations-q4",
+    "sup-l1-comptabilite-generale-tva-operations-q5"
+   ],
+   "reviewNotes": [
+    "Le taux de 19,25 % est une donnée d'énoncé : il ne doit pas être présenté comme règle ; à vérifier dans le Code général des impôts du Cameroun et dans le cours.",
+    "Intitulés « TVA facturée » / « TVA récupérable » en langage courant ; ne pas citer les numéros de comptes.",
+    "Traitement simplifié : pas de prorata, pas de TVA sur immobilisations, pas de régimes dérogatoires."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La TVA, impôt sur la consommation",
+     "md": "La **taxe sur la valeur ajoutée** (TVA) est un impôt indirect sur la **consommation** : le consommateur final la supporte, les entreprises la **collectent** pour l'État. Chaque entreprise facture la TVA à ses clients (**TVA collectée**) et récupère celle payée à ses fournisseurs (**TVA déductible**) ; elle ne reverse que la différence. Le **taux** est fixé par la loi ; il est ici **fourni par l'énoncé**.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Calculs HT, TVA, TTC",
+     "md": "Avec un taux $t$ (par exemple $t = 0{,}1925$ pour 19,25 %) :",
+     "tex": "TVA = HT \\times t \\quad ; \\quad TTC = HT \\times (1 + t) \\quad ; \\quad HT = \\frac{TTC}{1 + t}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "TVA à décaisser",
+     "md": "Sur une période :",
+     "tex": "\\text{TVA à décaisser} = \\text{TVA collectée} - \\text{TVA déductible}"
+    },
+    {
+     "type": "text",
+     "md": "Si la TVA déductible dépasse la TVA collectée, l'entreprise détient un **crédit de TVA** sur l'État. Pour l'entreprise, la TVA est **neutre** : elle n'est ni une charge ni un produit, mais une créance ou une dette envers l'État."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "TVA collectée",
+        "value": 288750.0,
+        "color": "green"
+       },
+       {
+        "label": "TVA déductible",
+        "value": 192500.0,
+        "color": "orange"
+       },
+       {
+        "label": "À décaisser",
+        "value": 96250.0,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "TVA collectée, TVA déductible et TVA à décaisser (exemple 2). (unité : FCFA)",
+     "alt": "Trois barres : TVA collectée 288 750 FCFA, TVA déductible 192 500 FCFA et TVA à décaisser 96 250 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — de HT à TTC",
+     "statement": "On suppose un taux de TVA de 19,25 % (fourni par l'énoncé). Une facture d'achat de marchandises porte un montant hors taxes de 1 000 000 FCFA. Calcule la TVA et le TTC, puis écris l'écriture si la facture est réglée plus tard.",
+     "steps": [
+      {
+       "md": "TVA = 1 000 000 × 0,1925 = 192 500.",
+       "tex": "1000000 \\times 0{,}1925 = 192500"
+      },
+      {
+       "md": "TTC = 1 000 000 + 192 500 = 1 192 500."
+      },
+      {
+       "md": "Écriture à la réception de la facture : D **Achats de marchandises** 1 000 000 ; D **TVA récupérable** 192 500 ; C **Fournisseurs** 1 192 500."
+      }
+     ],
+     "answer": "**TVA : 192 500 ; TTC : 1 192 500 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — TVA à décaisser",
+     "statement": "Même taux. Pendant le mois : achat HT 1 000 000 (ci-dessus) et vente de marchandises HT 1 500 000 payée par banque. Calcule la TVA collectée et la TVA à décaisser et écris la vente.",
+     "steps": [
+      {
+       "md": "TVA collectée = 1 500 000 × 0,1925 = 288 750 ; TTC encaissé = 1 788 750."
+      },
+      {
+       "md": "Vente : D **Banque** 1 788 750 ; C **Ventes de marchandises** 1 500 000 ; C **TVA facturée** 288 750."
+      },
+      {
+       "md": "TVA à décaisser = 288 750 − 192 500 = 96 250. Au règlement : D **TVA facturée** 288 750 ; C **TVA récupérable** 192 500 ; C **Banque** 96 250."
+      }
+     ],
+     "answer": "**TVA à décaisser : 96 250 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — remise commerciale",
+     "statement": "Un fournisseur facture 800 000 FCFA de marchandises avec une remise commerciale de 5 %, taux de TVA 19,25 % (fourni). Calcule le net commercial, la TVA et le TTC.",
+     "steps": [
+      {
+       "md": "Remise = 800 000 × 0,05 = 40 000 ; net commercial = 800 000 − 40 000 = 760 000."
+      },
+      {
+       "md": "TVA = 760 000 × 0,1925 = 146 300 (la TVA se calcule sur le net commercial)."
+      },
+      {
+       "md": "TTC = 760 000 + 146 300 = 906 300."
+      }
+     ],
+     "answer": "**Net : 760 000 ; TVA : 146 300 ; TTC : 906 300 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer la TVA sur le **TTC** au lieu du HT, ou retrouver le HT en retranchant $t \\times TTC$ (il faut **diviser** par $1+t$).\n- Enregistrer la TVA déductible en **charge** : c'est une créance sur l'État.\n- Oublier la **remise commerciale** avant de calculer la TVA.\n- Se tromper de signe : TVA à décaisser = collectée − déductible."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les **escomptes de règlement** et les **frais accessoires** (transport, emballage) suivent des règles précises du cours.",
+      "L'entreprise doit établir des **factures** conformes ; la TVA déductible suppose une facture régulière.",
+      "Certaines opérations sont **exonérées** ou **hors champ** : à voir dans le cours de fiscalité."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-comptabilite-generale-tva-operations-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "Taux de TVA supposé : 19,25 %. HT = 400 000 FCFA. Calcule la TVA.",
+   "explanation": "400 000 × 0,1925 = 77 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 77000.0,
+   "tolerance": 0.5,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "Taux supposé : 19,25 %. HT = 400 000 FCFA. Calcule le TTC.",
+   "explanation": "TTC = 400 000 × 1,1925 = 477 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 477000.0,
+   "tolerance": 0.5,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "La TVA déductible est une charge pour l'entreprise.",
+   "explanation": "Elle est récupérable sur l'État : c'est une créance, non une charge.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "TTC = 596 250 FCFA, taux supposé 19,25 %. Calcule le montant HT.",
+   "explanation": "HT = 596 250 / 1,1925 = 500 000 FCFA.",
+   "method": "Diviser le TTC par (1 + t).",
+   "mistakes": [
+    "Retrancher 19,25 % du TTC."
+   ],
+   "source": "Exercice original",
+   "answer": 500000.0,
+   "tolerance": 0.5,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "Sur un mois, TVA collectée = 520 000 et TVA déductible = 610 000 FCFA. Calcule la TVA à décaisser (valeur négative = crédit de TVA).",
+   "explanation": "520 000 − 610 000 = −90 000 : crédit de TVA de 90 000 FCFA, rien à reverser.",
+   "source": "Exercice original",
+   "answer": -90000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "Explique pourquoi la TVA est « neutre » pour une entreprise assujettie.",
+   "explanation": "TVA : taxe collectée pour le compte de l'État.",
+   "method": "Parcourir la chaîne fournisseur → entreprise → client.",
+   "source": "Exercice original",
+   "model": "L'entreprise facture la TVA à ses clients et la reverse à l'État, après avoir déduit celle qu'elle a payée à ses fournisseurs. Elle n'en supporte pas le coût final : le poids de la taxe est supporté par le consommateur final. Elle figure au bilan en créance ou en dette vis-à-vis de l'État, pas en charge ni en produit.",
+   "rubric": [
+    "Collecte pour l'État",
+    "Déduction de la TVA payée",
+    "Supportée par le consommateur final",
+    "Ni charge ni produit"
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "Une entreprise commerciale fictive (taux de TVA supposé : 19,25 %) réalise dans le mois : achats de marchandises HT 2 000 000 FCFA ; ventes de marchandises HT 3 200 000 FCFA. Les ventes sont encaissées par banque TTC ; les achats sont à crédit.",
+   "method": "Calculer HT → TVA → TTC, puis la différence collectée − déductible.",
+   "mistakes": [
+    "Calculer la TVA des ventes sur le TTC."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-comptabilite-generale-tva-operations-07-a",
+     "points": 1,
+     "prompt": "TVA déductible sur les achats ?",
+     "explanation": "2 000 000 × 0,1925 = 385 000.",
+     "kind": "numeric",
+     "answer": 385000.0,
+     "tolerance": 0.5
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-tva-operations-07-b",
+     "points": 1,
+     "prompt": "Montant TTC encaissé par banque sur les ventes ?",
+     "explanation": "3 200 000 × 1,1925 = 3 816 000.",
+     "kind": "numeric",
+     "answer": 3816000.0,
+     "tolerance": 0.5
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-tva-operations-07-c",
+     "points": 1,
+     "prompt": "TVA à décaisser ?",
+     "explanation": "Collectée 616 000 − déductible 385 000 = 231 000.",
+     "kind": "numeric",
+     "answer": 231000.0,
+     "tolerance": 0.5
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-tva-operations-07-d",
+     "points": 1,
+     "prompt": "Dans l'écriture de la vente, que fait-on de la TVA collectée ?",
+     "explanation": "D Banque (TTC) / C Ventes (HT) + C TVA facturée.",
+     "kind": "mcq",
+     "choices": [
+      "On la crédite au compte de TVA facturée",
+      "On la débite en charge",
+      "On l'ignore",
+      "On la crédite aux ventes"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "TVA = ",
+   "choices": [
+    "TTC × taux",
+    "HT × taux",
+    "HT / taux",
+    "HT + taux"
+   ],
+   "answer": 1,
+   "explanation": "La TVA se calcule sur le HT.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "Avec un taux de 20 % (supposé), HT = 500 : TTC =",
+   "choices": [
+    "400",
+    "520",
+    "100",
+    "600"
+   ],
+   "answer": 3,
+   "explanation": "500 × 1,2 = 600.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "La TVA déductible est comptabilisée :",
+   "choices": [
+    "En charge",
+    "Au capital",
+    "En produit",
+    "Comme créance sur l'État"
+   ],
+   "answer": 3,
+   "explanation": "Elle est récupérable.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "TVA collectée 80 ; TVA déductible 50. La TVA à décaisser est :",
+   "choices": [
+    "130",
+    "30",
+    "50",
+    "−30"
+   ],
+   "answer": 1,
+   "explanation": "80 − 50.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-tva-operations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-tva-operations",
+   "prompt": "Pour trouver le HT à partir du TTC avec un taux t, on :",
+   "choices": [
+    "Soustrait t",
+    "Divise par (1 + t)",
+    "Multiplie par (1 + t)",
+    "Ajoute t"
+   ],
+   "answer": 1,
+   "explanation": "HT = TTC/(1 + t).",
+   "review": true
+  }
+ ]
+}

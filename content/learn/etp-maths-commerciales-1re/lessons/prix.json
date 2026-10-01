@@ -1,0 +1,866 @@
+{
+ "chapter": "etp-maths-commerciales-1re-prix",
+ "lessons": [
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages",
+   "title": "Pourcentages, hausses et baisses",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer un pourcentage d'une quantité.",
+    "Utiliser le coefficient multiplicateur pour une hausse ou une baisse.",
+    "Calculer le taux d'évolution entre deux valeurs.",
+    "Traiter des évolutions successives."
+   ],
+   "exercises": [
+    "etp-maths-commerciales-1re-pourcentages-01",
+    "etp-maths-commerciales-1re-pourcentages-02",
+    "etp-maths-commerciales-1re-pourcentages-03",
+    "etp-maths-commerciales-1re-pourcentages-04",
+    "etp-maths-commerciales-1re-pourcentages-05",
+    "etp-maths-commerciales-1re-pourcentages-06"
+   ],
+   "selfCheck": [
+    "etp-maths-commerciales-1re-pourcentages-q1",
+    "etp-maths-commerciales-1re-pourcentages-q2",
+    "etp-maths-commerciales-1re-pourcentages-q3",
+    "etp-maths-commerciales-1re-pourcentages-q4",
+    "etp-maths-commerciales-1re-pourcentages-q5"
+   ],
+   "reviewNotes": [
+    "Montants et taux fictifs d'exercice.",
+    "Vérifier que la notion de coefficient multiplicateur est au programme de la classe."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Pourcentage",
+     "md": "Un **pourcentage** est une fraction de dénominateur 100. Prendre **t %** d'une quantité Q, c'est calculer Q × t ÷ 100.",
+     "tex": "\\frac{t}{100} \\times Q"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Hausse et baisse",
+     "md": "Une **hausse de t %** multiplie par **1 + t/100** ; une **baisse de t %** multiplie par **1 − t/100**. Ce nombre est le **coefficient multiplicateur**.",
+     "tex": "k = 1 + \\frac{t}{100} \\quad \\text{ou} \\quad k = 1 - \\frac{t}{100}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Taux d'évolution",
+     "md": "Si une valeur passe de V₀ à V₁, le **taux d'évolution** est la variation divisée par la valeur de départ.",
+     "tex": "t = \\frac{V_1 - V_0}{V_0} \\times 100"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Évolutions successives",
+     "md": "On **multiplie les coefficients** : k = k₁ × k₂. Les taux ne s'additionnent pas. Le taux global s'obtient avec (k − 1) × 100."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Prix initial",
+        "value": 100,
+        "color": "blue"
+       },
+       {
+        "label": "Après +20 %",
+        "value": 120,
+        "color": "green"
+       },
+       {
+        "label": "Après −20 %",
+        "value": 96,
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "+20 % puis −20 % : on n'est pas revenu à 100. (unité : % du prix initial)",
+     "alt": "Trois barres : 100 % au départ, 120 % après la hausse de 20 %, 96 % après la baisse de 20 %."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Calculer un pourcentage",
+     "statement": "Une commerçante fictive reçoit 240 000 FCFA de ventes ; 15 % sont payés en espèces. Quelle somme est payée en espèces ?",
+     "steps": [
+      {
+       "md": "On identifie la quantité (240 000) et le taux (15 %)."
+      },
+      {
+       "md": "On multiplie par t ÷ 100 :",
+       "tex": "240000 \\times \\frac{15}{100} = 36000"
+      }
+     ],
+     "answer": "**36 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Taux d'évolution",
+     "statement": "Le prix d'un article passe de 80 000 à 92 000 FCFA. Quel est le taux d'évolution ?",
+     "steps": [
+      {
+       "md": "Variation :",
+       "tex": "92000 - 80000 = 12000"
+      },
+      {
+       "md": "On divise par la valeur de départ :",
+       "tex": "\\frac{12000}{80000} \\times 100 = 15"
+      }
+     ],
+     "answer": "**Hausse de 15 %.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — Évolutions successives",
+     "statement": "Un prix de 50 000 FCFA augmente de 20 %, puis baisse de 20 %. Quel est le prix final et le taux global ?",
+     "steps": [
+      {
+       "md": "Coefficients : 1,20 puis 0,80. Produit :",
+       "tex": "1,2 \\times 0,8 = 0,96"
+      },
+      {
+       "md": "Prix final :",
+       "tex": "50000 \\times 0,96 = 48000"
+      },
+      {
+       "md": "Taux global : (0,96 − 1) × 100 = −4."
+      }
+     ],
+     "answer": "**Prix final 48 000 FCFA, soit une baisse globale de 4 %.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner les taux : +20 % puis −20 % ne fait pas 0 %.\n- Diviser par la valeur d'arrivée au lieu de celle de départ pour le taux d'évolution.\n- Confondre « baisser de 10 % » (×0,90) et « multiplier par 0,10 »."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une hausse de 100 % double une valeur ; une baisse de 100 % l'annule.",
+      "Pour revenir au prix de départ après une hausse de t %, on ne baisse pas de t % : on divise par le coefficient."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-commerciales-1re-pourcentages-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges",
+   "title": "Prix d'achat, prix de revient, prix de vente et marge",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer prix d'achat, prix de revient et prix de vente.",
+    "Calculer une marge et un bénéfice unitaire.",
+    "Calculer taux de marge et taux de marque.",
+    "Déduire le prix de vente à partir d'un taux de marge."
+   ],
+   "prerequisites": [
+    "etp-maths-commerciales-1re-pourcentages"
+   ],
+   "exercises": [
+    "etp-maths-commerciales-1re-marges-01",
+    "etp-maths-commerciales-1re-marges-02",
+    "etp-maths-commerciales-1re-marges-03",
+    "etp-maths-commerciales-1re-marges-04",
+    "etp-maths-commerciales-1re-marges-05",
+    "etp-maths-commerciales-1re-marges-06"
+   ],
+   "selfCheck": [
+    "etp-maths-commerciales-1re-marges-q1",
+    "etp-maths-commerciales-1re-marges-q2",
+    "etp-maths-commerciales-1re-marges-q3",
+    "etp-maths-commerciales-1re-marges-q4",
+    "etp-maths-commerciales-1re-marges-q5"
+   ],
+   "reviewNotes": [
+    "Définitions de marge, taux de marge et taux de marque à confirmer avec le cours de l'enseignant (certains incluent les frais dans le prix de revient).",
+    "Prix HT supposés ; la TVA n'est pas traitée ici."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les trois prix",
+     "md": "- **Prix d'achat (PA)** : prix payé au fournisseur (hors taxe).\n- **Prix de revient (PR)** : prix d'achat + frais (transport, emballage...).\n- **Prix de vente (PV)** : prix payé par le client (hors taxe dans nos exercices)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Marge et bénéfice",
+     "md": "- **Marge commerciale** = PV − PA.\n- **Bénéfice** = PV − PR (après les frais).",
+     "tex": "\\text{Marge} = PV - PA \\qquad \\text{Bénéfice} = PV - PR"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Taux de marge et taux de marque",
+     "md": "- **Taux de marge** = marge ÷ **prix d'achat** × 100.\n- **Taux de marque** = marge ÷ **prix de vente** × 100.",
+     "tex": "t_{marge} = \\frac{\\text{Marge}}{PA} \\times 100 \\qquad t_{marque} = \\frac{\\text{Marge}}{PV} \\times 100"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Remarque",
+     "md": "Le taux de marque est toujours **inférieur à 100 %** car la marge est plus petite que le prix de vente. Le taux de marge peut dépasser 100 %.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 50,
+        "w": 120,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 80.25,
+        "text": "Prix d'achat",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "+",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 50,
+        "w": 120,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 80.25,
+        "text": "Frais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 80,
+        "text": "+",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 50,
+        "w": 110,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 385.0,
+        "y": 80.25,
+        "text": "Bénéfice",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 30,
+        "x2": 290,
+        "y2": 30,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 22,
+        "text": "Prix de revient",
+        "size": 13,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 120,
+        "x2": 440,
+        "y2": 120,
+        "color": "green",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 142,
+        "text": "Prix de vente",
+        "size": 13,
+        "color": "green",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Du prix d'achat au prix de vente.",
+     "alt": "Une barre découpée : prix d'achat, plus frais, plus bénéfice. Prix d'achat plus frais forment le prix de revient ; l'ensemble forme le prix de vente."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Marge et bénéfice",
+     "statement": "Un commerçant fictif achète un article 40 000 FCFA, paie 5 000 FCFA de transport et le vend 60 000 FCFA HT. Calculer prix de revient, marge et bénéfice.",
+     "steps": [
+      {
+       "md": "Prix de revient :",
+       "tex": "40000 + 5000 = 45000"
+      },
+      {
+       "md": "Marge commerciale :",
+       "tex": "60000 - 40000 = 20000"
+      },
+      {
+       "md": "Bénéfice :",
+       "tex": "60000 - 45000 = 15000"
+      }
+     ],
+     "answer": "**PR = 45 000 FCFA ; marge = 20 000 FCFA ; bénéfice = 15 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Prix de vente à partir du taux de marge",
+     "statement": "Prix d'achat 48 000 FCFA, taux de marge 25 %. Trouver le prix de vente puis le taux de marque.",
+     "steps": [
+      {
+       "md": "Marge :",
+       "tex": "48000 \\times \\frac{25}{100} = 12000"
+      },
+      {
+       "md": "Prix de vente :",
+       "tex": "48000 + 12000 = 60000"
+      },
+      {
+       "md": "Taux de marque :",
+       "tex": "\\frac{12000}{60000} \\times 100 = 20"
+      }
+     ],
+     "answer": "**PV = 60 000 FCFA ; taux de marque = 20 %.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Diviser par le mauvais prix : le taux de marge se calcule sur le prix d'achat, le taux de marque sur le prix de vente.\n- Confondre marge (PV − PA) et bénéfice (PV − PR).\n- Oublier les frais dans le prix de revient."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un taux de marge de 25 % correspond à un taux de marque de 20 % : les deux taux décrivent la même marge sous deux angles différents.",
+      "Ces exercices sont hors taxe ; avec la TVA, on distingue prix HT et TTC (voir la fiche de comptabilité)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-commerciales-1re-marges-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Calculer 12 % de 350 000 FCFA.",
+   "explanation": "350 000 × 12 ÷ 100 = 42 000.",
+   "source": "Exercice original",
+   "answer": 42000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Une remise de 10 % sur un article à 25 000 FCFA donne un nouveau prix de…",
+   "explanation": "25 000 × 0,90 = 22 500 FCFA. 2 500 est le montant de la remise, pas le prix.",
+   "source": "Exercice original",
+   "choices": [
+    "2 500 FCFA",
+    "22 500 FCFA",
+    "27 500 FCFA",
+    "15 000 FCFA"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Une hausse de 50 % suivie d'une baisse de 50 % ramène au prix initial.",
+   "explanation": "1,5 × 0,5 = 0,75 : le prix est au final 25 % plus bas.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Après une hausse de 8 %, un prix vaut 129 600,00 FCFA. Quel était le prix avant la hausse ?",
+   "explanation": "Prix initial = 129 600,00 ÷ 1,08 = 120 000.",
+   "method": "Diviser par le coefficient multiplicateur.",
+   "mistakes": [
+    "Retirer 8 % du nouveau prix."
+   ],
+   "source": "Exercice original",
+   "answer": 120000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Associe chaque variation à son coefficient multiplicateur.",
+   "explanation": "Hausse : 1 + t/100 ; baisse : 1 − t/100.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Hausse de 25 %",
+     "1,25"
+    ],
+    [
+     "Baisse de 30 %",
+     "0,70"
+    ],
+    [
+     "Hausse de 5 %",
+     "1,05"
+    ],
+    [
+     "Baisse de 12 %",
+     "0,88"
+    ]
+   ]
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Un sac de riz fictif coûte 18 000 FCFA. Son prix augmente de 10 %, puis un commerçant accorde 5 % de remise sur le nouveau prix.",
+   "method": "Coefficients, produit, taux global.",
+   "mistakes": [
+    "Additionner ou soustraire les taux."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-commerciales-1re-pourcentages-06-a",
+     "points": 1,
+     "prompt": "Prix après la hausse (FCFA) ?",
+     "explanation": "18 000 × 1,10 = 19 800.",
+     "kind": "numeric",
+     "answer": 19800,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-pourcentages-06-b",
+     "points": 1,
+     "prompt": "Prix après la remise (FCFA) ?",
+     "explanation": "19 800 × 0,95 = 18 810.",
+     "kind": "numeric",
+     "answer": 18810,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-pourcentages-06-c",
+     "points": 2,
+     "prompt": "Taux global d'évolution par rapport à 18 000 FCFA (en %) ?",
+     "explanation": "1,10 × 0,95 = 1,045, soit +4,5 %. On vérifie : 18 810 ÷ 18 000 = 1,045.",
+     "kind": "numeric",
+     "answer": 4.5,
+     "tolerance": 0.01,
+     "unit": "%"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-pourcentages-06-d",
+     "points": 1,
+     "prompt": "Peut-on dire que le prix a augmenté de 10 % − 5 % = 5 % ?",
+     "explanation": "Les taux ne s'additionnent pas : on multiplie les coefficients.",
+     "kind": "mcq",
+     "choices": [
+      "Oui, on soustrait les taux",
+      "Non : les coefficients se multiplient, on obtient 4,5 %",
+      "Non, le prix a baissé",
+      "Oui, mais seulement si on arrondit"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Le coefficient multiplicateur d'une hausse de 15 % est…",
+   "choices": [
+    "0,85",
+    "1,15",
+    "15",
+    "1,015"
+   ],
+   "answer": 1,
+   "explanation": "1 + 15/100 = 1,15."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Pour un taux d'évolution, on divise la variation par…",
+   "choices": [
+    "La valeur de départ",
+    "La valeur d'arrivée",
+    "La somme des deux",
+    "100"
+   ],
+   "answer": 0,
+   "explanation": "La base est la valeur de départ."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Un prix de 40 000 baisse de 25 % : il vaut…",
+   "choices": [
+    "10 000",
+    "50 000",
+    "35 000",
+    "30 000"
+   ],
+   "answer": 3,
+   "explanation": "40 000 × 0,75 = 30 000."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "Deux évolutions successives se combinent par…",
+   "choices": [
+    "Addition des taux",
+    "Division des taux",
+    "Multiplication des coefficients",
+    "Moyenne des taux"
+   ],
+   "answer": 2,
+   "explanation": "Les coefficients se multiplient."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-pourcentages-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-pourcentages",
+   "prompt": "20 % de 150 000 FCFA font…",
+   "choices": [
+    "3 000",
+    "30 000",
+    "300 000",
+    "7 500"
+   ],
+   "answer": 1,
+   "explanation": "150 000 × 0,20 = 30 000."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "PA = 25 000 FCFA ; PV = 32 000 FCFA. Quelle est la marge ?",
+   "explanation": "32 000 − 25 000 = 7 000.",
+   "source": "Exercice original",
+   "answer": 7000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "Marge 20 000 FCFA sur un prix d'achat de 80 000 FCFA. Taux de marge (en %) ?",
+   "explanation": "20 000 ÷ 80 000 × 100 = 25 %.",
+   "source": "Exercice original",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "Le taux de marque peut dépasser 100 %.",
+   "explanation": "La marge est toujours plus petite que le prix de vente : le taux de marque est inférieur à 100 %.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "PA = 70 000 FCFA, taux de marge 30 %. Quel est le prix de vente ?",
+   "explanation": "Marge = 70 000 × 0,30 = 21 000 ; PV = 70 000 + 21 000 = 91 000.",
+   "method": "Marge = PA × taux ; PV = PA + marge.",
+   "source": "Exercice original",
+   "answer": 91000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "PA = 60 000 FCFA, PV = 80 000 FCFA. Quel est le taux de marque ?",
+   "explanation": "Marge = 20 000 ; 20 000 ÷ 80 000 = 25 %. Le taux de marge vaudrait 33,3 % (division par le PA).",
+   "mistakes": [
+    "Diviser par le prix d'achat : on obtient le taux de marge."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "20 %",
+    "25 %",
+    "33,3 %",
+    "75 %"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "Un grossiste fictif achète un lot 120 000 FCFA, paie 10 000 FCFA de frais de transport et le revend 156 000 FCFA HT.",
+   "method": "PR, marge, deux taux, bénéfice.",
+   "mistakes": [
+    "Utiliser le prix de revient comme base du taux de marge."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-commerciales-1re-marges-06-a",
+     "points": 1,
+     "prompt": "Prix de revient (FCFA) ?",
+     "explanation": "120 000 + 10 000 = 130 000.",
+     "kind": "numeric",
+     "answer": 130000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-marges-06-b",
+     "points": 1,
+     "prompt": "Marge commerciale (FCFA) ?",
+     "explanation": "156 000 − 120 000 = 36 000.",
+     "kind": "numeric",
+     "answer": 36000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-marges-06-c",
+     "points": 1,
+     "prompt": "Taux de marge (en %) ?",
+     "explanation": "36 000 ÷ 120 000 × 100 = 30 %.",
+     "kind": "numeric",
+     "answer": 30,
+     "tolerance": 0.05,
+     "unit": "%"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-marges-06-d",
+     "points": 1,
+     "prompt": "Taux de marque (en %, arrondi au centième) ?",
+     "explanation": "36 000 ÷ 156 000 × 100 ≈ 23,08 %.",
+     "kind": "numeric",
+     "answer": 23.08,
+     "tolerance": 0.05,
+     "unit": "%"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-marges-06-e",
+     "points": 1,
+     "prompt": "Bénéfice après les frais (FCFA) ?",
+     "explanation": "156 000 − 130 000 = 26 000.",
+     "kind": "numeric",
+     "answer": 26000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "Le prix de revient est…",
+   "choices": [
+    "PV − PA",
+    "PA − frais",
+    "PA + frais",
+    "Marge ÷ PV"
+   ],
+   "answer": 2,
+   "explanation": "On ajoute les frais au prix d'achat."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "Taux de marge = ",
+   "choices": [
+    "Marge ÷ PV",
+    "Marge ÷ PA",
+    "PV ÷ PA",
+    "PA ÷ Marge"
+   ],
+   "answer": 1,
+   "explanation": "Base : le prix d'achat (× 100)."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "Taux de marque = ",
+   "choices": [
+    "Marge ÷ PV",
+    "Marge ÷ PA",
+    "PV − PA",
+    "PR ÷ PV"
+   ],
+   "answer": 0,
+   "explanation": "Base : le prix de vente (× 100)."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "Si PA = 50 000 et la marge est de 10 000, le PV est…",
+   "choices": [
+    "40 000",
+    "50 000",
+    "10 000",
+    "60 000"
+   ],
+   "answer": 3,
+   "explanation": "PV = PA + marge = 60 000."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-marges-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-marges",
+   "prompt": "Le bénéfice est…",
+   "choices": [
+    "PV − PA",
+    "PA − PR",
+    "PV − PR",
+    "PV + frais"
+   ],
+   "answer": 2,
+   "explanation": "On enlève au prix de vente le prix de revient, frais compris."
+  }
+ ]
+}

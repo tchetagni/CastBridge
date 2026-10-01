@@ -1,0 +1,776 @@
+{
+ "chapter": "sup-l2-macroeconomie-keynes",
+ "lessons": [
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme",
+   "title": "Le modèle keynésien en économie fermée",
+   "minutes": 50,
+   "programRef": "L2 — Modèle keynésien simple, économie fermée (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Écrire la condition d'équilibre Y = DA dans le modèle keynésien simple.",
+    "Calculer le revenu d'équilibre et l'épargne d'équilibre.",
+    "Établir et utiliser le multiplicateur d'investissement.",
+    "Mesurer un écart de production et l'investissement nécessaire pour le combler."
+   ],
+   "exercises": [
+    "sup-l2-macroeconomie-keynes-ferme-01",
+    "sup-l2-macroeconomie-keynes-ferme-02",
+    "sup-l2-macroeconomie-keynes-ferme-03",
+    "sup-l2-macroeconomie-keynes-ferme-04",
+    "sup-l2-macroeconomie-keynes-ferme-05",
+    "sup-l2-macroeconomie-keynes-ferme-06",
+    "sup-l2-macroeconomie-keynes-ferme-07"
+   ],
+   "selfCheck": [
+    "sup-l2-macroeconomie-keynes-ferme-q1",
+    "sup-l2-macroeconomie-keynes-ferme-q2",
+    "sup-l2-macroeconomie-keynes-ferme-q3",
+    "sup-l2-macroeconomie-keynes-ferme-q4",
+    "sup-l2-macroeconomie-keynes-ferme-q5"
+   ],
+   "reviewNotes": [
+    "Modèle de court terme à prix fixes et capacités inutilisées ; les paramètres sont fictifs.",
+    "Vérifier la notation du cours (DA, Z, ou D pour la demande globale)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hypothèses",
+     "md": "Le modèle keynésien simple décrit le court terme : les **prix sont fixes**, il existe des **capacités inutilisées**, donc la production s'ajuste à la **demande**. En économie fermée sans État, la demande globale est $DA = C + I$ avec $C = C_0 + cY$ et un investissement $I$ **autonome** (exogène)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Équilibre et multiplicateur",
+     "md": "L'équilibre réalise $Y = DA$. On obtient :",
+     "tex": "Y = C_0 + cY + I \\Rightarrow Y^* = \\frac{C_0 + I}{1 - c} = \\frac{1}{1-c}\\,(C_0 + I)"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Le multiplicateur",
+     "md": "Le coefficient $k = \\frac{1}{1-c}$ est le **multiplicateur** : une variation de la demande autonome $\\Delta A$ provoque une variation du revenu $\\Delta Y = k\\,\\Delta A$. Mécanisme : un supplément de dépense devient revenu, dont une part $c$ est de nouveau dépensée, etc. : $\\Delta Y = \\Delta A\\,(1 + c + c^2 + \\dots) = \\frac{\\Delta A}{1-c}$ (somme d'une suite géométrique de raison $c < 1$)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 280,
+      "xmin": 0,
+      "xmax": 2000,
+      "ymin": 0,
+      "ymax": 2000,
+      "grid": 500,
+      "xlabel": "revenu Y",
+      "ylabel": "demande globale",
+      "curves": [
+       {
+        "expr": "250+0.8*x",
+        "color": "blue",
+        "label": "DA = 250 + 0,8Y"
+       },
+       {
+        "expr": "x",
+        "color": "grey",
+        "label": "DA = Y"
+       }
+      ],
+      "points": [
+       {
+        "x": 1250,
+        "y": 1250,
+        "label": "E (1 250)",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Croix keynésienne : équilibre à l'intersection de DA et de la bissectrice.",
+     "alt": "La droite de demande globale DA = 250 + 0,8 Y coupe la première bissectrice DA = Y au point E de coordonnées (1 250 ; 1 250). À gauche de E la demande dépasse la production, à droite elle est inférieure."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — équilibre",
+     "statement": "C = 100 + 0,8Y et I = 150. Calcule Y∗, C∗, S∗ et le multiplicateur.",
+     "steps": [
+      {
+       "md": "Y = 100 + 0,8Y + 150 ⇒ (1 − 0,8)Y = 250.",
+       "tex": "(1-0,8)Y = 250"
+      },
+      {
+       "md": "Y∗ = 250 / 0,2 = 1250.",
+       "tex": "Y^* = \\frac{250}{0{,}2} = 1250"
+      },
+      {
+       "md": "C∗ = 100 + 0,8×1250 = 1100 ; S∗ = Y∗ − C∗ = 150 = I (condition S = I vérifiée)."
+      },
+      {
+       "md": "Multiplicateur k = 1/(1 − 0,8) = 5."
+      }
+     ],
+     "answer": "**Y∗ = 1250 ; C∗ = 1100 ; S∗ = 150 ; k = 5.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — choc d'investissement et écart de production",
+     "statement": "Avec les mêmes données, l'investissement augmente de 30. Quel est le nouveau revenu ? Si le revenu de plein emploi est 1 500, quel supplément d'investissement faudrait-il pour combler l'écart ?",
+     "steps": [
+      {
+       "md": "ΔY = k·ΔI = 5 × 30 = 150. Nouveau revenu : 1250 + 150 = 1400."
+      },
+      {
+       "md": "Écart avec le plein emploi à l'équilibre initial : 1 500 − 1 250 = 250."
+      },
+      {
+       "md": "Supplément d'investissement nécessaire : ΔI = écart / k = 250 / 5 = 50.",
+       "tex": "\\Delta I = \\frac{250}{5} = 50"
+      }
+     ],
+     "answer": "**Y = 1400 ; ΔI nécessaire = 50.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de **diviser par (1 − c)** : $C_0 + I$ n'est pas le revenu d'équilibre.\n- Appliquer le multiplicateur à une variation de **revenu** au lieu de la variation de la demande **autonome**.\n- Utiliser $1/c$ au lieu de $1/(1-c)$.\n- Oublier que le modèle suppose des capacités inutilisées : au plein emploi, le multiplicateur se heurte à la contrainte d'offre."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le **paradoxe de l'épargne** : si tous les ménages cherchent à épargner davantage (c baisse), le revenu d'équilibre diminue et l'épargne finale peut ne pas augmenter.",
+      "En présence d'un investissement **induit** ($I = I_0 + aY$) le multiplicateur devient $1/(1-c-a)$.",
+      "Le multiplicateur est un effet de **demande** ; son ampleur réelle dépend des fuites (épargne, impôts, importations)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-macroeconomie-keynes-ferme-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert",
+   "title": "Modèle keynésien : État et économie ouverte",
+   "minutes": 55,
+   "programRef": "L2 — Modèle keynésien : État et économie ouverte (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Intégrer impôts forfaitaires, dépenses publiques, exportations et importations dans la demande globale.",
+    "Calculer le revenu d'équilibre dans l'économie ouverte avec État.",
+    "Calculer et interpréter les multiplicateurs de dépenses publiques et d'impôts.",
+    "Déterminer le solde budgétaire et le solde commercial à l'équilibre."
+   ],
+   "prerequisites": [
+    "sup-l2-macroeconomie-keynes-ferme"
+   ],
+   "exercises": [
+    "sup-l2-macroeconomie-keynes-ouvert-01",
+    "sup-l2-macroeconomie-keynes-ouvert-02",
+    "sup-l2-macroeconomie-keynes-ouvert-03",
+    "sup-l2-macroeconomie-keynes-ouvert-04",
+    "sup-l2-macroeconomie-keynes-ouvert-05",
+    "sup-l2-macroeconomie-keynes-ouvert-06",
+    "sup-l2-macroeconomie-keynes-ouvert-07"
+   ],
+   "selfCheck": [
+    "sup-l2-macroeconomie-keynes-ouvert-q1",
+    "sup-l2-macroeconomie-keynes-ouvert-q2",
+    "sup-l2-macroeconomie-keynes-ouvert-q3",
+    "sup-l2-macroeconomie-keynes-ouvert-q4",
+    "sup-l2-macroeconomie-keynes-ouvert-q5"
+   ],
+   "reviewNotes": [
+    "Impôt forfaitaire T et importations M = mY : hypothèses simplificatrices ; certains cours utilisent un impôt proportionnel tY (présenté seulement en ouverture).",
+    "Vérifier la forme du multiplicateur d'impôt (−c/(1−c+m)) par rapport à la notation du cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Demande globale ouverte avec État",
+     "md": "On suppose : consommation $C = C_0 + c\\,(Y - T)$ (avec $T$ impôt forfaitaire), investissement $I$ et dépenses publiques $G$ autonomes, exportations $X$ autonomes, importations $M = mY$ ($0 < m < 1$ : propension marginale à importer).",
+     "tex": "DA = C_0 + c(Y - T) + I + G + X - mY"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Revenu d'équilibre",
+     "md": "En posant $Y = DA$ et en regroupant :",
+     "tex": "Y^* = \\frac{C_0 - cT + I + G + X}{1 - c + m}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Multiplicateurs",
+     "md": "Le dénominateur $1 - c + m$ contient les **fuites** : l'épargne ($1 - c$) et les importations ($m$). Ainsi :\n- multiplicateur de dépenses ($G$, $I$, $X$) : $k = \\frac{1}{1-c+m}$ ;\n- multiplicateur d'impôt forfaitaire : $k_T = \\frac{-c}{1-c+m}$ (une hausse d'impôt réduit le revenu) ;\n- multiplicateur de budget équilibré ($\\Delta G = \\Delta T$) : $\\frac{1-c}{1-c+m}$, positif et inférieur à $k$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "C",
+        "value": 980.0000000000002,
+        "color": "blue"
+       },
+       {
+        "label": "I",
+        "value": 150,
+        "color": "green"
+       },
+       {
+        "label": "G",
+        "value": 120,
+        "color": "orange"
+       },
+       {
+        "label": "X",
+        "value": 70,
+        "color": "purple"
+       },
+       {
+        "label": "M",
+        "value": 120.00000000000003,
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Composantes de la demande à l'équilibre (exemple 1). (unité : unités)",
+     "alt": "Cinq barres : consommation 980, investissement 150, dépenses publiques 120, exportations 70 et importations 120 (à retrancher)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — équilibre et soldes",
+     "statement": "C = 100 + 0,8(Y − T) ; T = 100 ; I = 150 ; G = 120 ; X = 70 ; M = 0,1Y. Calcule Y∗, C, M, le solde budgétaire (T − G) et le solde commercial (X − M).",
+     "steps": [
+      {
+       "md": "Dépense autonome : 100 − 0,8×100 + 150 + 120 + 70 = 360. Dénominateur : 1 − 0,8 + 0,1 = 0,3."
+      },
+      {
+       "md": "Y∗ = 360/0,3 = 1200.",
+       "tex": "Y^* = \\frac{360}{0{,}3} = 1200"
+      },
+      {
+       "md": "C = 100 + 0,8×(1200 − 100) = 980 ; M = 0,1×1200 = 120. Contrôle : 980 + 150 + 120 + 70 − 120 = 1200."
+      },
+      {
+       "md": "Solde budgétaire = T − G = −20 (déficit de 20) ; solde commercial = X − M = −50 (déficit)."
+      }
+     ],
+     "answer": "**Y∗ = 1200 ; déficit budgétaire 20 ; déficit commercial 50.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — politique budgétaire",
+     "statement": "Avec les mêmes données, calcule l'effet sur Y d'une hausse de G de 30, puis d'une hausse de T de 30, puis des deux ensemble.",
+     "steps": [
+      {
+       "md": "k = 1/(1 − 0,8 + 0,1) = 1/0,3 ≈ 3,33 ; ΔY (G) = 3,333 × 30 = 100."
+      },
+      {
+       "md": "k_T = −0,8/0,3 ≈ −2,67 ; ΔY (T) = −2,667 × 30 = −80."
+      },
+      {
+       "md": "Budget équilibré : 100 + (−80) = 20. Vérification : (1 − c)/(1 − c + m) × 30 = 0,2/0,3 × 30 = 20."
+      }
+     ],
+     "answer": "**ΔY = +100 (G) ; −80 (T) ; +20 (G et T).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier $m$ au dénominateur : l'ouverture **réduit** le multiplicateur.\n- Utiliser le même multiplicateur pour $G$ et pour $T$ : l'impôt agit **via** la consommation (fraction $c$), d'où $-c/(1-c+m)$.\n- Oublier de multiplier $T$ par $c$ dans la dépense autonome.\n- Confondre **solde budgétaire** ($T - G$) et **solde commercial** ($X - M$)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Avec un impôt **proportionnel** $T = tY$, le multiplicateur devient $\\frac{1}{1 - c(1-t) + m}$ : l'impôt agit comme un **stabilisateur automatique**.",
+      "Le **déficit jumeau** : déficit budgétaire et déficit commercial peuvent évoluer ensemble.",
+      "Dans l'économie ouverte, une relance budgétaire fuit en partie vers l'étranger (importations) : c'est la fuite $m$."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-macroeconomie-keynes-ouvert-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "C = 50 + 0,6Y et I = 70. Calcule Y∗.",
+   "explanation": "Y = (50 + 70)/(1 − 0,6) = 120/0,4 = 300.",
+   "method": "Y∗ = (C0 + I)/(1 − c).",
+   "source": "Exercice original",
+   "answer": 300.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Calcule le multiplicateur si la propension marginale à consommer vaut 0,75.",
+   "explanation": "k = 1/(1 − 0,75) = 4.",
+   "method": "k = 1/(1 − c).",
+   "source": "Exercice original",
+   "answer": 4.0,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Dans le modèle keynésien simple, l'épargne d'équilibre est égale à l'investissement.",
+   "explanation": "À l'équilibre Y = C + I et Y = C + S, donc S = I.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "k = 4 ; l'investissement baisse de 25. De combien varie le revenu d'équilibre ?",
+   "explanation": "ΔY = k·ΔI = 4 × (−25) = −100.",
+   "method": "ΔY = k·ΔA, signe compris.",
+   "source": "Exercice original",
+   "answer": -100.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Si la propension marginale à consommer augmente, le multiplicateur :",
+   "explanation": "k = 1/(1 − c) croît avec c : une plus grande part du revenu est réinjectée.",
+   "mistakes": [
+    "Confondre c et s."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Est inchangé",
+    "Augmente",
+    "Devient négatif",
+    "Diminue"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Explique en 4-5 lignes le mécanisme du multiplicateur après une hausse de l'investissement.",
+   "explanation": "Le multiplicateur résume les tours successifs de dépense.",
+   "method": "Raisonner tour par tour.",
+   "source": "Exercice original",
+   "model": "Une entreprise investit : elle verse des revenus (salaires, achats). Les bénéficiaires consomment une fraction c de ce revenu supplémentaire, ce qui crée de nouveaux revenus pour d'autres agents, qui consomment à leur tour c de ce supplément, etc. La somme des tours (1 + c + c² + …) donne 1/(1 − c) : l'accroissement total du revenu dépasse la dépense initiale.",
+   "rubric": [
+    "Dépense initiale devient revenu",
+    "Fraction c réinjectée à chaque tour",
+    "Série géométrique",
+    "Résultat 1/(1 − c)"
+   ]
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Une économie fermée sans État a pour fonction de consommation C = 80 + 0,75Y et un investissement autonome I = 120. Le revenu de plein emploi est de 1 000.",
+   "method": "Équilibre, S = I, puis ΔY = k·ΔI.",
+   "mistakes": [
+    "Utiliser le mauvais multiplicateur."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-macroeconomie-keynes-ferme-07-a",
+     "points": 1,
+     "prompt": "Revenu d'équilibre ?",
+     "explanation": "Y = (80+120)/(1−0,75) = 200/0,25 = 800.",
+     "kind": "numeric",
+     "answer": 800.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-macroeconomie-keynes-ferme-07-b",
+     "points": 1,
+     "prompt": "Épargne d'équilibre ?",
+     "explanation": "S = I = 120 (vérification : Y − C = 800 − 680 = 120).",
+     "kind": "numeric",
+     "answer": 120.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-macroeconomie-keynes-ferme-07-c",
+     "points": 1,
+     "prompt": "Écart de production par rapport au plein emploi ?",
+     "explanation": "1 000 − 800 = 200.",
+     "kind": "numeric",
+     "answer": 200.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-macroeconomie-keynes-ferme-07-d",
+     "points": 1,
+     "prompt": "Supplément d'investissement permettant d'atteindre le plein emploi ?",
+     "explanation": "k = 4 ; ΔI = 200/4 = 50.",
+     "kind": "numeric",
+     "answer": 50.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Le revenu d'équilibre keynésien est tel que :",
+   "choices": [
+    "C = I",
+    "S > I",
+    "Y = DA",
+    "Y = C0"
+   ],
+   "answer": 2,
+   "explanation": "Production égale demande.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Le multiplicateur 1/(1 − c) vaut 10 si c =",
+   "choices": [
+    "1,1",
+    "0,1",
+    "0,9",
+    "0,5"
+   ],
+   "answer": 2,
+   "explanation": "1/(1 − 0,9) = 10.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Une hausse autonome de 20 de la demande avec k = 2,5 fait varier le revenu de :",
+   "choices": [
+    "50",
+    "20",
+    "22,5",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "ΔY = 2,5 × 20 = 50.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Le modèle keynésien simple suppose :",
+   "choices": [
+    "Des prix fixes et des capacités inutilisées",
+    "Une économie ouverte",
+    "Des prix parfaitement flexibles",
+    "Le plein emploi permanent"
+   ],
+   "answer": 0,
+   "explanation": "C'est un modèle de court terme guidé par la demande.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ferme-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ferme",
+   "prompt": "Au revenu d'équilibre, l'épargne vaut :",
+   "choices": [
+    "C",
+    "Y",
+    "0 toujours",
+    "I"
+   ],
+   "answer": 3,
+   "explanation": "S = I.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "c = 0,75 ; m = 0,15. Calcule le multiplicateur de dépenses (économie ouverte).",
+   "explanation": "k = 1/(1 − 0,75 + 0,15) = 1/0,4 = 2,5.",
+   "method": "k = 1/(1 − c + m).",
+   "source": "Exercice original",
+   "answer": 2.5,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "Avec k = 2,5, une hausse de G de 40 fait varier Y de :",
+   "explanation": "ΔY = 2,5 × 40 = 100.",
+   "source": "Exercice original",
+   "answer": 100.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "L'introduction des importations proportionnelles au revenu augmente le multiplicateur.",
+   "explanation": "Elle ajoute une fuite : le dénominateur 1 − c + m augmente, donc k diminue.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "c = 0,8 ; m = 0,2. Calcule le multiplicateur d'impôt forfaitaire.",
+   "explanation": "k_T = −c/(1 − c + m) = −0,8/0,4 = −2.",
+   "method": "Signe négatif : l'impôt réduit le revenu.",
+   "mistakes": [
+    "Utiliser le multiplicateur de dépenses."
+   ],
+   "source": "Exercice original",
+   "answer": -2.0,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "Pourquoi le multiplicateur de budget équilibré est-il inférieur au multiplicateur de dépenses ?",
+   "explanation": "ΔG crée ΔY = k·ΔG, mais l'impôt retire c·ΔT de consommation : effet net (1 − c)/(1 − c + m).",
+   "mistakes": [
+    "Croire que le budget équilibré est neutre : il reste expansionniste."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Parce que G ne crée pas de revenu",
+    "Parce que M est nul",
+    "Parce que X augmente",
+    "Parce que l'impôt réduit la consommation d'une fraction c de son montant"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "Un gouvernement veut relancer l'activité. Compare l'efficacité d'une hausse des dépenses publiques et d'une baisse d'impôts de même montant dans ce modèle.",
+   "explanation": "k_G > |k_T| car c < 1.",
+   "method": "Comparer les canaux de transmission.",
+   "source": "Exercice original",
+   "model": "Une hausse de G de ΔG augmente la demande de ΔG immédiatement, puis le multiplicateur 1/(1 − c + m) joue. Une baisse d'impôt de même montant n'augmente la consommation que de c·ΔT, car une part s'épargne : l'effet initial est plus faible, donc le multiplicateur (en valeur absolue) c/(1 − c + m) est inférieur à celui de G.",
+   "rubric": [
+    "Effet direct de G",
+    "Effet partiel de l'impôt via c",
+    "Comparaison des multiplicateurs",
+    "Rôle des fuites"
+   ]
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "Une économie ouverte a : C = 120 + 0,7(Y − T) ; T = 80 ; I = 160 ; G = 140 ; X = 90 ; M = 0,2Y.",
+   "method": "Dépense autonome, dénominateur 1 − c + m, puis multiplicateurs.",
+   "mistakes": [
+    "Oublier c·T."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-macroeconomie-keynes-ouvert-07-a",
+     "points": 1,
+     "prompt": "Quel est le multiplicateur de dépenses ?",
+     "explanation": "k = 1/(1 − 0,7 + 0,2) = 1/0,5 = 2.",
+     "kind": "numeric",
+     "answer": 2.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-macroeconomie-keynes-ouvert-07-b",
+     "points": 2,
+     "prompt": "Quel est le revenu d'équilibre ?",
+     "explanation": "Dépense autonome = 120 − 0,7×80 + 160 + 140 + 90 = 454 ; Y = 454/0,5 = 908.",
+     "kind": "numeric",
+     "answer": 908.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-macroeconomie-keynes-ouvert-07-c",
+     "points": 1,
+     "prompt": "Solde commercial X − M à l'équilibre ?",
+     "explanation": "M = 0,2×908 = 181,6 ; X − M = −91,6.",
+     "kind": "numeric",
+     "answer": -91.6,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-macroeconomie-keynes-ouvert-07-d",
+     "points": 1,
+     "prompt": "De combien varie Y si G augmente de 20 ?",
+     "explanation": "ΔY = 2 × 20 = 40.",
+     "kind": "numeric",
+     "answer": 40.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "Le dénominateur du multiplicateur en économie ouverte avec impôt forfaitaire est :",
+   "choices": [
+    "1 − c + m",
+    "1 − c − m",
+    "c − m",
+    "1 + c + m"
+   ],
+   "answer": 0,
+   "explanation": "Épargne + importations = fuites.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "Le multiplicateur d'impôt forfaitaire est :",
+   "choices": [
+    "Positif et égal à k",
+    "Nul",
+    "Égal à 1",
+    "Négatif : −c/(1 − c + m)"
+   ],
+   "answer": 3,
+   "explanation": "L'impôt réduit la consommation.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "Les importations M = mY représentent une :",
+   "choices": [
+    "Injection",
+    "Fuite",
+    "Dépense publique",
+    "Épargne"
+   ],
+   "answer": 1,
+   "explanation": "Elles détournent une part du revenu vers l'étranger.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "Un déficit budgétaire signifie :",
+   "choices": [
+    "G > T",
+    "X > M",
+    "M > X",
+    "T > G"
+   ],
+   "answer": 0,
+   "explanation": "Les dépenses publiques dépassent les impôts.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-macroeconomie-keynes-ouvert-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-macroeconomie-keynes-ouvert",
+   "prompt": "Une hausse des exportations de 50 avec k = 2 augmente Y de :",
+   "choices": [
+    "100",
+    "52",
+    "25",
+    "50"
+   ],
+   "answer": 0,
+   "explanation": "ΔY = 2 × 50.",
+   "review": true
+  }
+ ]
+}

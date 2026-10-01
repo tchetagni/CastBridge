@@ -1,0 +1,589 @@
+{
+ "chapter": "sup-l1-macroeconomie-monnaie",
+ "lessons": [
+  {
+   "id": "sup-l1-macroeconomie-monnaie",
+   "title": "Monnaie, banques et création monétaire",
+   "minutes": 50,
+   "programRef": "L1 — Monnaie et banques : rôle, création monétaire (notions générales) (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Énoncer les fonctions et les formes de la monnaie.",
+    "Décrire le rôle des banques commerciales et de la banque centrale en termes généraux.",
+    "Expliquer la création monétaire par le crédit et calculer un multiplicateur de dépôts simple.",
+    "Utiliser l'équation des échanges pour raisonner sur la relation monnaie-prix."
+   ],
+   "prerequisites": [
+    "sup-l1-macroeconomie-inflation-chomage"
+   ],
+   "exercises": [
+    "sup-l1-macroeconomie-monnaie-01",
+    "sup-l1-macroeconomie-monnaie-02",
+    "sup-l1-macroeconomie-monnaie-03",
+    "sup-l1-macroeconomie-monnaie-04",
+    "sup-l1-macroeconomie-monnaie-05",
+    "sup-l1-macroeconomie-monnaie-06",
+    "sup-l1-macroeconomie-monnaie-07"
+   ],
+   "selfCheck": [
+    "sup-l1-macroeconomie-monnaie-q1",
+    "sup-l1-macroeconomie-monnaie-q2",
+    "sup-l1-macroeconomie-monnaie-q3",
+    "sup-l1-macroeconomie-monnaie-q4",
+    "sup-l1-macroeconomie-monnaie-q5"
+   ],
+   "reviewNotes": [
+    "Description générale des banques centrales et commerciales ; ne cite aucun taux ni règle réglementaire précise : le coefficient de réserves est donné par l'énoncé.",
+    "Le multiplicateur de dépôts est présenté dans un modèle très simplifié (pas de fuite en billets) ; à adapter au cours.",
+    "Ne pas affirmer de règles précises sur la monnaie de la zone d'étude sans relecture."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les fonctions de la monnaie",
+     "md": "La **monnaie** est un actif accepté par tous dans les échanges. Elle remplit trois fonctions : **intermédiaire des échanges** (elle évite le troc), **unité de compte** (elle exprime les prix) et **réserve de valeur** (elle permet de transférer du pouvoir d'achat dans le temps)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Formes de la monnaie",
+     "md": "- **Monnaie fiduciaire** : pièces et billets, fondés sur la confiance ;\n- **Monnaie scripturale** : écritures dans les comptes bancaires (virements, chèques, cartes) ;\n- **Monnaie électronique** (mobile money) : valeur stockée sur un support électronique, très répandue en Afrique."
+    },
+    {
+     "type": "text",
+     "md": "Les **agrégats monétaires** regroupent des éléments classés du plus liquide au moins liquide : d'abord la monnaie au sens étroit (billets et dépôts à vue), puis des dépôts d'épargne et placements plus facilement convertibles. La **liquidité** mesure la rapidité et le coût avec lesquels un actif devient un moyen de paiement."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Banques",
+     "md": "Les **banques commerciales** reçoivent des dépôts, accordent des crédits et gèrent les moyens de paiement. La **banque centrale** émet la monnaie de base, conduit la politique monétaire, fait office de banque des banques et veille à la stabilité du système. Ces rôles sont décrits ici de façon générale.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 130,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 57.25,
+        "text": "Déposant",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 30,
+        "w": 130,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 355.0,
+        "y": 57.25,
+        "text": "Banque",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 170,
+        "w": 130,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 355.0,
+        "y": 197.25,
+        "text": "Emprunteur",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 52,
+        "x2": 290,
+        "y2": 52,
+        "color": "green",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 44,
+        "text": "dépôt",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 355,
+        "y1": 74,
+        "x2": 355,
+        "y2": 170,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 125,
+        "text": "crédit",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 170,
+        "w": 130,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 196.9,
+        "text": "Fournisseur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 192,
+        "x2": 150,
+        "y2": 192,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 184,
+        "text": "paiement",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 85,
+        "y1": 192,
+        "x2": 85,
+        "y2": 74,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Boucle de création monétaire : dépôt, crédit, paiement, nouveau dépôt.",
+     "alt": "Un déposant verse un dépôt à la banque ; la banque accorde un crédit à un emprunteur ; l'emprunteur paie un fournisseur, qui dépose à son tour cet argent à la banque : le cycle recommence avec un montant plus faible."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Création monétaire par le crédit",
+     "md": "Une banque ne prête pas seulement des dépôts existants : en accordant un crédit, elle **crée un dépôt** pour l'emprunteur. Elle doit cependant garder une fraction des dépôts en **réserves**. Si le coefficient de réserves est $r$ (donné par l'énoncé) et si tout l'argent prêté revient en dépôt dans le système, un dépôt initial $D_0$ peut finalement soutenir des dépôts totaux de :",
+     "tex": "D_{\\text{total}} = \\frac{D_0}{r}"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — multiplicateur de dépôts",
+     "statement": "On suppose r = 10 % (fourni par l'énoncé) et un dépôt initial de 1 000 FCFA. Combien la banque peut-elle prêter au premier tour ? Quel est le total maximal des dépôts ?",
+     "steps": [
+      {
+       "md": "Réserves à garder : 10 % de 1 000 = 100. Crédit possible : 900."
+      },
+      {
+       "md": "Ce crédit est dépensé puis redéposé : second dépôt de 900, qui permet un crédit de 810, et ainsi de suite (suite géométrique de raison 0,9)."
+      },
+      {
+       "md": "Total des dépôts = 1 000 × (1 + 0,9 + 0,9² + …) = 1 000/0,1 = 10 000.",
+       "tex": "\\frac{1000}{0{,}1} = 10000"
+      }
+     ],
+     "answer": "**Crédit initial : 900 ; dépôts totaux : 10 000 FCFA ; monnaie créée par le crédit : 9 000.**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 440,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Tour 1",
+        "value": 1000,
+        "color": "blue"
+       },
+       {
+        "label": "Tour 2",
+        "value": 900,
+        "color": "blue"
+       },
+       {
+        "label": "Tour 3",
+        "value": 810,
+        "color": "blue"
+       },
+       {
+        "label": "Tour 4",
+        "value": 729,
+        "color": "blue"
+       },
+       {
+        "label": "Tour 5",
+        "value": 656,
+        "color": "blue"
+       },
+       {
+        "label": "Tour 6",
+        "value": 590,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Dépôts successifs aux six premiers tours (r = 10 %). (unité : FCFA)",
+     "alt": "Six barres décroissantes : 1 000, 900, 810, 729, 656 et 590 FCFA environ ; chaque nouveau dépôt vaut 90 % du précédent."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Équation des échanges",
+     "md": "Si $M$ est la masse monétaire, $V$ la **vitesse de circulation** (nombre moyen d'utilisations d'une unité de monnaie), $P$ le niveau des prix et $Y$ la production en volume :",
+     "tex": "M \\times V = P \\times Y"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — équation des échanges",
+     "statement": "M = 500 ; V = 4 ; Y = 400 (en volume). Calcule le niveau général des prix P. Que devient P si M passe à 600 avec V et Y constants ?",
+     "steps": [
+      {
+       "md": "P = M×V/Y = 500×4/400 = 5.",
+       "tex": "P = \\frac{500\\times 4}{400} = 5"
+      },
+      {
+       "md": "Avec M = 600 : P = 600×4/400 = 6."
+      },
+      {
+       "md": "M a augmenté de 20 %, P aussi : 20 %. Proportionnalité (si V et Y sont constants)."
+      }
+     ],
+     "answer": "**P = 5, puis 6 (+20 %).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que la banque doit **d'abord** collecter des dépôts pour prêter : le crédit crée lui-même des dépôts (dans la limite des réserves exigées).\n- Utiliser $D_0\\times r$ au lieu de $D_0/r$.\n- Confondre **monnaie** et **richesse** ou **revenu**.\n- Oublier que la formule $D_0/r$ est une **limite théorique** : si des agents gardent des billets, la création est plus faible."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le **taux d'intérêt directeur** de la banque centrale influence le coût du crédit et donc l'activité et les prix.",
+      "Le **mobile money** a élargi l'accès aux services financiers sans agence bancaire ; il pose des questions de régulation.",
+      "La **théorie quantitative** (équation des échanges) suppose V et Y stables à court terme ; le lien monnaie-prix est donc discuté."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-macroeconomie-monnaie-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-macroeconomie-monnaie-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "Quelle fonction de la monnaie est utilisée quand on compare le prix d'un pagne et d'un sac de riz en FCFA ?",
+   "explanation": "Exprimer tous les prix dans la même unité : unité de compte.",
+   "source": "Exercice original",
+   "choices": [
+    "Intermédiaire des échanges",
+    "Moyen de crédit",
+    "Réserve de valeur",
+    "Unité de compte"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "Dépôt initial 2 000 000 FCFA ; coefficient de réserves 20 %. Montant total maximal des dépôts ?",
+   "explanation": "2 000 000 / 0,20 = 10 000 000 FCFA.",
+   "method": "Total = D0 / r.",
+   "mistakes": [
+    "Multiplier par r."
+   ],
+   "source": "Exercice original",
+   "answer": 10000000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "Associe chaque forme de monnaie à son exemple.",
+   "explanation": "Fiduciaire : pièces et billets. Scripturale : écritures en compte. Électronique : valeur stockée sur support électronique.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Fiduciaire",
+     "Billet de banque"
+    ],
+    [
+     "Scripturale",
+     "Virement bancaire"
+    ],
+    [
+     "Électronique",
+     "Portefeuille de mobile money"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "Quand une banque accorde un crédit, elle crée un dépôt pour l'emprunteur.",
+   "explanation": "Le crédit se traduit par une écriture au compte de l'emprunteur : monnaie scripturale nouvelle.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "M = 800 ; V = 5 ; P = 4. Calcule la production en volume Y (équation des échanges).",
+   "explanation": "Y = M×V/P = 800×5/4 = 1 000.",
+   "method": "Isoler Y.",
+   "source": "Exercice original",
+   "answer": 1000.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "Pourquoi la création monétaire par les banques est-elle limitée ?",
+   "explanation": "Plusieurs facteurs freinent l'expansion indéfinie du crédit.",
+   "method": "Lister contraintes de réserves, de demande et de régulation.",
+   "source": "Exercice original",
+   "model": "Les banques doivent détenir des réserves, les emprunteurs ne redéposent pas tout (billets conservés), la demande de crédit solvable est limitée, et la banque centrale fixe le cadre (réserves, taux).",
+   "rubric": [
+    "Réserves",
+    "Fuites en billets / demande de crédit",
+    "Rôle de la banque centrale"
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "Un système bancaire fictif exige un coefficient de réserves de 25 %. Un client dépose 5 000 (milliers de FCFA).",
+   "method": "Premier crédit = D0(1 − r) ; total = D0/r.",
+   "mistakes": [
+    "Confondre dépôts totaux et monnaie créée."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-macroeconomie-monnaie-07-a",
+     "points": 1,
+     "prompt": "Montant du premier crédit que la banque peut accorder ?",
+     "explanation": "5 000 × (1 − 0,25) = 3 750.",
+     "kind": "numeric",
+     "answer": 3750.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-monnaie-07-b",
+     "points": 1,
+     "prompt": "Dépôts totaux maximaux dans le système ?",
+     "explanation": "5 000/0,25 = 20 000.",
+     "kind": "numeric",
+     "answer": 20000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-monnaie-07-c",
+     "points": 1,
+     "prompt": "Monnaie scripturale supplémentaire créée par le crédit (dépôts totaux − dépôt initial) ?",
+     "explanation": "20 000 − 5 000 = 15 000.",
+     "kind": "numeric",
+     "answer": 15000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-monnaie-07-d",
+     "points": 1,
+     "prompt": "Si le coefficient de réserves passait à 50 %, la création monétaire maximale :",
+     "explanation": "D0/r diminue quand r augmente : 5 000/0,5 = 10 000 contre 20 000.",
+     "kind": "mcq",
+     "choices": [
+      "Diminuerait",
+      "Augmenterait",
+      "Resterait identique",
+      "Deviendrait infinie"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "La monnaie scripturale est :",
+   "choices": [
+    "Des billets",
+    "Des pièces",
+    "De l'or",
+    "Des écritures en compte"
+   ],
+   "answer": 3,
+   "explanation": "Écritures en compte.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "Avec r = 10 % et un dépôt de 100, les dépôts totaux maximaux valent :",
+   "choices": [
+    "1 000",
+    "110",
+    "90",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "100/0,10 = 1 000.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "La banque centrale a notamment pour rôle :",
+   "choices": [
+    "Gérer les comptes de chaque ménage",
+    "Fixer le salaire de chaque entreprise",
+    "Émettre la monnaie de base et conduire la politique monétaire",
+    "Percevoir tous les impôts"
+   ],
+   "answer": 2,
+   "explanation": "Rôle général de la banque centrale.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "Si M augmente de 10 % alors que V et Y restent constants, P :",
+   "choices": [
+    "Augmente d'environ 10 %",
+    "Baisse de 10 %",
+    "Reste constant",
+    "Double"
+   ],
+   "answer": 0,
+   "explanation": "M·V = P·Y.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-macroeconomie-monnaie-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-monnaie",
+   "prompt": "La vitesse de circulation de la monnaie mesure :",
+   "choices": [
+    "Le nombre moyen d'utilisations d'une unité monétaire",
+    "Le taux de change",
+    "Le taux d'intérêt",
+    "Le salaire moyen"
+   ],
+   "answer": 0,
+   "explanation": "Fréquence d'utilisation.",
+   "review": true
+  }
+ ]
+}

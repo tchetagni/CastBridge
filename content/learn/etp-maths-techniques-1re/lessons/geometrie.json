@@ -1,0 +1,931 @@
+{
+ "chapter": "etp-maths-techniques-1re-geometrie",
+ "lessons": [
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie",
+   "title": "Trigonométrie : triangle rectangle et cercle trigonométrique",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser sinus, cosinus et tangente dans un triangle rectangle.",
+    "Connaître les valeurs remarquables pour 30°, 45° et 60°.",
+    "Convertir degrés et radians.",
+    "Placer un angle sur le cercle trigonométrique et utiliser cos²+sin²=1."
+   ],
+   "exercises": [
+    "etp-maths-techniques-1re-trigonometrie-01",
+    "etp-maths-techniques-1re-trigonometrie-02",
+    "etp-maths-techniques-1re-trigonometrie-03",
+    "etp-maths-techniques-1re-trigonometrie-04",
+    "etp-maths-techniques-1re-trigonometrie-05",
+    "etp-maths-techniques-1re-trigonometrie-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-1re-trigonometrie-q1",
+    "etp-maths-techniques-1re-trigonometrie-q2",
+    "etp-maths-techniques-1re-trigonometrie-q3",
+    "etp-maths-techniques-1re-trigonometrie-q4",
+    "etp-maths-techniques-1re-trigonometrie-q5"
+   ],
+   "reviewNotes": [
+    "Valeurs de sin/cos/tan pour 30°, 45°, 60° à vérifier ; calculatrice en mode degrés pour les exercices."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Rapports dans un triangle rectangle",
+     "md": "Dans un triangle rectangle, pour un angle aigu $\\alpha$ : le côté **opposé** à $\\alpha$, le côté **adjacent** (qui touche $\\alpha$, sans être l'hypoténuse) et l'**hypoténuse** (côté en face de l'angle droit).",
+     "tex": "\\sin\\alpha = \\frac{\\text{opposé}}{\\text{hypoténuse}} \\;\\; \\cos\\alpha = \\frac{\\text{adjacent}}{\\text{hypoténuse}} \\;\\; \\tan\\alpha = \\frac{\\text{opposé}}{\\text{adjacent}}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         160,
+         300,
+         160,
+         300,
+         40
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "rect",
+        "x": 284,
+        "y": 144,
+        "w": 16,
+        "h": 16,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 183,
+        "text": "adjacent",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 105,
+        "text": "opposé",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 80,
+        "text": "hypoténuse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 78,
+        "y": 155,
+        "text": "α",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Triangle rectangle : côtés opposé, adjacent et hypoténuse par rapport à l'angle α.",
+     "alt": "Un triangle rectangle avec l'angle droit en bas à droite. L'angle α est à gauche. Le côté horizontal est l'adjacent, le côté vertical est l'opposé, le côté oblique est l'hypoténuse."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Relations et valeurs remarquables",
+     "md": "$\\cos^2\\alpha + \\sin^2\\alpha = 1$ et $\\tan\\alpha = \\dfrac{\\sin\\alpha}{\\cos\\alpha}$. Valeurs à connaître :\n- 30° : sin = 1/2 ; cos = $\\sqrt{3}/2$ ; tan = $\\sqrt{3}/3$.\n- 45° : sin = cos = $\\sqrt{2}/2$ ; tan = 1.\n- 60° : sin = $\\sqrt{3}/2$ ; cos = 1/2 ; tan = $\\sqrt{3}$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cercle trigonométrique et radians",
+     "md": "Le **cercle trigonométrique** a pour centre l'origine et pour rayon 1. Un angle $\\theta$ (mesuré depuis l'axe des abscisses, sens inverse des aiguilles d'une montre) repère un point de coordonnées $(\\cos\\theta\\,;\\,\\sin\\theta)$. Le **radian** est une unité d'angle : $\\pi$ rad = 180°.",
+     "tex": "x_{\\text{rad}} = x_{\\text{deg}} \\times \\frac{\\pi}{180}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 130,
+        "x2": 270,
+        "y2": 130,
+        "color": "ink",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 245,
+        "x2": 150,
+        "y2": 15,
+        "color": "ink",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 130,
+        "r": 100,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 130,
+        "x2": 200.0,
+        "y2": 43.39745962155614,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 43.39745962155614,
+        "x2": 200.0,
+        "y2": 130,
+        "color": "blue",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 130,
+        "x2": 200.0,
+        "y2": 130,
+        "color": "green",
+        "width": 4
+       },
+       {
+        "t": "circle",
+        "cx": 200.0,
+        "cy": 43.39745962155614,
+        "r": 4,
+        "fill": "red",
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 208.0,
+        "y": 37.39745962155614,
+        "text": "M (cos 60°, sin 60°)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 148,
+        "text": "cos",
+        "size": 13,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 206.0,
+        "y": 95,
+        "text": "sin",
+        "size": 13,
+        "color": "blue",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 256,
+        "y": 148,
+        "text": "1",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 136,
+        "y": 34,
+        "text": "1",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le point M du cercle trigonométrique pour θ = 60°.",
+     "alt": "Un cercle de rayon 1 centré à l'origine. Le point M à 60° au-dessus de l'axe horizontal a pour abscisse cos 60° = 0,5 (segment vert) et pour ordonnée sin 60° (segment bleu)."
+    },
+    {
+     "type": "example",
+     "title": "Hauteur d'une échelle",
+     "statement": "Une échelle de 4 m est appuyée contre un mur en faisant un angle de 60° avec le sol. À quelle hauteur touche-t-elle le mur ? Quelle est la distance du pied au mur ?",
+     "steps": [
+      {
+       "md": "La hauteur est le côté opposé à l'angle au sol : $\\sin 60° = h/4$.",
+       "tex": "h = 4 \\times \\sin 60° = 4 \\times \\frac{\\sqrt{3}}{2} = 2\\sqrt{3}"
+      },
+      {
+       "md": "Valeur approchée : $\\sqrt{3} \\approx 1{,}732$.",
+       "tex": "h \\approx 3,46\\ \\text{m}"
+      },
+      {
+       "md": "Distance au mur : côté adjacent, $\\cos 60° = 0{,}5$.",
+       "tex": "d = 4 \\times 0,5 = 2\\ \\text{m}"
+      }
+     ],
+     "answer": "**h ≈ 3,46 m ; d = 2 m.**"
+    },
+    {
+     "type": "example",
+     "title": "Trouver un angle",
+     "statement": "Dans un triangle rectangle, le côté opposé à $\\alpha$ mesure 3 et l'adjacent 4. Trouver $\\alpha$.",
+     "steps": [
+      {
+       "md": "On utilise la tangente.",
+       "tex": "\\tan\\alpha = \\frac{3}{4} = 0,75"
+      },
+      {
+       "md": "À la calculatrice (mode degrés), on utilise la touche $\\tan^{-1}$.",
+       "tex": "\\alpha \\approx 36,9°"
+      }
+     ],
+     "answer": "**α ≈ 36,9°** (l'hypoténuse vaut 5 : $\\sin\\alpha = 0{,}6$)."
+    },
+    {
+     "type": "example",
+     "title": "Degrés et radians",
+     "statement": "Convertir 150° en radians, puis $\\pi/3$ rad en degrés.",
+     "steps": [
+      {
+       "md": "$150 \\times \\pi / 180 = 5\\pi/6$.",
+       "tex": "150° = \\frac{150\\pi}{180} = \\frac{5\\pi}{6}\\ \\text{rad}"
+      },
+      {
+       "md": "$\\pi/3$ rad : on remplace $\\pi$ par 180°.",
+       "tex": "\\frac{\\pi}{3} = \\frac{180°}{3} = 60°"
+      }
+     ],
+     "answer": "**150° = 5π/6 rad ; π/3 rad = 60°.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculatrice en mauvais mode (radians au lieu de degrés).\n- Confondre opposé et adjacent : ils dépendent de l'angle considéré.\n- Utiliser le sinus avec l'adjacent (ou le cosinus avec l'opposé).\n- Oublier que sin et cos sont compris entre −1 et 1 : un résultat de 1,3 est faux."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Moyen mnémotechnique : SOH-CAH-TOA (Sinus = Opposé/Hypoténuse, Cosinus = Adjacent/Hypoténuse, Tangente = Opposé/Adjacent).",
+      "La pente d'une rampe est $\\tan\\alpha$ ; on l'exprime souvent en pourcentage (100 × hauteur / longueur horizontale)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-1re-trigonometrie-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "title": "Vecteurs et géométrie analytique de base",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer les coordonnées d'un vecteur, sa norme et la distance entre deux points.",
+    "Calculer les coordonnées du milieu d'un segment.",
+    "Reconnaître la colinéarité et un parallélogramme.",
+    "Déterminer l'équation d'une droite passant par deux points."
+   ],
+   "prerequisites": [
+    "etp-maths-techniques-1re-fonctions"
+   ],
+   "exercises": [
+    "etp-maths-techniques-1re-vecteurs-geometrie-01",
+    "etp-maths-techniques-1re-vecteurs-geometrie-02",
+    "etp-maths-techniques-1re-vecteurs-geometrie-03",
+    "etp-maths-techniques-1re-vecteurs-geometrie-04",
+    "etp-maths-techniques-1re-vecteurs-geometrie-05",
+    "etp-maths-techniques-1re-vecteurs-geometrie-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-1re-vecteurs-geometrie-q1",
+    "etp-maths-techniques-1re-vecteurs-geometrie-q2",
+    "etp-maths-techniques-1re-vecteurs-geometrie-q3",
+    "etp-maths-techniques-1re-vecteurs-geometrie-q4",
+    "etp-maths-techniques-1re-vecteurs-geometrie-q5"
+   ],
+   "reviewNotes": [
+    "Repère orthonormé supposé dans tous les exercices."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Coordonnées, norme, milieu",
+     "md": "Dans un repère orthonormé, pour $A(x_A\\,;\\,y_A)$ et $B(x_B\\,;\\,y_B)$ :",
+     "tex": "\\vec{AB}\\,(x_B - x_A\\,;\\,y_B - y_A) \\; AB = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2} \\; I\\left(\\frac{x_A + x_B}{2}\\,;\\,\\frac{y_A + y_B}{2}\\right)"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Opérations et colinéarité",
+     "md": "- Somme : $\\vec{u}(a\\,;\\,b) + \\vec{v}(c\\,;\\,d) = (a + c\\,;\\,b + d)$ ; produit par un réel $k$ : $k\\vec{u} = (ka\\,;\\,kb)$.\n- $\\vec{u}$ et $\\vec{v}$ sont **colinéaires** (parallèles) si $ad - bc = 0$.\n- $ABCD$ est un **parallélogramme** si et seulement si $\\vec{AB} = \\vec{DC}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équation de droite",
+     "md": "Une droite non verticale a une équation $y = mx + p$. Le **coefficient directeur** passant par $A$ et $B$ est $m = \\dfrac{y_B - y_A}{x_B - x_A}$ ; on trouve $p$ en remplaçant par un point."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 8,
+      "ymin": 0,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "points": [
+       {
+        "x": 1,
+        "y": 2,
+        "label": "A",
+        "color": "blue"
+       },
+       {
+        "x": 5,
+        "y": 5,
+        "label": "B",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 1,
+        "y1": 2,
+        "x2": 5,
+        "y2": 5,
+        "color": "ink",
+        "dash": true
+       },
+       {
+        "x1": 1,
+        "y1": 2,
+        "x2": 5,
+        "y2": 2,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 5,
+        "y1": 2,
+        "x2": 5,
+        "y2": 5,
+        "color": "grey",
+        "dash": true
+       }
+      ]
+     },
+     "caption": "Le segment [AB] avec A(1 ; 2) et B(5 ; 5) : le triangle rectangle de côtés 4 et 3 donne AB = 5.",
+     "alt": "Un repère avec les points A(1 ; 2) et B(5 ; 5) reliés par un segment. Un déplacement horizontal de 4 puis vertical de 3 (pointillés) forme un triangle rectangle."
+    },
+    {
+     "type": "example",
+     "title": "Vecteur, norme et milieu",
+     "statement": "Soit A(1 ; 2) et B(5 ; 5). Calculer $\\vec{AB}$, $AB$ et le milieu de [AB].",
+     "steps": [
+      {
+       "md": "Coordonnées du vecteur.",
+       "tex": "\\vec{AB}(4\\,;\\,3)"
+      },
+      {
+       "md": "Norme : Pythagore.",
+       "tex": "AB = \\sqrt{4^2 + 3^2} = \\sqrt{25} = 5"
+      },
+      {
+       "md": "Milieu.",
+       "tex": "I\\left(\\frac{1+5}{2}\\,;\\,\\frac{2+5}{2}\\right) = (3\\,;\\,3,5)"
+      }
+     ],
+     "answer": "**AB = 5 ; milieu (3 ; 3,5).**"
+    },
+    {
+     "type": "example",
+     "title": "Équation de la droite (AB)",
+     "statement": "Déterminer l'équation de la droite (AB) pour A(1 ; 2) et B(5 ; 5).",
+     "steps": [
+      {
+       "md": "Coefficient directeur.",
+       "tex": "m = \\frac{5 - 2}{5 - 1} = 0,75"
+      },
+      {
+       "md": "On remplace dans $y = mx + p$ avec A : $2 = 0{,}75 \\times 1 + p$.",
+       "tex": "p = 2 - 0,75 = 1,25"
+      }
+     ],
+     "answer": "**y = 0,75x + 1,25.**"
+    },
+    {
+     "type": "example",
+     "title": "Colinéarité",
+     "statement": "$\\vec{u}(2\\,;\\,3)$ et $\\vec{v}(6\\,;\\,9)$ sont-ils colinéaires ?",
+     "steps": [
+      {
+       "md": "On calcule $ad - bc$ avec $a=2, b=3, c=6, d=9$.",
+       "tex": "2 \\times 9 - 3 \\times 6 = 0"
+      },
+      {
+       "md": "Le résultat est nul : colinéaires ($\\vec{v} = 3\\vec{u}$)."
+      }
+     ],
+     "answer": "**Oui, v = 3u.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Soustraire dans le mauvais sens : $\\vec{AB} = B - A$ (arrivée moins départ).\n- Oublier la racine carrée dans la norme.\n- Oublier de diviser par 2 pour le milieu.\n- Utiliser la formule de la norme dans un repère non orthonormé."
+    },
+    {
+     "type": "more",
+     "items": [
+      "On peut calculer l'aire d'un triangle ou la distance d'un point à une droite avec les coordonnées dans les classes suivantes.",
+      "La relation de Chasles : $\\vec{AB} + \\vec{BC} = \\vec{AC}$."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-1re-vecteurs-geometrie-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "Triangle rectangle : hypoténuse 10, côté opposé à $\\alpha$ égal à 6. Calculer $\\sin\\alpha$.",
+   "explanation": "$\\sin\\alpha = 6/10 = 0{,}6$.",
+   "source": "Exercice original",
+   "answer": 0.6,
+   "tolerance": 0.001
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "La valeur de $\\sin 45°$ est :",
+   "explanation": "$\\sin 45° = \\cos 45° = \\sqrt{2}/2$.",
+   "source": "Exercice original",
+   "choices": [
+    "1/2",
+    "$\\sqrt{2}/2$",
+    "$\\sqrt{3}/2$",
+    "1"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "Pour tout angle $\\theta$, $\\cos^2\\theta + \\sin^2\\theta = 1$.",
+   "explanation": "C'est la relation fondamentale (théorème de Pythagore sur le cercle de rayon 1).",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "90° vaut en radians :",
+   "explanation": "$90 \\times \\pi/180 = \\pi/2$.",
+   "source": "Exercice original",
+   "choices": [
+    "$\\pi$",
+    "$\\pi/2$",
+    "$\\pi/4$",
+    "$2\\pi$"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "À 12 m d'un arbre, on voit son sommet sous un angle de 45° (par rapport à l'horizontale ; on néglige la hauteur de l'œil). Quelle est la hauteur de l'arbre (m) ?",
+   "explanation": "$\\tan 45° = 1 = h/12$ donc $h = 12$ m.",
+   "source": "Exercice original",
+   "answer": 12.0,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "Une rampe d'accès de 6 m de long fait un angle de 30° avec l'horizontale (on utilise les valeurs remarquables).",
+   "method": "Choisir sin, cos ou tan selon les côtés connus.",
+   "mistakes": [
+    "Calculatrice en radians."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-1re-trigonometrie-06-a",
+     "points": 1,
+     "prompt": "Quelle hauteur la rampe permet-elle de gagner (m) ?",
+     "explanation": "$h = 6 \\times \\sin 30° = 6 \\times 0{,}5 = 3$ m.",
+     "kind": "numeric",
+     "answer": 3.0,
+     "tolerance": 0,
+     "unit": "m"
+    },
+    {
+     "id": "etp-maths-techniques-1re-trigonometrie-06-b",
+     "points": 1,
+     "prompt": "Quelle est la longueur horizontale couverte (m, arrondie au centième) ?",
+     "explanation": "$6 \\times \\cos 30° = 6 \\times \\sqrt{3}/2 = 3\\sqrt{3} \\approx 5,20$ m.",
+     "kind": "numeric",
+     "answer": 5.196152423,
+     "tolerance": 0.01,
+     "unit": "m"
+    },
+    {
+     "id": "etp-maths-techniques-1re-trigonometrie-06-c",
+     "points": 1,
+     "prompt": "Une autre rampe monte de 1 m sur 12 m horizontaux. Quel angle (degrés, arrondi au dixième) ?",
+     "explanation": "$\\tan\\alpha = 1/12 \\approx 0{,}0833$, donc $\\alpha \\approx 4,8°$.",
+     "kind": "numeric",
+     "answer": 4.763641691,
+     "tolerance": 0.05,
+     "unit": "°"
+    },
+    {
+     "id": "etp-maths-techniques-1re-trigonometrie-06-d",
+     "points": 1,
+     "prompt": "Quelle est la pente de cette seconde rampe en % (arrondie au dixième) ?",
+     "explanation": "$100 \\times 1/12 \\approx 8,3$ %.",
+     "kind": "numeric",
+     "answer": 8.333333333,
+     "tolerance": 0.05,
+     "unit": "%"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "Dans un triangle rectangle, la tangente de $\\alpha$ est :",
+   "choices": [
+    "opposé/hypoténuse",
+    "adjacent/hypoténuse",
+    "opposé/adjacent",
+    "hypoténuse/opposé"
+   ],
+   "answer": 2,
+   "explanation": "tan = opposé/adjacent."
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "$\\cos 60°$ vaut :",
+   "choices": [
+    "0,5",
+    "0,866",
+    "1",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "$\\cos 60° = 1/2$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "180° en radians :",
+   "choices": [
+    "$\\pi/2$",
+    "$2\\pi$",
+    "$\\pi$",
+    "$\\pi/4$"
+   ],
+   "answer": 2,
+   "explanation": "$180 \\times \\pi/180 = \\pi$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "Si $\\sin\\alpha = 0{,}6$ (α aigu), alors $\\cos\\alpha$ vaut :",
+   "choices": [
+    "0,4",
+    "0,8",
+    "0,6",
+    "1,6"
+   ],
+   "answer": 1,
+   "explanation": "$\\cos^2 = 1 - 0{,}36 = 0{,}64$, donc 0,8."
+  },
+  {
+   "id": "etp-maths-techniques-1re-trigonometrie-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-trigonometrie",
+   "prompt": "Le cercle trigonométrique a un rayon de :",
+   "choices": [
+    "1",
+    "2",
+    "$\\pi$",
+    "360"
+   ],
+   "answer": 0,
+   "explanation": "Rayon 1."
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "A(2 ; 1) et B(8 ; 9). Calculer la longueur AB.",
+   "explanation": "$\\vec{AB}(6\\,;\\,8)$ ; $AB = \\sqrt{36 + 64} = \\sqrt{100} = 10$.",
+   "source": "Exercice original",
+   "answer": 10.0,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "A(−2 ; 4) et B(6 ; 0). Calculer l'abscisse du milieu de [AB].",
+   "explanation": "$(-2 + 6)/2 = 2$.",
+   "source": "Exercice original",
+   "answer": 2.0,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "Les coordonnées de $\\vec{AB}$ avec A(3 ; 1) et B(7 ; −2) sont :",
+   "explanation": "$(7-3\\,;\\,-2-1) = (4\\,;\\,-3)$.",
+   "source": "Exercice original",
+   "choices": [
+    "(10 ; −1)",
+    "(4 ; −3)",
+    "(−4 ; 3)",
+    "(4 ; 3)"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "Quel est le coefficient directeur de la droite passant par A(0 ; 1) et B(4 ; 9) ?",
+   "explanation": "$m = (9-1)/(4-0) = 2$.",
+   "source": "Exercice original",
+   "answer": 2.0,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "Les vecteurs $(1\\,;\\,2)$ et $(3\\,;\\,5)$ sont colinéaires.",
+   "explanation": "$1 \\times 5 - 2 \\times 3 = -1 \\neq 0$.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "Dans un repère orthonormé, A(1 ; 1), B(5 ; 2) et C(7 ; 5) sont trois sommets d'un parallélogramme ABCD (les plans d'un terrain, unité : mètre).",
+   "method": "Traduire « parallélogramme » par l'égalité de deux vecteurs.",
+   "mistakes": [
+    "Écrire $\\vec{AB} = \\vec{CD}$ au lieu de $\\vec{DC}$."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-1re-vecteurs-geometrie-06-a",
+     "points": 1,
+     "prompt": "Abscisse de D.",
+     "explanation": "$\\vec{AB}(4\\,;\\,1)$ doit égaler $\\vec{DC}(7 - x\\,;\\,5 - y)$ : $7 - x = 4$ donc $x = 3$.",
+     "kind": "numeric",
+     "answer": 3,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-maths-techniques-1re-vecteurs-geometrie-06-b",
+     "points": 1,
+     "prompt": "Ordonnée de D.",
+     "explanation": "$5 - y = 1$ donc $y = 4$. D(3 ; 4).",
+     "kind": "numeric",
+     "answer": 4,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-maths-techniques-1re-vecteurs-geometrie-06-c",
+     "points": 1,
+     "prompt": "Longueur de la diagonale [AC] (m, arrondie au centième).",
+     "explanation": "$\\vec{AC}(6\\,;\\,4)$ ; $AC = \\sqrt{52} \\approx 7,21$ m.",
+     "kind": "numeric",
+     "answer": 7.211102551,
+     "tolerance": 0.01,
+     "unit": "m"
+    },
+    {
+     "id": "etp-maths-techniques-1re-vecteurs-geometrie-06-d",
+     "points": 1,
+     "prompt": "Coefficient directeur de la droite (AC) (arrondi au centième).",
+     "explanation": "$m = 4/6 = 2/3 \\approx 0,67$.",
+     "kind": "numeric",
+     "answer": 0.666666667,
+     "tolerance": 0.01
+    },
+    {
+     "id": "etp-maths-techniques-1re-vecteurs-geometrie-06-e",
+     "points": 1,
+     "prompt": "Les diagonales [AC] et [BD] ont le même milieu.",
+     "explanation": "Milieu de [AC] : (4 ; 3). Milieu de [BD] : ((5+3)/2 ; (2+4)/2) = (4 ; 3). Propriété du parallélogramme.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "$AB$ pour $\\vec{AB}(3\\,;\\,4)$ vaut :",
+   "choices": [
+    "7",
+    "5",
+    "12",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "$\\sqrt{9+16} = 5$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "Le milieu de [AB], A(0 ; 0), B(6 ; 4) est :",
+   "choices": [
+    "(6 ; 4)",
+    "(3 ; 2)",
+    "(2 ; 3)",
+    "(12 ; 8)"
+   ],
+   "answer": 1,
+   "explanation": "Moitié des coordonnées."
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "$ABCD$ est un parallélogramme si :",
+   "choices": [
+    "AB = CD en longueur seulement",
+    "$\\vec{AB} = \\vec{DC}$",
+    "$\\vec{AB} = \\vec{CD}$",
+    "A = C"
+   ],
+   "answer": 1,
+   "explanation": "L'égalité vectorielle $\\vec{AB} = \\vec{DC}$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "La droite d'équation $y = 2x + 3$ a pour coefficient directeur :",
+   "choices": [
+    "3",
+    "2",
+    "5",
+    "−3"
+   ],
+   "answer": 1,
+   "explanation": "$m = 2$."
+  },
+  {
+   "id": "etp-maths-techniques-1re-vecteurs-geometrie-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-1re-vecteurs-geometrie",
+   "prompt": "$\\vec{u}(1\\,;\\,2)$ et $\\vec{v}(2\\,;\\,4)$ sont :",
+   "choices": [
+    "colinéaires",
+    "orthogonaux",
+    "égaux",
+    "opposés"
+   ],
+   "answer": 0,
+   "explanation": "$1\\times 4 - 2\\times 2 = 0$."
+  }
+ ]
+}

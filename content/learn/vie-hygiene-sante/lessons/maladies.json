@@ -1,0 +1,942 @@
+{
+ "chapter": "vie-hygiene-sante-maladies",
+ "lessons": [
+  {
+   "id": "vie-hygiene-sante-paludisme",
+   "title": "Le paludisme : comprendre et prévenir",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation à la santé (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer la cause du paludisme et son mode de transmission.",
+    "Citer les moyens de prévention.",
+    "Reconnaître des signes qui imposent de consulter.",
+    "Comprendre pourquoi on ne se soigne pas seul."
+   ],
+   "exercises": [
+    "vie-hygiene-sante-paludisme-01",
+    "vie-hygiene-sante-paludisme-02",
+    "vie-hygiene-sante-paludisme-03",
+    "vie-hygiene-sante-paludisme-04",
+    "vie-hygiene-sante-paludisme-05",
+    "vie-hygiene-sante-paludisme-06"
+   ],
+   "selfCheck": [
+    "vie-hygiene-sante-paludisme-q1",
+    "vie-hygiene-sante-paludisme-q2",
+    "vie-hygiene-sante-paludisme-q3",
+    "vie-hygiene-sante-paludisme-q4",
+    "vie-hygiene-sante-paludisme-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 5e par défaut (utile à tous les apprenants).",
+    "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+    "Vérifier la formulation : parasite transmis par la piqûre d'un moustique anophèle femelle ; aucun traitement ni dose cités.",
+    "Vérifier le message « consulter rapidement » en cas de fièvre, surtout pour les enfants et les femmes enceintes."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Paludisme",
+     "md": "Le **paludisme** (ou malaria) est une maladie causée par un **parasite**, un être vivant microscopique. Il est transmis d'une personne à une autre par la piqûre d'un moustique, l'**anophèle femelle**. Ce n'est pas une maladie causée par la fatigue, le soleil ou la pluie : ce n'est pas non plus transmis par le contact entre personnes.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Comment ça se transmet",
+     "md": "1. Un moustique pique une personne malade et prend des parasites avec son sang.\n2. Le parasite évolue dans le moustique.\n3. Le moustique pique une personne saine : il lui transmet le parasite.\nLes moustiques pondent dans les **eaux stagnantes** (flaques, seaux, vieux pneus, caniveaux bouchés) et piquent surtout le soir et la nuit.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Prévenir",
+     "md": "- Dormir sous une **moustiquaire** en bon état, bien bordée.\n- Supprimer les eaux stagnantes autour de la maison ; assainir le quartier.\n- Fermer les ouvertures ou porter des vêtements couvrants le soir.\n- Pour les femmes enceintes et les jeunes enfants, suivre les conseils du centre de santé sur la protection supplémentaire.\n- Utiliser les moustiquaires distribuées par les campagnes de santé.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Signes : consulter vite",
+     "md": "Fièvre, frissons, forte fatigue, maux de tête, vomissements, courbatures : ces signes **peuvent** indiquer un paludisme, mais aussi d'autres maladies. Chez un enfant, une personne âgée ou une femme enceinte, on consulte **rapidement**. Ne jamais se soigner seul ni prendre des médicaments « trouvés » : seul un agent de santé peut faire le bon diagnostic et conseiller le traitement.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 46.9,
+        "text": "Moustique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 46.9,
+        "text": "Personne",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 46.9,
+        "text": "Moustique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 42,
+        "x2": 145,
+        "y2": 42,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 255,
+        "y1": 42,
+        "x2": 280,
+        "y2": 42,
+        "color": "ink",
+        "width": 2,
+        "arrow": "start"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 90,
+        "text": "pique un malade",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 90,
+        "text": "Parasite dans le sang",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 90,
+        "text": "pique une autre personne",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "Protection : moustiquaire, eaux stagnantes supprimées",
+        "size": 13,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 190,
+        "text": "Fièvre : consulter un agent de santé",
+        "size": 13,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Le cycle de transmission du paludisme entre moustique et personnes, avec les protections.",
+     "alt": "Deux moustiques de part et d'autre d'une personne, reliés par des flèches. Dessous : protection par moustiquaire et suppression des eaux stagnantes, et consigne de consulter en cas de fièvre."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le seau d'eau",
+     "statement": "Dans la cour de Brice, un vieux seau reste plein d'eau de pluie depuis des jours. Quel risque ? Que faire ?",
+     "steps": [
+      {
+       "md": "Une eau qui stagne est un lieu de ponte pour les moustiques : plus de moustiques, plus de risque de paludisme."
+      },
+      {
+       "md": "On vide et retourne le seau, on bouche les trous d'eau, on couvre les récipients d'eau utile."
+      }
+     ],
+     "answer": "**Supprimer les eaux stagnantes réduit les moustiques.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un enfant fiévreux",
+     "statement": "Lina, 6 ans, a de la fièvre et des frissons. Sa tante propose de lui donner un reste de comprimés d'un autre malade. Que répondre ?",
+     "steps": [
+      {
+       "md": "La fièvre peut venir du paludisme ou d'autre chose : on ne peut pas deviner."
+      },
+      {
+       "md": "On ne donne pas de médicaments non prescrits, surtout à un enfant. On l'emmène vite au centre de santé."
+      }
+     ],
+     "answer": "**Consulter rapidement ; pas d'automédication.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « Le paludisme vient du soleil ou de la fatigue. » Non : c'est un parasite transmis par un moustique.\n- Garder la moustiquaire pliée dans une armoire.\n- Attendre plusieurs jours avant de consulter.\n- Se soigner avec des restes de médicaments ou des produits vendus dans la rue.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le centre de santé le plus proche : sais-tu où il se trouve et à quelles heures il est ouvert ?",
+      "Imagine une petite affiche pour ton quartier : « Mon seau est-il vide ? »"
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-hygiene-sante-paludisme-01"
+    }
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins",
+   "title": "Diarrhée, choléra et vaccination",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation à la santé (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer pourquoi la diarrhée est dangereuse, surtout chez l'enfant.",
+    "Décrire le principe de la réhydratation orale.",
+    "Citer les moyens de prévention du choléra.",
+    "Expliquer le principe de la vaccination et où se renseigner."
+   ],
+   "exercises": [
+    "vie-hygiene-sante-diarrhee-vaccins-01",
+    "vie-hygiene-sante-diarrhee-vaccins-02",
+    "vie-hygiene-sante-diarrhee-vaccins-03",
+    "vie-hygiene-sante-diarrhee-vaccins-04",
+    "vie-hygiene-sante-diarrhee-vaccins-05",
+    "vie-hygiene-sante-diarrhee-vaccins-06"
+   ],
+   "selfCheck": [
+    "vie-hygiene-sante-diarrhee-vaccins-q1",
+    "vie-hygiene-sante-diarrhee-vaccins-q2",
+    "vie-hygiene-sante-diarrhee-vaccins-q3",
+    "vie-hygiene-sante-diarrhee-vaccins-q4",
+    "vie-hygiene-sante-diarrhee-vaccins-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 5e par défaut (utile à tous les apprenants).",
+    "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+    "Vérifier que la réhydratation orale est décrite en principe (solution préparée selon les indications d'un agent de santé), sans proportions.",
+    "Vérifier qu'aucun calendrier vaccinal ni nom de vaccin précis n'est affirmé : renvoi au centre de santé.",
+    "Vérifier le principe « consulter vite » en cas de signes graves."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Diarrhée et choléra",
+     "md": "La **diarrhée** est l'émission fréquente de selles liquides. Elle fait perdre beaucoup d'**eau** et de sels au corps : c'est la **déshydratation**, dangereuse surtout pour les bébés et les jeunes enfants. Le **choléra** est une maladie diarrhéique très contagieuse due à un germe présent dans l'eau et les aliments contaminés. Il peut toucher beaucoup de personnes en peu de temps.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Prévenir",
+     "md": "- Boire de l'eau potable (filtrée, bouillie ou désinfectée).\n- Se laver les mains avant de manger et après les toilettes.\n- Utiliser des latrines propres ; ne pas déféquer près des points d'eau.\n- Bien cuire les aliments, couvrir les plats, laver fruits et légumes.\n- Suivre les consignes sanitaires lors d'une épidémie.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Réhydrater (principe)",
+     "md": "Quand quelqu'un a la diarrhée, le but est de **remplacer l'eau perdue** : boire souvent, en petites quantités, une solution de **réhydratation orale** préparée comme l'indique un agent de santé, ou le sachet fourni par le centre de santé. On continue à nourrir l'enfant (et à allaiter le bébé). **On consulte vite** si la diarrhée dure, si l'enfant est très faible, ne boit plus, vomit beaucoup ou si on voit du sang.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vaccination",
+     "md": "Un **vaccin** apprend au corps à se défendre contre une maladie **avant** qu'on la rencontre. Il protège la personne vaccinée et, quand beaucoup de gens sont vaccinés, il protège aussi les autres. Les vaccins sont donnés dans les centres de santé et lors de campagnes, selon un **calendrier** : pour connaître celui qui s'applique, **se renseigner au centre de santé** et garder le carnet de santé.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 46.9,
+        "text": "Eau sale",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 46.9,
+        "text": "Diarrhée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 46.55,
+        "text": "Perte d'eau",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 42,
+        "x2": 145,
+        "y2": 42,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 255,
+        "y1": 42,
+        "x2": 280,
+        "y2": 42,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 110,
+        "w": 110,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 136.55,
+        "text": "Boire, soigner",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 64,
+        "x2": 200,
+        "y2": 110,
+        "color": "green",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 185,
+        "text": "Réhydrater + consulter si signes graves",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "De l'eau contaminée à la déshydratation, et la réponse : réhydrater et consulter.",
+     "alt": "Trois rectangles en chaîne : eau sale, diarrhée, perte d'eau. Une flèche verte mène à « Boire, soigner », avec la consigne de réhydrater et de consulter si signes graves."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un bébé a la diarrhée",
+     "statement": "Un bébé de 1 an a des selles liquides depuis la veille et refuse de boire. Que faire ?",
+     "steps": [
+      {
+       "md": "Risque de déshydratation : il refuse de boire, c'est un signe d'alerte."
+      },
+      {
+       "md": "On l'emmène sans attendre au centre de santé, en continuant à lui donner à boire selon les conseils reçus."
+      }
+     ],
+     "answer": "**Consulter vite ; réhydrater selon les conseils d'un agent de santé.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : épidémie de choléra",
+     "statement": "Dans un quartier, on annonce des cas de choléra. Quels gestes adopter ?",
+     "steps": [
+      {
+       "md": "Boire uniquement de l'eau traitée ; cuire les aliments ; laver les mains souvent."
+      },
+      {
+       "md": "Suivre les consignes des autorités sanitaires, signaler les malades et ne pas les cacher."
+      }
+     ],
+     "answer": "**Eau sûre, mains propres, aliments cuits, consignes sanitaires suivies.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Arrêter de donner à boire à un enfant qui a la diarrhée.\n- Croire qu'un vaccin donne la maladie.\n- Cacher un malade par peur de la honte pendant une épidémie.\n- Utiliser des « remèdes » non conseillés par un agent de santé.\n- Perdre le carnet de santé de l'enfant.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche où se trouve le centre de santé de ton quartier et quand ont lieu les séances de vaccination.",
+      "Demande à un parent de te montrer le carnet de santé de la famille."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-hygiene-sante-diarrhee-vaccins-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "vie-hygiene-sante-paludisme-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Quelle est la cause du paludisme ?",
+   "explanation": "Parasite + moustique anophèle femelle.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Un parasite transmis par un moustique",
+    "Le soleil",
+    "Manger trop de sucre",
+    "Un contact avec un malade"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Le paludisme se transmet en serrant la main d'un malade.",
+   "explanation": "Faux : il se transmet par la piqûre d'un moustique.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Dans une rue, 25 maisons sur 50 ont une moustiquaire en bon état pour chaque lit. Quel pourcentage de maisons ?",
+   "explanation": "25 ÷ 50 = 0,5 soit 50 %.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+   "answer": 50,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Quel geste réduit le plus la ponte des moustiques ?",
+   "explanation": "Les moustiques pondent dans les eaux stagnantes.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Fermer les volets le jour",
+    "Vider les eaux stagnantes",
+    "Prendre des vitamines",
+    "Éviter de sortir à midi"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Une voisine dit : « La moustiquaire, c'est inutile, j'ai déjà eu le paludisme. » Rédige une réponse polie et argumentée.",
+   "explanation": "Avoir eu la maladie ne protège pas durablement : on se protège à chaque nuit.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "On peut retomber malade plusieurs fois ; la moustiquaire empêche les piqûres pendant la nuit, moment où l'anophèle pique. Elle protège toute la famille.",
+   "rubric": [
+    "Corrige l'idée fausse",
+    "Explique le rôle de la moustiquaire",
+    "Ton respectueux"
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Dans un quartier, les familles se plaignent de fièvres chez les enfants. Il y a beaucoup de flaques et de pneus remplis d'eau dans les rues.",
+   "method": "Suis la chaîne : eau stagnante, moustiques, piqûres, maladie ; agis sur chaque maillon.",
+   "mistakes": [
+    "Croire que le problème vient des flaques elles-mêmes sans passer par les moustiques."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+   "parts": [
+    {
+     "id": "vie-hygiene-sante-paludisme-06-a",
+     "points": 1,
+     "prompt": "Quel est le lien entre ces flaques et les fièvres ?",
+     "explanation": "Eaux stagnantes → moustiques → risque de paludisme.",
+     "kind": "mcq",
+     "choices": [
+      "Les flaques donnent directement la fièvre",
+      "Les flaques n'ont aucun rôle",
+      "Les flaques permettent aux moustiques de pondre et de se multiplier",
+      "Les flaques rafraîchissent l'air"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "vie-hygiene-sante-paludisme-06-b",
+     "points": 2,
+     "prompt": "Propose deux actions que les habitants peuvent mener ensemble.",
+     "explanation": "L'assainissement est une action collective.",
+     "kind": "open",
+     "model": "Nettoyer les caniveaux et vider ou retirer les pneus remplis d'eau ; sensibiliser les voisins à dormir sous moustiquaire.",
+     "rubric": [
+      "Une action d'assainissement",
+      "Une action de prévention individuelle ou de sensibilisation"
+     ]
+    },
+    {
+     "id": "vie-hygiene-sante-paludisme-06-c",
+     "points": 1,
+     "prompt": "Il suffit que les enfants prennent des médicaments sans voir d'agent de santé.",
+     "explanation": "Faux : on consulte, on ne se soigne pas seul.",
+     "kind": "truefalse",
+     "answer": false
+    }
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Le moustique qui transmet le paludisme est…",
+   "choices": [
+    "la mouche tsé-tsé",
+    "l'anophèle femelle",
+    "le moustique mâle",
+    "la fourmi"
+   ],
+   "answer": 1,
+   "explanation": "C'est l'anophèle femelle qui pique et transmet le parasite.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Une moustiquaire protège surtout…",
+   "choices": [
+    "pendant la nuit quand on dort",
+    "seulement le jour",
+    "uniquement des mouches",
+    "de la pluie"
+   ],
+   "answer": 0,
+   "explanation": "Elle empêche les piqûres pendant le sommeil.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Face à une forte fièvre chez un enfant, on…",
+   "choices": [
+    "attend une semaine",
+    "donne des médicaments non prescrits",
+    "ne fait rien",
+    "consulte rapidement"
+   ],
+   "answer": 3,
+   "explanation": "Un agent de santé doit voir l'enfant.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Les moustiques se développent dans…",
+   "choices": [
+    "les endroits secs",
+    "les pierres chaudes",
+    "les eaux stagnantes",
+    "l'air froid"
+   ],
+   "answer": 2,
+   "explanation": "C'est là qu'ils pondent.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-paludisme-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-paludisme",
+   "prompt": "Le paludisme est causé par…",
+   "choices": [
+    "le froid",
+    "un parasite",
+    "le soleil",
+    "une mauvaise odeur"
+   ],
+   "answer": 1,
+   "explanation": "C'est un parasite microscopique.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Le danger principal de la diarrhée est…",
+   "explanation": "On parle de déshydratation.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "la perte d'eau du corps",
+    "l'excès de sommeil",
+    "la prise de poids",
+    "l'excès de vitamines"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Un vaccin protège avant qu'on soit malade.",
+   "explanation": "Oui : il prépare le corps à se défendre.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Pour connaître le calendrier de vaccination, on peut s'en remettre à un voisin.",
+   "explanation": "Faux : on se renseigne au centre de santé.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Parmi ces gestes, lequel protège du choléra ?",
+   "explanation": "Le choléra se transmet par l'eau et les aliments contaminés.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Éviter le soleil",
+    "Boire de l'eau traitée et se laver les mains",
+    "Manger seulement le soir",
+    "Dormir plus longtemps"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Explique à un camarade pourquoi il faut continuer à boire quand on a la diarrhée.",
+   "explanation": "Le principe est de remplacer ce que le corps perd.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "La diarrhée fait perdre de l'eau ; si on ne remplace pas cette eau, on se déshydrate. Boire, avec la solution conseillée par un agent de santé, aide, et il faut consulter si c'est grave.",
+   "rubric": [
+    "Notion de perte d'eau",
+    "Notion de remplacement de l'eau",
+    "Rappel de consulter"
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Pendant la saison des pluies, plusieurs voisins ont des diarrhées. Le puits du quartier est inondé par les eaux des caniveaux.",
+   "method": "Identifie la source de contamination et protège l'eau, les mains et les aliments.",
+   "mistakes": [
+    "Oublier de consulter en cas de signes graves."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+   "parts": [
+    {
+     "id": "vie-hygiene-sante-diarrhee-vaccins-06-a",
+     "points": 1,
+     "prompt": "Quelle est la cause la plus probable ?",
+     "explanation": "Les eaux usées contaminent le puits.",
+     "kind": "mcq",
+     "choices": [
+      "De l'eau de puits contaminée",
+      "Le soleil",
+      "Les moustiques",
+      "La fatigue"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "vie-hygiene-sante-diarrhee-vaccins-06-b",
+     "points": 2,
+     "prompt": "Cite deux gestes à adopter immédiatement.",
+     "explanation": "L'eau est à traiter ; l'hygiène limite la transmission.",
+     "kind": "open",
+     "model": "Traiter l'eau avant de la boire (bouillir, filtrer ou désinfecter) ; se laver les mains ; consulter si signes graves.",
+     "rubric": [
+      "Traiter l'eau",
+      "Hygiène des mains ou consulter"
+     ]
+    },
+    {
+     "id": "vie-hygiene-sante-diarrhee-vaccins-06-c",
+     "points": 1,
+     "prompt": "Un bébé qui ne boit plus doit être conduit rapidement au centre de santé.",
+     "explanation": "Oui, c'est un signe d'alerte.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Un vaccin sert à…",
+   "choices": [
+    "guérir toute maladie",
+    "préparer le corps à se défendre",
+    "remplacer la nourriture",
+    "donner la maladie"
+   ],
+   "answer": 1,
+   "explanation": "C'est une préparation de l'organisme avant la maladie.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "La déshydratation est…",
+   "choices": [
+    "une perte importante d'eau du corps",
+    "une prise de poids",
+    "une maladie des yeux",
+    "un type de vaccin"
+   ],
+   "answer": 0,
+   "explanation": "Elle est grave chez l'enfant.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Le choléra se transmet surtout par…",
+   "choices": [
+    "les moustiques",
+    "le vent",
+    "le soleil",
+    "l'eau et les aliments contaminés"
+   ],
+   "answer": 3,
+   "explanation": "Hygiène et eau sûre le préviennent.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Pour le calendrier des vaccins, on…",
+   "choices": [
+    "invente les dates",
+    "demande au marchand",
+    "se renseigne au centre de santé",
+    "attend"
+   ],
+   "answer": 2,
+   "explanation": "Le centre de santé fournit les informations à jour.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-diarrhee-vaccins-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-diarrhee-vaccins",
+   "prompt": "Pendant une diarrhée, il faut…",
+   "choices": [
+    "arrêter de boire",
+    "continuer à boire et consulter si c'est grave",
+    "ne rien manger du tout",
+    "se soigner seul avec des restes de comprimés"
+   ],
+   "answer": 1,
+   "explanation": "Remplacer l'eau perdue est l'essentiel.",
+   "review": true
+  }
+ ]
+}

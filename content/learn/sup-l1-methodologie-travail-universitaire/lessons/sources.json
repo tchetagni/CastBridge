@@ -1,0 +1,993 @@
+{
+ "chapter": "sup-l1-methodologie-travail-universitaire-sources",
+ "lessons": [
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "title": "Rechercher, évaluer ses sources, citer",
+   "minutes": 40,
+   "programRef": "Compétences transversales d'entrée à l'université (méthodologie du travail universitaire, L1) — contenu original, à adapter aux exigences de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Chercher efficacement de l'information et évaluer sa fiabilité.",
+    "Reconnaître et éviter le plagiat.",
+    "Citer et construire une bibliographie selon un style auteur-date pris comme exemple."
+   ],
+   "prerequisites": [
+    "sup-l1-methodologie-travail-universitaire-notes-lecture"
+   ],
+   "exercises": [
+    "sup-l1-methodologie-travail-universitaire-sources-citation-01",
+    "sup-l1-methodologie-travail-universitaire-sources-citation-02",
+    "sup-l1-methodologie-travail-universitaire-sources-citation-03",
+    "sup-l1-methodologie-travail-universitaire-sources-citation-04",
+    "sup-l1-methodologie-travail-universitaire-sources-citation-05",
+    "sup-l1-methodologie-travail-universitaire-sources-citation-06"
+   ],
+   "selfCheck": [
+    "sup-l1-methodologie-travail-universitaire-sources-citation-q1",
+    "sup-l1-methodologie-travail-universitaire-sources-citation-q2",
+    "sup-l1-methodologie-travail-universitaire-sources-citation-q3",
+    "sup-l1-methodologie-travail-universitaire-sources-citation-q4",
+    "sup-l1-methodologie-travail-universitaire-sources-citation-q5"
+   ],
+   "reviewNotes": [
+    "Exemples fictifs ; adapter les consignes (formats de travaux, normes de citation, règles anti-plagiat) à celles de l'établissement et de l'enseignant.",
+    "Le style auteur-date est présenté comme exemple général : adapter à la norme imposée par l'établissement.",
+    "Les références de l'exemple sont fictives."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Évaluer une source",
+     "md": "Pose-toi cinq questions : **Qui** écrit (auteur, compétence) ? **Quand** (date, mise à jour) ? **Pourquoi** (informer, vendre, convaincre) ? **Comment** (sources citées, méthode) ? **Où** (éditeur, revue, site institutionnel) ? Croise **plusieurs sources** et préfère les ouvrages et articles scientifiques aux publications anonymes."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Plagiat",
+     "md": "Le **plagiat** consiste à présenter comme sien le travail, les idées ou les phrases d'autrui sans le dire. Il est une faute grave dans les études. On l'évite en **citant** ses sources, en **reformulant avec ses mots** (en citant tout de même l'idée) et en utilisant des **guillemets** pour toute citation exacte."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Citer : un style auteur-date (exemple)",
+     "md": "Dans le texte : (Auteur, année, page) pour une idée ou une citation. En fin de travail : une **bibliographie** classée par ordre alphabétique des auteurs : Auteur, initiale. (année). *Titre*. Lieu : éditeur. Il existe plusieurs normes : **respecte celle exigée** par ton enseignant ou ton établissement."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 15,
+        "w": 120,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 39.25,
+        "text": "Qui ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 15,
+        "w": 120,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 39.25,
+        "text": "Quand ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 15,
+        "w": 120,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 39.25,
+        "text": "Pourquoi ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 75,
+        "w": 120,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 99.25,
+        "text": "Comment ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 75,
+        "w": 120,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 99.25,
+        "text": "Où ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 75,
+        "w": 120,
+        "h": 38,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 99.25,
+        "text": "Croisement",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 160,
+        "text": "Source fiable ?",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 190,
+        "text": "Oui si les réponses convergent",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Grille d'évaluation d'une source.",
+     "alt": "Six cases : qui, quand, pourquoi, comment, où et croisement, aboutissant à la question source fiable ?"
+    },
+    {
+     "type": "example",
+     "title": "Citer sans plagier",
+     "statement": "Fictif : l'auteur A. Mbarga écrit (Planifier ses études, Éditions du Fleuve, 2019, p. 44) : « Réviser, c'est s'interroger sur ce que l'on sait. » Comment l'utiliser ?",
+     "steps": [
+      {
+       "md": "Citation exacte : « Réviser, c'est s'interroger sur ce que l'on sait » (Mbarga, 2019, p. 44)."
+      },
+      {
+       "md": "Reformulation : selon Mbarga (2019), réviser consiste à se tester sur ses connaissances."
+      }
+     ],
+     "answer": "**Guillemets si exact, reformulation + référence sinon.**"
+    },
+    {
+     "type": "example",
+     "title": "Écrire une référence",
+     "statement": "Fictif : rédige la référence du livre précédent.",
+     "steps": [
+      {
+       "md": "Ordre : nom, initiale, année, titre en italique, éditeur."
+      },
+      {
+       "md": "Résultat : Mbarga, A. (2019). *Planifier ses études*. Éditions du Fleuve."
+      }
+     ],
+     "answer": "**Référence complète, classée par ordre alphabétique.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Copier-coller **sans guillemets**.\n- Croire qu'un **site bien classé** dans un moteur de recherche est fiable.\n- Oublier de citer les **idées**, pas seulement les phrases.\n- Mélanger **plusieurs styles** de bibliographie.\n- Ne citer que **des sources anonymes**."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Compare deux sources sur un même sujet : lesquelles sont les plus fiables ?",
+      "Reprends un de tes exposés et ajoute une bibliographie."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-methodologie-travail-universitaire-sources-citation-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens",
+   "title": "Préparer et réussir un examen",
+   "minutes": 45,
+   "programRef": "Compétences transversales d'entrée à l'université (méthodologie du travail universitaire, L1) — contenu original, à adapter aux exigences de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Planifier sa préparation d'un examen.",
+    "Distinguer la démarche de la dissertation, du commentaire (d'arrêt ou de document) et du cas pratique.",
+    "Gérer son temps et sa copie le jour de l'épreuve."
+   ],
+   "prerequisites": [
+    "sup-l1-methodologie-travail-universitaire-sources-citation"
+   ],
+   "exercises": [
+    "sup-l1-methodologie-travail-universitaire-examens-01",
+    "sup-l1-methodologie-travail-universitaire-examens-02",
+    "sup-l1-methodologie-travail-universitaire-examens-03",
+    "sup-l1-methodologie-travail-universitaire-examens-04",
+    "sup-l1-methodologie-travail-universitaire-examens-05",
+    "sup-l1-methodologie-travail-universitaire-examens-06"
+   ],
+   "selfCheck": [
+    "sup-l1-methodologie-travail-universitaire-examens-q1",
+    "sup-l1-methodologie-travail-universitaire-examens-q2",
+    "sup-l1-methodologie-travail-universitaire-examens-q3",
+    "sup-l1-methodologie-travail-universitaire-examens-q4",
+    "sup-l1-methodologie-travail-universitaire-examens-q5"
+   ],
+   "reviewNotes": [
+    "Exemples fictifs ; adapter les consignes (formats de travaux, normes de citation, règles anti-plagiat) à celles de l'établissement et de l'enseignant.",
+    "Les démarches décrites sont générales et peuvent varier selon la discipline : confirmer avec l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Avant l'épreuve",
+     "md": "Rassemble le **programme**, les cours, les TD et les anciennes consignes ; fais une **liste de notions** ; révise par **fiches** ; refais des exercices ; **dors bien** la veille ; prépare le matériel et le trajet."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "La dissertation",
+     "md": "1. **Analyser le sujet** (mots-clés, limites).\n2. Dégager la **problématique**.\n3. Construire un **plan** (souvent en deux ou trois parties) avec idées et exemples.\n4. Rédiger : introduction (accroche, définitions, problème, plan), développement, **conclusion** (réponse + ouverture)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Commentaire (d'arrêt ou de document) et cas pratique",
+     "md": "- **Commentaire de document ou d'arrêt** : présenter le document, dégager son **idée principale**, expliquer sa **portée**, puis le **commenter** (analyse et limites).\n- **Cas pratique** : faits utiles → **problème** → **règle** → **application** → **conclusion**.\nDans tous les cas, **argumente** et illustre."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 70,
+        "w": 75,
+        "h": 45,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 42.5,
+        "y": 97.4,
+        "text": "Lire",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 92,
+        "x2": 88,
+        "y2": 92,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 88,
+        "y": 70,
+        "w": 75,
+        "h": 45,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 125.5,
+        "y": 97.4,
+        "text": "Analyser",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 163,
+        "y1": 92,
+        "x2": 171,
+        "y2": 92,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 171,
+        "y": 70,
+        "w": 75,
+        "h": 45,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 208.5,
+        "y": 97.4,
+        "text": "Plan",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 246,
+        "y1": 92,
+        "x2": 254,
+        "y2": 92,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 254,
+        "y": 70,
+        "w": 75,
+        "h": 45,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 291.5,
+        "y": 97.4,
+        "text": "Rédiger",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 329,
+        "y1": 92,
+        "x2": 337,
+        "y2": 92,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 337,
+        "y": 70,
+        "w": 75,
+        "h": 45,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 374.5,
+        "y": 97.4,
+        "text": "Relire",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 170,
+        "text": "Déroulé d'une copie",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 195,
+        "text": "prévoir du temps pour la relecture",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les étapes d'une copie.",
+     "alt": "Cinq rectangles successifs : lire, analyser, plan, rédiger, relire."
+    },
+    {
+     "type": "example",
+     "title": "Répartir le temps",
+     "statement": "Fictif : épreuve de 180 min. Il prévoit 30 min d'analyse et de plan, 120 min de rédaction et le reste pour la relecture. Combien de minutes de relecture ?",
+     "steps": [
+      {
+       "md": "Temps déjà planifié : ",
+       "tex": "30 + 120 = 150"
+      },
+      {
+       "md": "Reste : ",
+       "tex": "180 - 150 = 30"
+      }
+     ],
+     "answer": "**30 min de relecture.**"
+    },
+    {
+     "type": "example",
+     "title": "Démarche d'un cas pratique",
+     "review": true,
+     "statement": "Fictif : un étudiant achète un téléphone qui tombe en panne le lendemain. Comment structurer ?",
+     "steps": [
+      {
+       "md": "Faits utiles : achat, panne rapide. **Problème** : le vendeur doit-il répondre de cette panne ?"
+      },
+      {
+       "md": "**Règle** : en principe le vendeur répond d'une chose défectueuse (règle donnée à titre d'illustration de la méthode ; à vérifier en droit positif). **Application** puis **conclusion**."
+      }
+     ],
+     "answer": "**Faits, problème, règle, application, conclusion.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- **Hors-sujet** : traiter le thème, pas la question.\n- Plan **descriptif** sans argumentation.\n- Introduction et conclusion **négligées**.\n- **Pas de relecture** (fautes, oublis).\n- **Paniquer** devant une question difficile : commence par ce que tu maîtrises."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Chronomètre-toi sur un sujet d'entraînement : combien de minutes pour le plan ?",
+      "Compare l'introduction d'une dissertation et celle d'un commentaire."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-methodologie-travail-universitaire-examens-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Une citation exacte doit être…",
+   "explanation": "Guillemets et référence.",
+   "source": "Exercice original",
+   "choices": [
+    "entre guillemets et référencée",
+    "sans référence",
+    "modifiée discrètement",
+    "à peine visible"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Reformuler une idée d'autrui dispense de citer la source.",
+   "explanation": "L'idée reste celle de l'auteur : il faut le citer.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Associe question et critère.",
+   "explanation": "Grille d'évaluation.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Qui ?",
+     "Auteur et compétence"
+    ],
+    [
+     "Quand ?",
+     "Date et mise à jour"
+    ],
+    [
+     "Pourquoi ?",
+     "Intention de la source"
+    ],
+    [
+     "Comment ?",
+     "Méthode et sources"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Quel élément rend une source plus fiable ?",
+   "explanation": "La traçabilité compte.",
+   "source": "Exercice original",
+   "choices": [
+    "Elle est anonyme",
+    "Elle est très partagée",
+    "Elle cite ses propres sources",
+    "Elle est drôle"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Explique en 5 à 8 lignes pourquoi le plagiat est une faute grave et comment l'éviter.",
+   "explanation": "Intégrité et méthode.",
+   "source": "Exercice original",
+   "model": "Le plagiat prive l'auteur de son mérite et trompe l'enseignant sur son niveau réel ; il est sanctionné. On l'évite en citant les sources, en utilisant des guillemets et en reformulant.",
+   "rubric": [
+    "Faute envers l'auteur",
+    "Tromperie",
+    "Solutions pratiques"
+   ]
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Fictif : un étudiant copie trois paragraphes d'un site anonyme dans son exposé, sans guillemets.",
+   "method": "Qualifier, puis corriger.",
+   "mistakes": [
+    "Croire que le lien en fin de travail règle tout."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-methodologie-travail-universitaire-sources-citation-06-a",
+     "points": 1,
+     "prompt": "Cette pratique est…",
+     "explanation": "Il y a plagiat.",
+     "kind": "mcq",
+     "choices": [
+      "une reformulation",
+      "une citation correcte",
+      "un résumé",
+      "un plagiat"
+     ],
+     "answer": 3
+    },
+    {
+     "id": "sup-l1-methodologie-travail-universitaire-sources-citation-06-b",
+     "points": 1,
+     "prompt": "Ajouter le lien du site à la fin suffit à citer correctement.",
+     "explanation": "Faux : les passages exacts doivent aussi être entre guillemets et référencés précisément.",
+     "kind": "truefalse",
+     "answer": false
+    },
+    {
+     "id": "sup-l1-methodologie-travail-universitaire-sources-citation-06-c",
+     "points": 2,
+     "prompt": "Que doit-il faire pour corriger son travail ?",
+     "explanation": "Reformuler, ajouter guillemets et références, vérifier la fiabilité du site.",
+     "kind": "open",
+     "model": "Reformuler ou mettre des guillemets, référencer précisément et vérifier la fiabilité du site.",
+     "rubric": [
+      "Guillemets ou reformulation",
+      "Références",
+      "Vérification de la source"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Le plagiat est…",
+   "choices": [
+    "une reformulation honnête",
+    "une citation entre guillemets",
+    "présenter le travail d'autrui comme sien",
+    "un résumé sourcé"
+   ],
+   "answer": 2,
+   "explanation": "Définition.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Une bibliographie est classée…",
+   "choices": [
+    "au hasard",
+    "par ordre de lecture",
+    "par taille",
+    "par ordre alphabétique des auteurs"
+   ],
+   "answer": 3,
+   "explanation": "Convention.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Pour évaluer une source, on se demande…",
+   "choices": [
+    "qui, quand, pourquoi, comment",
+    "combien de likes",
+    "quelle couleur",
+    "quel prix"
+   ],
+   "answer": 0,
+   "explanation": "Grille.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Une idée reformulée…",
+   "choices": [
+    "n'a pas besoin de source",
+    "doit tout de même être référencée",
+    "devient la tienne",
+    "est interdite"
+   ],
+   "answer": 1,
+   "explanation": "Principe.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-sources-citation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-sources-citation",
+   "prompt": "Plusieurs normes de citation existent. Il faut…",
+   "choices": [
+    "en inventer une",
+    "ne rien citer",
+    "suivre celle imposée",
+    "mélanger"
+   ],
+   "answer": 2,
+   "explanation": "Consigne.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "La problématique est…",
+   "explanation": "Elle guide le devoir.",
+   "source": "Exercice original",
+   "choices": [
+    "la question centrale que pose le sujet",
+    "le plan",
+    "la conclusion",
+    "le titre"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "Une introduction de dissertation annonce le plan.",
+   "explanation": "Elle l'annonce après le problème.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "Épreuve de 120 min : 15 min de plan. Temps restant ?",
+   "explanation": "120 − 15 = 105.",
+   "source": "Exercice original",
+   "answer": 105,
+   "tolerance": 0,
+   "unit": "min"
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "Associe exercice et démarche.",
+   "explanation": "Démarches distinctes.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Dissertation",
+     "Problématique et plan argumenté"
+    ],
+    [
+     "Commentaire",
+     "Idée principale, portée, analyse"
+    ],
+    [
+     "Cas pratique",
+     "Faits, problème, règle, application, conclusion"
+    ],
+    [
+     "Fiche de révision",
+     "Synthèse des notions clés"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "Décris en 5 à 8 lignes comment tu organises les 10 premières minutes d'une épreuve.",
+   "explanation": "Bien démarrer fait gagner du temps.",
+   "source": "Exercice original",
+   "model": "Je lis tout le sujet, repère les consignes et le barème, choisis le sujet, note les mots-clés, puis je construis un brouillon de plan en réservant un temps de relecture.",
+   "rubric": [
+    "Lecture complète",
+    "Mots-clés",
+    "Plan",
+    "Gestion du temps"
+   ]
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "Fictif : sujet de dissertation : « Le travail en équipe est-il toujours préférable au travail individuel ? »",
+   "method": "Analyser, problématiser, planifier.",
+   "mistakes": [
+    "Plan en pour/contre sans conclusion."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-methodologie-travail-universitaire-examens-06-a",
+     "points": 1,
+     "prompt": "Quelle est la nature du sujet ?",
+     "explanation": "Une question appelant une réponse nuancée.",
+     "kind": "mcq",
+     "choices": [
+      "une question à nuancer",
+      "un simple résumé",
+      "un calcul",
+      "une récitation"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "sup-l1-methodologie-travail-universitaire-examens-06-b",
+     "points": 2,
+     "prompt": "Propose une problématique.",
+     "explanation": "Dans quelles conditions le travail en équipe est-il plus efficace que le travail individuel ?",
+     "kind": "open",
+     "model": "Dans quelles conditions le travail en équipe est-il plus efficace que le travail individuel ?",
+     "rubric": [
+      "Question claire",
+      "Prend en compte la nuance"
+     ]
+    },
+    {
+     "id": "sup-l1-methodologie-travail-universitaire-examens-06-c",
+     "points": 2,
+     "prompt": "Propose un plan en deux parties.",
+     "explanation": "I. Avantages de l'équipe ; II. Limites et conditions de réussite.",
+     "kind": "open",
+     "model": "I. Avantages du travail en équipe. II. Limites et conditions de réussite.",
+     "rubric": [
+      "Deux parties",
+      "Progression logique"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "Pour réussir une dissertation, on commence par…",
+   "choices": [
+    "rédiger la conclusion",
+    "recopier le cours",
+    "écrire le titre",
+    "analyser le sujet"
+   ],
+   "answer": 3,
+   "explanation": "Étape initiale.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "Une bonne introduction contient…",
+   "choices": [
+    "accroche, problème et plan",
+    "seulement un résumé",
+    "la réponse finale",
+    "rien"
+   ],
+   "answer": 0,
+   "explanation": "Structure.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "Dans un cas pratique, on énonce…",
+   "choices": [
+    "la conclusion avant tout",
+    "les faits, le problème, la règle, l'application, la conclusion",
+    "uniquement des opinions",
+    "un résumé"
+   ],
+   "answer": 1,
+   "explanation": "Démarche.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "La veille d'un examen, il vaut mieux…",
+   "choices": [
+    "veiller toute la nuit",
+    "ne rien préparer",
+    "bien dormir",
+    "changer de méthode"
+   ],
+   "answer": 2,
+   "explanation": "Mémoire.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-methodologie-travail-universitaire-examens-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-methodologie-travail-universitaire-examens",
+   "prompt": "Réserver du temps pour la relecture sert à…",
+   "choices": [
+    "perdre du temps",
+    "rendre plus tôt",
+    "ajouter un titre",
+    "corriger fautes et oublis"
+   ],
+   "answer": 3,
+   "explanation": "Qualité.",
+   "review": true
+  }
+ ]
+}

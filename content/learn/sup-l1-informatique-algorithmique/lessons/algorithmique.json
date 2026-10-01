@@ -1,0 +1,1468 @@
+{
+ "chapter": "sup-l1-informatique-algorithmique-algorithmique",
+ "lessons": [
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases",
+   "title": "Algorithmes : variables, conditions et boucles",
+   "minutes": 50,
+   "programRef": "Initiation à l'informatique de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Écrire un algorithme en pseudo-code français.",
+    "Utiliser variables, affectations et opérations.",
+    "Utiliser les structures Si, Pour et Tant que.",
+    "Dérouler un algorithme par une trace d'exécution."
+   ],
+   "prerequisites": [
+    "sup-l1-informatique-algorithmique-logique-booleenne"
+   ],
+   "exercises": [
+    "sup-l1-informatique-algorithmique-algo-bases-01",
+    "sup-l1-informatique-algorithmique-algo-bases-02",
+    "sup-l1-informatique-algorithmique-algo-bases-03",
+    "sup-l1-informatique-algorithmique-algo-bases-04",
+    "sup-l1-informatique-algorithmique-algo-bases-05",
+    "sup-l1-informatique-algorithmique-algo-bases-06"
+   ],
+   "selfCheck": [
+    "sup-l1-informatique-algorithmique-algo-bases-q1",
+    "sup-l1-informatique-algorithmique-algo-bases-q2",
+    "sup-l1-informatique-algorithmique-algo-bases-q3",
+    "sup-l1-informatique-algorithmique-algo-bases-q4",
+    "sup-l1-informatique-algorithmique-algo-bases-q5"
+   ],
+   "reviewNotes": [
+    "Pseudo-code sans langage imposé ; vérifier la convention de bornes (début à 1) avec l'enseignant.",
+    "Taux de TVA : jamais affirmé comme règle ; donné par l'énoncé."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Convention de pseudo-code utilisée : une affectation s'écrit « x ← valeur » ; chaque ligne est numérotée ; le symbole « · » en début de ligne marque une instruction à l'intérieur d'une structure (boucle ou condition)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Algorithme, variable, affectation",
+     "md": "Un **algorithme** est une suite finie et ordonnée d'instructions qui résout un problème. Une **variable** est une case mémoire nommée, de **type** donné (entier, réel, texte, booléen). L'**affectation** « x ← expression » calcule l'expression puis range le résultat dans $x$ (l'ancienne valeur est perdue). Entrées : **Lire x** ; sorties : **Écrire x**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les structures de contrôle",
+     "md": "- **Condition** : *Si* condition *Alors* … *Sinon* … *Fin si*.\n- **Boucle pour** (nombre de tours connu) : *Pour* i *de* 1 *à* n *faire* … *Fin pour*.\n- **Boucle tant que** (tours inconnus, condition testée **avant**) : *Tant que* condition *faire* … *Fin tant que*. Le corps doit modifier quelque chose pour que la condition devienne fausse, sinon on a une **boucle infinie**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trace d'exécution",
+     "md": "La **trace** est un tableau qui donne, après chaque instruction ou chaque tour de boucle, la valeur de **toutes** les variables. Elle sert à comprendre, tester et déboguer un algorithme."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 300,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 10,
+        "w": 160,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 33.25,
+        "text": "Début",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 46,
+        "x2": 210,
+        "y2": 66,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 66,
+        "w": 200,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 88.9,
+        "text": "n ← 45 ; c ← 0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 102,
+        "x2": 210,
+        "y2": 124,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 124,
+        "w": 180,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 149.25,
+        "text": "n > 0 ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 164,
+        "x2": 210,
+        "y2": 190,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 182,
+        "text": "oui",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 190,
+        "w": 240,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 212.9,
+        "text": "n ← n div 2 ; c ← c + 1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 208,
+        "x2": 40,
+        "y2": 208,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 208,
+        "x2": 40,
+        "y2": 144,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 144,
+        "x2": 120,
+        "y2": 144,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 144,
+        "x2": 370,
+        "y2": 144,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 370,
+        "y1": 144,
+        "x2": 370,
+        "y2": 252,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 370,
+        "y1": 252,
+        "x2": 300,
+        "y2": 252,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 136,
+        "text": "non",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 236,
+        "w": 170,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 215.0,
+        "y": 258.25,
+        "text": "Écrire c",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Organigramme d'une boucle Tant que : compter le nombre de chiffres binaires de 45.",
+     "alt": "Un organigramme : Début, initialisation n=45 et c=0, test n>0 ; si oui on divise n par 2 et on ajoute 1 à c puis on revient au test ; si non, on écrit c."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — affectations et trace",
+     "statement": "On suppose un taux de 19,25 % fourni par l'énoncé. Algorithme : 1. Lire ht ; 2. t ← 19,25 ; 3. ttc ← ht × (1 + t / 100) ; 4. Écrire ttc. Quelle valeur est écrite pour ht = 20 000 FCFA ?",
+     "steps": [
+      {
+       "md": "Ligne 1 : ht = 20 000."
+      },
+      {
+       "md": "Ligne 2 : t = 19,25."
+      },
+      {
+       "md": "Ligne 3 : ttc = 20 000 × 1,1925 = 23850."
+      },
+      {
+       "md": "Ligne 4 : on écrit la valeur de ttc."
+      }
+     ],
+     "answer": "**23 850 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — boucle Pour",
+     "statement": "Trace de : 1. S ← 0 ; 2. Pour i de 1 à 5 faire ; 3. · S ← S + i ; 4. Fin pour ; 5. Écrire S.",
+     "steps": [
+      {
+       "md": "Avant la boucle : S = 0."
+      },
+      {
+       "md": "Tours : i=1 → S=1 ; i=2 → S=3 ; i=3 → S=6 ; i=4 → S=10 ; i=5 → S=15."
+      },
+      {
+       "md": "Après la boucle : S = 15, somme des entiers de 1 à 5."
+      }
+     ],
+     "answer": "**On écrit 15.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — boucle Tant que",
+     "statement": "Trace de : 1. x ← 1 ; 2. Tant que x < 100 faire ; 3. · x ← 3 × x ; 4. Fin tant que ; 5. Écrire x.",
+     "steps": [
+      {
+       "md": "Valeurs de x testées : 1, 3, 9, 27, 81 (toutes < 100 : on entre dans la boucle à chaque fois)."
+      },
+      {
+       "md": "Après le 5e tour : x = 243, et $243<100$ est faux : la boucle s'arrête."
+      }
+     ],
+     "answer": "**On écrit 243 (5 tours).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — condition",
+     "statement": "Écrire un algorithme qui lit une note (sur 20) et affiche « admis » si elle est au moins 10, sinon « ajourné », puis tester pour 9,5 et 10.",
+     "steps": [
+      {
+       "md": "1. Lire note ; 2. Si note ≥ 10 Alors ; 3. · Écrire « admis » ; 4. Sinon ; 5. · Écrire « ajourné » ; 6. Fin si."
+      },
+      {
+       "md": "Pour 9,5 : $9{,}5≥10$ est faux, donc « ajourné »."
+      },
+      {
+       "md": "Pour 10 : $10≥10$ est vrai, donc « admis » (cas limite à tester)."
+      }
+     ],
+     "answer": "**9,5 → ajourné ; 10 → admis.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre l'**affectation** « x ← 5 » avec l'**égalité** « x = 5 » (test).\n- Oublier d'initialiser une variable avant de s'en servir (par exemple S ← 0 pour une somme).\n- Boucle **infinie** : la condition ne devient jamais fausse.\n- Se tromper de borne : « de 1 à 5 » fait 5 tours, « de 0 à 5 » en fait 6."
+    },
+    {
+     "type": "more",
+     "items": [
+      "On peut écrire un même algorithme dans n'importe quel langage de programmation : la logique reste la même.",
+      "Pour une boucle Répéter … jusqu'à, la condition est testée après le corps, donc le corps s'exécute au moins une fois."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-informatique-algorithmique-algo-bases-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux",
+   "title": "Tableaux : parcours, somme, maximum et recherche",
+   "minutes": 45,
+   "programRef": "Initiation à l'informatique de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Représenter une collection de valeurs dans un tableau indicé.",
+    "Parcourir un tableau pour calculer somme, moyenne et maximum.",
+    "Écrire une recherche séquentielle.",
+    "Dérouler la trace d'un parcours."
+   ],
+   "prerequisites": [
+    "sup-l1-informatique-algorithmique-algo-bases"
+   ],
+   "exercises": [
+    "sup-l1-informatique-algorithmique-tableaux-01",
+    "sup-l1-informatique-algorithmique-tableaux-02",
+    "sup-l1-informatique-algorithmique-tableaux-03",
+    "sup-l1-informatique-algorithmique-tableaux-04",
+    "sup-l1-informatique-algorithmique-tableaux-05",
+    "sup-l1-informatique-algorithmique-tableaux-06"
+   ],
+   "selfCheck": [
+    "sup-l1-informatique-algorithmique-tableaux-q1",
+    "sup-l1-informatique-algorithmique-tableaux-q2",
+    "sup-l1-informatique-algorithmique-tableaux-q3",
+    "sup-l1-informatique-algorithmique-tableaux-q4",
+    "sup-l1-informatique-algorithmique-tableaux-q5"
+   ],
+   "reviewNotes": [
+    "Indices de tableau commençant à 1 : à adapter à la convention du cours.",
+    "Données de ventes fictives."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Convention de pseudo-code utilisée : une affectation s'écrit « x ← valeur » ; chaque ligne est numérotée ; le symbole « · » en début de ligne marque une instruction à l'intérieur d'une structure (boucle ou condition)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Tableau",
+     "md": "Un **tableau** $T$ de $n$ cases stocke $n$ valeurs du même type ; la case numéro $i$ (l'**indice**) s'écrit $T[i]$ (ici les indices vont de 1 à $n$). Le nombre de cases est la **taille** du tableau. On le parcourt avec une boucle *Pour* i *de* 1 *à* $n$ ; accéder à $T[0]$ ou à $T[n+1]$ est une **erreur d'indice**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Somme, moyenne, maximum",
+     "md": "**Somme** : 1. S ← 0 ; 2. Pour i de 1 à n : S ← S + T[i]. **Moyenne** : S / n. **Maximum** : 1. m ← T[1] ; 2. Pour i de 2 à n : Si T[i] > m Alors m ← T[i]. On initialise m avec une **valeur du tableau** (pas avec 0, qui serait faux pour des valeurs négatives)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Recherche séquentielle",
+     "md": "Pour savoir si une valeur $v$ est dans $T$ : on examine les cases une à une ; dès que $T[i]=v$, on s'arrête et on renvoie $i$ ; si on atteint la fin sans succès, la valeur est absente. Au pire, il faut $n$ comparaisons (valeur en dernière case ou absente)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 120,
+      "items": [
+       {
+        "t": "text",
+        "x": 70,
+        "y": 22,
+        "text": "i = 1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 35,
+        "w": 60,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 61.3,
+        "text": "12",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 22,
+        "text": "i = 2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 35,
+        "w": 60,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 61.3,
+        "text": "7",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 22,
+        "text": "i = 3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 35,
+        "w": 60,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 61.3,
+        "text": "19",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 22,
+        "text": "i = 4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 35,
+        "w": 60,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 61.3,
+        "text": "3",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 22,
+        "text": "i = 5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 35,
+        "w": 60,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 61.3,
+        "text": "15",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 105,
+        "text": "T[4] = 3 : indices de 1 à 5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un tableau de 5 cases : T = [12, 7, 19, 3, 15].",
+     "alt": "Cinq cases numérotées de 1 à 5 contenant 12, 7, 19, 3 et 15."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — somme, moyenne, maximum",
+     "statement": "T = [12, 7, 19, 3, 15]. Calculer la somme, la moyenne et le maximum.",
+     "steps": [
+      {
+       "md": "Somme : $12+7=19$ ; $+19=38$ ; $+3=41$ ; $+15=56$."
+      },
+      {
+       "md": "Moyenne : $\\frac{56}{5}=11{,}2$.",
+       "tex": "\\frac{56}{5}=11{,}2"
+      },
+      {
+       "md": "Maximum : m ← 12 ; T[2]=7 : non ; T[3]=19 : oui, m ← 19 ; T[4]=3 : non ; T[5]=15 : non. m = 19."
+      }
+     ],
+     "answer": "**Somme 56 ; moyenne 11,2 ; maximum 19.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — recherche séquentielle",
+     "statement": "Chercher 3 puis 8 dans T = [12, 7, 19, 3, 15].",
+     "steps": [
+      {
+       "md": "Valeur 3 : on compare avec 12, 7, 19 (non), puis avec T[4]=3 (oui) : trouvé à l'indice 4 après 4 comparaisons."
+      },
+      {
+       "md": "Valeur 8 : on compare avec les 5 cases, aucune ne vaut 8 : absente, après 5 comparaisons."
+      }
+     ],
+     "answer": "**3 est en case 4 ; 8 est absent.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — comptage",
+     "statement": "Combien de valeurs de T sont supérieures ou égales à 10 ? Algorithme : c ← 0 ; Pour i de 1 à 5 : Si T[i] ≥ 10 Alors c ← c + 1.",
+     "steps": [
+      {
+       "md": "Trace de c : T[1]=12 → c=1 ; T[2]=7 → c=1 ; T[3]=19 → c=2 ; T[4]=3 → c=2 ; T[5]=15 → c=3."
+      },
+      {
+       "md": "Le compteur ne change que lorsque la condition T[i] ≥ 10 est vraie."
+      }
+     ],
+     "answer": "**c = 3 (les valeurs 12, 19 et 15).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Aller jusqu'à $n+1$ dans la boucle : erreur d'indice.\n- Initialiser le maximum à 0 alors que toutes les valeurs peuvent être négatives.\n- Oublier de réinitialiser le compteur ou la somme avant la boucle.\n- Confondre l'**indice** $i$ (position) et la **valeur** $T[i]$."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un tableau à deux dimensions (tableau de tableaux) représente une grille : $T[i][j]$ désigne la ligne $i$, colonne $j$.",
+      "Parcourir deux fois un tableau (une boucle dans une boucle) multiplie le coût : voir la fiche suivante sur la complexité."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-informatique-algorithmique-tableaux-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris",
+   "title": "Complexité et tris simples",
+   "minutes": 50,
+   "programRef": "Initiation à l'informatique de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer ce qu'est la complexité d'un algorithme (idée).",
+    "Comparer recherche séquentielle et dichotomique.",
+    "Décrire et dérouler le tri par sélection.",
+    "Citer le principe des tris à bulles et par insertion."
+   ],
+   "prerequisites": [
+    "sup-l1-informatique-algorithmique-tableaux"
+   ],
+   "exercises": [
+    "sup-l1-informatique-algorithmique-complexite-tris-01",
+    "sup-l1-informatique-algorithmique-complexite-tris-02",
+    "sup-l1-informatique-algorithmique-complexite-tris-03",
+    "sup-l1-informatique-algorithmique-complexite-tris-04",
+    "sup-l1-informatique-algorithmique-complexite-tris-05",
+    "sup-l1-informatique-algorithmique-complexite-tris-06"
+   ],
+   "selfCheck": [
+    "sup-l1-informatique-algorithmique-complexite-tris-q1",
+    "sup-l1-informatique-algorithmique-complexite-tris-q2",
+    "sup-l1-informatique-algorithmique-complexite-tris-q3",
+    "sup-l1-informatique-algorithmique-complexite-tris-q4",
+    "sup-l1-informatique-algorithmique-complexite-tris-q5"
+   ],
+   "reviewNotes": [
+    "Complexité traitée comme une idée (ordre de grandeur) ; pas de notation $O(\\,)$ formelle exigée.",
+    "Convention : indices à partir de 1."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Convention de pseudo-code utilisée : une affectation s'écrit « x ← valeur » ; chaque ligne est numérotée ; le symbole « · » en début de ligne marque une instruction à l'intérieur d'une structure (boucle ou condition)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Complexité (idée)",
+     "md": "Le **coût** d'un algorithme se mesure par le nombre d'opérations élémentaires (comparaisons, affectations) en fonction de la taille $n$ des données, **dans le pire des cas**. Ordres de grandeur usuels : **constant** (indépendant de $n$), **logarithmique** (~$\\log_{2}n$, dichotomie), **linéaire** (~$n$, un parcours), **quadratique** (~$n^{2}$, deux boucles imbriquées, tris simples)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Recherche dichotomique",
+     "md": "Dans un tableau **trié**, on compare la valeur cherchée à la case du **milieu** : si elle est égale, on a trouvé ; si elle est plus petite, on continue dans la moitié gauche ; sinon dans la moitié droite. À chaque tour la zone de recherche est **divisée par 2** : pour $n=1\\,000$, une dizaine de comparaisons suffisent, contre 1 000 au pire en séquentiel."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tri par sélection",
+     "md": "Pour $k$ de 1 à $n-1$ : chercher le **plus petit** élément parmi les cases $k$ à $n$ et l'**échanger** avec la case $k$. Après le tour $k$, les $k$ premières cases sont à leur place définitive. Nombre de comparaisons : $(n-1)+(n-2)+\\dots+1=\\frac{n(n-1)}{2}$, d'ordre $n^{2}$.",
+     "tex": "1+2+\\dots+(n-1)=\\frac{n(n-1)}{2}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Autres tris simples",
+     "md": "**Tri à bulles** : on parcourt le tableau en échangeant deux voisins mal ordonnés ; on recommence jusqu'à ce qu'il n'y ait plus d'échange. **Tri par insertion** : on trie progressivement le début du tableau en insérant chaque nouvel élément à sa bonne place parmi les précédents (comme on range des cartes à jouer). Les trois tris sont d'ordre $n^{2}$ dans le pire des cas."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 250,
+      "bars": [
+       {
+        "label": "log n",
+        "value": 3.0,
+        "color": "green"
+       },
+       {
+        "label": "n",
+        "value": 8,
+        "color": "blue"
+       },
+       {
+        "label": "n log n",
+        "value": 24.0,
+        "color": "orange"
+       },
+       {
+        "label": "n²",
+        "value": 64,
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Nombre d'opérations pour $n=8$ selon l'ordre de grandeur : 3, 8, 24 et 64. (unité : opérations pour n = 8)",
+     "alt": "Quatre barres croissantes : logarithmique 3, linéaire 8, n log n 24, quadratique 64."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — tri par sélection",
+     "statement": "Trier T = [5, 2, 9, 1, 6] par sélection et compter les comparaisons.",
+     "steps": [
+      {
+       "md": "Tour 1 : le minimum de [5, 2, 9, 1, 6] est 1 ; on l'échange avec 5 : [1, 2, 9, 5, 6]."
+      },
+      {
+       "md": "Tour 2 : minimum de [2, 9, 5, 6] : 2, déjà en place. Tour 3 : minimum de [9, 5, 6] : 5 ; échange avec 9 : [1, 2, 5, 9, 6]."
+      },
+      {
+       "md": "Tour 4 : minimum de [9, 6] : 6 ; échange : [1, 2, 5, 6, 9]."
+      },
+      {
+       "md": "Comparaisons : $4+3+2+1=10=\\frac{5×4}{2}$.",
+       "tex": "4+3+2+1=\\frac{5×4}{2}=10"
+      }
+     ],
+     "answer": "**Tableau trié [1, 2, 5, 6, 9] ; 10 comparaisons.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — recherche par dichotomie",
+     "statement": "Chercher 25 dans le tableau trié [3, 8, 12, 19, 25, 31, 40] (7 cases).",
+     "steps": [
+      {
+       "md": "Milieu : case 4, valeur 19 < 25 : on garde les cases 5 à 7."
+      },
+      {
+       "md": "Milieu : case 6, valeur 31 > 25 : on garde la case 5."
+      },
+      {
+       "md": "Case 5 : valeur 25 : trouvé en 3 comparaisons (contre 5 en recherche séquentielle)."
+      }
+     ],
+     "answer": "**25 est en case 5, trouvé en 3 comparaisons.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — ordres de grandeur",
+     "statement": "Pour $n=100$ et $n=1\\,000$, comparer le nombre de comparaisons d'un tri par sélection ($\\frac{n(n-1)}{2}$) et d'une recherche séquentielle ($n$).",
+     "steps": [
+      {
+       "md": "$n=100$ : tri : $\\frac{100×99}{2}=4\\,950$ ; recherche : 100."
+      },
+      {
+       "md": "$n=1\\,000$ : tri : $\\frac{1000×999}{2}=499\\,500$ ; recherche : 1 000."
+      },
+      {
+       "md": "Multiplier $n$ par 10 multiplie le tri par environ 100 (quadratique), la recherche par 10 (linéaire)."
+      }
+     ],
+     "answer": "**4 950 puis 499 500 comparaisons pour le tri.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Appliquer la dichotomie à un tableau **non trié**.\n- Échanger deux éléments sans variable temporaire : on perd une valeur.\n- Croire qu'un algorithme est « rapide » parce qu'il l'est sur un petit tableau : la différence apparaît quand $n$ grandit.\n- Confondre « nombre de tours » et « nombre de comparaisons » dans un tri."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Des tris plus efficaces (tri fusion, tri rapide) sont d'ordre $n\\log n$ en moyenne.",
+      "Trier d'abord permet ensuite d'effectuer de nombreuses recherches rapides par dichotomie."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-informatique-algorithmique-complexite-tris-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "Valeur finale de S : S ← 0 ; Pour i de 1 à 4 faire S ← S + 2 × i ; Fin pour.",
+   "explanation": "$2+4+6+8=20$.",
+   "source": "Exercice original",
+   "answer": 20,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "Combien de tours fait la boucle : x ← 1 ; Tant que x < 10 faire x ← 2 × x ; Fin tant que ?",
+   "explanation": "x prend les valeurs 1, 2, 4, 8 (< 10) puis 16 : 4 tours.",
+   "source": "Exercice original",
+   "choices": [
+    "3",
+    "4",
+    "5",
+    "10"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "Une boucle « Pour i de 1 à 0 » ne s'exécute aucune fois.",
+   "explanation": "La borne de départ dépasse la borne d'arrivée.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "Valeur finale de a : a ← 5 ; b ← 3 ; a ← a + b ; b ← a − b ; a ← a − b.",
+   "explanation": "Après $a=8$ ; $b=8-3=5$ ; $a=8-5=3$ : les valeurs ont été échangées.",
+   "method": "Tableau de trace ligne par ligne.",
+   "mistakes": [
+    "Évaluer toutes les affectations en même temps."
+   ],
+   "source": "Exercice original",
+   "answer": 3,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "Algorithme : n ← 6 ; c ← 0 ; Tant que n ≠ 1 faire ; Si n est pair Alors n ← n / 2 Sinon n ← 3n + 1 ; c ← c + 1 ; Fin tant que. Valeur finale de c ?",
+   "explanation": "Suite : 6, 3, 10, 5, 16, 8, 4, 2, 1 : 8 transformations.",
+   "source": "Exercice original",
+   "answer": 8,
+   "tolerance": 0,
+   "unit": "tours"
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "Algorithme : 1. S ← 0 ; 2. Pour i de 1 à 20 faire ; 3. · Si i est un multiple de 3 Alors S ← S + i ; 4. Fin pour ; 5. Écrire S.",
+   "method": "Dérouler la trace, compter les tours, vérifier le calcul.",
+   "mistakes": [
+    "Oublier d'inclure 18 ou de compter 21."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-informatique-algorithmique-algo-bases-06-a",
+     "points": 1,
+     "prompt": "Combien de tours fait la boucle ?",
+     "explanation": "De 1 à 20 inclus : 20 tours.",
+     "kind": "numeric",
+     "answer": 20,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-algo-bases-06-b",
+     "points": 1,
+     "prompt": "Combien de fois l'addition S ← S + i est-elle exécutée ?",
+     "explanation": "Multiples de 3 jusqu'à 20 : 3, 6, 9, 12, 15, 18 : 6 fois.",
+     "kind": "numeric",
+     "answer": 6,
+     "tolerance": 0,
+     "unit": "fois"
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-algo-bases-06-c",
+     "points": 1,
+     "prompt": "Quelle valeur est écrite ?",
+     "explanation": "$3+6+9+12+15+18=63$.",
+     "kind": "numeric",
+     "answer": 63,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-algo-bases-06-d",
+     "points": 1,
+     "prompt": "Pour obtenir la somme des multiples de 3 jusqu'à 30 inclus, on change :",
+     "explanation": "Il suffit d'étendre la borne de la boucle.",
+     "kind": "mcq",
+     "choices": [
+      "la condition en « i est pair »",
+      "S ← 0 en S ← 1",
+      "« Pour » en « Tant que »",
+      "la borne 20 en 30"
+     ],
+     "answer": 3
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "L'instruction « x ← x + 1 » signifie :",
+   "choices": [
+    "ajouter 1 à la valeur de x",
+    "x est égal à x + 1",
+    "x vaut 1",
+    "comparer x et x + 1"
+   ],
+   "answer": 0,
+   "explanation": "Affectation : on remplace x par x + 1.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "Une boucle « Tant que » teste sa condition :",
+   "choices": [
+    "après chaque tour",
+    "une seule fois",
+    "avant chaque tour",
+    "jamais"
+   ],
+   "answer": 2,
+   "explanation": "Si la condition est fausse d'emblée, le corps n'est jamais exécuté.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "Pour calculer une somme, on initialise la variable à :",
+   "choices": [
+    "1",
+    "la première valeur lue seulement",
+    "−1",
+    "0"
+   ],
+   "answer": 3,
+   "explanation": "0 est l'élément neutre de l'addition.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "« Pour i de 3 à 7 » exécute le corps :",
+   "choices": [
+    "4 fois",
+    "5 fois",
+    "7 fois",
+    "3 fois"
+   ],
+   "answer": 1,
+   "explanation": "Valeurs 3, 4, 5, 6, 7.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-algo-bases-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-algo-bases",
+   "prompt": "Une trace d'exécution sert à :",
+   "choices": [
+    "compiler le programme",
+    "écrire de la documentation",
+    "suivre les valeurs des variables",
+    "mesurer le temps"
+   ],
+   "answer": 2,
+   "explanation": "Outil de compréhension et de test.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Quelle est la somme du tableau [4, 11, 6, 9] ?",
+   "explanation": "$4+11+6+9=30$.",
+   "source": "Exercice original",
+   "answer": 30,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Pour T = [8, 3, 5], que vaut T[2] (indices à partir de 1) ?",
+   "explanation": "T[2] est la deuxième case.",
+   "source": "Exercice original",
+   "choices": [
+    "3",
+    "8",
+    "5",
+    "2"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Pour chercher le maximum d'un tableau de nombres, on peut initialiser m avec T[1].",
+   "explanation": "C'est une valeur du tableau : la comparaison reste correcte.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "T = [6, 2, 9, 4, 9, 1]. Combien de comparaisons fait la recherche séquentielle de 4 ?",
+   "explanation": "On compare avec 6, 2, 9, puis 4 : 4 comparaisons.",
+   "source": "Exercice original",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "comparaisons"
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Combien de fois la valeur 12 apparaît-elle dans [5, 12, 8, 12, 3] ? Écrire l'algorithme de comptage et donner la valeur finale du compteur.",
+   "explanation": "c ← 0 ; Pour i de 1 à 5 : Si T[i] = 12 Alors c ← c + 1 ; la valeur finale est 2.",
+   "source": "Exercice original",
+   "answer": 2,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Les ventes quotidiennes (en milliers de FCFA) d'une boutique fictive sur 7 jours sont T = [120, 95, 140, 80, 110, 160, 70].",
+   "method": "Parcourir le tableau en accumulant somme et maximum ; comparer à la moyenne.",
+   "mistakes": [
+    "Compter 110 comme supérieur à la moyenne."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-informatique-algorithmique-tableaux-06-a",
+     "points": 1,
+     "prompt": "Calculer la somme des ventes.",
+     "explanation": "$120+95+140+80+110+160+70=775$.",
+     "kind": "numeric",
+     "answer": 775,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-tableaux-06-b",
+     "points": 1,
+     "prompt": "Calculer la moyenne (arrondie à l'unité).",
+     "explanation": "$\\frac{775}{7}≈110.71$, soit environ 111.",
+     "kind": "numeric",
+     "answer": 111,
+     "tolerance": 0.5
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-tableaux-06-c",
+     "points": 1,
+     "prompt": "Quel est l'indice de la case du maximum ?",
+     "explanation": "Le maximum 160 est en 6e position.",
+     "kind": "numeric",
+     "answer": 6,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-tableaux-06-d",
+     "points": 1,
+     "prompt": "Combien de jours ont des ventes strictement supérieures à la moyenne ?",
+     "explanation": "Supérieures à 110,71 : 120, 140, 160 : 3 jours (110 est inférieur).",
+     "kind": "numeric",
+     "answer": 3,
+     "tolerance": 0,
+     "unit": "jours"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Le nombre de comparaisons maximal d'une recherche séquentielle dans un tableau de $n$ cases est :",
+   "choices": [
+    "1",
+    "$\\log_{2}n$",
+    "$n$",
+    "$n^{2}$"
+   ],
+   "answer": 2,
+   "explanation": "On peut devoir examiner toutes les cases.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Dans un tableau de 6 cases (indices de 1 à 6), l'indice du dernier élément est :",
+   "choices": [
+    "6",
+    "5",
+    "7",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "Les indices vont de 1 à $n$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Avant de calculer une somme avec une boucle, on affecte à S la valeur :",
+   "choices": [
+    "1",
+    "T[1] + 1",
+    "n",
+    "0"
+   ],
+   "answer": 3,
+   "explanation": "0 est neutre pour l'addition.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Pour calculer la moyenne d'un tableau de $n$ cases, on divise la somme par :",
+   "choices": [
+    "$n-1$",
+    "$n$",
+    "$n+1$",
+    "le maximum"
+   ],
+   "answer": 1,
+   "explanation": "Moyenne arithmétique.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-tableaux-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-tableaux",
+   "prompt": "Accéder à T[n+1] dans un tableau de $n$ cases provoque :",
+   "choices": [
+    "la valeur 0",
+    "une erreur d'indice",
+    "le maximum",
+    "un tri automatique"
+   ],
+   "answer": 1,
+   "explanation": "Cette case n'existe pas.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "La dichotomie s'applique à un tableau :",
+   "explanation": "On élimine la moitié selon la comparaison avec la valeur du milieu : cela exige un tableau trié.",
+   "source": "Exercice original",
+   "choices": [
+    "quelconque",
+    "de textes seulement",
+    "de taille paire",
+    "trié"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "Le tri à bulles est de complexité linéaire dans le pire des cas.",
+   "explanation": "Faux : il est d'ordre $n^{2}$ (deux boucles imbriquées).",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "Combien de comparaisons fait le tri par sélection sur 6 éléments (quel que soit l'ordre) ?",
+   "explanation": "$\\frac{6×5}{2}=15$.",
+   "source": "Exercice original",
+   "answer": 15,
+   "tolerance": 0,
+   "unit": "comparaisons"
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "On trie [9, 4, 7, 2] par sélection. Quelle est la valeur de T[1] après le premier tour ?",
+   "explanation": "Le minimum du tableau est 2 ; il est échangé avec la case 1 : [2, 4, 7, 9].",
+   "source": "Exercice original",
+   "answer": 2,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "Dans un tableau trié de 15 cases, au maximum combien de comparaisons demande la dichotomie ? (on coupe 15 → 7 → 3 → 1)",
+   "explanation": "On compare au milieu : il reste 7 cases, puis 3, puis 1, puis 0 : 4 comparaisons au plus.",
+   "source": "Exercice original",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "comparaisons"
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "On trie T = [7, 3, 9, 1] par sélection.",
+   "method": "Écrire le tableau après chaque tour.",
+   "mistakes": [
+    "Échanger avec la mauvaise case."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-informatique-algorithmique-complexite-tris-06-a",
+     "points": 1,
+     "prompt": "Combien de comparaisons le tri effectue-t-il au total ?",
+     "explanation": "$3+2+1=6=\\frac{4×3}{2}$.",
+     "kind": "numeric",
+     "answer": 6,
+     "tolerance": 0,
+     "unit": "comparaisons"
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-complexite-tris-06-b",
+     "points": 1,
+     "prompt": "Après le tour 1, quelle est la valeur de T[4] ?",
+     "explanation": "Le minimum 1 est échangé avec 7 : [1, 3, 9, 7] ; T[4]=7.",
+     "kind": "numeric",
+     "answer": 7,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-complexite-tris-06-c",
+     "points": 1,
+     "prompt": "Après le tour 2, quelle est la valeur de T[3] ?",
+     "explanation": "Le minimum de [3, 9, 7] est 3, déjà en place : [1, 3, 9, 7] ; T[3]=9.",
+     "kind": "numeric",
+     "answer": 9,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-algorithmique-complexite-tris-06-d",
+     "points": 1,
+     "prompt": "Quel est le tableau final ?",
+     "explanation": "Après le tour 3 : minimum de [9, 7] = 7, échangé avec 9 : [1, 3, 7, 9].",
+     "kind": "mcq",
+     "choices": [
+      "[1, 3, 7, 9]",
+      "[1, 3, 9, 7]",
+      "[9, 7, 3, 1]",
+      "[3, 1, 7, 9]"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "La recherche dichotomique dans un tableau trié de 1 000 cases demande environ :",
+   "choices": [
+    "1 000 comparaisons",
+    "500 comparaisons",
+    "10 comparaisons",
+    "100 000 comparaisons"
+   ],
+   "answer": 2,
+   "explanation": "$\\log_{2}1000≈10$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "Le tri par sélection place à chaque tour :",
+   "choices": [
+    "le plus grand au milieu",
+    "le premier élément à la fin",
+    "deux éléments au hasard",
+    "le plus petit des éléments restants à sa place"
+   ],
+   "answer": 3,
+   "explanation": "Après le tour $k$, les $k$ premières cases sont définitives.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "Un algorithme quadratique fait environ ... opérations pour $n=100$ :",
+   "choices": [
+    "100",
+    "10 000",
+    "200",
+    "1 000 000"
+   ],
+   "answer": 1,
+   "explanation": "$n^{2}=10\\,000$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "La complexité mesure :",
+   "choices": [
+    "la longueur du code",
+    "la beauté de l'algorithme",
+    "le nombre d'opérations selon la taille des données",
+    "la quantité d'écran utilisée"
+   ],
+   "answer": 2,
+   "explanation": "Ordre de grandeur du coût.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-informatique-algorithmique-complexite-tris-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-algorithmique-complexite-tris",
+   "prompt": "Le tri par insertion fonctionne comme :",
+   "choices": [
+    "le rangement de cartes à jouer dans la main",
+    "un partage en deux paquets",
+    "un mélange aléatoire",
+    "un tirage au sort"
+   ],
+   "answer": 0,
+   "explanation": "On insère chaque élément à sa place parmi les précédents.",
+   "review": true
+  }
+ ]
+}

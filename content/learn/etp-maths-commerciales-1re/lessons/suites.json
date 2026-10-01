@@ -1,0 +1,365 @@
+{
+ "chapter": "etp-maths-commerciales-1re-suites",
+ "lessons": [
+  {
+   "id": "etp-maths-commerciales-1re-suites",
+   "title": "Suites arithmétiques et géométriques appliquées",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une suite arithmétique ou géométrique.",
+    "Calculer un terme de rang n.",
+    "Calculer une somme de termes consécutifs.",
+    "Modéliser une épargne régulière ou un placement à intérêts composés."
+   ],
+   "prerequisites": [
+    "etp-maths-commerciales-1re-pourcentages",
+    "etp-maths-commerciales-1re-interets"
+   ],
+   "exercises": [
+    "etp-maths-commerciales-1re-suites-01",
+    "etp-maths-commerciales-1re-suites-02",
+    "etp-maths-commerciales-1re-suites-03",
+    "etp-maths-commerciales-1re-suites-04",
+    "etp-maths-commerciales-1re-suites-05",
+    "etp-maths-commerciales-1re-suites-06"
+   ],
+   "selfCheck": [
+    "etp-maths-commerciales-1re-suites-q1",
+    "etp-maths-commerciales-1re-suites-q2",
+    "etp-maths-commerciales-1re-suites-q3",
+    "etp-maths-commerciales-1re-suites-q4",
+    "etp-maths-commerciales-1re-suites-q5"
+   ],
+   "reviewNotes": [
+    "Formules de somme à vérifier avec le cours ; indices partant de 0 dans cette fiche.",
+    "Taux d'intérêts composés fictifs (donnés)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite arithmétique",
+     "md": "Une suite est **arithmétique** si on passe d'un terme au suivant en **ajoutant toujours le même nombre r** (la raison). Terme de rang n : **uₙ = u₀ + n × r**. Exemple : salaire augmenté de 5 000 FCFA chaque année.",
+     "tex": "u_n = u_0 + n \\times r"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite géométrique",
+     "md": "Une suite est **géométrique** si on passe d'un terme au suivant en **multipliant toujours par le même nombre q** (la raison). Terme de rang n : **uₙ = u₀ × qⁿ**. Exemple : un capital qui augmente de 5 % par an (q = 1,05).",
+     "tex": "u_n = u_0 \\times q^n"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Sommes",
+     "md": "- Arithmétique : somme de k termes consécutifs = k × (premier + dernier) ÷ 2.\n- Géométrique (q ≠ 1) : somme de k termes = premier × (qᵏ − 1) ÷ (q − 1).",
+     "tex": "S = k \\times \\frac{\\text{premier} + \\text{dernier}}{2} \\qquad S = \\text{premier} \\times \\frac{q^k - 1}{q - 1}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reconnaître la nature",
+     "md": "Calculer les différences successives : constantes, c'est arithmétique. Calculer les quotients successifs : constants, c'est géométrique. Une évolution de t % par période donne q = 1 + t/100."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 6,
+      "ymin": 0,
+      "ymax": 36,
+      "grid": 6,
+      "xlabel": "rang n",
+      "ylabel": "valeur",
+      "curves": [
+       {
+        "expr": "15+3*x",
+        "color": "blue",
+        "label": "arithmétique"
+       },
+       {
+        "expr": "10*1.25^x",
+        "color": "orange",
+        "label": "géométrique"
+       }
+      ]
+     },
+     "caption": "Croissance linéaire contre croissance en pourcentage.",
+     "alt": "Une droite (suite arithmétique, +3 par rang) et une courbe qui s'élève de plus en plus vite (suite géométrique, ×1,25 par rang)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Suite arithmétique",
+     "statement": "Un employé fictif gagne 150 000 FCFA la première année, avec une augmentation fixe de 5 000 FCFA par an. Quel salaire après 6 ans ? Quelle somme totale perçue sur les 7 années (rang 0 à 6) ?",
+     "steps": [
+      {
+       "md": "Salaire au rang 6 :",
+       "tex": "u_6 = 150000 + 6 \\times 5000 = 180000"
+      },
+      {
+       "md": "Somme de 7 termes :",
+       "tex": "7 \\times \\frac{150000 + 180000}{2} = 1155000"
+      }
+     ],
+     "answer": "**Salaire 180 000 FCFA ; total 1 155 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Suite géométrique",
+     "statement": "On place 500 000 FCFA à intérêts composés de 5 % par an (taux fictif). Quelle valeur après 3 ans ?",
+     "steps": [
+      {
+       "md": "Chaque année on multiplie par 1,05 : q = 1,05."
+      },
+      {
+       "md": "Au rang 3 :",
+       "tex": "u_3 = 500000 \\times 1,05^3 = 578812,50"
+      }
+     ],
+     "answer": "**Environ 578 812,50 FCFA** (contre 575 000 FCFA en intérêt simple)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre rang et nombre de termes : de u₀ à uₙ, il y a n + 1 termes.\n- Utiliser q = 0,05 au lieu de 1,05 pour une hausse de 5 %.\n- Appliquer la formule arithmétique à une évolution en pourcentage."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une baisse de t % par période donne q = 1 − t/100 : c'est le cas d'un matériel dont la valeur diminue.",
+      "Les remboursements d'emprunt et l'épargne régulière combinent souvent plusieurs suites."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-commerciales-1re-suites-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-maths-commerciales-1re-suites-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "Suite arithmétique de premier terme u₀ = 3 et de raison 4. Que vaut u₁₀ ?",
+   "explanation": "u₁₀ = 3 + 10 × 4 = 43.",
+   "source": "Exercice original",
+   "answer": 43,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "La suite 3, 6, 12, 24 est…",
+   "explanation": "Chaque terme est le double du précédent : géométrique de raison 2.",
+   "source": "Exercice original",
+   "choices": [
+    "Arithmétique de raison 3",
+    "Géométrique de raison 2",
+    "Arithmétique de raison 2",
+    "Ni l'une ni l'autre"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "Une augmentation de 10 % par période correspond à une raison q = 1,10.",
+   "explanation": "q = 1 + 10/100 = 1,10.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "Somme des 10 premiers termes de la suite géométrique 2, 4, 8, 16, … (premier terme 2, raison 2).",
+   "explanation": "S = 2 × (2¹⁰ − 1) ÷ (2 − 1) = 2 × 1 023 = 2 046.",
+   "method": "Utiliser la formule avec k = 10.",
+   "source": "Exercice original",
+   "answer": 2046,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "Un véhicule fictif de 2 000 000 FCFA perd 10 % de sa valeur chaque année. Valeur après 2 ans ?",
+   "explanation": "q = 0,90 ; 2 000 000 × 0,90² = 1 620 000.",
+   "method": "Baisse de 10 % : q = 0,90.",
+   "mistakes": [
+    "Retirer 20 % d'un coup."
+   ],
+   "source": "Exercice original",
+   "answer": 1620000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "Une jeune artisane fictive épargne 10 000 FCFA le premier mois, puis 2 000 FCFA de plus chaque mois que le mois précédent. Par ailleurs, son chiffre d'affaires mensuel de 400 000 FCFA augmente de 10 % par mois.",
+   "method": "Identifier la nature de chaque suite, puis appliquer la bonne formule.",
+   "mistakes": [
+    "Utiliser 12 termes avec n = 12 dans uₙ."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-commerciales-1re-suites-06-a",
+     "points": 1,
+     "prompt": "Épargne du 12e mois (FCFA) ?",
+     "explanation": "Suite arithmétique : premier terme 10 000, raison 2 000. Le 12e terme est 10 000 + 11 × 2 000 = 32 000.",
+     "kind": "numeric",
+     "answer": 32000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-suites-06-b",
+     "points": 2,
+     "prompt": "Épargne totale sur les 12 mois (FCFA) ?",
+     "explanation": "12 × (10 000 + 32 000) ÷ 2 = 252 000.",
+     "kind": "numeric",
+     "answer": 252000.0,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-suites-06-c",
+     "points": 2,
+     "prompt": "Chiffre d'affaires du 4e mois, c'est-à-dire après 3 hausses de 10 % (FCFA) ?",
+     "explanation": "Suite géométrique de raison 1,1 : 400 000 × 1,1³ = 400 000 × 1,331 = 532 400.",
+     "kind": "numeric",
+     "answer": 532400,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-suites-06-d",
+     "points": 1,
+     "prompt": "L'évolution du chiffre d'affaires est…",
+     "explanation": "On multiplie chaque mois par 1,1 : suite géométrique.",
+     "kind": "mcq",
+     "choices": [
+      "Arithmétique",
+      "Géométrique",
+      "Constante",
+      "Décroissante"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "Pour une suite arithmétique, on passe d'un terme au suivant…",
+   "choices": [
+    "En multipliant par q",
+    "En ajoutant r",
+    "En élevant au carré",
+    "En divisant par n"
+   ],
+   "answer": 1,
+   "explanation": "On ajoute toujours la même raison."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "Une baisse de 20 % par période correspond à q = ",
+   "choices": [
+    "0,80",
+    "0,20",
+    "1,20",
+    "−0,20"
+   ],
+   "answer": 0,
+   "explanation": "q = 1 − 0,20 = 0,80."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "Avec u₀ = 100 et q = 2, u₃ = ",
+   "choices": [
+    "300",
+    "600",
+    "1 000",
+    "800"
+   ],
+   "answer": 3,
+   "explanation": "100 × 2³ = 800."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "De u₀ à u₉, il y a…",
+   "choices": [
+    "9 termes",
+    "8 termes",
+    "10 termes",
+    "11 termes"
+   ],
+   "answer": 2,
+   "explanation": "Du rang 0 au rang 9 : 10 termes."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-suites-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-suites",
+   "prompt": "Des intérêts composés suivent une suite…",
+   "choices": [
+    "Arithmétique",
+    "Géométrique",
+    "Constante",
+    "Aléatoire"
+   ],
+   "answer": 1,
+   "explanation": "Capital multiplié par 1 + t à chaque période."
+  }
+ ]
+}

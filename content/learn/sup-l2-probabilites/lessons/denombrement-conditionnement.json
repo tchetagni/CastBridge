@@ -1,0 +1,960 @@
+{
+ "chapter": "sup-l2-probabilites-denombrement-conditionnement",
+ "lessons": [
+  {
+   "id": "sup-l2-probabilites-denombrement-proba",
+   "title": "Dénombrement et probabilités",
+   "minutes": 50,
+   "programRef": "Probabilités de deuxième année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser le principe multiplicatif, les permutations, arrangements et combinaisons.",
+    "Distinguer les situations où l'ordre compte ou non.",
+    "Calculer des probabilités en situation d'équiprobabilité.",
+    "Utiliser le complémentaire et la formule $P(A∪B)$."
+   ],
+   "exercises": [
+    "sup-l2-probabilites-denombrement-proba-01",
+    "sup-l2-probabilites-denombrement-proba-02",
+    "sup-l2-probabilites-denombrement-proba-03",
+    "sup-l2-probabilites-denombrement-proba-04",
+    "sup-l2-probabilites-denombrement-proba-05",
+    "sup-l2-probabilites-denombrement-proba-06",
+    "sup-l2-probabilites-denombrement-proba-07"
+   ],
+   "selfCheck": [
+    "sup-l2-probabilites-denombrement-proba-q1",
+    "sup-l2-probabilites-denombrement-proba-q2",
+    "sup-l2-probabilites-denombrement-proba-q3",
+    "sup-l2-probabilites-denombrement-proba-q4",
+    "sup-l2-probabilites-denombrement-proba-q5"
+   ],
+   "reviewNotes": [
+    "Notation $\\binom{n}{p}$ remplacée par $C_{n}^{p}$ (limite du moteur de formules) ; vérifier la notation du cours.",
+    "Exemples fictifs (urnes, lots)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Principe multiplicatif",
+     "md": "Si une opération se fait en $k$ étapes successives, la première ayant $n_{1}$ résultats possibles, la deuxième $n_{2}$, etc. (indépendamment des choix précédents), le nombre total de résultats est $n_{1}×n_{2}×\\dots×n_{k}$. Exemple : un code de 4 chiffres, chacun de 0 à 9, donne $10^{4}=10\\,000$ codes."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Permutations, arrangements, combinaisons",
+     "md": "Pour $n$ objets distincts :\n- **permutation** (ordre des $n$ objets) : $n!=n(n-1)\\dots 1$ ;\n- **arrangement** de $p$ objets parmi $n$ (l'**ordre compte**, sans répétition) : $A_{n}^{p}=\\frac{n!}{(n-p)!}$ ;\n- **combinaison** de $p$ objets parmi $n$ (l'**ordre ne compte pas**) : $C_{n}^{p}=\\frac{n!}{p!\\,(n-p)!}$.",
+     "tex": "A_{n}^{p}=\\frac{n!}{(n-p)!}\\,\\, C_{n}^{p}=\\frac{n!}{p!\\,(n-p)!}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propriétés des combinaisons",
+     "md": "$C_{n}^{p}=C_{n}^{n-p}$ ; $C_{n}^{0}=C_{n}^{n}=1$ ; $C_{n}^{1}=n$ ; formule de Pascal $C_{n}^{p}=C_{n-1}^{p-1}+C_{n-1}^{p}$ ; $\\sum_{p=0}^{n}C_{n}^{p}=2^{n}$ (nombre total de parties d'un ensemble à $n$ éléments)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Probabilité en situation d'équiprobabilité",
+     "md": "L'**univers** $Ω$ est l'ensemble des issues possibles ; un **événement** est une partie de $Ω$. Si les issues sont **équiprobables**, $P(A)=\\frac{\\text{nombre de cas favorables}}{\\text{nombre de cas possibles}}=\\frac{|A|}{|Ω|}$. Règles générales : $0≤P(A)≤1$ ; $P(\\bar{A})=1-P(A)$ ; $P(A∪B)=P(A)+P(B)-P(A∩B)$.",
+     "tex": "P(A)=\\frac{|A|}{|Ω|}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "k=0",
+        "value": 1,
+        "color": "blue"
+       },
+       {
+        "label": "k=1",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "k=2",
+        "value": 15,
+        "color": "blue"
+       },
+       {
+        "label": "k=3",
+        "value": 20,
+        "color": "blue"
+       },
+       {
+        "label": "k=4",
+        "value": 15,
+        "color": "blue"
+       },
+       {
+        "label": "k=5",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "k=6",
+        "value": 1,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Les coefficients $C_{6}^{k}$ : 1, 6, 15, 20, 15, 6, 1 (symétriques). (unité : C(6 ; k))",
+     "alt": "Sept barres de hauteurs 1, 6, 15, 20, 15, 6 et 1, symétriques autour de k=3."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — arrangement et combinaison",
+     "statement": "Huit athlètes fictifs participent à une course. (a) Combien de podiums (1er, 2e, 3e) ? (b) Combien de façons de choisir 3 athlètes pour un relais, sans ordre ?",
+     "steps": [
+      {
+       "md": "(a) L'ordre compte : $A_{8}^{3}=8×7×6=336$.",
+       "tex": "A_{8}^{3}=8×7×6=336"
+      },
+      {
+       "md": "(b) L'ordre ne compte pas : $C_{8}^{3}=\\frac{336}{3!}=56$.",
+       "tex": "C_{8}^{3}=\\frac{336}{6}=56"
+      }
+     ],
+     "answer": "**(a) 336 podiums ; (b) 56 choix.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — probabilité par combinaisons",
+     "statement": "Une urne contient 5 boules rouges et 4 bleues. On tire simultanément 3 boules. Quelle est la probabilité qu'elles soient toutes rouges ?",
+     "steps": [
+      {
+       "md": "Nombre de tirages possibles : $C_{9}^{3}=84$.",
+       "tex": "C_{9}^{3}=84"
+      },
+      {
+       "md": "Tirages favorables : $C_{5}^{3}=10$.",
+       "tex": "C_{5}^{3}=10"
+      },
+      {
+       "md": "$P=\\frac{10}{84}=\\frac{5}{42}≈0{,}119$.",
+       "tex": "P=\\frac{10}{84}=\\frac{5}{42}"
+      }
+     ],
+     "answer": "**$P=\\frac{5}{42}≈0{,}119$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — union d'événements",
+     "statement": "On lance un dé équilibré. $A$ : « résultat pair » ; $B$ : « résultat ≥ 4 ». Calculer $P(A∪B)$.",
+     "steps": [
+      {
+       "md": "$A=\\{2,4,6\\}$ : $P(A)=\\frac{1}{2}$ ; $B=\\{4,5,6\\}$ : $P(B)=\\frac{1}{2}$."
+      },
+      {
+       "md": "$A∩B=\\{4,6\\}$ : $P(A∩B)=\\frac{1}{3}$.",
+       "tex": "P(A∩B)=\\frac{2}{6}=\\frac{1}{3}"
+      },
+      {
+       "md": "$P(A∪B)=\\frac{1}{2}+\\frac{1}{2}-\\frac{1}{3}=\\frac{2}{3}$.",
+       "tex": "P(A∪B)=\\frac{2}{3}"
+      }
+     ],
+     "answer": "**$P(A∪B)=\\frac{2}{3}$** (vérification : $A∪B=\\{2,4,5,6\\}$, 4 cas sur 6)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre arrangement (ordre) et combinaison (sans ordre) : se demander « changer l'ordre donne-t-il un résultat différent ? ».\n- Appliquer la règle $P(A∪B)=P(A)+P(B)$ quand $A$ et $B$ ne sont **pas** incompatibles.\n- Oublier que l'équiprobabilité doit être **justifiée** (dé truqué, tirage non uniforme…).\n- Compter plusieurs fois le même tirage lorsqu'on énumère « à la main »."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La formule du binôme $(a+b)^{n}=\\sum C_{n}^{p}a^{p}b^{n-p}$ explique le nom « coefficients binomiaux ».",
+      "« Au moins un » se traite souvent par le **complémentaire** : $P(\\text{au moins un})=1-P(\\text{aucun})$."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-probabilites-denombrement-proba-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes",
+   "title": "Probabilités conditionnelles, indépendance et formule de Bayes",
+   "minutes": 55,
+   "programRef": "Probabilités de deuxième année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une probabilité conditionnelle.",
+    "Tester l'indépendance de deux événements.",
+    "Utiliser la formule des probabilités totales et un arbre pondéré.",
+    "Appliquer la formule de Bayes."
+   ],
+   "prerequisites": [
+    "sup-l2-probabilites-denombrement-proba"
+   ],
+   "exercises": [
+    "sup-l2-probabilites-conditionnement-bayes-01",
+    "sup-l2-probabilites-conditionnement-bayes-02",
+    "sup-l2-probabilites-conditionnement-bayes-03",
+    "sup-l2-probabilites-conditionnement-bayes-04",
+    "sup-l2-probabilites-conditionnement-bayes-05",
+    "sup-l2-probabilites-conditionnement-bayes-06"
+   ],
+   "selfCheck": [
+    "sup-l2-probabilites-conditionnement-bayes-q1",
+    "sup-l2-probabilites-conditionnement-bayes-q2",
+    "sup-l2-probabilites-conditionnement-bayes-q3",
+    "sup-l2-probabilites-conditionnement-bayes-q4",
+    "sup-l2-probabilites-conditionnement-bayes-q5"
+   ],
+   "reviewNotes": [
+    "Exercice de dépistage médical : chiffres entièrement fictifs et fournis par l'énoncé ; à relire (santé).",
+    "Tous les chiffres de défauts d'usine sont fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Probabilité conditionnelle",
+     "md": "Si $P(B)>0$, la probabilité de $A$ **sachant** $B$ est $P(A|B)=\\frac{P(A∩B)}{P(B)}$. On en déduit la **formule des probabilités composées** $P(A∩B)=P(B)\\,P(A|B)$.",
+     "tex": "P(A|B)=\\frac{P(A∩B)}{P(B)}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Indépendance",
+     "md": "Deux événements $A$ et $B$ sont **indépendants** si $P(A∩B)=P(A)\\,P(B)$ ; de façon équivalente (si $P(B)>0$), $P(A|B)=P(A)$ : savoir que $B$ est réalisé ne change pas la probabilité de $A$. Attention : **incompatibles** (ne se réalisent jamais ensemble) n'est pas **indépendants** ; deux événements incompatibles de probabilités non nulles sont dépendants."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Probabilités totales",
+     "md": "Si $B_{1},\\dots,B_{k}$ forment une **partition** de $Ω$ (disjoints, de réunion $Ω$, de probabilités non nulles), alors pour tout événement $A$ : $P(A)=\\sum_{i=1}^{k}P(B_{i})\\,P(A|B_{i})$. Dans un arbre pondéré, on **multiplie** le long d'une branche et on **additionne** les branches qui mènent à $A$.",
+     "tex": "P(A)=\\sum_{i=1}^{k}P(B_{i})\\,P(A|B_{i})"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formule de Bayes",
+     "md": "Avec les mêmes hypothèses et $P(A)>0$ : $P(B_{j}|A)=\\frac{P(B_{j})\\,P(A|B_{j})}{\\sum_{i}P(B_{i})\\,P(A|B_{i})}$. Elle « inverse » le conditionnement : on passe de $P(A|B_{j})$ (cause → effet) à $P(B_{j}|A)$ (effet → cause).",
+     "tex": "P(B_{j}|A)=\\frac{P(B_{j})\\,P(A|B_{j})}{P(A)}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 310,
+      "items": [
+       {
+        "t": "text",
+        "x": 30,
+        "y": 160,
+        "text": "Début",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 55,
+        "y1": 155,
+        "x2": 140,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 65,
+        "text": "M1  0,5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 56,
+        "x2": 300,
+        "y2": 38,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 40,
+        "text": "D  0,02",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 66,
+        "x2": 300,
+        "y2": 84,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 88,
+        "text": "D̄  0,98",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 55,
+        "y1": 155,
+        "x2": 140,
+        "y2": 160,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 165,
+        "text": "M2  0,3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 156,
+        "x2": 300,
+        "y2": 138,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 140,
+        "text": "D  0,03",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 166,
+        "x2": 300,
+        "y2": 184,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 188,
+        "text": "D̄  0,97",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 55,
+        "y1": 155,
+        "x2": 140,
+        "y2": 260,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 265,
+        "text": "M3  0,2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 256,
+        "x2": 300,
+        "y2": 238,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 240,
+        "text": "D  0,05",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 266,
+        "x2": 300,
+        "y2": 284,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 288,
+        "text": "D̄  0,95",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Arbre pondéré : machines M1, M2, M3 puis pièce défectueuse (D) ou non (D̄).",
+     "alt": "Un arbre à trois branches M1 (0,5), M2 (0,3), M3 (0,2), chacune se divisant en D (défectueuse) avec 0,02, 0,03, 0,05 et en D̄ avec le complément."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — probabilités totales et Bayes",
+     "statement": "Une usine fictive a trois machines : M1 produit 50 % des pièces, M2 30 %, M3 20 %. Les taux de pièces défectueuses sont 2 %, 3 % et 5 %. (a) $P(D)$ ? (b) Une pièce est défectueuse : probabilité qu'elle vienne de M3 ?",
+     "steps": [
+      {
+       "md": "(a) $P(D)=0{,}5×0{,}02+0{,}3×0{,}03+0{,}2×0{,}05=0{,}010+0{,}009+0{,}010=0{,}029$.",
+       "tex": "P(D)=0{,}029"
+      },
+      {
+       "md": "(b) Bayes : $P(M_{3}|D)=\\frac{0{,}2×0{,}05}{0{,}029}=\\frac{0{,}010}{0{,}029}=\\frac{10}{29}$.",
+       "tex": "P(M_{3}|D)=\\frac{10}{29}"
+      },
+      {
+       "md": "Valeur décimale : $≈0{,}345$."
+      }
+     ],
+     "answer": "**$P(D)=2{,}9$ % ; $P(M_{3}|D)≈0{,}345$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — tirages sans remise",
+     "statement": "Une urne contient 5 boules rouges et 4 noires. On tire deux boules **successivement sans remise**. Probabilité que les deux soient rouges ?",
+     "steps": [
+      {
+       "md": "$P(R_{1})=\\frac{5}{9}$."
+      },
+      {
+       "md": "Après un tirage rouge, il reste 4 rouges sur 8 boules : $P(R_{2}|R_{1})=\\frac{4}{8}$.",
+       "tex": "P(R_{2}|R_{1})=\\frac{4}{8}"
+      },
+      {
+       "md": "$P(R_{1}∩R_{2})=\\frac{5}{9}×\\frac{4}{8}=\\frac{5}{18}≈0{,}278$.",
+       "tex": "P(R_{1}∩R_{2})=\\frac{5}{18}"
+      }
+     ],
+     "answer": "**$\\frac{5}{18}≈0{,}278$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — indépendance",
+     "statement": "On donne $P(A)=0{,}4$, $P(B)=0{,}5$ et $P(A∩B)=0{,}2$. $A$ et $B$ sont-ils indépendants ? Calculer $P(A∪B)$.",
+     "steps": [
+      {
+       "md": "$P(A)P(B)=0{,}4×0{,}5=0{,}2=P(A∩B)$ : événements **indépendants**.",
+       "tex": "0{,}4×0{,}5=0{,}2"
+      },
+      {
+       "md": "$P(A∪B)=0{,}4+0{,}5-0{,}2=0{,}7$.",
+       "tex": "P(A∪B)=0{,}7"
+      }
+     ],
+     "answer": "**Indépendants ; $P(A∪B)=0{,}7$.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre $P(A|B)$ et $P(B|A)$ (« erreur du procureur »).\n- Écrire $P(A∩B)=P(A)P(B)$ sans avoir vérifié l'indépendance.\n- Oublier de modifier les effectifs dans un tirage sans remise.\n- Oublier un branche dans la formule des probabilités totales (les $B_{i}$ doivent former une partition)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La formule de Bayes est à la base du raisonnement sur les tests (dépistages, contrôles qualité) : une faible fréquence de la cause peut donner un faible $P(\\text{cause}|\\text{effet})$ même si le test est fiable.",
+      "Plus de deux événements sont indépendants (mutuellement) si toute sous-famille vérifie la formule du produit."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-probabilites-conditionnement-bayes-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "Calculer $5!$.",
+   "explanation": "$5×4×3×2×1=120$.",
+   "source": "Exercice original",
+   "answer": 120,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "Combien de façons de choisir un président et un secrétaire parmi 6 personnes (deux postes différents) ?",
+   "explanation": "L'ordre compte : $A_{6}^{2}=6×5=30$.",
+   "source": "Exercice original",
+   "answer": 30,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "$C_{7}^{2}$ vaut :",
+   "explanation": "$\\frac{7×6}{2}=21$.",
+   "source": "Exercice original",
+   "choices": [
+    "21",
+    "14",
+    "42",
+    "49"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-04",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "$C_{10}^{3}=C_{10}^{7}$.",
+   "explanation": "$C_{n}^{p}=C_{n}^{n-p}$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "Un comité de 4 personnes est choisi dans un groupe de 6 hommes et 4 femmes. Combien de comités comptent exactement 2 femmes ?",
+   "explanation": "$C_{4}^{2}×C_{6}^{2}=6×15=90$.",
+   "method": "Choisir séparément les femmes et les hommes puis multiplier.",
+   "mistakes": [
+    "Calculer $C_{10}^{4}$ sans tenir compte de la contrainte."
+   ],
+   "source": "Exercice original",
+   "answer": 90,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-06",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "On lance deux dés équilibrés. Quelle est la probabilité que la somme soit 7 ? (donner la valeur décimale arrondie au millième)",
+   "explanation": "Cas favorables : (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) soit 6 sur 36 : $\\frac{1}{6}≈0{,}167$.",
+   "source": "Exercice original",
+   "answer": 0.166666667,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "Un lot de 10 ampoules fictives contient 3 ampoules défectueuses. On en prélève 3 simultanément.",
+   "method": "Dénombrer cas possibles et favorables, puis passer par le complémentaire.",
+   "mistakes": [
+    "Calculer « au moins une » en additionnant plusieurs cas oubliés."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-probabilites-denombrement-proba-07-a",
+     "points": 1,
+     "prompt": "Combien de prélèvements possibles ?",
+     "explanation": "$C_{10}^{3}=120$.",
+     "kind": "numeric",
+     "answer": 120,
+     "tolerance": 0,
+     "unit": "prélèvements"
+    },
+    {
+     "id": "sup-l2-probabilites-denombrement-proba-07-b",
+     "points": 1,
+     "prompt": "Combien de prélèvements ne contiennent aucune ampoule défectueuse ?",
+     "explanation": "On choisit 3 ampoules parmi les 7 bonnes : $C_{7}^{3}=35$.",
+     "kind": "numeric",
+     "answer": 35,
+     "tolerance": 0,
+     "unit": "prélèvements"
+    },
+    {
+     "id": "sup-l2-probabilites-denombrement-proba-07-c",
+     "points": 1,
+     "prompt": "Probabilité qu'aucune ampoule ne soit défectueuse (valeur décimale).",
+     "explanation": "$\\frac{35}{120}=\\frac{7}{24}≈0{,}2917$.",
+     "kind": "numeric",
+     "answer": 0.291666667,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-probabilites-denombrement-proba-07-d",
+     "points": 1,
+     "prompt": "Probabilité d'en avoir au moins une défectueuse (valeur décimale).",
+     "explanation": "Complémentaire : $1-\\frac{7}{24}=\\frac{17}{24}≈0{,}7083$.",
+     "kind": "numeric",
+     "answer": 0.708333333,
+     "tolerance": 0.001
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "Le nombre de façons d'ordonner 4 objets distincts est :",
+   "choices": [
+    "16",
+    "4",
+    "12",
+    "24"
+   ],
+   "answer": 3,
+   "explanation": "$4!=24$.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "On choisit 2 délégués (sans ordre) parmi 5 : le nombre de choix est :",
+   "choices": [
+    "20",
+    "10",
+    "25",
+    "5"
+   ],
+   "answer": 1,
+   "explanation": "$C_{5}^{2}=10$.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "Si $P(A)=0{,}3$, alors $P(\\bar{A})=$",
+   "choices": [
+    "0,3",
+    "0,7",
+    "−0,3",
+    "1,3"
+   ],
+   "answer": 1,
+   "explanation": "$1-0{,}3$.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "La formule $P(A∪B)=P(A)+P(B)-P(A∩B)$ :",
+   "choices": [
+    "exige l'indépendance",
+    "n'est vraie que si $A∩B=∅$",
+    "est fausse pour les dés",
+    "est toujours vraie"
+   ],
+   "answer": 3,
+   "explanation": "Elle corrige le double comptage de $A∩B$.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-probabilites-denombrement-proba-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-denombrement-proba",
+   "prompt": "L'arrangement $A_{5}^{2}$ vaut :",
+   "choices": [
+    "20",
+    "10",
+    "25",
+    "120"
+   ],
+   "answer": 0,
+   "explanation": "$5×4=20$.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "$P(A∩B)=0{,}2$ et $P(B)=0{,}4$. Calculer $P(A|B)$.",
+   "explanation": "$\\frac{0{,}2}{0{,}4}=0{,}5$.",
+   "source": "Exercice original",
+   "answer": 0.5,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "Si $P(A)=0{,}3$, $P(B)=0{,}5$ et $P(A∩B)=0{,}15$, alors $A$ et $B$ sont :",
+   "explanation": "$0{,}3×0{,}5=0{,}15=P(A∩B)$.",
+   "source": "Exercice original",
+   "choices": [
+    "incompatibles",
+    "complémentaires",
+    "indépendants",
+    "dépendants"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "Deux événements incompatibles, chacun de probabilité non nulle, ne sont jamais indépendants.",
+   "explanation": "$P(A∩B)=0≠P(A)P(B)>0$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "Chiffres fictifs fournis par l'énoncé : 2 % d'une population porte une caractéristique ; un test est positif dans 90 % des cas pour les porteurs et dans 5 % des cas pour les non-porteurs. Quelle est la probabilité (en %, arrondie à l'unité) d'être porteur sachant que le test est positif ?",
+   "explanation": "$P(+)=0{,}02×0{,}9+0{,}98×0{,}05=0{,}067$ ; $P(\\text{porteur}|+)=\\frac{0{,}018}{0{,}067}≈0{,}269$, soit environ 27 %.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Exercice de dépistage : données fictives ; vérifier le contexte médical avec un enseignant.",
+   "answer": 27,
+   "tolerance": 1,
+   "unit": "%"
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "Une urne contient 4 boules rouges et 6 vertes. On tire deux boules successivement sans remise. Quelle est la probabilité d'obtenir une rouge puis une verte (valeur décimale) ?",
+   "explanation": "$\\frac{4}{10}×\\frac{6}{9}=\\frac{24}{90}=\\frac{4}{15}≈0{,}2667$.",
+   "source": "Exercice original",
+   "answer": 0.266666667,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "Une entreprise fictive reçoit ses pièces de deux fournisseurs : A (60 % des pièces) et B (40 %). 1 % des pièces de A et 4 % des pièces de B sont défectueuses.",
+   "method": "Arbre pondéré, probabilités totales, puis Bayes.",
+   "mistakes": [
+    "Calculer $P(D|B)$ à la place de $P(B|D)$."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-probabilites-conditionnement-bayes-06-a",
+     "points": 1,
+     "prompt": "Calculer $P(A∩D)$ (valeur décimale).",
+     "explanation": "$0{,}6×0{,}01=0{,}006$.",
+     "kind": "numeric",
+     "answer": 0.006,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "sup-l2-probabilites-conditionnement-bayes-06-b",
+     "points": 1,
+     "prompt": "Calculer $P(D)$ (valeur décimale).",
+     "explanation": "$0{,}6×0{,}01+0{,}4×0{,}04=0{,}006+0{,}016=0{,}022$.",
+     "kind": "numeric",
+     "answer": 0.022,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "sup-l2-probabilites-conditionnement-bayes-06-c",
+     "points": 1,
+     "prompt": "Une pièce défectueuse est trouvée. Quelle est la probabilité (en %) qu'elle vienne de B ?",
+     "explanation": "$P(B|D)=\\frac{0{,}016}{0{,}022}=\\frac{8}{11}≈72{,}7$ %.",
+     "kind": "numeric",
+     "answer": 72.727272727,
+     "tolerance": 0.1,
+     "unit": "%"
+    },
+    {
+     "id": "sup-l2-probabilites-conditionnement-bayes-06-d",
+     "points": 1,
+     "prompt": "Que traduit ce résultat ?",
+     "explanation": "40 % des pièces seulement mais 72,7 % des pièces défectueuses.",
+     "kind": "mcq",
+     "choices": [
+      "A est responsable de la majorité des défauts",
+      "les défauts sont indépendants du fournisseur",
+      "B fournit la majorité des pièces",
+      "B fournit moins de pièces mais explique la majorité des défauts"
+     ],
+     "answer": 3
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "La formule de Bayes permet de calculer :",
+   "choices": [
+    "$P(A∪B)$ à partir de $P(A)$",
+    "$P(B_{j}|A)$ à partir de $P(A|B_{j})$",
+    "la variance",
+    "l'espérance"
+   ],
+   "answer": 1,
+   "explanation": "Elle inverse le conditionnement.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "Si $A$ et $B$ sont indépendants, alors :",
+   "choices": [
+    "$P(A∩B)=0$",
+    "$P(A∪B)=P(A)+P(B)$",
+    "$P(A|B)=P(A)$",
+    "$P(A)=P(B)$"
+   ],
+   "answer": 2,
+   "explanation": "Connaître $B$ ne change pas la probabilité de $A$.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "Dans un arbre pondéré, la probabilité d'une branche complète est :",
+   "choices": [
+    "le produit des probabilités le long de la branche",
+    "la somme",
+    "la moyenne",
+    "la plus grande"
+   ],
+   "answer": 0,
+   "explanation": "Formule des probabilités composées.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "La probabilité totale $P(A)$ se calcule par :",
+   "choices": [
+    "$\\sum P(A|B_{i})$",
+    "$\\prod P(B_{i})$",
+    "$\\sum P(B_{i})P(A|B_{i})$",
+    "$P(A)+P(\\bar{A})$"
+   ],
+   "answer": 2,
+   "explanation": "On somme sur la partition.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-probabilites-conditionnement-bayes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-conditionnement-bayes",
+   "prompt": "Dans un tirage sans remise, les tirages successifs sont :",
+   "choices": [
+    "dépendants",
+    "indépendants",
+    "incompatibles",
+    "toujours équiprobables"
+   ],
+   "answer": 0,
+   "explanation": "La composition de l'urne change.",
+   "review": true
+  }
+ ]
+}

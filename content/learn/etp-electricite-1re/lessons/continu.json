@@ -1,0 +1,1806 @@
+{
+ "chapter": "etp-electricite-1re-continu",
+ "lessons": [
+  {
+   "id": "etp-electricite-1re-ohm",
+   "title": "Grandeurs électriques, loi d'Ohm et code des couleurs",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Nommer l'intensité, la tension, la résistance et leurs unités.",
+    "Appliquer la loi d'Ohm U = R·I dans les trois sens.",
+    "Lire la valeur d'une résistance à bandes de couleurs.",
+    "Calculer une charge électrique Q = I·t."
+   ],
+   "exercises": [
+    "etp-electricite-1re-ohm-01",
+    "etp-electricite-1re-ohm-02",
+    "etp-electricite-1re-ohm-03",
+    "etp-electricite-1re-ohm-04",
+    "etp-electricite-1re-ohm-05",
+    "etp-electricite-1re-ohm-06"
+   ],
+   "selfCheck": [
+    "etp-electricite-1re-ohm-q1",
+    "etp-electricite-1re-ohm-q2",
+    "etp-electricite-1re-ohm-q3",
+    "etp-electricite-1re-ohm-q4",
+    "etp-electricite-1re-ohm-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le code des couleurs (chiffres 0 à 9, multiplicateur, tolérance or ±5 % et argent ±10 %) avec un tableau officiel de l'établissement.",
+    "Les valeurs numériques des exemples sont fictives."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les grandeurs de base",
+     "md": "L'**intensité** $I$ du courant (en ampères, A) mesure la quantité de charge qui traverse un conducteur chaque seconde. La **tension** $U$ (en volts, V) est la différence de potentiel entre deux points : elle « pousse » le courant. La **résistance** $R$ (en ohms, Ω) mesure l'opposition d'un composant au passage du courant."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Charge électrique",
+     "md": "La charge $Q$ (en coulombs, C) qui traverse un conducteur pendant une durée $t$ (en secondes) avec une intensité constante $I$ est :",
+     "tex": "Q = I \\times t"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Loi d'Ohm",
+     "md": "Pour un conducteur ohmique (résistor) : la tension à ses bornes est proportionnelle à l'intensité qui le traverse. On en tire $R$ ou $I$ selon l'inconnue.",
+     "tex": "U = R \\times I \\;\\; R = \\frac{U}{I} \\;\\; I = \\frac{U}{R}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 40,
+        "x2": 360,
+        "y2": 40,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 130,
+        "x2": 360,
+        "y2": 130,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 40,
+        "x2": 60,
+        "y2": 130,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 40,
+        "x2": 360,
+        "y2": 130,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 28,
+        "w": 70,
+        "h": 24,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 22,
+        "text": "R",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 72,
+        "w": 60,
+        "h": 26,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 89.55,
+        "text": "Source",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 20,
+        "x2": 310,
+        "y2": 20,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 14,
+        "text": "I",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 80,
+        "text": "U = R·I",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Un résistor R branché sur une source : le courant I circule dans la boucle fermée.",
+     "alt": "Boucle rectangulaire fermée : une source à gauche, un résistor R en haut ; une flèche rouge indique le sens du courant I ; au centre on lit U = R·I."
+    },
+    {
+     "type": "heading",
+     "text": "Le code des couleurs"
+    },
+    {
+     "type": "text",
+     "md": "Une résistance de petite taille porte des **bandes de couleur**. Pour le code à 4 bandes : les deux premières donnent deux chiffres, la troisième est le **multiplicateur** (puissance de 10), la quatrième est la **tolérance** (or : ±5 %, argent : ±10 %). Chiffres : noir 0, marron 1, rouge 2, orange 3, jaune 4, vert 5, bleu 6, violet 7, gris 8, blanc 9."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 15,
+        "w": 70,
+        "h": 30,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 67,
+        "text": "Noir",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 87,
+        "text": "0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 15,
+        "w": 70,
+        "h": 30,
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 67,
+        "text": "Marron",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 87,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 15,
+        "w": 70,
+        "h": 30,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 67,
+        "text": "Rouge",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 87,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 15,
+        "w": 70,
+        "h": 30,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 67,
+        "text": "Orange",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 87,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 15,
+        "w": 70,
+        "h": 30,
+        "fill": "yellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 67,
+        "text": "Jaune",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 87,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 105,
+        "w": 70,
+        "h": 30,
+        "fill": "green",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 157,
+        "text": "Vert",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 177,
+        "text": "5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 105,
+        "w": 70,
+        "h": 30,
+        "fill": "blue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 157,
+        "text": "Bleu",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 177,
+        "text": "6",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 105,
+        "w": 70,
+        "h": 30,
+        "fill": "purple",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 157,
+        "text": "Violet",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 177,
+        "text": "7",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 105,
+        "w": 70,
+        "h": 30,
+        "fill": "grey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 157,
+        "text": "Gris",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 177,
+        "text": "8",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 105,
+        "w": 70,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 157,
+        "text": "Blanc",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 177,
+        "text": "9",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Les dix couleurs et leur chiffre.",
+     "alt": "Deux rangées de cinq rectangles colorés : noir 0, marron 1, rouge 2, orange 3, jaune 4, puis vert 5, bleu 6, violet 7, gris 8, blanc 9."
+    },
+    {
+     "type": "example",
+     "title": "Calculer une tension",
+     "statement": "Un résistor de 47 Ω est traversé par un courant de 0,2 A. Quelle est la tension à ses bornes ?",
+     "steps": [
+      {
+       "md": "On utilise $U = R \\times I$ avec $R = 47\\ \\Omega$ et $I = 0{,}2\\ \\text{A}$.",
+       "tex": "U = 47 \\times 0,2"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "U = 9,4\\ \\text{V}"
+      }
+     ],
+     "answer": "**U = 9,4 V.**"
+    },
+    {
+     "type": "example",
+     "title": "Calculer une résistance",
+     "statement": "Une lampe est alimentée sous 12 V ; elle est traversée par 0,5 A. Supposée ohmique, quelle est sa résistance ?",
+     "steps": [
+      {
+       "md": "On isole $R$ : $R = U / I$.",
+       "tex": "R = \\frac{U}{I}"
+      },
+      {
+       "md": "On remplace par les valeurs.",
+       "tex": "R = \\frac{12}{0,5} = 24\\ \\Omega"
+      }
+     ],
+     "answer": "**R = 24 Ω.**"
+    },
+    {
+     "type": "example",
+     "title": "Lire une résistance",
+     "statement": "Une résistance porte les bandes marron, noir, rouge, or. Quelle est sa valeur ?",
+     "steps": [
+      {
+       "md": "Chiffres : marron = 1, noir = 0, donc 10."
+      },
+      {
+       "md": "Multiplicateur : rouge = 2, donc ×10² = ×100 : 10 × 100 = 1 000 Ω.",
+       "tex": "10 \\times 10^{2} = 1000\\ \\Omega"
+      },
+      {
+       "md": "Tolérance or : ±5 %."
+      }
+     ],
+     "answer": "**1 000 Ω = 1 kΩ, à ±5 %.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre tension (V) et intensité (A) : on mesure l'intensité *dans* le circuit, la tension *aux bornes* d'un composant.\n- Oublier de convertir : 250 mA = 0,25 A ; 2,2 kΩ = 2 200 Ω.\n- Lire le code des couleurs à l'envers : la bande de tolérance (or ou argent) se place à droite.\n- Lire le troisième anneau comme un chiffre au lieu d'un nombre de zéros."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La loi d'Ohm ne s'applique qu'aux conducteurs ohmiques : une diode ou une lampe à filament chaude ne donnent pas une droite $U = f(I)$.",
+      "Pour des résistances de forte précision, il existe des codes à 5 bandes ; leur lecture suit le même principe avec un chiffre de plus."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-electricite-1re-ohm-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-associations",
+   "title": "Associations de résistances et diviseur de tension",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer la résistance équivalente d'une association en série et en parallèle.",
+    "Utiliser les propriétés des tensions et des courants dans chaque montage.",
+    "Appliquer la formule du diviseur de tension.",
+    "Résoudre un circuit mixte simple."
+   ],
+   "prerequisites": [
+    "etp-electricite-1re-ohm"
+   ],
+   "exercises": [
+    "etp-electricite-1re-associations-01",
+    "etp-electricite-1re-associations-02",
+    "etp-electricite-1re-associations-03",
+    "etp-electricite-1re-associations-04",
+    "etp-electricite-1re-associations-05",
+    "etp-electricite-1re-associations-06"
+   ],
+   "selfCheck": [
+    "etp-electricite-1re-associations-q1",
+    "etp-electricite-1re-associations-q2",
+    "etp-electricite-1re-associations-q3",
+    "etp-electricite-1re-associations-q4",
+    "etp-electricite-1re-associations-q5"
+   ],
+   "reviewNotes": [
+    "Valeurs fictives ; vérifier la cohérence des exemples chiffrés."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Association en série",
+     "md": "Des résistors sont **en série** quand ils sont traversés par le **même courant** (ils se suivent sur une seule branche). Les tensions s'additionnent et les résistances aussi :",
+     "tex": "R_{eq} = R_1 + R_2 + R_3"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Association en parallèle",
+     "md": "Des résistors sont **en parallèle** quand ils ont les **mêmes bornes** (même tension). Les courants s'additionnent. L'inverse de la résistance équivalente est la somme des inverses ; pour deux résistors :",
+     "tex": "\\frac{1}{R_{eq}} = \\frac{1}{R_1} + \\frac{1}{R_2} \\;\\Rightarrow\\; R_{eq} = \\frac{R_1 \\times R_2}{R_1 + R_2}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Deux repères utiles",
+     "md": "- En série, $R_{eq}$ est **plus grande** que chaque résistance.\n- En parallèle, $R_{eq}$ est **plus petite** que la plus petite des résistances.\n- Parallèle de $n$ résistances identiques $R$ : $R_{eq} = R / n$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 110,
+        "y": 18,
+        "text": "Série",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 60,
+        "x2": 40,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 48,
+        "w": 50,
+        "h": 24,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 42,
+        "text": "R1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 60,
+        "x2": 120,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 48,
+        "w": 50,
+        "h": 24,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 145.0,
+        "y": 42,
+        "text": "R2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 60,
+        "x2": 200,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 18,
+        "text": "Parallèle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 100,
+        "x2": 280,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 60,
+        "x2": 280,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 48,
+        "w": 50,
+        "h": 24,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 42,
+        "text": "R1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 138,
+        "w": 50,
+        "h": 24,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 132,
+        "text": "R2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 60,
+        "x2": 300,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 60,
+        "x2": 380,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 150,
+        "x2": 300,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 150,
+        "x2": 380,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 60,
+        "x2": 380,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 100,
+        "x2": 420,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       }
+      ]
+     },
+     "caption": "Montage en série (à gauche) et en parallèle (à droite).",
+     "alt": "À gauche, deux résistors R1 et R2 placés l'un après l'autre sur un même fil. À droite, R1 et R2 placés sur deux branches séparées reliées aux mêmes deux noeuds."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Diviseur de tension",
+     "md": "Deux résistors $R_1$ et $R_2$ en série sous une tension $U$ : la tension aux bornes de $R_2$ est la fraction $R_2/(R_1+R_2)$ de $U$. (Valable si rien d'autre n'est branché en parallèle sur $R_2$.)",
+     "tex": "U_2 = U \\times \\frac{R_2}{R_1 + R_2}"
+    },
+    {
+     "type": "example",
+     "title": "Résistance en série",
+     "statement": "Trois résistors de 100 Ω, 220 Ω et 330 Ω sont en série. Quelle est la résistance équivalente ?",
+     "steps": [
+      {
+       "md": "En série, on additionne.",
+       "tex": "R_{eq} = 100 + 220 + 330"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "R_{eq} = 650\\ \\Omega"
+      }
+     ],
+     "answer": "**R_eq = 650 Ω.**"
+    },
+    {
+     "type": "example",
+     "title": "Résistance en parallèle",
+     "statement": "Deux résistors de 60 Ω et 30 Ω sont en parallèle. Quelle est la résistance équivalente ?",
+     "steps": [
+      {
+       "md": "Formule produit sur somme.",
+       "tex": "R_{eq} = \\frac{60 \\times 30}{60 + 30}"
+      },
+      {
+       "md": "On calcule : 1 800 / 90.",
+       "tex": "R_{eq} = 20\\ \\Omega"
+      }
+     ],
+     "answer": "**R_eq = 20 Ω**, plus petite que 30 Ω, comme prévu."
+    },
+    {
+     "type": "example",
+     "title": "Diviseur de tension",
+     "statement": "Une source de 12 V alimente en série R1 = 1 kΩ et R2 = 3 kΩ. Quelle est la tension aux bornes de R2 ?",
+     "steps": [
+      {
+       "md": "Diviseur : $U_2 = U \\times R_2/(R_1+R_2)$.",
+       "tex": "U_2 = 12 \\times \\frac{3000}{1000 + 3000}"
+      },
+      {
+       "md": "On simplifie la fraction : 3/4.",
+       "tex": "U_2 = 12 \\times 0,75 = 9\\ \\text{V}"
+      }
+     ],
+     "answer": "**U₂ = 9 V** (et U₁ = 3 V, la somme fait bien 12 V)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner les résistances en parallèle : c'est faux, on additionne les *inverses*.\n- Écrire $1/R_{eq} = R_1+R_2$ sans les inverses.\n- Oublier d'inverser à la fin : le calcul de $1/R_{eq}$ ne donne pas encore $R_{eq}$.\n- Utiliser le diviseur de tension quand une autre charge est branchée sur $R_2$."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le diviseur de courant : pour deux résistors en parallèle, le courant dans $R_1$ vaut $I \\times R_2/(R_1+R_2)$ : le plus gros courant passe dans la plus petite résistance.",
+      "Un potentiomètre est un diviseur de tension à rapport réglable."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-electricite-1re-associations-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance",
+   "title": "Lois de Kirchhoff, puissance et énergie",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Énoncer et appliquer la loi des noeuds.",
+    "Énoncer et appliquer la loi des mailles.",
+    "Calculer une puissance par P = U·I, R·I² ou U²/R.",
+    "Calculer une énergie en Wh, kWh ou J et un coût avec un prix donné."
+   ],
+   "prerequisites": [
+    "etp-electricite-1re-ohm",
+    "etp-electricite-1re-associations"
+   ],
+   "exercises": [
+    "etp-electricite-1re-kirchhoff-puissance-01",
+    "etp-electricite-1re-kirchhoff-puissance-02",
+    "etp-electricite-1re-kirchhoff-puissance-03",
+    "etp-electricite-1re-kirchhoff-puissance-04",
+    "etp-electricite-1re-kirchhoff-puissance-05",
+    "etp-electricite-1re-kirchhoff-puissance-06"
+   ],
+   "selfCheck": [
+    "etp-electricite-1re-kirchhoff-puissance-q1",
+    "etp-electricite-1re-kirchhoff-puissance-q2",
+    "etp-electricite-1re-kirchhoff-puissance-q3",
+    "etp-electricite-1re-kirchhoff-puissance-q4",
+    "etp-electricite-1re-kirchhoff-puissance-q5"
+   ],
+   "reviewNotes": [
+    "Le prix du kWh utilisé dans les exercices (100 FCFA) est fictif et donné par l'énoncé : ne pas le présenter comme un tarif réel."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Loi des noeuds",
+     "md": "Un **noeud** est un point où se rejoignent au moins trois fils. La somme des intensités qui **arrivent** au noeud est égale à la somme de celles qui en **repartent** : rien ne s'y accumule.",
+     "tex": "\\sum I_{entrant} = \\sum I_{sortant}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Loi des mailles",
+     "md": "Une **maille** est une boucle fermée du circuit. En parcourant la maille dans un sens, la somme algébrique des tensions est nulle. Pour un circuit simple : la tension de la source est égale à la somme des tensions aux bornes des récepteurs.",
+     "tex": "E = U_1 + U_2 + U_3"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 95,
+        "r": 7,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 95,
+        "x2": 203,
+        "y2": 95,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 80,
+        "text": "I1 = 4 A",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 20,
+        "x2": 210,
+        "y2": 88,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 55,
+        "text": "I2 = 1,5 A",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 217,
+        "y1": 95,
+        "x2": 360,
+        "y2": 95,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 80,
+        "text": "I3 = 2 A",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 102,
+        "x2": 210,
+        "y2": 175,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 150,
+        "text": "I4 = ?",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Un noeud : deux courants entrent (bleu), deux sortent (rouge).",
+     "alt": "Un point noir central. Deux flèches bleues arrivent : I1 = 4 A par la gauche, I2 = 1,5 A par le haut. Deux flèches rouges repartent : I3 = 2 A vers la droite et I4 inconnu vers le bas."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Puissance électrique",
+     "md": "La puissance $P$ (en watts, W) reçue par un récepteur dépend de la tension et de l'intensité. Pour un résistor, la loi d'Ohm donne deux autres écritures :",
+     "tex": "P = U \\times I = R \\times I^2 = \\frac{U^2}{R}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Énergie électrique",
+     "md": "L'énergie $W$ consommée pendant une durée $t$ par un appareil de puissance $P$ constante est $W = P \\times t$. En joules (J) si $t$ est en secondes ; en wattheures (Wh) si $t$ est en heures ; 1 kWh = 1 000 Wh. Le coût est l'énergie en kWh multipliée par le prix du kWh (donné par l'énoncé).",
+     "tex": "W = P \\times t"
+    },
+    {
+     "type": "example",
+     "title": "Loi des noeuds",
+     "statement": "Au noeud ci-dessus, I1 = 4 A et I2 = 1,5 A arrivent ; I3 = 2 A repart. Calculer I4.",
+     "steps": [
+      {
+       "md": "Entrant = sortant : $I_1 + I_2 = I_3 + I_4$.",
+       "tex": "4 + 1,5 = 2 + I_4"
+      },
+      {
+       "md": "On isole $I_4$.",
+       "tex": "I_4 = 5,5 - 2 = 3,5\\ \\text{A}"
+      }
+     ],
+     "answer": "**I₄ = 3,5 A.**"
+    },
+    {
+     "type": "example",
+     "title": "Loi des mailles",
+     "statement": "Une source de 12 V alimente en série deux résistors (4,5 V et 3,5 V à leurs bornes) et une lampe. Quelle est la tension aux bornes de la lampe ?",
+     "steps": [
+      {
+       "md": "Loi des mailles : $E = U_1 + U_2 + U_L$.",
+       "tex": "12 = 4,5 + 3,5 + U_L"
+      },
+      {
+       "md": "On isole $U_L$.",
+       "tex": "U_L = 12 - 8 = 4\\ \\text{V}"
+      }
+     ],
+     "answer": "**U_L = 4 V.**"
+    },
+    {
+     "type": "example",
+     "title": "Énergie et coût",
+     "statement": "Un radiateur de 2 000 W fonctionne 3 h. Avec un prix supposé de 100 FCFA le kWh (donnée fictive), quel est le coût ?",
+     "steps": [
+      {
+       "md": "Puissance en kW : 2 000 W = 2 kW. Énergie : $W = P \\times t$.",
+       "tex": "W = 2 \\times 3 = 6\\ \\text{kWh}"
+      },
+      {
+       "md": "Coût = énergie × prix.",
+       "tex": "6 \\times 100 = 600\\ \\text{FCFA}"
+      }
+     ],
+     "answer": "**6 kWh, soit 600 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger les unités : W et kW, h et s.\n- Oublier un courant dans la loi des noeuds ou se tromper de sens (entrant/sortant).\n- Confondre puissance (W, débit d'énergie) et énergie (Wh, quantité).\n- Écrire $P = R \\times I$ au lieu de $R \\times I^2$."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le joule et le wattheure : 1 Wh = 3 600 J (1 W pendant 3 600 s).",
+      "La loi des mailles s'applique aussi aux circuits à plusieurs sources, en choisissant un sens de parcours et en comptant les tensions avec leur signe."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-electricite-1re-kirchhoff-puissance-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-electricite-1re-ohm-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "Un résistor de 220 Ω est traversé par un courant de 0,05 A. Calculer la tension à ses bornes.",
+   "explanation": "$U = R \\times I = 220 \\times 0{,}05 = 11$ V.",
+   "method": "Écrire la formule, remplacer, calculer avec les unités.",
+   "mistakes": [
+    "Oublier d'écrire l'unité."
+   ],
+   "source": "Exercice original",
+   "answer": 11.0,
+   "tolerance": 0.01,
+   "unit": "V"
+  },
+  {
+   "id": "etp-electricite-1re-ohm-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "Une résistance porte les bandes jaune, violet, orange, or. Sa valeur est :",
+   "explanation": "Jaune = 4, violet = 7 : 47. Orange = ×10³ : 47 000 Ω = 47 kΩ (tolérance ±5 %).",
+   "method": "Chiffre, chiffre, puissance de dix, tolérance.",
+   "mistakes": [
+    "Prendre orange pour le chiffre 3 au lieu de ×10³."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "47 Ω",
+    "470 Ω",
+    "47 kΩ",
+    "4,7 kΩ"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-electricite-1re-ohm-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "Si la tension aux bornes d'un résistor double et que sa résistance ne change pas, l'intensité double.",
+   "explanation": "$I = U / R$ : $R$ constante, donc $I$ est proportionnelle à $U$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-electricite-1re-ohm-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "Un courant constant de 2 A traverse un conducteur pendant 3 minutes. Quelle charge (en coulombs) a traversé le conducteur ?",
+   "explanation": "Il faut convertir : 3 min = 180 s. $Q = I \\times t = 2 \\times 180 = 360$ C.",
+   "method": "Convertir le temps en secondes avant d'appliquer Q = I·t.",
+   "mistakes": [
+    "Utiliser 3 au lieu de 180 s."
+   ],
+   "source": "Exercice original",
+   "answer": 360,
+   "tolerance": 0,
+   "unit": "C"
+  },
+  {
+   "id": "etp-electricite-1re-ohm-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "Associe chaque grandeur à son unité.",
+   "explanation": "Intensité en A, tension en V, résistance en Ω, charge en C.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Intensité",
+     "ampère (A)"
+    ],
+    [
+     "Tension",
+     "volt (V)"
+    ],
+    [
+     "Résistance",
+     "ohm (Ω)"
+    ],
+    [
+     "Charge",
+     "coulomb (C)"
+    ]
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-ohm-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "On étudie un résistor. Une mesure donne U = 6 V et I = 0,025 A.",
+   "method": "Appliquer la loi d'Ohm, puis convertir les unités.",
+   "mistakes": [
+    "Oublier la conversion A → mA."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-electricite-1re-ohm-06-a",
+     "points": 1,
+     "prompt": "Calculer sa résistance en ohms.",
+     "explanation": "$R = U / I = 6 / 0{,}025 = 240$ Ω.",
+     "kind": "numeric",
+     "answer": 240.0,
+     "tolerance": 0,
+     "unit": "Ω"
+    },
+    {
+     "id": "etp-electricite-1re-ohm-06-b",
+     "points": 1,
+     "prompt": "Quelles bandes (les 3 premières) codent une résistance de 560 Ω ?",
+     "explanation": "560 = 56 × 10 : vert (5), bleu (6), marron (×10¹).",
+     "kind": "mcq",
+     "choices": [
+      "rouge, vert, marron",
+      "vert, bleu, marron",
+      "vert, bleu, rouge",
+      "bleu, vert, marron"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-electricite-1re-ohm-06-c",
+     "points": 2,
+     "prompt": "On applique ensuite 9 V à ce même résistor. Quelle intensité, en mA ?",
+     "explanation": "$I = U / R = 9 / 240 = 0,0375$ A, soit 37,5 mA (on multiplie par 1 000).",
+     "kind": "numeric",
+     "answer": 37.5,
+     "tolerance": 0.01,
+     "unit": "mA"
+    }
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-ohm-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "L'unité de la tension est :",
+   "choices": [
+    "le volt",
+    "l'ampère",
+    "l'ohm",
+    "le watt"
+   ],
+   "answer": 0,
+   "explanation": "La tension se mesure en volts."
+  },
+  {
+   "id": "etp-electricite-1re-ohm-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "U = 12 V, R = 4 Ω : l'intensité vaut :",
+   "choices": [
+    "48 A",
+    "0,33 A",
+    "3 A",
+    "8 A"
+   ],
+   "answer": 2,
+   "explanation": "$I = U/R = 12/4 = 3$ A."
+  },
+  {
+   "id": "etp-electricite-1re-ohm-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "Une résistance de 3,3 kΩ vaut :",
+   "choices": [
+    "33 Ω",
+    "330 Ω",
+    "3 300 Ω",
+    "33 000 Ω"
+   ],
+   "answer": 2,
+   "explanation": "1 kΩ = 1 000 Ω, donc 3,3 kΩ = 3 300 Ω."
+  },
+  {
+   "id": "etp-electricite-1re-ohm-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "La bande dorée d'une résistance indique :",
+   "choices": [
+    "le multiplicateur ×10",
+    "la tolérance ±5 %",
+    "le chiffre 5",
+    "la puissance"
+   ],
+   "answer": 1,
+   "explanation": "L'or indique la tolérance de ±5 %."
+  },
+  {
+   "id": "etp-electricite-1re-ohm-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-ohm",
+   "prompt": "Un courant de 0,5 A pendant 10 s transporte :",
+   "choices": [
+    "0,05 C",
+    "5 C",
+    "20 C",
+    "50 C"
+   ],
+   "answer": 1,
+   "explanation": "$Q = I\\times t = 0{,}5\\times 10 = 5$ C."
+  },
+  {
+   "id": "etp-electricite-1re-associations-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "Calculer la résistance équivalente de trois résistors en série : 47 Ω, 68 Ω et 100 Ω.",
+   "explanation": "En série : $47 + 68 + 100 = 215$ Ω.",
+   "method": "Additionner.",
+   "source": "Exercice original",
+   "answer": 215,
+   "tolerance": 0,
+   "unit": "Ω"
+  },
+  {
+   "id": "etp-electricite-1re-associations-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "Calculer la résistance équivalente de deux résistors de 12 Ω et 4 Ω en parallèle.",
+   "explanation": "$\\dfrac{12 \\times 4}{12 + 4} = \\dfrac{48}{16} = 3$ Ω.",
+   "method": "Produit sur somme.",
+   "mistakes": [
+    "Additionner 12 + 4."
+   ],
+   "source": "Exercice original",
+   "answer": 3.0,
+   "tolerance": 0,
+   "unit": "Ω"
+  },
+  {
+   "id": "etp-electricite-1re-associations-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "Deux résistors de 100 Ω sont en parallèle. La résistance équivalente est :",
+   "explanation": "Deux résistances identiques en parallèle : $R/2 = 50$ Ω.",
+   "source": "Exercice original",
+   "choices": [
+    "200 Ω",
+    "100 Ω",
+    "50 Ω",
+    "10 Ω"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-electricite-1re-associations-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "Un diviseur de tension est formé de R1 = 2 kΩ et R2 = 3 kΩ en série sous 20 V. Calculer la tension aux bornes de R2.",
+   "explanation": "$U_2 = 20 \\times \\dfrac{3}{2+3} = 20 \\times 0{,}6 = 12$ V.",
+   "method": "Diviseur : U × R2/(R1+R2).",
+   "mistakes": [
+    "Inverser R1 et R2 dans la fraction."
+   ],
+   "source": "Exercice original",
+   "answer": 12.0,
+   "tolerance": 0,
+   "unit": "V"
+  },
+  {
+   "id": "etp-electricite-1re-associations-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "Dans une maison, les lampes sont branchées en parallèle et non en série. Explique pourquoi.",
+   "explanation": "Voir le modèle de réponse.",
+   "source": "Exercice original",
+   "model": "En parallèle, chaque lampe reçoit la pleine tension de la source et fonctionne indépendamment : si l'une s'éteint ou est débranchée, les autres continuent de fonctionner. En série, la tension serait partagée entre les lampes (elles brilleraient moins) et une lampe coupée interromprait tout le circuit.",
+   "rubric": [
+    "Tension identique pour chaque lampe.",
+    "Indépendance : une panne n'arrête pas les autres.",
+    "Contre-exemple de la série (tension partagée, circuit coupé)."
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-associations-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "Un résistor R1 = 100 Ω est en série avec deux résistors R2 = R3 = 40 Ω placés en parallèle entre eux. L'ensemble est alimenté sous 24 V.",
+   "method": "Réduire le circuit pas à pas : parallèle, puis série ; remonter avec la loi d'Ohm.",
+   "mistakes": [
+    "Oublier de remonter du circuit simplifié au circuit réel."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-electricite-1re-associations-06-a",
+     "points": 1,
+     "prompt": "Résistance équivalente de R2 et R3 en parallèle (Ω).",
+     "explanation": "Deux résistances identiques : $40/2 = 20$ Ω.",
+     "kind": "numeric",
+     "answer": 20.0,
+     "tolerance": 0,
+     "unit": "Ω"
+    },
+    {
+     "id": "etp-electricite-1re-associations-06-b",
+     "points": 1,
+     "prompt": "Résistance totale du circuit (Ω).",
+     "explanation": "R1 est en série avec le groupe : $100 + 20 = 120$ Ω.",
+     "kind": "numeric",
+     "answer": 120.0,
+     "tolerance": 0,
+     "unit": "Ω"
+    },
+    {
+     "id": "etp-electricite-1re-associations-06-c",
+     "points": 1,
+     "prompt": "Intensité du courant fourni par la source (A).",
+     "explanation": "$I = U/R_{tot} = 24/120 = 0,2$ A.",
+     "kind": "numeric",
+     "answer": 0.2,
+     "tolerance": 0.001,
+     "unit": "A"
+    },
+    {
+     "id": "etp-electricite-1re-associations-06-d",
+     "points": 1,
+     "prompt": "Tension aux bornes du groupe R2 // R3 (V).",
+     "explanation": "$U = R_{p} \\times I = 20 \\times 0,2 = 4$ V.",
+     "kind": "numeric",
+     "answer": 4.0,
+     "tolerance": 0.01,
+     "unit": "V"
+    },
+    {
+     "id": "etp-electricite-1re-associations-06-e",
+     "points": 1,
+     "prompt": "Intensité dans R2 (A).",
+     "explanation": "$I_2 = U/R_2 = 4/40 = 0,1$ A (la moitié de 0,2 A, par symétrie).",
+     "kind": "numeric",
+     "answer": 0.1,
+     "tolerance": 0.001,
+     "unit": "A"
+    }
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-associations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "Des résistors en série sont traversés par :",
+   "choices": [
+    "la même tension",
+    "des courants différents",
+    "le même courant",
+    "aucun courant"
+   ],
+   "answer": 2,
+   "explanation": "En série, le courant est le même."
+  },
+  {
+   "id": "etp-electricite-1re-associations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "Résistance équivalente de 10 Ω et 20 Ω en série :",
+   "choices": [
+    "30 Ω",
+    "6,7 Ω",
+    "200 Ω",
+    "15 Ω"
+   ],
+   "answer": 0,
+   "explanation": "On additionne : 30 Ω."
+  },
+  {
+   "id": "etp-electricite-1re-associations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "La résistance équivalente de deux résistors en parallèle est toujours :",
+   "choices": [
+    "plus grande que la plus grande",
+    "égale à la somme",
+    "plus petite que la plus petite",
+    "égale à la moyenne"
+   ],
+   "answer": 2,
+   "explanation": "Le parallèle offre plus de chemins : la résistance diminue."
+  },
+  {
+   "id": "etp-electricite-1re-associations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "R1 = R2 en série sous 10 V : la tension aux bornes de R2 est :",
+   "choices": [
+    "10 V",
+    "2 V",
+    "20 V",
+    "5 V"
+   ],
+   "answer": 3,
+   "explanation": "Diviseur : R2/(R1+R2) = 1/2, donc 5 V."
+  },
+  {
+   "id": "etp-electricite-1re-associations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-associations",
+   "prompt": "Trois résistors de 90 Ω en parallèle équivalent à :",
+   "choices": [
+    "270 Ω",
+    "30 Ω",
+    "90 Ω",
+    "3 Ω"
+   ],
+   "answer": 1,
+   "explanation": "$R/n = 90/3 = 30$ Ω."
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "À un noeud, deux courants de 3 A et 5 A arrivent. Un seul courant repart. Quelle est son intensité ?",
+   "explanation": "Entrant = sortant : $3 + 5 = 8$ A.",
+   "source": "Exercice original",
+   "answer": 8,
+   "tolerance": 0,
+   "unit": "A"
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "Un résistor de 10 Ω est traversé par 3 A. Calculer la puissance qu'il reçoit.",
+   "explanation": "$P = R \\times I^2 = 10 \\times 3^2 = 10 \\times 9 = 90$ W.",
+   "mistakes": [
+    "Calculer R × I = 30 sans mettre I au carré."
+   ],
+   "source": "Exercice original",
+   "answer": 90,
+   "tolerance": 0,
+   "unit": "W"
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "Un appareil de 1 kW fonctionne pendant 30 minutes. L'énergie consommée est :",
+   "explanation": "30 min = 0,5 h, donc $W = 1 \\times 0{,}5 = 0{,}5$ kWh.",
+   "mistakes": [
+    "Utiliser 30 au lieu de 0,5 h."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "0,5 kWh",
+    "30 kWh",
+    "2 kWh",
+    "1 kWh"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "Une source de 9 V alimente en série trois récepteurs. Les deux premiers ont 2,5 V et 4 V à leurs bornes. Quelle est la tension aux bornes du troisième ?",
+   "explanation": "$9 = 2{,}5 + 4 + U_3$ donc $U_3 = 9 - 6{,}5 = 2{,}5$ V.",
+   "source": "Exercice original",
+   "answer": 2.5,
+   "tolerance": 0.01,
+   "unit": "V"
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "Une lampe de 20 W reste allumée 5 h par jour pendant 30 jours. Avec un prix supposé de 100 FCFA par kWh, quel est le coût du mois (FCFA) ?",
+   "explanation": "Énergie : $20 \\times 5 \\times 30 = 3\\,000$ Wh = 3 kWh. Coût : $3 \\times 100 = 300$ FCFA.",
+   "method": "Calculer d'abord l'énergie en kWh, puis multiplier par le prix.",
+   "mistakes": [
+    "Oublier de passer de Wh à kWh."
+   ],
+   "source": "Exercice original",
+   "answer": 300.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "Un radiateur assimilé à un résistor de 46 Ω est alimenté sous 230 V (donnée de l'énoncé). On suppose un prix de 100 FCFA par kWh (fictif).",
+   "method": "Ohm, puis P = U·I, puis W = P·t, puis coût.",
+   "mistakes": [
+    "Laisser la puissance en W dans le calcul de kWh."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-electricite-1re-kirchhoff-puissance-06-a",
+     "points": 1,
+     "prompt": "Intensité du courant (A).",
+     "explanation": "$I = U/R = 230/46 = 5$ A.",
+     "kind": "numeric",
+     "answer": 5.0,
+     "tolerance": 0,
+     "unit": "A"
+    },
+    {
+     "id": "etp-electricite-1re-kirchhoff-puissance-06-b",
+     "points": 1,
+     "prompt": "Puissance du radiateur (W).",
+     "explanation": "$P = U \\times I = 230 \\times 5 = 1 150$ W.",
+     "kind": "numeric",
+     "answer": 1150.0,
+     "tolerance": 0,
+     "unit": "W"
+    },
+    {
+     "id": "etp-electricite-1re-kirchhoff-puissance-06-c",
+     "points": 1,
+     "prompt": "Énergie consommée en 2 h (kWh).",
+     "explanation": "$W = 1,15\\ \\text{kW} \\times 2 = 2,3$ kWh.",
+     "kind": "numeric",
+     "answer": 2.3,
+     "tolerance": 0.001,
+     "unit": "kWh"
+    },
+    {
+     "id": "etp-electricite-1re-kirchhoff-puissance-06-d",
+     "points": 1,
+     "prompt": "Coût de ces 2 h (FCFA).",
+     "explanation": "$2,3 \\times 100 = 230$ FCFA.",
+     "kind": "numeric",
+     "answer": 230.0,
+     "tolerance": 0.5,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "La loi des noeuds exprime que :",
+   "choices": [
+    "la tension est nulle",
+    "courants entrants = courants sortants",
+    "la puissance se conserve toujours à zéro",
+    "R est constante"
+   ],
+   "answer": 1,
+   "explanation": "Rien ne s'accumule dans un noeud."
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "La puissance se mesure en :",
+   "choices": [
+    "wattheures",
+    "volts",
+    "watts",
+    "ampères"
+   ],
+   "answer": 2,
+   "explanation": "La puissance s'exprime en watts."
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "Un appareil de 100 W fonctionne 10 h. Énergie :",
+   "choices": [
+    "1 kWh",
+    "10 kWh",
+    "100 kWh",
+    "0,1 kWh"
+   ],
+   "answer": 0,
+   "explanation": "100 W × 10 h = 1 000 Wh = 1 kWh."
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "Un résistor de 5 Ω sous 10 V reçoit :",
+   "choices": [
+    "50 W",
+    "2 W",
+    "10 W",
+    "20 W"
+   ],
+   "answer": 3,
+   "explanation": "$P = U^2/R = 100/5 = 20$ W."
+  },
+  {
+   "id": "etp-electricite-1re-kirchhoff-puissance-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-kirchhoff-puissance",
+   "prompt": "Loi des mailles : E = 6 V, U1 = 2 V, U2 = ? (circuit série à deux récepteurs)",
+   "choices": [
+    "8 V",
+    "4 V",
+    "3 V",
+    "12 V"
+   ],
+   "answer": 1,
+   "explanation": "$6 = 2 + U_2$ donc $U_2 = 4$ V."
+  }
+ ]
+}

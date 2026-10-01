@@ -1,0 +1,994 @@
+{
+ "chapter": "etp-cap-bep-communication-ecrits",
+ "lessons": [
+  {
+   "id": "etp-cap-bep-communication-lettre-cv",
+   "title": "La lettre professionnelle et le CV",
+   "minutes": 40,
+   "programRef": "Programme de français / communication de l'enseignement technique (CAP/BEP) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Rédiger une lettre de candidature ou de demande avec toutes ses parties.",
+    "Adopter le registre de langue et les formules adaptés.",
+    "Construire un CV clair et lisible.",
+    "Relire pour corriger fautes et oublis."
+   ],
+   "exercises": [
+    "etp-cap-bep-communication-lettre-cv-01",
+    "etp-cap-bep-communication-lettre-cv-02",
+    "etp-cap-bep-communication-lettre-cv-03",
+    "etp-cap-bep-communication-lettre-cv-04",
+    "etp-cap-bep-communication-lettre-cv-05",
+    "etp-cap-bep-communication-lettre-cv-06"
+   ],
+   "selfCheck": [
+    "etp-cap-bep-communication-lettre-cv-q1",
+    "etp-cap-bep-communication-lettre-cv-q2",
+    "etp-cap-bep-communication-lettre-cv-q3",
+    "etp-cap-bep-communication-lettre-cv-q4",
+    "etp-cap-bep-communication-lettre-cv-q5"
+   ],
+   "reviewNotes": [
+    "Le catalogue n'a pas de niveau CAP/BEP : pack placé en 3e (à ajuster quand le catalogue sera étendu).",
+    "Noms, entreprises et adresses fictifs : aucun établissement réel.",
+    "Les formules de politesse sont des usages courants, pas des règles officielles : à adapter par l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Lettre professionnelle",
+     "md": "Une **lettre professionnelle** est un écrit adressé à une entreprise, une administration ou un établissement pour demander quelque chose (stage, emploi, renseignement, rendez-vous). Elle est structurée, polie et sans abréviations familières."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les parties de la lettre",
+     "md": "1. **Expéditeur** (nom, adresse, contact), en haut à gauche.\n2. **Destinataire**, en haut à droite.\n3. **Lieu et date**.\n4. **Objet** : le but en quelques mots.\n5. **Corps** : appel (« Madame, Monsieur, »), présentation, demande, justification.\n6. **Formule de politesse** puis **signature**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Registre soutenu",
+     "md": "On écrit « je souhaite » et non « je veux », « je vous remercie de l'attention » et non « merci ». On vouvoie le destinataire, on évite les abréviations et les expressions familières."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Le CV",
+     "md": "Un **CV** tient sur une page. Il présente : l'**état civil et les coordonnées**, la **formation** (de la plus récente à la plus ancienne), les **expériences ou stages**, les **compétences**, les **centres d'intérêt**. Il est factuel : pas de phrases longues, des mots clés."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 280,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 180,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 32.9,
+        "text": "Expéditeur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 10,
+        "w": 180,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300.0,
+        "y": 32.9,
+        "text": "Destinataire",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 56,
+        "w": 180,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300.0,
+        "y": 75.9,
+        "text": "Lieu, date",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 96,
+        "w": 380,
+        "h": 30,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 115.9,
+        "text": "Objet : …",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 136,
+        "w": 380,
+        "h": 70,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 175.9,
+        "text": "Corps de la lettre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 216,
+        "w": 380,
+        "h": 28,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 234.9,
+        "text": "Formule de politesse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 250,
+        "w": 170,
+        "h": 26,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 267.9,
+        "text": "Signature",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Disposition d'une lettre professionnelle.",
+     "alt": "Schéma de la page : expéditeur en haut à gauche, destinataire à droite, puis lieu et date, objet, corps de la lettre, formule de politesse et signature en bas à droite."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — ordre des éléments",
+     "statement": "Remets dans le bon ordre : « Signature », « Objet », « Corps de la lettre », « Expéditeur », « Formule de politesse », « Destinataire », « Lieu et date ».",
+     "steps": [
+      {
+       "md": "En haut : l'expéditeur et le destinataire, puis le lieu et la date."
+      },
+      {
+       "md": "Ensuite : l'objet, le corps, la formule de politesse, enfin la signature."
+      }
+     ],
+     "answer": "**Expéditeur, destinataire, lieu et date, objet, corps, formule de politesse, signature.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — changer de registre",
+     "statement": "Transformer en registre soutenu : « Salut, je veux un stage chez vous, répondez-moi vite. »",
+     "steps": [
+      {
+       "md": "On remplace l'appel : « Madame, Monsieur, »."
+      },
+      {
+       "md": "On reformule : « Je souhaite effectuer un stage dans votre entreprise et vous remercie de bien vouloir me répondre dans les meilleurs délais. »"
+      }
+     ],
+     "answer": "**La phrase est polie, vouvoyée et sans familiarité.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier l'objet ou la signature.\n- Tutoyer ou écrire comme un SMS.\n- Commencer par « Je vous écris pour… » sans dire quelle est la demande.\n- Un CV de plusieurs pages, avec des fautes ou des informations fantaisistes."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Prépare ton CV en gardant une version à jour sur papier et sur téléphone.",
+      "Demande à un camarade de relire ta lettre : il repère plus vite les oublis."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-cap-bep-communication-lettre-cv-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu",
+   "title": "Le rapport de stage et le compte rendu",
+   "minutes": 40,
+   "programRef": "Programme de français / communication de l'enseignement technique (CAP/BEP) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Construire le plan d'un rapport de stage.",
+    "Rédiger objectivement une activité ou une observation.",
+    "Distinguer compte rendu, rapport et procès-verbal à l'échelle d'une réunion.",
+    "Rédiger un compte rendu de réunion court."
+   ],
+   "prerequisites": [
+    "etp-cap-bep-communication-lettre-cv"
+   ],
+   "exercises": [
+    "etp-cap-bep-communication-rapport-compte-rendu-01",
+    "etp-cap-bep-communication-rapport-compte-rendu-02",
+    "etp-cap-bep-communication-rapport-compte-rendu-03",
+    "etp-cap-bep-communication-rapport-compte-rendu-04",
+    "etp-cap-bep-communication-rapport-compte-rendu-05",
+    "etp-cap-bep-communication-rapport-compte-rendu-06"
+   ],
+   "selfCheck": [
+    "etp-cap-bep-communication-rapport-compte-rendu-q1",
+    "etp-cap-bep-communication-rapport-compte-rendu-q2",
+    "etp-cap-bep-communication-rapport-compte-rendu-q3",
+    "etp-cap-bep-communication-rapport-compte-rendu-q4",
+    "etp-cap-bep-communication-rapport-compte-rendu-q5"
+   ],
+   "reviewNotes": [
+    "Le catalogue n'a pas de niveau CAP/BEP : pack placé en 3e (à ajuster quand le catalogue sera étendu).",
+    "Noms, entreprises et adresses fictifs : aucun établissement réel.",
+    "Les plans proposés sont des modèles courants ; chaque établissement a ses exigences."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Rapport de stage",
+     "md": "Un **rapport de stage** raconte et analyse une période en entreprise. Il présente l'entreprise, les tâches réalisées, les apprentissages et un bilan personnel. Il est écrit à la première personne, au passé, avec un vocabulaire précis."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Plan type",
+     "md": "1. **Page de titre** (nom, classe, entreprise, dates).\n2. **Remerciements**.\n3. **Présentation de l'entreprise** (activité, équipe, lieu, produits).\n4. **Déroulement du stage** (tâches, jour par jour ou par thème).\n5. **Bilan** (ce que j'ai appris, difficultés, projet).\n6. **Annexes** (photos, schémas)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Compte rendu",
+     "md": "Un **compte rendu** relate de façon objective et synthétique une réunion, une visite ou un événement : date, lieu, participants, sujets abordés, décisions, suite à donner. Il est fidèle, neutre et bref."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Style",
+     "md": "On écrit au passé pour les faits (« nous avons examiné ») et au présent pour les décisions durables. On évite les jugements, les anecdotes, les phrases trop longues."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 40,
+        "w": 74,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 42.0,
+        "y": 66.2,
+        "text": "Titre",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 84,
+        "y": 40,
+        "w": 74,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 121.0,
+        "y": 66.2,
+        "text": "Présentation",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 40,
+        "w": 74,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 66.2,
+        "text": "Déroulement",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 242,
+        "y": 40,
+        "w": 74,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 279.0,
+        "y": 66.2,
+        "text": "Bilan",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 40,
+        "w": 74,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 66.2,
+        "text": "Annexes",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 79,
+        "y1": 62,
+        "x2": 84,
+        "y2": 62,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 158,
+        "y1": 62,
+        "x2": 163,
+        "y2": 62,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 237,
+        "y1": 62,
+        "x2": 242,
+        "y2": 62,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 316,
+        "y1": 62,
+        "x2": 321,
+        "y2": 62,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "Plan du rapport de stage",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Plan d'un rapport de stage.",
+     "alt": "Cinq cases alignées de gauche à droite : Titre, Présentation, Déroulement, Bilan, Annexes."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — plan",
+     "statement": "Un élève a fait un stage dans un garage fictif de Douala. Propose un plan.",
+     "steps": [
+      {
+       "md": "Titre et remerciements, puis présentation du garage : activité, équipe, clients."
+      },
+      {
+       "md": "Déroulement : semaine 1 accueil et sécurité, semaine 2 entretien, semaine 3 diagnostic ; bilan : compétences acquises ; annexes : photos."
+      }
+     ],
+     "answer": "**Un plan en 5 parties, du général au personnel.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — compte rendu",
+     "statement": "Réunion d'atelier du 3 octobre : présents Mme Ndzana (chef) et deux apprentis. Sujet : rangement. Décision : étiquetage des armoires dès lundi. Rédige un court compte rendu.",
+     "steps": [
+      {
+       "md": "En-tête : « Compte rendu de la réunion du 3 octobre ; présents : Mme Ndzana, deux apprentis. »"
+      },
+      {
+       "md": "Corps : « Le rangement de l'atelier a été examiné. Il est décidé d'étiqueter les armoires dès lundi. »"
+      }
+     ],
+     "answer": "**Date, participants, sujet, décision : le compte rendu est complet.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Recopier la plaquette de l'entreprise au lieu de décrire ce qu'on a vu.\n- Mélanger récit et opinion dans un compte rendu.\n- Oublier la date, les participants ou la décision.\n- Écrire sans paragraphes ni titres."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Tiens un carnet de stage chaque soir : le rapport sera plus facile à écrire.",
+      "Un procès-verbal est un compte rendu officiel signé ; ce n'est pas le cas du compte rendu simple."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-cap-bep-communication-rapport-compte-rendu-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "Où place-t-on l'objet dans une lettre ?",
+   "explanation": "L'objet est placé sous la date, avant « Madame, Monsieur, ».",
+   "source": "Exercice original",
+   "choices": [
+    "Après la signature",
+    "Avant l'appel, après la date",
+    "Dans la formule de politesse",
+    "Il n'y en a pas"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "Dans une lettre de candidature, on tutoie le destinataire.",
+   "explanation": "On vouvoie : le registre est soutenu.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "Quelle formule d'appel convient quand on ne connaît pas le nom du destinataire ?",
+   "explanation": "On emploie « Madame, Monsieur, ».",
+   "source": "Exercice original",
+   "choices": [
+    "Salut,",
+    "Madame, Monsieur,",
+    "Coucou,",
+    "Cher ami,"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "Associe chaque rubrique du CV à son contenu.",
+   "explanation": "Chaque rubrique répond à une question que se pose le recruteur.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Formation",
+     "Diplômes et classes, du plus récent au plus ancien"
+    ],
+    [
+     "Expériences",
+     "Stages et petits emplois"
+    ],
+    [
+     "Compétences",
+     "Savoir-faire techniques, langues"
+    ],
+    [
+     "Centres d'intérêt",
+     "Sport, musique, associations"
+    ]
+   ]
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "Rédige en 4 à 6 lignes le corps d'une lettre pour demander un stage de quatre semaines dans un atelier de menuiserie fictif.",
+   "explanation": "Une lettre correcte contient : appel, présentation, demande précise, motivation, politesse.",
+   "method": "Plan : qui je suis, ce que je demande, pourquoi, politesse.",
+   "source": "Exercice original",
+   "model": "Madame, Monsieur, élève en première année de CAP, je souhaite effectuer un stage de quatre semaines dans votre atelier afin de découvrir le métier de menuisier. Je suis sérieux, ponctuel et motivé. Je me tiens à votre disposition pour un entretien. Dans l'attente de votre réponse, je vous prie d'agréer, Madame, Monsieur, mes salutations distinguées.",
+   "rubric": [
+    "Appel et vouvoiement corrects",
+    "La demande est claire (stage, durée, lieu)",
+    "Une raison ou une qualité est donnée",
+    "Formule de politesse finale",
+    "Orthographe soignée"
+   ]
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "Voici un extrait de lettre : « Salut, moi c'est Ali, je veux un stage chez vous, je suis nul en maths mais bon en mécanique. Répondez vite. Ali ».",
+   "method": "Repérer le registre, la structure, les informations utiles.",
+   "mistakes": [
+    "Corriger seulement l'orthographe."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-cap-bep-communication-lettre-cv-06-a",
+     "points": 1,
+     "prompt": "Quel est le principal défaut de ce texte ?",
+     "explanation": "Le ton est familier et la structure d'une lettre est absente.",
+     "kind": "mcq",
+     "choices": [
+      "Il est trop long",
+      "Registre familier, pas d'appel ni de formule de politesse",
+      "Il est trop poli",
+      "Il contient un objet"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-cap-bep-communication-lettre-cv-06-b",
+     "points": 1,
+     "prompt": "Dire qu'on est « nul en maths » est une bonne information à mettre dans une lettre de candidature.",
+     "explanation": "On valorise ses qualités, on n'insiste pas sur ses faiblesses.",
+     "kind": "truefalse",
+     "answer": false
+    },
+    {
+     "id": "etp-cap-bep-communication-lettre-cv-06-c",
+     "points": 2,
+     "prompt": "Réécris la première phrase dans un registre adapté.",
+     "explanation": "La phrase doit être polie, claire et sans familiarité.",
+     "kind": "open",
+     "model": "Madame, Monsieur, je souhaite effectuer un stage au sein de votre entreprise.",
+     "rubric": [
+      "Appel",
+      "Vouvoiement",
+      "Verbe adapté (souhaiter)"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "Un CV présente la formation :",
+   "choices": [
+    "du plus ancien au plus récent",
+    "du plus récent au plus ancien",
+    "dans un ordre quelconque",
+    "il n'en parle pas"
+   ],
+   "answer": 1,
+   "explanation": "On commence par la formation la plus récente."
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "La signature se place :",
+   "choices": [
+    "au début",
+    "à la fin, en bas à droite",
+    "à côté de l'objet",
+    "dans le corps"
+   ],
+   "answer": 1,
+   "explanation": "C'est la dernière partie de la lettre."
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "« Je souhaite » est un registre :",
+   "choices": [
+    "familier",
+    "soutenu",
+    "argotique",
+    "télégraphique"
+   ],
+   "answer": 1,
+   "explanation": "Verbe courant en langage soutenu."
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "L'objet d'une lettre sert à :",
+   "choices": [
+    "Dire le but du courrier",
+    "Remercier",
+    "Donner l'adresse",
+    "Signer"
+   ],
+   "answer": 0,
+   "explanation": "Il annonce l'objet de la demande."
+  },
+  {
+   "id": "etp-cap-bep-communication-lettre-cv-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-lettre-cv",
+   "prompt": "Un CV doit tenir idéalement sur :",
+   "choices": [
+    "une page",
+    "cinq pages",
+    "dix lignes",
+    "aucune limite"
+   ],
+   "answer": 0,
+   "explanation": "Un CV est court et lisible."
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Quelle partie présente le lieu de stage et son activité ?",
+   "explanation": "La présentation de l'entreprise vient avant le déroulement.",
+   "source": "Exercice original",
+   "choices": [
+    "Le bilan",
+    "La présentation de l'entreprise",
+    "Les annexes",
+    "Les remerciements"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Un compte rendu doit être objectif.",
+   "explanation": "Il relate les faits sans opinion personnelle.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Où place-t-on les photos du stage ?",
+   "explanation": "Les documents d'illustration vont en annexes.",
+   "source": "Exercice original",
+   "choices": [
+    "Dans le titre",
+    "En annexe",
+    "Dans la signature",
+    "Nulle part"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Associe chaque phrase à sa partie.",
+   "explanation": "Chaque phrase a un rôle précis.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "« Je remercie le chef d'atelier. »",
+     "Remerciements"
+    ],
+    [
+     "« Le garage emploie six personnes. »",
+     "Présentation de l'entreprise"
+    ],
+    [
+     "« J'ai appris à lire un schéma électrique. »",
+     "Bilan"
+    ],
+    [
+     "« Plan de l'atelier, voir page 12. »",
+     "Annexes"
+    ]
+   ]
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "En 4 à 6 lignes, rédige la partie « Bilan » d'un stage de trois semaines dans un salon de coiffure fictif.",
+   "explanation": "Un bilan relie le vécu à un projet.",
+   "method": "Appris, difficultés, projet.",
+   "source": "Exercice original",
+   "model": "Ce stage de trois semaines m'a permis de découvrir l'accueil des clientes, l'entretien du matériel et les premiers gestes de coiffure. J'ai progressé en autonomie, mais j'ai encore du mal à gérer le temps. Je souhaite poursuivre ma formation dans ce métier.",
+   "rubric": [
+    "Ce qui a été appris",
+    "Une difficulté ou un point à améliorer",
+    "Un projet",
+    "Première personne et passé",
+    "Phrases correctes"
+   ]
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Compte rendu d'une réunion : « Le 12 mars, nous avons parlé du planning, j'ai trouvé que le chef parlait trop. Il a été décidé de commencer à 7 h 30. »",
+   "method": "Supprimer les jugements, compléter les éléments manquants.",
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-cap-bep-communication-rapport-compte-rendu-06-a",
+     "points": 1,
+     "prompt": "Quelle phrase est subjective et à supprimer ?",
+     "explanation": "C'est un jugement personnel.",
+     "kind": "mcq",
+     "choices": [
+      "Le 12 mars, nous avons parlé du planning.",
+      "J'ai trouvé que le chef parlait trop.",
+      "Il a été décidé de commencer à 7 h 30.",
+      "Aucune"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-cap-bep-communication-rapport-compte-rendu-06-b",
+     "points": 1,
+     "prompt": "Quel élément essentiel manque ?",
+     "explanation": "Un compte rendu mentionne les participants.",
+     "kind": "mcq",
+     "choices": [
+      "La liste des participants",
+      "Un titre en rouge",
+      "Une conclusion en vers",
+      "Un dessin"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-cap-bep-communication-rapport-compte-rendu-06-c",
+     "points": 2,
+     "prompt": "Réécris le compte rendu en 3 lignes.",
+     "explanation": "Un compte rendu garde faits et décisions.",
+     "kind": "open",
+     "model": "Réunion du 12 mars. Participants : (liste). Sujet : le planning de l'atelier. Décision : les journées commenceront à 7 h 30.",
+     "rubric": [
+      "Date",
+      "Participants",
+      "Sujet",
+      "Décision",
+      "Aucun jugement"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Le bilan d'un rapport de stage contient :",
+   "choices": [
+    "Les tâches de chaque jour seulement",
+    "Ce que l'on a appris",
+    "Les photos",
+    "L'adresse du stagiaire"
+   ],
+   "answer": 1,
+   "explanation": "Le bilan est l'analyse personnelle."
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Un compte rendu est écrit :",
+   "choices": [
+    "à la première personne",
+    "de façon neutre et objective",
+    "en langage familier",
+    "en vers"
+   ],
+   "answer": 1,
+   "explanation": "Il doit rester neutre."
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Dans un rapport de stage, les remerciements viennent :",
+   "choices": [
+    "au début",
+    "à la fin des annexes",
+    "après le bilan",
+    "il n'y en a pas"
+   ],
+   "answer": 0,
+   "explanation": "Ils suivent la page de titre."
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Les décisions prises sont dans :",
+   "choices": [
+    "le compte rendu",
+    "le CV",
+    "la lettre d'appel",
+    "la signature"
+   ],
+   "answer": 0,
+   "explanation": "Le compte rendu résume les décisions."
+  },
+  {
+   "id": "etp-cap-bep-communication-rapport-compte-rendu-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-communication-rapport-compte-rendu",
+   "prompt": "Le rapport de stage est généralement écrit :",
+   "choices": [
+    "au futur",
+    "au passé",
+    "à l'impératif",
+    "à l'infinitif seulement"
+   ],
+   "answer": 1,
+   "explanation": "On raconte un stage déjà réalisé."
+  }
+ ]
+}

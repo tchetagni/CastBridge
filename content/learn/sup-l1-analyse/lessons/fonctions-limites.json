@@ -1,0 +1,809 @@
+{
+ "chapter": "sup-l1-analyse-fonctions-limites",
+ "lessons": [
+  {
+   "id": "sup-l1-analyse-fonctions-definition",
+   "title": "Fonctions et ensembles de définition",
+   "minutes": 40,
+   "programRef": "Analyse de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Déterminer l'ensemble de définition d'une fonction (quotient, racine, logarithme).",
+    "Composer deux fonctions et préciser le domaine de la composée.",
+    "Lire et modéliser les fonctions économiques coût, recette et bénéfice.",
+    "Calculer un seuil de rentabilité."
+   ],
+   "exercises": [
+    "sup-l1-analyse-fonctions-definition-01",
+    "sup-l1-analyse-fonctions-definition-02",
+    "sup-l1-analyse-fonctions-definition-03",
+    "sup-l1-analyse-fonctions-definition-04",
+    "sup-l1-analyse-fonctions-definition-05",
+    "sup-l1-analyse-fonctions-definition-06"
+   ],
+   "selfCheck": [
+    "sup-l1-analyse-fonctions-definition-q1",
+    "sup-l1-analyse-fonctions-definition-q2",
+    "sup-l1-analyse-fonctions-definition-q3",
+    "sup-l1-analyse-fonctions-definition-q4",
+    "sup-l1-analyse-fonctions-definition-q5"
+   ],
+   "reviewNotes": [
+    "Montants fictifs (Atelier Ndombe) ; vérifier la notation des intervalles (crochets) avec l'enseignant.",
+    "Vérifier que le niveau de l'exemple de composition convient au programme local."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonction et ensemble de définition",
+     "md": "Une **fonction** $f$ d'une variable réelle associe à chaque réel $x$ d'un ensemble $D_f$ **au plus un** réel $f(x)$. L'ensemble $D_f$ des réels pour lesquels $f(x)$ a un sens est l'**ensemble de définition**. L'**image** de $x$ est $f(x)$ ; un **antécédent** de $y$ est un $x$ tel que $f(x)=y$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Chercher un ensemble de définition",
+     "md": "On exclut les « interdits » :\n- un **dénominateur** ne doit pas être nul : $\\frac{1}{g(x)}$ exige $g(x) \\neq 0$ ;\n- une **racine carrée** exige un radicande positif ou nul : $\\sqrt{g(x)}$ exige $g(x) ≥ 0$ ;\n- un **logarithme** exige un argument strictement positif : $\\ln(g(x))$ exige $g(x) > 0$.\nOn résout ces conditions, puis on **intersecte** les résultats."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Composition",
+     "md": "La **composée** de $f$ par $g$, notée $g∘f$, est $(g∘f)(x)=g(f(x))$. Elle est définie pour les $x$ qui sont dans $D_f$ **et** tels que $f(x)$ est dans $D_g$. En général $g∘f ≠ f∘g$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonctions économiques",
+     "md": "Pour une production de $q$ unités : le **coût total** $C(q)$ = coûts fixes + coûts variables ; la **recette** $R(q)=p×q$ si chaque unité est vendue au prix $p$ ; le **bénéfice** $B(q)=R(q)-C(q)$. Le **seuil de rentabilité** est la quantité $q$ pour laquelle $B(q)=0$ (recette = coût)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 100,
+      "ymin": 0,
+      "ymax": 200,
+      "grid": 1,
+      "xlabel": "q (unités)",
+      "ylabel": "milliers de FCFA",
+      "curves": [
+       {
+        "expr": "50+1.2x",
+        "color": "red",
+        "label": "Coût"
+       },
+       {
+        "expr": "2x",
+        "color": "green",
+        "label": "Recette"
+       }
+      ],
+      "points": [
+       {
+        "x": 62.5,
+        "y": 125,
+        "label": "Seuil",
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Coût (rouge) et recette (verte) : le seuil de rentabilité est leur intersection.",
+     "alt": "Deux droites : le coût part de 50 à q=0 et croît lentement, la recette part de 0 et croît plus vite ; elles se croisent au point q=62,5, au-delà duquel la recette dépasse le coût."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — ensemble de définition",
+     "statement": "Déterminer l'ensemble de définition de $f(x)=\\frac{\\sqrt{x-2}}{x-5}$.",
+     "steps": [
+      {
+       "md": "La racine exige $x-2 ≥ 0$, soit $x ≥ 2$.",
+       "tex": "x - 2 ≥ 0 ⇔ x ≥ 2"
+      },
+      {
+       "md": "Le dénominateur exige $x-5 ≠ 0$, soit $x ≠ 5$.",
+       "tex": "x ≠ 5"
+      },
+      {
+       "md": "On intersecte : on garde $[2\\,;+∞[$ et on retire 5."
+      }
+     ],
+     "answer": "**$D_f=[2\\,;5[\\,∪\\,]5\\,;+∞[$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — logarithme",
+     "statement": "Déterminer l'ensemble de définition de $g(x)=\\ln(4-x^{2})$.",
+     "steps": [
+      {
+       "md": "On exige $4-x^{2}>0$, soit $x^{2}<4$.",
+       "tex": "4 - x^{2} > 0 ⇔ x^{2} < 4"
+      },
+      {
+       "md": "Cela équivaut à $-2<x<2$ (la parabole est positive entre ses racines)."
+      }
+     ],
+     "answer": "**$D_g=]-2\\,;2[$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — seuil de rentabilité",
+     "statement": "Un atelier fictif a des coûts fixes de 120 000 FCFA, un coût variable de 3 500 FCFA par chemise et vend chaque chemise 6 000 FCFA. Trouver le seuil de rentabilité.",
+     "steps": [
+      {
+       "md": "Coût : $C(q)=120000+3500q$ ; recette : $R(q)=6000q$."
+      },
+      {
+       "md": "Bénéfice : $B(q)=2500q-120000$.",
+       "tex": "B(q) = 6000q - (120000+3500q) = 2500q - 120000"
+      },
+      {
+       "md": "$B(q)=0$ donne $q=\\frac{120000}{2500}=48.0$.",
+       "tex": "q = \\frac{120000}{2500} = 48.0"
+      },
+      {
+       "md": "Les chemises sont des unités entières : il faut donc **48** chemises au moins pour ne plus perdre d'argent."
+      }
+     ],
+     "answer": "**Seuil : 48 chemises** (exactement 48 dans le modèle)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $\\sqrt{x-2}$ défini pour $x>2$ : l'égalité $x=2$ est permise (racine de 0).\n- Oublier que le logarithme exige une valeur **strictement** positive.\n- Confondre $f(g(x))$ et $g(f(x))$.\n- Résoudre $x^{2}<4$ en écrivant $x<2$ : il faut aussi $x>-2$."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une fonction peut être définie par morceaux (ex. : tarif progressif) : on étudie alors chaque morceau séparément.",
+      "Pour une fonction de coût réelle, on vérifie toujours que $q ≥ 0$ : l'ensemble de définition « mathématique » peut être plus grand que le domaine « économique »."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-analyse-fonctions-definition-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite",
+   "title": "Limites et continuité",
+   "minutes": 45,
+   "programRef": "Analyse de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une limite en un point ou à l'infini (polynômes, fractions rationnelles).",
+    "Lever une forme indéterminée simple.",
+    "Étudier la continuité d'une fonction en un point.",
+    "Utiliser le théorème des valeurs intermédiaires pour localiser une solution."
+   ],
+   "prerequisites": [
+    "sup-l1-analyse-fonctions-definition"
+   ],
+   "exercises": [
+    "sup-l1-analyse-limites-continuite-01",
+    "sup-l1-analyse-limites-continuite-02",
+    "sup-l1-analyse-limites-continuite-03",
+    "sup-l1-analyse-limites-continuite-04",
+    "sup-l1-analyse-limites-continuite-05",
+    "sup-l1-analyse-limites-continuite-06"
+   ],
+   "selfCheck": [
+    "sup-l1-analyse-limites-continuite-q1",
+    "sup-l1-analyse-limites-continuite-q2",
+    "sup-l1-analyse-limites-continuite-q3",
+    "sup-l1-analyse-limites-continuite-q4",
+    "sup-l1-analyse-limites-continuite-q5"
+   ],
+   "reviewNotes": [
+    "Énoncé du théorème des valeurs intermédiaires : vérifier la formulation avec le cours de l'enseignant.",
+    "Les limites ne sont pas définies avec ε-δ dans cette fiche (approche intuitive) : à adapter selon le programme local."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Limite (approche intuitive)",
+     "md": "Écrire $\\lim_{x→a} f(x)=L$ signifie que $f(x)$ se rapproche autant qu'on veut de $L$ lorsque $x$ se rapproche de $a$ (sans forcément atteindre $a$). On définit de même les limites en $+∞$ et $-∞$ et les limites infinies. Une limite, si elle existe, est **unique**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Opérations et limites usuelles",
+     "md": "Si $f→L$ et $g→L'$, alors $f+g→L+L'$, $f×g→LL'$, et $\\frac{f}{g}→\\frac{L}{L'}$ si $L'≠0$. Limites usuelles en $+∞$ : $\\frac{1}{x}→0$ ; $e^{x}→+∞$ ; $\\ln x→+∞$. **Croissances comparées** : $\\frac{\\ln x}{x}→0$ et $x\\,e^{-x}→0$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Formes indéterminées",
+     "md": "Les formes $\\frac{0}{0}$, $\\frac{∞}{∞}$, $∞-∞$, $0×∞$ ne permettent pas de conclure directement. Deux outils : en $±∞$, on **factorise le terme de plus haut degré** (une fraction rationnelle a la même limite que le quotient de ses termes dominants) ; en un point, on **factorise et simplifie** (ex. $x^{2}-4=(x-2)(x+2)$)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Continuité",
+     "md": "Une fonction $f$ définie en $a$ est **continue en $a$** si $\\lim_{x→a} f(x)=f(a)$. Les polynômes, fractions rationnelles, $\\sqrt{x}$, $e^{x}$, $\\ln x$ sont continues sur leurs ensembles de définition. Somme, produit, quotient (dénominateur non nul) et composée de fonctions continues sont continues."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Théorème des valeurs intermédiaires",
+     "md": "Si $f$ est **continue** sur $[a\\,;b]$ et si $k$ est un réel compris entre $f(a)$ et $f(b)$, alors l'équation $f(x)=k$ admet **au moins une solution** dans $[a\\,;b]$. En particulier, si $f(a)$ et $f(b)$ sont de signes contraires, $f$ s'annule au moins une fois sur $[a\\,;b]$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": -3,
+      "xmax": 5,
+      "ymin": -1,
+      "ymax": 4,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "(3x^2-x+5)/(2x^2+7)",
+        "color": "blue",
+        "label": "f(x)"
+       }
+      ],
+      "segments": [
+       {
+        "x1": -3,
+        "y1": 1.5,
+        "x2": 5,
+        "y2": 1.5,
+        "color": "red",
+        "dash": true
+       }
+      ]
+     },
+     "caption": "La courbe de f s'approche de la droite y = 1,5 (en rouge, pointillée) quand x devient grand.",
+     "alt": "Courbe qui monte légèrement puis se stabilise vers la droite horizontale y=1,5 à droite ; la limite en plus l'infini vaut 3/2."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — limite à l'infini",
+     "statement": "Calculer $\\lim_{x→+∞}\\frac{3x^{2}-x+5}{2x^{2}+7}$.",
+     "steps": [
+      {
+       "md": "Forme $\\frac{∞}{∞}$. On factorise $x^{2}$ en haut et en bas.",
+       "tex": "\\frac{x^{2}\\left(3-\\frac{1}{x}+\\frac{5}{x^{2}}\\right)}{x^{2}\\left(2+\\frac{7}{x^{2}}\\right)}"
+      },
+      {
+       "md": "Les termes $\\frac{1}{x}$, $\\frac{5}{x^{2}}$, $\\frac{7}{x^{2}}$ tendent vers 0."
+      },
+      {
+       "md": "La limite est donc $\\frac{3}{2}$.",
+       "tex": "\\frac{3}{2}"
+      }
+     ],
+     "answer": "**Limite : $\\frac{3}{2}=1{,}5$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — limite en un point",
+     "statement": "Calculer $\\lim_{x→2}\\frac{x^{2}-4}{x-2}$.",
+     "steps": [
+      {
+       "md": "Forme $\\frac{0}{0}$ : on ne peut pas substituer."
+      },
+      {
+       "md": "On factorise : $x^{2}-4=(x-2)(x+2)$.",
+       "tex": "\\frac{(x-2)(x+2)}{x-2} = x+2 \\quad (x≠2)"
+      },
+      {
+       "md": "On simplifie puis on remplace $x$ par 2 : $2+2=4$."
+      }
+     ],
+     "answer": "**Limite : 4.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — continuité",
+     "statement": "Soit $f(x)=\\frac{x^{2}-1}{x-1}$ pour $x≠1$ et $f(1)=k$. Pour quelle valeur de $k$ la fonction est-elle continue en 1 ?",
+     "steps": [
+      {
+       "md": "Pour $x≠1$ : $f(x)=\\frac{(x-1)(x+1)}{x-1}=x+1$."
+      },
+      {
+       "md": "Donc $\\lim_{x→1} f(x)=2$.",
+       "tex": "\\lim_{x→1} f(x) = 2"
+      },
+      {
+       "md": "La continuité exige $f(1)=\\lim_{x→1} f(x)$ : $k=2$."
+      }
+     ],
+     "answer": "**$k=2$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — valeurs intermédiaires",
+     "statement": "Montrer que l'équation $x^{3}+x-1=0$ a une solution dans $[0\\,;1]$.",
+     "steps": [
+      {
+       "md": "La fonction $h(x)=x^{3}+x-1$ est un polynôme : elle est continue."
+      },
+      {
+       "md": "$h(0)=-1<0$ et $h(1)=1>0$.",
+       "tex": "h(0) = -1 \\quad h(1) = 1"
+      },
+      {
+       "md": "Le théorème des valeurs intermédiaires assure l'existence d'un $c∈[0\\,;1]$ tel que $h(c)=0$."
+      }
+     ],
+     "answer": "**Une solution existe dans $[0\\,;1]$.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Substituer sans réfléchir dans une forme $\\frac{0}{0}$ et conclure « la limite n'existe pas ».\n- Croire que $\\lim_{x→a} f(x)=f(a)$ est toujours vrai : c'est justement la définition de la continuité.\n- Appliquer le théorème des valeurs intermédiaires sans vérifier la **continuité**.\n- Écrire $∞-∞=0$."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le théorème des valeurs intermédiaires prouve l'existence d'une solution, pas son unicité (il faut la monotonie pour l'unicité).",
+      "La méthode de dichotomie découpe l'intervalle en deux à chaque étape pour approcher la solution."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-analyse-limites-continuite-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-analyse-fonctions-definition-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "Soit $f(x)=3x^{2}-2x+1$. Calculer $f(-2)$.",
+   "explanation": "$f(-2)=3×4+4+1=17$.",
+   "method": "Remplacer $x$ par la valeur entre parenthèses, puis calculer.",
+   "mistakes": [
+    "Écrire $-2^{2}=-4$ au lieu de $(-2)^{2}=4$."
+   ],
+   "source": "Exercice original",
+   "answer": 17,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "L'ensemble de définition de $f(x)=\\frac{1}{x-3}$ est :",
+   "explanation": "Le dénominateur s'annule pour $x=3$ uniquement.",
+   "source": "Exercice original",
+   "choices": [
+    "ℝ privé de 3",
+    "ℝ tout entier",
+    "$]3\\,;+∞[$ seulement",
+    "ℝ privé de −3"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "L'ensemble de définition de $\\sqrt{x+4}$ est $[-4\\,;+∞[$.",
+   "explanation": "On exige $x+4 ≥ 0$, soit $x ≥ -4$, et −4 est inclus.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "Un artisan fictif a des coûts fixes de 80 000 FCFA, un coût variable de 1 500 FCFA par article et vend chaque article 2 500 FCFA. Quel est le seuil de rentabilité (en nombre d'articles) ?",
+   "explanation": "$B(q)=2500q-(80000+1500q)=1000q-80000$. $B(q)=0$ donne $q=80$.",
+   "method": "Écrire $B=R-C$, puis résoudre $B(q)=0$.",
+   "mistakes": [
+    "Diviser les coûts fixes par le prix de vente au lieu de la marge unitaire."
+   ],
+   "source": "Exercice original",
+   "answer": 80,
+   "tolerance": 0,
+   "unit": "articles"
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "Associe chaque fonction à son ensemble de définition.",
+   "explanation": "Logarithme : $x-1>0$. Racine : $1-x ≥ 0$. Quotient : $x^{2}≠1$. Polynôme : aucun interdit.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "$\\ln(x-1)$",
+     "$]1\\,;+∞[$"
+    ],
+    [
+     "$\\sqrt{1-x}$",
+     "$]-∞\\,;1]$"
+    ],
+    [
+     "$\\frac{1}{x^{2}-1}$",
+     "ℝ privé de {−1 ; 1}"
+    ],
+    [
+     "$x^{2}+5$",
+     "ℝ"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "Un atelier de couture fictif de Bafoussam produit $q$ chemises par mois. Ses coûts fixes sont de 120 000 FCFA, son coût variable de 3 500 FCFA par chemise ; il vend chaque chemise 6 000 FCFA.",
+   "method": "Écrire C, R puis B ; résoudre B(q)=0 pour le seuil.",
+   "mistakes": [
+    "Oublier les coûts fixes dans le calcul du coût de 40 chemises."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-analyse-fonctions-definition-06-a",
+     "points": 1,
+     "prompt": "Calculer le coût total de 40 chemises.",
+     "explanation": "$C(40)=120000+3500×40=260000$ FCFA.",
+     "kind": "numeric",
+     "answer": 260000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l1-analyse-fonctions-definition-06-b",
+     "points": 1,
+     "prompt": "Quelle est l'expression du bénéfice $B(q)$ ?",
+     "explanation": "$B=R-C=6000q-(120000+3500q)=2500q-120000$.",
+     "kind": "mcq",
+     "choices": [
+      "$B(q)=9500q-120000$",
+      "$B(q)=2500q+120000$",
+      "$B(q)=120000-2500q$",
+      "$B(q)=2500q-120000$"
+     ],
+     "answer": 3
+    },
+    {
+     "id": "sup-l1-analyse-fonctions-definition-06-c",
+     "points": 1,
+     "prompt": "Quel est le seuil de rentabilité (nombre de chemises) ?",
+     "explanation": "$B(q)=0$ ⇒ $q=120000/2500=48$.",
+     "kind": "numeric",
+     "answer": 48,
+     "tolerance": 0,
+     "unit": "chemises"
+    },
+    {
+     "id": "sup-l1-analyse-fonctions-definition-06-d",
+     "points": 1,
+     "prompt": "Quel est le bénéfice pour 100 chemises ?",
+     "explanation": "$B(100)=2500×100-120000=130000$ FCFA.",
+     "kind": "numeric",
+     "answer": 130000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "L'ensemble de définition de $\\ln(2x-6)$ est :",
+   "choices": [
+    "$[3\\,;+∞[$",
+    "$]3\\,;+∞[$",
+    "$]-3\\,;+∞[$",
+    "$]6\\,;+∞[$"
+   ],
+   "answer": 1,
+   "explanation": "$2x-6>0$ ⇔ $x>3$ (strict).",
+   "review": true
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "Si $f(x)=x^{2}$ et $g(x)=x+1$, alors $(g∘f)(x)$ vaut :",
+   "choices": [
+    "$(x+1)^{2}$",
+    "$x^{2}+1$",
+    "$x^{2}+x$",
+    "$x^{3}+1$"
+   ],
+   "answer": 1,
+   "explanation": "On applique d'abord $f$ : $g(f(x))=x^{2}+1$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "Le bénéfice se définit par :",
+   "choices": [
+    "Coût − recette",
+    "Recette + coût",
+    "Recette ÷ coût",
+    "Recette − coût"
+   ],
+   "answer": 3,
+   "explanation": "$B=R-C$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "L'ensemble de définition de $\\frac{1}{\\sqrt{x}}$ est :",
+   "choices": [
+    "$]0\\,;+∞[$",
+    "$[0\\,;+∞[$",
+    "ℝ",
+    "$]-∞\\,;0[$"
+   ],
+   "answer": 0,
+   "explanation": "Racine : $x ≥ 0$ ; dénominateur non nul : $x≠0$. Donc $x>0$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-analyse-fonctions-definition-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-fonctions-definition",
+   "prompt": "Au seuil de rentabilité :",
+   "choices": [
+    "la recette est nulle",
+    "le coût est nul",
+    "le bénéfice est nul",
+    "le bénéfice est maximal"
+   ],
+   "answer": 2,
+   "explanation": "Recette = coût, donc $B=0$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "Calculer $\\lim_{x→3}\\frac{x^{2}+1}{x-1}$.",
+   "explanation": "Le dénominateur ne s'annule pas en 3 : on substitue, $\\frac{9+1}{3-1}=5$.",
+   "source": "Exercice original",
+   "answer": 5,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "$\\lim_{x→+∞}\\frac{5x+2}{x^{2}+1}$ vaut :",
+   "explanation": "Le degré du dénominateur est supérieur : le quotient tend vers 0.",
+   "source": "Exercice original",
+   "choices": [
+    "5",
+    "+∞",
+    "2",
+    "0"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "La limite de $\\frac{x^{2}-9}{x-3}$ quand $x→3$ n'existe pas puisqu'on obtient $\\frac{0}{0}$.",
+   "explanation": "Faux : $\\frac{x^{2}-9}{x-3}=x+3$ pour $x≠3$, donc la limite vaut 6.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "Calculer $\\lim_{x→+∞}\\frac{4x^{3}-x}{2x^{3}+5x^{2}}$.",
+   "explanation": "On compare les termes dominants : $\\frac{4x^{3}}{2x^{3}}=2$.",
+   "source": "Exercice original",
+   "answer": 2,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "Soit $f(x)=\\frac{x^{2}-x-6}{x-3}$ si $x≠3$ et $f(3)=k$. Quelle valeur de $k$ rend $f$ continue en 3 ?",
+   "explanation": "$x^{2}-x-6=(x-3)(x+2)$, donc $f(x)=x+2$ pour $x≠3$ et la limite en 3 vaut 5 ; on prend $k=5$.",
+   "source": "Exercice original",
+   "answer": 5,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "On considère $g(x)=x^{3}-3x+1$, continue sur ℝ.",
+   "method": "Calculer les images aux bornes, observer le signe, citer le théorème avec sa condition de continuité.",
+   "mistakes": [
+    "Oublier de citer la continuité."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-analyse-limites-continuite-06-a",
+     "points": 1,
+     "prompt": "Calculer $g(1)$.",
+     "explanation": "$g(1)=1-3+1=-1$.",
+     "kind": "numeric",
+     "answer": -1,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-analyse-limites-continuite-06-b",
+     "points": 1,
+     "prompt": "Calculer $g(0{,}5)$.",
+     "explanation": "$g(0{,}5)=0{,}125-1{,}5+1=-0.375$.",
+     "kind": "numeric",
+     "answer": -0.375,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l1-analyse-limites-continuite-06-c",
+     "points": 1,
+     "prompt": "Que peut-on conclure avec le théorème des valeurs intermédiaires ?",
+     "explanation": "$g(0)=1>0$ et $g(0{,}5)=-0{,}375<0$ : changement de signe sur $[0\\,;0{,}5]$. (Aussi $g(0{,}5)<0$ et $g(1)=-1<0$ : aucune conclusion sur $[0{,}5\\,;1]$.)",
+     "kind": "mcq",
+     "choices": [
+      "$g$ ne s'annule pas sur $[0\\,;1]$",
+      "$g$ s'annule dans $]0\\,;0{,}5[$",
+      "$g$ s'annule dans $]0{,}5\\,;1[$ uniquement",
+      "$g$ est croissante sur $[0\\,;1]$"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "$\\lim_{x→+∞} e^{-x}$ vaut :",
+   "choices": [
+    "+∞",
+    "1",
+    "0",
+    "−∞"
+   ],
+   "answer": 2,
+   "explanation": "$e^{-x}=\\frac{1}{e^{x}}→0$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "Une fonction continue sur $[a\\,;b]$ avec $f(a)<0<f(b)$ :",
+   "choices": [
+    "s'annule au moins une fois sur $[a\\,;b]$",
+    "s'annule exactement une fois",
+    "ne s'annule jamais",
+    "est croissante"
+   ],
+   "answer": 0,
+   "explanation": "C'est le théorème des valeurs intermédiaires ; l'unicité n'est pas garantie.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "$\\lim_{x→1}\\frac{x^{2}-1}{x-1}$ vaut :",
+   "choices": [
+    "0",
+    "1",
+    "2",
+    "n'existe pas"
+   ],
+   "answer": 2,
+   "explanation": "Après simplification : $x+1→2$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "$\\lim_{x→+∞}\\frac{\\ln x}{x}$ vaut :",
+   "choices": [
+    "0",
+    "+∞",
+    "1",
+    "−∞"
+   ],
+   "answer": 0,
+   "explanation": "Croissances comparées : $x$ l'emporte sur $\\ln x$.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-analyse-limites-continuite-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-limites-continuite",
+   "prompt": "$f$ est continue en $a$ lorsque :",
+   "choices": [
+    "$f(a)=0$",
+    "$f$ est dérivable en $a$ seulement",
+    "$f(x)≠f(a)$ pour tout $x$",
+    "$\\lim_{x→a}f(x)=f(a)$"
+   ],
+   "answer": 3,
+   "explanation": "C'est la définition de la continuité.",
+   "review": true
+  }
+ ]
+}

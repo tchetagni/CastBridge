@@ -1,0 +1,364 @@
+{
+ "chapter": "etp-agricole-1re-calculs",
+ "lessons": [
+  {
+   "id": "etp-agricole-1re-calculs",
+   "title": "Calculs agricoles : superficie, rendement, densité, marge brute",
+   "minutes": 45,
+   "programRef": "Programme de sciences et techniques agricoles des séries agricoles, classe de 1re — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une superficie et la convertir en hectares.",
+    "Calculer un rendement.",
+    "Déterminer une densité de semis.",
+    "Calculer une marge brute à partir de données fournies."
+   ],
+   "prerequisites": [
+    "etp-agricole-1re-techniques-protection"
+   ],
+   "exercises": [
+    "etp-agricole-1re-calculs-01",
+    "etp-agricole-1re-calculs-02",
+    "etp-agricole-1re-calculs-03",
+    "etp-agricole-1re-calculs-04",
+    "etp-agricole-1re-calculs-05",
+    "etp-agricole-1re-calculs-06"
+   ],
+   "selfCheck": [
+    "etp-agricole-1re-calculs-q1",
+    "etp-agricole-1re-calculs-q2",
+    "etp-agricole-1re-calculs-q3",
+    "etp-agricole-1re-calculs-q4",
+    "etp-agricole-1re-calculs-q5"
+   ],
+   "reviewNotes": [
+    "Matière « svt » choisie faute de matière agricole dans le catalogue.",
+    "Aucun chiffre agronomique réel (rendement, dose, pH optimal) n'est donné comme règle : tous les chiffres sont fictifs, fournis par l'énoncé. À adapter au contexte local par un enseignant agricole.",
+    "Tous les chiffres (surfaces, rendements, prix, charges) sont des données fictives d'énoncé : aucun n'est une valeur agronomique de référence."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Superficie",
+     "md": "Une parcelle rectangulaire : **superficie = longueur × largeur**. **1 hectare (ha) = 10 000 m²**.",
+     "tex": "S = L \\times l"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Rendement",
+     "md": "Le **rendement** est la production obtenue par unité de surface :",
+     "tex": "\\text{rendement} = \\frac{\\text{production}}{\\text{superficie}}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Densité de semis",
+     "md": "Si les plants sont espacés de $e_1$ entre lignes et de $e_2$ sur la ligne, chaque plant occupe $e_1 \\times e_2$ ; le nombre de plants par hectare est :",
+     "tex": "\\frac{10\\,000\\,\\text{m}^2}{e_1 \\times e_2}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Marge brute",
+     "md": "**Produit brut** = quantité vendue × prix. **Charges variables** = semences, engrais, main-d'œuvre saisonnière, etc. La **marge brute** est la différence :",
+     "tex": "\\text{marge brute} = \\text{produit brut} - \\text{charges variables}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Produit brut",
+        "value": 480,
+        "color": "green"
+       },
+       {
+        "label": "Charges",
+        "value": 360,
+        "color": "red"
+       },
+       {
+        "label": "Marge brute",
+        "value": 120,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Produit, charges et marge (données fictives). (unité : milliers de FCFA)",
+     "alt": "Trois barres en milliers de FCFA : produit brut 480, charges 360, marge brute 120."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — superficie et rendement",
+     "statement": "Une parcelle fictive de 120 m sur 80 m produit 2 400 kg. Superficie en ha et rendement ?",
+     "steps": [
+      {
+       "md": "Superficie : 120 × 80 = 9 600 m² = 0,96 ha."
+      },
+      {
+       "md": "Rendement : 2 400 ÷ 0,96 = 2 500 kg/ha."
+      }
+     ],
+     "answer": "**0,96 ha ; 2 500 kg/ha (donnée fictive).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — densité",
+     "statement": "Écartement fictif : 80 cm entre lignes et 40 cm sur la ligne. Plants par hectare ?",
+     "steps": [
+      {
+       "md": "Surface par plant : 0,8 × 0,4 = 0,32 m²."
+      },
+      {
+       "md": "Plants par ha : 10 000 ÷ 0,32 = 31 249."
+      }
+     ],
+     "answer": "**31 249 plants/ha.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — marge brute",
+     "statement": "Production vendue : 2 400 kg à 200 FCFA/kg. Charges variables : semences 150 000, engrais 90 000, main-d'œuvre 120 000 FCFA. Marge brute ?",
+     "steps": [
+      {
+       "md": "Produit brut : 2 400 × 200 = 480 000 FCFA ; charges : 360 000 FCFA."
+      },
+      {
+       "md": "Marge : 480 000 − 360 000 = 120 000 FCFA."
+      }
+     ],
+     "answer": "**120 000 FCFA (données fictives).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer un rendement avec la superficie en m² au lieu d'hectares.\n- Oublier de convertir cm en m dans la densité.\n- Compter dans les charges variables des éléments qui n'en sont pas, ou en oublier.\n- Prendre un chiffre fictif pour une norme."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Remplace les données par celles de ta région pour t'entraîner.",
+      "La marge brute n'est pas le bénéfice : il reste des charges fixes."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-agricole-1re-calculs-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-agricole-1re-calculs-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "Parcelle fictive de 50 m sur 40 m. Superficie en m² ?",
+   "explanation": "50 × 40 = 2 000 m².",
+   "source": "Exercice original",
+   "answer": 2000,
+   "tolerance": 0,
+   "unit": "m²"
+  },
+  {
+   "id": "etp-agricole-1re-calculs-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "Une parcelle fictive de 2 ha produit 5 000 kg. Rendement en kg/ha ?",
+   "explanation": "5 000 ÷ 2 = 2 500 kg/ha (donnée fictive).",
+   "source": "Exercice original",
+   "answer": 2500,
+   "tolerance": 0,
+   "unit": "kg/ha"
+  },
+  {
+   "id": "etp-agricole-1re-calculs-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "1 ha = 10 000 m².",
+   "explanation": "C'est la définition de l'hectare.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-agricole-1re-calculs-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "Écartement fictif de 50 cm sur 50 cm : plants par hectare ?",
+   "explanation": "Surface par plant : 0,5 × 0,5 = 0,25 m² ; 10 000 ÷ 0,25 = 40 000.",
+   "source": "Exercice original",
+   "answer": 40000,
+   "tolerance": 0,
+   "unit": "plants"
+  },
+  {
+   "id": "etp-agricole-1re-calculs-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "Produit brut 450 000 FCFA, charges variables 300 000 FCFA (fictifs). Marge brute ?",
+   "explanation": "450 000 − 300 000 = 150 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 150000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-agricole-1re-calculs-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "Une exploitation fictive cultive une parcelle de 150 m sur 60 m et récolte 1 800 kg. Elle vend à 150 FCFA/kg. Charges variables : semences 60 000, engrais 45 000, main-d'œuvre 40 000 FCFA.",
+   "method": "Surface, rendement, produit, charges, marge.",
+   "mistakes": [
+    "Utiliser les m² au lieu des hectares."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-agricole-1re-calculs-06-a",
+     "points": 1,
+     "prompt": "Superficie en ha ?",
+     "explanation": "150 × 60 = 9 000 m² = 0,9 ha.",
+     "kind": "numeric",
+     "answer": 0.9,
+     "tolerance": 0.001,
+     "unit": "ha"
+    },
+    {
+     "id": "etp-agricole-1re-calculs-06-b",
+     "points": 1,
+     "prompt": "Rendement en kg/ha ?",
+     "explanation": "1 800 ÷ 0,9 = 2 000 kg/ha.",
+     "kind": "numeric",
+     "answer": 2000.0,
+     "tolerance": 0.01,
+     "unit": "kg/ha"
+    },
+    {
+     "id": "etp-agricole-1re-calculs-06-c",
+     "points": 1,
+     "prompt": "Produit brut en FCFA ?",
+     "explanation": "1 800 × 150 = 270 000.",
+     "kind": "numeric",
+     "answer": 270000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-agricole-1re-calculs-06-d",
+     "points": 2,
+     "prompt": "Marge brute en FCFA ?",
+     "explanation": "Charges : 145 000 ; marge : 270 000 − 145 000 = 125 000 FCFA.",
+     "kind": "numeric",
+     "answer": 125000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-calculs-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "La superficie d'un rectangle de 30 m sur 20 m :",
+   "choices": [
+    "50 m²",
+    "100 m²",
+    "600 m²",
+    "6 000 m²"
+   ],
+   "answer": 2,
+   "explanation": "30 × 20 = 600 m²."
+  },
+  {
+   "id": "etp-agricole-1re-calculs-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "Le rendement se calcule :",
+   "choices": [
+    "production × superficie",
+    "production ÷ superficie",
+    "superficie ÷ production",
+    "prix ÷ superficie"
+   ],
+   "answer": 1,
+   "explanation": "Production par unité de surface."
+  },
+  {
+   "id": "etp-agricole-1re-calculs-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "1 ha vaut :",
+   "choices": [
+    "100 m²",
+    "1 000 m²",
+    "10 000 m²",
+    "100 000 m²"
+   ],
+   "answer": 2,
+   "explanation": "1 ha = 10 000 m²."
+  },
+  {
+   "id": "etp-agricole-1re-calculs-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "La marge brute est :",
+   "choices": [
+    "produit − charges variables",
+    "produit + charges",
+    "charges ÷ produit",
+    "produit × charges"
+   ],
+   "answer": 0,
+   "explanation": "Produit moins charges variables."
+  },
+  {
+   "id": "etp-agricole-1re-calculs-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-calculs",
+   "prompt": "Un écartement plus grand donne, par hectare :",
+   "choices": [
+    "plus de plants",
+    "moins de plants",
+    "autant de plants",
+    "aucun plant"
+   ],
+   "answer": 1,
+   "explanation": "Chaque plant occupe plus de surface."
+  }
+ ]
+}

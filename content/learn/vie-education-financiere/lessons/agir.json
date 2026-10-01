@@ -1,0 +1,958 @@
+{
+ "chapter": "vie-education-financiere-agir",
+ "lessons": [
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix",
+   "title": "Monnaie mobile, prix et pourcentages",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation financière (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer ce qu'est la monnaie mobile et ses usages.",
+    "Appliquer les règles de sécurité et reconnaître des arnaques courantes.",
+    "Calculer une remise et un prix après réduction.",
+    "Comparer des prix à l'unité."
+   ],
+   "exercises": [
+    "vie-education-financiere-monnaie-mobile-prix-01",
+    "vie-education-financiere-monnaie-mobile-prix-02",
+    "vie-education-financiere-monnaie-mobile-prix-03",
+    "vie-education-financiere-monnaie-mobile-prix-04",
+    "vie-education-financiere-monnaie-mobile-prix-05",
+    "vie-education-financiere-monnaie-mobile-prix-06"
+   ],
+   "selfCheck": [
+    "vie-education-financiere-monnaie-mobile-prix-q1",
+    "vie-education-financiere-monnaie-mobile-prix-q2",
+    "vie-education-financiere-monnaie-mobile-prix-q3",
+    "vie-education-financiere-monnaie-mobile-prix-q4",
+    "vie-education-financiere-monnaie-mobile-prix-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 2nde par défaut (utile à tous les apprenants).",
+    "Tous les chiffres (montants, taux, durées) sont des données d'énoncé fictives, pas des règles ni des taux réels.",
+    "Vérifier les conseils de sécurité (code PIN jamais communiqué, vérification du destinataire) : aucun nom d'opérateur ni de frais réel.",
+    "Aucun taux de frais ni de TVA affirmé : tout pourcentage est donné par l'énoncé."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La monnaie mobile",
+     "md": "La **monnaie mobile** permet de stocker de l'argent sur un compte lié à son numéro de téléphone, d'envoyer de l'argent à un proche, de payer des factures ou des achats et de retirer chez un agent. C'est pratique, mais l'argent dépend de la sécurité de ton téléphone et de ton **code PIN**."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Règles de sécurité",
+     "md": "- Ne **jamais** donner son code PIN, même à un agent, un « employé de l'opérateur » ou un proche qui insiste.\n- Ne pas écrire son PIN sur le téléphone ni le choisir trop simple.\n- Vérifier le numéro et le nom du destinataire avant de valider.\n- Garder les messages de confirmation.\n- Se méfier des messages disant « vous avez gagné », « votre compte sera bloqué » : ce sont des arnaques courantes.\n- En cas de doute ou de vol, contacter le service officiel de l'opérateur.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Pourcentages dans la vie courante",
+     "md": "Prendre **p %** d'un montant M : M × p ÷ 100. Remise de p % : prix final = prix × (1 − p/100). Pour comparer des prix, calcule le **prix à l'unité** (prix ÷ quantité).",
+     "tex": "\\text{prix final} = P \\times \\left(1 - \\frac{p}{100}\\right)"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Prix initial",
+        "value": 25000,
+        "color": "grey"
+       },
+       {
+        "label": "Remise",
+        "value": 5000,
+        "color": "orange"
+       },
+       {
+        "label": "Prix payé",
+        "value": 20000,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Une remise de 20 % sur un article à 25 000 FCFA.",
+     "alt": "Trois barres : prix initial 25 000, remise 5 000, prix payé 20 000 FCFA."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 100,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 57.25,
+        "text": "Message",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 30,
+        "w": 100,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 57.25,
+        "text": "Pression",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 30,
+        "w": 100,
+        "h": 44,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 56.55,
+        "text": "PIN demandé",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 52,
+        "x2": 150,
+        "y2": 52,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 52,
+        "x2": 290,
+        "y2": 52,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 120,
+        "text": "Réponse : ne jamais donner son PIN",
+        "size": 15,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "Raccrocher, vérifier auprès du service officiel",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le scénario d'une arnaque courante et la bonne réaction.",
+     "alt": "Trois rectangles en chaîne : message, pression, demande du PIN ; dessous, la bonne réaction : ne jamais donner son PIN et vérifier auprès du service officiel."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une remise",
+     "statement": "Un sac coûte 25 000 FCFA. Remise de 20 % (énoncé). Quel prix payer ?",
+     "steps": [
+      {
+       "md": "Remise = 25 000 × 20 ÷ 100 = 5 000 FCFA.",
+       "tex": "25000 \\times 20 \\div 100"
+      },
+      {
+       "md": "Prix payé = 25 000 − 5 000 = 20 000 FCFA."
+      }
+     ],
+     "answer": "**20 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : quel est le meilleur prix ?",
+     "statement": "Un sac de riz de 5 kg coûte 3 500 FCFA ; un autre de 2 kg coûte 1 500 FCFA. Lequel est le moins cher au kilo ?",
+     "steps": [
+      {
+       "md": "Premier : 3 500 ÷ 5 = 700 FCFA/kg."
+      },
+      {
+       "md": "Second : 1 500 ÷ 2 = 750 FCFA/kg."
+      },
+      {
+       "md": "On choisit le plus petit prix au kilo, à condition d'avoir besoin de la quantité."
+      }
+     ],
+     "answer": "**Le premier : 700 FCFA/kg contre 750 FCFA/kg.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Donner son PIN « pour vérifier » à un inconnu.\n- Croire qu'une remise de 20 % puis de 10 % donne 30 % : les pourcentages ne s'additionnent pas ainsi.\n- Comparer des prix sans les ramener à la même quantité.\n- Valider un transfert sans relire le numéro.\n- Cliquer sur un lien ou rappeler un numéro reçu dans un message suspect."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Si un message te dit que tu as gagné un prix et demande des frais d'abord, c'est presque certainement une arnaque : explique-le à ta famille.",
+      "Compare le prix de trois produits de ton marché en les ramenant au kilo ou au litre."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-education-financiere-monnaie-mobile-prix-01"
+    }
+   ]
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots",
+   "title": "Petit commerce et impôts",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation financière (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer un prix de revient, une marge et un bénéfice.",
+    "Calculer un bénéfice avec invendus.",
+    "Expliquer à quoi servent les impôts.",
+    "Comprendre la citoyenneté fiscale en termes généraux."
+   ],
+   "exercises": [
+    "vie-education-financiere-commerce-impots-01",
+    "vie-education-financiere-commerce-impots-02",
+    "vie-education-financiere-commerce-impots-03",
+    "vie-education-financiere-commerce-impots-04",
+    "vie-education-financiere-commerce-impots-05",
+    "vie-education-financiere-commerce-impots-06"
+   ],
+   "selfCheck": [
+    "vie-education-financiere-commerce-impots-q1",
+    "vie-education-financiere-commerce-impots-q2",
+    "vie-education-financiere-commerce-impots-q3",
+    "vie-education-financiere-commerce-impots-q4",
+    "vie-education-financiere-commerce-impots-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 2nde par défaut (utile à tous les apprenants).",
+    "Tous les chiffres (montants, taux, durées) sont des données d'énoncé fictives, pas des règles ni des taux réels.",
+    "Vérifier le vocabulaire commercial (prix de revient, marge, bénéfice) : modèle simplifié, sans charges ni amortissement.",
+    "Impôts : principes généraux uniquement (« Code général des impôts du Cameroun » nommé sans article) ; aucun taux ni seuil affirmé.",
+    "Faire relire la partie sur la citoyenneté fiscale par un enseignant de droit ou d'économie."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Prix de revient, marge, bénéfice",
+     "md": "- **Prix de revient** = tout ce que coûte un produit (achat + transport + emballage, etc.).\n- **Marge** = prix de vente − prix de revient (par unité).\n- **Bénéfice** (ici) = ce que l'on gagne en tout : ventes − coûts totaux. S'il est négatif, c'est une **perte**.\nUn invendu est un coût qui n'a pas rapporté."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formules",
+     "md": "Marge = prix de vente − prix de revient. Bénéfice = chiffre d'affaires − coûts totaux. Le **chiffre d'affaires** (CA) est le total des ventes : prix de vente × quantité vendue.",
+     "tex": "B = CA - \\text{coûts}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les impôts : principe",
+     "md": "Les **impôts** sont des contributions que les citoyens et les entreprises versent à l'État et aux collectivités. Ils financent les services utilisés par tous : écoles, hôpitaux, routes, sécurité, eau, justice. Les règles viennent de textes de loi (en termes généraux, le **Code général des impôts du Cameroun**) et chacun doit contribuer honnêtement : c'est de la **citoyenneté fiscale**. Pour connaître les obligations d'une activité, on s'adresse aux services compétents.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Coût total",
+        "value": 20000,
+        "color": "red"
+       },
+       {
+        "label": "Ventes (tout)",
+        "value": 25000,
+        "color": "green"
+       },
+       {
+        "label": "Ventes (10 invendus)",
+        "value": 20000,
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "Une commerçante achète 50 bouteilles ; effet des invendus sur le bénéfice (chiffres fictifs). (unité : FCFA)",
+     "alt": "Trois barres : coût total 20 000 FCFA, ventes si tout est vendu 25 000, ventes avec 10 invendus 20 000 FCFA."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 100,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 57.25,
+        "text": "Impôts",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 110,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 35.25,
+        "text": "Écoles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 65,
+        "w": 110,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 90.25,
+        "text": "Hôpitaux",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 120,
+        "w": 110,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 145.25,
+        "text": "Routes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 52,
+        "x2": 150,
+        "y2": 30,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 52,
+        "x2": 150,
+        "y2": 85,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 52,
+        "x2": 150,
+        "y2": 140,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 90,
+        "text": "Services pour tous",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "À quoi servent les impôts : financer des services pour tous.",
+     "alt": "Un rectangle impôts relié par des flèches à trois rectangles : écoles, hôpitaux, routes ; texte : services pour tous."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : prix de revient et marge",
+     "statement": "Fatou achète 50 bouteilles de jus à 350 FCFA l'unité et paie 2 500 FCFA de transport (données d'énoncé). Elle vend chaque bouteille 500 FCFA. Calcule prix de revient, marge unitaire et bénéfice si tout est vendu.",
+     "steps": [
+      {
+       "md": "Coût total = 50 × 350 + 2 500 = 20 000 FCFA ; prix de revient unitaire = 20 000 ÷ 50 = 400 FCFA.",
+       "tex": "50 \\times 350 + 2500"
+      },
+      {
+       "md": "Marge unitaire = 500 − 400 = 100 FCFA."
+      },
+      {
+       "md": "CA = 50 × 500 = 25 000 FCFA ; bénéfice = 25 000 − 20 000 = 5 000 FCFA."
+      }
+     ],
+     "answer": "**Prix de revient unitaire 400 FCFA ; marge 100 FCFA ; bénéfice 5 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avec des invendus",
+     "statement": "Même situation, mais 10 bouteilles restent invendues. Quel est le bénéfice ?",
+     "steps": [
+      {
+       "md": "Bouteilles vendues : 50 − 10 = 40. CA = 40 × 500 = 20 000 FCFA."
+      },
+      {
+       "md": "Bénéfice = 20 000 − 20 000 = 0 FCFA."
+      },
+      {
+       "md": "Les invendus font baisser le bénéfice ; ici, ils l'annulent."
+      }
+     ],
+     "answer": "**Bénéfice : 0 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le transport ou les emballages dans le prix de revient.\n- Confondre chiffre d'affaires et bénéfice.\n- Compter les invendus comme vendus.\n- Utiliser l'argent de la boutique pour les dépenses personnelles sans le noter.\n- Croire que les impôts « disparaissent » : ils financent des services publics."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Choisis un petit commerce de ton quartier et liste ses coûts (achat, transport, etc.).",
+      "Discute en classe d'un service public que tu utilises et qui est financé par les contributions de tous."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-education-financiere-commerce-impots-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "À qui peut-on donner son code PIN ?",
+   "explanation": "Le code PIN est strictement personnel.",
+   "source": "Exercice original",
+   "choices": [
+    "À personne",
+    "À un agent de l'opérateur au téléphone",
+    "À un ami qui insiste",
+    "À un commerçant"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Un article à 12 000 FCFA est soldé de 25 % (énoncé). Quelle est la remise ?",
+   "explanation": "12 000 × 25 ÷ 100 = 3 000.",
+   "source": "Exercice original",
+   "answer": 3000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Un message qui dit « votre compte sera bloqué, envoyez votre PIN » est fiable.",
+   "explanation": "Faux : c'est une arnaque classique.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Prix initial 40 000 FCFA, remise de 15 % (énoncé). Quel prix payer ?",
+   "explanation": "Remise = 6 000 ; prix = 40 000 − 6 000 = 34 000.",
+   "source": "Exercice original",
+   "answer": 34000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Tu reçois un appel : « Je suis de votre opérateur, donnez votre code PIN pour éviter la suspension. » Que fais-tu et pourquoi ?",
+   "explanation": "Ne jamais communiquer le PIN, quelle que soit l'urgence annoncée.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Je raccroche sans donner mon PIN, car un vrai service ne le demande jamais ; je vérifie auprès du service officiel et je préviens mes proches.",
+   "rubric": [
+    "Refuse de donner le PIN",
+    "Explique que le PIN est personnel",
+    "Propose de vérifier officiellement"
+   ]
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Au marché, un lot de 6 bouteilles d'huile coûte 10 800 FCFA ; un lot de 3 bouteilles coûte 3 000 FCFA.",
+   "method": "Divise le prix par la quantité pour chaque lot.",
+   "mistakes": [
+    "Comparer les prix totaux."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "vie-education-financiere-monnaie-mobile-prix-06-a",
+     "points": 1,
+     "prompt": "Prix à l'unité du premier lot ?",
+     "explanation": "10 800 ÷ 6 = 1 800.",
+     "kind": "numeric",
+     "answer": 1800,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-monnaie-mobile-prix-06-b",
+     "points": 1,
+     "prompt": "Prix à l'unité du second lot ?",
+     "explanation": "3 000 ÷ 3 = 1 000.",
+     "kind": "numeric",
+     "answer": 1000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-monnaie-mobile-prix-06-c",
+     "points": 1,
+     "prompt": "Quel lot est le moins cher à l'unité ?",
+     "explanation": "1000 < 1800.",
+     "kind": "mcq",
+     "choices": [
+      "Le second lot",
+      "Le premier lot",
+      "Ils sont égaux",
+      "On ne peut pas savoir"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "vie-education-financiere-monnaie-mobile-prix-06-d",
+     "points": 1,
+     "prompt": "Pourquoi comparer à l'unité ?",
+     "explanation": "Les prix totaux ne se comparent pas directement.",
+     "kind": "open",
+     "model": "Pour comparer des quantités différentes sur une même base.",
+     "rubric": [
+      "Même base de comparaison"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Le code PIN est…",
+   "choices": [
+    "à partager avec la famille",
+    "strictement personnel",
+    "à donner aux agents",
+    "à poster"
+   ],
+   "answer": 1,
+   "explanation": "Ne jamais le communiquer.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Remise de 10 % sur 10 000 FCFA :",
+   "choices": [
+    "1 000 FCFA",
+    "100 FCFA",
+    "10 000 FCFA",
+    "9 000 FCFA de remise"
+   ],
+   "answer": 0,
+   "explanation": "10 000 × 10 ÷ 100 = 1 000.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Pour comparer deux prix, on calcule…",
+   "choices": [
+    "la somme des prix",
+    "le produit des prix",
+    "la différence des quantités",
+    "le prix à l'unité"
+   ],
+   "answer": 3,
+   "explanation": "Même base de comparaison.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Un SMS promet un gain mais demande de payer des frais d'abord ; c'est…",
+   "choices": [
+    "un vrai gain",
+    "une obligation",
+    "probablement une arnaque",
+    "une assurance"
+   ],
+   "answer": 2,
+   "explanation": "Les vrais gains ne demandent pas de payer d'abord.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-monnaie-mobile-prix-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-monnaie-mobile-prix",
+   "prompt": "Avant de valider un transfert, on doit…",
+   "choices": [
+    "valider vite",
+    "vérifier le numéro du destinataire",
+    "donner le PIN",
+    "éteindre le téléphone"
+   ],
+   "answer": 1,
+   "explanation": "Une erreur de numéro est difficile à rattraper.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "Le prix de revient comprend…",
+   "explanation": "Tout ce qui est payé pour avoir le produit prêt à vendre.",
+   "source": "Exercice original",
+   "choices": [
+    "l'achat et les frais comme le transport",
+    "seulement le prix de vente",
+    "seulement le bénéfice",
+    "les impôts à venir"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "Prix de revient 800 FCFA, prix de vente 1 000 FCFA. Marge unitaire ?",
+   "explanation": "1 000 − 800 = 200.",
+   "source": "Exercice original",
+   "answer": 200,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "Les impôts servent à financer des services utiles à tous.",
+   "explanation": "Écoles, hôpitaux, routes en font partie.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "Un commerçant achète 30 articles à 400 FCFA et les vend 550 FCFA pièce, tous vendus (sans autres frais). Bénéfice ?",
+   "explanation": "Marge = 150 ; 30 × 150 = 4 500.",
+   "source": "Exercice original",
+   "answer": 4500,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "Explique à un camarade pourquoi il est important de noter ses dépenses de petit commerce.",
+   "explanation": "Noter permet de calculer ce qu'on gagne vraiment.",
+   "source": "Exercice original",
+   "model": "Pour connaître son vrai bénéfice, ne pas mélanger l'argent de la boutique et l'argent personnel, et éviter les pertes cachées.",
+   "rubric": [
+    "Idée de connaître le bénéfice",
+    "Éviter de mélanger les comptes"
+   ]
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "Une revendeuse achète 40 pagnes à 600 FCFA l'un, paie 4 000 FCFA de transport, et vend chaque pagne 800 FCFA. Elle garde 6 invendus (données d'énoncé).",
+   "method": "Coût total, puis ventes réelles, puis bénéfice = ventes − coût.",
+   "mistakes": [
+    "Calculer le CA sur tous les articles, invendus compris."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "vie-education-financiere-commerce-impots-06-a",
+     "points": 1,
+     "prompt": "Coût total ?",
+     "explanation": "40 × 600 + 4 000 = 28 000.",
+     "kind": "numeric",
+     "answer": 28000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-commerce-impots-06-b",
+     "points": 1,
+     "prompt": "Chiffre d'affaires ?",
+     "explanation": "34 × 800 = 27 200.",
+     "kind": "numeric",
+     "answer": 27200,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-commerce-impots-06-c",
+     "points": 1,
+     "prompt": "Bénéfice ?",
+     "explanation": "27 200 − 28 000 = -800.",
+     "kind": "numeric",
+     "answer": -800,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-commerce-impots-06-d",
+     "points": 1,
+     "prompt": "Que peut-elle faire des invendus ?",
+     "explanation": "Une remise peut transformer un invendu en recette.",
+     "kind": "open",
+     "model": "Les vendre avec une petite remise ou les garder pour la prochaine période.",
+     "rubric": [
+      "Une solution plausible"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "Bénéfice = …",
+   "choices": [
+    "ventes + coûts",
+    "ventes − coûts totaux",
+    "coûts − ventes seulement",
+    "marge × impôt"
+   ],
+   "answer": 1,
+   "explanation": "On retranche les coûts des ventes.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "Les impôts permettent notamment de financer…",
+   "choices": [
+    "des écoles et des hôpitaux",
+    "uniquement des loisirs privés",
+    "aucun service",
+    "les achats personnels des habitants"
+   ],
+   "answer": 0,
+   "explanation": "Services publics pour tous.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "Un invendu…",
+   "choices": [
+    "est un bénéfice",
+    "augmente le CA",
+    "n'a aucun effet",
+    "est un coût sans recette"
+   ],
+   "answer": 3,
+   "explanation": "Il a été payé mais pas vendu.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "La marge unitaire est…",
+   "choices": [
+    "prix de revient − prix de vente",
+    "prix de vente + prix de revient",
+    "prix de vente − prix de revient",
+    "CA − impôt"
+   ],
+   "answer": 2,
+   "explanation": "C'est le gain par article.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-commerce-impots-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-commerce-impots",
+   "prompt": "La citoyenneté fiscale, c'est…",
+   "choices": [
+    "éviter de payer",
+    "contribuer honnêtement aux charges communes",
+    "ne rien déclarer",
+    "cacher ses gains"
+   ],
+   "answer": 1,
+   "explanation": "Chacun contribue selon les règles.",
+   "review": true
+  }
+ ]
+}

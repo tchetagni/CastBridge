@@ -1,0 +1,474 @@
+{
+ "chapter": "etp-esf-1re-alimentation",
+ "lessons": [
+  {
+   "id": "etp-esf-1re-nutriments",
+   "title": "Nutriments, groupes d'aliments et équilibre alimentaire",
+   "minutes": 40,
+   "programRef": "Programme d'économie sociale et familiale, classe de 1re — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Nommer les nutriments et leur rôle.",
+    "Classer des aliments par groupes.",
+    "Composer un repas équilibré.",
+    "Analyser un menu et proposer une amélioration."
+   ],
+   "exercises": [
+    "etp-esf-1re-nutriments-01",
+    "etp-esf-1re-nutriments-02",
+    "etp-esf-1re-nutriments-03",
+    "etp-esf-1re-nutriments-04",
+    "etp-esf-1re-nutriments-05",
+    "etp-esf-1re-nutriments-06"
+   ],
+   "selfCheck": [
+    "etp-esf-1re-nutriments-q1",
+    "etp-esf-1re-nutriments-q2",
+    "etp-esf-1re-nutriments-q3",
+    "etp-esf-1re-nutriments-q4",
+    "etp-esf-1re-nutriments-q5"
+   ],
+   "reviewNotes": [
+    "Matière « svt » choisie faute de matière économie sociale et familiale dans le catalogue.",
+    "Aucun chiffre nutritionnel ou sanitaire de référence n'est donné ; budgets et prix fictifs.",
+    "Rôles des nutriments et groupes d'aliments : classification pédagogique classique, à adapter par l'enseignant aux habitudes locales."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Aliment et nutriment",
+     "md": "Un **aliment** est ce que l'on mange ; un **nutriment** est la substance utile que la digestion en tire. Les nutriments : **glucides**, **lipides**, **protides**, **vitamines**, **sels minéraux**, **eau**. Les **fibres** ne sont pas digérées mais aident le transit."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Rôle des nutriments",
+     "md": "- **Glucides** (sucres, amidon) : énergie rapide.\n- **Lipides** (graisses, huiles) : énergie et réserve.\n- **Protides** (protéines) : construction et réparation du corps.\n- **Vitamines et sels minéraux** : bon fonctionnement, défense, os et sang.\n- **Eau** : transporte, élimine, régule la température.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Groupes d'aliments",
+     "md": "- **Aliments énergétiques** : céréales, tubercules, banane plantain, huiles, sucre.\n- **Aliments constructeurs** : viande, poisson, œufs, lait, légumineuses.\n- **Aliments protecteurs** : fruits et légumes.\n- **Eau** à volonté."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Équilibre alimentaire",
+     "md": "Une alimentation **équilibrée** est **variée** (aliments de tous les groupes sur la journée), **suffisante** (ni trop ni trop peu) et **adaptée** à l'âge, à l'activité et à l'état de santé. Aucun aliment ne suffit à lui seul."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 20,
+        "text": "Groupes d'aliments",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 35,
+        "w": 160,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 57.9,
+        "text": "Eau à volonté",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 80,
+        "w": 160,
+        "h": 62,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 100,
+        "text": "Protecteurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 120,
+        "text": "fruits, légumes",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 80,
+        "w": 160,
+        "h": 62,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 98,
+        "text": "Constructeurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 116,
+        "text": "viande, poisson, œufs,",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 132,
+        "text": "lait, haricots",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 152,
+        "w": 360,
+        "h": 62,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 176,
+        "text": "Énergétiques",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 197,
+        "text": "céréales, tubercules, plantain, huile",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les groupes d'aliments.",
+     "alt": "Schéma de la page : eau en haut, puis fruits et légumes à gauche et aliments constructeurs à droite, puis aliments énergétiques en bas."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — classer",
+     "statement": "Classe : riz, haricots, orange, huile de palme.",
+     "steps": [
+      {
+       "md": "Riz et huile de palme apportent surtout de l'énergie."
+      },
+      {
+       "md": "Haricots : constructeurs (protéines) ; orange : protecteur (vitamines)."
+      }
+     ],
+     "answer": "**Riz et huile : énergétiques ; haricots : constructeurs ; orange : protecteur.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — analyser un menu",
+     "statement": "Menu fictif : riz, pâtes et pain. Qu'en penser ?",
+     "steps": [
+      {
+       "md": "Que des aliments énergétiques : il manque constructeurs et protecteurs."
+      },
+      {
+       "md": "Améliorer : ajouter des haricots ou du poisson, et des légumes ou des fruits."
+      }
+     ],
+     "answer": "**Menu à compléter pour l'équilibre.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser qu'un seul groupe suffit.\n- Croire que « manger beaucoup » équivaut à bien manger.\n- Supprimer les fruits et légumes parce qu'ils sont « peu nourrissants ».\n- Oublier de boire de l'eau."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Note ce que tu manges pendant une journée et classe-le par groupes.",
+      "Compare deux menus de la semaine."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-esf-1re-nutriments-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-esf-1re-nutriments-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Les protides servent surtout à :",
+   "explanation": "Ce sont les nutriments constructeurs.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "fournir de l'énergie rapide",
+    "construire et réparer le corps",
+    "colorer la peau",
+    "boire"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-esf-1re-nutriments-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Les fruits et légumes sont des aliments protecteurs.",
+   "explanation": "Ils apportent vitamines, minéraux et fibres.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-esf-1re-nutriments-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Un aliment énergétique est :",
+   "explanation": "Le manioc est un tubercule riche en amidon.",
+   "source": "Exercice original",
+   "choices": [
+    "le poisson",
+    "le manioc",
+    "la tomate",
+    "l'orange"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-esf-1re-nutriments-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Associe l'aliment et son groupe.",
+   "explanation": "Chaque aliment est classé selon son apport principal.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Œufs",
+     "Constructeur"
+    ],
+    [
+     "Igname",
+     "Énergétique"
+    ],
+    [
+     "Papaye",
+     "Protecteur"
+    ],
+    [
+     "Eau",
+     "À boire à volonté"
+    ]
+   ]
+  },
+  {
+   "id": "etp-esf-1re-nutriments-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Propose un repas équilibré pour une famille fictive et explique en 3 lignes pourquoi il est équilibré.",
+   "explanation": "Un repas équilibré contient les trois groupes.",
+   "source": "Exercice original",
+   "model": "Plantain, haricots et feuilles vertes, avec un fruit : énergie, protéines, vitamines et fibres sont présentes ; on boit de l'eau.",
+   "rubric": [
+    "Les trois groupes",
+    "Aliments réalistes",
+    "Eau mentionnée",
+    "Justification"
+   ]
+  },
+  {
+   "id": "etp-esf-1re-nutriments-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Le déjeuner d'un élève fictif : du riz, une sauce à l'huile, un soda.",
+   "method": "Repérer ce qui manque, proposer un ajout concret.",
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-esf-1re-nutriments-06-a",
+     "points": 1,
+     "prompt": "Quel groupe est le plus manquant ?",
+     "explanation": "Peu ou pas de protéines, de légumes ou de fruits.",
+     "kind": "mcq",
+     "choices": [
+      "Énergétique",
+      "Constructeurs et protecteurs",
+      "Eau",
+      "Aucun"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-esf-1re-nutriments-06-b",
+     "points": 1,
+     "prompt": "Remplacer le soda par de l'eau améliore l'équilibre.",
+     "explanation": "L'eau hydrate sans sucres ajoutés.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-esf-1re-nutriments-06-c",
+     "points": 2,
+     "prompt": "Propose deux ajouts pour améliorer le repas.",
+     "explanation": "On complète les groupes manquants.",
+     "kind": "open",
+     "model": "Ajouter des haricots ou du poisson, et des légumes ou un fruit.",
+     "rubric": [
+      "Un constructeur",
+      "Un protecteur"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-esf-1re-nutriments-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Les glucides sont :",
+   "choices": [
+    "constructeurs",
+    "énergétiques",
+    "inutiles",
+    "toxiques"
+   ],
+   "answer": 1,
+   "explanation": "Ils fournissent surtout de l'énergie."
+  },
+  {
+   "id": "etp-esf-1re-nutriments-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "L'eau :",
+   "choices": [
+    "n'a aucun rôle",
+    "aide au transport et à l'élimination",
+    "remplace les aliments",
+    "est un lipide"
+   ],
+   "answer": 1,
+   "explanation": "Rôle essentiel."
+  },
+  {
+   "id": "etp-esf-1re-nutriments-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Une alimentation équilibrée est :",
+   "choices": [
+    "variée",
+    "monotone",
+    "unique",
+    "excessive"
+   ],
+   "answer": 0,
+   "explanation": "On varie les aliments."
+  },
+  {
+   "id": "etp-esf-1re-nutriments-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Les fibres :",
+   "choices": [
+    "sont des vitamines",
+    "aident le transit",
+    "sont des protéines",
+    "sont interdites"
+   ],
+   "answer": 1,
+   "explanation": "Elles favorisent le transit."
+  },
+  {
+   "id": "etp-esf-1re-nutriments-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-esf-1re-nutriments",
+   "prompt": "Un aliment constructeur :",
+   "choices": [
+    "le sucre",
+    "le lait",
+    "l'huile",
+    "le sel"
+   ],
+   "answer": 1,
+   "explanation": "Le lait apporte des protéines."
+  }
+ ]
+}

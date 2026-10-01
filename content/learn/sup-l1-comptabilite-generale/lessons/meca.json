@@ -1,0 +1,853 @@
+{
+ "chapter": "sup-l1-comptabilite-generale-meca",
+ "lessons": [
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double",
+   "title": "Les comptes et la partie double",
+   "minutes": 50,
+   "programRef": "L1 — Comptes, débit/crédit, partie double (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Représenter un compte en T et définir débit, crédit et solde.",
+    "Appliquer les règles de fonctionnement des comptes d'actif, de passif, de charges et de produits.",
+    "Écrire des écritures en partie double équilibrées.",
+    "Identifier les grandes classes de comptes (sans numéros de comptes détaillés)."
+   ],
+   "prerequisites": [
+    "sup-l1-comptabilite-generale-bilan-resultat"
+   ],
+   "exercises": [
+    "sup-l1-comptabilite-generale-partie-double-01",
+    "sup-l1-comptabilite-generale-partie-double-02",
+    "sup-l1-comptabilite-generale-partie-double-03",
+    "sup-l1-comptabilite-generale-partie-double-04",
+    "sup-l1-comptabilite-generale-partie-double-05",
+    "sup-l1-comptabilite-generale-partie-double-06",
+    "sup-l1-comptabilite-generale-partie-double-07"
+   ],
+   "selfCheck": [
+    "sup-l1-comptabilite-generale-partie-double-q1",
+    "sup-l1-comptabilite-generale-partie-double-q2",
+    "sup-l1-comptabilite-generale-partie-double-q3",
+    "sup-l1-comptabilite-generale-partie-double-q4",
+    "sup-l1-comptabilite-generale-partie-double-q5"
+   ],
+   "reviewNotes": [
+    "Les intitulés de comptes sont donnés en langage courant ; les numéros du plan comptable ne sont volontairement pas cités. Seules les grandes classes (1 à 5 bilan, 6 charges, 7 produits, 8 autres charges et produits) sont mentionnées : à confronter au plan du SYSCOHADA révisé.",
+    "Les écritures sont simplifiées (achats de marchandises enregistrés en charge, variation de stocks traitée à l'inventaire)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Compte, débit, crédit",
+     "md": "Un **compte** est un tableau qui suit l'évolution d'un élément du patrimoine ou du résultat. On le représente en **T** : le **débit** à gauche, le **crédit** à droite. **Débiter** = écrire à gauche ; **créditer** = écrire à droite. Le **solde** est la différence entre les deux côtés ; il est débiteur si le débit est le plus grand, créditeur sinon."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 220,
+      "items": [
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 40,
+        "x2": 360,
+        "y2": 40,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 40,
+        "x2": 220,
+        "y2": 180,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 28,
+        "text": "Banque",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 66,
+        "text": "Débit",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 66,
+        "text": "Crédit",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 100,
+        "text": "3 000 000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 130,
+        "text": "500 000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 100,
+        "text": "800 000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 130,
+        "text": "700 000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 170,
+        "text": "Total 3 500 000",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 170,
+        "text": "Total 1 500 000",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Compte Banque en T : mouvements de l'exemple 2.",
+     "alt": "Un tableau en T intitulé Banque. Colonne de débit : 3 000 000 et 500 000 (total 3 500 000). Colonne de crédit : 800 000 et 700 000 (total 1 500 000). Le solde est débiteur de 2 000 000."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Principe de la partie double",
+     "md": "Chaque opération est enregistrée **deux fois, avec le même montant** : au débit d'un ou plusieurs comptes et au crédit d'un ou plusieurs comptes. Ainsi, le **total des débits est toujours égal au total des crédits**, ce qui permet de détecter les erreurs."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Règles de fonctionnement",
+     "md": "- **Comptes d'actif** (immobilisations, stocks, créances, trésorerie) : **débités** quand ils augmentent, **crédités** quand ils diminuent.\n- **Comptes de passif** (capital, dettes) : **crédités** quand ils augmentent, **débités** quand ils diminuent.\n- **Comptes de charges** : **débités** quand la charge naît.\n- **Comptes de produits** : **crédités** quand le produit naît."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les grandes classes de comptes",
+     "md": "Le plan comptable range les comptes en **classes** : les classes 1 à 5 concernent les comptes de **bilan** (1 : ressources durables ; 2 : actif immobilisé ; 3 : stocks ; 4 : comptes de tiers ; 5 : trésorerie) ; la classe 6 regroupe les **charges des activités ordinaires**, la classe 7 les **produits des activités ordinaires**, la classe 8 d'autres charges et d'autres produits.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — écritures",
+     "statement": "Une nouvelle boutique fictive enregistre ses cinq premières opérations. D = débit, C = crédit. Montants en FCFA. Écris chaque écriture.",
+     "steps": [
+      {
+       "md": "1. Apport en banque par le fondateur : D **Banque** 3 000 000 ; C **Capital** 3 000 000."
+      },
+      {
+       "md": "2. Achat de mobilier, payé par chèque : D **Matériel et mobilier** 800 000 ; C **Banque** 800 000."
+      },
+      {
+       "md": "3. Achat de marchandises à crédit : D **Achats de marchandises** 1 200 000 ; C **Fournisseurs** 1 200 000."
+      }
+     ],
+     "answer": "Les écritures 4 et 5 sont dans l'exemple 2."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — soldes des comptes",
+     "statement": "Suite de l'exemple 1. 4. Vente de marchandises au comptant (espèces) : D **Caisse** 500 000 ; C **Ventes de marchandises** 500 000 ; 5. Règlement partiel du fournisseur par la banque : D **Fournisseurs** 700 000 ; C **Banque** 700 000. Calcule le solde du compte Banque et celui du compte Fournisseurs.",
+     "steps": [
+      {
+       "md": "Banque : débit 3 000 000 ; crédit 800 000 + 700 000 = 1 500 000. Solde = 3 000 000 − 1 500 000 = 1 500 000 (débiteur)."
+      },
+      {
+       "md": "Fournisseurs : crédit 1 200 000 ; débit 700 000. Solde = 1 200 000 − 700 000 = 500 000 (créditeur : on doit encore 500 000)."
+      },
+      {
+       "md": "Caisse : débit 500 000, solde débiteur 500 000. Contrôle : débits = crédits sur l'ensemble des écritures (6 200 000)."
+      }
+     ],
+     "answer": "**Banque : 1 500 000 débiteur ; Fournisseurs : 500 000 créditeur.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que « débit = diminution » : tout dépend de la **nature** du compte (actif ou passif).\n- Oublier qu'une écriture doit **équilibrer** débit et crédit.\n- Créditer **Caisse** pour une vente en espèces : la caisse **augmente**, elle est **débitée**.\n- Confondre le sens du compte **Fournisseurs** (dette, passif) avec celui du compte **Clients** (créance, actif)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les écritures plus complexes (écritures **composées**) mettent en jeu plus de deux comptes ; la règle d'égalité reste la même.",
+      "Dans la pratique, les logiciels de comptabilité imposent l'équilibre de chaque écriture.",
+      "Chaque écriture comporte une **date**, un **libellé**, un **numéro de pièce** et les comptes mouvementés."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-comptabilite-generale-partie-double-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance",
+   "title": "Journal, grand livre et balance",
+   "minutes": 50,
+   "programRef": "L1 — Journal, grand livre, balance (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Enregistrer des opérations au journal.",
+    "Reporter les écritures au grand livre et calculer les soldes.",
+    "Établir une balance à quatre colonnes et en contrôler l'égalité.",
+    "Détecter et corriger une erreur à partir de la balance."
+   ],
+   "prerequisites": [
+    "sup-l1-comptabilite-generale-partie-double"
+   ],
+   "exercises": [
+    "sup-l1-comptabilite-generale-journal-balance-01",
+    "sup-l1-comptabilite-generale-journal-balance-02",
+    "sup-l1-comptabilite-generale-journal-balance-03",
+    "sup-l1-comptabilite-generale-journal-balance-04",
+    "sup-l1-comptabilite-generale-journal-balance-05",
+    "sup-l1-comptabilite-generale-journal-balance-06",
+    "sup-l1-comptabilite-generale-journal-balance-07"
+   ],
+   "selfCheck": [
+    "sup-l1-comptabilite-generale-journal-balance-q1",
+    "sup-l1-comptabilite-generale-journal-balance-q2",
+    "sup-l1-comptabilite-generale-journal-balance-q3",
+    "sup-l1-comptabilite-generale-journal-balance-q4",
+    "sup-l1-comptabilite-generale-journal-balance-q5"
+   ],
+   "reviewNotes": [
+    "Présentation simplifiée du journal unique ; les journaux auxiliaires ne sont que mentionnés.",
+    "Les intitulés de comptes sont en langage courant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le journal",
+     "md": "Le **journal** est le livre où l'on enregistre les opérations **dans l'ordre chronologique**. Chaque écriture comporte : la **date**, les **comptes débités et crédités**, les **montants**, et un **libellé** (explication brève, avec référence de la pièce). Il peut être subdivisé en journaux auxiliaires (achats, ventes, banque, caisse, opérations diverses)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le grand livre",
+     "md": "Le **grand livre** regroupe tous les comptes. On y **reporte** chaque ligne du journal sur le compte concerné (on parle de **report** ou de **ventilation**). Il permet d'obtenir pour chaque compte le total des mouvements et le **solde**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La balance",
+     "md": "La **balance** est le tableau de tous les comptes avec : total des débits, total des crédits, **solde débiteur** et **solde créditeur**. Elle sert à **contrôler** l'égalité des totaux :",
+     "tex": "\\sum \\text{débits} = \\sum \\text{crédits} \\quad ; \\quad \\sum \\text{soldes débiteurs} = \\sum \\text{soldes créditeurs}"
+    },
+    {
+     "type": "text",
+     "md": "Une balance équilibrée ne prouve pas l'exactitude des comptes : elle ne détecte pas une **erreur de compte** (on a débité Banque au lieu de Caisse) ni l'**omission** totale d'une écriture, car ces erreurs conservent l'égalité."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — journal",
+     "statement": "Une boutique fictive : 02/01 apport en banque 2 000 000 ; 04/01 achat de marchandises payé par chèque 900 000 ; 08/01 vente à crédit au client Mballa 1 100 000 ; 15/01 loyer payé en espèces 150 000 ; 20/01 règlement de Mballa par banque 600 000 ; 22/01 retrait d'espèces à la banque 400 000. D = débit, C = crédit. Montants en FCFA. Écris les trois premières au journal.",
+     "steps": [
+      {
+       "md": "02/01 — Apport en banque par l'exploitant : D **Banque** 2 000 000 ; C **Capital** 2 000 000."
+      },
+      {
+       "md": "04/01 — Achat de marchandises payé par chèque : D **Achats de marchandises** 900 000 ; C **Banque** 900 000."
+      },
+      {
+       "md": "08/01 — Vente de marchandises à crédit au client Mballa : D **Clients** 1 100 000 ; C **Ventes de marchandises** 1 100 000."
+      }
+     ],
+     "answer": "Les trois autres : 15/01 D Loyers 150 000 / C Caisse 150 000 ; 20/01 D Banque 600 000 / C Clients 600 000 ; 22/01 D Caisse 400 000 / C Banque 400 000."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — grand livre et balance",
+     "statement": "Avec les six écritures de l'exemple 1, établis la balance et contrôle-la.",
+     "steps": [
+      {
+       "md": "Totaux par compte (partie 1) — Banque : D 2 600 000 / C 1 300 000 ; Capital : D 0 / C 2 000 000 ; Achats de marchandises : D 900 000 / C 0 ; Clients : D 1 100 000 / C 600 000."
+      },
+      {
+       "md": "Partie 2 — Ventes de marchandises : D 0 / C 1 100 000 ; Loyers : D 150 000 / C 0 ; Caisse : D 400 000 / C 150 000."
+      },
+      {
+       "md": "Total des débits = 5 150 000 ; total des crédits = 5 150 000 : égalité vérifiée."
+      },
+      {
+       "md": "Soldes débiteurs : Banque 1 300 000, Achats de marchandises 900 000, Clients 500 000, Loyers 150 000, Caisse 250 000 ; soldes créditeurs : Capital 2 000 000, Ventes de marchandises 1 100 000. Total 3 100 000 de chaque côté."
+      }
+     ],
+     "answer": "**Balance équilibrée : 5 150 000 de mouvements ; 3 100 000 de soldes de chaque côté.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : trouver une erreur de balance",
+     "md": "1. Recalculer les **totaux** de chaque colonne.\n2. Si la différence est égale à un montant d'écriture, chercher une écriture **portée d'un seul côté**.\n3. Si la différence est un multiple de 9, suspecter une **transposition de chiffres** (ex. 540 écrit 450).\n4. Vérifier le **report** du journal au grand livre ligne par ligne."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Reporter un montant au bon compte mais du **mauvais côté** (débit/crédit).\n- Oublier une ligne du journal au report.\n- Penser qu'une balance équilibrée garantit l'absence d'erreurs.\n- Calculer le solde avec la **mauvaise soustraction** (toujours grand côté − petit côté, et noter le sens)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les **journaux auxiliaires** (achats, ventes, banque, caisse) allègent l'enregistrement : on centralise périodiquement les totaux au grand livre.",
+      "La **balance après inventaire** intègre les écritures de régularisation (voir comptabilité 2).",
+      "La **conservation des livres et des pièces** sur plusieurs années est une obligation de l'entreprise (durée à vérifier dans les textes en vigueur)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-comptabilite-generale-journal-balance-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Un client paie 200 000 FCFA en espèces. Quel compte est débité ?",
+   "explanation": "La caisse (actif) augmente : elle est débitée ; le compte Clients est crédité (la créance diminue).",
+   "method": "Pour chaque compte, se demander s'il augmente ou diminue.",
+   "source": "Exercice original",
+   "choices": [
+    "Ventes",
+    "Capital",
+    "Caisse",
+    "Clients"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Une dette envers un fournisseur augmente : le compte Fournisseurs est :",
+   "explanation": "C'est un compte de passif : il est crédité quand il augmente.",
+   "source": "Exercice original",
+   "choices": [
+    "Crédité",
+    "Ni l'un ni l'autre",
+    "Débité",
+    "Soldé"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Compte Caisse : débits 450 000, crédits 380 000. Calcule le solde (positif = débiteur).",
+   "explanation": "450 000 − 380 000 = 70 000 (débiteur).",
+   "source": "Exercice original",
+   "answer": 70000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Dans une écriture en partie double, le total des montants débités peut différer du total des montants crédités si l'opération est complexe.",
+   "explanation": "L'égalité est toujours vérifiée : c'est le principe même de la partie double.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Associe chaque opération à l'écriture correcte.",
+   "explanation": "Les actifs qui augmentent sont débités ; les ressources (emprunt, dettes) et les produits sont crédités ; une charge est débitée.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Achat de matériel payé par banque",
+     "D Matériel / C Banque"
+    ],
+    [
+     "Vente au comptant en espèces",
+     "D Caisse / C Ventes de marchandises"
+    ],
+    [
+     "Emprunt reçu en banque",
+     "D Banque / C Emprunts"
+    ],
+    [
+     "Achat de marchandises à crédit",
+     "D Achats de marchandises / C Fournisseurs"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Pourquoi dit-on que la partie double est un mécanisme de contrôle ?",
+   "explanation": "Le contrôle de l'égalité détecte les erreurs de saisie.",
+   "method": "Relier écriture, balance, détection d'erreur.",
+   "source": "Exercice original",
+   "model": "À chaque opération, le total des débits doit égaler le total des crédits. En fin de période, la somme de tous les débits doit donc égaler celle de tous les crédits : si ce n'est pas le cas, une erreur a été commise (montant, sens, omission d'un côté), ce qui permet de la rechercher.",
+   "rubric": [
+    "Égalité débit = crédit à chaque écriture",
+    "Égalité globale à la balance",
+    "Une inégalité révèle une erreur"
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Une entreprise fictive enregistre : (1) apport en banque des associés 5 000 000 ; (2) emprunt reçu en banque 2 000 000 ; (3) achat d'un matériel payé par banque 3 500 000 ; (4) achat de marchandises à crédit 1 800 000.",
+   "method": "Écrire les écritures, puis lire les soldes.",
+   "mistakes": [
+    "Inverser débit et crédit sur un compte de passif."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-comptabilite-generale-partie-double-07-a",
+     "points": 1,
+     "prompt": "Solde du compte Banque après les opérations (1) à (3) ?",
+     "explanation": "Banque : +5 000 000 +2 000 000 −3 500 000 = 3 500 000 (débiteur).",
+     "kind": "numeric",
+     "answer": 3500000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-partie-double-07-b",
+     "points": 1,
+     "prompt": "Total des montants débités par l'ensemble des quatre écritures ?",
+     "explanation": "Chaque écriture débite son montant : 5 000 000 + 2 000 000 + 3 500 000 + 1 800 000 = 12 300 000.",
+     "kind": "numeric",
+     "answer": 12300000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-partie-double-07-c",
+     "points": 1,
+     "prompt": "Quel compte est crédité par l'écriture (4) ?",
+     "explanation": "Achat à crédit : D Achats de marchandises / C Fournisseurs (dette qui augmente).",
+     "kind": "mcq",
+     "choices": [
+      "Banque",
+      "Fournisseurs",
+      "Capital",
+      "Achats de marchandises"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-partie-double-07-d",
+     "points": 1,
+     "prompt": "Le compte Capital est, après (1) :",
+     "explanation": "L'apport est une ressource : le capital augmente, il est crédité.",
+     "kind": "mcq",
+     "choices": [
+      "Crédité de 2 000 000",
+      "Soldé à zéro",
+      "Crédité de 5 000 000",
+      "Débité de 5 000 000"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Un compte d'actif qui augmente est :",
+   "choices": [
+    "Soldé",
+    "Supprimé",
+    "Crédité",
+    "Débité"
+   ],
+   "answer": 3,
+   "explanation": "Règle des comptes d'actif.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Une vente de marchandises est enregistrée :",
+   "choices": [
+    "Au débit du capital",
+    "Au crédit de la caisse",
+    "Au débit d'un compte de produits",
+    "Au crédit d'un compte de produits (ventes)"
+   ],
+   "answer": 3,
+   "explanation": "Les produits sont crédités.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Les comptes de la classe 6 sont :",
+   "choices": [
+    "Des stocks",
+    "Des produits",
+    "Des dettes",
+    "Des charges"
+   ],
+   "answer": 3,
+   "explanation": "Classe 6 : charges des activités ordinaires.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Le solde d'un compte dont les débits valent 900 et les crédits 600 est :",
+   "choices": [
+    "Débiteur de 1 500",
+    "Débiteur de 300",
+    "Nul",
+    "Créditeur de 300"
+   ],
+   "answer": 1,
+   "explanation": "900 − 600.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-partie-double-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-partie-double",
+   "prompt": "Le total des débits et des crédits d'une écriture :",
+   "choices": [
+    "Peuvent différer de 10 %",
+    "Dépendent du solde",
+    "Sont toujours égaux",
+    "Sont égaux si l'écriture est simple"
+   ],
+   "answer": 2,
+   "explanation": "Principe de la partie double.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Le compte Clients a un débit de 1 100 000 et un crédit de 600 000. Quel est son solde (débiteur) ?",
+   "explanation": "1 100 000 − 600 000 = 500 000 FCFA : les clients doivent encore 500 000.",
+   "source": "Exercice original",
+   "answer": 500000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Le loyer payé en espèces donne l'écriture :",
+   "explanation": "Charge débitée, caisse créditée (elle diminue).",
+   "source": "Exercice original",
+   "choices": [
+    "D Loyers / C Caisse",
+    "D Caisse / C Loyers",
+    "D Loyers / C Capital",
+    "D Banque / C Loyers"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Le journal enregistre les opérations par compte et non par date.",
+   "explanation": "Le journal est chronologique ; c'est le grand livre qui classe par compte.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Une balance a pour total des débits 4 560 000 et pour total des crédits 4 650 000. Calcule la différence (en valeur absolue).",
+   "explanation": "4 650 000 − 4 560 000 = 90 000. Piste : transposition de chiffres (45 600 / 46 500 par exemple) ou écriture portée d'un seul côté pour ce montant.",
+   "method": "Comparer le total des débits et des crédits.",
+   "source": "Exercice original",
+   "answer": 90000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Quelle erreur la balance NE détecte PAS ?",
+   "explanation": "Débiter le mauvais compte avec le bon montant conserve l'égalité des totaux.",
+   "mistakes": [
+    "Croire qu'une balance juste prouve des comptes justes."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Une écriture débitée au compte Caisse au lieu du compte Banque",
+    "Une ligne reportée d'un seul côté",
+    "Un montant débité mais non crédité",
+    "Un total mal additionné"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Décris les trois étapes qui mènent d'une facture d'achat à une ligne de la balance.",
+   "explanation": "Pièce → journal → grand livre → balance.",
+   "method": "Suivre le circuit des documents.",
+   "source": "Exercice original",
+   "model": "1) Enregistrement au journal : date, comptes débités et crédités, montant et libellé de la pièce. 2) Report au grand livre sur chacun des comptes mouvementés. 3) En fin de période, calcul des totaux et du solde de chaque compte, qui apparaissent dans la balance.",
+   "rubric": [
+    "Journal",
+    "Grand livre",
+    "Balance"
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Une société fictive enregistre : (1) apport en banque 4 000 000 ; (2) achat de marchandises à crédit 1 500 000 ; (3) vente de marchandises au comptant par banque 900 000 ; (4) paiement du fournisseur par banque 1 000 000 ; (5) paiement d'un salaire en espèces 200 000 (la caisse a été alimentée au préalable par un retrait de 300 000 sur la banque).",
+   "method": "Écrire les six écritures, puis les soldes ; contrôler que débits = crédits.",
+   "mistakes": [
+    "Oublier l'écriture du retrait.",
+    "Créditer la Caisse au lieu de la débiter pour le retrait."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-comptabilite-generale-journal-balance-07-a",
+     "points": 1,
+     "prompt": "Solde du compte Banque après toutes les opérations ?",
+     "explanation": "Débits : 4 000 000 + 900 000 = 4 900 000. Crédits : 1 000 000 + 300 000 = 1 300 000. Solde = 3 600 000 (débiteur).",
+     "kind": "numeric",
+     "answer": 3600000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-journal-balance-07-b",
+     "points": 1,
+     "prompt": "Solde du compte Fournisseurs (crédit positif) ?",
+     "explanation": "Crédit 1 500 000, débit 1 000 000 : reste dû 500 000.",
+     "kind": "numeric",
+     "answer": 500000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-journal-balance-07-c",
+     "points": 1,
+     "prompt": "Solde du compte Caisse ?",
+     "explanation": "Débit 300 000 (retrait), crédit 200 000 (salaire) : solde 100 000.",
+     "kind": "numeric",
+     "answer": 100000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-comptabilite-generale-journal-balance-07-d",
+     "points": 1,
+     "prompt": "Total des débits de la balance ?",
+     "explanation": "Écritures : 4 000 000 ; 1 500 000 ; 900 000 ; 1 000 000 ; retrait 300 000 ; salaire 200 000. Total 7 900 000 ; il est égal au total des crédits.",
+     "kind": "numeric",
+     "answer": 7900000.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Le journal enregistre les opérations :",
+   "choices": [
+    "Par client",
+    "Par ordre chronologique",
+    "Par montant croissant",
+    "Par compte"
+   ],
+   "answer": 1,
+   "explanation": "Ordre chronologique.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Une balance équilibrée signifie que :",
+   "choices": [
+    "Le total des débits égale celui des crédits",
+    "La trésorerie est positive",
+    "Le résultat est positif",
+    "Les comptes sont forcément exacts"
+   ],
+   "answer": 0,
+   "explanation": "C'est un contrôle de forme.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Le grand livre contient :",
+   "choices": [
+    "Seulement le capital",
+    "Tous les comptes avec leurs mouvements",
+    "Les contrats",
+    "Les bulletins de paie uniquement"
+   ],
+   "answer": 1,
+   "explanation": "Ensemble des comptes.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Débits totaux : 1 200 ; crédits totaux : 1 150. On suspecte :",
+   "choices": [
+    "Une écriture portée d'un seul côté ou une erreur d'addition de 50",
+    "Une dette",
+    "Un amortissement",
+    "Un bénéfice"
+   ],
+   "answer": 0,
+   "explanation": "L'écart de 50 est à rechercher dans le report.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-comptabilite-generale-journal-balance-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-comptabilite-generale-journal-balance",
+   "prompt": "Le report au grand livre se fait :",
+   "choices": [
+    "De la balance vers le journal",
+    "Des comptes vers le journal",
+    "Du journal vers les comptes",
+    "Du bilan vers le journal"
+   ],
+   "answer": 2,
+   "explanation": "Journal → grand livre.",
+   "review": true
+  }
+ ]
+}
