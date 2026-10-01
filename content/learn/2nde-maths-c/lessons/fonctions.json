@@ -1,0 +1,576 @@
+{
+ "chapter": "2nde-maths-c-ch-fonctions",
+ "lessons": [
+  {
+   "id": "2nde-maths-c-fonctions",
+   "title": "Fonctions : généralités, fonctions affines et du second degré",
+   "minutes": 45,
+   "programRef": "2nde C — Généralités sur les fonctions, fonctions affines, polynômes du second degré (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Déterminer le domaine de définition d'une fonction.",
+    "Étudier le sens de variation et la parité d'une fonction.",
+    "Déterminer et représenter une fonction affine.",
+    "Passer à la forme canonique d'un trinôme et en déduire son extremum et ses variations."
+   ],
+   "prerequisites": [
+    "2nde-maths-c-calcul"
+   ],
+   "exercises": [
+    "2nde-maths-c-fon-01",
+    "2nde-maths-c-fon-02",
+    "2nde-maths-c-fon-03",
+    "2nde-maths-c-fon-04",
+    "2nde-maths-c-fon-05",
+    "2nde-maths-c-fon-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-c-fon-q1",
+    "2nde-maths-c-fon-q2",
+    "2nde-maths-c-fon-q3",
+    "2nde-maths-c-fon-q4",
+    "2nde-maths-c-fon-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonction, image, antécédent",
+     "md": "Une **fonction** f associe à chaque réel x d'un ensemble D (son **domaine de définition**) un unique réel f(x), l'**image** de x. Si f(a) = b, on dit que a est **un antécédent** de b : un réel peut avoir plusieurs antécédents, ou aucun. La **courbe** de f est l'ensemble des points M(x ; f(x)) dans un repère."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Déterminer un domaine de définition",
+     "md": "- Un dénominateur ne doit pas être nul : on exclut les valeurs qui l'annulent.\n- Sous une racine carrée, l'expression doit être **positive ou nulle**.\n- Un polynôme est défini sur tout $\\mathbb{R}$.\nOn écrit le domaine sous forme d'intervalles ou d'une réunion d'intervalles."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Sens de variation",
+     "md": "f est **croissante** sur I si, pour tous a < b de I, f(a) ≤ f(b) ; **décroissante** si f(a) ≥ f(b). Un **extremum** est une valeur maximale ou minimale. Le **tableau de variation** résume les flèches ↗ et ↘, avec les extremums."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parité",
+     "md": "Soit D un ensemble **symétrique** par rapport à 0 (si x ∈ D alors −x ∈ D).\n- f est **paire** si f(−x) = f(x) : la courbe est symétrique par rapport à l'axe des ordonnées.\n- f est **impaire** si f(−x) = −f(x) : la courbe est symétrique par rapport à l'origine.\nUne fonction peut n'être ni paire ni impaire."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Fonction affine $f(x) = ax + b$",
+     "md": "Sa courbe est une **droite** : a est le coefficient directeur (la pente), b l'ordonnée à l'origine. Si a > 0, f est croissante ; si a < 0, décroissante ; si a = 0, constante. Pour deux points $A(x_A ; y_A)$ et $B(x_B ; y_B)$, on a $a = \\frac{y_B - y_A}{x_B - x_A}$ (avec $x_A \\neq x_B$)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonction du second degré",
+     "md": "$f(x) = ax^2 + bx + c$ avec a ≠ 0. Sa courbe est une **parabole** d'axe vertical. Sa **forme canonique** est $f(x) = a(x - \\alpha)^2 + \\beta$ avec $\\alpha = -\\frac{b}{2a}$ et $\\beta = f(\\alpha)$ ; le sommet est S(α ; β), et la droite x = α est axe de symétrie."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Variations du second degré",
+     "md": "- Si a > 0 : f décroît sur $]-\\infty ; \\alpha]$ puis croît sur $[\\alpha ; +\\infty[$ ; β est un **minimum**.\n- Si a < 0 : f croît puis décroît ; β est un **maximum**.\nLes racines (si elles existent) sont symétriques par rapport à α."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 5,
+      "ymin": -4,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^2-4*x+1",
+        "color": "blue",
+        "label": "f(x) = x² − 4x + 1"
+       }
+      ],
+      "points": [
+       {
+        "x": 2,
+        "y": -3,
+        "label": "S(2 ; −3)",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 2,
+        "y1": -4,
+        "x2": 2,
+        "y2": 6,
+        "dash": true,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "La parabole $f(x) = x^2 - 4x + 1$ a pour sommet S(2 ; −3) : la droite verticale pointillée x = 2 est son axe de symétrie.",
+     "alt": "Parabole ouverte vers le haut dont le point le plus bas, le sommet S, est en (2 ; −3). Une droite verticale en pointillés d'équation x = 2 passe par le sommet et partage la courbe en deux parties symétriques."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : domaine de définition",
+     "statement": "Détermine le domaine de définition de $f(x) = \\frac{\\sqrt{x - 1}}{x - 3}$.",
+     "steps": [
+      {
+       "md": "Sous la racine : $x - 1 \\geq 0$, donc $x \\geq 1$."
+      },
+      {
+       "md": "Au dénominateur : $x - 3 \\neq 0$, donc $x \\neq 3$."
+      },
+      {
+       "md": "On regroupe : x ≥ 1 en excluant 3. Or 3 est dans $[1 ; +\\infty[$, donc on le retire."
+      }
+     ],
+     "answer": "$D_f = [1 ; 3[ \\cup ]3 ; +\\infty[$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : forme canonique",
+     "statement": "Pour $f(x) = x^2 - 4x + 1$, écris la forme canonique et dresse le tableau de variation.",
+     "steps": [
+      {
+       "md": "Ici a = 1, b = −4, donc α = 2 et β = f(2) = 4 − 8 + 1 = −3 :",
+       "tex": "f(x) = (x - 2)^2 - 3"
+      },
+      {
+       "md": "Vérification : $(x-2)^2 - 3 = x^2 - 4x + 4 - 3 = x^2 - 4x + 1$."
+      },
+      {
+       "md": "a > 0 : f décroît sur $]-\\infty ; 2]$, atteint son minimum −3 en x = 2, puis croît sur $[2 ; +\\infty[$."
+      }
+     ],
+     "answer": "$f(x) = (x-2)^2 - 3$ ; minimum −3 atteint en 2.",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 5,
+      "ymin": -4,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^2-4*x+1",
+        "color": "blue",
+        "label": "f(x) = x² − 4x + 1"
+       }
+      ],
+      "points": [
+       {
+        "x": 2,
+        "y": -3,
+        "label": "S(2 ; −3)",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 2,
+        "y1": -4,
+        "x2": 2,
+        "y2": 6,
+        "dash": true,
+        "color": "grey"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : fonction affine par deux points",
+     "statement": "Une fonction affine f vérifie f(1) = 3 et f(4) = 9. Détermine f(x), puis résous f(x) = 0.",
+     "steps": [
+      {
+       "md": "Le coefficient directeur est :",
+       "tex": "a = \\frac{9 - 3}{4 - 1} = 2"
+      },
+      {
+       "md": "Comme f(1) = 3 : 2 × 1 + b = 3, donc b = 1 et f(x) = 2x + 1."
+      },
+      {
+       "md": "f(x) = 0 équivaut à 2x + 1 = 0, soit x = −1/2."
+      }
+     ],
+     "answer": "$f(x) = 2x + 1$ et l'antécédent de 0 est $-\\frac{1}{2}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 : parité",
+     "statement": "Étudie la parité de $g(x) = x^3 - x$ et de $h(x) = x^2 + x$.",
+     "steps": [
+      {
+       "md": "Les deux fonctions sont définies sur $\\mathbb{R}$, symétrique par rapport à 0."
+      },
+      {
+       "md": "Pour g :",
+       "tex": "g(-x) = (-x)^3 - (-x) = -x^3 + x = -g(x)"
+      },
+      {
+       "md": "g est donc impaire. Pour h : h(1) = 2 et h(−1) = 0 ; h(−1) n'est ni h(1) ni −h(1), donc h n'est ni paire ni impaire."
+      }
+     ],
+     "answer": "**g est impaire ; h n'est ni paire ni impaire.**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -2,
+      "xmax": 4,
+      "ymin": -3,
+      "ymax": 5,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "2*x-1",
+        "color": "blue",
+        "label": "y = 2x − 1"
+       },
+       {
+        "expr": "-x+2",
+        "color": "green",
+        "label": "y = −x + 2"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 1,
+        "label": "(1 ; 1)",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Deux fonctions affines : $y = 2x - 1$ (croissante) et $y = -x + 2$ (décroissante) se coupent au point (1 ; 1).",
+     "alt": "Deux droites dans un repère : la bleue monte, la verte descend, et elles se croisent au point de coordonnées (1 ; 1)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier d'exclure une valeur interdite dans le domaine.\n- Prouver la parité avec un seul exemple : un exemple ne suffit pas à démontrer, mais un contre-exemple prouve qu'une fonction n'est pas paire (ou pas impaire).\n- Confondre l'extremum (la valeur β) et l'abscisse où il est atteint (α).\n- Penser qu'une parabole a un maximum alors que a > 0 : elle a alors un **minimum**.\n- Calculer a = (xB − xA)/(yB − yA) : l'ordre est « Δy sur Δx »."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-c-fon-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une fonction définie sur un intervalle peut être étudiée par son tableau de variation sans connaître sa formule : la lecture graphique est une compétence à part entière.",
+      "En 1re, la dérivée remplacera l'étude de variation par la forme canonique pour des fonctions plus compliquées."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact à vérifier : étude de fonctions plus poussées (limites, dérivation) relève de la 1re ; ici seule la forme canonique est utilisée.",
+    "La notation du domaine (D_f, Df ou E) et celle du tableau de variation peuvent varier selon l'enseignant."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-c-fon-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Soit $f(x) = 2x^2 - 3x + 1$. Calcule f(−2).",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "f(−2) = 2 × 4 + 6 + 1 = 8 + 6 + 1 = 15.",
+   "method": "Remplacer x par −2 en gardant les parenthèses : $(-2)^2 = 4$.",
+   "mistakes": [
+    "Calculer −2² = −4 : le carré porte sur −2 tout entier."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel est le domaine de définition de $f(x) = \\frac{1}{x - 4}$ ?",
+   "choices": [
+    "Tous les réels sauf −4",
+    "Les réels strictement supérieurs à 4",
+    "Tous les réels sauf 4",
+    "Tous les réels"
+   ],
+   "answer": 2,
+   "explanation": "On ne peut pas diviser par 0 : x − 4 ≠ 0, donc x ≠ 4.",
+   "method": "Chercher la valeur qui annule le dénominateur.",
+   "mistakes": [
+    "Résoudre x + 4 = 0 par erreur de signe.",
+    "Croire qu'un dénominateur doit être positif (c'est seulement non nul)."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une fonction affine f vérifie f(1) = 5 et f(3) = 11. Calcule f(10).",
+   "answer": 32,
+   "tolerance": 0,
+   "explanation": "a = (11 − 5)/(3 − 1) = 3 ; 3 × 1 + b = 5 donc b = 2 ; f(x) = 3x + 2 et f(10) = 32.",
+   "method": "Calculer a, puis b avec un point, puis f(10).",
+   "mistakes": [
+    "Oublier b et répondre 30."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Vrai ou faux : la fonction $f(x) = x^2 + x$ est paire.",
+   "answer": false,
+   "explanation": "f(1) = 2 mais f(−1) = 1 − 1 = 0. Comme f(−1) ≠ f(1), f n'est pas paire (un seul contre-exemple suffit).",
+   "method": "Chercher un contre-exemple avec une valeur et son opposée.",
+   "mistakes": [
+    "Croire que x² suffit à rendre la fonction paire."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Quelle est la valeur minimale de $f(x) = x^2 - 6x + 4$ ?",
+   "answer": -5,
+   "tolerance": 0,
+   "explanation": "Forme canonique : $f(x) = (x - 3)^2 - 9 + 4 = (x - 3)^2 - 5$. Le minimum est −5, atteint en x = 3. Contrôle : f(3) = 9 − 18 + 4 = −5.",
+   "method": "Forme canonique : α = −b/2a puis β = f(α).",
+   "mistakes": [
+    "Répondre 3 (l'abscisse du sommet) au lieu de −5."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un négociant de Douala achète des sacs de cacao. Pour x centaines de sacs vendus, son bénéfice en dizaines de milliers de FCFA est $B(x) = -x^2 + 12x - 20$ (modèle fictif, avec $0 \\leq x \\leq 12$).",
+   "method": "Forme canonique pour l'extremum ; racines pour le signe.",
+   "mistakes": [
+    "Compter 2 et 10, alors que B vaut 0 en ces points (pas de bénéfice strictement positif)."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "parts": [
+    {
+     "id": "2nde-maths-c-fon-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la forme canonique de B(x) ?",
+     "choices": [
+      "$-(x - 6)^2 + 16$",
+      "$-(x + 6)^2 + 16$",
+      "$-(x - 6)^2 - 20$",
+      "$(x - 6)^2 + 16$"
+     ],
+     "answer": 0,
+     "explanation": "α = −12/(−2) = 6 et B(6) = −36 + 72 − 20 = 16. Donc B(x) = −(x − 6)² + 16 ; en développant : −x² + 12x − 36 + 16 = −x² + 12x − 20."
+    },
+    {
+     "id": "2nde-maths-c-fon-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le bénéfice maximal (en dizaines de milliers de FCFA) ?",
+     "answer": 16,
+     "tolerance": 0,
+     "explanation": "a < 0 : B admet un maximum β = B(6) = 16, soit 160 000 FCFA."
+    },
+    {
+     "id": "2nde-maths-c-fon-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Pour quelle valeur de x ce maximum est-il atteint ?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "Le maximum est atteint en α = 6 (600 sacs)."
+    },
+    {
+     "id": "2nde-maths-c-fon-06-d",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Pour combien de valeurs entières de x le bénéfice est-il strictement positif ?",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "B(x) = 0 : Δ = 144 − 80 = 64, x = (12 ± 8)/2 donne 2 et 10. B est positive entre les racines : x ∈ ]2 ; 10[. Les entiers 3, 4, …, 9 sont au nombre de 7."
+    }
+   ],
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Le sens de variation de $f(x) = -3x + 5$ est :",
+   "choices": [
+    "croissante sur $\\mathbb{R}$",
+    "constante",
+    "décroissante sur $\\mathbb{R}$",
+    "croissante puis décroissante"
+   ],
+   "answer": 2,
+   "explanation": "Le coefficient directeur −3 est négatif : f est décroissante.",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "La courbe d'une fonction paire est symétrique par rapport :",
+   "choices": [
+    "à l'origine",
+    "à l'axe des abscisses",
+    "à la droite y = x",
+    "à l'axe des ordonnées"
+   ],
+   "answer": 3,
+   "explanation": "f(−x) = f(x) : les points M(x ; y) et M'(−x ; y) sont symétriques par rapport à l'axe des ordonnées.",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Le sommet de la parabole $y = (x + 1)^2 - 4$ est :",
+   "choices": [
+    "S(−1 ; −4)",
+    "S(1 ; −4)",
+    "S(−1 ; 4)",
+    "S(1 ; 4)"
+   ],
+   "answer": 0,
+   "explanation": "Forme a(x − α)² + β avec α = −1 (car x + 1 = x − (−1)) et β = −4.",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Le nombre d'antécédents de 4 par $f(x) = x^2$ est :",
+   "choices": [
+    "1",
+    "2",
+    "0",
+    "4"
+   ],
+   "answer": 1,
+   "explanation": "x² = 4 a deux solutions : x = 2 et x = −2.",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-fon-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Le domaine de $\\sqrt{2x - 6}$ est :",
+   "choices": [
+    "$]3 ; +\\infty[$",
+    "$[-3 ; +\\infty[$",
+    "$[3 ; +\\infty[$",
+    "$]-\\infty ; 3]$"
+   ],
+   "answer": 2,
+   "explanation": "2x − 6 ≥ 0 équivaut à x ≥ 3.",
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-c-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 2 — Fonctions (5 points). Soit $f(x) = x^2 - 6x + 5$.",
+   "source": "Exercice original, style devoir de 2nde C",
+   "parts": [
+    {
+     "id": "2nde-maths-c-blanc-ex2-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la forme canonique de f(x) ?",
+     "choices": [
+      "$(x - 3)^2 - 4$",
+      "$(x + 3)^2 - 4$",
+      "$(x - 3)^2 + 5$",
+      "$(x - 3)^2 - 9$"
+     ],
+     "answer": 0,
+     "explanation": "α = 3 et f(3) = 9 − 18 + 5 = −4 : $f(x) = (x - 3)^2 - 4$."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est la valeur minimale de f ?",
+     "answer": -4,
+     "tolerance": 0,
+     "explanation": "a > 0 : le minimum est β = −4, atteint en x = 3."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la somme des solutions de f(x) = 0.",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "Δ = 36 − 20 = 16, x = (6 ± 4)/2 : 1 et 5. Somme : 6 (= −b/a)."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Combien d'entiers de l'intervalle [−2 ; 7] vérifient f(x) < 0 ?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "f(x) < 0 sur ]1 ; 5[ (entre les racines). Les entiers 2, 3 et 4 conviennent : 3 entiers."
+    }
+   ],
+   "lesson": "2nde-maths-c-fonctions",
+   "chapter": "2nde-maths-c-ch-fonctions"
+  }
+ ]
+}

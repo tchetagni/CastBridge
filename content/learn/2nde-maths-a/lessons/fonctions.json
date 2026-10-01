@@ -1,0 +1,561 @@
+{
+ "chapter": "2nde-maths-a-ch-fonctions",
+ "lessons": [
+  {
+   "id": "2nde-maths-a-fonctions",
+   "title": "Fonctions affines et lecture de graphiques",
+   "minutes": 40,
+   "programRef": "2nde A — Fonctions affines, représentation graphique et lecture de graphiques (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une image et un antécédent.",
+    "Reconnaître une fonction affine ou linéaire et donner son sens de variation.",
+    "Tracer une droite et déterminer a et b à partir de deux points.",
+    "Lire un graphique et comparer deux tarifs."
+   ],
+   "prerequisites": [
+    "2nde-maths-a-equations"
+   ],
+   "exercises": [
+    "2nde-maths-a-fon-01",
+    "2nde-maths-a-fon-02",
+    "2nde-maths-a-fon-03",
+    "2nde-maths-a-fon-04",
+    "2nde-maths-a-fon-05",
+    "2nde-maths-a-fon-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-a-fon-q1",
+    "2nde-maths-a-fon-q2",
+    "2nde-maths-a-fon-q3",
+    "2nde-maths-a-fon-q4",
+    "2nde-maths-a-fon-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonction, image et antécédent",
+     "md": "Une **fonction** f associe à chaque nombre x un unique nombre f(x), appelé **image** de x. Si f(a) = b, on dit que a est un **antécédent** de b. Pour trouver une image, on remplace x ; pour trouver un antécédent, on résout une équation."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonction affine",
+     "md": "Une fonction affine s'écrit $f(x) = ax + b$ où a et b sont des nombres fixés. Si b = 0, f(x) = ax est une **fonction linéaire** : elle traduit une situation de proportionnalité. Exemple : le prix de x kg à 500 FCFA le kilo est $f(x) = 500x$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Sens de variation",
+     "md": "- Si a > 0, f est **croissante** : quand x augmente, f(x) augmente.\n- Si a < 0, f est **décroissante**.\n- Si a = 0, f est **constante**.\nLe nombre a est le **coefficient directeur** (la pente) ; b est l'**ordonnée à l'origine** : c'est f(0)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Représentation graphique",
+     "md": "La courbe de $f(x) = ax + b$ est une **droite**. Il suffit de calculer deux points, par exemple (0 ; b) et (1 ; a + b), de les placer et de tracer la droite. Les points de la droite sont ceux dont les coordonnées vérifient y = ax + b."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -2,
+      "xmax": 4,
+      "ymin": -1,
+      "ymax": 8,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "2*x+1",
+        "color": "blue",
+        "label": "f(x) = 2x + 1"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 1,
+        "label": "(0 ; 1)",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 5,
+        "label": "(2 ; 5)",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "La droite d'équation y = 2x + 1 passe par (0 ; 1) et (2 ; 5) : elle monte, car son coefficient directeur 2 est positif.",
+     "alt": "Une droite bleue qui monte de gauche à droite et passe par les points (0 ; 1) et (2 ; 5), marqués en rouge."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Déterminer a et b à partir de deux points",
+     "md": "Si la droite passe par $A(x_A ; y_A)$ et $B(x_B ; y_B)$ avec $x_A \\neq x_B$ :",
+     "tex": "a = \\frac{y_B - y_A}{x_B - x_A}"
+    },
+    {
+     "type": "text",
+     "md": "Ensuite, on trouve b en remplaçant x et y par les coordonnées de A dans $y = ax + b$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Lire un graphique",
+     "md": "- **Image** de x₀ : on part de x₀ sur l'axe horizontal, on monte jusqu'à la courbe, puis on lit l'ordonnée.\n- **Antécédent** de y₀ : on part de y₀ sur l'axe vertical, on va jusqu'à la courbe, puis on lit l'abscisse.\n- Pour comparer deux tarifs, on cherche le point d'intersection des deux droites."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculs avec une fonction affine",
+     "statement": "Soit $f(x) = -2x + 7$. Calcule f(3), cherche l'antécédent de 3 et donne le sens de variation.",
+     "steps": [
+      {
+       "md": "Image de 3 :",
+       "tex": "f(3) = -2 \\times 3 + 7 = 1"
+      },
+      {
+       "md": "Antécédent de 3 : on résout f(x) = 3.",
+       "tex": "-2x + 7 = 3 \\Rightarrow -2x = -4 \\Rightarrow x = 2"
+      },
+      {
+       "md": "Le coefficient directeur −2 est négatif : f est décroissante."
+      }
+     ],
+     "answer": "f(3) = 1 ; l'antécédent de 3 est 2 ; f est décroissante."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : fonction affine par deux points",
+     "statement": "Une droite passe par A(1 ; 4) et B(3 ; 10). Trouve l'expression f(x) = ax + b.",
+     "steps": [
+      {
+       "md": "Coefficient directeur :",
+       "tex": "a = \\frac{10 - 4}{3 - 1} = 3"
+      },
+      {
+       "md": "On utilise A : 3 × 1 + b = 4, donc b = 1."
+      },
+      {
+       "md": "Vérification avec B : 3 × 3 + 1 = 10 ✓."
+      }
+     ],
+     "answer": "$f(x) = 3x + 1$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : comparer deux tarifs",
+     "statement": "Une taxi-moto facture x km 500x FCFA avec le tarif libre, ou 200x + 1 500 FCFA avec une carte d'abonnement. À partir de quelle distance l'abonnement est-il plus avantageux ?",
+     "steps": [
+      {
+       "md": "On cherche l'égalité des deux prix :",
+       "tex": "500x = 200x + 1500 \\Rightarrow 300x = 1500 \\Rightarrow x = 5"
+      },
+      {
+       "md": "Sur le graphique, les deux droites se coupent au point (5 ; 2 500) : à 5 km, les deux tarifs valent 2 500 FCFA."
+      },
+      {
+       "md": "Au-delà de 5 km, la droite orange (tarif libre) est au-dessus de la bleue : l'abonnement coûte moins cher."
+      }
+     ],
+     "answer": "L'abonnement est plus avantageux **au-delà de 5 km**.",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 8,
+      "ymin": 0,
+      "ymax": 4500,
+      "grid": 1000,
+      "xlabel": "x",
+      "ylabel": "prix",
+      "curves": [
+       {
+        "expr": "500*x",
+        "color": "orange",
+        "label": "500x"
+       },
+       {
+        "expr": "200*x+1500",
+        "color": "blue",
+        "label": "200x + 1500"
+       }
+      ],
+      "points": [
+       {
+        "x": 5,
+        "y": 2500,
+        "label": "(5 ; 2500)",
+        "color": "red"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre l'image (on remplace x) et l'antécédent (on résout une équation).\n- Dans $y = ax + b$, prendre b pour le coefficient directeur.\n- Calculer a avec les différences dans un ordre différent au numérateur et au dénominateur : si on fait $y_B - y_A$, il faut $x_B - x_A$.\n- Lire une graduation au lieu de la vraie valeur : vérifier l'échelle des axes.\n- Relier des points d'un graphique de proportionnalité sans passer par l'origine."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-a-fon-01"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 8,
+      "ymin": 0,
+      "ymax": 4500,
+      "grid": 1000,
+      "xlabel": "x",
+      "ylabel": "prix",
+      "curves": [
+       {
+        "expr": "500*x",
+        "color": "orange",
+        "label": "500x"
+       },
+       {
+        "expr": "200*x+1500",
+        "color": "blue",
+        "label": "200x + 1500"
+       }
+      ],
+      "points": [
+       {
+        "x": 5,
+        "y": 2500,
+        "label": "(5 ; 2500)",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Deux tarifs de taxi-moto (prix fictifs) : les droites se coupent en (5 ; 2 500).",
+     "alt": "Deux droites dans un repère : l'orange part de l'origine et monte vite, la bleue part de 1 500 et monte plus lentement. Elles se croisent au point (5 ; 2 500), marqué en rouge."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Si deux grandeurs sont proportionnelles, leur représentation graphique est une droite passant par l'origine.",
+      "Quand les droites de deux tarifs sont parallèles, elles ne se coupent jamais : un tarif est toujours moins cher que l'autre."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si les fonctions du second degré ou la lecture de tableaux de variation sont attendues en seconde A.",
+    "Les prix et tarifs sont fictifs."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-a-fon-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Soit $f(x) = -3x + 5$. Calcule f(2).",
+   "answer": -1,
+   "tolerance": 0,
+   "explanation": "f(2) = −3 × 2 + 5 = −6 + 5 = −1.",
+   "method": "Remplacer x par 2.",
+   "mistakes": [
+    "Calculer 3 × 2 + 5 = 11 en oubliant le signe."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Laquelle de ces fonctions est décroissante ?",
+   "choices": [
+    "$f(x) = -2x + 7$",
+    "$f(x) = 3x - 2$",
+    "$f(x) = \\frac{x}{2} + 1$",
+    "$f(x) = 5x$"
+   ],
+   "answer": 0,
+   "explanation": "Une fonction affine est décroissante quand son coefficient directeur est négatif : ici a = −2.",
+   "method": "Regarder le signe de a.",
+   "mistakes": [
+    "Regarder le signe de b (le terme constant)."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Soit $f(x) = 2x + 5$. Quel est l'antécédent de 11 par f ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "On résout 2x + 5 = 11 : 2x = 6, donc x = 3. Vérification : f(3) = 11.",
+   "method": "Antécédent : on résout f(x) = valeur.",
+   "mistakes": [
+    "Calculer f(11) = 27 au lieu de résoudre."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Vrai ou faux : la droite d'équation $y = 3x - 2$ passe par le point (1 ; 1).",
+   "answer": true,
+   "explanation": "Pour x = 1 : y = 3 × 1 − 2 = 1. Les coordonnées vérifient l'équation : le point est sur la droite.",
+   "method": "Remplacer x par l'abscisse et comparer avec l'ordonnée.",
+   "mistakes": [
+    "Remplacer x par l'ordonnée."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Une droite passe par A(−1 ; 4) et B(2 ; −2). Calcule son coefficient directeur.",
+   "answer": -2,
+   "tolerance": 0,
+   "explanation": "a = (−2 − 4)/(2 − (−1)) = −6/3 = −2.",
+   "method": "a = (yB − yA)/(xB − xA).",
+   "mistakes": [
+    "Calculer (4 − 2)/(−1 − 2) avec des erreurs de signe."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un cybercafé de Bamenda propose un abonnement (prix fictifs) : pour x heures de connexion, on paie $f(x) = 300x + 1\\,000$ FCFA. Sans abonnement, on paie $g(x) = 500x$ FCFA.",
+   "method": "Écrire l'équation correspondant à chaque question.",
+   "mistakes": [
+    "Comparer f(x) et g(x) sans résoudre l'équation."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "parts": [
+    {
+     "id": "2nde-maths-a-fon-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule f(0). Que représente ce nombre ?",
+     "answer": 1000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "f(0) = 1 000 FCFA : c'est le prix fixe de l'abonnement, payé même sans connexion."
+    },
+    {
+     "id": "2nde-maths-a-fon-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le prix avec abonnement pour 5 heures ?",
+     "answer": 2500,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "f(5) = 300 × 5 + 1 000 = 2 500 FCFA."
+    },
+    {
+     "id": "2nde-maths-a-fon-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour combien d'heures paie-t-on 4 000 FCFA avec l'abonnement ?",
+     "answer": 10,
+     "tolerance": 0,
+     "unit": "h",
+     "explanation": "On résout 300x + 1 000 = 4 000 : 300x = 3 000 et x = 10 heures."
+    },
+    {
+     "id": "2nde-maths-a-fon-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour combien d'heures les deux tarifs coûtent-ils le même prix ?",
+     "answer": 5,
+     "tolerance": 0,
+     "unit": "h",
+     "explanation": "300x + 1 000 = 500x donne 200x = 1 000, soit x = 5 heures (2 500 FCFA)."
+    }
+   ],
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Le coefficient directeur de $y = -4x + 1$ est :",
+   "choices": [
+    "−4",
+    "1",
+    "4",
+    "−1"
+   ],
+   "answer": 0,
+   "explanation": "Dans y = ax + b, a = −4.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "L'image de 0 par $f(x) = 3x + 2$ est :",
+   "choices": [
+    "0",
+    "2",
+    "3",
+    "5"
+   ],
+   "answer": 1,
+   "explanation": "f(0) = 3 × 0 + 2 = 2 (c'est l'ordonnée à l'origine).",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Une fonction affine $f(x) = ax + b$ est croissante lorsque :",
+   "choices": [
+    "b > 0",
+    "a < 0",
+    "a > 0",
+    "b < 0"
+   ],
+   "answer": 2,
+   "explanation": "Le sens de variation dépend du signe de a.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "La fonction $f(x) = 500x$ (prix de x kg à 500 FCFA le kilo) est :",
+   "choices": [
+    "constante",
+    "décroissante",
+    "ni affine ni linéaire",
+    "linéaire"
+   ],
+   "answer": 3,
+   "explanation": "Elle est de la forme ax (b = 0) : une fonction linéaire, qui traduit la proportionnalité.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-fon-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "La droite $y = 2x + 3$ coupe l'axe des ordonnées au point :",
+   "choices": [
+    "(0 ; 3)",
+    "(3 ; 0)",
+    "(0 ; 2)",
+    "(2 ; 3)"
+   ],
+   "answer": 0,
+   "explanation": "Pour x = 0, y = 3 : le point est (0 ; 3).",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  },
+  {
+   "id": "2nde-maths-a-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 3 — Fonctions affines (6 points). Soit $f(x) = -2x + 8$.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "parts": [
+    {
+     "id": "2nde-maths-a-blanc-ex3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule f(3).",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "f(3) = −6 + 8 = 2."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est l'antécédent de 0 ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "−2x + 8 = 0 donne x = 4."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex3-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel est le sens de variation de f ?",
+     "choices": [
+      "Décroissante",
+      "Croissante",
+      "Constante",
+      "D'abord croissante puis décroissante"
+     ],
+     "answer": 0,
+     "explanation": "Le coefficient directeur −2 est négatif : f est décroissante."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex3-d",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Le point A(1 ; 6) appartient à la courbe de f.",
+     "answer": true,
+     "explanation": "f(1) = −2 + 8 = 6 : les coordonnées de A vérifient y = f(x)."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex3-e",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Une fonction affine g vérifie g(1) = 1 et g(4) = 7. Calcule g(10).",
+     "answer": 19,
+     "tolerance": 0,
+     "explanation": "a = (7 − 1)/(4 − 1) = 2 ; 2 × 1 + b = 1 donne b = −1 ; g(x) = 2x − 1 et g(10) = 19."
+    }
+   ],
+   "lesson": "2nde-maths-a-fonctions",
+   "chapter": "2nde-maths-a-ch-fonctions"
+  }
+ ]
+}

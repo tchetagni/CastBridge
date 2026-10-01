@@ -1,0 +1,562 @@
+{
+ "chapter": "2nde-maths-a-ch-equations",
+ "lessons": [
+  {
+   "id": "2nde-maths-a-equations",
+   "title": "Équations, inéquations et systèmes",
+   "minutes": 40,
+   "programRef": "2nde A — Équations, inéquations et systèmes du premier degré (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Résoudre une équation et une inéquation du premier degré.",
+    "Écrire et représenter un ensemble de solutions.",
+    "Résoudre un système de deux équations à deux inconnues.",
+    "Mettre un problème en équation et conclure avec une phrase."
+   ],
+   "prerequisites": [
+    "2nde-maths-a-calcul"
+   ],
+   "exercises": [
+    "2nde-maths-a-equ-01",
+    "2nde-maths-a-equ-02",
+    "2nde-maths-a-equ-03",
+    "2nde-maths-a-equ-04",
+    "2nde-maths-a-equ-05",
+    "2nde-maths-a-equ-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-a-equ-q1",
+    "2nde-maths-a-equ-q2",
+    "2nde-maths-a-equ-q3",
+    "2nde-maths-a-equ-q4",
+    "2nde-maths-a-equ-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Équation du premier degré",
+     "md": "Une équation $ax + b = c$ (a ≠ 0) a une seule solution. Pour la résoudre, on garde l'égalité en faisant **la même opération des deux côtés** : on isole d'abord les termes en x, puis on divise par a. On vérifie en remplaçant x par la solution."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode de résolution",
+     "md": "1. Développer les parenthèses.\n2. Regrouper les x d'un côté, les nombres de l'autre.\n3. Réduire, puis diviser par le coefficient de x.\n4. Vérifier le résultat.\nParfois il n'y a **aucune solution** (ex. x + 1 = x + 2) ou **tous les réels** (ex. 2x = x + x)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Inéquations",
+     "md": "Une inéquation se résout comme une équation, avec **une seule règle différente** : quand on multiplie ou divise par un nombre **négatif**, on **change le sens** de l'inégalité. Exemple : $-3x > 12$ donne $x < -4$."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Écrire l'ensemble des solutions",
+     "md": "Les solutions d'une inéquation s'écrivent avec un intervalle et se représentent sur une droite graduée. $x < 2$ s'écrit $]-\\infty ; 2[$ (crochet ouvert en 2 : 2 est exclu) ; $x \\geq 5$ s'écrit $[5 ; +\\infty[$ (crochet fermé : 5 est inclus)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 120,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 70,
+        "x2": 380,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 70,
+        "x2": 190,
+        "y2": 70,
+        "color": "green",
+        "width": 7
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 70,
+        "r": 7,
+        "fill": "white",
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 104,
+        "text": "2",
+        "size": 18,
+        "bold": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 40,
+        "text": "solutions : x < 2",
+        "size": 16,
+        "bold": true,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Les solutions de x < 2 : tous les nombres à gauche de 2 ; le cercle vide indique que 2 est exclu.",
+     "alt": "Une droite graduée avec le nombre 2 marqué par un petit cercle vide en rouge. Une zone verte épaisse part de la gauche jusqu'à ce cercle, pour représenter les solutions."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Système de deux équations",
+     "md": "Un système de deux équations du premier degré (inconnues x et y) se résout par :\n- **substitution** : on exprime une inconnue avec l'autre, puis on remplace ;\n- **combinaison** : on additionne ou soustrait les équations pour éliminer une inconnue.\nIl peut avoir une solution, aucune solution, ou une infinité de solutions."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mise en équation d'un problème",
+     "md": "1. Choisir l'inconnue et la nommer (« soit x le prix d'un cahier »).\n2. Traduire l'énoncé par une équation ou un système.\n3. Résoudre.\n4. Vérifier dans l'énoncé, puis écrire une phrase de réponse avec l'unité."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une équation",
+     "statement": "Résous $3x - 7 = 2x + 5$.",
+     "steps": [
+      {
+       "md": "On regroupe les x à gauche et les nombres à droite :",
+       "tex": "3x - 2x = 5 + 7"
+      },
+      {
+       "md": "On réduit : x = 12."
+      },
+      {
+       "md": "Vérification : 3 × 12 − 7 = 29 et 2 × 12 + 5 = 29. Les deux côtés sont égaux."
+      }
+     ],
+     "answer": "$x = 12$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une inéquation",
+     "statement": "Résous $5 - 2x > 1$ et donne l'ensemble des solutions.",
+     "steps": [
+      {
+       "md": "On retire 5 des deux côtés :",
+       "tex": "-2x > 1 - 5 = -4"
+      },
+      {
+       "md": "On divise par −2 (nombre négatif) : on **change le sens** de l'inégalité, donc x < 2."
+      },
+      {
+       "md": "Contrôle avec x = 0 : 5 − 0 = 5 > 1, vrai. Avec x = 3 : 5 − 6 = −1 > 1, faux."
+      }
+     ],
+     "answer": "$S = ]-\\infty ; 2[$.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 120,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 70,
+        "x2": 380,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 70,
+        "x2": 190,
+        "y2": 70,
+        "color": "green",
+        "width": 7
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 70,
+        "r": 7,
+        "fill": "white",
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 104,
+        "text": "2",
+        "size": 18,
+        "bold": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 40,
+        "text": "solutions : x < 2",
+        "size": 16,
+        "bold": true,
+        "color": "green"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : un système",
+     "statement": "3 cahiers et 2 stylos coûtent 1 900 FCFA ; 2 cahiers et 1 stylo coûtent 1 100 FCFA. Quel est le prix d'un cahier et d'un stylo ?",
+     "steps": [
+      {
+       "md": "Soit c le prix d'un cahier et s celui d'un stylo :",
+       "tex": "3c + 2s = 1900 \\quad \\text{et} \\quad 2c + s = 1100"
+      },
+      {
+       "md": "Par substitution : s = 1 100 − 2c. Dans la première équation : 3c + 2(1 100 − 2c) = 1 900, soit 3c + 2 200 − 4c = 1 900, donc −c = −300 et c = 300."
+      },
+      {
+       "md": "Alors s = 1 100 − 600 = 500. Vérification : 3 × 300 + 2 × 500 = 1 900 ✓ et 2 × 300 + 500 = 1 100 ✓."
+      }
+     ],
+     "answer": "Un cahier coûte **300 FCFA** et un stylo **500 FCFA**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de changer le sens de l'inégalité en divisant par un nombre négatif.\n- Changer un terme de côté sans changer son signe.\n- Oublier de multiplier **tous** les termes d'une parenthèse : $3(x - 2) = 3x - 6$.\n- Résoudre le système et ne donner que x : il faut aussi y.\n- Ne pas vérifier ni conclure par une phrase avec l'unité."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-a-equ-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un système de deux équations correspond à deux droites : la solution est le point d'intersection. Si les droites sont parallèles, il n'y a pas de solution.",
+      "Pour les problèmes à plusieurs inconnues (prix, nombres de pièces), écris toujours « soit x… » avant de calculer."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si l'équation du second degré est au programme de seconde A (non traitée ici).",
+    "Le vocabulaire (« substitution », « combinaison ») peut varier d'un enseignant à l'autre."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-a-equ-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Résous $5x - 3 = 2x + 9$. Donne x.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "5x − 2x = 9 + 3, soit 3x = 12 et x = 4. Vérification : 5 × 4 − 3 = 17 = 2 × 4 + 9.",
+   "method": "Isoler les x puis diviser.",
+   "mistakes": [
+    "Écrire 3x = 6 en oubliant de changer le signe de −3."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la solution de l'inéquation $-3x > 12$ ?",
+   "choices": [
+    "$x < -4$",
+    "$x > -4$",
+    "$x < 4$",
+    "$x > 4$"
+   ],
+   "answer": 0,
+   "explanation": "On divise par −3 : le sens change, donc x < −4.",
+   "method": "Diviser par un négatif : retourner l'inégalité.",
+   "mistakes": [
+    "Ne pas changer le sens (x > −4).",
+    "Se tromper de signe : 12 ÷ (−3) = −4."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Résous $\\frac{x + 1}{2} = \\frac{2x - 1}{3}$. Donne x.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "On multiplie en croix : 3(x + 1) = 2(2x − 1), soit 3x + 3 = 4x − 2, donc x = 5. Vérification : 6/2 = 3 et 9/3 = 3.",
+   "method": "Produit en croix, puis équation du 1er degré.",
+   "mistakes": [
+    "Multiplier un seul numérateur."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Vrai ou faux : le système $x + y = 5$ et $x + y = 7$ n'a aucune solution.",
+   "answer": true,
+   "explanation": "La somme x + y ne peut pas valoir à la fois 5 et 7. Les deux équations se contredisent : pas de solution (les droites sont parallèles).",
+   "method": "Chercher une contradiction entre les équations.",
+   "mistakes": [
+    "Chercher une solution en choisissant x = 0."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Résous le système $x + y = 20$ et $x - y = 6$. Donne x.",
+   "answer": 13,
+   "tolerance": 0,
+   "explanation": "On additionne : 2x = 26, donc x = 13. Alors y = 20 − 13 = 7. Vérification : 13 − 7 = 6 ✓.",
+   "method": "Combinaison : additionner les équations pour éliminer y.",
+   "mistakes": [
+    "Soustraire au lieu d'additionner et obtenir 2y."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "À Garoua, un loueur de motos propose deux formules (prix fictifs) pour x kilomètres : formule A : 1 000 FCFA + 200 FCFA par km ; formule B : 2 000 FCFA + 100 FCFA par km.",
+   "method": "Écrire le prix de chaque formule en fonction de x, puis comparer.",
+   "mistakes": [
+    "Comparer les prix par km seulement, sans le prix fixe."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "parts": [
+    {
+     "id": "2nde-maths-a-equ-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le prix de la formule A pour 10 km ?",
+     "answer": 3000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "1 000 + 200 × 10 = 3 000 FCFA."
+    },
+    {
+     "id": "2nde-maths-a-equ-06-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour combien de km les deux formules coûtent-elles le même prix ?",
+     "answer": 10,
+     "tolerance": 0,
+     "unit": "km",
+     "explanation": "1 000 + 200x = 2 000 + 100x, donc 100x = 1 000 et x = 10 km. Pour 10 km, A et B coûtent chacune 3 000 FCFA."
+    },
+    {
+     "id": "2nde-maths-a-equ-06-c",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Pour quelles distances la formule A est-elle moins chère ?",
+     "choices": [
+      "Pour moins de 10 km",
+      "Pour plus de 10 km",
+      "Pour toute distance",
+      "Jamais"
+     ],
+     "answer": 0,
+     "explanation": "1 000 + 200x < 2 000 + 100x équivaut à x < 10. La formule A est avantageuse sur les courtes distances (son prix fixe est faible)."
+    },
+    {
+     "id": "2nde-maths-a-equ-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le prix de la formule B pour 15 km ?",
+     "answer": 3500,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "2 000 + 100 × 15 = 3 500 FCFA."
+    }
+   ],
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "La solution de $2x = 14$ est :",
+   "choices": [
+    "7",
+    "12",
+    "28",
+    "−7"
+   ],
+   "answer": 0,
+   "explanation": "On divise par 2 : x = 7.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "L'inéquation $x - 3 > 2$ a pour solutions :",
+   "choices": [
+    "$x > -1$",
+    "$x > 5$",
+    "$x < 5$",
+    "$x > 1$"
+   ],
+   "answer": 1,
+   "explanation": "On ajoute 3 des deux côtés : x > 5.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Pour le système $x + y = 7$ et $x - y = 1$, la solution (x ; y) est :",
+   "choices": [
+    "(3 ; 4)",
+    "(6 ; 1)",
+    "(4 ; 3)",
+    "(8 ; −1)"
+   ],
+   "answer": 2,
+   "explanation": "En additionnant : 2x = 8, x = 4 ; puis y = 7 − 4 = 3.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Un nombre doublé puis augmenté de 5 donne 21. L'équation est :",
+   "choices": [
+    "$2(x + 5) = 21$",
+    "$x + 10 = 21$",
+    "$2x - 5 = 21$",
+    "$2x + 5 = 21$"
+   ],
+   "answer": 3,
+   "explanation": "« Doublé » donne 2x, puis « augmenté de 5 » donne 2x + 5.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-equ-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "La solution de $4x - 1 = 11$ est :",
+   "choices": [
+    "3",
+    "2,5",
+    "12",
+    "−3"
+   ],
+   "answer": 0,
+   "explanation": "4x = 12, donc x = 3.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  },
+  {
+   "id": "2nde-maths-a-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 2 — Équations et systèmes (5 points).",
+   "source": "Exercice original, style devoir de 2nde A",
+   "parts": [
+    {
+     "id": "2nde-maths-a-blanc-ex2-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Résous $4x - 9 = 2x + 5$.",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "4x − 2x = 5 + 9, soit 2x = 14 et x = 7."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex2-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Résous l'inéquation $3x + 2 \\leq 11$.",
+     "choices": [
+      "$x \\leq 3$",
+      "$x \\geq 3$",
+      "$x \\leq 13/3$",
+      "$x < 3$"
+     ],
+     "answer": 0,
+     "explanation": "3x ≤ 9, donc x ≤ 3 (inégalité large, 3 est inclus)."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Résous le système $x + y = 12$ et $2x + y = 19$. Donne x.",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "En soustrayant la première équation à la seconde : x = 7. Alors y = 12 − 7 = 5. Vérification : 14 + 5 = 19 ✓."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Ngono a 15 pièces de 100 FCFA et de 500 FCFA, pour un total de 3 900 FCFA. Combien a-t-elle de pièces de 500 FCFA ?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "Soit x le nombre de pièces de 500 : 500x + 100(15 − x) = 3 900, soit 400x = 2 400 et x = 6. Contrôle : 6 × 500 + 9 × 100 = 3 900."
+    }
+   ],
+   "lesson": "2nde-maths-a-equations",
+   "chapter": "2nde-maths-a-ch-equations"
+  }
+ ]
+}

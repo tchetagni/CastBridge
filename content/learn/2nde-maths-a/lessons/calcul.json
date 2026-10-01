@@ -1,0 +1,501 @@
+{
+ "chapter": "2nde-maths-a-ch-calcul",
+ "lessons": [
+  {
+   "id": "2nde-maths-a-calcul",
+   "title": "Calcul numérique et pourcentages",
+   "minutes": 40,
+   "programRef": "2nde A — Calcul numérique, proportionnalité et pourcentages (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Calculer avec des fractions et des puissances de 10.",
+    "Calculer un pourcentage d'une quantité.",
+    "Utiliser les coefficients multiplicateurs pour une hausse ou une baisse.",
+    "Calculer un taux d'évolution et enchaîner des évolutions."
+   ],
+   "exercises": [
+    "2nde-maths-a-cal-01",
+    "2nde-maths-a-cal-02",
+    "2nde-maths-a-cal-03",
+    "2nde-maths-a-cal-04",
+    "2nde-maths-a-cal-05",
+    "2nde-maths-a-cal-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-a-cal-q1",
+    "2nde-maths-a-cal-q2",
+    "2nde-maths-a-cal-q3",
+    "2nde-maths-a-cal-q4",
+    "2nde-maths-a-cal-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fractions",
+     "md": "Une fraction $\\frac{a}{b}$ (b ≠ 0) est le quotient de a par b.\n- Pour additionner, on met au **même dénominateur** : $\\frac{2}{3} + \\frac{3}{4} = \\frac{8}{12} + \\frac{9}{12} = \\frac{17}{12}$.\n- Pour multiplier : $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$.\n- Pour diviser par une fraction, on multiplie par son inverse."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Priorités de calcul",
+     "md": "On calcule dans cet ordre : parenthèses, puissances, puis multiplications et divisions (de gauche à droite), enfin additions et soustractions. Exemple : $2 + 3 \\times 4 = 14$ et non 20."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Puissances de 10 et écriture scientifique",
+     "md": "$10^n$ = 1 suivi de n zéros ; $10^{-n} = \\frac{1}{10^n}$. On a $10^m \\times 10^n = 10^{m+n}$. Un nombre est en **écriture scientifique** s'il s'écrit $a \\times 10^n$ avec $1 \\leq a < 10$ : par exemple $45\\,000 = 4{,}5 \\times 10^4$ et $0{,}0003 = 3 \\times 10^{-4}$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Pourcentage d'une quantité",
+     "md": "Prendre t % d'une quantité, c'est la multiplier par $\\frac{t}{100}$. Exemple : 20 % de 35 000 FCFA = $\\frac{20}{100} \\times 35\\,000 = 7\\,000$ FCFA. Pour exprimer une part en pourcentage : (partie ÷ total) × 100."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Coefficient multiplicateur",
+     "md": "- Augmenter de t % revient à multiplier par $1 + \\frac{t}{100}$ (hausse de 8 % : × 1,08).\n- Diminuer de t % revient à multiplier par $1 - \\frac{t}{100}$ (baisse de 15 % : × 0,85).\nPour retrouver la valeur initiale, on **divise** par le coefficient."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Taux d'évolution",
+     "md": "Quand une valeur passe de $V_i$ à $V_f$, le taux d'évolution est :",
+     "tex": "t = \\frac{V_f - V_i}{V_i} \\times 100\\,\\%"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Évolutions successives",
+     "md": "Pour plusieurs évolutions de suite, on **multiplie les coefficients**. Les pourcentages ne s'additionnent pas : une hausse de 20 % suivie d'une baisse de 20 % donne $1{,}2 \\times 0{,}8 = 0{,}96$, soit une baisse de 4 %."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "FCFA",
+      "bars": [
+       {
+        "label": "Prix initial",
+        "value": 45000,
+        "color": "blue"
+       },
+       {
+        "label": "Prix remisé",
+        "value": 38250,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Remise de 15 % sur un article à 45 000 FCFA : le prix passe à 38 250 FCFA.",
+     "alt": "Diagramme en barres : une barre bleue pour le prix initial de 45 000 FCFA et une barre verte plus courte pour le prix remisé de 38 250 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une remise",
+     "statement": "Un pagne coûte 45 000 FCFA. La boutique accorde 15 % de remise. Quel est le prix à payer ?",
+     "steps": [
+      {
+       "md": "Baisse de 15 % : le coefficient est 1 − 0,15 = 0,85. On calcule :",
+       "tex": "45\\,000 \\times 0{,}85 = 38\\,250"
+      },
+      {
+       "md": "Contrôle : la remise vaut 15 % de 45 000, soit 6 750 FCFA, et 45 000 − 6 750 = 38 250."
+      }
+     ],
+     "answer": "Le prix à payer est **38 250 FCFA**.",
+     "figure": {
+      "kind": "bars",
+      "unit": "FCFA",
+      "bars": [
+       {
+        "label": "Prix initial",
+        "value": 45000,
+        "color": "blue"
+       },
+       {
+        "label": "Prix remisé",
+        "value": 38250,
+        "color": "green"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : évolutions successives",
+     "statement": "Le prix d'un article augmente de 20 %, puis baisse de 20 %. Quel est le taux global d'évolution ?",
+     "steps": [
+      {
+       "md": "On multiplie les coefficients :",
+       "tex": "1{,}2 \\times 0{,}8 = 0{,}96"
+      },
+      {
+       "md": "Le coefficient global est 0,96 = 1 − 0,04 : c'est une baisse de 4 %."
+      },
+      {
+       "md": "Le prix final n'est donc pas le prix de départ : les 20 % ne portent pas sur la même base."
+      }
+     ],
+     "answer": "Baisse globale de **4 %**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : calculer un taux",
+     "statement": "Un sac de riz passe de 12 000 FCFA à 13 800 FCFA. Quel est le pourcentage d'augmentation ?",
+     "steps": [
+      {
+       "md": "On calcule la variation puis on divise par la valeur de départ :",
+       "tex": "\\frac{13\\,800 - 12\\,000}{12\\,000} = \\frac{1\\,800}{12\\,000} = 0{,}15"
+      },
+      {
+       "md": "0,15 correspond à 15 %."
+      }
+     ],
+     "answer": "Hausse de **15 %**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 : fractions et écriture scientifique",
+     "statement": "Calcule $\\frac{2}{3} + \\frac{3}{4}$ puis écris 0,00045 en écriture scientifique.",
+     "steps": [
+      {
+       "md": "Dénominateur commun 12 :",
+       "tex": "\\frac{2}{3} + \\frac{3}{4} = \\frac{8}{12} + \\frac{9}{12} = \\frac{17}{12}"
+      },
+      {
+       "md": "On déplace la virgule de 4 rangs vers la droite pour obtenir 4,5 : 0,00045 = 4,5 × 10⁻⁴."
+      }
+     ],
+     "answer": "$\\frac{17}{12}$ et $4{,}5 \\times 10^{-4}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner des pourcentages : +10 % puis −10 % ne ramène **pas** au prix initial.\n- Calculer le taux par rapport à la valeur finale au lieu de la valeur de départ.\n- Additionner des fractions en additionnant numérateurs et dénominateurs : $\\frac{1}{2} + \\frac{1}{3} \\neq \\frac{2}{5}$.\n- Écrire $0{,}15 = 1{,}5\\,\\%$ : 0,15 = 15 %.\n- Oublier de diviser (et non soustraire) pour retrouver le prix avant une baisse."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-a-cal-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dans une tontine, la somme reçue peut être comparée aux cotisations versées pour calculer un taux : le calcul est le même que pour un prix.",
+      "Les taux officiels (TVA, etc.) ne figurent pas ici : utilise toujours ceux qui te sont donnés dans l'énoncé."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact de seconde A à vérifier : les notions de proportionnalité et de pourcentages peuvent être traitées en plusieurs séquences.",
+    "Tous les prix sont fictifs ; aucun taux officiel (TVA, intérêts) n'est utilisé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-a-cal-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule 20 % de 35 000 FCFA.",
+   "answer": 7000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "$\\frac{20}{100} \\times 35\\,000 = 7\\,000$ FCFA.",
+   "method": "t % de V = V × t/100.",
+   "mistakes": [
+    "Calculer 35 000 × 20 sans diviser par 100."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel coefficient multiplicateur correspond à une augmentation de 8 % ?",
+   "choices": [
+    "0,08",
+    "1,08",
+    "0,92",
+    "8"
+   ],
+   "answer": 1,
+   "explanation": "Augmenter de 8 % : on garde 100 % et on ajoute 8 %, soit 108 % = 1,08.",
+   "method": "1 + t/100 pour une hausse.",
+   "mistakes": [
+    "Confondre 8 % et 0,08.",
+    "Utiliser 1 − 0,08 qui correspond à une baisse."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un article passe de 12 000 FCFA à 13 800 FCFA. De quel pourcentage a-t-il augmenté ?",
+   "answer": 15,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "(13 800 − 12 000)/12 000 = 1 800/12 000 = 0,15 = 15 %.",
+   "method": "(finale − initiale) ÷ initiale.",
+   "mistakes": [
+    "Diviser par 13 800 (valeur finale)."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Vrai ou faux : si un prix augmente de 10 % puis diminue de 10 %, il revient à sa valeur de départ.",
+   "answer": false,
+   "explanation": "Coefficient global : 1,1 × 0,9 = 0,99 : le prix a baissé de 1 %. La baisse de 10 % s'applique à un prix plus grand que le prix de départ.",
+   "method": "Multiplier les coefficients.",
+   "mistakes": [
+    "Additionner +10 % et −10 % pour obtenir 0 %."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Après une baisse de 25 %, un article coûte 18 000 FCFA. Quel était son prix avant la baisse ?",
+   "answer": 24000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "Coefficient : 0,75. Prix initial = 18 000 ÷ 0,75 = 24 000 FCFA. Contrôle : 24 000 × 0,75 = 18 000.",
+   "method": "Valeur initiale = valeur finale ÷ coefficient.",
+   "mistakes": [
+    "Calculer 18 000 × 1,25 = 22 500 (ajouter 25 % au prix final)."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Une boutique de Douala achète un sac de riz 28 000 FCFA. Elle le revend avec une marge de 25 % sur le prix d'achat. Pendant les soldes, elle fait ensuite une remise de 10 % sur ce prix de vente (prix fictifs).",
+   "method": "Convertir chaque pourcentage en coefficient, puis multiplier.",
+   "mistakes": [
+    "Calculer +25 % − 10 % = +15 %."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "parts": [
+    {
+     "id": "2nde-maths-a-cal-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le prix de revente avant les soldes ?",
+     "answer": 35000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "28 000 × 1,25 = 35 000 FCFA."
+    },
+    {
+     "id": "2nde-maths-a-cal-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le prix pendant les soldes ?",
+     "answer": 31500,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "35 000 × 0,90 = 31 500 FCFA."
+    },
+    {
+     "id": "2nde-maths-a-cal-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quel est le pourcentage d'évolution global entre le prix d'achat et le prix soldé ?",
+     "answer": 12.5,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "(31 500 − 28 000)/28 000 = 3 500/28 000 = 0,125 = 12,5 %."
+    },
+    {
+     "id": "2nde-maths-a-cal-06-d",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quel est le coefficient multiplicateur global ?",
+     "choices": [
+      "1,125",
+      "1,15",
+      "1,35",
+      "0,85"
+     ],
+     "answer": 0,
+     "explanation": "1,25 × 0,9 = 1,125, ce qui correspond à une hausse de 12,5 %."
+    }
+   ],
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "25 % de 80 vaut :",
+   "choices": [
+    "25",
+    "20",
+    "32",
+    "55"
+   ],
+   "answer": 1,
+   "explanation": "80 × 25/100 = 20.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "$\\frac{1}{2} + \\frac{1}{4}$ est égal à :",
+   "choices": [
+    "$\\frac{2}{6}$",
+    "$\\frac{1}{6}$",
+    "$\\frac{3}{4}$",
+    "$\\frac{2}{4}$"
+   ],
+   "answer": 2,
+   "explanation": "$\\frac{1}{2} = \\frac{2}{4}$, donc $\\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4}$.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "$3 \\times 10^4$ est égal à :",
+   "choices": [
+    "3 000",
+    "300 000",
+    "12",
+    "30 000"
+   ],
+   "answer": 3,
+   "explanation": "10⁴ = 10 000, donc 3 × 10 000 = 30 000.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Une baisse de 30 % correspond au coefficient :",
+   "choices": [
+    "0,70",
+    "0,30",
+    "1,30",
+    "0,03"
+   ],
+   "answer": 0,
+   "explanation": "Baisse de 30 % : 100 % − 30 % = 70 %, soit 0,70.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-cal-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Un article de 8 000 FCFA est vendu 10 000 FCFA. Le pourcentage de hausse est :",
+   "choices": [
+    "20 %",
+    "25 %",
+    "2 000 %",
+    "80 %"
+   ],
+   "answer": 1,
+   "explanation": "(10 000 − 8 000)/8 000 = 2 000/8 000 = 0,25 = 25 %.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-a-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 1 — Pourcentages (5 points). Les prix sont fictifs.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "parts": [
+    {
+     "id": "2nde-maths-a-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Un téléviseur coûte 40 000 FCFA. Il bénéficie d'une réduction de 20 %. Quel est son nouveau prix ?",
+     "answer": 32000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "40 000 × 0,80 = 32 000 FCFA."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Après une hausse de 12 %, un article coûte 33 600 FCFA. Quel était son prix avant la hausse ?",
+     "answer": 30000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "Coefficient 1,12 : prix initial = 33 600 ÷ 1,12 = 30 000 FCFA. Contrôle : 30 000 × 1,12 = 33 600."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Un prix baisse de 15 % puis augmente de 10 %. Quel est le pourcentage d'évolution global ?",
+     "answer": -6.5,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "0,85 × 1,10 = 0,935 = 1 − 0,065 : baisse de 6,5 %, donc −6,5."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex1-d",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Un prix augmente de 50 % puis baisse de 50 % : il revient à sa valeur de départ.",
+     "answer": false,
+     "explanation": "1,5 × 0,5 = 0,75 : le prix a baissé de 25 %."
+    }
+   ],
+   "lesson": "2nde-maths-a-calcul",
+   "chapter": "2nde-maths-a-ch-calcul"
+  }
+ ]
+}

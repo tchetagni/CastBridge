@@ -1,0 +1,564 @@
+{
+ "chapter": "2nde-maths-c-ch-vecteurs",
+ "lessons": [
+  {
+   "id": "2nde-maths-c-vecteurs",
+   "title": "Vecteurs et géométrie analytique du plan",
+   "minutes": 45,
+   "programRef": "2nde C — Vecteurs, coordonnées, colinéarité, barycentre (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Calculer les coordonnées d'un vecteur, d'un milieu et une distance.",
+    "Utiliser le déterminant pour la colinéarité, l'alignement et le parallélisme.",
+    "Reconnaître un parallélogramme par une égalité de vecteurs.",
+    "Calculer les coordonnées d'un barycentre de deux points pondérés."
+   ],
+   "prerequisites": [
+    "2nde-maths-c-calcul"
+   ],
+   "exercises": [
+    "2nde-maths-c-vec-01",
+    "2nde-maths-c-vec-02",
+    "2nde-maths-c-vec-03",
+    "2nde-maths-c-vec-04",
+    "2nde-maths-c-vec-05",
+    "2nde-maths-c-vec-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-c-vec-q1",
+    "2nde-maths-c-vec-q2",
+    "2nde-maths-c-vec-q3",
+    "2nde-maths-c-vec-q4",
+    "2nde-maths-c-vec-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vecteur et coordonnées",
+     "md": "Un vecteur $\\vec{AB}$ est défini par une direction, un sens et une longueur. Dans un repère, si $A(x_A ; y_A)$ et $B(x_B ; y_B)$ :",
+     "tex": "\\vec{AB}\\,(x_B - x_A \\, ; \\, y_B - y_A)"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Égalité et opérations",
+     "md": "- $\\vec{AB} = \\vec{DC}$ équivaut à : ABCD est un **parallélogramme** (éventuellement aplati).\n- Pour $\\vec{u}(x ; y)$ et $\\vec{v}(x' ; y')$ : $\\vec{u} + \\vec{v}$ a pour coordonnées $(x + x' ; y + y')$ et $k\\vec{u}$ a pour coordonnées $(kx ; ky)$.\n- **Relation de Chasles** : $\\vec{AB} + \\vec{BC} = \\vec{AC}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Milieu et distance (repère orthonormé)",
+     "md": "Le milieu I de [AB] et la longueur AB valent :",
+     "tex": "I\\left(\\frac{x_A + x_B}{2} \\, ; \\, \\frac{y_A + y_B}{2}\\right) \\qquad AB = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Colinéarité",
+     "md": "Deux vecteurs $\\vec{u}(x ; y)$ et $\\vec{v}(x' ; y')$ sont **colinéaires** (l'un est un multiple de l'autre) si et seulement si leur **déterminant** est nul :",
+     "tex": "xy' - x'y = 0"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Alignement et parallélisme",
+     "md": "- A, B, C sont **alignés** si et seulement si $\\vec{AB}$ et $\\vec{AC}$ sont colinéaires.\n- Les droites (AB) et (CD) sont **parallèles** si et seulement si $\\vec{AB}$ et $\\vec{CD}$ sont colinéaires.\nOn calcule les coordonnées des deux vecteurs, puis le déterminant."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Barycentre",
+     "md": "Soit A et B deux points et a, b deux réels avec a + b ≠ 0. Le **barycentre** G de (A, a), (B, b) est le point défini par $a\\vec{GA} + b\\vec{GB} = \\vec{0}$. Il se situe sur la droite (AB). Si a = b, c'est le milieu de [AB] (isobarycentre)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Coordonnées du barycentre",
+     "md": "Pour G barycentre de (A, a) et (B, b), avec a + b ≠ 0 :",
+     "tex": "x_G = \\frac{a x_A + b x_B}{a + b} \\qquad y_G = \\frac{a y_A + b y_B}{a + b}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : démontrer une propriété géométrique",
+     "md": "1. Choisir un repère adapté (souvent donné).\n2. Calculer les coordonnées des points ou des vecteurs utiles.\n3. Utiliser le bon outil : déterminant (parallélisme, alignement), distances (triangle isocèle, rectangle avec Pythagore), milieu (diagonales d'un parallélogramme).\n4. Conclure par une phrase."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 6,
+      "ymin": -1,
+      "ymax": 5,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [],
+      "points": [
+       {
+        "x": 0,
+        "y": 0,
+        "label": "A",
+        "color": "blue"
+       },
+       {
+        "x": 4,
+        "y": 1,
+        "label": "B",
+        "color": "blue"
+       },
+       {
+        "x": 5,
+        "y": 4,
+        "label": "C",
+        "color": "blue"
+       },
+       {
+        "x": 1,
+        "y": 3,
+        "label": "D",
+        "color": "blue"
+       },
+       {
+        "x": 2.5,
+        "y": 2,
+        "label": "I",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 4,
+        "y2": 1,
+        "color": "blue"
+       },
+       {
+        "x1": 4,
+        "y1": 1,
+        "x2": 5,
+        "y2": 4,
+        "color": "blue"
+       },
+       {
+        "x1": 5,
+        "y1": 4,
+        "x2": 1,
+        "y2": 3,
+        "color": "blue"
+       },
+       {
+        "x1": 1,
+        "y1": 3,
+        "x2": 0,
+        "y2": 0,
+        "color": "blue"
+       },
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 5,
+        "y2": 4,
+        "dash": true,
+        "color": "grey"
+       },
+       {
+        "x1": 4,
+        "y1": 1,
+        "x2": 1,
+        "y2": 3,
+        "dash": true,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "Parallélogramme ABCD avec A(0 ; 0), B(4 ; 1), C(5 ; 4), D(1 ; 3). Ses diagonales (pointillés) se coupent en leur milieu commun I(2,5 ; 2).",
+     "alt": "Un quadrilatère ABCD dont les côtés opposés sont parallèles. Les deux diagonales, tracées en pointillés, se croisent au point I, qui est le milieu de chacune."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : coordonnées, milieu, distance",
+     "statement": "Dans un repère orthonormé, A(−1 ; 2), B(3 ; −1) et C(5 ; 4). Calcule les coordonnées de $\\vec{AB}$ et $\\vec{AC}$, du milieu I de [BC], et la longueur AB.",
+     "steps": [
+      {
+       "md": "Coordonnées des vecteurs :",
+       "tex": "\\vec{AB}(3 - (-1) \\, ; \\, -1 - 2) = (4 \\, ; \\, -3) \\qquad \\vec{AC}(6 \\, ; \\, 2)"
+      },
+      {
+       "md": "Milieu de [BC] :",
+       "tex": "I\\left(\\frac{3 + 5}{2} \\, ; \\, \\frac{-1 + 4}{2}\\right) = (4 \\, ; \\, 1{,}5)"
+      },
+      {
+       "md": "Longueur AB :",
+       "tex": "AB = \\sqrt{4^2 + (-3)^2} = \\sqrt{25} = 5"
+      }
+     ],
+     "answer": "$\\vec{AB}(4 ; -3)$, $\\vec{AC}(6 ; 2)$, $I(4 ; 1{,}5)$ et $AB = 5$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : colinéarité et alignement",
+     "statement": "Les vecteurs $\\vec{u}(3 ; -6)$ et $\\vec{v}(-2 ; 4)$ sont-ils colinéaires ? Les points A(1 ; 1), B(3 ; 2) et C(7 ; 4) sont-ils alignés ?",
+     "steps": [
+      {
+       "md": "Déterminant de u et v :",
+       "tex": "3 \\times 4 - (-2) \\times (-6) = 12 - 12 = 0"
+      },
+      {
+       "md": "Il est nul : u et v sont colinéaires (en effet $\\vec{v} = -\\frac{2}{3}\\vec{u}$)."
+      },
+      {
+       "md": "Pour A, B, C : $\\vec{AB}(2 ; 1)$ et $\\vec{AC}(6 ; 3)$ ; leur déterminant vaut",
+       "tex": "2 \\times 3 - 6 \\times 1 = 0"
+      },
+      {
+       "md": "Les vecteurs sont colinéaires et ont le point A en commun : A, B, C sont alignés."
+      }
+     ],
+     "answer": "**u et v sont colinéaires ; A, B, C sont alignés.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : barycentre",
+     "statement": "Soit A(1 ; 2) et B(6 ; −3). Détermine les coordonnées du barycentre G de (A, 2) et (B, 3).",
+     "steps": [
+      {
+       "md": "La somme des coefficients est 2 + 3 = 5 ≠ 0. On applique la formule :",
+       "tex": "x_G = \\frac{2 \\times 1 + 3 \\times 6}{5} = \\frac{20}{5} = 4"
+      },
+      {
+       "md": "Pour l'ordonnée :",
+       "tex": "y_G = \\frac{2 \\times 2 + 3 \\times (-3)}{5} = \\frac{-5}{5} = -1"
+      },
+      {
+       "md": "Contrôle : G est plus proche de B (coefficient 3) que de A : en abscisse, 4 est plus près de 6 que de 1."
+      }
+     ],
+     "answer": "$G(4 ; -1)$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $\\vec{AB} = (x_A - x_B ; y_A - y_B)$ : c'est « arrivée − départ ».\n- Utiliser la formule de distance dans un repère qui n'est pas orthonormé.\n- Se tromper de signe dans le déterminant : $xy' - x'y$, pas $xy' + x'y$.\n- Oublier de vérifier a + b ≠ 0 pour un barycentre.\n- Conclure à l'alignement avec un seul vecteur : il faut que $\\vec{AB}$ et $\\vec{AC}$ soient colinéaires."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-c-vec-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'isobarycentre d'un triangle est son centre de gravité : $x_G = \\frac{x_A + x_B + x_C}{3}$ et de même pour y.",
+      "On peut aussi montrer qu'un barycentre ne change pas si on multiplie tous les coefficients par un même réel non nul."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si le barycentre de trois points (ou plus) est au programme de seconde C ; ici il est surtout traité pour deux points.",
+    "Le produit scalaire et l'orthogonalité ne sont pas traités ici (souvent en 1re) : à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-c-vec-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans un repère orthonormé, A(1 ; 2) et B(4 ; 6). Calcule la distance AB.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "$AB = \\sqrt{(4-1)^2 + (6-2)^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$.",
+   "method": "Différences de coordonnées, carrés, somme, racine.",
+   "mistakes": [
+    "Additionner 3 + 4 = 7 sans passer par les carrés."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelles sont les coordonnées du milieu de [AB] avec A(−2 ; 5) et B(6 ; 1) ?",
+   "choices": [
+    "(4 ; 6)",
+    "(2 ; 3)",
+    "(−4 ; 2)",
+    "(8 ; −4)"
+   ],
+   "answer": 1,
+   "explanation": "Abscisse : (−2 + 6)/2 = 2 ; ordonnée : (5 + 1)/2 = 3.",
+   "method": "Moyenne des abscisses et moyenne des ordonnées.",
+   "mistakes": [
+    "Oublier de diviser par 2 : (4 ; 6).",
+    "Calculer les coordonnées du vecteur AB : (8 ; −4)."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Les vecteurs $\\vec{u}(2 ; m)$ et $\\vec{v}(3 ; 9)$ sont colinéaires. Calcule m.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Déterminant nul : 2 × 9 − 3 × m = 0, donc 18 = 3m et m = 6. (Vérification : $\\vec{v} = 1{,}5\\vec{u}$.)",
+   "method": "xy' − x'y = 0.",
+   "mistakes": [
+    "Écrire 2 × 3 − 9m = 0 en mélangeant les coordonnées."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Vrai ou faux : les points A(2 ; 1), B(5 ; 3) et C(11 ; 7) sont alignés.",
+   "answer": true,
+   "explanation": "$\\vec{AB}(3 ; 2)$ et $\\vec{AC}(9 ; 6)$. Déterminant : 3 × 6 − 9 × 2 = 18 − 18 = 0. Les vecteurs sont colinéaires : les points sont alignés.",
+   "method": "Déterminant de AB et AC.",
+   "mistakes": [
+    "Comparer seulement les abscisses ou seulement les ordonnées."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "ABCD est un parallélogramme avec A(1 ; 1), B(4 ; 2) et C(6 ; 5). Calcule l'ordonnée de D.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "ABCD parallélogramme équivaut à $\\vec{AB} = \\vec{DC}$. $\\vec{AB}(3 ; 1)$ et $\\vec{DC}(6 - x_D ; 5 - y_D)$ : 6 − xD = 3 donne xD = 3, et 5 − yD = 1 donne yD = 4. D(3 ; 4).",
+   "method": "Écrire l'égalité vectorielle AB = DC et en déduire les coordonnées de D.",
+   "mistakes": [
+    "Utiliser $\\vec{AB} = \\vec{CD}$ (mauvais sens) et trouver D(9 ; 6)."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Dans un repère orthonormé, on donne les points A(−2 ; 1), B(4 ; 3) et C(2 ; −3).",
+   "method": "Calculer d'abord les coordonnées des vecteurs, puis choisir déterminant, distances ou barycentre.",
+   "mistakes": [
+    "Appliquer la formule du barycentre en oubliant un point."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "parts": [
+    {
+     "id": "2nde-maths-c-vec-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le déterminant de $\\vec{AB}$ et $\\vec{AC}$.",
+     "answer": -32,
+     "tolerance": 0,
+     "explanation": "$\\vec{AB}(6 ; 2)$ et $\\vec{AC}(4 ; -4)$. Déterminant : 6 × (−4) − 4 × 2 = −24 − 8 = −32."
+    },
+    {
+     "id": "2nde-maths-c-vec-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que peut-on en déduire ?",
+     "choices": [
+      "A, B et C ne sont pas alignés",
+      "A, B et C sont alignés",
+      "ABC est rectangle en A",
+      "(AB) et (AC) sont parallèles"
+     ],
+     "answer": 0,
+     "explanation": "Le déterminant est non nul : les vecteurs ne sont pas colinéaires, donc A, B, C ne sont pas alignés (ABC est un vrai triangle)."
+    },
+    {
+     "id": "2nde-maths-c-vec-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $BC^2$.",
+     "answer": 40,
+     "tolerance": 0,
+     "explanation": "$\\vec{BC}(-2 ; -6)$ donc $BC^2 = 4 + 36 = 40$. Or $AB^2 = 36 + 4 = 40$ : AB = BC, le triangle est isocèle en B."
+    },
+    {
+     "id": "2nde-maths-c-vec-06-d",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "G est le barycentre de (A, 2), (B, 1) et (C, 1). Calcule l'abscisse de G.",
+     "answer": 0.5,
+     "tolerance": 0,
+     "explanation": "La somme des coefficients est 4. $x_G = \\frac{2 \\times (-2) + 4 + 2}{4} = \\frac{2}{4} = 0{,}5$. (Pour l'ordonnée : (2 + 3 − 3)/4 = 0,5.)"
+    }
+   ],
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "A(2 ; 3) et B(7 ; 1). Les coordonnées de $\\vec{AB}$ sont :",
+   "choices": [
+    "(−5 ; 2)",
+    "(5 ; −2)",
+    "(9 ; 4)",
+    "(5 ; 2)"
+   ],
+   "answer": 1,
+   "explanation": "Arrivée − départ : (7 − 2 ; 1 − 3) = (5 ; −2).",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Si $\\vec{AB} = \\vec{DC}$, alors ABCD est :",
+   "choices": [
+    "un carré",
+    "un trapèze quelconque",
+    "un parallélogramme",
+    "un losange"
+   ],
+   "answer": 2,
+   "explanation": "C'est la caractérisation vectorielle d'un parallélogramme (éventuellement aplati).",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Les vecteurs $(2 ; 5)$ et $(4 ; 10)$ sont :",
+   "choices": [
+    "orthogonaux",
+    "égaux",
+    "de même longueur",
+    "colinéaires"
+   ],
+   "answer": 3,
+   "explanation": "Déterminant : 2 × 10 − 4 × 5 = 0.",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Le barycentre de (A, 1) et (B, 3) avec A(0 ; 0) et B(4 ; 8) est :",
+   "choices": [
+    "(3 ; 6)",
+    "(2 ; 4)",
+    "(1 ; 2)",
+    "(4 ; 8)"
+   ],
+   "answer": 0,
+   "explanation": "x = (0 + 3 × 4)/4 = 3 et y = (0 + 3 × 8)/4 = 6. G est proche de B, plus lourd.",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-vec-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Pour calculer une distance avec la formule des coordonnées, le repère doit être :",
+   "choices": [
+    "quelconque",
+    "orthonormé",
+    "seulement orthogonal",
+    "gradué en FCFA"
+   ],
+   "answer": 1,
+   "explanation": "La formule vient du théorème de Pythagore, qui exige des axes perpendiculaires et des unités égales.",
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  },
+  {
+   "id": "2nde-maths-c-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 3 — Géométrie analytique et trigonométrie (6 points). Dans un repère orthonormé, A(1 ; 2), B(5 ; 4) et C(4 ; 7).",
+   "source": "Exercice original, style devoir de 2nde C",
+   "parts": [
+    {
+     "id": "2nde-maths-c-blanc-ex3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "ABCD est un parallélogramme. Calcule l'ordonnée de D.",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "AB = DC : $\\vec{AB}(4 ; 2)$ et $\\vec{DC}(4 - x_D ; 7 - y_D)$ donnent xD = 0 et yD = 5."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'abscisse du milieu I de [AC].",
+     "answer": 2.5,
+     "tolerance": 0,
+     "explanation": "xI = (1 + 4)/2 = 2,5. (Le milieu de [BD] est aussi (2,5 ; 4,5), ce qui confirme que ABCD est un parallélogramme.)"
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex3-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le déterminant de $\\vec{AB}$ et $\\vec{AC}$.",
+     "answer": 14,
+     "tolerance": 0,
+     "explanation": "$\\vec{AB}(4 ; 2)$ et $\\vec{AC}(3 ; 5)$ : 4 × 5 − 3 × 2 = 14, non nul : A, B, C ne sont pas alignés."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex3-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Soit x dans $\\left[0 ; \\frac{\\pi}{2}\\right]$ tel que $\\cos x = \\frac{5}{13}$. Calcule tan x (arrondi à 0,001).",
+     "answer": 2.4,
+     "tolerance": 0.001,
+     "explanation": "sin² x = 1 − 25/169 = 144/169, donc sin x = 12/13 (positif dans le premier quadrant). tan x = (12/13)/(5/13) = 12/5 = 2,4."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex3-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "L'image de C par l'homothétie de centre A et de rapport 3 est C'. Calcule l'abscisse de C'.",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "$\\vec{AC'} = 3\\vec{AC} = (9 ; 15)$. Donc $x_{C'} = 1 + 9 = 10$ (et $y_{C'} = 2 + 15 = 17$)."
+    }
+   ],
+   "lesson": "2nde-maths-c-vecteurs",
+   "chapter": "2nde-maths-c-ch-vecteurs"
+  }
+ ]
+}
