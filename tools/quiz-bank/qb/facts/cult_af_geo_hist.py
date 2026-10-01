@@ -61,8 +61,6 @@ rows("af-geo-hist", "AF", "Afrique : fleuves et lacs", [
      ["L'Athi-Galana", "La Nzoia", "L'Ewaso Ng'iro", "L'Omo"], "La Tana prend sa source dans les monts Aberdare, près du mont Kenya, et se jette dans l'océan Indien."),
     (5, "Quel est le plus long cours d'eau du Maroc, qui s'enfonce vers le Sahara ?", "Le Draâ",
      ["Le Sebou", "La Moulouya", "L'Oum Er-Rbia", "Le Tensift"], "Le Draâ, long d'environ 1 100 km, est souvent à sec dans son cours inférieur."),
-    (5, "Quel est le plus long cours d'eau d'Algérie ?", "Le Chélif",
-     ["La Soummam", "Le Rhumel", "La Medjerda", "La Saoura"], "Le Chélif prend sa source dans l'Atlas saharien et se jette dans la Méditerranée près de Mostaganem."),
     (5, "Quel est le plus long fleuve de Tunisie, dont la source se situe en Algérie ?", "La Medjerda",
      ["Le Chélif", "Le Zéroud", "Le Miliane", "Le Sebou"], "La Medjerda se jette dans le golfe de Tunis."),
     (4, "Quel explorateur britannique atteignit en 1858 le lac qu'il baptisa Victoria et affirma qu'il était la source du Nil ?", "John Hanning Speke",
@@ -182,7 +180,7 @@ rows("af-geo-hist", "AF", "Afrique : reliefs, déserts et îles", [
      ["Madagascar", "Zanzibar", "La Réunion", "Les Seychelles"], "Le dodo a disparu environ un siècle après l'arrivée des Européens."),
     (5, "Quel îlot de São Tomé-et-Príncipe est traversé par l'équateur ?", "L'Ilhéu das Rolas",
      ["Bioko", "Annobón", "Príncipe", "Corisco"], "Un monument sur l'îlot matérialise la ligne de l'équateur."),
-    (2, "Quelle île du golfe de Guinée abrite la capitale de la Guinée équatoriale, Malabo ?", "Bioko",
+    (2, "Quelle île du golfe de Guinée abrite la ville de Malabo ?", "Bioko",
      ["Annobón", "Príncipe", "São Tomé", "Corisco"], "Bioko s'appelait autrefois Fernando Poo."),
     (1, "À quel pays appartiennent les îles Canaries, situées au large du Maroc ?", "L'Espagne",
      ["Le Portugal", "Le Maroc", "La France", "La Mauritanie"], "Les Canaries sont une communauté autonome espagnole."),
@@ -664,7 +662,7 @@ rows("af-geo-hist", "AF", "Afrique : traite et colonisation", [
      ["La Belgique", "Le Portugal", "Le Royaume-Uni", "L'Italie"], "La Namibie s'appelait alors Sud-Ouest africain allemand."),
     (3, "Quel gouverneur français a créé en 1857 les tirailleurs sénégalais ?", "Louis Faidherbe",
      ["Joseph Gallieni", "Hubert Lyautey", "Pierre Savorgnan de Brazza", "Thomas Bugeaud"], "Faidherbe a été gouverneur du Sénégal dans les années 1850-1860."),
-    (2, "Comment appelait-on les soldats des troupes coloniales françaises recrutés en Afrique noire, qui ont combattu dans les deux guerres mondiales ?", "Les tirailleurs sénégalais",
+    (2, "Comment appelait-on les soldats des troupes coloniales françaises recrutés en Afrique subsaharienne, qui ont combattu dans les deux guerres mondiales ?", "Les tirailleurs sénégalais",
      ["Les zouaves", "Les spahis", "Les harkis", "Les gurkhas"], "Ils venaient en réalité de nombreux territoires d'Afrique de l'Ouest et centrale."),
     (4, "Quel gouverneur du Tchad a rallié sa colonie à la France libre en août 1940 ?", "Félix Éboué",
      ["Philippe Leclerc", "Blaise Diagne", "Léopold Senghor", "Charles Mangin"], "Ce ralliement a ouvert à la France libre un territoire africain."),
@@ -698,8 +696,6 @@ rows("af-geo-hist", "AF", "Afrique : décolonisation et organisations", [
      ["Gamal Abdel Nasser", "Kwame Nkrumah", "Habib Bourguiba", "Léopold Senghor"], "Il joua un rôle de médiateur entre les différents courants."),
     (4, "Dans quelle ville sud-africaine l'Union africaine a-t-elle été officiellement lancée en juillet 2002 ?", "Durban",
      ["Johannesburg", "Pretoria", "Le Cap", "Port Elizabeth"], "Elle a succédé à l'OUA."),
-    (5, "Quelle ville libyenne a vu la « déclaration de Syrte », en 1999, qui annonçait la création de l'Union africaine ?", "Syrte",
-     ["Tripoli", "Benghazi", "Tobrouk", "Misrata"], "La déclaration date de septembre 1999."),
     (2, "Quel jour célèbre-t-on la Journée de l'Afrique, en souvenir de la création de l'OUA ?", "Le 25 mai",
      ["Le 1er mai", "Le 9 juillet", "Le 1er janvier", "Le 11 novembre"], "Le 9 juillet est la date du lancement de l'Union africaine, en 2002."),
     (2, "Quelle organisation d'Afrique de l'Ouest a été créée en 1975 par le traité de Lagos ?", "La CEDEAO",
@@ -778,8 +774,6 @@ rows("af-geo-hist", "AF", "Afrique : apartheid et Afrique du Sud", [
      ["Newlands", "Loftus Versfeld", "Kings Park", "Soccer City"], "L'Afrique du Sud a battu la Nouvelle-Zélande en prolongation."),
     (2, "En quelle année Nelson Mandela a-t-il été élu président de l'Afrique du Sud, premier scrutin multiracial ?", "1994",
      ["1990", "1991", "1996", "1999"], "Il a quitté la présidence en 1999."),
-    (1, "Quel sport est lié à l'emblème des « Springboks », l'équipe nationale sud-africaine de rugby ?", "Le rugby",
-     ["Le cricket", "Le football", "Le tennis", "Le basket"], "Le mot Springbok désigne une antilope."),
 ])
 
 # ---------------------------------------------------------------- figures de l'indépendance (décédées) et conflits
@@ -798,8 +792,6 @@ rows("af-geo-hist", "AF", "Afrique : figures de l'histoire", [
      ["U Thant", "Kofi Annan", "Trygve Lie", "Boutros Boutros-Ghali"], "Il se rendait à une négociation sur le Congo."),
     (3, "En quelle année Mobutu a-t-il pris le pouvoir par un coup d'État au Congo ?", "1965",
      ["1960", "1961", "1971", "1997"], "Il a dirigé le pays jusqu'en 1997."),
-    (3, "Quel militaire a pris en 1952, avec les Officiers libres, la tête du coup d'État qui a renversé le roi Farouk, avant de présider l'Égypte ?", "Gamal Abdel Nasser",
-     ["Anouar el-Sadate", "Hosni Moubarak", "Mohamed Naguib", "Ahmed Urabi"], "Mohamed Naguib fut le premier président de la République, en 1953."),
     (3, "Quel président égyptien a reçu en 1978 le prix Nobel de la paix, avec Menahem Begin, après les accords de Camp David ?", "Anouar el-Sadate",
      ["Gamal Abdel Nasser", "Hosni Moubarak", "Mohamed Naguib", "Boutros Boutros-Ghali"], "Il a été assassiné en 1981."),
     (3, "Quel dirigeant a proclamé la République tunisienne en 1957 et en a été le premier président ?", "Habib Bourguiba",
@@ -830,7 +822,7 @@ rows("af-geo-hist", "AF", "Afrique : Rwanda, mémoire", [
 
 # ---------------------------------------------------------------- tableaux
 table("af-geo-hist", "AF", "Afrique : histoire", [
-    ("la conférence de Berlin (ouverture)", "1884", 3), ("la bataille d'Adwa", "1896", 3), ("le premier Congrès panafricain à Paris", "1919", 5),
+    ("la conférence de Berlin (ouverture)", "1884", 3), ("la bataille d'Adwa", "1896", 3), 
     ("la création de l'OUA", "1963", 3), ("le massacre de Sharpeville", "1960", 4), ("le soulèvement de Soweto", "1976", 3),
     ("la libération de Nelson Mandela", "1990", 3), ("la crise de Suez", "1956", 4), ("la prise d'Alger par la France", "1830", 4),
 ], "En quelle année a eu lieu {a} ?", None, diff=3, expl="{a} : {b}.")
