@@ -66,7 +66,15 @@ class ReceiverServer(
     private val streamUse: StreamUse = StreamUse(),
     /** Virtual folders of the library (see [FolderIndex]); null = no folders (the library stays a flat list). */
     private val folders: FolderIndex? = null,
+    /**
+     * Identity of clients that arrive through the Bluetooth API tunnel (castbridge.core.tunnel): all of them come from loopback, so
+     * PIN failures are counted against "bt:<address>" instead of one shared "127.0.0.1" (one device never locks the others, nor Wi-Fi).
+     */
+    private val peers: castbridge.core.ssh.PeerRegistry? = null,
 ) : NanoHTTPD(port) {
+
+    override fun createClientHandler(finalAccept: java.net.Socket, inputStream: java.io.InputStream): NanoHTTPD.ClientHandler =
+        super.createClientHandler(castbridge.core.tunnel.AttributedSocket.of(finalAccept, peers), inputStream)
 
     /** Single internal folder (tests, simple setups). */
     constructor(
@@ -423,7 +431,7 @@ class ReceiverServer(
     /** Null when the request may proceed, else 401 (with Connection: close: an unread PUT body would corrupt keep-alive). */
     private fun denied(s: IHTTPSession, p: Map<String, String>): Response? {
         val g = guard ?: return null
-        val ip = s.remoteIpAddress ?: "?"
+        val ip = peers?.keyOfAddress(s.remoteIpAddress) ?: s.remoteIpAddress ?: "?"
         val tok = s.headers["x-cb-token"] ?: p["token"]
         if (tok != null && tokenAuth != null) {
             if (tokenAuth.invoke(tok) != null) {

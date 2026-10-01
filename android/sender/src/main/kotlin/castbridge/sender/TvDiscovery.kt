@@ -6,7 +6,13 @@ import android.net.nsd.NsdServiceInfo
 import android.net.wifi.WifiManager
 import android.util.Log
 import castbridge.core.tv.ReceiverServer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.StateFlow
 import java.util.ArrayDeque
 
@@ -22,7 +28,11 @@ class TvDiscovery(ctx: Context) {
     private val app = ctx.applicationContext
     private val nsd = app.getSystemService(NsdManager::class.java)
     private val _tvs = MutableStateFlow<List<Tv>>(emptyList())
-    val tvs: StateFlow<List<Tv>> = _tvs
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    /** The TVs of the network; if none answers and the phone's Bluetooth API gateway runs, the TV through it (127.0.0.1, "Bluetooth"). */
+    val tvs: StateFlow<List<Tv>> = combine(_tvs, BtSshGatewayService.state) { lan, gw ->
+        if (lan.isEmpty() && gw.api.running) listOf(Tv("${gw.tv} (Bluetooth)", "127.0.0.1", BtSshGatewayService.API_PORT)) else lan
+    }.stateIn(scope, SharingStarted.WhileSubscribed(5000), emptyList())
     private val queue = ArrayDeque<NsdServiceInfo>()
     private var resolving = false
     private var listener: NsdManager.DiscoveryListener? = null
@@ -58,7 +68,7 @@ class TvDiscovery(ctx: Context) {
     /** Restart discovery, e.g. after a network change, so the TV's new address is found. */
     fun restart() { stop(); _tvs.value = emptyList(); start() }
 
-    fun find(name: String): Tv? = _tvs.value.firstOrNull { it.name == name }
+    fun find(name: String): Tv? = tvs.value.firstOrNull { it.name == name } ?: _tvs.value.firstOrNull { it.name == name }
 
     @Synchronized private fun enqueue(i: NsdServiceInfo) {
         queue.add(i)

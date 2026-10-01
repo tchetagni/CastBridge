@@ -342,7 +342,7 @@ ordinateur Linux (ProxyCommand) --------------RFCOMM « CastBridge SSH »--> TV 
 - **Verrouillage par appareil** : toutes les connexions tunnelisées arrivent de `127.0.0.1` ; sans précaution, 5 échecs d'un appareil verrouilleraient tous les
   autres. Le tunnel choisit son port source local, l'inscrit dans un registre « port local -> `bt:<adresse>` » **avant** de se connecter, et le serveur SSH compte
   les échecs par cette identité (`PeerRegistry`, tests `BtTunnelSshTest.lockoutIsPerBluetoothDevice`).
-- **Téléphone** : app CastBridge > CastBridge TV > Bluetooth > « Passerelle SSH Bluetooth » : choisir la TV appairée, Démarrer (service de premier plan). Le
+- **Téléphone** : app CastBridge > CastBridge TV > Bluetooth > « Passerelle Bluetooth » (SSH et API, §11) : choisir la TV appairée, Démarrer (service de premier plan). Le
   téléphone écoute sur `127.0.0.1:2222` ; option **désactivée par défaut** « Exposer aussi sur le réseau local / point d'accès du téléphone » (avertissement :
   tout appareil de ces réseaux atteint alors le SSH de la TV, qui exige toujours une clé). Puis :
   - depuis Termux sur le téléphone : `ssh -p 2222 tv@127.0.0.1` ;
@@ -359,3 +359,77 @@ ordinateur Linux (ProxyCommand) --------------RFCOMM « CastBridge SSH »--> TV 
   SFTP/scp** (un fichier de 100 Mo prend 6 à 15 min) : pour les gros fichiers, utiliser le Wi-Fi ou l'envoi Bluetooth de l'app.
 - **Non validé sans la TV** : ouverture du second service RFCOMM par GaiaOS (deux services simultanés), débit réel, comportement si le téléphone et la TV sont
   aussi connectés en audio Bluetooth.
+
+## 11. Tout par Bluetooth (API de la TV sans Wi-Fi)
+
+Besoin : le Wi-Fi n'est pas fiable, mais tout ce que le téléphone ou un ordinateur fait par HTTP (bibliothèque, envoi reprenable, APK et installation,
+télécommande, contrôle parental, clé SSH, capture d'écran…) doit marcher **à l'identique** par Bluetooth. Principe : le **même tunnel d'octets** que pour SSH (§10),
+mais vers l'API HTTP de la TV. Rien n'est réécrit côté TV : le serveur HTTP (port 8765) fait **toujours toute la vérification** (en-tête `X-CB-Pin`, jeton
+`X-CB-Token`, code parental, règles par route) ; le tunnel ne fait que porter les octets.
+
+```
+curl / app téléphone --TCP--> 127.0.0.1:18765 --RFCOMM « CastBridge API »--> TV --TCP--> 127.0.0.1:8765 (API HTTP, inchangée)
+                              (téléphone : passerelle ; Mac : cbt-rfcomm proxy ; Linux : bt-ssh-bridge.py --service api)
+```
+
+**Services RFCOMM de la TV** (sockets sécurisés, appareils appairés seulement) : `…0001` fichiers (CBT1/CBTN/CBTH/CBTR/passerelle), `…0002` SSH (octets SSH bruts),
+`…0003` **API** (UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000003`, nom SDP « CastBridge API »). Le service API répond d'abord **1 octet d'état** (0 = ok, 1 trop de liaisons,
+2 appareil non autorisé, 3 serveur local arrêté, 4 erreur interne), puis relaie du HTTP brut. Le service SSH reste sans octet d'état (compatibilité avec `ssh`, `bt-ssh-bridge.py`).
+
+**Ports locaux sur le téléphone** : SSH `127.0.0.1:2222`, API `127.0.0.1:18765`. L'API n'est **jamais** exposée sur le réseau (seul le SSH offre l'option « réseau local »).
+
+### Qui peut ouvrir une liaison API (règle de confiance)
+1. L'appareil doit être **appairé** (Android l'affirme par le socket sécurisé ; l'adresse n'est jamais celle que l'appareil « annonce »).
+2. Et **soit** l'interrupteur de la TV « API par Bluetooth » est actif (**actif par défaut** : le service fichiers accepte déjà un appareil appairé avec le bon code ;
+   MENU > Administration > « Couper l'API par Bluetooth », ou `POST /api/bluetooth/tunnel/disable`), **soit** l'appareil est un **téléphone de confiance**
+   (`docs/BT-PLUG-AND-PLAY.md`) : coupée, l'API reste donc joignable par les téléphones déjà approuvés, jamais par un autre appareil appairé.
+3. Puis le serveur HTTP demande, comme en Wi-Fi, le **code de la TV** (installation fraîche : un appareil appairé avec le bon code fonctionne ; un téléphone de confiance
+   utilise son jeton, qui n'ouvre toujours pas `/api/ssh*`, `/api/apk/install`, `/api/update/install` : PIN seulement).
+
+### Verrouillage par appareil
+Toutes les liaisons arrivent de `127.0.0.1` ; sans précaution, 5 codes faux d'un appareil verrouilleraient le Wi-Fi et tous les autres appareils. Le tunnel inscrit « port local
+-> `bt:<adresse>` » **avant** de se connecter ; le serveur HTTP (`ReceiverServer`, paramètre `peers`) voit alors cette connexion venir d'une adresse virtuelle stable par appareil
+(`240.77.x.y`, jamais routée) et `PinGuard` compte les échecs par `bt:<adresse>`. Un appareil verrouillé (60 s après 5 échecs) ne gêne ni les autres appareils Bluetooth, ni le Wi-Fi.
+Tests : `BtApiTunnelTest.pinLockoutIsPerBluetoothDevice`, `anotherDeviceCannotUseTheLockedDevicesIdentity`.
+
+### Gros transferts, liaisons, délais
+- `PUT /upload/<nom>?offset=&total=` (reprenable : le `.part` de la TV est le même que pour le Wi-Fi et CBT1) et `Range` sur `/stream/…` passent tels quels (test : 6 Mo coupés au
+  milieu puis repris, lecture `Range`). **Contre-pression** : un tampon fixe de 16 Ko par sens, écritures bloquantes : un disque lent de la TV ralentit l'envoi, rien ne s'accumule.
+- Jusqu'à **4 liaisons simultanées** (HTTP ouvre plusieurs connexions). Silence > **30 s** : liaison fermée (comme `BtServer`) ; **10 min** pendant qu'un transfert ou un déplacement
+  tourne sur la TV. Quand la TV est pleine, la liaison **muette depuis plus de 60 s** est fermée pour faire de la place : **jamais d'emplacement bloqué**.
+- Débit : celui du Bluetooth classique (≈ 100 à 300 ko/s). Un film se copie mieux par Wi-Fi ; la bibliothèque, la télécommande, les réglages et un APK de 30 Mo (≈ 2 à 5 min) sont adaptés.
+
+### Messages d'erreur
+Chaque refus ou échec produit **une ligne de journal INFO** (étiquettes `CastBridgeApiBt`, `CastBridgeSSH` côté TV ; `CastBridgeSshGw` côté téléphone ; jamais de code, jeton ni clé) **et** un
+message en français : sur la TV (MENU > Connexion & réglages : « API par Bluetooth », « SSH par Bluetooth », et `GET /api/bluetooth/tunnel`, `GET /api/ssh` -> `bluetooth.lastError`),
+et sur le panneau « Passerelle Bluetooth » du téléphone.
+
+### Depuis le téléphone (CastBridge)
+Onglet CastBridge TV > Bluetooth > **Passerelle Bluetooth** : choisir la TV, cocher API et/ou SSH, Démarrer. Quand le téléphone n'a **aucun** chemin IP vers la TV
+(ni réseau commun ni Wi-Fi Direct), l'app démarre elle-même la passerelle API (app au premier plan) et l'utilise comme route `BluetoothTunnel`
+(`LinkPlanner`, `PhoneLink`, `TvDiscovery`) : bibliothèque, télécommande, réglages parentaux, assistant, envoi de fichier ou d'APK (HTTP reprenable) et son installation
+fonctionnent alors par Bluetooth. L'envoi de fichier simple garde le chemin CBT1 (inchangé).
+
+### Depuis un Mac (sans téléphone) : `tools/cbt-rfcomm`
+```sh
+swiftc -O -framework IOBluetooth tools/cbt-rfcomm/main.swift -o cbt-rfcomm      # une fois ; Mac appairé avec la TV
+./cbt-rfcomm proxy AA:BB:CC:DD:EE:FF 18765 api &          # 127.0.0.1:18765 -> API de la TV (aucun code saisi ici)
+curl -H "X-CB-Pin: $PIN" http://127.0.0.1:18765/api/hello
+CB_PIN=$PIN tools/cbt-rfcomm/bt-api.sh upload film.mp4     # envoi reprenable ; relancer = reprise
+CB_PIN=$PIN tools/cbt-rfcomm/bt-api.sh upload CastBridge-TV.apk
+CB_PIN=$PIN tools/cbt-rfcomm/bt-api.sh install CastBridge-TV.apk
+CB_PIN=$PIN tools/cbt-rfcomm/bt-api.sh ssh-key ~/.ssh/id_ed25519.pub     # active SSH et inscrit la clé, sans réseau
+./cbt-rfcomm proxy AA:BB:CC:DD:EE:FF 2222 ssh &; ssh -p 2222 tv@127.0.0.1
+```
+Linux : `python3 tools/bt-ssh-bridge.py AA:BB:CC:DD:EE:FF --service api --listen 18765` (même usage de `curl`).
+
+### Diagnostic de l'échec observé (SSH par Bluetooth fermé avant la bannière)
+Constat sur le matériel : passerelle « Active », 0 connexion, 0 ko / 0 ko, **aucune ligne** `CastBridgeSshGw`, mais la pile RFCOMM du téléphone journalise une liaison vers la TV
+« fermée par le pair ». Lecture du code : (1) le téléphone ne journalisait **rien** quand la liaison s'ouvrait puis se fermait aussitôt (chemin « succès » silencieux) ; (2) la TV fermait
+la liaison **sans dire pourquoi** à quatre endroits (emplacements pleins, serveur SSH injoignable, exception, arrêt) ; (3) un emplacement pouvait rester pris indéfiniment (liaison dont
+le téléphone avait disparu sans fermeture RFCOMM : aucune limite de silence, le sshd garde 15 min une session déjà authentifiée ; avec `maxConnections = 2`, deux liaisons zombies
+fermaient ensuite toutes les nouvelles **sans bruit**) ; (4) `connect()` Bluetooth sans délai. La cause exacte sur la TV du propriétaire ne peut pas être établie sans ses journaux :
+la liaison s'ouvre côté téléphone (donc le service est publié et le jumelage valide) et la TV la referme avant tout octet, ce qui désigne **emplacements pleins/zombies** ou
+**serveur SSH injoignable** ; les deux sont maintenant visibles et corrigés (journal TV `ssh: link from … refused: <raison>`, message sur le panneau du téléphone « la TV a fermé la
+liaison avant toute donnée : … », éviction de la liaison muette, délai de 16 min, délai de connexion de 20 s, nouvel essai avec un socket neuf).
+

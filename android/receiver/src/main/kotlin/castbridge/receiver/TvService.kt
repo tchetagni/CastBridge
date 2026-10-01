@@ -109,6 +109,8 @@ class TvService : Service(), Device {
     var wd: WifiDirectGroup? = null; private set
     var usb: UsbImporter? = null; private set
     var ssh: SshControl? = null; private set
+    /** « API par Bluetooth »: the HTTP API over RFCOMM (docs/ADMIN.md). */
+    var btApi: BtApiControl? = null; private set
     var updater: UpdateInstaller? = null; private set
     var gateway: BtGatewayHost? = null; private set
     @Volatile var screen: Screen? = null; private set
@@ -176,6 +178,7 @@ class TvService : Service(), Device {
         // Thumbnails only while nothing plays (one decode at a time on this TV).
         library = Thumbnailer.provider(this, canRun = { playerBridge.state().state in setOf("idle", "ended", "error") },
             onThumb = { n -> screen?.thumbReady(n) })
+        btApi = BtApiControl(this, prefs, ::btBonded, ::btTrusted, { (server?.activeTransfers() ?: 0) > 0 }) { setStatus("4-api-bt", it) }
         startServer()
         register()
         bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted) { setStatus("1-bt", it) }
@@ -211,7 +214,7 @@ class TvService : Service(), Device {
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
             publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
-            tokenAuth = trust::verifyToken,
+            tokenAuth = trust::verifyToken, peers = btApi?.peers,
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
             contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex)
         try {
@@ -282,6 +285,7 @@ class TvService : Service(), Device {
     fun onPermissionsReady() {
         hookCapture()
         bt?.start()
+        btApi?.start()
         gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted, ::gatewayStatus)
         gateway?.start()
         // Wi-Fi Direct is opt-in (MENU): creating a group can disturb the TV's own Wi-Fi connection.
@@ -612,6 +616,7 @@ class TvService : Service(), Device {
 
     private fun extraApi(path: String, method: String, params: Map<String, String>): ApiReply? = when {
         path.startsWith("/api/ssh") -> ssh?.api(path, method, params)
+        path.startsWith("/api/bluetooth/tunnel") -> btApi?.api(path, method)
         // What the TV screen shows right now (the app's own window only), to check the layout remotely.
         path == "/api/screenshot" && method == "GET" -> ScreenCapture.resumed?.let { a ->
             ScreenCapture.capture(a)?.let { ApiReply.binary(it, "image/png") } ?: ApiReply(500, """{"error":"capture impossible"}""")
@@ -788,7 +793,7 @@ class TvService : Service(), Device {
             (volumeCallback as? android.os.storage.StorageManager.StorageVolumeCallback)?.let { getSystemService(android.os.storage.StorageManager::class.java).unregisterStorageVolumeCallback(it) }
         }
         main.removeCallbacks(storageTick)
-        bt?.stop(); wd?.stop(); ssh?.stop(); updater?.stop(); gateway?.stop()
+        bt?.stop(); btApi?.stop(); wd?.stop(); ssh?.stop(); updater?.stop(); gateway?.stop()
         server?.stop(); server = null
         library?.worker?.stopped = true
         releaseLocks()

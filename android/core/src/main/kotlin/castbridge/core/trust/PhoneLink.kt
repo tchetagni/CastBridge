@@ -28,7 +28,7 @@ data class SavedTv(
 /** Everything a screen needs once a TV answered: where to talk to it, with which credential, until when. */
 data class LinkSession(val tv: SavedTv, val route: LinkPlanner.Route, val credential: String, val expiresAt: Long, val info: HelloInfo) {
     /** Base URL of the TV's HTTP API when a Wi-Fi route exists, else null (Bluetooth only). */
-    val base: String? get() = when (val r = route) { is LinkPlanner.Route.Lan -> r.base; is LinkPlanner.Route.Direct -> r.base; else -> null }
+    val base: String? get() = when (val r = route) { is LinkPlanner.Route.Lan -> r.base; is LinkPlanner.Route.Direct -> r.base; is LinkPlanner.Route.BluetoothTunnel -> r.base; else -> null }
 }
 
 /**
@@ -40,6 +40,8 @@ class PhoneLink(
     /** GET /api/hello on this base URL answers like a CastBridge TV. */
     private val reachable: (String) -> Boolean,
     private val canJoinWifiDirect: () -> Boolean = { false },
+    /** Local end of the Bluetooth API tunnel when the phone's gateway runs (null = not available): used when no IP route exists. */
+    private val tunnelBase: () -> String? = { null },
     private val now: () -> Long = System::currentTimeMillis,
 ) {
     sealed class Result {
@@ -70,7 +72,7 @@ class PhoneLink(
         } catch (e: BtUnavailable) { return Result.BluetoothProblem(e.reason)
         } catch (e: BtProtocol.Refused) { return Result.Refused(e.code)
         } catch (e: IOException) { return Result.TvAbsent(e.message ?: e.javaClass.simpleName) }
-        val route = LinkPlanner.plan(info.link, reachable, canJoinWifiDirect()).first()
+        val route = LinkPlanner.plan(info.link, reachable, canJoinWifiDirect(), tunnelBase()).first()
         val updated = tv.copy(name = info.tvName, mdns = info.mdns ?: tv.mdns, lastIps = info.link.ips.ifEmpty { tv.lastIps }, port = info.link.port)
         return Result.Connected(LinkSession(updated, route, info.token, now() + info.ttlSec * 1000, info))
     }

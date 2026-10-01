@@ -50,6 +50,7 @@ fun TvLinkStatus(link: LinkUi, onAdd: () -> Unit, onManage: () -> Unit, modifier
         is LinkUi.Connected -> Triple(GOOD, "${link.session.tv.name} connectée", when (link.session.route) {
             is LinkPlanner.Route.Lan -> "Par le Wi-Fi de la maison"
             is LinkPlanner.Route.Direct -> "Par Wi-Fi Direct"
+            is LinkPlanner.Route.BluetoothTunnel -> "Par Bluetooth (mêmes fonctions qu'en Wi-Fi, plus lent)"
             else -> "Par Bluetooth seulement : plus lent (Wi-Fi différent ?)"
         })
         is LinkUi.Absent -> Triple(cs.outline, "${link.tv.name} est introuvable",
