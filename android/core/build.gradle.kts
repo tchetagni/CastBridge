@@ -66,5 +66,6 @@ val checkStarterBudget by tasks.registering(JavaExec::class) {
     dependsOn(tasks.named("classes"))
     classpath = files(sourceSets.main.get().output.classesDirs, sourceSets.main.get().output.resourcesDir, configurations.runtimeClasspath)
     mainClass.set("castbridge.core.lots.StarterBudget")
+    jvmArgs("-Dfile.encoding=UTF-8", "-Dstdout.encoding=UTF-8")
 }
 tasks.named("check") { dependsOn(checkStarterBudget) }
