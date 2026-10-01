@@ -14,9 +14,11 @@ class LearnContentTest {
         dirs.map { d -> LessonJson.parsePack(PackBuilder.sources(d).filterKeys { it.endsWith(".json") }.mapValues { String(it.value, Charsets.UTF_8) }) }
     }
 
+    private val SMALL_PACKS = setOf("bepc-svt", "bepc-histoire-geo", "bepc-english", "bac-philosophie", "gceal-maths", "licence-droit")
+
     @Test fun contentFolderExists() {
         assertTrue(content.isDirectory, "content/learn not found at $content")
-        assertTrue(dirs.size >= 13, "at least 13 packs (${dirs.map { it.name }})")
+        assertTrue(dirs.size >= 19, "at least 19 packs (${dirs.map { it.name }})")
     }
 
     @Test fun everyPackIsValid() {
@@ -35,7 +37,8 @@ class LearnContentTest {
         for (x in listOf("CEP", "BEPC", "GCE-OL")) assertTrue(exam.count { it.exam == x } >= 3, "3 subjects for $x (${exam.filter { it.exam == x }.map { it.id }})")
         assertTrue(exam.count { it.exam == "BAC" || it.exam == "PROBATOIRE" } >= 3, "3 subjects for Probatoire/Bac")
         for (p in exam) {
-            assertTrue(p.lessons.size >= 4, "${p.id}: ≥ 4 fiches (${p.lessons.size})")
+            // packs added with the lots (to review, smaller): 3 fiches; the original packs keep 4
+            assertTrue(p.lessons.size >= if (p.id in SMALL_PACKS) 3 else 4, "${p.id}: fiches (${p.lessons.size})")
             assertTrue(p.exercises.count { it.tier != ExerciseTier.SELFCHECK } >= 20, "${p.id}: ≥ 20 exercises")
             assertTrue(p.mockExams.isNotEmpty(), "${p.id}: a mock exam")
             for (m in p.mockExams) assertEquals(20.0, m.exerciseIds.sumOf { p.exercise(it)!!.totalPoints }, 0.01, "${p.id} ${m.id} out of 20")

@@ -1,0 +1,578 @@
+{
+ "chapter": "bepc-svt-ch-roches",
+ "lessons": [
+  {
+   "id": "bepc-svt-roches",
+   "title": "Les roches et le volcanisme",
+   "minutes": 25,
+   "programRef": "3e — SVT : géologie, roches et volcanisme (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de 3e ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer les trois familles de roches et en citer des exemples.",
+    "Légender un volcan et expliquer une éruption.",
+    "Citer risques et avantages du volcanisme au Cameroun."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-svt-roches-01",
+    "bepc-svt-roches-02",
+    "bepc-svt-roches-03",
+    "bepc-svt-roches-04",
+    "bepc-svt-roches-05",
+    "bepc-svt-roches-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-roches-q1",
+    "bepc-svt-roches-q2",
+    "bepc-svt-roches-q3",
+    "bepc-svt-roches-q4",
+    "bepc-svt-roches-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les trois familles de roches",
+     "md": "- Roches **magmatiques** : formées par le refroidissement du magma (granite, basalte).\n- Roches **sédimentaires** : formées par l'accumulation de sédiments qui durcissent (calcaire, grès, argile) ; elles contiennent parfois des **fossiles**.\n- Roches **métamorphiques** : roches transformées par la chaleur et la pression (marbre, schiste)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Vitesse de refroidissement",
+     "md": "Un refroidissement **lent** en profondeur donne de **gros cristaux** visibles (granite). Un refroidissement **rapide** en surface donne de **petits cristaux**, parfois du verre (basalte)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le volcan",
+     "md": "Un volcan est un relief par lequel le **magma** monte depuis la profondeur. Il comprend une **chambre magmatique**, une **cheminée**, un **cratère** et un **cône**. Le magma qui sort s'appelle la **lave** ; l'éruption rejette aussi des gaz et des cendres."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 260,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         20,
+         220,
+         130,
+         140,
+         160,
+         90,
+         190,
+         70,
+         250,
+         70,
+         280,
+         90,
+         310,
+         140,
+         420,
+         220
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         180,
+         220,
+         190,
+         70,
+         250,
+         70,
+         260,
+         220
+        ],
+        "fill": "none",
+        "stroke": "none",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 70,
+        "x2": 220,
+        "y2": 205,
+        "color": "red",
+        "width": 6
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 215,
+        "r": 22,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 220,
+        "text": "magma",
+        "size": 13,
+        "color": "white",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 38,
+        "text": "cratère",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 44,
+        "x2": 220,
+        "y2": 66,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 100,
+        "text": "cheminée",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 108,
+        "x2": 226,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 130,
+        "text": "cône",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 138,
+        "x2": 135,
+        "y2": 175,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Coupe simplifiée d'un volcan.",
+     "alt": "Un cône orange avec une cheminée rouge verticale reliant une chambre magmatique en bas au cratère au sommet. Les mots cône, cheminée, cratère et magma sont écrits."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le volcanisme au Cameroun",
+     "md": "Le **Mont Cameroun**, dans la région du Sud-Ouest près de Buea, est un volcan actif. Les éruptions présentent des risques (coulées, cendres, gaz) mais les sols volcaniques sont souvent **fertiles**. Les populations doivent suivre les consignes des autorités.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : reconnaître une roche",
+     "statement": "Un élève trouve une roche en couches qui contient un coquillage fossile. À quelle famille appartient-elle ?",
+     "steps": [
+      {
+       "md": "Un fossile est un reste d'être vivant pris dans des sédiments."
+      },
+      {
+       "md": "Les sédiments durcis forment les roches sédimentaires."
+      },
+      {
+       "md": "La roche est donc sédimentaire."
+      }
+     ],
+     "answer": "**Roche sédimentaire.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : taille des cristaux",
+     "statement": "Un échantillon sombre a de très petits cristaux. Comment s'est-il formé ?",
+     "steps": [
+      {
+       "md": "De petits cristaux indiquent un refroidissement rapide."
+      },
+      {
+       "md": "Cela arrive quand la lave arrive en surface."
+      },
+      {
+       "md": "C'est une roche volcanique, comme le basalte."
+      }
+     ],
+     "answer": "**Lave refroidie rapidement en surface.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **magma** (profondeur) et **lave** (surface).\n- Penser que le marbre est sédimentaire : il est **métamorphique**.\n- Croire qu'un volcan ne présente que des dangers : les sols volcaniques sont fertiles."
+    },
+    {
+     "type": "exercise",
+     "ref": "bepc-svt-roches-01"
+    }
+   ],
+   "reviewNotes": [
+    "Bloc « Le volcanisme au Cameroun » marqué review : confirmer le statut actif du Mont Cameroun et sa situation (Sud-Ouest, près de Buea) ; aucune date d'éruption ni altitude n'est donnée volontairement.",
+    "Avantage « sols fertiles » à valider par un enseignant de géologie ; ajouter si souhaité la ligne volcanique du Cameroun (non traitée par prudence).",
+    "Vérifier que la classification des roches (3 familles) correspond au vocabulaire du programme de 3e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bepc-svt-roches-01",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Laquelle de ces roches est une roche magmatique ?",
+   "choices": [
+    "Le calcaire",
+    "Le grès",
+    "Le marbre",
+    "Le granite"
+   ],
+   "answer": 3,
+   "explanation": "Le granite provient du refroidissement lent du magma en profondeur. Le calcaire et le grès sont sédimentaires, le marbre est métamorphique.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-roches-02",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Dans quelle famille de roches trouve-t-on le plus souvent des fossiles ?",
+   "choices": [
+    "Les roches sédimentaires",
+    "Les roches magmatiques",
+    "Les laves",
+    "Aucune roche"
+   ],
+   "answer": 0,
+   "explanation": "Les fossiles sont des restes d'êtres vivants pris dans des sédiments qui durcissent : on les trouve dans les roches sédimentaires.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-roches-03",
+   "kind": "matching",
+   "points": 2,
+   "prompt": "Associe chaque roche à son mode de formation.",
+   "pairs": [
+    [
+     "Basalte",
+     "Lave refroidie rapidement"
+    ],
+    [
+     "Granite",
+     "Magma refroidi lentement en profondeur"
+    ],
+    [
+     "Calcaire",
+     "Dépôts accumulés puis durcis"
+    ],
+    [
+     "Marbre",
+     "Roche transformée par la chaleur et la pression"
+    ]
+   ],
+   "explanation": "Basalte : lave refroidie vite (roche volcanique). Granite : magma refroidi lentement. Calcaire : sédiments. Marbre : calcaire transformé (roche métamorphique).",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-roches-04",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "Vrai ou faux : le magma et la lave sont deux noms pour la même chose, quel que soit l'endroit où elle se trouve.",
+   "answer": false,
+   "explanation": "On parle de magma en profondeur. Quand il arrive en surface lors d'une éruption, on l'appelle lave.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-roches-05",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Dans une série de 4 couches de roches sédimentaires non déformées, la couche 1 est tout en haut et la couche 4 tout en bas. Quel est le numéro de la couche la plus ancienne ?",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "",
+   "explanation": "Les sédiments se déposent les uns sur les autres : la couche du bas s'est déposée la première, donc elle est la plus ancienne.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC",
+   "method": "Principe : en bas = plus ancien (si les couches ne sont pas déformées).",
+   "mistakes": [
+    "Croire que la couche du dessus est la plus ancienne."
+   ]
+  },
+  {
+   "id": "bepc-svt-roches-06",
+   "kind": "problem",
+   "prompt": "Des élèves de Buea observent le Mont Cameroun, un volcan actif, et rapportent un échantillon de roche sombre à petits cristaux.",
+   "parts": [
+    {
+     "id": "bepc-svt-roches-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "À quelle famille appartient très probablement cette roche volcanique ?",
+     "choices": [
+      "Les roches sédimentaires",
+      "Les roches magmatiques",
+      "Les roches métamorphiques",
+      "Les fossiles"
+     ],
+     "answer": 1,
+     "explanation": "Une roche issue d'une lave refroidie est une roche magmatique (volcanique)."
+    },
+    {
+     "id": "bepc-svt-roches-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Pourquoi les cristaux sont-ils petits ?",
+     "choices": [
+      "La roche a refroidi très lentement en profondeur",
+      "La roche s'est formée dans un lac",
+      "La lave a refroidi rapidement à la surface",
+      "La roche a été transformée en marbre"
+     ],
+     "answer": 2,
+     "explanation": "Un refroidissement rapide empêche les cristaux de grossir."
+    },
+    {
+     "id": "bepc-svt-roches-06-c",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Cite un risque et un avantage d'habiter près d'un volcan actif.",
+     "model": "Risque : coulées de lave, chutes de cendres, gaz dangereux lors d'une éruption. Avantage : les sols issus des roches volcaniques sont souvent fertiles, favorables à l'agriculture.",
+     "rubric": [
+      "1 point : un risque correct.",
+      "1 point : un avantage correct."
+     ],
+     "explanation": "Penser à ce que le volcan émet et à ce qu'il laisse dans le sol."
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC",
+   "method": "Relier la vitesse de refroidissement à la taille des cristaux.",
+   "mistakes": [
+    "Dire que toutes les roches sombres sont des laves."
+   ],
+   "review": true,
+   "reviewNote": "Contexte : Mont Cameroun présenté comme un volcan actif (fait à confirmer pour le texte) ; avantage « sols fertiles » à valider."
+  },
+  {
+   "id": "bepc-svt-roches-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Combien de grandes familles de roches étudie-t-on ?",
+   "choices": [
+    "Deux",
+    "Quatre",
+    "Six",
+    "Trois"
+   ],
+   "answer": 3,
+   "explanation": "On distingue les roches magmatiques, sédimentaires et métamorphiques.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-roches-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Comment appelle-t-on le magma qui sort du volcan ?",
+   "choices": [
+    "La lave",
+    "Le sédiment",
+    "Le fossile",
+    "La cendre froide"
+   ],
+   "answer": 0,
+   "explanation": "En surface, le magma s'appelle la lave.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-roches-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle partie d'un volcan est l'ouverture au sommet ?",
+   "choices": [
+    "La cheminée",
+    "Le cratère",
+    "Le cône",
+    "Le sédiment"
+   ],
+   "answer": 1,
+   "explanation": "Le cratère est l'ouverture du sommet ; la cheminée est le conduit.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-roches-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Le marbre est une roche...",
+   "choices": [
+    "Magmatique",
+    "Sédimentaire",
+    "Métamorphique",
+    "Liquide"
+   ],
+   "answer": 2,
+   "explanation": "Le marbre est du calcaire transformé par la chaleur et la pression.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-roches-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Dans des couches non déformées, la plus récente est...",
+   "choices": [
+    "Celle du dessous",
+    "Celle du milieu",
+    "On ne peut pas savoir",
+    "Celle du dessus"
+   ],
+   "answer": 3,
+   "explanation": "Les couches se déposent les unes sur les autres : la dernière déposée est au sommet.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-mock-geol",
+   "kind": "problem",
+   "prompt": "Partie C. Un enseignant montre des échantillons de roches.",
+   "parts": [
+    {
+     "id": "bepc-svt-mock-geol-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle roche est sédimentaire ?",
+     "choices": [
+      "Le granite",
+      "Le basalte",
+      "Le marbre",
+      "Le calcaire"
+     ],
+     "answer": 3,
+     "explanation": "Le calcaire provient de sédiments durcis."
+    },
+    {
+     "id": "bepc-svt-mock-geol-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Comment s'appelle l'ouverture au sommet d'un volcan ?",
+     "choices": [
+      "Le cratère",
+      "La chambre magmatique",
+      "La cheminée",
+      "Le sédiment"
+     ],
+     "answer": 0,
+     "explanation": "Le cratère est l'ouverture du sommet."
+    },
+    {
+     "id": "bepc-svt-mock-geol-c",
+     "kind": "matching",
+     "points": 2,
+     "prompt": "Associe chaque roche à sa famille.",
+     "pairs": [
+      [
+       "Granite",
+       "Magmatique"
+      ],
+      [
+       "Grès",
+       "Sédimentaire"
+      ],
+      [
+       "Marbre",
+       "Métamorphique"
+      ]
+     ],
+     "explanation": "Le granite est magmatique, le grès sédimentaire, le marbre métamorphique."
+    },
+    {
+     "id": "bepc-svt-mock-geol-d",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Vrai ou faux : un refroidissement lent donne de gros cristaux.",
+     "answer": true,
+     "explanation": "Les cristaux ont le temps de grossir."
+    },
+    {
+     "id": "bepc-svt-mock-geol-e",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Le magma arrivé en surface s'appelle...",
+     "choices": [
+      "Le fossile",
+      "La lave",
+      "Le sédiment",
+      "La cendre"
+     ],
+     "answer": 1,
+     "explanation": "Magma en profondeur, lave en surface."
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bepc-svt-roches",
+   "source": "Exercice original, style BEPC",
+   "method": "Reprendre la fiche sur les roches et le volcanisme."
+  }
+ ]
+}

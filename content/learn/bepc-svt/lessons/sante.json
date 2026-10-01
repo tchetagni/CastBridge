@@ -1,0 +1,553 @@
+{
+ "chapter": "bepc-svt-ch-sante",
+ "lessons": [
+  {
+   "id": "bepc-svt-sante",
+   "title": "Santé : IST, VIH/sida et paludisme",
+   "minutes": 25,
+   "programRef": "3e — SVT : éducation à la santé, maladies parasitaires et IST/VIH-sida (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de 3e ; à relire par un enseignant",
+   "objectives": [
+    "Définir IST, VIH et sida et citer les modes de transmission du VIH.",
+    "Expliquer comment se transmet le paludisme.",
+    "Proposer des mesures de prévention adaptées."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-svt-sante-01",
+    "bepc-svt-sante-02",
+    "bepc-svt-sante-03",
+    "bepc-svt-sante-04",
+    "bepc-svt-sante-05",
+    "bepc-svt-sante-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-sante-q1",
+    "bepc-svt-sante-q2",
+    "bepc-svt-sante-q3",
+    "bepc-svt-sante-q4",
+    "bepc-svt-sante-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "VIH et sida",
+     "md": "Le **VIH** est un virus qui s'attaque aux cellules de défense du corps. Au stade avancé de l'infection, on parle de **sida** (syndrome d'immunodéficience acquise) : le corps se défend mal contre les maladies. Le VIH est une **IST** (infection sexuellement transmissible)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Comment se transmet le VIH ?",
+     "md": "- Par des **rapports sexuels non protégés**.\n- Par le **sang** : objets coupants ou seringues non stériles, transfusion de sang non contrôlé.\n- De la **mère à l'enfant** : grossesse, accouchement, allaitement.\n\nIl ne se transmet **pas** par les moustiques, la poignée de main, les repas partagés ou l'embrassade."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Se protéger du VIH et des IST",
+     "md": "- Éviter les risques : abstinence ou fidélité entre partenaires dépistés.\n- Utiliser un **préservatif**.\n- Ne jamais partager d'objets coupants.\n- Se faire **dépister** et consulter en cas de signes inhabituels."
+    },
+    {
+     "type": "text",
+     "md": "Il existe des médicaments qui contrôlent le virus et permettent de vivre longtemps en bonne santé, mais ils ne guérissent pas le VIH. Une personne séropositive ne doit jamais être rejetée : elle ne présente aucun danger dans la vie de tous les jours.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le paludisme",
+     "md": "Le **paludisme** est dû à un **parasite**, le *Plasmodium*. Il est transmis par la **piqûre de l'anophèle femelle**. Signes courants : fièvre, frissons, maux de tête, courbatures. En cas de fièvre, on consulte un centre de santé."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 80,
+        "w": 120,
+        "h": 56,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 112.33333333333333,
+        "text": "Moustique infecté",
+        "size": 13,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 108,
+        "x2": 175,
+        "y2": 108,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 175,
+        "y": 80,
+        "w": 100,
+        "h": 56,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 225.0,
+        "y": 113.0,
+        "text": "Piqûre",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 275,
+        "y1": 108,
+        "x2": 310,
+        "y2": 108,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 80,
+        "w": 120,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 370.0,
+        "y": 112.33333333333333,
+        "text": "Personne malade",
+        "size": 13,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 370,
+        "y1": 138,
+        "x2": 370,
+        "y2": 180,
+        "color": "grey",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 200,
+        "text": "un autre moustique pique la personne malade et s'infecte",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 30,
+        "text": "Transmission du paludisme",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Le cycle de transmission du paludisme.",
+     "alt": "Trois cases : un moustique infecté, une piqûre, une personne malade. Une flèche part de la personne malade vers le bas : un autre moustique pique et s'infecte."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Prévenir le paludisme",
+     "md": "- Dormir sous **moustiquaire imprégnée**.\n- Supprimer les **eaux stagnantes** et assainir les alentours.\n- Protéger les enfants et les femmes enceintes (conseils du centre de santé).\n- Consulter vite en cas de fièvre."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : répondre à une idée fausse",
+     "statement": "Un camarade affirme : « Le moustique peut me donner le sida ». Que lui réponds-tu ?",
+     "steps": [
+      {
+       "md": "Le VIH se transmet par le sang, les liquides sexuels et de la mère à l'enfant."
+      },
+      {
+       "md": "Le moustique ne transmet pas le VIH. Il transmet le paludisme."
+      },
+      {
+       "md": "Il faut donc se protéger des piqûres contre le paludisme et se protéger des IST par d'autres moyens."
+      }
+     ],
+     "answer": "**Faux : le moustique transmet le paludisme, pas le VIH.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une mesure, une raison",
+     "statement": "Pourquoi supprimer les flaques d'eau autour d'une maison réduit-il le paludisme ?",
+     "steps": [
+      {
+       "md": "Les moustiques pondent dans l'eau calme."
+      },
+      {
+       "md": "Les larves s'y développent."
+      },
+      {
+       "md": "Sans eau stagnante, moins de moustiques naissent, donc moins de piqûres."
+      }
+     ],
+     "answer": "**On rompt le cycle de développement des moustiques.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le VIH se transmet par un geste ordinaire (poignée de main, repas).\n- Penser que le paludisme vient de la pluie ou du soleil : il vient d'une piqûre.\n- Se soigner seul sans avis médical."
+    },
+    {
+     "type": "exercise",
+     "ref": "bepc-svt-sante-01"
+    }
+   ],
+   "reviewNotes": [
+    "Traitements (antirétroviraux, médicaments antipaludiques) : bloc marqué review ; l'enseignant ou un agent de santé doit confirmer les formulations (le cours ne donne ni nom de médicament ni dosage).",
+    "Le paludisme est présenté comme transmis par l'anophèle femelle (cas rares de transmission par transfusion ou de la mère à l'enfant non détaillés).",
+    "Vérifier le vocabulaire du programme officiel (séropositif, dépistage, IST ou MST) et le niveau de détail attendu sur les lymphocytes."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bepc-svt-sante-01",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel moustique transmet le paludisme ?",
+   "choices": [
+    "Le criquet",
+    "La mouche tsé-tsé",
+    "L'anophèle femelle",
+    "Le ver de Guinée"
+   ],
+   "answer": 2,
+   "explanation": "Le paludisme est transmis par la piqûre de l'anophèle femelle infectée par le parasite Plasmodium.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC",
+   "mistakes": [
+    "Croire que tous les moustiques transmettent le paludisme."
+   ]
+  },
+  {
+   "id": "bepc-svt-sante-02",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "Vrai ou faux : le VIH peut se transmettre par une piqûre de moustique.",
+   "answer": false,
+   "explanation": "Le VIH ne se transmet pas par les piqûres de moustique. Il se transmet par certains liquides du corps : rapports sexuels non protégés, sang contaminé, de la mère à l'enfant.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC",
+   "method": "Rappeler les trois modes de transmission."
+  },
+  {
+   "id": "bepc-svt-sante-03",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel moyen protège efficacement des piqûres de moustique pendant la nuit ?",
+   "choices": [
+    "Dormir la fenêtre ouverte",
+    "Boire beaucoup d'eau le soir",
+    "Se laver les mains avant de dormir",
+    "Dormir sous une moustiquaire imprégnée"
+   ],
+   "answer": 3,
+   "explanation": "La moustiquaire imprégnée d'insecticide forme une barrière et éloigne les moustiques, qui piquent surtout la nuit.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-sante-04",
+   "kind": "matching",
+   "points": 2,
+   "prompt": "Associe chaque mot à sa description.",
+   "pairs": [
+    [
+     "Plasmodium",
+     "Parasite responsable du paludisme"
+    ],
+    [
+     "VIH",
+     "Virus qui affaiblit les défenses du corps"
+    ],
+    [
+     "Anophèle",
+     "Moustique qui transmet le paludisme"
+    ],
+    [
+     "IST",
+     "Infection transmise surtout par les rapports sexuels"
+    ]
+   ],
+   "explanation": "Plasmodium est le parasite du paludisme, l'anophèle son transmetteur ; le VIH est un virus qui attaque les défenses du corps ; une IST est une infection sexuellement transmissible.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-sante-05",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel geste ne présente AUCUN risque de transmission du VIH ?",
+   "choices": [
+    "Partager un plat de nourriture avec une personne séropositive",
+    "Utiliser une lame de rasoir déjà utilisée par un autre",
+    "Avoir un rapport sexuel sans préservatif",
+    "Recevoir du sang qui n'a pas été contrôlé"
+   ],
+   "answer": 0,
+   "explanation": "Le VIH ne se transmet pas par les aliments, la vaisselle, la poignée de main ou l'embrassade. Les trois autres situations exposent à du sang ou à des liquides sexuels.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC",
+   "method": "Chercher s'il y a contact avec du sang ou des liquides sexuels.",
+   "mistakes": [
+    "Rejeter une personne séropositive : elle ne présente aucun danger dans la vie quotidienne."
+   ]
+  },
+  {
+   "id": "bepc-svt-sante-06",
+   "kind": "problem",
+   "prompt": "Dans un village, Paul a de la fièvre, des frissons et mal à la tête depuis deux jours. Sa famille craint le paludisme.",
+   "parts": [
+    {
+     "id": "bepc-svt-sante-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que doit faire la famille en priorité ?",
+     "choices": [
+      "Attendre une semaine",
+      "Conduire Paul au centre de santé pour un examen et un traitement",
+      "Donner n'importe quel médicament trouvé à la maison",
+      "Isoler Paul dans une pièce sans soins"
+     ],
+     "answer": 1,
+     "explanation": "La fièvre peut avoir plusieurs causes : seul un examen en centre de santé permet de confirmer le paludisme et de donner le bon traitement."
+    },
+    {
+     "id": "bepc-svt-sante-06-b",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Vrai ou faux : le paludisme se transmet par contact direct entre deux personnes, sans moustique.",
+     "answer": false,
+     "explanation": "Le paludisme se transmet par la piqûre d'un moustique infecté (cas particuliers mis à part), pas par un simple contact."
+    },
+    {
+     "id": "bepc-svt-sante-06-c",
+     "kind": "open",
+     "points": 3,
+     "prompt": "Cite trois mesures que la famille peut prendre pour réduire le risque de paludisme à la maison.",
+     "model": "Dormir sous moustiquaire imprégnée ; supprimer les eaux stagnantes (pneus, boîtes, flaques) où les moustiques pondent ; garder les alentours propres et dégager les herbes hautes ; fermer les fenêtres le soir ou utiliser des grillages.",
+     "rubric": [
+      "1 point par mesure correcte, 3 au maximum."
+     ],
+     "explanation": "Les larves d'anophèle vivent dans l'eau : on empêche leur développement et on évite les piqûres."
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC",
+   "method": "Penser à la fois à soigner le malade et à prévenir de nouvelles piqûres.",
+   "mistakes": [
+    "Se soigner soi-même sans avis médical."
+   ]
+  },
+  {
+   "id": "bepc-svt-sante-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel agent provoque le paludisme ?",
+   "choices": [
+    "Un virus du sida",
+    "Une bactérie de l'eau",
+    "Un parasite (Plasmodium)",
+    "Un champignon du sol"
+   ],
+   "answer": 2,
+   "explanation": "Le paludisme est dû à un parasite appelé Plasmodium.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-sante-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Que signifie la lettre S dans sida ?",
+   "choices": [
+    "Sang",
+    "Santé",
+    "Sexe",
+    "Syndrome"
+   ],
+   "answer": 3,
+   "explanation": "Sida : syndrome d'immunodéficience acquise.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-sante-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel moyen protège à la fois du VIH et d'autres IST lors d'un rapport sexuel ?",
+   "choices": [
+    "Le préservatif",
+    "La moustiquaire",
+    "Le lavage des mains",
+    "La vaccination contre la grippe"
+   ],
+   "answer": 0,
+   "explanation": "Le préservatif est une barrière contre les microbes.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-sante-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel lieu favorise la reproduction des moustiques ?",
+   "choices": [
+    "Une pièce bien ventilée",
+    "Une eau stagnante",
+    "Un sol sec et propre",
+    "Un grillage"
+   ],
+   "answer": 1,
+   "explanation": "Les moustiques pondent dans les eaux calmes : flaques, pneus, boîtes, gouttières.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-sante-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Une personne séropositive peut-elle transmettre le VIH en partageant un repas ?",
+   "choices": [
+    "Oui, par la nourriture",
+    "Oui, par la salive dans le verre",
+    "Non, cela ne transmet pas le VIH",
+    "Oui, par la poignée de main"
+   ],
+   "answer": 2,
+   "explanation": "Le VIH ne se transmet pas dans les gestes de la vie courante.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-svt-mock-sante",
+   "kind": "problem",
+   "prompt": "Partie B. Dans une classe de 3e, on discute de la santé.",
+   "parts": [
+    {
+     "id": "bepc-svt-mock-sante-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel moustique transmet le paludisme ?",
+     "choices": [
+      "La tsé-tsé",
+      "L'anophèle femelle",
+      "Le criquet",
+      "La libellule"
+     ],
+     "answer": 1,
+     "explanation": "C'est l'anophèle femelle infectée qui transmet le parasite."
+    },
+    {
+     "id": "bepc-svt-mock-sante-b",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Vrai ou faux : le VIH se transmet en partageant un plat avec une personne séropositive.",
+     "answer": false,
+     "explanation": "Le VIH ne se transmet pas par les repas partagés."
+    },
+    {
+     "id": "bepc-svt-mock-sante-c",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Vrai ou faux : le préservatif peut protéger des IST.",
+     "answer": true,
+     "explanation": "Bien utilisé, le préservatif limite le passage des microbes."
+    },
+    {
+     "id": "bepc-svt-mock-sante-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle mesure réduit le nombre de moustiques près d'une maison ?",
+     "choices": [
+      "Laisser traîner des pneus remplis d'eau",
+      "Planter de l'herbe haute contre les murs",
+      "Supprimer les eaux stagnantes",
+      "Garder des seaux ouverts sous la pluie"
+     ],
+     "answer": 2,
+     "explanation": "Les moustiques pondent dans l'eau stagnante."
+    },
+    {
+     "id": "bepc-svt-mock-sante-e",
+     "kind": "open",
+     "points": 3,
+     "prompt": "Cite trois modes de transmission du VIH.",
+     "model": "Rapports sexuels non protégés ; sang contaminé (seringues ou objets coupants non stériles, transfusion non contrôlée) ; de la mère à l'enfant (grossesse, accouchement, allaitement).",
+     "rubric": [
+      "1 point par mode correct, 3 au maximum."
+     ],
+     "explanation": "Trois modes : sexuel, sanguin, mère-enfant."
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bepc-svt-sante",
+   "source": "Exercice original, style BEPC",
+   "method": "Reprendre la fiche sur la santé."
+  }
+ ]
+}

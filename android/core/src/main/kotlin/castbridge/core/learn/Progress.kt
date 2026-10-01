@@ -18,11 +18,15 @@ data class Profile(val id: String, val name: String, val avatar: Int, val level:
 
 class LessonState(val lesson: String, val pack: String, val subject: String) {
     var page = 0; var pages = 0; var seen = false; var completed = false; var stars = 0; var timeMs = 0L; var lastAt = 0L
+    /** Content hash (lot index) of the version of the lesson the student last went through; null = before lots / unknown. */
+    var hash: String? = null
 }
 
 /** An exercise tried by a student. [box] = Leitner box of the spaced review (0 = not in review). */
 class ExerciseState(val exercise: String, val pack: String, val subject: String, val lesson: String?) {
     var attempts = 0; var correct = 0; var lastCorrect = false; var box = 0; var dueAt = 0L; var lastAt = 0L
+    /** Best score ever (0..1, points earned / points of the exercise); kept when two devices are merged ([LearnMerge]). */
+    var best = 0.0
 }
 
 data class MockRecord(val pack: String, val mock: String, val subject: String, val score: Double, val at: Long, val durationMs: Long)
@@ -107,9 +111,11 @@ class LearnProgress(val state: LearnState = LearnState(), private val zone: Zone
     }
 
     /** The student is on [page] of [pages] of a lesson for [dtMs]; the last page completes the lesson. */
-    fun lessonPage(profile: String, pack: Pack, lesson: Lesson, page: Int, pages: Int, dtMs: Long, now: Long): LessonState {
+    fun lessonPage(profile: String, pack: Pack, lesson: Lesson, page: Int, pages: Int, dtMs: Long, now: Long, hash: String? = null): LessonState {
         val sp = state.of(profile); touchDay(sp, now)
         val st = sp.lessons.getOrPut(lesson.id) { LessonState(lesson.id, pack.id, pack.subject) }
+        // the lot's content hash of this lesson: adopted at the first visit, and again once the student reached the end of the new version
+        if (hash != null && (st.hash == null || (st.hash != hash && page >= pages - 1))) st.hash = hash
         val first = !st.seen
         st.seen = true; st.page = page; st.pages = pages; st.lastAt = now
         val dt = dtMs.coerceIn(0, MAX_PAGE_MS)
@@ -134,6 +140,7 @@ class LearnProgress(val state: LearnState = LearnState(), private val zone: Zone
         val sp = state.of(profile); touchDay(sp, now)
         val st = sp.exercises.getOrPut(x.id) { ExerciseState(x.id, pack.id, pack.subject, x.lesson) }
         st.attempts++; st.lastAt = now; st.lastCorrect = mark.correct
+        if (mark.max > 0) st.best = maxOf(st.best, (mark.earned / mark.max).coerceIn(0.0, 1.0))
         if (mark.correct) st.correct++
         if (!mark.correct) { st.box = 1; st.dueAt = now + INTERVAL_DAYS[1] * 86_400_000L }
         else if (st.box > 0) {
@@ -147,6 +154,12 @@ class LearnProgress(val state: LearnState = LearnState(), private val zone: Zone
             "correct" to mark.correct, "points" to mark.earned, "max" to mark.max, "attempt" to st.attempts))
         pack.lessons.filter { it.id == x.lesson || x.id in it.exercises || x.id in it.selfCheck }.forEach { updateStars(sp, pack, it, now) }
         return st
+    }
+
+    /** A lesson the student already went through whose content changed with a lot update: the score stays, the screen says « mise à jour ». */
+    fun lessonUpdated(profile: String, lesson: String, currentHash: String?): Boolean {
+        val h = state.progress[profile]?.lessons?.get(lesson)?.hash
+        return h != null && currentHash != null && h != currentHash
     }
 
     /** Exercises to review now (due first), at most [limit]. */
@@ -246,9 +259,9 @@ object LearnStore {
             "badges" to sp.badges.toList(), "time" to sp.timeBySubject,
             "resume" to sp.resume?.let { linkedMapOf("pack" to it.pack, "lesson" to it.lesson, "page" to it.page, "at" to it.at) },
             "lessons" to sp.lessons.values.map { linkedMapOf("l" to it.lesson, "p" to it.pack, "s" to it.subject, "page" to it.page, "pages" to it.pages,
-                "seen" to it.seen, "done" to it.completed, "stars" to it.stars, "t" to it.timeMs, "at" to it.lastAt) },
+                "seen" to it.seen, "done" to it.completed, "stars" to it.stars, "t" to it.timeMs, "at" to it.lastAt, "h" to it.hash) },
             "exercises" to sp.exercises.values.map { linkedMapOf("x" to it.exercise, "p" to it.pack, "s" to it.subject, "l" to it.lesson, "n" to it.attempts,
-                "ok" to it.correct, "last" to it.lastCorrect, "box" to it.box, "due" to it.dueAt, "at" to it.lastAt) },
+                "ok" to it.correct, "last" to it.lastCorrect, "box" to it.box, "due" to it.dueAt, "at" to it.lastAt, "best" to it.best) },
             "mocks" to sp.mocks.map { linkedMapOf("p" to it.pack, "m" to it.mock, "s" to it.subject, "score" to it.score, "at" to it.at, "d" to it.durationMs) },
         ) },
         "events" to s.events.map { linkedMapOf("name" to it.name, "at" to it.at, "profile" to it.profile, "data" to it.data) },
@@ -271,13 +284,14 @@ object LearnStore {
             for (l in g.list("lessons")) {
                 val st = LessonState(l.str("l") ?: continue, l.str("p") ?: "", l.str("s") ?: "")
                 st.page = l.num("page")?.toInt() ?: 0; st.pages = l.num("pages")?.toInt() ?: 0; st.seen = l["seen"] == true; st.completed = l["done"] == true
-                st.stars = l.num("stars")?.toInt() ?: 0; st.timeMs = l.num("t")?.toLong() ?: 0; st.lastAt = l.num("at")?.toLong() ?: 0
+                st.stars = l.num("stars")?.toInt() ?: 0; st.timeMs = l.num("t")?.toLong() ?: 0; st.lastAt = l.num("at")?.toLong() ?: 0; st.hash = l.str("h")
                 sp.lessons[st.lesson] = st
             }
             for (x in g.list("exercises")) {
                 val st = ExerciseState(x.str("x") ?: continue, x.str("p") ?: "", x.str("s") ?: "", x.str("l"))
                 st.attempts = x.num("n")?.toInt() ?: 0; st.correct = x.num("ok")?.toInt() ?: 0; st.lastCorrect = x["last"] == true
                 st.box = x.num("box")?.toInt() ?: 0; st.dueAt = x.num("due")?.toLong() ?: 0; st.lastAt = x.num("at")?.toLong() ?: 0
+                st.best = x.num("best")?.toDouble() ?: (if (st.correct > 0) 1.0 else 0.0)
                 sp.exercises[st.exercise] = st
             }
             for (m in g.list("mocks")) sp.mocks += MockRecord(m.str("p") ?: "", m.str("m") ?: "", m.str("s") ?: "", m.num("score")?.toDouble() ?: 0.0,

@@ -22,7 +22,8 @@ object LearnQuiz {
                     question = Markdown.plain(x.prompt).let { if (it.trimEnd().endsWith("?")) it else "$it ?" },
                     choices = x.choices.map { Markdown.plain(it) }, answer = x.answerIndex,
                     explanation = Markdown.plain(x.explanation), source = "Apprendre — ${l.title}",
-                    track = level.track, level = level.key, field = null, lang = pack.lang,
+                    track = level.track, level = level.key,
+                    field = if (level.track == Track.HIGHER) QuizCatalog.fields.firstOrNull { it.key == pack.subject }?.key else null, lang = pack.lang,
                 )
             }
     }

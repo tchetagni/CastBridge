@@ -26,6 +26,9 @@ import castbridge.core.learn.LearnProgress
 import castbridge.core.learn.MockExamSession
 import castbridge.core.learn.Pack
 import castbridge.core.learn.PackInstaller
+import castbridge.core.learn.EmbeddedLessonSource
+import castbridge.core.learn.LearnFormat
+import castbridge.core.learn.LearnLotCatalog
 import castbridge.core.learn.PackRef
 import castbridge.core.learn.Profile
 import castbridge.core.learn.ReviewStatus
@@ -242,7 +245,7 @@ class ProfilesScreen(a: LearnActivity) : LearnActivity.Screen(a) {
         }
         if (pr.profiles.size < LearnProgress.MAX_PROFILES) tiles += a.st.tile("Ajouter un élève", "prénom, avatar, classe", LearnStyle.GOOD, "+") { a.push(NewProfileScreen(a)) }
         tiles += a.st.tile("Mode classe", "leçon en grand, pilotée depuis le téléphone", LearnStyle.GOLD, "▣") { a.setTeacher(!a.teacher); a.push(BrowseScreen(a)) }
-        tiles += a.st.tile("Contenus", "packs installés, clé USB, en ligne", LearnStyle.ACCENT, "⇩") { a.push(ContentsScreen(a)) }
+        tiles += a.st.tile("Contenus", "mes classes, clé USB, envoi du téléphone", LearnStyle.ACCENT, "⇩") { a.push(ContentsScreen(a)) }
         val col = LinearLayout(a).apply { orientation = LinearLayout.VERTICAL }
         col.addView(a.st.text("Qui apprend aujourd'hui ?", 36f, Color.WHITE, true))
         col.addView(a.st.text("Les progrès restent sur cette TV : juste un prénom, pas de données personnelles. Appui long sur un profil : modifier ou supprimer.", 20f, LearnStyle.MUTED), col.lp(bottom = a.st.px(12)))
@@ -396,7 +399,7 @@ class ExamScreen(a: LearnActivity, private val exam: String) : LearnActivity.Scr
             "${r.manifest.lessons} fiches · ${r.manifest.exercises} exercices" + (if (r.manifest.mockExams > 0) " · épreuve blanche" else "") + (if (r.manifest.exam != exam) " · ${LearnCatalog.exam(r.manifest.exam)?.label}" else ""),
             a.subjectColor(r.manifest.subject)) { a.openPack(r)?.let { a.push(PackScreen(a, it)) } }
         val missing = EXAM_SUBJECTS[exam].orEmpty().filter { s -> packs.none { it.manifest.subject == s } }
-        for (s in missing) tiles += a.st.tile(LearnCatalog.subject(s)?.label(e.lang) ?: s, "Télécharger ce contenu", TvStyle.OUTLINE, "⇩") {
+        for (s in missing) tiles += a.st.tile(LearnCatalog.subject(s)?.label(e.lang) ?: s, "Pas encore sur la TV : à envoyer depuis le téléphone", TvStyle.OUTLINE, "⇩") {
             a.push(ContentsScreen(a, "Le pack « ${LearnCatalog.subject(s)?.fr ?: s} — ${e.label} » n'est pas installé."))
         }
         tiles += a.st.tile("Changer d'examen", null, TvStyle.OUTLINE) { a.replace(ExamPickScreen(a)) }
@@ -552,7 +555,11 @@ class ContentsScreen(a: LearnActivity, private val note: String? = null) : Learn
         note?.let { col.addView(a.st.text(it, 24f, LearnStyle.GOLD, true), col.lp(bottom = a.st.px(8))) }
         col.addView(a.st.text("Installer un pack (fichier .learn.zip) : copiez-le dans le dossier CastBridge/Packs d'une clé USB " +
             "(ou Android/data/castbridge.receiver/files/CastBridge/Packs si la TV ne lit pas la racine), ou envoyez-le depuis l'app du téléphone. " +
-            "En ligne : bientôt. Les vidéos ne sont jamais dans les packs.", 19f, LearnStyle.MUTED), col.lp(bottom = a.st.px(10)))
+            "Les mises à jour des classes arrivent par le téléphone dès qu'il peut parler à la TV : la TV n'a pas besoin d'Internet. Les vidéos ne sont jamais dans les packs.", 19f, LearnStyle.MUTED), col.lp(bottom = a.st.px(10)))
+        // « Mes classes » : the lots held by this TV and how fresh their data is (the starter packs of the APK are listed below)
+        col.addView(a.st.text("Mes classes sur cette TV", 24f, Color.WHITE, true), col.lp(bottom = a.st.px(6)))
+        val classes = LearnLotCatalog(LearnHub.lots(), EmbeddedLessonSource()).classes()
+        for (c in classes) col.addView(a.st.text("${c.title} · ${c.lessons} fiches · " + (c.meta?.let { "v${it.version} · ${LearnFormat.size(it.bytes)} · ${LearnFormat.dataDate(c.date)}" } ?: "contenu de démarrage de l'app"), 19f, LearnStyle.MUTED), col.lp(bottom = a.st.px(4)))
         val received = LearnHub.libraryPackFiles()
         val acts = ArrayList<View>()
         acts += a.st.button("Rechercher à nouveau", "clé USB, mémoire de la TV") { lib.forget(); a.rebuild() }

@@ -62,7 +62,7 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
     private fun record() {
         val prof = a.profile ?: return
         val now = System.currentTimeMillis()
-        LearnHub.progress().lessonPage(prof.id, pack, lesson, page, deck.pages.size, now - shownAt, now); shownAt = now
+        LearnHub.progress().lessonPage(prof.id, pack, lesson, page, deck.pages.size, now - shownAt, now, LearnHub.lessonHash(lesson.id)); shownAt = now
         LearnHub.save()
     }
 
@@ -71,6 +71,9 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
         col.addView(a.st.text(lesson.title, 42f, Color.WHITE, true, 3))
         val status = if (lesson.status == ReviewStatus.VALIDATED) "✔ " + t("Contenu certifié", "Certified content") else "✎ " + t("Brouillon — à relire par un enseignant", "Draft — to be reviewed by a teacher")
         col.addView(a.st.text("⏱ ${lesson.minutes} min   ·   $status", 22f, if (lesson.status == ReviewStatus.VALIDATED) LearnStyle.GOOD else LearnStyle.GOLD), col.lp(top = a.st.px(8), bottom = a.st.px(18)))
+        // the lot of the class was updated since this student last read the fiche: the score stays, the fiche is flagged
+        if (a.profile?.let { LearnHub.progress().lessonUpdated(it.id, lesson.id, LearnHub.lessonHash(lesson.id)) } == true)
+            col.addView(a.st.text("↻ " + t("Fiche mise à jour depuis ta dernière lecture (tes étoiles sont gardées)", "Lesson updated since you last read it (your stars are kept)"), 21f, LearnStyle.ACCENT), col.lp(bottom = a.st.px(12)))
         if (lesson.objectives.isNotEmpty()) {
             col.addView(a.st.text(t("Objectifs", "Objectives"), 26f, LearnStyle.ACCENT, true))
             col.addView(a.st.text(a.st.md(lesson.objectives.joinToString("\n") { "- $it" }), 27f), col.lp(bottom = a.st.px(14)))

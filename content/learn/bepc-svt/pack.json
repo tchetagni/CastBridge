@@ -1,0 +1,67 @@
+{
+ "format": 1,
+ "id": "bepc-svt",
+ "version": 1,
+ "title": "SVT — BEPC",
+ "description": "Fiches « l'essentiel » (reproduction humaine, santé, roches et volcanisme), exemples résolus, exercices type BEPC corrigés et épreuve blanche.",
+ "lang": "fr",
+ "cursus": "secondaire",
+ "level": "3e",
+ "subject": "svt",
+ "exam": "BEPC",
+ "programRef": "Programme officiel de Sciences de la Vie et de la Terre de la classe de 3e (MINESEC) — à vérifier sur le texte officiel",
+ "authors": [
+  "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+ ],
+ "status": "draft",
+ "updatedAt": "2026-10-01",
+ "chapters": [
+  {
+   "id": "bepc-svt-ch-repro",
+   "title": "La reproduction humaine et la planification familiale",
+   "order": 1,
+   "programRef": "3e — Reproduction humaine et éducation à la santé de la reproduction (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bepc-svt-ch-sante",
+   "title": "Santé : IST, VIH/sida et paludisme",
+   "order": 2,
+   "programRef": "3e — Hygiène et santé : maladies et prévention (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bepc-svt-ch-roches",
+   "title": "Les roches et le volcanisme",
+   "order": 3,
+   "programRef": "3e — Géologie : roches et volcanisme (à vérifier sur le texte officiel)"
+  }
+ ],
+ "mockExams": [
+  {
+   "id": "bepc-svt-epreuve-1",
+   "title": "Épreuve blanche de SVT — BEPC",
+   "minutes": 120,
+   "outOf": 20,
+   "instructions": "Épreuve notée sur 20 points. Durée indicative : 2 heures (durée et format officiels à vérifier). Sujet d'entraînement original. Réponds avec des phrases courtes et précises.",
+   "sections": [
+    {
+     "title": "Partie A — Reproduction humaine (7 points)",
+     "exercises": [
+      "bepc-svt-mock-repro"
+     ]
+    },
+    {
+     "title": "Partie B — Santé (7 points)",
+     "exercises": [
+      "bepc-svt-mock-sante"
+     ]
+    },
+    {
+     "title": "Partie C — Roches et volcanisme (6 points)",
+     "exercises": [
+      "bepc-svt-mock-geol"
+     ]
+    }
+   ]
+  }
+ ]
+}

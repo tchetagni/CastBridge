@@ -9,6 +9,10 @@ import kotlin.system.exitProcess
  *   check <content dir> [pack id…]          validate the sources, print errors, warnings and the coverage table
  *   build <content dir> <out dir>           build every pack zip (+ catalog.json) into <out dir>
  *   embed <content dir> <out dir>           build only the packs listed in <content dir>/embedded.txt, as app resources
+ *   lots <content dir> <out dir> [--update] [--date=YYYY-MM-DD]
+ *                                           build the lots (one zip per class, docs/LEARN.md § Lots) + lots-catalog.json; fails if a
+ *                                           lot exceeds 3 MB or if its content changed without --update (which bumps its version)
+ *   review <content dir> <file>             write the review report per lot (what the teachers must check)
  *
  * <content dir> holds one folder per pack (pack.json, lessons/<name>.json, media/).
  */
@@ -21,6 +25,8 @@ object LearnTool {
             "check" -> check(content, args.drop(2).toSet())
             "build" -> build(content, File(args.getOrElse(2) { "build/learn-packs" }), null)
             "embed" -> build(content, File(args[2]), embeddedIds(content))
+            "lots" -> lots(content, File(args[2]), args.drop(3))
+            "review" -> { File(args[2]).writeText(LearnReview.report(content), Charsets.UTF_8); println("rapport de relecture : ${args[2]}"); 0 }
             else -> { System.err.println("commande inconnue ${args[0]}"); 2 }
         }
         exitProcess(code)
@@ -64,6 +70,7 @@ object LearnTool {
         out.mkdirs()
         val known = allLessonIds(content)
         val built = ArrayList<PackManifest>()
+        val table = File(content, "scopes.txt").takeIf { it.isFile }?.let { LearnScopes.parseTable(it.readText()) }
         for (d in packDirs(content)) {
             if (only != null && d.name !in only) continue
             val b = try { PackBuilder.build(PackBuilder.sources(d), knownLessons = known) } catch (e: Exception) {
@@ -74,7 +81,27 @@ object LearnTool {
             println("✓ ${b.manifest.fileName}  ${b.bytes.size} octets (${b.manifest.size} décompressés), ${b.manifest.lessons} fiches, ${b.manifest.exercises} exercices")
         }
         // index of the folder: what the app (embedded) or the server (catalog) lists without opening the zips
-        File(out, "catalog.json").writeText(LearnCatalogFile.write(built.map { LearnCatalogFile.Entry(it, it.fileName) }))
+        File(out, "catalog.json").writeText(LearnCatalogFile.write(built.map { LearnCatalogFile.Entry(it, it.fileName, scope = table?.scopeOf(it.id)) }))
+        return 0
+    }
+
+    /** Builds every lot into [out]; prints the size of each and the total. */
+    fun lots(content: File, out: File, flags: List<String>): Int {
+        val update = "--update" in flags
+        val date = flags.firstOrNull { it.startsWith("--date=") }?.substringAfter('=') ?: java.time.LocalDate.now().toString()
+        val regFile = File(content, "lots.json")
+        val r = try {
+            LearnLotBuilder.build(content, LearnLotBuilder.Registry.parse(regFile.takeIf { it.isFile }?.readText()), date, update)
+        } catch (e: LearnLotBuilder.Failure) { System.err.println("✗ ${e.message}"); return 1 }
+        out.mkdirs()
+        out.listFiles { f -> f.name.endsWith(LotFormat.SUFFIX) }?.forEach { it.delete() }
+        for (b in r.lots) File(out, b.file).writeBytes(b.bytes)
+        File(out, "lots-catalog.json").writeText(LearnLotCatalogFile.write(r.lots.map { LearnLotCatalogFile.Entry(it.meta, it.file, it.index.date, it.packIds, it.index.lessonCount) }))
+        if (update) regFile.writeText(r.registry.json())
+        println("| Lot | Version | Date | Packs | Fiches | Taille |\n|---|---|---|---|---|---|")
+        for (b in r.lots) println("| ${b.meta.id.scope} | v${b.meta.version} | ${b.index.date} | ${b.packIds.size} | ${b.index.lessonCount} | ${b.bytes.size} o |")
+        println("\n${r.lots.size} lots, total ${r.totalBytes} octets (${"%.2f".format(r.totalBytes / 1048576.0)} Mo ; plafond par lot ${LotFormat.MAX_LOT_BYTES shr 20} Mo, téléphone ${castbridge.core.lots.LotBudget.PHONE_MAX_BYTES shr 20} Mo)" +
+            (if (r.bumped.isEmpty()) "" else "\nversions incrémentées : ${r.bumped.joinToString()}"))
         return 0
     }
 }
@@ -96,7 +123,7 @@ object Coverage {
  * unzipped to show what exists. The server will serve the same document at GET /api/v1/learn/catalog.
  */
 object LearnCatalogFile {
-    class Entry(val manifest: PackManifest, val file: String, val url: String? = null)
+    class Entry(val manifest: PackManifest, val file: String, val url: String? = null, val scope: String? = null)
 
     fun write(entries: List<Entry>): String = castbridge.core.quiz.Json.write(linkedMapOf(
         "format" to PackFormat.VERSION,
@@ -104,12 +131,13 @@ object LearnCatalogFile {
             val m = e.manifest
             linkedMapOf("id" to m.id, "version" to m.version, "title" to m.title, "lang" to m.lang, "cursus" to m.cursus, "level" to m.level,
                 "subject" to m.subject, "exam" to m.exam, "status" to m.status, "size" to m.size, "lessons" to m.lessons,
-                "exercises" to m.exercises, "mockExams" to m.mockExams, "file" to e.file, "url" to e.url)
+                "exercises" to m.exercises, "mockExams" to m.mockExams, "file" to e.file, "url" to e.url, "scope" to e.scope)
         },
     ))
 
     data class Item(val id: String, val version: Int, val title: String, val lang: String, val level: String, val subject: String,
-                    val exam: String?, val size: Long, val lessons: Int, val exercises: Int, val file: String?, val url: String?, val status: String)
+                    val exam: String?, val size: Long, val lessons: Int, val exercises: Int, val file: String?, val url: String?, val status: String,
+                    val scope: String? = null)
 
     fun parse(json: String): List<Item> {
         val root = castbridge.core.quiz.Json.obj(json)
@@ -119,7 +147,7 @@ object LearnCatalogFile {
             fun s(k: String) = m[k] as? String
             fun n(k: String) = (m[k] as? Number)?.toLong() ?: 0
             Item(s("id") ?: return@mapNotNull null, n("version").toInt(), s("title") ?: "", s("lang") ?: "fr", s("level") ?: "", s("subject") ?: "",
-                s("exam"), n("size"), n("lessons").toInt(), n("exercises").toInt(), s("file"), s("url"), s("status") ?: "draft")
+                s("exam"), n("size"), n("lessons").toInt(), n("exercises").toInt(), s("file"), s("url"), s("status") ?: "draft", s("scope"))
         }
     }
 }
