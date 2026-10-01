@@ -1,0 +1,973 @@
+{
+ "chapter": "ce2-maths-geometrie",
+ "lessons": [
+  {
+   "id": "ce2-maths-figures-planes",
+   "title": "Les figures planes et l'angle droit",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Géométrie : angle droit, carré, rectangle, triangle, cercle",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître un carré, un rectangle, un triangle et un cercle.",
+    "Vérifier un angle droit avec une équerre.",
+    "Utiliser le vocabulaire côté, sommet, angle."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-maths-figures-planes-01",
+    "ce2-maths-figures-planes-02",
+    "ce2-maths-figures-planes-03",
+    "ce2-maths-figures-planes-04",
+    "ce2-maths-figures-planes-05",
+    "ce2-maths-figures-planes-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-figures-planes-q1",
+    "ce2-maths-figures-planes-q2",
+    "ce2-maths-figures-planes-q3",
+    "ce2-maths-figures-planes-q4",
+    "ce2-maths-figures-planes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le triangle rectangle et le cercle (compas) sont au programme du CE2."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Les figures planes et l'angle droit"
+    },
+    {
+     "type": "text",
+     "md": "Les figures **planes** se dessinent sur une feuille : carré, rectangle, triangle, cercle. On les reconnaît à leurs **côtés**, leurs **sommets** et leurs **angles**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un carré, un rectangle et un triangle rectangle. Les petits angles rouges sont des angles droits.",
+     "alt": "Un carré avec quatre angles droits, un rectangle avec quatre angles droits, un triangle rectangle avec un angle droit.",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 180,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         20,
+         40,
+         110,
+         40,
+         110,
+         130,
+         20,
+         130
+        ],
+        "stroke": "blue",
+        "fill": "lightblue"
+       },
+       {
+        "t": "angle",
+        "x": 20,
+        "y": 40,
+        "from": 270,
+        "to": 0,
+        "r": 20,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "angle",
+        "x": 110,
+        "y": 40,
+        "from": 180,
+        "to": 270,
+        "r": 20,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "angle",
+        "x": 110,
+        "y": 130,
+        "from": 90,
+        "to": 180,
+        "r": 20,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "angle",
+        "x": 20,
+        "y": 130,
+        "from": 0,
+        "to": 90,
+        "r": 20,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 160,
+        "text": "carré",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         160,
+         55,
+         300,
+         55,
+         300,
+         130,
+         160,
+         130
+        ],
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "angle",
+        "x": 160,
+        "y": 55,
+        "from": 270,
+        "to": 0,
+        "r": 20,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "angle",
+        "x": 300,
+        "y": 55,
+        "from": 180,
+        "to": 270,
+        "r": 20,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "angle",
+        "x": 300,
+        "y": 130,
+        "from": 90,
+        "to": 180,
+        "r": 20,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "angle",
+        "x": 160,
+        "y": 130,
+        "from": 0,
+        "to": 90,
+        "r": 20,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 160,
+        "text": "rectangle",
+        "size": 18,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         350,
+         130,
+         350,
+         40,
+         460,
+         130
+        ],
+        "stroke": "orange",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "angle",
+        "x": 350,
+        "y": 130,
+        "from": 0,
+        "to": 90,
+        "r": 20,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 405,
+        "y": 160,
+        "text": "triangle rectangle",
+        "size": 18,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'angle droit",
+     "md": "Un **angle droit** est un angle comme le coin d'une feuille. On le vérifie avec une **équerre** : le coin de l'équerre se place exactement dans l'angle. On le marque avec un petit **carré** ou un petit **coin**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les propriétés",
+     "md": "- **Carré** : 4 côtés de **même longueur**, 4 angles droits.\n- **Rectangle** : 4 angles droits, les côtés **opposés** ont la même longueur.\n- **Triangle** : 3 côtés, 3 sommets. Un **triangle rectangle** a un angle droit.\n- **Cercle** : tous ses points sont à la **même distance** de son centre (on le trace avec un compas)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : reconnaître une figure",
+     "statement": "Une figure a 4 côtés, 4 angles droits, mais deux côtés plus longs que les deux autres. Quelle figure est-ce ?",
+     "steps": [
+      {
+       "md": "4 côtés et 4 angles droits : ce peut être un carré ou un rectangle."
+      },
+      {
+       "md": "Les côtés n'ont pas tous la même longueur : ce n'est pas un carré."
+      }
+     ],
+     "answer": "**C'est un rectangle.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : vérifier un angle droit",
+     "statement": "Comment savoir si un angle est droit ?",
+     "steps": [
+      {
+       "md": "Je pose le sommet de l'équerre sur le sommet de l'angle."
+      },
+      {
+       "md": "Si les deux côtés de l'angle suivent exactement les bords de l'équerre, l'angle est droit."
+      }
+     ],
+     "answer": "**On utilise l'équerre.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Un **carré** est un rectangle **particulier** (tous ses côtés sont égaux), mais un rectangle n'est pas toujours un carré.\n- Ne juge pas un angle droit « à l'œil » : utilise l'équerre."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-figures-planes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-figures-planes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-figures-planes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-figures-planes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-figures-planes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-figures-planes-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche dans la classe cinq objets qui ont des angles droits (cahier, tableau, porte...)."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-perimetre",
+   "title": "Le périmètre",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Géométrie et mesures : périmètre du carré, du rectangle, du triangle",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Calculer le périmètre d'un carré, d'un rectangle, d'un triangle.",
+    "Choisir l'unité de longueur.",
+    "Résoudre un petit problème de contour."
+   ],
+   "prerequisites": [
+    "ce2-maths-figures-planes"
+   ],
+   "exercises": [
+    "ce2-maths-perimetre-01",
+    "ce2-maths-perimetre-02",
+    "ce2-maths-perimetre-03",
+    "ce2-maths-perimetre-04",
+    "ce2-maths-perimetre-05",
+    "ce2-maths-perimetre-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-perimetre-q1",
+    "ce2-maths-perimetre-q2",
+    "ce2-maths-perimetre-q3",
+    "ce2-maths-perimetre-q4",
+    "ce2-maths-perimetre-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que la formule 2 × (L + l) est attendue au CE2 (ou seulement L + l + L + l)."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Le périmètre"
+    },
+    {
+     "type": "text",
+     "md": "Le **périmètre** d'une figure est la **longueur de son contour**. C'est la longueur du tour de la figure, comme le tour d'un terrain."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le rectangle de 8 cm sur 5 cm : son périmètre est 26 cm.",
+     "alt": "Un rectangle de 8 cm de long et 5 cm de large. Le périmètre est 8 plus 5 plus 8 plus 5 égale 26 cm.",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 175,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         35,
+         260,
+         35,
+         260,
+         135,
+         60,
+         135
+        ],
+        "stroke": "orange",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 25,
+        "text": "8 cm",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 92,
+        "text": "5 cm",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 158,
+        "text": "8 cm",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 92,
+        "text": "5 cm",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 60,
+        "text": "Périmètre =",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 95,
+        "text": "8 + 5 + 8 + 5",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 130,
+        "text": "= 26 cm",
+        "size": 20,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Calculer un périmètre",
+     "md": "Je **additionne les longueurs de tous les côtés**.\n\n- **Carré** de côté c : 4 × c.\n- **Rectangle** de longueur L et de largeur l : 2 × (L + l), ou L + l + L + l.\n- **Triangle** : on additionne ses 3 côtés.\n\nLe périmètre s'exprime en **cm**, **m**, **km**… comme les longueurs."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un carré",
+     "statement": "Un carré a un côté de 6 cm. Quel est son périmètre ?",
+     "steps": [
+      {
+       "md": "Un carré a 4 côtés égaux."
+      },
+      {
+       "md": "6 × 4 = 24."
+      }
+     ],
+     "answer": "**Le périmètre est 24 cm.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un rectangle",
+     "statement": "Un rectangle mesure 9 cm de long et 4 cm de large. Quel est son périmètre ?",
+     "steps": [
+      {
+       "md": "Je calcule L + l : 9 + 4 = 13."
+      },
+      {
+       "md": "Je double : 13 × 2 = 26."
+      }
+     ],
+     "answer": "**Le périmètre est 26 cm.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- N'oublie aucun côté : un rectangle a **4** côtés (2 longueurs, 2 largeurs).\n- Le périmètre est une **longueur** (cm), pas une surface.\n- Garde la **même unité** pour tous les côtés."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-perimetre-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-perimetre-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-perimetre-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-perimetre-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-perimetre-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-perimetre-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Mesure le périmètre de ton cahier avec une règle, puis le périmètre de ta table."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-maths-figures-planes-01",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Combien de côtés a un rectangle ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Un rectangle a **4** côtés.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-figures-planes-02",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Vrai ou faux : un carré a quatre côtés de même longueur.",
+   "answer": true,
+   "explanation": "Vrai : c'est ce qui le distingue des autres rectangles.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-figures-planes-03",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Associe chaque figure à sa propriété.",
+   "pairs": [
+    [
+     "carré",
+     "4 côtés égaux et 4 angles droits"
+    ],
+    [
+     "rectangle",
+     "4 angles droits, côtés opposés égaux"
+    ],
+    [
+     "triangle",
+     "3 côtés et 3 sommets"
+    ],
+    [
+     "cercle",
+     "tous les points à la même distance du centre"
+    ]
+   ],
+   "explanation": "Ce sont les propriétés de base des figures.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-figures-planes-04",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Un triangle rectangle a…",
+   "choices": [
+    "un angle droit",
+    "trois angles droits",
+    "quatre côtés",
+    "aucun sommet"
+   ],
+   "answer": 0,
+   "explanation": "Rectangle : il a un angle droit.",
+   "method": "Connaître le vocabulaire.",
+   "mistakes": [
+    "Confondre triangle rectangle et rectangle."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-figures-planes-05",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Explique comment vérifier avec une équerre qu'un angle est droit.",
+   "model": "Je pose le sommet de l'équerre sur le sommet de l'angle. Si les deux côtés suivent exactement les bords de l'équerre, l'angle est droit.",
+   "rubric": [
+    "Le sommet de l'équerre est sur le sommet de l'angle.",
+    "Les côtés de l'angle suivent les bords."
+   ],
+   "explanation": "L'équerre est un outil pour contrôler un angle droit.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-figures-planes-06",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Observe un carré.",
+   "method": "Propriétés des figures.",
+   "mistakes": [
+    "Penser que rectangle et carré sont pareils."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "prompt": "Combien de sommets a un carré ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "Un carré a **4** sommets.",
+     "points": 1,
+     "id": "ce2-maths-figures-planes-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "prompt": "Combien d'angles droits a un carré ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "**4** angles droits.",
+     "points": 1,
+     "id": "ce2-maths-figures-planes-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 2,
+     "prompt": "Vrai ou faux : tout rectangle est un carré.",
+     "answer": false,
+     "explanation": "Faux. Un rectangle a 4 angles droits mais ses côtés ne sont pas tous égaux (sauf s'il est un carré).",
+     "points": 1,
+     "id": "ce2-maths-figures-planes-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-figures-planes-q1",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Quel outil permet de vérifier un angle droit ?",
+   "choices": [
+    "le compas",
+    "l'équerre",
+    "la règle graduée seule",
+    "le rapporteur"
+   ],
+   "answer": 1,
+   "explanation": "L'équerre sert à contrôler les angles droits.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-figures-planes-q2",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Un carré a combien de côtés égaux ?",
+   "choices": [
+    "2",
+    "3",
+    "4",
+    "1"
+   ],
+   "answer": 2,
+   "explanation": "Les 4 côtés d'un carré ont la même longueur.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-figures-planes-q3",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Quelle figure a 3 côtés ?",
+   "choices": [
+    "le carré",
+    "le rectangle",
+    "le cercle",
+    "le triangle"
+   ],
+   "answer": 3,
+   "explanation": "Tri- veut dire trois.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-figures-planes-q4",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Tous les points d'un cercle sont à la même distance…",
+   "choices": [
+    "du centre",
+    "d'un sommet",
+    "d'un côté",
+    "du bord de la feuille"
+   ],
+   "answer": 0,
+   "explanation": "On trace le cercle avec un compas.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-figures-planes-q5",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-figures-planes",
+   "prompt": "Un rectangle a combien d'angles droits ?",
+   "choices": [
+    "2",
+    "4",
+    "3",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "Un rectangle a 4 angles droits.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-01",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Un carré a un côté de 6 cm. Quel est son périmètre ?",
+   "answer": 24,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "4 × 6 = **24** cm.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-02",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Vrai ou faux : un rectangle de 9 cm sur 4 cm a un périmètre de 26 cm.",
+   "answer": true,
+   "explanation": "9 + 4 + 9 + 4 = 26 cm : vrai.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-03",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Un triangle a pour côtés 5 cm, 7 cm et 9 cm. Quel est son périmètre ?",
+   "answer": 21,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "5 + 7 + 9 = **21** cm.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-04",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Un rectangle a un périmètre de 30 cm et une longueur de 9 cm. Quelle est sa largeur ?",
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "Les deux longueurs font 18 cm. Il reste 30 − 18 = 12 cm pour les deux largeurs : 12 ÷ 2 = **6** cm.",
+   "mistakes": [
+    "Oublier de diviser par 2."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-05",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Un terrain rectangulaire mesure 25 m sur 12 m. Quelle longueur de clôture faut-il pour en faire le tour ?",
+   "model": "Périmètre = 2 × (25 + 12) = 74 m",
+   "rubric": [
+    "On calcule le périmètre du rectangle.",
+    "Résultat : 74 m."
+   ],
+   "explanation": "25 + 12 = 37 ; 37 × 2 = **74** m.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-06",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Un jardin carré a un côté de 15 m. On met du grillage tout autour.",
+   "method": "Périmètre d'abord, puis le prix.",
+   "mistakes": [
+    "Confondre périmètre et surface."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Quelle longueur de grillage faut-il ?",
+     "answer": 60,
+     "tolerance": 0,
+     "unit": "m",
+     "explanation": "4 × 15 = **60** m.",
+     "points": 1,
+     "id": "ce2-maths-perimetre-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Un mètre de grillage coûte 500 F. Combien coûte tout le grillage (en F) ?",
+     "answer": 30000,
+     "tolerance": 0,
+     "unit": "F",
+     "explanation": "60 × 500 = **30 000** F.",
+     "points": 1,
+     "id": "ce2-maths-perimetre-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "prompt": "Vrai ou faux : le périmètre s'exprime en mètres carrés.",
+     "answer": false,
+     "explanation": "Faux. Le périmètre est une longueur : il s'exprime en mètres.",
+     "points": 1,
+     "id": "ce2-maths-perimetre-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-perimetre-q1",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Le périmètre d'une figure, c'est…",
+   "choices": [
+    "la place qu'elle occupe",
+    "son nombre de sommets",
+    "la longueur de son contour",
+    "sa couleur"
+   ],
+   "answer": 2,
+   "explanation": "C'est le tour de la figure.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-q2",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Quel est le périmètre d'un carré de 5 cm de côté ?",
+   "choices": [
+    "10 cm",
+    "25 cm",
+    "15 cm",
+    "20 cm"
+   ],
+   "answer": 3,
+   "explanation": "4 × 5 = 20 cm.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-q3",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Quel est le périmètre d'un rectangle de 7 cm sur 3 cm ?",
+   "choices": [
+    "20 cm",
+    "10 cm",
+    "21 cm",
+    "14 cm"
+   ],
+   "answer": 0,
+   "explanation": "7 + 3 + 7 + 3 = 20 cm.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-q4",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Un périmètre s'exprime en…",
+   "choices": [
+    "cm²",
+    "cm, m, km",
+    "kg",
+    "litres"
+   ],
+   "answer": 1,
+   "explanation": "C'est une longueur.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-perimetre-q5",
+   "chapter": "ce2-maths-geometrie",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-perimetre",
+   "prompt": "Quel est le périmètre d'un triangle de côtés 4 cm, 5 cm et 6 cm ?",
+   "choices": [
+    "120 cm",
+    "9 cm",
+    "15 cm",
+    "14 cm"
+   ],
+   "answer": 2,
+   "explanation": "4 + 5 + 6 = 15 cm.",
+   "source": "Exercice original"
+  }
+ ]
+}

@@ -1,0 +1,1572 @@
+{
+ "chapter": "ce2-maths-mesures",
+ "lessons": [
+  {
+   "id": "ce2-maths-longueurs-masses",
+   "title": "Longueurs, masses et capacités : les conversions",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Mesures : longueurs, masses, capacités ; conversions",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Choisir l'unité adaptée.",
+    "Convertir des longueurs, des masses et des capacités.",
+    "Comparer des mesures."
+   ],
+   "prerequisites": [
+    "ce2-maths-multiplication"
+   ],
+   "exercises": [
+    "ce2-maths-longueurs-masses-01",
+    "ce2-maths-longueurs-masses-02",
+    "ce2-maths-longueurs-masses-03",
+    "ce2-maths-longueurs-masses-04",
+    "ce2-maths-longueurs-masses-05",
+    "ce2-maths-longueurs-masses-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-longueurs-masses-q1",
+    "ce2-maths-longueurs-masses-q2",
+    "ce2-maths-longueurs-masses-q3",
+    "ce2-maths-longueurs-masses-q4",
+    "ce2-maths-longueurs-masses-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les unités au programme du CE2 (km, m, dm ?, cm, mm ; kg, g ; L, dL, cL, mL) et le tableau de conversion."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Mesurer : longueurs, masses, capacités"
+    },
+    {
+     "type": "text",
+     "md": "Pour mesurer, on choisit une **unité** adaptée : le **mètre** pour une longueur, le **kilogramme** pour une masse, le **litre** pour une capacité. Pour comparer ou calculer, il faut parfois **convertir**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les conversions de longueurs : km, m, cm, mm.",
+     "alt": "De gauche à droite : kilomètre, mètre, centimètre, millimètre. Des flèches indiquent : 1 km égale 1 000 m, 1 m égale 100 cm, 1 cm égale 10 mm.",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 165,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 50,
+        "w": 100,
+        "h": 45,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 79.5,
+        "text": "km",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 50,
+        "w": 100,
+        "h": 45,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 79.5,
+        "text": "m",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 50,
+        "w": 100,
+        "h": 45,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 79.5,
+        "text": "cm",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 50,
+        "w": 100,
+        "h": 45,
+        "stroke": "red",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 480.0,
+        "y": 79.5,
+        "text": "mm",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 72,
+        "x2": 148,
+        "y2": 72,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 252,
+        "y1": 72,
+        "x2": 288,
+        "y2": 72,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 392,
+        "y1": 72,
+        "x2": 428,
+        "y2": 72,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 40,
+        "text": "× 1 000",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 40,
+        "text": "× 100",
+        "size": 15,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 40,
+        "text": "× 10",
+        "size": 15,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 125,
+        "text": "Pour convertir vers la petite unité, je multiplie ;",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 148,
+        "text": "vers la grande unité, je divise.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "À connaître",
+     "md": "**Longueurs** : 1 km = 1 000 m ; 1 m = 100 cm ; 1 cm = 10 mm.\n\n**Masses** : 1 kg = 1 000 g.\n\n**Capacités** : 1 L = 100 cL ; 1 L = 1 000 mL."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Convertir",
+     "md": "- Pour passer à une **plus petite** unité, je **multiplie** : 3 m = 3 × 100 = 300 cm.\n- Pour passer à une **plus grande** unité, je **divise** : 4 000 g = 4 000 ÷ 1 000 = 4 kg.\n- Je peux aussi utiliser un **tableau de conversion**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : convertir",
+     "statement": "Convertis 2 m 35 cm en centimètres.",
+     "steps": [
+      {
+       "md": "2 m = 2 × 100 = 200 cm."
+      },
+      {
+       "md": "200 cm + 35 cm = 235 cm."
+      }
+     ],
+     "answer": "**2 m 35 cm = 235 cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : comparer",
+     "statement": "Range 1 m, 90 cm et 1 050 mm du plus petit au plus grand.",
+     "steps": [
+      {
+       "md": "Je convertis en cm : 1 m = 100 cm ; 1 050 mm = 105 cm (1 050 ÷ 10)."
+      },
+      {
+       "md": "90 cm < 100 cm < 105 cm."
+      }
+     ],
+     "answer": "**90 cm < 1 m < 1 050 mm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Il faut **toujours** la même unité pour comparer ou additionner.\n- Ne confonds pas **kg** (masse) et **g** : 1 kg = 1 000 g.\n- Pour les longueurs, choisis l'unité adaptée : cm pour un cahier, m pour une cour, km pour une route."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-longueurs-masses-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-longueurs-masses-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-longueurs-masses-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-longueurs-masses-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-longueurs-masses-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-longueurs-masses-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Mesure la longueur de ta table en cm, puis en m. Pèse un sac de riz et exprime sa masse en kg et en g."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-heure",
+   "title": "L'heure et les durées",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Mesures : lecture de l'heure, durées",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire l'heure sur une horloge et en 24 heures.",
+    "Calculer une durée.",
+    "Convertir heures et minutes."
+   ],
+   "prerequisites": [
+    "ce2-maths-addition-soustraction"
+   ],
+   "exercises": [
+    "ce2-maths-heure-01",
+    "ce2-maths-heure-02",
+    "ce2-maths-heure-03",
+    "ce2-maths-heure-04",
+    "ce2-maths-heure-05",
+    "ce2-maths-heure-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-heure-q1",
+    "ce2-maths-heure-q2",
+    "ce2-maths-heure-q3",
+    "ce2-maths-heure-q4",
+    "ce2-maths-heure-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le format 24 h est étudié en CE2 et la notation « 8 h 15 min »."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "L'heure et les durées"
+    },
+    {
+     "type": "text",
+     "md": "Une horloge a deux aiguilles : la **petite** montre les **heures**, la **grande** montre les **minutes**. On peut dire l'heure en deux façons : de 1 h à 12 h, ou de 0 h à 24 h."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une horloge qui indique 8 h 15.",
+     "alt": "Une horloge avec une petite aiguille rouge un peu après le 8 et une grande aiguille bleue sur le 3. Elle indique 8 heures 15 minutes, ou 20 heures 15 le soir.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 115,
+        "r": 95,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 55.18206931238265,
+        "text": "1",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 175.81793068761732,
+        "y": 83.0,
+        "text": "2",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 186.0,
+        "y": 121.0,
+        "text": "3",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 175.81793068761735,
+        "y": 159.0,
+        "text": "4",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 186.81793068761735,
+        "text": "5",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110.00000000000001,
+        "y": 197.0,
+        "text": "6",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 72.0,
+        "y": 186.81793068761732,
+        "text": "7",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 44.18206931238268,
+        "y": 159.00000000000003,
+        "text": "8",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 34.0,
+        "y": 121.00000000000001,
+        "text": "9",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 44.182069312382666,
+        "y": 83.0,
+        "text": "10",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 71.99999999999997,
+        "y": 55.18206931238268,
+        "text": "11",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 109.99999999999999,
+        "y": 45.0,
+        "text": "12",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 115,
+        "x2": 71.19705963452594,
+        "y2": 131.07270415933377,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 115,
+        "x2": 172.0,
+        "y2": 115.0,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 115,
+        "r": 5,
+        "stroke": "ink",
+        "fill": "ink"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 70,
+        "text": "8 h 15 min",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 105,
+        "text": "(le matin)",
+        "size": 16,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 140,
+        "text": "ou 20 h 15",
+        "size": 20,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 172,
+        "text": "(le soir, en 24 h)",
+        "size": 15,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 210,
+        "text": "petite aiguille : heures",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 232,
+        "text": "grande aiguille : minutes",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "À connaître",
+     "md": "- 1 heure = **60 minutes** ; 1 minute = 60 secondes.\n- Une **demi-heure** = 30 min ; un **quart d'heure** = 15 min.\n- 1 jour = **24 heures** ; 1 semaine = **7 jours**.\n- Après midi, on peut dire 13 h, 14 h… 24 h : on ajoute 12. Ainsi **15 h = 3 h de l'après-midi**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Calculer une durée",
+     "md": "Pour calculer la **durée** entre deux heures :\n\n1. Je passe aux **heures rondes** : de 8 h 15 à 9 h, il y a 45 min.\n2. J'ajoute les heures entières, puis les minutes qui restent.\n\nOu je convertis tout en **minutes** : 8 h 15 = 495 min."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une durée",
+     "statement": "Un film commence à 8 h 15 et finit à 10 h 45. Combien de temps dure-t-il ?",
+     "steps": [
+      {
+       "md": "De 8 h 15 à 9 h : 45 min. De 9 h à 10 h : 1 h = 60 min. De 10 h à 10 h 45 : 45 min."
+      },
+      {
+       "md": "45 + 60 + 45 = 150 min, soit 2 h 30 min."
+      }
+     ],
+     "answer": "**Le film dure 2 h 30 min (150 minutes).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : l'heure d'arrivée",
+     "statement": "Un bus part à 6 h 40 et roule pendant 2 h 25 min. À quelle heure arrive-t-il ?",
+     "steps": [
+      {
+       "md": "6 h 40 + 2 h = 8 h 40."
+      },
+      {
+       "md": "8 h 40 + 25 min = 9 h 05 (car 40 + 20 = 60 min = 1 h, puis 5 min)."
+      }
+     ],
+     "answer": "**Il arrive à 9 h 05.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Il y a **60 minutes** dans une heure, pas 100.\n- 1 h 30 min n'est pas 1,30 h : c'est 90 min.\n- Quand on passe 60 minutes, on ajoute 1 heure."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-heure-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-heure-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-heure-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-heure-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-heure-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-heure-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Construis une horloge en carton avec deux aiguilles mobiles et montre l'heure du réveil, de la récréation et du repas."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-fcfa",
+   "title": "Le franc CFA : prix et monnaie",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Mesures : monnaie (FCFA), prix et rendu de monnaie",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Calculer une somme avec pièces et billets.",
+    "Calculer un prix à partir du prix unitaire.",
+    "Calculer la monnaie à rendre."
+   ],
+   "prerequisites": [
+    "ce2-maths-multiplication",
+    "ce2-maths-addition-soustraction"
+   ],
+   "exercises": [
+    "ce2-maths-fcfa-01",
+    "ce2-maths-fcfa-02",
+    "ce2-maths-fcfa-03",
+    "ce2-maths-fcfa-04",
+    "ce2-maths-fcfa-05",
+    "ce2-maths-fcfa-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-fcfa-q1",
+    "ce2-maths-fcfa-q2",
+    "ce2-maths-fcfa-q3",
+    "ce2-maths-fcfa-q4",
+    "ce2-maths-fcfa-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les valeurs de pièces et de billets en circulation (100 F et 500 F en pièces, 1 000 à 10 000 F en billets) avant publication.",
+    "Les prix sont fictifs, choisis pour faciliter le calcul."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "La monnaie : le franc CFA"
+    },
+    {
+     "type": "text",
+     "md": "Au Cameroun, on paie avec le **franc CFA** (**FCFA** ou **F**). Il y a des pièces (par exemple 100 F, 500 F) et des billets (par exemple 1 000 F, 2 000 F, 5 000 F, 10 000 F)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quelques valeurs de pièces et de billets en FCFA.",
+     "alt": "Deux pièces rondes de 100 F et 500 F, puis quatre billets de 1 000 F, 2 000 F, 5 000 F et 10 000 F.",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 145,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 45,
+        "cy": 60,
+        "r": 30,
+        "stroke": "grey",
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 66,
+        "text": "100 F",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 60,
+        "r": 30,
+        "stroke": "orange",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 66,
+        "text": "500 F",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 35,
+        "w": 84,
+        "h": 50,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 212.0,
+        "y": 65.25,
+        "text": "1 000 F",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 35,
+        "w": 84,
+        "h": 50,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 302.0,
+        "y": 65.25,
+        "text": "2 000 F",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 35,
+        "w": 84,
+        "h": 50,
+        "stroke": "red",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 392.0,
+        "y": 65.25,
+        "text": "5 000 F",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 440,
+        "y": 35,
+        "w": 84,
+        "h": 50,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 482.0,
+        "y": 65.25,
+        "text": "10 000 F",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 125,
+        "text": "Des pièces et des billets de FCFA",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Compter de l'argent",
+     "md": "On additionne les valeurs.\n\n- 2 pièces de 500 F + 3 pièces de 100 F = 1 000 + 300 = **1 300 F**.\n- 1 000 F = 2 × 500 F = 10 × 100 F.\n\nPour calculer le **prix de plusieurs objets** de même prix, on multiplie : 3 kg à 450 F le kg → 3 × 450 F."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rendre la monnaie",
+     "md": "Pour trouver **ce qu'on rend** :\n\n**monnaie rendue = somme donnée − prix**.\n\nExemple : prix 1 350 F, je donne 2 000 F. On rend 2 000 − 1 350 = 650 F."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer un prix",
+     "statement": "Ngono achète 3 kg de plantain à 450 F le kg. Combien paie-t-elle ?",
+     "steps": [
+      {
+       "md": "Chaque kilogramme coûte 450 F, il y en a 3."
+      },
+      {
+       "md": "3 × 450 = 1 350."
+      }
+     ],
+     "answer": "**Elle paie 1 350 F.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : rendre la monnaie",
+     "statement": "Elle donne un billet de 2 000 F. Combien lui rend-on ?",
+     "steps": [
+      {
+       "md": "On soustrait le prix de la somme donnée."
+      },
+      {
+       "md": "2 000 − 1 350 = 650."
+      }
+     ],
+     "answer": "**On lui rend 650 F.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- N'oublie pas l'unité **F** dans la réponse.\n- Pour rendre la monnaie, on soustrait **le prix** de **la somme donnée** (pas l'inverse).\n- Vérifie : prix + monnaie rendue = somme donnée."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-fcfa-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-fcfa-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-fcfa-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-fcfa-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-fcfa-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-fcfa-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Fais une dînette en classe avec de faux billets : un élève vend, l'autre achète et rend la monnaie."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-maths-longueurs-masses-01",
+   "chapter": "ce2-maths-mesures",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Convertis : 3 m en centimètres.",
+   "answer": 300,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "3 × 100 = **300** cm.",
+   "mistakes": [
+    "Multiplier par 10 au lieu de 100."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-02",
+   "chapter": "ce2-maths-mesures",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Vrai ou faux : 2 kg = 2 000 g.",
+   "answer": true,
+   "explanation": "1 kg = 1 000 g, donc 2 kg = 2 × 1 000 = 2 000 g.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-03",
+   "chapter": "ce2-maths-mesures",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Convertis : 5 km en mètres.",
+   "answer": 5000,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "5 × 1 000 = **5 000** m.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-04",
+   "chapter": "ce2-maths-mesures",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Convertis : 2 m 35 cm en centimètres.",
+   "answer": 235,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "2 m = 200 cm ; 200 + 35 = **235** cm.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-05",
+   "chapter": "ce2-maths-mesures",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Range du plus petit au plus grand : 1 m ; 90 cm ; 1 050 mm ; 1 km.",
+   "model": "90 cm < 1 m < 1 050 mm < 1 km",
+   "rubric": [
+    "90 cm est le plus petit.",
+    "1 050 mm vaut 105 cm.",
+    "1 km est le plus grand."
+   ],
+   "explanation": "En cm : 90 ; 100 ; 105 ; 100 000.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-06",
+   "chapter": "ce2-maths-mesures",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Un sac de riz pèse 25 kg. On le partage en sachets de 500 g.",
+   "method": "Convertir d'abord dans la même unité.",
+   "mistakes": [
+    "Diviser 25 par 500 sans convertir."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Convertis 25 kg en grammes.",
+     "answer": 25000,
+     "tolerance": 0,
+     "unit": "g",
+     "explanation": "25 × 1 000 = **25 000** g.",
+     "points": 1,
+     "id": "ce2-maths-longueurs-masses-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien de sachets de 500 g peut-on remplir ?",
+     "answer": 50,
+     "tolerance": 0,
+     "explanation": "25 000 ÷ 500 = **50** sachets.",
+     "points": 1,
+     "id": "ce2-maths-longueurs-masses-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "prompt": "Vrai ou faux : 1 L = 100 cL.",
+     "answer": true,
+     "explanation": "Vrai : 1 litre = 100 centilitres.",
+     "points": 1,
+     "id": "ce2-maths-longueurs-masses-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-q1",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Combien de mètres y a-t-il dans 1 km ?",
+   "choices": [
+    "1 000",
+    "100",
+    "10",
+    "10 000"
+   ],
+   "answer": 0,
+   "explanation": "1 km = 1 000 m.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-q2",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Combien de centimètres y a-t-il dans 1 m ?",
+   "choices": [
+    "10",
+    "100",
+    "1 000",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "1 m = 100 cm.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-q3",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Combien de centilitres y a-t-il dans 1 litre ?",
+   "choices": [
+    "10",
+    "1 000",
+    "100",
+    "1"
+   ],
+   "answer": 2,
+   "explanation": "1 L = 100 cL.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-q4",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Quelle unité choisir pour mesurer la longueur d'un cahier ?",
+   "choices": [
+    "le kilomètre",
+    "le litre",
+    "le gramme",
+    "le centimètre"
+   ],
+   "answer": 3,
+   "explanation": "Un cahier mesure environ 20 cm.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-longueurs-masses-q5",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-longueurs-masses",
+   "prompt": "Quelle est la plus grande masse ?",
+   "choices": [
+    "1 500 g",
+    "900 g",
+    "1 kg",
+    "750 g"
+   ],
+   "answer": 0,
+   "explanation": "1 500 g = 1 kg 500 g : c'est la plus grande.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-01",
+   "chapter": "ce2-maths-mesures",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-heure",
+   "prompt": "Combien de minutes y a-t-il dans 1 heure ?",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "min",
+   "explanation": "1 heure = **60** minutes.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-02",
+   "chapter": "ce2-maths-mesures",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-heure",
+   "prompt": "Vrai ou faux : 15 h, c'est 3 h de l'après-midi.",
+   "answer": true,
+   "explanation": "15 − 12 = 3 : 15 h = 3 h de l'après-midi.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-03",
+   "chapter": "ce2-maths-mesures",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-heure",
+   "prompt": "Un spectacle commence à 8 h 15 et finit à 10 h 45. Combien de minutes dure-t-il ?",
+   "answer": 150,
+   "tolerance": 0,
+   "unit": "min",
+   "explanation": "De 8 h 15 à 10 h 15 : 2 h = 120 min ; puis 30 min : **150** min.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-04",
+   "chapter": "ce2-maths-mesures",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-heure",
+   "prompt": "Combien de minutes entre 7 h 45 et 9 h 10 ?",
+   "answer": 85,
+   "tolerance": 0,
+   "unit": "min",
+   "explanation": "7 h 45 → 8 h : 15 min ; 8 h → 9 h : 60 min ; 9 h → 9 h 10 : 10 min. 15 + 60 + 10 = **85** min.",
+   "mistakes": [
+    "Compter 100 minutes dans l'heure."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-05",
+   "chapter": "ce2-maths-mesures",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-heure",
+   "prompt": "L'école commence à 7 h 30 et finit à 12 h 45. Quelle est la durée de la matinée ?",
+   "model": "12 h 45 − 7 h 30 = 5 h 15 min",
+   "rubric": [
+    "L'élève trouve 5 h 15 min (ou 315 min).",
+    "Le calcul est expliqué."
+   ],
+   "explanation": "De 7 h 30 à 12 h 30 : 5 h. Puis 15 min. Total : 5 h 15 min = 315 min.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-06",
+   "chapter": "ce2-maths-mesures",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-heure",
+   "prompt": "Un bus part de Douala à 6 h 40 et arrive à Yaoundé à 9 h 05.",
+   "method": "Convertir en minutes.",
+   "mistakes": [
+    "Soustraire les heures et les minutes sans faire attention aux 60."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien de minutes dure le trajet ?",
+     "answer": 145,
+     "tolerance": 0,
+     "unit": "min",
+     "explanation": "De 6 h 40 à 7 h : 20 min ; de 7 h à 9 h : 120 min ; de 9 h à 9 h 05 : 5 min. 20 + 120 + 5 = **145** min.",
+     "points": 1,
+     "id": "ce2-maths-heure-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "Le trajet dure…",
+     "choices": [
+      "2 h 45 min",
+      "2 h 25 min",
+      "3 h 25 min",
+      "2 h 15 min"
+     ],
+     "answer": 1,
+     "explanation": "145 min = 120 min + 25 min = 2 h 25 min.",
+     "points": 1,
+     "id": "ce2-maths-heure-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "prompt": "Vrai ou faux : le trajet dure moins de 3 heures.",
+     "answer": true,
+     "explanation": "145 min < 180 min (3 h) : vrai.",
+     "points": 1,
+     "id": "ce2-maths-heure-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-heure-q1",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-heure",
+   "prompt": "Combien d'heures y a-t-il dans 1 jour ?",
+   "choices": [
+    "12",
+    "60",
+    "24",
+    "48"
+   ],
+   "answer": 2,
+   "explanation": "1 jour = 24 heures.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-q2",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-heure",
+   "prompt": "Une demi-heure dure…",
+   "choices": [
+    "15 minutes",
+    "50 minutes",
+    "60 minutes",
+    "30 minutes"
+   ],
+   "answer": 3,
+   "explanation": "La moitié de 60 min.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-q3",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-heure",
+   "prompt": "18 h, c'est…",
+   "choices": [
+    "6 h du soir",
+    "8 h du matin",
+    "6 h du matin",
+    "2 h du soir"
+   ],
+   "answer": 0,
+   "explanation": "18 − 12 = 6.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-q4",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-heure",
+   "prompt": "Combien de jours y a-t-il dans 1 semaine ?",
+   "choices": [
+    "5",
+    "7",
+    "6",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "Lundi à dimanche : 7 jours.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-heure-q5",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-heure",
+   "prompt": "2 h 30 min, c'est combien de minutes ?",
+   "choices": [
+    "230",
+    "90",
+    "150",
+    "200"
+   ],
+   "answer": 2,
+   "explanation": "2 × 60 + 30 = 150.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-01",
+   "chapter": "ce2-maths-mesures",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Combien font 2 pièces de 500 F et 3 pièces de 100 F ?",
+   "answer": 1300,
+   "tolerance": 0,
+   "unit": "F",
+   "explanation": "2 × 500 = 1 000 ; 3 × 100 = 300 ; 1 000 + 300 = **1 300** F.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-02",
+   "chapter": "ce2-maths-mesures",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Vrai ou faux : 1 000 F = 2 × 500 F.",
+   "answer": true,
+   "explanation": "2 × 500 = 1 000 : vrai.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-03",
+   "chapter": "ce2-maths-mesures",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Le prix est 1 350 F. Je donne 2 000 F. Combien me rend-on ?",
+   "answer": 650,
+   "tolerance": 0,
+   "unit": "F",
+   "explanation": "2 000 − 1 350 = **650** F.",
+   "mistakes": [
+    "Faire 1 350 − 2 000."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-04",
+   "chapter": "ce2-maths-mesures",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "3 kg de plantain coûtent 450 F le kg. Combien paie-t-on ?",
+   "answer": 1350,
+   "tolerance": 0,
+   "unit": "F",
+   "explanation": "3 × 450 = **1 350** F.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-05",
+   "chapter": "ce2-maths-mesures",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Fotso a 5 000 F. Il achète 2 cahiers à 600 F l'un et un stylo à 250 F. Combien lui reste-t-il ?",
+   "model": "2 × 600 = 1 200 ; 1 200 + 250 = 1 450 ; 5 000 − 1 450 = 3550 F",
+   "rubric": [
+    "Le prix des 2 cahiers est calculé (1 200 F).",
+    "La dépense totale est 1 450 F.",
+    "Il reste 3550 F."
+   ],
+   "explanation": "Dépenses : 1 200 + 250 = 1 450 F. Reste : 5 000 − 1 450 = **3550** F.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-06",
+   "chapter": "ce2-maths-mesures",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Mme Essomba achète 4 sacs de riz à 1 250 F le sac.",
+   "method": "Multiplier puis soustraire.",
+   "mistakes": [
+    "Oublier le nombre de sacs."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien paie-t-elle en tout ?",
+     "answer": 5000,
+     "tolerance": 0,
+     "unit": "F",
+     "explanation": "4 × 1 250 = **5 000** F.",
+     "points": 1,
+     "id": "ce2-maths-fcfa-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "prompt": "Elle donne 10 000 F. Combien lui rend-on ?",
+     "answer": 5000,
+     "tolerance": 0,
+     "unit": "F",
+     "explanation": "10 000 − 5 000 = **5 000** F.",
+     "points": 1,
+     "id": "ce2-maths-fcfa-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "prompt": "Vrai ou faux : elle peut payer exactement avec 5 billets de 1 000 F.",
+     "answer": true,
+     "explanation": "5 × 1 000 = 5 000 F : vrai.",
+     "points": 1,
+     "id": "ce2-maths-fcfa-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-fcfa-q1",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Combien font 5 × 200 F ?",
+   "choices": [
+    "500 F",
+    "2 000 F",
+    "205 F",
+    "1 000 F"
+   ],
+   "answer": 3,
+   "explanation": "5 × 200 = 1 000.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-q2",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Combien faut-il de pièces de 500 F pour faire 2 000 F ?",
+   "choices": [
+    "4",
+    "2",
+    "5",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "2 000 ÷ 500 = 4.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-q3",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Le prix est 750 F, je donne 1 000 F. On me rend…",
+   "choices": [
+    "350 F",
+    "250 F",
+    "150 F",
+    "1 750 F"
+   ],
+   "answer": 1,
+   "explanation": "1 000 − 750 = 250.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-q4",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Combien font 1 000 F + 500 F + 100 F ?",
+   "choices": [
+    "1 500 F",
+    "1 100 F",
+    "1 600 F",
+    "2 600 F"
+   ],
+   "answer": 2,
+   "explanation": "1 000 + 500 + 100 = 1 600.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-fcfa-q5",
+   "chapter": "ce2-maths-mesures",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-fcfa",
+   "prompt": "Combien font 10 000 F ÷ 2 ?",
+   "choices": [
+    "2 000 F",
+    "500 F",
+    "8 000 F",
+    "5 000 F"
+   ],
+   "answer": 3,
+   "explanation": "La moitié de 10 000 est 5 000.",
+   "source": "Exercice original"
+  }
+ ]
+}

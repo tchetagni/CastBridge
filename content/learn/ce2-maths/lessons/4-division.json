@@ -1,0 +1,481 @@
+{
+ "chapter": "ce2-maths-operations",
+ "lessons": [
+  {
+   "id": "ce2-maths-division",
+   "title": "La division par un nombre à un chiffre",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Opérations : division posée par un nombre à un chiffre (quotient, reste)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Poser une division par un nombre à un chiffre.",
+    "Trouver le quotient et le reste.",
+    "Vérifier avec dividende = quotient × diviseur + reste."
+   ],
+   "prerequisites": [
+    "ce2-maths-tables",
+    "ce2-maths-multiplication"
+   ],
+   "exercises": [
+    "ce2-maths-division-01",
+    "ce2-maths-division-02",
+    "ce2-maths-division-03",
+    "ce2-maths-division-04",
+    "ce2-maths-division-05",
+    "ce2-maths-division-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-division-q1",
+    "ce2-maths-division-q2",
+    "ce2-maths-division-q3",
+    "ce2-maths-division-q4",
+    "ce2-maths-division-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la présentation de la division posée enseignée au Cameroun (potence) et le niveau de difficulté (dividende de 3 chiffres)."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "La division par un nombre à un chiffre"
+    },
+    {
+     "type": "text",
+     "md": "**Diviser**, c'est **partager** en parts égales ou chercher **combien de fois** un nombre est contenu dans un autre. 12 ÷ 3 = 4 car 3 × 4 = 12."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le vocabulaire",
+     "md": "Dans 78 ÷ 3 = 26 :\n\n- 78 est le **dividende**,\n- 3 est le **diviseur**,\n- 26 est le **quotient**.\n\nQuand le partage ne tombe pas juste, il reste un **reste**, toujours **plus petit que le diviseur**."
+    },
+    {
+     "type": "illustration",
+     "caption": "La division posée 78 ÷ 3 = 26.",
+     "alt": "Une division posée : 78 divisé par 3. On trouve 2 dizaines puis 6 unités. Le quotient est 26. À droite, les étapes et la preuve 26 fois 3 égale 78.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 175,
+      "items": [
+       {
+        "t": "text",
+        "x": 60,
+        "y": 50,
+        "text": "7  8",
+        "size": 26,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 25,
+        "x2": 95,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 62,
+        "x2": 175,
+        "y2": 62,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 50,
+        "text": "3",
+        "size": 26,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 100,
+        "text": "2  6",
+        "size": 26,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 95,
+        "text": "− 6",
+        "size": 18,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 105,
+        "x2": 92,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 125,
+        "text": "1  8",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 40,
+        "text": "7 dizaines ÷ 3 : 2 dizaines",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 64,
+        "text": "2 × 3 = 6 ; 7 − 6 = 1",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 98,
+        "text": "j'abaisse le 8 : 18",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 122,
+        "text": "18 ÷ 3 = 6",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 160,
+        "text": "Preuve : 26 × 3 = 78",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Poser une division",
+     "md": "1. Je regarde les **dizaines** : combien de fois 3 dans 7 ? 2 fois. J'écris 2.\n2. Je calcule 2 × 3 = 6, puis 7 − 6 = 1 : il reste 1 dizaine.\n3. J'**abaisse** le chiffre suivant (8) : 18.\n4. Combien de fois 3 dans 18 ? 6 fois. J'écris 6.\n5. Je vérifie : **quotient × diviseur + reste = dividende**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : sans reste",
+     "statement": "Calcule 78 ÷ 3.",
+     "steps": [
+      {
+       "md": "7 dizaines ÷ 3 : 2 fois (2 × 3 = 6), il reste 1 dizaine. J'abaisse 8 : 18."
+      },
+      {
+       "md": "18 ÷ 3 = 6, reste 0."
+      }
+     ],
+     "answer": "**78 ÷ 3 = 26**. Preuve : 26 × 3 = 78."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avec un reste",
+     "statement": "Calcule 85 ÷ 4.",
+     "steps": [
+      {
+       "md": "8 dizaines ÷ 4 = 2 (2 × 4 = 8), reste 0. J'abaisse 5."
+      },
+      {
+       "md": "5 ÷ 4 = 1 (1 × 4 = 4), reste 1."
+      }
+     ],
+     "answer": "**85 = 4 × 21 + 1** : quotient 21, reste 1. Preuve : 21 × 4 + 1 = 85."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Le **reste** doit toujours être **plus petit que le diviseur**.\n- N'oublie pas d'**abaisser** le chiffre suivant.\n- Si tu ne peux pas diviser un chiffre (par ex. 2 ÷ 3), tu écris 0 et tu abaisses le suivant."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-division-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-division-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-division-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-division-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-division-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-division-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour trouver combien de fois 7 est dans 56, pense à la table de 7 : 7 × 8 = 56."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-maths-division-01",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-division",
+   "prompt": "Calcule : 36 ÷ 4.",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "4 × 9 = 36 : **9**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-division-02",
+   "chapter": "ce2-maths-operations",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-division",
+   "prompt": "Vrai ou faux : 47 ÷ 5 donne un quotient de 9 et un reste de 2.",
+   "answer": true,
+   "explanation": "5 × 9 = 45 et 47 − 45 = 2. Le reste 2 est plus petit que 5 : vrai.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-division-03",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-division",
+   "prompt": "Calcule : 84 ÷ 2.",
+   "answer": 42,
+   "tolerance": 0,
+   "explanation": "8 dizaines ÷ 2 = 4 dizaines ; 4 unités ÷ 2 = 2 : **42**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-division-04",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-division",
+   "prompt": "Donne le quotient de 253 ÷ 4.",
+   "answer": 63,
+   "tolerance": 0,
+   "explanation": "25 ÷ 4 = 6 (24), reste 1 ; j'abaisse 3 : 13 ÷ 4 = 3 (12), reste 1. Quotient **63**, reste 1. Preuve : 63 × 4 + 1 = 253.",
+   "mistakes": [
+    "Oublier d'abaisser le chiffre."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-division-05",
+   "chapter": "ce2-maths-operations",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-division",
+   "prompt": "Pose et calcule : 945 ÷ 3.",
+   "model": "945 ÷ 3 = 315",
+   "rubric": [
+    "La division est bien posée.",
+    "Les étapes sont justes.",
+    "Résultat : 315."
+   ],
+   "explanation": "9 ÷ 3 = 3 ; 4 ÷ 3 = 1 reste 1 ; 15 ÷ 3 = 5. Résultat **315**. Preuve : 315 × 3 = 945.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-division-06",
+   "chapter": "ce2-maths-operations",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-division",
+   "prompt": "Sept amis se partagent des mangues à parts égales.",
+   "method": "Poser la division et lire quotient et reste.",
+   "mistakes": [
+    "Donner le reste comme quotient."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Ils ont 245 mangues. Combien de mangues chacun reçoit-il ?",
+     "answer": 35,
+     "tolerance": 0,
+     "explanation": "245 ÷ 7 = **35** (7 × 35 = 245).",
+     "points": 1,
+     "id": "ce2-maths-division-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Ils ont en fait 250 mangues. Combien chacun reçoit-il (quotient) ?",
+     "answer": 35,
+     "tolerance": 0,
+     "explanation": "250 ÷ 7 : quotient **35**, reste 5.",
+     "points": 1,
+     "id": "ce2-maths-division-06-b"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien de mangues restent alors non partagées ?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "250 − 7 × 35 = 250 − 245 = **5**.",
+     "points": 1,
+     "id": "ce2-maths-division-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-division-q1",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-division",
+   "prompt": "Combien font 48 ÷ 6 ?",
+   "choices": [
+    "8",
+    "6",
+    "7",
+    "9"
+   ],
+   "answer": 0,
+   "explanation": "6 × 8 = 48.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-division-q2",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-division",
+   "prompt": "Dans une division, le reste est toujours…",
+   "choices": [
+    "plus grand que le diviseur",
+    "plus petit que le diviseur",
+    "égal au quotient",
+    "égal à 0"
+   ],
+   "answer": 1,
+   "explanation": "Sinon on pourrait encore partager.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-division-q3",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-division",
+   "prompt": "Pour vérifier 78 ÷ 3 = 26, je calcule…",
+   "choices": [
+    "26 + 3",
+    "78 − 3",
+    "26 × 3",
+    "78 × 3"
+   ],
+   "answer": 2,
+   "explanation": "26 × 3 = 78.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-division-q4",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-division",
+   "prompt": "Combien font 65 ÷ 5 ?",
+   "choices": [
+    "12",
+    "14",
+    "15",
+    "13"
+   ],
+   "answer": 3,
+   "explanation": "5 × 13 = 65.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-division-q5",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-division",
+   "prompt": "17 ÷ 5 : quotient 3, reste…",
+   "choices": [
+    "2",
+    "3",
+    "5",
+    "12"
+   ],
+   "answer": 0,
+   "explanation": "5 × 3 = 15 ; 17 − 15 = 2.",
+   "source": "Exercice original"
+  }
+ ]
+}

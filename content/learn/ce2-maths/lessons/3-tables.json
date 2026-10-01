@@ -1,0 +1,1315 @@
+{
+ "chapter": "ce2-maths-operations",
+ "lessons": [
+  {
+   "id": "ce2-maths-tables",
+   "title": "Les tables de multiplication et le calcul mental",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Calcul : tables de multiplication, calcul mental",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Connaître les tables de multiplication jusqu'à 9.",
+    "Utiliser des astuces de calcul mental (doubles, moitiés, × 5, × 9).",
+    "Trouver le multiple ou le facteur manquant."
+   ],
+   "prerequisites": [
+    "ce2-maths-multiplication"
+   ],
+   "exercises": [
+    "ce2-maths-tables-01",
+    "ce2-maths-tables-02",
+    "ce2-maths-tables-03",
+    "ce2-maths-tables-04",
+    "ce2-maths-tables-05",
+    "ce2-maths-tables-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-tables-q1",
+    "ce2-maths-tables-q2",
+    "ce2-maths-tables-q3",
+    "ce2-maths-tables-q4",
+    "ce2-maths-tables-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les tables exigées en CE2 (jusqu'à 9) et la place des multiples."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Les tables et le calcul mental"
+    },
+    {
+     "type": "text",
+     "md": "Connaître les **tables de multiplication** par cœur permet de calculer vite, de **tête**. Voici la table de 4 à 9."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les tables de multiplication de 4 à 9.",
+     "alt": "Un tableau à double entrée avec les nombres de 4 à 9 en ligne et en colonne. Par exemple, 7 × 8 = 56.",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 255,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 53.0,
+        "y": 31.6,
+        "text": "×",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 10,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 123.0,
+        "y": 31.6,
+        "text": "4",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 10,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 193.0,
+        "y": 31.6,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 10,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 263.0,
+        "y": 31.6,
+        "text": "6",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 10,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 31.6,
+        "text": "7",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 10,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 403.0,
+        "y": 31.6,
+        "text": "8",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 440,
+        "y": 10,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 473.0,
+        "y": 31.6,
+        "text": "9",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 45,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 53.0,
+        "y": 66.6,
+        "text": "4",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 45,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 123.0,
+        "y": 66.6,
+        "text": "16",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 45,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 193.0,
+        "y": 66.6,
+        "text": "20",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 45,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 263.0,
+        "y": 66.6,
+        "text": "24",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 45,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 66.6,
+        "text": "28",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 45,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 403.0,
+        "y": 66.6,
+        "text": "32",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 440,
+        "y": 45,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 473.0,
+        "y": 66.6,
+        "text": "36",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 80,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 53.0,
+        "y": 101.6,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 80,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 123.0,
+        "y": 101.6,
+        "text": "20",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 80,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 193.0,
+        "y": 101.6,
+        "text": "25",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 80,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 263.0,
+        "y": 101.6,
+        "text": "30",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 80,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 101.6,
+        "text": "35",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 80,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 403.0,
+        "y": 101.6,
+        "text": "40",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 440,
+        "y": 80,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 473.0,
+        "y": 101.6,
+        "text": "45",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 115,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 53.0,
+        "y": 136.6,
+        "text": "6",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 115,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 123.0,
+        "y": 136.6,
+        "text": "24",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 115,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 193.0,
+        "y": 136.6,
+        "text": "30",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 115,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 263.0,
+        "y": 136.6,
+        "text": "36",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 115,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 136.6,
+        "text": "42",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 115,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 403.0,
+        "y": 136.6,
+        "text": "48",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 440,
+        "y": 115,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 473.0,
+        "y": 136.6,
+        "text": "54",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 150,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 53.0,
+        "y": 171.6,
+        "text": "7",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 150,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 123.0,
+        "y": 171.6,
+        "text": "28",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 150,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 193.0,
+        "y": 171.6,
+        "text": "35",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 150,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 263.0,
+        "y": 171.6,
+        "text": "42",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 150,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 171.6,
+        "text": "49",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 150,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 403.0,
+        "y": 171.6,
+        "text": "56",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 440,
+        "y": 150,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 473.0,
+        "y": 171.6,
+        "text": "63",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 185,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 53.0,
+        "y": 206.6,
+        "text": "8",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 185,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 123.0,
+        "y": 206.6,
+        "text": "32",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 185,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 193.0,
+        "y": 206.6,
+        "text": "40",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 185,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 263.0,
+        "y": 206.6,
+        "text": "48",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 185,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 206.6,
+        "text": "56",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 185,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 403.0,
+        "y": 206.6,
+        "text": "64",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 440,
+        "y": 185,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 473.0,
+        "y": 206.6,
+        "text": "72",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 220,
+        "w": 66,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 53.0,
+        "y": 241.6,
+        "text": "9",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 220,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 123.0,
+        "y": 241.6,
+        "text": "36",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 220,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 193.0,
+        "y": 241.6,
+        "text": "45",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 220,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 263.0,
+        "y": 241.6,
+        "text": "54",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 220,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 241.6,
+        "text": "63",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 220,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 403.0,
+        "y": 241.6,
+        "text": "72",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 440,
+        "y": 220,
+        "w": 66,
+        "h": 32,
+        "stroke": "lightgrey",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 473.0,
+        "y": 241.6,
+        "text": "81",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Astuces pour retenir",
+     "md": "- **a × b = b × a** : 6 × 7 = 7 × 6 = 42.\n- **× 5** : la moitié de × 10. 8 × 5 = moitié de 80 = 40.\n- **× 9** : × 10 puis on enlève une fois le nombre. 7 × 9 = 70 − 7 = 63.\n- **Double** : 2 fois le nombre. **Moitié** : on partage en 2.\n- **Compléments** : pour aller à 100, 65 + 35 = 100."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : utiliser la table de 9",
+     "statement": "Calcule 8 × 9 de tête.",
+     "steps": [
+      {
+       "md": "8 × 10 = 80."
+      },
+      {
+       "md": "80 − 8 = 72."
+      }
+     ],
+     "answer": "**8 × 9 = 72**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : trouver un facteur",
+     "statement": "Trouve le nombre manquant : 7 × ... = 56.",
+     "steps": [
+      {
+       "md": "Je cherche dans la table de 7 : 7 × 8 = 56."
+      },
+      {
+       "md": "Ou je pense : 56 divisé par 7."
+      }
+     ],
+     "answer": "**7 × 8 = 56**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les multiples",
+     "md": "Les **multiples de 6** sont les résultats de la table de 6 : 6, 12, 18, 24, 30, 36, 42, 48, 54, 60...\n\nUn nombre est un multiple de 5 s'il finit par 0 ou 5."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Ne confonds pas 6 × 8 (48) et 6 × 7 (42).\n- Pour la moitié de 90 : 90 ÷ 2 = 45 (et non 40).\n- Apprends aussi les compléments à 10, 20, 100."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-tables-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-tables-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-tables-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-tables-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-tables-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-tables-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Joue au « jeu des tables » en classe : un élève dit 7 × ..., l'autre répond."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-maths-tables-01",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Calcule : 6 × 7.",
+   "answer": 42,
+   "tolerance": 0,
+   "explanation": "6 × 7 = **42**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-tables-02",
+   "chapter": "ce2-maths-operations",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Vrai ou faux : 9 × 8 = 72.",
+   "answer": true,
+   "explanation": "9 × 8 = 72 (80 − 8).",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-tables-03",
+   "chapter": "ce2-maths-operations",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Associe chaque calcul à son résultat.",
+   "pairs": [
+    [
+     "7 × 6",
+     "42"
+    ],
+    [
+     "8 × 8",
+     "64"
+    ],
+    [
+     "9 × 4",
+     "36"
+    ],
+    [
+     "5 × 9",
+     "45"
+    ]
+   ],
+   "explanation": "Ce sont des résultats des tables de 6, 8, 9 et 5.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-tables-04",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Trouve le nombre qui manque : 7 × ... = 56.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "7 × 8 = 56 : le nombre manquant est **8**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-tables-05",
+   "chapter": "ce2-maths-operations",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Trouve trois multiples de 6 compris entre 30 et 50.",
+   "model": "36, 42, 48",
+   "rubric": [
+    "Trois multiples de 6.",
+    "Chaque nombre est entre 30 et 50."
+   ],
+   "explanation": "Les multiples de 6 : 30, 36, 42, 48, 54. Entre 30 et 50 : 36, 42, 48.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-tables-06",
+   "chapter": "ce2-maths-operations",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Calcule de tête.",
+   "method": "Utiliser doubles, moitiés, astuces.",
+   "mistakes": [
+    "Se tromper dans une moitié."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "prompt": "Quel est le double de 35 ?",
+     "answer": 70,
+     "tolerance": 0,
+     "explanation": "35 × 2 = **70**.",
+     "points": 1,
+     "id": "ce2-maths-tables-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "prompt": "Quelle est la moitié de 90 ?",
+     "answer": 45,
+     "tolerance": 0,
+     "explanation": "90 ÷ 2 = **45**.",
+     "points": 1,
+     "id": "ce2-maths-tables-06-b"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien font 12 × 5 ?",
+     "answer": 60,
+     "tolerance": 0,
+     "explanation": "12 × 5 = moitié de 120 = **60**.",
+     "points": 1,
+     "id": "ce2-maths-tables-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-tables-q1",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Combien font 9 × 7 ?",
+   "choices": [
+    "56",
+    "72",
+    "54",
+    "63"
+   ],
+   "answer": 3,
+   "explanation": "9 × 7 = 70 − 7 = 63.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-tables-q2",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Quel est le complément à 100 de 65 ?",
+   "choices": [
+    "35",
+    "25",
+    "45",
+    "30"
+   ],
+   "answer": 0,
+   "explanation": "65 + 35 = 100.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-tables-q3",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Quelle est la moitié de 80 ?",
+   "choices": [
+    "20",
+    "40",
+    "60",
+    "45"
+   ],
+   "answer": 1,
+   "explanation": "80 ÷ 2 = 40.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-tables-q4",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Combien font 8 × 6 ?",
+   "choices": [
+    "42",
+    "54",
+    "48",
+    "46"
+   ],
+   "answer": 2,
+   "explanation": "8 × 6 = 48.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-tables-q5",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-tables",
+   "prompt": "Quel calcul donne le même résultat que 6 × 7 ?",
+   "choices": [
+    "7 + 6",
+    "6 + 7",
+    "13",
+    "7 × 6"
+   ],
+   "answer": 3,
+   "explanation": "La multiplication est commutative : 6 × 7 = 7 × 6.",
+   "source": "Exercice original"
+  }
+ ]
+}

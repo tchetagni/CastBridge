@@ -1,0 +1,553 @@
+{
+ "chapter": "ce2-maths-numeration",
+ "lessons": [
+  {
+   "id": "ce2-maths-nombres",
+   "title": "Les nombres jusqu'à 9 999",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Numération : nombres jusqu'à 9 999 et 10 000",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire et écrire les nombres jusqu'à 9 999.",
+    "Donner la valeur d'un chiffre selon sa place.",
+    "Comparer et ranger des nombres."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-maths-nombres-01",
+    "ce2-maths-nombres-02",
+    "ce2-maths-nombres-03",
+    "ce2-maths-nombres-04",
+    "ce2-maths-nombres-05",
+    "ce2-maths-nombres-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-nombres-q1",
+    "ce2-maths-nombres-q2",
+    "ce2-maths-nombres-q3",
+    "ce2-maths-nombres-q4",
+    "ce2-maths-nombres-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la limite du CE2 (9 999 ou 10 000 ?) et la convention d'écriture des milliers (espace)."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Les nombres jusqu'à 9 999"
+    },
+    {
+     "type": "text",
+     "md": "Au CE2, on lit, on écrit et on compare les nombres jusqu'à **9 999**, puis **10 000**. Chaque chiffre a une **valeur** qui dépend de sa **place**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Unités, dizaines, centaines, milliers",
+     "md": "- **10 unités** = 1 dizaine.\n- **10 dizaines** = 1 centaine.\n- **10 centaines** = 1 **millier** (1 000).\n- **10 milliers** = **10 000**.\n\nOn écrit les nombres avec **quatre colonnes** : milliers, centaines, dizaines, unités. On laisse un petit espace après les milliers : 3 478."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le tableau de numération du nombre 3 478.",
+     "alt": "Un tableau à quatre colonnes : 3 dans les milliers, 4 dans les centaines, 7 dans les dizaines, 8 dans les unités.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 130,
+        "h": 40,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 35.95,
+        "text": "milliers",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 50,
+        "w": 130,
+        "h": 70,
+        "stroke": "blue",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 100,
+        "text": "3",
+        "size": 40,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 10,
+        "w": 130,
+        "h": 40,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 35.95,
+        "text": "centaines",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 50,
+        "w": 130,
+        "h": 70,
+        "stroke": "green",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 100,
+        "text": "4",
+        "size": 40,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 10,
+        "w": 130,
+        "h": 40,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 345.0,
+        "y": 35.95,
+        "text": "dizaines",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 50,
+        "w": 130,
+        "h": 70,
+        "stroke": "orange",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 100,
+        "text": "7",
+        "size": 40,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 415,
+        "y": 10,
+        "w": 130,
+        "h": 40,
+        "stroke": "red",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 480.0,
+        "y": 35.95,
+        "text": "unités",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 415,
+        "y": 50,
+        "w": 130,
+        "h": 70,
+        "stroke": "red",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 480,
+        "y": 100,
+        "text": "8",
+        "size": 40,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "text",
+     "md": "**3 478** se lit « trois mille quatre cent soixante-dix-huit ». On peut aussi l'écrire : 3 478 = 3 × 1 000 + 4 × 100 + 7 × 10 + 8."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : écrire en chiffres",
+     "statement": "Écris en chiffres : « six mille trois cent quarante ».",
+     "steps": [
+      {
+       "md": "**six mille** → 6 dans les milliers."
+      },
+      {
+       "md": "**trois cent** → 3 centaines. **quarante** → 4 dizaines et 0 unité."
+      }
+     ],
+     "answer": "**6 340**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Comparer et ranger",
+     "md": "1. Je compare le **nombre de chiffres** : le plus long est le plus grand.\n2. S'ils ont le même nombre de chiffres, je compare **de gauche à droite** : milliers, puis centaines, puis dizaines, puis unités.\n3. J'utilise **<** (plus petit que) ou **>** (plus grand que).\n\nRanger du plus petit au plus grand, c'est l'**ordre croissant**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : comparer",
+     "statement": "Compare 4 205 et 4 250.",
+     "steps": [
+      {
+       "md": "Les deux nombres ont 4 chiffres. Les milliers sont égaux (4), les centaines aussi (2)."
+      },
+      {
+       "md": "Les dizaines : 0 et 5. 0 < 5, donc 4 205 < 4 250."
+      }
+     ],
+     "answer": "**4 205 < 4 250**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Le **0** garde la place : 4 205 n'est pas 425.\n- **4 999 + 1 = 5 000** et **9 999 + 1 = 10 000**.\n- On lit « deux mille », mais on écrit « 2 000 » avec un espace."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-nombres-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-nombres-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-nombres-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-nombres-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-nombres-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-nombres-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Joue avec un camarade : un tire quatre chiffres, l'autre fait le plus grand nombre possible."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-maths-nombres-01",
+   "chapter": "ce2-maths-numeration",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Dans 3 482, quel est le chiffre des centaines ?",
+   "choices": [
+    "4",
+    "3",
+    "8",
+    "2"
+   ],
+   "answer": 0,
+   "explanation": "Les colonnes : 3 milliers, **4 centaines**, 8 dizaines, 2 unités.",
+   "method": "Utiliser le tableau de numération.",
+   "mistakes": [
+    "Confondre centaines et dizaines."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-nombres-02",
+   "chapter": "ce2-maths-numeration",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Vrai ou faux : 4 205 < 4 250.",
+   "answer": true,
+   "explanation": "Vrai. Milliers et centaines sont égaux ; aux dizaines, 0 < 5.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-nombres-03",
+   "chapter": "ce2-maths-numeration",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Écris en chiffres : six mille trois cent quarante.",
+   "answer": 6340,
+   "tolerance": 0,
+   "explanation": "6 milliers, 3 centaines, 4 dizaines, 0 unité : **6 340**.",
+   "method": "Remplir le tableau colonne par colonne.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-nombres-04",
+   "chapter": "ce2-maths-numeration",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Quel nombre est égal à 7 × 1 000 + 5 × 10 + 9 ?",
+   "choices": [
+    "7 509",
+    "7 059",
+    "7 590",
+    "759"
+   ],
+   "answer": 1,
+   "explanation": "7 milliers, 0 centaine, 5 dizaines, 9 unités : **7 059**. Le zéro marque l'absence de centaines.",
+   "method": "Placer chaque terme dans sa colonne.",
+   "mistakes": [
+    "Oublier le zéro des centaines."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-nombres-05",
+   "chapter": "ce2-maths-numeration",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Range du plus petit au plus grand : 3 908 ; 3 098 ; 9 308 ; 3 890.",
+   "model": "3 098 < 3 890 < 3 908 < 9 308",
+   "rubric": [
+    "Les quatre nombres sont bien rangés.",
+    "9 308 est le plus grand (9 milliers).",
+    "3 098 est le plus petit (0 centaine)."
+   ],
+   "explanation": "On compare d'abord les milliers (9 est plus grand), puis les centaines : 0, 8, 9.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-nombres-06",
+   "chapter": "ce2-maths-numeration",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Réponds aux questions sur les nombres.",
+   "method": "Tableau de numération.",
+   "mistakes": [
+    "Écrire 4 2008 pour quatre mille deux cent huit."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "prompt": "Écris en chiffres : quatre mille deux cent huit.",
+     "answer": 4208,
+     "tolerance": 0,
+     "explanation": "4 milliers, 2 centaines, 0 dizaine, 8 unités : **4 208**.",
+     "points": 1,
+     "id": "ce2-maths-nombres-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "prompt": "Quel nombre vient juste après 4 999 ?",
+     "choices": [
+      "4 990",
+      "4 910",
+      "5 000",
+      "5 999"
+     ],
+     "answer": 2,
+     "explanation": "4 999 + 1 = **5 000**.",
+     "points": 1,
+     "id": "ce2-maths-nombres-06-b"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Quel nombre est 10 de plus que 6 995 ?",
+     "answer": 7005,
+     "tolerance": 0,
+     "explanation": "6 995 + 10 = **7 005**.",
+     "points": 1,
+     "id": "ce2-maths-nombres-06-c"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "Comment lit-on 8 070 ?",
+     "choices": [
+      "huit cent soixante-dix",
+      "huit mille sept",
+      "huit mille sept cent",
+      "huit mille soixante-dix"
+     ],
+     "answer": 3,
+     "explanation": "8 milliers, 0 centaine, 7 dizaines : huit mille soixante-dix.",
+     "points": 1,
+     "id": "ce2-maths-nombres-06-d"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-nombres-q1",
+   "chapter": "ce2-maths-numeration",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Dans 6 215, le chiffre 6 vaut…",
+   "choices": [
+    "6 000",
+    "6",
+    "600",
+    "60"
+   ],
+   "answer": 0,
+   "explanation": "Il est dans la colonne des milliers : 6 × 1 000.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-nombres-q2",
+   "chapter": "ce2-maths-numeration",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "1 000, c'est combien de centaines ?",
+   "choices": [
+    "100 centaines",
+    "10 centaines",
+    "1 centaine",
+    "1 000 centaines"
+   ],
+   "answer": 1,
+   "explanation": "10 centaines = 1 000.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-nombres-q3",
+   "chapter": "ce2-maths-numeration",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Quel nombre est le plus grand ?",
+   "choices": [
+    "7 801",
+    "7 081",
+    "7 810",
+    "7 180"
+   ],
+   "answer": 2,
+   "explanation": "Mêmes milliers (7) ; centaines : 8 est le plus grand ; puis dizaines : 1 > 0.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-nombres-q4",
+   "chapter": "ce2-maths-numeration",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Quel nombre vient juste après 9 999 ?",
+   "choices": [
+    "9 1000",
+    "99 999",
+    "10 999",
+    "10 000"
+   ],
+   "answer": 3,
+   "explanation": "9 999 + 1 = 10 000.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-nombres-q5",
+   "chapter": "ce2-maths-numeration",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-nombres",
+   "prompt": "Quelle est la bonne décomposition de 2 304 ?",
+   "choices": [
+    "2 × 1 000 + 3 × 100 + 4",
+    "2 × 1 000 + 3 × 10 + 4",
+    "2 × 100 + 3 × 10 + 4",
+    "2 × 1 000 + 34"
+   ],
+   "answer": 0,
+   "explanation": "2 milliers, 3 centaines, 0 dizaine, 4 unités.",
+   "source": "Exercice original"
+  }
+ ]
+}
