@@ -117,6 +117,16 @@ les blocs `review` s'affichent avec « ⚑ à vérifier »). En résumé :
 - Liste complète : `tools/build-learn-packs --check` puis les `reviewNotes` de chaque fiche (voir aussi le rapport de la
   branche).
 
+### Contenu `review` en bêta et signalements (`docs/CONTENT-VALIDATION.md`)
+Chaque leçon et exercice a un **état** : `review` (défaut ; une leçon `draft`/`reviewed`, un exercice `review: true`), `validated`,
+`needs-fix`, `rejected`. Champs facultatifs de la source : `state` (leçon et exercice) en plus de `status` (leçon) et `review`
+(exercice) ; `tools/content-validation/cbvalidate.py apply` les met à jour à partir des décisions des relecteurs, sans réécrire le reste
+du fichier. Sur le canal **bêta** le contenu `review` porte la mention **« bêta : non validé »** (fiche et exercice, TV et téléphone) ;
+`rejected` et `needs-fix` sont cachés partout. Aujourd'hui le canal `stable` montre encore le contenu `review` avec son « ⚑ à vérifier »
+(`PlayPolicy.isVisible(legacyStable = true)`) ; ce sera strict quand le canal `stable` sera ouvert. Chaque fiche et chaque exercice
+corrigé propose **« Signaler une erreur »** (motif + texte facultatif sur le téléphone, motif seul sur la TV). Les exercices sont
+identifiés par `id` et par une empreinte de contenu (énoncé, choix, réponse, explication) qui survit aux mises à jour des packs.
+
 ## 3. Modèle de contenu (`android/core/src/main/kotlin/castbridge/core/learn/`)
 
 **Catalogue** (`LearnCatalog`, toujours embarqué) : cursus `maternelle` (PS, MS, GS), `nursery` (Nursery 1-2),
