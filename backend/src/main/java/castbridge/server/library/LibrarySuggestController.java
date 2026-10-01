@@ -45,10 +45,14 @@ public class LibrarySuggestController {
     private final NameSuggester suggester;
     private final SuggestLimiter limiter;
     private final int maxItems;
+    private final CostMeter meter;
+    private final int maxOutputTokens;
 
-    public LibrarySuggestController(DeviceService devices, NameSuggester suggester, LibrarySuggestProperties props) {
+    public LibrarySuggestController(DeviceService devices, NameSuggester suggester, LibrarySuggestProperties props, CostMeter meter) {
         this.devices = devices;
         this.suggester = suggester;
+        this.meter = meter;
+        this.maxOutputTokens = props.maxOutputTokens();
         this.maxItems = props.maxItems();
         this.limiter = new SuggestLimiter(props.perHour(), System::currentTimeMillis);
     }
@@ -77,17 +81,42 @@ public class LibrarySuggestController {
                     .cacheControl(CacheControl.noStore()).body(ApiError.of(429, "Trop de demandes : réessayez dans " + wait + " s", List.of(), req.getRequestURI()));
         }
         List<NameSuggester.Suggestion> out;
+        NameSuggester.Usage usage = NameSuggester.Usage.NONE;
+        String promptVersion = "";
+        double cost = 0;
         if (!suggester.available() || items.isEmpty()) out = List.of();
         else {
+            // daily limits (per device, and a budget for the whole server) BEFORE anything is sent to the model
+            int chars = items.stream().mapToInt(i -> i.text().length()).sum();
+            double expected = meter.estimateBeforehand(suggester.promptText(), items.size(), chars, maxOutputTokens);
+            CostMeter.Refusal refusal = meter.reserve(d.id, items.size(), expected);
+            if (refusal != CostMeter.Refusal.NONE) {
+                String msg = refusal == CostMeter.Refusal.DEVICE_QUOTA ? "Limite quotidienne atteinte pour cet appareil : réessayez demain"
+                        : "L'aide de l'IA est suspendue pour aujourd'hui : réessayez demain (les règles locales continuent de fonctionner)";
+                return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).header(HttpHeaders.RETRY_AFTER, "3600").cacheControl(CacheControl.noStore())
+                        .body(ApiError.of(429, msg, List.of(), req.getRequestURI()));
+            }
             try {
-                out = suggester.suggest(lang, items);
+                NameSuggester.Outcome o = suggester.suggestWithUsage(lang, items);
+                out = o.suggestions(); usage = o.usage(); promptVersion = o.promptVersion();
+                cost = meter.cost(usage.inputTokens(), usage.outputTokens());
+                meter.settle(expected, usage == NameSuggester.Usage.NONE ? expected : cost);
+                if (usage == NameSuggester.Usage.NONE) cost = expected;
             } catch (NameSuggester.SuggesterException e) {
+                // a call that reached the service may have been billed: keep the reservation of the budget, give back the device's names
+                meter.release(d.id, items.size(), 0);
                 throw new ApiException(HttpStatus.BAD_GATEWAY, "Le modèle n'a pas répondu : réessayez plus tard");
             }
         }
         Map<String, Object> res = new LinkedHashMap<>();
         res.put("model", suggester.model());
         res.put("available", suggester.available());
+        res.put("promptVersion", promptVersion);
+        Map<String, Object> u = new LinkedHashMap<>();
+        u.put("inputTokens", usage.inputTokens()); u.put("outputTokens", usage.outputTokens());
+        u.put("estimatedCostUsd", Math.round(cost * 1_000_000.0) / 1_000_000.0); u.put("estimated", usage.estimated());
+        res.put("usage", u);
+        res.put("rejected", usage.rejected());
         res.put("suggestions", out.stream().map(s -> {
             Map<String, Object> m = new LinkedHashMap<>();
             m.put("i", s.index()); m.put("kind", s.kind()); m.put("title", s.title()); m.put("year", s.year()); m.put("season", s.season());

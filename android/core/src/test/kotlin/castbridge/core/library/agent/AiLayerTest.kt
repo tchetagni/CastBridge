@@ -159,9 +159,37 @@ class AiLayerTest {
     }
 
     @Test fun consentTextSaysWhatLeavesAndWhatDoesNot() {
-        assertTrue(AiConsent.WHAT_LEAVES.contains("nom du fichier déjà nettoyé"))
-        assertTrue(AiConsent.WHAT_STAYS.contains("contenu des fichiers"))
-        assertTrue(AiConsent.WHAT_STAYS.contains("identifiant"))
+        val text = AiConsent.fullText()
+        assertTrue(text.contains("nom du fichier, déjà nettoyé"))
+        assertTrue(text.contains("contenu de vos fichiers"))
+        assertTrue(text.contains("identifiant publicitaire"))
+        assertTrue(text.contains("tiers"), "says that a third-party AI service is behind the server")
+        assertTrue(text.contains("adresse IP"), "the technical data of any connection are named")
+    }
+
+    /** The consent lists exactly the fields the request carries: adding a field to the request without changing the wording must fail here. */
+    @Test fun consentListsExactlyTheFieldsOfTheRequest() {
+        val body = SuggestRequest("fr", listOf(SuggestItem(0, "prison break s01e04", "mkv", "series", 45))).toJson()
+        val m = JsonLite.obj(body)
+        assertEquals(setOf("consent", "lang", "items"), m.keys)
+        @Suppress("UNCHECKED_CAST") val item = (m["items"] as List<Map<String, Any?>>).single()
+        assertEquals(setOf("i", "t", "x", "k", "d"), item.keys, "if this changes, rewrite AiConsent.LEAVES_LIST and raise AiConsent.VERSION")
+        assertEquals(item.keys.size, AiConsent.LEAVES_LIST.size, "one line of the consent per field sent")
+        val lines = AiConsent.LEAVES_LIST.joinToString(" ")
+        for (w in listOf("nom du fichier", "extension", "type supposé", "durée", "numéro")) assertTrue(lines.contains(w), w)
+        assertTrue(AiConsent.LEAVES_ONCE.contains("langue") && AiConsent.LEAVES_ONCE.contains("library-ai-v1"))
+    }
+
+    @Test fun serverAnswerCarriesTheCostAndPromptVersion() {
+        val model = ServerNamingModel("http://x", { "t" })
+        val r = model.parse("""{"model":"claude-haiku-4-5","available":true,"promptVersion":"v2","rejected":2,"usage":{"inputTokens":700,"outputTokens":80,"estimatedCostUsd":0.0011,"estimated":false},
+            "suggestions":[{"i":0,"kind":"series","title":"Prison Break","season":1,"episode":4,"confidence":0.9}]}""", 1)
+        assertEquals(0.0011, r.costUsd)
+        assertEquals("v2", r.promptVersion)
+        assertEquals(2, r.rejected)
+        assertEquals(1, r.suggestions.size)
+        val old = model.parse("""{"model":"x","available":false,"suggestions":[]}""", 1)
+        assertNull(old.costUsd)
     }
 
     @Test fun autoRenameOnlyTouchesSureNamesAndNeverFoldersOrOthers() {

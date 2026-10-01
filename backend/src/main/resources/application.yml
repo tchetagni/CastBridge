@@ -107,10 +107,22 @@ castbridge:
   # No key = no model: the endpoint answers available:false and calls nothing. NEVER put a key in this file.
   library:
     llm-api-key: ${CASTBRIDGE_LIBRARY_LLM_API_KEY:}
-    llm-url: ${CASTBRIDGE_LIBRARY_LLM_URL:https://api.anthropic.com/v1/messages}
-    llm-model: ${CASTBRIDGE_LIBRARY_LLM_MODEL:claude-haiku-4-5}
+    # anthropic (Messages API, default) or openai (any OpenAI-compatible chat completions service)
+    provider: ${CASTBRIDGE_LIBRARY_LLM_PROVIDER:anthropic}
+    # empty = the usual endpoint of the provider
+    llm-url: ${CASTBRIDGE_LIBRARY_LLM_URL:}
+    llm-model: ${CASTBRIDGE_LIBRARY_LLM_MODEL:}
     per-hour: ${CASTBRIDGE_LIBRARY_SUGGEST_PER_HOUR:30}
     max-items: ${CASTBRIDGE_LIBRARY_SUGGEST_MAX_ITEMS:40}
+    # versioned prompt: library/prompts/suggest-<version>.txt (v1 = default, v2 = with rules and examples)
+    prompt-version: ${CASTBRIDGE_LIBRARY_PROMPT_VERSION:v1}
+    # USD per million tokens of the model in use (default: Claude Haiku 4.5), to estimate the cost of an analysis
+    price-in-per-mtok: ${CASTBRIDGE_LIBRARY_PRICE_IN_PER_MTOK:1.0}
+    price-out-per-mtok: ${CASTBRIDGE_LIBRARY_PRICE_OUT_PER_MTOK:5.0}
+    # estimated spending allowed per UTC day for the whole server, and names per device and day
+    daily-budget-usd: ${CASTBRIDGE_LIBRARY_DAILY_BUDGET_USD:2.0}
+    per-device-daily-items: ${CASTBRIDGE_LIBRARY_DEVICE_DAILY_ITEMS:300}
+    max-output-tokens: ${CASTBRIDGE_LIBRARY_MAX_OUTPUT_TOKENS:3000}
 
 springdoc:
   api-docs:

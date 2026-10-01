@@ -1,6 +1,6 @@
 # Assistant « Ranger ma bibliothèque »
 
-> Branche `feat/library-agent`. Demande d'Esaie : « un agent sur l'app smartphone intelligent qui lira la bibliothèque,
+> Branches `feat/library-agent` (assistant) puis `feat/agent-c-ai` (qualité des propositions, état de la bibliothèque, couche IA du serveur). Demande d'Esaie : « un agent sur l'app smartphone intelligent qui lira la bibliothèque,
 > renommera et organisera efficacement les données. Ce doit être une IA circonstancielle. »
 > Code : `core/library/agent/` (logique pure, testée sur la JVM), `sender/agent/` (écrans Compose), routes de la corbeille
 > dans `core/library/agent/TvTrash.kt` (côté TV), `backend/…/library/` (aide facultative du serveur).
@@ -53,20 +53,35 @@ Les noms produits sont **stables** (un second passage ne change rien : testé su
 **Dossiers** (téléphone seulement) : `Séries/<Série>/Saison 01`, `Films/<Titre> (année)`, `Musique`, `Clips`, `Famille`, `Cours/<Matière>`,
 `Documents`, `Applications`, `Archives`, `Captures`, `À trier` (labels anglais si le téléphone est en anglais).
 
-### Taux de bonnes propositions sur le corpus de test
+### Taux de bonnes propositions : corpus, jeux gelés, chiffres honnêtes
 
-Le corpus (`NamingCorpus.kt`, `NamingCorpusB.kt`) contient 186 noms réalistes (séries, films, WhatsApp, noms africains / francophones /
-anglophones, accents, sites). Chaque cas attend le nom **et** le dossier **et** le type.
+Chaque cas attend le **nom**, le **dossier** et le **type**. Les attendus sont calculés **à partir des vraies métadonnées** (titre, saison, épisode…) par le générateur, jamais à partir du moteur.
 
-| Jeu | Noms | Résultat |
+| Jeu | Cas | Rôle |
 |---|---|---|
-| A (écrit puis utilisé pour régler le moteur) | 109 | 109 / 109, mais il a servi à régler les règles : **pas une mesure honnête** |
-| B (écrit après A, exécuté **une seule fois avant tout réglage**) | 77 | **65 / 77 = 84,4 %** au premier passage |
+| **DEV** : générés (`CorpusGen`, `CorpusGenHard`, graine fixe, titres « DEV ») + écrits à la main (`DevHand`) + anciens jeux A et B | 5 252 | **sert à régler les règles** ; rapport des échecs dans `build/reports/naming-dev-failures.txt` |
+| **GELÉ** `naming/frozen.tsv` : 187 écrits à la main (`FrozenHand`) + 1 900 générés (titres disjoints, graine 20261001) | 2 087 | formes courantes. **Jamais utilisé pour régler une règle** |
+| **GELÉ-DUR** `naming/frozen-hard.tsv` : 112 écrits à la main (`FrozenHardHand`) + 700 générés (formes inhabituelles : numérotation exotique, espaces, accents décomposés, extensions en majuscules, étiquettes rares, titres faits de chiffres, noms d'appareils photo) | 812 | formes difficiles. **Jamais utilisé pour régler une règle** |
 
-Les 12 échecs du premier passage de B : « FINAL » pris pour un titre d'épisode (2), `Episode 1000` (4 chiffres), un préfixe `[ToonsHub]`,
-« The Last of **US** » (suffixe de pays), `E.T.` (initiales à points), deux vidéos de famille classées en films (« Mariage … 2022 »),
-`FB_VID_…` renommé à tort, `DJ`, un `.exe`. Tous corrigés ensuite par des règles générales (pas des cas particuliers), B est repassé à
-77 / 77. **Sur une vraie bibliothèque il faut s'attendre à moins** : ce corpus est écrit par nous. Voir § 9.
+Les deux jeux gelés sont des fichiers TSV dont le **SHA-256 est vérifié par un test** (`FrozenCorpusTest`, `FrozenHardCorpusTest`) : les modifier fait échouer `gradle :core:test`. Ils ont été écrits **avant** toute modification des règles pour ce travail, et mesurés **une fois** avant (« avant » ci-dessous). Un test (`DevCorpusTest`) interdit qu'un cas écrit à la main pour le réglage soit aussi un cas gelé. Les tests de jeux gelés n'affichent que les totaux par famille, pas les cas en échec (pour ne pas être tenté de les corriger un par un).
+
+| Mesure | Avant (règles de `feat/library-agent`) | Après (`feat/agent-c-ai`) |
+|---|---|---|
+| **GELÉ** (formes courantes) | 1 971 / 2 087 = **94,4 %** | 2 073 / 2 087 = **99,3 %** |
+| dont écrits à la main (187) | 183 / 187 = 97,9 % | 183 / 187 = 97,9 % (inchangé) |
+| dont générés (1 900) | 1 788 / 1 900 = 94,1 % | 1 890 / 1 900 = 99,5 % |
+| **GELÉ-DUR** (formes inhabituelles) | 564 / 812 = **69,5 %** | 799 / 812 = **98,4 %** |
+| dont écrits à la main (112) | 92 / 112 = 82,1 % | 105 / 112 = 93,8 % |
+| dont générés (700) | 472 / 700 = 67,4 % | 694 / 700 = 99,1 % |
+| DEV (réglé dessus : **pas une mesure honnête**) | ≈ 85 % au premier passage | 5 251 / 5 252 = 99,98 % |
+
+**Comment lire ces chiffres (limites, à ne pas oublier).**
+- Les parties **générées** des jeux gelés utilisent les **mêmes gabarits** que le jeu DEV (autres titres, autres graines). Elles mesurent « une forme déjà vue sur d'autres titres », pas « une forme jamais vue » : leurs 99 % sont **optimistes**.
+- Les parties **écrites à la main** sont l'estimation la plus indépendante : 97,9 % (formes courantes, inchangé) et 93,8 % (formes difficiles). Même là, l'auteur est le même que celui des règles, et quelques formes du jeu DEV écrit à la main ont été inspirées par celles du jeu gelé dur (autres titres, autres dates, jamais les mêmes noms : le test l'interdit) : le gain 82 → 94 % est en partie de la fuite de **formes**, pas de cas.
+- Les 14 + 13 échecs restants des jeux gelés **n'ont pas été examinés** (volontairement) ; leurs familles seulement : jeu gelé = animés (7), séries générées (3), séries écrites à la main (2), sous-titre (1), musique (1) ; jeu gelé dur = titres faits de chiffres / initiales (6), écrits à la main (7).
+- **Un corpus écrit par nous n'est pas une bibliothèque réelle.** Sur la vraie bibliothèque d'Esaie il faut s'attendre à moins (§ 9, point 1 : passer l'assistant en lecture seule et relever les erreurs).
+
+**Règles générales ajoutées** (aucune par cas particulier) : `S01xE04` / `S01 - E04` ; épisodes multiples (`S01E04E05E06`, `1x04-05`) ; saison écrite après l'épisode (« Episode 4 - Season 1 », « Ep 7 Saison 8 ») ; « Saison 2 - 05 » ; fichier `04.mkv` dans `Série/Saison 2` ; marqueur entre crochets / parenthèses (`[1x04]`, `(1x04)`) sans laisser les crochets dans le titre ; groupe de diffusion avec espaces (`[Anime Time] Bleach - 138`) ; soulignés dans les parenthèses de bruit (`(Official_Video)`, `| Clip_officiel`) ; crédits (`| Prod. by …`) ; `Track 05 -`, face de disque `A1` ; `H 264`, `DD5.1` entre soulignés ; nom de site collé en fin de nom (`… E07 NetNaija`) ; « FRENCH iNTERNAL / PROPER » (mot de langue suivi d'un mot de publication) ; « MULTi SUBS » n'est pas une piste MULTI ; **langue du titre calculée sur le titre seul** (« house of cards » reste anglais malgré « Saison 2 Épisode 4 ») ; initiales (`S.W.A.T.`, `S.H.I.E.L.D.`) ; « LA CASA DE PAPEL » (l'article, pas Los Angeles) ; noms séparés seulement par des tirets (`Prison-Break-S01E04`) ; `Artiste_Titre` avec un seul tiret ; suffixes d'appareil photo (`_HDR`, `_BURST001`, `.MP`) ; captures « Screenshot 2024-03-15 at … », « Capture d’écran … à … » ; heure `2.22.11 PM`.
 
 ## 4. Circonstanciel : ce qui change les propositions
 
@@ -83,6 +98,26 @@ Les 12 échecs du premier passage de B : « FINAL » pris pour un titre d'épiso
 | TV ou téléphone | le téléphone a de vrais dossiers ; la TV a des dossiers **virtuels** (étiquette gardée par la TV, fichiers toujours à plat : voir § 13) ; une TV ancienne reste plate |
 | Corrections de l'utilisateur | modifier un nom enseigne le titre aux fichiers suivants (« prison break » → « PB ») ; « Ne plus toucher » ; stocké sur le téléphone, **effaçable** (Réglages) |
 
+## 4 bis. État de la bibliothèque : ce que l'assistant constate (`Health.kt`, `Analysis.health`)
+
+Calculé **localement** (noms, tailles, dates, durée et marques de lecture que la TV garde déjà) ; ne change rien tout seul. Chaque constat a un texte, des octets concernés, les fichiers, une priorité, et, quand c'est une action, une mise à la corbeille toute prête (jamais cochée, passe par le plan, la confirmation et l'`Executor` comme le reste).
+
+| Constat | Règle | Action proposée |
+|---|---|---|
+| Épisodes manquants | ≥ 3 épisodes d'une saison, trous **à l'intérieur** de la plage (et le début si on commence à l'épisode 1 ou 2) ; pas de constat s'il y a plus de trous que d'épisodes (choix, pas accident) ; les doubles épisodes comptent toute leur plage ; animés sans saison inclus | conseil (« Prison Break saison 1 : il manque l'épisode 3 ») |
+| Saisons mélangées | la même saison sur plusieurs volumes ; épisodes numérotés avec et sans saison (« E12 » / « S01E12 ») | conseil |
+| Doublons de qualité | même épisode / film en plusieurs qualités **dans la même version linguistique** : on garde la meilleure résolution (puis celui qu'on a commencé à regarder, puis le plus gros) | corbeille des autres, avec « conservé : 1080p » |
+| Doublons exacts | empreinte identique, ou même taille + même durée + même nom nettoyé | corbeille des copies |
+| Fichiers vides, téléchargements interrompus | taille 0 ; `.part`, `.crdownload`, `.tmp`, `.aria2`, paire `fichier` + `fichier.aria2` ; **rien** s'il a bougé il y a moins de 3 jours (téléchargement probablement en cours) | corbeille (vides et interrompus) ; les octets ne comptent comme « récupérables » que si le fichier est vide ou inactif depuis 3 jours |
+| Fichier tronqué | vidéo de durée connue dont le débit est < 80 kbit/s ; épisode < 20 % de la médiane de ses voisins (≥ 4 épisodes, médiane ≥ 50 Mo) | **conseil seulement** (peut être un épisode court) |
+| Déjà vu depuis longtemps | décidé par le plan (volume sous pression seulement) | corbeille |
+| Pression d'espace | volume < 2 Go libres ou plein à ≥ 90 % | « Il reste 800 Mo sur « Mémoire interne » : 1,5 Go récupérables ici : de quoi repasser au-dessus de 2 Go » ou « Rien de sûr à récupérer ici : déplacez vers une clé USB » |
+
+**Chiffres.** `HealthReport.recoverableBytes` additionne ce qui est récupérable **sans compter deux fois** un même fichier ; `headline()` donne « 4,2 Go récupérables (3 doublons, 1 fichier incomplet…) » ; `recoverableByVolume` et `pressure` disent ce que changerait la récupération sur chaque volume.
+**Priorités** (`ranked`) : pression d'espace d'abord ; puis, sur un volume sous pression, ce qui libère le plus ; fichiers cassés ; doublons exacts, doublons de qualité ; épisodes manquants (**en tête de ces conseils pour une série regardée ces 30 derniers jours**, un peu plus si on regarde surtout des séries) ; déjà vus ; saisons mélangées.
+**Bandeau** : `LibraryAgent.insights` ajoute, seulement quand cela apporte quelque chose, « 4,2 Go récupérables (…) », « 2 fichiers vides ou incomplets » et la ligne du premier épisode manquant. Les **fichiers protégés** (contrôle parental) et le **profil enfant** sont exclus comme partout.
+**Interface** : non touchée (zone de l'agent « UI ») ; elle peut lire `analysis.health.ranked` et `analysis.health.findings[].changes` pour afficher / proposer. Les nouvelles raisons de mise à la corbeille sont `TrashWhy.PARTIAL` et `TrashWhy.EMPTY` (l'écran du plan range tout ce qui n'est pas `WATCHED_OLD` sous « Doublons » : à adapter si ces changements y sont versés).
+
 ## 5. « IA » : ce qui est réel et ce qui ne l'est pas
 
 - **Réel et actif** : un moteur de règles et d'heuristiques, déterministe, avec du contexte. Ce n'est **pas** un modèle d'apprentissage :
@@ -90,9 +125,15 @@ Les 12 échecs du premier passage de B : « FINAL » pris pour un titre d'épiso
 - **Interface `NamingModel`** : (a) `LocalRulesModel` = les règles derrière la même interface (aucun réseau, aucune dépendance : pas de
   TFLite / ML Kit, l'APK ne grossit pas) ; (b) `ServerNamingModel` = `POST /api/v1/library/suggest` du serveur CastBridge.
 - **Couche IA du serveur** : désactivée par défaut. Pour les noms que les règles ne comprennent pas, des noms **nettoyés** partent au
-  serveur, qui appelle un LLM **configuré par variable d'environnement** (`CASTBRIDGE_LIBRARY_LLM_API_KEY`, `…_LLM_MODEL`, `…_LLM_URL`).
+  serveur, qui appelle un modèle de langage **configuré par variables d'environnement** (fournisseur, clé, URL, modèle : § 15).
   **Sans clé (état actuel du dépôt et du serveur) le serveur répond `available:false` et n'appelle personne.** Aucune clé dans le dépôt
-  (un test le vérifie). Le client LLM a été testé contre un faux service local, **jamais contre un vrai LLM**.
+  (un test le vérifie). Deux familles de services sont prises en charge : l'**API Messages d'Anthropic** (par défaut, modèle `claude-haiku-4-5`) et tout
+  service **compatible « chat completions » d'OpenAI**. **Tout a été testé avec un faux fournisseur et un faux service HTTP local, jamais contre un vrai modèle** :
+  la qualité réelle des propositions de l'IA est **inconnue** tant que ce n'est pas essayé (§ 15, étape « essai »).
+- **Prompts versionnés** (`backend/src/main/resources/library/prompts/suggest-<version>.txt`) : `v1` (défaut, minimal) et `v2` (règles + trois exemples). On **ne modifie jamais** une version déjà utilisée : on ajoute un fichier et on change `CASTBRIDGE_LIBRARY_PROMPT_VERSION`. La réponse porte `promptVersion` pour comparer.
+- **Sortie JSON stricte** : le modèle doit répondre **un seul objet** `{"v":1,"results":[…]}` ; du texte autour, une seconde valeur, une mauvaise version, une clé inconnue à la racine **refusent toute la réponse** (le téléphone reçoit un 502 poli, le texte du modèle n'est jamais répété). Chaque résultat est validé seul : clé inconnue, nombre écrit en texte, type inconnu, position hors liste ou en double, titre inutilisable → écarté et compté dans `rejected`. Titres nettoyés de `/ \ : * ? " < > |`, bornes sur année / saison / épisode / confiance.
+- **Coût et limites** : chaque réponse contient `usage` (`inputTokens`, `outputTokens`, `estimatedCostUsd`) ; les nombres de jetons sont ceux du service, ou une estimation (≈ 3 caractères par jeton) si le service n'en donne pas. Le prix par million de jetons vient de `CASTBRIDGE_LIBRARY_PRICE_IN/OUT_PER_MTOK` (défauts : Haiku 4.5, 1 $ / 5 $). **Avant** chaque appel le serveur réserve le coût estimé : limite **par appareil et par heure** (30), **par appareil et par jour** (300 noms), **budget quotidien global** (2 $ estimés par jour UTC) ; au-delà : réponse 429, **le modèle n'est plus appelé** et l'assistant continue avec ses règles locales. Ordre de grandeur **calculé, non mesuré sur un vrai service** : une analyse de 40 noms ≈ 0,003 à 0,013 $ avec Haiku 4.5 (tableau du § 15).
+- **Mode hors ligne inchangé** : sans consentement, sans clé, serveur injoignable, limite atteinte ou réponse invalide, l'assistant fonctionne avec les règles locales (aucune erreur bloquante).
 - Une réponse de l'IA est une **proposition de confiance modeste** (≤ 0,6), jamais cochée d'avance, étiquetée « Proposé par l'IA : à vérifier »,
   et validée localement (type autorisé, titre sans `/ : * ? " < > |`, année / saison / épisode bornés).
 
@@ -105,8 +146,8 @@ Jamais : contenu des fichiers, dossiers, chemins, tailles, dates, vidéos person
 contenu protégé, profil enfant, identifiant de l'appareil dans le corps (l'appareil est reconnu par son **jeton** en en-tête, comme les autres
 routes, pour refuser les appareils bloqués et limiter le débit). L'écran « Voir ce qui a été envoyé » montre la liste exacte.
 Le consentement est **séparé** de celui des statistiques, **versionné** (`AiConsent.VERSION`) et révocable à tout moment.
-Côté serveur : limite 30 requêtes par appareil et par heure (+ limite par IP existante), 40 noms par requête, rien n'est stocké ni journalisé
-(le journal d'accès ne garde que le chemin).
+Côté serveur : limite 30 requêtes par appareil et par heure (+ limite par IP existante), 300 noms par appareil et par jour, 40 noms par requête, budget quotidien global (voir ci-dessus),
+rien n'est stocké ni journalisé (le journal d'accès ne garde que le chemin). **Le texte exact de ce que voit l'utilisateur est au § 15 : à faire relire.**
 
 ## 6. Agir en sécurité (garanties vérifiées par les tests)
 
@@ -182,8 +223,12 @@ jamais une notification ni une fenêtre, masquable 7 jours, calculée localement
 
 `gradle :core:test` (JVM) — package `castbridge.core.library.agent` : corpus (3 tests dont stabilité des noms), planificateur (24), exécuteur / sécurité / annulation / reprise (27), couche IA (13),
 TV réelle (serveur de test, volumes, corbeille, PIN, empreintes : 12), contrôle parental (19), dossiers de la TV (17), durcissement (17 : `MoverFaultTest`, `TvHardeningRouteTest`).
-Total `:core:test` après cette étape : 707 tests (1 ignoré, 0 échec). `./mvnw -q test` dans `backend/` : `LibrarySuggestApiTest` (9 tests : authentification, consentement,
+(branche TV) Total `:core:test` après cette étape : 707 tests (1 ignoré, 0 échec). `./mvnw -q test` dans `backend/` : `LibrarySuggestApiTest` (9 tests : authentification, consentement,
 validation, débit, appareil bloqué, aucun secret dans la configuration, client LLM contre un faux service).
+
+`gradle :core:test` (JVM) — package `castbridge.core.library.agent` : corpus (jeux A / B, DEV de 5 252 cas, GELÉ de 2 087, GELÉ-DUR de 812, stabilité des noms : un second passage ne change rien, SHA-256 des jeux gelés, anti-fuite DEV / gelé), santé de la bibliothèque (`HealthTest`, 21 tests : épisodes manquants, doubles épisodes, saisons mélangées, doublons de qualité, fichiers vides / interrompus / tronqués, priorités, pression d'espace, fichiers protégés, profil enfant, exécution par l'`Executor`), planificateur, exécuteur / sécurité / annulation / reprise, couche IA côté téléphone (consentement : le texte liste **exactement** les champs de la requête), TV réelle (serveur de test, volumes, corbeille, PIN, empreintes).
+`./mvnw -q test` dans `backend/` : `LibrarySuggestApiTest` (authentification, consentement, validation, débit, appareil bloqué, aucun secret dans la configuration), `LibraryAiLayerTest` (sortie stricte, prompts, coût, quotas, deux transports HTTP contre un faux service local, configuration), `LibrarySuggestBudgetApiTest` et `LibrarySuggestBudgetExhaustedApiTest` (vrai suggesteur sur un **faux fournisseur** : usage et coût dans la réponse, quota par appareil, budget quotidien, 502 sur réponse non conforme, modèle non appelé au-delà des limites). **Aucun test n'appelle un service externe.**
+Note : `TrustTest.onlyTrustedPhonesGetTokensAndRevocationKillsThem` (module `:core`, étranger à ce travail) est parfois instable (jeton « altéré » tiré au hasard).
 Démo pour captures d'émulateur (non livrée dans l'APK) : `DemoTv` (faux serveur de TV, tests du module `:core`) et, dans les variantes **debug** seulement,
 `AssistantDemoActivity` (`adb shell am start -n castbridge.sender/.agent.AssistantDemoActivity --es base http://10.0.2.2:<port> --es pin <pin>`).
 
@@ -274,3 +319,72 @@ Contexte : clé USB exFAT lente (2-15 Mo/s), coupures de courant, clé retirée,
 | Panne simulée | `MoverFaultTest` (11) : disque plein puis reprise, coupure franche (`PowerCut`, une `Error` qu'aucun code ne peut attraper) pendant la copie / après la vérification, clé absente, source modifiée, copie corrompue, `.part` d'un autre fichier ; `TvHardeningRouteTest` (6) |
 
 Ce qui n'est **pas** fait : un `fsck` de la clé après coupure (impossible depuis une appli) ; une vérification complète octet par octet (doublerait le temps sur une clé lente : début et fin seulement) ; le renommage lui-même est atomique côté système de fichiers mais exFAT n'a pas de journal : une coupure exactement pendant l'écriture de l'entrée de répertoire peut corrompre la clé (rare, hors de portée de l'appli).
+
+## 15. Mise en service de l'IA du serveur (procédure pour Esaie) et texte de consentement à relire
+
+**État actuel : rien n'est activé.** Le serveur de production n'a pas de clé : `POST /api/v1/library/suggest` répond `available:false`. Cette branche n'a **rien déployé** et n'a **appelé aucun service externe**.
+
+### Procédure (sur le serveur, jamais dans le dépôt)
+
+1. **Choisir le fournisseur et ouvrir un compte** (par exemple console.anthropic.com pour Claude). Créer une **clé d'API dédiée** à CastBridge, avec une **limite de dépense mensuelle** côté fournisseur (la première protection ; celle du serveur n'est qu'une estimation).
+2. **Mettre la clé dans l'environnement du serveur** : fichier `.env` du dossier `backend/` sur le serveur (jamais commité, `chmod 600`) :
+   ```
+   CASTBRIDGE_LIBRARY_LLM_API_KEY=<la clé>
+   CASTBRIDGE_LIBRARY_LLM_PROVIDER=anthropic          # ou openai (service compatible OpenAI) ; avec openai, renseigner aussi _LLM_URL et _LLM_MODEL
+   CASTBRIDGE_LIBRARY_LLM_MODEL=claude-haiku-4-5      # vide = le modèle par défaut du fournisseur
+   CASTBRIDGE_LIBRARY_PROMPT_VERSION=v1               # ou v2 après essai comparatif
+   CASTBRIDGE_LIBRARY_PRICE_IN_PER_MTOK=1.0           # dollars par million de jetons en entrée DU MODÈLE CHOISI
+   CASTBRIDGE_LIBRARY_PRICE_OUT_PER_MTOK=5.0          # … en sortie
+   CASTBRIDGE_LIBRARY_DAILY_BUDGET_USD=2.0            # plafond estimé par jour pour tout le serveur
+   CASTBRIDGE_LIBRARY_DEVICE_DAILY_ITEMS=300          # noms par appareil et par jour
+   ```
+   Puis `docker compose up -d` (le fichier `docker-compose.yml` transmet ces variables). Rien d'autre à changer. Retirer la clé (ou la laisser vide) remet le serveur en mode « sans IA ».
+3. **Vérifier avant d'ouvrir à d'autres** : avec un téléphone enregistré, envoyer une demande de quelques noms (l'application le fait après consentement) ; la réponse doit contenir `"available":true`, `"promptVersion"`, `usage.estimatedCostUsd`. Regarder la dépense réelle sur la console du fournisseur après quelques analyses et **ajuster les prix** ci-dessus si l'estimation est trop basse.
+4. **Essai de qualité (à faire, jamais fait)** : prendre 100 noms réels que les règles ne comprennent pas, comparer `v1` et `v2` à la main, garder la version qui se trompe le moins. Les propositions de l'IA ne sont de toute façon **jamais cochées d'avance** (confiance ≤ 0,6, étiquette « Proposé par l'IA : à vérifier »).
+5. **Faire relire le texte de consentement ci-dessous** (et le faire relire par un juriste avant ouverture au public), **puis** seulement activer. Si un mot change, augmenter `AiConsent.VERSION` : tout le monde est réinterrogé.
+6. **Surveiller** : la dépense sur la console du fournisseur ; un 429 « suspendue pour aujourd'hui » signifie que le budget quotidien du serveur est atteint (normal, les téléphones continuent avec les règles locales).
+
+### Coût (estimations ; à confirmer avec la console du fournisseur)
+
+| Cas | Jetons (entrée / sortie) | Haiku 4.5 (1 $ / 5 $ par million) |
+|---|---|---|
+| prompt `v1` + 1 nom | ≈ 400 / ≈ 80 | ≈ 0,0008 $ |
+| prompt `v2` + 40 noms | ≈ 1 300 / de ≈ 400 à ≈ 2 400 (≈ 60 jetons par nom reconnu) | de ≈ 0,003 $ à ≈ 0,013 $ (pire cas : tous les noms reconnus) |
+| 100 noms (maximum d'une analyse) | ≈ 2 000 / jusqu'à 3 000 (plafond) | jusqu'à ≈ 0,017 $ |
+| Budget par défaut (2 $ par jour) | | ≈ 150 analyses de 40 noms par jour au pire cas, plusieurs centaines en moyenne |
+
+Les prompts sont courts et les sorties plafonnées (`CASTBRIDGE_LIBRARY_MAX_OUTPUT_TOKENS`, 3 000). Un modèle plus capable coûte plus cher par jeton (consulter la grille du fournisseur) : renseigner ses prix, sinon l'estimation et le budget seront faux.
+
+### Texte de consentement (écran « Aide de l'intelligence artificielle », `AiConsent` dans `NamingModel.kt`) : À RELIRE
+
+> **Aide de l'intelligence artificielle (facultatif)**
+>
+> Pour les seuls fichiers que les règles de l'application ne comprennent pas, l'assistant peut envoyer des informations au serveur CastBridge, qui les transmet à un service d'intelligence artificielle pour proposer un titre, une saison, un épisode. Voici la liste complète de ce qui part, pour chaque fichier concerné :
+> - le nom du fichier, déjà nettoyé : sans lien Internet, sans adresse e-mail et sans suite de 6 chiffres ou plus (par exemple « prison break s01e04 »), 120 caractères au plus ;
+> - son extension (mkv, mp4, mp3…) ;
+> - un type supposé par l'application (série, film, musique, clip, cours) quand elle en a un ;
+> - sa durée, arrondie à 5 minutes, quand elle est connue ;
+> - son numéro dans la liste envoyée (0, 1, 2…), sans autre sens.
+>
+> Une fois par envoi : la langue de l'application (français ou anglais) et la mention de votre accord (« library-ai-v1 »). Comme toute connexion Internet, l'envoi laisse aussi au serveur l'adresse IP du téléphone et l'heure, et le serveur reconnaît l'appareil par son jeton (déjà utilisé pour les mises à jour) afin de refuser les appareils bloqués et de limiter le nombre de demandes. Au plus 100 noms par analyse.
+>
+> Le service d'intelligence artificielle est un fournisseur tiers choisi par l'administrateur de CastBridge. CastBridge n'enregistre ni ne journalise les noms envoyés ; le fournisseur peut appliquer ses propres règles de conservation, indiquées dans la documentation de mise en service.
+>
+> Ne quitte jamais le téléphone :
+> - le contenu de vos fichiers ;
+> - leurs dossiers, chemins, tailles et dates ;
+> - vos vidéos et photos personnelles (WhatsApp, appareil photo, captures) et vos documents ;
+> - tout ce que le contrôle parental protège, et rien du tout quand un profil enfant est actif ;
+> - vos corrections et vos habitudes de visionnage ;
+> - votre nom, vos contacts, votre numéro, un identifiant publicitaire.
+>
+> Vous pouvez l'activer et le désactiver quand vous voulez, et voir la liste exacte de ce qui serait envoyé avant chaque analyse. Désactivé, l'assistant fonctionne entièrement sur le téléphone, sans réseau.
+
+Points à trancher à la relecture : (a) **nommer le fournisseur** dans le texte ou la politique de confidentialité (le texte dit « un fournisseur tiers » ; à préciser avant l'activation) ; (b) la **durée de conservation** du fournisseur et son éventuel usage pour l'entraînement (à vérifier dans ses conditions : certains services le désactivent pour l'API, à confirmer) ; (c) la **base légale** et le pays de traitement (les données envoyées sont des noms de fichiers nettoyés, mais un nom peut contenir un prénom : « Anniversaire de Junior » est classé « famille » et **n'est pas envoyé**, les vidéos personnelles ne partent jamais) ; (d) la mention de l'adresse IP et du jeton d'appareil.
+
+Un test (`consentListsExactlyTheFieldsOfTheRequest`) échoue si un champ est ajouté à la requête sans que la liste du consentement change.
+
+### Ce que cette mise en service ne fait pas
+
+Pas de cache des noms côté serveur (aurait réduit le coût mais contredit « rien n'est stocké »), pas de statistiques de dépense persistantes (le compteur du jour est en mémoire : un redémarrage le remet à zéro), pas d'essai contre un vrai modèle, pas d'écran « coût estimé » dans l'application (la valeur `costUsd` est lue par `ServerNamingModel` ; à afficher par l'agent « UI »).
+

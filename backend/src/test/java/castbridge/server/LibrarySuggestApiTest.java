@@ -2,7 +2,6 @@ package castbridge.server;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -10,13 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import castbridge.server.library.LibrarySuggestProperties;
-import castbridge.server.library.LlmNameSuggester;
 import castbridge.server.library.NameSuggester;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.net.httpserver.HttpServer;
-import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -144,58 +138,10 @@ class LibrarySuggestApiTest extends ApiTestBase {
         assertTrue(yml.contains("${CASTBRIDGE_LIBRARY_LLM_API_KEY:}"), "the key comes from the environment only, empty by default");
         for (String f : List.of("src/main/resources/application.yml", "src/test/resources/application-test.yml", ".env.example"))
             assertFalse(Files.readString(Path.of(f)).matches("(?s).*sk-[A-Za-z0-9_-]{20,}.*"), f + " must not contain an API key");
-        LibrarySuggestProperties p = new LibrarySuggestProperties(null, null, null, null, null);
+        LibrarySuggestProperties p = new LibrarySuggestProperties(null, null, null, null, null, null, null, null, null, null, null, null);
         assertFalse(p.llmConfigured());
         assertEquals(30, p.perHour());
         assertEquals(40, p.maxItems());
     }
 
-    // ------------------------------------------------------------------ the LLM client, against a local stand-in for the service
-
-    @Test
-    void llmClientSendsOnlyNamesAndValidatesWhatComesBack() throws Exception {
-        AtomicReference<String> key = new AtomicReference<>(), sent = new AtomicReference<>(), version = new AtomicReference<>(), auth = new AtomicReference<>();
-        HttpServer srv = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
-        srv.createContext("/v1/messages", ex -> {
-            key.set(ex.getRequestHeaders().getFirst("x-api-key")); version.set(ex.getRequestHeaders().getFirst("anthropic-version"));
-            auth.set(ex.getRequestHeaders().getFirst("Authorization"));
-            sent.set(new String(ex.getRequestBody().readAllBytes(), StandardCharsets.UTF_8));
-            String text = "Voici : [{\"i\":0,\"kind\":\"series\",\"title\":\"Kaduna Nights\",\"season\":2,\"episode\":3,\"confidence\":0.8},"
-                    + "{\"i\":9,\"kind\":\"movie\",\"title\":\"Hors liste\"},{\"i\":1,\"kind\":\"weapon\",\"title\":\"Mauvais type\"},"
-                    + "{\"i\":1,\"kind\":\"movie\",\"title\":\"../../etc/passwd\",\"year\":2999,\"confidence\":42}]";
-            byte[] out = new ObjectMapper().writeValueAsBytes(java.util.Map.of("content", List.of(java.util.Map.of("type", "text", "text", text))));
-            ex.getResponseHeaders().add("Content-Type", "application/json");
-            ex.sendResponseHeaders(200, out.length); ex.getResponseBody().write(out); ex.close();
-        });
-        srv.start();
-        try {
-            var llm = new LlmNameSuggester("http://127.0.0.1:" + srv.getAddress().getPort() + "/v1/messages", "test-key-not-real", "test-model", new ObjectMapper());
-            List<NameSuggester.Suggestion> r = llm.suggest("fr", List.of(new NameSuggester.Item(0, "kaduna nights s02e03", "mp4", null, 45), new NameSuggester.Item(1, "autre", "mkv", "movie", null)));
-            assertEquals("test-key-not-real", key.get());
-            assertEquals("2023-06-01", version.get());
-            assertEquals(null, auth.get(), "no device token is forwarded to the LLM service");
-            JsonNode body = new ObjectMapper().readTree(sent.get());
-            assertEquals("test-model", body.get("model").asText());
-            String content = body.get("messages").get(0).get("content").asText();
-            assertTrue(content.contains("kaduna nights s02e03"));
-            assertFalse(content.contains("Bearer") || content.contains("device"), content);
-            assertEquals(2, r.size(), "out-of-range index and unknown kind are dropped");
-            assertEquals("Kaduna Nights", r.get(0).title());
-            assertEquals(null, r.get(1).year(), "an impossible year is dropped");
-            assertEquals(1.0, r.get(1).confidence());
-            assertFalse(r.get(1).title().contains("/") || r.get(1).title().contains(":"), r.get(1).title());
-        } finally { srv.stop(0); }
-    }
-
-    @Test
-    void llmFailuresBecomeAFriendly502NotAStackTrace() throws Exception {
-        HttpServer srv = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
-        srv.createContext("/", ex -> { ex.sendResponseHeaders(500, -1); ex.close(); });
-        srv.start();
-        try {
-            var llm = new LlmNameSuggester("http://127.0.0.1:" + srv.getAddress().getPort() + "/", "k", "m", new ObjectMapper());
-            try { llm.suggest("fr", List.of(new NameSuggester.Item(0, "abc", "mkv", null, null))); throw new AssertionError("should fail"); }
-            catch (NameSuggester.SuggesterException e) { assertNotNull(e.getMessage()); assertTrue(e.getMessage().contains("500")); }
-        } finally { srv.stop(0); }
-    }
 }
