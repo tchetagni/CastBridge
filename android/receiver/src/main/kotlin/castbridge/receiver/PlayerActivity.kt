@@ -541,7 +541,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                         else Thread { runCatching { ssh?.enable() }.onFailure { e -> main.post { flash("SSH impossible : ${e.message}") } } }.start()
                     },
                     ((if (s?.btApi?.enabled != false) "Couper" else "Activer") + " l'API par Bluetooth (tout par Bluetooth, sans Wi-Fi)") to {
-                        s?.btApi?.let { it.setEnabled(!it.enabled); flash("API par Bluetooth : " + if (it.enabled) "activée" else "coupée (téléphones de confiance seulement)") }
+                        s?.btApi?.let { it.enable(!it.enabled); flash("API par Bluetooth : " + if (it.enabled) "activée" else "coupée (téléphones de confiance seulement)") }
                     },
                     "Adresse de la page web" to { flash("Ouvrez http://${TvService.localIp() ?: "?"}:${ReceiverServer.PORT} — code $pin") },
                 ))

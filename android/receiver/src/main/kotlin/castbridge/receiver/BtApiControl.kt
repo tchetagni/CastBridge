@@ -48,7 +48,7 @@ class BtApiControl(
     fun start() = bridge.start()
     fun stop() = bridge.stop()
 
-    fun setEnabled(on: Boolean) { enabled = on; bridge.refresh() }
+    fun enable(on: Boolean) { enabled = on; bridge.refresh() }
 
     private fun json(): String {
         val q = ReceiverServer::q
@@ -59,8 +59,8 @@ class BtApiControl(
     /** Routes /api/bluetooth/tunnel*, or null if [path] is not one of them. */
     fun api(path: String, method: String): ApiReply? = when {
         path == "/api/bluetooth/tunnel" && method == "GET" -> ApiReply(200, json())
-        path == "/api/bluetooth/tunnel/enable" && method == "POST" -> { setEnabled(true); ApiReply(200, json()) }
-        path == "/api/bluetooth/tunnel/disable" && method == "POST" -> { setEnabled(false); ApiReply(200, json()) }
+        path == "/api/bluetooth/tunnel/enable" && method == "POST" -> { enable(true); ApiReply(200, json()) }
+        path == "/api/bluetooth/tunnel/disable" && method == "POST" -> { enable(false); ApiReply(200, json()) }
         else -> null
     }
 
