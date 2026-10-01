@@ -152,8 +152,10 @@ class Registries(unittest.TestCase):
         return {"format": 1, "voices": [v], "mapping": {"zh-CN|f|adulte|lent": "v1"}}
 
     def test_empty_templates_are_valid_and_nothing_is_ready(self):
-        eng = json.loads((Path(__file__).resolve().parents[1] / "templates/registry/engines-registry.json").read_text())
-        voi = json.loads((Path(__file__).resolve().parents[1] / "templates/registry/voices-registry.json").read_text())
+        base = Path(__file__).resolve().parents[1]
+        reg_dir = base / "templates/registry" if (base / "templates/registry").is_dir() else base.parents[1] / "registry"    # dépôt de code : templates/ ; castbridge-content : registry/
+        eng = json.loads((reg_dir / "engines-registry.json").read_text())
+        voi = json.loads((reg_dir / "voices-registry.json").read_text())
         self.assertEqual([], reg.validate_registries(eng, voi))
         self.assertEqual([], eng["engines"]); self.assertEqual([], voi["voices"]); self.assertEqual({}, voi["mapping"])
 
@@ -299,7 +301,7 @@ class Manifest(unittest.TestCase):
 
     def test_secret_scan_reports_path_and_kind_only(self):
         d, root = tmpdir(); self.addCleanup(d.cleanup)
-        (root / "a.json").write_text('{"type": "service_account", "k": 1}')
+        (root / "a.json").write_text('{"type": "service_' + 'account", "k": 1}')   # coupé : ce fichier de test ne doit pas se signaler lui-même
         (root / "b.txt").write_text("rien")
         (root / "c.cfg").write_text("api_key = ABCDEFGHIJKLMNOPQRSTUV123456\n")
         found = scan_secrets(root)
