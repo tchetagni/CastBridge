@@ -2,6 +2,7 @@
 """CastBridge question-bank pipeline (docs/QUIZ.md, section Volume de contenu).
 
     quizbank.py build [--version N]   generate + check + write packs to content/quiz/dist (deterministic)
+    quizbank.py lots [--out DIR]      build the Quiz lots (one per scope, content/quiz/lots) + catalog-lots.json, fail above 3 MB per lot
     quizbank.py check                 generate + check, print the report, write nothing (exit 1 on any error)
     quizbank.py report                coverage table per course (questions, status, games without repeat, what is missing)
     quizbank.py import FILE...        validate expert/AI-written batches and store them in content/quiz/batches/
@@ -22,10 +23,11 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(HERE))
 
-from qb import balance, core, pack, qc  # noqa: E402
+from qb import balance, core, lots, pack, qc  # noqa: E402
 
 QUIZ = ROOT / "content" / "quiz"
 DIST = QUIZ / "dist"
+LOTS = QUIZ / "lots"
 BATCHES = QUIZ / "batches"
 APPROVALS = QUIZ / "approvals.json"
 VERSION_FILE = QUIZ / "pack-version.txt"
@@ -106,6 +108,19 @@ def cmd_build(args):
     return 0
 
 
+def cmd_lots(args):
+    """Builds the Quiz lots (one per scope) into content/quiz/lots + catalog-lots.json; exit 2 if a lot exceeds the size cap."""
+    qs, good, res, fails = prepare()
+    out = LOTS if not args.out else Path(args.out)
+    try:
+        catalog, lines = lots.build_lots(good, out)
+    except lots.LotTooBig as e:
+        print("ERREUR", e)
+        return 2
+    print("\n".join(lines))
+    return 0
+
+
 def cmd_check(args):
     qs, good, res, fails = prepare()
     print_report(good, res, len(qs))
@@ -158,6 +173,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build"); b.add_argument("--version", type=int); b.set_defaults(fn=cmd_build)
+    l = sub.add_parser("lots"); l.add_argument("--out"); l.set_defaults(fn=cmd_lots)
     sub.add_parser("check").set_defaults(fn=cmd_check)
     sub.add_parser("report").set_defaults(fn=cmd_report)
     i = sub.add_parser("import"); i.add_argument("files", nargs="+"); i.set_defaults(fn=cmd_import)

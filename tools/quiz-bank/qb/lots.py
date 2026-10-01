@@ -1,0 +1,115 @@
+"""Quiz lots (docs/QUIZ.md, section Lots): one self-contained pack per SCOPE (a class, a level, a field, or one region of
+general knowledge). A lot is the pack format (manifest.json + questions.json) plus index.json (version, question count, hash
+of every question). The lot version changes only when its content changes (lots-state.json remembers the last build).
+"""
+import hashlib
+import json
+from collections import Counter
+
+from .core import COURSES
+from .pack import _zip_bytes, question_json, PACK_SUFFIX
+
+MAX_LOT_BYTES = 3 << 20      # a lot above this is a build error (a TV downloads through a flaky phone link)
+FEATURE = "quiz"
+
+# scope -> (course key of core.COURSES, region filter or None, title). Keep in sync with QuizLotScopes.specs (Kotlin).
+SCOPES = {
+    "culture-cm": ("general", "CM", "Culture générale · Cameroun"),
+    "culture-afrique": ("general", "AF", "Culture générale · Afrique"),
+    "culture-monde": ("general", "WORLD", "Culture générale · Monde"),
+    "cm2": ("cm2", None, "Primaire · CM2"),
+    "3e": ("3e", None, "Secondaire · 3e"),
+    "tle": ("tle", None, "Secondaire · Terminale"),
+    "droit-l1": ("l1-droit", None, "Supérieur · L1 Droit"),
+    "eco-l1": ("l1-eco", None, "Supérieur · L1 Économie"),
+    "maths-l1": ("l1-maths", None, "Supérieur · L1 Mathématiques"),
+}
+
+
+def lot_file(scope, version):
+    return "quiz-%s-p1-v%d%s" % (scope, version, PACK_SUFFIX)
+
+
+def question_hash(q):
+    """First 8 hex digits of SHA-256 of the fields joined by U+001F (choices by U+001E): same as QuizLotIndex.questionHash (Kotlin)."""
+    f = [q["id"], q.get("track") or "general", q.get("level") or "", q.get("field") or "", q.get("region") or "", q.get("category") or "",
+         str(int(q["difficulty"])), q["question"], "\u001e".join(q["choices"]), str(int(q["answer"])), q.get("explanation") or "",
+         q.get("source") or "", q.get("status") or "", q.get("verif") or "", q.get("lang") or "fr"]
+    return hashlib.sha256("\u001f".join(f).encode("utf-8")).hexdigest()[:8]
+
+
+def content_hash(hashes):
+    return hashlib.sha256("".join("%s:%s\n" % (k, hashes[k]) for k in sorted(hashes)).encode("utf-8")).hexdigest()
+
+
+def lot_questions(questions, scope):
+    course, region, _ = SCOPES[scope]
+    c = COURSES[course]
+    return sorted((q for q in questions if (q["track"], q["level"], q["field"]) == (c["track"], c["level"], c["field"])
+                   and (region is None or q["region"] == region)), key=lambda q: q["id"])
+
+
+def make_lot(scope, qs, version):
+    course, _, title = SCOPES[scope]
+    c = COURSES[course]
+    qs = [question_json(q) for q in qs]
+    body = "{\"version\":2,\"questions\":[\n" + ",\n".join(json.dumps(q, ensure_ascii=False, separators=(",", ":")) for q in qs) + "\n]}\n"
+    qbytes = body.encode("utf-8")
+    hashes = {q["id"]: question_hash(q) for q in qs}
+    chash = content_hash(hashes)
+    index = {"v": 1, "scope": scope, "version": version, "count": len(qs), "contentHash": chash, "q": dict(sorted(hashes.items()))}
+    ibytes = json.dumps(index, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    manifest = {
+        "format": 1, "id": scope, "course": course, "track": c["track"], "level": c["level"], "field": c["field"],
+        "part": 1, "parts": 1, "version": version, "questions": len(qs),
+        "lot": {"feature": FEATURE, "scope": scope, "title": title, "contentHash": chash},
+        "byRegion": dict(sorted(Counter(q["region"] for q in qs).items())),
+        "byDifficulty": {str(d): n for d, n in sorted(Counter(q["difficulty"] for q in qs).items())},
+        "statuses": dict(sorted(Counter(q["status"] for q in qs).items())),
+        "files": {"questions.json": {"size": len(qbytes), "sha256": hashlib.sha256(qbytes).hexdigest()},
+                  "index.json": {"size": len(ibytes), "sha256": hashlib.sha256(ibytes).hexdigest()}},
+    }
+    data = _zip_bytes({"manifest.json": json.dumps(manifest, ensure_ascii=False, indent=1).encode("utf-8"), "questions.json": qbytes, "index.json": ibytes})
+    return manifest, chash, data
+
+
+class LotTooBig(Exception):
+    pass
+
+
+def build_lots(questions, out_dir, max_bytes=MAX_LOT_BYTES):
+    """Writes every lot + catalog-lots.json + lots-state.json into out_dir. Returns (catalog dict, report lines).
+    Raises LotTooBig (after writing nothing) when one lot exceeds max_bytes."""
+    state_file = out_dir / "lots-state.json"
+    state = json.loads(state_file.read_text(encoding="utf-8")) if state_file.is_file() else {}
+    built, new_state = [], {}
+    for scope, (course, region, title) in SCOPES.items():
+        qs = lot_questions(questions, scope)
+        if not qs:
+            continue
+        old = state.get(scope)
+        _, chash, _ = make_lot(scope, qs, 0)
+        version = 1 if old is None else (old["version"] if old["contentHash"] == chash else old["version"] + 1)
+        manifest, chash, data = make_lot(scope, qs, version)
+        if len(data) > max_bytes:
+            raise LotTooBig("lot %s : %d octets, plus que le plafond de %d octets" % (scope, len(data), max_bytes))
+        new_state[scope] = {"version": version, "contentHash": chash}
+        c = COURSES[course]
+        built.append({"feature": FEATURE, "scope": scope, "version": version, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(),
+                      "title": title, "minAppVersion": 0, "file": lot_file(scope, version), "questions": len(qs), "contentHash": chash,
+                      "id": scope, "course": course, "track": c["track"], "level": c["level"], "field": c["field"], "part": 1, "parts": 1,
+                      "_data": data, "_changed": old is None or old["contentHash"] != chash})
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for old in out_dir.glob("*" + PACK_SUFFIX):
+        old.unlink()
+    for e in built:
+        (out_dir / e["file"]).write_bytes(e.pop("_data"))
+    changed = {e["scope"]: e.pop("_changed") for e in built}
+    total = sum(e["bytes"] for e in built)
+    catalog = {"format": 1, "feature": FEATURE, "totalBytes": total, "lots": built}
+    (out_dir / "catalog-lots.json").write_text(json.dumps(catalog, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    state_file.write_text(json.dumps(new_state, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    lines = ["%-16s v%-3d %6d questions %9d octets  %s%s" % (e["scope"], e["version"], e["questions"], e["bytes"], e["file"], "  (nouvelle version)" if changed[e["scope"]] else "")
+             for e in built]
+    lines.append("%-16s      %6d questions %9d octets  (plafond par lot : %d)" % ("TOTAL", sum(e["questions"] for e in built), total, max_bytes))
+    return catalog, lines
