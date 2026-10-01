@@ -100,6 +100,7 @@ class LinkPool(
                             if (supportsShared == true) throw e
                             // first contact with this TV: is it the v2 service that is missing (old TV), or the TV that is unreachable?
                             log("$label: shared service failed (${e.message}); trying the single-use service")
+                            lastClosedAt = now(); pause(gapMs)      // the stack may still hold the failed attempt: never probe back to back
                             val l = try { synchronized(connectLock) { dialLegacy() } } catch (e2: java.io.IOException) { lastClosedAt = now(); throw e2 }
                             supportsShared = false; legacyUntil = now() + legacyRecheckMs; opened++; onChange()
                             return Opened.Legacy(l)

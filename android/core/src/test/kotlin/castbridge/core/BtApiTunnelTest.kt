@@ -57,7 +57,7 @@ class BtApiTunnelTest {
 
     /** The phone's gateway for one device; returns its local base URL. */
     private fun phone(dial: () -> Link, handshake: Boolean = true, idleMs: Long = 120_000, dialTimeoutMs: Long = 5000): Pair<TunnelGateway, String> {
-        val gw = TunnelGateway("api", handshake, dial, dialTimeoutMs = dialTimeoutMs, idleMs = idleMs, handshakeTimeoutMs = 3000, log = { tvLog += "phone: $it" }, watchStepMs = 50)
+        val gw = TunnelGateway("api", handshake, dial, dialTimeoutMs = dialTimeoutMs, idleMs = idleMs, handshakeTimeoutMs = 3000, log = { tvLog += "phone: $it" }, watchStepMs = 50, gapMs = 0, backoffMs = emptyList())   // these tests exercise the tunnel, not the pool's waits (BtMuxTunnelTest does)
         val port = gw.start("127.0.0.1", 0); closeables += AutoCloseable { gw.stop() }
         return gw to "http://127.0.0.1:$port"
     }
