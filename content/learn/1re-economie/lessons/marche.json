@@ -1,0 +1,429 @@
+{
+ "chapter": "1re-economie-ch-marche",
+ "lessons": [
+  {
+   "id": "1re-economie-marche",
+   "title": "Marché, offre, demande et prix d'équilibre",
+   "minutes": 40,
+   "programRef": "Économie de Première — marché, offre, demande, prix (programme général probable, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir marché, offre et demande.",
+    "Énoncer la loi de la demande et la croissance de l'offre.",
+    "Déterminer prix et quantité d'équilibre.",
+    "Analyser un excédent, une pénurie et un déplacement de courbe."
+   ],
+   "prerequisites": [
+    "1re-economie-agents"
+   ],
+   "exercises": [
+    "1re-economie-ma-01",
+    "1re-economie-ma-02",
+    "1re-economie-ma-03",
+    "1re-economie-ma-04",
+    "1re-economie-ma-05",
+    "1re-economie-ma-06"
+   ],
+   "selfCheck": [
+    "1re-economie-ma-q1",
+    "1re-economie-ma-q2",
+    "1re-economie-ma-q3",
+    "1re-economie-ma-q4",
+    "1re-economie-ma-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le marché",
+     "md": "Le **marché** est le lieu, réel ou virtuel, où se rencontrent des **offreurs** (vendeurs) et des **demandeurs** (acheteurs) d'un bien ou d'un service, et où se forme un **prix**. Il existe des marchés de biens et services (tomates, téléphones), du travail, des capitaux. Le marché de Mokolo à Yaoundé ou de Congo à Douala en est une image concrète."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La demande",
+     "md": "La **demande** est la quantité d'un bien que les acheteurs souhaitent acquérir à un prix donné. **Loi de la demande** : quand le prix augmente, la quantité demandée **diminue** (toutes choses égales par ailleurs). La courbe de demande est **décroissante**.\nLa demande dépend aussi du revenu, des goûts, du prix des autres biens et du nombre d'acheteurs."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "L'offre",
+     "md": "L'**offre** est la quantité d'un bien que les vendeurs proposent à un prix donné. Quand le prix augmente, la quantité offerte **augmente** : la courbe d'offre est **croissante**.\nL'offre dépend aussi des coûts de production, de la technologie, du nombre de producteurs et, pour l'agriculture, du climat."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 1200,
+      "ymin": 0,
+      "ymax": 700,
+      "grid": 200,
+      "xlabel": "quantité",
+      "ylabel": "prix",
+      "w": 420,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "600-x/2",
+        "color": "blue",
+        "label": "demande"
+       },
+       {
+        "expr": "100+x/3",
+        "color": "red",
+        "label": "offre"
+       }
+      ],
+      "points": [
+       {
+        "x": 600,
+        "y": 300,
+        "label": "E",
+        "color": "green"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 300,
+        "x2": 600,
+        "y2": 300,
+        "dash": true,
+        "color": "grey"
+       },
+       {
+        "x1": 600,
+        "y1": 0,
+        "x2": 600,
+        "y2": 300,
+        "dash": true,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "Offre et demande (valeurs fictives) : l'équilibre E est à l'intersection des courbes, au prix 300 FCFA pour 600 unités.",
+     "alt": "Deux courbes : la demande bleue décroissante et l'offre rouge croissante se coupent au point E, d'abscisse 600 et d'ordonnée 300. Deux pointillés relient E aux axes."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Prix d'équilibre",
+     "md": "Le **prix d'équilibre** est le prix pour lequel la quantité demandée est égale à la quantité offerte : **Qd = Qs**. La quantité échangée à ce prix est la **quantité d'équilibre**. À l'équilibre, tout ce qui est offert est acheté : il n'y a ni manque ni surplus."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Déséquilibres",
+     "md": "- Si le prix est **supérieur** au prix d'équilibre : l'offre dépasse la demande, c'est un **excédent** (surplus). Les vendeurs baissent leurs prix.\n- Si le prix est **inférieur** : la demande dépasse l'offre, c'est une **pénurie**. Les prix tendent à monter.\nLe marché tend ainsi vers l'équilibre. Ampleur du déséquilibre = |Qd − Qs|."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Déplacement des courbes",
+     "md": "Un changement du **prix** déplace le point **le long** de la courbe. Un changement d'un **autre déterminant** déplace **toute la courbe** : une hausse des revenus déplace la demande vers la droite (plus de quantité à chaque prix) et le prix d'équilibre augmente ; une mauvaise récolte déplace l'offre vers la gauche et le prix augmente."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : trouver l'équilibre",
+     "md": "1. Écrire les fonctions Qd et Qs en fonction du prix p.\n2. Résoudre l'équation **Qd = Qs** : on obtient le prix d'équilibre.\n3. Remplacer ce prix dans Qd (ou Qs) pour la quantité d'équilibre.\n4. **Vérifier** : Qd et Qs doivent être égales à ce prix.\n5. Pour un autre prix, comparer Qd et Qs : le plus grand l'emporte."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-economie-ma-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : prix et quantité d'équilibre",
+     "statement": "Sur un marché (données fictives), la demande est Qd = 1 200 − 2p et l'offre Qs = 3p − 300 (p en FCFA, Q en kilogrammes). Trouve l'équilibre.",
+     "steps": [
+      {
+       "md": "On pose Qd = Qs :",
+       "tex": "1200 - 2p = 3p - 300 \\Rightarrow 1500 = 5p \\Rightarrow p = 300"
+      },
+      {
+       "md": "Quantité d'équilibre :",
+       "tex": "Q = 1200 - 2 \\times 300 = 600\\ \\text{kg}"
+      },
+      {
+       "md": "Vérification avec l'offre : 3 × 300 − 300 = 600. Les deux quantités sont bien égales."
+      }
+     ],
+     "answer": "**Prix d'équilibre : 300 FCFA ; quantité d'équilibre : 600 kg.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : pénurie ou excédent",
+     "statement": "Avec les mêmes fonctions, que se passe-t-il au prix de 200 FCFA ? Et au prix de 400 FCFA ?",
+     "steps": [
+      {
+       "md": "À 200 FCFA : Qd = 1 200 − 400 = 800 et Qs = 600 − 300 = 300. La demande dépasse l'offre de 500 kg : **pénurie**, le prix a tendance à monter."
+      },
+      {
+       "md": "À 400 FCFA : Qd = 1 200 − 800 = 400 et Qs = 1 200 − 300 = 900. L'offre dépasse la demande de 500 kg : **excédent**, le prix a tendance à baisser."
+      },
+      {
+       "md": "Dans les deux cas, le prix revient vers 300 FCFA."
+      }
+     ],
+     "answer": "200 FCFA : **pénurie de 500 kg** ; 400 FCFA : **excédent de 500 kg**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que la demande augmente quand le prix baisse : c'est la **quantité demandée** qui augmente (mouvement le long de la courbe).\n- Confondre **excédent** (offre > demande, prix trop haut) et **pénurie** (demande > offre, prix trop bas).\n- Oublier de **vérifier** l'équilibre avec les deux fonctions.\n- Lire les courbes en échangeant prix et quantité sur les axes.\n- Penser que le marché est toujours à l'équilibre : il y tend seulement."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-economie-ma-05"
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'**élasticité-prix** mesure la sensibilité de la quantité demandée au prix : pour les produits de première nécessité, la demande varie peu.",
+      "Un **prix plafond** (prix maximum imposé) inférieur au prix d'équilibre provoque une pénurie ; un **prix plancher** supérieur provoque un excédent.",
+      "Sur les marchés agricoles, les prix varient avec les saisons : après la récolte l'offre est abondante et les prix baissent."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Fonctions linéaires Qd et Qs : niveau mathématique à adapter ; certains programmes de 1re se limitent à des tableaux et à des courbes.",
+    "L'élasticité et les formes de marché (concurrence, monopole) : au programme de 1re ou plus tard ? À vérifier.",
+    "Toutes les valeurs sont fictives (prix, quantités) ; les marchés cités (Mokolo, Congo) servent d'image seulement : à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-economie-ma-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-marche",
+   "prompt": "D'après la loi de la demande, si le prix d'un bien augmente (autres facteurs inchangés) :",
+   "choices": [
+    "la quantité demandée diminue",
+    "la quantité demandée augmente",
+    "la quantité offerte diminue",
+    "la demande reste identique en toutes circonstances"
+   ],
+   "answer": 0,
+   "explanation": "La courbe de demande est décroissante : plus le prix est élevé, moins on en achète.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ma-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-marche",
+   "prompt": "Lorsque le prix est supérieur au prix d'équilibre, il y a une pénurie.",
+   "answer": false,
+   "explanation": "Faux : à un prix trop élevé, l'offre dépasse la demande : c'est un excédent. La pénurie correspond à un prix trop bas.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ma-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-marche",
+   "prompt": "La demande d'un bien est Qd = 800 − 4p. Quelle quantité est demandée au prix p = 100 ? (en unités)",
+   "answer": 400,
+   "tolerance": 0,
+   "explanation": "Qd = 800 − 4 × 100 = 400 unités.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ma-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-economie-marche",
+   "prompt": "Sur un marché fictif, Qd = 1 000 − 2p et Qs = 4p − 200. Quel est le prix d'équilibre ? (en FCFA)",
+   "answer": 200,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "1 000 − 2p = 4p − 200 donne 1 200 = 6p, donc p = 200. Vérification : Qd = 600 et Qs = 600.",
+   "method": "Résoudre Qd = Qs.",
+   "mistakes": [
+    "Soustraire au lieu d'additionner : 800 = 2p donne 400, faux."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ma-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-economie-marche",
+   "prompt": "Même marché (Qs = 4p − 200), mais la demande augmente à Qd = 1 300 − 2p à cause d'une hausse des revenus. Quel est le nouveau prix d'équilibre ? (en FCFA)",
+   "answer": 250,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "1 300 − 2p = 4p − 200 donne 1 500 = 6p, donc p = 250. Le prix augmente (de 200 à 250) : la demande s'est déplacée vers la droite. Quantité : 800.",
+   "method": "Même méthode avec la nouvelle fonction de demande.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ma-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-economie-marche",
+   "prompt": "Sur le marché des tomates d'une ville (données fictives), on a relevé selon le prix du kilogramme les quantités demandées et offertes chaque jour, en kilogrammes. Prix (F) : 100 ; 200 ; 300 ; 400 ; 500. Demande : 900 ; 700 ; 500 ; 300 ; 100. Offre : 100 ; 300 ; 500 ; 700 ; 900.",
+   "method": "Lire le tableau, comparer Qd et Qs à chaque prix.",
+   "mistakes": [
+    "Confondre excédent et pénurie."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première",
+   "parts": [
+    {
+     "id": "1re-economie-ma-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le prix d'équilibre ? (en FCFA par kg)",
+     "answer": 300,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "À 300 F, la demande et l'offre valent 500 kg : c'est le prix d'équilibre."
+    },
+    {
+     "id": "1re-economie-ma-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Au prix de 400 F, de combien l'offre dépasse-t-elle la demande ? (en kg)",
+     "answer": 400,
+     "tolerance": 0,
+     "unit": "kg",
+     "explanation": "À 400 F : offre 700 et demande 300 : excédent de 700 − 300 = 400 kg."
+    },
+    {
+     "id": "1re-economie-ma-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que provoque un prix imposé à 200 F le kilogramme ?",
+     "choices": [
+      "Une pénurie de 400 kg",
+      "Un excédent de 400 kg",
+      "L'équilibre du marché",
+      "Une baisse de la demande à zéro"
+     ],
+     "answer": 0,
+     "explanation": "À 200 F, la demande (700) dépasse l'offre (300) de 400 kg : c'est une pénurie."
+    },
+    {
+     "id": "1re-economie-ma-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Une mauvaise récolte réduit l'offre à chaque prix. Explique l'effet sur le prix d'équilibre et sur la quantité échangée.",
+     "model": "L'offre diminue à chaque prix : la courbe d'offre se déplace vers la gauche. Au prix initial de 300 F, la demande dépasse alors l'offre : il y a pénurie, ce qui fait monter le prix. Le nouveau prix d'équilibre est plus élevé et la quantité échangée est plus faible.",
+     "rubric": [
+      "Déplacement de la courbe d'offre vers la gauche, pénurie au prix initial (1 point).",
+      "Prix d'équilibre plus élevé et quantité échangée plus faible (1 point)."
+     ],
+     "explanation": "Déplacer la courbe d'offre vers la gauche."
+    }
+   ]
+  },
+  {
+   "id": "1re-economie-ma-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-marche",
+   "prompt": "La courbe d'offre est généralement :",
+   "choices": [
+    "croissante",
+    "décroissante",
+    "horizontale",
+    "verticale"
+   ],
+   "answer": 0,
+   "explanation": "Plus le prix est élevé, plus les producteurs offrent de quantités.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ma-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-marche",
+   "prompt": "À l'équilibre :",
+   "choices": [
+    "Qd > Qs",
+    "Qd = Qs",
+    "Qd < Qs",
+    "le prix est nul"
+   ],
+   "answer": 1,
+   "explanation": "Le prix d'équilibre égalise quantité demandée et quantité offerte.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ma-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-marche",
+   "prompt": "Un prix inférieur au prix d'équilibre provoque :",
+   "choices": [
+    "un excédent",
+    "aucun effet",
+    "une pénurie",
+    "la disparition du marché"
+   ],
+   "answer": 2,
+   "explanation": "À un prix trop bas, la demande dépasse l'offre.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ma-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-marche",
+   "prompt": "Une hausse des revenus des consommateurs déplace :",
+   "choices": [
+    "la courbe d'offre vers la gauche",
+    "la courbe d'offre vers la droite",
+    "aucune courbe",
+    "la courbe de demande vers la droite"
+   ],
+   "answer": 3,
+   "explanation": "Les consommateurs achètent plus à chaque prix : la demande augmente.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ma-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-marche",
+   "prompt": "Sur le graphique, l'équilibre se lit :",
+   "choices": [
+    "à l'intersection des courbes d'offre et de demande",
+    "à l'origine du repère",
+    "sur l'axe des prix uniquement",
+    "au point le plus haut de la demande"
+   ],
+   "answer": 0,
+   "explanation": "Le point d'intersection donne le prix et la quantité d'équilibre.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  }
+ ]
+}

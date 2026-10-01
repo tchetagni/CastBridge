@@ -1,0 +1,674 @@
+{
+ "chapter": "1re-svt-d-ch-mitose",
+ "lessons": [
+  {
+   "id": "1re-svt-d-mitose",
+   "title": "Mitose, méiose, reproduction et brassage génétique",
+   "minutes": 35,
+   "programRef": "1re D — Mitose, méiose, brassage génétique (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire le cycle cellulaire et les phases de la mitose.",
+    "Dénombrer chromosomes et chromatides à chaque étape.",
+    "Comparer mitose et méiose.",
+    "Expliquer le brassage génétique et le rôle de la fécondation."
+   ],
+   "prerequisites": [
+    "1re-svt-d-adn"
+   ],
+   "exercises": [
+    "1re-svt-d-mit-01",
+    "1re-svt-d-mit-02",
+    "1re-svt-d-mit-03",
+    "1re-svt-d-mit-04",
+    "1re-svt-d-mit-05",
+    "1re-svt-d-mit-06"
+   ],
+   "selfCheck": [
+    "1re-svt-d-mit-q1",
+    "1re-svt-d-mit-q2",
+    "1re-svt-d-mit-q3",
+    "1re-svt-d-mit-q4",
+    "1re-svt-d-mit-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le cycle cellulaire",
+     "md": "Entre deux divisions, une cellule suit un **cycle** :\n- **interphase** : G1 (croissance), **S** (réplication de l'ADN), G2 (préparation) ;\n- **mitose** : division du noyau, en quatre phases, suivie de la division du cytoplasme.\nPendant la phase S, chaque chromosome passe de une à **deux chromatides** identiques, soudées."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les phases de la mitose",
+     "md": "1. **Prophase** : les chromosomes se condensent, la membrane du noyau disparaît.\n2. **Métaphase** : les chromosomes (à 2 chromatides) s'alignent au milieu de la cellule.\n3. **Anaphase** : les chromatides se séparent et migrent vers les deux pôles.\n4. **Télophase** : deux noyaux se reforment, la cellule se divise en deux."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Résultat de la mitose",
+     "md": "La mitose produit **2 cellules filles identiques** à la cellule mère : même information génétique, même nombre de chromosomes (**2n**).\nElle assure la croissance, le renouvellement des cellules et la réparation des tissus ; c'est aussi le mode de reproduction asexuée (bouturage, par exemple)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 3,
+      "grid": 1,
+      "xlabel": "temps",
+      "ylabel": "ADN",
+      "w": 420,
+      "h": 240,
+      "curves": [],
+      "points": [
+       {
+        "x": 2,
+        "y": 1,
+        "label": "Q",
+        "color": "red"
+       },
+       {
+        "x": 6.5,
+        "y": 2,
+        "label": "2Q",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 1,
+        "x2": 4,
+        "y2": 1,
+        "dash": false,
+        "color": "blue"
+       },
+       {
+        "x1": 4,
+        "y1": 1,
+        "x2": 5,
+        "y2": 2,
+        "dash": false,
+        "color": "blue"
+       },
+       {
+        "x1": 5,
+        "y1": 2,
+        "x2": 8,
+        "y2": 2,
+        "dash": false,
+        "color": "blue"
+       },
+       {
+        "x1": 8,
+        "y1": 2,
+        "x2": 8.3,
+        "y2": 1,
+        "dash": false,
+        "color": "blue"
+       },
+       {
+        "x1": 8.3,
+        "y1": 1,
+        "x2": 10,
+        "y2": 1,
+        "dash": false,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Quantité d'ADN d'une cellule diploïde au cours d'un cycle : elle double en phase S et revient à Q à la fin de la mitose.",
+     "alt": "Graphique de la quantité d'ADN en fonction du temps : palier à Q, montée à 2Q pendant la phase S, palier à 2Q, puis chute brutale à Q à la division, et nouveau palier à Q."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Caryotype, diploïde, haploïde",
+     "md": "Chez une espèce, les cellules du corps possèdent **2n chromosomes**, formant n paires de chromosomes **homologues** : elles sont **diploïdes**. Les gamètes (cellules reproductrices) n'en ont que **n** : ils sont **haploïdes**.\nChez l'être humain, 2n = 46 (23 paires) et n = 23. Le nombre de chromosomes est constant dans une espèce."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La méiose",
+     "md": "La **méiose** a lieu dans les organes reproducteurs (testicules, ovaires, organes floraux). Une cellule diploïde (2n) donne **4 cellules haploïdes (n)** en **deux divisions successives** :\n- **méiose I** : les chromosomes homologues se séparent (réduction du nombre à n) ;\n- **méiose II** : les chromatides se séparent, comme dans une mitose.\nLes 4 cellules obtenues sont **génétiquement différentes**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 250,
+      "items": [
+       {
+        "t": "text",
+        "x": 30,
+        "y": 26,
+        "text": "Mitose",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 150,
+        "text": "Méiose",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 75,
+        "r": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 80,
+        "text": "2n",
+        "size": 16,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 98,
+        "y1": 75,
+        "x2": 200,
+        "y2": 75,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 62,
+        "text": "1 division",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 75,
+        "r": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 75,
+        "r": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 80,
+        "text": "2n",
+        "size": 16,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 80,
+        "text": "2n",
+        "size": 16,
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 200,
+        "r": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 205,
+        "text": "2n",
+        "size": 16,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 98,
+        "y1": 200,
+        "x2": 200,
+        "y2": 200,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 187,
+        "text": "2 divisions",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 200,
+        "r": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "circle",
+        "cx": 310,
+        "cy": 200,
+        "r": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "circle",
+        "cx": 370,
+        "cy": 200,
+        "r": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "circle",
+        "cx": 430,
+        "cy": 200,
+        "r": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 205,
+        "text": "n",
+        "size": 16,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 205,
+        "text": "n",
+        "size": 16,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 205,
+        "text": "n",
+        "size": 16,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 205,
+        "text": "n",
+        "size": 16,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Comparaison : une mitose donne 2 cellules 2n identiques, une méiose donne 4 cellules haploïdes (n).",
+     "alt": "Deux lignes : la mitose transforme une cellule 2n en deux cellules 2n en une division ; la méiose transforme une cellule 2n en quatre cellules n en deux divisions."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Brassage génétique et fécondation",
+     "md": "Deux mécanismes de la méiose créent de la diversité :\n- **brassage interchromosomique** : en anaphase I, les chromosomes de chaque paire se répartissent au hasard : $2^n$ gamètes possibles pour n paires ;\n- **brassage intrachromosomique** : en prophase I, des échanges (**crossing-over**) entre chromosomes homologues recombinent les allèles.\nLa **fécondation** réunit deux gamètes au hasard : elle rétablit **2n** et ajoute du brassage."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : dénombrer chromosomes et chromatides",
+     "md": "- Avant la phase S : 1 chromatide par chromosome. Après S, jusqu'à l'anaphase : **2 chromatides**.\n- En métaphase de mitose : 2n chromosomes à 2 chromatides.\n- En anaphase de mitose : chaque chromatide devient un chromosome : **4n chromosomes** dans la cellule.\n- Nombre de gamètes différents (sans crossing-over) : **2 puissance n**."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-mit-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : compter en mitose",
+     "statement": "Une cellule de drosophile a 2n = 8 chromosomes. Combien de chromosomes (et de chromatides) la cellule contient-elle en métaphase, puis en anaphase ? Et chaque cellule fille ?",
+     "steps": [
+      {
+       "md": "En métaphase, l'ADN est répliqué : il y a 8 chromosomes à 2 chromatides, soit 16 chromatides."
+      },
+      {
+       "md": "En anaphase, les chromatides se séparent : chacune devient un chromosome, donc 16 chromosomes dans la cellule (8 vers chaque pôle)."
+      },
+      {
+       "md": "Après la télophase, chaque cellule fille reçoit 8 chromosomes à 1 chromatide : elle est identique à la cellule mère."
+      }
+     ],
+     "answer": "Métaphase : **8 chromosomes** (16 chromatides) ; anaphase : **16 chromosomes** ; cellule fille : **8 chromosomes**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : diversité des gamètes",
+     "statement": "Chez l'être humain, n = 23. Combien de gamètes génétiquement différents un individu peut-il produire par le seul brassage interchromosomique ? Même question pour une espèce où 2n = 6.",
+     "steps": [
+      {
+       "md": "Pour n paires de chromosomes, chaque paire se répartit de 2 façons : le nombre de gamètes différents est 2 multiplié n fois."
+      },
+      {
+       "md": "Être humain (n = 23) :",
+       "tex": "2^{23} = 8 388 608"
+      },
+      {
+       "md": "Espèce à 2n = 6 : il y a 3 paires, donc",
+       "tex": "2^3 = 8 \\text{ gamètes différents}"
+      }
+     ],
+     "answer": "**8 388 608** gamètes différents chez l'être humain ; **8** pour 2n = 6."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **chromosome** et **chromatide** : une chromatide est une moitié d'un chromosome répliqué.\n- Croire que la méiose conserve le nombre de chromosomes : elle le **divise par deux**.\n- Dire que la fécondation « double » les chromosomes d'un gamète : elle réunit deux lots haploïdes pour refaire 2n.\n- Calculer 2n au lieu de $2^n$ : pour n = 3, 2n = 6 mais $2^3 = 8$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-mit-04"
+    },
+    {
+     "type": "more",
+     "items": [
+      "**Trisomie 21** : accident de répartition (non-disjonction) des chromosomes 21 pendant la méiose ; la personne a 47 chromosomes dont trois chromosomes 21.",
+      "Les cellules cancéreuses se divisent sans contrôle : leur cycle cellulaire est dérégulé.",
+      "Le crossing-over augmente la diversité des gamètes bien au-delà de $2^n$."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Place des phases G1/S/G2 et détail de la méiose (noms des stades de la prophase I) : à vérifier selon le programme de 1re D.",
+    "Le brassage intrachromosomique est-il au programme de 1re D ou de Tle ? À confirmer.",
+    "Reproduction sexuée / asexuée chez les plantes : étendue à vérifier avec l'enseignant."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-svt-d-mit-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "À quel moment du cycle cellulaire l'ADN est-il répliqué ?",
+   "choices": [
+    "Pendant l'interphase, en phase S",
+    "Pendant la prophase",
+    "Pendant l'anaphase",
+    "Pendant la télophase"
+   ],
+   "answer": 0,
+   "explanation": "La réplication a lieu en phase S de l'interphase : à l'entrée en mitose, chaque chromosome a déjà deux chromatides.",
+   "mistakes": [
+    "Placer la réplication pendant la mitose."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-mit-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "Chez le pois, 2n = 14. Combien de chromosomes contient un gamète ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "Un gamète est haploïde : n = 14 ÷ 2 = 7 chromosomes.",
+   "method": "n = 2n ÷ 2.",
+   "mistakes": [
+    "Répondre 14 : c'est le nombre de la cellule diploïde."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-mit-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "Associe chaque phase de la mitose à son événement.",
+   "pairs": [
+    [
+     "Prophase",
+     "Les chromosomes se condensent"
+    ],
+    [
+     "Métaphase",
+     "Les chromosomes s'alignent au milieu de la cellule"
+    ],
+    [
+     "Anaphase",
+     "Les chromatides se séparent et migrent vers les pôles"
+    ],
+    [
+     "Télophase",
+     "Deux noyaux se reforment"
+    ]
+   ],
+   "explanation": "Ordre : prophase, métaphase, anaphase, télophase. La séparation des chromatides caractérise l'anaphase.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-mit-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "Chez la drosophile, 2n = 8. Combien de types de gamètes différents (brassage interchromosomique seul) un individu peut-il produire ?",
+   "answer": 16,
+   "tolerance": 0,
+   "explanation": "n = 4 paires de chromosomes : $2^4$ = 16 gamètes différents.",
+   "method": "Nombre de gamètes différents = 2 puissance (nombre de paires).",
+   "mistakes": [
+    "Calculer 2 × 4 = 8.",
+    "Calculer 4² = 16 par hasard : ici la bonne écriture est $2^4$."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-mit-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "Une cellule diploïde contient la quantité d'ADN Q avant la phase S. Quelle quantité contient chacun des 4 gamètes à l'issue de la méiose ?",
+   "choices": [
+    "Q",
+    "2Q",
+    "Q/2",
+    "Q/4"
+   ],
+   "answer": 2,
+   "explanation": "Après la phase S, la cellule contient 2Q. La méiose I donne 2 cellules à Q, la méiose II donne 4 cellules à Q/2.",
+   "method": "Suivre la quantité d'ADN : Q, 2Q, puis Q par cellule après la méiose I, puis Q/2.",
+   "mistakes": [
+    "Répondre Q : confusion avec une mitose."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-mit-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "On étudie la drosophile (2n = 8). On suppose que, pour chaque paire de chromosomes, chaque parent possède deux chromosomes différents l'un de l'autre, et que le crossing-over est ignoré.",
+   "method": "Passer de 2n à n, puis calculer 2 puissance n, puis multiplier pour les deux parents.",
+   "mistakes": [
+    "Confondre 2n = 8 chromosomes et 8 types de gamètes."
+   ],
+   "source": "Exercice original, style Probatoire",
+   "parts": [
+    {
+     "id": "1re-svt-d-mit-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de chromosomes contient un spermatozoïde de drosophile ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "Un gamète est haploïde : n = 8 ÷ 2 = 4."
+    },
+    {
+     "id": "1re-svt-d-mit-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de types de spermatozoïdes génétiquement différents un mâle peut-il produire ?",
+     "answer": 16,
+     "tolerance": 0,
+     "explanation": "4 paires de chromosomes donnent $2^4$ = 16 types de gamètes."
+    },
+    {
+     "id": "1re-svt-d-mit-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de zygotes génétiquement différents deux parents donnés peuvent-ils produire ?",
+     "answer": 256,
+     "tolerance": 0,
+     "explanation": "Chaque parent produit 16 types de gamètes ; la fécondation associe un gamète de chacun : 16 × 16 = 256."
+    },
+    {
+     "id": "1re-svt-d-mit-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Cite les deux mécanismes de brassage de la méiose et dis comment la fécondation intervient dans la diversité.",
+     "model": "Les deux mécanismes sont le brassage interchromosomique (répartition au hasard des chromosomes homologues en anaphase I) et le brassage intrachromosomique (crossing-over en prophase I). La fécondation associe au hasard deux gamètes parmi tous ceux qui sont possibles, ce qui multiplie encore la diversité des descendants et rétablit le nombre 2n.",
+     "rubric": [
+      "Brassage interchromosomique et intrachromosomique cités et situés (1 point).",
+      "Rôle de la fécondation : rencontre au hasard des gamètes, retour à 2n (1 point)."
+     ],
+     "explanation": "Deux mécanismes de brassage s'ajoutent à la fécondation, qui réunit au hasard les gamètes."
+    }
+   ]
+  },
+  {
+   "id": "1re-svt-d-mit-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "Combien de cellules produit une méiose à partir d'une cellule mère ?",
+   "choices": [
+    "4",
+    "2",
+    "1",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "Deux divisions successives donnent quatre cellules haploïdes.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-mit-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "Quelle est la conséquence d'une mitose ?",
+   "choices": [
+    "Quatre cellules haploïdes",
+    "Deux cellules filles identiques à la cellule mère",
+    "Deux cellules haploïdes différentes",
+    "Une cellule à 4n chromosomes"
+   ],
+   "answer": 1,
+   "explanation": "La mitose conserve l'information génétique et le nombre de chromosomes.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-mit-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "Le crossing-over se produit :",
+   "choices": [
+    "en prophase I de la méiose",
+    "en anaphase de la mitose",
+    "en phase S",
+    "lors de la fécondation"
+   ],
+   "answer": 0,
+   "explanation": "Il s'agit d'échanges entre chromatides de chromosomes homologues, en prophase I.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-mit-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "Qu'est-ce qui rétablit le nombre 2n de chromosomes ?",
+   "choices": [
+    "La méiose II",
+    "La réplication seule",
+    "La fécondation",
+    "La télophase de la méiose"
+   ],
+   "answer": 2,
+   "explanation": "La fusion de deux gamètes haploïdes donne un œuf diploïde.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-mit-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mitose",
+   "prompt": "Les chromatides se séparent :",
+   "choices": [
+    "en prophase",
+    "en anaphase de la mitose",
+    "en métaphase",
+    "en phase G1"
+   ],
+   "answer": 1,
+   "explanation": "La séparation des chromatides soeurs a lieu en anaphase (de la mitose et de la méiose II).",
+   "source": "Exercice original, style Probatoire"
+  }
+ ]
+}

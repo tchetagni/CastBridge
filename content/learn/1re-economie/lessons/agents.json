@@ -1,0 +1,512 @@
+{
+ "chapter": "1re-economie-ch-agents",
+ "lessons": [
+  {
+   "id": "1re-economie-agents",
+   "title": "Besoins, biens, agents économiques et circuit",
+   "minutes": 35,
+   "programRef": "Économie de Première — introduction : besoins, agents, circuit (programme général probable, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir besoin, bien, service et rareté.",
+    "Classer des produits (consommation, équipement, intermédiaire).",
+    "Citer les agents économiques et leurs fonctions.",
+    "Lire un circuit économique et calculer épargne et taux d'épargne."
+   ],
+   "exercises": [
+    "1re-economie-ag-01",
+    "1re-economie-ag-02",
+    "1re-economie-ag-03",
+    "1re-economie-ag-04",
+    "1re-economie-ag-05",
+    "1re-economie-ag-06"
+   ],
+   "selfCheck": [
+    "1re-economie-ag-q1",
+    "1re-economie-ag-q2",
+    "1re-economie-ag-q3",
+    "1re-economie-ag-q4",
+    "1re-economie-ag-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Besoins, biens et services",
+     "md": "Un **besoin** est un sentiment de manque que l'on cherche à satisfaire. On distingue les besoins **primaires** (manger, boire, se loger, se soigner) et **secondaires** (loisirs, téléphone), les besoins **individuels** et **collectifs** (sécurité, éducation, routes). Les besoins sont nombreux, varient selon l'époque et le lieu, et renaissent sans cesse."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Biens et services",
+     "md": "- Un **bien** est un produit matériel (pain, machine, voiture).\n- Un **service** est une activité immatérielle (coiffure, transport, enseignement, soins).\n- Bien de **consommation** : utilisé pour satisfaire un besoin final. Bien d'**équipement** (capital) : durable, utilisé pour produire (machine à coudre, camion). Bien **intermédiaire** : consommé dans la production (farine du boulanger).\n- Les ressources étant **rares**, il faut faire des **choix**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les agents économiques",
+     "md": "Un **agent économique** est une personne ou un groupe qui prend des décisions économiques :\n- les **ménages** : consomment, travaillent, épargnent ;\n- les **entreprises** : produisent des biens et services pour les vendre ;\n- les **administrations publiques** (État, communes) : lèvent des impôts, fournissent des services collectifs ;\n- les **institutions financières** (banques) : collectent l'épargne et accordent des crédits ;\n- le **reste du monde** : importations et exportations."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les grandes opérations",
+     "md": "- **Production** : création de biens et services.\n- **Répartition** : distribution de revenus (salaires, profits, impôts).\n- **Consommation** : achat de biens pour satisfaire des besoins.\n- **Épargne** : partie du revenu non consommée.\n- **Investissement** : achat de biens d'équipement pour produire plus tard.\nRevenu = consommation + épargne."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 120,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 150,
+        "text": "Ménages",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 390,
+        "y": 70,
+        "w": 120,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 450,
+        "y": 150,
+        "text": "Entreprises",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 100,
+        "x2": 390,
+        "y2": 100,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 90,
+        "text": "dépenses de consommation",
+        "size": 12,
+        "color": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 390,
+        "y1": 125,
+        "x2": 130,
+        "y2": 125,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 117,
+        "text": "biens et services",
+        "size": 12,
+        "color": "green"
+       },
+       {
+        "t": "line",
+        "x1": 390,
+        "y1": 165,
+        "x2": 130,
+        "y2": 165,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 157,
+        "text": "revenus (salaires, profits)",
+        "size": 12,
+        "color": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 190,
+        "x2": 390,
+        "y2": 190,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 182,
+        "text": "travail",
+        "size": 12,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Circuit économique simple : en bleu les flux monétaires, en vert les flux réels, qui vont en sens inverse.",
+     "alt": "Deux cadres, Ménages à gauche et Entreprises à droite. Quatre flèches : les dépenses de consommation vont des ménages vers les entreprises, les biens et services des entreprises vers les ménages, les revenus des entreprises vers les ménages, le travail des ménages vers les entreprises."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : lire un circuit économique",
+     "md": "1. Repérer les **agents** (cadres) et les **flux** (flèches).\n2. Distinguer flux **réels** (biens, services, travail) et flux **monétaires** (argent) : à chaque flux réel correspond un flux monétaire de sens contraire.\n3. Vérifier l'équilibre : ce qui sort d'un agent est ce qui entre chez l'autre."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Épargne et circuit élargi",
+     "md": "Si les ménages **épargnent** une partie S de leur revenu Y, ils ne dépensent que C = Y − S. Les banques collectent cette épargne et la prêtent aux entreprises, qui **investissent** (I). Dans un modèle simple sans État ni reste du monde, à l'équilibre : **épargne = investissement**. Le **taux d'épargne** vaut $\\frac{S}{Y} \\times 100$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-economie-ag-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer des produits",
+     "statement": "Une boulangère de Yaoundé achète de la farine et un four, puis vend du pain aux ménages. Classe la farine, le four et le pain.",
+     "steps": [
+      {
+       "md": "Le **pain** est acheté par les ménages pour se nourrir : c'est un bien de **consommation**."
+      },
+      {
+       "md": "La **farine** est transformée dans la production et disparaît dans le pain : c'est un bien **intermédiaire**."
+      },
+      {
+       "md": "Le **four** sert à produire pendant des années : c'est un bien d'**équipement** (capital)."
+      }
+     ],
+     "answer": "Farine : bien intermédiaire ; four : bien d'équipement ; pain : bien de consommation."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : épargne et taux d'épargne",
+     "statement": "Dans une économie fictive, les ménages reçoivent un revenu de 4 000 millions de FCFA et consomment 3 200 millions. Calcule l'épargne et le taux d'épargne. Quelle valeur de production les entreprises vendent-elles si elles investissent toute l'épargne ?",
+     "steps": [
+      {
+       "md": "Épargne :",
+       "tex": "S = Y - C = 4000 - 3200 = 800\\ \\text{millions de FCFA}"
+      },
+      {
+       "md": "Taux d'épargne :",
+       "tex": "\\frac{800}{4000} \\times 100 = 20\\ \\%"
+      },
+      {
+       "md": "Les entreprises vendent aux ménages 3 200 (consommation) et à elles-mêmes 800 (investissement financé par l'épargne) : 3 200 + 800 = 4 000, égal au revenu distribué."
+      }
+     ],
+     "answer": "**S = 800 millions de FCFA ; taux d'épargne = 20 % ; production vendue = 4 000 millions.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **bien** (matériel) et **service** (immatériel).\n- Classer un produit sans regarder son **usage** : la farine est intermédiaire pour le boulanger, de consommation pour le ménage qui cuisine.\n- Oublier que flux réel et flux monétaire vont en **sens opposés**.\n- Confondre **épargne** (argent non dépensé) et **investissement** (achat d'équipements).\n- Dire que la banque « fabrique » l'épargne : elle la collecte et la prête."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-economie-ag-05"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les ressources sont rares : choisir une chose, c'est renoncer à une autre ; on parle de **coût d'opportunité**.",
+      "On classe parfois les besoins en pyramide (besoins vitaux, de sécurité, sociaux...) : la classification dépend des manuels.",
+      "Dans un circuit complet, l'État reçoit des impôts et verse des services collectifs ; le reste du monde achète nos exportations et vend ses importations."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme d'économie de 1re : l'existence même et le contenu d'un cours d'introduction à l'économie selon la série (B, G, ESF...) sont à vérifier.",
+    "Nombre et nom des agents (3, 4 ou 5), classification des besoins et vocabulaire (« institutions financières », « reste du monde ») : à aligner sur les manuels.",
+    "Toutes les données chiffrées sont fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-economie-ag-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-agents",
+   "prompt": "Un bien d'équipement est :",
+   "choices": [
+    "un bien consommé par les ménages pour se nourrir",
+    "un bien durable utilisé dans la production",
+    "un bien détruit dès la première utilisation",
+    "un service public gratuit"
+   ],
+   "answer": 1,
+   "explanation": "Un bien d'équipement (machine, camion, four) sert à produire pendant plusieurs années.",
+   "mistakes": [
+    "Le confondre avec un bien intermédiaire, qui disparaît dans la production."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ag-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-agents",
+   "prompt": "Une machine achetée par une entreprise pour produire est un bien de consommation finale.",
+   "answer": false,
+   "explanation": "Faux : c'est un bien d'équipement (capital). Un bien de consommation finale est acheté pour satisfaire directement un besoin.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ag-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "1re-economie-agents",
+   "prompt": "Associe chaque exemple à sa catégorie.",
+   "pairs": [
+    [
+     "Manger à sa faim",
+     "Besoin primaire"
+    ],
+    [
+     "Posséder un téléphone portable",
+     "Besoin secondaire"
+    ],
+    [
+     "La sécurité publique",
+     "Besoin collectif"
+    ],
+    [
+     "Une machine à coudre d'un atelier",
+     "Bien d'équipement"
+    ],
+    [
+     "La farine du boulanger",
+     "Bien intermédiaire"
+    ]
+   ],
+   "explanation": "Se nourrir est un besoin vital ; le téléphone est un besoin secondaire ; la sécurité profite à tous ; la machine sert plusieurs années à produire ; la farine est transformée en pain.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ag-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-economie-agents",
+   "prompt": "Les ménages d'une économie fictive reçoivent 3 500 millions de FCFA et en consomment 2 975. Quel est le taux d'épargne ? (en %)",
+   "answer": 15,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "S = 3 500 − 2 975 = 525 millions. Taux = 525 ÷ 3 500 × 100 = 15 %.",
+   "method": "S = Y − C puis S ÷ Y × 100.",
+   "mistakes": [
+    "Calculer 2 975 ÷ 3 500 = 85 % : c'est le taux de consommation."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ag-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-economie-agents",
+   "prompt": "Dans le circuit simple, quel flux réel va des ménages vers les entreprises ?",
+   "choices": [
+    "Les revenus",
+    "Les biens de consommation",
+    "Les dépenses de consommation",
+    "Le travail"
+   ],
+   "answer": 3,
+   "explanation": "Les ménages fournissent du travail ; en échange, les entreprises leur versent des revenus (flux monétaire). Les biens vont des entreprises vers les ménages.",
+   "mistakes": [
+    "Choisir « dépenses de consommation » : c'est un flux monétaire, pas un flux réel."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ag-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-economie-agents",
+   "prompt": "Dans une économie fictive à deux agents (ménages et entreprises) et des banques, les entreprises distribuent un revenu total de 8 000 millions de FCFA. Les ménages en consomment 6 400 millions et placent le reste en banque. Les entreprises empruntent toute l'épargne pour investir.",
+   "method": "Épargne = revenu − consommation ; production vendue = C + I.",
+   "mistakes": [
+    "Oublier l'investissement dans la valeur de la production."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première",
+   "parts": [
+    {
+     "id": "1re-economie-ag-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'épargne des ménages. (en millions de FCFA)",
+     "answer": 1600,
+     "tolerance": 0,
+     "unit": "millions de FCFA",
+     "explanation": "S = Y − C = 8 000 − 6 400 = 1 600 millions de FCFA."
+    },
+    {
+     "id": "1re-economie-ag-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le taux d'épargne. (en %)",
+     "answer": 20,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "1 600 ÷ 8 000 × 100 = 20 %."
+    },
+    {
+     "id": "1re-economie-ag-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est la valeur de la production vendue (consommation + investissement) ? (en millions de FCFA)",
+     "answer": 8000,
+     "tolerance": 0,
+     "unit": "millions de FCFA",
+     "explanation": "C + I = 6 400 + 1 600 = 8 000 millions de FCFA, égale au revenu distribué."
+    },
+    {
+     "id": "1re-economie-ag-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique le rôle des banques dans ce circuit.",
+     "model": "Les banques collectent l'épargne des ménages (1 600 millions) et la prêtent aux entreprises. Ainsi l'argent non consommé n'est pas perdu pour l'économie : il finance l'investissement des entreprises, qui achètent des équipements. Les banques assurent le lien entre ceux qui épargnent et ceux qui investissent.",
+     "rubric": [
+      "Les banques collectent l'épargne des ménages (1 point).",
+      "Elles la prêtent aux entreprises qui investissent : épargne = investissement (1 point)."
+     ],
+     "explanation": "Les banques font le lien entre épargnants et investisseurs."
+    }
+   ]
+  },
+  {
+   "id": "1re-economie-ag-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-agents",
+   "prompt": "Quel agent produit des biens et services destinés à la vente ?",
+   "choices": [
+    "L'entreprise",
+    "Le ménage",
+    "La banque seule",
+    "Le reste du monde"
+   ],
+   "answer": 0,
+   "explanation": "Les entreprises produisent des biens et services pour le marché.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ag-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-agents",
+   "prompt": "Quelle activité est un service ?",
+   "choices": [
+    "Un sac de riz",
+    "Le transport de passagers",
+    "Un camion",
+    "Un four à pain"
+   ],
+   "answer": 1,
+   "explanation": "Le transport est une activité immatérielle ; les autres sont des biens.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ag-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-agents",
+   "prompt": "Dans le circuit simple, les revenus des ménages viennent :",
+   "choices": [
+    "des entreprises (salaires, profits)",
+    "des banques uniquement",
+    "de l'épargne uniquement",
+    "du reste du monde uniquement"
+   ],
+   "answer": 0,
+   "explanation": "Les entreprises rémunèrent le travail et le capital fournis par les ménages.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ag-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-agents",
+   "prompt": "Le revenu d'un ménage est égal à :",
+   "choices": [
+    "consommation − épargne",
+    "épargne − investissement",
+    "consommation + épargne",
+    "production + investissement"
+   ],
+   "answer": 2,
+   "explanation": "Un revenu est soit consommé, soit épargné : Y = C + S.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-ag-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-agents",
+   "prompt": "Un besoin collectif est :",
+   "choices": [
+    "un besoin d'une seule personne",
+    "un besoin que seule l'entreprise ressent",
+    "un besoin qui n'existe qu'à la ville",
+    "un besoin dont la satisfaction profite à toute une communauté"
+   ],
+   "answer": 3,
+   "explanation": "La sécurité, l'éducation, les routes satisfont des besoins collectifs.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  }
+ ]
+}

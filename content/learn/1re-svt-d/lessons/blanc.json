@@ -1,0 +1,242 @@
+{
+ "chapter": "1re-svt-d-ch-geologie",
+ "lessons": [],
+ "exercises": [
+  {
+   "id": "1re-svt-d-blanc-1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Exercice 1 — Restitution des connaissances (4 points).",
+   "method": "Réponses courtes et précises.",
+   "mistakes": [
+    "Compter le codon stop comme acide aminé."
+   ],
+   "source": "Exercice original, style Probatoire",
+   "parts": [
+    {
+     "id": "1re-svt-d-blanc-1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Une région codante d'ARNm compte 303 nucléotides, sans codon stop. Combien d'acides aminés code-t-elle ?",
+     "answer": 101,
+     "tolerance": 0,
+     "explanation": "303 ÷ 3 = 101 codons, donc 101 acides aminés (pas de stop à retirer)."
+    },
+    {
+     "id": "1re-svt-d-blanc-1-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la différence essentielle entre mitose et méiose ?",
+     "choices": [
+      "La méiose produit des cellules haploïdes différentes, la mitose des cellules identiques",
+      "La mitose produit des gamètes",
+      "La méiose a lieu dans toutes les cellules du corps",
+      "La mitose comporte deux divisions successives"
+     ],
+     "answer": 0,
+     "explanation": "La mitose conserve le nombre de chromosomes (2 cellules 2n identiques) ; la méiose le divise par deux (4 cellules haploïdes différentes)."
+    },
+    {
+     "id": "1re-svt-d-blanc-1-c",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Les ondes sismiques S traversent le noyau externe de la Terre.",
+     "answer": false,
+     "explanation": "Faux : les ondes S ne se propagent pas dans les liquides ; le noyau externe est liquide."
+    },
+    {
+     "id": "1re-svt-d-blanc-1-d",
+     "kind": "open",
+     "points": 1,
+     "prompt": "Écris l'équation équilibrée de la respiration cellulaire du glucose.",
+     "model": "C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O (+ énergie sous forme d'ATP)",
+     "rubric": [
+      "Équation correctement équilibrée avec les bons coefficients (1 point)."
+     ],
+     "explanation": "Compter les atomes C, H, O de chaque côté."
+    }
+   ]
+  },
+  {
+   "id": "1re-svt-d-blanc-2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Exercice 2 — Calculs (4 points). Masses molaires (g/mol) : C = 12 ; H = 1 ; O = 16.",
+   "method": "Poser les données, calculer, donner l'unité.",
+   "mistakes": [
+    "Oublier le coefficient 6 dans le bilan de la photosynthèse."
+   ],
+   "source": "Exercice original, style Probatoire",
+   "parts": [
+    {
+     "id": "1re-svt-d-blanc-2-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Un fragment d'ADN double brin compte 2 000 nucléotides, dont 600 guanines. Combien contient-il d'adénines ?",
+     "answer": 400,
+     "tolerance": 0,
+     "explanation": "G = C = 600, donc C + G = 1 200. Il reste 800 nucléotides pour A + T, donc A = 400."
+    },
+    {
+     "id": "1re-svt-d-blanc-2-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Chez une espèce à 2n = 12, combien de types de gamètes différents (brassage interchromosomique seul) un individu produit-il ?",
+     "answer": 64,
+     "tolerance": 0,
+     "explanation": "n = 6 paires de chromosomes : $2^6$ = 64 types de gamètes."
+    },
+    {
+     "id": "1re-svt-d-blanc-2-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Une plante fabrique 18 g de glucose par photosynthèse. Quelle masse de CO₂ (M = 44 g/mol) a-t-elle absorbée ? (en g)",
+     "answer": 26.4,
+     "tolerance": 0.1,
+     "unit": "g",
+     "explanation": "n(glucose) = 18 ÷ 180 = 0,1 mol. L'équation fait intervenir 6 CO₂ par glucose : 0,6 mol, soit 0,6 × 44 = 26,4 g."
+    },
+    {
+     "id": "1re-svt-d-blanc-2-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Une station reçoit l'onde S 15 s après l'onde P (P = 8 km/s ; S = 4 km/s, valeurs simplifiées). À quelle distance (km) est le foyer ?",
+     "answer": 120,
+     "tolerance": 0,
+     "unit": "km",
+     "explanation": "d/4 − d/8 = 15 donc d/8 = 15 et d = 120 km."
+    }
+   ]
+  },
+  {
+   "id": "1re-svt-d-blanc-3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "Exercice 3 — Génétique (6 points). Chez le pois, la couleur des fleurs (violette V, blanche v) et la taille de la plante (haute H, naine h) dépendent de deux gènes indépendants. On croise une lignée pure à fleurs violettes et hautes avec une lignée pure à fleurs blanches et naines : la F1 est entièrement violette et haute.",
+   "method": "Dominance, génotypes, gamètes, échiquier.",
+   "mistakes": [
+    "Écrire des gamètes Vv au lieu de V ou v."
+   ],
+   "source": "Exercice original, style Probatoire",
+   "parts": [
+    {
+     "id": "1re-svt-d-blanc-3-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que déduit-on de la F1 ?",
+     "choices": [
+      "Les caractères violet et haut sont dominants",
+      "Les caractères blanc et nain sont dominants",
+      "Les gènes sont liés au sexe",
+      "Les parents n'étaient pas de lignées pures"
+     ],
+     "answer": 0,
+     "explanation": "La F1 est uniforme et exprime les caractères d'un seul parent : violet et grand sont dominants."
+    },
+    {
+     "id": "1re-svt-d-blanc-3-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel est le génotype de la F1 ?",
+     "choices": [
+      "VvHh (double hétérozygote)",
+      "VVHH (double homozygote dominant)",
+      "vvhh (double homozygote récessif)",
+      "VVhh (violette et naine)"
+     ],
+     "answer": 0,
+     "explanation": "Les parents sont VVHH et vvhh ; la F1 reçoit un allèle de chacun pour chaque gène : VvHh."
+    },
+    {
+     "id": "1re-svt-d-blanc-3-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On croise la F1 avec une plante à fleurs blanches et naines (vvhh). Sur 800 descendants, combien sont attendus à fleurs blanches et naines ?",
+     "answer": 200,
+     "tolerance": 0,
+     "explanation": "La F1 donne 4 types de gamètes à 1/4 ; le parent vvhh ne donne que vh. Chaque phénotype représente 1/4 : 800 ÷ 4 = 200."
+    },
+    {
+     "id": "1re-svt-d-blanc-3-d",
+     "kind": "open",
+     "points": 3,
+     "prompt": "On croise deux plantes de la F1 entre elles. Écris les gamètes, indique les proportions des quatre phénotypes en F2 et, pour 1 600 plantes, le nombre de plantes à fleurs blanches et hautes.",
+     "model": "Gamètes de chaque F1 : VH, Vh, vH, vh (1/4 chacun). L'échiquier à 16 cases donne 9/16 violette-haute, 3/16 violette-naine, 3/16 blanche-haute, 1/16 blanche-naine. Fleurs blanches et hautes : 3/16 × 1 600 = 300 plantes.",
+     "rubric": [
+      "Quatre types de gamètes à 1/4 (1 point).",
+      "Proportions 9/16, 3/16, 3/16, 1/16 associées aux bons phénotypes (1 point).",
+      "Calcul : 3/16 × 1 600 = 300 (1 point)."
+     ],
+     "explanation": "Utiliser un échiquier à 16 cases."
+    }
+   ]
+  },
+  {
+   "id": "1re-svt-d-blanc-4",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Exercice 4 — Fermentation (6 points). Des levures sont placées dans une solution de glucose, à l'abri de l'air. On observe un dégagement gazeux qui trouble l'eau de chaux, et la solution contient ensuite de l'éthanol. L'équation de la réaction est C₆H₁₂O₆ → 2 C₂H₆O + 2 CO₂. Masses molaires (g/mol) : glucose 180 ; éthanol 46 ; CO₂ 44.",
+   "method": "Moles, coefficients, masses, vérification par conservation de la masse.",
+   "mistakes": [
+    "Oublier le coefficient 2 de l'éthanol."
+   ],
+   "source": "Exercice original, style Probatoire",
+   "parts": [
+    {
+     "id": "1re-svt-d-blanc-4-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel gaz trouble l'eau de chaux ?",
+     "choices": [
+      "Le dioxyde de carbone",
+      "Le dioxygène",
+      "L'azote",
+      "Le dihydrogène"
+     ],
+     "answer": 0,
+     "explanation": "Le dioxyde de carbone trouble l'eau de chaux : c'est le test caractéristique de ce gaz."
+    },
+    {
+     "id": "1re-svt-d-blanc-4-b",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "On fait fermenter 90 g de glucose. Quelle masse d'éthanol se forme ? (en g)",
+     "answer": 46,
+     "tolerance": 0.1,
+     "unit": "g",
+     "explanation": "n(glucose) = 90 ÷ 180 = 0,5 mol. L'équation donne 2 éthanol par glucose : 1 mol, soit 46 g."
+    },
+    {
+     "id": "1re-svt-d-blanc-4-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle masse de CO₂ est dégagée ? (en g)",
+     "answer": 44,
+     "tolerance": 0.1,
+     "unit": "g",
+     "explanation": "n(CO₂) = 1 mol, soit 44 g. Vérification : 46 + 44 = 90 g, la masse est conservée."
+    },
+    {
+     "id": "1re-svt-d-blanc-4-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Compare l'énergie libérée par cette fermentation et par la respiration du même glucose. Explique pourquoi la levure fait lever la pâte à pain.",
+     "model": "La fermentation libère peu d'énergie (2 ATP par glucose) car le glucose n'est dégradé que partiellement et il reste de l'éthanol, alors que la respiration, avec O₂, le dégrade totalement et libère beaucoup plus d'ATP. Dans la pâte, la levure fermente le glucose et dégage du CO₂ : le gaz forme des bulles qui font gonfler la pâte.",
+     "rubric": [
+      "Rendement énergétique de la fermentation plus faible, avec une raison (1 point).",
+      "Le CO₂ dégagé fait lever la pâte (1 point)."
+     ],
+     "explanation": "Penser au nombre d'ATP et au CO₂ dégagé."
+    }
+   ]
+  }
+ ]
+}

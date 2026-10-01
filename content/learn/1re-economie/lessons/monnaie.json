@@ -1,0 +1,422 @@
+{
+ "chapter": "1re-economie-ch-monnaie",
+ "lessons": [
+  {
+   "id": "1re-economie-monnaie",
+   "title": "Monnaie, banque, épargne et inflation",
+   "minutes": 40,
+   "programRef": "Économie de Première — monnaie, banque, épargne, inflation (programme général probable, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Citer les fonctions et les formes de la monnaie.",
+    "Calculer des intérêts simples et composés.",
+    "Calculer un indice des prix et un taux d'inflation.",
+    "Situer tontines et microfinance dans l'épargne et le crédit."
+   ],
+   "prerequisites": [
+    "1re-economie-agents"
+   ],
+   "exercises": [
+    "1re-economie-mo-01",
+    "1re-economie-mo-02",
+    "1re-economie-mo-03",
+    "1re-economie-mo-04",
+    "1re-economie-mo-05",
+    "1re-economie-mo-06"
+   ],
+   "selfCheck": [
+    "1re-economie-mo-q1",
+    "1re-economie-mo-q2",
+    "1re-economie-mo-q3",
+    "1re-economie-mo-q4",
+    "1re-economie-mo-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La monnaie et ses fonctions",
+     "md": "La **monnaie** est ce que tout le monde accepte en paiement. Elle remplit trois fonctions :\n- **intermédiaire des échanges** : elle remplace le troc ;\n- **unité de compte** : elle exprime les prix ;\n- **réserve de valeur** : elle permet de garder du pouvoir d'achat pour plus tard.\nFormes : pièces et billets (**monnaie fiduciaire**), soldes de comptes bancaires (**monnaie scripturale**), monnaie électronique et mobile."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le franc CFA",
+     "md": "Au Cameroun, la monnaie est le **franc CFA** d'Afrique centrale (FCFA), commun aux pays de la CEMAC. Il est émis par la **Banque des États de l'Afrique Centrale (BEAC)**, banque centrale de la zone. Les banques commerciales, elles, créent de la monnaie scripturale en accordant des crédits."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Banques, épargne et crédit",
+     "md": "Une **banque** reçoit des **dépôts** (épargne) et accorde des **crédits**. Elle se rémunère par l'écart entre le taux d'intérêt payé sur les crédits (supérieur) et celui payé sur les dépôts.\n**Épargne** = revenu − consommation. L'épargne placée rapporte des **intérêts**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Intérêts simples et composés",
+     "md": "Pour un capital C placé au taux annuel t (en écriture décimale) pendant n années :",
+     "tex": "\\text{intérêts simples : } I = C \\times t \\times n \\qquad \\text{capital composé : } C_n = C\\,(1 + t)^n"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Inflation et indice des prix",
+     "md": "L'**inflation** est une hausse générale et durable des prix. On la mesure par l'**indice des prix à la consommation (IPC)**, qui suit le prix d'un panier de produits, avec une année de base égale à 100.\nTaux d'inflation entre deux années : $\\frac{IPC_{\\text{fin}} - IPC_{\\text{début}}}{IPC_{\\text{début}}} \\times 100$.\nQuand les prix montent plus vite que les revenus, le **pouvoir d'achat** baisse."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "indice",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Année 1",
+        "value": 100,
+        "color": "lightblue"
+       },
+       {
+        "label": "Année 2",
+        "value": 104,
+        "color": "blue"
+       },
+       {
+        "label": "Année 3",
+        "value": 109.2,
+        "color": "blue"
+       },
+       {
+        "label": "Année 4",
+        "value": 114.66,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Indice des prix à la consommation sur quatre années (données fictives, base 100 à l'année 1).",
+     "alt": "Diagramme en barres de l'indice des prix : 100 à l'année 1, 104 à l'année 2, 109,2 à l'année 3 et 114,66 à l'année 4, en légère hausse chaque année."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Épargne, inflation et taux réel",
+     "md": "Un taux d'intérêt est dit **nominal** quand il ne tient pas compte de l'inflation. Le taux **réel** est approximativement : taux nominal − taux d'inflation. Si l'inflation dépasse le taux d'intérêt, l'épargne **perd** du pouvoir d'achat, même si le nombre de FCFA augmente."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Tontines et microfinance",
+     "md": "Au Cameroun, beaucoup de personnes utilisent des **tontines** (njangi) : un groupe cotise régulièrement et, à tour de rôle, chaque membre reçoit la totalité de la cotisation. C'est de l'épargne et du crédit entre proches, sans intérêt.\nLa **microfinance** propose épargne et petits crédits à des personnes ou des activités peu servies par les banques classiques."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-economie-mo-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : taux d'inflation",
+     "statement": "Un indice des prix (données fictives) vaut 104 l'année 2 et 109,2 l'année 3. Calcule le taux d'inflation de l'année 3.",
+     "steps": [
+      {
+       "md": "On applique la formule :",
+       "tex": "\\frac{109{,}2 - 104}{104} \\times 100"
+      },
+      {
+       "md": "Calcul :",
+       "tex": "\\frac{5{,}2}{104} \\times 100 = 5\\ \\%"
+      },
+      {
+       "md": "Interprétation : les prix ont augmenté en moyenne de 5 % : avec le même nombre de FCFA, on achète 5 % de moins environ."
+      }
+     ],
+     "answer": "**Taux d'inflation : 5 %.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : épargne et inflation",
+     "statement": "Un épargnant place 2 000 000 FCFA à 4 % pendant 1 an. Sur la même année, les prix augmentent de 5 % (données fictives). A-t-il gagné du pouvoir d'achat ?",
+     "steps": [
+      {
+       "md": "Capital après un an :",
+       "tex": "2\\,000\\,000 \\times 1{,}04 = 2\\,080\\,000\\ \\text{FCFA}"
+      },
+      {
+       "md": "Les prix ont augmenté de 5 % : pour retrouver la valeur d'avant, on divise par 1,05."
+      },
+      {
+       "md": "Pouvoir d'achat (en FCFA de départ) :",
+       "tex": "\\frac{2\\,080\\,000}{1{,}05} \\approx 1\\,981\\,000"
+      }
+     ],
+     "answer": "**Non** : il a environ 1 981 000 FCFA « de départ », moins que 2 000 000. Le taux réel est négatif (environ −1 %)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **inflation** (hausse générale des prix) et hausse du prix d'un seul produit.\n- Calculer le taux d'inflation avec l'indice final au dénominateur : on divise par l'indice de **départ**.\n- Utiliser $(1+t)n$ au lieu de $(1+t)^n$ pour les intérêts composés.\n- Penser qu'un taux nominal positif garantit un gain de pouvoir d'achat.\n- Croire que la tontine rapporte des intérêts : elle redistribue les cotisations."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-economie-mo-04"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La **déflation** est une baisse générale et durable des prix ; la **désinflation** est un ralentissement de l'inflation.",
+      "La **monnaie mobile** (paiement et transfert par téléphone) permet d'envoyer de l'argent sans compte bancaire.",
+      "Les établissements de microfinance du Cameroun sont encadrés par la réglementation de la zone CEMAC (à vérifier : autorité de contrôle et conditions d'agrément)."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "BEAC, CEMAC, tontines, microfinance et réglementation (COBAC) : formulations générales à faire valider par un enseignant d'économie.",
+    "Création monétaire par les banques, politique monétaire et parité du FCFA : non détaillées ; à ajouter si le programme les prévoit.",
+    "Données (indices, taux d'intérêt, cotisations) entièrement fictives ; il ne s'agit pas de taux réels du Cameroun.",
+    "Taux réel ≈ nominal − inflation : approximation à confirmer selon le programme."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-economie-mo-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "Quelle fonction de la monnaie permet de comparer les prix de produits différents ?",
+   "choices": [
+    "Intermédiaire des échanges",
+    "Unité de compte",
+    "Réserve de valeur",
+    "Moyen de troc"
+   ],
+   "answer": 1,
+   "explanation": "La monnaie sert d'unité de compte : tous les prix sont exprimés en FCFA, donc comparables.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-mo-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "On place 500 000 FCFA à 6 % d'intérêts simples pendant 2 ans. Quel est le montant des intérêts ? (en FCFA)",
+   "answer": 60000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "I = C × t × n = 500 000 × 0,06 × 2 = 60 000 FCFA.",
+   "mistakes": [
+    "Utiliser 6 au lieu de 0,06."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-mo-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "Un indice des prix passe de 120 à 126 (données fictives). Quel est le taux d'inflation ? (en %)",
+   "answer": 5,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "(126 − 120) ÷ 120 × 100 = 5 %.",
+   "mistakes": [
+    "Diviser par 126 : on obtient 4,76 %, faux."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-mo-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "On place 1 000 000 FCFA à 5 % par an en intérêts composés pendant 2 ans. Quel est le capital final ? (en FCFA)",
+   "answer": 1102500,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "C₂ = 1 000 000 × 1,05² = 1 000 000 × 1,1025 = 1 102 500 FCFA. Les intérêts simples auraient donné 1 100 000 : les intérêts de la 1re année produisent eux-mêmes des intérêts.",
+   "method": "C × (1 + t) élevé à la puissance n.",
+   "mistakes": [
+    "Calculer 1 100 000 (intérêts simples)."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-mo-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "Dans une tontine fictive de 12 membres, chacun verse 25 000 FCFA par mois et un membre différent reçoit toute la cotisation chaque mois. Quelle somme un membre reçoit-il le mois où c'est son tour ? (en FCFA)",
+   "answer": 300000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "12 membres × 25 000 FCFA = 300 000 FCFA. Sur un cycle de 12 mois, chacun verse 12 × 25 000 = 300 000 FCFA et reçoit 300 000 FCFA : il n'y a pas d'intérêt, mais la tontine oblige à épargner et permet de disposer d'une grosse somme.",
+   "method": "Nombre de membres × cotisation.",
+   "mistakes": [
+    "Répondre 25 000 en oubliant les autres cotisations."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-mo-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "Un panier de produits de consommation coûte 80 000 FCFA l'année 1 (année de base) et 84 000 FCFA l'année 2 (données fictives). Mme Nana a un salaire mensuel de 150 000 FCFA l'année 1.",
+   "method": "Indice = prix ÷ prix de base × 100 ; taux = (final − départ) ÷ départ.",
+   "mistakes": [
+    "Oublier de comparer la hausse du salaire à celle des prix."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première",
+   "parts": [
+    {
+     "id": "1re-economie-mo-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'indice des prix de l'année 2 (base 100 l'année 1).",
+     "answer": 105,
+     "tolerance": 0,
+     "explanation": "Indice = 84 000 ÷ 80 000 × 100 = 105."
+    },
+    {
+     "id": "1re-economie-mo-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le taux d'inflation de l'année 2. (en %)",
+     "answer": 5,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "(105 − 100) ÷ 100 × 100 = 5 %."
+    },
+    {
+     "id": "1re-economie-mo-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Son salaire est augmenté de 3 % l'année 2. Que devient son pouvoir d'achat ?",
+     "choices": [
+      "Il diminue",
+      "Il augmente",
+      "Il reste identique",
+      "On ne peut pas le savoir"
+     ],
+     "answer": 0,
+     "explanation": "Les prix augmentent de 5 % et le salaire de 3 % seulement : le salaire progresse moins vite que les prix, donc le pouvoir d'achat baisse."
+    },
+    {
+     "id": "1re-economie-mo-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Mme Nana veut épargner. Compare une tontine et un dépôt en banque pour son projet.",
+     "model": "La tontine oblige à épargner régulièrement et donne accès rapidement à une somme importante, sans frais ni intérêts ; mais elle ne rapporte pas d'intérêts et repose sur la confiance entre membres. Le dépôt en banque rapporte des intérêts (souvent faibles), est plus sûr et ouvre l'accès au crédit, mais peut avoir des frais. Avec 5 % d'inflation, aucun des deux ne protège complètement l'épargne si l'intérêt est inférieur à l'inflation.",
+     "rubric": [
+      "Un avantage et une limite de la tontine (1 point).",
+      "Un avantage et une limite du dépôt en banque ou de la microfinance (1 point)."
+     ],
+     "explanation": "Pense aux intérêts, à la discipline d'épargne, à la sécurité et à l'accès au crédit."
+    }
+   ]
+  },
+  {
+   "id": "1re-economie-mo-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "Qui émet le franc CFA en Afrique centrale ?",
+   "choices": [
+    "La BEAC",
+    "Une banque commerciale locale",
+    "Le ministère de l'Éducation",
+    "Une tontine"
+   ],
+   "answer": 0,
+   "explanation": "La Banque des États de l'Afrique Centrale est la banque centrale de la zone.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-mo-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "L'inflation est :",
+   "choices": [
+    "une baisse des prix",
+    "une hausse générale et durable des prix",
+    "la hausse du prix d'un seul produit",
+    "une hausse des salaires"
+   ],
+   "answer": 1,
+   "explanation": "L'inflation concerne le niveau général des prix.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-mo-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "Un indice des prix passe de 100 à 108. Le taux d'inflation est de :",
+   "choices": [
+    "0,8 %",
+    "108 %",
+    "8 %",
+    "92 %"
+   ],
+   "answer": 2,
+   "explanation": "(108 − 100) ÷ 100 × 100 = 8 %.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-mo-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "Dans une tontine, un membre :",
+   "choices": [
+    "reçoit à tour de rôle la totalité des cotisations",
+    "reçoit un intérêt fixé par la BEAC",
+    "ne reçoit jamais d'argent",
+    "verse une fois et reçoit à chaque fois"
+   ],
+   "answer": 0,
+   "explanation": "Chaque membre cotise régulièrement et bénéficie à son tour de la somme collectée.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-mo-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "Quel placement fait perdre du pouvoir d'achat ?",
+   "choices": [
+    "Un intérêt de 8 % avec 3 % d'inflation",
+    "Un intérêt de 6 % sans inflation",
+    "Un intérêt de 5 % avec 1 % d'inflation",
+    "Un intérêt de 2 % avec 5 % d'inflation"
+   ],
+   "answer": 3,
+   "explanation": "Le taux réel est négatif quand l'intérêt est inférieur à l'inflation : 2 % − 5 % = −3 %.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  }
+ ]
+}

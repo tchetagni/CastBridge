@@ -1,0 +1,605 @@
+{
+ "chapter": "1re-svt-d-ch-geologie",
+ "lessons": [
+  {
+   "id": "1re-svt-d-geologie",
+   "title": "Tectonique des plaques, séismes et volcans",
+   "minutes": 40,
+   "programRef": "1re D — Géologie : tectonique des plaques, séismes, volcans (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire la structure du globe et la lithosphère.",
+    "Distinguer les limites de plaques et leurs manifestations.",
+    "Présenter des arguments de la tectonique des plaques.",
+    "Exploiter des données (vitesse d'expansion, distance d'un épicentre)."
+   ],
+   "exercises": [
+    "1re-svt-d-geo-01",
+    "1re-svt-d-geo-02",
+    "1re-svt-d-geo-03",
+    "1re-svt-d-geo-04",
+    "1re-svt-d-geo-05",
+    "1re-svt-d-geo-06"
+   ],
+   "selfCheck": [
+    "1re-svt-d-geo-q1",
+    "1re-svt-d-geo-q2",
+    "1re-svt-d-geo-q3",
+    "1re-svt-d-geo-q4",
+    "1re-svt-d-geo-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Structure du globe",
+     "md": "Le globe terrestre est formé de couches concentriques, connues grâce aux **ondes sismiques** :\n- la **croûte** (continentale ou océanique) ;\n- le **manteau**, solide mais capable de se déformer lentement ;\n- le **noyau**, externe liquide et interne solide.\nLa **lithosphère** (croûte + partie supérieure du manteau) est **rigide** ; elle repose sur l'**asthénosphère**, plus déformable."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les plaques lithosphériques",
+     "md": "La lithosphère est découpée en **plaques** qui se déplacent lentement (de l'ordre de quelques centimètres par an) les unes par rapport aux autres. Aux **limites** des plaques se concentrent séismes et volcans. Il existe trois types de limites :\n- **divergente** : les plaques s'écartent (dorsale océanique) ;\n- **convergente** : elles se rapprochent (subduction ou collision) ;\n- **transformante** : elles coulissent l'une contre l'autre."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Aux limites divergentes et convergentes",
+     "md": "- **Dorsale** : du magma basaltique monte, refroidit et forme une nouvelle lithosphère océanique (**accrétion**) ; le fond s'élargit.\n- **Subduction** : une plaque océanique, plus dense, plonge sous une autre dans le manteau. Séismes de plus en plus profonds, volcans en surface.\n- **Collision** : deux plaques continentales se heurtent et forment une **chaîne de montagnes**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 0,
+        "y": 80,
+        "w": 520,
+        "h": 180,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         0,
+         80,
+         220,
+         80,
+         370,
+         205,
+         345,
+         230,
+         200,
+         105,
+         0,
+         105
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         225,
+         80,
+         250,
+         45,
+         520,
+         45,
+         520,
+         205,
+         370,
+         205
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         330,
+         45,
+         350,
+         10,
+         370,
+         45
+        ],
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 280,
+        "cy": 150,
+        "r": 6,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 320,
+        "cy": 185,
+        "r": 6,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 345,
+        "cy": 207,
+        "r": 6,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 98,
+        "text": "plaque océanique",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 120,
+        "text": "plaque continentale",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 235,
+        "text": "manteau",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 420,
+        "y": 30,
+        "text": "volcan",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 200,
+        "text": "manteau",
+        "size": 14,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Une zone de subduction : la plaque océanique plonge sous la plaque continentale ; les foyers des séismes (points rouges) s'alignent sur le plan de plongée et un volcan se forme en surface.",
+     "alt": "Coupe schématique : une plaque océanique bleue plonge sous une plaque continentale orange. Trois points rouges sur la plaque plongeante marquent les foyers de séismes. Un volcan rouge est au sommet de la plaque continentale."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Arguments en faveur de la tectonique des plaques",
+     "md": "- **Géométrie** : les côtes de l'Afrique et de l'Amérique du Sud s'emboîtent.\n- **Fossiles** et roches identiques de part et d'autre de l'Atlantique Sud (reptile *Mesosaurus*, plante *Glossopteris*).\n- **Fonds océaniques** : plus âgés quand on s'éloigne de la dorsale ; **anomalies magnétiques** symétriques de part et d'autre de la dorsale.\n- **Répartition** : séismes et volcans alignés sur les limites de plaques.\n- **Mesures** de déplacements par satellites (GPS)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "Ma",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "0 km",
+        "value": 0,
+        "color": "lightblue"
+       },
+       {
+        "label": "500 km",
+        "value": 25,
+        "color": "blue"
+       },
+       {
+        "label": "1000 km",
+        "value": 50,
+        "color": "blue"
+       },
+       {
+        "label": "1500 km",
+        "value": 75,
+        "color": "blue"
+       },
+       {
+        "label": "2000 km",
+        "value": 100,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Âge des fonds océaniques en fonction de la distance à la dorsale (données fictives pour l'exercice) : les roches sont d'autant plus âgées qu'elles sont éloignées.",
+     "alt": "Diagramme en barres : l'âge passe de 0 à 25, 50, 75 puis 100 millions d'années pour des distances de 0, 500, 1000, 1500 et 2000 kilomètres de la dorsale."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Séismes",
+     "md": "Un **séisme** est une rupture brutale de roches le long d'une **faille**. Le **foyer** est le point de rupture ; l'**épicentre** est sa projection en surface.\n- Ondes **P** : rapides, traversent solides et liquides.\n- Ondes **S** : plus lentes, **ne traversent pas les liquides** (preuve d'un noyau externe liquide).\n- **Magnitude** : mesure de l'énergie libérée (échelle logarithmique) ; **intensité** : mesure des effets observés en un lieu."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Volcans",
+     "md": "Un volcan émet du **magma** (lave, gaz, cendres).\n- Volcanisme **effusif** (lave fluide, basaltique) : dorsales et points chauds.\n- Volcanisme **explosif** (magma visqueux, riche en gaz) : zones de **subduction**.\n- **Points chauds** : remontées de matière chaude à l'intérieur d'une plaque.\nLe mont Cameroun, volcan actif, fait partie de la **ligne volcanique du Cameroun** (alignement de massifs volcaniques)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : exploiter des données",
+     "md": "1. **Décrire** l'observation (valeurs, tendance, position) sans l'interpréter.\n2. **Calculer** si on demande une vitesse : $v = \\frac{d}{t}$ (convertir les unités).\n3. **Interpréter** avec une notion du cours (accrétion, subduction...).\n4. **Conclure** en reliant la donnée à la tectonique des plaques."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-geo-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : vitesse d'expansion",
+     "statement": "Un fond océanique situé à 600 km de l'axe d'une dorsale est vieux de 30 millions d'années (données fictives). Calcule la vitesse moyenne d'expansion, en cm par an.",
+     "steps": [
+      {
+       "md": "On convertit : 600 km = 600 × 10⁵ cm = 6 × 10⁷ cm ; 30 Ma = 3 × 10⁷ ans.",
+       "tex": "v = \\frac{6 \\times 10^{7}\\ \\text{cm}}{3 \\times 10^{7}\\ \\text{ans}}"
+      },
+      {
+       "md": "Le calcul donne 2 cm par an : l'écartement est lent à l'échelle humaine, mais énorme à l'échelle des temps géologiques."
+      },
+      {
+       "md": "Interprétation : les roches âgées sont loin de la dorsale parce qu'elles se sont formées à l'axe puis se sont éloignées."
+      }
+     ],
+     "answer": "**v = 2 cm/an** (vitesse moyenne)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : distance d'un épicentre",
+     "statement": "Une station enregistre l'onde P puis l'onde S 20 s plus tard. On prend des vitesses simplifiées : P = 8 km/s, S = 4 km/s. À quelle distance se trouve le foyer ?",
+     "steps": [
+      {
+       "md": "Le temps de trajet de S moins celui de P vaut 20 s :",
+       "tex": "\\frac{d}{4} - \\frac{d}{8} = 20"
+      },
+      {
+       "md": "On réduit : $\\frac{d}{8} = 20$, donc",
+       "tex": "d = 20 \\times 8 = 160\\ \\text{km}"
+      },
+      {
+       "md": "Avec trois stations, on trace trois cercles de rayon d autour d'elles : l'épicentre est à leur point commun (**triangulation**)."
+      }
+     ],
+     "answer": "**d = 160 km** de la station."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **lithosphère** (rigide, en plaques) et **croûte** (couche superficielle seulement).\n- Confondre **foyer** (en profondeur) et **épicentre** (en surface).\n- Confondre **magnitude** (énergie, un nombre par séisme) et **intensité** (effets, dépend du lieu).\n- Dire que les continents « flottent sur l'océan » : ils sont portés par des plaques de lithosphère.\n- Oublier de convertir les unités (km, cm, Ma, ans) dans un calcul de vitesse."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-geo-05"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une augmentation de **1** en magnitude correspond à une amplitude des ondes **10 fois** plus grande (échelle logarithmique).",
+      "En 1986, le lac Nyos (Cameroun), un lac de cratère, a libéré brutalement du gaz carbonique : un exemple de risque lié au volcanisme.",
+      "L'origine de la ligne volcanique du Cameroun est encore discutée par les géologues ; elle ne correspond pas à une limite de plaques classique."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Aucun chiffre réel (épaisseurs, vitesses, dates) n'est donné : les valeurs numériques sont fictives ou simplifiées ; à compléter avec les valeurs du programme.",
+    "Ligne volcanique du Cameroun, mont Cameroun, lac Nyos (1986) : formulations prudentes, à faire valider par un géologue ou l'enseignant.",
+    "Niveau de détail attendu (anomalies magnétiques, points chauds, géothermie, roches magmatiques) : à vérifier selon le programme de 1re D.",
+    "L'intensité (échelle de dégâts) et la prévention des risques sismiques ne sont qu'effleurées."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-svt-d-geo-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Quelles ondes sismiques ne se propagent pas dans un liquide ?",
+   "choices": [
+    "Les ondes P",
+    "Les ondes S",
+    "Les ondes P et S",
+    "Ni les ondes P ni les ondes S"
+   ],
+   "answer": 1,
+   "explanation": "Les ondes S ne traversent pas les liquides : leur disparition derrière le noyau externe montre que ce dernier est liquide.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-geo-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Le volcanisme des zones de subduction est généralement explosif.",
+   "answer": true,
+   "explanation": "Le magma des zones de subduction est visqueux et riche en gaz : les éruptions sont souvent explosives, contrairement au volcanisme de dorsale, plutôt effusif.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-geo-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Associe chaque limite de plaques à sa description.",
+   "pairs": [
+    [
+     "Dorsale océanique",
+     "Limite divergente avec création de lithosphère"
+    ],
+    [
+     "Subduction",
+     "Une plaque océanique plonge sous une autre"
+    ],
+    [
+     "Collision",
+     "Deux plaques continentales forment une chaîne de montagnes"
+    ],
+    [
+     "Faille transformante",
+     "Les plaques coulissent horizontalement"
+    ]
+   ],
+   "explanation": "Dorsale : accrétion. Subduction : plongée d'une plaque océanique dense. Collision : plissements et chaînes de montagnes. Transformante : mouvement latéral.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-geo-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Un fond océanique est situé à 1 500 km de l'axe d'une dorsale ; son âge est de 60 millions d'années (données fictives). Calcule la vitesse moyenne d'expansion en cm/an.",
+   "answer": 2.5,
+   "tolerance": 0.05,
+   "unit": "cm/an",
+   "explanation": "1 500 km = 1,5 × 10⁸ cm ; 60 Ma = 6 × 10⁷ ans. v = 1,5 × 10⁸ ÷ 6 × 10⁷ = 2,5 cm/an.",
+   "method": "Convertir km en cm et Ma en ans, puis v = d ÷ t.",
+   "mistakes": [
+    "Se tromper dans la conversion des km en cm (1 km = 10⁵ cm).",
+    "Oublier de convertir les millions d'années (Ma) en années."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-geo-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Une station reçoit l'onde S 25 s après l'onde P. Vitesses simplifiées : P = 6 km/s, S = 3 km/s. À quelle distance (en km) se trouve le foyer ?",
+   "answer": 150,
+   "tolerance": 0,
+   "unit": "km",
+   "explanation": "$\\frac{d}{3} - \\frac{d}{6} = 25$ donc $\\frac{d}{6} = 25$ et d = 150 km.",
+   "method": "d/Vs − d/Vp = intervalle de temps.",
+   "mistakes": [
+    "Faire 25 × 3 = 75 en ne gardant que l'onde S."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-geo-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Le diagramme donne l'âge de roches du fond d'un océan (données fictives) en fonction de leur distance à l'axe de la dorsale.",
+   "figure": {
+    "kind": "bars",
+    "unit": "Ma",
+    "w": 420,
+    "h": 240,
+    "bars": [
+     {
+      "label": "0 km",
+      "value": 0,
+      "color": "lightblue"
+     },
+     {
+      "label": "500 km",
+      "value": 25,
+      "color": "blue"
+     },
+     {
+      "label": "1000 km",
+      "value": 50,
+      "color": "blue"
+     },
+     {
+      "label": "1500 km",
+      "value": 75,
+      "color": "blue"
+     },
+     {
+      "label": "2000 km",
+      "value": 100,
+      "color": "blue"
+     }
+    ]
+   },
+   "method": "Lire les valeurs, convertir les unités, puis interpréter.",
+   "mistakes": [
+    "Oublier que l'accrétion est compensée ailleurs par la subduction."
+   ],
+   "source": "Exercice original, style Probatoire",
+   "parts": [
+    {
+     "id": "1re-svt-d-geo-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est l'âge des roches situées à 1 500 km de l'axe de la dorsale ? (en Ma)",
+     "answer": 75,
+     "tolerance": 0,
+     "unit": "Ma",
+     "explanation": "On lit la barre « 1500 km » : 75 millions d'années."
+    },
+    {
+     "id": "1re-svt-d-geo-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la vitesse moyenne d'expansion entre l'axe et le point à 1 000 km. (en cm/an)",
+     "answer": 2,
+     "tolerance": 0.05,
+     "unit": "cm/an",
+     "explanation": "1 000 km = 10⁸ cm et 50 Ma = 5 × 10⁷ ans : v = 10⁸ ÷ (5 × 10⁷) = 2 cm/an."
+    },
+    {
+     "id": "1re-svt-d-geo-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle conclusion tire-t-on de la variation de l'âge ?",
+     "choices": [
+      "La lithosphère se forme à la dorsale puis s'en éloigne",
+      "Les fonds océaniques sont tous du même âge",
+      "La lithosphère disparaît à la dorsale",
+      "L'océan se rétrécit au niveau de la dorsale"
+     ],
+     "answer": 0,
+     "explanation": "L'âge croît régulièrement avec la distance : la lithosphère se forme à l'axe et s'éloigne de part et d'autre : c'est l'accrétion océanique."
+    },
+    {
+     "id": "1re-svt-d-geo-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Cite un second argument indépendant en faveur de l'expansion des fonds océaniques et explique pourquoi les océans ne grandissent pas indéfiniment.",
+     "model": "Les anomalies magnétiques sont symétriques de part et d'autre de la dorsale : la roche qui se forme enregistre le champ magnétique du moment, et chaque bande se retrouve des deux côtés de l'axe. Les océans ne grandissent pas indéfiniment car la lithosphère océanique ancienne, plus dense, plonge dans le manteau aux zones de subduction : la surface totale de la Terre reste constante.",
+     "rubric": [
+      "Un argument pertinent (anomalies magnétiques symétriques, ou répartition des séismes, ou fossiles) expliqué (1 point).",
+      "La subduction détruit la lithosphère océanique et compense l'accrétion (1 point)."
+     ],
+     "explanation": "Penser aux anomalies magnétiques et aux zones de subduction."
+    }
+   ]
+  },
+  {
+   "id": "1re-svt-d-geo-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "La lithosphère est constituée :",
+   "choices": [
+    "de la croûte et de la partie supérieure du manteau",
+    "du noyau seul",
+    "du manteau entier",
+    "de l'asthénosphère"
+   ],
+   "answer": 0,
+   "explanation": "La lithosphère est rigide ; elle comprend la croûte et le sommet du manteau.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-geo-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Où se forme de la nouvelle lithosphère océanique ?",
+   "choices": [
+    "Dans la fosse de subduction",
+    "À la dorsale",
+    "Au centre des continents",
+    "Au noyau"
+   ],
+   "answer": 1,
+   "explanation": "À la dorsale, le magma remonte et forme la nouvelle lithosphère (accrétion).",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-geo-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Une zone de subduction se caractérise par :",
+   "choices": [
+    "une absence de séismes",
+    "uniquement des volcans effusifs",
+    "des séismes et des volcans explosifs",
+    "une expansion du fond océanique"
+   ],
+   "answer": 2,
+   "explanation": "La plongée d'une plaque provoque des séismes et un volcanisme souvent explosif.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-geo-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Le foyer d'un séisme est :",
+   "choices": [
+    "le lieu de la rupture en profondeur",
+    "la ville la plus touchée",
+    "la projection du séisme en surface",
+    "la zone d'ombre des ondes S"
+   ],
+   "answer": 0,
+   "explanation": "Le foyer est en profondeur ; l'épicentre est sa projection verticale en surface.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-geo-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-geologie",
+   "prompt": "Lorsque la magnitude augmente de 1, l'amplitude des ondes est multipliée par :",
+   "choices": [
+    "2",
+    "1",
+    "100",
+    "10"
+   ],
+   "answer": 3,
+   "explanation": "L'échelle de magnitude est logarithmique : +1 correspond à une amplitude 10 fois plus grande.",
+   "source": "Exercice original, style Probatoire"
+  }
+ ]
+}
