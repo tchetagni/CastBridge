@@ -1,0 +1,91 @@
+{
+  "format": 1,
+  "id": "bepc-english",
+  "version": 1,
+  "title": "Anglais — BEPC",
+  "description": "Préparation du BEPC en anglais : révision des temps, grammaire, lecture, expression écrite, Use of English et épreuve blanche. Consignes en français. Bêta : contenu et format à vérifier par un enseignant.",
+  "lang": "fr",
+  "cursus": "secondaire",
+  "level": "3e",
+  "subject": "english",
+  "exam": "BEPC",
+  "programRef": "Programme d'anglais de la classe de 3e et préparation du BEPC (MINESEC, premier cycle) — à vérifier sur le texte officiel",
+  "authors": [
+    "CastBridge (brouillon IA, bêta)"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
+    {
+      "id": "bepc-english-tenses",
+      "title": "Les temps : révision",
+      "order": 1,
+      "programRef": "3e — Révision des temps : present perfect, past perfect, futurs (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-english-grammar",
+      "title": "Grammaire : conditionnel, passif, discours rapporté, relatifs, tags, comparaison, connecteurs",
+      "order": 2,
+      "programRef": "3e — Conditionals 0-1-2, passive, reported speech, relative clauses, question tags, comparison, linking words (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-english-reading-writing",
+      "title": "Lecture et expression écrite",
+      "order": 3,
+      "programRef": "3e — Reading comprehension ; guided composition : informal letter, essay, dialogue (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-english-vocab-use",
+      "title": "Vocabulaire et Use of English",
+      "order": 4,
+      "programRef": "3e — Vocabulary ; use of English : cloze, transformations (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-english-epreuve-blanche",
+      "title": "Épreuve blanche",
+      "order": 99,
+      "programRef": "Épreuve blanche de BEPC — anglais (format indicatif, à vérifier)"
+    }
+  ],
+  "mockExams": [
+    {
+      "id": "bepc-english-epreuve-blanche-1",
+      "title": "Épreuve blanche — Anglais (BEPC)",
+      "minutes": 120,
+      "instructions": "Lis attentivement chaque partie. Réponds dans l'ordre ou comme tu préfères. Les réponses sont notées sur 20 points. Épreuve d'entraînement (format indicatif, à vérifier).",
+      "outOf": 20,
+      "sections": [
+        {
+          "title": "Reading comprehension (5 points)",
+          "exercises": [
+            "bepc-english-eb-01"
+          ]
+        },
+        {
+          "title": "Use of English : cloze (5 points)",
+          "exercises": [
+            "bepc-english-eb-02"
+          ]
+        },
+        {
+          "title": "Use of English : transformations (4 points)",
+          "exercises": [
+            "bepc-english-eb-03"
+          ]
+        },
+        {
+          "title": "Vocabulary (2 points)",
+          "exercises": [
+            "bepc-english-eb-04"
+          ]
+        },
+        {
+          "title": "Guided composition (4 points)",
+          "exercises": [
+            "bepc-english-eb-05"
+          ]
+        }
+      ]
+    }
+  ]
+}
