@@ -181,6 +181,7 @@ class TvService : Service(), Device {
         btApi = BtApiControl(this, prefs, ::btBonded, ::btTrusted, { (server?.activeTransfers() ?: 0) > 0 }) { setStatus("4-api-bt", it) }
         startServer()
         register()
+        LotsHub.startup(this, videosDir)
         bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted, parental = ParentalHub.syncHost) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
@@ -209,7 +210,8 @@ class TvService : Service(), Device {
                 .then(castbridge.core.library.agent.TrashApi(registry, playing = { playerBridge.state().takeIf { it.state != "idle" }?.name }, library = library,
                     busy = { name -> server?.busyReason(name) }, folders = folderIndex, changed = { server?.changed() }))
                 .then(castbridge.core.tv.FoldersApi(folderIndex) { server?.libraryItems()?.map { it.name }?.toSet().orEmpty() })
-                .then(QuizHub.packApi(this)),   // question packs pushed by the phone (docs/QUIZ.md)
+                .then(QuizHub.packApi(this))   // question packs pushed by the phone (docs/QUIZ.md)
+                .then(LotsHub.api(this)),       // lots (Apprendre / Quiz data, 10 Mo cap) pushed by the phone, never downloaded by the TV (docs/LOTS.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,

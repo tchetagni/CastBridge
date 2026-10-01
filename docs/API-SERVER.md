@@ -323,6 +323,9 @@ cba $CB/api/v1/admin/kpi                                                     #  
 Le rapport d'appareil (register / heartbeat) porte le consentement : `"consent":"usage"` ou `"essential"` et
 `"consentVersion"`. Sans `usage`, seuls `error`, `crash` et `update_install` sont acceptés.
 
+## 4 bis. Lots (données hors ligne d'Apprendre et de Quiz)
+Catalogue signé `GET /api/v1/lots/catalog`, fichiers `GET /api/v1/lots/{feature}/{scope}/{version}` (`Range`, `ETag`, cache immuable) et administration `/api/v1/admin/lots` (dépôt, publication, déploiement, retrait) : voir `docs/LOTS.md` §3-4. Seuls les téléphones appellent ces routes ; la TV ne les appelle jamais.
+
 ## 5. Divers
 
 - `GET /admin` : interface d'administration web (connexion par identifiant/mot de passe, voir `backend/README.md`).

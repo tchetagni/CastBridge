@@ -89,6 +89,15 @@
         <service android:name=".agent.ProactiveJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
         <!-- Reports of the parental control pulled from the TV over Bluetooth (docs/PARENTAL.md); runs only on a designated phone -->
         <service android:name=".ParentalSyncJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- Lots (docs/LOTS.md): periodic sync with the server, deferred delivery to the TV, woken by the TV's Bluetooth link (system broadcast only) -->
+        <service android:name=".LotsSyncJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".LotsDeliverJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <receiver android:name=".LotsTriggerReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         <activity android:name=".agent.AssistantActivity" android:exported="false" android:label="Ranger ma bibliothèque"
             android:theme="@style/Theme.CastBridge" />
         <service android:name=".UploadService" android:exported="false"

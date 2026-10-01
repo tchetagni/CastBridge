@@ -175,6 +175,7 @@ class ServerActivity : Activity() {
         val quiz = QuizHub.cachedSource(this)
         fact("Questions du quiz", "${quiz.serverCount()} reçues du serveur" + (s.quizSyncedAt.takeIf { it > 0 }?.let { " · mises à jour le ${date(it)}" } ?: "") +
             (s.quizMessage?.let { "\n$it" } ?: ""))
+        fact("Données hors ligne (leçons, questions)", LotsHub.budgetText(this) + "\n" + LotsHub.ageText(this) + "\nElles arrivent du téléphone, sans que la TV ait besoin d'Internet.")
         fact("Sans Internet", "depuis le téléphone : CastBridge › CastBridge TV › Avancé › Installer des APK (ou par la clé USB)")
         if (s.needsConsent) action("Lire l'écran d'information…") { open(this, MODE_CONSENT, thenFinish = false) }
         action("Vérifier maintenant") {
