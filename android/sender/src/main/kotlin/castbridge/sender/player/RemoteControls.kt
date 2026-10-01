@@ -6,6 +6,9 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
@@ -51,7 +54,8 @@ fun RemoteControls(r: Remote, modifier: Modifier = Modifier, onClose: () -> Unit
         Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null, Modifier.size(72.dp), tint = MaterialTheme.colorScheme.primary)
         Text("Sur ${r.target.name}", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
         Text(r.item.name, style = MaterialTheme.typography.titleLarge, color = Color.White, maxLines = 2, overflow = TextOverflow.Ellipsis, textAlign = TextAlign.Center)
-        r.message?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM), textAlign = TextAlign.Center) }
+        if (r.phase == Remote.Phase.COPYING) CopyBanner(r, Modifier.fillMaxWidth())
+        else r.message?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM), textAlign = TextAlign.Center) }
         if (r.item.kind != MediaKind.IMAGE && r.phase == Remote.Phase.PLAYING) {
             if (dur > 0) {
                 Slider(seeking ?: pos.toFloat(), { seeking = it }, valueRange = 0f..dur.toFloat(),
@@ -101,12 +105,13 @@ fun CastMiniBar(modifier: Modifier = Modifier) {
     val s = r ?: return
     val sub = when (s.phase) {
         Remote.Phase.STARTING -> "Connexion à ${s.target.name}…"
-        Remote.Phase.COPYING -> s.message ?: "Copie vers ${s.target.name}…"
+        Remote.Phase.COPYING -> s.copy?.takeIf { it.total > 0 }?.let { c -> c.title(s.target.name) + (c.handoffInMs?.takeIf { it > 0 }?.let { " · relais dans ${castbridge.core.phone.CopyProgress.wait(it)}" } ?: "") }
+            ?: s.message ?: "Copie vers ${s.target.name}…"
         Remote.Phase.PLAYING -> "Sur ${s.target.name}"
         Remote.Phase.ENDED, Remote.Phase.FAILED -> s.message ?: "Terminé"
     }
     val dur = s.clock.durMs
-    Box(modifier) { MiniPlayer(s.item.name, sub, s.clock.playing, if (dur > 0) s.clock.now(now).toFloat() / dur else 0f,
+    Box(modifier) { MiniPlayer(s.item.name, sub, s.clock.playing, if (s.phase == Remote.Phase.COPYING && s.copy != null && s.copy.total > 0) s.copy.fraction else if (dur > 0) s.clock.now(now).toFloat() / dur else 0f,
         onToggle = { if (s.phase == Remote.Phase.PLAYING) CastSession.toggle() },
         onStop = { if (s.tvHasIt || s.phase == Remote.Phase.STARTING) CastSession.stop(ctx) else CastSession.dismiss(ctx) }) {
         ctx.startActivity(Intent(ctx, PlayerActivity::class.java).setAction(PlayerActivity.ACTION_REMOTE)
@@ -123,5 +128,25 @@ fun AudioArt(title: String, subtitle: String?, art: androidx.compose.ui.graphics
         Spacer(Modifier.height(16.dp))
         Text(title, style = MaterialTheme.typography.titleLarge, color = Color.White, maxLines = 2, overflow = TextOverflow.Ellipsis, textAlign = TextAlign.Center)
         subtitle?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM)) }
+    }
+}
+
+/**
+ * Always visible while a file is copied to the TV before it takes over (the playback controls hide after a few seconds):
+ * title with the percentage, a progress bar, the time left for the copy and before the TV takes over.
+ */
+@Composable
+fun CopyBanner(r: Remote, modifier: Modifier = Modifier) {
+    val c = r.copy
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        if (c == null || c.total <= 0) {
+            Text(r.message ?: "Préparation de la copie vers ${r.target.name}…", style = MaterialTheme.typography.titleSmall, color = Color.White)
+            LinearProgressIndicator(Modifier.fillMaxWidth())
+        } else {
+            Text(c.title(r.target.name), style = MaterialTheme.typography.titleSmall, color = Color.White, fontWeight = FontWeight.Bold)
+            LinearProgressIndicator({ c.fraction }, Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)))
+            Text(c.detail(), style = MaterialTheme.typography.bodySmall, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM))
+        }
+        Text("La lecture continue ici en attendant.", style = MaterialTheme.typography.bodySmall, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM))
     }
 }

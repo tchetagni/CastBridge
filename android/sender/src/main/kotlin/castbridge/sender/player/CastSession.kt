@@ -54,6 +54,8 @@ data class Remote(
     val volume: Int? = null,
     val message: String? = null,
     val servedByPhone: Boolean = false,
+    /** While the file is copied to the TV before it takes over: percentage, time left, time before the hand-over. */
+    val copy: castbridge.core.phone.CopyProgress? = null,
 ) {
     enum class Phase { STARTING, COPYING, PLAYING, ENDED, FAILED }
     /** The TV has taken over: the phone shows the remote control instead of its own player. */
@@ -165,7 +167,8 @@ object CastSession {
         val client = TvClient(target.tv.base, target.pin)
         var total = 0L
         var layout: Mp4Atoms.Layout? = null
-        update { it.copy(phase = Remote.Phase.COPYING, message = "Copie vers ${target.name}… La lecture continue ici en attendant.") }
+        update { it.copy(phase = Remote.Phase.COPYING, message = "Copie vers ${target.name}… La lecture continue ici en attendant.",
+            copy = castbridge.core.phone.CopyProgress(0, 0, 0, null)) }
         while (currentCoroutineContextActive()) {
             when (val u = UploadService.state.value) {
                 is UploadService.State.Failed -> throw CastFailure("Échec de l'envoi : ${u.reason}")
@@ -185,7 +188,10 @@ object CastSession {
                 val (pos, _) = phonePosition(item, fallbackPos, dur)
                 val moovAtEnd = layout == Mp4Atoms.Layout.MOOV_AT_END
                 val pct = f.received * 100 / total
-                update { it.copy(message = if (moovAtEnd) "Copie vers ${it.target.name} : $pct %. Ce MP4 doit être copié en entier avant de passer sur la TV ; la lecture continue ici."
+                val speed = UploadService.speed.value.takeIf { it > 0 } ?: UploadService.average.value
+                val progress = castbridge.core.phone.CopyProgress(f.received, total, speed,
+                    Handoff.waitMs(f.received, total, dur, pos, moovAtEnd, speed))
+                update { it.copy(copy = progress, message = if (moovAtEnd) "Copie vers ${it.target.name} : $pct %. Ce MP4 doit être copié en entier avant de passer sur la TV ; la lecture continue ici."
                     else "Copie vers ${it.target.name} : $pct %. La TV prendra le relais dès qu'elle aura assez d'avance ; la lecture continue ici.") }
                 if (Handoff.copyReady(f.received, total, dur, pos, moovAtEnd, UploadService.speed.value)) {
                     val start = Handoff.phoneToTv(pos, dur)

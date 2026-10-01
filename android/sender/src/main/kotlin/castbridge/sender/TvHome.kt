@@ -181,10 +181,25 @@ fun TvHome(onAdvanced: () -> Unit) {
 
         // Big progress while sending
         val u = upload
-        AnimatedVisibility(u is UploadService.State.Uploading || u is UploadService.State.Waiting, enter = expandVertically() + fadeIn(), exit = shrinkVertically() + fadeOut()) {
-            val (sent, total, name, waiting) = when (u) {
-                is UploadService.State.Uploading -> listOf(u.sent, u.total, u.job.fileName, null)
-                is UploadService.State.Waiting -> listOf(u.sent, u.total, u.job.fileName, u.reason)
+        val bt by BtUploadService.state.collectAsState()
+        val btRoute by BtUploadService.route.collectAsState()
+        val b = bt
+        val btActive = u !is UploadService.State.Uploading && u !is UploadService.State.Waiting &&
+            (b is castbridge.core.tv.ResumableUpload.State.Uploading || b is castbridge.core.tv.ResumableUpload.State.Waiting)
+        // Bluetooth has no speed meter of its own: measured from the progress since the transfer started (shown after 3 s).
+        val btSent = (b as? castbridge.core.tv.ResumableUpload.State.Uploading)?.sent ?: (b as? castbridge.core.tv.ResumableUpload.State.Waiting)?.sent
+        var btFrom by remember { mutableStateOf(0L to 0L) }
+        LaunchedEffect(btActive) { if (btActive) btFrom = System.currentTimeMillis() to (btSent ?: 0L) }
+        val btAvg = if (btActive && btSent != null) (System.currentTimeMillis() - btFrom.first).let { dt ->
+            if (dt > 3_000 && btSent > btFrom.second) (btSent - btFrom.second) * 1000 / dt else 0L } else 0L
+        val shownAvg = if (btActive) btAvg else avg
+        AnimatedVisibility(u is UploadService.State.Uploading || u is UploadService.State.Waiting || btActive, enter = expandVertically() + fadeIn(), exit = shrinkVertically() + fadeOut()) {
+            val (sent, total, name, waiting) = when {
+                u is UploadService.State.Uploading -> listOf(u.sent, u.total, u.job.fileName, null)
+                u is UploadService.State.Waiting -> listOf(u.sent, u.total, u.job.fileName, u.reason)
+                // sent by Bluetooth (no common Wi-Fi): same card, same percentage and time left
+                b is castbridge.core.tv.ResumableUpload.State.Uploading -> listOf(b.sent, b.total, "Envoi par ${btRoute ?: "Bluetooth"}", null)
+                b is castbridge.core.tv.ResumableUpload.State.Waiting -> listOf(b.sent, b.total, "Envoi par ${btRoute ?: "Bluetooth"}", b.reason)
                 else -> listOf(0L, 1L, "", null)
             }
             sent as Long; total as Long
@@ -194,9 +209,9 @@ fun TvHome(onAdvanced: () -> Unit) {
                     Text(name as String, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     Text("${sent * 100 / total.coerceAtLeast(1)} %", fontSize = 44.sp, fontWeight = FontWeight.Bold)
                     LinearProgressIndicator({ sent.toFloat() / total.coerceAtLeast(1) }, Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)))
-                    Text(if (waiting != null) "En pause : $waiting — reprise automatique" else listOf(eta(total - sent, avg), if (avg > 0) "${formatSize(avg)}/s" else "").filter { it.isNotEmpty() }.joinToString("  ·  "),
+                    Text(if (waiting != null) "En pause : $waiting — reprise automatique" else listOf(eta(total - sent, shownAvg), if (shownAvg > 0) "${formatSize(shownAvg)}/s" else "").filter { it.isNotEmpty() }.joinToString("  ·  "),
                         style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
-                    TextButton(onClick = { UploadService.cancel(ctx) }) { Text("Annuler l'envoi") }
+                    TextButton(onClick = { if (btActive) BtUploadService.cancel(ctx) else UploadService.cancel(ctx) }) { Text("Annuler l'envoi") }
                 }
             }
         }

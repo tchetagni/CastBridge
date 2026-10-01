@@ -167,6 +167,13 @@ fun VideoPlayerScreen(act: PlayerActivity, p: ExoPlayer) {
 
         if (act.inPip.value) return@Box
 
+        // Copy to the TV in progress: percentage and times, whatever the state of the (auto-hiding) controls.
+        if (copyingThis && remote != null) {
+            Surface(Modifier.align(Alignment.TopCenter).statusBarsPadding().padding(12.dp).fillMaxWidth(), shape = RoundedCornerShape(14.dp), color = Color(0xCC0A0F1E)) {
+                CopyBanner(remote!!, Modifier.padding(14.dp))
+            }
+        }
+
         // Gestures: tap = controls, double tap = ±10 s (middle: pause), horizontal = seek, vertical left = brightness, right = volume.
         Box(Modifier.fillMaxSize()
             .pointerInput(locked) {

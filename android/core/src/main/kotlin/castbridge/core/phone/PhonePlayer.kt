@@ -231,6 +231,58 @@ object Handoff {
     fun copyReady(received: Long, total: Long, durMs: Long, phonePosMs: Long, moovAtEnd: Boolean, uploadBytesPerSec: Long): Boolean =
         total > 0 && (received >= total ||
             received >= Progressive.handoffBytes(total, durMs, phoneToTv(phonePosMs, durMs), 30_000, moovAtEnd, uploadBytesPerSec))
+
+    /**
+     * How long until [copyReady] becomes true at the current upload speed: 0 = now, null = unknown (no speed measured yet).
+     * Assumes the phone position stays where it is (it moves on, so the real wait is a little shorter or equal).
+     */
+    fun waitMs(received: Long, total: Long, durMs: Long, phonePosMs: Long, moovAtEnd: Boolean, uploadBytesPerSec: Long): Long? {
+        if (total <= 0) return null
+        if (copyReady(received, total, durMs, phonePosMs, moovAtEnd, uploadBytesPerSec)) return 0
+        if (uploadBytesPerSec <= 0) return null
+        var lo = received; var hi = total              // copyReady(hi) is true: the whole file is there
+        while (hi - lo > 1) {
+            val mid = lo + (hi - lo) / 2
+            if (copyReady(mid, total, durMs, phonePosMs, moovAtEnd, uploadBytesPerSec)) hi = mid else lo = mid
+        }
+        return (hi - received) * 1000 / uploadBytesPerSec
+    }
+}
+
+/**
+ * What the phone shows while a file is copied to the TV before the TV takes over: percentage, time left for the whole copy and
+ * time left before the TV can start playing. Durations are estimates from the measured speed; [handoffInMs] / [fullInMs] are null
+ * while the speed is unknown, and the text then says so instead of showing a made-up number.
+ */
+data class CopyProgress(val sent: Long, val total: Long, val bytesPerSec: Long, val handoffInMs: Long?, val via: String? = null) {
+    val percent: Int get() = if (total > 0) (sent * 100 / total).toInt().coerceIn(0, 100) else 0
+    val fraction: Float get() = if (total > 0) (sent.toFloat() / total).coerceIn(0f, 1f) else 0f
+    val fullInMs: Long? get() = if (total > 0 && sent >= total) 0 else if (bytesPerSec > 0 && total > 0) (total - sent) * 1000 / bytesPerSec else null
+
+    fun title(tv: String): String = "Copie vers $tv : $percent %" + (via?.let { " ($it)" } ?: "")
+
+    fun detail(): String {
+        val speed = if (bytesPerSec > 0) " · ${sizeText(bytesPerSec)}/s" else ""
+        val full = fullInMs?.let { if (it <= 0) "copie terminée" else "copie complète dans ${wait(it)}" } ?: "durée en cours d'estimation"
+        val hand = when (handoffInMs) {
+            null -> "la TV prendra le relais dès qu'elle aura assez d'avance"
+            0L -> "la TV prend le relais maintenant"
+            else -> "la TV prend le relais dans ${wait(handoffInMs)}"
+        }
+        return "${hand.replaceFirstChar { it.uppercase() }} · $full$speed"
+    }
+
+    companion object {
+        fun wait(ms: Long): String {
+            val s = (ms + 999) / 1000
+            return when {
+                s < 60 -> "${s.coerceAtLeast(1)} s"
+                s < 3600 -> "${s / 60} min ${"%02d".format(s % 60)} s"
+                else -> "${s / 3600} h ${"%02d".format(s % 3600 / 60)} min"
+            }
+        }
+        private fun sizeText(b: Long): String = if (b >= 1_000_000) "%.1f Mo".format(b / 1e6) else "${b / 1000} ko"
+    }
 }
 
 /**
