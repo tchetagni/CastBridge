@@ -15,7 +15,46 @@ class ParentalError(val code: Int, message: String, val retryAfter: Long? = null
 class ParentalClient(private val base: String, private val tvPin: String) {
     data class Loaded(val config: ParentalConfig, val learnProfiles: List<Triple<String, String, String?>>, val status: Map<String, Any?>)
 
+    /** An app of the TV as listed for the parent. [never]: cannot be blocked (CastBridge TV, launcher, system). [isNew]: installed after the setup. */
+    data class AppRow(val pkg: String, val label: String, val category: AppCategory, val never: Boolean, val isNew: Boolean)
+    data class AppsLoaded(val apps: List<AppRow>, val settings: AppSettings, val supervision: Map<String, Any?>)
+    data class PhoneRow(val id: String, val name: String, val designated: Boolean)
+    data class ReportsLoaded(val config: ReportConfig, val phones: List<PhoneRow>, val waiting: Int)
+
     fun status(): Map<String, Any?> = JsonLite.obj(call("GET", "", null))
+
+    /** Real state of the whole-TV supervision and the TV's setup hints (older TVs answer 404). */
+    fun supervision(): Map<String, Any?> = JsonLite.obj(call("GET", "/supervision", null))
+
+    @Suppress("UNCHECKED_CAST")
+    fun apps(pin: String): AppsLoaded {
+        val o = post("/apps/list", mapOf("pin" to pin))
+        val rows = (o["apps"] as? List<Map<String, Any?>>).orEmpty().mapNotNull { m ->
+            AppRow(m["pkg"] as? String ?: return@mapNotNull null, m["label"] as? String ?: (m["pkg"] as String), AppCategory.of(m["category"] as? String) ?: AppCategory.OTHER,
+                m["never"] == true, m["new"] == true)
+        }
+        return AppsLoaded(rows, AppSettings.fromMap(o["settings"] as Map<String, Any?>), o["supervision"] as? Map<String, Any?> ?: emptyMap())
+    }
+
+    /** [reviewed]: apps the parent looked at without giving them a rule (they stop being « nouvelles »). */
+    @Suppress("UNCHECKED_CAST")
+    fun saveApps(pin: String, s: AppSettings, reviewed: List<String> = emptyList()): AppSettings {
+        val settings = linkedMapOf("supervise" to s.supervise, "newApp" to s.newApp.code, "reviewed" to reviewed,
+            "rules" to s.rules.map { (id, l) -> linkedMapOf("profile" to id, "apps" to l.map { AppSettings.ruleMap(it) }) })
+        return AppSettings.fromMap(post("/apps/rules/set", mapOf("pin" to pin, "rev" to s.rev, "settings" to settings))["settings"] as Map<String, Any?>)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun reportsLoaded(o: Map<String, Any?>) = ReportsLoaded(ReportConfig.fromMap(o["config"] as Map<String, Any?>),
+        (o["phones"] as? List<Map<String, Any?>>).orEmpty().map { PhoneRow(it["id"] as String, it["name"] as? String ?: "Téléphone", it["designated"] == true) },
+        (o["waiting"] as? Number)?.toInt() ?: 0)
+
+    fun reportsConfig(pin: String): ReportsLoaded = reportsLoaded(post("/reports/config/get", mapOf("pin" to pin)))
+    fun saveReportsConfig(pin: String, c: ReportConfig): ReportsLoaded = reportsLoaded(post("/reports/config/set", mapOf("pin" to pin, "rev" to c.rev, "config" to c.toMap())))
+    fun designate(pin: String, phoneId: String): ReportsLoaded = reportsLoaded(post("/reports/recipients/add", mapOf("pin" to pin, "phoneId" to phoneId)))
+    fun removeRecipient(pin: String, phoneId: String): ReportsLoaded = reportsLoaded(post("/reports/recipients/remove", mapOf("pin" to pin, "phoneId" to phoneId)))
+    fun reportNow(pin: String): Int = (post("/reports/now", mapOf("pin" to pin))["queued"] as? Number)?.toInt() ?: 0
+
     fun createPin(pin: String) = post("/pin/create", mapOf("pin" to pin))
     fun changePin(old: String, new: String) = post("/pin/change", mapOf("pin" to old, "new" to new))
     fun unlock(pin: String) = post("/unlock", mapOf("pin" to pin))
