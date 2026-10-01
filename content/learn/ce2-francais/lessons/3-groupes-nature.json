@@ -1,0 +1,1078 @@
+{
+ "chapter": "ce2-francais-grammaire",
+ "lessons": [
+  {
+   "id": "ce2-francais-groupes",
+   "title": "Les groupes de la phrase : sujet, verbe, compléments",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE2 — Français (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Grammaire : groupes de la phrase, fonctions simples",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Découper une phrase simple en groupe sujet et groupe verbal.",
+    "Trouver le sujet avec « Qui est-ce qui ? ».",
+    "Reconnaître un complément de phrase."
+   ],
+   "prerequisites": [
+    "ce2-francais-phrase"
+   ],
+   "exercises": [
+    "ce2-francais-groupes-01",
+    "ce2-francais-groupes-02",
+    "ce2-francais-groupes-03",
+    "ce2-francais-groupes-04",
+    "ce2-francais-groupes-05",
+    "ce2-francais-groupes-06"
+   ],
+   "selfCheck": [
+    "ce2-francais-groupes-q1",
+    "ce2-francais-groupes-q2",
+    "ce2-francais-groupes-q3",
+    "ce2-francais-groupes-q4",
+    "ce2-francais-groupes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la terminologie (groupe verbal / prédicat, complément de phrase / circonstanciel) et si le COD est étudié en CE2 ; ici il est volontairement laissé de côté."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Les groupes de la phrase"
+    },
+    {
+     "type": "text",
+     "md": "Une phrase se découpe en **groupes de mots**. Pour comprendre une phrase, on cherche d'abord **qui fait l'action** et **ce qu'il fait**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Groupe sujet et groupe verbal",
+     "md": "Une phrase simple est formée de deux groupes :\n\n- le **groupe sujet** : il dit **de qui** ou **de quoi** on parle. → *Les enfants de Kribi*\n- le **groupe verbal** : il contient le **verbe** et dit ce que fait le sujet. → *jouent sur la plage*"
+    },
+    {
+     "type": "illustration",
+     "caption": "La phrase « Les enfants de Kribi jouent sur la plage » découpée en groupes.",
+     "alt": "Une phrase découpée en deux cases : le groupe sujet « Les enfants de Kribi » en bleu et le groupe verbal « jouent sur la plage » en orange.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 255,
+        "h": 60,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 137.5,
+        "y": 76.3,
+        "text": "Les enfants de Kribi",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 275,
+        "y": 40,
+        "w": 275,
+        "h": 60,
+        "stroke": "orange",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 412.5,
+        "y": 76.3,
+        "text": "jouent sur la plage",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 137,
+        "y": 25,
+        "text": "groupe sujet",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 412,
+        "y": 25,
+        "text": "groupe verbal",
+        "size": 16,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 135,
+        "text": "On remplace le groupe sujet par un pronom : Ils jouent sur la plage.",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Comment trouver le sujet ?",
+     "md": "1. Je trouve le **verbe** (le mot qui change avec le temps).\n2. Je pose la question **« Qui est-ce qui ? »** (ou **« Qu'est-ce qui ? »**) devant le verbe.\n3. La réponse est le **groupe sujet**.\n\nJe vérifie : je peux le remplacer par **il, elle, ils, elles**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : trouver le sujet",
+     "statement": "Trouve le sujet : « Le petit chat de Marie dort sur le lit. »",
+     "steps": [
+      {
+       "md": "Le verbe est **dort**."
+      },
+      {
+       "md": "Qui est-ce qui dort ? **Le petit chat de Marie.** On peut dire : *Il dort sur le lit.*"
+      }
+     ],
+     "answer": "**Le groupe sujet est « Le petit chat de Marie ».**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le complément de phrase",
+     "md": "Un **complément de phrase** dit **où**, **quand** ou **comment** se passe l'action. On peut le **déplacer** ou le **supprimer** sans que la phrase perde son sens.\n\n- *Demain, ma tante vend des mangues.*\n- *Ma tante vend des mangues demain.*\n- *Ma tante vend des mangues.* (sans le complément)"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : découper une phrase",
+     "statement": "Découpe : « Ce matin, Ibrahim lit un livre dans la cour. »",
+     "steps": [
+      {
+       "md": "Je trouve le verbe : **lit**. Qui est-ce qui lit ? **Ibrahim** : groupe sujet."
+      },
+      {
+       "md": "Je cherche ce qu'on peut déplacer ou supprimer : **Ce matin** (quand) et **dans la cour** (où) : ce sont des compléments de phrase."
+      },
+      {
+       "md": "Le groupe verbal contient le verbe : **lit un livre**."
+      }
+     ],
+     "answer": "**Ce matin** (complément) / **Ibrahim** (sujet) / **lit un livre** (groupe verbal) / **dans la cour** (complément)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Le sujet n'est pas toujours **au début** : *Dans la forêt vivent des chimpanzés.* Le sujet est **des chimpanzés**.\n- Le sujet n'est pas le mot juste avant le verbe : *Les enfants de Kribi jouent.* Le sujet est **Les enfants de Kribi**, pas « Kribi »."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-groupes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-groupes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-groupes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-groupes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-groupes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-groupes-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les compléments de phrase peuvent être plusieurs : écris une phrase avec un complément de temps et un complément de lieu."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ce2-francais-nature",
+   "title": "La nature des mots : nom, déterminant, adjectif, verbe",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE2 — Français (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Grammaire : nature des mots",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître un nom, un déterminant, un adjectif et un verbe.",
+    "Utiliser des astuces pour vérifier la nature d'un mot.",
+    "Comprendre qu'un même mot peut avoir deux natures."
+   ],
+   "prerequisites": [
+    "ce2-francais-groupes"
+   ],
+   "exercises": [
+    "ce2-francais-nature-01",
+    "ce2-francais-nature-02",
+    "ce2-francais-nature-03",
+    "ce2-francais-nature-04",
+    "ce2-francais-nature-05",
+    "ce2-francais-nature-06"
+   ],
+   "selfCheck": [
+    "ce2-francais-nature-q1",
+    "ce2-francais-nature-q2",
+    "ce2-francais-nature-q3",
+    "ce2-francais-nature-q4",
+    "ce2-francais-nature-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la liste des natures au programme du CE2 (le pronom est traité dans une fiche à part ; la préposition et l'adverbe sont absents)."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "La nature des mots"
+    },
+    {
+     "type": "text",
+     "md": "Chaque mot a une **nature** : c'est « ce qu'il est » dans la phrase. Au CE2, on apprend à reconnaître quatre natures."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Quatre natures de mots",
+     "md": "- Le **nom** désigne une personne, un animal, une chose, un lieu : *manguier, Ngono, Yaoundé*. (Les noms propres prennent une majuscule.)\n- Le **déterminant** se place devant le nom : *le, la, les, un, une, des, mon, ma, ces…*\n- L'**adjectif** donne une précision sur le nom : *grand, rouge, sucré*.\n- Le **verbe** dit ce que l'on fait ou ce qui se passe : *chante, mangent, est*. Il change avec le temps."
+    },
+    {
+     "type": "illustration",
+     "caption": "Chaque mot de la phrase a une nature, indiquée par une couleur.",
+     "alt": "La phrase « Le grand manguier donne des fruits sucrés » : Le (déterminant), grand (adjectif), manguier (nom), donne (verbe), des (déterminant), fruits (nom), sucrés (adjectif).",
+     "figure": {
+      "kind": "shapes",
+      "w": 580,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 40,
+        "w": 50,
+        "h": 44,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 67.6,
+        "text": "Le",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 62,
+        "y": 40,
+        "w": 80,
+        "h": 44,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 102.0,
+        "y": 67.6,
+        "text": "grand",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 149,
+        "y": 40,
+        "w": 105,
+        "h": 44,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 201.5,
+        "y": 67.6,
+        "text": "manguier",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 261,
+        "y": 40,
+        "w": 75,
+        "h": 44,
+        "stroke": "red",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 298.5,
+        "y": 67.6,
+        "text": "donne",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 343,
+        "y": 40,
+        "w": 55,
+        "h": 44,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 370.5,
+        "y": 67.6,
+        "text": "des",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 405,
+        "y": 40,
+        "w": 75,
+        "h": 44,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 442.5,
+        "y": 67.6,
+        "text": "fruits",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 487,
+        "y": 40,
+        "w": 88,
+        "h": 44,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 531.0,
+        "y": 67.6,
+        "text": "sucrés",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 110,
+        "text": "dét.",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 102,
+        "y": 110,
+        "text": "adj.",
+        "size": 14,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 201,
+        "y": 110,
+        "text": "nom",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 298,
+        "y": 110,
+        "text": "verbe",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 110,
+        "text": "dét.",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 442,
+        "y": 110,
+        "text": "nom",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 531,
+        "y": 110,
+        "text": "adj.",
+        "size": 14,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 160,
+        "text": "Astuce : le verbe change si je dis « hier » ou « demain ».",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mes astuces",
+     "md": "- **Nom** : je peux mettre **un** ou **le** devant.\n- **Verbe** : je peux ajouter **ne … pas** autour, ou changer le temps (*hier, demain*).\n- **Adjectif** : je peux l'enlever, la phrase reste correcte, et il s'accorde avec le nom.\n- **Déterminant** : il est juste devant le nom."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : donner la nature des mots",
+     "statement": "Donne la nature des mots : « Mon frère mange du riz. »",
+     "steps": [
+      {
+       "md": "**Mon** est devant « frère » : déterminant. **frère** : nom (un frère)."
+      },
+      {
+       "md": "**mange** change avec le temps (hier, il mangeait) : verbe."
+      },
+      {
+       "md": "**du** est devant « riz » : déterminant. **riz** : nom."
+      }
+     ],
+     "answer": "**Mon** (dét.) **frère** (nom) **mange** (verbe) **du** (dét.) **riz** (nom)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un mot, deux natures",
+     "statement": "Dans « La ferme est grande. » et « Elle ferme la porte. », quelle est la nature de « ferme » ?",
+     "steps": [
+      {
+       "md": "Dans la première phrase, « la » est devant « ferme » : c'est un **nom**."
+      },
+      {
+       "md": "Dans la deuxième, « ferme » dit l'action et change avec le temps (elle fermait) : c'est un **verbe**."
+      }
+     ],
+     "answer": "**Le même mot peut avoir deux natures : on regarde la phrase.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Pour savoir la nature d'un mot, **regarde toujours la phrase**.\n- Les noms propres (Marie, Garoua) prennent une **majuscule**.\n- Un adjectif ne s'écrit pas toujours **à côté** du nom : *La mangue est mûre.*"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-nature-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-nature-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-nature-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-nature-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-nature-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-nature-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche dans un texte de lecture trois noms, deux adjectifs et deux verbes."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-francais-groupes-01",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Dans « Le petit chat dort sur le lit. », quel est le groupe sujet ?",
+   "choices": [
+    "Le petit chat",
+    "dort sur le lit",
+    "le lit",
+    "petit chat dort"
+   ],
+   "answer": 0,
+   "explanation": "Qui est-ce qui dort ? **Le petit chat**.",
+   "method": "Poser « Qui est-ce qui… ? » devant le verbe.",
+   "mistakes": [
+    "Prendre le verbe pour le sujet."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-groupes-02",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Vrai ou faux : dans « Ce matin, Ibrahim lit. », « Ce matin » est un complément de phrase qu'on peut supprimer.",
+   "answer": true,
+   "explanation": "Vrai. « Ce matin » dit quand : on peut l'enlever (*Ibrahim lit.*) ou le déplacer.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-groupes-03",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Dans la phrase « Demain, ma tante vend des mangues. », associe chaque groupe à son rôle.",
+   "pairs": [
+    [
+     "Demain",
+     "complément de phrase"
+    ],
+    [
+     "ma tante",
+     "groupe sujet"
+    ],
+    [
+     "vend des mangues",
+     "groupe verbal"
+    ]
+   ],
+   "explanation": "Qui vend ? ma tante (sujet). Le verbe vend est dans le groupe verbal. « Demain » dit quand : complément.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-groupes-04",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Quel est le sujet dans « Dans la forêt vivent des chimpanzés. » ?",
+   "choices": [
+    "la forêt",
+    "des chimpanzés",
+    "vivent",
+    "dans la forêt"
+   ],
+   "answer": 1,
+   "explanation": "Qui est-ce qui vit ? **des chimpanzés**. Le sujet est placé après le verbe.",
+   "method": "Chercher le verbe, puis « Qui est-ce qui ? ».",
+   "mistakes": [
+    "Penser que le sujet est toujours au début."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-groupes-05",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Découpe la phrase : « Le marchand de Douala vend des ananas ce matin. » (groupe sujet / groupe verbal / complément de phrase)",
+   "model": "Le marchand de Douala (sujet) / vend des ananas (groupe verbal) / ce matin (complément de phrase).",
+   "rubric": [
+    "Le groupe sujet est bien « Le marchand de Douala ».",
+    "Le groupe verbal est « vend des ananas ».",
+    "« ce matin » est reconnu comme complément de phrase."
+   ],
+   "explanation": "Verbe : vend. Qui vend ? Le marchand de Douala. « Ce matin » peut être déplacé : *Ce matin, le marchand vend des ananas.*",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-groupes-06",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Hier soir, les voisins de Marie ont chanté dans la cour.",
+   "method": "Verbe → sujet → compléments.",
+   "mistakes": [
+    "Oublier que le verbe est « ont chanté » (deux mots)."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "prompt": "Quel est le groupe sujet ?",
+     "choices": [
+      "Hier soir",
+      "Marie",
+      "les voisins de Marie",
+      "dans la cour"
+     ],
+     "answer": 2,
+     "explanation": "Qui est-ce qui a chanté ? **les voisins de Marie**.",
+     "points": 1,
+     "id": "ce2-francais-groupes-06-a"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "prompt": "Vrai ou faux : « Hier soir » est un complément de phrase.",
+     "answer": true,
+     "explanation": "Vrai : il dit quand, on peut le déplacer.",
+     "points": 1,
+     "id": "ce2-francais-groupes-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "Quel pronom peut remplacer le groupe sujet ?",
+     "choices": [
+      "elle",
+      "il",
+      "nous",
+      "ils"
+     ],
+     "answer": 3,
+     "explanation": "« Les voisins » : plusieurs personnes, on dit **ils**.",
+     "points": 1,
+     "id": "ce2-francais-groupes-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-francais-groupes-q1",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Une phrase simple est formée…",
+   "choices": [
+    "d'un groupe sujet et d'un groupe verbal",
+    "de deux verbes",
+    "d'un nom et d'un adjectif",
+    "de trois points"
+   ],
+   "answer": 0,
+   "explanation": "On retrouve toujours **de qui on parle** (sujet) et **ce qu'on dit** (groupe verbal).",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-groupes-q2",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Pour trouver le sujet, on pose la question…",
+   "choices": [
+    "Où ?",
+    "Qui est-ce qui ?",
+    "Pourquoi pas ?",
+    "Combien ?"
+   ],
+   "answer": 1,
+   "explanation": "« Qui est-ce qui + verbe ? » donne le sujet.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-groupes-q3",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Dans « Nkeng chante. », le sujet est…",
+   "choices": [
+    "chante",
+    "Nkeng chante",
+    "Nkeng",
+    "la chanson"
+   ],
+   "answer": 2,
+   "explanation": "Qui est-ce qui chante ? **Nkeng**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-groupes-q4",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Un complément de phrase peut…",
+   "choices": [
+    "remplacer le verbe",
+    "devenir le sujet obligatoirement",
+    "se placer seulement au début",
+    "être déplacé ou supprimé"
+   ],
+   "answer": 3,
+   "explanation": "Exemple : *Ce matin, il lit.* → *Il lit ce matin.* → *Il lit.*",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-groupes-q5",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-groupes",
+   "prompt": "Quel pronom remplace « les poules » ?",
+   "choices": [
+    "elles",
+    "ils",
+    "il",
+    "elle"
+   ],
+   "answer": 0,
+   "explanation": "« Les poules » : féminin pluriel, on dit **elles**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-01",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Quelle est la nature du mot « mangue » dans « une mangue sucrée » ?",
+   "choices": [
+    "verbe",
+    "nom",
+    "adjectif",
+    "déterminant"
+   ],
+   "answer": 1,
+   "explanation": "On peut dire « une mangue » : c'est un nom.",
+   "method": "Essayer de mettre un déterminant devant.",
+   "mistakes": [
+    "Confondre avec l'adjectif « sucrée »."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-02",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Vrai ou faux : dans « une petite fille », « petite » est un adjectif.",
+   "answer": true,
+   "explanation": "Vrai. « petite » donne une précision sur le nom « fille ».",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-03",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Associe chaque mot à sa nature.",
+   "pairs": [
+    [
+     "Yaoundé",
+     "nom propre"
+    ],
+    [
+     "chante",
+     "verbe"
+    ],
+    [
+     "les",
+     "déterminant"
+    ],
+    [
+     "rouge",
+     "adjectif"
+    ]
+   ],
+   "explanation": "Yaoundé : nom propre. Chante : action. Les : devant un nom. Rouge : couleur, précision sur un nom.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-04",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Dans « Elle ferme la porte. », quelle est la nature de « ferme » ?",
+   "choices": [
+    "nom",
+    "adjectif",
+    "verbe",
+    "déterminant"
+   ],
+   "answer": 2,
+   "explanation": "Ici « ferme » est une action, elle change avec le temps (elle fermait). C'est un **verbe**.",
+   "method": "Regarder le sens dans la phrase.",
+   "mistakes": [
+    "Croire que « ferme » est toujours un nom."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-05",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Recopie la phrase et écris la nature de chaque mot : « Mon frère mange du riz. »",
+   "model": "Mon (déterminant) frère (nom) mange (verbe) du (déterminant) riz (nom).",
+   "rubric": [
+    "Mon et du : déterminants.",
+    "frère et riz : noms.",
+    "mange : verbe."
+   ],
+   "explanation": "Chaque mot est analysé avec les astuces : déterminant devant le nom, verbe qui change avec le temps.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-06",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Les petits poussins mangent du maïs.",
+   "method": "Chercher d'abord le verbe puis les noms.",
+   "mistakes": [
+    "Mélanger déterminant et adjectif."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "prompt": "Quelle est la nature de « petits » ?",
+     "choices": [
+      "nom",
+      "verbe",
+      "déterminant",
+      "adjectif"
+     ],
+     "answer": 3,
+     "explanation": "« petits » donne une précision sur « poussins ».",
+     "points": 1,
+     "id": "ce2-francais-nature-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "prompt": "Quelle est la nature de « poussins » ?",
+     "choices": [
+      "nom",
+      "verbe",
+      "adjectif",
+      "déterminant"
+     ],
+     "answer": 0,
+     "explanation": "On peut dire « les poussins » : c'est un nom.",
+     "points": 1,
+     "id": "ce2-francais-nature-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "prompt": "Vrai ou faux : « Les » est un verbe.",
+     "answer": false,
+     "explanation": "Faux. « Les » est devant le nom « poussins » : c'est un déterminant.",
+     "points": 1,
+     "id": "ce2-francais-nature-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-francais-nature-q1",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Le mot qui change avec le temps (hier, demain) est…",
+   "choices": [
+    "le nom",
+    "le verbe",
+    "le déterminant",
+    "l'adjectif"
+   ],
+   "answer": 1,
+   "explanation": "Seul le verbe change avec le temps : hier il mangeait, demain il mangera.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-q2",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Un adjectif…",
+   "choices": [
+    "remplace un nom",
+    "dit toujours une action",
+    "donne une précision sur un nom",
+    "se met toujours en fin de phrase"
+   ],
+   "answer": 2,
+   "explanation": "Exemple : un **grand** arbre.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-q3",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Quelle est la nature de « un » dans « un taxi » ?",
+   "choices": [
+    "verbe",
+    "adjectif",
+    "nom propre",
+    "déterminant"
+   ],
+   "answer": 3,
+   "explanation": "« un » est devant le nom « taxi ».",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-q4",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Quel mot est un nom propre ?",
+   "choices": [
+    "Bafoussam",
+    "ville",
+    "marché",
+    "rivière"
+   ],
+   "answer": 0,
+   "explanation": "Bafoussam désigne une ville précise : nom propre, avec une majuscule.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-nature-q5",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-nature",
+   "prompt": "Dans « un train rapide », « rapide » est…",
+   "choices": [
+    "un verbe",
+    "un adjectif",
+    "un déterminant",
+    "un nom propre"
+   ],
+   "answer": 1,
+   "explanation": "« rapide » précise le nom « train ».",
+   "source": "Exercice original"
+  }
+ ]
+}

@@ -1,0 +1,520 @@
+{
+ "chapter": "ce2-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "ce2-francais-passe-compose",
+   "title": "Le passé composé",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE2 — Français : conjugaison (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Former le passé composé avec avoir et être.",
+    "Écrire le participe passé des verbes courants.",
+    "Accorder le participe passé avec être."
+   ],
+   "prerequisites": [
+    "ce2-francais-present-er",
+    "ce2-francais-present-23"
+   ],
+   "exercises": [
+    "ce2-francais-passe-compose-01",
+    "ce2-francais-passe-compose-02",
+    "ce2-francais-passe-compose-03",
+    "ce2-francais-passe-compose-04",
+    "ce2-francais-passe-compose-05",
+    "ce2-francais-passe-compose-06"
+   ],
+   "selfCheck": [
+    "ce2-francais-passe-compose-q1",
+    "ce2-francais-passe-compose-q2",
+    "ce2-francais-passe-compose-q3",
+    "ce2-francais-passe-compose-q4",
+    "ce2-francais-passe-compose-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que l'accord avec être est exigé au CE2, et la liste des verbes qui prennent être.",
+    "Le participe passé avec avoir et COD placé avant n'est pas traité (hors programme CE2)."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Le passé composé"
+    },
+    {
+     "type": "text",
+     "md": "Le **passé composé** raconte ce qui s'est passé et qui est **terminé**. *Hier, j'ai mangé du plantain. Ma sœur est partie au marché.*"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Deux mots : auxiliaire + participe passé",
+     "md": "Le passé composé se forme avec :\n\n- l'**auxiliaire** **avoir** ou **être**, au **présent**,\n- le **participe passé** du verbe.\n\n*j'ai chanté, tu as chanté, il a chanté, nous avons chanté, vous avez chanté, ils ont chanté.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le passé composé : auxiliaire + participe passé.",
+     "alt": "Un schéma : j'ai (auxiliaire avoir au présent) plus mangé (participe passé de manger) donne j'ai mangé (passé composé).",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 150,
+        "h": 50,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 72.7,
+        "text": "j'ai",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 72,
+        "text": "+",
+        "size": 28,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 40,
+        "w": 150,
+        "h": 50,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 285.0,
+        "y": 72.7,
+        "text": "mangé",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 385,
+        "y": 72,
+        "text": "=",
+        "size": 28,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 410,
+        "y": 40,
+        "w": 140,
+        "h": 50,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 480.0,
+        "y": 72.0,
+        "text": "j'ai mangé",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 28,
+        "text": "auxiliaire",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 28,
+        "text": "participe passé",
+        "size": 15,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 480,
+        "y": 28,
+        "text": "passé composé",
+        "size": 15,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les participes passés",
+     "md": "- 1er groupe : **-é** → chanté, joué, mangé.\n- 2e groupe : **-i** → fini, grandi.\n- 3e groupe : souvent irréguliers : **pris** (prendre), **fait** (faire), **dit** (dire), **venu** (venir), **allé** (aller).\n\nAvec **être**, on emploie le passé composé de : *aller, venir, arriver, partir, tomber, entrer, sortir, naître, mourir…*"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "L'accord du participe passé",
+     "md": "- Avec **avoir** : le participe passé **ne change pas** (avec le sujet) : *Les filles ont chanté.*\n- Avec **être** : le participe passé **s'accorde avec le sujet** : *Ma sœur est partie. Mes cousins sont partis. Mes cousines sont parties.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : avec avoir",
+     "statement": "Écris au passé composé : « Nous (finir) le travail. »",
+     "steps": [
+      {
+       "md": "Auxiliaire **avoir** avec nous : **avons**."
+      },
+      {
+       "md": "Participe passé de finir : **fini**."
+      }
+     ],
+     "answer": "**Nous avons fini le travail.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avec être",
+     "statement": "Écris au passé composé : « Mes cousines (partir) hier. »",
+     "steps": [
+      {
+       "md": "Partir se conjugue avec **être**. Sujet : elles → **sont**."
+      },
+      {
+       "md": "Participe passé : **parti**, qui s'accorde avec « mes cousines » (féminin pluriel) : **parties**."
+      }
+     ],
+     "answer": "**Mes cousines sont parties hier.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- N'écris pas *j'ai allé* : on dit **je suis allé(e)**.\n- Ne confonds pas l'infinitif en -er et le participe en -é : *il va manger* / *il a mangé*. Astuce : remplace par *vendre / vendu* : « il va vendre » → infinitif ; « il a vendu » → participe."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-passe-compose-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-passe-compose-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-passe-compose-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-passe-compose-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-passe-compose-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-passe-compose-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Écris cinq phrases pour raconter ta journée d'hier avec le passé composé."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-francais-passe-compose-01",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Complète : « Hier, j'___ (manger) du plantain. »",
+   "choices": [
+    "ai manger",
+    "suis mangé",
+    "mange",
+    "ai mangé"
+   ],
+   "answer": 3,
+   "explanation": "Auxiliaire **avoir** + participe en **-é** : j'ai mangé.",
+   "method": "Auxiliaire puis participe passé.",
+   "mistakes": [
+    "Écrire « ai manger »."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-passe-compose-02",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Vrai ou faux : on écrit « Les filles ont chantées ».",
+   "answer": false,
+   "explanation": "Faux. Avec **avoir**, le participe passé ne s'accorde pas avec le sujet : « ont **chanté** ».",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-passe-compose-03",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Associe chaque verbe à son participe passé.",
+   "pairs": [
+    [
+     "prendre",
+     "pris"
+    ],
+    [
+     "faire",
+     "fait"
+    ],
+    [
+     "finir",
+     "fini"
+    ],
+    [
+     "venir",
+     "venu"
+    ]
+   ],
+   "explanation": "Les verbes du 3e groupe ont souvent un participe irrégulier.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-passe-compose-04",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Complète : « Ma sœur est ___ au marché. »",
+   "choices": [
+    "partie",
+    "parti",
+    "partis",
+    "parties"
+   ],
+   "answer": 0,
+   "explanation": "Avec **être**, accord avec le sujet « ma sœur » : féminin singulier → **partie**.",
+   "method": "Auxiliaire être → accorder avec le sujet.",
+   "mistakes": [
+    "Oublier le -e du féminin."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-passe-compose-05",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "points": 2,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Récris au passé composé : « Ngono prend son panier, elle va au marché et elle achète des tomates. »",
+   "model": "Ngono a pris son panier, elle est allée au marché et elle a acheté des tomates.",
+   "rubric": [
+    "a pris (prendre avec avoir).",
+    "est allée (aller avec être, accord au féminin).",
+    "a acheté (acheter avec avoir)."
+   ],
+   "explanation": "Prendre et acheter : avoir. Aller : être, et on accorde avec Ngono (féminin) : **allée**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-passe-compose-06",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Écris les verbes au passé composé.",
+   "method": "Choisir l'auxiliaire puis le participe.",
+   "mistakes": [
+    "Dire « j'ai allé »."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "prompt": "Tu (finir) ton dessin.",
+     "choices": [
+      "es fini",
+      "as fini",
+      "as finir",
+      "a fini"
+     ],
+     "answer": 1,
+     "explanation": "Avoir (tu **as**) + finir → fini.",
+     "points": 1,
+     "id": "ce2-francais-passe-compose-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "Mes cousins (arriver) hier.",
+     "choices": [
+      "ont arrivé",
+      "sont arrivé",
+      "sont arrivés",
+      "est arrivés"
+     ],
+     "answer": 2,
+     "explanation": "Arriver : être. Accord avec « mes cousins » (masculin pluriel) → arrivés.",
+     "points": 1,
+     "id": "ce2-francais-passe-compose-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "Elles (faire) un gâteau.",
+     "choices": [
+      "sont fait",
+      "ont faite",
+      "a fait",
+      "ont fait"
+     ],
+     "answer": 3,
+     "explanation": "Faire : avoir, participe **fait**.",
+     "points": 1,
+     "id": "ce2-francais-passe-compose-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-francais-passe-compose-q1",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Le passé composé se forme avec…",
+   "choices": [
+    "un auxiliaire et un participe passé",
+    "deux verbes à l'infinitif",
+    "un nom et un adjectif",
+    "seulement l'infinitif"
+   ],
+   "answer": 0,
+   "explanation": "Exemple : j'ai chanté.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-passe-compose-q2",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Quel est le participe passé de « manger » ?",
+   "choices": [
+    "manger",
+    "mangé",
+    "mangeais",
+    "mangerai"
+   ],
+   "answer": 1,
+   "explanation": "1er groupe : -é.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-passe-compose-q3",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Complète : « Nous (aller) au marché. »",
+   "choices": [
+    "avons allé",
+    "avons allés",
+    "sommes allés",
+    "ont allés"
+   ],
+   "answer": 2,
+   "explanation": "Aller prend être. Nous sommes allés (masc. pluriel) ou allées.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-passe-compose-q4",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Complète : « Il (prendre) son cahier. »",
+   "choices": [
+    "est pris",
+    "a prendre",
+    "a prit",
+    "a pris"
+   ],
+   "answer": 3,
+   "explanation": "Prendre : il a **pris**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-passe-compose-q5",
+   "chapter": "ce2-francais-conjugaison",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-passe-compose",
+   "prompt": "Avec l'auxiliaire avoir, le participe passé…",
+   "choices": [
+    "ne s'accorde pas avec le sujet",
+    "s'accorde avec le sujet",
+    "change toujours en -s",
+    "devient un nom"
+   ],
+   "answer": 0,
+   "explanation": "Les garçons ont mangé.",
+   "source": "Exercice original"
+  }
+ ]
+}
