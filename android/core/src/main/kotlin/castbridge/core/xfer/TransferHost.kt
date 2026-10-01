@@ -35,6 +35,14 @@ class TransferHost(
         class Refused(val http: Int, val message: String) : Begin()
     }
 
+    /** "Network alone" session for the bench: nothing is stored, no volume is touched. */
+    fun beginDiscard(m: Manifest): Begin {
+        sessions[m.id]?.let { return Begin.Ok(it, true) }
+        if (sessions.size >= maxSessions) return Begin.Refused(429, "too many transfers in progress")
+        val s = Session(m, PartAssembler.open(File("."), m, stats, now, discard = true), "", "", File("."))
+        return Begin.Ok(sessions.putIfAbsent(m.id, s) ?: s, false)
+    }
+
     fun begin(m: Manifest, allocate: (Manifest) -> Allocation): Begin {
         sessions[m.id]?.let { if (!it.assembler.manifest.equals(m)) discard(m.id) else return Begin.Ok(it, true) }
         if (finalSizeOf(m.name) == m.size) return Begin.AlreadyThere
@@ -78,16 +86,25 @@ class TransferHost(
     fun inflightIds(): Set<String> = sessions.keys.toSet()
 
     // ---- JSON (hand-written like the rest of the API) ----
+    /** French hint when the disk (not the Wi-Fi) is what limits the copy; null while unknown or fast enough. */
+    fun note(s: Session): String? {
+        val bps = stats.bytesPerSec()
+        if (s.assembler.discard || bps <= 0 || s.assembler.map.count() < 2 || bps >= SLOW_DISK_BPS) return null
+        return "Le disque de la TV écrit à ${String.format(java.util.Locale.ROOT, "%.1f", bps / 1e6).replace('.', ',')} Mo/s : c'est lui qui limite la copie, pas le Wi-Fi. " +
+            "Un support plus rapide (clé USB plus rapide, autre port) accélérera la copie."
+    }
+
     fun stateJson(s: Session, withHashes: Boolean = false): String {
         val m = s.manifest; val a = s.assembler
         return "{\"id\":\"${m.id}\",\"name\":${q(m.name)},\"size\":${m.size},\"blockSize\":${m.blockSize},\"blocks\":${m.blocks}," +
             "\"done\":${a.map.count()},\"map\":\"${a.map.toHex()}\",\"volume\":${q(s.volumeId)}," +
-            "\"writeBps\":${stats.bytesPerSec()},\"queued\":${stats.queued()},\"maxStreams\":$maxStreams,\"ready\":${a.map.complete()}" +
+            "\"writeBps\":${stats.bytesPerSec()},\"queued\":${stats.queued()},\"maxStreams\":$maxStreams,\"ready\":${a.map.complete()}" + (note(s)?.let { ",\"note\":${q(it)}" } ?: "") +
             (if (withHashes) ",\"hashes\":\"${a.hashesJoined()}\"" else "") + "}"
     }
 
     companion object {
         const val API_VERSION = 1
+        const val SLOW_DISK_BPS = 3_000_000L
         fun q(s: String) = "\"" + s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t") + "\""
     }
 }

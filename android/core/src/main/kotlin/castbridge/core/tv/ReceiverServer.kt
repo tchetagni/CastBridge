@@ -603,7 +603,8 @@ class ReceiverServer(
         try {
             synchronized(FileLocks.of(LOCK_ROOT, name)) {
                 if (moving(name)) return json(Response.Status.CONFLICT, """{"error":"moving"}""")
-                val r = transfers.begin(m) { mf -> allocateTransfer(mf, target) }
+                // discard=1: the bench's "network alone" run (bytes are hashed and dropped, nothing is stored)
+                val r = if (p["discard"] == "1") transfers.beginDiscard(m) else transfers.begin(m) { mf -> allocateTransfer(mf, target) }
                 return when (r) {
                     is castbridge.core.xfer.TransferHost.Begin.AlreadyThere -> ok("""{"done":true,"name":${q(name)}}""")
                     is castbridge.core.xfer.TransferHost.Begin.Refused ->
@@ -635,8 +636,8 @@ class ReceiverServer(
 
     private fun transferChunk(s: IHTTPSession, p: Map<String, String>): Response {
         val sess = transfers.session(p["id"].orEmpty()) ?: return json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
-        val v = volumes[sess.volumeId]?.takeIf { volumes.alive(it) }
-        if (v == null) { transfers.remove(sess.manifest.id); sess.assembler.close(); return removed() }
+        val v = if (sess.assembler.discard) null else volumes[sess.volumeId]?.takeIf { volumes.alive(it) }
+        if (v == null && !sess.assembler.discard) { transfers.remove(sess.manifest.id); sess.assembler.close(); return removed() }
         val idx = p["idx"]?.toIntOrNull() ?: return bad("idx required")
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val sha = s.headers["x-cb-sha256"].orEmpty().lowercase()
@@ -654,7 +655,7 @@ class ReceiverServer(
                 is castbridge.core.xfer.PartAssembler.Block.Corrupt -> json(status(422), """{"error":"corrupt block","idx":$idx}""")
                 is castbridge.core.xfer.PartAssembler.Block.Bad -> bad(r.reason)
                 is castbridge.core.xfer.PartAssembler.Block.Interrupted -> bad("interrupted")
-                is castbridge.core.xfer.PartAssembler.Block.DiskFail -> try { diskFailure(v, DiskError(r.cause)) } finally { if (!volumes.alive(v)) { transfers.remove(sess.manifest.id); a.close() } }
+                is castbridge.core.xfer.PartAssembler.Block.DiskFail -> try { diskFailure(v!!, DiskError(r.cause)) } finally { if (!volumes.alive(v!!)) { transfers.remove(sess.manifest.id); a.close() } }
             }
         } finally { chunking.decrementAndGet() }
     }
@@ -663,6 +664,11 @@ class ReceiverServer(
         val sess = transfers.session(p["id"].orEmpty()) ?: return json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
         val root = p["root"].orEmpty()
         val name = sess.manifest.name
+        if (sess.assembler.discard) {
+            val r = sess.assembler.finish(root, "")
+            if (r is castbridge.core.xfer.PartAssembler.Finish.Done) transfers.remove(sess.manifest.id)
+            return if (r is castbridge.core.xfer.PartAssembler.Finish.Done) ok("""{"done":true,"discarded":true}""") else bad("incomplete")
+        }
         val v = volumes[sess.volumeId]?.takeIf { volumes.alive(it) } ?: return removed()
         uploading.incrementAndGet()
         sess.finishing = true

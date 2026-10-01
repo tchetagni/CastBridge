@@ -36,6 +36,8 @@ class WriteStats(private val now: () -> Long = System::nanoTime) {
 class PartAssembler private constructor(
     val dir: File, val manifest: Manifest, private val data: File, private val stateFile: File,
     val stats: WriteStats, private val now: () -> Long,
+    /** Bench only ("network alone"): bytes are received, hashed and dropped, nothing touches the disk. */
+    val discard: Boolean = false,
 ) {
     sealed class Block {
         object Ok : Block()
@@ -61,8 +63,8 @@ class PartAssembler private constructor(
     private val busy = HashSet<Int>()
     private val sliceMap = HashMap<Int, BitSet>()
     private val sliceSha = HashMap<Int, String>()
-    private val raf = RandomAccessFile(data, "rw")
-    private val ch: FileChannel = raf.channel
+    private val raf: RandomAccessFile? = if (discard) null else RandomAccessFile(data, "rw")
+    private val ch: FileChannel? = raf?.channel
     @Volatile private var closed = false
     @Volatile var touched = now(); private set
     private var lastPersist = 0L
@@ -145,6 +147,7 @@ class PartAssembler private constructor(
         if (miss.isNotEmpty()) return Finish.Missing(miss)
         val hs = synchronized(this) { hashes.map { it ?: "" } }
         if (Manifest.root(hs) != root) return Finish.RootMismatch
+        if (discard) { close(); return Finish.Done(data) }
         val bad = ArrayList<Int>()
         try {
             val md = MessageDigest.getInstance("SHA-256")
@@ -154,7 +157,7 @@ class PartAssembler private constructor(
                 if (Hash.hex(md.digest()) != hs[i]) bad += i
             }
             if (bad.isNotEmpty()) { synchronized(this) { bad.forEach { map.clear(it); hashes[it] = null } }; persist(); return Finish.Corrupt(bad) }
-            ch.force(true)
+            ch?.force(true)
         } catch (e: IOException) { return Finish.DiskFail(e) }
         close()
         val part = File(dir, diskName + castbridge.core.tv.Storage.PART)
@@ -167,17 +170,18 @@ class PartAssembler private constructor(
     }
 
     /** Forgets everything (cancel, or an abandoned transfer swept away). */
-    fun discard() { close(); data.delete(); stateFile.delete() }
+    fun discard() { close(); if (!discard) { data.delete(); stateFile.delete() } }
 
-    fun close() { closed = true; runCatching { persist() }; runCatching { raf.close() } }
+    fun close() { closed = true; runCatching { persist() }; runCatching { raf?.close() } }
 
     fun hashesJoined(): String = synchronized(this) { hashes.joinToString(",") { it ?: "" } }
 
     private fun writeAt(buf: ByteArray, n: Int, pos: Long) {
+        val c = ch ?: return
         val bb = ByteBuffer.wrap(buf, 0, n)
         var p = pos
         val t0 = System.nanoTime()
-        while (bb.hasRemaining()) p += ch.write(bb, p)
+        while (bb.hasRemaining()) p += c.write(bb, p)
         stats.record(n, System.nanoTime() - t0)
     }
 
@@ -185,7 +189,7 @@ class PartAssembler private constructor(
         val buf = ByteArray(BUF)
         var left = manifest.length(idx); var pos = manifest.offset(idx)
         while (left > 0) {
-            val r = ch.read(ByteBuffer.wrap(buf, 0, minOf(buf.size, left)), pos)
+            val r = (ch ?: throw IOException("no data kept")).read(ByteBuffer.wrap(buf, 0, minOf(buf.size, left)), pos)
             if (r <= 0) throw IOException("file shorter than expected")
             sink(buf, r); left -= r; pos += r
         }
@@ -194,6 +198,7 @@ class PartAssembler private constructor(
     private fun persistSoon() { val t = now(); if (t - lastPersist > 1000) { lastPersist = t; runCatching { persist() } } }
 
     @Synchronized private fun persist() {
+        if (discard) return
         val tmp = File(stateFile.path + ".tmp")
         tmp.writeText("CBX1\n${manifest.size}\n${manifest.blockSize}\n${map.toHex()}\n${hashes.joinToString(",") { it ?: "" }}\n")
         if (!tmp.renameTo(stateFile)) { stateFile.delete(); tmp.renameTo(stateFile) }
@@ -214,13 +219,14 @@ class PartAssembler private constructor(
         const val SUB = ".cbx"
 
         /** Opens (resuming what a previous run left) or creates the transfer's files in [dir]. Throws [IOException] if the disk refuses. */
-        fun open(dir: File, manifest: Manifest, stats: WriteStats = WriteStats(), now: () -> Long = System::currentTimeMillis): PartAssembler {
+        fun open(dir: File, manifest: Manifest, stats: WriteStats = WriteStats(), now: () -> Long = System::currentTimeMillis, discard: Boolean = false): PartAssembler {
+            if (discard) return PartAssembler(dir, manifest, File(dir, ".discard"), File(dir, ".discard"), stats, now, discard = true)
             val sub = File(dir, SUB).apply { mkdirs() }
             val data = File(sub, manifest.id + ".data"); val st = File(sub, manifest.id + ".state")
             val reuse = data.isFile && data.length() == manifest.size && st.isFile
             if (!reuse) { data.delete(); st.delete() }
             val a = PartAssembler(dir, manifest, data, st, stats, now)
-            if (reuse) a.restore() else { a.raf.setLength(manifest.size); a.persist() }
+            if (reuse) a.restore() else { a.raf!!.setLength(manifest.size); a.persist() }
             return a
         }
 

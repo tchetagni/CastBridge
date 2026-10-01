@@ -26,7 +26,7 @@ class MultipathServerTest {
     private fun src(name: String, bytes: ByteArray) = File(work, name).apply { writeBytes(bytes) }
     private fun client(r: Rig, f: File, name: String, pin: String? = null, k: Int? = 4, bt: Boolean = false, cancelled: () -> Boolean = { false },
                        wrap: (Lane) -> Lane = { it }, onProgress: (Long, Long) -> Unit = { _, _ -> }, base: String = r.base, hostPort: Int = r.port,
-                       compress: Boolean = true): Pair<TransferClient, FileChannel> {
+                       compress: Boolean = true, onDisk: (Long, String?) -> Unit = { _, _ -> }): Pair<TransferClient, FileChannel> {
         val ch = FileChannel.open(f.toPath(), StandardOpenOption.READ)
         val host = "127.0.0.1:$hostPort"
         val tc = TransferClient(HttpTransferApi(base) { pin }, FileBlockSource(ch), name, { id, max ->
@@ -34,7 +34,7 @@ class MultipathServerTest {
                 add(wrap(WifiLane("wifi", host, id, HttpConn.tcp("127.0.0.1", hostPort), { pin }, maxStreams = max, fixedK = k)))
                 if (bt) add(BluetoothLane("bluetooth", host, id, HttpConn.tcp("127.0.0.1", hostPort), { pin }))
             }
-        }, cancelled = cancelled, onProgress = onProgress, retryDelayMs = 50, compress = compress)
+        }, cancelled = cancelled, onProgress = onProgress, retryDelayMs = 50, compress = compress, onDisk = onDisk)
         return tc to ch
     }
 
@@ -209,5 +209,39 @@ class MultipathServerTest {
         h.stats.queue(-40 * MiB); assertTrue(h.mayAccept(4 * MiB))
         h.stats.record(1 shl 20, 1_000_000_000L)       // the disk absorbs 1 MiB/s
         assertTrue(h.maxInflight(4 * MiB) <= 6 * 4 * MiB && h.maxInflight(4 * MiB) >= 2 * 4 * MiB)
+    }
+
+    @Test fun networkAloneRunStoresNothingOnTheTv() {
+        val r = rig(); val data = randomBytes(5 * MiB.toInt()); val f = src("net.bin", data)
+        val ch = FileChannel.open(f.toPath(), StandardOpenOption.READ)
+        ch.use {
+            val tc = TransferClient(HttpTransferApi(r.base) { null }, FileBlockSource(ch), "net.bin", { id, max -> listOf(WifiLane("wifi", "127.0.0.1:${r.port}", id, HttpConn.tcp("127.0.0.1", r.port), { null }, maxStreams = max, fixedK = 2)) }, discard = true, retryDelayMs = 50)
+            assertEquals(TransferClient.Result.Done, tc.run())
+        }
+        assertFalse(finalFile(r, "net.bin").exists()); assertFalse(File(r.internalDir, "net.bin.part").exists()); assertFalse(File(r.internalDir, ".cbx").exists())
+        assertEquals(0, r.server.activeTransfers())
+    }
+
+    @Test fun aSlowDiskIsReportedInFrenchAndNotTheWifiBlamed() {
+        val h = TransferHost(); val dir = kotlin.io.path.createTempDirectory("note").toFile()
+        try {
+            val m = Manifest("n.bin", 4 * MiB, MiB.toInt())
+            val s = (h.begin(m) { Allocation.At(dir, "n.bin", "internal") } as TransferHost.Begin.Ok).s
+            assertNull(h.note(s), "nothing is said before anything is measured")
+            val d = randomBytes(MiB.toInt())
+            repeat(2) { s.assembler.writeBlock(it, Hash.hex(java.security.MessageDigest.getInstance("SHA-256").digest(d)), java.io.ByteArrayInputStream(d), d.size.toLong(), false) }
+            repeat(60) { h.stats.record(1 shl 20, 1_000_000_000L) }       // the disk absorbs 1 MiB per second, steadily
+            val n = h.note(s)!!
+            assertTrue("Mo/s" in n && "pas le Wi-Fi" in n, n); assertTrue("\"note\"" in h.stateJson(s))
+        } finally { dir.deleteRecursively() }
+    }
+
+    @Test fun theTvsDiskSpeedReachesThePhoneWhileCopying() {
+        val r = rig(); val data = randomBytes(8 * MiB.toInt())
+        val speeds = java.util.Collections.synchronizedList(ArrayList<Long>())
+        val (tc, ch) = client(r, src("sp.mkv", data), "sp.mkv", k = 1, onDisk = { bps, _ -> speeds += bps },
+            wrap = { l -> object : Lane by l { override fun send(worker: Int, idx: Int, ctx: SendContext): Outcome { Thread.sleep(500); return l.send(worker, idx, ctx) } } })
+        ch.use { assertEquals(TransferClient.Result.Done, tc.run()) }
+        assertTrue(speeds.any { it > 0 }, "the phone saw the measured disk speed: $speeds")
     }
 }

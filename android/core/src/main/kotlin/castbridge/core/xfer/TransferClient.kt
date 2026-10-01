@@ -8,21 +8,24 @@ import java.net.URL
 /** The small calls of the protocol (begin, state, finish). Chunks travel on the lanes. */
 interface TransferApi {
     class Caps(val version: Int, val maxStreams: Int)
-    class Begin(val done: Boolean, val id: String, val map: BlockMap, val hashes: List<String>, val writeBps: Long, val maxStreams: Int, val volume: String)
+    class Begin(val done: Boolean, val id: String, val map: BlockMap, val hashes: List<String>, val writeBps: Long, val maxStreams: Int, val volume: String, val note: String? = null)
     sealed class Finish { object Done : Finish(); class Missing(val map: BlockMap) : Finish(); class Corrupt(val map: BlockMap) : Finish(); class Refused(val message: String) : Finish() }
     /** A refusal that no retry fixes (no room, name refused, bad credential...); [message] is for the user. */
     class Refused(val http: Int, override val message: String) : IOException(message)
 
     /** null = this TV does not know the protocol: send the old way. */
     fun caps(): Caps?
-    fun begin(m: Manifest, target: String?): Begin
+    fun begin(m: Manifest, target: String?, discard: Boolean = false): Begin
     fun state(id: String, withHashes: Boolean = false): Begin?
     fun finish(id: String, root: String): Finish
     fun abort(id: String)
 }
 
-class HttpTransferApi(private val base: String, private val credential: () -> String?) : TransferApi {
+class HttpTransferApi(private val baseOf: () -> String?, private val credential: () -> String?) : TransferApi {
+    constructor(base: String, credential: () -> String?) : this({ base }, credential)
+
     private fun call(method: String, path: String): Pair<Int, String> {
+        val base = baseOf() ?: throw IOException("TV introuvable")
         val c = URL(base + path).openConnection() as HttpURLConnection
         c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 60_000   // finish re-reads the file on the TV
         castbridge.core.trust.TvCredential.apply(c, credential())
@@ -39,8 +42,8 @@ class HttpTransferApi(private val base: String, private val credential: () -> St
         return TransferApi.Caps(TvClient.num(body, "version")!!.toInt(), (TvClient.num(body, "maxStreams") ?: 4).toInt())
     }
 
-    override fun begin(m: Manifest, target: String?): TransferApi.Begin {
-        val (code, body) = call("POST", "/api/transfer/begin?name=${TvClient.enc(m.name)}&size=${m.size}&blockSize=${m.blockSize}" + (target?.let { "&target=${TvClient.enc(it)}" } ?: ""))
+    override fun begin(m: Manifest, target: String?, discard: Boolean): TransferApi.Begin {
+        val (code, body) = call("POST", "/api/transfer/begin?name=${TvClient.enc(m.name)}&size=${m.size}&blockSize=${m.blockSize}" + (target?.let { "&target=${TvClient.enc(it)}" } ?: "") + if (discard) "&discard=1" else "")
         if (code in 500..599 && code != 507) throw IOException("TV : $code ${body.take(80)}")
         if (code != 200) throw TransferApi.Refused(code, TvClient.str(body, "message") ?: TvClient.str(body, "error") ?: "refusé par la TV ($code)")
         return parse(m, body)!!
@@ -74,7 +77,7 @@ class HttpTransferApi(private val base: String, private val credential: () -> St
         val blocks = TvClient.num(body, "blocks")?.toInt() ?: return null
         val map = BlockMap.fromHex(blocks, TvClient.str(body, "map") ?: "")
         val hashes = (TvClient.str(body, "hashes") ?: "").let { if (it.isEmpty()) emptyList() else it.split(',') }
-        return TransferApi.Begin(false, TvClient.str(body, "id") ?: "", map, hashes, TvClient.num(body, "writeBps") ?: 0, (TvClient.num(body, "maxStreams") ?: 4).toInt(), TvClient.str(body, "volume") ?: "")
+        return TransferApi.Begin(false, TvClient.str(body, "id") ?: "", map, hashes, TvClient.num(body, "writeBps") ?: 0, (TvClient.num(body, "maxStreams") ?: 4).toInt(), TvClient.str(body, "volume") ?: "", TvClient.str(body, "note"))
     }
 }
 
@@ -96,6 +99,10 @@ class TransferClient(
     private val onEvent: (String) -> Unit = {},
     private val sleep: (Long) -> Unit = Thread::sleep,
     private val retryDelayMs: Long = 2000,
+    /** Bench: "network alone" (the TV drops the bytes after hashing them). */
+    private val discard: Boolean = false,
+    /** The TV's measured disk speed (bytes/s, re-measured all along: a drive slows down when its cache is full) and its French hint when the disk is the limit. */
+    private val onDisk: (bps: Long, note: String?) -> Unit = { _, _ -> },
 ) {
     sealed class Result {
         object Done : Result()
@@ -116,7 +123,7 @@ class TransferClient(
         var attempts = 0
         while (!cancelled()) {
             attempts++
-            val b = try { api.begin(m, target) }
+            val b = try { api.begin(m, target, discard) }
                 catch (e: TransferApi.Refused) { return if (e.http == 501) Result.Unsupported else Result.Failed(e.message ?: "refusé") }
                 catch (e: IOException) { onWaiting(castbridge.core.trust.LinkText.failure(e)); sleep(retryDelayMs); continue }
             if (b.done) { onProgress(m.size, m.size); return Result.Done }
@@ -131,7 +138,8 @@ class TransferClient(
             })
             if (full.map.count() > 0) onProgress((0 until m.blocks).filter { full.map.has(it) }.sumOf { m.length(it).toLong() }, m.size)
             rounds++
-            val r = try { sched.run(cancelled) } finally { ls.forEach { runCatching { it.close() } } }
+            val poll = Thread { while (!Thread.currentThread().isInterrupted) { try { Thread.sleep(2000); api.state(b.id)?.let { onDisk(it.writeBps, it.note) } } catch (_: InterruptedException) { return@Thread } catch (_: Exception) { } } }.apply { isDaemon = true; start() }
+            val r = try { sched.run(cancelled) } finally { poll.interrupt(); ls.forEach { runCatching { it.close() } } }
             ls.forEach { perLane[it.id] = (perLane[it.id] ?: 0) + it.sent.get() }
             duplicates += sched.duplicates.get()
             when (r) {

@@ -19,6 +19,11 @@ import castbridge.core.tv.Mp4Atoms
 import castbridge.core.tv.Progressive
 import castbridge.core.tv.ResumableUpload
 import castbridge.core.tv.TvClient
+import castbridge.core.xfer.FileBlockSource
+import castbridge.core.xfer.HttpConn
+import castbridge.core.xfer.HttpTransferApi
+import castbridge.core.xfer.TransferClient
+import castbridge.core.xfer.WifiLane
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.io.FileInputStream
@@ -115,18 +120,16 @@ class UploadService : Service() {
         }
         var lastAttempt = 0L
         var prevSent = -1L
-        val up = ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin,
-            target = job.target, onCheck = { _check.value = it },
-            // a token renewed while the transfer waits is picked up; one the TV refused is never sent again (core/.../TvClient.kt)
-            credential = { if (castbridge.core.trust.TvAuth.isToken(job.pin)) (TvLinkManager.credentialFor(job.tvName) ?: job.pin) else job.pin })
+        // a token renewed while the transfer waits is picked up; one the TV refused is never sent again (core/.../TvClient.kt)
+        val credential: () -> String? = { if (castbridge.core.trust.TvAuth.isToken(job.pin)) (TvLinkManager.credentialFor(job.tvName) ?: job.pin) else job.pin }
         val t0 = System.nanoTime(); var first = -1L
-        val result = up.run { s ->
+        val onState: (ResumableUpload.State) -> Unit = { s ->
             if (s is ResumableUpload.State.Uploading) {
                 if (first < 0) first = s.sent
                 val dt = (System.nanoTime() - t0) / 1_000_000
                 if (dt > 500) _average.value = (s.sent - first) * 1000 / dt
                 // Full speed by default: the bigger the lead over playback, the longer the video survives a lost network.
-                if (prevSent >= 0 && s.sent - prevSent in 1..(4L shl 20)) meter.add(s.sent - prevSent)
+                if (prevSent >= 0 && s.sent - prevSent in 1..(16L shl 20)) meter.add(s.sent - prevSent)
                 prevSent = s.sent
                 _speed.value = meter.bytesPerSec()
                 if (progressiveNow && !started && System.currentTimeMillis() - lastAttempt > 1000 &&
@@ -147,6 +150,11 @@ class UploadService : Service() {
             }
             notifyProgress(s)
         }
+        // « Transfert rapide » : plusieurs connexions en parallèle, fichier découpé en blocs (docs/TRANSFER.md). Jamais pendant « lire pendant l'envoi »
+        // (les blocs n'arrivent pas dans l'ordre) ; une TV qui ne connaît pas le protocole (null) reçoit l'envoi classique.
+        val fast = if (!progressiveNow && FastTransfer.enabled(this)) runFast(uri, job, total, resolve, credential, onState) else null
+        val result = fast ?: ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin,
+            target = job.target, onCheck = { _check.value = it }, credential = credential).run(onState)
         run {
             val ms = System.currentTimeMillis() - castStart
             val ok = result == ResumableUpload.State.Done
@@ -164,6 +172,41 @@ class UploadService : Service() {
                 ?.let { TvClient.str(it.substringAfter(": "), "message") }
             finish(if (r.isSuccess) State.Done(job) else State.Failed(job, why?.let { "Fichier envoyé. $it" } ?: "Fichier envoyé, mais lancement impossible : réessayez « Lire »"))
         } else finish(_state.value.takeIf { it is State.Failed } ?: State.Failed(job, "annulé"))
+    }
+
+    /**
+     * Transfert rapide. null = la TV n'a pas le protocole multivoie (ou ne peut pas l'utiliser) : l'appelant envoie à l'ancienne.
+     * Le débit alimente la même progression (pourcentage, durée) que l'envoi classique.
+     */
+    private fun runFast(uri: Uri, job: Job, total: Long, resolve: () -> String?, credential: () -> String?,
+                        onState: (ResumableUpload.State) -> Unit): ResumableUpload.State? {
+        var sent = 0L
+        // the TV may need a moment to be (re)discovered; the classic path waits the same way
+        while (!cancelled && resolve() == null) { onState(ResumableUpload.State.Waiting(sent, total, "TV introuvable")); Thread.sleep(1000) }
+        if (cancelled) return ResumableUpload.State.Failed("annulé")
+        val pfd = runCatching { contentResolver.openFileDescriptor(uri, "r") }.getOrNull() ?: return null
+        pfd.use {
+            val ch = FileInputStream(pfd.fileDescriptor).channel
+            val connect: () -> java.nio.channels.SocketChannel = {
+                val base = resolve() ?: throw IOException("TV introuvable")
+                val u = Uri.parse(base)
+                HttpConn.tcp(u.host ?: throw IOException("adresse de la TV illisible"), if (u.port > 0) u.port else 8765)()
+            }
+            val tc = TransferClient(HttpTransferApi(resolve, credential), FileBlockSource(ch, total), job.fileName,
+                lanes = { id, max -> listOf(WifiLane("wifi", resolve()?.removePrefix("http://") ?: "tv", id, connect, credential, maxStreams = max)) },
+                target = job.target, cancelled = { cancelled },
+                onProgress = { s, t -> sent = s; onState(ResumableUpload.State.Uploading(s, t)) },
+                onWaiting = { why -> onState(ResumableUpload.State.Waiting(sent, total, why)) },
+                onEvent = { Log.i(TAG, it) },
+                // the TV's measured disk speed: said once, in French, when the disk (not the Wi-Fi) is what limits the copy
+                onDisk = { _, note -> if (note != null && _notice.value != note) _notice.value = note })
+            return when (val r = tc.run()) {
+                TransferClient.Result.Done -> ResumableUpload.State.Done.also(onState)
+                TransferClient.Result.Unsupported -> null
+                TransferClient.Result.Cancelled -> ResumableUpload.State.Failed("annulé").also(onState)
+                is TransferClient.Result.Failed -> ResumableUpload.State.Failed(r.reason).also(onState)
+            }
+        }
     }
 
     /**

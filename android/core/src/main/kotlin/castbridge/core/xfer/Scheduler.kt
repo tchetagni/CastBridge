@@ -64,7 +64,7 @@ class Scheduler(
             while (!done.complete() && failure == null && !sessionLost && !cancelled()) lock.wait(100)
             lock.notifyAll()
         }
-        threads.forEach { it.join(5000) }
+        threads.forEach { it.join(300) }      // daemons: one stuck in a slow write is released when the engine closes its lane
         synchronized(lock) {
             return when {
                 done.complete() -> Result.Done
@@ -114,7 +114,6 @@ class Scheduler(
     }
 
     private fun report(lane: Lane, idx: Int, run: Run, out: Outcome, cancelled: () -> Boolean) {
-        var progressNow = false
         synchronized(lock) {
             running[idx]?.let { it.remove(run); if (it.isEmpty()) running.remove(idx) }
             val stillRunning = running.containsKey(idx)
@@ -129,7 +128,7 @@ class Scheduler(
                     if (done.set(idx)) {
                         doneBytes += manifest.length(idx); counts[lane.id] = (counts[lane.id] ?: 0) + 1
                         running.remove(idx)?.forEach { it.abort.set(true) }
-                        progressNow = true
+                        listener.progress(doneBytes, manifest.size)      // under the lock: never out of order
                     }
                 }
                 is Outcome.Corrupt -> {
@@ -157,6 +156,5 @@ class Scheduler(
             }
             lock.notifyAll()
         }
-        if (progressNow) listener.progress(synchronized(lock) { doneBytes }, manifest.size)
     }
 }

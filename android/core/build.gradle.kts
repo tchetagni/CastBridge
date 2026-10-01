@@ -47,6 +47,16 @@ tasks.register<JavaExec>("buildLearnLots") {
     args(listOf("lots", learnContent.absolutePath, layout.buildDirectory.dir("learn-lots").get().asFile.absolutePath) + (if (project.hasProperty("update")) listOf("--update") else emptyList()))
 }
 
+// Transfer bench (docs/TRANSFER.md): gradle :core:transferBench -Pargs="--tv http://IP:8765 --pin 123456" (or tools/transfer-bench/run.sh)
+tasks.register<JavaExec>("transferBench") {
+    group = "castbridge"
+    description = "Measures phone -> TV throughput for 1, 2, 4, 8 connections (needs --tv, or --simulate)"
+    dependsOn(tasks.named("classes"))
+    classpath = learnToolClasspath
+    mainClass.set("castbridge.core.xfer.TransferBench")
+    args(((project.findProperty("args") as String?) ?: "--help").split(" ").filter { it.isNotEmpty() })
+}
+
 tasks.register<JavaExec>("reviewLearn") {
     group = "castbridge"
     description = "Writes docs/LEARN-REVIEW.md: per lot, what the teachers must verify"
