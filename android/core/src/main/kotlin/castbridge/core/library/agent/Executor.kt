@@ -119,7 +119,7 @@ class Executor(
             val seq = journal.nextSeq()
             entry(runId, Op.RENAME, c, cur, to, State.PENDING, seq = seq)
             when (val r = ops.rename(cur, final)) {
-                is OpResult.Ok -> { entry(runId, Op.RENAME, c, cur, to, State.DONE, if (final != wantName) "nom déjà pris : $final" else null, seq = seq); cur = to }
+                is OpResult.Ok -> { val real = r.loc.copy(folder = cur.folder, volume = cur.volume); entry(runId, Op.RENAME, c, cur, real, State.DONE, if (final != wantName) "nom déjà pris : $final" else if (real.name != final) "nom changé par le système : ${real.name}" else null, seq = seq); cur = real }
                 is OpResult.Fail -> { entry(runId, Op.RENAME, c, cur, to, State.FAILED, r.reason, seq = seq); return StepReport(c.id, c.file.name, State.FAILED, r.reason) }
             }
         }

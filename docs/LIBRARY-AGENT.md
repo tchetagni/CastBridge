@@ -199,7 +199,7 @@ jamais une notification ni une fenêtre, masquable 7 jours, calculée localement
 - **Dossier du téléphone** : sélecteur Android (SAF). Sur Android 11+, le système refuse de choisir le dossier Téléchargements lui-même : choisir un sous-dossier.
   Déplacer d'un dossier à l'autre dépend du fournisseur de fichiers (`DocumentsContract.moveDocument`) ; si le système refuse, l'étape est signalée et rien n'est supprimé.
   La corbeille du téléphone est un dossier visible « Corbeille CastBridge » dans le dossier choisi, **jamais vidé automatiquement** (la TV, elle, purge à 30 jours).
-  Ce code n'a pas été exécuté sur un vrai téléphone ni sur un vrai dossier (voir § 9).
+  Exécuté sur émulateur et sur un fournisseur simulé (§ 16) ; **pas encore sur un vrai téléphone** (§ 9).
 - **Un seul volume** pour le téléphone (pas de déplacement entre volumes là-bas).
 - **Contrôle parental** : branché (§ 12). Limites : un fichier avec une règle « cette vidéo » est protégé contre le renommage (la classification suit le nom) ;
   tant que le parent n'a pas classé ses vidéos (« non classée = adulte »), l'assistant n'y touche pas et le dit (« N fichiers protégés ») ; une TV plus ancienne ne dit rien
@@ -215,7 +215,7 @@ jamais une notification ni une fenêtre, masquable 7 jours, calculée localement
 1. Passer l'assistant sur la bibliothèque réelle (séries **Prison Break**, etc.) **en regardant le plan sans rien cocher** : relever les noms mal compris, en faire des cas de `NamingCorpus`.
 2. Essayer sur la TV de référence (GaiaOS, clé exFAT) : renommage, déplacement interne → clé (lent : 2 à 15 Mo/s), mise à la corbeille, restauration, annulation, coupure du Wi-Fi en cours de route.
    Il faut d'abord **installer la TV 0.12+** (routes `/api/trash/*`) ; sinon l'assistant refuse la corbeille.
-3. Le dossier du téléphone (SAF) sur le Samsung S21+ : choisir `Movies`, `Download/Séries`, `WhatsApp/Media/WhatsApp Video` ; vérifier le déplacement et la corbeille.
+3. Le dossier du téléphone (SAF) sur le Samsung S21+ : déjà fait sur émulateur (§ 16) ; reste le vrai téléphone (fournisseur Samsung, vraie carte SD, fichiers de plusieurs Go).
 4. Décider si l'aide de l'IA doit être activée sur le serveur (clé, modèle, coût) : le texte de consentement (`AiConsent`) est à **faire relire** (juriste), comme celui de `ConsentText`.
 5. ~~Brancher `ContentGuard` au contrôle parental~~ : fait (§ 12) ; à essayer sur la vraie TV avec un profil enfant (non testé hors JVM / émulateur).
 
@@ -388,3 +388,76 @@ Un test (`consentListsExactlyTheFieldsOfTheRequest`) échoue si un champ est ajo
 
 Pas de cache des noms côté serveur (aurait réduit le coût mais contredit « rien n'est stocké »), pas de statistiques de dépense persistantes (le compteur du jour est en mémoire : un redémarrage le remet à zéro), pas d'essai contre un vrai modèle, pas d'écran « coût estimé » dans l'application (la valeur `costUsd` est lue par `ServerNamingModel` ; à afficher par l'agent « UI »).
 
+
+
+## 16. Assistant du téléphone : rapidité, dossier choisi, parcours guidé (branche `feat/agent-b-phone`)
+
+### 12.1 Parcours en 3 étapes
+**Analyser** (choix de la source, lecture) → **Vérifier** (le plan, rien n'est modifié) → **Appliquer** (récapitulatif exact, puis exécution). Un fil d'étapes en haut,
+« Retour » = un pas en arrière. Étape 3 : un écran de récapitulatif dit exactement ce qui va se passer ; les mises à la corbeille se confirment **là**, avec un interrupteur
+(plus de fenêtre surprise). Écrans : `AssistantScreen.kt` (parcours, accueil, récapitulatif, réglages), `PlanScreen.kt` (vérifier), `AssistantModel.kt` (état).
+
+**Vérifier** : filtres (Tout / Séries / Films / Doublons / Gros fichiers ≥ 1 Go, avec le nombre), **groupes repliables** (une série = un groupe, « Films », « Doublons »…) avec case
+tri-état (« tout cocher » du groupe : jamais une suppression), lignes **Avant → Après** étiquetées, indice de confiance en mots **et** icône (Sûr / Assez sûr / Peu sûr : pas seulement une couleur),
+« **Pourquoi cette proposition ?** » par ligne (ce qui a été retiré du nom, pourquoi ce dossier, source des règles, confiance, ce qu'on peut faire), pagination par groupe (30 lignes puis « Afficher … de plus »).
+Logique pure dans `core` (`PlanView.kt` : filtres, groupes, `Explain`) donc testée sans écran.
+
+**Correction manuelle → règle apprise** : « Modifier le nom » valide le nom, l'enregistre comme règle (`LearnedRules`), affiche « Retenu : … » et **re-propose tout de suite** les autres fichiers du même titre avec ce nom.
+Effaçable (Réglages).
+
+Accessibilité : zones ≥ 48 dp, titres de groupes marqués comme titres, états « coché / décoché » et descriptions parlées complètes par ligne, filtres annoncés avec leur nombre, avancement annoncé poliment,
+couleurs de la charte (`Cb.success/warning`) toujours doublées d'une icône ou d'un mot, police système à 200 % vérifiée sur émulateur (fil d'étapes réduit à l'étape en cours, boutons qui passent à la ligne). **Pas testé avec un vrai lecteur d'écran (TalkBack).**
+
+### 12.2 Vitesse perçue : ce qui a été mesuré, ce qui a été fait
+Mesure (JVM, 5 000 fichiers, `PhoneAgentTest`) : les règles comprennent et proposent pour **5 000 fichiers en ≈ 0,45 s** et le groupement du plan prend ≈ 5 ms. **Le moteur n'est donc pas le goulot** ;
+la lenteur vient de la lecture du dossier (une requête système par dossier), de la lecture de la durée de chaque vidéo (un en-tête par fichier) et, pour la TV, des empreintes (2 × 64 ko par fichier sur le Wi-Fi). C'est là qu'on a agi :
+
+| Mesure | Effet |
+|---|---|
+| **Analyse en 2 phases** | phase 1 (règles) → le plan s'ouvre ; phase 2 (empreintes TV, IA facultative) tourne **pendant** que l'utilisateur lit, et **ajoute** ses trouvailles (cases cochées et noms saisis conservés). « Passer » l'arrête ; « Continuer » aussi |
+| **Résultats au fil de l'eau** | pendant la lecture d'un dossier : nombre de fichiers / dossiers, noms déjà à améliorer et 4 exemples avant → après (recalculés à 100, 200, 400… fichiers) |
+| **Cache de l'analyse** (`FileAnalysisCache`, fichier privé, effaçable) | durées des vidéos du téléphone (clé : chemin + taille + date) et empreintes des fichiers de la TV (clé : volume + nom + taille + date). Une 2ᵉ analyse ne relit que le nouveau ; au plus 300 nouvelles durées / 60 nouvelles empreintes par analyse, **mais** ce qui est déjà en cache ne compte plus dans ce budget : chaque analyse va plus loin que la précédente (testé) |
+| **Opérations sans relister** | `DocTreeLibrary` tient les listes de dossiers à jour au fil des renommages / déplacements (les identifiants changent à chaque opération sur la plupart des fournisseurs) : 500 renommages = moins de 400 requêtes de listage (testé) ; la taille d'un fichier avant d'agir est relue à neuf (une seule ligne) |
+| **Tâche de fond** | le travail vit dans `AssistantHost` (portée du processus), pas dans l'écran : fermer l'assistant ou tourner le téléphone n'arrête rien, et rouvrir montre où on en est. **Limite honnête** : pas de service au premier plan ni de WorkManager (≈ 1 Mo pour une tâche par jour) : si Android tue l'application, l'analyse recommence (le cache la rend peu coûteuse). Une vérification quotidienne facultative existe (`JobScheduler`, § 12.5) |
+| **Milliers de fichiers** | `LazyColumn` + groupes repliés + pages de 30 ; le calcul des groupes est mémorisé |
+
+Ce qui n'a **pas** été mesuré : une vraie bibliothèque de milliers de fichiers sur le S21+ ou sur la TV (l'émulateur a servi pour 20 à 30 fichiers). Le chiffre de 5 000 fichiers vient d'un test JVM, pas d'un téléphone.
+
+### 12.3 Dossier du téléphone (SAF) : testé
+Toute la décision (parcours, collisions, corbeille, restauration, annulation, mémoire des identifiants) est dans `core` (`DocTree.kt`, `DocTreeLibrary` au-dessus de l'interface `DocProvider`) ; `SafLibrary.kt` n'est
+plus qu'un adaptateur `DocumentsContract`. Tests JVM contre un fournisseur simulé (`FakeDocProvider`) qui reproduit les cas pénibles : identifiants = chemins qui changent à chaque opération, noms insensibles à la casse (carte SD),
+fournisseur **sans** `moveDocument`, fournisseur qui **renomme en silence** (« (2) » ajouté), volume retiré en cours de route, volume en lecture seule, fichier modifié depuis l'analyse, deux fichiers de même nom mis à la corbeille depuis deux dossiers.
+Corrections trouvées par ces tests : le journal enregistre maintenant le nom **réel** donné par le système (sinon l'annulation échouait) ; une mise à la corbeille refusée par le fournisseur remet le nom d'origine (rien n'est laissé à moitié fait) ;
+« Restaurer » depuis la Corbeille remet le fichier **dans son dossier d'origine** (d'après le journal) et non à la racine ; après une annulation, les dossiers vides créés par le rangement sont retirés (jamais un dossier non vide) ; si le dossier choisi
+s'appelle déjà « Séries » le plan ne crée pas « Séries/Séries ».
+Fournisseur sans déplacement : repli « copier, vérifier la taille, puis supprimer l'original » (≤ 1 Go) ; sinon refus, rien ne change. Ce repli **n'a été testé que sur le fournisseur simulé** (côté logique) et jamais sur un vrai fournisseur.
+
+**Sur émulateur** (Android 35, vrai `ExternalStorageProvider`, sélecteur Android piloté par `uiautomator`) : `Movies` (renommage, création de dossiers `Films/<titre (année)>/`, déplacement, doublon à la corbeille avec confirmation,
+restauration, annulation de 6 étapes : tout est revenu à sa place), `Download/Séries` (série + sous-titre rangés ensemble, accents), et un **volume amovible** (disque virtuel `sm partition … public`, « Virtual SD card », FAT) : lecture, déplacement dans
+`Séries/Narcos/Saison 01`, accents et tiret long « – » dans les noms, annulation. `WhatsApp/Media/WhatsApp Video` : jeu de fichiers créé mais **non parcouru** sur émulateur (couvert par le test JVM, pas par l'émulateur). L'espace libre et le nom du volume
+sont lus par le fournisseur (`Root.AVAILABLE_BYTES`) : « Téléphone » ou le nom de la carte. Les dossiers vides laissés par une annulation (vus lors de ces essais) sont maintenant retirés : correction faite **après** ces essais, vérifiée par test JVM, pas revue sur émulateur.
+**Pas testé** : vraie carte SD / clé USB OTG, déplacement d'un volume à l'autre (impossible : un dossier choisi = un volume, le plan le dit), fournisseurs Samsung / Google Drive, plus de quelques dizaines de fichiers sur appareil.
+
+### 12.4 Rangement automatique des nouveaux envois (OFF par défaut) : fini
+Trois étapes (`AgentAuto`) : un **nom candidat** au début de l'envoi (rien n'est écrit) ; dans le service d'envoi, **avant le premier octet**, le nom n'est gardé que si la TV répond **et** n'a pas déjà un fichier de ce nom
+(l'envoi reprend dans un fichier existant du même nom : un nom propre qui tombe sur un autre fichier ne doit jamais être utilisé ; sinon le nom d'origine est envoyé) ; le renommage n'est inscrit au journal (annulable) **qu'une fois le fichier arrivé**.
+Défaut corrigé : l'envoi de plusieurs fichiers d'affilée (`TvTransferScreen`) attendait le nom d'origine et se serait arrêté après un fichier renommé. Réglages : interrupteur, **champ « Essayer un nom »** (montre le nom qui serait envoyé, sans rien envoyer),
+nombre d'envois renommés. Seul le chemin Wi-Fi (`UploadService`) est concerné ; Bluetooth et DLNA envoient le nom d'origine. **Non testé par un vrai envoi** vers une TV : seulement compilé et relu.
+
+### 12.5 Suggestions proactives
+Toujours là : **une ligne** discrète dans la bibliothèque de la TV (masquable 7 jours). Facultatif, **OFF par défaut** : une **notification silencieuse** (canal à faible importance, sans son ni vibration) **au plus une par semaine**, seulement s'il y a de quoi
+(≥ 10 fichiers à renommer, ≥ 1 Go de doublons, ou un volume plein), jamais deux fois pour la même trouvaille, jamais avec un profil enfant, jamais pour un conseil masqué. Elle porte sur le **dossier du téléphone** choisi (calcul local, aucun réseau) et ouvre l'assistant :
+elle ne fait rien d'elle-même. Mécanisme : `JobScheduler` (une tâche par jour, rechargée après redémarrage : permission `RECEIVE_BOOT_COMPLETED`). L'autorisation de notifier est demandée **au moment où on active l'option** ; refusée, l'option reste éteinte. La décision (`ProactivePolicy`) est testée.
+**Pas de notification pour la TV** (il faudrait la retrouver sur le réseau en tâche de fond : non fait). Vu sur émulateur : la notification est arrivée (« 15 fichiers mal nommés · 7 doublons = 43 Mo »), tâche lancée à la main (`cmd jobscheduler run`), pas attendue 24 h.
+
+### 12.6 Captures (émulateur Android 35, `docs/library-agent-phone/`)
+`01-accueil` (étapes, source) · `02-lecture` (progression et résultats déjà trouvés) · `03-verifier` (groupe de série, avant → après, confiance) · `04-pourquoi` (explication) · `05-correction-apprise` (« Retenu : … ») ·
+`06-recap-corbeille` (étape 3, confirmation) · `07-carte-sd` (volume amovible) · `08-reglages` (essai de nom, notification, IA : tout éteint) · `09-tv` (TV de démonstration) · `10-police-200` (police 200 %).
+Les captures de l'ancienne version (`docs/library-agent/`, § 11) montrent l'ancien écran du plan.
+
+### 12.7 Limites et à valider (en plus du § 9)
+- Rien de tout cela n'a tourné sur le vrai S21+ (interdit pendant ce travail) ni sur la vraie TV. Les doublons **sur le téléphone** se jugent par taille + durée + nom (pas d'empreinte) : deux fichiers différents de même taille et de même durée seraient signalés (rare avec de vrais fichiers ; vu sur l'émulateur avec des fichiers de test identiques).
+- Phase 2 (doublons TV) : si l'application est tuée pendant la recherche, elle recommence au prochain lancement (cache conservé).
+- Tâche de fond limitée à la vie du processus (§ 16.2). Pas de reprise d'un rangement interrompu après un redémarrage de l'application (le journal permet `recover()`, non branché à un écran).
+- Écrans en français uniquement (le moteur de noms gère l'anglais ; les écrans ne sont pas traduits).
+- Le parcours du sélecteur Android (« Utiliser ce dossier », autorisation) est celui d'Android 15 ; sur le Samsung il peut différer.

@@ -93,7 +93,12 @@ class LibraryAgent(
         if (fpr != null && !cancelled()) {
             // a name present on two volumes cannot be streamed unambiguously: it is judged by size + duration + name only
             val nameCount = files.groupingBy { it.name.lowercase() }.eachCount()
-            val cands = Duplicates.candidates(plannable).filter { nameCount[it.name.lowercase()] == 1 }.take(maxFingerprints)
+            val all = Duplicates.candidates(plannable).filter { nameCount[it.name.lowercase()] == 1 }
+            // the budget of reads counts only NEW reads: what a previous analysis already fingerprinted (CachingFingerprinter) is free, so each
+            // analysis goes further than the last one instead of redoing the same first 60 files
+            val cf = fpr as? CachingFingerprinter
+            var fresh = 0
+            val cands = if (cf == null) all.take(maxFingerprints) else all.filter { cf.known(it) || (fresh < maxFingerprints).also { ok -> if (ok) fresh++ } }
             cands.forEachIndexed { n, f ->
                 if (cancelled()) return@forEachIndexed
                 progress(Progress(Phase.FINGERPRINT, n, cands.size, f.name))

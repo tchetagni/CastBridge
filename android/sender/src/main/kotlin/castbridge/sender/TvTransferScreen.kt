@@ -98,7 +98,7 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
     LaunchedEffect(upload) {
         val u = upload
         if (next < 0 || next >= picked.size) return@LaunchedEffect
-        if (u is UploadService.State.Done && u.job.fileName == picked[next].name) {
+        if (u is UploadService.State.Done && castbridge.sender.agent.AgentAuto.originalOf(u.job.fileName) == picked[next].name) {
             if (next + 1 < picked.size) startUpload(next + 1) else { next = -1; msg = "Envoi terminé (${picked.size} fichier(s))." }
         } else if (u is UploadService.State.Failed) { next = -1; msg = "Envoi échoué : ${u.reason}" }
     }

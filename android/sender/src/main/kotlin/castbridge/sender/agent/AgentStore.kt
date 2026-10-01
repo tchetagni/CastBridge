@@ -5,6 +5,7 @@ import android.content.Context
 import castbridge.core.library.agent.AgentContext
 import castbridge.core.library.agent.AgentSettings
 import castbridge.core.library.agent.ContentGuard
+import castbridge.core.library.agent.FileAnalysisCache
 import castbridge.core.library.agent.FileJournal
 import castbridge.core.library.agent.LearnedRules
 import castbridge.core.library.agent.NamingModel
@@ -28,6 +29,9 @@ object AgentStore {
     val settings: AgentSettings by lazy { AgentSettings(kv) }
     val learned: LearnedRules by lazy { LearnedRules(kv) }
     val journal: FileJournal by lazy { FileJournal(File(ctx().filesDir, "agent/journal.jsonl")).also { runCatching { it.compact() } } }
+
+    /** Durations of the phone's videos and fingerprints of TV files, kept between two analyses (the second one only works on what is new). */
+    val cache: FileAnalysisCache by lazy { FileAnalysisCache(File(ctx().filesDir, "agent/analysis-cache.txt")) }
 
     /**
      * Parental control hook. The assistant never renames, moves, trashes or sends content this guard protects, and only advises

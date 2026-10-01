@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- only to keep the optional daily suggestion check (library assistant, off by default) scheduled after a reboot -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- Wi-Fi Direct channel (WifiNetworkSpecifier) -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -80,6 +82,10 @@
             android:icon="@drawable/ic_cb_telecommande" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter><action android:name="android.service.quicksettings.action.QS_TILE" /></intent-filter>
         </service>
+        <!-- Library assistant (docs/LIBRARY-AGENT.md): the optional weekly suggestion (off by default) and the screen it opens -->
+        <service android:name=".agent.ProactiveJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <activity android:name=".agent.AssistantActivity" android:exported="false" android:label="Ranger ma bibliothèque"
+            android:theme="@style/Theme.CastBridge" />
         <service android:name=".UploadService" android:exported="false"
             android:foregroundServiceType="dataSync" />
         <service android:name=".BtUploadService" android:exported="false"
