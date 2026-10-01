@@ -29,6 +29,23 @@ def pick(key, pool, right, k=8, exclude=()):
     return cands[:k]
 
 
+def pairs(course, tpl, rows, fwd=None, rev=None, *, region, cat, src, diff=2, extra_a=(), extra_b=(), expl="{a} : {b}.", rev_expl=None, k=3):
+    """Questions from (a, b[, difficulty]) rows. `fwd` asks for b given a (uses {a}), `rev` asks for a given b (uses {b}).
+    The reverse question is only built when b is unique in the table (otherwise several answers would be right).
+    Wrong choices come from the same column (plus extra_a / extra_b), nearest to a stable shuffle."""
+    rows = [(r[0], r[1], r[2] if len(r) > 2 else diff) for r in rows]
+    bs = Counter(norm(r[1]) for r in rows)
+    as_ = Counter(norm(r[0]) for r in rows)
+    col_a, col_b = [r[0] for r in rows] + list(extra_a), [r[1] for r in rows] + list(extra_b)
+    for a, b, d in rows:
+        same_a = {r[1] for r in rows if norm(r[0]) == norm(a)}          # all the right answers for this a
+        if fwd and as_[norm(a)] == 1:
+            fq(course, tpl + "-fwd", fwd.format(a=a, b=b), b, pick(tpl + a, col_b, b, 9, same_a), expl.format(a=a, b=b), src, region, cat, d)
+        if rev and bs[norm(b)] == 1:
+            same_b = {r[0] for r in rows if norm(r[1]) == norm(b)}
+            fq(course, tpl + "-rev", rev.format(a=a, b=b), a, pick(tpl + b, col_a, a, 9, same_b), (rev_expl or expl).format(a=a, b=b), src, region, cat, d)
+
+
 def run():
     """Builds the questions; unique by normalized text per course."""
     out, seen = [], set()
