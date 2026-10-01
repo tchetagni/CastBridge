@@ -1,0 +1,501 @@
+{
+ "chapter": "tle-physique-e-ti-ch-electricite",
+ "lessons": [
+  {
+   "id": "tle-physique-e-ti-electricite",
+   "title": "Électricité : régime sinusoïdal, impédance, puissance active",
+   "minutes": 40,
+   "programRef": "Tle E/TI — Électricité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Caractériser une grandeur sinusoïdale.",
+    "Calculer l'impédance d'un circuit R, L, C série.",
+    "Déterminer courant, déphasage et puissance active.",
+    "Expliquer l'intérêt d'un bon facteur de puissance."
+   ],
+   "exercises": [
+    "tle-physique-e-ti-electricite-01",
+    "tle-physique-e-ti-electricite-02",
+    "tle-physique-e-ti-electricite-03",
+    "tle-physique-e-ti-electricite-04",
+    "tle-physique-e-ti-electricite-05",
+    "tle-physique-e-ti-electricite-06"
+   ],
+   "selfCheck": [
+    "tle-physique-e-ti-ele-q1",
+    "tle-physique-e-ti-ele-q2",
+    "tle-physique-e-ti-ele-q3",
+    "tle-physique-e-ti-ele-q4",
+    "tle-physique-e-ti-ele-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Caractériser une grandeur sinusoïdale (période, fréquence, valeur efficace) ; calculer l'impédance d'un circuit R, L, C série ; déterminer courant, déphasage et puissance active ; relier facteur de puissance et pertes."
+    },
+    {
+     "type": "heading",
+     "text": "1. Grandeurs sinusoïdales"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Expression et grandeurs caractéristiques",
+     "md": "Une tension sinusoïdale s'écrit $u(t) = U_{max} \\sin(\\omega t + \\varphi)$. **Période** T (en s) ; **fréquence** $f = \\frac{1}{T}$ (en Hz) ; **pulsation** $\\omega = 2\\pi f$ (en rad/s). La **valeur efficace** est $U = \\frac{U_{max}}{\\sqrt{2}}$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 20,
+      "ymin": -400,
+      "ymax": 400,
+      "grid": 5,
+      "xlabel": "t (ms)",
+      "ylabel": "u (V)",
+      "w": 420,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "325*sin(0.31416*x)",
+        "color": "blue",
+        "label": "u(t)"
+       }
+      ],
+      "points": [
+       {
+        "x": 5,
+        "y": 325,
+        "label": "Umax ≈ 325 V",
+        "color": "red"
+       },
+       {
+        "x": 20,
+        "y": 0,
+        "label": "T = 20 ms",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Tension du réseau : 230 V efficaces, 50 Hz, donc T = 20 ms et Umax ≈ 325 V.",
+     "alt": "Une sinusoïde de période 20 ms et d'amplitude environ 325 V ; deux points repérés : le maximum et la fin de la période."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Valeur efficace",
+     "md": "C'est la valeur de la tension continue qui produirait le **même effet Joule** dans une résistance. Un voltmètre ou un ampèremètre usuel en alternatif mesure des valeurs **efficaces**. Le réseau de distribution camerounais est annoncé à 230 V efficaces et 50 Hz (valeurs usuelles ; à vérifier sur la documentation du distributeur)."
+    },
+    {
+     "type": "heading",
+     "text": "2. Impédance et déphasage"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dipôles en régime sinusoïdal",
+     "md": "- **Résistance R** : $Z = R$, courant et tension **en phase**.\n- **Bobine L** : $Z = L\\omega$, la tension est en **avance** de 90° sur le courant.\n- **Condensateur C** : $Z = \\frac{1}{C\\omega}$, la tension est en **retard** de 90° sur le courant.\nL'impédance Z s'exprime en ohms (Ω) et relie valeurs efficaces : $U = Z I$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Circuit R, L, C en série",
+     "md": "On pose $X = L\\omega - \\frac{1}{C\\omega}$ (réactance). Alors :",
+     "tex": "Z = \\sqrt{R^2 + X^2} \\qquad \\tan \\varphi = \\frac{X}{R} \\qquad I = \\frac{U}{Z}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         180,
+         260,
+         180,
+         260,
+         60
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 205,
+        "text": "R",
+        "size": 15
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 125,
+        "text": "X",
+        "size": 15
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 115,
+        "text": "Z",
+        "size": 15
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 172,
+        "text": "φ",
+        "size": 15,
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Triangle des impédances : Z est l'hypoténuse d'un triangle de côtés R et X ; φ est le déphasage de la tension sur le courant.",
+     "alt": "Un triangle rectangle avec la base R, le côté vertical X et l'hypoténuse Z ; l'angle φ est marqué entre R et Z."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : bobine réelle en série",
+     "statement": "Une bobine est modélisée par R = 40 Ω en série avec L = 0,1 H. Elle est alimentée sous 230 V, 50 Hz. Calcule Z, I, cos φ et la puissance active.",
+     "steps": [
+      {
+       "md": "Réactance et impédance :",
+       "tex": "L\\omega = 0{,}1 \\times 314{,}16 = 31{,}42 \\text{ Ω} \\ ; \\quad Z = \\sqrt{40^2 + 31{,}42^2} = 50{,}86 \\text{ Ω}"
+      },
+      {
+       "md": "Courant efficace : I = 230 ÷ 50,86 = **4,52 A**."
+      },
+      {
+       "md": "Facteur de puissance : cos φ = R ÷ Z = 40 ÷ 50,86 = **0,786**."
+      },
+      {
+       "md": "Puissance active : P = R I² = 40 × 4,52² ≈ **818 W**."
+      }
+     ],
+     "answer": "Z ≈ 50,86 Ω ; I ≈ 4,52 A ; cos φ ≈ 0,786 ; P ≈ 818 W."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-electricite-01"
+    },
+    {
+     "type": "heading",
+     "text": "3. Puissances et facteur de puissance"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les trois puissances",
+     "md": "Pour un dipôle en régime sinusoïdal (valeurs efficaces U, I, déphasage φ) :\n- **Puissance active** $P = U I \\cos\\varphi$ (en W) : la puissance réellement utilisée ;\n- **Puissance réactive** $Q = U I \\sin\\varphi$ (en var) ;\n- **Puissance apparente** $S = U I$ (en VA), avec $S^2 = P^2 + Q^2$.\nLe **facteur de puissance** est $\\cos\\varphi = \\frac{P}{S}$. Pour un circuit série, $P = R I^2$."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pourquoi améliorer cos φ ?",
+     "md": "Pour une même puissance active, un cos φ faible impose un **courant plus grand**, donc davantage de **pertes par effet Joule** dans les lignes et des câbles plus gros. Les installations industrielles cherchent donc un cos φ proche de 1, souvent avec des condensateurs qui compensent l'effet inductif des moteurs."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : puissances d'un récepteur",
+     "statement": "Un récepteur monophasé absorbe I = 5 A sous U = 230 V et une puissance active de 920 W. Calcule S, cos φ et Q.",
+     "steps": [
+      {
+       "md": "Puissance apparente : S = U I = 230 × 5 = **1 150 VA**."
+      },
+      {
+       "md": "Facteur de puissance :",
+       "tex": "\\cos\\varphi = \\frac{P}{S} = \\frac{920}{1150} = 0{,}8"
+      },
+      {
+       "md": "Comme sin φ = √(1 − 0,8²) = 0,6, Q = S sin φ = 1 150 × 0,6 = **690 var**."
+      }
+     ],
+     "answer": "S = 1 150 VA ; cos φ = 0,8 ; Q = 690 var."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : exercice RLC série",
+     "md": "1. Calculer la pulsation $\\omega = 2\\pi f$.\n2. Calculer $L\\omega$, $\\frac{1}{C\\omega}$ puis X.\n3. Calculer Z, puis I = U/Z.\n4. En déduire cos φ = R/Z et P = R I².\n5. Vérifier : P = U I cos φ."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser la valeur **maximale** au lieu de la valeur efficace dans U = Z I.\n- Oublier de convertir µF en F ou mH en H.\n- Additionner R et X : l'impédance se calcule avec un **théorème de Pythagore**, pas par somme.\n- Confondre P (W), Q (var) et S (VA)."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-electricite-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-electricite-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "À la résonance d'un circuit RLC série, $L\\omega = \\frac{1}{C\\omega}$, soit $f_0 = \\frac{1}{2\\pi\\sqrt{LC}}$ : l'impédance est minimale (Z = R) et le courant maximal.",
+      "Les formules ont été vérifiées numériquement par un petit programme ; les valeurs de tension et de fréquence du réseau sont à confirmer."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact des séries E et TI incertain : niveau, notation (Z, X, φ), usage des nombres complexes et du triphasé à confirmer.",
+    "Formules vérifiées numériquement ; conventions de signe du déphasage (φ de u par rapport à i) à harmoniser avec le manuel.",
+    "Tension et fréquence du réseau (230 V, 50 Hz) : valeurs usuelles à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-physique-e-ti-electricite-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "Quelle est la période d'une tension de fréquence 50 Hz ? (réponds en ms)",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "ms",
+   "explanation": "T = 1 ÷ f = 1 ÷ 50 = 0,020 s = 20 ms.",
+   "method": "T = 1/f.",
+   "mistakes": [
+    "Donner 0,02 sans convertir en ms."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-electricite-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "La tension du réseau a pour valeur efficace 230 V. Calcule sa valeur maximale, arrondie au volt.",
+   "answer": 325,
+   "tolerance": 1,
+   "unit": "V",
+   "explanation": "Umax = U × √2 = 230 × 1,4142 ≈ 325,3 V, soit 325 V.",
+   "method": "Umax = U√2.",
+   "mistakes": [
+    "Diviser par √2 au lieu de multiplier."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-electricite-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "Une bobine idéale de 0,2 H est alimentée à 50 Hz. Calcule son impédance Lω en Ω (au dixième).",
+   "answer": 62.8,
+   "tolerance": 0.1,
+   "unit": "Ω",
+   "explanation": "ω = 2π × 50 = 314,16 rad/s ; Lω = 0,2 × 314,16 ≈ 62,8 Ω.",
+   "method": "Z = Lω avec ω = 2πf.",
+   "mistakes": [
+    "Utiliser f à la place de ω (Z = 0,2 × 50 = 10 Ω)."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-electricite-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "Un condensateur de 50 µF est alimenté à 50 Hz. Calcule son impédance 1/(Cω), en Ω au dixième.",
+   "answer": 63.7,
+   "tolerance": 0.1,
+   "unit": "Ω",
+   "explanation": "Cω = 50·10⁻⁶ × 314,16 = 0,015708 S ; 1 ÷ 0,015708 ≈ 63,7 Ω.",
+   "method": "Convertir µF en F avant de calculer.",
+   "mistakes": [
+    "Oublier le facteur 10⁻⁶ et trouver une impédance minuscule."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-electricite-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "Une résistance de 30 Ω est en série avec une bobine de 0,1 H, sous 230 V, 50 Hz. Calcule la puissance active P (en W, arrondie au watt).",
+   "answer": 841,
+   "tolerance": 2,
+   "unit": "W",
+   "explanation": "Lω = 31,42 Ω ; Z = √(30² + 31,42²) = 43,44 Ω ; I = 230 ÷ 43,44 = 5,29 A ; P = R I² = 30 × 5,29² ≈ 841 W.",
+   "method": "Z, puis I, puis P = R I².",
+   "mistakes": [
+    "Calculer P = U I (puissance apparente) au lieu de R I²."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-electricite-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "Un petit moteur est modélisé par une résistance R = 30 Ω en série avec une bobine de réactance X = 40 Ω (à 50 Hz). Il est alimenté sous 230 V, 50 Hz.",
+   "parts": [
+    {
+     "id": "tle-physique-e-ti-electricite-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'impédance Z (en Ω).",
+     "answer": 50,
+     "tolerance": 0,
+     "unit": "Ω",
+     "explanation": "Z = √(30² + 40²) = √2500 = 50 Ω."
+    },
+    {
+     "id": "tle-physique-e-ti-electricite-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le courant efficace I (en A).",
+     "answer": 4.6,
+     "tolerance": 0.05,
+     "unit": "A",
+     "explanation": "I = U ÷ Z = 230 ÷ 50 = 4,6 A."
+    },
+    {
+     "id": "tle-physique-e-ti-electricite-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le facteur de puissance cos φ.",
+     "answer": 0.6,
+     "tolerance": 0.005,
+     "explanation": "cos φ = R ÷ Z = 30 ÷ 50 = 0,6."
+    },
+    {
+     "id": "tle-physique-e-ti-electricite-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la puissance active (en W, au dixième).",
+     "answer": 634.8,
+     "tolerance": 0.1,
+     "unit": "W",
+     "explanation": "P = R I² = 30 × 4,6² = 634,8 W. Contrôle : U I cos φ = 230 × 4,6 × 0,6 = 634,8 W."
+    },
+    {
+     "id": "tle-physique-e-ti-electricite-06-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "On place en série un condensateur dont l'impédance annule la réactance de la bobine (impédance de 40 Ω à 50 Hz). Calcule sa capacité en µF (au dixième).",
+     "answer": 79.6,
+     "tolerance": 0.2,
+     "unit": "µF",
+     "explanation": "1/(Cω) = 40 Ω donc C = 1 ÷ (40 × 314,16) = 79,6 µF. Le circuit n'a alors plus que la résistance : cos φ = 1."
+    }
+   ],
+   "method": "Déterminer Z, puis I, cos φ et P ; vérifier P = U I cos φ.",
+   "mistakes": [
+    "Oublier de convertir F en µF dans la dernière question."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-ele-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "La valeur efficace d'une tension sinusoïdale de maximum 100 V est environ :",
+   "choices": [
+    "70,7 V",
+    "141 V",
+    "50 V",
+    "100 V"
+   ],
+   "answer": 0,
+   "explanation": "U = Umax ÷ √2 = 100 ÷ 1,414 ≈ 70,7 V."
+  },
+  {
+   "id": "tle-physique-e-ti-ele-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "Quelle est l'impédance d'une résistance de 100 Ω en alternatif ?",
+   "choices": [
+    "0 Ω",
+    "100 Ω",
+    "100/ω Ω",
+    "∞"
+   ],
+   "answer": 1,
+   "explanation": "Pour une résistance, Z = R."
+  },
+  {
+   "id": "tle-physique-e-ti-ele-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "Dans une bobine, la tension est :",
+   "choices": [
+    "en retard de 90° sur le courant",
+    "en phase avec le courant",
+    "en avance de 90° sur le courant",
+    "en opposition de phase"
+   ],
+   "answer": 2,
+   "explanation": "La bobine avance la tension sur le courant."
+  },
+  {
+   "id": "tle-physique-e-ti-ele-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "La puissance active s'exprime en :",
+   "choices": [
+    "volts-ampères (VA)",
+    "vars",
+    "joules par ampère",
+    "watts (W)"
+   ],
+   "answer": 3,
+   "explanation": "VA est l'unité de la puissance apparente et var celle de la puissance réactive."
+  },
+  {
+   "id": "tle-physique-e-ti-ele-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "Un récepteur de 2 300 VA et de cos φ = 0,5 consomme une puissance active de :",
+   "choices": [
+    "1 150 W",
+    "4 600 W",
+    "2 300 W",
+    "0 W"
+   ],
+   "answer": 0,
+   "explanation": "P = S cos φ = 2 300 × 0,5 = 1 150 W."
+  }
+ ]
+}

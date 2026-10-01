@@ -1,0 +1,630 @@
+{
+ "chapter": "tle-physique-e-ti-ch-machines",
+ "lessons": [
+  {
+   "id": "tle-physique-e-ti-machines",
+   "title": "Transformateurs et machines : rapport de transformation, rendement, pertes",
+   "minutes": 40,
+   "programRef": "Tle E/TI — Machines électriques (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser le rapport de transformation.",
+    "Faire un bilan de puissance avec pertes et rendement.",
+    "Exploiter un moteur à courant continu simple.",
+    "Calculer la vitesse de synchronisme et le glissement."
+   ],
+   "prerequisites": [
+    "tle-physique-e-ti-electricite"
+   ],
+   "exercises": [
+    "tle-physique-e-ti-machines-01",
+    "tle-physique-e-ti-machines-02",
+    "tle-physique-e-ti-machines-03",
+    "tle-physique-e-ti-machines-04",
+    "tle-physique-e-ti-machines-05",
+    "tle-physique-e-ti-machines-06"
+   ],
+   "selfCheck": [
+    "tle-physique-e-ti-mac-q1",
+    "tle-physique-e-ti-mac-q2",
+    "tle-physique-e-ti-mac-q3",
+    "tle-physique-e-ti-mac-q4",
+    "tle-physique-e-ti-mac-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Utiliser le rapport de transformation d'un transformateur monophasé ; faire un bilan de puissance avec pertes et rendement ; exploiter un moteur à courant continu simple et la vitesse d'un moteur asynchrone."
+    },
+    {
+     "type": "heading",
+     "text": "1. Le transformateur monophasé"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Principe et rapport de transformation",
+     "md": "Un **transformateur** comprend deux enroulements (primaire de N₁ spires, secondaire de N₂ spires) sur un **circuit magnétique** commun. Il fonctionne seulement en **alternatif**. Le **rapport de transformation** est $m = \\frac{N_2}{N_1} = \\frac{U_2}{U_1}$ : si m < 1 le transformateur est abaisseur de tension, si m > 1 élévateur."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 40,
+        "w": 160,
+        "h": 140,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 165,
+        "y": 75,
+        "w": 90,
+        "h": 70,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 60,
+        "x2": 178,
+        "y2": 60,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 80,
+        "x2": 178,
+        "y2": 80,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 100,
+        "x2": 178,
+        "y2": 100,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 120,
+        "x2": 178,
+        "y2": 120,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 140,
+        "x2": 178,
+        "y2": 140,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 160,
+        "x2": 178,
+        "y2": 160,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 60,
+        "x2": 302,
+        "y2": 60,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 80,
+        "x2": 302,
+        "y2": 80,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 100,
+        "x2": 302,
+        "y2": 100,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 120,
+        "x2": 302,
+        "y2": 120,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 140,
+        "x2": 302,
+        "y2": 140,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 160,
+        "x2": 302,
+        "y2": 160,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 100,
+        "text": "primaire",
+        "size": 13,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 120,
+        "text": "N1 ; U1",
+        "size": 13,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 100,
+        "text": "secondaire",
+        "size": 13,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 120,
+        "text": "N2 ; U2",
+        "size": 13,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 205,
+        "text": "circuit magnétique",
+        "size": 13
+       }
+      ]
+     },
+     "caption": "Schéma d'un transformateur : primaire (N1 spires), secondaire (N2 spires) et circuit magnétique.",
+     "alt": "Un cadre gris représentant le circuit magnétique ; sur le côté gauche, un enroulement bleu pour le primaire ; sur le côté droit, un enroulement rouge pour le secondaire."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Transformateur parfait",
+     "md": "Sans pertes, la puissance apparente se conserve : $U_1 I_1 = U_2 I_2$. Donc $\\frac{I_2}{I_1} = \\frac{U_1}{U_2} = \\frac{1}{m}$ : quand la tension est abaissée, le courant est **augmenté** dans la même proportion."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : transformateur abaisseur",
+     "statement": "Un transformateur parfait a N₁ = 1 150 spires et N₂ = 60 spires. Le primaire est branché sur 230 V. Calcule U₂, le rapport m, puis I₁ si le secondaire débite I₂ = 10 A.",
+     "steps": [
+      {
+       "md": "Tension secondaire :",
+       "tex": "U_2 = U_1 \\times \\frac{N_2}{N_1} = 230 \\times \\frac{60}{1150} = 12 \\text{ V}"
+      },
+      {
+       "md": "Rapport de transformation : m = 60 ÷ 1 150 ≈ 0,0522 (abaisseur)."
+      },
+      {
+       "md": "Courant primaire : I₁ = U₂ I₂ ÷ U₁ = 12 × 10 ÷ 230 ≈ **0,522 A**."
+      }
+     ],
+     "answer": "U₂ = 12 V ; m ≈ 0,0522 ; I₁ ≈ 0,522 A."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-machines-01"
+    },
+    {
+     "type": "heading",
+     "text": "2. Pertes et rendement"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pertes dans un transformateur réel",
+     "md": "- **Pertes fer** : dans le circuit magnétique ; elles dépendent surtout de la tension et de la fréquence et sont presque constantes quelle que soit la charge.\n- **Pertes cuivre** (par effet Joule) : $R_1 I_1^2 + R_2 I_2^2$ ; elles croissent avec le carré du courant."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Rendement",
+     "md": "Le rendement est le rapport de la puissance utile à la puissance absorbée (toujours inférieur à 1) :",
+     "tex": "\\eta = \\frac{P_{utile}}{P_{abs}} = \\frac{P_{utile}}{P_{utile} + \\text{pertes}}"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : rendement d'un transformateur",
+     "statement": "Un transformateur fournit P₂ = 400 W à sa charge. Les pertes fer sont de 20 W et les pertes cuivre de 30 W. Calcule la puissance absorbée et le rendement.",
+     "steps": [
+      {
+       "md": "Puissance absorbée : P₁ = P₂ + pertes = 400 + 20 + 30 = **450 W**."
+      },
+      {
+       "md": "Rendement :",
+       "tex": "\\eta = \\frac{400}{450} = 0{,}889 \\approx 88{,}9 \\text{ %}"
+      }
+     ],
+     "answer": "P₁ = 450 W ; rendement ≈ 88,9 %."
+    },
+    {
+     "type": "heading",
+     "text": "3. Moteurs : bilan de puissance"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Moteur à courant continu (excitation indépendante)",
+     "md": "Modèle simple : $U = E + R I$, où E est la **force contre-électromotrice** et R la résistance de l'induit. Bilan : puissance absorbée $P_a = U I$ ; pertes par effet Joule $R I^2$ ; puissance électromagnétique $P_{em} = E I$ ; puissance utile $P_u = P_{em} - $ pertes constantes. Couple utile : $C_u = \\frac{P_u}{\\Omega}$ avec $\\Omega = \\frac{2\\pi n}{60}$ (n en tr/min)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "W",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "absorbée",
+        "value": 2200,
+        "color": "blue"
+       },
+       {
+        "label": "Joule",
+        "value": 200,
+        "color": "red"
+       },
+       {
+        "label": "autres pertes",
+        "value": 100,
+        "color": "orange"
+       },
+       {
+        "label": "utile",
+        "value": 1900,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Bilan de puissance d'un moteur à courant continu (exemple chiffré ci-dessous).",
+     "alt": "Quatre barres : la puissance absorbée de 2 200 W, les pertes Joule de 200 W, les autres pertes de 100 W et la puissance utile de 1 900 W."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Moteur asynchrone triphasé : vitesse",
+     "md": "Le champ tournant a pour vitesse de synchronisme $n_s = \\frac{60 f}{p}$ en tr/min (f = fréquence du réseau, p = nombre de paires de pôles). Le rotor tourne un peu plus lentement, à la vitesse n : le **glissement** est $g = \\frac{n_s - n}{n_s}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : moteur à courant continu",
+     "statement": "Un moteur est alimenté sous U = 220 V, absorbe I = 10 A, R = 2 Ω, pertes constantes 100 W, vitesse 1 500 tr/min. Fais le bilan de puissance.",
+     "steps": [
+      {
+       "md": "E, puissance absorbée, pertes Joule :",
+       "tex": "E = 220 - 2 \\times 10 = 200 \\text{ V} \\ ; \\ P_a = 2200 \\text{ W} \\ ; \\ RI^2 = 200 \\text{ W}"
+      },
+      {
+       "md": "P_em = E I = 2 000 W ; P_u = 2 000 − 100 = 1 900 W ; rendement = 1 900 ÷ 2 200 ≈ **86,4 %**."
+      },
+      {
+       "md": "Ω = 2π × 1 500 ÷ 60 = 157,08 rad/s ; C_u = 1 900 ÷ 157,08 ≈ **12,1 N·m**."
+      }
+     ],
+     "answer": "Rendement ≈ 86,4 % ; couple utile ≈ 12,1 N·m."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que le transformateur « fabrique » de la puissance : il la **transfère** (P₂ ≤ P₁).\n- Brancher un transformateur sur du **courant continu** : il ne fonctionne pas.\n- Oublier de convertir tr/min en rad/s.\n- Confondre rendement (sans unité ou en %) et puissance (W)."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-machines-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-machines-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour transporter l'électricité sur de longues distances, on **élève** la tension : à puissance égale, le courant diminue et les pertes Joule en ligne aussi.",
+      "Les modèles de machines ci-dessus sont des cas simples ; le programme peut aussi aborder le triphasé et d'autres machines (à vérifier)."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact incertain : triphasé, machine synchrone, essais à vide/en court-circuit peuvent être attendus pour la série E ou TI.",
+    "Modèle simplifié du moteur à courant continu (flux constant, excitation indépendante) à confirmer.",
+    "Valeurs numériques inventées et recalculées ; aucun matériel réel n'est décrit."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-physique-e-ti-machines-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Un transformateur parfait a N₁ = 500 spires et N₂ = 100 spires. Le primaire est alimenté sous 230 V. Quelle est la tension au secondaire ?",
+   "answer": 46,
+   "tolerance": 0.1,
+   "unit": "V",
+   "explanation": "U₂ = 230 × 100 ÷ 500 = 46 V.",
+   "method": "U₂ = U₁ N₂ ÷ N₁.",
+   "mistakes": [
+    "Inverser le rapport et trouver 1 150 V."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-machines-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Un transformateur parfait abaisse 230 V à 23 V ; le secondaire débite 5 A. Quel est le courant primaire (en A) ?",
+   "answer": 0.5,
+   "tolerance": 0.005,
+   "unit": "A",
+   "explanation": "U₁ I₁ = U₂ I₂ donc I₁ = 23 × 5 ÷ 230 = 0,5 A.",
+   "method": "Conservation de U I.",
+   "mistakes": [
+    "Garder 5 A au primaire."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-machines-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Une machine absorbe 1 000 W et fournit 800 W de puissance utile. Quel est son rendement (en %) ?",
+   "answer": 80,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "η = 800 ÷ 1 000 = 0,8 = 80 %.",
+   "method": "η = Pu/Pa.",
+   "mistakes": [
+    "Calculer 1 000 ÷ 800 > 1."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-machines-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Un transformateur est alimenté sous 230 V ; il absorbe 2,0 A avec un facteur de puissance de 0,9 et fournit 360 W. Calcule son rendement (en %, au dixième).",
+   "answer": 87.0,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "P₁ = U I cos φ = 230 × 2,0 × 0,9 = 414 W ; η = 360 ÷ 414 ≈ 0,8696, soit 87,0 %.",
+   "method": "Puissance absorbée = U I cos φ, puis η = P₂/P₁.",
+   "mistakes": [
+    "Utiliser U I (apparente) au lieu de U I cos φ."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-machines-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Un moteur asynchrone à 2 paires de pôles est alimenté en 50 Hz et tourne à 1 440 tr/min. Calcule son glissement (en %).",
+   "answer": 4,
+   "tolerance": 0.05,
+   "unit": "%",
+   "explanation": "n_s = 60 × 50 ÷ 2 = 1 500 tr/min ; g = (1 500 − 1 440) ÷ 1 500 = 0,04 = 4 %.",
+   "method": "n_s = 60f/p puis g = (n_s − n)/n_s.",
+   "mistakes": [
+    "Utiliser f = 50 comme vitesse de synchronisme."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-machines-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Un moteur à courant continu à excitation indépendante est alimenté sous U = 220 V. Il absorbe I = 10 A ; la résistance de l'induit est R = 2 Ω ; les pertes constantes valent 100 W ; il tourne à n = 1 500 tr/min.",
+   "parts": [
+    {
+     "id": "tle-physique-e-ti-machines-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la force contre-électromotrice E (en V).",
+     "answer": 200,
+     "tolerance": 0,
+     "unit": "V",
+     "explanation": "E = U − R I = 220 − 2 × 10 = 200 V."
+    },
+    {
+     "id": "tle-physique-e-ti-machines-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la puissance absorbée (en W).",
+     "answer": 2200,
+     "tolerance": 0,
+     "unit": "W",
+     "explanation": "P = U I = 220 × 10 = 2 200 W."
+    },
+    {
+     "id": "tle-physique-e-ti-machines-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule les pertes par effet Joule (en W).",
+     "answer": 200,
+     "tolerance": 0,
+     "unit": "W",
+     "explanation": "R I² = 2 × 10² = 200 W."
+    },
+    {
+     "id": "tle-physique-e-ti-machines-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la puissance utile (en W), sachant que P_em = E I.",
+     "answer": 1900,
+     "tolerance": 0,
+     "unit": "W",
+     "explanation": "P_em = 200 × 10 = 2 000 W ; P_u = 2 000 − 100 = 1 900 W."
+    },
+    {
+     "id": "tle-physique-e-ti-machines-06-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule le couple utile (en N·m, au dixième).",
+     "answer": 12.1,
+     "tolerance": 0.1,
+     "unit": "N·m",
+     "explanation": "Ω = 2π × 1 500 ÷ 60 = 157,08 rad/s ; C_u = 1 900 ÷ 157,08 ≈ 12,1 N·m."
+    }
+   ],
+   "method": "Enchaîner E, Pabs, pertes, Pu, puis rendement et couple.",
+   "mistakes": [
+    "Oublier de convertir tr/min en rad/s."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-mac-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Un transformateur abaisseur a un rapport m = N₂/N₁ :",
+   "choices": [
+    "supérieur à 1",
+    "inférieur à 1",
+    "égal à 1",
+    "négatif"
+   ],
+   "answer": 1,
+   "explanation": "Le secondaire a moins de spires que le primaire."
+  },
+  {
+   "id": "tle-physique-e-ti-mac-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Un transformateur fonctionne :",
+   "choices": [
+    "en continu seulement",
+    "en continu et en alternatif",
+    "en alternatif seulement",
+    "sans circuit magnétique"
+   ],
+   "answer": 2,
+   "explanation": "Il faut un flux variable."
+  },
+  {
+   "id": "tle-physique-e-ti-mac-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Les pertes par effet Joule dans un enroulement sont proportionnelles :",
+   "choices": [
+    "au courant",
+    "à la tension",
+    "à la fréquence",
+    "au carré du courant"
+   ],
+   "answer": 3,
+   "explanation": "P = R I²."
+  },
+  {
+   "id": "tle-physique-e-ti-mac-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Un rendement de 1,2 est :",
+   "choices": [
+    "impossible",
+    "normal",
+    "possible pour un moteur",
+    "la valeur idéale"
+   ],
+   "answer": 0,
+   "explanation": "Le rendement est toujours ≤ 1 : on ne crée pas d'énergie."
+  },
+  {
+   "id": "tle-physique-e-ti-mac-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "La vitesse de synchronisme à 50 Hz pour p = 3 est :",
+   "choices": [
+    "1 500 tr/min",
+    "1 000 tr/min",
+    "3 000 tr/min",
+    "750 tr/min"
+   ],
+   "answer": 1,
+   "explanation": "n_s = 60 × 50 ÷ 3 = 1 000 tr/min."
+  }
+ ]
+}

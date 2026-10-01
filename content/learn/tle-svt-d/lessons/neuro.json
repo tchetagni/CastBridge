@@ -1,0 +1,712 @@
+{
+ "chapter": "tle-svt-d-ch-neuro",
+ "lessons": [
+  {
+   "id": "tle-svt-d-neuro",
+   "title": "Neurophysiologie : neurone, influx nerveux, synapse, réflexe, centres nerveux",
+   "minutes": 40,
+   "programRef": "Tle D — Neurophysiologie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Décrire un neurone et situer ses parties.",
+    "Interpréter un potentiel d'action et calculer une vitesse de conduction.",
+    "Expliquer la transmission synaptique chimique.",
+    "Analyser un arc réflexe et situer les centres nerveux."
+   ],
+   "exercises": [
+    "tle-svt-d-neuro-01",
+    "tle-svt-d-neuro-02",
+    "tle-svt-d-neuro-03",
+    "tle-svt-d-neuro-04",
+    "tle-svt-d-neuro-05",
+    "tle-svt-d-neuro-06"
+   ],
+   "selfCheck": [
+    "tle-svt-d-neu-q1",
+    "tle-svt-d-neu-q2",
+    "tle-svt-d-neu-q3",
+    "tle-svt-d-neu-q4",
+    "tle-svt-d-neu-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Décrire un neurone ; interpréter un enregistrement de potentiel d'action ; expliquer la transmission synaptique ; analyser un arc réflexe ; situer les principaux centres nerveux et leurs rôles."
+    },
+    {
+     "type": "heading",
+     "text": "1. Le neurone et les nerfs"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le neurone",
+     "md": "Le **neurone** est la cellule du tissu nerveux. Il comprend un **corps cellulaire** (noyau), des **dendrites** qui reçoivent les messages, un **axone** (fibre nerveuse) qui les conduit, et des **terminaisons axoniques** qui les transmettent. Beaucoup d'axones sont entourés d'une **gaine de myéline** interrompue par les **nœuds de Ranvier**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 100,
+        "r": 28,
+        "fill": "lightyellow",
+        "stroke": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 100,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 48,
+        "y1": 82,
+        "x2": 14,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 46,
+        "y1": 104,
+        "x2": 10,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 52,
+        "y1": 120,
+        "x2": 22,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 98,
+        "y1": 100,
+        "x2": 330,
+        "y2": 100,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "rect",
+        "x": 125,
+        "y": 93,
+        "w": 50,
+        "h": 14,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 93,
+        "w": 50,
+        "h": 14,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 245,
+        "y": 93,
+        "w": 50,
+        "h": 14,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 100,
+        "x2": 370,
+        "y2": 75,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 100,
+        "x2": 375,
+        "y2": 125,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 375,
+        "cy": 73,
+        "r": 5,
+        "fill": "red",
+        "stroke": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 380,
+        "cy": 127,
+        "r": 5,
+        "fill": "red",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 200,
+        "text": "corps cellulaire",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 28,
+        "text": "dendrites",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 70,
+        "text": "gaine de myéline",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 150,
+        "text": "axone",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 185,
+        "text": "terminaisons",
+        "size": 12
+       }
+      ]
+     },
+     "caption": "Schéma d'un neurone myélinisé (non à l'échelle).",
+     "alt": "Un corps cellulaire à gauche porte plusieurs dendrites. Un long axone part vers la droite, entouré de trois manchons de myéline, et se termine par deux terminaisons."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Nerf, fibre, neurone",
+     "md": "Un **nerf** est un faisceau de fibres nerveuses (axones). Il peut être **sensitif** (message de l'organe vers le centre nerveux), **moteur** (du centre vers un muscle ou une glande) ou **mixte**."
+    },
+    {
+     "type": "heading",
+     "text": "2. Le message nerveux"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Potentiel de repos et potentiel d'action",
+     "md": "Au repos, l'intérieur d'un axone est **négatif** par rapport à l'extérieur : c'est le **potentiel de repos** (de l'ordre de −70 mV). Une stimulation suffisante provoque une inversion brève : le **potentiel d'action** (PA). Il dure environ 1 à 2 ms, avec une **dépolarisation** puis une **repolarisation**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 210,
+        "x2": 405,
+        "y2": 210,
+        "color": "ink",
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 210,
+        "x2": 60,
+        "y2": 30,
+        "color": "ink",
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 56,
+        "y1": 100,
+        "x2": 405,
+        "y2": 100,
+        "color": "lightgrey",
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 104,
+        "text": "0",
+        "size": 12,
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 174,
+        "text": "−70",
+        "size": 12,
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 66,
+        "y": 24,
+        "text": "Potentiel de membrane (mV)",
+        "size": 12,
+        "anchor": "start"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         70,
+         170,
+         130,
+         170,
+         150,
+         150,
+         165,
+         72,
+         180,
+         68,
+         200,
+         110,
+         220,
+         185,
+         250,
+         174,
+         290,
+         170,
+         390,
+         170
+        ],
+        "closed": false,
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 214,
+        "x2": 130,
+        "y2": 226,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 244,
+        "text": "stimulation",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 240,
+        "text": "temps",
+        "size": 12
+       }
+      ]
+     },
+     "caption": "Enregistrement d'un potentiel d'action sur une fibre (valeurs indicatives).",
+     "alt": "Un tracé rouge reste à environ −70 mV, monte brusquement jusqu'à une valeur positive au-dessus de zéro, redescend en dessous du niveau de repos, puis revient au repos."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propriétés du PA",
+     "md": "- **Seuil** : en dessous d'une certaine intensité de stimulation, pas de PA.\n- **Loi du tout ou rien** : au-dessus du seuil, l'amplitude du PA ne dépend pas de l'intensité.\n- **Période réfractaire** : juste après un PA, la fibre ne peut pas produire immédiatement un autre PA.\n- L'intensité du stimulus est codée par la **fréquence** des PA, pas par leur amplitude."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Explication ionique et vitesse",
+     "md": "Lors de la dépolarisation, des ions **Na⁺** entrent dans la fibre ; lors de la repolarisation, des ions **K⁺** sortent. Une pompe rétablit ensuite les concentrations. La **vitesse de conduction** augmente avec le diamètre de la fibre et avec la myéline (conduction **saltatoire** de nœud en nœud). Sur un trajet : **vitesse = distance ÷ durée**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : vitesse de conduction",
+     "statement": "Fictif : deux électrodes réceptrices R1 et R2 sont placées sur un nerf à 12 cm l'une de l'autre. Le PA arrive en R1 à t = 0 ms et en R2 à t = 2,0 ms. Calcule la vitesse de conduction.",
+     "steps": [
+      {
+       "md": "On convertit : 12 cm = 0,12 m ; 2,0 ms = 0,0020 s."
+      },
+      {
+       "md": "On applique v = d ÷ t :",
+       "tex": "v = \\frac{0{,}12}{0{,}0020} = 60 \\text{ m/s}"
+      }
+     ],
+     "answer": "La vitesse de conduction est de **60 m/s**."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-neuro-01"
+    },
+    {
+     "type": "heading",
+     "text": "3. La synapse"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La synapse",
+     "md": "Une **synapse** est la zone de jonction entre un neurone et une autre cellule (neurone ou muscle). Elle comprend l'élément **présynaptique** (terminaison), la **fente synaptique** et l'élément **postsynaptique** (avec des **récepteurs**). La synapse neuromusculaire est la **plaque motrice**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Transmission chimique",
+     "md": "Le PA arrive dans la terminaison : des **vésicules** libèrent un **neuromédiateur** (par exemple l'**acétylcholine**) dans la fente. Il se fixe sur les récepteurs postsynaptiques et crée un nouveau signal dans la cellule suivante. La transmission est **unidirectionnelle** (de la terminaison vers l'élément postsynaptique) et introduit un petit **délai**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Excitation, inhibition, sommation",
+     "md": "Une synapse **excitatrice** favorise un PA postsynaptique ; une synapse **inhibitrice** s'y oppose. Le neurone postsynaptique **additionne** les influences reçues (sommation spatiale et temporelle) : un PA naît seulement si le seuil est atteint."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une substance bloque une synapse",
+     "statement": "Une substance se fixe sur les récepteurs de l'acétylcholine d'une plaque motrice sans les activer. Que se passe-t-il quand le nerf moteur est stimulé ?",
+     "steps": [
+      {
+       "md": "Le PA atteint la terminaison et l'acétylcholine est bien libérée dans la fente."
+      },
+      {
+       "md": "Les récepteurs étant occupés, l'acétylcholine ne peut plus se fixer : la fibre musculaire ne reçoit pas le signal."
+      },
+      {
+       "md": "Le muscle ne se contracte pas malgré un nerf fonctionnel : la transmission est bloquée **à la synapse** (principe d'action du curare)."
+      }
+     ],
+     "answer": "Paralysie du muscle : la substance bloque la synapse neuromusculaire, pas le nerf."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-neuro-02"
+    },
+    {
+     "type": "heading",
+     "text": "4. Le réflexe et les centres nerveux"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'arc réflexe",
+     "md": "Un **réflexe** est une réaction automatique, rapide et involontaire à un stimulus. L'**arc réflexe** comprend : un **récepteur** sensoriel, un **nerf sensitif**, un **centre nerveux** (souvent la moelle épinière), un **nerf moteur** et un **effecteur** (muscle). Dans la moelle, la racine **dorsale** est sensitive (avec un ganglion spinal), la racine **ventrale** est motrice."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les centres nerveux",
+     "md": "Le **système nerveux central** comprend l'**encéphale** (cerveau, cervelet, tronc cérébral) et la **moelle épinière**. Le **cerveau** traite les sensations et commande les mouvements volontaires ; le **cervelet** coordonne les mouvements et l'équilibre ; le **bulbe rachidien** (tronc cérébral) contrôle des fonctions vitales comme la respiration et le rythme cardiaque."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Raisonner sur des sections",
+     "md": "Pour savoir ce que chaque élément fait, on supprime un élément et on observe : si la **racine dorsale** est coupée, le réflexe disparaît et la sensibilité aussi ; si la **racine ventrale** est coupée, la sensibilité reste mais la contraction disparaît."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que le PA diminue avec la distance : il garde la **même amplitude**.\n- Croire qu'un stimulus plus fort donne un PA plus grand : c'est la **fréquence** qui augmente.\n- Confondre nerf (faisceau de fibres) et neurone (une cellule).\n- Penser que le réflexe passe par le cerveau : l'arc réflexe médullaire passe par la moelle."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-neuro-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le réflexe rotulien est un réflexe myotatique à une seule synapse centrale ; le réflexe de retrait d'un doigt brûlé fait intervenir plusieurs synapses.",
+      "Les valeurs de vitesse et de potentiel varient selon les fibres et l'animal : ici elles sont indicatives."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Valeurs (−70 mV, +30 mV, durée, vitesses) indicatives : à ajuster à celles du manuel utilisé en classe.",
+    "Vérifier si la sommation, les neuromédiateurs inhibiteurs et les voies motrices/sensitives centrales sont au programme de Tle D.",
+    "Les expériences (grenouille, chat, curare) varient selon les manuels : les données ici sont fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-svt-d-neuro-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "Quel élément du neurone conduit le message nerveux sur une grande distance ?",
+   "choices": [
+    "L'axone",
+    "Le noyau",
+    "Les dendrites",
+    "La fente synaptique"
+   ],
+   "answer": 0,
+   "explanation": "L'axone est la fibre qui conduit les PA depuis le corps cellulaire jusqu'aux terminaisons.",
+   "method": "Reconnaître les parties d'un neurone.",
+   "mistakes": [
+    "Citer les dendrites, qui reçoivent mais ne conduisent pas sur de longues distances."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-neuro-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "Fictif : un PA parcourt 0,30 m de nerf en 3,0 ms. Quelle est la vitesse de conduction ?",
+   "answer": 100,
+   "tolerance": 0.5,
+   "unit": "m/s",
+   "explanation": "v = 0,30 ÷ 0,0030 = 100 m/s.",
+   "method": "v = d ÷ t avec d en mètres et t en secondes.",
+   "mistakes": [
+    "Oublier de convertir les millisecondes en secondes (v = 0,10 m/s)."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-neuro-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "Selon la loi du tout ou rien, un stimulus très fort produit un PA plus ample qu'un stimulus juste suffisant.",
+   "answer": false,
+   "explanation": "Faux : au-dessus du seuil, l'amplitude du PA est la même. Un stimulus plus fort produit des PA plus fréquents.",
+   "method": "Distinguer amplitude et fréquence.",
+   "mistakes": [
+    "Confondre amplitude et fréquence du message."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-neuro-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "Associe chaque structure à son rôle.",
+   "pairs": [
+    [
+     "Nerf sensitif",
+     "Conduit le message de l'organe au centre"
+    ],
+    [
+     "Nerf moteur",
+     "Conduit l'ordre du centre au muscle"
+    ],
+    [
+     "Neuromédiateur",
+     "Libéré dans la fente synaptique"
+    ],
+    [
+     "Cervelet",
+     "Coordination des mouvements et équilibre"
+    ]
+   ],
+   "explanation": "Le nerf sensitif est afférent, le nerf moteur efférent ; le neuromédiateur transmet le signal d'une cellule à l'autre ; le cervelet coordonne les mouvements.",
+   "method": "Relier structure et fonction.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-neuro-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "On sectionne la racine ventrale d'un nerf rachidien chez un animal anesthésié, puis on pince la peau de la patte correspondante. Quel résultat est attendu ?",
+   "choices": [
+    "Contraction normale et absence de sensibilité",
+    "Pas de contraction du muscle de cette patte, mais le message sensitif arrive à la moelle",
+    "Aucun message sensitif n'entre dans la moelle",
+    "Contraction plus forte"
+   ],
+   "answer": 1,
+   "explanation": "La racine ventrale contient les fibres motrices : leur section supprime la réponse musculaire, mais les fibres sensitives (racine dorsale) conduisent toujours le message vers la moelle.",
+   "method": "Identifier quelle racine est sectionnée, puis ce qu'elle transporte.",
+   "mistakes": [
+    "Inverser les rôles des racines dorsale et ventrale."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-neuro-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "Fictif : on stimule un nerf moteur de grenouille et on enregistre le PA en deux points A et B distants de 9,0 cm. En A, le PA apparaît 1,0 ms après le stimulus ; en B, 2,5 ms après le stimulus. Ensuite, on applique sur la jonction nerf-muscle une substance bloquant les récepteurs de l'acétylcholine : les PA en A et B sont inchangés mais le muscle ne se contracte plus.",
+   "parts": [
+    {
+     "id": "tle-svt-d-neuro-06-a",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la vitesse de conduction entre A et B.",
+     "answer": 60,
+     "tolerance": 0.5,
+     "unit": "m/s",
+     "explanation": "Durée entre A et B : 2,5 − 1,0 = 1,5 ms = 0,0015 s. Distance : 0,090 m. v = 0,090 ÷ 0,0015 = 60 m/s."
+    },
+    {
+     "id": "tle-svt-d-neuro-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que montre l'inchangement des PA enregistrés en A et B ?",
+     "choices": [
+      "La substance bloque la conduction dans l'axone",
+      "La substance détruit le neurone",
+      "La substance n'agit pas sur la conduction le long de l'axone",
+      "La substance agit sur la moelle épinière"
+     ],
+     "answer": 2,
+     "explanation": "Les PA en A et B sont normaux : la conduction dans la fibre est intacte."
+    },
+    {
+     "id": "tle-svt-d-neuro-06-c",
+     "kind": "open",
+     "points": 2.5,
+     "prompt": "Explique pourquoi le muscle ne se contracte plus alors que le nerf conduit normalement.",
+     "model": "Le PA arrive à la terminaison et libère l'acétylcholine, mais les récepteurs postsynaptiques de la fibre musculaire sont occupés par la substance. Le neuromédiateur ne peut pas se fixer, aucun signal n'est créé dans la fibre musculaire et il n'y a pas de contraction. Le blocage est synaptique.",
+     "rubric": [
+      "Libération normale du neuromédiateur",
+      "Récepteurs occupés par la substance",
+      "Absence de signal postsynaptique, donc pas de contraction",
+      "Conclusion : blocage au niveau de la synapse"
+     ],
+     "explanation": "On localise le blocage en comparant ce qui fonctionne (conduction) et ce qui ne fonctionne pas (contraction)."
+    }
+   ],
+   "method": "Calculer la vitesse sur le trajet entre deux points, puis localiser un blocage en comparant les observations.",
+   "mistakes": [
+    "Utiliser le temps depuis le stimulus au lieu de la différence entre A et B."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-neu-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "Le potentiel de repos d'une fibre nerveuse est :",
+   "choices": [
+    "positif à l'intérieur",
+    "nul",
+    "identique à celui du potentiel d'action",
+    "négatif à l'intérieur par rapport à l'extérieur"
+   ],
+   "answer": 3,
+   "explanation": "L'intérieur de la fibre est négatif au repos."
+  },
+  {
+   "id": "tle-svt-d-neu-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "La fréquence des PA code :",
+   "choices": [
+    "l'intensité du stimulus",
+    "la longueur de l'axone",
+    "le type de neuromédiateur",
+    "le nombre de neurones"
+   ],
+   "answer": 0,
+   "explanation": "L'intensité du stimulus est codée par la fréquence des PA."
+  },
+  {
+   "id": "tle-svt-d-neu-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "La synapse transmet le message :",
+   "choices": [
+    "uniquement par la myéline",
+    "chimiquement, par un neuromédiateur",
+    "par un fil électrique",
+    "par le sang"
+   ],
+   "answer": 1,
+   "explanation": "Un neuromédiateur est libéré dans la fente synaptique."
+  },
+  {
+   "id": "tle-svt-d-neu-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "Dans un arc réflexe médullaire, le centre nerveux est :",
+   "choices": [
+    "le cervelet",
+    "l'oreille",
+    "la moelle épinière",
+    "le muscle"
+   ],
+   "answer": 2,
+   "explanation": "Le message sensitif est traité dans la moelle puis une commande motrice est renvoyée."
+  },
+  {
+   "id": "tle-svt-d-neu-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "Quel centre contrôle la respiration et le rythme cardiaque ?",
+   "choices": [
+    "Le cervelet",
+    "Le lobe frontal seul",
+    "La rétine",
+    "Le bulbe rachidien"
+   ],
+   "answer": 3,
+   "explanation": "Le bulbe (tronc cérébral) contrôle les fonctions vitales automatiques."
+  }
+ ]
+}
