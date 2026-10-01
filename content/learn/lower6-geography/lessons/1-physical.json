@@ -1,0 +1,1130 @@
+{
+ "chapter": "lower6-geography-physical",
+ "lessons": [
+  {
+   "id": "lower6-geography-tectonics",
+   "title": "Plate tectonics and plate boundaries",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board, Advanced Level Geography syllabus (Lower Sixth) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the structure of the Earth and the movement of plates",
+    "Distinguish constructive, destructive and conservative boundaries",
+    "Link boundaries to landforms, earthquakes and volcanoes"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-geography-physical-e01",
+    "lower6-geography-physical-e02",
+    "lower6-geography-physical-e03",
+    "lower6-geography-physical-e04",
+    "lower6-geography-physical-e05",
+    "lower6-geography-physical-e06"
+   ],
+   "selfCheck": [
+    "lower6-geography-tectonics-q1",
+    "lower6-geography-tectonics-q2",
+    "lower6-geography-tectonics-q3",
+    "lower6-geography-tectonics-q4",
+    "lower6-geography-tectonics-q5"
+   ],
+   "reviewNotes": [
+    "Plate speeds are given only as ‘a few centimetres a year’; check the figure used in the official syllabus.",
+    "Origin of the Cameroon Volcanic Line is debated: confirm how the syllabus presents it.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Plates",
+     "md": "The **lithosphere** (crust and top of the mantle) is broken into rigid **plates**. They move slowly, a few centimetres a year, over the hotter, softer **asthenosphere**. Causes include convection currents in the mantle, **ridge push** and **slab pull** (a cold, dense plate sinking pulls the rest of the plate with it)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Three kinds of boundary",
+     "md": "**Constructive (divergent):** plates move apart, magma rises, new crust forms (mid-ocean ridges, rift valleys). **Destructive (convergent):** plates move together; a dense oceanic plate is **subducted** (trenches, fold mountains, volcanoes, strong earthquakes). **Conservative (transform):** plates slide past each other; earthquakes but no crust created or destroyed."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 75,
+        "y": 22,
+        "text": "Constructive",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 22,
+        "text": "Destructive",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 22,
+        "text": "Conservative",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 80,
+        "x2": 15,
+        "y2": 80,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 80,
+        "x2": 135,
+        "y2": 80,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 80,
+        "x2": 205,
+        "y2": 80,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 80,
+        "x2": 235,
+        "y2": 80,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 365,
+        "y1": 60,
+        "x2": 365,
+        "y2": 40,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 100,
+        "x2": 345,
+        "y2": 120,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 130,
+        "text": "plates move apart",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 130,
+        "text": "plates move together",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 150,
+        "text": "plates slide past",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 160,
+        "text": "new crust forms",
+        "size": 12,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 160,
+        "text": "crust destroyed",
+        "size": 12,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 180,
+        "text": "crust kept",
+        "size": 12,
+        "anchor": "middle",
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "The three types of plate boundary (schematic).",
+     "alt": "Three small diagrams with arrows: constructive boundary with plates moving apart, destructive with plates moving together, conservative with plates sliding past."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Volcanoes and earthquakes are not only found at plate edges: hot spots and other zones exist.\n- Mount Cameroon lies on the Cameroon Volcanic Line, which is not a simple plate boundary and whose origin is still discussed by geologists.\n- Plates move, continents do not ‘float’ separately from them."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Identify the boundary",
+     "statement": "Plate A (oceanic) and plate B (continental) are moving towards each other. Name the boundary, the process and two landforms or hazards.",
+     "steps": [
+      "Plates moving together form a destructive boundary.",
+      "The denser oceanic plate A sinks beneath B: this is subduction.",
+      "Landforms: an ocean trench and fold mountains or a chain of volcanoes on plate B.",
+      "Hazards: powerful earthquakes and explosive eruptions."
+     ],
+     "answer": "Destructive boundary; subduction; trench, volcanoes/fold mountains; earthquakes and eruptions."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Explain a rift valley",
+     "statement": "East Africa has long, steep-sided valleys with lakes and volcanoes. Explain how plate movement can produce them.",
+     "steps": [
+      "Where the crust is pulled apart (a divergent setting), it is stretched and thinned.",
+      "Blocks of crust between faults drop down and form a rift valley with steep sides.",
+      "Magma rises through the weak crust and builds volcanoes.",
+      "Shallow earthquakes occur as the faults move."
+     ],
+     "answer": "Stretching and faulting drop blocks to form the valley; rising magma gives volcanoes and earthquakes."
+    }
+   ],
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-weathering",
+   "title": "Weathering and mass movement",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board, Advanced Level Geography syllabus (Lower Sixth) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish physical, chemical and biological weathering",
+    "Explain why chemical weathering dominates in the humid tropics",
+    "Describe types of mass movement and the factors that trigger them"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-geography-physical-e07",
+    "lower6-geography-physical-e08",
+    "lower6-geography-physical-e09",
+    "lower6-geography-physical-e10",
+    "lower6-geography-physical-e11",
+    "lower6-geography-physical-e12"
+   ],
+   "selfCheck": [
+    "lower6-geography-weathering-q1",
+    "lower6-geography-weathering-q2",
+    "lower6-geography-weathering-q3",
+    "lower6-geography-weathering-q4",
+    "lower6-geography-weathering-q5"
+   ],
+   "reviewNotes": [
+    "Deeply weathered tropical profiles: check how deeply the syllabus expects students to describe them.",
+    "Landslide risk statement for Cameroon is general; choose a local case study with the teacher.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Weathering",
+     "md": "**Weathering** is the breakdown of rock **in place**, with no transport. **Erosion** involves a moving agent (water, wind, ice). **Physical** weathering breaks rock without changing its minerals (heating and cooling, freeze-thaw, salt crystals). **Chemical** weathering changes minerals (carbonation, hydrolysis, oxidation). **Biological** weathering is caused by roots, burrowing animals and lichens."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Weathering in warm, wet climates",
+     "md": "Chemical reactions speed up with heat and water, so in the humid tropics rocks decay to great depths, forming thick weathered layers and clay-rich soils. In hot deserts temperature changes and salt crystals dominate. Freeze-thaw needs repeated frost, so it is rare in the lowland tropics."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 230,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         20,
+         190,
+         20,
+         120,
+         110,
+         50,
+         200,
+         80,
+         300,
+         140,
+         420,
+         180,
+         420,
+         190
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "grey"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 30,
+        "text": "Steep: rockfall, landslide",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 120,
+        "text": "Gentle: soil creep",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 215,
+        "text": "Heavy rain and cleared slopes raise the risk",
+        "size": 12,
+        "anchor": "middle",
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "Slope processes: steeper slopes favour rapid movement.",
+     "alt": "Slope profile showing a steep upper part with rockfalls and landslides and a gentle lower part with soil creep."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Mass movement",
+     "md": "**Mass movement** is the downslope movement of weathered material under gravity. It ranges from slow **soil creep** to **mudflows**, **slumps**, **landslides** and **rockfalls**. Triggers: steep slope, heavy rain that saturates soil, loss of vegetation, undercutting by rivers or roads, and earthquakes."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Weathering is not erosion",
+     "md": "Do not write that rivers ‘weather’ the valley: rivers erode. Landslides have occurred on steep, built-up hillsides in Cameroon during heavy rain, so slope management matters for planning."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Name the type",
+     "statement": "Rock containing limestone is dissolved slowly by rainwater that has absorbed carbon dioxide. Name the process and the group of weathering it belongs to.",
+     "steps": [
+      "Rainwater with dissolved CO₂ is a weak acid.",
+      "It reacts with calcium carbonate: this is carbonation.",
+      "A chemical change takes place, so it is chemical weathering."
+     ],
+     "answer": "Carbonation (chemical weathering)."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Explain a landslide",
+     "statement": "A steep hillside was cleared of trees for housing. After days of rain a section slid downhill. Explain why.",
+     "steps": [
+      "Roots held the soil together and trees intercepted rain; both were lost.",
+      "Rainfall filled the soil pores, adding weight and reducing friction between particles.",
+      "On a steep slope gravity then overcame the strength of the material.",
+      "Cutting into the slope for houses removed support at the base."
+     ],
+     "answer": "Loss of vegetation, saturation, steepness and undercutting triggered the movement."
+    }
+   ],
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-rivers",
+   "title": "River processes, landforms and flooding",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board, Advanced Level Geography syllabus (Lower Sixth) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe erosion, transport and deposition by rivers",
+    "Link landforms to the upper, middle and lower course",
+    "Interpret a storm hydrograph and explain flood risk"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-geography-physical-e13",
+    "lower6-geography-physical-e14",
+    "lower6-geography-physical-e15",
+    "lower6-geography-physical-e16",
+    "lower6-geography-physical-e17",
+    "lower6-geography-physical-e18"
+   ],
+   "selfCheck": [
+    "lower6-geography-rivers-q1",
+    "lower6-geography-rivers-q2",
+    "lower6-geography-rivers-q3",
+    "lower6-geography-rivers-q4",
+    "lower6-geography-rivers-q5"
+   ],
+   "reviewNotes": [
+    "Hydrograph reading skills: confirm whether the syllabus expects drainage-basin systems diagrams.",
+    "Case studies of local rivers (Wouri, Sanaga, Benue) to be chosen by the teacher; no statistics given.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Processes",
+     "md": "**Erosion:** hydraulic action, abrasion, attrition and solution. **Transport:** solution, suspension, saltation and traction (rolling). **Deposition** happens when velocity falls, for example at a bend, in a lake or at the mouth. Larger load needs faster flow; flow is fastest in flood."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Landforms along the long profile",
+     "md": "**Upper course:** steep, V-shaped valley, rapids, waterfalls, interlocking spurs. **Middle course:** wider valley, meanders with erosion on the outside bend and deposition on the inside. **Lower course:** flat floodplain, levees, oxbow lakes, and a **delta** or estuary at the mouth. Rivers such as the Sanaga and Wouri drain Cameroon to the Atlantic."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 240,
+      "items": [
+       {
+        "t": "text",
+        "x": 220,
+        "y": 16,
+        "text": "Long profile of a river",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "path",
+        "d": "M 30 40 Q 120 200 410 205",
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 30,
+        "x2": 140,
+        "y2": 190,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 30,
+        "x2": 280,
+        "y2": 190,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 225,
+        "text": "Upper course",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 225,
+        "text": "Middle course",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 225,
+        "text": "Lower course",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A river’s long profile is steep near the source and gentle near the mouth.",
+     "alt": "A curved line falling steeply then flattening, divided into upper, middle and lower course."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reading a hydrograph",
+     "md": "A **storm hydrograph** plots river discharge against time after rain. **Lag time** is the time between peak rainfall and peak discharge. A short lag time and steep rising limb mean a flashy, flood-prone river: steep slopes, impermeable rock, saturated soil, little vegetation and urban surfaces all shorten the lag."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Mistakes to avoid",
+     "md": "- A meander bend is eroded on the outside and has deposition on the inside, not the reverse.\n- An oxbow lake is a cut-off meander, not a type of delta.\n- Lag time is peak rainfall to peak discharge, not the length of the whole storm."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Lag time",
+     "statement": "Peak rainfall was at 10:00 and peak discharge at 16:00. Find the lag time. A town stream peaks 2 hours after rain; say which is flashier and why.",
+     "steps": [
+      "Lag time = 16:00 − 10:00 = 6 hours.",
+      "The town stream has a lag of 2 hours, which is shorter.",
+      "Concrete and drains carry water quickly to the channel: little infiltration."
+     ],
+     "answer": "6 hours; the urban stream is flashier because of impermeable surfaces."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Explain an oxbow lake",
+     "statement": "Describe how an oxbow lake forms.",
+     "steps": [
+      "Erosion on the outside of a meander and deposition on the inside make the loop narrower.",
+      "In a flood the river cuts through the neck of the loop.",
+      "Deposition seals the ends of the old loop.",
+      "The cut-off loop remains as a curved lake."
+     ],
+     "answer": "A meander neck is cut through in flood and the abandoned loop is sealed off."
+    }
+   ],
+   "chapter": "lower6-geography-physical"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-geography-physical-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-geography-tectonics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which boundary creates new crust?",
+   "choices": [
+    "Constructive",
+    "Conservative",
+    "Destructive",
+    "Collision of two continents"
+   ],
+   "answer": 0,
+   "explanation": "New crust forms where plates move apart and magma rises.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-geography-tectonics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Subduction happens at constructive boundaries.",
+   "answer": false,
+   "explanation": "Subduction occurs at destructive boundaries, where one plate sinks under another.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e03",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "lower6-geography-tectonics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each boundary type to a typical feature.",
+   "pairs": [
+    [
+     "Constructive",
+     "Mid-ocean ridge"
+    ],
+    [
+     "Destructive",
+     "Ocean trench"
+    ],
+    [
+     "Conservative",
+     "Transform fault"
+    ],
+    [
+     "Continental collision",
+     "Fold mountain chain"
+    ]
+   ],
+   "explanation": "Ridges form where plates diverge, trenches where oceanic crust is subducted, transform faults where plates slide past, fold mountains where continents collide.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-tectonics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is NOT a mechanism driving plate movement?",
+   "choices": [
+    "The Moon’s phases",
+    "Mantle convection",
+    "Ridge push",
+    "Slab pull"
+   ],
+   "answer": 0,
+   "explanation": "Plate motion is driven by mantle convection, slab pull and ridge push; the phases of the Moon play no part.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-tectonics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "People still live close to active volcanoes. Give three reasons.",
+   "model": "Volcanic soils are often very fertile, so farming is productive. Geothermal energy and minerals can be exploited. Volcanoes attract tourists and give jobs. Families also have land, homes and social ties there and may lack the means to move.",
+   "rubric": "Award one mark per reason (fertile soil, energy/minerals, tourism/jobs, attachment/lack of alternatives), maximum 3.",
+   "explanation": "Volcanic soils are often very fertile, so farming is productive. Geothermal energy and minerals can be exploited. Volcanoes attract tourists and give jobs. Families also have land, homes and social ties there and may lack the means to move.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e06",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "lower6-geography-tectonics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe and explain the features found at a destructive plate boundary where oceanic crust meets continental crust.",
+   "model": "The denser oceanic plate is subducted beneath the continental plate, forming a deep ocean trench. Friction and melting produce magma, which rises to form volcanoes on the continental plate. Compression crumples sediments into fold mountains. The sticking and sudden slipping of the plates causes strong earthquakes, some deep. Subduction destroys oceanic crust.",
+   "rubric": "Trench and subduction explained (1); magma/volcanoes (1); fold mountains (1); earthquakes with cause (1).",
+   "explanation": "The denser oceanic plate is subducted beneath the continental plate, forming a deep ocean trench. Friction and melting produce magma, which rises to form volcanoes on the continental plate. Compression crumples sediments into fold mountains. The sticking and sudden slipping of the plates causes strong earthquakes, some deep. Subduction destroys oceanic crust.",
+   "difficulty": 3,
+   "points": 4,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-tectonics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tectonics",
+   "prompt": "Which layer of the Earth is broken into plates?",
+   "choices": [
+    "The lithosphere",
+    "The inner core",
+    "The outer core",
+    "The atmosphere"
+   ],
+   "answer": 0,
+   "explanation": "The lithosphere (crust and uppermost mantle) is divided into plates.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-tectonics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tectonics",
+   "prompt": "A mid-ocean ridge is found at a",
+   "choices": [
+    "Conservative boundary",
+    "Constructive boundary",
+    "Hot spring only",
+    "Destructive boundary"
+   ],
+   "answer": 1,
+   "explanation": "Ridges mark places where plates diverge.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-tectonics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tectonics",
+   "prompt": "Fold mountains are best linked to",
+   "choices": [
+    "Plates sliding past",
+    "River erosion only",
+    "Plates moving apart",
+    "Compression where plates collide"
+   ],
+   "answer": 3,
+   "explanation": "Collision and compression crumple rock layers.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-tectonics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tectonics",
+   "prompt": "Slab pull is",
+   "choices": [
+    "A wave type in earthquakes",
+    "A type of fold",
+    "A volcanic gas",
+    "The pull of a sinking plate on the rest of the plate"
+   ],
+   "answer": 3,
+   "explanation": "The sinking edge is cold and dense and drags the plate.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-tectonics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tectonics",
+   "prompt": "A transform fault is where plates",
+   "choices": [
+    "Move apart",
+    "Melt completely",
+    "Collide head on",
+    "Slide past one another"
+   ],
+   "answer": 3,
+   "explanation": "Conservative boundaries have sideways movement.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-geography-weathering",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is an example of biological weathering?",
+   "choices": [
+    "Rain dissolving limestone",
+    "A river carrying pebbles",
+    "Rock splitting after daily heating",
+    "Tree roots widening a crack in rock"
+   ],
+   "answer": 3,
+   "explanation": "Plants and animals act mechanically or chemically on rock.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-geography-weathering",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Freeze-thaw weathering is the dominant process in the lowland equatorial forest.",
+   "answer": false,
+   "explanation": "It needs temperatures that fall below and rise above 0°C repeatedly; lowland equatorial areas do not freeze.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e09",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "lower6-geography-weathering",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the process to its type.",
+   "pairs": [
+    [
+     "Oxidation of iron minerals",
+     "Chemical"
+    ],
+    [
+     "Salt crystals prising grains apart",
+     "Physical"
+    ],
+    [
+     "Lichen acids attacking rock",
+     "Biological"
+    ],
+    [
+     "Slow downslope shuffle of soil",
+     "Mass movement"
+    ]
+   ],
+   "explanation": "Oxidation is chemical; salt crystallisation physical; lichens biological; soil creep is a mass movement, not weathering.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-weathering",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why is chemical weathering fast in the humid tropics?",
+   "choices": [
+    "Wind is always strong",
+    "High temperature and plentiful water speed up reactions",
+    "There is little vegetation",
+    "Frost is frequent"
+   ],
+   "answer": 1,
+   "explanation": "Warm, wet conditions favour chemical reactions.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-weathering",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain two ways in which human activity can increase the risk of landslides.",
+   "model": "Removing trees takes away roots and shelter from rain, so soil is weaker and wetter. Cutting slopes for roads and houses removes support. Poor drainage allows water to soak into the slope. Building heavy structures on steep ground adds load.",
+   "rubric": "One mark for each way and one for explaining the link, maximum 4 (two ways x 2).",
+   "explanation": "Removing trees takes away roots and shelter from rain, so soil is weaker and wetter. Cutting slopes for roads and houses removes support. Poor drainage allows water to soak into the slope. Building heavy structures on steep ground adds load.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e12",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "lower6-geography-weathering",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe the main types of mass movement and explain the factors that cause them.",
+   "model": "Mass movements include creep (slow), mudflow (wet, fluid), slump and landslide (blocks of material sliding) and rockfall (free fall from cliffs). They happen where gravity overcomes resistance. Steepness increases the downslope force. Water adds weight and lowers friction. Vegetation loss, undercutting and earthquakes can trigger movement. Weak, weathered rock fails more easily.",
+   "rubric": "Types described (2); factors named (2); links explained (1).",
+   "explanation": "Mass movements include creep (slow), mudflow (wet, fluid), slump and landslide (blocks of material sliding) and rockfall (free fall from cliffs). They happen where gravity overcomes resistance. Steepness increases the downslope force. Water adds weight and lowers friction. Vegetation loss, undercutting and earthquakes can trigger movement. Weak, weathered rock fails more easily.",
+   "difficulty": 3,
+   "points": 4,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-weathering-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-weathering",
+   "prompt": "Weathering differs from erosion because weathering",
+   "choices": [
+    "Needs a river",
+    "Takes place without transport of material",
+    "Only happens at night",
+    "Only happens in deserts"
+   ],
+   "answer": 1,
+   "explanation": "Erosion needs a moving agent.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-weathering-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-weathering",
+   "prompt": "Carbonation mainly attacks",
+   "choices": [
+    "Limestone",
+    "Volcanic glass only",
+    "Granite quartz",
+    "Sand grains only"
+   ],
+   "answer": 0,
+   "explanation": "Calcium carbonate dissolves in weak carbonic acid.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-weathering-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-weathering",
+   "prompt": "Soil creep is",
+   "choices": [
+    "A rapid avalanche of rock",
+    "A type of river flow",
+    "A volcanic hazard",
+    "A very slow downslope movement of soil"
+   ],
+   "answer": 3,
+   "explanation": "It is the slowest mass movement.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-weathering-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-weathering",
+   "prompt": "A common trigger for landslides is",
+   "choices": [
+    "Saturation of soil by heavy rain",
+    "Low slope angle",
+    "Dense root cover",
+    "A dry season"
+   ],
+   "answer": 0,
+   "explanation": "Water adds weight and lowers friction.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-weathering-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-weathering",
+   "prompt": "Red colour in tropical soils is mostly due to",
+   "choices": [
+    "Coal",
+    "Salt",
+    "Iron oxides",
+    "Limestone"
+   ],
+   "answer": 2,
+   "explanation": "Oxidised iron gives red and yellow tones.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-geography-rivers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which landform is typical of the upper course?",
+   "choices": [
+    "Wide floodplain",
+    "Waterfall",
+    "Delta",
+    "Oxbow lake"
+   ],
+   "answer": 1,
+   "explanation": "Steep upper courses have waterfalls and rapids.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-geography-rivers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Peak rainfall is at 08:00 and peak discharge at 14:30. What is the lag time in hours?",
+   "answer": 6.5,
+   "tolerance": 0.01,
+   "unit": "hours",
+   "explanation": "14:30 − 08:00 = 6 hours 30 minutes = 6.5 hours.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-geography-rivers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Deposition occurs mainly where river velocity increases.",
+   "answer": false,
+   "explanation": "Deposition occurs where velocity falls, such as inside meander bends or at the mouth.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-rivers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which factor would SHORTEN lag time?",
+   "choices": [
+    "A large lake upstream",
+    "Gentle slopes with deep soil",
+    "Urban tarmac and drains",
+    "Dense forest"
+   ],
+   "answer": 2,
+   "explanation": "Impermeable surfaces send water quickly to the river.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e17",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-rivers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match term and description.",
+   "pairs": [
+    [
+     "Levee",
+     "Raised bank built by flood deposits"
+    ],
+    [
+     "Delta",
+     "Deposit at a river mouth"
+    ],
+    [
+     "Meander",
+     "Bend in the river channel"
+    ],
+    [
+     "Traction",
+     "Rolling of large stones along the bed"
+    ]
+   ],
+   "explanation": "Each term has a standard definition.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-physical-e18",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "lower6-geography-rivers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why flooding is a growing problem in many tropical towns, and suggest two ways to reduce it.",
+   "model": "Towns grow over floodplains and cover soil with concrete, so rain runs off quickly and drains block with waste. Removing vegetation also increases run-off. Solutions: keep drainage channels clear and enlarged; stop building in flood-prone areas and protect wetlands; plant trees; give early warnings.",
+   "rubric": "Causes (2); two valid measures (2); development of at least one point (1).",
+   "explanation": "Towns grow over floodplains and cover soil with concrete, so rain runs off quickly and drains block with waste. Removing vegetation also increases run-off. Solutions: keep drainage channels clear and enlarged; stop building in flood-prone areas and protect wetlands; plant trees; give early warnings.",
+   "difficulty": 3,
+   "points": 4,
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-rivers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-rivers",
+   "prompt": "The river’s ability to carry load is greatest",
+   "choices": [
+    "When velocity is lowest",
+    "At the source only",
+    "In drought",
+    "In flood"
+   ],
+   "answer": 3,
+   "explanation": "High velocity and discharge mean higher capacity.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-rivers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-rivers",
+   "prompt": "Erosion by the river using stones in its load is",
+   "choices": [
+    "Abrasion",
+    "Solution",
+    "Saltation",
+    "Attrition"
+   ],
+   "answer": 0,
+   "explanation": "Abrasion is the scraping of bed and banks by load.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-rivers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-rivers",
+   "prompt": "A floodplain is found mainly in the",
+   "choices": [
+    "Source",
+    "Glacier",
+    "Lower course",
+    "Upper course"
+   ],
+   "answer": 2,
+   "explanation": "Deposition builds a wide, flat floodplain.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-rivers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-rivers",
+   "prompt": "Lag time is measured between",
+   "choices": [
+    "Peak rainfall and peak discharge",
+    "Flood and drought",
+    "Start and end of rain",
+    "Source and mouth"
+   ],
+   "answer": 0,
+   "explanation": "It indicates how fast a river responds.",
+   "chapter": "lower6-geography-physical"
+  },
+  {
+   "id": "lower6-geography-rivers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-rivers",
+   "prompt": "Which gives a longer lag time?",
+   "choices": [
+    "Paved urban basin",
+    "Bare steep slopes",
+    "Forested, gently sloping basin",
+    "Saturated clay"
+   ],
+   "answer": 2,
+   "explanation": "Vegetation and infiltration delay run-off.",
+   "chapter": "lower6-geography-physical"
+  }
+ ]
+}
