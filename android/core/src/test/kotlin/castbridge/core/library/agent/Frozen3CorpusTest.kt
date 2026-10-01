@@ -29,6 +29,10 @@ class Frozen3CorpusTest {
         assertEquals(shaFile.readText().trim(), CorpusEval.sha256(bytes), "naming/frozen-3.tsv was modified: it must stay frozen")
         val report = Dev3Eval.evaluate(CorpusEval.fromTsv(String(bytes)))
         println(report.summary("GELÉ-3"))
+        // the hand-written cases come first in the file: the most independent estimate (the generated ones reuse the DEV-3 templates with other titles)
+        val nHand = Frozen3Hand.CASES.distinctBy { it.c.input + "|" + it.c.folderIn }.size
+        val hand = Dev3Eval.Report(report.rows.take(nHand)); val gen = Dev3Eval.Report(report.rows.drop(nHand))
+        println("GELÉ-3 écrits à la main : ${hand.passed}/${hand.total} = ${"%.1f".format(hand.rate * 100)} % (omissions ${hand.omissions}, faux ${hand.falses}) ; générés : ${gen.passed}/${gen.total} = ${"%.1f".format(gen.rate * 100)} % (omissions ${gen.omissions}, faux ${gen.falses})")
         assertTrue(report.total >= 700, "frozen-3 set too small: ${report.total}")
         assertTrue(report.rate >= FLOOR, "frozen-3 rate ${report.rate} below the recorded floor $FLOOR")
     }

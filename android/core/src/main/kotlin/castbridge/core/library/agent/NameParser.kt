@@ -432,8 +432,9 @@ object NameParser {
             if (sn in 1..40) return Marker(m.range, sn, m.groupValues[2].toInt(), m.groupValues[3].toIntOrNull(), "series.nxm")
         }
         RX_EP_ONLY.find(s)?.let { m ->
-            if (!yearAfter(m.range.last)) {
-                val ep = firstNumber(m)!!
+            val epNumber = firstNumber(m)!!
+            if (!yearAfter(m.range.last) && epNumber !in 1900..2100) {   // « Folge 2012 » is a year, not the 2012th episode
+                val ep = epNumber
                 val sm = RX_SAISON_ONLY.find(s)
                 val sn = sm?.let { firstNumber(it) }
                 val range = when {
