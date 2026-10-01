@@ -120,7 +120,7 @@ open class ConsoleActivity : ComponentActivity() {
 
     @Composable private fun Issue(signer: Ed25519Signer) {
         var input by remember { mutableStateOf("") }; var production by remember { mutableStateOf(false) }
-        var unlimited by remember { mutableStateOf(false) }; var license by remember { mutableStateOf("") }
+        var permanent by remember { mutableStateOf(false) }; var license by remember { mutableStateOf("") }
         var purchase by remember { mutableStateOf("") }; var subscription by remember { mutableStateOf("") }
         var openProduct by remember { mutableStateOf("") }; var openDays by remember { mutableStateOf("30") }
         var token by remember { mutableStateOf<String?>(null) }; var fileContent by remember { mutableStateOf<String?>(null) }
@@ -158,9 +158,10 @@ open class ConsoleActivity : ComponentActivity() {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(!production, { production = false }, { Text("Essai") }); FilterChip(production, { production = true }, { Text("Production") })
             }
-            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                Text(if (unlimited) "Durée ILLIMITÉE (superadmin)" else "Valable ${ActivationPolicy.CODE_VALIDITY_HOURS} h pour l'installer")
-                Switch(unlimited, { unlimited = it; token = null })
+            Text("Le code est valable ${ActivationPolicy.CODE_VALIDITY_HOURS} h pour l'installer (pour tous les codes).", style = MaterialTheme.typography.bodySmall)
+            if (production) Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(if (permanent) "Licence d'usage PERMANENTE (superadmin)" else "Licence d'usage selon les droits ci-dessous")
+                Switch(permanent, { permanent = it; token = null })
             }
             if (production) {
                 OutlinedTextField(license, { license = it }, label = { Text("Identifiant de licence") }, singleLine = true, modifier = Modifier.fillMaxWidth())
@@ -184,19 +185,21 @@ open class ConsoleActivity : ComponentActivity() {
                             subscription.lines().filter { it.isNotBlank() }.forEach { l -> l.split(':').also { if (it.size != 3) throw IssueException("Abonnement : PRODUIT:BOUQUET:AAAA-MM-JJ") }.let {
                                 val end = runCatching { LocalDate.parse(it[2].trim()).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli() }.getOrNull() ?: throw IssueException("Date d'abonnement invalide")
                                 rights += Right.Subscription(it[0].trim(), it[1].split(',').map(String::trim).filter(String::isNotEmpty), start, end, 7 * day, false) } }
+                            if (permanent) rights += Right.Purchase("licence-permanente", listOf(ActivationPolicy.ALL_BUNDLE), now)      // never ends: needs the ISSUE_UNLIMITED scope on this key
                             if (openProduct.isNotBlank()) rights += Right.OpenAll(openProduct.trim(), start, start + (openDays.toIntOrNull() ?: throw IssueException("« Tout ouvert » : nombre de jours")) * day)
                         }
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
                         val lic = if (production) license.trim() else Activation.TRIAL_LICENSE
-                        val issued = issuer.issue(ActivationIssuer.Request(kind, full.first, full.third, issuedAt = now, rights = rights, license = lic, unlimited = unlimited))
+                        val issued = issuer.issue(ActivationIssuer.Request(kind, full.first, full.third, issuedAt = now, rights = rights, license = lic))
                         token = issued.token; fileContent = issued.fileContent
-                        store.journal("activation", full.first, kind.name, lic, if (unlimited) 0 else ActivationPolicy.CODE_VALIDITY_HOURS)
+                        store.journal(if (permanent && production) "permanente" else "activation", full.first, kind.name, lic, ActivationPolicy.CODE_VALIDITY_HOURS)
                     } else {
                         val code = DeviceCode.parse(input.trim()) ?: throw IssueException("Code d'appareil mal formé (16 caractères, contrôle compris) et demande complète illisible")
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
                         val hourIdx = ((now - 1767225600000L) / ActivationPolicy.HOUR_MS).toInt()
-                        token = issuer.issueCompact(kind, code, hourIdx, unlimited = unlimited)
-                        store.journal("compact", code, kind.name, "-", if (unlimited) 0 else ActivationPolicy.CODE_VALIDITY_HOURS)
+                        if (permanent && production) throw IssueException("Une licence permanente exige la demande d'appareil complète (fichier ou Bluetooth) : une clé à saisir ne porte aucun droit")
+                        token = issuer.issueCompact(kind, code, hourIdx)
+                        store.journal("compact", code, kind.name, "-", ActivationPolicy.CODE_VALIDITY_HOURS)
                         info = "Clé compacte (à saisir) : liée à ce code d'appareil, sans droits ni clés de lots. Pour une activation complète, collez la demande d'appareil exportée par la TV."
                     }
                 }.onFailure { error = (it as? IssueException)?.message ?: "Erreur : ${it.message}" }

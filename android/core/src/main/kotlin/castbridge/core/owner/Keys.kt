@@ -30,7 +30,7 @@ enum class KeyScope {
     REACTIVATE,
     /** Sign deferred orders (management policies, docs/agent-briefs/deferred-orders.md). The server key has it; no key gets it implicitly from another scope. */
     POLICY,
-    /** Issue an activation whose install window never closes (superadmin phone / desk only: never the server). Every other activation lives at most [ActivationPolicy.CODE_VALIDITY_HOURS] hours. */
+    /** Issue a PERMANENT usage licence (purchase of the bundle "tout"): superadmin phone / desk only, never the server. Every code can be installed during [ActivationPolicy.CODE_VALIDITY_HOURS] hours, this scope included. */
     ISSUE_UNLIMITED;
 
     companion object {

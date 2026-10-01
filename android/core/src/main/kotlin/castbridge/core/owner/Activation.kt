@@ -101,15 +101,17 @@ class RevocationState(val keys: Set<String> = emptySet(), val seats: Map<String,
  * activation needs; the licence seat must not be revoked; the sequence number must not go back for this key. [expect] is the kind of device doing the check. On acceptance the
  * sequence number is recorded in [seqState] (persist it).
  */
-/** Commercial policy of activation codes: a code can be INSTALLED during 48 hours from its creation, no longer (the rights it grants have their own dates). Superadmin-only exception: [UNLIMITED_NOT_AFTER]. */
+/**
+ * Commercial policy of activation codes: a code can be INSTALLED during 48 hours from its creation, no longer, for everybody (the rights it grants have their own dates).
+ * What the superadmin may add (scope ISSUE_UNLIMITED) is a PERMANENT usage licence: a purchase of the bundle [ALL_BUNDLE], which never ends.
+ */
 object ActivationPolicy {
     const val CODE_VALIDITY_HOURS = 48
     const val HOUR_MS = 3_600_000L
     const val CODE_VALIDITY_MS = CODE_VALIDITY_HOURS * HOUR_MS
-    /** `notAfter` of an unlimited activation (9999-12-31T23:59:59Z): needs the ISSUE_UNLIMITED scope on the signing key. */
-    const val UNLIMITED_NOT_AFTER = 253_402_300_799_000L
-    /** The compact key's window field when unlimited. */
-    const val UNLIMITED_UNITS = 0xFFFF
+    /** Bundle of "everything": bought, it is a permanent full licence; only a key with ISSUE_UNLIMITED may sign such a purchase. */
+    const val ALL_BUNDLE = "tout"
+    fun isPermanent(r: Right) = r is Right.Purchase && ALL_BUNDLE in r.bundleIds
 }
 
 class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Long = ActivationPolicy.CODE_VALIDITY_MS, private val skewMs: Long = 24L * 3600 * 1000,
@@ -128,12 +130,11 @@ class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Lon
         val allowed = if (a.kind == ActivationKind.TRIAL) key.allows(KeyScope.ISSUE_TRIAL) else key.allows(KeyScope.ISSUE_PRODUCTION) || key.allows(KeyScope.REACTIVATE)
         if (!allowed) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'a pas le droit de délivrer ce type d'activation")
         if (a.rights.any { it is Right.OpenAll } && !key.allows(KeyScope.COMMAND_OPEN_ALL)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer « tout ouvert »")
+        if (a.rights.any(ActivationPolicy::isPermanent) && !key.allows(KeyScope.ISSUE_UNLIMITED)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer de licence permanente")
         if (a.kind == ActivationKind.TRIAL && a.rights.isNotEmpty()) return no(Rejection.BAD_RIGHTS, "Une clé d'essai ne porte aucun droit")
         if (a.rights.filterIsInstance<Right.OpenAll>().any { it.endsAt - it.startsAt > MAX_OPEN_ALL_MS || it.endsAt <= it.startsAt }) return no(Rejection.BAD_RIGHTS, "« Tout ouvert » : 30 jours au plus")
         if (a.subject != expect) return no(Rejection.WRONG_SUBJECT, "Cette activation est celle d'un autre type d'appareil")
-        if (a.notAfter == ActivationPolicy.UNLIMITED_NOT_AFTER) {
-            if (!key.allows(KeyScope.ISSUE_UNLIMITED)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer d'activation illimitée")
-        } else if (a.notAfter - a.notBefore > maxWindowMs) return no(Rejection.WINDOW_TOO_LONG, "Fenêtre d'installation trop longue (48 h au plus)")
+        if (a.notAfter - a.notBefore > maxWindowMs) return no(Rejection.WINDOW_TOO_LONG, "Fenêtre d'installation trop longue (48 h au plus)")
         if (!DeviceIdentity.matches(a.factors, a.k, device))
             return ActivationResult.Rejected(Rejection.WRONG_DEVICE, "Cette activation n'est pas celle de cet appareil : déblocage manuel possible", suspect = true)
         if (revocations.seatRevoked(a)) return no(Rejection.REVOKED_SEAT, "Ce poste de la licence a été transféré ou révoqué")
@@ -174,6 +175,7 @@ object TvGate {
         val extraLots = live.flatMap { it.lots }.toSet()
         val bundles = (subscribed + extraBundles + if (openAll != null) setOf("tout") else emptySet()).toSortedSet()
         val label = when {
+            rights.any(ActivationPolicy::isPermanent) -> "Licence permanente"
             openAll != null -> "Tout ouvert (temporaire)"
             activations.any { it.kind == ActivationKind.PRODUCTION } || live.isNotEmpty() -> "Version complète"
             else -> "Version d'essai"
@@ -193,7 +195,7 @@ object CompactActivation {
     const val BYTES = HEADER + 64
     private const val DOMAIN = "castbridge-activation-compact-v1\n"
 
-    /** [notBeforeUnit] / [windowUnits] are HOURS in version 2 (current: exact 48 h) and DAYS in version 1 (old keys, still read, capped at 2 days). [windowUnits] = [ActivationPolicy.UNLIMITED_UNITS] means unlimited (version 2). */
+    /** [notBeforeUnit] / [windowUnits] are HOURS in version 2 (current: exact 48 h) and DAYS in version 1 (old keys, still read, capped at 2 days). */
     data class Header(val kind: ActivationKind, val keyTag: Int, val notBeforeUnit: Int, val windowUnits: Int, val setId: Int, val bind: ByteArray, val version: Int = 2) {
         fun bytes(): ByteArray {
             val b = ByteArray(HEADER)
@@ -256,10 +258,8 @@ object CompactActivation {
         if (!p.header.bind.contentEquals(bindOf(deviceCode))) return ActivationResult.Rejected(Rejection.WRONG_DEVICE, "Cette clé n'est pas celle de cette TV", suspect = true)
         val unit = if (p.header.version == 1) DAY_MS else HOUR_MS
         val from = EPOCH_MS + p.header.notBeforeUnit * unit
-        val unlimited = p.header.version == 2 && p.header.windowUnits == ActivationPolicy.UNLIMITED_UNITS
-        if (unlimited && !key.allows(KeyScope.ISSUE_UNLIMITED)) return ActivationResult.Rejected(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer de clé illimitée")
-        val to = if (unlimited) ActivationPolicy.UNLIMITED_NOT_AFTER else from + p.header.windowUnits * unit
-        if (!unlimited && to - from > ActivationPolicy.CODE_VALIDITY_MS) return ActivationResult.Rejected(Rejection.WINDOW_TOO_LONG, "Fenêtre trop longue (48 h au plus)")
+        val to = from + p.header.windowUnits * unit
+        if (to - from > ActivationPolicy.CODE_VALIDITY_MS) return ActivationResult.Rejected(Rejection.WINDOW_TOO_LONG, "Fenêtre trop longue (48 h au plus)")
         if (nowMs + skewMs < from) return ActivationResult.Rejected(Rejection.NOT_YET_VALID, "Clé pas encore valable")
         if (nowMs > to) return ActivationResult.Rejected(Rejection.WINDOW_CLOSED, "Clé périmée : à refaire (une clé est valable 48 h)")
         return ActivationResult.Accepted(Activation(p.header.kind, Subject.TV, key.keyId, 0L, "", from, from, to, Activation.TRIAL_LICENSE, "", 0, emptyMap(), emptyList(), ""), weakIdentity = false)

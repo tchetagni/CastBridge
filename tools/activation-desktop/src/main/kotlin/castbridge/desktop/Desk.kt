@@ -65,9 +65,9 @@ class Desk(private val home: File, private val signer: Signer, private val scope
     fun createLicense(license: String, seats: Int, maxTransfersPerYear: Int = LicenseBook.DEFAULT_TRANSFERS_PER_YEAR) = flow.createLicense(license, seats, maxTransfersPerYear)
 
     /** The compact key (165 characters) for manual typing: strictly bound to the device code, no rights list. */
-    fun compact(code: String, kind: ActivationKind = ActivationKind.TRIAL, setId: Int = 0, unlimited: Boolean = false): String {
+    fun compact(code: String, kind: ActivationKind = ActivationKind.TRIAL, setId: Int = 0): String {
         val hour = ((clock() - CompactActivation.EPOCH_MS) / ActivationPolicy.HOUR_MS).toInt().coerceAtLeast(0)      // the 48 h run from the creation (to the hour)
-        return issuer.issueCompact(kind, code, hour, ActivationPolicy.CODE_VALIDITY_HOURS, setId, unlimited)
+        return issuer.issueCompact(kind, code, hour, ActivationPolicy.CODE_VALIDITY_HOURS, setId)
     }
 
     /** An owner command for ONE TV; [challenge] is the one that TV just issued (valid 120 s, single use). */

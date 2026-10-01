@@ -56,8 +56,8 @@ object OwnerCli {
         io.out("""castbridge-owner : générateur d'activations (hors ligne)
   init       --vault FICHIER                     crée la clé (protégée par votre code) et affiche la clé publique à faire accepter par les TV
   pubkey     --vault FICHIER
-  compact    --vault F --device XXXX-XXXX-XXXX-XXXX [--kind trial|production] [--duree 48h|illimitee] [--set N]
-  activation --vault F --request FICHIER_DEMANDE [--kind trial|production] [--license ID] [--duree 48h|illimitee] [--start AAAA-MM-JJ]
+  compact    --vault F --device XXXX-XXXX-XXXX-XXXX [--kind trial|production] [--set N]
+  activation --vault F --request FICHIER_DEMANDE [--kind trial|production] [--license ID] [--permanente oui] [--start AAAA-MM-JJ]
              [--purchase PRODUIT:BOUQUET[,BOUQUET]]... [--subscription PRODUIT:BOUQUET:AAAA-MM-JJ]... [--open-all PRODUIT --open-days N]
              [--out-file DOSSIER]                 écrit le fichier « activation » pour Download/CastBridge de la clé USB
   inspect    --request FICHIER_DEMANDE           affiche le contenu d'une demande d'appareil
@@ -123,19 +123,19 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
         else -> throw Fail("--kind : trial ou production")
     }
 
-    /** `--duree 48h` (default: the install window of every activation) or `--duree illimitee` (superadmin key only: the TV refuses it from any other key). */
-    private fun unlimitedOf(o: Opts) = when (o.opt("--duree")) { null, "48h" -> false; "illimitee" -> true; else -> throw Fail("--duree : 48h ou illimitee") }
+    /** `--permanente oui` adds the PERMANENT usage licence (purchase of the bundle « tout », no end): superadmin key only, the TV refuses it from any other key. */
+    private fun permanentOf(o: Opts) = when (o.opt("--permanente")) { null, "non" -> false; "oui" -> true; else -> throw Fail("--permanente : oui ou non") }
 
     private fun compact(o: Opts, io: Io, now: () -> Long): Int {
         val device = o.need("--device"); val kind = kindOf(o)
         val code = DeviceCode.parse(device) ?: throw Fail("Code d'appareil mal formé (16 caractères, contrôle compris)")
         val signer = open(o, io)
-        val unlimited = unlimitedOf(o)
+        o.opt("--permanente")?.let { throw Fail("--permanente : une clé compacte ne porte aucun droit ; utilisez « activation » (fichier ou Bluetooth)") }
         val t = now(); val hour = ((t - EPOCH_2026_MS) / ActivationPolicy.HOUR_MS).toInt()      // the window starts at creation (to the hour)
-        val key = ActivationIssuer(signer).issueCompact(kind, device, hour, ActivationIssuer.MAX_WINDOW_HOURS, (o.opt("--set") ?: "0").toIntOrNull() ?: throw Fail("--set : nombre"), unlimited)
+        val key = ActivationIssuer(signer).issueCompact(kind, device, hour, ActivationIssuer.MAX_WINDOW_HOURS, (o.opt("--set") ?: "0").toIntOrNull() ?: throw Fail("--set : nombre"))
         io.out(key)
-        journal(o, "compact", code, kind.name, "-", if (unlimited) 0 else ActivationIssuer.MAX_WINDOW_HOURS, t)
-        io.err("Clé compacte émise pour $code (${kind.name.lowercase()}, " + (if (unlimited) "durée ILLIMITÉE" else "à installer dans les ${ActivationIssuer.MAX_WINDOW_HOURS} h") + "). À saisir sur la TV ou le téléphone.")
+        journal(o, "compact", code, kind.name, "-", ActivationIssuer.MAX_WINDOW_HOURS, t)
+        io.err("Clé compacte émise pour $code (${kind.name.lowercase()}, " + "à installer dans les ${ActivationIssuer.MAX_WINDOW_HOURS} h). À saisir sur la TV ou le téléphone.")
         return 0
     }
 
@@ -150,15 +150,19 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
             val n = (o.opt("--open-days") ?: "30").toIntOrNull() ?: throw Fail("--open-days : nombre")
             rights += Right.OpenAll(p, start, start + n * DAY)
         }
+        if (permanentOf(o)) {
+            if (kind == ActivationKind.TRIAL) throw Fail("--permanente : licence de production seulement (--kind production)")
+            rights += Right.Purchase("licence-permanente", listOf(ActivationPolicy.ALL_BUNDLE), t)
+        }
         val license = o.opt("--license") ?: if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else throw Fail("--license obligatoire pour la production")
-        val issued = ActivationIssuer(signer).issue(ActivationIssuer.Request(kind, code, fp, issuedAt = t, rights = rights, license = license, unlimited = unlimitedOf(o)))
+        val issued = ActivationIssuer(signer).issue(ActivationIssuer.Request(kind, code, fp, issuedAt = t, rights = rights, license = license))
         io.out(issued.token)
         o.opt("--out-file")?.let {
             val dir = File(it).also { d -> d.mkdirs() }; File(dir, issued.fileName).writeText(issued.fileContent)
             io.err("Fichier écrit : ${File(dir, issued.fileName).path} (à copier dans Download/CastBridge de la clé USB de la TV)")
         }
-        journal(o, "activation", code, kind.name, license, if (unlimitedOf(o)) 0 else ActivationIssuer.MAX_WINDOW_HOURS, t)
-        io.err("Activation émise pour $code (${kind.name.lowercase()}, licence $license, ${rights.size} droit(s), " + (if (unlimitedOf(o)) "durée ILLIMITÉE" else "à installer dans les ${ActivationIssuer.MAX_WINDOW_HOURS} h") + ").")
+        journal(o, "activation", code, kind.name, license, ActivationIssuer.MAX_WINDOW_HOURS, t)
+        io.err("Activation émise pour $code (${kind.name.lowercase()}, licence $license, ${rights.size} droit(s), " + (if (permanentOf(o)) "LICENCE PERMANENTE, " else "") + "à installer dans les ${ActivationIssuer.MAX_WINDOW_HOURS} h).")
         return 0
     }
 

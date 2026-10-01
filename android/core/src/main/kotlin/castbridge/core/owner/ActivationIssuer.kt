@@ -46,7 +46,7 @@ object SeatIds {
  */
 class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeyScope> = KeyScope.ALL, private val random: SecureRandom = SecureRandom()) {
     companion object {
-        /** An activation can be installed during 48 h from its creation (docs/ACTIVATION-FORMAT.md); only a key with ISSUE_UNLIMITED may issue an unlimited one. */
+        /** An activation can be installed during 48 h from its creation, for everybody (docs/ACTIVATION-FORMAT.md). */
         const val MAX_WINDOW_HOURS = ActivationPolicy.CODE_VALIDITY_HOURS
         const val MAX_OPEN_ALL_DAYS = 30
         const val MAX_GRACE_DAYS = 30
@@ -57,8 +57,8 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
     data class Request(
         val kind: ActivationKind, val deviceCode: String, val factors: Fingerprints, val issuedAt: Long,
         val subject: Subject = Subject.TV, val rights: List<Right> = emptyList(), val license: String = Activation.TRIAL_LICENSE, val seat: String? = null,
-        /** Start of the install window (default [issuedAt]) and its length in hours (1 to 48, default 48), or [unlimited] (needs the ISSUE_UNLIMITED scope). */
-        val notBefore: Long = issuedAt, val windowHours: Int = MAX_WINDOW_HOURS, val unlimited: Boolean = false, val nonce: String? = null, val k: Int? = null,
+        /** Start of the install window (default [issuedAt]) and its length in hours (1 to 48, default 48): the same for everybody. */
+        val notBefore: Long = issuedAt, val windowHours: Int = MAX_WINDOW_HOURS, val nonce: String? = null, val k: Int? = null,
         /** The key's sequence number (a persistent counter per tool is best); defaults to [issuedAt]. */
         val seq: Long? = null,
     )
@@ -81,8 +81,7 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         val code = DeviceCode.parse(r.deviceCode) ?: throw IssueException("Code d'appareil mal formé")
         need(code == DeviceCode.of(r.factors), "Le code d'appareil ne correspond pas aux empreintes de facteurs fournies")
         need(r.factors.n >= 1, "Aucun facteur d'identité")
-        if (r.unlimited) need(KeyScope.ISSUE_UNLIMITED in scopes, "Cette clé n'a pas le droit de délivrer une activation illimitée")
-        else need(r.windowHours in 1..MAX_WINDOW_HOURS, "Fenêtre d'installation hors bornes (1 à $MAX_WINDOW_HOURS heures)")
+        need(r.windowHours in 1..MAX_WINDOW_HOURS, "Fenêtre d'installation hors bornes (1 à $MAX_WINDOW_HOURS heures)")
         need(r.issuedAt > 0 && r.notBefore > 0, "Date invalide")
         need(if (r.kind == ActivationKind.TRIAL) KeyScope.ISSUE_TRIAL in scopes else (KeyScope.ISSUE_PRODUCTION in scopes || KeyScope.REACTIVATE in scopes), "Cette clé n'a pas le droit de délivrer ce type d'activation")
         if (r.kind == ActivationKind.TRIAL) {
@@ -99,7 +98,7 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         need(k in 1..r.factors.n, "k hors bornes")
         val seat = r.seat ?: SeatIds.of(r.license, r.factors)
         need(Activation.HEX.matches(seat), "Identifiant de poste invalide")
-        val notAfter = if (r.unlimited) ActivationPolicy.UNLIMITED_NOT_AFTER else r.notBefore + r.windowHours * HOUR
+        val notAfter = r.notBefore + r.windowHours * HOUR
         val unsigned = Activation(r.kind, r.subject, signer.keyId, r.seq ?: r.issuedAt, nonce, r.issuedAt, r.notBefore, notAfter, r.license, seat, k, r.factors.byKind, r.rights, "")
         val sig = Base64.getEncoder().encodeToString(signer.sign(unsigned.canonicalPayload().toByteArray(Charsets.UTF_8)))
         return Issued(unsigned.copy(signature = sig))
@@ -109,7 +108,10 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         need(Activation.ID.matches(r.productId), "Identifiant de produit invalide : ${r.productId}")
         need(r.bundleIds.isNotEmpty() && r.bundleIds.all { Activation.ID.matches(it) }, "Bouquet invalide dans le droit ${r.productId}")
         when (r) {
-            is Right.Purchase -> need(r.grantedAt > 0, "Date d'achat invalide")
+            is Right.Purchase -> {
+                need(r.grantedAt > 0, "Date d'achat invalide")
+                if (ActivationPolicy.isPermanent(r)) need(KeyScope.ISSUE_UNLIMITED in scopes, "Cette clé ne peut pas délivrer de licence permanente")
+            }
             is Right.Subscription -> {
                 need(r.endsAt > r.startsAt, "Abonnement : fin avant le début")
                 need(r.graceMs in 0..MAX_GRACE_DAYS * DAY, "Abonnement : tolérance hors bornes")
@@ -122,13 +124,12 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
     }
 
     /** The compact key for manual typing (trial or production product set), strictly bound to the device code. */
-    fun issueCompact(kind: ActivationKind, deviceCode: String, notBeforeHour: Int, windowHours: Int = MAX_WINDOW_HOURS, setId: Int = 0, unlimited: Boolean = false): String {
+    fun issueCompact(kind: ActivationKind, deviceCode: String, notBeforeHour: Int, windowHours: Int = MAX_WINDOW_HOURS, setId: Int = 0): String {
         val code = DeviceCode.parse(deviceCode) ?: throw IssueException("Code d'appareil mal formé")
-        need(notBeforeHour in 0..0xfffe && setId in 0..0xffff && (unlimited || windowHours in 1..MAX_WINDOW_HOURS), "Champ hors bornes (la date de départ tient sur 16 bits d'heures : jusqu'en 2033)")
-        if (unlimited) need(KeyScope.ISSUE_UNLIMITED in scopes, "Cette clé n'a pas le droit de délivrer une clé illimitée")
+        need(notBeforeHour in 0..0xfffe && setId in 0..0xffff && windowHours in 1..MAX_WINDOW_HOURS, "Champ hors bornes (la date de départ tient sur 16 bits d'heures : jusqu'en 2033)")
         need(if (kind == ActivationKind.TRIAL) KeyScope.ISSUE_TRIAL in scopes else KeyScope.ISSUE_PRODUCTION in scopes, "Cette clé n'a pas ce droit")
         need(kind == ActivationKind.PRODUCTION || setId == 0, "La clé d'essai porte l'ensemble 0")
-        val h = CompactActivation.Header(kind, CompactActivation.keyTag(signer.keyId), notBeforeHour, if (unlimited) ActivationPolicy.UNLIMITED_UNITS else windowHours, setId, CompactActivation.bindOf(code))
+        val h = CompactActivation.Header(kind, CompactActivation.keyTag(signer.keyId), notBeforeHour, windowHours, setId, CompactActivation.bindOf(code))
         return CompactActivation.encode(h, signer.sign(CompactActivation.signedText(h.bytes()).toByteArray(Charsets.UTF_8)))
     }
 

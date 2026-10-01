@@ -19,7 +19,7 @@ private fun tv(name: String, wifi: String = "10:20:30:40:50:60") = DeviceIdentit
 private val purchase = Right.Purchase("p-classe-cm2", listOf("classe-cm2"), NOW - DAY)
 
 private fun issue(s: Signer, fp: Fingerprints, license: String, at: Long = NOW, seat: String? = null, subject: Subject = Subject.TV, scopes: Set<KeyScope> = KeyScope.ALL, nonce: String = "00".repeat(8) + at.toString(16).padStart(8, '0')): Activation =
-    ActivationIssuer(s, scopes).issue(ActivationIssuer.Request(ActivationKind.PRODUCTION, DeviceCode.of(fp), fp, at, subject, listOf(purchase), license, seat, at - 3_600_000L, 48, false, nonce)).activation
+    ActivationIssuer(s, scopes).issue(ActivationIssuer.Request(ActivationKind.PRODUCTION, DeviceCode.of(fp), fp, at, subject, listOf(purchase), license, seat, at - 3_600_000L, 48, nonce)).activation
 
 class LicenseTest {
     private fun licence(id: String = "lic-1", seats: Int = 2, cap: Int = 2) = LicenseEvent.license(desk, NOW - 10 * DAY, id, seats, cap)

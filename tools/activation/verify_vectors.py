@@ -22,8 +22,12 @@ DAY = 86400000
 EPOCH_MS = 1767225600000
 HOUR = 3600000
 MAX_WINDOW = 48 * HOUR              # an activation can be installed during 48 h from its creation
-UNLIMITED_NOT_AFTER = 253402300799000   # 9999-12-31T23:59:59Z: needs the ISSUE_UNLIMITED scope
-UNLIMITED_UNITS = 0xFFFF
+ALL_BUNDLE = "tout"                 # bought, a permanent full licence: only a key with ISSUE_UNLIMITED may sign it
+
+
+def is_permanent(line):
+    f = line.split("|")
+    return f[0] == "purchase" and ALL_BUNDLE in f[2].split(",")
 MAX_OPEN_ALL = 30 * DAY
 CHALLENGE_TTL_MS = 120000
 PLACEHOLDER = {"", "unknown", "null", "none", "n/a", "default string", "not specified", "123456789abcdef0", "123456789abcdef", "0123456789abcdef", "020000000000"}
@@ -296,16 +300,15 @@ def verify_activation(c, keys, devices):
     opens = [r.split("|") for r in a["rights"] if r.startswith("openall|")]
     if opens and "COMMAND_OPEN_ALL" not in scopes:
         return ("rejected", "KEY_NOT_ALLOWED")
+    if any(is_permanent(r) for r in a["rights"]) and "ISSUE_UNLIMITED" not in scopes:
+        return ("rejected", "KEY_NOT_ALLOWED")
     if a["kind"] == "trial" and a["rights"]:
         return ("rejected", "BAD_RIGHTS")
     if any(int(o[3]) - int(o[2]) > MAX_OPEN_ALL or int(o[3]) <= int(o[2]) for o in opens):
         return ("rejected", "BAD_RIGHTS")
     if a["subject"] != c["expectSubject"]:
         return ("rejected", "WRONG_SUBJECT")
-    if e["expiresAt"] == UNLIMITED_NOT_AFTER:
-        if "ISSUE_UNLIMITED" not in scopes:
-            return ("rejected", "KEY_NOT_ALLOWED")
-    elif e["expiresAt"] - e["notBefore"] > MAX_WINDOW:
+    if e["expiresAt"] - e["notBefore"] > MAX_WINDOW:
         return ("rejected", "WINDOW_TOO_LONG")
     dev = devices[c["device"]]["fingerprints"]
     t = e["target"]
@@ -341,11 +344,9 @@ def issue_activation(c, keys, devices):
     code = parse_code(r.get("deviceCodeOverride") or dev["code"])
     if code is None or code != device_code(dev["fingerprints"]):
         return None
-    unlimited = bool(r.get("unlimited"))
-    if unlimited:
-        if "ISSUE_UNLIMITED" not in scopes:
-            return None
-    elif not 1 <= r["windowHours"] <= 48:
+    if not 1 <= r["windowHours"] <= 48:
+        return None
+    if any(is_permanent(line) for line in r["rights"]) and "ISSUE_UNLIMITED" not in scopes:
         return None
     if r["kind"] == "trial":
         if "ISSUE_TRIAL" not in scopes or r["rights"] or r["license"] != "trial":
@@ -360,7 +361,7 @@ def issue_activation(c, keys, devices):
     fp = dev["fingerprints"]
     seat = r["seat"] or hashlib.sha256(("castbridge-seat|%s|%s" % (r["license"], set_hash(fp).hex())).encode()).digest()[:8].hex()
     env = {"type": "activation", "kid": key["kid"], "seq": r["seq"] if r.get("seq") is not None else r["issuedAt"], "nonce": r["nonce"], "issuedAt": r["issuedAt"], "notBefore": r["notBefore"],
-           "expiresAt": UNLIMITED_NOT_AFTER if unlimited else r["notBefore"] + r["windowHours"] * HOUR, "target": {"kind": "device", "k": k_for(len(fp)), "factors": fp},
+           "expiresAt": r["notBefore"] + r["windowHours"] * HOUR, "target": {"kind": "device", "k": k_for(len(fp)), "factors": fp},
            "body": activation_body(r["kind"], r["subject"], r["license"], seat, r["rights"])}
     return finish(env, key)
 
@@ -424,11 +425,8 @@ def verify_compact(c, keys):
     unit = DAY if header[0] == 1 else HOUR           # version 1 counted days (old keys), version 2 counts hours (exact 48 h)
     start = EPOCH_MS + ((header[4] << 8) | header[5]) * unit
     window = (header[6] << 8) | header[7]
-    unlimited = header[0] == 2 and window == UNLIMITED_UNITS
-    if unlimited and "ISSUE_UNLIMITED" not in key["scopes"]:
-        return ("rejected", "KEY_NOT_ALLOWED")
-    end = UNLIMITED_NOT_AFTER if unlimited else start + window * unit
-    if not unlimited and end - start > MAX_WINDOW:
+    end = start + window * unit
+    if end - start > MAX_WINDOW:
         return ("rejected", "WINDOW_TOO_LONG")
     if c["nowMs"] + HOUR < start:
         return ("rejected", "NOT_YET_VALID")
@@ -512,8 +510,7 @@ def issue_command(c, keys, devices):
 def issue_compact(c, keys):
     r = c["request"]
     key = keys[c["signer"]]
-    window = UNLIMITED_UNITS if r.get("unlimited") else r["windowHours"]
-    header = compact_header(r["kind"], key_tag(key["kid"]), r["notBeforeHour"], window, r["setId"], bind_of(r["deviceCode"]))
+    header = compact_header(r["kind"], key_tag(key["kid"]), r["notBeforeHour"], r["windowHours"], r["setId"], bind_of(r["deviceCode"]))
     return compact_encode(header, sign(key["seed"], compact_signed_text(header).encode()))
 
 

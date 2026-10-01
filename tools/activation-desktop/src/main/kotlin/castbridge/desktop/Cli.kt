@@ -169,7 +169,7 @@ class Cli(private val env: Env) {
         val kind = if (a.flags.contains("production")) ActivationKind.PRODUCTION else ActivationKind.TRIAL
         val now = env.clock()
         a.get("jours")?.let { throw UsageException("--jours n'existe plus : une clé s'installe dans les 48 h suivant sa création (--illimitee : réservé aux clés superadmin)") }
-        val spec = IssueSpec(kind, if (a.get("sujet") == "phone") Subject.PHONE else Subject.TV, rights(a, now), a.get("licence") ?: Activation.TRIAL_LICENSE, unlimited = a.flags.contains("illimitee"))
+        val spec = IssueSpec(kind, if (a.get("sujet") == "phone") Subject.PHONE else Subject.TV, rights(a, now) + permanent(a, kind, now), a.get("licence") ?: Activation.TRIAL_LICENSE)
         val r = d.issue(device, spec)
         val dir = File(a.get("sortie") ?: "."); dir.mkdirs()
         val fileOut = File(dir, r.issued.fileName); fileOut.writeText(r.issued.fileContent)
@@ -182,12 +182,18 @@ class Cli(private val env: Env) {
         return 0
     }
 
+    /** `--permanente`: the PERMANENT usage licence (purchase of the bundle « tout »); the TV refuses it unless the signing key holds ISSUE_UNLIMITED. */
+    private fun permanent(a: Args, kind: ActivationKind, now: Long): List<castbridge.core.lots.Right> =
+        if (!a.flags.contains("permanente")) emptyList()
+        else if (kind != ActivationKind.PRODUCTION) throw UsageException("--permanente : licence de production seulement (--production)")
+        else listOf(castbridge.core.lots.Right.Purchase("licence-permanente", listOf(castbridge.core.owner.ActivationPolicy.ALL_BUNDLE), now))
+
     private fun compact(a: Args): Int {
         a.get("jours")?.let { throw UsageException("--jours n'existe plus : une clé s'installe dans les 48 h suivant sa création (--illimitee : réservé aux clés superadmin)") }
         val code = DeviceCode.parse(a.need("code")) ?: throw UsageException("Code d'appareil mal formé")
         val d = desk(a)
         val prod = a.flags.contains("production")
-        env.out.println(d.compact(code, if (prod) ActivationKind.PRODUCTION else ActivationKind.TRIAL, setId = (a.get("ensemble") ?: "0").toInt(), unlimited = a.flags.contains("illimitee")))
+        env.out.println(d.compact(code, if (prod) ActivationKind.PRODUCTION else ActivationKind.TRIAL, setId = (a.get("ensemble") ?: "0").toInt()))
         return 0
     }
 
@@ -255,10 +261,10 @@ Commandes (français ; alias anglais : keygen key trust device license issue com
   faire-confiance F  ajoute la clé publique d'un autre outil (téléphone propriétaire, serveur) à l'anneau
   appareil [F|-]     lit la « demande d'appareil » donnée par la TV (code=…, k=…, factor=TYPE|empreinte)
   licence ID --postes N [--transferts N]    crée une licence (un achat)
-  emettre --appareil F [--production] [--licence ID] [--illimitee] [--sujet tv|phone]   (clé à installer dans les 48 h ; --illimitee : réservé aux clés superadmin)
+  emettre --appareil F [--production] [--licence ID] [--permanente] [--sujet tv|phone]   (clé à installer dans les 48 h ; --permanente : licence d'usage sans fin, clés superadmin seulement)
           [--achat produit=b1,b2] [--abonnement produit=b1:jours[:tolérance[:auto]]] [--tout-ouvert produit:jours] [--droit ligne]
           [--sortie DOSSIER] [--qr]       jeton, fichier « activation » (clé USB de la TV) et code QR
-  cle-saisissable --code XXXX-XXXX-XXXX-XXXX [--illimitee] [--production --ensemble N]   dernier recours : 165 caractères à taper
+  cle-saisissable --code XXXX-XXXX-XXXX-XXXX [--production --ensemble N]   dernier recours : 165 caractères à taper
   commande --appareil F --pouvoir support|unlock|open_all --defi HEX [--jours N] [--action A] [--bouquets a,b] [--lots fn:scope,…]
   verifier JETON --appareil F [--maintenant MS]   vérifie un jeton avec l'anneau de ce bureau
   journal            jetons émis (date, TV, droits ; jamais la clé)

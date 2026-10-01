@@ -159,17 +159,20 @@ class ActivationTest {
         accepted(v.verify(tok, fp, T0 + 48 * h)); rejected(v.verify(tok, fp, T0 + 48 * h + 1), Rejection.WINDOW_CLOSED)
     }
 
-    @Test fun unlimitedInstallWindowNeedsTheUnlimitedScope() {
+    @Test fun permanentLicenceNeedsTheUnlimitedScopeAndTheInstallWindowStays48Hours() {
         val h = 3_600_000L
-        val unlimited = console.activation(fp, from = T0, to = ActivationPolicy.UNLIMITED_NOT_AFTER)
-        accepted(v.verify(unlimited, fp, T0 + 900 * day))                              // the console key has every scope
+        val permanent = Right.Purchase("licence-permanente", listOf(ActivationPolicy.ALL_BUNDLE), T0)
+        val tok = console.activation(fp, rights = listOf(permanent))
+        val act = accepted(v.verify(tok, fp, T0))                                       // the console key has every scope
+        val gate = TvGate.evaluate(listOf(act), emptyList(), T0 + 5_000 * day)           // 13 years later: still everything
+        assertTrue("tout" in gate.access.granted); assertEquals("Licence permanente", gate.label)
         val noUnlimited = KeyRing(listOf(console.signer.trusted(KeyScope.ALL - KeyScope.ISSUE_UNLIMITED)))
-        rejected(ActivationVerifier(noUnlimited).verify(unlimited, fp, T0), Rejection.KEY_NOT_ALLOWED)
-        assertFailsWith<IssueException> { ActivationIssuer(console.signer, KeyScope.ALL - KeyScope.ISSUE_UNLIMITED).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, T0, unlimited = true)) }
+        rejected(ActivationVerifier(noUnlimited).verify(tok, fp, T0), Rejection.KEY_NOT_ALLOWED)
+        assertFailsWith<IssueException> { ActivationIssuer(console.signer, KeyScope.ALL - KeyScope.ISSUE_UNLIMITED).issue(ActivationIssuer.Request(ActivationKind.PRODUCTION, DeviceCode.of(fp), fp, T0, rights = listOf(permanent), license = "lic-1")) }
         assertFailsWith<IssueException> { ActivationIssuer(console.signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, T0, windowHours = 49)) }
-        val typed = ActivationIssuer(console.signer).issueCompact(ActivationKind.TRIAL, DeviceCode.of(fp), 100, unlimited = true)
-        accepted(CompactActivation.verify(typed, console.ring(), listOf(console.trusted), DeviceCode.of(fp), CompactActivation.EPOCH_MS + 10_000 * h))
-        assertFailsWith<IssueException> { ActivationIssuer(console.signer, KeyScope.ALL - KeyScope.ISSUE_UNLIMITED).issueCompact(ActivationKind.TRIAL, DeviceCode.of(fp), 100, unlimited = true) }
+        // a permanent licence is still INSTALLED within 48 h: there is no unlimited install window any more
+        val late = console.activation(fp, issued = T0, from = T0, to = T0 + 48 * h, rights = listOf(permanent))
+        rejected(v.verify(late, fp, T0 + 48 * h + 1), Rejection.WINDOW_CLOSED)
     }
 
     // ---- what a TV may open ----
