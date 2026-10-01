@@ -132,12 +132,15 @@ class TvLotStore(
     fun receive(name: String, offset: Long, total: Long, bytes: ByteArray): Chunk = synchronized(lock) {
         val (id, _) = LotNames.parseFileName(name) ?: return Chunk.Refused("nom de lot invalide")
         if (!LotNames.valid(id)) return Chunk.Refused("nom de lot invalide")
-        if (total <= 0 || total > maxBytes) return Chunk.Refused("lot trop gros pour la TV (${LotStore.mo(total)} > ${LotStore.mo(maxBytes)})")
+        if (total <= 0) return Chunk.Refused("taille invalide")
+        if (total > maxBytes) return Chunk.Refused("lot trop gros pour la TV (${LotStore.mo(total)} > ${LotStore.mo(maxBytes)})")
+            .also { rejected.removeAll { r -> r.id == id }; rejected += LotRejection(id, LotNames.parseFileName(name)!!.second, it.reason, now()); runCatching { save() } }
         val part = partFile(name)
         val cur = if (part.isFile) part.length() else 0L
         if (offset != cur || cur + bytes.size > total) return Chunk.Conflict(cur)
-        if (inbox.usableSpace < total - cur + (4L shl 20)) return Chunk.Refused("espace disque insuffisant sur la TV")
-        try { inbox.mkdirs(); java.io.FileOutputStream(part, true).use { it.write(bytes) } }
+        inbox.mkdirs()
+        if (inbox.usableSpace < total - cur + (1L shl 20)) return Chunk.Refused("espace disque insuffisant sur la TV")
+        try { java.io.FileOutputStream(part, true).use { it.write(bytes) } }
         catch (e: IOException) { return Chunk.Refused("écriture impossible sur la TV") }
         Chunk.Received(cur + bytes.size)
     }

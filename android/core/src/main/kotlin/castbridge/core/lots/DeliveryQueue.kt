@@ -217,12 +217,28 @@ class LotDelivery(
         val plan: LotPlanner.Plan?,
     )
 
+    /**
+     * Brings the queue of [tv] up to date with the phone's store, WITHOUT any contact: the plan uses the last manifest the TV
+     * reported (or the full default budget for a TV never seen). Call it after every download so that "En attente d'envoi à la TV"
+     * is shown at once, whether or not the TV is in range.
+     */
+    fun enqueue(tv: String): LotPlanner.Plan {
+        val known = queue.seen(tv)?.manifest
+        val plan = LotPlanner.plan(needs(tv), store.catalog(), known?.lots?.map { it.meta } ?: emptyList(), known?.starterBytes ?: 0L, known?.maxBytes ?: LotBudget.TV_MAX_BYTES)
+        queue.reconcile(tv, plan.wanted.map { it to (plan.priority[it.id] ?: 0) }, null)
+        return plan
+    }
+
     fun deliver(tv: String, transport: LotTransport, cancelled: () -> Boolean = { false }): Report {
-        val m = transport.manifest() ?: (if (transport.canReadManifest) null else queue.seen(tv)?.manifest)
-            ?: return Report(false, emptyList(), emptyList(), emptyList(), emptyList(), queue.pendingCount(tv), null)
-        val fresh = transport.canReadManifest
-        val plan = LotPlanner.plan(needs(tv), store.catalog(), m.lots.map { it.meta }, m.starterBytes, m.maxBytes)
-        queue.reconcile(tv, plan.wanted.map { it to (plan.priority[it.id] ?: 0) }, if (fresh) m else null)
+        val live = transport.manifest()
+        if (live == null && transport.canReadManifest) {
+            val plan = enqueue(tv)                                       // not in range: the delivery waits, nothing is lost
+            return Report(false, emptyList(), emptyList(), emptyList(), plan.skipped, queue.pendingCount(tv), plan)
+        }
+        val fresh = live != null
+        val m = live ?: queue.seen(tv)?.manifest
+        val plan = LotPlanner.plan(needs(tv), store.catalog(), m?.lots?.map { it.meta } ?: emptyList(), m?.starterBytes ?: 0L, m?.maxBytes ?: LotBudget.TV_MAX_BYTES)
+        queue.reconcile(tv, plan.wanted.map { it to (plan.priority[it.id] ?: 0) }, live)
         if (fresh) transport.setPriority(plan.wanted.map { it.id })
         val sent = ArrayList<LotId>(); val refused = ArrayList<Pair<LotId, String>>(); val confirmed = ArrayList<LotId>()
         while (!cancelled()) {
