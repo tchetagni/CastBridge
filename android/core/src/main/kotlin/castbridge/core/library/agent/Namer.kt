@@ -113,6 +113,7 @@ object Namer {
             val date = p.date ?: mtimeDate
             val folder = when (p.origin) { "Capture", "Écran" -> folder(l.captures); else -> folder(l.family) }
             if (date == null) return Proposal(original.name, folder, p.rule, "sans date : nom conservé")
+            if (p.rule == "personal.own") return Proposal(original.name, folder, p.rule)   // already in our format: never touched again
             val time = p.time?.replace(':', 'h')
             val seq = if (time == null) p.seq?.let { " ($it)" } ?: "" else ""
             val base = noun + origin + SEP + date + (time?.let { " $it" } ?: "") + seq

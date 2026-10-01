@@ -31,8 +31,11 @@ class LearnedRules(private val kv: KeyValueStore, private val max: Int = 300) {
     @Synchronized fun recordEdit(proposedTitleKey: String, editedFileName: String): Boolean {
         if (proposedTitleKey.isBlank()) return false
         val ep = NameParser.parse(editedFileName)
+        // the title as typed (parsing would re-case "PB" into "Pb"): what comes before the episode marker, the year or the first " – "
+        val typed = editedFileName.substringBeforeLast('.').substringBefore(" – ").substringBefore(" - ")
+            .replace(Regex("(?i)\\s+s\\d{1,2}\\s?e\\d{1,3}.*$"), "").replace(Regex("\\s*\\((?:19|20)\\d\\d\\).*$"), "")
         val newTitle = when (ep.kind) {
-            Kind.SERIES, Kind.MOVIE -> ep.title
+            Kind.SERIES, Kind.MOVIE -> typed.ifBlank { ep.title }
             else -> ep.stem.ifBlank { ep.title }
         }.trim()
         if (newTitle.isBlank() || SafeName.checkName(newTitle) != null || newTitle.length > 100) return false

@@ -88,6 +88,8 @@ object NameParser {
 
     // ------------------------------------------------------------------ personal media (phone camera, messengers)
 
+    /** The names the agent itself produces: "Vidéo WhatsApp – 2024-03-15 14h22", so that a second run changes nothing. */
+    private val RX_OWN = Regex("^(Vidéo|Video|Audio|Photo|Capture d'écran|Screenshot|Enregistrement d'écran|Screen recording)( WhatsApp| Telegram)? – (\\d{4})-(\\d{2})-(\\d{2})(?: (\\d{2})h(\\d{2}))?(?: \\((\\d+)\\))?$")
     private val RX_WA_LONG = Regex("^WhatsApp[ _](Video|Image|Audio|Vid[ée]o|Ptt|Voice Note|Sticker|Document)[ _](\\d{4})-(\\d{2})-(\\d{2})[ _](?:at|à|a)[ _](\\d{1,2})[.:h](\\d{2})(?:[.:](\\d{2}))?(?:[ _]*\\((\\d+)\\))?$", RegexOption.IGNORE_CASE)
     private val RX_WA_SHORT = Regex("^(VID|IMG|AUD|PTT|STK|DOC)-(\\d{4})(\\d{2})(\\d{2})-WA(\\d{3,5})(?:[ _]*\\(\\d+\\))?$", RegexOption.IGNORE_CASE)
     private val RX_CAM_DT = Regex("^(VID|IMG|MOV|PXL|PANO|BURST|VIDEO|Screenrecorder|Screen[ _]?Recording|Screenshot|Record|REC)[-_ ](\\d{4})-?(\\d{2})-?(\\d{2})[-_ ]+(?:at[-_ ])?(\\d{2})[-.:_]?(\\d{2})[-.:_]?(\\d{2})?\\d*(?:[-_ ].*)?$", RegexOption.IGNORE_CASE)
@@ -103,6 +105,11 @@ object NameParser {
             val time = if (hh != null && mm != null && hh.toInt() in 0..23 && mm.toInt() in 0..59) "${hh.padStart(2, '0')}:$mm" else null
             val kind = if (media == Media.IMAGE) Kind.PHOTO else Kind.PERSONAL
             return Parsed(media, kind, ext, date = "$y-$m-$d", time = time, seq = seq, origin = o, confidence = 0.95, rule = rule)
+        }
+        RX_OWN.matchEntire(stem)?.let { m ->
+            val g = m.groupValues
+            val origin = when { g[2].isNotEmpty() -> g[2].trim(); g[1].startsWith("Capture") -> "Capture"; g[1].startsWith("Enreg") -> "Écran"; else -> "Caméra" }
+            mk(origin, g[3], g[4], g[5], g[6].ifEmpty { null }, g[7].ifEmpty { null }, g[8].toIntOrNull(), "personal.own")?.let { return it }
         }
         RX_WA_LONG.matchEntire(stem)?.let { m ->
             val g = m.groupValues
@@ -301,7 +308,7 @@ object NameParser {
     private val RX_SXE = Regex("(?iU)\\bs(\\d{1,2})\\s?e(\\d{1,3})(?:\\s?(?:-|e|-e|&|et)\\s?e?(\\d{1,3}))?\\b")
     private val RX_SAISON_EP = Regex("(?iU)\\b(?:saison|season)\\s*(\\d{1,2})\\s*[,-]?\\s*(?:episode|épisode|ep|e)\\s*\\.?\\s*(\\d{1,3})\\b")
     private val RX_NXM = Regex("(?iU)\\b(\\d{1,2})x(\\d{2,3})\\b")
-    private val RX_EP_ONLY = Regex("(?iU)\\b(?:episode|épisode|ep)\\s*\\.?\\s*(\\d{1,4})\\b|\\be(\\d{2,3})\\b")
+    private val RX_EP_ONLY = Regex("(?iU)\\b(?:episode|épisode|ep)\\s*\\.?\\s*(\\d{1,4})\\b|\\be(\\d{2,4})\\b")
     private val RX_SAISON_ONLY = Regex("(?iU)\\b(?:saison|season)\\s*(\\d{1,2})\\b|\\bs(\\d{1,2})\\b(?!\\s?e\\d)")
     private val RX_ANIME = Regex("^(.+?)\\s+-\\s+(\\d{2,4})(?:v\\d)?(?=\\s|$)")
 
@@ -373,6 +380,7 @@ object NameParser {
         val hasGroupPrefix = Regex("^\\s*\\[[^\\]]+\\]").containsMatchIn(stem0)
         val clipHint = CLIP_WORDS.containsMatchIn(stem0)
         var junk = junk0
+        val rawTags = rawTags(stem0)
 
         return when (media) {
             Media.APP, Media.ARCHIVE -> {
@@ -381,7 +389,7 @@ object NameParser {
                 Parsed(media, kind, ext, title = t, confidence = 0.6, rule = "file." + kind.name.lowercase(), copy = copy, hadJunk = junk, stem = t, nameLang = nameLang(t))
             }
             Media.IMAGE, Media.DOC, Media.OTHER -> lightParse(stripped, media, ext, folder, junk, copy)
-            else -> mediaParse(stripped, media, ext, folder, durationMs, currentYear, hasGroupPrefix, clipHint, junk, copy, stem0)
+            else -> mediaParse(stripped, media, ext, folder, durationMs, currentYear, hasGroupPrefix, clipHint, junk, copy, stem0, rawTags)
         }
     }
 
@@ -406,7 +414,7 @@ object NameParser {
     private fun tidy(s: String): String = s.replace(Regex("^[\\s\\-–—|:.,_#]+|[\\s\\-–—|:.,_#]+$"), "").replace(Regex("\\s{2,}"), " ")
 
     private fun mediaParse(stripped: String, media: Media, ext: String, folder: String, durationMs: Long, currentYear: Int,
-                           hasGroupPrefix: Boolean, clipHint: Boolean, junk0: Boolean, copy: Boolean, rawStem: String): Parsed {
+                           hasGroupPrefix: Boolean, clipHint: Boolean, junk0: Boolean, copy: Boolean, rawStem: String, rawTags: Pair<Int?, Audio?>): Parsed {
         var junk = junk0
         val text = normalizeSeparators(stripped)
         val lang = nameLang(text)
@@ -415,8 +423,8 @@ object NameParser {
 
         // ---- gather tokens and tags (resolution, language version) over the whole text
         val allTokens = textNoLang.split(' ').filter { it.isNotEmpty() }
-        var resolution: Int? = null
-        var audio: Audio? = null
+        var resolution: Int? = rawTags.first
+        var audio: Audio? = rawTags.second
         for ((i, t) in allTokens.withIndex()) {
             val l = t.lowercase()
             RX_RES_TOKEN.matchEntire(l)?.let { if (resolution == null) resolution = it.groupValues[1].toInt() }
@@ -520,6 +528,19 @@ object NameParser {
         val plain = if (codeLike) rawStem else tidy(tokens.joinToString(" "))
         return Parsed(media, Kind.UNKNOWN, ext, title = plain, resolution = resolution, audio = audio, subLang = subLang, nameLang = lang, confidence = if (codeLike) 0.2 else 0.3,
             rule = "unknown.video", copy = copy, hadJunk = junk, stem = plain)
+    }
+
+    /** Resolution and language version written anywhere in the raw name, even inside brackets that cleaning removes ("[VOSTFR]"). */
+    private fun rawTags(raw: String): Pair<Int?, Audio?> {
+        var res: Int? = null
+        var audio: Audio? = null
+        for (t in raw.split(Regex("[^\\p{L}\\p{N}]+")).filter { it.isNotEmpty() }) {
+            val l = t.lowercase()
+            RX_RES_TOKEN.matchEntire(l)?.let { if (res == null && it.groupValues[1].toInt() in 240..4320) res = it.groupValues[1].toInt() }
+            if (l == "4k" || l == "uhd") res = 2160
+            if (audio == null) LANG_STRONG[l]?.let { audio = it }
+        }
+        return res to audio
     }
 
     private fun subtitleLang(text: String): Pair<String, String>? {
