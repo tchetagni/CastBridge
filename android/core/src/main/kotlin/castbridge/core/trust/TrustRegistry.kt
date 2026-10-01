@@ -146,7 +146,7 @@ class TrustRegistry(
         }
         tokens.values.removeAll { !phones.containsKey(it.address) }
         purge()
-        if (recoveredFromBackup == false) { phones.clear(); tokens.clear() }   // damaged and no good copy: nothing is believed, the phones must be added again (new install id tells them)
+        if (recoveredFromBackup == false) { phones.clear(); tokens.clear(); installId = newInstallId(random) }   // damaged and no good copy: nothing is believed, the phones must be added again (new install id tells them)
     }
 
     companion object {
@@ -158,7 +158,8 @@ class TrustRegistry(
         /** True for a legacy file (no checksum line) or one whose checksum matches; false when truncated or edited. */
         internal fun intact(text: String): Boolean {
             val i = text.lastIndexOf("\n$CHECK\t") + 1
-            if (i == 0) return !text.contains('\u0000')                 // legacy format; a file of zeros is what a power cut leaves
+            if (!text.startsWith("I\t")) return !text.contains('\u0000')    // legacy format (no id line, no checksum); a file of zeros is what a power cut leaves
+            if (i == 0) return false                                    // new format without its checksum line: cut short
             return text.substring(i).trim().removePrefix("$CHECK\t") == digest(text.substring(0, i))
         }
         private val TOKEN_FORMAT = Regex("^cbk_[0-9a-f]{64}$")
