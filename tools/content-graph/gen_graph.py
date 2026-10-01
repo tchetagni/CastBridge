@@ -26,6 +26,8 @@ YEARS = {
     14: ("l1", "l1-en", "Licence 1 / BTS 1", "Level 1 (L1) / HND 1"), 15: ("l2", "l2-en", "Licence 2 / BTS 2", "Level 2 (L2) / HND 2"),
 }
 EXAMS = {6: ["cep", "fslc"], 10: ["bepc"], 11: ["gce-ol"], 12: ["probatoire"], 13: ["bac", "gce-al"], 14: [], 15: ["bts", "licence"]}
+QUIZ_FIELDS = ["droit", "economie", "mathematiques", "physique", "psychologie", "geographie", "litterature", "histoire",
+               "informatique", "chimie", "biologie", "philosophie", "sociologie"]
 DOMAINS = {  # file -> (prefix, fr, en, subsystems)
     "mathematiques": ("math", "Mathématiques", "Mathematics", "both"),
     "francais": ("fra", "Langue française", "French language", "fr"),
@@ -52,6 +54,15 @@ def scopes():
         out.append({"id": sid, "title": {"fr": tfr, "en": ten}, "lang": "fr", "ord": y, "kind": "theme", "levels": ["N0", "N1"], "tv": True, "feature": "learn|quiz"})
         out.append({"id": sid + "-exc", "title": {"fr": tfr + " (excellence)", "en": ten + " (excellence)"}, "lang": "fr", "ord": y, "kind": "theme",
                     "levels": ["N2", "N3", "N4"], "tv": True, "feature": "learn|quiz"})
+    # quiz-only themes: general knowledge (70 % Cameroon / 20 % Africa / 10 % World) and university fields
+    for sid, tfr, ten in (("culture-cm", "Culture générale : Cameroun", "General knowledge: Cameroon"),
+                          ("culture-af", "Culture générale : Afrique", "General knowledge: Africa"),
+                          ("culture-monde", "Culture générale : Monde", "General knowledge: World")):
+        out.append({"id": sid, "title": {"fr": tfr, "en": ten}, "lang": "fr", "ord": 6, "kind": "theme", "levels": ["N1"], "tv": True, "feature": "quiz"})
+    for fld in QUIZ_FIELDS:
+        for lv, y in (("l1", 14), ("l2", 15), ("l3", 15)):
+            out.append({"id": fld + "-" + lv, "title": {"fr": "Quiz %s %s" % (fld, lv.upper()), "en": "Quiz %s %s" % (fld, lv.upper())}, "lang": "fr", "ord": y,
+                        "kind": "theme", "levels": ["N1"], "tv": True, "feature": "quiz"})
     return out
 
 
