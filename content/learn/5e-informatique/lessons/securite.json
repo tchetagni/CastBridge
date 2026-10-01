@@ -1,0 +1,632 @@
+{
+ "chapter": "5e-informatique-securite",
+ "lessons": [
+  {
+   "id": "5e-informatique-securite-vie-privee",
+   "title": "Mots de passe, arnaques et vie privée",
+   "minutes": 25,
+   "programRef": "Programme d'informatique de 5e (MINESEC) — découpage exact à vérifier sur le texte officiel — sécurité, protection des données personnelles",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Créer un mot de passe solide et le garder secret.",
+    "Reconnaître les arnaques courantes (hameçonnage, faux gains, demande de codes) et protéger ses informations personnelles."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-informatique-securite-vie-privee-01",
+    "5e-informatique-securite-vie-privee-02",
+    "5e-informatique-securite-vie-privee-03",
+    "5e-informatique-securite-vie-privee-04",
+    "5e-informatique-securite-vie-privee-05",
+    "5e-informatique-securite-vie-privee-06"
+   ],
+   "selfCheck": [
+    "5e-informatique-securite-vie-privee-q1",
+    "5e-informatique-securite-vie-privee-q2",
+    "5e-informatique-securite-vie-privee-q3",
+    "5e-informatique-securite-vie-privee-q4",
+    "5e-informatique-securite-vie-privee-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Données personnelles et vie privée",
+     "md": "Les **données personnelles** sont les informations qui permettent de t'identifier : nom, adresse, numéro de téléphone, photos, établissement, mot de passe. La **vie privée** est ton droit de décider qui y a accès. Ce qui est publié sur Internet peut être copié et rester longtemps."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Un mot de passe solide",
+     "md": "- **Long** : au moins 8 à 12 caractères.\n- **Varié** : lettres majuscules et minuscules, chiffres, signes.\n- **Pas d'information évidente** : ni ton nom, ni ta date de naissance, ni « 123456 ».\n- **Un mot de passe différent** par compte important.\n- **Secret** : on ne le donne à personne (même à un ami), on ne l'écrit pas à la vue de tous."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : comparer",
+     "statement": "Quel mot de passe est le plus solide : « amina », « Amina2012 » ou « Pq7!rN4tZ »  ?",
+     "steps": [
+      {
+       "md": "« amina » est un prénom, très court."
+      },
+      {
+       "md": "« Amina2012 » contient un prénom et une date probable."
+      },
+      {
+       "md": "« Pq7!rN4tZ » est long, varié et sans sens évident."
+      }
+     ],
+     "answer": "**Pq7!rN4tZ**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un SMS suspect",
+     "statement": "Boris reçoit un SMS : « Votre compte d'argent mobile est bloqué. Envoyez votre code secret pour le débloquer. » Que fait-il ?",
+     "steps": [
+      {
+       "md": "Un service sérieux ne demande jamais le code secret par message."
+      },
+      {
+       "md": "Il ne répond pas, ne donne rien et en parle à un adulte ; il peut signaler le numéro."
+      }
+     ],
+     "answer": "**Ne rien envoyer, prévenir un adulte, signaler.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Arnaques courantes",
+     "md": "- **Hameçonnage** : faux message qui imite un service pour te faire donner tes codes.\n- **Faux gains** : « tu as gagné… » pour te faire payer des frais.\n- **Fausse urgence** : « répondez dans 5 minutes ».\n- **Faux ami** : un inconnu qui demande de l'argent ou des photos.\nRègle : on **ne donne jamais** un code secret, un code reçu par SMS ou un mot de passe."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Réutiliser le même mot de passe partout : un vol ouvre toutes les portes.\n- Se connecter sur un ordinateur de cybercafé sans fermer sa session.\n- Publier sa position, son adresse ou celle de l'école.\n- Croire qu'un message est vrai parce qu'il vient d'un numéro « connu » : il peut être imité."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 5e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Les services de paiement mobile sont évoqués de façon générale, sans nom d'opérateur. Aucune référence à une loi précise (cadre juridique camerounais à ne pas citer sans vérification)."
+   ]
+  },
+  {
+   "id": "5e-informatique-respect-droits",
+   "title": "Respect en ligne, harcèlement et droit d'auteur",
+   "minutes": 25,
+   "programRef": "Programme d'informatique de 5e (MINESEC) — découpage exact à vérifier sur le texte officiel — comportement responsable et propriété intellectuelle",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Adopter un comportement respectueux sur Internet et savoir réagir au cyberharcèlement.",
+    "Comprendre le droit d'auteur et citer ses sources."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-informatique-respect-droits-01",
+    "5e-informatique-respect-droits-02",
+    "5e-informatique-respect-droits-03",
+    "5e-informatique-respect-droits-04",
+    "5e-informatique-respect-droits-05",
+    "5e-informatique-respect-droits-06"
+   ],
+   "selfCheck": [
+    "5e-informatique-respect-droits-q1",
+    "5e-informatique-respect-droits-q2",
+    "5e-informatique-respect-droits-q3",
+    "5e-informatique-respect-droits-q4",
+    "5e-informatique-respect-droits-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cyberharcèlement",
+     "md": "Le **cyberharcèlement**, c'est harceler, humilier, menacer ou isoler quelqu'un par des messages, des photos ou des publications en ligne, souvent de façon répétée. C'est **grave** : cela fait souffrir, même si c'est « pour rire »."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Que faire ?",
+     "md": "- **Si tu es victime** : ne réponds pas aux insultes, **garde les preuves** (captures de messages), bloque la personne, **parle à un adulte de confiance** (parent, professeur, conseiller).\n- **Si tu es témoin** : ne partage pas, ne ris pas, soutiens la victime et préviens un adulte.\n- **Avant de publier** : « Aurais-je le courage de dire ça en face ? »."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Droit d'auteur",
+     "md": "Une œuvre (texte, photo, musique, dessin, vidéo) appartient à son **auteur**. On ne peut pas la copier, la modifier ou la vendre sans son accord. On peut en citer **de courts extraits** en indiquant clairement l'auteur et la **source**. Copier un devoir ou un texte trouvé en ligne en le présentant comme le sien est du **plagiat**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : réagir",
+     "statement": "Amina découvre qu'un groupe se moque d'une camarade sur un groupe de discussion. Que doit-elle faire ?",
+     "steps": [
+      {
+       "md": "Elle ne participe pas et ne partage rien."
+      },
+      {
+       "md": "Elle soutient sa camarade et prévient un adulte."
+      }
+     ],
+     "answer": "**Ne pas participer, soutenir la victime, prévenir un adulte.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : citer une source",
+     "statement": "Boris veut utiliser une phrase d'un site pour son exposé. Que doit-il faire ?",
+     "steps": [
+      {
+       "md": "Il met la phrase entre guillemets si elle est recopiée."
+      },
+      {
+       "md": "Il indique le nom du site et de l'auteur (la source)."
+      }
+     ],
+     "answer": "**Guillemets et source indiquée.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que « tout ce qui est en ligne est libre » : non.\n- Faire suivre une photo humiliante « parce que tout le monde le fait ».\n- Copier un exposé entier : c'est du plagiat.\n- Garder le silence par peur : parler à un adulte est le bon réflexe."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 5e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Les règles de droit sont présentées sans citer de texte de loi ni de sanction chiffrée : à compléter avec les références officielles si nécessaire."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot de passe est le meilleur ?",
+   "choices": [
+    "123456",
+    "motdepasse",
+    "Nkeng",
+    "T7!kbR2m9"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un bon mot de passe est long, varié et difficile à deviner.",
+   "id": "5e-informatique-securite-vie-privee-01",
+   "tier": "application",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut prêter son mot de passe à un ami proche.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le mot de passe est personnel ; le partager enlève la protection.",
+   "id": "5e-informatique-securite-vie-privee-02",
+   "tier": "application",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque danger à sa bonne réaction.",
+   "pairs": [
+    [
+     "Faux message de la banque",
+     "Ne pas répondre, signaler"
+    ],
+    [
+     "Inconnu qui demande des photos",
+     "Refuser et en parler à un adulte"
+    ],
+    [
+     "Gain imaginaire à payer",
+     "Ignorer"
+    ],
+    [
+     "Session ouverte au cybercafé",
+     "La fermer avant de partir"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque situation appelle un réflexe simple.",
+   "id": "5e-informatique-securite-vie-privee-03",
+   "tier": "application",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi éviter d'utiliser le même mot de passe partout ?",
+   "choices": [
+    "Cela ralentit Internet",
+    "C'est interdit par le clavier",
+    "Une fuite sur un site donnerait accès aux autres comptes",
+    "Cela efface les fichiers"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Un mot de passe par compte limite les dégâts.",
+   "id": "5e-informatique-securite-vie-privee-04",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Parmi ces informations, laquelle ne doit jamais être donnée à un inconnu ?",
+   "choices": [
+    "La couleur préférée",
+    "Le nom d'un animal de dessin animé",
+    "Un code reçu par SMS pour confirmer une opération",
+    "Le nom d'un fruit"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Ce code autorise une opération : il doit rester secret.",
+   "id": "5e-informatique-securite-vie-privee-05",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng reçoit un message : « Félicitations ! Vous avez gagné un téléphone. Envoyez 5 000 FCFA de frais et votre code secret pour recevoir le prix. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "De quel type de message s'agit-il ?",
+     "choices": [
+      "D'une vraie récompense",
+      "D'un cours",
+      "D'une arnaque",
+      "D'une annonce du collège"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "On demande de l'argent à l'avance et un code secret.",
+     "id": "5e-informatique-securite-vie-privee-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que doit faire Nkeng ? Donne deux réactions précises.",
+     "model": "Ne pas payer, ne pas donner de code, ne pas répondre, en parler à un adulte et signaler le message.",
+     "rubric": [
+      "Deux réactions correctes"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-informatique-securite-vie-privee-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-informatique-securite-vie-privee-06",
+   "tier": "examen",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle d'un mot de passe ?",
+   "choices": [
+    "Accélérer l'ordinateur",
+    "Protéger l'accès à un compte",
+    "Changer la couleur du bureau",
+    "Compter les fichiers"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il empêche les autres de se connecter à ta place.",
+   "id": "5e-informatique-securite-vie-privee-q1",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que l'hameçonnage ?",
+   "choices": [
+    "Une technique de pêche",
+    "Un type de clavier",
+    "Un faux message qui cherche à voler des informations",
+    "Un logiciel de dessin"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il imite un service pour obtenir mots de passe ou codes.",
+   "id": "5e-informatique-securite-vie-privee-q2",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la bonne conduite sur un ordinateur de cybercafé ?",
+   "choices": [
+    "Laisser la page ouverte",
+    "Fermer sa session avant de partir",
+    "Noter son mot de passe sur l'écran",
+    "Garder ses fichiers sur le bureau"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La personne suivante pourrait sinon utiliser ton compte.",
+   "id": "5e-informatique-securite-vie-privee-q3",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un inconnu te demande ton adresse et ta photo. Que fais-tu ?",
+   "choices": [
+    "Je les envoie vite",
+    "Je lui donne mon mot de passe aussi",
+    "Je le félicite",
+    "Je refuse et j'en parle à un adulte"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les informations personnelles sont à protéger.",
+   "id": "5e-informatique-securite-vie-privee-q4",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel signe doit alerter dans un message ?",
+   "choices": [
+    "Une salutation polie",
+    "Une date",
+    "Un signe de ponctuation",
+    "Une urgence et une demande d'argent ou de code"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pression et demande d'argent sont des signaux d'arnaque.",
+   "id": "5e-informatique-securite-vie-privee-q5",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-securite-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que le cyberharcèlement ?",
+   "choices": [
+    "Humilier ou menacer quelqu'un en ligne",
+    "Envoyer un exposé",
+    "Choisir un mot de passe",
+    "Chercher une information"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est une violence répétée en ligne.",
+   "id": "5e-informatique-respect-droits-01",
+   "tier": "application",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut recopier tout un texte trouvé en ligne et le présenter comme le sien.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il s'agit de plagiat, interdit.",
+   "id": "5e-informatique-respect-droits-02",
+   "tier": "application",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque situation à la bonne réaction.",
+   "pairs": [
+    [
+     "Insulte reçue en ligne",
+     "Garder une preuve et en parler"
+    ],
+    [
+     "Photo humiliante partagée",
+     "Ne pas la transmettre"
+    ],
+    [
+     "Extrait utilisé dans un exposé",
+     "Citer la source"
+    ],
+    [
+     "Camarade harcelé",
+     "Le soutenir et prévenir un adulte"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque réflexe protège la victime ou respecte l'auteur.",
+   "id": "5e-informatique-respect-droits-03",
+   "tier": "application",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi garder une capture d'un message insultant ?",
+   "choices": [
+    "Pour le réutiliser contre l'auteur",
+    "Pour prouver ce qui s'est passé",
+    "Pour le montrer à toute la classe",
+    "Pour gagner de la mémoire"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Une preuve aide un adulte à agir.",
+   "id": "5e-informatique-respect-droits-04",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est un exemple de citation correcte ?",
+   "choices": [
+    "Phrase recopiée sans guillemets",
+    "Phrase copiée mais sans auteur",
+    "Phrase modifiée et signée de soi",
+    "« Phrase recopiée » — Nom de l'auteur, site"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Guillemets et source indiquent d'où vient le texte.",
+   "id": "5e-informatique-respect-droits-05",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans le groupe de discussion de la classe, quelqu'un publie une photo de Mballa avec une moquerie. Plusieurs élèves rient et partagent.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel comportement est le plus responsable ?",
+     "choices": [
+      "Ne pas partager, soutenir Mballa et prévenir un adulte",
+      "Partager aussi pour ne pas être exclu",
+      "Ajouter un commentaire drôle",
+      "Supprimer le groupe sans rien dire"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "On ne participe pas et on cherche l'aide d'un adulte.",
+     "id": "5e-informatique-respect-droits-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique en trois phrases pourquoi « ce n'est qu'une blague » n'est pas une excuse.",
+     "model": "La victime souffre ; la photo peut circuler longtemps et être copiée ; le caractère répété et public aggrave le mal.",
+     "rubric": [
+      "Souffrance de la victime",
+      "Durée ou diffusion de la publication",
+      "Conclusion claire"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-informatique-respect-droits-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-informatique-respect-droits-06",
+   "tier": "examen",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que doit-on faire si l'on est victime de cyberharcèlement ?",
+   "choices": [
+    "En parler à un adulte de confiance",
+    "Insulter en retour",
+    "Tout supprimer et se taire",
+    "Partager le message"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Parler est le premier réflexe de protection.",
+   "id": "5e-informatique-respect-droits-q1",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui possède une photo ou un texte publié ?",
+   "choices": [
+    "Le premier qui le copie",
+    "Le moteur de recherche",
+    "Son auteur",
+    "Le voisin"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une œuvre appartient à son auteur.",
+   "id": "5e-informatique-respect-droits-q2",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que le plagiat ?",
+   "choices": [
+    "Citer ses sources",
+    "Écrire avec ses mots",
+    "Présenter le travail d'un autre comme le sien",
+    "Faire un schéma"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le plagiat est une fraude.",
+   "id": "5e-informatique-respect-droits-q3",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait un témoin d'harcèlement responsable ?",
+   "choices": [
+    "Il rit",
+    "Il retransmet le message",
+    "Il ne partage pas et il prévient un adulte",
+    "Il se moque aussi"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il soutient la victime.",
+   "id": "5e-informatique-respect-droits-q4",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle question aide à savoir si un message est correct avant de l'envoyer ?",
+   "choices": [
+    "Le dirais-je en face à la personne ?",
+    "Combien de mots ?",
+    "Quelle est la couleur ?",
+    "À quelle heure ?"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle invite à respecter l'autre.",
+   "id": "5e-informatique-respect-droits-q5",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-respect-droits",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

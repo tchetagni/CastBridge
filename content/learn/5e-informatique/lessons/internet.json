@@ -1,0 +1,833 @@
+{
+ "chapter": "5e-informatique-internet",
+ "lessons": [
+  {
+   "id": "5e-informatique-internet-recherche",
+   "title": "Internet : navigateur et recherche d'informations",
+   "minutes": 25,
+   "programRef": "Programme d'informatique de 5e (MINESEC) — découpage exact à vérifier sur le texte officiel — Internet et recherche documentaire",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer Internet, le Web, un navigateur et un moteur de recherche, et lire une adresse de site.",
+    "Rechercher efficacement une information et juger sa fiabilité."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-informatique-internet-recherche-01",
+    "5e-informatique-internet-recherche-02",
+    "5e-informatique-internet-recherche-03",
+    "5e-informatique-internet-recherche-04",
+    "5e-informatique-internet-recherche-05",
+    "5e-informatique-internet-recherche-06"
+   ],
+   "selfCheck": [
+    "5e-informatique-internet-recherche-q1",
+    "5e-informatique-internet-recherche-q2",
+    "5e-informatique-internet-recherche-q3",
+    "5e-informatique-internet-recherche-q4",
+    "5e-informatique-internet-recherche-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Internet, Web, navigateur",
+     "md": "**Internet** est le grand réseau qui relie des ordinateurs dans le monde. Le **Web** est l'ensemble des pages et sites que l'on consulte par Internet. Un **navigateur** est le logiciel qui affiche ces pages. Un **moteur de recherche** est un site qui aide à trouver des pages à partir de **mots-clés**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'adresse d'un site",
+     "md": "Une page a une **adresse** (URL), par exemple **https://www.exemple.cm/accueil**. On y lit le protocole (**https**, version sécurisée), le **nom de domaine** (www.exemple.cm) et le **chemin** vers la page (/accueil). L'extension finale du domaine (.cm, .org, .com…) peut indiquer un pays ou un type d'organisme."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les trois parties d'une adresse Web.",
+     "alt": "Une barre d'adresse avec https://www.exemple.cm/accueil et les parties protocole, nom de domaine et chemin soulignées.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 460,
+        "h": 40,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 36,
+        "text": "https://www.exemple.cm/accueil",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 60,
+        "x2": 80,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 105,
+        "y1": 60,
+        "x2": 270,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 285,
+        "y1": 60,
+        "x2": 360,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 92,
+        "text": "protocole",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 92,
+        "text": "nom de domaine",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 92,
+        "text": "chemin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 130,
+        "text": "Adresse d'une page Web (exemple imaginaire)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Chercher efficacement",
+     "md": "1. Choisir des **mots-clés précis** (« marché de Mokolo histoire » plutôt que « marché »).\n2. Lire les titres et les adresses des résultats avant de cliquer.\n3. Comparer **au moins deux sources**.\n4. Vérifier l'auteur, la date et le but du site : un site d'une institution est souvent plus fiable qu'un message anonyme.\n5. **Noter la source** de ce que l'on garde."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir les mots-clés",
+     "statement": "Amina veut connaître la hauteur du mont Cameroun. Quels mots-clés choisit-elle ?",
+     "steps": [
+      {
+       "md": "Elle évite une phrase trop longue ou trop vague."
+      },
+      {
+       "md": "Elle garde les mots importants : sujet et information voulue."
+      }
+     ],
+     "answer": "**« mont Cameroun hauteur » (ou « mont Cameroun altitude »).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : fiable ou non ?",
+     "statement": "Boris trouve une « info » sans auteur ni date, partagée dans un message transféré, qui promet un secret incroyable. Peut-il la croire ?",
+     "steps": [
+      {
+       "md": "Pas d'auteur, pas de date, pas de source : aucun moyen de vérifier."
+      },
+      {
+       "md": "Il faut chercher la même information sur d'autres sources sérieuses."
+      }
+     ],
+     "answer": "**Non, pas sans vérification.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que « premier résultat = vrai » : le classement ne prouve pas la vérité.\n- Confondre Internet et le Web, ou le navigateur et le moteur de recherche.\n- Copier-coller un texte sans citer la source.\n- Cliquer sur une annonce qui promet un gain ou un cadeau."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 5e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Aucun nom de navigateur ni de moteur de recherche n'est cité. Les exemples d'adresses sont génériques (exemple.cm n'est qu'une illustration, pas un site réel)."
+   ]
+  },
+  {
+   "id": "5e-informatique-courrier-electronique",
+   "title": "Le courrier électronique",
+   "minutes": 25,
+   "programRef": "Programme d'informatique de 5e (MINESEC) — découpage exact à vérifier sur le texte officiel — messagerie électronique",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître et construire une adresse électronique ; écrire un courriel poli et clair.",
+    "Utiliser les champs À, Cc, Objet, pièce jointe et réagir aux messages douteux."
+   ],
+   "prerequisites": [
+    "5e-informatique-internet-recherche"
+   ],
+   "exercises": [
+    "5e-informatique-courrier-electronique-01",
+    "5e-informatique-courrier-electronique-02",
+    "5e-informatique-courrier-electronique-03",
+    "5e-informatique-courrier-electronique-04",
+    "5e-informatique-courrier-electronique-05",
+    "5e-informatique-courrier-electronique-06"
+   ],
+   "selfCheck": [
+    "5e-informatique-courrier-electronique-q1",
+    "5e-informatique-courrier-electronique-q2",
+    "5e-informatique-courrier-electronique-q3",
+    "5e-informatique-courrier-electronique-q4",
+    "5e-informatique-courrier-electronique-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Adresse électronique",
+     "md": "Une **adresse électronique** (courriel, e-mail) a la forme **nom@domaine**. Le signe **@** (« arobase ») sépare le nom de l'utilisateur du **nom de domaine** du service de messagerie. Exemple : **amina.n@exemple.cm**. Chaque adresse est **unique**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les champs d'un courriel : destinataire, copie, objet et message.",
+     "alt": "Un message avec les champs À, Cc et Objet puis un texte commençant par Bonjour Boris, avec une pièce jointe.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 460,
+        "h": 200,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 40,
+        "text": "À :",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 40,
+        "text": "boris.m@exemple.cm",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 75,
+        "text": "Cc :",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 110,
+        "text": "Objet :",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 110,
+        "text": "Devoir de SVT",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 125,
+        "x2": 470,
+        "y2": 125,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 155,
+        "text": "Bonjour Boris,",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 180,
+        "text": "Voici mon exposé en pièce jointe.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 202,
+        "text": "Amina",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les champs",
+     "md": "- **À** : le destinataire principal.\n- **Cc** : une copie envoyée à d'autres personnes (visibles).\n- **Objet** : le sujet, court et précis.\n- **Message** : formule d'appel, texte clair, formule de politesse, nom.\n- **Pièce jointe** : un fichier envoyé avec le message (attention à sa taille)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : adresse correcte ?",
+     "statement": "Parmi « boris@exemple.cm », « boris exemple.cm » et « @boris@exemple », laquelle est correcte ?",
+     "steps": [
+      {
+       "md": "Il faut un nom, puis un seul @, puis un domaine."
+      },
+      {
+       "md": "« boris@exemple.cm » respecte cette forme ; les autres manquent de @ ou en ont trop."
+      }
+     ],
+     "answer": "**boris@exemple.cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un bon objet",
+     "statement": "Mballa écrit à son professeur pour demander un rendez-vous. Quel objet convient ?",
+     "steps": [
+      {
+       "md": "Un objet vide ou « Salut » ne dit rien."
+      },
+      {
+       "md": "On précise le sujet : « Demande de rendez-vous — Mballa, 5eB »."
+      }
+     ],
+     "answer": "**Un objet court qui annonce le sujet.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Courriels douteux",
+     "md": "Ne cliquez pas sur un lien et n'ouvrez pas une pièce jointe dans un message d'un **inconnu**, surtout s'il annonce un gain, un cadeau ou un problème urgent. Ne **répondez pas** avec votre mot de passe ou des informations personnelles : un service sérieux ne les demande pas par courriel."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Se tromper d'une lettre dans l'adresse : le message part à une autre personne.\n- Écrire tout en majuscules, ce qui est perçu comme crier.\n- Oublier la pièce jointe annoncée dans le texte.\n- Envoyer un fichier trop lourd."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 5e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Aucun fournisseur de messagerie n'est cité. Les adresses d'exemple (@exemple.cm) sont imaginaires."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel logiciel sert à afficher les pages Web ?",
+   "choices": [
+    "Un traitement de texte",
+    "Un navigateur",
+    "Un tableur",
+    "Une imprimante"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le navigateur affiche les pages.",
+   "id": "5e-informatique-internet-recherche-01",
+   "tier": "application",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le premier résultat d'une recherche est toujours exact.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le classement dépend de nombreux critères, il ne garantit pas la vérité.",
+   "id": "5e-informatique-internet-recherche-02",
+   "tier": "application",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque terme à sa définition.",
+   "pairs": [
+    [
+     "Navigateur",
+     "Logiciel qui affiche les pages"
+    ],
+    [
+     "Moteur de recherche",
+     "Site qui trouve des pages avec des mots-clés"
+    ],
+    [
+     "URL",
+     "Adresse d'une page"
+    ],
+    [
+     "Mot-clé",
+     "Mot important tapé pour chercher"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Quatre notions de base.",
+   "id": "5e-informatique-internet-recherche-03",
+   "tier": "application",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « https://www.exemple.cm/sciences », que représente « /sciences » ?",
+   "choices": [
+    "Le protocole",
+    "Le moteur de recherche",
+    "Le nom de l'utilisateur",
+    "Le chemin vers une page du site"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Après le domaine, le chemin désigne la page.",
+   "id": "5e-informatique-internet-recherche-04",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour vérifier une information trouvée sur un site inconnu, que fais-tu ?",
+   "choices": [
+    "Je la partage tout de suite",
+    "Je la copie sans la lire",
+    "Je clique sur une publicité",
+    "Je la compare avec d'autres sources sérieuses"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Croiser les sources permet de vérifier.",
+   "id": "5e-informatique-internet-recherche-05",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Pour son exposé, Nkeng cherche des informations sur la culture du cacao au Cameroun. Il trouve un site officiel, un blog sans auteur et un forum.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle source garde-t-il en priorité ?",
+     "choices": [
+      "Le blog sans auteur",
+      "Le forum",
+      "Une source qu'il invente",
+      "Le site officiel, après vérification"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Un organisme identifié est plus facile à vérifier que des auteurs inconnus.",
+     "id": "5e-informatique-internet-recherche-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Donne trois conseils pour faire une recherche fiable.",
+     "model": "Mots-clés précis, comparer plusieurs sources, vérifier l'auteur et la date, noter la source.",
+     "rubric": [
+      "Trois conseils pertinents"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-informatique-internet-recherche-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-informatique-internet-recherche-06",
+   "tier": "examen",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que tape-t-on dans un moteur de recherche ?",
+   "choices": [
+    "Un mot de passe",
+    "Des mots-clés",
+    "Le nom de l'imprimante",
+    "Une adresse postale"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les mots-clés décrivent ce que l'on cherche.",
+   "id": "5e-informatique-internet-recherche-q1",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie « https » au début d'une adresse ?",
+   "choices": [
+    "Que la connexion est protégée",
+    "Que le site est gratuit",
+    "Que la page est très ancienne",
+    "Que le site est un jeu"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le « s » indique une connexion sécurisée.",
+   "id": "5e-informatique-internet-recherche-q2",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel élément aide à juger la fiabilité d'une page ?",
+   "choices": [
+    "La couleur du fond",
+    "L'auteur et la date",
+    "La taille de l'écran",
+    "Le nombre de cadeaux promis"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un auteur et une date identifiés permettent de vérifier.",
+   "id": "5e-informatique-internet-recherche-q3",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la différence entre le Web et Internet ?",
+   "choices": [
+    "Aucune, ce sont deux logiciels",
+    "Le Web est un ensemble de pages accessibles grâce à Internet",
+    "Internet est un logiciel de dessin",
+    "Le Web est un matériel"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Internet est le réseau, le Web est un de ses services.",
+   "id": "5e-informatique-internet-recherche-q4",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que doit-on faire avec une information utilisée dans un exposé ?",
+   "choices": [
+    "La présenter comme la sienne",
+    "La modifier au hasard",
+    "L'effacer",
+    "Noter la source"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Citer ses sources est une règle de base.",
+   "id": "5e-informatique-internet-recherche-q5",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-internet-recherche",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est une adresse électronique valide ?",
+   "choices": [
+    "nkeng.exemple.cm",
+    "nkeng@@exemple",
+    "nkeng exemple@",
+    "nkeng@exemple.cm"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut un nom, un @, puis un domaine.",
+   "id": "5e-informatique-courrier-electronique-01",
+   "tier": "application",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut envoyer son mot de passe par courriel à quelqu'un qui le demande.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un mot de passe est secret : aucun service sérieux ne le réclame par courriel.",
+   "id": "5e-informatique-courrier-electronique-02",
+   "tier": "application",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque champ à son rôle.",
+   "pairs": [
+    [
+     "À",
+     "Destinataire principal"
+    ],
+    [
+     "Cc",
+     "Copie à d'autres personnes"
+    ],
+    [
+     "Objet",
+     "Sujet du message"
+    ],
+    [
+     "Pièce jointe",
+     "Fichier envoyé avec le message"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Champs d'un courriel.",
+   "id": "5e-informatique-courrier-electronique-03",
+   "tier": "application",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule de politesse convient pour finir un courriel à un professeur ?",
+   "choices": [
+    "Salut mec",
+    "À+++",
+    "Réponds vite !!!",
+    "Cordialement, Amina"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Un message à un adulte garde un ton poli.",
+   "id": "5e-informatique-courrier-electronique-04",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un message inconnu annonce « Vous avez gagné 500 000 FCFA, cliquez ici ». Que faire ?",
+   "choices": [
+    "Cliquer pour vérifier",
+    "Répondre avec ses informations",
+    "Ne pas cliquer et le supprimer",
+    "Le transférer à tout le monde"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "C'est un schéma classique d'arnaque.",
+   "id": "5e-informatique-courrier-electronique-05",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris doit envoyer à sa tante un exposé de 3 Mo en pièce jointe. Il écrit à l'adresse « tante.mballa@exemple.cm ».",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Dans quel champ place-t-il l'adresse de sa tante ?",
+     "choices": [
+      "Dans « À »",
+      "Dans « Objet »",
+      "Dans « Pièce jointe »",
+      "Dans « Message »"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le destinataire principal va dans le champ À.",
+     "id": "5e-informatique-courrier-electronique-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Rédige un courriel court avec objet, formule d'appel, message et formule de politesse.",
+     "model": "Objet : Mon exposé. Bonjour tante, je t'envoie mon exposé en pièce jointe. Peux-tu me dire ce que tu en penses ? Cordialement, Boris.",
+     "rubric": [
+      "Objet précis",
+      "Formule d'appel",
+      "Message clair",
+      "Formule de politesse"
+     ],
+     "points": 4,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-informatique-courrier-electronique-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-informatique-courrier-electronique-06",
+   "tier": "examen",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que sépare le signe @ dans une adresse électronique ?",
+   "choices": [
+    "Le nom de l'utilisateur et le domaine",
+    "Le jour et le mois",
+    "Le mot de passe et l'identifiant",
+    "Deux fichiers"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il lie l'utilisateur à son service de messagerie.",
+   "id": "5e-informatique-courrier-electronique-q1",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que contient le champ Objet ?",
+   "choices": [
+    "Le mot de passe",
+    "L'adresse de l'expéditeur",
+    "Le sujet du message",
+    "La taille du fichier"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il résume l'objet du courriel.",
+   "id": "5e-informatique-courrier-electronique-q2",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert « Cc » ?",
+   "choices": [
+    "À supprimer le message",
+    "À envoyer une copie à d'autres personnes",
+    "À chiffrer le message",
+    "À changer la police"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les personnes en Cc reçoivent le même message.",
+   "id": "5e-informatique-courrier-electronique-q3",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait-on d'un courriel d'un inconnu avec une pièce jointe suspecte ?",
+   "choices": [
+    "On l'ouvre tout de suite",
+    "On le transfère",
+    "On ne l'ouvre pas",
+    "On répond avec ses données"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une pièce jointe peut contenir un virus.",
+   "id": "5e-informatique-courrier-electronique-q4",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi ne pas écrire tout en majuscules ?",
+   "choices": [
+    "C'est interdit par le clavier",
+    "C'est perçu comme crier et c'est moins lisible",
+    "Cela efface le message",
+    "Cela change l'adresse"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un ton calme et un texte lisible sont préférables.",
+   "id": "5e-informatique-courrier-electronique-q5",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-courrier-electronique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

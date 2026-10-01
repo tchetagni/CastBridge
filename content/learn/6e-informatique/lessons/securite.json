@@ -1,0 +1,429 @@
+{
+ "chapter": "6e-informatique-securite",
+ "lessons": [
+  {
+   "id": "6e-informatique-ergonomie-securite",
+   "title": "Ergonomie, sécurité et bon usage de la salle informatique",
+   "minutes": 20,
+   "programRef": "Programme d'informatique de 6e (MINESEC) — découpage exact à vérifier sur le texte officiel — règles d'hygiène, de sécurité et de bon usage du matériel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Adopter une bonne posture devant l'écran et respecter les règles de sécurité électrique et de bon usage.",
+    "Connaître les règles de base de protection de ses données (mot de passe, session)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "6e-informatique-ergonomie-securite-01",
+    "6e-informatique-ergonomie-securite-02",
+    "6e-informatique-ergonomie-securite-03",
+    "6e-informatique-ergonomie-securite-04",
+    "6e-informatique-ergonomie-securite-05",
+    "6e-informatique-ergonomie-securite-06"
+   ],
+   "selfCheck": [
+    "6e-informatique-ergonomie-securite-q1",
+    "6e-informatique-ergonomie-securite-q2",
+    "6e-informatique-ergonomie-securite-q3",
+    "6e-informatique-ergonomie-securite-q4",
+    "6e-informatique-ergonomie-securite-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'ergonomie",
+     "md": "L'**ergonomie**, c'est organiser son poste de travail pour être bien installé et éviter la fatigue ou les douleurs : dos, yeux, poignets."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Une bonne posture",
+     "md": "- Dos droit, appuyé sur le dossier ; pieds à plat sur le sol.\n- Écran face à soi, à bout de bras environ, haut de l'écran à hauteur des yeux.\n- Avant-bras posés, poignets dans le prolongement.\n- Lumière sans reflet sur l'écran.\n- **Pause** de quelques minutes régulièrement pour reposer les yeux (regarder au loin)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Schéma d'une personne assise devant un écran.",
+     "alt": "Un bonhomme assis dos droit devant un écran posé sur un bureau.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 90,
+        "h": 70,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 60,
+        "text": "Écran",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 100,
+        "w": 150,
+        "h": 20,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 140,
+        "text": "Bureau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 60,
+        "r": 25,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 85,
+        "x2": 300,
+        "y2": 160,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 160,
+        "x2": 270,
+        "y2": 200,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 110,
+        "x2": 200,
+        "y2": 100,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 20,
+        "text": "Dos droit",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "Regard",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Sécurité électrique et matériel",
+     "md": "- Ne touche pas aux câbles abîmés ; ne branche pas trop d'appareils sur la même multiprise.\n- Pas de boisson ni de nourriture près de l'ordinateur.\n- Ne démonte jamais le matériel : demande à l'adulte responsable.\n- En cas de fumée ou d'odeur de brûlé : prévenir immédiatement le professeur."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Bon usage et données personnelles",
+     "md": "- Ferme ta **session** quand tu quittes l'ordinateur partagé.\n- Garde ton **mot de passe** secret et ne le note pas sur l'écran.\n- Respecte le travail des autres : n'ouvre pas leurs dossiers, ne supprime rien qui ne soit pas à toi.\n- Utilise l'ordinateur pour apprendre, comme le demande le règlement."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : corriger la posture",
+     "statement": "Nkeng est courbé, l'écran est trop haut et un reflet lui gêne les yeux. Que lui conseilles-tu ?",
+     "steps": [
+      {
+       "md": "Se redresser, dos contre le dossier."
+      },
+      {
+       "md": "Baisser l'écran et tourner le poste pour supprimer le reflet."
+      }
+     ],
+     "answer": "**Dos droit, écran à hauteur des yeux, sans reflet.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : qui a cassé le câble ?",
+     "statement": "Amina remarque un fil dénudé sur une multiprise. Que fait-elle ?",
+     "steps": [
+      {
+       "md": "Elle ne touche à rien."
+      },
+      {
+       "md": "Elle prévient le professeur tout de suite."
+      }
+     ],
+     "answer": "**Ne pas toucher et prévenir un adulte.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Rester des heures sans pause.\n- Poser une bouteille d'eau à côté du clavier.\n- Laisser sa session ouverte sur un poste partagé."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 6e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Les distances et durées (ex. pause toutes les heures environ) sont des recommandations générales, à ajuster selon le règlement intérieur de la salle."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle posture est la meilleure ?",
+   "choices": [
+    "Allongé sur la table",
+    "Dos courbé, écran sur le côté",
+    "Dos droit, pieds à plat, écran face à soi",
+    "Debout sur la chaise"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une bonne posture prévient les douleurs.",
+   "id": "6e-informatique-ergonomie-securite-01",
+   "tier": "application",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut poser une boisson sur le clavier.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un liquide renversé peut endommager le matériel et provoquer un danger électrique.",
+   "id": "6e-informatique-ergonomie-securite-02",
+   "tier": "application",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faire en quittant un ordinateur partagé ?",
+   "choices": [
+    "Laisser ses fichiers ouverts",
+    "Fermer sa session",
+    "Noter son mot de passe sur l'écran",
+    "Éteindre la salle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sinon la personne suivante pourrait lire ou modifier son travail.",
+   "id": "6e-informatique-ergonomie-securite-03",
+   "tier": "application",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi regarder au loin pendant une pause ?",
+   "choices": [
+    "Pour accélérer l'ordinateur",
+    "Pour reposer les yeux",
+    "Pour économiser le courant",
+    "Pour changer de session"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'œil se fatigue en fixant un écran proche.",
+   "id": "6e-informatique-ergonomie-securite-04",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque situation à la bonne réaction.",
+   "pairs": [
+    [
+     "Câble abîmé",
+     "Prévenir un adulte sans toucher"
+    ],
+    [
+     "Reflet sur l'écran",
+     "Déplacer l'écran ou fermer le rideau"
+    ],
+    [
+     "Mot de passe oublié sur l'écran",
+     "Le changer et le garder secret"
+    ],
+    [
+     "Fatigue des yeux",
+     "Faire une pause"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque risque a sa bonne réaction.",
+   "id": "6e-informatique-ergonomie-securite-05",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans la salle informatique du collège, tu vois : un élève avec une bouteille d'eau près du clavier, un autre qui tient son écran très près du visage, et une multiprise surchargée.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel danger est le plus urgent à signaler ?",
+     "choices": [
+      "Le fond d'écran",
+      "La couleur du clavier",
+      "Le nom de la salle",
+      "La multiprise surchargée"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Une surcharge peut chauffer et provoquer un incendie.",
+     "id": "6e-informatique-ergonomie-securite-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pour chaque situation, donne le bon réflexe.",
+     "model": "Bouteille : l'éloigner du matériel. Écran trop proche : reculer à bout de bras. Multiprise : ne pas toucher et prévenir l'adulte.",
+     "rubric": [
+      "Réflexe pour la bouteille",
+      "Réflexe pour l'écran",
+      "Réflexe pour la multiprise"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-informatique-ergonomie-securite-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-informatique-ergonomie-securite-06",
+   "tier": "examen",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quelle distance environ place-t-on l'écran des yeux ?",
+   "choices": [
+    "Collé au visage",
+    "À l'autre bout de la salle",
+    "À peu près à bout de bras",
+    "Peu importe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une distance raisonnable limite la fatigue.",
+   "id": "6e-informatique-ergonomie-securite-q1",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie « ergonomie » ?",
+   "choices": [
+    "Organiser son poste pour travailler confortablement et sans risque",
+    "Réparer un ordinateur",
+    "Copier des fichiers",
+    "Dessiner sur l'écran"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est l'adaptation du poste à la personne.",
+   "id": "6e-informatique-ergonomie-securite-q2",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait-on d'un câble abîmé ?",
+   "choices": [
+    "On le signale sans le toucher",
+    "On l'enroule autour du bras",
+    "On l'essaie quand même",
+    "On le coupe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il peut provoquer un choc ou un incendie.",
+   "id": "6e-informatique-ergonomie-securite-q3",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi garder son mot de passe secret ?",
+   "choices": [
+    "Pour que personne ne puisse utiliser ton compte",
+    "Pour que l'écran s'allume",
+    "Pour économiser de la mémoire",
+    "Pour imprimer plus vite"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un mot de passe partagé n'est plus une protection.",
+   "id": "6e-informatique-ergonomie-securite-q4",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel comportement respecte les autres utilisateurs ?",
+   "choices": [
+    "Fermer leurs fenêtres",
+    "Ne pas ouvrir ni supprimer leurs fichiers",
+    "Effacer leurs dossiers",
+    "Changer leur fond d'écran"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chacun a droit à son travail.",
+   "id": "6e-informatique-ergonomie-securite-q5",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-ergonomie-securite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
