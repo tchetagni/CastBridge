@@ -103,6 +103,14 @@ castbridge:
   geo:
     country-header: ${CASTBRIDGE_GEO_COUNTRY_HEADER:}
     database-file: ${CASTBRIDGE_GEOIP_DB:}
+  # Optional AI layer of the phone's library assistant (POST /api/v1/library/suggest, docs/LIBRARY-AGENT.md).
+  # No key = no model: the endpoint answers available:false and calls nothing. NEVER put a key in this file.
+  library:
+    llm-api-key: ${CASTBRIDGE_LIBRARY_LLM_API_KEY:}
+    llm-url: ${CASTBRIDGE_LIBRARY_LLM_URL:https://api.anthropic.com/v1/messages}
+    llm-model: ${CASTBRIDGE_LIBRARY_LLM_MODEL:claude-haiku-4-5}
+    per-hour: ${CASTBRIDGE_LIBRARY_SUGGEST_PER_HOUR:30}
+    max-items: ${CASTBRIDGE_LIBRARY_SUGGEST_MAX_ITEMS:40}
 
 springdoc:
   api-docs:
