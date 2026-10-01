@@ -51,7 +51,7 @@ def analyse(content):
         lot = lots.setdefault(key, {"lot": key, "bytes": 0, "raw": 0, "files": 0, "by_kind": {}, "tv": scopes.get(r["scope"], {}).get("tv", not r["scope"].endswith("-media"))})
         lot["bytes"] += r["zipped"]; lot["raw"] += r["bytes"]; lot["files"] += 1
         lot["by_kind"][r["kind"]] = lot["by_kind"].get(r["kind"], 0) + r["zipped"]
-        if lot["tv"] and r["kind"] in ("clip", "audio") :
+        if lot["tv"] and r["kind"] in ("clip", "audio", "image"):
             errors.append("%s: %s dans un lot compatible TV (%s) : réservé aux lots média du téléphone" % (r["path"], r["kind"], key))
     for key, lot in sorted(lots.items()):
         if lot["tv"] and lot["bytes"] > L.TV_LOT_MAX:

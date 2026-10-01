@@ -255,6 +255,24 @@ class RepoContentTest(unittest.TestCase):
         self.assertTrue(all(len(set(p["lots"])) == len(p["lots"]) for p in paths))
 
 
+class SizeGateTest(Base):
+    def test_code_mode_refuses_heavy_media_and_big_binaries_content_mode_allows_lfs(self):
+        sys.path.insert(0, os.path.join(TOOLS, "content-split-repo"))
+        import check_sizes
+        write(os.path.join(self.tmp, "content", "learn", "p1", "media", "v.webm"), b"x" * 10)
+        write(os.path.join(self.tmp, "tool.bin"), b"y" * (6 << 20))
+        e = check_sizes.check(self.tmp, "code")
+        self.assertTrue(any("média lourd" in x for x in e)); self.assertTrue(any("tool.bin" in x for x in e))
+        write(os.path.join(self.tmp, ".gitattributes"), "*.bin filter=lfs diff=lfs merge=lfs -text\n")
+        e = check_sizes.check(self.tmp, "content")
+        self.assertFalse(any("tool.bin" in x for x in e))
+
+    def test_the_code_repository_has_no_heavy_media_or_big_binary(self):
+        sys.path.insert(0, os.path.join(TOOLS, "content-split-repo"))
+        import check_sizes
+        self.assertEqual([], check_sizes.check(L.REPO, "code"))
+
+
 class ReportTest(unittest.TestCase):
     sample = json.load(open(os.path.join(TOOLS, "pedagogy-report", "sample-report.json")))
 

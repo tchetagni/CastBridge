@@ -24,7 +24,7 @@ object GraphTool {
         val dir = File(content, "graph")
         val scopes = SkillGraph.parseScopes(File(dir, "scopes.json").readText())
         val skills = dir.listFiles { f -> f.name.endsWith(".json") && f.name != "scopes.json" }.orEmpty().sortedBy { it.name }
-            .filter { !it.name.startsWith("mapping") }.flatMap { SkillGraph.parseDomain(it.readText(), it.name) }
+            .filter { it.name != "paths.json" }.flatMap { SkillGraph.parseDomain(it.readText(), it.name) }
         return SkillGraph(skills, scopes)
     }
 
@@ -39,13 +39,33 @@ object GraphTool {
         return (lessons.keys + ex.keys).associateWith { Attached(lessons[it] ?: 0, ex[it].orEmpty()) }
     }
 
+    /** Learner paths (content/graph/paths.json) are ORDERED SETS of lots: no duplicate, every lot an existing scope that serves that feature. */
+    @Suppress("UNCHECKED_CAST")
+    fun pathErrors(content: File, graph: SkillGraph): List<String> {
+        val f = File(content, "graph/paths.json"); if (!f.isFile) return listOf("content/graph/paths.json manquant")
+        val e = ArrayList<String>()
+        val paths = castbridge.core.quiz.Json.obj(f.readText())["paths"] as? List<Map<String, Any?>> ?: return listOf("paths.json : \"paths\" manquant")
+        for (p in paths) {
+            val id = p["id"] as? String ?: "?"; val lots = (p["lots"] as? List<Any?>).orEmpty().map { it.toString() }
+            if (lots.toSet().size != lots.size) e += "parcours $id: lot en double (un parcours est un ensemble ordonné de lots)"
+            for (l in lots) {
+                val (feature, scope) = l.split(':').let { it.getOrElse(0) { "" } to it.getOrElse(1) { "" } }
+                val sc = graph.scopeById[scope]
+                if (sc == null) e += "parcours $id: scope $scope inconnu"
+                else if (feature !in sc.feature.split('|')) e += "parcours $id: le scope $scope ne sert pas la fonction $feature"
+            }
+        }
+        return e
+    }
+
     fun check(content: File, requireContent: Boolean): Int {
         val graph = try { load(content) } catch (t: Throwable) { System.err.println("ERREUR: ${t.message}"); return 1 }
         val r = ContentGraphValidator(graph, attached(content), requireContent).validate()
+        val pe = pathErrors(content, graph)
         r.stats.forEach(::println)
         r.warnings.forEach { println("AVERTISSEMENT: $it") }
-        r.errors.forEach { System.err.println("ERREUR: $it") }
-        println(if (r.ok) "Graphe valide." else "${r.errors.size} erreur(s).")
-        return if (r.ok) 0 else 1
+        (r.errors + pe).forEach { System.err.println("ERREUR: $it") }
+        println(if (r.ok && pe.isEmpty()) "Graphe valide." else "${r.errors.size + pe.size} erreur(s).")
+        return if (r.ok && pe.isEmpty()) 0 else 1
     }
 }

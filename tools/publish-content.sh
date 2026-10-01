@@ -28,7 +28,13 @@ if [ -z "$SKIPG" ]; then
   "$RUNNER" -q :core:checkContentGraph
   "$RUNNER" -q :core:checkLearnContent
 fi
-(cd "$ROOT/tools/quiz-bank" && $PY quizbank.py check >/dev/null)
+# the quiz-bank sources use Python 3.12 syntax (f-strings with backslashes): QUIZ_PY=python3.12 ; an older Python skips this step LOUDLY
+QPY=${QUIZ_PY:-$(command -v python3.12 || echo "$PY")}
+if "$QPY" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 12) else 1)'; then
+  (cd "$ROOT/tools/quiz-bank" && "$QPY" quizbank.py check >/dev/null)
+else
+  echo "AVERTISSEMENT: tools/quiz-bank/quizbank.py check ignoré (Python >= 3.12 requis, $("$QPY" -V 2>&1) trouvé) : les paquets de quiz déjà construits sont vérifiés par les tests du core" >&2
+fi
 $PY "$ROOT/tools/content-media/check_media.py"
 $PY "$ROOT/tools/content-budget/content_budget.py" --quiet
 $PY -m unittest discover -s "$ROOT/tools/tests" -p 'test_*.py' >/dev/null
@@ -50,6 +56,7 @@ $PY "$ROOT/tools/content-lots/make_release.py" --lots "$OUT/work/lots" --out "$O
 echo "Arbre prêt à copier : $OUT/tree (CONTENT-RELEASE.json, SHA256SUMS, lots/, graph/)"
 
 if [ -n "$RSYNC" ]; then
+  command -v rsync >/dev/null || { echo "rsync introuvable : installer rsync (l'arbre est prêt dans $OUT/tree)" >&2; exit 4; }
   say "rsync vers $RSYNC"
   if [ -z "$GO" ]; then
     rsync -a --checksum --delete --dry-run --itemize-changes "$OUT/tree/" "$RSYNC"

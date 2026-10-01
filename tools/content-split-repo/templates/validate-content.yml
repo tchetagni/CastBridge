@@ -1,0 +1,16 @@
+# Template for .github/workflows/validate-content.yml of castbridge-content (adapt the code repository name and ref).
+name: validate-content
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { lfs: true }
+      - uses: actions/checkout@v4
+        with: { repository: OWNER/castbridge, path: code, ref: ${{ env.CODE_REF }} }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - uses: gradle/actions/setup-gradle@v4
+      - run: python3 tools/content-split-repo/check_sizes.py
+      - run: CASTBRIDGE_CODE_DIR=$PWD/code tools/publish-content.sh --skip-gradle-checks   # drop the flag once the code checkout is wired

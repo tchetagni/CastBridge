@@ -23,6 +23,10 @@ class CurriculumTest {
         for (l in Level.values()) for (d in listOf("mathematiques", "physique-chimie")) assertTrue(g.skills.any { it.domain == d && it.level == l }, "$d has ${l.key}")
     }
 
+    @Test fun learnerPathsAreOrderedSetsOfExistingLots() {
+        assertEquals(emptyList(), GraphTool.pathErrors(content, GraphTool.load(content)))
+    }
+
     @Test fun everySkillLotExistsAndCarriesItsLevel() {
         val g = GraphTool.load(content)
         for (s in g.skills) for (l in s.lots) assertTrue(s.level in g.scopeById.getValue(l).levels, "${s.id} in $l")

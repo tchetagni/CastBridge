@@ -131,6 +131,17 @@ def gen_domain(name):
         skills.append({"id": prefix + "." + slug, "title": {"fr": fr, "en": en}, "level": level, "prereq": [p.strip() for p in prereq],
                        "years": ys, "classes": classes, "exams": exams, "lots": lots, "minutes": int(minutes),
                        "tags": [t.strip() for t in tags.split(",") if t.strip()]})
+    # placement probes: per (class year, level) the skill with the most dependants (ties: id) is tagged "probe" (docs/CONTENT-ARCHITECTURE.md § 9)
+    deps = {}
+    for sk in skills:
+        for pre_id in sk["prereq"]:
+            deps[pre_id] = deps.get(pre_id, 0) + 1
+    groups = {}
+    for sk in skills:
+        groups.setdefault((sk["years"][0], sk["level"]), []).append(sk)
+    for g in groups.values():
+        best = sorted(g, key=lambda x: (-deps.get(x["id"], 0), x["id"]))[0]
+        best["tags"].append("probe")
     return {"format": 1, "domain": name, "prefix": prefix, "title": {"fr": tfr, "en": ten}, "skills": skills}
 
 

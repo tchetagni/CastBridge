@@ -1,5 +1,7 @@
 # Apprendre — formation des élèves, de la maternelle à la licence (POC, branche `feat/learn`)
 
+> **Niveaux, compétences et lots** : le cadre de progression de zéro à l'expert (niveaux N0-N4, paliers `excellence-cm` / `excellence-monde`, difficulté 1-5, champs `skill`/`level`/`lot`/`media`) est décrit dans [CONTENT-ARCHITECTURE.md](CONTENT-ARCHITECTURE.md) ; les médias dans [MEDIA-POLICY.md](MEDIA-POLICY.md).
+
 Leçons (« fiches »), illustrations dessinées, exemples résolus pas à pas, exercices corrigés, **préparation des examens
 camerounais** (CEP, FSLC, BEPC, GCE O Level, Probatoire, Bac) avec épreuves blanches chronométrées, progression des
 élèves et tableau de bord des parents. Sous-systèmes **francophone et anglophone**. Sur la TV (télécommande, 720p à 4K,

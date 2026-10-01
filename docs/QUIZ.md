@@ -1,5 +1,7 @@
 # Quiz sur la TV — « Le Quiz des Millions » (POC, version 0.5-quiz)
 
+> **Niveaux et lots** : le quiz partage le graphe de compétences et l'échelle N0-N4 d'Apprendre ; champs optionnels `skill`, `nlevel`, `lot`, `calib` et choix des questions selon le niveau de l'apprenant : [CONTENT-ARCHITECTURE.md](CONTENT-ARCHITECTURE.md) § 6-7.
+
 Jeu de questions façon « Qui veut gagner des millions ? » sur CastBridge TV. On y joue **seul à la télécommande** (sans
 téléphone ni réseau) ou **à plusieurs** : chacun répond sur son téléphone, sans rien installer (QR code affiché sur la TV).
 
