@@ -23,9 +23,10 @@ class ActivationVectorsTest {
     private val keys = listOf(
         KeyDef("desk", Ed25519Signer(seedOf("desk")), KeyScope.ALL),
         KeyDef("phone", Ed25519Signer(seedOf("phone")), KeyScope.ALL - KeyScope.REGISTRY),
-        KeyDef("server", Ed25519Signer(seedOf("server")), setOf(KeyScope.ISSUE_TRIAL, KeyScope.ISSUE_PRODUCTION, KeyScope.REVOKE, KeyScope.REGISTRY)),
+        KeyDef("server", Ed25519Signer(seedOf("server")), setOf(KeyScope.ISSUE_TRIAL, KeyScope.ISSUE_PRODUCTION, KeyScope.REACTIVATE, KeyScope.REVOKE, KeyScope.REGISTRY, KeyScope.POLICY)),
         KeyDef("support", Ed25519Signer(seedOf("support")), setOf(KeyScope.COMMAND_SUPPORT)),
         KeyDef("rogue", Ed25519Signer(seedOf("rogue")), KeyScope.ALL),            // never in a ring: "unknown key"
+        KeyDef("support-reactivate", Ed25519Signer(seedOf("support-reactivate")), setOf(KeyScope.REACTIVATE)),
     )
     private fun key(n: String) = keys.first { it.name == n }
 
@@ -63,22 +64,23 @@ class ActivationVectorsTest {
     private fun raw(k: String, d: String, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = listOf(purchase), issued: Long = t0, from: Long = t0 - day, to: Long = t0 + 300 * day,
                     subject: Subject = Subject.TV, license: String = "lic-0001", seat: String? = null, nonce: String = "00112233445566778899aabbccddeeff", kk: Int? = null): String {
         val fp = dev(d).fp; val s = seat ?: SeatIds.of(license, fp); val kv = kk ?: DeviceIdentity.kFor(fp.n)
-        val p = Activation.payload(kind, subject, key(k).signer.keyId, nonce, issued, from, to, license, s, kv, fp.byKind, rights)
-        return Activation(kind, subject, key(k).signer.keyId, nonce, issued, from, to, license, s, kv, fp.byKind, rights, Base64.getEncoder().encodeToString(key(k).signer.sign(p.toByteArray()))).encode()
+        val p = Activation.payload(kind, subject, key(k).signer.keyId, issued, nonce, issued, from, to, license, s, kv, fp.byKind, rights)
+        return Activation(kind, subject, key(k).signer.keyId, issued, nonce, issued, from, to, license, s, kv, fp.byKind, rights, Base64.getEncoder().encodeToString(key(k).signer.sign(p.toByteArray()))).encode()
     }
 
     private fun hex(b: ByteArray) = b.joinToString("") { "%02x".format(it) }
 
     private fun activationCase(id: String, why: String, token: String, d: String, now: Long = t0, trusted: List<String> = listOf("desk", "phone", "server", "support"), revoked: List<String> = emptyList(),
-                               seats: List<Map<String, Any?>> = emptyList(), subject: Subject = Subject.TV, ring: KeyRing? = null) =
+                               seats: List<Map<String, Any?>> = emptyList(), subject: Subject = Subject.TV, lastSeq: Map<String, Long> = emptyMap()) =
         J("type" to "activation", "id" to id, "description" to why, "token" to token, "device" to d, "nowMs" to now, "trustedKeys" to trusted, "revokedKeys" to revoked, "revokedSeats" to seats,
-            "expectSubject" to subject.name.lowercase(), "expect" to evaluate(token, d, now, trusted, revoked, seats, subject))
+            "expectSubject" to subject.name.lowercase(), "lastSeq" to lastSeq, "expect" to evaluate(token, d, now, trusted, revoked, seats, subject, lastSeq))
 
     private fun ringOf(trusted: List<String>, revoked: List<String>) = KeyRing(trusted.map { key(it).signer.trusted(key(it).scopes) }, revoked.map { key(it).signer.keyId }.toSet())
 
-    private fun evaluate(token: String, d: String, now: Long, trusted: List<String>, revoked: List<String>, seats: List<Map<String, Any?>>, subject: Subject): Map<String, Any?> {
+    private fun evaluate(token: String, d: String, now: Long, trusted: List<String>, revoked: List<String>, seats: List<Map<String, Any?>>, subject: Subject, lastSeq: Map<String, Long> = emptyMap()): Map<String, Any?> {
         val rev = RevocationState(emptySet(), seats.associate { "${it["license"]}|${it["seat"]}" to (it["at"] as Long) })
-        return when (val r = ActivationVerifier(ringOf(trusted, revoked), revocations = rev, expect = subject).verify(token, dev(d).fp, now)) {
+        val seq = SeqState(lastSeq.mapKeys { key(it.key).signer.keyId })
+        return when (val r = ActivationVerifier(ringOf(trusted, revoked), revocations = rev, expect = subject, seqState = seq).verify(token, dev(d).fp, now)) {
             is ActivationResult.Accepted -> J("result" to "accepted", "kind" to r.activation.kind.name.lowercase(), "subject" to r.activation.subject.name.lowercase(),
                 "license" to r.activation.license, "seat" to r.activation.seat, "weakIdentity" to r.weakIdentity)
             is ActivationResult.Rejected -> J("result" to "rejected", "reason" to r.reason.name, "suspect" to r.suspect)
@@ -168,25 +170,25 @@ class ActivationVectorsTest {
             }
             return J("type" to "command", "id" to id, "description" to why, "device" to d, "openChallenges" to open, "trustedKeys" to trusted, "revokedKeys" to revoked, "steps" to out)
         }
-        val openCmd = issuer("desk").issueCommand(Power.OPEN_ALL, tvA.fp, ch1, days = 7)
+        val openCmd = issuer("desk").issueCommand(Power.OPEN_ALL, tvA.fp, ch1, t0, days = 7)
         cases += cmdCase("cmd-open-all", "« tout ouvert » 7 jours, défi émis par la TV", "tvA", listOf(ch1), listOf(Triple(openCmd, t0, null)))
         cases += cmdCase("cmd-replay", "le même jeton rejoué : refusé", "tvA", listOf(ch1), listOf(Triple(openCmd, t0, null), Triple(openCmd, t0, null)))
         cases += cmdCase("cmd-unknown-challenge", "défi jamais émis par cette TV", "tvA", listOf(ch2), listOf(Triple(openCmd, t0, null)))
         cases += cmdCase("cmd-wrong-tv", "commande destinée à une autre TV", "tvB-no-ethernet-usb-wifi", listOf(ch1), listOf(Triple(openCmd, t0, null)))
         cases += cmdCase("cmd-revoked-key", "clé révoquée", "tvA", listOf(ch1), listOf(Triple(openCmd, t0, null)), revoked = listOf("desk"))
-        val raw90 = key("desk").signer.let { s -> val p = OwnerCommand.payload(s.keyId, Power.OPEN_ALL, "", ch1, 4, tvA.fp.byKind, emptyList(), emptyList(), 90); OwnerCommand(s.keyId, Power.OPEN_ALL, "", ch1, 4, tvA.fp.byKind, emptyList(), emptyList(), 90, Base64.getEncoder().encodeToString(s.sign(p.toByteArray()))).encode() }
+        val raw90 = key("desk").signer.let { s -> val p = OwnerCommand.payload(s.keyId, t0, t0, Power.OPEN_ALL, "", ch1, 4, tvA.fp.byKind, emptyList(), emptyList(), 90); OwnerCommand(s.keyId, t0, t0, Power.OPEN_ALL, "", ch1, 4, tvA.fp.byKind, emptyList(), emptyList(), 90, Base64.getEncoder().encodeToString(s.sign(p.toByteArray()))).encode() }
         cases += cmdCase("cmd-clamped-30-days", "90 jours demandés : la TV borne à 30 jours", "tvA", listOf(ch1), listOf(Triple(raw90, t0, null)))
         cases += cmdCase("cmd-support-key-open-all", "clé de support seule : pouvoir « tout ouvert » refusé", "tvA", listOf(ch1),
-            listOf(Triple(key("support").signer.let { s -> val p = OwnerCommand.payload(s.keyId, Power.OPEN_ALL, "", ch1, 4, tvA.fp.byKind, emptyList(), emptyList(), 5); OwnerCommand(s.keyId, Power.OPEN_ALL, "", ch1, 4, tvA.fp.byKind, emptyList(), emptyList(), 5, Base64.getEncoder().encodeToString(s.sign(p.toByteArray()))).encode() }, t0, null)))
-        cases += cmdCase("cmd-support-reset", "support : remise à zéro de l'essai", "tvA", listOf(ch2), listOf(Triple(issuer("support").issueCommand(Power.SUPPORT, tvA.fp, ch2, action = "reset-trial"), t0, null)))
-        cases += cmdCase("cmd-unlock-lots", "déblocage de lots précis, 10 jours", "tvA", listOf(ch1), listOf(Triple(issuer("phone").issueCommand(Power.UNLOCK, tvA.fp, ch1, days = 10, lots = listOf(LotId("learn", "cm2"), LotId("quiz", "cm2"))), t0, null)))
+            listOf(Triple(key("support").signer.let { s -> val p = OwnerCommand.payload(s.keyId, t0, t0, Power.OPEN_ALL, "", ch1, 4, tvA.fp.byKind, emptyList(), emptyList(), 5); OwnerCommand(s.keyId, t0, t0, Power.OPEN_ALL, "", ch1, 4, tvA.fp.byKind, emptyList(), emptyList(), 5, Base64.getEncoder().encodeToString(s.sign(p.toByteArray()))).encode() }, t0, null)))
+        cases += cmdCase("cmd-support-reset", "support : remise à zéro de l'essai", "tvA", listOf(ch2), listOf(Triple(issuer("support").issueCommand(Power.SUPPORT, tvA.fp, ch2, t0, action = "reset-trial"), t0, null)))
+        cases += cmdCase("cmd-unlock-lots", "déblocage de lots précis, 10 jours", "tvA", listOf(ch1), listOf(Triple(issuer("phone").issueCommand(Power.UNLOCK, tvA.fp, ch1, t0, days = 10, lots = listOf(LotId("learn", "cm2"), LotId("quiz", "cm2"))), t0, null)))
         // 7. issuer builds: same inputs, same bytes (and refusals)
         fun build(id: String, why: String, k: String, r: ActivationIssuer.Request, d: String) = J("type" to "build-activation", "id" to id, "description" to why, "signer" to k, "request" to reqJson(r, d), "expect" to J("token" to issuer(k).issue(r).token))
         cases += build("build-trial", "construire la clé d'essai", "desk", req("tvA", ActivationKind.TRIAL), "tvA")
         cases += build("build-production", "construire la production (achat + abonnement)", "desk", req("tvA", rights = listOf(purchase, sub)), "tvA")
         cases += build("build-phone", "construire une activation de téléphone", "phone", req("phoneP", rights = listOf(purchase), subject = Subject.PHONE), "phoneP")
         cases += J("type" to "build-compact", "id" to "build-compact-trial", "description" to "construire la clé saisissable", "signer" to "desk", "request" to J("kind" to "trial", "deviceCode" to code, "notBeforeDay" to day0, "windowDays" to 200, "setId" to 0), "expect" to J("text" to compactOk))
-        cases += J("type" to "build-command", "id" to "build-command-open-all", "description" to "construire la commande « tout ouvert »", "signer" to "desk", "request" to J("power" to "open_all", "device" to "tvA", "challenge" to ch1, "days" to 7, "action" to "", "bundles" to emptyList<String>(), "lots" to emptyList<String>()), "expect" to J("token" to openCmd))
+        cases += J("type" to "build-command", "id" to "build-command-open-all", "description" to "construire la commande « tout ouvert »", "signer" to "desk", "request" to J("power" to "open_all", "device" to "tvA", "challenge" to ch1, "issuedAt" to t0, "days" to 7, "action" to "", "bundles" to emptyList<String>(), "lots" to emptyList<String>()), "expect" to J("token" to openCmd))
         fun refuse(id: String, why: String, k: String, r: ActivationIssuer.Request, d: String) = J("type" to "build-activation", "id" to id, "description" to why, "signer" to k, "request" to reqJson(r, d), "expect" to J("refused" to true))
         cases += refuse("build-refuse-window", "durée hors bornes (400 jours)", "desk", req("tvA", window = 400), "tvA")
         cases += refuse("build-refuse-zero-window", "durée nulle", "desk", req("tvA", window = 0), "tvA")
@@ -195,12 +197,80 @@ class ActivationVectorsTest {
         cases += refuse("build-refuse-no-rights", "production sans droit", "desk", req("tvA", rights = emptyList()), "tvA")
         cases += J("type" to "build-activation", "id" to "build-refuse-bad-code", "description" to "code d'appareil mal formé", "signer" to "desk",
             "request" to reqJson(req("tvA"), "tvA") + mapOf("deviceCodeOverride" to "ABCD-EFGH-JKMN-PQRZ"), "expect" to J("refused" to true))
+        // 5b. envelope: sequence numbers, unknown type
+        cases += activationCase("act-bad-stale-sequence", "numéro de séquence plus ancien que celui déjà vu pour cette clé", prodTok, "tvA", lastSeq = mapOf("desk" to t0 + 1000))
+        cases += activationCase("act-ok-same-sequence", "même numéro de séquence (le même fichier réinstallé) : accepté", prodTok, "tvA", lastSeq = mapOf("desk" to t0))
+        val reactivateOnly = ActivationIssuer(key("support-reactivate").signer, setOf(KeyScope.REACTIVATE))
+        cases += activationCase("act-ok-reactivate-scope", "une clé « reactivate » peut délivrer une activation de production (ré-émission)", reactivateOnly.issue(req("tvA", rights = listOf(purchase))).token, "tvA", trusted = listOf("desk", "phone", "server", "support-reactivate"))
+        cases += orderCases()
         cases += licenceCases()
         return J("format" to "castbridge-activation-test-vectors-v1", "warning" to "CLÉS DE TEST UNIQUEMENT : ces graines sont dérivées de textes publics et ne valent rien ; ne jamais les utiliser ailleurs que dans les tests",
             "nowMs" to t0, "compactEpochMs" to CompactActivation.EPOCH_MS,
             "keys" to keys.map { J("name" to it.name, "seed" to hex(seedOf(it.name)), "publicKey" to it.signer.publicKeyBase64, "kid" to it.signer.keyId, "scopes" to it.scopes.map { s -> s.name }.sorted()) },
             "devices" to devices.map { J("name" to it.name, "raw" to rawJson(it.raw), "code" to it.code, "fingerprints" to it.fp.byKind.mapKeys { e -> e.key.name }) },
             "cases" to cases)
+    }
+
+    // ---- deferred orders and revocation lists: same envelope ----
+    private fun orderCases(): List<Map<String, Any?>> {
+        val tvA = dev("tvA")
+        fun tok(k: String, seq: Long, target: Envelope.Target, action: String = "refresh-rights", params: Map<String, String> = mapOf("reason" to "periodic"), issuedAt: Long = t0, notBefore: Long = t0 - day, expiresAt: Long = t0 + 30 * day, nonce: String = "0102030405060708") =
+            Orders.issue(key(k).signer, seq, nonce, issuedAt, notBefore, expiresAt, target, action, params)
+        fun case(id: String, why: String, token: String, d: String = "tvA", now: Long = t0, trusted: List<String> = listOf("desk", "phone", "server", "support"), revoked: List<String> = emptyList(),
+                 last: Map<String, Long> = emptyMap(), licenses: List<String> = listOf("lic-0001"), groups: List<String> = listOf("beta")): Map<String, Any?> {
+            val seq = SeqState(last.mapKeys { key(it.key).signer.keyId })
+            val r = OrderVerifier(ringOf(trusted, revoked), seq).verify(token, DeviceContext(dev(d).fp, licenses.toSet(), groups.toSet()), now)
+            return J("type" to "order", "id" to id, "description" to why, "token" to token, "device" to d, "deviceLicenses" to licenses, "deviceGroups" to groups, "nowMs" to now, "trustedKeys" to trusted,
+                "revokedKeys" to revoked, "lastSeq" to last, "expect" to when (r) {
+                    is OrderResult.Accepted -> J("result" to "accepted", "action" to r.order.action, "params" to r.order.params.toSortedMap(), "seq" to r.envelope.seq)
+                    is OrderResult.Rejected -> J("result" to "rejected", "reason" to r.reason.name)
+                })
+        }
+        val any = Envelope.Target.Any
+        val out = ArrayList<Map<String, Any?>>()
+        out += case("order-any", "ordre pour tous les appareils, clé serveur (portée policy)", tok("server", 10, any))
+        out += case("order-device", "ordre ciblant ce matériel (k parmi n)", tok("server", 11, Envelope.Target.Device(DeviceIdentity.kFor(tvA.fp.n), tvA.fp.byKind)))
+        out += case("order-license", "ordre ciblant une licence que l'appareil détient", tok("server", 12, Envelope.Target.License("lic-0001")))
+        out += case("order-group", "ordre ciblant un groupe", tok("server", 13, Envelope.Target.Group("beta")))
+        out += case("order-seq-gap", "numéro de séquence en avance (trou) : accepté", tok("server", 500, any), last = mapOf("server" to 10))
+        out += case("order-bad-wrong-device", "ordre destiné à une autre TV", tok("server", 20, Envelope.Target.Device(DeviceIdentity.kFor(tvA.fp.n), tvA.fp.byKind)), d = "tvB-no-ethernet-usb-wifi")
+        out += case("order-bad-wrong-license", "licence que l'appareil ne détient pas", tok("server", 21, Envelope.Target.License("lic-9999")))
+        out += case("order-bad-wrong-group", "groupe auquel l'appareil n'appartient pas", tok("server", 22, Envelope.Target.Group("autre")))
+        out += case("order-bad-replay", "même numéro de séquence : rejeu refusé", tok("server", 30, any), last = mapOf("server" to 30))
+        out += case("order-bad-late", "numéro de séquence en retard : refusé", tok("server", 29, any), last = mapOf("server" to 30))
+        out += case("order-bad-scope", "clé sans la portée policy (support seul)", tok("support", 31, any))
+        out += case("order-bad-expired", "ordre expiré", tok("server", 32, any, expiresAt = t0 - 10 * day, notBefore = t0 - 40 * day))
+        out += case("order-bad-not-yet", "ordre pas encore valable", tok("server", 33, any, notBefore = t0 + 60 * day, expiresAt = t0 + 90 * day))
+        out += case("order-bad-clock-before-window", "horloge de la TV en 1970 : l'instant retenu précède notBefore (aucun plancher signé pour un ordre), refusé", tok("server", 34, any), now = 0L)
+        out += case("order-bad-unknown-key", "clé inconnue", tok("rogue", 35, any))
+        out += case("order-bad-revoked-key", "clé révoquée", tok("server", 36, any), revoked = listOf("server"))
+        val good = tok("server", 40, any)
+        out += case("order-bad-tampered", "paramètre modifié après signature", good.split('.').let { p -> p[0] + "." + Base64.getUrlEncoder().withoutPadding().encodeToString(String(Base64.getUrlDecoder().decode(p[1])).replace("periodic", "perpetue").toByteArray()) + "." + p[2] })
+        val rawBad = key("server").signer.let { sg -> val e = Envelope("order", sg.keyId, 41, "0102030405060708", t0, t0 - day, t0 + 30 * day, any, listOf("action=Format Disk"), ""); e.withSignature(Base64.getEncoder().encodeToString(sg.sign(e.canonicalPayload().toByteArray()))).encode() }
+        out += case("order-bad-schema", "action hors syntaxe : refusée avant le moteur de politiques", rawBad)
+        val rawType = key("server").signer.let { sg -> val e = Envelope("telemetry", sg.keyId, 42, "0102030405060708", t0, t0 - day, t0 + 30 * day, any, listOf("x=1"), ""); e.withSignature(Base64.getEncoder().encodeToString(sg.sign(e.canonicalPayload().toByteArray()))).encode() }
+        out += case("order-bad-unknown-type", "type de charge utile inconnu", rawType)
+        out += case("order-bad-activation-as-order", "une activation présentée comme un ordre", issuer("desk").issue(req("tvA")).token)
+        out += J("type" to "build-order", "id" to "build-order-any", "description" to "construire un ordre (mêmes entrées, mêmes octets)", "signer" to "server",
+            "request" to J("seq" to 10, "nonce" to "0102030405060708", "issuedAt" to t0, "notBefore" to t0 - day, "expiresAt" to t0 + 30 * day, "target" to "any", "action" to "refresh-rights", "params" to J("reason" to "periodic")),
+            "expect" to J("token" to tok("server", 10, any)))
+        out += J("type" to "build-order", "id" to "build-order-refuse", "description" to "action hors syntaxe : refus de construire", "signer" to "server",
+            "request" to J("seq" to 10, "nonce" to "0102030405060708", "issuedAt" to t0, "notBefore" to t0 - day, "expiresAt" to t0 + 30 * day, "target" to "any", "action" to "Format Disk", "params" to J()), "expect" to J("refused" to true))
+        // revocation lists
+        val notice = RevocationNotice.issue(key("server").signer, t0, RevocationState(setOf(key("rogue").signer.keyId), mapOf("lic-0001|aabbccddeeff0011" to t0)))
+        fun rev(id: String, why: String, token: String, trusted: List<String> = listOf("desk", "server")): Map<String, Any?> {
+            val r = RevocationNotice.verify(token, ringOf(trusted, emptyList()))
+            return J("type" to "revocation", "id" to id, "description" to why, "token" to token, "trustedKeys" to trusted,
+                "expect" to if (r == null) J("result" to "rejected") else J("result" to "accepted", "keys" to r.keys.sorted(), "seats" to r.seats.toSortedMap()))
+        }
+        out += rev("revocation-ok", "liste de révocation signée par la clé serveur (portée REVOKE)", notice)
+        out += rev("revocation-bad-scope", "signée par une clé sans la portée REVOKE", RevocationNotice.issue(key("support").signer, t0, RevocationState(setOf("00112233445566ff"), emptyMap())), trusted = listOf("desk", "server", "support"))
+        out += rev("revocation-bad-unknown-key", "signée par une clé inconnue", RevocationNotice.issue(key("rogue").signer, t0, RevocationState(setOf("00112233445566ff"), emptyMap())))
+        out += rev("revocation-bad-tampered", "modifiée après signature", notice.split('.').let { p -> p[0] + "." + Base64.getUrlEncoder().withoutPadding().encodeToString(String(Base64.getUrlDecoder().decode(p[1])).replace("lic-0001", "lic-0002").toByteArray()) + "." + p[2] })
+        out += rev("revocation-bad-as-activation", "une activation présentée comme une révocation", issuer("desk").issue(req("tvA")).token)
+        out += J("type" to "build-revocation", "id" to "build-revocation", "description" to "construire la liste de révocation", "signer" to "server",
+            "request" to J("at" to t0, "keys" to listOf(key("rogue").signer.keyId), "seats" to J("lic-0001|aabbccddeeff0011" to t0)), "expect" to J("token" to notice))
+        return out
     }
 
     // ---- licences: events -> state (the three tools must apply the same accounting) ----
@@ -298,7 +368,8 @@ class ActivationVectorsTest {
                 "activation" -> {
                     @Suppress("UNCHECKED_CAST") val seats = (c["revokedSeats"] as List<Map<String, Any?>>).associate { "${it["license"]}|${it["seat"]}" to (it["at"] as Number).toLong() }
                     val ring = KeyRing(trusted(c["trustedKeys"] as List<*>), (c["revokedKeys"] as List<*>).map { ks.getValue(it as String)["kid"] as String }.toSet())
-                    val r = ActivationVerifier(ring, revocations = RevocationState(emptySet(), seats), expect = Subject.valueOf((c["expectSubject"] as String).uppercase())).verify(c["token"] as String, fp(c["device"] as String), (c["nowMs"] as Number).toLong())
+                    val seq = SeqState((c["lastSeq"] as Map<*, *>).entries.associate { ks.getValue(it.key as String)["kid"] as String to (it.value as Number).toLong() })
+                    val r = ActivationVerifier(ring, revocations = RevocationState(emptySet(), seats), expect = Subject.valueOf((c["expectSubject"] as String).uppercase()), seqState = seq).verify(c["token"] as String, fp(c["device"] as String), (c["nowMs"] as Number).toLong())
                     if (expect!!["result"] == "accepted") { val a = assertIs<ActivationResult.Accepted>(r, id); assertEquals(expect["license"], a.activation.license, id); assertEquals(expect["seat"], a.activation.seat, id) }
                     else assertEquals(expect["reason"], assertIs<ActivationResult.Rejected>(r, id).reason.name, id)
                 }
@@ -333,6 +404,28 @@ class ActivationVectorsTest {
                     val p = DeviceCode.parse(c["text"] as String)
                     if (expect!!["result"] == "ok") assertEquals(expect["code"], p, id) else assertNull(p, id)
                 }
+                "order" -> {
+                    val seq = SeqState((c["lastSeq"] as Map<*, *>).entries.associate { ks.getValue(it.key as String)["kid"] as String to (it.value as Number).toLong() })
+                    val ring = KeyRing(trusted(c["trustedKeys"] as List<*>), (c["revokedKeys"] as List<*>).map { ks.getValue(it as String)["kid"] as String }.toSet())
+                    val ctx = DeviceContext(fp(c["device"] as String), (c["deviceLicenses"] as List<*>).map { it as String }.toSet(), (c["deviceGroups"] as List<*>).map { it as String }.toSet())
+                    val r = OrderVerifier(ring, seq).verify(c["token"] as String, ctx, (c["nowMs"] as Number).toLong())
+                    if (expect!!["result"] == "accepted") { val a = assertIs<OrderResult.Accepted>(r, id); assertEquals(expect["action"], a.order.action, id); assertEquals((expect["seq"] as Number).toLong(), a.envelope.seq, id) }
+                    else assertEquals(expect["reason"], assertIs<OrderResult.Rejected>(r, id).reason.name, id)
+                }
+                "revocation" -> {
+                    val r = RevocationNotice.verify(c["token"] as String, KeyRing(trusted(c["trustedKeys"] as List<*>)))
+                    if (expect!!["result"] == "accepted") { assertNotNull(r, id); assertEquals(expect["keys"], r.keys.sorted(), id) } else assertNull(r, id)
+                }
+                "build-order" -> {
+                    @Suppress("UNCHECKED_CAST") val rq = c["request"] as Map<String, Any?>; @Suppress("UNCHECKED_CAST") val params = (rq["params"] as Map<String, String>)
+                    val action = rq["action"] as String
+                    if (expect!!["refused"] == true) assertFailsWith<IllegalArgumentException>(id) { Orders.issue(signerOf(c["signer"] as String), (rq["seq"] as Number).toLong(), rq["nonce"] as String, (rq["issuedAt"] as Number).toLong(), (rq["notBefore"] as Number).toLong(), (rq["expiresAt"] as Number).toLong(), Envelope.Target.Any, action, params) }
+                    else assertEquals(expect["token"], Orders.issue(signerOf(c["signer"] as String), (rq["seq"] as Number).toLong(), rq["nonce"] as String, (rq["issuedAt"] as Number).toLong(), (rq["notBefore"] as Number).toLong(), (rq["expiresAt"] as Number).toLong(), Envelope.Target.Any, action, params), id)
+                }
+                "build-revocation" -> {
+                    @Suppress("UNCHECKED_CAST") val rq = c["request"] as Map<String, Any?>; @Suppress("UNCHECKED_CAST") val seats = (rq["seats"] as Map<String, Any?>).mapValues { (it.value as Number).toLong() }
+                    assertEquals(expect!!["token"], RevocationNotice.issue(signerOf(c["signer"] as String), (rq["at"] as Number).toLong(), RevocationState((rq["keys"] as List<*>).map { it as String }.toSet(), seats)), id)
+                }
                 "licence" -> {
                     @Suppress("UNCHECKED_CAST") val evs = (c["events"] as List<Map<String, Any?>>).map { LicenseEvent.fromMap(it) ?: LicenseEvent(it["kid"] as String, it["text"] as String, it["signature"] as String) }
                     val ring = KeyRing(trusted(c["trustedKeys"] as List<*>))
@@ -360,7 +453,7 @@ class ActivationVectorsTest {
                 }
                 "build-command" -> {
                     @Suppress("UNCHECKED_CAST") val rq = c["request"] as Map<String, Any?>
-                    assertEquals(expect!!["token"], ActivationIssuer(signerOf(c["signer"] as String)).issueCommand(Power.valueOf((rq["power"] as String).uppercase()), fp(rq["device"] as String), rq["challenge"] as String, (rq["days"] as Number).toInt()), id)
+                    assertEquals(expect!!["token"], ActivationIssuer(signerOf(c["signer"] as String)).issueCommand(Power.valueOf((rq["power"] as String).uppercase()), fp(rq["device"] as String), rq["challenge"] as String, (rq["issuedAt"] as Number).toLong(), (rq["days"] as Number).toInt()), id)
                 }
                 else -> fail("unknown vector type ${c["type"]}")
             }

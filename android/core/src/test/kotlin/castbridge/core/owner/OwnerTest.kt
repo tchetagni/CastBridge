@@ -24,14 +24,14 @@ private class Console(seed: ByteArray = ByteArray(32).also { SecureRandom().next
     fun activation(fp: Fingerprints, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = emptyList(), issued: Long = T0, from: Long = T0 - day,
                    to: Long = T0 + 300 * day, k: Int = DeviceIdentity.kFor(fp.n), nonce: String = "ab".repeat(8), subject: Subject = Subject.TV,
                    license: String = if (kind == ActivationKind.TRIAL) "trial" else "lic-1", seat: String = SeatIds.of(license, fp)): String {
-        val payload = Activation.payload(kind, subject, keyId, nonce, issued, from, to, license, seat, k, fp.byKind, rights)
-        return Activation(kind, subject, keyId, nonce, issued, from, to, license, seat, k, fp.byKind, rights, sig(payload)).encode()
+        val payload = Activation.payload(kind, subject, keyId, issued, nonce, issued, from, to, license, seat, k, fp.byKind, rights)
+        return Activation(kind, subject, keyId, issued, nonce, issued, from, to, license, seat, k, fp.byKind, rights, sig(payload)).encode()
     }
 
     fun command(fp: Fingerprints, challenge: String, power: Power = Power.OPEN_ALL, days: Int = 30, action: String = "", bundles: List<String> = emptyList(),
                 lots: List<LotId> = emptyList(), k: Int = DeviceIdentity.kFor(fp.n)): String {
-        val payload = OwnerCommand.payload(keyId, power, action, challenge, k, fp.byKind, bundles, lots, days)
-        return OwnerCommand(keyId, power, action, challenge, k, fp.byKind, bundles, lots, days, sig(payload)).encode()
+        val payload = OwnerCommand.payload(keyId, T0, T0, power, action, challenge, k, fp.byKind, bundles, lots, days)
+        return OwnerCommand(keyId, T0, T0, power, action, challenge, k, fp.byKind, bundles, lots, days, sig(payload)).encode()
     }
 
     fun compact(code: String, kind: ActivationKind = ActivationKind.TRIAL, notBeforeDay: Int = ((T0 - CompactActivation.EPOCH_MS) / day).toInt() - 1, window: Int = 200, setId: Int = 0): String {
@@ -136,8 +136,8 @@ class ActivationTest {
         rejected(v.verify("garbage", fp, T0), Rejection.MALFORMED)
         // a key claiming the id of the real one but signing with its own pair
         val liar = Console(); val seat = SeatIds.of("lic-1", fp)
-        val liarTok = Activation.payload(ActivationKind.PRODUCTION, Subject.TV, console.keyId, "ab".repeat(8), T0, T0 - day, T0 + day, "lic-1", seat, 4, fp.byKind, emptyList())
-        rejected(v.verify(Activation(ActivationKind.PRODUCTION, Subject.TV, console.keyId, "ab".repeat(8), T0, T0 - day, T0 + day, "lic-1", seat, 4, fp.byKind, emptyList(),
+        val liarTok = Activation.payload(ActivationKind.PRODUCTION, Subject.TV, console.keyId, T0, "ab".repeat(8), T0, T0 - day, T0 + day, "lic-1", seat, 4, fp.byKind, emptyList())
+        rejected(v.verify(Activation(ActivationKind.PRODUCTION, Subject.TV, console.keyId, T0, "ab".repeat(8), T0, T0 - day, T0 + day, "lic-1", seat, 4, fp.byKind, emptyList(),
             Base64.getEncoder().encodeToString(liar.signer.sign(liarTok.toByteArray()))).encode(), fp, T0), Rejection.BAD_SIGNATURE)
     }
 

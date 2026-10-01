@@ -85,11 +85,11 @@ class ActivationReceiver(private val ring: KeyRing, private val trusted: List<Tr
     }
 
     private fun manual(text: String, nowMs: Long): ActivationResult {
-        if (text.startsWith(Activation.PREFIX + ".")) return verifier.verify(text, device, nowMs)
+        if (text.startsWith(Envelope.PREFIX + ".")) return verifier.verify(text, device, nowMs)
         val grouped = GroupedText.decode(text)
         if (grouped is GroupedText.Decoded.Ok) {
             val token = String(grouped.bytes, Charsets.US_ASCII)
-            if (token.startsWith(Activation.PREFIX + ".")) return verifier.verify(token, device, nowMs)
+            if (token.startsWith(Envelope.PREFIX + ".")) return verifier.verify(token, device, nowMs)
         }
         return CompactActivation.verify(text, ring, trusted, deviceCode, nowMs)
     }
@@ -117,7 +117,7 @@ object CarrierMode {
     /** [text] = a full token, the grouped text or a compact key, as typed or scanned. Null when it is none of these (nothing is forwarded). */
     fun accept(text: String): Item? {
         val t = text.trim()
-        if (t.startsWith(Activation.PREFIX + ".")) {
+        if (t.startsWith(Envelope.PREFIX + ".")) {
             val a = Activation.decode(t) ?: return null
             if (a.subject != Subject.TV) return null
             val code = DeviceCode.of(Fingerprints(a.factors))
@@ -131,7 +131,7 @@ object CarrierMode {
     }
 
     /** The Bluetooth frame to hand a full token to the TV (a compact key is typed on the TV: it has no frame). */
-    fun frame(item: Item): ByteArray? = if (item.token.startsWith(Activation.PREFIX + ".")) OwnerFrames.encode(OwnerFrames.ACTIVATION, item.token) else null
+    fun frame(item: Item): ByteArray? = if (item.token.startsWith(Envelope.PREFIX + ".")) OwnerFrames.encode(OwnerFrames.ACTIVATION, item.token) else null
 }
 
 /** Who issues the trial key (owner decision): MANUAL by default during the offline phase (the owner generates it from the device code), AUTOMATIC when the server may deliver it to an online phone. */

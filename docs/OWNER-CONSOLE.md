@@ -13,14 +13,9 @@ Une application téléphone **indistribuable**, à droits de superadmin, à acc�
 4. **Pouvoirs gradués** (`Power`) : `SUPPORT` (diagnostic, remise à zéro de l'essai : aucun contenu), `UNLOCK` (lots ou bouquets précis, durée limitée **≤ 30 jours**), `OPEN_ALL` (« tout ouvert », **≤ 30 jours, réglable à chaque déblocage** dans le champ `days` de la commande signée, **borné à 30 jours par le vérificateur côté TV**, renouvelable par une nouvelle commande). À l'expiration, la TV revient aux droits acquis (essai + achats à la carte + abonnement valide) **sans rien supprimer**. (La limite de 30 jours de `UNLOCK` est mon choix par défaut, **à confirmer** : `Power.maxDays`.)
 5. **Plusieurs clés publiques + révocation + rotation dès la première version + clé de secours hors ligne** : la TV accepte tout identifiant de clé du `KeyRing` ; la rotation = ajouter la nouvelle clé publique, révoquer l'ancienne (testé : l'ancienne est refusée, la clé de secours reste valable). La **clé de secours** est gardée **hors ligne** (jamais sur un téléphone), son identifiant est déjà dans l'APK TV.
 
-## 3. Format des commandes (`OwnerCommand`, `cbo1.…`)
-Texte canonique signé, relu depuis le texte même qui a été signé :
-```
-castbridge-owner-command-v1
-keyId=<16 hex>            power=support|unlock|open_all      action=<diagnostic|reset-trial|vide>
-challenge=<hex>           k=<n>        factor=<FACTEUR>|<empreinte>   (une ligne par facteur, triées)
-bundles=<ids>   lots=<fonction:scope,…>   days=<n>
-```
+## 3. Format des commandes (`OwnerCommand`, `cbx1.…` (type `command`))
+Enveloppe signée générique `cbx1` de type `command` (voir [ACTIVATION-FORMAT.md](ACTIVATION-FORMAT.md) § 3 et § 5 : `nonce` = le défi de la TV, `target=device`, `kid`, `seq`), corps : `power=support|unlock|open_all`, `action=`, `bundles=`, `lots=`, `days=`.
+
 **Vérification côté TV** (`OwnerCommandVerifier`, dans cet ordre ; une commande refusée **ne consomme pas** le défi, donc une fausse commande ne peut pas brûler le défi d'une vraie) : forme canonique, clé connue, clé non révoquée, signature, **pouvoir ≤ pouvoir maximal de la clé**, TV cible conforme, action valide, **défi émis par cette TV, non expiré, jamais utilisé** ; durée **bornée** à 30 jours (`clamped` signalé à la console). Les défis dépensés sont persistés (512 derniers) pour qu'un redémarrage ne rouvre pas un rejeu.
 
 ## 4. Activation hors ligne (la console produit les clés sans serveur)
@@ -35,11 +30,11 @@ Un **service dédié** (`7c5e3b9a-4d2f-4c61-9b0e-cb0000000004`, après le servic
 | Type | Sens | Contenu |
 |---|---|---|
 | `CHALLENGE_REQUEST` / `CHALLENGE` | console → TV / TV → console | le défi (32 hex) |
-| `COMMAND` | console → TV | jeton `cbo1.…` |
+| `COMMAND` | console → TV | jeton `cbx1.…` (type `command`) |
 | `RESULT` | TV → console | `ok` + message en français |
 | `DEVICE_INFO_REQUEST` / `DEVICE_INFO` | console ↔ TV | code d'appareil + `k` + empreintes (la « demande d'appareil ») |
 | `PAIR` | console → TV | le code d'appairage court affiché sur le panneau caché |
-| `ACTIVATION` | console → TV | jeton `cba1.…` (phase hors ligne) |
+| `ACTIVATION` | console → TV | jeton `cbx1.…` (type `activation`) (phase hors ligne) |
 
 Le service n'est ouvert que lorsque le panneau caché est révélé (écoute en permanence côté TV selon la décision du coordinateur ; l'écoute n'ouvre que **ce protocole signé**, rien d'autre).
 
