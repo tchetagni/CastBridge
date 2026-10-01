@@ -64,7 +64,10 @@ class RemoteSetupActivity : Activity() {
         super.onResume()
         val on = RemoteHub.systemEnabled(this)
         val live = RemoteAccessibilityService.instance != null
+        val unavailable = RemoteHub.systemUnavailableReason(this)
+        open.isEnabled = unavailable == null
         state.text = when {
+            unavailable != null -> "Mode « toute la TV » : indisponible sur cette TV. $unavailable La télécommande du téléphone pilote CastBridge, le volume et le muet."
             on && live -> "Mode « toute la TV » : actif ✓"
             on -> "Mode « toute la TV » : activé, en cours de démarrage…"
             else -> "Mode « toute la TV » : inactif (la télécommande pilote CastBridge seulement)"

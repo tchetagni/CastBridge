@@ -38,13 +38,16 @@ data class RemoteTv(val name: String, val host: String?, val port: Int = Receive
 data class RemoteTvState(
     val screen: String?, val castbridgeFront: Boolean, val textField: Boolean,
     val systemEnabled: Boolean, val systemConnected: Boolean, val volume: Int?, val muted: Boolean?, val volumeFixed: Boolean,
+    /** False when the TV says the whole-TV mode cannot be switched on there (older TVs omit it: then true). */
+    val systemAvailable: Boolean = true, val systemReason: String? = null,
 ) {
     companion object {
         fun parse(j: String): RemoteTvState? = runCatching {
             val o = Json.obj(j)
             @Suppress("UNCHECKED_CAST") val sys = o["system"] as? Map<String, Any?> ?: emptyMap()
             RemoteTvState(o["screen"] as? String, o["castbridgeFront"] == true, o["textField"] == true,
-                sys["enabled"] == true, sys["connected"] == true, (o["volume"] as? Long)?.toInt(), o["muted"] as? Boolean, o["volumeFixed"] == true)
+                sys["enabled"] == true, sys["connected"] == true, (o["volume"] as? Long)?.toInt(), o["muted"] as? Boolean, o["volumeFixed"] == true,
+                sys["available"] != false, sys["reason"] as? String)
         }.getOrNull()
     }
 }

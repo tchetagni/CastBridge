@@ -169,6 +169,27 @@ object RemoteHub {
         return if (why == null) Outcome.done("app") else Outcome.refused(why)
     }
 
+    /**
+     * Can the owner switch the accessibility mode on at all? Android 13+ blocks the accessibility service of an app that was not installed by a
+     * store (« paramètres restreints ») until « Infos sur l'appli › Autoriser les paramètres restreints »; a TV without that screen (the white-label
+     * Amlogic/CVTE ones sold in Cameroon have no stock Settings) can never lift it. Returns null when it may work, else why not (French).
+     * Already enabled counts as possible. Only a best guess about the block itself: no API reports it.
+     */
+    fun systemUnavailableReason(ctx: Context): String? {
+        if (systemEnabled(ctx) || RemoteAccessibilityService.instance != null) return null
+        if (Build.VERSION.SDK_INT < 33) return null
+        val pm = ctx.packageManager
+        @Suppress("DEPRECATION")
+        val installer: String? = runCatching {
+            if (Build.VERSION.SDK_INT >= 30) pm.getInstallSourceInfo(ctx.packageName).installingPackageName else pm.getInstallerPackageName(ctx.packageName)
+        }.getOrNull()
+        val fromStore = installer in setOf("com.android.vending", "com.google.android.packageinstaller.store", "com.amazon.venezia")
+        if (fromStore) return null
+        val appInfo = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.parse("package:" + ctx.packageName))
+        val canLift = runCatching { pm.resolveActivity(appInfo, 0) != null }.getOrDefault(false)
+        return if (canLift) null else "Android bloque ce mode pour une app installée hors boutique (« paramètres restreints »), et cette TV n'a pas l'écran qui permet de le lever."
+    }
+
     fun systemEnabled(ctx: Context): Boolean {
         val me = ComponentName(ctx, RemoteAccessibilityService::class.java).flattenToString()
         val list = Settings.Secure.getString(ctx.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES).orEmpty()
@@ -294,7 +315,10 @@ object RemoteHub {
                 append(",\"textField\":").append(text)
                 append(",\"system\":{\"enabled\":").append(s?.let { systemEnabled(it) } ?: false)
                 append(",\"connected\":").append(RemoteAccessibilityService.instance != null)
-                append(",\"dpadGlobal\":").append(Build.VERSION.SDK_INT >= 33).append('}')
+                append(",\"dpadGlobal\":").append(Build.VERSION.SDK_INT >= 33)
+                append(",\"available\":").append(s?.let { systemUnavailableReason(it) } == null)
+                s?.let { systemUnavailableReason(it) }?.let { append(",\"reason\":").append(q(it)) }
+                append('}')
                 append(",\"volume\":").append(vol ?: "null")
                 append(",\"muted\":").append(muted ?: "null")
                 append(",\"volumeFixed\":").append(runCatching { am?.isVolumeFixed }.getOrNull() ?: false)

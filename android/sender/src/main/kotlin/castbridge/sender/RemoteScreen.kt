@@ -431,14 +431,15 @@ private fun WholeTvRow(on: Boolean, st: RemoteTvState?, onChange: (Boolean) -> U
                     Text("Piloter toute la TV", style = MaterialTheme.typography.titleSmall)
                     Text(when {
                         st == null -> "État inconnu (TV non connectée)"
+                        !st.systemAvailable && !st.systemConnected -> "Indisponible sur cette TV. " + (st.systemReason ?: "") + " La télécommande pilote CastBridge, le volume et le muet."
                         st.systemConnected -> "Actif sur la TV (accessibilité) : Retour, Accueil, flèches et OK aussi hors de CastBridge"
                         st.systemEnabled -> "Activé sur la TV, démarrage…"
                         else -> "Inactif : la télécommande pilote CastBridge seulement. À activer une fois sur la TV."
                     }, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
                 }
-                Switch(on, onChange)
+                Switch(on && (st?.systemAvailable != false || st.systemConnected), onChange, enabled = st == null || st.systemAvailable || st.systemConnected)
             }
-            if (st != null && !st.systemConnected && on)
+            if (st != null && st.systemAvailable && !st.systemConnected && on)
                 TextButton(onClick = { RemoteController.setup() }) { Text("Afficher la marche à suivre sur la TV") }
         }
     }
