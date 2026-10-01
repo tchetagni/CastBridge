@@ -1,0 +1,984 @@
+{
+ "chapter": "vie-hygiene-sante-hygiene",
+ "lessons": [
+  {
+   "id": "vie-hygiene-sante-hygiene-eau",
+   "title": "Hygiène du corps, eau potable et aliments",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation à la santé (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Citer les moments où il faut se laver les mains et décrire les gestes.",
+    "Expliquer la différence entre eau propre à l'œil et eau potable.",
+    "Reconnaître les bons gestes d'hygiène alimentaire.",
+    "Expliquer comment l'assainissement protège la santé de tous."
+   ],
+   "exercises": [
+    "vie-hygiene-sante-hygiene-eau-01",
+    "vie-hygiene-sante-hygiene-eau-02",
+    "vie-hygiene-sante-hygiene-eau-03",
+    "vie-hygiene-sante-hygiene-eau-04",
+    "vie-hygiene-sante-hygiene-eau-05",
+    "vie-hygiene-sante-hygiene-eau-06"
+   ],
+   "selfCheck": [
+    "vie-hygiene-sante-hygiene-eau-q1",
+    "vie-hygiene-sante-hygiene-eau-q2",
+    "vie-hygiene-sante-hygiene-eau-q3",
+    "vie-hygiene-sante-hygiene-eau-q4",
+    "vie-hygiene-sante-hygiene-eau-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 5e par défaut (utile à tous les apprenants).",
+    "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+    "Vérifier que les moyens de rendre l'eau potable (ébullition, filtration, désinfection) sont présentés en principe, sans durée ni dosage.",
+    "Vérifier le vocabulaire (germes, assainissement) pour des élèves de 5e."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hygiène",
+     "md": "L'**hygiène** regroupe tous les gestes qui gardent le corps, les objets, les aliments et le cadre de vie **propres** pour empêcher les **germes** (microbes) de nous rendre malades. Les germes sont trop petits pour être vus à l'œil nu : une main qui semble propre peut en porter beaucoup.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Bien se laver les mains",
+     "md": "**Quand ?** avant de manger ou de cuisiner ; après les toilettes ; après avoir touché des animaux, des ordures ou de la terre ; après avoir soigné un malade ; au retour du marché.\n**Comment ?**\n1. Mouiller les mains avec de l'eau propre.\n2. Frotter avec du savon : paumes, dos des mains, entre les doigts, ongles.\n3. Rincer à l'eau propre.\n4. Sécher avec un linge propre ou à l'air.\nSans savon, de la cendre ou un simple rinçage valent mieux que rien, mais le savon reste préférable.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Eau potable et assainissement",
+     "md": "Une eau **potable** est une eau qu'on peut boire sans risque. Une eau claire n'est pas forcément potable : puits, rivière ou eau de pluie peuvent contenir des germes. On peut rendre une eau plus sûre en la **filtrant** (linge propre, filtre), en la **faisant bouillir** ou en la **désinfectant** selon les conseils d'un agent de santé. On la garde dans un récipient **propre et couvert**.\nL'**assainissement** = latrines propres, évacuation des déchets et des eaux usées, pas d'eau stagnante.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Hygiène des aliments",
+     "md": "- Laver les fruits et légumes à l'eau potable.\n- Bien cuire la viande et le poisson ; réchauffer les restes.\n- Séparer le cru et le cuit (planches, couteaux).\n- Couvrir les plats contre les mouches ; ranger les aliments au frais ou à l'abri.\n- Ne pas consommer un aliment qui sent mauvais ou dont la date est dépassée.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 80,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 54.9,
+        "text": "Selles",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 30,
+        "w": 80,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 54.9,
+        "text": "Eau sale",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 30,
+        "w": 80,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 54.9,
+        "text": "Mains",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 30,
+        "w": 80,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 54.9,
+        "text": "Bouche",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 50,
+        "x2": 110,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 50,
+        "x2": 210,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 50,
+        "x2": 310,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 110,
+        "text": "Latrines",
+        "size": 13,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 110,
+        "text": "Eau traitée",
+        "size": 13,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 110,
+        "text": "Lavage",
+        "size": 13,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 110,
+        "text": "Cuisson",
+        "size": 13,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 160,
+        "text": "Chaque geste d'hygiène coupe la chaîne de transmission",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "La chaîne de transmission des germes par les selles, l'eau, les mains et les aliments, et les gestes qui l'interrompent.",
+     "alt": "Quatre rectangles reliés par des flèches : selles, eau sale, mains, bouche. Sous chacun, un geste de protection en vert : latrines, eau traitée, lavage des mains, cuisson."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : de retour du marché",
+     "statement": "Mireille revient du marché avec du poisson cru et des tomates. Que doit-elle faire avant de préparer le repas ?",
+     "steps": [
+      {
+       "md": "Elle a touché du poisson cru et de l'argent : elle se **lave les mains** à l'eau propre avec du savon."
+      },
+      {
+       "md": "Elle lave les tomates à l'eau potable et utilise une planche différente pour le poisson cru."
+      },
+      {
+       "md": "Elle cuit bien le poisson et couvre le plat pour éloigner les mouches."
+      }
+     ],
+     "answer": "**Lavage des mains, légumes lavés, cru séparé du cuit, cuisson complète, plat couvert.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : l'eau du puits",
+     "statement": "La famille de Paul boit l'eau d'un puits, claire mais proche des latrines. Que lui conseiller ?",
+     "steps": [
+      {
+       "md": "Une eau claire n'est pas forcément potable, surtout près de latrines : risque de germes."
+      },
+      {
+       "md": "Avant de boire, filtrer puis faire bouillir l'eau, ou la désinfecter selon les conseils de l'agent de santé du quartier."
+      },
+      {
+       "md": "Conserver l'eau dans un seau propre et couvert, avec un gobelet à manche pour ne pas y tremper les mains."
+      }
+     ],
+     "answer": "**Traiter l'eau avant de la boire et la conserver à l'abri.** À long terme : éloigner latrines et puits."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « L'eau est claire, donc elle est potable. » Faux.\n- Se laver les mains seulement avec de l'eau, ou les essuyer sur un vêtement sale.\n- Utiliser la même planche pour le cru et le cuit.\n- Laisser de l'eau stagner dans des seaux ou des pneus.\n- Boire l'eau d'un récipient où l'on plonge ses mains.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dans ton quartier, qui s'occupe de l'enlèvement des ordures ? Observe où elles sont déposées.",
+      "Organise dans ta classe un « coin lavage des mains » avec seau, robinet ou bouteille percée, et savon.",
+      "Renseigne-toi auprès du centre de santé sur les conseils locaux pour traiter l'eau."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-hygiene-sante-hygiene-eau-01"
+    }
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil",
+   "title": "Bien manger, bien dormir, bouger",
+   "minutes": 30,
+   "programRef": "Compétence de vie pratique — éducation à la santé (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Citer les grands groupes d'aliments et leur rôle.",
+    "Composer un repas équilibré avec des produits locaux.",
+    "Expliquer pourquoi le sommeil et l'activité physique comptent.",
+    "Éviter les erreurs courantes d'alimentation."
+   ],
+   "exercises": [
+    "vie-hygiene-sante-nutrition-sommeil-01",
+    "vie-hygiene-sante-nutrition-sommeil-02",
+    "vie-hygiene-sante-nutrition-sommeil-03",
+    "vie-hygiene-sante-nutrition-sommeil-04",
+    "vie-hygiene-sante-nutrition-sommeil-05",
+    "vie-hygiene-sante-nutrition-sommeil-06"
+   ],
+   "selfCheck": [
+    "vie-hygiene-sante-nutrition-sommeil-q1",
+    "vie-hygiene-sante-nutrition-sommeil-q2",
+    "vie-hygiene-sante-nutrition-sommeil-q3",
+    "vie-hygiene-sante-nutrition-sommeil-q4",
+    "vie-hygiene-sante-nutrition-sommeil-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 5e par défaut (utile à tous les apprenants).",
+    "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+    "Vérifier la classification des aliments (énergie, construction, protection) et les exemples locaux cités.",
+    "Aucune quantité, calorie ou durée de sommeil officielle n'est donnée : à confirmer si on veut en ajouter."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Alimentation équilibrée",
+     "md": "Une alimentation **équilibrée** apporte au corps tout ce qu'il lui faut. On distingue souvent trois rôles :\n- aliments **énergétiques** (manioc, plantain, riz, maïs, huile) : donnent de la force ;\n- aliments **de construction** (poisson, œufs, haricots, arachides, viande) : aident à grandir et à réparer le corps ;\n- aliments **protecteurs** (légumes, fruits, feuilles) : aident le corps à se défendre.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les bons réflexes",
+     "md": "- Varier les aliments et manger des légumes et des fruits chaque jour.\n- Ne pas sauter le petit-déjeuner avant l'école.\n- Boire de l'eau potable régulièrement ; limiter boissons très sucrées, friandises et fritures.\n- Éviter de grignoter toute la journée.\n- Dormir suffisamment : un adolescent a besoin de plus de sommeil qu'on ne le croit.\n- Bouger : marcher, jouer, faire du sport chaque jour.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Pourquoi le sommeil compte",
+     "md": "Pendant le sommeil, le corps se repose, grandit et le cerveau range ce qu'on a appris. Un élève qui dort trop peu a du mal à se concentrer, devient irritable et tombe plus facilement malade. Éviter les écrans tard le soir, garder une heure de coucher régulière et dormir dans une pièce calme aide à mieux dormir.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 120,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 49.9,
+        "text": "Énergie",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 20,
+        "w": 120,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 49.9,
+        "text": "Construction",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 20,
+        "w": 120,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 49.9,
+        "text": "Protection",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 100,
+        "text": "manioc, riz",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 100,
+        "text": "poisson, œufs",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 100,
+        "text": "légumes, fruits",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "Un repas équilibré combine les trois",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 180,
+        "text": "Ex. : riz + haricots + feuilles + fruit",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les trois grands rôles des aliments avec des exemples locaux.",
+     "alt": "Trois rectangles : énergie (manioc, riz), construction (poisson, œufs), protection (légumes, fruits), et un exemple de repas qui les combine."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le repas de midi",
+     "statement": "Le repas d'Awa : seulement du manioc et de l'huile. Comment l'améliorer ?",
+     "steps": [
+      {
+       "md": "Ce repas est surtout **énergétique** : il manque des aliments de construction et de protection."
+      },
+      {
+       "md": "On ajoute des haricots ou du poisson (construction) et des feuilles ou des légumes (protection)."
+      }
+     ],
+     "answer": "**Manioc + poisson ou haricots + légumes verts**, avec un fruit en dessert : repas plus équilibré."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une journée d'élève",
+     "statement": "Kevin se couche tard devant l'écran, saute le petit-déjeuner et s'endort en classe. Quels conseils ?",
+     "steps": [
+      {
+       "md": "Cause : manque de sommeil et estomac vide, donc moins d'énergie et d'attention."
+      },
+      {
+       "md": "Conseils : heure de coucher régulière, écrans éteints avant de dormir, petit-déjeuner simple même rapide."
+      }
+     ],
+     "answer": "**Dormir assez et prendre un petit-déjeuner** améliorent la concentration."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que manger beaucoup = bien manger.\n- Remplacer les repas par des boissons sucrées ou des beignets.\n- Penser que les légumes et les fruits sont « pour les enfants ».\n- Se priver de nourriture pour maigrir sans avis d'un agent de santé.\n- Compter sur un « tonique » à la place d'un vrai repas.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dresse la liste de cinq aliments de ta région et classe-les par rôle.",
+      "Pour les régimes particuliers ou la maigreur inquiétante, demande conseil à un agent de santé."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-hygiene-sante-nutrition-sommeil-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-01",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Une eau claire est forcément potable.",
+   "explanation": "Faux. Les germes sont invisibles : une eau claire peut être contaminée.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Quand faut-il se laver les mains ?",
+   "explanation": "Avant les repas et après les toilettes : ce sont les deux moments clés.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Seulement le dimanche",
+    "Seulement quand elles sont visiblement noires",
+    "Avant de manger et après les toilettes",
+    "Uniquement après avoir mangé"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Dans une classe de 40 élèves, 28 se lavent les mains avant de manger. Quel pourcentage ne le fait pas ?",
+   "explanation": "40 − 28 = 12 élèves ; 12 ÷ 40 = 0,30, soit 30 %.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Quel moyen aide à rendre une eau plus sûre à boire ?",
+   "explanation": "Faire bouillir, filtrer ou désinfecter (selon conseils de santé) réduit les germes.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "La faire bouillir ou la filtrer",
+    "La laisser au soleil sans couvercle",
+    "Y ajouter du sucre",
+    "La mélanger à de l'eau de pluie"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Associe chaque geste à ce qu'il protège.",
+   "explanation": "Chaque geste coupe un maillon de la chaîne de transmission.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Latrines propres",
+     "Évite la contamination de l'eau et du sol"
+    ],
+    [
+     "Plat couvert",
+     "Éloigne les mouches"
+    ],
+    [
+     "Lavage des mains",
+     "Empêche les germes d'aller à la bouche"
+    ],
+    [
+     "Viande bien cuite",
+     "Détruit des germes"
+    ]
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Dans un quartier, plusieurs enfants ont mal au ventre après une fête où l'on a servi des plats préparés à l'avance, sans couvercle, avec de l'eau de puits non traitée.",
+   "method": "Repère le chemin des germes (aliments, eau, mains) puis propose un geste pour chaque maillon.",
+   "mistakes": [
+    "Accuser un seul facteur alors que plusieurs sont possibles."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+   "parts": [
+    {
+     "id": "vie-hygiene-sante-hygiene-eau-06-a",
+     "points": 2,
+     "prompt": "Cite deux causes possibles de ces malaises.",
+     "explanation": "Les germes passent par les aliments non protégés, l'eau et les mains.",
+     "kind": "open",
+     "model": "Les plats sont restés découverts (mouches, germes) ; l'eau de puits n'était pas traitée ; on peut ajouter les mains non lavées.",
+     "rubric": [
+      "Mentionne les plats découverts ou mal conservés",
+      "Mentionne l'eau non traitée ou les mains sales"
+     ]
+    },
+    {
+     "id": "vie-hygiene-sante-hygiene-eau-06-b",
+     "points": 1,
+     "prompt": "Quel conseil est le plus utile pour la prochaine fête ?",
+     "explanation": "On agit sur chaque maillon : aliments protégés, eau traitée, mains propres.",
+     "kind": "mcq",
+     "choices": [
+      "Servir plus de nourriture",
+      "Couvrir les plats, traiter l'eau et se laver les mains",
+      "Boire plus vite",
+      "Éviter de cuisiner"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "vie-hygiene-sante-hygiene-eau-06-c",
+     "points": 1,
+     "prompt": "Si les enfants ont de fortes douleurs ou de la fièvre, il faut consulter un agent de santé.",
+     "explanation": "Oui : en cas de signes inquiétants, on consulte.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Le rôle du savon pour se laver les mains est de…",
+   "choices": [
+    "rendre les mains parfumées seulement",
+    "aider à détacher les germes et la saleté",
+    "remplacer l'eau",
+    "supprimer le besoin de rincer"
+   ],
+   "answer": 1,
+   "explanation": "Le savon, associé au frottement, décolle la saleté et les germes.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "L'assainissement désigne…",
+   "choices": [
+    "l'évacuation propre des déchets et des eaux usées",
+    "la vente de l'eau en sachet",
+    "la cuisson des aliments",
+    "la vaccination"
+   ],
+   "answer": 0,
+   "explanation": "Latrines, déchets et eaux usées bien gérés protègent la santé.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Pour éviter de contaminer les aliments, on…",
+   "choices": [
+    "lave la viande avec le même couteau que les légumes cuits",
+    "laisse les plats ouverts",
+    "réchauffe les restes à moitié",
+    "sépare le cru et le cuit"
+   ],
+   "answer": 3,
+   "explanation": "Le cru peut contenir des germes qui passeraient dans le cuit.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Un récipient d'eau potable doit être…",
+   "choices": [
+    "ouvert pour que l'eau respire",
+    "partagé avec les mains",
+    "propre et couvert",
+    "laissé près des ordures"
+   ],
+   "answer": 2,
+   "explanation": "Couvercle et récipient propre évitent une nouvelle contamination.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-hygiene-eau-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-hygiene-eau",
+   "prompt": "Les germes sont…",
+   "choices": [
+    "toujours visibles",
+    "invisibles à l'œil nu",
+    "présents uniquement dans l'eau trouble",
+    "inoffensifs"
+   ],
+   "answer": 1,
+   "explanation": "On ne les voit pas : d'où l'importance des gestes réguliers.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Quel aliment est surtout énergétique ?",
+   "explanation": "Manioc, plantain, riz, maïs donnent de l'énergie.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Le manioc",
+    "Les feuilles de légumes",
+    "L'eau",
+    "Le sel"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Les légumes et les fruits aident le corps à se protéger.",
+   "explanation": "Oui, ce sont des aliments protecteurs.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Associe aliment et rôle.",
+   "explanation": "Riz = énergie, poisson = construction, légumes = protection.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Riz",
+     "Énergie"
+    ],
+    [
+     "Poisson",
+     "Construction"
+    ],
+    [
+     "Légumes verts",
+     "Protection"
+    ]
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Pour mieux dormir, il vaut mieux…",
+   "explanation": "La régularité et le calme favorisent le sommeil.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "regarder l'écran jusqu'à minuit",
+    "garder une heure de coucher régulière",
+    "boire des boissons énergisantes le soir",
+    "dormir en classe pour rattraper"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Propose un repas équilibré avec des produits que l'on trouve facilement près de chez toi. Explique le rôle de chaque aliment.",
+   "explanation": "Plusieurs réponses sont possibles tant que les trois rôles sont représentés.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Plantain (énergie) + poisson fumé (construction) + feuilles de légumes (protection) + une orange.",
+   "rubric": [
+    "Au moins un aliment de chaque rôle",
+    "Aliments locaux plausibles",
+    "Explication du rôle de chaque aliment"
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Un élève de 14 ans se plaint de fatigue en classe. Il prend une boisson sucrée le matin, mange tard le soir et se couche à minuit.",
+   "method": "Relie chaque symptôme à une habitude puis propose un changement réaliste.",
+   "mistakes": [
+    "Proposer un produit miracle au lieu d'un changement d'habitude."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+   "parts": [
+    {
+     "id": "vie-hygiene-sante-nutrition-sommeil-06-a",
+     "points": 1,
+     "prompt": "Quelle habitude est la plus facile à corriger d'abord ?",
+     "explanation": "Deux changements simples : repas du matin et sommeil régulier.",
+     "kind": "mcq",
+     "choices": [
+      "Prendre un vrai petit-déjeuner et se coucher plus tôt",
+      "Boire encore plus de boissons sucrées",
+      "Dormir en classe",
+      "Manger moins de légumes"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "vie-hygiene-sante-nutrition-sommeil-06-b",
+     "points": 2,
+     "prompt": "Écris deux conseils pour cet élève.",
+     "explanation": "Alimentation et sommeil sont liés à la concentration.",
+     "kind": "open",
+     "model": "Manger un petit-déjeuner avec un aliment énergétique et un fruit ; éteindre les écrans et se coucher à heure fixe.",
+     "rubric": [
+      "Un conseil sur l'alimentation",
+      "Un conseil sur le sommeil"
+     ]
+    },
+    {
+     "id": "vie-hygiene-sante-nutrition-sommeil-06-c",
+     "points": 1,
+     "prompt": "Si la fatigue persiste malgré ces changements, il peut consulter un agent de santé.",
+     "explanation": "Oui : une fatigue durable mérite un avis médical.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Un repas équilibré contient…",
+   "choices": [
+    "un seul aliment en grande quantité",
+    "des aliments de plusieurs groupes",
+    "uniquement des fritures",
+    "uniquement des boissons"
+   ],
+   "answer": 1,
+   "explanation": "On combine énergie, construction et protection.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Le petit-déjeuner avant l'école aide à…",
+   "choices": [
+    "mieux se concentrer",
+    "dormir en classe",
+    "éviter de boire de l'eau",
+    "remplacer le dîner"
+   ],
+   "answer": 0,
+   "explanation": "Un estomac vide fatigue et distrait.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Les écrans tard le soir peuvent…",
+   "choices": [
+    "améliorer toujours le sommeil",
+    "remplacer le repas",
+    "remplacer le sport",
+    "retarder et gêner le sommeil"
+   ],
+   "answer": 3,
+   "explanation": "La lumière et l'excitation gênent l'endormissement.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "L'activité physique régulière est…",
+   "choices": [
+    "inutile avant 18 ans",
+    "réservée aux athlètes",
+    "bonne pour le corps et l'humeur",
+    "dangereuse pour tous"
+   ],
+   "answer": 2,
+   "explanation": "Marcher, jouer ou courir font du bien à tous.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-nutrition-sommeil-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-nutrition-sommeil",
+   "prompt": "Les aliments de construction comme les haricots ou le poisson aident à…",
+   "choices": [
+    "remplacer l'eau",
+    "grandir et réparer le corps",
+    "supprimer la faim pour toute la journée",
+    "se protéger du soleil"
+   ],
+   "answer": 1,
+   "explanation": "Ils apportent de quoi construire et réparer.",
+   "review": true
+  }
+ ]
+}

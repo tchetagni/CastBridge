@@ -1,0 +1,1341 @@
+{
+ "chapter": "vie-education-financiere-gerer",
+ "lessons": [
+  {
+   "id": "vie-education-financiere-budget",
+   "title": "Besoins, envies et budget",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation financière (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer besoins et envies.",
+    "Établir un budget avec recettes, dépenses fixes et dépenses variables.",
+    "Calculer et interpréter un solde.",
+    "Proposer des ajustements en cas de déficit."
+   ],
+   "exercises": [
+    "vie-education-financiere-budget-01",
+    "vie-education-financiere-budget-02",
+    "vie-education-financiere-budget-03",
+    "vie-education-financiere-budget-04",
+    "vie-education-financiere-budget-05",
+    "vie-education-financiere-budget-06"
+   ],
+   "selfCheck": [
+    "vie-education-financiere-budget-q1",
+    "vie-education-financiere-budget-q2",
+    "vie-education-financiere-budget-q3",
+    "vie-education-financiere-budget-q4",
+    "vie-education-financiere-budget-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 2nde par défaut (utile à tous les apprenants).",
+    "Tous les chiffres (montants, taux, durées) sont des données d'énoncé fictives, pas des règles ni des taux réels.",
+    "Vérifier que les exemples de budget (loyer, transport, FCFA) restent plausibles sans être présentés comme des prix réels."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Besoins et envies",
+     "md": "Un **besoin** est ce dont on ne peut pas se passer pour vivre dignement : se nourrir, se soigner, se loger, aller à l'école. Une **envie** est quelque chose d'agréable mais dont on peut se passer ou qu'on peut reporter : un nouveau téléphone, des sorties, des vêtements à la mode. Une même chose peut être un besoin pour l'un et une envie pour l'autre : tout dépend de la situation."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le budget",
+     "md": "Un **budget** est un plan écrit des **recettes** (l'argent qui entre : salaire, vente, aide familiale) et des **dépenses** (l'argent qui sort) sur une période, souvent un mois. Les **dépenses fixes** sont à peu près les mêmes chaque mois (loyer, scolarité, abonnement). Les **dépenses variables** changent (nourriture, transport, loisirs, imprévus)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Le solde",
+     "md": "Solde = recettes − dépenses totales. Si le solde est **positif** : excédent, on peut épargner. S'il est **négatif** : **déficit**, il faut réduire des dépenses ou augmenter les recettes.",
+     "tex": "S = R - D"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "FCFA",
+      "bars": [
+       {
+        "label": "Recettes",
+        "value": 220000,
+        "color": [
+         "green"
+        ]
+       },
+       {
+        "label": "Fixes",
+        "value": 80000,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Variables",
+        "value": 105000,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Solde",
+        "value": 35000,
+        "color": [
+         "purple"
+        ]
+       }
+      ]
+     },
+     "caption": "Budget mensuel de la famille Mbarga (chiffres fictifs).",
+     "alt": "Quatre barres : recettes 220 000 FCFA, dépenses fixes 80 000, dépenses variables 105 000, solde 35 000 FCFA."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 110,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 70.25,
+        "text": "Recettes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 20,
+        "w": 110,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 44.55,
+        "text": "Dépenses fixes",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 80,
+        "w": 110,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 104.55,
+        "text": "Dép. variables",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 40,
+        "w": 110,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 70.25,
+        "text": "Solde",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 65,
+        "x2": 145,
+        "y2": 40,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 65,
+        "x2": 145,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 255,
+        "y1": 40,
+        "x2": 280,
+        "y2": 65,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 255,
+        "y1": 100,
+        "x2": 280,
+        "y2": 65,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "Solde = recettes − (fixes + variables)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le chemin de l'argent dans un budget.",
+     "alt": "Le rectangle des recettes envoie des flèches vers les dépenses fixes et variables, qui mènent au solde."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le budget des Mbarga",
+     "statement": "Recettes : 220 000 FCFA. Dépenses fixes : loyer 50 000, scolarité 25 000, téléphone 5 000. Variables : nourriture 60 000, transport 20 000, santé 10 000, loisirs 15 000. Calcule le solde.",
+     "steps": [
+      {
+       "md": "Fixes : 50 000 + 25 000 + 5 000 = 80 000 FCFA.",
+       "tex": "50000+25000+5000"
+      },
+      {
+       "md": "Variables : 60 000 + 20 000 + 10 000 + 15 000 = 105 000 FCFA.",
+       "tex": "60000+20000+10000+15000"
+      },
+      {
+       "md": "Total des dépenses = 80 000 + 105 000 = 185 000 FCFA."
+      },
+      {
+       "md": "Solde = 220 000 − 185 000 = 35 000 FCFA."
+      }
+     ],
+     "answer": "**Solde : 35 000 FCFA (excédent).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un déficit",
+     "statement": "Une étudiante reçoit 90 000 FCFA par mois et dépense 105 000 FCFA. Que conclure ?",
+     "steps": [
+      {
+       "md": "Solde = 90 000 − 105 000 = -15 000 FCFA : négatif."
+      },
+      {
+       "md": "Il y a un **déficit** : elle dépense plus qu'elle ne reçoit."
+      },
+      {
+       "md": "Elle peut réduire les dépenses variables (loisirs) ou chercher une recette supplémentaire ; elle doit éviter de s'endetter pour des envies."
+      }
+     ],
+     "answer": "**Déficit de 15 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier les dépenses variables et les imprévus.\n- Compter une dépense deux fois ou oublier une recette.\n- Confondre dépense fixe et variable.\n- Faire un budget sans le respecter : un budget sert à décider avant de dépenser.\n- Dépenser d'abord et épargner « ce qui reste » : mieux vaut prévoir l'épargne en premier."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Note pendant une semaine toutes tes dépenses. Quelles dépenses sont des envies ?",
+      "Prépare un budget simple pour ta famille avec l'aide d'un parent."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-education-financiere-budget-01"
+    }
+   ]
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance",
+   "title": "Épargner : tontine, banque, microfinance, assurance",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation financière (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer pourquoi et comment épargner.",
+    "Comparer tontine, banque et microfinance en termes d'avantages et de risques.",
+    "Calculer un objectif d'épargne.",
+    "Expliquer le principe de l'assurance."
+   ],
+   "exercises": [
+    "vie-education-financiere-epargne-assurance-01",
+    "vie-education-financiere-epargne-assurance-02",
+    "vie-education-financiere-epargne-assurance-03",
+    "vie-education-financiere-epargne-assurance-04",
+    "vie-education-financiere-epargne-assurance-05",
+    "vie-education-financiere-epargne-assurance-06"
+   ],
+   "selfCheck": [
+    "vie-education-financiere-epargne-assurance-q1",
+    "vie-education-financiere-epargne-assurance-q2",
+    "vie-education-financiere-epargne-assurance-q3",
+    "vie-education-financiere-epargne-assurance-q4",
+    "vie-education-financiere-epargne-assurance-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 2nde par défaut (utile à tous les apprenants).",
+    "Tous les chiffres (montants, taux, durées) sont des données d'énoncé fictives, pas des règles ni des taux réels.",
+    "Vérifier le caractère général des descriptions de la tontine, des banques et de la microfinance : aucun taux, règle légale ni nom d'établissement.",
+    "Vérifier le principe de l'assurance (mutualisation du risque) sans référence au code CIMA.",
+    "Rappeler de vérifier qu'une institution est agréée : à valider par un enseignant ou un professionnel."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Épargner",
+     "md": "**Épargner**, c'est mettre de côté une partie de ses recettes pour plus tard : un projet (matériel scolaire, fonds de commerce), une urgence (maladie) ou un grand achat. On épargne mieux avec un **objectif** précis : montant à atteindre et date."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Où épargner ? Principes",
+     "md": "- **Tontine** : un groupe se réunit, chaque membre verse une somme fixe à chaque séance, et à tour de rôle un membre reçoit la totalité. Avantage : discipline et confiance entre membres. Risque : un membre qui part après avoir reçu.\n- **Banque** : sécurisée, mais parfois des frais.\n- **Microfinance** : institutions de proximité pour de petites sommes et de petits prêts.\nDans tous les cas, vérifier que l'institution est **reconnue** et garder une trace écrite.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'assurance",
+     "md": "L'**assurance** repose sur la **mutualisation** : beaucoup de personnes versent de petites sommes (**primes**) pour qu'en cas de sinistre (accident, incendie, maladie), celui qui est touché soit aidé. On paie peu de manière régulière pour être protégé contre une grosse perte. Lire le contrat : ce qui est couvert, ce qui ne l'est pas.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "FCFA",
+      "bars": [
+       {
+        "label": "Total versé par membre",
+        "value": 200000,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Pot reçu une fois",
+        "value": 200000,
+        "color": [
+         "green"
+        ]
+       }
+      ]
+     },
+     "caption": "Dans une tontine sans intérêt, chaque membre reçoit en tout ce qu'il a versé.",
+     "alt": "Deux barres égales de 200 000 FCFA : total versé par un membre sur le cycle et pot reçu une fois."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 120,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 47.25,
+        "text": "Épargne",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 20,
+        "w": 120,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 47.25,
+        "text": "Banque",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 47.25,
+        "text": "Tontine",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 100,
+        "text": "projets, urgences",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 100,
+        "text": "sécurité, frais",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 100,
+        "text": "discipline, confiance",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "Toujours : objectif + trace écrite + institution reconnue",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Trois façons d'épargner et leur idée clé.",
+     "alt": "Trois rectangles : épargne, banque, tontine, avec une phrase sous chacun, et un rappel : objectif, trace écrite, institution reconnue."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un objectif d'épargne",
+     "statement": "Rose veut acheter une machine à coudre à 240 000 FCFA. Elle peut épargner 20 000 FCFA par mois. En combien de mois ?",
+     "steps": [
+      {
+       "md": "On divise l'objectif par la somme mensuelle : 240 000 ÷ 20 000.",
+       "tex": "240000 / 20000"
+      },
+      {
+       "md": "240 000 ÷ 20 000 = 12."
+      }
+     ],
+     "answer": "**12 mois.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la tontine",
+     "statement": "Une tontine compte 10 membres. Chacun verse 20 000 FCFA à chaque séance. Quel est le pot d'une séance ? Combien un membre verse-t-il sur tout le cycle ?",
+     "steps": [
+      {
+       "md": "Pot = 10 × 20 000 = 200 000 FCFA.",
+       "tex": "10 × 20000"
+      },
+      {
+       "md": "Il y a 10 séances (une par membre) : un membre verse 10 × 20 000 = 200 000 FCFA et reçoit 200 000 FCFA une fois."
+      }
+     ],
+     "answer": "**Pot : 200 000 FCFA ; total versé par membre : 200 000 FCFA (sans intérêt).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Épargner sans objectif ni suivi.\n- Confier ses économies sans trace écrite ni vérification de l'institution.\n- Croire qu'une promesse de gains très élevés et rapides est sûre.\n- Épargner « ce qui reste » à la fin du mois (il ne reste rien).\n- Ne pas lire son contrat d'assurance."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pose-toi la question : pour quel objectif précis aimerais-tu épargner ?",
+      "Renseigne-toi, avec un adulte, sur les institutions de microfinance reconnues dans ta localité."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-education-financiere-epargne-assurance-01"
+    }
+   ]
+  },
+  {
+   "id": "vie-education-financiere-credit",
+   "title": "Crédit, intérêts et surendettement",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation financière (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir crédit, taux d'intérêt et intérêt.",
+    "Calculer l'intérêt simple et le coût total d'un prêt avec des chiffres donnés.",
+    "Comparer deux offres de prêt.",
+    "Repérer les risques de surendettement."
+   ],
+   "exercises": [
+    "vie-education-financiere-credit-01",
+    "vie-education-financiere-credit-02",
+    "vie-education-financiere-credit-03",
+    "vie-education-financiere-credit-04",
+    "vie-education-financiere-credit-05",
+    "vie-education-financiere-credit-06"
+   ],
+   "selfCheck": [
+    "vie-education-financiere-credit-q1",
+    "vie-education-financiere-credit-q2",
+    "vie-education-financiere-credit-q3",
+    "vie-education-financiere-credit-q4",
+    "vie-education-financiere-credit-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 2nde par défaut (utile à tous les apprenants).",
+    "Tous les chiffres (montants, taux, durées) sont des données d'énoncé fictives, pas des règles ni des taux réels.",
+    "Vérifier que le modèle « intérêt simple » est bien annoncé comme une simplification d'exercice : les prêts réels peuvent avoir d'autres calculs et des frais.",
+    "Aucun taux réglementaire n'est cité.",
+    "Faire relire par un enseignant d'économie pour la cohérence du vocabulaire."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Crédit et intérêt",
+     "md": "Un **crédit** (ou prêt) est une somme prêtée qu'on devra **rembourser plus tard**. Le prêteur demande un **intérêt** : un prix pour le service. Le **capital** est la somme empruntée ; le **taux** est un pourcentage du capital pour une durée (souvent par an). La **durée** est le temps du prêt."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Intérêt simple (modèle d'exercice)",
+     "md": "Dans l'**intérêt simple**, l'intérêt se calcule toujours sur le capital de départ : I = C × t × n, avec C le capital, t le taux annuel (en décimal), n la durée en années. Le **coût total** à rembourser = C + I. Dans la vie réelle, les prêts peuvent comporter des frais en plus : on demande **le coût total** avant de signer.",
+     "tex": "I = C \\times t \\times n",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le surendettement",
+     "md": "Le **surendettement**, c'est avoir tant de dettes qu'on ne peut plus les rembourser avec ses revenus. Pour l'éviter : emprunter pour un besoin utile et réfléchi (pas une envie passagère) ; vérifier que la mensualité est confortable dans son budget ; comparer plusieurs offres ; lire le contrat ; ne jamais emprunter pour rembourser un autre prêt sans conseil. Attention aux prêteurs qui n'expliquent pas le coût total.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 5,
+      "ymin": 0,
+      "ymax": 350000,
+      "grid": 1,
+      "xlabel": "années",
+      "ylabel": "FCFA",
+      "curves": [
+       {
+        "expr": "200000+20000.0*x",
+        "color": "blue",
+        "label": "Capital + intérêts"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 200000,
+        "label": "Capital",
+        "color": "green"
+       },
+       {
+        "x": 2,
+        "y": 240000,
+        "label": "Après 2 ans",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Avec un intérêt simple, la somme à rembourser croît de la même quantité chaque année.",
+     "alt": "Droite croissante partant de 200 000 FCFA, avec un point à 2 ans à 240 000 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : coût d'un prêt",
+     "statement": "On emprunte 200 000 FCFA à un taux de 10 % par an (intérêt simple) pour 2 ans (données d'énoncé). Quel est le coût total ?",
+     "steps": [
+      {
+       "md": "Intérêt = 200 000 × 0,10 × 2 = 40 000 FCFA.",
+       "tex": "200000 \\times 0,10 \\times 2"
+      },
+      {
+       "md": "Total à rembourser = 200 000 + 40 000 = 240 000 FCFA."
+      },
+      {
+       "md": "Si le remboursement est mensuel sur 24 mois : 240 000 ÷ 24 = 10 000 FCFA par mois."
+      }
+     ],
+     "answer": "**Coût du crédit : 40 000 FCFA ; total : 240 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : comparer deux offres",
+     "statement": "Offre A : 100 000 FCFA à 12 % par an pendant 1 an. Offre B : 100 000 FCFA à 8 % par an pendant 2 ans (intérêt simple). Laquelle coûte le moins en intérêts ?",
+     "steps": [
+      {
+       "md": "A : 100 000 × 0,12 × 1 = 12 000 FCFA."
+      },
+      {
+       "md": "B : 100 000 × 0,08 × 2 = 16 000 FCFA."
+      },
+      {
+       "md": "On compare 12 000 et 16 000 : A coûte moins, mais B a un taux annuel plus bas et une durée plus longue : on regarde le **coût total** et la mensualité possible."
+      }
+     ],
+     "answer": "**A : 12 000 FCFA ; B : 16 000 FCFA. Sur ces chiffres, A coûte moins en intérêts.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Ne regarder que la mensualité et pas le coût total.\n- Confondre taux annuel et taux mensuel.\n- Oublier de multiplier par la durée.\n- Emprunter pour une envie sans avoir prévu comment rembourser.\n- Signer sans lire ni garder un exemplaire du contrat."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dans ton entourage, comment les gens obtiennent-ils de petits prêts ? Quelles questions poser avant d'emprunter ?",
+      "Renseigne-toi sur la différence entre intérêt simple et intérêt composé."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-education-financiere-credit-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "vie-education-financiere-budget-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Une dépense fixe est…",
+   "explanation": "Le loyer est à peu près identique chaque mois.",
+   "source": "Exercice original",
+   "choices": [
+    "un loyer payé chaque mois",
+    "l'argent de poche variable",
+    "un cadeau imprévu",
+    "une recette"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-education-financiere-budget-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Une envie est quelque chose dont on peut se passer ou qu'on peut reporter.",
+   "explanation": "Oui, c'est la différence avec un besoin.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "vie-education-financiere-budget-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Recettes : 120 000 FCFA ; dépenses : 85 000 FCFA. Quel est le solde ?",
+   "explanation": "120 000 − 85 000 = 35 000.",
+   "source": "Exercice original",
+   "answer": 35000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "vie-education-financiere-budget-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Dépenses variables d'un mois : nourriture 40 000, transport 35 000, loisirs 18 000 FCFA. Total des variables ?",
+   "explanation": "40 000 + 35 000 + 18 000 = 93 000.",
+   "source": "Exercice original",
+   "answer": 93000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "vie-education-financiere-budget-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Classe chaque élément.",
+   "explanation": "Loyer fixe ; salaire = recette ; nourriture varie ; sortie = envie.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Loyer",
+     "Dépense fixe"
+    ],
+    [
+     "Salaire",
+     "Recette"
+    ],
+    [
+     "Nourriture",
+     "Dépense variable"
+    ],
+    [
+     "Sortie au cinéma",
+     "Envie"
+    ]
+   ]
+  },
+  {
+   "id": "vie-education-financiere-budget-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Un ménage a 150 000 FCFA de recettes par mois. Dépenses fixes : 70 000 FCFA. Dépenses variables : 55 000 FCFA.",
+   "method": "Additionne d'abord les dépenses, puis soustrais des recettes.",
+   "mistakes": [
+    "Oublier l'imprévu dans le total."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "vie-education-financiere-budget-06-a",
+     "points": 1,
+     "prompt": "Quel est le solde ?",
+     "explanation": "150 000 − 70 000 − 55 000 = 25 000.",
+     "kind": "numeric",
+     "answer": 25000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-budget-06-b",
+     "points": 1,
+     "prompt": "Un imprévu de 40 000 FCFA survient (réparation). Quel est le nouveau solde ?",
+     "explanation": "25 000 − 40 000 = -15 000 : déficit.",
+     "kind": "numeric",
+     "answer": -15000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-budget-06-c",
+     "points": 2,
+     "prompt": "Comment le ménage aurait-il pu mieux se préparer ?",
+     "explanation": "Une épargne de précaution évite de s'endetter.",
+     "kind": "open",
+     "model": "Prévoir une petite épargne de sécurité chaque mois pour les imprévus, ou réduire certaines dépenses variables.",
+     "rubric": [
+      "Idée d'épargne de précaution",
+      "Ajustement des dépenses"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vie-education-financiere-budget-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Un déficit signifie que…",
+   "choices": [
+    "les recettes dépassent les dépenses",
+    "les dépenses dépassent les recettes",
+    "il n'y a pas de budget",
+    "on a épargné"
+   ],
+   "answer": 1,
+   "explanation": "Solde négatif = déficit."
+  },
+  {
+   "id": "vie-education-financiere-budget-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Le budget sert à…",
+   "choices": [
+    "planifier recettes et dépenses",
+    "supprimer toutes les dépenses",
+    "dépenser sans compter",
+    "cacher son argent"
+   ],
+   "answer": 0,
+   "explanation": "C'est un outil de décision."
+  },
+  {
+   "id": "vie-education-financiere-budget-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Une dépense variable est…",
+   "choices": [
+    "le loyer fixe",
+    "le salaire",
+    "l'impôt annuel",
+    "la nourriture"
+   ],
+   "answer": 3,
+   "explanation": "Elle change d'un mois à l'autre."
+  },
+  {
+   "id": "vie-education-financiere-budget-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Un besoin est…",
+   "choices": [
+    "un luxe",
+    "une envie reportable",
+    "ce dont on ne peut pas se passer",
+    "une dépense inutile"
+   ],
+   "answer": 2,
+   "explanation": "Se nourrir, se soigner, se loger."
+  },
+  {
+   "id": "vie-education-financiere-budget-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-budget",
+   "prompt": "Solde = …",
+   "choices": [
+    "recettes + dépenses",
+    "recettes − dépenses",
+    "dépenses − recettes",
+    "recettes × dépenses"
+   ],
+   "answer": 1,
+   "explanation": "On retranche les dépenses des recettes."
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "Dans une tontine, le membre qui reçoit le pot…",
+   "explanation": "Chacun reçoit à son tour le total d'une séance.",
+   "source": "Exercice original",
+   "choices": [
+    "touche la somme de tous les versements d'une séance",
+    "ne reçoit rien",
+    "reçoit seulement sa propre cotisation",
+    "paie double"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "Une tontine de 12 membres cotise 15 000 FCFA par séance. Quel est le pot ?",
+   "explanation": "12 × 15 000 = 180 000.",
+   "source": "Exercice original",
+   "answer": 180000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "Une promesse de doubler son argent en une semaine est toujours sûre.",
+   "explanation": "Faux : c'est un signe d'arnaque, très risqué.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "Pour acheter du matériel à 90 000 FCFA, tu épargnes 15 000 FCFA par mois. Combien de mois ?",
+   "explanation": "90 000 ÷ 15 000 = 6.",
+   "source": "Exercice original",
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "mois"
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "Cite un avantage et un risque de la tontine.",
+   "explanation": "La confiance est essentielle ; une trace écrite et des règles claires aident.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Avantage : discipline d'épargne et entraide. Risque : un membre qui ne paie plus ou qui part après avoir reçu.",
+   "rubric": [
+    "Un avantage",
+    "Un risque"
+   ]
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "Un groupe de 8 amis crée une tontine : chacun verse 25 000 FCFA à chaque séance.",
+   "method": "Pot = nombre de membres × cotisation ; nombre de séances = nombre de membres.",
+   "mistakes": [
+    "Confondre pot et cotisation individuelle."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Principes généraux de la tontine : à faire relire.",
+   "parts": [
+    {
+     "id": "vie-education-financiere-epargne-assurance-06-a",
+     "points": 1,
+     "prompt": "Quel est le montant du pot ?",
+     "explanation": "8 × 25 000 = 200 000.",
+     "kind": "numeric",
+     "answer": 200000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-epargne-assurance-06-b",
+     "points": 1,
+     "prompt": "Combien de séances pour que chacun reçoive une fois ?",
+     "explanation": "Une séance par membre : 8.",
+     "kind": "numeric",
+     "answer": 8,
+     "tolerance": 0,
+     "unit": "séances"
+    },
+    {
+     "id": "vie-education-financiere-epargne-assurance-06-c",
+     "points": 1,
+     "prompt": "Quel est un risque principal ?",
+     "explanation": "La confiance entre membres est nécessaire.",
+     "kind": "mcq",
+     "choices": [
+      "Un membre peut cesser de payer",
+      "Le pot disparaît chaque mois",
+      "Le pot double automatiquement",
+      "Il n'y a aucun risque"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "vie-education-financiere-epargne-assurance-06-d",
+     "points": 1,
+     "prompt": "Propose une règle pour limiter ce risque.",
+     "explanation": "Règles écrites et suivi limitent les litiges.",
+     "kind": "open",
+     "model": "Écrire les règles, noter les versements à chaque séance et désigner un responsable.",
+     "rubric": [
+      "Une règle claire"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "L'assurance fonctionne grâce à…",
+   "choices": [
+    "la chance",
+    "la mutualisation des risques",
+    "le hasard seul",
+    "l'impôt"
+   ],
+   "answer": 1,
+   "explanation": "Beaucoup cotisent pour aider ceux qui subissent un sinistre.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "La prime d'assurance est…",
+   "choices": [
+    "la somme versée régulièrement",
+    "l'indemnité reçue",
+    "un impôt",
+    "un salaire"
+   ],
+   "answer": 0,
+   "explanation": "On paie la prime pour être couvert.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "Épargner efficacement, c'est d'abord…",
+   "choices": [
+    "dépenser d'abord",
+    "attendre de gagner plus",
+    "cacher l'argent",
+    "se fixer un objectif et un montant"
+   ],
+   "answer": 3,
+   "explanation": "Un objectif donne un but et une date.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "Avant de confier son argent à une institution, on…",
+   "choices": [
+    "ne vérifie rien",
+    "signe sans lire",
+    "vérifie qu'elle est reconnue",
+    "préfère l'institution qui promet le plus"
+   ],
+   "answer": 2,
+   "explanation": "Une promesse irréaliste est un signal d'alerte.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-epargne-assurance-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-epargne-assurance",
+   "prompt": "Dans une tontine sans intérêt, sur tout le cycle un membre reçoit…",
+   "choices": [
+    "le double",
+    "autant que ce qu'il a versé",
+    "la moitié",
+    "rien"
+   ],
+   "answer": 1,
+   "explanation": "Aucun intérêt : il reçoit en une fois ce qu'il a versé en plusieurs fois.",
+   "review": true
+  },
+  {
+   "id": "vie-education-financiere-credit-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Le capital d'un prêt est…",
+   "explanation": "C'est la somme de départ.",
+   "source": "Exercice original",
+   "choices": [
+    "la somme empruntée",
+    "la somme d'intérêts",
+    "la durée du prêt",
+    "la mensualité"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-education-financiere-credit-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Intérêt simple : capital 50 000 FCFA, taux 10 % par an, durée 1 an. Quel est l'intérêt ?",
+   "explanation": "50 000 × 0,10 × 1 = 5 000.",
+   "source": "Exercice original",
+   "answer": 5000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "vie-education-financiere-credit-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Un prêt qui promet « zéro coût, zéro risque » dispense de lire le contrat.",
+   "explanation": "Faux : on lit toujours le contrat.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "vie-education-financiere-credit-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "On emprunte 300 000 FCFA à 6 % par an pendant 3 ans (intérêt simple, énoncé). Quel est le coût total à rembourser ?",
+   "explanation": "I = 300 000 × 0,06 × 3 = 54 000 ; total = 354 000.",
+   "source": "Exercice original",
+   "answer": 354000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "vie-education-financiere-credit-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Un ami veut emprunter pour s'acheter des vêtements de marque alors qu'il rembourse déjà un prêt. Que lui conseilles-tu ?",
+   "explanation": "Emprunter pour une envie quand on a déjà une dette est risqué.",
+   "source": "Exercice original",
+   "model": "Lui expliquer que c'est une envie ; vérifier son budget ; éviter de s'endetter davantage, ce qui risque de mener au surendettement.",
+   "rubric": [
+    "Distingue besoin et envie",
+    "Évoque le budget",
+    "Évoque le surendettement"
+   ]
+  },
+  {
+   "id": "vie-education-financiere-credit-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Une commerçante emprunte 400 000 FCFA pour agrandir sa boutique, à 9 % par an en intérêt simple, sur 2 ans (données d'énoncé).",
+   "method": "I = C × t × n, puis total = C + I, puis divise par le nombre de mensualités.",
+   "mistakes": [
+    "Oublier de multiplier par la durée."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "vie-education-financiere-credit-06-a",
+     "points": 1,
+     "prompt": "Quel est l'intérêt total ?",
+     "explanation": "400 000 × 0,09 × 2 = 72 000.",
+     "kind": "numeric",
+     "answer": 72000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-credit-06-b",
+     "points": 1,
+     "prompt": "Quel est le coût total à rembourser ?",
+     "explanation": "400 000 + 72 000 = 472 000.",
+     "kind": "numeric",
+     "answer": 472000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-credit-06-c",
+     "points": 1,
+     "prompt": "En 24 mensualités égales, combien par mois ?",
+     "explanation": "472 000 ÷ 24 = 19 666.",
+     "kind": "numeric",
+     "answer": 19666,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "vie-education-financiere-credit-06-d",
+     "points": 2,
+     "prompt": "Que doit-elle vérifier avant de s'engager ?",
+     "explanation": "C'est ainsi qu'on évite le surendettement.",
+     "kind": "open",
+     "model": "Que la mensualité est supportable avec les recettes de la boutique, et lire le contrat pour connaître les frais.",
+     "rubric": [
+      "Capacité de remboursement",
+      "Lecture du contrat"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vie-education-financiere-credit-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Le coût total d'un prêt simple est…",
+   "choices": [
+    "capital − intérêt",
+    "capital + intérêt",
+    "intérêt seul",
+    "capital × durée"
+   ],
+   "answer": 1,
+   "explanation": "On rembourse le capital plus l'intérêt."
+  },
+  {
+   "id": "vie-education-financiere-credit-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Le taux d'intérêt est…",
+   "choices": [
+    "un pourcentage du capital pour une durée",
+    "une somme fixe",
+    "la mensualité",
+    "le nom de la banque"
+   ],
+   "answer": 0,
+   "explanation": "Il s'exprime souvent par an."
+  },
+  {
+   "id": "vie-education-financiere-credit-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Le surendettement se caractérise par…",
+   "choices": [
+    "une grande épargne",
+    "l'absence de dettes",
+    "un budget équilibré",
+    "des dettes qu'on ne peut plus rembourser"
+   ],
+   "answer": 3,
+   "explanation": "Les dettes dépassent la capacité de remboursement."
+  },
+  {
+   "id": "vie-education-financiere-credit-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Avant de signer un prêt, on…",
+   "choices": [
+    "signe vite",
+    "choisit l'offre la plus bruyante",
+    "demande le coût total et lit le contrat",
+    "ne demande pas de copie"
+   ],
+   "answer": 2,
+   "explanation": "Le contrat engage."
+  },
+  {
+   "id": "vie-education-financiere-credit-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-education-financiere-credit",
+   "prompt": "Emprunter pour une envie passagère est…",
+   "choices": [
+    "toujours conseillé",
+    "risqué pour son budget",
+    "sans danger",
+    "obligatoire"
+   ],
+   "answer": 1,
+   "explanation": "Il vaut mieux épargner ou reporter."
+  }
+ ]
+}

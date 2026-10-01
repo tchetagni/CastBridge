@@ -1,0 +1,1080 @@
+{
+ "chapter": "vie-code-route-voir",
+ "lessons": [
+  {
+   "id": "vie-code-route-pieton-panneaux",
+   "title": "Le piéton, les panneaux, les marquages et les feux",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — sécurité routière (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Adopter les bons gestes de piéton pour traverser.",
+    "Reconnaître la forme et la couleur des grandes familles de panneaux.",
+    "Lire les marquages au sol et les feux tricolores.",
+    "Expliquer pourquoi la visibilité protège."
+   ],
+   "exercises": [
+    "vie-code-route-pieton-panneaux-01",
+    "vie-code-route-pieton-panneaux-02",
+    "vie-code-route-pieton-panneaux-03",
+    "vie-code-route-pieton-panneaux-04",
+    "vie-code-route-pieton-panneaux-05",
+    "vie-code-route-pieton-panneaux-06"
+   ],
+   "selfCheck": [
+    "vie-code-route-pieton-panneaux-q1",
+    "vie-code-route-pieton-panneaux-q2",
+    "vie-code-route-pieton-panneaux-q3",
+    "vie-code-route-pieton-panneaux-q4",
+    "vie-code-route-pieton-panneaux-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 2nde par défaut (utile à tous les apprenants).",
+    "Contenu relevant du code de la route : principes généraux uniquement, sans limite de vitesse, taux, amende, âge légal ni numéro d'article ; à faire relire par un enseignant ou un professionnel de la sécurité routière.",
+    "Vérifier la présentation des conventions de forme et de couleur des panneaux (danger = triangle, interdiction = rond à bordure rouge, obligation = rond bleu, indication = rectangle ou carré) : principe général à confirmer avec le texte en vigueur au Cameroun.",
+    "Vérifier la description des feux tricolores (orange = se préparer à s'arrêter) : principe général, sans durée.",
+    "Aucune limite de vitesse ni amende n'est citée."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Traverser en sécurité",
+     "md": "1. S'arrêter au bord du trottoir ; ne pas courir sur la chaussée.\n2. Utiliser, si possible, un **passage piéton** ou un endroit bien visible.\n3. **Regarder des deux côtés** et attendre que les véhicules soient assez loin ou arrêtés.\n4. Traverser en marchant, sans téléphone ni écouteurs, en restant attentif.\n5. Marcher sur le **trottoir** ou, à défaut, au bord de la route face aux véhicules. Le soir, être visible : vêtements clairs, lampe.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les familles de panneaux",
+     "md": "Les conventions internationales donnent aux panneaux une **forme** et une **couleur** qui permettent de comprendre vite :\n- **Danger** : triangle (bordure rouge) → prudence, ralentir.\n- **Interdiction** : rond à bordure rouge → ce qui est interdit.\n- **Obligation** : rond bleu → ce qu'il faut faire.\n- **Indication** : rectangle ou carré (souvent bleu) → informations utiles.\nOn retient la forme avant le dessin intérieur.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Marquages et feux",
+     "md": "Les **marquages au sol** (lignes, bandes) guident la circulation : une ligne continue interdit en principe de la franchir, une ligne discontinue autorise le dépassement quand c'est sûr, des bandes parallèles indiquent un passage piéton. Les **feux tricolores** : **rouge** = arrêt ; **orange** = se préparer à s'arrêter ; **vert** = passage autorisé si la voie est libre. Quand le feu pour piétons est rouge, on attend.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         50,
+         20,
+         15,
+         80,
+         85,
+         80
+        ],
+        "fill": "lightyellow",
+        "stroke": "red",
+        "width": 4,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 68,
+        "text": "!",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 52,
+        "r": 32,
+        "fill": "white",
+        "stroke": "red",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 135,
+        "y1": 52,
+        "x2": 165,
+        "y2": 52,
+        "color": "red",
+        "width": 6
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 52,
+        "r": 32,
+        "fill": "blue",
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 62,
+        "text": "→",
+        "size": 28,
+        "color": "white",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 20,
+        "w": 60,
+        "h": 64,
+        "fill": "blue",
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 60,
+        "text": "P",
+        "size": 30,
+        "color": "white",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 120,
+        "text": "Danger",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 120,
+        "text": "Interdiction",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 120,
+        "text": "Obligation",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 120,
+        "text": "Indication",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 145,
+        "text": "triangle",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 145,
+        "text": "bordure rouge",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 145,
+        "text": "rond bleu",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 145,
+        "text": "rectangle",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les quatre grandes familles de panneaux : forme et couleur.",
+     "alt": "Quatre panneaux dessinés : un triangle à bordure rouge (danger), un rond à bordure rouge avec une barre (interdiction), un rond bleu avec une flèche (obligation), un rectangle bleu avec la lettre P (indication).",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 70,
+        "h": 170,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 14
+       },
+       {
+        "t": "circle",
+        "cx": 185,
+        "cy": 45,
+        "r": 22,
+        "fill": "red",
+        "stroke": "white",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 185,
+        "cy": 95,
+        "r": 22,
+        "fill": "orange",
+        "stroke": "white",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 185,
+        "cy": 145,
+        "r": 22,
+        "fill": "green",
+        "stroke": "white",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 50,
+        "text": "Rouge : arrêt",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 100,
+        "text": "Orange : s'apprêter à s'arrêter",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 150,
+        "text": "Vert : passage si libre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Les trois feux tricolores et leur sens.",
+     "alt": "Un feu vertical avec trois ronds : rouge en haut (arrêt), orange au milieu (s'apprêter à s'arrêter), vert en bas (passage si la voie est libre).",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : temps pour traverser",
+     "statement": "Un piéton marche à 1.5 m/s (donnée d'énoncé). La route fait 9 m de large. Combien de secondes pour la traverser ?",
+     "steps": [
+      {
+       "md": "On utilise la relation entre distance, vitesse et temps : t = d ÷ v.",
+       "tex": "t = \\frac{d}{v}"
+      },
+      {
+       "md": "t = 9 ÷ 1.5 = 6 s.",
+       "tex": "t = \\frac{9}{1.5} = 6"
+      }
+     ],
+     "answer": "**6 s : un véhicule qui arrive doit être assez loin pour laisser ce temps.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire un panneau",
+     "statement": "Un panneau est un rond à bordure rouge avec un dessin à l'intérieur. De quelle famille s'agit-il et que faire ?",
+     "steps": [
+      {
+       "md": "Le **rond à bordure rouge** est la forme des panneaux d'**interdiction**."
+      },
+      {
+       "md": "Il indique ce qui est interdit : on ne fait pas ce qui est dessiné et on lit le dessin pour savoir quoi."
+      }
+     ],
+     "answer": "**Panneau d'interdiction : on respecte ce qui est affiché.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Traverser en courant ou en regardant son téléphone.\n- Traverser derrière un véhicule arrêté qui cache la vue.\n- Se fier au dessin sans regarder la forme du panneau.\n- Croire que le feu vert protège : on vérifie toujours que la voie est libre.\n- Marcher sur la chaussée la nuit sans être visible.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Observe les panneaux autour de ton école : de quelle famille sont-ils ?",
+      "Dessine un plan de ton trajet scolaire et repère les endroits dangereux pour un piéton."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-code-route-pieton-panneaux-01"
+    }
+   ]
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues",
+   "title": "Priorités, moto-taxi, vélo et sécurité des passagers",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — sécurité routière (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer le principe des priorités : céder le passage aux indications.",
+    "Adopter les bonnes règles de sécurité à moto, à vélo et en voiture.",
+    "Expliquer pourquoi le casque et la ceinture sauvent des vies.",
+    "Reconnaître des comportements dangereux (surcharge, manque de visibilité)."
+   ],
+   "exercises": [
+    "vie-code-route-priorites-deux-roues-01",
+    "vie-code-route-priorites-deux-roues-02",
+    "vie-code-route-priorites-deux-roues-03",
+    "vie-code-route-priorites-deux-roues-04",
+    "vie-code-route-priorites-deux-roues-05",
+    "vie-code-route-priorites-deux-roues-06"
+   ],
+   "selfCheck": [
+    "vie-code-route-priorites-deux-roues-q1",
+    "vie-code-route-priorites-deux-roues-q2",
+    "vie-code-route-priorites-deux-roues-q3",
+    "vie-code-route-priorites-deux-roues-q4",
+    "vie-code-route-priorites-deux-roues-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 2nde par défaut (utile à tous les apprenants).",
+    "Contenu relevant du code de la route : principes généraux uniquement, sans limite de vitesse, taux, amende, âge légal ni numéro d'article ; à faire relire par un enseignant ou un professionnel de la sécurité routière.",
+    "Vérifier le principe de la priorité à droite en l'absence de signalisation : à confirmer avec le texte en vigueur.",
+    "Vérifier les consignes casque, passagers, siège enfant : principes généraux, sans nombre de passagers ni âge ni taille.",
+    "Vérifier que l'on n'indique ni amende ni limite de vitesse."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les priorités : le principe",
+     "md": "Quand deux véhicules arrivent au même endroit, la **priorité** détermine qui passe en premier. Principe général : on **respecte d'abord** les indications présentes (agent qui règle la circulation, feux, panneaux « cédez le passage » ou « stop »). En l'absence de toute signalisation, la règle habituelle est la **priorité à droite**. On **cède** le passage même si on est sûr d'avoir priorité, si cela évite un accident : la sécurité d'abord.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Moto-taxi et vélo : sécurité",
+     "md": "- Porter un **casque bien attaché** : le conducteur et, si possible, le passager. Un casque mal attaché protège mal.\n- Ne pas surcharger la moto : trop de passagers ou de charges font perdre l'équilibre.\n- Être **visible** : phares et feux allumés la nuit, vêtements clairs.\n- Respecter les feux, les panneaux et les piétons ; ne pas zigzaguer.\n- À vélo : avoir des freins en bon état, un éclairage la nuit, rouler du bon côté.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ceinture et siège enfant",
+     "md": "En voiture, la **ceinture** est attachée par **tous** les occupants, y compris à l'arrière. Un enfant ne doit pas être tenu sur les genoux : il doit être installé avec un dispositif adapté à son âge, son poids et sa taille (**siège enfant**, rehausseur), selon les conseils d'un professionnel. Le choc d'un accident est violent : sans ceinture, on est projeté.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 46.55,
+        "text": "Agent / feux",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 46.9,
+        "text": "Panneaux",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 20,
+        "w": 110,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 46.2,
+        "text": "Priorité à droite",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 42,
+        "x2": 145,
+        "y2": 42,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 255,
+        "y1": 42,
+        "x2": 280,
+        "y2": 42,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 90,
+        "text": "1er : indications",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 90,
+        "text": "2e : panneaux",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 90,
+        "text": "3e : sans signal",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "En cas de doute : ralentir et céder le passage",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "L'ordre de lecture des priorités : indications, panneaux, puis règle générale.",
+     "alt": "Trois rectangles : agent ou feux, panneaux, priorité à droite, reliés par des flèches ; en dessous, le conseil de ralentir et céder le passage en cas de doute.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "motos",
+      "bars": [
+       {
+        "label": "Avec casque attaché",
+        "value": 14,
+        "color": [
+         "green"
+        ]
+       },
+       {
+        "label": "Sans casque ou mal attaché",
+        "value": 6,
+        "color": [
+         "red"
+        ]
+       }
+      ]
+     },
+     "caption": "Observation fictive de 20 motos devant un lycée.",
+     "alt": "Deux barres : 14 motos avec casque attaché et 6 sans casque ou mal attaché."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un carrefour sans signalisation",
+     "statement": "Deux véhicules arrivent en même temps à un carrefour sans panneau ni feu. Que faire ?",
+     "steps": [
+      {
+       "md": "Chercher les indications : aucun panneau, aucun agent."
+      },
+      {
+       "md": "Appliquer la règle générale : priorité à celui qui vient de droite, sans s'imposer par la force ; ralentir et regarder."
+      }
+     ],
+     "answer": "**Ralentir, céder si nécessaire pour éviter l'accident.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un casque",
+     "statement": "Devant le lycée, on observe 20 motos : 14 conducteurs portent un casque attaché. Quel pourcentage ?",
+     "steps": [
+      {
+       "md": "Proportion = 14 ÷ 20 = 0.7.",
+       "tex": "\\frac{14}{20} = 0.7"
+      },
+      {
+       "md": "En pourcentage : 0.7 × 100 = 70 %."
+      }
+     ],
+     "answer": "**70 % des conducteurs portent un casque attaché : il y a encore 6 cas à améliorer.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « J'ai la priorité, donc je ne regarde pas. »\n- Casque posé sur la tête sans l'attacher.\n- Transporter trop de passagers ou des charges mal fixées.\n- Tenir un enfant sur les genoux au lieu d'un siège adapté.\n- Rouler la nuit sans lumière.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Interroge un conducteur de moto-taxi : quelles sont ses difficultés pour assurer sa sécurité ?",
+      "Imagine une campagne d'affiches pour ton quartier : « Casque attaché, vie protégée ». "
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-code-route-priorites-deux-roues-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "vie-code-route-pieton-panneaux-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Un panneau triangulaire à bordure rouge signale généralement…",
+   "explanation": "Triangle = danger (principe général).",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "un danger",
+    "une obligation",
+    "une indication de service",
+    "une fin de route"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Avant de traverser, on regarde des deux côtés.",
+   "explanation": "Oui, des véhicules peuvent arriver des deux côtés.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Associe forme/couleur et famille.",
+   "explanation": "Principe général des conventions de signalisation.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Triangle à bordure rouge",
+     "Danger"
+    ],
+    [
+     "Rond à bordure rouge",
+     "Interdiction"
+    ],
+    [
+     "Rond bleu",
+     "Obligation"
+    ],
+    [
+     "Rectangle bleu",
+     "Indication"
+    ]
+   ]
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Un enfant marche à 1.2 m/s sur une route de 12 m (énoncé). Temps de traversée en secondes ?",
+   "explanation": "t = 12 ÷ 1.2 = 10 s.",
+   "source": "Exercice original",
+   "answer": 10.0,
+   "tolerance": 0.1,
+   "unit": "s"
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Pourquoi est-il dangereux de traverser en regardant son téléphone ? Donne deux raisons.",
+   "explanation": "L'attention est indispensable.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "On ne voit ni n'entend les véhicules ; on réagit trop tard ; on ne regarde pas des deux côtés.",
+   "rubric": [
+    "Perte d'attention",
+    "Réaction trop tardive ou vue limitée"
+   ]
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "À la sortie d'une école, des élèves traversent une route sans passage piéton, entre deux véhicules garés.",
+   "method": "Pense à voir et être vu, puis à la distance, la vitesse et le temps.",
+   "mistakes": [
+    "Traverser entre des véhicules garés."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu relevant du code de la route : principes généraux uniquement, sans limite de vitesse, taux, amende, âge légal ni numéro d'article ; à faire relire par un enseignant ou un professionnel de la sécurité routière.",
+   "parts": [
+    {
+     "id": "vie-code-route-pieton-panneaux-06-a",
+     "points": 1,
+     "prompt": "Quel est le principal danger ?",
+     "explanation": "Un piéton caché est mal vu.",
+     "kind": "mcq",
+     "choices": [
+      "La route est trop propre",
+      "Les élèves sont cachés et mal vus des conducteurs",
+      "Les véhicules sont trop lents",
+      "Les panneaux sont bleus"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "vie-code-route-pieton-panneaux-06-b",
+     "points": 2,
+     "prompt": "Propose deux conseils pour traverser plus sûrement.",
+     "explanation": "Visibilité et attention.",
+     "kind": "open",
+     "model": "Utiliser un passage piéton ou un endroit dégagé ; regarder des deux côtés et attendre que les véhicules soient loin ou arrêtés.",
+     "rubric": [
+      "Endroit visible",
+      "Regarder des deux côtés / attendre"
+     ]
+    },
+    {
+     "id": "vie-code-route-pieton-panneaux-06-c",
+     "points": 1,
+     "prompt": "Si la traversée de 10 m se fait à 1,25 m/s, combien de secondes ?",
+     "explanation": "10 ÷ 1,25 = 8 s.",
+     "kind": "numeric",
+     "answer": 8,
+     "tolerance": 0,
+     "unit": "s"
+    }
+   ]
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Un panneau rond bleu est généralement…",
+   "choices": [
+    "de danger",
+    "d'obligation",
+    "d'interdiction",
+    "de fin de route"
+   ],
+   "answer": 1,
+   "explanation": "Rond bleu = obligation (principe général).",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Le feu rouge pour piéton signifie…",
+   "choices": [
+    "attendre",
+    "traverser vite",
+    "courir",
+    "ignorer"
+   ],
+   "answer": 0,
+   "explanation": "Rouge = arrêt.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Une ligne continue signifie en principe…",
+   "choices": [
+    "accélérer",
+    "freiner brutalement",
+    "klaxonner",
+    "ne pas la franchir"
+   ],
+   "answer": 3,
+   "explanation": "Respecter le marquage.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Pour être vu la nuit, un piéton porte…",
+   "choices": [
+    "des vêtements sombres",
+    "un casque audio",
+    "des vêtements clairs ou une lampe",
+    "un parapluie noir"
+   ],
+   "answer": 2,
+   "explanation": "Être visible protège.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-pieton-panneaux-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-pieton-panneaux",
+   "prompt": "Avant de traverser, un piéton doit…",
+   "choices": [
+    "courir",
+    "s'arrêter et regarder des deux côtés",
+    "fermer les yeux",
+    "attendre que le véhicule klaxonne"
+   ],
+   "answer": 1,
+   "explanation": "On s'arrête et on regarde.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "Avec un casque, il faut…",
+   "explanation": "Un casque mal attaché protège mal.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "bien l'attacher",
+    "le mettre sur le guidon",
+    "ne le porter que de jour",
+    "le prêter à l'arrière sans l'attacher"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "La ceinture ne sert qu'à l'avant du véhicule.",
+   "explanation": "Faux : tous les occupants doivent s'attacher.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "On cède le passage même si l'on a priorité quand cela évite un accident.",
+   "explanation": "Oui, la sécurité passe d'abord.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "Sur 25 cyclistes observés, 20 ont un éclairage la nuit. Quel pourcentage ?",
+   "explanation": "20 ÷ 25 = 0,8 soit 80 %.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu relevant du code de la route : principes généraux uniquement, sans limite de vitesse, taux, amende, âge légal ni numéro d'article ; à faire relire par un enseignant ou un professionnel de la sécurité routière.",
+   "answer": 80,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "Explique à un conducteur de moto-taxi pourquoi il ne doit pas surcharger sa moto.",
+   "explanation": "La surcharge augmente le risque de chute.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "La surcharge fait perdre l'équilibre, allonge le freinage et rend la moto difficile à contrôler.",
+   "rubric": [
+    "Équilibre",
+    "Freinage ou contrôle"
+   ]
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "À un carrefour, un agent de la circulation fait signe aux véhicules de s'arrêter alors que le feu est vert pour eux.",
+   "method": "Indications d'abord, puis panneaux, puis règle générale, puis prudence.",
+   "mistakes": [
+    "Se fier au feu quand un agent donne des ordres."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu relevant du code de la route : principes généraux uniquement, sans limite de vitesse, taux, amende, âge légal ni numéro d'article ; à faire relire par un enseignant ou un professionnel de la sécurité routière.",
+   "parts": [
+    {
+     "id": "vie-code-route-priorites-deux-roues-06-a",
+     "points": 1,
+     "prompt": "Que doivent faire les conducteurs ?",
+     "explanation": "Les indications d'un agent priment en général sur la signalisation.",
+     "kind": "mcq",
+     "choices": [
+      "Suivre les indications de l'agent",
+      "Suivre le feu vert",
+      "Accélérer",
+      "Klaxonner pour passer"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "vie-code-route-priorites-deux-roues-06-b",
+     "points": 2,
+     "prompt": "Explique pourquoi on cède parfois le passage même avec la priorité.",
+     "explanation": "La priorité est un droit, pas une garantie.",
+     "kind": "open",
+     "model": "Pour éviter un accident quand l'autre conducteur ne s'arrête pas ; la sécurité vaut plus qu'une priorité.",
+     "rubric": [
+      "Notion de sécurité",
+      "Éviter un accident"
+     ]
+    },
+    {
+     "id": "vie-code-route-priorites-deux-roues-06-c",
+     "points": 1,
+     "prompt": "En l'absence de toute signalisation, on applique la règle de priorité à droite.",
+     "explanation": "Principe général à vérifier avec le texte en vigueur.",
+     "kind": "truefalse",
+     "answer": true,
+     "review": true
+    }
+   ]
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "En l'absence de signalisation, la règle habituelle est…",
+   "choices": [
+    "la priorité au plus rapide",
+    "la priorité à droite",
+    "la priorité au plus gros",
+    "aucune règle"
+   ],
+   "answer": 1,
+   "explanation": "À vérifier avec le texte en vigueur.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "Un casque non attaché…",
+   "choices": [
+    "protège mal",
+    "protège toujours",
+    "n'a aucun risque",
+    "est obligatoire de nuit seulement"
+   ],
+   "answer": 0,
+   "explanation": "Il doit être bien attaché.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "En voiture, la ceinture…",
+   "choices": [
+    "est inutile à l'arrière",
+    "se porte seulement en ville",
+    "est réservée au conducteur",
+    "doit être portée par tous les occupants"
+   ],
+   "answer": 3,
+   "explanation": "Tous les occupants sont concernés.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "Un enfant en voiture…",
+   "choices": [
+    "se tient sur les genoux",
+    "reste debout",
+    "doit utiliser un dispositif adapté",
+    "joue à l'avant libre"
+   ],
+   "answer": 2,
+   "explanation": "Siège ou rehausseur adapté.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-priorites-deux-roues-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-priorites-deux-roues",
+   "prompt": "Un agent de la circulation fait un geste contraire au feu : on…",
+   "choices": [
+    "suit le feu",
+    "suit l'agent",
+    "klaxonne",
+    "accélère"
+   ],
+   "answer": 1,
+   "explanation": "Les indications de l'agent priment en général.",
+   "review": true
+  }
+ ]
+}

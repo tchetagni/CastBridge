@@ -1,0 +1,945 @@
+{
+ "chapter": "vie-code-route-responsable",
+ "lessons": [
+  {
+   "id": "vie-code-route-distance-arret",
+   "title": "Alcool, téléphone et distance d'arrêt",
+   "minutes": 40,
+   "programRef": "Compétence de vie pratique — sécurité routière (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer pourquoi l'alcool et le téléphone augmentent le danger.",
+    "Définir temps de réaction, distance de réaction, distance de freinage et distance d'arrêt.",
+    "Convertir une vitesse en m/s et calculer d = v × t.",
+    "Appliquer le principe des distances de sécurité."
+   ],
+   "exercises": [
+    "vie-code-route-distance-arret-01",
+    "vie-code-route-distance-arret-02",
+    "vie-code-route-distance-arret-03",
+    "vie-code-route-distance-arret-04",
+    "vie-code-route-distance-arret-05",
+    "vie-code-route-distance-arret-06"
+   ],
+   "selfCheck": [
+    "vie-code-route-distance-arret-q1",
+    "vie-code-route-distance-arret-q2",
+    "vie-code-route-distance-arret-q3",
+    "vie-code-route-distance-arret-q4",
+    "vie-code-route-distance-arret-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 2nde par défaut (utile à tous les apprenants).",
+    "Contenu relevant du code de la route : principes généraux uniquement, sans limite de vitesse, taux, amende, âge légal ni numéro d'article ; à faire relire par un enseignant ou un professionnel de la sécurité routière.",
+    "Aucun taux d'alcool, aucune limite de vitesse ni distance légale n'est cité : tous les chiffres sont des données d'énoncé fictives.",
+    "Vérifier le principe physique : la distance de freinage augmente plus vite que la vitesse (environ le carré à décélération constante) ; relecture par un enseignant de sciences.",
+    "Vérifier l'exactitude des conversions km/h vers m/s (division par 3,6)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les quatre notions",
+     "md": "- **Temps de réaction** : temps entre le moment où l'on voit le danger et celui où l'on commence à freiner.\n- **Distance de réaction** : distance parcourue pendant ce temps.\n- **Distance de freinage** : distance parcourue pendant que le véhicule ralentit jusqu'à l'arrêt.\n- **Distance d'arrêt** = distance de réaction + distance de freinage.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Calculer la distance de réaction",
+     "md": "Pendant le temps de réaction, la vitesse ne change pas : **d = v × t**, avec v en **mètres par seconde (m/s)** et t en secondes. Pour convertir des km/h en m/s, on divise par 3,6 : 36 km/h = 10 m/s.",
+     "tex": "d = v \\times t"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Alcool et téléphone",
+     "md": "L'**alcool**, la fatigue, certains médicaments et le **téléphone** (appel, message, écran) **augmentent le temps de réaction** et réduisent l'attention : le véhicule parcourt plus de distance avant le freinage. Le principe de sécurité : ne pas conduire après avoir bu, ne pas utiliser le téléphone en conduisant, ne pas conduire fatigué. Garder une **distance de sécurité** suffisante avec le véhicule qui précède, plus grande si la route est mouillée.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "m",
+      "bars": [
+       {
+        "label": "Réaction 10 m/s",
+        "value": 10,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Freinage 10 m/s",
+        "value": 8,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Réaction 20 m/s",
+        "value": 20,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Freinage 20 m/s",
+        "value": 32,
+        "color": [
+         "blue"
+        ]
+       }
+      ]
+     },
+     "caption": "Distances de réaction et de freinage pour deux vitesses (valeurs fictives d'énoncé).",
+     "alt": "Quatre barres : à 10 m/s, réaction 10 m et freinage 8 m ; à 20 m/s, réaction 20 m et freinage 32 m."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 120,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 70.25,
+        "text": "Réaction",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 40,
+        "w": 110,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 70.25,
+        "text": "Freinage",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 40,
+        "w": 110,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 70.25,
+        "text": "Arrêt",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 65,
+        "text": "+",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 65,
+        "text": "=",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 130,
+        "text": "d arrêt = d réaction + d freinage",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "La distance d'arrêt est la somme de la distance de réaction et de la distance de freinage.",
+     "alt": "Trois rectangles : réaction, freinage, arrêt, avec les signes plus et égal, et la formule dessous."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : distance d'arrêt",
+     "statement": "Une moto roule à 15 m/s. Temps de réaction : 1 s ; distance de freinage : 18 m (données d'énoncé). Quelle est la distance d'arrêt ?",
+     "steps": [
+      {
+       "md": "Distance de réaction : d = v × t = 15 × 1 = 15 m.",
+       "tex": "d = 15 \\times 1 = 15"
+      },
+      {
+       "md": "Distance d'arrêt = 15 + 18 = 33 m."
+      }
+     ],
+     "answer": "**33 m.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : l'effet du téléphone",
+     "statement": "Même moto, mais le conducteur lit un message : temps de réaction 2 s (énoncé). Distance d'arrêt ? Quelle différence ?",
+     "steps": [
+      {
+       "md": "Réaction : 15 × 2 = 30 m."
+      },
+      {
+       "md": "Arrêt : 30 + 18 = 48 m."
+      },
+      {
+       "md": "Différence : 48 − 33 = 15 m de plus : une distraction rallonge l'arrêt."
+      }
+     ],
+     "answer": "**48 m, soit 15 m de plus.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer avec des km/h : il faut des m/s pour d = v × t avec t en secondes.\n- Oublier d'ajouter la distance de freinage.\n- Croire qu'on s'arrête « sur place ».\n- Penser qu'un peu d'alcool ou un bref coup d'œil au téléphone est sans effet.\n- Garder la même distance de sécurité sur route mouillée.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Mesure en pas ou en mètres une distance de 20 m dans la cour de ton école et imagine un véhicule qui la parcourt en 1 s.",
+      "Calcule : 72 km/h = ? m/s (divise par 3,6)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-code-route-distance-arret-01"
+    }
+   ]
+  },
+  {
+   "id": "vie-code-route-documents-accident",
+   "title": "Documents du conducteur et gestes en cas d'accident",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — sécurité routière (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Citer la liste générale des documents d'un conducteur.",
+    "Expliquer pourquoi ces documents existent.",
+    "Appliquer les trois réflexes en cas d'accident : sécuriser, alerter, ne pas déplacer un blessé grave.",
+    "Savoir quoi dire en alertant les secours."
+   ],
+   "exercises": [
+    "vie-code-route-documents-accident-01",
+    "vie-code-route-documents-accident-02",
+    "vie-code-route-documents-accident-03",
+    "vie-code-route-documents-accident-04",
+    "vie-code-route-documents-accident-05",
+    "vie-code-route-documents-accident-06"
+   ],
+   "selfCheck": [
+    "vie-code-route-documents-accident-q1",
+    "vie-code-route-documents-accident-q2",
+    "vie-code-route-documents-accident-q3",
+    "vie-code-route-documents-accident-q4",
+    "vie-code-route-documents-accident-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 2nde par défaut (utile à tous les apprenants).",
+    "Contenu relevant du code de la route : principes généraux uniquement, sans limite de vitesse, taux, amende, âge légal ni numéro d'article ; à faire relire par un enseignant ou un professionnel de la sécurité routière.",
+    "Vérifier la liste générale des documents (permis de conduire de la catégorie correspondante, document d'immatriculation du véhicule, attestation d'assurance, visite technique) : à confirmer avec le texte en vigueur.",
+    "Vérifier les gestes en cas d'accident : principes généraux, aucun geste technique ni numéro d'urgence.",
+    "Aucune amende, durée de validité ni sanction n'est citée."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les documents d'un conducteur (liste générale)",
+     "md": "En principe, un conducteur doit pouvoir présenter :\n- son **permis de conduire** correspondant au type de véhicule ;\n- le **document d'immatriculation** du véhicule (carte grise) ;\n- l'**attestation d'assurance** en cours de validité ;\n- le justificatif de la **visite technique** à jour, quand elle est exigée pour le véhicule.\nCes documents prouvent que le conducteur est formé, que le véhicule est identifié, assuré et en bon état. Les règles précises sont à vérifier auprès des services compétents.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Face à un accident",
+     "md": "1. **Sécuriser** : s'arrêter à distance sûre, signaler le danger (feux de détresse, triangle si on en a), éloigner les curieux de la route. Ne pas se mettre en danger.\n2. **Alerter** : appeler ou faire appeler les secours ou le centre de santé le plus proche, en précisant le **lieu**, ce qui s'est passé, le **nombre de blessés** et leur état.\n3. **Protéger** : rassurer les blessés, les couvrir. **Ne pas déplacer un blessé grave**, sauf danger immédiat (feu, circulation). Ne pas lui donner à boire. Rester jusqu'à l'arrivée des secours.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Après l'accident",
+     "md": "Les personnes impliquées échangent leurs coordonnées et informent leur **assureur**, selon les règles en vigueur. Témoigner honnêtement de ce qu'on a vu aide à établir les faits. Prendre des photos du lieu peut aider, sans gêner les secours.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 110,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 56.9,
+        "text": "1 Sécuriser",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 30,
+        "w": 110,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 56.9,
+        "text": "2 Alerter",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 30,
+        "w": 110,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 56.9,
+        "text": "3 Protéger",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 52,
+        "x2": 145,
+        "y2": 52,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 255,
+        "y1": 52,
+        "x2": 280,
+        "y2": 52,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 105,
+        "text": "danger écarté",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 105,
+        "text": "lieu, blessés",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 105,
+        "text": "ne pas déplacer",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 160,
+        "text": "Rester calme et attendre les secours",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Les trois gestes en cas d'accident.",
+     "alt": "Trois rectangles reliés par des flèches : sécuriser, alerter, protéger ; sous chacun une courte consigne ; et le rappel de rester calme et d'attendre les secours.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un accident de moto",
+     "statement": "Une moto-taxi tombe devant toi. Le conducteur est étendu au sol et ne peut pas bouger. Que faire ?",
+     "steps": [
+      {
+       "md": "Sécuriser : s'éloigner du trafic, signaler le danger si possible."
+      },
+      {
+       "md": "Alerter : appeler les secours en donnant le lieu et le nombre de blessés."
+      },
+      {
+       "md": "Ne pas le relever ni lui retirer le casque ; le rassurer et attendre."
+      }
+     ],
+     "answer": "**Sécuriser, alerter, ne pas déplacer.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la bonne alerte",
+     "statement": "Tu appelles les secours après un accident à un carrefour. Que dire ?",
+     "steps": [
+      {
+       "md": "Donner le lieu précis : quartier, carrefour, point de repère connu."
+      },
+      {
+       "md": "Dire ce qui s'est passé, le nombre de blessés et leur état, puis répondre aux questions sans raccrocher en premier."
+      }
+     ],
+     "answer": "**Lieu, faits, blessés.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Quitter le lieu de l'accident sans alerter.\n- Relever brusquement un blessé grave.\n- Donner à boire à un blessé qui perd connaissance.\n- Rouler sans les documents ou avec une assurance non valide.\n- Laisser les curieux s'approcher ou filmer au lieu d'aider.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Demande à un adulte conducteur de te montrer les documents d'un véhicule de la famille.",
+      "Renseigne-toi sur les gestes de premiers secours enseignés par la Croix-Rouge ou ton centre de santé."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-code-route-documents-accident-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "vie-code-route-distance-arret-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "La distance d'arrêt est égale à…",
+   "explanation": "On additionne.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "la distance de réaction plus la distance de freinage",
+    "la distance de freinage seule",
+    "la distance de réaction seule",
+    "le produit des deux distances"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-code-route-distance-arret-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "Un véhicule roule à 12 m/s, temps de réaction 1 s. Distance de réaction ?",
+   "explanation": "12 × 1 = 12 m.",
+   "source": "Exercice original",
+   "answer": 12,
+   "tolerance": 0,
+   "unit": "m"
+  },
+  {
+   "id": "vie-code-route-distance-arret-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "Convertis 54 km/h en m/s.",
+   "explanation": "54 ÷ 3,6 = 15 m/s.",
+   "source": "Exercice original",
+   "answer": 15,
+   "tolerance": 0,
+   "unit": "m/s"
+  },
+  {
+   "id": "vie-code-route-distance-arret-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "Vitesse 20 m/s ; temps de réaction 1.5 s ; distance de freinage 30 m (énoncé). Distance d'arrêt ?",
+   "explanation": "Réaction : 20 × 1.5 = 30 m ; arrêt : 30 + 30 = 60 m.",
+   "source": "Exercice original",
+   "answer": 60.0,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  {
+   "id": "vie-code-route-distance-arret-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "Si le temps de réaction augmente, la distance de réaction augmente aussi.",
+   "explanation": "d = v × t : t plus grand, d plus grand.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "vie-code-route-distance-arret-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "Un conducteur roule à 25 m/s. Temps de réaction normal 1 s ; distance de freinage 40 m. Données d'énoncé.",
+   "method": "v en m/s ; d réaction = v × t ; ajoute le freinage.",
+   "mistakes": [
+    "Oublier d'ajouter la distance de freinage."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu relevant du code de la route : principes généraux uniquement, sans limite de vitesse, taux, amende, âge légal ni numéro d'article ; à faire relire par un enseignant ou un professionnel de la sécurité routière.",
+   "parts": [
+    {
+     "id": "vie-code-route-distance-arret-06-a",
+     "points": 1,
+     "prompt": "Distance de réaction ?",
+     "explanation": "25 × 1 = 25 m.",
+     "kind": "numeric",
+     "answer": 25,
+     "tolerance": 0,
+     "unit": "m"
+    },
+    {
+     "id": "vie-code-route-distance-arret-06-b",
+     "points": 1,
+     "prompt": "Distance d'arrêt ?",
+     "explanation": "25 + 40 = 65 m.",
+     "kind": "numeric",
+     "answer": 65,
+     "tolerance": 0,
+     "unit": "m"
+    },
+    {
+     "id": "vie-code-route-distance-arret-06-c",
+     "points": 1,
+     "prompt": "S'il téléphone, son temps de réaction passe à 2 s. Nouvelle distance d'arrêt ?",
+     "explanation": "Réaction : 25 × 2 = 50 ; arrêt : 50 + 40 = 90 m.",
+     "kind": "numeric",
+     "answer": 90,
+     "tolerance": 0,
+     "unit": "m"
+    },
+    {
+     "id": "vie-code-route-distance-arret-06-d",
+     "points": 1,
+     "prompt": "Que conclure sur l'usage du téléphone au volant ?",
+     "explanation": "Une distraction coûte des mètres.",
+     "kind": "open",
+     "model": "Il rallonge la distance d'arrêt : on parcourt plus de mètres avant de freiner, ce qui augmente le risque d'accident.",
+     "rubric": [
+      "Lien téléphone / réaction",
+      "Risque accru"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vie-code-route-distance-arret-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "Le temps de réaction est…",
+   "choices": [
+    "le temps de freinage",
+    "le temps entre voir le danger et commencer à freiner",
+    "la durée du trajet",
+    "la vitesse maximale"
+   ],
+   "answer": 1,
+   "explanation": "C'est le délai avant le freinage.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-distance-arret-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "Pour d = v × t, la vitesse est en…",
+   "choices": [
+    "m/s si le temps est en s",
+    "km/h toujours",
+    "kg",
+    "litres"
+   ],
+   "answer": 0,
+   "explanation": "Les unités doivent être cohérentes.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-distance-arret-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "L'alcool et le téléphone…",
+   "choices": [
+    "le diminuent",
+    "ne changent rien",
+    "améliorent la conduite",
+    "augmentent le temps de réaction"
+   ],
+   "answer": 3,
+   "explanation": "On parcourt plus de distance avant de freiner.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-distance-arret-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "36 km/h correspond à…",
+   "choices": [
+    "3,6 m/s",
+    "36 m/s",
+    "10 m/s",
+    "100 m/s"
+   ],
+   "answer": 2,
+   "explanation": "36 ÷ 3,6 = 10.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-distance-arret-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-distance-arret",
+   "prompt": "Sur route mouillée, on garde en principe…",
+   "choices": [
+    "la même distance",
+    "une plus grande distance de sécurité",
+    "une distance nulle",
+    "une distance au hasard"
+   ],
+   "answer": 1,
+   "explanation": "Le freinage est plus long sur route mouillée.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-documents-accident-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Quelle est la première étape devant un accident ?",
+   "explanation": "Éviter un second accident.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Sécuriser les lieux",
+    "Déplacer le blessé",
+    "Prendre un selfie",
+    "Partir"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-code-route-documents-accident-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Il faut déplacer tout blessé grave immédiatement.",
+   "explanation": "Faux : on ne le déplace pas sauf danger immédiat.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "vie-code-route-documents-accident-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Associe chaque document à son rôle.",
+   "explanation": "Chaque document a un rôle précis (principe général).",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Permis de conduire",
+     "Prouve que le conducteur est formé"
+    ],
+    [
+     "Attestation d'assurance",
+     "Couvre les dommages causés"
+    ],
+    [
+     "Visite technique",
+     "Contrôle l'état du véhicule"
+    ]
+   ]
+  },
+  {
+   "id": "vie-code-route-documents-accident-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Un véhicule roule à 20 m/s, temps de réaction 1.5 s (énoncé). Distance de réaction ?",
+   "explanation": "20 × 1.5 = 30 m.",
+   "source": "Exercice original",
+   "answer": 30.0,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  {
+   "id": "vie-code-route-documents-accident-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Rédige les phrases à dire aux secours pour signaler un accident (3 informations essentielles).",
+   "explanation": "Une alerte claire permet aux secours d'arriver vite.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Le lieu précis de l'accident ; ce qui s'est passé ; le nombre de blessés et leur état.",
+   "rubric": [
+    "Lieu",
+    "Faits",
+    "Blessés"
+   ]
+  },
+  {
+   "id": "vie-code-route-documents-accident-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Tu es témoin d'un accident entre une voiture et une moto à un carrefour. Un motard est à terre, conscient, il se plaint de douleur au dos.",
+   "method": "Sécuriser, alerter, protéger.",
+   "mistakes": [
+    "Partir après avoir appelé."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu relevant du code de la route : principes généraux uniquement, sans limite de vitesse, taux, amende, âge légal ni numéro d'article ; à faire relire par un enseignant ou un professionnel de la sécurité routière.",
+   "parts": [
+    {
+     "id": "vie-code-route-documents-accident-06-a",
+     "points": 1,
+     "prompt": "Que fais-tu en premier ?",
+     "explanation": "On sécurise et on alerte.",
+     "kind": "mcq",
+     "choices": [
+      "Je le relève pour le mettre debout",
+      "Je lui donne à boire",
+      "Je m'assure que le lieu est sûr et je fais alerter les secours",
+      "Je pars"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "vie-code-route-documents-accident-06-b",
+     "points": 2,
+     "prompt": "Pourquoi ne faut-il pas le déplacer ?",
+     "explanation": "Le déplacer peut aggraver une blessure grave.",
+     "kind": "open",
+     "model": "Une douleur au dos peut indiquer une lésion de la colonne vertébrale ; bouger brusquement peut aggraver l'état.",
+     "rubric": [
+      "Risque d'aggravation",
+      "Attendre les secours"
+     ]
+    },
+    {
+     "id": "vie-code-route-documents-accident-06-c",
+     "points": 1,
+     "prompt": "Il faut rester sur place avec le blessé jusqu'à l'arrivée des secours.",
+     "explanation": "Oui : on le rassure et on donne des informations aux secours.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "vie-code-route-documents-accident-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Parmi ces documents, lequel est en principe nécessaire pour conduire ?",
+   "choices": [
+    "un abonnement de téléphone",
+    "le permis de conduire",
+    "un ticket de bus",
+    "un bulletin scolaire"
+   ],
+   "answer": 1,
+   "explanation": "Il prouve la capacité à conduire.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-documents-accident-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Un blessé grave après une chute doit…",
+   "choices": [
+    "ne pas être déplacé sauf danger immédiat",
+    "être relevé tout de suite",
+    "marcher",
+    "boire"
+   ],
+   "answer": 0,
+   "explanation": "Éviter d'aggraver l'état.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-documents-accident-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Une bonne alerte donne…",
+   "choices": [
+    "seulement son nom",
+    "des opinions",
+    "rien",
+    "le lieu, les faits et le nombre de blessés"
+   ],
+   "answer": 3,
+   "explanation": "Informations essentielles.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-documents-accident-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "L'attestation d'assurance sert à…",
+   "choices": [
+    "remplacer le permis",
+    "régler la circulation",
+    "couvrir les dommages causés",
+    "vérifier la vitesse"
+   ],
+   "answer": 2,
+   "explanation": "Elle couvre en cas d'accident.",
+   "review": true
+  },
+  {
+   "id": "vie-code-route-documents-accident-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-code-route-documents-accident",
+   "prompt": "Après avoir alerté les secours, on…",
+   "choices": [
+    "part vite",
+    "reste près du blessé jusqu'à leur arrivée",
+    "le laisse seul",
+    "filme sans aider"
+   ],
+   "answer": 1,
+   "explanation": "On le rassure et on attend.",
+   "review": true
+  }
+ ]
+}

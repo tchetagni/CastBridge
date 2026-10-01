@@ -1,0 +1,902 @@
+{
+ "chapter": "vie-hygiene-sante-vie",
+ "lessons": [
+  {
+   "id": "vie-hygiene-sante-vih-ist",
+   "title": "VIH/sida et IST : savoir, se protéger, respecter",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation à la santé (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer VIH et sida en termes simples.",
+    "Citer les modes de transmission et ce qui ne transmet pas.",
+    "Citer les moyens de prévention et l'importance du dépistage.",
+    "Refuser la stigmatisation."
+   ],
+   "exercises": [
+    "vie-hygiene-sante-vih-ist-01",
+    "vie-hygiene-sante-vih-ist-02",
+    "vie-hygiene-sante-vih-ist-03",
+    "vie-hygiene-sante-vih-ist-04",
+    "vie-hygiene-sante-vih-ist-05",
+    "vie-hygiene-sante-vih-ist-06"
+   ],
+   "selfCheck": [
+    "vie-hygiene-sante-vih-ist-q1",
+    "vie-hygiene-sante-vih-ist-q2",
+    "vie-hygiene-sante-vih-ist-q3",
+    "vie-hygiene-sante-vih-ist-q4",
+    "vie-hygiene-sante-vih-ist-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 5e par défaut (utile à tous les apprenants).",
+    "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+    "Vérifier les modes de transmission et la liste de ce qui ne transmet pas ; aucun chiffre ni traitement détaillé n'est donné.",
+    "Vérifier que le message sur le dépistage et la prise en charge (« consulter un centre de santé ») est conforme aux consignes sanitaires nationales.",
+    "Vérifier le ton pour des adolescents : respectueux, sans moralisation excessive."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "VIH, sida, IST",
+     "md": "Le **VIH** est un virus qui affaiblit les défenses du corps. Sans prise en charge, il peut conduire au **sida**, stade avancé où le corps se défend mal. Les **IST** (infections sexuellement transmissibles) sont des infections qui se transmettent surtout lors de rapports sexuels. Avec un suivi médical, une personne vivant avec le VIH peut rester en bonne santé : il existe une prise en charge, accessible en centre de santé.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Transmission et non-transmission",
+     "md": "**Le VIH se transmet** par les rapports sexuels non protégés, par le sang (seringues ou objets coupants souillés partagés, transfusion non contrôlée), et de la mère à l'enfant (grossesse, accouchement, allaitement) en l'absence de suivi.\n**Il ne se transmet pas** par une poignée de main, un câlin, partager un repas, un verre, les toilettes, un moustique, ni en vivant ou en étudiant avec une personne séropositive.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Prévention et dépistage",
+     "md": "- Ne pas avoir de rapports sans protection ; utiliser correctement le préservatif ; l'abstinence est aussi un moyen de se protéger.\n- Ne jamais partager des objets pouvant couper ou piquer (lames, seringues).\n- Faire un **test de dépistage** au centre de santé : c'est confidentiel, et mieux vaut savoir pour se soigner à temps.\n- Les femmes enceintes doivent être suivies.\n- En cas de doute ou d'exposition, consulter rapidement.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pas de stigmatisation",
+     "md": "Une personne séropositive reste un camarade, un voisin, un parent : elle a les mêmes droits, y compris l'école, le travail, la vie en famille. Se moquer, éloigner ou révéler son état sans son accord est injuste et blessant, et pousse les gens à se cacher et à ne pas se soigner. Le respect et la confidentialité aident la prévention.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "text",
+        "x": 100,
+        "y": 28,
+        "text": "Transmet",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 28,
+        "text": "Ne transmet pas",
+        "size": 15,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 62,
+        "text": "Rapports non protégés",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 92,
+        "text": "Sang souillé",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 122,
+        "text": "Mère à l'enfant (sans suivi)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 62,
+        "text": "Poignée de main",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 92,
+        "text": "Partager un repas",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 122,
+        "text": "Moustique",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 10,
+        "x2": 200,
+        "y2": 160,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 195,
+        "text": "Savoir, c'est se protéger sans exclure",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Ce qui transmet le VIH et ce qui ne le transmet pas.",
+     "alt": "Deux colonnes séparées par une ligne : à gauche, ce qui transmet (rapports non protégés, sang souillé, de la mère à l'enfant sans suivi) ; à droite, ce qui ne transmet pas (poignée de main, repas partagé, moustique)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : partager un repas",
+     "statement": "Un élève dit : « Ne mange pas avec Joël, il paraît qu'il a le VIH. » Que répondre ?",
+     "steps": [
+      {
+       "md": "Le VIH ne se transmet pas en partageant un repas, un verre ou une table."
+      },
+      {
+       "md": "L'état de santé d'une personne est confidentiel ; l'exclure est injuste."
+      }
+     ],
+     "answer": "**On peut manger avec Joël ; on le respecte.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une lame partagée",
+     "statement": "Dans un salon de coiffure du quartier, une même lame sert à plusieurs clients sans être nettoyée. Quel risque ? Quel conseil ?",
+     "steps": [
+      {
+       "md": "Du sang peut rester sur la lame : risque de transmission de maladies par le sang."
+      },
+      {
+       "md": "Conseil : une lame neuve ou bien désinfectée pour chaque client ; ne pas partager d'objets coupants."
+      }
+     ],
+     "answer": "**Ne pas partager les objets coupants ; exiger du matériel propre.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Idées fausses",
+     "md": "- « On attrape le VIH avec un moustique ou en serrant la main. » Faux.\n- « On voit tout de suite qu'une personne est séropositive. » Faux : on ne peut pas le deviner.\n- « Le dépistage, c'est honteux. » Non : c'est un geste responsable.\n- « Si on est séropositif, on ne peut plus rien faire. » Faux : avec un suivi, on peut vivre normalement.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Renseigne-toi sur le centre de dépistage le plus proche : il y a des conseillers qui répondent aux questions.",
+      "Prépare une courte saynète pour montrer comment répondre à une rumeur."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-hygiene-sante-vih-ist-01"
+    }
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit",
+   "title": "Premiers secours, santé mentale et adolescence",
+   "minutes": 35,
+   "programRef": "Compétence de vie pratique — éducation à la santé (à vérifier avec les programmes du MINESEC).",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Appliquer les principes de base des premiers secours : alerter, sécuriser, ne pas déplacer un blessé grave.",
+    "Reconnaître des signes de mal-être et savoir en parler.",
+    "Citer des dangers des addictions.",
+    "Décrire les changements de l'adolescence avec respect."
+   ],
+   "exercises": [
+    "vie-hygiene-sante-secours-esprit-01",
+    "vie-hygiene-sante-secours-esprit-02",
+    "vie-hygiene-sante-secours-esprit-03",
+    "vie-hygiene-sante-secours-esprit-04",
+    "vie-hygiene-sante-secours-esprit-05",
+    "vie-hygiene-sante-secours-esprit-06"
+   ],
+   "selfCheck": [
+    "vie-hygiene-sante-secours-esprit-q1",
+    "vie-hygiene-sante-secours-esprit-q2",
+    "vie-hygiene-sante-secours-esprit-q3",
+    "vie-hygiene-sante-secours-esprit-q4",
+    "vie-hygiene-sante-secours-esprit-q5"
+   ],
+   "reviewNotes": [
+    "Pack transversal « vie pratique » : le catalogue n'a pas de niveau « tous publics », il est rattaché à la 5e par défaut (utile à tous les apprenants).",
+    "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+    "Vérifier que les premiers secours restent des principes généraux (pas de gestes techniques ni de médicaments).",
+    "Vérifier le vocabulaire sur la santé mentale et les addictions (tabac, alcool, drogues) : aucune statistique ni loi citée.",
+    "Vérifier l'orientation vers un adulte de confiance, l'infirmier de l'école ou un agent de santé."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Premiers secours : trois réflexes",
+     "md": "1. **Sécuriser** : vérifier que le lieu n'est pas dangereux (circulation, feu, courant) avant d'agir ; ne pas se mettre en danger.\n2. **Alerter** : appeler ou faire appeler un adulte, un voisin, les secours ou le centre de santé en donnant le lieu, ce qui s'est passé et le nombre de blessés.\n3. **Protéger** : rester près de la victime, la rassurer, la couvrir ; **ne pas déplacer un blessé grave** (chute, accident de la route) sauf danger immédiat.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Petites blessures",
+     "md": "Pour une petite coupure : se laver les mains, nettoyer la plaie à l'eau propre, la couvrir d'un pansement propre. Pour une brûlure légère : refroidir à l'eau propre et ne pas appliquer de produits non conseillés. Pour tout ce qui est grave, profond, qui saigne beaucoup ou en cas de perte de connaissance : **alerter et demander de l'aide**.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Santé mentale et addictions",
+     "md": "La **santé mentale** est notre équilibre : comment on pense, ressent, et vit avec les autres. Tristesse, stress, colère sont normaux, mais s'ils durent ou empêchent de vivre, il faut **en parler** à un adulte de confiance, un enseignant, un conseiller, un agent de santé. Une **addiction** est un besoin impossible à contrôler (alcool, tabac, drogues, jeux, écrans). Elle abîme la santé, les études et les relations. Dire non est un droit.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Adolescence",
+     "md": "L'**adolescence** est la période de transformation entre l'enfance et l'âge adulte. Le corps change (taille, voix, pilosité, règles chez les filles), les émotions varient, on cherche son identité. Ces changements sont **normaux** et ne se produisent pas au même moment chez tout le monde : on se respecte, on ne se moque pas. En cas de question ou de gêne, on peut en parler à un adulte de confiance.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 110,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 56.9,
+        "text": "1 Sécuriser",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 30,
+        "w": 110,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 56.9,
+        "text": "2 Alerter",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 30,
+        "w": 110,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 56.9,
+        "text": "3 Protéger",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 52,
+        "x2": 145,
+        "y2": 52,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 255,
+        "y1": 52,
+        "x2": 280,
+        "y2": 52,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 110,
+        "text": "Ne pas déplacer un blessé grave",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "Rester calme, rassurer la victime",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les trois réflexes des premiers secours.",
+     "alt": "Trois rectangles en chaîne : sécuriser, alerter, protéger ; dessous, la consigne de ne pas déplacer un blessé grave et de rester calme."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un élève tombe",
+     "statement": "Dans la cour, un élève tombe d'un mur et dit qu'il a très mal au dos. Que faire ?",
+     "steps": [
+      {
+       "md": "Sécuriser : éloigner les autres élèves ; aucun danger immédiat."
+      },
+      {
+       "md": "Alerter un enseignant ou l'infirmier ; donner le lieu et ce qui s'est passé."
+      },
+      {
+       "md": "Ne pas le déplacer ni le relever ; le rassurer et attendre les secours."
+      }
+     ],
+     "answer": "**Alerter, ne pas déplacer, rassurer.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un camarade très triste",
+     "statement": "Depuis quelques semaines, Sandra ne parle plus, mange peu et évite ses amies. Que faire ?",
+     "steps": [
+      {
+       "md": "Ces signes peuvent indiquer un mal-être ; on ne se moque pas."
+      },
+      {
+       "md": "On lui propose d'en parler et on informe un adulte de confiance ; on l'accompagne vers un professionnel."
+      }
+     ],
+     "answer": "**Écouter, ne pas juger, en parler à un adulte.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Relever vite un blessé qui a chuté.\n- Donner à boire ou à manger à une personne inconsciente.\n- Se moquer d'un camarade qui change à l'adolescence.\n- Penser qu'une addiction se contrôle seul, ou qu'un « petit essai » est sans danger.\n- Garder pour soi un mal-être durable.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Repère dans ton école : qui contacter en cas d'accident ? où est la trousse de secours ?",
+      "Note le numéro d'urgence du centre de santé le plus proche (demande-le à un adulte)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "vie-hygiene-sante-secours-esprit-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "vie-hygiene-sante-vih-ist-01",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Le VIH se transmet en partageant une assiette.",
+   "explanation": "Faux : le partage d'un repas ne transmet pas le VIH.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Que peut-on faire pour savoir si l'on est infecté ?",
+   "explanation": "Seul un test permet de savoir.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Regarder son visage",
+    "Faire un test de dépistage dans un centre de santé",
+    "Attendre des signes pendant des années",
+    "Demander à un camarade"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Associe chaque situation à la réponse correcte.",
+   "explanation": "Le contact social n'est pas un risque ; le sang et les rapports non protégés le sont.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Câlin à un ami séropositif",
+     "Ne transmet pas"
+    ],
+    [
+     "Seringue partagée",
+     "Risque par le sang"
+    ],
+    [
+     "Rapport non protégé",
+     "Risque par voie sexuelle"
+    ]
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Quelle attitude est juste envers une personne séropositive ?",
+   "explanation": "Respect et confidentialité.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "La respecter et garder son état confidentiel",
+    "L'éviter",
+    "La dénoncer",
+    "Se moquer d'elle"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Écris trois phrases pour expliquer pourquoi la stigmatisation fait du tort.",
+   "explanation": "La stigmatisation nuit aux personnes et à la santé de tous.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Elle blesse les personnes ; elle les pousse à se cacher et à ne pas se soigner ; elle favorise les rumeurs et empêche la prévention.",
+   "rubric": [
+    "Idée de souffrance",
+    "Idée que les gens se cachent",
+    "Lien avec la prévention"
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Une rumeur circule : « Ta voisine a le VIH, ne l'approche plus ni ne partage ses jeux. » Tu es son camarade de classe.",
+   "method": "Distingue l'information vraie, la rumeur et le respect de la vie privée.",
+   "mistakes": [
+    "Répéter une rumeur sans vérifier."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+   "parts": [
+    {
+     "id": "vie-hygiene-sante-vih-ist-06-a",
+     "points": 1,
+     "prompt": "Que fais-tu en premier ?",
+     "explanation": "On corrige l'idée fausse et on protège la confidentialité.",
+     "kind": "mcq",
+     "choices": [
+      "Je répands la rumeur",
+      "J'arrête de lui parler",
+      "Je rappelle que le VIH ne se transmet pas par les jeux et que son état ne regarde pas les autres",
+      "Je l'évite dans la cour"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "vie-hygiene-sante-vih-ist-06-b",
+     "points": 2,
+     "prompt": "Que dirais-tu à tes camarades ? Donne deux arguments.",
+     "explanation": "Informer et respecter.",
+     "kind": "open",
+     "model": "Le VIH ne se transmet pas par les jeux ni par un repas partagé ; chacun a droit au respect et à l'école.",
+     "rubric": [
+      "Fait scientifique correct",
+      "Appel au respect"
+     ]
+    },
+    {
+     "id": "vie-hygiene-sante-vih-ist-06-c",
+     "points": 1,
+     "prompt": "Faire un dépistage est un geste responsable.",
+     "explanation": "Oui : il permet de se soigner à temps.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Le VIH ne se transmet pas…",
+   "choices": [
+    "par le sang souillé",
+    "en serrant la main",
+    "de la mère à l'enfant sans suivi",
+    "par des rapports non protégés"
+   ],
+   "answer": 1,
+   "explanation": "Le contact social ne transmet pas.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Un moyen de prévention est…",
+   "choices": [
+    "ne pas partager d'objets coupants",
+    "partager des lames",
+    "ignorer les risques",
+    "éviter le centre de santé"
+   ],
+   "answer": 0,
+   "explanation": "Le sang peut transmettre.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Le dépistage est…",
+   "choices": [
+    "interdit",
+    "réservé aux adultes",
+    "inutile",
+    "confidentiel et recommandé"
+   ],
+   "answer": 3,
+   "explanation": "Mieux vaut savoir pour se soigner.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "La stigmatisation consiste à…",
+   "choices": [
+    "soigner la personne",
+    "garder le secret",
+    "rejeter ou humilier une personne à cause de sa maladie",
+    "l'aider"
+   ],
+   "answer": 2,
+   "explanation": "C'est injuste et nuisible.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-vih-ist-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-vih-ist",
+   "prompt": "Une personne séropositive suivie médicalement peut…",
+   "choices": [
+    "ne plus aller à l'école",
+    "mener une vie normale",
+    "ne plus travailler",
+    "vivre isolée"
+   ],
+   "answer": 1,
+   "explanation": "Le suivi permet de rester en bonne santé.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "Que fait-on d'abord devant un accident ?",
+   "explanation": "On sécurise pour ne pas se mettre en danger.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "On s'assure que le lieu est sûr",
+    "On déplace tout le monde",
+    "On court sans regarder",
+    "On fait un traitement au hasard"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "Il faut déplacer un blessé grave dès que possible.",
+   "explanation": "Faux : on ne le déplace pas, sauf danger immédiat.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "Parler de ses difficultés à un adulte de confiance est un signe de force.",
+   "explanation": "Oui, en parler aide à trouver de l'aide.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "Les changements de l'adolescence sont…",
+   "explanation": "Chacun évolue à son rythme.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "des maladies",
+    "normaux et différents d'une personne à l'autre",
+    "identiques pour tous au même âge",
+    "des moqueries"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "Un ami te propose de fumer ou de goûter une drogue « pour essayer ». Écris comment tu réponds et à qui tu en parles.",
+   "explanation": "Savoir dire non et demander de l'aide protège.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Je refuse poliment : c'est mon choix, c'est dangereux pour la santé. J'en parle à un adulte de confiance ou à l'infirmier.",
+   "rubric": [
+    "Refus clair et poli",
+    "Argument sur la santé",
+    "Recours à un adulte de confiance"
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "Un camarade s'est cogné violemment la tête en jouant et se plaint de nausées. Il est assis par terre.",
+   "method": "Retiens la séquence sécuriser, alerter, protéger.",
+   "mistakes": [
+    "Oublier d'alerter et vouloir tout faire seul."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Contenu de santé : à relire par un agent de santé (principes généraux uniquement, aucune dose ni traitement).",
+   "parts": [
+    {
+     "id": "vie-hygiene-sante-secours-esprit-06-a",
+     "points": 1,
+     "prompt": "Quel est le premier réflexe ?",
+     "explanation": "Sécuriser puis alerter.",
+     "kind": "mcq",
+     "choices": [
+      "Le faire courir",
+      "Vérifier que le lieu est sûr et alerter un adulte",
+      "Lui donner un médicament",
+      "Le laisser seul"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "vie-hygiene-sante-secours-esprit-06-b",
+     "points": 2,
+     "prompt": "Explique deux gestes à faire et un geste à éviter.",
+     "explanation": "On protège et on attend les secours.",
+     "kind": "open",
+     "model": "Alerter, rassurer et rester près de lui ; éviter de le déplacer brusquement ou de lui donner à boire.",
+     "rubric": [
+      "Deux gestes corrects",
+      "Un geste à éviter"
+     ]
+    },
+    {
+     "id": "vie-hygiene-sante-secours-esprit-06-c",
+     "points": 1,
+     "prompt": "Il faut faire examiner par un agent de santé un choc violent à la tête.",
+     "explanation": "Oui : même si ça semble aller, un avis est nécessaire.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "La première étape des premiers secours est…",
+   "choices": [
+    "déplacer le blessé",
+    "sécuriser les lieux",
+    "donner à manger",
+    "partir"
+   ],
+   "answer": 1,
+   "explanation": "On évite un second accident.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "Un blessé grave après une chute…",
+   "choices": [
+    "ne doit pas être déplacé sans nécessité",
+    "doit être relevé tout de suite",
+    "doit marcher",
+    "doit courir"
+   ],
+   "answer": 0,
+   "explanation": "Le déplacer peut aggraver les lésions.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "L'adolescence est…",
+   "choices": [
+    "une maladie",
+    "une punition",
+    "une obligation de se taire",
+    "une période de changements normaux"
+   ],
+   "answer": 3,
+   "explanation": "Elle fait partie de la vie.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "En cas de mal-être qui dure, on…",
+   "choices": [
+    "se cache",
+    "se moque de soi",
+    "en parle à un adulte de confiance",
+    "se soigne avec une drogue"
+   ],
+   "answer": 2,
+   "explanation": "Demander de l'aide est utile.",
+   "review": true
+  },
+  {
+   "id": "vie-hygiene-sante-secours-esprit-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "vie-hygiene-sante-secours-esprit",
+   "prompt": "Une addiction est…",
+   "choices": [
+    "un sport",
+    "un besoin qu'on ne contrôle plus",
+    "un repas",
+    "une vaccination"
+   ],
+   "answer": 1,
+   "explanation": "Elle nuit à la santé et aux études.",
+   "review": true
+  }
+ ]
+}
