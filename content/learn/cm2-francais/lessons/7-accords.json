@@ -1,0 +1,370 @@
+{
+ "chapter": "cm2-francais-accords",
+ "lessons": [
+  {
+   "id": "cm2-francais-accords-fiche",
+   "chapter": "cm2-francais-accords",
+   "title": "Les accords dans la phrase",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Français (reconstitué, à confronter au programme officiel MINEDUB)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Accorder déterminants et adjectifs avec le nom (genre et nombre).",
+    "Accorder le verbe avec son sujet, même éloigné ou inversé.",
+    "Accorder l'attribut et les noms et adjectifs aux pluriels et féminins particuliers."
+   ],
+   "prerequisites": [
+    "cm2-francais-fonctions-fiche"
+   ],
+   "exercises": [
+    "cm2-francais-accords-01",
+    "cm2-francais-accords-02",
+    "cm2-francais-accords-03",
+    "cm2-francais-accords-04",
+    "cm2-francais-accords-05",
+    "cm2-francais-accords-06"
+   ],
+   "selfCheck": [
+    "cm2-francais-accords-q1",
+    "cm2-francais-accords-q2",
+    "cm2-francais-accords-q3",
+    "cm2-francais-accords-q4",
+    "cm2-francais-accords-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les règles de pluriel/féminin particuliers retenues (-al, -eau, -eur, -on, -f) selon le programme du CM2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Accorder, c'est donner à un mot le **genre** (masculin / féminin) et le **nombre** (singulier / pluriel) du mot dont il dépend. Le nom commande les mots du groupe nominal ; le **sujet** commande le verbe."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pluriels et féminins particuliers",
+     "md": "- Pluriel : -s en général ; **-x** pour -eau, -eu (des gâteaux, des feux) ; **-aux** pour -al (des chevaux, des journaux) ; -s, -x, -z restent (un pays, des pays).\n- Féminin : -e (petit → petite) ; -er → -ère (premier → première) ; -eur → -euse (danseur → danseuse) ; -on → -onne (bon → bonne) ; -f → -ve (vif → vive)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le sujet éloigné ou inversé",
+     "statement": "Écris le bon verbe : « Les enfants du village voisin (jouer) au ballon. » et « Dans la cour (courir) les poules. »",
+     "steps": [
+      {
+       "md": "Phrase 1 : le sujet est « les enfants » (pluriel), pas « village ». Le verbe est au pluriel : **jouent**."
+      },
+      {
+       "md": "Phrase 2 : le sujet est inversé, après le verbe : « les poules » (pluriel) : **courent**."
+      }
+     ],
+     "answer": "**Les enfants du village voisin jouent ; Dans la cour courent les poules.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Accorder l'attribut et l'adjectif",
+     "md": "L'**attribut** s'accorde avec le sujet : Les routes sont **longues**. Elle est **contente**.\n\nQuand l'adjectif se rapporte à plusieurs noms de genres différents, il s'écrit au **masculin pluriel** : un garçon et une fille **contents**.\n\nTrouve toujours le **sujet** avec « Qui est-ce qui… ? » avant d'écrire la terminaison."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : tout accorder",
+     "statement": "Mets au pluriel : « La belle chanteuse a reçu un beau cadeau. »",
+     "steps": [
+      {
+       "md": "« la belle chanteuse » → « les belles chanteuses »."
+      },
+      {
+       "md": "« a reçu » → « ont reçu » ; « un beau cadeau » → « de beaux cadeaux » (devant un adjectif, « des » devient « de »)."
+      }
+     ],
+     "answer": "**Les belles chanteuses ont reçu de beaux cadeaux.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Le verbe ne s'accorde pas avec le mot qui le précède s'il n'est pas le sujet : « Les cahiers de Paul sont neufs ».\n- Avec « qui », le verbe s'accorde avec l'antécédent : C'est moi qui **suis**, ce sont eux qui **viennent**.\n- « Chaque élève **a** son cahier » : chaque est singulier."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-accords-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-accords-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-accords-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-accords-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-accords-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-accords-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Quelques exceptions : des bals, des carnavals, des festivals ; des clous, des trous (sans x)."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le pluriel de « un cheval » ?",
+   "choices": [
+    "des chevaux",
+    "des chevals",
+    "des chevalx",
+    "des chevales"
+   ],
+   "answer": 0,
+   "explanation": "Les noms en -al font -aux.",
+   "id": "cm2-francais-accords-01",
+   "chapter": "cm2-francais-accords",
+   "tier": "application",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le féminin de « un danseur » ?",
+   "choices": [
+    "une danseure",
+    "une danseresse",
+    "une danseuse",
+    "une danseuze"
+   ],
+   "answer": 2,
+   "explanation": "-eur → -euse.",
+   "id": "cm2-francais-accords-02",
+   "chapter": "cm2-francais-accords",
+   "tier": "application",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : « Les enfants du quartier joue au ballon » est correct.",
+   "answer": false,
+   "explanation": "Le sujet « les enfants » est au pluriel : « jouent ».",
+   "id": "cm2-francais-accords-03",
+   "chapter": "cm2-francais-accords",
+   "tier": "application",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Complète : « Les mangues du marché sont ___. »",
+   "choices": [
+    "mûr",
+    "mûrs",
+    "mûres",
+    "mûre"
+   ],
+   "answer": 2,
+   "explanation": "« les mangues » : féminin pluriel : mûres.",
+   "id": "cm2-francais-accords-04",
+   "chapter": "cm2-francais-accords",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Complète : « Mon frère et ma sœur sont ___. »",
+   "choices": [
+    "contents",
+    "content",
+    "contente",
+    "contentes"
+   ],
+   "answer": 0,
+   "explanation": "Genres différents : masculin pluriel.",
+   "id": "cm2-francais-accords-05",
+   "chapter": "cm2-francais-accords",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Corrige les accords dans : « Les petite filles du village chante des belle chansons ; chaque fille a son tambour. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle forme correcte pour « petite » ?",
+     "choices": [
+      "petit",
+      "petits",
+      "petite",
+      "petites"
+     ],
+     "answer": 3,
+     "explanation": "Elle s'accorde avec « filles » (féminin pluriel).",
+     "points": 1,
+     "id": "cm2-francais-accords-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle forme correcte pour le verbe « chante » ?",
+     "choices": [
+      "chante",
+      "chantent",
+      "chantes",
+      "chantons"
+     ],
+     "answer": 1,
+     "explanation": "Le sujet est « les petites filles » : pluriel.",
+     "points": 1,
+     "id": "cm2-francais-accords-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que devient « belle chansons » ?",
+     "choices": [
+      "belles chansons",
+      "beaux chansons",
+      "belle chanson",
+      "belles chanson"
+     ],
+     "answer": 0,
+     "explanation": "Adjectif et nom au féminin pluriel.",
+     "points": 1,
+     "id": "cm2-francais-accords-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-francais-accords-06",
+   "chapter": "cm2-francais-accords",
+   "tier": "examen",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Le verbe s'accorde avec…",
+   "choices": [
+    "son COD",
+    "le dernier mot",
+    "son sujet",
+    "le premier mot"
+   ],
+   "answer": 2,
+   "explanation": "Le sujet commande le verbe.",
+   "id": "cm2-francais-accords-q1",
+   "chapter": "cm2-francais-accords",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le pluriel de « un gâteau » ?",
+   "choices": [
+    "des gâteaus",
+    "des gâteaux",
+    "des gâteau",
+    "des gâteauxs"
+   ],
+   "answer": 1,
+   "explanation": "-eau → -eaux.",
+   "id": "cm2-francais-accords-q2",
+   "chapter": "cm2-francais-accords",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Le féminin de « bon » est…",
+   "choices": [
+    "bone",
+    "bonnes",
+    "bonn",
+    "bonne"
+   ],
+   "answer": 3,
+   "explanation": "-on → -onne.",
+   "id": "cm2-francais-accords-q3",
+   "chapter": "cm2-francais-accords",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Complète : « Ce sont eux qui ___. »",
+   "choices": [
+    "vient",
+    "viennent",
+    "viens",
+    "venons"
+   ],
+   "answer": 1,
+   "explanation": "« qui » reprend « eux » (3e personne du pluriel).",
+   "id": "cm2-francais-accords-q4",
+   "chapter": "cm2-francais-accords",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Complète : « Chaque enfant ___ son cahier. »",
+   "choices": [
+    "ont",
+    "avez",
+    "avons",
+    "a"
+   ],
+   "answer": 3,
+   "explanation": "Chaque + singulier.",
+   "id": "cm2-francais-accords-q5",
+   "chapter": "cm2-francais-accords",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-accords-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

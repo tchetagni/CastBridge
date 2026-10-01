@@ -1,0 +1,473 @@
+{
+ "chapter": "cm2-francais-temps-simples",
+ "lessons": [
+  {
+   "id": "cm2-francais-temps-simples-fiche",
+   "chapter": "cm2-francais-temps-simples",
+   "title": "Conjugaison : présent, imparfait, futur, passé simple",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Français (reconstitué, à confronter au programme officiel MINEDUB)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Conjuguer les verbes des trois groupes au présent, à l'imparfait et au futur.",
+    "Reconnaître et écrire le passé simple à la 3e personne.",
+    "Choisir le bon temps dans un récit."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-francais-temps-simples-01",
+    "cm2-francais-temps-simples-02",
+    "cm2-francais-temps-simples-03",
+    "cm2-francais-temps-simples-04",
+    "cm2-francais-temps-simples-05",
+    "cm2-francais-temps-simples-06"
+   ],
+   "selfCheck": [
+    "cm2-francais-temps-simples-q1",
+    "cm2-francais-temps-simples-q2",
+    "cm2-francais-temps-simples-q3",
+    "cm2-francais-temps-simples-q4",
+    "cm2-francais-temps-simples-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les tableaux de conjugaison (passé simple limité à la 3e personne en CM2 ?) et les irrégularités indiquées."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Le **verbe** change de forme selon la personne, le temps et le mode. Il y a trois groupes : **1er groupe** (infinitif en -er, sauf aller : chanter), **2e groupe** (-ir, -issons : finir), **3e groupe** (tous les autres : prendre, venir, aller, être, avoir)."
+    },
+    {
+     "type": "illustration",
+     "caption": "La ligne du temps : passé, présent, futur.",
+     "alt": "Une flèche horizontale avec trois zones : passé avec les formes il chantait et il chanta, présent avec il chante, futur avec il chantera.",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 140,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 70,
+        "x2": 480,
+        "y2": 70,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 55,
+        "x2": 250,
+        "y2": 85,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 40,
+        "text": "PASSÉ",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 40,
+        "text": "PRÉSENT",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 40,
+        "text": "FUTUR",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 100,
+        "text": "il chantait",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 122,
+        "text": "il chanta",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 100,
+        "text": "il chante",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 100,
+        "text": "il chantera",
+        "size": 15,
+        "color": "green",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les terminaisons",
+     "md": "- **Présent, 1er groupe** : -e, -es, -e, -ons, -ez, -ent. **2e groupe** : -is, -is, -it, -issons, -issez, -issent.\n- **Imparfait** (tous les groupes) : -ais, -ais, -ait, -ions, -iez, -aient.\n- **Futur** (infinitif + terminaisons de avoir) : -rai, -ras, -ra, -rons, -rez, -ront.\n- **Passé simple, 3e personne** : il chanta, ils chantèrent ; il finit, ils finirent ; il prit, ils prirent."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Conjugue « finir » au présent (nous), à l'imparfait (ils) et au futur (je).",
+     "steps": [
+      {
+       "md": "Présent, 2e groupe : radical « fin- » + « -issons » : nous fin**issons**."
+      },
+      {
+       "md": "Imparfait : radical de « nous finissons » (fin-iss-) + -aient : ils fin**issaient**."
+      },
+      {
+       "md": "Futur : infinitif « finir » + -ai : je fin**irai**."
+      }
+     ],
+     "answer": "**nous finissons ; ils finissaient ; je finirai.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : imparfait et passé simple",
+     "statement": "Complète : « Il (marcher) lentement quand la pluie (tomber). »",
+     "steps": [
+      {
+       "md": "« marchait » : action qui dure, décor : imparfait."
+      },
+      {
+       "md": "« tomba » : action brève qui arrive tout à coup : passé simple."
+      }
+     ],
+     "answer": "**Il marchait lentement quand la pluie tomba.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Verbes irréguliers à connaître",
+     "md": "- être : je suis, il est, nous sommes, ils sont ; futur : je serai ; imparfait : j'étais.\n- avoir : j'ai, nous avons, ils ont ; futur : j'aurai.\n- aller : je vais, ils vont ; futur : j'irai.\n- faire : vous faites ; dire : vous dites ; futur de voir : je verrai ; venir : je viendrai."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-temps-simples-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-temps-simples-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-temps-simples-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-temps-simples-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-temps-simples-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-temps-simples-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "À l'imparfait de « manger », on écrit « nous mangions » (avec un e après le g)."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le présent de « chanter » avec « nous » ?",
+   "choices": [
+    "nous chantez",
+    "nous chantent",
+    "nous chantons",
+    "nous chanterons"
+   ],
+   "answer": 2,
+   "explanation": "1er groupe : terminaison -ons.",
+   "id": "cm2-francais-temps-simples-01",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "application",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le futur de « aller » avec « je » ?",
+   "choices": [
+    "j'allerai",
+    "j'allais",
+    "j'irai",
+    "je vais"
+   ],
+   "answer": 2,
+   "explanation": "Futur irrégulier : j'irai.",
+   "id": "cm2-francais-temps-simples-02",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "application",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 1,
+   "prompt": "Associe chaque pronom à la terminaison de l'imparfait.",
+   "pairs": [
+    [
+     "je",
+     "-ais"
+    ],
+    [
+     "il",
+     "-ait"
+    ],
+    [
+     "nous",
+     "-ions"
+    ],
+    [
+     "ils",
+     "-aient"
+    ]
+   ],
+   "explanation": "Les terminaisons de l'imparfait sont : -ais, -ais, -ait, -ions, -iez, -aient.",
+   "id": "cm2-francais-temps-simples-03",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "application",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Complète : « Hier, nous (jouer) au ballon. » (imparfait)",
+   "choices": [
+    "jouions",
+    "jouerons",
+    "jouons",
+    "jouaient"
+   ],
+   "answer": 0,
+   "explanation": "Imparfait de nous : -ions.",
+   "id": "cm2-francais-temps-simples-04",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 2,
+   "prompt": "Vrai ou faux : « Ils finisent le travail » est correct au présent.",
+   "answer": false,
+   "explanation": "Au présent, le 2e groupe fait « ils fin**issent** » (deux s).",
+   "id": "cm2-francais-temps-simples-05",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Récit à conjuguer : « Hier, Mballa (aller) au champ. Il (couper) du bois ; soudain, un orage (éclater). Demain, il (revenir) avec son frère. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Imparfait de « aller » (il) ?",
+     "choices": [
+      "alla",
+      "ira",
+      "va",
+      "allait"
+     ],
+     "answer": 3,
+     "explanation": "Imparfait de il : -ait (all-ait).",
+     "points": 1,
+     "id": "cm2-francais-temps-simples-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Passé simple de « éclater » (3e personne du singulier) ?",
+     "choices": [
+      "éclatait",
+      "éclata",
+      "éclatera",
+      "éclate"
+     ],
+     "answer": 1,
+     "explanation": "Action brève et soudaine : passé simple « éclata ».",
+     "points": 1,
+     "id": "cm2-francais-temps-simples-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Futur de « revenir » (il) ?",
+     "choices": [
+      "reviendra",
+      "revenait",
+      "revint",
+      "revenira"
+     ],
+     "answer": 0,
+     "explanation": "Futur irrégulier : il reviendra.",
+     "points": 1,
+     "id": "cm2-francais-temps-simples-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-francais-temps-simples-06",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "examen",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le groupe du verbe « finir » ?",
+   "choices": [
+    "1er groupe",
+    "3e groupe",
+    "2e groupe",
+    "Aucun"
+   ],
+   "answer": 2,
+   "explanation": "Infinitif en -ir avec « nous finissons ».",
+   "id": "cm2-francais-temps-simples-q1",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle forme est à l'imparfait ?",
+   "choices": [
+    "ils chanteront",
+    "ils chantaient",
+    "ils chantent",
+    "ils chantèrent"
+   ],
+   "answer": 1,
+   "explanation": "Terminaison -aient.",
+   "id": "cm2-francais-temps-simples-q2",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le futur de « je mange » ?",
+   "choices": [
+    "je mangeais",
+    "je mange",
+    "je mangerais",
+    "je mangerai"
+   ],
+   "answer": 3,
+   "explanation": "Infinitif « manger » + -ai.",
+   "id": "cm2-francais-temps-simples-q3",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "« Tu es » : à quel verbe appartient cette forme ?",
+   "choices": [
+    "avoir",
+    "être",
+    "aller",
+    "faire"
+   ],
+   "answer": 1,
+   "explanation": "Je suis, tu es, il est…",
+   "id": "cm2-francais-temps-simples-q4",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "« Il prit » est…",
+   "choices": [
+    "un imparfait",
+    "un futur",
+    "un présent",
+    "un passé simple"
+   ],
+   "answer": 3,
+   "explanation": "Passé simple de « prendre ».",
+   "id": "cm2-francais-temps-simples-q5",
+   "chapter": "cm2-francais-temps-simples",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-temps-simples-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

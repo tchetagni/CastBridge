@@ -1,0 +1,544 @@
+{
+ "chapter": "cm2-francais-fonctions",
+ "lessons": [
+  {
+   "id": "cm2-francais-fonctions-fiche",
+   "chapter": "cm2-francais-fonctions",
+   "title": "Les fonctions dans la phrase",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Français (reconstitué, à confronter au programme officiel MINEDUB)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Trouver le sujet, le verbe, le COD, le COI et le complément circonstanciel.",
+    "Reconnaître l'attribut du sujet, l'épithète et le complément du nom.",
+    "Poser les bonnes questions pour identifier une fonction."
+   ],
+   "prerequisites": [
+    "cm2-francais-phrases-fiche"
+   ],
+   "exercises": [
+    "cm2-francais-fonctions-01",
+    "cm2-francais-fonctions-02",
+    "cm2-francais-fonctions-03",
+    "cm2-francais-fonctions-04",
+    "cm2-francais-fonctions-05",
+    "cm2-francais-fonctions-06"
+   ],
+   "selfCheck": [
+    "cm2-francais-fonctions-q1",
+    "cm2-francais-fonctions-q2",
+    "cm2-francais-fonctions-q3",
+    "cm2-francais-fonctions-q4",
+    "cm2-francais-fonctions-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la terminologie des fonctions (COD, COI, CC, attribut, épithète) selon la grammaire du CM2 au Cameroun."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Chaque mot ou groupe de mots a une **fonction**, un rôle dans la phrase. Ne confonds pas la fonction (ce qu'il fait dans la phrase) avec la nature (nom, verbe, adjectif…)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les fonctions dans « Ce matin, Mballa mange une mangue mûre dans la cour. »",
+     "alt": "La phrase est découpée en cinq cases : Ce matin (complément circonstanciel de temps), Mballa (sujet), mange (verbe), une mangue mûre (COD), dans la cour (complément circonstanciel de lieu).",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 135,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 90,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 66,
+        "text": "Ce matin,",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 102,
+        "text": "CC de temps",
+        "size": 12,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 135.0,
+        "y": 66,
+        "text": "Mballa",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 135.0,
+        "y": 102,
+        "text": "sujet",
+        "size": 12,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 40,
+        "w": 60,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 66,
+        "text": "mange",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 102,
+        "text": "verbe",
+        "size": 12,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 40,
+        "w": 130,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 315.0,
+        "y": 66,
+        "text": "une mangue mûre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 315.0,
+        "y": 102,
+        "text": "COD",
+        "size": 12,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 390,
+        "y": 40,
+        "w": 110,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 445.0,
+        "y": 66,
+        "text": "dans la cour.",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 445.0,
+        "y": 102,
+        "text": "CC de lieu",
+        "size": 12,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les questions pour trouver les fonctions",
+     "md": "- **Sujet** : Qui est-ce qui… ? / Qu'est-ce qui… ? → Mballa.\n- **COD** (complément d'objet direct, sans préposition) : … quoi ? / qui ? → mange quoi ? une mangue.\n- **COI** (avec à, de, sur…) : parle à qui ? de quoi ? → Il parle **à Ngono**.\n- **CC** (circonstanciel, déplaçable, supprimable) : où ? quand ? comment ? pourquoi ?"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : trouver les compléments",
+     "statement": "Dans « Hier, Amina a offert un cahier à sa cousine à Yaoundé. », donne le sujet, le COD, le COI et les CC.",
+     "steps": [
+      {
+       "md": "Sujet : qui a offert ? Amina."
+      },
+      {
+       "md": "COD : a offert quoi ? un cahier."
+      },
+      {
+       "md": "COI : a offert à qui ? à sa cousine."
+      },
+      {
+       "md": "CC de temps : « Hier » ; CC de lieu : « à Yaoundé »."
+      }
+     ],
+     "answer": "**Sujet : Amina ; COD : un cahier ; COI : à sa cousine ; CC de temps : Hier ; CC de lieu : à Yaoundé.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Attribut, épithète, complément du nom",
+     "md": "- **Attribut du sujet** : après un verbe d'état (être, paraître, sembler, devenir, rester) : La route **est longue**.\n- **Épithète** : adjectif collé au nom : une **longue** route.\n- **Complément du nom** : précise un nom avec « de » : la route **de Bafoussam**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : attribut ou épithète ?",
+     "statement": "Compare : « Un fruit mûr tombe. » et « Le fruit est mûr. »",
+     "steps": [
+      {
+       "md": "Dans la première phrase, « mûr » est collé au nom : épithète."
+      },
+      {
+       "md": "Dans la seconde, « mûr » suit le verbe d'état « est » et renseigne sur le sujet : attribut du sujet."
+      }
+     ],
+     "answer": "**Épithète dans la 1re phrase ; attribut du sujet dans la 2e.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Le sujet n'est pas toujours avant le verbe : « Dans la cour jouent les enfants. » (sujet : les enfants).\n- Un CC peut changer de place : « Dans la cour, Mballa mange. »\n- « Il parle à Ngono » : COI, car il y a la préposition à."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-fonctions-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-fonctions-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-fonctions-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-fonctions-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-fonctions-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-fonctions-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le complément d'agent est le complément du verbe passif : « La mangue est mangée par Paul »."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans « Paul lit un livre », quel est le COD ?",
+   "choices": [
+    "Paul",
+    "lit",
+    "livre lit",
+    "un livre"
+   ],
+   "answer": 3,
+   "explanation": "Paul lit quoi ? un livre.",
+   "id": "cm2-francais-fonctions-01",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "application",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans « Elle parle à sa tante », « à sa tante » est…",
+   "choices": [
+    "COD",
+    "COI",
+    "sujet",
+    "attribut"
+   ],
+   "answer": 1,
+   "explanation": "Il y a la préposition « à » : complément d'objet indirect.",
+   "id": "cm2-francais-fonctions-02",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "application",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : dans « Le ciel est bleu », « bleu » est attribut du sujet.",
+   "answer": true,
+   "explanation": "Il suit le verbe d'état « est » et décrit le sujet.",
+   "id": "cm2-francais-fonctions-03",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "application",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Dans « Nous marchons vers le marché de Douala », « de Douala » est…",
+   "choices": [
+    "complément du nom « marché »",
+    "COD",
+    "sujet",
+    "CC de manière"
+   ],
+   "answer": 0,
+   "explanation": "Il précise le nom « marché » avec la préposition « de ».",
+   "id": "cm2-francais-fonctions-04",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 2,
+   "prompt": "Associe chaque groupe souligné à sa fonction (phrase : « Hier, Ngono a chanté joyeusement dans la cour. »).",
+   "pairs": [
+    [
+     "Hier",
+     "CC de temps"
+    ],
+    [
+     "Ngono",
+     "sujet"
+    ],
+    [
+     "joyeusement",
+     "CC de manière"
+    ],
+    [
+     "dans la cour",
+     "CC de lieu"
+    ]
+   ],
+   "explanation": "Quand ? Qui ? Comment ? Où ?",
+   "id": "cm2-francais-fonctions-05",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Analyse la phrase : « Ce soir, la grand-mère de Fotso raconte une belle histoire aux enfants. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le sujet ?",
+     "choices": [
+      "Fotso",
+      "les enfants",
+      "la grand-mère de Fotso",
+      "une belle histoire"
+     ],
+     "answer": 2,
+     "explanation": "Qui est-ce qui raconte ? la grand-mère de Fotso.",
+     "points": 1,
+     "id": "cm2-francais-fonctions-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le COD ?",
+     "choices": [
+      "aux enfants",
+      "une belle histoire",
+      "Ce soir",
+      "de Fotso"
+     ],
+     "answer": 1,
+     "explanation": "Raconte quoi ? une belle histoire.",
+     "points": 1,
+     "id": "cm2-francais-fonctions-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que dit « aux enfants » ?",
+     "choices": [
+      "COD",
+      "CC de lieu",
+      "attribut",
+      "COI"
+     ],
+     "answer": 3,
+     "explanation": "Raconte à qui ? aux enfants (préposition « à »).",
+     "points": 1,
+     "id": "cm2-francais-fonctions-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-francais-fonctions-06",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "examen",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Pour trouver le sujet, on pose la question…",
+   "choices": [
+    "Où ?",
+    "Qui est-ce qui… ?",
+    "Comment ?",
+    "Pourquoi pas ?"
+   ],
+   "answer": 1,
+   "explanation": "« Qui est-ce qui » (ou « Qu'est-ce qui ») devant le verbe.",
+   "id": "cm2-francais-fonctions-q1",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "« La mangue est mûre » : « mûre » est…",
+   "choices": [
+    "COD",
+    "épithète",
+    "complément du nom",
+    "attribut du sujet"
+   ],
+   "answer": 3,
+   "explanation": "Il suit le verbe d'état « est ».",
+   "id": "cm2-francais-fonctions-q2",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Un complément circonstanciel peut…",
+   "choices": [
+    "être déplacé ou supprimé",
+    "jamais être supprimé",
+    "remplacer le verbe",
+    "être le sujet"
+   ],
+   "answer": 0,
+   "explanation": "Il apporte une précision (lieu, temps, manière…).",
+   "id": "cm2-francais-fonctions-q3",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans « Marie boit de l'eau », le COD est…",
+   "choices": [
+    "Marie",
+    "boit",
+    "de l'eau",
+    "l'eau boit"
+   ],
+   "answer": 2,
+   "explanation": "Marie boit quoi ? de l'eau.",
+   "id": "cm2-francais-fonctions-q4",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "« La route de Ngaoundéré » : « de Ngaoundéré » est…",
+   "choices": [
+    "COI",
+    "sujet",
+    "complément du nom",
+    "CC de temps"
+   ],
+   "answer": 2,
+   "explanation": "Il précise « la route ».",
+   "id": "cm2-francais-fonctions-q5",
+   "chapter": "cm2-francais-fonctions",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-fonctions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

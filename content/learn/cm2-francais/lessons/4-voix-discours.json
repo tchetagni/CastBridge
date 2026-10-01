@@ -1,0 +1,367 @@
+{
+ "chapter": "cm2-francais-voix-discours",
+ "lessons": [
+  {
+   "id": "cm2-francais-voix-discours-fiche",
+   "chapter": "cm2-francais-voix-discours",
+   "title": "Voix passive et discours rapporté",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Français (reconstitué, à confronter au programme officiel MINEDUB)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Transformer une phrase de la voix active à la voix passive, et inversement.",
+    "Distinguer discours direct et discours indirect.",
+    "Passer du discours direct au discours indirect (cas simples)."
+   ],
+   "prerequisites": [
+    "cm2-francais-fonctions-fiche"
+   ],
+   "exercises": [
+    "cm2-francais-voix-discours-01",
+    "cm2-francais-voix-discours-02",
+    "cm2-francais-voix-discours-03",
+    "cm2-francais-voix-discours-04",
+    "cm2-francais-voix-discours-05",
+    "cm2-francais-voix-discours-06"
+   ],
+   "selfCheck": [
+    "cm2-francais-voix-discours-q1",
+    "cm2-francais-voix-discours-q2",
+    "cm2-francais-voix-discours-q3",
+    "cm2-francais-voix-discours-q4",
+    "cm2-francais-voix-discours-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que la concordance des temps au discours indirect (futur → conditionnel, présent → imparfait) est au programme du CM2 ou si seul le cas « verbe introducteur au présent » est attendu."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "À la **voix active**, le sujet fait l'action : « Le chat mange la souris. » À la **voix passive**, le sujet subit l'action : « La souris est mangée par le chat. »"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Passer à la voix passive",
+     "md": "1. Le COD devient le **sujet** : la souris.\n2. Le verbe devient **être** (au même temps) + **participe passé** accordé avec le nouveau sujet : est mangée.\n3. L'ancien sujet devient le **complément d'agent**, avec « par » : par le chat.\n\nSeuls les verbes qui ont un COD peuvent passer au passif."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : actif → passif",
+     "statement": "Mets à la voix passive : « Les élèves ont planté des manguiers. »",
+     "steps": [
+      {
+       "md": "Le COD « des manguiers » devient le sujet."
+      },
+      {
+       "md": "« ont planté » (passé composé) → « ont été plantés » : même temps du verbe être, participe accordé (masculin pluriel)."
+      },
+      {
+       "md": "Ancien sujet : « par les élèves »."
+      }
+     ],
+     "answer": "**Des manguiers ont été plantés par les élèves.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Discours direct et indirect",
+     "md": "- **Direct** : on rapporte les paroles exactement, entre guillemets : Paul dit : « Je viens demain. »\n- **Indirect** : on rapporte avec « que » (ou « si », « de »), sans guillemets : Paul dit **qu'il** vient **le lendemain**.\n\nOn change les pronoms (je → il), et si le verbe introducteur est au passé, les temps et les mots de temps (demain → le lendemain)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : direct → indirect",
+     "statement": "Transforme : « Ngono a dit : “J'irai au marché demain.” »",
+     "steps": [
+      {
+       "md": "Verbe introducteur au passé composé (a dit) : on le garde et on ajoute « que »."
+      },
+      {
+       "md": "« J' » → « elle » ; « irai » (futur) → « irait » (conditionnel présent) ; « demain » → « le lendemain »."
+      }
+     ],
+     "answer": "**Ngono a dit qu'elle irait au marché le lendemain.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Le participe passé du passif s'accorde toujours avec le sujet : Les mangues sont cueillies.\n- Au discours indirect, on supprime les guillemets et les tirets, et la phrase ne finit pas par un point d'interrogation : Il demande si tu viens.\n- Un verbe sans COD (dormir, aller) n'a pas de passif."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-voix-discours-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-voix-discours-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-voix-discours-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-voix-discours-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-voix-discours-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-voix-discours-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une phrase passive sans complément d'agent est possible : « Le marché est fermé. »"
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle phrase est à la voix passive ?",
+   "choices": [
+    "Le gâteau est préparé par Marie.",
+    "Marie prépare le gâteau.",
+    "Marie prépare un gâteau.",
+    "Le gâteau cuit."
+   ],
+   "answer": 0,
+   "explanation": "Verbe « est préparé » : être + participe passé, avec complément d'agent.",
+   "id": "cm2-francais-voix-discours-01",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "application",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Mets à la voix passive : « Le maître félicite les élèves. »",
+   "choices": [
+    "Les élèves félicitent le maître.",
+    "Le maître est félicité par les élèves.",
+    "Les élèves ont félicité le maître.",
+    "Les élèves sont félicités par le maître."
+   ],
+   "answer": 3,
+   "explanation": "Le COD devient sujet, verbe être au présent + participe accordé.",
+   "id": "cm2-francais-voix-discours-02",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "application",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : le discours indirect s'écrit entre guillemets.",
+   "answer": false,
+   "explanation": "Les guillemets servent au discours direct.",
+   "id": "cm2-francais-voix-discours-03",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "application",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Transforme en discours indirect : Paul dit : « Je suis fatigué. »",
+   "choices": [
+    "Paul dit je suis fatigué.",
+    "Paul dit qu'il est fatigué.",
+    "Paul dit que je suis fatigué.",
+    "Paul dit qu'il était fatigué hier."
+   ],
+   "answer": 1,
+   "explanation": "Je → il ; le verbe « dit » est au présent : le temps ne change pas.",
+   "id": "cm2-francais-voix-discours-04",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Combien de mots forment le verbe dans « La case a été construite par les villageois » ? (a été construite)",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "« a été construite » : auxiliaire avoir + été + participe passé : trois mots.",
+   "id": "cm2-francais-voix-discours-05",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 3,
+   "prompt": "Transformations.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Voix passive de « Les chèvres broutent l'herbe » ?",
+     "choices": [
+      "L'herbe est broutée par les chèvres.",
+      "L'herbe broute les chèvres.",
+      "Les chèvres sont broutées par l'herbe.",
+      "L'herbe est brouté par les chèvres."
+     ],
+     "answer": 0,
+     "explanation": "« l'herbe » (féminin singulier) : « est broutée ».",
+     "points": 1,
+     "id": "cm2-francais-voix-discours-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Discours indirect de : Il m'a demandé : « Tu viens ? »",
+     "choices": [
+      "Il m'a demandé que je viens.",
+      "Il m'a demandé tu viens.",
+      "Il m'a demandé si je venais.",
+      "Il m'a demandé si tu viens ?"
+     ],
+     "answer": 2,
+     "explanation": "Question → « si » ; temps de l'imparfait après un passé.",
+     "points": 1,
+     "id": "cm2-francais-voix-discours-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Passe en discours direct : Mballa a dit qu'il rentrerait le lendemain.",
+     "model": "Mballa a dit : « Je rentrerai demain. »",
+     "rubric": [
+      "Guillemets et deux-points.",
+      "« il » → « je ».",
+      "« rentrerait » → « rentrerai » et « le lendemain » → « demain »."
+     ],
+     "explanation": "On remet les paroles à la 1re personne, au futur, avec « demain ».",
+     "points": 2,
+     "id": "cm2-francais-voix-discours-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-francais-voix-discours-06",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "examen",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 4,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "À la voix passive, le COD devient…",
+   "choices": [
+    "le verbe",
+    "le sujet",
+    "le complément d'agent",
+    "le COI"
+   ],
+   "answer": 1,
+   "explanation": "On permute le COD et le sujet.",
+   "id": "cm2-francais-voix-discours-q1",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Le verbe de « Les voitures sont lavées par Paul » est…",
+   "choices": [
+    "au passé composé",
+    "au futur",
+    "à l'imparfait",
+    "au présent, voix passive"
+   ],
+   "answer": 3,
+   "explanation": "« sont » (être au présent) + participe.",
+   "id": "cm2-francais-voix-discours-q2",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Au discours direct, on utilise…",
+   "choices": [
+    "« que » et « si »",
+    "des guillemets",
+    "des parenthèses",
+    "aucune ponctuation"
+   ],
+   "answer": 1,
+   "explanation": "Les guillemets encadrent les paroles.",
+   "id": "cm2-francais-voix-discours-q3",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel mot introduit souvent le discours indirect ?",
+   "choices": [
+    "mais",
+    "donc",
+    "car",
+    "que"
+   ],
+   "answer": 3,
+   "explanation": "Il a dit qu'il viendrait.",
+   "id": "cm2-francais-voix-discours-q4",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle phrase est au discours indirect ?",
+   "choices": [
+    "Elle dit qu'elle a faim.",
+    "Elle dit : « J'ai faim. »",
+    "« J'ai faim », dit-elle.",
+    "Elle crie : « Vite ! »"
+   ],
+   "answer": 0,
+   "explanation": "Pas de guillemets, présence de « que ».",
+   "id": "cm2-francais-voix-discours-q5",
+   "chapter": "cm2-francais-voix-discours",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-voix-discours-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

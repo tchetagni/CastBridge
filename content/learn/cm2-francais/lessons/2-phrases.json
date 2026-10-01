@@ -1,0 +1,438 @@
+{
+ "chapter": "cm2-francais-phrases",
+ "lessons": [
+  {
+   "id": "cm2-francais-phrases-fiche",
+   "chapter": "cm2-francais-phrases",
+   "title": "La phrase : types, propositions",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Français (reconstitué, à confronter au programme officiel MINEDUB)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître les types et les formes de phrase.",
+    "Distinguer phrase simple et phrase complexe.",
+    "Repérer les propositions (indépendante, principale, subordonnée) et leurs liens."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-francais-phrases-01",
+    "cm2-francais-phrases-02",
+    "cm2-francais-phrases-03",
+    "cm2-francais-phrases-04",
+    "cm2-francais-phrases-05",
+    "cm2-francais-phrases-06"
+   ],
+   "selfCheck": [
+    "cm2-francais-phrases-q1",
+    "cm2-francais-phrases-q2",
+    "cm2-francais-phrases-q3",
+    "cm2-francais-phrases-q4",
+    "cm2-francais-phrases-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire (proposition indépendante / principale / subordonnée, juxtaposée / coordonnée) selon le programme du CM2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Il y a **quatre types** de phrases : **déclarative** (elle dit quelque chose, point), **interrogative** (elle pose une question, point d'interrogation), **exclamative** (elle exprime un sentiment, point d'exclamation), **impérative** (elle ordonne ou conseille). Chacune peut être à la forme affirmative ou négative."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Phrase simple, phrase complexe",
+     "md": "Une **proposition** contient un verbe conjugué.\n\n- **Phrase simple** : une seule proposition. Les élèves lisent.\n- **Phrase complexe** : au moins deux propositions. Les élèves lisent pendant que le maître écrit."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une phrase complexe : une principale et une subordonnée.",
+     "alt": "La phrase Je pense que tu as raison est découpée en deux cases. La case bleue Je pense est la proposition principale ; la case orange que tu as raison est la proposition subordonnée.",
+     "figure": {
+      "kind": "shapes",
+      "w": 490,
+      "h": 125,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 230,
+        "h": 40,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 40,
+        "w": 230,
+        "h": 40,
+        "stroke": "red",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 66,
+        "text": "Je pense",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 66,
+        "text": "que tu as raison.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 100,
+        "text": "proposition principale",
+        "size": 13,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 100,
+        "text": "proposition subordonnée",
+        "size": 13,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 25,
+        "text": "1 verbe conjugué = 1 proposition",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Comment les propositions sont reliées",
+     "md": "- **Juxtaposées** : séparées par une virgule ou un point-virgule : Il pleut, nous restons.\n- **Coordonnées** : reliées par mais, ou, et, donc, or, ni, car : Ngono chante et Amina danse.\n- **Subordonnée** : elle dépend d'une principale. Elle commence par que, qui, quand, parce que, si, pour que, bien que… : Je sais **que** tu viens."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : compter les propositions",
+     "statement": "Combien de propositions dans : « Quand la pluie cesse, les enfants sortent jouer. » ?",
+     "steps": [
+      {
+       "md": "On cherche les verbes conjugués : cesse, sortent. (« jouer » est à l'infinitif.)"
+      },
+      {
+       "md": "Deux verbes conjugués : deux propositions."
+      },
+      {
+       "md": "« Quand la pluie cesse » est la subordonnée ; « les enfants sortent jouer » est la principale."
+      }
+     ],
+     "answer": "**Deux propositions : une subordonnée et une principale.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : juxtaposées ou coordonnées ?",
+     "statement": "Que remarques-tu dans : « Le soleil se lève, les oiseaux chantent et le coq appelle. » ?",
+     "steps": [
+      {
+       "md": "Trois verbes : se lève, chantent, appelle : trois propositions."
+      },
+      {
+       "md": "Les deux premières sont séparées par une virgule : juxtaposées."
+      },
+      {
+       "md": "Les deux dernières sont reliées par « et » : coordonnées."
+      }
+     ],
+     "answer": "**Trois propositions : les deux premières sont juxtaposées, les deux dernières coordonnées.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Un verbe à l'infinitif ou au participe ne forme pas une proposition à lui seul.\n- « Elle chante et danse » : un seul sujet pour deux verbes, donc deux propositions quand même.\n- Le point d'exclamation ne change pas le type : « Viens ici ! » est impérative."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-phrases-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-phrases-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-phrases-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-phrases-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-phrases-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-phrases-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La proposition subordonnée relative commence par qui, que, où, dont : la mangue **que** j'ai cueillie."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le type de la phrase « Quelle belle journée ! » ?",
+   "choices": [
+    "interrogative",
+    "déclarative",
+    "exclamative",
+    "impérative"
+   ],
+   "answer": 2,
+   "explanation": "Elle exprime un sentiment, avec « quelle » et un point d'exclamation.",
+   "id": "cm2-francais-phrases-01",
+   "chapter": "cm2-francais-phrases",
+   "tier": "application",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Combien de propositions dans : « Mballa mange et Ngono boit. » ?",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "Deux verbes conjugués : mange, boit.",
+   "id": "cm2-francais-phrases-02",
+   "chapter": "cm2-francais-phrases",
+   "tier": "application",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : « Ferme la porte. » est une phrase déclarative.",
+   "answer": false,
+   "explanation": "C'est un ordre : phrase impérative.",
+   "id": "cm2-francais-phrases-03",
+   "chapter": "cm2-francais-phrases",
+   "tier": "application",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Dans « Je sais que tu viens », la proposition « que tu viens » est…",
+   "choices": [
+    "une principale",
+    "une subordonnée",
+    "une indépendante",
+    "une coordonnée"
+   ],
+   "answer": 1,
+   "explanation": "Elle dépend de « je sais » et commence par « que ».",
+   "id": "cm2-francais-phrases-04",
+   "chapter": "cm2-francais-phrases",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Combien de propositions dans : « Quand Ibrahim arrive, nous mangeons, puis il part parce qu'il est fatigué. » ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Verbes : arrive, mangeons, part, est : quatre propositions.",
+   "id": "cm2-francais-phrases-05",
+   "chapter": "cm2-francais-phrases",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Lis la phrase : « Nkeng range ses cahiers, ferme son sac et sort parce que la cloche sonne. »",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien y a-t-il de verbes conjugués ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "range, ferme, sort, sonne.",
+     "points": 1,
+     "id": "cm2-francais-phrases-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle proposition est subordonnée ?",
+     "choices": [
+      "Nkeng range ses cahiers",
+      "ferme son sac",
+      "sort",
+      "parce que la cloche sonne"
+     ],
+     "answer": 3,
+     "explanation": "Elle commence par « parce que ».",
+     "points": 1,
+     "id": "cm2-francais-phrases-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Par quoi sont reliées « range ses cahiers » et « ferme son sac » ?",
+     "choices": [
+      "« parce que »",
+      "Une virgule",
+      "« mais »",
+      "Rien du tout"
+     ],
+     "answer": 1,
+     "explanation": "Elles sont juxtaposées (virgule).",
+     "points": 1,
+     "id": "cm2-francais-phrases-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-francais-phrases-06",
+   "chapter": "cm2-francais-phrases",
+   "tier": "examen",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel signe termine une phrase interrogative ?",
+   "choices": [
+    "le point d'exclamation",
+    "les deux-points",
+    "le point-virgule",
+    "le point d'interrogation"
+   ],
+   "answer": 3,
+   "explanation": "Elle pose une question.",
+   "id": "cm2-francais-phrases-q1",
+   "chapter": "cm2-francais-phrases",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Une proposition est…",
+   "choices": [
+    "un groupe de mots avec un verbe conjugué",
+    "un mot seul",
+    "un groupe sans verbe",
+    "une phrase sans sujet"
+   ],
+   "answer": 0,
+   "explanation": "C'est le critère pour compter les propositions.",
+   "id": "cm2-francais-phrases-q2",
+   "chapter": "cm2-francais-phrases",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans « Il pleut mais nous sortons », « mais » est…",
+   "choices": [
+    "un nom",
+    "un verbe",
+    "une conjonction de coordination",
+    "un adjectif"
+   ],
+   "answer": 2,
+   "explanation": "Elle relie deux propositions.",
+   "id": "cm2-francais-phrases-q3",
+   "chapter": "cm2-francais-phrases",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle phrase est simple ?",
+   "choices": [
+    "Les enfants jouent pendant que la pluie tombe.",
+    "Je pense que tu viens.",
+    "Les enfants jouent dans la cour.",
+    "Il court et elle marche."
+   ],
+   "answer": 2,
+   "explanation": "Un seul verbe conjugué : jouent.",
+   "id": "cm2-francais-phrases-q4",
+   "chapter": "cm2-francais-phrases",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle phrase est à la forme négative ?",
+   "choices": [
+    "Paul ne mange pas de manioc.",
+    "Paul mange du manioc.",
+    "Paul aime le manioc.",
+    "Paul, viens manger !"
+   ],
+   "answer": 0,
+   "explanation": "« ne … pas » encadre le verbe.",
+   "id": "cm2-francais-phrases-q5",
+   "chapter": "cm2-francais-phrases",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-phrases-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

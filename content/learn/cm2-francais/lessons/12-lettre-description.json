@@ -1,0 +1,509 @@
+{
+ "chapter": "cm2-francais-lettre-description",
+ "lessons": [
+  {
+   "id": "cm2-francais-lettre-description-fiche",
+   "chapter": "cm2-francais-lettre-description",
+   "title": "Écrire une lettre, une description, un compte rendu",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Français (reconstitué, à confronter au programme officiel MINEDUB)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Rédiger une lettre avec toutes ses parties.",
+    "Faire une description organisée.",
+    "Écrire un compte rendu court et chronologique."
+   ],
+   "prerequisites": [
+    "cm2-francais-recit-fiche"
+   ],
+   "exercises": [
+    "cm2-francais-lettre-description-01",
+    "cm2-francais-lettre-description-02",
+    "cm2-francais-lettre-description-03",
+    "cm2-francais-lettre-description-04",
+    "cm2-francais-lettre-description-05",
+    "cm2-francais-lettre-description-06"
+   ],
+   "selfCheck": [
+    "cm2-francais-lettre-description-q1",
+    "cm2-francais-lettre-description-q2",
+    "cm2-francais-lettre-description-q3",
+    "cm2-francais-lettre-description-q4",
+    "cm2-francais-lettre-description-q5"
+   ],
+   "reviewNotes": [
+    "Les formules de politesse officielles sont à vérifier selon les usages scolaires camerounais ; relire les productions modèles."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "On écrit pour des raisons différentes : **raconter** (récit), **écrire à quelqu'un** (lettre), **faire voir** (description), **rendre compte** de ce qu'on a fait ou vu (compte rendu). Chaque texte a sa forme."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les parties d'une lettre.",
+     "alt": "Une feuille avec en haut le lieu et la date, puis la formule d'appel Cher Paul, le corps de la lettre, et en bas la formule de politesse avec la signature. À droite, des légendes nomment chaque partie.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 300,
+        "h": 200,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 30,
+        "text": "Yaoundé, le 12 mai",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 50,
+        "text": "Cher Paul,",
+        "size": 12,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 70,
+        "x2": 290,
+        "y2": 70,
+        "color": "lightgrey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 85,
+        "x2": 290,
+        "y2": 85,
+        "color": "lightgrey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 100,
+        "x2": 290,
+        "y2": 100,
+        "color": "lightgrey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 115,
+        "x2": 290,
+        "y2": 115,
+        "color": "lightgrey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 130,
+        "x2": 290,
+        "y2": 130,
+        "color": "lightgrey",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 155,
+        "text": "Corps de la lettre",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 185,
+        "text": "Ton ami, Ngono",
+        "size": 12,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 30,
+        "text": "Lieu et date",
+        "size": 12,
+        "color": "grey",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 50,
+        "text": "Formule d'appel",
+        "size": 12,
+        "color": "blue",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 155,
+        "text": "Message",
+        "size": 12,
+        "color": "grey",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 185,
+        "text": "Politesse + signature",
+        "size": 12,
+        "color": "red",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La lettre",
+     "md": "1. **Lieu et date** (en haut à droite) : Yaoundé, le 12 mai.\n2. **Formule d'appel** : Cher Paul, / Chère tante, / Monsieur le directeur,\n3. **Corps** : on dit ce qu'on veut dire, en paragraphes.\n4. **Formule de politesse** : Affectueusement, / Je t'embrasse. / Veuillez agréer, Monsieur, mes salutations respectueuses.\n5. **Signature**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une description",
+     "statement": "Décris le marché de ton quartier en trois phrases, du général au détail.",
+     "steps": [
+      {
+       "md": "On va du général (l'ensemble) au détail (l'étal)."
+      },
+      {
+       "md": "On utilise l'imparfait ou le présent, des adjectifs, des comparaisons."
+      }
+     ],
+     "answer": "**Le marché est un grand espace animé. Les étals sont serrés les uns contre les autres. Sur l'un d'eux, des mangues dorées brillent comme de petits soleils.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Décrire et rendre compte",
+     "md": "- **Description** : on observe (général → détail), on choisit des adjectifs et des comparaisons, on garde le même temps (présent ou imparfait).\n- **Compte rendu** : on répond à Qui ? Quoi ? Où ? Quand ? Comment ? On suit l'ordre chronologique et on écrit à la 3e personne : « Les élèves ont visité… »."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un compte rendu",
+     "statement": "Résume en deux phrases la sortie de la classe de CM2 à la plantation de cacao.",
+     "steps": [
+      {
+       "md": "Qui ? les élèves du CM2. Où ? à la plantation. Quand ? jeudi. Quoi ? ils ont observé les cabosses."
+      },
+      {
+       "md": "On suit l'ordre : arrivée, observation."
+      }
+     ],
+     "answer": "**Jeudi, les élèves de CM2 ont visité une plantation de cacao. Ils ont observé les cabosses et posé des questions au planteur.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Dans une lettre, on s'adresse à quelqu'un : « tu » ou « vous » selon la personne (pas de mélange).\n- Dans un compte rendu, pas de « je » ni d'opinion : on informe.\n- Une description n'est pas une histoire : pas d'événements, seulement ce qu'on voit."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-lettre-description-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-lettre-description-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-lettre-description-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-lettre-description-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-lettre-description-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-lettre-description-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour une carte postale, on garde la même structure en plus court."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Où place-t-on la date dans une lettre ?",
+   "choices": [
+    "En haut, à droite",
+    "À la fin sur la gauche",
+    "Au milieu",
+    "Avant la signature"
+   ],
+   "answer": 0,
+   "explanation": "Lieu et date en haut à droite.",
+   "id": "cm2-francais-lettre-description-01",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "application",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle formule d'appel convient pour une lettre à ta tante ?",
+   "choices": [
+    "Cher Monsieur le directeur,",
+    "Salut tout le monde,",
+    "Chère tante,",
+    "Bonjour tante"
+   ],
+   "answer": 2,
+   "explanation": "On écrit « Chère tante, ».",
+   "id": "cm2-francais-lettre-description-02",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "application",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : un compte rendu doit donner l'opinion de l'auteur.",
+   "answer": false,
+   "explanation": "Il informe : qui, quoi, où, quand, comment.",
+   "id": "cm2-francais-lettre-description-03",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "application",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Pour une description, on va…",
+   "choices": [
+    "du détail au général au hasard",
+    "du général au détail",
+    "de la fin au début",
+    "sans ordre"
+   ],
+   "answer": 1,
+   "explanation": "On suit un ordre clair.",
+   "id": "cm2-francais-lettre-description-04",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "difficulty": 2,
+   "prompt": "Écris une lettre de 4 à 5 lignes à un ami d'une autre ville pour lui parler de ton école.",
+   "model": "Douala, le 3 mars\nCher Paul,\nJ'espère que tu vas bien. Mon école est grande et mes camarades sont gentils. J'adore la classe de français.\nÀ bientôt ! Ngono",
+   "rubric": [
+    "Lieu et date.",
+    "Formule d'appel.",
+    "Corps cohérent avec « tu ».",
+    "Formule de politesse et signature."
+   ],
+   "explanation": "Toutes les parties d'une lettre doivent apparaître.",
+   "id": "cm2-francais-lettre-description-05",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 3,
+   "prompt": "Rédige une courte lettre à ton directeur pour demander la permission d'organiser une sortie à Limbé.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle formule d'appel est la plus adaptée ?",
+     "choices": [
+      "Salut directeur,",
+      "Cher copain,",
+      "Ma chère maîtresse,",
+      "Monsieur le directeur,"
+     ],
+     "answer": 3,
+     "explanation": "Lettre officielle : on s'adresse poliment.",
+     "points": 1,
+     "id": "cm2-francais-lettre-description-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris deux phrases pour demander la permission.",
+     "model": "Monsieur le directeur, les élèves de CM2 aimeraient visiter la plage de Limbé. Nous vous demandons la permission d'organiser cette sortie.",
+     "rubric": [
+      "Vouvoiement.",
+      "Demande claire.",
+      "Phrases complètes."
+     ],
+     "explanation": "On utilise le vouvoiement et la politesse.",
+     "points": 2,
+     "id": "cm2-francais-lettre-description-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle formule de politesse convient ?",
+     "choices": [
+      "Je t'embrasse fort.",
+      "Veuillez agréer, Monsieur le directeur, mes salutations respectueuses.",
+      "À plus !",
+      "Bisous."
+     ],
+     "answer": 1,
+     "explanation": "Lettre à une personne que l'on vouvoie.",
+     "points": 1,
+     "id": "cm2-francais-lettre-description-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-francais-lettre-description-06",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "examen",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 4,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Une description sert à…",
+   "choices": [
+    "raconter un événement",
+    "donner des ordres",
+    "poser des questions",
+    "faire voir un lieu, une personne ou un objet"
+   ],
+   "answer": 3,
+   "explanation": "Elle permet d'imaginer.",
+   "id": "cm2-francais-lettre-description-q1",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Un compte rendu répond à…",
+   "choices": [
+    "Qui ? Quoi ? Où ? Quand ?",
+    "Pourquoi pas ?",
+    "Et alors ?",
+    "Comment dormir ?"
+   ],
+   "answer": 0,
+   "explanation": "Les questions de base de l'information.",
+   "id": "cm2-francais-lettre-description-q2",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "La formule de politesse se place…",
+   "choices": [
+    "avant la date",
+    "au début",
+    "à la fin de la lettre",
+    "avant le lieu"
+   ],
+   "answer": 2,
+   "explanation": "Avant la signature.",
+   "id": "cm2-francais-lettre-description-q3",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel temps convient pour une description ?",
+   "choices": [
+    "le futur",
+    "l'impératif",
+    "le présent ou l'imparfait",
+    "le passé simple"
+   ],
+   "answer": 2,
+   "explanation": "On garde le même temps.",
+   "id": "cm2-francais-lettre-description-q4",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans une lettre à un ami, on dit…",
+   "choices": [
+    "tu",
+    "vous de politesse",
+    "nous seulement",
+    "on ne dit rien"
+   ],
+   "answer": 0,
+   "explanation": "Entre amis, on tutoie.",
+   "id": "cm2-francais-lettre-description-q5",
+   "chapter": "cm2-francais-lettre-description",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-lettre-description-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}
