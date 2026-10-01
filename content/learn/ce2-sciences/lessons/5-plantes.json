@@ -1,0 +1,472 @@
+{
+ "chapter": "ce2-sciences-vivant",
+ "lessons": [
+  {
+   "id": "ce2-sciences-plantes",
+   "title": "Les plantes : leurs parties et leurs besoins",
+   "minutes": 14,
+   "readAloud": true,
+   "programRef": "Les plantes : leurs parties et leurs besoins (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les parties d'une plante.",
+    "Citer ce dont une plante a besoin pour vivre.",
+    "Décrire les étapes de la germination d'une graine."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-sciences-plantes-01",
+    "ce2-sciences-plantes-02",
+    "ce2-sciences-plantes-03",
+    "ce2-sciences-plantes-04",
+    "ce2-sciences-plantes-05",
+    "ce2-sciences-plantes-06"
+   ],
+   "selfCheck": [
+    "ce2-sciences-plantes-q1",
+    "ce2-sciences-plantes-q2",
+    "ce2-sciences-plantes-q3",
+    "ce2-sciences-plantes-q4",
+    "ce2-sciences-plantes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que la germination (graine → racine → tige) est bien au programme du CE2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Le manioc, le cacaoyer, le manguier : ce sont des **plantes**. Elles sont vivantes : elles naissent, grandissent, se reproduisent et meurent."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les parties d'une plante",
+     "md": "- La **racine** fixe la plante dans le sol et boit l'eau.\n- La **tige** porte les feuilles.\n- Les **feuilles** sont souvent vertes.\n- La **fleur** devient un **fruit** qui contient des **graines**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les parties d'une plante.",
+     "alt": "Dessin simple d'une plante avec une fleur orange en haut, une tige verte, deux feuilles et des racines marron en bas ; chaque partie est nommée.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 70,
+        "w": 18,
+        "h": 130,
+        "fill": "green",
+        "stroke": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 175,
+        "cy": 110,
+        "r": 18,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 225,
+        "cy": 140,
+        "r": 18,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 199,
+        "cy": 55,
+        "r": 16,
+        "fill": "orange",
+        "stroke": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 199,
+        "y1": 200,
+        "x2": 160,
+        "y2": 240,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 199,
+        "y1": 200,
+        "x2": 240,
+        "y2": 240,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 58,
+        "text": "fleur",
+        "size": 16,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 125,
+        "text": "feuille",
+        "size": 16,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 175,
+        "text": "tige",
+        "size": 16,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 240,
+        "text": "racines",
+        "size": 16,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 54,
+        "x2": 220,
+        "y2": 54,
+        "color": "grey",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 285,
+        "y1": 120,
+        "x2": 248,
+        "y2": 135,
+        "color": "grey",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 170,
+        "x2": 212,
+        "y2": 170,
+        "color": "grey",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 285,
+        "y1": 236,
+        "x2": 245,
+        "y2": 236,
+        "color": "grey",
+        "width": 1,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ce dont la plante a besoin",
+     "md": "Pour vivre, une plante a besoin d'**eau**, de **lumière**, d'**air** et de **terre** (le sol). Sans eau ni lumière, elle se dessèche."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une plante qui sèche",
+     "statement": "Le plant de tomate de Paul jaunit. Il est oublié sous une caisse, sans pluie. Pourquoi ?",
+     "steps": [
+      {
+       "md": "Sous la caisse, il n'y a **pas de lumière**."
+      },
+      {
+       "md": "Sans arrosage, il n'a pas d'**eau**."
+      }
+     ],
+     "answer": "**Il manque de lumière et d'eau.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la germination",
+     "statement": "Une graine d'arachide est mise en terre humide. Que se passe-t-il ?",
+     "steps": [
+      {
+       "md": "La graine gonfle avec l'eau."
+      },
+      {
+       "md": "Une petite **racine** sort, puis une **tige**."
+      },
+      {
+       "md": "Les premières feuilles apparaissent."
+      }
+     ],
+     "answer": "**La graine germe puis devient une jeune plante.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Les plantes utiles",
+     "md": "Les plantes nous donnent des aliments (manioc, plantain, haricot, arachide), des boissons et des fruits, des matières (coton), du bois, de l'ombre. Il faut **les protéger**."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Au Cameroun, on cultive par exemple le cacao, le café, le coton (au nord), le plantain et le manioc."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-plantes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-plantes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-plantes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-plantes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-plantes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-plantes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie fixe la plante dans le sol ?",
+   "explanation": "Les racines tiennent la plante et boivent l'eau.",
+   "difficulty": 1,
+   "choices": [
+    "La feuille",
+    "La racine",
+    "La fleur",
+    "Le fruit"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-plantes-01",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une plante a besoin de lumière.",
+   "answer": true,
+   "explanation": "Sans lumière, une plante ne se développe pas bien.",
+   "difficulty": 1,
+   "id": "ce2-sciences-plantes-02",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque partie à son rôle.",
+   "pairs": [
+    [
+     "racine",
+     "boit l'eau dans le sol"
+    ],
+    [
+     "tige",
+     "porte les feuilles"
+    ],
+    [
+     "fleur",
+     "devient un fruit"
+    ],
+    [
+     "fruit",
+     "contient les graines"
+    ]
+   ],
+   "explanation": "Chaque partie a un rôle.",
+   "difficulty": 1,
+   "id": "ce2-sciences-plantes-03",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient une graine mise en terre humide ?",
+   "explanation": "Elle gonfle puis germe.",
+   "difficulty": 2,
+   "choices": [
+    "Elle devient du sable",
+    "Elle se transforme en animal",
+    "Elle disparaît toujours",
+    "Elle germe"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-plantes-04",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris trois besoins d'une plante.",
+   "model": "Eau, lumière, air, terre (sol).",
+   "rubric": [
+    "Trois besoins justes (1 point pour les deux premiers, 1 point pour le troisième)."
+   ],
+   "explanation": "Les besoins sont : eau, lumière, air, sol.",
+   "difficulty": 2,
+   "id": "ce2-sciences-plantes-05",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Nkeng met un haricot dans un pot sans eau pendant une semaine. Que va-t-il probablement se passer ?",
+   "explanation": "Sans eau, la graine ne germe pas.",
+   "difficulty": 3,
+   "choices": [
+    "Il changera de couleur en bleu",
+    "Il donnera des fruits tout de suite",
+    "Il deviendra un arbre",
+    "Il ne germera pas"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-plantes-06",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où se trouvent les graines ?",
+   "explanation": "Le fruit contient les graines.",
+   "difficulty": 1,
+   "choices": [
+    "Sous la feuille",
+    "Dans la racine seulement",
+    "Dans le fruit",
+    "Dans la tige seulement"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-plantes-q1",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie est souvent verte ?",
+   "explanation": "Les feuilles sont souvent vertes.",
+   "difficulty": 1,
+   "choices": [
+    "Le fruit toujours",
+    "La terre",
+    "La racine",
+    "La feuille"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-plantes-q2",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "De quoi a besoin une plante ?",
+   "explanation": "Eau, lumière, air et terre.",
+   "difficulty": 1,
+   "choices": [
+    "De sucre",
+    "D'argent",
+    "D'eau et de lumière",
+    "De bruit"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-plantes-q3",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La fleur devient…",
+   "explanation": "La fleur devient un fruit.",
+   "difficulty": 2,
+   "choices": [
+    "une racine",
+    "une pierre",
+    "une tige",
+    "un fruit"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-plantes-q4",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'appelle la naissance d'une jeune plante à partir d'une graine ?",
+   "explanation": "C'est la germination.",
+   "difficulty": 2,
+   "choices": [
+    "La construction",
+    "La digestion",
+    "La germination",
+    "La respiration"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-plantes-q5",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-plantes",
+   "source": "Exercice original"
+  }
+ ]
+}

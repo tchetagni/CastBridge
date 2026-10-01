@@ -1,0 +1,422 @@
+{
+ "chapter": "ce2-histoire-geo-espace",
+ "lessons": [
+  {
+   "id": "ce2-histoire-geo-localite",
+   "title": "Se repérer : ma localité, le plan et les points cardinaux",
+   "minutes": 14,
+   "readAloud": true,
+   "programRef": "Se repérer : ma localité, le plan et les points cardinaux (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Décrire sa localité (village ou quartier, ville).",
+    "Utiliser les points cardinaux.",
+    "Lire un plan simple avec sa légende."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-histoire-geo-localite-01",
+    "ce2-histoire-geo-localite-02",
+    "ce2-histoire-geo-localite-03",
+    "ce2-histoire-geo-localite-04",
+    "ce2-histoire-geo-localite-05",
+    "ce2-histoire-geo-localite-06"
+   ],
+   "selfCheck": [
+    "ce2-histoire-geo-localite-q1",
+    "ce2-histoire-geo-localite-q2",
+    "ce2-histoire-geo-localite-q3",
+    "ce2-histoire-geo-localite-q4",
+    "ce2-histoire-geo-localite-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que les mots « village, quartier, ville » correspondent aux définitions utilisées en classe."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Ta **localité**, c'est l'endroit où tu vis : un village, un quartier, une ville. Tu y trouves ton école, le marché, le centre de santé, la route."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Un plan",
+     "md": "Un **plan** est un dessin vu de dessus. Il montre où sont les lieux. La **légende** explique les signes du plan."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les points cardinaux",
+     "md": "Il y en a quatre : le **nord**, le **sud**, l'**est** et l'**ouest**. Le soleil se lève à l'**est** et se couche à l'**ouest**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les quatre points cardinaux.",
+     "alt": "Une croix avec des flèches : nord en haut, sud en bas, est à droite, ouest à gauche.",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 300,
+      "items": [
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 250,
+        "x2": 170,
+        "y2": 45,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 150,
+        "x2": 270,
+        "y2": 150,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 150,
+        "x2": 70,
+        "y2": 150,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 45,
+        "x2": 170,
+        "y2": 250,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 30,
+        "text": "NORD",
+        "size": 16,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 280,
+        "text": "SUD",
+        "size": 16,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 156,
+        "text": "EST",
+        "size": 16,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 156,
+        "text": "OUEST",
+        "size": 16,
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le lever du soleil",
+     "statement": "Le matin, de quel côté Paul voit-il le soleil se lever ?",
+     "steps": [
+      {
+       "md": "Le soleil se lève à l'**est**."
+      },
+      {
+       "md": "Si Paul regarde le soleil du matin, il regarde vers l'est."
+      }
+     ],
+     "answer": "**Vers l'est.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire un plan",
+     "statement": "Sur le plan, l'école est dessinée au nord du marché. Où est le marché par rapport à l'école ?",
+     "steps": [
+      {
+       "md": "L'école est en haut (nord), le marché est en dessous."
+      },
+      {
+       "md": "Donc le marché est **au sud** de l'école."
+      }
+     ],
+     "answer": "**Le marché est au sud de l'école.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Village et ville",
+     "md": "Un **village** est petit, avec peu de maisons, souvent entouré de champs. Une **ville** est grande, avec beaucoup de maisons, de routes, de magasins et de services."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Yaoundé et Douala sont de grandes villes du Cameroun."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-localite-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-localite-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-localite-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-localite-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-localite-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-localite-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Où le soleil se lève-t-il ?",
+   "explanation": "Il se lève à l'est et se couche à l'ouest.",
+   "difficulty": 1,
+   "choices": [
+    "À l'ouest",
+    "À l'est",
+    "Au nord",
+    "Au sud"
+   ],
+   "answer": 1,
+   "id": "ce2-histoire-geo-localite-01",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un plan est un dessin vu de dessus.",
+   "answer": true,
+   "explanation": "Le plan montre les lieux vus d'en haut.",
+   "difficulty": 1,
+   "id": "ce2-histoire-geo-localite-02",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque point cardinal à sa position sur un plan.",
+   "pairs": [
+    [
+     "nord",
+     "en haut"
+    ],
+    [
+     "sud",
+     "en bas"
+    ],
+    [
+     "est",
+     "à droite"
+    ],
+    [
+     "ouest",
+     "à gauche"
+    ]
+   ],
+   "explanation": "Sur un plan, le nord est en haut.",
+   "difficulty": 1,
+   "id": "ce2-histoire-geo-localite-03",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert la légende d'un plan ?",
+   "explanation": "La légende dit ce que signifient les signes.",
+   "difficulty": 2,
+   "choices": [
+    "À expliquer les signes",
+    "À décorer",
+    "À donner la date",
+    "À nommer le dessinateur"
+   ],
+   "answer": 0,
+   "id": "ce2-histoire-geo-localite-04",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris trois lieux que tu trouves dans ta localité.",
+   "model": "L'école, le marché, le centre de santé, la route, l'église ou la mosquée.",
+   "rubric": [
+    "Trois lieux justes."
+   ],
+   "explanation": "Réponse libre : lieux réels de la localité.",
+   "difficulty": 2,
+   "id": "ce2-histoire-geo-localite-05",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Mballa marche vers le soleil couchant. Vers quel point cardinal va-t-il ?",
+   "explanation": "Le soleil se couche à l'ouest.",
+   "difficulty": 3,
+   "choices": [
+    "Vers le sud",
+    "Vers l'est",
+    "Vers le nord",
+    "Vers l'ouest"
+   ],
+   "answer": 3,
+   "id": "ce2-histoire-geo-localite-06",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien y a-t-il de points cardinaux ?",
+   "explanation": "Nord, sud, est, ouest.",
+   "difficulty": 1,
+   "choices": [
+    "4",
+    "2",
+    "3",
+    "8"
+   ],
+   "answer": 0,
+   "id": "ce2-histoire-geo-localite-q1",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le contraire du nord est…",
+   "explanation": "Nord et sud sont opposés.",
+   "difficulty": 1,
+   "choices": [
+    "le centre",
+    "le sud",
+    "l'ouest",
+    "l'est"
+   ],
+   "answer": 1,
+   "id": "ce2-histoire-geo-localite-q2",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le soleil se couche à…",
+   "explanation": "Il se couche à l'ouest.",
+   "difficulty": 1,
+   "choices": [
+    "au sud",
+    "au nord",
+    "l'ouest",
+    "l'est"
+   ],
+   "answer": 2,
+   "id": "ce2-histoire-geo-localite-q3",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'une localité ?",
+   "explanation": "Village, quartier ou ville.",
+   "difficulty": 2,
+   "choices": [
+    "Un animal",
+    "L'endroit où l'on vit",
+    "Une couleur",
+    "Un livre"
+   ],
+   "answer": 1,
+   "id": "ce2-histoire-geo-localite-q4",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur un plan, le nord est généralement…",
+   "explanation": "Le nord est en haut.",
+   "difficulty": 2,
+   "choices": [
+    "en haut",
+    "en bas",
+    "à gauche",
+    "au centre"
+   ],
+   "answer": 0,
+   "id": "ce2-histoire-geo-localite-q5",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-localite",
+   "source": "Exercice original"
+  }
+ ]
+}

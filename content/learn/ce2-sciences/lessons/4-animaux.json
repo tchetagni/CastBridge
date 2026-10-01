@@ -1,0 +1,437 @@
+{
+ "chapter": "ce2-sciences-vivant",
+ "lessons": [
+  {
+   "id": "ce2-sciences-animaux",
+   "title": "Les animaux et leur milieu de vie",
+   "minutes": 14,
+   "readAloud": true,
+   "programRef": "Les animaux et leur milieu de vie (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Classer des animaux selon ce qu'ils mangent.",
+    "Associer un animal à son milieu de vie.",
+    "Citer des façons de se déplacer."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-sciences-animaux-01",
+    "ce2-sciences-animaux-02",
+    "ce2-sciences-animaux-03",
+    "ce2-sciences-animaux-04",
+    "ce2-sciences-animaux-05",
+    "ce2-sciences-animaux-06"
+   ],
+   "selfCheck": [
+    "ce2-sciences-animaux-q1",
+    "ce2-sciences-animaux-q2",
+    "ce2-sciences-animaux-q3",
+    "ce2-sciences-animaux-q4",
+    "ce2-sciences-animaux-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que les exemples d'animaux (éléphant, lion, chimpanzé, pangolin, crocodile, poule) correspondent bien à leur régime indiqué."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Les animaux ne vivent pas tous au même endroit et ne mangent pas tous la même chose. Le **milieu de vie** est l'endroit où un animal trouve sa nourriture et un abri."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ce qu'ils mangent",
+     "md": "- Un **herbivore** mange des plantes (éléphant, antilope, mouton).\n- Un **carnivore** mange d'autres animaux (lion, crocodile, chat).\n- Un **omnivore** mange des plantes et des animaux (chimpanzé, poule, homme)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trois régimes alimentaires.",
+     "alt": "Trois cases : éléphant herbivore, lion carnivore, poule omnivore.",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 90,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 104.0,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 62.0,
+        "y": 34.0,
+        "text": "Éléphant",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 62.0,
+        "y": 52.0,
+        "text": "herbivore",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 128.0,
+        "y": 10,
+        "w": 104.0,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 34.0,
+        "text": "Lion",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 52.0,
+        "text": "carnivore",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 246.0,
+        "y": 10,
+        "w": 104.0,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 298.0,
+        "y": 34.0,
+        "text": "Poule",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 298.0,
+        "y": 52.0,
+        "text": "omnivore",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les milieux de vie",
+     "md": "- La **forêt** : chimpanzé, gorille, oiseaux.\n- La **savane** : éléphant, lion, girafe.\n- L'**eau** : poissons, crocodile, hippopotame.\n- Près des maisons : poule, chèvre, chien."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le régime d'un animal",
+     "statement": "Le pangolin mange des fourmis et des termites. Est-ce un herbivore ?",
+     "steps": [
+      {
+       "md": "Les fourmis sont des animaux."
+      },
+      {
+       "md": "Il mange des animaux : ce n'est pas un herbivore."
+      }
+     ],
+     "answer": "**Non : il mange de petits animaux (c'est un carnivore).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le bon milieu",
+     "statement": "Où vit le poisson ? Comment respire-t-il ?",
+     "steps": [
+      {
+       "md": "Le poisson vit dans l'**eau**."
+      },
+      {
+       "md": "Il respire avec des **branchies**."
+      }
+     ],
+     "answer": "**Dans l'eau, avec des branchies.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Se déplacer",
+     "md": "Les animaux **marchent** ou **courent** (lion), **volent** (oiseau), **nagent** (poisson), **rampent** (serpent), **sautent** (grenouille)."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Protéger les animaux",
+     "md": "Certains animaux sont **rares**. On ne les chasse pas sans règles et on protège leur forêt."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Beaucoup d'animaux naissent d'un **œuf** (poule, poisson, crocodile) ; d'autres naissent dans le ventre de leur mère (chèvre, éléphant)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-animaux-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-animaux-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-animaux-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-animaux-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-animaux-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-animaux-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Que mange un herbivore ?",
+   "explanation": "Herbivore = mangeur d'herbe et de plantes.",
+   "difficulty": 1,
+   "choices": [
+    "Des pierres",
+    "Des plantes",
+    "Du sable",
+    "Des animaux seulement"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-animaux-01",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le poisson respire avec des poumons.",
+   "answer": false,
+   "explanation": "Le poisson respire avec des branchies.",
+   "difficulty": 1,
+   "id": "ce2-sciences-animaux-02",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque animal à son régime.",
+   "pairs": [
+    [
+     "éléphant",
+     "herbivore"
+    ],
+    [
+     "lion",
+     "carnivore"
+    ],
+    [
+     "poule",
+     "omnivore"
+    ],
+    [
+     "pangolin",
+     "mange des fourmis"
+    ]
+   ],
+   "explanation": "Éléphant : plantes ; lion et crocodile : animaux ; poule : graines et insectes.",
+   "difficulty": 1,
+   "id": "ce2-sciences-animaux-03",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel animal vit surtout dans l'eau ?",
+   "explanation": "L'hippopotame passe beaucoup de temps dans l'eau.",
+   "difficulty": 2,
+   "choices": [
+    "L'hippopotame",
+    "La chèvre",
+    "La poule",
+    "Le mouton"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-animaux-04",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris deux animaux qui volent et un animal qui nage.",
+   "model": "Oiseau, chauve-souris ; poisson.",
+   "rubric": [
+    "Deux animaux qui volent (1 point).",
+    "Un animal qui nage (1 point)."
+   ],
+   "explanation": "Les oiseaux volent, les poissons nagent.",
+   "difficulty": 2,
+   "id": "ce2-sciences-animaux-05",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le chimpanzé mange des fruits et de petits animaux. C'est un…",
+   "explanation": "Il mange des plantes et des animaux : omnivore.",
+   "difficulty": 3,
+   "choices": [
+    "carnivore",
+    "omnivore",
+    "poisson",
+    "herbivore"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-animaux-06",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que mange un carnivore ?",
+   "explanation": "Carnivore = mangeur de viande.",
+   "difficulty": 1,
+   "choices": [
+    "Seulement de l'herbe",
+    "Des fruits seulement",
+    "Des cailloux",
+    "D'autres animaux"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-animaux-q1",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où vit surtout le lion ?",
+   "explanation": "Le lion vit dans la savane.",
+   "difficulty": 1,
+   "choices": [
+    "Dans la savane",
+    "Dans l'eau",
+    "Dans une maison",
+    "Sur un arbre fruitier"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-animaux-q2",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment se déplace le serpent ?",
+   "explanation": "Le serpent rampe.",
+   "difficulty": 2,
+   "choices": [
+    "Il marche sur deux pattes",
+    "Il vole",
+    "Il nage seulement",
+    "Il rampe"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-animaux-q3",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel animal est un omnivore ?",
+   "explanation": "La poule mange des graines et des insectes.",
+   "difficulty": 2,
+   "choices": [
+    "Le lion",
+    "Le crocodile",
+    "La poule",
+    "L'éléphant"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-animaux-q4",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que le milieu de vie ?",
+   "explanation": "C'est son lieu de vie.",
+   "difficulty": 1,
+   "choices": [
+    "Sa couleur",
+    "L'endroit où l'animal trouve nourriture et abri",
+    "Le nom de l'animal",
+    "Son âge"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-animaux-q5",
+   "chapter": "ce2-sciences-vivant",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-animaux",
+   "source": "Exercice original"
+  }
+ ]
+}

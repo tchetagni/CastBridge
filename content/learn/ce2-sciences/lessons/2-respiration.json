@@ -1,0 +1,438 @@
+{
+ "chapter": "ce2-sciences-corps",
+ "lessons": [
+  {
+   "id": "ce2-sciences-respiration",
+   "title": "Respirer : le trajet de l'air",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "Respirer : le trajet de l'air (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Décrire le trajet de l'air dans le corps.",
+    "Distinguer inspiration et expiration.",
+    "Citer des gestes qui protègent la respiration."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-sciences-respiration-01",
+    "ce2-sciences-respiration-02",
+    "ce2-sciences-respiration-03",
+    "ce2-sciences-respiration-04",
+    "ce2-sciences-respiration-05",
+    "ce2-sciences-respiration-06"
+   ],
+   "selfCheck": [
+    "ce2-sciences-respiration-q1",
+    "ce2-sciences-respiration-q2",
+    "ce2-sciences-respiration-q3",
+    "ce2-sciences-respiration-q4",
+    "ce2-sciences-respiration-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que l'idée « l'air contient de l'oxygène que le corps utilise » est bien au programme du CE2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Pose la main sur ta poitrine. Respire doucement. Que sens-tu ? Ta poitrine se gonfle puis se dégonfle."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La respiration",
+     "md": "**Respirer**, c'est faire entrer de l'air dans son corps (**inspiration**) puis le faire sortir (**expiration**). On respire sans arrêt, même en dormant."
+    },
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "L'air entre par le nez, passe par la trachée et arrive dans les poumons."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le trajet de l'air.",
+     "alt": "Trois cases reliées par des flèches : nez, trachée, poumons.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 160.0,
+        "h": 56,
+        "fill": "lightorange",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 68,
+        "text": "Nez",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 173.0,
+        "y1": 68,
+        "x2": 197.0,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 40,
+        "w": 160.0,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 68,
+        "text": "Trachée",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 363.0,
+        "y1": 68,
+        "x2": 387.0,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 390.0,
+        "y": 40,
+        "w": 160.0,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 68,
+        "text": "Poumons",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 130,
+        "text": "Le trajet de l'air",
+        "size": 15,
+        "anchor": "middle",
+        "color": "grey"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le trajet de l'air",
+     "md": "L'air entre par le **nez** (ou par la bouche). Il descend dans la **trachée**, un tube. Il arrive dans les deux **poumons**. Le corps prend dans l'air ce dont il a besoin (l'**oxygène**), puis rejette de l'air."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : après la course",
+     "statement": "Fotso a couru dans la cour. Que remarque-t-il ?",
+     "steps": [
+      {
+       "md": "Son cœur bat plus vite."
+      },
+      {
+       "md": "Il **respire plus vite** : le corps a besoin de plus d'air quand on fait un effort."
+      }
+     ],
+     "answer": "**Quand on court, on respire plus vite.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : protéger ses poumons",
+     "statement": "Pourquoi la fumée de bois ou de cigarette est-elle mauvaise ?",
+     "steps": [
+      {
+       "md": "La fumée entre avec l'air dans le nez et les poumons."
+      },
+      {
+       "md": "Elle abîme les poumons et peut faire tousser."
+      }
+     ],
+     "answer": "**On évite de respirer beaucoup de fumée.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Respirer par le nez",
+     "md": "Respirer par le **nez** est mieux : le nez réchauffe l'air et arrête une partie de la poussière."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les poissons respirent dans l'eau avec des **branchies**."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-respiration-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-respiration-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-respiration-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-respiration-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-respiration-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-respiration-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Par où l'air entre-t-il d'abord dans le corps ?",
+   "explanation": "L'air entre par le nez ou par la bouche.",
+   "difficulty": 1,
+   "choices": [
+    "Par le nez",
+    "Par le genou",
+    "Par l'oreille",
+    "Par le dos"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-respiration-01",
+   "chapter": "ce2-sciences-corps",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on respire aussi quand on dort.",
+   "answer": true,
+   "explanation": "On respire toute la vie, même pendant le sommeil.",
+   "difficulty": 1,
+   "id": "ce2-sciences-respiration-02",
+   "chapter": "ce2-sciences-corps",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque mot à son sens.",
+   "pairs": [
+    [
+     "inspiration",
+     "l'air entre"
+    ],
+    [
+     "expiration",
+     "l'air sort"
+    ],
+    [
+     "poumons",
+     "organes de la respiration"
+    ],
+    [
+     "trachée",
+     "tube pour l'air"
+    ]
+   ],
+   "explanation": "Inspirer = faire entrer l'air ; expirer = le faire sortir.",
+   "difficulty": 1,
+   "id": "ce2-sciences-respiration-03",
+   "chapter": "ce2-sciences-corps",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le bon ordre pour l'air ?",
+   "explanation": "L'air passe par le nez, la trachée puis les poumons.",
+   "difficulty": 2,
+   "choices": [
+    "nez, trachée, poumons",
+    "nez, poumons, trachée",
+    "poumons, nez, trachée",
+    "trachée, poumons, nez"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-respiration-04",
+   "chapter": "ce2-sciences-corps",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi on respire plus vite après avoir couru.",
+   "model": "Quand on court, le corps travaille beaucoup et a besoin de plus d'air, donc on respire plus vite.",
+   "rubric": [
+    "Parle de l'effort du corps (1 point).",
+    "Parle du besoin de plus d'air (1 point)."
+   ],
+   "explanation": "L'effort demande plus d'air.",
+   "difficulty": 2,
+   "id": "ce2-sciences-respiration-05",
+   "chapter": "ce2-sciences-corps",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Marie est enrhumée et son nez est bouché. Que peut-elle faire pour respirer ?",
+   "explanation": "Elle peut respirer par la bouche un moment et se moucher doucement.",
+   "difficulty": 3,
+   "choices": [
+    "Courir très vite",
+    "Retenir son souffle",
+    "Mettre un tissu sur le visage",
+    "Respirer un peu par la bouche en attendant"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-respiration-06",
+   "chapter": "ce2-sciences-corps",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'appelle l'organe de la respiration ?",
+   "explanation": "Les deux poumons sont dans la poitrine.",
+   "difficulty": 1,
+   "choices": [
+    "Les poumons",
+    "L'estomac",
+    "Le foie",
+    "Le genou"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-respiration-q1",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel tube amène l'air vers les poumons ?",
+   "explanation": "C'est la trachée.",
+   "difficulty": 1,
+   "choices": [
+    "L'œsophage",
+    "La veine",
+    "L'intestin",
+    "La trachée"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-respiration-q2",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire « expirer » ?",
+   "explanation": "Expirer = l'air sort.",
+   "difficulty": 1,
+   "choices": [
+    "Dormir",
+    "Faire entrer l'air",
+    "Faire sortir l'air",
+    "Avaler"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-respiration-q3",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Après une course, on respire…",
+   "explanation": "Le corps demande plus d'air.",
+   "difficulty": 2,
+   "choices": [
+    "plus vite",
+    "plus lentement",
+    "comme avant exactement",
+    "pas du tout"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-respiration-q4",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qui abîme les poumons ?",
+   "explanation": "La fumée abîme les poumons.",
+   "difficulty": 1,
+   "choices": [
+    "Un fruit",
+    "La fumée",
+    "L'eau propre",
+    "Un sourire"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-respiration-q5",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-respiration",
+   "source": "Exercice original"
+  }
+ ]
+}

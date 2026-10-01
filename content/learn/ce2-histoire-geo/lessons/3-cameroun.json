@@ -1,0 +1,639 @@
+{
+ "chapter": "ce2-histoire-geo-espace",
+ "lessons": [
+  {
+   "id": "ce2-histoire-geo-cameroun",
+   "title": "Le Cameroun : capitale, voisins et dix régions",
+   "minutes": 16,
+   "readAloud": true,
+   "programRef": "Le Cameroun : capitale, voisins et dix régions (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Situer le Cameroun et nommer son océan et ses voisins.",
+    "Nommer les dix régions.",
+    "Associer une région à son chef-lieu."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-histoire-geo-cameroun-01",
+    "ce2-histoire-geo-cameroun-02",
+    "ce2-histoire-geo-cameroun-03",
+    "ce2-histoire-geo-cameroun-04",
+    "ce2-histoire-geo-cameroun-05",
+    "ce2-histoire-geo-cameroun-06"
+   ],
+   "selfCheck": [
+    "ce2-histoire-geo-cameroun-q1",
+    "ce2-histoire-geo-cameroun-q2",
+    "ce2-histoire-geo-cameroun-q3",
+    "ce2-histoire-geo-cameroun-q4",
+    "ce2-histoire-geo-cameroun-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la liste des dix régions et de leurs chefs-lieux (Adamaoua-Ngaoundéré, Centre-Yaoundé, Est-Bertoua, Extrême-Nord-Maroua, Littoral-Douala, Nord-Garoua, Nord-Ouest-Bamenda, Ouest-Bafoussam, Sud-Ebolowa, Sud-Ouest-Buea).",
+    "Vérifier la liste des pays voisins : Nigeria, Tchad, République centrafricaine, Congo, Gabon, Guinée équatoriale."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Le **Cameroun** est un pays d'Afrique centrale. Sa capitale est **Yaoundé**. Sa grande ville économique est **Douala**, un port."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les voisins du Cameroun",
+     "md": "À l'ouest, il y a le **Nigeria** ; au nord-est, le **Tchad** ; à l'est, la **République centrafricaine** ; au sud, le **Congo**, le **Gabon** et la **Guinée équatoriale**. Au sud-ouest, c'est l'**océan Atlantique** (golfe de Guinée)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les dix régions",
+     "md": "Le Cameroun est divisé en **10 régions** : Adamaoua, Centre, Est, Extrême-Nord, Littoral, Nord, Nord-Ouest, Ouest, Sud, Sud-Ouest."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les dix régions et leur chef-lieu.",
+     "alt": "Dix cases : chaque région avec son chef-lieu. Adamaoua Ngaoundéré, Centre Yaoundé, Est Bertoua, Extrême-Nord Maroua, Littoral Douala, Nord Garoua, Nord-Ouest Bamenda, Ouest Bafoussam, Sud Ebolowa, Sud-Ouest Buea.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 330,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 30.0,
+        "text": "Adamaoua",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 48.0,
+        "text": "Ngaoundéré",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 237.0,
+        "y": 10,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 30.0,
+        "text": "Centre",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 48.0,
+        "text": "Yaoundé",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 72,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 92.0,
+        "text": "Est",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 110.0,
+        "text": "Bertoua",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 237.0,
+        "y": 72,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 92.0,
+        "text": "Extrême-Nord",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 110.0,
+        "text": "Maroua",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 134,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 154.0,
+        "text": "Littoral",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 172.0,
+        "text": "Douala",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 237.0,
+        "y": 134,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 154.0,
+        "text": "Nord",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 172.0,
+        "text": "Garoua",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 196,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 216.0,
+        "text": "Nord-Ouest",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 234.0,
+        "text": "Bamenda",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 237.0,
+        "y": 196,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 216.0,
+        "text": "Ouest",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 234.0,
+        "text": "Bafoussam",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 258,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 278.0,
+        "text": "Sud",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 116.5,
+        "y": 296.0,
+        "text": "Ebolowa",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 237.0,
+        "y": 258,
+        "w": 213.0,
+        "h": 48,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 278.0,
+        "text": "Sud-Ouest",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 343.5,
+        "y": 296.0,
+        "text": "Buea",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le chef-lieu",
+     "md": "Le **chef-lieu** est la ville principale d'une région, où se trouvent les grands services. Le chef-lieu du Centre est Yaoundé ; celui du Littoral est Douala."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : trouver le chef-lieu",
+     "statement": "Quel est le chef-lieu de la région de l'Ouest ?",
+     "steps": [
+      {
+       "md": "On cherche dans la liste : Ouest."
+      },
+      {
+       "md": "À côté de Ouest, on lit **Bafoussam**."
+      }
+     ],
+     "answer": "**Bafoussam.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : compter les régions",
+     "statement": "Ibrahim dit : « Le Cameroun a huit régions. » A-t-il raison ?",
+     "steps": [
+      {
+       "md": "On compte la liste : Adamaoua, Centre, Est, Extrême-Nord, Littoral, Nord, Nord-Ouest, Ouest, Sud, Sud-Ouest."
+      },
+      {
+       "md": "Cela fait 10 régions."
+      }
+     ],
+     "answer": "**Non, il y a 10 régions.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Ne pas confondre",
+     "md": "**Yaoundé** est la capitale politique ; **Douala** est la capitale économique. Ce ne sont pas les mêmes villes."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le Cameroun est parfois appelé « l'Afrique en miniature », car on y trouve des paysages très variés."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-cameroun-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-cameroun-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-cameroun-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-cameroun-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-cameroun-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-cameroun-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la capitale du Cameroun ?",
+   "explanation": "La capitale est Yaoundé.",
+   "difficulty": 1,
+   "choices": [
+    "Bamenda",
+    "Douala",
+    "Garoua",
+    "Yaoundé"
+   ],
+   "answer": 3,
+   "id": "ce2-histoire-geo-cameroun-01",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien le Cameroun compte-t-il de régions ?",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "régions",
+   "explanation": "Le pays compte 10 régions.",
+   "difficulty": 1,
+   "id": "ce2-histoire-geo-cameroun-02",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque région à son chef-lieu.",
+   "pairs": [
+    [
+     "Littoral",
+     "Douala"
+    ],
+    [
+     "Ouest",
+     "Bafoussam"
+    ],
+    [
+     "Sud",
+     "Ebolowa"
+    ],
+    [
+     "Extrême-Nord",
+     "Maroua"
+    ],
+    [
+     "Nord",
+     "Garoua"
+    ]
+   ],
+   "explanation": "Chaque région a un chef-lieu.",
+   "difficulty": 1,
+   "id": "ce2-histoire-geo-cameroun-03",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel océan borde le Cameroun ?",
+   "explanation": "Le Cameroun donne sur l'océan Atlantique (golfe de Guinée).",
+   "difficulty": 2,
+   "choices": [
+    "L'océan Atlantique",
+    "L'océan Pacifique",
+    "La mer Rouge",
+    "L'océan Indien"
+   ],
+   "answer": 0,
+   "id": "ce2-histoire-geo-cameroun-04",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris trois pays voisins du Cameroun.",
+   "model": "Nigeria, Tchad, République centrafricaine, Congo, Gabon, Guinée équatoriale.",
+   "rubric": [
+    "Trois voisins justes."
+   ],
+   "explanation": "Six voisins : Nigeria, Tchad, RCA, Congo, Gabon, Guinée équatoriale.",
+   "difficulty": 2,
+   "id": "ce2-histoire-geo-cameroun-05",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle ville est le chef-lieu de la région du Nord-Ouest ?",
+   "explanation": "Bamenda est le chef-lieu du Nord-Ouest.",
+   "difficulty": 3,
+   "choices": [
+    "Buea",
+    "Bamenda",
+    "Ngaoundéré",
+    "Bertoua"
+   ],
+   "answer": 1,
+   "id": "ce2-histoire-geo-cameroun-06",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la capitale économique du Cameroun ?",
+   "explanation": "Douala est un grand port.",
+   "difficulty": 1,
+   "choices": [
+    "Yaoundé",
+    "Garoua",
+    "Douala",
+    "Ebolowa"
+   ],
+   "answer": 2,
+   "id": "ce2-histoire-geo-cameroun-q1",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Chef-lieu de la région de l'Est ?",
+   "explanation": "C'est Bertoua.",
+   "difficulty": 2,
+   "choices": [
+    "Bertoua",
+    "Kribi",
+    "Maroua",
+    "Limbé"
+   ],
+   "answer": 0,
+   "id": "ce2-histoire-geo-cameroun-q2",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Chef-lieu de la région de l'Adamaoua ?",
+   "explanation": "C'est Ngaoundéré.",
+   "difficulty": 2,
+   "choices": [
+    "Buea",
+    "Garoua",
+    "Ngaoundéré",
+    "Bafoussam"
+   ],
+   "answer": 2,
+   "id": "ce2-histoire-geo-cameroun-q3",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pays est voisin du Cameroun ?",
+   "explanation": "Le Gabon est voisin.",
+   "difficulty": 1,
+   "choices": [
+    "Le Maroc",
+    "Le Gabon",
+    "Le Brésil",
+    "Le Japon"
+   ],
+   "answer": 1,
+   "id": "ce2-histoire-geo-cameroun-q4",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de régions ?",
+   "explanation": "Le Cameroun a 10 régions.",
+   "difficulty": 1,
+   "choices": [
+    "10",
+    "12",
+    "6",
+    "8"
+   ],
+   "answer": 0,
+   "id": "ce2-histoire-geo-cameroun-q5",
+   "chapter": "ce2-histoire-geo-espace",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-cameroun",
+   "source": "Exercice original"
+  }
+ ]
+}

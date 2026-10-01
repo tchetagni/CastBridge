@@ -1,0 +1,470 @@
+{
+ "chapter": "ce2-sciences-corps",
+ "lessons": [
+  {
+   "id": "ce2-sciences-digestion",
+   "title": "Le trajet des aliments dans le corps",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "Le trajet des aliments dans le corps (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les organes que les aliments traversent.",
+    "Expliquer pourquoi on mange et on boit.",
+    "Citer des gestes qui aident à bien digérer."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-sciences-digestion-01",
+    "ce2-sciences-digestion-02",
+    "ce2-sciences-digestion-03",
+    "ce2-sciences-digestion-04",
+    "ce2-sciences-digestion-05",
+    "ce2-sciences-digestion-06"
+   ],
+   "selfCheck": [
+    "ce2-sciences-digestion-q1",
+    "ce2-sciences-digestion-q2",
+    "ce2-sciences-digestion-q3",
+    "ce2-sciences-digestion-q4",
+    "ce2-sciences-digestion-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le niveau de détail (bouche, œsophage, estomac, intestin) correspond au programme du CE2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Pourquoi manges-tu du riz, des haricots ou du plantain ? Les aliments donnent de l'**énergie** pour jouer, courir et étudier. Ils aident aussi le corps à **grandir**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La digestion",
+     "md": "La **digestion**, c'est le travail du corps qui transforme les aliments en petits morceaux très fins. Ces petits morceaux passent ensuite dans le sang et nourrissent tout le corps."
+    },
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Les aliments passent par la bouche, l'œsophage, l'estomac et l'intestin."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le trajet des aliments dans le corps.",
+     "alt": "Quatre cases reliées par des flèches : bouche, œsophage, estomac, intestin, dans cet ordre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 112.5,
+        "h": 56,
+        "fill": "lightorange",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 66.25,
+        "y": 68,
+        "text": "Bouche",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 125.5,
+        "y1": 68,
+        "x2": 149.5,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 152.5,
+        "y": 40,
+        "w": 112.5,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 208.75,
+        "y": 68,
+        "text": "Œsophage",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 268.0,
+        "y1": 68,
+        "x2": 292.0,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 295.0,
+        "y": 40,
+        "w": 112.5,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 351.25,
+        "y": 68,
+        "text": "Estomac",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 410.5,
+        "y1": 68,
+        "x2": 434.5,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 437.5,
+        "y": 40,
+        "w": 112.5,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 493.75,
+        "y": 68,
+        "text": "Intestin",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 130,
+        "text": "Le trajet des aliments",
+        "size": 15,
+        "anchor": "middle",
+        "color": "grey"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le trajet",
+     "md": "1. Dans la **bouche**, les dents coupent et broient les aliments.\n2. L'**œsophage** est un tube qui fait descendre la nourriture.\n3. Dans l'**estomac**, les aliments sont brassés.\n4. Dans l'**intestin**, les bons éléments passent dans le sang. Ce qui reste est rejeté."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le chemin d'une bouchée",
+     "statement": "Ngono avale une bouchée de manioc. Quel chemin suit-elle ?",
+     "steps": [
+      {
+       "md": "Elle est d'abord mâchée dans la **bouche**."
+      },
+      {
+       "md": "Elle descend par l'**œsophage**."
+      },
+      {
+       "md": "Elle arrive dans l'**estomac**, puis dans l'**intestin**."
+      }
+     ],
+     "answer": "**Bouche, œsophage, estomac, intestin.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : bien manger",
+     "statement": "Mballa mange vite sans mâcher. Quel conseil lui donner ?",
+     "steps": [
+      {
+       "md": "Les dents servent à broyer : sans mâcher, l'estomac a plus de mal."
+      },
+      {
+       "md": "Il faut **manger lentement** et bien mâcher."
+      }
+     ],
+     "answer": "**Mâcher longtemps aide la digestion.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Ne confonds pas l'**œsophage** (tube qui descend la nourriture) avec les **poumons** (qui servent à respirer)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "On mange des aliments variés : céréales (riz, mil), légumes, fruits, poisson, viande, haricots.",
+      "Boire de l'eau propre aide le corps à bien fonctionner."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-digestion-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-digestion-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-digestion-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-digestion-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-digestion-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-digestion-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Où commence la digestion ?",
+   "explanation": "Les aliments entrent par la bouche : c'est là que la digestion commence.",
+   "difficulty": 1,
+   "choices": [
+    "Dans la bouche",
+    "Dans le nez",
+    "Dans les poumons",
+    "Dans le pied"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-digestion-01",
+   "chapter": "ce2-sciences-corps",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les aliments donnent de l'énergie au corps.",
+   "answer": true,
+   "explanation": "Oui, manger donne l'énergie pour jouer, travailler et grandir.",
+   "difficulty": 1,
+   "id": "ce2-sciences-digestion-02",
+   "chapter": "ce2-sciences-corps",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque organe à son rôle.",
+   "pairs": [
+    [
+     "la bouche",
+     "broie les aliments"
+    ],
+    [
+     "l'œsophage",
+     "fait descendre la nourriture"
+    ],
+    [
+     "l'estomac",
+     "brasse les aliments"
+    ],
+    [
+     "l'intestin",
+     "laisse passer les bons éléments dans le sang"
+    ]
+   ],
+   "explanation": "Chaque organe a son travail dans le trajet des aliments.",
+   "difficulty": 1,
+   "id": "ce2-sciences-digestion-03",
+   "chapter": "ce2-sciences-corps",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le bon ordre ?",
+   "explanation": "Les aliments entrent par la bouche et finissent dans l'intestin.",
+   "difficulty": 2,
+   "choices": [
+    "œsophage, bouche, intestin, estomac",
+    "intestin, estomac, œsophage, bouche",
+    "bouche, estomac, œsophage, intestin",
+    "bouche, œsophage, estomac, intestin"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-digestion-04",
+   "chapter": "ce2-sciences-corps",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris deux conseils pour bien digérer.",
+   "model": "Mâcher lentement ; manger des aliments variés ; boire de l'eau propre ; se laver les mains avant de manger.",
+   "rubric": [
+    "Deux conseils justes (1 point chacun)."
+   ],
+   "explanation": "Plusieurs réponses sont possibles : mâcher, varier, boire, se laver les mains.",
+   "difficulty": 2,
+   "id": "ce2-sciences-digestion-05",
+   "chapter": "ce2-sciences-corps",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Amina avale un morceau de plantain. Par quel organe passe-t-il juste après la bouche ?",
+   "explanation": "Après la bouche, le plantain descend par l'œsophage, puis arrive dans l'estomac.",
+   "difficulty": 3,
+   "choices": [
+    "L'estomac",
+    "Les poumons",
+    "L'œsophage",
+    "L'intestin"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-digestion-06",
+   "chapter": "ce2-sciences-corps",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait la bouche ?",
+   "explanation": "Les dents coupent et broient.",
+   "difficulty": 1,
+   "choices": [
+    "Elle fabrique des os",
+    "Elle fait respirer",
+    "Elle pompe le sang",
+    "Elle broie les aliments"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-digestion-q1",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe est un tube qui descend la nourriture ?",
+   "explanation": "C'est l'œsophage.",
+   "difficulty": 1,
+   "choices": [
+    "Le poumon",
+    "L'estomac",
+    "L'œsophage",
+    "Le cœur"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-digestion-q2",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où les bons éléments passent-ils dans le sang ?",
+   "explanation": "C'est dans l'intestin.",
+   "difficulty": 2,
+   "choices": [
+    "Dans l'œsophage",
+    "Dans l'intestin",
+    "Dans le nez",
+    "Dans la bouche"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-digestion-q3",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi mange-t-on ?",
+   "explanation": "Les aliments nourrissent le corps.",
+   "difficulty": 1,
+   "choices": [
+    "Pour avoir de l'énergie et grandir",
+    "Pour dormir moins",
+    "Pour avoir chaud seulement",
+    "Pour respirer"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-digestion-q4",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel geste aide à bien digérer ?",
+   "explanation": "Mâcher aide l'estomac.",
+   "difficulty": 1,
+   "choices": [
+    "Ne jamais boire",
+    "Avaler sans mâcher",
+    "Courir en mangeant",
+    "Mâcher lentement"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-digestion-q5",
+   "chapter": "ce2-sciences-corps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-digestion",
+   "source": "Exercice original"
+  }
+ ]
+}

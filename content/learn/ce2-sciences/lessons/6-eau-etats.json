@@ -1,0 +1,461 @@
+{
+ "chapter": "ce2-sciences-matiere",
+ "lessons": [
+  {
+   "id": "ce2-sciences-eau-etats",
+   "title": "L'eau et ses trois états",
+   "minutes": 14,
+   "readAloud": true,
+   "programRef": "L'eau et ses trois états (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les trois états de la matière.",
+    "Décrire la fusion, l'évaporation et la condensation.",
+    "Citer des sources d'eau potable et des usages de l'eau."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-sciences-eau-etats-01",
+    "ce2-sciences-eau-etats-02",
+    "ce2-sciences-eau-etats-03",
+    "ce2-sciences-eau-etats-04",
+    "ce2-sciences-eau-etats-05",
+    "ce2-sciences-eau-etats-06"
+   ],
+   "selfCheck": [
+    "ce2-sciences-eau-etats-q1",
+    "ce2-sciences-eau-etats-q2",
+    "ce2-sciences-eau-etats-q3",
+    "ce2-sciences-eau-etats-q4",
+    "ce2-sciences-eau-etats-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les valeurs 0 °C et 100 °C (niveau de la mer) : elles sont données dans « Pour aller plus loin ».",
+    "Vérifier l'ordre de présentation du cycle de l'eau pour le CE2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Dans une bouteille, l'eau coule. Dans le congélateur, elle devient dure. Au-dessus d'une casserole chaude, elle monte en vapeur. C'est toujours de l'eau !"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les trois états",
+     "md": "- **Solide** : garde sa forme (la glace, une pierre).\n- **Liquide** : coule et prend la forme du récipient (l'eau, le lait).\n- **Gaz** : se répand partout, on ne le voit pas bien (la vapeur d'eau, l'air)."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'eau change d'état.",
+     "alt": "Trois cases : glace (solide), eau (liquide), vapeur (gaz), reliées par des flèches.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 160.0,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 59,
+        "text": "Glace",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 77,
+        "text": "solide",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 173.0,
+        "y1": 68,
+        "x2": 197.0,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 40,
+        "w": 160.0,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 59,
+        "text": "Eau",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 77,
+        "text": "liquide",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 363.0,
+        "y1": 68,
+        "x2": 387.0,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 390.0,
+        "y": 40,
+        "w": 160.0,
+        "h": 56,
+        "fill": "lightgrey",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 59,
+        "text": "Vapeur",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 77,
+        "text": "gaz",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 130,
+        "text": "L'eau peut changer d'état",
+        "size": 15,
+        "anchor": "middle",
+        "color": "grey"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les changements d'état",
+     "md": "- **Fusion** : le solide devient liquide (la glace fond).\n- **Solidification** : le liquide devient solide (l'eau gèle).\n- **Évaporation** : le liquide devient gaz (le linge sèche).\n- **Condensation** : le gaz devient liquide (gouttes sur un verre froid)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le linge",
+     "statement": "Fotso étend du linge mouillé au soleil. Après une heure il est sec. Où est passée l'eau ?",
+     "steps": [
+      {
+       "md": "L'eau liquide chauffée par le soleil devient de la **vapeur**."
+      },
+      {
+       "md": "La vapeur se mélange à l'air : c'est l'**évaporation**."
+      }
+     ],
+     "answer": "**L'eau s'est évaporée.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le verre froid",
+     "statement": "Des gouttes apparaissent autour d'un verre d'eau glacée. Pourquoi ?",
+     "steps": [
+      {
+       "md": "La vapeur d'eau de l'air touche le verre froid."
+      },
+      {
+       "md": "Elle redevient liquide : c'est la **condensation**."
+      }
+     ],
+     "answer": "**La vapeur de l'air se condense.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'eau potable",
+     "md": "L'**eau potable** est une eau propre qu'on peut boire sans danger : eau du robinet traitée, forage, puits protégé. On utilise l'eau pour boire, cuisiner, se laver et arroser. Il ne faut pas la **gaspiller**."
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'eau gèle à 0 °C. Elle bout à 100 °C (au niveau de la mer).",
+      "L'**air** est un gaz : on ne le voit pas, mais on sent le vent."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-eau-etats-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-eau-etats-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-eau-etats-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-eau-etats-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-eau-etats-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-eau-etats-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Dans quel état est la glace ?",
+   "explanation": "La glace est de l'eau solide.",
+   "difficulty": 1,
+   "choices": [
+    "Gaz",
+    "Solide",
+    "Liquide",
+    "Fumée"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-eau-etats-01",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'eau liquide prend la forme de son récipient.",
+   "answer": true,
+   "explanation": "Un liquide prend la forme du verre ou de la bouteille.",
+   "difficulty": 1,
+   "id": "ce2-sciences-eau-etats-02",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque changement à son nom.",
+   "pairs": [
+    [
+     "la glace fond",
+     "fusion"
+    ],
+    [
+     "l'eau devient vapeur",
+     "évaporation"
+    ],
+    [
+     "la vapeur devient gouttes",
+     "condensation"
+    ],
+    [
+     "l'eau devient glace",
+     "solidification"
+    ]
+   ],
+   "explanation": "Chaque changement d'état a un nom.",
+   "difficulty": 1,
+   "id": "ce2-sciences-eau-etats-03",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que se passe-t-il quand une flaque disparaît au soleil ?",
+   "explanation": "La chaleur transforme l'eau liquide en vapeur.",
+   "difficulty": 2,
+   "choices": [
+    "L'eau entre dans la glace",
+    "L'eau s'évapore",
+    "L'eau gèle",
+    "L'eau devient du sable"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-eau-etats-04",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Donne un exemple de solide, de liquide et de gaz.",
+   "model": "Solide : pierre ; liquide : eau ; gaz : air.",
+   "rubric": [
+    "Un exemple pour chaque état."
+   ],
+   "explanation": "Plusieurs exemples sont possibles.",
+   "difficulty": 2,
+   "id": "ce2-sciences-eau-etats-05",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Du lait chaud est laissé dans une casserole ouverte, il en reste moins. Quelle explication est juste ?",
+   "explanation": "Une partie du liquide est partie en vapeur.",
+   "difficulty": 3,
+   "choices": [
+    "Il est devenu solide",
+    "Il est tombé dans le sol",
+    "Une partie s'est évaporée",
+    "Il a gelé"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-eau-etats-06",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'état de l'air ?",
+   "explanation": "L'air est un gaz.",
+   "difficulty": 1,
+   "choices": [
+    "Solide",
+    "Glace",
+    "Liquide",
+    "Gaz"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-eau-etats-q1",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand la glace fond, elle devient…",
+   "explanation": "C'est la fusion.",
+   "difficulty": 1,
+   "choices": [
+    "du sable",
+    "du gaz",
+    "de l'eau liquide",
+    "de la pierre"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-eau-etats-q2",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment appelle-t-on le passage du liquide au gaz ?",
+   "explanation": "Liquide → gaz : évaporation.",
+   "difficulty": 2,
+   "choices": [
+    "La condensation",
+    "L'évaporation",
+    "La fusion",
+    "La solidification"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-eau-etats-q3",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'une eau potable ?",
+   "explanation": "On peut la boire sans danger.",
+   "difficulty": 1,
+   "choices": [
+    "Une eau propre qu'on peut boire",
+    "Une eau de flaque",
+    "De l'eau salée de la mer",
+    "Une eau avec des déchets"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-eau-etats-q4",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'un solide ?",
+   "explanation": "Un solide garde sa forme.",
+   "difficulty": 2,
+   "choices": [
+    "Ce qui se répand partout",
+    "Ce qui coule",
+    "Ce qu'on ne voit pas",
+    "Ce qui garde sa forme"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-eau-etats-q5",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-eau-etats",
+   "source": "Exercice original"
+  }
+ ]
+}

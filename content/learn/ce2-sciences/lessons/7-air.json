@@ -1,0 +1,351 @@
+{
+ "chapter": "ce2-sciences-matiere",
+ "lessons": [
+  {
+   "id": "ce2-sciences-air",
+   "title": "L'air autour de nous",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "L'air autour de nous (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Montrer que l'air existe même si on ne le voit pas.",
+    "Dire que l'air prend de la place.",
+    "Expliquer ce qu'est le vent et citer ses usages."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-sciences-air-01",
+    "ce2-sciences-air-02",
+    "ce2-sciences-air-03",
+    "ce2-sciences-air-04",
+    "ce2-sciences-air-05",
+    "ce2-sciences-air-06"
+   ],
+   "selfCheck": [
+    "ce2-sciences-air-q1",
+    "ce2-sciences-air-q2",
+    "ce2-sciences-air-q3",
+    "ce2-sciences-air-q4",
+    "ce2-sciences-air-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que les expériences proposées (ballon, bouteille retournée) sont réalisables en classe sans danger."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "On ne voit pas l'air, on ne le sent pas toujours. Pourtant il est partout autour de nous !"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'air existe",
+     "md": "- L'air est un **gaz** invisible.\n- On le **sent** quand il y a du vent.\n- Il **prend de la place** : un ballon gonflé est plein d'air.\n- Il est nécessaire aux êtres vivants."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un ballon gonflé contient de l'air qui prend de la place.",
+     "alt": "Deux barres : le ballon vide est petit, le ballon gonflé est plus grand.",
+     "figure": {
+      "kind": "bars",
+      "bars": [
+       {
+        "label": "Ballon vide",
+        "value": 1,
+        "color": "lightgrey"
+       },
+       {
+        "label": "Ballon gonflé",
+        "value": 5,
+        "color": "blue"
+       }
+      ],
+      "unit": "place prise par l'air (dessin)",
+      "w": 440,
+      "h": 240
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : prouver que l'air existe",
+     "statement": "Comment montrer que l'air existe avec un ballon ?",
+     "steps": [
+      {
+       "md": "On gonfle un ballon avec la bouche."
+      },
+      {
+       "md": "Le ballon grossit : il est rempli d'air, même si on ne le voit pas."
+      }
+     ],
+     "answer": "**Le ballon gonflé prouve que l'air existe.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le vent",
+     "statement": "Mballa fait voler un cerf-volant. Qu'est-ce qui le fait monter ?",
+     "steps": [
+      {
+       "md": "Le **vent** est de l'air qui bouge."
+      },
+      {
+       "md": "L'air en mouvement pousse le cerf-volant."
+      }
+     ],
+     "answer": "**Le vent, c'est de l'air en mouvement.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "À quoi sert le vent ?",
+     "md": "Le vent fait avancer les voiliers, sécher le linge et tourner des éoliennes. Un vent très fort peut abîmer des toits."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Mets une bouteille vide, bouchon vers le haut, dans un seau d'eau : l'air empêche l'eau d'entrer. (À faire avec un adulte.)"
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-air-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-air-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-air-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-air-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-air-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-sciences-air-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "L'air est…",
+   "explanation": "L'air est un gaz invisible.",
+   "difficulty": 1,
+   "choices": [
+    "un solide",
+    "un gaz",
+    "une pierre",
+    "un liquide coloré"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-air-01",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'air prend de la place.",
+   "answer": true,
+   "explanation": "Un ballon gonflé grossit parce qu'il contient de l'air.",
+   "difficulty": 1,
+   "id": "ce2-sciences-air-02",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque idée à son exemple.",
+   "pairs": [
+    [
+     "air en mouvement",
+     "le vent"
+    ],
+    [
+     "objet rempli d'air",
+     "un ballon gonflé"
+    ],
+    [
+     "objet poussé par le vent",
+     "un cerf-volant"
+    ],
+    [
+     "sert à respirer",
+     "l'air"
+    ]
+   ],
+   "explanation": "Le vent est de l'air qui bouge.",
+   "difficulty": 1,
+   "id": "ce2-sciences-air-03",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi un ballon gonflé est-il plus gros qu'un ballon vide ?",
+   "explanation": "L'air gonfle le ballon.",
+   "difficulty": 2,
+   "choices": [
+    "Il est plus lourd en métal",
+    "Il est collé",
+    "Il contient de l'air",
+    "Il contient du sable"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-air-04",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Cite deux usages du vent.",
+   "model": "Faire avancer un voilier ; sécher le linge ; faire voler un cerf-volant ; faire tourner une éolienne.",
+   "rubric": [
+    "Deux usages justes (1 point chacun)."
+   ],
+   "explanation": "Voiliers, linge, cerf-volant, éoliennes.",
+   "difficulty": 2,
+   "id": "ce2-sciences-air-05",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un pneu de vélo est dégonflé. Qu'est-ce qui manque dedans ?",
+   "explanation": "Le pneu est gonflé d'air.",
+   "difficulty": 3,
+   "choices": [
+    "Du sable",
+    "De l'eau",
+    "De la peinture",
+    "De l'air"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-air-06",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Peut-on voir l'air ?",
+   "explanation": "L'air est invisible.",
+   "difficulty": 1,
+   "choices": [
+    "Oui, il est rouge",
+    "Oui, il est bleu",
+    "Non, il est invisible",
+    "Oui, c'est de l'eau"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-air-q1",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le vent, c'est…",
+   "explanation": "L'air qui bouge est du vent.",
+   "difficulty": 1,
+   "choices": [
+    "de l'air en mouvement",
+    "de l'eau",
+    "du sable",
+    "de la chaleur seulement"
+   ],
+   "answer": 0,
+   "id": "ce2-sciences-air-q2",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'y a-t-il dans un ballon gonflé ?",
+   "explanation": "Il est rempli d'air.",
+   "difficulty": 1,
+   "choices": [
+    "Rien du tout",
+    "De l'eau",
+    "De la terre",
+    "De l'air"
+   ],
+   "answer": 3,
+   "id": "ce2-sciences-air-q3",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert l'air ?",
+   "explanation": "Les êtres vivants ont besoin d'air.",
+   "difficulty": 1,
+   "choices": [
+    "À écrire",
+    "À couper",
+    "À respirer",
+    "À coller"
+   ],
+   "answer": 2,
+   "id": "ce2-sciences-air-q4",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'air est un…",
+   "explanation": "C'est un gaz.",
+   "difficulty": 2,
+   "choices": [
+    "solide",
+    "gaz",
+    "liquide",
+    "métal"
+   ],
+   "answer": 1,
+   "id": "ce2-sciences-air-q5",
+   "chapter": "ce2-sciences-matiere",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-sciences-air",
+   "source": "Exercice original"
+  }
+ ]
+}
