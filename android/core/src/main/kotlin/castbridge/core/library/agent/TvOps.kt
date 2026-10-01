@@ -12,12 +12,15 @@ object TvSnapshot {
     @Suppress("UNCHECKED_CAST")
     fun read(client: TvClient, now: Long = System.currentTimeMillis()): LibrarySnapshot {
         val lib = JsonLite.obj(client.library())
+        // the TV evaluates the parental control (it owns the configuration) and says so per file; a TV that does not is treated as "all protected"
+        val aware = lib.bool("guard") == true
         val files = (lib["files"] as? List<Map<String, Any?>>).orEmpty().map { o ->
-            FileRef(Origin.TV, o.str("name").orEmpty(), o.long("size") ?: 0, o.long("mtime") ?: 0, volumeId = o.str("volume").orEmpty(), folder = "",
+            FileRef(Origin.TV, o.str("name").orEmpty(), o.long("size") ?: 0, o.long("mtime") ?: 0, volumeId = o.str("volume").orEmpty(), folder = o.str("folder").orEmpty(),
                 durationMs = o.long("durationMs") ?: 0, watched = o.bool("watched") ?: false, playedAtMs = o.long("playedAt") ?: 0,
-                resumeMs = o.long("resumeMs") ?: 0, playing = o.bool("playing") ?: false)
+                resumeMs = o.long("resumeMs") ?: 0, playing = o.bool("playing") ?: false,
+                guarded = !aware || o.bool("protected") != false)
         }.filter { it.name.isNotEmpty() }
-        return LibrarySnapshot(Origin.TV, files, volumes(client), now)
+        return LibrarySnapshot(Origin.TV, files, volumes(client), now, childActive = lib.bool("childActive") == true, guardUnsupported = !aware, foldersSupported = lib.bool("folders") == true)
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -65,7 +68,11 @@ class TvFingerprinter(private val client: TvClient, private val window: Int = 64
  */
 class TvLibraryOps(private val client: TvClient, private val sleep: (Long) -> Unit = Thread::sleep, private val now: () -> Long = System::currentTimeMillis,
                    private val moveTimeoutMs: Long = 6 * 3_600_000L) : LibraryOps {
-    override val folders = false
+    /** Virtual folders: only when the TV says so (`folders:true` in /api/library); an older TV keeps a flat list. */
+    @Volatile private var foldersFlag = false
+    override val folders: Boolean get() { runCatching { rows() }; return foldersFlag }
+    /** The TV library has one name space: a name cannot exist twice, whatever the folder. */
+    override val flatNames = true
 
     private data class Row(val volume: String, val name: String, val size: Long, val playing: Boolean)
     @Volatile private var cache: Pair<Long, List<Row>>? = null
@@ -74,6 +81,7 @@ class TvLibraryOps(private val client: TvClient, private val sleep: (Long) -> Un
     private fun rows(): List<Row> {
         cache?.let { if (now() - it.first < 1500) return it.second }
         val j = JsonLite.obj(client.library())
+        foldersFlag = j.bool("folders") == true
         val l = (j["files"] as? List<Map<String, Any?>>).orEmpty().map { Row(it.str("volume").orEmpty(), it.str("name").orEmpty(), it.long("size") ?: 0, it.bool("playing") ?: false) }
         cache = now() to l
         return l
@@ -90,8 +98,19 @@ class TvLibraryOps(private val client: TvClient, private val sleep: (Long) -> Un
 
     override fun isPlaying(loc: Loc): Boolean = rows().any { it.name == loc.name && (loc.volume.isEmpty() || it.volume == loc.volume) && it.playing }
 
-    override fun mkdirs(volume: String, folder: String): OpResult = OpResult.Fail("la bibliothèque de la TV n'a pas de dossiers")
-    override fun moveToFolder(loc: Loc, folder: String): OpResult = OpResult.Fail("la bibliothèque de la TV n'a pas de dossiers")
+    /** A TV folder exists as soon as a file is in it: nothing to create. */
+    override fun mkdirs(volume: String, folder: String): OpResult =
+        if (folders) OpResult.Ok(Loc(volume, folder, "")) else OpResult.Fail("cette TV ne gère pas les dossiers : mettez CastBridge-TV à jour")
+
+    /** Puts the file in a (virtual) folder: moves no byte, changes nothing on the volumes. */
+    override fun moveToFolder(loc: Loc, folder: String): OpResult = try {
+        val j = JsonLite.obj(client.raw("POST", "/api/folders/set?name=${TvClient.enc(loc.name)}&folder=${TvClient.enc(folder)}"))
+        changed(); OpResult.Ok(loc.copy(folder = j.str("folder") ?: folder))
+    } catch (e: TvClient.HttpError) {
+        if (e.code == 404 && runCatching { JsonLite.obj(e.message.orEmpty().substringAfter(": ", "")).str("error") }.getOrNull() == "not found" && !folders)
+            OpResult.Fail("cette TV ne gère pas les dossiers : mettez CastBridge-TV à jour")
+        else httpFail(e)
+    } catch (e: java.io.IOException) { OpResult.Fail("TV injoignable : ${e.message}") }
 
     private fun httpFail(e: TvClient.HttpError): OpResult.Fail {
         val body = e.message.orEmpty().substringAfter(": ", "")
@@ -99,7 +118,10 @@ class TvLibraryOps(private val client: TvClient, private val sleep: (Long) -> Un
         return OpResult.Fail(when {
             e.code == 401 -> "code PIN refusé"
             msg == "target exists" -> "ce nom existe déjà sur la TV"
-            msg == "moving" || msg == "playing" -> "le fichier est en cours d'utilisation"
+            msg == "moving" -> "le fichier est en cours de déplacement"
+            msg == "playing" -> "le fichier est en cours de lecture"
+            msg == "streaming" -> "le fichier est en cours de lecture sur un téléphone"
+            msg == "uploading" -> "le fichier est en cours d'envoi"
             msg == "not found" || msg == "no such file" -> "fichier introuvable sur la TV"
             msg == "not in the bin" || msg.startsWith("not in the bin") -> "n'est plus dans la corbeille (expiré ?)"
             else -> msg
@@ -107,7 +129,7 @@ class TvLibraryOps(private val client: TvClient, private val sleep: (Long) -> Un
     }
 
     override fun rename(loc: Loc, newName: String): OpResult = try {
-        client.rename(loc.name, newName); changed(); OpResult.Ok(loc.copy(name = newName))
+        client.rename(loc.name, newName, safe = true); changed(); OpResult.Ok(loc.copy(name = newName))
     } catch (e: TvClient.HttpError) { httpFail(e) } catch (e: java.io.IOException) { OpResult.Fail("TV injoignable : ${e.message}") }
 
     @Suppress("UNCHECKED_CAST")
@@ -153,7 +175,7 @@ class TvLibraryOps(private val client: TvClient, private val sleep: (Long) -> Un
     override fun restore(trashId: String, original: Loc): OpResult = try {
         val j = JsonLite.obj(client.raw("POST", "/api/trash/restore?id=${TvClient.enc(trashId)}"))
         changed()
-        OpResult.Ok(Loc(j.str("volume") ?: original.volume, "", j.str("name") ?: original.name))
+        OpResult.Ok(Loc(j.str("volume") ?: original.volume, j.str("folder").orEmpty(), j.str("name") ?: original.name))
     } catch (e: TvClient.HttpError) { httpFail(e) } catch (e: java.io.IOException) { OpResult.Fail("TV injoignable : ${e.message}") }
 
     @Suppress("UNCHECKED_CAST")

@@ -96,6 +96,8 @@ class TvService : Service(), Device {
     var pin = ""; private set
     var server: ReceiverServer? = null; private set
     var library: LibraryProvider? = null; private set
+    /** Virtual folders of the library (docs/LIBRARY-AGENT.md, "Dossiers sur la TV"): files stay flat, a folder is a label kept here. */
+    private val folderIndex by lazy { castbridge.core.tv.FolderIndex(File(filesDir, "folders.db")) }
     var bt: BtServer? = null; private set
     /** « Téléphones de confiance » (docs/BT-PLUG-AND-PLAY.md): who may use the TV without the PIN, and the pairing window. */
     lateinit var trust: castbridge.core.trust.TrustRegistry; private set
@@ -196,13 +198,17 @@ class TvService : Service(), Device {
             extension = ApiExtension(::extraApi).then(RemoteHub.api.also { RemoteHub.install(this) }).then(TvDownloads.start(this, registry) { server?.target ?: "auto" }.manager.apiExtension).then(ParentalHub.api)
                 .then(LearnHub.also { it.attach(this) }.api(this))   // « Apprendre » (docs/LEARN.md)
                 // « Corbeille CastBridge » of the phone's library assistant (docs/LIBRARY-AGENT.md): recoverable for 30 days, behind the PIN
-                .then(castbridge.core.library.agent.TrashApi(registry, playing = { playerBridge.state().takeIf { it.state != "idle" }?.name }, library = library))
+                .then(castbridge.core.library.agent.TrashApi(registry, playing = { playerBridge.state().takeIf { it.state != "idle" }?.name }, library = library,
+                    busy = { name -> server?.busyReason(name) }, folders = folderIndex, changed = { server?.changed() }))
+                .then(castbridge.core.tv.FoldersApi(folderIndex) { server?.libraryItems()?.map { it.name }?.toSet().orEmpty() })
                 .then(QuizHub.packApi(this)),   // question packs pushed by the phone (docs/QUIZ.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
             publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
-            tokenAuth = trust::verifyToken)
+            tokenAuth = trust::verifyToken,
+            // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
+            contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex)
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {

@@ -43,7 +43,7 @@ class Executor(
             if (cancelled()) return@forEachIndexed
             if (c.id in already) { reports += StepReport(c.id, c.file.name, State.DONE, "déjà fait (reprise)"); if (c.type == ChangeType.TRASH) trashedKeys += c.file.key; return@forEachIndexed }
             progress(ExecProgress(i, changes.size, c.file.name))
-            reports += runChange(c, runId, confirmDeletions, trashedKeys, { d, t -> progress(ExecProgress(i, changes.size, c.file.name, d, t)) }, cancelled)
+            reports += runChange(c, runId, confirmDeletions, plan.childActive, trashedKeys, { d, t -> progress(ExecProgress(i, changes.size, c.file.name, d, t)) }, cancelled)
         }
         return RunResult(runId, reports)
     }
@@ -78,11 +78,11 @@ class Executor(
         return StepReport(c.id, c.file.name, State.SKIPPED, why)
     }
 
-    private fun runChange(c: Change, runId: String, confirm: Boolean, trashed: MutableSet<String>, onBytes: (Long, Long) -> Unit, cancelled: () -> Boolean): StepReport {
+    private fun runChange(c: Change, runId: String, confirm: Boolean, planChild: Boolean, trashed: MutableSet<String>, onBytes: (Long, Long) -> Unit, cancelled: () -> Boolean): StepReport {
         val f = c.file
         problem(c)?.let { return skipped(runId, c, it) }
-        if (ctx.guard.childProfileActive) return skipped(runId, c, "profil enfant actif : aucune modification")
-        if (ctx.guard.isProtected(f)) return skipped(runId, c, "protégé par le contrôle parental")
+        if (planChild || ctx.guard.childProfileActive) return skipped(runId, c, "profil enfant actif : aucune modification")
+        if (f.guarded || ctx.guard.isProtected(f)) return skipped(runId, c, "protégé par le contrôle parental")
         if (c.type == ChangeType.TRASH && !confirm) return skipped(runId, c, "suppression non confirmée")
         val loc = f.loc
         if (f.playing || ops.isPlaying(loc)) return skipped(runId, c, "en cours de lecture")
@@ -131,7 +131,7 @@ class Executor(
                 else -> {}
             }
             var name = cur.name
-            if (ops.nameTaken(Loc(cur.volume, wantFolder, name))) {           // same name already in the target folder: make ours unique first
+            if (!ops.flatNames && ops.nameTaken(Loc(cur.volume, wantFolder, name))) {           // same name already in the target folder: make ours unique first
                 val free = freeName(cur.volume, wantFolder, name)
                 val seq = journal.nextSeq()
                 val to = cur.copy(name = free)
@@ -254,7 +254,7 @@ class Executor(
                     to == null -> fail("journal incomplet")
                     ops.stat(to) == null -> fail("le fichier « ${to.name} » n'est plus là")
                     ops.isPlaying(to) -> fail("en cours de lecture")
-                    ops.nameTaken(Loc(e.from.volume, e.from.folder, to.name)) -> fail("un fichier du même nom est déjà dans « ${e.from.folder.ifEmpty { "la racine" }} »")
+                    !ops.flatNames && ops.nameTaken(Loc(e.from.volume, e.from.folder, to.name)) -> fail("un fichier du même nom est déjà dans « ${e.from.folder.ifEmpty { "la racine" }} »")
                     else -> when (val x = ops.moveToFolder(to, e.from.folder)) { is OpResult.Ok -> ok(); is OpResult.Fail -> fail(x.reason) }
                 }
                 Op.MOVE_VOLUME -> when {

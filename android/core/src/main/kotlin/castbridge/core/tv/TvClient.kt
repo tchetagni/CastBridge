@@ -44,7 +44,8 @@ class TvClient(val base: String, val pin: String? = null) {
         call("POST", "/api/update/install?name=${enc(name)}" + if (force) "&force=1" else "")
     fun setVolume(pct: Int) = call("POST", "/api/volume?pct=$pct")
     fun restart() = call("POST", "/api/restart")
-    fun rename(name: String, to: String) = call("POST", "/api/rename?name=${enc(name)}&to=${enc(to)}")
+    /** [safe]: the TV refuses (409 "playing") instead of stopping the video that is playing (the assistant uses it). */
+    fun rename(name: String, to: String, safe: Boolean = false) = call("POST", "/api/rename?name=${enc(name)}&to=${enc(to)}" + if (safe) "&safe=1" else "")
     // ---- storage (see docs/STORAGE.md) ----
     fun storage(): String = call("GET", "/api/storage")
     /** [value] = "auto", "internal" or a volume id from [storage]. */

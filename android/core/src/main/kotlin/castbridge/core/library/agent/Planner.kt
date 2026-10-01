@@ -80,7 +80,7 @@ class Planner(private val ctx: AgentContext, private val learned: LearnedRules? 
         for (i in live.sortedWith(compareBy({ it.file.origin }, { it.file.folder }, { it.file.name }))) {
             val f = i.file; val p = i.parsed
             val wantName = i.proposal.name
-            val wantFolder = if (ctx.folders && f.origin == Origin.PHONE) i.proposal.folder else null
+            val wantFolder = if ((ctx.folders && f.origin == Origin.PHONE) || (snapshot.foldersSupported && f.origin == Origin.TV)) i.proposal.folder else null
             val nameChanges = wantName != f.name && !wantName.equals(f.name, ignoreCase = true)
             val folderChanges = wantFolder != null && !wantFolder.equals(f.folder, ignoreCase = true)
             // never rename what we do not understand, unless a download site left its mark; loose unknown files only go to "À trier"

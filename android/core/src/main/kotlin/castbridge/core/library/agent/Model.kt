@@ -38,6 +38,8 @@ data class FileRef(
     val playing: Boolean = false,
     /** Partial fingerprint (hash of head + tail), filled only for duplicate candidates. */
     val fingerprint: String? = null,
+    /** Marked by the parental control (the TV said so, or a [ContentGuard] did): never renamed, moved, trashed, listed or sent. */
+    val guarded: Boolean = false,
 ) {
     val key: String get() = "${origin.name}|$volumeId|$folder|$name"
     val loc: Loc get() = Loc(volumeId, folder, name)
@@ -66,7 +68,17 @@ data class VolumeInfo(
 }
 
 /** What the agent read: files and volumes at a given time. */
-data class LibrarySnapshot(val origin: Origin, val files: List<FileRef>, val volumes: List<VolumeInfo>, val takenAtMs: Long = 0)
+data class LibrarySnapshot(
+    val origin: Origin, val files: List<FileRef>, val volumes: List<VolumeInfo>, val takenAtMs: Long = 0,
+    /** A child profile is active on the TV: the agent only gives advice. */
+    val childActive: Boolean = false,
+    /** Files left out of [files] because the parental control protects them (only their number is kept, never their names). */
+    val protectedCount: Int = 0,
+    /** The TV did not say whether the parental control is on (older version): everything is treated as protected. */
+    val guardUnsupported: Boolean = false,
+    /** The source keeps folders for its files (phone: real folders; TV: virtual folders, `/api/library` says `folders:true`). */
+    val foldersSupported: Boolean = false,
+)
 
 /** A parental-control hook: marked content is never renamed, moved or trashed, and never sent anywhere. */
 interface ContentGuard {

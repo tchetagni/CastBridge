@@ -13,8 +13,11 @@ sealed class OpResult {
  * must refuse anything outside the library.
  */
 interface LibraryOps {
-    /** Folders exist (phone) or not (the TV library is flat). */
+    /** Folders exist (phone: real folders; TV: virtual folders, when the TV says so) or not (an old TV: flat list). */
     val folders: Boolean
+
+    /** One name space for the whole library whatever the folder (TV): the same name cannot exist in two folders. */
+    val flatNames: Boolean get() = false
 
     /** Live volumes with their current free space. */
     fun volumes(): List<VolumeInfo>

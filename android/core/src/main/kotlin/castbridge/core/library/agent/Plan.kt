@@ -46,7 +46,9 @@ data class Change(
 /** A file the agent deliberately leaves alone, and why (shown in the plan, never hidden). */
 data class Skipped(val file: FileRef, val reason: String)
 
-data class Plan(val changes: List<Change>, val skipped: List<Skipped> = emptyList(), val notes: List<String> = emptyList()) {
+data class Plan(val changes: List<Change>, val skipped: List<Skipped> = emptyList(), val notes: List<String> = emptyList(),
+                /** A child profile was active when the plan was made: the executor changes nothing. */
+                val childActive: Boolean = false) {
     val renames get() = changes.filter { it.type == ChangeType.RENAME }
     val moves get() = changes.filter { it.type == ChangeType.MOVE }
     val trash get() = changes.filter { it.type == ChangeType.TRASH }

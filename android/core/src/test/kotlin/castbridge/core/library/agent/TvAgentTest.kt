@@ -11,7 +11,7 @@ import kotlin.random.Random
 import kotlin.test.*
 
 /** A real TV server (two folders standing for the internal memory and a USB key) with the bin routes, driven over HTTP like the phone does. */
-class AgentRig(pin: String? = "123456", withTrash: Boolean = true, now: () -> Long = System::currentTimeMillis, retentionMs: Long = TrashApi.RETENTION_MS) {
+class AgentRig(pin: String? = "123456", withTrash: Boolean = true, withFolders: Boolean = false, now: () -> Long = System::currentTimeMillis, retentionMs: Long = TrashApi.RETENTION_MS) {
     val root = kotlin.io.path.createTempDirectory("agent").toFile()
     val internalDir = File(root, "internal").apply { mkdirs() }
     val usbDir = File(root, "usb").apply { mkdirs() }
@@ -25,9 +25,13 @@ class AgentRig(pin: String? = "123456", withTrash: Boolean = true, now: () -> Lo
     }) { v -> capacity[v.id]?.let { it - used(v.dir) } ?: v.dir.usableSpace }.also { it.refresh() }
     val port = ServerSocket(0).use { it.localPort }
     val base = "http://127.0.0.1:$port"
-    val trashApi = TrashApi(registry, playing = { player.state().takeIf { it.state != "idle" }?.name }, now = now, retentionMs = retentionMs)
+    @Volatile private var srv: ReceiverServer? = null
+    val index: FolderIndex? = if (withFolders) FolderIndex(null) else null
+    val trashApi = TrashApi(registry, playing = { player.state().takeIf { it.state != "idle" }?.name }, now = now, retentionMs = retentionMs, busy = { srv?.busyReason(it) }, folders = index, changed = { srv?.changed() })
     val server = ReceiverServer(registry, player, port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), pin = pin,
-        guard = pin?.let { PinGuard(it, maxFailures = 1000) }, extension = if (withTrash) trashApi else null).apply { start(5000, false) }
+        guard = pin?.let { PinGuard(it, maxFailures = 1000) }, extension = if (!withTrash) null else if (index != null) trashApi.then(FoldersApi(index) { srv?.libraryItems()?.map { it.name }?.toSet().orEmpty() }) else trashApi,
+        folders = index,
+        contentFlags = object : ContentFlags { override fun childActive() = false; override fun protectedNames(items: List<LibraryItem>) = emptySet<String>() }).apply { start(5000, false); srv = this }
     val tv = TvClient(base, pin)
 
     fun used(d: File) = d.walkTopDown().filter { it.isFile && !it.path.contains(TrashApi.BIN) }.sumOf { it.length() }

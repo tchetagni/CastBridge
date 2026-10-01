@@ -230,7 +230,9 @@ class AgentPlanTest {
         }
         val a = analyze(snap(tv("Film.Adulte.2020.1080p.mkv"), tv("Prison.Break.S01E01.mkv", playing = true), tv("Prison.Break.S01E02.mkv")), CTX.copy(guard = guard))
         assertEquals(listOf("Prison Break – S01E02.mkv"), a.plan.renames.map { it.toName })
-        assertEquals(setOf("protégé par le contrôle parental", "en cours de lecture"), a.plan.skipped.map { it.reason }.toSet())
+        assertEquals(setOf("en cours de lecture"), a.plan.skipped.map { it.reason }.toSet(), "a protected file is not even listed as skipped")
+        assertEquals(1, a.snapshot.protectedCount)
+        assertTrue(a.snapshot.files.none { it.name.contains("Adulte") })
         val child = object : ContentGuard { override fun isProtected(file: FileRef) = false; override val childProfileActive = true }
         val c = analyze(snap(tv("Prison.Break.S01E02.mkv")), CTX.copy(guard = child))
         assertTrue(c.plan.changes.isEmpty())
