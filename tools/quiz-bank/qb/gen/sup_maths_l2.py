@@ -1406,8 +1406,8 @@ def ode1_sep(rng, d):
     a, y0, x1 = nz(rng, -6, 6), rng.randint(1, 6), rng.randint(1, 3)
     e = F(a * x1 * x1, 2)
     val = y0 * math.exp(float(e))
-    num_val = rk4(lambda x, y: a * x * y, float(y0), 0.0, float(x1))
-    assert close(num_val, val, 1e-8)
+    num_val = rk4(lambda x, y: a * x * y, float(y0), 0.0, float(x1), 6000)
+    assert abs(num_val - val) <= 1e-6 * max(1e-3, abs(val)) + 1e-9, (a, y0, x1, num_val, val)
     right = coef(F(y0), ex(e))
     wr = [coef(F(y0), ex(F(a * x1 * x1))), coef(F(y0), ex(F(a * x1))), coef(F(y0), ex(F(a, 2))), coef(F(y0 * a), ex(e)), coef(F(y0), ex(F(a * x1 * x1, 4))), coef(F(y0), ex(e + 1))]
     return Draft(f"Quelle est la valeur en x = {x1} de la solution de y' = {'' if abs(a) == 1 and a > 0 else (MINUS if a == -1 else a)}xy avec y(0) = {y0} ?".replace(f"y' = {a}xy", f"y' = {num(a)}xy"), right, dedup(wr, right),
@@ -1431,18 +1431,18 @@ def _expterm(r, cname):
 def ode2_general(rng, d):
     kind = rng.choice(["real", "real", "double", "complex"])
     if kind == "real":
-        r1, r2 = rng.sample(range(-5, 6), 2)
+        r1, r2 = rng.sample(range(-9, 10), 2)
         r1, r2 = min(r1, r2), max(r1, r2)
         p, q = -(r1 + r2), r1 * r2
         right = f"{_expterm(r1, 'C₁')} + {_expterm(r2, 'C₂')}"
         sol = lambda x, c1, c2: c1 * math.exp(r1 * x) + c2 * math.exp(r2 * x)
     elif kind == "double":
-        r = rng.randint(-5, 5)
+        r = rng.randint(-9, 9)
         p, q = -2 * r, r * r
         right = f"(C₁ + C₂x){exx(r)}" if r else "C₁ + C₂x"
         sol = lambda x, c1, c2: (c1 + c2 * x) * math.exp(r * x)
     else:
-        al, be = rng.randint(-3, 3), rng.randint(1, 4)
+        al, be = rng.randint(-5, 5), rng.randint(1, 6)
         p, q = -2 * al, al * al + be * be
         trig = f"C₁cos({be}x) + C₂sin({be}x)" if be != 1 else "C₁cos x + C₂sin x"
         right = f"{exx(al)}({trig})" if al else trig

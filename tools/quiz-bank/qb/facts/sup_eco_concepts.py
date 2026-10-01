@@ -2,8 +2,6 @@
 Faits rédigés à la main (principes, définitions, institutions, attributions d'auteurs) : aucun chiffre d'actualité, aucune date
 incertaine. Tout est en statut `review` : une relecture par un enseignant d'économie reste nécessaire."""
 from .sup_kit import *      # source, table, classify, mcq, fq, pairs, pick, cap
-from ..facts_engine import SOURCES  # noqa: F401
-import random
 
 L1, L2, L3 = "l1-eco", "l2-eco", "l3-eco"
 source("sup-eco-micro", "Microéconomie : consommateur, producteur, marchés, externalités, information, jeux", "cours de L2/L3 économie",
@@ -35,7 +33,6 @@ def split3(tpl, rows, *, cat, src, region="WORLD"):
     mcq(L2, tpl, [r for r in rows if r[4] == 3], cat=cat, src=src, region=region)
     mcq(L3, tpl.replace("eco2", "eco3"), [r for r in rows if r[4] >= 4], cat=cat, src=src, region=region)
 
-CM = "Microéconomie"
 # =====================================================================================================================
 # L2 : MICROÉCONOMIE
 # =====================================================================================================================
@@ -457,7 +454,7 @@ split(L2, L3, "eco2-com-q1", [
     ("Qu'est-ce qu'une amélioration des termes de l'échange ?", "Le prix des exportations monte par rapport à celui des importations", ["Le prix des importations monte par rapport à celui des exportations", "Le volume des exportations double", "Le taux de change se déprécie"], "Un pays peut acheter plus d'importations avec la même quantité d'exportations.", 3),
     ("Que mesure le taux de couverture ?", "Le rapport des exportations aux importations", ["Le rapport de la dette aux exportations", "Le rapport du PIB aux importations", "Le rapport de l'épargne au PIB"], "Un taux supérieur à 100 % correspond à un excédent commercial.", 2),
     ("Que signifie un excédent de la balance commerciale ?", "Les exportations de biens dépassent les importations de biens", ["Les importations dépassent les exportations", "L'État dégage un excédent budgétaire", "Le chômage est nul"], "Le solde est positif.", 2),
-    ("Selon la condition de Marshall-Lerner, quand une dépréciation améliore-t-elle la balance commerciale ?", "Quand la somme des élasticités-prix des exportations et des importations dépasse 1 en valeur absolue", ["Quand l'élasticité des exportations est nulle", "Quand le pays est une économie fermée", "Quand les importations sont inélastiques et les exportations aussi"], "Sinon, l'effet prix l'emporte sur l'effet volume.", 5),
+    ("Selon la condition de Marshall-Lerner, quand une dépréciation améliore-t-elle la balance commerciale ?", "Quand la somme des élasticités-prix des exportations et des importations dépasse 1 en valeur absolue", ["Quand l'élasticité des exportations est nulle", "Quand le pays est une économie fermée", "Quand l'élasticité des importations et celle des exportations sont toutes deux nulles"], "Sinon, l'effet prix l'emporte sur l'effet volume.", 5),
     ("Que décrit la courbe en J ?", "À court terme, une dépréciation dégrade d'abord la balance commerciale avant de l'améliorer", ["Une hausse permanente des importations", "L'évolution du taux d'intérêt après une relance", "L'effet d'un quota sur les prix"], "Les volumes s'ajustent plus lentement que les prix.", 5),
     ("Que dit la parité de pouvoir d'achat absolue ?", "Le taux de change égalise le prix d'un même panier de biens exprimé dans la même monnaie", ["Le taux de change est égal au taux d'intérêt", "Les prix sont toujours fixes", "Le taux de change dépend uniquement du déficit"], "En pratique, elle est surtout vérifiée à long terme et approximativement.", 4),
     ("Que décrit le syndrome hollandais ?", "La hausse de la monnaie liée à un boom d'exportations de ressources, qui pénalise l'industrie", ["Le manque de main-d'œuvre agricole", "Une dévaluation compétitive", "L'effondrement des importations"], "Le nom vient de l'expérience néerlandaise après la découverte de gaz.", 5),
