@@ -14,8 +14,8 @@ data class Retention(val days: Int = DEFAULT_DAYS, val maxEvents: Int = 20_000, 
 /** What the phone knows about one TV. [lastReportTs]: TV clock of its newest report; [lastReceivedAt]: phone clock when it arrived. */
 data class TvInfo(val name: String, val lastReportTs: Long, val lastReceivedAt: Long)
 
-/** A profile as last seen in a report. [deleted]: the TV no longer lists it (see [ParentalLedger.markProfiles]); its history stays until purged. */
-data class ProfileInfo(val id: String, val name: String, val deleted: Boolean = false)
+/** A profile as last seen in a report of [tv] (profile ids are only unique per TV). [deleted]: the TV no longer lists it (see [ParentalLedger.markProfiles]); its history stays until purged. */
+data class ProfileInfo(val tv: String, val id: String, val name: String, val deleted: Boolean = false) { val key: String get() = "$tv|$id" }
 
 /**
  * The phone's local copy of everything the TVs reported: the single source of every screen of the Parental tab. It absorbs the reports of
@@ -39,7 +39,7 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
     private val learn = LinkedHashMap<String, Map<String, Any?>>()          // tv|profile -> newest digest of « Apprendre » (cumulative, from the TV)
     private val learnTs = HashMap<String, Long>()
     private val seen = LinkedHashSet<String>()                              // report ids already absorbed (bounded)
-    private val purged = HashMap<String, Long>()                            // profile id or "*" -> phone time of the purge
+    private val purged = HashMap<String, Long>()                            // "*", "tv|" or "tv|profile" -> phone time of the purge
     private var dirty = false
 
     init { synchronized(this) { load() } }
@@ -65,12 +65,13 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
     private fun num(m: Map<*, *>?, k: String) = (m?.get(k) as? Number)?.toLong() ?: 0L
     private fun str(m: Map<*, *>?, k: String) = (m?.get(k) as? String)?.takeIf { it.isNotBlank() }
 
-    private fun isPurged(profileId: String?, r: StoredReport): Boolean = profileId != null && (purged[profileId]?.let { r.at <= it } ?: false)
+    private fun isPurged(tv: String, profileId: String?, r: StoredReport): Boolean =
+        (purged["$tv|"]?.let { r.at <= it } ?: false) || (profileId != null && (purged["$tv|$profileId"]?.let { r.at <= it } ?: false))
 
-    private fun noteProfile(id: String, name: String, ts: Long) {
-        val cur = profiles[id]
+    private fun noteProfile(tv: String, id: String, name: String, ts: Long) {
+        val k = "$tv|$id"; val cur = profiles[k]
         // the newest report decides the name (a rename, even when a late report arrives afterwards)
-        if (cur == null || ts >= (profileTs[id] ?: 0)) { profiles[id] = ProfileInfo(id, name.take(40).ifBlank { cur?.name ?: id }, false); profileTs[id] = ts }
+        if (cur == null || ts >= (profileTs[k] ?: 0)) { profiles[k] = ProfileInfo(tv, id, name.take(40).ifBlank { cur?.name ?: id }, false); profileTs[k] = ts }
     }
     private val profileTs = HashMap<String, Long>()
 
@@ -78,9 +79,9 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
     private fun daily(r: StoredReport) {
         val b = r.body; val prof = b["profile"] as? Map<String, Any?> ?: return
         val pid = str(prof, "id") ?: return; val name = str(prof, "name") ?: pid
-        if (isPurged(pid, r)) return
+        if (isPurged(r.tv, pid, r)) return
         val day = Clock.parseDay(b["day"] as? String)?.toString() ?: return
-        noteProfile(pid, name, r.ts)
+        noteProfile(r.tv, pid, name, r.ts)
         val kinds = b["kinds"] as? Map<String, Any?>
         val sv = (b["supervision"] as? Map<String, Any?>)?.get("state") as? String
         val apps = (b["apps"] as? List<Map<String, Any?>>).orEmpty().mapNotNull { m -> str(m, "pkg")?.let { AppMin(it, str(m, "label") ?: it, num(m, "min")) } }
@@ -121,8 +122,8 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
     private fun weekly(r: StoredReport) {
         val b = r.body; val prof = b["profile"] as? Map<String, Any?> ?: return
         val pid = str(prof, "id") ?: return; val name = str(prof, "name") ?: pid
-        if (isPurged(pid, r)) return
-        noteProfile(pid, name, r.ts)
+        if (isPurged(r.tv, pid, r)) return
+        noteProfile(r.tv, pid, name, r.ts)
         val sv = (b["supervision"] as? Map<String, Any?>)?.get("state") as? String
         sv?.let { observeSupervision(r.tv, r.ts, it) }
         for (d in (b["days"] as? List<Map<String, Any?>>).orEmpty()) {
@@ -136,8 +137,8 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
 
     private fun alert(r: StoredReport) {
         val b = r.body; val prof = b["profile"] as? Map<*, *>; val pid = str(prof, "id")
-        if (isPurged(pid, r)) return
-        if (pid != null) noteProfile(pid, str(prof, "name") ?: pid, r.ts)
+        if (isPurged(r.tv, pid, r)) return
+        if (pid != null) noteProfile(r.tv, pid, str(prof, "name") ?: pid, r.ts)
         val kind = b["alert"] as? String
         val (sev, action) = when (kind) {
             "tamper" -> Severity.CRITICAL to "Alerte immédiate envoyée à ce téléphone. À vérifier sur la TV (accès « Statistiques d'utilisation »)."
@@ -178,16 +179,16 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
     @Synchronized fun supervisionLog(tv: String? = null): List<SupervisionObs> = sup.filter { tv == null || it.tv == tv }
     @Synchronized fun tvList(): List<TvInfo> = tvs.values.toList()
     @Synchronized fun profileList(): List<ProfileInfo> = profiles.values.toList()
-    @Synchronized fun profileName(id: String?): String = if (id == null) "Toute la TV" else profiles[id]?.let { it.name + if (it.deleted) " (profil supprimé)" else "" } ?: id
+    @Synchronized fun profileName(tv: String, id: String?): String = if (id == null) "Toute la TV" else profiles["$tv|$id"]?.let { it.name + if (it.deleted) " (profil supprimé)" else "" } ?: id
     @Synchronized fun learnDigest(tv: String, profileId: String): Map<String, Any?>? = learn["$tv|$profileId"]
     @Synchronized fun lastSupervision(tv: String? = null): SupervisionObs? = sup.lastOrNull { tv == null || it.tv == tv }
     @Synchronized fun isEmpty() = events.isEmpty() && facts.isEmpty() && tvs.isEmpty()
     @Synchronized fun sizes() = Triple(events.size, facts.size, seen.size)
 
     /** The TV's list of profiles (live, from its status): the ones it no longer lists are marked deleted, the others come back. */
-    @Synchronized fun markProfiles(liveIds: Collection<String>) {
+    @Synchronized fun markProfiles(tv: String, liveIds: Collection<String>) {
         var ch = false
-        for ((id, p) in profiles.toList()) { val del = id !in liveIds; if (p.deleted != del) { profiles[id] = p.copy(deleted = del); ch = true } }
+        for ((k, p) in profiles.toList()) { if (p.tv != tv) continue; val del = p.id !in liveIds; if (p.deleted != del) { profiles[k] = p.copy(deleted = del); ch = true } }
         if (ch) { dirty = true; save() }
     }
 
@@ -207,14 +208,20 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
 
     fun applyRetention(r: Retention) { synchronized(this) { retention = r; prune(); dirty = true; save() } }
 
-    /** Purge of one profile (events, days, digest) or of everything ([profileId] null). The caller asked for the PIN. What was purged is not absorbed again. */
-    @Synchronized fun purge(profileId: String?) {
+    /**
+     * Purge of everything (both null), of one TV ([tv] only) or of one profile of a TV. The caller asked for the PIN. What was purged is not
+     * absorbed again from the inbox (reports received before the purge are ignored).
+     */
+    @Synchronized fun purge(tv: String? = null, profileId: String? = null) {
         val t = now()
-        if (profileId == null) {
+        if (tv == null) {
             events.clear(); facts.clear(); sup.clear(); tvs.clear(); profiles.clear(); learn.clear(); learnTs.clear(); profileTs.clear(); purged["*"] = t
+        } else if (profileId == null) {
+            events.values.removeAll { it.tv == tv }; facts.values.removeAll { it.tv == tv }; sup.removeAll { it.tv == tv }; tvs.remove(tv)
+            profiles.keys.removeAll { it.startsWith("$tv|") }; profileTs.keys.removeAll { it.startsWith("$tv|") }; learn.keys.removeAll { it.startsWith("$tv|") }; purged["$tv|"] = t
         } else {
-            events.values.removeAll { it.profileId == profileId }; facts.values.removeAll { it.profileId == profileId }
-            profiles.remove(profileId); profileTs.remove(profileId); learn.keys.removeAll { it.endsWith("|$profileId") }; purged[profileId] = t
+            events.values.removeAll { it.tv == tv && it.profileId == profileId }; facts.values.removeAll { it.tv == tv && it.profileId == profileId }
+            profiles.remove("$tv|$profileId"); profileTs.remove("$tv|$profileId"); learn.remove("$tv|$profileId"); purged["$tv|$profileId"] = t
         }
         dirty = true; save()
     }
@@ -229,7 +236,7 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
                 "kinds" to f.kindsKnown, "byApp" to f.byApp.map { linkedMapOf("pkg" to it.pkg, "label" to it.label, "min" to it.min) }, "limit" to f.limitMin, "window" to f.window, "sup" to f.supervision, "ts" to f.ts, "src" to f.source) },
             "sup" to sup.map { linkedMapOf("tv" to it.tv, "ts" to it.ts, "s" to it.state) },
             "tvs" to tvs.values.map { linkedMapOf("name" to it.name, "rt" to it.lastReportTs, "ra" to it.lastReceivedAt) },
-            "profiles" to profiles.values.map { linkedMapOf("id" to it.id, "name" to it.name, "del" to it.deleted, "ts" to (profileTs[it.id] ?: 0L)) },
+            "profiles" to profiles.values.map { linkedMapOf("tv" to it.tv, "id" to it.id, "name" to it.name, "del" to it.deleted, "ts" to (profileTs[it.key] ?: 0L)) },
             "learn" to learn.map { (k, v) -> linkedMapOf("k" to k, "ts" to (learnTs[k] ?: 0L), "d" to v) },
             "seen" to seen.toList(), "purged" to purged.map { (k, v) -> linkedMapOf("k" to k, "t" to v) },
         )
@@ -254,7 +261,7 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
         }
         for (m in l("sup")) runCatching { sup += SupervisionObs(m["tv"] as String, num(m, "ts"), m["s"] as String) }
         for (m in l("tvs")) runCatching { tvs[m["name"] as String] = TvInfo(m["name"] as String, num(m, "rt"), num(m, "ra")) }
-        for (m in l("profiles")) runCatching { val id = m["id"] as String; profiles[id] = ProfileInfo(id, m["name"] as String, m["del"] == true); profileTs[id] = num(m, "ts") }
+        for (m in l("profiles")) runCatching { val tv = m["tv"] as String; val id = m["id"] as String; val p = ProfileInfo(tv, id, m["name"] as String, m["del"] == true); profiles[p.key] = p; profileTs[p.key] = num(m, "ts") }
         for (m in l("learn")) runCatching { val k = m["k"] as String; learn[k] = m["d"] as Map<String, Any?>; learnTs[k] = num(m, "ts") }
         (o["seen"] as? List<Any?>)?.forEach { (it as? String)?.let(seen::add) }
         for (m in l("purged")) runCatching { purged[m["k"] as String] = num(m, "t") }

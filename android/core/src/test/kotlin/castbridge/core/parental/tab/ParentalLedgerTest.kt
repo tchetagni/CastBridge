@@ -54,13 +54,13 @@ class ParentalLedgerTest {
     @Test fun profileRenamedAndDeleted() {
         val l = newLedger()
         l.absorb(listOf(daily("r1", d1, ms(d1), name = "Léa"), daily("r2", d2, ms(d2), name = "Léa-Rose")))
-        assertEquals("Léa-Rose", l.profileName("p1"))
+        assertEquals("Léa-Rose", l.profileName("TV salon", "p1"))
         l.absorb(listOf(daily("r0", "2026-09-20", ms("2026-09-20"), name = "Ancien nom")))      // late old report must not undo the rename
-        assertEquals("Léa-Rose", l.profileName("p1"))
-        l.markProfiles(emptyList())
-        assertTrue(l.profileName("p1").contains("profil supprimé"))
+        assertEquals("Léa-Rose", l.profileName("TV salon", "p1"))
+        l.markProfiles("TV salon", emptyList())
+        assertTrue(l.profileName("TV salon", "p1").contains("profil supprimé"))
         assertTrue(l.facts().isNotEmpty())                                                       // history kept
-        l.markProfiles(listOf("p1")); assertFalse(l.profileName("p1").contains("supprimé"))
+        l.markProfiles("TV salon", listOf("p1")); assertFalse(l.profileName("TV salon", "p1").contains("supprimé"))
     }
 
     @Test fun supervisionBecomingInactiveMidPeriod() {
@@ -83,15 +83,24 @@ class ParentalLedgerTest {
     @Test fun purgeIsRememberedAndPerProfile() {
         val l = newLedger()
         val r1 = daily("r1", d1, ms(d1), pid = "p1", at = 1000); val r2 = daily("r2", d1, ms(d1), pid = "p2", name = "Tom", at = 1000)
-        l.absorb(listOf(r1, r2)); l.purge("p1")
+        l.absorb(listOf(r1, r2)); l.purge("TV salon", "p1")
         assertEquals(listOf("p2"), l.facts().map { it.profileId })
         // the same reports absorbed again (inbox not purged) do not bring p1 back; a report received later does
         l.absorb(listOf(r1.copy(id = "r1b")))
         assertEquals(listOf("p2"), l.facts().map { it.profileId })
         l.absorb(listOf(daily("r3", d2, ms(d2), pid = "p1", at = System.currentTimeMillis() + 10_000)))
         assertTrue(l.facts().any { it.profileId == "p1" })
-        l.purge(null); assertTrue(l.isEmpty())
+        l.purge(); assertTrue(l.isEmpty())
         l.absorb(listOf(r2.copy(id = "r2b"))); assertTrue(l.isEmpty())
+    }
+
+    @Test fun sameProfileIdOnTwoTvsStaysSeparate() {
+        val l = newLedger()
+        l.absorb(listOf(daily("a", d1, ms(d1), pid = "c1", name = "Léa", tv = "TV salon", play = 10), daily("b", d1, ms(d1), pid = "c1", name = "Tom", tv = "TV chambre", play = 20)))
+        assertEquals("Léa", l.profileName("TV salon", "c1")); assertEquals("Tom", l.profileName("TV chambre", "c1"))
+        assertEquals(10, ReportAggregator.summarize(l.facts(), l.events(), Period.day(java.time.LocalDate.parse(d1)), "c1", UTC, "TV salon").measured.value)
+        l.markProfiles("TV salon", emptyList()); assertTrue(l.profileName("TV salon", "c1").contains("supprimé")); assertFalse(l.profileName("TV chambre", "c1").contains("supprimé"))
+        l.purge("TV salon"); assertEquals(listOf("TV chambre"), l.facts().map { it.tv }); assertEquals(1, l.tvList().size)
     }
 
     @Test fun retentionByAgeAndSize() {

@@ -51,7 +51,7 @@ private fun savedAddress(ctx: Context) = ctx.getSharedPreferences("castbridge_pa
 
 /** The TV of the home tab (found on the network), or an address typed by hand (emulators, « ma TV n'apparaît pas »). */
 @Composable
-private fun ParentalTvPicker(ctx: Context, content: @Composable (ParentalClient) -> Unit) {
+internal fun ParentalTvPicker(ctx: Context, content: @Composable (ParentalClient) -> Unit) {
     // The TV this phone is already linked to (plug and play): its address and token, no discovery and no PIN to type.
     val link by TvLinkManager.state.collectAsState()
     (link as? LinkUi.Connected)?.session?.let { s ->
@@ -162,7 +162,7 @@ private fun ParentalPanel(client: ParentalClient) {
 }
 
 @Composable
-private fun PinInput(v: String, onV: (String) -> Unit, label: String) =
+internal fun PinInput(v: String, onV: (String) -> Unit, label: String) =
     OutlinedTextField(v, { onV(it.filter { c -> c.isDigit() }.take(ParentalPins.MAX)) }, Modifier.fillMaxWidth(), singleLine = true, label = { Text(label) },
         visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
 

@@ -85,6 +85,10 @@
         <!-- Parental control (docs/PARENTAL.md): the parent's own screen -->
         <activity android:name=".ParentalActivity" android:exported="false" android:label="Contrôle parental"
             android:theme="@style/Theme.CastBridge" android:windowSoftInputMode="adjustResize" />
+        <!-- Sharing of the PDF / CSV of the Parental tab through the share sheet (not exported: only the app hands out URIs, one file, read only) -->
+        <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.parentalshare" android:exported="false" android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/parental_share_paths" />
+        </provider>
         <!-- Library assistant (docs/LIBRARY-AGENT.md): the optional weekly suggestion (off by default) and the screen it opens -->
         <service android:name=".agent.ProactiveJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
         <!-- Reports of the parental control pulled from the TV over Bluetooth (docs/PARENTAL.md); runs only on a designated phone -->
