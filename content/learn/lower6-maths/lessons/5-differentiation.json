@@ -1,0 +1,1234 @@
+{
+ "chapter": "lower6-maths-differentiation",
+ "lessons": [
+  {
+   "id": "lower6-maths-differentiation-rules",
+   "title": "Differentiation: rules, tangents and normals",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Differentiate powers of $x$ term by term",
+    "Find the gradient of a curve at a point",
+    "Find equations of tangents and normals"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-differentiation-e01",
+    "lower6-maths-differentiation-e02",
+    "lower6-maths-differentiation-e03",
+    "lower6-maths-differentiation-e04",
+    "lower6-maths-differentiation-e05",
+    "lower6-maths-differentiation-e06"
+   ],
+   "selfCheck": [
+    "lower6-maths-differentiation-rules-q1",
+    "lower6-maths-differentiation-rules-q2",
+    "lower6-maths-differentiation-rules-q3",
+    "lower6-maths-differentiation-rules-q4",
+    "lower6-maths-differentiation-rules-q5"
+   ],
+   "reviewNotes": [
+    "Differentiation from first principles is not included; check whether the syllabus requires it.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Power rule",
+     "md": "If $y=ax^n$ then $\\frac{dy}{dx}=anx^{n-1}$ for any real $n$. Constants differentiate to 0. Differentiate term by term: $\\frac{d}{dx}(3x^4-2x^2+5x-1)=12x^3-4x+5$. Write roots and fractions as powers first: $\\sqrt{x}=x^{1/2}$, $\\frac{4}{x^2}=4x^{-2}$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Gradient, tangent, normal",
+     "md": "$\\frac{dy}{dx}$ gives the gradient of the curve at each point. The **tangent** at a point has that gradient; the **normal** is perpendicular to the tangent, so its gradient is $-\\frac{1}{m}$. The second derivative $\\frac{d^2y}{dx^2}$ is the derivative of $\\frac{dy}{dx}$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tangent or normal at $x=a$",
+     "md": "1. Find $y$ at $x=a$. 2. Differentiate and find $m=\\frac{dy}{dx}$ at $x=a$. 3. Tangent: $y-y_1=m(x-a)$. Normal: use gradient $-\\frac1m$. 4. Check the point lies on your line."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Differentiating $\\frac{4}{x^2}$ as $\\frac{4}{2x}$: rewrite as $4x^{-2}$ first.\n- Forgetting to subtract 1 from the power of a negative power: $x^{-2}\\to-2x^{-3}$.\n- Using the gradient of the tangent for the normal."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the equations of the tangent and normal to $y=x^2-3x+2$ at $x=3$.",
+     "steps": [
+      "At $x=3$: $y=9-9+2=2$. $\\frac{dy}{dx}=2x-3=3$.",
+      "Tangent: $y-2=3(x-3)$, i.e. $y=3x-7$.",
+      "Normal: gradient $-\\frac{1}{3}$: $y-2=-\\frac{1}{3}(x-3)$, so $x+3y-9=0$."
+     ],
+     "answer": "Tangent $y=3x-7$; normal $x+3y-9=0$",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 4.5,
+      "ymin": -4,
+      "ymax": 9,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "x^2-3x+2",
+        "color": "blue"
+       },
+       {
+        "expr": "3x-7",
+        "color": "orange"
+       }
+      ],
+      "points": [
+       {
+        "x": 3,
+        "y": 2,
+        "label": "(3, 2)",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find $\\frac{dy}{dx}$ for $y=2\\sqrt{x}+\\frac{4}{x^2}$.",
+     "steps": [
+      "Rewrite: $y=2x^{1/2}+4x^{-2}$.",
+      "Differentiate: $x^{-1/2}-8x^{-3}$."
+     ],
+     "answer": "$\\frac{dy}{dx}=\\frac{1}{\\sqrt{x}}-\\frac{8}{x^3}$"
+    }
+   ],
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-stationary-points",
+   "title": "Stationary points and optimisation",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find and classify stationary points",
+    "Set up and solve optimisation problems",
+    "Use increasing and decreasing"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-differentiation-e07",
+    "lower6-maths-differentiation-e08",
+    "lower6-maths-differentiation-e09",
+    "lower6-maths-differentiation-e10",
+    "lower6-maths-differentiation-e11",
+    "lower6-maths-differentiation-e12"
+   ],
+   "selfCheck": [
+    "lower6-maths-stationary-points-q1",
+    "lower6-maths-stationary-points-q2",
+    "lower6-maths-stationary-points-q3",
+    "lower6-maths-stationary-points-q4",
+    "lower6-maths-stationary-points-q5"
+   ],
+   "reviewNotes": [
+    "Concavity/inflexion treated only briefly.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Stationary points",
+     "md": "A stationary point is where $\\frac{dy}{dx}=0$. It is classified by the second derivative: $\\frac{d^2y}{dx^2}<0$ gives a **maximum**, $>0$ a **minimum**, $=0$ is inconclusive (check the sign of $\\frac{dy}{dx}$ on each side). A curve is increasing where $\\frac{dy}{dx}>0$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Optimisation",
+     "md": "1. Draw a diagram and name the variables. 2. Write the quantity to optimise as a function of ONE variable (use the given constraint). 3. Differentiate and set to 0. 4. Prove it is a maximum/minimum. 5. Answer the question with units."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Stopping once $x$ is found: also find $y$ and the nature of the point.\n- $\\frac{dy}{dx}=0$ does not always give a max or min: $y=x^3$ has a point of inflexion at $x=0$.\n- Forgetting to reject values outside the sensible domain (for example a negative length)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find and classify the stationary points of $y=x^3-6x^2+9x+2$.",
+     "steps": [
+      "$\\frac{dy}{dx}=3x^2-12x+9=3(x-1)(x-3)=0$, so $x=1$ or $x=3$. Then $y(1)=6$, $y(3)=2$.",
+      "$\\frac{d^2y}{dx^2}=6x-12$: at $x=1$ it is $-6<0$ (maximum); at $x=3$ it is $6>0$ (minimum)."
+     ],
+     "answer": "Maximum $(1,6)$, minimum $(3,2)$",
+     "figure": {
+      "kind": "plot",
+      "xmin": -0.5,
+      "xmax": 4.5,
+      "ymin": -5,
+      "ymax": 13,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "x^3-6x^2+9x+2",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 6,
+        "label": "max (1, 6)",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 2,
+        "label": "min (3, 2)",
+        "color": "green"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Squares of side $x$ cm are cut from the corners of a 12 cm square metal sheet; the sides are folded up to make an open box. Find the $x$ that maximises the volume.",
+     "steps": [
+      "Base side $12-2x$, height $x$: $V=x(12-2x)^2$ for $0<x<6$.",
+      "$\\frac{dV}{dx}=(12-2x)^2-4x(12-2x)=(12-2x)(12-6x)=0$, so $x=2$ ($x=6$ is rejected: no box).",
+      "$V(2)=2\\times64=128$; check $V(1)=100$ and $V(3)=108$, both smaller, so a maximum."
+     ],
+     "answer": "$x=2$ cm, $V_{max}=128$ cm³"
+    }
+   ],
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-integration-basic",
+   "title": "Integration and area under a curve",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Integrate powers of $x$",
+    "Find a constant of integration from a point",
+    "Evaluate definite integrals and areas"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-differentiation-e13",
+    "lower6-maths-differentiation-e14",
+    "lower6-maths-differentiation-e15",
+    "lower6-maths-differentiation-e16",
+    "lower6-maths-differentiation-e17",
+    "lower6-maths-differentiation-e18"
+   ],
+   "selfCheck": [
+    "lower6-maths-integration-basic-q1",
+    "lower6-maths-integration-basic-q2",
+    "lower6-maths-integration-basic-q3",
+    "lower6-maths-integration-basic-q4",
+    "lower6-maths-integration-basic-q5"
+   ],
+   "reviewNotes": [
+    "Volumes of revolution and integration by substitution are not in this pack (substitution appears in the Upper Sixth pack).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Indefinite integral",
+     "md": "$\\int ax^n\\,dx=\\frac{ax^{n+1}}{n+1}+C$ for $n\\neq-1$. Integration reverses differentiation. Always add the constant $C$ for an indefinite integral; use a given point on the curve to find it."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Definite integral and area",
+     "md": "$\\int_a^b f(x)\\,dx=F(b)-F(a)$ where $F$ is an antiderivative of $f$. For $f(x)\\geq0$ on $[a,b]$ this is the area between the curve, the x-axis and $x=a$, $x=b$. The area between two curves is $\\int_a^b\\big(f(x)-g(x)\\big)dx$ where $f\\geq g$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting $+C$.\n- Area below the x-axis gives a NEGATIVE integral: take the positive value, and split the integral where the curve crosses the axis.\n- $\\int x^{-1}dx$ is not given by the power rule (it is $\\ln|x|$)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A curve passes through $(1,5)$ and has $\\frac{dy}{dx}=6x^2-4x+3$. Find its equation.",
+     "steps": [
+      "$y=\\int(6x^2-4x+3)dx=2x^3-2x^2+3x+C$.",
+      "At $(1,5)$: $2-2+3+C=5$, so $C=2$."
+     ],
+     "answer": "$y=2x^3-2x^2+3x+2$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the area under $y=x^2+1$ from $x=0$ to $x=3$.",
+     "steps": [
+      "$\\int_0^3(x^2+1)dx=\\left[\\frac{x^3}{3}+x\\right]_0^3$.",
+      "$=(9+3)-(0)=12$."
+     ],
+     "answer": "Area $=12$ square units",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 191.66666666666666,
+        "x2": 372.0,
+        "y2": 191.66666666666666,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 72.6046511627907,
+        "y1": 212.0,
+        "x2": 72.6046511627907,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 149.81395348837208,
+        "y1": 188.66666666666666,
+        "x2": 149.81395348837208,
+        "y2": 194.66666666666666,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 149.81395348837208,
+        "y": 208.66666666666666,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 227.02325581395348,
+        "y1": 188.66666666666666,
+        "x2": 227.02325581395348,
+        "y2": 194.66666666666666,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 227.02325581395348,
+        "y": 208.66666666666666,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 304.2325581395349,
+        "y1": 188.66666666666666,
+        "x2": 304.2325581395349,
+        "y2": 194.66666666666666,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 304.2325581395349,
+        "y": 208.66666666666666,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 69.6046511627907,
+        "y1": 120.0,
+        "x2": 75.6046511627907,
+        "y2": 120.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 64.6046511627907,
+        "y": 124.0,
+        "text": "5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 69.6046511627907,
+        "y1": 48.33333333333334,
+        "x2": 75.6046511627907,
+        "y2": 48.33333333333334,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 64.6046511627907,
+        "y": 52.33333333333334,
+        "text": "10",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         72.6,
+         191.7,
+         72.6,
+         177.3,
+         80.3,
+         177.2,
+         88.0,
+         176.8,
+         95.8,
+         176.0,
+         103.5,
+         175.0,
+         111.2,
+         173.8,
+         118.9,
+         172.2,
+         126.7,
+         170.3,
+         134.4,
+         168.2,
+         142.1,
+         165.7,
+         149.8,
+         163.0,
+         157.5,
+         160.0,
+         165.3,
+         156.7,
+         173.0,
+         153.1,
+         180.7,
+         149.2,
+         188.4,
+         145.1,
+         196.1,
+         140.6,
+         203.9,
+         135.9,
+         211.6,
+         130.9,
+         219.3,
+         125.6,
+         227.0,
+         120.0,
+         234.7,
+         114.1,
+         242.5,
+         108.0,
+         250.2,
+         101.5,
+         257.9,
+         94.8,
+         265.6,
+         87.8,
+         273.3,
+         80.4,
+         281.1,
+         72.8,
+         288.8,
+         65.0,
+         296.5,
+         56.8,
+         304.2,
+         48.3,
+         304.2,
+         191.7
+        ],
+        "stroke": "orange",
+        "width": 1,
+        "closed": true,
+        "fill": "yellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         72.6,
+         177.3,
+         76.7,
+         177.3,
+         80.8,
+         177.2,
+         85.0,
+         177.0,
+         89.1,
+         176.7,
+         93.2,
+         176.3,
+         97.3,
+         175.9,
+         101.4,
+         175.3,
+         105.5,
+         174.7,
+         109.7,
+         174.0,
+         113.8,
+         173.3,
+         117.9,
+         172.4,
+         122.0,
+         171.5,
+         126.1,
+         170.4,
+         130.3,
+         169.3,
+         134.4,
+         168.2,
+         138.5,
+         166.9,
+         142.6,
+         165.6,
+         146.7,
+         164.1,
+         150.8,
+         162.6,
+         155.0,
+         161.0,
+         159.1,
+         159.4,
+         163.2,
+         157.6,
+         167.3,
+         155.8,
+         171.4,
+         153.8,
+         175.6,
+         151.9,
+         179.7,
+         149.8,
+         183.8,
+         147.6,
+         187.9,
+         145.4,
+         192.0,
+         143.0,
+         196.1,
+         140.6,
+         200.3,
+         138.2,
+         204.4,
+         135.6,
+         208.5,
+         132.9,
+         212.6,
+         130.2,
+         216.7,
+         127.4,
+         220.8,
+         124.5,
+         225.0,
+         121.5,
+         229.1,
+         118.5,
+         233.2,
+         115.3,
+         237.3,
+         112.1,
+         241.4,
+         108.8,
+         245.6,
+         105.4,
+         249.7,
+         101.9,
+         253.8,
+         98.4,
+         257.9,
+         94.8,
+         262.0,
+         91.1,
+         266.1,
+         87.3,
+         270.3,
+         83.4,
+         274.4,
+         79.4,
+         278.5,
+         75.4,
+         282.6,
+         71.3,
+         286.7,
+         67.1,
+         290.8,
+         62.8,
+         295.0,
+         58.4,
+         299.1,
+         54.0,
+         303.2,
+         49.5,
+         307.3,
+         44.9,
+         311.4,
+         40.2,
+         315.6,
+         35.4
+        ],
+        "stroke": "blue",
+        "width": 2.5,
+        "closed": false
+       },
+       {
+        "t": "text",
+        "x": 188.4186046511628,
+        "y": 148.66666666666666,
+        "text": "area = 12",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "lower6-maths-differentiation"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-maths-differentiation-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-differentiation-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the gradient of $y=x^3-4x$ at $x=2$.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "$\\frac{dy}{dx}=3x^2-4=12-4$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-differentiation-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{d}{dx}\\left(\\frac{4}{x^2}\\right)=$",
+   "choices": [
+    "$-\\frac{8}{x^3}$",
+    "$-\\frac{4}{x^3}$",
+    "$\\frac{4}{2x}$",
+    "$\\frac{8}{x^3}$"
+   ],
+   "answer": 0,
+   "explanation": "$4x^{-2}\\to-8x^{-3}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-differentiation-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The derivative of a constant is 0.",
+   "answer": true,
+   "explanation": "A constant has zero rate of change.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-differentiation-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$y=x^2+kx$ has gradient 5 at $x=1$. Then $k=$",
+   "choices": [
+    "$7$",
+    "$2$",
+    "$3$",
+    "$5$"
+   ],
+   "answer": 2,
+   "explanation": "$2x+k=2+k=5$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-differentiation-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the coordinates of the points on $y=2x^3-3x^2$ where the gradient is 12.",
+   "model": "$\\frac{dy}{dx}=6x^2-6x=12$, so $x^2-x-2=0$, $(x-2)(x+1)=0$: $x=2$ or $-1$. Then $y(2)=16-12=4$ and $y(-1)=-2-3=-5$. Points $(2,4)$ and $(-1,-5)$.",
+   "rubric": [
+    "Gradient equation (1)",
+    "Both $x$ values (1)",
+    "Both $y$ values (1)"
+   ],
+   "explanation": "$\\frac{dy}{dx}=6x^2-6x=12$, so $x^2-x-2=0$, $(x-2)(x+1)=0$: $x=2$ or $-1$. Then $y(2)=16-12=4$ and $y(-1)=-2-3=-5$. Points $(2,4)$ and $(-1,-5)$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-differentiation-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The curve $C$ has equation $y=x^3-3x+2$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the gradient of $C$ at the point $(2,4)$.",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "$\\frac{dy}{dx}=3x^2-3=9$.",
+     "id": "lower6-maths-differentiation-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "The tangent at $(2,4)$ meets the y-axis at $(0,k)$. Find $k$.",
+     "answer": -14,
+     "tolerance": 0,
+     "explanation": "$y-4=9(x-2)$ gives $y=9x-14$, so $k=-14$.",
+     "id": "lower6-maths-differentiation-e06-b"
+    }
+   ],
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-rules-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-differentiation-rules",
+   "prompt": "$\\frac{d}{dx}(x^5)=$",
+   "choices": [
+    "$5x^5$",
+    "$x^4$",
+    "$\\frac{x^6}{6}$",
+    "$5x^4$"
+   ],
+   "answer": 3,
+   "explanation": "Power rule.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-rules-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-differentiation-rules",
+   "prompt": "The gradient of $y=3x+7$ is",
+   "choices": [
+    "$7$",
+    "$10$",
+    "$3$",
+    "$0$"
+   ],
+   "answer": 2,
+   "explanation": "A line has constant gradient.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-rules-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-differentiation-rules",
+   "prompt": "The normal gradient when the tangent gradient is 4 is",
+   "choices": [
+    "$-\\frac{1}{4}$",
+    "$-4$",
+    "$4$",
+    "$\\frac{1}{4}$"
+   ],
+   "answer": 0,
+   "explanation": "Negative reciprocal.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-rules-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-differentiation-rules",
+   "prompt": "$\\frac{d}{dx}(\\sqrt{x})=$",
+   "choices": [
+    "$2\\sqrt{x}$",
+    "$\\frac{1}{2\\sqrt{x}}$",
+    "$\\frac{\\sqrt{x}}{2}$",
+    "$\\frac{1}{\\sqrt{x}}$"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{1}{2}x^{-1/2}$.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-rules-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-differentiation-rules",
+   "prompt": "If $y=5x^2-x$ then $\\frac{d^2y}{dx^2}=$",
+   "choices": [
+    "$-1$",
+    "$5$",
+    "$10x-1$",
+    "$10$"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{dy}{dx}=10x-1$, differentiate again.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-stationary-points",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the $x$-coordinate of the minimum of $y=x^2-8x+3$.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "$\\frac{dy}{dx}=2x-8=0$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-stationary-points",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The stationary points of $y=x^3-3x$ occur at",
+   "choices": [
+    "$x=3$ and $x=-3$",
+    "$x=0$ and $x=1$",
+    "$x=0$ only",
+    "$x=1$ and $x=-1$"
+   ],
+   "answer": 3,
+   "explanation": "$3x^2-3=0$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-stationary-points",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If $\\frac{dy}{dx}=0$ at a point then it is always a maximum or a minimum.",
+   "answer": false,
+   "explanation": "False: $y=x^3$ has $\\frac{dy}{dx}=0$ at $x=0$ but it is a point of inflexion.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-stationary-points",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "For $y=2x^3-9x^2+12x$, the point at $x=2$ is",
+   "choices": [
+    "not stationary",
+    "a point of inflexion",
+    "a maximum",
+    "a minimum"
+   ],
+   "answer": 3,
+   "explanation": "$y'=6(x-1)(x-2)$ is 0 at $x=2$; $y''=12x-18=6>0$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-stationary-points",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer in Bamenda has 100 m of fencing for three sides of a rectangular field, the fourth side being a wall. Find the maximum area (m²).",
+   "answer": 1250,
+   "tolerance": 0,
+   "explanation": "Width $x$, length $100-2x$: $A=100x-2x^2$; $A'=100-4x=0$ gives $x=25$; $A=25\\times50=1250$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-stationary-points",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An open-topped tank with a square base of side $x$ m has volume 32 m³, so its height is $\\frac{32}{x^2}$ m. Its surface area (base plus four sides) is $S=x^2+\\frac{128}{x}$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the value of $x$ that minimises $S$.",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "$S'=2x-\\frac{128}{x^2}=0$ gives $x^3=64$, $x=4$.",
+     "id": "lower6-maths-differentiation-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the minimum value of $S$ (m²).",
+     "answer": 48,
+     "tolerance": 0,
+     "explanation": "$S(4)=16+32=48$.",
+     "id": "lower6-maths-differentiation-e12-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The value $x=4$ gives a minimum.",
+     "answer": true,
+     "explanation": "$S''=2+\\frac{256}{x^3}=6>0$ at $x=4$.",
+     "id": "lower6-maths-differentiation-e12-c"
+    }
+   ],
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-stationary-points-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-stationary-points",
+   "prompt": "At a maximum, $\\frac{d^2y}{dx^2}$ is",
+   "choices": [
+    "positive",
+    "zero always",
+    "negative",
+    "undefined"
+   ],
+   "answer": 2,
+   "explanation": "Curve bends downward.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-stationary-points-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-stationary-points",
+   "prompt": "A curve is decreasing where",
+   "choices": [
+    "$\\frac{dy}{dx}<0$",
+    "$y<0$",
+    "$\\frac{dy}{dx}>0$",
+    "$\\frac{d^2y}{dx^2}<0$"
+   ],
+   "answer": 0,
+   "explanation": "Negative gradient.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-stationary-points-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-stationary-points",
+   "prompt": "The minimum of $y=(x-3)^2+1$ is",
+   "choices": [
+    "$3$",
+    "$1$",
+    "$0$",
+    "$-3$"
+   ],
+   "answer": 1,
+   "explanation": "At $x=3$.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-stationary-points-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-stationary-points",
+   "prompt": "To optimise a quantity with two variables you first",
+   "choices": [
+    "differentiate twice",
+    "guess",
+    "set both to 0",
+    "use a constraint to eliminate one"
+   ],
+   "answer": 3,
+   "explanation": "One variable is needed.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-stationary-points-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-stationary-points",
+   "prompt": "$y=x^3$ at $x=0$ has",
+   "choices": [
+    "a minimum",
+    "no stationary point",
+    "a point of inflexion",
+    "a maximum"
+   ],
+   "answer": 2,
+   "explanation": "$y'=0$ but no change of sign.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-integration-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Evaluate $\\int_0^2(3x^2+2x)\\,dx$.",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "$[x^3+x^2]_0^2=8+4$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-integration-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int\\frac{1}{x^2}dx=$",
+   "choices": [
+    "$\\ln x^2+C$",
+    "$-\\frac{2}{x^3}+C$",
+    "$\\frac{1}{x}+C$",
+    "$-\\frac{1}{x}+C$"
+   ],
+   "answer": 3,
+   "explanation": "$\\int x^{-2}dx=\\frac{x^{-1}}{-1}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-integration-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int x^n\\,dx=\\frac{x^{n+1}}{n+1}+C$ is valid for every real $n$.",
+   "answer": false,
+   "explanation": "It fails for $n=-1$ (division by zero); that integral is $\\ln|x|+C$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-integration-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The area enclosed between $y=x$ and $y=x^2$ is",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$\\frac{1}{6}$",
+    "$\\frac{1}{3}$",
+    "$\\frac{5}{6}$"
+   ],
+   "answer": 1,
+   "explanation": "They meet at $x=0,1$: $\\int_0^1(x-x^2)dx=\\frac{1}{2}-\\frac{1}{3}$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-integration-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the area enclosed by $y=x^2-4$ and the x-axis (2 d.p.).",
+   "answer": 10.67,
+   "tolerance": 0.01,
+   "explanation": "Roots $\\pm2$; $\\int_{-2}^2(x^2-4)dx=\\left[\\frac{x^3}{3}-4x\\right]=-\\frac{32}{3}$; the area is the positive value $\\frac{32}{3}\\approx10.67$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-differentiation-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-integration-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The curve $y=6x-x^2$ crosses the x-axis at $O$ and at $A$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the $x$-coordinate of $A$.",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "$x(6-x)=0$.",
+     "id": "lower6-maths-differentiation-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area between the curve and the x-axis (square units).",
+     "answer": 36,
+     "tolerance": 0,
+     "explanation": "$\\int_0^6(6x-x^2)dx=\\left[3x^2-\\frac{x^3}{3}\\right]_0^6=108-72=36$.",
+     "id": "lower6-maths-differentiation-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area under the curve from $x=0$ to $x=3$.",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "$\\left[3x^2-\\frac{x^3}{3}\\right]_0^3=27-9=18$.",
+     "id": "lower6-maths-differentiation-e18-c"
+    }
+   ],
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-integration-basic-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-integration-basic",
+   "prompt": "$\\int 4x^3dx=$",
+   "choices": [
+    "$x^4+C$",
+    "$12x^2+C$",
+    "$4x^4+C$",
+    "$\\frac{x^4}{3}+C$"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{4x^4}{4}$.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-integration-basic-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-integration-basic",
+   "prompt": "$\\int_1^2 2x\\,dx=$",
+   "choices": [
+    "$1$",
+    "$4$",
+    "$3$",
+    "$2$"
+   ],
+   "answer": 2,
+   "explanation": "$[x^2]_1^2=4-1$.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-integration-basic-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-integration-basic",
+   "prompt": "An integral with the curve below the x-axis is",
+   "choices": [
+    "undefined",
+    "negative",
+    "zero",
+    "positive"
+   ],
+   "answer": 1,
+   "explanation": "Signed area.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-integration-basic-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-integration-basic",
+   "prompt": "$\\int 5\\,dx=$",
+   "choices": [
+    "$5+C$",
+    "$\\frac{x^2}{5}+C$",
+    "$5x+C$",
+    "$0$"
+   ],
+   "answer": 2,
+   "explanation": "Integrate the constant.",
+   "chapter": "lower6-maths-differentiation"
+  },
+  {
+   "id": "lower6-maths-integration-basic-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-integration-basic",
+   "prompt": "If $\\frac{dy}{dx}=2x$ and $y=3$ when $x=0$, then $y=$",
+   "choices": [
+    "$x^2+2$",
+    "$x^2$",
+    "$x^2+3$",
+    "$2x+3$"
+   ],
+   "answer": 2,
+   "explanation": "$C=3$.",
+   "chapter": "lower6-maths-differentiation"
+  }
+ ]
+}

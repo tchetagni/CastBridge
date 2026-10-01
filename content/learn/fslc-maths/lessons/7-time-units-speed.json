@@ -1,0 +1,1265 @@
+{
+ "chapter": "fslc-maths-time-units-speed",
+ "lessons": [
+  {
+   "id": "fslc-maths-time-calendar",
+   "title": "Time and the calendar",
+   "minutes": 25,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read the time on a clock and use the 12-hour and 24-hour systems.",
+    "Calculate durations, start times and finishing times.",
+    "Use the calendar: days, weeks, months, years and leap years."
+   ],
+   "prerequisites": [
+    "fslc-maths-measurement"
+   ],
+   "exercises": [
+    "fslc-maths-time-units-speed-e01",
+    "fslc-maths-time-units-speed-e02",
+    "fslc-maths-time-units-speed-e03",
+    "fslc-maths-time-units-speed-e04",
+    "fslc-maths-time-units-speed-e05",
+    "fslc-maths-time-units-speed-e06"
+   ],
+   "selfCheck": [
+    "fslc-maths-time-calendar-q1",
+    "fslc-maths-time-calendar-q2",
+    "fslc-maths-time-calendar-q3",
+    "fslc-maths-time-calendar-q4",
+    "fslc-maths-time-calendar-q5"
+   ],
+   "reviewNotes": [
+    "Leap-year rule: only 'every 4 years' is taught; the exception for century years (1900, 2100) is not covered at this level.",
+    "12-hour/24-hour clock: check which one the FSLC paper uses.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Units of time",
+     "md": "60 seconds = 1 minute; 60 minutes = 1 hour; 24 hours = 1 day; 7 days = 1 week; 12 months = 1 year; 365 days = 1 year, and 366 days in a **leap year** (every 4 years, for example 2024 and 2028). **30 days** have April, June, September and November. February has 28 days (29 in a leap year). The other months have 31."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 90,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 120,
+        "x2": 246,
+        "y2": 139,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 120,
+        "x2": 125,
+        "y2": 120,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "12",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 126,
+        "text": "3",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 228,
+        "text": "6",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 126,
+        "text": "9",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A clock showing 3:45.",
+     "alt": "A clock face. The short hour hand points between 3 and 4. The long minute hand points to 9. The clock shows quarter to four."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "12-hour and 24-hour clock",
+     "md": "The 24-hour clock counts from 00:00 to 23:59. From 13:00 onwards subtract 12 to get the pm time: 15:45 is 3:45 pm. Add 12 to a pm time to get the 24-hour time: 8:30 pm is 20:30. Midnight is 00:00 and midday is 12:00."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Working with 100 minutes in an hour: there are only **60**. 2 h 45 min + 30 min = 3 h 15 min, not 2 h 75 min.\n- Forgetting that some months have 30 days and others 31.\n- Counting the first day twice when you find the number of days between two dates."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A bus leaves at 08:45 and the journey lasts 3 hours 50 minutes. At what time does it arrive?",
+     "steps": [
+      "Add the hours: 08:45 + 3 h = 11:45.",
+      "Add the minutes: 11:45 + 50 min = 11:95, which is 12:35 (95 − 60 = 35 and one more hour)."
+     ],
+     "answer": "It arrives at 12:35 (12:35 pm)."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "How many days are there from 12 March to 5 April in a year that is not a leap year?",
+     "steps": [
+      "From 12 March to 31 March: 31 − 12 = 19 days.",
+      "From 31 March to 5 April: 5 more days.",
+      "Total: 19 + 5 = 24 days."
+     ],
+     "answer": "24 days."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-units-conversion",
+   "title": "Converting units of length, mass, capacity and time",
+   "minutes": 25,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Convert between units of length, mass, capacity and time.",
+    "Add and subtract measures with mixed units.",
+    "Solve problems that need a change of units."
+   ],
+   "prerequisites": [
+    "fslc-maths-measurement"
+   ],
+   "exercises": [
+    "fslc-maths-time-units-speed-e07",
+    "fslc-maths-time-units-speed-e08",
+    "fslc-maths-time-units-speed-e09",
+    "fslc-maths-time-units-speed-e10",
+    "fslc-maths-time-units-speed-e11",
+    "fslc-maths-time-units-speed-e12"
+   ],
+   "selfCheck": [
+    "fslc-maths-units-conversion-q1",
+    "fslc-maths-units-conversion-q2",
+    "fslc-maths-units-conversion-q3",
+    "fslc-maths-units-conversion-q4",
+    "fslc-maths-units-conversion-q5"
+   ],
+   "reviewNotes": [
+    "The existing 'Measurement' lesson also covers basic conversions; this lesson adds mixed-unit sums and problems.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Units to remember",
+     "md": "- Length: 1 km = 1,000 m; 1 m = 100 cm; 1 cm = 10 mm.\n- Mass: 1 kg = 1,000 g; 1 tonne = 1,000 kg.\n- Capacity: 1 litre = 1,000 ml (millilitres).\n- Time: 1 h = 60 min; 1 min = 60 s.\nTo go from a **big** unit to a **small** one, multiply. To go from small to big, divide."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 107,
+        "text": "km",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 107,
+        "text": "m",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 107,
+        "text": "cm",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 107,
+        "text": "mm",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 92,
+        "y1": 90,
+        "x2": 118,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 192,
+        "y1": 90,
+        "x2": 218,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 292,
+        "y1": 90,
+        "x2": 318,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 60,
+        "text": "×1,000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 60,
+        "text": "×100",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 60,
+        "text": "×10",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 110,
+        "x2": 92,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 218,
+        "y1": 110,
+        "x2": 192,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 318,
+        "y1": 110,
+        "x2": 292,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 145,
+        "text": "÷1,000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 145,
+        "text": "÷100",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 145,
+        "text": "÷10",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 185,
+        "text": "Big unit to small unit: multiply. Small to big: divide.",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "How to change between kilometres, metres, centimetres and millimetres.",
+     "alt": "Four boxes in a row: km, m, cm and mm. Arrows going right say times 1,000, times 100 and times 10. Arrows going left say divide by the same numbers."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mixed units",
+     "md": "To add or subtract, change everything to the **same small unit** first. Example: 2 kg 700 g + 1 kg 450 g = 2,700 g + 1,450 g = 4,150 g = 4 kg 150 g. For time, do not use 100: 1 h 45 min = 105 minutes."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Multiplying when you should divide (km to m: multiply; g to kg: divide).\n- Adding numbers with **different units** (like 2 m + 50 cm = 52!). Change first: 2 m + 50 cm = 250 cm.\n- Using 100 for time: there are 60 minutes in an hour."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Change 3.5 km to metres, and 2,750 g to kilograms.",
+     "steps": [
+      "Kilometres to metres: 3.5 × 1,000 = 3,500 m.",
+      "Grams to kilograms: 2,750 ÷ 1,000 = 2.75 kg."
+     ],
+     "answer": "3,500 m and 2.75 kg."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A tailor has a roll of cloth 5 m long. He cuts 3 m 40 cm. How much cloth is left?",
+     "steps": [
+      "Change to centimetres: 5 m = 500 cm and 3 m 40 cm = 340 cm.",
+      "Subtract: 500 − 340 = 160 cm = 1 m 60 cm."
+     ],
+     "answer": "1 m 60 cm (160 cm)."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-speed-distance-time",
+   "title": "Speed, distance and time",
+   "minutes": 30,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate speed, distance or time from the other two.",
+    "Change minutes to hours in speed problems.",
+    "Find an average speed for a whole journey."
+   ],
+   "prerequisites": [
+    "fslc-maths-time-calendar",
+    "fslc-maths-units-conversion"
+   ],
+   "exercises": [
+    "fslc-maths-time-units-speed-e13",
+    "fslc-maths-time-units-speed-e14",
+    "fslc-maths-time-units-speed-e15",
+    "fslc-maths-time-units-speed-e16",
+    "fslc-maths-time-units-speed-e17",
+    "fslc-maths-time-units-speed-e18"
+   ],
+   "selfCheck": [
+    "fslc-maths-speed-distance-time-q1",
+    "fslc-maths-speed-distance-time-q2",
+    "fslc-maths-speed-distance-time-q3",
+    "fslc-maths-speed-distance-time-q4",
+    "fslc-maths-speed-distance-time-q5"
+   ],
+   "reviewNotes": [
+    "Average speed uses 'total distance ÷ total time'; check this is expected at Class 6.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The speed rule",
+     "md": "**Speed = distance ÷ time.** If a car travels 180 km in 3 hours, its speed is 180 ÷ 3 = 60 km/h (kilometres per hour). From this we get: **distance = speed × time** and **time = distance ÷ speed**. The units must agree: km with hours gives km/h; metres with seconds gives m/s."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 25,
+        "w": 140,
+        "h": 130,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 80,
+        "x2": 270,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 80,
+        "x2": 200,
+        "y2": 155,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 62,
+        "text": "D",
+        "size": 24,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 165,
+        "y": 128,
+        "text": "S",
+        "size": 24,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 128,
+        "text": "T",
+        "size": 24,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 185,
+        "text": "D = S × T    S = D ÷ T    T = D ÷ S",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 208,
+        "text": "D: distance   S: speed   T: time",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The speed triangle: cover the one you want.",
+     "alt": "A box split into three parts: D on the top, S at bottom left and T at bottom right. Below are the three formulas for D, S and T."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Minutes and hours",
+     "md": "Change minutes to hours **before** you use km/h: 30 min = 0.5 h; 45 min = 0.75 h; 15 min = 0.25 h; 20 min = 1/3 h. Example: at 60 km/h for 45 minutes, the distance is 60 × 0.75 = 45 km."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using minutes with km/h without changing to hours.\n- Finding an **average speed** by adding two speeds and dividing by 2. The correct way: **total distance ÷ total time**.\n- Dividing the wrong way: time is distance ÷ speed, not speed ÷ distance."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A bus travels 150 km at 50 km/h. How long does the journey take?",
+     "steps": [
+      "Time = distance ÷ speed.",
+      "150 ÷ 50 = 3 hours."
+     ],
+     "answer": "3 hours."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A man goes 100 km at 50 km/h, then another 100 km at 100 km/h. What is his average speed for the whole journey?",
+     "steps": [
+      "Time for the first part: 100 ÷ 50 = 2 h. Second part: 100 ÷ 100 = 1 h.",
+      "Total distance 200 km; total time 3 h.",
+      "Average speed = 200 ÷ 3 ≈ 66.7 km/h (not 75!)."
+     ],
+     "answer": "About 66.7 km/h."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-time-units-speed"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "fslc-maths-time-units-speed-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-time-calendar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write 3:45 pm in the 24-hour clock.",
+   "choices": [
+    "03:45",
+    "13:45",
+    "15:45",
+    "17:45"
+   ],
+   "answer": 2,
+   "explanation": "Add 12 hours to 3:45 pm: 15:45.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-time-calendar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A lesson starts at 07:20 and ends at 11:05. How many minutes does it last?",
+   "answer": 225,
+   "tolerance": 0,
+   "unit": "minutes",
+   "explanation": "From 07:20 to 11:00 is 3 h 40 min; plus 5 min makes 3 h 45 min = 3 × 60 + 45 = 225 minutes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-time-calendar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many days has September?",
+   "choices": [
+    "31",
+    "29",
+    "30",
+    "28"
+   ],
+   "answer": 2,
+   "explanation": "September is one of the 30-day months: April, June, September, November.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-time-calendar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many days are there from 12 March to 5 April (not a leap year)?",
+   "answer": 24,
+   "tolerance": 0,
+   "unit": "days",
+   "explanation": "19 days to the end of March, then 5 days: 24 days.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-time-calendar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The year 2024 is a leap year, so February 2024 has 29 days.",
+   "answer": true,
+   "explanation": "2024 is divisible by 4, so it is a leap year.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-time-calendar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bus leaves Bafoussam at 08:45. The journey takes 3 hours 50 minutes.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "At what time does the bus arrive?",
+     "choices": [
+      "13:35",
+      "11:95",
+      "12:35",
+      "12:05"
+     ],
+     "answer": 2,
+     "explanation": "08:45 + 3 h 50 min = 12:35.",
+     "id": "fslc-maths-time-units-speed-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The bus is 25 minutes late. It arrives at...",
+     "choices": [
+      "12:35",
+      "13:25",
+      "12:60",
+      "13:00"
+     ],
+     "answer": 3,
+     "explanation": "12:35 + 25 min = 13:00, which is 1:00 pm.",
+     "id": "fslc-maths-time-units-speed-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many minutes is the planned journey?",
+     "answer": 230,
+     "tolerance": 0,
+     "explanation": "3 × 60 + 50 = 230 minutes.",
+     "unit": "minutes",
+     "id": "fslc-maths-time-units-speed-e06-c"
+    }
+   ],
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-calendar-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-time-calendar",
+   "prompt": "How many minutes are there in 2 hours 15 minutes?",
+   "choices": [
+    "135",
+    "175",
+    "215",
+    "120"
+   ],
+   "answer": 0,
+   "explanation": "2 × 60 + 15 = 135.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-calendar-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-time-calendar",
+   "prompt": "8:30 pm in the 24-hour clock is...",
+   "choices": [
+    "20:30",
+    "18:30",
+    "22:30",
+    "08:30"
+   ],
+   "answer": 0,
+   "explanation": "8 + 12 = 20.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-calendar-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-time-calendar",
+   "prompt": "How many days are there in a leap year?",
+   "choices": [
+    "365",
+    "364",
+    "360",
+    "366"
+   ],
+   "answer": 3,
+   "explanation": "A leap year has one extra day, 29 February.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-calendar-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-time-calendar",
+   "prompt": "A film starts at 18:40 and lasts 1 h 35 min. It ends at...",
+   "choices": [
+    "20:05",
+    "20:15",
+    "19:15",
+    "19:75"
+   ],
+   "answer": 1,
+   "explanation": "18:40 + 1 h = 19:40; + 35 min = 20:15.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-calendar-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-time-calendar",
+   "prompt": "Which month has 31 days?",
+   "choices": [
+    "July",
+    "November",
+    "June",
+    "April"
+   ],
+   "answer": 0,
+   "explanation": "June, April and November have 30 days.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-units-conversion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Change 3.5 km to metres.",
+   "answer": 3500,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "3.5 × 1,000 = 3,500.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-units-conversion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "2,750 g is equal to...",
+   "choices": [
+    "275 kg",
+    "27.5 kg",
+    "2.75 kg",
+    "0.275 kg"
+   ],
+   "answer": 2,
+   "explanation": "Divide by 1,000: 2,750 ÷ 1,000 = 2.75.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-units-conversion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Change 4.2 litres to millilitres.",
+   "answer": 4200,
+   "tolerance": 0,
+   "unit": "ml",
+   "explanation": "4.2 × 1,000 = 4,200.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-units-conversion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many minutes are there in 1 hour 45 minutes?",
+   "answer": 105,
+   "tolerance": 0,
+   "unit": "minutes",
+   "explanation": "60 + 45 = 105 minutes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-units-conversion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Add 2 kg 700 g and 1 kg 450 g. Give the answer in grams.",
+   "answer": 4150,
+   "tolerance": 0,
+   "unit": "g",
+   "explanation": "2,700 + 1,450 = 4,150 g.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-units-conversion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A shop sells cooking oil in bottles of 750 ml.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many millilitres are in 12 bottles?",
+     "answer": 9000,
+     "tolerance": 0,
+     "explanation": "12 × 750 = 9,000 ml.",
+     "unit": "ml",
+     "id": "fslc-maths-time-units-speed-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many litres is that?",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "9,000 ÷ 1,000 = 9 litres.",
+     "unit": "litres",
+     "id": "fslc-maths-time-units-speed-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many full bottles can be filled from a 5-litre can?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "5 litres = 5,000 ml. 5,000 ÷ 750 = 6 remainder 500, so 6 full bottles.",
+     "unit": "bottles",
+     "id": "fslc-maths-time-units-speed-e12-c"
+    }
+   ],
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-units-conversion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-units-conversion",
+   "prompt": "5 km is equal to...",
+   "choices": [
+    "50,000 m",
+    "500 m",
+    "50 m",
+    "5,000 m"
+   ],
+   "answer": 3,
+   "explanation": "1 km = 1,000 m.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-units-conversion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-units-conversion",
+   "prompt": "3 kg 250 g in grams is...",
+   "choices": [
+    "3,025 g",
+    "32,500 g",
+    "325 g",
+    "3,250 g"
+   ],
+   "answer": 3,
+   "explanation": "3 × 1,000 + 250 = 3,250.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-units-conversion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-units-conversion",
+   "prompt": "How many cm are there in 2.5 m?",
+   "choices": [
+    "250",
+    "2,500",
+    "25",
+    "2.5"
+   ],
+   "answer": 0,
+   "explanation": "2.5 × 100 = 250.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-units-conversion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-units-conversion",
+   "prompt": "1 hour 20 minutes = ... minutes",
+   "choices": [
+    "80",
+    "120",
+    "120.20",
+    "100"
+   ],
+   "answer": 0,
+   "explanation": "60 + 20 = 80.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-units-conversion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-units-conversion",
+   "prompt": "A jug holds 1.5 litres. In millilitres this is...",
+   "choices": [
+    "150 ml",
+    "15 ml",
+    "15,000 ml",
+    "1,500 ml"
+   ],
+   "answer": 3,
+   "explanation": "1.5 × 1,000 = 1,500.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-speed-distance-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A car travels 240 km in 4 hours. What is its speed?",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "km/h",
+   "explanation": "240 ÷ 4 = 60.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-speed-distance-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bus drives at 80 km/h for 3 hours. What distance does it cover?",
+   "answer": 240,
+   "tolerance": 0,
+   "unit": "km",
+   "explanation": "80 × 3 = 240.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-speed-distance-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cyclist rides 30 km at 15 km/h. How long does it take?",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "hours",
+   "explanation": "30 ÷ 15 = 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-speed-distance-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A motorbike goes at 60 km/h for 45 minutes. How far does it travel?",
+   "answer": 45,
+   "tolerance": 0,
+   "unit": "km",
+   "explanation": "45 min = 0.75 h. 60 × 0.75 = 45 km.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-speed-distance-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A traveller goes 100 km in 2 hours and then 100 km in 1 hour. What is his average speed (to the nearest km/h)?",
+   "answer": 67,
+   "tolerance": 0.5,
+   "unit": "km/h",
+   "explanation": "200 km in 3 hours: 200 ÷ 3 = 66.7, about 67 km/h.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-time-units-speed-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-speed-distance-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cyclist leaves home at 07:30 and rides at 18 km/h for 2 hours 30 minutes.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How far does he ride?",
+     "answer": 45,
+     "tolerance": 0,
+     "explanation": "2 h 30 min = 2.5 h. 18 × 2.5 = 45 km.",
+     "unit": "km",
+     "id": "fslc-maths-time-units-speed-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "At what time does he arrive?",
+     "choices": [
+      "09:00",
+      "10:30",
+      "10:00",
+      "09:30"
+     ],
+     "answer": 2,
+     "explanation": "07:30 + 2 h 30 min = 10:00.",
+     "id": "fslc-maths-time-units-speed-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "He returns by the same road at 15 km/h. How many hours does the return take?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "45 ÷ 15 = 3 hours.",
+     "unit": "hours",
+     "id": "fslc-maths-time-units-speed-e18-c"
+    }
+   ],
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-speed-distance-time-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-speed-distance-time",
+   "prompt": "A runner does 100 m in 20 seconds. His speed is...",
+   "choices": [
+    "2,000 m/s",
+    "20 m/s",
+    "0.2 m/s",
+    "5 m/s"
+   ],
+   "answer": 3,
+   "explanation": "100 ÷ 20 = 5.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-speed-distance-time-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-speed-distance-time",
+   "prompt": "A train at 90 km/h travels for 2 hours. The distance is...",
+   "choices": [
+    "92 km",
+    "45 km",
+    "88 km",
+    "180 km"
+   ],
+   "answer": 3,
+   "explanation": "90 × 2 = 180.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-speed-distance-time-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-speed-distance-time",
+   "prompt": "How long does 120 km take at 40 km/h?",
+   "choices": [
+    "3 hours",
+    "5 hours",
+    "30 hours",
+    "80 hours"
+   ],
+   "answer": 0,
+   "explanation": "120 ÷ 40 = 3.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-speed-distance-time-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-speed-distance-time",
+   "prompt": "30 minutes in hours is...",
+   "choices": [
+    "0.5 h",
+    "30 h",
+    "5 h",
+    "0.3 h"
+   ],
+   "answer": 0,
+   "explanation": "30 ÷ 60 = 0.5.",
+   "chapter": "fslc-maths-time-units-speed"
+  },
+  {
+   "id": "fslc-maths-speed-distance-time-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-speed-distance-time",
+   "prompt": "Speed = ...",
+   "choices": [
+    "distance + time",
+    "distance ÷ time",
+    "time ÷ distance",
+    "distance × time"
+   ],
+   "answer": 1,
+   "explanation": "Speed is how far we go in one hour.",
+   "chapter": "fslc-maths-time-units-speed"
+  }
+ ]
+}

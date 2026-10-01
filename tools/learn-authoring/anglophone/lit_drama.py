@@ -1,0 +1,77 @@
+from lit_prose import *
+
+
+def drama(p):
+    ch = p.chapter("ch-drama", "Drama", "O Level Literature in English — drama: dialogue, stage directions, conflict, tragedy and comedy (transferable skills; official set play to be added by a teacher)")
+
+    B(ch, slug="drama-elements", title="Drama: dialogue, stage directions and conflict", min=26,
+      obj=["Read a play script: character names, dialogue and stage directions.", "Explain acts, scenes, soliloquy, aside and dramatic irony.", "Identify the conflict and the dramatic effect of a short scene."],
+      blocks=[
+          ("text", "**The Meeting Hall** (Act One, Scene Two)\n*A village meeting hall at dusk. One oil lamp flickers. NJI sits alone. MAMA ASHU enters with a basket.*\nMAMA ASHU: (sharply) You are still here? The meeting ended an hour ago.\nNJI: (not looking up) I am waiting for the answer.\nMAMA ASHU: What answer?\nNJI: Whether the village will sell the land. (He stands.) My father worked that land for forty years.\nMAMA ASHU: (softly) And your father is not here to decide.\n*A long silence. The lamp flickers and goes out.*"),
+          ("fig", tree("How a play is organised", "Play", [("Act I", "scenes 1, 2, 3"), ("Act II", "scenes 1, 2"), ("Act III", "scenes 1, 2")], h=185),
+           "Acts are the large divisions; scenes change with time or place.", "A diagram with the word Play above three boxes: Act I with scenes 1, 2 and 3; Act II with scenes 1 and 2; Act III with scenes 1 and 2."),
+          ("key", "definition", "Reading a script",
+           "- **Character names** in capitals before each speech.\n- **Dialogue:** the words the characters speak; it reveals character and moves the action forward.\n- **Stage directions** (in brackets or italics): how to speak (*sharply*), how to move (*He stands*), the setting, light and sound. They are written for the director and actors, but readers can learn from them.\n- A **play** is divided into **acts** and **scenes**."),
+          ("key", "definition", "Conflict and dramatic devices",
+           "- **Conflict:** the struggle that drives a play, between people, between a person and society or between two desires inside one person. Here: **tradition (the father's land) against change (the sale)**.\n- **Soliloquy:** a character alone speaks thoughts aloud. **Aside:** a short remark to the audience, unheard by others.\n- **Dramatic irony:** the audience knows more than a character.\n- **Climax:** the most intense point. **Tension, suspense** and **silence** are also tools."),
+          ("key", "definition", "What the extract shows",
+           "- Mama Ashu speaks **sharply** then **softly**: her attitude changes, which shows compassion.\n- Nji does not look up: he is troubled and withdrawn.\n- The **silence** and the **lamp going out** are symbols of uncertainty and loss.\nA good comment links a **word or direction** to an **effect on the audience**."),
+          ("key", "pieges", "Common mistakes",
+           "- Writing about a play as if it were a novel (ignoring stage directions and the audience).\n- Retelling the scene instead of commenting.\n- Forgetting that a play is **performed**: say what the audience sees and hears.\n- Confusing a **soliloquy** (alone, to oneself) with an **aside** (to the audience, others present).\n- Using *the author* for the character's opinion."),
+          ("ex", "Example 1: a stage direction", "What does the stage direction *(softly)* tell us about Mama Ashu's last line?",
+           ["Before this she spoke *sharply*; now she speaks *softly*.", "The change shows she understands Nji's pain: her attitude is kind."], "She speaks kindly and with understanding."),
+          ("ex", "Example 2: the conflict", "State the central conflict in *The Meeting Hall*.",
+           ["Nji is thinking about his father's forty years on the land.", "The village may sell it: loyalty to the past against the need to change."], "Tradition and family loyalty against the village's decision to sell the land."),
+      ],
+      ex=[
+          ("mcq", "Text in brackets, such as *(sharply)*, is a...", "stage direction", ["soliloquy", "rhyme", "refrain"], "It tells the actor how to speak or move."),
+          ("mcq", "A character alone on stage speaking thoughts aloud is delivering a...", "soliloquy", ["aside", "dialogue", "scene"], "Soliloquy."),
+          ("tf", "A play is divided into acts, which may be divided into scenes.", True, "Acts contain scenes."),
+          ("mcq", "When the audience knows something a character does not, we have...", "dramatic irony", ["a soliloquy", "an epilogue", "a refrain"], "The audience has superior knowledge."),
+          ("mcq", "In *The Meeting Hall*, the lamp going out most likely suggests...", "uncertainty or loss", ["a joke", "a sunny day", "a happy ending"], "Light fading is a common symbol of hope fading."),
+          ("open", "Read: *KOFI: (angrily) You sold my bicycle! / ADA: (calmly) I sold it to pay for your school fees.*\nExplain what the stage directions add and what the conflict is (3–4 sentences).",
+           "The stage directions show the contrast between Kofi's anger and Ada's calm, so we see that Ada is in control and has a reason for what she did. The conflict is between Kofi's feeling of betrayal and Ada's sense of duty to his education.",
+           ["1 mark: effect of the directions (anger / calm).", "1 mark: character insight about Ada.", "1 mark: conflict identified.", "1 mark: clear written expression."]),
+      ],
+      sc=[("A stage direction is addressed to...", "actors and director", ["only the poet", "the audience only", "nobody"], "It guides the performance."),
+          ("A short remark to the audience unheard by others is an...", "aside", ["epilogue", "act", "scene"], "Aside."),
+          ("The struggle that drives a play is the...", "conflict", ["rhyme", "setting", "chorus"], "Conflict."),
+          ("A scene is...", "a division of an act", ["the whole play", "a poem", "a song"], "Smaller than an act."),
+          ("To comment on a play you should consider...", "what the audience sees and hears", ["only the author's life", "only the title", "only the cast list"], "Drama is performed.")])
+
+    B(ch, slug="tragedy-comedy", title="Drama: tragedy and comedy", min=24,
+      obj=["Define tragedy and comedy in general terms.", "Recognise the features of each in a short scene.", "Explain comic relief and tragicomedy."],
+      notes=["Only general definitions are given; no specific play or playwright is discussed. If the set play is a tragedy or a comedy, the teacher should add the specific features."],
+      blocks=[
+          ("text", "**Last Bus** (a comic scene)\n*A bus station. KOFI holds two tickets. ADA enters, out of breath.*\nADA: Where is the bus to Kribi?\nKOFI: Gone. Ten minutes ago.\nADA: Gone? But my ticket says it leaves at ten!\nKOFI: Madam, your ticket says ten. Tomorrow.\n*ADA stares at the ticket, then sits slowly on her suitcase.*"),
+          ("fig", cols("Tragedy and comedy compared", ["Feature", "Tragedy", "Comedy"], [["Mood", "serious", "light"], ["Hero", "noble, flawed", "ordinary, foolish"], ["Ending", "loss, ruin", "happy, peace"], ["Aim", "pity and fear", "laughter"]], size=12),
+           "General features: individual plays can mix them.", "A table with columns Feature, Tragedy and Comedy. Mood: serious, light. Hero: noble and flawed, ordinary and foolish. Ending: loss or ruin, happy or peace. Aim: pity and fear, laughter."),
+          ("key", "definition", "Tragedy",
+           "A **tragedy** is a serious play in which the main character, often admirable but with a **flaw** (pride, jealousy, ambition) or caught in **forces beyond control**, moves towards **suffering, loss or death**. The audience feels **pity** and sometimes fear, and the end usually brings **understanding** or a sense of waste."),
+          ("key", "definition", "Comedy",
+           "A **comedy** is a play meant to amuse. It uses **misunderstanding, mistaken identity, exaggeration, wit and funny situations**. Characters are often ordinary people with weaknesses; problems are solved and the end is **happy** (reunion, wedding, forgiveness). *Last Bus* shows a **comic misunderstanding**: the date, not the time, was wrong."),
+          ("key", "definition", "Comic relief and tragicomedy",
+           "- **Comic relief:** a funny moment inside a serious play, to release tension (and often to make the next serious moment stronger).\n- **Tragicomedy:** a play mixing serious and comic elements.\n- **Satire:** comedy that criticises people or society by making them look foolish.\n- **Farce:** very exaggerated, fast comedy with absurd events."),
+          ("key", "pieges", "Common mistakes",
+           "- Saying tragedy = any sad story. In drama, it is a **serious play** with a particular pattern.\n- Saying comedy = only jokes. It also has a **structure** (problem → confusion → happy ending).\n- Giving the title of a play from memory with wrong details: only name a text you know well.\n- Ignoring **comic relief** in serious plays.\n- Not linking an example to an effect on the audience."),
+          ("ex", "Example 1: classifying a scene", "A scene shows a wealthy man pretending to be poor but everyone discovers him. The audience laughs. Which type of drama is the scene most like?",
+           ["Mistaken or hidden identity and laughter are typical of comedy.", "There is no serious loss: the effect is amusement."], "comedy"),
+          ("ex", "Example 2: comic relief", "In a serious play about a famine, a servant makes a joke about his own empty stomach. What is the purpose?",
+           ["A joke inside a serious play is **comic relief**.", "It eases the tension and makes the suffering more human."], "comic relief"),
+      ],
+      ex=[
+          ("mcq", "A play with a serious tone, a flawed hero and a sad ending is generally a...", "tragedy", ["comedy", "farce", "satire"], "Tragedy."),
+          ("mcq", "A funny episode in a serious play is called...", "comic relief", ["a soliloquy", "a tragedy", "a refrain"], "Comic relief."),
+          ("tf", "A comedy normally ends unhappily, with the main character's death.", False, "Comedy usually ends happily."),
+          ("mcq", "Which feature is typical of comedy?", "misunderstanding and a happy ending", ["a noble hero's ruin", "a funeral song", "a long soliloquy about death"], "Comedy uses misunderstandings and resolves them."),
+          ("mcq", "A play that makes fun of society's faults to criticise them is a...", "satire", ["tragedy", "lyric", "elegy"], "Satire uses humour for criticism."),
+          ("open", "Read: *ADA stares at the ticket, then sits slowly on her suitcase.* (end of *Last Bus*)\nExplain why this direction is both comic and slightly sad (3–4 sentences).",
+           "It is comic because Ada's long rush ended in a silly mistake about the date, and we see her helpless. It is also slightly sad because she is tired and has nowhere to go. Sitting *slowly* shows her disappointment, so the audience laughs but also feels sympathy.",
+           ["1 mark: the comic element (the mistaken date).", "1 mark: the sad element (disappointment).", "1 mark: a reference to the direction (sits slowly).", "1 mark: clear written expression."]),
+      ],
+      sc=[("A comedy usually ends...", "happily", ["in death", "in war", "in silence"], "Happy ending."),
+          ("Tragedy often features...", "a flawed main character", ["only animals", "no conflict", "rhyming couplets"], "Flaw or fate."),
+          ("Tragicomedy is...", "a mix of tragedy and comedy", ["a long poem", "a song", "a sad novel"], "A mixture."),
+          ("A farce is...", "very exaggerated comedy", ["a funeral", "a prayer", "a sonnet"], "Fast and absurd."),
+          ("The audience's feeling in tragedy is often...", "pity", ["boredom", "pride", "hunger"], "Pity (and fear).")])
+    return ch

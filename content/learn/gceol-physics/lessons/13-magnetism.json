@@ -1,0 +1,388 @@
+{
+ "chapter": "gceol-physics-magnetism",
+ "lessons": [
+  {
+   "id": "gceol-physics-magnets-fields",
+   "title": "Magnets and magnetic fields",
+   "minutes": 20,
+   "programRef": "GCE O Level Physics — Magnetism: magnets, fields, magnetisation (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the laws of magnetic poles and the magnetic materials.",
+    "Describe the magnetic field of a bar magnet using field lines.",
+    "Distinguish soft iron and steel and describe magnetisation and demagnetisation.",
+    "Describe the use of a plotting compass and the Earth's magnetic field."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-physics-magnetism-e01",
+    "gceol-physics-magnetism-e02",
+    "gceol-physics-magnetism-e03",
+    "gceol-physics-magnetism-e04",
+    "gceol-physics-magnetism-e05",
+    "gceol-physics-magnetism-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-magnets-fields-q1",
+    "gceol-physics-magnets-fields-q2",
+    "gceol-physics-magnets-fields-q3",
+    "gceol-physics-magnets-fields-q4",
+    "gceol-physics-magnets-fields-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Magnets",
+     "md": "A magnet has two **poles**, north (N) and south (S). **Like poles repel; unlike poles attract.** Magnetic materials are **iron, steel, nickel and cobalt**; copper, aluminium and plastic are not. Only a magnet **repels** another magnet; a magnet attracts both magnets and unmagnetised magnetic materials (by induction)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Magnetic fields",
+     "md": "A **magnetic field** is the region round a magnet in which a magnetic force acts. **Field lines** leave the **N pole** and enter the **S pole**; where they are closest the field is strongest (at the poles). A **plotting compass** shows the field direction (its N end points along the field). The Earth has a magnetic field; a compass needle points roughly to the geographic north."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Magnetising and demagnetising",
+     "md": "- **Soft iron** is easily magnetised and loses its magnetism easily (electromagnets, transformer cores).\n- **Steel** is hard to magnetise but keeps magnetism (permanent magnets, compass needles).\n- Magnetise by stroking with a magnet, or by placing in a coil carrying direct current; demagnetise by an alternating current in a coil, hammering or heating."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- The only sure test for a magnet is **repulsion**; attraction could be a magnet and an iron bar.\n- Magnetic field lines never cross.\n- The north pole of a compass is attracted to the Earth's magnetic south pole, which is near the geographic north."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 105,
+        "w": 50,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 105,
+        "w": 50,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 125,
+        "text": "S",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 125,
+        "text": "N",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 250 110 C 300 30 100 30 150 110",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "path",
+        "d": "M 250 130 C 300 210 100 210 150 130",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 58,
+        "x2": 185,
+        "y2": 58,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 182,
+        "x2": 215,
+        "y2": 182,
+        "color": "ink",
+        "width": 2,
+        "arrow": "start"
+       }
+      ]
+     },
+     "caption": "Magnetic field lines of a bar magnet: from the north pole round to the south pole.",
+     "alt": "A bar magnet with its south pole on the left and north on the right and curved lines leaving N and returning to S, with arrows showing direction."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — sorting materials",
+     "statement": "A pupil tests an iron nail, a copper coin, a steel pin and a plastic ruler with a magnet. Which are attracted?",
+     "steps": [
+      "Iron and steel are magnetic materials, so the nail and the pin are attracted.",
+      "Copper and plastic are not magnetic, so the coin and ruler are not attracted."
+     ],
+     "answer": "The nail and the pin"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — identifying a magnet",
+     "statement": "Bar X is attracted to both ends of bar Y. Bar X repels one end of bar Z. Which bars are magnets?",
+     "steps": [
+      "Repulsion happens only between two magnets, so X and Z are magnets.",
+      "Y attracts X at both ends but we cannot say it is a magnet: it could be unmagnetised iron attracted by the magnet X."
+     ],
+     "answer": "X and Z are magnets; Y may be only iron"
+    }
+   ],
+   "chapter": "gceol-physics-magnetism"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-magnetism-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-magnets-fields",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these materials is attracted by a magnet?",
+   "choices": [
+    "aluminium",
+    "wood",
+    "nickel",
+    "copper"
+   ],
+   "answer": 2,
+   "explanation": "Iron, steel, nickel and cobalt are magnetic.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnetism-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-magnets-fields",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Magnetic field lines go from the south pole to the north pole outside the magnet.",
+   "answer": false,
+   "explanation": "They go from N to S outside the magnet.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnetism-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-magnets-fields",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the best material for a permanent magnet?",
+   "choices": [
+    "steel",
+    "copper",
+    "soft iron",
+    "aluminium"
+   ],
+   "answer": 0,
+   "explanation": "Steel keeps its magnetism.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnetism-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-magnets-fields",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The only certain test to show that an object is a magnet is",
+   "choices": [
+    "its colour",
+    "repulsion with a known magnet",
+    "its weight",
+    "attraction with a known magnet"
+   ],
+   "answer": 1,
+   "explanation": "Both a magnet and unmagnetised iron are attracted; only a magnet can repel.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnetism-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-magnets-fields",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil wants to make a steel needle into a compass needle. Describe how.",
+   "model": "Stroke the needle many times in the same direction with one pole of a strong magnet (or place it in a coil carrying direct current); then suspend it so it can turn freely, and it will settle in a north-south direction.",
+   "rubric": "1 mark: stroking/DC coil; 1 mark: same direction; 1 mark: free to turn so it points N-S.",
+   "explanation": "Stroke the needle many times in the same direction with one pole of a strong magnet (or place it in a coil carrying direct current); then suspend it so it can turn freely, and it will settle in a north-south direction.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnetism-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-magnets-fields",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil holds a bar magnet near a hanging magnetic needle. The needle is repelled by the right-hand end of the bar magnet.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The right-hand end of the bar magnet and the near end of the needle are",
+     "choices": [
+      "opposite poles",
+      "poles of the same kind",
+      "both unmagnetised",
+      "not poles"
+     ],
+     "answer": 1,
+     "explanation": "Repulsion occurs between like poles.",
+     "id": "gceol-physics-magnetism-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What happens if the bar magnet is turned round?",
+     "choices": [
+      "The needle loses its magnetism",
+      "Nothing happens",
+      "The needle is attracted",
+      "The needle is repelled again"
+     ],
+     "answer": 2,
+     "explanation": "The opposite pole now faces the needle: unlike poles attract.",
+     "id": "gceol-physics-magnetism-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why soft iron is used for the core of an electromagnet.",
+     "model": "Soft iron is easily magnetised and demagnetised, so the magnetism switches on and off with the current.",
+     "rubric": "1 mark: easily magnetised; 1 mark: loses magnetism when current stops.",
+     "explanation": "Soft iron is easily magnetised and demagnetised, so the magnetism switches on and off with the current.",
+     "id": "gceol-physics-magnetism-e06-c"
+    }
+   ],
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnets-fields-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-magnets-fields",
+   "prompt": "Like magnetic poles",
+   "choices": [
+    "repel",
+    "attract",
+    "join",
+    "cancel"
+   ],
+   "answer": 0,
+   "explanation": "Like poles repel.",
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnets-fields-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-magnets-fields",
+   "prompt": "Field lines leave the",
+   "choices": [
+    "iron",
+    "middle",
+    "south pole",
+    "north pole"
+   ],
+   "answer": 3,
+   "explanation": "From N to S outside the magnet.",
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnets-fields-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-magnets-fields",
+   "prompt": "A plotting compass is used to",
+   "choices": [
+    "measure mass",
+    "measure current",
+    "show the direction of the magnetic field",
+    "cut wires"
+   ],
+   "answer": 2,
+   "explanation": "Its needle lines up with the field.",
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnets-fields-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-magnets-fields",
+   "prompt": "Which is NOT magnetic?",
+   "choices": [
+    "cobalt",
+    "iron",
+    "steel",
+    "aluminium"
+   ],
+   "answer": 3,
+   "explanation": "Aluminium is not a magnetic material.",
+   "chapter": "gceol-physics-magnetism"
+  },
+  {
+   "id": "gceol-physics-magnets-fields-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-magnets-fields",
+   "prompt": "Steel is used for permanent magnets because it",
+   "choices": [
+    "is not magnetic",
+    "keeps its magnetism",
+    "loses magnetism easily",
+    "is a liquid"
+   ],
+   "answer": 1,
+   "explanation": "It is hard to demagnetise.",
+   "chapter": "gceol-physics-magnetism"
+  }
+ ]
+}

@@ -1,0 +1,785 @@
+{
+ "chapter": "gceol-physics-motion",
+ "lessons": [
+  {
+   "id": "gceol-physics-speed-graphs",
+   "title": "Speed, velocity and motion graphs",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Kinematics: speed, velocity, acceleration, graphs, equations of motion (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define speed, velocity, distance and displacement.",
+    "Calculate average speed and convert between km/h and m/s.",
+    "Read distance-time and speed-time graphs: gradient and area.",
+    "Find the distance travelled from the area under a speed-time graph."
+   ],
+   "prerequisites": [
+    "gceol-physics-units-instruments"
+   ],
+   "exercises": [
+    "gceol-physics-motion-e01",
+    "gceol-physics-motion-e02",
+    "gceol-physics-motion-e03",
+    "gceol-physics-motion-e04",
+    "gceol-physics-motion-e05",
+    "gceol-physics-motion-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-speed-graphs-q1",
+    "gceol-physics-speed-graphs-q2",
+    "gceol-physics-speed-graphs-q3",
+    "gceol-physics-speed-graphs-q4",
+    "gceol-physics-speed-graphs-q5"
+   ],
+   "reviewNotes": [
+    "Distances between towns used as examples are illustrative round numbers, not exact road distances.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Speed and velocity",
+     "md": "**Speed** = distance ÷ time. **Velocity** is speed in a stated direction (a vector); **distance** is the length of path, **displacement** is the straight-line change of position with direction."
+    },
+    {
+     "type": "formula",
+     "tex": "\\text{average speed} = \\frac{\\text{total distance}}{\\text{total time}}",
+     "caption": "Units: m/s (or km/h)"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reading graphs",
+     "md": "- **Distance-time graph**: gradient = speed. Flat line = at rest. Steeper = faster.\n- **Speed-time graph**: gradient = acceleration; a flat line = constant speed.\n- **Area under a speed-time graph** = distance travelled.\n- To convert: km/h ÷ 3.6 = m/s (and m/s × 3.6 = km/h)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Average speed is not the average of speeds",
+     "md": "Average speed = **total** distance ÷ **total** time. If you travel 60 km/h for one hour and 40 km/h for another hour the average is 50 km/h, but if you travel the same *distance* at two speeds the average is **not** the middle value."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 40,
+      "ymin": 0,
+      "ymax": 25,
+      "grid": 5,
+      "w": 400,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 10,
+        "y": 20,
+        "label": "A",
+        "color": "red"
+       },
+       {
+        "x": 30,
+        "y": 20,
+        "label": "B",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 10,
+        "y2": 20,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 10,
+        "y1": 20,
+        "x2": 30,
+        "y2": 20,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 30,
+        "y1": 20,
+        "x2": 40,
+        "y2": 0,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "time (s)",
+      "ylabel": "speed (m/s)"
+     },
+     "caption": "Speed-time graph of a taxi: speeding up, steady, then braking.",
+     "alt": "A trapezoid-shaped speed-time graph rising from 0 to 20 m/s in 10 s, flat until 30 s, and falling to 0 at 40 s."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — average speed",
+     "statement": "A bus travels 150 km in 2.5 hours. Find its average speed in km/h and in m/s.",
+     "steps": [
+      "Speed = distance ÷ time = 150 ÷ 2.5 = 60 km/h.",
+      "Convert: 60 ÷ 3.6 = 16.67 m/s."
+     ],
+     "answer": "60 km/h ≈ 16.7 m/s"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — area under the graph",
+     "statement": "The graph shows a taxi's speed: 0 to 20 m/s in 10 s, steady until 30 s, then 20 m/s to 0 by 40 s. Find the total distance and the average speed.",
+     "steps": [
+      "The shape is a trapezium: parallel sides 40 s (base) and 20 s (top), height 20 m/s.",
+      "Area = ½ × (40 + 20) × 20 = 600 m, so the distance is 600 m.",
+      "Average speed = 600 ÷ 40 = 15 m/s."
+     ],
+     "answer": "600 m; 15 m/s"
+    }
+   ],
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-acceleration-equations",
+   "title": "Acceleration and the equations of motion",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — Kinematics: speed, velocity, acceleration, graphs, equations of motion (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define acceleration and deceleration.",
+    "Use v = u + at, s = ut + ½at² and v² = u² + 2as for uniform acceleration.",
+    "Describe free fall and use g = 10 m/s² (air resistance ignored).",
+    "Choose the right equation from the data given."
+   ],
+   "prerequisites": [
+    "gceol-physics-speed-graphs"
+   ],
+   "exercises": [
+    "gceol-physics-motion-e07",
+    "gceol-physics-motion-e08",
+    "gceol-physics-motion-e09",
+    "gceol-physics-motion-e10",
+    "gceol-physics-motion-e11",
+    "gceol-physics-motion-e12"
+   ],
+   "selfCheck": [
+    "gceol-physics-acceleration-equations-q1",
+    "gceol-physics-acceleration-equations-q2",
+    "gceol-physics-acceleration-equations-q3",
+    "gceol-physics-acceleration-equations-q4",
+    "gceol-physics-acceleration-equations-q5"
+   ],
+   "reviewNotes": [
+    "g = 10 m/s² is used for easy calculation; the Board may allow 9.8 or 10 — check the instruction in past papers.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Acceleration",
+     "md": "**Acceleration** = change in velocity ÷ time taken, unit m/s². Negative acceleration (deceleration) means the object slows down."
+    },
+    {
+     "type": "formula",
+     "tex": "a = \\frac{v - u}{t}",
+     "caption": "u = starting speed, v = final speed, t = time"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Equations for uniform acceleration",
+     "md": "- $v = u + at$\n- $s = ut + \\frac{1}{2}at^2$\n- $v^2 = u^2 + 2as$\n\nHere $u$ is the initial velocity, $v$ the final velocity, $a$ the constant acceleration, $t$ the time and $s$ the displacement. Starting from rest means $u = 0$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Free fall",
+     "md": "Near the Earth's surface every freely falling object (air resistance ignored) has acceleration **g = 10 m/s²** in this course (9.8 m/s² is more exact). A heavy and a light stone dropped together reach the ground together."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Method",
+     "md": "1. Write down what is given (u, v, a, t, s) and what is wanted.\n2. Pick the equation that contains these four quantities and **not** the one you do not need.\n3. Use consistent units (m, s). Convert km/h to m/s first."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 4,
+      "ymin": 0,
+      "ymax": 40,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "10*x",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 3,
+        "y": 30,
+        "label": "v = 30 m/s at 3 s",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "time (s)",
+      "ylabel": "speed (m/s)"
+     },
+     "caption": "Speed of a freely falling stone dropped from rest: a straight line of gradient g = 10 m/s².",
+     "alt": "A straight line through the origin on a speed-time graph, passing through 30 m/s at 3 seconds."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — car from rest",
+     "statement": "A car starts from rest and accelerates uniformly at 2.5 m/s² for 8 s. Find its final speed and the distance covered.",
+     "steps": [
+      "v = u + at = 0 + 2.5 × 8 = 20 m/s.",
+      "s = ut + ½at² = 0 + ½ × 2.5 × 8² = ½ × 2.5 × 64 = 80 m."
+     ],
+     "answer": "20 m/s; 80 m"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — stone from a cliff",
+     "statement": "A stone is dropped from the top of a 45 m cliff. Ignoring air resistance (g = 10 m/s²), find the time to hit the ground and its speed on impact.",
+     "steps": [
+      "u = 0, s = 45, a = 10. From s = ½at²: 45 = 5t², so t² = 9 and t = 3 s.",
+      "v = u + at = 0 + 10 × 3 = 30 m/s (check: v² = 2as = 900, v = 30)."
+     ],
+     "answer": "3 s; 30 m/s"
+    }
+   ],
+   "chapter": "gceol-physics-motion"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-motion-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-speed-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cyclist covers 90 m in 15 s. Find the speed in m/s.",
+   "answer": 6.0,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "90 ÷ 15 = 6 m/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-speed-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 108 km/h into m/s.",
+   "answer": 30.0,
+   "tolerance": 0.01,
+   "unit": "m/s",
+   "explanation": "108 ÷ 3.6 = 30 m/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-speed-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "On a distance-time graph, a horizontal line means the object is",
+   "choices": [
+    "accelerating",
+    "at rest",
+    "moving at constant speed",
+    "moving backwards"
+   ],
+   "answer": 1,
+   "explanation": "Distance does not change with time, so the object is stationary.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-speed-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A runner does the first 100 m in 20 s and the next 100 m in 25 s. Find the average speed over the 200 m (to 2 d.p.).",
+   "answer": 4.44,
+   "tolerance": 0.01,
+   "unit": "m/s",
+   "explanation": "Total distance 200 m, total time 45 s, so 200 ÷ 45 = 4.44 m/s.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-speed-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A speed-time graph is a horizontal line at 8 m/s from t = 0 to t = 5 s. The distance travelled is",
+   "choices": [
+    "1.6 m",
+    "8 m",
+    "40 m",
+    "13 m"
+   ],
+   "answer": 2,
+   "explanation": "Area of the rectangle = 8 × 5 = 40 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-speed-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A minibus starts from rest, accelerates uniformly to 20 m/s in 10 s, travels at 20 m/s for 20 s and then stops uniformly in 10 s (the graph of Example 2).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the acceleration during the first 10 s.",
+     "answer": 2.0,
+     "tolerance": 0,
+     "explanation": "a = change in speed ÷ time = 20 ÷ 10 = 2 m/s².",
+     "unit": "m/s²",
+     "id": "gceol-physics-motion-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the distance travelled in the first 10 s.",
+     "answer": 100.0,
+     "tolerance": 0,
+     "explanation": "Area of a triangle = ½ × 10 × 20 = 100 m.",
+     "unit": "m",
+     "id": "gceol-physics-motion-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the distance travelled at constant speed.",
+     "answer": 400,
+     "tolerance": 0,
+     "explanation": "20 m/s × 20 s = 400 m.",
+     "unit": "m",
+     "id": "gceol-physics-motion-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the total distance travelled?",
+     "choices": [
+      "400 m",
+      "500 m",
+      "800 m",
+      "600 m"
+     ],
+     "answer": 3,
+     "explanation": "100 + 400 + 100 = 600 m, same as the trapezium area.",
+     "id": "gceol-physics-motion-e06-d"
+    }
+   ],
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-speed-graphs-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-speed-graphs",
+   "prompt": "Speed is defined as",
+   "choices": [
+    "displacement multiplied by time",
+    "distance divided by time",
+    "distance multiplied by time",
+    "time divided by distance"
+   ],
+   "answer": 1,
+   "explanation": "Speed = distance ÷ time.",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-speed-graphs-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-speed-graphs",
+   "prompt": "The gradient of a distance-time graph gives",
+   "choices": [
+    "time",
+    "distance",
+    "speed",
+    "acceleration"
+   ],
+   "answer": 2,
+   "explanation": "Gradient = change in distance ÷ change in time = speed.",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-speed-graphs-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-speed-graphs",
+   "prompt": "The area under a speed-time graph gives",
+   "choices": [
+    "time",
+    "average force",
+    "acceleration",
+    "distance travelled"
+   ],
+   "answer": 3,
+   "explanation": "Area = speed × time = distance.",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-speed-graphs-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-speed-graphs",
+   "prompt": "72 km/h in m/s is",
+   "choices": [
+    "20 m/s",
+    "7.2 m/s",
+    "72 m/s",
+    "259 m/s"
+   ],
+   "answer": 0,
+   "explanation": "72 ÷ 3.6 = 20 m/s.",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-speed-graphs-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-speed-graphs",
+   "prompt": "Which of these is a vector quantity?",
+   "choices": [
+    "speed",
+    "distance",
+    "velocity",
+    "time"
+   ],
+   "answer": 2,
+   "explanation": "Velocity has a direction; speed, distance and time do not.",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-acceleration-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A car increases its speed from 10 m/s to 30 m/s in 5 s. Find the acceleration.",
+   "answer": 4.0,
+   "tolerance": 0,
+   "unit": "m/s²",
+   "explanation": "a = (30 − 10) ÷ 5 = 4 m/s².",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-acceleration-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ball is dropped and falls for 2 s. Find its speed (g = 10 m/s²).",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "v = gt = 10 × 2 = 20 m/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-acceleration-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which equation links u, v, a and s but not t?",
+   "choices": [
+    "s = ut + ½at²",
+    "a = v/t",
+    "v² = u² + 2as",
+    "v = u + at"
+   ],
+   "answer": 2,
+   "explanation": "v² = u² + 2as contains no time.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-acceleration-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A train starts from rest and accelerates at 3 m/s² over a distance of 150 m. Find its final speed.",
+   "answer": 30.0,
+   "tolerance": 0.01,
+   "unit": "m/s",
+   "explanation": "v² = u² + 2as = 0 + 2 × 3 × 150 = 900, so v = 30 m/s.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-acceleration-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bus travelling at 20 m/s brakes uniformly to rest in 4 s. What distance does it travel while braking?",
+   "choices": [
+    "5 m",
+    "40 m",
+    "80 m",
+    "20 m"
+   ],
+   "answer": 1,
+   "explanation": "Average speed 10 m/s × 4 s = 40 m (or s = ut + ½at² with a = −5: 80 − 40).",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-acceleration-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ball is thrown straight up from the ground at 20 m/s (g = 10 m/s², air resistance ignored).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How long does it take to reach the highest point? (the speed is 0 there)",
+     "answer": 2.0,
+     "tolerance": 0,
+     "explanation": "0 = 20 − 10t gives t = 2 s.",
+     "unit": "s",
+     "id": "gceol-physics-motion-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the maximum height.",
+     "answer": 20.0,
+     "tolerance": 0,
+     "explanation": "v² = u² + 2as: 0 = 400 − 20s, so s = 20 m.",
+     "unit": "m",
+     "id": "gceol-physics-motion-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the total time before it returns to the ground.",
+     "answer": 4.0,
+     "tolerance": 0,
+     "explanation": "Going up and coming down take equal times: 2 × 2 = 4 s.",
+     "unit": "s",
+     "id": "gceol-physics-motion-e12-c"
+    }
+   ],
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-acceleration-equations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-acceleration-equations",
+   "prompt": "Acceleration is measured in",
+   "choices": [
+    "m/s",
+    "m/s²",
+    "m²/s",
+    "N"
+   ],
+   "answer": 1,
+   "explanation": "Change in speed (m/s) per second gives m/s².",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-acceleration-equations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-acceleration-equations",
+   "prompt": "An object dropped from rest falls for 3 s (g = 10 m/s²). How far does it fall?",
+   "choices": [
+    "15 m",
+    "90 m",
+    "30 m",
+    "45 m"
+   ],
+   "answer": 3,
+   "explanation": "s = ½gt² = ½ × 10 × 9 = 45 m.",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-acceleration-equations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-acceleration-equations",
+   "prompt": "The acceleration of a car slowing down is",
+   "choices": [
+    "zero",
+    "always positive",
+    "equal to g",
+    "negative"
+   ],
+   "answer": 3,
+   "explanation": "Speed decreases, so the change in velocity is negative.",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-acceleration-equations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-acceleration-equations",
+   "prompt": "A car goes from rest to 12 m/s in 4 s. Its acceleration is",
+   "choices": [
+    "0.33 m/s²",
+    "48 m/s²",
+    "8 m/s²",
+    "3 m/s²"
+   ],
+   "answer": 3,
+   "explanation": "a = 12 ÷ 4 = 3 m/s².",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-acceleration-equations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-acceleration-equations",
+   "prompt": "In free fall (no air resistance) a heavy and a light object",
+   "choices": [
+    "never hit",
+    "heavy hits first",
+    "light hits first",
+    "hit the ground together"
+   ],
+   "answer": 3,
+   "explanation": "All objects have the same acceleration g without air resistance.",
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-physics-speed-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The gradient of a speed-time graph gives the",
+   "choices": [
+    "acceleration",
+    "average speed",
+    "distance travelled",
+    "force"
+   ],
+   "answer": 0,
+   "explanation": "Gradient = change in speed ÷ time = acceleration.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-motion"
+  },
+  {
+   "id": "gceol-physics-motion-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-acceleration-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A lorry of mass 2000 kg starts from rest on a level road. The engine force is 5000 N and the total resistance is 1000 N.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the resultant force.",
+     "answer": 4000,
+     "tolerance": 0,
+     "explanation": "5000 − 1000 = 4000 N.",
+     "unit": "N",
+     "id": "gceol-physics-motion-m02-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the acceleration.",
+     "answer": 2.0,
+     "tolerance": 0,
+     "explanation": "a = F ÷ m = 4000 ÷ 2000 = 2 m/s².",
+     "unit": "m/s²",
+     "id": "gceol-physics-motion-m02-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the speed after 10 s.",
+     "answer": 20.0,
+     "tolerance": 0,
+     "explanation": "v = at = 2 × 10 = 20 m/s.",
+     "unit": "m/s",
+     "id": "gceol-physics-motion-m02-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the distance travelled in 10 s.",
+     "answer": 100.0,
+     "tolerance": 0,
+     "explanation": "s = ½at² = ½ × 2 × 100 = 100 m.",
+     "unit": "m",
+     "id": "gceol-physics-motion-m02-d"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the kinetic energy of the lorry after 10 s.",
+     "answer": 400000.0,
+     "tolerance": 0,
+     "explanation": "Ek = ½mv² = ½ × 2000 × 400 = 400 000 J (equal to the work done by the resultant force, 4000 × 100).",
+     "unit": "J",
+     "id": "gceol-physics-motion-m02-e"
+    }
+   ],
+   "chapter": "gceol-physics-motion"
+  }
+ ]
+}

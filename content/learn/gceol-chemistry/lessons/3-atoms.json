@@ -1,0 +1,1230 @@
+{
+ "chapter": "gceol-chemistry-atoms",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-atomic-structure",
+   "title": "Atomic structure, electron arrangement and isotopes",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Atomic structure, isotopes, periodic table, Groups I, VII and 0 (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the relative charge and mass of protons, neutrons and electrons.",
+    "Find numbers of protons, neutrons and electrons from the proton and nucleon numbers.",
+    "Write electron arrangements for elements 1–20.",
+    "Define isotopes and calculate relative atomic mass from isotope abundances."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-chemistry-atoms-e01",
+    "gceol-chemistry-atoms-e02",
+    "gceol-chemistry-atoms-e03",
+    "gceol-chemistry-atoms-e04",
+    "gceol-chemistry-atoms-e05",
+    "gceol-chemistry-atoms-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-atomic-structure-q1",
+    "gceol-chemistry-atomic-structure-q2",
+    "gceol-chemistry-atomic-structure-q3",
+    "gceol-chemistry-atomic-structure-q4",
+    "gceol-chemistry-atomic-structure-q5"
+   ],
+   "reviewNotes": [
+    "Electron arrangements up to calcium (Z = 20) follow the 2, 8, 8, 2 pattern taught at this level.",
+    "Abundances of chlorine isotopes (75% and 25%) are the standard rounded values that give Ar = 35.5.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Inside the atom",
+     "md": "The **nucleus** contains **protons** (charge +1, mass 1) and **neutrons** (0, mass 1); **electrons** (charge −1, negligible mass) move around it in **shells**. **Proton number Z** = number of protons = number of electrons in a neutral atom. **Nucleon number A** = protons + neutrons. Neutrons = A − Z."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Electron arrangement",
+     "md": "Shells hold at most **2, 8, 8** electrons (for the first 20 elements), filled from the inside out. Sodium (Z = 11): **2,8,1**. Chlorine (Z = 17): **2,8,7**. Calcium (Z = 20): **2,8,8,2**. The number of **outer electrons** = the group number (Groups I–VII); full outer shell (2 or 8) = noble gas, very unreactive."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Isotopes and relative atomic mass",
+     "md": "**Isotopes** are atoms of the same element (same Z) with different numbers of neutrons (different A), e.g. chlorine-35 and chlorine-37. They have the same chemical properties. **Relative atomic mass** Ar = average mass of the isotopes (taking their abundance into account) compared with 1/12 of the mass of a carbon-12 atom."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Number of neutrons = A − Z, not A + Z.\n- Isotopes differ in neutrons, not in protons or electrons.\n- An ion has a different number of electrons from protons (Na⁺ has 10 electrons but 11 protons)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 55,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 80,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 226,
+        "cy": 134,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 174,
+        "cy": 106,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 254,
+        "cy": 131,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 166,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 189,
+        "cy": 174,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 154,
+        "cy": 150,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 146,
+        "cy": 109,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 170,
+        "cy": 74,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 211,
+        "cy": 66,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 246,
+        "cy": 90,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 183,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 40,
+        "text": "2,8,1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 190,
+        "text": "sodium",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Sodium atom, 2,8,1: 11 electrons in three shells round the nucleus.",
+     "alt": "Three concentric circles with 2, 8 and 1 red electrons and a central nucleus; text 2,8,1."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — particles in an atom",
+     "statement": "An atom of sodium has proton number 11 and nucleon number 23. State the number of protons, neutrons and electrons and write its electron arrangement.",
+     "steps": [
+      "Protons = 11; electrons = 11 (neutral atom); neutrons = 23 − 11 = 12.",
+      "Fill the shells: 2, 8, then 1: electron arrangement 2,8,1."
+     ],
+     "answer": "11 protons, 12 neutrons, 11 electrons; 2,8,1"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — relative atomic mass",
+     "statement": "Natural chlorine is 75% chlorine-35 and 25% chlorine-37. Calculate its relative atomic mass.",
+     "steps": [
+      "Ar = (75 × 35 + 25 × 37) ÷ 100.",
+      "= (2625 + 925) ÷ 100 = 3550 ÷ 100 = 35.5."
+     ],
+     "answer": "Ar = 35.5"
+    }
+   ],
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-periodic-table",
+   "title": "The periodic table: Groups I, VII and 0",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Atomic structure, isotopes, periodic table, Groups I, VII and 0 (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe how the periodic table is arranged (groups, periods, metals and non-metals).",
+    "Describe the trends and reactions of the alkali metals.",
+    "Describe the trends and displacement reactions of the halogens.",
+    "Explain the inertness and uses of noble gases."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-atomic-structure"
+   ],
+   "exercises": [
+    "gceol-chemistry-atoms-e07",
+    "gceol-chemistry-atoms-e08",
+    "gceol-chemistry-atoms-e09",
+    "gceol-chemistry-atoms-e10",
+    "gceol-chemistry-atoms-e11",
+    "gceol-chemistry-atoms-e12"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-periodic-table-q1",
+    "gceol-chemistry-periodic-table-q2",
+    "gceol-chemistry-periodic-table-q3",
+    "gceol-chemistry-periodic-table-q4",
+    "gceol-chemistry-periodic-table-q5"
+   ],
+   "reviewNotes": [
+    "Reactions of Group I metals with water are described qualitatively; a teacher should demonstrate or show video, never let pupils handle potassium.",
+    "Melting points and states of halogens at room temperature (Cl₂ gas, Br₂ liquid, I₂ solid) are standard.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Arrangement",
+     "md": "Elements are arranged in order of **proton number**. **Periods** are horizontal rows; **groups** are vertical columns of elements with the **same number of outer electrons** and similar properties. Metals are on the left and in the middle, non-metals on the right. Between Groups II and III are the **transition metals** (iron, copper, zinc…), which have coloured compounds and are good catalysts."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Group I — alkali metals (Li, Na, K)",
+     "md": "Soft metals with low melting points and densities, stored under oil. They react with water: **metal + water → metal hydroxide + hydrogen**, e.g. 2Na + 2H₂O → 2NaOH + H₂. The solution is alkaline. Reactivity **increases down the group** (K more violent than Na, Na more than Li), because the outer electron is lost more easily from a larger atom."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Group VII — halogens (F, Cl, Br, I)",
+     "md": "Chlorine is a pale green **gas**, bromine a red-brown **liquid**, iodine a grey-black **solid**: melting and boiling points **increase down the group**. They form diatomic molecules (Cl₂, Br₂, I₂) and ions X⁻. Reactivity **decreases down the group**, so a more reactive halogen **displaces** a less reactive one: Cl₂ + 2KBr → 2KCl + Br₂."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Group 0 and watch out",
+     "md": "**Group 0 (noble gases)**: He, Ne, Ar, Kr are monatomic, colourless and **unreactive** because their outer shells are full; used in lamps (neon, argon) and balloons (helium).\n\n- Alkali metals become **more** reactive down the group; halogens become **less** reactive. Do not mix them up."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 55,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 47,
+        "y": 79,
+        "text": "H",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 333,
+        "y": 55,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 79,
+        "text": "He",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 91,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 47,
+        "y": 115,
+        "text": "Li",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 69,
+        "y": 91,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 91,
+        "y": 115,
+        "text": "Be",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 113,
+        "y": 91,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 115,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 157,
+        "y": 91,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 179,
+        "y": 115,
+        "text": "C",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 201,
+        "y": 91,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 223,
+        "y": 115,
+        "text": "N",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 245,
+        "y": 91,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 267,
+        "y": 115,
+        "text": "O",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 289,
+        "y": 91,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 311,
+        "y": 115,
+        "text": "F",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 333,
+        "y": 91,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 115,
+        "text": "Ne",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 127,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 47,
+        "y": 151,
+        "text": "Na",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 69,
+        "y": 127,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 91,
+        "y": 151,
+        "text": "Mg",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 113,
+        "y": 127,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 151,
+        "text": "Al",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 157,
+        "y": 127,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 179,
+        "y": 151,
+        "text": "Si",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 201,
+        "y": 127,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 223,
+        "y": 151,
+        "text": "P",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 245,
+        "y": 127,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 267,
+        "y": 151,
+        "text": "S",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 289,
+        "y": 127,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 311,
+        "y": 151,
+        "text": "Cl",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 333,
+        "y": 127,
+        "w": 44,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 151,
+        "text": "Ar",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 47,
+        "y": 45,
+        "text": "I",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 91,
+        "y": 45,
+        "text": "II",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 45,
+        "text": "III",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 179,
+        "y": 45,
+        "text": "IV",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 223,
+        "y": 45,
+        "text": "V",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 267,
+        "y": 45,
+        "text": "VI",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 311,
+        "y": 45,
+        "text": "VII",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 45,
+        "text": "0",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 190,
+        "text": "Groups I (orange), VII (blue) and 0 (green)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The first three periods of the periodic table with Groups I, VII and 0 highlighted.",
+     "alt": "A grid with three rows of elements from hydrogen to argon and group numbers I to 0 along the top; Group I, VII and 0 are coloured."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — finding the group",
+     "statement": "An element X has electron arrangement 2,8,6. In which group and period is it, and is it a metal?",
+     "steps": [
+      "Outer electrons = 6, so Group VI. Three shells, so Period 3.",
+      "Group VI elements on the right of the table are non-metals: X is sulphur (Z = 16)."
+     ],
+     "answer": "Group VI, Period 3; non-metal (sulphur)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — displacement",
+     "statement": "Will chlorine displace bromine from potassium bromide solution? Write the equation and say what you see.",
+     "steps": [
+      "Chlorine is more reactive than bromine (higher in Group VII), so it displaces bromine: Cl₂ + 2KBr → 2KCl + Br₂.",
+      "The colourless solution turns orange-brown as bromine forms."
+     ],
+     "answer": "Yes: orange-brown bromine formed"
+    }
+   ],
+   "chapter": "gceol-chemistry-atoms"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-atoms-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-atomic-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An atom has 17 protons and 18 neutrons. Find its nucleon number.",
+   "answer": 35,
+   "tolerance": 0,
+   "explanation": "A = 17 + 18 = 35.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-atomic-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The electron arrangement of magnesium (Z = 12) is",
+   "choices": [
+    "2,8,1",
+    "2,10",
+    "2,8,2",
+    "2,2,8"
+   ],
+   "answer": 2,
+   "explanation": "Fill 2, then 8, then the remaining 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-atomic-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Isotopes of an element have different numbers of electrons in a neutral atom.",
+   "answer": false,
+   "explanation": "Neutral isotopes have the same number of protons and electrons; only neutrons differ.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-atomic-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Boron is 20% boron-10 and 80% boron-11. Calculate its relative atomic mass.",
+   "answer": 10.8,
+   "tolerance": 0.01,
+   "explanation": "Ar = (20 × 10 + 80 × 11) ÷ 100 = (200 + 880) ÷ 100 = 10.8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-atomic-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An atom has electron arrangement 2,8,6. It is in",
+   "choices": [
+    "Group VI, Period 2",
+    "Group VIII, Period 3",
+    "Group VI, Period 3",
+    "Group III, Period 6"
+   ],
+   "answer": 2,
+   "explanation": "6 outer electrons: Group VI; three shells: Period 3 (sulphur).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-atomic-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Three particles are described by (protons, neutrons, electrons): X (6, 6, 6), Y (6, 8, 6) and Z (11, 12, 10).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which two particles are isotopes of the same element?",
+     "choices": [
+      "Y and Z",
+      "None",
+      "X and Z",
+      "X and Y"
+     ],
+     "answer": 3,
+     "explanation": "Same number of protons (6) but different neutrons (6 and 8).",
+     "id": "gceol-chemistry-atoms-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the nucleon number of Y?",
+     "answer": 14,
+     "tolerance": 0,
+     "explanation": "A = 6 + 8 = 14.",
+     "id": "gceol-chemistry-atoms-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Particle Z is",
+     "choices": [
+      "a neutral atom",
+      "a negative ion",
+      "a neutron",
+      "a positive ion (Na⁺)"
+     ],
+     "answer": 3,
+     "explanation": "11 protons but 10 electrons: charge +1.",
+     "id": "gceol-chemistry-atoms-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State the electron arrangement of particle X (a neutral atom).",
+     "model": "2,4.",
+     "rubric": "1 mark for 2,4; 1 mark for stating 6 electrons filling shell 1 then shell 2.",
+     "explanation": "2,4.",
+     "id": "gceol-chemistry-atoms-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atomic-structure-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-atomic-structure",
+   "prompt": "The nucleon number is the number of",
+   "choices": [
+    "neutrons only",
+    "protons plus neutrons",
+    "protons only",
+    "electrons"
+   ],
+   "answer": 1,
+   "explanation": "A = Z + neutrons.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atomic-structure-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-atomic-structure",
+   "prompt": "A neutral atom has 9 protons. It has",
+   "choices": [
+    "9 electrons",
+    "10 electrons",
+    "18 electrons",
+    "0 electrons"
+   ],
+   "answer": 0,
+   "explanation": "Electrons = protons for neutral atoms.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atomic-structure-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-atomic-structure",
+   "prompt": "Electron arrangement of chlorine (Z = 17)",
+   "choices": [
+    "2,7,8",
+    "2,9,6",
+    "2,8,8",
+    "2,8,7"
+   ],
+   "answer": 3,
+   "explanation": "7 outer electrons.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atomic-structure-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-atomic-structure",
+   "prompt": "Chlorine-35 and chlorine-37 atoms have the same number of",
+   "choices": [
+    "neutrons",
+    "nucleons",
+    "electrons only",
+    "protons"
+   ],
+   "answer": 3,
+   "explanation": "They are isotopes of one element, so Z is the same.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atomic-structure-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-atomic-structure",
+   "prompt": "A noble gas atom has",
+   "choices": [
+    "a half full shell",
+    "one outer electron",
+    "no electrons",
+    "a full outer shell"
+   ],
+   "answer": 3,
+   "explanation": "That makes it unreactive.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-periodic-table",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which statement about Group I metals is correct?",
+   "choices": [
+    "They are hard and dense",
+    "They do not react with water",
+    "Reactivity decreases down the group",
+    "Reactivity increases down the group"
+   ],
+   "answer": 3,
+   "explanation": "Atoms get larger and the outer electron is lost more easily.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-periodic-table",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which halogen is a liquid at room temperature?",
+   "choices": [
+    "iodine",
+    "chlorine",
+    "bromine",
+    "fluorine"
+   ],
+   "answer": 2,
+   "explanation": "Cl₂ gas, Br₂ liquid, I₂ solid.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-periodic-table",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Neon is chemically unreactive because its outer shell is full.",
+   "answer": true,
+   "explanation": "A full outer shell gives stability.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-periodic-table",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Chlorine is bubbled into potassium iodide solution. The solution turns",
+   "choices": [
+    "green",
+    "brown (iodine formed)",
+    "blue",
+    "colourless"
+   ],
+   "answer": 1,
+   "explanation": "Chlorine displaces iodine: Cl₂ + 2KI → 2KCl + I₂.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-periodic-table",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why potassium is more reactive than lithium.",
+   "model": "Both lose one outer electron, but the potassium atom is larger, so its outer electron is further from the nucleus and held less strongly, and it is lost more easily.",
+   "rubric": "1 mark: both lose one electron; 1 mark: potassium's outer electron is further from nucleus/held less strongly.",
+   "explanation": "Both lose one outer electron, but the potassium atom is larger, so its outer electron is further from the nucleus and held less strongly, and it is lost more easily.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-periodic-table",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil adds a small piece of sodium to water in a trough (the teacher performs the demonstration).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What gas is given off?",
+     "choices": [
+      "hydrogen",
+      "oxygen",
+      "chlorine",
+      "carbon dioxide"
+     ],
+     "answer": 0,
+     "explanation": "2Na + 2H₂O → 2NaOH + H₂.",
+     "id": "gceol-chemistry-atoms-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What colour does universal indicator turn in the resulting solution?",
+     "choices": [
+      "blue/purple (alkaline)",
+      "green",
+      "red",
+      "colourless"
+     ],
+     "answer": 0,
+     "explanation": "Sodium hydroxide is a strong alkali.",
+     "id": "gceol-chemistry-atoms-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the balanced equation for the reaction.",
+     "model": "2Na + 2H₂O → 2NaOH + H₂",
+     "rubric": "1 mark for correct formulae; 1 mark for balancing.",
+     "explanation": "2Na + 2H₂O → 2NaOH + H₂",
+     "id": "gceol-chemistry-atoms-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Predict how potassium would react compared with sodium and explain.",
+     "model": "More vigorously, because it is further down Group I: the larger atom loses its outer electron more easily.",
+     "rubric": "1 mark: more vigorous; 1 mark: reason.",
+     "explanation": "More vigorously, because it is further down Group I: the larger atom loses its outer electron more easily.",
+     "id": "gceol-chemistry-atoms-e12-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-periodic-table-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-periodic-table",
+   "prompt": "Elements in the same group have the same number of",
+   "choices": [
+    "protons",
+    "neutrons",
+    "outer electrons",
+    "shells"
+   ],
+   "answer": 2,
+   "explanation": "That is why they have similar properties.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-periodic-table-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-periodic-table",
+   "prompt": "Noble gases are",
+   "choices": [
+    "metals",
+    "unreactive",
+    "liquids at room temperature",
+    "very reactive"
+   ],
+   "answer": 1,
+   "explanation": "Full outer shell.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-periodic-table-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-periodic-table",
+   "prompt": "Which is the most reactive halogen listed?",
+   "choices": [
+    "iodine",
+    "chlorine",
+    "all equal",
+    "bromine"
+   ],
+   "answer": 1,
+   "explanation": "Reactivity falls down the group.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-periodic-table-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-periodic-table",
+   "prompt": "Alkali metals react with water to form",
+   "choices": [
+    "chloride and chlorine",
+    "oxide and oxygen",
+    "carbonate and CO₂",
+    "hydroxide and hydrogen"
+   ],
+   "answer": 3,
+   "explanation": "2Na + 2H₂O → 2NaOH + H₂.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-periodic-table-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-periodic-table",
+   "prompt": "Transition metals",
+   "choices": [
+    "are not metals",
+    "have coloured compounds",
+    "are gases",
+    "are in Group 0"
+   ],
+   "answer": 1,
+   "explanation": "Typical property.",
+   "chapter": "gceol-chemistry-atoms"
+  },
+  {
+   "id": "gceol-chemistry-atoms-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-atomic-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which electron arrangement belongs to calcium (Z = 20)?",
+   "choices": [
+    "2,8,8",
+    "2,8,10",
+    "2,8,8,2",
+    "2,8,2"
+   ],
+   "answer": 2,
+   "explanation": "Fill shells 2, 8, 8 then 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-atoms"
+  }
+ ]
+}

@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "id": "gceol-literature",
+  "version": 1,
+  "title": "Literature in English — GCE O Level",
+  "description": "Transferable literature skills with original poems, extracts and scenes: prose, poetry, drama, African oral literature, literary terms, context questions, essays on a text and unseen appreciation, with a mock paper. Official set texts are not included.",
+  "lang": "en",
+  "cursus": "secondary",
+  "level": "Form 5",
+  "subject": "english",
+  "subjectWanted": "literature",
+  "exam": "GCE-OL",
+  "programRef": "Cameroon GCE Board, Ordinary Level Literature in English syllabus — general skills only; the official set texts must be added by a teacher (to be checked against the official texts)",
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
+    {
+      "id": "gceol-literature-ch-prose",
+      "title": "Prose fiction",
+      "order": 1,
+      "programRef": "O Level Literature in English — the novel and the short story (transferable skills; official set texts to be added by a teacher)"
+    },
+    {
+      "id": "gceol-literature-ch-poetry",
+      "title": "Poetry",
+      "order": 2,
+      "programRef": "O Level Literature in English — poetry: imagery, sound, form and tone (transferable skills; official set poems to be added by a teacher)"
+    },
+    {
+      "id": "gceol-literature-ch-drama",
+      "title": "Drama",
+      "order": 3,
+      "programRef": "O Level Literature in English — drama: dialogue, stage directions, conflict, tragedy and comedy (transferable skills; official set play to be added by a teacher)"
+    },
+    {
+      "id": "gceol-literature-ch-oral",
+      "title": "African oral literature and literary terms",
+      "order": 4,
+      "programRef": "O Level Literature in English — African oral literature (general knowledge) and literary terms"
+    },
+    {
+      "id": "gceol-literature-ch-exam",
+      "title": "Answering in the exam: context questions, essays and unseen texts",
+      "order": 5,
+      "programRef": "O Level Literature in English — answering context questions, writing essays on a text, unseen appreciation (transferable skills)"
+    }
+  ],
+  "mockExams": [
+    {
+      "id": "gceol-literature-mock-skills",
+      "title": "GCE O Level mock — Literature in English: reading skills",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Answer ALL the questions. Marks are shown for each section (total 20). All extracts are original CastBridge texts. This mock tests transferable skills only: the official set texts of the Cameroon GCE Board are not included, and the format of the paper must be checked against the official texts.",
+      "sections": [
+        {
+          "title": "Section A — Prose extract (5 marks)",
+          "exercises": [
+            "gceol-literature-ch-exam-m01"
+          ]
+        },
+        {
+          "title": "Section B — Unseen poem (5 marks)",
+          "exercises": [
+            "gceol-literature-ch-poetry-m01"
+          ]
+        },
+        {
+          "title": "Section C — Drama scene (4 marks)",
+          "exercises": [
+            "gceol-literature-ch-drama-m01"
+          ]
+        },
+        {
+          "title": "Section D — Essay skills and oral literature (6 marks)",
+          "exercises": [
+            "gceol-literature-ch-exam-m02",
+            "gceol-literature-ch-oral-m01"
+          ]
+        }
+      ]
+    }
+  ]
+}

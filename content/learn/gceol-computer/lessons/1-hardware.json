@@ -1,0 +1,1061 @@
+{
+ "chapter": "gceol-computer-hardware",
+ "lessons": [
+  {
+   "id": "gceol-computer-hardware-software",
+   "title": "Hardware, software and the computer system",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define a computer and name its four basic functions",
+    "Distinguish hardware from software",
+    "Classify software as system or application software",
+    "Name the main parts inside the system unit"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-hardware-e01",
+    "gceol-computer-hardware-e02",
+    "gceol-computer-hardware-e03",
+    "gceol-computer-hardware-e04",
+    "gceol-computer-hardware-e05",
+    "gceol-computer-hardware-e06"
+   ],
+   "selfCheck": [
+    "gceol-computer-hardware-software-q1",
+    "gceol-computer-hardware-software-q2",
+    "gceol-computer-hardware-software-q3",
+    "gceol-computer-hardware-software-q4",
+    "gceol-computer-hardware-software-q5"
+   ],
+   "reviewNotes": [
+    "Classification of software (system / application / programming) follows the usual textbook split; check the exact wording used by the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "What a computer is",
+     "md": "A **computer** is an electronic machine that accepts **input**, **processes** it following stored instructions, produces **output** and can **store** results. The cycle is often written \\*Input - Process - Output - Storage\\*."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Hardware and software",
+     "md": "**Hardware** is every physical part you can touch: keyboard, monitor, CPU, memory chips, disks. **Software** is the set of programs (instructions) that tell the hardware what to do. A computer without software cannot do useful work; software without hardware cannot run."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 130,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 26,
+        "text": "The information processing cycle",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 56,
+        "w": 83.5,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 51.75,
+        "y": 76,
+        "text": "Input",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 51.75,
+        "y": 93,
+        "text": "keyboard",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 93.5,
+        "y1": 78,
+        "x2": 115.5,
+        "y2": 78,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 115.5,
+        "y": 56,
+        "w": 83.5,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 157.25,
+        "y": 76,
+        "text": "Processing",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 157.25,
+        "y": 93,
+        "text": "CPU",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 199.0,
+        "y1": 78,
+        "x2": 221.0,
+        "y2": 78,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 221.0,
+        "y": 56,
+        "w": 83.5,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 262.75,
+        "y": 76,
+        "text": "Output",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 262.75,
+        "y": 93,
+        "text": "screen",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 304.5,
+        "y1": 78,
+        "x2": 326.5,
+        "y2": 78,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 326.5,
+        "y": 56,
+        "w": 83.5,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 368.25,
+        "y": 76,
+        "text": "Storage",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 368.25,
+        "y": 93,
+        "text": "disk",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A computer takes input, processes it with the CPU, gives output and can store the result.",
+     "alt": "Four boxes joined by arrows: input, processing, output and storage."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Types of software",
+     "md": "- **System software** manages the computer: operating system, utility programs (antivirus, disk cleaner), device drivers.\n- **Application software** does tasks for the user: word processor, spreadsheet, browser, games.\n- **Programming software** (compilers, interpreters) is used to create other programs."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A file, a photo or a program is **not** hardware: it is data or software stored \\*on\\* hardware.\n- The **CPU** is not the whole computer; the \\*system unit\\* (case) holds the motherboard, CPU, RAM, storage and power supply.\n- Windows, Linux and Android are operating systems, **not** application programs."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Classify",
+     "statement": "A school bursar in Bamenda uses a spreadsheet to total fees, an antivirus to protect the PC and a laser printer. Classify each item.",
+     "steps": [
+      "Spreadsheet: it does a user task (totals) so it is application software.",
+      "Antivirus: it protects and maintains the system so it is system (utility) software.",
+      "Laser printer: a physical device so it is hardware (an output device)."
+     ],
+     "answer": "Spreadsheet = application software; antivirus = system software; printer = hardware."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - IPO",
+     "statement": "Identify the input, process and output when a student types 12 and 8 and the computer displays 20.",
+     "steps": [
+      "Input: the numbers 12 and 8 typed on the keyboard.",
+      "Process: the CPU adds them (12 + 8).",
+      "Output: 20 displayed on the monitor; it may be saved to disk (storage)."
+     ],
+     "answer": "Input 12 and 8; process addition; output 20."
+    }
+   ],
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-devices",
+   "title": "Input, output and storage devices",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Give examples of input, output and storage devices",
+    "Match devices to uses",
+    "Compare RAM and ROM and primary and secondary storage",
+    "Convert between storage units"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-hardware-e07",
+    "gceol-computer-hardware-e08",
+    "gceol-computer-hardware-e09",
+    "gceol-computer-hardware-e10",
+    "gceol-computer-hardware-e11",
+    "gceol-computer-hardware-e12"
+   ],
+   "selfCheck": [
+    "gceol-computer-devices-q1",
+    "gceol-computer-devices-q2",
+    "gceol-computer-devices-q3",
+    "gceol-computer-devices-q4",
+    "gceol-computer-devices-q5"
+   ],
+   "reviewNotes": [
+    "1 KB = 1024 bytes convention is stated in the lesson; the exam may use 1000 - check the official guidance.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Three kinds of device",
+     "md": "- **Input devices** send data in: keyboard, mouse, scanner, microphone, digital camera, touch screen, barcode reader.\n- **Output devices** present results: monitor, printer, speakers, projector.\n- **Storage devices** keep data: hard disk, solid-state drive, flash drive, memory card, optical disc."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Memory and storage",
+     "md": "**RAM** (random access memory) holds programs and data in use; it is fast and **volatile** (it loses its contents when power is off). **ROM** (read-only memory) holds start-up instructions and keeps them without power. **Secondary storage** (disks, flash drives) keeps files permanently but is slower than RAM."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Examples of devices",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 59,
+        "text": "Input",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 59,
+        "text": "Output",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 59,
+        "text": "Storage",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 87,
+        "text": "Keyboard",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 87,
+        "text": "Monitor",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 87,
+        "text": "Hard disk",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 115,
+        "text": "Mouse",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 115,
+        "text": "Printer",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 115,
+        "text": "Flash drive",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 143,
+        "text": "Scanner",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 143,
+        "text": "Speaker",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 143,
+        "text": "Memory card",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table with three columns listing example input, output and storage devices.",
+     "alt": "Table: input devices keyboard, mouse, scanner; output devices monitor, printer, speaker; storage devices hard disk, flash drive, memory card."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Storage units",
+     "md": "A **bit** is 0 or 1. **8 bits = 1 byte**. In school computing we use 1 KB = 1024 bytes, 1 MB = 1024 KB, 1 GB = 1024 MB, 1 TB = 1024 GB. (Some makers use 1000; this lesson uses 1024.)"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A touch screen is **both** input and output.\n- RAM is not permanent storage: unsaved work is lost in a power cut (a real risk in many towns).\n- Do not confuse \\*memory\\* (RAM) with \\*storage\\* (disk), even though both are measured in bytes."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Which device?",
+     "statement": "A shop in Kumba wants to (a) read product codes at the till, (b) print receipts, (c) back up daily sales. Choose a device for each.",
+     "steps": [
+      "(a) Reading product codes is input: a barcode reader.",
+      "(b) Printing receipts is output: a printer.",
+      "(c) Backing up needs storage: an external disk or flash drive."
+     ],
+     "answer": "Barcode reader, printer, external disk or flash drive."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Units",
+     "statement": "How many bytes are in 3 KB, and how many MB are in 5 GB?",
+     "steps": [
+      "3 KB x 1024 = 3072 bytes.",
+      "5 GB x 1024 = 5120 MB."
+     ],
+     "answer": "3072 bytes; 5120 MB."
+    }
+   ],
+   "chapter": "gceol-computer-hardware"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-computer-hardware-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-hardware-software",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of the following is **hardware**?",
+   "choices": [
+    "An antivirus program",
+    "An operating system",
+    "A word processor",
+    "A monitor"
+   ],
+   "answer": 3,
+   "explanation": "A monitor is a physical device. The other three are software.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-hardware-software",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Microsoft Word, a browser or a game are examples of",
+   "choices": [
+    "system software",
+    "firmware chips only",
+    "application software",
+    "hardware"
+   ],
+   "answer": 2,
+   "explanation": "They help the user do a task, so they are application software.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-hardware-software",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A photograph stored on a flash drive is hardware.",
+   "answer": false,
+   "explanation": "The flash drive is hardware; the photo is data stored on it.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-hardware-software",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which pair is correctly matched?",
+   "choices": [
+    "Keyboard - software",
+    "Compiler - hardware",
+    "Spreadsheet - system software",
+    "Device driver - system software"
+   ],
+   "answer": 3,
+   "explanation": "Drivers help the OS control devices, so they are system software. Keyboards are hardware; compilers are software.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-hardware-software",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a computer needs both hardware and software. Give one example of each.",
+   "model": "Hardware provides the physical parts that carry out operations (e.g. the CPU or the keyboard). Software gives the instructions that tell the hardware what to do (e.g. an operating system). Without software the hardware does nothing useful; without hardware the software has nothing to run on.",
+   "rubric": "1 mark each: role of hardware, role of software, one correct example of each (3 marks).",
+   "explanation": "Hardware provides the physical parts that carry out operations (e.g. the CPU or the keyboard). Software gives the instructions that tell the hardware what to do (e.g. an operating system). Without software the hardware does nothing useful; without hardware the software has nothing to run on.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-hardware-software",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A small business in Douala has a desktop PC, a printer, an operating system, a spreadsheet and a flash drive.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which item is application software?",
+     "choices": [
+      "The printer",
+      "The flash drive",
+      "The operating system",
+      "The spreadsheet"
+     ],
+     "answer": 3,
+     "explanation": "Spreadsheets perform a user task.",
+     "id": "gceol-computer-hardware-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which item is system software?",
+     "choices": [
+      "The spreadsheet",
+      "The printer",
+      "The operating system",
+      "The flash drive"
+     ],
+     "answer": 2,
+     "explanation": "The OS manages the computer.",
+     "id": "gceol-computer-hardware-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name two hardware items from the list and say whether each is input, output or storage.",
+     "model": "Printer - output device; flash drive - storage device.",
+     "rubric": "1 mark per correct item with its type.",
+     "explanation": "Printer - output device; flash drive - storage device.",
+     "id": "gceol-computer-hardware-e06-c"
+    }
+   ],
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-software-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-hardware-software",
+   "prompt": "Which of these is NOT a basic function of a computer?",
+   "choices": [
+    "Input",
+    "Processing",
+    "Cooking",
+    "Output"
+   ],
+   "answer": 2,
+   "explanation": "Input, processing, output (and storage) are the basic functions.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-software-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-hardware-software",
+   "prompt": "The physical parts of a computer are called",
+   "choices": [
+    "hardware",
+    "software",
+    "data",
+    "firmware only"
+   ],
+   "answer": 0,
+   "explanation": "Hardware means the physical parts.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-software-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-hardware-software",
+   "prompt": "An operating system is a kind of",
+   "choices": [
+    "storage medium",
+    "system software",
+    "application software",
+    "output device"
+   ],
+   "answer": 1,
+   "explanation": "It manages the computer.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-software-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-hardware-software",
+   "prompt": "Which component carries out the instructions of a program?",
+   "choices": [
+    "The keyboard",
+    "The CPU",
+    "The monitor",
+    "The speaker"
+   ],
+   "answer": 1,
+   "explanation": "The Central Processing Unit executes instructions.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-software-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-hardware-software",
+   "prompt": "An antivirus program is best described as",
+   "choices": [
+    "an input device",
+    "a utility (system) program",
+    "a programming language",
+    "a spreadsheet"
+   ],
+   "answer": 1,
+   "explanation": "It maintains and protects the system.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-devices",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which one is an **output** device?",
+   "choices": [
+    "Mouse",
+    "Microphone",
+    "Speaker",
+    "Scanner"
+   ],
+   "answer": 2,
+   "explanation": "Speakers produce sound output.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-devices",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many bytes are in 2 KB? (use 1 KB = 1024 bytes)",
+   "answer": 2048,
+   "tolerance": 0,
+   "explanation": "2 x 1024 = 2048.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-devices",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "ROM loses its contents when the computer is switched off.",
+   "answer": false,
+   "explanation": "ROM is non-volatile. RAM is the volatile memory.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-devices",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A file is 4096 KB. How many MB is that? (1 MB = 1024 KB)",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "4096 / 1024 = 4 MB.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e11",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-devices",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each device to its type.",
+   "pairs": [
+    [
+     "Barcode reader",
+     "Input"
+    ],
+    [
+     "Projector",
+     "Output"
+    ],
+    [
+     "Memory card",
+     "Storage"
+    ],
+    [
+     "Touch screen",
+     "Input and output"
+    ]
+   ],
+   "explanation": "A touch screen takes touches (input) and shows pictures (output).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-devices",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A computer has 4 GB of RAM and a 500 GB hard disk. Use 1 GB = 1024 MB.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many MB of RAM is 4 GB?",
+     "answer": 4096,
+     "tolerance": 0,
+     "explanation": "4 x 1024 = 4096 MB.",
+     "id": "gceol-computer-hardware-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What happens to unsaved work in RAM during a power cut?",
+     "choices": [
+      "It is copied to ROM",
+      "It is lost",
+      "It is kept in the monitor",
+      "It is saved to the keyboard"
+     ],
+     "answer": 1,
+     "explanation": "RAM is volatile.",
+     "id": "gceol-computer-hardware-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give two differences between RAM and a hard disk.",
+     "model": "RAM is fast, temporary and volatile; the hard disk is slower, permanent and usually much larger.",
+     "rubric": "1 mark per correct difference.",
+     "explanation": "RAM is fast, temporary and volatile; the hard disk is slower, permanent and usually much larger.",
+     "id": "gceol-computer-hardware-e12-c"
+    }
+   ],
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-devices-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-devices",
+   "prompt": "A device that converts printed pages into digital images is a",
+   "choices": [
+    "scanner",
+    "speaker",
+    "printer",
+    "plotter"
+   ],
+   "answer": 0,
+   "explanation": "A scanner is an input device for images.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-devices-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-devices",
+   "prompt": "8 bits make",
+   "choices": [
+    "1 KB",
+    "1 MB",
+    "1 nibble only",
+    "1 byte"
+   ],
+   "answer": 3,
+   "explanation": "8 bits = 1 byte.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-devices-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-devices",
+   "prompt": "Which memory is volatile?",
+   "choices": [
+    "ROM",
+    "A flash drive",
+    "RAM",
+    "A hard disk"
+   ],
+   "answer": 2,
+   "explanation": "RAM loses its data without power.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-devices-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-devices",
+   "prompt": "A flash drive is mainly used for",
+   "choices": [
+    "storing and carrying files",
+    "displaying output",
+    "cooling the CPU",
+    "typing text"
+   ],
+   "answer": 0,
+   "explanation": "It is a portable storage device.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-devices-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-devices",
+   "prompt": "Which is secondary storage?",
+   "choices": [
+    "Monitor",
+    "Solid-state drive",
+    "RAM",
+    "CPU cache only"
+   ],
+   "answer": 1,
+   "explanation": "SSDs keep data permanently.",
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-computer-hardware-software",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which one is **application** software?",
+   "choices": [
+    "A device driver",
+    "A spreadsheet program",
+    "An operating system",
+    "A printer"
+   ],
+   "answer": 1,
+   "explanation": "It does a user task.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceol-computer-hardware"
+  },
+  {
+   "id": "gceol-computer-hardware-m02",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-computer-devices",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which memory loses its contents when the power is switched off?",
+   "choices": [
+    "ROM",
+    "A hard disk",
+    "A flash drive",
+    "RAM"
+   ],
+   "answer": 3,
+   "explanation": "RAM is volatile.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceol-computer-hardware"
+  }
+ ]
+}

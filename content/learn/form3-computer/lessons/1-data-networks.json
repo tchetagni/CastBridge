@@ -1,0 +1,1507 @@
+{
+ "chapter": "form3-computer-data-networks",
+ "lessons": [
+  {
+   "id": "form3-computer-data-information",
+   "title": "Data, information and processing",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 3 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish data from information",
+    "Describe the data processing cycle",
+    "Compare batch and real-time processing",
+    "Explain why data must be accurate"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-computer-data-networks-e01",
+    "form3-computer-data-networks-e02",
+    "form3-computer-data-networks-e03",
+    "form3-computer-data-networks-e04",
+    "form3-computer-data-networks-e05",
+    "form3-computer-data-networks-e06"
+   ],
+   "selfCheck": [
+    "form3-computer-data-information-q1",
+    "form3-computer-data-information-q2",
+    "form3-computer-data-information-q3",
+    "form3-computer-data-information-q4",
+    "form3-computer-data-information-q5"
+   ],
+   "reviewNotes": [
+    "Terminology (batch, real-time, interactive) follows common textbook use; check the programme.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Data and information",
+     "md": "**Data** is raw facts and figures with no meaning on their own, e.g. 15, 12, 18. **Information** is data that has been processed and organised so that it has meaning, e.g. 'The class average mark is 15'."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Processing cycle",
+     "md": "The cycle has stages: **collect** the data, **input** it, **process** it (sort, calculate, search), **output** the information, **store** it. Information can then be used to make decisions."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 130,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 26,
+        "text": "Data processing cycle",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 56,
+        "w": 83.5,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 51.75,
+        "y": 76,
+        "text": "Collect",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 51.75,
+        "y": 93,
+        "text": "data",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 93.5,
+        "y1": 78,
+        "x2": 115.5,
+        "y2": 78,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 115.5,
+        "y": 56,
+        "w": 83.5,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 157.25,
+        "y": 84,
+        "text": "Input",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 199.0,
+        "y1": 78,
+        "x2": 221.0,
+        "y2": 78,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 221.0,
+        "y": 56,
+        "w": 83.5,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 262.75,
+        "y": 84,
+        "text": "Process",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 304.5,
+        "y1": 78,
+        "x2": 326.5,
+        "y2": 78,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 326.5,
+        "y": 56,
+        "w": 83.5,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 368.25,
+        "y": 76,
+        "text": "Output",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 368.25,
+        "y": 93,
+        "text": "info",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Four boxes: collect data, input, process, output information.",
+     "alt": "Flow of four boxes from collect data to output information."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Kinds of processing",
+     "md": "**Batch processing**: data is collected and processed all together later (for example monthly payslips). **Real-time (online) processing**: data is processed at once (for example a ticket booking system). **Interactive** processing replies immediately to the user."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- 'Garbage in, garbage out': wrong input gives wrong output.\n- A number alone is data; 'Ada scored 15/20' is information.\n- Real-time does not mean 'faster computer'; it means processed immediately."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "The marks 12, 15, 18 of three tests are data. Produce information.",
+     "steps": [
+      "Add the marks: 12 + 15 + 18 = 45.",
+      "Average = 45 / 3 = 15, so the information is: average mark 15."
+     ],
+     "answer": "Average mark 15"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Decide batch or real-time: (a) a school prints all report cards at the end of term; (b) an ATM gives money immediately.",
+     "steps": [
+      "(a) Data collected over the term and processed together: batch.",
+      "(b) Needs an immediate answer: real-time."
+     ],
+     "answer": "(a) batch; (b) real-time"
+    }
+   ],
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-databases-intro",
+   "title": "Introduction to databases",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 3 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define database, table, field, record and primary key",
+    "Choose data types for fields",
+    "Sort and search a table",
+    "Say why a database is better than paper lists"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-computer-data-networks-e07",
+    "form3-computer-data-networks-e08",
+    "form3-computer-data-networks-e09",
+    "form3-computer-data-networks-e10",
+    "form3-computer-data-networks-e11",
+    "form3-computer-data-networks-e12"
+   ],
+   "selfCheck": [
+    "form3-computer-databases-intro-q1",
+    "form3-computer-databases-intro-q2",
+    "form3-computer-databases-intro-q3",
+    "form3-computer-databases-intro-q4",
+    "form3-computer-databases-intro-q5"
+   ],
+   "reviewNotes": [
+    "Query syntax is kept in words; SQL is not required at this level.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Database",
+     "md": "A **database** is an organised collection of data that can be searched and updated easily. It is stored in **tables**. A table has **fields** (columns, e.g. Name) and **records** (rows, e.g. all data about one student). A **primary key** is a field with a unique value for each record, such as StudentID."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Data types",
+     "md": "Each field has a **data type**: **text** (names, phone numbers), **number** (age, price), **date** (birthday), **yes/no** (a true/false answer). Choosing the right type helps sorting and validation. A phone number is stored as text because we do not calculate with it."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Table: Students",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 59,
+        "text": "ID",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 59,
+        "text": "Name",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 59,
+        "text": "Town",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 59,
+        "text": "Age",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 87,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 87,
+        "text": "Ada",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 87,
+        "text": "Buea",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 87,
+        "text": "14",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 115,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 115,
+        "text": "Paul",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 115,
+        "text": "Limbe",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 115,
+        "text": "15",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 143,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 143,
+        "text": "Nina",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 143,
+        "text": "Buea",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 143,
+        "text": "13",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table with fields ID, Name, Town, Age and three records.",
+     "alt": "Database table with four fields and three records."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Sorting and queries",
+     "md": "**Sorting** puts records in order, e.g. by Surname from A to Z or by Age from largest to smallest. A **search** or **query** finds records that match a condition, for example Town = \"Buea\". Conditions can be joined with AND / OR."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- Do not use a name as the primary key.\n- Keep one kind of data per field (do not mix first and last name in the same field if you want to sort by surname).\n- Back up the database regularly."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "From the table, find records with Town = Buea.",
+     "steps": [
+      "Check each record's Town field.",
+      "Records 1 (Ada) and 3 (Nina) have Buea."
+     ],
+     "answer": "Ada and Nina"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Sort the table by Age from smallest to largest.",
+     "steps": [
+      "Ages: Ada 14, Paul 15, Nina 13.",
+      "Smallest first: Nina (13), Ada (14), Paul (15)."
+     ],
+     "answer": "Nina, Ada, Paul"
+    }
+   ],
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-networks-intro",
+   "title": "Computer networks",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 3 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define a network and give reasons for networking",
+    "Name LAN, WAN and the Internet",
+    "Describe the star and bus topologies",
+    "Name basic network devices"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-computer-data-networks-e13",
+    "form3-computer-data-networks-e14",
+    "form3-computer-data-networks-e15",
+    "form3-computer-data-networks-e16",
+    "form3-computer-data-networks-e17",
+    "form3-computer-data-networks-e18"
+   ],
+   "selfCheck": [
+    "form3-computer-networks-intro-q1",
+    "form3-computer-networks-intro-q2",
+    "form3-computer-networks-intro-q3",
+    "form3-computer-networks-intro-q4",
+    "form3-computer-networks-intro-q5"
+   ],
+   "reviewNotes": [
+    "Bus/ring/mesh topologies in outline; check which ones the programme requires.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Network",
+     "md": "A **network** is two or more computers connected so that they can share **data**, **printers** and an **Internet connection**. Computers in a network are linked by cables or by wireless (**Wi-Fi**)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "LAN and WAN",
+     "md": "A **LAN** (local area network) covers a small area such as a school or an office. A **WAN** (wide area network) covers a large area; the **Internet** is the largest WAN. Reasons for networking: sharing resources, saving money, central storage and backup, communication."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 140,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 22,
+        "text": "Bus network",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 110,
+        "x2": 390,
+        "y2": 110,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "rect",
+        "x": 38,
+        "y": 40,
+        "w": 64,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 5
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 61,
+        "text": "PC 1",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 70,
+        "x2": 70,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 128,
+        "y": 40,
+        "w": 64,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 5
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 61,
+        "text": "PC 2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 70,
+        "x2": 160,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 218,
+        "y": 40,
+        "w": 64,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 5
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 61,
+        "text": "PC 3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 70,
+        "x2": 250,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 308,
+        "y": 40,
+        "w": 64,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 5
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 61,
+        "text": "Printer",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 70,
+        "x2": 340,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       }
+      ]
+     },
+     "caption": "Four devices connected to one shared cable.",
+     "alt": "Bus topology: PC 1, PC 2, PC 3 and a printer all joined to a single cable."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Topologies and devices",
+     "md": "**Star**: each computer connects to a central **switch**. **Bus**: all computers share one cable. A **router** connects a network to the Internet. A **network interface card (NIC)** lets a computer join a network. A **server** is a computer that provides services to others."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- A network is not the same as the Internet.\n- In a star network, if the central switch fails, all connected computers lose the network.\n- Wireless networks are convenient but can be less secure if not protected with a password."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A school lab in Garoua has 15 computers and one printer. Why connect them in a LAN?",
+     "steps": [
+      "All 15 computers can print on the one printer.",
+      "Files can be shared and one Internet connection can serve all."
+     ],
+     "answer": "To share the printer, files and Internet connection."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "One cable of a star network is cut. How many computers are affected if there are 10 computers?",
+     "steps": [
+      "Each computer has its own cable to the switch.",
+      "Only the one with the cut cable is affected: 1."
+     ],
+     "answer": "1 computer"
+    }
+   ],
+   "chapter": "form3-computer-data-networks"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-computer-data-networks-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-computer-data-information",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Raw facts and figures are called",
+   "choices": [
+    "output",
+    "hardware",
+    "data",
+    "information"
+   ],
+   "answer": 2,
+   "explanation": "Data.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-computer-data-information",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Information is data that has been processed to give meaning.",
+   "answer": true,
+   "explanation": "That is the definition.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-computer-data-information",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The average of 10, 14 and 18 is",
+   "answer": 14,
+   "tolerance": 0,
+   "explanation": "(10+14+18)/3 = 42/3 = 14.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-data-information",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Online seat booking is an example of",
+   "choices": [
+    "storage only",
+    "batch processing",
+    "no processing",
+    "real-time processing"
+   ],
+   "answer": 3,
+   "explanation": "Immediate processing.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-data-information",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain 'garbage in, garbage out' with an example.",
+   "model": "If wrong data is typed in, the output will also be wrong. Example: typing 150 instead of 15 as a mark gives a wrong class average.",
+   "rubric": "1 mark meaning, 1 mark example.",
+   "explanation": "If wrong data is typed in, the output will also be wrong. Example: typing 150 instead of 15 as a mark gives a wrong class average.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-computer-data-information",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A shop records daily sales: 12000, 15000, 18000, 15000 FCFA.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total sales",
+     "answer": 60000,
+     "tolerance": 0,
+     "explanation": "12000 + 15000 + 18000 + 15000 = 60000.",
+     "id": "form3-computer-data-networks-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Average daily sales",
+     "answer": 15000,
+     "tolerance": 0,
+     "explanation": "60000 / 4 = 15000.",
+     "id": "form3-computer-data-networks-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The list of numbers is",
+     "choices": [
+      "an algorithm",
+      "software",
+      "data",
+      "information"
+     ],
+     "answer": 2,
+     "explanation": "Raw figures.",
+     "id": "form3-computer-data-networks-e06-c"
+    }
+   ],
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-information-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-data-information",
+   "prompt": "Which is information?",
+   "choices": [
+    "15",
+    "12 18 9",
+    "The class average is 15",
+    "Ada"
+   ],
+   "answer": 2,
+   "explanation": "Meaningful statement.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-information-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-data-information",
+   "prompt": "Batch processing means",
+   "choices": [
+    "never processing",
+    "data is processed together later",
+    "random output",
+    "processing immediately"
+   ],
+   "answer": 1,
+   "explanation": "Batch.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-information-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-data-information",
+   "prompt": "The stage after processing is",
+   "choices": [
+    "collect",
+    "output",
+    "deleting",
+    "input"
+   ],
+   "answer": 1,
+   "explanation": "Output.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-information-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-data-information",
+   "prompt": "Wrong input leads to",
+   "choices": [
+    "perfect output",
+    "faster output",
+    "no problem",
+    "wrong output"
+   ],
+   "answer": 3,
+   "explanation": "GIGO.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-information-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-data-information",
+   "prompt": "An ATM uses",
+   "choices": [
+    "batch processing only",
+    "real-time processing",
+    "no computer",
+    "manual processing"
+   ],
+   "answer": 1,
+   "explanation": "Immediate.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-computer-databases-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A column in a database table is a",
+   "choices": [
+    "field",
+    "key",
+    "record",
+    "table"
+   ],
+   "answer": 0,
+   "explanation": "Field.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-computer-databases-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is best as a primary key?",
+   "choices": [
+    "First name",
+    "Town",
+    "Age",
+    "ID number"
+   ],
+   "answer": 3,
+   "explanation": "Unique.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-computer-databases-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A record is a row.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-databases-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which data type suits a person's age?",
+   "choices": [
+    "Text only",
+    "Yes/No",
+    "Date",
+    "Number"
+   ],
+   "answer": 3,
+   "explanation": "Ages are numbers.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-databases-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give two advantages of a computer database over a paper list.",
+   "model": "Fast searching and sorting; easy updating; less space; easy copying and backup.",
+   "rubric": "1 mark each.",
+   "explanation": "Fast searching and sorting; easy updating; less space; easy copying and backup.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-computer-databases-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Using the Students table: Ada 14 Buea, Paul 15 Limbe, Nina 13 Buea.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many records have Town = Buea?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "Ada and Nina.",
+     "id": "form3-computer-data-networks-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many fields does the table have?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "ID, Name, Town, Age.",
+     "id": "form3-computer-data-networks-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which condition finds students in Buea older than 13?",
+     "choices": [
+      "Town = Limbe",
+      "Town = Buea AND Age > 13",
+      "Age > 13",
+      "Town = Buea OR Age > 13"
+     ],
+     "answer": 1,
+     "explanation": "Only Ada (14) fits both.",
+     "id": "form3-computer-data-networks-e12-c"
+    }
+   ],
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-databases-intro-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-databases-intro",
+   "prompt": "Rows in a table are called",
+   "choices": [
+    "queries",
+    "keys",
+    "records",
+    "fields"
+   ],
+   "answer": 2,
+   "explanation": "Records.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-databases-intro-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-databases-intro",
+   "prompt": "A primary key is",
+   "choices": [
+    "unique for each record",
+    "a type of virus",
+    "the same for all",
+    "always a name"
+   ],
+   "answer": 0,
+   "explanation": "Unique.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-databases-intro-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-databases-intro",
+   "prompt": "Sorting means",
+   "choices": [
+    "deleting records",
+    "copying",
+    "putting records in order",
+    "printing"
+   ],
+   "answer": 2,
+   "explanation": "Order.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-databases-intro-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-databases-intro",
+   "prompt": "A search that finds matching records is a",
+   "choices": [
+    "table",
+    "primary key",
+    "query",
+    "field"
+   ],
+   "answer": 2,
+   "explanation": "Query.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-databases-intro-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-databases-intro",
+   "prompt": "A phone number is stored as",
+   "choices": [
+    "a picture",
+    "a date",
+    "text",
+    "a calculation"
+   ],
+   "answer": 2,
+   "explanation": "Text.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-computer-networks-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A network covering one school is a",
+   "choices": [
+    "ISP",
+    "LAN",
+    "Bus",
+    "WAN"
+   ],
+   "answer": 1,
+   "explanation": "LAN.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-computer-networks-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A device that connects a network to the Internet is a",
+   "choices": [
+    "keyboard",
+    "router",
+    "monitor",
+    "scanner"
+   ],
+   "answer": 1,
+   "explanation": "Router.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-computer-networks-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The Internet is a WAN.",
+   "answer": true,
+   "explanation": "It is the largest WAN.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-networks-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a star network the computers connect to a central",
+   "choices": [
+    "keyboard",
+    "switch",
+    "scanner",
+    "monitor"
+   ],
+   "answer": 1,
+   "explanation": "Switch.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-networks-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give three advantages of networking computers.",
+   "model": "Sharing printers; sharing files; one Internet connection for all; central backup; communication.",
+   "rubric": "1 mark each, up to 3.",
+   "explanation": "Sharing printers; sharing files; one Internet connection for all; central backup; communication.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-data-networks-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-computer-networks-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An office in Yaoundé has 8 computers joined to a switch, one printer and one router.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The topology is",
+     "choices": [
+      "ring",
+      "none",
+      "star",
+      "bus"
+     ],
+     "answer": 2,
+     "explanation": "Central switch.",
+     "id": "form3-computer-data-networks-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which device gives the Internet connection?",
+     "choices": [
+      "Speaker",
+      "Router",
+      "Printer",
+      "Mouse"
+     ],
+     "answer": 1,
+     "explanation": "Router.",
+     "id": "form3-computer-data-networks-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State one disadvantage of the star topology.",
+     "model": "If the central switch fails, all computers lose the network; it needs a lot of cable.",
+     "rubric": "1 mark.",
+     "explanation": "If the central switch fails, all computers lose the network; it needs a lot of cable.",
+     "id": "form3-computer-data-networks-e18-c"
+    }
+   ],
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-networks-intro-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-networks-intro",
+   "prompt": "Wi-Fi is a",
+   "choices": [
+    "type of printer",
+    "virus",
+    "wireless network connection",
+    "file"
+   ],
+   "answer": 2,
+   "explanation": "Wireless.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-networks-intro-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-networks-intro",
+   "prompt": "A server",
+   "choices": [
+    "is a cable",
+    "is a mouse",
+    "provides services to other computers",
+    "only prints"
+   ],
+   "answer": 2,
+   "explanation": "Server.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-networks-intro-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-networks-intro",
+   "prompt": "A WAN covers",
+   "choices": [
+    "one desk",
+    "a large area",
+    "one file",
+    "one keyboard"
+   ],
+   "answer": 1,
+   "explanation": "Wide.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-networks-intro-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-networks-intro",
+   "prompt": "NIC stands for",
+   "choices": [
+    "new internet cable",
+    "none",
+    "network input code",
+    "network interface card"
+   ],
+   "answer": 3,
+   "explanation": "NIC.",
+   "chapter": "form3-computer-data-networks"
+  },
+  {
+   "id": "form3-computer-networks-intro-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-networks-intro",
+   "prompt": "Networks allow",
+   "choices": [
+    "no sharing",
+    "only drawing",
+    "sharing resources",
+    "only typing"
+   ],
+   "answer": 2,
+   "explanation": "Share.",
+   "chapter": "form3-computer-data-networks"
+  }
+ ]
+}

@@ -1,0 +1,2283 @@
+{
+ "chapter": "form2-computer-tools",
+ "lessons": [
+  {
+   "id": "form2-computer-spreadsheet-basics",
+   "title": "Spreadsheet basics",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 2 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name rows, columns and cells",
+    "Enter data and simple formulas",
+    "Use SUM and AVERAGE",
+    "Make a simple chart"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-computer-tools-e01",
+    "form2-computer-tools-e02",
+    "form2-computer-tools-e03",
+    "form2-computer-tools-e04",
+    "form2-computer-tools-e05",
+    "form2-computer-tools-e06"
+   ],
+   "selfCheck": [
+    "form2-computer-spreadsheet-basics-q1",
+    "form2-computer-spreadsheet-basics-q2",
+    "form2-computer-spreadsheet-basics-q3",
+    "form2-computer-spreadsheet-basics-q4",
+    "form2-computer-spreadsheet-basics-q5"
+   ],
+   "reviewNotes": [
+    "Function names are English (SUM, AVERAGE, MAX).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Spreadsheet",
+     "md": "A **spreadsheet** is a program that arranges data in **rows** (numbers 1, 2, 3...) and **columns** (letters A, B, C...). Each box is a **cell**. B3 means column B, row 3. A spreadsheet can calculate automatically."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Formulas",
+     "md": "Start a formula with **=**. Examples: =A1+A2, =B2\\*C2, =SUM(B2:B5) (adds B2 to B5), =AVERAGE(B2:B5). Press Enter. If you change a number, the answer changes by itself. Use + - \\* / for add, subtract, multiply, divide."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Spreadsheet of fruit sales",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 59,
+        "text": "A: Fruit",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 59,
+        "text": "B: Kg",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 59,
+        "text": "C: Price",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 87,
+        "text": "Mango",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 87,
+        "text": "10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 87,
+        "text": "500",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 115,
+        "text": "Pineapple",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 115,
+        "text": "6",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 115,
+        "text": "700",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 143,
+        "text": "Banana",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 143,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 143,
+        "text": "300",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A spreadsheet table with three fruits, kilograms sold and price per kilogram.",
+     "alt": "Table: mango 10 kg at 500, pineapple 6 kg at 700, banana 8 kg at 300."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Charts",
+     "md": "A **bar chart** compares amounts. A **line chart** shows change over time. A **pie chart** shows parts of a total. Always give a chart a title and label the axes."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- No = sign: the cell shows text instead of a result.\n- Typing the answer by hand: it will not update.\n- Writing the cell reference as 3B instead of B3."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "In the sheet above, write a formula for the income from mango (kg in B2, price in C2) and compute it.",
+     "steps": [
+      "Income = kg x price, so D2 = B2\\*C2.",
+      "10 x 500 = 5000 FCFA."
+     ],
+     "answer": "=B2\\*C2 = 5000"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Total kilograms sold: B2=10, B3=6, B4=8. Write the formula and compute it.",
+     "steps": [
+      "Use SUM over the range: =SUM(B2:B4).",
+      "10 + 6 + 8 = 24."
+     ],
+     "answer": "=SUM(B2:B4) = 24"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-internet-email",
+   "title": "The Internet and email basics",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 2 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain what the Internet and the web are",
+    "Use a browser and a search engine",
+    "Send and receive email",
+    "Stay safe online"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-computer-tools-e07",
+    "form2-computer-tools-e08",
+    "form2-computer-tools-e09",
+    "form2-computer-tools-e10",
+    "form2-computer-tools-e11",
+    "form2-computer-tools-e12"
+   ],
+   "selfCheck": [
+    "form2-computer-internet-email-q1",
+    "form2-computer-internet-email-q2",
+    "form2-computer-internet-email-q3",
+    "form2-computer-internet-email-q4",
+    "form2-computer-internet-email-q5"
+   ],
+   "reviewNotes": [
+    "Use example.com style addresses only; no real addresses.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Internet and web",
+     "md": "The **Internet** is a worldwide network of computers. The **World Wide Web** is the pages you view on it. A **browser** shows web pages. A **search engine** finds pages for words you type. A **website address** (URL) is like www.example.com."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Searching well",
+     "md": "Use clear key words, e.g. 'rainfall Douala'. Check who made the page. Compare two sources. Not everything online is true. Copying a text word for word without saying where it came from is not honest."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 205,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 22,
+        "text": "Parts of an email",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 380,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 59,
+        "text": "To:",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 59,
+        "text": "friend@example.com",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 70,
+        "w": 380,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 89,
+        "text": "Subject:",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 89,
+        "text": "School trip",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 100,
+        "w": 380,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 135,
+        "text": "Message text",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 165,
+        "w": 90,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 184,
+        "text": "Send",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An email with the To box, Subject box, message area and Send button.",
+     "alt": "Email window with To, Subject, message text and Send."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Email",
+     "md": "An **email address** looks like name@example.com. To send: click New message, type the address in **To**, a **Subject**, the message, and click Send. You can add an **attachment**. **Reply** answers a message. **Inbox** holds received mail."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Safety",
+     "md": "- Never share your password.\n- Do not open attachments from people you do not know.\n- Do not give personal details to strangers.\n- A message promising a prize may be a trick (phishing)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Why is 'prize@free-win.example' in an unknown email a warning sign?",
+     "steps": [
+      "It offers something for nothing from an unknown sender.",
+      "Prize messages often ask for personal data: a phishing sign."
+     ],
+     "answer": "Do not open or reply; delete it."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "List the steps to email a homework file to your teacher.",
+     "steps": [
+      "Open your email, click New message, type the teacher's address and a subject.",
+      "Click Attach, choose the file, then Send."
+     ],
+     "answer": "New message, address, subject, attach, send"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-presentations",
+   "title": "Presentation software",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 2 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say what a presentation program is for",
+    "Create slides with titles, text and pictures",
+    "Apply simple design rules",
+    "Present clearly"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-computer-tools-e13",
+    "form2-computer-tools-e14",
+    "form2-computer-tools-e15",
+    "form2-computer-tools-e16",
+    "form2-computer-tools-e17",
+    "form2-computer-tools-e18"
+   ],
+   "selfCheck": [
+    "form2-computer-presentations-q1",
+    "form2-computer-presentations-q2",
+    "form2-computer-presentations-q3",
+    "form2-computer-presentations-q4",
+    "form2-computer-presentations-q5"
+   ],
+   "reviewNotes": [
+    "Font size guidance (24 pt) is a common rule of thumb, not an official rule.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Slides",
+     "md": "A **presentation program** lets you make a series of **slides** to show an audience. Each slide can have a title, short text, pictures, charts and sound. You can add **transitions** between slides and **animations** to objects."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Good design",
+     "md": "- One main idea per slide.\n- Short points, not long sentences (about 6 lines at most).\n- Large text (at least 24 points) in a clear font.\n- Strong contrast between text and background.\n- Use pictures that help, not decorate."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 195,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 20,
+        "text": "A good slide",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 35,
+        "w": 340,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 45,
+        "w": 300,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 65,
+        "text": "Title of the slide",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 100,
+        "text": "- First short point",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 124,
+        "text": "- Second short point",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 148,
+        "text": "- Third short point",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A slide with a title and three short bullet points.",
+     "alt": "Slide with a title bar and three short bullet points."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Making a presentation",
+     "md": "Choose a layout (Title slide, Title and content). Click to add the title and text. Use Insert to add a picture or table. Use **Slide Show** to run it. Practise what you will say. Do not read every word from the slide."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- Too much text on a slide.\n- Dark text on a dark background.\n- Too many animations, which distract the audience."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A slide has 12 long sentences. How would you improve it?",
+     "steps": [
+      "Too much text; split it across several slides.",
+      "Keep three to five short bullets per slide and enlarge the text."
+     ],
+     "answer": "Split the slide and shorten the text."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Choose the better colour pair for a projector: yellow text on white or dark blue text on white.",
+     "steps": [
+      "Contrast matters: yellow on white is hard to read.",
+      "Dark blue on white gives strong contrast."
+     ],
+     "answer": "Dark blue on white"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-word-processing-layout",
+   "title": "Word processing: tables, pictures and page layout",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 2 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Insert and format a table",
+    "Insert a picture and wrap text around it",
+    "Set margins, page numbers, headers and footers",
+    "Use find and replace and a spell check"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-computer-tools-e19",
+    "form2-computer-tools-e20",
+    "form2-computer-tools-e21",
+    "form2-computer-tools-e22",
+    "form2-computer-tools-e23",
+    "form2-computer-tools-e24"
+   ],
+   "selfCheck": [
+    "form2-computer-word-processing-layout-q1",
+    "form2-computer-word-processing-layout-q2",
+    "form2-computer-word-processing-layout-q3",
+    "form2-computer-word-processing-layout-q4",
+    "form2-computer-word-processing-layout-q5"
+   ],
+   "reviewNotes": [
+    "Menu names differ between word processors.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tables",
+     "md": "A **table** has rows and columns of cells. Use Insert then Table and choose the number of rows and columns. Tables are good for timetables, price lists and class lists. You can add or delete rows and columns, merge cells and add borders."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pictures and layout",
+     "md": "Use Insert then Picture to add an image. Drag a corner handle to resize it **without distortion**. **Text wrapping** decides how the text flows around the picture. **Margins** are the empty spaces at the page edges. **Orientation** can be portrait (tall) or landscape (wide)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Class timetable (part)",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 59,
+        "text": "Time",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 59,
+        "text": "Monday",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 59,
+        "text": "Tuesday",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 87,
+        "text": "8:00",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 87,
+        "text": "Maths",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 87,
+        "text": "English",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 115,
+        "text": "9:00",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 115,
+        "text": "Science",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 115,
+        "text": "ICT",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 143,
+        "text": "10:00",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 143,
+        "text": "Break",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 143,
+        "text": "Break",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table with times and subjects for Monday and Tuesday.",
+     "alt": "Timetable table with columns for time, Monday and Tuesday."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Headers, footers and tools",
+     "md": "A **header** is text at the top of every page; a **footer** is at the bottom. Page numbers are often placed in the footer. **Find and Replace** changes every copy of a word at once. **Spell check** underlines possible mistakes; always read your text yourself too."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- Pulling a side handle of a picture stretches it; use a corner handle.\n- Very large pictures make the file big.\n- Do not use spaces to line up columns; use a table or tab stops."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "How many cells are in a table with 5 rows and 4 columns?",
+     "steps": [
+      "Cells = rows x columns.",
+      "5 x 4 = 20."
+     ],
+     "answer": "20 cells"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A school name appears 12 times as 'GBHS' but must be 'GBPHS'. What tool changes all at once?",
+     "steps": [
+      "Open Find and Replace.",
+      "Find: GBHS. Replace with: GBPHS. Choose Replace All."
+     ],
+     "answer": "Find and Replace (Replace All)"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-binary-basics",
+   "title": "Binary numbers: the basics",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 2 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain why computers use 0 and 1",
+    "Count in binary",
+    "Convert small binary numbers to denary and back",
+    "Know bit, byte and the storage units"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-computer-tools-e25",
+    "form2-computer-tools-e26",
+    "form2-computer-tools-e27",
+    "form2-computer-tools-e28",
+    "form2-computer-tools-e29",
+    "form2-computer-tools-e30"
+   ],
+   "selfCheck": [
+    "form2-computer-binary-basics-q1",
+    "form2-computer-binary-basics-q2",
+    "form2-computer-binary-basics-q3",
+    "form2-computer-binary-basics-q4",
+    "form2-computer-binary-basics-q5"
+   ],
+   "reviewNotes": [
+    "1024 vs 1000 convention to be agreed with the teacher.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Binary",
+     "md": "Computers use **binary**: only the digits 0 and 1. A **bit** is one binary digit. **8 bits make 1 byte**. Binary matches the two states of electronic switches: off (0) and on (1)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Place values",
+     "md": "Binary place values double from the right: 1, 2, 4, 8, 16, 32, 64, 128. To convert binary to **denary** (ordinary numbers), add the place values where there is a 1. Example: 1011 = 8 + 2 + 1 = 11."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 150,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Place values of 1101 (13)",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 82.0,
+        "y": 70,
+        "w": 60,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 112.0,
+        "y": 94,
+        "text": "8",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 112.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 146.0,
+        "y": 70,
+        "w": 60,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 176.0,
+        "y": 94,
+        "text": "4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 176.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 70,
+        "w": 60,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 94,
+        "text": "2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 128,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 274.0,
+        "y": 70,
+        "w": 60,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 304.0,
+        "y": 94,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 304.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Four boxes with place values 8, 4, 2, 1 and the bits 1101.",
+     "alt": "Row of boxes 8, 4, 2, 1 with bits 1, 1, 0, 1 under them."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Denary to binary",
+     "md": "Find the largest place value that fits, write 1 there and subtract. Continue to the right. Example: 13 = 8 + 4 + 1, so 13 = 1101 (place 2 is 0)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Storage units",
+     "md": "1 byte = 8 bits. 1 KB (kilobyte) = 1024 bytes, 1 MB = 1024 KB, 1 GB = 1024 MB (the usual school convention)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Convert 1011 from binary to denary.",
+     "steps": [
+      "Place values: 8, 4, 2, 1 for bits 1, 0, 1, 1.",
+      "Add: 8 + 2 + 1 = 11."
+     ],
+     "answer": "11"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Convert 13 to binary.",
+     "steps": [
+      "13 = 8 + 4 + 1. Bits for 8, 4, 2, 1: 1, 1, 0, 1.",
+      "So 13 = 1101."
+     ],
+     "answer": "1101"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form2-computer-tools-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-computer-spreadsheet-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The cell in column D, row 4 is",
+   "choices": [
+    "4D",
+    "D4",
+    "D-4",
+    "DD4"
+   ],
+   "answer": 1,
+   "explanation": "Column then row.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-computer-spreadsheet-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What does =A1+A2 give if A1 = 7 and A2 = 5?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "7 + 5 = 12.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-computer-spreadsheet-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A formula begins with the = sign.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-spreadsheet-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "=AVERAGE(B2:B4) when B2=10, B3=6, B4=8 equals",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "(10+6+8)/3 = 24/3 = 8.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-spreadsheet-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which chart shows how a total is shared in parts?",
+   "choices": [
+    "Bar chart only",
+    "Pie chart",
+    "No chart",
+    "Line chart of years"
+   ],
+   "answer": 1,
+   "explanation": "Pie = parts of a whole.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-computer-spreadsheet-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Prices: Rice 600, Oil 1500, Sugar 800 FCFA are in C2:C4.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Value of =SUM(C2:C4)",
+     "answer": 2900,
+     "tolerance": 0,
+     "explanation": "600 + 1500 + 800 = 2900.",
+     "id": "form2-computer-tools-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Value of =MAX(C2:C4)",
+     "answer": 1500,
+     "tolerance": 0,
+     "explanation": "Largest price: 1500.",
+     "id": "form2-computer-tools-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "To find the mean price use",
+     "choices": [
+      "AVERAGE C2",
+      "=AVERAGE(C2:C4)",
+      "=C2:C4",
+      "=ADD(C2:C4)"
+     ],
+     "answer": 1,
+     "explanation": "AVERAGE gives the mean.",
+     "id": "form2-computer-tools-e06-c"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-spreadsheet-basics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-spreadsheet-basics",
+   "prompt": "A box in a spreadsheet is called a",
+   "choices": [
+    "folder",
+    "icon",
+    "file",
+    "cell"
+   ],
+   "answer": 3,
+   "explanation": "Cell.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-spreadsheet-basics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-spreadsheet-basics",
+   "prompt": "=SUM(A1:A3) adds",
+   "choices": [
+    "the cells A1, A2 and A3",
+    "only A3",
+    "only A1",
+    "nothing"
+   ],
+   "answer": 0,
+   "explanation": "Range sum.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-spreadsheet-basics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-spreadsheet-basics",
+   "prompt": "Columns are named by",
+   "choices": [
+    "symbols",
+    "numbers",
+    "colours",
+    "letters"
+   ],
+   "answer": 3,
+   "explanation": "A, B, C...",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-spreadsheet-basics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-spreadsheet-basics",
+   "prompt": "If a number used by a formula changes, the answer",
+   "choices": [
+    "stays the same",
+    "updates automatically",
+    "turns into text",
+    "disappears"
+   ],
+   "answer": 1,
+   "explanation": "Automatic.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-spreadsheet-basics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-spreadsheet-basics",
+   "prompt": "A bar chart is best for",
+   "choices": [
+    "printing",
+    "typing letters",
+    "storing files",
+    "comparing amounts"
+   ],
+   "answer": 3,
+   "explanation": "Compare.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-computer-internet-email",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which program shows web pages?",
+   "choices": [
+    "A spreadsheet",
+    "A browser",
+    "A printer",
+    "A scanner"
+   ],
+   "answer": 1,
+   "explanation": "Browser.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-computer-internet-email",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An email address contains the symbol",
+   "choices": [
+    "&",
+    "%",
+    "#",
+    "@"
+   ],
+   "answer": 3,
+   "explanation": "Name@domain.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-computer-internet-email",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Everything on the Internet is true.",
+   "answer": false,
+   "explanation": "Always check sources.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-internet-email",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a strong sign of a phishing email?",
+   "choices": [
+    "It has your homework",
+    "It has no attachment",
+    "It asks for your password",
+    "It is from your teacher by name"
+   ],
+   "answer": 2,
+   "explanation": "No real service asks for passwords by email.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-internet-email",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give three rules for safe use of the Internet.",
+   "model": "Keep passwords secret; do not give personal details to strangers; do not open unknown attachments or links; tell an adult if something is wrong.",
+   "rubric": "1 mark each, up to 3.",
+   "explanation": "Keep passwords secret; do not give personal details to strangers; do not open unknown attachments or links; tell an adult if something is wrong.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-computer-internet-email",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Eko wants to find information about Mount Cameroon for a project.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which tool helps him find pages?",
+     "choices": [
+      "A scanner",
+      "A printer",
+      "A speaker",
+      "A search engine"
+     ],
+     "answer": 3,
+     "explanation": "Search engine.",
+     "id": "form2-computer-tools-e12-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "He should copy a whole page into his project without saying where it came from.",
+     "answer": false,
+     "explanation": "Copying without credit is not honest.",
+     "id": "form2-computer-tools-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two key words he could type.",
+     "model": "Mount Cameroon height; Mount Cameroon volcano.",
+     "rubric": "1 mark each reasonable key words.",
+     "explanation": "Mount Cameroon height; Mount Cameroon volcano.",
+     "id": "form2-computer-tools-e12-c"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-internet-email-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-internet-email",
+   "prompt": "An ISP gives you",
+   "choices": [
+    "a mouse",
+    "a printer",
+    "a screen",
+    "access to the Internet"
+   ],
+   "answer": 3,
+   "explanation": "Internet Service Provider.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-internet-email-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-internet-email",
+   "prompt": "The subject of an email is",
+   "choices": [
+    "the password",
+    "a short title for the message",
+    "the attachment",
+    "the address"
+   ],
+   "answer": 1,
+   "explanation": "Title.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-internet-email-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-internet-email",
+   "prompt": "A URL is",
+   "choices": [
+    "a memory chip",
+    "a mouse",
+    "a web address",
+    "a virus"
+   ],
+   "answer": 2,
+   "explanation": "Address.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-internet-email-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-internet-email",
+   "prompt": "Attachments from unknown senders should",
+   "choices": [
+    "be printed",
+    "always be opened",
+    "not be opened",
+    "be forwarded"
+   ],
+   "answer": 2,
+   "explanation": "May contain viruses.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-internet-email-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-internet-email",
+   "prompt": "The Inbox holds",
+   "choices": [
+    "passwords",
+    "deleted pictures",
+    "received messages",
+    "sent messages only"
+   ],
+   "answer": 2,
+   "explanation": "Inbox.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-computer-presentations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A single page in a presentation is a",
+   "choices": [
+    "record",
+    "folder",
+    "cell",
+    "slide"
+   ],
+   "answer": 3,
+   "explanation": "Slide.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e14",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-computer-presentations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A slide should contain a lot of small text.",
+   "answer": false,
+   "explanation": "Keep text short and large.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-computer-presentations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which makes text easy to read?",
+   "choices": [
+    "Strong contrast with the background",
+    "Long paragraphs",
+    "Very small letters",
+    "Many colours"
+   ],
+   "answer": 0,
+   "explanation": "Contrast.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-presentations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Moving from one slide to the next with an effect is a",
+   "choices": [
+    "extension",
+    "field",
+    "query",
+    "transition"
+   ],
+   "answer": 3,
+   "explanation": "Transition.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-presentations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give three rules for designing a good slide.",
+   "model": "One idea per slide; short points; large clear text; good contrast; useful pictures.",
+   "rubric": "1 mark each, up to 3.",
+   "explanation": "One idea per slide; short points; large clear text; good contrast; useful pictures.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-computer-presentations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Rose will present 'Water in Cameroon' to Form 2 using five slides.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What should the first slide show?",
+     "choices": [
+      "Only a picture",
+      "The title and her name",
+      "All the facts",
+      "A blank page"
+     ],
+     "answer": 1,
+     "explanation": "Title slide.",
+     "id": "form2-computer-tools-e18-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "She should read every word from the slide.",
+     "answer": false,
+     "explanation": "She should explain in her own words.",
+     "id": "form2-computer-tools-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two things to put on a slide about water.",
+     "model": "A title; two or three short points; a picture of a river such as the Wouri.",
+     "rubric": "1 mark each.",
+     "explanation": "A title; two or three short points; a picture of a river such as the Wouri.",
+     "id": "form2-computer-tools-e18-c"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-presentations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-presentations",
+   "prompt": "The best amount of text for a slide is",
+   "choices": [
+    "a story",
+    "none at all",
+    "a few short points",
+    "a full page"
+   ],
+   "answer": 2,
+   "explanation": "Short.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-presentations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-presentations",
+   "prompt": "Slides are shown with",
+   "choices": [
+    "Slide Show",
+    "Print Only",
+    "Shut Down",
+    "Save As"
+   ],
+   "answer": 0,
+   "explanation": "Slide Show view.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-presentations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-presentations",
+   "prompt": "Animations should be",
+   "choices": [
+    "used sparingly",
+    "on every word",
+    "very loud",
+    "never read"
+   ],
+   "answer": 0,
+   "explanation": "Avoid distraction.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-presentations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-presentations",
+   "prompt": "Which is a presentation program task?",
+   "choices": [
+    "Add up numbers",
+    "Store records",
+    "Make slides",
+    "Install a network"
+   ],
+   "answer": 2,
+   "explanation": "Slides.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-presentations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-presentations",
+   "prompt": "Large clear text",
+   "choices": [
+    "hides the message",
+    "saves paper",
+    "is not allowed",
+    "helps the audience read"
+   ],
+   "answer": 3,
+   "explanation": "Readable.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-computer-word-processing-layout",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many cells does a table with 3 rows and 6 columns have?",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "3 x 6 = 18.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-computer-word-processing-layout",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Text that appears at the top of every page is a",
+   "choices": [
+    "border",
+    "footer",
+    "margin",
+    "header"
+   ],
+   "answer": 3,
+   "explanation": "Header.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-computer-word-processing-layout",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Dragging a corner handle resizes a picture without stretching it.",
+   "answer": true,
+   "explanation": "Corner handles keep proportions.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e22",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-word-processing-layout",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which view is wider than it is tall?",
+   "choices": [
+    "Portrait",
+    "Margin",
+    "Header",
+    "Landscape"
+   ],
+   "answer": 3,
+   "explanation": "Landscape orientation.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-word-processing-layout",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain two good uses of a table in a document.",
+   "model": "To show a timetable or price list in neat rows and columns; to line up data so it is easy to compare.",
+   "rubric": "1 mark each use.",
+   "explanation": "To show a timetable or price list in neat rows and columns; to line up data so it is easy to compare.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-computer-word-processing-layout",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ada makes a price list: item, quantity, price for 4 items plus a title row.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many rows does her table need (title row plus 4 items)?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "1 + 4 = 5 rows.",
+     "id": "form2-computer-tools-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "It has 3 columns. How many cells in all?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "5 x 3 = 15.",
+     "id": "form2-computer-tools-e24-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Where would she put page numbers?",
+     "choices": [
+      "In the cell",
+      "In the margin only",
+      "In the footer",
+      "In the file name"
+     ],
+     "answer": 2,
+     "explanation": "Page numbers usually go in the footer.",
+     "id": "form2-computer-tools-e24-c"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-word-processing-layout-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-word-processing-layout",
+   "prompt": "Margins are",
+   "choices": [
+    "empty spaces at the page edges",
+    "headers",
+    "pictures",
+    "tables"
+   ],
+   "answer": 0,
+   "explanation": "Margins.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-word-processing-layout-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-word-processing-layout",
+   "prompt": "A footer is at the",
+   "choices": [
+    "side of the screen",
+    "top of the page",
+    "inside RAM",
+    "bottom of the page"
+   ],
+   "answer": 3,
+   "explanation": "Footer.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-word-processing-layout-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-word-processing-layout",
+   "prompt": "Find and Replace helps to",
+   "choices": [
+    "shut down",
+    "draw",
+    "change a word everywhere",
+    "print"
+   ],
+   "answer": 2,
+   "explanation": "Replace All.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-word-processing-layout-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-word-processing-layout",
+   "prompt": "Portrait means",
+   "choices": [
+    "no page",
+    "colour page",
+    "wide page",
+    "tall page"
+   ],
+   "answer": 3,
+   "explanation": "Portrait.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-word-processing-layout-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-word-processing-layout",
+   "prompt": "Cells in a table are found at",
+   "choices": [
+    "rows and columns crossing",
+    "the footer",
+    "only the corners",
+    "the title"
+   ],
+   "answer": 0,
+   "explanation": "Cells.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e25",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-computer-binary-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 101 (binary) to denary.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "4 + 1 = 5.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e26",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-computer-binary-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bit is",
+   "choices": [
+    "a printer",
+    "8 bytes",
+    "a single 0 or 1",
+    "a type of file"
+   ],
+   "answer": 2,
+   "explanation": "One binary digit.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e27",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-computer-binary-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many bits are there in 2 bytes?",
+   "answer": 16,
+   "tolerance": 0,
+   "explanation": "2 x 8 = 16.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e28",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-binary-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Binary 1000 in denary is",
+   "choices": [
+    "4",
+    "8",
+    "16",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "Place value 8.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e29",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-computer-binary-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 9 to binary and give the number of 1s in it.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "9 = 1001, which has two 1s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-tools-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-computer-binary-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Binary numbers: 110 and 111.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "110 in denary",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "4 + 2 = 6.",
+     "id": "form2-computer-tools-e30-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "111 in denary",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "4 + 2 + 1 = 7.",
+     "id": "form2-computer-tools-e30-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Which is bigger, and by how much?",
+     "model": "111 (7) is bigger than 110 (6) by 1.",
+     "rubric": "1 mark bigger, 1 mark difference.",
+     "explanation": "111 (7) is bigger than 110 (6) by 1.",
+     "id": "form2-computer-tools-e30-c"
+    }
+   ],
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-binary-basics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-binary-basics",
+   "prompt": "The digits of binary are",
+   "choices": [
+    "1 to 8",
+    "0 to 9",
+    "A to F",
+    "0 and 1"
+   ],
+   "answer": 3,
+   "explanation": "Base 2.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-binary-basics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-binary-basics",
+   "prompt": "1 byte equals",
+   "choices": [
+    "8 bits",
+    "2 bits",
+    "1024 bits",
+    "16 bits"
+   ],
+   "answer": 0,
+   "explanation": "8 bits.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-binary-basics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-binary-basics",
+   "prompt": "Binary 11 in denary is",
+   "choices": [
+    "2",
+    "3",
+    "4",
+    "11"
+   ],
+   "answer": 1,
+   "explanation": "2 + 1.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-binary-basics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-binary-basics",
+   "prompt": "The place values in binary (from the right) are",
+   "choices": [
+    "2, 4, 6, 8",
+    "1, 3, 5, 7",
+    "1, 10, 100",
+    "1, 2, 4, 8"
+   ],
+   "answer": 3,
+   "explanation": "Powers of 2.",
+   "chapter": "form2-computer-tools"
+  },
+  {
+   "id": "form2-computer-binary-basics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-computer-binary-basics",
+   "prompt": "1 KB is about",
+   "choices": [
+    "1 GB",
+    "8 bytes",
+    "1 bit",
+    "1024 bytes"
+   ],
+   "answer": 3,
+   "explanation": "School convention.",
+   "chapter": "form2-computer-tools"
+  }
+ ]
+}

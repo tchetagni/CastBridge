@@ -1,0 +1,606 @@
+{
+ "chapter": "form4-biology-ecology",
+ "lessons": [
+  {
+   "id": "form4-biology-ecosystem",
+   "title": "Ecosystems, food chains and energy flow",
+   "minutes": 30,
+   "programRef": "Form 4 Biology — Ecosystems, food chains and energy flow (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define habitat, population, community and ecosystem.",
+    "Construct a food chain and a pyramid of numbers.",
+    "Describe energy flow and the effects of humans on ecosystems."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-biology-ecology-e01",
+    "form4-biology-ecology-e02",
+    "form4-biology-ecology-e03",
+    "form4-biology-ecology-e04",
+    "form4-biology-ecology-e05",
+    "form4-biology-ecology-e06"
+   ],
+   "selfCheck": [
+    "form4-biology-ecosystem-q1",
+    "form4-biology-ecosystem-q2",
+    "form4-biology-ecosystem-q3",
+    "form4-biology-ecosystem-q4",
+    "form4-biology-ecosystem-q5"
+   ],
+   "reviewNotes": [
+    "The 10 % rule is an approximation; it varies between 5 and 20 %.",
+    "Food chain organisms are typical savannah examples; the Form 5 pack covers energy efficiency, pyramids of biomass and conservation.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ecology words",
+     "md": "- **Habitat**: where an organism lives (a pond, a forest floor).\n- **Population**: all the organisms of one species in an area.\n- **Community**: all the populations living together.\n- **Ecosystem**: a community together with its non-living surroundings (soil, water, light, climate)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Food chains",
+     "md": "A **food chain** shows who eats whom. The arrow means 'is eaten by' and shows the direction of energy flow. **Producers** (green plants) make food by photosynthesis; **consumers** eat other organisms (herbivores are primary consumers, carnivores eat animals); **decomposers** (bacteria and fungi) break down dead matter and return nutrients to the soil. Many chains linked together form a **food web**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 131,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 43.5,
+        "w": 84.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 52.4,
+        "y": 69.5,
+        "text": "Sun",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 97.8,
+        "y1": 65.5,
+        "x2": 105.8,
+        "y2": 65.5,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 108.8,
+        "y": 43.5,
+        "w": 84.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 151.2,
+        "y": 62.5,
+        "text": "Grass",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 151.2,
+        "y": 76.5,
+        "text": "(producer)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 196.6,
+        "y1": 65.5,
+        "x2": 204.6,
+        "y2": 65.5,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 207.6,
+        "y": 43.5,
+        "w": 84.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 62.5,
+        "text": "Grasshopper",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 76.5,
+        "text": "(primary consumer)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 295.4,
+        "y1": 65.5,
+        "x2": 303.4,
+        "y2": 65.5,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 306.4,
+        "y": 43.5,
+        "w": 84.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 348.79999999999995,
+        "y": 62.5,
+        "text": "Lizard",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 348.79999999999995,
+        "y": 76.5,
+        "text": "(secondary consumer)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 394.2,
+        "y1": 65.5,
+        "x2": 402.2,
+        "y2": 65.5,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 405.2,
+        "y": 43.5,
+        "w": 84.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 447.59999999999997,
+        "y": 62.5,
+        "text": "Hawk",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 447.59999999999997,
+        "y": 76.5,
+        "text": "(tertiary consumer)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A food chain in the savannah.",
+     "alt": "Boxes in a row: sun, grass as producer, grasshopper as primary consumer, lizard as secondary consumer and hawk as tertiary consumer."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Energy flow and pyramids",
+     "md": "The Sun is the source of energy. At each step only about **10 %** of the energy passes to the next level; the rest is lost as heat, in movement, and in waste. So food chains are short and there are fewer organisms at higher levels. A **pyramid of numbers** shows this: the producers form the widest layer."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 195,
+      "items": [
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 20,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 60,
+        "w": 100,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 100,
+        "w": 180,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 140,
+        "w": 280,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 45,
+        "text": "hawk",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 85,
+        "text": "lizards",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 125,
+        "text": "grasshoppers",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 165,
+        "text": "grass",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A pyramid of numbers.",
+     "alt": "A four-layer pyramid: the widest layer is grass, then grasshoppers, then lizards, and a small top layer for the hawk."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Arrows point to the *eater*, not away from it.\n- A food chain always starts with a producer (and energy from the Sun).\n- Decomposers are not 'wasteful': they recycle nutrients."
+    },
+    {
+     "type": "example",
+     "title": "Energy at each level",
+     "statement": "The grass in a field holds 10 000 kJ of energy. Assuming 10 % is passed on at each step, how much reaches the grasshoppers and then the lizards?",
+     "steps": [
+      "Grasshoppers: 10 000 × 0.1 = 1000 kJ.",
+      "Lizards: 1000 × 0.1 = 100 kJ."
+     ],
+     "answer": "1000 kJ and then 100 kJ"
+    },
+    {
+     "type": "example",
+     "title": "Write a food chain",
+     "statement": "Rice, a rat, a snake and an eagle are in one area. Write the food chain and name the producer and the top consumer.",
+     "steps": [
+      "The producer is rice; the rat eats rice; the snake eats the rat; the eagle eats the snake.",
+      "Chain: rice → rat → snake → eagle."
+     ],
+     "answer": "rice → rat → snake → eagle; producer rice, top consumer eagle"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-biology-ecology-e01"
+    }
+   ],
+   "chapter": "form4-biology-ecology"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-biology-ecology-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-biology-ecosystem",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which organism is a producer?",
+   "choices": [
+    "grass",
+    "lion",
+    "hawk",
+    "fungus"
+   ],
+   "answer": 0,
+   "explanation": "Plants make their own food.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecology-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form4-biology-ecosystem",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the term with its meaning.",
+   "pairs": [
+    [
+     "habitat",
+     "where an organism lives"
+    ],
+    [
+     "producer",
+     "makes food by photosynthesis"
+    ],
+    [
+     "decomposer",
+     "breaks down dead matter"
+    ],
+    [
+     "herbivore",
+     "eats plants only"
+    ]
+   ],
+   "explanation": "Standard definitions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecology-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-biology-ecosystem",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A producer has 5000 kJ of energy. Assume 10 % passes to each next level. How much energy reaches the secondary consumer (two steps)?",
+   "answer": 50,
+   "tolerance": 0,
+   "unit": "kJ",
+   "explanation": "5000 × 0.1 × 0.1 = 50 kJ.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecology-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-biology-ecosystem",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a food chain the arrow means:",
+   "choices": [
+    "eats",
+    "is eaten by",
+    "grows near",
+    "lives with"
+   ],
+   "answer": 1,
+   "explanation": "It shows energy flow to the eater.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecology-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-biology-ecosystem",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why there are fewer hawks than grasshoppers.",
+   "model": "Energy is lost at each step (about 90 %), so less energy is available at the top and fewer animals can be supported.",
+   "rubric": [
+    "1 mark: energy lost at each step",
+    "1 mark: less energy supports fewer animals"
+   ],
+   "explanation": "Energy is lost at each step (about 90 %), so less energy is available at the top and fewer animals can be supported.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecology-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-biology-ecosystem",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A forest food web has trees, caterpillars, birds, and a snake that eats birds.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The producer is:",
+     "choices": [
+      "the bird",
+      "the tree",
+      "the caterpillar",
+      "the snake"
+     ],
+     "answer": 1,
+     "explanation": "Trees photosynthesise.",
+     "id": "form4-biology-ecology-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The tertiary consumer is:",
+     "choices": [
+      "the tree",
+      "the snake",
+      "the caterpillar",
+      "the bird"
+     ],
+     "answer": 1,
+     "explanation": "Tree → caterpillar → bird → snake.",
+     "id": "form4-biology-ecology-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "What would happen to the caterpillars if all the birds were killed? Give a reason.",
+     "model": "Their numbers would increase at first because fewer are eaten, until food becomes limiting.",
+     "rubric": [
+      "1 mark: increase",
+      "1 mark: reason (fewer predators)"
+     ],
+     "explanation": "Their numbers would increase at first because fewer are eaten, until food becomes limiting.",
+     "id": "form4-biology-ecology-e06-c"
+    }
+   ],
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecosystem-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-ecosystem",
+   "prompt": "Decomposers are:",
+   "choices": [
+    "birds",
+    "lions",
+    "grasses",
+    "bacteria and fungi"
+   ],
+   "answer": 3,
+   "explanation": "They break down dead matter.",
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecosystem-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-ecosystem",
+   "prompt": "A herbivore eats:",
+   "choices": [
+    "plants",
+    "rocks",
+    "dead matter",
+    "animals only"
+   ],
+   "answer": 0,
+   "explanation": "Plants.",
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecosystem-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-ecosystem",
+   "prompt": "The first organism in a food chain is the:",
+   "choices": [
+    "consumer",
+    "decomposer",
+    "predator",
+    "producer"
+   ],
+   "answer": 3,
+   "explanation": "Producer.",
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecosystem-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-ecosystem",
+   "prompt": "About how much energy passes to the next level?",
+   "choices": [
+    "100 %",
+    "10 %",
+    "90 %",
+    "50 %"
+   ],
+   "answer": 1,
+   "explanation": "About one tenth.",
+   "chapter": "form4-biology-ecology"
+  },
+  {
+   "id": "form4-biology-ecosystem-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-ecosystem",
+   "prompt": "A community plus its surroundings is an:",
+   "choices": [
+    "organism",
+    "habitat",
+    "ecosystem",
+    "population"
+   ],
+   "answer": 2,
+   "explanation": "Ecosystem.",
+   "chapter": "form4-biology-ecology"
+  }
+ ]
+}

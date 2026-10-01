@@ -1,0 +1,715 @@
+{
+ "chapter": "gceol-chemistry-energetics",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-energy-changes",
+   "title": "Energy changes in chemical reactions",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Energetics (exothermic/endothermic), rates of reaction, catalysts (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish exothermic and endothermic reactions with examples.",
+    "Draw and interpret energy level diagrams.",
+    "Explain energy changes in terms of bond breaking and bond making.",
+    "Calculate heat energy released from temperature changes (q = mcΔT)."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-acids-bases"
+   ],
+   "exercises": [
+    "gceol-chemistry-energetics-e01",
+    "gceol-chemistry-energetics-e02",
+    "gceol-chemistry-energetics-e03",
+    "gceol-chemistry-energetics-e04",
+    "gceol-chemistry-energetics-e05",
+    "gceol-chemistry-energetics-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-energy-changes-q1",
+    "gceol-chemistry-energy-changes-q2",
+    "gceol-chemistry-energy-changes-q3",
+    "gceol-chemistry-energy-changes-q4",
+    "gceol-chemistry-energy-changes-q5"
+   ],
+   "reviewNotes": [
+    "Specific heat capacity of water-based solutions taken as 4.2 J/g °C and density 1 g/cm³.",
+    "Neutralisation enthalpy about −57 kJ/mol for strong acid with strong alkali is the standard textbook value; the example data are illustrative.",
+    "Fuels in Cameroonian homes (firewood, charcoal, gas) are mentioned without quoting energy values.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Exothermic and endothermic",
+     "md": "An **exothermic** reaction **releases** heat to the surroundings (temperature rises, ΔH negative): burning fuels, neutralisation, respiration, rusting. An **endothermic** reaction **absorbs** heat (temperature falls, ΔH positive): thermal decomposition of calcium carbonate, photosynthesis, dissolving ammonium nitrate."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Bond energy idea",
+     "md": "Reactions involve **breaking** bonds in the reactants (needs energy, endothermic) and **making** bonds in the products (releases energy, exothermic). If more energy is released making bonds than is used breaking them, the reaction is exothermic. The extra energy needed to start a reaction is the **activation energy**."
+    },
+    {
+     "type": "formula",
+     "tex": "q = mc\\Delta T",
+     "caption": "m in g of solution, c = 4.2 J/g °C, ΔT in °C; ΔH = −q ÷ moles"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- On a diagram of an exothermic reaction the **products are lower** than the reactants; for an endothermic reaction they are higher.\n- ΔH is negative for exothermic reactions.\n- Burning charcoal or gas indoors without ventilation can produce poisonous carbon monoxide."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 100,
+      "grid": 20,
+      "w": 400,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 1,
+        "y": 68,
+        "label": "reactants",
+        "color": "red"
+       },
+       {
+        "x": 9,
+        "y": 33,
+        "label": "products",
+        "color": "red"
+       },
+       {
+        "x": 5,
+        "y": 97,
+        "label": "peak",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 60,
+        "x2": 2,
+        "y2": 60,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 2,
+        "y1": 60,
+        "x2": 5,
+        "y2": 92,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 5,
+        "y1": 92,
+        "x2": 8,
+        "y2": 25,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 8,
+        "y1": 25,
+        "x2": 10,
+        "y2": 25,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "progress of reaction",
+      "ylabel": "energy"
+     },
+     "caption": "Energy level diagram of an exothermic reaction: products have less energy than reactants; the peak is the activation energy.",
+     "alt": "A line starting at a high energy level for reactants, rising to a peak and falling to a lower level for products."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — neutralisation",
+     "statement": "50 cm³ of 1.0 mol/dm³ HCl is mixed with 50 cm³ of 1.0 mol/dm³ NaOH. The temperature rises by 6.8 °C. Find the heat released and the energy change per mole of water formed (assume 1 g/cm³ and 4.2 J/g °C).",
+     "steps": [
+      "Mass of solution = 100 g. q = mcΔT = 100 × 4.2 × 6.8 = 2856 J.",
+      "Moles of HCl = 1.0 × 0.050 = 0.050 mol (= moles of water formed). ΔH = −2856 ÷ 0.050 = −57 120 J/mol ≈ −57.1 kJ/mol."
+     ],
+     "answer": "q = 2856 J; ΔH ≈ −57 kJ/mol"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — energy of a fuel",
+     "statement": "Burning 0.80 g of a fuel in a spirit burner heats 200 g of water by 12.5 °C. Estimate the energy released per gram (ignore heat losses).",
+     "steps": [
+      "q = mcΔT = 200 × 4.2 × 12.5 = 10 500 J.",
+      "Energy per gram = 10 500 ÷ 0.80 = 13 125 J/g ≈ 13.1 kJ/g. (The real value is higher because much heat is lost.)"
+     ],
+     "answer": "≈ 13.1 kJ/g (an underestimate)"
+    }
+   ],
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-rates-reaction",
+   "title": "Rates of reaction",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Energetics (exothermic/endothermic), rates of reaction, catalysts (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe how rate can be measured.",
+    "State the factors affecting rate: concentration, temperature, surface area, catalyst.",
+    "Explain the factors with collision theory.",
+    "Interpret rate graphs and calculate average rates."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-energy-changes"
+   ],
+   "exercises": [
+    "gceol-chemistry-energetics-e07",
+    "gceol-chemistry-energetics-e08",
+    "gceol-chemistry-energetics-e09",
+    "gceol-chemistry-energetics-e10",
+    "gceol-chemistry-energetics-e11",
+    "gceol-chemistry-energetics-e12"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-rates-reaction-q1",
+    "gceol-chemistry-rates-reaction-q2",
+    "gceol-chemistry-rates-reaction-q3",
+    "gceol-chemistry-rates-reaction-q4",
+    "gceol-chemistry-rates-reaction-q5"
+   ],
+   "reviewNotes": [
+    "The statement that rate roughly doubles for each 10 °C rise is a rule of thumb, not an exact law; it is used here only for illustration.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Rate of reaction",
+     "md": "The **rate** is how fast reactants are used up or products formed. It can be measured by the volume of gas produced per unit time, loss of mass of the flask, or the time for a cross to disappear. **Average rate** = change in quantity ÷ time taken. On a graph of product against time, the **gradient** is the rate: steep at the start, flat when the reaction has stopped."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Factors and collision theory",
+     "md": "Reactions occur when particles **collide with enough energy** (activation energy). Rate increases with:\n\n- **Higher concentration** (or pressure of gases): more particles in the same volume, more collisions per second.\n- **Higher temperature**: particles move faster, more collisions and a larger fraction have enough energy (mainly this).\n- **Larger surface area** (smaller pieces, powder): more particles exposed.\n- **A catalyst**: provides a path with lower activation energy and is not used up."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Catalysts",
+     "md": "A **catalyst** speeds up a reaction without being used up or changing the amount of product. Examples: manganese(IV) oxide for H₂O₂ → H₂O + O₂; iron in the Haber process; vanadium(V) oxide in the contact process; **enzymes** in living things (and yeast in fermentation)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- A catalyst does not change the **amount** of product, only how fast it forms.\n- Temperature raises the rate mainly because more collisions have enough energy, not only because they are more frequent.\n- Fair test: change one factor at a time."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 30,
+      "ymin": 0,
+      "ymax": 70,
+      "grid": 10,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "60*(1-exp(-0.15*x))",
+        "color": "blue",
+        "label": "fast"
+       },
+       {
+        "expr": "60*(1-exp(-0.05*x))",
+        "color": "red",
+        "label": "slow"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "time (s)",
+      "ylabel": "volume of gas (cm³)"
+     },
+     "caption": "Volume of gas against time: the faster reaction (blue) is steeper at first; both reach the same final volume.",
+     "alt": "Two rising curves flattening at 60 cm3, one steeper (fast) and one gentler (slow)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — average rates",
+     "statement": "Gas collected from a reaction: 0 cm³ at 0 s, 30 cm³ at 20 s, 48 cm³ at 40 s, 54 cm³ at 60 s. Find the average rate for the first 20 s and for 40–60 s and explain the change.",
+     "steps": [
+      "First 20 s: 30 ÷ 20 = 1.5 cm³/s. From 40 s to 60 s: (54 − 48) ÷ 20 = 0.3 cm³/s.",
+      "The rate decreases because the reactants are being used up (lower concentration, fewer collisions)."
+     ],
+     "answer": "1.5 cm³/s then 0.3 cm³/s"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — effect of temperature",
+     "statement": "A reaction takes 240 s at 20 °C. Assuming (as a rough rule) that the rate doubles for every 10 °C rise, how long will it take at 50 °C?",
+     "steps": [
+      "Temperature rise 30 °C = three steps of 10 °C, so the rate is multiplied by 2 × 2 × 2 = 8.",
+      "The time is divided by 8: 240 ÷ 8 = 30 s."
+     ],
+     "answer": "About 30 s (rule of thumb)"
+    }
+   ],
+   "chapter": "gceol-chemistry-energetics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-energetics-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is an endothermic process?",
+   "choices": [
+    "respiration",
+    "dissolving ammonium nitrate in water",
+    "neutralisation",
+    "burning charcoal"
+   ],
+   "answer": 1,
+   "explanation": "The temperature falls when ammonium nitrate dissolves.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In an exothermic reaction the products have less energy than the reactants.",
+   "answer": true,
+   "explanation": "The difference is released as heat.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A reaction in 50 g of solution raises the temperature by 8 °C (c = 4.2 J/g °C). Find the heat released in joules.",
+   "answer": 1680.0,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "q = 50 × 4.2 × 8 = 1680 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Breaking bonds is",
+   "choices": [
+    "endothermic, and making bonds is exothermic",
+    "neither",
+    "always exothermic",
+    "exothermic, and making bonds is endothermic"
+   ],
+   "answer": 0,
+   "explanation": "Energy is needed to break bonds; energy is released when bonds form.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil in Bamenda adds a spatula of a white salt to water and the temperature drops by 5 °C. State what this shows and sketch the energy level diagram in words.",
+   "model": "The dissolving is endothermic: it takes in heat from the water. On the energy diagram the products (solution) are higher than the reactants (solid and water).",
+   "rubric": "1 mark: endothermic; 1 mark: heat absorbed from surroundings; 1 mark: products higher.",
+   "explanation": "The dissolving is endothermic: it takes in heat from the water. On the energy diagram the products (solution) are higher than the reactants (solid and water).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a school experiment, 25 g of water is heated by burning 0.50 g of methanol and its temperature rises from 20.0 °C to 40.0 °C (c = 4.2 J/g °C).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the temperature rise in °C.",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "40.0 − 20.0 = 20 °C.",
+     "unit": "°C",
+     "id": "gceol-chemistry-energetics-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the heat absorbed by the water in joules.",
+     "answer": 2100.0,
+     "tolerance": 0,
+     "explanation": "q = 25 × 4.2 × 20 = 2100 J.",
+     "unit": "J",
+     "id": "gceol-chemistry-energetics-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the energy per gram of methanol in J/g.",
+     "answer": 4200.0,
+     "tolerance": 0,
+     "explanation": "2100 ÷ 0.50 = 4200 J/g.",
+     "unit": "J/g",
+     "id": "gceol-chemistry-energetics-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give two reasons why the true energy value is greater.",
+     "model": "Heat is lost to the air and the apparatus; combustion may be incomplete; some heat warms the container.",
+     "rubric": "1 mark each; any two.",
+     "explanation": "Heat is lost to the air and the apparatus; combustion may be incomplete; some heat warms the container.",
+     "id": "gceol-chemistry-energetics-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energy-changes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-energy-changes",
+   "prompt": "An exothermic reaction",
+   "choices": [
+    "releases heat",
+    "absorbs heat",
+    "has no energy change",
+    "cools the surroundings"
+   ],
+   "answer": 0,
+   "explanation": "Temperature of surroundings rises.",
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energy-changes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-energy-changes",
+   "prompt": "Photosynthesis is",
+   "choices": [
+    "endothermic",
+    "a combustion",
+    "exothermic",
+    "a neutralisation"
+   ],
+   "answer": 0,
+   "explanation": "Absorbs light energy.",
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energy-changes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-energy-changes",
+   "prompt": "Activation energy is the energy needed to",
+   "choices": [
+    "start the reaction",
+    "dissolve the salt",
+    "finish the reaction",
+    "cool the products"
+   ],
+   "answer": 0,
+   "explanation": "The energy hurdle.",
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energy-changes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-energy-changes",
+   "prompt": "q = mcΔT gives",
+   "choices": [
+    "heat energy",
+    "mass",
+    "volume",
+    "concentration"
+   ],
+   "answer": 0,
+   "explanation": "Heat from temperature change.",
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energy-changes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-energy-changes",
+   "prompt": "Neutralisation is usually",
+   "choices": [
+    "exothermic",
+    "a physical change",
+    "not a reaction",
+    "endothermic"
+   ],
+   "answer": 0,
+   "explanation": "The temperature rises.",
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-rates-reaction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which change does NOT increase the rate of reaction of marble chips with acid?",
+   "choices": [
+    "using more concentrated acid",
+    "heating the acid",
+    "using powdered marble",
+    "using fewer, larger marble chips"
+   ],
+   "answer": 3,
+   "explanation": "Larger pieces have a smaller surface area.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-rates-reaction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A catalyst is used up during a reaction.",
+   "answer": false,
+   "explanation": "It is unchanged at the end, though it may change form temporarily.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-rates-reaction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "20 cm³ of gas is produced in 40 s. Find the average rate in cm³/s.",
+   "answer": 0.5,
+   "tolerance": 0,
+   "unit": "cm³/s",
+   "explanation": "20 ÷ 40 = 0.5 cm³/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-rates-reaction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why does a lump of charcoal burn more slowly than charcoal dust?",
+   "choices": [
+    "The dust is hotter",
+    "Lumps have less carbon",
+    "The dust has a much larger surface area",
+    "Lumps contain a catalyst"
+   ],
+   "answer": 2,
+   "explanation": "More surface exposed to oxygen: more collisions.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-rates-reaction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain, using collision theory, why increasing the temperature increases the rate.",
+   "model": "At higher temperature the particles move faster, so they collide more often and, more importantly, a greater fraction of collisions has energy at or above the activation energy, so more collisions are successful.",
+   "rubric": "1 mark: more frequent collisions; 1 mark: more energetic collisions/greater fraction above activation energy.",
+   "explanation": "At higher temperature the particles move faster, so they collide more often and, more importantly, a greater fraction of collisions has energy at or above the activation energy, so more collisions are successful.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-energetics-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-rates-reaction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Hydrogen peroxide solution decomposes slowly: 2H₂O₂ → 2H₂O + O₂. A pupil adds manganese(IV) oxide and records the oxygen volume: 0 s: 0 cm³; 10 s: 24 cm³; 20 s: 36 cm³; 30 s: 42 cm³.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the average rate in the first 10 s in cm³/s.",
+     "answer": 2.4,
+     "tolerance": 0.01,
+     "explanation": "24 ÷ 10 = 2.4 cm³/s.",
+     "unit": "cm³/s",
+     "id": "gceol-chemistry-energetics-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the average rate between 20 s and 30 s.",
+     "answer": 0.6,
+     "tolerance": 0.01,
+     "explanation": "(42 − 36) ÷ 10 = 0.6 cm³/s.",
+     "unit": "cm³/s",
+     "id": "gceol-chemistry-energetics-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the role of manganese(IV) oxide?",
+     "choices": [
+      "It is a reactant",
+      "It is a catalyst: it speeds up the reaction and is not used up",
+      "It lowers the temperature",
+      "It is a product"
+     ],
+     "answer": 1,
+     "explanation": "A catalyst gives a lower activation energy path.",
+     "id": "gceol-chemistry-energetics-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why does the rate decrease with time?",
+     "model": "The hydrogen peroxide is being used up, so its concentration falls and there are fewer collisions per second.",
+     "rubric": "1 mark: reactant used up; 1 mark: fewer collisions.",
+     "explanation": "The hydrogen peroxide is being used up, so its concentration falls and there are fewer collisions per second.",
+     "id": "gceol-chemistry-energetics-e12-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-rates-reaction-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-rates-reaction",
+   "prompt": "Which does NOT affect the rate?",
+   "choices": [
+    "surface area",
+    "the colour of the container",
+    "temperature",
+    "concentration"
+   ],
+   "answer": 1,
+   "explanation": "Colour has no effect on collisions.",
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-rates-reaction-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-rates-reaction",
+   "prompt": "A catalyst",
+   "choices": [
+    "is a gas",
+    "lowers the activation energy",
+    "is a product",
+    "raises the temperature"
+   ],
+   "answer": 1,
+   "explanation": "It gives an alternative pathway.",
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-rates-reaction-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-rates-reaction",
+   "prompt": "A steep gradient on a graph of gas volume against time means the rate is",
+   "choices": [
+    "zero",
+    "fast",
+    "constant",
+    "slow"
+   ],
+   "answer": 1,
+   "explanation": "More gas per second.",
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-rates-reaction-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-rates-reaction",
+   "prompt": "Powdering a solid reactant",
+   "choices": [
+    "lowers the temperature",
+    "adds a catalyst",
+    "decreases the surface area",
+    "increases the surface area"
+   ],
+   "answer": 3,
+   "explanation": "More particles are exposed.",
+   "chapter": "gceol-chemistry-energetics"
+  },
+  {
+   "id": "gceol-chemistry-rates-reaction-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-rates-reaction",
+   "prompt": "The reaction stops when the graph is",
+   "choices": [
+    "curving upwards",
+    "horizontal",
+    "vertical",
+    "at zero"
+   ],
+   "answer": 1,
+   "explanation": "No more product forms.",
+   "chapter": "gceol-chemistry-energetics"
+  }
+ ]
+}

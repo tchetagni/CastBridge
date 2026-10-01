@@ -1,0 +1,492 @@
+{
+ "chapter": "gceal-computer-logic-circuits",
+ "lessons": [
+  {
+   "id": "gceal-computer-logic-circuits",
+   "title": "Half and full adders, simplification and flip-flops",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Build a half adder and a full adder from gates",
+    "Simplify Boolean expressions with laws and Karnaugh maps",
+    "Describe a flip-flop as one bit of memory",
+    "Read a combinational circuit"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-logic-circuits-e01",
+    "gceal-computer-logic-circuits-e02",
+    "gceal-computer-logic-circuits-e03",
+    "gceal-computer-logic-circuits-e04",
+    "gceal-computer-logic-circuits-e05",
+    "gceal-computer-logic-circuits-e06"
+   ],
+   "selfCheck": [
+    "gceal-computer-logic-circuits-q1",
+    "gceal-computer-logic-circuits-q2",
+    "gceal-computer-logic-circuits-q3",
+    "gceal-computer-logic-circuits-q4",
+    "gceal-computer-logic-circuits-q5"
+   ],
+   "reviewNotes": [
+    "Full-adder table and K-map result verified in Python. Gate diagrams drawn without the correct gate shapes; replace with proper symbols after review.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Adders",
+     "md": "A **half adder** adds two bits: **Sum = A XOR B**, **Carry = A AND B**. A **full adder** adds two bits **and a carry-in**: Sum = A XOR B XOR Cin; Carry-out = (A AND B) OR (Cin AND (A XOR B)). Chaining full adders adds multi-bit binary numbers."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Karnaugh map (K-map)",
+     "md": "A K-map arranges a truth table in a grid in which neighbouring cells differ in **one** variable (Gray-code order: 00, 01, 11, 10). Group adjacent 1s in rectangles of 1, 2, 4, 8 (powers of two); bigger groups give simpler terms; groups may overlap and wrap around edges. Each group gives one product term from the variables that **do not change** inside it."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 18,
+        "text": "Half adder: Sum = A XOR B, Carry = A AND B",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 65,
+        "text": "XOR",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 110,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 135,
+        "text": "AND",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 56,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 126,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 45,
+        "y1": 54,
+        "x2": 180,
+        "y2": 52,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 45,
+        "y1": 124,
+        "x2": 180,
+        "y2": 140,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 54,
+        "x2": 80,
+        "y2": 118,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 118,
+        "x2": 180,
+        "y2": 118,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 124,
+        "x2": 95,
+        "y2": 70,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 70,
+        "x2": 180,
+        "y2": 70,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 60,
+        "x2": 320,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 65,
+        "text": "Sum",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 130,
+        "x2": 320,
+        "y2": 130,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 135,
+        "text": "Carry",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A half adder drawn with one XOR gate giving the sum and one AND gate giving the carry.",
+     "alt": "Half adder diagram: A and B go to an XOR gate (sum) and an AND gate (carry)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Example",
+     "md": "Q = A'BC + ABC + AB'C + ABC' (A' means NOT A). The 1s are at 011, 111, 101, 110, which group as: (B and C), (A and C), (A and B). Simplified: Q = AB + BC + AC. This is the **majority** function: 1 when at least two inputs are 1. Check: A=1,B=1,C=0 gives AB = 1, correct."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Flip-flop",
+     "md": "A **flip-flop** is a circuit with two stable states that stores **one bit**. An **SR** flip-flop (two cross-coupled NOR or NAND gates) has Set and Reset inputs; a **D flip-flop** copies its D input on the clock edge. Registers are groups of flip-flops. Sequential circuits depend on stored state as well as inputs."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- K-map rows and columns are in Gray-code order, not 00, 01, 10, 11.\n- Groups must be rectangles whose size is a power of two.\n- XOR is not OR: 1 + 1 gives sum 0 with carry 1.\n- The inputs 'S = R = 1' is forbidden for a simple SR latch."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Half adder",
+     "statement": "Find Sum and Carry for A = 1, B = 1.",
+     "steps": [
+      "Sum = 1 XOR 1 = 0.",
+      "Carry = 1 AND 1 = 1, so 1 + 1 = 10 in binary."
+     ],
+     "answer": "Sum 0, carry 1"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Full adder",
+     "statement": "Find Sum and Carry-out for A = 1, B = 1, Cin = 1.",
+     "steps": [
+      "Sum = 1 XOR 1 XOR 1 = 1. A XOR B = 0, so Carry-out = (1 AND 1) OR (1 AND 0) = 1.",
+      "Check: 1 + 1 + 1 = 3 = binary 11: sum 1, carry 1."
+     ],
+     "answer": "Sum 1, carry 1"
+    }
+   ],
+   "chapter": "gceal-computer-logic-circuits"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-computer-logic-circuits-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-logic-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The carry of a half adder is given by",
+   "choices": [
+    "A XOR B",
+    "NOT A",
+    "A AND B",
+    "A OR B"
+   ],
+   "answer": 2,
+   "explanation": "Carry.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-computer-logic-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Number of inputs that give Sum = 1 in a half adder (out of 4 combinations)",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "01 and 10.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-computer-logic-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A flip-flop can store one bit.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-logic-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a full adder, for A = 1, B = 0, Cin = 1 the sum is",
+   "answer": 0,
+   "tolerance": 0,
+   "explanation": "1 XOR 0 XOR 1 = 0 (carry-out 1).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-logic-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a K-map uses the order 00, 01, 11, 10.",
+   "model": "In this Gray-code order neighbouring cells differ by only one variable, so adjacent 1s can be grouped to eliminate a variable.",
+   "rubric": "1 mark each point (2) plus 1 for example.",
+   "explanation": "In this Gray-code order neighbouring cells differ by only one variable, so adjacent 1s can be grouped to eliminate a variable.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-logic-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Q = A'BC + ABC + AB'C + ABC' (A' = NOT A).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Simplified expression",
+     "choices": [
+      "AB + C",
+      "ABC",
+      "AB + BC + AC",
+      "A + B + C"
+     ],
+     "answer": 2,
+     "explanation": "Majority function.",
+     "id": "gceal-computer-logic-circuits-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Value of Q when A = 0, B = 1, C = 1",
+     "answer": 1,
+     "tolerance": 0,
+     "explanation": "A'BC = 1.",
+     "id": "gceal-computer-logic-circuits-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Value of Q when A = 1, B = 0, C = 0",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "No term is 1.",
+     "id": "gceal-computer-logic-circuits-e06-c"
+    }
+   ],
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-logic-circuits",
+   "prompt": "A full adder has",
+   "choices": [
+    "three inputs",
+    "no outputs",
+    "four outputs",
+    "one input"
+   ],
+   "answer": 0,
+   "explanation": "A, B, Cin.",
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-logic-circuits",
+   "prompt": "XOR gives 1 when",
+   "choices": [
+    "the inputs differ",
+    "both inputs are 0",
+    "never",
+    "both inputs are 1"
+   ],
+   "answer": 0,
+   "explanation": "XOR.",
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-logic-circuits",
+   "prompt": "A K-map group must contain",
+   "choices": [
+    "1, 2, 4, 8 ... cells",
+    "5 cells",
+    "any number",
+    "3 cells"
+   ],
+   "answer": 0,
+   "explanation": "Powers of two.",
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-logic-circuits",
+   "prompt": "A register is made of",
+   "choices": [
+    "routers",
+    "cables",
+    "flip-flops",
+    "monitors"
+   ],
+   "answer": 2,
+   "explanation": "Registers.",
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-logic-circuits",
+   "prompt": "A half adder cannot",
+   "choices": [
+    "accept a carry-in",
+    "add two bits",
+    "give a carry",
+    "give a sum"
+   ],
+   "answer": 0,
+   "explanation": "Only two inputs.",
+   "chapter": "gceal-computer-logic-circuits"
+  },
+  {
+   "id": "gceal-computer-logic-circuits-m01",
+   "kind": "numeric",
+   "tier": "examen",
+   "lesson": "gceal-computer-logic-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a full adder, A = 1, B = 1, Cin = 0. What is the sum bit?",
+   "answer": 0,
+   "tolerance": 0,
+   "explanation": "1 XOR 1 XOR 0 = 0 (carry-out 1).",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceal-computer-logic-circuits"
+  }
+ ]
+}

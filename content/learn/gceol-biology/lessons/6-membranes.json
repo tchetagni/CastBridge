@@ -1,0 +1,1025 @@
+{
+ "chapter": "gceol-biology-membranes",
+ "lessons": [
+  {
+   "id": "gceol-biology-diffusion",
+   "title": "Diffusion and surface area",
+   "minutes": 25,
+   "programRef": "GCE O Level Biology — Diffusion, osmosis and active transport (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define diffusion and name the factors that affect its rate.",
+    "Give examples of diffusion in living organisms.",
+    "Calculate surface area to volume ratio and explain why large organisms need exchange surfaces."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-membranes-e01",
+    "gceol-biology-membranes-e02",
+    "gceol-biology-membranes-e03",
+    "gceol-biology-membranes-e04",
+    "gceol-biology-membranes-e05",
+    "gceol-biology-membranes-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-diffusion-q1",
+    "gceol-biology-diffusion-q2",
+    "gceol-biology-diffusion-q3",
+    "gceol-biology-diffusion-q4",
+    "gceol-biology-diffusion-q5"
+   ],
+   "reviewNotes": [
+    "Cube dimensions and ratios are computed in the script; real cells are not cubes.",
+    "Syllabus may require Fick's law-type reasoning only qualitatively.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Diffusion",
+     "md": "**Diffusion** is the net movement of particles (molecules or ions) from a region of **higher concentration** to a region of **lower concentration**, down a concentration gradient, as a result of their random movement.\n\nDiffusion is a **passive** process: it needs no energy from the cell."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 215,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 270,
+        "h": 140,
+        "stroke": "grey",
+        "width": 1.5
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 120,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 99,
+        "cy": 61,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 77,
+        "cy": 122,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 125,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 104,
+        "cy": 53,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 107,
+        "cy": 46,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 78,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 74,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 54,
+        "cy": 136,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 114,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 105,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 80,
+        "cy": 126,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 49,
+        "cy": 74,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 49,
+        "cy": 111,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 229,
+        "cy": 139,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 181,
+        "cy": 130,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 279,
+        "cy": 53,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 100,
+        "x2": 420,
+        "y2": 100,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 85,
+        "text": "net movement",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 195,
+        "text": "high concentration",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 195,
+        "text": "low concentration",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Particles spread from where they are crowded to where they are few.",
+     "alt": "A box with many orange dots on the left and few on the right; a blue arrow points to the right labelled net movement."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Examples and factors",
+     "md": "In living things: oxygen enters cells and carbon dioxide leaves them; carbon dioxide enters leaves through stomata; digested food enters the blood in the ileum.\n\nThe rate of diffusion is **faster** when:\n- the concentration gradient is steeper,\n- the temperature is higher,\n- the surface area is larger,\n- the distance is shorter."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Surface area to volume ratio",
+     "md": "As an object gets bigger its volume grows faster than its surface area, so the **ratio SA : V falls**. A tiny single-celled organism has enough surface for diffusion alone. A large animal does not, so it needs **exchange surfaces** (lungs, villi) and a transport system."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 220,
+      "bars": [
+       {
+        "label": "1 cm cube",
+        "value": 6.0,
+        "color": "blue"
+       },
+       {
+        "label": "2 cm cube",
+        "value": 3.0,
+        "color": "blue"
+       },
+       {
+        "label": "4 cm cube",
+        "value": 1.5,
+        "color": "blue"
+       }
+      ],
+      "unit": "ratio"
+     },
+     "caption": "SA:V falls as a cube gets larger (computed from 6a² ÷ a³).",
+     "alt": "A bar chart: the 1 cm cube has a ratio of 6, the 2 cm cube 3 and the 4 cm cube 1.5."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Diffusion stops moving particles only when the *net* movement is zero (equal concentration); particles still move randomly.\n- Diffusion is not 'osmosis': osmosis is only the movement of *water* through a partially permeable membrane.\n- A larger cell does not have a larger ratio; it has a smaller one."
+    },
+    {
+     "type": "example",
+     "title": "Surface area to volume ratio",
+     "statement": "A cube of agar has sides of 2 cm. Calculate its surface area, volume and SA : V ratio.",
+     "steps": [
+      "Surface area = 6 faces × (2 × 2) cm² = 24 cm².",
+      "Volume = 2 × 2 × 2 = 8 cm³.",
+      "Ratio = 24 ÷ 8 = 3."
+     ],
+     "answer": "SA : V = 3 : 1"
+    },
+    {
+     "type": "example",
+     "title": "Predict the rate",
+     "statement": "Coloured dye is placed in water at 20 °C and in water at 40 °C. In which beaker does it spread faster, and why?",
+     "steps": [
+      "Higher temperature gives particles more kinetic energy.",
+      "They move faster, so the dye spreads more quickly in the warm water."
+     ],
+     "answer": "In the 40 °C water, because particles move faster at a higher temperature."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-membranes-e01"
+    }
+   ],
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-osmosis",
+   "title": "Osmosis and active transport",
+   "minutes": 25,
+   "programRef": "GCE O Level Biology — Diffusion, osmosis and active transport (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define osmosis and describe its effect on plant and animal cells.",
+    "Calculate the percentage change in mass in an osmosis experiment.",
+    "Define active transport and give examples."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-membranes-e07",
+    "gceol-biology-membranes-e08",
+    "gceol-biology-membranes-e09",
+    "gceol-biology-membranes-e10",
+    "gceol-biology-membranes-e11",
+    "gceol-biology-membranes-e12"
+   ],
+   "selfCheck": [
+    "gceol-biology-osmosis-q1",
+    "gceol-biology-osmosis-q2",
+    "gceol-biology-osmosis-q3",
+    "gceol-biology-osmosis-q4",
+    "gceol-biology-osmosis-q5"
+   ],
+   "reviewNotes": [
+    "Water potential terminology: some syllabi only use 'dilute to concentrated'; check which is required.",
+    "Potato strip data are invented for practice.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Osmosis",
+     "md": "**Osmosis** is the movement of **water molecules** from a region of **higher water potential** (a dilute solution or pure water) to a region of **lower water potential** (a concentrated solution) through a **partially permeable membrane**.\n\nIn simple words: water moves from the dilute solution to the concentrated solution."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Effects on cells",
+     "md": "- **Plant cell in pure water**: water enters by osmosis; the vacuole swells and presses on the cell wall; the cell becomes **turgid** (firm). The wall prevents bursting.\n- **Plant cell in a concentrated solution**: water leaves; the cytoplasm shrinks away from the wall; the cell is **plasmolysed**; a tissue becomes **flaccid** and the plant wilts.\n- **Animal cell** (no wall) in pure water can burst; in a very concentrated solution it shrinks."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 120,
+        "h": 90,
+        "stroke": "blue",
+        "width": 1.5,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 55,
+        "w": 60,
+        "h": 60,
+        "stroke": "green",
+        "width": 4,
+        "fill": "lightgreen",
+        "radius": 12
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 150,
+        "text": "turgid",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 170,
+        "text": "in pure water",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 40,
+        "w": 120,
+        "h": 90,
+        "stroke": "orange",
+        "width": 1.5,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 55,
+        "w": 60,
+        "h": 60,
+        "stroke": "green",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 150,
+        "text": "flaccid",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 170,
+        "text": "in same strength",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 40,
+        "w": 120,
+        "h": 90,
+        "stroke": "orange",
+        "width": 1.5,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 355,
+        "y": 55,
+        "w": 90,
+        "h": 60,
+        "stroke": "green",
+        "width": 3
+       },
+       {
+        "t": "rect",
+        "x": 375,
+        "y": 70,
+        "w": 40,
+        "h": 30,
+        "stroke": "green",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 150,
+        "text": "plasmolysed",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 170,
+        "text": "in strong solution",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A plant cell in three different surroundings.",
+     "alt": "Three beakers: a swollen turgid plant cell in pure water, a limp flaccid cell in a solution of equal strength and a plasmolysed cell whose cytoplasm has pulled away from the wall in a strong solution."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Active transport",
+     "md": "**Active transport** is the movement of particles through a cell membrane **against** a concentration gradient (from low to high concentration), using **energy from respiration**.\n\nExamples: root hair cells take in nitrate and other mineral ions from the soil; glucose is absorbed in the small intestine and kidney tubules when its concentration is lower outside than inside the cell."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Water always moves *towards the more concentrated solution* in osmosis; learners often reverse this.\n- The membrane must be *partially permeable*: it lets water through but not large solute molecules.\n- Active transport needs energy, so it stops if a cell is starved of oxygen or poisoned."
+    },
+    {
+     "type": "example",
+     "title": "Percentage change in mass",
+     "statement": "A strip of potato of mass 5.0 g is kept in pure water for one hour and its mass becomes 5.7 g. Calculate the percentage change in mass and explain it.",
+     "steps": [
+      "Change = 5.7 − 5.0 = 0.7 g.",
+      "Percentage change = 0.7 ÷ 5.0 × 100 = 14 %.",
+      "Water entered the potato cells by osmosis because the water outside had a higher water potential."
+     ],
+     "answer": "+14 %: the potato gained water by osmosis."
+    },
+    {
+     "type": "example",
+     "title": "A strip in strong sugar solution",
+     "statement": "A 5.0 g potato strip is placed in strong sugar solution and weighs 4.2 g afterwards. Find the percentage change.",
+     "steps": [
+      "Change = 4.2 − 5.0 = −0.8 g.",
+      "−0.8 ÷ 5.0 × 100 = −16 %.",
+      "The negative sign shows loss: water left the cells by osmosis."
+     ],
+     "answer": "−16 %: the strip lost water."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-membranes-e07"
+    }
+   ],
+   "chapter": "gceol-biology-membranes"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-membranes-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Diffusion is the movement of particles:",
+   "choices": [
+    "from high to low concentration down a gradient",
+    "from low to high concentration using energy",
+    "of water only through a membrane",
+    "only in solids"
+   ],
+   "answer": 0,
+   "explanation": "Diffusion moves particles down a concentration gradient, without energy.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Diffusion requires energy from respiration.",
+   "answer": false,
+   "explanation": "Diffusion is passive; active transport needs energy.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cube has sides of 4 cm. Calculate its surface area to volume ratio.",
+   "answer": 1.5,
+   "tolerance": 0.01,
+   "explanation": "SA = 6 × 16 = 96 cm²; V = 64 cm³; 96 ÷ 64 = 1.5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why does a large animal need a lung or gills but an amoeba does not?",
+   "choices": [
+    "the amoeba does not need oxygen",
+    "the large animal has no cell membranes",
+    "the large animal has a small SA:V ratio",
+    "diffusion does not occur in large animals"
+   ],
+   "answer": 2,
+   "explanation": "In large animals surface area is too small compared with volume, so special exchange surfaces are needed.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "State three ways in which the lining of the small intestine is adapted for fast absorption by diffusion.",
+   "model": "It is folded into many villi that give a large surface area; the wall is only one cell thick (short distance); each villus has a rich blood supply that keeps the concentration gradient steep.",
+   "rubric": [
+    "1 mark: large surface area / villi",
+    "1 mark: thin wall / short distance",
+    "1 mark: blood supply maintains gradient"
+   ],
+   "explanation": "It is folded into many villi that give a large surface area; the wall is only one cell thick (short distance); each villus has a rich blood supply that keeps the concentration gradient steep.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two cubes of agar jelly containing indicator are placed in acid: cube A has sides of 1 cm and cube B has sides of 2 cm.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "SA : V ratio of cube A.",
+     "answer": 6.0,
+     "tolerance": 0.01,
+     "explanation": "6 ÷ 1 = 6.",
+     "id": "gceol-biology-membranes-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "SA : V ratio of cube B.",
+     "answer": 3.0,
+     "tolerance": 0.01,
+     "explanation": "24 ÷ 8 = 3.",
+     "id": "gceol-biology-membranes-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which cube changes colour right through first?",
+     "choices": [
+      "cube B",
+      "neither",
+      "both at the same time",
+      "cube A"
+     ],
+     "answer": 3,
+     "explanation": "The larger ratio gives faster diffusion relative to volume, and the distance to the centre is smaller.",
+     "id": "gceol-biology-membranes-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Name one factor that would make the acid diffuse faster.",
+     "model": "A higher temperature or a stronger acid (steeper gradient).",
+     "rubric": [
+      "1 mark for a correct factor"
+     ],
+     "explanation": "A higher temperature or a stronger acid (steeper gradient).",
+     "id": "gceol-biology-membranes-e06-d"
+    }
+   ],
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-diffusion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-diffusion",
+   "prompt": "The best definition of diffusion is:",
+   "choices": [
+    "movement of water only",
+    "net movement down a concentration gradient",
+    "movement using ATP",
+    "movement against a gradient"
+   ],
+   "answer": 1,
+   "explanation": "Diffusion goes from high to low concentration.",
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-diffusion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-diffusion",
+   "prompt": "Which does NOT speed up diffusion?",
+   "choices": [
+    "steeper concentration gradient",
+    "larger surface area",
+    "higher temperature",
+    "a longer distance"
+   ],
+   "answer": 3,
+   "explanation": "A longer distance slows it.",
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-diffusion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-diffusion",
+   "prompt": "A 3 cm cube has a SA:V ratio of:",
+   "choices": [
+    "9",
+    "27",
+    "6",
+    "2"
+   ],
+   "answer": 3,
+   "explanation": "54 cm² ÷ 27 cm³ = 2.",
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-diffusion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-diffusion",
+   "prompt": "Oxygen moves into a cell from the blood by:",
+   "choices": [
+    "digestion",
+    "osmosis",
+    "active transport",
+    "diffusion"
+   ],
+   "answer": 3,
+   "explanation": "Oxygen moves down its concentration gradient.",
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-diffusion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-diffusion",
+   "prompt": "The ratio SA:V of a growing cell:",
+   "choices": [
+    "increases",
+    "stays equal",
+    "decreases",
+    "is always 1"
+   ],
+   "answer": 2,
+   "explanation": "Volume increases faster than surface area.",
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In osmosis, water moves:",
+   "choices": [
+    "from a dilute solution to a concentrated solution across a partially permeable membrane",
+    "from a concentrated solution to a dilute solution",
+    "only through the cell wall",
+    "using energy from respiration"
+   ],
+   "answer": 0,
+   "explanation": "Water moves from higher to lower water potential, i.e. dilute to concentrated.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the cell condition with its description.",
+   "pairs": [
+    [
+     "turgid",
+     "swollen and firm in pure water"
+    ],
+    [
+     "flaccid",
+     "soft because water has been lost"
+    ],
+    [
+     "plasmolysed",
+     "cytoplasm pulled away from the wall"
+    ],
+    [
+     "active transport",
+     "uses energy to move ions against a gradient"
+    ]
+   ],
+   "explanation": "Each term is matched with its definition.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A potato strip of mass 5.0 g becomes 5.7 g in water. What is its percentage change in mass?",
+   "answer": 14.0,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "(5.7 − 5.0) ÷ 5.0 × 100 = 14 %.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why can a plant cell not burst in pure water while an animal cell can?",
+   "choices": [
+    "the plant cell makes more water",
+    "the plant cell has a strong cellulose cell wall",
+    "the animal cell contains starch",
+    "the plant cell has no membrane"
+   ],
+   "answer": 1,
+   "explanation": "The wall resists the pressure of the swollen vacuole.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a plant wilts when too much salt fertiliser is put in the soil.",
+   "model": "The soil solution becomes more concentrated than the cell sap, so water leaves the root cells and then the other cells by osmosis. The cells lose turgor and become flaccid, so the plant wilts.",
+   "rubric": [
+    "1 mark: soil solution more concentrated",
+    "1 mark: water leaves by osmosis",
+    "1 mark: cells lose turgor / become flaccid"
+   ],
+   "explanation": "The soil solution becomes more concentrated than the cell sap, so water leaves the root cells and then the other cells by osmosis. The cells lose turgor and become flaccid, so the plant wilts.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-membranes-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Three potato strips were placed in three solutions for one hour. Strip 1: 5.0 g to 5.7 g. Strip 2: 5.0 g to 4.2 g. Strip 3: 4.0 g to 4.0 g.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Percentage change of strip 2.",
+     "answer": -16.0,
+     "tolerance": 0.1,
+     "explanation": "(4.2 − 5.0) ÷ 5.0 × 100 = −16.",
+     "unit": "%",
+     "id": "gceol-biology-membranes-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Percentage change of strip 3.",
+     "answer": 0.0,
+     "tolerance": 0.01,
+     "explanation": "No change in mass = 0 %.",
+     "unit": "%",
+     "id": "gceol-biology-membranes-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What does the result of strip 3 suggest?",
+     "choices": [
+      "the solution was pure water",
+      "the solution had the same water potential as the potato cells",
+      "osmosis only occurs in animals",
+      "the cells were dead"
+     ],
+     "answer": 1,
+     "explanation": "No net movement of water means equal concentrations.",
+     "id": "gceol-biology-membranes-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Give one reason why percentage change is used instead of change in grams.",
+     "model": "Strips may have different starting masses; percentages allow a fair comparison.",
+     "rubric": [
+      "1 mark for the idea of comparing strips of different initial mass"
+     ],
+     "explanation": "Strips may have different starting masses; percentages allow a fair comparison.",
+     "id": "gceol-biology-membranes-e12-d"
+    }
+   ],
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-osmosis-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-osmosis",
+   "prompt": "Plasmolysis happens when a plant cell is placed in:",
+   "choices": [
+    "a dilute solution",
+    "oxygen",
+    "pure water",
+    "a concentrated solution"
+   ],
+   "answer": 3,
+   "explanation": "Water leaves the cell.",
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-osmosis-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-osmosis",
+   "prompt": "Active transport requires:",
+   "choices": [
+    "a steep gradient only",
+    "energy from respiration",
+    "a dilute solution",
+    "a cell wall"
+   ],
+   "answer": 1,
+   "explanation": "It works against the gradient so energy is needed.",
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-osmosis-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-osmosis",
+   "prompt": "A turgid cell is:",
+   "choices": [
+    "firm because of water in the vacuole",
+    "shrunken",
+    "without a cell wall",
+    "dead"
+   ],
+   "answer": 0,
+   "explanation": "Turgor pressure makes cells firm.",
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-osmosis-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-osmosis",
+   "prompt": "Root hairs absorb mineral ions mainly by:",
+   "choices": [
+    "active transport",
+    "digestion",
+    "osmosis",
+    "transpiration"
+   ],
+   "answer": 0,
+   "explanation": "Ions are usually at a lower concentration in the soil than in the root hair.",
+   "chapter": "gceol-biology-membranes"
+  },
+  {
+   "id": "gceol-biology-osmosis-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-osmosis",
+   "prompt": "The membrane in osmosis is:",
+   "choices": [
+    "impermeable",
+    "partially permeable",
+    "made of cellulose",
+    "fully permeable"
+   ],
+   "answer": 1,
+   "explanation": "It allows water through but not large solutes.",
+   "chapter": "gceol-biology-membranes"
+  }
+ ]
+}

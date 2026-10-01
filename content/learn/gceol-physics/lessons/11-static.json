@@ -1,0 +1,438 @@
+{
+ "chapter": "gceol-physics-static",
+ "lessons": [
+  {
+   "id": "gceol-physics-static-electricity",
+   "title": "Static electricity",
+   "minutes": 20,
+   "programRef": "GCE O Level Physics — Electrostatics: charging, conductors and insulators, uses and dangers (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State that there are two kinds of charge and the force between them.",
+    "Explain charging by friction in terms of electrons.",
+    "Distinguish conductors and insulators.",
+    "Describe uses and dangers of static electricity and the lightning conductor."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-physics-static-e01",
+    "gceol-physics-static-e02",
+    "gceol-physics-static-e03",
+    "gceol-physics-static-e04",
+    "gceol-physics-static-e05",
+    "gceol-physics-static-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-static-electricity-q1",
+    "gceol-physics-static-electricity-q2",
+    "gceol-physics-static-electricity-q3",
+    "gceol-physics-static-electricity-q4",
+    "gceol-physics-static-electricity-q5"
+   ],
+   "reviewNotes": [
+    "Charging by induction and the gold-leaf electroscope are described only briefly; add if the Board requires diagrams.",
+    "The charge of an electron (1.6 × 10⁻¹⁹ C) is not used in this lesson.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Charge",
+     "md": "There are two kinds of electric charge, **positive (+)** and **negative (−)**. **Like charges repel; unlike charges attract.** Charge is measured in **coulombs (C)**. An atom is neutral; a body becomes charged when it **gains or loses electrons** (negative charges)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Charging by friction",
+     "md": "When a polythene rod is rubbed with a cloth, **electrons move from the cloth to the rod**: the rod becomes negative and the cloth positive (equal and opposite). A glass rod rubbed with silk loses electrons and becomes positive. Only **electrons** move; the positive charges stay in the nuclei."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Conductors, insulators, uses and dangers",
+     "md": "**Conductors** (metals, graphite, the human body) allow charge to flow; **insulators** (plastic, glass, rubber, dry air) do not. Uses: paint sprayers, photocopiers, dust removal. Dangers: sparks igniting fuel (tankers are earthed with a chain), and lightning. A **lightning conductor** is a pointed thick metal strip connected to the earth to carry the charge safely."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Positive charges do not move in solids; electrons do.\n- A charged object attracts a neutral light object (such as paper bits) by induction: this is not repulsion.\n- Rubbing does not create charge; it only moves it."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 110,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 117,
+        "text": "+",
+        "size": 24,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 170,
+        "cy": 110,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 117,
+        "text": "−",
+        "size": 24,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 110,
+        "x2": 140,
+        "y2": 110,
+        "color": "red",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 80,
+        "text": "attract",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 110,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 117,
+        "text": "+",
+        "size": 24,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 110,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 117,
+        "text": "+",
+        "size": 24,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 278,
+        "y1": 110,
+        "x2": 322,
+        "y2": 110,
+        "color": "blue",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 160,
+        "text": "repel",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Unlike charges attract; like charges repel.",
+     "alt": "Four charged circles: a plus and a minus joined by arrows labelled attract, and two pluses labelled repel."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — charging a rod",
+     "statement": "A polythene rod is rubbed with a dry cloth and becomes negatively charged. Explain what happens to the cloth.",
+     "steps": [
+      "Electrons are transferred by friction from the cloth to the rod.",
+      "The cloth loses electrons, so it is left with a positive charge equal in size to the charge on the rod."
+     ],
+     "answer": "The cloth becomes positively charged."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — repulsion test",
+     "statement": "A charged rod repels a hanging charged ball but attracts it when the rod is replaced by another charged rod. Explain how the test shows the signs of the charges.",
+     "steps": [
+      "Repulsion happens only between like charges, so the first rod has the same sign as the ball.",
+      "Attraction occurs between unlike charges (or a charged and neutral object), so a second rod that attracts may have the opposite sign: repulsion is the reliable test."
+     ],
+     "answer": "Repulsion proves the charges have the same sign."
+    }
+   ],
+   "chapter": "gceol-physics-static"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-static-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two negatively charged balloons are brought near each other. They",
+   "choices": [
+    "repel",
+    "attract",
+    "do nothing",
+    "become neutral"
+   ],
+   "answer": 0,
+   "explanation": "Like charges repel.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "When a rod is charged by rubbing, protons move from the cloth to the rod.",
+   "answer": false,
+   "explanation": "Only electrons move in a solid; protons stay in the nuclei.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-e03",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the material with its type.",
+   "pairs": [
+    [
+     "copper wire",
+     "allows charge to flow easily"
+    ],
+    [
+     "dry plastic",
+     "does not allow charge to flow"
+    ],
+    [
+     "lightning conductor",
+     "carries charge safely to the earth"
+    ]
+   ],
+   "explanation": "Copper is a conductor, plastic is an insulator, and a lightning conductor is a thick metal strip joined to the earth.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A rod is charged by rubbing and attracts small pieces of paper. This is because",
+   "choices": [
+    "the paper has a net charge opposite to the rod",
+    "the paper is neutral but charges in it are rearranged by induction",
+    "paper is a conductor of heat",
+    "the rod is hot"
+   ],
+   "answer": 1,
+   "explanation": "Charges shift in the paper, so the nearer part has an opposite charge and attraction wins.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why are fuel tankers fitted with a metal chain or strap touching the ground?",
+   "model": "Friction between fuel and the tank can build up charge; the chain is a conductor that carries the charge safely to earth so that no spark ignites the fuel vapour.",
+   "rubric": "1 mark: charge builds up by friction; 1 mark: chain conducts it to earth; 1 mark: prevents spark/fire.",
+   "explanation": "Friction between fuel and the tank can build up charge; the chain is a conductor that carries the charge safely to earth so that no spark ignites the fuel vapour.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A glass rod is rubbed with silk and becomes positively charged.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What moved when the glass rod was rubbed?",
+     "choices": [
+      "Electrons moved from the silk to the rod",
+      "Nothing moved",
+      "Electrons moved from the rod to the silk",
+      "Protons moved from the silk to the rod"
+     ],
+     "answer": 2,
+     "explanation": "A positive glass rod has lost electrons; the silk gains them and becomes negative.",
+     "id": "gceol-physics-static-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the sign of the charge on the silk?",
+     "choices": [
+      "positive",
+      "neutral",
+      "it depends on colour",
+      "negative"
+     ],
+     "answer": 3,
+     "explanation": "It gained the electrons that the rod lost.",
+     "id": "gceol-physics-static-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The positive glass rod is brought near a hanging negatively charged ball. The ball",
+     "choices": [
+      "is repelled",
+      "is attracted",
+      "becomes positive",
+      "does not move"
+     ],
+     "answer": 1,
+     "explanation": "Unlike charges attract.",
+     "id": "gceol-physics-static-e06-c"
+    }
+   ],
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-electricity-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-static-electricity",
+   "prompt": "Like charges",
+   "choices": [
+    "attract",
+    "neutralise",
+    "repel",
+    "cancel"
+   ],
+   "answer": 2,
+   "explanation": "Like charges repel.",
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-electricity-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-static-electricity",
+   "prompt": "The particles that move when a rod is charged by friction are",
+   "choices": [
+    "electrons",
+    "neutrons",
+    "protons",
+    "nuclei"
+   ],
+   "answer": 0,
+   "explanation": "Electrons are free to move.",
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-electricity-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-static-electricity",
+   "prompt": "Which is an insulator?",
+   "choices": [
+    "graphite",
+    "iron",
+    "copper",
+    "dry rubber"
+   ],
+   "answer": 3,
+   "explanation": "Rubber does not conduct charge.",
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-electricity-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-static-electricity",
+   "prompt": "The unit of charge is the",
+   "choices": [
+    "coulomb",
+    "volt",
+    "watt",
+    "ampere"
+   ],
+   "answer": 0,
+   "explanation": "1 C = 1 A for 1 s.",
+   "chapter": "gceol-physics-static"
+  },
+  {
+   "id": "gceol-physics-static-electricity-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-static-electricity",
+   "prompt": "A lightning conductor is connected to the",
+   "choices": [
+    "power line",
+    "earth",
+    "TV aerial",
+    "roof only"
+   ],
+   "answer": 1,
+   "explanation": "It carries the charge to ground.",
+   "chapter": "gceol-physics-static"
+  }
+ ]
+}

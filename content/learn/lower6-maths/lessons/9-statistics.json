@@ -1,0 +1,1268 @@
+{
+ "chapter": "lower6-maths-statistics",
+ "lessons": [
+  {
+   "id": "lower6-maths-probability",
+   "title": "Probability",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Statistics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the addition and multiplication rules",
+    "Use conditional probability and independence",
+    "Draw and use tree diagrams"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-statistics-e01",
+    "lower6-maths-statistics-e02",
+    "lower6-maths-statistics-e03",
+    "lower6-maths-statistics-e04",
+    "lower6-maths-statistics-e05",
+    "lower6-maths-statistics-e06"
+   ],
+   "selfCheck": [
+    "lower6-maths-probability-q1",
+    "lower6-maths-probability-q2",
+    "lower6-maths-probability-q3",
+    "lower6-maths-probability-q4",
+    "lower6-maths-probability-q5"
+   ],
+   "reviewNotes": [
+    "Permutations/combinations for counting probability are only touched through the binomial coefficient.",
+    "Check that Statistics (probability, data, distributions) is examined in Lower Sixth on the official syllabus: placement is an assumption.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Rules",
+     "md": "$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. Complement: $P(A')=1-P(A)$. Conditional: $P(A|B)=\\frac{P(A\\cap B)}{P(B)}$. Always $0\\leq P\\leq1$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Independent and mutually exclusive",
+     "md": "$A$ and $B$ are **independent** if $P(A\\cap B)=P(A)P(B)$ (one does not affect the other). They are **mutually exclusive** if $P(A\\cap B)=0$. Two events with positive probabilities cannot be both."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tree diagrams",
+     "md": "Draw branches for each stage with their probabilities (the branches from a point add to 1). Multiply along a path for 'and'; add the paths for 'or'. For draws without replacement the probabilities of the second stage change."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding probabilities for 'and' (multiply!).\n- Forgetting to subtract $P(A\\cap B)$ in the addition rule.\n- Treating draws without replacement as independent.\n- Confusing $P(A|B)$ with $P(B|A)$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A bag has 5 red and 3 blue balls. Two are drawn without replacement. Find $P$(both red) and $P$(one of each colour).",
+     "steps": [
+      "Both red: $\\frac{5}{8}\\times\\frac{4}{7}=\\frac{20}{56}=\\frac{5}{14}$.",
+      "RB or BR: $\\frac{5}{8}\\times\\frac{3}{7}+\\frac{3}{8}\\times\\frac{5}{7}=\\frac{15}{56}+\\frac{15}{56}=\\frac{15}{28}$."
+     ],
+     "answer": "$\\frac{5}{14}$ and $\\frac{15}{28}$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "In Buea it rains on a given morning with probability 0.3. If it rains the bus is late with probability 0.5, otherwise 0.1. Find $P$(late).",
+     "steps": [
+      "Rain and late: $0.3\\times0.5=0.15$.",
+      "No rain and late: $0.7\\times0.1=0.07$. Add."
+     ],
+     "answer": "$P(\\text{late})=0.22$",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 120,
+        "x2": 170,
+        "y2": 55,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 120,
+        "x2": 170,
+        "y2": 185,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 70,
+        "text": "0.3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 185,
+        "text": "0.7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 55,
+        "text": "Rain",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 185,
+        "text": "No rain",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 45,
+        "x2": 330,
+        "y2": 20,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 55,
+        "x2": 330,
+        "y2": 85,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 25,
+        "text": "0.5",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 95,
+        "text": "0.5",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 20,
+        "text": "late",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 85,
+        "text": "on time",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 185,
+        "x2": 340,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 190,
+        "x2": 340,
+        "y2": 220,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 168,
+        "text": "0.1",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 222,
+        "text": "0.9",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 160,
+        "text": "late",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 224,
+        "text": "on time",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-data",
+   "title": "Describing data: mean, variance and standard deviation",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Statistics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate mean, median, mode, variance and standard deviation",
+    "Work with frequency tables and coding",
+    "Compare data sets"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-statistics-e07",
+    "lower6-maths-statistics-e08",
+    "lower6-maths-statistics-e09",
+    "lower6-maths-statistics-e10",
+    "lower6-maths-statistics-e11",
+    "lower6-maths-statistics-e12"
+   ],
+   "selfCheck": [
+    "lower6-maths-data-q1",
+    "lower6-maths-data-q2",
+    "lower6-maths-data-q3",
+    "lower6-maths-data-q4",
+    "lower6-maths-data-q5"
+   ],
+   "reviewNotes": [
+    "Grouped data with histograms, cumulative frequency and quartiles are not worked in this lesson.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Measures",
+     "md": "Mean $\\bar x=\\frac{\\sum x}{n}$ (or $\\frac{\\sum fx}{\\sum f}$). Variance $\\sigma^2=\\frac{\\sum x^2}{n}-\\bar x^2$ (or $\\frac{\\sum fx^2}{\\sum f}-\\bar x^2$). Standard deviation $\\sigma=\\sqrt{\\sigma^2}$, in the same unit as the data."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Coding",
+     "md": "If $y=ax+b$ then $\\bar y=a\\bar x+b$ and $\\sigma_y=|a|\\sigma_x$. Adding a constant changes the mean but NOT the spread; multiplying scales both."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Choosing a measure",
+     "md": "Median (middle value, or mean of the two middle values) and the interquartile range resist outliers. The mean and standard deviation use every value, so an outlier pulls them. The mode is the most frequent value."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the square root at the end (variance is not the standard deviation).\n- Using $(\\sum x)^2$ instead of $\\sum x^2$.\n- Subtracting the mean before squaring in the shortcut formula: the shortcut is $\\frac{\\sum x^2}{n}-\\bar x^2$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the mean and standard deviation of 4, 7, 8, 9, 12.",
+     "steps": [
+      "$\\bar x=\\frac{40}{5}=8$.",
+      "$\\sum(x-8)^2=16+1+0+1+16=34$, variance $=\\frac{34}{5}=6.8$.",
+      "$\\sigma=\\sqrt{6.8}\\approx2.61$."
+     ],
+     "answer": "Mean 8; $\\sigma\\approx2.61$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Score $x$: 1, 2, 3, 4 with frequencies 2, 5, 8, 5. Find the mean and variance.",
+     "steps": [
+      "$n=20$, $\\sum fx=2+10+24+20=56$, $\\bar x=2.8$.",
+      "$\\sum fx^2=2+20+72+80=174$; variance $=\\frac{174}{20}-2.8^2=8.7-7.84$."
+     ],
+     "answer": "Mean 2.8; variance 0.86 ($\\sigma\\approx0.93$)",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "1",
+        "value": 2,
+        "color": "blue"
+       },
+       {
+        "label": "2",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "3",
+        "value": 8,
+        "color": "blue"
+       },
+       {
+        "label": "4",
+        "value": 5,
+        "color": "blue"
+       }
+      ],
+      "unit": "students"
+     }
+    }
+   ],
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-distributions",
+   "title": "Binomial and normal distributions",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Statistics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the binomial distribution $B(n,p)$",
+    "Standardise a normal variable and use tables",
+    "Solve practical problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-statistics-e13",
+    "lower6-maths-statistics-e14",
+    "lower6-maths-statistics-e15",
+    "lower6-maths-statistics-e16",
+    "lower6-maths-statistics-e17",
+    "lower6-maths-statistics-e18"
+   ],
+   "selfCheck": [
+    "lower6-maths-distributions-q1",
+    "lower6-maths-distributions-q2",
+    "lower6-maths-distributions-q3",
+    "lower6-maths-distributions-q4",
+    "lower6-maths-distributions-q5"
+   ],
+   "reviewNotes": [
+    "Table values are computed from the normal CDF and rounded to 4 d.p.; if the Board's tables differ in the last digit, adjust tolerances.",
+    "Normal approximation to the binomial and continuity corrections are not included; Poisson is in the Upper Sixth pack.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Binomial $B(n,p)$",
+     "md": "Used when there are $n$ independent trials, each with two outcomes and constant success probability $p$. $P(X=r)=C(n,r)p^r(1-p)^{n-r}$. Mean $np$, variance $np(1-p)$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Normal $N(\\mu,\\sigma^2)$",
+     "md": "A symmetric bell-shaped curve centred on $\\mu$. Standardise: $Z=\\frac{X-\\mu}{\\sigma}$, which follows $N(0,1)$. Use $\\Phi(z)=P(Z<z)$ from tables. Symmetry: $\\Phi(-z)=1-\\Phi(z)$; $P(Z>z)=1-\\Phi(z)$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Table values used here",
+     "md": "$\\Phi(1)=0.8413$, $\\Phi(1.5)=0.9332$, $\\Phi(1.96)=0.9750$, $\\Phi(2)=0.9772$. About 68% of a normal distribution lies within $1\\sigma$ of the mean, 95% within $1.96\\sigma$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the binomial when trials are not independent or $p$ changes.\n- Forgetting to divide by $\\sigma$ (not $\\sigma^2$) when standardising: if $N(55,10^2)$ then $\\sigma=10$.\n- For $P(Z>z)$, subtract the table value from 1."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "$X\\sim B(10,0.3)$. Find $P(X=3)$.",
+     "steps": [
+      "$P=C(10,3)(0.3)^3(0.7)^7$ with $C(10,3)=120$.",
+      "$=120\\times0.027\\times0.08235=0.2668$."
+     ],
+     "answer": "$P(X=3)\\approx0.267$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Heights of adults in a village are $N(170,8^2)$ cm. Find $P(X>182)$.",
+     "steps": [
+      "$z=\\frac{182-170}{8}=1.5$.",
+      "$P(Z>1.5)=1-\\Phi(1.5)=1-0.9332$."
+     ],
+     "answer": "$0.0668$",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3.5,
+      "xmax": 3.5,
+      "ymin": -0.1,
+      "ymax": 1.15,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "exp(-x^2/2)",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 1,
+        "label": "mean",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 1.5,
+        "y1": 0,
+        "x2": 1.5,
+        "y2": 0.3247,
+        "color": "red",
+        "dash": true,
+        "label": "z = 1.5"
+       }
+      ],
+      "xlabel": "z"
+     }
+    }
+   ],
+   "chapter": "lower6-maths-statistics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-maths-statistics-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$A$ and $B$ are independent, $P(A)=0.3$, $P(B)=0.6$. Find $P(A\\cap B)$.",
+   "answer": 0.18,
+   "tolerance": 0.001,
+   "explanation": "$0.3\\times0.6$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$P(A\\cap B)=0.12$ and $P(B)=0.4$. Then $P(A|B)=$",
+   "choices": [
+    "0.12",
+    "0.048",
+    "3.33",
+    "0.3"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{0.12}{0.4}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two mutually exclusive events, each with positive probability, are independent.",
+   "answer": false,
+   "explanation": "$P(A\\cap B)=0\\neq P(A)P(B)>0$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A fair die is rolled 3 times. $P$(at least one six) is",
+   "choices": [
+    "$\\frac{125}{216}$",
+    "$\\frac{91}{216}$",
+    "$\\frac{1}{2}$",
+    "$\\frac{1}{216}$"
+   ],
+   "answer": 1,
+   "explanation": "$1-\\left(\\frac{5}{6}\\right)^3=1-\\frac{125}{216}$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Among 30 students, 18 study mathematics, 12 study physics and 7 study both. Find the number who study neither, and $P$(maths | physics).",
+   "model": "$|M\\cup P|=18+12-7=23$, so $30-23=7$ study neither. Of the 12 physics students 7 also study maths, so $P(M|P)=\\frac{7}{12}$.",
+   "rubric": [
+    "Uses addition rule (1)",
+    "Neither $=7$ (1)",
+    "$\\frac{7}{12}$ (1)"
+   ],
+   "explanation": "$|M\\cup P|=18+12-7=23$, so $30-23=7$ study neither. Of the 12 physics students 7 also study maths, so $P(M|P)=\\frac{7}{12}$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Use the tree diagram of Example 2 (rain 0.3; late 0.5 if rain, 0.1 if no rain).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $P$(late).",
+     "answer": 0.22,
+     "tolerance": 0.001,
+     "explanation": "$0.15+0.07$.",
+     "id": "lower6-maths-statistics-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Given that the bus is late, find $P$(it rained), to 3 d.p.",
+     "answer": 0.682,
+     "tolerance": 0.001,
+     "explanation": "$\\frac{P(\\text{rain and late})}{P(\\text{late})}=\\frac{0.15}{0.22}=0.682$.",
+     "id": "lower6-maths-statistics-e06-b"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 240,
+    "items": [
+     {
+      "t": "line",
+      "x1": 40,
+      "y1": 120,
+      "x2": 170,
+      "y2": 55,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 40,
+      "y1": 120,
+      "x2": 170,
+      "y2": 185,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 105,
+      "y": 70,
+      "text": "0.3",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 105,
+      "y": 185,
+      "text": "0.7",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 190,
+      "y": 55,
+      "text": "Rain",
+      "size": 13,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 190,
+      "y": 185,
+      "text": "No rain",
+      "size": 13,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 250,
+      "y1": 45,
+      "x2": 330,
+      "y2": 20,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 250,
+      "y1": 55,
+      "x2": 330,
+      "y2": 85,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 25,
+      "text": "0.5",
+      "size": 12,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 95,
+      "text": "0.5",
+      "size": 12,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 335,
+      "y": 20,
+      "text": "late",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 335,
+      "y": 85,
+      "text": "on time",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 270,
+      "y1": 185,
+      "x2": 340,
+      "y2": 160,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 270,
+      "y1": 190,
+      "x2": 340,
+      "y2": 220,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 168,
+      "text": "0.1",
+      "size": 12,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 222,
+      "text": "0.9",
+      "size": 12,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 345,
+      "y": 160,
+      "text": "late",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 345,
+      "y": 224,
+      "text": "on time",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-probability-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-probability",
+   "prompt": "$P(A')$ when $P(A)=0.35$ is",
+   "choices": [
+    "1.35",
+    "0.65",
+    "0.35",
+    "0.45"
+   ],
+   "answer": 1,
+   "explanation": "Complement.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-probability-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-probability",
+   "prompt": "For independent events $P(A\\cap B)=$",
+   "choices": [
+    "$P(A)P(B)$",
+    "$P(A)+P(B)$",
+    "$0$",
+    "$P(A)-P(B)$"
+   ],
+   "answer": 0,
+   "explanation": "Definition.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-probability-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-probability",
+   "prompt": "$P(A)=0.5$, $P(B)=0.4$, $P(A\\cap B)=0.2$. $P(A\\cup B)=$",
+   "choices": [
+    "0.9",
+    "0.7",
+    "0.2",
+    "0.1"
+   ],
+   "answer": 1,
+   "explanation": "$0.5+0.4-0.2$.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-probability-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-probability",
+   "prompt": "Probabilities on branches from one point add to",
+   "choices": [
+    "the number of branches",
+    "100",
+    "1",
+    "0"
+   ],
+   "answer": 2,
+   "explanation": "Exhaustive outcomes.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-probability-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-probability",
+   "prompt": "Drawing two cards without replacement makes the draws",
+   "choices": [
+    "dependent",
+    "independent",
+    "impossible",
+    "exclusive"
+   ],
+   "answer": 0,
+   "explanation": "Second probability changes.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the mean of 3, 5, 7, 9, 11.",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "$\\frac{35}{5}$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The variance can be found from",
+   "choices": [
+    "$\\frac{\\sum x}{n}$",
+    "$\\sum x^2-\\bar x$",
+    "$\\frac{\\sum x^2}{n}-\\bar x^2$",
+    "$\\left(\\frac{\\sum x}{n}\\right)^2$"
+   ],
+   "answer": 2,
+   "explanation": "Mean of squares minus square of the mean.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Adding 5 to every value changes the standard deviation.",
+   "answer": false,
+   "explanation": "The spread is unchanged; only the mean increases by 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If $\\bar x=10$ and $\\sigma_x=4$, and $y=2x+3$, then $\\bar y$ and $\\sigma_y$ are",
+   "choices": [
+    "20 and 8",
+    "23 and 11",
+    "23 and 8",
+    "13 and 8"
+   ],
+   "answer": 2,
+   "explanation": "$\\bar y=2(10)+3$; $\\sigma_y=2\\times4$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Salaries in a small workshop in Bafoussam: 90, 95, 100, 100, 105, 400 (thousand FCFA). Which is a better 'typical' value, the mean or the median? Explain.",
+   "model": "Mean $=\\frac{890}{6}\\approx148$; median $=100$. The value 400 is an outlier that pulls the mean well above what most workers earn, so the median (100) is more representative.",
+   "rubric": [
+    "Computes both averages (1)",
+    "Identifies the outlier (1)",
+    "Justified choice of median (1)"
+   ],
+   "explanation": "Mean $=\\frac{890}{6}\\approx148$; median $=100$. The value 400 is an outlier that pulls the mean well above what most workers earn, so the median (100) is more representative.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Marks of 10 students: 12, 15, 15, 16, 18, 18, 18, 20, 22, 26.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the mean mark.",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "$\\frac{180}{10}=18$.",
+     "id": "lower6-maths-statistics-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Find the standard deviation (2 d.p.).",
+     "answer": 3.77,
+     "tolerance": 0.01,
+     "explanation": "$\\sum x^2=3382$, variance $=\\frac{3382}{10}-18^2=14.2$, $\\sigma\\approx3.77$.",
+     "id": "lower6-maths-statistics-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The median is",
+     "choices": [
+      "19",
+      "18",
+      "17",
+      "16"
+     ],
+     "answer": 1,
+     "explanation": "Middle two values are both 18.",
+     "id": "lower6-maths-statistics-e12-c"
+    }
+   ],
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-data-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-data",
+   "prompt": "Median of 2, 9, 4, 7, 5 is",
+   "choices": [
+    "7",
+    "4",
+    "5.4",
+    "5"
+   ],
+   "answer": 3,
+   "explanation": "Sorted: 2, 4, 5, 7, 9.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-data-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-data",
+   "prompt": "The mode of 1, 2, 2, 3, 2, 5 is",
+   "choices": [
+    "5",
+    "2.5",
+    "3",
+    "2"
+   ],
+   "answer": 3,
+   "explanation": "Most frequent.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-data-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-data",
+   "prompt": "Standard deviation is the square root of",
+   "choices": [
+    "the mean",
+    "the median",
+    "the range",
+    "the variance"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-data-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-data",
+   "prompt": "An outlier mostly affects the",
+   "choices": [
+    "mean",
+    "mode",
+    "range of the middle half",
+    "median"
+   ],
+   "answer": 0,
+   "explanation": "The mean uses every value.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-data-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-data",
+   "prompt": "If all values are doubled, the standard deviation is",
+   "choices": [
+    "halved",
+    "squared",
+    "unchanged",
+    "doubled"
+   ],
+   "answer": 3,
+   "explanation": "$\\sigma_y=2\\sigma_x$.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-distributions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the mean of $B(20,0.25)$.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "$np=20\\times0.25$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-distributions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$X\\sim B(5,0.2)$. $P(X=0)=$",
+   "choices": [
+    "0.00032",
+    "0.8",
+    "0.32768",
+    "0.2"
+   ],
+   "answer": 2,
+   "explanation": "$(0.8)^5$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-distributions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A normal distribution is symmetric about its mean.",
+   "answer": true,
+   "explanation": "The bell curve mirrors about $x=\\mu$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-distributions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Exam scores are $N(62,6^2)$. The $z$-value of a score of 74 is",
+   "choices": [
+    "0.5",
+    "12",
+    "6",
+    "2"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{74-62}{6}=2$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-distributions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$X\\sim B(8,0.5)$. Find $P(X\\geq7)$ (4 d.p.).",
+   "answer": 0.0352,
+   "tolerance": 0.0002,
+   "explanation": "$P(7)+P(8)=\\frac{8}{256}+\\frac{1}{256}=\\frac{9}{256}=0.0352$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-statistics-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-distributions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Marks in a school examination are normally distributed with mean 55 and standard deviation 10.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the proportion of students scoring more than 65 (4 d.p.).",
+     "answer": 0.1587,
+     "tolerance": 0.0003,
+     "explanation": "$z=1$: $1-0.8413=0.1587$.",
+     "id": "lower6-maths-statistics-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $P(45<X<65)$ (4 d.p.).",
+     "answer": 0.6827,
+     "tolerance": 0.000300001000000078,
+     "explanation": "$z$ between $-1$ and $1$: $2\\Phi(1)-1=0.6826$ (0.6827 with more accurate tables).",
+     "id": "lower6-maths-statistics-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the mark exceeded by only 2.5% of students (1 d.p.).",
+     "answer": 74.6,
+     "tolerance": 0.1,
+     "explanation": "$\\Phi(z)=0.975$ gives $z=1.96$: $55+1.96\\times10=74.6$.",
+     "id": "lower6-maths-statistics-e18-c"
+    }
+   ],
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-distributions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-distributions",
+   "prompt": "In $B(n,p)$ the mean is",
+   "choices": [
+    "$\\frac{n}{p}$",
+    "$n+p$",
+    "$np(1-p)$",
+    "$np$"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-distributions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-distributions",
+   "prompt": "$X\\sim N(100,25)$ means $\\sigma=$",
+   "choices": [
+    "5",
+    "25",
+    "100",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "Variance 25.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-distributions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-distributions",
+   "prompt": "$P(Z<0)$ equals",
+   "choices": [
+    "0.5",
+    "0.25",
+    "1",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "Symmetry.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-distributions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-distributions",
+   "prompt": "$P(Z>1.96)=$",
+   "choices": [
+    "0.025",
+    "0.975",
+    "0.5",
+    "0.05"
+   ],
+   "answer": 0,
+   "explanation": "$1-0.975$.",
+   "chapter": "lower6-maths-statistics"
+  },
+  {
+   "id": "lower6-maths-distributions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-distributions",
+   "prompt": "A binomial model needs trials that are",
+   "choices": [
+    "dependent",
+    "independent",
+    "without a fixed $n$",
+    "three or more outcomes"
+   ],
+   "answer": 1,
+   "explanation": "Conditions.",
+   "chapter": "lower6-maths-statistics"
+  }
+ ]
+}

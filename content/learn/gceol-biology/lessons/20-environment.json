@@ -1,0 +1,688 @@
+{
+ "chapter": "gceol-biology-environment",
+ "lessons": [
+  {
+   "id": "gceol-biology-impact",
+   "title": "Deforestation, pollution and conservation",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Pollution, deforestation and conservation (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the causes and effects of deforestation.",
+    "Describe air, water and land pollution and their effects.",
+    "Explain eutrophication and suggest ways to protect the environment."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-environment-e01",
+    "gceol-biology-environment-e02",
+    "gceol-biology-environment-e03",
+    "gceol-biology-environment-e04",
+    "gceol-biology-environment-e05",
+    "gceol-biology-environment-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-impact-q1",
+    "gceol-biology-impact-q2",
+    "gceol-biology-impact-q3",
+    "gceol-biology-impact-q4",
+    "gceol-biology-impact-q5"
+   ],
+   "reviewNotes": [
+    "Deforestation causes/effects stated generally; no statistics are given on purpose.",
+    "Reference to protected areas is generic; the existing ecology lesson names conservation measures.",
+    "Possible overlap with the existing Ecology lesson (carbon cycle, conservation).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Deforestation",
+     "md": "**Deforestation** is the clearing of forests. Causes: farming (including slash-and-burn), logging for timber, firewood and charcoal, roads and towns.\n\nEffects: **soil erosion** and floods, **loss of habitats** and species (biodiversity), less water vapour so less rain locally, and more **carbon dioxide** in the air because trees no longer absorb it and burning releases it."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40.0,
+        "w": 101.5,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 60.75,
+        "y": 60.0,
+        "text": "Trees cut",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60.75,
+        "y": 74.0,
+        "text": "and burned",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 114.5,
+        "y1": 63.0,
+        "x2": 126.5,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 129.5,
+        "y": 40.0,
+        "w": 101.5,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 180.25,
+        "y": 60.0,
+        "text": "Soil bare,",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180.25,
+        "y": 74.0,
+        "text": "no roots",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 234.0,
+        "y1": 63.0,
+        "x2": 246.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 249.0,
+        "y": 40.0,
+        "w": 101.5,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 299.75,
+        "y": 60.0,
+        "text": "Heavy rain",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 299.75,
+        "y": 74.0,
+        "text": "washes soil away",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 353.5,
+        "y1": 63.0,
+        "x2": 365.5,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 368.5,
+        "y": 40.0,
+        "w": 101.5,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 419.25,
+        "y": 60.0,
+        "text": "Rivers silt up,",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 419.25,
+        "y": 74.0,
+        "text": "floods, poor crops",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "How deforestation can damage soil and rivers.",
+     "alt": "Four boxes: trees cut and burned, bare soil without roots, heavy rain washes the soil away, rivers silt up with floods and poor crops."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Air pollution",
+     "md": "- **Carbon dioxide** and **methane** from burning fuels, livestock and rice fields: **greenhouse gases** that trap heat and contribute to **global warming** and climate change.\n- **Sulfur dioxide** (from burning fuels with sulfur) dissolves to cause **acid rain**.\n- **Carbon monoxide** (poor combustion, exhaust) is poisonous.\n- **Smoke and dust** harm the lungs."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Water and land pollution",
+     "md": "- **Sewage** and animal waste cause disease and use up oxygen in water.\n- **Fertilisers** and **detergents** cause **eutrophication** (below).\n- **Oil spills and chemicals** (including some from mining and factories) poison living things.\n- **Plastic waste** blocks drains, harms animals and does not rot."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 41.0,
+        "w": 79.2,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 49.6,
+        "y": 60.0,
+        "text": "Fertiliser",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 49.6,
+        "y": 74.0,
+        "text": "runs into river",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 92.2,
+        "y1": 63.0,
+        "x2": 102.2,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 105.2,
+        "y": 41.0,
+        "w": 79.2,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 144.8,
+        "y": 60.0,
+        "text": "Algae",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 144.8,
+        "y": 74.0,
+        "text": "grow fast",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 187.4,
+        "y1": 63.0,
+        "x2": 197.4,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 200.4,
+        "y": 41.0,
+        "w": 79.2,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 60.0,
+        "text": "Light blocked,",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 74.0,
+        "text": "plants die",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 282.6,
+        "y1": 63.0,
+        "x2": 292.6,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 295.6,
+        "y": 41.0,
+        "w": 79.2,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 335.20000000000005,
+        "y": 60.0,
+        "text": "Bacteria use",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335.20000000000005,
+        "y": 74.0,
+        "text": "up oxygen",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 377.8,
+        "y1": 63.0,
+        "x2": 387.8,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 390.8,
+        "y": 41.0,
+        "w": 79.2,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 430.40000000000003,
+        "y": 60.0,
+        "text": "Fish",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 430.40000000000003,
+        "y": 74.0,
+        "text": "die",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Eutrophication, step by step.",
+     "alt": "Five boxes: fertiliser runs into a river, algae grow fast, light is blocked and plants die, bacteria use up oxygen decomposing them, fish die."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Protecting the environment",
+     "md": "Plant trees (**reforestation**) and use agroforestry; protect land in **national parks and reserves**; use **less and better** fertiliser; treat sewage; **reduce, reuse, recycle** waste, especially plastics; use clean energy (solar), efficient stoves; make and enforce laws; educate people. Individual action counts: do not litter, do not burn rubbish."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Fertiliser pollution does not kill fish directly: the *oxygen shortage* does.\n- The greenhouse effect is natural and useful; the problem is the *extra* gases from human activity.\n- Cutting trees is not always wrong: the problem is cutting without replanting."
+    },
+    {
+     "type": "example",
+     "title": "Explain a fish kill",
+     "statement": "After heavy rain in a farming area a river turns green and many fish die. Explain.",
+     "steps": [
+      "Fertiliser washed from the fields into the river; the nitrates make algae grow rapidly (an algal bloom).",
+      "The algae block light, plants below die and bacteria that decompose them use up the dissolved oxygen, so the fish suffocate."
+     ],
+     "answer": "Eutrophication: loss of oxygen kills the fish."
+    },
+    {
+     "type": "example",
+     "title": "Effect of felling forest",
+     "statement": "A hillside near Buea is cleared of trees for farming. Give two likely consequences for the soil and the river below.",
+     "steps": [
+      "Without roots and leaf cover the soil is washed away by rain: soil erosion and loss of fertility.",
+      "The washed soil enters the river, making it muddy and silting it up, raising the risk of flooding."
+     ],
+     "answer": "Erosion and a silted, flood-prone river"
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-environment-e01"
+    }
+   ],
+   "chapter": "gceol-biology-environment"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-environment-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-impact",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which gas contributes mainly to global warming?",
+   "choices": [
+    "carbon dioxide",
+    "helium",
+    "oxygen",
+    "nitrogen"
+   ],
+   "answer": 0,
+   "explanation": "It is a greenhouse gas.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-environment-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-impact",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the pollutant with its effect.",
+   "pairs": [
+    [
+     "sulfur dioxide",
+     "acid rain"
+    ],
+    [
+     "sewage",
+     "disease and oxygen loss in water"
+    ],
+    [
+     "plastic",
+     "blocks drains and harms animals"
+    ],
+    [
+     "fertiliser run-off",
+     "eutrophication"
+    ]
+   ],
+   "explanation": "Standard effects.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-environment-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-impact",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Planting new trees after felling helps reduce the harm of deforestation.",
+   "answer": true,
+   "explanation": "Replanting restores habitats and prevents erosion.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-environment-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-impact",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In eutrophication, fish die mainly because:",
+   "choices": [
+    "algae eat them",
+    "they cannot see",
+    "decomposing bacteria use up the oxygen",
+    "fertiliser is poisonous to them"
+   ],
+   "answer": 2,
+   "explanation": "Oxygen levels fall.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-environment-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-impact",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe three consequences of deforestation.",
+   "model": "Soil erosion and loss of fertility, loss of habitats and biodiversity, floods, less local rainfall and more carbon dioxide in the air.",
+   "rubric": [
+    "1 mark each, maximum 3"
+   ],
+   "explanation": "Soil erosion and loss of fertility, loss of habitats and biodiversity, floods, less local rainfall and more carbon dioxide in the air.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-environment-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-impact",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A town on a river in the Littoral region has plastic bags blocking gutters and a river receiving untreated sewage.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Blocked gutters can lead to:",
+     "choices": [
+      "floods and breeding sites for mosquitoes",
+      "more rain",
+      "better farming",
+      "cleaner water"
+     ],
+     "answer": 0,
+     "explanation": "Standing water breeds mosquitoes.",
+     "id": "gceol-biology-environment-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Untreated sewage in the river mainly causes:",
+     "choices": [
+      "greenhouse effect",
+      "water-borne diseases and oxygen shortage",
+      "more trees",
+      "acid rain"
+     ],
+     "answer": 1,
+     "explanation": "Disease and oxygen loss.",
+     "id": "gceol-biology-environment-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two actions the town could take.",
+     "model": "Organise waste collection and recycling; build drains and sewage treatment; education campaigns; fines for dumping.",
+     "rubric": [
+      "1 mark each, maximum 2"
+     ],
+     "explanation": "Organise waste collection and recycling; build drains and sewage treatment; education campaigns; fines for dumping.",
+     "id": "gceol-biology-environment-e06-c"
+    }
+   ],
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-impact-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-impact",
+   "prompt": "Burning fossil fuels increases the level of:",
+   "choices": [
+    "carbon dioxide",
+    "argon",
+    "ozone only",
+    "oxygen"
+   ],
+   "answer": 0,
+   "explanation": "CO₂.",
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-impact-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-impact",
+   "prompt": "Acid rain is caused by:",
+   "choices": [
+    "sulfur dioxide",
+    "nitrogen",
+    "oxygen",
+    "water vapour"
+   ],
+   "answer": 0,
+   "explanation": "SO₂.",
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-impact-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-impact",
+   "prompt": "Which helps conserve soil on a slope?",
+   "choices": [
+    "overgrazing",
+    "terraces",
+    "bare ground",
+    "burning"
+   ],
+   "answer": 1,
+   "explanation": "Terraces slow run-off.",
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-impact-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-impact",
+   "prompt": "Eutrophication is caused by:",
+   "choices": [
+    "cold water",
+    "too much oxygen",
+    "lack of algae",
+    "excess nutrients in water"
+   ],
+   "answer": 3,
+   "explanation": "Fertiliser.",
+   "chapter": "gceol-biology-environment"
+  },
+  {
+   "id": "gceol-biology-impact-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-impact",
+   "prompt": "Which is a way to reduce waste?",
+   "choices": [
+    "burning plastic",
+    "recycling",
+    "dumping in rivers",
+    "throwing in drains"
+   ],
+   "answer": 1,
+   "explanation": "Recycle.",
+   "chapter": "gceol-biology-environment"
+  }
+ ]
+}

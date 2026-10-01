@@ -1,0 +1,2454 @@
+{
+ "chapter": "gceol-chemistry-organic",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-alkanes-petroleum",
+   "title": "Alkanes and petroleum",
+   "minutes": 35,
+   "programRef": "GCE O Level Chemistry — Organic chemistry: alkanes, alkenes, alcohols, carboxylic acids, esters, polymers, fats and soap, petroleum (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define hydrocarbon, homologous series and general formula.",
+    "Name and write formulae of the first alkanes.",
+    "Describe combustion and substitution reactions of alkanes.",
+    "Describe fractional distillation of crude oil, the uses of fractions and cracking."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-ionic-covalent",
+    "gceol-chemistry-moles-reactions"
+   ],
+   "exercises": [
+    "gceol-chemistry-organic-e01",
+    "gceol-chemistry-organic-e02",
+    "gceol-chemistry-organic-e03",
+    "gceol-chemistry-organic-e04",
+    "gceol-chemistry-organic-e05",
+    "gceol-chemistry-organic-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-alkanes-petroleum-q1",
+    "gceol-chemistry-alkanes-petroleum-q2",
+    "gceol-chemistry-alkanes-petroleum-q3",
+    "gceol-chemistry-alkanes-petroleum-q4",
+    "gceol-chemistry-alkanes-petroleum-q5"
+   ],
+   "reviewNotes": [
+    "Cameroon's refinery SONARA is at Limbe; the statement that it refines crude oil into fuels such as petrol, kerosene, diesel and gas should be checked by a teacher for accuracy and currency.",
+    "Fraction names and uses are standard textbook ones; temperatures are not given.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hydrocarbons and homologous series",
+     "md": "A **hydrocarbon** contains only carbon and hydrogen. A **homologous series** is a family of compounds with the **same functional group and general formula**, similar chemical properties, and a gradual change in physical properties (boiling point rises with chain length); each member differs from the next by CH₂. **Alkanes** are **saturated** (only single C–C bonds), general formula **CₙH₂ₙ₊₂**: methane CH₄, ethane C₂H₆, propane C₃H₈, butane C₄H₁₀, pentane C₅H₁₂, hexane C₆H₁₄."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Reactions of alkanes",
+     "md": "- **Complete combustion**: alkane + oxygen → carbon dioxide + water, e.g. CH₄ + 2O₂ → CO₂ + 2H₂O (very exothermic); with limited oxygen: carbon monoxide or soot.\n- **Substitution** with chlorine in ultraviolet light: CH₄ + Cl₂ → CH₃Cl + HCl (a hydrogen atom is replaced by chlorine).\nAlkanes are fairly unreactive and do not decolourise bromine water."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Petroleum and fractional distillation",
+     "md": "**Crude oil** is a mixture of many hydrocarbons. In a **fractionating column** it is heated and the vapours rise; each **fraction** condenses at a different height: **refinery gas** (LPG, cooking gas), **petrol**, **naphtha**, **kerosene** (paraffin, jet fuel), **diesel**, **fuel oil**, **lubricating oil and bitumen** (road surfacing). Going **down** the column: bigger molecules, **higher** boiling point, **more viscous**, **less flammable**. SONARA is Cameroon's oil refinery, at Limbe."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Cracking",
+     "md": "Large, less useful alkanes are broken into smaller, more useful molecules by heat and a catalyst (**cracking**), giving shorter alkanes and **alkenes**: C₁₀H₂₂ → C₈H₁₈ + C₂H₄. The alkene is a raw material for plastics. Fossil fuels are non-renewable and their burning releases CO₂."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- The general formula CₙH₂ₙ₊₂ works only for alkanes.\n- Alkanes are not 'unsaturated'; the presence of a double bond makes a compound unsaturated.\n- A fraction is a **mixture** of hydrocarbons with similar boiling points, not a pure substance."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 245,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 20,
+        "w": 70,
+        "h": 200,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 35,
+        "x2": 245,
+        "y2": 35,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 68,
+        "x2": 245,
+        "y2": 68,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 101,
+        "x2": 245,
+        "y2": 101,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 134,
+        "x2": 245,
+        "y2": 134,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 167,
+        "x2": 245,
+        "y2": 167,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 203,
+        "x2": 245,
+        "y2": 203,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 40,
+        "text": "refinery gas",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 73,
+        "text": "petrol",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 106,
+        "text": "kerosene",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 139,
+        "text": "diesel",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 172,
+        "text": "fuel oil",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 208,
+        "text": "bitumen",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 150,
+        "x2": 130,
+        "y2": 150,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 135,
+        "text": "crude oil",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 12,
+        "text": "cooler",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 235,
+        "text": "hotter",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Fractional distillation of crude oil: lighter fractions leave at the top, heavy ones at the bottom.",
+     "alt": "A tall fractionating column with crude oil entering at the side and six fractions leaving through arrows from refinery gas at the top to bitumen at the bottom."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — naming an alkane",
+     "statement": "Give the formula and name of the alkane with six carbon atoms and calculate its Mr (C 12, H 1).",
+     "steps": [
+      "CₙH₂ₙ₊₂ with n = 6: C₆H₁₄. The name is hexane.",
+      "Mr = 6 × 12 + 14 × 1 = 72 + 14 = 86."
+     ],
+     "answer": "C₆H₁₄ (hexane); Mr = 86"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — burning propane",
+     "statement": "Cooking gas contains propane. For C₃H₈ + 5O₂ → 3CO₂ + 4H₂O, find the volume of CO₂ (24 dm³/mol) and the mass of CO₂ formed from 4.4 g of propane (C 12, H 1, O 16).",
+     "steps": [
+      "Mr(C₃H₈) = 44; n = 4.4 ÷ 44 = 0.10 mol. Ratio C₃H₈ : CO₂ = 1 : 3, so n(CO₂) = 0.30 mol.",
+      "Volume = 0.30 × 24 = 7.2 dm³; mass = 0.30 × 44 = 13.2 g."
+     ],
+     "answer": "7.2 dm³ and 13.2 g of CO₂"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkenes",
+   "title": "Alkenes",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Organic chemistry: alkanes, alkenes, alcohols, carboxylic acids, esters, polymers, fats and soap, petroleum (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the general formula and structure of alkenes.",
+    "Write formulae for ethene and propene.",
+    "Describe addition reactions with hydrogen, bromine and steam.",
+    "Use the bromine water test to distinguish alkanes from alkenes."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-alkanes-petroleum"
+   ],
+   "exercises": [
+    "gceol-chemistry-organic-e07",
+    "gceol-chemistry-organic-e08",
+    "gceol-chemistry-organic-e09",
+    "gceol-chemistry-organic-e10",
+    "gceol-chemistry-organic-e11",
+    "gceol-chemistry-organic-e12"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-alkenes-q1",
+    "gceol-chemistry-alkenes-q2",
+    "gceol-chemistry-alkenes-q3",
+    "gceol-chemistry-alkenes-q4",
+    "gceol-chemistry-alkenes-q5"
+   ],
+   "reviewNotes": [
+    "Conditions: hydrogenation with nickel catalyst at about 150 °C; hydration with steam and phosphoric acid catalyst at high temperature and pressure (typical school values).",
+    "Isomerism of alkenes is not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Alkenes",
+     "md": "**Alkenes** are hydrocarbons with a **carbon-carbon double bond** (C=C); they are **unsaturated**. General formula **CₙH₂ₙ**: ethene C₂H₄, propene C₃H₆, butene C₄H₈. The double bond makes them much more reactive than alkanes. They are made by **cracking** of larger alkanes."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Addition reactions",
+     "md": "The double bond opens and atoms add on:\n\n- with **hydrogen** (nickel catalyst, about 150 °C): C₂H₄ + H₂ → C₂H₆ (an alkane)\n- with **bromine**: C₂H₄ + Br₂ → C₂H₄Br₂ (1,2-dibromoethane)\n- with **steam** (phosphoric acid catalyst, high T and P): C₂H₄ + H₂O → C₂H₅OH (ethanol)\n\nEthene also undergoes addition **polymerisation** to make poly(ethene)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Test for unsaturation",
+     "md": "Shake the hydrocarbon with **bromine water** (orange-brown). An **alkene** decolourises it quickly (the bromine adds across the double bond); an **alkane** does not (it stays orange). Alkenes also decolourise acidified potassium manganate(VII) (purple → colourless). Alkenes burn with a more smoky flame than alkanes because they contain a higher percentage of carbon."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Addition reactions give **one** product; substitution gives two.\n- The test is **decolourises** bromine water, not 'turns it colourless to brown'.\n- Every alkene has the same percentage of carbon by mass (about 85.7%): CₙH₂ₙ has the ratio 12n : 2n."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 60,
+        "y": 80,
+        "text": "C₂H₄",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 110,
+        "text": "ethene",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 80,
+        "text": "+ Br₂",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 125,
+        "y1": 80,
+        "x2": 160,
+        "y2": 80,
+        "color": "ink",
+        "width": 0
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 80,
+        "x2": 290,
+        "y2": 80,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 80,
+        "text": "C₂H₄Br₂",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 110,
+        "text": "dibromoethane",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 160,
+        "text": "orange bromine water becomes colourless",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Addition of bromine to ethene: the orange colour of bromine water disappears.",
+     "alt": "The equation of ethene plus bromine giving 1,2-dibromoethane with a note that bromine water becomes colourless."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — hydrogenation",
+     "statement": "Calculate the volume of hydrogen (24 dm³/mol) needed to convert 14 g of ethene into ethane: C₂H₄ + H₂ → C₂H₆ (C 12, H 1).",
+     "steps": [
+      "Mr(C₂H₄) = 28; n = 14 ÷ 28 = 0.50 mol. Ratio C₂H₄ : H₂ = 1 : 1, so n(H₂) = 0.50 mol.",
+      "Volume = 0.50 × 24 = 12 dm³."
+     ],
+     "answer": "12 dm³"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — bromine addition",
+     "statement": "What mass of bromine (Mr 160) adds to 4.2 g of propene, C₃H₆? (C₃H₆ + Br₂ → C₃H₆Br₂)",
+     "steps": [
+      "Mr(C₃H₆) = 42; n = 4.2 ÷ 42 = 0.10 mol. Ratio 1 : 1, so n(Br₂) = 0.10 mol.",
+      "Mass = 0.10 × 160 = 16 g."
+     ],
+     "answer": "16 g of bromine"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alcohols-acids",
+   "title": "Alcohols, carboxylic acids and esters",
+   "minutes": 35,
+   "programRef": "GCE O Level Chemistry — Organic chemistry: alkanes, alkenes, alcohols, carboxylic acids, esters, polymers, fats and soap, petroleum (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the manufacture of ethanol by fermentation and from ethene.",
+    "State the properties and uses of ethanol.",
+    "Describe the oxidation of ethanol to ethanoic acid and the properties of ethanoic acid.",
+    "Describe ester formation."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-alkenes",
+    "gceol-chemistry-acids-bases"
+   ],
+   "exercises": [
+    "gceol-chemistry-organic-e13",
+    "gceol-chemistry-organic-e14",
+    "gceol-chemistry-organic-e15",
+    "gceol-chemistry-organic-e16",
+    "gceol-chemistry-organic-e17",
+    "gceol-chemistry-organic-e18"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-alcohols-acids-q1",
+    "gceol-chemistry-alcohols-acids-q2",
+    "gceol-chemistry-alcohols-acids-q3",
+    "gceol-chemistry-alcohols-acids-q4",
+    "gceol-chemistry-alcohols-acids-q5"
+   ],
+   "reviewNotes": [
+    "Palm wine ferments through natural yeasts and bacteria in the sap; this is described qualitatively only.",
+    "Alcohol content and health effects of alcoholic drinks are not detailed: a health worker should review any wording added.",
+    "Conditions for fermentation: yeast, about 25–35 °C, absence of air.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ethanol",
+     "md": "**Ethanol** C₂H₅OH is an **alcohol** (functional group –OH), a colourless liquid, soluble in water, flammable, with a lower boiling point than water (78 °C). **Fermentation**: sugars (glucose) are changed by the enzymes in **yeast** into ethanol and carbon dioxide, without air, at about 25–35 °C: **C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂**. The product is a dilute solution, concentrated by fractional distillation. Ethanol is also made from ethene and steam. Palm wine ferments quickly after tapping because natural yeasts in the sap act on its sugar."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Uses and combustion of ethanol",
+     "md": "Uses: **solvent** (perfumes, paints), **fuel** (alone or mixed with petrol), alcoholic drinks (harmful in excess and dangerous with driving), antiseptic. Burning: C₂H₅OH + 3O₂ → 2CO₂ + 3H₂O. **Oxidation**: ethanol is oxidised to **ethanoic acid** by acidified potassium dichromate(VI) (orange → green) or by bacteria in air (wine turns to **vinegar**): C₂H₅OH + 2[O] → CH₃COOH + H₂O."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ethanoic acid and esters",
+     "md": "**Ethanoic acid** CH₃COOH (carboxylic acid, group –COOH) is a **weak acid**: it reacts with metals (hydrogen), carbonates (carbon dioxide) and alkalis (salt + water). **Vinegar** is a dilute solution. **Esters** (sweet, fruity smell, used in perfumes and flavourings) are made by heating an alcohol with a carboxylic acid with concentrated sulphuric acid as catalyst: ethanol + ethanoic acid ⇌ **ethyl ethanoate** + water."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Fermentation needs **no air**; with air ethanol is oxidised to ethanoic acid (vinegar).\n- Too high a temperature kills the yeast; too low is too slow.\n- Ethanoic acid is a **weak** acid, not strong, even though it is called an acid."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 235,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         150,
+         160,
+         150,
+         175,
+         85,
+         85,
+         85
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 55,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 55,
+        "x2": 130,
+        "y2": 35,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 35,
+        "x2": 250,
+        "y2": 35,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 35,
+        "x2": 250,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 215,
+        "y": 150,
+        "w": 70,
+        "h": 65,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 216,
+        "y": 175,
+        "w": 68,
+        "h": 39,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 125,
+        "text": "yeast +",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 140,
+        "text": "glucose",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 175,
+        "text": "limewater",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 195,
+        "text": "turns milky",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Fermentation: a mixture of glucose solution and yeast in a flask; the gas is carbon dioxide, which turns limewater milky.",
+     "alt": "A flask with a delivery tube bubbling into limewater in a test tube."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — fermentation",
+     "statement": "Calculate the maximum mass of ethanol and the volume of CO₂ (24 dm³/mol) from 180 g of glucose (C 12, H 1, O 16).",
+     "steps": [
+      "Mr(glucose) = 180; n = 180 ÷ 180 = 1 mol. Ratio glucose : ethanol : CO₂ = 1 : 2 : 2.",
+      "n(ethanol) = 2 mol; Mr = 46; mass = 92 g. n(CO₂) = 2 mol; volume = 48 dm³."
+     ],
+     "answer": "92 g of ethanol and 48 dm³ of CO₂"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — identifying compounds",
+     "statement": "Name the functional group in (a) CH₃OH, (b) CH₃COOH, (c) CH₃COOC₂H₅.",
+     "steps": [
+      "(a) –OH: an alcohol (methanol). (b) –COOH: a carboxylic acid (ethanoic acid).",
+      "(c) –COO– between two carbon chains: an ester (ethyl ethanoate)."
+     ],
+     "answer": "(a) alcohol; (b) carboxylic acid; (c) ester"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-polymers-plastics",
+   "title": "Polymers, plastics and the environment",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Organic chemistry: alkanes, alkenes, alcohols, carboxylic acids, esters, polymers, fats and soap, petroleum (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define monomer, polymer and addition polymerisation.",
+    "Give examples of addition polymers and their uses.",
+    "Describe condensation polymers (nylon, polyesters) and natural polymers in outline.",
+    "Discuss disposal problems and ways of reducing plastic waste."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-alkenes"
+   ],
+   "exercises": [
+    "gceol-chemistry-organic-e19",
+    "gceol-chemistry-organic-e20",
+    "gceol-chemistry-organic-e21",
+    "gceol-chemistry-organic-e22",
+    "gceol-chemistry-organic-e23",
+    "gceol-chemistry-organic-e24"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-polymers-plastics-q1",
+    "gceol-chemistry-polymers-plastics-q2",
+    "gceol-chemistry-polymers-plastics-q3",
+    "gceol-chemistry-polymers-plastics-q4",
+    "gceol-chemistry-polymers-plastics-q5"
+   ],
+   "reviewNotes": [
+    "Condensation polymers and natural polymers (starch, proteins) are covered in outline only; check the depth required.",
+    "Details of any national regulations on plastic bags are not given.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Addition polymers",
+     "md": "A **polymer** is a very large molecule made by joining many small molecules (**monomers**). In **addition polymerisation** unsaturated monomers (alkenes) join with no other product: **n C₂H₄ → (–CH₂–CH₂–)ₙ** (poly(ethene), also called polythene). Poly(propene) from propene; **PVC** (poly(chloroethene)) from chloroethene; PTFE (non-stick coating) from tetrafluoroethene. Because nothing is lost, the **mass of polymer equals the mass of monomer**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Uses",
+     "md": "- **Poly(ethene)**: bags, bottles, bowls and packaging.\n- **Poly(propene)**: ropes, crates, containers.\n- **PVC**: water pipes, insulation of electric cables, window frames.\n- **PTFE**: non-stick pans.\n- **Nylon** and **polyesters** (condensation polymers) are made when two different monomers join and **small molecules such as water are lost**; used for fibres and clothing, ropes and fishing nets."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Natural polymers",
+     "md": "**Starch** (from glucose, in cassava, maize and yam), **proteins** (from amino acids) and **cellulose** are natural polymers. Fats and oils are esters, not polymers."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Plastic waste and watch out",
+     "md": "Most plastics are **non-biodegradable**: they stay in the environment for years, block drains and gutters (making floods worse), harm animals and, when burned in the open, can release poisonous gases (for example hydrogen chloride from PVC). Solutions: **reduce, reuse, recycle**, use cloth or paper bags, and dispose of waste properly. Do not confuse monomer with polymer or addition with condensation polymerisation."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 40,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 75,
+        "text": "monomers",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 125,
+        "y1": 100,
+        "x2": 185,
+        "y2": 100,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 85,
+        "text": "join",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 234,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 218,
+        "y1": 100,
+        "x2": 226,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 258,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 100,
+        "x2": 250,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 282,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 266,
+        "y1": 100,
+        "x2": 274,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 306,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 100,
+        "x2": 298,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 314,
+        "y1": 100,
+        "x2": 322,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 354,
+        "cy": 100,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 338,
+        "y1": 100,
+        "x2": 346,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 75,
+        "text": "polymer chain",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Many small monomer molecules join to form a long polymer chain.",
+     "alt": "Three separate blue circles on the left, an arrow labelled join, and a long chain of linked circles on the right."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — length of a chain",
+     "statement": "A poly(ethene) molecule has relative molecular mass 28 000. How many ethene units (Mr 28) does it contain? What mass of polymer forms from 56 g of ethene?",
+     "steps": [
+      "Number of units = 28 000 ÷ 28 = 1000.",
+      "Addition polymerisation has no other product, so 56 g of ethene gives 56 g of poly(ethene)."
+     ],
+     "answer": "1000 units; 56 g"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — choosing a material",
+     "statement": "Why is PVC used for water pipes and the insulation on electric cables?",
+     "steps": [
+      "PVC is strong, does not corrode or rot, and is cheap and easy to shape.",
+      "It is an electrical insulator, so it protects against shock, and it does not react with water."
+     ],
+     "answer": "Strong, non-corroding electrical insulator"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-soap-fats",
+   "title": "Fats, oils and soap",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Organic chemistry: alkanes, alkenes, alcohols, carboxylic acids, esters, polymers, fats and soap, petroleum (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe fats and oils as esters of propane-1,2,3-triol (glycerol) and fatty acids.",
+    "Describe saponification and write its equation in words and symbols.",
+    "Explain how soap cleans and why soap forms scum in hard water.",
+    "Calculate masses in soap making."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-alcohols-acids",
+    "gceol-chemistry-moles-reactions"
+   ],
+   "exercises": [
+    "gceol-chemistry-organic-e25",
+    "gceol-chemistry-organic-e26",
+    "gceol-chemistry-organic-e27",
+    "gceol-chemistry-organic-e28",
+    "gceol-chemistry-organic-e29",
+    "gceol-chemistry-organic-e30"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-soap-fats-q1",
+    "gceol-chemistry-soap-fats-q2",
+    "gceol-chemistry-soap-fats-q3",
+    "gceol-chemistry-soap-fats-q4",
+    "gceol-chemistry-soap-fats-q5"
+   ],
+   "reviewNotes": [
+    "Tristearin (C₅₇H₁₁₀O₆, Mr 890) is used as a model fat; real palm oil and palm kernel oil are mixtures of different triglycerides.",
+    "Caustic soda is dangerous (burns); local soap making should only be done with training and protective equipment.",
+    "Saturated/unsaturated terms are used qualitatively; no percentages for palm oil are quoted.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fats and oils",
+     "md": "**Fats** (solid) and **oils** (liquid at room temperature) are **esters** of **glycerol** (propane-1,2,3-triol, three –OH groups) and three **fatty acids**. Animal fats and some tropical fats are more **saturated** (no C=C in the fatty acid chains); vegetable oils are often more **unsaturated** (they decolourise bromine water). **Hardening**: oils + hydrogen (nickel catalyst) → solid fats (margarine). Fats are an energy store for the body."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Making soap: saponification",
+     "md": "Boiling a fat or oil with **sodium hydroxide** (caustic soda) gives **soap** and **glycerol**: **fat/oil + 3NaOH → glycerol + 3 sodium salts of fatty acids (soap)**. Example: tristearin + 3NaOH → C₃H₅(OH)₃ + 3C₁₇H₃₅COONa. Salt is added to separate the soap. Palm oil, palm kernel oil or groundnut oil can be used. Potassium hydroxide gives softer soap."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "How soap cleans",
+     "md": "A soap ion has a **water-loving (hydrophilic) head** (–COO⁻) and a **grease-loving (hydrophobic) tail** (hydrocarbon chain). The tails dissolve in the grease; the heads stay in the water. Agitation breaks the grease into droplets surrounded by soap ions, which are washed away. In **hard water**, soap forms **scum** (calcium or magnesium salts of fatty acids), so more soap is used; **soapless detergents** do not form scum."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Fats and oils are **esters**, not alkanes.\n- Caustic soda (NaOH) burns skin and eyes: wear gloves and goggles.\n- Detergent waste can pollute rivers if not properly treated."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 105,
+        "r": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 238,
+        "y1": 105,
+        "x2": 264,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 270,
+        "cy": 105,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 233,
+        "y1": 124,
+        "x2": 255,
+        "y2": 137,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 261,
+        "cy": 140,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 219,
+        "y1": 138,
+        "x2": 232,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 235,
+        "cy": 166,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 143,
+        "x2": 200,
+        "y2": 169,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 175,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 181,
+        "y1": 138,
+        "x2": 168,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 165,
+        "cy": 166,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 167,
+        "y1": 124,
+        "x2": 145,
+        "y2": 137,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 139,
+        "cy": 140,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 162,
+        "y1": 105,
+        "x2": 136,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 105,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 167,
+        "y1": 86,
+        "x2": 145,
+        "y2": 73,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 139,
+        "cy": 70,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 181,
+        "y1": 72,
+        "x2": 168,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 165,
+        "cy": 44,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 67,
+        "x2": 200,
+        "y2": 41,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 35,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 219,
+        "y1": 72,
+        "x2": 232,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 235,
+        "cy": 44,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 233,
+        "y1": 86,
+        "x2": 255,
+        "y2": 73,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 261,
+        "cy": 70,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 110,
+        "text": "grease",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 205,
+        "text": "soap ions around a drop of grease",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 40,
+        "text": "head (water)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 60,
+        "text": "tail (grease)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Soap ions surround a drop of grease with their tails in the grease and their heads in the water.",
+     "alt": "An orange grease drop surrounded by short lines (tails) pointing inward and blue circles (heads) pointing outward."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — masses in saponification",
+     "statement": "Tristearin (Mr 890) reacts with sodium hydroxide: C₅₇H₁₁₀O₆ + 3NaOH → C₃H₈O₃ + 3C₁₇H₃₅COONa (Mr 92 and 306). For 89 g of tristearin find the mass of NaOH needed and the mass of soap formed (Na 23, O 16, H 1).",
+     "steps": [
+      "n(tristearin) = 89 ÷ 890 = 0.10 mol. NaOH: 3 × 0.10 = 0.30 mol, mass = 0.30 × 40 = 12.0 g.",
+      "Soap: 3 × 0.10 = 0.30 mol; mass = 0.30 × 306 = 91.8 g (check: 89 + 12 = 101 = 91.8 + 9.2 glycerol)."
+     ],
+     "answer": "12.0 g of NaOH; 91.8 g of soap"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — scum",
+     "statement": "Explain why soap gives little lather and a scum in hard water, and how soapless detergent helps.",
+     "steps": [
+      "Calcium and magnesium ions react with soap ions to form an insoluble scum, using up soap before it lathers: Ca²⁺ + 2C₁₇H₃₅COO⁻ → (C₁₇H₃₅COO)₂Ca(s).",
+      "Soapless detergents have calcium salts that are soluble, so they lather and clean in hard water."
+     ],
+     "answer": "Insoluble calcium salts form scum; detergents do not"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-organic-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the general formula of the alkanes?",
+   "choices": [
+    "CₙH₂ₙ",
+    "CₙHₙ",
+    "CₙH₂ₙ₋₂",
+    "CₙH₂ₙ₊₂"
+   ],
+   "answer": 3,
+   "explanation": "Methane CH₄ (n=1), ethane C₂H₆ (n=2).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which fraction of crude oil has the highest boiling point?",
+   "choices": [
+    "petrol",
+    "refinery gas",
+    "bitumen",
+    "kerosene"
+   ],
+   "answer": 2,
+   "explanation": "The largest molecules.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Alkanes decolourise bromine water at once.",
+   "answer": false,
+   "explanation": "Alkanes are saturated; only unsaturated compounds (alkenes) decolourise bromine water.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many hydrogen atoms are in a molecule of the alkane with 8 carbon atoms (octane)?",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "CₙH₂ₙ₊₂: 2 × 8 + 2 = 18.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In cracking, C₁₂H₂₆ breaks down into an alkane with 8 carbon atoms and an alkene. Write the equation and name the alkene.",
+   "model": "C₁₂H₂₆ → C₈H₁₈ + C₄H₈; the alkene is butene (C₄H₈).",
+   "rubric": "1 mark: C₈H₁₈; 1 mark: C₄H₈; 1 mark: balanced/name.",
+   "explanation": "C₁₂H₂₆ → C₈H₁₈ + C₄H₈; the alkene is butene (C₄H₈).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A town in Cameroon uses cooking gas (mainly butane, C₄H₁₀) in homes.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the balanced equation for the complete combustion of butane.",
+     "model": "2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O",
+     "rubric": "1 mark products; 1 mark balanced.",
+     "explanation": "2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O",
+     "id": "gceol-chemistry-organic-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many moles of O₂ are needed to burn 2 mol of butane?",
+     "answer": 13,
+     "tolerance": 0,
+     "explanation": "From the equation 2 : 13.",
+     "unit": "mol",
+     "id": "gceol-chemistry-organic-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is likely to form if butane burns in a poorly ventilated room?",
+     "choices": [
+      "carbon monoxide",
+      "hydrogen",
+      "sulphur",
+      "nitrogen"
+     ],
+     "answer": 0,
+     "explanation": "Incomplete combustion gives poisonous CO.",
+     "id": "gceol-chemistry-organic-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why cooking gas should not be used in a closed room.",
+     "model": "It can burn incompletely, producing poisonous carbon monoxide; also a leak can form an explosive mixture with air.",
+     "rubric": "1 mark each; any two ideas.",
+     "explanation": "It can burn incompletely, producing poisonous carbon monoxide; also a leak can form an explosive mixture with air.",
+     "id": "gceol-chemistry-organic-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkanes-petroleum-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "prompt": "A hydrocarbon contains only",
+   "choices": [
+    "hydrogen and oxygen",
+    "carbon and hydrogen",
+    "metals",
+    "carbon and oxygen"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkanes-petroleum-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "prompt": "The formula of propane is",
+   "choices": [
+    "C₂H₆",
+    "C₃H₆",
+    "C₃H₈",
+    "C₄H₁₀"
+   ],
+   "answer": 2,
+   "explanation": "n = 3: 2n + 2 = 8.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkanes-petroleum-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "prompt": "Crude oil is separated by",
+   "choices": [
+    "electrolysis",
+    "chromatography",
+    "fractional distillation",
+    "filtration"
+   ],
+   "answer": 2,
+   "explanation": "Different boiling points.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkanes-petroleum-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "prompt": "Cracking produces",
+   "choices": [
+    "smaller alkanes and alkenes",
+    "salts",
+    "larger alkanes",
+    "metals"
+   ],
+   "answer": 0,
+   "explanation": "Breaks long chains.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkanes-petroleum-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkanes-petroleum",
+   "prompt": "Alkanes are described as",
+   "choices": [
+    "saturated",
+    "ionic",
+    "unsaturated",
+    "metallic"
+   ],
+   "answer": 0,
+   "explanation": "Only single bonds.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-alkenes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the general formula of alkenes?",
+   "choices": [
+    "CₙH₂ₙ₋₂",
+    "CₙHₙ",
+    "CₙH₂ₙ",
+    "CₙH₂ₙ₊₂"
+   ],
+   "answer": 2,
+   "explanation": "Ethene C₂H₄ fits n = 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-alkenes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A colourless gas decolourises bromine water. It could be",
+   "choices": [
+    "carbon dioxide",
+    "ethane",
+    "methane",
+    "ethene"
+   ],
+   "answer": 3,
+   "explanation": "Only the unsaturated compound reacts.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-alkenes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ethene can be converted into ethanol by adding steam.",
+   "answer": true,
+   "explanation": "C₂H₄ + H₂O → C₂H₅OH.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-alkenes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many hydrogen atoms are in a molecule of the alkene with 5 carbon atoms?",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "CₙH₂ₙ: 2 × 5 = 10, so C₅H₁₀ (pentene).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-alkenes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why alkenes are more reactive than alkanes.",
+   "model": "Alkenes contain a C=C double bond, one bond of which is weaker and can open, allowing other atoms to add on (addition reactions); alkanes have only strong single bonds.",
+   "rubric": "1 mark: C=C double bond; 1 mark: opens to allow addition/weaker bond.",
+   "explanation": "Alkenes contain a C=C double bond, one bond of which is weaker and can open, allowing other atoms to add on (addition reactions); alkanes have only strong single bonds.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-alkenes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two colourless liquids, X and Y, are known to be hexane (C₆H₁₄) and hexene (C₆H₁₂). Bromine water is added to each.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "In test tube X the orange colour disappears. X is",
+     "choices": [
+      "water",
+      "hexene",
+      "ethanol",
+      "hexane"
+     ],
+     "answer": 1,
+     "explanation": "Alkenes decolourise bromine water.",
+     "id": "gceol-chemistry-organic-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "In test tube Y the colour stays orange. What does this show?",
+     "choices": [
+      "Y is unsaturated",
+      "Y contains bromine",
+      "Y is a saturated hydrocarbon (hexane)",
+      "Y is an acid"
+     ],
+     "answer": 2,
+     "explanation": "No addition reaction occurs with alkanes.",
+     "id": "gceol-chemistry-organic-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the Mr of hexene, C₆H₁₂ (C 12, H 1).",
+     "answer": 84,
+     "tolerance": 0,
+     "explanation": "6 × 12 + 12 = 84.",
+     "id": "gceol-chemistry-organic-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the equation for the reaction of hexene with hydrogen.",
+     "model": "C₆H₁₂ + H₂ → C₆H₁₄",
+     "rubric": "1 mark.",
+     "explanation": "C₆H₁₂ + H₂ → C₆H₁₄",
+     "id": "gceol-chemistry-organic-e12-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkenes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkenes",
+   "prompt": "Alkenes contain a",
+   "choices": [
+    "ionic bond",
+    "C–C single bond only",
+    "O–H bond",
+    "C=C double bond"
+   ],
+   "answer": 3,
+   "explanation": "Unsaturated.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkenes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkenes",
+   "prompt": "Ethene reacts with bromine to give",
+   "choices": [
+    "ethane",
+    "ethanol",
+    "dibromoethane",
+    "hydrogen bromide only"
+   ],
+   "answer": 2,
+   "explanation": "An addition reaction.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkenes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkenes",
+   "prompt": "The test for an alkene uses",
+   "choices": [
+    "silver nitrate",
+    "limewater",
+    "litmus",
+    "bromine water"
+   ],
+   "answer": 3,
+   "explanation": "Decolourises.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkenes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkenes",
+   "prompt": "The formula of propene is",
+   "choices": [
+    "C₃H₆",
+    "C₄H₈",
+    "C₂H₄",
+    "C₃H₈"
+   ],
+   "answer": 0,
+   "explanation": "CₙH₂ₙ with n = 3.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alkenes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alkenes",
+   "prompt": "Ethene is manufactured mainly by",
+   "choices": [
+    "fermentation of urea",
+    "cracking",
+    "distillation of water",
+    "electrolysis"
+   ],
+   "answer": 1,
+   "explanation": "Large alkanes are cracked.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Fermentation of glucose by yeast gives",
+   "choices": [
+    "ethene and hydrogen",
+    "ethanoic acid and water",
+    "ethanol and carbon dioxide",
+    "methane and oxygen"
+   ],
+   "answer": 2,
+   "explanation": "C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the main component of vinegar?",
+   "choices": [
+    "ethene",
+    "ethanol",
+    "ethanoic acid",
+    "methanol"
+   ],
+   "answer": 2,
+   "explanation": "Oxidation of ethanol gives ethanoic acid.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Fermentation by yeast needs a plentiful supply of air.",
+   "answer": false,
+   "explanation": "It is anaerobic; air would oxidise the ethanol to ethanoic acid.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "From 180 g of glucose, 80 g of ethanol is actually obtained. Find the percentage yield (theoretical mass = 92 g), to the nearest whole number.",
+   "answer": 87,
+   "tolerance": 1,
+   "unit": "%",
+   "explanation": "80 ÷ 92 × 100 = 87%.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe a chemical test to show that a clear liquid is ethanoic acid and not ethanol.",
+   "model": "Add sodium carbonate (or hydrogencarbonate): ethanoic acid fizzes and gives CO₂, which turns limewater milky; ethanol does not. Also universal indicator turns orange/red with the acid but stays green with ethanol.",
+   "rubric": "1 mark: carbonate test with fizzing; 1 mark: CO₂/limewater or indicator result.",
+   "explanation": "Add sodium carbonate (or hydrogencarbonate): ethanoic acid fizzes and gives CO₂, which turns limewater milky; ethanol does not. Also universal indicator turns orange/red with the acid but stays green with ethanol.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Palm sap is collected in a calabash, left in the warm air and ferments to a sweet-sour drink; left longer it turns sour like vinegar.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What causes the initial fermentation?",
+     "choices": [
+      "Sunlight alone",
+      "Plastic from the container",
+      "Dissolved nitrogen",
+      "Yeasts acting on the sugar in the sap"
+     ],
+     "answer": 3,
+     "explanation": "Yeasts produce ethanol and CO₂ from the sugar.",
+     "id": "gceol-chemistry-organic-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is formed when the ethanol is oxidised by air and bacteria?",
+     "choices": [
+      "methane",
+      "ethene",
+      "glucose",
+      "ethanoic acid"
+     ],
+     "answer": 3,
+     "explanation": "C₂H₅OH + 2[O] → CH₃COOH + H₂O.",
+     "id": "gceol-chemistry-organic-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the equation for the fermentation of glucose.",
+     "model": "C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂",
+     "rubric": "1 mark formulae; 1 mark balanced.",
+     "explanation": "C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂",
+     "id": "gceol-chemistry-organic-e18-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give two uses of ethanol (other than in drinks).",
+     "model": "Solvent; fuel; antiseptic; making perfumes.",
+     "rubric": "1 mark each.",
+     "explanation": "Solvent; fuel; antiseptic; making perfumes.",
+     "id": "gceol-chemistry-organic-e18-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alcohols-acids-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "prompt": "The functional group of alcohols is",
+   "choices": [
+    "C=C",
+    "–OH",
+    "–Cl",
+    "–COOH"
+   ],
+   "answer": 1,
+   "explanation": "Hydroxyl group.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alcohols-acids-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "prompt": "Ethanol burns to give",
+   "choices": [
+    "carbon only",
+    "ethene",
+    "carbon dioxide and water",
+    "hydrogen only"
+   ],
+   "answer": 2,
+   "explanation": "Complete combustion.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alcohols-acids-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "prompt": "Esters are known for their",
+   "choices": [
+    "metallic taste",
+    "foul smells",
+    "sweet fruity smells",
+    "no smell"
+   ],
+   "answer": 2,
+   "explanation": "Used in perfumes and flavours.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alcohols-acids-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "prompt": "Ethanoic acid is a",
+   "choices": [
+    "strong acid",
+    "base",
+    "neutral compound",
+    "weak acid"
+   ],
+   "answer": 3,
+   "explanation": "Partly ionised.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-alcohols-acids-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-alcohols-acids",
+   "prompt": "Yeast contains",
+   "choices": [
+    "acids",
+    "metals",
+    "enzymes",
+    "gases"
+   ],
+   "answer": 2,
+   "explanation": "Which catalyse fermentation.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e19",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The monomer of poly(ethene) is",
+   "choices": [
+    "ethanoic acid",
+    "ethene",
+    "ethanol",
+    "ethane"
+   ],
+   "answer": 1,
+   "explanation": "n C₂H₄ → (–CH₂–CH₂–)ₙ.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A disadvantage of most plastics is that they",
+   "choices": [
+    "are heavy",
+    "dissolve in water",
+    "do not decay easily",
+    "conduct electricity"
+   ],
+   "answer": 2,
+   "explanation": "They are non-biodegradable.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Nylon is made by addition polymerisation.",
+   "answer": false,
+   "explanation": "Nylon is a condensation polymer: small molecules (water) are lost.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A polymer has Mr 140 000 and its repeating unit has Mr 28. Find the number of units.",
+   "answer": 5000,
+   "tolerance": 0,
+   "explanation": "140 000 ÷ 28 = 5000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Suggest three ways in which a town in Cameroon could reduce the problems caused by plastic waste.",
+   "model": "Reduce use of single-use plastic bags; reuse containers; collect and recycle plastic bottles; clean drains and bins regularly; educate people not to burn or throw plastic in gutters.",
+   "rubric": "1 mark each for three valid ideas.",
+   "explanation": "Reduce use of single-use plastic bags; reuse containers; collect and recycle plastic bottles; clean drains and bins regularly; educate people not to burn or throw plastic in gutters.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Chloroethene (CH₂=CHCl, Mr 62.5) polymerises to PVC.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What type of polymerisation is this?",
+     "choices": [
+      "fermentation",
+      "cracking",
+      "addition polymerisation",
+      "condensation polymerisation"
+     ],
+     "answer": 2,
+     "explanation": "The double bond opens; no molecule is lost.",
+     "id": "gceol-chemistry-organic-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What mass of PVC forms from 125 g of chloroethene?",
+     "answer": 125,
+     "tolerance": 0,
+     "explanation": "No loss in addition polymerisation: 125 g.",
+     "unit": "g",
+     "id": "gceol-chemistry-organic-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many moles of chloroethene are in 125 g?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "125 ÷ 62.5 = 2 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-organic-e24-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why should PVC not be burned in the open?",
+     "model": "It gives off poisonous gases such as hydrogen chloride (and dioxins), and fumes harm health and the environment.",
+     "rubric": "1 mark: toxic gases; 1 mark: harm to health/environment.",
+     "explanation": "It gives off poisonous gases such as hydrogen chloride (and dioxins), and fumes harm health and the environment.",
+     "id": "gceol-chemistry-organic-e24-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-polymers-plastics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "prompt": "A polymer is made of many",
+   "choices": [
+    "water molecules",
+    "monomers joined together",
+    "metal ions",
+    "acids only"
+   ],
+   "answer": 1,
+   "explanation": "Repeating units.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-polymers-plastics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "prompt": "PVC is used for",
+   "choices": [
+    "food",
+    "fertiliser",
+    "water pipes",
+    "fuel"
+   ],
+   "answer": 2,
+   "explanation": "Strong and does not corrode.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-polymers-plastics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "prompt": "Addition polymers are made from",
+   "choices": [
+    "metals",
+    "alcohols only",
+    "alkanes",
+    "alkenes"
+   ],
+   "answer": 3,
+   "explanation": "Unsaturated monomers.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-polymers-plastics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "prompt": "Starch is a",
+   "choices": [
+    "simple sugar",
+    "metal",
+    "natural polymer",
+    "synthetic fibre"
+   ],
+   "answer": 2,
+   "explanation": "Made of many glucose units.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-polymers-plastics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-polymers-plastics",
+   "prompt": "To reduce plastic waste we should",
+   "choices": [
+    "bury it in drains",
+    "throw it in rivers",
+    "reduce, reuse and recycle",
+    "burn it in the open"
+   ],
+   "answer": 2,
+   "explanation": "Good waste management.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e25",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-soap-fats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Fats and oils belong to the group of compounds called",
+   "choices": [
+    "acids",
+    "alcohols",
+    "alkenes",
+    "esters"
+   ],
+   "answer": 3,
+   "explanation": "Esters of glycerol and fatty acids.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e26",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-soap-fats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which reagent is boiled with a fat to make soap?",
+   "choices": [
+    "sodium hydroxide",
+    "ethanol",
+    "hydrochloric acid",
+    "sodium chloride"
+   ],
+   "answer": 0,
+   "explanation": "Alkaline hydrolysis (saponification).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e27",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-soap-fats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Soap forms scum in hard water.",
+   "answer": true,
+   "explanation": "Calcium and magnesium ions give insoluble salts with soap.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e28",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-soap-fats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In making soap, 0.50 mol of fat requires how many moles of NaOH (3 NaOH per fat molecule)?",
+   "answer": 1.5,
+   "tolerance": 0.01,
+   "unit": "mol",
+   "explanation": "0.50 × 3 = 1.5 mol.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e29",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-soap-fats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how soap removes grease from clothes.",
+   "model": "The hydrocarbon tails dissolve in the grease while the charged heads stay in the water; agitation breaks the grease into small droplets surrounded by soap ions, which are rinsed away with the water.",
+   "rubric": "1 mark: tail in grease; 1 mark: head in water; 1 mark: droplets washed away.",
+   "explanation": "The hydrocarbon tails dissolve in the grease while the charged heads stay in the water; agitation breaks the grease into small droplets surrounded by soap ions, which are rinsed away with the water.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-soap-fats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A group of pupils, supervised by a teacher, makes soap by boiling palm oil with sodium hydroxide solution.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the name of this reaction?",
+     "choices": [
+      "cracking",
+      "saponification",
+      "fermentation",
+      "neutralisation only"
+     ],
+     "answer": 1,
+     "explanation": "Alkaline hydrolysis of an ester.",
+     "id": "gceol-chemistry-organic-e30-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which other product is formed besides soap?",
+     "choices": [
+      "ethanol",
+      "chlorine",
+      "glycerol",
+      "methane"
+     ],
+     "answer": 2,
+     "explanation": "Propane-1,2,3-triol.",
+     "id": "gceol-chemistry-organic-e30-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why must gloves and goggles be worn?",
+     "model": "Sodium hydroxide (caustic soda) is corrosive and burns skin and eyes.",
+     "rubric": "1 mark.",
+     "explanation": "Sodium hydroxide (caustic soda) is corrosive and burns skin and eyes.",
+     "id": "gceol-chemistry-organic-e30-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many moles of NaOH are needed for 0.20 mol of palm oil (a triglyceride)?",
+     "answer": 0.6,
+     "tolerance": 0.01,
+     "explanation": "3 × 0.20 = 0.60 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-organic-e30-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-soap-fats-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-soap-fats",
+   "prompt": "Soap is the sodium salt of a",
+   "choices": [
+    "fatty acid",
+    "alkane",
+    "alcohol",
+    "mineral acid"
+   ],
+   "answer": 0,
+   "explanation": "e.g. sodium stearate.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-soap-fats-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-soap-fats",
+   "prompt": "Glycerol has",
+   "choices": [
+    "three –OH groups",
+    "one –COOH group",
+    "no –OH groups",
+    "a C=C bond"
+   ],
+   "answer": 0,
+   "explanation": "Propane-1,2,3-triol.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-soap-fats-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-soap-fats",
+   "prompt": "The tail of a soap ion is",
+   "choices": [
+    "a metal",
+    "attracted to water",
+    "ionic",
+    "attracted to grease"
+   ],
+   "answer": 3,
+   "explanation": "Hydrophobic tail dissolves in grease.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-soap-fats-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-soap-fats",
+   "prompt": "Hardening of oils uses",
+   "choices": [
+    "hydrogen and a nickel catalyst",
+    "oxygen only",
+    "chlorine",
+    "sulphur dioxide"
+   ],
+   "answer": 0,
+   "explanation": "Addition of H₂ to C=C.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-soap-fats-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-soap-fats",
+   "prompt": "Soapless detergents",
+   "choices": [
+    "cannot clean",
+    "are acids",
+    "form scum in hard water",
+    "lather in hard water"
+   ],
+   "answer": 3,
+   "explanation": "Their calcium salts are soluble.",
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-alkenes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which compound decolourises bromine water?",
+   "choices": [
+    "propane",
+    "ethene",
+    "ethane",
+    "methane"
+   ],
+   "answer": 1,
+   "explanation": "Only the unsaturated alkene reacts.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-organic"
+  },
+  {
+   "id": "gceol-chemistry-organic-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-alkenes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Hydrocarbon X has the formula C₄H₈ and decolourises bromine water.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which homologous series does X belong to?",
+     "choices": [
+      "alkenes",
+      "alcohols",
+      "alkanes",
+      "carboxylic acids"
+     ],
+     "answer": 0,
+     "explanation": "General formula CₙH₂ₙ with a C=C bond.",
+     "id": "gceol-chemistry-organic-m02-a"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Write the equation for the reaction of X with hydrogen.",
+     "model": "C₄H₈ + H₂ → C₄H₁₀",
+     "rubric": "1 mark.",
+     "explanation": "C₄H₈ + H₂ → C₄H₁₀",
+     "id": "gceol-chemistry-organic-m02-b"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "State the name of the polymer made when many molecules of ethene join together.",
+     "model": "Poly(ethene) (polythene).",
+     "rubric": "1 mark.",
+     "explanation": "Poly(ethene) (polythene).",
+     "id": "gceol-chemistry-organic-m02-c"
+    }
+   ],
+   "chapter": "gceol-chemistry-organic"
+  }
+ ]
+}

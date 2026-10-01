@@ -1,0 +1,1931 @@
+{
+ "chapter": "gceal-maths-mechanics",
+ "lessons": [
+  {
+   "id": "gceal-maths-projectiles",
+   "title": "Projectiles",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Mechanics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Resolve the initial velocity into horizontal and vertical components",
+    "Find time of flight, range and greatest height",
+    "Use the trajectory equation"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-mechanics-e01",
+    "gceal-maths-mechanics-e02",
+    "gceal-maths-mechanics-e03",
+    "gceal-maths-mechanics-e04",
+    "gceal-maths-mechanics-e05",
+    "gceal-maths-mechanics-e06"
+   ],
+   "selfCheck": [
+    "gceal-maths-projectiles-q1",
+    "gceal-maths-projectiles-q2",
+    "gceal-maths-projectiles-q3",
+    "gceal-maths-projectiles-q4",
+    "gceal-maths-projectiles-q5"
+   ],
+   "reviewNotes": [
+    "g=10 m/s² used (check whether the Board uses 9.8).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Model",
+     "md": "Neglect air resistance. Horizontally the velocity is constant; vertically the acceleration is $g$ downwards ($g=10$ m/s² here). For launch speed $u$ at angle $\\alpha$ above the horizontal: $u_x=u\\cos\\alpha$, $u_y=u\\sin\\alpha$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Equations of motion",
+     "md": "At time $t$: $x=u\\cos\\alpha\\,t$, $y=u\\sin\\alpha\\,t-\\frac{1}{2}gt^2$; $v_x=u\\cos\\alpha$, $v_y=u\\sin\\alpha-gt$. Landing at the same level: time of flight $T=\\frac{2u\\sin\\alpha}{g}$, range $R=\\frac{u^2\\sin2\\alpha}{g}$, greatest height $H=\\frac{u^2\\sin^2\\alpha}{2g}$ (when $v_y=0$)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Trajectory",
+     "md": "Eliminating $t$: $y=x\\tan\\alpha-\\frac{gx^2}{2u^2\\cos^2\\alpha}$, a parabola. The speed at any time is $\\sqrt{v_x^2+v_y^2}$ and the angle with the horizontal is $\\tan^{-1}\\frac{|v_y|}{v_x}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- At the highest point the velocity is NOT zero: only the vertical component is.\n- Use the vertical motion to find the time and then the horizontal motion for the distance.\n- Do not use $R=\\frac{u^2\\sin2\\alpha}{g}$ when the landing point is at a different height."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A ball is hit from the ground at 20 m/s at $30\\degree$ to the horizontal ($g=10$). Find the time of flight, the range and the greatest height.",
+     "steps": [
+      "$u_y=10$, $u_x=17.32$. Flight time: $y=0$: $10t-5t^2=0$, $t=2$ s.",
+      "Range $=17.32\\times2=34.6$ m.",
+      "Greatest height: $v_y=0$ at $t=1$: $H=10(1)-5(1)^2=5$ m."
+     ],
+     "answer": "$T=2$ s, $R\\approx34.6$ m, $H=5$ m",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 149.5,
+        "x2": 372.0,
+        "y2": 149.5,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 50.6,
+        "y1": 172.0,
+        "x2": 50.6,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 133.6,
+        "y1": 146.5,
+        "x2": 133.6,
+        "y2": 152.5,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 133.6,
+        "y": 166.5,
+        "text": "10",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 216.6,
+        "y1": 146.5,
+        "x2": 216.6,
+        "y2": 152.5,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 216.6,
+        "y": 166.5,
+        "text": "20",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 299.6,
+        "y1": 146.5,
+        "x2": 299.6,
+        "y2": 152.5,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 299.6,
+        "y": 166.5,
+        "text": "30",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 47.6,
+        "y1": 67.0,
+        "x2": 53.6,
+        "y2": 67.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 42.6,
+        "y": 71.0,
+        "text": "5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         50.6,
+         149.5,
+         55.4,
+         144.1,
+         60.2,
+         138.9,
+         65.0,
+         133.8,
+         69.8,
+         129.0,
+         74.6,
+         124.3,
+         79.4,
+         119.8,
+         84.1,
+         115.5,
+         88.9,
+         111.4,
+         93.7,
+         107.4,
+         98.5,
+         103.7,
+         103.3,
+         100.1,
+         108.1,
+         96.7,
+         112.9,
+         93.5,
+         117.7,
+         90.5,
+         122.5,
+         87.6,
+         127.3,
+         85.0,
+         132.1,
+         82.5,
+         136.9,
+         80.2,
+         141.6,
+         78.1,
+         146.4,
+         76.2,
+         151.2,
+         74.4,
+         156.0,
+         72.9,
+         160.8,
+         71.5,
+         165.6,
+         70.3,
+         170.4,
+         69.3,
+         175.2,
+         68.5,
+         180.0,
+         67.8,
+         184.8,
+         67.4,
+         189.6,
+         67.1,
+         194.4,
+         67.0,
+         199.2,
+         67.1,
+         203.9,
+         67.4,
+         208.7,
+         67.8,
+         213.5,
+         68.5,
+         218.3,
+         69.3,
+         223.1,
+         70.3,
+         227.9,
+         71.5,
+         232.7,
+         72.9,
+         237.5,
+         74.4,
+         242.3,
+         76.2,
+         247.1,
+         78.1,
+         251.9,
+         80.2,
+         256.7,
+         82.5,
+         261.4,
+         85.0,
+         266.2,
+         87.6,
+         271.0,
+         90.5,
+         275.8,
+         93.5,
+         280.6,
+         96.7,
+         285.4,
+         100.1,
+         290.2,
+         103.7,
+         295.0,
+         107.4,
+         299.8,
+         111.4,
+         304.6,
+         115.5,
+         309.4,
+         119.8,
+         314.2,
+         124.3,
+         319.0,
+         129.0,
+         323.7,
+         133.8,
+         328.5,
+         138.9,
+         333.3,
+         144.1,
+         338.1,
+         149.5
+        ],
+        "stroke": "blue",
+        "width": 2.5,
+        "closed": false
+       },
+       {
+        "t": "circle",
+        "cx": 194.36021702821682,
+        "cy": 67.00000000000003,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 194.36021702821682,
+        "y": 57.00000000000003,
+        "text": "max 5 m",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 338.12043405643357,
+        "cy": 149.5,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 328.12043405643357,
+        "y": 139.5,
+        "text": "range 34.6 m",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A stone is thrown horizontally at 12 m/s from a cliff 45 m high. How far from the base does it land?",
+     "steps": [
+      "Vertical: $45=\\frac{1}{2}(10)t^2$, so $t^2=9$, $t=3$ s.",
+      "Horizontal distance $=12\\times3=36$ m."
+     ],
+     "answer": "36 m"
+    }
+   ],
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-moments",
+   "title": "Moments and equilibrium",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Mechanics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the moment of a force about a point",
+    "Use the two conditions for equilibrium",
+    "Solve beam, seesaw and pivot problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-mechanics-e07",
+    "gceal-maths-mechanics-e08",
+    "gceal-maths-mechanics-e09",
+    "gceal-maths-mechanics-e10",
+    "gceal-maths-mechanics-e11",
+    "gceal-maths-mechanics-e12"
+   ],
+   "selfCheck": [
+    "gceal-maths-moments-q1",
+    "gceal-maths-moments-q2",
+    "gceal-maths-moments-q3",
+    "gceal-maths-moments-q4",
+    "gceal-maths-moments-q5"
+   ],
+   "reviewNotes": [
+    "Ladder and inclined-force problems (friction at wall and ground) not included; check if required.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Moment",
+     "md": "The moment of a force $F$ about a point is $F\\times d$, where $d$ is the perpendicular distance from the point to the line of action of the force. Unit: N m. Its sense is clockwise or anticlockwise."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Equilibrium of a rigid body",
+     "md": "A body is in equilibrium when (1) the resultant force is zero (upward forces = downward forces) and (2) the total moment about any point is zero (clockwise = anticlockwise). Take moments about a point where an unknown force acts to remove it from the equation."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Draw a diagram with all forces (weight of a uniform beam acts at its midpoint). 2. Choose a point to take moments about. 3. Sum clockwise moments = sum anticlockwise moments. 4. Resolve vertically to find the other reaction. 5. Check that both reactions are positive (a negative reaction means the beam lifts off that support)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the distance along the beam when the force is inclined: you need the PERPENDICULAR distance.\n- Putting the weight at the end of a uniform beam instead of the middle.\n- Forgetting the weight of the beam itself."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A uniform beam $AB$ of length 4 m and weight 200 N rests on supports at its ends. A child of weight 300 N stands 1 m from $A$. Find the reactions at $A$ and $B$.",
+     "steps": [
+      "Moments about $A$: $R_B\\times4=300\\times1+200\\times2=700$, so $R_B=175$ N.",
+      "Vertically: $R_A+R_B=500$, so $R_A=325$ N."
+     ],
+     "answer": "$R_A=325$ N, $R_B=175$ N",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 100,
+        "w": 320,
+        "h": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         114,
+         28,
+         140,
+         52,
+         140
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "orange"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         360,
+         114,
+         348,
+         140,
+         372,
+         140
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 60,
+        "x2": 110,
+        "y2": 98,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 52,
+        "text": "300 N",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 150,
+        "x2": 200,
+        "y2": 116,
+        "color": "blue",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 62,
+        "x2": 200,
+        "y2": 98,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 52,
+        "text": "200 N",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 190,
+        "x2": 40,
+        "y2": 156,
+        "color": "grey",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 205,
+        "text": "R_A",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 190,
+        "x2": 360,
+        "y2": 156,
+        "color": "grey",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 205,
+        "text": "R_B",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 175,
+        "text": "1 m",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 175,
+        "text": "beam 4 m",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A 40 kg child sits 1.5 m from the pivot of a seesaw. Where must a 30 kg child sit on the other side to balance it?",
+     "steps": [
+      "Moments about the pivot: $40g\\times1.5=30g\\times d$.",
+      "$d=\\frac{40\\times1.5}{30}$ (the $g$ cancels)."
+     ],
+     "answer": "$d=2$ m"
+    }
+   ],
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-energy-momentum",
+   "title": "Work, energy, power and momentum",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Mechanics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use work, kinetic and potential energy and the work-energy principle",
+    "Use power $P=Fv$",
+    "Use conservation of momentum and impulse"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-mechanics-e13",
+    "gceal-maths-mechanics-e14",
+    "gceal-maths-mechanics-e15",
+    "gceal-maths-mechanics-e16",
+    "gceal-maths-mechanics-e17",
+    "gceal-maths-mechanics-e18"
+   ],
+   "selfCheck": [
+    "gceal-maths-energy-momentum-q1",
+    "gceal-maths-energy-momentum-q2",
+    "gceal-maths-energy-momentum-q3",
+    "gceal-maths-energy-momentum-q4",
+    "gceal-maths-energy-momentum-q5"
+   ],
+   "reviewNotes": [
+    "Coefficient of restitution and oblique impacts not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Energy and power",
+     "md": "Work done by a constant force $=Fd$ (in the direction of the force), in joules. Kinetic energy $=\\frac{1}{2}mv^2$; gravitational potential energy $=mgh$. Work-energy principle: work done by the resultant force $=$ change in kinetic energy. Power $=\\frac{\\text{work}}{\\text{time}}=Fv$, in watts."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Momentum",
+     "md": "Momentum $p=mv$ (kg m/s). **Conservation**: in a collision with no external force, total momentum before = total momentum after. Impulse $=Ft=$ change in momentum $=mv-mu$ (N s). Kinetic energy is NOT conserved in an inelastic collision (energy is lost as heat and sound)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "For motion under gravity without friction use $\\frac{1}{2}mv^2+mgh=$ constant. With friction: work by friction $=$ friction force $\\times$ distance reduces the energy. For collisions: choose a positive direction, write $m_1u_1+m_2u_2=m_1v_1+m_2v_2$, then compare kinetic energies if asked."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Momentum is a vector: a rebound reverses the sign (impulse on a ball bouncing off a wall is $m(v_1+v_2)$). Do not use $F=\\frac{\\Delta KE}{t}$ for power. Check units: J, W, N s."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A 2 kg ball is dropped from 5 m ($g=10$). Find its speed on impact and its kinetic energy.",
+     "steps": [
+      "Energy conservation: $mgh=\\frac{1}{2}mv^2$, so $v^2=2gh=100$ and $v=10$ m/s.",
+      "$KE=\\frac{1}{2}(2)(100)=100$ J (equal to the lost potential energy $2\\times10\\times5$)."
+     ],
+     "answer": "$v=10$ m/s, $KE=100$ J"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A 3 kg trolley at 4 m/s hits a stationary 1 kg trolley and they stick together. Find the common speed and the kinetic energy lost.",
+     "steps": [
+      "Momentum: $3\\times4=(3+1)v$, so $v=3$ m/s.",
+      "KE before $=\\frac{1}{2}(3)(16)=24$ J; after $=\\frac{1}{2}(4)(9)=18$ J; lost $=6$ J."
+     ],
+     "answer": "$v=3$ m/s; 6 J lost",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 60,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 64,
+        "text": "4000 kg",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 100,
+        "x2": 100,
+        "y2": 100,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 120,
+        "text": "6 m/s",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 50,
+        "w": 40,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 70,
+        "text": "1000 kg",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 100,
+        "text": "at rest",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 140,
+        "text": "before",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 170,
+        "w": 100,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 195,
+        "text": "5000 kg",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 190,
+        "x2": 330,
+        "y2": 190,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 175,
+        "text": "4.8 m/s",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-circular-motion",
+   "title": "Motion in a horizontal circle",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Mechanics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use angular speed $\\omega$, speed $v=r\\omega$ and period",
+    "Use the centripetal acceleration $\\frac{v^2}{r}$ and force $\\frac{mv^2}{r}$",
+    "Solve problems with tension and friction"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-mechanics-e19",
+    "gceal-maths-mechanics-e20",
+    "gceal-maths-mechanics-e21",
+    "gceal-maths-mechanics-e22",
+    "gceal-maths-mechanics-e23",
+    "gceal-maths-mechanics-e24"
+   ],
+   "selfCheck": [
+    "gceal-maths-circular-motion-q1",
+    "gceal-maths-circular-motion-q2",
+    "gceal-maths-circular-motion-q3",
+    "gceal-maths-circular-motion-q4",
+    "gceal-maths-circular-motion-q5"
+   ],
+   "reviewNotes": [
+    "Vertical circles and banked tracks not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Angular motion",
+     "md": "A particle moving in a circle of radius $r$ with angular speed $\\omega$ (rad/s): $v=r\\omega$. The period $T=\\frac{2\\pi}{\\omega}$ and $\\omega=2\\pi f$ where $f$ is the frequency (rev/s). Convert revolutions per minute: $\\omega=\\text{rpm}\\times\\frac{2\\pi}{60}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Acceleration towards the centre",
+     "md": "Even at constant speed the velocity changes direction, so there is an acceleration $a=\\frac{v^2}{r}=r\\omega^2$ directed towards the centre. The resultant force towards the centre is $F=\\frac{mv^2}{r}=mr\\omega^2$ (provided by tension, friction, a reaction...). It is not an extra force."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Identify the real forces (tension, friction, weight, reaction) that point towards the centre. 2. Write $F_{towards\\;centre}=\\frac{mv^2}{r}$. 3. Resolve vertically when needed (balanced). 4. For a car on a flat bend friction gives $\\mu mg\\geq\\frac{mv^2}{r}$, so the maximum speed satisfies $v^2=\\mu gr$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "There is no 'centrifugal force' pushing outwards in the equation of motion. Uniform circular motion has acceleration (not zero). Use radians per second, not revolutions per minute, in $v=r\\omega$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A 0.5 kg stone is whirled in a horizontal circle of radius 0.8 m at 4 m/s on a light string. Find the acceleration and the tension.",
+     "steps": [
+      "$a=\\frac{v^2}{r}=\\frac{16}{0.8}=20$ m/s².",
+      "Tension provides the centripetal force: $T=ma=0.5\\times20=10$ N."
+     ],
+     "answer": "$a=20$ m/s²; $T=10$ N",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 130,
+        "r": 70,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 130,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 130,
+        "x2": 260,
+        "y2": 130,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 124,
+        "text": "r",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 60,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 60,
+        "x2": 270,
+        "y2": 60,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 58,
+        "text": "v",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 60,
+        "x2": 190,
+        "y2": 100,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 92,
+        "text": "a",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A car goes round a flat bend of radius 50 m. The coefficient of friction is 0.4. Find the maximum speed ($g=10$).",
+     "steps": [
+      "Friction $\\mu mg=\\frac{mv^2}{r}$, so $v^2=\\mu gr=0.4\\times10\\times50=200$.",
+      "$v=\\sqrt{200}=14.1$ m/s (about 51 km/h)."
+     ],
+     "answer": "$v\\approx14.1$ m/s"
+    }
+   ],
+   "chapter": "gceal-maths-mechanics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-maths-mechanics-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-projectiles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How long does an object take to fall 20 m from rest ($g=10$)?",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "s",
+   "explanation": "$20=5t^2$, so $t=2$ s.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-projectiles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Range for $u=30$ m/s at $45\\degree$ ($g=10$):",
+   "choices": [
+    "45 m",
+    "30 m",
+    "180 m",
+    "90 m"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{u^2\\sin90\\degree}{g}=\\frac{900}{10}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-projectiles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "At the highest point of its flight a projectile has zero velocity.",
+   "answer": false,
+   "explanation": "The horizontal component $u\\cos\\alpha$ remains; only the vertical component is zero.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-projectiles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "During the flight of a projectile the horizontal component of velocity",
+   "choices": [
+    "increases",
+    "stays constant",
+    "decreases",
+    "is zero at the top"
+   ],
+   "answer": 1,
+   "explanation": "No horizontal force.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-projectiles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Show that a projectile launched from the ground with speed $u$ at angle $\\alpha$ has time of flight $\\frac{2u\\sin\\alpha}{g}$.",
+   "model": "Vertical displacement $y=u\\sin\\alpha\\,t-\\frac{1}{2}gt^2$. It returns to the ground when $y=0$: $t\\left(u\\sin\\alpha-\\frac{1}{2}gt\\right)=0$. The non-zero solution is $t=\\frac{2u\\sin\\alpha}{g}$.",
+   "rubric": [
+    "Vertical equation (1)",
+    "Sets $y=0$ and factorises (1)",
+    "Correct time (1)"
+   ],
+   "explanation": "Vertical displacement $y=u\\sin\\alpha\\,t-\\frac{1}{2}gt^2$. It returns to the ground when $y=0$: $t\\left(u\\sin\\alpha-\\frac{1}{2}gt\\right)=0$. The non-zero solution is $t=\\frac{2u\\sin\\alpha}{g}$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-projectiles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ball is kicked from the ground at 25 m/s at an angle $\\alpha$ with $\\sin\\alpha=0.6$ ($\\cos\\alpha=0.8$). Take $g=10$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the time of flight (s).",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "$u_y=15$: $T=\\frac{2\\times15}{10}=3$.",
+     "id": "gceal-maths-mechanics-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the range (m).",
+     "answer": 60,
+     "tolerance": 0,
+     "explanation": "$u_x=20$: $20\\times3=60$.",
+     "id": "gceal-maths-mechanics-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the greatest height (m).",
+     "answer": 11.25,
+     "tolerance": 0.01,
+     "explanation": "$H=\\frac{15^2}{20}=11.25$.",
+     "id": "gceal-maths-mechanics-e06-c"
+    }
+   ],
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-projectiles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-projectiles",
+   "prompt": "In projectile motion the horizontal acceleration is",
+   "choices": [
+    "$u$",
+    "$-g$",
+    "$g$",
+    "0"
+   ],
+   "answer": 3,
+   "explanation": "No horizontal force.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-projectiles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-projectiles",
+   "prompt": "$u=20$ at $\\alpha=90\\degree$ reaches greatest height ($g=10$)",
+   "choices": [
+    "0",
+    "20 m",
+    "40 m",
+    "10 m"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{400}{20}$.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-projectiles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-projectiles",
+   "prompt": "Maximum range on level ground occurs at",
+   "choices": [
+    "$60\\degree$",
+    "$30\\degree$",
+    "$90\\degree$",
+    "$45\\degree$"
+   ],
+   "answer": 3,
+   "explanation": "$\\sin2\\alpha=1$.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-projectiles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-projectiles",
+   "prompt": "A stone dropped and one thrown horizontally from the same height land",
+   "choices": [
+    "the thrown one first",
+    "never",
+    "at the same time",
+    "the dropped one first"
+   ],
+   "answer": 2,
+   "explanation": "Same vertical motion.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-projectiles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-projectiles",
+   "prompt": "The trajectory of a projectile is a",
+   "choices": [
+    "circle",
+    "parabola",
+    "straight line",
+    "hyperbola"
+   ],
+   "answer": 1,
+   "explanation": "Quadratic in $x$.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the moment (N m) of a 25 N force acting 0.4 m from a pivot.",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "N m",
+   "explanation": "$25\\times0.4$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The unit of moment is",
+   "choices": [
+    "N m",
+    "J/s",
+    "N",
+    "N/m"
+   ],
+   "answer": 0,
+   "explanation": "Force times distance.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The moment of a force depends only on the size of the force.",
+   "answer": false,
+   "explanation": "It also depends on the perpendicular distance from the pivot.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A uniform plank $AB$ of length 6 m and weight 120 N is pivoted at a point 2 m from $A$. The downward force $F$ at $A$ needed to hold it horizontal is",
+   "choices": [
+    "30 N",
+    "40 N",
+    "120 N",
+    "60 N"
+   ],
+   "answer": 3,
+   "explanation": "Weight acts 1 m from the pivot: $120\\times1=F\\times2$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A uniform beam $AB$ of length 6 m and weight 240 N is supported at $A$ and at $C$, where $AC=4$ m. A load of 80 N hangs at $B$. Find the reactions at $A$ and $C$.",
+   "model": "Moments about $A$: $R_C\\times4=240\\times3+80\\times6=1200$, so $R_C=300$ N. Vertically $R_A+R_C=320$, so $R_A=20$ N (positive, so the beam does not lift).",
+   "rubric": [
+    "Moments about $A$ (1)",
+    "$R_C=300$ N (1)",
+    "$R_A=20$ N (1)"
+   ],
+   "explanation": "Moments about $A$: $R_C\\times4=240\\times3+80\\times6=1200$, so $R_C=300$ N. Vertically $R_A+R_C=320$, so $R_A=20$ N (positive, so the beam does not lift).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A uniform plank $AB$ of length 6 m and weight 300 N rests on supports $C$ (1 m from $A$) and $D$ (1 m from $B$). A load of 400 N is placed on the plank 2 m from $A$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the reaction at $D$ (N).",
+     "answer": 250,
+     "tolerance": 0,
+     "explanation": "Moments about $C$: $R_D\\times4=300\\times2+400\\times1=1000$, $R_D=250$.",
+     "id": "gceal-maths-mechanics-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the reaction at $C$ (N).",
+     "answer": 450,
+     "tolerance": 0,
+     "explanation": "$R_C=700-250=450$.",
+     "id": "gceal-maths-mechanics-e12-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The plank would remain in equilibrium if the load were moved to the point directly above $D$.",
+     "answer": true,
+     "explanation": "The reactions would change but both stay positive: $R_C\\approx150$ N and $R_D\\approx550$ N.",
+     "id": "gceal-maths-mechanics-e12-c"
+    }
+   ],
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-moments-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-moments",
+   "prompt": "A uniform beam's weight acts at",
+   "choices": [
+    "its heaviest point",
+    "its midpoint",
+    "one end",
+    "a support"
+   ],
+   "answer": 1,
+   "explanation": "Centre of mass.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-moments-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-moments",
+   "prompt": "In equilibrium the total clockwise moment is",
+   "choices": [
+    "double the anticlockwise",
+    "equal to the total anticlockwise moment",
+    "zero always",
+    "unrelated"
+   ],
+   "answer": 1,
+   "explanation": "Moment condition.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-moments-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-moments",
+   "prompt": "A 10 N force at 3 m gives a moment of",
+   "choices": [
+    "30 N m",
+    "7 N m",
+    "3.3 N m",
+    "13 N m"
+   ],
+   "answer": 0,
+   "explanation": "$10\\times3$.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-moments-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-moments",
+   "prompt": "To eliminate an unknown reaction take moments about",
+   "choices": [
+    "any point at random",
+    "the point where it acts",
+    "the centre of the beam always",
+    "infinity"
+   ],
+   "answer": 1,
+   "explanation": "Its moment is zero.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-moments-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-moments",
+   "prompt": "Two conditions for equilibrium are",
+   "choices": [
+    "equal masses",
+    "zero resultant force and zero resultant moment",
+    "equal distances",
+    "zero speed only"
+   ],
+   "answer": 1,
+   "explanation": "Standard result.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-energy-momentum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the kinetic energy (J) of a 1200 kg car moving at 15 m/s.",
+   "answer": 135000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "$\\frac{1}{2}\\times1200\\times225$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-energy-momentum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A car moves at constant 20 m/s with a driving force of 1500 N. The power developed is",
+   "choices": [
+    "3 kW",
+    "75 W",
+    "300 W",
+    "30 kW"
+   ],
+   "answer": 3,
+   "explanation": "$P=Fv=1500\\times20=30000$ W.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-energy-momentum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Momentum is conserved in a collision (no external forces) but kinetic energy need not be.",
+   "answer": true,
+   "explanation": "In an inelastic collision some kinetic energy is converted to other forms.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-energy-momentum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 0.5 kg ball hits a wall at 12 m/s and rebounds at 8 m/s. The impulse on the ball is",
+   "choices": [
+    "10 N s",
+    "4 N s",
+    "2 N s",
+    "6 N s"
+   ],
+   "answer": 0,
+   "explanation": "$m(v+u)$ with direction reversed: $0.5(8+12)=10$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-energy-momentum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 50 kg trolley starts from rest and is pushed by a constant 200 N force for 15 m against a constant 50 N resistance. Find its final speed (m/s, 1 d.p.).",
+   "answer": 9.5,
+   "tolerance": 0.05,
+   "unit": "m/s",
+   "explanation": "Net work $=(200-50)\\times15=2250$ J $=\\frac{1}{2}(50)v^2$, so $v^2=90$, $v=9.49$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-energy-momentum",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A truck of mass 4000 kg moving at 6 m/s collides with a stationary car of mass 1000 kg on a straight road near Bafoussam. They move together after impact.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find their common speed (m/s).",
+     "answer": 4.8,
+     "tolerance": 0.01,
+     "explanation": "$4000\\times6=5000v$, so $v=4.8$.",
+     "id": "gceal-maths-mechanics-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the kinetic energy lost (J).",
+     "answer": 14400,
+     "tolerance": 1,
+     "explanation": "Before: $\\frac{1}{2}(4000)(36)=72000$ J; after: $\\frac{1}{2}(5000)(23.04)=57600$ J; lost $=14400$ J.",
+     "id": "gceal-maths-mechanics-e18-b"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 240,
+    "items": [
+     {
+      "t": "rect",
+      "x": 40,
+      "y": 40,
+      "w": 60,
+      "h": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgrey"
+     },
+     {
+      "t": "text",
+      "x": 70,
+      "y": 64,
+      "text": "4000 kg",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 40,
+      "y1": 100,
+      "x2": 100,
+      "y2": 100,
+      "color": "blue",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 70,
+      "y": 120,
+      "text": "6 m/s",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 180,
+      "y": 50,
+      "w": 40,
+      "h": 30,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgrey"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 70,
+      "text": "1000 kg",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 100,
+      "text": "at rest",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 140,
+      "text": "before",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 150,
+      "y": 170,
+      "w": 100,
+      "h": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 195,
+      "text": "5000 kg",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 250,
+      "y1": 190,
+      "x2": 330,
+      "y2": 190,
+      "color": "blue",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 175,
+      "text": "4.8 m/s",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-energy-momentum-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-energy-momentum",
+   "prompt": "The unit of power is",
+   "choices": [
+    "the newton",
+    "the joule",
+    "the pascal",
+    "the watt"
+   ],
+   "answer": 3,
+   "explanation": "J/s.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-energy-momentum-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-energy-momentum",
+   "prompt": "$mgh$ for 2 kg at 3 m ($g=10$) is",
+   "choices": [
+    "30 J",
+    "60 J",
+    "0.6 J",
+    "6 J"
+   ],
+   "answer": 1,
+   "explanation": "$2\\times10\\times3$.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-energy-momentum-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-energy-momentum",
+   "prompt": "Impulse equals",
+   "choices": [
+    "mass $\\times$ acceleration",
+    "force $\\times$ distance",
+    "change in energy",
+    "change in momentum"
+   ],
+   "answer": 3,
+   "explanation": "$Ft=mv-mu$.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-energy-momentum-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-energy-momentum",
+   "prompt": "In an elastic collision",
+   "choices": [
+    "momentum is lost",
+    "kinetic energy is conserved",
+    "mass changes",
+    "speed is constant"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-energy-momentum-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-energy-momentum",
+   "prompt": "Work done by a 20 N force over 5 m is",
+   "choices": [
+    "100 J",
+    "25 J",
+    "4 J",
+    "15 J"
+   ],
+   "answer": 0,
+   "explanation": "$Fd$.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-circular-motion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A particle moves at $\\omega=3$ rad/s on a circle of radius 2 m. Find its speed (m/s).",
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "$v=r\\omega=2\\times3$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-circular-motion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The acceleration of a particle in uniform circular motion is directed",
+   "choices": [
+    "along the tangent",
+    "away from the centre",
+    "it has no acceleration",
+    "towards the centre"
+   ],
+   "answer": 3,
+   "explanation": "Velocity changes direction.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-circular-motion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A particle moving at constant speed in a circle has zero acceleration.",
+   "answer": false,
+   "explanation": "Its velocity direction changes, so $a=\\frac{v^2}{r}\\neq0$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e22",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-circular-motion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The period of a particle with $\\omega=2$ rad/s is",
+   "choices": [
+    "$4\\pi$ s",
+    "$\\frac{\\pi}{2}$ s",
+    "$\\pi$ s",
+    "$2\\pi$ s"
+   ],
+   "answer": 2,
+   "explanation": "$T=\\frac{2\\pi}{\\omega}$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e23",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-circular-motion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 0.2 kg stone on a light string of length 1.2 m moves in a horizontal circle at 3 revolutions per second. Find the tension (N, nearest whole number).",
+   "answer": 85,
+   "tolerance": 1,
+   "unit": "N",
+   "explanation": "$\\omega=6\\pi$ rad/s; $T=mr\\omega^2=0.2\\times1.2\\times(6\\pi)^2=85.3$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-circular-motion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A potter's wheel rotates at 90 revolutions per minute. A point on its rim is 0.4 m from the centre.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the angular speed (rad/s, 2 d.p.).",
+     "answer": 9.42,
+     "tolerance": 0.01,
+     "explanation": "$90\\times\\frac{2\\pi}{60}=3\\pi=9.42$.",
+     "id": "gceal-maths-mechanics-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the speed of the point (m/s, 2 d.p.).",
+     "answer": 3.77,
+     "tolerance": 0.01,
+     "explanation": "$v=r\\omega=0.4\\times9.42$.",
+     "id": "gceal-maths-mechanics-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find its acceleration (m/s², 1 d.p.).",
+     "answer": 35.5,
+     "tolerance": 0.1,
+     "explanation": "$r\\omega^2=0.4\\times88.83=35.5$.",
+     "id": "gceal-maths-mechanics-e24-c"
+    }
+   ],
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-circular-motion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-circular-motion",
+   "prompt": "$v=r\\omega$: $r=3$, $\\omega=4$ gives $v=$",
+   "choices": [
+    "12 m/s",
+    "7 m/s",
+    "0.75 m/s",
+    "48 m/s"
+   ],
+   "answer": 0,
+   "explanation": "Multiply.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-circular-motion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-circular-motion",
+   "prompt": "Centripetal force formula is",
+   "choices": [
+    "$mvr$",
+    "$\\frac{mr}{v^2}$",
+    "$mv^2r$",
+    "$\\frac{mv^2}{r}$"
+   ],
+   "answer": 3,
+   "explanation": "Newton's second law.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-circular-motion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-circular-motion",
+   "prompt": "$\\omega$ for 60 rpm is",
+   "choices": [
+    "$60$ rad/s",
+    "$\\pi$ rad/s",
+    "$120$ rad/s",
+    "$2\\pi$ rad/s"
+   ],
+   "answer": 3,
+   "explanation": "One revolution per second.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-circular-motion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-circular-motion",
+   "prompt": "For a car on a flat bend the centripetal force is provided by",
+   "choices": [
+    "the engine",
+    "the weight",
+    "friction",
+    "the air"
+   ],
+   "answer": 2,
+   "explanation": "Horizontal force.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-circular-motion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-circular-motion",
+   "prompt": "If the speed doubles at the same radius the centripetal force is",
+   "choices": [
+    "halved",
+    "unchanged",
+    "doubled",
+    "four times"
+   ],
+   "answer": 3,
+   "explanation": "$v^2$.",
+   "chapter": "gceal-maths-mechanics"
+  },
+  {
+   "id": "gceal-maths-mechanics-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-projectiles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ball is projected from the ground at 20 m/s at an angle $\\alpha$ with $\\sin\\alpha=0.6$ ($\\cos\\alpha=0.8$). Take $g=10$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the time of flight (s).",
+     "answer": 2.4,
+     "tolerance": 0.01,
+     "explanation": "$u_y=12$: $T=\\frac{2\\times12}{10}=2.4$.",
+     "id": "gceal-maths-mechanics-m01-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the range (m).",
+     "answer": 38.4,
+     "tolerance": 0.05,
+     "explanation": "$u_x=16$: $16\\times2.4=38.4$.",
+     "id": "gceal-maths-mechanics-m01-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the greatest height (m).",
+     "answer": 7.2,
+     "tolerance": 0.02,
+     "explanation": "$\\frac{12^2}{20}=7.2$.",
+     "id": "gceal-maths-mechanics-m01-c"
+    }
+   ],
+   "chapter": "gceal-maths-mechanics"
+  }
+ ]
+}

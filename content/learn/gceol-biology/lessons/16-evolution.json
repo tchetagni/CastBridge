@@ -1,0 +1,1309 @@
+{
+ "chapter": "gceol-biology-evolution",
+ "lessons": [
+  {
+   "id": "gceol-biology-selection",
+   "title": "Variation and natural selection",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Variation; natural selection; chromosomes, DNA, mitosis and meiosis (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish continuous and discontinuous variation and give the causes of variation.",
+    "Explain natural selection using the example of resistance.",
+    "Distinguish natural selection from selective breeding."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-evolution-e01",
+    "gceol-biology-evolution-e02",
+    "gceol-biology-evolution-e03",
+    "gceol-biology-evolution-e04",
+    "gceol-biology-evolution-e05",
+    "gceol-biology-evolution-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-selection-q1",
+    "gceol-biology-selection-q2",
+    "gceol-biology-selection-q3",
+    "gceol-biology-selection-q4",
+    "gceol-biology-selection-q5"
+   ],
+   "reviewNotes": [
+    "Doubling figures are invented to show exponential growth.",
+    "Naming of Darwin and Wallace is general; check the level of history required.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Variation",
+     "md": "**Variation** is the differences between individuals of the same species. **Continuous variation** shows a range of values with no clear groups (height, mass, skin tone), usually shaped by genes *and* environment. **Discontinuous variation** shows distinct groups with nothing between them (blood group, ability to roll the tongue), usually controlled by genes only."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 460,
+      "h": 240,
+      "bars": [
+       {
+        "label": "140-144",
+        "value": 2,
+        "color": "blue"
+       },
+       {
+        "label": "145-149",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "150-154",
+        "value": 11,
+        "color": "blue"
+       },
+       {
+        "label": "155-159",
+        "value": 8,
+        "color": "blue"
+       },
+       {
+        "label": "160-164",
+        "value": 3,
+        "color": "blue"
+       }
+      ],
+      "unit": "number of students (height in cm; teaching data)"
+     },
+     "caption": "Heights of 30 students: continuous variation.",
+     "alt": "A bar chart of heights in 5 cm classes: 2, 6, 11, 8 and 3 students, forming a bell shape with the tallest bar in the middle."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Causes of variation",
+     "md": "- **Genetic**: different combinations of alleles from two parents (sexual reproduction) and **mutation**, a random change in a gene or chromosome; ionising radiation and some chemicals increase the rate.\n- **Environmental**: food, light, climate, accidents (a plant grown in shade is taller and paler).\n\nOnly genetic variation is inherited."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Natural selection",
+     "md": "Organisms produce more offspring than can survive. Those with features that suit the environment are more likely to survive and breed, and pass on their alleles; over many generations the characteristics of the population change. This is **natural selection** (Darwin and Wallace, 19th century). It is a main mechanism of **evolution**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 50.4,
+        "y": 60.0,
+        "text": "Variation",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 50.4,
+        "y": 74.0,
+        "text": "in the population",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 93.8,
+        "y1": 63.0,
+        "x2": 101.8,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 104.8,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 145.2,
+        "y": 60.0,
+        "text": "Overproduction",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 145.2,
+        "y": 74.0,
+        "text": "of offspring",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 188.6,
+        "y1": 63.0,
+        "x2": 196.6,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 199.6,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 60.0,
+        "text": "Struggle for",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 74.0,
+        "text": "survival",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 283.4,
+        "y1": 63.0,
+        "x2": 291.4,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 294.4,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 334.79999999999995,
+        "y": 60.0,
+        "text": "Best adapted",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 334.79999999999995,
+        "y": 74.0,
+        "text": "survive",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 378.2,
+        "y1": 63.0,
+        "x2": 386.2,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 389.2,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 429.59999999999997,
+        "y": 60.0,
+        "text": "They breed and",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 429.59999999999997,
+        "y": 74.0,
+        "text": "pass on alleles",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The steps of natural selection.",
+     "alt": "Five boxes joined by arrows: variation, overproduction of offspring, struggle for survival, the best adapted survive, they breed and pass on their alleles."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Resistance and selective breeding",
+     "md": "**Resistance**: in a population of bacteria or mosquitoes a few have a mutation that protects them against an antibiotic or insecticide. The treatment kills the others; the resistant ones survive, reproduce and the resistant allele becomes common. So antibiotics must be used only when needed and the course completed.\n\n**Selective breeding** is the same idea controlled by people: farmers choose the best cattle or cocoa plants to breed."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Individuals do not 'try' to adapt, and acquired features (a bodybuilder's muscles) are *not* inherited.\n- Natural selection acts on *existing* variation; mutation is random.\n- The *population* evolves, not the individual."
+    },
+    {
+     "type": "example",
+     "title": "Spread of resistance",
+     "statement": "A farmer sprays insecticide. Ten resistant mosquitoes survive and the number doubles every hour in an enclosed place. How many resistant mosquitoes after 5 hours, assuming no deaths?",
+     "steps": [
+      "Doubling each hour: 10 × 2 × 2 × 2 × 2 × 2.",
+      "10 × 32 = 320."
+     ],
+     "answer": "320 resistant mosquitoes"
+    },
+    {
+     "type": "example",
+     "title": "Which type of variation?",
+     "statement": "Classify: (a) blood group, (b) height of maize plants, (c) tongue-rolling.",
+     "steps": [
+      "Blood group and tongue-rolling fall into clear groups: discontinuous.",
+      "Maize height has all values and depends on water and soil as well as genes: continuous."
+     ],
+     "answer": "(a) discontinuous, (b) continuous, (c) discontinuous"
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-evolution-e01"
+    }
+   ],
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-dna",
+   "title": "Chromosomes, DNA, mitosis and meiosis",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Variation; natural selection; chromosomes, DNA, mitosis and meiosis (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the relationship between DNA, genes and chromosomes.",
+    "Describe base pairing in DNA.",
+    "Compare mitosis and meiosis and state their importance."
+   ],
+   "prerequisites": [
+    "gceol-biology-genetics"
+   ],
+   "exercises": [
+    "gceol-biology-evolution-e07",
+    "gceol-biology-evolution-e08",
+    "gceol-biology-evolution-e09",
+    "gceol-biology-evolution-e10",
+    "gceol-biology-evolution-e11",
+    "gceol-biology-evolution-e12"
+   ],
+   "selfCheck": [
+    "gceol-biology-dna-q1",
+    "gceol-biology-dna-q2",
+    "gceol-biology-dna-q3",
+    "gceol-biology-dna-q4",
+    "gceol-biology-dna-q5"
+   ],
+   "reviewNotes": [
+    "RNA and protein synthesis are not covered; check syllabus scope.",
+    "Link to existing monohybrid inheritance lesson is intentional.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Chromosomes, genes and DNA",
+     "md": "The **nucleus** contains **chromosomes**, long threads made of **DNA** (deoxyribonucleic acid). A **gene** is a length of DNA that carries the instructions to make one protein, and so controls a characteristic. Human body cells have **46 chromosomes** in **23 pairs**; gametes have 23. Sex is decided by the pair of **sex chromosomes**: **XX** female, **XY** male."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 210,
+      "items": [
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 15,
+        "x2": 150,
+        "y2": 195,
+        "color": "grey",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 15,
+        "x2": 250,
+        "y2": 195,
+        "color": "grey",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 35,
+        "x2": 250,
+        "y2": 35,
+        "color": "lightgrey",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 40,
+        "text": "A",
+        "size": 14,
+        "anchor": "end",
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 40,
+        "text": "T",
+        "size": 14,
+        "anchor": "start",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 63,
+        "x2": 250,
+        "y2": 63,
+        "color": "lightgrey",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 68,
+        "text": "T",
+        "size": 14,
+        "anchor": "end",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 68,
+        "text": "A",
+        "size": 14,
+        "anchor": "start",
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 91,
+        "x2": 250,
+        "y2": 91,
+        "color": "lightgrey",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 96,
+        "text": "C",
+        "size": 14,
+        "anchor": "end",
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 96,
+        "text": "G",
+        "size": 14,
+        "anchor": "start",
+        "color": "orange",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 119,
+        "x2": 250,
+        "y2": 119,
+        "color": "lightgrey",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 124,
+        "text": "G",
+        "size": 14,
+        "anchor": "end",
+        "color": "orange",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 124,
+        "text": "C",
+        "size": 14,
+        "anchor": "start",
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 147,
+        "x2": 250,
+        "y2": 147,
+        "color": "lightgrey",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 152,
+        "text": "A",
+        "size": 14,
+        "anchor": "end",
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 152,
+        "text": "T",
+        "size": 14,
+        "anchor": "start",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 175,
+        "x2": 250,
+        "y2": 175,
+        "color": "lightgrey",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 180,
+        "text": "C",
+        "size": 14,
+        "anchor": "end",
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 180,
+        "text": "G",
+        "size": 14,
+        "anchor": "start",
+        "color": "orange",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 190,
+        "x2": 330,
+        "y2": 170,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 174,
+        "text": "sugar-phosphate backbone",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 100,
+        "text": "A pairs with T",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 116,
+        "text": "C pairs with G",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A short stretch of DNA.",
+     "alt": "A ladder-shaped DNA molecule with two grey backbones and six rungs showing the base pairs A with T, T with A, C with G, G with C, A with T and C with G."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "DNA structure",
+     "md": "DNA is a **double helix**: two strands twisted together. Each strand has a backbone and four types of **base**: **A**, **T**, **C** and **G**. The strands are joined by **complementary base pairing**: **A with T** and **C with G**. The order of the bases forms the genetic code. DNA can make an exact copy of itself before a cell divides."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Mitosis and meiosis",
+     "md": "- **Mitosis**: one cell divides into **two genetically identical** cells with the **same chromosome number**. Used for growth, repair and asexual reproduction.\n- **Meiosis**: occurs only in the ovaries and testes; makes **four different gametes** with **half** the chromosome number. Fertilisation restores the full number and the mixing of genes gives **variation**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 146,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 35.0,
+        "text": "Body cell",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 49.0,
+        "text": "46 chromosomes",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 35.0,
+        "text": "MITOSIS",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 49.0,
+        "text": "growth and repair",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 35.0,
+        "text": "2 identical cells",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 49.0,
+        "text": "46 each",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 80,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 105.0,
+        "text": "Cell in ovary",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 119.0,
+        "text": "or testis: 46",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 80,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 105.0,
+        "text": "MEIOSIS",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 119.0,
+        "text": "makes gametes",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 80,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 105.0,
+        "text": "4 different cells",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 119.0,
+        "text": "23 each",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Mitosis and meiosis compared.",
+     "alt": "A table of six boxes: a body cell with 46 chromosomes divides by mitosis into 2 identical cells with 46 each; a cell in an ovary or testis with 46 divides by meiosis into 4 different cells with 23 each."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Meiosis does not happen in body cells; mitosis does not make gametes.\n- A is paired with T, never with C. (In this level of syllabus, RNA is not required.)\n- A gene is a *part* of a chromosome, not a whole cell."
+    },
+    {
+     "type": "example",
+     "title": "Complementary strand",
+     "statement": "One strand of DNA has the base sequence ATGCCA. Write the sequence of the complementary strand.",
+     "steps": [
+      "Pair A with T, T with A, G with C, C with G, C with G, A with T.",
+      "Result: TACGGT."
+     ],
+     "answer": "TACGGT"
+    },
+    {
+     "type": "example",
+     "title": "Counting cells",
+     "statement": "A single fertilised egg divides by mitosis 5 times. How many cells does it have then, assuming no cell dies? How many chromosomes are in each?",
+     "steps": [
+      "Each division doubles the number: 2⁵ = 32 cells.",
+      "Mitosis gives identical cells so each has 46 chromosomes."
+     ],
+     "answer": "32 cells, 46 chromosomes each"
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-evolution-e07"
+    }
+   ],
+   "chapter": "gceol-biology-evolution"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-evolution-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-selection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is an example of discontinuous variation?",
+   "choices": [
+    "height",
+    "mass",
+    "blood group",
+    "length of a leaf"
+   ],
+   "answer": 2,
+   "explanation": "Blood group falls into distinct classes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-selection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A feature that an animal acquires during its life, such as a scar, can be inherited.",
+   "answer": false,
+   "explanation": "Acquired characteristics are not passed on.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-selection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Twelve resistant bacteria double every 20 minutes. How many are there after 1 hour (3 doublings)?",
+   "answer": 96,
+   "tolerance": 0,
+   "explanation": "12 × 2 × 2 × 2 = 96.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-selection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these changes the genes?",
+   "choices": [
+    "mutation",
+    "diet",
+    "exercise",
+    "light"
+   ],
+   "answer": 0,
+   "explanation": "A mutation is a change in a gene or chromosome.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-selection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how bacteria become resistant to an antibiotic.",
+   "model": "A few bacteria have a mutation that gives resistance. The antibiotic kills the non-resistant ones; the resistant ones survive and reproduce, passing on the allele, so a resistant population results.",
+   "rubric": [
+    "1 mark: chance mutation",
+    "1 mark: antibiotic kills non-resistant",
+    "1 mark: survivors reproduce and pass on allele"
+   ],
+   "explanation": "A few bacteria have a mutation that gives resistance. The antibiotic kills the non-resistant ones; the resistant ones survive and reproduce, passing on the allele, so a resistant population results.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-selection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Maize plants of the same variety are grown in two fields in Bamenda: one with plenty of water and one dry.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Differences in height between the two fields are mostly due to:",
+     "choices": [
+      "environment",
+      "inheritance",
+      "mutation",
+      "natural selection"
+     ],
+     "answer": 0,
+     "explanation": "Same variety, different water.",
+     "id": "gceol-biology-evolution-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This is an example of:",
+     "choices": [
+      "a mutation",
+      "discontinuous variation",
+      "continuous variation",
+      "selective breeding"
+     ],
+     "answer": 2,
+     "explanation": "Height varies continuously.",
+     "id": "gceol-biology-evolution-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Describe how a farmer could produce a higher-yielding variety by selective breeding.",
+     "model": "Choose the plants with the highest yield, breed them together, select the best offspring and repeat over many generations.",
+     "rubric": [
+      "1 mark: choose best parents",
+      "1 mark: repeat over generations"
+     ],
+     "explanation": "Choose the plants with the highest yield, breed them together, select the best offspring and repeat over many generations.",
+     "id": "gceol-biology-evolution-e06-c"
+    }
+   ],
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-selection-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-selection",
+   "prompt": "Variation is the:",
+   "choices": [
+    "size of a cell",
+    "differences between individuals of a species",
+    "growth of a plant",
+    "number of species"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-selection-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-selection",
+   "prompt": "Which factor increases mutation rate?",
+   "choices": [
+    "ionising radiation",
+    "exercise",
+    "vitamins",
+    "water"
+   ],
+   "answer": 0,
+   "explanation": "Radiation damages DNA.",
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-selection-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-selection",
+   "prompt": "Natural selection favours:",
+   "choices": [
+    "random individuals",
+    "individuals best adapted to the environment",
+    "the biggest always",
+    "the oldest"
+   ],
+   "answer": 1,
+   "explanation": "Best adapted survive.",
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-selection-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-selection",
+   "prompt": "Selective breeding is carried out by:",
+   "choices": [
+    "wind",
+    "bacteria",
+    "humans",
+    "mutation only"
+   ],
+   "answer": 2,
+   "explanation": "Artificial selection.",
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-selection-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-selection",
+   "prompt": "Which statement about acquired features is correct?",
+   "choices": [
+    "they are mutations",
+    "they change the DNA",
+    "they are not inherited",
+    "they are inherited"
+   ],
+   "answer": 2,
+   "explanation": "Not inherited.",
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-dna",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A gene is:",
+   "choices": [
+    "a type of cell",
+    "a base",
+    "a section of DNA that codes for a protein",
+    "a whole chromosome"
+   ],
+   "answer": 2,
+   "explanation": "A gene is a length of DNA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-dna",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cell divides by mitosis 4 times. How many cells result?",
+   "answer": 16,
+   "tolerance": 0,
+   "explanation": "2⁴ = 16.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e09",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-dna",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each term with its description.",
+   "pairs": [
+    [
+     "mitosis",
+     "two identical cells"
+    ],
+    [
+     "meiosis",
+     "four different gametes"
+    ],
+    [
+     "XY",
+     "male sex chromosomes"
+    ],
+    [
+     "base pairing",
+     "A with T"
+    ]
+   ],
+   "explanation": "Standard definitions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-dna",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The complementary strand to GGTA is:",
+   "choices": [
+    "CCTA",
+    "AATG",
+    "CCAT",
+    "GGTA"
+   ],
+   "answer": 2,
+   "explanation": "G-C, G-C, T-A, A-T gives CCAT.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-dna",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "State the importance of mitosis and meiosis.",
+   "model": "Mitosis produces identical cells for growth, repair and asexual reproduction. Meiosis produces gametes with half the chromosome number so that the number stays constant after fertilisation and creates variation.",
+   "rubric": [
+    "1 mark: mitosis for growth/repair",
+    "1 mark: meiosis halves the number",
+    "1 mark: variation or keeps number constant"
+   ],
+   "explanation": "Mitosis produces identical cells for growth, repair and asexual reproduction. Meiosis produces gametes with half the chromosome number so that the number stays constant after fertilisation and creates variation.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-evolution-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-dna",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A human skin cell has 46 chromosomes.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many chromosomes in a sperm cell?",
+     "answer": 23,
+     "tolerance": 0,
+     "explanation": "Half of 46.",
+     "id": "gceol-biology-evolution-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many chromosomes in the zygote?",
+     "answer": 46,
+     "tolerance": 0,
+     "explanation": "23 + 23 = 46.",
+     "id": "gceol-biology-evolution-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The sex chromosomes of a boy are:",
+     "choices": [
+      "XY",
+      "YY",
+      "XXY",
+      "XX"
+     ],
+     "answer": 0,
+     "explanation": "Males are XY.",
+     "id": "gceol-biology-evolution-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why meiosis is needed in sexual reproduction.",
+     "model": "Without halving, the chromosome number would double in every generation.",
+     "rubric": [
+      "1 mark: halving of chromosome number",
+      "1 mark: stays constant after fertilisation"
+     ],
+     "explanation": "Without halving, the chromosome number would double in every generation.",
+     "id": "gceol-biology-evolution-e12-d"
+    }
+   ],
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-dna-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-dna",
+   "prompt": "Human body cells contain:",
+   "choices": [
+    "46 chromosomes",
+    "23 chromosomes",
+    "92 chromosomes",
+    "12 chromosomes"
+   ],
+   "answer": 0,
+   "explanation": "23 pairs.",
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-dna-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-dna",
+   "prompt": "Base pairing is:",
+   "choices": [
+    "A with C",
+    "T with G",
+    "A with T and C with G",
+    "A with G"
+   ],
+   "answer": 2,
+   "explanation": "Complementary.",
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-dna-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-dna",
+   "prompt": "Mitosis results in:",
+   "choices": [
+    "half the chromosomes",
+    "one cell",
+    "two identical cells",
+    "four gametes"
+   ],
+   "answer": 2,
+   "explanation": "Identical cells.",
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-dna-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-dna",
+   "prompt": "Gametes are made by:",
+   "choices": [
+    "digestion",
+    "osmosis",
+    "mitosis",
+    "meiosis"
+   ],
+   "answer": 3,
+   "explanation": "Meiosis.",
+   "chapter": "gceol-biology-evolution"
+  },
+  {
+   "id": "gceol-biology-dna-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-dna",
+   "prompt": "A female has sex chromosomes:",
+   "choices": [
+    "XY",
+    "XX",
+    "YY",
+    "X only"
+   ],
+   "answer": 1,
+   "explanation": "XX.",
+   "chapter": "gceol-biology-evolution"
+  }
+ ]
+}

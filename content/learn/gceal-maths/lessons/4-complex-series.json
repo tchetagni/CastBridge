@@ -1,0 +1,781 @@
+{
+ "chapter": "gceal-maths-complex-series",
+ "lessons": [
+  {
+   "id": "gceal-maths-complex-numbers",
+   "title": "Complex numbers",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Perform arithmetic with complex numbers",
+    "Use the Argand diagram, modulus and argument",
+    "Solve quadratics with complex roots"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-complex-series-e01",
+    "gceal-maths-complex-series-e02",
+    "gceal-maths-complex-series-e03",
+    "gceal-maths-complex-series-e04",
+    "gceal-maths-complex-series-e05",
+    "gceal-maths-complex-series-e06"
+   ],
+   "selfCheck": [
+    "gceal-maths-complex-numbers-q1",
+    "gceal-maths-complex-numbers-q2",
+    "gceal-maths-complex-numbers-q3",
+    "gceal-maths-complex-numbers-q4",
+    "gceal-maths-complex-numbers-q5"
+   ],
+   "reviewNotes": [
+    "IMPORTANT: complex numbers may belong to the Further Mathematics syllabus rather than Advanced Level Mathematics in Cameroon: confirm with the official syllabus before release; delete this lesson if not on the syllabus.",
+    "Polar form and De Moivre are in the Further Mathematics packs.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Complex numbers",
+     "md": "$i^2=-1$. A complex number is $z=a+bi$ with real part $a$ and imaginary part $b$. Add/subtract real and imaginary parts separately; multiply like brackets and replace $i^2$ by $-1$. The **conjugate** of $z$ is $\\bar z=a-bi$ and $z\\bar z=a^2+b^2$ is real."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Division",
+     "md": "To divide, multiply numerator and denominator by the conjugate of the denominator: $\\frac{2+i}{1-i}=\\frac{(2+i)(1+i)}{(1-i)(1+i)}=\\frac{1+3i}{2}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Argand diagram, modulus, argument",
+     "md": "$z=a+bi$ is the point $(a,b)$. Modulus $|z|=\\sqrt{a^2+b^2}$; argument $\\theta=\\text{arg }z$ with $\\tan\\theta=\\frac ba$ (check the quadrant). A quadratic with real coefficients and $\\Delta<0$ has two roots that are complex conjugates: $x=\\frac{-b\\pm i\\sqrt{-\\Delta}}{2a}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "$i^2=-1$ not $+1$. The conjugate of $2-5i$ is $2+5i$ (only the sign of the imaginary part changes). Take care with the quadrant of the argument."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Calculate $(3+2i)(1-4i)$.",
+     "steps": [
+      "Expand: $3-12i+2i-8i^2$.",
+      "$i^2=-1$: $3-10i+8=11-10i$."
+     ],
+     "answer": "$11-10i$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Solve $x^2-4x+13=0$.",
+     "steps": [
+      "$\\Delta=16-52=-36$, so $x=\\frac{4\\pm\\sqrt{-36}}{2}=\\frac{4\\pm6i}{2}$.",
+      "Check: sum of roots $=4$, product $=(2+3i)(2-3i)=13$."
+     ],
+     "answer": "$x=2\\pm3i$",
+     "figure": {
+      "kind": "shapes",
+      "w": 260,
+      "h": 388,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 194.0,
+        "x2": 232.0,
+        "y2": 194.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 66.0,
+        "y1": 360.0,
+        "x2": 66.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 98.0,
+        "y1": 191.0,
+        "x2": 98.0,
+        "y2": 197.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 98.0,
+        "y": 211.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 162.0,
+        "y1": 191.0,
+        "x2": 162.0,
+        "y2": 197.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.0,
+        "y": 211.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 226.0,
+        "y1": 191.0,
+        "x2": 226.0,
+        "y2": 197.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 226.0,
+        "y": 211.0,
+        "text": "5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 63.0,
+        "y1": 322.0,
+        "x2": 69.0,
+        "y2": 322.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 58.0,
+        "y": 326.0,
+        "text": "−4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 63.0,
+        "y1": 66.0,
+        "x2": 69.0,
+        "y2": 66.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 58.0,
+        "y": 70.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 66.0,
+        "y1": 194.0,
+        "x2": 162.0,
+        "y2": 66.0,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 66.0,
+        "y1": 194.0,
+        "x2": 162.0,
+        "y2": 322.0,
+        "color": "orange",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 162.0,
+        "cy": 66.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 172.0,
+        "y": 60.0,
+        "text": "3 + 4i",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 162.0,
+        "cy": 322.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 172.0,
+        "y": 338.0,
+        "text": "3 − 4i",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 91.6,
+        "y": 165.2,
+        "text": "θ",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-maclaurin",
+   "title": "Maclaurin series",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find Maclaurin series from derivatives",
+    "Use standard series for $e^x$, $\\sin x$, $\\cos x$, $\\ln(1+x)$",
+    "Approximate values and combine series"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-complex-series-e07",
+    "gceal-maths-complex-series-e08",
+    "gceal-maths-complex-series-e09",
+    "gceal-maths-complex-series-e10",
+    "gceal-maths-complex-series-e11",
+    "gceal-maths-complex-series-e12"
+   ],
+   "selfCheck": [
+    "gceal-maths-maclaurin-q1",
+    "gceal-maths-maclaurin-q2",
+    "gceal-maths-maclaurin-q3",
+    "gceal-maths-maclaurin-q4",
+    "gceal-maths-maclaurin-q5"
+   ],
+   "reviewNotes": [
+    "Range of validity and the binomial series for rational $n$ are only mentioned.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Maclaurin series",
+     "md": "$f(x)=f(0)+f'(0)x+\\frac{f''(0)}{2!}x^2+\\frac{f'''(0)}{3!}x^3+\\cdots$. It requires $f$ and its derivatives to exist at 0 (so $\\ln x$ has no Maclaurin series, but $\\ln(1+x)$ does)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Standard series",
+     "md": "$e^x=1+x+\\frac{x^2}{2!}+\\frac{x^3}{3!}+\\cdots$ (all $x$); $\\sin x=x-\\frac{x^3}{3!}+\\frac{x^5}{5!}-\\cdots$; $\\cos x=1-\\frac{x^2}{2!}+\\frac{x^4}{4!}-\\cdots$ (all $x$, in radians); $\\ln(1+x)=x-\\frac{x^2}{2}+\\frac{x^3}{3}-\\cdots$ for $-1<x\\leq1$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Using them",
+     "md": "Replace $x$ by a function ($e^{2x}$: use $2x$), multiply series and keep terms up to the required power. For approximations use $x$ small: the first few terms are very accurate near 0, as in the picture."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Forgetting the factorials. Replacing $x$ by $2x$ must also change $x^2$ to $(2x)^2=4x^2$. Using a series outside its range of validity (e.g. $\\ln(1+x)$ with $x=3$)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the series for $e^{2x}$ up to $x^3$.",
+     "steps": [
+      "Replace $x$ by $2x$: $1+2x+\\frac{(2x)^2}{2}+\\frac{(2x)^3}{6}$.",
+      "$=1+2x+2x^2+\\frac{4}{3}x^3$."
+     ],
+     "answer": "$1+2x+2x^2+\\frac{4}{3}x^3$",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3,
+      "xmax": 3,
+      "ymin": -2,
+      "ymax": 2,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "sin(x)",
+        "color": "blue",
+        "label": "sin x"
+       },
+       {
+        "expr": "x-x^3/6",
+        "color": "orange"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "x"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Estimate $\\sin0.2$ using two terms, and $\\ln1.1$ using three terms.",
+     "steps": [
+      "$\\sin0.2\\approx0.2-\\frac{0.008}{6}=0.19867$ (true value 0.198669).",
+      "$\\ln1.1\\approx0.1-\\frac{0.01}{2}+\\frac{0.001}{3}=0.09533$ (true value 0.09531)."
+     ],
+     "answer": "$0.19867$ and $0.09533$"
+    }
+   ],
+   "chapter": "gceal-maths-complex-series"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-maths-complex-series-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-complex-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $|3+4i|$.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "$\\sqrt{9+16}$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-complex-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$i^3=$",
+   "choices": [
+    "$i$",
+    "$-1$",
+    "$1$",
+    "$-i$"
+   ],
+   "answer": 3,
+   "explanation": "$i^3=i^2\\cdot i=-i$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-complex-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The conjugate of $2-5i$ is $-2+5i$.",
+   "answer": false,
+   "explanation": "It is $2+5i$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-complex-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The sum of the roots of $x^2+2x+5=0$ is",
+   "choices": [
+    "$2$",
+    "$5$",
+    "$-2$",
+    "$-5$"
+   ],
+   "answer": 2,
+   "explanation": "Roots $-1\\pm2i$; sum $=-2$, product $=5$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-complex-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the complex number $z$ such that $z+2\\bar z=3-2i$.",
+   "model": "Let $z=a+bi$. Then $z+2\\bar z=3a-bi$. So $3a=3$ and $-b=-2$, giving $z=1+2i$. Check: $1+2i+2(1-2i)=3-2i$.",
+   "rubric": [
+    "Sets $z=a+bi$ (1)",
+    "Two equations (1)",
+    "$z=1+2i$ (1)"
+   ],
+   "explanation": "Let $z=a+bi$. Then $z+2\\bar z=3a-bi$. So $3a=3$ and $-b=-2$, giving $z=1+2i$. Check: $1+2i+2(1-2i)=3-2i$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-complex-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The quadratic $x^2-6x+25=0$ has roots $z_1=3+4i$ and $z_2=3-4i$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $|z_1|$.",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "$\\sqrt{9+16}=5$.",
+     "id": "gceal-maths-complex-series-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $\\text{arg }z_1$ in degrees (2 d.p.).",
+     "answer": 53.13,
+     "tolerance": 0.01,
+     "explanation": "$\\tan\\theta=\\frac{4}{3}$ in the first quadrant: $\\theta=53.13\\degree$.",
+     "id": "gceal-maths-complex-series-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the product $z_1z_2$.",
+     "answer": 25,
+     "tolerance": 0,
+     "explanation": "$(3+4i)(3-4i)=9+16=25$, equal to $\\frac ca$.",
+     "id": "gceal-maths-complex-series-e06-c"
+    }
+   ],
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-numbers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-complex-numbers",
+   "prompt": "$(1+i)^2=$",
+   "choices": [
+    "$1+i$",
+    "$2i$",
+    "$0$",
+    "$2$"
+   ],
+   "answer": 1,
+   "explanation": "$1+2i-1$.",
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-numbers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-complex-numbers",
+   "prompt": "$z\\bar z$ for $z=3+4i$ is",
+   "choices": [
+    "$5$",
+    "$-7$",
+    "$25$",
+    "$24i$"
+   ],
+   "answer": 2,
+   "explanation": "$a^2+b^2$.",
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-numbers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-complex-numbers",
+   "prompt": "Complex roots of a real quadratic come in",
+   "choices": [
+    "triples",
+    "pairs with real sum 0 always",
+    "equal pairs",
+    "conjugate pairs"
+   ],
+   "answer": 3,
+   "explanation": "Real coefficients.",
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-numbers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-complex-numbers",
+   "prompt": "The point representing $-2+i$ on the Argand diagram is",
+   "choices": [
+    "$(-2,1)$",
+    "$(-2,-1)$",
+    "$(1,-2)$",
+    "$(2,-1)$"
+   ],
+   "answer": 0,
+   "explanation": "(real, imaginary).",
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-numbers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-complex-numbers",
+   "prompt": "$\\frac{1}{i}=$",
+   "choices": [
+    "$-1$",
+    "$-i$",
+    "$i$",
+    "$1$"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{i}{i^2}$.",
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-maclaurin",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the coefficient of $x^2$ in the Maclaurin series of $\\cos x$.",
+   "answer": -0.5,
+   "tolerance": 0.001,
+   "explanation": "$-\\frac{1}{2!}=-\\frac{1}{2}$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-maclaurin",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The first two terms of $e^{-x}$ are",
+   "choices": [
+    "$1+x$",
+    "$1-\\frac{x}{2}$",
+    "$1-x$",
+    "$-1-x$"
+   ],
+   "answer": 2,
+   "explanation": "Replace $x$ by $-x$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-maclaurin",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\ln x$ has a Maclaurin series.",
+   "answer": false,
+   "explanation": "$\\ln x$ is not defined at $x=0$; use $\\ln(1+x)$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-maclaurin",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The coefficient of $x^3$ in the series of $\\sin2x$ is",
+   "choices": [
+    "$-\\frac{4}{3}$",
+    "$-\\frac{8}{3}$",
+    "$\\frac{4}{3}$",
+    "$-\\frac{1}{3}$"
+   ],
+   "answer": 0,
+   "explanation": "$-\\frac{(2x)^3}{6}=-\\frac{8}{6}x^3$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-maclaurin",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the series for $(1+x)e^x$ up to $x^2$.",
+   "model": "$e^x=1+x+\\frac{x^2}{2}+\\cdots$. Multiply by $(1+x)$: $1+x+\\frac{x^2}{2}+x+x^2=1+2x+\\frac{3}{2}x^2$.",
+   "rubric": [
+    "Series of $e^x$ (1)",
+    "Multiplication (1)",
+    "$1+2x+\\frac{3}{2}x^2$ (1)"
+   ],
+   "explanation": "$e^x=1+x+\\frac{x^2}{2}+\\cdots$. Multiply by $(1+x)$: $1+x+\\frac{x^2}{2}+x+x^2=1+2x+\\frac{3}{2}x^2$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-complex-series-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-maclaurin",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Consider $e^x\\sin x$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the coefficient of $x^3$ in its series.",
+     "answer": 0.3333,
+     "tolerance": 0.001,
+     "explanation": "$\\left(1+x+\\frac{x^2}{2}\\right)\\left(x-\\frac{x^3}{6}\\right)=x+x^2+\\left(\\frac{1}{2}-\\frac{1}{6}\\right)x^3$, so $\\frac{1}{3}$.",
+     "id": "gceal-maths-complex-series-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Use $x+x^2+\\frac{x^3}{3}$ to estimate $e^{0.1}\\sin0.1$ (4 d.p.).",
+     "answer": 0.1103,
+     "tolerance": 0.00030000099999999473,
+     "explanation": "$0.1+0.01+0.000333=0.110333$ (true value 0.110333).",
+     "id": "gceal-maths-complex-series-e12-b"
+    }
+   ],
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-maclaurin-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-maclaurin",
+   "prompt": "$e^x$ expanded begins",
+   "choices": [
+    "$x+\\frac{x^2}{2}+\\cdots$",
+    "$1+x+\\frac{x^2}{2}+\\cdots$",
+    "$1+\\frac{x}{2}+\\cdots$",
+    "$1+x+x^2+\\cdots$"
+   ],
+   "answer": 1,
+   "explanation": "Factorials.",
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-maclaurin-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-maclaurin",
+   "prompt": "$\\sin x$ has only",
+   "choices": [
+    "odd powers of $x$",
+    "all powers",
+    "even powers of $x$",
+    "no powers"
+   ],
+   "answer": 0,
+   "explanation": "$x,x^3,x^5,\\ldots$",
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-maclaurin-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-maclaurin",
+   "prompt": "The series of $\\cos x$ starts with",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$1$",
+    "$0$",
+    "$x$"
+   ],
+   "answer": 1,
+   "explanation": "$\\cos0=1$.",
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-maclaurin-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-maclaurin",
+   "prompt": "$\\ln(1+x)$ series is valid for",
+   "choices": [
+    "all $x$",
+    "$x>1$",
+    "$x<-1$",
+    "$-1<x\\leq1$"
+   ],
+   "answer": 3,
+   "explanation": "Convergence range.",
+   "chapter": "gceal-maths-complex-series"
+  },
+  {
+   "id": "gceal-maths-maclaurin-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-maclaurin",
+   "prompt": "$f(0)=1$, $f'(0)=2$, $f''(0)=6$: the series begins",
+   "choices": [
+    "$1+2x+3x^2$",
+    "$1+2x+x^2$",
+    "$1+x+3x^2$",
+    "$1+2x+6x^2$"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{6}{2!}=3$.",
+   "chapter": "gceal-maths-complex-series"
+  }
+ ]
+}

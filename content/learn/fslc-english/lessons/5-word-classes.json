@@ -1,0 +1,2440 @@
+{
+ "chapter": "fslc-english-word-classes",
+ "lessons": [
+  {
+   "id": "fslc-english-parts-of-speech",
+   "title": "Parts of speech",
+   "minutes": 30,
+   "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the eight parts of speech and say what each one does.",
+    "Pick out nouns, pronouns, verbs, adjectives and adverbs in a sentence.",
+    "Use the correct part of speech to complete a sentence."
+   ],
+   "prerequisites": [
+    "fslc-english-grammar-main"
+   ],
+   "exercises": [
+    "fslc-english-word-classes-e01",
+    "fslc-english-word-classes-e02",
+    "fslc-english-word-classes-e03",
+    "fslc-english-word-classes-e04",
+    "fslc-english-word-classes-e05",
+    "fslc-english-word-classes-e06"
+   ],
+   "selfCheck": [
+    "fslc-english-parts-of-speech-q1",
+    "fslc-english-parts-of-speech-q2",
+    "fslc-english-parts-of-speech-q3",
+    "fslc-english-parts-of-speech-q4",
+    "fslc-english-parts-of-speech-q5"
+   ],
+   "reviewNotes": [
+    "Articles are treated as a small group; check whether the syllabus calls them 'determiners' or 'articles'.",
+    "Overlap with the existing Grammar lesson (pronouns, prepositions) is deliberate.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The parts of speech",
+     "md": "Every word in a sentence has a job. A **noun** names a person, place, thing or idea (Mary, Douala, mango). A **pronoun** takes the place of a noun (he, she, it, they). A **verb** shows an action or a state (run, eat, is). An **adjective** describes a noun (tall, ripe). An **adverb** tells how, when or where (quickly, today, here)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "More parts of speech",
+     "md": "A **preposition** shows position or link (on, under, in, with). A **conjunction** joins words or sentences (and, but, because, or). An **interjection** shows a sudden feeling (Oh! Wow! Ouch!). The words *a*, *an* and *the* are articles: they come before nouns."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 40,
+        "text": "noun",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 62,
+        "text": "Mary, school",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 40,
+        "text": "pronoun",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 62,
+        "text": "he, they",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 204,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 40,
+        "text": "verb",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 62,
+        "text": "run, is",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 304,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 40,
+        "text": "adjective",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 62,
+        "text": "tall, red",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 110,
+        "text": "adverb",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 132,
+        "text": "quickly",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 110,
+        "text": "preposition",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 132,
+        "text": "on, under",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 204,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 110,
+        "text": "conjunction",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 132,
+        "text": "and, but",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 304,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 110,
+        "text": "interjection",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 132,
+        "text": "Wow! Oh!",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The eight parts of speech with examples.",
+     "alt": "Eight boxes. Each shows a part of speech with examples: noun (Mary, school), pronoun (he, they), verb (run, is), adjective (tall, red), adverb (quickly), preposition (on, under), conjunction (and, but) and interjection (Wow, Oh)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "How to find the part of speech",
+     "md": "Ask what the word **does** in the sentence, not how it looks. A word can change its job: in *We play football*, play is a verb; in *We watched a play*, play is a noun. Questions that help: **What** or **who**? (noun) **Which kind**? (adjective) **How**? (adverb)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using an adjective instead of an adverb: *She sings beautiful* is wrong; say *She sings beautifully*.\n- Thinking that every word ending in -ly is an adverb (friendly is an adjective).\n- Forgetting that a pronoun replaces a noun: *Ada said that Ada was tired* is better as *Ada said that she was tired*."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Name the part of speech of each underlined idea in: The tall boy quickly ate the ripe mango.",
+     "steps": [
+      "tall and ripe tell us **what kind**: they are adjectives.",
+      "boy and mango name things: they are nouns.",
+      "ate shows the action: it is a verb. quickly tells how he ate: it is an adverb."
+     ],
+     "answer": "tall, ripe = adjectives; boy, mango = nouns; ate = verb; quickly = adverb."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Choose the correct word: She sings (beautiful / beautifully).",
+     "steps": [
+      "The word is describing the verb sings: it tells **how**.",
+      "A word that describes a verb is an adverb, so we use beautifully."
+     ],
+     "answer": "She sings beautifully."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-adjectives-adverbs",
+   "title": "Adjectives, adverbs and comparison",
+   "minutes": 30,
+   "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use adjectives and adverbs correctly.",
+    "Form the comparative and the superlative.",
+    "Use good/well and other easily confused pairs."
+   ],
+   "prerequisites": [
+    "fslc-english-parts-of-speech"
+   ],
+   "exercises": [
+    "fslc-english-word-classes-e07",
+    "fslc-english-word-classes-e08",
+    "fslc-english-word-classes-e09",
+    "fslc-english-word-classes-e10",
+    "fslc-english-word-classes-e11",
+    "fslc-english-word-classes-e12"
+   ],
+   "selfCheck": [
+    "fslc-english-adjectives-adverbs-q1",
+    "fslc-english-adjectives-adverbs-q2",
+    "fslc-english-adjectives-adverbs-q3",
+    "fslc-english-adjectives-adverbs-q4",
+    "fslc-english-adjectives-adverbs-q5"
+   ],
+   "reviewNotes": [
+    "Spelling rule 'double the consonant' (big, bigger) appears here and again in the spelling lesson.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Adjectives and adverbs",
+     "md": "An **adjective** describes a noun: *a fast bus*. An **adverb** describes a verb, an adjective or another adverb: *The bus goes fast. It is very fast.* Many adverbs of manner end in **-ly**: slow → slowly, careful → carefully, happy → happily. Some adverbs have no -ly: fast, hard, late, early."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 235,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 150,
+        "w": 90,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 155,
+        "y": 105,
+        "w": 90,
+        "h": 95,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 60,
+        "w": 90,
+        "h": 140,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 180,
+        "text": "tall",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 160,
+        "text": "taller",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 135,
+        "text": "tallest",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 220,
+        "text": "Ada",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 220,
+        "text": "Bih",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 220,
+        "text": "Che",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 30,
+        "text": "Ada is tall. Bih is taller. Che is the tallest.",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Comparing three girls: tall, taller, tallest.",
+     "alt": "Three bars of growing height. The first is labelled tall (Ada), the second taller (Bih) and the third tallest (Che)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Comparing",
+     "md": "Short words: add **-er** and **-est** (tall, taller, tallest). Long words: use **more** and **most** (beautiful, more beautiful, most beautiful). We use **than** to compare two things: *Bih is taller than Ada.* Irregular forms: good, better, best; bad, worse, worst; little, less, least; far, farther, farthest."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- *more taller* or *most tallest*: use only one way of comparing.\n- *good* and *well*: *good* is an adjective (a good cook), *well* is an adverb (she cooks well).\n- Using *than* with the superlative: say *the tallest in the class*, not *the tallest than*.\n- The spelling change: big, bigger; happy, happier."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Complete: Ada is tall. Bih is ...... than Ada. Che is the ...... of the three.",
+     "steps": [
+      "Tall is a short word, so we add -er to compare two people: taller.",
+      "For three or more, we add -est: the tallest."
+     ],
+     "answer": "taller; tallest."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Choose good or well: Mama cooks ...... and her ndolé is very ......",
+     "steps": [
+      "Cooks is a verb, so we need an adverb: well.",
+      "The word before ndolé is a description of it, so we need an adjective: good."
+     ],
+     "answer": "Mama cooks well and her ndolé is very good."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-vocabulary-families",
+   "title": "Vocabulary: synonyms, antonyms, prefixes, suffixes and word families",
+   "minutes": 30,
+   "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find synonyms and antonyms of common words.",
+    "Use prefixes and suffixes to build new words.",
+    "Build a word family from a root word."
+   ],
+   "prerequisites": [
+    "fslc-english-parts-of-speech"
+   ],
+   "exercises": [
+    "fslc-english-word-classes-e13",
+    "fslc-english-word-classes-e14",
+    "fslc-english-word-classes-e15",
+    "fslc-english-word-classes-e16",
+    "fslc-english-word-classes-e17",
+    "fslc-english-word-classes-e18"
+   ],
+   "selfCheck": [
+    "fslc-english-vocabulary-families-q1",
+    "fslc-english-vocabulary-families-q2",
+    "fslc-english-vocabulary-families-q3",
+    "fslc-english-vocabulary-families-q4",
+    "fslc-english-vocabulary-families-q5"
+   ],
+   "reviewNotes": [
+    "The lists of prefixes/suffixes are selective, not exhaustive; compare with the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Synonyms and antonyms",
+     "md": "**Synonyms** are words with nearly the same meaning: big and large, begin and start, glad and happy. **Antonyms** are words with opposite meanings: hot and cold, early and late, generous and mean. Synonyms are not always exactly the same: *tiny* is smaller than *small*. Always check the sentence."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Prefixes and suffixes",
+     "md": "A **prefix** goes at the **beginning** of a word and changes its meaning: *un-* (unhappy), *dis-* (disagree), *re-* (rewrite), *in-* (incorrect), *mis-* (misspell). A **suffix** goes at the **end**: *-ful* (helpful), *-less* (helpless), *-ness* (kindness), *-er* (teacher), *-ly* (slowly)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 105,
+        "r": 38,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 111,
+        "text": "help",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 165,
+        "y1": 85,
+        "x2": 110,
+        "y2": 55,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 235,
+        "y1": 85,
+        "x2": 290,
+        "y2": 55,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 165,
+        "y1": 125,
+        "x2": 110,
+        "y2": 155,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 235,
+        "y1": 125,
+        "x2": 290,
+        "y2": 155,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 55,
+        "text": "helpful",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 55,
+        "text": "helpless",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 165,
+        "text": "helper",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 165,
+        "text": "helping",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 205,
+        "text": "one root word, many related words",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A word family built on the root word 'help'.",
+     "alt": "A circle with the word help in the middle. Four lines go out to the words helpful, helpless, helper and helping."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Building a word family",
+     "md": "Start with the **root** word. Add prefixes and suffixes and check each new word in a dictionary. Example: *care* → careful, careless, carefully, carelessly. Sometimes the spelling changes: happy → happiness (y becomes i); hope → hopeful (the e stays) but hope → hoping (the e goes)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using *dis-* or *un-* with the wrong word: we say *unhappy* and *disagree*, not *dishappy* or *unagree*.\n- Forgetting that a suffix can change the **part of speech**: kind (adjective) → kindness (noun).\n- Choosing a synonym that does not fit the sentence."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write an antonym of each word using a prefix: happy, agree, correct.",
+     "steps": [
+      "Happy takes un-: unhappy.",
+      "Agree takes dis-: disagree.",
+      "Correct takes in-: incorrect."
+     ],
+     "answer": "unhappy, disagree, incorrect."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Make words from the root 'care': one with -ful, one with -less, one with -ly.",
+     "steps": [
+      "care + ful = careful (a person who takes care).",
+      "care + less = careless (without care).",
+      "careful + ly = carefully (an adverb)."
+     ],
+     "answer": "careful, careless, carefully."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-spelling-rules",
+   "title": "Spelling rules and commonly confused words",
+   "minutes": 30,
+   "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the rules for plurals and for adding -ing, -ed and -er.",
+    "Spell common difficult words correctly.",
+    "Tell apart words that sound the same (homophones)."
+   ],
+   "prerequisites": [
+    "fslc-english-grammar-main"
+   ],
+   "exercises": [
+    "fslc-english-word-classes-e19",
+    "fslc-english-word-classes-e20",
+    "fslc-english-word-classes-e21",
+    "fslc-english-word-classes-e22",
+    "fslc-english-word-classes-e23",
+    "fslc-english-word-classes-e24"
+   ],
+   "selfCheck": [
+    "fslc-english-spelling-rules-q1",
+    "fslc-english-spelling-rules-q2",
+    "fslc-english-spelling-rules-q3",
+    "fslc-english-spelling-rules-q4",
+    "fslc-english-spelling-rules-q5"
+   ],
+   "reviewNotes": [
+    "Spelling follows British English (anglophone Cameroon). The 'i before e' rule has exceptions; the lesson lists only one.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Plural rules",
+     "md": "Most nouns add **-s**: book, books. Nouns ending in **s, x, z, ch, sh** add **-es**: box, boxes; church, churches. A noun ending in **consonant + y** changes y to **-ies**: baby, babies (but boy, boys). Many nouns in **-f / -fe** change to **-ves**: leaf, leaves; knife, knives. Irregular plurals: child, children; man, men; woman, women; tooth, teeth; foot, feet; mouse, mice."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 40,
+        "text": "box",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 62,
+        "text": "boxes",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 40,
+        "text": "baby",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 62,
+        "text": "babies",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 204,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 40,
+        "text": "leaf",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 62,
+        "text": "leaves",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 304,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 40,
+        "text": "child",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 62,
+        "text": "children",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 110,
+        "text": "run",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 132,
+        "text": "running",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 110,
+        "text": "make",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 132,
+        "text": "making",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 204,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 110,
+        "text": "their",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 132,
+        "text": "there",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 304,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 110,
+        "text": "write",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 132,
+        "text": "right",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Spelling changes: plurals, adding -ing, and words that sound alike.",
+     "alt": "Eight boxes with word pairs: box and boxes, baby and babies, leaf and leaves, child and children, run and running, make and making, their and there, write and right."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Adding endings",
+     "md": "- Short word with one vowel and one consonant: **double** the last letter: run → running, hop → hopped, big → bigger.\n- Word ending in silent **e**: drop the e before -ing: make → making, hope → hoping.\n- Consonant + y: change y to i before -ed, -er, -est: carry → carried, happy → happier. Keep y before -ing: carrying."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Words that sound the same",
+     "md": "- **their** (belongs to them), **there** (a place), **they're** (they are).\n- **to** (towards), **too** (also, very), **two** (the number 2).\n- **write** (with a pen), **right** (correct; the opposite of left).\n- **hear** (with your ears), **here** (in this place).\n- **buy** (pay for), **by** (near), **bye** (goodbye)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing *babys* or *boxs*: follow the plural rule.\n- Forgetting to double: *runing*, *stoped*.\n- *i before e*: believe, receive, field. We write ie, except after c: receive, ceiling. There are a few exceptions, such as weird."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write the plural of: box, baby, leaf.",
+     "steps": [
+      "box ends in x, so we add -es: boxes.",
+      "baby ends in consonant + y, so y becomes ies: babies.",
+      "leaf ends in f, so f becomes ves: leaves."
+     ],
+     "answer": "boxes, babies, leaves."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Add -ing to run, make and carry.",
+     "steps": [
+      "run: one vowel and one consonant, so double the n: running.",
+      "make: drop the silent e: making.",
+      "carry: keep the y before -ing: carrying."
+     ],
+     "answer": "running, making, carrying."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-punctuation",
+   "title": "Punctuation and capital letters",
+   "minutes": 30,
+   "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use capital letters, full stops, question marks and exclamation marks.",
+    "Use commas, apostrophes and quotation marks correctly.",
+    "Punctuate a short passage."
+   ],
+   "prerequisites": [
+    "fslc-english-grammar-main"
+   ],
+   "exercises": [
+    "fslc-english-word-classes-e25",
+    "fslc-english-word-classes-e26",
+    "fslc-english-word-classes-e27",
+    "fslc-english-word-classes-e28",
+    "fslc-english-word-classes-e29",
+    "fslc-english-word-classes-e30"
+   ],
+   "selfCheck": [
+    "fslc-english-punctuation-q1",
+    "fslc-english-punctuation-q2",
+    "fslc-english-punctuation-q3",
+    "fslc-english-punctuation-q4",
+    "fslc-english-punctuation-q5"
+   ],
+   "reviewNotes": [
+    "The Oxford comma (comma before 'and') is shown both ways; the syllabus convention is to be checked. Quotation marks: single or double, to be checked.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Capital letters and end marks",
+     "md": "Use a **capital letter** for the first word of a sentence, for names of people and places (Ada, Buea, Mount Cameroon), for days and months (Monday, March) and for the word *I*. End a sentence with a **full stop** (.), a **question mark** (?) or an **exclamation mark** (!)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 40,
+        "text": "“Where are Ada’s books?” asked Mama.",
+        "size": 20,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 80,
+        "text": "capital letter   question mark   apostrophe",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 120,
+        "text": "quotation marks round the exact words spoken",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 165,
+        "text": "Mama bought rice, beans, yams, and oil.",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 200,
+        "text": "commas between the items of a list",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Punctuation marks at work in two sentences.",
+     "alt": "Two sentences. The first has quotation marks, a question mark and an apostrophe: Where are Ada's books, asked Mama. The second has commas between rice, beans, yams and oil."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Comma, apostrophe, quotation marks",
+     "md": "- **Comma**: between items in a list, after *yes* / *no*, and after a time word at the start (*In the morning, we sing.*).\n- **Apostrophe**: shows missing letters (don't = do not) and belonging (Ada's book; the boys' books).\n- **Quotation marks**: round the exact words someone says: “I am hungry,” said Ngu."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using an apostrophe for a plural: *the book's are on the table* is wrong (books).\n- *its* (belongs to it) and *it's* (it is) are different.\n- Putting a comma where a full stop is needed (a comma splice): *I was tired, I went to bed* is better as two sentences or joined with *so*."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Punctuate: where are adas books asked mama",
+     "steps": [
+      "Mama asks a question, so we need quotation marks and a question mark.",
+      "Names and the first word need capital letters: Ada's has an apostrophe for belonging.",
+      "The sentence becomes: “Where are Ada's books?” asked Mama."
+     ],
+     "answer": "“Where are Ada's books?” asked Mama."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Punctuate: mama bought rice beans yams and oil",
+     "steps": [
+      "This is a list of four things, so we put commas between them.",
+      "Mama bought rice, beans, yams and oil."
+     ],
+     "answer": "Mama bought rice, beans, yams and oil."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-english-word-classes"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "fslc-english-word-classes-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-parts-of-speech",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which word is a verb in: The children play football on Saturday.?",
+   "choices": [
+    "Saturday",
+    "children",
+    "football",
+    "play"
+   ],
+   "answer": 3,
+   "explanation": "play shows the action. The other words are nouns.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-parts-of-speech",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which word is a pronoun in: Ngu lost the book, and he cried.?",
+   "choices": [
+    "cried",
+    "he",
+    "book",
+    "Ngu"
+   ],
+   "answer": 1,
+   "explanation": "he takes the place of the noun Ngu.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-parts-of-speech",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which word is an adjective in: She wore a red dress.?",
+   "choices": [
+    "She",
+    "red",
+    "dress",
+    "wore"
+   ],
+   "answer": 1,
+   "explanation": "red describes the noun dress.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-parts-of-speech",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each word to its part of speech.",
+   "pairs": [
+    [
+     "quickly",
+     "adverb"
+    ],
+    [
+     "under",
+     "preposition"
+    ],
+    [
+     "but",
+     "conjunction"
+    ],
+    [
+     "Wow!",
+     "interjection"
+    ]
+   ],
+   "explanation": "quickly tells how; under shows position; but joins ideas; Wow! shows feeling.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-parts-of-speech",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The word happily is an adjective.",
+   "answer": false,
+   "explanation": "Happily describes how something is done: it is an adverb. The adjective is happy.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-english-parts-of-speech",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Read the sentence: Mary quickly ate the sweet mango and she smiled happily.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What part of speech is 'sweet'?",
+     "choices": [
+      "adjective",
+      "noun",
+      "adverb",
+      "verb"
+     ],
+     "answer": 0,
+     "explanation": "It describes the noun mango.",
+     "id": "fslc-english-word-classes-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What part of speech is 'and'?",
+     "choices": [
+      "preposition",
+      "conjunction",
+      "adverb",
+      "pronoun"
+     ],
+     "answer": 1,
+     "explanation": "It joins two ideas.",
+     "id": "fslc-english-word-classes-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which word is a pronoun?",
+     "choices": [
+      "Mary",
+      "she",
+      "smiled",
+      "mango"
+     ],
+     "answer": 1,
+     "explanation": "she replaces Mary.",
+     "id": "fslc-english-word-classes-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which two words are adverbs?",
+     "choices": [
+      "quickly and happily",
+      "Mary and she",
+      "sweet and mango",
+      "ate and smiled"
+     ],
+     "answer": 0,
+     "explanation": "Both tell how an action was done.",
+     "id": "fslc-english-word-classes-e06-d"
+    }
+   ],
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-parts-of-speech-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-parts-of-speech",
+   "prompt": "A word that names a person, place or thing is a...",
+   "choices": [
+    "verb",
+    "noun",
+    "pronoun",
+    "adverb"
+   ],
+   "answer": 1,
+   "explanation": "Nouns name.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-parts-of-speech-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-parts-of-speech",
+   "prompt": "In the sentence 'The cat sat on the mat', the word 'on' is a...",
+   "choices": [
+    "conjunction",
+    "preposition",
+    "noun",
+    "adjective"
+   ],
+   "answer": 1,
+   "explanation": "It shows the position of the cat.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-parts-of-speech-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-parts-of-speech",
+   "prompt": "Which word is an adverb: 'The boy ran fast.'?",
+   "choices": [
+    "ran",
+    "boy",
+    "fast",
+    "The"
+   ],
+   "answer": 2,
+   "explanation": "It tells how the boy ran.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-parts-of-speech-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-parts-of-speech",
+   "prompt": "'Oh! I forgot my book.' The word 'Oh' is an...",
+   "choices": [
+    "adjective",
+    "article",
+    "interjection",
+    "adverb"
+   ],
+   "answer": 2,
+   "explanation": "It shows a sudden feeling.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-parts-of-speech-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-parts-of-speech",
+   "prompt": "Which sentence uses the right part of speech?",
+   "choices": [
+    "He speaks clear.",
+    "He speaks clearly.",
+    "He speaks clearer.",
+    "He speak clearly."
+   ],
+   "answer": 1,
+   "explanation": "Clearly (adverb) describes the verb speaks, and speaks agrees with he.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-adjectives-adverbs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Choose the correct word: This road is ...... than that one.",
+   "choices": [
+    "more wider",
+    "widest",
+    "wide",
+    "wider"
+   ],
+   "answer": 3,
+   "explanation": "We compare two roads with the -er form: wider.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-adjectives-adverbs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Choose the correct word: He ran ...... to catch the bus.",
+   "choices": [
+    "quick",
+    "quickly",
+    "more quick",
+    "quicker than"
+   ],
+   "answer": 1,
+   "explanation": "Ran is a verb, so we need an adverb.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-adjectives-adverbs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the superlative of 'good'?",
+   "choices": [
+    "best",
+    "most good",
+    "goodest",
+    "better"
+   ],
+   "answer": 0,
+   "explanation": "Good is irregular: good, better, best.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e10",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-adjectives-adverbs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the adjective with its comparative.",
+   "pairs": [
+    [
+     "small",
+     "smaller"
+    ],
+    [
+     "bad",
+     "worse"
+    ],
+    [
+     "beautiful",
+     "more beautiful"
+    ],
+    [
+     "happy",
+     "happier"
+    ]
+   ],
+   "explanation": "Regular, irregular and long words follow different rules.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-adjectives-adverbs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write two sentences about two animals or two towns. Use a comparative (-er or more) in the first sentence and a superlative (-est or most) in the second.",
+   "model": "An elephant is bigger than a goat. The elephant is the biggest animal in the zoo.",
+   "rubric": "Full marks: two correct sentences, one comparative and one superlative, correct spelling and punctuation. Half marks if only one is correct.",
+   "explanation": "An elephant is bigger than a goat. The elephant is the biggest animal in the zoo.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-english-adjectives-adverbs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Read: Bih is a good runner. She runs faster than Ada, but Che is the fastest in the school. Che trains hard every morning.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which word is a comparative?",
+     "choices": [
+      "hard",
+      "good",
+      "fastest",
+      "faster"
+     ],
+     "answer": 3,
+     "explanation": "Faster compares Bih with Ada.",
+     "id": "fslc-english-word-classes-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which word is a superlative?",
+     "choices": [
+      "runner",
+      "faster",
+      "trains",
+      "fastest"
+     ],
+     "answer": 3,
+     "explanation": "Fastest compares Che with everybody.",
+     "id": "fslc-english-word-classes-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is 'hard' in the last sentence?",
+     "choices": [
+      "noun",
+      "adverb",
+      "adjective",
+      "pronoun"
+     ],
+     "answer": 1,
+     "explanation": "Hard tells how Che trains: it is an adverb with no -ly.",
+     "id": "fslc-english-word-classes-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which word is an adjective?",
+     "choices": [
+      "every",
+      "good",
+      "morning",
+      "runs"
+     ],
+     "answer": 1,
+     "explanation": "Good describes the noun runner.",
+     "id": "fslc-english-word-classes-e12-d"
+    }
+   ],
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-adjectives-adverbs-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-adjectives-adverbs",
+   "prompt": "The comparative of 'tall' is...",
+   "choices": [
+    "more tall",
+    "tallest",
+    "taller",
+    "tallier"
+   ],
+   "answer": 2,
+   "explanation": "Add -er.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-adjectives-adverbs-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-adjectives-adverbs",
+   "prompt": "Choose: She is the ...... girl in the class.",
+   "choices": [
+    "tallest",
+    "more tall",
+    "taller",
+    "tall"
+   ],
+   "answer": 0,
+   "explanation": "In the class means three or more, so we use the superlative.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-adjectives-adverbs-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-adjectives-adverbs",
+   "prompt": "Choose: He speaks English ......",
+   "choices": [
+    "better good",
+    "well",
+    "good",
+    "goodly"
+   ],
+   "answer": 1,
+   "explanation": "Well is the adverb.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-adjectives-adverbs-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-adjectives-adverbs",
+   "prompt": "The comparative of 'bad' is...",
+   "choices": [
+    "more bad",
+    "worse",
+    "worst",
+    "badder"
+   ],
+   "answer": 1,
+   "explanation": "Bad is irregular: bad, worse, worst.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-adjectives-adverbs-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-adjectives-adverbs",
+   "prompt": "Which comparison sentence is correct?",
+   "choices": [
+    "This mango is more sweeter than that one.",
+    "This mango is sweetest than that one.",
+    "This mango is sweet than that one.",
+    "This mango is sweeter than that one."
+   ],
+   "answer": 3,
+   "explanation": "Use the -er form with than.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-vocabulary-families",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which word is a synonym of 'begin'?",
+   "choices": [
+    "start",
+    "stop",
+    "end",
+    "finish"
+   ],
+   "answer": 0,
+   "explanation": "Begin and start have the same meaning.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-vocabulary-families",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which word is an antonym of 'early'?",
+   "choices": [
+    "late",
+    "first",
+    "quick",
+    "soon"
+   ],
+   "answer": 0,
+   "explanation": "Early and late are opposites.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-vocabulary-families",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which word means 'to write again'?",
+   "choices": [
+    "rewrite",
+    "miswrite",
+    "writeful",
+    "unwrite"
+   ],
+   "answer": 0,
+   "explanation": "The prefix re- means again.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e16",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-vocabulary-families",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each root word with its new word.",
+   "pairs": [
+    [
+     "kind",
+     "kindness"
+    ],
+    [
+     "help",
+     "helpless"
+    ],
+    [
+     "teach",
+     "teacher"
+    ],
+    [
+     "slow",
+     "slowly"
+    ]
+   ],
+   "explanation": "Each suffix is added to its root: -ness, -less, -er, -ly.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-vocabulary-families",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "'Helpful' and 'helpless' have the same meaning.",
+   "answer": false,
+   "explanation": "-ful means full of help; -less means without help. They are opposites.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-english-vocabulary-families",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Read the sentence: The careless driver was very unhappy after the accident, so he promised to be more careful.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the root word of 'careless' and 'careful'?",
+     "choices": [
+      "car",
+      "less",
+      "care",
+      "ful"
+     ],
+     "answer": 2,
+     "explanation": "Both words are built on care.",
+     "id": "fslc-english-word-classes-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which word has a prefix?",
+     "choices": [
+      "careless",
+      "unhappy",
+      "careful",
+      "driver"
+     ],
+     "answer": 1,
+     "explanation": "un- is a prefix: un + happy.",
+     "id": "fslc-english-word-classes-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is an antonym of 'careless' in the passage?",
+     "choices": [
+      "driver",
+      "unhappy",
+      "accident",
+      "careful"
+     ],
+     "answer": 3,
+     "explanation": "Careless and careful are opposites.",
+     "id": "fslc-english-word-classes-e18-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many words in the sentence have the suffix -less or -ful?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "careless and careful.",
+     "id": "fslc-english-word-classes-e18-d"
+    }
+   ],
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-vocabulary-families-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-vocabulary-families",
+   "prompt": "An antonym of 'generous' is...",
+   "choices": [
+    "kind",
+    "rich",
+    "mean",
+    "happy"
+   ],
+   "answer": 2,
+   "explanation": "A generous person gives; a mean person does not.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-vocabulary-families-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-vocabulary-families",
+   "prompt": "The prefix in 'misspell' is...",
+   "choices": [
+    "-ell",
+    "m-",
+    "spell",
+    "mis-"
+   ],
+   "answer": 3,
+   "explanation": "Mis- means wrongly.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-vocabulary-families-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-vocabulary-families",
+   "prompt": "The suffix in 'kindness' is...",
+   "choices": [
+    "kind-",
+    "-n",
+    "-ess",
+    "-ness"
+   ],
+   "answer": 3,
+   "explanation": "-ness makes a noun.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-vocabulary-families-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-vocabulary-families",
+   "prompt": "A synonym of 'enormous' is...",
+   "choices": [
+    "tiny",
+    "narrow",
+    "quiet",
+    "huge"
+   ],
+   "answer": 3,
+   "explanation": "Both mean very big.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-vocabulary-families-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-vocabulary-families",
+   "prompt": "Which word belongs to the family of 'friend'?",
+   "choices": [
+    "friendship",
+    "fry",
+    "fiend",
+    "friction"
+   ],
+   "answer": 0,
+   "explanation": "Friendship = friend + ship.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e19",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-spelling-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the plural of 'baby'?",
+   "choices": [
+    "babys",
+    "babyies",
+    "babyes",
+    "babies"
+   ],
+   "answer": 3,
+   "explanation": "Consonant + y: change y to ies.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-spelling-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Add -ing to 'swim'.",
+   "choices": [
+    "swimming'",
+    "swiming",
+    "swimeing",
+    "swimming"
+   ],
+   "answer": 3,
+   "explanation": "Double the last consonant.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e21",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-spelling-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Choose the correct word: They left ...... books at school.",
+   "choices": [
+    "their",
+    "thier",
+    "there",
+    "they're"
+   ],
+   "answer": 0,
+   "explanation": "Their means belonging to them.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e22",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-spelling-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the singular with its plural.",
+   "pairs": [
+    [
+     "child",
+     "children"
+    ],
+    [
+     "tooth",
+     "teeth"
+    ],
+    [
+     "knife",
+     "knives"
+    ],
+    [
+     "church",
+     "churches"
+    ]
+   ],
+   "explanation": "These plurals are irregular or follow the -ves and -es rules.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-spelling-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The correct spelling is 'recieve'.",
+   "answer": false,
+   "explanation": "After c we write ei: receive.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-english-spelling-rules",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Correct the mistakes in this sentence: The babys of the two womans were playing in the churchs yard, and they were runing to there mothers.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which is the correct plural of 'baby'?",
+     "choices": [
+      "babyys",
+      "babies",
+      "babys",
+      "babyes"
+     ],
+     "answer": 1,
+     "explanation": "Consonant + y gives ies.",
+     "id": "fslc-english-word-classes-e24-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which is the correct plural of 'woman'?",
+     "choices": [
+      "womens",
+      "women",
+      "womans",
+      "womanes"
+     ],
+     "answer": 1,
+     "explanation": "Woman is irregular: women.",
+     "id": "fslc-english-word-classes-e24-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which is the correct spelling?",
+     "choices": [
+      "runeing",
+      "running",
+      "runing",
+      "runnning"
+     ],
+     "answer": 1,
+     "explanation": "Double the n before -ing.",
+     "id": "fslc-english-word-classes-e24-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which word is needed in 'they were running to ...... mothers'?",
+     "choices": [
+      "they're",
+      "their",
+      "there",
+      "thare"
+     ],
+     "answer": 1,
+     "explanation": "The mothers belong to them.",
+     "id": "fslc-english-word-classes-e24-d"
+    }
+   ],
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-spelling-rules-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-spelling-rules",
+   "prompt": "The plural of 'box' is...",
+   "choices": [
+    "boxs",
+    "boxen",
+    "boxes",
+    "boxies"
+   ],
+   "answer": 2,
+   "explanation": "Words ending in x add -es.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-spelling-rules-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-spelling-rules",
+   "prompt": "The plural of 'leaf' is...",
+   "choices": [
+    "leavs",
+    "leaves",
+    "leafs",
+    "leafes"
+   ],
+   "answer": 1,
+   "explanation": "f changes to ves.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-spelling-rules-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-spelling-rules",
+   "prompt": "Choose: I ...... a loud noise.",
+   "choices": [
+    "heared",
+    "hered",
+    "heard",
+    "herd"
+   ],
+   "answer": 2,
+   "explanation": "Heard (past of hear); herd is a group of animals.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-spelling-rules-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-spelling-rules",
+   "prompt": "The -ing form of 'make' is...",
+   "choices": [
+    "making",
+    "makeing",
+    "makking",
+    "maaking"
+   ],
+   "answer": 0,
+   "explanation": "Drop the silent e.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-spelling-rules-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-spelling-rules",
+   "prompt": "Choose: She has ...... sisters.",
+   "choices": [
+    "to",
+    "tow",
+    "too",
+    "two"
+   ],
+   "answer": 3,
+   "explanation": "Two is the number 2.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e25",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-punctuation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which sentence is punctuated correctly?",
+   "choices": [
+    "We bought pens, books, and rulers,",
+    "We bought pens books and rulers",
+    "we bought pens, books and rulers",
+    "We bought pens, books and rulers."
+   ],
+   "answer": 3,
+   "explanation": "A capital letter at the start, commas in the list, one full stop at the end.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e26",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-punctuation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is correct?",
+   "choices": [
+    "Ada's bag is red.",
+    "Adas bag is red.",
+    "Ada,s bag is red.",
+    "Adas' bag is red."
+   ],
+   "answer": 0,
+   "explanation": "The apostrophe goes before the s to show that the bag belongs to one girl.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e27",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-english-punctuation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What does the apostrophe show in 'don't'?",
+   "choices": [
+    "A plural",
+    "Missing letters",
+    "A question",
+    "Belonging"
+   ],
+   "answer": 1,
+   "explanation": "Don't = do not: the o is missing.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e28",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-punctuation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "'It's' means 'it is' (or 'it has').",
+   "answer": true,
+   "explanation": "Its (no apostrophe) shows belonging.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e29",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "fslc-english-punctuation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write the sentence with correct punctuation and capital letters: on monday ngu asked where is the key",
+   "model": "On Monday, Ngu asked, “Where is the key?”",
+   "rubric": "Full marks: capital letters for On, Monday, Ngu and Where; a comma after Monday (accept no comma) and after asked; quotation marks; a question mark inside the quotation marks.",
+   "explanation": "On Monday, Ngu asked, “Where is the key?”",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-word-classes-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-english-punctuation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Punctuate the passage in your head: mama said children come and eat the food is ready ngu shouted yes mama we are coming",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What mark goes at the end of 'the food is ready'?",
+     "choices": [
+      "full stop",
+      "apostrophe",
+      "question mark",
+      "comma"
+     ],
+     "answer": 0,
+     "explanation": "It is a statement.",
+     "id": "fslc-english-word-classes-e30-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which words must start with a capital letter?",
+     "choices": [
+      "shouted, coming",
+      "food, ready",
+      "children, come",
+      "Mama, Ngu, Yes"
+     ],
+     "answer": 3,
+     "explanation": "Names and the first word of a sentence or speech.",
+     "id": "fslc-english-word-classes-e30-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What goes round the words spoken by Mama?",
+     "choices": [
+      "full stops",
+      "capital letters",
+      "commas",
+      "quotation marks"
+     ],
+     "answer": 3,
+     "explanation": "They show the exact words.",
+     "id": "fslc-english-word-classes-e30-c"
+    }
+   ],
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-punctuation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-punctuation",
+   "prompt": "What mark ends a question?",
+   "choices": [
+    ".",
+    ",",
+    "!",
+    "?"
+   ],
+   "answer": 3,
+   "explanation": "A question mark.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-punctuation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-punctuation",
+   "prompt": "Which sentence needs a capital letter?",
+   "choices": [
+    "Ada is my friend.",
+    "Mount Cameroon is high.",
+    "I am ten.",
+    "we went to buea."
+   ],
+   "answer": 3,
+   "explanation": "The sentence starts with we, and Buea is a place name.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-punctuation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-punctuation",
+   "prompt": "'The girl's books' means books belonging to...",
+   "choices": [
+    "the girls",
+    "one girl",
+    "no girl",
+    "two girls"
+   ],
+   "answer": 1,
+   "explanation": "'s with one owner.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-punctuation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-punctuation",
+   "prompt": "Where does a comma go in this list: pens pencils and rulers?",
+   "choices": [
+    "after and",
+    "nowhere",
+    "after rulers",
+    "after pens"
+   ],
+   "answer": 3,
+   "explanation": "Pens, pencils and rulers.",
+   "chapter": "fslc-english-word-classes"
+  },
+  {
+   "id": "fslc-english-punctuation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-english-punctuation",
+   "prompt": "'Its' without an apostrophe shows...",
+   "choices": [
+    "a list",
+    "it is",
+    "a question",
+    "belonging"
+   ],
+   "answer": 3,
+   "explanation": "The dog wagged its tail.",
+   "chapter": "fslc-english-word-classes"
+  }
+ ]
+}

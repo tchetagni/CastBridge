@@ -1,0 +1,421 @@
+{
+ "chapter": "gceol-chemistry-redox",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-redox-reactions",
+   "title": "Oxidation, reduction and redox reactions",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Oxidation and reduction (redox): oxygen, hydrogen, electrons, oxidising/reducing agents (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define oxidation and reduction in terms of oxygen, hydrogen and electrons.",
+    "Identify the substance oxidised and reduced in an equation.",
+    "Define oxidising and reducing agents and name common ones.",
+    "Write simple half-equations."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-formulae-equations"
+   ],
+   "exercises": [
+    "gceol-chemistry-redox-e01",
+    "gceol-chemistry-redox-e02",
+    "gceol-chemistry-redox-e03",
+    "gceol-chemistry-redox-e04",
+    "gceol-chemistry-redox-e05",
+    "gceol-chemistry-redox-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-redox-reactions-q1",
+    "gceol-chemistry-redox-reactions-q2",
+    "gceol-chemistry-redox-reactions-q3",
+    "gceol-chemistry-redox-reactions-q4",
+    "gceol-chemistry-redox-reactions-q5"
+   ],
+   "reviewNotes": [
+    "Oxidation numbers are not used here; check whether the syllabus requires them (they are in some syllabi).",
+    "Colour changes for acidified potassium manganate(VII) (purple → colourless) and dichromate(VI) (orange → green) are the standard tests.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Oxidation and reduction",
+     "md": "**Oxidation** = **gain of oxygen**, **loss of hydrogen**, or **loss of electrons**. **Reduction** = **loss of oxygen**, **gain of hydrogen**, or **gain of electrons**. Remember **OIL RIG**: Oxidation Is Loss (of electrons), Reduction Is Gain. They always happen together in a **redox reaction**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Oxidising and reducing agents",
+     "md": "An **oxidising agent** oxidises another substance (it gains electrons, so it is itself reduced): oxygen, chlorine, acidified potassium manganate(VII) (purple → colourless), acidified potassium dichromate(VI) (orange → green). A **reducing agent** reduces another substance (it loses electrons, so it is itself oxidised): hydrogen, carbon, carbon monoxide, metals, iodide ions."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Half-equations",
+     "md": "Show electrons being lost or gained:\n\n- Oxidation: Mg → Mg²⁺ + 2e⁻\n- Reduction: Cu²⁺ + 2e⁻ → Cu\n\nAdd the two, cancelling electrons, to get the overall ionic equation: Mg + Cu²⁺ → Mg²⁺ + Cu. A **displacement** reaction is a redox reaction."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- The substance oxidised is the **reducing agent**; the substance reduced is the **oxidising agent**.\n- Rusting and burning are oxidation; extraction of metals from ores is reduction.\n- Electrons in half-equations must balance on both sides of the arrow, including charge."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 110,
+        "r": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 117,
+        "text": "Mg",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 310,
+        "cy": 110,
+        "r": 36,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 117,
+        "text": "Cu²⁺",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 110,
+        "x2": 270,
+        "y2": 110,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 90,
+        "text": "2e⁻",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 175,
+        "text": "oxidised",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 175,
+        "text": "reduced",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 195,
+        "text": "(loses electrons)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 195,
+        "text": "(gains electrons)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Magnesium displaces copper: magnesium loses two electrons (oxidation), copper ions gain them (reduction).",
+     "alt": "A magnesium atom on the left with a red arrow of 2 electrons to a copper(II) ion on the right."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — copper oxide and hydrogen",
+     "statement": "In CuO + H₂ → Cu + H₂O, identify what is oxidised and reduced, and the oxidising and reducing agents.",
+     "steps": [
+      "CuO loses oxygen: copper(II) oxide is **reduced**. H₂ gains oxygen (forms H₂O): hydrogen is **oxidised**.",
+      "The oxidising agent is CuO (it oxidises H₂); the reducing agent is H₂ (it reduces CuO)."
+     ],
+     "answer": "CuO reduced (oxidising agent); H₂ oxidised (reducing agent)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — displacement",
+     "statement": "Magnesium is added to copper(II) sulphate solution. Write the half-equations and the overall ionic equation.",
+     "steps": [
+      "Mg → Mg²⁺ + 2e⁻ (oxidation); Cu²⁺ + 2e⁻ → Cu (reduction).",
+      "Add: Mg + Cu²⁺ → Mg²⁺ + Cu. The blue colour fades and brown copper is deposited."
+     ],
+     "answer": "Mg + Cu²⁺ → Mg²⁺ + Cu"
+    }
+   ],
+   "chapter": "gceol-chemistry-redox"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-redox-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-redox-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the reaction 2Mg + O₂ → 2MgO, magnesium is",
+   "choices": [
+    "unchanged",
+    "oxidised",
+    "a catalyst",
+    "reduced"
+   ],
+   "answer": 1,
+   "explanation": "It gains oxygen (and loses electrons).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-redox-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A substance that loses electrons is",
+   "choices": [
+    "reduced",
+    "oxidised",
+    "decomposed",
+    "neutralised"
+   ],
+   "answer": 1,
+   "explanation": "OIL RIG: Oxidation Is Loss.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-redox-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Rusting of iron is an example of oxidation.",
+   "answer": true,
+   "explanation": "Iron gains oxygen to form iron(III) oxide.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-redox-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Acidified potassium manganate(VII) changes from purple to colourless when warmed with a substance. The substance is acting as",
+   "choices": [
+    "a catalyst",
+    "a reducing agent",
+    "an oxidising agent",
+    "an indicator"
+   ],
+   "answer": 1,
+   "explanation": "The purple MnO₄⁻ is reduced, so the substance is the reducing agent.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-redox-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, state which species is reduced and explain in terms of electrons.",
+   "model": "Cu²⁺ is reduced because it gains two electrons to become Cu atoms; zinc is oxidised because it loses two electrons.",
+   "rubric": "1 mark: Cu²⁺ reduced; 1 mark: gain of electrons; 1 mark: zinc oxidised.",
+   "explanation": "Cu²⁺ is reduced because it gains two electrons to become Cu atoms; zinc is oxidised because it loses two electrons.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-redox-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Iron(III) oxide is reduced to iron by carbon monoxide: Fe₂O₃ + 3CO → 2Fe + 3CO₂.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which substance is oxidised?",
+     "choices": [
+      "iron(III) oxide",
+      "carbon monoxide",
+      "iron",
+      "carbon dioxide"
+     ],
+     "answer": 1,
+     "explanation": "CO gains oxygen to become CO₂.",
+     "id": "gceol-chemistry-redox-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the reducing agent?",
+     "choices": [
+      "carbon monoxide",
+      "carbon dioxide",
+      "iron(III) oxide",
+      "iron"
+     ],
+     "answer": 0,
+     "explanation": "It reduces the iron oxide.",
+     "id": "gceol-chemistry-redox-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many moles of CO react with 2 mol of Fe₂O₃?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "Ratio Fe₂O₃ : CO = 1 : 3, so 6 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-redox-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write a half-equation for the reduction of Fe³⁺ to Fe.",
+     "model": "Fe³⁺ + 3e⁻ → Fe",
+     "rubric": "1 mark for formulae; 1 mark for balanced charge.",
+     "explanation": "Fe³⁺ + 3e⁻ → Fe",
+     "id": "gceol-chemistry-redox-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-reactions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-redox-reactions",
+   "prompt": "Reduction is",
+   "choices": [
+    "gain of electrons",
+    "loss of electrons",
+    "gain of oxygen",
+    "loss of protons"
+   ],
+   "answer": 0,
+   "explanation": "OIL RIG.",
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-reactions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-redox-reactions",
+   "prompt": "An oxidising agent is itself",
+   "choices": [
+    "oxidised",
+    "neutral",
+    "reduced",
+    "a metal"
+   ],
+   "answer": 2,
+   "explanation": "It takes electrons from the other substance.",
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-reactions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-redox-reactions",
+   "prompt": "In Mg → Mg²⁺ + 2e⁻ magnesium is",
+   "choices": [
+    "displaced only",
+    "a catalyst",
+    "reduced",
+    "oxidised"
+   ],
+   "answer": 3,
+   "explanation": "It loses electrons.",
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-reactions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-redox-reactions",
+   "prompt": "Which is a reducing agent?",
+   "choices": [
+    "oxygen",
+    "hydrogen",
+    "chlorine",
+    "potassium manganate(VII)"
+   ],
+   "answer": 1,
+   "explanation": "Hydrogen removes oxygen from oxides.",
+   "chapter": "gceol-chemistry-redox"
+  },
+  {
+   "id": "gceol-chemistry-redox-reactions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-redox-reactions",
+   "prompt": "Displacement reactions of metals are",
+   "choices": [
+    "precipitation only",
+    "physical changes",
+    "acid-base reactions",
+    "redox reactions"
+   ],
+   "answer": 3,
+   "explanation": "Electron transfer between atoms and ions.",
+   "chapter": "gceol-chemistry-redox"
+  }
+ ]
+}

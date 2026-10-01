@@ -1,0 +1,522 @@
+{
+ "chapter": "gceol-computer-impact",
+ "lessons": [
+  {
+   "id": "gceol-computer-ict-cameroon",
+   "title": "The impact of ICT in Cameroon",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe uses of ICT in education, health, business and government",
+    "Discuss advantages and disadvantages",
+    "Explain the digital divide and responsible use",
+    "Name careers in ICT"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-impact-e01",
+    "gceol-computer-impact-e02",
+    "gceol-computer-impact-e03",
+    "gceol-computer-impact-e04",
+    "gceol-computer-impact-e05",
+    "gceol-computer-impact-e06"
+   ],
+   "selfCheck": [
+    "gceol-computer-ict-cameroon-q1",
+    "gceol-computer-ict-cameroon-q2",
+    "gceol-computer-ict-cameroon-q3",
+    "gceol-computer-ict-cameroon-q4",
+    "gceol-computer-ict-cameroon-q5"
+   ],
+   "reviewNotes": [
+    "No statistics are given on purpose; add current Cameroonian data after teacher review. Mobile money is mentioned generically.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "ICT",
+     "md": "**ICT** (information and communication technology) means technology for storing, processing and communicating information: computers, phones, networks and the Internet. It affects almost every area of life."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Uses",
+     "md": "- **Education**: e-learning, online research, school computer labs.\n- **Health**: electronic records, telemedicine (advice at a distance), health information.\n- **Business**: online shopping, mobile money services, accounting software, social-media marketing.\n- **Government**: online information and forms (e-government)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "ICT: advantages and challenges",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 59,
+        "text": "Advantages",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 59,
+        "text": "Challenges",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 87,
+        "text": "Fast communication",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 87,
+        "text": "Cost of data",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 115,
+        "text": "Access to information",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 115,
+        "text": "Power cuts",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 143,
+        "text": "New jobs",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 143,
+        "text": "Digital divide",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 171,
+        "text": "Online learning",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 171,
+        "text": "Cybercrime",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table pairing four advantages with four challenges of ICT.",
+     "alt": "Two-column table: advantages and challenges of ICT."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Advantages and challenges",
+     "md": "Advantages: speed, access to information, new jobs, lower communication costs. Challenges: cost of equipment and data, **unreliable electricity**, limited network coverage in some areas, **digital divide** (unequal access), job changes, health issues from long screen use, misinformation, and cybercrime."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Not all ICT problems are 'technical': cost, training and access matter too.\n- ICT does not remove the need for teachers, doctors or farmers; it supports them.\n- Avoid giving statistics you cannot source in an exam answer."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Argue",
+     "statement": "Give two advantages of mobile money services for a market trader in Bafoussam.",
+     "steps": [
+      "Money can be sent or received quickly without travelling.",
+      "Less need to carry cash, which reduces the risk of theft."
+     ],
+     "answer": "Speed and safety."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Challenge",
+     "statement": "A rural school has a computer lab but frequent power cuts. Suggest two practical solutions.",
+     "steps": [
+      "Use a power source that does not depend only on the grid (e.g. solar with battery) if the budget allows.",
+      "Teach frequent saving and use laptops with batteries; keep backups."
+     ],
+     "answer": "Alternative power; save often; laptops with batteries."
+    }
+   ],
+   "chapter": "gceol-computer-impact"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-computer-impact-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-ict-cameroon",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "ICT stands for",
+   "choices": [
+    "internal computer technology",
+    "information and communication technology",
+    "internet and cable transfer",
+    "input and computer tools"
+   ],
+   "answer": 1,
+   "explanation": "Standard meaning.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-impact-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-ict-cameroon",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Telemedicine can give medical advice at a distance.",
+   "answer": true,
+   "explanation": "It uses communication technology.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-impact-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-ict-cameroon",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The 'digital divide' is",
+   "choices": [
+    "unequal access to ICT between groups or places",
+    "a broken screen",
+    "two files with the same name",
+    "a network cable"
+   ],
+   "answer": 0,
+   "explanation": "Access gap.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-impact-e04",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-ict-cameroon",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give three ways ICT has changed how businesses work.",
+   "model": "Online sales and advertising; electronic payments; faster communication with customers and suppliers; record keeping on computers.",
+   "rubric": "1 mark each, up to 3.",
+   "explanation": "Online sales and advertising; electronic payments; faster communication with customers and suppliers; record keeping on computers.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-impact-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-ict-cameroon",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe two problems ICT can cause and one way to reduce each.",
+   "model": "Cybercrime - use strong passwords and antivirus. Long screen time - take breaks and limit use.",
+   "rubric": "1 mark per problem, 1 per matching solution.",
+   "explanation": "Cybercrime - use strong passwords and antivirus. Long screen time - take breaks and limit use.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-impact-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-ict-cameroon",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A town clinic plans to store patient records on a computer.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "One advantage of electronic records is",
+     "choices": [
+      "they remove the need for staff",
+      "they cannot be copied",
+      "records can be found quickly",
+      "they never need backup"
+     ],
+     "answer": 2,
+     "explanation": "Searching is fast.",
+     "id": "gceol-computer-impact-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "One risk is",
+     "choices": [
+      "unauthorised access to private information",
+      "better handwriting",
+      "less typing",
+      "paper cuts"
+     ],
+     "answer": 0,
+     "explanation": "Privacy is a risk.",
+     "id": "gceol-computer-impact-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State two measures to protect the records.",
+     "model": "Passwords, access rights, backups, antivirus, training staff.",
+     "rubric": "1 mark each.",
+     "explanation": "Passwords, access rights, backups, antivirus, training staff.",
+     "id": "gceol-computer-impact-e06-c"
+    }
+   ],
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-ict-cameroon-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-ict-cameroon",
+   "prompt": "Which is an example of e-learning?",
+   "choices": [
+    "Taking a lesson on a computer or phone",
+    "Repairing a road",
+    "Farming without tools",
+    "Writing on a blackboard only"
+   ],
+   "answer": 0,
+   "explanation": "Learning via ICT.",
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-ict-cameroon-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-ict-cameroon",
+   "prompt": "A problem that affects ICT in many places is",
+   "choices": [
+    "free equipment for all",
+    "no need for training",
+    "unreliable electricity",
+    "too many teachers"
+   ],
+   "answer": 2,
+   "explanation": "Power cuts.",
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-ict-cameroon-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-ict-cameroon",
+   "prompt": "Mobile money is used mainly to",
+   "choices": [
+    "design flowcharts",
+    "repair computers",
+    "send and receive money by phone",
+    "print photos"
+   ],
+   "answer": 2,
+   "explanation": "Financial service.",
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-ict-cameroon-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-ict-cameroon",
+   "prompt": "A career linked to ICT is",
+   "choices": [
+    "none",
+    "network technician",
+    "only farmer",
+    "only driver"
+   ],
+   "answer": 1,
+   "explanation": "Technicians, programmers, etc.",
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-ict-cameroon-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-ict-cameroon",
+   "prompt": "The statement 'ICT removes all jobs' is",
+   "choices": [
+    "true for all farmers",
+    "true for teachers only",
+    "completely true",
+    "false - it changes jobs and creates new ones"
+   ],
+   "answer": 3,
+   "explanation": "Jobs change.",
+   "chapter": "gceol-computer-impact"
+  },
+  {
+   "id": "gceol-computer-impact-m01",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "gceol-computer-ict-cameroon",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Discuss two benefits and two challenges of ICT in Cameroon.",
+   "model": "Benefits: faster communication and access to information; mobile payments and online services. Challenges: unreliable electricity and the cost of data; the digital divide and cybercrime.",
+   "rubric": "1 mark per correct, well-explained point (4 marks).",
+   "explanation": "Benefits: faster communication and access to information; mobile payments and online services. Challenges: unreliable electricity and the cost of data; the digital divide and cybercrime.",
+   "difficulty": 3,
+   "points": 4,
+   "chapter": "gceol-computer-impact"
+  }
+ ]
+}

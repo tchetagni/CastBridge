@@ -1,0 +1,893 @@
+{
+ "chapter": "gceol-chemistry-metals",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-reactivity-series",
+   "title": "Metals and the reactivity series",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Properties of metals, reactivity series, corrosion, extraction of iron and aluminium, alloys (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State physical and chemical properties of metals.",
+    "Order metals in the reactivity series from their reactions with water, acid and oxygen.",
+    "Predict displacement reactions.",
+    "Explain how reactivity relates to corrosion and extraction."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-acids-bases",
+    "gceol-chemistry-redox-reactions"
+   ],
+   "exercises": [
+    "gceol-chemistry-metals-e01",
+    "gceol-chemistry-metals-e02",
+    "gceol-chemistry-metals-e03",
+    "gceol-chemistry-metals-e04",
+    "gceol-chemistry-metals-e05",
+    "gceol-chemistry-metals-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-reactivity-series-q1",
+    "gceol-chemistry-reactivity-series-q2",
+    "gceol-chemistry-reactivity-series-q3",
+    "gceol-chemistry-reactivity-series-q4",
+    "gceol-chemistry-reactivity-series-q5"
+   ],
+   "reviewNotes": [
+    "Order used: potassium, sodium, calcium, magnesium, aluminium, (carbon), zinc, iron, (hydrogen), copper, silver, gold. Lead and tin sit between iron and hydrogen in most tables.",
+    "Aluminium appears unreactive because of a protective oxide layer.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Properties of metals",
+     "md": "Metals are typically **shiny, malleable, ductile, hard and dense**, good **conductors** of heat and electricity, with high melting points (exceptions: sodium, mercury). They form **positive ions** and their oxides are **basic**. **Alloys** are mixtures of metals (or metal + carbon) that are often harder or more resistant to corrosion than the pure metal."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "The reactivity series",
+     "md": "**K, Na, Ca, Mg, Al, (C), Zn, Fe, (H), Cu, Ag, Au** (most to least reactive). K, Na and Ca react with **cold water** (H₂ + hydroxide); Mg reacts slowly with cold water and quickly with **steam** (oxide + H₂); Zn and Fe react with steam; metals above **hydrogen** react with dilute acids giving H₂; Cu, Ag, Au do not react with dilute acid or water. Reactivity is also the order of ease of **forming positive ions** and of **corrosion**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Displacement",
+     "md": "A more reactive metal displaces a less reactive metal from a solution of its salt: Zn + CuSO₄ → ZnSO₄ + Cu (blue colour fades, brown copper forms). A reaction occurs **only** if the added metal is **more** reactive than the metal in the solution. Metal oxides can be displaced similarly: magnesium reacts with copper(II) oxide on heating."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Carbon and hydrogen are placed in the series for comparison but are not metals.\n- Aluminium is high in the series but protected by a thin layer of aluminium oxide, so it seems unreactive.\n- Never put potassium or sodium in water without teacher supervision."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 25,
+        "x2": 120,
+        "y2": 215,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 35,
+        "text": "K",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 57,
+        "text": "Na",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 79,
+        "text": "Ca",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 101,
+        "text": "Mg",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 123,
+        "text": "Al",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 145,
+        "text": "Zn",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 167,
+        "text": "Fe",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 189,
+        "text": "Cu",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 211,
+        "text": "Ag",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 40,
+        "text": "most reactive",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 205,
+        "text": "least reactive",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The reactivity series (simplified): potassium at the top, silver at the bottom.",
+     "alt": "A vertical arrow with the symbols K, Na, Ca, Mg, Al, Zn, Fe, Cu and Ag from most reactive at the top to least reactive at the bottom."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — will it react?",
+     "statement": "Will iron displace copper from copper(II) sulphate solution? Will copper displace zinc from zinc sulphate solution? Give the equation where a reaction occurs.",
+     "steps": [
+      "Iron is above copper in the series, so it displaces it: Fe + CuSO₄ → FeSO₄ + Cu (brown copper forms on the iron).",
+      "Copper is below zinc, so no reaction occurs with zinc sulphate."
+     ],
+     "answer": "Yes for iron; no for copper"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — placing unknown metals",
+     "statement": "Metal P reacts slowly with cold water; Q does not react with water but gives bubbles with dilute acid; R does not react with water or acid. Place P, Q, R in order of reactivity.",
+     "steps": [
+      "P reacts with cold water, so it is the most reactive. Q reacts with acid but not cold water: less reactive than P.",
+      "R does not react with acid: the least reactive. Order: P > Q > R."
+     ],
+     "answer": "P > Q > R"
+    }
+   ],
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-extraction-metals",
+   "title": "Extraction of iron and aluminium",
+   "minutes": 35,
+   "programRef": "GCE O Level Chemistry — Properties of metals, reactivity series, corrosion, extraction of iron and aluminium, alloys (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain how the method of extraction depends on the position in the reactivity series.",
+    "Describe the blast furnace extraction of iron with equations.",
+    "Describe the extraction of aluminium by electrolysis.",
+    "Calculate masses of metals from ores; state uses of steel and other alloys."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-reactivity-series",
+    "gceol-chemistry-electrolysis-basics"
+   ],
+   "exercises": [
+    "gceol-chemistry-metals-e07",
+    "gceol-chemistry-metals-e08",
+    "gceol-chemistry-metals-e09",
+    "gceol-chemistry-metals-e10",
+    "gceol-chemistry-metals-e11",
+    "gceol-chemistry-metals-e12"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-extraction-metals-q1",
+    "gceol-chemistry-extraction-metals-q2",
+    "gceol-chemistry-extraction-metals-q3",
+    "gceol-chemistry-extraction-metals-q4",
+    "gceol-chemistry-extraction-metals-q5"
+   ],
+   "reviewNotes": [
+    "Cameroon has an aluminium smelter at Edéa (ALUCAM) and bauxite deposits; the smelter and its raw material sources should be checked before being named in class.",
+    "Temperature ~950 °C for molten alumina in cryolite and the 1500–2000 °C zone of the blast furnace are typical textbook values.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Choosing the method",
+     "md": "Most metals occur as **ores** (compounds, mainly oxides). Reactive metals (above carbon: K, Na, Ca, Mg, Al) are extracted by **electrolysis** of molten compounds; metals below carbon (Zn, Fe, Pb, Cu) can be extracted by **reduction with carbon or carbon monoxide** (heating the oxide with coke). Unreactive metals (gold, silver) occur as native metals."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Iron: the blast furnace",
+     "md": "Raw materials: **iron ore** (haematite, Fe₂O₃), **coke** (carbon), **limestone** (CaCO₃), hot **air**. Reactions: C + O₂ → CO₂ (heat); CO₂ + C → 2CO; **Fe₂O₃ + 3CO → 2Fe + 3CO₂** (reduction). Limestone: CaCO₃ → CaO + CO₂; CaO + SiO₂ → CaSiO₃ (**slag**, removes sand). Molten iron and slag run off at the bottom (slag is less dense and floats). Iron is made into **steel** by removing carbon and impurities with oxygen."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Aluminium: electrolysis",
+     "md": "Bauxite is purified to **aluminium oxide (alumina), Al₂O₃**. Alumina has a very high melting point, so it is dissolved in molten **cryolite** (about 950 °C) to save energy. **Cathode** (carbon lining): Al³⁺ + 3e⁻ → Al (molten metal collects at the bottom). **Anode** (carbon): 2O²⁻ → O₂ + 4e⁻; the oxygen burns the carbon anodes to CO₂, so they must be replaced. The process needs **large amounts of electricity**, so smelters are located near cheap hydroelectric power."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Alloys and uses",
+     "md": "**Steel** (iron + carbon): stronger than iron (buildings, tools); **stainless steel** (iron + chromium + nickel): does not rust. **Brass** (copper + zinc), **bronze** (copper + tin). Aluminium (low density, resists corrosion): cooking pots, aircraft, overhead cables. Copper: electrical wiring. Zinc: galvanising."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Iron(III) oxide is reduced by carbon monoxide, not by the limestone; limestone only removes the sand as slag.\n- Aluminium is not extracted in the blast furnace: it is above carbon in the reactivity series.\n- The carbon anodes burn away during aluminium electrolysis and must be replaced regularly."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         160,
+         40,
+         240,
+         40,
+         265,
+         120,
+         235,
+         200,
+         165,
+         200,
+         135,
+         120
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 25,
+        "text": "ore, coke, limestone in",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 190,
+        "text": "hot air in",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 175,
+        "x2": 140,
+        "y2": 175,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 170,
+        "text": "slag out",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 200,
+        "text": "molten iron out",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 178,
+        "x2": 280,
+        "y2": 178,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 235,
+        "y1": 196,
+        "x2": 270,
+        "y2": 205,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 45,
+        "x2": 200,
+        "y2": 90,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "A blast furnace: raw materials go in at the top, hot air at the bottom; slag and molten iron are tapped from the base.",
+     "alt": "A tall furnace shape with arrows for the raw materials entering at the top, hot air entering near the bottom and slag and molten iron leaving."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — iron from haematite",
+     "statement": "Calculate the mass of iron obtainable from 160 g of iron(III) oxide: Fe₂O₃ + 3CO → 2Fe + 3CO₂ (Fe 56, O 16).",
+     "steps": [
+      "Mr(Fe₂O₃) = 2 × 56 + 3 × 16 = 160; n = 160 ÷ 160 = 1 mol.",
+      "Ratio Fe₂O₃ : Fe = 1 : 2, so n(Fe) = 2 mol; mass = 2 × 56 = 112 g."
+     ],
+     "answer": "112 g of iron"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — aluminium from alumina",
+     "statement": "Calculate the mass of aluminium obtainable from 102 kg of aluminium oxide: 2Al₂O₃ → 4Al + 3O₂ (Al 27, O 16).",
+     "steps": [
+      "Mr(Al₂O₃) = 2 × 27 + 3 × 16 = 102, so 102 kg is 1000 mol. Ratio Al₂O₃ : Al = 1 : 2, so n(Al) = 2000 mol.",
+      "Mass = 2000 × 27 = 54 000 g = 54 kg."
+     ],
+     "answer": "54 kg of aluminium"
+    }
+   ],
+   "chapter": "gceol-chemistry-metals"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-metals-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-reactivity-series",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which metal does not react with dilute hydrochloric acid?",
+   "choices": [
+    "iron",
+    "zinc",
+    "copper",
+    "magnesium"
+   ],
+   "answer": 2,
+   "explanation": "Copper is below hydrogen.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-reactivity-series",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the most reactive?",
+   "choices": [
+    "potassium",
+    "sodium",
+    "magnesium",
+    "calcium"
+   ],
+   "answer": 0,
+   "explanation": "Top of the series.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-reactivity-series",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Zinc will displace magnesium from magnesium sulphate solution.",
+   "answer": false,
+   "explanation": "Zinc is less reactive than magnesium, so no reaction.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-reactivity-series",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Magnesium reacts with excess dilute acid: Mg + 2HCl → MgCl₂ + H₂. What volume of hydrogen (dm³, 24 dm³/mol) is produced by 2.4 g of Mg (Mg 24)?",
+   "answer": 2.4,
+   "tolerance": 0.01,
+   "unit": "dm³",
+   "explanation": "n(Mg) = 2.4 ÷ 24 = 0.10 mol = n(H₂); V = 0.10 × 24 = 2.4 dm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-reactivity-series",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why aluminium pans do not corrode quickly in everyday use although aluminium is high in the reactivity series.",
+   "model": "Aluminium reacts with oxygen in the air to form a thin, tough, unreactive layer of aluminium oxide that sticks to the metal and prevents further reaction.",
+   "rubric": "1 mark: oxide layer forms; 1 mark: protects the metal from further reaction.",
+   "explanation": "Aluminium reacts with oxygen in the air to form a thin, tough, unreactive layer of aluminium oxide that sticks to the metal and prevents further reaction.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-reactivity-series",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil drops pieces of four metals W, X, Y and Z into dilute sulphuric acid and into copper(II) sulphate solution. Results: W: fizzes strongly in acid, displaces copper; X: no reaction in acid, no displacement; Y: fizzes slowly in acid, displaces copper; Z: no reaction in acid but displaces silver from silver nitrate.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which metal is the most reactive?",
+     "choices": [
+      "W",
+      "X",
+      "Z",
+      "Y"
+     ],
+     "answer": 0,
+     "explanation": "It fizzes most strongly with acid.",
+     "id": "gceol-chemistry-metals-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which metal is below hydrogen in the reactivity series but above silver?",
+     "choices": [
+      "Z",
+      "W",
+      "X",
+      "Y"
+     ],
+     "answer": 0,
+     "explanation": "It does not react with acid but displaces silver.",
+     "id": "gceol-chemistry-metals-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which of the following is the order from most to least reactive?",
+     "choices": [
+      "Y > W > Z > X",
+      "W > X > Y > Z",
+      "X > Z > Y > W",
+      "W > Y > Z > X"
+     ],
+     "answer": 3,
+     "explanation": "Strong acid reaction, weaker acid reaction, displaces silver only, no displacement.",
+     "id": "gceol-chemistry-metals-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write an equation for zinc reacting with copper(II) sulphate.",
+     "model": "Zn + CuSO₄ → ZnSO₄ + Cu",
+     "rubric": "1 mark formulae; 1 mark balanced.",
+     "explanation": "Zn + CuSO₄ → ZnSO₄ + Cu",
+     "id": "gceol-chemistry-metals-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-reactivity-series-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-reactivity-series",
+   "prompt": "Metals form",
+   "choices": [
+    "molecules",
+    "no ions",
+    "positive ions",
+    "negative ions"
+   ],
+   "answer": 2,
+   "explanation": "They lose electrons.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-reactivity-series-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-reactivity-series",
+   "prompt": "A more reactive metal will",
+   "choices": [
+    "never react",
+    "form acids",
+    "turn into non-metals",
+    "displace a less reactive metal from its salt solution"
+   ],
+   "answer": 3,
+   "explanation": "Displacement reaction.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-reactivity-series-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-reactivity-series",
+   "prompt": "Which metal reacts with cold water?",
+   "choices": [
+    "gold",
+    "copper",
+    "silver",
+    "sodium"
+   ],
+   "answer": 3,
+   "explanation": "Group I metals do.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-reactivity-series-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-reactivity-series",
+   "prompt": "An alloy is",
+   "choices": [
+    "a pure metal",
+    "an acid",
+    "a mixture of metals",
+    "a compound of non-metals"
+   ],
+   "answer": 2,
+   "explanation": "For example brass and steel.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-reactivity-series-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-reactivity-series",
+   "prompt": "Metals are good",
+   "choices": [
+    "solvents",
+    "conductors of electricity",
+    "indicators",
+    "insulators"
+   ],
+   "answer": 1,
+   "explanation": "Delocalised electrons.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-extraction-metals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why is aluminium extracted by electrolysis and not by heating with carbon?",
+   "choices": [
+    "Aluminium is more reactive than carbon",
+    "It has no oxide",
+    "Carbon is too expensive",
+    "Aluminium is less reactive than carbon"
+   ],
+   "answer": 0,
+   "explanation": "Carbon cannot reduce the oxides of metals above it in the series.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-extraction-metals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the role of limestone in the blast furnace?",
+   "choices": [
+    "To remove silica as slag",
+    "To burn as fuel",
+    "To cool the furnace",
+    "To reduce iron oxide"
+   ],
+   "answer": 0,
+   "explanation": "CaO + SiO₂ → CaSiO₃.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e09",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-chemistry-extraction-metals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the alloy with its main metals.",
+   "pairs": [
+    [
+     "brass",
+     "copper and zinc"
+    ],
+    [
+     "bronze",
+     "copper and tin"
+    ],
+    [
+     "steel",
+     "iron and carbon"
+    ]
+   ],
+   "explanation": "Standard compositions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-extraction-metals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many kg of iron can be obtained from 800 kg of pure Fe₂O₃ (Mr 160)? (Fe 56)",
+   "answer": 560,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "800 kg ÷ 160 = 5 kmol of Fe₂O₃, giving 10 kmol of Fe: 10 × 56 = 560 kg.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-extraction-metals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why alumina is dissolved in molten cryolite in the extraction of aluminium.",
+   "model": "Alumina melts at a very high temperature (over 2000 °C); dissolving it in molten cryolite lowers the temperature needed to about 950 °C, saving a lot of energy, and the molten solution conducts electricity.",
+   "rubric": "1 mark: alumina has very high melting point; 1 mark: cryolite lowers the operating temperature/saves energy.",
+   "explanation": "Alumina melts at a very high temperature (over 2000 °C); dissolving it in molten cryolite lowers the temperature needed to about 950 °C, saving a lot of energy, and the molten solution conducts electricity.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-extraction-metals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Iron is extracted in a blast furnace. Raw materials are haematite (Fe₂O₃), coke and limestone.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which substance is the reducing agent for iron(III) oxide?",
+     "choices": [
+      "oxygen",
+      "carbon monoxide",
+      "slag",
+      "limestone"
+     ],
+     "answer": 1,
+     "explanation": "Fe₂O₃ + 3CO → 2Fe + 3CO₂.",
+     "id": "gceol-chemistry-metals-e12-a"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the equation for the formation of carbon monoxide from coke.",
+     "model": "CO₂ + C → 2CO (after C + O₂ → CO₂)",
+     "rubric": "1 mark.",
+     "explanation": "CO₂ + C → 2CO (after C + O₂ → CO₂)",
+     "id": "gceol-chemistry-metals-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many moles of CO are needed to reduce 2.0 mol of Fe₂O₃?",
+     "answer": 6.0,
+     "tolerance": 0.01,
+     "explanation": "Ratio 1 : 3, so 6.0 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-metals-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name the slag and write the equation for its formation.",
+     "model": "Calcium silicate; CaO + SiO₂ → CaSiO₃",
+     "rubric": "1 mark name; 1 mark equation.",
+     "explanation": "Calcium silicate; CaO + SiO₂ → CaSiO₃",
+     "id": "gceol-chemistry-metals-e12-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-extraction-metals-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-extraction-metals",
+   "prompt": "The main ore of iron is",
+   "choices": [
+    "galena",
+    "haematite",
+    "bauxite",
+    "cryolite"
+   ],
+   "answer": 1,
+   "explanation": "Fe₂O₃.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-extraction-metals-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-extraction-metals",
+   "prompt": "The ore of aluminium is",
+   "choices": [
+    "bauxite",
+    "coke",
+    "haematite",
+    "limestone"
+   ],
+   "answer": 0,
+   "explanation": "Source of Al₂O₃.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-extraction-metals-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-extraction-metals",
+   "prompt": "Cryolite is used to",
+   "choices": [
+    "purify copper",
+    "lower the melting point of alumina",
+    "form slag",
+    "reduce iron oxide"
+   ],
+   "answer": 1,
+   "explanation": "Saves energy.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-extraction-metals-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-extraction-metals",
+   "prompt": "Steel is",
+   "choices": [
+    "a compound of iron and oxygen",
+    "an ore",
+    "pure iron",
+    "an alloy of iron and carbon"
+   ],
+   "answer": 3,
+   "explanation": "Harder than pure iron.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-extraction-metals-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-extraction-metals",
+   "prompt": "Metals above carbon in the reactivity series are extracted by",
+   "choices": [
+    "heating with carbon",
+    "filtration",
+    "electrolysis",
+    "distillation"
+   ],
+   "answer": 2,
+   "explanation": "Carbon cannot reduce them.",
+   "chapter": "gceol-chemistry-metals"
+  },
+  {
+   "id": "gceol-chemistry-metals-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-reactivity-series",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which metal would displace copper from copper(II) sulphate solution?",
+   "choices": [
+    "gold",
+    "zinc",
+    "mercury",
+    "silver"
+   ],
+   "answer": 1,
+   "explanation": "Zinc is above copper in the reactivity series.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-metals"
+  }
+ ]
+}

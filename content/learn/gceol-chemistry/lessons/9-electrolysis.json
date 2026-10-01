@@ -1,0 +1,525 @@
+{
+ "chapter": "gceol-chemistry-electrolysis",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-electrolysis-basics",
+   "title": "Electrolysis of molten and aqueous electrolytes",
+   "minutes": 35,
+   "programRef": "GCE O Level Chemistry — Electrolysis of molten and aqueous electrolytes, electroplating, purification of copper (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define electrolysis, electrolyte, anode and cathode.",
+    "Predict the products at each electrode for molten and aqueous electrolytes.",
+    "Write half-equations for the electrode reactions.",
+    "Describe electroplating and purification of copper."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-redox-reactions",
+    "gceol-chemistry-structure-properties"
+   ],
+   "exercises": [
+    "gceol-chemistry-electrolysis-e01",
+    "gceol-chemistry-electrolysis-e02",
+    "gceol-chemistry-electrolysis-e03",
+    "gceol-chemistry-electrolysis-e04",
+    "gceol-chemistry-electrolysis-e05",
+    "gceol-chemistry-electrolysis-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-electrolysis-basics-q1",
+    "gceol-chemistry-electrolysis-basics-q2",
+    "gceol-chemistry-electrolysis-basics-q3",
+    "gceol-chemistry-electrolysis-basics-q4",
+    "gceol-chemistry-electrolysis-basics-q5"
+   ],
+   "reviewNotes": [
+    "Selective discharge rules are given in simplified form (less reactive cation, halide before hydroxide in concentrated solution); the Board's exact wording should be checked.",
+    "Quantitative electrolysis (Faraday) is not covered here; check whether it is required.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Electrolysis",
+     "md": "**Electrolysis** is the decomposition of an ionic compound (**electrolyte**, molten or in solution) by an electric current. **Cathode** (−): positive ions (cations) move there and **gain electrons** (reduction). **Anode** (+): negative ions (anions) move there and **lose electrons** (oxidation). Electrodes are usually inert (graphite or platinum). Mnemonic: **PANIC**: Positive Anode, Negative Is Cathode."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Molten and aqueous",
+     "md": "**Molten** compounds give the metal at the cathode and the non-metal at the anode: molten lead(II) bromide → lead (cathode) + bromine (anode). In **aqueous** solutions water also supplies H⁺ and OH⁻ ions: at the cathode the **less reactive** of the metal and hydrogen is formed (hydrogen unless the metal is below hydrogen, e.g. copper or silver); at the anode a halogen forms from concentrated halide solutions, otherwise oxygen."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Common examples (inert electrodes)",
+     "md": "- **Brine** (concentrated NaCl solution): H₂ at the cathode, Cl₂ at the anode; NaOH remains in solution.\n- **Dilute sulphuric acid**: H₂ (cathode) and O₂ (anode) in the volume ratio **2 : 1**.\n- **Copper(II) sulphate** with graphite: copper at the cathode, O₂ at the anode (blue colour fades).\n- Half-equations: 2H⁺ + 2e⁻ → H₂; 2Cl⁻ → Cl₂ + 2e⁻; 4OH⁻ → 2H₂O + O₂ + 4e⁻; Cu²⁺ + 2e⁻ → Cu."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Uses",
+     "md": "**Electroplating**: the object to be plated is the **cathode**, the plating metal is the **anode**, and the electrolyte is a salt of the plating metal (e.g. nickel or chromium plating of steel, silver plating of cutlery). **Purifying copper**: impure copper is the anode (it dissolves), pure copper the cathode (copper builds up). Aluminium is also extracted by electrolysis (see the extraction lesson)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Electrons flow in the wires, ions move in the electrolyte; solid ionic compounds do not conduct.\n- Cations go to the **cathode**; anions go to the **anode**.\n- With copper electrodes, the anode itself dissolves (the reaction is different from graphite)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 90,
+        "w": 180,
+        "h": 110,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 111,
+        "y": 110,
+        "w": 178,
+        "h": 89,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 158,
+        "y": 50,
+        "w": 8,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 238,
+        "y": 50,
+        "w": 8,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 162,
+        "y1": 50,
+        "x2": 162,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 162,
+        "y1": 25,
+        "x2": 192,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 192,
+        "y1": 20,
+        "x2": 192,
+        "y2": 30,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 204,
+        "y1": 12,
+        "x2": 204,
+        "y2": 38,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 204,
+        "y1": 25,
+        "x2": 242,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 25,
+        "x2": 242,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 70,
+        "text": "cathode (−)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 70,
+        "text": "anode (+)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 225,
+        "text": "electrolyte",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An electrolysis cell: the negative electrode is the cathode, the positive electrode is the anode.",
+     "alt": "A beaker of electrolyte with two vertical electrodes joined by wires to a battery, labelled cathode (negative) and anode (positive)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — dilute sulphuric acid",
+     "statement": "Dilute sulphuric acid is electrolysed with inert electrodes. Name the gases and say what volume of oxygen is made when 30 cm³ of hydrogen is collected.",
+     "steps": [
+      "Cathode: 2H⁺ + 2e⁻ → H₂. Anode: 4OH⁻ → 2H₂O + O₂ + 4e⁻. Hydrogen and oxygen are formed (water is decomposed).",
+      "Volume ratio H₂ : O₂ = 2 : 1, so oxygen = 30 ÷ 2 = 15 cm³."
+     ],
+     "answer": "H₂ and O₂; 15 cm³ of oxygen"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — brine",
+     "statement": "Concentrated sodium chloride solution is electrolysed using graphite electrodes. Name the products at each electrode and what is left in solution.",
+     "steps": [
+      "Cathode: H⁺ is discharged rather than Na⁺ (sodium is more reactive than hydrogen): 2H⁺ + 2e⁻ → H₂.",
+      "Anode: chloride ions give chlorine: 2Cl⁻ → Cl₂ + 2e⁻. Na⁺ and OH⁻ remain, so sodium hydroxide solution is left."
+     ],
+     "answer": "H₂ at the cathode; Cl₂ at the anode; NaOH in solution"
+    }
+   ],
+   "chapter": "gceol-chemistry-electrolysis"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-electrolysis-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "At which electrode are metals deposited?",
+   "choices": [
+    "both",
+    "cathode",
+    "neither",
+    "anode"
+   ],
+   "answer": 1,
+   "explanation": "Metal ions gain electrons at the negative electrode.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Molten lead(II) bromide is electrolysed. What is formed at the anode?",
+   "choices": [
+    "hydrogen",
+    "bromine",
+    "lead",
+    "oxygen"
+   ],
+   "answer": 1,
+   "explanation": "Br⁻ ions lose electrons: 2Br⁻ → Br₂ + 2e⁻.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solid sodium chloride conducts electricity during electrolysis.",
+   "answer": false,
+   "explanation": "The ions are fixed in the solid; it must be molten or dissolved.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the electrolysis of dilute sulphuric acid, 24 cm³ of oxygen is collected at the anode. How many cm³ of hydrogen are collected?",
+   "answer": 48,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "Ratio H₂ : O₂ = 2 : 1, so 2 × 24 = 48 cm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how you would silver-plate a metal spoon. State the cathode, the anode and the electrolyte.",
+   "model": "Make the spoon (cleaned) the cathode, a silver rod the anode, and use silver nitrate solution as electrolyte; pass a direct current so silver is deposited on the spoon: Ag⁺ + e⁻ → Ag.",
+   "rubric": "1 mark: spoon is the cathode; 1 mark: silver anode; 1 mark: silver nitrate; 1 mark: equation or description of deposit.",
+   "explanation": "Make the spoon (cleaned) the cathode, a silver rod the anode, and use silver nitrate solution as electrolyte; pass a direct current so silver is deposited on the spoon: Ag⁺ + e⁻ → Ag.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Copper(II) sulphate solution is electrolysed in two experiments: (A) graphite electrodes; (B) copper electrodes.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is deposited at the cathode in both experiments?",
+     "choices": [
+      "copper",
+      "sulphur",
+      "hydrogen",
+      "oxygen"
+     ],
+     "answer": 0,
+     "explanation": "Cu²⁺ is discharged because copper is less reactive than hydrogen.",
+     "id": "gceol-chemistry-electrolysis-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "In experiment (A) what is formed at the anode?",
+     "choices": [
+      "oxygen",
+      "sulphate",
+      "copper",
+      "hydrogen"
+     ],
+     "answer": 0,
+     "explanation": "OH⁻ ions are discharged: 4OH⁻ → 2H₂O + O₂ + 4e⁻.",
+     "id": "gceol-chemistry-electrolysis-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "In experiment (B) what happens to the anode?",
+     "choices": [
+      "Nothing changes",
+      "It gets bigger",
+      "It dissolves (gets smaller)",
+      "It becomes oxygen gas"
+     ],
+     "answer": 2,
+     "explanation": "Copper atoms lose electrons: Cu → Cu²⁺ + 2e⁻, so the blue colour stays the same.",
+     "id": "gceol-chemistry-electrolysis-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the half-equation for the change at the cathode.",
+     "model": "Cu²⁺ + 2e⁻ → Cu",
+     "rubric": "1 mark formulae; 1 mark balanced.",
+     "explanation": "Cu²⁺ + 2e⁻ → Cu",
+     "id": "gceol-chemistry-electrolysis-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-basics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "prompt": "The anode is the",
+   "choices": [
+    "salt bridge",
+    "positive electrode",
+    "electrolyte",
+    "negative electrode"
+   ],
+   "answer": 1,
+   "explanation": "Anions are attracted to the anode.",
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-basics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "prompt": "An electrolyte is",
+   "choices": [
+    "an ionic compound molten or in solution",
+    "a catalyst",
+    "a covalent gas",
+    "a solid metal"
+   ],
+   "answer": 0,
+   "explanation": "It conducts by moving ions.",
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-basics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "prompt": "Electrolysis of brine gives chlorine at the",
+   "choices": [
+    "salt",
+    "cathode",
+    "anode",
+    "battery"
+   ],
+   "answer": 2,
+   "explanation": "Cl⁻ is oxidised at the anode.",
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-basics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "prompt": "In electroplating the object to be plated is the",
+   "choices": [
+    "anode",
+    "electrolyte",
+    "power supply",
+    "cathode"
+   ],
+   "answer": 3,
+   "explanation": "Metal ions are reduced onto it.",
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-basics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "prompt": "Hydrogen and oxygen from water electrolysis are in volume ratio",
+   "choices": [
+    "2 : 1",
+    "1 : 1",
+    "3 : 1",
+    "1 : 2"
+   ],
+   "answer": 0,
+   "explanation": "H₂O has twice as many H as O atoms.",
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "During electrolysis, metals are deposited at the",
+   "choices": [
+    "cathode",
+    "battery",
+    "salt bridge",
+    "anode"
+   ],
+   "answer": 0,
+   "explanation": "Cations are reduced at the negative electrode.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-electrolysis"
+  },
+  {
+   "id": "gceol-chemistry-electrolysis-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-electrolysis-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Molten lead(II) bromide is electrolysed using inert electrodes.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is formed at the cathode?",
+     "choices": [
+      "lead",
+      "bromine",
+      "hydrogen",
+      "oxygen"
+     ],
+     "answer": 0,
+     "explanation": "Pb²⁺ gains electrons: Pb²⁺ + 2e⁻ → Pb.",
+     "id": "gceol-chemistry-electrolysis-m02-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is formed at the anode?",
+     "choices": [
+      "hydrogen",
+      "lead",
+      "oxygen",
+      "bromine"
+     ],
+     "answer": 3,
+     "explanation": "2Br⁻ → Br₂ + 2e⁻.",
+     "id": "gceol-chemistry-electrolysis-m02-b"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Explain why solid lead(II) bromide does not conduct electricity.",
+     "model": "The ions are held in fixed positions in the lattice and cannot move to carry the charge.",
+     "rubric": "1 mark.",
+     "explanation": "The ions are held in fixed positions in the lattice and cannot move to carry the charge.",
+     "id": "gceol-chemistry-electrolysis-m02-c"
+    }
+   ],
+   "chapter": "gceol-chemistry-electrolysis"
+  }
+ ]
+}

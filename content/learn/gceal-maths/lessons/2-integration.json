@@ -1,0 +1,1191 @@
+{
+ "chapter": "gceal-maths-integration",
+ "lessons": [
+  {
+   "id": "gceal-maths-integration-substitution",
+   "title": "Integration by substitution",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Recognise when a substitution is needed",
+    "Change variable and limits",
+    "Integrate with the reverse chain rule"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-integration-e01",
+    "gceal-maths-integration-e02",
+    "gceal-maths-integration-e03",
+    "gceal-maths-integration-e04",
+    "gceal-maths-integration-e05",
+    "gceal-maths-integration-e06"
+   ],
+   "selfCheck": [
+    "gceal-maths-integration-substitution-q1",
+    "gceal-maths-integration-substitution-q2",
+    "gceal-maths-integration-substitution-q3",
+    "gceal-maths-integration-substitution-q4",
+    "gceal-maths-integration-substitution-q5"
+   ],
+   "reviewNotes": [
+    "Trigonometric substitutions are not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Substitution",
+     "md": "1. Choose $u$ (often the inside of a bracket or root, or the denominator). 2. Find $\\frac{du}{dx}$ and replace $dx$ (and every $x$) by $u$-terms. 3. Integrate in $u$. 4. Return to $x$. For a definite integral change the limits to $u$-values and do NOT return to $x$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Reverse chain rule shortcuts",
+     "md": "$\\int f'(x)\\,[f(x)]^n\\,dx=\\frac{[f(x)]^{n+1}}{n+1}+C$ and $\\int\\frac{f'(x)}{f(x)}dx=\\ln|f(x)|+C$. For linear inside: $\\int(ax+b)^n\\,dx=\\frac{(ax+b)^{n+1}}{a(n+1)}+C$, $\\int\\frac{1}{ax+b}dx=\\frac1a\\ln|ax+b|+C$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the factor $\\frac1a$ in $\\int(ax+b)^ndx$.\n- Changing the variable but keeping the old limits.\n- Leaving some $x$ in an integral that should be entirely in $u$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find $\\int2x(x^2+1)^3dx$.",
+     "steps": [
+      "Let $u=x^2+1$, so $du=2x\\,dx$.",
+      "$\\int u^3du=\\frac{u^4}{4}+C$; substitute back."
+     ],
+     "answer": "$\\frac{(x^2+1)^4}{4}+C$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Evaluate $\\int_0^1x\\sqrt{1+x^2}\\,dx$.",
+     "steps": [
+      "$u=1+x^2$, $du=2x\\,dx$; limits: $x=0\\to u=1$, $x=1\\to u=2$.",
+      "$\\frac{1}{2}\\int_1^2u^{1/2}du=\\frac{1}{2}\\cdot\\frac{2}{3}\\left[u^{3/2}\\right]_1^2=\\frac{1}{3}(2\\sqrt2-1)$."
+     ],
+     "answer": "$\\frac{2\\sqrt2-1}{3}\\approx0.609$",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 191.66666666666666,
+        "x2": 372.0,
+        "y2": 191.66666666666666,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 89.33333333333333,
+        "y1": 212.0,
+        "x2": 89.33333333333333,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 181.55555555555557,
+        "y1": 188.66666666666666,
+        "x2": 181.55555555555557,
+        "y2": 194.66666666666666,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 181.55555555555557,
+        "y": 208.66666666666666,
+        "text": "0.5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 273.77777777777777,
+        "y1": 188.66666666666666,
+        "x2": 273.77777777777777,
+        "y2": 194.66666666666666,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 273.77777777777777,
+        "y": 208.66666666666666,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 86.33333333333333,
+        "y1": 120.00000000000001,
+        "x2": 92.33333333333333,
+        "y2": 120.00000000000001,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 81.33333333333333,
+        "y": 124.00000000000001,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 86.33333333333333,
+        "y1": 48.33333333333334,
+        "x2": 92.33333333333333,
+        "y2": 48.33333333333334,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 81.33333333333333,
+        "y": 52.33333333333334,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         89.3,
+         191.7,
+         89.3,
+         191.7,
+         98.6,
+         188.1,
+         107.8,
+         184.5,
+         117.0,
+         180.8,
+         126.2,
+         177.0,
+         135.4,
+         173.2,
+         144.7,
+         169.2,
+         153.9,
+         165.1,
+         163.1,
+         160.8,
+         172.3,
+         156.3,
+         181.6,
+         151.6,
+         190.8,
+         146.7,
+         200.0,
+         141.5,
+         209.2,
+         136.1,
+         218.4,
+         130.4,
+         227.7,
+         124.5,
+         236.9,
+         118.2,
+         246.1,
+         111.7,
+         255.3,
+         104.9,
+         264.6,
+         97.8,
+         273.8,
+         90.3,
+         273.8,
+         191.7
+        ],
+        "stroke": "orange",
+        "width": 1,
+        "closed": true,
+        "fill": "yellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         89.3,
+         191.7,
+         93.6,
+         190.0,
+         97.9,
+         188.3,
+         102.2,
+         186.6,
+         106.5,
+         184.9,
+         110.9,
+         183.2,
+         115.2,
+         181.5,
+         119.5,
+         179.8,
+         123.8,
+         178.1,
+         128.1,
+         176.3,
+         132.4,
+         174.5,
+         136.7,
+         172.7,
+         141.0,
+         170.8,
+         145.3,
+         168.9,
+         149.6,
+         167.0,
+         153.9,
+         165.1,
+         158.2,
+         163.1,
+         162.5,
+         161.1,
+         166.8,
+         159.0,
+         171.1,
+         156.9,
+         175.4,
+         154.8,
+         179.7,
+         152.6,
+         184.0,
+         150.3,
+         188.3,
+         148.0,
+         192.6,
+         145.7,
+         196.9,
+         143.3,
+         201.2,
+         140.8,
+         205.5,
+         138.3,
+         209.8,
+         135.7,
+         214.1,
+         133.1,
+         218.4,
+         130.4,
+         222.7,
+         127.7,
+         227.1,
+         124.9,
+         231.4,
+         122.0,
+         235.7,
+         119.1,
+         240.0,
+         116.1,
+         244.3,
+         113.0,
+         248.6,
+         109.9,
+         252.9,
+         106.7,
+         257.2,
+         103.5,
+         261.5,
+         100.2,
+         265.8,
+         96.8,
+         270.1,
+         93.3,
+         274.4,
+         89.8,
+         278.7,
+         86.2,
+         283.0,
+         82.6,
+         287.3,
+         78.8,
+         291.6,
+         75.0,
+         295.9,
+         71.1,
+         300.2,
+         67.2,
+         304.5,
+         63.2,
+         308.8,
+         59.1,
+         313.1,
+         54.9,
+         317.4,
+         50.7,
+         321.7,
+         46.4,
+         326.0,
+         42.0,
+         330.3,
+         37.6
+        ],
+        "stroke": "blue",
+        "width": 2.5,
+        "closed": false
+       },
+       {
+        "t": "text",
+        "x": 190.7777777777778,
+        "y": 173.75,
+        "text": "area = 0.609",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-by-parts",
+   "title": "Integration by parts",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Apply $\\int u\\,dv=uv-\\int v\\,du$",
+    "Choose $u$ sensibly (LATE rule)",
+    "Evaluate definite integrals by parts"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-integration-e07",
+    "gceal-maths-integration-e08",
+    "gceal-maths-integration-e09",
+    "gceal-maths-integration-e10",
+    "gceal-maths-integration-e11",
+    "gceal-maths-integration-e12"
+   ],
+   "selfCheck": [
+    "gceal-maths-integration-by-parts-q1",
+    "gceal-maths-integration-by-parts-q2",
+    "gceal-maths-integration-by-parts-q3",
+    "gceal-maths-integration-by-parts-q4",
+    "gceal-maths-integration-by-parts-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Integration by parts",
+     "md": "$\\int u\\frac{dv}{dx}dx=uv-\\int v\\frac{du}{dx}dx$. Definite: $\\int_a^bu\\,v'\\,dx=[uv]_a^b-\\int_a^bv\\,u'\\,dx$. It undoes the product rule."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Choosing $u$",
+     "md": "Pick $u$ as the part that becomes simpler when differentiated. A guide (LATE): Logarithm, then Algebraic ($x$, $x^2$), then Trigonometric, then Exponential. For $\\int\\ln x\\,dx$ take $u=\\ln x$ and $\\frac{dv}{dx}=1$. Repeat if needed ($x^2e^x$ needs two steps)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Sign errors in $uv-\\int v\\,du$ when $v$ is a $\\cos$ or $-\\sin$.\n- Choosing $u=e^x$ and $\\frac{dv}{dx}=x$: the integral becomes harder.\n- Forgetting to apply limits to the $uv$ term."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find $\\int xe^x\\,dx$.",
+     "steps": [
+      "$u=x$, $\\frac{dv}{dx}=e^x$: $\\frac{du}{dx}=1$, $v=e^x$.",
+      "$\\int xe^xdx=xe^x-\\int e^xdx=xe^x-e^x+C=(x-1)e^x+C$."
+     ],
+     "answer": "$(x-1)e^x+C$",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 2.2,
+      "ymin": -0.2,
+      "ymax": 3.5,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "x*exp(x)",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 2.718281828459045,
+        "label": "(1, e)",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Evaluate $\\int_1^ex\\ln x\\,dx$.",
+     "steps": [
+      "$u=\\ln x$, $\\frac{dv}{dx}=x$: $\\frac{du}{dx}=\\frac1x$, $v=\\frac{x^2}{2}$.",
+      "$\\left[\\frac{x^2}{2}\\ln x\\right]_1^e-\\int_1^e\\frac x2dx=\\frac{e^2}{2}-\\left[\\frac{x^2}{4}\\right]_1^e=\\frac{e^2}{2}-\\frac{e^2-1}{4}$."
+     ],
+     "answer": "$\\frac{e^2+1}{4}\\approx2.097$"
+    }
+   ],
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-partial-fractions",
+   "title": "Partial fractions and their integration",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Split a rational function into partial fractions",
+    "Handle improper fractions",
+    "Integrate the results"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-integration-e13",
+    "gceal-maths-integration-e14",
+    "gceal-maths-integration-e15",
+    "gceal-maths-integration-e16",
+    "gceal-maths-integration-e17",
+    "gceal-maths-integration-e18"
+   ],
+   "selfCheck": [
+    "gceal-maths-partial-fractions-q1",
+    "gceal-maths-partial-fractions-q2",
+    "gceal-maths-partial-fractions-q3",
+    "gceal-maths-partial-fractions-q4",
+    "gceal-maths-partial-fractions-q5"
+   ],
+   "reviewNotes": [
+    "Repeated-factor and quadratic-factor cases are described but only distinct linear factors are exercised.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Partial fractions",
+     "md": "For distinct linear factors: $\\frac{px+q}{(x-a)(x-b)}=\\frac{A}{x-a}+\\frac{B}{x-b}$. Multiply by the denominator and substitute $x=a$ (to get $A$) and $x=b$ (to get $B$) - the cover-up method. For a repeated factor use $\\frac{A}{x-a}+\\frac{B}{(x-a)^2}$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Improper fractions",
+     "md": "If the degree of the numerator is at least that of the denominator, divide first. Example: $\\frac{x^2}{x^2-1}=1+\\frac{1}{x^2-1}$, and then split $\\frac{1}{(x-1)(x+1)}=\\frac{1/2}{x-1}-\\frac{1/2}{x+1}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Integrating",
+     "md": "$\\int\\frac{A}{x-a}dx=A\\ln|x-a|+C$. After integrating, combine logs with $\\ln p+\\ln q=\\ln pq$ and $\\ln p-\\ln q=\\ln\\frac pq$ to give an exact answer."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Do not forget to check your constants (substitute another value of $x$). A fraction that is improper must be divided first. $\\int\\frac{1}{x-a}dx$ is a logarithm, not $-\\frac{1}{(x-a)^2}$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Express $\\frac{5x+1}{(x-1)(x+2)}$ in partial fractions.",
+     "steps": [
+      "Write $5x+1=A(x+2)+B(x-1)$.",
+      "$x=1$: $6=3A$, $A=2$. $x=-2$: $-9=-3B$, $B=3$.",
+      "Check at $x=0$: LHS $=-\\frac{1}{2}$; RHS $=-2+\\frac{3}{2}=-\\frac{1}{2}$."
+     ],
+     "answer": "$\\frac{2}{x-1}+\\frac{3}{x+2}$",
+     "figure": {
+      "kind": "plot",
+      "xmin": 1.2,
+      "xmax": 6,
+      "ymin": -2,
+      "ymax": 12,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "(5x+1)/((x-1)(x+2))",
+        "color": "blue"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "x"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Evaluate $\\int_2^3\\frac{5x+1}{(x-1)(x+2)}dx$.",
+     "steps": [
+      "$\\int\\left(\\frac{2}{x-1}+\\frac{3}{x+2}\\right)dx=2\\ln|x-1|+3\\ln|x+2|$.",
+      "$[\\,]_2^3=(2\\ln2+3\\ln5)-(2\\ln1+3\\ln4)=2\\ln2+3\\ln\\frac{5}{4}$."
+     ],
+     "answer": "$2\\ln2+3\\ln\\frac{5}{4}\\approx2.056$"
+    }
+   ],
+   "chapter": "gceal-maths-integration"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-maths-integration-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-integration-substitution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Evaluate $\\int_0^{\\pi/2}\\cos x\\sin^2x\\,dx$ (3 d.p.).",
+   "answer": 0.333,
+   "tolerance": 0.001,
+   "explanation": "$u=\\sin x$: $\\int_0^1u^2du=\\frac{1}{3}$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-integration-substitution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int xe^{x^2}dx=$",
+   "choices": [
+    "$xe^{x^2}+C$",
+    "$e^{x^2}+C$",
+    "$2e^{x^2}+C$",
+    "$\\frac{1}{2}e^{x^2}+C$"
+   ],
+   "answer": 3,
+   "explanation": "$u=x^2$, $du=2x\\,dx$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-integration-substitution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int(2x+1)^4dx=\\frac{(2x+1)^5}{5}+C$.",
+   "answer": false,
+   "explanation": "The inside has derivative 2, so the result is $\\frac{(2x+1)^5}{10}+C$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-integration-substitution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int\\frac{1}{2x+3}dx=$",
+   "choices": [
+    "$\\ln|2x+3|+C$",
+    "$2\\ln|2x+3|+C$",
+    "$-\\frac{1}{(2x+3)^2}+C$",
+    "$\\frac{1}{2}\\ln|2x+3|+C$"
+   ],
+   "answer": 3,
+   "explanation": "Reverse chain rule with factor $\\frac{1}{2}$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-integration-substitution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Evaluate $\\int_0^2\\frac{x}{x^2+1}dx$ (3 d.p.).",
+   "answer": 0.805,
+   "tolerance": 0.001,
+   "explanation": "$\\frac{1}{2}\\left[\\ln(x^2+1)\\right]_0^2=\\frac{1}{2}\\ln5=0.805$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-integration-substitution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Answer the following.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Evaluate $\\int_0^1x(1-x^2)^3dx$.",
+     "answer": 0.125,
+     "tolerance": 0.001,
+     "explanation": "$u=1-x^2$, $du=-2x\\,dx$: $-\\frac{1}{2}\\int_1^0u^3du=\\frac{1}{2}\\cdot\\frac{1}{4}=\\frac{1}{8}$.",
+     "id": "gceal-maths-integration-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "$\\int\\tan x\\,dx=$",
+     "choices": [
+      "$\\ln|\\sin x|+C$",
+      "$-\\ln|\\cos x|+C$",
+      "$\\ln|\\cos x|+C$",
+      "$\\frac{1}{\\cos^2x}+C$"
+     ],
+     "answer": 1,
+     "explanation": "$\\tan x=\\frac{\\sin x}{\\cos x}$ and $u=\\cos x$.",
+     "id": "gceal-maths-integration-e06-b"
+    }
+   ],
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-substitution-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-substitution",
+   "prompt": "The substitution for $\\int x\\sqrt{x^2+4}\\,dx$ is",
+   "choices": [
+    "$u=x$",
+    "$u=\\sqrt x$",
+    "$u=x^2+4$",
+    "$u=4$"
+   ],
+   "answer": 2,
+   "explanation": "Inside the root.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-substitution-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-substitution",
+   "prompt": "$\\int\\cos2x\\,dx=$",
+   "choices": [
+    "$2\\sin2x+C$",
+    "$\\frac{1}{2}\\sin2x+C$",
+    "$\\sin2x+C$",
+    "$-\\frac{1}{2}\\sin2x+C$"
+   ],
+   "answer": 1,
+   "explanation": "Factor $\\frac{1}{2}$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-substitution-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-substitution",
+   "prompt": "$\\int\\frac{2x}{x^2+5}dx=$",
+   "choices": [
+    "$\\ln(x^2+5)+C$",
+    "$\\frac{1}{x^2+5}+C$",
+    "$2\\ln x+C$",
+    "$\\frac{x^2}{x^2+5}+C$"
+   ],
+   "answer": 0,
+   "explanation": "$f'/f$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-substitution-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-substitution",
+   "prompt": "For a definite integral with substitution the limits",
+   "choices": [
+    "stay the same",
+    "are swapped",
+    "are changed to $u$-values",
+    "become 0 and 1"
+   ],
+   "answer": 2,
+   "explanation": "Or return to $x$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-substitution-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-substitution",
+   "prompt": "$\\int e^{3x}dx=$",
+   "choices": [
+    "$3e^{3x}+C$",
+    "$\\frac{e^{3x}}{x}+C$",
+    "$\\frac{1}{3}e^{3x}+C$",
+    "$e^{3x}+C$"
+   ],
+   "answer": 2,
+   "explanation": "Factor $\\frac{1}{3}$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-integration-by-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Evaluate $\\int_0^1xe^x\\,dx$.",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "$[(x-1)e^x]_0^1=0-(-1)=1$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-integration-by-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int x\\cos x\\,dx=$",
+   "choices": [
+    "$x\\sin x-\\cos x+C$",
+    "$x\\sin x+\\cos x+C$",
+    "$\\frac{x^2}{2}\\sin x+C$",
+    "$-x\\sin x+\\cos x+C$"
+   ],
+   "answer": 1,
+   "explanation": "$u=x$, $v=\\sin x$: $x\\sin x-\\int\\sin x\\,dx$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-integration-by-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int xe^xdx=\\frac{x^2}{2}e^x+C$.",
+   "answer": false,
+   "explanation": "Differentiating that gives $xe^x+\\frac{x^2}{2}e^x$, not $xe^x$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-integration-by-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int\\ln x\\,dx=$",
+   "choices": [
+    "$x\\ln x+C$",
+    "$\\frac1x+C$",
+    "$\\frac{(\\ln x)^2}{2}+C$",
+    "$x\\ln x-x+C$"
+   ],
+   "answer": 3,
+   "explanation": "$u=\\ln x$, $v'=1$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-integration-by-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $\\int x^2e^xdx$.",
+   "model": "$u=x^2$, $v'=e^x$: $x^2e^x-\\int2xe^xdx$. By Example 1, $\\int xe^xdx=(x-1)e^x$, so the result is $x^2e^x-2(x-1)e^x+C=(x^2-2x+2)e^x+C$.",
+   "rubric": [
+    "First application (1)",
+    "Second application (1)",
+    "Simplified answer (1)"
+   ],
+   "explanation": "$u=x^2$, $v'=e^x$: $x^2e^x-\\int2xe^xdx$. By Example 1, $\\int xe^xdx=(x-1)e^x$, so the result is $x^2e^x-2(x-1)e^x+C=(x^2-2x+2)e^x+C$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-integration-by-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Answer the following.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "To find $\\int x\\sin x\\,dx$ the best choice of $u$ is",
+     "choices": [
+      "$u=\\sin x$",
+      "$u=1$",
+      "$u=x\\sin x$",
+      "$u=x$"
+     ],
+     "answer": 3,
+     "explanation": "$x$ differentiates to 1.",
+     "id": "gceal-maths-integration-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Evaluate $\\int_0^{\\pi/2}x\\sin x\\,dx$.",
+     "answer": 1,
+     "tolerance": 0.001,
+     "explanation": "$[-x\\cos x]_0^{\\pi/2}+\\int_0^{\\pi/2}\\cos x\\,dx=0+1=1$.",
+     "id": "gceal-maths-integration-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area under $y=xe^{-x}$ from $x=0$ to $x=1$ (3 d.p.).",
+     "answer": 0.264,
+     "tolerance": 0.001,
+     "explanation": "$\\int xe^{-x}dx=-(x+1)e^{-x}$, so $[ -(x+1)e^{-x}]_0^1=1-2e^{-1}=0.264$.",
+     "id": "gceal-maths-integration-e12-c"
+    }
+   ],
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-by-parts-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-by-parts",
+   "prompt": "Integration by parts undoes the",
+   "choices": [
+    "power rule",
+    "product rule",
+    "quotient rule",
+    "chain rule"
+   ],
+   "answer": 1,
+   "explanation": "From $(uv)'=u'v+uv'$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-by-parts-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-by-parts",
+   "prompt": "For $\\int x^2\\ln x\\,dx$ take $u=$",
+   "choices": [
+    "$1$",
+    "$x^2\\ln x$",
+    "$\\ln x$",
+    "$x^2$"
+   ],
+   "answer": 2,
+   "explanation": "LATE.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-by-parts-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-by-parts",
+   "prompt": "$\\int_0^\\pi\\sin x\\,dx=$",
+   "choices": [
+    "$1$",
+    "$-2$",
+    "$2$",
+    "$0$"
+   ],
+   "answer": 2,
+   "explanation": "$[-\\cos x]_0^\\pi$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-by-parts-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-by-parts",
+   "prompt": "$\\int xe^{2x}dx=$",
+   "choices": [
+    "$\\frac{x}{2}e^{2x}-\\frac{1}{4}e^{2x}+C$",
+    "$\\frac{x}{2}e^{2x}+C$",
+    "$\\frac{x^2}{2}e^{2x}+C$",
+    "$xe^{2x}-e^{2x}+C$"
+   ],
+   "answer": 0,
+   "explanation": "$u=x$, $v=\\frac{1}{2}e^{2x}$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-by-parts-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-integration-by-parts",
+   "prompt": "How many applications of parts does $\\int x^2e^xdx$ need?",
+   "choices": [
+    "1",
+    "0",
+    "2",
+    "3"
+   ],
+   "answer": 2,
+   "explanation": "Each reduces the power of $x$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-partial-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In $\\frac{3x+5}{(x+1)(x+3)}=\\frac{A}{x+1}+\\frac{B}{x+3}$ find $B$.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "$x=-3$: $-4=-2B$, $B=2$ (and $A=1$).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-partial-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{1}{x(x+1)}=$",
+   "choices": [
+    "$\\frac{1}{x^2+x}$ cannot be split",
+    "$\\frac{1}{x}-\\frac{1}{x-1}$",
+    "$\\frac1x-\\frac{1}{x+1}$",
+    "$\\frac1x+\\frac1{x+1}$"
+   ],
+   "answer": 2,
+   "explanation": "$1=A(x+1)+Bx$: $A=1$, $B=-1$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-partial-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int\\frac{1}{x-a}dx=-\\frac{1}{(x-a)^2}+C$.",
+   "answer": false,
+   "explanation": "It is $\\ln|x-a|+C$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-partial-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int\\frac{1}{(x-1)(x+1)}dx=$",
+   "choices": [
+    "$\\ln|x^2-1|+C$",
+    "$\\frac{1}{2}\\ln\\left|\\frac{x-1}{x+1}\\right|+C$",
+    "$\\frac{1}{2}\\ln|x^2-1|+C$",
+    "$\\frac{1}{2}\\ln\\left|\\frac{x+1}{x-1}\\right|+C$"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{1}{2}\\int\\left(\\frac{1}{x-1}-\\frac{1}{x+1}\\right)dx$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-partial-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write $\\frac{x^2}{x^2-1}$ in the form $1+\\frac{A}{x-1}+\\frac{B}{x+1}$.",
+   "model": "$\\frac{x^2}{x^2-1}=1+\\frac{1}{x^2-1}$. Then $\\frac{1}{(x-1)(x+1)}=\\frac{A}{x-1}+\\frac{B}{x+1}$ with $1=A(x+1)+B(x-1)$: $x=1$ gives $A=\\frac{1}{2}$; $x=-1$ gives $B=-\\frac{1}{2}$.",
+   "rubric": [
+    "Divides first (1)",
+    "$A=\\frac{1}{2}$ (1)",
+    "$B=-\\frac{1}{2}$ (1)"
+   ],
+   "explanation": "$\\frac{x^2}{x^2-1}=1+\\frac{1}{x^2-1}$. Then $\\frac{1}{(x-1)(x+1)}=\\frac{A}{x-1}+\\frac{B}{x+1}$ with $1=A(x+1)+B(x-1)$: $x=1$ gives $A=\\frac{1}{2}$; $x=-1$ gives $B=-\\frac{1}{2}$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-partial-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Let $f(x)=\\frac{4x-2}{(x-2)(x+1)}$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Write $f(x)=\\frac{A}{x-2}+\\frac{B}{x+1}$. Find $A+B$.",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "$x=2$: $6=3A$, $A=2$. $x=-1$: $-6=-3B$, $B=2$. So $A+B=4$ (also equals the coefficient of $x$ in the numerator, 4).",
+     "id": "gceal-maths-integration-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Evaluate $\\int_3^5f(x)\\,dx$ (3 d.p.).",
+     "answer": 3.008,
+     "tolerance": 0.002,
+     "explanation": "$[2\\ln(x-2)+2\\ln(x+1)]_3^5=2\\ln3+2\\ln\\frac{6}{4}=3.008$.",
+     "id": "gceal-maths-integration-e18-b"
+    }
+   ],
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-partial-fractions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-partial-fractions",
+   "prompt": "The cover-up method finds $A$ by",
+   "choices": [
+    "substituting $x=a$",
+    "setting $A=1$",
+    "differentiating",
+    "adding fractions"
+   ],
+   "answer": 0,
+   "explanation": "Kills the other term.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-partial-fractions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-partial-fractions",
+   "prompt": "$\\frac{x+1}{x(x+2)}$ splits as $\\frac{A}{x}+\\frac{B}{x+2}$ with $A=$",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$1$",
+    "$2$",
+    "$-\\frac{1}{2}$"
+   ],
+   "answer": 0,
+   "explanation": "$x=0$: $1=2A$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-partial-fractions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-partial-fractions",
+   "prompt": "A fraction with numerator degree 2 and denominator degree 2 is",
+   "choices": [
+    "undefined",
+    "a surd",
+    "proper",
+    "improper"
+   ],
+   "answer": 3,
+   "explanation": "Divide first.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-partial-fractions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-partial-fractions",
+   "prompt": "$\\ln6-\\ln2=$",
+   "choices": [
+    "$\\ln3$",
+    "$\\ln12$",
+    "$\\ln\\frac{1}{3}$",
+    "$\\ln4$"
+   ],
+   "answer": 0,
+   "explanation": "Quotient law.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-partial-fractions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-partial-fractions",
+   "prompt": "$\\int\\frac{3}{x+2}dx=$",
+   "choices": [
+    "$\\frac{3}{(x+2)^2}+C$",
+    "$3x\\ln|x+2|+C$",
+    "$\\ln|3x+6|+C$ only",
+    "$3\\ln|x+2|+C$"
+   ],
+   "answer": 3,
+   "explanation": "Constant multiple of $\\ln$.",
+   "chapter": "gceal-maths-integration"
+  },
+  {
+   "id": "gceal-maths-integration-m01",
+   "kind": "numeric",
+   "tier": "examen",
+   "lesson": "gceal-maths-integration-substitution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Evaluate $\\int_1^2\\ln x\\,dx$ (4 d.p.).",
+   "answer": 0.3863,
+   "tolerance": 0.0003,
+   "explanation": "By parts: $[x\\ln x-x]_1^2=(2\\ln2-2)-(0-1)=2\\ln2-1=0.3863$.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-maths-integration"
+  }
+ ]
+}

@@ -1,0 +1,754 @@
+{
+ "chapter": "lower6-computer-databases",
+ "lessons": [
+  {
+   "id": "lower6-computer-relational-sql",
+   "title": "Relational databases and SQL",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define table, record, field, primary key and foreign key",
+    "Explain why relational databases reduce duplication",
+    "Write SELECT, INSERT, UPDATE and DELETE statements",
+    "Use WHERE, ORDER BY, COUNT, AVG and GROUP BY"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-databases-e01",
+    "lower6-computer-databases-e02",
+    "lower6-computer-databases-e03",
+    "lower6-computer-databases-e04",
+    "lower6-computer-databases-e05",
+    "lower6-computer-databases-e06"
+   ],
+   "selfCheck": [
+    "lower6-computer-relational-sql-q1",
+    "lower6-computer-relational-sql-q2",
+    "lower6-computer-relational-sql-q3",
+    "lower6-computer-relational-sql-q4",
+    "lower6-computer-relational-sql-q5"
+   ],
+   "reviewNotes": [
+    "All SQL here was run in SQLite to check the results. Dialect differences exist (e.g. quoting); the Board's exact SQL subset must be checked.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Relational model",
+     "md": "A **relational database** stores data in **tables** (relations). Each **record** (row) is about one entity; each **field** (column) holds one attribute. A **primary key** uniquely identifies a record. A **foreign key** is a field in one table that holds the primary key of another table, linking the two. Splitting data into related tables avoids repeating the same data many times and keeps it consistent."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Querying with SQL",
+     "md": "SQL (Structured Query Language) is declarative. **SELECT** columns **FROM** a table **WHERE** a condition **ORDER BY** a column (ASC or DESC). Text values are written in quotes. Functions: COUNT(\\*), SUM(), AVG(), MAX(), MIN(). **GROUP BY** groups rows to apply a function to each group."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 226,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Student table",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 59,
+        "text": "ID",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 59,
+        "text": "Name",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 59,
+        "text": "Town",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 59,
+        "text": "Mark",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 87,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 87,
+        "text": "Ada",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 87,
+        "text": "Buea",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 87,
+        "text": "72",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 115,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 115,
+        "text": "Paul",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 115,
+        "text": "Limbe",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 115,
+        "text": "48",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 143,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 143,
+        "text": "Nina",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 143,
+        "text": "Buea",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 143,
+        "text": "55",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 171,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 152,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 171,
+        "text": "Joel",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 152,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 171,
+        "text": "Kumba",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 152,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 171,
+        "text": "63",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 180,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 199,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 180,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 199,
+        "text": "Mary",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 180,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 199,
+        "text": "Buea",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 180,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 199,
+        "text": "41",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A student table of five records with ID, Name, Town and Mark.",
+     "alt": "Table of five students with ID, name, town and mark."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Changing data",
+     "md": "INSERT INTO Student VALUES (6, 'Eve', 'Bali', 59); UPDATE Student SET Mark = 60 WHERE ID = 6; DELETE FROM Student WHERE ID = 6; Always include a WHERE in UPDATE and DELETE, or **every** row is changed or deleted."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- UPDATE or DELETE without WHERE affects all rows.\n- Using = on a NULL value: use IS NULL.\n- A foreign key must refer to an existing primary key value.\n- Text comparisons are case/format sensitive in many systems: 'Buea' and 'buea' may differ."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Query",
+     "statement": "Write SQL to list the names of students in Buea with Mark at least 50, highest mark first, using the table above.",
+     "steps": [
+      "SELECT Name FROM Student WHERE Town = 'Buea' AND Mark >= 50 ORDER BY Mark DESC;",
+      "Buea students: Ada 72, Nina 55, Mary 41. Mark >= 50 keeps Ada and Nina; order: Ada, Nina."
+     ],
+     "answer": "Ada, Nina"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Aggregate",
+     "statement": "What do SELECT AVG(Mark) FROM Student; and SELECT COUNT(\\*) FROM Student WHERE Mark < 50; return?",
+     "steps": [
+      "AVG: (72 + 48 + 55 + 63 + 41) / 5 = 279 / 5 = 55.8.",
+      "Marks below 50: Paul (48) and Mary (41), so COUNT = 2."
+     ],
+     "answer": "55.8 and 2"
+    }
+   ],
+   "chapter": "lower6-computer-databases"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-computer-databases-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-relational-sql",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A field that links to the primary key of another table is a",
+   "choices": [
+    "report",
+    "candidate sort",
+    "foreign key",
+    "query"
+   ],
+   "answer": 2,
+   "explanation": "Foreign key.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-databases-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-computer-relational-sql",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "SELECT COUNT(\\*) FROM Student WHERE Town = 'Buea' returns",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Ada, Nina and Mary.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-databases-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-relational-sql",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "UPDATE without a WHERE clause changes every record.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-databases-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-relational-sql",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "SELECT AVG(Mark) FROM Student WHERE Town = 'Buea' returns (to 1 decimal place)",
+   "answer": 56,
+   "tolerance": 0.05,
+   "explanation": "(72 + 55 + 41) / 3 = 168 / 3 = 56.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-databases-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-relational-sql",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain two advantages of using two related tables (e.g. Student and Class) instead of one big table.",
+   "model": "Less repeated data (e.g. teacher name stored once); easier updates because a change is made in one place; fewer inconsistencies.",
+   "rubric": "1 mark each, 2 marks plus 1 for example.",
+   "explanation": "Less repeated data (e.g. teacher name stored once); easier updates because a change is made in one place; fewer inconsistencies.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-databases-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-relational-sql",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Student table as above.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which SQL lists all names alphabetically?",
+     "choices": [
+      "SELECT Name ORDER Student;",
+      "SELECT \\* ORDER Name;",
+      "LIST Name FROM Student;",
+      "SELECT Name FROM Student ORDER BY Name;"
+     ],
+     "answer": 3,
+     "explanation": "Standard form.",
+     "id": "lower6-computer-databases-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many rows does SELECT \\* FROM Student WHERE Mark > 50 return?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "Ada 72, Nina 55, Joel 63.",
+     "id": "lower6-computer-databases-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write SQL to increase Paul's mark to 50.",
+     "model": "UPDATE Student SET Mark = 50 WHERE Name = 'Paul';",
+     "rubric": "1 mark UPDATE/SET, 1 mark WHERE.",
+     "explanation": "UPDATE Student SET Mark = 50 WHERE Name = 'Paul';",
+     "id": "lower6-computer-databases-e06-c"
+    }
+   ],
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-relational-sql-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-relational-sql",
+   "prompt": "A primary key",
+   "choices": [
+    "repeats",
+    "uniquely identifies each record",
+    "is a password",
+    "is a query"
+   ],
+   "answer": 1,
+   "explanation": "Unique.",
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-relational-sql-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-relational-sql",
+   "prompt": "SELECT is used to",
+   "choices": [
+    "draw gates",
+    "delete a table only",
+    "retrieve data",
+    "set a password"
+   ],
+   "answer": 2,
+   "explanation": "Query.",
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-relational-sql-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-relational-sql",
+   "prompt": "GROUP BY is used to",
+   "choices": [
+    "create folders",
+    "format text",
+    "sort items alphabetically only",
+    "group rows for aggregate functions"
+   ],
+   "answer": 3,
+   "explanation": "Grouping.",
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-relational-sql-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-relational-sql",
+   "prompt": "DELETE FROM Student WHERE ID = 3 removes",
+   "choices": [
+    "one record",
+    "the table",
+    "the database",
+    "all records"
+   ],
+   "answer": 0,
+   "explanation": "WHERE limits.",
+   "chapter": "lower6-computer-databases"
+  },
+  {
+   "id": "lower6-computer-relational-sql-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-relational-sql",
+   "prompt": "SQL is an example of",
+   "choices": [
+    "an assembler",
+    "machine code",
+    "a mouse",
+    "a declarative language"
+   ],
+   "answer": 3,
+   "explanation": "Declarative.",
+   "chapter": "lower6-computer-databases"
+  }
+ ]
+}

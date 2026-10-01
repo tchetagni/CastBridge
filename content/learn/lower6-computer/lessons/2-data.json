@@ -1,0 +1,941 @@
+{
+ "chapter": "lower6-computer-data",
+ "lessons": [
+  {
+   "id": "lower6-computer-data-representation",
+   "title": "Number systems, negative numbers and character sets",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Convert between binary, denary and hexadecimal",
+    "Represent negative integers in two's complement",
+    "State the range of an n-bit number",
+    "Explain ASCII and Unicode"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-data-e01",
+    "lower6-computer-data-e02",
+    "lower6-computer-data-e03",
+    "lower6-computer-data-e04",
+    "lower6-computer-data-e05",
+    "lower6-computer-data-e06"
+   ],
+   "selfCheck": [
+    "lower6-computer-data-representation-q1",
+    "lower6-computer-data-representation-q2",
+    "lower6-computer-data-representation-q3",
+    "lower6-computer-data-representation-q4",
+    "lower6-computer-data-representation-q5"
+   ],
+   "reviewNotes": [
+    "Verified in Python (two's complement 8-bit). Syllabus may also expect sign-and-magnitude: not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Bases and ranges",
+     "md": "Place values in binary are powers of 2. An n-bit **unsigned** integer ranges from 0 to 2ⁿ - 1 (8 bits: 0 to 255). Hexadecimal groups four bits: 1011 0111 = B7 = 11 x 16 + 7 = 183. Use hex to write long binary numbers compactly."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Two's complement",
+     "md": "In n-bit two's complement the leftmost bit has a **negative** weight (-128 in 8 bits). To negate a number: flip all bits and add 1. -45: 45 = 00101101, flipped 11010010, plus 1 gives **11010011**. Range for 8 bits: -128 to +127. Subtraction is addition of the negative."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 150,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Two's complement weights: 11010011 = -45",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 33.0,
+        "y": 94,
+        "text": "-128",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 33.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 60.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 83.0,
+        "y": 94,
+        "text": "64",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 83.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 133.0,
+        "y": 94,
+        "text": "32",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 133.0,
+        "y": 128,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 183.0,
+        "y": 94,
+        "text": "16",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 183.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 233.0,
+        "y": 94,
+        "text": "8",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 233.0,
+        "y": 128,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 283.0,
+        "y": 94,
+        "text": "4",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 283.0,
+        "y": 128,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 94,
+        "text": "2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 360.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 383.0,
+        "y": 94,
+        "text": "1",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 383.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Eight boxes with weights -128, 64, 32, 16, 8, 4, 2, 1 above the bits 11010011.",
+     "alt": "Bit weights for an 8-bit two's complement number, the leftmost weight being -128."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Characters",
+     "md": "Characters are stored as numeric codes. **ASCII** is a 7-bit code (128 characters: letters, digits, punctuation, control codes). **Unicode** extends this to represent most of the world's writing systems (including accented letters used in French and African-language scripts). Characters in a text file are stored as a sequence of codes."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- 8-bit two's complement cannot store +128.\n- 11010011 as unsigned is 211, as two's complement is -45: the meaning depends on the interpretation.\n- Adding 1 after flipping: forgetting it gives the one's complement, not the negative.\n- ASCII 'A' (65) is not the digit 1."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Negative number",
+     "statement": "Write -45 in 8-bit two's complement and check.",
+     "steps": [
+      "45 = 00101101. Flip: 11010010. Add 1: 11010011.",
+      "Check weights: -128 + 64 + 16 + 2 + 1 = -128 + 83 = -45."
+     ],
+     "answer": "11010011"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Subtraction",
+     "statement": "Compute 20 - 35 in 8-bit two's complement.",
+     "steps": [
+      "20 = 00010100. -35: 35 = 00100011, flip 11011100, +1 = 11011101.",
+      "Add: 00010100 + 11011101 = 11110001. Weights: -128+64+32+16+1 = -15."
+     ],
+     "answer": "11110001 = -15"
+    }
+   ],
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-boolean-logic",
+   "title": "Boolean algebra and logic gates",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe NOT, AND, OR, NAND, NOR and XOR",
+    "Complete truth tables",
+    "Apply De Morgan's laws",
+    "Write and interpret a logic expression"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-data-e07",
+    "lower6-computer-data-e08",
+    "lower6-computer-data-e09",
+    "lower6-computer-data-e10",
+    "lower6-computer-data-e11",
+    "lower6-computer-data-e12"
+   ],
+   "selfCheck": [
+    "lower6-computer-boolean-logic-q1",
+    "lower6-computer-boolean-logic-q2",
+    "lower6-computer-boolean-logic-q3",
+    "lower6-computer-boolean-logic-q4",
+    "lower6-computer-boolean-logic-q5"
+   ],
+   "reviewNotes": [
+    "Truth tables checked in Python (De Morgan verified for all inputs). Gate diagram drawn with a path.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Gates",
+     "md": "A **logic gate** takes one or more binary inputs and gives one output. **NOT**: output is the opposite of the input. **AND**: 1 only if all inputs are 1. **OR**: 1 if at least one input is 1. **NAND** = NOT AND, **NOR** = NOT OR. **XOR**: 1 if the inputs are different."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Truth tables",
+     "md": "A **truth table** lists every input combination and the output. For two inputs there are 2² = 4 rows; for n inputs, 2ⁿ rows. Example: A AND B is 1 only in the row A=1, B=1; A OR B is 0 only in the row A=0, B=0."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 160,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 20,
+        "text": "Q = A AND B",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 80,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 130,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 45,
+        "y1": 76,
+        "x2": 130,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 45,
+        "y1": 126,
+        "x2": 130,
+        "y2": 126,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 76,
+        "x2": 130,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 126,
+        "x2": 130,
+        "y2": 112,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "path",
+        "d": "M130 70 H170 A32 32 0 0 1 170 134 H130 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 202,
+        "y1": 102,
+        "x2": 300,
+        "y2": 102,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 108,
+        "text": "Q",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 166,
+        "y": 108,
+        "text": "AND",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The symbol of an AND gate with inputs A and B and output Q.",
+     "alt": "AND gate symbol: two inputs A and B on the left, output Q on the right."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Laws",
+     "md": "**De Morgan**: NOT(A AND B) = (NOT A) OR (NOT B), and NOT(A OR B) = (NOT A) AND (NOT B). Other identities: A AND 1 = A; A OR 0 = A; A AND 0 = 0; A OR 1 = 1; A AND A = A; A OR (NOT A) = 1; NOT(NOT A) = A."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Confusing XOR (different inputs) with OR (at least one).\n- Forgetting to include all 2ⁿ rows.\n- Misapplying De Morgan: the operator changes **and** each term is negated.\n- Writing NAND as NOT A AND NOT B (that is NOR)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Truth table",
+     "statement": "Complete the truth table of Q = NOT(A AND B).",
+     "steps": [
+      "A AND B is 1 only for A=1,B=1, so Q = 0 there.",
+      "Rows (A,B): (0,0)->1, (0,1)->1, (1,0)->1, (1,1)->0. This is NAND."
+     ],
+     "answer": "1, 1, 1, 0"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - De Morgan",
+     "statement": "Show that NOT(A OR B) equals (NOT A) AND (NOT B) when A = 1, B = 0.",
+     "steps": [
+      "A OR B = 1, so NOT(A OR B) = 0.",
+      "NOT A = 0, NOT B = 1, and 0 AND 1 = 0. Both sides are 0."
+     ],
+     "answer": "Both sides give 0."
+    }
+   ],
+   "chapter": "lower6-computer-data"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-computer-data-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The range of unsigned 8-bit integers has largest value",
+   "answer": 255,
+   "tolerance": 0,
+   "explanation": "2^8 - 1 = 255.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert B7 (hex) to denary.",
+   "answer": 183,
+   "tolerance": 0,
+   "explanation": "11 x 16 + 7 = 183.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In 8-bit two's complement the number +128 can be stored.",
+   "answer": false,
+   "explanation": "The largest is +127.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The smallest 8-bit two's complement number is",
+   "answer": -128,
+   "tolerance": 0,
+   "explanation": "10000000 = -128.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain the difference between ASCII and Unicode.",
+   "model": "ASCII uses 7 bits for 128 characters (mainly English letters, digits and symbols). Unicode uses more bits per character and covers many languages and symbols, so it can represent accented and African-language characters.",
+   "rubric": "1 mark per correct statement (3).",
+   "explanation": "ASCII uses 7 bits for 128 characters (mainly English letters, digits and symbols). Unicode uses more bits per character and covers many languages and symbols, so it can represent accented and African-language characters.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two's complement with 8 bits.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "-1 is stored as",
+     "choices": [
+      "11111111",
+      "10000001",
+      "11111110",
+      "00000001"
+     ],
+     "answer": 0,
+     "explanation": "Flip 00000001 = 11111110, add 1 = 11111111.",
+     "id": "lower6-computer-data-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The denary value of 11100000 in two's complement",
+     "answer": -32,
+     "tolerance": 0,
+     "explanation": "-128 + 64 + 32 = -32.",
+     "id": "lower6-computer-data-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which number cannot be stored in 8 bits (two's complement)?",
+     "choices": [
+      "200",
+      "-100",
+      "100",
+      "-128"
+     ],
+     "answer": 0,
+     "explanation": "Max is 127.",
+     "id": "lower6-computer-data-e06-c"
+    }
+   ],
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-representation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-data-representation",
+   "prompt": "An 8-bit unsigned integer can store up to",
+   "choices": [
+    "128",
+    "127",
+    "256",
+    "255"
+   ],
+   "answer": 3,
+   "explanation": "2^8 - 1.",
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-representation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-data-representation",
+   "prompt": "Hex 1F equals",
+   "choices": [
+    "32",
+    "31",
+    "16",
+    "15"
+   ],
+   "answer": 1,
+   "explanation": "16 + 15.",
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-representation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-data-representation",
+   "prompt": "To negate a two's complement number we",
+   "choices": [
+    "subtract 1 only",
+    "only flip the bits",
+    "flip the bits and add 1",
+    "add 1 then flip"
+   ],
+   "answer": 2,
+   "explanation": "Method.",
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-representation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-data-representation",
+   "prompt": "Unicode is used to",
+   "choices": [
+    "represent many writing systems",
+    "draw pictures",
+    "control the CPU",
+    "store only digits"
+   ],
+   "answer": 0,
+   "explanation": "Wider than ASCII.",
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-representation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-data-representation",
+   "prompt": "The leftmost bit of an 8-bit two's complement number has weight",
+   "choices": [
+    "-128",
+    "-64",
+    "+128",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "Negative weight.",
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-boolean-logic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The output of an AND gate is 1 when",
+   "choices": [
+    "any input is 1",
+    "all inputs are 0",
+    "all inputs are 1",
+    "inputs differ"
+   ],
+   "answer": 2,
+   "explanation": "AND definition.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-computer-boolean-logic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many rows in the truth table of a 3-input circuit?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "2^3 = 8.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-boolean-logic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "XOR gives 1 when its two inputs are the same.",
+   "answer": false,
+   "explanation": "XOR gives 1 when they are different.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-boolean-logic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "NOT(A OR B) is equivalent to",
+   "choices": [
+    "A AND B",
+    "NOT A AND NOT B",
+    "A OR B",
+    "NOT A OR NOT B"
+   ],
+   "answer": 1,
+   "explanation": "De Morgan.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-boolean-logic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Draw (describe) the truth table of Q = A XOR B.",
+   "model": "A=0,B=0 -> 0; A=0,B=1 -> 1; A=1,B=0 -> 1; A=1,B=1 -> 0.",
+   "rubric": "1 mark per two correct rows (2 marks).",
+   "explanation": "A=0,B=0 -> 0; A=0,B=1 -> 1; A=1,B=0 -> 1; A=1,B=1 -> 0.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-data-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-boolean-logic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Q = (A AND B) OR (NOT C).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Q when A=1, B=1, C=1",
+     "answer": 1,
+     "tolerance": 0,
+     "explanation": "(1 AND 1) = 1, so Q = 1 OR 0 = 1.",
+     "id": "lower6-computer-data-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Q when A=0, B=1, C=1",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "(0 AND 1) = 0 and NOT 1 = 0, so Q = 0.",
+     "id": "lower6-computer-data-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "How many rows does the full truth table have?",
+     "model": "8 rows (three inputs, 2^3).",
+     "rubric": "1 mark each.",
+     "explanation": "8 rows (three inputs, 2^3).",
+     "id": "lower6-computer-data-e12-c"
+    }
+   ],
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-boolean-logic-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-boolean-logic",
+   "prompt": "NOT 1 equals",
+   "choices": [
+    "1",
+    "2",
+    "0",
+    "10"
+   ],
+   "answer": 2,
+   "explanation": "NOT inverts.",
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-boolean-logic-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-boolean-logic",
+   "prompt": "A OR B is 0 only when",
+   "choices": [
+    "both inputs are 0",
+    "B is 1",
+    "A is 1",
+    "both inputs are 1"
+   ],
+   "answer": 0,
+   "explanation": "OR.",
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-boolean-logic-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-boolean-logic",
+   "prompt": "NAND is",
+   "choices": [
+    "AND NOT",
+    "OR",
+    "XOR",
+    "NOT AND"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-boolean-logic-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-boolean-logic",
+   "prompt": "A AND 0 equals",
+   "choices": [
+    "A",
+    "0",
+    "NOT A",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "Identity.",
+   "chapter": "lower6-computer-data"
+  },
+  {
+   "id": "lower6-computer-boolean-logic-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-boolean-logic",
+   "prompt": "A OR (NOT A) equals",
+   "choices": [
+    "NOT A",
+    "1",
+    "A",
+    "0"
+   ],
+   "answer": 1,
+   "explanation": "Always true.",
+   "chapter": "lower6-computer-data"
+  }
+ ]
+}

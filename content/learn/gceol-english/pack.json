@@ -3,33 +3,148 @@
   "id": "gceol-english",
   "version": 1,
   "title": "English Language — GCE O Level",
-  "description": "Revision sheets, step-by-step worked examples, GCE O Level style exercises with model answers, and a mock paper: reading comprehension, grammar, reported speech, composition and summary writing.",
+  "description": "Revision sheets, step-by-step worked examples, GCE O Level style exercises with model answers and two mock papers: reading comprehension, grammar, reported speech and passive voice, vocabulary and usage, sentence structure, punctuation and spelling, letters, reports, speeches, articles, narrative and descriptive essays, summary, inference and figurative language, oral English and listening.",
   "lang": "en",
   "cursus": "secondary",
   "level": "Form 5",
   "subject": "english",
   "exam": "GCE-OL",
   "programRef": "Cameroon GCE Board, Ordinary Level English Language syllabus (Form 5) — to be checked against the official texts",
-  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
   "status": "draft",
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-01",
   "chapters": [
-    {"id": "gceol-english-ch-reading", "title": "Reading comprehension", "order": 1, "programRef": "O Level English Language — reading comprehension (to be checked against the official texts)"},
-    {"id": "gceol-english-ch-grammar", "title": "Grammar: tenses, concord and reported speech", "order": 2, "programRef": "O Level English Language — grammar and usage (to be checked against the official texts)"},
-    {"id": "gceol-english-ch-composition", "title": "Composition: letters and argumentative essays", "order": 3, "programRef": "O Level English Language — composition / continuous writing (to be checked against the official texts)"},
-    {"id": "gceol-english-ch-summary", "title": "Summary writing", "order": 4, "programRef": "O Level English Language — summary (to be checked against the official texts)"}
+    {
+      "id": "gceol-english-ch-reading",
+      "title": "Reading comprehension",
+      "order": 1,
+      "programRef": "O Level English Language — reading comprehension (to be checked against the official texts)"
+    },
+    {
+      "id": "gceol-english-ch-grammar",
+      "title": "Grammar: tenses, concord and reported speech",
+      "order": 2,
+      "programRef": "O Level English Language — grammar and usage (to be checked against the official texts)"
+    },
+    {
+      "id": "gceol-english-ch-composition",
+      "title": "Composition: letters and argumentative essays",
+      "order": 3,
+      "programRef": "O Level English Language — composition / continuous writing (to be checked against the official texts)"
+    },
+    {
+      "id": "gceol-english-ch-summary",
+      "title": "Summary writing",
+      "order": 4,
+      "programRef": "O Level English Language — summary (to be checked against the official texts)"
+    },
+    {
+      "id": "gceol-english-ch-vocab",
+      "title": "Vocabulary and usage",
+      "order": 5,
+      "programRef": "O Level English Language — vocabulary, word formation and usage (to be checked against the official texts)"
+    },
+    {
+      "id": "gceol-english-ch-structure",
+      "title": "Sentence structure, punctuation and spelling",
+      "order": 6,
+      "programRef": "O Level English Language — sentence structure, punctuation and spelling (to be checked against the official texts)"
+    },
+    {
+      "id": "gceol-english-ch-writing",
+      "title": "Writing for different purposes",
+      "order": 7,
+      "programRef": "O Level English Language — continuous writing: letters, reports, speeches, articles, narrative and descriptive essays (to be checked against the official texts)"
+    },
+    {
+      "id": "gceol-english-ch-skills",
+      "title": "Comprehension skills and summary extras",
+      "order": 8,
+      "programRef": "O Level English Language — comprehension (inference, figurative language, tone, purpose) and summary (to be checked against the official texts)"
+    },
+    {
+      "id": "gceol-english-ch-oral",
+      "title": "Oral English and listening",
+      "order": 9,
+      "programRef": "O Level English Language — oral English, listening and note-taking (to be checked against the official texts)"
+    }
   ],
   "mockExams": [
-    {"id": "gceol-english-mock",
-     "title": "GCE O Level mock — English Language",
-     "minutes": 120,
-     "instructions": "Answer ALL the questions. Read each passage carefully before you answer. Write complete sentences and use your own words unless you are told to quote. Marks are shown for each question (total 20). This mock paper is a CastBridge practice paper: its format is simplified and is to be checked against the official texts of the Cameroon GCE Board.",
-     "outOf": 20,
-     "sections": [
-       {"title": "Section A — Reading comprehension (6 marks)", "exercises": ["gceol-english-mock-reading"]},
-       {"title": "Section B — Grammar and reported speech (4 marks)", "exercises": ["gceol-english-mock-grammar"]},
-       {"title": "Section C — Summary (4 marks)", "exercises": ["gceol-english-mock-summary"]},
-       {"title": "Section D — Composition (6 marks)", "exercises": ["gceol-english-mock-composition"]}
-     ]}
+    {
+      "id": "gceol-english-mock",
+      "title": "GCE O Level mock — English Language",
+      "minutes": 120,
+      "instructions": "Answer ALL the questions. Read each passage carefully before you answer. Write complete sentences and use your own words unless you are told to quote. Marks are shown for each question (total 20). This mock paper is a CastBridge practice paper: its format is simplified and is to be checked against the official texts of the Cameroon GCE Board.",
+      "outOf": 20,
+      "sections": [
+        {
+          "title": "Section A — Reading comprehension (6 marks)",
+          "exercises": [
+            "gceol-english-mock-reading"
+          ]
+        },
+        {
+          "title": "Section B — Grammar and reported speech (4 marks)",
+          "exercises": [
+            "gceol-english-mock-grammar"
+          ]
+        },
+        {
+          "title": "Section C — Summary (4 marks)",
+          "exercises": [
+            "gceol-english-mock-summary"
+          ]
+        },
+        {
+          "title": "Section D — Composition (6 marks)",
+          "exercises": [
+            "gceol-english-mock-composition"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gceol-english-mock-language-2",
+      "title": "GCE O Level mock 2 — English Language: vocabulary, structure and comprehension skills",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Answer ALL the questions. Marks are shown for each section (total 20). This CastBridge practice paper is simplified; its format must be checked against the official texts of the Cameroon GCE Board.",
+      "sections": [
+        {
+          "title": "Section A — Vocabulary and usage (5 marks)",
+          "exercises": [
+            "gceol-english-ch-vocab-m01",
+            "gceol-english-ch-vocab-m02",
+            "gceol-english-ch-vocab-m03",
+            "gceol-english-ch-vocab-m04",
+            "gceol-english-ch-vocab-m05"
+          ]
+        },
+        {
+          "title": "Section B — Sentence structure (5 marks)",
+          "exercises": [
+            "gceol-english-ch-structure-m01",
+            "gceol-english-ch-structure-m02",
+            "gceol-english-ch-structure-m03",
+            "gceol-english-ch-structure-m04"
+          ]
+        },
+        {
+          "title": "Section C — Comprehension (4 marks)",
+          "exercises": [
+            "gceol-english-ch-skills-m01"
+          ]
+        },
+        {
+          "title": "Section D — Writing (6 marks)",
+          "exercises": [
+            "gceol-english-ch-skills-m02",
+            "gceol-english-ch-writing-m01"
+          ]
+        }
+      ]
+    }
   ]
 }

@@ -1,0 +1,1341 @@
+{
+ "chapter": "lower6-geography-climate",
+ "lessons": [
+  {
+   "id": "lower6-geography-atmosphere",
+   "title": "Atmosphere, heat budget and global winds",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board, Advanced Level Geography syllabus (Lower Sixth) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the composition and layers of the atmosphere",
+    "Explain why temperature varies with latitude and altitude",
+    "Describe pressure belts and the main surface winds"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-geography-climate-e01",
+    "lower6-geography-climate-e02",
+    "lower6-geography-climate-e03",
+    "lower6-geography-climate-e04",
+    "lower6-geography-climate-e05",
+    "lower6-geography-climate-e06"
+   ],
+   "selfCheck": [
+    "lower6-geography-atmosphere-q1",
+    "lower6-geography-atmosphere-q2",
+    "lower6-geography-atmosphere-q3",
+    "lower6-geography-atmosphere-q4",
+    "lower6-geography-atmosphere-q5"
+   ],
+   "reviewNotes": [
+    "Check the syllabus convention for pressure-belt latitudes (30° and 60° are used here as approximate values).",
+    "6.5°C per 1000 m is the standard average lapse rate; use the value the syllabus teaches.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Atmosphere and layers",
+     "md": "The atmosphere is mostly nitrogen (about 78%) and oxygen (about 21%), with small amounts of argon, carbon dioxide, water vapour and other gases. Layers from the ground: **troposphere** (weather occurs here), **stratosphere** (ozone layer), **mesosphere**, **thermosphere**. In the troposphere temperature falls with height, on average about 6.5°C per 1000 m."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Why latitude matters",
+     "md": "Near the equator the Sun’s rays are nearly overhead: they strike a small area and pass through less atmosphere, so heating is intense. Towards the poles the same energy is spread over a larger area and passes through more air. Surfaces with high **albedo** (ice, bright sand) reflect more energy than dark forest."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 176,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 78.66666666666667,
+        "y": 29.0,
+        "text": "Latitude",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 149.33333333333334,
+        "y": 8,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 29.0,
+        "text": "Pressure",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290.6666666666667,
+        "y": 8,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 361.33333333333337,
+        "y": 29.0,
+        "text": "Surface wind",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 40,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 78.66666666666667,
+        "y": 61.0,
+        "text": "Equator",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 149.33333333333334,
+        "y": 40,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 61.0,
+        "text": "Low (ITCZ)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.6666666666667,
+        "y": 40,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 361.33333333333337,
+        "y": 61.0,
+        "text": "Light, variable",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 72,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 78.66666666666667,
+        "y": 93.0,
+        "text": "About 30°",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 149.33333333333334,
+        "y": 72,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 93.0,
+        "text": "High",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.6666666666667,
+        "y": 72,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 361.33333333333337,
+        "y": 93.0,
+        "text": "Trades and westerlies",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 104,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 78.66666666666667,
+        "y": 125.0,
+        "text": "About 60°",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 149.33333333333334,
+        "y": 104,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 125.0,
+        "text": "Low",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.6666666666667,
+        "y": 104,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 361.33333333333337,
+        "y": 125.0,
+        "text": "Westerlies meet polar air",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 136,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 78.66666666666667,
+        "y": 157.0,
+        "text": "Poles",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 149.33333333333334,
+        "y": 136,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 157.0,
+        "text": "High",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.6666666666667,
+        "y": 136,
+        "w": 141.33333333333334,
+        "h": 32,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 361.33333333333337,
+        "y": 157.0,
+        "text": "Polar easterlies",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Pressure belts and the main surface winds.",
+     "alt": "A table of four latitude zones with the usual pressure and wind pattern."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pressure belts and winds",
+     "md": "Heating at the equator makes air rise (low pressure). It sinks near 30° latitude (high pressure, deserts). Winds blow from high to low pressure but are deflected by the **Coriolis effect**: to the right in the northern hemisphere, to the left in the south. This gives the **trade winds** (north-east in the north) and the **westerlies**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common confusions",
+     "md": "- Winds are named after where they come FROM: a north-east trade wind comes from the north-east.\n- Warm air rises and so gives LOW surface pressure; sinking air gives HIGH pressure.\n- Weather occurs in the troposphere, not in the ozone layer."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Temperature and height",
+     "statement": "A town at sea level has an average temperature of 28°C. A hill town 1000 m higher is in the same area. Estimate its temperature (use 6.5°C per 1000 m).",
+     "steps": [
+      "Temperature fall = 6.5 × (1000 ÷ 1000) = 6.5°C.",
+      "Hill town ≈ 28 − 6.5 = 21.5°C."
+     ],
+     "answer": "About 21.5°C."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Direction of a trade wind",
+     "statement": "Explain why the wind at the surface between 30°N and the equator blows from the north-east.",
+     "steps": [
+      "Air moves from the high-pressure belt near 30°N towards the equatorial low, that is from north to south.",
+      "The Coriolis effect deflects moving air to the right in the northern hemisphere.",
+      "A southward wind deflected to the right becomes a wind from the north-east."
+     ],
+     "answer": "Pressure gradient plus Coriolis deflection gives the north-east trades."
+    }
+   ],
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-tropical",
+   "title": "The ITCZ, the monsoon and tropical climates",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board, Advanced Level Geography syllabus (Lower Sixth) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain the movement of the ITCZ",
+    "Describe the West African monsoon and the harmattan",
+    "Compare equatorial and tropical continental climates and relate them to Cameroon"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-geography-climate-e07",
+    "lower6-geography-climate-e08",
+    "lower6-geography-climate-e09",
+    "lower6-geography-climate-e10",
+    "lower6-geography-climate-e11",
+    "lower6-geography-climate-e12"
+   ],
+   "selfCheck": [
+    "lower6-geography-tropical-q1",
+    "lower6-geography-tropical-q2",
+    "lower6-geography-tropical-q3",
+    "lower6-geography-tropical-q4",
+    "lower6-geography-tropical-q5"
+   ],
+   "reviewNotes": [
+    "Months for Cameroon’s seasons and the bimodal southern rain pattern are approximate: verify against the syllabus and local climate data.",
+    "Mount Cameroon’s heavy rainfall is stated in qualitative terms only; add exact values from an approved source if needed.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "ITCZ",
+     "md": "The **Inter-Tropical Convergence Zone (ITCZ)** is the belt where the trade winds of the two hemispheres meet and air rises, forming thick clouds and heavy rain. It follows the overhead Sun with a delay: it moves north from about March to August and south for the rest of the year."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "West African monsoon",
+     "md": "When the ITCZ is far north, moist **south-westerly** air from the Atlantic reaches West and Central Africa and brings the rainy season. When it moves south, dry **north-easterly** air from the Sahara dominates: the **harmattan**, a dry, dusty wind in the dry season (roughly November to March)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 8,
+        "w": 380,
+        "h": 34,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 30.0,
+        "text": "Overhead Sun moves north (June to August)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 220.0,
+        "y1": 42,
+        "x2": 220.0,
+        "y2": 64,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 64,
+        "w": 380,
+        "h": 34,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 86.0,
+        "text": "ITCZ moves north with it",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 220.0,
+        "y1": 98,
+        "x2": 220.0,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 120,
+        "w": 380,
+        "h": 34,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 142.0,
+        "text": "South-west monsoon brings rain",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 220.0,
+        "y1": 154,
+        "x2": 220.0,
+        "y2": 176,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 176,
+        "w": 380,
+        "h": 34,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 198.0,
+        "text": "Sun moves south: dry harmattan returns",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "How the ITCZ produces seasons.",
+     "alt": "A chain of four boxes showing the Sun moving north, the ITCZ moving north, the monsoon rains and the return of the dry harmattan."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Climate types",
+     "md": "**Equatorial:** hot all year, small annual temperature range, heavy rain in every month, daily convectional storms. **Tropical continental (savanna):** hot, a longer dry season and one wet season, a larger temperature range. In Cameroon the south has a long, humid, mostly bimodal rain pattern; the north has one rainy season and a long dry season; the Atlantic coast and the slopes of Mount Cameroon are extremely wet."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Do not confuse",
+     "md": "- Rainfall total is not the same as temperature range: range = highest monthly mean − lowest monthly mean.\n- The ITCZ is a belt of low pressure and rising air, not a single line fixed on the equator.\n- Relief rain on mountains adds to the monsoon effect: windward slopes are much wetter than leeward ones."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Temperature range",
+     "statement": "A station’s hottest month averages 31°C and its coolest month 24°C. Another station has 27°C and 26°C. Which is more likely to be equatorial and why?",
+     "steps": [
+      "Range of station 1 = 31 − 24 = 7°C.",
+      "Range of station 2 = 27 − 26 = 1°C.",
+      "Equatorial climates have very small ranges, so station 2 is more likely equatorial."
+     ],
+     "answer": "Station 2 (range 1°C)."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Why is Maroua drier than Douala?",
+     "statement": "Explain in simple terms why the far north of Cameroon gets less rain than the coast.",
+     "steps": [
+      "The coast is close to the moist Atlantic air and the ITCZ stays near for long.",
+      "The far north is far from the ocean and the ITCZ reaches it late and leaves early.",
+      "So the northern rainy season is short and the dry harmattan season is long."
+     ],
+     "answer": "Distance from the moist air source and a short ITCZ stay give the north less rain."
+    }
+   ],
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-soils",
+   "title": "Soils, vegetation and biomes",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board, Advanced Level Geography syllabus (Lower Sixth) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe a soil profile and the factors of soil formation",
+    "Explain the characteristics of tropical soils",
+    "Describe tropical rainforest and savanna vegetation and their adaptations"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-geography-climate-e13",
+    "lower6-geography-climate-e14",
+    "lower6-geography-climate-e15",
+    "lower6-geography-climate-e16",
+    "lower6-geography-climate-e17",
+    "lower6-geography-climate-e18"
+   ],
+   "selfCheck": [
+    "lower6-geography-soils-q1",
+    "lower6-geography-soils-q2",
+    "lower6-geography-soils-q3",
+    "lower6-geography-soils-q4",
+    "lower6-geography-soils-q5"
+   ],
+   "reviewNotes": [
+    "Soil names (ferralsol, laterite) and the nutrient-cycling statement are textbook generalisations: check the terms used in the syllabus.",
+    "The link between volcanic soils and farming around Mount Cameroon is stated qualitatively: verify with a local source.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Soil and its profile",
+     "md": "**Soil** is a mixture of weathered mineral particles, organic matter, water and air. A **soil profile** has horizons: **O** (litter and humus), **A** (topsoil), **B** (subsoil where leached minerals collect), **C** (weathered parent rock) and **R** (bedrock). Soil forms from parent material, climate, relief, organisms and time."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Tropical soils",
+     "md": "In hot, wet forests chemical weathering and heavy rain wash out (**leach**) soluble minerals, leaving iron and aluminium oxides: red, deep, acidic soils (**ferralsols**, often called laterite when hardened). Fertility is low in the soil itself: most nutrients are held in the vegetation and recycled quickly from leaf litter. Clear the forest and the nutrients are soon lost."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 208,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 424.0,
+        "h": 32,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 29.0,
+        "text": "O: litter and humus",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 48,
+        "w": 424.0,
+        "h": 32,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 69.0,
+        "text": "A: dark topsoil",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 88,
+        "w": 424.0,
+        "h": 32,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 109.0,
+        "text": "B: subsoil (iron, clay)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 128,
+        "w": 424.0,
+        "h": 32,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 149.0,
+        "text": "C: weathered rock",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 168,
+        "w": 424.0,
+        "h": 32,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 189.0,
+        "text": "R: solid bedrock",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A soil profile from litter to bedrock.",
+     "alt": "Five stacked boxes labelled O litter and humus, A topsoil, B subsoil, C weathered rock and R bedrock."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Vegetation",
+     "md": "**Tropical rainforest:** tall evergreen trees in layers (emergent, canopy, understorey, floor), buttress roots, drip-tip leaves, high biodiversity. **Savanna:** grassland with scattered fire- and drought-resistant trees such as the baobab, a long dry season, deep roots. **Sahel:** thorny scrub and sparse grass."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Fertile does not mean tropical",
+     "md": "Young volcanic soils, such as those around Mount Cameroon and the volcanic highlands of western Cameroon, are generally richer in minerals than old leached soils. Do not say that all tropical soils are infertile."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Why shifting cultivation?",
+     "statement": "Explain why farmers using shifting cultivation move to a new plot after a few years.",
+     "steps": [
+      "Clearing and burning releases a short burst of nutrients into the soil.",
+      "Crops remove nutrients and heavy rain leaches them.",
+      "Yields fall, so the plot is left to fallow and vegetation regrows while the farmer clears elsewhere."
+     ],
+     "answer": "Nutrients are quickly used and leached, so land is rested."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Adaptation",
+     "statement": "Give two adaptations of savanna trees and explain them.",
+     "steps": [
+      "Thick bark resists grass fires.",
+      "Deep roots reach water during the long dry season.",
+      "Some lose leaves in the dry season to cut water loss."
+     ],
+     "answer": "Thick bark (fire) and deep roots or leaf loss (drought)."
+    }
+   ],
+   "chapter": "lower6-geography-climate"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-geography-climate-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-geography-atmosphere",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A station at sea level is 30°C. Using 6.5°C per 1000 m, what is the temperature at 2000 m?",
+   "answer": 17,
+   "tolerance": 0.1,
+   "unit": "°C",
+   "explanation": "30 − (6.5 × 2) = 17°C.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-geography-atmosphere",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which layer contains the ozone layer?",
+   "choices": [
+    "Troposphere",
+    "Thermosphere",
+    "Stratosphere",
+    "Mesosphere"
+   ],
+   "answer": 2,
+   "explanation": "The ozone layer is in the stratosphere.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-geography-atmosphere",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Air at the equatorial low-pressure belt is mostly rising.",
+   "answer": true,
+   "explanation": "Intense heating makes air rise, producing low surface pressure.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-atmosphere",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why are the equatorial regions warmer than the poles?",
+   "choices": [
+    "They have no clouds",
+    "Sun’s rays are nearly vertical and pass through less atmosphere",
+    "They have no oceans",
+    "They are closer to the Sun by thousands of kilometres"
+   ],
+   "answer": 1,
+   "explanation": "Angle of the rays and path length are the main reasons.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-atmosphere",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each wind to its description.",
+   "pairs": [
+    [
+     "Trade winds",
+     "Blow towards the equator from the subtropical highs"
+    ],
+    [
+     "Westerlies",
+     "Blow from the subtropical highs towards 60° latitude"
+    ],
+    [
+     "Coriolis effect",
+     "Deflects winds right in the northern hemisphere"
+    ],
+    [
+     "Albedo",
+     "Reflectivity of a surface"
+    ]
+   ],
+   "explanation": "Standard definitions.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e06",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "lower6-geography-atmosphere",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why many of the world’s great deserts lie near latitude 30° north and south.",
+   "model": "Air rises at the equator, loses moisture through heavy rain and spreads out at height. It cools and sinks near 30°, forming a belt of high pressure. Sinking air warms and becomes drier, so clouds do not form and rainfall is low. Skies are clear so days are very hot. This explains the Sahara.",
+   "rubric": "Rising air at equator (1); descent near 30° (1); warming/drying of sinking air (1); result: little cloud and rain (1).",
+   "explanation": "Air rises at the equator, loses moisture through heavy rain and spreads out at height. It cools and sinks near 30°, forming a belt of high pressure. Sinking air warms and becomes drier, so clouds do not form and rainfall is low. Skies are clear so days are very hot. This explains the Sahara.",
+   "difficulty": 3,
+   "points": 4,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-atmosphere-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-atmosphere",
+   "prompt": "About what share of dry air is nitrogen?",
+   "choices": [
+    "1%",
+    "78%",
+    "21%",
+    "50%"
+   ],
+   "answer": 1,
+   "explanation": "Nitrogen is the largest component.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-atmosphere-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-atmosphere",
+   "prompt": "Weather happens mostly in the",
+   "choices": [
+    "Stratosphere",
+    "Mesosphere",
+    "Troposphere",
+    "Thermosphere"
+   ],
+   "answer": 2,
+   "explanation": "Clouds and rain form in the lowest layer.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-atmosphere-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-atmosphere",
+   "prompt": "A wind from the south-west is called",
+   "choices": [
+    "A south-westerly",
+    "A north-easterly",
+    "A trade wind from the north-east",
+    "An easterly"
+   ],
+   "answer": 0,
+   "explanation": "Winds take the name of the direction they come from.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-atmosphere-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-atmosphere",
+   "prompt": "The Coriolis effect deflects moving air to the right in the",
+   "choices": [
+    "Southern hemisphere",
+    "Neither",
+    "Both hemispheres",
+    "Northern hemisphere"
+   ],
+   "answer": 3,
+   "explanation": "It reverses in the south.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-atmosphere-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-atmosphere",
+   "prompt": "High albedo surfaces",
+   "choices": [
+    "Reduce pressure",
+    "Reflect much incoming radiation",
+    "Create tropical heat",
+    "Absorb most radiation"
+   ],
+   "answer": 1,
+   "explanation": "Ice and bright sand reflect.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-geography-tropical",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The harmattan is a",
+   "choices": [
+    "Cold ocean current",
+    "Type of cyclone",
+    "Dry, dusty north-easterly wind",
+    "Wet south-westerly wind"
+   ],
+   "answer": 2,
+   "explanation": "It blows from the Sahara.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-geography-tropical",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A station’s warmest month is 29°C and its coolest 23°C. What is the annual temperature range?",
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "°C",
+   "explanation": "29 − 23 = 6°C.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-geography-tropical",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The ITCZ is at its most northern position in about July–August.",
+   "answer": true,
+   "explanation": "It follows the overhead Sun with a lag.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-tropical",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which feature best describes an equatorial climate?",
+   "choices": [
+    "A long dry season and large range",
+    "Rain in every month and a small temperature range",
+    "Rain only in winter",
+    "Freezing nights"
+   ],
+   "answer": 1,
+   "explanation": "Equatorial climates are hot and wet all year.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-tropical",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why are windward slopes of Mount Cameroon very wet?",
+   "choices": [
+    "They are in the Sahara",
+    "Moist air is forced to rise and cool, forming relief rain",
+    "They lie in a rain shadow",
+    "They are far from the ocean"
+   ],
+   "answer": 1,
+   "explanation": "Orographic uplift gives heavy rain.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e12",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "lower6-geography-tropical",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how the movement of the ITCZ explains the wet and dry seasons in northern Cameroon.",
+   "model": "When the overhead Sun and the ITCZ move north, moist south-westerly air spreads over the north, giving the wet season (roughly May to September). When the ITCZ retreats south, dry north-easterly harmattan air returns, giving a long dry season. The wet season is short because the ITCZ is overhead only briefly at that latitude.",
+   "rubric": "ITCZ moves with the Sun (1); moist air and wet season (1); dry air and harmattan (1); shorter wet season in the north (1).",
+   "explanation": "When the overhead Sun and the ITCZ move north, moist south-westerly air spreads over the north, giving the wet season (roughly May to September). When the ITCZ retreats south, dry north-easterly harmattan air returns, giving a long dry season. The wet season is short because the ITCZ is overhead only briefly at that latitude.",
+   "difficulty": 3,
+   "points": 4,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-tropical-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tropical",
+   "prompt": "The ITCZ is a zone where",
+   "choices": [
+    "Trade winds converge and air rises",
+    "Polar air meets tropical air",
+    "Air sinks and clears the sky",
+    "Cold ocean water rises"
+   ],
+   "answer": 0,
+   "explanation": "Convergence and uplift give cloud and rain.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-tropical-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tropical",
+   "prompt": "Moist air in the West African monsoon comes from the",
+   "choices": [
+    "North, Mediterranean",
+    "South-west, Atlantic Ocean",
+    "East, Indian Ocean",
+    "North-east, Sahara"
+   ],
+   "answer": 1,
+   "explanation": "The monsoon is a south-westerly flow.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-tropical-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tropical",
+   "prompt": "A large annual temperature range is typical of",
+   "choices": [
+    "Equatorial climates",
+    "Mountain tops only",
+    "Oceans",
+    "Tropical continental climates"
+   ],
+   "answer": 3,
+   "explanation": "Dry and wet seasons give a bigger range.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-tropical-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tropical",
+   "prompt": "Convectional rain in the tropics is caused by",
+   "choices": [
+    "Ocean currents only",
+    "Strong heating and rising air",
+    "Mountains only",
+    "Cold fronts"
+   ],
+   "answer": 1,
+   "explanation": "Heated ground produces thunderstorms.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-tropical-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-tropical",
+   "prompt": "In which months is the harmattan strongest in Central Africa?",
+   "choices": [
+    "All year",
+    "June to August",
+    "Only in April",
+    "In the dry season, roughly November to March"
+   ],
+   "answer": 3,
+   "explanation": "It blows when the ITCZ is south.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-geography-soils",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which horizon is the topsoil?",
+   "choices": [
+    "A",
+    "C",
+    "R",
+    "B"
+   ],
+   "answer": 0,
+   "explanation": "A is the dark layer rich in organic matter.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e14",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-geography-soils",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In tropical rainforest most nutrients are stored in the soil rather than in the vegetation.",
+   "answer": false,
+   "explanation": "Most nutrients are in the living biomass and the litter; the soil is often poor.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e15",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "lower6-geography-soils",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the term to its meaning.",
+   "pairs": [
+    [
+     "Leaching",
+     "Washing out of soluble minerals"
+    ],
+    [
+     "Humus",
+     "Decayed organic matter"
+    ],
+    [
+     "Parent material",
+     "Rock from which soil forms"
+    ],
+    [
+     "Fallow",
+     "Land left to recover"
+    ]
+   ],
+   "explanation": "Standard soil terms.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-soils",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Red colour in many tropical soils comes from",
+   "choices": [
+    "Sand only",
+    "Oxidised iron",
+    "Salt",
+    "Soot"
+   ],
+   "answer": 1,
+   "explanation": "Iron oxides give red tones.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-soils",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why clearing tropical rainforest for farming often leads to falling yields.",
+   "model": "Most nutrients are in the trees and leaf litter. Clearing removes them, and heavy rain leaches the remainder. Without roots and cover the soil is exposed to erosion and baking by the sun. After a few harvests the soil can no longer support crops.",
+   "rubric": "Nutrient store in vegetation (1); leaching (1); erosion/exposure (1); falling fertility (1).",
+   "explanation": "Most nutrients are in the trees and leaf litter. Clearing removes them, and heavy rain leaches the remainder. Without roots and cover the soil is exposed to erosion and baking by the sun. After a few harvests the soil can no longer support crops.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-climate-e18",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "lower6-geography-soils",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Compare tropical rainforest and savanna vegetation, and explain the differences by climate.",
+   "model": "Rainforest has tall evergreen trees in layers, dense canopy and great diversity, because rain falls in all months and it is hot all year. Savanna has grass with scattered trees that tolerate fire and drought, since there is a long dry season. Savanna trees may drop leaves and have deep roots, thick bark; rainforest leaves have drip tips to shed water.",
+   "rubric": "Rainforest features (1); savanna features (1); climate link for each (2).",
+   "explanation": "Rainforest has tall evergreen trees in layers, dense canopy and great diversity, because rain falls in all months and it is hot all year. Savanna has grass with scattered trees that tolerate fire and drought, since there is a long dry season. Savanna trees may drop leaves and have deep roots, thick bark; rainforest leaves have drip tips to shed water.",
+   "difficulty": 3,
+   "points": 4,
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-soils-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-soils",
+   "prompt": "The horizon of accumulated minerals washed down is",
+   "choices": [
+    "B",
+    "R",
+    "O",
+    "A"
+   ],
+   "answer": 0,
+   "explanation": "The subsoil collects leached material.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-soils-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-soils",
+   "prompt": "Leaching is common in",
+   "choices": [
+    "Hot, wet climates",
+    "Polar regions",
+    "Cold, dry climates",
+    "Deserts"
+   ],
+   "answer": 0,
+   "explanation": "Heavy rain washes out soluble minerals.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-soils-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-soils",
+   "prompt": "A buttress root helps a tree to",
+   "choices": [
+    "Attract insects",
+    "Make fruit",
+    "Store water",
+    "Stay upright in shallow soil"
+   ],
+   "answer": 3,
+   "explanation": "It spreads weight.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-soils-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-soils",
+   "prompt": "Baobab trees are typical of",
+   "choices": [
+    "Mangrove swamp",
+    "Polar tundra",
+    "Savanna",
+    "Alpine meadow"
+   ],
+   "answer": 2,
+   "explanation": "They store water and tolerate drought.",
+   "chapter": "lower6-geography-climate"
+  },
+  {
+   "id": "lower6-geography-soils-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-soils",
+   "prompt": "Young volcanic soils are usually",
+   "choices": [
+    "Made of pure sand",
+    "Frozen",
+    "Always infertile",
+    "Rich in minerals"
+   ],
+   "answer": 3,
+   "explanation": "Fresh volcanic material supplies nutrients.",
+   "chapter": "lower6-geography-climate"
+  }
+ ]
+}

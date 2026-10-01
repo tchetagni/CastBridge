@@ -1,0 +1,688 @@
+{
+ "chapter": "lower6-geography-skills",
+ "lessons": [
+  {
+   "id": "lower6-geography-maps",
+   "title": "Map reading: scale, grid references, contours and gradient",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board, Advanced Level Geography syllabus (Lower Sixth) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate distances from a map scale",
+    "Give four- and six-figure grid references and bearings",
+    "Read contours and calculate gradient"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-geography-skills-e01",
+    "lower6-geography-skills-e02",
+    "lower6-geography-skills-e03",
+    "lower6-geography-skills-e04",
+    "lower6-geography-skills-e05",
+    "lower6-geography-skills-e06"
+   ],
+   "selfCheck": [
+    "lower6-geography-maps-q1",
+    "lower6-geography-maps-q2",
+    "lower6-geography-maps-q3",
+    "lower6-geography-maps-q4",
+    "lower6-geography-maps-q5"
+   ],
+   "reviewNotes": [
+    "The contour figure is schematic and not to scale.",
+    "Confirm how many digits the syllabus expects in grid references and whether bearings use grid north.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Scale and distance",
+     "md": "A scale such as **1:50 000** means 1 cm on the map is 50 000 cm (0.5 km) on the ground. Distance = map length × scale denominator, then convert units: 100 000 cm = 1 km. A straight line is easy; for a curved road lay string along it and measure the string."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Grid references and bearings",
+     "md": "Give **eastings first** (along the corridor) then **northings** (up the stairs). A four-figure reference names a grid square; a six-figure reference adds tenths for precision. A **bearing** is measured clockwise from grid north, with three digits (e.g. 045° is north-east)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 125,
+        "r": 100,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 125,
+        "r": 65,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 125,
+        "r": 30,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 18,
+        "text": "100 m",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 53,
+        "text": "200 m",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 90,
+        "text": "300 m",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Concentric contours show a hill.",
+     "alt": "Three concentric rings labelled 100, 200 and 300 metres around a hilltop."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Contours and gradient",
+     "md": "**Contours** join points of equal height. Close together means steep; far apart means gentle; closed rings are hills or summits. **Gradient** = vertical interval ÷ horizontal distance, often written 1 in n. Convert both to the same unit first."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Frequent mistakes",
+     "md": "- Reading northings before eastings.\n- Forgetting to convert cm to km.\n- Mixing up height difference and distance in the gradient fraction.\n- Taking bearings anticlockwise or from magnetic north."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Distance",
+     "statement": "Two villages are 6.4 cm apart on a map of scale 1:50 000. Find the real distance in km.",
+     "steps": [
+      "6.4 × 50 000 = 320 000 cm.",
+      "320 000 ÷ 100 000 = 3.2 km."
+     ],
+     "answer": "3.2 km."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Gradient",
+     "statement": "A road climbs from 400 m to 500 m over a horizontal distance of 2 km. Find the gradient as 1 in n.",
+     "steps": [
+      "Vertical interval = 500 − 400 = 100 m.",
+      "Horizontal distance = 2 km = 2000 m.",
+      "Gradient = 100 ÷ 2000 = 1 in 20."
+     ],
+     "answer": "1 in 20."
+    }
+   ],
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-statistics",
+   "title": "Statistics, GIS, remote sensing and fieldwork",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board, Advanced Level Geography syllabus (Lower Sixth) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate mean, median, mode and range and interpret scatter graphs",
+    "Explain what GIS and remote sensing are used for",
+    "Plan a fieldwork enquiry with suitable sampling"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-geography-skills-e07",
+    "lower6-geography-skills-e08",
+    "lower6-geography-skills-e09",
+    "lower6-geography-skills-e10",
+    "lower6-geography-skills-e11",
+    "lower6-geography-skills-e12"
+   ],
+   "selfCheck": [
+    "lower6-geography-statistics-q1",
+    "lower6-geography-statistics-q2",
+    "lower6-geography-statistics-q3",
+    "lower6-geography-statistics-q4",
+    "lower6-geography-statistics-q5"
+   ],
+   "reviewNotes": [
+    "Check whether the syllabus requires Spearman’s rank correlation and standard deviation (not covered here).",
+    "All data in this lesson are invented for practice.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Averages and spread",
+     "md": "**Mean** = sum ÷ number of values. **Median** = middle value of the ordered list. **Mode** = most frequent value. **Range** = largest − smallest. A scatter graph shows the relationship between two variables: points rising from left to right show **positive correlation**, falling points **negative correlation**, and no pattern means none. Correlation does not prove cause."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "GIS and remote sensing",
+     "md": "A **GIS** (geographic information system) stores data in **layers** (roads, rivers, population, land use) that can be overlaid and analysed. **Remote sensing** uses satellites and aircraft to record the Earth’s surface, for example to monitor forest loss, floods, crop condition and urban growth. GPS gives positions."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 10,
+      "grid": 2,
+      "w": 400,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 1,
+        "y": 2,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 2,
+        "y": 3,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 3,
+        "y": 3,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 4,
+        "y": 5,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 5,
+        "y": 5,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 6,
+        "y": 7,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 7,
+        "y": 7,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 8,
+        "y": 9,
+        "label": null,
+        "color": "blue"
+       }
+      ],
+      "segments": [],
+      "xlabel": "Distance from town (km)",
+      "ylabel": "Farm size"
+     },
+     "caption": "A scatter graph showing positive correlation (illustrative data).",
+     "alt": "Scatter graph with points rising from bottom-left to top-right."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Fieldwork steps",
+     "md": "1. Choose a question and hypothesis. 2. Plan methods, equipment and safety. 3. Choose a **sampling** method: random, systematic (every nth) or stratified (proportional groups). 4. Collect data. 5. Present with graphs and maps. 6. Analyse, conclude and evaluate (reliability, bias, limits)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pitfalls",
+     "md": "- The median needs the data sorted first.\n- For an even number of values the median is the mean of the two middle values.\n- A small sample may be unreliable.\n- Do not claim that correlation proves one factor causes the other."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Averages",
+     "statement": "Monthly rainfall (illustrative, mm): 10, 25, 25, 40, 50. Find mean, median, mode and range.",
+     "steps": [
+      "Mean = (10 + 25 + 25 + 40 + 50) ÷ 5 = 150 ÷ 5 = 30.",
+      "Median = middle value = 25.",
+      "Mode = 25 (appears twice).",
+      "Range = 50 − 10 = 40."
+     ],
+     "answer": "Mean 30 mm, median 25 mm, mode 25 mm, range 40 mm."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Sampling",
+     "statement": "A student wants to study the opinions of 200 market traders: 120 sell food, 80 sell cloth. She will sample 20. How many from each group in a stratified sample?",
+     "steps": [
+      "Food share = 120 ÷ 200 = 0.6, so 0.6 × 20 = 12.",
+      "Cloth share = 80 ÷ 200 = 0.4, so 0.4 × 20 = 8."
+     ],
+     "answer": "12 food traders and 8 cloth traders."
+    }
+   ],
+   "chapter": "lower6-geography-skills"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-geography-skills-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-geography-maps",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A map has scale 1:25 000. Two points are 8 cm apart. What is the real distance in km?",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "km",
+   "explanation": "8 × 25 000 = 200 000 cm = 2 km.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-geography-maps",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A slope rises 50 m over 1000 m. It is 1 in n. What is n?",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "1000 ÷ 50 = 20.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-geography-maps",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What do closely spaced contours show?",
+   "choices": [
+    "A steep slope",
+    "A gentle slope",
+    "A road",
+    "A river"
+   ],
+   "answer": 0,
+   "explanation": "Height changes quickly over a short distance.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-maps",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In 4-figure grid references the first two digits give the",
+   "choices": [
+    "Easting",
+    "Bearing",
+    "Northing",
+    "Height"
+   ],
+   "answer": 0,
+   "explanation": "Eastings come first.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-maps",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bearing of 090° points east.",
+   "answer": true,
+   "explanation": "Bearings are measured clockwise from north: 90° is east.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e06",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "lower6-geography-maps",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A map has scale 1:50 000. A path is 9 cm on the map and climbs 120 m. Calculate its real length and the average gradient (assume the map length is the horizontal distance).",
+   "model": "Length: 9 × 50 000 = 450 000 cm = 4.5 km. Horizontal distance 4500 m, rise 120 m: gradient = 120 ÷ 4500 = 1 in 37.5 (about 1 in 38).",
+   "rubric": "Distance (2), unit conversion (1), gradient fraction (1).",
+   "explanation": "Length: 9 × 50 000 = 450 000 cm = 4.5 km. Horizontal distance 4500 m, rise 120 m: gradient = 120 ÷ 4500 = 1 in 37.5 (about 1 in 38).",
+   "difficulty": 3,
+   "points": 4,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-maps-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-maps",
+   "prompt": "A scale of 1:100 000 means 1 cm represents",
+   "choices": [
+    "10 km",
+    "100 m",
+    "10 m",
+    "1 km"
+   ],
+   "answer": 3,
+   "explanation": "100 000 cm = 1 km.",
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-maps-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-maps",
+   "prompt": "A summit is shown by",
+   "choices": [
+    "A small closed contour ring",
+    "A straight line",
+    "A wide blue area",
+    "A dotted line"
+   ],
+   "answer": 0,
+   "explanation": "Contours close around the highest point.",
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-maps-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-maps",
+   "prompt": "Bearings are measured from",
+   "choices": [
+    "South, clockwise",
+    "North, clockwise",
+    "East, anticlockwise",
+    "West, anticlockwise"
+   ],
+   "answer": 1,
+   "explanation": "Three-figure bearings are clockwise from north.",
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-maps-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-maps",
+   "prompt": "Gradient 1 in 10 is",
+   "choices": [
+    "Flat",
+    "Steeper than 1 in 50",
+    "Gentler than 1 in 50",
+    "Equal to 1 in 50"
+   ],
+   "answer": 1,
+   "explanation": "Smaller n means steeper.",
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-maps-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-maps",
+   "prompt": "In a six-figure reference the extra digits give",
+   "choices": [
+    "Slope",
+    "Height",
+    "Date",
+    "Tenths of the grid square"
+   ],
+   "answer": 3,
+   "explanation": "They locate a point within the square.",
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-geography-statistics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the mean of 4, 6, 8, 10, 12.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "40 ÷ 5 = 8.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-geography-statistics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the median of 3, 9, 4, 7, 5.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "Sorted: 3, 4, 5, 7, 9; the middle value is 5.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-geography-statistics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A scatter graph in which points fall from left to right shows",
+   "choices": [
+    "A perfect average",
+    "No data",
+    "Positive correlation",
+    "Negative correlation"
+   ],
+   "answer": 3,
+   "explanation": "One variable falls as the other rises.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-statistics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Remote sensing is",
+   "choices": [
+    "Collecting data about Earth from satellites or aircraft",
+    "Interviewing",
+    "Surveying with a tape only",
+    "Drawing sketches"
+   ],
+   "answer": 0,
+   "explanation": "It gathers images from a distance.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "lower6-geography-statistics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a stratified sample each subgroup is represented in proportion to its size.",
+   "answer": true,
+   "explanation": "That is the definition.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-skills-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-geography-statistics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The table gives illustrative daily maximum temperatures (°C) for 6 days: 28, 30, 30, 32, 33, 35.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calculate the mean temperature.",
+     "answer": 31.3333,
+     "tolerance": 0.05,
+     "explanation": "Sum = 188; 188 ÷ 6 = 31.33.",
+     "id": "lower6-geography-skills-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the range.",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "35 − 28 = 7.",
+     "id": "lower6-geography-skills-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give two advantages of using a GIS to study flood risk in a town.",
+     "model": "A GIS can overlay layers (rivers, contours, buildings, population) to show the most exposed areas, update quickly as new data arrive and produce clear maps for planners.",
+     "rubric": "One mark per valid advantage (2).",
+     "explanation": "A GIS can overlay layers (rivers, contours, buildings, population) to show the most exposed areas, update quickly as new data arrive and produce clear maps for planners.",
+     "id": "lower6-geography-skills-e12-c"
+    }
+   ],
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-statistics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-statistics",
+   "prompt": "The mode is",
+   "choices": [
+    "The middle value",
+    "The most frequent value",
+    "The largest",
+    "The average"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-statistics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-statistics",
+   "prompt": "A GIS works with",
+   "choices": [
+    "Only photographs",
+    "Only graphs",
+    "Layers of spatial data",
+    "Only text"
+   ],
+   "answer": 2,
+   "explanation": "Layers can be overlaid.",
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-statistics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-statistics",
+   "prompt": "Systematic sampling means",
+   "choices": [
+    "Choosing the first few",
+    "Selecting every nth item",
+    "Choosing at random",
+    "Choosing friends"
+   ],
+   "answer": 1,
+   "explanation": "Regular intervals.",
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-statistics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-statistics",
+   "prompt": "Data from a satellite is an example of",
+   "choices": [
+    "Primary field counts only",
+    "Interview data only",
+    "Secondary or remote data",
+    "No data"
+   ],
+   "answer": 2,
+   "explanation": "It is gathered by instruments from a distance.",
+   "chapter": "lower6-geography-skills"
+  },
+  {
+   "id": "lower6-geography-statistics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-geography-statistics",
+   "prompt": "The range of 2, 5, 9 is",
+   "choices": [
+    "7",
+    "14",
+    "9",
+    "5"
+   ],
+   "answer": 0,
+   "explanation": "9 − 2 = 7.",
+   "chapter": "lower6-geography-skills"
+  }
+ ]
+}

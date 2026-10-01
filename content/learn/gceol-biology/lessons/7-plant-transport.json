@@ -1,0 +1,799 @@
+{
+ "chapter": "gceol-biology-plant-transport",
+ "lessons": [
+  {
+   "id": "gceol-biology-transpiration",
+   "title": "Water transport: transpiration, xylem and phloem",
+   "minutes": 25,
+   "programRef": "GCE O Level Biology — Transport in plants: transpiration, xylem and phloem (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define transpiration and list factors that affect its rate.",
+    "Describe the path of water through a plant and the roles of xylem and phloem.",
+    "Calculate a rate of water uptake from potometer readings."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-plant-transport-e01",
+    "gceol-biology-plant-transport-e02",
+    "gceol-biology-plant-transport-e03",
+    "gceol-biology-plant-transport-e04",
+    "gceol-biology-plant-transport-e05",
+    "gceol-biology-plant-transport-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-transpiration-q1",
+    "gceol-biology-transpiration-q2",
+    "gceol-biology-transpiration-q3",
+    "gceol-biology-transpiration-q4",
+    "gceol-biology-transpiration-q5"
+   ],
+   "reviewNotes": [
+    "Details on 'cohesion-tension' are intentionally omitted; check whether the syllabus requires them.",
+    "Leaf diagram is schematic (not to scale).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Transpiration",
+     "md": "**Transpiration** is the loss of water vapour from the aerial parts of a plant, mainly through the **stomata** of the leaves. Water evaporates from the damp walls of the mesophyll cells and the vapour **diffuses** out through the open stomata.\n\nTranspiration pulls water up the **xylem** (the transpiration stream), supplies water for photosynthesis, keeps cells turgid, carries ions and helps cool the leaf."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 225,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 30,
+        "w": 340,
+        "h": 22,
+        "stroke": "green",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 52,
+        "w": 340,
+        "h": 50,
+        "stroke": "green",
+        "width": 2,
+        "fill": "green",
+        "radius": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 102,
+        "w": 340,
+        "h": 50,
+        "stroke": "green",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 152,
+        "w": 340,
+        "h": 18,
+        "stroke": "green",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 152,
+        "w": 40,
+        "h": 18,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "paper"
+       },
+       {
+        "t": "circle",
+        "cx": 198,
+        "cy": 161,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 222,
+        "cy": 161,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 105,
+        "w": 40,
+        "h": 28,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 41,
+        "x2": 410,
+        "y2": 41,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 414,
+        "y": 45,
+        "text": "upper epidermis",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 77,
+        "x2": 410,
+        "y2": 77,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 414,
+        "y": 81,
+        "text": "palisade layer",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 127,
+        "x2": 410,
+        "y2": 127,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 414,
+        "y": 131,
+        "text": "spongy layer",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 170,
+        "x2": 210,
+        "y2": 195,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 210,
+        "text": "stoma with guard cells",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 119,
+        "x2": 120,
+        "y2": 195,
+        "color": "ink",
+        "width": 1.2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 210,
+        "text": "xylem (vein)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Section through a leaf showing where water vapour escapes.",
+     "alt": "A leaf cross-section with an upper epidermis, a dark green palisade layer, a spongy layer with a vein containing xylem, and a lower epidermis with a stoma between two guard cells."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 43.0,
+        "w": 65.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 42.5,
+        "y": 60.0,
+        "text": "Soil",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 42.5,
+        "y": 74.0,
+        "text": "water",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 78.0,
+        "y1": 63.0,
+        "x2": 86.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 89.0,
+        "y": 43.0,
+        "w": 65.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 60.0,
+        "text": "Root hair",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 74.0,
+        "text": "cell",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 157.0,
+        "y1": 63.0,
+        "x2": 165.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 43.0,
+        "w": 65.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 200.5,
+        "y": 60.0,
+        "text": "Root",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200.5,
+        "y": 74.0,
+        "text": "xylem",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 236.0,
+        "y1": 63.0,
+        "x2": 244.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 247.0,
+        "y": 43.0,
+        "w": 65.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 279.5,
+        "y": 60.0,
+        "text": "Stem",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 279.5,
+        "y": 74.0,
+        "text": "xylem",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 315.0,
+        "y1": 63.0,
+        "x2": 323.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 43.0,
+        "w": 65.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 60.0,
+        "text": "Leaf",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 74.0,
+        "text": "mesophyll",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 394.0,
+        "y1": 63.0,
+        "x2": 402.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 405.0,
+        "y": 43.0,
+        "w": 65.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 437.5,
+        "y": 60.0,
+        "text": "Stomata",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 437.5,
+        "y": 74.0,
+        "text": "(vapour)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The path taken by water.",
+     "alt": "A flow of six boxes: soil water, root hair cell, root xylem, stem xylem, leaf mesophyll, stomata."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Factors that increase transpiration",
+     "md": "- **Higher temperature** (faster evaporation).\n- **Lower humidity** of the air (steeper gradient).\n- **Wind** (removes vapour near the leaf).\n- **Bright light** (stomata open).\n\nStomata close at night and in drought, so less water is lost."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Xylem and phloem",
+     "md": "- **Xylem**: dead, hollow tubes with walls strengthened with **lignin**; carry **water and mineral ions** upwards from the roots; also give support.\n- **Phloem**: living **sieve tubes**; carry **sucrose and amino acids** (**translocation**) from the leaves to growing parts and storage organs, in both directions.\n\nRoot hairs have a large surface area for absorbing water (osmosis) and ions (active transport)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Xylem carries water *up*; phloem carries food *up and down*.\n- Transpiration is the loss of water *vapour*, not of liquid water.\n- A potometer measures water *uptake*; this is only an estimate of transpiration."
+    },
+    {
+     "type": "example",
+     "title": "Rate of water uptake",
+     "statement": "In a potometer an air bubble moves 36 mm in 12 minutes. Calculate the rate of uptake in mm per minute. When a fan is switched on the bubble moves 60 mm in 12 minutes: find the new rate.",
+     "steps": [
+      "Rate before = 36 ÷ 12 = 3 mm/min.",
+      "Rate with the fan = 60 ÷ 12 = 5 mm/min.",
+      "The wind removes water vapour near the leaf, so transpiration increases."
+     ],
+     "answer": "3 mm/min then 5 mm/min; wind increases transpiration."
+    },
+    {
+     "type": "example",
+     "title": "Wilting in Garoua",
+     "statement": "In the dry season a young maize plant wilts at noon but recovers in the evening. Explain.",
+     "steps": [
+      "At noon it is hot and dry, so transpiration is fast and water is lost faster than the roots can supply it.",
+      "The cells lose turgor and the leaves droop (wilt).",
+      "In the evening transpiration slows, the cells take in water again and become turgid."
+     ],
+     "answer": "Water loss exceeds uptake at noon; turgor is restored when transpiration slows."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-plant-transport-e01"
+    }
+   ],
+   "chapter": "gceol-biology-plant-transport"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-plant-transport-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-transpiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which tissue carries water and mineral ions up the stem?",
+   "choices": [
+    "epidermis",
+    "phloem",
+    "cambium only",
+    "xylem"
+   ],
+   "answer": 3,
+   "explanation": "Xylem transports water and minerals upwards.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-plant-transport-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-transpiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the term to its description.",
+   "pairs": [
+    [
+     "stoma",
+     "pore in the leaf surface"
+    ],
+    [
+     "phloem",
+     "carries sucrose"
+    ],
+    [
+     "xylem",
+     "contains lignin"
+    ],
+    [
+     "potometer",
+     "measures water uptake"
+    ]
+   ],
+   "explanation": "Standard definitions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-plant-transport-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-transpiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bubble moves 45 mm in 15 minutes in a potometer. What is the rate in mm per minute?",
+   "answer": 3,
+   "tolerance": 0.01,
+   "unit": "mm/min",
+   "explanation": "45 ÷ 15 = 3 mm/min.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-plant-transport-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-transpiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which condition gives the highest rate of transpiration?",
+   "choices": [
+    "cool, windy, humid day",
+    "cool, humid, still night",
+    "cold, dry, still night",
+    "hot, dry, windy day"
+   ],
+   "answer": 3,
+   "explanation": "High temperature, low humidity and wind all increase the rate.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-plant-transport-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-transpiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why transpiration is useful to a plant.",
+   "model": "It pulls water and mineral ions up the xylem to the leaves, supplies water for photosynthesis, keeps the cells turgid so the plant is supported, and cools the leaves by evaporation.",
+   "rubric": [
+    "1 mark each for any three correct uses"
+   ],
+   "explanation": "It pulls water and mineral ions up the xylem to the leaves, supplies water for photosynthesis, keeps the cells turgid so the plant is supported, and cools the leaves by evaporation.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-plant-transport-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-transpiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An experiment compares water loss from leafy shoots in a potometer in four conditions.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A shoot in still, humid shade will have:",
+     "choices": [
+      "the lowest rate of uptake",
+      "uptake only through phloem",
+      "the highest rate",
+      "no uptake"
+     ],
+     "answer": 0,
+     "explanation": "Still humid air and low light reduce transpiration.",
+     "id": "gceol-biology-plant-transport-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Coating the lower surface of leaves with petroleum jelly reduces water loss because:",
+     "choices": [
+      "it closes the phloem",
+      "it cools the leaf",
+      "it blocks the stomata",
+      "it kills the xylem"
+     ],
+     "answer": 2,
+     "explanation": "Most stomata are on the lower surface; blocking them stops vapour escaping.",
+     "id": "gceol-biology-plant-transport-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the bubble position must be reset to the start of the scale for each reading.",
+     "model": "So that the distance moved in a set time can be measured from the same point, giving fair and comparable rates.",
+     "rubric": [
+      "1 mark for fair test / same starting point"
+     ],
+     "explanation": "So that the distance moved in a set time can be measured from the same point, giving fair and comparable rates.",
+     "id": "gceol-biology-plant-transport-e06-c"
+    }
+   ],
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-transpiration-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-transpiration",
+   "prompt": "Water vapour leaves a leaf mainly through the:",
+   "choices": [
+    "root hair",
+    "stomata",
+    "phloem",
+    "xylem"
+   ],
+   "answer": 1,
+   "explanation": "Stomata are the main exit.",
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-transpiration-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-transpiration",
+   "prompt": "Transpiration is increased by:",
+   "choices": [
+    "darkness",
+    "cold temperature",
+    "high humidity",
+    "wind"
+   ],
+   "answer": 3,
+   "explanation": "Wind removes vapour from around the leaf.",
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-transpiration-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-transpiration",
+   "prompt": "Sucrose is transported in the:",
+   "choices": [
+    "phloem",
+    "xylem",
+    "root hairs",
+    "stomata"
+   ],
+   "answer": 0,
+   "explanation": "Phloem carries sugars.",
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-transpiration-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-transpiration",
+   "prompt": "The strengthening substance in xylem walls is:",
+   "choices": [
+    "chlorophyll",
+    "starch",
+    "cellulose only",
+    "lignin"
+   ],
+   "answer": 3,
+   "explanation": "Lignin strengthens xylem.",
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-transpiration-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-transpiration",
+   "prompt": "A potometer measures:",
+   "choices": [
+    "the volume of oxygen released",
+    "the rate of photosynthesis",
+    "the uptake of water by a shoot",
+    "the loss of mass of a root"
+   ],
+   "answer": 2,
+   "explanation": "It is used to estimate transpiration rate.",
+   "chapter": "gceol-biology-plant-transport"
+  },
+  {
+   "id": "gceol-biology-plant-transport-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-transpiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Question 1 — Transport in plants (5 marks). A student uses a potometer to measure water uptake by a leafy shoot of a tomato plant.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which change would INCREASE the rate at which the bubble moves?",
+     "choices": [
+      "spreading petroleum jelly on both leaf surfaces",
+      "covering the leaves with a plastic bag",
+      "placing the shoot in a draught from a fan",
+      "putting the shoot in a cold dark cupboard"
+     ],
+     "answer": 2,
+     "explanation": "Wind removes water vapour from around the leaves, so transpiration and uptake increase. The other changes reduce it.",
+     "id": "gceol-biology-plant-transport-m01-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "In still air the bubble moves 48 mm in 16 minutes. Calculate the rate of movement in mm per minute.",
+     "answer": 3.0,
+     "tolerance": 0.01,
+     "explanation": "48 ÷ 16 = 3 mm per minute (1 mark for the working, 1 for the answer).",
+     "unit": "mm/min",
+     "id": "gceol-biology-plant-transport-m01-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the water taken up is only an estimate of the water lost by transpiration.",
+     "model": "Some of the water is used in photosynthesis and some remains in the cells to keep them turgid, so uptake is slightly different from the volume lost as vapour.",
+     "rubric": [
+      "1 mark: water used in photosynthesis or kept in cells",
+      "1 mark: so uptake is not exactly equal to loss"
+     ],
+     "explanation": "Some of the water is used in photosynthesis and some remains in the cells to keep them turgid, so uptake is slightly different from the volume lost as vapour.",
+     "id": "gceol-biology-plant-transport-m01-c"
+    }
+   ],
+   "chapter": "gceol-biology-plant-transport"
+  }
+ ]
+}

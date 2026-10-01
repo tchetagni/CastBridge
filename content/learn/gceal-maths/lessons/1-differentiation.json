@@ -1,0 +1,1592 @@
+{
+ "chapter": "gceal-maths-differentiation",
+ "lessons": [
+  {
+   "id": "gceal-maths-diff-product-quotient",
+   "title": "Product and quotient rules",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Differentiate products with the product rule",
+    "Differentiate quotients with the quotient rule",
+    "Find stationary points of such functions"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-differentiation-e01",
+    "gceal-maths-differentiation-e02",
+    "gceal-maths-differentiation-e03",
+    "gceal-maths-differentiation-e04",
+    "gceal-maths-differentiation-e05",
+    "gceal-maths-differentiation-e06"
+   ],
+   "selfCheck": [
+    "gceal-maths-diff-product-quotient-q1",
+    "gceal-maths-diff-product-quotient-q2",
+    "gceal-maths-diff-product-quotient-q3",
+    "gceal-maths-diff-product-quotient-q4",
+    "gceal-maths-diff-product-quotient-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Product rule",
+     "md": "If $y=uv$ then $\\frac{dy}{dx}=u\\frac{dv}{dx}+v\\frac{du}{dx}$. Use it when two functions of $x$ are multiplied, for example $x^2e^{3x}$, $x\\ln x$, $x\\sin x$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Quotient rule",
+     "md": "If $y=\\frac{u}{v}$ then $\\frac{dy}{dx}=\\frac{v\\frac{du}{dx}-u\\frac{dv}{dx}}{v^2}$. The order in the numerator matters: bottom times derivative of top, minus top times derivative of bottom."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 5,
+      "ymin": -0.1,
+      "ymax": 0.5,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "x*exp(-x)",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 0.3679,
+        "label": "max (1, 0.37)",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x"
+     },
+     "caption": "The curve $y=xe^{-x}$ has its maximum at $(1,e^{-1})$, found with the product rule.",
+     "alt": "A curve rising from the origin to a peak at x=1 then slowly decreasing to 0."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Name $u$ and $v$ and differentiate each separately. 2. Substitute into the formula. 3. Factorise the result (common factors such as $e^{x}$) so that setting $\\frac{dy}{dx}=0$ is easy. Check with a number if possible."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- $\\frac{d}{dx}(uv)\\neq\\frac{du}{dx}\\times\\frac{dv}{dx}$.\n- Reversing the numerator of the quotient rule gives the wrong sign.\n- Forgetting that $e^x$ is never zero when solving $\\frac{dy}{dx}=0$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Differentiate $y=x^2e^{3x}$.",
+     "steps": [
+      "Let $u=x^2$, $v=e^{3x}$: $u'=2x$, $v'=3e^{3x}$.",
+      "$\\frac{dy}{dx}=x^2\\cdot3e^{3x}+e^{3x}\\cdot2x=xe^{3x}(3x+2)$."
+     ],
+     "answer": "$\\frac{dy}{dx}=xe^{3x}(3x+2)$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the gradient of $y=\\frac{2x+1}{x^2+1}$ at $x=1$.",
+     "steps": [
+      "$u=2x+1$, $v=x^2+1$: $\\frac{dy}{dx}=\\frac{(x^2+1)(2)-(2x+1)(2x)}{(x^2+1)^2}=\\frac{-2x^2-2x+2}{(x^2+1)^2}$.",
+      "At $x=1$: $\\frac{-2-2+2}{4}=-\\frac{1}{2}$."
+     ],
+     "answer": "Gradient $-\\frac{1}{2}$"
+    }
+   ],
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-chain-trig",
+   "title": "Chain rule and trigonometric functions",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the chain rule",
+    "Differentiate $\\sin$, $\\cos$ and $\\tan$ (x in radians)",
+    "Combine the chain, product and quotient rules"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-differentiation-e07",
+    "gceal-maths-differentiation-e08",
+    "gceal-maths-differentiation-e09",
+    "gceal-maths-differentiation-e10",
+    "gceal-maths-differentiation-e11",
+    "gceal-maths-differentiation-e12"
+   ],
+   "selfCheck": [
+    "gceal-maths-diff-chain-trig-q1",
+    "gceal-maths-diff-chain-trig-q2",
+    "gceal-maths-diff-chain-trig-q3",
+    "gceal-maths-diff-chain-trig-q4",
+    "gceal-maths-diff-chain-trig-q5"
+   ],
+   "reviewNotes": [
+    "Derivatives of sec, cosec, cot, inverse trig functions not covered; check the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Chain rule",
+     "md": "If $y=f(u)$ and $u=g(x)$ then $\\frac{dy}{dx}=\\frac{dy}{du}\\times\\frac{du}{dx}$. In practice: differentiate the outer function, keep the inside, then multiply by the derivative of the inside. E.g. $\\frac{d}{dx}(3x^2+1)^5=5(3x^2+1)^4\\times6x$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Trigonometric derivatives (radians)",
+     "md": "$\\frac{d}{dx}\\sin x=\\cos x$, $\\frac{d}{dx}\\cos x=-\\sin x$, $\\frac{d}{dx}\\tan x=\\frac{1}{\\cos^2x}$. With a constant: $\\frac{d}{dx}\\sin kx=k\\cos kx$, $\\frac{d}{dx}\\cos kx=-k\\sin kx$. Also $\\frac{d}{dx}e^{f(x)}=f'(x)e^{f(x)}$ and $\\frac{d}{dx}\\ln f(x)=\\frac{f'(x)}{f(x)}$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 6.4,
+      "ymin": -1.3,
+      "ymax": 1.3,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "sin(x)",
+        "color": "blue",
+        "label": "sin x"
+       },
+       {
+        "expr": "cos(x)",
+        "color": "orange",
+        "label": "cos x"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "x (radians)"
+     },
+     "caption": "$y=\\sin x$ (blue) and its gradient function $y=\\cos x$ (orange): where $\\sin x$ peaks, $\\cos x=0$.",
+     "alt": "Sine and cosine curves over one period, cosine is the gradient of sine."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the derivative of the inside: $\\frac{d}{dx}\\sin x^2=2x\\cos x^2$, not $\\cos x^2$.\n- These formulae are only valid when $x$ is in RADIANS.\n- $\\frac{d}{dx}\\cos x$ has a minus sign."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Differentiate $y=(3x^2+1)^5$.",
+     "steps": [
+      "Outer: $u^5$ gives $5u^4$. Inner: $u=3x^2+1$ gives $6x$.",
+      "$\\frac{dy}{dx}=5(3x^2+1)^4\\times6x=30x(3x^2+1)^4$."
+     ],
+     "answer": "$30x(3x^2+1)^4$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Differentiate $y=e^x\\sin2x$.",
+     "steps": [
+      "Product rule with $u=e^x$, $v=\\sin2x$ ($v'=2\\cos2x$ by the chain rule).",
+      "$\\frac{dy}{dx}=e^x\\cdot2\\cos2x+\\sin2x\\cdot e^x=e^x(\\sin2x+2\\cos2x)$."
+     ],
+     "answer": "$e^x(\\sin2x+2\\cos2x)$"
+    }
+   ],
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-implicit-parametric",
+   "title": "Implicit and parametric differentiation",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Differentiate implicit functions",
+    "Find $\\frac{dy}{dx}$ for parametric curves",
+    "Find tangents and normals in these cases"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-differentiation-e13",
+    "gceal-maths-differentiation-e14",
+    "gceal-maths-differentiation-e15",
+    "gceal-maths-differentiation-e16",
+    "gceal-maths-differentiation-e17",
+    "gceal-maths-differentiation-e18"
+   ],
+   "selfCheck": [
+    "gceal-maths-implicit-parametric-q1",
+    "gceal-maths-implicit-parametric-q2",
+    "gceal-maths-implicit-parametric-q3",
+    "gceal-maths-implicit-parametric-q4",
+    "gceal-maths-implicit-parametric-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Implicit differentiation",
+     "md": "When $y$ cannot be isolated, differentiate every term with respect to $x$. A term in $y$ needs the chain rule: $\\frac{d}{dx}(y^2)=2y\\frac{dy}{dx}$ and $\\frac{d}{dx}(xy)=y+x\\frac{dy}{dx}$. Then collect the $\\frac{dy}{dx}$ terms and solve."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Parametric curves",
+     "md": "If $x=f(t)$ and $y=g(t)$ then $\\frac{dy}{dx}=\\frac{dy/dt}{dx/dt}$. The point at a given $t$ is found by substituting into both. Eliminate $t$ to get the Cartesian equation when possible, e.g. $x=3\\cos t$, $y=2\\sin t$ gives $\\frac{x^2}{9}+\\frac{y^2}{4}=1$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Forgetting $\\frac{dy}{dx}$ when differentiating a $y$ term. For parametric curves $\\frac{dy}{dx}$ is NOT $\\frac{dx}{dy}$ upside down by accident: divide $\\frac{dy}{dt}$ by $\\frac{dx}{dt}$, in that order."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the gradient of $x^2+xy+y^2=7$ at $(1,2)$, after checking the point lies on the curve.",
+     "steps": [
+      "$1+2+4=7$, so the point is on the curve.",
+      "Differentiate: $2x+y+x\\frac{dy}{dx}+2y\\frac{dy}{dx}=0$, so $\\frac{dy}{dx}=-\\frac{2x+y}{x+2y}$.",
+      "At $(1,2)$: $-\\frac{4}{5}$."
+     ],
+     "answer": "Gradient $-\\frac{4}{5}$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A curve has $x=t^2$, $y=2t$. Find $\\frac{dy}{dx}$ and the tangent at $t=2$.",
+     "steps": [
+      "$\\frac{dy}{dt}=2$, $\\frac{dx}{dt}=2t$, so $\\frac{dy}{dx}=\\frac1t$.",
+      "At $t=2$: point $(4,4)$, gradient $\\frac{1}{2}$; tangent $y-4=\\frac{1}{2}(x-4)$, i.e. $y=\\frac{x}{2}+2$."
+     ],
+     "answer": "$\\frac{dy}{dx}=\\frac{1}{t}$; tangent $y=\\frac{x}{2}+2$",
+     "figure": {
+      "kind": "shapes",
+      "w": 388,
+      "h": 308,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 154.0,
+        "x2": 360.0,
+        "y2": 154.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 194.0,
+        "y1": 280.0,
+        "x2": 194.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 74.0,
+        "y1": 151.0,
+        "x2": 74.0,
+        "y2": 157.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 74.0,
+        "y": 171.0,
+        "text": "−3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 314.0,
+        "y1": 151.0,
+        "x2": 314.0,
+        "y2": 157.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 314.0,
+        "y": 171.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 191.0,
+        "y1": 234.0,
+        "x2": 197.0,
+        "y2": 234.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 186.0,
+        "y": 238.0,
+        "text": "−2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 191.0,
+        "y1": 74.0,
+        "x2": 197.0,
+        "y2": 74.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 186.0,
+        "y": 78.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         314.0,
+         154.0,
+         313.8,
+         149.0,
+         313.1,
+         144.0,
+         311.9,
+         139.0,
+         310.2,
+         134.1,
+         308.1,
+         129.3,
+         305.6,
+         124.6,
+         302.6,
+         119.9,
+         299.2,
+         115.5,
+         295.3,
+         111.1,
+         291.1,
+         107.0,
+         286.5,
+         103.0,
+         281.5,
+         99.2,
+         276.1,
+         95.7,
+         270.5,
+         92.4,
+         264.5,
+         89.3,
+         258.3,
+         86.5,
+         251.8,
+         83.9,
+         245.1,
+         81.6,
+         238.2,
+         79.6,
+         231.1,
+         77.9,
+         223.8,
+         76.5,
+         216.5,
+         75.4,
+         209.0,
+         74.6,
+         201.5,
+         74.2,
+         194.0,
+         74.0,
+         186.5,
+         74.2,
+         179.0,
+         74.6,
+         171.5,
+         75.4,
+         164.2,
+         76.5,
+         156.9,
+         77.9,
+         149.8,
+         79.6,
+         142.9,
+         81.6,
+         136.2,
+         83.9,
+         129.7,
+         86.5,
+         123.5,
+         89.3,
+         117.5,
+         92.4,
+         111.9,
+         95.7,
+         106.5,
+         99.2,
+         101.5,
+         103.0,
+         96.9,
+         107.0,
+         92.7,
+         111.1,
+         88.8,
+         115.5,
+         85.4,
+         119.9,
+         82.4,
+         124.6,
+         79.9,
+         129.3,
+         77.8,
+         134.1,
+         76.1,
+         139.0,
+         74.9,
+         144.0,
+         74.2,
+         149.0,
+         74.0,
+         154.0,
+         74.2,
+         159.0,
+         74.9,
+         164.0,
+         76.1,
+         169.0,
+         77.8,
+         173.9,
+         79.9,
+         178.7,
+         82.4,
+         183.4,
+         85.4,
+         188.1,
+         88.8,
+         192.5,
+         92.7,
+         196.9,
+         96.9,
+         201.0,
+         101.5,
+         205.0,
+         106.5,
+         208.8,
+         111.9,
+         212.3,
+         117.5,
+         215.6,
+         123.5,
+         218.7,
+         129.7,
+         221.5,
+         136.2,
+         224.1,
+         142.9,
+         226.4,
+         149.8,
+         228.4,
+         156.9,
+         230.1,
+         164.2,
+         231.5,
+         171.5,
+         232.6,
+         179.0,
+         233.4,
+         186.5,
+         233.8,
+         194.0,
+         234.0,
+         201.5,
+         233.8,
+         209.0,
+         233.4,
+         216.5,
+         232.6,
+         223.8,
+         231.5,
+         231.1,
+         230.1,
+         238.2,
+         228.4,
+         245.1,
+         226.4,
+         251.8,
+         224.1,
+         258.3,
+         221.5,
+         264.5,
+         218.7,
+         270.5,
+         215.6,
+         276.1,
+         212.3,
+         281.5,
+         208.8,
+         286.5,
+         205.0,
+         291.1,
+         201.0,
+         295.3,
+         196.9,
+         299.2,
+         192.5,
+         302.6,
+         188.1,
+         305.6,
+         183.4,
+         308.1,
+         178.7,
+         310.2,
+         173.9,
+         311.9,
+         169.0,
+         313.1,
+         164.0,
+         313.8,
+         159.0,
+         314.0,
+         154.0
+        ],
+        "stroke": "blue",
+        "width": 2.5,
+        "closed": false
+       },
+       {
+        "t": "circle",
+        "cx": 254.0,
+        "cy": 84.71796769724494,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 268.0,
+        "y": 76.71796769724494,
+        "text": "t = π/3",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-trig-formulae",
+   "title": "Compound angles, double angles and the R-form",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use addition and double-angle formulae",
+    "Write $a\\sin x+b\\cos x$ as $R\\sin(x+\\alpha)$",
+    "Solve equations and prove identities"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-differentiation-e19",
+    "gceal-maths-differentiation-e20",
+    "gceal-maths-differentiation-e21",
+    "gceal-maths-differentiation-e22",
+    "gceal-maths-differentiation-e23",
+    "gceal-maths-differentiation-e24"
+   ],
+   "selfCheck": [
+    "gceal-maths-trig-formulae-q1",
+    "gceal-maths-trig-formulae-q2",
+    "gceal-maths-trig-formulae-q3",
+    "gceal-maths-trig-formulae-q4",
+    "gceal-maths-trig-formulae-q5"
+   ],
+   "reviewNotes": [
+    "Half-angle (t) formulae and factor formulae not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Addition formulae",
+     "md": "$\\sin(A\\pm B)=\\sin A\\cos B\\pm\\cos A\\sin B$; $\\cos(A\\pm B)=\\cos A\\cos B\\mp\\sin A\\sin B$; $\\tan(A\\pm B)=\\frac{\\tan A\\pm\\tan B}{1\\mp\\tan A\\tan B}$. Note the sign flip in the cosine formula."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Double-angle formulae",
+     "md": "$\\sin2A=2\\sin A\\cos A$; $\\cos2A=\\cos^2A-\\sin^2A=2\\cos^2A-1=1-2\\sin^2A$; $\\tan2A=\\frac{2\\tan A}{1-\\tan^2A}$. Choose the form of $\\cos2A$ that leaves a single trig function."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "The R-form",
+     "md": "$a\\sin x+b\\cos x=R\\sin(x+\\alpha)$ with $R=\\sqrt{a^2+b^2}$, $\\tan\\alpha=\\frac ba$ ($a,b>0$, $\\alpha$ acute). The maximum value is $R$ and the minimum $-R$. To solve $a\\sin x+b\\cos x=c$: solve $\\sin(x+\\alpha)=\\frac cR$, then subtract $\\alpha$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "$\\sin(A+B)\\neq\\sin A+\\sin B$. $\\cos2A\\neq2\\cos A$. When solving $\\sin(x+\\alpha)=k$ list solutions for $x+\\alpha$ over the SHIFTED interval before subtracting $\\alpha$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the exact value of $\\sin75\\degree$.",
+     "steps": [
+      "$\\sin75\\degree=\\sin(45\\degree+30\\degree)=\\sin45\\cos30+\\cos45\\sin30$.",
+      "$=\\frac{\\sqrt2}{2}\\cdot\\frac{\\sqrt3}{2}+\\frac{\\sqrt2}{2}\\cdot\\frac{1}{2}=\\frac{\\sqrt6+\\sqrt2}{4}$."
+     ],
+     "answer": "$\\frac{\\sqrt6+\\sqrt2}{4}\\approx0.966$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Solve $3\\sin x+4\\cos x=2$ for $0\\degree\\leq x\\leq360\\degree$.",
+     "steps": [
+      "$R=5$, $\\tan\\alpha=\\frac{4}{3}$, $\\alpha=53.13\\degree$: $5\\sin(x+53.13\\degree)=2$.",
+      "$x+53.13\\degree=23.58\\degree$ (too small: add $360\\degree$ later) or $156.42\\degree$.",
+      "$x=156.42-53.13=103.29\\degree$ or $x=23.58+360-53.13=330.45\\degree$."
+     ],
+     "answer": "$x\\approx103.3\\degree$ or $330.5\\degree$",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 6.4,
+      "ymin": -6,
+      "ymax": 6,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "3sin(x)+4cos(x)",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 1.802780589520693,
+        "y": 2,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 5.767406935245463,
+        "y": 2,
+        "label": null,
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 2,
+        "x2": 6.4,
+        "y2": 2,
+        "color": "grey",
+        "dash": true
+       }
+      ],
+      "xlabel": "x (radians)"
+     }
+    }
+   ],
+   "chapter": "gceal-maths-differentiation"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-maths-differentiation-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-diff-product-quotient",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $\\frac{d}{dx}(xe^x)$ at $x=0$.",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "$e^x+xe^x=e^x(1+x)$, which is 1 at $x=0$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-diff-product-quotient",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{d}{dx}(x\\sin x)=$",
+   "choices": [
+    "$x\\cos x$",
+    "$\\sin x-x\\cos x$",
+    "$\\sin x+x\\cos x$",
+    "$\\cos x$"
+   ],
+   "answer": 2,
+   "explanation": "Product rule with $u=x$, $v=\\sin x$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-diff-product-quotient",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{d}{dx}(uv)=\\frac{du}{dx}\\cdot\\frac{dv}{dx}$.",
+   "answer": false,
+   "explanation": "False: $(x\\cdot x)'=2x$, but $1\\times1=1$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-diff-product-quotient",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The curve $y=xe^{-x}$ has a stationary point at",
+   "choices": [
+    "$x=1$",
+    "$x=0$",
+    "$x=e$",
+    "$x=-1$"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{dy}{dx}=e^{-x}(1-x)=0$ gives $x=1$ and $y=e^{-1}$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-diff-product-quotient",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Use the quotient rule to show that $\\frac{d}{dx}(\\tan x)=\\frac{1}{\\cos^2x}$.",
+   "model": "$\\tan x=\\frac{\\sin x}{\\cos x}$. $\\frac{dy}{dx}=\\frac{\\cos x\\cdot\\cos x-\\sin x\\cdot(-\\sin x)}{\\cos^2x}=\\frac{\\cos^2x+\\sin^2x}{\\cos^2x}=\\frac{1}{\\cos^2x}$.",
+   "rubric": [
+    "Correct $u,v$ and derivatives (1)",
+    "Quotient rule applied (1)",
+    "Uses $\\sin^2+\\cos^2=1$ (1)"
+   ],
+   "explanation": "$\\tan x=\\frac{\\sin x}{\\cos x}$. $\\frac{dy}{dx}=\\frac{\\cos x\\cdot\\cos x-\\sin x\\cdot(-\\sin x)}{\\cos^2x}=\\frac{\\cos^2x+\\sin^2x}{\\cos^2x}=\\frac{1}{\\cos^2x}$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-diff-product-quotient",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The curve $C$ has equation $y=x\\ln x$ for $x>0$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the $x$-coordinate of the stationary point (3 d.p.).",
+     "answer": 0.368,
+     "tolerance": 0.001,
+     "explanation": "$\\frac{dy}{dx}=\\ln x+1=0$ gives $x=e^{-1}\\approx0.368$.",
+     "id": "gceal-maths-differentiation-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the $y$-coordinate there (3 d.p.).",
+     "answer": -0.368,
+     "tolerance": 0.001,
+     "explanation": "$y=e^{-1}\\ln(e^{-1})=-e^{-1}\\approx-0.368$.",
+     "id": "gceal-maths-differentiation-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The stationary point is",
+     "choices": [
+      "not classified",
+      "a maximum",
+      "a minimum",
+      "a point of inflexion"
+     ],
+     "answer": 2,
+     "explanation": "$\\frac{d^2y}{dx^2}=\\frac1x>0$.",
+     "id": "gceal-maths-differentiation-e06-c"
+    }
+   ],
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-product-quotient-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-product-quotient",
+   "prompt": "$\\frac{d}{dx}(x^2\\ln x)=$",
+   "choices": [
+    "$2x\\ln x+x$",
+    "$x\\ln x+x^2$",
+    "$\\frac{2x}{x}$",
+    "$2x\\ln x$"
+   ],
+   "answer": 0,
+   "explanation": "$u=x^2$, $v=\\ln x$.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-product-quotient-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-product-quotient",
+   "prompt": "In the quotient rule the denominator becomes",
+   "choices": [
+    "$v$",
+    "$v^2$",
+    "$uv$",
+    "$u^2$"
+   ],
+   "answer": 1,
+   "explanation": "Square of the bottom.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-product-quotient-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-product-quotient",
+   "prompt": "$\\frac{d}{dx}\\left(\\frac{x}{x+1}\\right)=$",
+   "choices": [
+    "$\\frac{1}{x+1}$",
+    "$\\frac{1}{(x+1)^2}$",
+    "$\\frac{2x+1}{(x+1)^2}$",
+    "$1$"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{(x+1)-x}{(x+1)^2}$.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-product-quotient-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-product-quotient",
+   "prompt": "$e^x\\neq0$ means $xe^x(2+x)=0$ gives",
+   "choices": [
+    "$x=0$ or $x=-2$",
+    "$x=0$ only",
+    "no solution",
+    "$x=-2$ only"
+   ],
+   "answer": 0,
+   "explanation": "Other factors vanish.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-product-quotient-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-product-quotient",
+   "prompt": "The derivative of $x\\cos x$ is",
+   "choices": [
+    "$\\cos x+x\\sin x$",
+    "$-x\\sin x$",
+    "$\\cos x-x\\sin x$",
+    "$-\\sin x$"
+   ],
+   "answer": 2,
+   "explanation": "Product rule.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-diff-chain-trig",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the gradient of $y=(2x+1)^3$ at $x=1$.",
+   "answer": 54,
+   "tolerance": 0,
+   "explanation": "$3(2x+1)^2\\times2=6\\times9$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-diff-chain-trig",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{d}{dx}\\cos3x=$",
+   "choices": [
+    "$-3\\sin3x$",
+    "$3\\sin3x$",
+    "$-\\sin3x$",
+    "$-3\\cos3x$"
+   ],
+   "answer": 0,
+   "explanation": "Chain factor 3 and the minus sign.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-diff-chain-trig",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{d}{dx}\\sin x^2=\\cos x^2$.",
+   "answer": false,
+   "explanation": "The chain rule gives $2x\\cos x^2$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-diff-chain-trig",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The gradient of $y=\\sqrt{4x+1}$ at $x=2$ is",
+   "choices": [
+    "$\\frac{1}{3}$",
+    "$2$",
+    "$\\frac{2}{3}$",
+    "$\\frac{2}{9}$"
+   ],
+   "answer": 2,
+   "explanation": "$\\frac{1}{2}(4x+1)^{-1/2}\\times4=\\frac{2}{3}$ at $x=2$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-diff-chain-trig",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the equation of the tangent to $y=\\tan x$ at $x=\\frac{\\pi}{4}$.",
+   "model": "$y=\\tan\\frac{\\pi}{4}=1$ and $\\frac{dy}{dx}=\\frac{1}{\\cos^2x}=\\frac{1}{1/2}=2$ at $x=\\frac\\pi4$. Tangent: $y-1=2\\left(x-\\frac{\\pi}{4}\\right)$.",
+   "rubric": [
+    "Point $(\\frac\\pi4,1)$ (1)",
+    "Gradient 2 (1)",
+    "Equation (1)"
+   ],
+   "explanation": "$y=\\tan\\frac{\\pi}{4}=1$ and $\\frac{dy}{dx}=\\frac{1}{\\cos^2x}=\\frac{1}{1/2}=2$ at $x=\\frac\\pi4$. Tangent: $y-1=2\\left(x-\\frac{\\pi}{4}\\right)$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-diff-chain-trig",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The curve $C$ is $y=e^{-2x}\\cos x$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the gradient of $C$ at $x=0$.",
+     "answer": -2,
+     "tolerance": 0,
+     "explanation": "$\\frac{dy}{dx}=-2e^{-2x}\\cos x-e^{-2x}\\sin x$; at $x=0$ this is $-2$.",
+     "id": "gceal-maths-differentiation-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The tangent at $(0,1)$ meets the x-axis at $(k,0)$. Find $k$.",
+     "answer": 0.5,
+     "tolerance": 0.001,
+     "explanation": "Tangent $y=1-2x$; set $y=0$.",
+     "id": "gceal-maths-differentiation-e12-b"
+    }
+   ],
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-chain-trig-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-chain-trig",
+   "prompt": "$\\frac{d}{dx}\\ln(3x)=$",
+   "choices": [
+    "$\\frac1x$",
+    "$3\\ln x$",
+    "$\\frac{1}{3x}$",
+    "$\\frac{3}{x}$"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{3}{3x}$.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-chain-trig-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-chain-trig",
+   "prompt": "$\\frac{d}{dx}e^{x^2}=$",
+   "choices": [
+    "$2xe^{x^2}$",
+    "$x^2e^{x^2-1}$",
+    "$2e^{x^2}$",
+    "$e^{x^2}$"
+   ],
+   "answer": 0,
+   "explanation": "Chain rule.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-chain-trig-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-chain-trig",
+   "prompt": "$\\frac{d}{dx}\\sin(2x+1)=$",
+   "choices": [
+    "$-2\\cos(2x+1)$",
+    "$2\\cos(2x+1)$",
+    "$\\cos(2x+1)$",
+    "$2\\cos x$"
+   ],
+   "answer": 1,
+   "explanation": "Chain factor 2.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-chain-trig-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-chain-trig",
+   "prompt": "$\\frac{d}{dx}(x^2+1)^{-1}=$",
+   "choices": [
+    "$-2x(x^2+1)^{-1}$",
+    "$2x(x^2+1)^{-2}$",
+    "$-(x^2+1)^{-2}$",
+    "$-2x(x^2+1)^{-2}$"
+   ],
+   "answer": 3,
+   "explanation": "Outer power rule, inner $2x$.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-diff-chain-trig-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-diff-chain-trig",
+   "prompt": "In $\\frac{d}{dx}\\sin x=\\cos x$, $x$ must be in",
+   "choices": [
+    "radians",
+    "any unit",
+    "gradians",
+    "degrees"
+   ],
+   "answer": 0,
+   "explanation": "Limit $\\frac{\\sin x}{x}\\to1$ needs radians.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-implicit-parametric",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$x=3t$, $y=t^2$. Find $\\frac{dy}{dx}$ at $t=2$ (3 d.p.).",
+   "answer": 1.333,
+   "tolerance": 0.001,
+   "explanation": "$\\frac{dy}{dx}=\\frac{2t}{3}=\\frac{4}{3}$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-implicit-parametric",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "For $x^2+y^2=25$, $\\frac{dy}{dx}=$",
+   "choices": [
+    "$-\\frac{y}{x}$",
+    "$-\\frac{x}{y}$",
+    "$-2x$",
+    "$\\frac{x}{y}$"
+   ],
+   "answer": 1,
+   "explanation": "$2x+2y\\frac{dy}{dx}=0$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-implicit-parametric",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Implicit differentiation can only be used when $y$ can be written explicitly in terms of $x$.",
+   "answer": false,
+   "explanation": "It is used precisely when $y$ cannot (or need not) be isolated.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-implicit-parametric",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{d}{dx}(y^2)=$",
+   "choices": [
+    "$2x$",
+    "$2y$",
+    "$2y\\frac{dy}{dx}$",
+    "$y\\frac{dy}{dx}$"
+   ],
+   "answer": 2,
+   "explanation": "Chain rule.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-implicit-parametric",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A curve has $x=t^2$, $y=t^3-3t$. Find the points where the tangent is horizontal.",
+   "model": "$\\frac{dy}{dt}=3t^2-3=0$ gives $t=\\pm1$ (and $\\frac{dx}{dt}=2t\\neq0$ there). At $t=1$: $(1,-2)$; at $t=-1$: $(1,2)$.",
+   "rubric": [
+    "$\\frac{dy}{dt}=0$ (1)",
+    "Both $t$ values (1)",
+    "Both points (1)"
+   ],
+   "explanation": "$\\frac{dy}{dt}=3t^2-3=0$ gives $t=\\pm1$ (and $\\frac{dx}{dt}=2t\\neq0$ there). At $t=1$: $(1,-2)$; at $t=-1$: $(1,2)$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-implicit-parametric",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A curve has parametric equations $x=3\\cos t$, $y=2\\sin t$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Find $\\frac{dy}{dx}$ at $t=\\frac\\pi3$ (3 d.p.).",
+     "answer": -0.385,
+     "tolerance": 0.001,
+     "explanation": "$\\frac{dy}{dx}=\\frac{2\\cos t}{-3\\sin t}=-\\frac{2}{3}\\times\\frac{\\cos t}{\\sin t}$; at $\\frac\\pi3$: $-\\frac{2}{3}\\times\\frac{1}{\\sqrt3}=-0.385$.",
+     "id": "gceal-maths-differentiation-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The Cartesian equation of the curve is",
+     "choices": [
+      "$3x+2y=1$",
+      "$\\frac{x^2}{4}+\\frac{y^2}{9}=1$",
+      "$x^2+y^2=1$",
+      "$\\frac{x^2}{9}+\\frac{y^2}{4}=1$"
+     ],
+     "answer": 3,
+     "explanation": "$\\cos^2t+\\sin^2t=1$ with $\\cos t=\\frac x3$, $\\sin t=\\frac y2$.",
+     "id": "gceal-maths-differentiation-e18-b"
+    }
+   ],
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-implicit-parametric-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-implicit-parametric",
+   "prompt": "$\\frac{d}{dx}(xy)=$",
+   "choices": [
+    "$y+x\\frac{dy}{dx}$",
+    "$y$",
+    "$\\frac{dy}{dx}$",
+    "$x\\frac{dy}{dx}$"
+   ],
+   "answer": 0,
+   "explanation": "Product rule.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-implicit-parametric-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-implicit-parametric",
+   "prompt": "$x=t^2$, $y=t^3$: $\\frac{dy}{dx}=$",
+   "choices": [
+    "$\\frac{3t^2}{2t^2}$",
+    "$3t^2$",
+    "$\\frac{3t}{2}$",
+    "$\\frac{2}{3t}$"
+   ],
+   "answer": 2,
+   "explanation": "$\\frac{3t^2}{2t}$.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-implicit-parametric-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-implicit-parametric",
+   "prompt": "In $x^2+y^2=25$ at $(3,4)$ the gradient is",
+   "choices": [
+    "$-\\frac{3}{4}$",
+    "$\\frac{3}{4}$",
+    "$-\\frac{4}{3}$",
+    "$\\frac{4}{3}$"
+   ],
+   "answer": 0,
+   "explanation": "$-\\frac{x}{y}$.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-implicit-parametric-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-implicit-parametric",
+   "prompt": "A parametric curve has a vertical tangent where",
+   "choices": [
+    "$\\frac{dx}{dt}=0$ (and $\\frac{dy}{dt}\\neq0$)",
+    "$\\frac{dy}{dt}=0$",
+    "$t=0$",
+    "$\\frac{dy}{dx}=0$"
+   ],
+   "answer": 0,
+   "explanation": "Gradient undefined.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-implicit-parametric-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-implicit-parametric",
+   "prompt": "Eliminating $t$ from $x=t+1$, $y=2t$ gives",
+   "choices": [
+    "$y=2x-2$",
+    "$y=2x+2$",
+    "$y=\\frac{x}{2}$",
+    "$y=x-1$"
+   ],
+   "answer": 0,
+   "explanation": "$t=x-1$.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-trig-formulae",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If $\\sin x=0.6$, find $\\cos2x$.",
+   "answer": 0.28,
+   "tolerance": 0.001,
+   "explanation": "$\\cos2x=1-2\\sin^2x=1-2(0.36)=0.28$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-trig-formulae",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$2\\sin15\\degree\\cos15\\degree=$",
+   "choices": [
+    "$\\sin15\\degree$",
+    "$1$",
+    "$\\frac{1}{2}$",
+    "$\\frac{\\sqrt3}{2}$"
+   ],
+   "answer": 2,
+   "explanation": "$\\sin30\\degree$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-trig-formulae",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\sin(A+B)=\\sin A+\\sin B$.",
+   "answer": false,
+   "explanation": "Take $A=B=30\\degree$: LHS $=\\frac{\\sqrt3}{2}$, RHS $=1$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e22",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-trig-formulae",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The maximum value of $3\\sin x+4\\cos x$ is",
+   "choices": [
+    "$4$",
+    "$7$",
+    "$\\sqrt7$",
+    "$5$"
+   ],
+   "answer": 3,
+   "explanation": "$R=\\sqrt{9+16}$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-trig-formulae",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Prove that $\\frac{\\sin2x}{1+\\cos2x}=\\tan x$.",
+   "model": "$\\sin2x=2\\sin x\\cos x$ and $1+\\cos2x=1+2\\cos^2x-1=2\\cos^2x$. So the fraction is $\\frac{2\\sin x\\cos x}{2\\cos^2x}=\\frac{\\sin x}{\\cos x}=\\tan x$.",
+   "rubric": [
+    "Double-angle numerator (1)",
+    "$1+\\cos2x=2\\cos^2x$ (1)",
+    "Cancels to $\\tan x$ (1)"
+   ],
+   "explanation": "$\\sin2x=2\\sin x\\cos x$ and $1+\\cos2x=1+2\\cos^2x-1=2\\cos^2x$. So the fraction is $\\frac{2\\sin x\\cos x}{2\\cos^2x}=\\frac{\\sin x}{\\cos x}=\\tan x$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-trig-formulae",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $\\cos2x=\\sin x$ for $0\\degree\\leq x\\leq360\\degree$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The equation can be written as",
+     "choices": [
+      "$\\sin^2x+\\sin x=0$",
+      "$2\\sin^2x+\\sin x-1=0$",
+      "$2\\sin^2x-\\sin x+1=0$",
+      "$2\\cos^2x+\\sin x=0$"
+     ],
+     "answer": 1,
+     "explanation": "$1-2\\sin^2x=\\sin x$.",
+     "id": "gceal-maths-differentiation-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many solutions are there?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "$(2s-1)(s+1)=0$: $\\sin x=\\frac{1}{2}$ gives $30\\degree,150\\degree$; $\\sin x=-1$ gives $270\\degree$.",
+     "id": "gceal-maths-differentiation-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the sum of the solutions (degrees).",
+     "answer": 450,
+     "tolerance": 0,
+     "explanation": "$30+150+270$.",
+     "id": "gceal-maths-differentiation-e24-c"
+    }
+   ],
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-trig-formulae-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-trig-formulae",
+   "prompt": "$\\cos(A+B)=$",
+   "choices": [
+    "$\\cos A\\cos B+\\sin A\\sin B$",
+    "$\\cos A+\\cos B$",
+    "$\\sin A\\cos B-\\cos A\\sin B$",
+    "$\\cos A\\cos B-\\sin A\\sin B$"
+   ],
+   "answer": 3,
+   "explanation": "Sign flip.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-trig-formulae-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-trig-formulae",
+   "prompt": "$\\sin2A=$",
+   "choices": [
+    "$2\\sin A\\cos A$",
+    "$\\sin A+\\cos A$",
+    "$\\sin^2A$",
+    "$2\\sin A$"
+   ],
+   "answer": 0,
+   "explanation": "Double angle.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-trig-formulae-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-trig-formulae",
+   "prompt": "$\\cos2A$ in terms of $\\cos A$ only is",
+   "choices": [
+    "$\\cos^2A+1$",
+    "$1-2\\cos^2A$",
+    "$2\\cos A$",
+    "$2\\cos^2A-1$"
+   ],
+   "answer": 3,
+   "explanation": "From $\\cos^2-\\sin^2$.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-trig-formulae-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-trig-formulae",
+   "prompt": "For $4\\sin x+3\\cos x=R\\sin(x+\\alpha)$, $R=$",
+   "choices": [
+    "$7$",
+    "$5$",
+    "$12$",
+    "$1$"
+   ],
+   "answer": 1,
+   "explanation": "$\\sqrt{16+9}$.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-trig-formulae-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-trig-formulae",
+   "prompt": "$\\tan(A+B)$ equals",
+   "choices": [
+    "$\\frac{\\tan A-\\tan B}{1+\\tan A\\tan B}$",
+    "$\\frac{\\tan A\\tan B}{1-\\tan A}$",
+    "$\\tan A+\\tan B$",
+    "$\\frac{\\tan A+\\tan B}{1-\\tan A\\tan B}$"
+   ],
+   "answer": 3,
+   "explanation": "Standard formula.",
+   "chapter": "gceal-maths-differentiation"
+  },
+  {
+   "id": "gceal-maths-differentiation-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-maths-diff-product-quotient",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The gradient of $y=\\ln(x^2+1)$ at $x=1$ is",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$\\ln2$",
+    "$2$",
+    "$1$"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{dy}{dx}=\\frac{2x}{x^2+1}=\\frac{2}{2}=1$ (chain rule).",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-maths-differentiation"
+  }
+ ]
+}

@@ -1,0 +1,2592 @@
+{
+ "chapter": "lower6-maths-algebra",
+ "lessons": [
+  {
+   "id": "lower6-maths-indices-surds",
+   "title": "Indices and surds",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the laws of indices with integer and fractional powers",
+    "Simplify surds and rationalise denominators"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-algebra-e01",
+    "lower6-maths-algebra-e02",
+    "lower6-maths-algebra-e03",
+    "lower6-maths-algebra-e04",
+    "lower6-maths-algebra-e05",
+    "lower6-maths-algebra-e06"
+   ],
+   "selfCheck": [
+    "lower6-maths-indices-surds-q1",
+    "lower6-maths-indices-surds-q2",
+    "lower6-maths-indices-surds-q3",
+    "lower6-maths-indices-surds-q4",
+    "lower6-maths-indices-surds-q5"
+   ],
+   "reviewNotes": [
+    "Scope of surds/indices in the GCE Board syllabus (fractional and negative powers assumed standard) to be confirmed.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Laws of indices",
+     "md": "For $a>0$: $a^m \\times a^n = a^{m+n}$, $a^m \\div a^n = a^{m-n}$, $(a^m)^n = a^{mn}$, $a^0 = 1$, $a^{-n} = \\frac{1}{a^n}$. Fractional powers are roots: $a^{1/n} = \\sqrt[n]{a}$ and $a^{m/n} = (\\sqrt[n]{a})^m$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Surds",
+     "md": "A surd is an irrational root such as $\\sqrt{2}$. Rules: $\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$ and $\\sqrt{a/b} = \\sqrt{a}/\\sqrt{b}$. Simplify by taking out square factors: $\\sqrt{72} = \\sqrt{36 \\times 2} = 6\\sqrt{2}$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3,
+      "xmax": 3,
+      "ymin": 0,
+      "ymax": 9,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "2^x",
+        "color": "blue",
+        "label": "2^x"
+       },
+       {
+        "expr": "(1/2)^x",
+        "color": "orange"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 1,
+        "label": "(0, 1)",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     },
+     "caption": "Graphs of $y=2^x$ (growth) and $y=(1/2)^x$ (decay) both pass through $(0,1)$ because $a^0=1$.",
+     "alt": "Two exponential curves crossing the y-axis at 1, one rising and one falling."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rationalising the denominator",
+     "md": "To remove a surd from a denominator multiply top and bottom by the **conjugate**. The conjugate of $a + \\sqrt{b}$ is $a - \\sqrt{b}$, and $(a+\\sqrt{b})(a-\\sqrt{b}) = a^2 - b$ is rational."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- $(a+b)^2 \\neq a^2 + b^2$: there is a middle term $2ab$.\n- $\\sqrt{a+b} \\neq \\sqrt{a} + \\sqrt{b}$.\n- $2^{-3}$ is $\\frac{1}{8}$, not $-8$.\n- $\\sqrt{x^2} = |x|$, not simply $x$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Evaluate $16^{3/4} \\times 9^{-1/2}$.",
+     "steps": [
+      "$16^{3/4} = (\\sqrt[4]{16})^3 = 2^3 = 8$.",
+      "$9^{-1/2} = \\frac{1}{\\sqrt{9}} = \\frac{1}{3}$.",
+      "Multiply: $8 \\times \\frac{1}{3}$."
+     ],
+     "answer": "$\\frac{8}{3}$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Rationalise $\\frac{6}{3-\\sqrt{3}}$.",
+     "steps": [
+      "Multiply top and bottom by the conjugate $3+\\sqrt{3}$.",
+      "Denominator: $(3-\\sqrt{3})(3+\\sqrt{3}) = 9-3 = 6$.",
+      "Numerator: $6(3+\\sqrt{3})$, so the fraction is $\\frac{6(3+\\sqrt{3})}{6}$."
+     ],
+     "answer": "$3+\\sqrt{3}$"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-logarithms",
+   "title": "Logarithms and exponential equations",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Convert between index and logarithm form",
+    "Use the laws of logarithms",
+    "Solve equations of the form $a^x = b$"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-algebra-e07",
+    "lower6-maths-algebra-e08",
+    "lower6-maths-algebra-e09",
+    "lower6-maths-algebra-e10",
+    "lower6-maths-algebra-e11",
+    "lower6-maths-algebra-e12"
+   ],
+   "selfCheck": [
+    "lower6-maths-logarithms-q1",
+    "lower6-maths-logarithms-q2",
+    "lower6-maths-logarithms-q3",
+    "lower6-maths-logarithms-q4",
+    "lower6-maths-logarithms-q5"
+   ],
+   "reviewNotes": [
+    "Natural logarithm (ln) is assumed known from this lesson; the exponential function itself is treated in the 'Exponential and logarithmic functions' lesson.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Definition and laws",
+     "md": "$\\log_a x = y$ means $a^y = x$ (with $a>0$, $a\\neq1$, $x>0$). Laws: $\\log_a(xy)=\\log_a x+\\log_a y$, $\\log_a\\frac{x}{y}=\\log_a x-\\log_a y$, $\\log_a x^k = k\\log_a x$. Also $\\log_a a=1$ and $\\log_a 1=0$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Solving $a^x = b$",
+     "md": "Take logarithms of both sides (base 10 or $\\ln$): $x\\log a = \\log b$, so $x = \\frac{\\log b}{\\log a}$. The change of base formula is $\\log_a b = \\frac{\\log b}{\\log a}$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0.1,
+      "xmax": 8.5,
+      "ymin": -3,
+      "ymax": 3.5,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "ln(x)/ln(2)",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 0,
+        "label": "(1, 0)",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 1,
+        "label": "(2, 1)",
+        "color": "red"
+       },
+       {
+        "x": 8,
+        "y": 3,
+        "label": "(8, 3)",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x"
+     },
+     "caption": "The graph of $y=\\log_2 x$: it passes through $(1,0)$, $(2,1)$, $(8,3)$ and is undefined for $x\\leq0$.",
+     "alt": "Increasing logarithm curve through (1,0), (2,1) and (8,3) with the y-axis as a vertical asymptote."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- $\\log(a+b)$ is NOT $\\log a + \\log b$.\n- $\\frac{\\log a}{\\log b}$ is NOT $\\log a - \\log b$.\n- In equations with logs, check every answer: the argument of a log must stay positive, so some roots must be rejected."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Solve $\\log_2(x+3) + \\log_2(x-3) = 4$.",
+     "steps": [
+      "Combine: $\\log_2\\big((x+3)(x-3)\\big)=4$, so $x^2-9 = 2^4 = 16$.",
+      "$x^2 = 25$, so $x=5$ or $x=-5$.",
+      "The arguments must be positive: $x>3$. So $x=-5$ is rejected."
+     ],
+     "answer": "$x=5$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Solve $3^x = 20$ to 3 significant figures.",
+     "steps": [
+      "Take $\\log$ of both sides: $x\\log 3=\\log 20$.",
+      "$x=\\frac{\\log 20}{\\log 3}=\\frac{1.3010}{0.4771}$."
+     ],
+     "answer": "$x \\approx 2.73$"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-quadratics",
+   "title": "Quadratic functions and equations",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Complete the square and find the turning point",
+    "Use the discriminant to describe the roots",
+    "Use sum and product of roots"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-algebra-e13",
+    "lower6-maths-algebra-e14",
+    "lower6-maths-algebra-e15",
+    "lower6-maths-algebra-e16",
+    "lower6-maths-algebra-e17",
+    "lower6-maths-algebra-e18"
+   ],
+   "selfCheck": [
+    "lower6-maths-quadratics-q1",
+    "lower6-maths-quadratics-q2",
+    "lower6-maths-quadratics-q3",
+    "lower6-maths-quadratics-q4",
+    "lower6-maths-quadratics-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Completing the square",
+     "md": "$ax^2+bx+c = a\\left(x+\\frac{b}{2a}\\right)^2 + c-\\frac{b^2}{4a}$. The parabola has its turning point at $x=-\\frac{b}{2a}$, a minimum if $a>0$ and a maximum if $a<0$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Discriminant",
+     "md": "For $ax^2+bx+c=0$ the discriminant is $\\Delta=b^2-4ac$. If $\\Delta>0$: two distinct real roots; $\\Delta=0$: one repeated root; $\\Delta<0$: no real roots. Roots: $x=\\frac{-b\\pm\\sqrt{\\Delta}}{2a}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Sum and product of roots",
+     "md": "If $\\alpha$ and $\\beta$ are the roots of $ax^2+bx+c=0$ then $\\alpha+\\beta=-\\frac{b}{a}$ and $\\alpha\\beta=\\frac{c}{a}$. These let you build a new equation from given roots."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Watch out",
+     "md": "Equal roots means $\\Delta=0$ exactly. Always move everything to one side ($=0$) before reading off $a$, $b$, $c$. Divide by $a$ BEFORE completing the square."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write $x^2-6x+4$ in the form $(x-p)^2+q$ and state the minimum value.",
+     "steps": [
+      "Half of $-6$ is $-3$: $x^2-6x=(x-3)^2-9$.",
+      "So $x^2-6x+4=(x-3)^2-9+4=(x-3)^2-5$.",
+      "A square is at least 0, so the minimum is $-5$, at $x=3$."
+     ],
+     "answer": "$(x-3)^2-5$; minimum $-5$ at $x=3$",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 162.0,
+        "x2": 372.0,
+        "y2": 162.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 75.5,
+        "y1": 232.0,
+        "x2": 75.5,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 117.0,
+        "y1": 159.0,
+        "x2": 117.0,
+        "y2": 165.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 117.0,
+        "y": 179.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 159.0,
+        "x2": 200.0,
+        "y2": 165.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 179.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 283.0,
+        "y1": 159.0,
+        "x2": 283.0,
+        "y2": 165.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 283.0,
+        "y": 179.0,
+        "text": "5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 366.0,
+        "y1": 159.0,
+        "x2": 366.0,
+        "y2": 165.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 366.0,
+        "y": 179.0,
+        "text": "7",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 72.5,
+        "y1": 215.33333333333334,
+        "x2": 78.5,
+        "y2": 215.33333333333334,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.5,
+        "y": 219.33333333333334,
+        "text": "−5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 72.5,
+        "y1": 108.66666666666667,
+        "x2": 78.5,
+        "y2": 108.66666666666667,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.5,
+        "y": 112.66666666666667,
+        "text": "5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 72.5,
+        "y1": 55.33333333333334,
+        "x2": 78.5,
+        "y2": 55.33333333333334,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.5,
+        "y": 59.33333333333334,
+        "text": "10",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         34.0,
+         44.7,
+         39.5,
+         55.9,
+         45.1,
+         66.7,
+         50.6,
+         77.1,
+         56.1,
+         87.1,
+         61.7,
+         96.8,
+         67.2,
+         106.1,
+         72.7,
+         115.0,
+         78.3,
+         123.6,
+         83.8,
+         131.7,
+         89.3,
+         139.5,
+         94.9,
+         146.9,
+         100.4,
+         153.9,
+         105.9,
+         160.5,
+         111.5,
+         166.8,
+         117.0,
+         172.7,
+         122.5,
+         178.2,
+         128.1,
+         183.3,
+         133.6,
+         188.0,
+         139.1,
+         192.4,
+         144.7,
+         196.4,
+         150.2,
+         200.0,
+         155.7,
+         203.2,
+         161.3,
+         206.0,
+         166.8,
+         208.5,
+         172.3,
+         210.6,
+         177.9,
+         212.3,
+         183.4,
+         213.6,
+         188.9,
+         214.6,
+         194.5,
+         215.1,
+         200.0,
+         215.3,
+         205.5,
+         215.1,
+         211.1,
+         214.6,
+         216.6,
+         213.6,
+         222.1,
+         212.3,
+         227.7,
+         210.6,
+         233.2,
+         208.5,
+         238.7,
+         206.0,
+         244.3,
+         203.2,
+         249.8,
+         200.0,
+         255.3,
+         196.4,
+         260.9,
+         192.4,
+         266.4,
+         188.0,
+         271.9,
+         183.3,
+         277.5,
+         178.2,
+         283.0,
+         172.7,
+         288.5,
+         166.8,
+         294.1,
+         160.5,
+         299.6,
+         153.9,
+         305.1,
+         146.9,
+         310.7,
+         139.5,
+         316.2,
+         131.7,
+         321.7,
+         123.6,
+         327.3,
+         115.0,
+         332.8,
+         106.1,
+         338.3,
+         96.8,
+         343.9,
+         87.1,
+         349.4,
+         77.1,
+         354.9,
+         66.7,
+         360.5,
+         55.9,
+         366.0,
+         44.7
+        ],
+        "stroke": "blue",
+        "width": 2.5,
+        "closed": false
+       },
+       {
+        "t": "circle",
+        "cx": 200.0,
+        "cy": 215.33333333333334,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 231.33333333333334,
+        "text": "(3, −5)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the values of $k$ for which $x^2+kx+9=0$ has equal roots.",
+     "steps": [
+      "Equal roots: $\\Delta=k^2-4(1)(9)=0$.",
+      "$k^2=36$."
+     ],
+     "answer": "$k=6$ or $k=-6$"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-inequalities",
+   "title": "Inequalities and the modulus",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Solve linear and quadratic inequalities",
+    "Solve simple modulus equations and inequalities"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-algebra-e19",
+    "lower6-maths-algebra-e20",
+    "lower6-maths-algebra-e21",
+    "lower6-maths-algebra-e22",
+    "lower6-maths-algebra-e23",
+    "lower6-maths-algebra-e24"
+   ],
+   "selfCheck": [
+    "lower6-maths-inequalities-q1",
+    "lower6-maths-inequalities-q2",
+    "lower6-maths-inequalities-q3",
+    "lower6-maths-inequalities-q4",
+    "lower6-maths-inequalities-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Quadratic inequalities",
+     "md": "Find the roots of the related equation, sketch the parabola, then read the answer. For $ax^2+bx+c>0$ with $a>0$: outside the roots; for $<0$: between the roots. Write answers like $x<-2$ or $x>3$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Modulus",
+     "md": "$|x|=x$ if $x\\geq0$ and $|x|=-x$ if $x<0$; it is the distance from 0. $|x-a|<r$ means $a-r<x<a+r$; $|x-a|>r$ means $x<a-r$ or $x>a+r$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 100,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 50,
+        "x2": 380,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 30.0,
+        "y1": 45,
+        "x2": 30.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 74,
+        "text": "−4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 67.77777777777777,
+        "y1": 45,
+        "x2": 67.77777777777777,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.77777777777777,
+        "y": 74,
+        "text": "−3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 105.55555555555556,
+        "y1": 45,
+        "x2": 105.55555555555556,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 105.55555555555556,
+        "y": 74,
+        "text": "−2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 143.33333333333331,
+        "y1": 45,
+        "x2": 143.33333333333331,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 143.33333333333331,
+        "y": 74,
+        "text": "−1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 181.11111111111111,
+        "y1": 45,
+        "x2": 181.11111111111111,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 181.11111111111111,
+        "y": 74,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 218.88888888888889,
+        "y1": 45,
+        "x2": 218.88888888888889,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 218.88888888888889,
+        "y": 74,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 256.66666666666663,
+        "y1": 45,
+        "x2": 256.66666666666663,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 256.66666666666663,
+        "y": 74,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 294.44444444444446,
+        "y1": 45,
+        "x2": 294.44444444444446,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 294.44444444444446,
+        "y": 74,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 332.22222222222223,
+        "y1": 45,
+        "x2": 332.22222222222223,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 332.22222222222223,
+        "y": 74,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 370.0,
+        "y1": 45,
+        "x2": 370.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 370.0,
+        "y": 74,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 105.55555555555556,
+        "y1": 50,
+        "x2": 294.44444444444446,
+        "y2": 50,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "circle",
+        "cx": 105.55555555555556,
+        "cy": 50,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "circle",
+        "cx": 294.44444444444446,
+        "cy": 50,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "white"
+       }
+      ]
+     },
+     "caption": "Number line for $-2<x<3$: open circles at the ends are not included.",
+     "alt": "Number line from -4 to 5 with open circles at -2 and 3 and the segment between them shaded."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Multiplying or dividing by a NEGATIVE number reverses the inequality sign.\n- Never square-root or divide by $x$ without checking its sign.\n- $|x|=a$ has two solutions for $a>0$; check each against the original equation."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Solve $x^2-x-6>0$.",
+     "steps": [
+      "Factorise: $(x-3)(x+2)>0$, roots $x=3$ and $x=-2$.",
+      "The parabola opens upwards, so it is positive outside the roots."
+     ],
+     "answer": "$x<-2$ or $x>3$",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 100,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 50,
+        "x2": 380,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 30.0,
+        "y1": 45,
+        "x2": 30.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 74,
+        "text": "−4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 67.77777777777777,
+        "y1": 45,
+        "x2": 67.77777777777777,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.77777777777777,
+        "y": 74,
+        "text": "−3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 105.55555555555556,
+        "y1": 45,
+        "x2": 105.55555555555556,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 105.55555555555556,
+        "y": 74,
+        "text": "−2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 143.33333333333331,
+        "y1": 45,
+        "x2": 143.33333333333331,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 143.33333333333331,
+        "y": 74,
+        "text": "−1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 181.11111111111111,
+        "y1": 45,
+        "x2": 181.11111111111111,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 181.11111111111111,
+        "y": 74,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 218.88888888888889,
+        "y1": 45,
+        "x2": 218.88888888888889,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 218.88888888888889,
+        "y": 74,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 256.66666666666663,
+        "y1": 45,
+        "x2": 256.66666666666663,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 256.66666666666663,
+        "y": 74,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 294.44444444444446,
+        "y1": 45,
+        "x2": 294.44444444444446,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 294.44444444444446,
+        "y": 74,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 332.22222222222223,
+        "y1": 45,
+        "x2": 332.22222222222223,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 332.22222222222223,
+        "y": 74,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 370.0,
+        "y1": 45,
+        "x2": 370.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 370.0,
+        "y": 74,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 50,
+        "x2": 105.55555555555556,
+        "y2": 50,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "circle",
+        "cx": 105.55555555555556,
+        "cy": 50,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "circle",
+        "cx": 294.44444444444446,
+        "cy": 50,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "white"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Solve $|2x-1|\\leq5$.",
+     "steps": [
+      "$-5\\leq2x-1\\leq5$.",
+      "Add 1: $-4\\leq2x\\leq6$; divide by 2."
+     ],
+     "answer": "$-2\\leq x\\leq3$"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-polynomials",
+   "title": "Polynomials: factor and remainder theorems",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Divide polynomials",
+    "Use the remainder and factor theorems",
+    "Factorise cubics and solve $f(x)=0$"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-algebra-e25",
+    "lower6-maths-algebra-e26",
+    "lower6-maths-algebra-e27",
+    "lower6-maths-algebra-e28",
+    "lower6-maths-algebra-e29",
+    "lower6-maths-algebra-e30"
+   ],
+   "selfCheck": [
+    "lower6-maths-polynomials-q1",
+    "lower6-maths-polynomials-q2",
+    "lower6-maths-polynomials-q3",
+    "lower6-maths-polynomials-q4",
+    "lower6-maths-polynomials-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Remainder theorem",
+     "md": "When a polynomial $f(x)$ is divided by $(x-a)$ the remainder is $f(a)$. For $(ax-b)$ the remainder is $f\\left(\\frac{b}{a}\\right)$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Factor theorem",
+     "md": "$(x-a)$ is a factor of $f(x)$ if and only if $f(a)=0$. Then $a$ is a root of $f(x)=0$ and the graph crosses the x-axis at $x=a$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Factorising a cubic",
+     "md": "1. Try $x=\\pm1,\\pm2,\\pm3,s'$ (factors of the constant term) until $f(a)=0$.\n2. Divide $f(x)$ by $(x-a)$ (long division or inspection) to get a quadratic.\n3. Factorise the quadratic.\n4. List all roots."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "A factor $(x+3)$ corresponds to the root $x=-3$, not $+3$. Remember the sign: test $f(-3)$ for the factor $(x+3)$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Factorise $f(x)=x^3-2x^2-5x+6$ completely.",
+     "steps": [
+      "$f(1)=1-2-5+6=0$, so $(x-1)$ is a factor.",
+      "Divide: $f(x)=(x-1)(x^2-x-6)$.",
+      "$x^2-x-6=(x-3)(x+2)$."
+     ],
+     "answer": "$f(x)=(x-1)(x-3)(x+2)$",
+     "figure": {
+      "kind": "plot",
+      "xmin": -2.5,
+      "xmax": 3.5,
+      "ymin": -12,
+      "ymax": 12,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "x^3-2x^2-5x+6",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 0,
+        "label": "1",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       },
+       {
+        "x": -2,
+        "y": 0,
+        "label": "-2",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the remainder when $2x^3+x^2-3x+5$ is divided by $(x+2)$.",
+     "steps": [
+      "Remainder theorem with $a=-2$: $f(-2)=2(-8)+4+6+5$.",
+      "$=-16+15$."
+     ],
+     "answer": "Remainder $-1$"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-functions",
+   "title": "Functions: composite and inverse",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find domain and range",
+    "Form composite functions $fg$",
+    "Find inverse functions and relate their graphs"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-algebra-e31",
+    "lower6-maths-algebra-e32",
+    "lower6-maths-algebra-e33",
+    "lower6-maths-algebra-e34",
+    "lower6-maths-algebra-e35",
+    "lower6-maths-algebra-e36"
+   ],
+   "selfCheck": [
+    "lower6-maths-functions-q1",
+    "lower6-maths-functions-q2",
+    "lower6-maths-functions-q3",
+    "lower6-maths-functions-q4",
+    "lower6-maths-functions-q5"
+   ],
+   "reviewNotes": [
+    "Check whether the syllabus asks for one-to-one/many-to-one terminology and graph transformations (translations, stretches); transformations of graphs are not covered in this pack.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Function, domain, range",
+     "md": "A function $f$ gives exactly one output for each input. The **domain** is the set of allowed inputs, the **range** the set of outputs. Examples: $\\sqrt{x-3}$ needs $x\\geq3$; $\\frac{1}{x-5}$ needs $x\\neq5$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Composite function",
+     "md": "$fg(x)=f(g(x))$: apply $g$ first, then $f$. In general $fg\\neq gf$. Work from the inside out."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Finding an inverse",
+     "md": "Write $y=f(x)$, make $x$ the subject, then swap letters: $f^{-1}(x)$. The graph of $y=f^{-1}(x)$ is the reflection of $y=f(x)$ in the line $y=x$. Only one-to-one functions have an inverse; restrict the domain if needed. The domain of $f^{-1}$ is the range of $f$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "$f^{-1}(x)$ is NOT $\\frac{1}{f(x)}$. For $fg(x)$ do $g$ first. A function like $x^2$ has no inverse on all of $\\mathbb{R}$ because two inputs give one output."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "$f(x)=2x+3$, $g(x)=x^2$. Find $fg(x)$, $gf(x)$ and $fg(-2)$.",
+     "steps": [
+      "$fg(x)=f(x^2)=2x^2+3$.",
+      "$gf(x)=g(2x+3)=(2x+3)^2$.",
+      "$fg(-2)=2(4)+3=11$."
+     ],
+     "answer": "$fg=2x^2+3$, $gf=(2x+3)^2$, $fg(-2)=11$",
+     "figure": {
+      "kind": "plot",
+      "xmin": -5,
+      "xmax": 5,
+      "ymin": -5,
+      "ymax": 5,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "2x+3",
+        "color": "blue",
+        "label": "f"
+       },
+       {
+        "expr": "(x-3)/2",
+        "color": "orange",
+        "label": "f inverse"
+       },
+       {
+        "expr": "x",
+        "color": "grey"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "x"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the inverse of $f(x)=\\frac{x+1}{x-2}$, $x\\neq2$.",
+     "steps": [
+      "$y(x-2)=x+1$, so $yx-2y=x+1$ and $x(y-1)=2y+1$.",
+      "$x=\\frac{2y+1}{y-1}$. Swap letters. Check: $f(3)=4$ and $f^{-1}(4)=\\frac{9}{3}=3$."
+     ],
+     "answer": "$f^{-1}(x)=\\frac{2x+1}{x-1}$, $x\\neq1$"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-maths-algebra-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-indices-surds",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Evaluate $125^{2/3}$.",
+   "answer": 25,
+   "tolerance": 0,
+   "explanation": "$125^{1/3}=5$, then $5^2=25$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-indices-surds",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Simplify $\\sqrt{50} + \\sqrt{18}$.",
+   "choices": [
+    "$8\\sqrt{2}\\,/\\,2$",
+    "$8\\sqrt{2}$",
+    "$15\\sqrt{2}$",
+    "$\\sqrt{68}$"
+   ],
+   "answer": 1,
+   "explanation": "$\\sqrt{50}=5\\sqrt{2}$ and $\\sqrt{18}=3\\sqrt{2}$; add the like surds to get $8\\sqrt{2}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-indices-surds",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$(a+b)^2 = a^2 + b^2$ for all real $a,b$.",
+   "answer": false,
+   "explanation": "False. $(a+b)^2 = a^2+2ab+b^2$; for example $(1+2)^2=9$ but $1+4=5$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-indices-surds",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If $4^x = 8$, then $x$ equals",
+   "choices": [
+    "$2$",
+    "$\\frac{1}{2}$",
+    "$\\frac{2}{3}$",
+    "$\\frac{3}{2}$"
+   ],
+   "answer": 3,
+   "explanation": "$4^x=2^{2x}$ and $8=2^3$, so $2x=3$ and $x=\\frac{3}{2}$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-indices-surds",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Show that $\\frac{1}{\\sqrt{5}-2} = \\sqrt{5}+2$. Hence simplify $\\frac{1}{\\sqrt{5}-2} + \\frac{1}{\\sqrt{5}+2}$.",
+   "model": "Multiply by the conjugate: $\\frac{\\sqrt{5}+2}{(\\sqrt{5}-2)(\\sqrt{5}+2)} = \\frac{\\sqrt{5}+2}{5-4} = \\sqrt{5}+2$. In the same way $\\frac{1}{\\sqrt{5}+2} = \\sqrt{5}-2$. The sum is $(\\sqrt{5}+2)+(\\sqrt{5}-2) = 2\\sqrt{5}$.",
+   "rubric": [
+    "Uses the conjugate correctly (1)",
+    "Denominator becomes 1 (1)",
+    "Final answer $2\\sqrt{5}$ (1)"
+   ],
+   "explanation": "Multiply by the conjugate: $\\frac{\\sqrt{5}+2}{(\\sqrt{5}-2)(\\sqrt{5}+2)} = \\frac{\\sqrt{5}+2}{5-4} = \\sqrt{5}+2$. In the same way $\\frac{1}{\\sqrt{5}+2} = \\sqrt{5}-2$. The sum is $(\\sqrt{5}+2)+(\\sqrt{5}-2) = 2\\sqrt{5}$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-indices-surds",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Answer the following.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Solve $9^x = 27^{x-1}$ for $x$.",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "$3^{2x}=3^{3(x-1)}$, so $2x=3x-3$ and $x=3$.",
+     "id": "lower6-maths-algebra-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Write $\\frac{2+\\sqrt{3}}{2-\\sqrt{3}}$ in the form $a+b\\sqrt{3}$. Find $a+b$.",
+     "answer": 11,
+     "tolerance": 0,
+     "explanation": "Multiply by $2+\\sqrt{3}$: numerator $(2+\\sqrt{3})^2 = 7+4\\sqrt{3}$, denominator $4-3=1$. So $a=7$, $b=4$ and $a+b=11$.",
+     "id": "lower6-maths-algebra-e06-b"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-indices-surds-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-indices-surds",
+   "prompt": "$2^3 \\times 2^4$ equals",
+   "choices": [
+    "$2^{12}$",
+    "$4^7$",
+    "$2^1$",
+    "$2^7$"
+   ],
+   "answer": 3,
+   "explanation": "Add the powers when multiplying with the same base: $3+4=7$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-indices-surds-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-indices-surds",
+   "prompt": "$9^{1/2}$ equals",
+   "choices": [
+    "$4.5$",
+    "$3$",
+    "$\\frac{1}{3}$",
+    "$81$"
+   ],
+   "answer": 1,
+   "explanation": "A power of $\\frac{1}{2}$ is a square root.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-indices-surds-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-indices-surds",
+   "prompt": "$3^{-2}$ equals",
+   "choices": [
+    "$\\frac{1}{6}$",
+    "$-9$",
+    "$\\frac{1}{9}$",
+    "$-6$"
+   ],
+   "answer": 2,
+   "explanation": "A negative power means a reciprocal: $\\frac{1}{3^2}$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-indices-surds-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-indices-surds",
+   "prompt": "$\\sqrt{12}$ simplifies to",
+   "choices": [
+    "$2\\sqrt{3}$",
+    "$6$",
+    "$3\\sqrt{2}$",
+    "$4\\sqrt{3}$"
+   ],
+   "answer": 0,
+   "explanation": "$\\sqrt{12}=\\sqrt{4\\times3}=2\\sqrt{3}$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-indices-surds-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-indices-surds",
+   "prompt": "$\\sqrt{3}\\times\\sqrt{12}$ equals",
+   "choices": [
+    "$6$",
+    "$\\sqrt{15}$",
+    "$12$",
+    "$3\\sqrt{2}$"
+   ],
+   "answer": 0,
+   "explanation": "$\\sqrt{3\\times12}=\\sqrt{36}=6$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-logarithms",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Evaluate $\\log_2 32$.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "$2^5=32$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-logarithms",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\log 4 + \\log 25$ (base 10) equals",
+   "choices": [
+    "$\\log 29$",
+    "$100$",
+    "$2$",
+    "$1$"
+   ],
+   "answer": 2,
+   "explanation": "$\\log(4\\times25)=\\log100=2$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-logarithms",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\log(a+b) = \\log a + \\log b$.",
+   "answer": false,
+   "explanation": "False: it is $\\log(ab)$ that equals $\\log a+\\log b$. Try $a=b=1$: $\\log 2\\neq 0$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-logarithms",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $\\log_3 x + \\log_3(x-2) = 1$.",
+   "choices": [
+    "$x=-1$",
+    "$x=3$ and $x=-1$",
+    "$x=3$",
+    "$x=\\frac{1}{2}$"
+   ],
+   "answer": 2,
+   "explanation": "$x(x-2)=3$ gives $x^2-2x-3=0$, so $x=3$ or $-1$; $x=-1$ makes a log undefined, so only $x=3$ (check: $\\log_3 3+\\log_3 1=1$).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-logarithms",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $5^x = 40$. Give $x$ to 2 decimal places.",
+   "answer": 2.29,
+   "tolerance": 0.01,
+   "explanation": "$x=\\frac{\\ln 40}{\\ln 5}\\approx 2.292$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-logarithms",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "500 000 FCFA is saved in a Douala cooperative at 4% compound interest per year, so after $n$ years it is worth $500000\\times1.04^n$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Solve $500000\\times1.04^n = 800000$ for $n$ (2 d.p.).",
+     "answer": 11.98,
+     "tolerance": 0.02,
+     "explanation": "$1.04^n=1.6$, so $n=\\frac{\\ln1.6}{\\ln1.04}\\approx 11.98$.",
+     "id": "lower6-maths-algebra-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "After how many whole years does the savings first exceed 800 000 FCFA?",
+     "choices": [
+      "13",
+      "11",
+      "12",
+      "10"
+     ],
+     "answer": 2,
+     "explanation": "At $n=11$ the value is about 769 000 (below), at $n=12$ about 800 500 (above).",
+     "id": "lower6-maths-algebra-e12-b"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-logarithms-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-logarithms",
+   "prompt": "$\\log_{10}1000$ equals",
+   "choices": [
+    "$10$",
+    "$\\frac{1}{3}$",
+    "$100$",
+    "$3$"
+   ],
+   "answer": 3,
+   "explanation": "$10^3=1000$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-logarithms-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-logarithms",
+   "prompt": "$\\log_a a^5$ equals",
+   "choices": [
+    "$\\log 5$",
+    "$5$",
+    "$a^5$",
+    "$5a$"
+   ],
+   "answer": 1,
+   "explanation": "$\\log_a a^5 = 5\\log_a a=5$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-logarithms-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-logarithms",
+   "prompt": "$2\\log 3 + \\log 4$ equals",
+   "choices": [
+    "$\\log 10$",
+    "$\\log 24$",
+    "$\\log 36$",
+    "$\\log 12$"
+   ],
+   "answer": 2,
+   "explanation": "$2\\log3=\\log9$; $\\log9+\\log4=\\log36$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-logarithms-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-logarithms",
+   "prompt": "If $2^x = 7$ then $x$ equals",
+   "choices": [
+    "$\\frac{\\log 7}{\\log 2}$",
+    "$\\frac{\\log 2}{\\log 7}$",
+    "$\\log 7-\\log 2$",
+    "$\\frac{7}{2}$"
+   ],
+   "answer": 0,
+   "explanation": "Take logs: $x\\log2=\\log7$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-logarithms-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-logarithms",
+   "prompt": "$\\log_2 \\frac{1}{8}$ equals",
+   "choices": [
+    "$-\\frac{1}{3}$",
+    "$\\frac{1}{8}$",
+    "$-3$",
+    "$3$"
+   ],
+   "answer": 2,
+   "explanation": "$2^{-3}=\\frac{1}{8}$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-quadratics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the larger root of $2x^2-5x-3=0$.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "$(2x+1)(x-3)=0$, roots $-\\frac{1}{2}$ and $3$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-quadratics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The discriminant of $3x^2-2x+5$ is",
+   "choices": [
+    "$56$",
+    "$-16$",
+    "$-56$",
+    "$64$"
+   ],
+   "answer": 2,
+   "explanation": "$b^2-4ac=4-60=-56<0$: no real roots.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-quadratics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The sum of the roots of $x^2-7x+10=0$ is 7.",
+   "answer": true,
+   "explanation": "$-\\frac{b}{a}=7$ (roots 2 and 5).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-quadratics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The equation $x^2+4x+k=0$ has two distinct real roots when",
+   "choices": [
+    "$k>4$",
+    "$k=4$",
+    "$k<-4$",
+    "$k<4$"
+   ],
+   "answer": 3,
+   "explanation": "$\\Delta=16-4k>0$ gives $k<4$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-quadratics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Show that $x^2+2x+5>0$ for every real $x$.",
+   "model": "$x^2+2x+5=(x+1)^2+4$. Since $(x+1)^2\\geq0$, the expression is at least 4, hence positive. (Equivalently $\\Delta=4-20<0$ and the parabola opens upwards.)",
+   "rubric": [
+    "Completes the square correctly (1)",
+    "States $(x+1)^2\\geq0$ (1)",
+    "Concludes the expression $\\geq4>0$ (1)"
+   ],
+   "explanation": "$x^2+2x+5=(x+1)^2+4$. Since $(x+1)^2\\geq0$, the expression is at least 4, hence positive. (Equivalently $\\Delta=4-20<0$ and the parabola opens upwards.)",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-quadratics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A rectangular plot in Bamenda has perimeter 40 m, and one side is $x$ m.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Its area is 91 m². Find the shorter side (m).",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "Other side $20-x$: $x(20-x)=91$, so $x^2-20x+91=0$, $(x-7)(x-13)=0$. Sides 7 m and 13 m.",
+     "id": "lower6-maths-algebra-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the largest possible area (m²) of such a plot.",
+     "answer": 100,
+     "tolerance": 0,
+     "explanation": "$A=20x-x^2=100-(x-10)^2\\leq100$, equal when $x=10$ (a square).",
+     "id": "lower6-maths-algebra-e18-b"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-quadratics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-quadratics",
+   "prompt": "The turning point of $y=x^2-4x+9$ has $x=$",
+   "choices": [
+    "$2$",
+    "$4$",
+    "$9$",
+    "$-2$"
+   ],
+   "answer": 0,
+   "explanation": "$x=-\\frac{b}{2a}=2$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-quadratics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-quadratics",
+   "prompt": "If $\\Delta<0$ the parabola",
+   "choices": [
+    "does not cross the x-axis",
+    "crosses the x-axis twice",
+    "opens downwards",
+    "touches the x-axis"
+   ],
+   "answer": 0,
+   "explanation": "No real roots means no x-intercepts.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-quadratics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-quadratics",
+   "prompt": "Roots of $x^2-3x-10=0$ are",
+   "choices": [
+    "$10$ and $-1$",
+    "$5$ and $-2$",
+    "$-5$ and $2$",
+    "$5$ and $2$"
+   ],
+   "answer": 1,
+   "explanation": "$(x-5)(x+2)$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-quadratics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-quadratics",
+   "prompt": "Product of the roots of $2x^2+5x-3=0$ is",
+   "choices": [
+    "$-\\frac{3}{2}$",
+    "$-3$",
+    "$-\\frac{5}{2}$",
+    "$\\frac{3}{2}$"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{c}{a}=-\\frac{3}{2}$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-quadratics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-quadratics",
+   "prompt": "$x^2+6x+1=(x+3)^2+\\ldots$",
+   "choices": [
+    "$-8$",
+    "$1$",
+    "$8$",
+    "$-9$"
+   ],
+   "answer": 0,
+   "explanation": "$(x+3)^2=x^2+6x+9$, so subtract 8.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many integers satisfy $x^2<10$?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "$-\\sqrt{10}<x<\\sqrt{10}$, about $-3.16<x<3.16$: the integers are $-3,s',3$, which is 7.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $3x-2>10$.",
+   "choices": [
+    "$x<4$",
+    "$x>\\frac{8}{3}$",
+    "$x>4$",
+    "$x>12$"
+   ],
+   "answer": 2,
+   "explanation": "$3x>12$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If $a>b$ then $a^2>b^2$.",
+   "answer": false,
+   "explanation": "False when negatives are involved: $1>-2$ but $1<4$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e22",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $(x-1)(x-4)\\leq0$.",
+   "choices": [
+    "$x\\leq4$",
+    "$1<x<4$",
+    "$1\\leq x\\leq4$",
+    "$x\\leq1$ or $x\\geq4$"
+   ],
+   "answer": 2,
+   "explanation": "Upward parabola is $\\leq0$ between (and at) its roots.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $|x-3|=2x+1$.",
+   "model": "Case $x\\geq3$: $x-3=2x+1$ gives $x=-4$, rejected (not $\\geq3$). Case $x<3$: $3-x=2x+1$ gives $x=\\frac{2}{3}$, valid. Check: $|\\frac{2}{3}-3|=\\frac{7}{3}$ and $2\\cdot\\frac{2}{3}+1=\\frac{7}{3}$. Answer $x=\\frac{2}{3}$.",
+   "rubric": [
+    "Splits into two cases (1)",
+    "Rejects $x=-4$ (1)",
+    "Finds and checks $x=\\frac{2}{3}$ (1)"
+   ],
+   "explanation": "Case $x\\geq3$: $x-3=2x+1$ gives $x=-4$, rejected (not $\\geq3$). Case $x<3$: $3-x=2x+1$ gives $x=\\frac{2}{3}$, valid. Check: $|\\frac{2}{3}-3|=\\frac{7}{3}$ and $2\\cdot\\frac{2}{3}+1=\\frac{7}{3}$. Answer $x=\\frac{2}{3}$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Answer the following.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Solve $2x^2-3x-2\\geq0$.",
+     "choices": [
+      "$x\\leq-2$ or $x\\geq\\frac{1}{2}$",
+      "$x\\geq2$",
+      "$-\\frac{1}{2}\\leq x\\leq2$",
+      "$x\\leq-\\frac{1}{2}$ or $x\\geq2$"
+     ],
+     "answer": 3,
+     "explanation": "$(2x+1)(x-2)\\geq0$; roots $-\\frac{1}{2}$ and 2; upward parabola, so outside.",
+     "id": "lower6-maths-algebra-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the smallest positive integer $n$ with $n^2>200$.",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "$14^2=196<200$ and $15^2=225>200$.",
+     "id": "lower6-maths-algebra-e24-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The solution of $x^2\\leq9$ is $x\\leq3$.",
+     "answer": false,
+     "explanation": "It is $-3\\leq x\\leq3$.",
+     "id": "lower6-maths-algebra-e24-c"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-inequalities-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-inequalities",
+   "prompt": "Solve $-2x<6$.",
+   "choices": [
+    "$x<3$",
+    "$x<-3$",
+    "$x>3$",
+    "$x>-3$"
+   ],
+   "answer": 3,
+   "explanation": "Dividing by $-2$ reverses the sign.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-inequalities-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-inequalities",
+   "prompt": "$|x|<4$ means",
+   "choices": [
+    "$x<4$",
+    "$-4<x<4$",
+    "$x<-4$ or $x>4$",
+    "$x>-4$"
+   ],
+   "answer": 1,
+   "explanation": "Distance from 0 less than 4.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-inequalities-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-inequalities",
+   "prompt": "$x^2>25$ means",
+   "choices": [
+    "$x>5$",
+    "$-5<x<5$",
+    "$x<-5$ or $x>5$",
+    "$x>\\pm5$"
+   ],
+   "answer": 2,
+   "explanation": "Outside the roots.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-inequalities-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-inequalities",
+   "prompt": "$|x-2|=3$ has solutions",
+   "choices": [
+    "$x=3$",
+    "$x=1$ and $x=-5$",
+    "$x=5$ only",
+    "$x=5$ and $x=-1$"
+   ],
+   "answer": 3,
+   "explanation": "$x-2=3$ or $x-2=-3$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-inequalities-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-inequalities",
+   "prompt": "The inequality $x^2+1<0$ has",
+   "choices": [
+    "$x<-1$",
+    "$-1<x<1$",
+    "no real solutions",
+    "all real solutions"
+   ],
+   "answer": 2,
+   "explanation": "$x^2+1\\geq1$ always.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e25",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-polynomials",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $f(2)$ for $f(x)=x^3-4x+1$.",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "$8-8+1=1$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e26",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-polynomials",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a factor of $x^3-6x^2+11x-6$?",
+   "choices": [
+    "$(x+2)$",
+    "$(x-4)$",
+    "$(x-2)$",
+    "$(x+1)$"
+   ],
+   "answer": 2,
+   "explanation": "Only $f(2)=8-24+22-6=0$. The others give $-24$, $-60$, $6$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e27",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-polynomials",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If $f(3)=0$ then $(x+3)$ is a factor of $f(x)$.",
+   "answer": false,
+   "explanation": "False: $f(3)=0$ means $(x-3)$ is a factor.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e28",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-polynomials",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$x^3+kx^2-5x-6$ is divisible by $(x+1)$. Find $k$.",
+   "choices": [
+    "$k=2$",
+    "$k=0$",
+    "$k=10$",
+    "$k=-2$"
+   ],
+   "answer": 0,
+   "explanation": "$f(-1)=-1+k+5-6=k-2=0$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e29",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-polynomials",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$f(x)=x^3+ax^2+bx+6$ has $(x-1)$ as a factor and leaves remainder 12 when divided by $(x-2)$. Find $a$ and $b$.",
+   "model": "$f(1)=0$: $a+b=-7$. $f(2)=12$: $8+4a+2b+6=12$, so $2a+b=-1$. Subtract: $a=6$, then $b=-13$. Check $f(2)=8+24-26+6=12$.",
+   "rubric": [
+    "Two equations from the two theorems (2)",
+    "Solves $a=6$, $b=-13$ (1)"
+   ],
+   "explanation": "$f(1)=0$: $a+b=-7$. $f(2)=12$: $8+4a+2b+6=12$, so $2a+b=-1$. Subtract: $a=6$, then $b=-13$. Check $f(2)=8+24-26+6=12$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-polynomials",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Let $f(x)=2x^3-3x^2-11x+6$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $f(3)$.",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "$54-27-33+6=0$, so $(x-3)$ is a factor.",
+     "id": "lower6-maths-algebra-e30-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Factorise $f(x)=(x-3)(2x-1)(x+2)$ and find the sum of the three roots.",
+     "answer": 1.5,
+     "tolerance": 0.001,
+     "explanation": "Dividing by $(x-3)$ gives $2x^2+3x-2=(2x-1)(x+2)$. Roots $3,\\frac{1}{2},-2$; sum $=\\frac{3}{2}$, matching $-\\frac{b}{a}=\\frac{3}{2}$.",
+     "id": "lower6-maths-algebra-e30-b"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-polynomials-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-polynomials",
+   "prompt": "The remainder when $x^2+3x+1$ is divided by $(x-1)$ is",
+   "choices": [
+    "$1$",
+    "$-1$",
+    "$3$",
+    "$5$"
+   ],
+   "answer": 3,
+   "explanation": "$f(1)=5$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-polynomials-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-polynomials",
+   "prompt": "If $f(-2)=0$, a factor is",
+   "choices": [
+    "$(x+2)$",
+    "$(x+1)$",
+    "$(x-2)$",
+    "$(2x+1)$"
+   ],
+   "answer": 0,
+   "explanation": "$a=-2$ gives $(x-(-2))$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-polynomials-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-polynomials",
+   "prompt": "A cubic has at most",
+   "choices": [
+    "3 real roots",
+    "4 real roots",
+    "2 real roots",
+    "1 real root"
+   ],
+   "answer": 0,
+   "explanation": "Degree 3.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-polynomials-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-polynomials",
+   "prompt": "$x^3-x=x(x-1)(x+\\ldots)$",
+   "choices": [
+    "$2$",
+    "$0$",
+    "$-1$",
+    "$1$"
+   ],
+   "answer": 3,
+   "explanation": "$x^3-x=x(x^2-1)$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-polynomials-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-polynomials",
+   "prompt": "The roots of $(x-1)(x-3)(x+2)=0$ are",
+   "choices": [
+    "$1,-3,-2$",
+    "$1,3,-2$",
+    "$-1,-3,2$",
+    "$1,3,2$"
+   ],
+   "answer": 1,
+   "explanation": "Each factor gives a root.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e31",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-functions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$f(x)=3x-1$, $g(x)=x+4$. Find $fg(2)$.",
+   "answer": 17,
+   "tolerance": 0,
+   "explanation": "$g(2)=6$, $f(6)=17$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e32",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-functions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The inverse of $f(x)=2x-5$ is",
+   "choices": [
+    "$2x+5$",
+    "$\\frac{1}{2x-5}$",
+    "$\\frac{x+5}{2}$",
+    "$\\frac{x-5}{2}$"
+   ],
+   "answer": 2,
+   "explanation": "$y=2x-5$ gives $x=\\frac{y+5}{2}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e33",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-functions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Every function has an inverse function on its whole natural domain.",
+   "answer": false,
+   "explanation": "False. $f(x)=x^2$ gives the same output for 2 and $-2$, so it is not one-to-one.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e34",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-functions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The largest domain of $\\frac{\\sqrt{x-3}}{x-5}$ is",
+   "choices": [
+    "$x\\geq5$",
+    "$x>3$",
+    "$x\\geq3$, $x\\neq5$",
+    "$x\\neq5$"
+   ],
+   "answer": 2,
+   "explanation": "Square root: $x\\geq3$; denominator: $x\\neq5$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e35",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-functions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$f(x)=x^2-4x$ for $x\\geq2$. Find $f^{-1}(x)$ and state its domain.",
+   "model": "$y=(x-2)^2-4$, so $(x-2)^2=y+4$ and, since $x\\geq2$, $x=2+\\sqrt{y+4}$. So $f^{-1}(x)=2+\\sqrt{x+4}$. The range of $f$ is $y\\geq-4$, so the domain of $f^{-1}$ is $x\\geq-4$.",
+   "rubric": [
+    "Completes the square (1)",
+    "Chooses the + root because $x\\geq2$ (1)",
+    "Domain $x\\geq-4$ (1)"
+   ],
+   "explanation": "$y=(x-2)^2-4$, so $(x-2)^2=y+4$ and, since $x\\geq2$, $x=2+\\sqrt{y+4}$. So $f^{-1}(x)=2+\\sqrt{x+4}$. The range of $f$ is $y\\geq-4$, so the domain of $f^{-1}$ is $x\\geq-4$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-algebra-e36",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-functions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$f(x)=2x-1$ and $g(x)=x^2+1$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $fg(3)$.",
+     "answer": 19,
+     "tolerance": 0,
+     "explanation": "$g(3)=10$, $f(10)=19$.",
+     "id": "lower6-maths-algebra-e36-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Solve $gf(x)=10$. Give the larger solution.",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "$(2x-1)^2+1=10$, so $(2x-1)^2=9$, $2x-1=\\pm3$: $x=2$ or $x=-1$.",
+     "id": "lower6-maths-algebra-e36-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "$fg(x)=gf(x)$ for all $x$.",
+     "answer": false,
+     "explanation": "$fg(x)=2x^2+1$ but $gf(x)=4x^2-4x+2$.",
+     "id": "lower6-maths-algebra-e36-c"
+    }
+   ],
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-functions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-functions",
+   "prompt": "If $f(x)=x+2$ and $g(x)=3x$ then $gf(1)$ is",
+   "choices": [
+    "$11$",
+    "$9$",
+    "$3$",
+    "$5$"
+   ],
+   "answer": 1,
+   "explanation": "$f(1)=3$, $g(3)=9$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-functions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-functions",
+   "prompt": "The graph of $f^{-1}$ is the reflection of $f$ in",
+   "choices": [
+    "$y=x$",
+    "the y-axis",
+    "$y=-x$",
+    "the x-axis"
+   ],
+   "answer": 0,
+   "explanation": "Swapping $x$ and $y$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-functions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-functions",
+   "prompt": "Range of $f(x)=x^2+1$ is",
+   "choices": [
+    "$y\\leq1$",
+    "all reals",
+    "$y\\geq0$",
+    "$y\\geq1$"
+   ],
+   "answer": 3,
+   "explanation": "$x^2\\geq0$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-functions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-functions",
+   "prompt": "$f(x)=\\frac{1}{x}$ has inverse",
+   "choices": [
+    "$x$",
+    "$-\\frac1x$",
+    "itself",
+    "none"
+   ],
+   "answer": 2,
+   "explanation": "$y=\\frac1x$ gives $x=\\frac1y$.",
+   "chapter": "lower6-maths-algebra"
+  },
+  {
+   "id": "lower6-maths-functions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-functions",
+   "prompt": "A function needs",
+   "choices": [
+    "a formula only",
+    "two outputs",
+    "one output for each input",
+    "one input for each output"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "lower6-maths-algebra"
+  }
+ ]
+}

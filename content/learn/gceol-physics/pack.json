@@ -1,0 +1,152 @@
+{
+  "format": 1,
+  "id": "gceol-physics",
+  "version": 1,
+  "title": "Physics — GCE O Level",
+  "description": "Key-point summaries, worked calculations, GCE O Level-style exercises with answers and a mock exam: measurement, motion, forces, energy, heat, waves, light, electricity, magnetism and atomic physics.",
+  "lang": "en",
+  "cursus": "secondary",
+  "level": "Form 5",
+  "subject": "physics",
+  "exam": "GCE-OL",
+  "programRef": "Cameroon GCE Board — Ordinary Level Physics syllabus (Forms 4–5) — to be checked against the official texts",
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
+    {
+      "id": "gceol-physics-measurement",
+      "title": "Measurement and units",
+      "order": 1,
+      "programRef": "GCE O Level Physics — Measurement: SI units, instruments, density basics (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-motion",
+      "title": "Motion in a straight line",
+      "order": 2,
+      "programRef": "GCE O Level Physics — Kinematics: speed, velocity, acceleration, graphs, equations of motion (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-forces",
+      "title": "Forces and Newton's laws",
+      "order": 3,
+      "programRef": "GCE O Level Physics — Forces: weight, friction, Newton's laws, F = ma (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-moments",
+      "title": "Moments and equilibrium",
+      "order": 4,
+      "programRef": "GCE O Level Physics — Turning effect of forces, equilibrium, centre of gravity (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-matter",
+      "title": "Density and pressure",
+      "order": 5,
+      "programRef": "GCE O Level Physics — Density, pressure in solids, liquids and gases (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-energy",
+      "title": "Work, energy, power and machines",
+      "order": 6,
+      "programRef": "GCE O Level Physics — Work, energy, power, machines, energy sources (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-thermal",
+      "title": "Thermal physics",
+      "order": 7,
+      "programRef": "GCE O Level Physics — Thermal physics: temperature, expansion, gas laws, heat capacity, change of state, heat transfer (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-waves",
+      "title": "Waves",
+      "order": 8,
+      "programRef": "GCE O Level Physics — General wave properties, electromagnetic spectrum (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-sound",
+      "title": "Sound",
+      "order": 9,
+      "programRef": "GCE O Level Physics — Sound: production, speed, echoes, pitch and loudness (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-light",
+      "title": "Light",
+      "order": 10,
+      "programRef": "GCE O Level Physics — Light: reflection, refraction, total internal reflection, lenses, dispersion (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-static",
+      "title": "Static electricity",
+      "order": 11,
+      "programRef": "GCE O Level Physics — Electrostatics: charging, conductors and insulators, uses and dangers (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-current",
+      "title": "Current electricity",
+      "order": 12,
+      "programRef": "GCE O Level Physics — Current electricity: charge, current, p.d., resistance, Ohm's law, series and parallel circuits (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-magnetism",
+      "title": "Magnetism",
+      "order": 13,
+      "programRef": "GCE O Level Physics — Magnetism: magnets, fields, magnetisation (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-electromagnetism",
+      "title": "Electromagnetism",
+      "order": 14,
+      "programRef": "GCE O Level Physics — Electromagnetism: magnetic effect of current, motor effect, induction, transformer (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceol-physics-atomic",
+      "title": "Atomic and nuclear physics",
+      "order": 15,
+      "programRef": "GCE O Level Physics — Atomic and nuclear physics: structure of the atom, radioactivity, half-life (to be checked against the official syllabus)"
+    }
+  ],
+  "mockExams": [
+    {
+      "id": "gceol-physics-mock-1",
+      "title": "GCE O Level mock — Physics",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Answer all questions. The paper is marked out of 20: Section A has 8 multiple-choice questions (1 mark each) and Sections B to D are structured questions with the marks shown for each part. Use g = 10 N/kg and c(water) = 4200 J/kg °C. This is an original practice paper: its format is to be checked against the official texts of the Cameroon GCE Board.",
+      "sections": [
+        {
+          "title": "Section A — Multiple choice (8 marks)",
+          "exercises": [
+            "gceol-physics-motion-m01",
+            "gceol-physics-forces-m01",
+            "gceol-physics-matter-m01",
+            "gceol-physics-thermal-m01",
+            "gceol-physics-waves-m01",
+            "gceol-physics-light-m01",
+            "gceol-physics-current-m01",
+            "gceol-physics-atomic-m01"
+          ]
+        },
+        {
+          "title": "Section B — Mechanics (6 marks)",
+          "exercises": [
+            "gceol-physics-motion-m02"
+          ]
+        },
+        {
+          "title": "Section C — Electricity (3 marks)",
+          "exercises": [
+            "gceol-physics-current-m02"
+          ]
+        },
+        {
+          "title": "Section D — Thermal physics (3 marks)",
+          "exercises": [
+            "gceol-physics-thermal-m02"
+          ]
+        }
+      ]
+    }
+  ]
+}

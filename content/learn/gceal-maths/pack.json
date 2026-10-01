@@ -1,62 +1,90 @@
 {
- "format": 1,
- "id": "gceal-maths",
- "version": 1,
- "title": "Pure Mathematics — GCE A Level",
- "description": "Key-point summaries, worked examples, A Level style exercises with full solutions and a mock examination: differentiation, integration, sequences and series.",
- "lang": "en",
- "cursus": "secondary",
- "level": "Upper Sixth",
- "subject": "maths",
- "exam": "GCE-AL",
- "programRef": "Cameroon GCE Board — Advanced Level Pure Mathematics syllabus (to be checked against the official text)",
- "authors": [
-  "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
- ],
- "status": "draft",
- "updatedAt": "2026-10-01",
- "chapters": [
-  {
-   "id": "gceal-maths-differentiation",
-   "title": "Differentiation",
-   "order": 1,
-   "programRef": "A Level Pure Mathematics — Differentiation (to be checked)"
-  },
-  {
-   "id": "gceal-maths-integration",
-   "title": "Integration",
-   "order": 2,
-   "programRef": "A Level Pure Mathematics — Integration (to be checked)"
-  },
-  {
-   "id": "gceal-maths-series",
-   "title": "Sequences and series",
-   "order": 3,
-   "programRef": "A Level Pure Mathematics — Sequences and series (to be checked)"
-  }
- ],
- "mockExams": [
-  {
-   "id": "gceal-maths-mock",
-   "title": "GCE A Level mock — Pure Mathematics",
-   "minutes": 120,
-   "outOf": 20,
-   "instructions": "Answer all three questions. Show all your working: marks are given for method as well as for the final answer. Electronic calculators may be used. Give non-exact answers to 2 decimal places unless told otherwise. This is a practice paper in the style of a Pure Mathematics paper, marked out of 20: the duration and format are to be checked against the official texts of the Cameroon GCE Board.",
-   "sections": [
+  "format": 1,
+  "id": "gceal-maths",
+  "version": 1,
+  "title": "Mathematics — GCE A Level",
+  "description": "Pure mathematics year 2, mechanics and statistics: key points, worked examples, GCE Advanced Level style exercises with full solutions and a mock paper.",
+  "lang": "en",
+  "cursus": "secondary",
+  "level": "Upper Sixth",
+  "subject": "maths",
+  "exam": "GCE-AL",
+  "programRef": "Cameroon GCE Board — Advanced Level Mathematics syllabus (Upper Sixth part) — to be checked against the official text",
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
     {
-     "title": "Section A — Calculus (14 marks)",
-     "exercises": [
-      "gceal-maths-diff-mock",
-      "gceal-maths-int-mock"
-     ]
+      "id": "gceal-maths-differentiation",
+      "title": "Further differentiation",
+      "order": 1,
+      "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus) — differentiation"
     },
     {
-     "title": "Section B — Sequences and series (6 marks)",
-     "exercises": [
-      "gceal-maths-ser-mock"
-     ]
+      "id": "gceal-maths-integration",
+      "title": "Integration techniques",
+      "order": 2,
+      "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus) — integration"
+    },
+    {
+      "id": "gceal-maths-de-numeric",
+      "title": "Differential equations and numerical methods",
+      "order": 3,
+      "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus) — differential equations; numerical methods"
+    },
+    {
+      "id": "gceal-maths-complex-series",
+      "title": "Complex numbers and series",
+      "order": 4,
+      "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus) — complex numbers (to be checked: may be Further Mathematics content), Maclaurin series"
+    },
+    {
+      "id": "gceal-maths-vectors3d",
+      "title": "Vectors in three dimensions and proof",
+      "order": 5,
+      "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus) — vectors in 3D; proof"
+    },
+    {
+      "id": "gceal-maths-mechanics",
+      "title": "Mechanics",
+      "order": 6,
+      "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Mechanics (Upper Sixth part; to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceal-maths-statistics",
+      "title": "Statistics",
+      "order": 7,
+      "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Statistics (Upper Sixth part; to be checked against the official syllabus)"
     }
-   ]
-  }
- ]
+  ],
+  "mockExams": [
+    {
+      "id": "gceal-maths-mock-paper-1",
+      "title": "GCE A Level mock — Mathematics (Pure, Mechanics, Statistics)",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Answer all questions. Show your working in full: marks are given for method as well as for accuracy. Take g = 10 m/s². Normal critical values: 1.645 (5% one-tailed), 1.96 (5% two-tailed). Calculators allowed.",
+      "sections": [
+        {
+          "title": "Section A — short questions (8 marks)",
+          "exercises": [
+            "gceal-maths-differentiation-m01",
+            "gceal-maths-integration-m01",
+            "gceal-maths-vectors3d-m01",
+            "gceal-maths-statistics-m01"
+          ]
+        },
+        {
+          "title": "Section B — structured questions (12 marks)",
+          "exercises": [
+            "gceal-maths-de-numeric-m01",
+            "gceal-maths-mechanics-m01",
+            "gceal-maths-statistics-m02"
+          ]
+        }
+      ]
+    }
+  ]
 }

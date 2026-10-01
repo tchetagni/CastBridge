@@ -1,0 +1,1276 @@
+{
+ "chapter": "gceol-chemistry-acids",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-acids-bases",
+   "title": "Acids, bases, pH and neutralisation",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Acids, bases, pH, neutralisation, preparation of salts, tests for ions and gases (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define acids, bases and alkalis in terms of H⁺ and OH⁻.",
+    "Use indicators and the pH scale.",
+    "Write equations for the reactions of acids with metals, bases and carbonates.",
+    "Explain neutralisation and give everyday uses."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-formulae-equations"
+   ],
+   "exercises": [
+    "gceol-chemistry-acids-e01",
+    "gceol-chemistry-acids-e02",
+    "gceol-chemistry-acids-e03",
+    "gceol-chemistry-acids-e04",
+    "gceol-chemistry-acids-e05",
+    "gceol-chemistry-acids-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-acids-bases-q1",
+    "gceol-chemistry-acids-bases-q2",
+    "gceol-chemistry-acids-bases-q3",
+    "gceol-chemistry-acids-bases-q4",
+    "gceol-chemistry-acids-bases-q5"
+   ],
+   "reviewNotes": [
+    "pH values in the bar chart are approximate typical values (gastric juice about 1–2, lemon juice about 2, soap about 10, bleach about 12–13).",
+    "Strong/weak acid distinction is based on degree of ionisation; no numerical Ka is required at this level.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Acids and bases",
+     "md": "An **acid** produces **hydrogen ions H⁺** in water (HCl, H₂SO₄, HNO₃, ethanoic acid). A **base** is a substance that neutralises an acid (metal oxides and hydroxides); a base that dissolves in water is an **alkali** and produces **hydroxide ions OH⁻** (NaOH, KOH, Ca(OH)₂, ammonia solution). **Neutralisation**: H⁺ + OH⁻ → H₂O."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Indicators and pH",
+     "md": "**pH scale**: below 7 acidic, 7 neutral, above 7 alkaline. Universal indicator: red/orange (strong acid) → yellow → green (7) → blue → purple (strong alkali). **Litmus**: red in acid, blue in alkali. **Methyl orange**: red in acid, yellow in alkali. **Phenolphthalein**: colourless in acid, pink in alkali. A **strong** acid (HCl, H₂SO₄) is fully ionised; a **weak** acid (ethanoic acid) is only partly ionised."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Reactions of acids",
+     "md": "- acid + metal → salt + hydrogen: Mg + 2HCl → MgCl₂ + H₂\n- acid + base (oxide/hydroxide) → salt + water: CuO + H₂SO₄ → CuSO₄ + H₂O\n- acid + carbonate → salt + water + carbon dioxide: CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂\n\nSalt names: hydrochloric acid → **chlorides**; sulphuric → **sulphates**; nitric → **nitrates**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- A strong acid is not the same as a concentrated acid: strength is about ionisation, concentration is about how much is dissolved.\n- Copper, silver and gold do not react with dilute acids.\n- Never taste or touch strong acids and alkalis; wear eye protection."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "acid in stomach",
+        "value": 2,
+        "color": "red"
+       },
+       {
+        "label": "lemon juice",
+        "value": 2.5,
+        "color": "orange"
+       },
+       {
+        "label": "pure water",
+        "value": 7,
+        "color": "green"
+       },
+       {
+        "label": "soap",
+        "value": 10,
+        "color": "blue"
+       },
+       {
+        "label": "bleach",
+        "value": 12.5,
+        "color": "blue"
+       }
+      ],
+      "unit": "pH"
+     },
+     "caption": "Approximate pH of some familiar substances: acids below 7, alkalis above 7.",
+     "alt": "A bar chart of pH: stomach acid about 2, lemon juice about 2.5, pure water 7, soap about 10 and bleach about 12.5."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — zinc and acid",
+     "statement": "Write the balanced equation (with state symbols) for zinc reacting with dilute sulphuric acid and name the products.",
+     "steps": [
+      "Zinc is above hydrogen in the reactivity series so it reacts with dilute acid and forms a salt and hydrogen.",
+      "Zn(s) + H₂SO₄(aq) → ZnSO₄(aq) + H₂(g): zinc sulphate and hydrogen."
+     ],
+     "answer": "Zn + H₂SO₄ → ZnSO₄ + H₂"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — antacid sum",
+     "statement": "How much calcium carbonate neutralises 0.10 mol of hydrochloric acid (CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂), and what volume of CO₂ is released? (Ca 40, C 12, O 16; 24 dm³ per mole)",
+     "steps": [
+      "Ratio CaCO₃ : HCl = 1 : 2, so n(CaCO₃) = 0.10 ÷ 2 = 0.05 mol; mass = 0.05 × 100 = 5.0 g.",
+      "n(CO₂) = 0.05 mol; volume = 0.05 × 24 = 1.2 dm³."
+     ],
+     "answer": "5.0 g; 1.2 dm³"
+    }
+   ],
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-salts-prep",
+   "title": "Preparing salts",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Acids, bases, pH, neutralisation, preparation of salts, tests for ions and gases (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the solubility rules for common salts.",
+    "Describe the preparation of a soluble salt from an acid and an insoluble base, metal or carbonate.",
+    "Describe the preparation by titration and by precipitation.",
+    "Calculate the mass of crystals obtained."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-acids-bases"
+   ],
+   "exercises": [
+    "gceol-chemistry-acids-e07",
+    "gceol-chemistry-acids-e08",
+    "gceol-chemistry-acids-e09",
+    "gceol-chemistry-acids-e10",
+    "gceol-chemistry-acids-e11",
+    "gceol-chemistry-acids-e12"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-salts-prep-q1",
+    "gceol-chemistry-salts-prep-q2",
+    "gceol-chemistry-salts-prep-q3",
+    "gceol-chemistry-salts-prep-q4",
+    "gceol-chemistry-salts-prep-q5"
+   ],
+   "reviewNotes": [
+    "Solubility rules are the standard school set; calcium sulphate and calcium hydroxide are only slightly soluble.",
+    "Hydrated copper(II) sulphate CuSO₄·5H₂O has Mr = 160 + 5 × 18 = 250.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Solubility rules",
+     "md": "- All **sodium, potassium and ammonium** salts are soluble.\n- All **nitrates** are soluble.\n- **Chlorides** are soluble except silver chloride and lead(II) chloride.\n- **Sulphates** are soluble except barium sulphate and lead(II) sulphate (calcium sulphate is slightly soluble).\n- **Carbonates** and **hydroxides** are insoluble except those of sodium, potassium (and ammonium)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method A — insoluble base, metal or carbonate in excess",
+     "md": "1. Warm the dilute acid and add the solid **in excess** until no more dissolves.\n2. **Filter** off the excess solid.\n3. Heat the filtrate to evaporate part of the water (crystallisation point).\n4. Leave to cool and crystallise; filter and dry the crystals between filter papers.\n\nExample: CuO + H₂SO₄ → CuSO₄ + H₂O."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method B and C",
+     "md": "**Titration** (for soluble bases such as NaOH, and for Na⁺, K⁺, NH₄⁺ salts): find the exact volume of acid that neutralises a known volume of alkali with an indicator, repeat **without** indicator and crystallise. **Precipitation** (for insoluble salts): mix two soluble solutions, filter the precipitate, wash with distilled water and dry. Example: lead(II) nitrate + sodium iodide → lead(II) iodide (yellow ppt) + sodium nitrate."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Add the solid in **excess**, so that all the acid is used up.\n- Do not evaporate to dryness: it destroys the crystals; stop when crystals begin to form on a glass rod.\n- Filter paper after use should be rinsed; wear eye protection when heating acid."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 70,
+        "w": 90,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 100,
+        "text": "acid + excess",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 114,
+        "text": "solid, warm",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 70,
+        "w": 90,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 100,
+        "text": "filter",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 70,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 100,
+        "text": "evaporate",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 114,
+        "text": "then crystallise",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 95,
+        "x2": 150,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 95,
+        "x2": 280,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 150,
+        "text": "step 1",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 150,
+        "text": "step 2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 150,
+        "text": "steps 3-4",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Preparing a soluble salt from an acid and an insoluble solid in excess: react, filter, evaporate and crystallise.",
+     "alt": "Three boxes in a row joined by arrows: acid plus excess solid, filter, and evaporate then crystallise."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — copper(II) sulphate",
+     "statement": "Describe how to make crystals of copper(II) sulphate from copper(II) oxide and dilute sulphuric acid, and find the maximum mass of CuSO₄·5H₂O from 8.0 g of CuO (Cu 64, O 16, S 32, H 1).",
+     "steps": [
+      "Warm the acid, add CuO until in excess (black solid remains), filter, evaporate to crystallisation point, cool, filter and dry.",
+      "n(CuO) = 8.0 ÷ 80 = 0.10 mol = n(CuSO₄·5H₂O); Mr = 160 + 90 = 250; mass = 0.10 × 250 = 25 g."
+     ],
+     "answer": "25 g of CuSO₄·5H₂O"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — precipitation",
+     "statement": "Choose reagents to prepare insoluble silver chloride and write the ionic equation.",
+     "steps": [
+      "Silver chloride is insoluble: mix two soluble salts, silver nitrate (all nitrates soluble) and sodium chloride solution.",
+      "Filter, wash and dry the white precipitate. Ionic equation: Ag⁺(aq) + Cl⁻(aq) → AgCl(s)."
+     ],
+     "answer": "AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq)"
+    }
+   ],
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-tests-analysis",
+   "title": "Tests for gases, cations and anions",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Acids, bases, pH, neutralisation, preparation of salts, tests for ions and gases (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the tests and results for hydrogen, oxygen, carbon dioxide, ammonia and chlorine.",
+    "Identify cations using sodium hydroxide solution.",
+    "Identify chloride, sulphate, carbonate and nitrate ions.",
+    "Plan a simple analysis of an unknown salt."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-salts-prep"
+   ],
+   "exercises": [
+    "gceol-chemistry-acids-e13",
+    "gceol-chemistry-acids-e14",
+    "gceol-chemistry-acids-e15",
+    "gceol-chemistry-acids-e16",
+    "gceol-chemistry-acids-e17",
+    "gceol-chemistry-acids-e18"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-tests-analysis-q1",
+    "gceol-chemistry-tests-analysis-q2",
+    "gceol-chemistry-tests-analysis-q3",
+    "gceol-chemistry-tests-analysis-q4",
+    "gceol-chemistry-tests-analysis-q5"
+   ],
+   "reviewNotes": [
+    "Colours of hydroxide precipitates (Cu²⁺ light blue, Fe²⁺ green, Fe³⁺ red-brown) and their behaviour in excess NaOH follow the usual school tables; check against the Board's reference list.",
+    "Nitrate test (aluminium with sodium hydroxide, heated, gives ammonia) is included as the usual O-level test.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Tests for gases",
+     "md": "- **Hydrogen**: lighted splint → squeaky pop.\n- **Oxygen**: glowing splint relights.\n- **Carbon dioxide**: limewater turns milky.\n- **Ammonia**: turns damp red litmus blue; pungent smell.\n- **Chlorine**: bleaches damp litmus paper (turns it white); pale green gas."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Tests for cations (add NaOH solution drop by drop, then excess)",
+     "md": "- **Cu²⁺**: light blue precipitate, insoluble in excess.\n- **Fe²⁺**: green precipitate; **Fe³⁺**: red-brown precipitate (both insoluble in excess).\n- **Ca²⁺**: white precipitate, insoluble in excess.\n- **Al³⁺, Zn²⁺, Pb²⁺**: white precipitate that **dissolves** in excess NaOH (Al³⁺ and Zn²⁺ also with ammonia: Zn²⁺ dissolves, Al³⁺ does not).\n- **NH₄⁺**: no precipitate; warming gives ammonia gas."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Tests for anions",
+     "md": "- **Chloride Cl⁻**: add dilute nitric acid then silver nitrate → white precipitate.\n- **Sulphate SO₄²⁻**: add dilute hydrochloric acid then barium chloride → white precipitate.\n- **Carbonate CO₃²⁻**: add dilute acid → fizzing, CO₂ turns limewater milky.\n- **Nitrate NO₃⁻**: warm with aluminium foil and sodium hydroxide → ammonia (turns damp red litmus blue)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Always add the acid **before** silver nitrate or barium chloride, to remove carbonates that would also give white precipitates.\n- Say 'dissolves in excess' only if the precipitate disappears; Ca²⁺ and Al³⁺ both give white precipitates, so use the excess test to tell them apart."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 60,
+        "w": 50,
+        "h": 110,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 41,
+        "y": 120,
+        "w": 48,
+        "h": 49,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 50,
+        "text": "Cu²⁺",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 60,
+        "w": 50,
+        "h": 110,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 120,
+        "w": 48,
+        "h": 49,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 50,
+        "text": "Fe²⁺",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 60,
+        "w": 50,
+        "h": 110,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 201,
+        "y": 120,
+        "w": 48,
+        "h": 49,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 50,
+        "text": "Fe³⁺",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 60,
+        "w": 50,
+        "h": 110,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 281,
+        "y": 120,
+        "w": 48,
+        "h": 49,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 50,
+        "text": "Ca²⁺",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 195,
+        "text": "colour of hydroxide precipitates with NaOH(aq)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Colours of the precipitates formed when sodium hydroxide solution is added to solutions of some metal ions.",
+     "alt": "Four test tubes showing precipitates: blue for copper, green for iron(II), orange-brown for iron(III) and white/grey for calcium."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — unknown solution",
+     "statement": "A solution gives a light blue precipitate with sodium hydroxide, insoluble in excess, and a white precipitate with acidified barium chloride. Identify the salt.",
+     "steps": [
+      "Light blue precipitate, insoluble in excess: Cu²⁺ ions.",
+      "White precipitate with acidified barium chloride: SO₄²⁻ ions. The salt is copper(II) sulphate, CuSO₄."
+     ],
+     "answer": "Copper(II) sulphate"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — white solid",
+     "statement": "A white solid fizzes with dilute acid giving a gas that turns limewater milky. Its solution gives a white precipitate with sodium hydroxide that stays in excess. Which compound is it?",
+     "steps": [
+      "Fizzing with a gas that turns limewater milky: carbonate ion CO₃²⁻.",
+      "White precipitate insoluble in excess NaOH: calcium ions Ca²⁺. The solid is calcium carbonate."
+     ],
+     "answer": "Calcium carbonate (CaCO₃)"
+    }
+   ],
+   "chapter": "gceol-chemistry-acids"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-acids-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A solution turns universal indicator purple. It is a",
+   "choices": [
+    "strong acid",
+    "strong alkali",
+    "neutral solution",
+    "weak acid"
+   ],
+   "answer": 1,
+   "explanation": "Purple means pH about 13–14.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which gas is produced when magnesium reacts with dilute hydrochloric acid?",
+   "choices": [
+    "oxygen",
+    "carbon dioxide",
+    "hydrogen",
+    "chlorine"
+   ],
+   "answer": 2,
+   "explanation": "Mg + 2HCl → MgCl₂ + H₂.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A solution of pH 3 is more acidic than a solution of pH 5.",
+   "answer": true,
+   "explanation": "Lower pH means a more acidic solution.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What mass of magnesium oxide (Mr 40) is needed to neutralise 0.20 mol of HCl? (MgO + 2HCl → MgCl₂ + H₂O)",
+   "answer": 4.0,
+   "tolerance": 0.01,
+   "unit": "g",
+   "explanation": "n(MgO) = 0.20 ÷ 2 = 0.10 mol; mass = 0.10 × 40 = 4.0 g.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer in the Western Highlands finds that the soil is too acidic. Suggest a substance to add and explain why it helps.",
+   "model": "Add lime (calcium hydroxide or calcium oxide/carbonate, a base): it neutralises the acid in the soil and raises the pH so crops grow better.",
+   "rubric": "1 mark: lime (a base); 1 mark: neutralises acid / raises pH.",
+   "explanation": "Add lime (calcium hydroxide or calcium oxide/carbonate, a base): it neutralises the acid in the soil and raises the pH so crops grow better.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Dilute hydrochloric acid is added to three solids in separate test tubes: copper(II) oxide, magnesium ribbon and sodium carbonate.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which one fizzes and gives a gas that turns limewater milky?",
+     "choices": [
+      "the acid alone",
+      "magnesium ribbon",
+      "sodium carbonate",
+      "copper(II) oxide"
+     ],
+     "answer": 2,
+     "explanation": "Carbonate + acid gives CO₂.",
+     "id": "gceol-chemistry-acids-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is observed when copper(II) oxide is warmed with the acid?",
+     "choices": [
+      "The black solid dissolves to give a blue solution",
+      "Hydrogen is given off",
+      "Nothing happens at all",
+      "A white precipitate forms"
+     ],
+     "answer": 0,
+     "explanation": "CuO + 2HCl → CuCl₂ + H₂O; copper(II) ions are blue.",
+     "id": "gceol-chemistry-acids-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the equation for the reaction of magnesium with hydrochloric acid.",
+     "model": "Mg(s) + 2HCl(aq) → MgCl₂(aq) + H₂(g)",
+     "rubric": "1 mark formulae; 1 mark balancing and state symbols.",
+     "explanation": "Mg(s) + 2HCl(aq) → MgCl₂(aq) + H₂(g)",
+     "id": "gceol-chemistry-acids-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name the salt formed from sodium carbonate and hydrochloric acid and give the test for the gas.",
+     "model": "Sodium chloride; carbon dioxide turns limewater milky.",
+     "rubric": "1 mark each.",
+     "explanation": "Sodium chloride; carbon dioxide turns limewater milky.",
+     "id": "gceol-chemistry-acids-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-bases-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-acids-bases",
+   "prompt": "An alkali is a base that",
+   "choices": [
+    "is a gas",
+    "dissolves in water",
+    "is an acid",
+    "has pH 1"
+   ],
+   "answer": 1,
+   "explanation": "Alkalis give OH⁻ ions.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-bases-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-acids-bases",
+   "prompt": "The pH of pure water is",
+   "choices": [
+    "14",
+    "0",
+    "1",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "Neutral.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-bases-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-acids-bases",
+   "prompt": "Acid + carbonate gives salt, water and",
+   "choices": [
+    "chlorine",
+    "hydrogen",
+    "carbon dioxide",
+    "oxygen"
+   ],
+   "answer": 2,
+   "explanation": "CO₂ fizzes out.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-bases-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-acids-bases",
+   "prompt": "Litmus is red in",
+   "choices": [
+    "ammonia",
+    "pure water only",
+    "alkali",
+    "acid"
+   ],
+   "answer": 3,
+   "explanation": "Red in acid, blue in alkali.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-bases-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-acids-bases",
+   "prompt": "Neutralisation is the reaction of",
+   "choices": [
+    "H⁺ with OH⁻",
+    "C with O₂",
+    "Na with Cl",
+    "O with H₂"
+   ],
+   "answer": 0,
+   "explanation": "H⁺ + OH⁻ → H₂O.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-salts-prep",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which salt is insoluble in water?",
+   "choices": [
+    "potassium nitrate",
+    "barium sulphate",
+    "sodium sulphate",
+    "ammonium chloride"
+   ],
+   "answer": 1,
+   "explanation": "Barium sulphate is the insoluble sulphate (used in barium meals for X-rays).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-salts-prep",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which method would you use to prepare sodium nitrate?",
+   "choices": [
+    "Filtration",
+    "Titration of sodium hydroxide solution with nitric acid",
+    "Precipitation",
+    "Adding excess sodium to acid"
+   ],
+   "answer": 1,
+   "explanation": "Sodium compounds are soluble; use a soluble alkali and titration.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-salts-prep",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A soluble salt is crystallised by evaporating all the water until the dish is dry.",
+   "answer": false,
+   "explanation": "Evaporate only part of the water, then cool and let crystals form.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-salts-prep",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What mass of zinc oxide (Mr 81) is needed to react with 0.20 mol sulphuric acid? (ZnO + H₂SO₄ → ZnSO₄ + H₂O) Use Zn 65, O 16.",
+   "answer": 16.2,
+   "tolerance": 0.01,
+   "unit": "g",
+   "explanation": "Ratio 1 : 1; mass = 0.20 × 81 = 16.2 g.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-salts-prep",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why the metal oxide is added in excess when making a salt.",
+   "model": "To make sure all the acid is used up so that the solution contains only the salt; the leftover insoluble oxide is simply removed by filtration.",
+   "rubric": "1 mark: all acid reacts; 1 mark: excess can be filtered off.",
+   "explanation": "To make sure all the acid is used up so that the solution contains only the salt; the leftover insoluble oxide is simply removed by filtration.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-salts-prep",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil wants to make lead(II) iodide, which is a yellow solid insoluble in water.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which pair of solutions should be mixed?",
+     "choices": [
+      "lead metal and iodine water",
+      "lead(II) nitrate and potassium iodide",
+      "lead(II) sulphate and potassium iodide",
+      "lead(II) carbonate and sodium chloride"
+     ],
+     "answer": 1,
+     "explanation": "Lead nitrate is soluble (all nitrates are) and potassium iodide is soluble.",
+     "id": "gceol-chemistry-acids-e12-a"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the ionic equation.",
+     "model": "Pb²⁺(aq) + 2I⁻(aq) → PbI₂(s)",
+     "rubric": "1 mark ions; 1 mark balanced; 1 mark state symbols.",
+     "explanation": "Pb²⁺(aq) + 2I⁻(aq) → PbI₂(s)",
+     "id": "gceol-chemistry-acids-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Describe how the solid is separated and dried.",
+     "model": "Filter the mixture; wash the residue with distilled water; dry it between filter papers or in a warm oven.",
+     "rubric": "1 mark filter; 1 mark wash; 1 mark dry.",
+     "explanation": "Filter the mixture; wash the residue with distilled water; dry it between filter papers or in a warm oven.",
+     "id": "gceol-chemistry-acids-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What name is given to the ions Na⁺ and NO₃⁻ that remain in solution?",
+     "choices": [
+      "precipitates",
+      "spectator ions",
+      "catalysts",
+      "indicators"
+     ],
+     "answer": 1,
+     "explanation": "They do not take part in the reaction.",
+     "id": "gceol-chemistry-acids-e12-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-salts-prep-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-salts-prep",
+   "prompt": "All nitrates are",
+   "choices": [
+    "gases",
+    "acidic",
+    "insoluble",
+    "soluble"
+   ],
+   "answer": 3,
+   "explanation": "Rule of solubility.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-salts-prep-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-salts-prep",
+   "prompt": "Silver chloride is",
+   "choices": [
+    "yellow and soluble",
+    "an insoluble white solid",
+    "soluble",
+    "a gas"
+   ],
+   "answer": 1,
+   "explanation": "A white precipitate.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-salts-prep-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-salts-prep",
+   "prompt": "To make a salt from an insoluble base you add the base",
+   "choices": [
+    "to cold alkali",
+    "in excess",
+    "in small amounts",
+    "after evaporation"
+   ],
+   "answer": 1,
+   "explanation": "To use up all the acid.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-salts-prep-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-salts-prep",
+   "prompt": "Crystals are obtained by",
+   "choices": [
+    "chromatography",
+    "cooling a hot saturated solution",
+    "filtering a dry solid",
+    "distilling"
+   ],
+   "answer": 1,
+   "explanation": "Crystallisation.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-salts-prep-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-salts-prep",
+   "prompt": "Which salt is soluble?",
+   "choices": [
+    "lead(II) chloride",
+    "calcium carbonate",
+    "potassium carbonate",
+    "barium sulphate"
+   ],
+   "answer": 2,
+   "explanation": "Group I carbonates are soluble.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-tests-analysis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the test for oxygen?",
+   "choices": [
+    "Damp litmus turns blue",
+    "A lighted splint gives a squeaky pop",
+    "Limewater turns milky",
+    "A glowing splint relights"
+   ],
+   "answer": 3,
+   "explanation": "Oxygen supports burning.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e14",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-chemistry-tests-analysis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the gas with its test.",
+   "pairs": [
+    [
+     "hydrogen",
+     "squeaky pop with a lighted splint"
+    ],
+    [
+     "carbon dioxide",
+     "limewater turns milky"
+    ],
+    [
+     "ammonia",
+     "turns damp red litmus blue"
+    ],
+    [
+     "chlorine",
+     "bleaches damp litmus paper"
+    ]
+   ],
+   "explanation": "Standard tests.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-tests-analysis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Adding NaOH to a solution gives a green precipitate. The ion is",
+   "choices": [
+    "Ca²⁺",
+    "Cu²⁺",
+    "Fe³⁺",
+    "Fe²⁺"
+   ],
+   "answer": 3,
+   "explanation": "Iron(II) hydroxide is green.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-tests-analysis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A white precipitate forms with NaOH and dissolves in excess. Which ion could it be?",
+   "choices": [
+    "Zn²⁺ (or Al³⁺ or Pb²⁺)",
+    "Cu²⁺",
+    "Ca²⁺",
+    "Fe³⁺"
+   ],
+   "answer": 0,
+   "explanation": "Amphoteric hydroxides dissolve in excess NaOH.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-tests-analysis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil adds silver nitrate solution directly to an unknown solution and gets a white precipitate. Why is the result not reliable, and what should be done?",
+   "model": "The white precipitate could be silver carbonate or silver chloride. Add dilute nitric acid first: carbonate reacts and goes, so a precipitate that remains with silver nitrate shows chloride ions.",
+   "rubric": "1 mark: carbonate also gives a white precipitate; 1 mark: acidify with dilute nitric acid first.",
+   "explanation": "The white precipitate could be silver carbonate or silver chloride. Add dilute nitric acid first: carbonate reacts and goes, so a precipitate that remains with silver nitrate shows chloride ions.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-tests-analysis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solution X is a green salt solution. Tests: (1) NaOH gives a green precipitate insoluble in excess; (2) dilute HNO₃ then AgNO₃ gives a white precipitate.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which cation is present?",
+     "choices": [
+      "Cu²⁺",
+      "Ca²⁺",
+      "Fe²⁺",
+      "Zn²⁺"
+     ],
+     "answer": 2,
+     "explanation": "Green hydroxide precipitate insoluble in excess: iron(II).",
+     "id": "gceol-chemistry-acids-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which anion is present?",
+     "choices": [
+      "SO₄²⁻",
+      "NO₃⁻",
+      "CO₃²⁻",
+      "Cl⁻"
+     ],
+     "answer": 3,
+     "explanation": "White precipitate with acidified silver nitrate: chloride.",
+     "id": "gceol-chemistry-acids-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name the compound in X.",
+     "model": "Iron(II) chloride (FeCl₂).",
+     "rubric": "1 mark name; 1 mark formula.",
+     "explanation": "Iron(II) chloride (FeCl₂).",
+     "id": "gceol-chemistry-acids-e18-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the ionic equation for test (2).",
+     "model": "Ag⁺(aq) + Cl⁻(aq) → AgCl(s)",
+     "rubric": "1 mark ions; 1 mark state symbols.",
+     "explanation": "Ag⁺(aq) + Cl⁻(aq) → AgCl(s)",
+     "id": "gceol-chemistry-acids-e18-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-tests-analysis-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-tests-analysis",
+   "prompt": "Limewater turns milky with",
+   "choices": [
+    "carbon dioxide",
+    "hydrogen",
+    "oxygen",
+    "ammonia"
+   ],
+   "answer": 0,
+   "explanation": "CO₂ forms insoluble CaCO₃.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-tests-analysis-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-tests-analysis",
+   "prompt": "Chlorine bleaches",
+   "choices": [
+    "glowing splint",
+    "damp litmus paper",
+    "limewater",
+    "silver nitrate"
+   ],
+   "answer": 1,
+   "explanation": "Test for chlorine.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-tests-analysis-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-tests-analysis",
+   "prompt": "A red-brown precipitate with NaOH shows",
+   "choices": [
+    "Fe²⁺",
+    "Cu²⁺",
+    "Fe³⁺",
+    "Ca²⁺"
+   ],
+   "answer": 2,
+   "explanation": "Iron(III) hydroxide.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-tests-analysis-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-tests-analysis",
+   "prompt": "A white precipitate with acidified BaCl₂ shows",
+   "choices": [
+    "carbonate",
+    "chloride",
+    "sulphate",
+    "nitrate"
+   ],
+   "answer": 2,
+   "explanation": "BaSO₄ is insoluble.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-tests-analysis-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-tests-analysis",
+   "prompt": "Ammonia turns damp red litmus",
+   "choices": [
+    "green",
+    "red",
+    "blue",
+    "white"
+   ],
+   "answer": 2,
+   "explanation": "It is an alkaline gas.",
+   "chapter": "gceol-chemistry-acids"
+  },
+  {
+   "id": "gceol-chemistry-acids-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A solution turns universal indicator blue. Its pH is probably",
+   "choices": [
+    "10",
+    "2",
+    "7",
+    "5"
+   ],
+   "answer": 0,
+   "explanation": "Blue indicates an alkaline solution (pH above 7).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-acids"
+  }
+ ]
+}

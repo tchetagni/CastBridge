@@ -1,0 +1,696 @@
+{
+ "chapter": "lower6-further-maths-hyperbolic-vectors",
+ "lessons": [
+  {
+   "id": "lower6-further-maths-hyperbolic",
+   "title": "Hyperbolic functions",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Lower Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define $\\text{sinh}\\,$, $\\text{cosh}\\,$, $\\text{tanh}\\,$ and use their identities",
+    "Differentiate hyperbolic functions",
+    "Solve equations using logarithmic forms"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-further-maths-hyperbolic-vectors-e01",
+    "lower6-further-maths-hyperbolic-vectors-e02",
+    "lower6-further-maths-hyperbolic-vectors-e03",
+    "lower6-further-maths-hyperbolic-vectors-e04",
+    "lower6-further-maths-hyperbolic-vectors-e05",
+    "lower6-further-maths-hyperbolic-vectors-e06"
+   ],
+   "selfCheck": [
+    "lower6-further-maths-hyperbolic-q1",
+    "lower6-further-maths-hyperbolic-q2",
+    "lower6-further-maths-hyperbolic-q3",
+    "lower6-further-maths-hyperbolic-q4",
+    "lower6-further-maths-hyperbolic-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus (and in which year) is to be confirmed: it is standard A-Level Further Maths content.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Definitions",
+     "md": "$\\text{sinh}\\, x=\\frac{e^x-e^{-x}}{2}$, $\\text{cosh}\\, x=\\frac{e^x+e^{-x}}{2}$, $\\text{tanh}\\, x=\\frac{\\text{sinh}\\, x}{\\text{cosh}\\, x}$. $\\text{cosh}\\,$ is even with minimum value 1 at $x=0$; $\\text{sinh}\\,$ is odd and increasing. 'Hyperbolic' because $(x,y)=(\\text{cosh}\\, t,\\text{sinh}\\, t)$ lies on the hyperbola $x^2-y^2=1$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Identities and derivatives",
+     "md": "$\\text{cosh}\\,^2x-\\text{sinh}\\,^2x=1$ (compare Osborn's rule: change the sign of each product of two sinh terms in the trigonometric identity). $\\text{sinh}\\,2x=2\\text{sinh}\\, x\\text{cosh}\\, x$, $\\text{cosh}\\,2x=\\text{cosh}\\,^2x+\\text{sinh}\\,^2x=2\\text{cosh}\\,^2x-1$. Derivatives: $\\frac{d}{dx}\\text{sinh}\\, x=\\text{cosh}\\, x$, $\\frac{d}{dx}\\text{cosh}\\, x=\\text{sinh}\\, x$, $\\frac{d}{dx}\\text{tanh}\\, x=\\frac{1}{\\text{cosh}\\,^2x}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Inverse functions",
+     "md": "$\\text{arsinh }x=\\ln\\left(x+\\sqrt{x^2+1}\\right)$ for all $x$; $\\text{arcosh }x=\\ln\\left(x+\\sqrt{x^2-1}\\right)$ for $x\\geq1$. To solve $\\text{sinh}\\, x=k$ or $\\text{cosh}\\, x=k$ either use these or write in terms of $e^x$ and solve the resulting quadratic in $e^x$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "$\\frac{d}{dx}\\text{cosh}\\, x=+\\text{sinh}\\, x$ (no minus sign, unlike $\\cos$). $\\text{cosh}\\, x\\geq1$ always, so $\\text{cosh}\\, x=\\frac{1}{2}$ has no solution. Do not forget the $\\pm$ in the identity changes: $\\text{cosh}\\,^2x-\\text{sinh}\\,^2x=1$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Solve $\\text{sinh}\\, x=1$.",
+     "steps": [
+      "$\\frac{e^x-e^{-x}}{2}=1$; put $u=e^x$: $u^2-2u-1=0$, $u=1\\pm\\sqrt2$.",
+      "$e^x>0$ so $u=1+\\sqrt2$ and $x=\\ln(1+\\sqrt2)=0.881$."
+     ],
+     "answer": "$x=\\ln(1+\\sqrt2)\\approx0.881$",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3,
+      "xmax": 3,
+      "ymin": -5,
+      "ymax": 5,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "(exp(x)+exp(-x))/2",
+        "color": "blue",
+        "label": "cosh x"
+       },
+       {
+        "expr": "(exp(x)-exp(-x))/2",
+        "color": "orange",
+        "label": "sinh x"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "x"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Evaluate $\\text{cosh}\\,(\\ln2)$ and differentiate $y=x\\text{cosh}\\, x$.",
+     "steps": [
+      "$\\text{cosh}\\,(\\ln2)=\\frac{2+\\frac{1}{2}}{2}=1.25$.",
+      "Product rule: $\\frac{dy}{dx}=\\text{cosh}\\, x+x\\text{sinh}\\, x$."
+     ],
+     "answer": "$1.25$; $\\text{cosh}\\, x+x\\text{sinh}\\, x$"
+    }
+   ],
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-vector-product",
+   "title": "Vector product and planes",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Lower Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the vector product $\\vec a\\times\\vec b$",
+    "Find areas of triangles and parallelograms",
+    "Find the equation of a plane and the distance from a point to a plane"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-further-maths-hyperbolic-vectors-e07",
+    "lower6-further-maths-hyperbolic-vectors-e08",
+    "lower6-further-maths-hyperbolic-vectors-e09",
+    "lower6-further-maths-hyperbolic-vectors-e10",
+    "lower6-further-maths-hyperbolic-vectors-e11",
+    "lower6-further-maths-hyperbolic-vectors-e12"
+   ],
+   "selfCheck": [
+    "lower6-further-maths-vector-product-q1",
+    "lower6-further-maths-vector-product-q2",
+    "lower6-further-maths-vector-product-q3",
+    "lower6-further-maths-vector-product-q4",
+    "lower6-further-maths-vector-product-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus (and in which year) is to be confirmed: it is standard A-Level Further Maths content.",
+    "The vector equation of a plane in the form r = a + sb + tc is not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Vector product",
+     "md": "$\\vec a\\times\\vec b=(a_2b_3-a_3b_2,\\;a_3b_1-a_1b_3,\\;a_1b_2-a_2b_1)$. It is perpendicular to both $\\vec a$ and $\\vec b$, $|\\vec a\\times\\vec b|=|\\vec a||\\vec b|\\sin\\theta$ and $\\vec b\\times\\vec a=-\\vec a\\times\\vec b$. $\\vec a\\times\\vec b=\\vec 0$ if and only if the vectors are parallel."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Areas",
+     "md": "Area of the parallelogram on $\\vec a,\\vec b$ is $|\\vec a\\times\\vec b|$; area of triangle $ABC$ is $\\frac{1}{2}|\\vec{AB}\\times\\vec{AC}|$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Planes",
+     "md": "A plane through a point with normal $\\vec n$ is $\\vec n\\cdot\\vec r=d$, i.e. $n_1x+n_2y+n_3z=d$. If you know three points $A,B,C$ use $\\vec n=\\vec{AB}\\times\\vec{AC}$. The distance from point $P$ to the plane is $\\frac{|\\vec n\\cdot\\vec p-d|}{|\\vec n|}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "The vector product is a VECTOR (the scalar product is a number). The order matters for the sign. Do not forget the middle component's order: $a_3b_1-a_1b_3$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find $\\vec a\\times\\vec b$ for $\\vec a=(1,2,3)$ and $\\vec b=(4,5,6)$.",
+     "steps": [
+      "First: $2\\cdot6-3\\cdot5=-3$. Second: $3\\cdot4-1\\cdot6=6$.",
+      "Third: $1\\cdot5-2\\cdot4=-3$."
+     ],
+     "answer": "$(-3,6,-3)$",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 180,
+        "x2": 240,
+        "y2": 180,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 184,
+        "text": "a",
+        "size": 15,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 180,
+        "x2": 150,
+        "y2": 120,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 158,
+        "y": 116,
+        "text": "b",
+        "size": 15,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 180,
+        "x2": 80,
+        "y2": 50,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 52,
+        "text": "a × b",
+        "size": 15,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 168,
+        "text": "θ",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 90,
+        "text": "|a × b| = |a||b| sin θ",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 112,
+        "text": "= area of parallelogram",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "$A(1,0,0)$, $B(0,2,0)$, $C(0,0,3)$. Find the plane $ABC$, the area of the triangle and the distance from $O$ to the plane.",
+     "steps": [
+      "$\\vec{AB}=(-1,2,0)$, $\\vec{AC}=(-1,0,3)$: $\\vec n=(6,3,2)$. Plane $6x+3y+2z=6$ (check $A$, $B$, $C$ each give 6).",
+      "$|\\vec n|=\\sqrt{36+9+4}=7$. Area $=\\frac{7}{2}=3.5$; distance from $O=\\frac{|0-6|}{7}=\\frac{6}{7}$."
+     ],
+     "answer": "$6x+3y+2z=6$; area 3.5; distance $\\frac{6}{7}$"
+    }
+   ],
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-further-maths-hyperbolic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $\\text{sinh}\\,(\\ln3)$ (3 d.p.).",
+   "answer": 1.333,
+   "tolerance": 0.001,
+   "explanation": "$\\frac{3-\\frac{1}{3}}{2}=\\frac{4}{3}$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-further-maths-hyperbolic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{d}{dx}\\text{cosh}\\,2x=$",
+   "choices": [
+    "$2\\text{sinh}\\,2x$",
+    "$\\text{sinh}\\,2x$",
+    "$2\\text{cosh}\\,2x$",
+    "$-2\\text{sinh}\\,2x$"
+   ],
+   "answer": 0,
+   "explanation": "Chain rule.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-further-maths-hyperbolic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\text{cosh}\\, x\\geq1$ for all real $x$.",
+   "answer": true,
+   "explanation": "$\\text{cosh}\\, x=\\frac{e^x+e^{-x}}{2}\\geq1$ by AM–GM; minimum 1 at $x=0$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-hyperbolic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which equation has NO real solution?",
+   "choices": [
+    "$\\text{cosh}\\, x=2$",
+    "$\\text{sinh}\\, x=\\frac{1}{2}$",
+    "$\\text{tanh}\\, x=\\frac{1}{2}$",
+    "$\\text{cosh}\\, x=\\frac{1}{2}$"
+   ],
+   "answer": 3,
+   "explanation": "$\\text{cosh}\\, x\\geq1$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-hyperbolic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $2\\text{cosh}\\, x=3$ for the positive solution (4 d.p.).",
+   "answer": 0.9624,
+   "tolerance": 0.000400001000000067,
+   "explanation": "$\\text{cosh}\\, x=1.5$: $x=\\ln\\left(1.5+\\sqrt{1.25}\\right)=0.9624$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-further-maths-hyperbolic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cable hangs in the shape $y=20\\text{cosh}\\,\\frac{x}{20}$ metres ($x$ measured from the lowest point).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the height of the lowest point (m).",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "$y(0)=20\\text{cosh}\\,0=20$.",
+     "id": "lower6-further-maths-hyperbolic-vectors-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the height at $x=10$ (m, 2 d.p.).",
+     "answer": 22.55,
+     "tolerance": 0.01,
+     "explanation": "$20\\text{cosh}\\,0.5=20\\times1.1276=22.55$.",
+     "id": "lower6-further-maths-hyperbolic-vectors-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the gradient of the cable at $x=10$ (4 d.p.).",
+     "answer": 0.5211,
+     "tolerance": 0.0002,
+     "explanation": "$\\frac{dy}{dx}=\\text{sinh}\\,\\frac{x}{20}=\\text{sinh}\\,0.5=0.5211$.",
+     "id": "lower6-further-maths-hyperbolic-vectors-e06-c"
+    }
+   ],
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-hyperbolic",
+   "prompt": "$\\text{cosh}\\,0=$",
+   "choices": [
+    "$0$",
+    "$e$",
+    "$\\frac{1}{2}$",
+    "$1$"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{1+1}{2}$.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-hyperbolic",
+   "prompt": "$\\text{sinh}\\,0=$",
+   "choices": [
+    "$1$",
+    "$e$",
+    "$-1$",
+    "$0$"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{1-1}{2}$.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-hyperbolic",
+   "prompt": "$\\text{cosh}\\,^2x-\\text{sinh}\\,^2x=$",
+   "choices": [
+    "$1$",
+    "$\\text{cosh}\\,2x$",
+    "$0$",
+    "$-1$"
+   ],
+   "answer": 0,
+   "explanation": "Basic identity.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-hyperbolic",
+   "prompt": "$\\frac{d}{dx}\\text{sinh}\\, x=$",
+   "choices": [
+    "$\\text{sinh}\\, x$",
+    "$-\\text{cosh}\\, x$",
+    "$\\text{cosh}\\, x$",
+    "$\\frac{1}{\\text{cosh}\\, x}$"
+   ],
+   "answer": 2,
+   "explanation": "Derivative of the definition.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-hyperbolic",
+   "prompt": "$\\text{arsinh }0=$",
+   "choices": [
+    "$1$",
+    "$0$",
+    "$\\ln2$",
+    "undefined"
+   ],
+   "answer": 1,
+   "explanation": "$\\ln(0+1)$.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-further-maths-vector-product",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $|\\vec a\\times\\vec b|$ for $\\vec a=(2,0,0)$, $\\vec b=(0,3,0)$.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "$\\vec a\\times\\vec b=(0,0,6)$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-further-maths-vector-product",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\vec a\\times\\vec b$ equals",
+   "choices": [
+    "$-\\vec b\\times\\vec a$",
+    "$|\\vec a||\\vec b|$",
+    "$\\vec a\\cdot\\vec b$",
+    "$\\vec b\\times\\vec a$"
+   ],
+   "answer": 0,
+   "explanation": "Anti-commutative.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-further-maths-vector-product",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The vector product of two vectors is a scalar.",
+   "answer": false,
+   "explanation": "It is a vector perpendicular to both.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-vector-product",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The distance from $(1,1,1)$ to the plane $x+2y+2z=3$ is",
+   "choices": [
+    "$2$",
+    "$\\frac{1}{3}$",
+    "$\\frac{2}{3}$",
+    "$\\frac{4}{3}$"
+   ],
+   "answer": 2,
+   "explanation": "$\\frac{|1+2+2-3|}{\\sqrt{1+4+4}}=\\frac{2}{3}$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-vector-product",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the area of the triangle $P(1,2,3)$, $Q(3,2,1)$, $R(2,4,2)$.",
+   "model": "$\\vec{PQ}=(2,0,-2)$, $\\vec{PR}=(1,2,-1)$. $\\vec{PQ}\\times\\vec{PR}=(0\\cdot(-1)-(-2)(2),\\;(-2)(1)-2(-1),\\;2\\cdot2-0)=(4,0,4)$, magnitude $\\sqrt{32}$. Area $=\\frac{1}{2}\\sqrt{32}=2\\sqrt2\\approx2.83$.",
+   "rubric": [
+    "Edge vectors (1)",
+    "Cross product (1)",
+    "Half the magnitude (1)"
+   ],
+   "explanation": "$\\vec{PQ}=(2,0,-2)$, $\\vec{PR}=(1,2,-1)$. $\\vec{PQ}\\times\\vec{PR}=(0\\cdot(-1)-(-2)(2),\\;(-2)(1)-2(-1),\\;2\\cdot2-0)=(4,0,4)$, magnitude $\\sqrt{32}$. Area $=\\frac{1}{2}\\sqrt{32}=2\\sqrt2\\approx2.83$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-hyperbolic-vectors-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-further-maths-vector-product",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$A(2,0,0)$, $B(0,3,0)$, $C(0,0,6)$ lie on a plane.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "$\\vec{AB}\\times\\vec{AC}=(18,12,6)$. The plane is $3x+2y+z=d$. Find $d$.",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "Using $A$: $3(2)=6$ (also $B$: $2(3)=6$, $C$: $6$).",
+     "id": "lower6-further-maths-hyperbolic-vectors-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area of triangle $ABC$ (3 d.p.).",
+     "answer": 11.225,
+     "tolerance": 0.001,
+     "explanation": "$\\frac{1}{2}\\sqrt{18^2+12^2+6^2}=\\frac{1}{2}\\sqrt{504}=11.225$.",
+     "id": "lower6-further-maths-hyperbolic-vectors-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the distance from $O$ to the plane (3 d.p.).",
+     "answer": 1.604,
+     "tolerance": 0.001,
+     "explanation": "$\\frac{6}{\\sqrt{14}}=1.604$.",
+     "id": "lower6-further-maths-hyperbolic-vectors-e12-c"
+    }
+   ],
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-vector-product-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-vector-product",
+   "prompt": "$(1,0,0)\\times(0,1,0)=$",
+   "choices": [
+    "$0$",
+    "$(1,1,0)$",
+    "$(0,0,-1)$",
+    "$(0,0,1)$"
+   ],
+   "answer": 3,
+   "explanation": "Right-hand rule.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-vector-product-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-vector-product",
+   "prompt": "$\\vec a\\times\\vec a=$",
+   "choices": [
+    "$\\vec a$",
+    "$1$",
+    "$\\vec 0$",
+    "$|\\vec a|^2$"
+   ],
+   "answer": 2,
+   "explanation": "$\\sin0=0$.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-vector-product-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-vector-product",
+   "prompt": "A normal to a plane through $A,B,C$ is",
+   "choices": [
+    "$\\vec{BC}$",
+    "$\\vec{AB}+\\vec{AC}$",
+    "$\\vec{AB}\\cdot\\vec{AC}$",
+    "$\\vec{AB}\\times\\vec{AC}$"
+   ],
+   "answer": 3,
+   "explanation": "Perpendicular to the plane.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-vector-product-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-vector-product",
+   "prompt": "The plane $2x-y+3z=4$ has normal",
+   "choices": [
+    "$(4,0,0)$",
+    "$(2,-1,3)$",
+    "$(3,-1,2)$",
+    "$(2,1,3)$"
+   ],
+   "answer": 1,
+   "explanation": "Coefficients.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  },
+  {
+   "id": "lower6-further-maths-vector-product-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-vector-product",
+   "prompt": "The area of a parallelogram on $\\vec a,\\vec b$ is",
+   "choices": [
+    "$\\vec a\\cdot\\vec b$",
+    "$|\\vec a||\\vec b|$",
+    "$\\frac{1}{2}|\\vec a\\times\\vec b|$",
+    "$|\\vec a\\times\\vec b|$"
+   ],
+   "answer": 3,
+   "explanation": "Magnitude of the cross product.",
+   "chapter": "lower6-further-maths-hyperbolic-vectors"
+  }
+ ]
+}

@@ -1,0 +1,1543 @@
+{
+ "chapter": "fslc-science-living-things",
+ "lessons": [
+  {
+   "id": "fslc-science-living-nonliving",
+   "title": "Living and non-living things",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "List the seven characteristics of living things.",
+    "Sort things into living, non-living and once-living.",
+    "Explain why a car or a river is not a living thing."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "fslc-science-living-things-e01",
+    "fslc-science-living-things-e02",
+    "fslc-science-living-things-e03",
+    "fslc-science-living-things-e04",
+    "fslc-science-living-things-e05",
+    "fslc-science-living-things-e06"
+   ],
+   "selfCheck": [
+    "fslc-science-living-nonliving-q1",
+    "fslc-science-living-nonliving-q2",
+    "fslc-science-living-nonliving-q3",
+    "fslc-science-living-nonliving-q4",
+    "fslc-science-living-nonliving-q5"
+   ],
+   "reviewNotes": [
+    "Whether fire and viruses count as living is not discussed; keep to the classic classification. MRS GREN word list should match the syllabus wording.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Living things",
+     "md": "All **living things** do seven things (remember MRS GREN): **M**ove, **R**espire (breathe), be **S**ensitive (feel and react), **G**row, **R**eproduce (have young), **E**xcrete (get rid of waste) and take in **N**utrition (food). Plants, animals and tiny living things like bacteria are all living. Stones, water, plastic and cars are **non-living**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 40,
+        "text": "Movement",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 62,
+        "text": "move",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 40,
+        "text": "Respiration",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 62,
+        "text": "breathe",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 204,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 40,
+        "text": "Sensitivity",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 62,
+        "text": "feel",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 304,
+        "y": 14,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 40,
+        "text": "Growth",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 62,
+        "text": "grow",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 110,
+        "text": "Reproduction",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 132,
+        "text": "have young",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 110,
+        "text": "Excretion",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 132,
+        "text": "get rid of waste",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 204,
+        "y": 84,
+        "w": 92,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 110,
+        "text": "Nutrition",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 132,
+        "text": "feed",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The seven characteristics of living things.",
+     "alt": "Seven boxes: movement, respiration, sensitivity, growth, reproduction, excretion and nutrition, each with a short explanation."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Once-living things",
+     "md": "Some things are not alive now but **were** alive: dry wood, a dead leaf, a bone, cotton cloth and leather. We call them **once-living** (or dead) things. A thing that is alive must show **all** seven signs, not only one: a car moves but it does not grow, feed or reproduce, so it is non-living."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that a thing is alive because it **moves** (a car, a river, the wind).\n- Saying that plants are not alive because they do not move from place to place: they grow, feed, reproduce and react to light.\n- Forgetting that seeds are alive: they are resting and can grow when they get water and warmth."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Sort into living, non-living and once-living: a goat, a stone, a dry leaf.",
+     "steps": [
+      "A goat moves, breathes, feeds, grows and has young: living.",
+      "A stone does none of these: non-living.",
+      "A dry leaf came from a plant that was alive: once-living."
+     ],
+     "answer": "goat: living; stone: non-living; dry leaf: once-living."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Why is a motorbike not a living thing?",
+     "steps": [
+      "It moves, but only when someone starts it with fuel.",
+      "It does not grow, reproduce, breathe or react like a living thing."
+     ],
+     "answer": "A motorbike moves, but it does not grow, breathe, feed or reproduce, so it is not alive."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-plants-parts",
+   "title": "Plants: parts and their jobs",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the main parts of a flowering plant and say what each part does.",
+    "Explain how a green plant makes its food.",
+    "Give examples of plant parts that we eat."
+   ],
+   "prerequisites": [
+    "fslc-science-living-nonliving"
+   ],
+   "exercises": [
+    "fslc-science-living-things-e07",
+    "fslc-science-living-things-e08",
+    "fslc-science-living-things-e09",
+    "fslc-science-living-things-e10",
+    "fslc-science-living-things-e11",
+    "fslc-science-living-things-e12"
+   ],
+   "selfCheck": [
+    "fslc-science-plants-parts-q1",
+    "fslc-science-plants-parts-q2",
+    "fslc-science-plants-parts-q3",
+    "fslc-science-plants-parts-q4",
+    "fslc-science-plants-parts-q5"
+   ],
+   "reviewNotes": [
+    "Cassava is described as a root (storage root); yam/cocoyam are left out as botanical classification is more complex. Photosynthesis is simplified.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parts of a plant",
+     "md": "- **Roots**: hold the plant in the soil and take in water and minerals.\n- **Stem**: holds up the plant and carries water and food up and down.\n- **Leaves**: make food for the plant.\n- **Flower**: makes seeds.\n- **Fruit**: grows from the flower and protects the seeds.\n- **Seeds**: can grow into new plants."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 150,
+        "x2": 380,
+        "y2": 150,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 150,
+        "x2": 200,
+        "y2": 60,
+        "color": "green",
+        "width": 5
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         110,
+         140,
+         90,
+         190,
+         125
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         90,
+         262,
+         70,
+         210,
+         105
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 48,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 150,
+        "x2": 170,
+        "y2": 190,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 150,
+        "x2": 200,
+        "y2": 200,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 150,
+        "x2": 235,
+        "y2": 190,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 40,
+        "text": "flower",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 278,
+        "y": 76,
+        "text": "leaf",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 100,
+        "text": "leaf",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 128,
+        "text": "stem",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 192,
+        "text": "roots",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 142,
+        "text": "ground",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The parts of a flowering plant.",
+     "alt": "A drawing of a plant. Below the ground line are the brown roots. A green stem rises from the ground with two leaves and a pink flower on top. The parts are labelled flower, leaf, stem and roots."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "How a plant makes food",
+     "md": "A green plant makes its own food in its leaves. This is called **photosynthesis**. The leaf uses **sunlight**, **water** (from the roots) and **carbon dioxide** (from the air) to make food (sugar), and it gives out **oxygen**. Because plants make food, they are the first link in every food chain: they are **producers**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Plant parts we eat",
+     "md": "- Roots: cassava, carrot.\n- Stem: sugar cane.\n- Leaves: eru, bitter leaf, cabbage.\n- Fruits: mango, tomato, pawpaw.\n- Seeds: maize, beans, groundnuts, rice.\nA balanced diet uses several of these."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that plants feed on soil. They take **water and minerals** from the soil, but they make their **food** in the leaves.\n- Thinking that photosynthesis happens at night: it needs light.\n- Mixing up the stem (holds the plant) and the roots (take in water)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A plant is kept in a dark cupboard for two weeks. It becomes pale and weak. Explain why.",
+     "steps": [
+      "Leaves make food by photosynthesis, and this needs sunlight.",
+      "In the dark the plant cannot make food, so it becomes pale and weak."
+     ],
+     "answer": "Without sunlight the leaves cannot make food, so the plant becomes pale and weak."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Name the part of the plant that we eat in: cassava, eru, maize.",
+     "steps": [
+      "Cassava is a thick root.",
+      "Eru is a leaf. Maize grains are seeds."
+     ],
+     "answer": "cassava: root; eru: leaves; maize: seeds."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-animals-habitats",
+   "title": "Animals and their habitats",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Sort animals into vertebrates and invertebrates.",
+    "Name the five groups of vertebrates and one feature of each.",
+    "Say where some animals live (habitats) and what they eat."
+   ],
+   "prerequisites": [
+    "fslc-science-living-nonliving"
+   ],
+   "exercises": [
+    "fslc-science-living-things-e13",
+    "fslc-science-living-things-e14",
+    "fslc-science-living-things-e15",
+    "fslc-science-living-things-e16",
+    "fslc-science-living-things-e17",
+    "fslc-science-living-things-e18"
+   ],
+   "selfCheck": [
+    "fslc-science-animals-habitats-q1",
+    "fslc-science-animals-habitats-q2",
+    "fslc-science-animals-habitats-q3",
+    "fslc-science-animals-habitats-q4",
+    "fslc-science-animals-habitats-q5"
+   ],
+   "reviewNotes": [
+    "The animals named are common in Cameroon; classifications (bat, whale, spider) are standard textbook facts.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vertebrates and invertebrates",
+     "md": "**Vertebrates** have a backbone. **Invertebrates** have no backbone. Vertebrates: **mammals**, **birds**, **reptiles**, **amphibians** and **fish**. Invertebrates include insects, spiders, snails, worms and crabs. Most animals on Earth are invertebrates."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 19,
+        "y": 14,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 76.5,
+        "y": 40,
+        "text": "Mammals",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 76.5,
+        "y": 62,
+        "text": "goat, human",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 14,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 199.5,
+        "y": 40,
+        "text": "Birds",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 199.5,
+        "y": 62,
+        "text": "hen, eagle",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 265,
+        "y": 14,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 322.5,
+        "y": 40,
+        "text": "Reptiles",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 322.5,
+        "y": 62,
+        "text": "lizard, snake",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 19,
+        "y": 84,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 76.5,
+        "y": 110,
+        "text": "Amphibians",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 76.5,
+        "y": 132,
+        "text": "frog, toad",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 84,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 199.5,
+        "y": 110,
+        "text": "Fish",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 199.5,
+        "y": 132,
+        "text": "tilapia, catfish",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 265,
+        "y": 84,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 322.5,
+        "y": 110,
+        "text": "Invertebrates",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 322.5,
+        "y": 132,
+        "text": "ant, snail",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Groups of animals with examples.",
+     "alt": "Six boxes: mammals (goat, human), birds (hen, eagle), reptiles (lizard, snake), amphibians (frog, toad), fish (tilapia, catfish) and invertebrates (ant, snail)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "The five groups of vertebrates",
+     "md": "- **Mammals**: have hair or fur, give birth to live young and feed them milk (goat, human, bat).\n- **Birds**: have feathers and wings, lay eggs with hard shells (hen, eagle).\n- **Reptiles**: dry scaly skin, most lay eggs (lizard, snake, crocodile).\n- **Amphibians**: moist skin, young live in water and adults on land and in water (frog).\n- **Fish**: live in water, breathe with gills, have fins and scales (tilapia)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Habitats and feeding",
+     "md": "A **habitat** is the place where an animal lives: forest, savanna, river, sea, soil, a pond. Animals that eat only plants are **herbivores** (goat, cow); animals that eat other animals are **carnivores** (lion, snake); animals that eat both are **omnivores** (human, chicken). An insect has **6 legs** and 3 body parts; a spider has **8 legs**, so a spider is not an insect."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that a bat is a bird because it flies: it has fur and feeds its young with milk, so it is a mammal.\n- Saying that a whale or a dolphin is a fish: they are mammals.\n- Saying that all animals that live in water are fish: a frog is an amphibian."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Say which group of animals each belongs to: a frog, a hen, a goat.",
+     "steps": [
+      "A frog has moist skin and lays eggs in water: amphibian.",
+      "A hen has feathers and wings: bird.",
+      "A goat has hair and feeds its kids with milk: mammal."
+     ],
+     "answer": "frog: amphibian; hen: bird; goat: mammal."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A creature has 8 legs and no backbone. Is it an insect?",
+     "steps": [
+      "Insects have 6 legs. This animal has 8 legs.",
+      "It has no backbone, so it is an invertebrate, but it is not an insect (it is like a spider)."
+     ],
+     "answer": "No. It is an invertebrate with 8 legs, like a spider."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-science-living-things"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "fslc-science-living-things-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-living-nonliving",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is a living thing?",
+   "choices": [
+    "a mango tree",
+    "a motorbike",
+    "a river",
+    "a stone"
+   ],
+   "answer": 0,
+   "explanation": "A mango tree grows, feeds, reproduces and reacts to its surroundings.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-science-living-nonliving",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many characteristics of living things do we study (M R S G R E N)?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "Movement, respiration, sensitivity, growth, reproduction, excretion and nutrition: 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-living-nonliving",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which one is a once-living thing?",
+   "choices": [
+    "a stone",
+    "a hen",
+    "a dry piece of wood",
+    "water"
+   ],
+   "answer": 2,
+   "explanation": "Wood comes from a tree that was alive.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-living-nonliving",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A river is alive because it moves.",
+   "answer": false,
+   "explanation": "Moving is only one sign. A river does not grow, feed or reproduce.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-living-nonliving",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the characteristic with its meaning.",
+   "pairs": [
+    [
+     "Respiration",
+     "taking in oxygen and giving out carbon dioxide"
+    ],
+    [
+     "Excretion",
+     "getting rid of waste"
+    ],
+    [
+     "Reproduction",
+     "having young"
+    ],
+    [
+     "Sensitivity",
+     "reacting to light, heat or touch"
+    ]
+   ],
+   "explanation": "These are four of the seven characteristics.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-living-nonliving",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil put seeds of maize in wet soil near a window. After a week small green shoots appeared and they bent towards the light. Later the plant became taller.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which characteristic is shown when the plant becomes taller?",
+     "choices": [
+      "movement from place to place",
+      "growth",
+      "excretion",
+      "respiration"
+     ],
+     "answer": 1,
+     "explanation": "Getting taller is growth.",
+     "id": "fslc-science-living-things-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which characteristic is shown when the shoots bend towards the light?",
+     "choices": [
+      "nutrition",
+      "reproduction",
+      "sensitivity",
+      "excretion"
+     ],
+     "answer": 2,
+     "explanation": "The plant reacts to light.",
+     "id": "fslc-science-living-things-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Is a maize seed a living thing?",
+     "choices": [
+      "No, because it is small",
+      "Only after it has flowers",
+      "Yes, it is alive but resting",
+      "No, because it does not move"
+     ],
+     "answer": 2,
+     "explanation": "A seed is alive; it grows when it gets water and warmth.",
+     "id": "fslc-science-living-things-e06-c"
+    }
+   ],
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-nonliving-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-living-nonliving",
+   "prompt": "Which is a non-living thing?",
+   "choices": [
+    "a mango tree",
+    "a stone",
+    "a goat",
+    "a mushroom"
+   ],
+   "answer": 1,
+   "explanation": "A stone has no signs of life.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-nonliving-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-living-nonliving",
+   "prompt": "Taking in food is called...",
+   "choices": [
+    "nutrition",
+    "respiration",
+    "reproduction",
+    "excretion"
+   ],
+   "answer": 0,
+   "explanation": "Nutrition = feeding.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-nonliving-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-living-nonliving",
+   "prompt": "Getting rid of waste is called...",
+   "choices": [
+    "sensitivity",
+    "excretion",
+    "growth",
+    "nutrition"
+   ],
+   "answer": 1,
+   "explanation": "Excretion removes waste.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-nonliving-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-living-nonliving",
+   "prompt": "A dead leaf is...",
+   "choices": [
+    "living",
+    "once-living",
+    "non-living only",
+    "a seed"
+   ],
+   "answer": 1,
+   "explanation": "It came from a plant that was alive.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-nonliving-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-living-nonliving",
+   "prompt": "What do all living things do?",
+   "choices": [
+    "make noise",
+    "reproduce",
+    "fly",
+    "swim"
+   ],
+   "answer": 1,
+   "explanation": "Living things have young of their kind.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-plants-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of a plant takes in water from the soil?",
+   "choices": [
+    "roots",
+    "fruit",
+    "leaves",
+    "flower"
+   ],
+   "answer": 0,
+   "explanation": "Roots take in water and minerals.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-plants-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Where does a plant make its food?",
+   "choices": [
+    "in the fruit",
+    "in the soil",
+    "in the leaves",
+    "in the roots"
+   ],
+   "answer": 2,
+   "explanation": "Photosynthesis happens mostly in the green leaves.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-plants-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What does a plant give out during photosynthesis?",
+   "choices": [
+    "nitrogen only",
+    "smoke",
+    "carbon dioxide",
+    "oxygen"
+   ],
+   "answer": 3,
+   "explanation": "Oxygen is released.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e10",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-plants-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the plant part with its job.",
+   "pairs": [
+    [
+     "roots",
+     "hold the plant and take in water"
+    ],
+    [
+     "stem",
+     "holds up the plant"
+    ],
+    [
+     "leaf",
+     "makes food"
+    ],
+    [
+     "flower",
+     "makes seeds"
+    ]
+   ],
+   "explanation": "Each part has its job.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-plants-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Photosynthesis needs sunlight, water and carbon dioxide.",
+   "answer": true,
+   "explanation": "These three are used by the leaf to make food.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-plants-parts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil planted three beans in pots. Pot A was kept in light and watered. Pot B was in light without water. Pot C was watered but kept in a dark cupboard. After two weeks only plant A was green and healthy.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What does plant B lack?",
+     "choices": [
+      "water",
+      "soil",
+      "light",
+      "seeds"
+     ],
+     "answer": 0,
+     "explanation": "Plant B was not watered.",
+     "id": "fslc-science-living-things-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What does plant C lack?",
+     "choices": [
+      "air",
+      "water",
+      "roots",
+      "light"
+     ],
+     "answer": 3,
+     "explanation": "It was in the dark.",
+     "id": "fslc-science-living-things-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "What do we learn from the test?",
+     "choices": [
+      "light is harmful to beans",
+      "plants only need soil",
+      "a plant needs light and water to grow well",
+      "a plant needs nothing"
+     ],
+     "answer": 2,
+     "explanation": "Only A had both and stayed healthy.",
+     "id": "fslc-science-living-things-e12-c"
+    }
+   ],
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-plants-parts-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-plants-parts",
+   "prompt": "Which part carries water up the plant?",
+   "choices": [
+    "seed",
+    "fruit",
+    "flower",
+    "stem"
+   ],
+   "answer": 3,
+   "explanation": "The stem carries water and food.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-plants-parts-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-plants-parts",
+   "prompt": "Which gas do plants take from the air to make food?",
+   "choices": [
+    "carbon dioxide",
+    "nitrogen",
+    "oxygen",
+    "hydrogen"
+   ],
+   "answer": 0,
+   "explanation": "Plants use carbon dioxide.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-plants-parts-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-plants-parts",
+   "prompt": "A green plant is called a producer because it...",
+   "choices": [
+    "makes its own food",
+    "gives milk",
+    "eats animals",
+    "makes noise"
+   ],
+   "answer": 0,
+   "explanation": "Producers make food.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-plants-parts-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-plants-parts",
+   "prompt": "A seed grows into...",
+   "choices": [
+    "a root only",
+    "a new plant",
+    "a stone",
+    "an animal"
+   ],
+   "answer": 1,
+   "explanation": "A seed contains a baby plant.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-plants-parts-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-plants-parts",
+   "prompt": "Which plant part is the cassava that we eat?",
+   "choices": [
+    "root",
+    "leaf",
+    "stem",
+    "flower"
+   ],
+   "answer": 0,
+   "explanation": "Cassava is a thick root.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-animals-habitats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which animal is a mammal?",
+   "choices": [
+    "hen",
+    "tilapia",
+    "bat",
+    "frog"
+   ],
+   "answer": 2,
+   "explanation": "A bat has fur and feeds its young with milk.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-science-animals-habitats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many legs has an insect?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "An insect has 3 pairs of legs: 6 legs.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-animals-habitats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Animals with no backbone are called...",
+   "choices": [
+    "vertebrates",
+    "reptiles",
+    "mammals",
+    "invertebrates"
+   ],
+   "answer": 3,
+   "explanation": "In = without, vertebra = backbone.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e16",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-animals-habitats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the animal with its group.",
+   "pairs": [
+    [
+     "eagle",
+     "bird"
+    ],
+    [
+     "crocodile",
+     "reptile"
+    ],
+    [
+     "frog",
+     "amphibian"
+    ],
+    [
+     "tilapia",
+     "fish"
+    ]
+   ],
+   "explanation": "Check the body covering and where the animal lives.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-animals-habitats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A snail is a vertebrate.",
+   "answer": false,
+   "explanation": "A snail has no backbone: it is an invertebrate.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-living-things-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-animals-habitats",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mary made a table of four animals. Animal W: feathers, lays eggs. Animal X: hair, gives milk to its young. Animal Y: scales, breathes with gills. Animal Z: 6 legs, no backbone.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Animal W is a...",
+     "choices": [
+      "reptile",
+      "fish",
+      "bird",
+      "mammal"
+     ],
+     "answer": 2,
+     "explanation": "Feathers and eggs show a bird.",
+     "id": "fslc-science-living-things-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Animal X is a...",
+     "choices": [
+      "insect",
+      "amphibian",
+      "mammal",
+      "bird"
+     ],
+     "answer": 2,
+     "explanation": "Hair and milk show a mammal.",
+     "id": "fslc-science-living-things-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Animal Y is a...",
+     "choices": [
+      "bird",
+      "mammal",
+      "fish",
+      "reptile"
+     ],
+     "answer": 2,
+     "explanation": "Scales and gills show a fish.",
+     "id": "fslc-science-living-things-e18-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Animal Z is a...",
+     "choices": [
+      "insect",
+      "spider",
+      "reptile",
+      "fish"
+     ],
+     "answer": 0,
+     "explanation": "6 legs and no backbone: an insect.",
+     "id": "fslc-science-living-things-e18-d"
+    }
+   ],
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-animals-habitats-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-animals-habitats",
+   "prompt": "Which is an amphibian?",
+   "choices": [
+    "frog",
+    "goat",
+    "lizard",
+    "hen"
+   ],
+   "answer": 0,
+   "explanation": "Amphibians live partly in water and partly on land.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-animals-habitats-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-animals-habitats",
+   "prompt": "An animal that eats only plants is a...",
+   "choices": [
+    "vertebrate",
+    "carnivore",
+    "omnivore",
+    "herbivore"
+   ],
+   "answer": 3,
+   "explanation": "Herbivores eat plants.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-animals-habitats-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-animals-habitats",
+   "prompt": "Which animal is an invertebrate?",
+   "choices": [
+    "tilapia",
+    "snail",
+    "goat",
+    "snake"
+   ],
+   "answer": 1,
+   "explanation": "Snails have no backbone.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-animals-habitats-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-animals-habitats",
+   "prompt": "A habitat is...",
+   "choices": [
+    "the food an animal eats",
+    "a kind of skin",
+    "an animal's baby",
+    "the place where an animal lives"
+   ],
+   "answer": 3,
+   "explanation": "For example a forest or a river.",
+   "chapter": "fslc-science-living-things"
+  },
+  {
+   "id": "fslc-science-animals-habitats-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-animals-habitats",
+   "prompt": "A spider has...",
+   "choices": [
+    "10 legs",
+    "4 legs",
+    "8 legs",
+    "6 legs"
+   ],
+   "answer": 2,
+   "explanation": "Spiders have eight legs.",
+   "chapter": "fslc-science-living-things"
+  }
+ ]
+}

@@ -10,14 +10,66 @@
   "subject": "maths",
   "exam": "FSLC",
   "programRef": "MINEDUB National Syllabus for English-speaking Primary Schools, Mathematics, Level III (Class 5–6) — to be checked against the official text",
-  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
   "status": "draft",
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-01",
   "chapters": [
-    {"id": "fslc-maths-num", "title": "Whole numbers and the four operations", "order": 1, "programRef": "Level III — Numbers and operations (to be checked against the official text)"},
-    {"id": "fslc-maths-frac", "title": "Fractions, decimals and percentages", "order": 2, "programRef": "Level III — Fractions, decimals and percentages (to be checked against the official text)"},
-    {"id": "fslc-maths-meas", "title": "Measurement and geometry", "order": 3, "programRef": "Level III — Measurement; shapes and space (to be checked against the official text)"},
-    {"id": "fslc-maths-word", "title": "Word problems", "order": 4, "programRef": "Level III — Problem solving: sharing, profit and loss, speed, simple interest (to be checked against the official text)"}
+    {
+      "id": "fslc-maths-num",
+      "title": "Whole numbers and the four operations",
+      "order": 1,
+      "programRef": "Level III — Numbers and operations (to be checked against the official text)"
+    },
+    {
+      "id": "fslc-maths-frac",
+      "title": "Fractions, decimals and percentages",
+      "order": 2,
+      "programRef": "Level III — Fractions, decimals and percentages (to be checked against the official text)"
+    },
+    {
+      "id": "fslc-maths-meas",
+      "title": "Measurement and geometry",
+      "order": 3,
+      "programRef": "Level III — Measurement; shapes and space (to be checked against the official text)"
+    },
+    {
+      "id": "fslc-maths-word",
+      "title": "Word problems",
+      "order": 4,
+      "programRef": "Level III — Problem solving: sharing, profit and loss, speed, simple interest (to be checked against the official text)"
+    },
+    {
+      "id": "fslc-maths-place-factors",
+      "title": "Large numbers, factors and patterns",
+      "order": 5,
+      "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text"
+    },
+    {
+      "id": "fslc-maths-ratio-money",
+      "title": "Ratio, money, business and averages",
+      "order": 6,
+      "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text"
+    },
+    {
+      "id": "fslc-maths-time-units-speed",
+      "title": "Time, units and speed",
+      "order": 7,
+      "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text"
+    },
+    {
+      "id": "fslc-maths-geometry-more",
+      "title": "Angles, triangles, circles and solids",
+      "order": 8,
+      "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text"
+    },
+    {
+      "id": "fslc-maths-data-algebra",
+      "title": "Data, probability and introduction to algebra",
+      "order": 9,
+      "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text"
+    }
   ],
   "mockExams": [
     {
@@ -27,8 +79,53 @@
       "instructions": "Answer ALL the questions. Show your working for the problems in Section B. Use π ≈ 3.14. Total: 20 marks. This is a practice paper written in the style of the FSLC: its format, duration and marking are to be checked against the official texts.",
       "outOf": 20,
       "sections": [
-        {"title": "Section A — Short questions (5 marks)", "exercises": ["fslc-maths-mock-a1", "fslc-maths-mock-a2", "fslc-maths-mock-a3", "fslc-maths-mock-a4", "fslc-maths-mock-a5"]},
-        {"title": "Section B — Problems (15 marks)", "exercises": ["fslc-maths-mock-b1", "fslc-maths-mock-b2", "fslc-maths-mock-b3"]}
+        {
+          "title": "Section A — Short questions (5 marks)",
+          "exercises": [
+            "fslc-maths-mock-a1",
+            "fslc-maths-mock-a2",
+            "fslc-maths-mock-a3",
+            "fslc-maths-mock-a4",
+            "fslc-maths-mock-a5"
+          ]
+        },
+        {
+          "title": "Section B — Problems (15 marks)",
+          "exercises": [
+            "fslc-maths-mock-b1",
+            "fslc-maths-mock-b2",
+            "fslc-maths-mock-b3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fslc-maths-mock-2",
+      "title": "FSLC mock paper 2 — Mathematics",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Answer ALL the questions. Show your working for the problems in Section B. Use π = 3.14. Total: 20 marks. Practice paper written in the style of the FSLC; format, duration and marking are to be checked against the official texts.",
+      "sections": [
+        {
+          "title": "Section A — Short questions (8 marks)",
+          "exercises": [
+            "fslc-maths-data-algebra-m01",
+            "fslc-maths-data-algebra-m02",
+            "fslc-maths-data-algebra-m03",
+            "fslc-maths-data-algebra-m04",
+            "fslc-maths-data-algebra-m05",
+            "fslc-maths-data-algebra-m06",
+            "fslc-maths-data-algebra-m07",
+            "fslc-maths-data-algebra-m08"
+          ]
+        },
+        {
+          "title": "Section B — Problems (12 marks)",
+          "exercises": [
+            "fslc-maths-data-algebra-m09",
+            "fslc-maths-data-algebra-m10"
+          ]
+        }
       ]
     }
   ]

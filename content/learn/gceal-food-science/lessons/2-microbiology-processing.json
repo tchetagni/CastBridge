@@ -1,0 +1,1401 @@
+{
+ "chapter": "gceal-food-science-microbiology-processing",
+ "lessons": [
+  {
+   "id": "gceal-food-science-food-microbiology",
+   "title": "Food microbiology",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Food Science and Nutrition syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe growth of microorganisms and calculate growth",
+    "Describe intrinsic and extrinsic factors",
+    "Describe important pathogens and spoilage organisms",
+    "Describe useful fermentations"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-food-science-microbiology-processing-e01",
+    "gceal-food-science-microbiology-processing-e02",
+    "gceal-food-science-microbiology-processing-e03",
+    "gceal-food-science-microbiology-processing-e04",
+    "gceal-food-science-microbiology-processing-e05",
+    "gceal-food-science-microbiology-processing-e06"
+   ],
+   "selfCheck": [
+    "gceal-food-science-food-microbiology-q1",
+    "gceal-food-science-food-microbiology-q2",
+    "gceal-food-science-food-microbiology-q3",
+    "gceal-food-science-food-microbiology-q4",
+    "gceal-food-science-food-microbiology-q5"
+   ],
+   "reviewNotes": [
+    "Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release.",
+    "Thresholds (aw 0.9, pH 4.6) are standard guidance values. Pathogen list is an outline; verify against the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Growth",
+     "md": "Bacteria multiply by **binary fission**: N = N0 x 2^n, where n = t/g is the number of generations (g = generation time). Growth curve: **lag**, **log**, **stationary**, **death**. Spores of some bacteria (Bacillus, Clostridium) survive boiling and germinate when conditions allow. Yeasts reproduce by budding; moulds by spores and hyphae."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Factors",
+     "md": "**Intrinsic** (in the food): water activity (aw: most bacteria need above about 0.9; many moulds grow lower), pH (low-acid foods above about 4.6 allow growth of Clostridium botulinum in sealed, oxygen-free conditions), nutrients, natural antimicrobials, structure. **Extrinsic** (environment): temperature, humidity, atmosphere (oxygen), time."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 222,
+      "items": [
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 24,
+        "text": "Growth curve phases",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 60,
+        "text": "Lag",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 70,
+        "x2": 200.0,
+        "y2": 86,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 86,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 106,
+        "text": "Log (exponential)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 116,
+        "x2": 200.0,
+        "y2": 132,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 132,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 152,
+        "text": "Stationary",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 162,
+        "x2": 200.0,
+        "y2": 178,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 178,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 198,
+        "text": "Death",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Four boxes listing the phases of the bacterial growth curve.",
+     "alt": "Flow of phases: lag, log, stationary, death."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pathogens (outline)",
+     "md": "**Salmonella** (poultry, eggs; infection). **Escherichia coli** (some strains; contaminated food/water). **Staphylococcus aureus** (from skin and nose; heat-stable toxin). **Clostridium botulinum** (inadequately canned low-acid foods; very potent toxin). **Bacillus cereus** (rice; toxins). **Listeria** (can grow in the fridge). **Vibrio cholerae** and **Salmonella Typhi** (water-borne). **Aspergillus** moulds (aflatoxins in groundnuts and maize)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Useful fermentation",
+     "md": "**Lactic acid bacteria** ferment sugars to lactic acid (yoghurt, fermented cassava and cereal foods, pickles). **Yeasts** ferment sugar to ethanol and carbon dioxide (bread, traditional drinks such as palm wine). Controlled fermentation preserves food, improves flavour and can improve digestibility or reduce toxic compounds."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Pathogens are not always visible, smelly or tasty-different.\n- Boiling kills growing cells but not all spores or toxins.\n- Intoxication needs no live bacteria to remain in the food.\n- Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Calculation",
+     "statement": "N0 = 200 cells per gram, generation time 40 minutes. Find N after 4 hours.",
+     "steps": [
+      "4 hours = 240 minutes; n = 240 / 40 = 6 generations.",
+      "N = 200 x 2^6 = 12800 cells per gram."
+     ],
+     "answer": "12 800 per gram"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Low-acid cans",
+     "statement": "Why is under-processing of canned low-acid vegetables dangerous?",
+     "steps": [
+      "Spores of Clostridium botulinum may survive and grow in the oxygen-free, low-acid can.",
+      "They produce a very potent toxin; correct sterilisation is essential."
+     ],
+     "answer": "Botulinum toxin risk"
+    }
+   ],
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-processing-technology",
+   "title": "Food processing technology",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Food Science and Nutrition syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe pasteurisation, sterilisation and UHT",
+    "Describe drying, freezing and refrigeration",
+    "Describe smoking, salting, fermentation and extrusion",
+    "Describe packaging and its role"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-food-science-microbiology-processing-e07",
+    "gceal-food-science-microbiology-processing-e08",
+    "gceal-food-science-microbiology-processing-e09",
+    "gceal-food-science-microbiology-processing-e10",
+    "gceal-food-science-microbiology-processing-e11",
+    "gceal-food-science-microbiology-processing-e12"
+   ],
+   "selfCheck": [
+    "gceal-food-science-processing-technology-q1",
+    "gceal-food-science-processing-technology-q2",
+    "gceal-food-science-processing-technology-q3",
+    "gceal-food-science-processing-technology-q4",
+    "gceal-food-science-processing-technology-q5"
+   ],
+   "reviewNotes": [
+    "Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release.",
+    "Temperatures and times are common textbook values and must be checked; D-value example is illustrative.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Heat processing",
+     "md": "**Pasteurisation**: mild heat to destroy pathogens (milk: about 72 degrees Celsius for 15 seconds, or 63 degrees for 30 minutes). **UHT**: about 135 to 150 degrees for a few seconds, then aseptic packing; long shelf life without refrigeration until opened. **Canning (commercial sterilisation)**: food sealed in containers and heated enough to destroy spores (about 121 degrees for low-acid foods). Time and temperature depend on the food, can size and heat penetration. A **D-value** is the time at a given temperature to reduce the population by 90% (one log cycle); for example with D = 2 min, 6 D = 12 min gives a million-fold (6 log) reduction."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cold and drying",
+     "md": "**Refrigeration** (about 0 to 5 degrees Celsius) slows microbial and enzyme action. **Freezing** (around -18 degrees or lower) stops microbial growth; **fast freezing** forms small ice crystals and less drip loss. **Drying** (sun, air, spray, freeze-drying) lowers water activity; sun-drying is cheap but needs protection from dust, insects and rain. **Freeze-drying** keeps quality but costs more."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 250,
+      "bars": [
+       {
+        "label": "0 min",
+        "value": 6,
+        "color": "red"
+       },
+       {
+        "label": "4 min",
+        "value": 4,
+        "color": "orange"
+       },
+       {
+        "label": "8 min",
+        "value": 2,
+        "color": "green"
+       },
+       {
+        "label": "12 min",
+        "value": 0,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "A bar chart: with D = 2 minutes the log10 of the surviving cells falls from 6 to 0 over 12 minutes.",
+     "alt": "Bar chart of log10 survivors: 6 at 0 minutes, 4 at 4, 2 at 8 and 0 at 12 minutes, with D equal to 2 minutes."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Other methods",
+     "md": "**Smoking** (drying, antimicrobial compounds, flavour, often with salt). **Salting/curing** and **sugar**. **Fermentation** (lactic, alcoholic). **Extrusion**: food forced under pressure and heat through a die to make snacks, pasta and texturised proteins. **Irradiation** (approved in some countries) and **high-pressure processing** are other technologies at outline level."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Packaging",
+     "md": "Packaging protects from contamination, moisture, oxygen, light and physical damage, gives information (label), and extends shelf life. Types: glass, metal cans, plastics, paper and composites; **modified-atmosphere packaging** replaces air with another gas mixture. Packaging waste must be managed responsibly."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Pasteurised milk is not sterile.\n- Freezing is not a kill step.\n- A D-value is not a total time: the process must reach many D-values.\n- Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - D-value",
+     "statement": "A population of 10^6 cells has D = 2 min at a set temperature. How long to reduce it to 10^0 (1 cell)?",
+     "steps": [
+      "Six log cycles are needed (10^6 to 10^0).",
+      "Time = 6 x D = 12 minutes."
+     ],
+     "answer": "12 minutes"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Choose a process",
+     "statement": "A dairy in Bamenda wants milk to be safe and stay good for a few days in a fridge. Which process is suitable?",
+     "steps": [
+      "Pasteurisation kills pathogens while keeping flavour.",
+      "Refrigeration slows growth of surviving organisms."
+     ],
+     "answer": "Pasteurisation plus refrigeration"
+    }
+   ],
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-quality-haccp",
+   "title": "Food quality, hazards and HACCP",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Food Science and Nutrition syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Classify hazards: biological, chemical, physical, allergens",
+    "Explain good hygiene practice and the seven HACCP principles",
+    "Describe quality control and sensory evaluation",
+    "Design a simple HACCP plan"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-food-science-microbiology-processing-e13",
+    "gceal-food-science-microbiology-processing-e14",
+    "gceal-food-science-microbiology-processing-e15",
+    "gceal-food-science-microbiology-processing-e16",
+    "gceal-food-science-microbiology-processing-e17",
+    "gceal-food-science-microbiology-processing-e18"
+   ],
+   "selfCheck": [
+    "gceal-food-science-quality-haccp-q1",
+    "gceal-food-science-quality-haccp-q2",
+    "gceal-food-science-quality-haccp-q3",
+    "gceal-food-science-quality-haccp-q4",
+    "gceal-food-science-quality-haccp-q5"
+   ],
+   "reviewNotes": [
+    "Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release.",
+    "Triangle-test statistics are simplified (no significance table). Critical limits depend on local regulation.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hazards",
+     "md": "**Biological**: bacteria, viruses, parasites, moulds. **Chemical**: pesticide residues, cleaning chemicals, toxins (e.g. aflatoxins), unapproved additives. **Physical**: stones, glass, metal, hair. **Allergens**: foods such as peanuts, eggs, milk, fish, wheat must be controlled and labelled where required. **Good hygiene practice (GHP)** and **good manufacturing practice (GMP)** (clean premises, trained staff, pest control, traceability) form the base."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "HACCP principles",
+     "md": "1. Hazard analysis. 2. Determine **critical control points (CCPs)**. 3. Set **critical limits** (e.g. core temperature at least a set value). 4. Monitoring. 5. Corrective actions when a limit is missed. 6. Verification. 7. Documentation and record keeping. HACCP is preventive, process-based and works with prerequisites such as hygiene."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 226,
+      "items": [
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 24,
+        "text": "HACCP example: stew",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 59,
+        "text": "Step",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 40,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 59,
+        "text": "Example",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 87,
+        "text": "Hazard",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 68,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 87,
+        "text": "Salmonella",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 115,
+        "text": "CCP",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 96,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 115,
+        "text": "Cooking",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 143,
+        "text": "Limit",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 124,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 143,
+        "text": "Safe core temp",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 171,
+        "text": "Monitor",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 152,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 171,
+        "text": "Probe",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 180,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 199,
+        "text": "Action",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 180,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 199,
+        "text": "Cook longer",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table giving an HACCP example for a chicken stew with hazard, CCP, limit, monitoring and action.",
+     "alt": "Table: hazard Salmonella, CCP cooking, limit safe core temperature, monitor with a probe, corrective action cook longer."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quality and sensory evaluation",
+     "md": "Quality includes safety, nutrition, appearance, flavour, texture and consistency. **Quality control** checks raw materials, processes and finished products (sampling, testing, records). **Sensory evaluation** uses trained or consumer panels: **difference tests** (triangle test), **ranking**, **rating (hedonic) scales**; use blind coding, neutral conditions and unbiased samples."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Example plan",
+     "md": "Product: cooked chicken stew for a canteen. Hazard: Salmonella survival. CCP: cooking. Critical limit: centre of chicken reaches at least the temperature set by local authority (commonly about 70 degrees or equivalent). Monitoring: probe thermometer for each batch. Corrective action: continue cooking. Verification: periodic checks of thermometers. Records: batch temperature log."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A CCP is not any step; it is where control is essential and a measurable limit exists.\n- Sensory panels must not see sample labels (bias).\n- HACCP does not replace hygiene.\n- Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Classify",
+     "statement": "Classify: (a) a piece of glass in a jar of jam, (b) aflatoxin in groundnuts, (c) Salmonella in eggs.",
+     "steps": [
+      "(a) is a physical hazard; (b) is a chemical hazard (toxin).",
+      "(c) is a biological hazard."
+     ],
+     "answer": "(a) physical, (b) chemical, (c) biological"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Triangle test",
+     "statement": "In a triangle test, three samples are given, two identical. 12 of 20 tasters pick the odd one out correctly. Is this clearly better than guessing (one third would be about 7)?",
+     "steps": [
+      "Guessing would give about 20/3 = 6.7, so 7 correct.",
+      "12 is well above this, suggesting a real detectable difference (formal statistics required for a firm conclusion)."
+     ],
+     "answer": "Suggests a real difference"
+    }
+   ],
+   "chapter": "gceal-food-science-microbiology-processing"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-food-science-microbiology-processing-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-food-science-food-microbiology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "N0 = 50, 5 generations. N = 50 x 2^5 =",
+   "answer": 1600,
+   "tolerance": 0,
+   "explanation": "50 x 32 = 1600.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-food-science-food-microbiology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is heat-stable toxin producer?",
+   "choices": [
+    "Yeast",
+    "Lactic acid bacteria",
+    "Vibrio cholerae",
+    "Staphylococcus aureus"
+   ],
+   "answer": 3,
+   "explanation": "Toxin.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-food-science-food-microbiology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Spores can survive boiling.",
+   "answer": true,
+   "explanation": "Some can.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-food-science-food-microbiology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "N0 = 1000, g = 30 min, t = 3 hours. N =",
+   "answer": 64000,
+   "tolerance": 0,
+   "explanation": "n = 6; 1000 x 64 = 64000.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-food-science-food-microbiology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain two intrinsic and two extrinsic factors affecting microbial growth.",
+   "model": "Intrinsic: water activity, pH, nutrients. Extrinsic: temperature, humidity, oxygen availability, time.",
+   "rubric": "1 mark each, 4.",
+   "explanation": "Intrinsic: water activity, pH, nutrients. Extrinsic: temperature, humidity, oxygen availability, time.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-food-science-food-microbiology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A trader in Maroua stores shelled groundnuts in a damp, warm room for months.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The most important risk is",
+     "choices": [
+      "mould growth with aflatoxin formation",
+      "vitamin gain",
+      "more fat",
+      "more protein"
+     ],
+     "answer": 0,
+     "explanation": "Aspergillus.",
+     "id": "gceal-food-science-microbiology-processing-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The best preventive step is",
+     "choices": [
+      "add water",
+      "seal wet in a bag",
+      "dry thoroughly and store dry and ventilated",
+      "store in sunlight uncovered"
+     ],
+     "answer": 2,
+     "explanation": "Control moisture.",
+     "id": "gceal-food-science-microbiology-processing-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why should shrivelled or mouldy nuts be discarded?",
+     "model": "They are more likely to contain aflatoxins, which are harmful and not destroyed by normal cooking.",
+     "rubric": "1 mark each.",
+     "explanation": "They are more likely to contain aflatoxins, which are harmful and not destroyed by normal cooking.",
+     "id": "gceal-food-science-microbiology-processing-e06-c"
+    }
+   ],
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-food-microbiology-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-food-microbiology",
+   "prompt": "Binary fission means",
+   "choices": [
+    "food heating",
+    "a cell becomes a spore only",
+    "a cell dies",
+    "one cell divides into two"
+   ],
+   "answer": 3,
+   "explanation": "Fission.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-food-microbiology-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-food-microbiology",
+   "prompt": "Lactic acid bacteria produce",
+   "choices": [
+    "lactic acid",
+    "oil",
+    "alcohol only",
+    "protein"
+   ],
+   "answer": 0,
+   "explanation": "Fermentation.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-food-microbiology-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-food-microbiology",
+   "prompt": "Aw means",
+   "choices": [
+    "amino acid water",
+    "alcohol",
+    "water activity",
+    "acid water"
+   ],
+   "answer": 2,
+   "explanation": "Water availability.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-food-microbiology-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-food-microbiology",
+   "prompt": "Intoxication is caused by",
+   "choices": [
+    "toxins formed in food",
+    "fibre",
+    "vitamins",
+    "live viruses only"
+   ],
+   "answer": 0,
+   "explanation": "Toxins.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-food-microbiology-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-food-microbiology",
+   "prompt": "Yeast budding is",
+   "choices": [
+    "a vitamin",
+    "fermentation of fat",
+    "a form of reproduction",
+    "a toxin"
+   ],
+   "answer": 2,
+   "explanation": "Budding.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-food-science-processing-technology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "D = 3 min. How many minutes are needed for a 5-log reduction?",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "5 x 3 = 15.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-food-science-processing-technology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "UHT milk can be kept unopened without refrigeration because it is",
+   "choices": [
+    "dried",
+    "salted",
+    "heated very hot and aseptically packed",
+    "frozen"
+   ],
+   "answer": 2,
+   "explanation": "UHT.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-food-science-processing-technology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Fast freezing produces smaller ice crystals.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-food-science-processing-technology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The main purpose of modified-atmosphere packaging is to",
+   "choices": [
+    "slow spoilage by changing the gas around the food",
+    "add salt",
+    "increase fat",
+    "add colour"
+   ],
+   "answer": 0,
+   "explanation": "MAP.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-food-science-processing-technology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Compare drying and freezing as methods of preservation.",
+   "model": "Drying removes water so microbes cannot grow and the food is stable at room temperature but may change texture; freezing keeps nutrients and texture better but needs electricity and a cold chain.",
+   "rubric": "1 mark each point, 3.",
+   "explanation": "Drying removes water so microbes cannot grow and the food is stable at room temperature but may change texture; freezing keeps nutrients and texture better but needs electricity and a cold chain.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-food-science-processing-technology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cooperative in Bafoussam dries tomatoes in the sun.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Drying works mainly by",
+     "choices": [
+      "adding oxygen",
+      "adding fat",
+      "lowering water activity",
+      "heating to sterilise"
+     ],
+     "answer": 2,
+     "explanation": "Aw.",
+     "id": "gceal-food-science-microbiology-processing-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A major risk in sun-drying is",
+     "choices": [
+      "contamination and re-wetting",
+      "too much vitamin C",
+      "too much protein",
+      "too much fat"
+     ],
+     "answer": 0,
+     "explanation": "Dust, insects, humidity.",
+     "id": "gceal-food-science-microbiology-processing-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two improvements.",
+     "model": "Dry on raised clean racks covered with netting; use a solar dryer; store in dry sealed containers.",
+     "rubric": "1 mark each.",
+     "explanation": "Dry on raised clean racks covered with netting; use a solar dryer; store in dry sealed containers.",
+     "id": "gceal-food-science-microbiology-processing-e12-c"
+    }
+   ],
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-processing-technology-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-processing-technology",
+   "prompt": "A D-value is the time for",
+   "choices": [
+    "tripling",
+    "100 percent reduction",
+    "doubling",
+    "a 90 percent reduction"
+   ],
+   "answer": 3,
+   "explanation": "One log.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-processing-technology-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-processing-technology",
+   "prompt": "Extrusion",
+   "choices": [
+    "is freezing",
+    "is smoking",
+    "forces food through a die under heat and pressure",
+    "is canning only"
+   ],
+   "answer": 2,
+   "explanation": "Extrusion.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-processing-technology-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-processing-technology",
+   "prompt": "Freeze-drying",
+   "choices": [
+    "dries food from the frozen state",
+    "adds fat",
+    "boils food",
+    "needs no energy"
+   ],
+   "answer": 0,
+   "explanation": "Freeze-drying.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-processing-technology-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-processing-technology",
+   "prompt": "Packaging should protect food from",
+   "choices": [
+    "light, oxygen and contamination",
+    "only price",
+    "only weight",
+    "only colour"
+   ],
+   "answer": 0,
+   "explanation": "Packaging.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-processing-technology-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-processing-technology",
+   "prompt": "Canned low-acid foods must be heated to",
+   "choices": [
+    "colour them",
+    "freeze them",
+    "destroy spores",
+    "dry them"
+   ],
+   "answer": 2,
+   "explanation": "Commercial sterility.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-food-science-quality-haccp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A stone in rice is a",
+   "choices": [
+    "chemical hazard",
+    "biological hazard",
+    "allergen",
+    "physical hazard"
+   ],
+   "answer": 3,
+   "explanation": "Physical.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-food-science-quality-haccp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A critical limit is",
+   "choices": [
+    "a label",
+    "a measurable value that must be met at a CCP",
+    "any hygiene rule",
+    "a recipe"
+   ],
+   "answer": 1,
+   "explanation": "Limit.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-food-science-quality-haccp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Sensory panel samples should be coded so that tasters cannot identify them.",
+   "answer": true,
+   "explanation": "Blind coding avoids bias.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e16",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "gceal-food-science-quality-haccp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the HACCP principle with its meaning.",
+   "pairs": [
+    [
+     "Monitoring",
+     "Checking the CCP limit during production"
+    ],
+    [
+     "Corrective action",
+     "What to do when a limit is missed"
+    ],
+    [
+     "Verification",
+     "Checking that the system works"
+    ],
+    [
+     "Hazard analysis",
+     "Identifying what could go wrong"
+    ]
+   ],
+   "explanation": "Standard principles.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-food-science-quality-haccp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Design a HACCP summary for fried fish sold at a roadside stall (hazard, CCP, limit, monitoring).",
+   "model": "Hazard: bacteria (from raw fish, handling) and cross-contamination. CCP: cooking (core temperature) and cold or hot holding. Limit: fish cooked until hot and firm throughout; hot-holding above about 60 degrees or sold quickly. Monitoring: visual check and thermometer if available; corrective: recook; also clean hands and water.",
+   "rubric": "1 mark each of hazard, CCP, limit, monitoring.",
+   "explanation": "Hazard: bacteria (from raw fish, handling) and cross-contamination. CCP: cooking (core temperature) and cold or hot holding. Limit: fish cooked until hot and firm throughout; hot-holding above about 60 degrees or sold quickly. Monitoring: visual check and thermometer if available; corrective: recook; also clean hands and water.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-food-science-quality-haccp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A small factory in Limbe produces fruit juice in bottles.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A chemical hazard here might be",
+     "choices": [
+      "cleaning-chemical residue in bottles",
+      "a stone",
+      "hair",
+      "a bottle cap"
+     ],
+     "answer": 0,
+     "explanation": "Chemical.",
+     "id": "gceal-food-science-microbiology-processing-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A suitable CCP is",
+     "choices": [
+      "labelling the juice",
+      "price",
+      "bottle colour",
+      "pasteurisation or heating step"
+     ],
+     "answer": 3,
+     "explanation": "Kill step.",
+     "id": "gceal-food-science-microbiology-processing-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State two records the factory should keep.",
+     "model": "Pasteurisation temperature and time for each batch; supplier and ingredient records; cleaning records.",
+     "rubric": "1 mark each.",
+     "explanation": "Pasteurisation temperature and time for each batch; supplier and ingredient records; cleaning records.",
+     "id": "gceal-food-science-microbiology-processing-e18-c"
+    }
+   ],
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-quality-haccp-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-quality-haccp",
+   "prompt": "Traceability means",
+   "choices": [
+    "taxing food",
+    "being able to follow a product back and forward in the supply chain",
+    "making food sweeter",
+    "freezing food"
+   ],
+   "answer": 1,
+   "explanation": "Traceability.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-quality-haccp-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-quality-haccp",
+   "prompt": "Allergens include",
+   "choices": [
+    "water and salt only",
+    "peanuts and eggs",
+    "only air",
+    "only sugar"
+   ],
+   "answer": 1,
+   "explanation": "Allergens.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-quality-haccp-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-quality-haccp",
+   "prompt": "Hedonic scale tests",
+   "choices": [
+    "how much tasters like a food",
+    "weight",
+    "price",
+    "the chemical formula"
+   ],
+   "answer": 0,
+   "explanation": "Liking.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-quality-haccp-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-quality-haccp",
+   "prompt": "GMP stands for",
+   "choices": [
+    "good market price",
+    "good manufacturing practice",
+    "general milk process",
+    "great meal plan"
+   ],
+   "answer": 1,
+   "explanation": "GMP.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-quality-haccp-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-food-science-quality-haccp",
+   "prompt": "Corrective action happens when",
+   "choices": [
+    "never",
+    "after packaging only",
+    "a critical limit is not met",
+    "every day only"
+   ],
+   "answer": 2,
+   "explanation": "Action.",
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-m01",
+   "kind": "numeric",
+   "tier": "examen",
+   "lesson": "gceal-food-science-food-microbiology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "N0 = 100 cells, 4 generations. N =",
+   "answer": 1600,
+   "tolerance": 0,
+   "explanation": "100 x 2^4 = 1600.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-m02",
+   "kind": "truefalse",
+   "tier": "examen",
+   "lesson": "gceal-food-science-quality-haccp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A critical control point is any step in a recipe.",
+   "answer": false,
+   "explanation": "It is a step where control is essential and a measurable limit exists.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceal-food-science-microbiology-processing"
+  },
+  {
+   "id": "gceal-food-science-microbiology-processing-m03",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-food-science-processing-technology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Heat processing.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "D = 2.5 min. Minutes for a 6-log reduction",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "6 x 2.5 = 15.",
+     "id": "gceal-food-science-microbiology-processing-m03-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which process gives milk a long unopened shelf life without refrigeration?",
+     "choices": [
+      "Refrigeration",
+      "Pasteurisation at 72 degrees for 15 seconds",
+      "UHT with aseptic packing",
+      "Salting"
+     ],
+     "answer": 2,
+     "explanation": "UHT.",
+     "id": "gceal-food-science-microbiology-processing-m03-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why pasteurised milk is still refrigerated.",
+     "model": "Pasteurisation kills pathogens but not all organisms; cold slows growth of survivors and spoilage organisms.",
+     "rubric": "1 mark each of survivors, cold slows growth.",
+     "explanation": "Pasteurisation kills pathogens but not all organisms; cold slows growth of survivors and spoilage organisms.",
+     "id": "gceal-food-science-microbiology-processing-m03-c"
+    }
+   ],
+   "chapter": "gceal-food-science-microbiology-processing"
+  }
+ ]
+}

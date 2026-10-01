@@ -10,14 +10,60 @@
   "subject": "english",
   "exam": "FSLC",
   "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text",
-  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
   "status": "draft",
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-01",
   "chapters": [
-    {"id": "fslc-english-reading", "title": "Reading comprehension", "order": 1, "programRef": "Class 6 English — Reading: comprehension of short texts, vocabulary in context, main idea (to be checked against the official text)"},
-    {"id": "fslc-english-tenses", "title": "Tenses", "order": 2, "programRef": "Class 6 English — Grammar: present, past, present perfect and future tenses (to be checked against the official text)"},
-    {"id": "fslc-english-grammar", "title": "Grammar: concord, plurals, pronouns, prepositions", "order": 3, "programRef": "Class 6 English — Grammar: subject-verb agreement, nouns (plurals), pronouns, prepositions (to be checked against the official text)"},
-    {"id": "fslc-english-composition", "title": "Composition: friendly letter and short story", "order": 4, "programRef": "Class 6 English — Writing: informal letter, narrative composition (to be checked against the official text)"}
+    {
+      "id": "fslc-english-reading",
+      "title": "Reading comprehension",
+      "order": 1,
+      "programRef": "Class 6 English — Reading: comprehension of short texts, vocabulary in context, main idea (to be checked against the official text)"
+    },
+    {
+      "id": "fslc-english-tenses",
+      "title": "Tenses",
+      "order": 2,
+      "programRef": "Class 6 English — Grammar: present, past, present perfect and future tenses (to be checked against the official text)"
+    },
+    {
+      "id": "fslc-english-grammar",
+      "title": "Grammar: concord, plurals, pronouns, prepositions",
+      "order": 3,
+      "programRef": "Class 6 English — Grammar: subject-verb agreement, nouns (plurals), pronouns, prepositions (to be checked against the official text)"
+    },
+    {
+      "id": "fslc-english-composition",
+      "title": "Composition: friendly letter and short story",
+      "order": 4,
+      "programRef": "Class 6 English — Writing: informal letter, narrative composition (to be checked against the official text)"
+    },
+    {
+      "id": "fslc-english-word-classes",
+      "title": "Parts of speech",
+      "order": 5,
+      "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text"
+    },
+    {
+      "id": "fslc-english-sentence-skills",
+      "title": "Sentences: types, voice, reported speech and conditionals",
+      "order": 6,
+      "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text"
+    },
+    {
+      "id": "fslc-english-reading-skills",
+      "title": "Reading skills: strategies for comprehension",
+      "order": 7,
+      "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text"
+    },
+    {
+      "id": "fslc-english-writing-oral",
+      "title": "Writing, poetry and oral English",
+      "order": 8,
+      "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text"
+    }
   ],
   "mockExams": [
     {
@@ -27,10 +73,64 @@
       "instructions": "Time: 1 hour 30 minutes. Marked out of 20. Answer ALL the questions in Sections A, B and C. In Section D, choose ONE topic only. Read each question carefully and check your spelling. This paper is a practice paper written for CastBridge: the format (time, marks, sections) is to be checked against the official texts.",
       "outOf": 20,
       "sections": [
-        {"title": "Section A — Reading comprehension (6 marks)", "exercises": ["fslc-english-mock-reading"]},
-        {"title": "Section B — Grammar (5 marks)", "exercises": ["fslc-english-mock-grammar"]},
-        {"title": "Section C — Tenses (4 marks)", "exercises": ["fslc-english-mock-tenses"]},
-        {"title": "Section D — Composition (5 marks)", "exercises": ["fslc-english-mock-composition"]}
+        {
+          "title": "Section A — Reading comprehension (6 marks)",
+          "exercises": [
+            "fslc-english-mock-reading"
+          ]
+        },
+        {
+          "title": "Section B — Grammar (5 marks)",
+          "exercises": [
+            "fslc-english-mock-grammar"
+          ]
+        },
+        {
+          "title": "Section C — Tenses (4 marks)",
+          "exercises": [
+            "fslc-english-mock-tenses"
+          ]
+        },
+        {
+          "title": "Section D — Composition (5 marks)",
+          "exercises": [
+            "fslc-english-mock-composition"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fslc-english-mock-2",
+      "title": "FSLC mock paper 2 — English Language",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Time: 1 hour 30 minutes. Marked out of 20. Answer ALL the questions. Read each question carefully and check your spelling. Practice paper written for CastBridge; the format (time, marks, sections) is to be checked against the official texts.",
+      "sections": [
+        {
+          "title": "Section A — Reading comprehension (6 marks)",
+          "exercises": [
+            "fslc-english-writing-oral-m01"
+          ]
+        },
+        {
+          "title": "Section B — Grammar and vocabulary (8 marks)",
+          "exercises": [
+            "fslc-english-writing-oral-m02",
+            "fslc-english-writing-oral-m03",
+            "fslc-english-writing-oral-m04",
+            "fslc-english-writing-oral-m05",
+            "fslc-english-writing-oral-m06",
+            "fslc-english-writing-oral-m07",
+            "fslc-english-writing-oral-m08",
+            "fslc-english-writing-oral-m09"
+          ]
+        },
+        {
+          "title": "Section C — Composition: informal letter (6 marks)",
+          "exercises": [
+            "fslc-english-writing-oral-m10"
+          ]
+        }
       ]
     }
   ]

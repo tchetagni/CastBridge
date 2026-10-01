@@ -1,0 +1,504 @@
+{
+ "chapter": "gceol-chemistry-cameroon",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-everyday-chemistry",
+   "title": "Chemistry in Cameroonian life: farming, fuels, building and the home",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Applications of chemistry: industrial and everyday processes (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Link chemical ideas to cocoa and palm-oil processing, soap making and cooking fuels.",
+    "Relate fuels (petrol, diesel, kerosene, gas, charcoal) to hydrocarbons and combustion.",
+    "Explain the chemistry of limestone, cement, galvanised roofing and water safety.",
+    "Carry out simple calculations from local contexts."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-soap-fats",
+    "gceol-chemistry-nitrogen-fertilisers",
+    "gceol-chemistry-alkanes-petroleum"
+   ],
+   "exercises": [
+    "gceol-chemistry-cameroon-e01",
+    "gceol-chemistry-cameroon-e02",
+    "gceol-chemistry-cameroon-e03",
+    "gceol-chemistry-cameroon-e04",
+    "gceol-chemistry-cameroon-e05",
+    "gceol-chemistry-cameroon-e06",
+    "gceol-chemistry-cameroon-e07"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-everyday-chemistry-q1",
+    "gceol-chemistry-everyday-chemistry-q2",
+    "gceol-chemistry-everyday-chemistry-q3",
+    "gceol-chemistry-everyday-chemistry-q4",
+    "gceol-chemistry-everyday-chemistry-q5"
+   ],
+   "reviewNotes": [
+    "This lesson links chapters rather than adding new syllabus content; check that every process described (cocoa fermentation, SONARA, local soap making) is accurate and current for the region.",
+    "No production statistics, prices or company data are given.",
+    "Biogas is mentioned as a small-scale methane source from waste; digester design is not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Farming and food",
+     "md": "**Cocoa and coffee**: after harvest cocoa beans are fermented for several days in heaps or boxes: microorganisms act on the sugary pulp, giving heat, ethanol and then ethanoic acid, which helps develop the flavour; the beans are then dried. **Palm oil**: oil from palm fruits is a mixture of esters (triglycerides); it is used in cooking and, with sodium hydroxide, in **soap making** (saponification). **Fertilisers** (N, P, K) replace nutrients taken by crops such as maize, cocoa and vegetables; excess causes pollution (eutrophication)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Fuels",
+     "md": "**Petrol, diesel, kerosene (paraffin) and cooking gas (LPG)** are fractions of **crude oil**, separated in a refinery such as **SONARA at Limbe**; they are mixtures of hydrocarbons which release CO₂ and heat when burned. **Charcoal and firewood** are widely used for cooking: burning in a closed room produces poisonous **carbon monoxide**. **Biogas** (mainly methane) can be produced from animal and plant waste and burned as fuel."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Building and the home",
+     "md": "**Limestone** (calcium carbonate) is heated to make quicklime: CaCO₃ → CaO + CO₂; limestone is also a raw material for **cement**. **Galvanised iron (zinc-coated)** roofing resists rust because zinc protects the iron. **Aluminium** is used for pots and window frames because it resists corrosion. **Safe water**: settle, filter, then boil or chlorinate."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Fuels from crude oil and from fermentation (ethanol) are different families; both release CO₂ when burned.\n- Never burn charcoal or use a gas ring for heating in a closed room.\n- Handle caustic soda, kerosene and fertilisers carefully, away from children and from drinking water."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 85,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 92,
+        "text": "palm fruit",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 108,
+        "text": "→ palm oil",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 70,
+        "w": 85,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 162,
+        "y": 92,
+        "text": "oil + NaOH",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 162,
+        "y": 108,
+        "text": "(heated)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 70,
+        "w": 70,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 92,
+        "text": "soap +",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 108,
+        "text": "glycerol",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 70,
+        "w": 70,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 92,
+        "text": "add salt:",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 108,
+        "text": "soap rises",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 95,
+        "x2": 120,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 95,
+        "x2": 230,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 95,
+        "x2": 320,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Steps in making soap from palm oil: heat the oil with sodium hydroxide, then separate the soap with salt.",
+     "alt": "Four boxes joined by arrows: palm oil, oil with sodium hydroxide heated, soap and glycerol, salt added to separate the soap."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — lime from limestone",
+     "statement": "A kiln heats 1000 kg of pure calcium carbonate: CaCO₃ → CaO + CO₂ (Ca 40, C 12, O 16). Find the mass of quicklime and the mass of CO₂.",
+     "steps": [
+      "n(CaCO₃) = 1 000 000 g ÷ 100 = 10 000 mol (10 kmol) = n(CaO) = n(CO₂).",
+      "Mass CaO = 10 kmol × 56 = 560 kg; mass CO₂ = 10 kmol × 44 = 440 kg (check: 560 + 440 = 1000 kg)."
+     ],
+     "answer": "560 kg of CaO and 440 kg of CO₂"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — air for biogas",
+     "statement": "Biogas is mainly methane: CH₄ + 2O₂ → CO₂ + 2H₂O. If air is taken as one-fifth oxygen by volume, what volume of air is needed to burn 1 m³ of methane completely (same temperature and pressure)?",
+     "steps": [
+      "Gas volumes follow the mole ratio: 1 m³ of CH₄ needs 2 m³ of O₂.",
+      "Air is one-fifth oxygen, so volume of air = 2 × 5 = 10 m³."
+     ],
+     "answer": "10 m³ of air"
+    }
+   ],
+   "chapter": "gceol-chemistry-cameroon"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-cameroon-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why is it dangerous to use a charcoal stove in a closed room?",
+   "choices": [
+    "Incomplete combustion produces poisonous carbon monoxide",
+    "It makes the room too bright",
+    "Charcoal explodes with air",
+    "Charcoal produces chlorine"
+   ],
+   "answer": 0,
+   "explanation": "CO has no smell and reduces oxygen transport in blood.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-cameroon-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is a fraction of crude oil?",
+   "choices": [
+    "kerosene",
+    "glycerol",
+    "bauxite",
+    "quicklime"
+   ],
+   "answer": 0,
+   "explanation": "Kerosene (paraffin) is a fraction.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-cameroon-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Soap can be made by heating palm oil with sodium hydroxide.",
+   "answer": true,
+   "explanation": "This is saponification, giving soap and glycerol.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-cameroon-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each everyday process to the chemistry behind it.",
+   "pairs": [
+    [
+     "soap from palm oil",
+     "saponification"
+    ],
+    [
+     "cocoa bean fermentation",
+     "action of microorganisms on sugar"
+    ],
+    [
+     "galvanised roof",
+     "zinc protects iron from rusting"
+    ],
+    [
+     "quicklime from limestone",
+     "thermal decomposition"
+    ]
+   ],
+   "explanation": "Each process uses ideas from earlier lessons.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-cameroon-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many kg of quicklime (CaO, Mr 56) can be made from 500 kg of calcium carbonate (Mr 100)?",
+   "answer": 280,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "500 ÷ 100 = 5 kmol; 5 × 56 = 280 kg.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-cameroon-e06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer in the Western Highlands applies large amounts of fertiliser and the stream below turns green. Explain what is happening and suggest how to prevent it.",
+   "model": "Excess fertiliser washes into the stream and causes algae to grow rapidly (eutrophication); when the algae die, bacteria use up oxygen and fish die. Use only the amount needed, avoid applying before rain, and keep buffer strips of plants beside streams.",
+   "rubric": "1 mark: runoff/algae growth; 1 mark: oxygen depletion; 1 mark: prevention.",
+   "explanation": "Excess fertiliser washes into the stream and causes algae to grow rapidly (eutrophication); when the algae die, bacteria use up oxygen and fish die. Use only the amount needed, avoid applying before rain, and keep buffer strips of plants beside streams.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-cameroon-e07",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A household in a Cameroonian town cooks with a gas cylinder (butane, C₄H₁₀), with charcoal, and sometimes with kerosene.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which two of these fuels are obtained from crude oil?",
+     "choices": [
+      "butane and kerosene",
+      "butane and charcoal",
+      "charcoal and kerosene",
+      "only charcoal"
+     ],
+     "answer": 0,
+     "explanation": "Charcoal is made from wood.",
+     "id": "gceol-chemistry-cameroon-e07-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which gas formed in poor ventilation is poisonous?",
+     "choices": [
+      "nitrogen",
+      "water vapour",
+      "carbon monoxide",
+      "carbon dioxide"
+     ],
+     "answer": 2,
+     "explanation": "Incomplete combustion.",
+     "id": "gceol-chemistry-cameroon-e07-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many moles of CO₂ are formed when 1 mol of butane burns completely (C₄H₁₀ gives 4CO₂)?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "Each carbon atom gives one CO₂: 4 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-cameroon-e07-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give two safety rules for cooking at home.",
+     "model": "Cook in a well-ventilated place; keep gas cylinders upright and check for leaks; keep kerosene in labelled containers away from children and flames; never burn charcoal in a closed room.",
+     "rubric": "1 mark each; any two.",
+     "explanation": "Cook in a well-ventilated place; keep gas cylinders upright and check for leaks; keep kerosene in labelled containers away from children and flames; never burn charcoal in a closed room.",
+     "id": "gceol-chemistry-cameroon-e07-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-everyday-chemistry-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "prompt": "SONARA is Cameroon's",
+   "choices": [
+    "cement works",
+    "water treatment plant",
+    "palm oil mill",
+    "oil refinery (at Limbe)"
+   ],
+   "answer": 3,
+   "explanation": "It processes crude oil into fuels.",
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-everyday-chemistry-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "prompt": "Fermented cocoa beans are then",
+   "choices": [
+    "burnt",
+    "distilled",
+    "frozen",
+    "dried"
+   ],
+   "answer": 3,
+   "explanation": "Drying follows fermentation.",
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-everyday-chemistry-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "prompt": "Quicklime is formed by heating",
+   "choices": [
+    "calcium carbonate",
+    "sand",
+    "calcium chloride",
+    "sodium chloride"
+   ],
+   "answer": 0,
+   "explanation": "CaCO₃ → CaO + CO₂.",
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-everyday-chemistry-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "prompt": "Galvanised roofing is iron coated with",
+   "choices": [
+    "copper",
+    "silver",
+    "gold",
+    "zinc"
+   ],
+   "answer": 3,
+   "explanation": "Zinc protects the iron.",
+   "chapter": "gceol-chemistry-cameroon"
+  },
+  {
+   "id": "gceol-chemistry-everyday-chemistry-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-everyday-chemistry",
+   "prompt": "Biogas is mainly",
+   "choices": [
+    "nitrogen",
+    "chlorine",
+    "methane",
+    "oxygen"
+   ],
+   "answer": 2,
+   "explanation": "From the decay of waste without air.",
+   "chapter": "gceol-chemistry-cameroon"
+  }
+ ]
+}

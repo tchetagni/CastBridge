@@ -1,0 +1,791 @@
+{
+ "chapter": "gceal-maths-vectors3d",
+ "lessons": [
+  {
+   "id": "gceal-maths-vectors-3d",
+   "title": "Vectors in three dimensions: lines and planes",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use 3-D vectors, magnitude and the scalar product",
+    "Write and use vector equations of lines",
+    "Use the equation of a plane $ax+by+cz=d$ and find intersections"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-vectors3d-e01",
+    "gceal-maths-vectors3d-e02",
+    "gceal-maths-vectors3d-e03",
+    "gceal-maths-vectors3d-e04",
+    "gceal-maths-vectors3d-e05",
+    "gceal-maths-vectors3d-e06"
+   ],
+   "selfCheck": [
+    "gceal-maths-vectors-3d-q1",
+    "gceal-maths-vectors-3d-q2",
+    "gceal-maths-vectors-3d-q3",
+    "gceal-maths-vectors-3d-q4",
+    "gceal-maths-vectors-3d-q5"
+   ],
+   "reviewNotes": [
+    "Cross product, shortest distance between skew lines and plane in parametric form are not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Basics in 3-D",
+     "md": "$|(x,y,z)|=\\sqrt{x^2+y^2+z^2}$. Scalar product: $\\vec a\\cdot\\vec b=a_1b_1+a_2b_2+a_3b_3=|\\vec a||\\vec b|\\cos\\theta$. Perpendicular vectors have scalar product 0."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Lines and planes",
+     "md": "Line through $A$ with direction $\\vec d$: $\\vec r=\\vec a+t\\vec d$. A plane with normal $\\vec n=(a,b,c)$ through a point has equation $ax+by+cz=d$ (with $d=\\vec n\\cdot$ point). The angle between a line and a plane is $90\\degree$ minus the angle between the line and the normal."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Line meets plane",
+     "md": "Write the point of the line as $(x(t),y(t),z(t))$, substitute into the plane equation and solve for $t$. If the $t$ terms cancel and the equation is false the line is parallel to the plane (no intersection); if true the line lies in the plane."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Two lines in 3-D that do not meet are not always parallel: they may be **skew**. The angle between two lines uses their DIRECTION vectors, not position vectors. Remember to take the acute angle when needed."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the angle between lines with directions $(1,2,2)$ and $(2,-1,2)$.",
+     "steps": [
+      "$\\vec a\\cdot\\vec b=2-2+4=4$; $|\\vec a|=3$, $|\\vec b|=3$.",
+      "$\\cos\\theta=\\frac{4}{9}$, so $\\theta=63.6\\degree$."
+     ],
+     "answer": "$\\theta\\approx63.6\\degree$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find where the line $\\vec r=(1,2,3)+t(2,-1,1)$ meets the plane $x+y+z=12$.",
+     "steps": [
+      "Point: $(1+2t,\\;2-t,\\;3+t)$. Sum $=6+2t=12$, so $t=3$.",
+      "Point: $(7,-1,6)$. Check: $7-1+6=12$."
+     ],
+     "answer": "$(7,-1,6)$",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         90,
+         190,
+         290,
+         190,
+         330,
+         130,
+         130,
+         130
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 220,
+        "x2": 330,
+        "y2": 40,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 205,
+        "cy": 134,
+        "r": 5,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 122,
+        "text": "P",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 40,
+        "text": "line",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 180,
+        "text": "plane",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-proof",
+   "title": "Proof",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Prove statements by deduction",
+    "Disprove by counterexample",
+    "Prove by contradiction"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-vectors3d-e07",
+    "gceal-maths-vectors3d-e08",
+    "gceal-maths-vectors3d-e09",
+    "gceal-maths-vectors3d-e10",
+    "gceal-maths-vectors3d-e11",
+    "gceal-maths-vectors3d-e12"
+   ],
+   "selfCheck": [
+    "gceal-maths-proof-q1",
+    "gceal-maths-proof-q2",
+    "gceal-maths-proof-q3",
+    "gceal-maths-proof-q4",
+    "gceal-maths-proof-q5"
+   ],
+   "reviewNotes": [
+    "Proof by induction is included in the Further Mathematics packs; check whether the Advanced Level Mathematics syllabus also includes it.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Types of proof",
+     "md": "**Deduction**: start from known facts and argue step by step (use algebra, e.g. odd number $=2k+1$). **Counterexample**: one case where a statement fails disproves it. **Contradiction**: assume the statement is false, derive something impossible, so the statement is true."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Algebraic proofs",
+     "md": "Represent even numbers as $2k$, odd numbers as $2k+1$, consecutive integers as $n$, $n+1$. Show the final expression has the required form (e.g. is a multiple of 2). Writing 'for all integers $k$' and a clear concluding sentence earns the marks."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Checking a few examples is NOT a proof (the statement $n^2+n+41$ is prime for $n=0,s',39$ but fails at $n=40$).\n- Starting from the result you want to prove and 'working backwards' without logical equivalence.\n- Forgetting to state the conclusion."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Prove that the sum of two odd numbers is even.",
+     "steps": [
+      "Let the numbers be $2m+1$ and $2n+1$ where $m,n$ are integers.",
+      "Sum $=2m+2n+2=2(m+n+1)$, a multiple of 2, so it is even."
+     ],
+     "answer": "Proved",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 20,
+        "w": 320,
+        "h": 34,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 42,
+        "text": "Assume √2 = a/b (lowest terms)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 54,
+        "x2": 200,
+        "y2": 78,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 78,
+        "w": 320,
+        "h": 34,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 100,
+        "text": "a² = 2b²  so a is even, a = 2k",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 112,
+        "x2": 200,
+        "y2": 136,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 136,
+        "w": 320,
+        "h": 34,
+        "stroke": "blue",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 158,
+        "text": "4k² = 2b²  so b² = 2k², b is even",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 170,
+        "x2": 200,
+        "y2": 194,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 194,
+        "w": 320,
+        "h": 34,
+        "stroke": "red",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 216,
+        "text": "a, b both even: contradiction",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Show that $n^2>n$ is false for some positive integer $n$.",
+     "steps": [
+      "A single counterexample is enough: take $n=1$.",
+      "$1^2=1$ and $1>1$ is false."
+     ],
+     "answer": "Counterexample $n=1$"
+    }
+   ],
+   "chapter": "gceal-maths-vectors3d"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-maths-vectors3d-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-vectors-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $|(2,3,6)|$.",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "$\\sqrt{4+9+36}=7$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-vectors-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The angle between $(1,0,0)$ and $(1,1,0)$ is",
+   "choices": [
+    "$60\\degree$",
+    "$90\\degree$",
+    "$30\\degree$",
+    "$45\\degree$"
+   ],
+   "answer": 3,
+   "explanation": "$\\cos\\theta=\\frac{1}{\\sqrt2}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-vectors-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two lines in 3-D that never meet must be parallel.",
+   "answer": false,
+   "explanation": "They may be skew (not parallel, not meeting).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-vectors-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The plane through the origin with normal $(2,1,-1)$ has equation",
+   "choices": [
+    "$2x+y-z=0$",
+    "$x+2y-z=0$",
+    "$2x+y-z=1$",
+    "$2x-y+z=0$"
+   ],
+   "answer": 0,
+   "explanation": "$ax+by+cz=d$ with $d=0$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-vectors-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Show that the line $\\vec r=(0,1,2)+t(1,1,-1)$ does not meet the plane $2x-y+z=5$.",
+   "model": "Point: $(t,1+t,2-t)$. Substitute: $2t-(1+t)+(2-t)=1$. The $t$ terms cancel and $1\\neq5$, so there is no solution: the line is parallel to the plane and does not meet it.",
+   "rubric": [
+    "Parametric point (1)",
+    "Substitution gives $1=5$ (1)",
+    "Conclusion (1)"
+   ],
+   "explanation": "Point: $(t,1+t,2-t)$. Substitute: $2t-(1+t)+(2-t)=1$. The $t$ terms cancel and $1\\neq5$, so there is no solution: the line is parallel to the plane and does not meet it.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-vectors-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$A(1,2,3)$ and $B(3,1,4)$. The line $AB$ meets the plane $x+y+z=12$ at $P$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $|\\vec{AB}|$ (3 d.p.).",
+     "answer": 2.449,
+     "tolerance": 0.001,
+     "explanation": "$\\vec{AB}=(2,-1,1)$, $\\sqrt{6}=2.449$.",
+     "id": "gceal-maths-vectors3d-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the x-coordinate of $P$.",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "Line $(1+2t,2-t,3+t)$; $6+2t=12$ so $t=3$ and $x=7$.",
+     "id": "gceal-maths-vectors3d-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the angle between $AB$ and the plane (1 d.p., degrees).",
+     "answer": 28.1,
+     "tolerance": 0.1,
+     "explanation": "Angle with the normal $(1,1,1)$: $\\cos\\phi=\\frac{2}{\\sqrt6\\sqrt3}=0.4714$, $\\phi=61.9\\degree$; the angle with the plane is $90-61.9=28.1\\degree$.",
+     "id": "gceal-maths-vectors3d-e06-c"
+    }
+   ],
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors-3d-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-vectors-3d",
+   "prompt": "$(1,2,3)\\cdot(4,-5,6)=$",
+   "choices": [
+    "$32$",
+    "$(4,-10,18)$",
+    "$12$",
+    "$-12$"
+   ],
+   "answer": 2,
+   "explanation": "$4-10+18$.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors-3d-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-vectors-3d",
+   "prompt": "The direction of $\\vec r=(1,0,2)+t(3,1,-2)$ is",
+   "choices": [
+    "$t$",
+    "$(4,1,0)$",
+    "$(3,1,-2)$",
+    "$(1,0,2)$"
+   ],
+   "answer": 2,
+   "explanation": "Coefficient of $t$.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors-3d-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-vectors-3d",
+   "prompt": "A normal to $3x-y+2z=7$ is",
+   "choices": [
+    "$(7,0,0)$",
+    "$(3,1,2)$",
+    "$(3,-1,2)$",
+    "$(1,1,1)$"
+   ],
+   "answer": 2,
+   "explanation": "Coefficients.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors-3d-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-vectors-3d",
+   "prompt": "$(2,-1,3)\\perp(1,k,0)$ when $k=$",
+   "choices": [
+    "$-2$",
+    "$2$",
+    "$\\frac{1}{2}$",
+    "$0$"
+   ],
+   "answer": 1,
+   "explanation": "$2-k=0$.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors-3d-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-vectors-3d",
+   "prompt": "Skew lines are",
+   "choices": [
+    "parallel",
+    "intersecting",
+    "the same line",
+    "not parallel and do not meet"
+   ],
+   "answer": 3,
+   "explanation": "Only in 3-D.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-proof",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the smallest positive integer $n$ for which $n^2+n+41$ is not prime?",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "For $n=40$: $40^2+40+41=1681=41^2$. Every smaller $n\\geq1$ gives a prime.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-proof",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A counterexample to 'every prime is odd' is",
+   "choices": [
+    "$1$",
+    "$2$",
+    "$4$",
+    "$9$"
+   ],
+   "answer": 1,
+   "explanation": "$2$ is prime and even.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-proof",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Checking that a statement holds for 5 examples proves it is true.",
+   "answer": false,
+   "explanation": "Examples never prove a general statement; one counterexample can disprove it.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-proof",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Prove by contradiction that there is no largest integer. The first step is to",
+   "choices": [
+    "assume there is a largest integer $N$",
+    "assume $N+1$ is not an integer",
+    "show $N$ is even",
+    "choose $N=0$"
+   ],
+   "answer": 0,
+   "explanation": "Then $N+1>N$ is an integer, a contradiction.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-proof",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Prove that the product of two consecutive integers is even.",
+   "model": "Let the integers be $n$ and $n+1$. If $n$ is even, $n=2k$ and the product is $2k(n+1)$, even. If $n$ is odd, $n+1$ is even, $n+1=2k$, and the product $n\\cdot2k$ is even. In both cases the product is even.",
+   "rubric": [
+    "Sets up $n$, $n+1$ (1)",
+    "Considers both cases (1)",
+    "Concludes (1)"
+   ],
+   "explanation": "Let the integers be $n$ and $n+1$. If $n$ is even, $n=2k$ and the product is $2k(n+1)$, even. If $n$ is odd, $n+1$ is even, $n+1=2k$, and the product $n\\cdot2k$ is even. In both cases the product is even.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-proof",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Consider the statement: 'for every positive integer $n$, $n^3-n$ is divisible by 6'.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "$n^3-n$ factorises as",
+     "choices": [
+      "$n(n-1)^2$",
+      "$(n-1)n(n+1)$",
+      "$n(n+1)^2$",
+      "$(n^2-1)(n+1)$"
+     ],
+     "answer": 1,
+     "explanation": "$n^3-n=n(n^2-1)=n(n-1)(n+1)$.",
+     "id": "gceal-maths-vectors3d-e12-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The product of three consecutive integers always contains a multiple of 2 and a multiple of 3, which proves the statement.",
+     "answer": true,
+     "explanation": "A product with a factor 2 and a factor 3 (different numbers, coprime) is divisible by 6.",
+     "id": "gceal-maths-vectors3d-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Evaluate $n^3-n$ for $n=5$.",
+     "answer": 120,
+     "tolerance": 0,
+     "explanation": "$125-5=120=6\\times20$.",
+     "id": "gceal-maths-vectors3d-e12-c"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The statement 'for all integers $n$, $n^2+n+41$ is prime' is false.",
+     "answer": true,
+     "explanation": "$n=40$ gives $41^2$.",
+     "id": "gceal-maths-vectors3d-e12-d"
+    }
+   ],
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-proof-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-proof",
+   "prompt": "An even number can be written as",
+   "choices": [
+    "$2k+1$",
+    "$2k$",
+    "$k^2$",
+    "$k+2$"
+   ],
+   "answer": 1,
+   "explanation": "Multiple of 2.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-proof-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-proof",
+   "prompt": "An odd number can be written as",
+   "choices": [
+    "$2k-2$",
+    "$2k+1$",
+    "$k^2$",
+    "$2k$"
+   ],
+   "answer": 1,
+   "explanation": "One more than a multiple of 2.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-proof-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-proof",
+   "prompt": "To disprove a general statement it is enough to give",
+   "choices": [
+    "one counterexample",
+    "a calculation with decimals",
+    "three examples",
+    "a graph"
+   ],
+   "answer": 0,
+   "explanation": "Logic.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-proof-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-proof",
+   "prompt": "In proof by contradiction we assume",
+   "choices": [
+    "a specific example",
+    "the statement is true",
+    "the opposite of what we want to prove",
+    "nothing"
+   ],
+   "answer": 2,
+   "explanation": "Then derive impossibility.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-proof-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-proof",
+   "prompt": "$(2m+1)^2$ is",
+   "choices": [
+    "negative",
+    "a multiple of 4",
+    "odd",
+    "even"
+   ],
+   "answer": 2,
+   "explanation": "$4m^2+4m+1$.",
+   "chapter": "gceal-maths-vectors3d"
+  },
+  {
+   "id": "gceal-maths-vectors3d-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-maths-vectors-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The angle between the lines with directions $(1,2,2)$ and $(2,-1,2)$ is",
+   "choices": [
+    "$116.4\\degree$",
+    "$63.6\\degree$",
+    "$41.8\\degree$",
+    "$26.4\\degree$"
+   ],
+   "answer": 1,
+   "explanation": "$\\cos\\theta=\\frac{2-2+4}{3\\times3}=\\frac{4}{9}$, so $\\theta=63.6\\degree$.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-maths-vectors3d"
+  }
+ ]
+}

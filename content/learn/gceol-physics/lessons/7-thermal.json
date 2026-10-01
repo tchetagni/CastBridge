@@ -1,0 +1,1881 @@
+{
+ "chapter": "gceol-physics-thermal",
+ "lessons": [
+  {
+   "id": "gceol-physics-temperature-expansion",
+   "title": "Temperature, thermometers and expansion",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Thermal physics: temperature, expansion, gas laws, heat capacity, change of state, heat transfer (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish heat and temperature and describe the kinetic model of matter.",
+    "Describe liquid-in-glass thermometers, fixed points and the Kelvin scale.",
+    "Describe expansion of solids, liquids and gases and its uses and problems.",
+    "Use T(K) = θ(°C) + 273 and the linear scale of a thermometer."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-physics-thermal-e01",
+    "gceol-physics-thermal-e02",
+    "gceol-physics-thermal-e03",
+    "gceol-physics-thermal-e04",
+    "gceol-physics-thermal-e05",
+    "gceol-physics-thermal-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-temperature-expansion-q1",
+    "gceol-physics-temperature-expansion-q2",
+    "gceol-physics-temperature-expansion-q3",
+    "gceol-physics-temperature-expansion-q4",
+    "gceol-physics-temperature-expansion-q5"
+   ],
+   "reviewNotes": [
+    "Kelvin conversion uses 273 (273.15 is more exact). Anomalous expansion of water (4 °C) may be in the syllabus; not detailed here.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Heat and temperature",
+     "md": "**Heat** is energy transferred because of a temperature difference (joule). **Temperature** measures how hot something is (°C or K): it is related to the average kinetic energy of the particles. In solids particles vibrate in fixed places, in liquids they slide past each other, in gases they move freely and far apart."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Thermometers and scales",
+     "md": "A liquid-in-glass thermometer uses the expansion of mercury or coloured alcohol. Fixed points: **0 °C** (pure melting ice) and **100 °C** (steam above boiling water at normal pressure); the scale in between is divided into 100 equal steps. **Kelvin scale**: $T(K) = \\theta(°C) + 273$; 0 K (−273 °C) is the lowest possible temperature."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Expansion",
+     "md": "When heated, most solids, liquids and gases **expand** (particles vibrate or move more). Gases expand most, solids least.\n\n- Uses: **bimetallic strip** (two metals bend as they heat unequally) in thermostats and fire alarms.\n- Problems: gaps are left in railway lines and bridges; telephone and power cables sag in hot weather."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Heat and temperature are not the same: a bath of lukewarm water holds more heat than a hot cup of tea.\n- A temperature **difference** has the same number in °C and K, but a temperature itself does not."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 40,
+        "w": 14,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 67,
+        "cy": 205,
+        "r": 16,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 61,
+        "y": 120,
+        "w": 12,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 190,
+        "x2": 100,
+        "y2": 190,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 195,
+        "text": "0 °C",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 40,
+        "x2": 100,
+        "y2": 40,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 45,
+        "text": "100 °C",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 120,
+        "x2": 100,
+        "y2": 120,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 125,
+        "text": "35 °C",
+        "size": 14,
+        "anchor": "middle",
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "A thermometer with fixed points at 0 °C and 100 °C; the column length changes linearly with temperature.",
+     "alt": "A vertical liquid thermometer with marks at 0 and 100 degrees Celsius and a marked level at 35 degrees Celsius."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Kelvin",
+     "statement": "The temperature in Buea one morning is 27 °C. Express it in kelvin, and give 400 K in °C.",
+     "steps": [
+      "T = θ + 273 = 27 + 273 = 300 K.",
+      "θ = T − 273 = 400 − 273 = 127 °C."
+     ],
+     "answer": "300 K; 127 °C"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — uncalibrated thermometer",
+     "statement": "The mercury thread of an unmarked thermometer is 2 cm long at 0 °C and 22 cm long at 100 °C. Find the temperature when the thread is 9 cm long.",
+     "steps": [
+      "Length change for 100 °C = 22 − 2 = 20 cm, so 0.2 cm per °C.",
+      "Change from the ice point = 9 − 2 = 7 cm, so θ = 7 ÷ 0.2 = 35 °C."
+     ],
+     "answer": "35 °C"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-gas-laws",
+   "title": "Gas laws",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — Thermal physics: temperature, expansion, gas laws, heat capacity, change of state, heat transfer (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain gas pressure using the kinetic model.",
+    "State and use Boyle's law P₁V₁ = P₂V₂.",
+    "Use Charles's law and the pressure law with temperatures in kelvin.",
+    "Solve gas problems with the correct unit conversions."
+   ],
+   "prerequisites": [
+    "gceol-physics-temperature-expansion",
+    "gceol-physics-pressure"
+   ],
+   "exercises": [
+    "gceol-physics-thermal-e07",
+    "gceol-physics-thermal-e08",
+    "gceol-physics-thermal-e09",
+    "gceol-physics-thermal-e10",
+    "gceol-physics-thermal-e11",
+    "gceol-physics-thermal-e12"
+   ],
+   "selfCheck": [
+    "gceol-physics-gas-laws-q1",
+    "gceol-physics-gas-laws-q2",
+    "gceol-physics-gas-laws-q3",
+    "gceol-physics-gas-laws-q4",
+    "gceol-physics-gas-laws-q5"
+   ],
+   "reviewNotes": [
+    "Whether the Board expects the combined formula P₁V₁/T₁ = P₂V₂/T₂ should be confirmed (it follows from the three laws).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Gas pressure",
+     "md": "Gas particles move randomly and hit the walls of their container. The impacts of many particles give a steady **pressure**. Heating the gas makes the particles faster, so the pressure (or volume) increases; compressing a gas into a smaller volume means more collisions with the walls."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The three gas laws (fixed mass of gas)",
+     "md": "- **Boyle's law** (constant T): $P_1V_1 = P_2V_2$ — pressure and volume are inversely proportional.\n- **Charles's law** (constant P): $\\frac{V_1}{T_1} = \\frac{V_2}{T_2}$.\n- **Pressure law** (constant V): $\\frac{P_1}{T_1} = \\frac{P_2}{T_2}$.\n\n**T must be in kelvin.** The same units may be used for P (or V) on both sides."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Never use °C in Charles's or the pressure law: add 273 first.\n- Boyle's law needs the **temperature to stay constant**; a fast pump heats the air.\n- A graph of P against V at constant T is a **curve**; P against 1/V is a straight line through the origin."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 1,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 65,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "60/x",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 2,
+        "y": 30,
+        "label": "P = 30",
+        "color": "red"
+       },
+       {
+        "x": 6,
+        "y": 10,
+        "label": "P = 10",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "volume V",
+      "ylabel": "pressure P"
+     },
+     "caption": "Boyle's law: pressure falls as volume rises, PV is constant (here PV = 60 in arbitrary units).",
+     "alt": "A downward curve of pressure against volume with two marked points where the product of pressure and volume is 60."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Boyle's law",
+     "statement": "Air of volume 600 cm³ at a pressure of 1.0 × 10⁵ Pa is compressed slowly to 200 cm³ at constant temperature. Find the new pressure.",
+     "steps": [
+      "P₁V₁ = P₂V₂, so 1.0 × 10⁵ × 600 = P₂ × 200.",
+      "P₂ = 6.0 × 10⁷ ÷ 200 = 3.0 × 10⁵ Pa."
+     ],
+     "answer": "3.0 × 10⁵ Pa"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — car tyre",
+     "statement": "A tyre (volume taken as constant) has air at 2.4 × 10⁵ Pa at 27 °C. After a long drive the air is at 57 °C. Find the new pressure.",
+     "steps": [
+      "Convert to kelvin: T₁ = 300 K, T₂ = 330 K.",
+      "P₂ = P₁ × T₂ ÷ T₁ = 2.4 × 10⁵ × 330 ÷ 300 = 2.64 × 10⁵ Pa."
+     ],
+     "answer": "2.64 × 10⁵ Pa"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-capacity",
+   "title": "Specific heat capacity",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Thermal physics: temperature, expansion, gas laws, heat capacity, change of state, heat transfer (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define heat capacity and specific heat capacity.",
+    "Use Q = mcΔθ and Pt = mcΔθ for electric heating.",
+    "Use the method of mixtures (heat lost = heat gained).",
+    "Explain why water is used as a coolant and for heating."
+   ],
+   "prerequisites": [
+    "gceol-physics-temperature-expansion",
+    "gceol-physics-work-energy-power"
+   ],
+   "exercises": [
+    "gceol-physics-thermal-e13",
+    "gceol-physics-thermal-e14",
+    "gceol-physics-thermal-e15",
+    "gceol-physics-thermal-e16",
+    "gceol-physics-thermal-e17",
+    "gceol-physics-thermal-e18"
+   ],
+   "selfCheck": [
+    "gceol-physics-heat-capacity-q1",
+    "gceol-physics-heat-capacity-q2",
+    "gceol-physics-heat-capacity-q3",
+    "gceol-physics-heat-capacity-q4",
+    "gceol-physics-heat-capacity-q5"
+   ],
+   "reviewNotes": [
+    "Values used: c(water) = 4200 J/kg °C; c(copper) about 400, c(aluminium) about 900, c(iron) about 450 J/kg °C — rounded school values; check against the school table.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Specific heat capacity",
+     "md": "The **specific heat capacity (c)** of a substance is the energy needed to raise the temperature of **1 kg** by **1 °C** (unit **J/kg °C**). Water: c = **4200 J/kg °C** (this value is used in this course). The **heat capacity** of an object = mass × c (J/°C)."
+    },
+    {
+     "type": "formula",
+     "tex": "Q = mc\\Delta\\theta",
+     "caption": "Q in joules, m in kg, Δθ = change in temperature (°C)"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Electric heater and mixtures",
+     "md": "- For an electric heater of power P working for time t (no losses): $Pt = mc\\Delta\\theta$.\n- **Method of mixtures**: when a hot and a cold liquid are mixed, **heat lost by the hot = heat gained by the cold** (if no heat is lost to the surroundings)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Mass must be in **kg** (500 g = 0.5 kg).\n- Δθ = final − initial temperature.\n- Real experiments lose heat to the air and the container, so measured c is usually a bit too high."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "copper",
+        "value": 400,
+        "color": "orange"
+       },
+       {
+        "label": "iron",
+        "value": 450,
+        "color": "red"
+       },
+       {
+        "label": "aluminium",
+        "value": 900,
+        "color": "grey"
+       },
+       {
+        "label": "water",
+        "value": 4200,
+        "color": "blue"
+       }
+      ],
+      "unit": "J/kg °C"
+     },
+     "caption": "Approximate specific heat capacities: water needs much more energy per kg per degree than metals.",
+     "alt": "A bar chart: copper about 400, iron about 450, aluminium about 900 and water 4200 joules per kilogram per degree Celsius."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — heating water",
+     "statement": "How much energy is needed to heat 2 kg of water from 25 °C to 75 °C? How long does a 2 kW heater take (no losses)?",
+     "steps": [
+      "Q = mcΔθ = 2 × 4200 × (75 − 25) = 2 × 4200 × 50 = 420 000 J.",
+      "t = Q ÷ P = 420 000 ÷ 2000 = 210 s."
+     ],
+     "answer": "420 kJ; 210 s"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — mixing water",
+     "statement": "0.5 kg of water at 80 °C is mixed with 1.5 kg of water at 20 °C. Find the final temperature (ignore losses).",
+     "steps": [
+      "Let the final temperature be θ. Heat lost = 0.5 × 4200 × (80 − θ); heat gained = 1.5 × 4200 × (θ − 20).",
+      "Equate and divide by 4200: 40 − 0.5θ = 1.5θ − 30, so 70 = 2θ.",
+      "θ = 35 °C."
+     ],
+     "answer": "35 °C"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-change-of-state",
+   "title": "Change of state and latent heat",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Thermal physics: temperature, expansion, gas laws, heat capacity, change of state, heat transfer (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe melting, boiling, evaporation, condensation and freezing using particles.",
+    "Explain why temperature stays constant during a change of state.",
+    "Define specific latent heat and use Q = ml.",
+    "Distinguish evaporation from boiling."
+   ],
+   "prerequisites": [
+    "gceol-physics-heat-capacity"
+   ],
+   "exercises": [
+    "gceol-physics-thermal-e19",
+    "gceol-physics-thermal-e20",
+    "gceol-physics-thermal-e21",
+    "gceol-physics-thermal-e22",
+    "gceol-physics-thermal-e23",
+    "gceol-physics-thermal-e24"
+   ],
+   "selfCheck": [
+    "gceol-physics-change-of-state-q1",
+    "gceol-physics-change-of-state-q2",
+    "gceol-physics-change-of-state-q3",
+    "gceol-physics-change-of-state-q4",
+    "gceol-physics-change-of-state-q5"
+   ],
+   "reviewNotes": [
+    "Values used: specific latent heat of fusion of ice 336 000 J/kg; of vaporisation of water 2 260 000 J/kg (2.26 × 10⁶). Some school tables use 340 000 and 2 300 000.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Latent heat",
+     "md": "While a substance melts or boils, it takes in energy but the **temperature stays constant**: the energy breaks the forces between particles instead of speeding them up. The **specific latent heat** is the energy needed to change **1 kg** of a substance from one state to another **without a change of temperature**: $Q = ml$ (J/kg)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Values for water (used here)",
+     "md": "- Specific latent heat of **fusion** (ice → water at 0 °C): **336 000 J/kg**.\n- Specific latent heat of **vaporisation** (water → steam at 100 °C): **2 260 000 J/kg**.\n\nVaporisation needs much more energy because the particles must be pulled completely apart."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Evaporation and boiling",
+     "md": "**Boiling** happens throughout the liquid at one fixed temperature (the boiling point). **Evaporation** happens only at the surface, at any temperature, and it **cools** the liquid because the fastest particles escape. It is faster when warm, windy, with a large surface and dry air (that is why washing dries well in the dry season)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Use Q = mcΔθ when the temperature **changes**; use Q = ml when the **state** changes at constant temperature.\n- On a heating curve the flat parts are the changes of state."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": -20,
+      "ymax": 120,
+      "grid": 20,
+      "w": 400,
+      "h": 260,
+      "curves": [],
+      "points": [],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": -10,
+        "x2": 1,
+        "y2": 0,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 1,
+        "y1": 0,
+        "x2": 3,
+        "y2": 0,
+        "color": "blue",
+        "dash": false,
+        "label": "melting"
+       },
+       {
+        "x1": 3,
+        "y1": 0,
+        "x2": 6,
+        "y2": 100,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 6,
+        "y1": 100,
+        "x2": 9,
+        "y2": 100,
+        "color": "blue",
+        "dash": false,
+        "label": "boiling"
+       }
+      ],
+      "xlabel": "time of heating",
+      "ylabel": "temperature °C"
+     },
+     "caption": "Heating curve of ice to steam: flat parts are melting at 0 °C and boiling at 100 °C.",
+     "alt": "A temperature-time graph: a rise from −10 to 0 °C, a flat part at 0 °C, a rise to 100 °C, and a flat part at 100 °C."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — melting ice",
+     "statement": "How much energy melts 0.2 kg of ice already at 0 °C?",
+     "steps": [
+      "Q = ml = 0.2 × 336 000.",
+      "Q = 67 200 J."
+     ],
+     "answer": "67 200 J"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — ice to warm water",
+     "statement": "Find the energy to change 0.5 kg of ice at 0 °C into water at 20 °C.",
+     "steps": [
+      "Melting: Q₁ = 0.5 × 336 000 = 168 000 J.",
+      "Warming the water from 0 °C to 20 °C: Q₂ = 0.5 × 4200 × 20 = 42 000 J.",
+      "Total = 168 000 + 42 000 = 210 000 J."
+     ],
+     "answer": "210 000 J"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-transfer",
+   "title": "Conduction, convection and radiation",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Thermal physics: temperature, expansion, gas laws, heat capacity, change of state, heat transfer (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe how conduction, convection and radiation transfer heat.",
+    "Explain which surfaces are good absorbers and emitters.",
+    "Explain the construction of a vacuum flask.",
+    "Apply the ideas to everyday situations such as cooking, houses and clothes."
+   ],
+   "prerequisites": [
+    "gceol-physics-temperature-expansion"
+   ],
+   "exercises": [
+    "gceol-physics-thermal-e25",
+    "gceol-physics-thermal-e26",
+    "gceol-physics-thermal-e27",
+    "gceol-physics-thermal-e28",
+    "gceol-physics-thermal-e29",
+    "gceol-physics-thermal-e30"
+   ],
+   "selfCheck": [
+    "gceol-physics-heat-transfer-q1",
+    "gceol-physics-heat-transfer-q2",
+    "gceol-physics-heat-transfer-q3",
+    "gceol-physics-heat-transfer-q4",
+    "gceol-physics-heat-transfer-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Three ways heat travels",
+     "md": "- **Conduction**: transfer through a material by vibrating particles passing on energy (best in metals, which also have free electrons). Needs matter; main way in solids.\n- **Convection**: in liquids and gases, warm fluid becomes less dense and rises, cool fluid sinks, setting up a current.\n- **Radiation**: infrared waves; needs no medium; travels through a vacuum (heat from the Sun)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Surfaces",
+     "md": "Dull **black** surfaces are the best **absorbers and emitters** of radiation; shiny, light-coloured surfaces are the best **reflectors** and the worst emitters. Hence houses in hot regions are painted white, and cooking pots are black on the bottom but shiny on the outside to cut heat loss."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Vacuum flask",
+     "md": "The flask has two glass walls with a **vacuum** between (no conduction or convection), **silvered** surfaces (reflect radiation) and a **stopper** that is a poor conductor (cuts conduction and convection at the top). Hot drinks stay hot and cold drinks stay cold."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Convection and conduction are different: convection needs a fluid that can move.\n- Metals feel colder than wood at the same temperature because they conduct heat away from your hand faster, not because they are colder."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 40,
+        "w": 140,
+        "h": 170,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 10
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 55,
+        "w": 100,
+        "h": 145,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "line",
+        "x1": 143,
+        "y1": 50,
+        "x2": 143,
+        "y2": 205,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 257,
+        "y1": 50,
+        "x2": 257,
+        "y2": 205,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 120,
+        "text": "vacuum",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 120,
+        "x2": 135,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 120,
+        "text": "hot liquid",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 285,
+        "y1": 120,
+        "x2": 250,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 30,
+        "text": "stopper",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A vacuum flask: double wall with a vacuum between silvered surfaces.",
+     "alt": "A flask drawn as two nested containers with a gap labelled vacuum, a hot liquid inside and a stopper on top."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — metal and wood",
+     "statement": "Explain why a metal spoon feels colder than a wooden spoon when both have been in the same room.",
+     "steps": [
+      "Both are at room temperature, which is lower than your hand.",
+      "Metal is a good conductor, so it removes heat from your hand quickly and feels cold; wood is a poor conductor, so little heat leaves your hand."
+     ],
+     "answer": "Metal conducts heat away from the hand faster."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — heating water in a kettle",
+     "statement": "Explain how the whole of the water in a kettle is heated when the element is at the bottom.",
+     "steps": [
+      "Water near the element warms, expands and becomes less dense, so it rises.",
+      "Cooler, denser water sinks to take its place; the circulating convection current heats all the water."
+     ],
+     "answer": "By convection currents."
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-thermal-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 20 °C into kelvin.",
+   "answer": 293,
+   "tolerance": 0,
+   "unit": "K",
+   "explanation": "20 + 273 = 293 K.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which gives the lower fixed point of the Celsius scale?",
+   "choices": [
+    "Pure melting ice",
+    "Body temperature",
+    "Boiling water",
+    "Room temperature"
+   ],
+   "answer": 0,
+   "explanation": "0 °C is the temperature of pure melting ice.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bimetallic strip bends when heated because the two metals expand by different amounts.",
+   "answer": true,
+   "explanation": "That is the principle of the thermostat.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The mercury thread of an unmarked thermometer is 3 cm at 0 °C and 23 cm at 100 °C. What is its length at 60 °C?",
+   "answer": 15,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "Length = 3 + 0.2 × 60 = 15 cm.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why are small gaps left between rails of a railway?",
+   "choices": [
+    "To reduce friction of wheels only",
+    "To save steel",
+    "To allow contraction only",
+    "To allow expansion in hot weather"
+   ],
+   "answer": 3,
+   "explanation": "Without gaps, expansion would buckle the rails.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil in Maroua measures the air temperature as 38 °C.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Express 38 °C in kelvin.",
+     "answer": 311,
+     "tolerance": 0,
+     "explanation": "38 + 273 = 311 K.",
+     "unit": "K",
+     "id": "gceol-physics-thermal-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The temperature then falls by 15 °C. What is the new temperature in °C?",
+     "answer": 23,
+     "tolerance": 0,
+     "explanation": "38 − 15 = 23 °C.",
+     "unit": "°C",
+     "id": "gceol-physics-thermal-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the fall of temperature in kelvin?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "A temperature difference is the same in K and °C: 15 K.",
+     "unit": "K",
+     "id": "gceol-physics-thermal-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the mercury level rises when the thermometer is placed in warm water.",
+     "model": "The mercury particles gain energy, move/vibrate more and take more space, so the liquid expands more than the glass and rises up the narrow tube.",
+     "rubric": "1 mark: particles gain energy; 1 mark: liquid expands/rises.",
+     "explanation": "The mercury particles gain energy, move/vibrate more and take more space, so the liquid expands more than the glass and rises up the narrow tube.",
+     "id": "gceol-physics-thermal-e06-d"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-temperature-expansion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-temperature-expansion",
+   "prompt": "Absolute zero is",
+   "choices": [
+    "0 °C",
+    "−273 °C",
+    "273 °C",
+    "−100 °C"
+   ],
+   "answer": 1,
+   "explanation": "0 K = −273 °C.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-temperature-expansion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-temperature-expansion",
+   "prompt": "300 K is",
+   "choices": [
+    "573 °C",
+    "−27 °C",
+    "27 °C",
+    "300 °C"
+   ],
+   "answer": 2,
+   "explanation": "300 − 273 = 27.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-temperature-expansion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-temperature-expansion",
+   "prompt": "Particles in a gas are",
+   "choices": [
+    "fixed in place",
+    "touching and vibrating only",
+    "stationary",
+    "far apart and moving freely"
+   ],
+   "answer": 3,
+   "explanation": "That is the kinetic model of a gas.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-temperature-expansion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-temperature-expansion",
+   "prompt": "Which substances usually expand most for the same temperature rise?",
+   "choices": [
+    "metals",
+    "solids",
+    "wood",
+    "gases"
+   ],
+   "answer": 3,
+   "explanation": "Gases expand much more than liquids or solids.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-temperature-expansion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-temperature-expansion",
+   "prompt": "The upper fixed point of the Celsius scale is",
+   "choices": [
+    "100 °C",
+    "37 °C",
+    "273 °C",
+    "0 °C"
+   ],
+   "answer": 0,
+   "explanation": "Steam above boiling water at normal pressure.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-gas-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A gas at 100 kPa has volume 6 litres. It is compressed at constant temperature to 2 litres. Find the new pressure in kPa.",
+   "answer": 300,
+   "tolerance": 0,
+   "unit": "kPa",
+   "explanation": "100 × 6 = P × 2, so P = 300 kPa.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-gas-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which law links pressure and temperature at constant volume?",
+   "choices": [
+    "Newton's law",
+    "The pressure law",
+    "Boyle's law",
+    "Charles's law"
+   ],
+   "answer": 1,
+   "explanation": "P/T = constant at constant volume.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-gas-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 47 °C to kelvin before using a gas law.",
+   "answer": 320,
+   "tolerance": 0,
+   "unit": "K",
+   "explanation": "47 + 273 = 320 K.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-gas-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A gas has volume 300 cm³ at 0 °C. It is heated to 100 °C at constant pressure. Find the new volume (to the nearest cm³).",
+   "answer": 410,
+   "tolerance": 1,
+   "unit": "cm³",
+   "explanation": "V₂ = V₁ × T₂/T₁ = 300 × 373 ÷ 273 = 410 cm³.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-gas-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The pressure of a fixed mass of gas at constant temperature is doubled. Its volume becomes",
+   "choices": [
+    "four times",
+    "the same",
+    "double",
+    "half"
+   ],
+   "answer": 3,
+   "explanation": "PV = constant, so if P doubles V halves.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-gas-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bicycle pump holds 80 cm³ of air at atmospheric pressure (1.0 × 10⁵ Pa). The outlet is blocked and the piston is pushed in slowly until the volume is 20 cm³.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the final pressure in pascals.",
+     "answer": 400000.0,
+     "tolerance": 0,
+     "explanation": "P₂ = 1.0 × 10⁵ × 80 ÷ 20 = 4.0 × 10⁵ Pa.",
+     "unit": "Pa",
+     "id": "gceol-physics-thermal-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "By what factor has the pressure increased?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "4.0 × 10⁵ ÷ 1.0 × 10⁵ = 4.",
+     "id": "gceol-physics-thermal-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain, using the particle model, why the pressure increases.",
+     "model": "The same number of particles are squeezed into a smaller volume, so they hit the walls more often per second, giving a larger force per unit area.",
+     "rubric": "1 mark: smaller volume / more collisions; 1 mark: larger force per unit area.",
+     "explanation": "The same number of particles are squeezed into a smaller volume, so they hit the walls more often per second, giving a larger force per unit area.",
+     "id": "gceol-physics-thermal-e12-c"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-gas-laws-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-gas-laws",
+   "prompt": "Boyle's law says that at constant temperature",
+   "choices": [
+    "pressure ÷ volume is constant",
+    "volume is constant",
+    "pressure × volume is constant",
+    "pressure is constant"
+   ],
+   "answer": 2,
+   "explanation": "PV = constant.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-gas-laws-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-gas-laws",
+   "prompt": "In gas laws, temperature must be in",
+   "choices": [
+    "fahrenheit",
+    "joules",
+    "kelvin",
+    "degrees Celsius"
+   ],
+   "answer": 2,
+   "explanation": "The gas laws need the absolute scale.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-gas-laws-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-gas-laws",
+   "prompt": "Gas pressure is caused by",
+   "choices": [
+    "particles colliding with the walls",
+    "gas expanding only",
+    "gravity only",
+    "particles' weight on the floor"
+   ],
+   "answer": 0,
+   "explanation": "Many impacts produce a steady force on the walls.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-gas-laws-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-gas-laws",
+   "prompt": "A gas at 300 K and 1 atm is heated to 600 K at constant volume. Its pressure becomes",
+   "choices": [
+    "4 atm",
+    "2 atm",
+    "1 atm",
+    "0.5 atm"
+   ],
+   "answer": 1,
+   "explanation": "P ∝ T, so P doubles.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-gas-laws-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-gas-laws",
+   "prompt": "A graph of P against V at constant temperature is",
+   "choices": [
+    "a curve",
+    "a straight line through the origin",
+    "horizontal",
+    "vertical"
+   ],
+   "answer": 0,
+   "explanation": "P ∝ 1/V gives a curve.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-heat-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How much energy raises the temperature of 3 kg of water by 10 °C? (c = 4200 J/kg °C)",
+   "answer": 126000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "Q = 3 × 4200 × 10 = 126 000 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-heat-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Water is a good coolant in a car radiator mainly because it has",
+   "choices": [
+    "a high specific heat capacity",
+    "a dark colour",
+    "a low boiling point",
+    "a low density"
+   ],
+   "answer": 0,
+   "explanation": "It absorbs a lot of energy for a small temperature rise.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-heat-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 500 g to kg, then find the energy to heat 500 g of water by 20 °C.",
+   "answer": 42000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "0.5 × 4200 × 20 = 42 000 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-heat-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 0.5 kg metal block rises from 20 °C to 80 °C when given 12 000 J. Find its specific heat capacity.",
+   "answer": 400.0,
+   "tolerance": 0,
+   "unit": "J/kg °C",
+   "explanation": "c = Q ÷ (mΔθ) = 12 000 ÷ (0.5 × 60) = 400 J/kg °C.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-heat-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Suggest why the coastal city of Limbe has a smaller day-to-night temperature change than an inland Sahel town. (Give a reason based on water.)",
+   "model": "Water has a high specific heat capacity, so large bodies of water warm and cool slowly and moderate the air temperature nearby; dry land heats and cools quickly.",
+   "rubric": "1 mark: high specific heat capacity of water; 1 mark: slow heating/cooling gives a smaller temperature range.",
+   "explanation": "Water has a high specific heat capacity, so large bodies of water warm and cool slowly and moderate the air temperature nearby; dry land heats and cools quickly.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-heat-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An electric kettle of power 3 kW heats 1.5 kg of water from 20 °C to 100 °C (c = 4200 J/kg °C). Assume no energy is lost.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the energy needed.",
+     "answer": 504000.0,
+     "tolerance": 0,
+     "explanation": "Q = 1.5 × 4200 × 80 = 504 000 J.",
+     "unit": "J",
+     "id": "gceol-physics-thermal-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the time taken in seconds.",
+     "answer": 168.0,
+     "tolerance": 0,
+     "explanation": "t = Q ÷ P = 504 000 ÷ 3000 = 168 s.",
+     "unit": "s",
+     "id": "gceol-physics-thermal-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "In practice the kettle takes 200 s. Find the efficiency in % (to the nearest whole number).",
+     "answer": 84,
+     "tolerance": 1,
+     "explanation": "Efficiency = useful ÷ total = 168 ÷ 200 = 84%.",
+     "unit": "%",
+     "id": "gceol-physics-thermal-e18-c"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-capacity-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-capacity",
+   "prompt": "The unit of specific heat capacity is",
+   "choices": [
+    "J/kg",
+    "N/kg",
+    "W/kg",
+    "J/kg °C"
+   ],
+   "answer": 3,
+   "explanation": "Energy per kg per degree.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-capacity-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-capacity",
+   "prompt": "Q = mcΔθ gives the energy for",
+   "choices": [
+    "a force",
+    "a change of state",
+    "a change of speed",
+    "a temperature change"
+   ],
+   "answer": 3,
+   "explanation": "It applies when the temperature changes without a change of state.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-capacity-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-capacity",
+   "prompt": "Water's specific heat capacity (this course) is",
+   "choices": [
+    "4.2 J/kg °C",
+    "4200 J/kg °C",
+    "42 J/kg °C",
+    "420 J/kg °C"
+   ],
+   "answer": 1,
+   "explanation": "Standard school value.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-capacity-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-capacity",
+   "prompt": "In the method of mixtures",
+   "choices": [
+    "temperature lost = temperature gained",
+    "mass lost = mass gained",
+    "heat lost = heat gained",
+    "power is zero"
+   ],
+   "answer": 2,
+   "explanation": "Conservation of energy.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-capacity-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-capacity",
+   "prompt": "A high specific heat capacity means the substance",
+   "choices": [
+    "has no mass",
+    "heats up slowly",
+    "heats up quickly",
+    "cannot be heated"
+   ],
+   "answer": 1,
+   "explanation": "More energy is needed per degree.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-change-of-state",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the energy to boil away 0.5 kg of water already at 100 °C (L = 2.26 × 10⁶ J/kg).",
+   "answer": 1130000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "Q = 0.5 × 2 260 000 = 1 130 000 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-change-of-state",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "During melting of pure ice, the temperature",
+   "choices": [
+    "stays at 0 °C",
+    "falls",
+    "rises steadily",
+    "rises to 100 °C"
+   ],
+   "answer": 0,
+   "explanation": "Energy is used to break bonds between particles, not to raise the temperature.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e21",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-physics-change-of-state",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each change of state with its name.",
+   "pairs": [
+    [
+     "solid → liquid",
+     "melting"
+    ],
+    [
+     "liquid → gas",
+     "evaporation / boiling"
+    ],
+    [
+     "gas → liquid",
+     "condensation"
+    ],
+    [
+     "liquid → solid",
+     "freezing"
+    ]
+   ],
+   "explanation": "These are the standard names of the changes of state.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-change-of-state",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An electric heater of 2 kW boils away 0.5 kg of water at 100 °C (L = 2.26 × 10⁶ J/kg). How long does it take with no losses?",
+   "answer": 565.0,
+   "tolerance": 0,
+   "unit": "s",
+   "explanation": "t = Q ÷ P = 1 130 000 ÷ 2000 = 565 s.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e23",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-change-of-state",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why does sweating cool the body?",
+   "choices": [
+    "Sweat is always cold",
+    "It stops evaporation",
+    "It adds heat to the skin",
+    "The fastest particles escape from the liquid, lowering its average energy"
+   ],
+   "answer": 3,
+   "explanation": "Evaporation removes the most energetic particles and takes latent heat from the skin.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-change-of-state",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "0.1 kg of water at 20 °C is heated and completely turned into steam at 100 °C (c = 4200 J/kg °C; L = 2.26 × 10⁶ J/kg).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the energy to warm the water from 20 °C to 100 °C.",
+     "answer": 33600.0,
+     "tolerance": 0,
+     "explanation": "Q₁ = 0.1 × 4200 × 80 = 33 600 J.",
+     "unit": "J",
+     "id": "gceol-physics-thermal-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the energy to turn the water at 100 °C into steam.",
+     "answer": 226000.0,
+     "tolerance": 0,
+     "explanation": "Q₂ = 0.1 × 2 260 000 = 226 000 J.",
+     "unit": "J",
+     "id": "gceol-physics-thermal-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the total energy.",
+     "answer": 259600.0,
+     "tolerance": 0,
+     "explanation": "33 600 + 226 000 = 259 600 J.",
+     "unit": "J",
+     "id": "gceol-physics-thermal-e24-c"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-change-of-state-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-change-of-state",
+   "prompt": "The temperature of boiling water is constant at",
+   "choices": [
+    "0 °C",
+    "100 °C (normal pressure)",
+    "37 °C",
+    "273 °C"
+   ],
+   "answer": 1,
+   "explanation": "Boiling point of water at normal pressure.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-change-of-state-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-change-of-state",
+   "prompt": "Latent heat is energy that",
+   "choices": [
+    "raises the temperature only",
+    "is stored as mass",
+    "changes the state without changing temperature",
+    "is lost as light"
+   ],
+   "answer": 2,
+   "explanation": "Definition of latent heat.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-change-of-state-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-change-of-state",
+   "prompt": "Evaporation occurs",
+   "choices": [
+    "only at 100 °C",
+    "at the surface at any temperature",
+    "only in sunlight",
+    "only inside the liquid"
+   ],
+   "answer": 1,
+   "explanation": "Boiling is throughout the liquid; evaporation only at the surface.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-change-of-state-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-change-of-state",
+   "prompt": "Q = ml is used for",
+   "choices": [
+    "a current",
+    "a change of state",
+    "a force",
+    "a temperature rise in the same state"
+   ],
+   "answer": 1,
+   "explanation": "m = mass, l = specific latent heat.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-change-of-state-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-change-of-state",
+   "prompt": "Steam at 100 °C causes a worse burn than water at 100 °C because",
+   "choices": [
+    "it has no energy",
+    "it is heavier",
+    "it releases latent heat when it condenses",
+    "it is colder"
+   ],
+   "answer": 2,
+   "explanation": "Condensation releases a large amount of energy.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e25",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-heat-transfer",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Heat from the Sun reaches the Earth mainly by",
+   "choices": [
+    "conduction",
+    "evaporation",
+    "convection",
+    "radiation"
+   ],
+   "answer": 3,
+   "explanation": "Radiation can travel through the vacuum of space.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e26",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-heat-transfer",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convection can take place in a solid.",
+   "answer": false,
+   "explanation": "Convection needs a fluid (liquid or gas) whose particles can flow.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e27",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-physics-heat-transfer",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the example with the main method of heat transfer.",
+   "pairs": [
+    [
+     "metal pan heated on a fire",
+     "conduction"
+    ],
+    [
+     "warm air rising over a hot road",
+     "convection"
+    ],
+    [
+     "warmth felt from the Sun",
+     "radiation"
+    ]
+   ],
+   "explanation": "Metal handle/pan: conduction; rising air: convection; the Sun: radiation.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e28",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-heat-transfer",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why are roofs in hot places often painted white or made of shiny metal?",
+   "choices": [
+    "They are black and absorb more",
+    "They are heavier",
+    "They conduct heat better",
+    "They reflect radiation and absorb less heat"
+   ],
+   "answer": 3,
+   "explanation": "Light, shiny surfaces reflect most radiation.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e29",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-heat-transfer",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how the vacuum, the silvering and the stopper of a flask reduce heat loss.",
+   "model": "Vacuum: no particles, so no conduction or convection across the gap. Silvering: reflects radiation back inside (and poor emitter). Stopper: poor conductor and traps air, so little loss by conduction or convection at the top.",
+   "rubric": "1 mark per feature explained.",
+   "explanation": "Vacuum: no particles, so no conduction or convection across the gap. Silvering: reflects radiation back inside (and poor emitter). Stopper: poor conductor and traps air, so little loss by conduction or convection at the top.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-heat-transfer",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Air conditioners are placed high on the wall in a room in Douala while a heater is better placed low.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Cold air from a high air conditioner moves downwards because",
+     "choices": [
+      "cold air has no mass",
+      "heat rises",
+      "cold air is denser and sinks",
+      "cold air is lighter"
+     ],
+     "answer": 2,
+     "explanation": "Denser cold air sinks, setting up a convection current that cools the room.",
+     "id": "gceol-physics-thermal-e30-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A heater should be near the floor because",
+     "choices": [
+      "warm air sinks",
+      "it conducts through walls",
+      "it is safer",
+      "warm air rises and circulates through the room"
+     ],
+     "answer": 3,
+     "explanation": "Warm air rises, so a low heater sets up a convection current.",
+     "id": "gceol-physics-thermal-e30-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State two ways a thick wall helps keep a house cool in the day.",
+     "model": "It is a poor conductor of heat so heat enters slowly; light-coloured outer surface reflects radiation; it has a high heat capacity so it warms slowly.",
+     "rubric": "1 mark for each valid idea (max 2).",
+     "explanation": "It is a poor conductor of heat so heat enters slowly; light-coloured outer surface reflects radiation; it has a high heat capacity so it warms slowly.",
+     "id": "gceol-physics-thermal-e30-c"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-transfer-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-transfer",
+   "prompt": "Metals are good conductors because",
+   "choices": [
+    "they are shiny only",
+    "they have free electrons",
+    "they are heavy",
+    "they have no particles"
+   ],
+   "answer": 1,
+   "explanation": "Free electrons carry energy rapidly.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-transfer-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-transfer",
+   "prompt": "Convection happens in",
+   "choices": [
+    "liquids and gases",
+    "metals only",
+    "vacuum",
+    "solids"
+   ],
+   "answer": 0,
+   "explanation": "Fluids can flow.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-transfer-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-transfer",
+   "prompt": "Which surface is the best emitter of radiation?",
+   "choices": [
+    "shiny silver",
+    "dull black",
+    "shiny white",
+    "dull white"
+   ],
+   "answer": 1,
+   "explanation": "Dull black surfaces emit and absorb best.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-transfer-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-transfer",
+   "prompt": "The vacuum in a flask prevents",
+   "choices": [
+    "radiation only",
+    "conduction and convection",
+    "evaporation only",
+    "nothing"
+   ],
+   "answer": 1,
+   "explanation": "No particles to carry heat.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-heat-transfer-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-heat-transfer",
+   "prompt": "Radiation does NOT need",
+   "choices": [
+    "a medium",
+    "a source",
+    "energy",
+    "a temperature difference"
+   ],
+   "answer": 0,
+   "explanation": "It can travel through a vacuum.",
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A temperature of 25 °C is equal to",
+   "choices": [
+    "25 K",
+    "−248 K",
+    "298 K",
+    "273 K"
+   ],
+   "answer": 2,
+   "explanation": "T = 25 + 273 = 298 K.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-thermal"
+  },
+  {
+   "id": "gceol-physics-thermal-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-heat-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 2 kW electric heater is placed in 1 kg of water for 100 s (c = 4200 J/kg °C). Assume first that all the energy goes into the water.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the energy supplied by the heater.",
+     "answer": 200000,
+     "tolerance": 0,
+     "explanation": "E = Pt = 2000 × 100 = 200 000 J.",
+     "unit": "J",
+     "id": "gceol-physics-thermal-m02-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the rise in temperature (to 1 decimal place).",
+     "answer": 47.6,
+     "tolerance": 0.1,
+     "explanation": "Δθ = Q ÷ (mc) = 200 000 ÷ 4200 = 47.6 °C.",
+     "unit": "°C",
+     "id": "gceol-physics-thermal-m02-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "In a real experiment the water rises by only 40 °C. Find the efficiency in %.",
+     "answer": 84.0,
+     "tolerance": 0.5,
+     "explanation": "Useful energy = 1 × 4200 × 40 = 168 000 J; efficiency = 168 000 ÷ 200 000 = 84%.",
+     "unit": "%",
+     "id": "gceol-physics-thermal-m02-c"
+    }
+   ],
+   "chapter": "gceol-physics-thermal"
+  }
+ ]
+}

@@ -1,0 +1,1280 @@
+{
+ "chapter": "fslc-science-energy-forces",
+ "lessons": [
+  {
+   "id": "fslc-science-light-heat-sound",
+   "title": "Light, heat and sound",
+   "minutes": 35,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain why shadows form and tell transparent, translucent and opaque materials apart.",
+    "Describe how heat moves and name good conductors and insulators of heat.",
+    "Explain that sound is made by vibrations and travels through materials."
+   ],
+   "prerequisites": [
+    "fslc-science-matter-energy"
+   ],
+   "exercises": [
+    "fslc-science-energy-forces-e01",
+    "fslc-science-energy-forces-e02",
+    "fslc-science-energy-forces-e03",
+    "fslc-science-energy-forces-e04",
+    "fslc-science-energy-forces-e05",
+    "fslc-science-energy-forces-e06"
+   ],
+   "selfCheck": [
+    "fslc-science-light-heat-sound-q1",
+    "fslc-science-light-heat-sound-q2",
+    "fslc-science-light-heat-sound-q3",
+    "fslc-science-light-heat-sound-q4",
+    "fslc-science-light-heat-sound-q5"
+   ],
+   "reviewNotes": [
+    "Standard textbook facts only; temperature of boiling/freezing and speeds of light and sound are deliberately left out.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Light",
+     "md": "We see things when light from a **source** (the sun, a lamp, a fire) or **reflected** by an object (like the moon) enters our eyes. **Light travels in straight lines.** **Transparent** materials let light through (clear glass, clean water). **Translucent** ones let some light through (frosted glass, tissue paper). **Opaque** ones block light (wood, metal). A **shadow** forms when an opaque object blocks light."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 50,
+        "cy": 105,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 150,
+        "text": "lamp",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 95,
+        "x2": 175,
+        "y2": 85,
+        "color": "orange",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 105,
+        "x2": 175,
+        "y2": 105,
+        "color": "orange",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 115,
+        "x2": 175,
+        "y2": 125,
+        "color": "orange",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 70,
+        "w": 22,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 160,
+        "text": "object",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 70,
+        "w": 90,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 160,
+        "text": "shadow",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 35,
+        "text": "Light travels in straight lines",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A shadow forms behind an opaque object.",
+     "alt": "A lamp on the left sends three rays to the right. A grey object blocks the rays. Behind it there is a grey shadow."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Heat",
+     "md": "**Heat** moves from a **hotter** place to a **colder** one. In **solids** (metals) it moves by conduction: a metal spoon in hot tea becomes hot. In **liquids and air** hot parts rise (convection). The **sun's heat** reaches us across space (radiation). **Conductors** (metals) let heat pass easily; **insulators** (wood, plastic, cloth) do not. Temperature is measured with a thermometer in **degrees Celsius (°C)**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Sound",
+     "md": "**Sound** is made when things **vibrate** (move quickly to and fro): a drum skin, a guitar string, our vocal cords. Sound travels through air, water and solids, but **not through empty space**. A **high pitch** comes from fast vibrations, a **loud** sound from big vibrations. An **echo** is sound that bounces off a hard surface. Light travels much faster than sound, so we see lightning before we hear thunder."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that a metal pot handle is made of metal because it is a good **insulator**: metal is a conductor, so handles are made of wood or plastic.\n- Saying that the moon is a source of light: it **reflects** the sun's light.\n- Saying that sound needs no material to travel through.\n- Looking at the sun directly or with sunglasses only: it can damage the eyes."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Why do cooking pots have handles of wood or plastic?",
+     "steps": [
+      "The metal of the pot is a good conductor, so the heat travels to the handle.",
+      "Wood and plastic are insulators, so the handle stays cool and we can hold it."
+     ],
+     "answer": "Because wood and plastic are insulators: they do not let the heat pass, so the handle stays cool."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "You see lightning and hear thunder a few seconds later. Why?",
+     "steps": [
+      "Light travels much faster than sound.",
+      "The light reaches us almost at once; the sound takes longer."
+     ],
+     "answer": "Light travels faster than sound."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-magnets-forces-machines",
+   "title": "Magnets, forces and simple machines",
+   "minutes": 35,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say which materials a magnet attracts and what poles do.",
+    "Describe push and pull forces, friction and gravity.",
+    "Name simple machines and say how they make work easier."
+   ],
+   "prerequisites": [
+    "fslc-science-matter-energy"
+   ],
+   "exercises": [
+    "fslc-science-energy-forces-e07",
+    "fslc-science-energy-forces-e08",
+    "fslc-science-energy-forces-e09",
+    "fslc-science-energy-forces-e10",
+    "fslc-science-energy-forces-e11",
+    "fslc-science-energy-forces-e12"
+   ],
+   "selfCheck": [
+    "fslc-science-magnets-forces-machines-q1",
+    "fslc-science-magnets-forces-machines-q2",
+    "fslc-science-magnets-forces-machines-q3",
+    "fslc-science-magnets-forces-machines-q4",
+    "fslc-science-magnets-forces-machines-q5"
+   ],
+   "reviewNotes": [
+    "Weight vs mass is only mentioned; unit of force (newton) is not covered. Check whether gravity/friction are in the Class 6 syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Magnets",
+     "md": "A **magnet** attracts objects made of **iron** and **steel** (they are called **magnetic**). It does not attract wood, plastic, glass or most other metals such as copper and aluminium. A magnet has two **poles**, **north** and **south**. **Unlike poles attract** (north and south). **Like poles repel** (north and north push apart)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Forces",
+     "md": "A **force** is a push or a pull. A force can start or stop an object, make it go faster or slower, change its direction or change its shape. **Gravity** pulls everything towards the centre of the Earth: it makes things fall and gives them **weight**. **Friction** is a force that slows moving things when two surfaces rub. It is useful for brakes and for walking, but it wears machines, so oil is used to reduce it."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 340,
+        "y2": 150,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         135,
+         180,
+         175,
+         220,
+         175
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 85,
+        "w": 40,
+        "h": 35,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 70,
+        "text": "load",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 60,
+        "x2": 320,
+        "y2": 140,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 40,
+        "text": "effort (push down)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 195,
+        "text": "pivot",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A lever: a small effort on one side lifts a load on the other.",
+     "alt": "A long bar rests on a triangle called the pivot. A blue load sits on the left end. A red arrow pushes down on the right end."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Simple machines",
+     "md": "A **simple machine** makes work easier (less effort, or a better direction). Examples: **lever** (see-saw, scissors, wheelbarrow, crowbar), **pulley** (raising water from a well, a flag), **inclined plane** (a ramp or a sloping road), **wheel and axle** (bicycle, cart), **wedge** (axe, knife) and **screw** (a bottle top, a jack)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that a magnet attracts all metals. Only some metals (iron, steel) are magnetic.\n- Saying that like poles attract.\n- Believing that a machine **creates** energy: it only makes the work easier.\n- Mixing up weight (a force, from gravity) and mass (how much matter)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A magnet is held near a nail, a coin made of copper, and a plastic ruler. Which will it attract?",
+     "steps": [
+      "The nail is made of iron (or steel): magnetic.",
+      "Copper and plastic are not magnetic."
+     ],
+     "answer": "Only the iron nail."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Why is it easier to push a heavy barrel up a ramp than to lift it?",
+     "steps": [
+      "A ramp is an inclined plane: it spreads the work over a longer distance.",
+      "We need a smaller force, but we must push over a longer distance."
+     ],
+     "answer": "A ramp (inclined plane) needs a smaller force, but over a longer distance."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-electricity-safety",
+   "title": "Electricity and electrical safety",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe a simple electric circuit and what a switch does.",
+    "Tell conductors from insulators of electricity.",
+    "Follow the safety rules for electricity."
+   ],
+   "prerequisites": [
+    "fslc-science-matter-energy"
+   ],
+   "exercises": [
+    "fslc-science-energy-forces-e13",
+    "fslc-science-energy-forces-e14",
+    "fslc-science-energy-forces-e15",
+    "fslc-science-energy-forces-e16",
+    "fslc-science-energy-forces-e17",
+    "fslc-science-energy-forces-e18"
+   ],
+   "selfCheck": [
+    "fslc-science-electricity-safety-q1",
+    "fslc-science-electricity-safety-q2",
+    "fslc-science-electricity-safety-q3",
+    "fslc-science-electricity-safety-q4",
+    "fslc-science-electricity-safety-q5"
+   ],
+   "reviewNotes": [
+    "The existing 'Matter and energy' lesson also covers simple circuits; this lesson stresses conductors, insulators and safety. Safety rules are generic and should be reviewed by a qualified person (e.g. an electrician or teacher).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "A simple circuit",
+     "md": "A **circuit** is a closed path for electricity. A simple circuit has a **cell** (or battery) that pushes the electricity, **wires** and a **bulb**. A **switch** opens or closes the path: when the switch is **closed** the bulb lights; when it is **open** the circuit is broken and the bulb goes out."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 70,
+        "x2": 320,
+        "y2": 70,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 70,
+        "x2": 320,
+        "y2": 170,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 170,
+        "x2": 80,
+        "y2": 170,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 170,
+        "x2": 80,
+        "y2": 70,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 100,
+        "w": 20,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 120,
+        "text": "cell",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 70,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 40,
+        "text": "bulb",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 160,
+        "w": 20,
+        "h": 20,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 205,
+        "text": "switch",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A simple circuit with a cell, a bulb and a switch.",
+     "alt": "A rectangle of wire. On the left side there is a cell. At the top is a bulb. At the bottom is a switch."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Conductors and insulators",
+     "md": "**Conductors** let electricity pass: copper, iron, aluminium and other metals. **Insulators** do not: plastic, rubber, dry wood, glass and cloth. Wires are made of metal (conductor) covered with plastic (insulator). **Water that is not pure** and the **human body** also conduct electricity, so they are dangerous near electricity."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Safety rules",
+     "md": "- Never touch bare wires, sockets or switches with **wet hands**.\n- Never put fingers, pins or metal into a socket.\n- Do not play with electric wires, and **stay away from fallen power lines**: tell an adult at once.\n- Do not fly kites near power lines or climb electricity poles.\n- Do not plug too many things into one socket.\n- Let an adult unplug broken equipment. During a storm, stay inside and do not shelter under a tall tree."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Thinking a bulb lights with only one wire connected: the circuit must be a **complete loop**.\n- Using a pin or knife to take out a plug.\n- Saying that all metals are magnetic or that all materials conduct: plastic and rubber are insulators.\n- Using a damaged cable because it 'still works'."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A bulb does not light in a circuit with a cell, wires and a switch. Give two possible reasons.",
+     "steps": [
+      "The switch is open, so the circuit is not complete.",
+      "A wire is loose or broken, or the cell is flat."
+     ],
+     "answer": "The switch may be open, or a wire may be loose or the cell flat."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Why are electric wires covered with plastic?",
+     "steps": [
+      "The wire inside is metal and carries the electricity.",
+      "Plastic is an insulator, so it protects us from the electricity."
+     ],
+     "answer": "Plastic is an insulator, so it protects us from shock."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-science-energy-forces"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "fslc-science-energy-forces-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-light-heat-sound",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which material is opaque?",
+   "choices": [
+    "clear plastic",
+    "wood",
+    "clean water",
+    "clear glass"
+   ],
+   "answer": 1,
+   "explanation": "Opaque materials block light.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-light-heat-sound",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Sound is made when something...",
+   "choices": [
+    "vibrates",
+    "is cold",
+    "is transparent",
+    "is still"
+   ],
+   "answer": 0,
+   "explanation": "Vibrations make sound.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-light-heat-sound",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a good conductor of heat?",
+   "choices": [
+    "a wooden spoon",
+    "a cloth",
+    "a plastic cup",
+    "a metal spoon"
+   ],
+   "answer": 3,
+   "explanation": "Metals conduct heat well.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-light-heat-sound",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Sound can travel through water.",
+   "answer": true,
+   "explanation": "Sound travels through solids, liquids and gases.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-light-heat-sound",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the word with its meaning.",
+   "pairs": [
+    [
+     "transparent",
+     "lets light pass through"
+    ],
+    [
+     "opaque",
+     "blocks light"
+    ],
+    [
+     "conductor",
+     "lets heat pass easily"
+    ],
+    [
+     "echo",
+     "sound that bounces back"
+    ]
+   ],
+   "explanation": "These are the key words.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-light-heat-sound",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mary holds a metal spoon in a pot of hot soup. After a minute the end she is holding is hot. She changes to a wooden spoon and her hand stays cool.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why did the metal spoon become hot?",
+     "choices": [
+      "the spoon was shiny",
+      "metal is a good conductor of heat",
+      "metal is an insulator",
+      "metal is transparent"
+     ],
+     "answer": 1,
+     "explanation": "Heat moves along metal.",
+     "id": "fslc-science-energy-forces-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why did the wooden spoon stay cool?",
+     "choices": [
+      "wood is a poor conductor (an insulator)",
+      "wood is a liquid",
+      "wood is opaque",
+      "wood makes sound"
+     ],
+     "answer": 0,
+     "explanation": "Wood does not let heat pass easily.",
+     "id": "fslc-science-energy-forces-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "How does heat move along the spoon?",
+     "choices": [
+      "from the hot end to the cold end",
+      "it does not move",
+      "only upwards in air",
+      "from the cold end to the hot end"
+     ],
+     "answer": 0,
+     "explanation": "Heat flows from hot to cold.",
+     "id": "fslc-science-energy-forces-e06-c"
+    }
+   ],
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-light-heat-sound-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-light-heat-sound",
+   "prompt": "A shadow is formed when light is blocked by an...",
+   "choices": [
+    "opaque object",
+    "clear glass",
+    "transparent object",
+    "mirror only"
+   ],
+   "answer": 0,
+   "explanation": "Opaque things block light.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-light-heat-sound-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-light-heat-sound",
+   "prompt": "Which travels fastest?",
+   "choices": [
+    "light",
+    "wind",
+    "a bicycle",
+    "sound"
+   ],
+   "answer": 0,
+   "explanation": "Light is much faster than sound.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-light-heat-sound-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-light-heat-sound",
+   "prompt": "Heat moves from...",
+   "choices": [
+    "cold to hot",
+    "nowhere",
+    "up only",
+    "hot to cold"
+   ],
+   "answer": 3,
+   "explanation": "From the hotter place to the colder place.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-light-heat-sound-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-light-heat-sound",
+   "prompt": "Which material is an insulator of heat?",
+   "choices": [
+    "plastic",
+    "copper",
+    "iron",
+    "aluminium"
+   ],
+   "answer": 0,
+   "explanation": "Plastic is a poor conductor.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-light-heat-sound-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-light-heat-sound",
+   "prompt": "Sound cannot travel through...",
+   "choices": [
+    "empty space",
+    "water",
+    "air",
+    "wood"
+   ],
+   "answer": 0,
+   "explanation": "It needs a material.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-magnets-forces-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which object will a magnet attract?",
+   "choices": [
+    "a wooden pencil",
+    "a plastic ruler",
+    "an iron nail",
+    "a glass marble"
+   ],
+   "answer": 2,
+   "explanation": "Iron is magnetic.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-magnets-forces-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What happens when two north poles are brought together?",
+   "choices": [
+    "they attract",
+    "they repel",
+    "they stick forever",
+    "nothing happens"
+   ],
+   "answer": 1,
+   "explanation": "Like poles repel.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-magnets-forces-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a lever?",
+   "choices": [
+    "a window",
+    "a stone",
+    "a rope only",
+    "a see-saw"
+   ],
+   "answer": 3,
+   "explanation": "A see-saw turns on a pivot.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e10",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-magnets-forces-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Friction is a force that slows moving objects.",
+   "answer": true,
+   "explanation": "Rubbing surfaces slow motion.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e11",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-magnets-forces-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the machine with an example.",
+   "pairs": [
+    [
+     "lever",
+     "scissors"
+    ],
+    [
+     "inclined plane",
+     "a ramp"
+    ],
+    [
+     "wheel and axle",
+     "a bicycle wheel"
+    ],
+    [
+     "pulley",
+     "raising a flag"
+    ]
+   ],
+   "explanation": "Each is a simple machine.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-magnets-forces-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer wants to load heavy sacks of cocoa onto a truck. A boy suggests using a long wooden plank as a ramp.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What simple machine is the plank?",
+     "choices": [
+      "wedge",
+      "inclined plane",
+      "lever",
+      "pulley"
+     ],
+     "answer": 1,
+     "explanation": "A sloping surface is an inclined plane.",
+     "id": "fslc-science-energy-forces-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the advantage?",
+     "choices": [
+      "less effort is needed",
+      "the truck gets bigger",
+      "the sacks become lighter",
+      "no effort is needed"
+     ],
+     "answer": 0,
+     "explanation": "A ramp reduces the force needed.",
+     "id": "fslc-science-energy-forces-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which force makes the sacks slide down the plank when released?",
+     "choices": [
+      "friction only",
+      "wind",
+      "gravity",
+      "magnetism"
+     ],
+     "answer": 2,
+     "explanation": "Gravity pulls the sacks down.",
+     "id": "fslc-science-energy-forces-e12-c"
+    }
+   ],
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-magnets-forces-machines-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-magnets-forces-machines",
+   "prompt": "A magnet has...",
+   "choices": [
+    "one pole",
+    "no pole",
+    "two poles",
+    "three poles"
+   ],
+   "answer": 2,
+   "explanation": "North and south.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-magnets-forces-machines-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-magnets-forces-machines",
+   "prompt": "The force that pulls things to the ground is...",
+   "choices": [
+    "wind",
+    "friction",
+    "magnetism",
+    "gravity"
+   ],
+   "answer": 3,
+   "explanation": "Gravity pulls towards the Earth.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-magnets-forces-machines-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-magnets-forces-machines",
+   "prompt": "Oil helps machines because it reduces...",
+   "choices": [
+    "weight",
+    "magnetism",
+    "gravity",
+    "friction"
+   ],
+   "answer": 3,
+   "explanation": "Oil makes surfaces slide.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-magnets-forces-machines-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-magnets-forces-machines",
+   "prompt": "Which of these is NOT magnetic?",
+   "choices": [
+    "an iron nail",
+    "iron",
+    "steel",
+    "copper"
+   ],
+   "answer": 3,
+   "explanation": "Copper is not attracted by a magnet.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-magnets-forces-machines-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-magnets-forces-machines",
+   "prompt": "A force is a...",
+   "choices": [
+    "colour",
+    "kind of metal",
+    "push or pull",
+    "sound"
+   ],
+   "answer": 2,
+   "explanation": "That is the definition.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-electricity-safety",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which material is an electrical insulator?",
+   "choices": [
+    "rubber",
+    "aluminium",
+    "iron",
+    "copper"
+   ],
+   "answer": 0,
+   "explanation": "Rubber does not let electricity pass.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-electricity-safety",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What does a closed switch do?",
+   "choices": [
+    "makes the wire insulating",
+    "turns off the cell",
+    "completes the circuit so the bulb lights",
+    "breaks the circuit"
+   ],
+   "answer": 2,
+   "explanation": "The path is complete.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-electricity-safety",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which action is SAFE?",
+   "choices": [
+    "touch a fallen wire",
+    "put a pin in a socket",
+    "fly a kite near power lines",
+    "unplug a device with dry hands only after an adult has switched off"
+   ],
+   "answer": 3,
+   "explanation": "Dry hands and adult supervision are safe.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e16",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-electricity-safety",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Water is a good insulator, so it is safe to touch a switch with wet hands.",
+   "answer": false,
+   "explanation": "Water with impurities conducts electricity: wet hands near electricity are dangerous.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e17",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-electricity-safety",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each item with its job.",
+   "pairs": [
+    [
+     "copper wire",
+     "carries electricity"
+    ],
+    [
+     "plastic cover",
+     "protects us from shock"
+    ],
+    [
+     "cell",
+     "pushes the electricity round"
+    ],
+    [
+     "switch",
+     "opens and closes the circuit"
+    ]
+   ],
+   "explanation": "Each part of a circuit has its own job.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-energy-forces-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-electricity-safety",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ngu sees a broken electric wire lying on the road after a storm. A small child is walking toward it.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What should Ngu do first?",
+     "choices": [
+      "touch it to see if it is live",
+      "warn the child to stay away and call an adult",
+      "ignore it",
+      "pick up the wire with a stick"
+     ],
+     "answer": 1,
+     "explanation": "Stay away and get help.",
+     "id": "fslc-science-energy-forces-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why is the wire dangerous?",
+     "choices": [
+      "it is wet only",
+      "it makes noise",
+      "it can carry electricity that gives a shock",
+      "it is heavy"
+     ],
+     "answer": 2,
+     "explanation": "Electricity can seriously hurt people.",
+     "id": "fslc-science-energy-forces-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Who should repair it?",
+     "choices": [
+      "any child",
+      "the electricity company technicians",
+      "nobody",
+      "a neighbour with a knife"
+     ],
+     "answer": 1,
+     "explanation": "Only trained people.",
+     "id": "fslc-science-energy-forces-e18-c"
+    }
+   ],
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-electricity-safety-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-electricity-safety",
+   "prompt": "A bulb lights when the circuit is...",
+   "choices": [
+    "complete",
+    "broken",
+    "cold",
+    "open"
+   ],
+   "answer": 0,
+   "explanation": "A closed path lets electricity flow.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-electricity-safety-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-electricity-safety",
+   "prompt": "Which is a good conductor of electricity?",
+   "choices": [
+    "rubber",
+    "copper",
+    "dry wood",
+    "plastic"
+   ],
+   "answer": 1,
+   "explanation": "Copper is a metal.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-electricity-safety-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-electricity-safety",
+   "prompt": "Which should we NEVER do?",
+   "choices": [
+    "switch off before cleaning",
+    "ask an adult for help",
+    "keep water away",
+    "touch a socket with wet hands"
+   ],
+   "answer": 3,
+   "explanation": "Wet hands are dangerous.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-electricity-safety-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-electricity-safety",
+   "prompt": "The part that opens and closes a circuit is the...",
+   "choices": [
+    "plastic",
+    "switch",
+    "cell",
+    "bulb"
+   ],
+   "answer": 1,
+   "explanation": "The switch controls the path.",
+   "chapter": "fslc-science-energy-forces"
+  },
+  {
+   "id": "fslc-science-electricity-safety-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-electricity-safety",
+   "prompt": "Wires are covered with plastic because plastic is...",
+   "choices": [
+    "magnetic",
+    "heavy",
+    "an insulator",
+    "a conductor"
+   ],
+   "answer": 2,
+   "explanation": "It protects us.",
+   "chapter": "fslc-science-energy-forces"
+  }
+ ]
+}

@@ -1,0 +1,942 @@
+{
+ "chapter": "lower6-computer-ds-algorithms",
+ "lessons": [
+  {
+   "id": "lower6-computer-arrays-stacks-queues",
+   "title": "Arrays, stacks and queues",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Declare and use one- and two-dimensional arrays",
+    "Describe a stack and its operations",
+    "Describe a queue and a circular queue",
+    "Choose a structure for a task"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-ds-algorithms-e01",
+    "lower6-computer-ds-algorithms-e02",
+    "lower6-computer-ds-algorithms-e03",
+    "lower6-computer-ds-algorithms-e04",
+    "lower6-computer-ds-algorithms-e05",
+    "lower6-computer-ds-algorithms-e06"
+   ],
+   "selfCheck": [
+    "lower6-computer-arrays-stacks-queues-q1",
+    "lower6-computer-arrays-stacks-queues-q2",
+    "lower6-computer-arrays-stacks-queues-q3",
+    "lower6-computer-arrays-stacks-queues-q4",
+    "lower6-computer-arrays-stacks-queues-q5"
+   ],
+   "reviewNotes": [
+    "Indexing from 0 chosen; some Board papers use 1. State convention in exam answers. Pseudocode in this pack is Python-like: indentation shows blocks, `for i in range(1, 6)` runs i = 1 to 5.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Arrays",
+     "md": "An **array** is a fixed-size collection of items of the same type, accessed by an **index**. In this pack indexes start at 0, as in most languages (a 5-item array has indexes 0 to 4). A **two-dimensional array** is a table: grid[row][col]. Pseudocode in this pack is Python-like: indentation shows blocks, `for i in range(1, 6)` runs i = 1 to 5."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Stack",
+     "md": "A **stack** is **LIFO** (last in, first out). **push(x)** adds on top; **pop()** removes and returns the top item; **peek()** reads the top without removing. Uses: undo, the call stack of subroutines, reversing a sequence, checking brackets. Popping an empty stack is an **underflow**; pushing onto a full one is an **overflow**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 175,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 20,
+        "text": "Stack (LIFO)",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 130,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 150,
+        "text": "12",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 100,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 120,
+        "text": "7",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 70,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 90,
+        "text": "3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 90,
+        "text": "Top",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 305,
+        "y1": 86,
+        "x2": 275,
+        "y2": 86,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 60,
+        "text": "push",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 66,
+        "x2": 80,
+        "y2": 80,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 80,
+        "x2": 148,
+        "y2": 84,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "A stack with 12 at the bottom, then 7, with 3 on top.",
+     "alt": "Stack diagram: items 12, 7 and 3, the top item being 3."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Queue",
+     "md": "A **queue** is **FIFO** (first in, first out). **enqueue(x)** adds at the rear; **dequeue()** removes from the front. Uses: print queues, keyboard buffers, scheduling. A **circular queue** reuses space by wrapping the rear pointer back to the start of the array (using MOD)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Off-by-one: index 5 does not exist in a 5-item array.\n- Mixing up LIFO and FIFO.\n- Forgetting to check for empty/full before pop/dequeue/push.\n- A queue's front and rear move; the array itself is not shifted in a circular queue."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Stack",
+     "statement": "Start with an empty stack. push(4), push(9), pop(), push(2), pop(). What is on the stack and what values were popped?",
+     "steps": [
+      "push 4: [4]; push 9: [4, 9]; pop returns 9: [4]; push 2: [4, 2]; pop returns 2: [4].",
+      "Popped values: 9 then 2. The stack holds [4]."
+     ],
+     "answer": "Stack [4]; popped 9 and 2"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Queue",
+     "statement": "Empty queue: enqueue A, B, C; dequeue; enqueue D. List the queue front to rear.",
+     "steps": [
+      "After A, B, C: front A, B, C rear. dequeue removes A: B, C.",
+      "enqueue D: B, C, D."
+     ],
+     "answer": "B, C, D"
+    }
+   ],
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-searching-sorting",
+   "title": "Searching and sorting algorithms",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Perform linear and binary search",
+    "State when binary search can be used",
+    "Perform bubble sort and insertion sort",
+    "Compare algorithms in outline (efficiency)"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-ds-algorithms-e07",
+    "lower6-computer-ds-algorithms-e08",
+    "lower6-computer-ds-algorithms-e09",
+    "lower6-computer-ds-algorithms-e10",
+    "lower6-computer-ds-algorithms-e11",
+    "lower6-computer-ds-algorithms-e12"
+   ],
+   "selfCheck": [
+    "lower6-computer-searching-sorting-q1",
+    "lower6-computer-searching-sorting-q2",
+    "lower6-computer-searching-sorting-q3",
+    "lower6-computer-searching-sorting-q4",
+    "lower6-computer-searching-sorting-q5"
+   ],
+   "reviewNotes": [
+    "Computed with Python: bubble sort 3 passes / 4 swaps; binary search steps. Complexity stated in outline only.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Linear and binary search",
+     "md": "**Linear search** checks items one by one from the start; it works on any list; in the worst case it checks all n items. **Binary search** works only on a **sorted** list: compare the target with the middle item, discard the half that cannot contain it, repeat. It needs at most about log₂ n + 1 comparisons (1000 items: at most 10)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Bubble sort",
+     "md": "Compare neighbouring items from the start and **swap** them if out of order; this moves the largest item to the end each pass. Repeat passes until a pass makes **no swaps**. Simple, but slow for long lists: roughly n² comparisons."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 175,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 20,
+        "text": "Bubble sort: pass 1 of [5, 1, 4, 2, 8]",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 40,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 64,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 126,
+        "y": 40,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 151,
+        "y": 64,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 182,
+        "y": 40,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 207,
+        "y": 64,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 238,
+        "y": 40,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 263,
+        "y": 64,
+        "text": "2",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 294,
+        "y": 40,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 319,
+        "y": 64,
+        "text": "8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 120,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 144,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 126,
+        "y": 120,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 151,
+        "y": 144,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 182,
+        "y": 120,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 207,
+        "y": 144,
+        "text": "2",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 238,
+        "y": 120,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 263,
+        "y": 144,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 294,
+        "y": 120,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 319,
+        "y": 144,
+        "text": "8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 80,
+        "x2": 210,
+        "y2": 116,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 102,
+        "text": "after pass 1 (3 swaps)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A list 5 1 4 2 8 above the list 1 4 2 5 8 after the first bubble sort pass.",
+     "alt": "Before and after of the first pass of bubble sort."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Insertion sort",
+     "md": "Take items one at a time and **insert** each into its correct place within the already sorted part on the left, shifting larger items right. Efficient for small or nearly sorted lists."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Efficiency in outline",
+     "md": "We compare algorithms by how the number of steps grows with n. Linear search grows in proportion to n, binary search grows very slowly (about log₂ n), bubble and insertion sorts grow roughly with n². Merge sort and quick sort are faster for large lists (about n log n)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Binary search on an unsorted list gives wrong answers.\n- Bubble sort stops only when a full pass has no swaps.\n- Mid index rounds down: (0 + 6) // 2 = 3."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Binary search",
+     "statement": "Search for 23 in [3, 8, 12, 17, 23, 31, 40] (indexes 0 to 6).",
+     "steps": [
+      "lo=0, hi=6, mid=3: 17 < 23, so lo=4. mid=(4+6)//2=5: 31 > 23, so hi=4.",
+      "mid=4: 23 found at index 4 after 3 comparisons."
+     ],
+     "answer": "Found at index 4 in 3 steps"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Bubble sort",
+     "statement": "Sort [5, 1, 4, 2, 8] with bubble sort. How many passes and swaps?",
+     "steps": [
+      "Pass 1: 3 swaps -> [1,4,2,5,8]. Pass 2: 1 swap -> [1,2,4,5,8]. Pass 3: 0 swaps, stop.",
+      "Total: 3 passes, 4 swaps."
+     ],
+     "answer": "[1, 2, 4, 5, 8]; 3 passes; 4 swaps"
+    }
+   ],
+   "chapter": "lower6-computer-ds-algorithms"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-computer-ds-algorithms-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A stack follows",
+   "choices": [
+    "random order",
+    "FILO only for queues",
+    "FIFO",
+    "LIFO"
+   ],
+   "answer": 3,
+   "explanation": "Last in, first out.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which operation removes the item at the front of a queue?",
+   "choices": [
+    "pop",
+    "peek",
+    "dequeue",
+    "push"
+   ],
+   "answer": 2,
+   "explanation": "Dequeue.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An array has 8 items indexed from 0. What is the last index?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "Indexes 0 to 7.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Stack: push 5, push 8, push 1, pop, pop. What is on top now?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "After two pops only 5 remains.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a circular queue is better than shifting all items forward after each dequeue.",
+   "model": "Shifting needs many moves for each dequeue so it is slow; in a circular queue only the front pointer moves and the rear pointer wraps around, reusing the empty space efficiently.",
+   "rubric": "1 mark each correct point (3).",
+   "explanation": "Shifting needs many moves for each dequeue so it is slow; in a circular queue only the front pointer moves and the rear pointer wraps around, reusing the empty space efficiently.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A circular queue uses an array of size 5 (indexes 0-4). The rear pointer is at index 4 and a new item is added.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The new rear index is (rear + 1) MOD 5 = ",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "(4 + 1) MOD 5 = 0.",
+     "id": "lower6-computer-ds-algorithms-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The pointer 'wraps around' because of",
+     "choices": [
+      "a router",
+      "the stack",
+      "ROM",
+      "the MOD operator"
+     ],
+     "answer": 3,
+     "explanation": "MOD wraps to 0.",
+     "id": "lower6-computer-ds-algorithms-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name one use of a queue and one use of a stack.",
+     "model": "Queue: print jobs. Stack: undo operations or the call stack.",
+     "rubric": "1 mark each.",
+     "explanation": "Queue: print jobs. Stack: undo operations or the call stack.",
+     "id": "lower6-computer-ds-algorithms-e06-c"
+    }
+   ],
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-arrays-stacks-queues-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "prompt": "push adds an item to the",
+   "choices": [
+    "middle",
+    "rear of a queue",
+    "bottom of a queue",
+    "top of the stack"
+   ],
+   "answer": 3,
+   "explanation": "Push.",
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-arrays-stacks-queues-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "prompt": "An underflow occurs when",
+   "choices": [
+    "the array is sorted",
+    "you push",
+    "you peek twice",
+    "you pop from an empty stack"
+   ],
+   "answer": 3,
+   "explanation": "Underflow.",
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-arrays-stacks-queues-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "prompt": "In a queue the first item added is",
+   "choices": [
+    "the first removed",
+    "never removed",
+    "removed by peek",
+    "the last removed"
+   ],
+   "answer": 0,
+   "explanation": "FIFO.",
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-arrays-stacks-queues-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "prompt": "A 2D array can represent",
+   "choices": [
+    "a single number",
+    "only text",
+    "a network",
+    "a table of rows and columns"
+   ],
+   "answer": 3,
+   "explanation": "Grid.",
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-arrays-stacks-queues-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-arrays-stacks-queues",
+   "prompt": "The call stack is used for",
+   "choices": [
+    "printing",
+    "keeping track of subroutine calls",
+    "storing photos",
+    "drawing"
+   ],
+   "answer": 1,
+   "explanation": "Stack use.",
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-searching-sorting",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Binary search needs the list to be",
+   "choices": [
+    "sorted",
+    "unique",
+    "short",
+    "numeric only"
+   ],
+   "answer": 0,
+   "explanation": "Sorted order is required.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-computer-searching-sorting",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Maximum comparisons for a binary search on 1000 sorted items (log2 rule, whole number)",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "floor(log2 1000) + 1 = 10.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-searching-sorting",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Linear search can be used on an unsorted list.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-searching-sorting",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many swaps does bubble sort need to sort [3, 2, 1]? (count every swap)",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "[3,2,1] -> [2,3,1] -> [2,1,3] -> [1,2,3]: 3 swaps.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-searching-sorting",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a 'no swaps' pass allows bubble sort to stop.",
+   "model": "If no neighbouring pair needed swapping then every item is already in order, so nothing more can change.",
+   "rubric": "1 mark each point (2).",
+   "explanation": "If no neighbouring pair needed swapping then every item is already in order, so nothing more can change.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-ds-algorithms-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-searching-sorting",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The sorted list is [2, 5, 9, 14, 20, 27, 33] (indexes 0-6). Search for 27 with binary search.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The first middle index",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "(0 + 6) // 2 = 3 (value 14).",
+     "id": "lower6-computer-ds-algorithms-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The number of comparisons to find 27",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "mid 3 (14) < 27 so lo = 4; mid = (4+6)//2 = 5 holds 27: found, 2 comparisons.",
+     "id": "lower6-computer-ds-algorithms-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State one advantage of binary search over linear search.",
+     "model": "It needs far fewer comparisons for large sorted lists.",
+     "rubric": "1 mark.",
+     "explanation": "It needs far fewer comparisons for large sorted lists.",
+     "id": "lower6-computer-ds-algorithms-e12-c"
+    }
+   ],
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-searching-sorting-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-searching-sorting",
+   "prompt": "Insertion sort inserts each item into",
+   "choices": [
+    "the sorted part of the list",
+    "the CPU",
+    "the cache",
+    "a new file"
+   ],
+   "answer": 0,
+   "explanation": "Insertion.",
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-searching-sorting-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-searching-sorting",
+   "prompt": "The worst case for linear search on n items is",
+   "choices": [
+    "n comparisons",
+    "1 comparison",
+    "0",
+    "log n comparisons"
+   ],
+   "answer": 0,
+   "explanation": "All items.",
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-searching-sorting-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-searching-sorting",
+   "prompt": "The middle index of a list with indexes 0-8 is",
+   "choices": [
+    "4",
+    "8",
+    "5",
+    "3"
+   ],
+   "answer": 0,
+   "explanation": "(0+8)//2.",
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-searching-sorting-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-searching-sorting",
+   "prompt": "Which sort is described as comparing neighbours and swapping?",
+   "choices": [
+    "Insertion search",
+    "Bubble sort",
+    "Linear search",
+    "Binary search"
+   ],
+   "answer": 1,
+   "explanation": "Bubble.",
+   "chapter": "lower6-computer-ds-algorithms"
+  },
+  {
+   "id": "lower6-computer-searching-sorting-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-searching-sorting",
+   "prompt": "For large lists, a faster sort is",
+   "choices": [
+    "bubble sort",
+    "random",
+    "no sort",
+    "merge sort"
+   ],
+   "answer": 3,
+   "explanation": "n log n.",
+   "chapter": "lower6-computer-ds-algorithms"
+  }
+ ]
+}

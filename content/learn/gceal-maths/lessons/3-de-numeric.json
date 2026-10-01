@@ -1,0 +1,707 @@
+{
+ "chapter": "gceal-maths-de-numeric",
+ "lessons": [
+  {
+   "id": "gceal-maths-differential-equations",
+   "title": "First-order differential equations (separable)",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Solve $\\frac{dy}{dx}=f(x)g(y)$ by separating variables",
+    "Use initial conditions",
+    "Form and solve models (growth, cooling)"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-de-numeric-e01",
+    "gceal-maths-de-numeric-e02",
+    "gceal-maths-de-numeric-e03",
+    "gceal-maths-de-numeric-e04",
+    "gceal-maths-de-numeric-e05",
+    "gceal-maths-de-numeric-e06"
+   ],
+   "selfCheck": [
+    "gceal-maths-differential-equations-q1",
+    "gceal-maths-differential-equations-q2",
+    "gceal-maths-differential-equations-q3",
+    "gceal-maths-differential-equations-q4",
+    "gceal-maths-differential-equations-q5"
+   ],
+   "reviewNotes": [
+    "Second-order and integrating-factor equations are not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Separation of variables",
+     "md": "If $\\frac{dy}{dx}=f(x)\\,g(y)$ then $\\int\\frac{1}{g(y)}dy=\\int f(x)\\,dx$. Integrate both sides (one constant $C$ is enough), then use the initial condition to find $C$, then make $y$ the subject if possible."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Standard models",
+     "md": "Growth/decay: $\\frac{dP}{dt}=kP$ has solution $P=P_0e^{kt}$. Newton's law of cooling: $\\frac{dT}{dt}=-k(T-T_s)$ with surroundings $T_s$, solution $T=T_s+(T_0-T_s)e^{-kt}$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 40,
+      "ymin": 0,
+      "ymax": 100,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "25+70exp(-0.1x)",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 15.40445040947149,
+        "y": 40,
+        "label": "(15.4, 40)",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 25,
+        "x2": 40,
+        "y2": 25,
+        "color": "grey",
+        "dash": true
+       }
+      ],
+      "xlabel": "t (minutes)",
+      "ylabel": "T (°C)"
+     },
+     "caption": "Newton cooling: the temperature falls towards the room temperature of 25 degrees C.",
+     "alt": "Decaying exponential curve from 95 degrees C levelling off at 25 degrees C, with the point (15.4, 40) marked."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Putting $C$ on both sides or forgetting it.\n- Integrating the wrong side: all $y$ terms with $dy$, all $x$ terms with $dx$.\n- In modelling, forgetting the units of $t$ or the sign of $k$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Solve $\\frac{dy}{dx}=2xy$ given $y=3$ when $x=0$.",
+     "steps": [
+      "Separate: $\\int\\frac{1}{y}dy=\\int2x\\,dx$, so $\\ln y=x^2+C$.",
+      "$y=Ae^{x^2}$ with $A=e^C$. At $x=0$: $3=A$."
+     ],
+     "answer": "$y=3e^{x^2}$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A population of bacteria satisfies $\\frac{dP}{dt}=0.05P$ with $P=1000$ at $t=0$. When does it double?",
+     "steps": [
+      "$P=1000e^{0.05t}$.",
+      "$2=e^{0.05t}$, so $t=\\frac{\\ln2}{0.05}=13.86$."
+     ],
+     "answer": "About 13.9 time units"
+    }
+   ],
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-numerical-methods",
+   "title": "Numerical methods",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Locate roots by sign change",
+    "Use fixed-point iteration and Newton-Raphson",
+    "Use the trapezium rule"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-de-numeric-e07",
+    "gceal-maths-de-numeric-e08",
+    "gceal-maths-de-numeric-e09",
+    "gceal-maths-de-numeric-e10",
+    "gceal-maths-de-numeric-e11",
+    "gceal-maths-de-numeric-e12"
+   ],
+   "selfCheck": [
+    "gceal-maths-numerical-methods-q1",
+    "gceal-maths-numerical-methods-q2",
+    "gceal-maths-numerical-methods-q3",
+    "gceal-maths-numerical-methods-q4",
+    "gceal-maths-numerical-methods-q5"
+   ],
+   "reviewNotes": [
+    "Simpson's rule not included; check whether the syllabus requires it.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Sign change",
+     "md": "If $f$ is continuous and $f(a)$, $f(b)$ have opposite signs then $f(x)=0$ has a root between $a$ and $b$. Repeating (interval bisection) narrows the root. Always say 'continuous'."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Iteration and Newton-Raphson",
+     "md": "Rearrange $f(x)=0$ as $x=g(x)$ and iterate $x_{n+1}=g(x_n)$; it converges if $|g'|<1$ near the root. Newton-Raphson: $x_{n+1}=x_n-\\frac{f(x_n)}{f'(x_n)}$ (tangent meets the x-axis). It can fail if $f'(x_n)$ is near 0 or if the start is poor."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Trapezium rule",
+     "md": "$\\int_a^bf(x)\\,dx\\approx\\frac h2\\Big[y_0+y_n+2(y_1+\\cdots+y_{n-1})\\Big]$ with $n$ strips of width $h=\\frac{b-a}{n}$. More strips give a better estimate."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "In the trapezium rule the middle values are DOUBLED, the end values counted once. A calculator must be in radian mode for trig functions. Newton-Raphson needs $f'$: do not forget to differentiate correctly."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Use Newton-Raphson on $f(x)=x^3-x-2$ with $x_0=1.5$ to find $x_1$ and $x_2$.",
+     "steps": [
+      "$f(1.5)=3.375-1.5-2=-0.125$; $f'(1.5)=3(2.25)-1=5.75$. $x_1=1.5+\\frac{0.125}{5.75}=1.5217$.",
+      "$f(1.5217)=0.00201$, $f'(1.5217)=5.9467$, so $x_2=1.5217-0.00034=1.5214$."
+     ],
+     "answer": "$x_1\\approx1.5217$, $x_2\\approx1.5214$",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0.5,
+      "xmax": 2.5,
+      "ymin": -1.5,
+      "ymax": 4.5,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "x^2-2",
+        "color": "blue"
+       },
+       {
+        "expr": "3x-4.25",
+        "color": "orange"
+       }
+      ],
+      "points": [
+       {
+        "x": 1.5,
+        "y": 0.25,
+        "label": "x0 = 1.5",
+        "color": "red"
+       },
+       {
+        "x": 1.41667,
+        "y": 0,
+        "label": "x1",
+        "color": "green"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Estimate $\\int_0^1\\frac{1}{1+x^2}dx$ using 4 strips.",
+     "steps": [
+      "$h=0.25$: $y_0=1$, $y_1=0.9412$, $y_2=0.8$, $y_3=0.64$, $y_4=0.5$.",
+      "$\\frac{0.25}{2}\\big[1+0.5+2(0.9412+0.8+0.64)\\big]=0.125\\times6.2624$."
+     ],
+     "answer": "$\\approx0.783$ (exact value $\\frac\\pi4=0.785$)"
+    }
+   ],
+   "chapter": "gceal-maths-de-numeric"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-maths-de-numeric-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-differential-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{dy}{dx}=3y$ and $y(0)=2$. Find $y(1)$ (2 d.p.).",
+   "answer": 40.17,
+   "tolerance": 0.01,
+   "explanation": "$y=2e^{3x}$, so $y(1)=2e^3=40.17$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-differential-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The general solution of $\\frac{dy}{dx}=\\frac xy$ is",
+   "choices": [
+    "$y=\\ln x+C$",
+    "$y^2=x^2+C$",
+    "$\\frac{y^2}{2}=x$",
+    "$y=x^2+C$"
+   ],
+   "answer": 1,
+   "explanation": "$\\int y\\,dy=\\int x\\,dx$ gives $\\frac{y^2}{2}=\\frac{x^2}{2}+c$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-differential-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A separable equation can always be solved by separating variables and integrating.",
+   "answer": true,
+   "explanation": "Separation reduces it to two integrals (although they may not always be easy).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-differential-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{dy}{dx}=y^2$, $y(0)=1$ has solution",
+   "choices": [
+    "$y=\\frac{1}{1-x}$",
+    "$y=1+x^2$",
+    "$y=e^x$",
+    "$y=\\frac{1}{1+x}$"
+   ],
+   "answer": 0,
+   "explanation": "$-\\frac1y=x+C$ with $C=-1$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-differential-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $y\\frac{dy}{dx}=2x$ given $y=2$ when $x=1$. State $y$ in terms of $x$ for $y>0$.",
+   "model": "$\\int y\\,dy=\\int2x\\,dx$: $\\frac{y^2}{2}=x^2+C$. At $(1,2)$: $2=1+C$, $C=1$. So $y^2=2x^2+2$ and $y=\\sqrt{2x^2+2}$.",
+   "rubric": [
+    "Separates correctly (1)",
+    "$C=1$ (1)",
+    "Final $y=\\sqrt{2x^2+2}$ (1)"
+   ],
+   "explanation": "$\\int y\\,dy=\\int2x\\,dx$: $\\frac{y^2}{2}=x^2+C$. At $(1,2)$: $2=1+C$, $C=1$. So $y^2=2x^2+2$ and $y=\\sqrt{2x^2+2}$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-differential-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cup of tea at 95 degrees C is left in a room at 25 degrees C. Its temperature $T$ satisfies $\\frac{dT}{dt}=-0.1(T-25)$ ($t$ in minutes).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $T$ when $t=10$ (1 d.p. in degrees C).",
+     "answer": 50.8,
+     "tolerance": 0.1,
+     "explanation": "$T=25+70e^{-0.1t}$; at $t=10$: $25+70e^{-1}=50.75$.",
+     "id": "gceal-maths-de-numeric-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "After how many minutes does the tea reach 40 degrees C (1 d.p.)?",
+     "answer": 15.4,
+     "tolerance": 0.1,
+     "explanation": "$70e^{-0.1t}=15$, $t=10\\ln\\frac{70}{15}=15.4$.",
+     "id": "gceal-maths-de-numeric-e06-b"
+    }
+   ],
+   "figure": {
+    "kind": "plot",
+    "xmin": 0,
+    "xmax": 40,
+    "ymin": 0,
+    "ymax": 100,
+    "grid": 1,
+    "w": 400,
+    "h": 260,
+    "curves": [
+     {
+      "expr": "25+70exp(-0.1x)",
+      "color": "blue"
+     }
+    ],
+    "points": [
+     {
+      "x": 15.40445040947149,
+      "y": 40,
+      "label": "(15.4, 40)",
+      "color": "red"
+     }
+    ],
+    "segments": [
+     {
+      "x1": 0,
+      "y1": 25,
+      "x2": 40,
+      "y2": 25,
+      "color": "grey",
+      "dash": true
+     }
+    ],
+    "xlabel": "t (minutes)",
+    "ylabel": "T (°C)"
+   },
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-differential-equations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-differential-equations",
+   "prompt": "To separate $\\frac{dy}{dx}=xy$ we write",
+   "choices": [
+    "$\\int\\frac{dy}{x}=\\int y\\,dx$",
+    "$\\int y\\,dy=\\int x\\,dx$",
+    "$y=x\\,y'$",
+    "$\\int\\frac{dy}{y}=\\int x\\,dx$"
+   ],
+   "answer": 3,
+   "explanation": "$y$-terms with $dy$.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-differential-equations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-differential-equations",
+   "prompt": "$\\frac{dP}{dt}=kP$ gives",
+   "choices": [
+    "$P=kP_0t$",
+    "$P=\\ln t$",
+    "$P=P_0+kt$",
+    "$P=P_0e^{kt}$"
+   ],
+   "answer": 3,
+   "explanation": "Exponential.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-differential-equations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-differential-equations",
+   "prompt": "In Newton's cooling, as $t\\to\\infty$, $T\\to$",
+   "choices": [
+    "the surrounding temperature",
+    "the initial temperature",
+    "0",
+    "infinity"
+   ],
+   "answer": 0,
+   "explanation": "$e^{-kt}\\to0$.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-differential-equations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-differential-equations",
+   "prompt": "An initial condition is used to find",
+   "choices": [
+    "the variable $x$",
+    "the constant $C$",
+    "the derivative",
+    "the integral sign"
+   ],
+   "answer": 1,
+   "explanation": "Particular solution.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-differential-equations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-differential-equations",
+   "prompt": "If $\\ln y=x+C$ then $y=$",
+   "choices": [
+    "$e^x+C$",
+    "$x+A$",
+    "$A\\ln x$",
+    "$Ae^x$"
+   ],
+   "answer": 3,
+   "explanation": "$A=e^C$.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-numerical-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "One Newton-Raphson step for $x^2-2=0$ from $x_0=1.5$ gives $x_1=$ (4 d.p.)",
+   "answer": 1.4167,
+   "tolerance": 0.000300000999999967,
+   "explanation": "$1.5-\\frac{0.25}{3}$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-numerical-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$f(x)=x^3+x-3$ has a root in the interval",
+   "choices": [
+    "$0<x<1$",
+    "$1<x<2$",
+    "$2<x<3$",
+    "$-1<x<0$"
+   ],
+   "answer": 1,
+   "explanation": "$f(1)=-1<0$, $f(2)=7>0$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-numerical-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Newton-Raphson always converges to a root.",
+   "answer": false,
+   "explanation": "It can diverge or jump to another root when the start is poor or $f'$ is near 0.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-numerical-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Trapezium rule with 2 strips for $\\int_0^2x^2dx$. Find the estimate.",
+   "answer": 3,
+   "tolerance": 0.001,
+   "explanation": "$h=1$: $\\frac{1}{2}[0+4+2(1)]=3$ (exact $\\frac{8}{3}$).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-numerical-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The iteration $x_{n+1}=\\sqrt{x_n+2}$ with $x_0=1$ is used. Find $x_1,x_2,x_3$ and say what root it approaches, and why.",
+   "model": "$x_1=1.7321$, $x_2=1.9319$, $x_3=1.9829$. It approaches 2 because the limit satisfies $x=\\sqrt{x+2}$, so $x^2=x+2$, $(x-2)(x+1)=0$, and only $x=2$ is non-negative.",
+   "rubric": [
+    "Three values (1)",
+    "States limit 2 (1)",
+    "Solves $x^2=x+2$ (1)"
+   ],
+   "explanation": "$x_1=1.7321$, $x_2=1.9319$, $x_3=1.9829$. It approaches 2 because the limit satisfies $x=\\sqrt{x+2}$, so $x^2=x+2$, $(x-2)(x+1)=0$, and only $x=2$ is non-negative.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-numerical-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$f(x)=x^3+2x-5$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "$f(1)=-2$ and $f(2)=7$ show that",
+     "choices": [
+      "a root lies between 1 and 2",
+      "there are three roots",
+      "the root is negative",
+      "the root is 1.5"
+     ],
+     "answer": 0,
+     "explanation": "Sign change of a continuous function.",
+     "id": "gceal-maths-de-numeric-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Use Newton-Raphson from $x_0=1.3$ to find $x_1$ (4 d.p.).",
+     "answer": 1.3287,
+     "tolerance": 0.000300000999999967,
+     "explanation": "$f(1.3)=-0.203$, $f'(1.3)=7.07$; $x_1=1.3+\\frac{0.203}{7.07}=1.3287$.",
+     "id": "gceal-maths-de-numeric-e12-b"
+    }
+   ],
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-numerical-methods-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-numerical-methods",
+   "prompt": "Newton-Raphson formula is",
+   "choices": [
+    "$\\frac{f'(x_n)}{f(x_n)}$",
+    "$x_n+f(x_n)$",
+    "$x_n-f'(x_n)$",
+    "$x_n-\\frac{f(x_n)}{f'(x_n)}$"
+   ],
+   "answer": 3,
+   "explanation": "Tangent method.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-numerical-methods-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-numerical-methods",
+   "prompt": "In the trapezium rule the first and last ordinates are",
+   "choices": [
+    "doubled",
+    "counted once",
+    "squared",
+    "ignored"
+   ],
+   "answer": 1,
+   "explanation": "Only middle ones doubled.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-numerical-methods-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-numerical-methods",
+   "prompt": "A sign change proves a root provided $f$ is",
+   "choices": [
+    "differentiable at 0",
+    "linear",
+    "positive",
+    "continuous"
+   ],
+   "answer": 3,
+   "explanation": "Needed for the root.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-numerical-methods-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-numerical-methods",
+   "prompt": "More strips in the trapezium rule give",
+   "choices": [
+    "a less accurate estimate",
+    "a more accurate estimate",
+    "no change",
+    "an exact value always"
+   ],
+   "answer": 1,
+   "explanation": "Smaller $h$.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-numerical-methods-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-numerical-methods",
+   "prompt": "An iteration converges when $|g'(x)|$ near the root is",
+   "choices": [
+    "equal to 0 only",
+    "less than 1",
+    "negative",
+    "greater than 1"
+   ],
+   "answer": 1,
+   "explanation": "Fixed-point condition.",
+   "chapter": "gceal-maths-de-numeric"
+  },
+  {
+   "id": "gceal-maths-de-numeric-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-differential-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Consider $\\frac{dy}{dx}=3x^2y^2$ with $y=1$ when $x=0$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "The solution is",
+     "choices": [
+      "$y=\\frac{1}{1+x^3}$",
+      "$y=1+x^3$",
+      "$y=e^{x^3}$",
+      "$y=\\frac{1}{1-x^3}$"
+     ],
+     "answer": 3,
+     "explanation": "$\\int y^{-2}dy=\\int3x^2dx$ gives $-\\frac1y=x^3+C$; $C=-1$, so $y=\\frac{1}{1-x^3}$.",
+     "id": "gceal-maths-de-numeric-m01-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $y$ when $x=0.5$ (4 d.p.).",
+     "answer": 1.1429,
+     "tolerance": 0.0003,
+     "explanation": "$\\frac{1}{1-0.125}=1.1429$.",
+     "id": "gceal-maths-de-numeric-m01-b"
+    }
+   ],
+   "chapter": "gceal-maths-de-numeric"
+  }
+ ]
+}

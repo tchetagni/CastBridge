@@ -1,0 +1,718 @@
+{
+ "chapter": "gceol-chemistry-particles",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-states-diffusion",
+   "title": "States of matter, particles and diffusion",
+   "minutes": 25,
+   "programRef": "GCE O Level Chemistry — Kinetic particle theory, states of matter, diffusion (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the arrangement and motion of particles in solids, liquids and gases.",
+    "Name the changes of state and explain them with the particle model.",
+    "Explain diffusion and why lighter particles diffuse faster.",
+    "Interpret melting and boiling points to decide the state of a substance."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-chemistry-particles-e01",
+    "gceol-chemistry-particles-e02",
+    "gceol-chemistry-particles-e03",
+    "gceol-chemistry-particles-e04",
+    "gceol-chemistry-particles-e05",
+    "gceol-chemistry-particles-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-states-diffusion-q1",
+    "gceol-chemistry-states-diffusion-q2",
+    "gceol-chemistry-states-diffusion-q3",
+    "gceol-chemistry-states-diffusion-q4",
+    "gceol-chemistry-states-diffusion-q5"
+   ],
+   "reviewNotes": [
+    "Boiling point of nitrogen −196 °C (77 K) is a standard value.",
+    "In the ammonia/hydrogen chloride experiment the white ring forms nearer the hydrogen chloride end: standard result.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The particle model",
+     "md": "All matter is made of tiny **particles** (atoms, molecules or ions) that are always moving. In a **solid** the particles are close together in a regular pattern and only **vibrate** about fixed positions. In a **liquid** they are close but irregular and can **slide past** each other. In a **gas** they are far apart, move **randomly and fast**, and fill their container."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Changes of state",
+     "md": "**Melting** (solid → liquid), **freezing** (liquid → solid), **boiling/evaporation** (liquid → gas), **condensation** (gas → liquid), **sublimation** (solid → gas directly, e.g. iodine). Heating gives particles more energy; at the melting or boiling point the energy overcomes the forces between particles, so the **temperature stays constant** during the change."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Diffusion",
+     "md": "**Diffusion** is the spreading of particles from a region of high concentration to low concentration, by random movement. It is fast in gases, slow in liquids, almost nil in solids. At the same temperature **lighter particles diffuse faster**. Example: ammonia (NH₃) and hydrogen chloride (HCl) gases meet in a tube and form a white ring of ammonium chloride **closer to the HCl end**, because the lighter NH₃ travels further in the same time."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- The particles themselves do **not** expand when a substance is heated; they move faster or further apart.\n- Dissolving is not melting.\n- A substance is liquid at a given temperature only if that temperature is **between** its melting and boiling points."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 50,
+        "w": 100,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 84,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 108,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 132,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 54,
+        "cy": 60,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 54,
+        "cy": 84,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 54,
+        "cy": 108,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 54,
+        "cy": 132,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 78,
+        "cy": 60,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 78,
+        "cy": 84,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 78,
+        "cy": 108,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 78,
+        "cy": 132,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 102,
+        "cy": 60,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 102,
+        "cy": 84,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 102,
+        "cy": 108,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 102,
+        "cy": 132,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 50,
+        "w": 100,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 165,
+        "cy": 70,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 85,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 72,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 178,
+        "cy": 105,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 205,
+        "cy": 112,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 90,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 170,
+        "cy": 135,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 195,
+        "cy": 140,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 222,
+        "cy": 130,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 240,
+        "cy": 112,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 100,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 232,
+        "cy": 140,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 275,
+        "y": 50,
+        "w": 110,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 285,
+        "cy": 75,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 100,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 310,
+        "cy": 135,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 375,
+        "cy": 70,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 60,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 292,
+        "cy": 135,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 355,
+        "cy": 140,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 175,
+        "text": "solid",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 175,
+        "text": "liquid",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 175,
+        "text": "gas",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Particle arrangement in a solid (regular, close), a liquid (close, irregular) and a gas (far apart).",
+     "alt": "Three boxes of circles: a regular grid for the solid, close random circles for the liquid and few widely spaced circles for the gas."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — deciding the state",
+     "statement": "A substance melts at −20 °C and boils at 80 °C. What is its state at 25 °C? At 100 °C?",
+     "steps": [
+      "At 25 °C: this is above the melting point (−20 °C) and below the boiling point (80 °C), so the substance is a **liquid**.",
+      "At 100 °C: this is above the boiling point, so it is a **gas**."
+     ],
+     "answer": "Liquid at 25 °C; gas at 100 °C"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — which diffuses faster?",
+     "statement": "Cotton wool with ammonia solution is placed at one end of a long glass tube and cotton wool with hydrochloric acid at the other end. Where does the white ring form and why?",
+     "steps": [
+      "Ammonia gas (NH₃) is lighter than hydrogen chloride gas (HCl), so its particles diffuse faster and travel further.",
+      "The gases meet nearer the HCl end, where white ammonium chloride (NH₄Cl) forms: NH₃ + HCl → NH₄Cl."
+     ],
+     "answer": "Nearer the hydrochloric acid end"
+    }
+   ],
+   "chapter": "gceol-chemistry-particles"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-particles-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-states-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these gives the best evidence that particles of a gas move randomly?",
+   "choices": [
+    "A solid has a fixed shape",
+    "Ice melts when heated",
+    "Water boils at 100 °C",
+    "A drop of bromine fills a jar with brown vapour without stirring"
+   ],
+   "answer": 3,
+   "explanation": "Spreading by itself (diffusion) shows the particles move at random.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-particles-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-states-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "During boiling of pure water the temperature keeps rising.",
+   "answer": false,
+   "explanation": "The temperature stays constant at the boiling point while the energy breaks the forces between particles.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-particles-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-states-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Nitrogen boils at −196 °C. Express this in kelvin (add 273).",
+   "answer": 77,
+   "tolerance": 0,
+   "unit": "K",
+   "explanation": "T = −196 + 273 = 77 K.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-particles-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-states-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which gas diffuses fastest at the same temperature?",
+   "choices": [
+    "Carbon dioxide (CO₂)",
+    "Chlorine (Cl₂)",
+    "Oxygen (O₂)",
+    "Hydrogen (H₂)"
+   ],
+   "answer": 3,
+   "explanation": "H₂ has the smallest mass of these molecules, so it moves fastest on average.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-particles-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-states-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain, using the particle model, why a gas can be compressed but a liquid cannot easily be.",
+   "model": "In a gas the particles are far apart with a lot of empty space, so they can be pushed closer together. In a liquid the particles are already touching, so there is almost no space to compress.",
+   "rubric": "1 mark: gas particles far apart / empty space; 1 mark: liquid particles already close together.",
+   "explanation": "In a gas the particles are far apart with a lot of empty space, so they can be pushed closer together. In a liquid the particles are already touching, so there is almost no space to compress.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-particles-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-states-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The table gives data for four substances: P (melts −7 °C, boils 59 °C); Q (melts 801 °C, boils 1413 °C); R (melts −219 °C, boils −183 °C); S (melts 0 °C, boils 100 °C). Room temperature is 25 °C.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which substance is a gas at room temperature?",
+     "choices": [
+      "R",
+      "S",
+      "P",
+      "Q"
+     ],
+     "answer": 0,
+     "explanation": "R boils at −183 °C, far below 25 °C, so it is a gas.",
+     "id": "gceol-chemistry-particles-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which substance is a solid at room temperature?",
+     "choices": [
+      "S",
+      "P",
+      "R",
+      "Q"
+     ],
+     "answer": 3,
+     "explanation": "Q melts at 801 °C, so it is solid at 25 °C.",
+     "id": "gceol-chemistry-particles-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which substance is liquid at 25 °C?",
+     "choices": [
+      "Both P and S",
+      "Only Q",
+      "Only P",
+      "Only R"
+     ],
+     "answer": 0,
+     "explanation": "25 °C lies between the melting and boiling points of both P and S.",
+     "id": "gceol-chemistry-particles-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the temperature of S stays at 100 °C while it boils.",
+     "model": "The heat energy supplied is used to separate the particles (overcome the forces between them) rather than to raise their average kinetic energy.",
+     "rubric": "1 mark: energy used to separate particles; 1 mark: so the temperature does not rise.",
+     "explanation": "The heat energy supplied is used to separate the particles (overcome the forces between them) rather than to raise their average kinetic energy.",
+     "id": "gceol-chemistry-particles-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-states-diffusion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-states-diffusion",
+   "prompt": "In a gas the particles are",
+   "choices": [
+    "touching in a regular pattern",
+    "close and fixed",
+    "stationary",
+    "far apart and move randomly"
+   ],
+   "answer": 3,
+   "explanation": "That is the particle model of a gas.",
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-states-diffusion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-states-diffusion",
+   "prompt": "Condensation is the change from",
+   "choices": [
+    "gas to liquid",
+    "solid to gas",
+    "liquid to gas",
+    "solid to liquid"
+   ],
+   "answer": 0,
+   "explanation": "Gas particles cool and come together.",
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-states-diffusion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-states-diffusion",
+   "prompt": "Diffusion is fastest in",
+   "choices": [
+    "gases",
+    "metals",
+    "solids",
+    "liquids"
+   ],
+   "answer": 0,
+   "explanation": "Gas particles move freely.",
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-states-diffusion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-states-diffusion",
+   "prompt": "A substance that changes from solid directly to gas is said to",
+   "choices": [
+    "freeze",
+    "sublime",
+    "melt",
+    "condense"
+   ],
+   "answer": 1,
+   "explanation": "Example: iodine on heating.",
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-states-diffusion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-states-diffusion",
+   "prompt": "Heating a solid makes its particles",
+   "choices": [
+    "disappear",
+    "vibrate more",
+    "stop moving",
+    "become larger"
+   ],
+   "answer": 1,
+   "explanation": "They gain kinetic energy.",
+   "chapter": "gceol-chemistry-particles"
+  },
+  {
+   "id": "gceol-chemistry-particles-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-states-diffusion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which statement about the particles of a gas is correct?",
+   "choices": [
+    "They are far apart and move randomly",
+    "They cannot move",
+    "They vibrate in fixed positions",
+    "They are touching in a regular pattern"
+   ],
+   "answer": 0,
+   "explanation": "That is the kinetic model of a gas.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-particles"
+  }
+ ]
+}

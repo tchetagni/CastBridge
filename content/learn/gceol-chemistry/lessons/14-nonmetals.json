@@ -1,0 +1,1670 @@
+{
+ "chapter": "gceol-chemistry-nonmetals",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-hydrogen-oxygen",
+   "title": "Hydrogen and oxygen",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Non-metals: hydrogen, oxygen, nitrogen and ammonia, fertilisers, sulphur and sulphuric acid, chlorine and halogens (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the laboratory preparation and test of hydrogen.",
+    "Describe the laboratory preparation and test of oxygen.",
+    "Describe the combustion of elements in oxygen and classify oxides.",
+    "Use gas volume ratios in simple calculations."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-tests-analysis",
+    "gceol-chemistry-reactivity-series"
+   ],
+   "exercises": [
+    "gceol-chemistry-nonmetals-e01",
+    "gceol-chemistry-nonmetals-e02",
+    "gceol-chemistry-nonmetals-e03",
+    "gceol-chemistry-nonmetals-e04",
+    "gceol-chemistry-nonmetals-e05",
+    "gceol-chemistry-nonmetals-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-hydrogen-oxygen-q1",
+    "gceol-chemistry-hydrogen-oxygen-q2",
+    "gceol-chemistry-hydrogen-oxygen-q3",
+    "gceol-chemistry-hydrogen-oxygen-q4",
+    "gceol-chemistry-hydrogen-oxygen-q5"
+   ],
+   "reviewNotes": [
+    "Gas volumes are compared at the same temperature and pressure (Avogadro's law).",
+    "Oxide classification: acidic (non-metal oxides such as CO₂, SO₂), basic (most metal oxides), amphoteric (Al₂O₃, ZnO) and neutral (H₂O, CO, NO).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Hydrogen",
+     "md": "**Preparation**: zinc (or magnesium) + dilute hydrochloric acid: Zn + 2HCl → ZnCl₂ + H₂. Collected over water or by upward delivery (it is the **least dense** gas). **Test**: a lighted splint gives a **squeaky pop**. Colourless, odourless, burns to form water: 2H₂ + O₂ → 2H₂O. **Uses**: making ammonia (Haber process), hardening oils to make margarine, rocket fuel, cutting and welding (oxy-hydrogen)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Oxygen",
+     "md": "**Preparation**: decomposing hydrogen peroxide with manganese(IV) oxide as catalyst: 2H₂O₂ → 2H₂O + O₂, collected over water. **Test**: a **glowing splint relights**. Elements burn in oxygen to form oxides: magnesium (bright white flame, MgO), sulphur (blue flame, SO₂), carbon (CO₂). **Uses**: respiration, hospitals, steel making, welding, rocket oxidiser."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Classes of oxide",
+     "md": "- **Basic oxides**: most metal oxides (MgO, CuO); react with acids to form salts; alkali if soluble.\n- **Acidic oxides**: non-metal oxides (CO₂, SO₂, NO₂); react with alkalis; dissolve in water to form acids (SO₂ → acid rain).\n- **Amphoteric**: react with both acids and alkalis (Al₂O₃, ZnO).\n- **Neutral**: H₂O, CO, NO."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Hydrogen is explosive with air: always test small samples, away from flames.\n- Manganese(IV) oxide is a catalyst: it is not used up.\n- Carbon dioxide is an acidic oxide, but it is not a gas that supports burning."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         130,
+         120,
+         130,
+         135,
+         60,
+         45,
+         60
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 40,
+        "w": 14,
+        "h": 25,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 77,
+        "y1": 40,
+        "x2": 77,
+        "y2": 30,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 77,
+        "y1": 30,
+        "x2": 210,
+        "y2": 30,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 30,
+        "x2": 210,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 150,
+        "w": 80,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 171,
+        "y": 175,
+        "w": 78,
+        "h": 44,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 160,
+        "text": "flask",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 105,
+        "text": "gas jar over water",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 125,
+        "text": "(gas collected)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 20,
+        "text": "solid + liquid",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Apparatus to prepare a gas: reactants in a flask, gas passed along a delivery tube and collected over water in a gas jar.",
+     "alt": "A conical flask connected by a delivery tube to an upside-down gas jar full of water in a trough."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — gas volumes",
+     "statement": "10 cm³ of hydrogen is burnt in excess oxygen: 2H₂ + O₂ → 2H₂O (steam). What volume of oxygen reacts and what volume of steam forms (same temperature and pressure, above 100 °C)?",
+     "steps": [
+      "Gas volumes are in the same ratio as the moles: H₂ : O₂ : H₂O = 2 : 1 : 2.",
+      "Oxygen used = 10 ÷ 2 = 5 cm³; steam formed = 10 cm³."
+     ],
+     "answer": "5 cm³ of oxygen; 10 cm³ of steam"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — oxygen from hydrogen peroxide",
+     "statement": "What volume of oxygen at room temperature and pressure (24 dm³/mol) is obtained from 6.8 g of H₂O₂ (H 1, O 16)?",
+     "steps": [
+      "Mr(H₂O₂) = 34; n = 6.8 ÷ 34 = 0.20 mol. Ratio H₂O₂ : O₂ = 2 : 1, so n(O₂) = 0.10 mol.",
+      "Volume = 0.10 × 24 = 2.4 dm³."
+     ],
+     "answer": "2.4 dm³"
+    }
+   ],
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nitrogen-fertilisers",
+   "title": "Nitrogen, ammonia and fertilisers",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Non-metals: hydrogen, oxygen, nitrogen and ammonia, fertilisers, sulphur and sulphuric acid, chlorine and halogens (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the properties and uses of nitrogen.",
+    "Describe the preparation, test, properties and uses of ammonia.",
+    "Explain the need for fertilisers and name common ones.",
+    "Calculate the percentage of nitrogen in fertilisers and describe environmental effects."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-equilibrium-basics",
+    "gceol-chemistry-moles-masses"
+   ],
+   "exercises": [
+    "gceol-chemistry-nonmetals-e07",
+    "gceol-chemistry-nonmetals-e08",
+    "gceol-chemistry-nonmetals-e09",
+    "gceol-chemistry-nonmetals-e10",
+    "gceol-chemistry-nonmetals-e11",
+    "gceol-chemistry-nonmetals-e12"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-nitrogen-fertilisers-q1",
+    "gceol-chemistry-nitrogen-fertilisers-q2",
+    "gceol-chemistry-nitrogen-fertilisers-q3",
+    "gceol-chemistry-nitrogen-fertilisers-q4",
+    "gceol-chemistry-nitrogen-fertilisers-q5"
+   ],
+   "reviewNotes": [
+    "N:P:K labels refer to nitrogen, phosphorus and potassium; the content values quoted are computed from formulae, not from product labels.",
+    "Fertiliser use in Cameroonian farming is mentioned in general terms; no statistics are given.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Nitrogen and ammonia",
+     "md": "**Nitrogen** (N₂) makes up 78% of air; it is **unreactive** (strong triple bond), used to fill food packets and as liquid nitrogen coolant. **Ammonia** (NH₃): made in the lab by heating an ammonium salt with an alkali: 2NH₄Cl + Ca(OH)₂ → CaCl₂ + 2H₂O + 2NH₃; dried with **quicklime** (CaO); collected by **upward delivery** (lighter than air). **Test**: turns damp red litmus **blue**. Very soluble in water, giving an alkaline solution; it reacts with acids to form **ammonium salts**: NH₃ + HCl → NH₄Cl."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Fertilisers",
+     "md": "Plants need **nitrogen (N)** for leaves and protein, **phosphorus (P)** for roots and **potassium (K)** for flowers and fruit. Fertilisers replace nutrients removed by crops. Common ones: **ammonium nitrate** NH₄NO₃, **ammonium sulphate** (NH₄)₂SO₄, **urea** CO(NH₂)₂ and **NPK** mixtures. Made by neutralising ammonia with acids. **Problem**: excess fertiliser washes into rivers and lakes (**eutrophication**): algae grow, then die and rot, using up oxygen so fish die."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Ammonia is lighter than air and very soluble: it cannot be collected over water or dried with concentrated sulphuric acid or calcium chloride (both react with it).\n- Compare fertilisers by **% nitrogen** (mass), not by name.\n- Do not store or apply fertilisers where they can run into drinking water."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "ammonium sulphate",
+        "value": 21.2,
+        "color": "orange"
+       },
+       {
+        "label": "ammonium nitrate",
+        "value": 35.0,
+        "color": "blue"
+       },
+       {
+        "label": "urea",
+        "value": 46.7,
+        "color": "green"
+       }
+      ],
+      "unit": "% N"
+     },
+     "caption": "Percentage of nitrogen by mass in three fertilisers (computed from their formulae).",
+     "alt": "A bar chart: ammonium sulphate 21.2 percent, ammonium nitrate 35 percent and urea 46.7 percent nitrogen."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — % nitrogen in urea",
+     "statement": "Calculate the percentage of nitrogen in urea, CO(NH₂)₂ (C 12, O 16, N 14, H 1).",
+     "steps": [
+      "Mr = 12 + 16 + 2 × (14 + 2) = 12 + 16 + 32 = 60. Nitrogen in the formula: 2 × 14 = 28.",
+      "% N = 28 ÷ 60 × 100 = 46.7%."
+     ],
+     "answer": "46.7%"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — which fertiliser?",
+     "statement": "A farmer has 100 kg of ammonium nitrate (35% N) and 100 kg of ammonium sulphate (21.2% N). Which supplies more nitrogen and how much more?",
+     "steps": [
+      "Nitrogen in ammonium nitrate = 100 × 0.35 = 35.0 kg; in ammonium sulphate = 100 × 0.212 = 21.2 kg.",
+      "Difference = 35.0 − 21.2 = 13.8 kg more from ammonium nitrate."
+     ],
+     "answer": "Ammonium nitrate: 13.8 kg more"
+    }
+   ],
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-sulphur-acid",
+   "title": "Sulphur, sulphur dioxide and sulphuric acid",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Non-metals: hydrogen, oxygen, nitrogen and ammonia, fertilisers, sulphur and sulphuric acid, chlorine and halogens (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe sulphur and its burning to form sulphur dioxide.",
+    "State properties, uses and hazards of sulphur dioxide.",
+    "Describe the contact process with conditions.",
+    "State properties and uses of dilute and concentrated sulphuric acid."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-equilibrium-basics",
+    "gceol-chemistry-acids-bases"
+   ],
+   "exercises": [
+    "gceol-chemistry-nonmetals-e13",
+    "gceol-chemistry-nonmetals-e14",
+    "gceol-chemistry-nonmetals-e15",
+    "gceol-chemistry-nonmetals-e16",
+    "gceol-chemistry-nonmetals-e17",
+    "gceol-chemistry-nonmetals-e18"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-sulphur-acid-q1",
+    "gceol-chemistry-sulphur-acid-q2",
+    "gceol-chemistry-sulphur-acid-q3",
+    "gceol-chemistry-sulphur-acid-q4",
+    "gceol-chemistry-sulphur-acid-q5"
+   ],
+   "reviewNotes": [
+    "Contact process conditions quoted: about 450 °C, vanadium(V) oxide catalyst and a pressure of about 1–2 atmospheres (typical textbook values).",
+    "Sulphur dioxide as a food preservative and bleach is mentioned generally; safe limits are not given.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Sulphur and sulphur dioxide",
+     "md": "**Sulphur** is a yellow brittle non-metal; it burns in air with a blue flame to give **sulphur dioxide**: S + O₂ → SO₂. SO₂ is a colourless, choking, **acidic** gas that turns damp blue litmus red and **bleaches** coloured materials; it is a **reducing agent** (decolourises acidified potassium manganate(VII)). **Uses**: bleach for paper, food preservative, making sulphuric acid. **Harm**: causes acid rain and breathing problems."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The contact process",
+     "md": "1. Burn sulphur (or roast sulphide ores): S + O₂ → SO₂.\n2. Convert to sulphur trioxide: **2SO₂ + O₂ ⇌ 2SO₃** (exothermic) with **vanadium(V) oxide** catalyst at about **450 °C** and about 1–2 atmospheres.\n3. Dissolve SO₃ in concentrated H₂SO₄ to make **oleum** (H₂S₂O₇), then add water to make H₂SO₄. (SO₃ is not added directly to water because the reaction is violent and makes a mist.)"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sulphuric acid",
+     "md": "**Dilute** H₂SO₄: a strong acid (reacts with metals, bases, carbonates to give sulphates). **Concentrated** H₂SO₄: a **dehydrating agent** (turns blue copper(II) sulphate crystals white and sugar into black carbon), and generates a lot of heat with water: **always add acid to water**, never water to acid. **Uses**: fertilisers (ammonium sulphate), detergents, paints, **lead-acid car batteries**, cleaning metals."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Safety and watch out",
+     "md": "- Concentrated sulphuric acid causes severe burns; wear eye protection.\n- Add the **acid to water slowly**, stirring.\n- The catalyst does not change the equilibrium position; the compromise temperature gives a good rate and yield."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 105,
+        "text": "sulphur",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 105,
+        "text": "SO₂",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 105,
+        "text": "SO₃",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 80,
+        "w": 80,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 105,
+        "text": "H₂SO₄",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 100,
+        "x2": 110,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 100,
+        "x2": 210,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 100,
+        "x2": 310,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 70,
+        "text": "burn",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 140,
+        "text": "450 °C, V₂O₅",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 70,
+        "text": "oleum",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The contact process: sulphur is burnt to SO₂, converted to SO₃ over a catalyst and made into sulphuric acid.",
+     "alt": "Four boxes joined by arrows: sulphur, SO2, SO3 and sulphuric acid with conditions labelled."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — acid from sulphur",
+     "statement": "How much sulphuric acid (kg) could be made from 1000 kg (1 tonne) of sulphur if all the sulphur is converted? (S 32, H 1, O 16)",
+     "steps": [
+      "S → SO₂ → SO₃ → H₂SO₄: 1 mol S gives 1 mol H₂SO₄. n(S) = 1 000 000 g ÷ 32 = 31 250 mol.",
+      "Mass H₂SO₄ = 31 250 × 98 = 3 062 500 g = 3062.5 kg."
+     ],
+     "answer": "3062.5 kg (about 3.06 tonnes)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — % sulphur",
+     "statement": "Calculate the percentage of sulphur in sulphuric acid, H₂SO₄.",
+     "steps": [
+      "Mr = 2 × 1 + 32 + 4 × 16 = 98.",
+      "% S = 32 ÷ 98 × 100 = 32.7%."
+     ],
+     "answer": "32.7%"
+    }
+   ],
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-chlorine-halogens",
+   "title": "Chlorine, hydrogen chloride and the halogens",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Non-metals: hydrogen, oxygen, nitrogen and ammonia, fertilisers, sulphur and sulphuric acid, chlorine and halogens (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the preparation, properties, test and uses of chlorine.",
+    "Describe the properties of hydrogen chloride and hydrochloric acid.",
+    "Use silver nitrate to distinguish chloride, bromide and iodide ions.",
+    "Describe the importance of sodium chloride."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-periodic-table",
+    "gceol-chemistry-electrolysis-basics"
+   ],
+   "exercises": [
+    "gceol-chemistry-nonmetals-e19",
+    "gceol-chemistry-nonmetals-e20",
+    "gceol-chemistry-nonmetals-e21",
+    "gceol-chemistry-nonmetals-e22",
+    "gceol-chemistry-nonmetals-e23",
+    "gceol-chemistry-nonmetals-e24"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-chlorine-halogens-q1",
+    "gceol-chemistry-chlorine-halogens-q2",
+    "gceol-chemistry-chlorine-halogens-q3",
+    "gceol-chemistry-chlorine-halogens-q4",
+    "gceol-chemistry-chlorine-halogens-q5"
+   ],
+   "reviewNotes": [
+    "Cl₂ + H₂O ⇌ HCl + HOCl is the standard equation for chlorine water; HOCl is the bleaching/disinfecting species.",
+    "Chlorine is toxic: preparations must be a teacher demonstration in a fume cupboard.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Chlorine",
+     "md": "A pale green, poisonous gas, denser than air. **Lab preparation** (teacher demonstration, fume cupboard): MnO₂ + 4HCl(conc) → MnCl₂ + Cl₂ + 2H₂O (warm). **Test**: **bleaches damp litmus paper** (first red, then white). It reacts with metals: 2Fe + 3Cl₂ → 2FeCl₃; with hydrogen to give HCl; with water: Cl₂ + H₂O ⇌ HCl + HOCl; with cold sodium hydroxide: bleach (sodium chlorate(I)). **Uses**: **disinfecting drinking water and swimming pools**, bleach, making PVC and solvents."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Hydrogen chloride",
+     "md": "HCl is a colourless gas, **very soluble** in water (forms **hydrochloric acid**, a strong acid), and makes white fumes with ammonia. It is made by reacting sodium chloride with concentrated sulphuric acid. **Sodium chloride** (common salt) is obtained from sea water (evaporation) or rock salt; it is used in food, preserving, and as a raw material: electrolysis of brine gives chlorine, hydrogen and sodium hydroxide."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Halide ions: silver nitrate test",
+     "md": "Add dilute nitric acid, then silver nitrate solution: **chloride** gives a **white** precipitate (AgCl), **bromide** a **cream** precipitate (AgBr), **iodide** a **yellow** precipitate (AgI). The precipitates darken in light. Ionic equation: Ag⁺(aq) + X⁻(aq) → AgX(s)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Chlorine is poisonous: never smell directly; the gas is prepared only in a fume cupboard.\n- Distinguish chlorine (Cl₂, gas) from chloride (Cl⁻, ion) and hydrochloric acid (HCl solution).\n- Dry chlorine does not bleach dry litmus paper; the paper must be damp."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 235,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 60,
+        "w": 40,
+        "h": 110,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 61,
+        "y": 120,
+        "w": 38,
+        "h": 49,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 50,
+        "text": "Cl⁻",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 60,
+        "w": 40,
+        "h": 110,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 161,
+        "y": 120,
+        "w": 38,
+        "h": 49,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 50,
+        "text": "Br⁻",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 60,
+        "w": 40,
+        "h": 110,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 261,
+        "y": 120,
+        "w": 38,
+        "h": 49,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 50,
+        "text": "I⁻",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 195,
+        "text": "white",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 195,
+        "text": "cream",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 195,
+        "text": "yellow",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 215,
+        "text": "precipitates with silver nitrate",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Silver halide precipitates: silver chloride is white, silver bromide cream and silver iodide yellow.",
+     "alt": "Three test tubes labelled chloride, bromide and iodide with white, cream and yellow precipitates."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — iron in chlorine",
+     "statement": "Hot iron wool burns in chlorine: 2Fe + 3Cl₂ → 2FeCl₃. What volume of chlorine (24 dm³/mol) reacts with 5.6 g of iron (Fe 56)?",
+     "steps": [
+      "n(Fe) = 5.6 ÷ 56 = 0.10 mol. Ratio Fe : Cl₂ = 2 : 3, so n(Cl₂) = 0.10 × 3/2 = 0.15 mol.",
+      "Volume = 0.15 × 24 = 3.6 dm³."
+     ],
+     "answer": "3.6 dm³"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — identifying a halide",
+     "statement": "A solution gives a yellow precipitate with acidified silver nitrate. Which ion is present and what is the ionic equation?",
+     "steps": [
+      "Yellow precipitate: iodide ions I⁻ (silver iodide).",
+      "Ag⁺(aq) + I⁻(aq) → AgI(s)."
+     ],
+     "answer": "Iodide: Ag⁺(aq) + I⁻(aq) → AgI(s)"
+    }
+   ],
+   "chapter": "gceol-chemistry-nonmetals"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-nonmetals-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which gas relights a glowing splint?",
+   "choices": [
+    "carbon dioxide",
+    "nitrogen",
+    "oxygen",
+    "hydrogen"
+   ],
+   "answer": 2,
+   "explanation": "Oxygen supports combustion.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the test for hydrogen?",
+   "choices": [
+    "A lighted splint gives a squeaky pop",
+    "A glowing splint relights",
+    "Limewater turns milky",
+    "Damp litmus is bleached"
+   ],
+   "answer": 0,
+   "explanation": "Hydrogen burns explosively with air.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Manganese(IV) oxide is used up when it catalyses the decomposition of hydrogen peroxide.",
+   "answer": false,
+   "explanation": "A catalyst is not used up.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What volume of oxygen is needed to burn 20 cm³ of hydrogen completely (2H₂ + O₂ → 2H₂O)?",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "Volume ratio H₂ : O₂ = 2 : 1, so 20 ÷ 2 = 10 cm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the oxide with its type.",
+   "pairs": [
+    [
+     "magnesium oxide",
+     "basic"
+    ],
+    [
+     "sulphur dioxide",
+     "acidic"
+    ],
+    [
+     "aluminium oxide",
+     "amphoteric"
+    ],
+    [
+     "carbon monoxide",
+     "neutral"
+    ]
+   ],
+   "explanation": "Based on the behaviour of each oxide with acids and alkalis.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil prepares hydrogen by adding zinc to dilute hydrochloric acid and collects it over water.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the balanced equation.",
+     "model": "Zn + 2HCl → ZnCl₂ + H₂",
+     "rubric": "1 mark formulae; 1 mark balanced.",
+     "explanation": "Zn + 2HCl → ZnCl₂ + H₂",
+     "id": "gceol-chemistry-nonmetals-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why can hydrogen be collected over water?",
+     "choices": [
+      "It is heavier than water",
+      "It reacts with water",
+      "It is almost insoluble in water",
+      "It is soluble"
+     ],
+     "answer": 2,
+     "explanation": "Insoluble gases can be collected over water.",
+     "id": "gceol-chemistry-nonmetals-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the volume of hydrogen (dm³) from 6.5 g of zinc (Zn 65; 24 dm³/mol).",
+     "answer": 2.4,
+     "tolerance": 0.01,
+     "explanation": "n(Zn) = 0.10 mol = n(H₂); V = 0.10 × 24 = 2.4 dm³.",
+     "unit": "dm³",
+     "id": "gceol-chemistry-nonmetals-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Describe the test for hydrogen.",
+     "model": "Hold a lighted splint at the mouth of the tube: the gas burns with a squeaky pop.",
+     "rubric": "1 mark.",
+     "explanation": "Hold a lighted splint at the mouth of the tube: the gas burns with a squeaky pop.",
+     "id": "gceol-chemistry-nonmetals-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-hydrogen-oxygen-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "prompt": "Hydrogen is the",
+   "choices": [
+    "gas in air",
+    "heaviest gas",
+    "most dense gas",
+    "least dense gas"
+   ],
+   "answer": 3,
+   "explanation": "It is lighter than air.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-hydrogen-oxygen-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "prompt": "Oxygen is collected",
+   "choices": [
+    "only upwards",
+    "never",
+    "in a syringe only",
+    "over water"
+   ],
+   "answer": 3,
+   "explanation": "It is slightly soluble but can be collected over water.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-hydrogen-oxygen-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "prompt": "Burning magnesium in oxygen forms",
+   "choices": [
+    "magnesium chloride",
+    "carbon",
+    "magnesium hydroxide",
+    "magnesium oxide"
+   ],
+   "answer": 3,
+   "explanation": "2Mg + O₂ → 2MgO.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-hydrogen-oxygen-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "prompt": "A non-metal oxide is usually",
+   "choices": [
+    "basic",
+    "acidic",
+    "neutral always",
+    "a metal"
+   ],
+   "answer": 1,
+   "explanation": "Example: CO₂, SO₂.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-hydrogen-oxygen-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-hydrogen-oxygen",
+   "prompt": "2H₂ + O₂ → 2H₂O. Volume ratio H₂ : O₂ is",
+   "choices": [
+    "3 : 1",
+    "1 : 1",
+    "1 : 2",
+    "2 : 1"
+   ],
+   "answer": 3,
+   "explanation": "From the coefficients.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which gas turns damp red litmus blue?",
+   "choices": [
+    "ammonia",
+    "hydrogen",
+    "nitrogen",
+    "oxygen"
+   ],
+   "answer": 0,
+   "explanation": "Ammonia is alkaline.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why is ammonia collected by upward delivery?",
+   "choices": [
+    "It is less dense than air",
+    "It is insoluble",
+    "It reacts with air",
+    "It is heavier than air"
+   ],
+   "answer": 0,
+   "explanation": "Light gases rise.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Nitrogen is very reactive because it makes up most of the air.",
+   "answer": false,
+   "explanation": "Nitrogen is unreactive because of its strong triple bond.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Calculate the percentage of nitrogen in ammonium nitrate, NH₄NO₃ (N 14, H 1, O 16).",
+   "answer": 35.0,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "Mr = 80; N = 28; 28 ÷ 80 × 100 = 35%.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how excess fertiliser can kill fish in a river.",
+   "model": "Fertiliser runs into the water and causes rapid growth of algae (eutrophication); when the algae die, bacteria decompose them using up dissolved oxygen, so fish and other animals die.",
+   "rubric": "1 mark: runs into river/algae grow; 1 mark: bacteria use up oxygen; 1 mark: fish die.",
+   "explanation": "Fertiliser runs into the water and causes rapid growth of algae (eutrophication); when the algae die, bacteria decompose them using up dissolved oxygen, so fish and other animals die.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ammonium sulphate is made by neutralising ammonia solution with sulphuric acid: 2NH₃ + H₂SO₄ → (NH₄)₂SO₄ (N 14, H 1, S 32, O 16).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the Mr of ammonium sulphate.",
+     "answer": 132,
+     "tolerance": 0,
+     "explanation": "2 × (14 + 4) + 32 + 64 = 36 + 96 = 132.",
+     "id": "gceol-chemistry-nonmetals-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the mass of ammonium sulphate from 34 g of ammonia (Mr 17).",
+     "answer": 132.0,
+     "tolerance": 0,
+     "explanation": "n(NH₃) = 34 ÷ 17 = 2 mol; n((NH₄)₂SO₄) = 1 mol; mass = 132 g.",
+     "unit": "g",
+     "id": "gceol-chemistry-nonmetals-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the percentage of nitrogen (to 1 d.p.).",
+     "answer": 21.2,
+     "tolerance": 0.1,
+     "explanation": "28 ÷ 132 × 100 = 21.2%.",
+     "unit": "%",
+     "id": "gceol-chemistry-nonmetals-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name the type of reaction between ammonia and sulphuric acid.",
+     "model": "Neutralisation (acid-base reaction).",
+     "rubric": "1 mark.",
+     "explanation": "Neutralisation (acid-base reaction).",
+     "id": "gceol-chemistry-nonmetals-e12-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nitrogen-fertilisers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "prompt": "Nitrogen makes up what fraction of air?",
+   "choices": [
+    "about 78%",
+    "about 21%",
+    "about 1%",
+    "about 50%"
+   ],
+   "answer": 0,
+   "explanation": "Standard composition.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nitrogen-fertilisers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "prompt": "A fertiliser supplies",
+   "choices": [
+    "water only",
+    "nutrients for plants",
+    "pesticides",
+    "oxygen"
+   ],
+   "answer": 1,
+   "explanation": "N, P and K.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nitrogen-fertilisers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "prompt": "Ammonia is a",
+   "choices": [
+    "neutral gas",
+    "strong acid",
+    "metal",
+    "weak alkali gas"
+   ],
+   "answer": 3,
+   "explanation": "It dissolves to give an alkaline solution.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nitrogen-fertilisers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "prompt": "Eutrophication is caused by",
+   "choices": [
+    "lack of nutrients",
+    "excess nutrients in water",
+    "lack of light",
+    "high pH of air"
+   ],
+   "answer": 1,
+   "explanation": "Algae overgrowth.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nitrogen-fertilisers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-nitrogen-fertilisers",
+   "prompt": "Ammonia is dried using",
+   "choices": [
+    "concentrated sulphuric acid",
+    "calcium chloride",
+    "water",
+    "quicklime (calcium oxide)"
+   ],
+   "answer": 3,
+   "explanation": "The others react with ammonia.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the catalyst in the contact process?",
+   "choices": [
+    "iron",
+    "nickel",
+    "platinum",
+    "vanadium(V) oxide"
+   ],
+   "answer": 3,
+   "explanation": "V₂O₅ is used at about 450 °C.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Concentrated sulphuric acid turns blue copper(II) sulphate crystals white because it is",
+   "choices": [
+    "a dehydrating agent",
+    "an indicator",
+    "a reducing agent",
+    "an oxidising agent only"
+   ],
+   "answer": 0,
+   "explanation": "It removes the water of crystallisation.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "When diluting concentrated sulphuric acid you should pour water into the acid.",
+   "answer": false,
+   "explanation": "Always add the acid to the water, slowly, to avoid violent spitting.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What mass of sulphur dioxide (Mr 64) is formed by burning 16 g of sulphur (S 32)?",
+   "answer": 32,
+   "tolerance": 0,
+   "unit": "g",
+   "explanation": "n(S) = 0.5 mol = n(SO₂); mass = 0.5 × 64 = 32 g.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why the temperature used in the contact process (about 450 °C) is a compromise.",
+   "model": "The forward reaction is exothermic, so a low temperature gives a higher yield of SO₃ but too slow a rate; a high temperature is fast but lowers the yield. 450 °C with the catalyst gives an acceptable rate and yield.",
+   "rubric": "1 mark: exothermic/low T gives higher yield; 1 mark: but slow; 1 mark: compromise with catalyst.",
+   "explanation": "The forward reaction is exothermic, so a low temperature gives a higher yield of SO₃ but too slow a rate; a high temperature is fast but lowers the yield. 450 °C with the catalyst gives an acceptable rate and yield.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Sulphur dioxide is bubbled through acidified potassium manganate(VII) solution and through damp blue litmus paper.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is seen in the manganate(VII) solution?",
+     "choices": [
+      "It changes from purple to colourless",
+      "It turns blue",
+      "A white precipitate forms",
+      "It turns green"
+     ],
+     "answer": 0,
+     "explanation": "SO₂ acts as a reducing agent.",
+     "id": "gceol-chemistry-nonmetals-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What happens to the damp blue litmus paper?",
+     "choices": [
+      "It turns purple",
+      "It turns blue",
+      "It turns red and is then bleached",
+      "It stays blue"
+     ],
+     "answer": 2,
+     "explanation": "SO₂ is acidic and also bleaches.",
+     "id": "gceol-chemistry-nonmetals-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State two uses of sulphur dioxide.",
+     "model": "Bleaching paper/wood pulp; preserving food; making sulphuric acid.",
+     "rubric": "1 mark each; any two.",
+     "explanation": "Bleaching paper/wood pulp; preserving food; making sulphuric acid.",
+     "id": "gceol-chemistry-nonmetals-e18-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why is sulphur dioxide a pollutant?",
+     "model": "It dissolves in rain to form acid rain, damaging buildings, plants and aquatic life, and irritates the lungs.",
+     "rubric": "1 mark each; any two ideas.",
+     "explanation": "It dissolves in rain to form acid rain, damaging buildings, plants and aquatic life, and irritates the lungs.",
+     "id": "gceol-chemistry-nonmetals-e18-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-sulphur-acid-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "prompt": "Sulphur burns in air with a",
+   "choices": [
+    "blue flame",
+    "green flame",
+    "yellow flame only",
+    "no flame"
+   ],
+   "answer": 0,
+   "explanation": "Forms SO₂.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-sulphur-acid-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "prompt": "SO₂ in the contact process is converted to SO₃ using",
+   "choices": [
+    "electrolysis",
+    "iron catalyst",
+    "UV light",
+    "V₂O₅ catalyst"
+   ],
+   "answer": 3,
+   "explanation": "Vanadium(V) oxide.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-sulphur-acid-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "prompt": "Concentrated sulphuric acid is a",
+   "choices": [
+    "indicator",
+    "reducing gas",
+    "bleach",
+    "dehydrating agent"
+   ],
+   "answer": 3,
+   "explanation": "It removes water.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-sulphur-acid-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "prompt": "A use of sulphuric acid is in",
+   "choices": [
+    "tyres only",
+    "bread",
+    "making plastics only",
+    "lead-acid batteries"
+   ],
+   "answer": 3,
+   "explanation": "Electrolyte in car batteries.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-sulphur-acid-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-sulphur-acid",
+   "prompt": "SO₂ causes",
+   "choices": [
+    "global cooling",
+    "ozone creation",
+    "eutrophication",
+    "acid rain"
+   ],
+   "answer": 3,
+   "explanation": "It dissolves in rain water.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e19",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the test for chlorine?",
+   "choices": [
+    "It bleaches damp litmus paper",
+    "It relights a glowing splint",
+    "It turns limewater milky",
+    "It gives a squeaky pop"
+   ],
+   "answer": 0,
+   "explanation": "Chlorine is a bleach in the presence of water.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which ion gives a cream precipitate with silver nitrate?",
+   "choices": [
+    "sulphate",
+    "bromide",
+    "chloride",
+    "iodide"
+   ],
+   "answer": 1,
+   "explanation": "AgBr is cream.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Chlorine is used to kill bacteria in drinking water.",
+   "answer": true,
+   "explanation": "A small amount of chlorine acts as a disinfectant.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What volume of hydrogen chloride (dm³ at 24 dm³/mol) is made from 1 mol of hydrogen reacting with chlorine (H₂ + Cl₂ → 2HCl)?",
+   "answer": 48,
+   "tolerance": 0,
+   "unit": "dm³",
+   "explanation": "n(HCl) = 2 mol; V = 2 × 24 = 48 dm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Chlorine is bubbled into potassium bromide solution. State the observation and the reason.",
+   "model": "The solution turns orange-brown because chlorine is more reactive than bromine and displaces it: Cl₂ + 2KBr → 2KCl + Br₂.",
+   "rubric": "1 mark: orange/brown colour; 1 mark: chlorine more reactive/displacement; 1 mark: equation.",
+   "explanation": "The solution turns orange-brown because chlorine is more reactive than bromine and displaces it: Cl₂ + 2KBr → 2KCl + Br₂.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-nonmetals-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Sodium chloride solution (brine) is electrolysed in industry.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What gas forms at the anode?",
+     "choices": [
+      "hydrogen",
+      "nitrogen",
+      "chlorine",
+      "oxygen"
+     ],
+     "answer": 2,
+     "explanation": "2Cl⁻ → Cl₂ + 2e⁻.",
+     "id": "gceol-chemistry-nonmetals-e24-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What gas forms at the cathode?",
+     "choices": [
+      "oxygen",
+      "hydrogen",
+      "sodium",
+      "chlorine"
+     ],
+     "answer": 1,
+     "explanation": "H⁺ is discharged rather than Na⁺.",
+     "id": "gceol-chemistry-nonmetals-e24-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is left in the solution?",
+     "choices": [
+      "hydrochloric acid",
+      "nothing",
+      "sodium hydroxide",
+      "sodium metal"
+     ],
+     "answer": 2,
+     "explanation": "Na⁺ and OH⁻ remain.",
+     "id": "gceol-chemistry-nonmetals-e24-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State one use of each product.",
+     "model": "Chlorine: water treatment/bleach; hydrogen: making ammonia/margarine; sodium hydroxide: soap making.",
+     "rubric": "1 mark each.",
+     "explanation": "Chlorine: water treatment/bleach; hydrogen: making ammonia/margarine; sodium hydroxide: soap making.",
+     "id": "gceol-chemistry-nonmetals-e24-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-chlorine-halogens-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "prompt": "Chlorine gas is",
+   "choices": [
+    "red-brown",
+    "blue",
+    "pale green",
+    "colourless"
+   ],
+   "answer": 2,
+   "explanation": "Cl₂ is pale green.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-chlorine-halogens-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "prompt": "Hydrogen chloride dissolves in water to form",
+   "choices": [
+    "hydrochloric acid",
+    "bleach",
+    "sulphuric acid",
+    "ammonia"
+   ],
+   "answer": 0,
+   "explanation": "A strong acid.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-chlorine-halogens-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "prompt": "Silver iodide is",
+   "choices": [
+    "yellow",
+    "cream",
+    "white",
+    "blue"
+   ],
+   "answer": 0,
+   "explanation": "Yellow precipitate.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-chlorine-halogens-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "prompt": "An important use of chlorine is",
+   "choices": [
+    "cooking oil",
+    "fertilisers only",
+    "water treatment",
+    "fuel"
+   ],
+   "answer": 2,
+   "explanation": "Disinfection.",
+   "chapter": "gceol-chemistry-nonmetals"
+  },
+  {
+   "id": "gceol-chemistry-chlorine-halogens-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-chlorine-halogens",
+   "prompt": "A bleach test for chlorine needs the litmus paper to be",
+   "choices": [
+    "red only",
+    "damp",
+    "hot",
+    "dry"
+   ],
+   "answer": 1,
+   "explanation": "Water is needed to form the bleaching agent.",
+   "chapter": "gceol-chemistry-nonmetals"
+  }
+ ]
+}

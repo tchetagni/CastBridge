@@ -1,0 +1,938 @@
+{
+ "chapter": "form3-computer-problem-solving",
+ "lessons": [
+  {
+   "id": "form3-computer-algorithms-flowcharts",
+   "title": "Algorithms and flowcharts",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 3 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define an algorithm",
+    "Draw and read flowcharts",
+    "Write simple pseudocode",
+    "Trace an algorithm"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-computer-problem-solving-e01",
+    "form3-computer-problem-solving-e02",
+    "form3-computer-problem-solving-e03",
+    "form3-computer-problem-solving-e04",
+    "form3-computer-problem-solving-e05",
+    "form3-computer-problem-solving-e06"
+   ],
+   "selfCheck": [
+    "form3-computer-algorithms-flowcharts-q1",
+    "form3-computer-algorithms-flowcharts-q2",
+    "form3-computer-algorithms-flowcharts-q3",
+    "form3-computer-algorithms-flowcharts-q4",
+    "form3-computer-algorithms-flowcharts-q5"
+   ],
+   "reviewNotes": [
+    "Pseudocode style follows common textbooks; check whether the Board prescribes keywords.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Algorithm",
+     "md": "An **algorithm** is a set of clear steps to solve a problem. Everyday example: steps to make tea. In computing, an algorithm must be unambiguous, ordered and must end."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Flowchart symbols",
+     "md": "**Oval**: start/end. **Parallelogram**: input/output. **Rectangle**: process. **Diamond**: decision with Yes/No exits. **Arrows**: direction of flow."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 225,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 15
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 30,
+        "text": "Start",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 40,
+        "x2": 210,
+        "y2": 55,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         130,
+         55,
+         290,
+         55,
+         270,
+         85,
+         110,
+         85
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 75,
+        "text": "Input a, b",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 85,
+        "x2": 210,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 100,
+        "w": 160,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 120,
+        "text": "sum = a + b",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 130,
+        "x2": 210,
+        "y2": 145,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         130,
+         145,
+         290,
+         145,
+         270,
+         175,
+         110,
+         175
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 165,
+        "text": "Output sum",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 175,
+        "x2": 210,
+        "y2": 190,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 190,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 14
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 209,
+        "text": "End",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A flowchart that inputs two numbers, adds them and outputs the sum.",
+     "alt": "Flowchart: start, input a and b, process sum = a + b, output sum, end."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pseudocode and tracing",
+     "md": "**Pseudocode** is a plain-language outline of a program: INPUT, OUTPUT, IF ... THEN ... ELSE, FOR, WHILE. A **trace table** lists the values of variables line by line to test an algorithm."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- A decision box must have two exits.\n- Every flowchart has exactly one Start.\n- Do not draw arrows without direction."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write pseudocode to add two numbers and print the sum. Trace it for 6 and 9.",
+     "steps": [
+      "INPUT a, b; sum = a + b; OUTPUT sum.",
+      "For a = 6 and b = 9: sum = 15, the output is 15."
+     ],
+     "answer": "15"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Trace: x = 2; FOR i = 1 TO 3: x = x \\* 2; OUTPUT x.",
+     "steps": [
+      "i=1: x=4; i=2: x=8; i=3: x=16.",
+      "OUTPUT 16."
+     ],
+     "answer": "16"
+    }
+   ],
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-programming-intro",
+   "title": "Introduction to programming",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 3 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain what a program is",
+    "Use variables and data types",
+    "Write sequence, selection and loops in pseudocode",
+    "Say what a translator does"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-computer-problem-solving-e07",
+    "form3-computer-problem-solving-e08",
+    "form3-computer-problem-solving-e09",
+    "form3-computer-problem-solving-e10",
+    "form3-computer-problem-solving-e11",
+    "form3-computer-problem-solving-e12"
+   ],
+   "selfCheck": [
+    "form3-computer-programming-intro-q1",
+    "form3-computer-programming-intro-q2",
+    "form3-computer-programming-intro-q3",
+    "form3-computer-programming-intro-q4",
+    "form3-computer-programming-intro-q5"
+   ],
+   "reviewNotes": [
+    "Pseudocode only; no real language is run in this course.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Programs and languages",
+     "md": "A **program** is a set of instructions that a computer follows. We write programs in a **programming language**. Computers only run **machine code** (binary), so a **translator** (compiler or interpreter) turns our language into machine code."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Variables and types",
+     "md": "A **variable** is a named box that stores a value, e.g. age = 14. Types: **integer** (whole numbers), **real** (decimals), **string** (text) and **Boolean** (TRUE/FALSE). A **constant** never changes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Three building blocks",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 59,
+        "text": "Block",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 59,
+        "text": "Example",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 87,
+        "text": "Sequence",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 87,
+        "text": "INPUT a; OUTPUT a",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 115,
+        "text": "Selection",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 115,
+        "text": "IF a > 0 THEN",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 143,
+        "text": "Iteration",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 143,
+        "text": "FOR i = 1 TO 5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Table of sequence, selection and iteration with a pseudocode example each.",
+     "alt": "Table: sequence, selection and iteration with pseudocode examples."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Three building blocks",
+     "md": "**Sequence**: steps one after another. **Selection**: IF ... THEN ... ELSE chooses a path. **Iteration**: FOR and WHILE loops repeat steps. All programs are built from these."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- A variable name should describe its content, e.g. price, not x.\n- Text must be in quotation marks: \"Buea\".\n- A loop that never ends is a bug."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write pseudocode: ask for a price and quantity and output the total.",
+     "steps": [
+      "INPUT price, quantity",
+      "total = price \\* quantity; OUTPUT total. For 500 and 3 the total is 1500."
+     ],
+     "answer": "1500"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Trace: total = 0; FOR i = 1 TO 4: total = total + i; OUTPUT total.",
+     "steps": [
+      "i=1: 1; i=2: 3; i=3: 6; i=4: 10.",
+      "OUTPUT 10."
+     ],
+     "answer": "10"
+    }
+   ],
+   "chapter": "form3-computer-problem-solving"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-computer-problem-solving-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The diamond shape means",
+   "choices": [
+    "input",
+    "decision",
+    "start",
+    "end"
+   ],
+   "answer": 1,
+   "explanation": "Decision.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Pseudocode is",
+   "choices": [
+    "a network",
+    "an outline of a program in plain language",
+    "a virus",
+    "a screen"
+   ],
+   "answer": 1,
+   "explanation": "Outline.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Trace: n = 4; n = n + 3; n = n \\* 2. What is n?",
+   "answer": 14,
+   "tolerance": 0,
+   "explanation": "4+3 = 7; 7 x 2 = 14.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The parallelogram is used for",
+   "choices": [
+    "decisions",
+    "loops only",
+    "start only",
+    "input or output"
+   ],
+   "answer": 3,
+   "explanation": "Input/output.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write pseudocode to input two numbers and output the larger one.",
+   "model": "INPUT a, b; IF a > b THEN OUTPUT a ELSE OUTPUT b ENDIF",
+   "rubric": "1 mark input, 1 mark comparison, 1 mark outputs.",
+   "explanation": "INPUT a, b; IF a > b THEN OUTPUT a ELSE OUTPUT b ENDIF",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Algorithm: INPUT mark; IF mark >= 50 THEN OUTPUT \"Pass\" ELSE OUTPUT \"Fail\" ENDIF.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Output for mark 50?",
+     "choices": [
+      "Pass",
+      "Fail",
+      "Error",
+      "50"
+     ],
+     "answer": 0,
+     "explanation": "50 >= 50 is true.",
+     "id": "form3-computer-problem-solving-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Output for mark 49?",
+     "choices": [
+      "Error",
+      "49",
+      "Pass",
+      "Fail"
+     ],
+     "answer": 3,
+     "explanation": "49 >= 50 is false.",
+     "id": "form3-computer-problem-solving-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name the flowchart symbol for the test.",
+     "model": "Diamond (decision).",
+     "rubric": "1 mark.",
+     "explanation": "Diamond (decision).",
+     "id": "form3-computer-problem-solving-e06-c"
+    }
+   ],
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-algorithms-flowcharts-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "prompt": "An algorithm must",
+   "choices": [
+    "be secret",
+    "have no order",
+    "never end",
+    "end after a limited number of steps"
+   ],
+   "answer": 3,
+   "explanation": "Finite.",
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-algorithms-flowcharts-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "prompt": "A rectangle in a flowchart is",
+   "choices": [
+    "an input",
+    "a process",
+    "a start",
+    "a decision"
+   ],
+   "answer": 1,
+   "explanation": "Process.",
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-algorithms-flowcharts-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "prompt": "A trace table is used to",
+   "choices": [
+    "draw pictures",
+    "send mail",
+    "store files",
+    "test an algorithm"
+   ],
+   "answer": 3,
+   "explanation": "Testing.",
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-algorithms-flowcharts-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "prompt": "Which symbol marks Start?",
+   "choices": [
+    "Diamond",
+    "Oval",
+    "Rectangle",
+    "Parallelogram"
+   ],
+   "answer": 1,
+   "explanation": "Terminator.",
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-algorithms-flowcharts-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-algorithms-flowcharts",
+   "prompt": "INPUT in pseudocode means",
+   "choices": [
+    "end",
+    "read a value from the user",
+    "print a value",
+    "repeat"
+   ],
+   "answer": 1,
+   "explanation": "Input.",
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-computer-programming-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A named place that stores a value is a",
+   "choices": [
+    "compiler",
+    "loop",
+    "monitor",
+    "variable"
+   ],
+   "answer": 3,
+   "explanation": "Variable.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-computer-programming-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The type for TRUE or FALSE is",
+   "choices": [
+    "Boolean",
+    "string",
+    "real",
+    "integer"
+   ],
+   "answer": 0,
+   "explanation": "Boolean.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-computer-programming-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many times does FOR i = 1 TO 8 repeat?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "1 to 8 is eight values.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-programming-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A compiler",
+   "choices": [
+    "draws charts",
+    "translates a program into machine code",
+    "prints pages",
+    "sends email"
+   ],
+   "answer": 1,
+   "explanation": "Translator.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-computer-programming-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain the three building blocks of programs.",
+   "model": "Sequence: instructions in order; selection: choosing with IF; iteration: repeating with loops.",
+   "rubric": "1 mark each.",
+   "explanation": "Sequence: instructions in order; selection: choosing with IF; iteration: repeating with loops.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-problem-solving-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-computer-programming-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Program: count = 0; FOR n = 1 TO 6: IF n > 3 THEN count = count + 1 ENDIF; OUTPUT count.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Output",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "n = 4, 5, 6 satisfy n > 3.",
+     "id": "form3-computer-problem-solving-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The variable count has type",
+     "choices": [
+      "Boolean",
+      "real",
+      "integer",
+      "string"
+     ],
+     "answer": 2,
+     "explanation": "Whole number.",
+     "id": "form3-computer-problem-solving-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Which building block is the IF?",
+     "model": "Selection.",
+     "rubric": "1 mark.",
+     "explanation": "Selection.",
+     "id": "form3-computer-problem-solving-e12-c"
+    }
+   ],
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-programming-intro-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-programming-intro",
+   "prompt": "The language computers run directly is",
+   "choices": [
+    "flowchart",
+    "machine code",
+    "pseudocode",
+    "English"
+   ],
+   "answer": 1,
+   "explanation": "Binary.",
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-programming-intro-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-programming-intro",
+   "prompt": "A string is",
+   "choices": [
+    "text",
+    "a cable",
+    "a number",
+    "a loop"
+   ],
+   "answer": 0,
+   "explanation": "Text.",
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-programming-intro-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-programming-intro",
+   "prompt": "The loop FOR i = 1 TO 5 runs",
+   "choices": [
+    "6 times",
+    "never",
+    "4 times",
+    "5 times"
+   ],
+   "answer": 3,
+   "explanation": "Five.",
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-programming-intro-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-programming-intro",
+   "prompt": "IF is used for",
+   "choices": [
+    "iteration",
+    "sequence only",
+    "storage",
+    "selection"
+   ],
+   "answer": 3,
+   "explanation": "Selection.",
+   "chapter": "form3-computer-problem-solving"
+  },
+  {
+   "id": "form3-computer-programming-intro-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-computer-programming-intro",
+   "prompt": "A good variable name is",
+   "choices": [
+    "123",
+    "price",
+    "x1x",
+    "zz"
+   ],
+   "answer": 1,
+   "explanation": "Describes content.",
+   "chapter": "form3-computer-problem-solving"
+  }
+ ]
+}

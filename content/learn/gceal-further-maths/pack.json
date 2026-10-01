@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "id": "gceal-further-maths",
+  "version": 1,
+  "title": "Further Mathematics — GCE A Level",
+  "description": "Further pure mathematics and applications: matrices, complex numbers, polar coordinates, conics, differential equations, mechanics and statistics, with a mock paper.",
+  "lang": "en",
+  "cursus": "secondary",
+  "level": "Upper Sixth",
+  "subject": "maths",
+  "subjectWanted": "further-maths",
+  "exam": "GCE-AL",
+  "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Upper Sixth part) — to be checked against the official text",
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
+    {
+      "id": "gceal-further-maths-matrices",
+      "title": "Matrices: 3×3 systems and eigenvalues",
+      "order": 1,
+      "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Upper Sixth part; scope to be checked against the official text) — matrices"
+    },
+    {
+      "id": "gceal-further-maths-complex-geometry",
+      "title": "Complex numbers: roots and loci",
+      "order": 2,
+      "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Upper Sixth part; scope to be checked against the official text) — complex numbers"
+    },
+    {
+      "id": "gceal-further-maths-polar-conics",
+      "title": "Polar coordinates and conic sections",
+      "order": 3,
+      "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Upper Sixth part; scope to be checked against the official text) — polar coordinates; conics"
+    },
+    {
+      "id": "gceal-further-maths-calculus-ext",
+      "title": "Further calculus and differential equations",
+      "order": 4,
+      "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Upper Sixth part; scope to be checked against the official text) — calculus; differential equations"
+    },
+    {
+      "id": "gceal-further-maths-applications",
+      "title": "Further mechanics and statistics",
+      "order": 5,
+      "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics, Mechanics and Statistics (to be checked)"
+    }
+  ],
+  "mockExams": [
+    {
+      "id": "gceal-further-maths-mock-paper-1",
+      "title": "GCE A Level mock — Further Mathematics",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Answer all questions. Show your working in full: marks are given for method as well as for accuracy. Calculators allowed.",
+      "sections": [
+        {
+          "title": "Section A — short questions (8 marks)",
+          "exercises": [
+            "gceal-further-maths-matrices-m01",
+            "gceal-further-maths-complex-geometry-m01",
+            "gceal-further-maths-polar-conics-m01",
+            "gceal-further-maths-applications-m01"
+          ]
+        },
+        {
+          "title": "Section B — structured questions (12 marks)",
+          "exercises": [
+            "gceal-further-maths-calculus-ext-m01",
+            "gceal-further-maths-polar-conics-m02",
+            "gceal-further-maths-applications-m02"
+          ]
+        }
+      ]
+    }
+  ]
+}

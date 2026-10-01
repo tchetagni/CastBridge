@@ -1,0 +1,385 @@
+{
+ "chapter": "gceol-physics-waves",
+ "lessons": [
+  {
+   "id": "gceol-physics-wave-properties",
+   "title": "Wave properties and the electromagnetic spectrum",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — General wave properties, electromagnetic spectrum (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define amplitude, wavelength, frequency, period and wave speed.",
+    "Distinguish transverse and longitudinal waves.",
+    "Use v = fλ and T = 1/f.",
+    "List the electromagnetic spectrum in order and give uses."
+   ],
+   "prerequisites": [
+    "gceol-physics-speed-graphs"
+   ],
+   "exercises": [
+    "gceol-physics-waves-e01",
+    "gceol-physics-waves-e02",
+    "gceol-physics-waves-e03",
+    "gceol-physics-waves-e04",
+    "gceol-physics-waves-e05",
+    "gceol-physics-waves-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-wave-properties-q1",
+    "gceol-physics-wave-properties-q2",
+    "gceol-physics-wave-properties-q3",
+    "gceol-physics-wave-properties-q4",
+    "gceol-physics-wave-properties-q5"
+   ],
+   "reviewNotes": [
+    "Speed of electromagnetic waves in a vacuum: 3.0 × 10⁸ m/s (3 × 10⁸ used here).",
+    "Uses and hazards of each EM band are given in summary; check the exact list required by the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Describing a wave",
+     "md": "A **wave** transfers energy without transferring matter. **Amplitude** = maximum displacement from the rest position; **wavelength λ** = distance between two successive crests; **frequency f** = number of waves per second (hertz, Hz); **period T** = time for one wave = 1/f."
+    },
+    {
+     "type": "formula",
+     "tex": "v = f\\lambda \\qquad T = \\frac{1}{f}",
+     "caption": "v in m/s, f in Hz, λ in m"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Two types of wave",
+     "md": "- **Transverse**: the vibration is at right angles to the direction of travel (water ripples, light, all electromagnetic waves, waves on a rope).\n- **Longitudinal**: the vibration is parallel to the direction of travel, with compressions and rarefactions (sound, a pushed spring).\n\nAll waves can be **reflected, refracted and diffracted**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Electromagnetic spectrum",
+     "md": "From long to short wavelength (low to high frequency): **radio waves, microwaves, infrared, visible light, ultraviolet, X-rays, gamma rays**. All are transverse and travel at $3 \\times 10^8$ m/s in a vacuum. Uses: radio and TV communication, microwaves (cooking, mobile phones), infrared (remote controls, heating), ultraviolet (sterilising), X-rays (medical images), gamma rays (cancer treatment). Ultraviolet, X-rays and gamma rays can damage living cells."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Convert units first: cm to m, MHz to Hz (1 MHz = 10⁶ Hz), kHz to Hz.\n- Amplitude is measured from the rest line to a crest, not from trough to crest.\n- Changing the frequency of a source does not change the wave speed in the same medium: the wavelength changes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 8,
+      "ymin": -1.6,
+      "ymax": 1.6,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "sin(3.1416*x/2)",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 1,
+        "label": "crest",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": -1,
+        "label": "trough",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 1.3,
+        "x2": 4,
+        "y2": 1.3,
+        "color": "orange",
+        "dash": false,
+        "label": "wavelength"
+       }
+      ],
+      "xlabel": "distance (cm)",
+      "ylabel": "displacement (cm)"
+     },
+     "caption": "A transverse wave of amplitude 1 cm and wavelength 4 cm.",
+     "alt": "A sine curve with crest at 1 cm, trough at 3 cm and an orange bar showing one wavelength of 4 cm."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — ripples",
+     "statement": "Water ripples have frequency 15 Hz and wavelength 2 cm. Find the wave speed in m/s.",
+     "steps": [
+      "Convert: λ = 2 cm = 0.02 m.",
+      "v = fλ = 15 × 0.02 = 0.3 m/s."
+     ],
+     "answer": "0.3 m/s"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — FM radio",
+     "statement": "A radio station in Yaoundé broadcasts at 100 MHz (1 MHz = 10⁶ Hz). Find the wavelength (c = 3 × 10⁸ m/s).",
+     "steps": [
+      "f = 100 × 10⁶ = 1 × 10⁸ Hz.",
+      "λ = v ÷ f = 3 × 10⁸ ÷ 1 × 10⁸ = 3 m."
+     ],
+     "answer": "3 m"
+    }
+   ],
+   "chapter": "gceol-physics-waves"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-waves-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-wave-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A wave has frequency 5 Hz and wavelength 0.4 m. Find its speed.",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "v = fλ = 5 × 0.4 = 2 m/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-waves-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-wave-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A sound source vibrates at 250 Hz. Find the period in seconds.",
+   "answer": 0.004,
+   "tolerance": 1e-06,
+   "unit": "s",
+   "explanation": "T = 1/f = 1/250 = 0.004 s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-waves-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-wave-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is a longitudinal wave?",
+   "choices": [
+    "radio waves",
+    "light",
+    "X-rays",
+    "sound"
+   ],
+   "answer": 3,
+   "explanation": "Sound consists of compressions and rarefactions along the direction of travel.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-waves-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-wave-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each electromagnetic wave with a use.",
+   "pairs": [
+    [
+     "radio waves",
+     "broadcasting"
+    ],
+    [
+     "infrared",
+     "TV remote control"
+    ],
+    [
+     "ultraviolet",
+     "sterilising"
+    ],
+    [
+     "X-rays",
+     "medical images of bones"
+    ]
+   ],
+   "explanation": "Standard uses of each band.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-waves-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-wave-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A radio wave of wavelength 600 m travels at 3 × 10⁸ m/s. Find its frequency in kHz.",
+   "answer": 500.0,
+   "tolerance": 0,
+   "unit": "kHz",
+   "explanation": "f = v/λ = 3 × 10⁸ ÷ 600 = 5 × 10⁵ Hz = 500 kHz.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-waves-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-wave-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a ripple tank 12 waves pass a point in 3 s. The wavelength is 5 cm.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the frequency in Hz.",
+     "answer": 4.0,
+     "tolerance": 0,
+     "explanation": "f = 12 ÷ 3 = 4 Hz.",
+     "unit": "Hz",
+     "id": "gceol-physics-waves-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the wave speed in cm/s.",
+     "answer": 20.0,
+     "tolerance": 0,
+     "explanation": "v = fλ = 4 × 5 = 20 cm/s.",
+     "unit": "cm/s",
+     "id": "gceol-physics-waves-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How long does a wave take to travel 1 m (100 cm)?",
+     "answer": 5.0,
+     "tolerance": 0,
+     "explanation": "t = 100 ÷ 20 = 5 s.",
+     "unit": "s",
+     "id": "gceol-physics-waves-e06-c"
+    }
+   ],
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-wave-properties-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-wave-properties",
+   "prompt": "The unit of frequency is the",
+   "choices": [
+    "second",
+    "watt",
+    "metre",
+    "hertz"
+   ],
+   "answer": 3,
+   "explanation": "1 Hz = one wave per second.",
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-wave-properties-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-wave-properties",
+   "prompt": "Which has the shortest wavelength?",
+   "choices": [
+    "infrared",
+    "radio waves",
+    "gamma rays",
+    "visible light"
+   ],
+   "answer": 2,
+   "explanation": "Gamma rays are at the high-frequency end of the spectrum.",
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-wave-properties-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-wave-properties",
+   "prompt": "In a transverse wave the vibrations are",
+   "choices": [
+    "absent",
+    "circular only",
+    "perpendicular to the direction of travel",
+    "parallel to the direction of travel"
+   ],
+   "answer": 2,
+   "explanation": "Definition of a transverse wave.",
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-wave-properties-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-wave-properties",
+   "prompt": "v = fλ. If f doubles at constant speed, λ",
+   "choices": [
+    "stays the same",
+    "halves",
+    "quadruples",
+    "doubles"
+   ],
+   "answer": 1,
+   "explanation": "λ = v/f.",
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-wave-properties-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-wave-properties",
+   "prompt": "A wave transfers",
+   "choices": [
+    "charge only",
+    "mass",
+    "matter only",
+    "energy"
+   ],
+   "answer": 3,
+   "explanation": "Waves carry energy without carrying matter.",
+   "chapter": "gceol-physics-waves"
+  },
+  {
+   "id": "gceol-physics-waves-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-physics-wave-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A wave of frequency 20 Hz travels at 340 m/s. Its wavelength is",
+   "choices": [
+    "6800 m",
+    "17 m",
+    "360 m",
+    "0.059 m"
+   ],
+   "answer": 1,
+   "explanation": "λ = v ÷ f = 340 ÷ 20 = 17 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-waves"
+  }
+ ]
+}

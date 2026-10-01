@@ -1,0 +1,942 @@
+{
+ "chapter": "lower6-food-science-processing-planning",
+ "lessons": [
+  {
+   "id": "lower6-food-science-processing-principles",
+   "title": "Preservation and processing: principles",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Food Science and Nutrition syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain how heat, cold, water removal and acids preserve food",
+    "Describe local processing such as drying, smoking, fermentation and milling",
+    "Describe cassava processing and why it matters",
+    "Compare methods by nutrient effects"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-food-science-processing-planning-e01",
+    "lower6-food-science-processing-planning-e02",
+    "lower6-food-science-processing-planning-e03",
+    "lower6-food-science-processing-planning-e04",
+    "lower6-food-science-processing-planning-e05",
+    "lower6-food-science-processing-planning-e06"
+   ],
+   "selfCheck": [
+    "lower6-food-science-processing-principles-q1",
+    "lower6-food-science-processing-principles-q2",
+    "lower6-food-science-processing-principles-q3",
+    "lower6-food-science-processing-principles-q4",
+    "lower6-food-science-processing-principles-q5"
+   ],
+   "reviewNotes": [
+    "Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release.",
+    "Pasteurisation and canning temperatures are standard textbook values; local cassava-processing details vary by region and should be checked with food technologists.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Principles",
+     "md": "Preservation prevents or slows spoilage by controlling **temperature** (heat destroys microorganisms; cold slows growth), **water** (drying, salting, sugaring), **acidity** (pickling, fermentation), **oxygen** (vacuum, sealing) and **time**. Methods are often combined, e.g. smoking = drying + chemicals from smoke + often salting."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Heat treatments",
+     "md": "**Pasteurisation** (e.g. about 72 degrees Celsius for 15 seconds for milk, or 63 degrees for 30 minutes) kills disease-causing bacteria but not all microorganisms, so milk still needs refrigeration. **Sterilisation / canning** (about 121 degrees for low-acid foods) destroys nearly all microorganisms and spores; the sealed can is stable without refrigeration. Values are textbook figures flagged for review."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 222,
+      "items": [
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 24,
+        "text": "Traditional cassava processing (garri)",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 60,
+        "text": "Peel and wash roots",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 70,
+        "x2": 200.0,
+        "y2": 86,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 86,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 106,
+        "text": "Grate and ferment, press",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 116,
+        "x2": 200.0,
+        "y2": 132,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 132,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 152,
+        "text": "Sieve and roast (garri)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 162,
+        "x2": 200.0,
+        "y2": 178,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 178,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 198,
+        "text": "Cool and store dry",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A flow of four steps for processing cassava into garri.",
+     "alt": "Flow of garri production: peel and wash, grate and ferment then press, sieve and roast, cool and store dry."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Local processing",
+     "md": "**Drying** of fish, crayfish, maize and beans; **smoking** of fish and meat; **milling** of maize and rice; **fermentation** of cassava and cereal products, and traditional drinks; **frying and roasting** of snacks. **Cassava** (especially bitter varieties) contains natural cyanogenic compounds, which are reduced by peeling, grating, soaking, fermenting, pressing, drying and cooking; incomplete processing is a health risk."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Pasteurised does not mean sterile.\n- Dried food rehydrates and spoils if stored in damp places.\n- Smoked foods should be eaten in moderation (smoke can contain harmful compounds).\n- Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Why pasteurise?",
+     "statement": "Why is pasteurised milk still stored in a fridge?",
+     "steps": [
+      "Pasteurisation kills disease-causing bacteria but not all microorganisms.",
+      "Cold storage slows the growth of the survivors."
+     ],
+     "answer": "Not sterile"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Cassava safety",
+     "statement": "Why must bitter cassava be processed properly?",
+     "steps": [
+      "It contains compounds that can release cyanide.",
+      "Peeling, grating, fermenting, pressing, drying and cooking reduce them."
+     ],
+     "answer": "To remove cyanogenic compounds"
+    }
+   ],
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-meal-planning-groups",
+   "title": "Meal planning for different groups",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Food Science and Nutrition syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain how nutritional needs change with age and condition",
+    "Plan meals for infants, children, adolescents, pregnant and elderly people in outline",
+    "Use food groups and cost to plan",
+    "Adapt for special diets in general terms"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-food-science-processing-planning-e07",
+    "lower6-food-science-processing-planning-e08",
+    "lower6-food-science-processing-planning-e09",
+    "lower6-food-science-processing-planning-e10",
+    "lower6-food-science-processing-planning-e11",
+    "lower6-food-science-processing-planning-e12"
+   ],
+   "selfCheck": [
+    "lower6-food-science-meal-planning-groups-q1",
+    "lower6-food-science-meal-planning-groups-q2",
+    "lower6-food-science-meal-planning-groups-q3",
+    "lower6-food-science-meal-planning-groups-q4",
+    "lower6-food-science-meal-planning-groups-q5"
+   ],
+   "reviewNotes": [
+    "Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release.",
+    "Infant feeding statements follow WHO general guidance and must be checked against national guidelines by a nutritionist or paediatric health worker.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Needs change",
+     "md": "**Infants**: breast milk alone is recommended for about the first six months (WHO guidance), then **complementary foods** while breastfeeding continues. **Children**: frequent small meals, growth needs protein, energy, iron, calcium. **Adolescents**: rapid growth, higher needs for energy, iron (especially girls after periods start) and calcium. **Adults**: maintenance, according to activity. **Pregnancy and breastfeeding**: extra energy and nutrients (iron, folate, iodine, calcium) under health-worker guidance. **Older adults**: less energy, but similar protein, calcium, vitamin D and fluid needs."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Planning steps",
+     "md": "1. Identify the group and its needs. 2. Choose a staple, a protein food and vegetables or fruit for each meal. 3. Add healthy snacks (groundnuts, fruit). 4. Adapt texture (soft foods for infants and some older people). 5. Check hygiene, cost and cultural acceptability. 6. Review with a health worker if the person is ill or pregnant."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 24,
+        "text": "Group and extra need",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 59,
+        "text": "Group",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 40,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 59,
+        "text": "Important needs",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 87,
+        "text": "Infant",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 68,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 87,
+        "text": "Breast milk, energy",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 115,
+        "text": "Adolescent",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 96,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 115,
+        "text": "Iron, calcium",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 143,
+        "text": "Pregnant woman",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 124,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 143,
+        "text": "Iron, folate",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 171,
+        "text": "Older adult",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 152,
+        "w": 210.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 171,
+        "text": "Calcium, fluid",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table of four groups and their important nutritional needs.",
+     "alt": "Table: infants need breast milk and energy, adolescents iron and calcium, pregnant women iron and folate, older adults calcium and fluids."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Special diets (general)",
+     "md": "Some people need special diets, such as low-salt or low-sugar diets for medical reasons, or exclude foods because of allergies or beliefs. These must be set with health professionals. Teachers and cooks should not recommend therapeutic diets for illnesses on their own."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Giving infants thin porridge with little energy or protein.\n- Giving honey to infants under one year (not recommended by health authorities).\n- Using very low-fat or strict diets for growing children without advice.\n- Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Infant",
+     "statement": "A mother of a 7-month-old baby asks what to give. Give general advice.",
+     "steps": [
+      "Continue breastfeeding and add soft, well-cooked foods in small amounts, such as enriched pap (with groundnut paste, fish or egg) and mashed fruit and vegetables.",
+      "Keep utensils clean, prepare fresh food, and see a clinic for individual advice."
+     ],
+     "answer": "Continue breastfeeding; add enriched soft foods; clinic advice"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Adolescent",
+     "statement": "A 15-year-old girl feels tired and eats little meat or beans. Which nutrient might be low and what is the advice?",
+     "steps": [
+      "Iron is commonly low in adolescent girls; fatigue has many causes.",
+      "Add iron-rich foods with vitamin C and visit a health worker for assessment."
+     ],
+     "answer": "Iron; see a health worker"
+    }
+   ],
+   "chapter": "lower6-food-science-processing-planning"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-food-science-processing-planning-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-food-science-processing-principles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Pasteurisation",
+   "choices": [
+    "adds vitamins",
+    "makes food sterile always",
+    "kills disease-causing bacteria",
+    "freezes milk"
+   ],
+   "answer": 2,
+   "explanation": "Pasteurisation.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-food-science-processing-principles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Canning kills microorganisms by",
+   "choices": [
+    "freezing",
+    "salting",
+    "drying",
+    "heating in sealed containers"
+   ],
+   "answer": 3,
+   "explanation": "Canning.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-food-science-processing-principles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Fermentation can preserve and change the flavour of food.",
+   "answer": true,
+   "explanation": "Acids and alcohol inhibit spoilage organisms.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-food-science-processing-principles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which combination describes smoking fish?",
+   "choices": [
+    "Pasteurising",
+    "Canning only",
+    "Drying and chemicals from smoke",
+    "Freezing and canning"
+   ],
+   "answer": 2,
+   "explanation": "Smoking.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-food-science-processing-principles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain two reasons why food processing is important in a developing country.",
+   "model": "Reduces losses after harvest; makes food available out of season; adds value and income; makes some foods safe (e.g. cassava).",
+   "rubric": "1 mark each reason, 2 marks plus 1 for example.",
+   "explanation": "Reduces losses after harvest; makes food available out of season; adds value and income; makes some foods safe (e.g. cassava).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-food-science-processing-principles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cooperative in Nkongsamba plans to produce dried fish and garri for sale.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which factor is the most important for dried fish quality?",
+     "choices": [
+      "Freezing it first",
+      "Adding sugar",
+      "Thorough drying and dry storage",
+      "Exposing to rain"
+     ],
+     "answer": 2,
+     "explanation": "Water control.",
+     "id": "lower6-food-science-processing-planning-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why must garri be stored dry?",
+     "choices": [
+      "Moisture allows mould and spoilage",
+      "It will lose vitamins",
+      "It becomes sweeter",
+      "It turns to fat"
+     ],
+     "answer": 0,
+     "explanation": "Moisture.",
+     "id": "lower6-food-science-processing-planning-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest one hygiene precaution during processing.",
+     "model": "Clean hands and utensils, clean water, protect food from flies and dust.",
+     "rubric": "1 mark.",
+     "explanation": "Clean hands and utensils, clean water, protect food from flies and dust.",
+     "id": "lower6-food-science-processing-planning-e06-c"
+    }
+   ],
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-principles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-processing-principles",
+   "prompt": "Sterilised canned food",
+   "choices": [
+    "is dried",
+    "contains live bacteria",
+    "must be frozen",
+    "keeps without refrigeration if sealed"
+   ],
+   "answer": 3,
+   "explanation": "Canning.",
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-principles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-processing-principles",
+   "prompt": "Milling means",
+   "choices": [
+    "cooking in oil",
+    "freezing",
+    "grinding grain into flour",
+    "canning"
+   ],
+   "answer": 2,
+   "explanation": "Milling.",
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-principles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-processing-principles",
+   "prompt": "Acids such as vinegar",
+   "choices": [
+    "encourage all bacteria",
+    "make fat",
+    "inhibit spoilage organisms",
+    "add protein"
+   ],
+   "answer": 2,
+   "explanation": "Pickling.",
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-principles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-processing-principles",
+   "prompt": "Fermentation of milk gives",
+   "choices": [
+    "yoghurt",
+    "garri",
+    "flour",
+    "oil"
+   ],
+   "answer": 0,
+   "explanation": "Lactic fermentation.",
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-principles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-processing-principles",
+   "prompt": "Heat-sensitive vitamins may be lost during",
+   "choices": [
+    "drying in cold air only",
+    "not at all",
+    "canning and long heating",
+    "only in raw food"
+   ],
+   "answer": 2,
+   "explanation": "Heat.",
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Breast milk alone is recommended for about the first",
+   "choices": [
+    "six months",
+    "one year",
+    "two weeks",
+    "month"
+   ],
+   "answer": 0,
+   "explanation": "WHO guidance.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An adolescent girl especially needs",
+   "choices": [
+    "only fat",
+    "no minerals",
+    "less water",
+    "iron"
+   ],
+   "answer": 3,
+   "explanation": "General.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Older adults need no calcium.",
+   "answer": false,
+   "explanation": "Calcium and vitamin D remain important.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which food is a good first complementary food when enriched?",
+   "choices": [
+    "Pap with groundnut paste or egg",
+    "Plain thin pap only",
+    "Sweet drinks",
+    "Fried snacks"
+   ],
+   "answer": 0,
+   "explanation": "Energy and protein.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Plan a one-day menu for a pregnant woman (general guidance) and explain two choices.",
+   "model": "Breakfast: pap with groundnuts; lunch: rice, beans, green leaves; snack: fruit; supper: cassava or plantain with fish and vegetables. Iron-rich beans, fish and leaves with fruit; folate and iodine sources such as leaves and fish. She should follow health-worker advice and supplements.",
+   "rubric": "1 mark each of balanced menu, two explained choices, health-worker advice.",
+   "explanation": "Breakfast: pap with groundnuts; lunch: rice, beans, green leaves; snack: fruit; supper: cassava or plantain with fish and vegetables. Iron-rich beans, fish and leaves with fruit; folate and iodine sources such as leaves and fish. She should follow health-worker advice and supplements.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-processing-planning-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school canteen in Kumba serves 12-year-olds with a daily budget of 300 FCFA per child (illustrative).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Daily cost for 200 children (FCFA)",
+     "answer": 60000,
+     "tolerance": 0,
+     "explanation": "200 x 300 = 60000.",
+     "id": "lower6-food-science-processing-planning-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which cheap combination is the best for protein?",
+     "choices": [
+      "Soft drinks and biscuits",
+      "Fried dough only",
+      "Sugar only",
+      "Beans with maize or plantain"
+     ],
+     "answer": 3,
+     "explanation": "Legumes with staples.",
+     "id": "lower6-food-science-processing-planning-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two ways to include vitamins and minerals within the budget.",
+     "model": "Seasonal vegetables and fruit; green leaves; groundnuts.",
+     "rubric": "1 mark each.",
+     "explanation": "Seasonal vegetables and fruit; green leaves; groundnuts.",
+     "id": "lower6-food-science-processing-planning-e12-c"
+    }
+   ],
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-meal-planning-groups-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "prompt": "Complementary foods begin at about",
+   "choices": [
+    "six months",
+    "two years",
+    "birth",
+    "one week"
+   ],
+   "answer": 0,
+   "explanation": "WHO guidance.",
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-meal-planning-groups-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "prompt": "Pregnant women should be",
+   "choices": [
+    "told to starve",
+    "given only sugar",
+    "guided by a health worker",
+    "left alone"
+   ],
+   "answer": 2,
+   "explanation": "Health-worker.",
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-meal-planning-groups-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "prompt": "Older adults often need",
+   "choices": [
+    "no water",
+    "more sugar",
+    "no protein",
+    "fewer calories but enough protein and calcium"
+   ],
+   "answer": 3,
+   "explanation": "General.",
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-meal-planning-groups-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "prompt": "A therapeutic diet should be set by",
+   "choices": [
+    "an advert",
+    "a salesman",
+    "a health professional",
+    "a neighbour"
+   ],
+   "answer": 2,
+   "explanation": "Professional advice.",
+   "chapter": "lower6-food-science-processing-planning"
+  },
+  {
+   "id": "lower6-food-science-meal-planning-groups-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-meal-planning-groups",
+   "prompt": "Planning for a school canteen must consider",
+   "choices": [
+    "only price",
+    "nutrition, hygiene and cost",
+    "only colour",
+    "only taste"
+   ],
+   "answer": 1,
+   "explanation": "Balance.",
+   "chapter": "lower6-food-science-processing-planning"
+  }
+ ]
+}

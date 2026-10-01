@@ -1,0 +1,551 @@
+{
+ "chapter": "gceal-computer-operating-systems",
+ "lessons": [
+  {
+   "id": "gceal-computer-scheduling-memory",
+   "title": "Process scheduling and memory management",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe process states",
+    "Compare FCFS, shortest-job-first and round-robin scheduling",
+    "Calculate waiting and completion times",
+    "Explain paging and virtual memory"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-operating-systems-e01",
+    "gceal-computer-operating-systems-e02",
+    "gceal-computer-operating-systems-e03",
+    "gceal-computer-operating-systems-e04",
+    "gceal-computer-operating-systems-e05",
+    "gceal-computer-operating-systems-e06"
+   ],
+   "selfCheck": [
+    "gceal-computer-scheduling-memory-q1",
+    "gceal-computer-scheduling-memory-q2",
+    "gceal-computer-scheduling-memory-q3",
+    "gceal-computer-scheduling-memory-q4",
+    "gceal-computer-scheduling-memory-q5"
+   ],
+   "reviewNotes": [
+    "Computed in Python: round robin finish times, FCFS waits, paging offset. Pre-emptive SJF and priority scheduling not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Processes",
+     "md": "A **process** is a program being executed. States: **ready** (waiting for the CPU), **running** (using the CPU), **blocked/waiting** (waiting for I/O). The **scheduler** chooses which ready process runs next; a **context switch** saves the state of one process and loads another. The aim: keep the CPU busy and give fair, quick responses."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Scheduling algorithms",
+     "md": "**FCFS** (first come, first served): run in order of arrival, simple but a long job delays short ones. **SJF** (shortest job first): run the shortest burst first; minimises average waiting time but needs the burst length known. **Round robin**: each process gets a fixed **time slice (quantum)**; if unfinished it goes to the back of the queue; fair and good for interactive use."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 160,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 16,
+        "text": "Round robin, quantum 2: P1=5, P2=3, P3=2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 50,
+        "w": 72,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 56,
+        "y": 73,
+        "text": "P1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 92,
+        "y": 50,
+        "w": 72,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 128,
+        "y": 73,
+        "text": "P2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 164,
+        "y": 50,
+        "w": 72,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 73,
+        "text": "P3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 236,
+        "y": 50,
+        "w": 72,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 272,
+        "y": 73,
+        "text": "P1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 308,
+        "y": 50,
+        "w": 36,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 326,
+        "y": 73,
+        "text": "P2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 344,
+        "y": 50,
+        "w": 36,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 362,
+        "y": 73,
+        "text": "P1",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 108,
+        "text": "0",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 108,
+        "text": "2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 164,
+        "y": 108,
+        "text": "4",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 236,
+        "y": 108,
+        "text": "6",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 308,
+        "y": 108,
+        "text": "8",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 344,
+        "y": 108,
+        "text": "9",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 108,
+        "text": "10",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 140,
+        "text": "Finish: P3 at 6, P2 at 9, P1 at 10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A Gantt chart of round-robin scheduling with quantum 2 showing P1, P2, P3, P1, P2, P1 from time 0 to 10.",
+     "alt": "Gantt chart: P1 0-2, P2 2-4, P3 4-6, P1 6-8, P2 8-9, P1 9-10."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Waiting time",
+     "md": "Waiting time = time spent in the ready queue before running (with all arrivals at time 0 and no pre-emption: the sum of earlier burst times). Example: bursts 24, 3, 3 (order P1, P2, P3) under FCFS: waits 0, 24, 27, mean 17. With SJF the order is P2, P3, P1: waits 0, 3, 6, mean 3 (see the worked example)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Paging",
+     "md": "In **paging** memory is split into fixed-size **frames** and each program into **pages** of the same size; a **page table** maps pages to frames, so a program need not be in contiguous memory. A logical address = page number and **offset**. With 4096-byte pages, address 10000 is page 10000 // 4096 = 2, offset 10000 mod 4096 = 1808. Pages not in RAM are kept on disk (virtual memory); a **page fault** loads the page when needed."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Round robin: a process that finishes early gives up the CPU immediately.\n- SJF can starve long jobs.\n- A small quantum causes many context switches (overhead); a very large quantum behaves like FCFS.\n- Offset is the remainder after dividing by the page size."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - FCFS vs SJF",
+     "statement": "Three jobs arrive at time 0 with bursts P1 = 24, P2 = 3, P3 = 3. Compare the mean waiting time under FCFS (order P1, P2, P3) and SJF.",
+     "steps": [
+      "FCFS: waits 0, 24, 27, so the mean is (0 + 24 + 27) / 3 = 17.",
+      "SJF order P2, P3, P1: waits 0, 3, 6, mean 9 / 3 = 3. SJF is much lower."
+     ],
+     "answer": "FCFS 17, SJF 3"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Paging",
+     "statement": "Page size 4096 bytes. A logical address is 10000. Find the page number and offset.",
+     "steps": [
+      "Page = 10000 // 4096 = 2 (2 x 4096 = 8192).",
+      "Offset = 10000 - 8192 = 1808."
+     ],
+     "answer": "Page 2, offset 1808"
+    }
+   ],
+   "chapter": "gceal-computer-operating-systems"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-computer-operating-systems-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-scheduling-memory",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A process waiting for disk input is in the",
+   "choices": [
+    "finished state",
+    "blocked state",
+    "running state",
+    "ready state"
+   ],
+   "answer": 1,
+   "explanation": "Waiting for I/O.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-operating-systems-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-scheduling-memory",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Round robin gives each process",
+   "choices": [
+    "the CPU until it finishes",
+    "a fixed time slice in turn",
+    "no CPU time",
+    "a random file"
+   ],
+   "answer": 1,
+   "explanation": "Quantum.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-operating-systems-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-computer-scheduling-memory",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Page size 1024 bytes. Address 3000 is in page number (starting from 0)",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "3000 // 1024 = 2.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-operating-systems-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-scheduling-memory",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Round robin, quantum 2, bursts P1=5, P2=3, P3=2 (all at time 0, order P1, P2, P3). At what time does P2 finish?",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "P1 0-2, P2 2-4, P3 4-6 (done), P1 6-8, P2 8-9 (done).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-operating-systems-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-scheduling-memory",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain one advantage and one disadvantage of SJF scheduling.",
+   "model": "Advantage: lowest average waiting time. Disadvantage: long jobs may starve, and burst length must be known in advance.",
+   "rubric": "1 mark each (2) plus 1 for explanation.",
+   "explanation": "Advantage: lowest average waiting time. Disadvantage: long jobs may starve, and burst length must be known in advance.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-operating-systems-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-scheduling-memory",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Jobs P1 = 6, P2 = 2, P3 = 4 arrive at time 0. Use FCFS in the order P1, P2, P3.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Waiting time of P3",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "P3 waits for P1 and P2: 6 + 2 = 8.",
+     "id": "gceal-computer-operating-systems-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total of the three waiting times",
+     "answer": 14,
+     "tolerance": 0,
+     "explanation": "0 + 6 + 8 = 14.",
+     "id": "gceal-computer-operating-systems-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which algorithm would give the lowest mean waiting time?",
+     "choices": [
+      "Random",
+      "FCFS",
+      "Round robin always",
+      "SJF"
+     ],
+     "answer": 3,
+     "explanation": "Shortest first.",
+     "id": "gceal-computer-operating-systems-e06-c"
+    }
+   ],
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-scheduling-memory-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-scheduling-memory",
+   "prompt": "A context switch",
+   "choices": [
+    "deletes memory",
+    "prints a page",
+    "saves one process's state and loads another's",
+    "formats a disk"
+   ],
+   "answer": 2,
+   "explanation": "Context switch.",
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-scheduling-memory-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-scheduling-memory",
+   "prompt": "A page table maps",
+   "choices": [
+    "IP to MAC only",
+    "keys to values only",
+    "pages to frames",
+    "files to folders"
+   ],
+   "answer": 2,
+   "explanation": "Paging.",
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-scheduling-memory-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-scheduling-memory",
+   "prompt": "A page fault occurs when",
+   "choices": [
+    "a file is deleted",
+    "the CPU overheats",
+    "RAM is full of zeros",
+    "a needed page is not in RAM"
+   ],
+   "answer": 3,
+   "explanation": "Load from disk.",
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-scheduling-memory-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-scheduling-memory",
+   "prompt": "A very large round-robin quantum behaves like",
+   "choices": [
+    "FCFS",
+    "SJF",
+    "paging",
+    "random scheduling"
+   ],
+   "answer": 0,
+   "explanation": "No pre-emption.",
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-scheduling-memory-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-scheduling-memory",
+   "prompt": "The ready state means",
+   "choices": [
+    "using the CPU",
+    "terminated",
+    "waiting for I/O",
+    "waiting for the CPU"
+   ],
+   "answer": 3,
+   "explanation": "Ready.",
+   "chapter": "gceal-computer-operating-systems"
+  },
+  {
+   "id": "gceal-computer-operating-systems-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-scheduling-memory",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Round robin scheduling with quantum 2: P1 needs 5 units, P2 needs 3 and P3 needs 2 (all arrive at 0, queue order P1, P2, P3).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Time at which P3 finishes",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "P1 0-2, P2 2-4, P3 4-6.",
+     "id": "gceal-computer-operating-systems-m01-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Time at which P1 finishes",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "P1 runs 6-8 and 9-10.",
+     "id": "gceal-computer-operating-systems-m01-b"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Name one disadvantage of a very small quantum.",
+     "model": "Many context switches waste CPU time.",
+     "rubric": "1 mark.",
+     "explanation": "Many context switches waste CPU time.",
+     "id": "gceal-computer-operating-systems-m01-c"
+    }
+   ],
+   "chapter": "gceal-computer-operating-systems"
+  }
+ ]
+}

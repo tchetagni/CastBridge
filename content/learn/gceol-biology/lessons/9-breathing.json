@@ -1,0 +1,1123 @@
+{
+ "chapter": "gceol-biology-breathing",
+ "lessons": [
+  {
+   "id": "gceol-biology-gas-exchange",
+   "title": "Breathing and gas exchange",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Gas exchange in humans; respiration (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the structure of the breathing system and the mechanism of ventilation.",
+    "Explain how alveoli are adapted for gas exchange.",
+    "Compare inhaled and exhaled air and describe the effects of smoking."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-breathing-e01",
+    "gceol-biology-breathing-e02",
+    "gceol-biology-breathing-e03",
+    "gceol-biology-breathing-e04",
+    "gceol-biology-breathing-e05",
+    "gceol-biology-breathing-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-gas-exchange-q1",
+    "gceol-biology-gas-exchange-q2",
+    "gceol-biology-gas-exchange-q3",
+    "gceol-biology-gas-exchange-q4",
+    "gceol-biology-gas-exchange-q5"
+   ],
+   "reviewNotes": [
+    "Composition values of air are approximate; check the figures required (16–17 % O₂, about 4 % CO₂ in exhaled air).",
+    "Tidal volume of 450-500 cm³ assumed typical for a resting person.",
+    "Smoking content is for review by a health worker.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Gas exchange",
+     "md": "**Gas exchange** is the diffusion of oxygen into the blood and carbon dioxide out of it. It takes place in the **alveoli** of the lungs. Air passes through the nose, **trachea** (held open by rings of cartilage), **bronchi** and **bronchioles** to the alveoli. The **ciliated cells** and **mucus** of the airways trap dust and microbes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 205,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 110,
+        "r": 70,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "lightblue"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 110,
+        "r": 62,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 70,
+        "w": 60,
+        "h": 80,
+        "stroke": "red",
+        "width": 2,
+        "fill": "pink",
+        "radius": 20
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 110,
+        "x2": 20,
+        "y2": 110,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 100,
+        "x2": 250,
+        "y2": 100,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 125,
+        "x2": 230,
+        "y2": 125,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 105,
+        "text": "air",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 122,
+        "text": "(alveolus)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 105,
+        "text": "blood",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 122,
+        "text": "capillary",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 40,
+        "text": "oxygen in",
+        "size": 11,
+        "anchor": "middle",
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 180,
+        "text": "CO₂ out",
+        "size": 11,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 46,
+        "x2": 240,
+        "y2": 62,
+        "color": "blue",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 164,
+        "x2": 240,
+        "y2": 150,
+        "color": "red",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 100,
+        "text": "thin wall:",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 116,
+        "text": "one cell thick",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "One alveolus and its capillary.",
+     "alt": "An alveolus drawn as a circle containing air next to a blood capillary: oxygen diffuses into the blood and carbon dioxide diffuses out; the wall is one cell thick."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Adaptations of alveoli",
+     "md": "- Very **large total surface area** (millions of alveoli).\n- **Thin walls** (one cell thick) so the diffusion distance is short.\n- A rich network of **capillaries** that carries oxygen away and brings carbon dioxide, keeping the concentration gradient steep.\n- A **moist** lining in which gases dissolve.\n- Fresh air from **ventilation** keeps a high oxygen concentration."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Mechanism of breathing",
+     "md": "**Inhalation**: intercostal muscles contract and raise the ribs up and out; the **diaphragm** contracts and flattens; the volume of the chest increases, the pressure falls and air enters.\n\n**Exhalation**: the intercostal muscles and diaphragm relax; the ribs fall and the diaphragm rises; the volume decreases, the pressure rises and air is forced out."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 230,
+      "bars": [
+       {
+        "label": "O₂ in",
+        "value": 21,
+        "color": "blue"
+       },
+       {
+        "label": "O₂ out",
+        "value": 16,
+        "color": "lightblue"
+       },
+       {
+        "label": "CO₂ in",
+        "value": 0.04,
+        "color": "red"
+       },
+       {
+        "label": "CO₂ out",
+        "value": 4,
+        "color": "orange"
+       }
+      ],
+      "unit": "% of the air"
+     },
+     "caption": "Approximate composition of inhaled and exhaled air.",
+     "alt": "A bar chart: oxygen about 21 percent in and 16 percent out; carbon dioxide about 0.04 percent in and 4 percent out."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Smoking and health (flag for health review)",
+     "md": "Tobacco smoke contains **tar** (which damages the airways and can cause lung cancer), **nicotine** (an addictive drug), and **carbon monoxide**, which combines with haemoglobin and reduces the oxygen carried. Smoking is linked with bronchitis, emphysema and heart disease. Stopping smoking improves health; seek advice from a health worker."
+    },
+    {
+     "type": "example",
+     "title": "Volume of air breathed per minute",
+     "statement": "A resting boy takes 16 breaths per minute and inhales about 500 cm³ of air with each breath. Calculate the volume of air breathed per minute.",
+     "steps": [
+      "Volume per minute = volume per breath × breaths per minute.",
+      "500 × 16 = 8000 cm³."
+     ],
+     "answer": "8000 cm³ (8 dm³) per minute"
+    },
+    {
+     "type": "example",
+     "title": "Limewater test",
+     "statement": "Exhaled air is bubbled through limewater and it turns milky. Air from a pump does so only after a long time. What does this show?",
+     "steps": [
+      "Limewater turns milky in the presence of carbon dioxide.",
+      "Exhaled air has more carbon dioxide than inhaled air."
+     ],
+     "answer": "Exhaled air contains more carbon dioxide than inhaled air."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-breathing-e01"
+    }
+   ],
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-respiration",
+   "title": "Respiration: aerobic and anaerobic",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Gas exchange in humans; respiration (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write the word and chemical equations for aerobic respiration.",
+    "Describe anaerobic respiration in muscles and in yeast and explain oxygen debt.",
+    "Interpret simple respiration experiments."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-breathing-e07",
+    "gceol-biology-breathing-e08",
+    "gceol-biology-breathing-e09",
+    "gceol-biology-breathing-e10",
+    "gceol-biology-breathing-e11",
+    "gceol-biology-breathing-e12"
+   ],
+   "selfCheck": [
+    "gceol-biology-respiration-q1",
+    "gceol-biology-respiration-q2",
+    "gceol-biology-respiration-q3",
+    "gceol-biology-respiration-q4",
+    "gceol-biology-respiration-q5"
+   ],
+   "reviewNotes": [
+    "Mitochondria 'site of aerobic respiration' is as in the existing cell lesson.",
+    "The formula uses LaTeX subscripts; checked by the validator.",
+    "Experimental values are invented for practice.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Respiration",
+     "md": "**Respiration** is the chemical process in living cells that releases **energy from food** (usually glucose). Energy is used for muscle contraction, growth, active transport, making proteins and keeping a constant body temperature.\n\n**Aerobic respiration** uses oxygen. It takes place in the **mitochondria**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Anaerobic respiration",
+     "md": "**Anaerobic respiration** releases energy from glucose **without oxygen**. It releases much *less* energy per glucose molecule.\n\n- In **muscles** (hard exercise): glucose → **lactic acid** + a little energy.\n- In **yeast** (fermentation): glucose → **ethanol** + **carbon dioxide** + a little energy.\n\nYeast fermentation is used to make bread (CO₂ makes dough rise), palm wine and beer."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 40,
+        "w": 130,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 67,
+        "text": "glucose",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 67,
+        "text": "+",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 40,
+        "w": 130,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 67,
+        "text": "oxygen",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 335,
+        "y1": 62,
+        "x2": 370,
+        "y2": 62,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 375,
+        "y": 40,
+        "w": 100,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 425,
+        "y": 67,
+        "text": "energy",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 120,
+        "text": "+ carbon dioxide + water",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 150,
+        "w": 130,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 177,
+        "text": "glucose",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 165,
+        "y1": 172,
+        "x2": 215,
+        "y2": 172,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 150,
+        "w": 110,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 177,
+        "text": "lactic acid",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 405,
+        "y": 172,
+        "text": "(muscles)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 230,
+        "text": "with only a little energy",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Aerobic and anaerobic (muscle) respiration.",
+     "alt": "Two rows of boxes: glucose plus oxygen gives energy with carbon dioxide and water; and glucose gives lactic acid with only a little energy in muscles."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Oxygen debt",
+     "md": "During sprinting the muscles respire anaerobically and **lactic acid** builds up, causing fatigue. After the exercise we go on breathing hard and the heart beats fast: extra oxygen is needed to break down the lactic acid. This extra oxygen is called the **oxygen debt**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 90,
+        "w": 90,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 140,
+        "text": "yeast +",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 156,
+        "text": "glucose",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 105,
+        "y1": 90,
+        "x2": 105,
+        "y2": 45,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 105,
+        "y1": 45,
+        "x2": 250,
+        "y2": 45,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 45,
+        "x2": 250,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 120,
+        "w": 100,
+        "h": 80,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 168,
+        "text": "limewater",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 215,
+        "text": "flask",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 220,
+        "text": "turns milky",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 125,
+        "text": "CO₂ given off",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 60,
+        "x2": 360,
+        "y2": 110,
+        "color": "ink",
+        "width": 1.2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Yeast fermentation produces carbon dioxide.",
+     "alt": "A flask of yeast and glucose joined by a delivery tube to a tube of limewater, which turns milky."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Respiration is *not* breathing, and it is not the same as photosynthesis.\n- Plants respire all the time, not only at night.\n- Anaerobic respiration releases some energy; it does not release none.\n- Energy is *released* from glucose, it is not 'made'."
+    },
+    {
+     "type": "example",
+     "title": "Rate of fermentation",
+     "statement": "Yeast in warm sugar solution gives 24 bubbles of gas in 2 minutes at 20 °C, and 54 bubbles in 2 minutes at 35 °C. Calculate the rates in bubbles per minute.",
+     "steps": [
+      "At 20 °C: 24 ÷ 2 = 12 bubbles/min.",
+      "At 35 °C: 54 ÷ 2 = 27 bubbles/min.",
+      "Enzymes work faster at the warmer temperature (below the optimum)."
+     ],
+     "answer": "12 and 27 bubbles per minute"
+    },
+    {
+     "type": "example",
+     "title": "After a 100 m race",
+     "statement": "A boy runs the 100 m race in Bamenda and keeps breathing hard for several minutes. Explain.",
+     "steps": [
+      "His muscles respired partly anaerobically and made lactic acid.",
+      "He needs extra oxygen to break the lactic acid down: he repays the oxygen debt by deep, fast breathing."
+     ],
+     "answer": "To repay the oxygen debt and remove lactic acid."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-breathing-e07"
+    }
+   ],
+   "chapter": "gceol-biology-breathing"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-breathing-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-gas-exchange",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Gas exchange in the lungs occurs in the:",
+   "choices": [
+    "diaphragm",
+    "alveoli",
+    "trachea",
+    "bronchi"
+   ],
+   "answer": 1,
+   "explanation": "Alveoli are the exchange surface.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-gas-exchange",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "During inhalation the diaphragm relaxes and moves up.",
+   "answer": false,
+   "explanation": "During inhalation the diaphragm contracts and flattens.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-gas-exchange",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A girl takes 18 breaths per minute, each of 450 cm³. What volume of air does she breathe in one minute (cm³)?",
+   "answer": 8100,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "450 × 18 = 8100 cm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-gas-exchange",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is NOT an adaptation of the alveoli?",
+   "choices": [
+    "rich blood supply",
+    "walls made of thick cartilage",
+    "large surface area",
+    "thin walls"
+   ],
+   "answer": 1,
+   "explanation": "Cartilage rings are found in the trachea, not the alveolar wall.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-gas-exchange",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why exhaled air contains less oxygen and more carbon dioxide than inhaled air.",
+   "model": "Cells use oxygen in aerobic respiration and release carbon dioxide; oxygen diffuses from alveoli into the blood and carbon dioxide diffuses from the blood into the alveoli.",
+   "rubric": [
+    "1 mark: oxygen absorbed into blood",
+    "1 mark: carbon dioxide made in respiration",
+    "1 mark: carbon dioxide diffuses into the alveoli"
+   ],
+   "explanation": "Cells use oxygen in aerobic respiration and release carbon dioxide; oxygen diffuses from alveoli into the blood and carbon dioxide diffuses from the blood into the alveoli.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-gas-exchange",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student measures the breathing rate of a classmate at rest and after running on the spot in Kumba.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "At rest 15 breaths in one minute; after running 33 breaths in one minute. By how many breaths per minute did the rate increase?",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "33 − 15 = 18.",
+     "unit": "breaths/min",
+     "id": "gceol-biology-breathing-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The best explanation of the increase is that:",
+     "choices": [
+      "blood loses haemoglobin",
+      "the diaphragm stops working",
+      "muscles respire faster and need more oxygen and must remove more CO₂",
+      "the lungs get smaller"
+     ],
+     "answer": 2,
+     "explanation": "The increased respiration increases the CO₂ level, detected by the brain, which increases the breathing rate.",
+     "id": "gceol-biology-breathing-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Suggest one way to make the investigation fair.",
+     "model": "Use the same person, same exercise duration and measure for the same length of time.",
+     "rubric": [
+      "1 mark for a control variable"
+     ],
+     "explanation": "Use the same person, same exercise duration and measure for the same length of time.",
+     "id": "gceol-biology-breathing-e06-c"
+    }
+   ],
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-gas-exchange-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-gas-exchange",
+   "prompt": "Which structure keeps the trachea open?",
+   "choices": [
+    "muscle",
+    "bone",
+    "rings of cartilage",
+    "cellulose"
+   ],
+   "answer": 2,
+   "explanation": "C-shaped cartilage rings.",
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-gas-exchange-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-gas-exchange",
+   "prompt": "Air entering the lungs is cleaned by:",
+   "choices": [
+    "alveoli",
+    "the diaphragm",
+    "mucus and cilia",
+    "haemoglobin"
+   ],
+   "answer": 2,
+   "explanation": "They trap dust and microbes.",
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-gas-exchange-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-gas-exchange",
+   "prompt": "Carbon monoxide in smoke:",
+   "choices": [
+    "is a source of energy",
+    "makes cilia grow",
+    "is used in respiration",
+    "reduces oxygen carried by haemoglobin"
+   ],
+   "answer": 3,
+   "explanation": "It binds to haemoglobin.",
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-gas-exchange-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-gas-exchange",
+   "prompt": "When the ribs move up and out the pressure in the chest:",
+   "choices": [
+    "falls",
+    "stays the same",
+    "doubles",
+    "rises"
+   ],
+   "answer": 0,
+   "explanation": "The volume increases.",
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-gas-exchange-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-gas-exchange",
+   "prompt": "Which gas turns limewater milky?",
+   "choices": [
+    "carbon dioxide",
+    "nitrogen",
+    "oxygen",
+    "hydrogen"
+   ],
+   "answer": 0,
+   "explanation": "That is the test for CO₂.",
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is a product of anaerobic respiration in yeast?",
+   "choices": [
+    "lactic acid",
+    "ethanol",
+    "glucose",
+    "oxygen"
+   ],
+   "answer": 1,
+   "explanation": "Yeast makes ethanol and carbon dioxide.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each item to its role.",
+   "pairs": [
+    [
+     "mitochondria",
+     "site of aerobic respiration"
+    ],
+    [
+     "lactic acid",
+     "made in muscles without oxygen"
+    ],
+    [
+     "limewater",
+     "test for carbon dioxide"
+    ],
+    [
+     "yeast",
+     "ferments sugar"
+    ]
+   ],
+   "explanation": "Standard definitions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A yeast culture gives 45 bubbles in 3 minutes. What is the rate in bubbles per minute?",
+   "answer": 15,
+   "tolerance": 0,
+   "unit": "bubbles/min",
+   "explanation": "45 ÷ 3 = 15.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why does anaerobic respiration release less energy than aerobic respiration?",
+   "choices": [
+    "cells are dead",
+    "oxygen is made",
+    "glucose is only partly broken down",
+    "no glucose is used"
+   ],
+   "answer": 2,
+   "explanation": "The products still contain energy (lactic acid or ethanol).",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain what is meant by oxygen debt.",
+   "model": "It is the extra oxygen needed after vigorous exercise to break down the lactic acid formed during anaerobic respiration in the muscles.",
+   "rubric": [
+    "1 mark: extra oxygen after exercise",
+    "1 mark: to remove lactic acid made anaerobically"
+   ],
+   "explanation": "It is the extra oxygen needed after vigorous exercise to break down the lactic acid formed during anaerobic respiration in the muscles.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-breathing-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student sets up a flask of germinating bean seeds with a thermometer and another flask of boiled seeds.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The temperature of the flask with living seeds:",
+     "choices": [
+      "falls",
+      "stays the same",
+      "becomes zero",
+      "rises"
+     ],
+     "answer": 3,
+     "explanation": "Respiration releases heat energy.",
+     "id": "gceol-biology-breathing-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The flask of boiled seeds acts as a:",
+     "choices": [
+      "control",
+      "test",
+      "source of oxygen",
+      "variable"
+     ],
+     "answer": 0,
+     "explanation": "Dead seeds do not respire, so any change is due to respiration.",
+     "id": "gceol-biology-breathing-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State the word equation for the reaction that raises the temperature.",
+     "model": "Glucose + oxygen → carbon dioxide + water + energy.",
+     "rubric": [
+      "1 mark: reactants",
+      "1 mark: products including energy"
+     ],
+     "explanation": "Glucose + oxygen → carbon dioxide + water + energy.",
+     "id": "gceol-biology-breathing-e12-c"
+    }
+   ],
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-respiration-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-respiration",
+   "prompt": "Aerobic respiration needs:",
+   "choices": [
+    "light",
+    "limewater",
+    "chlorophyll",
+    "oxygen"
+   ],
+   "answer": 3,
+   "explanation": "Aerobic means with oxygen.",
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-respiration-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-respiration",
+   "prompt": "Muscles in hard exercise make:",
+   "choices": [
+    "starch",
+    "ethanol",
+    "glycogen",
+    "lactic acid"
+   ],
+   "answer": 3,
+   "explanation": "Anaerobic respiration in muscles.",
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-respiration-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-respiration",
+   "prompt": "Organelle of aerobic respiration:",
+   "choices": [
+    "chloroplast",
+    "mitochondrion",
+    "ribosome",
+    "vacuole"
+   ],
+   "answer": 1,
+   "explanation": "Mitochondria release energy.",
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-respiration-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-respiration",
+   "prompt": "Which test shows CO₂ is given off by yeast?",
+   "choices": [
+    "limewater turns milky",
+    "litmus turns red",
+    "iodine turns blue-black",
+    "glowing splint relights"
+   ],
+   "answer": 0,
+   "explanation": "Limewater test for CO₂.",
+   "chapter": "gceol-biology-breathing"
+  },
+  {
+   "id": "gceol-biology-respiration-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-respiration",
+   "prompt": "Respiration occurs in:",
+   "choices": [
+    "only at night",
+    "all living cells",
+    "only animal cells",
+    "only plant leaves"
+   ],
+   "answer": 1,
+   "explanation": "Every living cell respires.",
+   "chapter": "gceol-biology-breathing"
+  }
+ ]
+}
