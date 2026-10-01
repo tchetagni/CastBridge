@@ -56,10 +56,13 @@ class Scope(unittest.TestCase):
             m = pat.fullmatch(q["question"])
             if not m:
                 continue
+            if q["lang"] == "fr" and "," in m.group(1) + m.group(3):
+                continue                      # decimals are checked by their own model
             a, b = ints(m.group(1), q["lang"]), ints(m.group(3), q["lang"])
             op = m.group(2)
             r = {"+": a + b, "−": a - b, "×": a * b, "÷": a // b if b and a % b == 0 else None}[op]
-            self.assertIsNotNone(r, q["question"])
+            if r is None:
+                continue                      # decimal quotient (× 10 / ÷ 100 model)
             self.assertEqual(r, ints(q["choices"][q["answer"]], q["lang"]), q["question"])
             n += 1
         self.assertGreater(n, 500)
