@@ -1,0 +1,1304 @@
+{
+ "chapter": "form1-maths-fractions",
+ "lessons": [
+  {
+   "id": "form1-maths-fractions",
+   "title": "Fractions and mixed numbers",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Simplify and compare fractions",
+    "Add, subtract, multiply and divide fractions",
+    "Convert between mixed numbers and improper fractions",
+    "Solve word problems with fractions"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-fractions-e01",
+    "form1-maths-fractions-e02",
+    "form1-maths-fractions-e03",
+    "form1-maths-fractions-e04",
+    "form1-maths-fractions-e05",
+    "form1-maths-fractions-e06"
+   ],
+   "selfCheck": [
+    "form1-maths-fractions-q1",
+    "form1-maths-fractions-q2",
+    "form1-maths-fractions-q3",
+    "form1-maths-fractions-q4",
+    "form1-maths-fractions-q5"
+   ],
+   "reviewNotes": [
+    "Question 4 of the exam problem is a conditional on the previous parts; check clarity.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fractions",
+     "md": "A fraction $\\frac{a}{b}$ shows a part of a whole: b equal parts, a of them taken. $\\frac{3}{4}$ means 3 of 4 equal parts. Equivalent fractions have the same value: $\\frac{1}{2} = \\frac{2}{4} = \\frac{3}{6}$. To simplify, divide the top and bottom by their HCF. A mixed number such as $2\\frac{1}{3}$ equals the improper fraction $\\frac{7}{3}$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Adding and subtracting",
+     "md": "Write both fractions with the same denominator (use the LCM), then add or subtract the numerators and keep the denominator. Example: $\\frac{2}{3} + \\frac{3}{4} = \\frac{8}{12} + \\frac{9}{12} = \\frac{17}{12} = 1\\frac{5}{12}$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 80,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 40,
+        "w": 80,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 40,
+        "w": 80,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 40,
+        "w": 80,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 120,
+        "text": "3 out of 4 equal parts shaded: 3/4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A bar divided into four equal parts, three shaded.",
+     "alt": "A rectangle split into four equal parts with three of them shaded."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Multiplying and dividing",
+     "md": "To multiply, multiply the tops and multiply the bottoms (cancel first if you can). To divide by a fraction, **multiply by its reciprocal** (turn it upside down): $\\frac{3}{5} \\div \\frac{9}{10} = \\frac{3}{5} \\times \\frac{10}{9} = \\frac{2}{3}$. Change mixed numbers to improper fractions first."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding the denominators: $\\frac{1}{2} + \\frac{1}{3}$ is not $\\frac{2}{5}$.\n- Finding a common denominator for × and ÷; it is not needed.\n- Flipping the first fraction instead of the one you divide by."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: add and subtract",
+     "statement": "Calculate $\\frac{2}{3} + \\frac{3}{4}$ and $\\frac{5}{6} - \\frac{1}{4}$.",
+     "steps": [
+      "LCM of 3 and 4 is 12: $\\frac{8}{12} + \\frac{9}{12} = \\frac{17}{12} = 1\\frac{5}{12}$.",
+      "LCM of 6 and 4 is 12: $\\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}$."
+     ],
+     "answer": "**$1\\frac{5}{12}$ and $\\frac{7}{12}$**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: fraction of a quantity",
+     "statement": "A farmer in Bafoussam harvests 480 kg of maize and sells $\\frac{3}{8}$ of it. How much does he sell and how much is left?",
+     "steps": [
+      "Divide by the denominator: 480 ÷ 8 = 60.",
+      "Multiply by the numerator: 60 × 3 = 180 kg sold.",
+      "Left: 480 − 180 = 300 kg."
+     ],
+     "answer": "**180 kg sold; 300 kg left.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 80,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 40,
+        "w": 80,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 40,
+        "w": 80,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 40,
+        "w": 80,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 120,
+        "text": "3 out of 4 equal parts shaded: 3/4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-decimals-percentages",
+   "title": "Decimals and percentages",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Convert between fractions, decimals and percentages",
+    "Find a percentage of a quantity",
+    "Increase and decrease a quantity by a percentage",
+    "Express one quantity as a percentage of another"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-fractions-e07",
+    "form1-maths-fractions-e08",
+    "form1-maths-fractions-e09",
+    "form1-maths-fractions-e10",
+    "form1-maths-fractions-e11",
+    "form1-maths-fractions-e12"
+   ],
+   "selfCheck": [
+    "form1-maths-decimals-percentages-q1",
+    "form1-maths-decimals-percentages-q2",
+    "form1-maths-decimals-percentages-q3",
+    "form1-maths-decimals-percentages-q4",
+    "form1-maths-decimals-percentages-q5"
+   ],
+   "reviewNotes": [
+    "The bar chart tallest bar is 55 with automatic scale; check that the label does not overlap the top gridline.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Percentages",
+     "md": "A **percentage** is a fraction out of 100: 45% means $\\frac{45}{100} = 0.45$. To change a fraction to a percentage, divide and multiply by 100: $\\frac{3}{8} = 0.375 = 37.5\\%$. To change a percentage to a decimal, divide by 100."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Percentage of a quantity",
+     "md": "To find p% of an amount, multiply the amount by $\\frac{p}{100}$. Example: 15% of 24 000 FCFA = 0.15 × 24 000 = 3 600 FCFA. To express a as a percentage of b, calculate $\\frac{a}{b} \\times 100$: 18 out of 40 is $\\frac{18}{40} \\times 100 = 45\\%$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 260,
+      "bars": [
+       {
+        "label": "Girls",
+        "value": 45,
+        "color": "orange"
+       },
+       {
+        "label": "Boys",
+        "value": 55,
+        "color": "blue"
+       }
+      ],
+      "unit": "%"
+     },
+     "caption": "Percentage of girls and boys in a class of 40.",
+     "alt": "A bar chart with girls 45 percent and boys 55 percent."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Increase and decrease",
+     "md": "To **increase** by p%, multiply by $1 + \\frac{p}{100}$; to **decrease** by p%, multiply by $1 - \\frac{p}{100}$. A price of 12 500 FCFA increased by 8% becomes 12 500 × 1.08 = 13 500 FCFA. A price of 45 000 FCFA reduced by 20% becomes 45 000 × 0.8 = 36 000 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Giving the **amount of the change** when the question asks for the new price.\n- Calculating the percentage on the wrong quantity (always use the **original** value).\n- Writing 0.5% for one half: one half is 50%."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: percentage of an amount",
+     "statement": "A trader gives a 15% discount on a bag of rice that costs 24 000 FCFA. Find the discount and the new price.",
+     "steps": [
+      "Discount = 15% of 24 000 = 0.15 × 24 000 = 3 600 FCFA.",
+      "New price = 24 000 − 3 600 = 20 400 FCFA.",
+      "Check by the multiplier 0.85: 24 000 × 0.85 = 20 400."
+     ],
+     "answer": "**Discount 3 600 FCFA; new price 20 400 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: as a percentage",
+     "statement": "In a class of 40 pupils at a school in Limbe, 18 are girls. What percentage are girls? What percentage are boys?",
+     "steps": [
+      "Girls: $\\frac{18}{40} \\times 100 = 45\\%$.",
+      "Boys: 40 − 18 = 22 pupils, so $\\frac{22}{40} \\times 100 = 55\\%$.",
+      "Check: 45% + 55% = 100%."
+     ],
+     "answer": "**45% girls, 55% boys.**"
+    }
+   ],
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-ratio-proportion",
+   "title": "Ratio and proportion",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write and simplify ratios",
+    "Share a quantity in a given ratio",
+    "Solve direct proportion problems by the unitary method",
+    "Recognise inverse proportion in simple situations"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-fractions-e13",
+    "form1-maths-fractions-e14",
+    "form1-maths-fractions-e15",
+    "form1-maths-fractions-e16",
+    "form1-maths-fractions-e17",
+    "form1-maths-fractions-e18"
+   ],
+   "selfCheck": [
+    "form1-maths-ratio-proportion-q1",
+    "form1-maths-ratio-proportion-q2",
+    "form1-maths-ratio-proportion-q3",
+    "form1-maths-ratio-proportion-q4",
+    "form1-maths-ratio-proportion-q5"
+   ],
+   "reviewNotes": [
+    "Inverse proportion is only introduced informally here; the official scheme may place it in Form 2.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ratio",
+     "md": "A **ratio** compares quantities of the same kind: 20 000 FCFA to 30 000 FCFA is the ratio 20 000 : 30 000 = 2 : 3. Simplify a ratio by dividing both parts by the same number. Both quantities must be in the same unit (change 2 m and 50 cm to 200 cm : 50 cm = 4 : 1)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Sharing in a ratio",
+     "md": "To share an amount in the ratio a : b: add the parts (a + b), divide the amount by the total number of parts to find **one part**, then multiply by a and by b. Check that the shares add up to the amount."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 58,
+        "text": "Ako: 20 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 58,
+        "text": "Beri: 30 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "50 000 FCFA shared in the ratio 2 : 3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A bar of five equal parts sharing 50 000 FCFA in the ratio 2 : 3.",
+     "alt": "A bar split in five equal parts, two for Ako and three for Beri."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Direct and inverse proportion",
+     "md": "In **direct proportion** both quantities grow together: find the value of **one unit**, then multiply. If 5 kg cost 3 500 FCFA, 1 kg costs 700 FCFA and 8 kg cost 5 600 FCFA. In **inverse proportion** one quantity grows when the other falls: 6 workers need 10 days, so the total work is 60 worker-days, and 4 workers need 60 ÷ 4 = 15 days."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Putting the parts in the wrong order: 'boys to girls' is not 'girls to boys'.\n- Dividing the amount by one part of the ratio instead of the total number of parts.\n- Treating an inverse situation (more workers, fewer days) as direct."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: sharing",
+     "statement": "Ako and Beri share 50 000 FCFA in the ratio 2 : 3. How much does each get?",
+     "steps": [
+      "Total parts: 2 + 3 = 5.",
+      "One part: 50 000 ÷ 5 = 10 000 FCFA.",
+      "Ako: 2 × 10 000 = 20 000 FCFA; Beri: 3 × 10 000 = 30 000 FCFA.",
+      "Check: 20 000 + 30 000 = 50 000."
+     ],
+     "answer": "**Ako 20 000 FCFA, Beri 30 000 FCFA.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 70,
+        "w": 60,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 100,
+        "text": "10 000",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 58,
+        "text": "Ako: 20 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 58,
+        "text": "Beri: 30 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "50 000 FCFA shared in the ratio 2 : 3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: proportion",
+     "statement": "(a) 5 kg of tomatoes cost 3 500 FCFA. Find the cost of 8 kg. (b) 6 workers build a wall in 10 days. How long would 4 workers take?",
+     "steps": [
+      "(a) 1 kg costs 3 500 ÷ 5 = 700 FCFA, so 8 kg cost 8 × 700 = 5 600 FCFA.",
+      "(b) Work = 6 × 10 = 60 worker-days.",
+      "(b) With 4 workers: 60 ÷ 4 = 15 days."
+     ],
+     "answer": "**(a) 5 600 FCFA; (b) 15 days.**"
+    }
+   ],
+   "chapter": "form1-maths-fractions"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form1-maths-fractions-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Calculate $\\frac{1}{2} + \\frac{1}{4}$ as a decimal.",
+   "answer": 0.75,
+   "tolerance": 0,
+   "explanation": "$\\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4} = 0.75$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Simplify $\\frac{18}{24}$.",
+   "choices": [
+    "$\\frac{2}{3}$",
+    "$\\frac{6}{8}$",
+    "$\\frac{9}{12}$",
+    "$\\frac{3}{4}$"
+   ],
+   "answer": 3,
+   "explanation": "Divide by the HCF 6: $\\frac{3}{4}$; the others are not fully simplified or are wrong.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Write $\\frac{17}{5}$ as a mixed number: what is the whole-number part?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "17 ÷ 5 = 3 remainder 2, so $3\\frac{2}{5}$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Calculate $\\frac{3}{5} \\div \\frac{9}{10}$ as a decimal (3 d.p.).",
+   "answer": 0.667,
+   "tolerance": 0.001,
+   "explanation": "$\\frac{3}{5} \\times \\frac{10}{9} = \\frac{2}{3} \\approx 0.667$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A student writes $\\frac{1}{3} + \\frac{1}{4} = \\frac{2}{7}$. Explain the mistake and give the correct answer.",
+   "model": "She added the numerators and the denominators. The fractions need a common denominator: $\\frac{4}{12} + \\frac{3}{12} = \\frac{7}{12}$.",
+   "rubric": "1 mark for the mistake, 1 mark for the common denominator, 1 mark for 7/12.",
+   "explanation": "She added the numerators and the denominators. The fractions need a common denominator: $\\frac{4}{12} + \\frac{3}{12} = \\frac{7}{12}$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-fractions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Mama Ngo in Kumba shares 360 balls of fufu corn among three markets. The first gets $\\frac{1}{3}$ and the second gets $\\frac{1}{4}$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many go to the first market?",
+     "answer": 120,
+     "tolerance": 0,
+     "explanation": "360 ÷ 3 = 120.",
+     "id": "form1-maths-fractions-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many go to the second market?",
+     "answer": 90,
+     "tolerance": 0,
+     "explanation": "360 ÷ 4 = 90.",
+     "id": "form1-maths-fractions-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What fraction of the balls goes to the third market? Give a decimal to 3 d.p.",
+     "answer": 0.417,
+     "tolerance": 0.001,
+     "explanation": "1 − 1/3 − 1/4 = 5/12 ≈ 0.417; that is 150 balls.",
+     "id": "form1-maths-fractions-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many balls go to the third market?",
+     "answer": 150,
+     "tolerance": 0,
+     "explanation": "360 − 120 − 90 = 150.",
+     "id": "form1-maths-fractions-e06-d"
+    }
+   ],
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-fractions",
+   "prompt": "A fraction equivalent to $\\frac{2}{5}$:",
+   "choices": [
+    "$\\frac{3}{6}$",
+    "$\\frac{2}{10}$",
+    "$\\frac{4}{10}$",
+    "$\\frac{5}{2}$"
+   ],
+   "answer": 2,
+   "explanation": "Multiply top and bottom by 2.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-fractions",
+   "prompt": "To divide by $\\frac{2}{3}$ we multiply by:",
+   "choices": [
+    "$\\frac{2}{2}$",
+    "$\\frac{2}{3}$",
+    "$\\frac{3}{2}$",
+    "$\\frac{3}{3}$"
+   ],
+   "answer": 2,
+   "explanation": "Use the reciprocal.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-fractions",
+   "prompt": "The improper fraction for $3\\frac{1}{2}$:",
+   "choices": [
+    "$\\frac{3}{2}$",
+    "$\\frac{7}{2}$",
+    "$\\frac{5}{2}$",
+    "$\\frac{4}{2}$"
+   ],
+   "answer": 1,
+   "explanation": "3 × 2 + 1 = 7.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-fractions",
+   "prompt": "What is $\\frac{1}{2}$ of 18 kg of cassava?",
+   "choices": [
+    "36 kg",
+    "6 kg",
+    "9 kg",
+    "2 kg"
+   ],
+   "answer": 2,
+   "explanation": "Divide by 2.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-fractions",
+   "prompt": "The value of $\\frac{1}{3} \\times \\frac{3}{4}$:",
+   "choices": [
+    "$\\frac{4}{3}$",
+    "$\\frac{1}{12}$",
+    "$\\frac{1}{4}$",
+    "$\\frac{4}{7}$"
+   ],
+   "answer": 2,
+   "explanation": "Multiply tops and bottoms and cancel: $\\frac{3}{12}$.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-decimals-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Write $\\frac{3}{8}$ as a percentage.",
+   "answer": 37.5,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "3 ÷ 8 = 0.375 and 0.375 × 100 = 37.5%.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-decimals-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find 20% of 9 500 FCFA.",
+   "answer": 1900,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "0.2 × 9 500 = 1 900.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-decimals-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The decimal for 7% is:",
+   "choices": [
+    "0.007",
+    "0.07",
+    "0.7",
+    "7.0"
+   ],
+   "answer": 1,
+   "explanation": "Divide by 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-decimals-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The price of a bag of cement at Yaoundé is 12 500 FCFA and rises by 8%. What is the new price (FCFA)?",
+   "answer": 13500,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "12 500 × 1.08 = 13 500.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-decimals-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A phone costing 45 000 FCFA is sold with a 20% reduction. Find the selling price (FCFA).",
+   "answer": 36000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "45 000 × 0.8 = 36 000.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-decimals-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "At a market in Bamenda, 250 kg of tomatoes are bought. 10% is spoiled and the rest is sold at 400 FCFA per kg.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kilograms are spoiled?",
+     "answer": 25,
+     "tolerance": 0,
+     "explanation": "10% of 250 = 25 kg.",
+     "unit": "kg",
+     "id": "form1-maths-fractions-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kilograms are sold?",
+     "answer": 225,
+     "tolerance": 0,
+     "explanation": "250 − 25 = 225 kg.",
+     "unit": "kg",
+     "id": "form1-maths-fractions-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How much money is received (FCFA)?",
+     "answer": 90000,
+     "tolerance": 0,
+     "explanation": "225 × 400 = 90 000 FCFA.",
+     "unit": "FCFA",
+     "id": "form1-maths-fractions-e12-c"
+    }
+   ],
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-decimals-percentages-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-decimals-percentages",
+   "prompt": "45% as a decimal:",
+   "choices": [
+    "0.045",
+    "45",
+    "4.5",
+    "0.45"
+   ],
+   "answer": 3,
+   "explanation": "45 ÷ 100.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-decimals-percentages-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-decimals-percentages",
+   "prompt": "As a percentage, one fifth is:",
+   "choices": [
+    "15%",
+    "5%",
+    "20%",
+    "25%"
+   ],
+   "answer": 2,
+   "explanation": "0.2 × 100.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-decimals-percentages-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-decimals-percentages",
+   "prompt": "To decrease by 10% we multiply by:",
+   "choices": [
+    "0.9",
+    "0.1",
+    "1.1",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "1 − 0.1 = 0.9.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-decimals-percentages-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-decimals-percentages",
+   "prompt": "What is 50% of 2 000 FCFA?",
+   "choices": [
+    "2 050 FCFA",
+    "500 FCFA",
+    "1 000 FCFA",
+    "100 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "Half of the amount.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-decimals-percentages-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-decimals-percentages",
+   "prompt": "12 out of 48 expressed as a percentage:",
+   "choices": [
+    "4%",
+    "48%",
+    "12%",
+    "25%"
+   ],
+   "answer": 3,
+   "explanation": "12/48 = 1/4.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Simplify the ratio 24 : 36: give the first number of the simplest form.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "Divide by 12: 2 : 3.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Share 90 000 FCFA in the ratio 2 : 3 : 4. How much is the smallest share (FCFA)?",
+   "answer": 20000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "9 parts; one part is 10 000; smallest share is 2 × 10 000.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The ratio 2 m : 50 cm in its simplest form is:",
+   "choices": [
+    "4 : 1",
+    "40 : 1",
+    "2 : 50",
+    "1 : 25"
+   ],
+   "answer": 0,
+   "explanation": "200 cm : 50 cm = 4 : 1.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A taxi in Douala uses 12 litres of fuel for 150 km. How many litres for 250 km?",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "l",
+   "explanation": "1 km uses 12 ÷ 150 = 0.08 litre; 250 × 0.08 = 20.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "8 workers dig a drain in 9 days. How many days would 12 workers need (same pace)?",
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "days",
+   "explanation": "72 worker-days ÷ 12 = 6.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-fractions-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A cocoa farmer at Mbalmayo mixes fertiliser and sand in the ratio 1 : 4 to make 30 kg of mixture.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many parts are there in all?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "1 + 4 = 5.",
+     "id": "form1-maths-fractions-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How much fertiliser is in the mixture (kg)?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "30 ÷ 5 = 6 kg.",
+     "unit": "kg",
+     "id": "form1-maths-fractions-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How much sand is in the mixture (kg)?",
+     "answer": 24,
+     "tolerance": 0,
+     "explanation": "4 × 6 = 24 kg.",
+     "unit": "kg",
+     "id": "form1-maths-fractions-e18-c"
+    }
+   ],
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-ratio-proportion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-ratio-proportion",
+   "prompt": "The ratio 10 : 15 simplified is:",
+   "choices": [
+    "5 : 3",
+    "2 : 3",
+    "10 : 3",
+    "3 : 2"
+   ],
+   "answer": 1,
+   "explanation": "Divide both by 5.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-ratio-proportion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-ratio-proportion",
+   "prompt": "Sharing 60 in the ratio 1 : 2 gives:",
+   "choices": [
+    "15 and 45",
+    "10 and 50",
+    "30 and 30",
+    "20 and 40"
+   ],
+   "answer": 3,
+   "explanation": "3 parts of 20.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-ratio-proportion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-ratio-proportion",
+   "prompt": "Which pair is in direct proportion?",
+   "choices": [
+    "pupils and chalk left",
+    "speed and journey time",
+    "kilograms of rice and its cost",
+    "workers and days to build a house"
+   ],
+   "answer": 2,
+   "explanation": "Twice the rice costs twice as much.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-ratio-proportion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-ratio-proportion",
+   "prompt": "If 3 books cost 2 400 FCFA, one book costs:",
+   "choices": [
+    "800 FCFA",
+    "7 200 FCFA",
+    "2 397 FCFA",
+    "600 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "Divide by 3.",
+   "chapter": "form1-maths-fractions"
+  },
+  {
+   "id": "form1-maths-ratio-proportion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-ratio-proportion",
+   "prompt": "More workers on the same job means:",
+   "choices": [
+    "fewer days",
+    "no work",
+    "the same days",
+    "more days"
+   ],
+   "answer": 0,
+   "explanation": "Inverse proportion.",
+   "chapter": "form1-maths-fractions"
+  }
+ ]
+}

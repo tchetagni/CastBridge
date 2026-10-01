@@ -1,0 +1,3075 @@
+{
+ "chapter": "form4-maths-geometry",
+ "lessons": [
+  {
+   "id": "form4-maths-sine-cosine-rules",
+   "title": "Sine rule, cosine rule and area of a triangle",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the sine rule to find sides and angles",
+    "Use the cosine rule to find a side or an angle",
+    "Use ½ ab sin C for the area of a triangle",
+    "Solve problems on non-right-angled triangles"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-geometry-e01",
+    "form4-maths-geometry-e02",
+    "form4-maths-geometry-e03",
+    "form4-maths-geometry-e04",
+    "form4-maths-geometry-e05",
+    "form4-maths-geometry-e06"
+   ],
+   "selfCheck": [
+    "form4-maths-sine-cosine-rules-q1",
+    "form4-maths-sine-cosine-rules-q2",
+    "form4-maths-sine-cosine-rules-q3",
+    "form4-maths-sine-cosine-rules-q4",
+    "form4-maths-sine-cosine-rules-q5"
+   ],
+   "reviewNotes": [
+    "The ambiguous case of the sine rule (SSA) is not developed.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Sine rule",
+     "md": "In triangle ABC with sides a, b, c opposite the angles A, B, C, use the sine rule when you know **two angles and a side**, or **two sides and an angle opposite one of them**:",
+     "tex": "\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Cosine rule",
+     "md": "Use the cosine rule when you know **two sides and the angle between them**, or **all three sides**:",
+     "tex": "a^2 = b^2 + c^2 - 2bc \\cos A \\qquad \\cos A = \\frac{b^2 + c^2 - a^2}{2bc}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         190,
+         330,
+         190,
+         240,
+         50
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 48,
+        "y": 205,
+        "text": "A",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 205,
+        "text": "B",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 40,
+        "text": "C",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 208,
+        "text": "c",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 112,
+        "text": "a",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 112,
+        "text": "b",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Triangle ABC with sides a, b, c opposite the angles A, B, C.",
+     "alt": "A triangle with vertices A, B and C and the sides named a, b and c opposite them."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Area",
+     "md": "The area of a triangle from two sides and the **included** angle:",
+     "tex": "\\text{Area} = \\frac{1}{2} ab \\sin C"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the area formula with an angle that is not between the two sides.\n- Forgetting that for an obtuse angle cos is negative: cos 120° = −0.5, and sin 120° = sin 60°.\n- Not checking that the calculator is in degree mode; also the longest side is opposite the largest angle."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: sine rule",
+     "statement": "In triangle ABC, a = 8 cm, A = 40° and B = 65°. Find b and c (2 d.p.).",
+     "steps": [
+      "C = 180° − 40° − 65° = 75°.",
+      "b = a sin B ÷ sin A = 8 sin 65° ÷ sin 40° = 11.28 cm.",
+      "c = 8 sin 75° ÷ sin 40° = 12.02 cm."
+     ],
+     "answer": "**b ≈ 11.28 cm; c ≈ 12.02 cm.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         190,
+         330,
+         190,
+         240,
+         50
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 48,
+        "y": 205,
+        "text": "A",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 205,
+        "text": "B",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 40,
+        "text": "C",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 208,
+        "text": "c",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 112,
+        "text": "a",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 112,
+        "text": "b",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: cosine rule and area",
+     "statement": "A plot ABC has AB = 50 m, AC = 60 m and angle A = 70°. Find BC and the area.",
+     "steps": [
+      "BC² = 50² + 60² − 2 × 50 × 60 × cos 70° = 6 100 − 2 052.1 = 4 047.9, so BC ≈ 63.6 m.",
+      "Area = ½ × 50 × 60 × sin 70° = 1 500 × 0.9397.",
+      "Area ≈ 1 409.5 m²."
+     ],
+     "answer": "**BC ≈ 63.6 m; area ≈ 1 409.5 m².**"
+    }
+   ],
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-circle-theorems",
+   "title": "Circle theorems",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the angle theorems of a circle",
+    "State the tangent theorems",
+    "Find unknown angles and lengths using them",
+    "Give reasons for each step"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-geometry-e07",
+    "form4-maths-geometry-e08",
+    "form4-maths-geometry-e09",
+    "form4-maths-geometry-e10",
+    "form4-maths-geometry-e11",
+    "form4-maths-geometry-e12"
+   ],
+   "selfCheck": [
+    "form4-maths-circle-theorems-q1",
+    "form4-maths-circle-theorems-q2",
+    "form4-maths-circle-theorems-q3",
+    "form4-maths-circle-theorems-q4",
+    "form4-maths-circle-theorems-q5"
+   ],
+   "reviewNotes": [
+    "The figure shows C at the top of the circle on the major arc; angle labels are positioned schematically.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Angle theorems",
+     "md": "- The angle at the **centre** is **twice** the angle at the circumference on the same arc.\n- The angle in a **semicircle** is 90°.\n- Angles in the **same segment** are equal.\n- **Opposite angles** of a cyclic quadrilateral add up to 180°.\n- The perpendicular from the centre to a chord bisects the chord."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Tangent theorems",
+     "md": "- A tangent is **perpendicular to the radius** at the point of contact.\n- Two tangents from an outside point are **equal in length**.\n- **Alternate segment theorem**: the angle between a tangent and a chord equals the angle in the alternate segment."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 125,
+        "r": 90,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 118.4,
+        "y1": 163.0,
+        "x2": 200,
+        "y2": 125,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 125,
+        "x2": 281.6,
+        "y2": 163.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 118.4,
+        "y1": 163.0,
+        "x2": 200.0,
+        "y2": 35.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 35.0,
+        "x2": 281.6,
+        "y2": 163.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 157,
+        "text": "130°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 69,
+        "text": "65°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 106.4,
+        "y": 177.0,
+        "text": "A",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 293.6,
+        "y": 177.0,
+        "text": "B",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 27.0,
+        "text": "C",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 119,
+        "text": "O",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A circle with centre O: the angle at the centre is 130° and the angle at C on the circumference is 65°.",
+     "alt": "A circle with a triangle ABC inscribed and the centre joined to A and B."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "How to answer",
+     "md": "Mark known angles on the diagram. Look for radii (they make isosceles triangles with equal base angles), diameters (90° angles) and tangents (90° with the radius). **Write the reason** next to each angle you find, using the exact names of the theorems. Check that the angles in each triangle add up to 180°."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the 'twice' rule when the angles stand on different arcs.\n- In a cyclic quadrilateral: **opposite** angles (not adjacent) add up to 180°.\n- Forgetting that a tangent makes 90° with the **radius**, not with the chord."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: centre and circumference",
+     "statement": "A, B and C lie on a circle with centre O. Angle AOB = 130° and C is on the major arc. Find angle ACB. A cyclic quadrilateral has angle A = 95°: find the opposite angle C.",
+     "steps": [
+      "Angle at the circumference = half the angle at the centre: 130° ÷ 2 = 65°.",
+      "Opposite angles of a cyclic quadrilateral add up to 180°: C = 180° − 95° = 85°."
+     ],
+     "answer": "**65°; 85°**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 125,
+        "r": 90,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 118.4,
+        "y1": 163.0,
+        "x2": 200,
+        "y2": 125,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 125,
+        "x2": 281.6,
+        "y2": 163.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 118.4,
+        "y1": 163.0,
+        "x2": 200.0,
+        "y2": 35.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 35.0,
+        "x2": 281.6,
+        "y2": 163.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 157,
+        "text": "130°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 69,
+        "text": "65°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 106.4,
+        "y": 177.0,
+        "text": "A",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 293.6,
+        "y": 177.0,
+        "text": "B",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 27.0,
+        "text": "C",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 119,
+        "text": "O",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: tangent",
+     "statement": "PA is a tangent to a circle with centre O at A. The radius is 6 cm and OP = 10 cm. Find PA. Also, AB is a diameter and angle ABC = 38°: find angle ACB and angle BAC.",
+     "steps": [
+      "Tangent ⊥ radius: triangle OAP has a right angle at A, so PA² = 10² − 6² = 64 and PA = 8 cm.",
+      "The angle in a semicircle is 90°: angle ACB = 90°.",
+      "Then angle BAC = 180° − 90° − 38° = 52°."
+     ],
+     "answer": "**PA = 8 cm; ACB = 90°; BAC = 52°.**"
+    }
+   ],
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-vectors",
+   "title": "Vectors in two dimensions",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write a vector in component form",
+    "Add, subtract and multiply a vector by a number",
+    "Find the magnitude of a vector",
+    "Use vectors for position, midpoints and parallel lines"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-geometry-e13",
+    "form4-maths-geometry-e14",
+    "form4-maths-geometry-e15",
+    "form4-maths-geometry-e16",
+    "form4-maths-geometry-e17",
+    "form4-maths-geometry-e18"
+   ],
+   "selfCheck": [
+    "form4-maths-vectors-q1",
+    "form4-maths-vectors-q2",
+    "form4-maths-vectors-q3",
+    "form4-maths-vectors-q4",
+    "form4-maths-vectors-q5"
+   ],
+   "reviewNotes": [
+    "Vectors are written (x, y) in this content because the format has no column-vector notation. Vector geometry proofs are not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vectors",
+     "md": "A **vector** has both **size** (magnitude) and **direction**. In component form we write it as a column; here we write it as (x, y): x units to the right (negative: left) and y units up (negative: down). The vector from A to B is written $\\vec{AB}$. The vector from A(1, 2) to B(5, 5) is $\\vec{AB}$ = (5 − 1, 5 − 2) = (4, 3)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Operations",
+     "md": "To add vectors add the components: (3, 4) + (6, 2) = (9, 6). To multiply by a number k, multiply each component: 3(2, 1) = (6, 3). The **negative** −a points the opposite way. **Parallel** vectors are multiples of each other. The **magnitude** of (x, y) is $\\sqrt{x^2 + y^2}$, so |(4, 3)| = 5."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 300,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 266.0,
+        "x2": 352.0,
+        "y2": 266.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 272.0,
+        "x2": 34.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 263.0,
+        "x2": 34.0,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 34.0,
+        "y": 283.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 78.57142857142857,
+        "y1": 263.0,
+        "x2": 78.57142857142857,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 78.57142857142857,
+        "y": 283.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 123.14285714285714,
+        "y1": 263.0,
+        "x2": 123.14285714285714,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.14285714285714,
+        "y": 283.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 167.71428571428572,
+        "y1": 263.0,
+        "x2": 167.71428571428572,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 167.71428571428572,
+        "y": 283.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 212.28571428571428,
+        "y1": 263.0,
+        "x2": 212.28571428571428,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 212.28571428571428,
+        "y": 283.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 256.8571428571429,
+        "y1": 263.0,
+        "x2": 256.8571428571429,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 256.8571428571429,
+        "y": 283.0,
+        "text": "5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 301.42857142857144,
+        "y1": 263.0,
+        "x2": 301.42857142857144,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.42857142857144,
+        "y": 283.0,
+        "text": "6",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 346.0,
+        "y1": 263.0,
+        "x2": 346.0,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 346.0,
+        "y": 283.0,
+        "text": "7",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 266.0,
+        "x2": 37.0,
+        "y2": 266.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 270.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 232.85714285714286,
+        "x2": 37.0,
+        "y2": 232.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 236.85714285714286,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 199.71428571428572,
+        "x2": 37.0,
+        "y2": 199.71428571428572,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 203.71428571428572,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 166.57142857142856,
+        "x2": 37.0,
+        "y2": 166.57142857142856,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 170.57142857142856,
+        "text": "3",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 133.42857142857142,
+        "x2": 37.0,
+        "y2": 133.42857142857142,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 137.42857142857142,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 100.28571428571428,
+        "x2": 37.0,
+        "y2": 100.28571428571428,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 104.28571428571428,
+        "text": "5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 67.14285714285714,
+        "x2": 37.0,
+        "y2": 67.14285714285714,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 71.14285714285714,
+        "text": "6",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 34.0,
+        "x2": 37.0,
+        "y2": 34.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 38.0,
+        "text": "7",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 78.57142857142857,
+        "y1": 199.71428571428572,
+        "x2": 256.8571428571429,
+        "y2": 100.28571428571428,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 78.57142857142857,
+        "cy": 199.71428571428572,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 66.57142857142857,
+        "y": 213.71428571428572,
+        "text": "A",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 256.8571428571429,
+        "cy": 100.28571428571428,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 268.8571428571429,
+        "y": 94.28571428571428,
+        "text": "B",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 185.54285714285714,
+        "y": 159.94285714285712,
+        "text": "AB = (4, 3)",
+        "size": 12,
+        "anchor": "start",
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "The vector from A(1, 2) to B(5, 5) drawn on a grid.",
+     "alt": "An arrow from A to B on a coordinate grid; its components are 4 and 3."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Position vectors and midpoints",
+     "md": "The **position vector** of a point is the vector from the origin O. $\\vec{AB} = \\vec{OB} - \\vec{OA}$. The midpoint M of AB has position vector $\\frac{1}{2}(\\vec{OA} + \\vec{OB})$: for A(1, 2) and B(5, 5), M = (3, 3.5). A point P with AP : PB = 1 : 3 is $\\vec{OA} + \\frac{1}{4}\\vec{AB}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Subtracting in the wrong order: $\\vec{AB}$ = B − A, not A − B.\n- Adding magnitudes instead of components: |a + b| is usually less than |a| + |b|.\n- Confusing the coordinates of a point with a vector between two points."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: AB, magnitude, midpoint",
+     "statement": "Find $\\vec{AB}$, its magnitude and the midpoint M for A(1, 2) and B(5, 5).",
+     "steps": [
+      "$\\vec{AB}$ = (5 − 1, 5 − 2) = (4, 3).",
+      "|AB| = √(4² + 3²) = √25 = 5 units.",
+      "M = ((1 + 5) ÷ 2, (2 + 5) ÷ 2) = (3, 3.5)."
+     ],
+     "answer": "**AB = (4, 3); |AB| = 5; M = (3, 3.5).**",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 300,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 266.0,
+        "x2": 352.0,
+        "y2": 266.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 272.0,
+        "x2": 34.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 263.0,
+        "x2": 34.0,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 34.0,
+        "y": 283.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 78.57142857142857,
+        "y1": 263.0,
+        "x2": 78.57142857142857,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 78.57142857142857,
+        "y": 283.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 123.14285714285714,
+        "y1": 263.0,
+        "x2": 123.14285714285714,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.14285714285714,
+        "y": 283.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 167.71428571428572,
+        "y1": 263.0,
+        "x2": 167.71428571428572,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 167.71428571428572,
+        "y": 283.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 212.28571428571428,
+        "y1": 263.0,
+        "x2": 212.28571428571428,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 212.28571428571428,
+        "y": 283.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 256.8571428571429,
+        "y1": 263.0,
+        "x2": 256.8571428571429,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 256.8571428571429,
+        "y": 283.0,
+        "text": "5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 301.42857142857144,
+        "y1": 263.0,
+        "x2": 301.42857142857144,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.42857142857144,
+        "y": 283.0,
+        "text": "6",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 346.0,
+        "y1": 263.0,
+        "x2": 346.0,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 346.0,
+        "y": 283.0,
+        "text": "7",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 266.0,
+        "x2": 37.0,
+        "y2": 266.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 270.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 232.85714285714286,
+        "x2": 37.0,
+        "y2": 232.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 236.85714285714286,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 199.71428571428572,
+        "x2": 37.0,
+        "y2": 199.71428571428572,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 203.71428571428572,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 166.57142857142856,
+        "x2": 37.0,
+        "y2": 166.57142857142856,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 170.57142857142856,
+        "text": "3",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 133.42857142857142,
+        "x2": 37.0,
+        "y2": 133.42857142857142,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 137.42857142857142,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 100.28571428571428,
+        "x2": 37.0,
+        "y2": 100.28571428571428,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 104.28571428571428,
+        "text": "5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 67.14285714285714,
+        "x2": 37.0,
+        "y2": 67.14285714285714,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 71.14285714285714,
+        "text": "6",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 34.0,
+        "x2": 37.0,
+        "y2": 34.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 38.0,
+        "text": "7",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 78.57142857142857,
+        "y1": 199.71428571428572,
+        "x2": 256.8571428571429,
+        "y2": 100.28571428571428,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 78.57142857142857,
+        "cy": 199.71428571428572,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 66.57142857142857,
+        "y": 213.71428571428572,
+        "text": "A",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 256.8571428571429,
+        "cy": 100.28571428571428,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 268.8571428571429,
+        "y": 94.28571428571428,
+        "text": "B",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 185.54285714285714,
+        "y": 159.94285714285712,
+        "text": "AB = (4, 3)",
+        "size": 12,
+        "anchor": "start",
+        "color": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: combining vectors",
+     "statement": "p = (2, 1) and q = (−1, 3). Find 2p + q, its magnitude and p − q. Show that (6, 3) is parallel to p.",
+     "steps": [
+      "2p + q = (4, 2) + (−1, 3) = (3, 5); |2p + q| = √(9 + 25) = √34 ≈ 5.83.",
+      "p − q = (2 − (−1), 1 − 3) = (3, −2).",
+      "(6, 3) = 3 × (2, 1) = 3p, so it is parallel to p."
+     ],
+     "answer": "**(3, 5), 5.83; (3, −2); parallel since (6, 3) = 3p.**"
+    }
+   ],
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-loci",
+   "title": "Loci",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define a locus as the set of points satisfying a condition",
+    "Describe and draw the four standard loci",
+    "Combine two loci to find a region",
+    "Solve practical locus problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-geometry-e19",
+    "form4-maths-geometry-e20",
+    "form4-maths-geometry-e21",
+    "form4-maths-geometry-e22",
+    "form4-maths-geometry-e23",
+    "form4-maths-geometry-e24"
+   ],
+   "selfCheck": [
+    "form4-maths-loci-q1",
+    "form4-maths-loci-q2",
+    "form4-maths-loci-q3",
+    "form4-maths-loci-q4",
+    "form4-maths-loci-q5"
+   ],
+   "reviewNotes": [
+    "Constructions must be done with ruler and compasses in practice; the figure only shows the result.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "What is a locus?",
+     "md": "A **locus** (plural: loci) is the set of **all points** that satisfy a given condition. For example, the locus of points exactly 3 m from a post is a circle of radius 3 m. The locus of points at most 3 m from the post is the circle **and its inside**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "The four standard loci",
+     "md": "- Points at a fixed distance from a **point**: a circle.\n- Points equidistant from **two points** A and B: the **perpendicular bisector** of AB.\n- Points equidistant from **two intersecting lines**: the **angle bisectors**.\n- Points at a fixed distance from a **line**: two parallel lines (with semicircles at the ends of a segment)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 130,
+        "r": 80,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 35,
+        "x2": 200,
+        "y2": 225,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 130,
+        "x2": 250,
+        "y2": 130,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 130,
+        "r": 3,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 130,
+        "r": 3,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 67.6,
+        "r": 4,
+        "stroke": "green",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 192.4,
+        "r": 4,
+        "stroke": "green",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 138,
+        "y": 150,
+        "text": "S",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 150,
+        "text": "M",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 63.599999999999994,
+        "text": "P",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 206.4,
+        "text": "P′",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "S and M with their perpendicular bisector (red) and a circle of radius 8 km round S meeting it at P and P′.",
+     "alt": "Two points S and M, a vertical bisector line and a circle round S crossing it at two points."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Combining loci",
+     "md": "Draw each locus **with the construction marks** (ruler and compasses). Use a **solid** line for 'on the boundary' and a **dashed** line for a boundary that is not included. Then shade the region that satisfies **all** the conditions. 'Nearer to S than to M' means the side of the bisector containing S."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Drawing the whole circle when the condition is 'at most': shade the inside as well.\n- Forgetting that equidistant from two points means a **line**, not a point.\n- Using the wrong bisector side for 'nearer to'."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: a goat",
+     "statement": "A goat at Wum is tied by a 6 m rope to a post. Describe the area it can reach and find it (π = 3.14).",
+     "steps": [
+      "The goat can reach all points at most 6 m from the post: a circle (with its inside) of radius 6 m.",
+      "Area = 3.14 × 6² = 113.04 m².",
+      "The boundary (where the rope is tight) is the locus of points exactly 6 m away."
+     ],
+     "answer": "**A circle of radius 6 m; about 113 m².**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a borehole",
+     "statement": "A school S and a market M are 10 km apart. A borehole B must be equidistant from S and M and no more than 8 km from S. Describe the possible places and find the length of the bisector in range.",
+     "steps": [
+      "Equidistant from S and M: the perpendicular bisector of SM, 5 km from S.",
+      "At most 8 km from S: inside a circle of radius 8 km. The circle meets the bisector at distance √(8² − 5²) = √39 ≈ 6.24 km from the midpoint, on each side.",
+      "The possible places form a segment of the bisector of length 2 × 6.24 ≈ 12.5 km."
+     ],
+     "answer": "**A segment of the perpendicular bisector about 12.5 km long.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 130,
+        "r": 80,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 35,
+        "x2": 200,
+        "y2": 225,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 130,
+        "x2": 250,
+        "y2": 130,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 130,
+        "r": 3,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 130,
+        "r": 3,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 67.6,
+        "r": 4,
+        "stroke": "green",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 192.4,
+        "r": 4,
+        "stroke": "green",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 138,
+        "y": 150,
+        "text": "S",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 150,
+        "text": "M",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 63.599999999999994,
+        "text": "P",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 206.4,
+        "text": "P′",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-similarity",
+   "title": "Similar figures: lengths, areas and volumes",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Recognise similar shapes and find the scale factor",
+    "Calculate unknown lengths using ratios",
+    "Use the area ratio k² and the volume ratio k³",
+    "Solve problems with shadows, maps and models"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-geometry-e25",
+    "form4-maths-geometry-e26",
+    "form4-maths-geometry-e27",
+    "form4-maths-geometry-e28",
+    "form4-maths-geometry-e29",
+    "form4-maths-geometry-e30"
+   ],
+   "selfCheck": [
+    "form4-maths-similarity-q1",
+    "form4-maths-similarity-q2",
+    "form4-maths-similarity-q3",
+    "form4-maths-similarity-q4",
+    "form4-maths-similarity-q5"
+   ],
+   "reviewNotes": [
+    "The model scale and capacities are invented for practice.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Similar figures",
+     "md": "Two figures are **similar** if they have the same shape: corresponding angles are equal and corresponding sides are in the same ratio, called the **scale factor** k. Triangles with sides 6, 8, 10 and 9, 12, 15 are similar with k = 15 ÷ 10 = 1.5. Two triangles are similar if they have **equal angles**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Lengths, areas and volumes",
+     "md": "If the scale factor of lengths is k, then:\n- **areas** are in the ratio k² (surface areas of solids too);\n- **volumes** (and capacities) are in the ratio k³.\nExample: k = 1.5 gives area ratio 2.25 and volume ratio 3.375."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         30,
+         150,
+         110,
+         150,
+         30,
+         90
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         180,
+         170,
+         300,
+         170,
+         180,
+         80
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 168,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 122,
+        "text": "6",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 112,
+        "text": "10",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 188,
+        "text": "12",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 128,
+        "text": "9",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 112,
+        "text": "15",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Two similar right triangles with sides 6, 8, 10 and 9, 12, 15.",
+     "alt": "A small and a large right-angled triangle with the lengths of their sides."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "Match corresponding sides (the sides opposite equal angles). Write the scale factor as **new ÷ old**. Multiply lengths by k, areas by k², volumes by k³. To go back, divide. When given an area ratio, take the **square root** to find k; when given a volume ratio, take the **cube root**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Multiplying areas by k instead of k².\n- Matching sides that do not correspond.\n- Forgetting that the scale factor for a **reduction** is less than 1."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: similar triangles",
+     "statement": "Triangles with sides 6, 8, 10 cm and 9, 12, 15 cm are similar. Find the scale factor and the ratio of their areas.",
+     "steps": [
+      "Scale factor = 9 ÷ 6 = 12 ÷ 8 = 15 ÷ 10 = 1.5.",
+      "Area ratio = 1.5² = 2.25.",
+      "Check: areas ½ × 6 × 8 = 24 and ½ × 9 × 12 = 54; 54 ÷ 24 = 2.25."
+     ],
+     "answer": "**k = 1.5; area ratio 2.25.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         30,
+         150,
+         110,
+         150,
+         30,
+         90
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         180,
+         170,
+         300,
+         170,
+         180,
+         80
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 168,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 122,
+        "text": "6",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 112,
+        "text": "10",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 188,
+        "text": "12",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 128,
+        "text": "9",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 112,
+        "text": "15",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: tins and shadows",
+     "statement": "Two similar tins have heights 12 cm and 18 cm. The small tin holds 400 ml and its label has area 80 cm². Find the capacity of the large tin and the label area. A 2 m pole casts a 3 m shadow while a tree casts an 18 m shadow: find the height of the tree.",
+     "steps": [
+      "k = 18 ÷ 12 = 1.5. Capacity = 400 × 1.5³ = 400 × 3.375 = 1 350 ml.",
+      "Label area = 80 × 1.5² = 80 × 2.25 = 180 cm².",
+      "Tree: the shadow triangles are similar: height = 2 × 18 ÷ 3 = 12 m."
+     ],
+     "answer": "**1 350 ml; 180 cm²; 12 m.**"
+    }
+   ],
+   "chapter": "form4-maths-geometry"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-maths-geometry-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-sine-cosine-rules",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "In triangle ABC, A = 30°, B = 45° and a = 10 cm. Find b (2 d.p.).",
+   "answer": 14.14,
+   "tolerance": 0.01,
+   "unit": "cm",
+   "explanation": "b = 10 sin 45° ÷ sin 30° = 14.14 cm.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-sine-cosine-rules",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find sin 150° (it equals sin 30°).",
+   "answer": 0.5,
+   "tolerance": 0.001,
+   "explanation": "Supplementary angles have equal sines.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-sine-cosine-rules",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The cosine rule is used when we know:",
+   "choices": [
+    "three angles",
+    "two sides and the included angle",
+    "two angles and one side only",
+    "one side only"
+   ],
+   "answer": 1,
+   "explanation": "SAS or SSS.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-sine-cosine-rules",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Triangle with b = 7 cm, c = 9 cm and A = 60°. Find a (to 2 d.p.).",
+   "answer": 8.19,
+   "tolerance": 0.01,
+   "unit": "cm",
+   "explanation": "a² = 49 + 81 − 63 = 67, so a = 8.185.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-sine-cosine-rules",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A triangle has sides 5, 7 and 9 cm. Find the largest angle (1 d.p.).",
+   "answer": 95.7,
+   "tolerance": 0.1,
+   "unit": "°",
+   "explanation": "cos C = (25 + 49 − 81) ÷ 70 = −0.1, so C = 95.7°.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-sine-cosine-rules",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Two villages A and B are both visible from a hill H. AH = 6 km, BH = 8 km and angle AHB = 50°.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Find the distance AB (km, 2 d.p.).",
+     "answer": 6.19,
+     "tolerance": 0.01,
+     "explanation": "AB² = 36 + 64 − 96 cos 50° = 100 − 61.71 = 38.29, so AB = 6.19 km.",
+     "unit": "km",
+     "id": "form4-maths-geometry-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area of triangle AHB (km², 1 d.p.).",
+     "answer": 18.4,
+     "tolerance": 0.1,
+     "explanation": "½ × 6 × 8 × sin 50° = 24 × 0.766 = 18.4.",
+     "unit": "km²",
+     "id": "form4-maths-geometry-e06-b"
+    }
+   ],
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-sine-cosine-rules-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sine-cosine-rules",
+   "prompt": "The sine rule states:",
+   "choices": [
+    "a/cos A = b/cos B",
+    "a/sin A = b/sin B",
+    "sin a = sin b",
+    "a sin A = b sin B"
+   ],
+   "answer": 1,
+   "explanation": "Ratio of side to sine of opposite angle.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-sine-cosine-rules-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sine-cosine-rules",
+   "prompt": "The area of a triangle is:",
+   "choices": [
+    "½ ab sin C",
+    "ab sin C",
+    "½ ab cos C",
+    "½ a + b"
+   ],
+   "answer": 0,
+   "explanation": "Included angle.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-sine-cosine-rules-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sine-cosine-rules",
+   "prompt": "cos 120° is:",
+   "choices": [
+    "0.866",
+    "−0.5",
+    "−0.866",
+    "0.5"
+   ],
+   "answer": 1,
+   "explanation": "Obtuse angles have negative cosine.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-sine-cosine-rules-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sine-cosine-rules",
+   "prompt": "The longest side is opposite:",
+   "choices": [
+    "any angle",
+    "the largest angle",
+    "the smallest angle",
+    "the right angle only"
+   ],
+   "answer": 1,
+   "explanation": "Property.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-sine-cosine-rules-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sine-cosine-rules",
+   "prompt": "The cosine rule is a² =",
+   "choices": [
+    "b² + c² − 2bc cos A",
+    "bc cos A",
+    "b² + c²",
+    "b² + c² + 2bc cos A"
+   ],
+   "answer": 0,
+   "explanation": "Includes the minus sign.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-circle-theorems",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The angle at the centre is 100°. Find the angle at the circumference on the same arc.",
+   "answer": 50,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "Half of 100°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-circle-theorems",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A cyclic quadrilateral has angles A = 110° and B = 80°. Find C.",
+   "answer": 70,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "C = 180 − 110 = 70° (opposite A).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-circle-theorems",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The angle in a semicircle is:",
+   "choices": [
+    "180°",
+    "45°",
+    "90°",
+    "60°"
+   ],
+   "answer": 2,
+   "explanation": "The diameter subtends a right angle.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-circle-theorems",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A tangent and a chord meet at 52°. Find the angle in the alternate segment.",
+   "answer": 52,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "Alternate segment theorem: equal.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-circle-theorems",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "In a cyclic quadrilateral ABCD, angle ABC = 2x + 10 and angle ADC = 3x − 20. Find x and the angle ABC.",
+   "model": "Opposite angles add up to 180°: 5x − 10 = 180 so x = 38. Angle ABC = 2 × 38 + 10 = 86°.",
+   "rubric": "1 mark for the equation, 1 mark for x = 38, 1 mark for 86°.",
+   "explanation": "Opposite angles add up to 180°: 5x − 10 = 180 so x = 38. Angle ABC = 2 × 38 + 10 = 86°.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-circle-theorems",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A circular fish pond at Limbe has centre O. A post P stands outside the pond, and PT is a tangent from P touching the pond at T. The pond has radius 5 m and OP = 13 m.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the length PT (m).",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "PT² = 13² − 5² = 144.",
+     "unit": "m",
+     "id": "form4-maths-geometry-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "A second tangent PS touches the pond at S. State its length (m).",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "Tangents from an outside point are equal.",
+     "unit": "m",
+     "id": "form4-maths-geometry-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area of the quadrilateral OTPS (m²).",
+     "answer": 60,
+     "tolerance": 0,
+     "explanation": "Two right triangles each ½ × 5 × 12 = 30.",
+     "unit": "m²",
+     "id": "form4-maths-geometry-e12-c"
+    }
+   ],
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-circle-theorems-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-circle-theorems",
+   "prompt": "The angle at the centre is ___ the angle at the circumference:",
+   "choices": [
+    "twice",
+    "three times",
+    "equal to",
+    "half"
+   ],
+   "answer": 0,
+   "explanation": "Same arc.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-circle-theorems-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-circle-theorems",
+   "prompt": "In circle theorems, a tangent meets the radius at:",
+   "choices": [
+    "90°",
+    "45°",
+    "180°",
+    "60°"
+   ],
+   "answer": 0,
+   "explanation": "Perpendicular.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-circle-theorems-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-circle-theorems",
+   "prompt": "Opposite angles of a cyclic quadrilateral add up to:",
+   "choices": [
+    "270°",
+    "90°",
+    "360°",
+    "180°"
+   ],
+   "answer": 3,
+   "explanation": "Theorem.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-circle-theorems-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-circle-theorems",
+   "prompt": "By a circle theorem, angles in the same segment are:",
+   "choices": [
+    "complementary",
+    "equal",
+    "double",
+    "supplementary"
+   ],
+   "answer": 1,
+   "explanation": "Theorem.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-circle-theorems-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-circle-theorems",
+   "prompt": "Two tangents from an outside point are:",
+   "choices": [
+    "equal in length",
+    "parallel",
+    "different",
+    "perpendicular"
+   ],
+   "answer": 0,
+   "explanation": "Theorem.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-vectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the magnitude of the vector (6, 8).",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "√(36 + 64) = 10.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-vectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Given a = (3, −1) and b = (2, 4), find the x-component of a + b.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "3 + 2 = 5.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-vectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The vector from P(2, 3) to Q(7, 1) is:",
+   "choices": [
+    "(9, 4)",
+    "(5, 2)",
+    "(−5, 2)",
+    "(5, −2)"
+   ],
+   "answer": 3,
+   "explanation": "Q − P.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-vectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the magnitude of 2p + q for p = (2, 1) and q = (−1, 3) (2 d.p.).",
+   "answer": 5.83,
+   "tolerance": 0.01,
+   "explanation": "(3, 5) has magnitude √34 = 5.83.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-vectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Show that the points A(1, 1), B(3, 2) and C(7, 4) lie on a straight line.",
+   "model": "AB = (2, 1) and BC = (4, 2) = 2AB. The vectors are parallel and share the point B, so A, B and C are collinear.",
+   "rubric": "1 mark for AB, 1 mark for BC, 1 mark for BC = 2AB and the conclusion.",
+   "explanation": "AB = (2, 1) and BC = (4, 2) = 2AB. The vectors are parallel and share the point B, so A, B and C are collinear.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-vectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A hiker from Buea walks (3, 4) km (3 km east and 4 km north) and then (6, 2) km.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the total displacement: x-component (km).",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "3 + 6 = 9.",
+     "unit": "km",
+     "id": "form4-maths-geometry-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the total displacement: y-component (km).",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "4 + 2 = 6.",
+     "unit": "km",
+     "id": "form4-maths-geometry-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Find the straight-line distance from the start (km, 2 d.p.).",
+     "answer": 10.82,
+     "tolerance": 0.01,
+     "explanation": "√(81 + 36) = √117 = 10.82.",
+     "unit": "km",
+     "id": "form4-maths-geometry-e18-c"
+    }
+   ],
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-vectors-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-vectors",
+   "prompt": "A vector has:",
+   "choices": [
+    "direction only",
+    "magnitude and direction",
+    "magnitude only",
+    "no components"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-vectors-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-vectors",
+   "prompt": "The magnitude of the vector (3, 4) is:",
+   "choices": [
+    "5",
+    "12",
+    "7",
+    "25"
+   ],
+   "answer": 0,
+   "explanation": "√(9 + 16).",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-vectors-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-vectors",
+   "prompt": "The vector AB equals:",
+   "choices": [
+    "OA − OB",
+    "OA + OB",
+    "OA × OB",
+    "OB − OA"
+   ],
+   "answer": 3,
+   "explanation": "Position vectors.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-vectors-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-vectors",
+   "prompt": "2 × (1, −3) =",
+   "choices": [
+    "(2, −3)",
+    "(1, −6)",
+    "(3, −1)",
+    "(2, −6)"
+   ],
+   "answer": 3,
+   "explanation": "Multiply each component.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-vectors-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-vectors",
+   "prompt": "Two parallel vectors are:",
+   "choices": [
+    "always equal",
+    "perpendicular",
+    "multiples of each other",
+    "equal in length only"
+   ],
+   "answer": 2,
+   "explanation": "Scalar multiples.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e19",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-loci",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The locus of points 4 cm from a fixed point is:",
+   "choices": [
+    "a point",
+    "a straight line",
+    "a square",
+    "a circle"
+   ],
+   "answer": 3,
+   "explanation": "Fixed distance from a point.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-loci",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The locus of points equidistant from two points A and B is:",
+   "choices": [
+    "the line AB",
+    "a circle round A",
+    "a point",
+    "the perpendicular bisector of AB"
+   ],
+   "answer": 3,
+   "explanation": "Standard locus.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e21",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-loci",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A circular region is at most 10 m from a tree (π = 3.14). Find its area (m²).",
+   "answer": 314,
+   "tolerance": 0,
+   "unit": "m²",
+   "explanation": "3.14 × 100.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-loci",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A and B are 12 cm apart. Find the distance from A to the midpoint of AB.",
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "The bisector meets AB at its midpoint.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-loci",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Describe the locus of points that are 2 cm from the line segment AB where AB = 6 cm.",
+   "model": "Two straight lines parallel to AB, 2 cm from it, joined by semicircles of radius 2 cm at the ends A and B (a 'stadium' shape).",
+   "rubric": "1 mark for two parallel lines, 1 mark for 2 cm distance, 1 mark for the semicircles at the ends.",
+   "explanation": "Two straight lines parallel to AB, 2 cm from it, joined by semicircles of radius 2 cm at the ends A and B (a 'stadium' shape).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-loci",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A market stall in Bafoussam is at S and a second stall is at M, 10 m apart. A customer stands where she is nearer to S than to M and within 8 m of S.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How far from S is the dividing line (the bisector) (m)?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "Half of 10 m.",
+     "unit": "m",
+     "id": "form4-maths-geometry-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "On the dividing line, how far from the midpoint is the point exactly 8 m from S (m, 2 d.p.)?",
+     "answer": 6.24,
+     "tolerance": 0.01,
+     "explanation": "√(64 − 25) = 6.245.",
+     "unit": "m",
+     "id": "form4-maths-geometry-e24-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which statement describes the allowed region?",
+     "choices": [
+      "Inside the circle of radius 8 m round S and on S's side of the bisector",
+      "On M's side of the bisector",
+      "Outside the circle",
+      "Only on the bisector"
+     ],
+     "answer": 0,
+     "explanation": "Both conditions together.",
+     "id": "form4-maths-geometry-e24-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 260,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 150,
+      "cy": 130,
+      "r": 80,
+      "stroke": "blue",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 200,
+      "y1": 35,
+      "x2": 200,
+      "y2": 225,
+      "color": "red",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 130,
+      "x2": 250,
+      "y2": 130,
+      "color": "grey",
+      "width": 2,
+      "dash": true
+     },
+     {
+      "t": "circle",
+      "cx": 150,
+      "cy": 130,
+      "r": 3,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "ink"
+     },
+     {
+      "t": "circle",
+      "cx": 250,
+      "cy": 130,
+      "r": 3,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "ink"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 67.6,
+      "r": 4,
+      "stroke": "green",
+      "width": 2,
+      "fill": "green"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 192.4,
+      "r": 4,
+      "stroke": "green",
+      "width": 2,
+      "fill": "green"
+     },
+     {
+      "t": "text",
+      "x": 138,
+      "y": 150,
+      "text": "S",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 262,
+      "y": 150,
+      "text": "M",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 215,
+      "y": 63.599999999999994,
+      "text": "P",
+      "size": 14,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 215,
+      "y": 206.4,
+      "text": "P′",
+      "size": 14,
+      "anchor": "start",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-loci-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-loci",
+   "prompt": "A locus is:",
+   "choices": [
+    "a measurement",
+    "an angle",
+    "a single point",
+    "a set of points satisfying a condition"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-loci-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-loci",
+   "prompt": "The locus of points equidistant from two lines that cross is:",
+   "choices": [
+    "a parallel line",
+    "a circle",
+    "a point",
+    "the angle bisector"
+   ],
+   "answer": 3,
+   "explanation": "Standard locus.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-loci-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-loci",
+   "prompt": "'At most 5 cm from P' includes:",
+   "choices": [
+    "the circle only",
+    "the circle and its inside",
+    "the centre only",
+    "the outside only"
+   ],
+   "answer": 1,
+   "explanation": "At most.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-loci-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-loci",
+   "prompt": "A dashed boundary line means the points on the line are:",
+   "choices": [
+    "included",
+    "at the origin",
+    "the centre",
+    "not included"
+   ],
+   "answer": 3,
+   "explanation": "Strict condition.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-loci-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-loci",
+   "prompt": "The locus of points 3 cm from a straight line is:",
+   "choices": [
+    "one line",
+    "a point",
+    "a circle",
+    "two parallel lines"
+   ],
+   "answer": 3,
+   "explanation": "One on each side.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e25",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-similarity",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Two similar shapes have lengths 4 cm and 10 cm. Find the scale factor from the small to the large.",
+   "answer": 2.5,
+   "tolerance": 0,
+   "explanation": "10 ÷ 4.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e26",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-similarity",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A model has scale factor 3. Find the ratio of the areas.",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "3² = 9.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e27",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-similarity",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The volume ratio for similar solids with scale factor 2 is:",
+   "choices": [
+    "4",
+    "2",
+    "8",
+    "6"
+   ],
+   "answer": 2,
+   "explanation": "2³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e28",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-similarity",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The areas of two similar figures are 20 cm² and 45 cm². Find the scale factor from the small to the large.",
+   "answer": 1.5,
+   "tolerance": 0,
+   "explanation": "√(45/20) = 1.5.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e29",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-similarity",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A photograph 10 cm by 15 cm is enlarged so that its width becomes 25 cm. Find the new height and explain why the shape is kept.",
+   "model": "k = 25 ÷ 10 = 2.5, so the height is 15 × 2.5 = 37.5 cm. All lengths are multiplied by the same factor, so the shape (the ratios and angles) is unchanged.",
+   "rubric": "1 mark for k, 1 mark for 37.5 cm, 1 mark for the explanation.",
+   "explanation": "k = 25 ÷ 10 = 2.5, so the height is 15 × 2.5 = 37.5 cm. All lengths are multiplied by the same factor, so the shape (the ratios and angles) is unchanged.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-geometry-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-similarity",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A model of a water tank for a village at Bali is made at scale 1 : 20. The model holds 0.5 litres.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many times larger is each length of the real tank than the model?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "Scale 1 : 20.",
+     "id": "form4-maths-geometry-e30-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the capacity ratio real : model.",
+     "answer": 8000,
+     "tolerance": 0,
+     "explanation": "20³ = 8 000.",
+     "id": "form4-maths-geometry-e30-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the real capacity in litres.",
+     "answer": 4000,
+     "tolerance": 0,
+     "explanation": "0.5 × 8 000.",
+     "unit": "l",
+     "id": "form4-maths-geometry-e30-c"
+    }
+   ],
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-similarity-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-similarity",
+   "prompt": "Similar shapes have:",
+   "choices": [
+    "equal areas",
+    "equal perimeters only",
+    "equal angles and proportional sides",
+    "equal sides"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-similarity-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-similarity",
+   "prompt": "If k = 3, the area ratio is:",
+   "choices": [
+    "6",
+    "3",
+    "27",
+    "9"
+   ],
+   "answer": 3,
+   "explanation": "k².",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-similarity-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-similarity",
+   "prompt": "If k = 2, the volume ratio is:",
+   "choices": [
+    "6",
+    "2",
+    "8",
+    "4"
+   ],
+   "answer": 2,
+   "explanation": "k³.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-similarity-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-similarity",
+   "prompt": "Two similar solids have volumes in ratio 27 : 1. The lengths are in ratio:",
+   "choices": [
+    "3 : 1",
+    "81 : 1",
+    "9 : 1",
+    "27 : 1"
+   ],
+   "answer": 0,
+   "explanation": "Cube root.",
+   "chapter": "form4-maths-geometry"
+  },
+  {
+   "id": "form4-maths-similarity-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-similarity",
+   "prompt": "A scale factor less than 1 gives:",
+   "choices": [
+    "a reflection",
+    "a congruent figure",
+    "an enlargement",
+    "a reduction"
+   ],
+   "answer": 3,
+   "explanation": "Smaller figure.",
+   "chapter": "form4-maths-geometry"
+  }
+ ]
+}

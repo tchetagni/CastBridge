@@ -1,0 +1,1735 @@
+{
+ "chapter": "form1-maths-geometry",
+ "lessons": [
+  {
+   "id": "form1-maths-angles",
+   "title": "Angles and parallel lines",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name types of angle and measure them with a protractor",
+    "Use angle facts on a straight line, round a point and for vertically opposite angles",
+    "Use corresponding, alternate and co-interior angles on parallel lines",
+    "Find unknown angles using equations"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-geometry-e01",
+    "form1-maths-geometry-e02",
+    "form1-maths-geometry-e03",
+    "form1-maths-geometry-e04",
+    "form1-maths-geometry-e05",
+    "form1-maths-geometry-e06"
+   ],
+   "selfCheck": [
+    "form1-maths-angles-q1",
+    "form1-maths-angles-q2",
+    "form1-maths-angles-q3",
+    "form1-maths-angles-q4",
+    "form1-maths-angles-q5"
+   ],
+   "reviewNotes": [
+    "The figure is schematic; angle marks are not drawn to scale with arcs.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Types of angle",
+     "md": "An angle measures a turn. An **acute** angle is less than 90°, a **right** angle is exactly 90°, an **obtuse** angle is between 90° and 180°, a **straight** angle is 180° and a **reflex** angle is between 180° and 360°. Two angles are **complementary** if they add up to 90° and **supplementary** if they add up to 180°."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Angle facts",
+     "md": "- Angles on a straight line add up to 180°.\n- Angles round a point add up to 360°.\n- **Vertically opposite** angles (made by two crossing lines) are equal.\n- Check measuring: place the centre of the protractor on the vertex and read the scale that starts at 0° on one arm."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 140,
+        "x2": 330,
+        "y2": 140,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 153.51199120852306,
+        "y1": 239.69385657403149,
+        "x2": 246.48800879147694,
+        "y2": 40.3061434259685,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 114.2,
+        "text": "65°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 172.1,
+        "y": 96.1,
+        "text": "115°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 156.1,
+        "y": 167.9,
+        "text": "65°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 225.8,
+        "y": 180.5,
+        "text": "115°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Two crossing lines: the four angles are 65°, 115°, 65°, 115°.",
+     "alt": "Two lines crossing; opposite angles equal 65 and 115 degrees."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Parallel lines",
+     "md": "A line crossing two parallel lines makes: **corresponding** angles (F shape) that are equal; **alternate** angles (Z shape) that are equal; **co-interior** angles (C or U shape) that add up to 180°. These rules only work when the lines are parallel."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Reading the wrong scale on the protractor: an obtuse angle cannot be 40°.\n- Using Z or F rules on lines that are not parallel.\n- Forgetting that co-interior angles add up to 180° but are not equal."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: straight line",
+     "statement": "Three angles on a straight line are x, 2x + 10 and 3x + 20 (in degrees). Find x and the angles.",
+     "steps": [
+      "The angles add up to 180°: x + 2x + 10 + 3x + 20 = 180.",
+      "6x + 30 = 180, so 6x = 150 and x = 25.",
+      "The angles are 25°, 60° and 95°. Check: 25 + 60 + 95 = 180."
+     ],
+     "answer": "**x = 25; angles 25°, 60°, 95°.**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: crossing lines",
+     "statement": "Two straight lines cross and one angle is 65°. Find the other three angles.",
+     "steps": [
+      "The angle next to it is on a straight line: 180° − 65° = 115°.",
+      "The angle vertically opposite 65° is also 65°.",
+      "The angle vertically opposite 115° is also 115°."
+     ],
+     "answer": "**65°, 115°, 65°, 115°.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 140,
+        "x2": 330,
+        "y2": 140,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 153.51199120852306,
+        "y1": 239.69385657403149,
+        "x2": 246.48800879147694,
+        "y2": 40.3061434259685,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 114.2,
+        "text": "65°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 172.1,
+        "y": 96.1,
+        "text": "115°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 156.1,
+        "y": 167.9,
+        "text": "65°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 225.8,
+        "y": 180.5,
+        "text": "115°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-triangles-quadrilaterals",
+   "title": "Triangles and quadrilaterals",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Classify triangles by sides and by angles",
+    "Use the angle sum of a triangle and the exterior angle property",
+    "Name the special quadrilaterals and their properties",
+    "Use the angle sum of a quadrilateral"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-geometry-e07",
+    "form1-maths-geometry-e08",
+    "form1-maths-geometry-e09",
+    "form1-maths-geometry-e10",
+    "form1-maths-geometry-e11",
+    "form1-maths-geometry-e12"
+   ],
+   "selfCheck": [
+    "form1-maths-triangles-quadrilaterals-q1",
+    "form1-maths-triangles-quadrilaterals-q2",
+    "form1-maths-triangles-quadrilaterals-q3",
+    "form1-maths-triangles-quadrilaterals-q4",
+    "form1-maths-triangles-quadrilaterals-q5"
+   ],
+   "reviewNotes": [
+    "Some textbooks define a trapezium as having at least one pair of parallel sides, others exactly one; confirm the local convention.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Triangles",
+     "md": "A triangle has three sides and three angles that **add up to 180°**. By sides: **equilateral** (3 equal sides, all angles 60°), **isosceles** (2 equal sides and the two angles opposite them equal), **scalene** (no equal sides). By angles: acute, right (one angle 90°) or obtuse (one angle over 90°). The **exterior angle** of a triangle equals the sum of the two opposite interior angles."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Quadrilaterals",
+     "md": "The angles of a quadrilateral add up to 360°. A **square** has 4 equal sides and 4 right angles. A **rectangle** has opposite sides equal and 4 right angles. A **parallelogram** has opposite sides parallel and equal. A **rhombus** has 4 equal sides. A **trapezium** has one pair of parallel sides. A **kite** has two pairs of equal adjacent sides."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         80,
+         190,
+         320,
+         190,
+         222.2,
+         20.6
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 182,
+        "text": "50°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 182,
+        "text": "60°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 222.2,
+        "y": 58.6,
+        "text": "x",
+        "size": 14,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 68,
+        "y": 205,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 205,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 222.2,
+        "y": 10.600000000000001,
+        "text": "C",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Triangle ABC with angles 50°, 60° and x = 70°.",
+     "alt": "A triangle with angles 50 and 60 degrees at the base and x at the top."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Thinking a square is not a rectangle; a square is a special rectangle and a special rhombus.\n- Forgetting that the two base angles of an isosceles triangle are equal.\n- Using 360° for a triangle or 180° for a quadrilateral."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: triangle angles",
+     "statement": "In triangle ABC, angle A = 50° and angle B = 60°. Find angle C. Then find the angles of an isosceles triangle whose apex angle is 40°.",
+     "steps": [
+      "Angle C = 180° − 50° − 60° = 70°.",
+      "In the isosceles triangle the two base angles are equal: (180° − 40°) ÷ 2 = 70°.",
+      "So its angles are 40°, 70°, 70°."
+     ],
+     "answer": "**C = 70°; 40°, 70°, 70°.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         80,
+         190,
+         320,
+         190,
+         222.2,
+         20.6
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 182,
+        "text": "50°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 182,
+        "text": "60°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 222.2,
+        "y": 58.6,
+        "text": "x",
+        "size": 14,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 68,
+        "y": 205,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 205,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 222.2,
+        "y": 10.600000000000001,
+        "text": "C",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: quadrilateral",
+     "statement": "Three angles of a quadrilateral are 80°, 100° and 120°. Find the fourth. Then find all the angles of a parallelogram with one angle of 80°.",
+     "steps": [
+      "The four angles add up to 360°: 80 + 100 + 120 = 300, so the fourth angle is 60°.",
+      "In a parallelogram opposite angles are equal, so another angle is 80°.",
+      "Neighbouring angles add up to 180°, so the other two are 100° each. Check: 80 + 100 + 80 + 100 = 360."
+     ],
+     "answer": "**60°; the parallelogram has 80°, 100°, 80°, 100°.**"
+    }
+   ],
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-constructions",
+   "title": "Constructions with ruler and compasses",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Construct a triangle given three sides",
+    "Construct the perpendicular bisector of a line",
+    "Construct the bisector of an angle",
+    "Construct angles of 60° and 90°"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-geometry-e13",
+    "form1-maths-geometry-e14",
+    "form1-maths-geometry-e15",
+    "form1-maths-geometry-e16",
+    "form1-maths-geometry-e17",
+    "form1-maths-geometry-e18"
+   ],
+   "selfCheck": [
+    "form1-maths-constructions-q1",
+    "form1-maths-constructions-q2",
+    "form1-maths-constructions-q3",
+    "form1-maths-constructions-q4",
+    "form1-maths-constructions-q5"
+   ],
+   "reviewNotes": [
+    "The figure shows complete circles instead of arcs for clarity; construction marks in an exam are arcs only.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Perpendicular bisector",
+     "md": "To bisect the segment AB: set the compasses to **more than half** of AB. Draw an arc above and below from A, then the same arcs from B. Join the two crossing points with a ruler. This line cuts AB at its midpoint M at 90°. Every point on it is the same distance from A and from B."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Angle bisector and a 60° angle",
+     "md": "To bisect an angle at O: draw an arc that cuts both arms; from those two points draw equal arcs that cross inside the angle; join O to the crossing. To make **60°**: from A draw an arc of any radius cutting the base at P; with the same radius, centre P, cut the arc at Q; join A to Q. Bisect that to get 30°."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 300,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 150,
+        "r": 100,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 150,
+        "r": 100,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 150,
+        "x2": 300,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 75.0,
+        "x2": 220,
+        "y2": 225.0,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 165,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 165,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 170,
+        "text": "M",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Perpendicular bisector of AB made with two pairs of arcs.",
+     "alt": "Two circles centred on A and B crossing; a vertical line through the crossing points meets AB at M."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Triangle with three sides",
+     "md": "To construct a triangle with sides 7 cm, 5 cm and 4 cm: draw the longest side AB = 7 cm. With compasses at A and radius 5 cm draw an arc; with compasses at B and radius 4 cm draw another arc. The arcs cross at C. Join AC and BC. Never rub out the arcs."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Changing the compass setting between the two arcs of a bisector: use the same radius.\n- Setting the radius to **less than half** of AB: the arcs will not cross.\n- Measuring with a ruler instead of using arcs when a construction is asked: show all construction marks."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: perpendicular bisector",
+     "statement": "AB = 8 cm. Describe how to find the point equidistant from A and B on a road map, and state the distance AM.",
+     "steps": [
+      "Open the compasses to 5 cm (more than 4 cm, half of AB).",
+      "Draw arcs from A and from B above and below AB; join the crossing points.",
+      "The line crosses AB at M, the midpoint, so AM = 4 cm."
+     ],
+     "answer": "**M is at 4 cm from A; the bisector is at 90° to AB.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 300,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 150,
+        "r": 100,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 150,
+        "r": 100,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 150,
+        "x2": 300,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 75.0,
+        "x2": 220,
+        "y2": 225.0,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 165,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 165,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 170,
+        "text": "M",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: triangle",
+     "statement": "Describe the construction of triangle ABC with AB = 7 cm, AC = 5 cm and BC = 4 cm. Is it possible?",
+     "steps": [
+      "Check: 5 + 4 = 9 is more than 7, so the arcs will cross: a triangle exists.",
+      "Draw AB = 7 cm; arc radius 5 cm from A; arc radius 4 cm from B.",
+      "Mark the crossing point C and join AC and BC."
+     ],
+     "answer": "**Possible; C is where the two arcs meet.**"
+    }
+   ],
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-perimeter-area",
+   "title": "Perimeter and area",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the perimeter of polygons",
+    "Use the area formulas for the rectangle, square, triangle, parallelogram and trapezium",
+    "Convert between units of length and area",
+    "Solve practical problems on land and floors"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-geometry-e19",
+    "form1-maths-geometry-e20",
+    "form1-maths-geometry-e21",
+    "form1-maths-geometry-e22",
+    "form1-maths-geometry-e23",
+    "form1-maths-geometry-e24"
+   ],
+   "selfCheck": [
+    "form1-maths-perimeter-area-q1",
+    "form1-maths-perimeter-area-q2",
+    "form1-maths-perimeter-area-q3",
+    "form1-maths-perimeter-area-q4",
+    "form1-maths-perimeter-area-q5"
+   ],
+   "reviewNotes": [
+    "Circle circumference and area are taught in Form 2 in this scheme; adjust if the official scheme differs.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Area formulas",
+     "md": "The **perimeter** is the distance round a shape. The **area** is the surface it covers, in square units:",
+     "tex": "A_{\\text{rectangle}} = l \\times w \\qquad A_{\\text{triangle}} = \\frac{1}{2} b h \\qquad A_{\\text{parallelogram}} = b h"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Trapezium",
+     "md": "For a trapezium with parallel sides a and b and height h (the distance between them):",
+     "tex": "A = \\frac{1}{2}(a + b) \\times h"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         170,
+         320,
+         170,
+         270,
+         70,
+         150,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 70,
+        "x2": 150,
+        "y2": 170,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 190,
+        "text": "50 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 60,
+        "text": "30 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 125,
+        "text": "20 m",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A trapezium plot with parallel sides 30 m and 50 m and height 20 m.",
+     "alt": "A trapezium with its top side 30 m, bottom 50 m and a dashed height of 20 m."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Units",
+     "md": "1 m = 100 cm, so 1 m² = 100 × 100 = 10 000 cm². 1 hectare = 10 000 m². Use the same unit for all measurements before calculating. The **height** is always at right angles to the base, not along a slanted side."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the slanted side instead of the perpendicular height.\n- Forgetting the ½ in the area of a triangle or trapezium.\n- Writing area in cm instead of cm², or converting 1 m² to 100 cm² instead of 10 000 cm²."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: rectangle and floor tiles",
+     "statement": "A classroom floor at Kumba is 6 m by 5 m. Square tiles of side 50 cm cost 450 FCFA each. How many tiles are needed and what do they cost?",
+     "steps": [
+      "Floor area = 6 × 5 = 30 m² = 300 000 cm²... use 600 cm × 500 cm = 300 000 cm².",
+      "One tile: 50 × 50 = 2 500 cm². Tiles = 300 000 ÷ 2 500 = 120.",
+      "Cost = 120 × 450 = 54 000 FCFA."
+     ],
+     "answer": "**120 tiles; 54 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: trapezium",
+     "statement": "A plot of land at Bamenda is a trapezium with parallel sides 30 m and 50 m, 20 m apart. Find its area.",
+     "steps": [
+      "Use A = ½ (a + b) × h with a = 30, b = 50 and h = 20.",
+      "A = ½ × 80 × 20 = 800.",
+      "The area is 800 m²."
+     ],
+     "answer": "**800 m²**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         170,
+         320,
+         170,
+         270,
+         70,
+         150,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 70,
+        "x2": 150,
+        "y2": 170,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 190,
+        "text": "50 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 60,
+        "text": "30 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 125,
+        "text": "20 m",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form1-maths-geometry"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form1-maths-geometry-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the angle that is supplementary to 112°.",
+   "answer": 68,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "180 − 112 = 68°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Two straight lines cross. One angle is 38°. Find the angle next to it.",
+   "answer": 142,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "180 − 38 = 142°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A transversal crosses two parallel lines. Alternate angles are:",
+   "choices": [
+    "always 90°",
+    "supplementary",
+    "never equal",
+    "equal"
+   ],
+   "answer": 3,
+   "explanation": "Z-shaped angles are equal.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Four angles round a point are 90°, 110°, x and 2x. Find x.",
+   "answer": 53.333,
+   "tolerance": 0.01,
+   "unit": "°",
+   "explanation": "90 + 110 + 3x = 360, so 3x = 160 and x = 53.3°.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Two parallel roads are crossed by a third road. One angle at the first junction is 70°. Find the co-interior angle at the second junction and explain.",
+   "model": "Co-interior angles add up to 180° between parallel lines, so the angle is 180° − 70° = 110°.",
+   "rubric": "1 mark for the rule, 1 mark for the subtraction, 1 mark for 110°.",
+   "explanation": "Co-interior angles add up to 180° between parallel lines, so the angle is 180° − 70° = 110°.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Two parallel roads in Yaoundé are crossed by an avenue. At the first junction an angle is 65°.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the corresponding angle at the second junction (°).",
+     "answer": 65,
+     "tolerance": 0,
+     "explanation": "Corresponding angles are equal.",
+     "unit": "°",
+     "id": "form1-maths-geometry-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the co-interior angle on the same side of the avenue as the 65° at the first junction (°).",
+     "answer": 115,
+     "tolerance": 0,
+     "explanation": "Co-interior angles add up to 180°: 180 − 65 = 115.",
+     "unit": "°",
+     "id": "form1-maths-geometry-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which fact do you use for alternate angles?",
+     "choices": [
+      "They are equal when the lines are parallel",
+      "They are always 90°",
+      "They are equal for any two lines",
+      "They add up to 180°"
+     ],
+     "answer": 0,
+     "explanation": "The Z rule needs parallel lines.",
+     "id": "form1-maths-geometry-e06-c"
+    }
+   ],
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-angles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-angles",
+   "prompt": "A 120° angle is:",
+   "choices": [
+    "obtuse",
+    "right",
+    "reflex",
+    "acute"
+   ],
+   "answer": 0,
+   "explanation": "Between 90° and 180°.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-angles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-angles",
+   "prompt": "Angles round a point add up to:",
+   "choices": [
+    "180°",
+    "90°",
+    "270°",
+    "360°"
+   ],
+   "answer": 3,
+   "explanation": "A full turn.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-angles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-angles",
+   "prompt": "Vertically opposite angles are:",
+   "choices": [
+    "unrelated",
+    "supplementary",
+    "equal",
+    "complementary"
+   ],
+   "answer": 2,
+   "explanation": "Made by crossing lines.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-angles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-angles",
+   "prompt": "The complement of 35° is:",
+   "choices": [
+    "145°",
+    "65°",
+    "35°",
+    "55°"
+   ],
+   "answer": 3,
+   "explanation": "90 − 35.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-angles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-angles",
+   "prompt": "Co-interior angles between parallel lines add up to:",
+   "choices": [
+    "90°",
+    "they are equal",
+    "180°",
+    "360°"
+   ],
+   "answer": 2,
+   "explanation": "C-shape rule.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Two angles of a triangle are 35° and 80°. Find the third.",
+   "answer": 65,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "180 − 115 = 65°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A triangle with two equal sides is called:",
+   "choices": [
+    "right",
+    "scalene",
+    "equilateral",
+    "isosceles"
+   ],
+   "answer": 3,
+   "explanation": "Isosceles has two equal sides.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The three angles of a triangle are x, x + 20 and x + 40. Find x.",
+   "answer": 40,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "3x + 60 = 180, so x = 40.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "An exterior angle of a triangle is 125° and one opposite interior angle is 70°. Find the other opposite interior angle.",
+   "answer": 55,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "The exterior angle is the sum of the two opposite interior angles: 125 − 70 = 55°.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "List three properties of a rhombus.",
+   "model": "Four equal sides; opposite sides parallel; opposite angles equal; diagonals cross at right angles and bisect each other.",
+   "rubric": "1 mark for each correct property, up to 3.",
+   "explanation": "Four equal sides; opposite sides parallel; opposite angles equal; diagonals cross at right angles and bisect each other.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The roof of a house in Bafoussam is an isosceles triangle with apex angle 100°.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find each base angle (°).",
+     "answer": 40,
+     "tolerance": 0,
+     "explanation": "(180 − 100) ÷ 2 = 40°.",
+     "unit": "°",
+     "id": "form1-maths-geometry-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "A support beam makes an exterior angle at one base corner. Find that exterior angle (°).",
+     "answer": 140,
+     "tolerance": 0,
+     "explanation": "Exterior angle = 180 − 40 = 140° (or 40 + 100).",
+     "unit": "°",
+     "id": "form1-maths-geometry-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What type of triangle by angles is the roof?",
+     "choices": [
+      "Right",
+      "Acute",
+      "Reflex",
+      "Obtuse"
+     ],
+     "answer": 3,
+     "explanation": "The apex angle is 100°, more than 90°.",
+     "id": "form1-maths-geometry-e12-c"
+    }
+   ],
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-triangles-quadrilaterals-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "prompt": "The angles of a triangle add up to:",
+   "choices": [
+    "90°",
+    "360°",
+    "180°",
+    "270°"
+   ],
+   "answer": 2,
+   "explanation": "Triangle angle sum.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-triangles-quadrilaterals-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "prompt": "A quadrilateral with 4 equal sides and no right angles is a:",
+   "choices": [
+    "square",
+    "rhombus",
+    "rectangle",
+    "trapezium"
+   ],
+   "answer": 1,
+   "explanation": "Rhombus.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-triangles-quadrilaterals-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "prompt": "The angles of a quadrilateral add up to:",
+   "choices": [
+    "540°",
+    "180°",
+    "720°",
+    "360°"
+   ],
+   "answer": 3,
+   "explanation": "Two triangles.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-triangles-quadrilaterals-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "prompt": "An equilateral triangle has each angle:",
+   "choices": [
+    "60°",
+    "30°",
+    "45°",
+    "90°"
+   ],
+   "answer": 0,
+   "explanation": "180 ÷ 3.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-triangles-quadrilaterals-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-triangles-quadrilaterals",
+   "prompt": "A trapezium has:",
+   "choices": [
+    "four equal sides",
+    "no parallel sides",
+    "four right angles",
+    "one pair of parallel sides"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-constructions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The perpendicular bisector of AB passes through:",
+   "choices": [
+    "A only",
+    "the midpoint of AB at 90°",
+    "B only",
+    "a point 1 cm from A"
+   ],
+   "answer": 1,
+   "explanation": "It cuts AB in two equal parts at a right angle.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-constructions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "To bisect a 80° angle you get two angles of how many degrees each?",
+   "answer": 40,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "80 ÷ 2 = 40°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form1-maths-constructions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A triangle with sides 3 cm, 4 cm and 8 cm can be constructed.",
+   "answer": false,
+   "explanation": "3 + 4 = 7 is less than 8, so the arcs do not meet.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-constructions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Which angle do you get by bisecting a 60° angle (construction)?",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "Half of 60° is 30°.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-constructions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "List the steps to construct a 90° angle at a point P on a line.",
+   "model": "Draw equal arcs on both sides of P on the line; with a larger radius, draw arcs from those two points that cross above P; join P to the crossing: this is the perpendicular.",
+   "rubric": "1 mark for the equal arcs, 1 mark for the crossing arcs, 1 mark for joining.",
+   "explanation": "Draw equal arcs on both sides of P on the line; with a larger radius, draw arcs from those two points that cross above P; join P to the crossing: this is the perpendicular.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-constructions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A surveyor wants a point P that is the same distance from two villages A and B, 10 km apart.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "On which line does P lie?",
+     "choices": [
+      "any circle through A",
+      "the perpendicular bisector of AB",
+      "a line parallel to AB",
+      "the line AB only"
+     ],
+     "answer": 1,
+     "explanation": "All points equidistant from A and B lie on it.",
+     "id": "form1-maths-geometry-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The midpoint M of AB is how far from A (km)?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "10 ÷ 2 = 5 km.",
+     "unit": "km",
+     "id": "form1-maths-geometry-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "A point P on the bisector is 12 km from M. Find PA in km (use Pythagoras).",
+     "answer": 13,
+     "tolerance": 0,
+     "explanation": "PA = sqrt(5² + 12²) = 13 km.",
+     "unit": "km",
+     "id": "form1-maths-geometry-e18-c"
+    }
+   ],
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-constructions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-constructions",
+   "prompt": "The compasses are used to draw:",
+   "choices": [
+    "angles in degrees only",
+    "tables",
+    "arcs and circles",
+    "straight lines only"
+   ],
+   "answer": 2,
+   "explanation": "Arcs and circles.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-constructions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-constructions",
+   "prompt": "When bisecting a line, the compass radius must be:",
+   "choices": [
+    "exactly 1 cm",
+    "zero",
+    "less than half the line",
+    "more than half the line"
+   ],
+   "answer": 3,
+   "explanation": "Otherwise the arcs do not cross.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-constructions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-constructions",
+   "prompt": "Each angle of an equilateral triangle constructed with arcs is:",
+   "choices": [
+    "30°",
+    "90°",
+    "60°",
+    "45°"
+   ],
+   "answer": 2,
+   "explanation": "All sides are equal.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-constructions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-constructions",
+   "prompt": "A perpendicular line makes an angle of:",
+   "choices": [
+    "180°",
+    "45°",
+    "90°",
+    "60°"
+   ],
+   "answer": 2,
+   "explanation": "Right angle.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-constructions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-constructions",
+   "prompt": "A triangle exists when the two shorter sides together are:",
+   "choices": [
+    "equal to zero",
+    "shorter than the third side",
+    "equal to double",
+    "longer than the third side"
+   ],
+   "answer": 3,
+   "explanation": "Triangle inequality.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the perimeter of a rectangle 12 m by 7 m.",
+   "answer": 38,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "2 × (12 + 7) = 38 m.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the area of a triangle with base 10 cm and height 6 cm.",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "½ × 10 × 6 = 30 cm².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e21",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "1 m² equals:",
+   "choices": [
+    "1 000 cm²",
+    "1 000 000 cm²",
+    "100 cm²",
+    "10 000 cm²"
+   ],
+   "answer": 3,
+   "explanation": "100 cm × 100 cm.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A parallelogram has base 14 cm and height 9 cm. Find its area.",
+   "answer": 126,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "14 × 9 = 126 cm².",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A square has the perimeter 36 cm. Find its side and its area, showing the steps.",
+   "model": "Side = 36 ÷ 4 = 9 cm. Area = 9 × 9 = 81 cm².",
+   "rubric": "1 mark for the side, 1 mark for the method of the area, 1 mark for 81 cm².",
+   "explanation": "Side = 36 ÷ 4 = 9 cm. Area = 9 × 9 = 81 cm².",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-geometry-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A rectangular farm in Bali measures 80 m by 50 m. A path 2 m wide runs round the inside edge of the farm.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the area of the whole farm (m²).",
+     "answer": 4000,
+     "tolerance": 0,
+     "explanation": "80 × 50 = 4 000.",
+     "unit": "m²",
+     "id": "form1-maths-geometry-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The inner part (inside the path) measures 76 m by 46 m. Find its area (m²).",
+     "answer": 3496,
+     "tolerance": 0,
+     "explanation": "76 × 46 = 3 496.",
+     "unit": "m²",
+     "id": "form1-maths-geometry-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area of the path (m²).",
+     "answer": 504,
+     "tolerance": 0,
+     "explanation": "4 000 − 3 496 = 504.",
+     "unit": "m²",
+     "id": "form1-maths-geometry-e24-c"
+    }
+   ],
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-perimeter-area-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-perimeter-area",
+   "prompt": "The area of a rectangle 5 cm by 4 cm:",
+   "choices": [
+    "20 cm²",
+    "20 cm",
+    "9 cm²",
+    "18 cm²"
+   ],
+   "answer": 0,
+   "explanation": "Length × width; area is in square units.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-perimeter-area-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-perimeter-area",
+   "prompt": "The area of a triangle with base 8 and height 5:",
+   "choices": [
+    "13",
+    "26",
+    "40",
+    "20"
+   ],
+   "answer": 3,
+   "explanation": "½ × 8 × 5.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-perimeter-area-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-perimeter-area",
+   "prompt": "The perimeter of a square of side 6 cm:",
+   "choices": [
+    "12 cm",
+    "24 cm",
+    "6 cm",
+    "36 cm"
+   ],
+   "answer": 1,
+   "explanation": "4 × 6.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-perimeter-area-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-perimeter-area",
+   "prompt": "Area of a trapezium with parallel sides 4 and 6, height 5:",
+   "choices": [
+    "50",
+    "25",
+    "20",
+    "30"
+   ],
+   "answer": 1,
+   "explanation": "½ × 10 × 5.",
+   "chapter": "form1-maths-geometry"
+  },
+  {
+   "id": "form1-maths-perimeter-area-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-perimeter-area",
+   "prompt": "1 hectare equals:",
+   "choices": [
+    "10 000 m²",
+    "100 m²",
+    "1 000 m²",
+    "100 000 m²"
+   ],
+   "answer": 0,
+   "explanation": "100 m × 100 m.",
+   "chapter": "form1-maths-geometry"
+  }
+ ]
+}

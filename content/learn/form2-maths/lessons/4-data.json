@@ -1,0 +1,852 @@
+{
+ "chapter": "form2-maths-data",
+ "lessons": [
+  {
+   "id": "form2-maths-statistics-tables-pie",
+   "title": "Frequency tables, mean and pie charts",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 2 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the mean, median and mode from a frequency table",
+    "Draw and read a pie chart",
+    "Compare sets of data using averages and range",
+    "Interpret statistics from real situations"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-maths-data-e01",
+    "form2-maths-data-e02",
+    "form2-maths-data-e03",
+    "form2-maths-data-e04",
+    "form2-maths-data-e05",
+    "form2-maths-data-e06"
+   ],
+   "selfCheck": [
+    "form2-maths-statistics-tables-pie-q1",
+    "form2-maths-statistics-tables-pie-q2",
+    "form2-maths-statistics-tables-pie-q3",
+    "form2-maths-statistics-tables-pie-q4",
+    "form2-maths-statistics-tables-pie-q5"
+   ],
+   "reviewNotes": [
+    "Grouped frequency tables and histograms are left for Form 3-4.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mean from a frequency table",
+     "md": "Add a column f × x (value times frequency). **Mean = Σfx ÷ Σf**, where Σ means 'the sum of'. The **mode** is the value with the highest frequency. For the **median** use the cumulative frequency to find the middle position: the (n + 1) ÷ 2th value."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pie charts",
+     "md": "A pie chart shows how a total is shared. The angle of a sector is $\\frac{\\text{frequency}}{\\text{total}} \\times 360^\\circ$. Draw a circle, draw one radius, and measure each angle in turn with a protractor, in order. The angles must add up to 360°."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "path",
+        "d": "M 200 130 L 200.0 50.0 A 80 80 0 0 1 240.0 199.3 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 310.1,
+        "y": 107.6,
+        "text": "Walk 150°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 200 130 L 240.0 199.3 A 80 80 0 0 1 130.7 170.0 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 170.5,
+        "y": 237.4,
+        "text": "Taxi 90°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 200 130 L 130.7 170.0 A 80 80 0 0 1 130.7 90.0 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 86.0,
+        "y": 135.0,
+        "text": "Bicycle 60°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 200 130 L 130.7 90.0 A 80 80 0 0 1 200.0 50.0 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 143.0,
+        "y": 43.2,
+        "text": "Car 60°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Pie chart of how 240 pupils travel to school.",
+     "alt": "A pie chart with sectors for walking 150°, taxi 90°, bicycle 60° and car 60°."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Dividing Σfx by the number of values in the table instead of by Σf.\n- Taking the median as the middle row of the table rather than the middle of all the data.\n- Pie chart angles that do not add up to 360°."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: frequency table",
+     "statement": "20 families in a neighbourhood of Limbe were asked how many children they have: 0 children (3 families), 1 (7), 2 (6), 3 (3), 4 (1). Find the mean, median and mode.",
+     "steps": [
+      "Σf = 20 and Σfx = 0×3 + 1×7 + 2×6 + 3×3 + 4×1 = 32. Mean = 32 ÷ 20 = 1.6.",
+      "Mode = 1 child (frequency 7).",
+      "Median: the 10th and 11th values. Cumulative frequencies are 3, 10, 16: the 10th is 1 and the 11th is 2, so the median is 1.5."
+     ],
+     "answer": "**Mean 1.6, mode 1, median 1.5.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 470,
+      "h": 134,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 47.5,
+        "y": 30.0,
+        "text": "Children x",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 85,
+        "y": 10,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 122.5,
+        "y": 30.0,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 10,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 197.5,
+        "y": 30.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 235,
+        "y": 10,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 272.5,
+        "y": 30.0,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 10,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 347.5,
+        "y": 30.0,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 385,
+        "y": 10,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 422.5,
+        "y": 30.0,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 47.5,
+        "y": 60.0,
+        "text": "Families f",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 85,
+        "y": 40,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 122.5,
+        "y": 60.0,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 40,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 197.5,
+        "y": 60.0,
+        "text": "7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 235,
+        "y": 40,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 272.5,
+        "y": 60.0,
+        "text": "6",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 40,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 347.5,
+        "y": 60.0,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 385,
+        "y": 40,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 422.5,
+        "y": 60.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 47.5,
+        "y": 90.0,
+        "text": "f × x",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 85,
+        "y": 70,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 122.5,
+        "y": 90.0,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 70,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 197.5,
+        "y": 90.0,
+        "text": "7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 235,
+        "y": 70,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 272.5,
+        "y": 90.0,
+        "text": "12",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 70,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 347.5,
+        "y": 90.0,
+        "text": "9",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 385,
+        "y": 70,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 422.5,
+        "y": 90.0,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: pie chart",
+     "statement": "240 pupils travel to school: 100 walk, 60 take a taxi, 40 cycle and 40 come by car. Find the angle for each sector.",
+     "steps": [
+      "Each pupil is 360 ÷ 240 = 1.5°.",
+      "Walk: 100 × 1.5 = 150°; taxi: 60 × 1.5 = 90°.",
+      "Bicycle: 40 × 1.5 = 60°; car: 60°. Total 150 + 90 + 60 + 60 = 360°."
+     ],
+     "answer": "**150°, 90°, 60°, 60°**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "path",
+        "d": "M 200 130 L 200.0 50.0 A 80 80 0 0 1 240.0 199.3 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 310.1,
+        "y": 107.6,
+        "text": "Walk 150°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 200 130 L 240.0 199.3 A 80 80 0 0 1 130.7 170.0 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 170.5,
+        "y": 237.4,
+        "text": "Taxi 90°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 200 130 L 130.7 170.0 A 80 80 0 0 1 130.7 90.0 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 86.0,
+        "y": 135.0,
+        "text": "Bicycle 60°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 200 130 L 130.7 90.0 A 80 80 0 0 1 200.0 50.0 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 143.0,
+        "y": 43.2,
+        "text": "Car 60°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form2-maths-data"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form2-maths-data-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-statistics-tables-pie",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the mean of the data: value 1 (frequency 2), value 2 (frequency 3), value 3 (frequency 5).",
+   "answer": 2.3,
+   "tolerance": 0,
+   "explanation": "(2 + 6 + 15) ÷ 10 = 2.3.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-data-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-statistics-tables-pie",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "In a pie chart for 120 people, how many degrees represent 30 people?",
+   "answer": 90,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "30 ÷ 120 × 360.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-data-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-statistics-tables-pie",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The mode of a frequency table is:",
+   "choices": [
+    "the value with the largest frequency",
+    "the middle value",
+    "the largest value",
+    "the total frequency"
+   ],
+   "answer": 0,
+   "explanation": "Definition.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-data-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-statistics-tables-pie",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The shoe sizes of 10 pupils: size 38 (3), size 39 (4), size 40 (3). Find the mean size.",
+   "answer": 39,
+   "tolerance": 0,
+   "explanation": "(114 + 156 + 120) ÷ 10 = 39.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-data-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-statistics-tables-pie",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Class A has a mean mark of 12 and a range of 4; class B has a mean mark of 12 and a range of 12. Compare the classes.",
+   "model": "The average mark is the same, but class A's marks are close together, while class B's are widely spread, so class A is more consistent.",
+   "rubric": "1 mark for equal means, 1 mark for the range comparison, 1 mark for the conclusion about spread.",
+   "explanation": "The average mark is the same, but class A's marks are close together, while class B's are widely spread, so class A is more consistent.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-data-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-maths-statistics-tables-pie",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The pie chart shows how 240 pupils travel to school: walk 150°, taxi 90°, bicycle 60° and car 60°.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many pupils walk?",
+     "answer": 100,
+     "tolerance": 0,
+     "explanation": "150 ÷ 360 × 240 = 100.",
+     "id": "form2-maths-data-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What percentage take a taxi (%)?",
+     "answer": 25,
+     "tolerance": 0,
+     "explanation": "90 ÷ 360 × 100.",
+     "unit": "%",
+     "id": "form2-maths-data-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which statement is true?",
+     "choices": [
+      "More pupils cycle than take a taxi",
+      "Taxi has the largest sector",
+      "Fewer walk than cycle",
+      "As many pupils cycle as come by car"
+     ],
+     "answer": 3,
+     "explanation": "Both sectors are 60°.",
+     "id": "form2-maths-data-e06-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 260,
+    "items": [
+     {
+      "t": "path",
+      "d": "M 200 130 L 200.0 50.0 A 80 80 0 0 1 240.0 199.3 Z",
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 310.1,
+      "y": 107.6,
+      "text": "Walk 150°",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "path",
+      "d": "M 200 130 L 240.0 199.3 A 80 80 0 0 1 130.7 170.0 Z",
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 170.5,
+      "y": 237.4,
+      "text": "Taxi 90°",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "path",
+      "d": "M 200 130 L 130.7 170.0 A 80 80 0 0 1 130.7 90.0 Z",
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgreen"
+     },
+     {
+      "t": "text",
+      "x": 86.0,
+      "y": 135.0,
+      "text": "Bicycle 60°",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "path",
+      "d": "M 200 130 L 130.7 90.0 A 80 80 0 0 1 200.0 50.0 Z",
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 143.0,
+      "y": 43.2,
+      "text": "Car 60°",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-statistics-tables-pie-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-statistics-tables-pie",
+   "prompt": "To find the mean from a frequency table we divide Σfx by:",
+   "choices": [
+    "Σf",
+    "the number of rows",
+    "the largest value",
+    "the mode"
+   ],
+   "answer": 0,
+   "explanation": "Σf is the number of values.",
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-statistics-tables-pie-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-statistics-tables-pie",
+   "prompt": "A pie chart sector for 1/4 of the total has angle:",
+   "choices": [
+    "90°",
+    "180°",
+    "25°",
+    "45°"
+   ],
+   "answer": 0,
+   "explanation": "360 ÷ 4.",
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-statistics-tables-pie-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-statistics-tables-pie",
+   "prompt": "The angles of a pie chart add up to:",
+   "choices": [
+    "360°",
+    "90°",
+    "100°",
+    "180°"
+   ],
+   "answer": 0,
+   "explanation": "Full circle.",
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-statistics-tables-pie-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-statistics-tables-pie",
+   "prompt": "In a frequency table, the mean of values x with frequencies f is:",
+   "choices": [
+    "Σfx ÷ Σf",
+    "Σfx",
+    "Σx ÷ Σf",
+    "Σf ÷ Σx"
+   ],
+   "answer": 0,
+   "explanation": "Standard formula.",
+   "chapter": "form2-maths-data"
+  },
+  {
+   "id": "form2-maths-statistics-tables-pie-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-statistics-tables-pie",
+   "prompt": "The range measures:",
+   "choices": [
+    "the most common value",
+    "the middle value",
+    "the total",
+    "spread of data"
+   ],
+   "answer": 3,
+   "explanation": "Largest − smallest.",
+   "chapter": "form2-maths-data"
+  }
+ ]
+}

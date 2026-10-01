@@ -1,0 +1,2167 @@
+{
+ "chapter": "form2-maths-algebra",
+ "lessons": [
+  {
+   "id": "form2-maths-algebraic-expressions",
+   "title": "Brackets, factors and formulae",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 2 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Expand a product of two brackets",
+    "Factorise by taking out a common factor",
+    "Substitute into formulae",
+    "Change the subject of a simple formula"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-maths-algebra-e01",
+    "form2-maths-algebra-e02",
+    "form2-maths-algebra-e03",
+    "form2-maths-algebra-e04",
+    "form2-maths-algebra-e05",
+    "form2-maths-algebra-e06"
+   ],
+   "selfCheck": [
+    "form2-maths-algebraic-expressions-q1",
+    "form2-maths-algebraic-expressions-q2",
+    "form2-maths-algebraic-expressions-q3",
+    "form2-maths-algebraic-expressions-q4",
+    "form2-maths-algebraic-expressions-q5"
+   ],
+   "reviewNotes": [
+    "Trinomial factorisation (x² + bx + c) and difference of two squares are left for Form 3.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Expanding two brackets",
+     "md": "Multiply **each term of the first bracket by each term of the second**, then collect like terms: $(x + 2)(x + 3) = x^2 + 3x + 2x + 6 = x^2 + 5x + 6$. For a minus sign: $(2x - 1)(x + 4) = 2x^2 + 8x - x - 4 = 2x^2 + 7x - 4$. An area picture shows all four products."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Factorising: common factor",
+     "md": "**Factorising** is the opposite of expanding. Find the largest number and the lowest power of a letter that divide every term and write it outside a bracket: $6x^2 + 9x = 3x(2x + 3)$. Check by expanding the answer."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Changing the subject",
+     "md": "To make a letter the subject, undo the operations around it, doing the same to both sides. From $P = 2(l + w)$: divide by 2 to get $\\frac{P}{2} = l + w$, then subtract w: $l = \\frac{P}{2} - w$. From $v = u + at$: $t = \\frac{v - u}{a}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing $(x + 3)^2 = x^2 + 9$: it is $(x + 3)(x + 3) = x^2 + 6x + 9$.\n- Taking out a factor but leaving a term without a factor in the bracket: $6x^2 + 9x = 3x(2x + 3)$, not $3x(2x + 9)$.\n- Moving a term across the equals sign without changing its sign."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: expand",
+     "statement": "A garden has length (x + 5) m and width (x + 2) m. Expand its area and find it when x = 3.",
+     "steps": [
+      "Area = (x + 5)(x + 2) = x² + 2x + 5x + 10 = x² + 7x + 10.",
+      "When x = 3: 9 + 21 + 10 = 40.",
+      "Check: (3 + 5)(3 + 2) = 8 × 5 = 40 m²."
+     ],
+     "answer": "**x² + 7x + 10; 40 m²**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 40,
+        "w": 120,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 40,
+        "w": 90,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 120,
+        "w": 120,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 120,
+        "w": 90,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 85,
+        "text": "x²",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 85,
+        "text": "3x",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 155,
+        "text": "2x",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 155,
+        "text": "6",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 32,
+        "text": "x",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 32,
+        "text": "3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 48,
+        "y": 85,
+        "text": "x",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 48,
+        "y": 155,
+        "text": "2",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: factorise and change the subject",
+     "statement": "Factorise 6x² + 9x. Make l the subject of P = 2(l + w).",
+     "steps": [
+      "The common factor of 6x² and 9x is 3x. 6x² ÷ 3x = 2x and 9x ÷ 3x = 3, so 3x(2x + 3).",
+      "Divide P = 2(l + w) by 2: P/2 = l + w.",
+      "Subtract w: l = P/2 − w."
+     ],
+     "answer": "**3x(2x + 3); l = P/2 − w**"
+    }
+   ],
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-equations-inequalities",
+   "title": "Equations with fractions and linear inequalities",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 2 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Solve equations containing fractions",
+    "Use the inequality symbols < > ≤ ≥",
+    "Solve linear inequalities, including multiplying by a negative number",
+    "Show the solution on a number line"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-maths-algebra-e07",
+    "form2-maths-algebra-e08",
+    "form2-maths-algebra-e09",
+    "form2-maths-algebra-e10",
+    "form2-maths-algebra-e11",
+    "form2-maths-algebra-e12"
+   ],
+   "selfCheck": [
+    "form2-maths-equations-inequalities-q1",
+    "form2-maths-equations-inequalities-q2",
+    "form2-maths-equations-inequalities-q3",
+    "form2-maths-equations-inequalities-q4",
+    "form2-maths-equations-inequalities-q5"
+   ],
+   "reviewNotes": [
+    "Compound and simultaneous inequalities are left for Form 3.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Equations with fractions",
+     "md": "Multiply **every term** by the denominator to clear the fraction. $\\frac{x}{3} + 2 = 7$: subtract 2 to get $\\frac{x}{3} = 5$, then multiply by 3: x = 15. $\\frac{2x - 1}{3} = 5$: multiply by 3: 2x − 1 = 15, so x = 8. Always check by substituting."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Inequalities",
+     "md": "The symbols are: < (less than), > (greater than), ≤ (less than or equal to), ≥ (greater than or equal to). An inequality has **many solutions**: x > 4 is true for 5, 6, 4.5, 100 and so on. On a number line an **open circle** shows that the end point is not included; a **closed circle** shows that it is included."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 130,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 50,
+        "x2": 400,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 30.0,
+        "y1": 45,
+        "x2": 30.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 74,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 75.0,
+        "y1": 45,
+        "x2": 75.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 74,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 120.0,
+        "y1": 45,
+        "x2": 120.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 74,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 165.0,
+        "y1": 45,
+        "x2": 165.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 74,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210.0,
+        "y1": 45,
+        "x2": 210.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 74,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 255.0,
+        "y1": 45,
+        "x2": 255.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 255.0,
+        "y": 74,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 300.0,
+        "y1": 45,
+        "x2": 300.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 300.0,
+        "y": 74,
+        "text": "6",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 345.0,
+        "y1": 45,
+        "x2": 345.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 345.0,
+        "y": 74,
+        "text": "7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 390.0,
+        "y1": 45,
+        "x2": 390.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 390.0,
+        "y": 74,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210.0,
+        "y1": 50,
+        "x2": 390.0,
+        "y2": 50,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "circle",
+        "cx": 210.0,
+        "cy": 50,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "white"
+       }
+      ]
+     },
+     "caption": "Number line showing x > 4: open circle at 4, arrow to the right.",
+     "alt": "A number line from 0 to 8 with an open circle at 4 and a shaded line to the right."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Solving inequalities",
+     "md": "Solve like an equation (same operation on both sides), with one big difference: **when you multiply or divide by a negative number, reverse the inequality sign.** −2x ≤ 6 gives x ≥ −3."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting to reverse the sign when dividing by a negative number.\n- Using a closed circle for > or <.\n- Multiplying only one term by the denominator in an equation with fractions."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: fractions",
+     "statement": "Solve (a) x/3 + 2 = 7 and (b) (2x − 1)/3 = 5.",
+     "steps": [
+      "(a) x/3 = 5, so x = 15. Check 15/3 + 2 = 7.",
+      "(b) Multiply by 3: 2x − 1 = 15, so 2x = 16 and x = 8. Check (16 − 1)/3 = 5."
+     ],
+     "answer": "**(a) x = 15; (b) x = 8**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: inequalities",
+     "statement": "Solve 3x − 2 > 10 and show it on a number line. Then solve −2x ≤ 6.",
+     "steps": [
+      "3x > 12, so x > 4. Open circle at 4 and an arrow to the right.",
+      "Divide −2x ≤ 6 by −2 and reverse the sign: x ≥ −3."
+     ],
+     "answer": "**x > 4; x ≥ −3**",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 130,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 50,
+        "x2": 400,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 30.0,
+        "y1": 45,
+        "x2": 30.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 74,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 75.0,
+        "y1": 45,
+        "x2": 75.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 74,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 120.0,
+        "y1": 45,
+        "x2": 120.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 74,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 165.0,
+        "y1": 45,
+        "x2": 165.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 74,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210.0,
+        "y1": 45,
+        "x2": 210.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 74,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 255.0,
+        "y1": 45,
+        "x2": 255.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 255.0,
+        "y": 74,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 300.0,
+        "y1": 45,
+        "x2": 300.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 300.0,
+        "y": 74,
+        "text": "6",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 345.0,
+        "y1": 45,
+        "x2": 345.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 345.0,
+        "y": 74,
+        "text": "7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 390.0,
+        "y1": 45,
+        "x2": 390.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 390.0,
+        "y": 74,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210.0,
+        "y1": 50,
+        "x2": 390.0,
+        "y2": 50,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "circle",
+        "cx": 210.0,
+        "cy": 50,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "white"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-linear-graphs",
+   "title": "Coordinates and straight-line graphs",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 2 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Plot points in the four quadrants",
+    "Make a table of values and draw a straight line",
+    "Find the gradient and y-intercept of y = mx + c",
+    "Use a straight-line graph to solve a problem"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-maths-algebra-e13",
+    "form2-maths-algebra-e14",
+    "form2-maths-algebra-e15",
+    "form2-maths-algebra-e16",
+    "form2-maths-algebra-e17",
+    "form2-maths-algebra-e18"
+   ],
+   "selfCheck": [
+    "form2-maths-linear-graphs-q1",
+    "form2-maths-linear-graphs-q2",
+    "form2-maths-linear-graphs-q3",
+    "form2-maths-linear-graphs-q4",
+    "form2-maths-linear-graphs-q5"
+   ],
+   "reviewNotes": [
+    "The fare formulas are invented for practice, not real taxi tariffs.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Coordinates",
+     "md": "A point is given by an ordered pair (x, y): x tells how far along the horizontal axis, y how far up the vertical axis. The axes meet at the **origin** O(0, 0) and divide the plane into four **quadrants**. The point (−2, 3) is 2 left and 3 up."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Drawing a line",
+     "md": "To draw y = 2x + 1 make a **table of values**: choose x = −2, −1, 0, 1, 2, 3 and calculate y = −3, −1, 1, 3, 5, 7. Plot the points; they lie on a straight line. Join them with a ruler and label the line. Two points are enough, a third checks."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Gradient and intercept",
+     "md": "For y = mx + c the number m is the **gradient** (steepness): rise ÷ run. The number c is the **y-intercept**, where the line crosses the y-axis. y = 2x + 1 has gradient 2 and y-intercept 1; the line y = −x + 4 slopes down."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Plotting (x, y) as (y, x).\n- Mixing negative numbers in the table: with y = 2x + 1 and x = −2, y = −3, not 5.\n- Reading the gradient from the wrong scale when the axes have different scales."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: table and line",
+     "statement": "Draw y = 2x + 1 for x from −2 to 3 and state the gradient.",
+     "steps": [
+      "Table: (−2, −3), (−1, −1), (0, 1), (1, 3), (2, 5), (3, 7).",
+      "Plot and join them: a straight line through (0, 1).",
+      "From (0, 1) to (2, 5): rise 4, run 2, gradient 4 ÷ 2 = 2."
+     ],
+     "answer": "**Gradient 2, y-intercept 1.**",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3,
+      "xmax": 4,
+      "ymin": -4,
+      "ymax": 9,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "2*x+1",
+        "color": "blue",
+        "label": "y = 2x + 1"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 1,
+        "label": "(0, 1)",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 5,
+        "label": "(2, 5)",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a taxi fare",
+     "statement": "A taxi in Bamenda charges F = 300 + 150d FCFA for a trip of d km. Find the fare for 4 km, and the distance for a fare of 1 500 FCFA.",
+     "steps": [
+      "For 4 km: F = 300 + 150 × 4 = 900 FCFA.",
+      "For 1 500 FCFA: 300 + 150d = 1 500, so 150d = 1 200.",
+      "d = 8 km. The gradient 150 is the cost per km and 300 is the starting charge."
+     ],
+     "answer": "**900 FCFA; 8 km.**"
+    }
+   ],
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-sets-three",
+   "title": "Sets: complement, three sets and problems",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 2 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the complement A′ and the universal set",
+    "Draw and read a Venn diagram with three sets",
+    "Use n(A ∪ B ∪ C) for three sets",
+    "Solve survey problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-maths-algebra-e19",
+    "form2-maths-algebra-e20",
+    "form2-maths-algebra-e21",
+    "form2-maths-algebra-e22",
+    "form2-maths-algebra-e23",
+    "form2-maths-algebra-e24"
+   ],
+   "selfCheck": [
+    "form2-maths-sets-three-q1",
+    "form2-maths-sets-three-q2",
+    "form2-maths-sets-three-q3",
+    "form2-maths-sets-three-q4",
+    "form2-maths-sets-three-q5"
+   ],
+   "reviewNotes": [
+    "The subsets count (2ⁿ) in the last self-check is extension content; check against the official scheme.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Set notation",
+     "md": "The **complement** A′ is the set of elements in ξ that are not in A. The set {x : x is an even number, x < 10} reads 'the set of x such that x is even and less than 10' and equals {2, 4, 6, 8}. The notation A ∩ B ∩ C means the elements in all three sets."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Venn diagrams with three sets",
+     "md": "Draw three overlapping circles in a rectangle. There are **eight regions**. Work from the middle outwards: first A ∩ B ∩ C, then the regions with two sets only (subtract the centre), then the regions with one set only, and finally the outside. The total of all regions is n(ξ)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 380,
+        "h": 240,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 32,
+        "text": "ξ",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 110,
+        "r": 60,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 240,
+        "cy": 110,
+        "r": 60,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 175,
+        "r": 60,
+        "stroke": "green",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 50,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 50,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 232,
+        "text": "C",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 98,
+        "text": "10",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 98,
+        "text": "8",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 218,
+        "text": "6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 85,
+        "text": "5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 165,
+        "text": "4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 165,
+        "text": "3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 135,
+        "text": "2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 232,
+        "text": "22",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Venn diagram of three sports: 10, 8, 6 only; 5, 4, 3 two sports; 2 all three; 22 none.",
+     "alt": "Three overlapping circles with numbers in all regions and 22 outside."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Counting formula",
+     "md": "For three sets, the number in at least one set is:",
+     "tex": "n(A \\cup B \\cup C) = n(A) + n(B) + n(C) - n(A \\cap B) - n(A \\cap C) - n(B \\cap C) + n(A \\cap B \\cap C)"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing n(A ∩ B) in the 'A and B only' region: that region excludes the centre.\n- Forgetting the elements outside all three circles.\n- Confusing A′ (complement) with the empty set."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: fill a diagram",
+     "statement": "In a school of 60 students: n(A) = 21 play football, n(B) = 18 volleyball, n(C) = 15 athletics; n(A ∩ B) = 7, n(A ∩ C) = 6, n(B ∩ C) = 5 and n(A ∩ B ∩ C) = 2. Find how many play only football.",
+     "steps": [
+      "Centre = 2. A and B only = 7 − 2 = 5; A and C only = 6 − 2 = 4; B and C only = 5 − 2 = 3.",
+      "Only A = 21 − 5 − 4 − 2 = 10."
+     ],
+     "answer": "**10 students play only football.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 380,
+        "h": 240,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 32,
+        "text": "ξ",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 110,
+        "r": 60,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 240,
+        "cy": 110,
+        "r": 60,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 175,
+        "r": 60,
+        "stroke": "green",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 50,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 50,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 232,
+        "text": "C",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 98,
+        "text": "10",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 98,
+        "text": "8",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 218,
+        "text": "6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 85,
+        "text": "5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 165,
+        "text": "4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 165,
+        "text": "3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 135,
+        "text": "2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 232,
+        "text": "22",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: none of them",
+     "statement": "Using Example 1, find how many students play none of the three sports.",
+     "steps": [
+      "Only B = 18 − 5 − 3 − 2 = 8 and only C = 15 − 4 − 3 − 2 = 6.",
+      "At least one sport: 10 + 8 + 6 + 5 + 4 + 3 + 2 = 38 (formula: 21 + 18 + 15 − 7 − 6 − 5 + 2 = 38).",
+      "None = 60 − 38 = 22."
+     ],
+     "answer": "**22 students play none of the three.**"
+    }
+   ],
+   "chapter": "form2-maths-algebra"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form2-maths-algebra-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-algebraic-expressions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Expand (x + 4)(x + 1).",
+   "choices": [
+    "$x^2 + 3x + 4$",
+    "$x^2 + 5x + 5$",
+    "$x^2 + 4$",
+    "$x^2 + 5x + 4$"
+   ],
+   "answer": 3,
+   "explanation": "x² + x + 4x + 4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-algebraic-expressions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Factorise 4a + 12.",
+   "choices": [
+    "4(a + 12)",
+    "4(a + 3)",
+    "a(4 + 12)",
+    "4a(3)"
+   ],
+   "answer": 1,
+   "explanation": "4 is the common factor.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-algebraic-expressions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the value of P = 2(l + w) when l = 9 and w = 4.",
+   "answer": 26,
+   "tolerance": 0,
+   "explanation": "2 × 13.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-algebraic-expressions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Expand (3x − 2)(x + 5) and give the coefficient of x.",
+   "answer": 13,
+   "tolerance": 0,
+   "explanation": "3x² + 15x − 2x − 10 = 3x² + 13x − 10.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-algebraic-expressions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Make t the subject of v = u + at and explain each step.",
+   "model": "Subtract u from both sides: v − u = at. Divide both sides by a: t = (v − u) ÷ a.",
+   "rubric": "1 mark for subtracting u, 1 mark for dividing by a, 1 mark for the result.",
+   "explanation": "Subtract u from both sides: v − u = at. Divide both sides by a: t = (v − u) ÷ a.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-maths-algebraic-expressions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A shop in Limbe charges a delivery fee of 2 000 FCFA plus 500 FCFA per kilogram: C = 500k + 2 000.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the cost for 6 kg (FCFA).",
+     "answer": 5000,
+     "tolerance": 0,
+     "explanation": "500 × 6 + 2 000 = 5 000.",
+     "unit": "FCFA",
+     "id": "form2-maths-algebra-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find k when C = 9 000.",
+     "answer": 14,
+     "tolerance": 0,
+     "explanation": "500k = 7 000, so k = 14.",
+     "unit": "kg",
+     "id": "form2-maths-algebra-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which is k in terms of C?",
+     "choices": [
+      "$k = \\frac{C}{500} + 2000$",
+      "$k = 500C - 2000$",
+      "$k = \\frac{C + 2000}{500}$",
+      "$k = \\frac{C - 2000}{500}$"
+     ],
+     "answer": 3,
+     "explanation": "Subtract 2 000 then divide by 500.",
+     "id": "form2-maths-algebra-e06-c"
+    }
+   ],
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebraic-expressions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-algebraic-expressions",
+   "prompt": "Expand (x + 1)(x + 2):",
+   "choices": [
+    "$x^2 + 3x + 3$",
+    "$x^2 + 3x + 2$",
+    "$x^2 + 2$",
+    "$2x + 3$"
+   ],
+   "answer": 1,
+   "explanation": "Four products.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebraic-expressions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-algebraic-expressions",
+   "prompt": "A common factor of 5x and 15 is:",
+   "choices": [
+    "5",
+    "15",
+    "3",
+    "x"
+   ],
+   "answer": 0,
+   "explanation": "Largest number dividing both.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebraic-expressions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-algebraic-expressions",
+   "prompt": "In y = mx + c, making x the subject gives:",
+   "choices": [
+    "$x = m(y - c)$",
+    "$x = \\frac{y - c}{m}$",
+    "$x = y - c - m$",
+    "$x = \\frac{y + c}{m}$"
+   ],
+   "answer": 1,
+   "explanation": "Subtract c then divide by m.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebraic-expressions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-algebraic-expressions",
+   "prompt": "Factorise x² + 3x:",
+   "choices": [
+    "x(x + 3x)",
+    "x(x + 3)",
+    "3(x + x)",
+    "x²(1 + 3)"
+   ],
+   "answer": 1,
+   "explanation": "Common factor x.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebraic-expressions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-algebraic-expressions",
+   "prompt": "To check a common-factor factorisation we:",
+   "choices": [
+    "expand it again",
+    "add the terms",
+    "divide by x",
+    "square it"
+   ],
+   "answer": 0,
+   "explanation": "It must give the original.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-equations-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve x/4 = 6.",
+   "answer": 24,
+   "tolerance": 0,
+   "explanation": "Multiply both sides by 4.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-equations-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 2x + 1 < 9:",
+   "choices": [
+    "x < 5",
+    "x > 4",
+    "x < 8",
+    "x < 4"
+   ],
+   "answer": 3,
+   "explanation": "2x < 8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-equations-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "What is the largest integer satisfying x < 7?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "7 is not included.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-equations-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "List the integers satisfying 2 < x ≤ 6; how many are there?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "3, 4, 5, 6: four integers.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-equations-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve −3x > 12 and give the boundary value.",
+   "answer": -4,
+   "tolerance": 0,
+   "explanation": "Divide by −3 and reverse: x < −4; the boundary is −4.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-maths-equations-inequalities",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A taxi driver at Yaoundé wants to earn at least 15 000 FCFA in a day. He earns 1 500 FCFA per trip and pays 3 000 FCFA for fuel. Let n be the number of trips.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which inequality models the target?",
+     "choices": [
+      "1 500n − 3 000 ≥ 15 000",
+      "1 500n + 3 000 ≥ 15 000",
+      "1 500 − 3 000n ≥ 15 000",
+      "1 500n − 3 000 ≤ 15 000"
+     ],
+     "answer": 0,
+     "explanation": "Earnings minus fuel is at least 15 000.",
+     "id": "form2-maths-algebra-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Solve for the smallest value of n.",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "1 500n ≥ 18 000, so n ≥ 12.",
+     "id": "form2-maths-algebra-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "If he does 14 trips, how much does he earn after fuel (FCFA)?",
+     "answer": 18000,
+     "tolerance": 0,
+     "explanation": "14 × 1 500 − 3 000 = 18 000.",
+     "unit": "FCFA",
+     "id": "form2-maths-algebra-e12-c"
+    }
+   ],
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-equations-inequalities-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-equations-inequalities",
+   "prompt": "The symbol ≥ means:",
+   "choices": [
+    "not equal to",
+    "less than or equal to",
+    "greater than",
+    "greater than or equal to"
+   ],
+   "answer": 3,
+   "explanation": "Symbol meaning.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-equations-inequalities-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-equations-inequalities",
+   "prompt": "Solve x + 3 > 8:",
+   "choices": [
+    "x < 5",
+    "x > 11",
+    "x > 5",
+    "x < 11"
+   ],
+   "answer": 2,
+   "explanation": "Subtract 3.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-equations-inequalities-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-equations-inequalities",
+   "prompt": "When you divide an inequality by a negative number you:",
+   "choices": [
+    "add one to both sides",
+    "reverse the sign",
+    "keep the sign",
+    "remove the sign"
+   ],
+   "answer": 1,
+   "explanation": "Rule.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-equations-inequalities-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-equations-inequalities",
+   "prompt": "An open circle on a number line shows that the point is:",
+   "choices": [
+    "included",
+    "zero",
+    "not included",
+    "negative"
+   ],
+   "answer": 2,
+   "explanation": "Strict inequality.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-equations-inequalities-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-equations-inequalities",
+   "prompt": "Solve x/5 = 3:",
+   "choices": [
+    "x = 2",
+    "x = 15",
+    "x = 0.6",
+    "x = 8"
+   ],
+   "answer": 1,
+   "explanation": "Multiply by 5.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-linear-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find y when x = 4 in y = 3x − 2.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "3 × 4 − 2 = 10.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-linear-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The line y = 3x + 5 crosses the y-axis at:",
+   "choices": [
+    "(0, 3)",
+    "(5, 0)",
+    "(3, 0)",
+    "(0, 5)"
+   ],
+   "answer": 3,
+   "explanation": "x = 0 gives y = 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-linear-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the gradient of the line through (0, 1) and (3, 7).",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "(7 − 1) ÷ (3 − 0) = 2.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-linear-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the gradient of the line through (1, 5) and (4, −1).",
+   "answer": -2,
+   "tolerance": 0,
+   "explanation": "(−1 − 5) ÷ (4 − 1) = −2.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-linear-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Describe the graph of y = −x + 4: its gradient, intercept and one point on it.",
+   "model": "It slopes down with gradient −1, crosses the y-axis at 4, and passes through (4, 0).",
+   "rubric": "1 mark for the gradient, 1 mark for the intercept, 1 mark for a correct point.",
+   "explanation": "It slopes down with gradient −1, crosses the y-axis at 4, and passes through (4, 0).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-maths-linear-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The fare F = 300 + 150d FCFA is drawn on a graph with d on the horizontal axis.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the fare at d = 0 (FCFA)?",
+     "answer": 300,
+     "tolerance": 0,
+     "explanation": "The y-intercept is 300.",
+     "unit": "FCFA",
+     "id": "form2-maths-algebra-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the gradient of the fare line?",
+     "answer": 150,
+     "tolerance": 0,
+     "explanation": "It is the cost per km.",
+     "id": "form2-maths-algebra-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "A passenger pays 1 050 FCFA. How far did she travel (km)?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "300 + 150d = 1 050, so d = 5.",
+     "unit": "km",
+     "id": "form2-maths-algebra-e18-c"
+    }
+   ],
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-linear-graphs-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-linear-graphs",
+   "prompt": "The point (0, 0) is called:",
+   "choices": [
+    "the origin",
+    "the gradient",
+    "the axis",
+    "the quadrant"
+   ],
+   "answer": 0,
+   "explanation": "Where the axes meet.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-linear-graphs-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-linear-graphs",
+   "prompt": "The line y = 2x passes through:",
+   "choices": [
+    "(3, 5)",
+    "(3, 6)",
+    "(6, 3)",
+    "(2, 3)"
+   ],
+   "answer": 1,
+   "explanation": "y = 2 × 3.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-linear-graphs-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-linear-graphs",
+   "prompt": "In y = mx + c, c is:",
+   "choices": [
+    "the gradient",
+    "the y-intercept",
+    "the origin",
+    "the x-value"
+   ],
+   "answer": 1,
+   "explanation": "Value of y at x = 0.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-linear-graphs-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-linear-graphs",
+   "prompt": "A line that slopes downward from left to right has:",
+   "choices": [
+    "a positive gradient",
+    "no gradient",
+    "gradient zero",
+    "a negative gradient"
+   ],
+   "answer": 3,
+   "explanation": "Falling line.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-linear-graphs-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-linear-graphs",
+   "prompt": "The point (−3, 2) lies:",
+   "choices": [
+    "3 units left and 2 up",
+    "2 left and 3 up",
+    "3 left and 2 down",
+    "3 right and 2 up"
+   ],
+   "answer": 0,
+   "explanation": "(x, y) order.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-sets-three",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "ξ = {1, ..., 10} and A = {2, 4, 6, 8, 10}. Find n(A′).",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "A′ = {1, 3, 5, 7, 9}.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-sets-three",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The set {x : x is a whole number, 2 < x < 6} is:",
+   "choices": [
+    "{2, 3, 4, 5, 6}",
+    "{3, 4, 5}",
+    "{3, 4, 5, 6}",
+    "{2, 3, 4, 5}"
+   ],
+   "answer": 1,
+   "explanation": "Strict inequalities exclude 2 and 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e21",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-sets-three",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "How many regions does a Venn diagram of three overlapping sets have inside the circles?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "Seven regions inside the circles, plus the outside region.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-sets-three",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "n(A) = 12, n(B) = 9, n(C) = 7, n(A ∩ B) = 4, n(A ∩ C) = 3, n(B ∩ C) = 2, n(A ∩ B ∩ C) = 1. Find n(A ∪ B ∪ C).",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "12 + 9 + 7 − 4 − 3 − 2 + 1 = 20.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-sets-three",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "In your own words, explain why n(A ∩ B ∩ C) is added back in the three-set counting formula.",
+   "model": "The elements in all three sets are counted three times by n(A) + n(B) + n(C) and removed three times by the three pairs, so they would not be counted at all. Adding the centre back counts them once.",
+   "rubric": "1 mark for triple counting, 1 mark for the removal, 1 mark for adding back.",
+   "explanation": "The elements in all three sets are counted three times by n(A) + n(B) + n(C) and removed three times by the three pairs, so they would not be counted at all. Adding the centre back counts them once.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-algebra-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-maths-sets-three",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "In a survey of 60 students, the figure shows how many take Football (A), Volleyball (B) and Athletics (C).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many students take exactly two of the three sports?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "5 + 4 + 3 = 12.",
+     "id": "form2-maths-algebra-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many take at least one sport?",
+     "answer": 38,
+     "tolerance": 0,
+     "explanation": "Sum of all seven regions = 38.",
+     "id": "form2-maths-algebra-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many do not take football?",
+     "answer": 39,
+     "tolerance": 0,
+     "explanation": "n(A′) = 60 − 21 = 39.",
+     "id": "form2-maths-algebra-e24-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 260,
+    "items": [
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 10,
+      "w": 380,
+      "h": 240,
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 28,
+      "y": 32,
+      "text": "ξ",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "circle",
+      "cx": 160,
+      "cy": 110,
+      "r": 60,
+      "stroke": "blue",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 240,
+      "cy": 110,
+      "r": 60,
+      "stroke": "red",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 175,
+      "r": 60,
+      "stroke": "green",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 105,
+      "y": 50,
+      "text": "A",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 295,
+      "y": 50,
+      "text": "B",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 285,
+      "y": 232,
+      "text": "C",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 125,
+      "y": 98,
+      "text": "10",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 275,
+      "y": 98,
+      "text": "8",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 218,
+      "text": "6",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 85,
+      "text": "5",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 160,
+      "y": 165,
+      "text": "4",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 240,
+      "y": 165,
+      "text": "3",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 135,
+      "text": "2",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 365,
+      "y": 232,
+      "text": "22",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-sets-three-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-sets-three",
+   "prompt": "A′ means:",
+   "choices": [
+    "the elements of ξ not in A",
+    "the elements of A",
+    "the empty set",
+    "A squared"
+   ],
+   "answer": 0,
+   "explanation": "Complement.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-sets-three-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-sets-three",
+   "prompt": "A ∩ B ∩ C contains elements that are:",
+   "choices": [
+    "in none",
+    "in exactly one set",
+    "in all three sets",
+    "in any set"
+   ],
+   "answer": 2,
+   "explanation": "Triple intersection.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-sets-three-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-sets-three",
+   "prompt": "If n(ξ) = 30 and n(A) = 12, then n(A′) =",
+   "choices": [
+    "360",
+    "42",
+    "12",
+    "18"
+   ],
+   "answer": 3,
+   "explanation": "30 − 12.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-sets-three-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-sets-three",
+   "prompt": "The centre of a three-set Venn diagram is:",
+   "choices": [
+    "∅",
+    "A ∪ B ∪ C",
+    "A′",
+    "A ∩ B ∩ C"
+   ],
+   "answer": 3,
+   "explanation": "Common to all three.",
+   "chapter": "form2-maths-algebra"
+  },
+  {
+   "id": "form2-maths-sets-three-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-sets-three",
+   "prompt": "How many subsets does {1, 2, 3} have?",
+   "choices": [
+    "8",
+    "6",
+    "9",
+    "3"
+   ],
+   "answer": 0,
+   "explanation": "2³ = 8.",
+   "chapter": "form2-maths-algebra"
+  }
+ ]
+}

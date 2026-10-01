@@ -1,0 +1,1213 @@
+{
+ "chapter": "form4-maths-algebra",
+ "lessons": [
+  {
+   "id": "form4-maths-quadratic-equations",
+   "title": "Solving quadratic equations",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Solve quadratic equations by factorising",
+    "Solve by completing the square",
+    "Solve using the quadratic formula",
+    "Use the discriminant to decide the number of roots",
+    "Form and solve quadratic equations from problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-algebra-e01",
+    "form4-maths-algebra-e02",
+    "form4-maths-algebra-e03",
+    "form4-maths-algebra-e04",
+    "form4-maths-algebra-e05",
+    "form4-maths-algebra-e06"
+   ],
+   "selfCheck": [
+    "form4-maths-quadratic-equations-q1",
+    "form4-maths-quadratic-equations-q2",
+    "form4-maths-quadratic-equations-q3",
+    "form4-maths-quadratic-equations-q4",
+    "form4-maths-quadratic-equations-q5"
+   ],
+   "reviewNotes": [
+    "Simultaneous equations with a quadratic and quadratic inequalities are not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Factorising",
+     "md": "Write the equation as $ax^2 + bx + c = 0$ (zero on one side), factorise, and use the fact that **if a product is zero, one of the factors is zero**. $x^2 - 5x - 14 = 0$ gives $(x - 7)(x + 2) = 0$, so x = 7 or x = −2. Always give **both** roots and check them."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The quadratic formula",
+     "md": "When factorising is hard, use the formula for $ax^2 + bx + c = 0$:",
+     "tex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -2,
+      "xmax": 3.5,
+      "ymin": -6,
+      "ymax": 12,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "2*x^2-3*x-4",
+        "color": "blue",
+        "label": "y = 2x² − 3x − 4"
+       }
+      ],
+      "points": [
+       {
+        "x": 2.35,
+        "y": 0,
+        "label": "2.35",
+        "color": "red"
+       },
+       {
+        "x": -0.85,
+        "y": 0,
+        "label": "−0.85",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     },
+     "caption": "The graph of y = 2x² − 3x − 4 meets the x-axis at about 2.35 and −0.85.",
+     "alt": "A U-shaped curve crossing the x-axis at −0.85 and 2.35."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "The discriminant",
+     "md": "The number $b^2 - 4ac$ is the **discriminant**. If it is positive there are **two different** real roots; if it is **zero** there is one repeated root; if it is **negative** there are **no real roots** (the curve does not touch the x-axis). For $2x^2 - 3x - 4 = 0$: 9 + 32 = 41, so x = (3 ± √41) ÷ 4 = 2.35 or −0.85 (2 d.p.)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Completing the square",
+     "md": "To solve $x^2 + 6x + 2 = 0$: move the constant: $x^2 + 6x = -2$. Add (half of 6)² = 9 to both sides: $(x + 3)^2 = 7$. Take square roots: $x + 3 = \\pm\\sqrt{7}$, so $x = -3 \\pm 2.646$, that is x = −0.35 or −5.65 (2 d.p.)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Solving x² = 5x by dividing by x: this loses the root x = 0; write x(x − 5) = 0.\n- Forgetting that −b and the whole numerator are divided by 2a.\n- Using the formula with the equation not equal to zero."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: factorising and formula",
+     "statement": "Solve (a) x² − 5x − 14 = 0 and (b) 2x² − 3x − 4 = 0 (2 d.p.).",
+     "steps": [
+      "(a) (x − 7)(x + 2) = 0, so x = 7 or x = −2.",
+      "(b) a = 2, b = −3, c = −4: discriminant = 9 + 32 = 41.",
+      "(b) x = (3 ± 6.403) ÷ 4, so x = 2.35 or x = −0.85."
+     ],
+     "answer": "**(a) 7 or −2; (b) 2.35 or −0.85**",
+     "figure": {
+      "kind": "plot",
+      "xmin": -2,
+      "xmax": 3.5,
+      "ymin": -6,
+      "ymax": 12,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "2*x^2-3*x-4",
+        "color": "blue",
+        "label": "y = 2x² − 3x − 4"
+       }
+      ],
+      "points": [
+       {
+        "x": 2.35,
+        "y": 0,
+        "label": "2.35",
+        "color": "red"
+       },
+       {
+        "x": -0.85,
+        "y": 0,
+        "label": "−0.85",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a fenced plot",
+     "statement": "A rectangular plot at Bamenda has perimeter 36 m and area 80 m². Find its dimensions.",
+     "steps": [
+      "Half the perimeter: length + width = 18, so length = 18 − w.",
+      "Area: w(18 − w) = 80, so w² − 18w + 80 = 0.",
+      "Factorise: (w − 8)(w − 10) = 0, so w = 8 or w = 10. The plot is 8 m by 10 m."
+     ],
+     "answer": "**8 m by 10 m**"
+    }
+   ],
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-variation",
+   "title": "Direct, inverse, joint and partial variation",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write and solve direct variation y = kx and y = kx²",
+    "Write and solve inverse variation y = k/x",
+    "Deal with joint variation",
+    "Solve partial variation problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-algebra-e07",
+    "form4-maths-algebra-e08",
+    "form4-maths-algebra-e09",
+    "form4-maths-algebra-e10",
+    "form4-maths-algebra-e11",
+    "form4-maths-algebra-e12"
+   ],
+   "selfCheck": [
+    "form4-maths-variation-q1",
+    "form4-maths-variation-q2",
+    "form4-maths-variation-q3",
+    "form4-maths-variation-q4",
+    "form4-maths-variation-q5"
+   ],
+   "reviewNotes": [
+    "The gas tariff is invented for practice; it is not a real price list.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Direct variation",
+     "md": "y **varies directly as** x (y ∝ x) when y = kx: doubling x doubles y. k is the **constant of variation**. If y = 12 when x = 3 then k = 4, so y = 4x and when x = 7, y = 28. The graph is a straight line through the origin. Variants: y ∝ x² means y = kx²; y ∝ √x means y = k√x."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Inverse variation",
+     "md": "y **varies inversely as** x (y ∝ 1/x) when y = k/x, or xy = k. If x doubles, y halves. If y = 6 when x = 4 then k = 24, so y = 24/x and when x = 3, y = 8. The graph is a curve called a **hyperbola** that never touches the axes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 1,
+      "xmax": 6,
+      "ymin": 0,
+      "ymax": 28,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "4*x",
+        "color": "blue",
+        "label": "y = 4x"
+       },
+       {
+        "expr": "24/x",
+        "color": "red",
+        "label": "y = 24/x"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     },
+     "caption": "Graphs of y = 4x (direct) and y = 24/x (inverse) for x from 1 to 6.",
+     "alt": "A rising straight line and a falling curve crossing at about x = 2.45."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Joint and partial variation",
+     "md": "**Joint**: y varies as x and inversely as z gives y = kx/z. **Partial**: y is the sum of a fixed part and a varying part: y = a + bx. Use two data pairs to find a and b. Method for every problem: 1. write the equation with k; 2. find k from the given pair; 3. rewrite with k; 4. substitute to answer."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing y = x + k instead of y = kx for direct variation.\n- Confusing inverse variation with a negative gradient: xy stays constant.\n- Using only one pair of values to solve a partial variation: two pairs are needed."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: direct and inverse",
+     "statement": "(a) y ∝ x and y = 12 when x = 3. Find y when x = 7. (b) y ∝ 1/x and y = 6 when x = 4. Find y when x = 3.",
+     "steps": [
+      "(a) y = kx; 12 = 3k, so k = 4 and y = 4 × 7 = 28.",
+      "(b) y = k/x; 6 = k/4, so k = 24 and y = 24 ÷ 3 = 8."
+     ],
+     "answer": "**(a) 28; (b) 8**",
+     "figure": {
+      "kind": "plot",
+      "xmin": 1,
+      "xmax": 6,
+      "ymin": 0,
+      "ymax": 28,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "4*x",
+        "color": "blue",
+        "label": "y = 4x"
+       },
+       {
+        "expr": "24/x",
+        "color": "red",
+        "label": "y = 24/x"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: workers and partial variation",
+     "statement": "8 workers finish a job in 12 days. Days vary inversely with the workers: how long for 6 workers? A cooking gas supplier charges C = a + bn FCFA for n units; the bill is 7 000 for 10 units and 11 500 for 25 units. Find a and b.",
+     "steps": [
+      "Days × workers = 8 × 12 = 96, so 6 workers need 96 ÷ 6 = 16 days.",
+      "a + 10b = 7 000 and a + 25b = 11 500. Subtract: 15b = 4 500, so b = 300.",
+      "a = 7 000 − 3 000 = 4 000. So C = 4 000 + 300n; for 40 units: 16 000 FCFA."
+     ],
+     "answer": "**16 days; a = 4 000 FCFA, b = 300 FCFA per unit.**"
+    }
+   ],
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-sequences",
+   "title": "Arithmetic and geometric sequences",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the nth term of an arithmetic sequence",
+    "Find the sum of an arithmetic series",
+    "Find the nth term and sum of a geometric sequence",
+    "Solve practical problems on savings and depreciation"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-algebra-e13",
+    "form4-maths-algebra-e14",
+    "form4-maths-algebra-e15",
+    "form4-maths-algebra-e16",
+    "form4-maths-algebra-e17",
+    "form4-maths-algebra-e18"
+   ],
+   "selfCheck": [
+    "form4-maths-sequences-q1",
+    "form4-maths-sequences-q2",
+    "form4-maths-sequences-q3",
+    "form4-maths-sequences-q4",
+    "form4-maths-sequences-q5"
+   ],
+   "reviewNotes": [
+    "The sum to infinity of a GP and sigma notation are not included; check whether the Form 4 scheme requires them.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Arithmetic sequences",
+     "md": "In an **arithmetic** sequence (AP) the **common difference** d is added each time. With first term a:",
+     "tex": "T_n = a + (n - 1)d \\qquad S_n = \\frac{n}{2}\\left[2a + (n - 1)d\\right]"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "AP example",
+     "md": "5, 8, 11, 14, … has a = 5 and d = 3, so T_n = 5 + 3(n − 1) = 3n + 2. The 10th term is 32, and the sum of the first 10 terms is 10 ÷ 2 × (10 + 27) = 185. You can also use S = n ÷ 2 × (first term + last term) = 5 × (5 + 32) = 185."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 7,
+      "ymin": 0,
+      "ymax": 24,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 1,
+        "y": 5,
+        "label": "5",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 8,
+        "label": "8",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 11,
+        "label": "11",
+        "color": "red"
+       },
+       {
+        "x": 4,
+        "y": 14,
+        "label": "14",
+        "color": "red"
+       },
+       {
+        "x": 5,
+        "y": 17,
+        "label": "17",
+        "color": "red"
+       },
+       {
+        "x": 6,
+        "y": 20,
+        "label": "20",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 1,
+        "y1": 5,
+        "x2": 2,
+        "y2": 8,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 2,
+        "y1": 8,
+        "x2": 3,
+        "y2": 11,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 3,
+        "y1": 11,
+        "x2": 4,
+        "y2": 14,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 4,
+        "y1": 14,
+        "x2": 5,
+        "y2": 17,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 5,
+        "y1": 17,
+        "x2": 6,
+        "y2": 20,
+        "color": "grey",
+        "dash": true
+       }
+      ],
+      "xlabel": "n",
+      "ylabel": "term"
+     },
+     "caption": "The terms 5, 8, 11, 14, 17, 20 of the sequence 3n + 2 plotted against n.",
+     "alt": "Six points rising by 3 each time, joined by dashed lines."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Geometric sequences",
+     "md": "In a **geometric** sequence (GP) each term is multiplied by the **common ratio** r:",
+     "tex": "T_n = a r^{\\,n-1} \\qquad S_n = \\frac{a (r^n - 1)}{r - 1}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "GP example",
+     "md": "3, 6, 12, 24, … has a = 3 and r = 2. The 8th term is 3 × 2⁷ = 384. The sum of the first 6 terms is 3 × (2⁶ − 1) ÷ (2 − 1) = 189. A ratio **less than 1** means the terms decrease, e.g. depreciation of a machine by 20% a year has r = 0.8."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using n instead of (n − 1) in the formula for the nth term.\n- Confusing a sequence (a list) with a series (a sum).\n- Treating a sequence as arithmetic when the ratio, not the difference, is constant."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: arithmetic",
+     "statement": "A trader saves 5 000 FCFA in the first month and 1 500 FCFA more each month than the month before. How much does she save in month 12 and in total over 12 months?",
+     "steps": [
+      "a = 5 000 and d = 1 500. T₁₂ = 5 000 + 11 × 1 500 = 21 500.",
+      "S₁₂ = 12 ÷ 2 × (5 000 + 21 500) = 6 × 26 500.",
+      "Total = 159 000 FCFA."
+     ],
+     "answer": "**Month 12: 21 500 FCFA; total 159 000 FCFA.**",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 7,
+      "ymin": 0,
+      "ymax": 24,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 1,
+        "y": 5,
+        "label": "5",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 8,
+        "label": "8",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 11,
+        "label": "11",
+        "color": "red"
+       },
+       {
+        "x": 4,
+        "y": 14,
+        "label": "14",
+        "color": "red"
+       },
+       {
+        "x": 5,
+        "y": 17,
+        "label": "17",
+        "color": "red"
+       },
+       {
+        "x": 6,
+        "y": 20,
+        "label": "20",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 1,
+        "y1": 5,
+        "x2": 2,
+        "y2": 8,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 2,
+        "y1": 8,
+        "x2": 3,
+        "y2": 11,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 3,
+        "y1": 11,
+        "x2": 4,
+        "y2": 14,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 4,
+        "y1": 14,
+        "x2": 5,
+        "y2": 17,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 5,
+        "y1": 17,
+        "x2": 6,
+        "y2": 20,
+        "color": "grey",
+        "dash": true
+       }
+      ],
+      "xlabel": "n",
+      "ylabel": "term"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: geometric",
+     "statement": "Find the 8th term and the sum of the first 6 terms of 3, 6, 12, …. A machine worth 600 000 FCFA loses 20% of its value each year: find its value after 3 years.",
+     "steps": [
+      "T₈ = 3 × 2⁷ = 384 and S₆ = 3(64 − 1) ÷ 1 = 189.",
+      "Each year the value is multiplied by 0.8: 600 000 × 0.8³ = 600 000 × 0.512.",
+      "Value = 307 200 FCFA."
+     ],
+     "answer": "**384; 189; 307 200 FCFA.**"
+    }
+   ],
+   "chapter": "form4-maths-algebra"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-maths-algebra-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-quadratic-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve x² − 9 = 0 and give the positive root.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "x² = 9, so x = 3 or −3.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-quadratic-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The roots of (x − 2)(x + 5) = 0 are:",
+   "choices": [
+    "−2 and −5",
+    "2 and −5",
+    "2 and 5",
+    "−2 and 5"
+   ],
+   "answer": 1,
+   "explanation": "Each factor equals zero.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-quadratic-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the discriminant of x² + 4x + 1.",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "16 − 4 = 12.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-quadratic-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve x² + 2x − 15 = 0 and give the larger root.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "(x + 5)(x − 3) = 0, so x = −5 or 3.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-quadratic-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain what a negative discriminant tells you about the graph of y = ax² + bx + c.",
+   "model": "A negative discriminant means no real roots, so the parabola does not cross or touch the x-axis; it lies entirely above or below it.",
+   "rubric": "1 mark for no real roots, 1 mark for the graph not touching the x-axis, 1 mark for 'above or below'.",
+   "explanation": "A negative discriminant means no real roots, so the parabola does not cross or touch the x-axis; it lies entirely above or below it.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-quadratic-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A rectangular garden at Kumba is 3 m longer than it is wide, and its area is 70 m².",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which equation does the width w satisfy?",
+     "choices": [
+      "w² + 3w + 70 = 0",
+      "2w + 3 = 70",
+      "w² − 3w − 70 = 0",
+      "w² + 3w − 70 = 0"
+     ],
+     "answer": 3,
+     "explanation": "w(w + 3) = 70.",
+     "id": "form4-maths-algebra-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the width (m).",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "(w + 10)(w − 7) = 0, so w = 7 (a length cannot be negative).",
+     "unit": "m",
+     "id": "form4-maths-algebra-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the length (m).",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "7 + 3 = 10.",
+     "unit": "m",
+     "id": "form4-maths-algebra-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Fencing costs 1 200 FCFA per metre. Find the cost to fence the garden (FCFA).",
+     "answer": 40800,
+     "tolerance": 0,
+     "explanation": "Perimeter 2(7 + 10) = 34 m; 34 × 1 200 = 40 800.",
+     "unit": "FCFA",
+     "id": "form4-maths-algebra-e06-d"
+    }
+   ],
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-quadratic-equations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-quadratic-equations",
+   "prompt": "A quadratic equation has the form:",
+   "choices": [
+    "ax² + bx + c = 0",
+    "a/x = 0",
+    "x³ = 0",
+    "ax + b = 0"
+   ],
+   "answer": 0,
+   "explanation": "Degree 2.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-quadratic-equations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-quadratic-equations",
+   "prompt": "If (x − 3)(x − 4) = 0 then:",
+   "choices": [
+    "x = 12",
+    "x = 1",
+    "x = 3 or x = 4",
+    "x = 7"
+   ],
+   "answer": 2,
+   "explanation": "Zero product rule.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-quadratic-equations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-quadratic-equations",
+   "prompt": "A discriminant of 0 means:",
+   "choices": [
+    "one repeated root",
+    "no root",
+    "two roots",
+    "three roots"
+   ],
+   "answer": 0,
+   "explanation": "b² = 4ac.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-quadratic-equations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-quadratic-equations",
+   "prompt": "To complete the square on x² + 8x we add:",
+   "choices": [
+    "4",
+    "8",
+    "16",
+    "64"
+   ],
+   "answer": 2,
+   "explanation": "(8/2)².",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-quadratic-equations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-quadratic-equations",
+   "prompt": "x² = 5x has the roots:",
+   "choices": [
+    "0 only",
+    "−5 and 5",
+    "5 only",
+    "0 and 5"
+   ],
+   "answer": 3,
+   "explanation": "x(x − 5) = 0.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-variation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "y varies directly as x and y = 10 when x = 2. Find y when x = 9.",
+   "answer": 45,
+   "tolerance": 0,
+   "explanation": "k = 5, so y = 5 × 9.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-variation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "y varies inversely as x and y = 5 when x = 6. Find k.",
+   "answer": 30,
+   "tolerance": 0,
+   "explanation": "k = xy = 30.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-variation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Which situation shows inverse variation?",
+   "choices": [
+    "More rice, higher cost",
+    "More workers, fewer days for the same job",
+    "Longer time, more distance at constant speed",
+    "More pages, more paper"
+   ],
+   "answer": 1,
+   "explanation": "Product workers × days is constant.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-variation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "y ∝ x² and y = 50 when x = 5. Find y when x = 8.",
+   "answer": 128,
+   "tolerance": 0,
+   "explanation": "k = 2; y = 2 × 64 = 128.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-variation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "y varies jointly as x and inversely as z, with y = 6 when x = 3 and z = 2. Find y when x = 5 and z = 10, showing k.",
+   "model": "y = kx/z, so 6 = 3k/2 and k = 4. Then y = 4 × 5 ÷ 10 = 2.",
+   "rubric": "1 mark for the equation, 1 mark for k = 4, 1 mark for y = 2.",
+   "explanation": "y = kx/z, so 6 = 3k/2 and k = 4. Then y = 4 × 5 ÷ 10 = 2.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-variation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The time T hours to travel between two towns varies inversely as the average speed v km/h. At 60 km/h the journey takes 3 hours.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the constant k in T = k/v (the distance in km).",
+     "answer": 180,
+     "tolerance": 0,
+     "explanation": "k = vT = 60 × 3.",
+     "id": "form4-maths-algebra-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How long at 90 km/h (hours)?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "180 ÷ 90.",
+     "unit": "h",
+     "id": "form4-maths-algebra-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What speed is needed to complete the journey in 2.5 hours (km/h)?",
+     "answer": 72,
+     "tolerance": 0,
+     "explanation": "180 ÷ 2.5 = 72.",
+     "unit": "km/h",
+     "id": "form4-maths-algebra-e12-c"
+    }
+   ],
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-variation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-variation",
+   "prompt": "y ∝ x means:",
+   "choices": [
+    "y = k/x",
+    "y = k − x",
+    "y = kx",
+    "y = x + k"
+   ],
+   "answer": 2,
+   "explanation": "Direct variation.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-variation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-variation",
+   "prompt": "In inverse variation the product xy is:",
+   "choices": [
+    "x + y",
+    "increasing",
+    "zero",
+    "constant"
+   ],
+   "answer": 3,
+   "explanation": "xy = k.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-variation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-variation",
+   "prompt": "y = kx has a graph that is:",
+   "choices": [
+    "a line through the origin",
+    "a horizontal line",
+    "a circle",
+    "a hyperbola"
+   ],
+   "answer": 0,
+   "explanation": "Direct variation.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-variation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-variation",
+   "prompt": "A fixed charge plus a charge per unit is:",
+   "choices": [
+    "joint variation",
+    "direct variation",
+    "partial variation",
+    "inverse variation"
+   ],
+   "answer": 2,
+   "explanation": "y = a + bx.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-variation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-variation",
+   "prompt": "If y ∝ x² and x is doubled, y becomes:",
+   "choices": [
+    "half",
+    "the same",
+    "twice",
+    "four times larger"
+   ],
+   "answer": 3,
+   "explanation": "2² = 4.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-sequences",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the 10th term of 5, 8, 11, ....",
+   "answer": 32,
+   "tolerance": 0,
+   "explanation": "5 + 9 × 3 = 32.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-sequences",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the common ratio of 2, 6, 18, ....",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "6 ÷ 2 = 3.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-sequences",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The nth term of 7, 10, 13, … is:",
+   "choices": [
+    "3n + 7",
+    "3n + 4",
+    "7n + 3",
+    "n + 3"
+   ],
+   "answer": 1,
+   "explanation": "a = 7, d = 3: 7 + 3(n − 1) = 3n + 4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-sequences",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the sum of the first 20 natural numbers 1 + 2 + 3 + ... + 20.",
+   "answer": 210,
+   "tolerance": 0,
+   "explanation": "20 ÷ 2 × (1 + 20) = 210.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-sequences",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The 3rd term of an AP is 11 and the 7th term is 23. Find a and d.",
+   "model": "T₇ − T₃ = 4d = 12, so d = 3. Then a + 2d = 11 gives a = 5.",
+   "rubric": "1 mark for the subtraction, 1 mark for d = 3, 1 mark for a = 5.",
+   "explanation": "T₇ − T₃ = 4d = 12, so d = 3. Then a + 2d = 11 gives a = 5.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-algebra-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-sequences",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A taxi-moto driver in Douala earns 6 000 FCFA on day 1 and his daily earnings rise by 500 FCFA each day for 14 days.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the earnings on day 14 (FCFA).",
+     "answer": 12500,
+     "tolerance": 0,
+     "explanation": "6 000 + 13 × 500 = 12 500.",
+     "unit": "FCFA",
+     "id": "form4-maths-algebra-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the total earnings over the 14 days (FCFA).",
+     "answer": 129500,
+     "tolerance": 0,
+     "explanation": "14 ÷ 2 × (6 000 + 12 500) = 7 × 18 500.",
+     "unit": "FCFA",
+     "id": "form4-maths-algebra-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "On which day are the earnings first at least 10 000 FCFA?",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "6 000 + (n − 1) × 500 ≥ 10 000 gives n ≥ 9.",
+     "id": "form4-maths-algebra-e18-c"
+    }
+   ],
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-sequences-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sequences",
+   "prompt": "The common difference of 4, 9, 14, … is:",
+   "choices": [
+    "4",
+    "5",
+    "9",
+    "13"
+   ],
+   "answer": 1,
+   "explanation": "9 − 4.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-sequences-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sequences",
+   "prompt": "The common ratio of 5, 10, 20, … is:",
+   "choices": [
+    "10",
+    "15",
+    "2",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "10 ÷ 5.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-sequences-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sequences",
+   "prompt": "The nth term of an AP is:",
+   "choices": [
+    "a + (n − 1)d",
+    "a − d",
+    "a + nd",
+    "ar^n"
+   ],
+   "answer": 0,
+   "explanation": "Standard formula.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-sequences-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sequences",
+   "prompt": "The sum of a GP is found with:",
+   "choices": [
+    "a(rⁿ − 1)/(r − 1)",
+    "n/2(a + d)",
+    "a + (n − 1)d",
+    "ar"
+   ],
+   "answer": 0,
+   "explanation": "GP sum.",
+   "chapter": "form4-maths-algebra"
+  },
+  {
+   "id": "form4-maths-sequences-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-sequences",
+   "prompt": "1, 2, 4, 8, … is:",
+   "choices": [
+    "a geometric sequence",
+    "neither",
+    "an arithmetic sequence",
+    "a constant sequence"
+   ],
+   "answer": 0,
+   "explanation": "Ratio 2.",
+   "chapter": "form4-maths-algebra"
+  }
+ ]
+}

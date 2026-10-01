@@ -1,0 +1,3078 @@
+{
+ "chapter": "form3-maths-prob-transf",
+ "lessons": [
+  {
+   "id": "form3-maths-probability",
+   "title": "Probability: single and combined events",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the probability of an event",
+    "Use the complement and mutually exclusive events",
+    "Use tree diagrams for independent events and for events without replacement",
+    "Apply the AND and OR rules"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-prob-transf-e01",
+    "form3-maths-prob-transf-e02",
+    "form3-maths-prob-transf-e03",
+    "form3-maths-prob-transf-e04",
+    "form3-maths-prob-transf-e05",
+    "form3-maths-prob-transf-e06"
+   ],
+   "selfCheck": [
+    "form3-maths-probability-q1",
+    "form3-maths-probability-q2",
+    "form3-maths-probability-q3",
+    "form3-maths-probability-q4",
+    "form3-maths-probability-q5"
+   ],
+   "reviewNotes": [
+    "Conditional probability notation is not used; the tree diagram handles it informally.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Probability",
+     "md": "The probability of an event is a number from 0 (impossible) to 1 (certain):",
+     "tex": "P(A) = \\frac{\\text{number of favourable outcomes}}{\\text{total number of equally likely outcomes}}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Rules",
+     "md": "- **Complement**: P(not A) = 1 − P(A).\n- **Mutually exclusive** events cannot happen together: P(A or B) = P(A) + P(B).\n- **Independent** events do not affect each other: P(A and B) = P(A) × P(B).\n- Probabilities of all outcomes add up to 1. Give answers as fractions, decimals or percentages."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 130,
+        "x2": 170,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 130,
+        "x2": 170,
+        "y2": 200,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 60,
+        "x2": 330,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 60,
+        "x2": 330,
+        "y2": 95,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 200,
+        "x2": 330,
+        "y2": 165,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 200,
+        "x2": 330,
+        "y2": 235,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 82,
+        "text": "5/8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 188,
+        "text": "3/8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 36,
+        "text": "4/7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 88,
+        "text": "3/7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 172,
+        "text": "5/7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 226,
+        "text": "2/7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 56,
+        "text": "R",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 214,
+        "text": "B",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 30,
+        "text": "R",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 100,
+        "text": "B",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 170,
+        "text": "R",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 240,
+        "text": "B",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Tree diagram for two draws without replacement from 5 red and 3 blue beads.",
+     "alt": "A tree diagram with probabilities 5/8 and 3/8 on the first branches and 4/7, 3/7, 5/7, 2/7 on the second."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tree diagrams",
+     "md": "Draw a branch for each outcome and write the probability on it. **Multiply along the branches** for 'and'; **add the results** of different routes for 'or'. If an object is **not replaced**, the second set of branches has changed numbers: from a bag of 5 red (R) and 3 blue (B) balls, after taking a red ball there are 4 red and 3 blue left."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding probabilities along a branch instead of multiplying.\n- Leaving the denominator unchanged when an object is not replaced.\n- A probability larger than 1 or negative: check the answer."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: single events",
+     "statement": "A bag at a Douala stall holds 5 red and 3 blue beads. One is taken at random. Find P(red) and P(not red).",
+     "steps": [
+      "Total beads = 8; favourable = 5, so P(red) = 5/8.",
+      "P(not red) = 1 − 5/8 = 3/8, and this equals P(blue)."
+     ],
+     "answer": "**5/8 and 3/8**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: two draws, no replacement",
+     "statement": "Two beads are taken, one after the other, without replacement. Find P(two reds) and P(one of each colour).",
+     "steps": [
+      "Two reds: 5/8 × 4/7 = 20/56 = 5/14 ≈ 0.357.",
+      "Red then blue: 5/8 × 3/7 = 15/56; blue then red: 3/8 × 5/7 = 15/56.",
+      "One of each = 15/56 + 15/56 = 30/56 = 15/28 ≈ 0.536."
+     ],
+     "answer": "**5/14 and 15/28**",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 130,
+        "x2": 170,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 130,
+        "x2": 170,
+        "y2": 200,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 60,
+        "x2": 330,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 60,
+        "x2": 330,
+        "y2": 95,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 200,
+        "x2": 330,
+        "y2": 165,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 200,
+        "x2": 330,
+        "y2": 235,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 82,
+        "text": "5/8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 188,
+        "text": "3/8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 36,
+        "text": "4/7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 88,
+        "text": "3/7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 172,
+        "text": "5/7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 226,
+        "text": "2/7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 56,
+        "text": "R",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 214,
+        "text": "B",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 30,
+        "text": "R",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 100,
+        "text": "B",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 170,
+        "text": "R",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 240,
+        "text": "B",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-transformations",
+   "title": "Transformations of the plane",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Reflect a shape in a line",
+    "Translate a shape by a vector",
+    "Rotate a shape about a point through a given angle",
+    "Enlarge a shape and relate scale factor to area"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-prob-transf-e07",
+    "form3-maths-prob-transf-e08",
+    "form3-maths-prob-transf-e09",
+    "form3-maths-prob-transf-e10",
+    "form3-maths-prob-transf-e11",
+    "form3-maths-prob-transf-e12"
+   ],
+   "selfCheck": [
+    "form3-maths-transformations-q1",
+    "form3-maths-transformations-q2",
+    "form3-maths-transformations-q3",
+    "form3-maths-transformations-q4",
+    "form3-maths-transformations-q5"
+   ],
+   "reviewNotes": [
+    "Column vectors are written in the form (3, −2) because the content format has no matrix notation; check conventions. Combined transformations and negative scale factors are only mentioned.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The four transformations",
+     "md": "A transformation moves a shape (the **object**) to a new position (the **image**). A **reflection** flips it over a mirror line. A **translation** slides it, described by a vector such as 3 units right and 2 units down, written (3, −2). A **rotation** turns it about a centre through an angle, clockwise or anticlockwise. An **enlargement** changes its size by a scale factor k from a centre. Reflection, translation and rotation keep the size and shape (they are **congruent**)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Coordinate rules",
+     "md": "Reflection in the y-axis: (x, y) → (−x, y); in the x-axis: (x, y) → (x, −y). Translation by (a, b): (x, y) → (x + a, y + b). Rotation of 90° anticlockwise about the origin: (x, y) → (−y, x). Enlargement with scale factor k and centre the origin: (x, y) → (kx, ky)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 290,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 160.85714285714286,
+        "x2": 372.0,
+        "y2": 160.85714285714286,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 262.0,
+        "x2": 200.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 157.85714285714286,
+        "x2": 34.0,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 34.0,
+        "y": 177.85714285714286,
+        "text": "−5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 67.2,
+        "y1": 157.85714285714286,
+        "x2": 67.2,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.2,
+        "y": 177.85714285714286,
+        "text": "−4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 100.4,
+        "y1": 157.85714285714286,
+        "x2": 100.4,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 100.4,
+        "y": 177.85714285714286,
+        "text": "−3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 133.6,
+        "y1": 157.85714285714286,
+        "x2": 133.6,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 133.6,
+        "y": 177.85714285714286,
+        "text": "−2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 166.8,
+        "y1": 157.85714285714286,
+        "x2": 166.8,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 166.8,
+        "y": 177.85714285714286,
+        "text": "−1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 157.85714285714286,
+        "x2": 200.0,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 177.85714285714286,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 233.2,
+        "y1": 157.85714285714286,
+        "x2": 233.2,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 233.2,
+        "y": 177.85714285714286,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 266.4,
+        "y1": 157.85714285714286,
+        "x2": 266.4,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 266.4,
+        "y": 177.85714285714286,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 299.6,
+        "y1": 157.85714285714286,
+        "x2": 299.6,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 299.6,
+        "y": 177.85714285714286,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 332.8,
+        "y1": 157.85714285714286,
+        "x2": 332.8,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 332.8,
+        "y": 177.85714285714286,
+        "text": "4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 366.0,
+        "y1": 157.85714285714286,
+        "x2": 366.0,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 366.0,
+        "y": 177.85714285714286,
+        "text": "5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 256.0,
+        "x2": 203.0,
+        "y2": 256.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 260.0,
+        "text": "−3",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 224.28571428571428,
+        "x2": 203.0,
+        "y2": 224.28571428571428,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 228.28571428571428,
+        "text": "−2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 192.57142857142856,
+        "x2": 203.0,
+        "y2": 192.57142857142856,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 196.57142857142856,
+        "text": "−1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 160.85714285714286,
+        "x2": 203.0,
+        "y2": 160.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 164.85714285714286,
+        "text": "0",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 129.14285714285714,
+        "x2": 203.0,
+        "y2": 129.14285714285714,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 133.14285714285714,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 97.42857142857142,
+        "x2": 203.0,
+        "y2": 97.42857142857142,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 101.42857142857142,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 65.71428571428572,
+        "x2": 203.0,
+        "y2": 65.71428571428572,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 69.71428571428572,
+        "text": "3",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 34.0,
+        "x2": 203.0,
+        "y2": 34.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 38.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         233.2,
+         129.1,
+         332.8,
+         129.1,
+         233.2,
+         65.7
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         166.8,
+         129.1,
+         67.2,
+         129.1,
+         166.8,
+         65.7
+        ],
+        "stroke": "red",
+        "width": 2,
+        "closed": true,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 263.08000000000004,
+        "y": 113.28571428571428,
+        "text": "T",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 136.92000000000002,
+        "y": 113.28571428571428,
+        "text": "T′",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Triangle T and its reflection T′ in the y-axis.",
+     "alt": "A blue triangle on the right of the y-axis and its orange mirror image on the left."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Scale factors",
+     "md": "Under an enlargement of scale factor k, every **length** is multiplied by k, but angles stay the same and the **area is multiplied by k²**. A scale factor between 0 and 1 makes the image smaller; a **negative** scale factor puts the image on the opposite side of the centre."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Reflecting in the wrong axis, or measuring the distance to the mirror line incorrectly.\n- Rotating in the wrong direction (clockwise vs anticlockwise).\n- Multiplying the area by k instead of k²; a scale factor 2 gives 4 times the area."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: reflection and translation",
+     "statement": "Triangle T has vertices (1, 1), (4, 1) and (1, 3). Find its reflection in the y-axis and its translation by (3, −2).",
+     "steps": [
+      "Reflection (x, y) → (−x, y): (−1, 1), (−4, 1), (−1, 3).",
+      "Translation (x + 3, y − 2): (4, −1), (7, −1), (4, 1).",
+      "Both images are congruent to T."
+     ],
+     "answer": "**(−1, 1), (−4, 1), (−1, 3); (4, −1), (7, −1), (4, 1).**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 290,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 160.85714285714286,
+        "x2": 372.0,
+        "y2": 160.85714285714286,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 262.0,
+        "x2": 200.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 157.85714285714286,
+        "x2": 34.0,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 34.0,
+        "y": 177.85714285714286,
+        "text": "−5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 67.2,
+        "y1": 157.85714285714286,
+        "x2": 67.2,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.2,
+        "y": 177.85714285714286,
+        "text": "−4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 100.4,
+        "y1": 157.85714285714286,
+        "x2": 100.4,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 100.4,
+        "y": 177.85714285714286,
+        "text": "−3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 133.6,
+        "y1": 157.85714285714286,
+        "x2": 133.6,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 133.6,
+        "y": 177.85714285714286,
+        "text": "−2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 166.8,
+        "y1": 157.85714285714286,
+        "x2": 166.8,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 166.8,
+        "y": 177.85714285714286,
+        "text": "−1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 157.85714285714286,
+        "x2": 200.0,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 177.85714285714286,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 233.2,
+        "y1": 157.85714285714286,
+        "x2": 233.2,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 233.2,
+        "y": 177.85714285714286,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 266.4,
+        "y1": 157.85714285714286,
+        "x2": 266.4,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 266.4,
+        "y": 177.85714285714286,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 299.6,
+        "y1": 157.85714285714286,
+        "x2": 299.6,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 299.6,
+        "y": 177.85714285714286,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 332.8,
+        "y1": 157.85714285714286,
+        "x2": 332.8,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 332.8,
+        "y": 177.85714285714286,
+        "text": "4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 366.0,
+        "y1": 157.85714285714286,
+        "x2": 366.0,
+        "y2": 163.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 366.0,
+        "y": 177.85714285714286,
+        "text": "5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 256.0,
+        "x2": 203.0,
+        "y2": 256.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 260.0,
+        "text": "−3",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 224.28571428571428,
+        "x2": 203.0,
+        "y2": 224.28571428571428,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 228.28571428571428,
+        "text": "−2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 192.57142857142856,
+        "x2": 203.0,
+        "y2": 192.57142857142856,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 196.57142857142856,
+        "text": "−1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 160.85714285714286,
+        "x2": 203.0,
+        "y2": 160.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 164.85714285714286,
+        "text": "0",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 129.14285714285714,
+        "x2": 203.0,
+        "y2": 129.14285714285714,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 133.14285714285714,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 97.42857142857142,
+        "x2": 203.0,
+        "y2": 97.42857142857142,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 101.42857142857142,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 65.71428571428572,
+        "x2": 203.0,
+        "y2": 65.71428571428572,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 69.71428571428572,
+        "text": "3",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.0,
+        "y1": 34.0,
+        "x2": 203.0,
+        "y2": 34.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 192.0,
+        "y": 38.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         233.2,
+         129.1,
+         332.8,
+         129.1,
+         233.2,
+         65.7
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         166.8,
+         129.1,
+         67.2,
+         129.1,
+         166.8,
+         65.7
+        ],
+        "stroke": "red",
+        "width": 2,
+        "closed": true,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 263.08000000000004,
+        "y": 113.28571428571428,
+        "text": "T",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 136.92000000000002,
+        "y": 113.28571428571428,
+        "text": "T′",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: rotation and enlargement",
+     "statement": "Rotate T by 90° anticlockwise about the origin, then enlarge T by scale factor 2 with centre the origin. Compare the areas.",
+     "steps": [
+      "Rotation (x, y) → (−y, x): (−1, 1), (−1, 4), (−3, 1).",
+      "Enlargement (x, y) → (2x, 2y): (2, 2), (8, 2), (2, 6).",
+      "Area of T = ½ × 3 × 2 = 3 and area of the enlargement = ½ × 6 × 4 = 12, which is 2² = 4 times as large."
+     ],
+     "answer": "**(−1, 1), (−1, 4), (−3, 1); (2, 2), (8, 2), (2, 6); area × 4.**"
+    }
+   ],
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-matrices",
+   "title": "Introduction to matrices",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe a matrix by its order",
+    "Add, subtract and multiply by a number",
+    "Multiply two matrices",
+    "Find the determinant of a 2 × 2 matrix"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-prob-transf-e13",
+    "form3-maths-prob-transf-e14",
+    "form3-maths-prob-transf-e15",
+    "form3-maths-prob-transf-e16",
+    "form3-maths-prob-transf-e17",
+    "form3-maths-prob-transf-e18"
+   ],
+   "selfCheck": [
+    "form3-maths-matrices-q1",
+    "form3-maths-matrices-q2",
+    "form3-maths-matrices-q3",
+    "form3-maths-matrices-q4",
+    "form3-maths-matrices-q5"
+   ],
+   "reviewNotes": [
+    "Matrix inverses and solving simultaneous equations with matrices are left for Form 4-5. Matrices are described in words in the text because the content format has no matrix notation.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Matrices",
+     "md": "A **matrix** is a rectangular array of numbers in rows and columns inside brackets. A matrix with 2 rows and 3 columns has **order** 2 × 3 (rows first). Each number is an **element**. A **square** matrix has the same number of rows and columns. Matrices store tables of data such as sales or prices."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Adding and scalar multiplication",
+     "md": "Matrices of the **same order** are added (or subtracted) element by element. Multiplying by a number multiplies **every element**. If A has rows (2, 3) and (1, 4) and B has rows (1, 0) and (5, 2), then A + B has rows (3, 3) and (6, 6), and 2A has rows (4, 6) and (2, 8)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 120,
+      "items": [
+       {
+        "t": "line",
+        "x1": 19,
+        "y1": 32.0,
+        "x2": 15,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 15,
+        "y1": 32.0,
+        "x2": 15,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 15,
+        "y1": 88.0,
+        "x2": 19,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 91,
+        "y1": 32.0,
+        "x2": 95,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 32.0,
+        "x2": 95,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 88.0,
+        "x2": 91,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 51.0,
+        "text": "2",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 72.0,
+        "y": 51.0,
+        "text": "3",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 79.0,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 72.0,
+        "y": 79.0,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 65.0,
+        "text": "×",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 141,
+        "y1": 32.0,
+        "x2": 137,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 137,
+        "y1": 32.0,
+        "x2": 137,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 137,
+        "y1": 88.0,
+        "x2": 141,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 213,
+        "y1": 32.0,
+        "x2": 217,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 217,
+        "y1": 32.0,
+        "x2": 217,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 217,
+        "y1": 88.0,
+        "x2": 213,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 51.0,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 194.0,
+        "y": 51.0,
+        "text": "0",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 79.0,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 194.0,
+        "y": 79.0,
+        "text": "2",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 237,
+        "y": 65.0,
+        "text": "=",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 263,
+        "y1": 32.0,
+        "x2": 259,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 259,
+        "y1": 32.0,
+        "x2": 259,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 259,
+        "y1": 88.0,
+        "x2": 263,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 335,
+        "y1": 32.0,
+        "x2": 339,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 339,
+        "y1": 32.0,
+        "x2": 339,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 339,
+        "y1": 88.0,
+        "x2": 335,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 282.0,
+        "y": 51.0,
+        "text": "17",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 316.0,
+        "y": 51.0,
+        "text": "6",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 282.0,
+        "y": 79.0,
+        "text": "21",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 316.0,
+        "y": 79.0,
+        "text": "8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The product of two 2 × 2 matrices A × B = AB.",
+     "alt": "Three matrices written side by side showing A times B equals the result."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Multiplication",
+     "md": "To multiply matrices, take a **row of the first** times a **column of the second**: multiply the entries in pairs and add. A × B is possible only when the number of **columns of A equals the number of rows of B**. For the A and B above, the first row of AB is (2×1 + 3×5, 2×0 + 3×2) = (17, 6). In general **AB is not equal to BA**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Determinant",
+     "md": "The determinant of a 2 × 2 matrix with rows (a, b) and (c, d) is:",
+     "tex": "\\text{det}\\, = ad - bc"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding matrices of different orders.\n- Multiplying element by element instead of row × column.\n- Assuming AB = BA."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: multiplication",
+     "statement": "A has rows (2, 3) and (1, 4); B has rows (1, 0) and (5, 2). Find AB, BA and det A.",
+     "steps": [
+      "Row 1 × columns: 2×1 + 3×5 = 17 and 2×0 + 3×2 = 6; row 2: 1×1 + 4×5 = 21 and 1×0 + 4×2 = 8, so AB has rows (17, 6) and (21, 8).",
+      "BA: row 1 is (1×2 + 0×1, 1×3 + 0×4) = (2, 3); row 2 is (5×2 + 2×1, 5×3 + 2×4) = (12, 23). So AB ≠ BA.",
+      "det A = 2×4 − 3×1 = 5."
+     ],
+     "answer": "**AB = (17, 6 / 21, 8); BA = (2, 3 / 12, 23); det A = 5.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 120,
+      "items": [
+       {
+        "t": "line",
+        "x1": 19,
+        "y1": 32.0,
+        "x2": 15,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 15,
+        "y1": 32.0,
+        "x2": 15,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 15,
+        "y1": 88.0,
+        "x2": 19,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 91,
+        "y1": 32.0,
+        "x2": 95,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 32.0,
+        "x2": 95,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 88.0,
+        "x2": 91,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 51.0,
+        "text": "2",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 72.0,
+        "y": 51.0,
+        "text": "3",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 79.0,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 72.0,
+        "y": 79.0,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 65.0,
+        "text": "×",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 141,
+        "y1": 32.0,
+        "x2": 137,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 137,
+        "y1": 32.0,
+        "x2": 137,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 137,
+        "y1": 88.0,
+        "x2": 141,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 213,
+        "y1": 32.0,
+        "x2": 217,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 217,
+        "y1": 32.0,
+        "x2": 217,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 217,
+        "y1": 88.0,
+        "x2": 213,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 51.0,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 194.0,
+        "y": 51.0,
+        "text": "0",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 79.0,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 194.0,
+        "y": 79.0,
+        "text": "2",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 237,
+        "y": 65.0,
+        "text": "=",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 263,
+        "y1": 32.0,
+        "x2": 259,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 259,
+        "y1": 32.0,
+        "x2": 259,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 259,
+        "y1": 88.0,
+        "x2": 263,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 335,
+        "y1": 32.0,
+        "x2": 339,
+        "y2": 32.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 339,
+        "y1": 32.0,
+        "x2": 339,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 339,
+        "y1": 88.0,
+        "x2": 335,
+        "y2": 88.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 282.0,
+        "y": 51.0,
+        "text": "17",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 316.0,
+        "y": 51.0,
+        "text": "6",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 282.0,
+        "y": 79.0,
+        "text": "21",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 316.0,
+        "y": 79.0,
+        "text": "8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a sales problem",
+     "statement": "A trader sells 4 kg of rice at 500 FCFA/kg and 6 kg of beans at 300 FCFA/kg. Use a row matrix of prices times a column matrix of quantities to find the takings.",
+     "steps": [
+      "Prices (500, 300) are a 1 × 2 matrix; quantities (4 above 6) are a 2 × 1 matrix.",
+      "Row × column: 500 × 4 + 300 × 6 = 2 000 + 1 800.",
+      "The product is a 1 × 1 matrix: 3 800 FCFA."
+     ],
+     "answer": "**3 800 FCFA**"
+    }
+   ],
+   "chapter": "form3-maths-prob-transf"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-maths-prob-transf-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A fair die is rolled. Find P(a number greater than 4) as a decimal to 3 d.p.",
+   "answer": 0.333,
+   "tolerance": 0.001,
+   "explanation": "Outcomes 5 and 6: 2/6 = 0.333.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "P(rain tomorrow) = 0.3. Find P(no rain).",
+   "answer": 0.7,
+   "tolerance": 0.001,
+   "explanation": "1 − 0.3.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The probability of an impossible event is:",
+   "choices": [
+    "−1",
+    "1",
+    "0",
+    "0.5"
+   ],
+   "answer": 2,
+   "explanation": "Impossible means 0.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Two fair coins are tossed. Find P(two heads) as a decimal.",
+   "answer": 0.25,
+   "tolerance": 0.001,
+   "explanation": "1/2 × 1/2 = 1/4.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A student says: 'P(head) = 1/2, so if I toss a coin twice I must get exactly one head.' Is she right? Explain.",
+   "model": "No. Each toss is independent: P(2 heads) = 1/4, P(1 head) = 1/2 and P(0 heads) = 1/4. Getting exactly one head is only likely, not certain.",
+   "rubric": "1 mark for independence, 1 mark for the correct probabilities, 1 mark for the conclusion.",
+   "explanation": "No. Each toss is independent: P(2 heads) = 1/4, P(1 head) = 1/2 and P(0 heads) = 1/4. Getting exactly one head is only likely, not certain.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Two fair dice are rolled together (36 equally likely outcomes).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the number of outcomes that give a total of 7.",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "(1,6), (2,5), (3,4), (4,3), (5,2), (6,1).",
+     "id": "form3-maths-prob-transf-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find P(total 7) as a decimal to 3 d.p.",
+     "answer": 0.167,
+     "tolerance": 0.001,
+     "explanation": "6/36 = 1/6.",
+     "id": "form3-maths-prob-transf-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find P(a double, i.e. both dice show the same number) to 3 d.p.",
+     "answer": 0.167,
+     "tolerance": 0.001,
+     "explanation": "(1,1) to (6,6): 6/36.",
+     "id": "form3-maths-prob-transf-e06-c"
+    }
+   ],
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-probability-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-probability",
+   "prompt": "A probability cannot be:",
+   "choices": [
+    "0",
+    "0.5",
+    "greater than 1",
+    "1"
+   ],
+   "answer": 2,
+   "explanation": "The scale is 0 to 1.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-probability-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-probability",
+   "prompt": "P(A) = 0.4 means P(not A) =",
+   "choices": [
+    "1.4",
+    "0.4",
+    "−0.4",
+    "0.6"
+   ],
+   "answer": 3,
+   "explanation": "1 − P(A).",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-probability-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-probability",
+   "prompt": "For independent events, P(A and B) =",
+   "choices": [
+    "P(A) − P(B)",
+    "P(A) + P(B)",
+    "P(A) ÷ P(B)",
+    "P(A) × P(B)"
+   ],
+   "answer": 3,
+   "explanation": "Multiply.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-probability-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-probability",
+   "prompt": "In a tree diagram we multiply along:",
+   "choices": [
+    "a vertical line",
+    "the outcomes",
+    "nothing",
+    "a branch (route)"
+   ],
+   "answer": 3,
+   "explanation": "'And' rule.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-probability-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-probability",
+   "prompt": "Mutually exclusive events:",
+   "choices": [
+    "are independent",
+    "cannot happen together",
+    "have probability 1",
+    "always happen together"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Reflect the point (3, 2) in the y-axis. What is the x-coordinate of the image?",
+   "answer": -3,
+   "tolerance": 0,
+   "explanation": "(x, y) → (−x, y).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Translate (2, 5) by (−4, 3). Find the y-coordinate of the image.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "5 + 3 = 8.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Which transformation does NOT change the size of a shape?",
+   "choices": [
+    "Enlargement with k = 0.5",
+    "Enlargement with k = 2",
+    "Rotation",
+    "Enlargement with k = 3"
+   ],
+   "answer": 2,
+   "explanation": "Congruent transformations keep size.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A shape has area 5 cm². It is enlarged with scale factor 3. Find the area of the image (cm²).",
+   "answer": 45,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "5 × 3² = 45.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Describe fully the single transformation that maps (2, 1) → (−2, 1) and (3, 4) → (−3, 4).",
+   "model": "It is a reflection in the y-axis (the line x = 0), since (x, y) → (−x, y).",
+   "rubric": "1 mark for 'reflection', 1 mark for the mirror line x = 0 (y-axis), 1 mark for a rule or check.",
+   "explanation": "It is a reflection in the y-axis (the line x = 0), since (x, y) → (−x, y).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A signboard triangle of a shop in Bamenda has vertices (1, 1), (4, 1) and (1, 3), with 1 unit = 1 m.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find its area (m²).",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "½ × 3 × 2 = 3.",
+     "unit": "m²",
+     "id": "form3-maths-prob-transf-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "A larger sign is an enlargement with scale factor 2. Find its area (m²).",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "3 × 2² = 12.",
+     "unit": "m²",
+     "id": "form3-maths-prob-transf-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The larger sign is painted with paint costing 1 500 FCFA per m². Find the cost (FCFA).",
+     "answer": 18000,
+     "tolerance": 0,
+     "explanation": "12 × 1 500 = 18 000.",
+     "unit": "FCFA",
+     "id": "form3-maths-prob-transf-e12-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 290,
+    "items": [
+     {
+      "t": "line",
+      "x1": 28.0,
+      "y1": 160.85714285714286,
+      "x2": 372.0,
+      "y2": 160.85714285714286,
+      "color": "ink",
+      "width": 1.5,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 200.0,
+      "y1": 262.0,
+      "x2": 200.0,
+      "y2": 28.0,
+      "color": "ink",
+      "width": 1.5,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 34.0,
+      "y1": 157.85714285714286,
+      "x2": 34.0,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 34.0,
+      "y": 177.85714285714286,
+      "text": "−5",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 67.2,
+      "y1": 157.85714285714286,
+      "x2": 67.2,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 67.2,
+      "y": 177.85714285714286,
+      "text": "−4",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 100.4,
+      "y1": 157.85714285714286,
+      "x2": 100.4,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 100.4,
+      "y": 177.85714285714286,
+      "text": "−3",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 133.6,
+      "y1": 157.85714285714286,
+      "x2": 133.6,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 133.6,
+      "y": 177.85714285714286,
+      "text": "−2",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 166.8,
+      "y1": 157.85714285714286,
+      "x2": 166.8,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 166.8,
+      "y": 177.85714285714286,
+      "text": "−1",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 200.0,
+      "y1": 157.85714285714286,
+      "x2": 200.0,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 200.0,
+      "y": 177.85714285714286,
+      "text": "0",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 233.2,
+      "y1": 157.85714285714286,
+      "x2": 233.2,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 233.2,
+      "y": 177.85714285714286,
+      "text": "1",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 266.4,
+      "y1": 157.85714285714286,
+      "x2": 266.4,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 266.4,
+      "y": 177.85714285714286,
+      "text": "2",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 299.6,
+      "y1": 157.85714285714286,
+      "x2": 299.6,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 299.6,
+      "y": 177.85714285714286,
+      "text": "3",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 332.8,
+      "y1": 157.85714285714286,
+      "x2": 332.8,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 332.8,
+      "y": 177.85714285714286,
+      "text": "4",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 366.0,
+      "y1": 157.85714285714286,
+      "x2": 366.0,
+      "y2": 163.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 366.0,
+      "y": 177.85714285714286,
+      "text": "5",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 197.0,
+      "y1": 256.0,
+      "x2": 203.0,
+      "y2": 256.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 192.0,
+      "y": 260.0,
+      "text": "−3",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 197.0,
+      "y1": 224.28571428571428,
+      "x2": 203.0,
+      "y2": 224.28571428571428,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 192.0,
+      "y": 228.28571428571428,
+      "text": "−2",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 197.0,
+      "y1": 192.57142857142856,
+      "x2": 203.0,
+      "y2": 192.57142857142856,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 192.0,
+      "y": 196.57142857142856,
+      "text": "−1",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 197.0,
+      "y1": 160.85714285714286,
+      "x2": 203.0,
+      "y2": 160.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 192.0,
+      "y": 164.85714285714286,
+      "text": "0",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 197.0,
+      "y1": 129.14285714285714,
+      "x2": 203.0,
+      "y2": 129.14285714285714,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 192.0,
+      "y": 133.14285714285714,
+      "text": "1",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 197.0,
+      "y1": 97.42857142857142,
+      "x2": 203.0,
+      "y2": 97.42857142857142,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 192.0,
+      "y": 101.42857142857142,
+      "text": "2",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 197.0,
+      "y1": 65.71428571428572,
+      "x2": 203.0,
+      "y2": 65.71428571428572,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 192.0,
+      "y": 69.71428571428572,
+      "text": "3",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 197.0,
+      "y1": 34.0,
+      "x2": 203.0,
+      "y2": 34.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 192.0,
+      "y": 38.0,
+      "text": "4",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       233.2,
+       129.1,
+       332.8,
+       129.1,
+       233.2,
+       65.7
+      ],
+      "stroke": "blue",
+      "width": 2,
+      "closed": true,
+      "fill": "lightblue"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       166.8,
+       129.1,
+       67.2,
+       129.1,
+       166.8,
+       65.7
+      ],
+      "stroke": "red",
+      "width": 2,
+      "closed": true,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 263.08000000000004,
+      "y": 113.28571428571428,
+      "text": "T",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 136.92000000000002,
+      "y": 113.28571428571428,
+      "text": "T′",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     }
+    ]
+   },
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-transformations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-transformations",
+   "prompt": "An enlargement of scale factor 3 multiplies areas by:",
+   "choices": [
+    "27",
+    "3",
+    "6",
+    "9"
+   ],
+   "answer": 3,
+   "explanation": "k².",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-transformations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-transformations",
+   "prompt": "A translation changes:",
+   "choices": [
+    "the size",
+    "the angles",
+    "the position only",
+    "the shape"
+   ],
+   "answer": 2,
+   "explanation": "It slides the shape.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-transformations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-transformations",
+   "prompt": "Reflection in the x-axis sends (2, 3) to:",
+   "choices": [
+    "(−2, 3)",
+    "(−2, −3)",
+    "(3, 2)",
+    "(2, −3)"
+   ],
+   "answer": 3,
+   "explanation": "(x, y) → (x, −y).",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-transformations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-transformations",
+   "prompt": "A scale factor of 0.5 makes the image:",
+   "choices": [
+    "inverted only",
+    "smaller",
+    "larger",
+    "the same size"
+   ],
+   "answer": 1,
+   "explanation": "Between 0 and 1.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-transformations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-transformations",
+   "prompt": "Rotation 90° anticlockwise about O sends (x, y) to:",
+   "choices": [
+    "(−y, x)",
+    "(y, −x)",
+    "(−x, −y)",
+    "(x, −y)"
+   ],
+   "answer": 0,
+   "explanation": "Standard rule.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-matrices",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the sum of the elements of A + B where A has rows (1, 2), (3, 4) and B has rows (5, 6), (7, 8).",
+   "answer": 36,
+   "tolerance": 0,
+   "explanation": "A + B has rows (6, 8) and (10, 12): sum 36.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-matrices",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the determinant of the matrix with rows (3, 2) and (4, 5).",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "3×5 − 2×4 = 7.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-matrices",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A matrix with 3 rows and 2 columns has order:",
+   "choices": [
+    "2 × 3",
+    "3 × 2",
+    "3 + 2",
+    "6"
+   ],
+   "answer": 1,
+   "explanation": "Rows first.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-matrices",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the top-left element of the product of the matrices with rows (1, 2), (3, 4) and (0, 1), (1, 0).",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "1×0 + 2×1 = 2.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-matrices",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A and B are 2 × 2 matrices. Explain why AB and BA are usually different, using any example.",
+   "model": "Matrix multiplication is row times column, so changing the order changes which rows and columns are paired. E.g. with A = rows (2, 3), (1, 4) and B = rows (1, 0), (5, 2), AB has top-left 17 but BA has top-left 2.",
+   "rubric": "1 mark for row × column, 1 mark for an example, 1 mark for the comparison.",
+   "explanation": "Matrix multiplication is row times column, so changing the order changes which rows and columns are paired. E.g. with A = rows (2, 3), (1, 4) and B = rows (1, 0), (5, 2), AB has top-left 17 but BA has top-left 2.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-prob-transf-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-matrices",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A shop in Bafoussam records sales (kg) in a matrix: rice and beans on Monday (4, 6) and on Tuesday (3, 8). Prices are 500 FCFA/kg (rice) and 300 FCFA/kg (beans).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find Monday's takings (FCFA).",
+     "answer": 3800,
+     "tolerance": 0,
+     "explanation": "500 × 4 + 300 × 6.",
+     "unit": "FCFA",
+     "id": "form3-maths-prob-transf-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find Tuesday's takings (FCFA).",
+     "answer": 3900,
+     "tolerance": 0,
+     "explanation": "500 × 3 + 300 × 8 = 1 500 + 2 400.",
+     "unit": "FCFA",
+     "id": "form3-maths-prob-transf-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the total for the two days (FCFA).",
+     "answer": 7700,
+     "tolerance": 0,
+     "explanation": "3 800 + 3 900.",
+     "unit": "FCFA",
+     "id": "form3-maths-prob-transf-e18-c"
+    }
+   ],
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-matrices-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-matrices",
+   "prompt": "The order of a matrix with 2 rows and 4 columns is:",
+   "choices": [
+    "2 × 4",
+    "8",
+    "4 × 2",
+    "2 + 4"
+   ],
+   "answer": 0,
+   "explanation": "Rows × columns.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-matrices-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-matrices",
+   "prompt": "To add two matrices they must have:",
+   "choices": [
+    "the same determinant",
+    "an odd order",
+    "the same elements",
+    "the same order"
+   ],
+   "answer": 3,
+   "explanation": "Element by element.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-matrices-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-matrices",
+   "prompt": "The determinant of (2, 1 / 3, 4) is:",
+   "choices": [
+    "−5",
+    "5",
+    "11",
+    "8"
+   ],
+   "answer": 1,
+   "explanation": "2×4 − 1×3.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-matrices-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-matrices",
+   "prompt": "AB = BA is:",
+   "choices": [
+    "never true",
+    "always true",
+    "not generally true",
+    "true only for 1 × 1"
+   ],
+   "answer": 2,
+   "explanation": "Non-commutative.",
+   "chapter": "form3-maths-prob-transf"
+  },
+  {
+   "id": "form3-maths-matrices-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-matrices",
+   "prompt": "2 × (matrix with rows (1, 2), (3, 4)) has top-right element:",
+   "choices": [
+    "6",
+    "4",
+    "8",
+    "2"
+   ],
+   "answer": 1,
+   "explanation": "2 × 2.",
+   "chapter": "form3-maths-prob-transf"
+  }
+ ]
+}
