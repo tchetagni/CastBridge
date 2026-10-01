@@ -18,9 +18,9 @@ def date_fr(d, m):
     return ("1er" if d == 1 else str(d)) + " " + MONTHS[m - 1]
 
 
-@gen(C, "gen-cm-weekday", cap=1100, cat="Calendrier camerounais", region="CM", source=SRC_CAL)
+@gen(C, "gen-cm-weekday", cap=240, cat="Calendrier camerounais", region="CM", source=SRC_CAL)
 def cm_weekday(rng, d):
-    lo, hi = {1: (2020, 2030), 2: (2000, 2040), 3: (1970, 2060), 4: (1920, 2100), 5: (1850, 2200)}[d]
+    lo, hi = {1: (2000, 2040), 2: (1960, 2080), 3: (1900, 2100), 4: (1800, 2200), 5: (1600, 2400)}[d]
     day, mon, name = rng.choice(CM_DAYS)
     y = rng.randint(lo, hi)
     wd = DAYS[dt.date(y, mon, day).weekday()]
@@ -28,9 +28,9 @@ def cm_weekday(rng, d):
                  f"Le {date_fr(day, mon)} {y} est un {wd} (calcul du calendrier grégorien).", src=SRC_CAL)
 
 
-@gen(C, "gen-cm-days-between", cap=800, cat="Calendrier camerounais", region="CM", source=SRC_CAL)
+@gen(C, "gen-cm-days-between", cap=250, cat="Calendrier camerounais", region="CM", source=SRC_CAL)
 def cm_between(rng, d):
-    lo, hi = {1: (2020, 2030), 2: (2000, 2040), 3: (1970, 2060), 4: (1920, 2100), 5: (1850, 2200)}[d]
+    lo, hi = {1: (2000, 2040), 2: (1960, 2080), 3: (1900, 2100), 4: (1800, 2200), 5: (1600, 2400)}[d]
     (d1, m1, n1), (d2, m2, n2) = sorted(rng.sample(CM_DAYS, 2), key=lambda t: (t[1], t[0]))
     y = rng.randint(lo, hi)
     n = (dt.date(y, m2, d2) - dt.date(y, m1, d1)).days
@@ -39,7 +39,7 @@ def cm_between(rng, d):
                  f"Du {date_fr(d1, m1)} au {date_fr(d2, m2)} {y}, il y a {n} jours ({'année bissextile' if leap else 'année non bissextile'}).", src=SRC_CAL)
 
 
-@gen(C, "gen-leap-year", cap=500, cat="Calendrier", region="WORLD", source="Règle de l'année bissextile du calendrier grégorien")
+@gen(C, "gen-leap-year", cap=120, cat="Calendrier", region="WORLD", source="Règle de l'année bissextile du calendrier grégorien")
 def leap(rng, d):
     y = rng.choice([rng.randint(1600, 2400), rng.choice([1700, 1800, 1900, 2000, 2100, 2200, 2400, 1600, 2300]), rng.randint(1900, 2100)])
     if y % 400 == 0:
@@ -95,12 +95,12 @@ def tz_q(rng, table, region, src, note):
                  f"Écart = {off(table[b])} − {off(table[a])} = {fr(table[b] - table[a], 2)} h ; {hhmm(local)} + ({fr(table[b] - table[a], 2)} h) = {right}.", src=src, region=region)
 
 
-@gen(C, "gen-tz-africa", cap=700, cat="Fuseaux horaires", region="AF", source=SRC_TZ_AF)
+@gen(C, "gen-tz-africa", cap=200, cat="Fuseaux horaires", region="AF", source=SRC_TZ_AF)
 def tz_africa(rng, d):
     return tz_q(rng, TZ_AF, "AF", SRC_TZ_AF, "")
 
 
-@gen(C, "gen-tz-world", cap=600, cat="Fuseaux horaires", region="WORLD", source=SRC_TZ_W)
+@gen(C, "gen-tz-world", cap=200, cat="Fuseaux horaires", region="WORLD", source=SRC_TZ_W)
 def tz_world(rng, d):
     return tz_q(rng, TZ_WORLD, "WORLD", SRC_TZ_W, "")
 
@@ -119,7 +119,7 @@ def siecle(n):
     return roman(n) + ("er" if n == 1 else "e")
 
 
-@gen(C, "gen-century-of-year", cap=300, cat="Histoire (repères)", region="WORLD", source="Convention : le siècle n commence à l'année 100(n−1)+1")
+@gen(C, "gen-century-of-year", cap=200, cat="Histoire (repères)", region="WORLD", source="Convention : le siècle n commence à l'année 100(n−1)+1")
 def century_of_year(rng, d):
     y = rng.choice([rng.randint(1, 2100), rng.randint(1000, 2100), rng.choice([1000, 1100, 1200, 1500, 1600, 1700, 1800, 1900, 2000, 1001, 1101, 1901, 2001, 1999, 1800])])
     c = (y - 1) // 100 + 1
@@ -127,7 +127,7 @@ def century_of_year(rng, d):
     return Draft(f"À quel siècle appartient l'année {y} ?", f"Le {siecle(c)} siècle", [f"Le {w} siècle" for w in wr], f"Le {siecle(c)} siècle va de l'an {(c - 1) * 100 + 1} à l'an {c * 100} : {y} en fait partie.", src="Convention : le siècle n commence à l'année 100(n−1)+1")
 
 
-@gen(C, "gen-century-span", cap=120, cat="Histoire (repères)", region="WORLD", source="Convention : le siècle n commence à l'année 100(n−1)+1")
+@gen(C, "gen-century-span", cap=20, cat="Histoire (repères)", region="WORLD", source="Convention : le siècle n commence à l'année 100(n−1)+1")
 def century_span(rng, d):
     c = rng.randint(2, 21)
     a, b = (c - 1) * 100 + 1, c * 100
@@ -149,12 +149,12 @@ FORMULAS = {"H₂O": ("eau", {"H": 2, "O": 1}), "CO₂": ("dioxyde de carbone", 
             "H₃PO₄": ("acide phosphorique", {"H": 3, "P": 1, "O": 4})}
 
 
-@gen(C, "gen-molar-mass", cap=200, cat="Sciences", region="WORLD", source=SRC_AT)
+@gen(C, "gen-molar-mass", cap=40, cat="Sciences", region="WORLD", source=SRC_AT)
 def molar_mass(rng, d):
     f = rng.choice(list(FORMULAS))
     name, comp = FORMULAS[f]
     m = sum(AT[k] * n for k, n in comp.items())
     mm = lambda x: fr(x, 1) + " g/mol"
     wr = [mm(m + 1), mm(m - 2), mm(m + 16), mm(m - 16 if m > 16 else m + 32), mm(m * 2), mm(m + 2)]
-    return Draft(f"Quelle est la masse molaire de {name}, de formule {f} (masses atomiques : " + ", ".join(f"{k} = {fr(AT[k], 1)}" for k in comp) + ") ?", mm(m), wr,
+    return Draft(f"Quelle est la masse molaire du composé {f} ({name}) (masses atomiques : " + ", ".join(f"{k} = {fr(AT[k], 1)}" for k in comp) + ") ?", mm(m), wr,
                  "M = " + " + ".join(f"{n} × {fr(AT[k], 1)}" for k, n in comp.items()) + f" = {fr(m, 1)} g/mol.", src=SRC_AT)

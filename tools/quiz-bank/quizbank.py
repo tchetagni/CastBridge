@@ -22,7 +22,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(HERE))
 
-from qb import core, pack, qc  # noqa: E402
+from qb import balance, core, pack, qc  # noqa: E402
 
 QUIZ = ROOT / "content" / "quiz"
 DIST = QUIZ / "dist"
@@ -52,8 +52,7 @@ def collect(strict=True):
         k = (q["track"], q["level"], q["field"], core.norm(q["question"]))
         if k not in seen:
             seen.add(k); uniq.append(q)
-    notes = len(qs) - len(uniq)
-    qs = uniq
+    qs = balance.balance(uniq)
     approvals = json.loads(APPROVALS.read_text(encoding="utf-8")) if APPROVALS.is_file() else {}
     for q in qs:
         a = approvals.get(q["id"])
@@ -96,6 +95,8 @@ def cmd_build(args):
             print("  ", i, res["errors"][i])
     version = args.version or (int(VERSION_FILE.read_text().strip()) if VERSION_FILE.is_file() else 1)
     catalog = pack.build_packs(good, DIST, version)
+    from qb import facts_engine
+    (DIST / "sources.json").write_text(json.dumps(facts_engine.sources_report(good), ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     (DIST / "coverage.json").write_text(json.dumps(cov, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     (DIST / "rejected.json").write_text(json.dumps({i: res["errors"][i] for i in sorted(res["dropped"])}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     total = sum(p["size"] for p in catalog["packs"])
