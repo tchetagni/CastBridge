@@ -83,7 +83,7 @@ object ParentalInbox {
         } catch (e: BtProtocol.Refused) {
             fail(when (e.code) {
                 BtProtocol.ERR_UNTRUSTED -> "La TV ne connaît plus ce téléphone : ajoutez-la à nouveau."
-                BtProtocol.ERR_MAGIC -> "Cette TV n'a pas la dernière version de CastBridge TV (rapports non disponibles)."
+                BtProtocol.ERR_MAGIC -> "Cette TV n'a pas la dernière version de CastBridge-TV (rapports non disponibles)."
                 else -> BtProtocol.describe(e.code)
             })
         } catch (e: IOException) { fail("TV injoignable (éteinte ou hors de portée) : nouvel essai plus tard.") }

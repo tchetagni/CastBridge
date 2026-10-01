@@ -411,7 +411,7 @@ class ParentalSyncTest {
 
 class ParentalAppsApiTest {
     private val rig = ReportRig()
-    private val installed = mutableListOf(InstalledApp("com.netflix.ninja", "Netflix", AppCategory.VIDEO), InstalledApp("com.android.tv.settings", "Réglages"), InstalledApp("castbridge.receiver", "CastBridge TV"))
+    private val installed = mutableListOf(InstalledApp("com.netflix.ninja", "Netflix", AppCategory.VIDEO), InstalledApp("com.android.tv.settings", "Réglages"), InstalledApp("castbridge.receiver", "CastBridge-TV"))
     private val api = ParentalApi(rig.engine, installed = { installed }, appEnv = { AppEnv("castbridge.receiver") }, supervisionSetup = { mapOf("usageGranted" to false) },
         reports = rig.reports, trustedPhones = { listOf(PHONE_A to "Maman", CHILD_PHONE to "Léa") })
 
@@ -535,5 +535,48 @@ class ParentalReportTextTest {
         assertTrue(t.startsWith("1 h 20 d'écran : YouTube 50 min, Jeu 20 min")); assertTrue(t.contains("1 blocage(s)")); assertTrue(t.contains("non autorisée"))
         assertNull(ReportText.notification(emptyList()))
         assertEquals("2 nouveaux rapports parentaux", ReportText.notification(listOf(alert, daily))!!.first)
+    }
+}
+
+/** The new routes through the real server: still behind the TV's own PIN, and the client of the phone parses them. */
+class ParentalWholeTvHttpTest {
+    private val dir = kotlin.io.path.createTempDirectory("parental-whole").toFile()
+    private val port = java.net.ServerSocket(0).use { it.localPort }
+    private val rig = ReportRig()
+    private val api = ParentalApi(rig.engine, installed = { listOf(InstalledApp("com.netflix.ninja", "Netflix", AppCategory.VIDEO)) },
+        supervisionSetup = { mapOf("usageGranted" to false) }, reports = rig.reports, trustedPhones = { listOf(PHONE_A to "Maman") })
+    private val server = castbridge.core.tv.ReceiverServer(dir, FakePlayer(), port, pin = "123456", extension = api).apply { start(5000, false) }
+    private val base = "http://127.0.0.1:$port"
+
+    @AfterTest fun tearDown() { server.stop(); dir.deleteRecursively() }
+
+    private fun code(method: String, path: String, tvPin: String?): Int {
+        val c = java.net.URI(base + path).toURL().openConnection() as java.net.HttpURLConnection
+        c.requestMethod = method; tvPin?.let { c.setRequestProperty("X-CB-Pin", it) }
+        return c.responseCode
+    }
+
+    @Test fun supervisionRouteIsBehindTheTvPin() {
+        assertEquals(401, code("GET", "/api/parental/supervision", null))
+        assertEquals(200, code("GET", "/api/parental/supervision", "123456"))
+    }
+
+    @Test fun phoneClientUsesTheNewRoutes() {
+        val c = ParentalClient(base, "123456")
+        @Suppress("UNCHECKED_CAST") assertEquals("unauthorized", (c.supervision()["supervision"] as Map<String, Any?>)["state"])
+        val apps = c.apps("4821")
+        assertEquals("Netflix", apps.apps.single().label)
+        val saved = c.saveApps("4821", apps.settings.copy(supervise = true, rules = mapOf("c1" to listOf(AppRule("com.netflix.ninja", AppState.LIMITED, 30)))))
+        assertEquals(30, saved.rule("c1", "com.netflix.ninja")!!.limitMin)
+        assertEquals(409, assertFailsWith<ParentalError> { c.saveApps("4821", apps.settings) }.code, "stale rev")
+        assertEquals(403, assertFailsWith<ParentalError> { c.apps("0001") }.code)
+        val rl = c.reportsConfig("4821")
+        assertEquals(listOf("Maman"), rl.phones.map { it.name }); assertFalse(rl.phones[0].designated)
+        val after = c.designate("4821", rl.phones[0].id)
+        assertTrue(after.phones[0].designated)
+        assertTrue(rig.recipients.isRecipient(PHONE_A))
+        assertEquals(1, c.reportNow("4821").coerceAtLeast(0).let { if (it >= 1) 1 else 0 })
+        assertFalse(c.removeRecipient("4821", rl.phones[0].id).phones[0].designated)
+        assertEquals(0, rig.outbox.count())
     }
 }

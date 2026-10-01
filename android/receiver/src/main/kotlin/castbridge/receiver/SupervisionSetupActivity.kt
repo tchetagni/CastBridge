@@ -65,13 +65,13 @@ class SupervisionSetupActivity : Activity() {
         content.removeAllViews()
         val e = ParentalHub.engine
         val on = e.appSettings().supervise
-        note("Sans cette surveillance, le contrôle parental ne voit que ce qui se passe DANS CastBridge TV. Avec elle, les autres applications (YouTube, Netflix, navigateur, jeux…) sont comptées dans le temps d'écran et peuvent être bloquées. Rien n'est envoyé au serveur.")
+        note("Sans cette surveillance, le contrôle parental ne voit que ce qui se passe DANS CastBridge-TV. Avec elle, les autres applications (YouTube, Netflix, navigateur, jeux…) sont comptées dans le temps d'écran et peuvent être bloquées. Rien n'est envoyé au serveur.")
         step(if (on) "Surveillance : activée — OK pour désactiver" else "Surveillance : désactivée — OK pour activer",
             "Demande le code parental. Elle ne protège que lorsque l'état ci-dessus indique « active ».") { toggle(on) }
 
         val usage = setup["usageGranted"] == true
         step("1. Accès aux données d'utilisation : " + if (usage) "accordé" else "à accorder",
-            "Réglages > Applications > Accès spécial > Accès aux données d'utilisation > CastBridge TV > Autoriser.") { openUsage(setup["usageSettingsExists"] == true) }
+            "Réglages > Applications > Accès spécial > Accès aux données d'utilisation > CastBridge-TV > Autoriser.") { openUsage(setup["usageSettingsExists"] == true) }
         if (!usage) { note("Si cet écran n'existe pas sur votre TV, branchez-la en adb et tapez :"); adb(setup["adbUsage"] as? String ?: "") }
 
         val overlay = setup["overlayGranted"] == true

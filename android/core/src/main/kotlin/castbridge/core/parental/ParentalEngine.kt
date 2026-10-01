@@ -274,8 +274,8 @@ class ParentalEngine(
 
     /**
      * Adds [dtMs] of foreground time on [pkg] to the day (per app, and to the profile's daily quota as [UseKind.APPS]) when the app is
-     * allowed, warns 5 minutes before the end, and says when to stop. CastBridge TV itself and the launcher are never counted here
-     * (CastBridge TV has its own meter: [tick]).
+     * allowed, warns 5 minutes before the end, and says when to stop. CastBridge-TV itself and the launcher are never counted here
+     * (CastBridge-TV has its own meter: [tick]).
      */
     @Synchronized fun appTick(pkg: String, label: String, dtMs: Long, env: AppEnv): TickResult {
         val p = activeProfile() ?: return TickResult()

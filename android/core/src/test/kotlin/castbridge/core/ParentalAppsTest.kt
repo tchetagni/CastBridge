@@ -133,7 +133,7 @@ class ParentalAppEngineTest {
         // CastBridge-TV playing counts in the same quota
         e.tick(UseKind.PLAY, 4 * 60_000L)
         val r = e.appTick("a.video", "Vidéo", 60_000, ENV)
-        assertNotNull(r.blockReason, "30 min over apps + CastBridge TV reached")
+        assertNotNull(r.blockReason, "30 min over apps + CastBridge-TV reached")
         assertEquals("limit", e.checkApp("a.video", ENV).code)
         @Suppress("UNCHECKED_CAST") val prof = ((e.report(1)["days"] as List<Map<String, Any?>>)[0]["profiles"] as List<Map<String, Any?>>)[0]
         assertEquals(26L, prof["apps"]); assertEquals(4L, prof["play"])
@@ -150,7 +150,7 @@ class ParentalAppEngineTest {
     @Test fun essentialsAreNeverCounted() {
         val e = setup()
         e.appTick("com.acme.launcher", "Accueil", 60_000, ENV)
-        e.appTick("castbridge.receiver", "CastBridge TV", 60_000, ENV)
+        e.appTick("castbridge.receiver", "CastBridge-TV", 60_000, ENV)
         assertEquals(0L, e.usedMs(e.config().active()!!))
     }
 

@@ -2,7 +2,7 @@ package castbridge.core.parental
 
 import castbridge.core.net.JsonLite
 
-/** What a parent decides for an app of the TV other than CastBridge TV (docs/PARENTAL.md, « Surveillance de toute la TV »). */
+/** What a parent decides for an app of the TV other than CastBridge-TV (docs/PARENTAL.md, « Surveillance de toute la TV »). */
 enum class AppState(val code: String, val label: String) {
     ALLOWED("allow", "Autorisée"), BLOCKED("block", "Bloquée"), LIMITED("limit", "Durée limitée"), PIN("pin", "Code parental requis");
     companion object { fun of(code: String?) = values().firstOrNull { it.code == code } }
@@ -50,7 +50,7 @@ data class NewApp(val pkg: String, val label: String, val at: Long)
  */
 data class AppSettings(
     val rev: Int = 0,
-    /** The parent switched on the supervision of the whole TV. Off = nothing outside CastBridge TV is looked at. */
+    /** The parent switched on the supervision of the whole TV. Off = nothing outside CastBridge-TV is looked at. */
     val supervise: Boolean = false,
     val newApp: NewAppDefault = NewAppDefault.BLOCK,
     /** profile id -> rules. */
@@ -132,7 +132,7 @@ data class InstalledApp(val pkg: String, val label: String, val category: AppCat
 
 /**
  * What the TV knows about the system, given by the Android side: it keeps the pure rules free of PackageManager.
- * [neverBlock]: CastBridge TV itself, the launcher(s) and the system UI. [settingsPkgs]: the Settings and the package installer,
+ * [neverBlock]: CastBridge-TV itself, the launcher(s) and the system UI. [settingsPkgs]: the Settings and the package installer,
  * blocked only through the « Réglages » category of the profile.
  */
 data class AppEnv(val selfPkg: String, val neverBlock: Set<String> = emptySet(), val settingsPkgs: Set<String> = emptySet()) {

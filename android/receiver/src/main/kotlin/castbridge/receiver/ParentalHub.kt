@@ -319,7 +319,7 @@ object ParentalHub {
         runCatching { superviseTick(e, now) }
         if (e.activeProfile() == null) return
         val t = top
-        // another app in front: it is counted by [accountApp]; CastBridge TV's own meter must not count it a second time
+        // another app in front: it is counted by [accountApp]; CastBridge-TV's own meter must not count it a second time
         val elsewhere = e.supervising() && fgPkg != null && fgPkg != app?.packageName
         val playing = !elsewhere && TvService.running?.playerBridge?.state()?.state == "playing"
         val kind = if (elsewhere) null else when {
@@ -411,7 +411,7 @@ object ParentalHub {
         }
     }
 
-    /** Counts the time since the last call on the app in front (if any, and if it is not CastBridge TV or the launcher). */
+    /** Counts the time since the last call on the app in front (if any, and if it is not CastBridge-TV or the launcher). */
     private fun accountApp(now: Long) {
         val e = engineOrNull ?: return
         val c = app ?: return

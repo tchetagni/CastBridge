@@ -41,7 +41,7 @@ private fun SupervisionBlock(client: ParentalClient, onMsg: (String?) -> Unit) {
         color = if (bad) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface)
     if (bad) Text("⚠ Les autres applications de la TV ne sont PAS contrôlées en ce moment. Sur la TV : Contrôle parental > Surveillance de toute la TV, et suivez les étapes.",
         style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
-    if (state == "off") Text("Désactivée : seul ce qui se passe dans CastBridge TV est contrôlé.", style = MaterialTheme.typography.bodySmall)
+    if (state == "off") Text("Désactivée : seul ce qui se passe dans CastBridge-TV est contrôlé.", style = MaterialTheme.typography.bodySmall)
     if (bad && setup != null) {
         (setup["adbUsage"] as? String)?.takeIf { it.isNotBlank() && setup["usageGranted"] != true }?.let { Text("Sans écran de réglages sur la TV, en adb : $it", style = MaterialTheme.typography.bodySmall) }
     }
@@ -88,7 +88,7 @@ private fun AppsBlock(client: ParentalClient, profiles: List<ChildProfile>, pin:
         val r = ruleOf(a.pkg)
         Column(Modifier.fillMaxWidth()) {
             Text(a.label + if (a.isNew) "  · NOUVELLE" else "", style = MaterialTheme.typography.bodyMedium)
-            if (a.never) Text("Toujours autorisée (CastBridge TV, accueil ou système).", style = MaterialTheme.typography.bodySmall)
+            if (a.never) Text("Toujours autorisée (CastBridge-TV, accueil ou système).", style = MaterialTheme.typography.bodySmall)
             else {
                 Picker(a.category.label, states.map { it.label } + "Aucune règle", r?.state?.ordinal ?: states.size) { i ->
                     if (i >= states.size) setRule(a.pkg, null)
@@ -205,7 +205,7 @@ private fun ReportDetail(r: StoredReport) {
     @Suppress("UNCHECKED_CAST") val apps = (r.body[if (r.kind == "weekly") "topApps" else "apps"] as? List<Map<String, Any?>>).orEmpty()
     apps.forEach { a -> Text("• ${a["label"]} : ${ReportText.minutes((a["min"] as? Number)?.toLong() ?: 0)}", style = MaterialTheme.typography.bodySmall) }
     @Suppress("UNCHECKED_CAST") (r.body["kinds"] as? Map<String, Any?>)?.let { k ->
-        Text("Dans CastBridge TV : lecture ${k["play"]} min · jeux ${k["games"]} min · téléchargements ${k["downloads"]} min · autres applications ${k["apps"]} min", style = MaterialTheme.typography.bodySmall)
+        Text("Dans CastBridge-TV : lecture ${k["play"]} min · jeux ${k["games"]} min · téléchargements ${k["downloads"]} min · autres applications ${k["apps"]} min", style = MaterialTheme.typography.bodySmall)
     }
     @Suppress("UNCHECKED_CAST") (r.body["days"] as? List<Map<String, Any?>>)?.forEach { d -> Text("${d["day"]} : ${ReportText.minutes((d["totalMin"] as? Number)?.toLong() ?: 0)}", style = MaterialTheme.typography.bodySmall) }
     @Suppress("UNCHECKED_CAST") (r.body["blocked"] as? List<Map<String, Any?>>).orEmpty().forEach { b -> Text("⛔ ${b["what"]} — ${b["why"]}", style = MaterialTheme.typography.bodySmall) }

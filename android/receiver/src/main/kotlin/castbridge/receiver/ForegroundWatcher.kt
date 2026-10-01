@@ -52,7 +52,7 @@ object ForegroundWatcher {
 
     fun usageExists(ctx: Context): Boolean = ctx.getSystemService(Context.USAGE_STATS_SERVICE) != null
 
-    /** The special access « Accès aux données d'utilisation » is granted to CastBridge TV. */
+    /** The special access « Accès aux données d'utilisation » is granted to CastBridge-TV. */
     @Suppress("DEPRECATION")
     fun usageGranted(ctx: Context): Boolean = runCatching {
         val ops = ctx.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager

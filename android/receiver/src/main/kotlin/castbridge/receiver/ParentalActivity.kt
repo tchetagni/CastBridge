@@ -402,7 +402,7 @@ class ParentalActivity : Activity() {
         e.syncInstalled(apps)                                   // the first time is the baseline: nothing is « nouvelle » on the setup day
         val s = e.appSettings()
         val env = AppCatalog.env(this@ParentalActivity)
-        note("CastBridge TV (Apprendre inclus), l'accueil de la TV et le système ne sont jamais bloquables : on peut toujours revenir à l'accueil. Les Réglages suivent la catégorie « Réglages » du profil.")
+        note("CastBridge-TV (Apprendre inclus), l'accueil de la TV et le système ne sont jamais bloquables : on peut toujours revenir à l'accueil. Les Réglages suivent la catégorie « Réglages » du profil.")
         if (e.config().profiles.size > 1) row("Profil : ${p.name}", "OK pour changer de profil") {
             val ps = e.config().profiles
             ParentalUi.choose(this@ParentalActivity, "Règles de quel profil ?", ps.map { it.name }, ps.indexOfFirst { it.id == profileId }) { i -> stack.removeAt(stack.size - 1); push(appsPage(ps[i].id)) }
@@ -418,7 +418,7 @@ class ParentalActivity : Activity() {
         for (a in apps) {
             val never = AppRules.neverBlockable(a.pkg, env)
             val title = a.label + if (s.isNew(a.pkg)) "  · NOUVELLE" else ""
-            if (never) row(title, "Toujours autorisée (CastBridge TV, accueil ou système)") { ParentalUi.info(this@ParentalActivity, a.label, "Cette application ne peut pas être bloquée : sans elle, la TV n'aurait plus d'accueil.") }
+            if (never) row(title, "Toujours autorisée (CastBridge-TV, accueil ou système)") { ParentalUi.info(this@ParentalActivity, a.label, "Cette application ne peut pas être bloquée : sans elle, la TV n'aurait plus d'accueil.") }
             else row(title, stateText(p, s, a)) { editApp(p, a) }
         }
     }

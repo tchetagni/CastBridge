@@ -53,7 +53,7 @@ object AppCatalog {
     private fun pkgsOf(ctx: Context, i: Intent): Set<String> =
         runCatching { ctx.packageManager.queryIntentActivities(i, 0).mapNotNull { it.activityInfo?.packageName }.toSet() }.getOrDefault(emptySet())
 
-    /** CastBridge TV, the home launcher(s) and the system UI are never blockable; Settings and the package installer follow « Réglages ». */
+    /** CastBridge-TV, the home launcher(s) and the system UI are never blockable; Settings and the package installer follow « Réglages ». */
     fun env(ctx: Context): AppEnv {
         val t = System.currentTimeMillis()
         envCache?.let { if (t - envAt < ENV_TTL_MS) return it }
