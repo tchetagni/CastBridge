@@ -285,6 +285,11 @@ class ParentalReports(
     private val now: () -> Long = System::currentTimeMillis,
     private val zone: () -> ZoneId = { ZoneId.systemDefault() },
 ) {
+    /**
+     * Additive fields of the daily report for one profile (the TV's own journal "events" and the « Apprendre » digest "learn", see
+     * [castbridge.core.parental.tab.TvJournal]); the argument is the oldest time of the events to carry. Set by the TV glue; none by default.
+     */
+    @Volatile var extras: (ChildProfile, Long) -> Map<String, Any?> = { _, _ -> emptyMap() }
     private val lastAlert = HashMap<String, Long>()
     private val sentAlerts = ArrayDeque<Long>()
 
@@ -354,7 +359,7 @@ class ParentalReports(
         var n = 0
         for (p in engine.config().profiles) {
             if (!force && !cfg.options(p.id).daily) continue
-            enqueueAll("daily", ReportBuilder.daily(rep, tvName(), d, p, midnight, now() - 24 * 3600_000L)); n++
+            enqueueAll("daily", ReportBuilder.daily(rep, tvName(), d, p, midnight, now() - 24 * 3600_000L) + runCatching { extras(p, now() - EXTRAS_WINDOW_MS) }.getOrDefault(emptyMap())); n++
         }
         return n
     }
@@ -379,6 +384,8 @@ class ParentalReports(
     companion object {
         const val ALERT_GAP_MS = 10 * 60_000L
         const val MAX_ALERTS_PER_HOUR = 12
+        /** The daily report also carries the journal of the last 26 h: what happened after the previous summary is not lost (the phone drops duplicates by id). */
+        const val EXTRAS_WINDOW_MS = 26 * 3600_000L
     }
 }
 

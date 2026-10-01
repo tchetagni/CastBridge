@@ -71,7 +71,7 @@ object CsvExport {
     const val SEP = ';'
     val HEADER = listOf("date", "heure", "tv", "profil", "type", "titre", "duree_min", "score", "qualite", "detail")
 
-    fun build(events: List<ActivityEvent>, zone: ZoneId, profileName: (String?) -> String, maxRows: Int = 50_000): String {
+    fun build(events: List<ActivityEvent>, zone: ZoneId, maxRows: Int = 50_000, profileName: (String?) -> String): String {
         val sb = StringBuilder(HEADER.joinToString(SEP.toString())).append("\r\n")
         val df = DateTimeFormatter.ofPattern("yyyy-MM-dd"); val tf = DateTimeFormatter.ofPattern("HH:mm:ss")
         for (e in events.sortedBy { it.ts }.take(maxRows)) {

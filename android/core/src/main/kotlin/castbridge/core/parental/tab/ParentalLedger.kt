@@ -205,7 +205,7 @@ class ParentalLedger(private val persistence: InboxPersistence, var retention: R
         if (facts.size > retention.maxFacts) facts.values.sortedBy { it.day }.take(facts.size - retention.maxFacts).forEach { facts.remove(it.key) }
     }
 
-    fun setRetention(r: Retention) { synchronized(this) { retention = r; prune(); dirty = true; save() } }
+    fun applyRetention(r: Retention) { synchronized(this) { retention = r; prune(); dirty = true; save() } }
 
     /** Purge of one profile (events, days, digest) or of everything ([profileId] null). The caller asked for the PIN. What was purged is not absorbed again. */
     @Synchronized fun purge(profileId: String?) {

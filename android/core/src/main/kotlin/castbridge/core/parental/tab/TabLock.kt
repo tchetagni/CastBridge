@@ -8,22 +8,23 @@ package castbridge.core.parental.tab
 class TabLock(private val timeoutMs: Long = DEFAULT_TIMEOUT_MS) {
     private var unlocked = false
     private var leftAt = 0L
+    private var away = false
 
-    @Synchronized fun unlock() { unlocked = true; leftAt = 0 }
-    @Synchronized fun lock() { unlocked = false; leftAt = 0 }
+    @Synchronized fun unlock() { unlocked = true; away = false }
+    @Synchronized fun lock() { unlocked = false; away = false }
 
     /** The app went to the background (or the screen turned off). */
-    @Synchronized fun onBackground(now: Long) { if (unlocked && leftAt == 0L) leftAt = now }
+    @Synchronized fun onBackground(now: Long) { if (unlocked && !away) { away = true; leftAt = now } }
 
     /** The app came back: locks if it stayed away too long. Returns whether the tab is open. */
     @Synchronized fun onForeground(now: Long): Boolean {
-        if (unlocked && leftAt != 0L && now - leftAt >= timeoutMs) unlocked = false
-        leftAt = 0
+        if (unlocked && away && now - leftAt >= timeoutMs) unlocked = false
+        away = false
         return unlocked
     }
 
     @Synchronized fun isOpen(now: Long): Boolean {
-        if (unlocked && leftAt != 0L && now - leftAt >= timeoutMs) unlocked = false
+        if (unlocked && away && now - leftAt >= timeoutMs) unlocked = false
         return unlocked
     }
 
