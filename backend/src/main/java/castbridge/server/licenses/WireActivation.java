@@ -16,7 +16,16 @@ public final class WireActivation {
     public static final String PREFIX = Envelope.PREFIX;
     public static final String TRIAL_LICENSE = "trial";
     public static final long DAY_MS = 86_400_000L;
-    public static final int MAX_WINDOW_DAYS = 366;
+    /** An activation can be installed during 48 h from its creation (docs/ACTIVATION-FORMAT.md § Durées), for everybody. */
+    public static final long HOUR_MS = 3_600_000L;
+    public static final int MAX_WINDOW_HOURS = 48;
+    /** Bundle of "everything": bought, a permanent full licence; only a key holding ISSUE_UNLIMITED may sign such a purchase (never the server's). */
+    public static final String ALL_BUNDLE = "tout";
+
+    public static boolean isPermanent(String rightLine) {
+        String[] f = rightLine.split("\\|", -1);
+        return f.length > 2 && f[0].equals("purchase") && java.util.Arrays.asList(f[2].split(",")).contains(ALL_BUNDLE);
+    }
     public static final long MAX_OPEN_ALL_MS = 30 * DAY_MS;
     public static final Pattern ID = Envelope.ID;
     public static final Pattern HEX = Envelope.HEX;

@@ -19,7 +19,7 @@ import java.util.TreeSet;
  * end-to-end tests (an activation issued by the server must be accepted by this verifier AND by the Kotlin core, see tools/activation/server-issued.json).
  */
 public final class EnvelopeVerifier {
-    public static final long MAX_WINDOW_MS = 366L * WireActivation.DAY_MS;
+    public static final long MAX_WINDOW_MS = WireActivation.MAX_WINDOW_HOURS * WireActivation.HOUR_MS;
     public static final long SKEW_MS = WireActivation.DAY_MS;
 
     /** A public key the device accepts, with its scopes. */
@@ -131,6 +131,7 @@ public final class EnvelopeVerifier {
         List<String[]> openAll = new ArrayList<>();
         for (String r : a.rights()) if (r.startsWith("openall|")) openAll.add(r.split("\\|", -1));
         if (!openAll.isEmpty() && !key.allows(SignerScope.COMMAND_OPEN_ALL)) return Result.no(Reason.KEY_NOT_ALLOWED);
+        if (a.rights().stream().anyMatch(WireActivation::isPermanent) && !key.allows(SignerScope.ISSUE_UNLIMITED)) return Result.no(Reason.KEY_NOT_ALLOWED);
         if (trial && !a.rights().isEmpty()) return Result.no(Reason.BAD_RIGHTS);
         for (String[] r : openAll) {
             long d = Long.parseLong(r[3]) - Long.parseLong(r[2]);

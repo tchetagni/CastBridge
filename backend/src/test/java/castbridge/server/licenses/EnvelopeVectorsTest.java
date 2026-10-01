@@ -93,7 +93,7 @@ class EnvelopeVectorsTest {
                 assertThat(r.suspect()).as(id + " suspect").isEqualTo(e.get("suspect").asBoolean());
             }
         }
-        assertThat(n).isEqualTo(29);
+        assertThat(n).isEqualTo(35);
     }
 
     @Test

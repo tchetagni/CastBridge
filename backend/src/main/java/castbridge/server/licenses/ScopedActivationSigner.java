@@ -45,6 +45,7 @@ public final class ScopedActivationSigner implements ActivationSigner {
     public void check(ActivationRequest r) {
         boolean openAll = r.kind() == IssueKind.OPEN_ALL || r.rights().stream().anyMatch(x -> x.startsWith("openall|"));
         if (openAll && !scopes.contains(SignerScope.COMMAND_OPEN_ALL)) throw openAllRefused();
+        if (r.rights().stream().anyMatch(WireActivation::isPermanent) && !scopes.contains(SignerScope.ISSUE_UNLIMITED)) throw permanentRefused();
         if (r.kind() == IssueKind.TRANSFER && !scopes.contains(SignerScope.TRANSFER)) throw transferRefused();
         // a production activation needs ISSUE_PRODUCTION or REACTIVATE (the format: a REACTIVATE-only key re-issues an existing seat, the registry replay refuses it a new one)
         if (r.kind() == IssueKind.PRODUCTION && scopes.contains(SignerScope.REACTIVATE)) return;
@@ -53,6 +54,10 @@ public final class ScopedActivationSigner implements ActivationSigner {
 
     public static ApiException openAllRefused() {
         return new ApiException(HttpStatus.FORBIDDEN, "La clé du serveur ne peut pas tout ouvrir : seul le propriétaire le fait, avec ses outils hors serveur");
+    }
+
+    public static ApiException permanentRefused() {
+        return new ApiException(HttpStatus.FORBIDDEN, "Le serveur ne délivre jamais de licence permanente : seul le propriétaire le fait, avec ses outils hors serveur");
     }
 
     public static ApiException transferRefused() {

@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  *   <li>the scope of the key is enforced before anything is written: no transfer, no "tout ouvert" (403);</li>
  *   <li>the device is identified by its REQUEST (code + k + factor fingerprints, never raw values); the same hardware (k of n factors) keeps its
  *       seat and consumes nothing, a new hardware takes a seat under the licence lock; none free = refusal (transfer needed);</li>
- *   <li>a re-issue while the previous activation can still be installed gives back THE SAME token (idempotence: the nonce and the dates come from the
+ *   <li>a re-issue while the previous activation can still be installed (the 48 h window of its creation) gives back THE SAME token (idempotence: the nonce and the dates come from the
  *       stored row, Ed25519 is deterministic); otherwise a fresh one with a new window;</li>
  *   <li>nothing is issued for a suspended, revoked or expired licence; a licence inside its grace period only re-issues;</li>
  *   <li>the activation text is returned once and never stored nor logged: only its SHA-256 fingerprint is kept; each issuance is also written to the
@@ -57,9 +57,9 @@ public class ActivationService {
      * @param subject       tv (default) or phone
      * @param kind          optional; anything but production/trial (transfer, open_all…) is refused by the scope of the server key
      * @param productIds    optional; "*" = "tout ouvert", refused
-     * @param windowDays    installation window, default castbridge.licenses.window-days
+     * @param windowHours   installation window in hours (1 to 48), default castbridge.licenses.window-hours (48)
      */
-    public record IssueRequest(String licenseId, String subject, String deviceRequest, String kind, List<String> productIds, Integer windowDays) {}
+    public record IssueRequest(String licenseId, String subject, String deviceRequest, String kind, List<String> productIds, Integer windowHours) {}
 
     public record Activation(String text, String kid, String nonce, String fingerprint, String kind, String subject, Instant issuedAt, Instant notAfter, String licenseId,
                              String seatId, String deviceCode, boolean reused, boolean newSeat, String format) {}
@@ -95,10 +95,10 @@ public class ActivationService {
         String subject = req.subject() == null || req.subject().isBlank() ? "tv" : req.subject().trim().toLowerCase(Locale.ROOT);
         if (!subject.equals("tv") && !subject.equals("phone")) throw ApiException.badRequest("Type d'appareil : tv ou phone");
         var device = DeviceIdentity.parseRequest(req.deviceRequest());
-        return doIssue(actor, licenseId, subject, device, req.kind(), req.productIds(), req.windowDays(), channel, reissueOnly);
+        return doIssue(actor, licenseId, subject, device, req.kind(), req.productIds(), req.windowHours(), channel, reissueOnly);
     }
 
-    private Activation doIssue(Actor actor, String licenseId, String subject, DeviceIdentity.Request device, String askedKind, List<String> productIds, Integer windowDays, String channel,
+    private Activation doIssue(Actor actor, String licenseId, String subject, DeviceIdentity.Request device, String askedKind, List<String> productIds, Integer windowHours, String channel,
                                boolean reissueOnly) {
         IssueKind asked = parseKind(askedKind);
         // 1. scope first: a forbidden request writes nothing (not even a seat)
@@ -124,7 +124,7 @@ public class ActivationService {
         IssueKind kind = trial ? IssueKind.TRIAL : IssueKind.PRODUCTION;
         if (asked != null && asked != kind) throw ApiException.badRequest(trial ? "Une licence d'essai ne délivre que des clés d'essai" : "Une licence payante ne délivre que des activations de production");
         List<String> rights = trial ? List.of() : rightsOf(l, nowI, productIds);
-        int window = windowDays == null ? props.windowDays() : Validate.range(windowDays, "Fenêtre d'installation (jours)", 1, WireActivation.MAX_WINDOW_DAYS);
+        int window = windowHours == null ? props.windowHours() : Validate.range(windowHours, "Fenêtre d'installation (heures)", 1, WireActivation.MAX_WINDOW_HOURS);
 
         // the seat the activation is for (the id of a new seat is deterministic)
         String seatId = existing != null ? existing.seatId() : WireActivation.defaultSeat(l.wireId(), device.factors());
@@ -135,9 +135,9 @@ public class ActivationService {
         List<Prior> prior = jdbc.query("SELECT issued_at, not_before, not_after, nonce, token_fingerprint FROM lic_issuance WHERE license_pk = ? AND idem_key = ? ORDER BY id DESC LIMIT 1",
                 (rs, i) -> new Prior(rs.getTimestamp("issued_at").toInstant(), rs.getTimestamp("not_before").toInstant(), rs.getTimestamp("not_after").toInstant(), rs.getString("nonce"),
                         rs.getString("token_fingerprint")), l.id(), idem);
-        if (existing != null && !prior.isEmpty() && prior.get(0).notAfter().isAfter(nowI.plusMillis(DAY))) {
+        if (existing != null && !prior.isEmpty() && prior.get(0).notAfter().isAfter(nowI.plusMillis(WireActivation.HOUR_MS))) {
             Prior p = prior.get(0);
-            int w = (int) ((p.notAfter().toEpochMilli() - p.notBefore().toEpochMilli()) / DAY);
+            int w = (int) ((p.notAfter().toEpochMilli() - p.notBefore().toEpochMilli()) / WireActivation.HOUR_MS);
             SignedActivation s = signer.sign(new ActivationRequest(kind, subject, l.wireId(), seatId, device, rights, p.issuedAt().toEpochMilli(), p.notBefore().toEpochMilli(), w, p.nonce()));
             if (!s.fingerprint().equals(p.fingerprint())) {
                 throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "La réémission ne correspond pas à l'activation d'origine (clé changée) : contactez le propriétaire");

@@ -113,7 +113,7 @@ class WireFormatVectorsTest {
                 var device = DeviceIdentity.parseRequest(requestText(code, fp(dev)));
                 IssueKind kind = r.get("kind").asText().equals("trial") ? IssueKind.TRIAL : IssueKind.PRODUCTION;
                 var req = new ActivationSigner.ActivationRequest(kind, r.get("subject").asText(), r.get("license").asText(), r.hasNonNull("seat") ? r.get("seat").asText() : null, device, rights,
-                        r.get("issuedAt").asLong(), r.get("notBefore").asLong(), r.get("windowDays").asInt(), r.get("nonce").asText());
+                        r.get("issuedAt").asLong(), r.get("notBefore").asLong(), r.get("windowHours").asInt(), r.get("nonce").asText());
                 var out = signer.sign(req);
                 assertThat(refused).as(id + " devait être refusé").isFalse();
                 assertThat(out.text()).as(id).isEqualTo(c.get("expect").get("token").asText());
@@ -126,7 +126,7 @@ class WireFormatVectorsTest {
                 assertThat(refused).as(id + " refus inattendu : " + e.getMessage()).isTrue();
             }
         }
-        assertThat(n).isEqualTo(9);
+        assertThat(n).isEqualTo(10);
     }
 
     @Test

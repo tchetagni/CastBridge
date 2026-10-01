@@ -229,25 +229,25 @@ public class LicenseWebController {
         m.addAttribute("licenseId", licenseId);
         m.addAttribute("format", activations.format());
         m.addAttribute("keyLoaded", keyring.present());
-        m.addAttribute("defaultWindow", props.windowDays());
+        m.addAttribute("defaultWindow", props.windowHours());
         m.addAttribute("sub", "issue");
         return "admin/lic-issue";
     }
 
     @PostMapping("/admin/licenses/issue")
     public String issue(Authentication auth, @RequestParam String licenseId, @RequestParam(defaultValue = "tv") String subject, @RequestParam String deviceRequest,
-                        @RequestParam(required = false) Integer windowDays, @RequestParam(required = false) String reissue, Model m) {
+                        @RequestParam(required = false) Integer windowHours, @RequestParam(required = false) String reissue, Model m) {
         Actor a = read(auth, Role.Permission.REISSUE, m);
         m.addAttribute("licenseId", licenseId);
         m.addAttribute("subject", subject);
         m.addAttribute("deviceRequest", deviceRequest);
         m.addAttribute("format", activations.format());
         m.addAttribute("keyLoaded", keyring.present());
-        m.addAttribute("defaultWindow", props.windowDays());
+        m.addAttribute("defaultWindow", props.windowHours());
         m.addAttribute("sub", "issue");
         try {
             var act = "on".equals(reissue) ? activations.reissue(a, Validate.licenseId(licenseId), subject, deviceRequest, "server-web")
-                    : activations.issue(a, new ActivationService.IssueRequest(licenseId, subject, deviceRequest, null, null, windowDays), "server-web");
+                    : activations.issue(a, new ActivationService.IssueRequest(licenseId, subject, deviceRequest, null, null, windowHours), "server-web");
             m.addAttribute("act", act);
             m.addAttribute("qr", QrSvg.dataUri(act.text()));
         } catch (ApiException e) {

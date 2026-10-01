@@ -79,7 +79,7 @@ class LicenseLifecycleTest extends LicenseTestBase {
         assertThat(f.seat()).isEqualTo(seatOf(l.licenseId(), d)).hasSize(16);
         assertThat(f.issuedAt()).isLessThanOrEqualTo(System.currentTimeMillis() + 1500);
         assertThat(f.notBefore()).isLessThanOrEqualTo(f.issuedAt());
-        assertThat(f.notAfter() - f.notBefore()).isEqualTo(30 * 86_400_000L); // default installation window
+        assertThat(f.notAfter() - f.notBefore()).isEqualTo(48 * 3_600_000L); // default installation window: 48 h from the creation
         assertThat(f.rights()).hasSize(2).anyMatch(r -> r.startsWith("purchase|p-test|classe-test|"))
                 .anyMatch(r -> r.startsWith("subscription|abo-tout|tout|") && r.endsWith("|" + 10 * 86_400_000L + "|0"));
         String sub = f.rights().stream().filter(r -> r.startsWith("subscription|")).findFirst().orElseThrow();
@@ -97,10 +97,10 @@ class LicenseLifecycleTest extends LicenseTestBase {
     void windowAndRightsRules() {
         var l = license(5);
         Dev d = dev();
-        var a = activations.issue(OWNER, new ActivationService.IssueRequest(l.licenseId(), "tv", d.text(), null, null, 90), "server-api");
-        assertThat(decode(a).notAfter() - decode(a).notBefore()).isEqualTo(90 * 86_400_000L);
-        assertThatThrownBy(() -> activations.issue(OWNER, new ActivationService.IssueRequest(l.licenseId(), "tv", dev().text(), null, null, 400), "server-api")).hasMessageContaining("1 à 366");
-        assertThatThrownBy(() -> activations.issue(OWNER, new ActivationService.IssueRequest(l.licenseId(), "tv", dev().text(), null, null, 0), "server-api")).hasMessageContaining("1 à 366");
+        var a = activations.issue(OWNER, new ActivationService.IssueRequest(l.licenseId(), "tv", d.text(), null, null, 24), "server-api");
+        assertThat(decode(a).notAfter() - decode(a).notBefore()).isEqualTo(24 * 3_600_000L);
+        assertThatThrownBy(() -> activations.issue(OWNER, new ActivationService.IssueRequest(l.licenseId(), "tv", dev().text(), null, null, 49), "server-api")).hasMessageContaining("1 à 48");
+        assertThatThrownBy(() -> activations.issue(OWNER, new ActivationService.IssueRequest(l.licenseId(), "tv", dev().text(), null, null, 0), "server-api")).hasMessageContaining("1 à 48");
         // a licence without any product has nothing to grant
         var empty = licenses.create(OWNER, new LicenseService.NewLicense(null, client().id(), "PAID", 1, null, null, null, null, null));
         assertThatThrownBy(() -> issue(empty.licenseId(), dev())).hasMessageContaining("aucun droit");

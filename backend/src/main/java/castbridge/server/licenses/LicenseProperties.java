@@ -19,7 +19,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @param defaultTransferCap transfers allowed per licence and year, for a new licence
  * @param trustedKeys      public keys of the offline tools trusted to sign registry events: "name:base64(raw 32-byte public key):SCOPE+SCOPE"
  *                         (scopes of docs/ACTIVATION-FORMAT.md § 2; an entry without explicit scopes is ignored)
- * @param windowDays       default installation window of an activation, in days (1 to 366)
+ * @param windowHours      installation window of an activation issued by the server, in hours (1 to 48, default 48)
  * @param maxImportBytes   size limit of an imported ledger file
  * @param maxImportEntries entries limit of an imported ledger file
  * @param burstPer10Min    issuances per licence in 10 minutes above which an alert is raised
@@ -39,7 +39,7 @@ public record LicenseProperties(
         Integer maxImportBytes,
         Integer maxImportEntries,
         Integer burstPer10Min,
-        Integer windowDays) {
+        Integer windowHours) {
 
     public LicenseProperties {
         if (trialIssuance == null || !trialIssuance.equals("automatic")) trialIssuance = "manual";
@@ -52,6 +52,6 @@ public record LicenseProperties(
         if (maxImportBytes == null) maxImportBytes = 5_000_000;
         if (maxImportEntries == null) maxImportEntries = 5000;
         if (burstPer10Min == null) burstPer10Min = 10;
-        if (windowDays == null || windowDays < 1 || windowDays > 366) windowDays = 30;
+        if (windowHours == null || windowHours < 1 || windowHours > 48) windowHours = 48;
     }
 }

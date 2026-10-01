@@ -26,7 +26,7 @@ public final class Ed25519ActivationSigner implements ActivationSigner {
             throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Aucune clé de signature serveur : déposez-la dans le dossier des secrets (voir docs/LICENSE-ADMIN.md)");
         }
         if (r.kind() != IssueKind.TRIAL && r.kind() != IssueKind.PRODUCTION) throw new ApiException(HttpStatus.FORBIDDEN, "Sorte d'activation non prise en charge par le serveur : " + r.kind());
-        if (r.windowDays() < 1 || r.windowDays() > WireActivation.MAX_WINDOW_DAYS) throw ApiException.badRequest("Fenêtre d'installation : de 1 à " + WireActivation.MAX_WINDOW_DAYS + " jours");
+        if (r.windowHours() < 1 || r.windowHours() > WireActivation.MAX_WINDOW_HOURS) throw ApiException.badRequest("Fenêtre d'installation : de 1 à " + WireActivation.MAX_WINDOW_HOURS + " heures");
         if (!r.subject().equals("tv") && !r.subject().equals("phone")) throw ApiException.badRequest("Type d'appareil : tv ou phone");
         if (!WireActivation.HEX.matcher(r.nonce()).matches()) throw ApiException.badRequest("Nonce invalide (8 à 64 chiffres hexadécimaux)");
         if (r.notBefore() > r.issuedAt()) throw ApiException.badRequest("Le début de la fenêtre ne peut pas dépasser la date d'émission");
@@ -46,7 +46,7 @@ public final class Ed25519ActivationSigner implements ActivationSigner {
             if (f[0].equals("subscription") && Long.parseLong(f[5]) > 30 * WireActivation.DAY_MS) throw ApiException.badRequest("Abonnement : tolérance de 30 jours au plus");
         }
         String seat = r.seat() == null ? WireActivation.defaultSeat(r.license(), r.device().factors()) : r.seat();
-        long notAfter = r.notBefore() + r.windowDays() * WireActivation.DAY_MS;
+        long notAfter = r.notBefore() + r.windowHours() * WireActivation.HOUR_MS;
         long seq = r.seq() == null ? r.issuedAt() : r.seq();
         if (seq < 0) throw ApiException.badRequest("Numéro de séquence invalide");
         var fields = new WireActivation.Fields(r.kind().name().toLowerCase(java.util.Locale.ROOT), r.subject(), keyring.kid(), seq, r.nonce(), r.issuedAt(), r.notBefore(), notAfter, r.license(), seat,

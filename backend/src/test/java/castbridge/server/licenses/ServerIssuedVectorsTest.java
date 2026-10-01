@@ -77,7 +77,7 @@ class ServerIssuedVectorsTest {
         for (Spec s : specs) {
             Map<Factor, String> f = fp(s.device());
             var device = new DeviceIdentity.Request(f, DeviceIdentity.code(f), DeviceIdentity.kFor(f.size()));
-            var out = signer.sign(new ActivationSigner.ActivationRequest(s.kind(), s.subject(), s.license(), s.seat(), device, s.rights(), T0, T0 - DAY, 300, s.nonce()));
+            var out = signer.sign(new ActivationSigner.ActivationRequest(s.kind(), s.subject(), s.license(), s.seat(), device, s.rights(), T0, T0 - 3_600_000L, 48, s.nonce()));
             ObjectNode c = cases.addObject();
             c.put("type", "activation");
             c.put("id", s.id());

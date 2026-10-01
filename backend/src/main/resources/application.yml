@@ -118,8 +118,8 @@ castbridge:
     # public keys of the offline tools trusted to sign registry events, WITH their scopes (docs/ACTIVATION-FORMAT.md § 2):
     # "desktop:<base64 raw public key>:ISSUE_TRIAL+ISSUE_PRODUCTION+TRANSFER+REVOKE+REGISTRY,phone:<base64>:…"; an entry without scopes is ignored
     trusted-keys: ${CASTBRIDGE_LICENSES_TRUSTED_KEYS:}
-    # installation window of an activation issued by the server, in days (1 to 366)
-    window-days: ${CASTBRIDGE_LICENSES_WINDOW_DAYS:30}
+    # installation window of an activation issued by the server, in hours (1 to 48): a code is valid 48 h from its creation
+    window-hours: ${CASTBRIDGE_LICENSES_WINDOW_HOURS:48}
     max-import-bytes: ${CASTBRIDGE_LICENSES_MAX_IMPORT_BYTES:5000000}
     max-import-entries: ${CASTBRIDGE_LICENSES_MAX_IMPORT_ENTRIES:5000}
     burst-per10-min: ${CASTBRIDGE_LICENSES_BURST_PER_10_MIN:10}

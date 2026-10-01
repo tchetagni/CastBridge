@@ -17,7 +17,7 @@
             <div class="row">
                 <label>Licence <input type="text" name="licenseId" th:value="${licenseId}" required maxlength="64" pattern="[A-Za-z0-9][A-Za-z0-9-]{2,63}" autocapitalize="none"></label>
                 <label>Appareil <select name="subject"><option value="tv" th:selected="${subject != 'phone'}">TV</option><option value="phone" th:selected="${subject == 'phone'}">Téléphone</option></select></label>
-                <label>Fenêtre d'installation (jours) <input type="number" name="windowDays" min="1" max="366" th:placeholder="${defaultWindow}"></label>
+                <label>Fenêtre d'installation (heures, 48 au plus) <input type="number" name="windowHours" min="1" max="48" th:placeholder="${defaultWindow}"></label>
             </div>
             <label>Demande d'appareil <textarea name="deviceRequest" class="act" rows="8" required maxlength="2000" th:text="${deviceRequest}" placeholder="code=XXXX-XXXX-XXXX-XXXX&#10;k=4&#10;factor=FLASH|…"></textarea></label>
             <label class="check"><input type="checkbox" name="reissue"> Réémission : le poste existe déjà (ne consomme pas de poste)</label>
