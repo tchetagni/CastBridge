@@ -12,3 +12,4 @@
 | content-quiz-culture / superieur | tools/quiz-bank | claude/content-quiz-* | LIVRÉ, NON FUSIONNÉ (superieur fusionné) | |
 | multipath-transfer | android/core/.../tv/*Transfer*, sender UploadService, receiver serveur d'envoi | claude/multipath-transfer | LANCÉ | copie rapide multivoie : mesurer d'abord |
 | content-phase1 | castbridge-content uniquement | (branche autorisée dans castbridge-content) | LANCÉ | corrections puis première vague N2/N4 |
+| languages-architect | docs/LANGUES.md, core/.../learn/lang*, graph/langue-* | claude/languages-architect | LANCÉ | catégorie Langues (7 langues, 6 Go) : conception d'abord |
