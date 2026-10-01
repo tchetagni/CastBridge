@@ -19,3 +19,4 @@
 | license-admin | backend/ (module licences, migrations ≥ V50, admin) | claude/license-admin | LANCÉ | gestion robuste des licences en ligne ; clé serveur : ni transfert ni « tout ouvrir » |
 | deferred-orders | core/.../policy*, backend/ (file d'ordres), protocole Bluetooth additif, tâche téléphone | claude/deferred-orders | PRÊT À LANCER (format livré) | serveur → téléphone → TV : ordres différés signés, liste blanche d'actions |
 | content-langues-w1 | castbridge-content uniquement | idem | LANCÉ | Langues vague 1 : A0–A2 des 7 langues (lots libres SA / lots réservés séparés) |
+| owner-cli (local) | core/.../owner/OwnerCli.kt, docs/OWNER-CLI.md | integration/agents | LIVRÉ (coordinateur) | CLI d'activation Mac/Windows/Linux, 9 tests ; le reste de activation-tools bâtit dessus |

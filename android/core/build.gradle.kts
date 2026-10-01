@@ -116,3 +116,16 @@ val checkStarterBudget by tasks.registering(JavaExec::class) {
     jvmArgs("-Dfile.encoding=UTF-8", "-Dstdout.encoding=UTF-8")
 }
 tasks.named("check") { dependsOn(checkStarterBudget) }
+
+// ---- « castbridge-owner » : the desk activation tool, one runnable jar for Mac / Windows / Linux (Java 17+) ----
+tasks.register<Jar>("ownerToolJar") {
+    group = "castbridge"
+    description = "Builds build/libs/castbridge-owner.jar (java -jar castbridge-owner.jar help)"
+    archiveBaseName.set("castbridge-owner"); archiveVersion.set("")
+    manifest { attributes["Main-Class"] = "castbridge.core.owner.OwnerCli" }
+    dependsOn(tasks.named("compileKotlin"))
+    from(sourceSets.main.get().output.classesDirs)
+    from({ configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }.map { zipTree(it) } })
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "META-INF/MANIFEST.MF")
+}
