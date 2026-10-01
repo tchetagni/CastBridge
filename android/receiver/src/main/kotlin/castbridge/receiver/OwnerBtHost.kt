@@ -22,6 +22,8 @@ class OwnerBtHost(private val ctx: Context, private val status: (String?) -> Uni
     private companion object { const val TAG = "OwnerBt" }
     @Volatile private var server: BluetoothServerSocket? = null
     @Volatile private var running = false
+    /** What the activation screen shows: is the channel the owner's phone talks to listening, and if not, why. */
+    @Volatile var state: String = "pas encore démarré"; private set
     private val slots = java.util.concurrent.Semaphore(2)
 
     private val channel = OwnerChannelServer(
@@ -31,11 +33,11 @@ class OwnerBtHost(private val ctx: Context, private val status: (String?) -> Uni
 
     @Synchronized fun start() {
         if (running) return
-        val ad = (ctx.getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager)?.adapter ?: return
-        if (!ad.isEnabled) return
+        val ad = (ctx.getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager)?.adapter ?: run { state = "pas de Bluetooth sur cette TV"; return }
+        if (!ad.isEnabled) { state = "Bluetooth éteint (réglages de la TV)"; return }
         val ss = try { ad.listenUsingRfcommWithServiceRecord("CastBridge Owner", UUID.fromString(OwnerFrames.SERVICE_UUID)) }
-        catch (e: Exception) { Log.w(TAG, "listen failed: ${e.message}"); return }
-        server = ss; running = true
+        catch (e: Exception) { Log.w(TAG, "listen failed: ${e.message}"); state = if (e is SecurityException) "permission Bluetooth refusée" else "écoute impossible (${e.message})"; return }
+        server = ss; running = true; state = "prêt (${runCatching { ad.name }.getOrNull() ?: "TV"})"
         Thread({
             while (running) {
                 val sock = try { ss.accept() } catch (e: IOException) { break }
@@ -46,7 +48,7 @@ class OwnerBtHost(private val ctx: Context, private val status: (String?) -> Uni
                     finally { slots.release() }
                 }, "owner-bt-link").apply { isDaemon = true; start() }
             }
-            running = false
+            running = false; state = "arrêté"
         }, "owner-bt-accept").apply { isDaemon = true; start() }
     }
 

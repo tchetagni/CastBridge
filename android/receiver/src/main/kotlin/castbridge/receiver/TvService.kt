@@ -177,6 +177,7 @@ class TvService : Service(), Device {
         }
     }
     private var ownerBt: OwnerBtHost? = null
+    fun ownerStatus(): String = ownerBt?.state ?: "service non démarré"
     fun startOwnerChannel() { if (ownerBt == null) ownerBt = OwnerBtHost(this); runCatching { ownerBt?.start() } }
 
     private fun watchForActivation() {

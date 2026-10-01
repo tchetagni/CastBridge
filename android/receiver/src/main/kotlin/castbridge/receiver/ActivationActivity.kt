@@ -44,6 +44,7 @@ class ActivationActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ActivationCenter.init(this)
+        TvService.start(this)                       // the service (and the owner Bluetooth channel) must run while this screen is up: a locked TV starts nothing else
         window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         val state = ActivationCenter.state()
         fun tv(text: String, sp: Float, color: Int = Color.WHITE, bold: Boolean = false, mono: Boolean = false) = TextView(this).apply {
@@ -52,6 +53,8 @@ class ActivationActivity : Activity() {
         }
         val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(90, 50, 90, 50); gravity = Gravity.CENTER_HORIZONTAL }
         col.addView(tv("CastBridge TV", 34f, 0xFFF5B027.toInt(), bold = true))
+        col.addView(tv("Version ${BuildConfig.VERSION_NAME} (code ${BuildConfig.VERSION_CODE})", 20f, 0xFFF5B027.toInt(), bold = true))
+        btLine = tv("Bluetooth d'activation : …", 16f, 0xFF7B849C.toInt()); col.addView(btLine)
         col.addView(tv(LockedTexts.NOTICE_TITLE, 22f, 0xFFB8C0D6.toInt(), bold = true))
         col.addView(tv(LockedTexts.NOTICE, 18f, 0xFFB8C0D6.toInt()))
         if (state is GateState.Grace) col.addView(tv(LockedTexts.GRACE + "\nJusqu'au " + DateFormat.getDateInstance(DateFormat.LONG).format(Date(state.untilMs)) + ".", 18f, 0xFFF5B027.toInt()))
@@ -78,6 +81,7 @@ class ActivationActivity : Activity() {
         setContentView(ScrollView(this).apply { setBackgroundColor(0xFF0A0F1E.toInt()); addView(col) })
     }
 
+    private lateinit var btLine: TextView
     private var askedVisible = false
     /** Makes the TV discoverable for 5 minutes (the system asks for a confirmation on the TV), so the owner's phone can find it and pair by itself. */
     private fun makeVisible() {
@@ -110,8 +114,9 @@ class ActivationActivity : Activity() {
         finish()
     }
 
+    private val btTick = object : Runnable { override fun run() { btLine.text = "Bluetooth d'activation : " + (TvService.running?.ownerStatus() ?: "service non démarré"); h.postDelayed(this, 2_000) } }
     override fun onResume() {
-        super.onResume(); h.post(poll)
+        super.onResume(); h.post(poll); h.post(btTick)
         // the owner's phone pushes the activation by Bluetooth: on recent Android that needs the permission, asked here because a locked TV asks nothing else
         if (android.os.Build.VERSION.SDK_INT >= 31 && checkSelfPermission(android.Manifest.permission.BLUETOOTH_CONNECT) != android.content.pm.PackageManager.PERMISSION_GRANTED)
             runCatching { requestPermissions(arrayOf(android.Manifest.permission.BLUETOOTH_CONNECT), 77) }
@@ -121,7 +126,7 @@ class ActivationActivity : Activity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 77) { TvService.running?.startOwnerChannel(); if (!askedVisible) { askedVisible = true; makeVisible() } }
     }
-    override fun onPause() { super.onPause(); h.removeCallbacks(poll) }
+    override fun onPause() { super.onPause(); h.removeCallbacks(poll); h.removeCallbacks(btTick) }
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean =
         if (keyCode == KeyEvent.KEYCODE_BACK && ActivationCenter.state() is GateState.Locked) true else super.onKeyDown(keyCode, event)      // no way out while locked
 }
