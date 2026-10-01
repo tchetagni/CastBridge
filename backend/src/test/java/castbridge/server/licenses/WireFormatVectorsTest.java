@@ -136,15 +136,20 @@ class WireFormatVectorsTest {
         var device = DeviceIdentity.parseRequest(requestText(dev.get("code").asText(), fp(dev)));
         long now = vectors.get("nowMs").asLong();
         var ok = new ActivationSigner.ActivationRequest(IssueKind.PRODUCTION, "tv", "lic-0001", null, device, List.of("purchase|p-classe-cm2|classe-cm2|" + now), now, now, 30, "00112233445566778899aabbccddeeff");
-        assertThat(server.sign(ok).text()).startsWith("cba1.");
+        assertThat(server.sign(ok).text()).startsWith("cbx1.");
         var openAll = new ActivationSigner.ActivationRequest(IssueKind.PRODUCTION, "tv", "lic-0001", null, device, List.of("openall|tout|" + now + "|" + (now + 86_400_000L)), now, now, 30, "00112233445566778899aabbccddeeff");
         assertThatThrownBy(() -> server.sign(openAll)).isInstanceOf(ApiException.class).hasMessageContaining("tout ouvrir");
+        // not even with the "all open" power asked for in another way: the kind OPEN_ALL
+        var openAllKind = new ActivationSigner.ActivationRequest(IssueKind.OPEN_ALL, "tv", "lic-0001", null, device, List.of(), now, now, 30, "00112233445566778899aabbccddeeff");
+        assertThatThrownBy(() -> server.sign(openAllKind)).isInstanceOf(ApiException.class).hasMessageContaining("tout ouvrir");
         var transfer = new ActivationSigner.ActivationRequest(IssueKind.TRANSFER, "tv", "lic-0001", null, device, List.of(), now, now, 30, "00112233445566778899aabbccddeeff");
         assertThatThrownBy(() -> server.sign(transfer)).isInstanceOf(ApiException.class).hasMessageContaining("transfert");
         // the desk key (all scopes) may sign the open-all right, which proves the refusal comes from the scope and not from a format rule
         var desk = new ScopedActivationSigner(new Ed25519ActivationSigner(ring("desk")), scopes("desk"));
-        assertThat(desk.sign(openAll).text()).startsWith("cba1.");
+        assertThat(desk.sign(openAll).text()).startsWith("cbx1.");
         assertThat(ScopedActivationSigner.SERVER_SCOPES).isEqualTo(scopes("server"));
+        assertThat(ScopedActivationSigner.SERVER_SCOPES).contains(SignerScope.ISSUE_TRIAL, SignerScope.ISSUE_PRODUCTION, SignerScope.REVOKE, SignerScope.POLICY)
+                .doesNotContain(SignerScope.TRANSFER, SignerScope.COMMAND_OPEN_ALL, SignerScope.COMMAND_UNLOCK, SignerScope.COMMAND_SUPPORT);
     }
 
     @Test

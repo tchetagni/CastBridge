@@ -210,19 +210,19 @@ class LicenseWebTest extends LicenseTestBase {
         Dev d = dev();
         String html = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l.licenseId()).param("deviceRequest", d.text()))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-        assertThat(html).contains("cba1.").contains("data:image/svg+xml;base64,").contains("ACTIVATION-FORMAT").contains("Télécharger").contains("(nouveau)");
+        assertThat(html).contains("cbx1.").contains("data:image/svg+xml;base64,").contains("ACTIVATION-FORMAT").contains("Télécharger").contains("(nouveau)");
         // invalid or altered device request: a clear message, nothing consumed
         String bad = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l.licenseId()).param("deviceRequest", "code=12345"))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-        assertThat(bad).contains("Demande d&#39;appareil").doesNotContain("cba1.");
+        assertThat(bad).contains("Demande d&#39;appareil").doesNotContain("cbx1.");
         String codeOnly = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l.licenseId()).param("deviceRequest", "code=" + dev().code()))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-        assertThat(codeOnly).contains("sans facteur").doesNotContain("cba1.");
+        assertThat(codeOnly).contains("sans facteur").doesNotContain("cbx1.");
         assertThat(licenses.get(l.licenseId()).seatsUsed()).isEqualTo(1);
         String seat = licenses.detail(l.licenseId()).seats().get(0).seatId();
         String file = mvc.perform(get("/admin/licenses/" + l.licenseId() + "/seats/" + seat + "/activation").with(as(SUPPORT_USER))).andExpect(status().isOk())
                 .andExpect(header().string("Content-Disposition", org.hamcrest.Matchers.containsString("activation"))).andReturn().getResponse().getContentAsString();
-        assertThat(file).startsWith("cba1.");
+        assertThat(file).startsWith("cbx1.");
     }
 
     @Test

@@ -81,7 +81,7 @@ class LicenseScopeAndAuditTest extends LicenseTestBase {
         assertThat(count("lic_event")).isEqualTo(events);
         // a normal issuance through the API works and returns the activation once
         mvc.perform(post("/api/v1/admin/licenses/" + l.licenseId() + "/activations").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(body(dev(), null, false)))
-                .andExpect(status().isOk()).andExpect(jsonPath("$.kind").value("PRODUCTION")).andExpect(jsonPath("$.text").value(org.hamcrest.Matchers.startsWith("cba1.")));
+                .andExpect(status().isOk()).andExpect(jsonPath("$.kind").value("PRODUCTION")).andExpect(jsonPath("$.text").value(org.hamcrest.Matchers.startsWith("cbx1.")));
     }
 
     @Test
@@ -93,7 +93,7 @@ class LicenseScopeAndAuditTest extends LicenseTestBase {
         assertThat(all).doesNotContain(a.text()).doesNotContain(a.text().substring(5, 25)).doesNotContain(d.code()).doesNotContain(l.clientName());
         assertThat(jdbc.queryForList("select token_fingerprint from lic_issuance", String.class)).contains(a.fingerprint());
         // the registry holds the signed issue event (fingerprints of the hardware, never raw values), not the activation
-        assertThat(jdbc.queryForList("select text from lic_event where type = 'issue'", String.class).toString()).doesNotContain("cba1.");
+        assertThat(jdbc.queryForList("select text from lic_event where type = 'issue'", String.class).toString()).doesNotContain("cbx1.");
     }
 
     @Test

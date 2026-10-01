@@ -5,7 +5,7 @@ import java.util.Set;
 import org.springframework.http.HttpStatus;
 
 /**
- * Builds and signs the {@code cba1} activation with the keyring key. It applies the rules of the format (docs/ACTIVATION-FORMAT.md § 10: window
+ * Builds and signs the {@code cbx1} activation with the keyring key. It applies the rules of the format (docs/ACTIVATION-FORMAT.md § 10: window
  * 1..366 days, a trial carries no right and the licence "trial", a production carries at least one right, "tout ouvert" at most 30 days, well-formed
  * rights) but NOT the scope of the key: wrap it in {@link ScopedActivationSigner} (the bean does).
  */
@@ -47,10 +47,12 @@ public final class Ed25519ActivationSigner implements ActivationSigner {
         }
         String seat = r.seat() == null ? WireActivation.defaultSeat(r.license(), r.device().factors()) : r.seat();
         long notAfter = r.notBefore() + r.windowDays() * WireActivation.DAY_MS;
-        var fields = new WireActivation.Fields(r.kind().name().toLowerCase(java.util.Locale.ROOT), r.subject(), keyring.kid(), r.nonce(), r.issuedAt(), r.notBefore(), notAfter, r.license(), seat,
+        long seq = r.seq() == null ? r.issuedAt() : r.seq();
+        if (seq < 0) throw ApiException.badRequest("Numéro de séquence invalide");
+        var fields = new WireActivation.Fields(r.kind().name().toLowerCase(java.util.Locale.ROOT), r.subject(), keyring.kid(), seq, r.nonce(), r.issuedAt(), r.notBefore(), notAfter, r.license(), seat,
                 r.device().k(), r.device().factors(), r.rights());
         String payload = WireActivation.payload(fields);
-        String text = WireActivation.token(payload, keyring.sign(payload.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
-        return new SignedActivation(text, keyring.kid(), r.nonce(), Hashing.sha256Hex(text), seat, r.notBefore(), notAfter);
+        String text = WireActivation.token(fields, keyring.sign(payload.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+        return new SignedActivation(text, keyring.kid(), r.nonce(), Hashing.sha256Hex(text), seat, r.notBefore(), notAfter, seq);
     }
 }

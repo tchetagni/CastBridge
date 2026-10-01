@@ -86,7 +86,7 @@ public record RegistryEvent(String id, String kid, String text, String signature
 
     public static RegistryEvent issue(LicenseKeyring k, ActivationSigner.SignedActivation a, String subject, String kind, String license, int kk, Map<Factor, String> factors, long issuedAt) {
         List<String> l = base("issue", k, issuedAt);
-        l.addAll(List.of("license=" + license, "seat=" + a.seat(), "subject=" + subject, "kind=" + kind, "nonce=" + a.nonce(), "notAfter=" + a.notAfter(), "k=" + kk));
+        l.addAll(List.of("license=" + license, "seat=" + a.seat(), "subject=" + subject, "kind=" + kind, "nonce=" + a.nonce(), "seq=" + a.seq(), "notAfter=" + a.notAfter(), "k=" + kk));
         return sign(k, l, factors);
     }
 

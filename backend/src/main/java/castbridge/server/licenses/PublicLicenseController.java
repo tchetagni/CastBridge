@@ -27,7 +27,7 @@ public class PublicLicenseController {
         this.devices = devices;
     }
 
-    /** The signed list {@code cbr1.…} as one line of plain text (docs/ACTIVATION-FORMAT.md § 7). */
+    /** The signed list {@code cbx1.…} as one line of plain text (docs/ACTIVATION-FORMAT.md § 7). */
     @GetMapping(value = "/api/v1/revocations", produces = org.springframework.http.MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> revocations() {
         return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(service.signedList());
