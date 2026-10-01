@@ -1,0 +1,20 @@
+{
+ "format": 1,
+ "comment": "Voix concrètes CHOISIES PAR LE PROPRIÉTAIRE (jamais par l'outil ni par un agent). VIDE tant que le propriétaire n'a pas décidé. Seules les voix de catalogue préconstruites sont admises : ni clonage, ni voix personnalisée, ni audio de référence, ni imitation d'une personne réelle.",
+ "fields": {
+  "id": "identifiant interne stable",
+  "apiVoiceId": "identifiant API réel de la voix chez le fournisseur",
+  "engineId": "moteur du registre des moteurs",
+  "lang": "langue (zh, ja, en, de, fr, it, es)",
+  "variety": "variété (zh-CN, fr-FR, en-GB…)",
+  "voiceClass": "{gender, ageBand, register}",
+  "type": "voix_de_catalogue_preconstruite",
+  "status": "à choisir | approved | retired",
+  "approvedBy": "qui a choisi",
+  "approvedOn": "AAAA-MM-JJ",
+  "validatedBy": "locuteur natif qui a écouté (obligatoire avant diffusion pour le chinois et le japonais)"
+ },
+ "voices": [],
+ "mapping": {},
+ "mappingComment": "clé de classe « variété|genre|âge|registre » (voir `mp.py registries … --requests`, section « Classes de voix à faire choisir ») -> id de voix du tableau ci-dessus, ou null tant qu'à choisir"
+}

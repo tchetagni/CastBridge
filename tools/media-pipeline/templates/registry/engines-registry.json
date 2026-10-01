@@ -1,0 +1,21 @@
+{
+ "format": 1,
+ "comment": "Registre des moteurs de production (voix, images, vidéo, reconnaissance vocale). VIDE : à renseigner par le propriétaire d'après les conditions Google EN VIGUEUR. Un moteur n'est utilisable qu'avec status = approved ET tous les champs remplis.",
+ "fields": {
+  "id": "identifiant interne stable",
+  "provider": "fournisseur",
+  "service": "service exact",
+  "model": "modèle ou moteur réellement utilisé",
+  "version": "version ou date du modèle",
+  "allowedUse": "usage permis par les conditions (texte ou référence)",
+  "termsUrl": "adresse des conditions",
+  "termsCheckedOn": "AAAA-MM-JJ (date de vérification des conditions)",
+  "termsEvidence": "chemin interne de la preuve sous legal/",
+  "syntheticMarkingRequired": "true | false : le fournisseur impose-t-il de signaler le contenu synthétique ?",
+  "status": "à renseigner | approved | retired",
+  "approvedBy": "qui a approuvé",
+  "approvedOn": "AAAA-MM-JJ",
+  "role": "tts | image | video | asr"
+ },
+ "engines": []
+}
