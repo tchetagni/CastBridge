@@ -56,7 +56,10 @@ object RemoteHub {
     }
 
     /** Bluetooth remote (CBTR on the Bluetooth file service), after the PIN check. */
-    fun serveBt(input: InputStream, output: OutputStream, onActivity: () -> Unit) = RemoteBt.serve(input, output, api, onActivity)
+    fun serveBt(input: InputStream, output: OutputStream, onActivity: () -> Unit) {
+        svc?.remoteLink(castbridge.core.status.Tech.BLUETOOTH, true)             // status bar icon while the link lasts
+        try { RemoteBt.serve(input, output, api, onActivity) } finally { svc?.remoteLink(castbridge.core.status.Tech.BLUETOOTH, false) }
+    }
 
     // ------------------------------------------------------------------ helpers
 
@@ -205,6 +208,7 @@ object RemoteHub {
 
     private object Sink : RemoteSink {
         override fun key(k: RemoteKey, action: KeyAction, repeat: Int, target: RemoteTarget): Outcome {
+            svc?.remoteKeySeen()
             if (k.kind == RemoteKey.Kind.VOLUME) return if (action == KeyAction.UP) Outcome.done("audio") else volume(k)
             if (k == RemoteKey.HOME) return if (action == KeyAction.UP) Outcome.done("app") else home()
             val a = front()

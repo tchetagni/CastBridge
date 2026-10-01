@@ -29,6 +29,8 @@ import android.os.Looper
 import android.os.PowerManager
 import android.provider.Settings
 import android.util.Log
+import castbridge.core.status.IconKind
+import castbridge.core.status.Tech
 import castbridge.core.net.NetState
 import castbridge.core.net.NetStateTracker
 import castbridge.core.net.netJson
@@ -73,6 +75,8 @@ class TvService : Service(), Device {
         val activity: Activity
         fun notice(msg: String)
         fun statusesChanged()
+        /** The permanent status bar ([TvService.icons]) may have changed: redraw it (cheap, diffed by the screen). */
+        fun iconsChanged()
         fun thumbReady(name: String)
         /** A playback request that arrived while the screen was hidden, to run now. */
         fun runPending(r: Pending)
@@ -105,7 +109,10 @@ class TvService : Service(), Device {
     /** « Téléphones de confiance » (docs/BT-PLUG-AND-PLAY.md): who may use the TV without the PIN, and the pairing window. */
     lateinit var trust: castbridge.core.trust.TrustRegistry; private set
     lateinit var pairing: castbridge.core.trust.PairingSession; private set
-    private val lastBanner = ConcurrentHashMap<String, Long>()
+    /** The permanent status bar of the screen (docs/ADMIN.md, « Barre d'icônes ») : fed here from what the service already knows. */
+    val icons = castbridge.core.status.StatusIconModel({ System.currentTimeMillis() })
+    private val lanSeen = ConcurrentHashMap<String, Long>()
+    private val iconsPosted = java.util.concurrent.atomic.AtomicBoolean(false)
     var wd: WifiDirectGroup? = null; private set
     var usb: UsbImporter? = null; private set
     var ssh: SshControl? = null; private set
@@ -183,10 +190,13 @@ class TvService : Service(), Device {
         register()
         LotsHub.startup(this, videosDir)
         bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted, parental = ParentalHub.syncHost) { setStatus("1-bt", it) }
-        wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
+        wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it); syncIconsAsync() }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
         ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) },
-            onSessions = { n -> setStatus("4-ssh-n", if (n > 0) (if (n == 1) "SSH : 1 connexion active" else "SSH : $n connexions actives") else null) })
+            onSessions = { n ->
+                setStatus("4-ssh-n", if (n > 0) (if (n == 1) "SSH : 1 connexion active" else "SSH : $n connexions actives") else null)
+                icons.setSsh(n, ssh?.btSessions() ?: 0); iconsChanged()
+            })
         updater = UpdateInstaller(this, { registry.volumes().filter { it.kind != VolumeKind.SAF }.map { it.dir } },
             launch = { i, what -> launchScreen(i, what) }) { m -> setStatus("5-update", m); notice(m) }
         onPermissionsReady()                                    // Bluetooth starts if its permission was granted earlier
@@ -197,6 +207,8 @@ class TvService : Service(), Device {
         rescanAsync(remeasure = true)
         main.postDelayed(transferTick, 5000)
         main.postDelayed(netTick, 3000)
+        icons.setInternet(NetState.CHECKING)
+        main.postDelayed(iconTick, 2000)
         watchNetwork()
     }
 
@@ -217,7 +229,7 @@ class TvService : Service(), Device {
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
             publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
-            tokenAuth = trust::verifyToken, peers = btApi?.peers,
+            tokenAuth = { tok -> trust.verifyToken(tok)?.also { a -> phoneSeen(a) } }, peers = btApi?.peers,
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
             contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex)
         try {
@@ -274,12 +286,84 @@ class TvService : Service(), Device {
         getSystemService(BluetoothManager::class.java)?.adapter?.getRemoteDevice(address)?.bondState == BluetoothDevice.BOND_BONDED
     }.getOrDefault(false)
 
-    /** Banner « <téléphone> connecté », at most once per 10 minutes per phone (the phone renews its token in the background). */
+    /**
+     * A trusted phone said hello over Bluetooth (CBTH): its icon appears in the status bar and stays while the phone keeps coming back
+     * (the lease is renewed by every hello; the phone renews its token in the background). No banner: the icon is the signal.
+     */
     private fun phoneConnected(p: castbridge.core.trust.TrustedPhone) {
+        icons.up(castbridge.core.status.IconKind.PHONE, p.address, castbridge.core.status.Tech.BLUETOOTH, p.name, leaseMs = PHONE_LEASE_MS)
+        setStatus("1-phone", "Téléphone connecté : ${p.name}")
+        iconsChanged()
+    }
+
+    /**
+     * A trusted phone used its token over HTTP (Wi-Fi LAN). The hook for the Bluetooth API tunnel (branch bt-everything) is the same
+     * call with Tech.BLUETOOTH_TUNNEL. Throttled: the token is checked on every request.
+     */
+    private fun phoneSeen(address: String, tech: castbridge.core.status.Tech = castbridge.core.status.Tech.WIFI_LAN) {
+        val key = address + tech.wire
         val t = System.currentTimeMillis()
-        val last = lastBanner[p.address] ?: 0
-        lastBanner[p.address] = t
-        if (t - last > 10 * 60_000L) { notice("${p.name} connecté"); setStatus("1-phone", "Téléphone connecté : ${p.name}") }
+        if (t - (lanSeen[key] ?: 0L) < 20_000) return
+        lanSeen[key] = t
+        val name = trust.list().firstOrNull { it.address == address }?.name ?: return
+        icons.up(castbridge.core.status.IconKind.PHONE, address, tech, name, leaseMs = PHONE_LEASE_MS)
+        iconsChanged()
+    }
+
+    /** The phone remote over [tech]: one icon while the Bluetooth link lasts ([on] false = it closed). */
+    fun remoteLink(tech: castbridge.core.status.Tech, on: Boolean) {
+        val k = castbridge.core.status.IconKind.REMOTE_CONTROL
+        if (on) icons.up(k, "", tech, "Télécommande") else icons.down(k, "", tech)
+        iconsChanged()
+    }
+
+    private var lastRemoteNote = 0L
+    /** A key reached the HTTP remote: keeps its icon for 20 s after the last one. */
+    fun remoteKeySeen() {
+        val t = System.currentTimeMillis()
+        icons.up(castbridge.core.status.IconKind.REMOTE_CONTROL, "", castbridge.core.status.Tech.WIFI_LAN, "Télécommande", leaseMs = 20_000)
+        if (t - lastRemoteNote > 3_000) { lastRemoteNote = t; iconsChanged() }
+    }
+
+    fun iconsChanged() {
+        if (iconsPosted.compareAndSet(false, true)) main.post { iconsPosted.set(false); screen?.iconsChanged() }
+    }
+
+    /** Things that are states of the service (not events): read again every few seconds, which also lets held icons expire on screen. */
+    private fun syncIcons() {
+        fun set(kind: IconKind, on: Boolean, tech: Tech, label: String) =
+            if (on) icons.up(kind, "", tech, label) else icons.down(kind, "")
+        runCatching {
+            val gw = gateway?.takeIf { it.connected }
+            set(IconKind.GATEWAY, gw != null, Tech.BLUETOOTH, statuses["6-gw"]?.substringAfter("(", "")?.substringBeforeLast(")")?.ifBlank { null } ?: "Internet du téléphone")
+            set(IconKind.WIFI_DIRECT_GROUP, wd?.active != null, Tech.WIFI_DIRECT, "Wi-Fi Direct")
+            val usbN = registry.volumes().count { it.kind == VolumeKind.REMOVABLE }
+            set(IconKind.USB_DRIVE, usbN > 0, Tech.USB, if (usbN > 1) "$usbN clés USB" else "Clé USB")
+            val dl = TvDownloads.get()?.manager?.views()?.count { it.state == castbridge.core.dl.DlState.DOWNLOADING || it.state == castbridge.core.dl.DlState.METADATA || it.state == castbridge.core.dl.DlState.CONNECTING } ?: 0
+            set(IconKind.DOWNLOAD, dl > 0, Tech.NONE, if (dl > 1) "$dl téléchargements" else "Téléchargement")
+            set(IconKind.PARENTAL_MODE, runCatching { ParentalHub.engine.config().let { it.enabled && it.activeProfile != null } }.getOrDefault(false), Tech.NONE, "Mode enfant")
+            val qr = QuizHub.room; val cr = ChessHub.room
+            syncRoom(IconKind.QUIZ_PLAYER, qr?.players()?.map { Triple(it.id, it.name, qr.isConnected(it)) })
+            syncRoom(IconKind.CHESS_PLAYER, cr?.players()?.map { Triple(it.id, it.name, cr.isConnected(it)) })
+        }
+        iconsChanged()
+    }
+
+    private val roomRefs = HashMap<castbridge.core.status.IconKind, Set<String>>()
+    /** Quiz / chess players that joined from their phone (Wi-Fi): one icon each while connected; a closed room (null) clears them. */
+    private fun syncRoom(kind: castbridge.core.status.IconKind, players: List<Triple<String, String, Boolean>>?) {
+        val now = players.orEmpty().filter { it.third }.map { it.first }.toSet()
+        for ((id, name, on) in players.orEmpty()) if (on) icons.up(kind, id, castbridge.core.status.Tech.WIFI_LAN, name)
+        for (id in roomRefs[kind].orEmpty() - now) icons.down(kind, id)
+        roomRefs[kind] = now
+    }
+
+    /** Own thread: reading the downloads asks aria2 over RPC, which must never block the main thread or the storage thread. */
+    private val iconBg = java.util.concurrent.Executors.newSingleThreadExecutor { r -> Thread(r, "cb-icons").apply { isDaemon = true } }
+    private fun syncIconsAsync() { runCatching { iconBg.execute { syncIcons() } } }
+
+    private val iconTick = object : Runnable {
+        override fun run() { syncIconsAsync(); main.postDelayed(this, 5_000) }
     }
 
     private var captureHooked = false
@@ -324,7 +408,8 @@ class TvService : Service(), Device {
                             netGatewayAlso = netTracker.gatewayAlsoAvailable
                             delay = netTracker.nextDelayMs()               // 60 s while Internet works, 10-30 s while it does not
                         }
-                        main.post { screen?.statusesChanged() }
+                        icons.setInternet(netState)
+                        main.post { screen?.statusesChanged() }; iconsChanged()
                         // connectivity_check: at start and when the state changes (not every minute)
                         if (first || wasDirect != (netDirectMs != null)) connectivityEvent(null, netDirectMs)
                         if (gateway?.connected == true && (first || wasGateway != (netGatewayMs != null))) connectivityEvent("bluetooth", netGatewayMs)
@@ -367,7 +452,7 @@ class TvService : Service(), Device {
 
     /** Gateway status callback: re-probe when a phone connects or disconnects. */
     private fun gatewayStatus(st: String?) {
-        setStatus("6-gw", st)
+        setStatus("6-gw", st); syncIconsAsync()
         if ((st != null) != netGwUp) { netGwUp = st != null; netChanged() }
     }
 
@@ -635,6 +720,8 @@ class TvService : Service(), Device {
             val msg = onScreen { act -> (act as? PlayerActivity)?.openDevSettings() } ?: "Réglages ouverts sur la TV."
             ApiReply(200, """{"message":${ReceiverServer.q(msg)}}""")
         }
+        // What the TV's status bar shows (labels only: no token, PIN or Bluetooth address)
+        path == "/api/connections" && method == "GET" -> ApiReply(200, castbridge.core.status.StatusIconModel.json(icons.snapshot(), System.currentTimeMillis()))
         path == "/api/net" && method == "GET" -> ApiReply(200, synchronized(netTracker) {
             netJson(netTracker, TvNetDiag.linkKind(this), netDirectMs, gateway?.connected == true, netGatewayMs, netCheckedAt) })
         path == "/api/gateway" && method == "GET" -> ApiReply(200, gateway?.json() ?: """{"listening":false,"connected":false}""")
@@ -811,7 +898,7 @@ class TvService : Service(), Device {
         stopCore()
         unwatchNetwork()
         main.removeCallbacksAndMessages(null)
-        bg.shutdownNow()
+        bg.shutdownNow(); iconBg.shutdownNow()
         if (running === this) running = null
         super.onDestroy()
     }
@@ -821,6 +908,8 @@ class TvService : Service(), Device {
         private const val CH_SERVICE = "tv-service"
         private const val CH_LAUNCH = "tv-launch"
         private const val NOTIF = 1
+        /** A phone that said hello (or used its token) is shown connected this long without news; each sign of life renews it. */
+        private const val PHONE_LEASE_MS = 10 * 60_000L
         private const val NOTIF_LAUNCH = 2
         @Volatile var running: TvService? = null; private set
 
