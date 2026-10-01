@@ -1,0 +1,859 @@
+{
+ "chapter": "3e-informatique-metiers",
+ "lessons": [
+  {
+   "id": "3e-informatique-metiers-numerique",
+   "title": "Les métiers du numérique",
+   "minutes": 25,
+   "programRef": "3e — Découverte des métiers et de l'orientation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer plusieurs métiers du numérique et leur rôle.",
+    "Relier un métier aux compétences et à une formation générale."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "3e-informatique-metiers-numerique-01",
+    "3e-informatique-metiers-numerique-02",
+    "3e-informatique-metiers-numerique-03",
+    "3e-informatique-metiers-numerique-04",
+    "3e-informatique-metiers-numerique-05",
+    "3e-informatique-metiers-numerique-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-metiers-numerique-q1",
+    "3e-informatique-metiers-numerique-q2",
+    "3e-informatique-metiers-numerique-q3",
+    "3e-informatique-metiers-numerique-q4",
+    "3e-informatique-metiers-numerique-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Quelques métiers",
+     "md": "- **Développeur / développeuse** : écrit les programmes et applications.\n- **Administrateur réseau** : installe et surveille les réseaux.\n- **Technicien de maintenance** : dépanne et répare les ordinateurs.\n- **Spécialiste en cybersécurité** : protège les systèmes et les données.\n- **Concepteur de site web / graphiste numérique** : crée l'apparence des sites et des supports.\n- **Analyste de données** : étudie des données pour aider à décider."
+    },
+    {
+     "type": "illustration",
+     "caption": "Six métiers du numérique.",
+     "alt": "Six cases : développeur, réseaux, cybersécurité, maintenance, graphisme, données.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 140,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 44,
+        "text": "Développeur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 20,
+        "w": 140,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 44,
+        "text": "Réseaux",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 20,
+        "w": 140,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 400.0,
+        "y": 44,
+        "text": "Cybersécurité",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 90,
+        "w": 140,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 114,
+        "text": "Maintenance",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 90,
+        "w": 140,
+        "h": 36,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 114,
+        "text": "Graphisme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 90,
+        "w": 140,
+        "h": 36,
+        "fill": "cyan",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 400.0,
+        "y": 114,
+        "text": "Données",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "S'informer sur un métier",
+     "md": "Pour découvrir un métier : lire une fiche métier, rencontrer un professionnel, noter **ce qu'il fait**, **les qualités utiles** (rigueur, curiosité, travail en équipe), **la formation** à suivre et **les lieux de travail**. Beaucoup de métiers non informatiques utilisent aussi le numérique (santé, agriculture, banque, commerce, éducation)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : relier tâche et métier",
+     "statement": "Un cybercafé a un problème : plusieurs ordinateurs ne se connectent plus à Internet. Quel professionnel appeler ?",
+     "steps": [
+      {
+       "md": "Le problème concerne le réseau : câbles, routeur, configuration."
+      },
+      {
+       "md": "C'est le rôle d'un administrateur réseau ou d'un technicien de maintenance."
+      }
+     ],
+     "answer": "**Administrateur réseau ou technicien**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : se projeter",
+     "statement": "Amina aime les sciences, la logique et résoudre des problèmes. Quel métier du numérique peut lui plaire et pourquoi ?",
+     "steps": [
+      {
+       "md": "Elle apprécie la logique et les problèmes : le développement ou l'analyse de données lui conviennent."
+      },
+      {
+       "md": "Elle devra continuer à se former, notamment en mathématiques et en algorithmique."
+      }
+     ],
+     "answer": "**Développeuse ou analyste de données**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que tous les métiers du numérique consistent à « réparer des ordinateurs ».\n- Penser qu'il faut être très fort uniquement en informatique : mathématiques, langues et communication comptent aussi.\n- Croire qu'un métier du numérique existe seulement dans les grandes villes ou à l'étranger."
+    }
+   ],
+   "reviewNotes": [
+    "Pas de chiffres sur salaires ni sur le marché de l'emploi (non vérifiables). Intitulés de formations camerounaises à faire compléter par l'enseignant ou le conseiller d'orientation."
+   ]
+  },
+  {
+   "id": "3e-informatique-projet-synthese",
+   "title": "Projet de synthèse : mener un projet numérique",
+   "minutes": 40,
+   "programRef": "3e — Projet de synthèse (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Planifier un projet numérique d'équipe.",
+    "Combiner tableur, algorithme et présentation dans un même projet.",
+    "Présenter et évaluer son travail."
+   ],
+   "prerequisites": [
+    "3e-informatique-structures-controle",
+    "3e-informatique-tableur-avance",
+    "3e-informatique-droit-vie-privee"
+   ],
+   "exercises": [
+    "3e-informatique-projet-synthese-01",
+    "3e-informatique-projet-synthese-02",
+    "3e-informatique-projet-synthese-03",
+    "3e-informatique-projet-synthese-04",
+    "3e-informatique-projet-synthese-05",
+    "3e-informatique-projet-synthese-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-projet-synthese-q1",
+    "3e-informatique-projet-synthese-q2",
+    "3e-informatique-projet-synthese-q3",
+    "3e-informatique-projet-synthese-q4",
+    "3e-informatique-projet-synthese-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Projet numérique",
+     "md": "Un **projet** est un travail d'équipe pour atteindre un but précis, dans un temps donné. Un **cahier des charges** décrit ce qu'on doit produire. Un projet numérique de collège mêle souvent plusieurs outils : recherche d'informations, tableur, algorithme, diaporama."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les grandes phases d'un projet.",
+     "alt": "Quatre blocs : idée, plan, réalisation, test, suivis de la présentation.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 127,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 57.0,
+        "y": 43,
+        "text": "Idée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 107.0,
+        "y1": 37,
+        "x2": 129.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 132.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 179.0,
+        "y": 43,
+        "text": "Plan",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 229.0,
+        "y1": 37,
+        "x2": 251.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 254.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 301.0,
+        "y": 43,
+        "text": "Réalisation",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 351.0,
+        "y1": 37,
+        "x2": 373.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 376.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 423.0,
+        "y": 43,
+        "text": "Test",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Déroulement",
+     "md": "1. **Choisir** un sujet utile (gestion d'une petite boutique, enquête sur les moyens de transport…).\n2. **Écrire le cahier des charges** : but, données, résultats attendus.\n3. **Répartir** les rôles dans l'équipe et fixer un calendrier.\n4. **Réaliser** : collecte de données, tableur, algorithme, supports.\n5. **Tester** et corriger.\n6. **Présenter** en citant les sources, puis **évaluer** : ce qui a marché, ce qu'on améliorerait."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : planifier",
+     "statement": "Une équipe de 4 élèves dispose de 6 séances de 40 minutes. Quel est le temps total ? Quel temps de travail par élève en tout ?",
+     "steps": [
+      {
+       "md": "Temps de la classe : 6 × 40 = 240 minutes, soit 4 heures."
+      },
+      {
+       "md": "Si les 4 élèves se partagent équitablement ce temps de production : 240 ÷ 4 = 60 minutes chacun."
+      }
+     ],
+     "answer": "**240 minutes ; 60 minutes par élève si le travail est partagé**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : projet « petite boutique »",
+     "statement": "Décris comment utiliser trois outils dans un projet de gestion de boutique.",
+     "steps": [
+      {
+       "md": "Base de données ou tableur : table des produits (code, nom, prix, stock) et totaux."
+      },
+      {
+       "md": "Algorithme : calculer le prix avec remise ; diaporama pour présenter les résultats."
+      }
+     ],
+     "answer": "**Tableur + algorithme + diaporama**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Se lancer sans cahier des charges.\n- Un seul élève travaille, les autres regardent : répartir les tâches.\n- Garder les tests pour la fin : tester à chaque étape.\n- Oublier les sources, les droits des images et la sauvegarde du travail."
+    }
+   ],
+   "reviewNotes": [
+    "Fiche de méthode : le projet réel dépend du matériel disponible dans l'établissement.",
+    "Aucun logiciel imposé ; durées indicatives à adapter."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "matching",
+   "prompt": "Associe le métier à sa mission.",
+   "pairs": [
+    [
+     "Développeur",
+     "Écrire des programmes"
+    ],
+    [
+     "Technicien de maintenance",
+     "Réparer et dépanner"
+    ],
+    [
+     "Cybersécurité",
+     "Protéger les systèmes"
+    ],
+    [
+     "Analyste de données",
+     "Étudier des données pour décider"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque métier a un rôle précis.",
+   "id": "3e-informatique-metiers-numerique-01",
+   "tier": "application",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui installe et surveille un réseau d'entreprise ?",
+   "choices": [
+    "Un graphiste",
+    "Un administrateur réseau",
+    "Un analyste de données",
+    "Un comptable seulement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est son rôle.",
+   "id": "3e-informatique-metiers-numerique-02",
+   "tier": "application",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : seuls les informaticiens utilisent le numérique dans leur travail.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Santé, commerce, agriculture et éducation l'utilisent aussi.",
+   "id": "3e-informatique-metiers-numerique-03",
+   "tier": "application",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle matière aide beaucoup à devenir développeur ?",
+   "choices": [
+    "Aucune",
+    "Les mathématiques et la logique",
+    "Seulement le dessin",
+    "Seulement le sport"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Algorithmique et raisonnement.",
+   "id": "3e-informatique-metiers-numerique-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle qualité est utile dans la plupart des métiers du numérique ?",
+   "choices": [
+    "Ne jamais changer",
+    "La curiosité et l'envie d'apprendre",
+    "Éviter le travail en équipe",
+    "Ne jamais lire"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les techniques évoluent vite.",
+   "id": "3e-informatique-metiers-numerique-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng veut présenter un métier du numérique en 5 lignes devant la classe.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Choisis un métier et décris-le (mission, qualités, formation).",
+     "model": "Exemple : technicien de maintenance : dépanne les ordinateurs, patient et méthodique, formation technique après le collège.",
+     "rubric": [
+      "Mission claire",
+      "Qualités",
+      "Formation"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-metiers-numerique-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Cite un autre secteur où ce métier serait utile.",
+     "model": "La banque, l'hôpital, une école ou une entreprise agricole.",
+     "rubric": [
+      "Un secteur plausible"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-metiers-numerique-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-metiers-numerique-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un spécialiste en cybersécurité :",
+   "choices": [
+    "Imprime les fichiers",
+    "Fabrique des écrans",
+    "Écrit des romans",
+    "Protège les données et les systèmes"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il lutte contre les attaques.",
+   "id": "3e-informatique-metiers-numerique-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un métier du numérique demande souvent :",
+   "choices": [
+    "De ne jamais apprendre",
+    "De ne jamais travailler en équipe",
+    "De se former tout au long de la vie",
+    "Aucun effort"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La technologie évolue.",
+   "id": "3e-informatique-metiers-numerique-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui crée l'apparence d'un site web ?",
+   "choices": [
+    "Un antivirus",
+    "Un câble",
+    "Un concepteur de site / graphiste numérique",
+    "Un routeur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il pense la mise en page.",
+   "id": "3e-informatique-metiers-numerique-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un analyste de données :",
+   "choices": [
+    "Répare les écrans",
+    "Étudie des données pour aider à décider",
+    "Installe des câbles",
+    "Rédige des lois"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tableur, bases de données, graphiques.",
+   "id": "3e-informatique-metiers-numerique-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour s'informer sur un métier, on peut :",
+   "choices": [
+    "Rencontrer un professionnel",
+    "Deviner",
+    "Ignorer",
+    "Attendre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est une des meilleures sources.",
+   "id": "3e-informatique-metiers-numerique-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-metiers-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le cahier des charges décrit :",
+   "choices": [
+    "Le prix du matériel seulement",
+    "Ce que le projet doit produire",
+    "Les mots de passe",
+    "La liste des élèves absents"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "But, données, résultats attendus.",
+   "id": "3e-informatique-projet-synthese-01",
+   "tier": "application",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de minutes dans 5 séances de 40 minutes ?",
+   "answer": 200,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "5 × 40 = 200.",
+   "id": "3e-informatique-projet-synthese-02",
+   "tier": "application",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand tester son travail ?",
+   "choices": [
+    "Jamais",
+    "Seulement le dernier jour",
+    "Après la présentation",
+    "À chaque étape"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On corrige tôt pour éviter les grosses erreurs.",
+   "id": "3e-informatique-projet-synthese-03",
+   "tier": "application",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une équipe de 5 élèves a 150 minutes de travail à répartir de façon égale. Combien de minutes chacun ?",
+   "answer": 30,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "150 ÷ 5 = 30.",
+   "id": "3e-informatique-projet-synthese-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle suite d'étapes est la plus logique ?",
+   "choices": [
+    "Choisir, planifier, réaliser, tester, présenter",
+    "Présenter, tester, choisir",
+    "Tester, présenter, planifier",
+    "Réaliser, choisir, planifier"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On planifie avant de réaliser.",
+   "id": "3e-informatique-projet-synthese-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Votre classe prépare une enquête sur les moyens de transport utilisés pour venir au collège.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Écris le cahier des charges en 4 lignes (but, données, résultats, outils).",
+     "model": "But : connaître les transports des élèves ; données : réponses des élèves ; résultats : tableau et graphique ; outils : tableur et diaporama.",
+     "rubric": [
+      "But",
+      "Données",
+      "Résultats attendus"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-projet-synthese-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Dis comment tu respecterais le droit d'auteur et la vie privée dans ce projet.",
+     "model": "Citer les sources, utiliser des images autorisées et ne publier que des résultats anonymes.",
+     "rubric": [
+      "Sources et images",
+      "Anonymat des réponses"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-projet-synthese-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-projet-synthese-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un projet d'équipe, on doit :",
+   "choices": [
+    "Répartir les rôles",
+    "Tout faire seul",
+    "Ne rien noter",
+    "Éviter les tests"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chacun a une tâche.",
+   "id": "3e-informatique-projet-synthese-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Évaluer son projet permet de :",
+   "choices": [
+    "Voir ce qu'on peut améliorer",
+    "Effacer les fichiers",
+    "Éviter de présenter",
+    "Cacher les erreurs"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On apprend de son travail.",
+   "id": "3e-informatique-projet-synthese-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un projet numérique peut combiner :",
+   "choices": [
+    "Seulement un écran",
+    "Un seul mot de passe",
+    "Tableur, algorithme et diaporama",
+    "Un seul octet"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plusieurs outils se complètent.",
+   "id": "3e-informatique-projet-synthese-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où mettre les sources utilisées ?",
+   "choices": [
+    "Nulle part",
+    "Dans le mot de passe",
+    "Sur le clavier",
+    "À la fin du diaporama ou du rapport"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On cite toujours ses sources.",
+   "id": "3e-informatique-projet-synthese-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Faire une sauvegarde pendant un projet sert à :",
+   "choices": [
+    "Ne pas perdre le travail",
+    "Ralentir le projet",
+    "Supprimer des fichiers",
+    "Changer d'équipe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pannes et fausses manipulations arrivent.",
+   "id": "3e-informatique-projet-synthese-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-projet-synthese",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

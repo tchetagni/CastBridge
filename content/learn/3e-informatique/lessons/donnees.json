@@ -1,0 +1,1531 @@
+{
+ "chapter": "3e-informatique-donnees",
+ "lessons": [
+  {
+   "id": "3e-informatique-bases-de-donnees",
+   "title": "Bases de données : tables, champs, enregistrements",
+   "minutes": 30,
+   "programRef": "3e — Notions de base de données (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir table, champ, enregistrement et clé.",
+    "Lire une table et répondre à une question par sélection, tri ou comptage."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "3e-informatique-bases-de-donnees-01",
+    "3e-informatique-bases-de-donnees-02",
+    "3e-informatique-bases-de-donnees-03",
+    "3e-informatique-bases-de-donnees-04",
+    "3e-informatique-bases-de-donnees-05",
+    "3e-informatique-bases-de-donnees-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-bases-de-donnees-q1",
+    "3e-informatique-bases-de-donnees-q2",
+    "3e-informatique-bases-de-donnees-q3",
+    "3e-informatique-bases-de-donnees-q4",
+    "3e-informatique-bases-de-donnees-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "Une **base de données** range des informations organisées pour les retrouver vite. Elle est faite de **tables**. Dans une table : une **colonne** est un **champ** (nom, classe, moyenne…) et une **ligne** est un **enregistrement** (un élève). Un champ qui identifie chaque enregistrement sans doublon est une **clé** (ex. le matricule)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une table « Élèves » : 4 champs, 4 enregistrements.",
+     "alt": "Tableau avec les champs matricule, nom, classe, moyenne et quatre élèves.",
+     "figure": {
+      "kind": "shapes",
+      "w": 410,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 100,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 32.0,
+        "text": "Matricule",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 10,
+        "w": 100,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 32.0,
+        "text": "Nom",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 10,
+        "w": 90,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 255.0,
+        "y": 32.0,
+        "text": "Classe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 10,
+        "w": 100,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 32.0,
+        "text": "Moyenne",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 44,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 66.0,
+        "text": "101",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 44,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 66.0,
+        "text": "Amina",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 44,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 255.0,
+        "y": 66.0,
+        "text": "3e A",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 44,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 66.0,
+        "text": "14,5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 78,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 100.0,
+        "text": "102",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 78,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 100.0,
+        "text": "Boris",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 78,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 255.0,
+        "y": 100.0,
+        "text": "3e B",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 78,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 100.0,
+        "text": "9,75",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 134.0,
+        "text": "103",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 112,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 134.0,
+        "text": "Carine",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 112,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 255.0,
+        "y": 134.0,
+        "text": "3e A",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 112,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 134.0,
+        "text": "12",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 146,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 168.0,
+        "text": "104",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 146,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 168.0,
+        "text": "Mballa",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 146,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 255.0,
+        "y": 168.0,
+        "text": "3e B",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 146,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 168.0,
+        "text": "16",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Interroger une table",
+     "md": "- **Sélectionner** (filtrer) : garder les enregistrements qui vérifient une condition (moyenne ≥ 12).\n- **Trier** : ordonner selon un champ (croissant ou décroissant).\n- **Compter** : nombre d'enregistrements qui conviennent.\nUn logiciel de base de données permet aussi de saisir des **formulaires**, de faire des **recherches** et d'imprimer des **états**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : sélectionner",
+     "statement": "Dans la table ci-dessus, quels élèves ont une moyenne supérieure ou égale à 12 ?",
+     "steps": [
+      {
+       "md": "On lit le champ Moyenne : 14,5 ; 9,75 ; 12 ; 16."
+      },
+      {
+       "md": "Les valeurs ≥ 12 : 14,5 (Amina), 12 (Carine), 16 (Mballa)."
+      }
+     ],
+     "answer": "**Amina, Carine, Mballa**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : trier et compter",
+     "statement": "Trie la table par moyenne décroissante, puis compte les élèves de 3e A.",
+     "steps": [
+      {
+       "md": "Ordre décroissant : 16 (Mballa), 14,5 (Amina), 12 (Carine), 9,75 (Boris)."
+      },
+      {
+       "md": "Classe 3e A : Amina et Carine, donc 2 élèves."
+      }
+     ],
+     "answer": "**Mballa, Amina, Carine, Boris ; 2 élèves en 3e A**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre champ (colonne) et enregistrement (ligne).\n- Choisir un nom comme clé : deux élèves peuvent avoir le même nom ; il faut un identifiant unique.\n- Saisir la même information sous plusieurs formes (3eA, 3e A, 3ème A) : les recherches échouent.\n- Oublier de sauvegarder la base."
+    }
+   ],
+   "reviewNotes": [
+    "Notions seulement : pas de langage de requête (SQL) ; à adapter si le programme en impose.",
+    "Relation entre tables : simple mention."
+   ]
+  },
+  {
+   "id": "3e-informatique-tableur-avance",
+   "title": "Tableur avancé : références absolues et fonctions conditionnelles",
+   "minutes": 35,
+   "programRef": "3e — Tableur : références, fonctions conditionnelles, tri et filtre (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser une référence absolue dans un calcul de pourcentage.",
+    "Utiliser SOMME.SI et NB.SI.",
+    "Trier et filtrer une liste."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "3e-informatique-tableur-avance-01",
+    "3e-informatique-tableur-avance-02",
+    "3e-informatique-tableur-avance-03",
+    "3e-informatique-tableur-avance-04",
+    "3e-informatique-tableur-avance-05",
+    "3e-informatique-tableur-avance-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-tableur-avance-q1",
+    "3e-informatique-tableur-avance-q2",
+    "3e-informatique-tableur-avance-q3",
+    "3e-informatique-tableur-avance-q4",
+    "3e-informatique-tableur-avance-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Référence absolue",
+     "md": "Pour calculer la part de chaque vente dans le total placé en B6, on écrit en C2 : =B2/\\$B\\$6. Les signes dollar figent B6 : en recopiant vers le bas, B2 devient B3, B4… mais \\$B\\$6 ne change pas. Avec 100 et un total de 500 : 100 ÷ 500 = 0,2 = 20 %."
+    },
+    {
+     "type": "illustration",
+     "caption": "La colonne C contient =B2/\\$B\\$6 recopiée vers le bas.",
+     "alt": "Tableau des ventes par région avec le total 500 et les parts en pourcentage.",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 40,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 30.0,
+        "text": "#",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 10,
+        "w": 100,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 30.0,
+        "text": "A",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 90,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 30.0,
+        "text": "B",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 10,
+        "w": 90,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285.0,
+        "y": 30.0,
+        "text": "C",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 40,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 60.0,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 40,
+        "w": 100,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 60.0,
+        "text": "Région",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 40,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 60.0,
+        "text": "Ventes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 40,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285.0,
+        "y": 60.0,
+        "text": "Part",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 40,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 90.0,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 70,
+        "w": 100,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 90.0,
+        "text": "Nord",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 70,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 90.0,
+        "text": "100",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 70,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285.0,
+        "y": 90.0,
+        "text": "20 %",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 100,
+        "w": 40,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 120.0,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 100,
+        "w": 100,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 120.0,
+        "text": "Sud",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 100,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 120.0,
+        "text": "200",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 100,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285.0,
+        "y": 120.0,
+        "text": "40 %",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 130,
+        "w": 40,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 150.0,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 130,
+        "w": 100,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 150.0,
+        "text": "Nord",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 130,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 150.0,
+        "text": "150",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 130,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285.0,
+        "y": 150.0,
+        "text": "30 %",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 160,
+        "w": 40,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 180.0,
+        "text": "5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 160,
+        "w": 100,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 180.0,
+        "text": "Sud",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 160,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 180.0,
+        "text": "50",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 160,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285.0,
+        "y": 180.0,
+        "text": "10 %",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 190,
+        "w": 40,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 210.0,
+        "text": "6",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 190,
+        "w": 100,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 210.0,
+        "text": "Total",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 190,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 210.0,
+        "text": "500",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 190,
+        "w": 90,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285.0,
+        "y": 210.0,
+        "text": "100 %",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Fonctions conditionnelles",
+     "md": "=NB.SI(B2:B5;\">=100\") compte les cellules qui valent au moins 100. =SOMME.SI(A2:A5;\"Nord\";B2:B5) additionne les ventes (colonne B) des lignes où la région (colonne A) est Nord. Un **tri** réordonne les lignes ; un **filtre** n'affiche que celles qui conviennent."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : SOMME.SI",
+     "statement": "Avec le tableau, que donne =SOMME.SI(A2:A5;\"Nord\";B2:B5) ?",
+     "steps": [
+      {
+       "md": "Les lignes « Nord » sont les lignes 2 et 4 : 100 et 150."
+      },
+      {
+       "md": "Leur somme : 100 + 150 = 250."
+      }
+     ],
+     "answer": "**250**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : NB.SI",
+     "statement": "Que donne =NB.SI(B2:B5;\">=100\") ?",
+     "steps": [
+      {
+       "md": "Les ventes sont 100, 200, 150, 50."
+      },
+      {
+       "md": "Celles qui valent au moins 100 : 100, 200, 150. Soit 3."
+      }
+     ],
+     "answer": "**3**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier les signes dollar : en recopiant, la référence du total se décale vers une cellule vide.\n- Écrire le test sans guillemets : \">=100\" doit être entre guillemets.\n- Trier une seule colonne : les lignes sont mélangées. Il faut sélectionner toute la liste.\n- Prendre une plage trop courte."
+    }
+   ],
+   "reviewNotes": [
+    "Noms de fonctions français (NB.SI, SOMME.SI) : varient selon le logiciel et la langue.",
+    "Il est supposé que les élèves ont vu les formules et fonctions de base (4e)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Dans une table, une ligne s'appelle :",
+   "choices": [
+    "Un champ",
+    "Un enregistrement",
+    "Une clé",
+    "Une plage"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chaque ligne décrit un élément (un élève).",
+   "id": "3e-informatique-bases-de-donnees-01",
+   "tier": "application",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel champ serait une bonne clé pour des élèves ?",
+   "choices": [
+    "Prénom",
+    "Matricule",
+    "Classe",
+    "Moyenne"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le matricule est unique pour chaque élève.",
+   "id": "3e-informatique-bases-de-donnees-02",
+   "tier": "application",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Dans la table Élèves, combien d'élèves sont en 3e B ?",
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Boris et Mballa.",
+   "id": "3e-informatique-bases-de-donnees-03",
+   "tier": "application",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien d'élèves ont une moyenne strictement inférieure à 12 ?",
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Seul Boris (9,75) est en dessous de 12.",
+   "id": "3e-informatique-bases-de-donnees-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour trouver les élèves d'une seule classe, on utilise :",
+   "choices": [
+    "Un tri seulement",
+    "Une sélection (filtre)",
+    "La clé",
+    "Un graphique"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On garde les enregistrements dont le champ Classe vaut la valeur voulue.",
+   "id": "3e-informatique-bases-de-donnees-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng crée une table « Produits » pour sa boutique : code, nom, prix (FCFA), stock. Enregistrements : (1, riz, 500, 40), (2, huile, 1200, 10), (3, sucre, 700, 0), (4, savon, 250, 25).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de champs la table a-t-elle ?",
+     "answer": 4,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "code, nom, prix, stock.",
+     "id": "3e-informatique-bases-de-donnees-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de produits sont en rupture (stock = 0) ?",
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Seul le sucre a un stock nul.",
+     "id": "3e-informatique-bases-de-donnees-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose une clé et justifie.",
+     "model": "Le code : unique pour chaque produit, contrairement au nom ou au prix qui peuvent se répéter.",
+     "rubric": [
+      "Choisit le code",
+      "Justifie par l'unicité"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-bases-de-donnees-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-bases-de-donnees-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un champ est :",
+   "choices": [
+    "Une ligne",
+    "Une colonne d'une table",
+    "Un fichier",
+    "Un réseau"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chaque champ décrit une caractéristique.",
+   "id": "3e-informatique-bases-de-donnees-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une clé doit être :",
+   "choices": [
+    "Unique pour chaque enregistrement",
+    "Toujours un nom",
+    "Toujours un nombre décimal",
+    "Vide"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pour identifier sans ambiguïté.",
+   "id": "3e-informatique-bases-de-donnees-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Trier une table, c'est :",
+   "choices": [
+    "La supprimer",
+    "La traduire",
+    "La mettre dans un certain ordre",
+    "La chiffrer"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On classe selon un champ.",
+   "id": "3e-informatique-bases-de-donnees-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une base de données sert à :",
+   "choices": [
+    "Chauffer l'ordinateur",
+    "Organiser et retrouver des informations",
+    "Brancher un écran",
+    "Dessiner un plan"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est son rôle.",
+   "id": "3e-informatique-bases-de-donnees-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Filtrer signifie :",
+   "choices": [
+    "Doubler la table",
+    "Changer les noms de champs",
+    "Garder les enregistrements qui répondent à une condition",
+    "Éteindre l'ordinateur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sélection selon une condition.",
+   "id": "3e-informatique-bases-de-donnees-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-bases-de-donnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Avec le tableau (ventes 100, 200, 150, 50), que donne =SOMME.SI pour la région Sud ?",
+   "answer": 250,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "200 + 50 = 250.",
+   "id": "3e-informatique-tableur-avance-01",
+   "tier": "application",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel pourcentage du total représente la vente de 150 ?",
+   "answer": 30,
+   "unit": "%",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "150 ÷ 500 = 0,30 = 30 %.",
+   "id": "3e-informatique-tableur-avance-02",
+   "tier": "application",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fige l'écriture avec des signes dollar autour de B6 ?",
+   "choices": [
+    "La couleur",
+    "Le nom du fichier",
+    "La taille de la police",
+    "La cellule B6 lors de la recopie"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est une référence absolue.",
+   "id": "3e-informatique-tableur-avance-03",
+   "tier": "application",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Que donne =NB.SI(B2:B5;\">150\") ?",
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Seule 200 est strictement supérieure à 150.",
+   "id": "3e-informatique-tableur-avance-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi trier seulement la colonne B est une erreur ?",
+   "choices": [
+    "Le tableur plante",
+    "Les chiffres deviennent du texte",
+    "Le fichier est supprimé",
+    "Les lignes se retrouvent mélangées"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il faut trier toute la liste pour garder les lignes cohérentes.",
+   "id": "3e-informatique-tableur-avance-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina note ses dépenses du mois (FCFA) : Transport 4000, Nourriture 12000, Fournitures 4000, Divers 2000. Le total est en B6.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le total ?",
+     "answer": 22000,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "4000 + 12000 + 4000 + 2000 = 22 000.",
+     "id": "3e-informatique-tableur-avance-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel pourcentage représente la nourriture ? (arrondis à l'entier)",
+     "answer": 55,
+     "tolerance": 1,
+     "unit": "%",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "12 000 ÷ 22 000 ≈ 0,545 donc environ 55 %.",
+     "id": "3e-informatique-tableur-avance-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris la formule à mettre en C2 pour la part du transport, utilisable en recopie vers le bas.",
+     "model": "=B2/\\$B\\$6 (avec référence absolue sur le total).",
+     "rubric": [
+      "Division par le total",
+      "Total en référence absolue"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-tableur-avance-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-tableur-avance-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "NB.SI sert à :",
+   "choices": [
+    "Additionner tout",
+    "Compter selon une condition",
+    "Trier",
+    "Dessiner un graphique"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "NB = nombre.",
+   "id": "3e-informatique-tableur-avance-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un filtre :",
+   "choices": [
+    "Supprime les lignes",
+    "Change les formules",
+    "Cache les lignes qui ne conviennent pas",
+    "Ferme le tableur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les données ne sont pas effacées.",
+   "id": "3e-informatique-tableur-avance-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans =B2/\\$B\\$6 recopiée en C3, on obtient :",
+   "choices": [
+    "=B2/\\$B\\$6",
+    "=B3/\\$B\\$6",
+    "=B3/B7",
+    "=C3/B6"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le numérateur est relatif, le dénominateur est absolu.",
+   "id": "3e-informatique-tableur-avance-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un pourcentage s'obtient par :",
+   "choices": [
+    "Partie ÷ total × 100",
+    "Total ÷ partie",
+    "Partie + total",
+    "Partie − total"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Par exemple 150 ÷ 500 × 100 = 30.",
+   "id": "3e-informatique-tableur-avance-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour additionner selon un critère on utilise :",
+   "choices": [
+    "MIN",
+    "NB",
+    "MOYENNE seule",
+    "SOMME.SI"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "SOMME.SI additionne seulement les lignes qui conviennent.",
+   "id": "3e-informatique-tableur-avance-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableur-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

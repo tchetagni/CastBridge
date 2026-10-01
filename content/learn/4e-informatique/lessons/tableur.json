@@ -1,0 +1,1133 @@
+{
+ "chapter": "4e-informatique-tableur",
+ "lessons": [
+  {
+   "id": "4e-informatique-tableur-formules",
+   "title": "Le tableur : cellules et formules",
+   "minutes": 30,
+   "programRef": "4e — Tableur : cellules, formules, recopie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Repérer une cellule par sa colonne et sa ligne.",
+    "Écrire une formule avec des références de cellules.",
+    "Recopier une formule vers le bas."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-informatique-tableur-formules-01",
+    "4e-informatique-tableur-formules-02",
+    "4e-informatique-tableur-formules-03",
+    "4e-informatique-tableur-formules-04",
+    "4e-informatique-tableur-formules-05",
+    "4e-informatique-tableur-formules-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-tableur-formules-q1",
+    "4e-informatique-tableur-formules-q2",
+    "4e-informatique-tableur-formules-q3",
+    "4e-informatique-tableur-formules-q4",
+    "4e-informatique-tableur-formules-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cellule et référence",
+     "md": "Un **tableur** est un logiciel qui organise des données en lignes et en colonnes et fait des calculs. Les colonnes sont notées par des lettres (A, B, C…) et les lignes par des nombres (1, 2, 3…). Une **cellule** se repère par sa **référence** : colonne puis ligne (B3 = colonne B, ligne 3). Une **formule** commence par le signe = ; elle utilise des références, donc se met à jour quand une valeur change."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une feuille de calcul : D2 contient la formule = B2 × C2.",
+     "alt": "Un tableau avec colonnes A à D et lignes 1 à 4 : article, prix, quantité, total.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 40,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 40,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 10,
+        "w": 100,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 100,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 10,
+        "w": 100,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 10,
+        "w": 100,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 31,
+        "text": "A",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 31,
+        "text": "B",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 31,
+        "text": "C",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 31,
+        "text": "D",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 40,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 40,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 100,
+        "w": 40,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 130,
+        "w": 40,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 61,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 91,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 121,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 151,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 40,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 40,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 40,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 40,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 70,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 70,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 70,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 70,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 100,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 100,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 100,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 100,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 130,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 130,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 130,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 130,
+        "w": 100,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 61,
+        "text": "Article",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 61,
+        "text": "Prix",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 61,
+        "text": "Quantité",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 61,
+        "text": "Total",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 91,
+        "text": "Riz",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 91,
+        "text": "500",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 91,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 91,
+        "text": "1500",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 121,
+        "text": "Huile",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 121,
+        "text": "1200",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 121,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 121,
+        "text": "2400",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 151,
+        "text": "Sucre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 151,
+        "text": "700",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 151,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 151,
+        "text": "2800",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Écrire et recopier une formule",
+     "md": "Dans D2, on écrit =B2\\*C2 (le signe \\* est le symbole de la multiplication au tableur ; + − / pour les autres opérations). En **recopiant vers le bas**, la référence se décale : D3 devient =B3\\*C3. C'est une référence **relative**. Pour qu'une référence ne bouge pas, on la fige avec des signes dollar : \\$B\\$1 (référence **absolue**)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer un total",
+     "statement": "Avec la feuille ci-dessus, quelle formule met le total du sucre dans D4, et quelle est sa valeur ?",
+     "steps": [
+      {
+       "md": "Le total du sucre = prix × quantité, donc B4 × C4."
+      },
+      {
+       "md": "On écrit =B4\\*C4 ; les valeurs sont 700 et 4 : 700 × 4 = 2800."
+      }
+     ],
+     "answer": "**=B4\\*C4 qui donne 2800 FCFA**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : pourquoi une référence ?",
+     "statement": "Le prix du riz passe de 500 à 600. Que devient D2 si D2 contient =B2\\*C2 ? Et si on avait tapé 1500 directement ?",
+     "steps": [
+      {
+       "md": "Avec la formule, le tableur recalcule : 600 × 3 = 1800."
+      },
+      {
+       "md": "Avec 1500 tapé à la main, la valeur ne change pas : elle devient fausse."
+      }
+     ],
+     "answer": "**La formule donne 1800 ; la valeur tapée reste 1500 (fausse)**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le signe = : le tableur considère alors le texte comme du texte.\n- Taper le résultat au lieu de la formule : il ne se met pas à jour.\n- Recopier une formule qui doit garder une cellule fixe sans utiliser de référence absolue : le résultat se décale et devient faux."
+    }
+   ],
+   "reviewNotes": [
+    "Le séparateur d'arguments (point-virgule ou virgule) dépend du logiciel et de la langue : à adapter.",
+    "Aucun logiciel précis ne doit être imposé ; les menus ne sont pas détaillés."
+   ]
+  },
+  {
+   "id": "4e-informatique-tableur-fonctions",
+   "title": "Fonctions et graphiques du tableur",
+   "minutes": 30,
+   "programRef": "4e — Tableur : fonctions usuelles et graphiques (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser SOMME, MOYENNE, MIN, MAX et SI.",
+    "Choisir un type de graphique adapté aux données."
+   ],
+   "prerequisites": [
+    "4e-informatique-tableur-formules"
+   ],
+   "exercises": [
+    "4e-informatique-tableur-fonctions-01",
+    "4e-informatique-tableur-fonctions-02",
+    "4e-informatique-tableur-fonctions-03",
+    "4e-informatique-tableur-fonctions-04",
+    "4e-informatique-tableur-fonctions-05",
+    "4e-informatique-tableur-fonctions-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-tableur-fonctions-q1",
+    "4e-informatique-tableur-fonctions-q2",
+    "4e-informatique-tableur-fonctions-q3",
+    "4e-informatique-tableur-fonctions-q4",
+    "4e-informatique-tableur-fonctions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les fonctions courantes",
+     "md": "Une **fonction** est un calcul prêt à l'emploi, écrit avec un nom et des parenthèses. Une **plage** désigne un bloc de cellules : B2:B5 = de B2 à B5.\n- =SOMME(B2:B5) : additionne.\n- =MOYENNE(B2:B5) : moyenne.\n- =MIN(B2:B5) et =MAX(B2:B5) : plus petite et plus grande valeur.\n- =NB(B2:B5) : nombre de cellules contenant un nombre."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "La fonction SI",
+     "md": "=SI(test ; valeur si vrai ; valeur si faux). Exemple : =SI(B2>=10;\"Admis\";\"Refusé\") affiche Admis si B2 vaut 10 ou plus, sinon Refusé. Le texte écrit dans la formule se met entre guillemets."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un histogramme : une barre par matière (notes sur 20).",
+     "alt": "Quatre barres de hauteurs 12, 15, 9 et 14.",
+     "figure": {
+      "kind": "bars",
+      "w": 380,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Maths",
+        "value": 12,
+        "color": "blue"
+       },
+       {
+        "label": "Anglais",
+        "value": 15,
+        "color": "green"
+       },
+       {
+        "label": "SVT",
+        "value": 9,
+        "color": "orange"
+       },
+       {
+        "label": "Histoire",
+        "value": 14,
+        "color": "purple"
+       }
+      ],
+      "unit": "/20"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : moyenne",
+     "statement": "Les notes de Boris sont en B2:B5 : 12, 15, 9 et 14. Quelle formule donne sa moyenne et quelle est sa valeur ?",
+     "steps": [
+      {
+       "md": "On écrit =MOYENNE(B2:B5)."
+      },
+      {
+       "md": "Somme : 12 + 15 + 9 + 14 = 50 ; 50 ÷ 4 = 12,5."
+      }
+     ],
+     "answer": "**=MOYENNE(B2:B5) donne 12,5**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir un graphique",
+     "statement": "Quel graphique choisir pour (a) comparer les notes de quatre matières ; (b) montrer l'évolution de la température sur 7 jours ; (c) montrer la part de chaque dépense dans un budget ?",
+     "steps": [
+      {
+       "md": "(a) comparer des quantités distinctes : histogramme (barres)."
+      },
+      {
+       "md": "(b) une évolution dans le temps : courbe."
+      },
+      {
+       "md": "(c) des parts d'un tout : diagramme circulaire (secteurs)."
+      }
+     ],
+     "answer": "**(a) barres ; (b) courbe ; (c) secteurs**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Se tromper de plage : =SOMME(B2:B4) oublie la ligne 5.\n- Oublier les guillemets autour d'un texte dans SI.\n- Faire un diagramme circulaire pour des valeurs qui ne forment pas un tout.\n- Ne pas titrer le graphique ni nommer les axes."
+    }
+   ],
+   "reviewNotes": [
+    "Noms de fonctions donnés en français (SOMME, MOYENNE, SI) ; peuvent différer en version anglaise (SUM, AVERAGE, IF).",
+    "Séparateur d'arguments : point-virgule ou virgule selon le logiciel."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la référence de la cellule située colonne C, ligne 5 ?",
+   "choices": [
+    "5C",
+    "C-5",
+    "C5",
+    "E3"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On écrit la lettre de la colonne puis le numéro de la ligne.",
+   "id": "4e-informatique-tableur-formules-01",
+   "tier": "application",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une formule au tableur commence par :",
+   "choices": [
+    "Le signe +",
+    "Le signe =",
+    "Un guillemet",
+    "Un point"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sans =, le texte n'est pas calculé.",
+   "id": "4e-informatique-tableur-formules-02",
+   "tier": "application",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Dans une feuille, B2 contient 8 et C2 contient 7. Que donne =B2\\*C2 ?",
+   "answer": 56,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "8 × 7 = 56.",
+   "id": "4e-informatique-tableur-formules-03",
+   "tier": "application",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La formule =B2+C2 est recopiée de D2 vers D3. Que devient-elle ?",
+   "choices": [
+    "=B3+C3",
+    "=B2+C2",
+    "=B3+C2",
+    "=D3+E3"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Une référence relative se décale d'une ligne vers le bas.",
+   "id": "4e-informatique-tableur-formules-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle écriture fige complètement la cellule A1 ?",
+   "choices": [
+    "Avec un signe dollar devant la lettre et devant le chiffre",
+    "Avec un point",
+    "Avec le signe =",
+    "Avec deux lettres A"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "C'est la référence absolue \\$A\\$1.",
+   "id": "4e-informatique-tableur-formules-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina tient la liste de ses dépenses : colonne B = prix unitaire (500, 250, 100) et colonne C = nombre d'articles (4, 6, 10).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le total de la ligne du 1er article.",
+     "answer": 2000,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "500 × 4 = 2 000 FCFA.",
+     "id": "4e-informatique-tableur-formules-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le total des trois lignes (prix × quantité, puis somme).",
+     "answer": 4500,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "500 × 4 + 250 × 6 + 100 × 10 = 2 000 + 1 500 + 1 000 = 4 500.",
+     "id": "4e-informatique-tableur-formules-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique pourquoi il vaut mieux utiliser une formule qu'écrire les totaux à la main.",
+     "model": "Quand un prix ou une quantité change, la formule se met à jour seule, on évite les erreurs et on gagne du temps.",
+     "rubric": [
+      "Mise à jour automatique",
+      "Moins d'erreurs"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-informatique-tableur-formules-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-tableur-formules-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que représente A1 ?",
+   "choices": [
+    "Une feuille",
+    "Un classeur",
+    "Un dossier",
+    "Une cellule"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "A1 est la cellule colonne A, ligne 1.",
+   "id": "4e-informatique-tableur-formules-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel symbole multiplie au tableur ?",
+   "choices": [
+    "x",
+    "×",
+    "#",
+    "\\*"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Au clavier on tape \\*.",
+   "id": "4e-informatique-tableur-formules-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que se passe-t-il quand on change B2 si D2 = B2\\*C2 ?",
+   "choices": [
+    "D2 est recalculé",
+    "D2 reste identique",
+    "Le fichier se ferme",
+    "Une erreur apparaît toujours"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La formule utilise la valeur de B2.",
+   "id": "4e-informatique-tableur-formules-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une référence relative recopiée vers la droite :",
+   "choices": [
+    "Se décale vers la droite",
+    "Ne bouge pas",
+    "Devient une valeur",
+    "Efface la cellule"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La lettre de colonne change.",
+   "id": "4e-informatique-tableur-formules-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une colonne est repérée par :",
+   "choices": [
+    "Un nombre",
+    "Une lettre",
+    "Un symbole",
+    "Un mot"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Colonnes A, B, C… lignes 1, 2, 3…",
+   "id": "4e-informatique-tableur-formules-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "B2:B4 contient 10, 20 et 30. Que donne =SOMME(B2:B4) ?",
+   "answer": 60,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10 + 20 + 30 = 60.",
+   "id": "4e-informatique-tableur-fonctions-01",
+   "tier": "application",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "B2:B4 contient 10, 20 et 30. Que donne =MAX(B2:B4) ?",
+   "answer": 30,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La plus grande valeur est 30.",
+   "id": "4e-informatique-tableur-fonctions-02",
+   "tier": "application",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque graphique à son usage.",
+   "pairs": [
+    [
+     "Histogramme",
+     "Comparer des quantités"
+    ],
+    [
+     "Courbe",
+     "Suivre une évolution"
+    ],
+    [
+     "Secteurs",
+     "Montrer des parts d'un total"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque type de graphique répond à un besoin.",
+   "id": "4e-informatique-tableur-fonctions-03",
+   "tier": "application",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Les prix sont 500, 700 et 1200 en B2:B4. Que donne =MOYENNE(B2:B4) ?",
+   "answer": 800,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "(500 + 700 + 1200) ÷ 3 = 2 400 ÷ 3 = 800.",
+   "id": "4e-informatique-tableur-fonctions-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si B2 = 8, que donne =SI(B2>=10;\"Admis\";\"Refusé\") ?",
+   "choices": [
+    "Admis",
+    "8",
+    "Une erreur",
+    "Refusé"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "8 n'est pas supérieur ou égal à 10 : valeur si faux.",
+   "id": "4e-informatique-tableur-fonctions-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng note ses ventes de la semaine en FCFA dans B2:B6 : 3000, 4500, 2500, 5000, 5000.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle formule SOMME donne le total ? Donne sa valeur.",
+     "answer": 20000,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "3000 + 4500 + 2500 + 5000 + 5000 = 20 000.",
+     "id": "4e-informatique-tableur-fonctions-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la moyenne journalière ?",
+     "answer": 4000,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "20 000 ÷ 5 = 4 000.",
+     "id": "4e-informatique-tableur-fonctions-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel graphique est le plus adapté pour suivre l'évolution des ventes jour après jour ?",
+     "choices": [
+      "Un diagramme circulaire",
+      "Aucun graphique",
+      "Un tableau vide",
+      "Une courbe"
+     ],
+     "answer": 3,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Une évolution dans le temps se montre avec une courbe.",
+     "id": "4e-informatique-tableur-fonctions-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-tableur-fonctions-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que désigne B2:B5 ?",
+   "choices": [
+    "Une seule cellule",
+    "Une formule",
+    "Une plage de cellules",
+    "Un graphique"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les deux-points relient la première et la dernière cellule de la plage.",
+   "id": "4e-informatique-tableur-fonctions-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fonction donne la plus petite valeur ?",
+   "choices": [
+    "MAX",
+    "MIN",
+    "SOMME",
+    "SI"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "MIN = minimum.",
+   "id": "4e-informatique-tableur-fonctions-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans SI, le texte doit être écrit :",
+   "choices": [
+    "Entre crochets",
+    "Entre guillemets",
+    "En majuscules",
+    "Sans rien"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sans guillemets, le texte est pris pour un nom.",
+   "id": "4e-informatique-tableur-fonctions-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour montrer la part de chaque dépense dans un budget on utilise :",
+   "choices": [
+    "Une courbe",
+    "Un diagramme circulaire",
+    "Un histogramme de températures",
+    "Un tableau de notes"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les secteurs montrent les parts d'un tout.",
+   "id": "4e-informatique-tableur-fonctions-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "=MOYENNE(4;6) donne :",
+   "choices": [
+    "10",
+    "4",
+    "6",
+    "5"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "(4 + 6) ÷ 2 = 5.",
+   "id": "4e-informatique-tableur-fonctions-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-tableur-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

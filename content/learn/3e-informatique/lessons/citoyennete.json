@@ -1,0 +1,734 @@
+{
+ "chapter": "3e-informatique-citoyennete",
+ "lessons": [
+  {
+   "id": "3e-informatique-droit-vie-privee",
+   "title": "Droit d'auteur et vie privée",
+   "minutes": 30,
+   "programRef": "3e — Droits et devoirs sur Internet (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer ce qu'est le droit d'auteur et citer ses sources.",
+    "Distinguer données personnelles et informations publiques.",
+    "Appliquer des réflexes pour protéger sa vie privée."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "3e-informatique-droit-vie-privee-01",
+    "3e-informatique-droit-vie-privee-02",
+    "3e-informatique-droit-vie-privee-03",
+    "3e-informatique-droit-vie-privee-04",
+    "3e-informatique-droit-vie-privee-05",
+    "3e-informatique-droit-vie-privee-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-droit-vie-privee-q1",
+    "3e-informatique-droit-vie-privee-q2",
+    "3e-informatique-droit-vie-privee-q3",
+    "3e-informatique-droit-vie-privee-q4",
+    "3e-informatique-droit-vie-privee-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Droit d'auteur",
+     "md": "Une œuvre (texte, photo, musique, vidéo, programme) appartient à son **auteur**, qui décide de son usage. En général, on ne peut pas la copier, la modifier ou la diffuser sans son accord. Certaines œuvres sont proposées avec une **licence** qui autorise certains usages (souvent en citant l'auteur). Pour un exposé : on **cite ses sources** (auteur, titre, adresse du site) et on ne présente jamais le travail d'un autre comme le sien (**plagiat**)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vie privée et données personnelles",
+     "md": "Les **données personnelles** permettent d'identifier quelqu'un : nom, adresse, numéro de téléphone, photos, voix, mots de passe. Ce qu'on publie peut rester longtemps visible et être copié. Respecter la vie privée, c'est aussi demander l'accord avant de publier la photo d'un camarade."
+    },
+    {
+     "type": "illustration",
+     "caption": "Avant de publier : relire, demander l'accord, citer ses sources.",
+     "alt": "Quatre étapes : relire, demander l'accord, citer, publier.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 127,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 57.0,
+        "y": 43,
+        "text": "Je relis",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 107.0,
+        "y1": 37,
+        "x2": 129.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 132.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 179.0,
+        "y": 43,
+        "text": "Je demande",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 229.0,
+        "y1": 37,
+        "x2": 251.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 254.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 301.0,
+        "y": 43,
+        "text": "Je cite",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 351.0,
+        "y1": 37,
+        "x2": 373.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 376.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 423.0,
+        "y": 43,
+        "text": "Je publie",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Réflexes",
+     "md": "- Avant d'utiliser une image ou un texte : qui en est l'auteur ? ai-je le droit ? comment le citer ?\n- Avant de publier : cela peut-il blesser ? gêner quelqu'un ? être mal compris ?\n- Régler les paramètres de confidentialité de ses comptes.\n- Ne pas donner son adresse, son téléphone, ses codes à des inconnus.\n- Se demander : « Serais-je à l'aise si mes parents ou mon enseignant voyaient ceci ? »"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : exposé",
+     "statement": "Amina trouve une photo sur un site et veut l'utiliser dans son diaporama. Que doit-elle faire ?",
+     "steps": [
+      {
+       "md": "Chercher l'auteur et les conditions d'utilisation de la photo."
+      },
+      {
+       "md": "Si l'usage est permis, elle l'utilise en indiquant l'auteur et le site ; sinon elle choisit une autre image."
+      }
+     ],
+     "answer": "**Vérifier le droit d'usage et citer la source**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : photo d'un camarade",
+     "statement": "Boris veut publier une photo de classe où figure Carine. Que fait-il ?",
+     "steps": [
+      {
+       "md": "La photo montre Carine : c'est une donnée personnelle."
+      },
+      {
+       "md": "Il lui demande son accord (et celui de ses parents si nécessaire) avant de publier."
+      }
+     ],
+     "answer": "**Demander l'accord avant de publier**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que « tout ce qui est sur Internet est gratuit et libre ».\n- Copier-coller un texte entier dans un devoir sans guillemets ni source.\n- Croire que supprimer une publication l'efface partout : elle a pu être copiée.\n- Partager en public sa localisation ou ses informations de famille."
+    }
+   ],
+   "reviewNotes": [
+    "Aucune référence légale précise : principes généraux seulement ; les lois en vigueur au Cameroun sont à faire préciser par l'enseignant.",
+    "Les licences libres sont mentionnées sans détail."
+   ]
+  },
+  {
+   "id": "3e-informatique-cyber-desinformation",
+   "title": "Cyberharcèlement et désinformation",
+   "minutes": 30,
+   "programRef": "3e — Comportements responsables en ligne (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître le cyberharcèlement et savoir réagir.",
+    "Vérifier une information avant de la partager.",
+    "Adopter un comportement responsable en ligne."
+   ],
+   "prerequisites": [
+    "3e-informatique-droit-vie-privee"
+   ],
+   "exercises": [
+    "3e-informatique-cyber-desinformation-01",
+    "3e-informatique-cyber-desinformation-02",
+    "3e-informatique-cyber-desinformation-03",
+    "3e-informatique-cyber-desinformation-04",
+    "3e-informatique-cyber-desinformation-05",
+    "3e-informatique-cyber-desinformation-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-cyber-desinformation-q1",
+    "3e-informatique-cyber-desinformation-q2",
+    "3e-informatique-cyber-desinformation-q3",
+    "3e-informatique-cyber-desinformation-q4",
+    "3e-informatique-cyber-desinformation-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cyberharcèlement",
+     "md": "Le **cyberharcèlement** est le fait de s'en prendre à quelqu'un de façon répétée par des moyens numériques : messages méchants, moqueries, photos humiliantes, fausses rumeurs, exclusion de groupes. Il peut avoir de graves conséquences et il est interdit : ce n'est pas « juste pour rire ». Les faits peuvent être sanctionnés par la loi et par le règlement de l'établissement (sans détail ici)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Que faire ?",
+     "md": "**Si je suis victime** : ne pas répondre à chaud, garder des preuves (captures d'écran), bloquer, **en parler** à un adulte de confiance.\n**Si je suis témoin** : ne pas partager ni « liker », soutenir la victime, prévenir un adulte.\n**Avant d'écrire** : réfléchir au message qu'on enverrait si la personne était en face de nous."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Vérifier une information",
+     "md": "1. **Qui** a publié ? Source connue et fiable ?\n2. **Quand** ? L'information est-elle récente ?\n3. **Autres sources** : d'autres sites sérieux disent-ils la même chose ?\n4. **Preuves** : l'image ou la vidéo peut être ancienne ou truquée.\n5. Un titre qui choque ou pousse à partager vite doit éveiller la méfiance."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : témoin",
+     "statement": "Dans un groupe, des élèves se moquent d'une camarade avec une photo retouchée. Que faire ?",
+     "steps": [
+      {
+       "md": "Ne pas partager la photo ni rire pour ne pas amplifier."
+      },
+      {
+       "md": "Soutenir la camarade et prévenir un adulte (enseignant, surveillant, parent)."
+      }
+     ],
+     "answer": "**Ne pas participer, soutenir, prévenir un adulte**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : rumeur",
+     "statement": "Un message dit « ce fruit guérit toutes les maladies, partage à 10 personnes ». Que faire ?",
+     "steps": [
+      {
+       "md": "Le ton exagéré et la demande de partage sont des signaux d'alerte."
+      },
+      {
+       "md": "Chercher une source fiable (professionnel de santé, organisme reconnu) avant de partager."
+      }
+     ],
+     "answer": "**Ne pas partager ; vérifier la source**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Partager « au cas où » sans vérifier.\n- Croire qu'une photo ou une vidéo est une preuve parce qu'elle « paraît vraie ».\n- Se moquer anonymement : l'anonymat n'efface pas le mal fait.\n- Se taire par peur : en parler est un acte de courage."
+    }
+   ],
+   "reviewNotes": [
+    "Principes généraux uniquement ; aucune référence à un texte de loi précis. Vérifier avec l'enseignant les dispositifs d'aide locaux (numéros, adultes référents).",
+    "Sujet sensible : aborder avec tact en classe."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quand on utilise le texte d'un autre dans un exposé, on doit :",
+   "choices": [
+    "Le présenter comme le sien",
+    "Supprimer le nom de l'auteur",
+    "Le garder secret",
+    "Le citer avec sa source"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Citer la source est la règle.",
+   "id": "3e-informatique-droit-vie-privee-01",
+   "tier": "application",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle information est une donnée personnelle ?",
+   "choices": [
+    "La capitale du pays",
+    "Le résultat de 2 + 2",
+    "La couleur du ciel",
+    "Le numéro de téléphone"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle identifie une personne.",
+   "id": "3e-informatique-droit-vie-privee-02",
+   "tier": "application",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une photo trouvée sur Internet peut toujours être réutilisée librement.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle appartient à son auteur, sauf indication contraire.",
+   "id": "3e-informatique-droit-vie-privee-03",
+   "tier": "application",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le plagiat consiste à :",
+   "choices": [
+    "Citer ses sources",
+    "Présenter le travail d'un autre comme le sien",
+    "Écrire avec ses mots",
+    "Corriger une faute"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "C'est une faute, même avec un copier-coller.",
+   "id": "3e-informatique-droit-vie-privee-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avant de publier une photo de groupe, il faut :",
+   "choices": [
+    "Ajouter un filtre",
+    "Demander l'accord des personnes visibles",
+    "Changer le titre",
+    "La rendre plus grande"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le droit à l'image et le respect des camarades.",
+   "id": "3e-informatique-droit-vie-privee-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa prépare un exposé sur le cacao. Il copie trois paragraphes d'un site et une photo, sans rien indiquer.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Dis ce qui ne va pas dans sa démarche.",
+     "model": "Il copie sans citer : plagiat, et il n'a pas vérifié le droit d'utiliser la photo.",
+     "rubric": [
+      "Plagiat",
+      "Source et droit d'usage"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-droit-vie-privee-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris comment il devrait procéder.",
+     "model": "Reformuler avec ses mots, citer l'auteur et le site, utiliser une image dont l'usage est permis en indiquant sa source.",
+     "rubric": [
+      "Reformulation",
+      "Citation des sources",
+      "Image autorisée"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-droit-vie-privee-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-droit-vie-privee-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le droit d'auteur protège :",
+   "choices": [
+    "Les œuvres de leur créateur",
+    "Seulement les livres",
+    "Les ordinateurs",
+    "Les mots de passe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Texte, image, musique, programme…",
+   "id": "3e-informatique-droit-vie-privee-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une licence peut :",
+   "choices": [
+    "Effacer l'œuvre",
+    "Autoriser certains usages d'une œuvre",
+    "Chiffrer l'écran",
+    "Remplacer l'auteur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les conditions sont précisées par l'auteur.",
+   "id": "3e-informatique-droit-vie-privee-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faire avec la photo d'un camarade ?",
+   "choices": [
+    "Demander son accord",
+    "La publier sans le dire",
+    "La modifier en secret",
+    "La vendre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Respect de sa vie privée.",
+   "id": "3e-informatique-droit-vie-privee-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un mot de passe est :",
+   "choices": [
+    "Une information publique",
+    "Une donnée personnelle à ne pas partager",
+    "Un fichier de cours",
+    "Une adresse de site"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il protège l'accès à un compte.",
+   "id": "3e-informatique-droit-vie-privee-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que citer ses sources ?",
+   "choices": [
+    "Copier sans dire",
+    "Indiquer d'où viennent les informations",
+    "Effacer l'auteur",
+    "Garder le texte secret"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On rend à l'auteur ce qui lui appartient.",
+   "id": "3e-informatique-droit-vie-privee-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-droit-vie-privee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel comportement relève du cyberharcèlement ?",
+   "choices": [
+    "Envoyer des moqueries répétées à un camarade",
+    "Féliciter un camarade",
+    "Poser une question au cours",
+    "Envoyer son devoir"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Des attaques répétées par voie numérique.",
+   "id": "3e-informatique-cyber-desinformation-01",
+   "tier": "application",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si on est victime, que faire en premier ?",
+   "choices": [
+    "Se venger sur les réseaux",
+    "Garder des preuves et en parler à un adulte",
+    "Supprimer toutes les traces et se taire",
+    "Partager les messages"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les preuves et l'aide d'un adulte sont essentielles.",
+   "id": "3e-informatique-cyber-desinformation-02",
+   "tier": "application",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : cliquer sur « partager » un message d'insulte n'est pas grave si on n'est pas l'auteur.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le partage amplifie le mal.",
+   "id": "3e-informatique-cyber-desinformation-03",
+   "tier": "application",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel signe doit faire douter d'une information ?",
+   "choices": [
+    "Un titre choquant et une demande de partage rapide",
+    "Une source citée",
+    "La date de publication",
+    "Plusieurs sources sérieuses"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La désinformation joue sur l'émotion et la vitesse.",
+   "id": "3e-informatique-cyber-desinformation-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour vérifier une rumeur, le mieux est de :",
+   "choices": [
+    "La partager d'abord",
+    "Compter les « j'aime »",
+    "Chercher plusieurs sources fiables",
+    "La copier dans un autre groupe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On recoupe les informations.",
+   "id": "3e-informatique-cyber-desinformation-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Carine reçoit un message : « Une école ferme demain, le directeur l'a annoncé, prévenez tous vos amis ! » sans signature.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Cite deux raisons de douter de ce message.",
+     "model": "Aucune source ni signature, pas de date, appel à partager à tous.",
+     "rubric": [
+      "Source absente",
+      "Appel à partager"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-cyber-desinformation-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que doit-elle faire avant de le transmettre ?",
+     "model": "Vérifier auprès de l'école ou d'un adulte responsable et ne rien transmettre tant que ce n'est pas confirmé.",
+     "rubric": [
+      "Vérification auprès d'une source fiable",
+      "Ne pas partager sans preuve"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-cyber-desinformation-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-cyber-desinformation-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La désinformation est :",
+   "choices": [
+    "Une information fausse diffusée",
+    "Une information vraie",
+    "Un antivirus",
+    "Un logiciel de dessin"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle peut être volontaire ou non.",
+   "id": "3e-informatique-cyber-desinformation-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Garder des captures d'écran sert à :",
+   "choices": [
+    "Aggraver la situation",
+    "Effacer les messages",
+    "Cacher la victime",
+    "Prouver ce qui s'est passé"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elles servent de preuves.",
+   "id": "3e-informatique-cyber-desinformation-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un témoin d'harcèlement doit :",
+   "choices": [
+    "Rire",
+    "Partager",
+    "Ne pas participer et prévenir un adulte",
+    "Ne rien faire du tout"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chacun peut aider.",
+   "id": "3e-informatique-cyber-desinformation-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une vidéo « choquante » reçue d'un inconnu :",
+   "choices": [
+    "Est toujours vraie",
+    "Est toujours fausse",
+    "Doit être vérifiée avant d'être partagée",
+    "Doit être envoyée à toute la classe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les montages et vieilles images sont fréquents.",
+   "id": "3e-informatique-cyber-desinformation-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le cyberharcèlement est :",
+   "choices": [
+    "Interdit et dangereux",
+    "Un jeu",
+    "Autorisé en classe",
+    "Sans conséquence"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il peut faire beaucoup de mal.",
+   "id": "3e-informatique-cyber-desinformation-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-cyber-desinformation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

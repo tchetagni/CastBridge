@@ -1,0 +1,1198 @@
+{
+ "chapter": "3e-informatique-algo",
+ "lessons": [
+  {
+   "id": "3e-informatique-structures-controle",
+   "title": "Structures de contrôle : conditions combinées et boucles",
+   "minutes": 35,
+   "programRef": "3e — Structures de contrôle : conditionnelles, répétitives (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Combiner des conditions avec ET, OU, NON.",
+    "Imbriquer une condition dans une boucle.",
+    "Utiliser un compteur et un cumul."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "3e-informatique-structures-controle-01",
+    "3e-informatique-structures-controle-02",
+    "3e-informatique-structures-controle-03",
+    "3e-informatique-structures-controle-04",
+    "3e-informatique-structures-controle-05",
+    "3e-informatique-structures-controle-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-structures-controle-q1",
+    "3e-informatique-structures-controle-q2",
+    "3e-informatique-structures-controle-q3",
+    "3e-informatique-structures-controle-q4",
+    "3e-informatique-structures-controle-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Conditions combinées",
+     "md": "On peut combiner des conditions :\n- **A ET B** est vrai seulement si A et B sont vraies.\n- **A OU B** est vrai si au moins une des deux est vraie.\n- **NON A** est vrai quand A est fausse.\nExemple : (age ≥ 12) ET (age ≤ 15) est vrai pour 12, 13, 14 et 15 seulement."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Conditions dans une boucle",
+     "md": "Une boucle peut contenir une condition. Deux outils très utilisés :\n- un **compteur** : c ← c + 1 chaque fois qu'un cas se présente ;\n- un **cumul** : s ← s + valeur pour additionner.\nOn les initialise (souvent à 0) **avant** la boucle."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un compteur dans une boucle.",
+     "alt": "Pseudo-code : compteur à zéro, pour cinq notes lues, on ajoute un si la note est au moins dix, puis on écrit le compteur.",
+     "figure": {
+      "kind": "shapes",
+      "w": 330,
+      "h": 208,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 310,
+        "h": 192,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 30,
+        "text": "Compter les notes ≥ 10",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 58,
+        "text": "c ← 0",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 84,
+        "text": "Pour i de 1 à 5",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 110,
+        "text": "   Lire note",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 136,
+        "text": "   Si note ≥ 10 Alors c ← c + 1",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 162,
+        "text": "Fin Pour",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 188,
+        "text": "Écrire c",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : ET, OU",
+     "statement": "Pour age = 14 puis age = 20, évalue (age ≥ 12) ET (age ≤ 15) puis (age < 12) OU (age > 18).",
+     "steps": [
+      {
+       "md": "age = 14 : 14 ≥ 12 vrai et 14 ≤ 15 vrai : ET donne vrai. (14 < 12 faux, 14 > 18 faux : OU donne faux.)"
+      },
+      {
+       "md": "age = 20 : 20 ≤ 15 faux : ET donne faux. 20 > 18 vrai : OU donne vrai."
+      }
+     ],
+     "answer": "**14 : vrai puis faux ; 20 : faux puis vrai**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : compteur",
+     "statement": "Les cinq notes lues sont 12, 8, 15, 9, 20. Quelle valeur écrit l'algorithme de la figure ?",
+     "steps": [
+      {
+       "md": "Tour 1 : 12 ≥ 10, c = 1. Tour 2 : 8, c reste 1. Tour 3 : 15, c = 2."
+      },
+      {
+       "md": "Tour 4 : 9, c reste 2. Tour 5 : 20, c = 3."
+      }
+     ],
+     "answer": "**3**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire 12 ≤ age ≤ 15 : la plupart des langages veulent (age ≥ 12) ET (age ≤ 15).\n- Confondre ET et OU : « moins de 12 ET plus de 18 » n'est jamais vrai.\n- Oublier d'initialiser le compteur ou le mettre à zéro à chaque tour (à l'intérieur de la boucle)."
+    }
+   ],
+   "reviewNotes": [
+    "Programme officiel exact de 3e non vérifié. Pseudo-code libre : mots-clés en français, affectation ←.",
+    "Cette fiche suppose acquises les notions de variable, Si/Sinon, Pour et Tant que (vues en 4e)."
+   ]
+  },
+  {
+   "id": "3e-informatique-tableaux",
+   "title": "Les tableaux",
+   "minutes": 35,
+   "programRef": "3e — Tableaux à une dimension (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer ce qu'est un tableau, son indice et sa taille.",
+    "Parcourir un tableau avec une boucle.",
+    "Calculer somme, moyenne, maximum."
+   ],
+   "prerequisites": [
+    "3e-informatique-structures-controle"
+   ],
+   "exercises": [
+    "3e-informatique-tableaux-01",
+    "3e-informatique-tableaux-02",
+    "3e-informatique-tableaux-03",
+    "3e-informatique-tableaux-04",
+    "3e-informatique-tableaux-05",
+    "3e-informatique-tableaux-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-tableaux-q1",
+    "3e-informatique-tableaux-q2",
+    "3e-informatique-tableaux-q3",
+    "3e-informatique-tableaux-q4",
+    "3e-informatique-tableaux-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Tableau",
+     "md": "Un **tableau** est une variable qui contient plusieurs valeurs rangées les unes à côté des autres. Chaque valeur a un numéro : son **indice**. Dans cette fiche, les indices commencent à 1. T[3] désigne la 3e valeur. La **taille** est le nombre de valeurs."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un tableau de 5 notes ; les indices sont en bleu.",
+     "alt": "Cinq cases contenant 12, 8, 15, 9 et 20, numérotées de 1 à 5.",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 30,
+        "w": 60,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 53.0,
+        "text": "12",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 88,
+        "text": "1",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 30,
+        "w": 60,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 53.0,
+        "text": "8",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 88,
+        "text": "2",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 30,
+        "w": 60,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 53.0,
+        "text": "15",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 88,
+        "text": "3",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 30,
+        "w": 60,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 53.0,
+        "text": "9",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 88,
+        "text": "4",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 30,
+        "w": 60,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300.0,
+        "y": 53.0,
+        "text": "20",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300.0,
+        "y": 88,
+        "text": "5",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 18,
+        "text": "Tableau T (taille 5)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Parcourir un tableau",
+     "md": "Pour traiter toutes les valeurs : **Pour i de 1 à taille** puis on utilise T[i]. Somme : s ← 0 ; Pour i de 1 à 5 : s ← s + T[i]. Moyenne : s ÷ taille. Maximum : on part de max ← T[1], puis pour chaque i, **Si** T[i] > max **Alors** max ← T[i]."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : somme et moyenne",
+     "statement": "T = [12, 8, 15, 9, 20]. Calcule la somme et la moyenne avec une boucle.",
+     "steps": [
+      {
+       "md": "s part de 0 et cumule : 12, 20, 35, 44, 64."
+      },
+      {
+       "md": "La somme est 64 ; la moyenne est 64 ÷ 5 = 12,8."
+      }
+     ],
+     "answer": "**Somme 64 ; moyenne 12,8**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : maximum",
+     "statement": "Même tableau. Déroule la recherche du maximum.",
+     "steps": [
+      {
+       "md": "max ← T[1] = 12. T[2] = 8 : non. T[3] = 15 > 12 : max = 15."
+      },
+      {
+       "md": "T[4] = 9 : non. T[5] = 20 > 15 : max = 20."
+      }
+     ],
+     "answer": "**max = 20 (indice 5)**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Sortir du tableau : avec 5 cases, T[6] n'existe pas.\n- Confondre l'indice et la valeur : T[2] = 8 (l'indice est 2).\n- Initialiser max à 0 : faux si toutes les valeurs sont négatives. Mieux : max ← T[1].\n- Oublier que les indices peuvent commencer à 0 dans un langage."
+    }
+   ],
+   "reviewNotes": [
+    "Convention : les indices commencent à 1 dans cette fiche. Beaucoup de langages commencent à 0 : à préciser selon l'outil de la classe."
+   ]
+  },
+  {
+   "id": "3e-informatique-fonctions",
+   "title": "Les fonctions",
+   "minutes": 35,
+   "programRef": "3e — Fonctions et sous-programmes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir une fonction avec paramètres et valeur de retour.",
+    "Appeler une fonction et suivre son exécution.",
+    "Expliquer l'intérêt de découper un programme."
+   ],
+   "prerequisites": [
+    "3e-informatique-tableaux"
+   ],
+   "exercises": [
+    "3e-informatique-fonctions-01",
+    "3e-informatique-fonctions-02",
+    "3e-informatique-fonctions-03",
+    "3e-informatique-fonctions-04",
+    "3e-informatique-fonctions-05",
+    "3e-informatique-fonctions-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-fonctions-q1",
+    "3e-informatique-fonctions-q2",
+    "3e-informatique-fonctions-q3",
+    "3e-informatique-fonctions-q4",
+    "3e-informatique-fonctions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonction",
+     "md": "Une **fonction** est un petit programme avec un nom, qu'on peut appeler plusieurs fois. Elle reçoit des **paramètres** (entrées), fait des calculs, puis **renvoie** un résultat. Définition : **Fonction** carre(x) : **Renvoyer** x × x. Appel : carre(5) renvoie 25."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une fonction transforme ses paramètres en résultat.",
+     "alt": "Trois blocs reliés par des flèches : paramètres, fonction, résultat.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 111,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 114.66666666666667,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 67.33333333333334,
+        "y": 43,
+        "text": "Paramètres",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 127.66666666666667,
+        "y1": 37,
+        "x2": 149.66666666666669,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 152.66666666666669,
+        "y": 15,
+        "w": 114.66666666666667,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 210.00000000000003,
+        "y": 43,
+        "text": "Fonction",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 270.33333333333337,
+        "y1": 37,
+        "x2": 292.33333333333337,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 295.33333333333337,
+        "y": 15,
+        "w": 114.66666666666667,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 352.6666666666667,
+        "y": 43,
+        "text": "Résultat",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pourquoi des fonctions ?",
+     "md": "- On écrit le calcul **une seule fois** et on l'utilise partout.\n- Le programme est plus **lisible** : on lit des noms clairs (prixAvecRemise, estPair).\n- On peut **tester** chaque fonction séparément.\n- Les variables à l'intérieur d'une fonction sont **locales** : elles n'existent que pendant son exécution."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : appeler une fonction",
+     "statement": "Fonction prixAvecRemise(prix, p) : Renvoyer prix − prix × p ÷ 100. Que renvoie prixAvecRemise(8000, 15) ?",
+     "steps": [
+      {
+       "md": "Remise : 8000 × 15 ÷ 100 = 1200."
+      },
+      {
+       "md": "Prix final : 8000 − 1200 = 6800."
+      }
+     ],
+     "answer": "**6800 FCFA**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : fonction avec condition",
+     "statement": "Fonction estPair(n) : Si n est divisible par 2 Alors Renvoyer Vrai Sinon Renvoyer Faux. Que renvoie estPair(7) ? estPair(10) ?",
+     "steps": [
+      {
+       "md": "7 ÷ 2 = 3 reste 1 : pas divisible, donc Faux."
+      },
+      {
+       "md": "10 ÷ 2 = 5 reste 0 : divisible, donc Vrai."
+      }
+     ],
+     "answer": "**Faux puis Vrai**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Appeler la fonction sans lui donner tous ses paramètres, ou dans le mauvais ordre : prixAvecRemise(15, 8000) ne donne pas le bon résultat.\n- Oublier de Renvoyer : la fonction ne donne alors rien.\n- Utiliser une variable locale en dehors de la fonction.\n- Confondre définir une fonction et l'appeler : définir ne calcule rien."
+    }
+   ],
+   "reviewNotes": [
+    "Vocabulaire : « fonction », « procédure », « sous-programme » ne sont pas utilisés de façon uniforme ; ici fonction = renvoie une valeur."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "(5 > 3) ET (2 > 4) est :",
+   "choices": [
+    "Vrai",
+    "Faux",
+    "Indéterminé",
+    "Égal à 5"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une des deux conditions est fausse : ET est faux.",
+   "id": "3e-informatique-structures-controle-01",
+   "tier": "application",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "(5 > 3) OU (2 > 4) est :",
+   "choices": [
+    "Faux",
+    "Indéterminé",
+    "Égal à 2",
+    "Vrai"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une condition vraie suffit pour OU.",
+   "id": "3e-informatique-structures-controle-02",
+   "tier": "application",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "c ← 0 ; Pour i de 1 à 6 : Si i est pair Alors c ← c + 1. Quelle est la valeur de c ?",
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les nombres pairs de 1 à 6 sont 2, 4, 6 : 3.",
+   "id": "3e-informatique-structures-controle-03",
+   "tier": "application",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "s ← 0 ; Pour i de 1 à 6 : Si i > 3 Alors s ← s + i. Quelle est la valeur de s ?",
+   "answer": 15,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On additionne 4 + 5 + 6 = 15.",
+   "id": "3e-informatique-structures-controle-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle condition est vraie pour x = 5 et fausse pour x = 12 ?",
+   "choices": [
+    "(x > 0) OU (x < 10)",
+    "(x < 0) ET (x < 10)",
+    "(x > 0) ET (x < 10)",
+    "(x > 10) OU (x > 20)"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Pour 5 : 5 > 0 et 5 < 10. Pour 12 : 12 < 10 est faux.",
+   "id": "3e-informatique-structures-controle-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un algorithme lit les âges de 4 élèves : 11, 13, 15, 17. Il compte ceux qui ont entre 12 et 16 ans inclus : Si (age ≥ 12) ET (age ≤ 16) Alors c ← c + 1.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle valeur de c est écrite ?",
+     "answer": 2,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "13 et 15 conviennent. 11 et 17 sont hors de l'intervalle : c = 2.",
+     "id": "3e-informatique-structures-controle-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris la condition qui compterait ceux qui ne sont PAS dans cet intervalle.",
+     "model": "(age < 12) OU (age > 16), ou NON((age ≥ 12) ET (age ≤ 16)).",
+     "rubric": [
+      "Utilise OU avec < 12 et > 16, ou NON de la condition précédente"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-structures-controle-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-structures-controle-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un compteur est généralement initialisé à :",
+   "choices": [
+    "1 000",
+    "0",
+    "La note maximale",
+    "Il n'a pas de valeur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On commence à compter à partir de zéro.",
+   "id": "3e-informatique-structures-controle-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "NON (4 > 7) est :",
+   "choices": [
+    "Faux",
+    "4",
+    "7",
+    "Vrai"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 > 7 est faux, donc NON est vrai.",
+   "id": "3e-informatique-structures-controle-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand A ET B est-il vrai ?",
+   "choices": [
+    "Quand une seule est vraie",
+    "Quand A est fausse",
+    "Quand A et B sont vraies",
+    "Toujours"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les deux doivent être vraies.",
+   "id": "3e-informatique-structures-controle-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où place-t-on l'initialisation d'un cumul ?",
+   "choices": [
+    "Dans la boucle",
+    "Après la boucle",
+    "N'importe où",
+    "Avant la boucle"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sinon il serait remis à zéro à chaque tour.",
+   "id": "3e-informatique-structures-controle-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le cumul s ← s + valeur sert à :",
+   "choices": [
+    "Additionner des valeurs",
+    "Compter les tours",
+    "Effacer s",
+    "Comparer deux nombres"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ajoute la valeur courante au total.",
+   "id": "3e-informatique-structures-controle-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-structures-controle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "T = [12, 8, 15, 9, 20]. Que vaut T[3] ?",
+   "answer": 15,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La 3e case contient 15.",
+   "id": "3e-informatique-tableaux-01",
+   "tier": "application",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la taille du tableau [4, 7, 1, 9, 3, 8] ?",
+   "answer": 6,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il y a 6 valeurs.",
+   "id": "3e-informatique-tableaux-02",
+   "tier": "application",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la somme du tableau [4, 7, 1, 9, 3, 8] ?",
+   "answer": 32,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 + 7 + 1 + 9 + 3 + 8 = 32.",
+   "id": "3e-informatique-tableaux-03",
+   "tier": "application",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le minimum du tableau [14, 9, 17, 6, 11] ?",
+   "answer": 6,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On garde la plus petite valeur rencontrée : 6.",
+   "id": "3e-informatique-tableaux-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "T = [3, 5, 2]. Après Pour i de 1 à 3 : T[i] ← T[i] × 2, le tableau est :",
+   "choices": [
+    "[3, 5, 2]",
+    "[6, 5, 2]",
+    "[6, 10, 4]",
+    "[5, 7, 4]"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Chaque valeur est doublée.",
+   "id": "3e-informatique-tableaux-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Les ventes de la semaine de Nkeng (en milliers de FCFA) sont dans V = [5, 8, 3, 9, 6, 7, 2].",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le total des ventes (en milliers de FCFA) ?",
+     "answer": 40,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "5 + 8 + 3 + 9 + 6 + 7 + 2 = 40.",
+     "id": "3e-informatique-tableaux-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de jours ont une vente supérieure ou égale à 6 ?",
+     "answer": 4,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "8, 9, 6, 7 : quatre jours.",
+     "id": "3e-informatique-tableaux-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris l'algorithme qui trouve la plus grande vente.",
+     "model": "max ← V[1] ; Pour i de 2 à 7 : Si V[i] > max Alors max ← V[i] ; Écrire max.",
+     "rubric": [
+      "max initialisé avec V[1]",
+      "Boucle de 2 à 7 avec comparaison"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-tableaux-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-tableaux-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'indice d'un tableau est :",
+   "choices": [
+    "Le numéro d'une case",
+    "La taille",
+    "La valeur",
+    "Le nom du fichier"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il permet d'atteindre une valeur.",
+   "id": "3e-informatique-tableaux-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "T = [7, 2, 9]. Combien vaut T[2] (indices à partir de 1) ?",
+   "choices": [
+    "7",
+    "9",
+    "3",
+    "2"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La 2e case contient 2.",
+   "id": "3e-informatique-tableaux-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour calculer la moyenne d'un tableau on fait :",
+   "choices": [
+    "Somme × taille",
+    "Maximum ÷ minimum",
+    "Taille − somme",
+    "Somme ÷ taille"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Moyenne = total divisé par le nombre de valeurs.",
+   "id": "3e-informatique-tableaux-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que se passe-t-il si on lit T[10] dans un tableau de taille 5 ?",
+   "choices": [
+    "On obtient 0",
+    "Erreur : l'indice n'existe pas",
+    "On obtient le maximum",
+    "Rien d'anormal"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'indice dépasse la taille.",
+   "id": "3e-informatique-tableaux-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour parcourir tout un tableau on utilise souvent :",
+   "choices": [
+    "Une condition seule",
+    "Un fichier",
+    "Une boucle Pour",
+    "Un courriel"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pour i de 1 à la taille.",
+   "id": "3e-informatique-tableaux-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-tableaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Fonction double(x) : Renvoyer 2 × x. Que renvoie double(9) ?",
+   "answer": 18,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 9 = 18.",
+   "id": "3e-informatique-fonctions-01",
+   "tier": "application",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Fonction aire(L, l) : Renvoyer L × l. Que renvoie aire(7, 3) ?",
+   "answer": 21,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "7 × 3 = 21.",
+   "id": "3e-informatique-fonctions-02",
+   "tier": "application",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans carre(x), que représente x ?",
+   "choices": [
+    "Le résultat",
+    "Le paramètre",
+    "Le nom du fichier",
+    "Une boucle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "x est la valeur reçue par la fonction.",
+   "id": "3e-informatique-fonctions-03",
+   "tier": "application",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Fonction f(x) : Renvoyer x × x + 1. Que vaut f(f(2)) ?",
+   "answer": 26,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "f(2) = 2 × 2 + 1 = 5 ; f(5) = 5 × 5 + 1 = 26.",
+   "method": "Calcule d'abord la fonction intérieure.",
+   "id": "3e-informatique-fonctions-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Fonction max2(a, b) : Si a > b Alors Renvoyer a Sinon Renvoyer b. Que renvoie max2(4, 9) ?",
+   "choices": [
+    "4",
+    "9",
+    "13",
+    "5"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "4 > 9 est faux, on renvoie b = 9.",
+   "id": "3e-informatique-fonctions-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina écrit : Fonction moyenne(a, b, c) : Renvoyer (a + b + c) ÷ 3.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Que renvoie moyenne(12, 9, 15) ?",
+     "answer": 12,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "(12 + 9 + 15) ÷ 3 = 36 ÷ 3 = 12.",
+     "id": "3e-informatique-fonctions-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique deux avantages d'utiliser cette fonction plutôt que de recopier le calcul.",
+     "model": "Le calcul est écrit une fois, réutilisable pour chaque élève, moins d'erreurs et plus lisible.",
+     "rubric": [
+      "Réutilisation",
+      "Lisibilité ou moins d'erreurs"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-fonctions-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-fonctions-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une fonction renvoie :",
+   "choices": [
+    "Un câble",
+    "Un résultat",
+    "Un fichier supprimé",
+    "Rien jamais"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le mot clé Renvoyer donne le résultat.",
+   "id": "3e-informatique-fonctions-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Appeler » une fonction, c'est :",
+   "choices": [
+    "L'effacer",
+    "La renommer",
+    "L'utiliser avec des valeurs",
+    "Fermer le programme"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On l'exécute en lui donnant ses paramètres.",
+   "id": "3e-informatique-fonctions-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une variable locale :",
+   "choices": [
+    "Existe partout",
+    "Est toujours 0",
+    "Est un fichier",
+    "Existe seulement dans la fonction"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle disparaît à la fin de l'exécution.",
+   "id": "3e-informatique-fonctions-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "carre(4) renvoie :",
+   "choices": [
+    "8",
+    "4",
+    "44",
+    "16"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 × 4 = 16.",
+   "id": "3e-informatique-fonctions-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est un avantage des fonctions ?",
+   "choices": [
+    "Chiffrer le disque",
+    "Supprimer les bogues automatiquement",
+    "Réutiliser du code",
+    "Rendre l'écran plus grand"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On écrit une fois et on appelle plusieurs fois.",
+   "id": "3e-informatique-fonctions-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-fonctions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

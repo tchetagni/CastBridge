@@ -1,0 +1,1391 @@
+{
+ "chapter": "4e-informatique-algo",
+ "lessons": [
+  {
+   "id": "4e-informatique-algo-bases",
+   "title": "Variables, séquence et conditions",
+   "minutes": 35,
+   "programRef": "4e — Algorithmique : variables, affectation, séquence, conditionnelle (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser une variable et l'affectation.",
+    "Suivre un algorithme pas à pas.",
+    "Écrire une condition Si… Alors… Sinon."
+   ],
+   "prerequisites": [
+    "4e-informatique-binaire"
+   ],
+   "exercises": [
+    "4e-informatique-algo-bases-01",
+    "4e-informatique-algo-bases-02",
+    "4e-informatique-algo-bases-03",
+    "4e-informatique-algo-bases-04",
+    "4e-informatique-algo-bases-05",
+    "4e-informatique-algo-bases-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-algo-bases-q1",
+    "4e-informatique-algo-bases-q2",
+    "4e-informatique-algo-bases-q3",
+    "4e-informatique-algo-bases-q4",
+    "4e-informatique-algo-bases-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Algorithme, variable, affectation",
+     "md": "Un **algorithme** est une suite d'instructions précises qui résout un problème. Une **variable** est une case mémoire avec un nom qui contient une valeur. L'**affectation** range une valeur dedans : x ← 5 se lit « x reçoit 5 ». Dans x ← x + 1, on calcule avec l'ancienne valeur puis on range le résultat. Les instructions s'exécutent dans l'ordre : c'est la **séquence**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un petit algorithme.",
+     "alt": "Quatre lignes de pseudo-code : x reçoit 5, y reçoit x plus 3, x reçoit y fois 2, écrire x.",
+     "figure": {
+      "kind": "shapes",
+      "w": 220,
+      "h": 156,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 200,
+        "h": 140,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 30,
+        "text": "Exemple",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 58,
+        "text": "x ← 5",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 84,
+        "text": "y ← x + 3",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 110,
+        "text": "x ← y × 2",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 136,
+        "text": "Écrire x",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "La condition",
+     "md": "Pour choisir entre deux actions : **Si** condition **Alors** actions **Sinon** actions **Fin Si**. La condition est vraie ou fausse : n ≥ 10, x = 4, age < 18… On peut suivre l'exécution avec un **tableau de suivi** : une ligne par instruction et une colonne par variable."
+    },
+    {
+     "type": "illustration",
+     "caption": "Ordinogramme d'une condition.",
+     "alt": "Début, lire note, test note supérieure ou égale à 10, si oui écrire Admis, sinon écrire Refusé.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 330,
+      "items": [
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 8,
+        "w": 100,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 18
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 32,
+        "text": "Début",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 44,
+        "x2": 210,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 60,
+        "w": 140,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 84,
+        "text": "Lire note",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 96,
+        "x2": 210,
+        "y2": 112,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         210,
+         112,
+         295.0,
+         150.0,
+         210,
+         188,
+         125.0,
+         150.0
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 155.0,
+        "text": "note ≥ 10 ?",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 125,
+        "y1": 150,
+        "x2": 80,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 150,
+        "x2": 80,
+        "y2": 212,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 140,
+        "text": "oui",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 295,
+        "y1": 150,
+        "x2": 340,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 150,
+        "x2": 340,
+        "y2": 212,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 140,
+        "text": "non",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 212,
+        "w": 120,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 236,
+        "text": "Écrire Admis",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 212,
+        "w": 120,
+        "h": 36,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 236,
+        "text": "Écrire Refusé",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 248,
+        "x2": 80,
+        "y2": 262,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 248,
+        "x2": 340,
+        "y2": 262,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 262,
+        "x2": 340,
+        "y2": 262,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 262,
+        "x2": 210,
+        "y2": 278,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 278,
+        "w": 100,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 18
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 302,
+        "text": "Fin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : suivre un algorithme",
+     "statement": "x ← 5 ; y ← x + 3 ; x ← y × 2. Quelles sont les valeurs finales de x et y ?",
+     "steps": [
+      {
+       "md": "Après la ligne 1 : x = 5. Ligne 2 : y = 5 + 3 = 8."
+      },
+      {
+       "md": "Ligne 3 : x reçoit 8 × 2 = 16 ; y reste 8."
+      }
+     ],
+     "answer": "**x = 16 et y = 8**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une condition",
+     "statement": "Algorithme : Lire note ; Si note ≥ 10 Alors Écrire « Admis » Sinon Écrire « Refusé ». Que s'affiche-t-il pour 9, puis pour 10 ?",
+     "steps": [
+      {
+       "md": "Pour 9 : la condition 9 ≥ 10 est fausse, donc Sinon : Refusé."
+      },
+      {
+       "md": "Pour 10 : 10 ≥ 10 est vraie (égalité comprise) : Admis."
+      }
+     ],
+     "answer": "**9 donne Refusé ; 10 donne Admis**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Lire x ← 5 comme une égalité mathématique : c'est une action (ranger 5 dans x).\n- Croire que y ← x + 3 relie y à x pour toujours : si x change ensuite, y garde sa valeur.\n- Confondre > et ≥ : n > 10 ne contient pas 10.\n- Oublier Fin Si."
+    }
+   ],
+   "reviewNotes": [
+    "Notation de pseudo-code libre : flèche ← pour l'affectation, mots-clés en français. Le programme officiel peut utiliser des blocs visuels ou un langage précis."
+   ]
+  },
+  {
+   "id": "4e-informatique-algo-boucles",
+   "title": "Les boucles",
+   "minutes": 35,
+   "programRef": "4e — Algorithmique : répétitives (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Écrire une boucle Pour.",
+    "Écrire une boucle Tant que et éviter la boucle infinie.",
+    "Suivre une boucle avec un tableau de suivi."
+   ],
+   "prerequisites": [
+    "4e-informatique-algo-bases"
+   ],
+   "exercises": [
+    "4e-informatique-algo-boucles-01",
+    "4e-informatique-algo-boucles-02",
+    "4e-informatique-algo-boucles-03",
+    "4e-informatique-algo-boucles-04",
+    "4e-informatique-algo-boucles-05",
+    "4e-informatique-algo-boucles-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-algo-boucles-q1",
+    "4e-informatique-algo-boucles-q2",
+    "4e-informatique-algo-boucles-q3",
+    "4e-informatique-algo-boucles-q4",
+    "4e-informatique-algo-boucles-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Répéter des instructions",
+     "md": "Une **boucle** répète des instructions.\n- **Pour i de 1 à n** : répète n fois ; i prend les valeurs 1, 2, …, n.\n- **Tant que** condition : répète tant que la condition est vraie ; on teste avant chaque tour. Si la condition reste toujours vraie : **boucle infinie** (le programme ne s'arrête pas)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une boucle Pour qui additionne.",
+     "alt": "Pseudo-code : s à zéro ; pour i de 1 à 5, s reçoit s plus i ; écrire s.",
+     "figure": {
+      "kind": "shapes",
+      "w": 240,
+      "h": 182,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 220,
+        "h": 166,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 30,
+        "text": "Somme de 1 à 5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 58,
+        "text": "s ← 0",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 84,
+        "text": "Pour i de 1 à 5",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 110,
+        "text": "   s ← s + i",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 136,
+        "text": "Fin Pour",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 24,
+        "y": 162,
+        "text": "Écrire s",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : boucle Pour",
+     "statement": "Quelle valeur est écrite par : s ← 0 ; Pour i de 1 à 5 : s ← s + i ; Écrire s ?",
+     "steps": [
+      {
+       "md": "Tour 1 : s = 0 + 1 = 1. Tour 2 : s = 3. Tour 3 : s = 6."
+      },
+      {
+       "md": "Tour 4 : s = 10. Tour 5 : s = 15."
+      }
+     ],
+     "answer": "**15**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : Tant que",
+     "statement": "n ← 5 ; Tant que n < 100 : n ← n × 2. Quelle est la valeur finale de n ?",
+     "steps": [
+      {
+       "md": "5 → 10 → 20 → 40 → 80 (toujours < 100, on continue)."
+      },
+      {
+       "md": "80 × 2 = 160 : 160 < 100 est faux, on s'arrête."
+      }
+     ],
+     "answer": "**n = 160 (5 tours)**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Choisir sa boucle",
+     "md": "- Le nombre de répétitions est connu à l'avance : **Pour**.\n- On répète jusqu'à ce qu'un événement arrive : **Tant que**.\n- Dans un Tant que, une instruction doit changer ce qui est testé, sinon la boucle est infinie.\n- Avant le Tant que, initialiser la variable testée."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier d'initialiser s avant la boucle.\n- Faire un tour de trop ou de moins : Pour i de 1 à 5 fait 5 tours, pas 4.\n- Tant que n < 100 avec n ← n − 1 : n diminue, la condition reste vraie : boucle infinie."
+    }
+   ],
+   "reviewNotes": [
+    "Les boucles Pour et Tant que sont proposées ; certains programmes de 4e se limitent à la boucle Répéter n fois."
+   ]
+  },
+  {
+   "id": "4e-informatique-algo-programme",
+   "title": "Du pseudo-code au programme : tester et corriger",
+   "minutes": 30,
+   "programRef": "4e — Initiation à la programmation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Traduire un algorithme en instructions d'un langage simple ou en blocs.",
+    "Tester un programme et trouver un bogue."
+   ],
+   "prerequisites": [
+    "4e-informatique-algo-boucles"
+   ],
+   "exercises": [
+    "4e-informatique-algo-programme-01",
+    "4e-informatique-algo-programme-02",
+    "4e-informatique-algo-programme-03",
+    "4e-informatique-algo-programme-04",
+    "4e-informatique-algo-programme-05",
+    "4e-informatique-algo-programme-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-algo-programme-q1",
+    "4e-informatique-algo-programme-q2",
+    "4e-informatique-algo-programme-q3",
+    "4e-informatique-algo-programme-q4",
+    "4e-informatique-algo-programme-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Programme et bogue",
+     "md": "Un **programme** est un algorithme écrit dans un langage que l'ordinateur comprend (langage de texte ou blocs assemblés à l'écran). Une erreur dans un programme s'appelle un **bogue** ; corriger les erreurs, c'est **déboguer**. Un **test** compare le résultat obtenu au résultat attendu."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les étapes de la programmation.",
+     "alt": "Quatre blocs : problème, algorithme, programme, test.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 127,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 57.0,
+        "y": 43,
+        "text": "Problème",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 107.0,
+        "y1": 37,
+        "x2": 129.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 132.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 179.0,
+        "y": 43,
+        "text": "Algorithme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 229.0,
+        "y1": 37,
+        "x2": 251.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 254.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 301.0,
+        "y": 43,
+        "text": "Programme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 351.0,
+        "y1": 37,
+        "x2": 373.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 376.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 423.0,
+        "y": 43,
+        "text": "Test",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Démarche",
+     "md": "1. Comprendre le problème : données, résultat attendu.\n2. Écrire l'algorithme en pseudo-code ou en ordinogramme.\n3. Traduire chaque instruction (affectation, condition, boucle) dans le langage choisi.\n4. Tester avec des valeurs simples dont on connaît la réponse, puis avec des cas limites (0, valeur à la frontière).\n5. Si le résultat est faux, suivre les variables ligne par ligne."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : tester",
+     "statement": "Un programme doit afficher le double d'un nombre : Lire x ; y ← x + 2 ; Écrire y. On le teste avec x = 5. Que se passe-t-il ?",
+     "steps": [
+      {
+       "md": "Résultat obtenu : 5 + 2 = 7 ; résultat attendu : 10."
+      },
+      {
+       "md": "Le bogue est y ← x + 2 : il faut y ← x × 2."
+      }
+     ],
+     "answer": "**Bogue : + au lieu de ×**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : cas limite",
+     "statement": "Programme : Lire n ; Si n > 0 Alors Écrire « positif » Sinon Écrire « négatif ». Quel problème pour n = 0 ?",
+     "steps": [
+      {
+       "md": "0 n'est pas > 0 : le programme écrit « négatif »."
+      },
+      {
+       "md": "Or 0 n'est ni positif ni négatif : il faut un cas supplémentaire."
+      }
+     ],
+     "answer": "**Cas n = 0 mal traité**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Ne tester qu'une seule valeur.\n- Corriger au hasard sans comprendre l'erreur.\n- Oublier d'initialiser une variable ou de terminer une boucle.\n- Croire qu'un programme qui s'exécute sans message est correct : il peut donner un mauvais résultat."
+    }
+   ],
+   "reviewNotes": [
+    "Fiche volontairement indépendante d'un logiciel : à adapter au langage ou à l'outil de blocs utilisé en classe.",
+    "Le programme officiel peut préciser un langage ; non vérifié."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "x ← 4 ; y ← x × 3. Quelle est la valeur de y ?",
+   "answer": 12,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "y reçoit 4 × 3 = 12.",
+   "id": "4e-informatique-algo-bases-01",
+   "tier": "application",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "n ← 7 ; n ← n + 2. Quelle est la valeur de n ?",
+   "answer": 9,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ancienne valeur 7, plus 2 : 9.",
+   "id": "4e-informatique-algo-bases-02",
+   "tier": "application",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait l'instruction x ← 10 ?",
+   "choices": [
+    "Elle range 10 dans x",
+    "Elle compare x et 10",
+    "Elle efface x",
+    "Elle affiche 10"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La flèche est l'affectation.",
+   "id": "4e-informatique-algo-bases-03",
+   "tier": "application",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "a ← 3 ; b ← 5 ; c ← a ; a ← b ; b ← c. Quelle est la valeur finale de a ?",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "c = 3 ; a reçoit 5 ; b reçoit 3. Les deux valeurs sont échangées : a = 5, b = 3.",
+   "method": "Fais un tableau de suivi a, b, c.",
+   "id": "4e-informatique-algo-bases-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si age ≥ 18 Alors Écrire « majeur » Sinon Écrire « mineur ». Pour age = 17, on obtient :",
+   "choices": [
+    "majeur",
+    "mineur",
+    "Rien",
+    "Une erreur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "17 ≥ 18 est faux : Sinon.",
+   "id": "4e-informatique-algo-bases-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris écrit : Lire prix ; Si prix > 5000 Alors remise ← 10 Sinon remise ← 0 ; Écrire remise. (La remise est en pourcentage.)",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle remise s'affiche pour un prix de 6000 ?",
+     "answer": 10,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "6000 > 5000 : la remise est 10.",
+     "id": "4e-informatique-algo-bases-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle remise s'affiche pour un prix de 5000 ?",
+     "answer": 0,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "5000 > 5000 est faux (stricte) : remise = 0.",
+     "id": "4e-informatique-algo-bases-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que changer pour que 5000 donne aussi une remise ?",
+     "model": "Remplacer > par ≥.",
+     "rubric": [
+      "Utiliser ≥ à la place de >"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-informatique-algo-bases-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-algo-bases-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut x après x ← 2 ; x ← x + 1 ?",
+   "choices": [
+    "2",
+    "3",
+    "1",
+    "21"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "x vaut 2 puis 2 + 1.",
+   "id": "4e-informatique-algo-bases-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Si n > 0 Alors … Sinon … », la condition est :",
+   "choices": [
+    "Alors",
+    "n > 0",
+    "Sinon",
+    "Fin"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La condition suit Si.",
+   "id": "4e-informatique-algo-bases-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une variable est :",
+   "choices": [
+    "Une image",
+    "Un câble",
+    "Un fichier supprimé",
+    "Un nom associé à une valeur en mémoire"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On range une valeur sous un nom.",
+   "id": "4e-informatique-algo-bases-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les instructions d'une séquence s'exécutent :",
+   "choices": [
+    "Dans l'ordre",
+    "Au hasard",
+    "À l'envers",
+    "Toutes en même temps"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "De haut en bas.",
+   "id": "4e-informatique-algo-bases-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un tableau de suivi sert à :",
+   "choices": [
+    "Dessiner un graphique",
+    "Suivre les valeurs des variables",
+    "Envoyer un courriel",
+    "Compresser un fichier"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une ligne par instruction.",
+   "id": "4e-informatique-algo-bases-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de tours fait « Pour i de 1 à 8 » ?",
+   "answer": 8,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "i prend les valeurs 1 à 8 : 8 tours.",
+   "id": "4e-informatique-algo-boucles-01",
+   "tier": "application",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "s ← 0 ; Pour i de 1 à 4 : s ← s + 2. Quelle valeur a s ?",
+   "answer": 8,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ajoute 2 quatre fois : 8.",
+   "id": "4e-informatique-algo-boucles-02",
+   "tier": "application",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle boucle choisir pour répéter exactement 10 fois ?",
+   "choices": [
+    "Tant que sans condition",
+    "Si",
+    "Aucune",
+    "Pour"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le nombre de tours est connu.",
+   "id": "4e-informatique-algo-boucles-03",
+   "tier": "application",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Pour i de 1 à 4 : écrire i × 3. Quel est le dernier nombre écrit ?",
+   "answer": 12,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "3, 6, 9, 12.",
+   "id": "4e-informatique-algo-boucles-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel algorithme est une boucle infinie ?",
+   "choices": [
+    "n ← 1 ; Tant que n < 5 : n ← n + 1",
+    "Pour i de 1 à 3",
+    "n ← 4 ; Si n > 2",
+    "n ← 1 ; Tant que n > 0 : n ← n + 1"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "n augmente et reste toujours > 0.",
+   "id": "4e-informatique-algo-boucles-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina économise 500 FCFA chaque semaine. Elle veut atteindre 3000 FCFA. Algorithme : somme ← 0 ; sem ← 0 ; Tant que somme < 3000 : somme ← somme + 500 ; sem ← sem + 1.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de semaines faut-il ?",
+     "answer": 6,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "3000 ÷ 500 = 6 semaines (somme = 500, 1000, …, 3000).",
+     "id": "4e-informatique-algo-boucles-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la valeur finale de somme ?",
+     "answer": 3000,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le dernier tour amène somme à 3000, qui n'est plus < 3000.",
+     "id": "4e-informatique-algo-boucles-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris la version avec une boucle Pour.",
+     "model": "somme ← 0 ; Pour sem de 1 à 6 : somme ← somme + 500 ; Écrire somme.",
+     "rubric": [
+      "Boucle Pour de 1 à 6",
+      "Somme initialisée et augmentée de 500"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-informatique-algo-boucles-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-algo-boucles-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une boucle infinie est une boucle :",
+   "choices": [
+    "Sans instruction",
+    "Qui s'exécute une fois",
+    "Qui ne s'arrête jamais",
+    "Qui efface la mémoire"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La condition reste vraie.",
+   "id": "4e-informatique-algo-boucles-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans Pour i de 3 à 5, quelles valeurs prend i ?",
+   "choices": [
+    "3, 4, 5",
+    "1, 2, 3",
+    "3, 5",
+    "4, 5"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "De 3 jusqu'à 5 inclus.",
+   "id": "4e-informatique-algo-boucles-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avant un Tant que, il faut :",
+   "choices": [
+    "Fermer le programme",
+    "Initialiser les variables testées",
+    "Supprimer les variables",
+    "Écrire Fin"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sinon le test porte sur une valeur inconnue.",
+   "id": "4e-informatique-algo-boucles-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "s ← 1 ; Pour i de 1 à 3 : s ← s × 2. s vaut :",
+   "choices": [
+    "6",
+    "8",
+    "2",
+    "3"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 → 2 → 4 → 8.",
+   "id": "4e-informatique-algo-boucles-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une boucle sert à :",
+   "choices": [
+    "Afficher une image",
+    "Répéter des instructions",
+    "Nommer un fichier",
+    "Brancher un câble"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est son rôle.",
+   "id": "4e-informatique-algo-boucles-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un bogue est :",
+   "choices": [
+    "Un type de câble",
+    "Un virus obligatoire",
+    "Un écran",
+    "Une erreur dans un programme"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Déboguer = chercher et corriger les erreurs.",
+   "id": "4e-informatique-algo-programme-01",
+   "tier": "application",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Lire x ; y ← x × 2 + 1. Pour x = 4, quelle est la valeur de y ?",
+   "answer": 9,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 × 2 + 1 = 9.",
+   "id": "4e-informatique-algo-programme-02",
+   "tier": "application",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : tester avec une seule valeur suffit pour être sûr que le programme est correct.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut plusieurs valeurs, dont des cas limites.",
+   "id": "4e-informatique-algo-programme-03",
+   "tier": "application",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lire x ; Si x ≥ 18 Alors Écrire « majeur ». Quel test est un cas limite utile ?",
+   "choices": [
+    "x = 100",
+    "x = 5",
+    "x = 1 000",
+    "x = 18"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La frontière de la condition est 18.",
+   "id": "4e-informatique-algo-programme-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un programme calcule la moyenne de deux notes a et b avec : m ← a + b ÷ 2. Pour a = 10 et b = 20, il donne 20 au lieu de 15. Cause ?",
+   "choices": [
+    "Il faut diviser par 3",
+    "Il faut échanger a et b",
+    "Il n'y a pas de bogue",
+    "Il manque des parenthèses : (a + b) ÷ 2"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La division s'applique à b d'abord : 10 + 10 = 20.",
+   "id": "4e-informatique-algo-programme-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng écrit : s ← 0 ; Pour i de 1 à 3 : s ← s + 10 ; Écrire s. Il voulait le total de 3 paniers de 10 kg.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle valeur est écrite ?",
+     "answer": 30,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "10 + 10 + 10 = 30.",
+     "id": "4e-informatique-algo-programme-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose deux tests pour vérifier ce programme.",
+     "model": "Tester avec 0 panier (résultat 0) et avec 1 panier (10) ; vérifier que 3 paniers donnent 30.",
+     "rubric": [
+      "Un cas limite (0 ou 1)",
+      "Un résultat attendu connu"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-informatique-algo-programme-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-algo-programme-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle étape vient après l'écriture du programme ?",
+   "choices": [
+    "La suppression",
+    "Le branchement",
+    "L'impression du clavier",
+    "Le test"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On vérifie le résultat.",
+   "id": "4e-informatique-algo-programme-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Déboguer signifie :",
+   "choices": [
+    "Écrire un virus",
+    "Ajouter des couleurs",
+    "Chercher et corriger les erreurs",
+    "Fermer le fichier"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Terme courant pour la correction.",
+   "id": "4e-informatique-algo-programme-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un cas limite est :",
+   "choices": [
+    "Une valeur très grande uniquement",
+    "Un type d'écran",
+    "Un fichier supprimé",
+    "Une valeur à la frontière d'une condition"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ex. x = 18 pour x ≥ 18.",
+   "id": "4e-informatique-algo-programme-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un langage de programmation sert à :",
+   "choices": [
+    "Dessiner uniquement",
+    "Brancher des câbles",
+    "Chiffrer un courriel",
+    "Écrire des instructions pour l'ordinateur"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est un langage compris par la machine.",
+   "id": "4e-informatique-algo-programme-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un résultat différent du résultat attendu indique :",
+   "choices": [
+    "Probablement un bogue",
+    "Que tout va bien",
+    "Que le programme est terminé",
+    "Qu'il faut redémarrer"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut chercher l'erreur.",
+   "id": "4e-informatique-algo-programme-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-algo-programme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
