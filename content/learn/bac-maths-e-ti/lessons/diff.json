@@ -1,0 +1,599 @@
+{
+ "chapter": "bac-maths-e-ti-ch-diff",
+ "lessons": [
+  {
+   "id": "bac-maths-e-ti-diff-proba",
+   "title": "Équations différentielles (RC, RL) ; probabilités et statistiques",
+   "minutes": 45,
+   "programRef": "Tle E/TI — Équations différentielles du premier ordre ; probabilités, loi binomiale, statistiques (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Résoudre y′ = ay et y′ = ay + b avec une condition initiale.",
+    "Modéliser la charge d'un condensateur (RC) ou l'établissement d'un courant (RL).",
+    "Utiliser la loi binomiale pour un contrôle de qualité.",
+    "Calculer et interpréter une moyenne et un écart-type."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équation $y'=ay$",
+     "md": "Les solutions de $y'=ay$ (a constante non nulle) sont les fonctions $y(x)=Ce^{ax}$, C réel. Avec la condition initiale $y(0)=y_0$ : $y(x)=y_0e^{ax}$.\n- a > 0 : croissance exponentielle ; a < 0 : décroissance vers 0.\n- Pour une décroissance, la durée nécessaire pour diviser par 2 est $\\frac{\\ln2}{|a|}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équation $y'=ay+b$",
+     "md": "Pour a ≠ 0, les solutions de $y'=ay+b$ sont $y(x)=Ce^{ax}-\\frac{b}{a}$. La constante $-\\frac{b}{a}$ est la solution **constante** (état d'équilibre). Avec $y(0)=y_0$ : $C=y_0+\\frac{b}{a}$.\nOn vérifie en dérivant : $y'=aCe^{ax}=a\\left(y+\\frac{b}{a}\\right)=ay+b$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Circuits RC et RL",
+     "md": "- **RC** (charge d'un condensateur sous une tension E) : $RC\\,u'+u=E$ ; avec u(0) = 0, $u(t)=E\\left(1-e^{-t/\\tau}\\right)$ et $\\tau=RC$.\n- **RL** (établissement du courant) : $L\\,i'+Ri=E$ ; avec i(0) = 0, $i(t)=\\frac{E}{R}\\left(1-e^{-t/\\tau}\\right)$ et $\\tau=\\frac{L}{R}$.\nÀ t = τ la grandeur atteint environ 63 % de sa valeur finale."
+    },
+    {
+     "type": "heading",
+     "text": "Probabilités et statistiques"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Loi binomiale",
+     "md": "On répète n fois, de façon **indépendante**, une épreuve à deux issues (succès de probabilité p). Le nombre X de succès suit la **loi binomiale** de paramètres n et p :\n- $P(X=k)=C_n^k\\,p^k(1-p)^{n-k}$ ;\n- espérance $E(X)=np$ ;\n- $P(X\\geq1)=1-(1-p)^n$.\nLes statistiques rappellent : moyenne $\\bar{x}$ et écart-type $\\sigma=\\sqrt{V}$ mesurent centre et dispersion."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : charge d'un condensateur",
+     "statement": "Un condensateur de 250 µF est chargé par E = 12 V à travers R = 2 000 Ω, donc τ = 0,5 s. À quel instant la tension atteint-elle 90 % de E ?",
+     "steps": [
+      {
+       "md": "La tension est $u(t)=12\\left(1-e^{-2t}\\right)$ (on peut vérifier : $0{,}5u'+u=12e^{-2t}+12-12e^{-2t}=12$)."
+      },
+      {
+       "md": "$u(t)=0{,}9\\times12\\Leftrightarrow1-e^{-2t}=0{,}9\\Leftrightarrow e^{-2t}=0{,}1$, donc :",
+       "tex": "t=\\frac{\\ln10}{2}\\approx1{,}151\\ \\text{s}"
+      }
+     ],
+     "answer": "**t ≈ 1,15 s**, soit environ 2,3 τ."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : décroissance",
+     "statement": "La quantité y d'un produit dans une cuve vérifie $y'=-0{,}3y$ (t en heures) avec y(0) = 50 g. Donne y(t) et la durée pour la diviser par 2.",
+     "steps": [
+      {
+       "md": "$a=-0{,}3$ : $y(t)=50e^{-0{,}3t}$."
+      },
+      {
+       "md": "Division par 2 : $e^{-0{,}3t}=\\frac{1}{2}\\Leftrightarrow t=\\frac{\\ln2}{0{,}3}\\approx2{,}31$ h."
+      }
+     ],
+     "answer": "$y(t)=50e^{-0{,}3t}$ ; la quantité est divisée par 2 toutes les **2,31 h** environ."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : contrôle de qualité",
+     "statement": "Une machine produit 10 % de pièces défectueuses (donnée fictive). On prélève 5 pièces indépendamment ; X est le nombre de pièces défectueuses. Calcule P(X = 2) et E(X).",
+     "steps": [
+      {
+       "md": "X suit la loi binomiale de paramètres n = 5 et p = 0,1."
+      },
+      {
+       "md": "$P(X=2)=C_5^2\\times0{,}1^2\\times0{,}9^3=10\\times0{,}01\\times0{,}729=0{,}0729$ et $E(X)=5\\times0{,}1=0{,}5$."
+      }
+     ],
+     "answer": "**P(X = 2) ≈ 0,073** ; en moyenne **0,5** pièce défectueuse par lot de 5."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 3,
+      "ymin": 0,
+      "ymax": 13,
+      "grid": 1,
+      "xlabel": "t (s)",
+      "ylabel": "u (V)",
+      "curves": [
+       {
+        "expr": "12*(1-exp(-2*x))",
+        "color": "blue",
+        "label": "u(t)"
+       },
+       {
+        "expr": "12",
+        "color": "grey",
+        "label": "E = 12 V"
+       }
+      ],
+      "points": [
+       {
+        "x": 0.5,
+        "y": 7.585,
+        "label": "τ : 63 %",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Charge du condensateur : la tension tend vers 12 V ; à t = τ = 0,5 s elle atteint environ 7,6 V, soit 63 % de E.",
+     "alt": "Courbe bleue croissante partant de 0 V et se rapprochant de la droite grise horizontale à 12 V. Un point rouge à 0,5 s, environ 7,6 V, marque la constante de temps."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la solution constante : pour $y'=2y+6$, $y=Ce^{2x}-3$ et non $y=Ce^{2x}$.\n- Confondre τ = RC (circuit RC) et τ = L/R (circuit RL).\n- Utiliser la loi binomiale sans indépendance des épreuves.\n- Calculer P(X ≥ 1) en additionnant tous les cas au lieu de passer par $1-P(X=0)$."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-e-ti-dif-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les équations différentielles servent aussi à modéliser le refroidissement d'un objet ou la croissance d'une population (modèle simple).",
+      "Toutes les valeurs (R, C, L, taux de défauts) sont fictives."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Cette fiche regroupe deux thèmes (équations différentielles ; probabilités/statistiques) : à séparer si le programme officiel le justifie.",
+    "Vérifier au programme de Tle E/TI : équations $y''+\\omega^2y=0$, loi normale, statistiques à deux variables.",
+    "Couverture des probabilités et statistiques volontairement minimale (loi binomiale, moyenne, écart-type)."
+   ],
+   "exercises": [
+    "bac-maths-e-ti-dif-01",
+    "bac-maths-e-ti-dif-02",
+    "bac-maths-e-ti-dif-03",
+    "bac-maths-e-ti-dif-04",
+    "bac-maths-e-ti-dif-05",
+    "bac-maths-e-ti-dif-06"
+   ],
+   "selfCheck": [
+    "bac-maths-e-ti-dif-q1",
+    "bac-maths-e-ti-dif-q2",
+    "bac-maths-e-ti-dif-q3",
+    "bac-maths-e-ti-dif-q4",
+    "bac-maths-e-ti-dif-q5"
+   ],
+   "prerequisites": [
+    "bac-maths-e-ti-integrales",
+    "bac-maths-e-ti-exp-ln"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-e-ti-dif-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La solution de $y'=3y$ avec $y(0)=2$ est :",
+   "choices": [
+    "$2e^{3x}$",
+    "$3e^{2x}$",
+    "$2e^{x}+3$",
+    "$e^{3x}+1$"
+   ],
+   "answer": 0,
+   "explanation": "$y=Ce^{3x}$ et $y(0)=C=2$ : $y=2e^{3x}$.",
+   "method": "$y'=ay\\Rightarrow y=y_0e^{ax}$.",
+   "mistakes": [
+    "Inverser la valeur initiale et le coefficient."
+   ],
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La fonction y vérifie $y'=-2y$ et $y(0)=5$. Calcule y(1), au millième.",
+   "answer": 0.677,
+   "tolerance": 0.001,
+   "explanation": "$y(x)=5e^{-2x}$ donc $y(1)=5e^{-2}\\approx0{,}677$.",
+   "method": "Écrire d'abord y(x).",
+   "mistakes": [
+    "Calculer $5e^{-1}\\approx1{,}84$."
+   ],
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un circuit RC a R = 10 kΩ et C = 47 µF. Calcule sa constante de temps τ en secondes.",
+   "answer": 0.47,
+   "tolerance": 0,
+   "unit": "s",
+   "explanation": "$\\tau=RC=10\\,000\\times47\\times10^{-6}=0{,}47$ s.",
+   "method": "Convertir : 10 kΩ = 10 000 Ω ; 47 µF = 47×10⁻⁶ F.",
+   "mistakes": [
+    "Ne pas convertir les unités."
+   ],
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Résous $y'=2y+6$ avec $y(0)=1$ et calcule y(1), au millième.",
+   "answer": 26.556,
+   "tolerance": 0.001,
+   "explanation": "Solutions : $y=Ce^{2x}-3$. $y(0)=C-3=1$ donc C = 4. $y(1)=4e^2-3\\approx4\\times7{,}389056-3\\approx26{,}556$.",
+   "method": "Solution générale, puis condition initiale.",
+   "mistakes": [
+    "Oublier −3 et trouver C = 1."
+   ],
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "X suit la loi binomiale de paramètres n = 4 et p = 0,3. Calcule P(X = 1), au millième.",
+   "answer": 0.412,
+   "tolerance": 0.001,
+   "explanation": "$P(X=1)=C_4^1\\times0{,}3\\times0{,}7^3=4\\times0{,}3\\times0{,}343=0{,}4116$.",
+   "method": "$P(X=k)=C_n^kp^k(1-p)^{n-k}$.",
+   "mistakes": [
+    "Oublier le coefficient $C_4^1=4$."
+   ],
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Une bobine de résistance R = 10 Ω et d'inductance L = 0,2 H est connectée à un générateur de tension constante E = 20 V à t = 0 (i(0) = 0). Valeurs fictives.",
+   "parts": [
+    {
+     "id": "bac-maths-e-ti-dif-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle équation différentielle l'intensité i vérifie-t-elle ?",
+     "explanation": "La loi des mailles donne $L\\,i'+Ri=E$, soit $0{,}2\\,i'+10\\,i=20$.",
+     "choices": [
+      "$0{,}2\\,i'+10\\,i=20$",
+      "$10\\,i'+0{,}2\\,i=20$",
+      "$0{,}2\\,i+10\\,i'=20$",
+      "$i'=20$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-e-ti-dif-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la constante de temps $\\tau=\\frac{L}{R}$ (en s).",
+     "explanation": "$\\tau=\\frac{0{,}2}{10}=0{,}02$ s.",
+     "answer": 0.02,
+     "tolerance": 0,
+     "unit": "s"
+    },
+    {
+     "id": "bac-maths-e-ti-dif-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On donne $i(t)=2\\left(1-e^{-50t}\\right)$. Quelle est l'intensité limite (en A) ?",
+     "explanation": "Quand t tend vers $+\\infty$, $e^{-50t}$ tend vers 0 : $i\\to2$ A (= E/R).",
+     "answer": 2,
+     "tolerance": 0,
+     "unit": "A"
+    },
+    {
+     "id": "bac-maths-e-ti-dif-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule i(τ) pour t = 0,02 s, au millième.",
+     "explanation": "$i(0{,}02)=2(1-e^{-1})\\approx1{,}264$ A (63 % de 2 A).",
+     "answer": 1.264,
+     "tolerance": 0.001,
+     "unit": "A"
+    },
+    {
+     "id": "bac-maths-e-ti-dif-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "À quel instant i atteint-elle 1,5 A ? (en s, au millième)",
+     "explanation": "$2(1-e^{-50t})=1{,}5\\Leftrightarrow e^{-50t}=0{,}25\\Leftrightarrow t=\\frac{\\ln4}{50}\\approx0{,}028$ s.",
+     "answer": 0.028,
+     "tolerance": 0.0005,
+     "unit": "s"
+    }
+   ],
+   "method": "Équation de maille, solution avec constante de temps, lecture des valeurs.",
+   "mistakes": [
+    "Confondre τ = L/R avec τ = RL."
+   ],
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Les solutions de $y'=2y+6$ sont :",
+   "choices": [
+    "$Ce^{2x}-3$",
+    "$Ce^{2x}+3$",
+    "$Ce^{2x}+6$",
+    "$Ce^{6x}-2$"
+   ],
+   "answer": 0,
+   "explanation": "Solution constante $-\\frac{b}{a}=-3$.",
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La constante de temps d'un circuit RL est :",
+   "choices": [
+    "$\\frac{L}{R}$",
+    "$RL$",
+    "$\\frac{R}{L}$",
+    "$R+L$"
+   ],
+   "answer": 0,
+   "explanation": "$\\tau=\\frac{L}{R}$ (en secondes).",
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "X suit la loi binomiale avec n = 10 et p = 0,2. Son espérance est :",
+   "choices": [
+    "2",
+    "0,2",
+    "10",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "$E(X)=np=10\\times0{,}2=2$.",
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Avec p = 0,1 et n = 5, la probabilité d'avoir au moins une pièce défectueuse vaut :",
+   "choices": [
+    "$1-0{,}9^5\\approx0{,}41$",
+    "$0{,}1^5$",
+    "$5\\times0{,}1=0{,}5$",
+    "$0{,}9^5\\approx0{,}59$"
+   ],
+   "answer": 0,
+   "explanation": "$P(X\\geq1)=1-P(X=0)=1-0{,}9^5\\approx0{,}4095$.",
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-dif-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "À t = τ, la tension d'un condensateur qui se charge a atteint environ :",
+   "choices": [
+    "63 % de E",
+    "37 % de E",
+    "100 % de E",
+    "50 % de E"
+   ],
+   "answer": 0,
+   "explanation": "$1-e^{-1}\\approx0{,}632$.",
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 1 (5 points) — Électricité. Une bobine de résistance R = 50 Ω et d'inductance L = 0,2 H est alimentée sous une tension sinusoïdale de fréquence 50 Hz (valeurs fictives). On note ω la pulsation.",
+   "parts": [
+    {
+     "id": "bac-maths-e-ti-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $L\\omega$ (en Ω), au millième.",
+     "explanation": "$\\omega=100\\pi$ et $L\\omega=0{,}2\\times100\\pi=20\\pi\\approx62{,}832$ Ω.",
+     "answer": 62.832,
+     "tolerance": 0.001,
+     "unit": "Ω"
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule le module de l'impédance $Z=50+jL\\omega$, au centième.",
+     "explanation": "$|Z|=\\sqrt{50^2+62{,}832^2}\\approx80{,}30$ Ω.",
+     "answer": 80.3,
+     "tolerance": 0.01,
+     "unit": "Ω"
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule le déphasage φ en degrés, au centième.",
+     "explanation": "$\\tan\\varphi=\\frac{62{,}832}{50}$, donc $\\varphi\\approx51{,}49^\\circ$.",
+     "answer": 51.49,
+     "tolerance": 0.01,
+     "unit": "°"
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-ex1-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "La tension efficace est U = 230 V. Calcule I = U/|Z| (en A), au millième.",
+     "explanation": "$I=\\frac{230}{80{,}298}\\approx2{,}864$ A.",
+     "answer": 2.864,
+     "tolerance": 0.001,
+     "unit": "A"
+    }
+   ],
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 2 (5 points) — Équation différentielle. Une grandeur y(t) vérifie $y'+0{,}4\\,y=2$ avec y(0) = 0.",
+   "parts": [
+    {
+     "id": "bac-maths-e-ti-blanc-ex2-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la forme générale des solutions ?",
+     "explanation": "L'équation s'écrit $y'=-0{,}4y+2$ : solutions $Ce^{-0{,}4t}+5$ (solution constante $\\frac{2}{0{,}4}=5$).",
+     "choices": [
+      "$Ce^{-0{,}4t}+5$",
+      "$Ce^{-0{,}4t}+2$",
+      "$Ce^{0{,}4t}+5$",
+      "$Ce^{-0{,}4t}-5$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est la valeur de la solution constante ?",
+     "explanation": "$0{,}4y=2\\Rightarrow y=5$.",
+     "answer": 5,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Avec y(0) = 0 on trouve $y(t)=5\\left(1-e^{-0{,}4t}\\right)$. Calcule y(2), au millième.",
+     "explanation": "$y(2)=5(1-e^{-0{,}8})\\approx5\\times0{,}55067\\approx2{,}753$.",
+     "answer": 2.753,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "À quel instant y vaut-elle 4 ? (au millième)",
+     "explanation": "$1-e^{-0{,}4t}=0{,}8\\Leftrightarrow e^{-0{,}4t}=0{,}2\\Leftrightarrow t=\\frac{\\ln5}{0{,}4}\\approx4{,}024$.",
+     "answer": 4.024,
+     "tolerance": 0.001
+    }
+   ],
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-blanc-pb",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "prompt": "Problème (10 points). Soit f la fonction définie sur ]0 ; +∞[ par $f(x)=x-1-\\ln x$.",
+   "parts": [
+    {
+     "id": "bac-maths-e-ti-blanc-pb-a",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle est l'expression de f′(x) ?",
+     "explanation": "$f'(x)=1-\\frac{1}{x}=\\frac{x-1}{x}$.",
+     "choices": [
+      "$\\frac{x-1}{x}$",
+      "$1-x$",
+      "$\\frac{x+1}{x}$",
+      "$1+\\frac{1}{x}$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-pb-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "En quelle valeur de x la fonction f est-elle minimale ?",
+     "explanation": "Pour x > 0, f′ a le signe de x − 1 : f décroît sur ]0 ; 1] puis croît sur [1 ; +∞[.",
+     "answer": 1,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-pb-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la valeur de ce minimum.",
+     "explanation": "$f(1)=1-1-\\ln1=0$. Donc f(x) ≥ 0 pour tout x > 0, c'est-à-dire $\\ln x\\leq x-1$.",
+     "answer": 0,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-pb-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule f(e), au millième.",
+     "explanation": "$f(e)=e-1-1=e-2\\approx0{,}718$.",
+     "answer": 0.718,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-pb-e",
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Quelle est une primitive F de f sur ]0 ; +∞[ ? (Indice : une primitive de ln x est $x\\ln x-x$.)",
+     "explanation": "$F(x)=\\frac{x^2}{2}-x-(x\\ln x-x)=\\frac{x^2}{2}-x\\ln x$. Contrôle : $F'(x)=x-\\ln x-1=f(x)$.",
+     "choices": [
+      "$\\frac{x^2}{2}-x\\ln x$",
+      "$\\frac{x^2}{2}-x-\\frac{1}{x}$",
+      "$\\frac{x^2}{2}-x+x\\ln x$",
+      "$x^2-x\\ln x$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-e-ti-blanc-pb-f",
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Calcule l'aire du domaine entre la courbe de f, l'axe des abscisses et les droites x = 1 et x = e (unités d'aire), au millième.",
+     "explanation": "$\\int_1^ef(x)\\,dx=\\left[\\frac{x^2}{2}-x\\ln x\\right]_1^e=\\left(\\frac{e^2}{2}-e\\right)-\\frac{1}{2}\\approx0{,}476$ (f ≥ 0 sur [1 ; e]).",
+     "answer": 0.476,
+     "tolerance": 0.001
+    }
+   ],
+   "lesson": "bac-maths-e-ti-diff-proba",
+   "source": "Exercice original, style Terminale E/TI"
+  }
+ ]
+}

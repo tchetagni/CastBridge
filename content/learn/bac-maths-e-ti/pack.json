@@ -1,0 +1,82 @@
+{
+ "format": 1,
+ "id": "bac-maths-e-ti",
+ "version": 1,
+ "title": "Mathématiques — Terminale E et TI",
+ "description": "Fiches « l'essentiel » de Terminale E et TI : étude de fonctions et primitives, exponentielle et logarithme, calcul intégral, nombres complexes appliqués à l'électricité, équations différentielles et probabilités. Applications techniques, exemples résolus, exercices corrigés et épreuve blanche.",
+ "lang": "fr",
+ "cursus": "secondaire",
+ "level": "Tle",
+ "subject": "maths",
+ "series": [
+  "E",
+  "TI"
+ ],
+ "programRef": "Programmes de mathématiques des classes de Terminale E et TI (MINESEC) — à vérifier sur le texte officiel",
+ "authors": [
+  "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+ ],
+ "status": "draft",
+ "updatedAt": "2026-10-01",
+ "chapters": [
+  {
+   "id": "bac-maths-e-ti-ch-fonctions",
+   "title": "Fonctions, limites, dérivées et primitives",
+   "order": 1,
+   "programRef": "Tle E/TI — Analyse : limites, dérivation, primitives (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bac-maths-e-ti-ch-lnexp",
+   "title": "Exponentielle et logarithme",
+   "order": 2,
+   "programRef": "Tle E/TI — Analyse : fonctions exp et ln (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bac-maths-e-ti-ch-integrales",
+   "title": "Calcul intégral et applications",
+   "order": 3,
+   "programRef": "Tle E/TI — Calcul intégral, aires, valeur moyenne (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bac-maths-e-ti-ch-complexes",
+   "title": "Nombres complexes appliqués",
+   "order": 4,
+   "programRef": "Tle E/TI — Nombres complexes ; impédances et représentation de Fresnel (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bac-maths-e-ti-ch-diff",
+   "title": "Équations différentielles, probabilités et statistiques",
+   "order": 5,
+   "programRef": "Tle E/TI — Équations différentielles ; probabilités et statistiques (à vérifier sur le texte officiel)"
+  }
+ ],
+ "mockExams": [
+  {
+   "id": "bac-maths-e-ti-blanc-1",
+   "title": "Épreuve blanche de mathématiques — Terminale E et TI",
+   "minutes": 180,
+   "outOf": 20,
+   "instructions": "Durée : 3 heures. Deux exercices et un problème, tous obligatoires. Calculatrice non programmable autorisée. Les données sont fictives. Durée, barème et format sont indicatifs : à vérifier sur les textes officiels.",
+   "sections": [
+    {
+     "title": "Exercice 1 — Nombres complexes et électricité (5 points)",
+     "exercises": [
+      "bac-maths-e-ti-blanc-ex1"
+     ]
+    },
+    {
+     "title": "Exercice 2 — Équation différentielle (5 points)",
+     "exercises": [
+      "bac-maths-e-ti-blanc-ex2"
+     ]
+    },
+    {
+     "title": "Problème — Fonction logarithme et calcul d'aire (10 points)",
+     "exercises": [
+      "bac-maths-e-ti-blanc-pb"
+     ]
+    }
+   ]
+  }
+ ]
+}
