@@ -53,6 +53,8 @@ class ReceiverServer(
     private val settingsOpener: (() -> String?)? = null,
     /** Thumbnails, durations and saved positions for the library screens; null = plain file list. */
     private val library: LibraryMeta? = null,
+    /** JSON of the last re-adoption scan of the drive (see [UsbReadopt]); null = none yet. Additive field `heavy.readopt` of /api/storage. */
+    private val readoptJson: () -> String? = { null },
     /** Routes served without the PIN (the quiz at /quiz, with its own room code); asked before the PIN check. */
     private val publicRoutes: PublicRoutes? = null,
     /**
@@ -831,7 +833,16 @@ class ReceiverServer(
         return """{"used":$used,"free":${pv?.let { volumes.free(it) } ?: 0},"quota":${pv?.let { quotaOf(it, used) } ?: 0},"quotaMb":${cfg.quotaBytes shr 20},""" +
             """"deleteAfterPlay":${cfg.deleteAfterPlay},"evictPlayed":${cfg.evictPlayed},"minFreeMb":${cfg.minFreeBytes shr 20},"minFreeAfterMb":${cfg.minFreeAfterTransfer shr 20},""" +
             """"target":${q(cfg.target)},"primary":${pv?.let { q(it.id) } ?: "null"},"volumes":${volumesJson(l)},""" +
-            """"move":${moveJob?.json() ?: "null"},"warnings":${strs(warnings)}}"""
+            """"move":${moveJob?.json() ?: "null"},"warnings":${strs(warnings)},"heavy":${heavyJson()}}"""
+    }
+
+    /** Additive: where heavy content goes (no absolute path is ever disclosed), why, and the state of the last re-adoption. */
+    private fun heavyJson(): String {
+        val d = HeavyStorage.decide(volumes.snapshot(), cfg.heavyOnUsb, cfg.heavyDriveId)
+        val v = d.volume
+        return """{"enabled":${cfg.heavyOnUsb},"where":${q(d.where.name.lowercase())},"drive":${if (d.where == HeavyStorage.Where.USB && v != null) q(v.id) else "null"},""" +
+            """"label":${v?.let { q(it.label) } ?: "null"},"root":${if (v?.heavyRoot != null) q("Download/CastBridge") else "null"},"free":${v?.let { volumes.free(it) } ?: -1},""" +
+            """"writeBps":${v?.writeBps ?: 0},"warnings":${strs(d.warnings)},"readopt":${readoptJson() ?: "null"}}"""
     }
 
     private fun storage(method: Method, p: Map<String, String>): Response {
@@ -841,7 +852,10 @@ class ReceiverServer(
             p["evictPlayed"]?.let { c = c.copy(evictPlayed = it == "true" || it == "1") }
             p["quotaMb"]?.let { v -> c = c.copy(quotaBytes = (v.toLongOrNull() ?: return bad("quotaMb must be a number")).coerceAtLeast(0) shl 20) }
             p["minFreeAfterMb"]?.let { v -> c = c.copy(minFreeAfterTransfer = (v.toLongOrNull() ?: return bad("minFreeAfterMb must be a number")).coerceIn(0, 1L shl 20) shl 20) }
+            p["heavyOnUsb"]?.let { c = c.copy(heavyOnUsb = it == "true" || it == "1") }
+            p["heavyDrive"]?.let { v -> if (v.isNotEmpty() && volumes.volumes().none { it.id == v && it.kind == VolumeKind.REMOVABLE }) return bad("heavyDrive must be empty or a drive id"); c = c.copy(heavyDriveId = v) }
             cfg = c; onSettings(c); invalidate()
+            if (p.containsKey("heavyOnUsb") || p.containsKey("heavyDrive")) volumes.refresh()
         } else if (method != Method.GET) return json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET or POST"}""")
         return ok(storageJson())
     }
