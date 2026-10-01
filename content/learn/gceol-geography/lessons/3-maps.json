@@ -1,0 +1,1084 @@
+{
+ "chapter": "gceol-geography-maps",
+ "lessons": [
+  {
+   "id": "gceol-geography-map-skills",
+   "title": "Map scale, direction and grid references",
+   "minutes": 20,
+   "programRef": "GCE O Level Geography — Map work and practical skills (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use a scale to convert map distance to ground distance and the reverse",
+    "Give directions with compass points and bearings",
+    "Give and read four- and six-figure grid references"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-geography-maps-e01",
+    "gceol-geography-maps-e02",
+    "gceol-geography-maps-e03",
+    "gceol-geography-maps-e04",
+    "gceol-geography-maps-e05",
+    "gceol-geography-maps-e06"
+   ],
+   "selfCheck": [
+    "gceol-geography-map-skills-q1",
+    "gceol-geography-map-skills-q2",
+    "gceol-geography-map-skills-q3",
+    "gceol-geography-map-skills-q4",
+    "gceol-geography-map-skills-q5"
+   ],
+   "reviewNotes": [
+    "Teacher to check which map style and conventions (four- vs six-figure references, bearings) the GCE Board's map-work paper uses.",
+    "Syllabus references and scope to be checked against the official GCE Board syllabus; all facts, names and figures to be verified by a geography teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "A **scale** tells us how much smaller the map is than the ground. A **representative fraction** such as 1 : 50 000 means that 1 cm on the map represents 50 000 cm (500 m, or 0.5 km) on the ground. A **statement scale** says it in words (1 cm to 1 km) and a **linear scale** is a ruler line drawn on the map."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 120,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 120,
+        "y2": 15,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 120,
+        "y2": 225,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 225,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 15,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 195,
+        "y2": 45,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 195,
+        "y2": 195,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 45,
+        "y2": 195,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 45,
+        "y2": 45,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 10,
+        "text": "N",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 238,
+        "text": "S",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 236,
+        "y": 125,
+        "text": "E",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 5,
+        "y": 125,
+        "text": "W",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 206,
+        "y": 40,
+        "text": "NE",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 206,
+        "y": 205,
+        "text": "SE",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 34,
+        "y": 205,
+        "text": "SW",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 34,
+        "y": 40,
+        "text": "NW",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 100,
+        "text": "Bearings are measured",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 120,
+        "text": "clockwise from north,",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 140,
+        "text": "e.g. east = 090°",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The eight compass points",
+     "alt": "A compass rose with eight arrows labelled N, NE, E, SE, S, SW, W and NW."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Measuring distance",
+     "md": "1. Measure the map distance in cm with a ruler (use a string for curved roads or rivers).\n2. Multiply by the scale number (50 000 for 1 : 50 000).\n3. Convert cm to km: divide by 100 000.\nExample: 6.4 cm on a 1 : 50 000 map is 6.4 × 50 000 = 320 000 cm = 3.2 km."
+    },
+    {
+     "type": "text",
+     "md": "**Direction:** the eight main compass points are N, NE, E, SE, S, SW, W, NW. For more accuracy we use a **bearing**, an angle from north measured clockwise: north is 000°, east 090°, south 180° and west 270°. On most maps north is at the top."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Grid references",
+     "md": "Vertical lines (eastings) are numbered across the bottom of the map; horizontal lines (northings) up the side. In a **four-figure reference** give the eastings number first, then the northings number of the square's lower-left corner. In a **six-figure reference** divide the square into tenths to give a more exact position. Remember: along the corridor, then up the stairs."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Giving the northings before the eastings.\n- Forgetting to convert cm to km.\n- Measuring a bearing anticlockwise; it is always clockwise from north.\n- Confusing a larger scale (1 : 25 000, more detail) with a smaller scale (1 : 500 000, less detail)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: map distance to ground distance",
+     "statement": "On a map of scale 1 : 50 000 two villages are 6.4 cm apart. Find the ground distance in km.",
+     "steps": [
+      "Ground distance = 6.4 × 50 000 = 320 000 cm.",
+      "Convert to metres: 320 000 ÷ 100 = 3 200 m.",
+      "Convert to km: 3 200 ÷ 1 000 = 3.2 km."
+     ],
+     "answer": "3.2 km."
+    },
+    {
+     "type": "example",
+     "title": "Example 2: grid reference",
+     "statement": "A school lies in the square whose lower-left corner is at easting 24 and northing 71. Give the four-figure reference.",
+     "steps": [
+      "Eastings come first: 24.",
+      "Then northings: 71.",
+      "Join them without a space or comma."
+     ],
+     "answer": "2471",
+     "figure": {
+      "kind": "shapes",
+      "w": 280,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 40,
+        "w": 120,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 100,
+        "x2": 180,
+        "y2": 100,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 40,
+        "x2": 120,
+        "y2": 160,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 180,
+        "text": "24",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 180,
+        "text": "25",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 180,
+        "text": "26",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 160,
+        "text": "71",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 100,
+        "text": "72",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 40,
+        "text": "73",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 130,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 135,
+        "text": "School",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-contours-sections",
+   "title": "Contours, relief and cross-sections",
+   "minutes": 20,
+   "programRef": "GCE O Level Geography — Map work and practical skills (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain what contour lines show",
+    "Recognise steep and gentle slopes, valleys, spurs and peaks from contours",
+    "Calculate gradient",
+    "Draw and interpret a cross-section and check intervisibility"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-geography-maps-e07",
+    "gceol-geography-maps-e08",
+    "gceol-geography-maps-e09",
+    "gceol-geography-maps-e10",
+    "gceol-geography-maps-e11",
+    "gceol-geography-maps-e12"
+   ],
+   "selfCheck": [
+    "gceol-geography-contours-sections-q1",
+    "gceol-geography-contours-sections-q2",
+    "gceol-geography-contours-sections-q3",
+    "gceol-geography-contours-sections-q4",
+    "gceol-geography-contours-sections-q5"
+   ],
+   "reviewNotes": [
+    "Teacher to confirm the exam's conventions for gradient and section drawing (ratio or fraction, vertical scale).",
+    "Syllabus references and scope to be checked against the official GCE Board syllabus; all facts, names and figures to be verified by a geography teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "A **contour line** joins places that have the same height above sea level. The **contour interval** is the vertical height between two lines (for example 20 m). Heights on a map are measured from sea level. A **spot height** gives the exact height of a point and a **trig point** is a surveyed marker on a summit."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 120,
+        "r": 100,
+        "stroke": "green",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 75,
+        "stroke": "brown",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 120,
+        "r": 50,
+        "stroke": "brown",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "circle",
+        "cx": 170,
+        "cy": 120,
+        "r": 25,
+        "stroke": "brown",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 48,
+        "y": 124,
+        "text": "100 m",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 78,
+        "y": 124,
+        "text": "200 m",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 70,
+        "text": "Gentle slope (wide spacing)",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 232,
+        "text": "Steep slope: contours close together on the left",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 90,
+        "text": "on the right",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Contour lines on a hill (schematic)",
+     "alt": "Concentric rings that are close together on the left side and wide apart on the right."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reading the shape of the land",
+     "md": "- Contours **close together**: steep slope. **Far apart**: gentle slope.\n- Closed rings with higher numbers inside: hill or peak.\n- **V-shapes pointing uphill** mark a valley (a river runs in it).\n- Contours bulging downhill mark a **spur**.\n- Evenly spaced lines: uniform slope.\n- A sudden merging of lines: cliff or escarpment."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Gradient",
+     "md": "Gradient = vertical interval ÷ horizontal distance, with both in the same unit. A rise of 100 m over 3 000 m gives 100 ÷ 3 000, or 1 in 30.",
+     "tex": "\\text{gradient}=\\frac{\\text{vertical interval}}{\\text{horizontal distance}}"
+    },
+    {
+     "type": "text",
+     "md": "A **cross-section** is a side view along a line drawn between two points. To draw it: lay a strip of paper along the line, mark each contour crossing with its height, transfer the marks to graph paper, plot the heights, and join the points smoothly. Use a suitable vertical scale and label the axes. Two places are **intervisible** if no higher ground lies in between on the section."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Be careful",
+     "md": "- Contour lines never cross (except at a cliff).\n- Do not join the ends of the profile with straight lines; the real land is curved.\n- Vertical exaggeration makes slopes look steeper on the section than they are; state the vertical scale."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: calculate gradient",
+     "statement": "Point A is at 100 m and point B is at 400 m. The horizontal distance between them is 3 km. Find the gradient as 1 in n.",
+     "steps": [
+      "Vertical interval = 400 − 100 = 300 m.",
+      "Horizontal distance = 3 km = 3 000 m.",
+      "Gradient = 300 : 3 000 = 1 : 10, so 1 in 10."
+     ],
+     "answer": "1 in 10."
+    },
+    {
+     "type": "example",
+     "title": "Example 2: steep or gentle?",
+     "statement": "Along the line PQ the 100 m and 200 m contours are 1 cm apart; along the line RS they are 4 cm apart on the same map. Which line is steeper?",
+     "steps": [
+      "The same height change happens over a shorter distance on PQ.",
+      "A shorter horizontal distance for the same rise means a steeper slope.",
+      "So PQ is steeper than RS."
+     ],
+     "answer": "PQ is steeper."
+    }
+   ],
+   "chapter": "gceol-geography-maps"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-geography-maps-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-geography-map-skills",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A map has the scale 1 : 25 000. Two points are 8 cm apart on the map. What is the ground distance in km?",
+   "answer": 2.0,
+   "tolerance": 0,
+   "unit": "km",
+   "explanation": "8 × 25 000 = 200 000 cm = 2 km.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-geography-map-skills",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the bearing of due east?",
+   "choices": [
+    "090°",
+    "180°",
+    "270°",
+    "000°"
+   ],
+   "answer": 0,
+   "explanation": "North is 000°, east 090°, south 180° and west 270°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-geography-map-skills",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a grid reference you give the eastings before the northings.",
+   "answer": true,
+   "explanation": "The eastings come first: along the corridor, then up the stairs.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-geography-map-skills",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A road is 4.5 km long. How long is it on a map of scale 1 : 50 000, in cm?",
+   "answer": 9,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "4.5 km = 450 000 cm; 450 000 ÷ 50 000 = 9 cm.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-geography-map-skills",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which scale shows the most detail?",
+   "choices": [
+    "1 : 250 000",
+    "1 : 1 000 000",
+    "1 : 10 000",
+    "1 : 50 000"
+   ],
+   "answer": 2,
+   "explanation": "The smaller the number after the colon, the larger the scale and the more detail shown.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-geography-map-skills",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A map of a district near Bafoussam has the scale 1 : 50 000. A health centre is 7 cm north-east of a market on the map.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the real distance in km?",
+     "answer": 3.5,
+     "tolerance": 0,
+     "explanation": "7 × 50 000 = 350 000 cm = 3.5 km.",
+     "unit": "km",
+     "id": "gceol-geography-maps-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The direction from the market to the health centre is",
+     "choices": [
+      "north-west",
+      "south-east",
+      "south-west",
+      "north-east"
+     ],
+     "answer": 3,
+     "explanation": "The health centre lies north-east of the market, so the direction from market to centre is NE.",
+     "id": "gceol-geography-maps-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The bearing from the market to the centre is about",
+     "choices": [
+      "045°",
+      "225°",
+      "135°",
+      "315°"
+     ],
+     "answer": 0,
+     "explanation": "North-east is halfway between north (000°) and east (090°).",
+     "id": "gceol-geography-maps-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give one reason why the scale of a map matters for planning a road.",
+     "model": "The scale lets planners measure real distances and estimate the length, cost and time needed to build the road.",
+     "rubric": "1 mark for stating that scale gives distance; 1 mark for the link to cost or planning.",
+     "explanation": "The scale lets planners measure real distances and estimate the length, cost and time needed to build the road.",
+     "id": "gceol-geography-maps-e06-d"
+    }
+   ],
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-map-skills-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-map-skills",
+   "prompt": "The scale 1 : 100 000 means 1 cm represents",
+   "choices": [
+    "10 m",
+    "100 m",
+    "1 km",
+    "10 km"
+   ],
+   "answer": 2,
+   "explanation": "100 000 cm = 1 km.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-map-skills-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-map-skills",
+   "prompt": "North-west is between",
+   "choices": [
+    "North and east",
+    "North and west",
+    "South and west",
+    "South and east"
+   ],
+   "answer": 1,
+   "explanation": "NW lies between N and W.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-map-skills-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-map-skills",
+   "prompt": "The bearing of south is",
+   "choices": [
+    "090°",
+    "180°",
+    "270°",
+    "000°"
+   ],
+   "answer": 1,
+   "explanation": "South is 180°.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-map-skills-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-map-skills",
+   "prompt": "In the reference 3254, the 32 is the",
+   "choices": [
+    "Northings",
+    "Eastings",
+    "Scale",
+    "Height"
+   ],
+   "answer": 1,
+   "explanation": "Eastings come first.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-map-skills-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-map-skills",
+   "prompt": "A map of scale 1 : 25 000 compared with 1 : 100 000 is",
+   "choices": [
+    "Equal in scale",
+    "Smaller in scale",
+    "Not a map",
+    "Larger in scale"
+   ],
+   "answer": 3,
+   "explanation": "A smaller denominator means a larger scale.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-geography-contours-sections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Contour lines that are very close together show",
+   "choices": [
+    "A steep slope",
+    "A flat plain",
+    "The sea",
+    "A gentle slope"
+   ],
+   "answer": 0,
+   "explanation": "Many height changes in a short distance mean steepness.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-geography-contours-sections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Contour lines join places of the same height above sea level.",
+   "answer": true,
+   "explanation": "That is the definition of a contour.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-geography-contours-sections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Point A is at 250 m and point B at 700 m. What is the height difference in metres?",
+   "answer": 450,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "700 − 250 = 450 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-geography-contours-sections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The vertical interval is 200 m and the horizontal distance is 4 km. Give the gradient as 1 in n (enter n).",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "4 km = 4 000 m; 4 000 ÷ 200 = 20, so the gradient is 1 in 20.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-geography-contours-sections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "V-shaped contours pointing uphill indicate",
+   "choices": [
+    "A valley",
+    "A lake",
+    "A spur",
+    "A summit"
+   ],
+   "answer": 0,
+   "explanation": "Contours bend upstream (uphill) across a valley.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-geography-contours-sections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Along a section line the heights in order are: 100 m (start), 200 m, 300 m (a ridge), 150 m, 100 m (end).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The highest point on the line is at",
+     "choices": [
+      "300 m",
+      "100 m",
+      "150 m",
+      "200 m"
+     ],
+     "answer": 0,
+     "explanation": "The ridge is at 300 m.",
+     "id": "gceol-geography-maps-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The total rise from start to the ridge is how many metres?",
+     "answer": 200,
+     "tolerance": 0,
+     "explanation": "300 − 100 = 200 m.",
+     "unit": "m",
+     "id": "gceol-geography-maps-e12-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "A 150 m hill beyond the ridge can be seen from the start point if the ridge is higher.",
+     "answer": false,
+     "explanation": "The 300 m ridge blocks the view; they are not intervisible.",
+     "id": "gceol-geography-maps-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State two steps when drawing a cross-section.",
+     "model": "Lay paper along the line and mark contour crossings with heights; transfer them to graph paper, plot the points and join with a smooth line, labelling the scales.",
+     "rubric": "1 mark each for two correct steps.",
+     "explanation": "Lay paper along the line and mark contour crossings with heights; transfer them to graph paper, plot the points and join with a smooth line, labelling the scales.",
+     "id": "gceol-geography-maps-e12-d"
+    }
+   ],
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-contours-sections-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-contours-sections",
+   "prompt": "The contour interval is",
+   "choices": [
+    "The map's north line",
+    "The scale of the map",
+    "The height difference between two contours",
+    "The length of a river"
+   ],
+   "answer": 2,
+   "explanation": "It is the vertical spacing between adjacent lines.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-contours-sections-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-contours-sections",
+   "prompt": "A gentle slope has contours which are",
+   "choices": [
+    "Close together",
+    "Far apart",
+    "Crossing each other",
+    "Straight and parallel at 90°"
+   ],
+   "answer": 1,
+   "explanation": "Wide spacing means a gentle slope.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-contours-sections-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-contours-sections",
+   "prompt": "A rise of 50 m over 1 000 m is a gradient of",
+   "choices": [
+    "1 in 5",
+    "1 in 200",
+    "1 in 50",
+    "1 in 20"
+   ],
+   "answer": 3,
+   "explanation": "1 000 ÷ 50 = 20.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-contours-sections-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-contours-sections",
+   "prompt": "Two points are intervisible if",
+   "choices": [
+    "They are on the same map",
+    "They are the same height",
+    "No higher ground lies between them",
+    "A river runs between them"
+   ],
+   "answer": 2,
+   "explanation": "Look for blocking high ground on the section.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-contours-sections-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-geography-contours-sections",
+   "prompt": "A spot height on a map shows",
+   "choices": [
+    "The river speed",
+    "The slope",
+    "The height of a point",
+    "The distance"
+   ],
+   "answer": 2,
+   "explanation": "It is a marked exact height.",
+   "chapter": "gceol-geography-maps"
+  },
+  {
+   "id": "gceol-geography-maps-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-geography-map-skills",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A map has the scale 1 : 50 000. A school is at reference 3562 and a hospital is 8 cm east of the school on the map.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is the real distance between the school and the hospital in km?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "8 × 50 000 = 400 000 cm = 4 km.",
+     "unit": "km",
+     "id": "gceol-geography-maps-m01-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The bearing of the hospital from the school is",
+     "choices": [
+      "180°",
+      "270°",
+      "090°",
+      "000°"
+     ],
+     "answer": 2,
+     "explanation": "East is 090°.",
+     "id": "gceol-geography-maps-m01-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "In the reference 3562 the eastings are 35.",
+     "answer": true,
+     "explanation": "Eastings are given first.",
+     "id": "gceol-geography-maps-m01-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A map of scale 1 : 25 000 compared with 1 : 50 000 is",
+     "choices": [
+      "smaller in scale",
+      "larger in scale",
+      "the same scale",
+      "not a scale"
+     ],
+     "answer": 1,
+     "explanation": "A smaller denominator is a larger scale.",
+     "id": "gceol-geography-maps-m01-d"
+    }
+   ],
+   "chapter": "gceol-geography-maps"
+  }
+ ]
+}
