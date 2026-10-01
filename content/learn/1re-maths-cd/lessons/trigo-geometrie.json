@@ -1,0 +1,473 @@
+{
+ "chapter": "1re-maths-cd-ch-trigo-geometrie",
+ "lessons": [
+  {
+   "id": "1re-maths-cd-trigo-geometrie",
+   "title": "Trigonométrie, produit scalaire et géométrie analytique",
+   "minutes": 45,
+   "programRef": "1re C/D — Trigonométrie, produit scalaire, géométrie analytique du plan (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser formules d'addition et valeurs remarquables.",
+    "Résoudre des équations trigonométriques.",
+    "Calculer produits scalaires, normes et distances.",
+    "Écrire droites et cercles."
+   ],
+   "prerequisites": [
+    "1re-maths-cd-second-degre"
+   ],
+   "exercises": [
+    "1re-maths-cd-tg-01",
+    "1re-maths-cd-tg-02",
+    "1re-maths-cd-tg-03",
+    "1re-maths-cd-tg-04",
+    "1re-maths-cd-tg-05",
+    "1re-maths-cd-tg-06"
+   ],
+   "selfCheck": [
+    "1re-maths-cd-tg-q1",
+    "1re-maths-cd-tg-q2",
+    "1re-maths-cd-tg-q3",
+    "1re-maths-cd-tg-q4",
+    "1re-maths-cd-tg-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si la linéarisation, la formule d'Al-Kashi, les transformations de sommes en produits et les inéquations trigonométriques sont exigées.",
+    "Sur ce chapitre, le découpage trigonométrie / géométrie varie selon la progression de l'établissement."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Utiliser les valeurs remarquables et les formules d'addition et de duplication.\n- Résoudre des équations trigonométriques simples.\n- Calculer un produit scalaire, une norme, un angle droit.\n- Écrire une droite ou un cercle en géométrie analytique."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Valeurs remarquables",
+     "md": "Pour $x = 0, \\frac{\\pi}{6}, \\frac{\\pi}{4}, \\frac{\\pi}{3}, \\frac{\\pi}{2}$ :\n- $\\cos x = 1, \\frac{\\sqrt{3}}{2}, \\frac{\\sqrt{2}}{2}, \\frac{1}{2}, 0$ ;\n- $\\sin x = 0, \\frac{1}{2}, \\frac{\\sqrt{2}}{2}, \\frac{\\sqrt{3}}{2}, 1$.\nEt toujours $\\cos^2 x + \\sin^2 x = 1$, $\\cos(\\pi - x) = -\\cos x$, $\\sin(\\pi - x) = \\sin x$, $\\cos(-x) = \\cos x$, $\\sin(-x) = -\\sin x$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formules d'addition et de duplication",
+     "md": "- $\\cos(a \\pm b) = \\cos a \\cos b \\mp \\sin a \\sin b$.\n- $\\sin(a \\pm b) = \\sin a \\cos b \\pm \\cos a \\sin b$.\n- $\\sin 2a = 2 \\sin a \\cos a$.\n- $\\cos 2a = \\cos^2 a - \\sin^2 a = 2\\cos^2 a - 1 = 1 - 2\\sin^2 a$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équations trigonométriques",
+     "md": "Avec k entier relatif :\n- $\\cos x = \\cos a \\iff x = a + 2k\\pi$ ou $x = -a + 2k\\pi$.\n- $\\sin x = \\sin a \\iff x = a + 2k\\pi$ ou $x = \\pi - a + 2k\\pi$.\n- $\\tan x = \\tan a \\iff x = a + k\\pi$.\nOn retient ensuite les solutions de l'intervalle demandé."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Produit scalaire",
+     "md": "Dans un repère orthonormé, pour $\\vec{u}(x ; y)$ et $\\vec{v}(x' ; y')$ : $\\vec{u} \\cdot \\vec{v} = xx' + yy'$. On a aussi $\\vec{u} \\cdot \\vec{v} = ||\\vec{u}|| \\times ||\\vec{v}|| \\times \\cos\\theta$, où θ est l'angle des deux vecteurs. Les vecteurs sont **orthogonaux** si et seulement si $\\vec{u} \\cdot \\vec{v} = 0$. La norme est $||\\vec{u}|| = \\sqrt{x^2 + y^2}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Géométrie analytique du plan",
+     "md": "- $AB = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}$ ; milieu $I\\left(\\frac{x_A + x_B}{2} ; \\frac{y_A + y_B}{2}\\right)$.\n- Droite $ax + by + c = 0$ : vecteur normal $\\vec{n}(a ; b)$, vecteur directeur $(-b ; a)$.\n- Distance de $M(x_0 ; y_0)$ à cette droite : $\\frac{|ax_0 + by_0 + c|}{\\sqrt{a^2 + b^2}}$.\n- Cercle de centre $\\Omega(a ; b)$ et de rayon R : $(x - a)^2 + (y - b)^2 = R^2$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3,
+      "xmax": 7,
+      "ymin": 0,
+      "ymax": 7,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "points": [
+       {
+        "x": 1,
+        "y": 2,
+        "label": "A(1 ; 2)",
+        "color": "red"
+       },
+       {
+        "x": 5,
+        "y": 5,
+        "label": "B(5 ; 5)",
+        "color": "red"
+       },
+       {
+        "x": -2,
+        "y": 6,
+        "label": "C(-2 ; 6)",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 1,
+        "y1": 2,
+        "x2": 5,
+        "y2": 5,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 1,
+        "y1": 2,
+        "x2": -2,
+        "y2": 6,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 5,
+        "y1": 5,
+        "x2": -2,
+        "y2": 6,
+        "color": "green",
+        "dash": false
+       }
+      ]
+     },
+     "caption": "Triangle ABC avec A(1 ; 2), B(5 ; 5), C(−2 ; 6) : $\\overrightarrow{AB}(4 ; 3)$ et $\\overrightarrow{AC}(-3 ; 4)$ sont orthogonaux.",
+     "alt": "Triangle dont les sommets sont A(1 ; 2), B(5 ; 5) et C(-2 ; 6), avec un angle droit en A."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : formule d'addition",
+     "statement": "Calcule la valeur exacte de $\\cos\\frac{5\\pi}{12}$.",
+     "steps": [
+      {
+       "md": "On écrit $\\frac{5\\pi}{12} = \\frac{\\pi}{4} + \\frac{\\pi}{6}$ et on applique la formule d'addition :",
+       "tex": "\\cos\\frac{5\\pi}{12} = \\cos\\frac{\\pi}{4}\\cos\\frac{\\pi}{6} - \\sin\\frac{\\pi}{4}\\sin\\frac{\\pi}{6}"
+      },
+      {
+       "md": "On remplace par les valeurs remarquables :",
+       "tex": "= \\frac{\\sqrt{2}}{2} \\times \\frac{\\sqrt{3}}{2} - \\frac{\\sqrt{2}}{2} \\times \\frac{1}{2} = \\frac{\\sqrt{6} - \\sqrt{2}}{4}"
+      }
+     ],
+     "answer": "$\\cos\\frac{5\\pi}{12} = \\frac{\\sqrt{6} - \\sqrt{2}}{4} \\approx 0{,}259$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : équation avec changement d'inconnue",
+     "statement": "Résous dans $[0 ; 2\\pi[$ : $2\\sin^2 x - \\sin x - 1 = 0$.",
+     "steps": [
+      {
+       "md": "On pose $X = \\sin x$ : $2X^2 - X - 1 = 0$. Le discriminant vaut 9, d'où :",
+       "tex": "X = 1 \\quad \\text{ou} \\quad X = -\\frac{1}{2}"
+      },
+      {
+       "md": "$\\sin x = 1$ donne $x = \\frac{\\pi}{2}$. $\\sin x = -\\frac{1}{2} = \\sin\\left(-\\frac{\\pi}{6}\\right)$ donne $x = -\\frac{\\pi}{6} + 2k\\pi$ ou $x = \\frac{7\\pi}{6} + 2k\\pi$."
+      },
+      {
+       "md": "Dans $[0 ; 2\\pi[$, on garde $\\frac{\\pi}{2}$, $\\frac{7\\pi}{6}$ et $\\frac{11\\pi}{6}$."
+      }
+     ],
+     "answer": "$S = \\left\\{\\frac{\\pi}{2} ; \\frac{7\\pi}{6} ; \\frac{11\\pi}{6}\\right\\}$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-tg-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-tg-02"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : triangle et cercle",
+     "statement": "Avec A(1 ; 2), B(5 ; 5), C(−2 ; 6), montre que ABC est rectangle isocèle en A et donne le cercle circonscrit.",
+     "steps": [
+      {
+       "md": "$\\overrightarrow{AB}(4 ; 3)$ et $\\overrightarrow{AC}(-3 ; 4)$ :",
+       "tex": "\\overrightarrow{AB} \\cdot \\overrightarrow{AC} = 4 \\times (-3) + 3 \\times 4 = 0 \\quad ; \\quad AB = AC = 5"
+      },
+      {
+       "md": "Les côtés AB et AC sont perpendiculaires et de même longueur 5 : le triangle est rectangle isocèle en A."
+      },
+      {
+       "md": "Le centre du cercle circonscrit est le milieu de l'hypoténuse [BC], soit $\\Omega\\left(\\frac{3}{2} ; \\frac{11}{2}\\right)$, et $R^2 = \\frac{BC^2}{4} = \\frac{50}{4}$ :",
+       "tex": "\\left(x - \\frac{3}{2}\\right)^2 + \\left(y - \\frac{11}{2}\\right)^2 = \\frac{25}{2}"
+      }
+     ],
+     "answer": "Triangle rectangle isocèle en A ; cercle de centre $\\left(\\frac{3}{2} ; \\frac{11}{2}\\right)$ et de rayon $R^2 = \\frac{25}{2}$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-tg-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Écrire $\\cos(a + b) = \\cos a + \\cos b$ : c'est faux.\n- Oublier la seconde famille de solutions : $\\sin x = \\sin a$ a aussi $\\pi - a$.\n- Résoudre $\\sin x = -\\frac{1}{2}$ sans ramener les solutions dans l'intervalle demandé.\n- Confondre vecteur normal et vecteur directeur d'une droite ; oublier la racine dans la distance point-droite."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-tg-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-tg-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-tg-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Autres résultats possibles au programme : formule d'Al-Kashi ($a^2 = b^2 + c^2 - 2bc \\cos A$), formules de linéarisation, transformation de $a \\cos x + b \\sin x$.",
+      "Ces notions sont à vérifier sur le texte officiel de Première C et D."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-cd-tg-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Calcule le produit scalaire de $\\vec{u}(3 ; -2)$ et $\\vec{v}(4 ; 5)$.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "$\\vec{u} \\cdot \\vec{v} = 3 \\times 4 + (-2) \\times 5 = 12 - 10 = 2$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "$xx' + yy'$.",
+   "mistakes": [
+    "Oublier le signe de −2 × 5."
+   ],
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-02",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle est la valeur de $\\sin\\frac{5\\pi}{6}$ ?",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$-\\frac{1}{2}$",
+    "$\\frac{\\sqrt{3}}{2}$",
+    "$-\\frac{\\sqrt{3}}{2}$"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{5\\pi}{6} = \\pi - \\frac{\\pi}{6}$ et $\\sin(\\pi - x) = \\sin x$, donc $\\sin\\frac{5\\pi}{6} = \\sin\\frac{\\pi}{6} = \\frac{1}{2}$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Angle supplémentaire.",
+   "mistakes": [
+    "Confondre sin et cos pour l'angle supplémentaire."
+   ],
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "Pour tous réels a et b, $\\cos(a + b) = \\cos a + \\cos b$.",
+   "answer": false,
+   "explanation": "Contre-exemple : a = b = 0 donne $\\cos 0 = 1$ mais $\\cos 0 + \\cos 0 = 2$. La bonne formule est $\\cos a \\cos b - \\sin a \\sin b$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Tester avec des valeurs simples.",
+   "mistakes": [
+    "Étendre la linéarité à la fonction cosinus."
+   ],
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Calcule la distance du point $M(2 ; 1)$ à la droite d'équation $3x - 4y + 5 = 0$.",
+   "answer": 1.4,
+   "tolerance": 0.01,
+   "explanation": "$d = \\frac{|3 \\times 2 - 4 \\times 1 + 5|}{\\sqrt{3^2 + 4^2}} = \\frac{7}{5} = 1{,}4$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "$\\frac{|ax_0 + by_0 + c|}{\\sqrt{a^2 + b^2}}$.",
+   "mistakes": [
+    "Oublier la racine au dénominateur (donner 7)."
+   ],
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-05",
+   "kind": "mcq",
+   "points": 2,
+   "prompt": "Quel est l'ensemble des solutions de $2\\cos x = 1$ dans $]-\\pi ; \\pi]$ ?",
+   "choices": [
+    "$\\left\\{-\\frac{\\pi}{6} ; \\frac{\\pi}{6}\\right\\}$",
+    "$\\left\\{\\frac{\\pi}{3} ; \\frac{2\\pi}{3}\\right\\}$",
+    "$\\left\\{\\frac{\\pi}{3}\\right\\}$",
+    "$\\left\\{-\\frac{\\pi}{3} ; \\frac{\\pi}{3}\\right\\}$"
+   ],
+   "answer": 3,
+   "explanation": "$\\cos x = \\frac{1}{2} = \\cos\\frac{\\pi}{3}$, donc $x = \\pm\\frac{\\pi}{3} + 2k\\pi$. Dans $]-\\pi ; \\pi]$, on garde $-\\frac{\\pi}{3}$ et $\\frac{\\pi}{3}$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "$\\cos x = \\cos a$ donne $x = \\pm a + 2k\\pi$.",
+   "mistakes": [
+    "Oublier la solution négative."
+   ],
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-06",
+   "kind": "problem",
+   "prompt": "Dans un repère orthonormé, on donne les points $A(2 ; 1)$, $B(6 ; 4)$ et $C(-1 ; 5)$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $\\overrightarrow{AB} \\cdot \\overrightarrow{AC}$.",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "$\\overrightarrow{AB}(4 ; 3)$, $\\overrightarrow{AC}(-3 ; 4)$ : $4 \\times (-3) + 3 \\times 4 = 0$.",
+     "id": "1re-maths-cd-tg-06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule $BC^2$.",
+     "answer": 50,
+     "tolerance": 0,
+     "explanation": "$\\overrightarrow{BC}(-7 ; 1)$, donc $BC^2 = 49 + 1 = 50$.",
+     "id": "1re-maths-cd-tg-06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle est la nature du triangle ABC ?",
+     "choices": [
+      "Rectangle isocèle en A",
+      "Rectangle non isocèle en A",
+      "Isocèle en B, non rectangle",
+      "Équilatéral"
+     ],
+     "answer": 0,
+     "explanation": "Le produit scalaire est nul (angle droit en A) et $AB = AC = 5$ car $16 + 9 = 25$ et $9 + 16 = 25$. Vérification : $AB^2 + AC^2 = 50 = BC^2$.",
+     "id": "1re-maths-cd-tg-06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'aire du triangle ABC (en unités d'aire).",
+     "answer": 12.5,
+     "tolerance": 0.01,
+     "explanation": "Triangle rectangle en A : $\\frac{AB \\times AC}{2} = \\frac{5 \\times 5}{2} = 12{,}5$.",
+     "id": "1re-maths-cd-tg-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Calculer les vecteurs, le produit scalaire et les longueurs.",
+   "mistakes": [
+    "Calculer $\\overrightarrow{BA}$ au lieu de $\\overrightarrow{AB}$ (le signe change, pas la nullité)."
+   ],
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle égalité est toujours vraie ?",
+   "choices": [
+    "$\\cos x + \\sin x = 1$",
+    "$\\cos^2 x - \\sin^2 x = 1$",
+    "$\\cos^2 x + \\sin^2 x = 1$",
+    "$\\cos x \\sin x = 1$"
+   ],
+   "answer": 2,
+   "explanation": "C'est la relation fondamentale.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Que vaut $\\sin 2a$ ?",
+   "choices": [
+    "$2\\sin a \\cos a$",
+    "$2\\sin a$",
+    "$\\sin^2 a$",
+    "$\\sin a + \\cos a$"
+   ],
+   "answer": 0,
+   "explanation": "Formule de duplication.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Deux vecteurs non nuls sont orthogonaux si :",
+   "choices": [
+    "leurs normes sont égales",
+    "leur produit scalaire vaut 1",
+    "leur produit scalaire est nul",
+    "ils sont colinéaires"
+   ],
+   "answer": 2,
+   "explanation": "Orthogonalité ⇔ produit scalaire nul.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel est le milieu de $[AB]$ avec A(0 ; 2) et B(4 ; 6) ?",
+   "choices": [
+    "(4 ; 8)",
+    "(2 ; 4)",
+    "(2 ; 2)",
+    "(1 ; 2)"
+   ],
+   "answer": 1,
+   "explanation": "On fait la moyenne des abscisses et des ordonnées : $\\left(\\frac{0 + 4}{2} ; \\frac{2 + 6}{2}\\right)$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  },
+  {
+   "id": "1re-maths-cd-tg-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Solutions de $\\sin x = \\frac{1}{2}$ dans $[0 ; 2\\pi[$ :",
+   "choices": [
+    "$\\frac{\\pi}{6}$ et $\\frac{11\\pi}{6}$",
+    "$\\frac{\\pi}{3}$ et $\\frac{2\\pi}{3}$",
+    "$\\frac{\\pi}{6}$ seulement",
+    "$\\frac{\\pi}{6}$ et $\\frac{5\\pi}{6}$"
+   ],
+   "answer": 3,
+   "explanation": "$x = \\frac{\\pi}{6}$ ou $x = \\pi - \\frac{\\pi}{6} = \\frac{5\\pi}{6}$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-trigo-geometrie"
+  }
+ ]
+}

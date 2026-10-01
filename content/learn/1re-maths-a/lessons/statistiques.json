@@ -1,0 +1,418 @@
+{
+ "chapter": "1re-maths-a-ch-statistiques",
+ "lessons": [
+  {
+   "id": "1re-maths-a-statistiques",
+   "title": "Statistiques à une variable",
+   "minutes": 35,
+   "programRef": "1re A — Statistiques : effectifs, moyenne, variance, écart-type, médiane (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Calculer moyenne, variance et écart-type.",
+    "Déterminer une médiane.",
+    "Traiter des données groupées en classes."
+   ],
+   "prerequisites": [
+    "1re-maths-a-suites"
+   ],
+   "exercises": [
+    "1re-maths-a-st-01",
+    "1re-maths-a-st-02",
+    "1re-maths-a-st-03",
+    "1re-maths-a-st-04",
+    "1re-maths-a-st-05",
+    "1re-maths-a-st-06"
+   ],
+   "selfCheck": [
+    "1re-maths-a-st-q1",
+    "1re-maths-a-st-q2",
+    "1re-maths-a-st-q3",
+    "1re-maths-a-st-q4",
+    "1re-maths-a-st-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la convention du programme officiel pour la variance et l'écart-type (division par N).",
+    "Données groupées : le programme exige-t-il histogramme, polygone des fréquences cumulées, quartiles ?"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Lire un tableau d'effectifs et de fréquences.\n- Calculer moyenne, variance et écart-type.\n- Déterminer la médiane.\n- Traiter une série groupée en classes (centres des classes)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "Une **série statistique** donne les valeurs $x_i$ d'un caractère et leurs **effectifs** $n_i$ ; l'**effectif total** est $N = \\sum n_i$. La **fréquence** d'une valeur est $f_i = \\frac{n_i}{N}$ (en pourcentage : × 100). Pour des données groupées en classes, on remplace chaque classe par son **centre** (moyenne des bornes)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne",
+     "md": "$\\bar{x} = \\frac{n_1 x_1 + n_2 x_2 + \\ldots + n_k x_k}{N} = \\frac{\\sum n_i x_i}{N}$.\nC'est la valeur « équilibre » de la série. Elle est sensible aux valeurs très grandes ou très petites."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Variance et écart-type",
+     "md": "$V = \\frac{\\sum n_i x_i^2}{N} - \\bar{x}^2$ (moyenne des carrés moins carré de la moyenne) et $\\sigma = \\sqrt{V}$.\nL'écart-type mesure la dispersion autour de la moyenne ; il s'exprime dans **la même unité** que les données. Plus il est petit, plus la série est regroupée."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Médiane",
+     "md": "On range les valeurs dans l'ordre croissant. La **médiane** partage la série en deux parties de même effectif : c'est la valeur centrale si N est impair, la moyenne des deux valeurs centrales si N est pair. Elle est peu sensible aux valeurs extrêmes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "personnes",
+      "bars": [
+       {
+        "label": "0-10",
+        "value": 5,
+        "color": "lightblue"
+       },
+       {
+        "label": "10-20",
+        "value": 10,
+        "color": "blue"
+       },
+       {
+        "label": "20-30",
+        "value": 3,
+        "color": "lightblue"
+       },
+       {
+        "label": "30-40",
+        "value": 2,
+        "color": "lightblue"
+       }
+      ]
+     },
+     "caption": "Temps de trajet de 20 personnes jusqu'à leur travail, en minutes (données fictives), regroupés en classes.",
+     "alt": "Diagramme en barres à quatre classes : 5 personnes pour 0-10 minutes, 10 pour 10-20, 3 pour 20-30 et 2 pour 30-40."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : série à effectifs",
+     "statement": "Notes de 10 élèves (fictives) : 10 (2 fois), 12 (3 fois), 14 (3 fois), 16 (2 fois). Calcule moyenne, médiane, variance et écart-type.",
+     "steps": [
+      {
+       "md": "Moyenne :",
+       "tex": "\\bar{x} = \\frac{2 \\times 10 + 3 \\times 12 + 3 \\times 14 + 2 \\times 16}{10} = \\frac{130}{10} = 13"
+      },
+      {
+       "md": "Médiane : N = 10, on prend la moyenne des 5e et 6e valeurs de la série ordonnée (12 et 14), soit 13."
+      },
+      {
+       "md": "Variance : $\\frac{2 \\times 100 + 3 \\times 144 + 3 \\times 196 + 2 \\times 256}{10} = 173{,}2$, puis :",
+       "tex": "V = 173{,}2 - 13^2 = 4{,}2 \\quad \\text{et} \\quad \\sigma = \\sqrt{4{,}2} \\approx 2{,}05"
+      }
+     ],
+     "answer": "Moyenne 13, médiane 13, variance 4,2, écart-type ≈ 2,05."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : données en classes",
+     "statement": "Temps de trajet (minutes) : [0 ; 10[ : 5 personnes, [10 ; 20[ : 10, [20 ; 30[ : 3, [30 ; 40[ : 2. Calcule la moyenne.",
+     "steps": [
+      {
+       "md": "Centres des classes : 5, 15, 25 et 35. Effectif total N = 20.",
+       "tex": "N = 5 + 10 + 3 + 2 = 20"
+      },
+      {
+       "md": "Moyenne :",
+       "tex": "\\bar{x} = \\frac{5 \\times 5 + 10 \\times 15 + 3 \\times 25 + 2 \\times 35}{20} = \\frac{320}{20} = 16"
+      }
+     ],
+     "answer": "Temps de trajet moyen estimé : **16 minutes** (c'est une estimation, car on a remplacé chaque classe par son centre)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-st-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-st-02"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : calculs organisés",
+     "md": "1. Dresser un tableau : colonnes $x_i$, $n_i$, $n_i x_i$, $n_i x_i^2$.\n2. Calculer les sommes des colonnes et N.\n3. Moyenne = (somme des $n_i x_i$) ÷ N.\n4. Variance = (somme des $n_i x_i^2$) ÷ N − moyenne², puis écart-type = racine carrée.\n5. Vérifier que la variance obtenue est positive."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-st-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Oublier de multiplier chaque valeur par son effectif.\n- Oublier d'élever la moyenne **au carré** dans la variance.\n- Donner la variance quand on demande l'écart-type (ou l'inverse).\n- Prendre la valeur du milieu de la liste sans ranger d'abord les données pour la médiane."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-st-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-st-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-st-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les quartiles $Q_1$ et $Q_3$ complètent la médiane : ils partagent la série en quatre parties. Leur définition exacte peut varier selon le manuel (à vérifier sur le texte officiel).",
+      "Pour comparer deux séries (deux classes, deux marchés), on regarde moyenne et écart-type ensemble."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-a-st-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Calcule la moyenne de la série 12, 15, 9, 14, 10.",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "$\\frac{12 + 15 + 9 + 14 + 10}{5} = \\frac{60}{5} = 12$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Somme divisée par l'effectif total.",
+   "mistakes": [
+    "Diviser par 4 au lieu de 5."
+   ],
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-02",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Détermine la médiane de la série 3, 7, 8, 12, 15, 20.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "La série est déjà rangée et compte 6 valeurs (N pair) : la médiane est la moyenne des 3e et 4e valeurs, $\\frac{8 + 12}{2} = 10$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Moyenne des deux valeurs centrales.",
+   "mistakes": [
+    "Prendre seulement la 3e valeur (8)."
+   ],
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "L'écart-type s'exprime dans la même unité que les données.",
+   "answer": true,
+   "explanation": "L'écart-type est la racine carrée de la variance : si les données sont en FCFA, il est en FCFA (la variance est en FCFA²).",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Raisonner sur les unités.",
+   "mistakes": [
+    "Confondre unité de la variance et de l'écart-type."
+   ],
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Calcule la variance de la série 2, 4, 4, 4, 5, 5, 7, 9.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Moyenne : $\\frac{40}{8} = 5$. Carrés des écarts : 9, 1, 1, 1, 0, 0, 4, 16, de somme 32, et $V = \\frac{32}{8} = 4$ (l'écart-type vaut 2). Avec l'autre formule : $\\frac{4 + 16 + 16 + 16 + 25 + 25 + 49 + 81}{8} - 25 = \\frac{232}{8} - 25 = 4$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Moyenne des carrés moins carré de la moyenne.",
+   "mistakes": [
+    "Oublier de mettre 5 au carré."
+   ],
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-05",
+   "kind": "mcq",
+   "points": 2,
+   "prompt": "Série : 1 (effectif 2), 2 (effectif 5), 3 (effectif 3). Quelle est la moyenne ?",
+   "choices": [
+    "2",
+    "2,5",
+    "6",
+    "2,1"
+   ],
+   "answer": 3,
+   "explanation": "$\\bar{x} = \\frac{2 \\times 1 + 5 \\times 2 + 3 \\times 3}{10} = \\frac{21}{10} = 2{,}1$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Pondérer par les effectifs.",
+   "mistakes": [
+    "Faire la moyenne simple des valeurs 1, 2, 3 (donne 2)."
+   ],
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-06",
+   "kind": "problem",
+   "prompt": "Dans une boutique de Garoua, on relève le prix de vente d'un article (en milliers de FCFA) sur 20 jours (données fictives) : 5 (4 jours), 10 (8 jours), 15 (6 jours), 20 (2 jours).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la moyenne (en milliers de FCFA).",
+     "answer": 11.5,
+     "tolerance": 0.01,
+     "explanation": "$\\bar{x} = \\frac{4 \\times 5 + 8 \\times 10 + 6 \\times 15 + 2 \\times 20}{20} = \\frac{230}{20} = 11{,}5$.",
+     "unit": "milliers de FCFA",
+     "id": "1re-maths-a-st-06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la variance.",
+     "answer": 20.25,
+     "tolerance": 0.01,
+     "explanation": "$\\frac{4 \\times 25 + 8 \\times 100 + 6 \\times 225 + 2 \\times 400}{20} = \\frac{3050}{20} = 152{,}5$ puis $V = 152{,}5 - 11{,}5^2 = 152{,}5 - 132{,}25 = 20{,}25$.",
+     "id": "1re-maths-a-st-06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "En déduire l'écart-type.",
+     "answer": 4.5,
+     "tolerance": 0.01,
+     "explanation": "$\\sigma = \\sqrt{20{,}25} = 4{,}5$ milliers de FCFA.",
+     "unit": "milliers de FCFA",
+     "id": "1re-maths-a-st-06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Détermine la médiane (en milliers de FCFA).",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "N = 20 : la médiane est la moyenne des 10e et 11e valeurs de la série ordonnée. Les 4 premières valent 5, les 8 suivantes (rangs 5 à 12) valent 10 : les 10e et 11e valent 10, donc la médiane vaut 10.",
+     "unit": "milliers de FCFA",
+     "id": "1re-maths-a-st-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Tableau $n_i x_i$ et $n_i x_i^2$, puis moyenne, variance, écart-type ; médiane par les rangs.",
+   "mistakes": [
+    "Oublier le carré de la moyenne.",
+    "Chercher la médiane au rang 20/2 = 10 seulement."
+   ],
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "L'effectif total est :",
+   "choices": [
+    "la somme des valeurs",
+    "la moyenne des effectifs",
+    "la somme des effectifs",
+    "la plus grande valeur"
+   ],
+   "answer": 2,
+   "explanation": "$N = \\sum n_i$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "La médiane d'une série de 7 valeurs rangées est :",
+   "choices": [
+    "la 4e valeur",
+    "la 3e valeur",
+    "la moyenne des 3e et 4e",
+    "la 7e valeur"
+   ],
+   "answer": 0,
+   "explanation": "Pour N = 7 impair, la valeur centrale est au rang $\\frac{7 + 1}{2} = 4$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "L'écart-type d'une série dont tous les termes sont égaux vaut :",
+   "choices": [
+    "1",
+    "la moyenne",
+    "0",
+    "la valeur commune au carré"
+   ],
+   "answer": 2,
+   "explanation": "Aucune dispersion : la variance et l'écart-type sont nuls.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Le centre de la classe $[20 ; 30[$ est :",
+   "choices": [
+    "20",
+    "25",
+    "30",
+    "50"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{20 + 30}{2} = 25$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-statistiques"
+  },
+  {
+   "id": "1re-maths-a-st-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Si on ajoute 10 à toutes les valeurs d'une série, la moyenne :",
+   "choices": [
+    "ne change pas",
+    "est multipliée par 10",
+    "diminue de 10",
+    "augmente de 10"
+   ],
+   "answer": 3,
+   "explanation": "Chaque valeur augmentant de 10, la moyenne augmente de 10 (l'écart-type, lui, ne change pas).",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-statistiques"
+  }
+ ]
+}

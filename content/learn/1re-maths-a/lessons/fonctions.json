@@ -1,0 +1,624 @@
+{
+ "chapter": "1re-maths-a-ch-fonctions",
+ "lessons": [
+  {
+   "id": "1re-maths-a-fonctions",
+   "title": "Fonctions, second degré et dérivation simple",
+   "minutes": 40,
+   "programRef": "1re A — Analyse : fonctions numériques, second degré, dérivation et variations (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Déterminer ensemble de définition, image et antécédent.",
+    "Résoudre une équation du second degré.",
+    "Dériver un polynôme et dresser un tableau de variations.",
+    "Résoudre un problème de maximum."
+   ],
+   "exercises": [
+    "1re-maths-a-fn-01",
+    "1re-maths-a-fn-02",
+    "1re-maths-a-fn-03",
+    "1re-maths-a-fn-04",
+    "1re-maths-a-fn-05",
+    "1re-maths-a-fn-06"
+   ],
+   "selfCheck": [
+    "1re-maths-a-fn-q1",
+    "1re-maths-a-fn-q2",
+    "1re-maths-a-fn-q3",
+    "1re-maths-a-fn-q4",
+    "1re-maths-a-fn-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le niveau exact de la dérivation en série A (polynômes seulement ?).",
+    "Vérifier si l'étude de fonctions rationnelles est attendue ou limitée à la lecture graphique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Trouver l'ensemble de définition, une image, un antécédent.\n- Résoudre une équation du second degré et étudier le signe d'un trinôme.\n- Calculer la dérivée d'un polynôme.\n- Dresser un tableau de variations et le lire."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonction numérique",
+     "md": "Une fonction f associe à chaque réel x de son **ensemble de définition** un unique réel $f(x)$, l'**image** de x. Un **antécédent** de y est un x tel que $f(x) = y$.\nEnsemble de définition : on exclut les x qui annulent un dénominateur (par exemple $x \\neq 3$ pour $\\frac{1}{x - 3}$) et ceux qui rendent négatif ce qui est sous une racine carrée."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Second degré",
+     "md": "Pour $ax^2 + bx + c = 0$ (a ≠ 0), on calcule $\\Delta = b^2 - 4ac$.\n- $\\Delta > 0$ : deux solutions $x = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}$.\n- $\\Delta = 0$ : une solution $x = \\frac{-b}{2a}$.\n- $\\Delta < 0$ : pas de solution réelle.\nLe trinôme est du signe de a à l'extérieur des racines et du signe contraire entre les racines."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dérivées à connaître",
+     "md": "- $(k)' = 0$ ; $(x)' = 1$ ; $(x^n)' = n x^{n-1}$.\n- $(f + g)' = f' + g'$ ; $(kf)' = k f'$.\nExemple : $(2x^3 - 3x^2 + 5)' = 6x^2 - 6x$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dérivée et variations",
+     "md": "Sur un intervalle : si $f'(x) > 0$, f est **croissante** ; si $f'(x) < 0$, f est **décroissante**. Quand f' s'annule en changeant de signe, f a un **maximum** ou un **minimum**. On range ces informations dans un **tableau de variations**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 5,
+      "ymin": -2,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^2-4*x+3",
+        "color": "blue",
+        "label": "f"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 0,
+        "label": "1",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": -1,
+        "label": "minimum (2 ; -1)",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Courbe de $f(x) = x^2 - 4x + 3$ : elle coupe l'axe des abscisses en 1 et 3 et atteint son minimum −1 en x = 2.",
+     "alt": "Courbe en forme de U tournée vers le haut, qui coupe l'axe horizontal en 1 et en 3 et dont le point le plus bas est (2 ; -1)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : domaine, image, antécédent",
+     "statement": "Soit $f(x) = \\frac{2x + 1}{x - 3}$. Donne son ensemble de définition, l'image de 0 et l'antécédent de 1.",
+     "steps": [
+      {
+       "md": "Le dénominateur s'annule pour x = 3 : l'ensemble de définition est tous les réels sauf 3.",
+       "tex": "D_f = \\mathbb{R} \\text{ sauf } 3"
+      },
+      {
+       "md": "Image de 0 :",
+       "tex": "f(0) = \\frac{1}{-3} = -\\frac{1}{3}"
+      },
+      {
+       "md": "Antécédent de 1 : on résout $\\frac{2x + 1}{x - 3} = 1$, soit $2x + 1 = x - 3$, donc :",
+       "tex": "x = -4"
+      }
+     ],
+     "answer": "$D_f$ = tous les réels sauf 3 ; $f(0) = -\\frac{1}{3}$ ; l'antécédent de 1 est −4 (vérification : $f(-4) = \\frac{-7}{-7} = 1$)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : étude complète d'un trinôme",
+     "statement": "Étudie $f(x) = x^2 - 4x + 3$ : racines, dérivée, variations.",
+     "steps": [
+      {
+       "md": "Racines : $\\Delta = 16 - 12 = 4$, donc :",
+       "tex": "x_1 = \\frac{4 - 2}{2} = 1 \\quad \\text{et} \\quad x_2 = \\frac{4 + 2}{2} = 3"
+      },
+      {
+       "md": "Dérivée :",
+       "tex": "f'(x) = 2x - 4"
+      },
+      {
+       "md": "$f'(x) < 0$ pour x < 2 et $f'(x) > 0$ pour x > 2 : f décroît sur $]-\\infty ; 2]$, croît sur $[2 ; +\\infty[$ et admet un minimum $f(2) = 4 - 8 + 3 = -1$."
+      }
+     ],
+     "answer": "Racines 1 et 3 ; minimum −1 atteint en x = 2."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-fn-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-fn-02"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : bénéfice maximal",
+     "statement": "Le bénéfice (en milliers de FCFA) d'un artisan qui vend x centaines d'objets est $B(x) = -x^2 + 8x - 7$ pour $0 \\leq x \\leq 8$ (modèle fictif). Quand est-il maximal ?",
+     "steps": [
+      {
+       "md": "On dérive :",
+       "tex": "B'(x) = -2x + 8"
+      },
+      {
+       "md": "$B'(x) > 0$ pour x < 4 et $B'(x) < 0$ pour x > 4 : B croît puis décroît, avec un maximum en x = 4."
+      },
+      {
+       "md": "Valeur du maximum :",
+       "tex": "B(4) = -16 + 32 - 7 = 9"
+      }
+     ],
+     "answer": "Bénéfice maximal : 9 milliers de FCFA (9 000 FCFA) pour 400 objets. (B est positif entre ses racines 1 et 7.)"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-fn-03"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : tableau de variations",
+     "md": "1. Calculer $f'(x)$.\n2. Résoudre $f'(x) = 0$ puis étudier son signe.\n3. Dessiner le tableau : une ligne pour x, une pour le signe de f', une pour les flèches de f.\n4. Calculer les valeurs de f aux points importants (extremums, bornes) et les écrire au bout des flèches."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Oublier d'exclure une valeur interdite dans l'ensemble de définition.\n- Se tromper de signe en calculant $-b$ lorsque b est négatif.\n- Confondre l'abscisse du sommet (x = 2) et sa valeur (−1).\n- Écrire « f' = 0 donc f est constante » : ce n'est vrai que si f' = 0 sur tout un intervalle."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-fn-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-fn-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-fn-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour un trinôme, le sommet est en $x = -\\frac{b}{2a}$ : on retrouve la même abscisse sans dériver.",
+      "Selon le programme officiel de la série A, la dérivation peut être limitée aux polynômes ou être moins développée : à vérifier sur le texte officiel."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-a-fn-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Soit $f(x) = 3x^2 - 2x + 1$. Calcule $f(2)$.",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "$f(2) = 3 \\times 4 - 4 + 1 = 12 - 4 + 1 = 9$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Remplacer x par 2.",
+   "mistakes": [
+    "Calculer $3 \\times 2^2$ comme $(3 \\times 2)^2 = 36$."
+   ],
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-02",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel est l'ensemble de définition de $f(x) = \\frac{1}{x - 5}$ ?",
+   "choices": [
+    "Tous les réels sauf −5",
+    "Tous les réels sauf 5",
+    "Tous les réels sauf 0",
+    "Les réels strictement supérieurs à 5"
+   ],
+   "answer": 1,
+   "explanation": "Le dénominateur $x - 5$ s'annule pour x = 5 : cette seule valeur est exclue.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Valeurs qui annulent le dénominateur.",
+   "mistakes": [
+    "Exclure −5 en changeant le signe."
+   ],
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "Si $f'(x) > 0$ sur un intervalle I, alors f est croissante sur I.",
+   "answer": true,
+   "explanation": "C'est le lien entre signe de la dérivée et variations.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Rappel de cours.",
+   "mistakes": [
+    "Inverser croissante et décroissante."
+   ],
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Résous $x^2 - 5x + 4 = 0$ et donne la plus grande solution.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "$\\Delta = 25 - 16 = 9$, donc $x = \\frac{5 \\pm 3}{2}$ : les solutions sont 1 et 4. La plus grande est 4.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Discriminant.",
+   "mistakes": [
+    "Oublier la division par 2a."
+   ],
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-05",
+   "kind": "mcq",
+   "points": 2,
+   "prompt": "Quelle est la dérivée de $f(x) = 2x^3 - 3x^2 + 5$ ?",
+   "choices": [
+    "$6x^2 - 6x + 5$",
+    "$2x^2 - 3x$",
+    "$6x^2 - 6x$",
+    "$6x^3 - 6x^2$"
+   ],
+   "answer": 2,
+   "explanation": "On dérive chaque terme : $(2x^3)' = 6x^2$, $(-3x^2)' = -6x$, $(5)' = 0$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Dérivée terme à terme.",
+   "mistakes": [
+    "Conserver la constante 5.",
+    "Ne pas baisser le degré."
+   ],
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-06",
+   "kind": "problem",
+   "prompt": "Le bénéfice (en milliers de FCFA) d'un atelier de couture de Bafoussam qui produit x dizaines de robes est $B(x) = -x^2 + 8x - 7$, pour $0 \\leq x \\leq 8$ (modèle fictif).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $B(2)$.",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "$B(2) = -4 + 16 - 7 = 5$ milliers de FCFA.",
+     "id": "1re-maths-a-fn-06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle est la dérivée de B ?",
+     "choices": [
+      "$B'(x) = -2x - 7$",
+      "$B'(x) = -2x + 8$",
+      "$B'(x) = 2x + 8$",
+      "$B'(x) = -x + 8$"
+     ],
+     "answer": 1,
+     "explanation": "$(-x^2)' = -2x$, $(8x)' = 8$ et $(-7)' = 0$.",
+     "id": "1re-maths-a-fn-06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour quelle valeur de x le bénéfice est-il maximal ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "$B'(x) = 0$ pour x = 4 ; B' est positive avant 4 et négative après : B passe par un maximum.",
+     "id": "1re-maths-a-fn-06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le bénéfice maximal (en milliers de FCFA) ?",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "$B(4) = -16 + 32 - 7 = 9$ milliers de FCFA.",
+     "unit": "milliers de FCFA",
+     "id": "1re-maths-a-fn-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Dériver, étudier le signe de la dérivée, calculer la valeur au maximum.",
+   "mistakes": [
+    "Donner x = 4 au lieu de la valeur du bénéfice."
+   ],
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel est l'ensemble de définition de $f(x) = \\sqrt{x - 2}$ ?",
+   "choices": [
+    "$]2 ; +\\infty[$",
+    "$]-\\infty ; 2]$",
+    "Tous les réels",
+    "$[2 ; +\\infty[$"
+   ],
+   "answer": 3,
+   "explanation": "Il faut $x - 2 \\geq 0$, donc $x \\geq 2$ (la racine de 0 est définie).",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Si $\\Delta < 0$, l'équation $ax^2 + bx + c = 0$ a :",
+   "choices": [
+    "une solution",
+    "aucune solution réelle",
+    "deux solutions",
+    "une infinité de solutions"
+   ],
+   "answer": 1,
+   "explanation": "Il n'y a pas de racine carrée réelle d'un nombre négatif.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "La dérivée de $f(x) = 5x$ est :",
+   "choices": [
+    "5x",
+    "0",
+    "x",
+    "5"
+   ],
+   "answer": 3,
+   "explanation": "$(kx)' = k$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Si f est décroissante sur $[0 ; 3]$, alors :",
+   "choices": [
+    "$f(1) \\geq f(2)$",
+    "$f(1) \\leq f(2)$",
+    "$f(1) = f(2)$",
+    "$f'(1) > 0$"
+   ],
+   "answer": 0,
+   "explanation": "Une fonction décroissante inverse l'ordre : plus x est grand, plus f(x) est petit.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-fn-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle est l'abscisse du sommet de $y = x^2 - 6x + 5$ ?",
+   "choices": [
+    "−3",
+    "6",
+    "3",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "$-\\frac{b}{2a} = \\frac{6}{2} = 3$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-fonctions"
+  },
+  {
+   "id": "1re-maths-a-blanc-ex1",
+   "kind": "problem",
+   "prompt": "Soit $f(x) = x^2 - 6x + 5$ définie sur $\\mathbb{R}$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Résous $f(x) = 0$ : donne la plus petite solution.",
+     "answer": 1,
+     "tolerance": 0,
+     "explanation": "$\\Delta = 36 - 20 = 16$, donc $x = \\frac{6 \\pm 4}{2}$, soit 1 et 5. La plus petite est 1.",
+     "id": "1re-maths-a-blanc-ex1-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $f(0)$.",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "$f(0) = 5$.",
+     "id": "1re-maths-a-blanc-ex1-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle est la dérivée de f ?",
+     "choices": [
+      "$f'(x) = x - 6$",
+      "$f'(x) = 2x - 6$",
+      "$f'(x) = 2x^2 - 6$",
+      "$f'(x) = 2x + 6$"
+     ],
+     "answer": 1,
+     "explanation": "$(x^2)' = 2x$, $(-6x)' = -6$ et $(5)' = 0$.",
+     "id": "1re-maths-a-blanc-ex1-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "f admet un minimum, atteint en $x_0$ où $f'(x_0) = 0$. Quelle est la valeur de ce minimum ?",
+     "answer": -4,
+     "tolerance": 0,
+     "explanation": "$f'(x) = 0$ pour x = 3, $f' < 0$ avant et $f' > 0$ après : minimum $f(3) = 9 - 18 + 5 = -4$.",
+     "id": "1re-maths-a-blanc-ex1-d"
+    },
+    {
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Pour quelles valeurs de x a-t-on $f(x) < 0$ ?",
+     "choices": [
+      "$x < 1$ ou $x > 5$",
+      "$-4 < x < 3$",
+      "$1 < x < 5$",
+      "$x > 3$"
+     ],
+     "answer": 2,
+     "explanation": "Le trinôme est négatif entre ses racines 1 et 5 (a = 1 > 0).",
+     "id": "1re-maths-a-blanc-ex1-e"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Discriminant, dérivée, signe du trinôme.",
+   "mistakes": [
+    "Choisir l'extérieur des racines pour f(x) < 0."
+   ],
+   "chapter": "1re-maths-a-ch-fonctions"
+  },
+  {
+   "id": "1re-maths-a-blanc-ex2",
+   "kind": "problem",
+   "prompt": "Une jeune entrepreneuse de Limbé épargne chaque mois : 50 000 FCFA le premier mois puis 2 500 FCFA de plus chaque mois (exemple fictif). On note $u_n$ l'épargne du mois de rang n, avec $u_0 = 50\\,000$. Elle place par ailleurs 200 000 FCFA à 5 % par an, à intérêts composés.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule $u_{11}$ (en FCFA).",
+     "answer": 77500,
+     "tolerance": 0,
+     "explanation": "Suite arithmétique de raison 2 500 : $u_{11} = 50\\,000 + 11 \\times 2\\,500 = 77\\,500$ FCFA.",
+     "unit": "FCFA",
+     "id": "1re-maths-a-blanc-ex2-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule le total épargné de $u_0$ à $u_{11}$ (12 mois), en FCFA.",
+     "answer": 765000,
+     "tolerance": 0,
+     "explanation": "$12 \\times \\frac{50\\,000 + 77\\,500}{2} = 12 \\times 63\\,750 = 765\\,000$ FCFA.",
+     "unit": "FCFA",
+     "id": "1re-maths-a-blanc-ex2-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2.5,
+     "prompt": "Calcule le capital placé à 5 % après 2 ans, en FCFA.",
+     "answer": 220500,
+     "tolerance": 0,
+     "explanation": "$200\\,000 \\times 1{,}05^2 = 200\\,000 \\times 1{,}1025 = 220\\,500$ FCFA.",
+     "unit": "FCFA",
+     "id": "1re-maths-a-blanc-ex2-c"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Suite arithmétique pour l'épargne mensuelle, suite géométrique pour les intérêts composés.",
+   "mistakes": [
+    "Compter 11 termes au lieu de 12."
+   ],
+   "chapter": "1re-maths-a-ch-fonctions"
+  },
+  {
+   "id": "1re-maths-a-blanc-ex3",
+   "kind": "problem",
+   "prompt": "Dans une classe de Première A (données fictives), les notes de 10 élèves sont : 8 (2 élèves), 10 (4 élèves), 12 (3 élèves) et 14 (1 élève).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la moyenne.",
+     "answer": 10.6,
+     "tolerance": 0.01,
+     "explanation": "$\\frac{2 \\times 8 + 4 \\times 10 + 3 \\times 12 + 14}{10} = \\frac{16 + 40 + 36 + 14}{10} = \\frac{106}{10} = 10{,}6$.",
+     "id": "1re-maths-a-blanc-ex3-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule la variance.",
+     "answer": 3.24,
+     "tolerance": 0.01,
+     "explanation": "$\\frac{2 \\times 64 + 4 \\times 100 + 3 \\times 144 + 196}{10} = \\frac{1\\,156}{10} = 115{,}6$ puis $V = 115{,}6 - 10{,}6^2 = 115{,}6 - 112{,}36 = 3{,}24$.",
+     "id": "1re-maths-a-blanc-ex3-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "En déduire l'écart-type.",
+     "answer": 1.8,
+     "tolerance": 0.01,
+     "explanation": "$\\sigma = \\sqrt{3{,}24} = 1{,}8$.",
+     "id": "1re-maths-a-blanc-ex3-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Détermine la médiane.",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "N = 10 : la médiane est la moyenne des 5e et 6e valeurs de la série ordonnée (8, 8, 10, 10, 10, 10, 12, 12, 12, 14), soit 10 et 10 : médiane 10.",
+     "id": "1re-maths-a-blanc-ex3-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Tableau d'effectifs puis formules.",
+   "mistakes": [
+    "Oublier le carré de la moyenne."
+   ],
+   "chapter": "1re-maths-a-ch-fonctions"
+  }
+ ]
+}

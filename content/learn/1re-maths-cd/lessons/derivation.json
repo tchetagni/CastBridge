@@ -1,0 +1,624 @@
+{
+ "chapter": "1re-maths-cd-ch-derivation",
+ "lessons": [
+  {
+   "id": "1re-maths-cd-derivation",
+   "title": "Dérivation et étude des variations",
+   "minutes": 45,
+   "programRef": "1re C/D — Analyse : dérivation, tangente, sens de variation, optimisation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Calculer un nombre dérivé et une tangente.",
+    "Dériver sommes, produits, quotients et composées simples.",
+    "Dresser un tableau de variations.",
+    "Résoudre un problème d'optimisation."
+   ],
+   "prerequisites": [
+    "1re-maths-cd-limites"
+   ],
+   "exercises": [
+    "1re-maths-cd-de-01",
+    "1re-maths-cd-de-02",
+    "1re-maths-cd-de-03",
+    "1re-maths-cd-de-04",
+    "1re-maths-cd-de-05",
+    "1re-maths-cd-de-06"
+   ],
+   "selfCheck": [
+    "1re-maths-cd-de-q1",
+    "1re-maths-cd-de-q2",
+    "1re-maths-cd-de-q3",
+    "1re-maths-cd-de-q4",
+    "1re-maths-cd-de-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si la dérivée de sin(ax+b) et la dérivée seconde sont au programme de 1re C/D.",
+    "Le niveau des problèmes d'optimisation (géométrie de l'espace) est à confirmer."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Calculer un nombre dérivé et l'équation d'une tangente.\n- Dériver une somme, un produit, un quotient et une composée simple.\n- Dresser le tableau de variations d'une fonction à partir du signe de $f'$.\n- Résoudre un problème d'optimisation."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nombre dérivé et tangente",
+     "md": "$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$ lorsque cette limite existe : c'est le **coefficient directeur de la tangente** en $A(a ; f(a))$. Équation de la tangente :",
+     "tex": "y = f'(a)(x - a) + f(a)"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dérivées usuelles",
+     "md": "- $(k)' = 0$ ; $(x)' = 1$ ; $(x^n)' = n x^{n-1}$.\n- $\\left(\\frac{1}{x}\\right)' = -\\frac{1}{x^2}$ ; $(\\sqrt{x})' = \\frac{1}{2\\sqrt{x}}$.\n- $(\\sin x)' = \\cos x$ ; $(\\cos x)' = -\\sin x$.\nElles sont valables sur les intervalles où la fonction est définie et dérivable ($x \\neq 0$ pour $1/x$, $x > 0$ pour $\\sqrt{x}$)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Opérations sur les dérivées",
+     "md": "- $(u + v)' = u' + v'$ ; $(ku)' = k u'$.\n- $(uv)' = u'v + uv'$.\n- $\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}$ (v ne s'annule pas).\n- $(u^n)' = n u' u^{n-1}$ ; $(\\sqrt{u})' = \\frac{u'}{2\\sqrt{u}}$ ; $\\big(f(ax + b)\\big)' = a f'(ax + b)$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Signe de la dérivée et variations",
+     "md": "Sur un intervalle I : $f' \\geq 0$ donc f **croissante** ; $f' \\leq 0$ donc f **décroissante** ; $f' = 0$ donc f constante. Si $f'$ s'annule **en changeant de signe** en a, f admet un **extremum local** en a. Annuler $f'$ ne suffit pas : $f(x) = x^3$ a $f'(0) = 0$ sans extremum."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 3.2,
+      "ymin": -4,
+      "ymax": 5,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^3-3*x^2+2",
+        "color": "blue",
+        "label": "Cf"
+       },
+       {
+        "expr": "-3*x+3",
+        "color": "red",
+        "label": "tangente en 1"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 2,
+        "label": "max local",
+        "color": "green"
+       },
+       {
+        "x": 2,
+        "y": -2,
+        "label": "min local",
+        "color": "green"
+       },
+       {
+        "x": 1,
+        "y": 0,
+        "label": "A",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Courbe de $f(x) = x^3 - 3x^2 + 2$ : maximum local en (0 ; 2), minimum local en (2 ; −2) et tangente en A(1 ; 0) de pente −3.",
+     "alt": "Courbe en forme de S : elle monte jusqu'au point (0 ; 2), descend jusqu'au point (2 ; -2) puis remonte. Une droite rouge de pente -3 touche la courbe au point A(1 ; 0)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : variations et tangente",
+     "statement": "Soit $f(x) = x^3 - 3x^2 + 2$. Dresse son tableau de variations et donne la tangente en $x = 1$.",
+     "steps": [
+      {
+       "md": "On dérive et on factorise :",
+       "tex": "f'(x) = 3x^2 - 6x = 3x(x - 2)"
+      },
+      {
+       "md": "$f'$ est positive pour x < 0 ou x > 2, négative entre 0 et 2. Donc f est croissante sur $]-\\infty ; 0]$, décroissante sur $[0 ; 2]$, croissante sur $[2 ; +\\infty[$, avec $f(0) = 2$ (maximum local) et $f(2) = -2$ (minimum local)."
+      },
+      {
+       "md": "En $x = 1$ : $f(1) = 0$ et $f'(1) = -3$, d'où :",
+       "tex": "y = -3(x - 1) + 0 = -3x + 3"
+      }
+     ],
+     "answer": "Maximum local 2 en x = 0, minimum local −2 en x = 2 ; tangente $y = -3x + 3$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : quotient et composée",
+     "statement": "Dérive $f(x) = \\frac{2x + 1}{x - 3}$ sur $]3 ; +\\infty[$, puis $g(x) = (x^2 + 1)^3$.",
+     "steps": [
+      {
+       "md": "Quotient avec $u = 2x + 1$ et $v = x - 3$ :",
+       "tex": "f'(x) = \\frac{2(x - 3) - (2x + 1) \\times 1}{(x - 3)^2} = \\frac{-7}{(x - 3)^2}"
+      },
+      {
+       "md": "Composée $u^3$ avec $u = x^2 + 1$ et $u' = 2x$ :",
+       "tex": "g'(x) = 3 \\times 2x \\times (x^2 + 1)^2 = 6x(x^2 + 1)^2"
+      },
+      {
+       "md": "Comme $f'(x) < 0$ sur $]3 ; +\\infty[$, la fonction f y est strictement décroissante."
+      }
+     ],
+     "answer": "$f'(x) = \\frac{-7}{(x - 3)^2}$ et $g'(x) = 6x(x^2 + 1)^2$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-de-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-de-02"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : étudier les variations",
+     "md": "1. Déterminer l'ensemble de définition.\n2. Calculer $f'(x)$ et la factoriser pour étudier son signe.\n3. Dresser le tableau (signe de $f'$, flèches, valeurs aux bornes et aux extrema).\n4. Calculer les limites aux bornes si on cherche les asymptotes ou les images."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-de-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Écrire $(uv)' = u'v'$ : c'est faux, la formule contient deux termes.\n- Oublier le facteur $u'$ dans une composée : $((3x - 1)^4)' = 12(3x - 1)^3$ et non $4(3x - 1)^3$.\n- Se tromper dans le numérateur d'un quotient : $u'v - uv'$, dans cet ordre.\n- Confondre « $f'(a) = 0$ » et « extremum en a » : il faut un changement de signe de $f'$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-de-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-de-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-de-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une fonction dérivable est continue, mais la réciproque est fausse : $|x|$ est continue en 0 sans y être dérivable.",
+      "Fonctions trigonométriques composées, dérivée seconde et convexité : à vérifier sur le texte officiel pour la Première."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-cd-de-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Soit $f(x) = x^2 - 4x + 1$. Calcule $f'(3)$.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "$f'(x) = 2x - 4$, donc $f'(3) = 6 - 4 = 2$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Dérivée d'un polynôme terme à terme.",
+   "mistakes": [
+    "Oublier de dériver le terme $-4x$ (qui donne −4)."
+   ],
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-02",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle est la dérivée de $f(x) = (3x - 1)^4$ ?",
+   "choices": [
+    "$4(3x - 1)^3$",
+    "$12(3x - 1)^3$",
+    "$12x^3$",
+    "$(3x - 1)^3 \\times 3x$"
+   ],
+   "answer": 1,
+   "explanation": "On utilise $(u^n)' = n u' u^{n-1}$ avec $u = 3x - 1$, $u' = 3$, $n = 4$ : $4 \\times 3 \\times (3x - 1)^3 = 12(3x - 1)^3$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "$(u^n)' = n u' u^{n-1}$.",
+   "mistakes": [
+    "Oublier le facteur $u' = 3$."
+   ],
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "Si $f'(a) = 0$, alors f admet nécessairement un extremum local en a.",
+   "answer": false,
+   "explanation": "Contre-exemple : $f(x) = x^3$ a $f'(0) = 0$ mais est strictement croissante. Il faut que $f'$ change de signe en a.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Chercher un contre-exemple simple.",
+   "mistakes": [
+    "Croire que l'annulation de la dérivée suffit à garantir un extremum."
+   ],
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Soit $f(x) = x^2 + 3x$. La tangente en $x = 2$ a pour équation $y = 7x + p$. Donne p.",
+   "answer": -4,
+   "tolerance": 0,
+   "explanation": "$f(2) = 10$ et $f'(x) = 2x + 3$, donc $f'(2) = 7$. Tangente : $y = 7(x - 2) + 10 = 7x - 4$, donc p = −4.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "$y = f'(a)(x - a) + f(a)$.",
+   "mistakes": [
+    "Oublier de soustraire $7 \\times 2 = 14$ en développant."
+   ],
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-05",
+   "kind": "mcq",
+   "points": 2,
+   "prompt": "Sur quel intervalle la fonction $f(x) = \\frac{x}{x^2 + 1}$ est-elle croissante ?",
+   "choices": [
+    "$]-\\infty ; -1] \\cup [1 ; +\\infty[$",
+    "$[0 ; +\\infty[$",
+    "$[-1 ; 1]$",
+    "$]-\\infty ; 0]$"
+   ],
+   "answer": 2,
+   "explanation": "$f'(x) = \\frac{(x^2 + 1) - x \\times 2x}{(x^2 + 1)^2} = \\frac{1 - x^2}{(x^2 + 1)^2}$. Le dénominateur est positif : le signe est celui de $1 - x^2$, positif sur $[-1 ; 1]$ (f est décroissante à l'extérieur).",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Dériver le quotient et étudier le signe du numérateur.",
+   "mistakes": [
+    "Se tromper de signe dans le numérateur $u'v - uv'$."
+   ],
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-06",
+   "kind": "problem",
+   "prompt": "Un éleveur de Bamenda dispose de 60 m de grillage pour clôturer un enclos rectangulaire adossé à un mur : seuls trois côtés sont grillagés (deux côtés de longueur x et un côté parallèle au mur). On note x la longueur, en mètres, d'un côté perpendiculaire au mur, avec $0 < x < 30$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Exprime l'aire et calcule-la pour x = 10 (en m²). On a $A(x) = x(60 - 2x)$.",
+     "answer": 400,
+     "tolerance": 0,
+     "explanation": "Le côté parallèle au mur mesure $60 - 2x$, donc $A(10) = 10 \\times 40 = 400$ m².",
+     "unit": "m²",
+     "id": "1re-maths-cd-de-06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle est la dérivée de $A(x) = 60x - 2x^2$ ?",
+     "choices": [
+      "$A'(x) = 60 - 4x$",
+      "$A'(x) = 60 - 2x$",
+      "$A'(x) = 60x - 4$",
+      "$A'(x) = 60 + 4x$"
+     ],
+     "answer": 0,
+     "explanation": "On dérive terme à terme : $(60x)' = 60$ et $(-2x^2)' = -4x$.",
+     "id": "1re-maths-cd-de-06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour quelle valeur de x (en mètres) l'aire est-elle maximale ?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "$A'(x) = 0 \\iff x = 15$. $A'$ est positive avant 15 et négative après : A est croissante puis décroissante, donc maximale en x = 15.",
+     "unit": "m",
+     "id": "1re-maths-cd-de-06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est l'aire maximale (en m²) ?",
+     "answer": 450,
+     "tolerance": 0,
+     "explanation": "$A(15) = 15 \\times (60 - 30) = 15 \\times 30 = 450$ m².",
+     "unit": "m²",
+     "id": "1re-maths-cd-de-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Exprimer l'aire en fonction de x, dériver, étudier le signe de la dérivée.",
+   "mistakes": [
+    "Oublier que le mur évite un côté : le grillage compte $2x + y$ et non $2x + 2y$.",
+    "Donner la valeur de x au lieu de l'aire maximale."
+   ],
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle est la dérivée de $f(x) = x^5$ ?",
+   "choices": [
+    "$x^4$",
+    "$5x^5$",
+    "$4x^5$",
+    "$5x^4$"
+   ],
+   "answer": 3,
+   "explanation": "$(x^n)' = n x^{n-1}$ avec n = 5.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "La dérivée de $f(x) = \\frac{1}{x}$ est :",
+   "choices": [
+    "$\\frac{1}{x^2}$",
+    "$-\\frac{1}{x^2}$",
+    "$\\ln x$",
+    "$-\\frac{1}{x}$"
+   ],
+   "answer": 1,
+   "explanation": "C'est une dérivée usuelle.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Si $f' > 0$ sur un intervalle, alors f est :",
+   "choices": [
+    "décroissante",
+    "constante",
+    "négative",
+    "strictement croissante sur cet intervalle"
+   ],
+   "answer": 3,
+   "explanation": "Le signe de la dérivée donne le sens de variation.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "La dérivée de $uv$ est :",
+   "choices": [
+    "$u'v + uv'$",
+    "$u'v'$",
+    "$u'v - uv'$",
+    "$u v' $"
+   ],
+   "answer": 0,
+   "explanation": "Règle du produit.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-de-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle est l'équation de la tangente à la courbe de f au point d'abscisse a ?",
+   "choices": [
+    "$y = f(a)(x - a) + f'(a)$",
+    "$y = f'(x)(a - x)$",
+    "$y = f'(a)(x - a) + f(a)$",
+    "$y = f'(a)x$"
+   ],
+   "answer": 2,
+   "explanation": "La pente est $f'(a)$ et la droite passe par $(a ; f(a))$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-derivation"
+  },
+  {
+   "id": "1re-maths-cd-blanc-ex1",
+   "kind": "problem",
+   "prompt": "Soit m un réel. On considère l'équation $(E_m)$ : $x^2 + 2(m - 1)x + m^2 - 5 = 0$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le discriminant réduit $\\Delta' = (m - 1)^2 - (m^2 - 5)$ pour m = 1.",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "On a $\\Delta' = (m - 1)^2 - (m^2 - 5) = -2m + 6$. Pour m = 1 : $\\Delta' = 4$.",
+     "id": "1re-maths-cd-blanc-ex1-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour quelle valeur de m l'équation $(E_m)$ a-t-elle une racine double ?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "Racine double $\\iff \\Delta' = 0 \\iff -2m + 6 = 0 \\iff m = 3$. L'équation est alors $x^2 + 4x + 4 = 0$, soit $(x + 2)^2 = 0$.",
+     "id": "1re-maths-cd-blanc-ex1-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Donne une valeur approchée à 0,001 près de $\\cos\\frac{\\pi}{12}$, sachant que $\\frac{\\pi}{12} = \\frac{\\pi}{3} - \\frac{\\pi}{4}$.",
+     "answer": 0.966,
+     "tolerance": 0.001,
+     "explanation": "$\\cos\\left(\\frac{\\pi}{3} - \\frac{\\pi}{4}\\right) = \\frac{1}{2} \\times \\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{3}}{2} \\times \\frac{\\sqrt{2}}{2} = \\frac{\\sqrt{2} + \\sqrt{6}}{4} \\approx 0{,}966$.",
+     "id": "1re-maths-cd-blanc-ex1-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien l'équation $\\sin x = \\frac{\\sqrt{3}}{2}$ a-t-elle de solutions dans $[0 ; 2\\pi[$ ?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "$\\sin x = \\sin\\frac{\\pi}{3}$ donne $x = \\frac{\\pi}{3}$ ou $x = \\frac{2\\pi}{3}$ : deux solutions.",
+     "id": "1re-maths-cd-blanc-ex1-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Calculer Δ', puis utiliser les formules d'addition et les valeurs remarquables.",
+   "mistakes": [
+    "Oublier la seconde solution de $\\sin x = \\sin a$."
+   ],
+   "chapter": "1re-maths-cd-ch-derivation"
+  },
+  {
+   "id": "1re-maths-cd-blanc-ex2",
+   "kind": "problem",
+   "prompt": "Une association de Douala organise une collecte : un membre verse 3 000 FCFA le premier mois puis 500 FCFA de plus chaque mois (données fictives). On note $u_n$ le versement du mois de rang n, avec $u_0 = 3\\,000$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le versement $u_{10}$ (en FCFA).",
+     "answer": 8000,
+     "tolerance": 0,
+     "explanation": "Suite arithmétique de raison 500 : $u_{10} = 3\\,000 + 10 \\times 500 = 8\\,000$ FCFA.",
+     "unit": "FCFA",
+     "id": "1re-maths-cd-blanc-ex2-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la somme $u_0 + u_1 + \\ldots + u_{10}$ (en FCFA).",
+     "answer": 60500,
+     "tolerance": 0,
+     "explanation": "11 termes : $11 \\times \\frac{3\\,000 + 8\\,000}{2} = 11 \\times 5\\,500 = 60\\,500$ FCFA.",
+     "unit": "FCFA",
+     "id": "1re-maths-cd-blanc-ex2-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Six candidats se présentent pour trois postes distincts (président, secrétaire, trésorier). Combien de bureaux différents ?",
+     "answer": 120,
+     "tolerance": 0,
+     "explanation": "L'ordre compte : $A_6^3 = 6 \\times 5 \\times 4 = 120$.",
+     "id": "1re-maths-cd-blanc-ex2-c"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Suite arithmétique : dernier terme puis somme. Arrangement : l'ordre compte.",
+   "mistakes": [
+    "Compter 10 termes au lieu de 11.",
+    "Utiliser une combinaison : $C_6^3 = 20$ ne tient pas compte des postes."
+   ],
+   "chapter": "1re-maths-cd-ch-derivation"
+  },
+  {
+   "id": "1re-maths-cd-blanc-pb",
+   "kind": "problem",
+   "prompt": "Soit $f(x) = \\frac{x^2 + 3}{x + 1}$ définie pour $x \\neq -1$. On note $(C)$ sa courbe dans un repère orthonormé. On admet que $f(x) = x - 1 + \\frac{4}{x + 1}$ et que $f'(x) = \\frac{(x - 1)(x + 3)}{(x + 1)^2}$.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la limite de f en $-1^+$ ?",
+     "choices": [
+      "$-\\infty$",
+      "0",
+      "$+\\infty$",
+      "3"
+     ],
+     "answer": 2,
+     "explanation": "Le numérateur tend vers 4 > 0 et $x + 1$ tend vers $0^+$ : $f(x) \\to +\\infty$. La droite $x = -1$ est asymptote verticale.",
+     "id": "1re-maths-cd-blanc-pb-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Quelle est l'asymptote oblique de (C) ?",
+     "choices": [
+      "$y = x + 1$",
+      "$y = 4$",
+      "$y = x + 3$",
+      "$y = x - 1$"
+     ],
+     "answer": 3,
+     "explanation": "$f(x) - (x - 1) = \\frac{4}{x + 1} \\to 0$ en ±∞. La courbe est au-dessus de l'asymptote pour x > −1 et en dessous pour x < −1.",
+     "id": "1re-maths-cd-blanc-pb-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule $f'(2)$ (valeur approchée à 0,001 près).",
+     "answer": 0.556,
+     "tolerance": 0.001,
+     "explanation": "$f'(2) = \\frac{1 \\times 5}{9} = \\frac{5}{9} \\approx 0{,}556$.",
+     "id": "1re-maths-cd-blanc-pb-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Sur $]-1 ; +\\infty[$, f' s'annule en 1 en changeant de signe (négative avant, positive après). Quelle est la valeur du minimum local de f en x = 1 ?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "$f(1) = \\frac{1 + 3}{2} = 2$.",
+     "id": "1re-maths-cd-blanc-pb-d"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Donne le coefficient directeur de la tangente à (C) au point d'abscisse 0.",
+     "answer": -3,
+     "tolerance": 0,
+     "explanation": "$f'(0) = \\frac{(-1)(3)}{1} = -3$. L'équation de la tangente est $y = -3x + 3$ (car $f(0) = 3$).",
+     "id": "1re-maths-cd-blanc-pb-e"
+    },
+    {
+     "kind": "truefalse",
+     "points": 2,
+     "prompt": "L'équation $f(x) = 0$ admet au moins une solution réelle.",
+     "answer": false,
+     "explanation": "$f(x) = 0 \\iff x^2 + 3 = 0$, impossible dans $\\mathbb{R}$ car $x^2 + 3 \\geq 3$. Cela est cohérent avec les extremums : maximum local −6 en x = −3 et minimum local 2 en x = 1.",
+     "id": "1re-maths-cd-blanc-pb-f"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 3,
+   "source": "Exercice original, style Probatoire",
+   "method": "Limites aux bornes, dérivée, tableau de variations, tangente.",
+   "mistakes": [
+    "Oublier d'étudier séparément les deux intervalles de définition.",
+    "Oublier de factoriser la dérivée."
+   ],
+   "chapter": "1re-maths-cd-ch-derivation"
+  }
+ ]
+}

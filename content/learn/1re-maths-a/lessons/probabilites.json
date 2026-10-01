@@ -1,0 +1,461 @@
+{
+ "chapter": "1re-maths-a-ch-probabilites",
+ "lessons": [
+  {
+   "id": "1re-maths-a-probabilites",
+   "title": "Probabilités et dénombrement élémentaire",
+   "minutes": 35,
+   "programRef": "1re A — Dénombrement élémentaire, probabilités (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Dénombrer avec le principe multiplicatif, arrangements et combinaisons.",
+    "Calculer des probabilités en équiprobabilité.",
+    "Utiliser l'événement contraire et la réunion."
+   ],
+   "prerequisites": [
+    "1re-maths-a-statistiques"
+   ],
+   "exercises": [
+    "1re-maths-a-pd-01",
+    "1re-maths-a-pd-02",
+    "1re-maths-a-pd-03",
+    "1re-maths-a-pd-04",
+    "1re-maths-a-pd-05",
+    "1re-maths-a-pd-06"
+   ],
+   "selfCheck": [
+    "1re-maths-a-pd-q1",
+    "1re-maths-a-pd-q2",
+    "1re-maths-a-pd-q3",
+    "1re-maths-a-pd-q4",
+    "1re-maths-a-pd-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si les combinaisons et la probabilité conditionnelle sont au programme de Première A.",
+    "Les contextes (dés, urnes, menus) sont génériques : adapter au programme."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Dénombrer avec le principe multiplicatif, les arrangements et les combinaisons simples.\n- Calculer une probabilité en situation d'équiprobabilité.\n- Utiliser l'événement contraire et la formule de la réunion.\n- Traiter des tirages dans une urne."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dénombrement",
+     "md": "- **Principe multiplicatif** : si on fait un choix parmi n puis un choix parmi p, il y a $n \\times p$ possibilités.\n- **Permutations** de n objets : $n! = n \\times (n - 1) \\times \\ldots \\times 1$.\n- **Arrangements** (p objets parmi n, ordre important) : $A_n^p = n \\times (n - 1) \\times \\ldots$ (p facteurs).\n- **Combinaisons** (ordre sans importance) : $C_n^p = \\frac{A_n^p}{p!}$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Probabilité",
+     "md": "Une expérience aléatoire a un ensemble d'issues possibles. En **équiprobabilité** (toutes les issues ont la même chance) :\n$P(A) = \\frac{\\text{nombre d'issues favorables}}{\\text{nombre d'issues possibles}}$.\nUne probabilité est un nombre entre 0 et 1 : 0 pour l'événement impossible, 1 pour l'événement certain."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Règles de calcul",
+     "md": "- Événement contraire : $P(\\overline{A}) = 1 - P(A)$.\n- Réunion : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.\n- Si A et B sont **incompatibles** ($A \\cap B$ vide) : $P(A \\cup B) = P(A) + P(B)$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tirages dans une urne",
+     "md": "- **Simultané** (ou sans remise, ordre ignoré) : on utilise des combinaisons $C_n^p$.\n- **Successifs avec remise** : à chaque tirage la composition est la même ; on multiplie les probabilités le long de la branche de l'arbre.\n- Pour « au moins un », penser à l'événement contraire « aucun »."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "cas sur 36",
+      "bars": [
+       {
+        "label": "2",
+        "value": 1,
+        "color": "lightblue"
+       },
+       {
+        "label": "3",
+        "value": 2,
+        "color": "lightblue"
+       },
+       {
+        "label": "4",
+        "value": 3,
+        "color": "lightblue"
+       },
+       {
+        "label": "5",
+        "value": 4,
+        "color": "lightblue"
+       },
+       {
+        "label": "6",
+        "value": 5,
+        "color": "lightblue"
+       },
+       {
+        "label": "7",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "8",
+        "value": 5,
+        "color": "lightblue"
+       },
+       {
+        "label": "9",
+        "value": 4,
+        "color": "lightblue"
+       },
+       {
+        "label": "10",
+        "value": 3,
+        "color": "lightblue"
+       },
+       {
+        "label": "11",
+        "value": 2,
+        "color": "lightblue"
+       },
+       {
+        "label": "12",
+        "value": 1,
+        "color": "lightblue"
+       }
+      ]
+     },
+     "caption": "Somme de deux dés équilibrés : nombre de cas sur 36 pour chaque somme. La somme 7 est la plus fréquente (6 cas).",
+     "alt": "Diagramme en barres des sommes de 2 à 12 : les barres croissent de 1 à 6 cas pour la somme 7 puis décroissent jusqu'à 1 cas pour la somme 12."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : principe multiplicatif",
+     "statement": "Un code comporte 4 chiffres. Combien de codes si les chiffres peuvent se répéter ? Et s'ils doivent tous être différents ?",
+     "steps": [
+      {
+       "md": "Chaque position offre 10 choix :",
+       "tex": "10 \\times 10 \\times 10 \\times 10 = 10\\,000"
+      },
+      {
+       "md": "Sans répétition : 10 choix, puis 9, puis 8, puis 7 :",
+       "tex": "A_{10}^4 = 10 \\times 9 \\times 8 \\times 7 = 5\\,040"
+      }
+     ],
+     "answer": "10 000 codes avec répétition et 5 040 codes sans répétition."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : événements d'un dé",
+     "statement": "On lance un dé équilibré. A : « le résultat est pair », B : « le résultat est au moins 5 ». Calcule P(A), P(B) et $P(A \\cup B)$.",
+     "steps": [
+      {
+       "md": "Issues favorables : A = {2 ; 4 ; 6} et B = {5 ; 6}, donc :",
+       "tex": "P(A) = \\frac{3}{6} = \\frac{1}{2} \\quad \\text{et} \\quad P(B) = \\frac{2}{6} = \\frac{1}{3}"
+      },
+      {
+       "md": "L'intersection est {6}, de probabilité $\\frac{1}{6}$. La réunion est {2 ; 4 ; 5 ; 6}."
+      },
+      {
+       "md": "Formule de la réunion :",
+       "tex": "P(A \\cup B) = \\frac{1}{2} + \\frac{1}{3} - \\frac{1}{6} = \\frac{4}{6} = \\frac{2}{3}"
+      }
+     ],
+     "answer": "$P(A) = \\frac{1}{2}$, $P(B) = \\frac{1}{3}$ et $P(A \\cup B) = \\frac{2}{3}$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-pd-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-pd-02"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : tirage simultané",
+     "statement": "Une urne contient 3 boules rouges et 2 vertes. On tire 2 boules simultanément. Calcule la probabilité d'avoir 2 rouges, puis au moins une verte.",
+     "steps": [
+      {
+       "md": "Nombre de tirages possibles :",
+       "tex": "C_5^2 = 10"
+      },
+      {
+       "md": "Deux rouges : $C_3^2 = 3$ tirages, donc $P = \\frac{3}{10}$."
+      },
+      {
+       "md": "« Au moins une verte » est le contraire de « deux rouges » : $P = 1 - \\frac{3}{10} = \\frac{7}{10}$."
+      }
+     ],
+     "answer": "$P(\\text{2 rouges}) = \\frac{3}{10}$ et $P(\\text{au moins une verte}) = \\frac{7}{10}$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-pd-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Utiliser $\\frac{\\text{cas favorables}}{\\text{cas possibles}}$ quand les issues ne sont pas équiprobables (ex. : « somme de deux dés » : 7 est plus probable que 2).\n- Oublier de retrancher $P(A \\cap B)$.\n- Confondre arrangement et combinaison : pour un tirage simultané, l'ordre ne compte pas.\n- Donner une probabilité supérieure à 1 ou négative : c'est le signe d'une erreur."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-pd-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-pd-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-pd-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La probabilité conditionnelle et l'indépendance peuvent faire partie du programme de la série A : à vérifier sur le texte officiel.",
+      "Une probabilité peut aussi se lire comme une fréquence « à long terme » : sur un grand nombre de lancers de dé, la fréquence du 6 se rapproche de $\\frac{1}{6}$."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-a-pd-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Un restaurant propose 3 entrées, 4 plats et 2 desserts. Combien de menus (une entrée, un plat, un dessert) peut-on composer ?",
+   "answer": 24,
+   "tolerance": 0,
+   "explanation": "Principe multiplicatif : $3 \\times 4 \\times 2 = 24$ menus.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Multiplier les nombres de choix.",
+   "mistakes": [
+    "Additionner 3 + 4 + 2."
+   ],
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-02",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "De combien de façons peut-on ranger 5 élèves sur un banc, l'un à côté de l'autre ?",
+   "answer": 120,
+   "tolerance": 0,
+   "explanation": "Permutations : $5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Permutation de 5 objets.",
+   "mistakes": [
+    "Calculer $5^5 = 3125$."
+   ],
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "Une probabilité peut être supérieure à 1.",
+   "answer": false,
+   "explanation": "Une probabilité est toujours comprise entre 0 et 1 (0 pour l'impossible, 1 pour le certain).",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Rappel de cours.",
+   "mistakes": [
+    "Confondre probabilité et nombre de cas."
+   ],
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "On choisit 3 délégués parmi 7 élèves, sans distinguer de postes. Combien de choix possibles ?",
+   "answer": 35,
+   "tolerance": 0,
+   "explanation": "Ordre sans importance : $C_7^3 = \\frac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1} = 35$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Combinaison.",
+   "mistakes": [
+    "Donner $A_7^3 = 210$."
+   ],
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-05",
+   "kind": "mcq",
+   "points": 2,
+   "prompt": "On lance deux dés équilibrés. Quelle est la probabilité que la somme soit 7 ?",
+   "choices": [
+    "$\\frac{1}{6}$",
+    "$\\frac{1}{12}$",
+    "$\\frac{7}{36}$",
+    "$\\frac{1}{36}$"
+   ],
+   "answer": 0,
+   "explanation": "Il y a 36 couples équiprobables ; ceux de somme 7 sont (1,6), (2,5), (3,4), (4,3), (5,2), (6,1), soit 6 cas. $P = \\frac{6}{36} = \\frac{1}{6}$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Lister les 36 issues du couple.",
+   "mistakes": [
+    "Compter 11 sommes possibles équiprobables."
+   ],
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-06",
+   "kind": "problem",
+   "prompt": "Un sac contient 4 jetons rouges et 6 jetons bleus indiscernables au toucher. On tire simultanément 2 jetons.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de tirages possibles y a-t-il ?",
+     "answer": 45,
+     "tolerance": 0,
+     "explanation": "$C_{10}^2 = \\frac{10 \\times 9}{2} = 45$.",
+     "id": "1re-maths-a-pd-06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule P(« deux jetons rouges ») (arrondie à 0,001).",
+     "answer": 0.133,
+     "tolerance": 0.001,
+     "explanation": "$C_4^2 = 6$ tirages favorables : $P = \\frac{6}{45} = \\frac{2}{15} \\approx 0{,}133$.",
+     "id": "1re-maths-a-pd-06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule P(« deux jetons bleus ») (arrondie à 0,001).",
+     "answer": 0.333,
+     "tolerance": 0.001,
+     "explanation": "$C_6^2 = 15$ tirages : $P = \\frac{15}{45} = \\frac{1}{3} \\approx 0{,}333$.",
+     "id": "1re-maths-a-pd-06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule P(« au moins un jeton rouge ») (arrondie à 0,001).",
+     "answer": 0.667,
+     "tolerance": 0.001,
+     "explanation": "C'est le contraire de « deux bleus » : $1 - \\frac{1}{3} = \\frac{2}{3} \\approx 0{,}667$.",
+     "id": "1re-maths-a-pd-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Compter avec des combinaisons, puis passer par l'événement contraire.",
+   "mistakes": [
+    "Utiliser des arrangements pour un tirage simultané."
+   ],
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Que vaut $4!$ ?",
+   "choices": [
+    "16",
+    "24",
+    "10",
+    "12"
+   ],
+   "answer": 1,
+   "explanation": "$4! = 4 \\times 3 \\times 2 \\times 1 = 24$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "On lance une pièce équilibrée. La probabilité de « Pile » est :",
+   "choices": [
+    "1",
+    "$\\frac{1}{4}$",
+    "0",
+    "$\\frac{1}{2}$"
+   ],
+   "answer": 3,
+   "explanation": "Deux issues équiprobables.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Si $P(A) = 0{,}3$, alors $P(\\overline{A})$ vaut :",
+   "choices": [
+    "0,3",
+    "0,7",
+    "1,3",
+    "0"
+   ],
+   "answer": 1,
+   "explanation": "$1 - 0{,}3 = 0{,}7$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "On tire une carte au hasard parmi 32. La probabilité de tirer un as (il y en a 4) est :",
+   "choices": [
+    "$\\frac{1}{4}$",
+    "$\\frac{4}{31}$",
+    "$\\frac{1}{8}$",
+    "$\\frac{1}{32}$"
+   ],
+   "answer": 2,
+   "explanation": "$\\frac{4}{32} = \\frac{1}{8}$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-probabilites"
+  },
+  {
+   "id": "1re-maths-a-pd-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Pour un tirage simultané de 2 boules parmi 6, le nombre de tirages est :",
+   "choices": [
+    "15",
+    "30",
+    "12",
+    "36"
+   ],
+   "answer": 0,
+   "explanation": "$C_6^2 = \\frac{6 \\times 5}{2} = 15$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-probabilites"
+  }
+ ]
+}
