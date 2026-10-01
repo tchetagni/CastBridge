@@ -19,8 +19,9 @@ object SeriesClassifier {
 
     private fun folderOf(p: Parsed, title: String, fr: Boolean): String? {
         if (p.kind != Kind.SERIES || p.media != Media.VIDEO && p.media != Media.SUBTITLE) return null
-        if (p.episode == null || p.confidence < MIN_CONFIDENCE) return null
+        if (p.episode == null && p.date == null || p.confidence < MIN_CONFIDENCE) return null
         val t = clean(title).ifBlank { return null }
+        if (p.date != null) return "$t/${if (fr) "Saison" else "Season"} ${p.date.take(4)}"
         val s = p.season ?: return t
         return "$t/${if (fr) "Saison" else "Season"} ${"%02d".format(s)}"
     }

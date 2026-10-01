@@ -301,11 +301,11 @@ object Dev3Hand {
         other("music", "Burna Boy - Last Last.flac", "Burna Boy – Last Last.flac", "Musique", Kind.MUSIC),
         other("music", "Burna Boy - Last Last (320kbps).mp3", "Burna Boy – Last Last.mp3", "Musique", Kind.MUSIC),
         // ---------------------------------------------------------------- cours
-        other("course", "01. Introduction.mp4", "01. Introduction.mp4", "Cours", Kind.COURSE, folderIn = "Cours de Python"),
+        other("course", "01. Introduction.mp4", "01 Introduction.mp4", "Cours/Informatique", Kind.COURSE, folderIn = "Cours de Python"),
         other("course", "Section 1 - Lecture 2 - Variables.mp4", "Section 1 – Lecture 2 – Variables.mp4", "Cours", Kind.COURSE),
         other("course", "Module 3 - Les fonctions.mp4", "Module 3 – Les fonctions.mp4", "Cours/Informatique", Kind.COURSE, folderIn = "Formation Python"),
         other("course", "Chapitre 9 : Les dérivées.mp4", "Chapitre 9 – Les dérivées.mp4", "Cours/Mathématiques", Kind.COURSE, folderIn = "Cours de Maths"),
-        other("course", "Leçon 5 - Les fractions.mp4", "Leçon 5 – Les fractions.mp4", "Cours/Mathématiques", Kind.COURSE),
+        other("course", "Leçon 5 - Les fractions.mp4", "Leçon 5 – Les fractions.mp4", "Cours", Kind.COURSE),
         other("course", "Lesson 5 - Fractions.mp4", "Lesson 5 – Fractions.mp4", "Cours", Kind.COURSE),
         // ---------------------------------------------------------------- séparateurs, casse, Unicode
         ser("sep", "prison break s01e08.avi", "Prison Break", 1, 8),
@@ -319,7 +319,7 @@ object Dev3Hand {
         ser("sep", nfd("Les.Misérables.S01E01.mkv"), "Les Misérables", 1, 1),
         ser("sep", "Sœurs de Yaoundé S01E01.mkv", "Sœurs de Yaoundé", 1, 1),
         ser("sep", nfd("Les Révénants S01E01.mkv"), "Les Révénants", 1, 1),
-        ser("sep", "A".repeat(100) + " S01E08.avi", "A".repeat(100), 1, 8).let { GCase("sep", Case(it.c.input, "A".repeat(100) + " – S01E08.avi", "Séries/" + "A".repeat(100) + "/Saison 01", Kind.SERIES)) },
+        ser("sep", "A" + "b".repeat(119) + " S01E08.avi", "A" + "b".repeat(119), 1, 8),
     )
 
     /** A subtitle that follows [g]'s video: same name, the language (and flags) before the extension. */

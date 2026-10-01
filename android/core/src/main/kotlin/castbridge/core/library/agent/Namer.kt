@@ -49,8 +49,8 @@ object Namer {
         val title = learned?.aliasFor(p.titleKey) ?: p.title
         val forced = learned?.folderFor(p.titleKey)
 
-        fun file(base: String, sub: String? = null): String {
-            val b0 = base.replace(" - ", SEP)
+        fun file(base: String, sub: String? = null, raw: Boolean = false): String {
+            val b0 = if (raw) base else base.replace(" - ", SEP)
             val b = if (sub != null) "$b0.$sub" else b0
             return SafeName.fileName(b, p.ext).takeIf { SafeName.checkName(it) == null } ?: original.name
         }
@@ -61,7 +61,9 @@ object Namer {
             Kind.SERIES -> series()
             Kind.MOVIE -> {
                 val dir = title + (p.year?.let { " ($it)" } ?: "")
-                Proposal(file(dir + tag, p.subLang), forced ?: folder(l.movies, dir), p.rule)
+                // « Kill Bill (2003) - part1 »: the media-server convention for a film in several files (a hyphen, not our dash)
+                val name = dir.replace(" - ", SEP) + (p.part?.let { " - part$it" } ?: "") + tag
+                Proposal(file(name, p.subLang, raw = true), forced ?: folder(l.movies, dir), p.rule)
             }
             Kind.MUSIC, Kind.CLIP -> {
                 val base = when {
@@ -80,6 +82,8 @@ object Namer {
         }
 
         fun series(): Proposal {
+            if (p.date != null && title.isNotBlank())   // daily show: the date is the episode, the year is the "season"
+                return Proposal(file(title + SEP + p.date + (p.episodeTitle?.let { SEP + it } ?: "") + tag, p.subLang), forced ?: folder(l.series, title, "${l.season} ${p.date.take(4)}"), p.rule)
             if (title.isBlank())
                 return Proposal(file(p.stem.ifBlank { original.name.substringBeforeLast('.') }, p.subLang), folder(l.toSort), p.rule, "série non identifiée")
             val name = buildString {
