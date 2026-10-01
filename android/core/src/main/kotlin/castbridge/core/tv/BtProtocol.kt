@@ -339,11 +339,11 @@ class ResumableBtUpload(
             } catch (e: BtProtocol.Refused) {
                 if (BtProtocol.isFatal(e.code)) return ResumableUpload.State.Failed(e.message ?: "refusé").also(onState)
                 failures++
-                onState(ResumableUpload.State.Waiting(sent, total, e.message ?: "erreur"))
+                onState(ResumableUpload.State.Waiting(sent, total, castbridge.core.trust.LinkText.failure(e)))
             } catch (e: IOException) {
                 if (cancelled()) break
                 failures++
-                onState(ResumableUpload.State.Waiting(sent, total, e.message ?: e.javaClass.simpleName))
+                onState(ResumableUpload.State.Waiting(sent, total, castbridge.core.trust.LinkText.failure(e)))
             }
             if (failures >= maxFailures) return ResumableUpload.State.Failed("Bluetooth injoignable").also(onState)
             sleep(backoff); backoff = minOf(backoff * 2, 5000)

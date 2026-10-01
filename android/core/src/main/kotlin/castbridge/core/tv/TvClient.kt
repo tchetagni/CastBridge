@@ -127,6 +127,7 @@ class TvClient(val base: String, val pin: String? = null) {
     class Conflict(val serverLength: Long) : IOException("offset conflict, TV has $serverLength")
     class HttpError(val code: Int, body: String) : IOException("HTTP $code: ${body.take(200)}")
 
+
     private fun call(method: String, path: String): String = try { callOnce(method, path) } catch (e: java.net.SocketException) {
         // A pooled keep-alive connection the TV had already closed: a GET is safe to send again, once, on a fresh connection.
         if (method != "GET") throw e
@@ -141,7 +142,7 @@ class TvClient(val base: String, val pin: String? = null) {
 
     private fun open(method: String, path: String) = (URL(base + path).openConnection() as HttpURLConnection).apply {
         requestMethod = method; connectTimeout = 4000; readTimeout = 8000
-        pin?.let { castbridge.core.trust.TvAuth.header(it).let { (k, v) -> setRequestProperty(k, v) } }     // PIN or trusted-phone token
+        castbridge.core.trust.TvCredential.apply(this, pin)     // PIN or trusted-phone token (never an unusable one)
     }
 
     private fun read(c: HttpURLConnection, allow409: Boolean = false): String {
@@ -152,6 +153,8 @@ class TvClient(val base: String, val pin: String? = null) {
     }
 
     companion object {
+        /** 401 because the phone's TOKEN is expired or revoked (not a wrong PIN: no lockout counted, a new HELLO fixes it). */
+        fun isBadToken(e: HttpError) = e.code == 401 && "bad token" in e.message.orEmpty()
         /** Phone side of an upload: large reads from the file, one continuous HTTP body (the TV writes 256 kB blocks). */
         const val UPLOAD_BUFFER = 512 * 1024
         fun enc(s: String): String = URLEncoder.encode(s, "UTF-8").replace("+", "%20")
@@ -202,6 +205,8 @@ class ResumableUpload(
     private val onCheck: (TvClient.StorageCheck) -> Unit = {},
     /** Consecutive failures without progress before giving up (to try another link); default: never. */
     private val giveUpAfter: Int = Int.MAX_VALUE,
+    /** The credential to use NOW (a trusted phone's token is renewed while a long transfer waits); falls back to [pin]. A token the TV refused is never sent again. */
+    private val credential: (() -> String?)? = null,
 ) {
     sealed class State {
         data class Uploading(val sent: Long, val total: Long) : State()
@@ -217,6 +222,7 @@ class ResumableUpload(
         var checked = false
         var failures = 0
         var lastSent = -1L
+        var refusedToken: String? = null
         while (!cancelled()) {
             if (sent != lastSent) { lastSent = sent; failures = 0 } else if (++failures > giveUpAfter) return State.Failed("liaison perdue").also(onState)
             val base = resolve()
@@ -224,7 +230,12 @@ class ResumableUpload(
                 onState(State.Waiting(sent, total, "TV introuvable"))
                 sleep(backoff); backoff = minOf(backoff * 2, 5000); continue
             }
-            val tv = TvClient(base, pin)
+            val cred = credential?.invoke() ?: pin
+            if (cred != null && cred == refusedToken) {
+                // the TV said this token is expired or revoked: ask for no more until the phone holds a new one (nothing is sent meanwhile)
+                onState(State.Waiting(sent, total, "Autorisation de la TV à renouveler : reprise dès qu'elle l'est")); sleep(backoff); backoff = minOf(backoff * 2, 5000); continue
+            }
+            val tv = TvClient(base, cred)
             if (!checked) {
                 // Pre-flight, before any byte moves: a file that cannot be stored (FAT32 4 GB, no room) is announced now.
                 try {
@@ -234,12 +245,15 @@ class ResumableUpload(
                     if (!c.ok) return State.Failed(c.message.ifEmpty { "refusé par la TV" }).also(onState)
                     if (c.warnings.isNotEmpty()) onWarnings(c.warnings)
                     checked = true
+                } catch (e: castbridge.core.trust.TvCredential.Missing) {
+                    return State.Failed(castbridge.core.trust.LinkText.failure(e)).also(onState)
                 } catch (e: TvClient.HttpError) {
-                    if (e.code == 401) return State.Failed(e.message ?: "erreur").also(onState)
+                    if (e.code == 401 && TvClient.isBadToken(e) && credential != null) { refusedToken = cred; continue }
+                    if (e.code == 401) return State.Failed(castbridge.core.trust.LinkText.http(401, e.message.orEmpty())).also(onState)
                     checked = true                       // a TV without this route (404): the upload itself will say
                 } catch (e: IOException) {
                     if (cancelled()) break
-                    onState(State.Waiting(sent, total, e.message ?: e.javaClass.simpleName))
+                    onState(State.Waiting(sent, total, castbridge.core.trust.LinkText.failure(e)))
                     sleep(backoff); backoff = minOf(backoff * 2, 5000); continue
                 }
             }
@@ -257,7 +271,10 @@ class ResumableUpload(
                     }
                     if (r.done) return State.Done.also(onState)
                 }
+            } catch (e: castbridge.core.trust.TvCredential.Missing) {
+                return State.Failed(castbridge.core.trust.LinkText.failure(e)).also(onState)
             } catch (e: TvClient.HttpError) {
+                if (e.code == 401 && TvClient.isBadToken(e) && credential != null) { refusedToken = cred; continue }
                 if (e.code == 507 || e.code == 413 || e.code == 400 || e.code == 401)
                     return State.Failed(TvClient.str(e.message.orEmpty().substringAfter(": "), "message") ?: e.message ?: "erreur").also(onState)
                 // 503 "volume removed": the drive was pulled; wait like after a network cut, the upload resumes when it is back.
@@ -266,7 +283,7 @@ class ResumableUpload(
                 sleep(backoff); backoff = minOf(backoff * 2, 5000)
             } catch (e: IOException) {
                 if (cancelled()) break
-                onState(State.Waiting(sent, total, e.message ?: e.javaClass.simpleName))
+                onState(State.Waiting(sent, total, castbridge.core.trust.LinkText.failure(e)))
                 sleep(backoff); backoff = minOf(backoff * 2, 5000)
             }
         }
@@ -307,6 +324,8 @@ class ResumableDownload(
     private val sleep: (Long) -> Unit = Thread::sleep,
     private val bufferBytes: Int = 256 * 1024,
     private val maxFailures: Int = 60,
+    /** As in [ResumableUpload]: the live credential, and a refused token is never sent twice. */
+    private val credential: (() -> String?)? = null,
 ) {
     sealed class State {
         data class Downloading(val got: Long, val total: Long) : State()
@@ -319,13 +338,17 @@ class ResumableDownload(
         var backoff = 500L
         var failures = 0
         var total = -1L
+        var refusedToken: String? = null
         while (!cancelled()) {
             val have = saved()
             val base = resolve()
+            val cred = credential?.invoke() ?: pin
             if (base == null) {
                 onState(State.Waiting(have, total, "TV introuvable")); failures++
+            } else if (cred != null && cred == refusedToken) {
+                onState(State.Waiting(have, total, "Autorisation de la TV à renouveler : reprise dès qu'elle l'est"))
             } else try {
-                val r = TvClient(base, pin).openRange(name, have)
+                val r = TvClient(base, cred).openRange(name, have)
                 if (r.total >= 0) total = r.total
                 if (r.code == 416 || (total >= 0 && have >= total)) {
                     r.input.close()
@@ -349,13 +372,18 @@ class ResumableDownload(
                 }
                 if (total < 0 || got >= total) return State.Done(got).also(onState)
                 throw java.io.IOException("connection closed at $got/$total")
+            } catch (e: castbridge.core.trust.TvCredential.Missing) {
+                return State.Failed(castbridge.core.trust.LinkText.failure(e)).also(onState)
             } catch (e: TvClient.HttpError) {
-                if (e.code == 401 || e.code == 404 || e.code == 400) return State.Failed(
-                    when (e.code) { 404 -> "Fichier introuvable sur la TV"; 401 -> "PIN refusé"; else -> e.message ?: "erreur" }).also(onState)
-                failures++; onState(State.Waiting(saved(), total, e.message ?: "erreur"))
+                if (e.code == 401 && TvClient.isBadToken(e) && credential != null) { refusedToken = cred; onState(State.Waiting(saved(), total, castbridge.core.trust.LinkText.http(401, e.message.orEmpty()))) }
+                else {
+                    if (e.code == 401 || e.code == 404 || e.code == 400) return State.Failed(
+                        when (e.code) { 404 -> "Fichier introuvable sur la TV"; 401 -> castbridge.core.trust.LinkText.http(401, e.message.orEmpty()); else -> castbridge.core.trust.LinkText.http(e.code, e.message.orEmpty()) }).also(onState)
+                    failures++; onState(State.Waiting(saved(), total, castbridge.core.trust.LinkText.http(e.code, e.message.orEmpty())))
+                }
             } catch (e: java.io.IOException) {
                 if (cancelled()) break
-                failures++; onState(State.Waiting(saved(), total, e.message ?: e.javaClass.simpleName))
+                failures++; onState(State.Waiting(saved(), total, castbridge.core.trust.LinkText.failure(e)))
             }
             if (failures >= maxFailures) return State.Failed("TV injoignable").also(onState)
             sleep(backoff); backoff = minOf(backoff * 2, 5000)

@@ -54,7 +54,7 @@ class ParentalClient(private val base: String, private val tvPin: String) {
         try {
             c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 15_000
             // a trusted phone presents its token (X-CB-Token), anybody else the TV's PIN (X-CB-Pin): TvAuth says which header
-            castbridge.core.trust.TvAuth.header(tvPin).let { (h, v) -> c.setRequestProperty(h, v) }
+            castbridge.core.trust.TvCredential.apply(c, tvPin)
             if (body != null) {
                 val bytes = body.toByteArray(Charsets.UTF_8)
                 c.doOutput = true; c.setRequestProperty("Content-Type", "application/json; charset=utf-8"); c.setFixedLengthStreamingMode(bytes.size)

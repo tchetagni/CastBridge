@@ -175,7 +175,7 @@ class DownloadsActivity : Activity() {
         io.execute {
             val ok = runCatching {
                 val c = URL("http://127.0.0.1:8765/api/play?name=" + URLEncoder.encode(name, "UTF-8").replace("+", "%20")).openConnection() as HttpURLConnection
-                c.requestMethod = "POST"; c.setRequestProperty("X-CB-Pin", pin); c.doOutput = true; c.setFixedLengthStreamingMode(0)
+                c.requestMethod = "POST"; castbridge.core.trust.TvCredential.apply(c, pin); c.doOutput = true; c.setFixedLengthStreamingMode(0)
                 c.outputStream.close(); val code = c.responseCode; c.disconnect(); code == 200
             }.getOrDefault(false)
             main.post { if (ok) finish() else flash("Lecture impossible pour le moment.") }

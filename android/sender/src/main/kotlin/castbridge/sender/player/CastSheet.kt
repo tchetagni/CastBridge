@@ -97,7 +97,7 @@ fun CastSheet(item: PlayItem, posMs: Long, durMs: Long, only: CastAction? = null
                     trailingContent = { Icon(if (open) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore, null) },
                 )
                 if (open) Column(Modifier.padding(horizontal = 20.dp, vertical = 4.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    val pinOk = Pin.isValidFormat(pin)
+                    val pinOk = castbridge.core.trust.TvCredential.isUsable(pin)   // a trusted phone holds a token, not a 6-digit PIN
                     if (!pinOk) PinField(pins, tv.name, pin, { pin = it }, Modifier.fillMaxWidth())
                     val actions = CastPlan.actions(TargetKind.CASTBRIDGE, src).filter { only == null || it == only }
                     for (a in actions) {
