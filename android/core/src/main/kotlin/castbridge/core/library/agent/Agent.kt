@@ -85,7 +85,9 @@ class LibraryAgent(
         val fps = HashMap<String, String>()
         val fpr = fingerprinter
         if (fpr != null && !cancelled()) {
-            val cands = Duplicates.candidates(plannable).take(maxFingerprints)
+            // a name present on two volumes cannot be streamed unambiguously: it is judged by size + duration + name only
+            val nameCount = files.groupingBy { it.name.lowercase() }.eachCount()
+            val cands = Duplicates.candidates(plannable).filter { nameCount[it.name.lowercase()] == 1 }.take(maxFingerprints)
             cands.forEachIndexed { n, f ->
                 if (cancelled()) return@forEachIndexed
                 progress(Progress(Phase.FINGERPRINT, n, cands.size, f.name))
