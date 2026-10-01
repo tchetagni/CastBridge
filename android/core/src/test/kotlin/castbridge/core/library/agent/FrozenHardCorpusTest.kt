@@ -30,5 +30,5 @@ class FrozenHardCorpusTest {
         assertTrue(report.rate >= FLOOR, "frozen-hard rate ${report.rate} below the recorded floor $FLOOR")
     }
 
-    companion object { const val FLOOR = 0.0 }
+    companion object { const val FLOOR = 0.98 }
 }

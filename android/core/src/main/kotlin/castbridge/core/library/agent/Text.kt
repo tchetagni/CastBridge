@@ -17,6 +17,10 @@ object Text {
     private val SMALL_EN = setOf("a", "an", "the", "of", "and", "in", "on", "at", "to", "for", "or", "but", "vs", "via", "with", "by", "from", "nor", "as")
     private val ACRONYMS = setOf("ncis", "csi", "fbi", "swat", "ufc", "nba", "wwe", "bbc", "cnn", "tv", "dj", "usa", "uk", "ovni", "tmz", "mtv", "hbo", "npr", "rnb", "r&b", "atl", "mc", "ft", "cia", "nypd", "la", "nyc", "dc", "bts", "ac", "dvd", "cd", "hd", "vip", "ok", "xxx", "uefa", "fifa", "can", "caf")
     private val COUNTRY_SUFFIX = setOf("us", "uk", "au", "nz")
+    /** "S.W.A.T.", "S.H.I.E.L.D.", "E.T.": letters and dots only, at least two letters. */
+    private val INITIALS = Regex("^(?:\\p{L}\\.){2,}\\p{L}?\\.?$")
+    /** "LA CASA DE PAPEL": in a French title "LA" is the article, not Los Angeles. */
+    private val FRENCH_WORDS_LIKE_ACRONYMS = setOf("la", "can")
     private val ROMAN = Regex("^(ii|iii|iv|vi|vii|viii|ix|xi|xii|xiii|xiv|xv)$")
     private val ELISION = setOf("l", "d", "j", "n", "s", "c", "m", "t", "qu", "jusqu", "lorsqu", "puisqu")
 
@@ -40,10 +44,11 @@ object Text {
         words.forEachIndexed { i, w ->
             val lw = w.lowercase()
             sb += when {
-                allUpper && lw in ACRONYMS && w.length <= 5 && w.any { it.isLetter() } -> w.uppercase()
+                allUpper && lw in ACRONYMS && !(lang == "fr" && lw in FRENCH_WORDS_LIKE_ACRONYMS) && w.length <= 5 && w.any { it.isLetter() } -> w.uppercase()
                 ROMAN.matches(lw) -> w.uppercase()
                 i > 0 && i == words.lastIndex && lw in COUNTRY_SUFFIX && words.size > 2 && words[i - 1].lowercase() !in small && words[i - 1].lowercase() !in SMALL_EN -> w.uppercase()   // "The Office US", not "The Last of Us"
                 lw == "dj" || lw == "tv" -> w.uppercase()
+                INITIALS.matches(w) -> w.uppercase()
                 i > 0 && lw in small -> lw
                 else -> capitalizeWord(lw, i == 0)
             }

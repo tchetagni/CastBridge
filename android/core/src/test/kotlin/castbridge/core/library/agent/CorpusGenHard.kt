@@ -16,6 +16,7 @@ class CorpusGenHard(seed: Long, private val pools: Pools) {
     private val oddTags = listOf("WEB DL", "Blu-Ray", "H 264", "HDTV-LOL", "AAC2.0", "DD+5.1", "10bit", "REPACK", "PROPER", "iNTERNAL", "WEB.DL", "x264-mSD", "HEVC-PSA", "BDRip", "480p", "2160p", "4K", "HDR")
     private val langs = listOf("" to "", "" to "", "VOSTFR" to " [VOSTFR]", "FRENCH" to "", "MULTi" to " [MULTI]", "TRUEFRENCH" to "", "VF" to "")
 
+    private val STRONG = setOf("WEB DL", "Blu-Ray", "H 264", "HDTV-LOL", "AAC2.0", "DD+5.1", "10bit", "WEB.DL", "x264-mSD", "HEVC-PSA", "BDRip", "480p", "2160p", "4K", "HDR")
     private fun nfd(s: String) = Normalizer.normalize(s, Normalizer.Form.NFD)
 
     fun series(): GCase {
@@ -44,7 +45,7 @@ class CorpusGenHard(seed: Long, private val pools: Pools) {
         if (chance(0.15)) base = base.trim() + " "
         val ext = pick(vexts)
         val name = "${Normalizer.normalize(title, Normalizer.Form.NFC)}${Namer.SEP}$exp${lang.second}.${ext.lowercase()}"
-        return GCase("hard-series", Case("${base.trim()}.$ext", name, "Séries/$title/Saison ${pad(sn)}", Kind.SERIES))
+        return GCase("hard-series", Case("${base.trim()}.$ext", name, "Séries/${title.trimEnd('.')}/Saison ${pad(sn)}", Kind.SERIES))
     }
 
     fun digitsSeries(): GCase {
@@ -53,7 +54,7 @@ class CorpusGenHard(seed: Long, private val pools: Pools) {
         val sep = pick(listOf(".", " ", "_"))
         val ext = pick(vexts)
         val base = title.replace(' ', sep[0]) + sep + "S${pad(sn)}E${pad(ep)}" + sep + pick(listOf("720p", "1080p.WEB.H264", "HDTV.x264", "FRENCH.720p"))
-        return GCase("hard-digits", Case("$base.$ext", "$title${Namer.SEP}S${pad(sn)}E${pad(ep)}.${ext.lowercase()}", "Séries/$title/Saison ${pad(sn)}", Kind.SERIES))
+        return GCase("hard-digits", Case("$base.$ext", "$title${Namer.SEP}S${pad(sn)}E${pad(ep)}.${ext.lowercase()}", "Séries/${title.trimEnd('.')}/Saison ${pad(sn)}", Kind.SERIES))
     }
 
     fun movie(): GCase {
@@ -65,7 +66,9 @@ class CorpusGenHard(seed: Long, private val pools: Pools) {
         val (t, y) = if (useNum) numbered else title to year
         val sep = pick(listOf(".", " ", "_"))
         val noYear = chance(0.1) && !useNum
-        val tags = (0 until r.nextInt(1, 4)).map { pick(oddTags) }.joinToString(sep) { it.replace(' ', sep[0]) }
+        val picked = (0 until r.nextInt(1, 4)).map { pick(oddTags) }.toMutableList()
+        if (noYear && picked.none { it in STRONG }) picked += "1080p"      // a name with neither a year nor a quality tag is not recognisable as a film
+        val tags = picked.joinToString(sep) { it.replace(' ', sep[0]) }
         val parts = ArrayList<String>()
         parts += t.replace(' ', sep[0])
         if (!noYear) parts += pick(listOf("$y", "($y)", "[$y]", "- $y"))

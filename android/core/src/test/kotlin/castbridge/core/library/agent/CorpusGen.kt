@@ -97,7 +97,11 @@ class CorpusGen(seed: Long, private val pools: Pools) {
     private val langs = listOf(Lang("", ""), Lang("", ""), Lang("", ""), Lang("VF", ""), Lang("FRENCH", ""), Lang("TRUEFRENCH", ""), Lang("VOSTFR", " [VOSTFR]"), Lang("vostfr", " [VOSTFR]"),
         Lang("MULTi", " [MULTI]"), Lang("MULTI", " [MULTI]"), Lang("SUBFRENCH", " [VOSTFR]"))
 
-    private fun style(title: String, sep: String, cs: Int): String {
+    private val SMALL_ALL = setOf("a", "an", "the", "of", "and", "in", "on", "at", "to", "for", "or", "de", "du", "des", "la", "le", "les", "un", "une", "et", "au", "aux", "en", "sur", "d", "l", "à")
+    /** Only titles written in Title Case can be rendered in lower / upper case and be expected back in Title Case. */
+    private fun titleCased(t: String) = t.split(' ').withIndex().all { (i, w) -> w.isEmpty() || w[0].isUpperCase() || w[0].isDigit() || (i > 0 && w.lowercase() in SMALL_ALL) }
+    private fun style(title: String, sep: String, cs0: Int): String {
+        val cs = if (cs0 != 0 && titleCased(title) && !title.contains('\'')) cs0 else 0
         val t = when (cs) { 1 -> title.lowercase(); 2 -> title.uppercase(); else -> title }
         return t.split(' ').joinToString(sep)
     }
@@ -155,7 +159,7 @@ class CorpusGen(seed: Long, private val pools: Pools) {
             2 -> "$title.ep.$ep.${if (lang == "VOSTFR") "vostfr." else ""}$q"
             else -> "$title Episode $ep" + (if (lang == "VOSTFR") " VOSTFR" else "") + " $q"
         }.let { if (form >= 2) it.replace(' ', if (form == 2) '.' else ' ') else it }
-        val tag = if (lang == "VOSTFR" && form >= 2) " [VOSTFR]" else if (lang == "VOSTFR" && form < 2) " [VOSTFR]" else ""
+        val tag = if (lang == "VOSTFR" && form != 1) " [VOSTFR]" else ""
         return GCase("anime", Case("$base.$ext", "$title${Namer.SEP}E${pad(ep)}$tag.$ext", "Séries/$title", Kind.SERIES))
     }
 

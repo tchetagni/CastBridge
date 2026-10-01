@@ -38,6 +38,6 @@ class FrozenCorpusTest {
 
     companion object {
         /** Lowest rate accepted (a regression guard, not a target). Raised only with the measured result. */
-        const val FLOOR = 0.0
+        const val FLOOR = 0.99
     }
 }
