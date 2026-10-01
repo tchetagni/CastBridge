@@ -28,7 +28,7 @@ class LicenseScopeAndAuditTest extends LicenseTestBase {
 
     @Test
     void serverKeyScopeIsFixedInCode() {
-        assertThat(ScopedActivationSigner.SERVER_SCOPES).containsExactlyInAnyOrder(SignerScope.ISSUE_TRIAL, SignerScope.ISSUE_PRODUCTION, SignerScope.REVOKE, SignerScope.REGISTRY)
+        assertThat(ScopedActivationSigner.SERVER_SCOPES).containsExactlyInAnyOrder(SignerScope.ISSUE_TRIAL, SignerScope.ISSUE_PRODUCTION, SignerScope.REACTIVATE, SignerScope.REVOKE, SignerScope.REGISTRY, SignerScope.POLICY)
                 .doesNotContain(SignerScope.TRANSFER, SignerScope.COMMAND_OPEN_ALL, SignerScope.COMMAND_UNLOCK, SignerScope.COMMAND_SUPPORT);
         assertThatThrownBy(() -> ScopedActivationSigner.SERVER_SCOPES.add(SignerScope.TRANSFER)).isInstanceOf(UnsupportedOperationException.class);
         assertThat(activations.serverKinds()).containsExactlyInAnyOrder("TRIAL", "PRODUCTION");

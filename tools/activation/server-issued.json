@@ -1,0 +1,132 @@
+{
+  "format" : "castbridge-server-issued-v1",
+  "warning" : "Produit par le code du SERVEUR (backend, module licenses) avec la clé de TEST « server » de test-vectors.json : aucun secret. Vérifié par ServerIssuedActivationTest (core) avec le vrai ActivationVerifier.",
+  "nowMs" : 1800000000000,
+  "server" : {
+    "name" : "server",
+    "publicKey" : "NkwlTOU+5giijtjEeVIUX8OpzDb0s1OGSMIRxZcy4u4=",
+    "kid" : "ce202dfdbe57b99a",
+    "scopes" : [ "ISSUE_PRODUCTION", "ISSUE_TRIAL", "POLICY", "REACTIVATE", "REGISTRY", "REVOKE" ]
+  },
+  "cases" : [ {
+    "type" : "activation",
+    "id" : "server-trial",
+    "device" : "tvA",
+    "fingerprints" : {
+      "FLASH" : "c48cacd81b9663d0ba97c221cbd17f4f",
+      "ETHERNET" : "f91efd89e0025c2262da12cfbed43632",
+      "WIFI" : "ea8b552e2240bbdd8c88c42313c4deab",
+      "SYSTEM_SERIAL" : "774beacbf351b0d205f9166669e4d3c7",
+      "BLUETOOTH" : "d365ea67e00585edaf8bef4d7378850d"
+    },
+    "subject" : "tv",
+    "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWNlMjAyZGZkYmU1N2I5OWEKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTkxMzYwMDAwMApleHBpcmVzQXQ9MTgyNTgzMzYwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD10cmlhbApzdWJqZWN0PXR2CmxpY2Vuc2U9dHJpYWwKc2VhdD0zODliNTgzYWI2YmVhODU2.FWnSE1PKcIFwsbppWZKlki3/Z7ECqloMTTkSKoPuAqdVg3L5IXbVVTS7kmzLH7gZdCDXH+51M0GiW7TMCYFZAw==",
+    "expect" : {
+      "kind" : "trial",
+      "license" : "trial",
+      "seat" : "389b583ab6bea856",
+      "rights" : [ ]
+    }
+  }, {
+    "type" : "activation",
+    "id" : "server-production-purchase",
+    "device" : "tvA",
+    "fingerprints" : {
+      "FLASH" : "c48cacd81b9663d0ba97c221cbd17f4f",
+      "ETHERNET" : "f91efd89e0025c2262da12cfbed43632",
+      "WIFI" : "ea8b552e2240bbdd8c88c42313c4deab",
+      "SYSTEM_SERIAL" : "774beacbf351b0d205f9166669e4d3c7",
+      "BLUETOOTH" : "d365ea67e00585edaf8bef4d7378850d"
+    },
+    "subject" : "tv",
+    "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWNlMjAyZGZkYmU1N2I5OWEKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTkxMzYwMDAwMApleHBpcmVzQXQ9MTgyNTgzMzYwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMA.z0aDv7OgR6j+W2UbkCA8Zl3ZXTOumaYaX0odltXXOg32eCk2RleNkKSNvLPw2h+N3xcQrfxUg+meErRrl1OVDg==",
+    "expect" : {
+      "kind" : "production",
+      "license" : "lic-0001",
+      "seat" : "f36757c226dd2ee4",
+      "rights" : [ "purchase|p-classe-cm2|classe-cm2|1799136000000" ]
+    }
+  }, {
+    "type" : "activation",
+    "id" : "server-production-subscription",
+    "device" : "tvA",
+    "fingerprints" : {
+      "FLASH" : "c48cacd81b9663d0ba97c221cbd17f4f",
+      "ETHERNET" : "f91efd89e0025c2262da12cfbed43632",
+      "WIFI" : "ea8b552e2240bbdd8c88c42313c4deab",
+      "SYSTEM_SERIAL" : "774beacbf351b0d205f9166669e4d3c7",
+      "BLUETOOTH" : "d365ea67e00585edaf8bef4d7378850d"
+    },
+    "subject" : "tv",
+    "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWNlMjAyZGZkYmU1N2I5OWEKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9ZmZlZWRkY2NiYmFhOTk4ODc3NjY1NTQ0MzMyMjExMDAKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTkxMzYwMDAwMApleHBpcmVzQXQ9MTgyNTgzMzYwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMApyaWdodD1zdWJzY3JpcHRpb258YWJvLXRvdXR8dG91dHwxNzk5OTEzNjAwMDAwfDE4MDc3NzYwMDAwMDB8NjA0ODAwMDAwfDA.vfL5z5OWsesbDDEhKZKRIcKCCmV1rRrW6Hp2JG4pAuPyQLRDXaeaizzkmV+FHfUuTshCBfQELrRSSST88RS+CQ==",
+    "expect" : {
+      "kind" : "production",
+      "license" : "lic-0001",
+      "seat" : "f36757c226dd2ee4",
+      "rights" : [ "purchase|p-classe-cm2|classe-cm2|1799136000000", "subscription|abo-tout|tout|1799913600000|1807776000000|604800000|0" ]
+    }
+  }, {
+    "type" : "activation",
+    "id" : "server-phone",
+    "device" : "phoneP",
+    "fingerprints" : {
+      "SYSTEM_SERIAL" : "bf398694573db9e7d052b335b1c51e10"
+    },
+    "subject" : "phone",
+    "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWNlMjAyZGZkYmU1N2I5OWEKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTkxMzYwMDAwMApleHBpcmVzQXQ9MTgyNTgzMzYwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9MQpmYWN0b3I9U1lTVEVNX1NFUklBTHxiZjM5ODY5NDU3M2RiOWU3ZDA1MmIzMzViMWM1MWUxMAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD1waG9uZQpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9YzQ3NDFmOWNhYjIxYTMzMwpyaWdodD1wdXJjaGFzZXxwLWNsYXNzZS1jbTJ8Y2xhc3NlLWNtMnwxNzk5MTM2MDAwMDAw.JDrJ6B9IsWnoCd9pfpm71y34vjK3MsOB7pfQfWR3EWFQccB/S+E5AoRmiUtNgC91+ogA+Sj+YH3J/44cV+tpDg==",
+    "expect" : {
+      "kind" : "production",
+      "license" : "lic-0001",
+      "seat" : "c4741f9cab21a333",
+      "rights" : [ "purchase|p-classe-cm2|classe-cm2|1799136000000" ]
+    }
+  }, {
+    "type" : "activation",
+    "id" : "server-reissue-module-replaced",
+    "device" : "tvA-swapped-wifi",
+    "fingerprints" : {
+      "FLASH" : "c48cacd81b9663d0ba97c221cbd17f4f",
+      "ETHERNET" : "f91efd89e0025c2262da12cfbed43632",
+      "WIFI" : "3b3be8657cfa25b97f464ec3d62efb8e",
+      "SYSTEM_SERIAL" : "774beacbf351b0d205f9166669e4d3c7",
+      "BLUETOOTH" : "d365ea67e00585edaf8bef4d7378850d"
+    },
+    "subject" : "tv",
+    "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWNlMjAyZGZkYmU1N2I5OWEKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YWFiYmNjZGRlZWZmMDAxMTIyMzM0NDU1NjY3Nzg4OTkKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTkxMzYwMDAwMApleHBpcmVzQXQ9MTgyNTgzMzYwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfDNiM2JlODY1N2NmYTI1Yjk3ZjQ2NGVjM2Q2MmVmYjhlCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMA.wKxGoFmlNG1G0jb3tz39L3cK7fMUrAO5rGehzbDvZD4J9sNPpkgK/HltkatTubFgOq/7gZL24RNucor3wRt0BQ==",
+    "expect" : {
+      "kind" : "production",
+      "license" : "lic-0001",
+      "seat" : "f36757c226dd2ee4",
+      "rights" : [ "purchase|p-classe-cm2|classe-cm2|1799136000000" ]
+    }
+  }, {
+    "type" : "revocation",
+    "id" : "server-revocation",
+    "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXJldm9jYXRpb24Ka2lkPWNlMjAyZGZkYmU1N2I5OWEKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAwMDAwMDAxYTMxODVjNTAwMAppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODMxNjIyNDAwMDAwCnRhcmdldD1hbnkKLS0Ka2V5PWRmOWU3YzBkOGNjMjgwOWQKc2VhdD1saWMtMDAwMXxmMzY3NTdjMjI2ZGQyZWU0fDE4MDAwMDAwMDAwMDA.utjHUyMW6gfctN+ZKPkihfn0zTPlA1ewzgunpGXnBoU4fDU8n6FVGhqvkO8vwxHL5kEiCimO+FXsycmmj2U8DA==",
+    "expect" : {
+      "keys" : [ "df9e7c0d8cc2809d" ],
+      "seats" : {
+        "lic-0001|f36757c226dd2ee4" : 1800000000000
+      }
+    }
+  }, {
+    "type" : "order",
+    "id" : "server-order",
+    "device" : "tvA",
+    "fingerprints" : {
+      "FLASH" : "c48cacd81b9663d0ba97c221cbd17f4f",
+      "ETHERNET" : "f91efd89e0025c2262da12cfbed43632",
+      "WIFI" : "ea8b552e2240bbdd8c88c42313c4deab",
+      "SYSTEM_SERIAL" : "774beacbf351b0d205f9166669e4d3c7",
+      "BLUETOOTH" : "d365ea67e00585edaf8bef4d7378850d"
+    },
+    "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPW9yZGVyCmtpZD1jZTIwMmRmZGJlNTdiOTlhCnNlcT0xMApub25jZT0wMTAyMDMwNDA1MDYwNzA4Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKZXhwaXJlc0F0PTE4MDI1OTIwMDAwMDAKdGFyZ2V0PWFueQotLQphY3Rpb249cmVmcmVzaC1yaWdodHMKcGFyYW09cmVhc29ufHBlcmlvZGlj.yoaQ2nCAhqBqYQzi2Jizr+NEHBG/+TzEhv8sGPCy+erB2e4u6JrUNdl7w2FldaKeiKwVf9J8sBss6TUM/bw7Cw==",
+    "expect" : {
+      "action" : "refresh-rights",
+      "params" : {
+        "reason" : "periodic"
+      },
+      "seq" : 10
+    }
+  } ]
+}
