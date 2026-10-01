@@ -36,6 +36,15 @@ class LotManifestTest {
         assertFailsWith<IllegalArgumentException> { LotManifest.parse("{}") }
     }
 
+    /** Built and signed by the server (backend LotsApiTest / LotCatalog.java, RFC 8032 test key 1): both sides build the same payload. */
+    @Test fun verifiesACatalogSignedByTheServer() {
+        val fixture = """{"channel":"stable","feature":"learn","generatedAt":"2026-10-01T13:05:24+01:00","lots":[{"feature":"learn","scope":"fx1","version":3,"bytes":6247,"sha256":"c599ce1dac301011732f3be6b2708958b2d6dcdd833811b9042f2b7cb545a7b3","title":"Apprendre « fx1 »","minAppVersion":0}],"keyId":"21fe31dfa154a261","signature":"TSo2cSUD5ePqLQePMPhwQBzuwn8TyKhFYNl41lg1CSyflVwj5MG7uxEbLYf7mS8+eQAjIjkpIMELWViiMPZIBw=="}"""
+        val c = LotManifest.parse(fixture)
+        assertTrue(c.signatureValid("11qYAYKxCrfVS/7TyWQHOg7hcvPapiMlrwIaaPcHURo="), c.canonicalPayload())
+        assertFalse(c.copy(lots = c.lots.map { it.copy(bytes = it.bytes + 1) }).signatureValid("11qYAYKxCrfVS/7TyWQHOg7hcvPapiMlrwIaaPcHURo="))
+        assertEquals(LotId("learn", "fx1"), c.lots.single().id); assertEquals("Apprendre « fx1 »", c.lots.single().title)
+    }
+
     @Test fun lotNames() {
         assertEquals("castbridge-lot-learn-cm2-v3.lot", LotNames.fileName(ma))
         assertEquals(LotId("learn", "cm2") to 3, LotNames.parseFileName("castbridge-lot-learn-cm2-v3.lot"))
