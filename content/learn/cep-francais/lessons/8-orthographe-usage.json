@@ -1,0 +1,523 @@
+{
+ "chapter": "cep-francais-usage",
+ "lessons": [
+  {
+   "id": "cep-francais-orthographe-usage",
+   "title": "L'orthographe d'usage : les mots à retenir",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Orthographe lexicale — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Écrire correctement les mots courants (m devant b, m, p ; ç ; ge).",
+    "Distinguer des mots proches (poisson / poison, désert / dessert).",
+    "Utiliser la famille du mot pour trouver une lettre finale muette."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-francais-orthographe-usage-01",
+    "cep-francais-orthographe-usage-02",
+    "cep-francais-orthographe-usage-03",
+    "cep-francais-orthographe-usage-04",
+    "cep-francais-orthographe-usage-05",
+    "cep-francais-orthographe-usage-06"
+   ],
+   "selfCheck": [
+    "cep-francais-orthographe-usage-q1",
+    "cep-francais-orthographe-usage-q2",
+    "cep-francais-orthographe-usage-q3",
+    "cep-francais-orthographe-usage-q4",
+    "cep-francais-orthographe-usage-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la liste des exceptions (bonbon, bonbonne, néanmoins) et le choix des mots de référence.",
+    "Contrôler la règle « g devant a, o » (verbes en -ger au présent, 1re personne du pluriel)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les règles qui aident",
+     "md": "- Devant **b, m, p**, on écrit **m** et non n : lampe, nombre, emmener, pompier.\n  Exceptions : bonbon, bonbonne, néanmoins.\n- **ç** (c cédille) devant **a, o, u** pour faire le son [s] : garçon, leçon, reçu.\n- **g** devant **a, o** : on ajoute **e** pour le son [j] : mangeons, nageons, plongeon."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 15,
+        "y": 15,
+        "w": 140,
+        "h": 120,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 15,
+        "w": 140,
+        "h": 120,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 325,
+        "y": 15,
+        "w": 140,
+        "h": 120,
+        "stroke": "orange",
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 38,
+        "text": "m devant b, m, p",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 68,
+        "text": "lampe",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 92,
+        "text": "nombre",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 116,
+        "text": "emmener",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 38,
+        "text": "ç devant a, o, u",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 68,
+        "text": "garçon",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 92,
+        "text": "leçon",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 116,
+        "text": "reçu",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 38,
+        "text": "g devant a, o",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 68,
+        "text": "mangeons",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 92,
+        "text": "nageons",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 116,
+        "text": "plongeon",
+        "size": 15,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Trois règles d'orthographe d'usage.",
+     "alt": "Trois cartes colorées. La première rappelle m devant b, m, p avec lampe, nombre, emmener. La deuxième rappelle ç devant a, o, u avec garçon, leçon, reçu. La troisième rappelle ge devant a ou o avec mangeons, nageons, plongeon."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Trouver la lettre muette finale",
+     "md": "Pour savoir si un mot finit par une lettre muette, je cherche un mot de la **même famille** ou le **féminin** :\n\n- grand → grande (on entend le d) ;\n- un chant → chanter ;\n- un plomb → plomber ;\n- un tapis → tapisser.\n\nSi le doute persiste, je consulte le dictionnaire."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : m ou n ?",
+     "statement": "Complète avec m ou n : « une la…pe, un co…bat, un po…pier, un bo…bon ».",
+     "steps": [
+      {
+       "md": "**lampe** : devant p, on écrit m."
+      },
+      {
+       "md": "**combat** : devant b, on écrit m."
+      },
+      {
+       "md": "**pompier** : devant p, on écrit m."
+      },
+      {
+       "md": "**bonbon** : exception, on garde n devant b."
+      }
+     ],
+     "answer": "**lampe, combat, pompier, bonbon**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : c ou ç, g ou ge",
+     "statement": "Écris correctement : « Le gar…on a re…u une le…on. Nous (manger) du manioc. »",
+     "steps": [
+      {
+       "md": "**garçon**, **reçu**, **leçon** : le c devant o ou u devient ç pour faire [s]."
+      },
+      {
+       "md": "**nous mangeons** : on ajoute e après g devant o pour garder le son [j]."
+      }
+     ],
+     "answer": "**Le garçon a reçu une leçon. Nous mangeons du manioc.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire *ponpier* ou *lanpe* : m devant p.\n- Confondre **poisson** (animal) et **poison** (substance dangereuse).\n- Confondre **désert** (sans eau) et **dessert** (plat sucré, deux s).\n- Écrire *nous mangons* : il faut **mangeons**.\n- Écrire *comencer* : on double le **m** : commencer."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-orthographe-usage-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-orthographe-usage-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-orthographe-usage-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-orthographe-usage-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-orthographe-usage-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-orthographe-usage-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est bien orthographié ?",
+   "choices": [
+    "ponpier",
+    "pompié",
+    "pompier",
+    "pomppier"
+   ],
+   "answer": 2,
+   "explanation": "Devant p, on écrit m : pompier.",
+   "id": "cep-francais-orthographe-usage-01",
+   "chapter": "cep-francais-usage",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "« Nous mangons du manioc » est bien écrit.",
+   "answer": false,
+   "explanation": "Il faut écrire **mangeons** : e après g devant o.",
+   "id": "cep-francais-orthographe-usage-02",
+   "chapter": "cep-francais-usage",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque définition au bon mot.",
+   "pairs": [
+    [
+     "Endroit sans eau ni plantes",
+     "un désert"
+    ],
+    [
+     "Plat sucré à la fin du repas",
+     "un dessert"
+    ],
+    [
+     "Animal qui vit dans l'eau",
+     "un poisson"
+    ],
+    [
+     "Substance dangereuse",
+     "un poison"
+    ]
+   ],
+   "explanation": "Désert (un s) / dessert (deux s) ; poisson (animal) / poison (danger).",
+   "points": 2,
+   "id": "cep-francais-orthographe-usage-03",
+   "chapter": "cep-francais-usage",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est correcte au présent : « Nous (nager) dans le fleuve. » ?",
+   "choices": [
+    "nous nagons",
+    "nous nageons",
+    "nous nagions",
+    "nous nageont"
+   ],
+   "answer": 1,
+   "explanation": "Devant o, le g prend un e : nageons.",
+   "mistakes": [
+    "Écrire « nous nagons » : le son est [j], il faut le e."
+   ],
+   "id": "cep-francais-orthographe-usage-04",
+   "chapter": "cep-francais-usage",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Corrige les erreurs : « Le garson a recu une leson de calcule. »",
+   "model": "Le garçon a reçu une leçon de calcul.",
+   "rubric": [
+    "garçon (ç)",
+    "reçu (ç)",
+    "leçon (ç)",
+    "calcul (sans e)"
+   ],
+   "explanation": "Cédille devant o et u ; « calcul » s'écrit sans e final (famille : calculer).",
+   "points": 2,
+   "id": "cep-francais-orthographe-usage-05",
+   "chapter": "cep-francais-usage",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Orthographe d'usage.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel mot est bien écrit ?",
+     "choices": [
+      "nombre",
+      "nonbre",
+      "nomre",
+      "nombbre"
+     ],
+     "answer": 0,
+     "explanation": "Devant b, on écrit m.",
+     "id": "cep-francais-orthographe-usage-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Complète : « une le…on » ",
+     "choices": [
+      "lecon",
+      "leson",
+      "leçson",
+      "leçon"
+     ],
+     "answer": 3,
+     "explanation": "Devant o, le c devient ç : leçon.",
+     "id": "cep-francais-orthographe-usage-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "« Un dessert » s'écrit avec deux s.",
+     "answer": true,
+     "explanation": "dessert : deux s ; désert : un seul s.",
+     "id": "cep-francais-orthographe-usage-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle phrase est correcte ?",
+     "choices": [
+      "Les garçons nagent dans le fleuve poison.",
+      "Les garsons nagent dans le fleuve.",
+      "Les garçons nagent dans le fleuve.",
+      "Les garçons nagon dans le fleuve."
+     ],
+     "answer": 2,
+     "explanation": "Garçons avec ç, nagent avec -ent (verbe au pluriel).",
+     "id": "cep-francais-orthographe-usage-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Règles m/b/p, ç, ge ; famille du mot.",
+   "id": "cep-francais-orthographe-usage-06",
+   "chapter": "cep-francais-usage",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot s'écrit avec ç ?",
+   "choices": [
+    "ceci",
+    "reçu",
+    "cinéma",
+    "certain"
+   ],
+   "answer": 1,
+   "explanation": "Devant u, le c doit être ç pour faire [s] : reçu.",
+   "id": "cep-francais-orthographe-usage-q1",
+   "chapter": "cep-francais-usage",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour écrire un mot se terminant par une lettre muette, on...",
+   "choices": [
+    "cherche le féminin ou un mot de la famille",
+    "écrit au hasard",
+    "met toujours -s",
+    "met toujours -t"
+   ],
+   "answer": 0,
+   "explanation": "On entend la lettre dans le dérivé : grand → grande.",
+   "id": "cep-francais-orthographe-usage-q2",
+   "chapter": "cep-francais-usage",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est une exception à la règle « m devant b, m, p » ?",
+   "choices": [
+    "lampe",
+    "nombre",
+    "emmener",
+    "bonbon"
+   ],
+   "answer": 3,
+   "explanation": "Bonbon garde n devant b.",
+   "id": "cep-francais-orthographe-usage-q3",
+   "chapter": "cep-francais-usage",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est correct ?",
+   "choices": [
+    "comencer",
+    "commancer",
+    "commencer",
+    "comancer"
+   ],
+   "answer": 2,
+   "explanation": "Commencer : deux m, puis -en-.",
+   "id": "cep-francais-orthographe-usage-q4",
+   "chapter": "cep-francais-usage",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment écrit-on « nous (voyager) » au présent ?",
+   "choices": [
+    "nous voyagons",
+    "nous voyageons",
+    "nous voyageont",
+    "nous voyajons"
+   ],
+   "answer": 1,
+   "explanation": "Devant o, ge : voyageons.",
+   "id": "cep-francais-orthographe-usage-q5",
+   "chapter": "cep-francais-usage",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-orthographe-usage",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}
