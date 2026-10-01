@@ -29,6 +29,7 @@ class PairingSession(
     private val lock = Object()
     private var state: State = State.Closed
     private var decision: Boolean? = null
+    private var generation = 0
     private val denials = HashMap<String, Pair<Int, Long>>()    // address -> (count, blocked until)
     private val listeners = java.util.concurrent.CopyOnWriteArrayList<(State) -> Unit>()
 
@@ -73,25 +74,32 @@ class PairingSession(
     fun ask(address: String, rawName: String): Decision {
         val a = TrustRegistry.norm(address)
         val name = PhoneName.sanitize(rawName)
+        var myGen = 0
         synchronized(lock) {
             expire()
             denials[a]?.let { (_, until) -> if (until > now()) return Decision.BLOCKED }
-            when (val s = state) {
+            // The same phone asking again (its link dropped while it waited, the old thread is stuck on a dead socket) takes the request over;
+            // another phone is told to wait.
+            val until = when (val s = state) {
                 State.Closed -> return Decision.NOT_OPEN
-                is State.Asking -> return Decision.BUSY
-                is State.Open -> state = State.Asking(a, name, now() + approvalMs, s.until)
+                is State.Asking -> if (s.address == a) s.until else return Decision.BUSY
+                is State.Open -> s.until
             }
+            state = State.Asking(a, name, now() + approvalMs, until)
             decision = null
+            myGen = ++generation
+            lock.notifyAll()
         }
         publish()
         val limit = System.nanoTime() + approvalMs * 1_000_000
         var result: Boolean? = null
         synchronized(lock) {
-            while (decision == null) {
+            while (decision == null && generation == myGen) {
                 val left = (limit - System.nanoTime()) / 1_000_000
                 if (left <= 0) break
                 lock.wait(left)
             }
+            if (generation != myGen) return Decision.BUSY       // taken over by a newer request of the same phone: it owns the state now
             result = decision
             val until = (state as? State.Asking)?.until ?: 0
             decision = null

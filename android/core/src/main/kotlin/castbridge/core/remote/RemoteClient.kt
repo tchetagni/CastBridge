@@ -136,8 +136,8 @@ class HttpRemoteTransport(
         connect()
         try {
             val path = "/api/remote/$route" + if (query.isNotEmpty()) "?$query" else ""
-            val auth = castbridge.core.trust.TvAuth.header(pin).let { (k, v) -> "$k: $v" }
-            val req = "$method $path HTTP/1.1\r\nHost: $host:$port\r\n$auth\r\nContent-Length: 0\r\nConnection: keep-alive\r\n\r\n"
+            val auth = castbridge.core.trust.TvCredential.headerLine(pin)?.plus("\r\n").orEmpty()   // PIN or token header; an unusable credential never leaves the phone
+            val req = "$method $path HTTP/1.1\r\nHost: $host:$port\r\n${auth}Content-Length: 0\r\nConnection: keep-alive\r\n\r\n"
             output!!.write(req.toByteArray(Charsets.UTF_8)); output!!.flush()
             val r = Http1.readResponse(input!!)
             if (r.close) close()

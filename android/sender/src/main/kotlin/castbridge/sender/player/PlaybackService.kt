@@ -21,6 +21,7 @@ import androidx.media3.session.LibraryResult
 import androidx.media3.session.MediaLibraryService
 import androidx.media3.session.MediaSession
 import castbridge.core.phone.ResumeBook
+import castbridge.sender.TvLinkManager
 import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
@@ -47,8 +48,12 @@ class PlaybackService : MediaLibraryService() {
             .setConnectTimeoutMs(10_000).setReadTimeoutMs(20_000)
         // The TV's /stream/ route wants its PIN: added only for the TV hosts registered in TvStreamAuth.
         val upstream = ResolvingDataSource.Factory(DefaultDataSource.Factory(this, http)) { spec: DataSpec ->
-            val pin = spec.uri.host?.let { TvStreamAuth.pins[it] }
-            if (pin != null) spec.withAdditionalHeaders(mapOf(castbridge.core.trust.TvAuth.header(pin))) else spec
+            // asked at every request: a token renewed while a long film plays is picked up, never the one that was current when playback started
+            val host = spec.uri.host
+            val live = host?.let { h -> TvLinkManager.savedForHost(h)?.let { TvLinkManager.credentialFor("bt:${it.address}") } }
+            val pin = live ?: host?.let { TvStreamAuth.pins[it] }
+            val auth = runCatching { castbridge.core.trust.TvCredential.headers(pin) }.getOrDefault(emptyMap())
+            if (auth.isNotEmpty()) spec.withAdditionalHeaders(auth) else spec
         }
         val p = ExoPlayer.Builder(this)
             .setRenderersFactory(DefaultRenderersFactory(this).setEnableDecoderFallback(true))

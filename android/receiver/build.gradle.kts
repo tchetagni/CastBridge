@@ -10,8 +10,8 @@ android {
         minSdk = 26
         targetSdk = 35
         // -Pcastbridge.versionCode / -Pcastbridge.versionName: build a higher version to test the automatic updates
-        versionCode = (project.findProperty("castbridge.versionCode") as String?)?.toInt() ?: 26
-        versionName = (project.findProperty("castbridge.versionName") as String?) ?: "0.13.2"
+        versionCode = (project.findProperty("castbridge.versionCode") as String?)?.toInt() ?: 27
+        versionName = (project.findProperty("castbridge.versionName") as String?) ?: "0.13.3"
         // For a LOCAL test server only (docs/API-SERVER.md, « Tester en local »): -Pcastbridge.serverUrl=http://10.0.2.2:7090 and
         // -Pcastbridge.extraUpdateKey=<its public key>. Both empty by default: the apps built for Esaie talk to
         // https://bridge.sti-cm.com and trust the production key alone (UpdateKeys).

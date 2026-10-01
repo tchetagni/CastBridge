@@ -302,7 +302,7 @@ private fun tvCall(base: String, pin: String, method: String, path: String): Str
     val c = URL(base + path).openConnection() as HttpURLConnection
     try {
         c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 30_000
-        castbridge.core.trust.TvAuth.header(pin).let { (k, v) -> c.setRequestProperty(k, v) }
+        castbridge.core.trust.TvCredential.apply(c, pin)
         if (method == "POST") { c.doOutput = true; c.setFixedLengthStreamingMode(0); c.outputStream.close() }
         val code = c.responseCode
         val text = (if (code < 400) c.inputStream else c.errorStream)?.bufferedReader()?.use { it.readText() }.orEmpty()

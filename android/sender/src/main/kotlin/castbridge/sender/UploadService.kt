@@ -116,7 +116,9 @@ class UploadService : Service() {
         var lastAttempt = 0L
         var prevSent = -1L
         val up = ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin,
-            target = job.target, onCheck = { _check.value = it })
+            target = job.target, onCheck = { _check.value = it },
+            // a token renewed while the transfer waits is picked up; one the TV refused is never sent again (core/.../TvClient.kt)
+            credential = { if (castbridge.core.trust.TvAuth.isToken(job.pin)) (TvLinkManager.credentialFor(job.tvName) ?: job.pin) else job.pin })
         val t0 = System.nanoTime(); var first = -1L
         val result = up.run { s ->
             if (s is ResumableUpload.State.Uploading) {

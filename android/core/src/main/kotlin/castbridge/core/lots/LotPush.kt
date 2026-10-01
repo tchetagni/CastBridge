@@ -109,7 +109,7 @@ class HttpLotTransport(private val base: String, private val pin: String?, overr
         val c = URL(base.trimEnd('/') + path).openConnection() as HttpURLConnection
         try {
             c.requestMethod = method; c.connectTimeout = timeoutMs; c.readTimeout = timeoutMs * 4
-            pin?.let { castbridge.core.trust.TvAuth.header(it).let { (k, v) -> c.setRequestProperty(k, v) } }   // never logged, never in the URL
+            castbridge.core.trust.TvCredential.apply(c, pin)   // the one place that builds the header; never logged, never in the URL
             if (method == "POST") {
                 c.doOutput = true
                 c.setFixedLengthStreamingMode(body?.size ?: 0)

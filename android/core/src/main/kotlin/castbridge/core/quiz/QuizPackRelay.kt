@@ -88,7 +88,7 @@ interface TvPackEndpoint {
 class HttpTvPackEndpoint(private val base: String, private val pin: String?) : TvPackEndpoint {
     private fun open(method: String, path: String) = (URL(base.trimEnd('/') + path).openConnection() as HttpURLConnection).apply {
         requestMethod = method; connectTimeout = 8_000; readTimeout = 30_000
-        pin?.let { setRequestProperty("X-CB-Pin", it) }
+        castbridge.core.trust.TvCredential.apply(this, pin)
     }
 
     override fun status(): TvPackStatus? = try {

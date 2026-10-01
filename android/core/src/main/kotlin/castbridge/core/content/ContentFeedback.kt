@@ -104,7 +104,7 @@ class ReportHandoffClient(private val base: String, private val credential: Stri
         val c = URL(base.trimEnd('/') + route).openConnection() as HttpURLConnection
         return try {
             c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 10_000
-            castbridge.core.trust.TvAuth.header(credential).let { (h, v) -> c.setRequestProperty(h, v) }
+            castbridge.core.trust.TvCredential.apply(c, credential)
             if (method == "POST") { c.doOutput = true; c.setFixedLengthStreamingMode(0) }
             if (c.responseCode in 200..299) c.inputStream.use { String(it.readBytes(), Charsets.UTF_8) } else null
         } catch (e: IOException) { null } finally { c.disconnect() }

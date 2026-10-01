@@ -23,6 +23,8 @@ interface BtTransport {
 data class SavedTv(
     val address: String, val name: String, val mdns: String? = null,
     val lastIps: List<String> = emptyList(), val port: Int = 8765, val addedAt: Long = 0,
+    /** Install id of the TV as last seen in a HELLO (see [castbridge.core.tv.HelloInfo.installId]); null = never seen / older TV. */
+    val installId: String? = null,
 )
 
 /** Everything a screen needs once a TV answered: where to talk to it, with which credential, until when. */
@@ -49,31 +51,30 @@ class PhoneLink(
         /** Bluetooth itself is unusable: off, no adapter, permission refused. */
         class BluetoothProblem(val reason: BtUnavailable.Reason) : Result()
         /** The TV did not answer (off, out of range, Bluetooth off on the TV...): try again later, silently. */
-        class TvAbsent(val why: String) : Result()
+        class TvAbsent(val why: String, val elapsedMs: Long = 0) : Result() {
+            /** Which kind of silence it was (for the state machine); [why] itself is never shown. */
+            val kind get() = AbsentKind.classify(why, elapsedMs)
+        }
         /** The TV answered "not you": [BtProtocol.ERR_UNTRUSTED] = forgotten or never added, [BtProtocol.ERR_DENIED] = refused by the owner... */
-        class Refused(val code: Int) : Result() {
+        class Refused(val code: Int, val hint: Int = BtProtocol.HINT_NONE) : Result() {
             val needsPairing get() = code == BtProtocol.ERR_UNTRUSTED
-            val message get() = when (code) {
-                BtProtocol.ERR_UNTRUSTED -> "La TV ne connaît plus ce téléphone : ajoutez-la à nouveau."
-                BtProtocol.ERR_DENIED -> "La TV a refusé ce téléphone."
-                BtProtocol.ERR_TIMEOUT -> "Personne n'a répondu sur la TV."
-                BtProtocol.ERR_NOT_OPEN -> "Sur la TV, ouvrez « Ajouter un téléphone » puis réessayez."
-                BtProtocol.ERR_BUSY -> "La TV attend déjà la réponse pour un autre téléphone."
-                BtProtocol.ERR_MAGIC -> "Cette TV n'a pas la dernière version de CastBridge TV."
-                else -> BtProtocol.describe(code)
-            }
+            /** The TV is another installation than the one this phone knew: it was reset or reinstalled. */
+            val tvWasReset get() = code == BtProtocol.ERR_UNTRUSTED && hint == BtProtocol.HINT_OTHER_INSTALL
+            val message get() = LinkText.refused(code, hint).detail
         }
     }
 
     /** One HELLO and the choice of route. [requestTrust] only from the « Ajouter ma TV » flow. */
     fun connect(tv: SavedTv, requestTrust: Boolean = false): Result {
+        val started = now()
         val info = try {
-            transport.connect(tv.address).use { l -> BtProtocol.hello(l.input, l.output, requestTrust) }
+            transport.connect(tv.address).use { l -> BtProtocol.hello(l.input, l.output, requestTrust, tv.installId) }
         } catch (e: BtUnavailable) { return Result.BluetoothProblem(e.reason)
-        } catch (e: BtProtocol.Refused) { return Result.Refused(e.code)
-        } catch (e: IOException) { return Result.TvAbsent(e.message ?: e.javaClass.simpleName) }
+        } catch (e: SecurityException) { return Result.BluetoothProblem(BtUnavailable.Reason.NO_PERMISSION)    // permission revoked while running
+        } catch (e: BtProtocol.Refused) { return Result.Refused(e.code, e.hint)
+        } catch (e: IOException) { return Result.TvAbsent(e.message ?: e.javaClass.simpleName, now() - started) }
         val route = LinkPlanner.plan(info.link, reachable, canJoinWifiDirect(), tunnelBase()).first()
-        val updated = tv.copy(name = info.tvName, mdns = info.mdns ?: tv.mdns, lastIps = info.link.ips.ifEmpty { tv.lastIps }, port = info.link.port)
+        val updated = tv.copy(name = info.tvName, mdns = info.mdns ?: tv.mdns, lastIps = info.link.ips.ifEmpty { tv.lastIps }, port = info.link.port, installId = info.installId ?: tv.installId)
         return Result.Connected(LinkSession(updated, route, info.token, now() + info.ttlSec * 1000, info))
     }
 }
@@ -141,7 +142,7 @@ class SavedTvs(private val persistence: TrustPersistence) {
         val sb = StringBuilder()
         defaultAddress?.let { sb.append("D\t").append(it).append('\n') }
         tvs.values.forEach { sb.append("S\t").append(it.address).append('\t').append(enc(it.name)).append('\t').append(enc(it.mdns ?: "")).append('\t')
-            .append(it.lastIps.joinToString(",")).append('\t').append(it.port).append('\t').append(it.addedAt).append('\n') }
+            .append(it.lastIps.joinToString(",")).append('\t').append(it.port).append('\t').append(it.addedAt).append('\t').append(it.installId.orEmpty()).append('\n') }
         runCatching { persistence.save(sb.toString()) }
     }
 
@@ -154,7 +155,7 @@ class SavedTvs(private val persistence: TrustPersistence) {
                 "S" -> {
                     val a = TrustRegistry.norm(f[1]); if (!TrustRegistry.isAddress(a)) return@runCatching
                     tvs[a] = SavedTv(a, PhoneName.sanitize(URLDecoder.decode(f[2], "UTF-8"), 60), URLDecoder.decode(f[3], "UTF-8").ifEmpty { null },
-                        f[4].split(',').filter { it.isNotEmpty() }, f[5].toInt(), f[6].toLong())
+                        f[4].split(',').filter { it.isNotEmpty() }, f[5].toInt(), f[6].toLong(), f.getOrNull(7)?.takeIf { it.matches(Regex("^[0-9a-f]{8,64}$")) })
                 }
             }
         }

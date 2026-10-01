@@ -70,7 +70,8 @@ class DownloadService : Service() {
         val meter = RateMeter()
         val t0 = System.nanoTime(); val start = sink.length()
         var last = 0L; var prev = start
-        val d = ResumableDownload(job.name, { job.base }, job.pin, { sink.length() }, { at -> sink.open(at) }, { cancelled })
+        val d = ResumableDownload(job.name, { job.base }, job.pin, { sink.length() }, { at -> sink.open(at) }, { cancelled },
+            credential = { if (castbridge.core.trust.TvAuth.isToken(job.pin)) (TvLinkManager.credentialForBase(job.base) ?: job.pin) else job.pin })
         val res = d.run { s ->
             if (s is ResumableDownload.State.Downloading) { meter.add((s.got - prev).coerceAtLeast(0)); prev = s.got }
             val now = System.currentTimeMillis()

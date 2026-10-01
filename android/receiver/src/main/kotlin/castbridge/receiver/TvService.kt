@@ -229,7 +229,7 @@ class TvService : Service(), Device {
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
             publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
-            tokenAuth = { tok -> trust.verifyToken(tok)?.also { a -> phoneSeen(a) } }, peers = btApi?.peers,
+            tokenAuth = { t -> trust.verifyToken(t)?.also { a -> phoneSeen(a); presence.seen(a) } }, peers = btApi?.peers,
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
             contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex)
         try {
@@ -273,7 +273,8 @@ class TvService : Service(), Device {
 
     private val helloHandler by lazy {
         castbridge.core.trust.HelloHandler(trust, pairing, ::btBonded, ::tvName, runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?",
-            { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(false) }) { p -> phoneConnected(p) }
+            { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(false) }, { p -> phoneConnected(p) }, castbridge.core.trust.AttemptLimiter(global = 40, perPeer = 10),
+            { name, d -> castbridge.core.trust.TvRefusals.message(name, d)?.let { notice(it); setStatus("1-phone", it) } })
     }
 
     fun btHello(peer: String, peerName: String?, requestTrust: Boolean) = helloHandler.handle(peer, peerName, requestTrust)
@@ -286,13 +287,19 @@ class TvService : Service(), Device {
         getSystemService(BluetoothManager::class.java)?.adapter?.getRemoteDevice(address)?.bondState == BluetoothDevice.BOND_BONDED
     }.getOrDefault(false)
 
+    /** Who is around, truthfully (« connecté », « liaison reprise », « téléphone déconnecté »): see castbridge.core.trust.PhonePresence. */
+    val presence = castbridge.core.trust.PhonePresence()
+
     /**
      * A trusted phone said hello over Bluetooth (CBTH): its icon appears in the status bar and stays while the phone keeps coming back
      * (the lease is renewed by every hello; the phone renews its token in the background). No banner: the icon is the signal.
      */
     private fun phoneConnected(p: castbridge.core.trust.TrustedPhone) {
         icons.up(castbridge.core.status.IconKind.PHONE, p.address, castbridge.core.status.Tech.BLUETOOTH, p.name, leaseMs = PHONE_LEASE_MS)
-        setStatus("1-phone", "Téléphone connecté : ${p.name}")
+        when (presence.seen(p.address, p.name)) {
+            castbridge.core.trust.PhonePresence.Event.RECONNECTED -> setStatus("1-phone", "Liaison reprise : ${p.name}")
+            else -> setStatus("1-phone", "Téléphone connecté : ${p.name}")
+        }
         iconsChanged()
     }
 

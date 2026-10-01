@@ -58,7 +58,7 @@ fun HandoffButton(fileUri: Uri?, fileName: String?, posSec: Long, durSec: Long, 
         if (tv == null) Text("Continuer sans réseau : aucune TV CastBridge trouvée.", style = MaterialTheme.typography.bodySmall)
         else {
             PinField(pins, tv.name, pin, { pin = it }, Modifier.fillMaxWidth())
-            OutlinedButton(enabled = !running && fileUri != null && fileName != null && Pin.isValidFormat(pin), onClick = {
+            OutlinedButton(enabled = !running && fileUri != null && fileName != null && castbridge.core.trust.TvCredential.isUsable(pin), onClick = {
                 running = true; status = "Envoi vers ${tv.name}…"
                 UploadService.start(ctx, fileUri!!, fileName!!, tv.name, null, pin, progressive = false, autoPlay = false)
             }) { Text("Continuer sur la TV sans réseau") }

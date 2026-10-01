@@ -3,7 +3,11 @@ package castbridge.sender
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.os.Process
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,13 +30,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import castbridge.core.trust.BtUnavailable
+import castbridge.core.trust.DiagReport
+import castbridge.core.trust.DiagStep
+import castbridge.core.trust.LinkAction
+import castbridge.core.trust.LinkMachine
+import castbridge.core.trust.LinkState
+import castbridge.core.trust.LinkView
+import castbridge.core.trust.PairStep
+import castbridge.core.trust.RouteKind
+import castbridge.core.trust.Tone
 import castbridge.core.trust.Candidates
 import castbridge.core.trust.SavedTv
 import castbridge.core.trust.TvCandidate
-import castbridge.core.tv.LinkPlanner
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /** Samsung "Dual App" / Secure Folder / work-profile copies run as another Android user and are refused Bluetooth access. */
 fun isSecondaryUserCopy() = Process.myUid() / 100000 != 0
@@ -40,45 +52,88 @@ fun isSecondaryUserCopy() = Process.myUid() / 100000 != 0
 private val GOOD = Color(0xFF35C08A)      // success, branding/design-tokens.json
 private val WARN = Color(0xFFF5B025)      // primary / warning
 
-/** One-line state of the plug-and-play link, with its indicator dot, for the home screen. */
+/** What a card shows when the link is not connected yet: the state machine's own wording, one button, steady (no flapping). */
+private val idleView = LinkMachine().view(LinkMachine.Model())
+
+/** State of the plug-and-play link, with its indicator dot, for the home screen. Text, tone and the single action come from [LinkView]. */
 @Composable
 fun TvLinkStatus(link: LinkUi, onAdd: () -> Unit, onManage: () -> Unit, modifier: Modifier = Modifier) {
     val cs = MaterialTheme.colorScheme
-    val (dot, title, sub) = when (link) {
-        LinkUi.NoTv -> Triple(cs.outline, "Aucune TV ajoutée", "Ajoutez votre TV : pas de code à saisir.")
-        is LinkUi.Connecting -> Triple(WARN, "Connexion à ${link.tv.name}…", "Recherche de la TV par Bluetooth")
-        is LinkUi.Connected -> Triple(GOOD, "${link.session.tv.name} connectée", when (link.session.route) {
-            is LinkPlanner.Route.Lan -> "Par le Wi-Fi de la maison"
-            is LinkPlanner.Route.Direct -> "Par Wi-Fi Direct"
-            is LinkPlanner.Route.BluetoothTunnel -> "Par Bluetooth (mêmes fonctions qu'en Wi-Fi, plus lent)"
-            else -> "Par Bluetooth seulement : plus lent (Wi-Fi différent ?)"
-        })
-        is LinkUi.Absent -> Triple(cs.outline, "${link.tv.name} est introuvable",
-            if (link.failures >= 3) "Allumez la TV et restez à proximité. Si vous avez réinstallé CastBridge-TV, réassociez la TV."
-            else "Allumez la TV et restez à proximité : la connexion est automatique.")
-        is LinkUi.Refused -> Triple(cs.error, link.tv.name, link.message)
-        is LinkUi.BluetoothProblem -> Triple(cs.error, "Bluetooth indisponible", when (link.reason) {
-            BtUnavailable.Reason.OFF -> "Activez le Bluetooth du téléphone."
-            BtUnavailable.Reason.NO_PERMISSION -> "Autorisez « Appareils à proximité » pour CastBridge."
-            BtUnavailable.Reason.NO_ADAPTER -> "Ce téléphone n'a pas de Bluetooth."
-        })
+    val ctx = LocalContext.current
+    var diag by remember { mutableStateOf(false) }
+    val view = when (link) {
+        LinkUi.NoTv -> idleView
+        is LinkUi.Connected -> link.view ?: LinkMachine().view(LinkMachine.Model(shown = LinkState.Connected(RouteKind.of(link.session.route), link.session.tv.name), tvName = link.session.tv.name))
+        is LinkUi.Status -> link.view
+    }
+    val tv: SavedTv? = when (link) { is LinkUi.Connected -> link.session.tv; is LinkUi.Status -> link.tv; else -> null }
+    val dot = when (view.tone) { Tone.GOOD -> GOOD; Tone.WARN -> WARN; Tone.BAD -> cs.error; Tone.NEUTRAL -> cs.outline }
+    fun startIt(intent: Intent) { runCatching { ctx.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } }
+    fun act(a: LinkAction) = when (a) {
+        LinkAction.ADD_TV, LinkAction.PAIR, LinkAction.ENTER_CODE -> onAdd()
+        LinkAction.REASSOCIATE -> { tv?.let { TvLinkManager.requestReassociate(it.address) }; onAdd() }
+        LinkAction.RETRY -> TvLinkManager.retryNow()
+        LinkAction.ENABLE_BLUETOOTH -> startIt(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE))
+        LinkAction.GRANT_PERMISSION -> startIt(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${ctx.packageName}")))
+        LinkAction.REMOVE_BOND -> startIt(Intent(Settings.ACTION_BLUETOOTH_SETTINGS))      // the documented way: removeBond() is unreliable on Android 14
+        LinkAction.NONE -> {}
     }
     Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.size(12.dp).clip(RoundedCornerShape(6.dp)).background(dot))
         Spacer(Modifier.width(10.dp))
         Column(Modifier.weight(1f)) {
-            Text(title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold, maxLines = 1)
-            Text(sub, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+            Text(view.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold, maxLines = 2)
+            Text(view.detail, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+            view.hint?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = WARN) }
         }
-        val needsAdd = link == LinkUi.NoTv || (link is LinkUi.Refused && link.needsPairing)
-        if (link is LinkUi.Absent && link.failures >= 3) {
-            // several failures in a row: most often the TV was reinstalled and forgot this phone: one tap forgets it and starts the pairing again
-            Column(horizontalAlignment = Alignment.End) {
-                Button(onClick = { TvLinkManager.forget(link.tv.address); onAdd() }) { Text("Réassocier") }
+        Column(horizontalAlignment = Alignment.End) {
+            if (view.action != LinkAction.NONE) Button(onClick = { act(view.action) }) { Text(view.action.label) }
+            Row {
                 TextButton(onClick = onManage) { Text("Mes TV") }
+                if (link != LinkUi.NoTv) TextButton(onClick = { diag = true }) { Text("Diagnostic") }
             }
-        } else TextButton(onClick = if (needsAdd) onAdd else onManage) { Text(if (needsAdd) "Ajouter" else "Mes TV") }
+        }
     }
+    if (diag) DiagnosticDialog(onDismiss = { diag = false })
+}
+
+/** « Diagnostic Bluetooth »: every step with OK / KO and the exact next action, and a copyable report without any secret. */
+@Composable
+fun DiagnosticDialog(onDismiss: () -> Unit) {
+    val ctx = LocalContext.current
+    val cs = MaterialTheme.colorScheme
+    val steps = remember { mutableStateListOf<DiagStep>() }
+    var report by remember { mutableStateOf<DiagReport?>(null) }
+    LaunchedEffect(Unit) { withContext(Dispatchers.IO) { report = TvLinkManager.diagnose { s -> steps.add(s) } } }
+    AlertDialog(onDismissRequest = onDismiss, title = { Text("Diagnostic Bluetooth") },
+        text = {
+            Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                steps.toList().forEach { st ->
+                    Row(verticalAlignment = Alignment.Top) {
+                        val (icon, tint) = when (st.status) {
+                            DiagStep.Status.OK -> Icons.Filled.CheckCircle to GOOD
+                            DiagStep.Status.KO -> Icons.Filled.ErrorOutline to cs.error
+                            DiagStep.Status.SKIPPED -> Icons.Filled.RemoveCircleOutline to cs.outline
+                            DiagStep.Status.INFO -> Icons.Filled.Info to cs.primary
+                        }
+                        Icon(icon, null, Modifier.size(20.dp), tint = tint); Spacer(Modifier.width(8.dp))
+                        Column {
+                            Text(st.label + if (st.detail.isNotEmpty()) " : " + st.detail else "", style = MaterialTheme.typography.bodyMedium)
+                            if (st.status == DiagStep.Status.KO && st.next != null) Text("→ " + st.next!!.title + ". " + st.next!!.detail, style = MaterialTheme.typography.bodySmall, color = cs.error)
+                        }
+                    }
+                }
+                if (report == null) Row(verticalAlignment = Alignment.CenterVertically) { CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp); Spacer(Modifier.width(8.dp)); Text("Vérification en cours…") }
+                else Text(if (report!!.ok) "Tout est en ordre." else "Premier problème : ${report!!.firstFailure!!.label}.", fontWeight = FontWeight.SemiBold)
+            }
+        },
+        confirmButton = {
+            TextButton(enabled = report != null, onClick = {
+                val cm = ctx.getSystemService(ClipboardManager::class.java)
+                runCatching { cm?.setPrimaryClip(ClipData.newPlainText("Diagnostic Bluetooth", report!!.text())) }
+            }) { Text("Copier le rapport") }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("Fermer") } })
 }
 
 /** « Ajouter ma TV »: permissions and help, finding the TV, Android's pairing, then the owner's OK on the TV. */
@@ -94,7 +149,7 @@ fun AddTvFlow(onClose: () -> Unit, onAdded: (SavedTv) -> Unit) {
     val finder = remember { BtFinder(ctx) }
     val found by finder.found.collectAsState()
     val scanning by finder.scanning.collectAsState()
-    var step by remember { mutableStateOf<TvLinkManager.PairStep?>(null) }
+    var step by remember { mutableStateOf<PairStep?>(null) }
     var chosen by remember { mutableStateOf<TvCandidate?>(null) }
     var showOthers by remember { mutableStateOf(false) }
     var round by remember { mutableIntStateOf(0) }
@@ -106,9 +161,14 @@ fun AddTvFlow(onClose: () -> Unit, onAdded: (SavedTv) -> Unit) {
     }
 
     fun pair(c: TvCandidate) {
-        chosen = c; step = TvLinkManager.PairStep.Bonding
+        chosen = c; step = PairStep.Bonding
         finder.stop()
         scope.launch(Dispatchers.IO) { TvLinkManager.pair(c) { step = it } }
+    }
+
+    // « Réassocier »: the TV was forgotten locally, the whole flow starts by itself (guided stale-bond repair, waiting for « Ajouter un téléphone »)
+    LaunchedEffect(granted, btOn) {
+        if (granted && btOn && step == null) TvLinkManager.takeReassociate()?.let { tv -> pair(TvCandidate(tv.address, tv.name, bonded = true, hasCbt1 = true)) }
     }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -170,32 +230,48 @@ fun AddTvFlow(onClose: () -> Unit, onAdded: (SavedTv) -> Unit) {
 }
 
 @Composable
-private fun PairProgress(step: TvLinkManager.PairStep, tv: TvCandidate?, onRetry: () -> Unit, onCancel: () -> Unit, onDone: (SavedTv) -> Unit) {
+private fun PairProgress(step: PairStep, tv: TvCandidate?, onRetry: () -> Unit, onCancel: () -> Unit, onDone: (SavedTv) -> Unit) {
     val cs = MaterialTheme.colorScheme
+    val ctx = LocalContext.current
     Column(Modifier.fillMaxWidth().padding(top = 8.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(14.dp)) {
         when (step) {
-            TvLinkManager.PairStep.Bonding -> {
+            PairStep.Bonding -> {
                 CircularProgressIndicator()
                 Text("Association avec ${tv?.name ?: "la TV"}", style = MaterialTheme.typography.titleMedium)
-                Text("Android affiche un code sur le téléphone et sur la TV. S'ils sont identiques, validez sur les deux.", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
+                Text(step.advice.detail, textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
                 TextButton(onClick = onCancel) { Text("Annuler") }
             }
-            TvLinkManager.PairStep.WaitingOwner -> {
+            PairStep.StaleBond -> {
+                Icon(Icons.Filled.BluetoothDisabled, null, Modifier.size(48.dp), tint = WARN)
+                Text(step.advice.title, style = MaterialTheme.typography.titleMedium)
+                Text(step.advice.detail, textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
+                Button(onClick = { runCatching { ctx.startActivity(Intent(Settings.ACTION_BLUETOOTH_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } }) { Text(step.advice.action.label) }
+                Text("Cet écran continue tout seul dès que l'association est supprimée.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+                TextButton(onClick = onCancel) { Text("Annuler") }
+            }
+            is PairStep.WaitingTvWindow -> {
                 CircularProgressIndicator()
-                Text("Validez sur la TV", style = MaterialTheme.typography.titleMedium)
-                Text("La TV demande « Autoriser ce téléphone à piloter cette TV ? ». Choisissez « Autoriser » avec la télécommande.", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
+                Text(step.advice.title, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
+                Text(step.advice.detail, textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
+                TextButton(onClick = onCancel) { Text("Annuler") }
             }
-            is TvLinkManager.PairStep.Done -> {
+            PairStep.WaitingOwner -> {
+                CircularProgressIndicator()
+                Text(step.advice.title, style = MaterialTheme.typography.titleMedium)
+                Text(step.advice.detail, textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
+            }
+            is PairStep.Done -> {
                 Icon(Icons.Filled.CheckCircle, null, Modifier.size(64.dp), tint = GOOD)
-                Text("${step.tv.name} est ajoutée", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                Text("Elle se connectera toute seule quand vous ouvrirez l'app, sans code.", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
-                Button(onClick = { onDone(step.tv) }) { Text("Terminer") }
+                Text(step.advice.title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                Text(step.advice.detail, textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
+                Button(onClick = { onDone(step.session.tv) }) { Text("Terminer") }
             }
-            is TvLinkManager.PairStep.Failed -> {
+            is PairStep.Failed -> {
                 Icon(Icons.Filled.ErrorOutline, null, Modifier.size(56.dp), tint = cs.error)
-                Text(step.message, textAlign = TextAlign.Center)
+                Text(step.advice.title, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
+                Text(step.advice.detail, textAlign = TextAlign.Center)
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    if (step.retry) Button(onClick = onRetry) { Text("Réessayer") }
+                    if (step.canRetry) Button(onClick = onRetry) { Text("Réessayer") }
                     OutlinedButton(onClick = onCancel) { Text("Annuler") }
                 }
             }
@@ -210,6 +286,8 @@ fun ManageTvsDialog(onDismiss: () -> Unit, onAdd: () -> Unit) {
     val tvs = remember(version) { TvLinkManager.saved.list() }
     val def = remember(version) { TvLinkManager.saved.default()?.address }
     var confirm by remember { mutableStateOf<SavedTv?>(null) }
+    var diag by remember { mutableStateOf(false) }
+    if (diag) DiagnosticDialog(onDismiss = { diag = false })
     AlertDialog(onDismissRequest = onDismiss, title = { Text("Mes TV") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -225,6 +303,7 @@ fun ManageTvsDialog(onDismiss: () -> Unit, onAdd: () -> Unit) {
                     }
                 }
                 if (tvs.size > 1) Text("La TV par défaut est celle à laquelle le téléphone se connecte à l'ouverture.", style = MaterialTheme.typography.bodySmall)
+                if (tvs.isNotEmpty()) TextButton(onClick = { diag = true }) { Text("Diagnostic Bluetooth") }
             }
         },
         confirmButton = { TextButton(onClick = { onDismiss(); onAdd() }) { Text("Ajouter une TV") } },

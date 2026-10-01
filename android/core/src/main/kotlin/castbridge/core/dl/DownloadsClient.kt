@@ -47,7 +47,7 @@ class DownloadsClient(val base: String, private val pin: String?) {
         val c = URL(base + path).openConnection() as HttpURLConnection
         try {
             c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 15_000   // adding a link probes its size (up to ~6 s)
-            pin?.let { castbridge.core.trust.TvAuth.header(it).let { (k, v) -> c.setRequestProperty(k, v) } }
+            castbridge.core.trust.TvCredential.apply(c, pin)
             if (method == "POST") {
                 val b = body ?: ByteArray(0)
                 c.doOutput = true; c.setFixedLengthStreamingMode(b.size)

@@ -246,14 +246,18 @@ class PairActivity : Activity() {
             ad == null -> { countdown.text = "Bluetooth absent"; countdown.setTextColor(C.ERROR); status.text = "Cette TV n'a pas de Bluetooth : utilisez le code et le Wi-Fi." }
             !hasBt() -> { countdown.text = "Bluetooth non autorisé"; countdown.setTextColor(C.ERROR); status.text = message ?: "Autorisez « Appareils à proximité » pour CastBridge TV." }
             !btOn -> { countdown.text = "Bluetooth éteint"; countdown.setTextColor(C.ERROR); status.text = "Allumez le Bluetooth de la TV, puis revenez ici." }
-            state is PairingSession.State.Closed -> { countdown.text = "Non visible"; countdown.setTextColor(C.TEXT_MID); status.text = message ?: "Appuyez sur « Rendre visible » pour ajouter un téléphone." }
+            state is PairingSession.State.Closed -> { countdown.text = "Non visible"; countdown.setTextColor(C.TEXT_MID); status.text = message ?: ("Appuyez sur « Rendre visible » pour ajouter un téléphone.\n" + btLine(svc, state)) }
             state is PairingSession.State.Asking -> { countdown.text = "Visible encore ${mmss(svc.pairing.secondsLeft())}"; countdown.setTextColor(C.SUCCESS); status.text = "${state.name} demande l'autorisation…" }
-            else -> { countdown.text = "Visible encore ${mmss(svc.pairing.secondsLeft())}"; countdown.setTextColor(C.SUCCESS); status.text = message ?: "En attente d'un téléphone…" }
+            else -> { countdown.text = "Visible encore ${mmss(svc.pairing.secondsLeft())}"; countdown.setTextColor(C.SUCCESS); status.text = message ?: ("En attente d'un téléphone…\n" + btLine(svc, state)) }
         }
         visibleBtn.text = if (state is PairingSession.State.Closed) "Rendre visible 2 minutes" else "Prolonger de 2 minutes"
         showAsk(svc, state)
         renderList(svc.trust.list())
     }
+
+    /** « Bluetooth prêt · 2 téléphones de confiance (1 connecté) » : the TV's short status, matching the phone's diagnostic. */
+    private fun btLine(svc: TvService, state: PairingSession.State) = castbridge.core.trust.TvBtStatus.line(true, null, svc.trust.list().size,
+        svc.presence.statuses().count { it.state != castbridge.core.trust.PhonePresence.State.DISCONNECTED }, state)
 
     private fun showAsk(svc: TvService, state: PairingSession.State) {
         if (state !is PairingSession.State.Asking) { dialog?.takeIf { it.isShowing }?.dismiss(); dialog = null; return }
@@ -270,7 +274,8 @@ class PairActivity : Activity() {
     }
 
     private fun renderList(phones: List<TrustedPhone>) {
-        val sig = phones.joinToString("|") { "${it.address}:${it.name}:${it.lastSeen}" }
+        val presence = bound?.presence?.statuses().orEmpty().associateBy { it.address }
+        val sig = phones.joinToString("|") { "${it.address}:${it.name}:${it.lastSeen}:${presence[it.address]?.state}" }
         listTitle.text = "Téléphones de confiance (${phones.size})"
         forgetAll.visibility = if (phones.isEmpty()) View.GONE else View.VISIBLE
         if (sig == listSig) return
@@ -283,7 +288,13 @@ class PairActivity : Activity() {
             val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL; setPadding(0, dp(6), 0, dp(6)) }
             val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
             col.addView(label(p.name, 22f, C.TEXT, true).apply { maxLines = 1; ellipsize = TextUtils.TruncateAt.END })
-            col.addView(label("Ajouté le ${DateFormat.getDateInstance(DateFormat.SHORT).format(Date(p.addedAt))} · vu ${df.format(Date(p.lastSeen))}", 15f, C.TEXT_MID).apply { maxLines = 2; ellipsize = TextUtils.TruncateAt.END })
+            val live = when (presence[p.address]?.state) {
+                castbridge.core.trust.PhonePresence.State.CONNECTED -> "connecté · "
+                castbridge.core.trust.PhonePresence.State.RECONNECTED -> "liaison reprise · "
+                castbridge.core.trust.PhonePresence.State.DISCONNECTED -> "téléphone déconnecté · "
+                null -> ""
+            }
+            col.addView(label("$live" + "Ajouté le ${DateFormat.getDateInstance(DateFormat.SHORT).format(Date(p.addedAt))} · vu ${df.format(Date(p.lastSeen))}", 15f, C.TEXT_MID).apply { maxLines = 2; ellipsize = TextUtils.TruncateAt.END })
             row.addView(col, LinearLayout.LayoutParams(0, -2, 1f))
             row.addView(button("Retirer", danger = true) { confirmRemove(p) }, LinearLayout.LayoutParams(-2, -2).apply { leftMargin = dp(12) })
             list.addView(row, LinearLayout.LayoutParams(-1, -2))
