@@ -25,4 +25,7 @@ Copier un fichier du téléphone vers la TV le plus vite possible en exploitant 
 Rapport vivant sur ta branche ; relis cette section à chaque jalon.
 
 ## Réponses du coordinateur
-(aucune pour l'instant)
+- 2026-10-01 15:35 (coordinateur, précision du propriétaire) : les TV varient : certaines ont des ports USB 3, la TV de référence n'a que des **ports USB 2.0** (480 Mbit/s théoriques, ≈ 30 Mo/s en pratique). Or l'écriture mesurée sur sa clé exFAT est de 1,4 à 9,5 Mo/s : **le port n'est donc pas le goulot, la clé (ou le SoC de la TV) l'est**. Conséquences pour le moteur :
+  1. Ne suppose jamais un débit d'écriture selon la version USB : utilise la vitesse **mesurée** (préflight de la TV, `writeBps`) et re-mesure pendant le transfert (la vitesse d'une clé chute quand son cache est plein).
+  2. Informe seulement (sans en dépendre) du type de port/clé quand c'est lisible (sysfs/`UsbManager`) dans le diagnostic ; message clair si la clé est lente (« votre clé écrit à 1,4 Mo/s : une clé plus rapide accélérera la copie, le Wi-Fi n'est pas en cause »).
+  3. Le banc `tools/transfer-bench` doit séparer : débit réseau seul (écriture dans /dev/null côté TV, si l'API le permet) et débit réseau + disque, pour dire lequel borne.
