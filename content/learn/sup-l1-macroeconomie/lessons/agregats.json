@@ -101,7 +101,7 @@
      "statement": "C = 200 + 0.8Y (en milliers de FCFA). Calcule C, S et la propension moyenne à consommer pour Y = 1 000 puis Y = 1 500.",
      "steps": [
       {
-       "md": "Pour Y = 1 000 : C = 200 + 0.8×1 000 = 1000. S = 1 000 − 1000 = 0. PMC = 1."
+       "md": "Pour Y = 1 000 : C = 200 + 0,8×1 000 = 1000. S = 1 000 − 1000 = 0. PMC = 1."
       },
       {
        "md": "Pour Y = 1 500 : C = 200 + 0,8×1 500 = 1400, S = 1 500 − 1400 = 100, PMC = 0,933,"
@@ -121,13 +121,13 @@
        "md": "ΔY = 30 000 ; ΔC = 24 000 ⇒ c = 24 000/30 000 = 0.8."
       },
       {
-       "md": "s = 1 − c = 0.2 (vérification : ΔS = 6 000, ΔS/ΔY = 0.2)."
+       "md": "s = 1 − c = 0,2 (vérification : ΔS = 6 000, ΔS/ΔY = 0,2)."
       },
       {
        "md": "PMC avant = 130 000/150 000 ≈ 0,867 ; après = 154 000/180 000 ≈ 0,856 : la part consommée baisse quand le revenu augmente,"
       }
      ],
-     "answer": "**c = 0.8 ; s = 0.2.**"
+     "answer": "**c = 0,8 ; s = 0.2.**"
     },
     {
      "type": "key",
@@ -240,13 +240,13 @@
     {
      "type": "example",
      "title": "Exemple 2 — salaire nominal et réel",
-     "statement": "Le salaire nominal d'un employé passe de 150 000 à 162 000 FCFA ; l'indice des prix passe de 112.5 à 118.0. Calcule l'inflation, le salaire réel de chaque année (en pouvoir d'achat base 100) et conclus.",
+     "statement": "Le salaire nominal d'un employé passe de 150 000 à 162 000 FCFA ; l'indice des prix passe de 112,5 à 118.0. Calcule l'inflation, le salaire réel de chaque année (en pouvoir d'achat base 100) et conclus.",
      "steps": [
       {
        "md": "Inflation = (118,0 − 112,5)/112,5 ≈ 4,89 %,"
       },
       {
-       "md": "Salaire réel = nominal / indice × 100 : avant 150 000/112.5×100 ≈ 133 333,33 ; après 162 000/118.0×100 ≈ 137 288,14."
+       "md": "Salaire réel = nominal / indice × 100 : avant 150 000/112,5×100 ≈ 133 333,33 ; après 162 000/118,0×100 ≈ 137 288,14."
       },
       {
        "md": "Le salaire nominal progresse de 8 %, le salaire réel de 2,97 % : le pouvoir d'achat augmente moins vite que le salaire affiché,"
@@ -426,7 +426,7 @@
      "id": "sup-l1-macroeconomie-conso-epargne-07-a",
      "points": 1,
      "prompt": "Calcule la consommation.",
-     "explanation": "C = 120 + 0.75×2 000 = 1620.",
+     "explanation": "C = 120 + 0,75×2 000 = 1620.",
      "kind": "numeric",
      "answer": 1620.0,
      "tolerance": 0
@@ -444,7 +444,7 @@
      "id": "sup-l1-macroeconomie-conso-epargne-07-c",
      "points": 1,
      "prompt": "Calcule la propension moyenne à consommer (arrondi à 0,01).",
-     "explanation": "PMC = 1620/2 000 = 0.810 ≈ 0.81.",
+     "explanation": "PMC = 1620/2 000 = 0,810 ≈ 0.81.",
      "kind": "numeric",
      "answer": 0.81,
      "tolerance": 0.005
@@ -453,7 +453,7 @@
      "id": "sup-l1-macroeconomie-conso-epargne-07-d",
      "points": 1,
      "prompt": "Si Y augmente de 200, de combien augmente l'épargne ?",
-     "explanation": "ΔS = (1 − c)ΔY = 0.25 × 200 = 50.",
+     "explanation": "ΔS = (1 − c)ΔY = 0,25 × 200 = 50.",
      "kind": "numeric",
      "answer": 50.0,
      "tolerance": 0
