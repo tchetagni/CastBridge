@@ -10,3 +10,4 @@
 | usb-data | android/core/.../tv/Storage*, receiver UsbImporter | claude/usb-data | LIVRÉ, NON FUSIONNÉ | 1 commit seulement : à vérifier |
 | net-architect | tools/content-*, docs/CONTENT-PUBLISH.md | claude/net-architect | LIVRÉ, NON FUSIONNÉ | outils de budget et de découpage |
 | content-quiz-culture / superieur | tools/quiz-bank | claude/content-quiz-* | LIVRÉ, NON FUSIONNÉ (superieur fusionné) | |
+| multipath-transfer | android/core/.../tv/*Transfer*, sender UploadService, receiver serveur d'envoi | claude/multipath-transfer | LANCÉ | copie rapide multivoie : mesurer d'abord |
