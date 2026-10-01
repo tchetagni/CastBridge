@@ -1,0 +1,81 @@
+{
+  "format": 1,
+  "id": "bepc-histoire-geo",
+  "version": 1,
+  "title": "Histoire-Géographie-ECM — BEPC",
+  "description": "Préparation du BEPC en histoire, géographie et ECM : du Cameroun colonial à l'indépendance, monde contemporain, économie du Cameroun, institutions et citoyenneté, épreuve blanche. Bêta : contenu à vérifier par un enseignant.",
+  "lang": "fr",
+  "cursus": "secondaire",
+  "level": "3e",
+  "subject": "histoire-geo",
+  "exam": "BEPC",
+  "programRef": "Programme d'histoire-géographie-ECM de la classe de 3e et préparation du BEPC (MINESEC) — à vérifier sur le texte officiel",
+  "authors": [
+    "CastBridge (brouillon IA, bêta)"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
+    {
+      "id": "bepc-histoire-geo-histoire",
+      "title": "Histoire — Du Cameroun colonial au monde contemporain",
+      "order": 1,
+      "programRef": "3e — Histoire : du Cameroun colonial à l'indépendance, construction de l'État, monde contemporain (découpage à vérifier sur le programme officiel du BEPC)"
+    },
+    {
+      "id": "bepc-histoire-geo-geographie",
+      "title": "Géographie — Économie du Cameroun, intégration, mondialisation",
+      "order": 2,
+      "programRef": "3e — Géographie : le Cameroun économique, intégration régionale, mondialisation, environnement et développement durable (à vérifier sur le programme officiel du BEPC)"
+    },
+    {
+      "id": "bepc-histoire-geo-ecm",
+      "title": "ECM — Institutions, démocratie, citoyenneté",
+      "order": 3,
+      "programRef": "3e — ECM : institutions de la République, démocratie et élections, droits et devoirs, lutte contre la corruption, paix et vivre-ensemble (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-histoire-geo-epreuve-blanche",
+      "title": "Épreuve blanche",
+      "order": 4,
+      "programRef": "3e — Préparation au BEPC : épreuve blanche d'histoire-géographie-ECM (format indicatif ; à vérifier sur les sujets officiels)"
+    }
+  ],
+  "mockExams": [
+    {
+      "id": "bepc-histoire-geo-epreuve-blanche-1",
+      "title": "BEPC blanc — Histoire-Géographie-ECM",
+      "minutes": 90,
+      "instructions": "Réponds à toutes les questions. Soigne la rédaction des réponses longues. Le barème total est sur 20 points.",
+      "outOf": 20,
+      "sections": [
+        {
+          "title": "Histoire",
+          "exercises": [
+            "bepc-histoire-geo-epreuve-blanche-01",
+            "bepc-histoire-geo-epreuve-blanche-02",
+            "bepc-histoire-geo-epreuve-blanche-03",
+            "bepc-histoire-geo-epreuve-blanche-04"
+          ]
+        },
+        {
+          "title": "Géographie",
+          "exercises": [
+            "bepc-histoire-geo-epreuve-blanche-05",
+            "bepc-histoire-geo-epreuve-blanche-06",
+            "bepc-histoire-geo-epreuve-blanche-07",
+            "bepc-histoire-geo-epreuve-blanche-08"
+          ]
+        },
+        {
+          "title": "ECM",
+          "exercises": [
+            "bepc-histoire-geo-epreuve-blanche-09",
+            "bepc-histoire-geo-epreuve-blanche-10",
+            "bepc-histoire-geo-epreuve-blanche-11"
+          ]
+        }
+      ]
+    }
+  ]
+}
