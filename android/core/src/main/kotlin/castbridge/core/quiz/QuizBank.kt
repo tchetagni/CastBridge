@@ -39,6 +39,8 @@ data class Question(
     val updatedAt: String? = null,
     /** How the answer was checked: "computed" (the answer comes from a calculation, tested), "fact" (table of sourced facts), "import" (written then imported), null = bundled/reviewed. */
     val verif: String? = null,
+    /** Raw validation status of the source ("approved", "rejected", "needs-fix"…), null = not stated (see castbridge.core.content.PlayPolicy). */
+    val status: String? = null,
 ) {
     /** Same question with its choices reordered by [rng] (the bank's answer positions do not leak into the game). */
     fun shuffled(rng: Random): Question {
@@ -59,8 +61,12 @@ data class QuestionFilter(val track: Track = Track.GENERAL, val level: String? =
  * asked in the session (while possible), reproducible for a given seed; for general knowledge it keeps
  * 70 % Cameroon / 20 % Africa / 10 % World (±1 question).
  */
-class QuizBank(val all: List<Question>) {
-    val playable: List<Question> by lazy { all.filter { !it.review } }
+class QuizBank(val all: List<Question>, val channel: castbridge.core.content.Channel = castbridge.core.content.Channel.STABLE) {
+    /** What a game may draw on this bank's channel (stable = validated only, as before; beta = also questions under review, marked). */
+    val playable: List<Question> by lazy { all.filter { castbridge.core.content.PlayPolicy.isPlayable(it, channel) } }
+
+    /** The same questions for another channel (the channel comes from the server per device). */
+    fun forChannel(c: castbridge.core.content.Channel) = if (c == channel) this else QuizBank(all, c)
 
     fun count(filter: QuestionFilter, includeReview: Boolean = false) = poolOf(filter, includeReview).size
 
@@ -213,7 +219,7 @@ class QuizBank(val all: List<Question>) {
     /** This bank plus [other]; a question of [other] replaces one of this bank with the same id. */
     fun merge(other: QuizBank): QuizBank {
         val ids = other.all.map { it.id }.toSet()
-        return QuizBank(all.filter { it.id !in ids } + other.all)
+        return QuizBank(all.filter { it.id !in ids } + other.all, channel)
     }
 
     companion object {
@@ -259,6 +265,7 @@ class QuizBank(val all: List<Question>) {
                     review = if (computedPlayable && m.str("verif") == "computed" && status != "rejected") false
                         else (m.bool("review") ?: false) || (status != null && status != "approved"),
                     verif = m.str("verif"),
+                    status = status,
                     track = m.str("track")?.let { Track.of(it) ?: throw Json.ParseError("question #$i: bad track") } ?: Track.GENERAL,
                     level = m.str("level"),
                     field = m.str("field"),
