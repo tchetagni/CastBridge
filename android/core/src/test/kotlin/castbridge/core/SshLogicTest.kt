@@ -146,3 +146,14 @@ class LineDisciplineTest {
         assertEquals("\ny", String(ld.fromShell("\ny".toByteArray())), "LF right after a chunk-final CR is not doubled")
     }
 }
+
+class SshSessionCountTest {
+    @Test fun listenerSeesEveryChangeOfTheOpenSessionCount() {
+        val seen = mutableListOf<Int>()
+        val p = SshPolicy().also { it.onSessions = { n -> seen += n } }
+        p.enable()
+        p.onSessionOpened(); p.onSessionOpened(); p.onSessionClosed(); p.onSessionClosed(); p.onSessionClosed()
+        p.onSessionOpened(); p.disable()
+        assertEquals(listOf(0, 1, 2, 1, 0, 0, 1, 0), seen, "never negative; enable and disable report 0")
+    }
+}

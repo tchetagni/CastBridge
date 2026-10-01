@@ -178,7 +178,8 @@ class TvService : Service(), Device {
         bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
-        ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) })
+        ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) },
+            onSessions = { n -> setStatus("4-ssh-n", if (n > 0) (if (n == 1) "SSH : 1 connexion active" else "SSH : $n connexions actives") else null) })
         updater = UpdateInstaller(this, { registry.volumes().filter { it.kind != VolumeKind.SAF }.map { it.dir } },
             launch = { i, what -> launchScreen(i, what) }) { m -> setStatus("5-update", m); notice(m) }
         onPermissionsReady()                                    // Bluetooth starts if its permission was granted earlier

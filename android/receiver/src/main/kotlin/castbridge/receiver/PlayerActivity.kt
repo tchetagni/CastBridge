@@ -106,6 +106,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (settingsPanel == null) settingsPanel = SettingsPanel(this, findViewById(R.id.settings))
         panel = PlayerPanel(this, panelApi())
         if (!::bar.isInitialized) bar = ProgressOverlay(this, findViewById(android.R.id.content))
+        showSshBadge(s.statuses["4-ssh-n"])                  // connections already open when the screen (re)opens
         s.attach(this)                                       // may run a play request that arrived while the screen was closed
         requestRuntimePermissions()
         if (current == null && libScreen?.visible != true) showHome()
@@ -169,7 +170,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     override val shown: Boolean get() = resumed && !isFinishing
     override val activity: Activity get() = this
     override fun notice(msg: String) { flash(msg) }
-    override fun statusesChanged() { if (settingsPanel?.visible == true) showSettings(); showNetBadge(svc?.statuses?.get("6-gw")) }
+    override fun statusesChanged() { if (settingsPanel?.visible == true) showSettings(); showNetBadge(svc?.statuses?.get("6-gw")); showSshBadge(svc?.statuses?.get("4-ssh-n")) }
     override fun thumbReady(name: String) { thumbs?.ready(name); libScreen?.onThumbReady(name); home?.onThumbReady(name) }
     override fun runPending(r: TvService.Pending) {
         runCatching {
@@ -703,6 +704,14 @@ class PlayerActivity : Activity(), TvService.Screen {
         }
         for ((intent, msg) in tries) if (runCatching { startActivity(intent) }.isSuccess) return msg
         return "Réglages inaccessibles sur cette TV : ouvrez-les avec la télécommande de la TV."
+    }
+
+    /** Always-visible badge at the top right (also over a playing video) while someone is connected over SSH: the owner sees it at once. */
+    private fun showSshBadge(text: String?) {
+        val b = findViewById<TextView>(R.id.sshBadge) ?: return
+        if (text == null) { b.animate().alpha(0f).setDuration(300).withEndAction { b.visibility = View.GONE }; return }
+        b.text = text
+        if (b.visibility != View.VISIBLE) { b.animate().cancel(); b.alpha = 0f; b.visibility = View.VISIBLE; b.animate().alpha(1f).setDuration(300) }
     }
 
     /** Always-visible badge (also over a playing video) while the TV's Internet goes through the phone. */

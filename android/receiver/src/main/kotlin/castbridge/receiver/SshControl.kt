@@ -14,11 +14,11 @@ import java.io.File
  * SSH administration of the TV, off until someone switches it on (MENU on the remote, or the
  * PIN-protected API). Keys and the host key live in the app's private storage.
  */
-class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStatus: (String?) -> Unit = {}) {
+class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStatus: (String?) -> Unit = {}, onSessions: (Int) -> Unit = {}) {
     private val server: TvSshServer = TvSshServer(
         dataDir = File(ctx.filesDir, "ssh"),
         sftpRoot = ctx.getExternalFilesDir(null) ?: ctx.filesDir,
-        policy = SshPolicy(),
+        policy = SshPolicy().also { it.onSessions = onSessions },
         log = { m ->
             Log.i(TAG, m)                                       // never contains keys or the PIN
             if ("stopping" in m) { onChange(null); bridge.stop() }

@@ -17,16 +17,20 @@ class SshPolicy(
     @Volatile private var lastActivity = 0L
     @Volatile private var sessions = 0
 
+    /** Told the number of authenticated sessions each time it changes (the TV shows it at the top of the screen). */
+    @Volatile var onSessions: ((Int) -> Unit)? = null
+    private fun changed() { onSessions?.invoke(sessions) }
+
     /** [minutes] overrides the idle timeout for this run (clamped to 1..[MAX_IDLE_MINUTES]). */
     @Synchronized fun enable(minutes: Int? = null) {
         if (minutes != null) idleMinutes = minutes.coerceIn(MIN_IDLE_MINUTES, MAX_IDLE_MINUTES)
-        enabled = true; sessions = 0; lastActivity = now()
+        enabled = true; sessions = 0; lastActivity = now(); changed()
     }
 
-    @Synchronized fun disable() { enabled = false; sessions = 0 }
+    @Synchronized fun disable() { enabled = false; sessions = 0; changed() }
 
-    @Synchronized fun onSessionOpened() { sessions++; lastActivity = now() }
-    @Synchronized fun onSessionClosed() { sessions = (sessions - 1).coerceAtLeast(0); lastActivity = now() }
+    @Synchronized fun onSessionOpened() { sessions++; lastActivity = now(); changed() }
+    @Synchronized fun onSessionClosed() { sessions = (sessions - 1).coerceAtLeast(0); lastActivity = now(); changed() }
     @Synchronized fun onActivity() { lastActivity = now() }
 
     val openSessions get() = sessions
