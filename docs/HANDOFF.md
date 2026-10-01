@@ -168,3 +168,4 @@ Démarrage automatique après redémarrage de la TV (signal de démarrage sur Ga
 
 ## 11. Documentation détaillée
 `docs/` : ADMIN, API-SERVER, TELEMETRY, STORAGE, DOWNLOADS, QUIZ, CHESS, LEARN, PHONE-PLAYER, REMOTE, CONTENT-VALIDATION ; `backend/README.md` ; `branding/guide/CastBridge-charte-graphique.pdf`.
+- 2026-10-01 : **branche claude/integration-2** (depuis integration/agents 3115b2e, pas de PR) : fusion de usb-data, net-architect, quiz culture/lycée/supérieur, smart-remote, content-learn-anglophone ; :core:test 1378 verts, :sender/:receiver NON compilés ; détail docs/agent-reports/integration-2.md.
