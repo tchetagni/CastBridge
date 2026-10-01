@@ -23,8 +23,6 @@ rows("cm-culture2", "CM", "Gastronomie camerounaise", [
      "La pâte de manioc est enveloppée dans des feuilles puis cuite à la vapeur."),
     (2, "Dans quelle région le ndolé est-il traditionnellement associé ?", "Le Littoral",
      ["L'Extrême-Nord", "L'Est", "L'Adamaoua", "Le Nord"], "Le ndolé est lié à la cuisine des peuples sawa du Littoral, notamment à Douala."),
-    (2, "Quel légume-feuille donne son goût amer au ndolé ?", "Les feuilles de ndolé", ["Le gombo", "La laitue", "Le chou pommé", "Le poireau"],
-     "Les feuilles, lavées et bouillies, sont ensuite mêlées à une pâte d'arachides."),
     (2, "Quelle graine pilée donne sa texture crémeuse au ndolé ?", "L'arachide", ["Le sésame", "La noix de cajou", "Le soja", "L'amande de karité"],
      "L'arachide pilée lie la sauce du ndolé et en adoucit l'amertume."),
     (2, "Quel haricot sec écrasé est la base du koki ?", "Le niébé", ["La lentille", "Le pois chiche", "Le haricot rouge", "Le soja"],
@@ -101,7 +99,7 @@ rows("cm-culture2", "CM", "Langues du Cameroun", [
      ["L'API", "L'AFNOR", "L'ALCAM", "L'OAPI"], "L'Alphabet général des langues camerounaises est la référence pour noter les langues nationales."),
     (5, "Quel projet d'enseignement bilingue en langues maternelles a été lancé au Cameroun sous l'impulsion de Maurice Tadadjeu ?", "PROPELCA",
      ["PNDP", "PRODEM", "ALCAM", "MINEDUB"],
-     "Le PROPELCA (Projet de recherche opérationnelle pour l'enseignement des langues au Cameroun) date des années 1980."),
+     "Le PROPELCA (Projet de recherche opérationnelle pour l'enseignement des langues au Cameroun) remonte à la fin des années 1970 et aux années 1980."),
     (2, "Quelle langue peule sert de langue de communication dans une grande partie du Nord ?", "Le fulfulde",
      ["L'ewondo", "Le duala", "Le bassa", "Le ghomala"], "Elle est parlée bien au-delà des communautés peules."),
     (3, "Quelle langue nationale est traditionnellement associée aux Bulu du Sud ?", "Le bulu", ["Le duala", "Le bassa", "Le bamoun", "Le fulfulde"],
@@ -177,9 +175,6 @@ rows("cm-culture2", "CM", "Fêtes et festivals", [
     (3, "Dans quelle ville se tient le festival de cinéma Écrans noirs ?", "Yaoundé", ["Douala", "Bafoussam", "Garoua", "Limbé"], "Il se déroule dans la capitale et présente des films africains."),
     (4, "Qui a fondé le festival Écrans noirs, consacré au cinéma africain ?", "Bassek Ba Kobhio", ["Jean-Pierre Bekolo", "Manu Dibango", "Mongo Beti", "Daniel Kamwa"],
      "Ce cinéaste est aussi l'auteur de « Sango Malo » (1991)."),
-    (5, "Quelle fête, célébrée à Bali Nyonga, est connue sous le nom de Lela ?", "Une fête traditionnelle annuelle de la chefferie de Bali Nyonga",
-     ["Un concours de pirogues à Douala", "Un festival de cinéma à Yaoundé", "Une course de montagne à Buea", "Un salon d'artisanat à Foumban"],
-     "Le Lela, fête du peuple de Bali Nyonga, se tient dans le Nord-Ouest."),
     (4, "Dans quelle ville débute la Course de l'Espoir sur le mont Cameroun ?", "Buea", ["Limbé", "Kumba", "Tiko", "Mamfe"], "Cette course de montagne part de la ville située au pied du volcan."),
     (3, "Quel peuple célèbre le Nguon à Foumban ?", "Les Bamoun", ["Les Bassa", "Les Peuls", "Les Mafa", "Les Baka"], "Le Nguon est le festival culturel du royaume bamoun."),
 ])
@@ -240,8 +235,6 @@ rows("cm-culture2", "CM", "Architecture et patrimoine", [
     (5, "Quelle enceinte royale du Nord-Ouest, appelée Achum, est associée aux Bafut ?", "Le palais de Bafut", ["Le palais de Foumban", "La chefferie de Bandjoun", "Le palais de Laikom", "Le lamidat de Rey-Bouba"],
      "Le palais de Bafut, résidence du fon, est un monument majeur des Grassfields."),
     (3, "Quelle ville de l'Ouest abrite le palais du sultan des Bamoun ?", "Foumban", ["Dschang", "Mbouda", "Bafang", "Bangangté"], "Le palais est aujourd'hui aussi un musée."),
-    (4, "Quel style architectural le roi Njoya a-t-il mêlé aux traditions locales pour son palais ?", "L'architecture coloniale allemande", ["Le style gothique", "Le style mauresque", "L'art déco", "Le style soudano-sahélien"],
-     "Le palais associe des influences européennes et des motifs bamoun."),
     (5, "Quel paysage culturel camerounais a été inscrit au patrimoine mondial en 2024 ?", "Diy-Gid-Biy, dans les monts Mandara", ["Le palais de Foumban", "La chefferie de Bandjoun", "Le Ngondo de Douala", "Rhumsiki"],
      "Ce paysage culturel des Mafa associe terrasses, habitats et rites des monts Mandara."),
     (4, "Quel parc camerounais fait partie du site « Sangha Trinational » classé par l'UNESCO ?", "Lobéké", ["Waza", "Korup", "Bouba Ndjida", "Campo-Ma'an"], "Le site réunit des aires protégées du Cameroun, du Congo et de la République centrafricaine."),
@@ -261,7 +254,7 @@ rows("cm-culture2", "CM", "Musées", [
 rows("cm-culture2", "CM", "Littérature", [
     (3, "En quelle année est paru « Une vie de boy » de Ferdinand Oyono ?", "1956", ["1946", "1950", "1960", "1966"], "Ce roman, sous forme de journal, est l'un des textes majeurs de la littérature africaine francophone."),
     (4, "Comment s'appelle le jeune héros dont le journal forme « Une vie de boy » ?", "Toundi", ["Meka", "Denis", "Banda", "Mor-Zamba"], "Toundi, boy d'un commandant colonial, tient son journal."),
-    (4, "Comment s'appelle le héros du roman « Le Vieux Nègre et la médaille » ?", "Meka", ["Toundi", "Denis", "Banda", "Mor-Zamba"], "Le roman d'Oyono se passe en 1956 dans un village sous administration coloniale."),
+    (4, "Comment s'appelle le héros du roman « Le Vieux Nègre et la médaille » ?", "Meka", ["Toundi", "Denis", "Banda", "Mor-Zamba"], "Roman d'Oyono (1956) sur un vieil homme décoré par l'administration coloniale, dans un village du Sud."),
     (5, "Sous quel pseudonyme Mongo Beti a-t-il publié « Ville cruelle » en 1954 ?", "Eza Boto", ["Mongo Kuma", "Jean-Marc Ela", "Eto Bassa", "René Philombe"], "Le roman a été publié par Présence africaine."),
     (5, "Quel est le titre du roman de Léonora Miano couronné par le prix Goncourt des lycéens en 2006 ?", "Contours du jour qui vient", ["La Saison de l'ombre", "Les Aubes écarlates", "Blues pour Élise", "Crépuscule du tourment"],
      "C'est son deuxième roman, après « L'Intérieur de la nuit »."),
@@ -304,9 +297,9 @@ rows("cm-culture2", "CM", "Gastronomie camerounaise", [
     (2, "Comment prépare-t-on le « poisson braisé » camerounais ?", "Grillé sur la braise, souvent épicé", ["Cru, mariné au citron", "Séché au soleil", "Fumé pendant trois semaines", "Bouilli dans du lait"], "Il est vendu dans des maquis, avec du bâton de manioc ou du plantain."),
 ])
 table("cm-culture2", "CM", "Gastronomie camerounaise",
-      [("le koki", "le niébé", 2), ("l'achu", "le taro", 2), ("le ndolé", "les feuilles de ndolé", 2), ("l'okok", "les feuilles de gnetum", 3),
-       ("le bâton de manioc", "le manioc fermenté", 2), ("le poulet DG", "le plantain mûr frit", 2), ("le sanga", "le maïs frais", 3), ("le mbongo tchobi", "les épices grillées", 3)],
-      "Quel ingrédient est caractéristique de {a} ?", "Quel plat camerounais se caractérise par {b} ?", diff=2, expl="{a} se caractérise par {b}.",
+      [("le koki", "le niébé", 2), ("l'achu", "le taro", 2), ("l'okok", "les feuilles de gnetum", 3),
+       ("le bâton de manioc", "le manioc fermenté", 2), ("le poulet DG", "le plantain mûr frit", 2), ("le mbongo tchobi", "les épices grillées", 3)],
+      "Quel ingrédient caractérise {a} ?", "Quel plat camerounais se caractérise par {b} ?", diff=2, expl="{a} se caractérise par {b}.",
       extra_b=["le riz blanc", "les lentilles", "le chou"])
 
 # ------------------------------------------------------------------------------------------------ localités et patrimoine
@@ -345,14 +338,9 @@ rows("cm-culture2", "AF", "Cinéma africain", [
 
 # ------------------------------------------------------------------------------------------------ boissons, instruments, repères datés
 table("cm-culture2", "CM", "Boissons et instruments",
-      [("le matango", "la sève de palmier", 3), ("la bili-bili", "le sorgho", 3), ("le bissap (folléré)", "les fleurs d'hibiscus", 2), ("le kossam", "le lait caillé", 3),
-       ("le jus de gingembre", "le gingembre", 1)],
-      "Quelle est la matière première de {a} ?", "Quelle boisson est préparée à partir de {b} ?", diff=3, expl="{a} est préparé à partir de {b}.",
+      [("le matango", "la sève de palmier", 3), ("la bili-bili", "le sorgho", 3), ("le bissap (folléré)", "les fleurs d'hibiscus", 2), ("le kossam", "le lait caillé", 3)],
+      "Quelle matière première sert à préparer {a} ?", "Quelle boisson est préparée à partir de {b} ?", diff=3, expl="{a} est préparé à partir de {b}.",
       extra_b=["le raisin", "la canne à sucre"])
-table("cm-culture2", "CM", "Boissons et instruments",
-      [("le balafon", "un xylophone à lames de bois", 2), ("le mvet", "une cithare-harpe", 4), ("le tam-tam d'appel", "un tambour de transmission de messages", 3)][1:],
-      "De quel type d'instrument s'agit-il pour {a} ?", "Quel instrument est {b} ?", diff=3, expl="{a} est {b}.",
-      extra_b=["une flûte de roseau", "un luth à manche court"], extra_a=["la kora", "le djembé", "le balafon"])
 rows("cm-culture2", "CM", "Repères datés", [
     (3, "En quelle année est sorti le titre « Soul Makossa » de Manu Dibango ?", "1972", ["1965", "1968", "1975", "1980"], "Le morceau s'est diffusé aux États-Unis grâce aux discothèques."),
     (4, "En quelle année est né Manu Dibango ?", "1933", ["1929", "1936", "1940", "1943"], "Il est né à Douala puis a étudié en France."),
