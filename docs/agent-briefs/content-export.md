@@ -25,4 +25,4 @@ de contenu du dépôt CastBridge et ne supprime rien de `content/` là-bas. Ce c
 Suis `docs/COORDINATION.md` : rapport vivant `docs/agent-reports/content-export.md` sur ta branche (STATUT en première ligne, une ligne par jalon, QUESTION si bloqué).
 
 ## Réponses du coordinateur
-(aucune pour l'instant ; relis cette section à chaque jalon)
+- 2026-10-01 15:25 : la source à copier est maintenant `origin/integration/agents` au commit 3115b2e (tests de contenu verts, 24 lots Apprendre, 26 lots Quiz de plus). Les autorisations (lecture de CastBridge, branche de travail dans castbridge-content) restent à donner par le propriétaire dans ta session : sans elles, écris `STATUT: BLOQUÉ` dans castbridge-content/docs/agent-reports/content-export.md avec la QUESTION.
