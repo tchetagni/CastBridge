@@ -11,8 +11,8 @@ android {
         minSdk = 26
         targetSdk = 35
         // -Pcastbridge.versionCode / -Pcastbridge.versionName: build a higher version to test the automatic updates
-        versionCode = (project.findProperty("castbridge.versionCode") as String?)?.toInt() ?: 14
-        versionName = (project.findProperty("castbridge.versionName") as String?) ?: "1.2.4-beta"
+        versionCode = (project.findProperty("castbridge.versionCode") as String?)?.toInt() ?: 15
+        versionName = (project.findProperty("castbridge.versionName") as String?) ?: "1.2.5-beta"
         // For a LOCAL test server only (docs/API-SERVER.md, « Tester en local »): -Pcastbridge.serverUrl=http://10.0.2.2:7090 and
         // -Pcastbridge.extraUpdateKey=<its public key>. Both empty by default: production server and production key only (UpdateKeys).
         buildConfigField("String", "EXTRA_UPDATE_KEY", "\"${(project.findProperty("castbridge.extraUpdateKey") as String?) ?: ""}\"")

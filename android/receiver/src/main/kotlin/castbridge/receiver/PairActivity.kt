@@ -246,14 +246,18 @@ class PairActivity : Activity() {
             ad == null -> { countdown.text = "Bluetooth absent"; countdown.setTextColor(C.ERROR); status.text = "Cette TV n'a pas de Bluetooth : utilisez le code et le Wi-Fi." }
             !hasBt() -> { countdown.text = "Bluetooth non autorisé"; countdown.setTextColor(C.ERROR); status.text = message ?: "Autorisez « Appareils à proximité » pour CastBridge TV." }
             !btOn -> { countdown.text = "Bluetooth éteint"; countdown.setTextColor(C.ERROR); status.text = "Allumez le Bluetooth de la TV, puis revenez ici." }
-            state is PairingSession.State.Closed -> { countdown.text = "Non visible"; countdown.setTextColor(C.TEXT_MID); status.text = message ?: "Appuyez sur « Rendre visible » pour ajouter un téléphone." }
+            state is PairingSession.State.Closed -> { countdown.text = "Non visible"; countdown.setTextColor(C.TEXT_MID); status.text = message ?: ("Appuyez sur « Rendre visible » pour ajouter un téléphone.\n" + btLine(svc, state)) }
             state is PairingSession.State.Asking -> { countdown.text = "Visible encore ${mmss(svc.pairing.secondsLeft())}"; countdown.setTextColor(C.SUCCESS); status.text = "${state.name} demande l'autorisation…" }
-            else -> { countdown.text = "Visible encore ${mmss(svc.pairing.secondsLeft())}"; countdown.setTextColor(C.SUCCESS); status.text = message ?: "En attente d'un téléphone…" }
+            else -> { countdown.text = "Visible encore ${mmss(svc.pairing.secondsLeft())}"; countdown.setTextColor(C.SUCCESS); status.text = message ?: ("En attente d'un téléphone…\n" + btLine(svc, state)) }
         }
         visibleBtn.text = if (state is PairingSession.State.Closed) "Rendre visible 2 minutes" else "Prolonger de 2 minutes"
         showAsk(svc, state)
         renderList(svc.trust.list())
     }
+
+    /** « Bluetooth prêt · 2 téléphones de confiance (1 connecté) » : the TV's short status, matching the phone's diagnostic. */
+    private fun btLine(svc: TvService, state: PairingSession.State) = castbridge.core.trust.TvBtStatus.line(true, null, svc.trust.list().size,
+        svc.presence.statuses().count { it.state != castbridge.core.trust.PhonePresence.State.DISCONNECTED }, state)
 
     private fun showAsk(svc: TvService, state: PairingSession.State) {
         if (state !is PairingSession.State.Asking) { dialog?.takeIf { it.isShowing }?.dismiss(); dialog = null; return }

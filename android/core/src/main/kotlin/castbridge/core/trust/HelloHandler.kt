@@ -26,6 +26,8 @@ class HelloHandler(
     private val onConnected: (TrustedPhone) -> Unit = {},
     /** Storm control (not applied to the owner-driven « Ajouter un téléphone » requests): a phone (or all of them) asking far too often is told "busy, later" (ERR_BUSY, which the phone treats as transient). */
     private val limiter: AttemptLimiter? = null,
+    /** The owner's window refused a phone that asked (denied, timed out, blocked, busy...): for a clear message on the TV. */
+    private val onRefused: (name: String, decision: PairingSession.Decision) -> Unit = { _, _ -> },
 ) {
     /** What an unknown phone is told: nothing but "no", plus (only when it is paired and gave the install id it remembers) whether the TV is another installation. */
     private fun untrusted(paired: Boolean) = HelloReply.Err(BtProtocol.ERR_UNTRUSTED,
@@ -36,7 +38,9 @@ class HelloHandler(
         if (!requestTrust && limiter != null && limiter.tryAcquire(TrustRegistry.norm(peer)) > 0) return HelloReply.Err(BtProtocol.ERR_BUSY)
         if (!registry.isTrusted(peer)) {
             if (!requestTrust) return untrusted(true)
-            when (pairing.ask(peer, peerName.orEmpty())) {
+            val decision = pairing.ask(peer, peerName.orEmpty())
+            if (decision != PairingSession.Decision.APPROVED && decision != PairingSession.Decision.NOT_OPEN) runCatching { onRefused(PhoneName.sanitize(peerName), decision) }
+            when (decision) {
                 PairingSession.Decision.APPROVED -> {}
                 PairingSession.Decision.DENIED -> return HelloReply.Err(BtProtocol.ERR_DENIED)
                 PairingSession.Decision.TIMEOUT -> return HelloReply.Err(BtProtocol.ERR_TIMEOUT)

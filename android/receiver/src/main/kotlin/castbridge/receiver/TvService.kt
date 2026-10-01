@@ -251,7 +251,8 @@ class TvService : Service(), Device {
 
     private val helloHandler by lazy {
         castbridge.core.trust.HelloHandler(trust, pairing, ::btBonded, ::tvName, runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?",
-            { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(false) }, { p -> phoneConnected(p) }, castbridge.core.trust.AttemptLimiter(global = 40, perPeer = 10))
+            { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(false) }, { p -> phoneConnected(p) }, castbridge.core.trust.AttemptLimiter(global = 40, perPeer = 10),
+            { name, d -> castbridge.core.trust.TvRefusals.message(name, d)?.let { notice(it); setStatus("1-phone", it) } })
     }
 
     fun btHello(peer: String, peerName: String?, requestTrust: Boolean) = helloHandler.handle(peer, peerName, requestTrust)

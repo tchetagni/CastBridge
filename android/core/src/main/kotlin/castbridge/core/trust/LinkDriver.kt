@@ -79,18 +79,18 @@ class LinkDriver(
 
     val gate = CredentialGate()
     private var model: LinkMachine.Model? = null
-    private var session: LinkSession? = null
+    @Volatile private var session: LinkSession? = null          // read by the UI thread through [credential]: never behind the step's lock
     private var issuedAt = 0L
     private var lastHelloAt = 0L
     private var lastStepAt = Long.MIN_VALUE / 2
     private var last: Step? = null
-    private var rejected = false
+    @Volatile private var rejected = false
     private var forceCheck = false
 
     val currentModel: LinkMachine.Model? @Synchronized get() = model
 
-    /** The token to present to the TV right now, or null: kept while valid even if the link is lost, never one the TV refused. */
-    @Synchronized fun credential(address: String? = null): String? {
+    /** The token to present to the TV right now, or null: kept while valid even if the link is lost, never one the TV refused. Never blocks (a HELLO may be running). */
+    fun credential(address: String? = null): String? {
         val tv = (address?.let { saved.get(it) } ?: saved.default()) ?: return null
         val now = env.now()
         session?.takeIf { it.tv.address == tv.address && now < it.expiresAt - skewMs && gate.allows(tv.address, it.credential) }?.let { return it.credential }
@@ -98,7 +98,7 @@ class LinkDriver(
     }
 
     /** The TV's API said this token is expired or revoked (HTTP 401 "bad token"): it is dropped and a new HELLO follows at the next [step]. */
-    @Synchronized fun reportTokenRejected(token: String) {
+    fun reportTokenRejected(token: String) {
         val tv = saved.default() ?: return
         dropToken(tv, token)
         rejected = true

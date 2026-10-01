@@ -314,5 +314,79 @@ class LinkDriverTest {
         assertTrue(tv.reg.isTrusted("AA:BB:CC:DD:EE:01")); assertFalse(tv.reg.isTrusted("AA:BB:CC:DD:EE:02"))
     }
 
+    // ------------------------------------------------------------------------------------------------ more of the matrix
+
+    @Test fun phoneRevokedOnTheTvWhileConnectedIsNoticedAtTheNextKeepAlive() {
+        connect()
+        tv.reg.revoke(tv.phone)
+        val s = phone.run(60_000)
+        assertTrue(s.view.state.key.startsWith("forgot:"), s.view.state.key)
+        assertNull(phone.driver.credential(), "the revoked token is not offered any more")
+        assertTrue(phone.shownHistory.none { it.startsWith("unreachable") })
+    }
+
+    @Test fun wifiAndBluetoothDroppingAtTheSameMomentRecoverTogether() {
+        connect()
+        tv.wifiUp = false; tv.btRadioOn = false
+        phone.run(30_000, Trigger.ACL_DISCONNECTED)
+        assertIs<LinkState.Reconnecting>(shown(), "both routes lost: 'Liaison perdue, reconnexion…', credential kept")
+        assertNotNull(phone.driver.credential())
+        tv.wifiUp = true; tv.btRadioOn = true
+        val s = phone.run(2 * 60_000)
+        assertEquals("ok:LAN", s.view.state.key)
+    }
+
+    @Test fun aTwoDayOutageThenTheTvComesBackAndTheOldTokenIsGone() {
+        connect()
+        tv.power = false
+        phone.run(48 * 3600_000L)
+        assertNull(phone.driver.credential())
+        assertEquals("unreachable:NO_ANSWER", shown().key)
+        val c = tv.connects
+        assertTrue(c < 3_000, "two days with the app in front: one attempt a minute at most, not a storm ($c)")
+        tv.power = true
+        assertTrue(phone.run(3 * 60_000).view.state.isGood)
+    }
+
+    @Test fun twoDaysInTheBackgroundCostAtMostAFewDozenAttemptsPerDay() {
+        connect(); phone.env.fg = false
+        tv.power = false
+        val c0 = tv.connects
+        phone.run(48 * 3600_000L)
+        assertTrue(tv.connects - c0 < 250, "background attempts in 48 h: ${tv.connects - c0}")
+        tv.power = true
+        assertTrue(phone.run(30 * 60_000L).view.state.isGood, "it still comes back by itself")
+    }
+
+    @Test fun tvRebootsWhileThePhoneIsAlsoRestartedInTheMiddle() {
+        connect()
+        tv.power = false
+        val store = phone.store
+        phone.run(20_000)
+        // the phone's process dies and restarts during the outage
+        val driver2 = LinkDriver(phone.link, phone.env, phone.saved, store, phone.machine, { 0.5 })
+        driver2.step(Trigger.APP_OPENED)
+        assertTrue(driver2.currentModel!!.shown.let { it is LinkState.Reconnecting || it is LinkState.Connecting }, driver2.currentModel!!.shown.key)
+        tv.power = true; tv.restartApp()
+        phone.clock.advance(70_000)
+        var s = driver2.step(Trigger.APP_OPENED)
+        repeat(5) { phone.clock.advance(5_000); s = driver2.step(Trigger.TIMER) }
+        assertTrue(s.view.state.isGood, s.view.state.key)
+    }
+
+    @Test fun anOwnerDenialShownOnTheTvAndNeverRetriedByThePhoneLoop() {
+        val refusals = ArrayList<String>()
+        val reg = tv.reg; val pairing = PairingSession(reg, clock::now)
+        val handler = HelloHandler(reg, pairing, { true }, { "TV" }, "1", { null }, { castbridge.core.tv.LinkInfo(8765, emptyList()) }, {}, null,
+            { name, d -> TvRefusals.message(name, d)?.let { refusals += it } })
+        pairing.open()
+        val t = kotlin.concurrent.thread { handler.handle(tv.phone, "Galaxy", true) }
+        while (pairing.asking() == null) Thread.sleep(2)
+        pairing.deny(); t.join()
+        assertEquals(listOf("Galaxy a été refusé."), refusals)
+        assertEquals("Galaxy est ignoré 10 minutes : trois refus de suite.", TvRefusals.message("Galaxy", PairingSession.Decision.BLOCKED))
+        assertNull(TvRefusals.message("x", PairingSession.Decision.APPROVED))
+    }
+
     companion object { const val PHONE_TOKEN_OK = true }
 }

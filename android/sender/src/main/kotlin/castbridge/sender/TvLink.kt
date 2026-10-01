@@ -165,10 +165,13 @@ object TvLinkManager {
     /** A call to the TV's API was answered "bad token": the token is dropped for good and a new HELLO follows. */
     fun tokenRejected(token: String) { if (::driver.isInitialized) { driver.reportTokenRejected(token); wake.trySend(Trigger.USER) } }
 
+    /** Off the main thread: a step may be in the middle of a HELLO (seconds). */
     fun forget(address: String) {
-        driver.forget(address)
-        publish(driver.step(Trigger.USER))
-        poke()
+        scope.launch {
+            driver.forget(address)
+            publish(driver.step(Trigger.USER))
+            poke()
+        }
     }
 
     fun makeDefault(address: String) { saved.setDefault(address); retryNow() }

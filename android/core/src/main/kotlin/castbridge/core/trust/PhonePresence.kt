@@ -55,6 +55,17 @@ class PhonePresence(
     }
 }
 
+/** What the TV tells its owner when a phone that asked to be added was not accepted (never silent). */
+object TvRefusals {
+    fun message(name: String, d: PairingSession.Decision): String? = when (d) {
+        PairingSession.Decision.DENIED -> "$name a été refusé."
+        PairingSession.Decision.TIMEOUT -> "$name attendait votre réponse : trop tard, la demande est annulée."
+        PairingSession.Decision.BLOCKED -> "$name est ignoré 10 minutes : trois refus de suite."
+        PairingSession.Decision.BUSY -> "$name doit patienter : une autre demande est en cours."
+        PairingSession.Decision.APPROVED, PairingSession.Decision.NOT_OPEN -> null
+    }
+}
+
 /** The short Bluetooth status the TV shows, matching the phone's diagnostic: what is ready, how many phones, and the pairing window. */
 object TvBtStatus {
     fun line(btReady: Boolean, btReason: String?, trusted: Int, connected: Int, pairing: PairingSession.State): String = buildString {
