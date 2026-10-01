@@ -72,8 +72,18 @@ class ActivationActivity : Activity() {
         col.addView(input, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
         col.addView(Button(this).apply { text = "Valider la clé"; textSize = 20f; setOnClickListener { enter() } })
         col.addView(Button(this).apply { text = "Chercher la clé sur la clé USB"; textSize = 20f; setOnClickListener { Thread { val r = ActivationCenter.scanFiles(); h.post { if (r != null) show(r, "la clé USB") else status.text = "Aucun fichier « activation » trouvé sur la clé USB." } }.start() } })
+        col.addView(tv("Plus simple : sur le téléphone, ouvrez CastBridge > « Activer la TV », collez la clé : le téléphone trouve cette TV par Bluetooth et l'envoie.", 18f, 0xFFB8C0D6.toInt()))
+        col.addView(Button(this).apply { text = "Rendre la TV visible pour le téléphone (Bluetooth)"; textSize = 20f; setOnClickListener { makeVisible() } })
         if (state is GateState.Grace) col.addView(Button(this).apply { text = "Continuer sans activer pour l'instant"; textSize = 20f; setOnClickListener { goOn() } })
         setContentView(ScrollView(this).apply { setBackgroundColor(0xFF0A0F1E.toInt()); addView(col) })
+    }
+
+    private var askedVisible = false
+    /** Makes the TV discoverable for 5 minutes (the system asks for a confirmation on the TV), so the owner's phone can find it and pair by itself. */
+    private fun makeVisible() {
+        val ad = (getSystemService(android.content.Context.BLUETOOTH_SERVICE) as? android.bluetooth.BluetoothManager)?.adapter ?: return
+        if (!ad.isEnabled) { status.text = "Activez le Bluetooth de la TV dans ses réglages."; return }
+        runCatching { startActivity(Intent(android.bluetooth.BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE).putExtra(android.bluetooth.BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300)) }
     }
 
     private fun enter() {
@@ -105,10 +115,11 @@ class ActivationActivity : Activity() {
         // the owner's phone pushes the activation by Bluetooth: on recent Android that needs the permission, asked here because a locked TV asks nothing else
         if (android.os.Build.VERSION.SDK_INT >= 31 && checkSelfPermission(android.Manifest.permission.BLUETOOTH_CONNECT) != android.content.pm.PackageManager.PERMISSION_GRANTED)
             runCatching { requestPermissions(arrayOf(android.Manifest.permission.BLUETOOTH_CONNECT), 77) }
+        else if (!askedVisible) { askedVisible = true; makeVisible() }
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 77) TvService.running?.startOwnerChannel()
+        if (requestCode == 77) { TvService.running?.startOwnerChannel(); if (!askedVisible) { askedVisible = true; makeVisible() } }
     }
     override fun onPause() { super.onPause(); h.removeCallbacks(poll) }
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean =
