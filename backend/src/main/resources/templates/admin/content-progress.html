@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Avancement des contenus')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <p><a th:href="@{/admin/content}">← File de relecture</a></p>
+    <h1>Avancement de la validation</h1>
+
+    <section class="card">
+        <h2>Budget de contenu <small th:text="|${@fmt.bytes(budget.totalBytes)} sur ${@fmt.bytes(budget.limitBytes)} (${budget.percent} %)|"></small></h2>
+        <p><span class="badge" th:classappend="${budget.status == 'ok'} ? 'good' : (${budget.status == 'warn'} ? 'warn' : 'bad')"
+                 th:text="${budget.status == 'ok'} ? 'dans le budget' : (${budget.status == 'warn'} ? 'plus de 80 % du budget' : 'BUDGET DÉPASSÉ')"></span>
+            <progress th:value="${budget.totalBytes}" th:max="${budget.limitBytes}"></progress></p>
+        <div class="cols">
+            <table class="compact"><tr><th>Fonctionnalité</th><th class="num">Taille</th></tr>
+                <tr th:each="e : ${budget.perFeature}"><td th:text="${e.key}"></td><td class="num" th:text="${@fmt.bytes(e.value)}"></td></tr></table>
+            <table class="compact"><tr><th>Lot</th><th class="num">Taille</th></tr>
+                <tr th:each="e : ${budget.perLot}"><td th:text="${e.key}"></td><td class="num" th:text="${@fmt.bytes(e.value)}"></td></tr></table>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Par lot</h2>
+        <table class="list">
+            <thead><tr><th>Lot</th><th class="num">Éléments</th><th class="num">Validés</th><th>%</th><th class="num">À relire</th><th class="num">À corriger</th><th class="num">Rejetés</th><th class="num">Signalés</th></tr></thead>
+            <tbody><tr th:each="p : ${lots}">
+                <td><a th:href="@{/admin/content(lot=${p.lot})}" th:text="${p.lot}"></a></td><td class="num" th:text="${p.total}"></td><td class="num" th:text="${p.validated}"></td>
+                <td><progress th:value="${p.validated}" th:max="${p.total}"></progress> <span class="small" th:text="${#numbers.formatDecimal(p.percentValidated(), 1, 0)} + ' %'"></span></td>
+                <td class="num" th:text="${p.review}"></td><td class="num" th:text="${p.needsFix}"></td><td class="num" th:text="${p.rejected}"></td><td class="num" th:text="${p.reported}"></td>
+            </tr></tbody>
+        </table>
+    </section>
+
+    <section class="card">
+        <h2>Par lot et par classe</h2>
+        <table class="list">
+            <thead><tr><th>Lot</th><th>Classe</th><th class="num">Éléments</th><th class="num">Validés</th><th>%</th><th class="num">Signalés</th><th class="num">Rejetés</th></tr></thead>
+            <tbody><tr th:each="p : ${classes}">
+                <td th:text="${p.lot}"></td><td><a th:href="@{/admin/content(lot=${p.lot},cls=${p.classKey})}" th:text="${p.classKey}"></a></td>
+                <td class="num" th:text="${p.total}"></td><td class="num" th:text="${p.validated}"></td>
+                <td><progress th:value="${p.validated}" th:max="${p.total}"></progress> <span class="small" th:text="${#numbers.formatDecimal(p.percentValidated(), 1, 0)} + ' %'"></span></td>
+                <td class="num" th:text="${p.reported}"></td><td class="num" th:text="${p.rejected}"></td>
+            </tr></tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

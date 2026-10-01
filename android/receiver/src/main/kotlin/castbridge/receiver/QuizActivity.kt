@@ -162,6 +162,7 @@ class QuizActivity : Activity() {
             if (game != null) {
                 val sel = game.i("selected")
                 TvConnect.track("quiz_answer", mapOf("question" to qid, "correct" to (sel == answer), "ms" to (now - statQuestionAt)))
+                TvConnect.feedback?.shown(castbridge.core.content.ContentKind.QUESTION, qid, sel == answer, now - statQuestionAt)   // per item totals (content_stat)
             } else duel!!.maps("ranking").forEach { p ->
                 (p["correct"] as? Boolean)?.let { TvConnect.track("quiz_answer", mapOf("question" to qid, "correct" to it)) }
             }
@@ -223,6 +224,10 @@ class QuizActivity : Activity() {
     private var field: String? = null
 
     private fun push(step: String) { steps += step; render() }
+    /** « Signaler une erreur » on the question shown (Millionaire or Duel); the answer is the sentence for the screen. */
+    private fun reportQuestion(r: castbridge.core.content.ReportReason): String =
+        if (room?.hostReport(r.key) == true) "Merci ! Votre signalement sera envoyé dès que possible." else "Signalement impossible, déjà envoyé, ou trop de signalements : réessayez plus tard."
+
     private fun goHome() { room?.backToLobby(); steps.clear(); steps += "home"; stage.calm = false; render() }
     private fun count(f: QuestionFilter) = room?.bank?.count(f) ?: 0
     /** "240 questions, environ 16 parties sans repetition": the bank's size against the goal of 300 games without repeat (docs/QUIZ.md). */
@@ -466,6 +471,7 @@ class QuizActivity : Activity() {
         private val no = quizButton(this@QuizActivity, "Non", 22f) { room?.hostAct("cancel") }
         private val confirmText = quizText(this@QuizActivity, "", 26f, QuizColors.TEXT, true).apply { gravity = Gravity.CENTER }
         private val next = quizButton(this@QuizActivity, "Continuer", 22f) { room?.hostAct("next") }.apply { visibility = View.GONE }
+        private val report = quizButton(this@QuizActivity, "Signaler une erreur", 18f) { askReportReason { r -> reportQuestion(r) } }.apply { visibility = View.GONE }
         private var lastPhase: String? = null
         private var remaining = 0L
         private var total = 0L
@@ -495,6 +501,7 @@ class QuizActivity : Activity() {
                         addView(plates[2], lp(0, dpi(78), 1f)); addView(plates[3], lp(0, dpi(78), 1f))
                     }, lp(MATCH, t = 4))
                     addView(next, lp(t = 8))
+                    addView(report, lp(t = 4))
                 }, lp(0, MATCH, 1f, r = 16))
                 addView(column(Gravity.CENTER).apply {
                     background = panelBackground(context, 0xCC060F3A.toInt())
@@ -545,7 +552,7 @@ class QuizActivity : Activity() {
             val answer = q.i("answer")
             val revealed = phase == "REVEALED"
             header.text = (if (g.b("practice")) "Entraînement  ·  ${g.i("correct")} bonne(s) réponse(s)\n" else "") +
-                "Question ${index + 1}/${g.i("levels")}  ·  ${q.s("category")}"
+                "Question ${index + 1}/${g.i("levels")}  ·  ${q.s("category")}" + (q.s("mark")?.let { "\n⚑ $it" } ?: "")
             val ladderAmounts = g.list("ladder").mapNotNull { (it as? Number)?.toLong() }
             prize.text = if (g.b("practice")) "" else "Question pour ${Ladder.fcfa(ladderAmounts.getOrElse(index) { 0 })}"
             questionPlate.text = fr(q.s("text"))
@@ -631,6 +638,7 @@ class QuizActivity : Activity() {
             confirmBox.visibility = if (phase == "CONFIRM") View.VISIBLE else View.GONE
             if (phase == "CONFIRM" && sel != null) confirmText.text = "C'est votre dernier mot ?\n${QuizColors.LETTERS[sel]} : ${choices.getOrElse(sel) { "" }}"
             next.visibility = if (revealed) View.VISIBLE else View.GONE
+            report.visibility = next.visibility
             next.text = if (revealed && g.b("lastCorrect") && index + 1 < (g.i("levels") ?: 15)) "Question suivante" else "Continuer"
             // focus + sound on phase changes
             if (phase != lastPhase) {
@@ -778,7 +786,7 @@ class QuizActivity : Activity() {
             val reveal = phase == "REVEAL"
             val answer = q.i("answer")
             val dist = d.list("distribution").mapNotNull { (it as? Number)?.toInt() }
-            header.text = "DUEL  ·  Question ${(d.i("index") ?: 0) + 1}/${d.i("count")}  ·  ${q.s("category")}"
+            header.text = "DUEL  ·  Question ${(d.i("index") ?: 0) + 1}/${d.i("count")}  ·  ${q.s("category")}" + (q.s("mark")?.let { "  ·  ⚑ $it" } ?: "")
             questionPlate.text = fr(q.s("text"))
             val choices = q.list("choices").map { it.toString() }
             for (i in 0..3) {

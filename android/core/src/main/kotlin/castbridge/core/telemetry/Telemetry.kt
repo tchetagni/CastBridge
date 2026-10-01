@@ -47,6 +47,8 @@ object EventCatalog {
         // « Apprendre » (docs/LEARN.md § 6): content ids only (packs, lessons, exercises), never a pupil's first name
         "learn" to setOf("action", "pack", "lesson", "subject", "exercise", "correct", "points", "max", "attempt", "box", "score",
             "out_of", "ms", "badge", "level", "version"),
+        // Quality signals of the content (docs/CONTENT-VALIDATION.md § 5): per item totals since the last flush, ids and numbers only
+        "content_stat" to setOf("kind", "item", "shown", "correct", "ms", "reports"),
     )
 
     /** Values of "action" in the "learn" event (the names of LearnProgress.EVENTS). */

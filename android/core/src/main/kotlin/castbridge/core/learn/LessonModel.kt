@@ -65,6 +65,8 @@ data class Lesson(
     val selfCheck: List<String> = emptyList(),
     /** Points the author is not sure of (shown to reviewers, never to children as facts). */
     val reviewNotes: List<String> = emptyList(),
+    /** Validation state written by tools/content-validation (docs/CONTENT-VALIDATION.md); null = derived from [status]. */
+    val state: castbridge.core.content.ContentState? = null,
 )
 
 /** One step of a worked example: text (restricted Markdown) and/or a formula. */
@@ -141,6 +143,8 @@ data class Exercise(
     val source: String? = null,
     /** Lesson to reopen when this exercise is failed (« renvoi vers la fiche »). */
     val lesson: String? = null,
+    /** Validation state written by tools/content-validation; null = derived from [review]. */
+    val state: castbridge.core.content.ContentState? = null,
 ) {
     val autoMarked: Boolean get() = kind != ExerciseKind.OPEN && (kind != ExerciseKind.PROBLEM || parts.all { it.autoMarked })
     val totalPoints: Double get() = if (kind == ExerciseKind.PROBLEM) parts.sumOf { it.points } else points

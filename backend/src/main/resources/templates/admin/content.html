@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Contenus')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main th:with="back=|?lot=${lot ?: ''}&cls=${cls ?: ''}&subject=${subject ?: ''}&state=${state ?: ''}&kind=${kind ?: ''}&q=${q ?: ''}&sort=${sort}&page=${page.page}|">
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Relecture des contenus <small th:text="|${page.total} éléments|"></small></h1>
+    <p class="muted small">Questions du quiz, leçons et exercices d'« Apprendre » diffusés aux testeurs bêta. Un élément « à relire » est jouable par les testeurs
+        (marqué « bêta : non validé ») et caché aux autres tant qu'il n'est pas validé. <a th:href="@{/admin/content/progress}">Avancement et budget</a></p>
+
+    <form class="filters" method="get" th:action="@{/admin/content}">
+        <input type="search" name="q" th:value="${q}" placeholder="Identifiant ou texte…">
+        <select name="lot"><option value="">Tous les lots</option><option th:each="l : ${lots}" th:value="${l}" th:text="${l}" th:selected="${lot == l}"></option></select>
+        <select name="cls"><option value="">Toutes classes</option><option th:each="c : ${classes}" th:value="${c}" th:text="${c}" th:selected="${cls == c}"></option></select>
+        <select name="subject"><option value="">Toutes matières</option><option th:each="s : ${subjects}" th:value="${s}" th:text="${s}" th:selected="${subject == s}"></option></select>
+        <select name="state"><option value="">Tous états</option><option th:each="s : ${states}" th:value="${s}" th:text="${stateLabels[s]}" th:selected="${state == s}"></option></select>
+        <select name="kind"><option value="">Tous types</option><option value="question" th:selected="${kind == 'question'}">Questions</option>
+            <option value="lesson" th:selected="${kind == 'lesson'}">Leçons</option><option value="exercise" th:selected="${kind == 'exercise'}">Exercices</option></select>
+        <select name="sort"><option value="score" th:selected="${sort == 'score'}">Plus suspects d'abord</option>
+            <option value="reports" th:selected="${sort == 'reports'}">Plus signalés d'abord</option><option value="lot" th:selected="${sort == 'lot'}">Par lot</option></select>
+        <button type="submit">Filtrer</button>
+    </form>
+
+    <div class="scroll">
+    <table class="list">
+        <thead><tr><th>Élément</th><th>Lot · classe · matière</th><th>État</th><th class="num">Signalements</th><th class="num">Vu</th><th class="num">Réussite</th><th class="num">Suspicion</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="r : ${page.rows}">
+            <td><b th:text="${r.id}"></b> <span class="muted small" th:text="${r.kind}"></span>
+                <div class="small wrap" th:text="${r.excerpt}"></div></td>
+            <td class="small" th:text="|${r.lot} · ${r.classKey} · ${r.subject}|"></td>
+            <td><span class="badge" th:text="${stateLabels[r.state]}" th:classappend="${r.state == 'validated'} ? 'good' : (${r.state == 'review'} ? 'warn' : 'bad')"></span></td>
+            <td class="num" th:text="${r.reports}"></td>
+            <td class="num" th:text="${r.shown}"></td>
+            <td class="num" th:text="${r.successRate() == null} ? '—' : ${#numbers.formatDecimal(r.successRate() * 100, 1, 0)} + ' %'"></td>
+            <td class="num"><span class="badge" th:classappend="${r.suspicion.flagged} ? 'bad' : ''" th:text="${#numbers.formatDecimal(r.suspicion.score, 1, 2)}"
+                                  th:title="${#strings.listJoin(r.suspicion.reasons, ' ; ')}"></span></td>
+            <td class="nowrap"><a class="button small ghost" th:href="@{/admin/content/item(kind=${r.kind},id=${r.id},back=${back})}">Ouvrir</a></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <p th:if="${page.rows.isEmpty()}" class="muted">Aucun élément. Importez l'index des contenus (ci-dessous).</p>
+
+    <nav class="pager" th:if="${page.pages > 1}">
+        <a th:if="${page.page > 0}" th:href="@{/admin/content(lot=${lot},cls=${cls},subject=${subject},state=${state},kind=${kind},q=${q},sort=${sort},page=${page.page - 1})}">← Précédents</a>
+        <span th:text="|Page ${page.page + 1} / ${page.pages}|"></span>
+        <a th:if="${page.page + 1 < page.pages}" th:href="@{/admin/content(lot=${lot},cls=${cls},subject=${subject},state=${state},kind=${kind},q=${q},sort=${sort},page=${page.page + 1})}">Suivants →</a>
+    </nav>
+
+    <div class="cols">
+        <section class="card">
+            <h2>Valider un lot entier</h2>
+            <p class="muted small">Valide tous les éléments « à relire » du lot choisi, sauf ceux qui ont des signalements ou qui sont suspects (ils restent dans la file).</p>
+            <form th:action="@{/admin/content/bulk}" method="post" class="stack">
+                <label>Lot <select name="lot" required><option th:each="l : ${lots}" th:value="${l}" th:text="${l}" th:selected="${lot == l}"></option></select></label>
+                <label>Classe (facultatif) <select name="cls"><option value="">Toutes</option><option th:each="c : ${classes}" th:value="${c}" th:text="${c}"></option></select></label>
+                <label>Note <input type="text" name="note" maxlength="500" placeholder="Relu par M. … le …"></label>
+                <label class="check"><input type="checkbox" name="includeReported" value="true"> Valider aussi les éléments signalés ou suspects</label>
+                <button type="submit" data-confirm="Valider en bloc tous les éléments à relire de ce lot ?">Valider le lot</button>
+            </form>
+        </section>
+        <section class="card">
+            <h2>Relecteurs hors ligne (CSV)</h2>
+            <p><a class="button ghost" th:href="@{/admin/content/export.csv(lot=${lot},cls=${cls},subject=${subject},state=${state},kind=${kind})}">Exporter la sélection (CSV)</a></p>
+            <form th:action="@{/admin/content/import-csv}" method="post" enctype="multipart/form-data" class="stack">
+                <label>Décisions (colonnes id, etat, relecteur, date, note, empreinte) <input type="file" name="file" accept=".csv" required></label>
+                <button type="submit">Importer les décisions</button>
+                <p class="muted small">Un élément modifié depuis l'export est refusé. « rejeté » et « à corriger » demandent une note.</p>
+            </form>
+            <h2>Index des contenus</h2>
+            <form th:action="@{/admin/content/import-index}" method="post" enctype="multipart/form-data" class="stack">
+                <label>Fichier de <code>tools/content-validation/cbvalidate.py index</code> <input type="file" name="file" accept=".jsonl,.json,.txt" required></label>
+                <button type="submit">Importer l'index</button>
+            </form>
+        </section>
+    </div>
+</main>
+</body>
+</html>

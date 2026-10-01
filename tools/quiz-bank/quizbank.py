@@ -60,6 +60,8 @@ def collect(strict=True):
         a = approvals.get(q["id"])
         if a and a.get("status") == "approved":
             q["status"] = "approved"
+        elif a and a.get("status") in ("rejected", "needs-fix"):   # decisions of tools/content-validation (docs/CONTENT-VALIDATION.md)
+            q["status"] = a["status"]
     return qs, fails
 
 

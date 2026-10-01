@@ -117,6 +117,12 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
         }
     }
 
+    // « Signaler une erreur » reports queued on the TV (offline first) are handed to this phone, which uploads them when it has Internet
+    LaunchedEffect(base, pin, reachable) {
+        val b = base; val fb = PhoneConnect.feedback
+        if (b != null && fb != null && reachable && castbridge.core.trust.TvAuth.isUsable(pin)) withContext(Dispatchers.IO) { runCatching { castbridge.core.content.ReportHandoffClient(b, pin).pull(fb.queue) } }
+    }
+
     fun cmd(label: String, block: TvClient.() -> Unit) {
         val c = client ?: return
         scope.launch {

@@ -113,6 +113,10 @@ public final class EventCatalog {
                 Map.entry("out_of", Prop.number(1000)), Map.entry("ms", ms), Map.entry("badge", Prop.text(32)), Map.entry("level", Prop.text(16)),
                 Map.entry("version", Prop.integer(1e9))),
                 "action", "subject", "ms", null, "score", "correct", true);
+        // Quality signals of quiz questions, lessons and exercises (docs/CONTENT-VALIDATION.md § 5): totals per item since the last
+        // flush of the device, ids and numbers only. dim1 = kind, dim2 = item id; the totals feed the content_stat table.
+        def("content_stat", false, Map.of("kind", Prop.oneOf("question", "lesson", "exercise"), "item", id, "shown", Prop.integer(1e6),
+                "correct", Prop.integer(1e6), "ms", Prop.integer(1e9), "reports", Prop.integer(1e4)), "kind", "item", "ms", null, "shown", null, false);
     }
 
     private static void def(String name, boolean essential, Map<String, Prop> props, String dim1, String dim2, String ms, String bytes,

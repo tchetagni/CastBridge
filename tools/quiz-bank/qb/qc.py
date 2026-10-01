@@ -48,7 +48,7 @@ def check_question(q):
         e.append("difficulté hors 1..5")
     if q["region"] not in ("CM", "AF", "WORLD"):
         e.append("région inconnue")
-    if q["status"] not in ("review", "approved"):
+    if q["status"] not in ("review", "approved", "rejected", "needs-fix"):
         e.append("statut inconnu")
     if q["verif"] not in ("computed", "fact", "import"):
         e.append("verif inconnu")

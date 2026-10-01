@@ -68,6 +68,7 @@ object LessonJson {
             programRef = m.s("programRef"), status = ReviewStatus.of(m.s("status")) ?: ReviewStatus.DRAFT,
             author = m.s("author"), source = m.s("source"), lang = m.s("lang"), readAloud = m.b("readAloud"),
             exercises = m.strs("exercises"), selfCheck = m.strs("selfCheck"), reviewNotes = m.strs("reviewNotes"),
+            state = castbridge.core.content.ContentState.of(m.s("state")),
         )
     }
 
@@ -114,6 +115,7 @@ object LessonJson {
             parts = m.l("parts").mapIndexed { k, o -> exercise(o.obj("$w partie #$k"), "$w partie #$k", m.s("chapter") ?: defChapter, true) },
             explanation = m.s("explanation") ?: "", steps = m.strs("steps"), method = m.s("method"), mistakes = m.strs("mistakes"),
             review = m.b("review") ?: false, reviewNote = m.s("reviewNote"), source = m.s("source"), lesson = m.s("lesson"),
+            state = castbridge.core.content.ContentState.of(m.s("state")),
         )
     }
 

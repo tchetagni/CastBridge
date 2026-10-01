@@ -135,6 +135,16 @@ mauvaises réponses plausibles mais clairement fausses.
 Contenu embarqué dans l'APK (inchangé) : 200 questions de culture générale (140 CM, 40 AF, 20 Monde ; 28-29 par difficulté pour le Cameroun, 8
 pour l'Afrique, 4 pour le Monde), 120 questions scolaires (CM2, 3e, Tle, L1 droit / économie / mathématiques, 20 chacune).
 
+### Canal bêta et état de validation (`docs/CONTENT-VALIDATION.md`)
+Les questions `review` ne sont plus « exclues pour toujours » : leur sort dépend du **canal** de l'appareil (réglé par le serveur,
+`stable` par défaut). En `stable`, comportement inchangé (seules les questions validées, plus celles dont la réponse est calculée
+et vérifiée, sont tirées). En `beta`, les questions `review` sont **jouables avec la mention « bêta : non validé »** (clé `mark` de
+l'état de la partie, affichée sur la TV et sur la page de jeu). `rejected` et `needs-fix` ne sont jamais jouées. Politique unique :
+`PlayPolicy` ; banque par canal : `QuizBank.forChannel`. Les champs de la source gagnent `status: needs-fix` (en plus de `review`,
+`approved`, `rejected`). Chaque question affiche, une fois révélée, **« Signaler une erreur »** (TV : télécommande ; téléphone :
+page de jeu). Décisions des relecteurs : `content/validation/*.jsonl` puis `tools/content-validation/cbvalidate.py apply` qui
+met à jour `content/quiz/approvals.json` (lu par `quizbank.py`, y compris `rejected` et `needs-fix`).
+
 ## 6 bis. Règle des 300 parties : une question ne revient pas avant 300 parties
 
 Demande d'Esaie : « des quiz où la répétition d'une question demande au moins 300 parties ». Règle retenue : **une même

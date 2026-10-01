@@ -52,6 +52,8 @@ class ServerLink(
     private val clock: () -> Long = { System.currentTimeMillis() },
     private val schedule: UpdateSchedule = UpdateSchedule(deviceSeed = state.installId.hashCode().toLong()),
     private val sleep: (Long) -> Unit = { Thread.sleep(it) },
+    /** « Signaler une erreur » reports and per item usage totals (docs/CONTENT-VALIDATION.md); null = no content feedback in this app. */
+    val feedback: castbridge.core.content.ContentFeedback? = null,
 ) {
     data class Installed(val versionCode: Int, val versionName: String?, val supportedAbis: List<String>, val sdk: Int)
 
@@ -154,6 +156,7 @@ class ServerLink(
         if (startup || state.lastContactAt == 0L || now - maxOf(state.lastContactAt, state.lastAttemptAt) >= retry || now < state.lastContactAt) contact()
         if (state.lastContactOk) {
             sendCrashes()
+            feedback?.let { fb -> fb.flushStats(); if (fb.queue.count() > 0) flushReports() }
             if (TelemetryUploader.shouldFlush(state.lastFlushAt, now, queue.size()) || (startup && queue.size() > 0)) flush()
         }
         val trigger = when {
@@ -222,6 +225,22 @@ class ServerLink(
             is TelemetryUploader.Result.Sent -> { state.lastFlushAt = clock(); "${res.accepted} événement(s) envoyé(s)" }
             TelemetryUploader.Result.NeedsRegistration -> { state.deviceToken = null; if (contact()) flush() else "enregistrement impossible" }
             is TelemetryUploader.Result.Failed -> res.reason
+        }
+    }
+
+    /** Sends the queued content reports (essential data: whatever the usage-statistics choice); returns a short French status. */
+    fun flushReports(): String = synchronized(lock) {
+        val fb = feedback ?: return "inactif"
+        val token = state.deviceToken ?: return "pas encore enregistré"
+        val res = try {
+            routes.call({ it is castbridge.core.content.ReportUploader.Result.Failed && it.reason.startsWith("serveur injoignable") }) { p ->
+                castbridge.core.content.ReportUploader(state.baseUrl, http = http(p)).flush(fb.queue, token)
+            }
+        } catch (e: IOException) { castbridge.core.content.ReportUploader.Result.Failed(e.message ?: "erreur réseau") }
+        return when (res) {
+            is castbridge.core.content.ReportUploader.Result.Sent -> "${res.accepted} signalement(s) envoyé(s)"
+            castbridge.core.content.ReportUploader.Result.NeedsRegistration -> { state.deviceToken = null; "enregistrement à refaire" }
+            is castbridge.core.content.ReportUploader.Result.Failed -> res.reason
         }
     }
 

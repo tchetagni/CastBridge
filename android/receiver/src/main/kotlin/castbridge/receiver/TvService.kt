@@ -211,7 +211,8 @@ class TvService : Service(), Device {
                     busy = { name -> server?.busyReason(name) }, folders = folderIndex, changed = { server?.changed() }))
                 .then(castbridge.core.tv.FoldersApi(folderIndex) { server?.libraryItems()?.map { it.name }?.toSet().orEmpty() })
                 .then(QuizHub.packApi(this))   // question packs pushed by the phone (docs/QUIZ.md)
-                .then(LotsHub.api(this)),       // lots (Apprendre / Quiz data, 10 Mo cap) pushed by the phone, never downloaded by the TV (docs/LOTS.md)
+                .then(LotsHub.api(this))        // lots (Apprendre / Quiz data, 10 Mo cap) pushed by the phone, never downloaded by the TV (docs/LOTS.md)
+                .then(castbridge.core.content.ContentFeedbackApi { TvConnect.feedback }),   // reports handed to the phone (docs/CONTENT-VALIDATION.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,

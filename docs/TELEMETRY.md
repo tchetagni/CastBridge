@@ -80,8 +80,14 @@ passerelle Bluetooth du téléphone est disponible (proxy SOCKS local possible).
 | `download` | `type` = `http` \| `magnet` \| `torrent`, `bytes`, `ms`, `ok`, `error` | usage |
 | `gateway_session` | `ms`, `bytes` (passerelle Internet Bluetooth) | usage |
 | `connectivity_check` | `via` = `wifi` \| `bluetooth` \| `ethernet` \| `wifidirect` \| `none`, `ok`, `latency_ms` | usage |
+| `content_stat` | `kind` = `question` \| `lesson` \| `exercise`, `item` (id), `shown`, `correct`, `ms` (temps total), `reports` : totaux par élément depuis le dernier envoi, **identifiants et nombres seulement** (`docs/CONTENT-VALIDATION.md` § 5) | usage |
 | `update_install` | `from`, `to` (versionCode), `ok`, `error` | essentiel |
 | `error`, `crash` | `screen`, `type`, `message` (≤ 200, nettoyé) | essentiel |
+
+**Signalements de contenu** (« Signaler une erreur ») : ce n'est **pas** un événement mais `POST /api/v1/content/reports` (jeton de l'appareil) ;
+catégorie **essentielle** (geste volontaire de l'utilisateur, envoyé même sans accord pour les statistiques) : identifiant de l'élément,
+empreinte, lot, motif, texte facultatif de 200 caractères nettoyé, canal. Voir `docs/CONTENT-VALIDATION.md` § 4. Le texte du § 7
+(`ConsentText`, version `2026-11`) le mentionne et demande de ne mettre aucune donnée personnelle dans le texte libre.
 
 ### Identifiants de fonctionnalités (liste fermée)
 

@@ -83,6 +83,8 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
         val pre = lesson.prerequisites.mapNotNull { pack.lesson(it)?.title }
         if (pre.isNotEmpty()) col.addView(a.st.text(t("À connaître avant : ", "You should know: ") + pre.joinToString(", "), 21f, LearnStyle.MUTED), col.lp(bottom = a.st.px(6)))
         lesson.programRef?.let { col.addView(a.st.text(t("Programme : ", "Syllabus: ") + it, 18f, LearnStyle.MUTED, lines = 2)) }
+        castbridge.core.content.PlayPolicy.mark(lesson, TvConnect.channel())?.let { col.addView(a.st.text("⚑ $it", 20f, LearnStyle.GOLD), col.lp(top = a.st.px(6))) }
+        col.addView(a.st.button(t("Signaler une erreur", "Report an error"), size = 19f) { a.askReportReason { r -> ContentReports.lesson(pack, lesson, r) } }, col.lp(top = a.st.px(10)))
         return scroll(col)
     }
 
@@ -170,7 +172,8 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
     }
 
     private fun exercise(x: Exercise): View {
-        val v = ExerciseView(a.st, x, false, deck.lang, onAnswer = { ans, m -> result(x, m) }, onContinue = { go(page + 1) })
+        val v = ExerciseView(a.st, x, false, deck.lang, onAnswer = { ans, m -> result(x, m) }, onContinue = { go(page + 1) },
+            onReport = { ex -> a.askReportReason { r -> ContentReports.exercise(pack, ex, r) } }, mark = castbridge.core.content.PlayPolicy.mark(x, TvConnect.channel()))
         ex = v
         return v.view
     }
@@ -278,7 +281,8 @@ class SeriesScreen(a: LearnActivity, val pack: Pack?, private val items: List<Ex
     override fun build(): View {
         if (i >= items.size) return summary()
         val x = items[i]
-        val v = ExerciseView(a.st, x, false, lang, onAnswer = { ans, m -> result(x, m) }, onContinue = { i++; a.rebuild() })
+        val v = ExerciseView(a.st, x, false, lang, onAnswer = { ans, m -> result(x, m) }, onContinue = { i++; a.rebuild() },
+            onReport = { ex -> packOf(ex)?.let { p -> a.askReportReason { r -> ContentReports.exercise(p, ex, r) } } }, mark = castbridge.core.content.PlayPolicy.mark(x, TvConnect.channel()))
         ex = v
         // nursery / primary: the question is read aloud (children who do not read yet)
         packOf(x)?.let { p -> if (a.autoRead && LearnCatalog.readAloudByDefault(p.level)) a.speak(Markdown.spoken(x.prompt, lang), lang) }
