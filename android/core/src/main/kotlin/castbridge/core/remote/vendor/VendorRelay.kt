@@ -25,8 +25,8 @@ object KeyRouting {
         if (k == RemoteKey.HOME) return if (target == RemoteTarget.SYSTEM && vendorReady) listOf(Route.VENDOR) else listOf(Route.APP)
         if (castbridgeFront) return if (target == RemoteTarget.SYSTEM && vendorReady) listOf(Route.VENDOR) else listOf(Route.APP) + vendor
         if (target == RemoteTarget.APP) return emptyList()
-        return vendor + (if (accessibility) listOf(Route.ACCESSIBILITY) else emptyList()) +
-            (if (k.kind == RemoteKey.Kind.MEDIA) listOf(Route.MEDIA_SESSION) else emptyList())
+        // Accessibility cannot press media keys; the active media session takes them.
+        return vendor + if (k.kind == RemoteKey.Kind.MEDIA) listOf(Route.MEDIA_SESSION) else if (accessibility) listOf(Route.ACCESSIBILITY) else emptyList()
     }
 
     /** The system-wide actions the relay can stand in for when the accessibility service is not available. */

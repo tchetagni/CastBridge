@@ -27,6 +27,11 @@ import castbridge.core.remote.RemoteKey
 import castbridge.core.remote.RemoteSink
 import castbridge.core.remote.RemoteTarget
 import castbridge.core.remote.TextMode
+import castbridge.core.remote.vendor.KeyRouting
+import castbridge.core.remote.vendor.Route
+import castbridge.core.remote.vendor.VendorBridge
+import castbridge.core.remote.vendor.VendorRelay
+import castbridge.core.remote.vendor.VendorState
 import castbridge.core.tv.ReceiverServer.Companion.q
 import java.io.InputStream
 import java.io.OutputStream
@@ -50,7 +55,29 @@ object RemoteHub {
 
     val api: RemoteApi = RemoteApi(Sink)
 
+    /**
+     * Relay to the manufacturer's remote service of white-label TVs (docs/REMOTE-VENDOR-CVTE.md). Loopback only: the bridge has no
+     * host parameter. Only reachable through [Sink], i.e. after the PIN / trusted Bluetooth link of the phone was checked.
+     */
+    private val vendorBridge = VendorBridge()
+    private val vendor = VendorRelay(vendorBridge)
+    val vendorState: VendorState get() = vendorBridge.state
+    val vendorJournal: List<String> get() = vendor.journal()
+
+    /** Developer-menu test: volume up then volume down (net effect nil). Lines for the diagnostic screen. */
+    fun testVendorRelay(out: (String) -> Unit) {
+        out("Service du fabricant : ${vendorBridge.state}")
+        if (!vendor.ready) { out("Indisponible : ce service n'existe pas sur cette TV, ou il ne répond pas."); return }
+        val up = vendor.relay(RemoteKey.VOLUME_UP, KeyAction.PRESS)
+        Thread.sleep(400)
+        val down = vendor.relay(RemoteKey.VOLUME_DOWN, KeyAction.PRESS)
+        out("Volume + : ${if (up.ok) "envoyé" else up.message}")
+        out("Volume − : ${if (down.ok) "envoyé" else down.message}")
+        out("Avez-vous vu la barre de volume bouger sur la TV ?")
+    }
+
     fun install(s: TvService) {
+        vendorBridge.start()
         if (svc == null) watchdog.scheduleWithFixedDelay({ runCatching { if (api.holding) api.releaseStale() } }, 200, 200, TimeUnit.MILLISECONDS)
         svc = s
     }
@@ -205,12 +232,23 @@ object RemoteHub {
 
     private object Sink : RemoteSink {
         override fun key(k: RemoteKey, action: KeyAction, repeat: Int, target: RemoteTarget): Outcome {
-            if (k.kind == RemoteKey.Kind.VOLUME) return if (action == KeyAction.UP) Outcome.done("audio") else volume(k)
-            if (k == RemoteKey.HOME) return if (action == KeyAction.UP) Outcome.done("app") else home()
             val a = front()
-            if (a != null) return appKey(a, k, action, repeat)
-            if (target == RemoteTarget.APP) return Outcome.refused(NO_SCREEN)
-            return systemKey(k, action)
+            val plan = KeyRouting.plan(k, target, a != null, RemoteAccessibilityService.instance != null, vendor.ready)
+            if (plan.isEmpty()) return Outcome.refused(NO_SCREEN)
+            var last = Outcome.refused(NO_SCREEN)
+            var soft: Outcome? = null
+            // First route that takes the key ends it: a key CastBridge consumed is never sent again to the relay.
+            for (route in plan) {
+                last = when (route) {
+                    Route.AUDIO -> if (action == KeyAction.UP) Outcome.done("audio") else volume(k)
+                    Route.APP -> if (k == RemoteKey.HOME) { if (action == KeyAction.UP) Outcome.done("app") else home() } else appKey(a ?: return last, k, action, repeat).also { if (it.ok) soft = it }
+                    Route.VENDOR -> vendor.relay(k, action)
+                    Route.ACCESSIBILITY -> systemKey(k, action)
+                    Route.MEDIA_SESSION -> if (action == KeyAction.UP) Outcome.done("media") else mediaKey(k)
+                }
+                if (last.ok && last.message == null) return last
+            }
+            return if (!last.ok) soft ?: last else last
         }
 
         private fun appKey(a: Activity, k: RemoteKey, action: KeyAction, repeat: Int): Outcome {
@@ -240,7 +278,6 @@ object RemoteHub {
         }
 
         private fun systemKey(k: RemoteKey, action: KeyAction): Outcome {
-            if (k.kind == RemoteKey.Kind.MEDIA) return if (action == KeyAction.UP) Outcome.done("media") else mediaKey(k)
             val s = RemoteAccessibilityService.instance ?: return Outcome.refused(NO_SCREEN)
             if (action == KeyAction.UP) return Outcome.done("system")
             val ok = onMain {
@@ -287,7 +324,8 @@ object RemoteHub {
 
         override fun global(g: RemoteGlobal): Outcome {
             val s = RemoteAccessibilityService.instance
-                ?: return Outcome.refused("Mode « toute la TV » inactif : activez « CastBridge Télécommande » dans Réglages > Accessibilité de la TV.")
+                ?: return KeyRouting.globalViaVendor(g)?.takeIf { vendor.ready }?.let { vendor.relay(it, KeyAction.PRESS) }
+                    ?: Outcome.refused("Mode « toute la TV » inactif : activez « CastBridge Télécommande » dans Réglages > Accessibilité de la TV.")
             if (g == RemoteGlobal.POWER_DIALOG && Build.VERSION.SDK_INT < 21) return Outcome.refused("indisponible")
             return if (onMain { s.global(g.action) } == true) Outcome.done("system")
             else Outcome.refused("La TV a refusé « ${g.label} » (ce lanceur ne le permet pas).")
@@ -319,6 +357,7 @@ object RemoteHub {
                 append(",\"available\":").append(s?.let { systemUnavailableReason(it) } == null)
                 s?.let { systemUnavailableReason(it) }?.let { append(",\"reason\":").append(q(it)) }
                 append('}')
+                append(",\"vendor\":{\"available\":").append(vendor.ready).append(",\"state\":").append(q(vendorBridge.state.name)).append('}')
                 append(",\"volume\":").append(vol ?: "null")
                 append(",\"muted\":").append(muted ?: "null")
                 append(",\"volumeFixed\":").append(runCatching { am?.isVolumeFixed }.getOrNull() ?: false)

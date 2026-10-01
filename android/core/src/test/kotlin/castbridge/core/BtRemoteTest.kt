@@ -226,7 +226,7 @@ class KeyRoutingTest {
     }
     @Test fun notFrontVendorThenAccessibilityThenMedia() {
         assertEquals(listOf(Route.VENDOR, Route.ACCESSIBILITY), plan(RemoteKey.DPAD_UP, front = false, a11y = true, v = true))
-        assertEquals(listOf(Route.VENDOR, Route.MEDIA_SESSION), plan(RemoteKey.PLAY_PAUSE, front = false, v = true))
+        assertEquals(listOf(Route.VENDOR, Route.MEDIA_SESSION), plan(RemoteKey.PLAY_PAUSE, front = false, a11y = true, v = true))
         assertEquals(listOf(Route.ACCESSIBILITY), plan(RemoteKey.DPAD_UP, front = false, a11y = true, v = false))
         assertEquals(emptyList(), plan(RemoteKey.DPAD_UP, front = false, v = false))
         assertEquals(emptyList(), plan(RemoteKey.DPAD_UP, RemoteTarget.APP, front = false, v = true))
