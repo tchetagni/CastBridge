@@ -16,6 +16,16 @@ android {
         // -Pcastbridge.extraUpdateKey=<its public key>. Both empty by default: the apps built for Esaie talk to
         // https://bridge.sti-cm.com and trust the production key alone (UpdateKeys).
         buildConfigField("String", "EXTRA_UPDATE_KEY", "\"${(project.findProperty("castbridge.extraUpdateKey") as String?) ?: ""}\"")
+        // Activation requirement (docs/TRIAL-EDITION.md § Interrupteur de déploiement): OFF unless -PrequireActivation=true. An UPDATED install (the owner's TV, beta testers) gets
+        // ACTIVATION_GRACE_DAYS of grace; a fresh install is locked at once. TRUSTED_KEYS = the PUBLIC keys that may sign activations, read from a file OUTSIDE the repository
+        // (~/.castbridge-signing/activation-trusted-keys.txt, one « kid=… pub=… scopes=… » line per tool): empty => nobody can activate (the build then refuses to enable the lock).
+        val requireActivation = (project.findProperty("requireActivation") as String?) == "true"
+        val trustedFile = (project.findProperty("trustedKeysFile") as String?)?.let { File(it) } ?: File(System.getProperty("user.home"), ".castbridge-signing/activation-trusted-keys.txt")      // -PtrustedKeysFile=… : essais avec une clé jetable
+        val trustedKeys = if (trustedFile.isFile) trustedFile.readLines().map { it.trim() }.filter { it.startsWith("kid=") && " pub=" in it }.joinToString("\\n") else ""
+        if (requireActivation && trustedKeys.isEmpty()) throw GradleException("requireActivation=true mais aucune clé publique de confiance : créez ~/.castbridge-signing/activation-trusted-keys.txt (lignes « kid=… pub=… scopes=… » données par « Clé publique » de la console ou « cle » de l'outil de bureau). Sans elle, personne ne pourrait activer la TV.")
+        buildConfigField("boolean", "REQUIRE_ACTIVATION", requireActivation.toString())
+        buildConfigField("int", "ACTIVATION_GRACE_DAYS", ((project.findProperty("castbridge.graceDays") as String?) ?: "30"))
+        buildConfigField("String", "TRUSTED_KEYS", "\"$trustedKeys\"")
         buildConfigField("String", "DEFAULT_SERVER", "\"${(project.findProperty("castbridge.serverUrl") as String?) ?: ""}\"")
     }
     buildFeatures { buildConfig = true }

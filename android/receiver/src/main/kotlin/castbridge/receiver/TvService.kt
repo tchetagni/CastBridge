@@ -167,10 +167,27 @@ class TvService : Service(), Device {
             .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true).setContentIntent(open).build()
     }
 
+    // ------------------------------------------------------------------ activation
+    private val activationWatch = object : Runnable {
+        override fun run() {
+            if (started) return
+            ActivationCenter.scanFiles()
+            if (!ActivationCenter.locked()) { startCore(); return }
+            main.postDelayed(this, 5_000)
+        }
+    }
+    private fun watchForActivation() {
+        setStatus("0-storage", "Usage soumis à autorisation : activation requise")
+        main.removeCallbacks(activationWatch); main.postDelayed(activationWatch, 5_000)
+    }
+
     // ------------------------------------------------------------------ core
 
     private fun startCore() {
         if (started) return
+        // A locked TV starts no server, no pairing, no sending, no telemetry: only a watch for the activation (the activation screen or the USB file unlocks it)
+        ActivationCenter.init(this)
+        if (ActivationCenter.locked()) { watchForActivation(); return }
         started = true
         prefs = TvPrefs(this)
         volProvider = AndroidVolumeProvider(this, prefs)

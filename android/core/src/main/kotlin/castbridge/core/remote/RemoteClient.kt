@@ -105,6 +105,13 @@ object RemoteWire {
     }
 }
 
+/** What the user sees as the link: « Bluetooth » when the request goes through the phone's loopback tunnel, « Wi-Fi Direct » on its subnet, otherwise « Wi-Fi ». */
+fun routeName(host: String): String = when {
+    host == "127.0.0.1" || host == "localhost" || host == "::1" || host.startsWith("127.") -> "Bluetooth"
+    host.startsWith("192.168.49.") -> "Wi-Fi Direct"
+    else -> "Wi-Fi"
+}
+
 /**
  * Remote over Wi-Fi: ONE TCP connection kept open (HTTP/1.1 keep-alive, TCP_NODELAY), so a key costs one small write and one
  * small read, no handshake. The TV closes idle connections after 15 s; the session's ping every few seconds keeps it open,
@@ -114,7 +121,8 @@ class HttpRemoteTransport(
     val host: String, val port: Int, private val pin: String,
     private val connectTimeoutMs: Int = 2000, private val readTimeoutMs: Int = 3000,
 ) : RemoteTransport {
-    override val name = "Wi-Fi"
+    /** The route actually used, from the address: the Bluetooth gateway serves the TV's API on the phone's own loopback, Wi-Fi Direct has its own subnet. */
+    override val name: String get() = routeName(host)
     private var sock: Socket? = null
     private var input: BufferedInputStream? = null
     private var output: OutputStream? = null

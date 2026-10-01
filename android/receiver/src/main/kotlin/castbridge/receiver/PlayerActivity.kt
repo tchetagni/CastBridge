@@ -91,6 +91,12 @@ class PlayerActivity : Activity(), TvService.Screen {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_CastBridge_Tv) // leaves the launch theme (splash) for the normal one
         super.onCreate(savedInstanceState)
+        // Activation (docs/TRIAL-EDITION.md): a locked TV (no key, no grace) shows nothing but the activation screen; in the grace period it is offered once a day
+        ActivationCenter.init(this)
+        val gate = ActivationCenter.state()
+        if (gate is castbridge.core.owner.GateState.Locked || (gate is castbridge.core.owner.GateState.Grace && ActivationCenter.dailyPrompt())) {
+            startActivity(Intent(this, ActivationActivity::class.java)); finish(); return
+        }
         setContentView(R.layout.activity_player)
         lead = findViewById(R.id.lead)
         banner = Banner(findViewById(android.R.id.content))
