@@ -78,7 +78,7 @@ def dedup(vals, right=None):
 
 
 def V(v, sep=" ; "):
-    return "(" + sep.join(num(x) for x in v) + ")"
+    return "(" + sep.join(x if isinstance(x, str) else num(x) for x in v) + ")"
 
 
 def Mx(m):
@@ -1427,7 +1427,7 @@ def _expterm(r, cname):
     return cname if r == 0 else cname + exx(r)
 
 
-@gen(C, "l2m-ode2-general", cap=100, cat="Équations différentielles")
+@gen(C, "l2m-ode2-general", cap=75, cat="Équations différentielles")
 def ode2_general(rng, d):
     kind = rng.choice(["real", "real", "double", "complex"])
     if kind == "real":
@@ -1593,3 +1593,931 @@ def ode_system_type(rng, d):
     wr_sel = [t for t in wr if (t.split()[0] != want.split()[0])] + [t for t in wr if t.split()[0] == want.split()[0]]
     return Draft(f"Pour le système X' = AX avec A = {Mx(A)}, quelle est la nature du point d'équilibre (0 ; 0) ?", want, wr_sel[:5],
                  f"Trace = {tr}, déterminant = {det}, discriminant tr² − 4det = {disc} : " + got + ".", src=SRC)
+
+
+# ======================================================================================================== ALGÈBRE LINÉAIRE
+def rmat(rng, n, lo=-4, hi=5):
+    return [[rng.randint(lo, hi) for _ in range(n)] for _ in range(n)]
+
+
+def fnear(rng, v, n=6):
+    """Generic nearby wrong numbers (Fractions)."""
+    v = F(v)
+    return [v + 1, v - 1, v * 2, v / 2 if v else F(3), v + 2, v - 2, v + F(1, 2)][:n]
+
+
+@gen(C, "l2m-charpoly2", cap=60, cat="Valeurs propres")
+def charpoly2(rng, d):
+    m = rmat(rng, 2)
+    a, b, c, dd = m[0][0], m[0][1], m[1][0], m[1][1]
+    tr, de = a + dd, a * dd - b * c
+    for lam in (0, 1, 2, -1, 3):          # det(A - lam I) evaluated directly
+        assert det2([[a - lam, b], [c, dd - lam]]) == lam * lam - tr * lam + de
+    right = poly([1, -tr, de], "λ")
+    cands = [(1, -tr, a * dd + b * c), (1, -(a + b + c + dd), de), (1, -(a * dd), de), (1, tr, -de if de else 1), (1, -tr, de + 1), (1, -(a - dd), de), (1, -tr, a * dd - b - c)]
+    wr = dedup([poly(list(t), "λ") for t in cands], right)
+    return Draft(f"Quel est le polynôme caractéristique det(A − λI) de A = {Mx(m)} ?", right, wr,
+                 f"Pour une matrice 2×2 : λ² − (trace)λ + déterminant = λ² − ({tr})λ + ({de}).".replace("− (-", "+ (-"), src=SRC)
+
+
+@gen(C, "l2m-charpoly3", cap=90, cat="Valeurs propres")
+def charpoly3(rng, d):
+    m = rmat(rng, 3, -3, 3)
+    tr = sum(m[i][i] for i in range(3))
+    c2 = sum(m[i][i] * m[j][j] - m[i][j] * m[j][i] for i, j in ((0, 1), (0, 2), (1, 2)))
+    de = det3(m)
+    assert de == det3_col(m)
+    for lam in (0, 1, 2, -1):             # det(lam I - A) evaluated directly
+        lamI = [[(lam if i == j else 0) - m[i][j] for j in range(3)] for i in range(3)]
+        assert det3(lamI) == lam ** 3 - tr * lam ** 2 + c2 * lam - de
+    right = poly([1, -tr, c2, -de], "λ")
+    pairs = sum(m[i][i] * m[j][j] for i, j in ((0, 1), (0, 2), (1, 2)))
+    cands = [(1, -tr, pairs, -de), (1, -tr, c2, de), (1, tr, c2, -de), (1, -tr, c2 + 1, -de), (1, -tr, c2, -de + 1), (1, -tr, -c2, -de), (1, -tr, c2, -(m[0][0] * m[1][1] * m[2][2]))]
+    wr = dedup([poly(list(t), "λ") for t in cands], right)
+    return Draft(f"Quel est le polynôme caractéristique det(λI − A) de A = {Mx(m)} ?", right, wr,
+                 f"λ³ − tr(A)λ² + (somme des mineurs principaux d'ordre 2)λ − det(A) avec tr = {tr}, somme = {c2}, det = {de}.", src=SRC)
+
+
+@gen(C, "l2m-matrix-power-diag", cap=90, cat="Diagonalisation")
+def matrix_power_diag(rng, d):
+    P = unimodular(rng, 2, 3 if d < 4 else 4)
+    l1, l2 = rng.sample(range(-3, 4), 2)
+    Pi = inverse(P)
+    A = [[int(x) for x in row] for row in matmul(matmul(P, [[l1, 0], [0, l2]]), Pi)]
+    k = rng.randint(2, 5)
+    direct = [[F(int(i == j)) for j in range(2)] for i in range(2)]
+    for _ in range(k):
+        direct = matmul(direct, A)
+    viaD = matmul(matmul(P, [[l1 ** k, 0], [0, l2 ** k]]), Pi)
+    assert direct == viaD
+    i, j = rng.randrange(2), rng.randrange(2)
+    val = int(direct[i][j])
+    wr = [A[i][j] ** k, k * A[i][j], int(direct[j][i]), val + A[i][j], l1 ** k + l2 ** k if i == j else val + 1, int(direct[1 - i][j])] + near_ints(rng, val, 4)
+    return Draft(f"Soit A = {Mx(A)}, diagonalisable. Quel est le coefficient de la ligne {i + 1}, colonne {j + 1} de A{sup(k)} ?", str(val), dedup([str(w) for w in wr], str(val)),
+                 f"A = PDP⁻¹ donc Aᵏ = PDᵏP⁻¹ (valeurs propres {l1} et {l2}) ; on peut aussi multiplier A par elle-même {k} fois.", src=SRC)
+
+
+_R_JORDAN = "Non : valeur propre double dont l'espace propre est de dimension 1"
+_R_DISTINCT = "Oui : deux valeurs propres réelles distinctes"
+_R_SCALAR = "Oui : c'est un multiple de la matrice identité"
+_R_NOREAL = "Non : le polynôme caractéristique n'a aucune racine réelle"
+
+
+def _diag_class(m):
+    tr, de = m[0][0] + m[1][1], det2(m)
+    disc = tr * tr - 4 * de
+    if disc < 0:
+        return "noreal"
+    if disc > 0:
+        return "distinct"
+    lam = F(tr, 2)
+    if m[0][1] == 0 and m[1][0] == 0 and m[0][0] == m[1][1]:
+        return "scalar"
+    # double eigenvalue: eigenspace = kernel of A - lam I, dimension 2 - rank
+    rk = rank([[m[0][0] - lam, m[0][1]], [m[1][0], m[1][1] - lam]])
+    return "scalar" if rk == 0 else "jordan"
+
+
+@gen(C, "l2m-diagonalizable-reason", cap=70, cat="Diagonalisation")
+def diagonalizable_reason(rng, d):
+    cls = rng.choice(["jordan", "distinct", "scalar", "noreal"])
+    a = rng.randint(-5, 5)
+    if cls == "jordan":
+        c = nz(rng, -5, 5)
+        m = [[a, c], [0, a]] if rng.random() < 0.5 else [[a, 0], [c, a]]
+    elif cls == "scalar":
+        a = nz(rng, -5, 5)
+        m = [[a, 0], [0, a]]
+    elif cls == "noreal":
+        b = nz(rng, -4, 4)
+        m = [[a, -b], [b, a]] if rng.random() < 0.5 else [[a, b * 2], [-b * 3, a]]
+    else:
+        b, c = rng.randint(-5, 5), nz(rng, -5, 5)
+        if a == b:
+            return None
+        m = [[a, c], [0, b]] if rng.random() < 0.5 else [[a, 0], [c, b]]
+    assert _diag_class(m) == cls, (m, cls)
+    right = {"jordan": _R_JORDAN, "distinct": _R_DISTINCT, "scalar": _R_SCALAR, "noreal": _R_NOREAL}[cls]
+    wr = [r for r in (_R_JORDAN, _R_DISTINCT, _R_SCALAR, _R_NOREAL) if r != right]
+    return Draft(f"Soit A = {Mx(m)}. Quelle affirmation sur la diagonalisation de A sur ℝ est correcte ?", right, wr,
+                 {"jordan": "Seule valeur propre double, avec A ≠ λI : un seul vecteur propre indépendant, donc A n'est pas diagonalisable.",
+                  "distinct": "Deux valeurs propres réelles distinctes donnent deux vecteurs propres indépendants : A est diagonalisable.",
+                  "scalar": "A = aI est déjà diagonale : elle est diagonalisable.",
+                  "noreal": "Le discriminant du polynôme caractéristique est négatif : pas de valeur propre réelle, donc pas de diagonalisation sur ℝ."}[cls], src=SRC)
+
+
+def _eigen_matrix(rng, n, lams, steps=4):
+    P = unimodular(rng, n, steps)
+    Pi = inverse(P)
+    D = [[lams[i] if i == j else 0 for j in range(n)] for i in range(n)]
+    A = [[int(x) for x in row] for row in matmul(matmul(P, D), Pi)]
+    return A, P
+
+
+@gen(C, "l2m-eigenvector-pick", cap=70, cat="Valeurs propres")
+def eigenvector_pick(rng, d):
+    n = 2 if d <= 3 else rng.choice([2, 3])
+    lams = rng.sample(range(-3, 5), n)
+    A, P = _eigen_matrix(rng, n, lams, 3)
+    cols = [[P[i][j] for i in range(n)] for j in range(n)]
+    j = rng.randrange(n)
+    lam = lams[j]
+    t = rng.choice([1, 1, -1, 2])
+    right_v = [t * x for x in cols[j]]
+    ok = lambda v, l: matvec(A, v) == [l * x for x in v] and any(v)
+    assert ok(right_v, lam)
+    cand = [cols[(j + 1) % n], [x + y for x, y in zip(cols[j], cols[(j + 1) % n])], list(reversed(cols[j])), [cols[j][0] + 1] + cols[j][1:], [x + 1 for x in cols[j]], [2 * cols[j][0]] + cols[j][1:]]
+    wr = [V(v) for v in cand if not ok(v, lam) and v != right_v and not all(x == 0 for x in v)]
+    right = V(right_v)
+    return Draft(f"La matrice A = {Mx(A)} admet la valeur propre λ = {lam}. Quel est un vecteur propre associé à λ ?".replace(f"λ = {lam}", f"λ = {num(lam)}"), right, dedup(wr, right),
+                 f"On vérifie A·v = λ·v : A·{right} = {V(matvec(A, right_v))} = {num(lam)}·{right}.", src=SRC)
+
+
+@gen(C, "l2m-eigen3-largest", cap=80, cat="Valeurs propres")
+def eigen3_largest(rng, d):
+    lams = rng.sample(range(-4, 6), 3)
+    A, P = _eigen_matrix(rng, 3, lams, 5)
+    tr, c2, de = sum(A[i][i] for i in range(3)), sum(A[i][i] * A[j][j] - A[i][j] * A[j][i] for i, j in ((0, 1), (0, 2), (1, 2))), det3(A)
+    for l in lams:
+        lamI = [[(l if i == j else 0) - A[i][j] for j in range(3)] for i in range(3)]
+        assert det3(lamI) == 0
+    assert tr == sum(lams) and de == lams[0] * lams[1] * lams[2]
+    mx = max(lams)
+    others = [l for l in lams if l != mx]
+    wr = [min(lams), tr, de, A[0][0], c2, max(others) + 1] + others
+    return Draft(f"La matrice A = {Mx(A)} a trois valeurs propres entières distinctes. Quelle est la plus grande ?", num(mx), dedup([num(w) for w in wr], num(mx)),
+                 f"Le polynôme caractéristique se factorise : valeurs propres {sorted(lams)} (somme = trace = {tr}, produit = déterminant = {de}).", src=SRC)
+
+
+def _rank2_matrix(rng):
+    """3x3 integer matrix of rank 2 with a known kernel vector v (rows orthogonal to v)."""
+    while True:
+        v = [rng.randint(-3, 3) for _ in range(3)]
+        if not any(v):
+            continue
+        w1, w2 = [rng.randint(-3, 3) for _ in range(3)], [rng.randint(-3, 3) for _ in range(3)]
+        cross = lambda a, b: [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]
+        r1, r2 = cross(v, w1), cross(v, w2)
+        al, be = rng.randint(-2, 2), rng.randint(-2, 2)
+        r3 = [al * x + be * y for x, y in zip(r1, r2)]
+        rows = [r1, r2, r3]
+        rng.shuffle(rows)
+        if rank(rows) == 2 and minors_rank(rows) == 2 and all(abs(x) <= 12 for r in rows for x in r):
+            return rows, v
+
+
+@gen(C, "l2m-kernel-member", cap=70, cat="Applications linéaires")
+def kernel_member(rng, d):
+    A, v = _rank2_matrix(rng)
+    t = rng.choice([1, -1, 2, -2])
+    right_v = [t * x for x in v]
+    assert matvec(A, right_v) == [0, 0, 0]
+    cand = []
+    for i in range(3):
+        w = list(right_v)
+        w[i] += rng.choice([-1, 1])
+        cand.append(w)
+    cand.append([right_v[1], right_v[2], right_v[0]])
+    cand.append([x + 1 for x in right_v])
+    wr = [V(w) for w in cand if matvec(A, w) != [0, 0, 0] and w != right_v]
+    right = V(right_v)
+    return Draft(f"Soit A = {Mx(A)}. Lequel de ces vecteurs appartient au noyau de A ?", right, dedup(wr, right),
+                 f"On calcule A·x : seul {right} donne le vecteur nul (le noyau est une droite car rang A = 2).", src=SRC)
+
+
+@gen(C, "l2m-image-member", cap=60, cat="Applications linéaires")
+def image_member(rng, d):
+    A, v = _rank2_matrix(rng)
+    x0 = [rng.randint(-3, 3) for _ in range(3)]
+    b = matvec(A, x0)
+    if not any(b):
+        return None
+    inimg = lambda w: rank([A[i] + [w[i]] for i in range(3)]) == rank(A)
+    assert inimg(b)
+    cand = []
+    for i in range(3):
+        w = list(b)
+        w[i] += rng.choice([-1, 1, 2])
+        cand.append(w)
+    cand.append([b[0] + 1, b[1] + 1, b[2] + 1])
+    wr = [V(w) for w in cand if not inimg(w)]
+    right = V(b)
+    return Draft(f"Soit A = {Mx(A)}, de rang 2. Lequel de ces vecteurs appartient à l'image de A ?", right, dedup(wr, right),
+                 f"{right} = A·{V(x0)} : le système Ax = b admet une solution, contrairement aux autres propositions.", src=SRC)
+
+
+@gen(C, "l2m-span-dim", cap=70, cat="Espaces vectoriels")
+def span_dim(rng, d):
+    dim = rng.choice([3, 4])
+    k = rng.choice([3, 4])
+    r = rng.randint(1, min(dim, k))
+    base = [[rng.randint(-3, 3) for _ in range(dim)] for _ in range(r)]
+    if rank(base) != r:
+        return None
+    vecs = []
+    for i in range(k):
+        if i < r:
+            vecs.append(list(base[i]))
+        else:
+            co = [rng.randint(-2, 2) for _ in range(r)]
+            vecs.append([sum(c * b[j] for c, b in zip(co, base)) for j in range(dim)])
+    rng.shuffle(vecs)
+    rk = rank(vecs)
+    assert rk == minors_rank(vecs)
+    if rk != r:
+        return None
+    wr = [str(x) for x in range(0, 5) if x != rk]
+    names = ", ".join(V(v) for v in vecs)
+    return Draft(f"Quelle est la dimension du sous-espace de ℝ{sup(dim)} engendré par les vecteurs {names} ?", str(rk), wr[:4],
+                 f"On échelonne la matrice des vecteurs : il reste {rk} ligne(s) non nulle(s), donc la dimension de l'espace engendré vaut {rk}.", src=SRC)
+
+
+@gen(C, "l2m-basis-k", cap=90, cat="Espaces vectoriels")
+def basis_k(rng, d):
+    u = [rng.randint(-3, 3) for _ in range(3)]
+    v = [rng.randint(-3, 3) for _ in range(3)]
+    w0 = [rng.randint(-3, 3), rng.randint(-3, 3)]
+    # determinant of (u, v, (w0, k)) as columns is affine in k : det = alpha*k + beta
+    def det_k(k):
+        return det3([[u[0], v[0], w0[0]], [u[1], v[1], w0[1]], [u[2], v[2], k]])
+    beta = det_k(0)
+    alpha = det_k(1) - beta
+    if alpha == 0:
+        return None
+    k0 = F(-beta, alpha)
+    assert det_k(k0) == 0 and det3_col([[u[0], v[0], w0[0]], [u[1], v[1], w0[1]], [u[2], v[2], k0]]) == 0
+    assert det_k(k0 + 1) != 0
+    rows_rank = rank([[u[0], v[0], w0[0]], [u[1], v[1], w0[1]], [u[2], v[2], k0]])
+    assert rows_rank == 2 or rows_rank < 3
+    wr = [F(beta, alpha), F(alpha, beta) if beta else F(2), k0 + 1, F(-alpha, beta) if beta else F(3), F(beta), F(-beta)]
+    return Draft(f"Pour quelle valeur de k la famille ({V(u)}, {V(v)}, {V([w0[0], w0[1], 'k'])}) n'est-elle pas une base de ℝ³ ?", num(k0), dedup([num(w) for w in wr], num(k0)),
+                 f"Le déterminant des trois vecteurs vaut {num(alpha)}k + ({num(beta)}) ; il s'annule seulement pour k = {num(k0)}.", src=SRC)
+
+
+@gen(C, "l2m-orth-k", cap=70, cat="Espaces euclidiens")
+def orth_k(rng, d):
+    a, b, c, dd, e = rng.randint(-5, 5), rng.randint(-5, 5), rng.randint(-5, 5), rng.randint(-5, 5), nz(rng, -5, 5)
+    s = a * c + b * dd
+    k = F(-s, e)
+    assert a * c + b * dd + k * e == 0
+    if s == 0:
+        return None
+    wr = [F(s, e), F(-s, 1), F(e, s), F(-e, s), k + 1, F(-s, c) if c else F(1, 2)]
+    return Draft(f"Pour quelle valeur de k les vecteurs u = {V([a, b, 'k'])} et v = {V([c, dd, e])} sont-ils orthogonaux dans ℝ³ ?", num(k), dedup([num(w) for w in wr], num(k)), f"u·v = {num(a)}·{par(c)} + {par(b)}·{par(dd)} + k·{par(e)} = 0 donne k = {num(k)}.", src=SRC)
+
+
+_PYTH = [(1, 2, 2, 3), (2, 3, 6, 7), (1, 4, 8, 9), (4, 4, 7, 9), (2, 6, 9, 11), (6, 6, 7, 11), (3, 4, 12, 13), (2, 10, 11, 15), (1, 12, 12, 17), (8, 9, 12, 17)]
+
+
+def _pyth_vec(rng):
+    x, y, z, n = rng.choice(_PYTH)
+    v = [x, y, z]
+    rng.shuffle(v)
+    v = [e * rng.choice([1, -1]) for e in v]
+    sc = rng.choice([1, 1, 2])
+    return [e * sc for e in v], n * sc
+
+
+@gen(C, "l2m-norm-cos", cap=80, cat="Espaces euclidiens")
+def norm_cos(rng, d):
+    u, nu = _pyth_vec(rng)
+    assert sum(x * x for x in u) == nu * nu
+    if rng.random() < 0.4:
+        wr = [nu * nu, sum(abs(x) for x in u), nu + 1, nu - 1, nu * 2] + near_ints(rng, nu, 3)
+        return Draft(f"Quelle est la norme euclidienne du vecteur u = {V(u)} de ℝ³ ?", str(nu), dedup([str(w) for w in wr], str(nu)),
+                     f"‖u‖ = √({' + '.join(str(x * x) for x in u)}) = √{nu * nu} = {nu}.", src=SRC)
+    v, nv = _pyth_vec(rng)
+    dot = sum(x * y for x, y in zip(u, v))
+    cos = F(dot, nu * nv)
+    if abs(cos) > 1:
+        return None
+    wr = [F(dot), F(dot, nu * nu * nv * nv), F(dot, nu + nv), F(dot, nu * nv * 2), F(dot, nu), F(dot, nv), cos + F(1, 2)]
+    return Draft(f"Quel est le cosinus de l'angle entre u = {V(u)} et v = {V(v)} dans ℝ³ ?", num(cos), dedup([num(F(w)) for w in wr], num(cos)),
+                 f"cos θ = u·v ÷ (‖u‖‖v‖) = {dot} ÷ ({nu} × {nv}) = {num(cos)}.", src=SRC)
+
+
+@gen(C, "l2m-inner-poly", cap=60, cat="Espaces euclidiens")
+def inner_poly(rng, d):
+    p = [rng.randint(-3, 3) for _ in range(3)]
+    q = [rng.randint(-3, 3) for _ in range(3)]
+    if not any(p) or not any(q):
+        return None
+    s1 = sum(F(p[i] * q[j], i + j + 1) for i in range(3) for j in range(3))
+    prod = {}
+    for i in range(3):
+        for j in range(3):
+            prod[i + j] = prod.get(i + j, 0) + p[i] * q[j]
+    s2 = sum(F(c, e + 1) for e, c in prod.items())
+    assert s1 == s2
+    def P(co):
+        return poly([co[2], co[1], co[0]], "t")
+    int_p = sum(F(c, i + 1) for i, c in enumerate(p))
+    int_q = sum(F(c, i + 1) for i, c in enumerate(q))
+    wr = [F(sum(a * b for a, b in zip(p, q))), int_p * int_q, int_p + int_q, s1 + 1, sum(F(c, e + 1) for e, c in prod.items()) * 2, F(sum(a * b for a, b in zip(p, q)), 3)]
+    return Draft(f"Dans ℝ₂[t] muni du produit scalaire ⟨P, Q⟩ = ∫ de 0 à 1 de P(t)Q(t) dt, que vaut ⟨{P(p)}, {P(q)}⟩ ?", num(s1), dedup([num(w) for w in wr], num(s1)),
+                 "On développe le produit PQ et on intègre terme à terme sur [0 ; 1] : ∫ tᵏ dt = 1/(k + 1).", src=SRC)
+
+
+@gen(C, "l2m-proj-line", cap=90, cat="Espaces euclidiens")
+def proj_line(rng, d):
+    n = rng.choice([2, 3])
+    u = [rng.randint(-3, 3) for _ in range(n)]
+    v = [rng.randint(-5, 5) for _ in range(n)]
+    if not any(u) or not any(v):
+        return None
+    uu, vu = sum(x * x for x in u), sum(x * y for x, y in zip(u, v))
+    if vu == 0:
+        return None
+    lam = F(vu, uu)
+    p = [lam * x for x in u]
+    assert sum((vi - pi) * ui for vi, pi, ui in zip(v, p, u)) == 0           # v - p is orthogonal to u
+    assert all(p[i] * u[j] == p[j] * u[i] for i in range(n) for j in range(n))   # p is collinear with u
+    wr = [[vu * x for x in u], [F(vu, 1) / F(math.isqrt(uu)) * x if False else F(vu, uu) * y for y in v], [vi - pi for vi, pi in zip(v, p)], [F(uu, vu) * x for x in u], [F(vu, uu) * x + 1 for x in u]]
+    right = V(p)
+    return Draft(f"Quelle est la projection orthogonale du vecteur v = {V(v)} sur la droite engendrée par u = {V(u)} ?", right, dedup([V(w) for w in wr], right),
+                 f"p = (v·u ÷ u·u)·u = ({vu}/{uu})·u = {right}.", src=SRC)
+
+
+@gen(C, "l2m-proj-plane", cap=70, cat="Espaces euclidiens")
+def proj_plane(rng, d):
+    nvec = [rng.randint(-3, 3) for _ in range(3)]
+    if not any(nvec):
+        return None
+    v = [rng.randint(-5, 5) for _ in range(3)]
+    nn, vn = sum(x * x for x in nvec), sum(x * y for x, y in zip(nvec, v))
+    if vn == 0:
+        return None
+    lam = F(vn, nn)
+    p = [vi - lam * ni for vi, ni in zip(v, nvec)]
+    assert sum(pi * ni for pi, ni in zip(p, nvec)) == 0                      # p lies in the plane
+    assert all((vi - pi) * nvec[j] == (v[j] - p[j]) * nvec[i] for i, (vi, pi) in enumerate(zip(v, p)) for j in range(3))   # v - p collinear with n
+    wr = [[lam * x for x in nvec], v, [vi + lam * ni for vi, ni in zip(v, nvec)], [vi - vn * ni for vi, ni in zip(v, nvec)], [vi - 2 * lam * ni for vi, ni in zip(v, nvec)]]
+    right = V(p)
+    return Draft(f"Quelle est la projection orthogonale de v = {V(v)} sur le plan d'équation {lin_text(nvec)} = 0 ?", right, dedup([V(w) for w in wr], right),
+                 f"On retire à v sa composante normale : p = v − (v·n ÷ n·n)·n avec n = {V(nvec)}.", src=SRC)
+
+
+@gen(C, "l2m-inverse3-entry", cap=90, cat="Matrices")
+def inverse3_entry(rng, d):
+    while True:
+        m = rmat(rng, 3, -3, 3)
+        de = det3(m)
+        if de in (1, -1, 2, -2, 3, -3, 4, -4):
+            break
+    inv = inverse(m)
+    assert matmul(m, inv) == ident(3) and det3_col(m) == de
+    i, j = rng.randrange(3), rng.randrange(3)
+    # cofactor formula for the (i, j) entry of the inverse: C_ji / det
+    def minor(r, c):
+        rows = [[x for cc, x in enumerate(row) if cc != c] for rr, row in enumerate(m) if rr != r]
+        return det2(rows)
+    cof = lambda r, c: (-1) ** (r + c) * minor(r, c)
+    val = F(cof(j, i), de)
+    assert val == inv[i][j]
+    kind = rng.choice(["entry", "entry", "trace"])
+    if kind == "trace":
+        t = sum(inv[k][k] for k in range(3))
+        assert t == sum(F(cof(k, k), de) for k in range(3))
+        wr = [F(sum(m[k][k] for k in range(3)), de), sum(F(1, m[k][k]) for k in range(3) if m[k][k]) if all(m[k][k] for k in range(3)) else t + 1, F(1, de), t + 1, F(sum(cof(k, k) for k in range(3))), t * de]
+        return Draft(f"Quelle est la trace de l'inverse de A = {Mx(m)} ?", num(t), dedup([num(F(w)) for w in wr], num(t)),
+                     f"det A = {de} ; les coefficients diagonaux de A⁻¹ sont les cofacteurs diagonaux divisés par det A.", src=SRC)
+    wr = [F(cof(i, j), de), F(cof(j, i)), F(minor(j, i), de), F(1, m[i][j]) if m[i][j] else val + 1, val + 1, F(de * cof(j, i))]
+    return Draft(f"Quel est le coefficient de la ligne {i + 1}, colonne {j + 1} de l'inverse de A = {Mx(m)} ?", num(val), dedup([num(F(w)) for w in wr], num(val)),
+                 f"det A = {de} ; A⁻¹ = (1/det A)·(matrice des cofacteurs)ᵀ : le coefficient ({i + 1},{j + 1}) est C_{j + 1}{i + 1}/det A = {num(val)}.", src=SRC)
+
+
+@gen(C, "l2m-det-properties", cap=75, cat="Matrices")
+def det_properties(rng, d):
+    n = rng.choice([2, 3, 4])
+    dA = nz(rng, -4, 4)
+    kind = rng.choice(["scal", "inv", "pow", "prod", "transp"])
+    k, m = rng.randint(2, 4), rng.randint(2, 4)
+    dB = nz(rng, -3, 3)
+    A = [[dA if i == j == 0 else int(i == j) for j in range(n)] for i in range(n)]          # diag(dA, 1, ..., 1)
+    B = [[dB if i == j == 0 else int(i == j) for j in range(n)] for i in range(n)]
+    if kind == "scal":
+        val = F(k ** n * dA)
+        direct = _det([[k * x for x in row] for row in A])
+        assert direct == val
+        text = f"A est une matrice carrée d'ordre {n} de déterminant {num(dA)}. Que vaut det({k}A) ?"
+        wr = [k * dA, k ** (n - 1) * dA, k * n * dA, F(dA, k ** n), (k + n) * dA, val + k]
+    elif kind == "inv":
+        val = F(1, dA)
+        direct = _det(inverse(A))
+        assert direct == val
+        text = f"A est une matrice inversible d'ordre {n} de déterminant {num(dA)}. Que vaut det(A⁻¹) ?"
+        wr = [F(dA), F(-dA), F(1, dA ** 2), F(n, dA), F(dA * dA), F(1, n * dA)]
+    elif kind == "pow":
+        val = F(dA ** m)
+        P = ident(n)
+        for _ in range(m):
+            P = matmul(P, A)
+        assert _det(P) == val
+        text = f"A est une matrice carrée d'ordre {n} de déterminant {num(dA)}. Que vaut det(A{sup(m)}) ?"
+        wr = [m * dA, dA ** (m + 1), dA ** (m - 1), F(dA, m), n * dA ** m, dA ** n]
+    elif kind == "prod":
+        val = F(dA * dB)
+        assert _det(matmul(A, B)) == val
+        text = f"A et B sont deux matrices d'ordre {n}, avec det A = {num(dA)} et det B = {num(dB)}. Que vaut det(AB) ?"
+        wr = [dA + dB, F(dA, dB), dA * dB + 1, dA ** n * dB, dB ** n * dA, dA * dA * dB]
+    else:
+        val = F(dA)
+        At = [list(r) for r in zip(*A)]
+        assert _det(At) == val
+        text = f"A est une matrice d'ordre {n} avec det A = {num(dA)}. Que vaut det(2Aᵀ) ?"
+        val = F(2 ** n * dA)
+        assert _det([[2 * x for x in r] for r in At]) == val
+        wr = [2 * dA, dA, F(dA, 2 ** n), 2 ** (n - 1) * dA, 2 * n * dA, (2 + n) * dA]
+    right = num(val)
+    return Draft(text, right, dedup([num(F(w)) for w in wr], right), "On utilise les propriétés du déterminant (multilinéarité, det(AB) = det A·det B, det Aᵀ = det A) ; vérifié sur une matrice diagonale.", src=SRC)
+
+
+@gen(C, "l2m-linear-map-image", cap=60, cat="Applications linéaires")
+def linear_map_image(rng, d):
+    M_ = [[rng.randint(-3, 3) for _ in range(3)] for _ in range(3)]
+    if any(not any(r) for r in M_):
+        return None
+    v = [rng.randint(-3, 3) for _ in range(3)]
+    img = [sum(M_[i][j] * v[j] for j in range(3)) for i in range(3)]
+    assert img == matvec(M_, v)
+    fx = lambda x, y, z: tuple(sum(M_[i][j] * (x, y, z)[j] for j in range(3)) for i in range(3))
+    assert list(fx(*v)) == img
+    Mt = [list(r) for r in zip(*M_)]
+    wr = [matvec(Mt, v), [img[1], img[2], img[0]], [img[0], img[1], img[2] + 1], [sum(M_[i]) for i in range(3)], [M_[0][0] * v[0], M_[1][1] * v[1], M_[2][2] * v[2]]]
+    right = V(img)
+    comps = ", ".join(lin_text(r) for r in M_)
+    return Draft(f"Soit f(x, y, z) = ({comps}). Que vaut f{V(v)} ?", right, dedup([V(w) for w in wr if list(w) != img], right),
+                 f"On remplace (x ; y ; z) par {V(v)} dans chaque composante : f{V(v)} = {right}.", src=SRC)
+
+
+# ======================================================================================================== PROBABILITÉS ET STATISTIQUES
+def phi(z):
+    return 0.5 * (1 + math.erf(z / math.sqrt(2)))
+
+
+def phi4(z):
+    """Φ(z) rounded to 4 decimals, as an exact Fraction (the 'table value' given in the statement)."""
+    return F(round(phi(float(z)) * 10000), 10000)
+
+
+_ZS = [F(x, 100) for x in (25, 50, 75, 80, 100, 120, 125, 128, 150, 164, 165, 175, 180, 196, 200, 225, 233, 250, 258, 300)]
+
+
+def zt(z):
+    return dec(z) if z.denominator == 1 or _terminating(z) else num(z)
+
+
+@gen(C, "l2m-normal-std", cap=90, cat="Lois continues")
+def normal_std(rng, d):
+    kind = rng.choice(["gt", "neg", "sym", "tails", "between", "mixed"])
+    z = rng.choice(_ZS)
+    pz = phi4(z)
+    if kind == "gt":
+        val = 1 - pz
+        exact = 1 - phi(float(z))
+        text = f"Z suit la loi normale centrée réduite et Φ({zt(z)}) = {dec(pz)}. Quelle est P(Z > {zt(z)}) ?"
+        wr = [pz, 1 - 2 * pz + 1 if False else 2 * pz - 1, 2 * (1 - pz), pz - F(1, 2), 1 - pz / 2]
+    elif kind == "neg":
+        val = 1 - pz
+        exact = phi(-float(z))
+        text = f"Z suit la loi normale centrée réduite et Φ({zt(z)}) = {dec(pz)}. Quelle est P(Z < −{zt(z)}) ?"
+        wr = [pz, 2 * pz - 1, 2 * (1 - pz), F(1, 2) - pz if pz < F(1, 2) else pz - F(1, 2), 1 - pz / 2]
+    elif kind == "sym":
+        val = 2 * pz - 1
+        exact = phi(float(z)) - phi(-float(z))
+        text = f"Z suit la loi normale centrée réduite et Φ({zt(z)}) = {dec(pz)}. Quelle est P(−{zt(z)} < Z < {zt(z)}) ?"
+        wr = [pz, 2 * (1 - pz), 1 - pz, 2 * pz, pz - F(1, 2)]
+    elif kind == "tails":
+        val = 2 * (1 - pz)
+        exact = 2 * (1 - phi(float(z)))
+        text = f"Z suit la loi normale centrée réduite et Φ({zt(z)}) = {dec(pz)}. Quelle est P(|Z| > {zt(z)}) ?"
+        wr = [1 - pz, 2 * pz - 1, pz, 2 * pz, 1 - 2 * (1 - pz) if False else (1 - pz) / 2]
+    elif kind == "between":
+        z2 = rng.choice([w for w in _ZS if w > z] or [F(300)])
+        if z2 <= z:
+            return None
+        p2 = phi4(z2)
+        val = p2 - pz
+        exact = phi(float(z2)) - phi(float(z))
+        text = f"Z suit la loi normale centrée réduite, avec Φ({zt(z)}) = {dec(pz)} et Φ({zt(z2)}) = {dec(p2)}. Quelle est P({zt(z)} < Z < {zt(z2)}) ?"
+        wr = [p2 + pz - 1, p2 - pz + F(1, 2), 1 - p2 + pz, (p2 - pz) * 2, pz * p2, p2]
+    else:
+        z2 = rng.choice(_ZS)
+        p2 = phi4(z2)
+        val = pz + p2 - 1
+        exact = phi(float(z2)) - phi(-float(z))
+        text = f"Z suit la loi normale centrée réduite, avec Φ({zt(z)}) = {dec(pz)} et Φ({zt(z2)}) = {dec(p2)}. Quelle est P(−{zt(z)} < Z < {zt(z2)}) ?"
+        wr = [p2 - pz, pz + p2, 1 - pz - p2 if pz + p2 < 1 else pz + p2 - F(3, 2), pz * p2, p2 + pz - F(1, 2)]
+    assert abs(float(val) - exact) < 2.5e-4, (kind, z, val, exact)
+    right = dec(val)
+    return Draft(text, right, dedup([dec(F(w)) for w in wr], right), "On utilise la symétrie Φ(−z) = 1 − Φ(z) et P(a < Z < b) = Φ(b) − Φ(a).", src=SRC)
+
+
+@gen(C, "l2m-normal-general", cap=80, cat="Lois continues")
+def normal_general(rng, d):
+    mu, sg = rng.randint(0, 120), rng.randint(2, 20)
+    k = rng.choice([F(1, 2), F(1), F(3, 2), F(2), F(5, 2), F(1, 4), F(3, 4)])
+    shift = k * sg
+    if shift.denominator != 1:
+        return None
+    shift = int(shift)
+    pk = phi4(k)
+    kind = rng.choice(["lt", "gt", "inside", "below"])
+    x = mu + shift
+    if kind == "lt":
+        val, exact = pk, phi(float(k))
+        text = f"X suit la loi normale N({mu} ; {sg}²) (variance {sg * sg}) et Φ({dec(k)}) = {dec(pk)}. Quelle est P(X < {x}) ?"
+        ex_ = f"On centre et on réduit : (x − μ)/σ = ({x} − {mu})/{sg} = {dec(k)}, donc P(X < {x}) = Φ({dec(k)})."
+        wr = [1 - pk, 2 * pk - 1, pk - F(1, 2), 1 - pk / 2, phi4(F(shift, sg * sg)) if shift else pk + F(1, 10)]
+    elif kind == "gt":
+        val, exact = 1 - pk, 1 - phi(float(k))
+        text = f"X suit la loi normale N({mu} ; {sg}²) (variance {sg * sg}) et Φ({dec(k)}) = {dec(pk)}. Quelle est P(X > {x}) ?"
+        ex_ = f"(x − μ)/σ = {dec(k)} ; P(X > {x}) = 1 − Φ({dec(k)})."
+        wr = [pk, 2 * (1 - pk), 2 * pk - 1, 1 - pk / 2, phi4(F(shift, sg * sg)) if shift else pk + F(1, 10)]
+    elif kind == "inside":
+        val, exact = 2 * pk - 1, phi(float(k)) - phi(-float(k))
+        text = f"X suit la loi normale N({mu} ; {sg}²) (variance {sg * sg}) et Φ({dec(k)}) = {dec(pk)}. Quelle est P({mu - shift} < X < {mu + shift}) ?"
+        ex_ = f"L'intervalle est μ ± {dec(k)}σ : probabilité 2Φ({dec(k)}) − 1."
+        wr = [pk, 2 * (1 - pk), 1 - pk, 2 * pk, pk - F(1, 2)]
+    else:
+        val, exact = 1 - pk, phi(-float(k))
+        text = f"X suit la loi normale N({mu} ; {sg}²) (variance {sg * sg}) et Φ({dec(k)}) = {dec(pk)}. Quelle est P(X < {mu - shift}) ?"
+        ex_ = f"(x − μ)/σ = −{dec(k)} ; P(X < {mu - shift}) = Φ(−{dec(k)}) = 1 − Φ({dec(k)})."
+        wr = [pk, 2 * pk - 1, 2 * (1 - pk), 1 - pk / 2, pk - F(1, 2)]
+    assert abs(float(val) - exact) < 2.5e-4
+    right = dec(val)
+    return Draft(text, right, dedup([dec(F(w)) for w in wr], right), ex_, src=SRC)
+
+
+_CRIT = {F(90): F(1645, 1000), F(95): F(196, 100), F(99): F(2576, 1000)}
+
+
+@gen(C, "l2m-ci-mean", cap=100, cat="Statistiques inférentielles")
+def ci_mean(rng, d):
+    level = rng.choice([90, 95, 99])
+    z = _CRIT[F(level)]
+    n = rng.choice([4, 9, 16, 25, 36, 49, 64, 81, 100, 144, 196, 225, 400])
+    sg = rng.randint(2, 30)
+    xbar = rng.randint(10, 200)
+    rn = math.isqrt(n)
+    assert rn * rn == n
+    h = z * sg / rn
+    lo, hi = xbar - h, xbar + h
+    # second method: float computation, and symmetry of the interval around the mean
+    assert abs(float(hi - lo) - 2 * float(z) * sg / math.sqrt(n)) < 1e-9 and (lo + hi) / 2 == xbar
+    flo, fhi = fx(lo, 2), fx(hi, 2)
+    if flo is None or fhi is None:
+        return None
+    wr_h = [z * sg / n, z * sg * sg / rn, z * sg * rn, 2 * z * sg / rn, z * sg / (2 * rn)]
+    fmt = lambda hh: (fx(xbar - hh, 2), fx(xbar + hh, 2))
+    wr = []
+    for hh in wr_h:
+        a, b = fmt(hh)
+        if a and b:
+            wr.append(f"[{a} ; {b}]")
+    right = f"[{flo} ; {fhi}]"
+    return Draft(f"Un échantillon de taille {n} a pour moyenne {xbar}. L'écart-type de la population est connu : σ = {sg}. Avec le quantile z = {dec(z)} (niveau {level} %), quel est l'intervalle de confiance de la moyenne (bornes arrondies au centième) ?",
+                 right, dedup(wr, right), f"Marge = z·σ/√n = {dec(z)} × {sg}/{rn} ≈ {fx(h, 2)} ; intervalle = moyenne ± marge.", src=SRC)
+
+
+@gen(C, "l2m-ci-samplesize", cap=60, cat="Statistiques inférentielles")
+def ci_samplesize(rng, d):
+    level = rng.choice([90, 95, 99])
+    z = _CRIT[F(level)]
+    sg = rng.randint(2, 40)
+    e = F(rng.choice([1, 2, 3, 4, 5, 10]), rng.choice([1, 2]))
+    # brute force: first n such that z*sigma/sqrt(n) <= e, i.e. z^2 sigma^2 <= e^2 n
+    n = 1
+    while z * z * sg * sg > e * e * n:
+        n += 1
+    x = z * z * sg * sg / (e * e)
+    assert n == math.ceil(x) and (n - 1 < x) and z * z * sg * sg <= e * e * n
+    wr = [math.floor(x) if math.floor(x) != n else n - 1, math.ceil(z * sg / e), n + 1, int(round(float(z * sg * sg / e))), math.ceil(float(x) / 2), int(n * 2)]
+    return Draft(f"Quelle taille minimale d'échantillon faut-il pour que la marge d'erreur z·σ/√n d'un intervalle de confiance soit au plus {dec(e)}, avec σ = {sg} et z = {dec(z)} (niveau {level} %) ?",
+                 str(n), dedup([str(w) for w in wr if w > 0], str(n)), f"n ≥ (zσ/e)² = ({dec(z)} × {sg} ÷ {dec(e)})² ≈ {fx(x, 2)} ; on arrondit à l'entier supérieur : {n}.", src=SRC)
+
+
+@gen(C, "l2m-estimator-variance", cap=80, cat="Estimation")
+def estimator_variance(rng, d):
+    kind = rng.choice(["varbar", "se", "unbiased"])
+    if kind == "varbar":
+        n = rng.randint(2, 40)
+        s2 = rng.choice([4, 9, 16, 25, 36, 49, 64, 81, 100, 144])
+        val = F(s2, n)
+        # second method: Var of the sum of n independent copies is n*sigma^2, divide by n^2
+        assert val == F(n * s2, n * n)
+        wr = [F(s2), F(s2, n * n), F(s2 * n), val * 2, F(math.isqrt(s2), n) if True else val]
+        return Draft(f"Les variables X₁, …, X{sub_digits(n)} sont indépendantes, de même variance σ² = {s2}. Quelle est la variance de leur moyenne empirique X̄ ?",
+                     dec(val), dedup([dec(F(w)) for w in wr], dec(val)), "Var(X̄) = σ²/n : la variance d'une moyenne de n variables indépendantes est divisée par n.", src=SRC)
+    if kind == "se":
+        n = rng.choice([4, 9, 16, 25, 36, 49, 64, 100, 144, 400])
+        s = rng.randint(2, 40)
+        rn = math.isqrt(n)
+        val = F(s, rn)
+        assert val * val == F(s * s, n)
+        wr = [F(s, n), F(s * s, rn), F(s * rn), F(s * s, n), val * 2]
+        return Draft(f"Pour un échantillon de taille {n} issu d'une population d'écart-type σ = {s}, quel est l'écart-type de la moyenne empirique X̄ (erreur standard) ?", dec(val), dedup([dec(F(w)) for w in wr], dec(val)),
+                     f"σ/√n = {s}/{rn} = {dec(val)}.", src=SRC)
+    n = rng.choice([3, 5, 6])
+    vals = [rng.randint(1, 20) for _ in range(n)]
+    m = F(sum(vals), n)
+    ss = sum((F(x) - m) ** 2 for x in vals)
+    assert ss == sum(x * x for x in vals) - n * m * m
+    s2 = ss / (n - 1)
+    right = fx(s2, 2)
+    if right is None or ss == 0:
+        return None
+    wr = fxs([ss / n, ss, s2 * (n - 1) / n if False else ss / (n + 1), F(sum(x * x for x in vals), n), s2 + 1], 2)
+    return Draft(f"Quelle est l'estimation sans biais de la variance obtenue à partir de l'échantillon {lst(vals) if False else ', '.join(map(str, vals))} (division par n − 1), arrondie au centième ?", right, dedup(wr, right),
+                 f"Moyenne = {dec(m)} ; somme des carrés des écarts = {dec(ss)} ; divisée par n − 1 = {n - 1} : {right}.", src=SRC)
+
+
+@gen(C, "l2m-estimator-weights", cap=60, cat="Estimation")
+def estimator_weights(rng, d):
+    den = rng.choice([2, 3, 4, 5, 6, 8, 10])
+    a, b = F(rng.randint(1, den), den), F(rng.randint(-1, den), den)
+    c = 1 - a - b
+    w = [a, b, c]
+    kind = rng.choice(["c", "var"])
+    if kind == "c":
+        if c == 0:
+            return None
+        # E(T) = mu (a + b + c) : unbiased iff the weights sum to 1
+        assert a + b + c == 1
+        wr = [c + 1, a + b, F(1) - a, -c, F(1, 3), F(1) - b]
+        return Draft(f"X₁, X₂, X₃ ont toutes pour espérance μ. T = {num(a)}·X₁ + {num(b)}·X₂ + c·X₃ est un estimateur sans biais de μ pour quelle valeur de c ?", num(c), dedup([num(F(x)) for x in wr], num(c)),
+                     f"E(T) = μ(a + b + c) : il faut a + b + c = 1, donc c = 1 − {num(a)} − {num(b)} = {num(c)}.", src=SRC)
+    s2 = rng.choice([1, 2, 4, 9, 16, 25])
+    var = s2 * sum(x * x for x in w)
+    # check with Bernoulli(1/2) variables (variance 1/4): enumerate the 8 outcomes
+    mean = sum(x * F(1, 2) for x in w)
+    ev_ = sum(F(1, 8) * (sum(x * o for x, o in zip(w, outcome)) - mean) ** 2 for outcome in product((0, 1), repeat=3))
+    assert ev_ == F(1, 4) * sum(x * x for x in w)
+    wr = [s2 * sum(w) ** 2, s2 * sum(abs(x) for x in w), s2 * sum(x * x for x in w) / 3, s2 * sum(w) / 3, s2 * (sum(x * x for x in w) + 1)]
+    return Draft(f"X₁, X₂, X₃ sont indépendantes, de même variance σ² = {s2}. Quelle est la variance de T = {num(a)}·X₁ + {num(b)}·X₂ + {num(c)}·X₃ ?", num(var), dedup([num(F(x)) for x in wr], num(var)),
+                 f"Var(T) = σ²(a² + b² + c²) = {s2} × {num(sum(x * x for x in w))} = {num(var)}.", src=SRC)
+
+
+@gen(C, "l2m-test-statistic", cap=80, cat="Tests")
+def test_statistic(rng, d):
+    n = rng.choice([4, 9, 16, 25, 36, 49, 64, 100, 144, 225])
+    sg = rng.randint(2, 20)
+    mu0 = rng.randint(10, 100)
+    xbar = mu0 + rng.randint(-12, 12)
+    if xbar == mu0:
+        return None
+    rn = math.isqrt(n)
+    z = F((xbar - mu0) * rn, sg)
+    assert z == (F(xbar) - mu0) / (F(sg) / rn)
+    right = fx(z, 2)
+    if right is None:
+        return None
+    wr = fxs([F((xbar - mu0) * n, sg), F((xbar - mu0) * rn, sg * sg), F(xbar - mu0, sg), F((xbar - mu0), sg * rn), z * 2, F((xbar - mu0) * rn, 2 * sg)], 2)
+    return Draft(f"On teste H₀ : μ = {mu0} avec σ = {sg} connu. Un échantillon de taille {n} donne la moyenne {xbar}. Quelle est la valeur de la statistique z = (x̄ − μ₀)/(σ/√n), arrondie au centième ?", right, dedup(wr, right),
+                 f"z = ({xbar} − {mu0}) ÷ ({sg}/{rn}) = {right}.", src=SRC)
+
+
+@gen(C, "l2m-test-decision", cap=80, cat="Tests")
+def test_decision(rng, d):
+    n = rng.choice([4, 9, 16, 25, 36, 49, 64, 100])
+    sg = rng.randint(2, 15)
+    mu0 = rng.randint(20, 100)
+    rn = math.isqrt(n)
+    xbar = mu0 + rng.randint(-10, 10)
+    if xbar == mu0:
+        return None
+    z = F((xbar - mu0) * rn, sg)
+    zalt = F((xbar - mu0) * n, sg)
+    side = rng.choice(["bi", "right"])
+    crit = F(196, 100) if side == "bi" else F(1645, 1000)
+    rej = abs(z) > crit if side == "bi" else z > crit
+    rej_alt = abs(zalt) > crit if side == "bi" else zalt > crit
+    zs, zas = fx(z, 2), fx(zalt, 2)
+    if zs is None or zas is None or zs == zas:
+        return None
+    dec_r, dec_n = "on rejette H₀", "on ne rejette pas H₀"
+    pr = lambda zz, r: f"z = {zz} : {dec_r if r else dec_n}"
+    right = pr(zs, rej)
+    wr = [pr(zs, not rej), pr(zas, rej), pr(zas, not rej)]
+    kind = "bilatéral (valeur critique 1,96)" if side == "bi" else "unilatéral à droite (H₁ : μ > μ₀, valeur critique 1,645)"
+    tail = "|z| > 1,96" if side == "bi" else "z > 1,645"
+    return Draft(f"Test {kind} de H₀ : μ = {mu0}, avec σ = {sg}, n = {n} et x̄ = {xbar}. Quelle conclusion est correcte ?", right, wr,
+                 f"z = (x̄ − μ₀)√n/σ = {zs} ; on rejette H₀ si {tail} : ici {'oui' if rej else 'non'}.", src=SRC)
+
+
+@gen(C, "l2m-density-const", cap=60, cat="Lois continues")
+def density_const(rng, d):
+    kind = rng.choice(["power", "tri", "unif"])
+    if kind == "power":
+        k, b = rng.randint(0, 4), rng.randint(1, 5)
+        c = F(k + 1, b ** (k + 1))
+        assert c * F(b ** (k + 1), k + 1) == 1               # integral of c x^k over [0, b]
+        xk = "" if k == 0 else ("x" if k == 1 else "x" + sup(k))
+        text = f"Pour quelle valeur de c la fonction f(x) = c{('·' + xk) if xk else ''} sur [0 ; {b}] (nulle ailleurs) est-elle une densité de probabilité ?"
+        wr = [F(1, b ** (k + 1)), F(1, b), F(k + 1, b), F(1, k + 1), F(b ** (k + 1), k + 1)]
+    elif kind == "tri":
+        b = rng.randint(1, 8)
+        c = F(2, b * b)
+        tot = sum(c * (F(b) * F(b, 1) - F(b * b, 2)) for _ in [0])
+        assert tot == 1
+        text = f"Pour quelle valeur de c la fonction f(x) = c({b} − x) sur [0 ; {b}] (nulle ailleurs) est-elle une densité de probabilité ?"
+        wr = [F(1, b * b), F(1, b), F(2, b), F(4, b * b), F(1, 2)]
+    else:
+        a = rng.randint(-5, 5)
+        b = a + rng.randint(1, 9)
+        c = F(1, b - a)
+        text = f"Pour quelle valeur de c la fonction constante f(x) = c sur [{num(a)} ; {b}] (nulle ailleurs) est-elle une densité de probabilité ?"
+        wr = [F(1, b + a) if b + a else F(2), F(1, b) if b else F(1, 3), F(b - a), F(2, b - a), F(1, 2 * (b - a))]
+    return Draft(text, num(c), dedup([num(F(w)) for w in wr], num(c)), "L'intégrale de f sur son support doit valoir 1 : cela détermine c.", src=SRC)
+
+
+@gen(C, "l2m-density-prob", cap=80, cat="Lois continues")
+def density_prob(rng, d):
+    k, b = rng.randint(1, 4), rng.randint(1, 6)
+    s, t = sorted(rng.sample(range(0, b + 1), 2))
+    # f(x) = (k+1) x^k / b^(k+1) on [0, b] ; P(s <= X <= t) = (t^(k+1) - s^(k+1)) / b^(k+1)
+    val = F(t ** (k + 1) - s ** (k + 1), b ** (k + 1))
+    fn = lambda x: (k + 1) * x ** k / b ** (k + 1)
+    assert close(simpson(fn, 0, b, 2000), 1.0, 1e-9)
+    assert close(simpson(fn, s, t, 2000), float(val), 1e-8)
+    xk = "x" if k == 1 else "x" + sup(k)
+    coefn = f"{k + 1}{xk}/{b}{sup(k + 1)}" if b > 1 else f"{k + 1}{xk}"
+    wr = [F(t - s, b), F(t ** k - s ** k, b ** k), F((t - s) ** (k + 1), b ** (k + 1)), 1 - val, F(t ** (k + 1) - s ** (k + 1), b ** k), val / 2]
+    return Draft(f"X a pour densité f(x) = {coefn} sur [0 ; {b}] (nulle ailleurs). Quelle est P({s} ≤ X ≤ {t}) ?", num(val), dedup([num(F(w)) for w in wr], num(val)),
+                 f"On intègre la densité : P = [x^{k + 1}/{b ** (k + 1)}] entre {s} et {t} = {num(val)}.", src=SRC)
+
+
+@gen(C, "l2m-density-moments", cap=80, cat="Lois continues")
+def density_moments(rng, d):
+    k, b = rng.randint(0, 4), rng.randint(1, 6)
+    kind = rng.choice(["E", "V"])
+    # f(x) = (k+1) x^k / b^(k+1) on [0, b]
+    e1 = F((k + 1) * b, k + 2)
+    e2 = F((k + 1) * b * b, k + 3)
+    var = e2 - e1 * e1
+    fn = lambda x: (k + 1) * x ** k / b ** (k + 1)
+    assert close(simpson(lambda x: x * fn(x), 0, b, 4000), float(e1), 1e-8)
+    assert close(simpson(lambda x: x * x * fn(x), 0, b, 4000), float(e2), 1e-8)
+    xk = "1" if k == 0 else ("x" if k == 1 else "x" + sup(k))
+    coefn = (f"{k + 1}{'' if k == 0 else xk}/{b}{sup(k + 1) if k + 1 > 1 else ''}" if k else f"1/{b}") if b > 1 else (f"{k + 1}{'' if k == 0 else xk}")
+    coefn = coefn.replace("1x", "x") if False else coefn
+    if k == 0:
+        coefn = f"1/{b}" if b > 1 else "1"
+    head = f"X a pour densité f(x) = {coefn} sur [0 ; {b}] (nulle ailleurs)."
+    if kind == "E":
+        val = e1
+        wr = [e2, F(b, 2) if k else e1 + 1, F(b * (k + 1), k + 3), F(k + 1, k + 2), e1 * 2]
+        text, ex_ = head + " Quelle est son espérance E(X) ?", f"E(X) = ∫ x·f(x)dx = {k + 1}·b^{k + 2}/(({k + 2})·b^{k + 1}) = {num(e1)}."
+    else:
+        val = var
+        wr = [e2, e1 * e1, e2 + e1 * e1, e1, F(b * b, 12) if k else var + 1]
+        text, ex_ = head + " Quelle est sa variance V(X) ?", f"V(X) = E(X²) − E(X)² = {num(e2)} − ({num(e1)})² = {num(var)}."
+    return Draft(text, num(val), dedup([num(F(w)) for w in wr], num(val)), ex_, src=SRC)
+
+
+@gen(C, "l2m-uniform", cap=80, cat="Lois continues")
+def uniform_q(rng, d):
+    a = rng.randint(-6, 12)
+    b = a + rng.randint(2, 14)
+    kind = rng.choice(["E", "V", "P", "Q"])
+    head = f"X suit la loi uniforme sur [{num(a)} ; {b}]."
+    if kind == "E":
+        val = F(a + b, 2)
+        assert close(simpson(lambda x: x / (b - a), a, b, 2000), float(val), 1e-9)
+        text, wr = head + " Quelle est son espérance ?", [F(b - a, 2), F(b - a), F(a * b), val + 1, F(1, b - a)]
+        ex_ = "E(X) = (a + b)/2 : le milieu de l'intervalle."
+    elif kind == "V":
+        val = F((b - a) ** 2, 12)
+        m = F(a + b, 2)
+        assert close(simpson(lambda x: (x - float(m)) ** 2 / (b - a), a, b, 4000), float(val), 1e-8)
+        text, wr = head + " Quelle est sa variance ?", [F((b - a) ** 2, 4), F((b - a) ** 2, 6), F(b - a, 12), F((b - a), 2), F((b + a) ** 2, 12) if a + b else val + 1]
+        ex_ = "V(X) = (b − a)²/12."
+    elif kind == "P":
+        c = rng.randint(a, b - 1)
+        dd = rng.randint(c + 1, b)
+        val = F(dd - c, b - a)
+        text, wr = head + f" Quelle est P({num(c)} ≤ X ≤ {dd}) ?", [F(dd - c), F(dd - c, b), F(c, b - a), F(b - dd, b - a) if b - dd != dd - c else val + F(1, 7), 1 - val if 1 - val != val else val + F(1, 5)]
+        ex_ = "La probabilité est proportionnelle à la longueur : (d − c)/(b − a)."
+    else:
+        pct = rng.choice([F(1, 4), F(1, 2), F(3, 4), F(1, 10), F(9, 10), F(1, 5)])
+        val = a + pct * (b - a)
+        text, wr = head + f" Quelle est la valeur x telle que P(X ≤ x) = {dec(pct)} ?", [a + (1 - pct) * (b - a), pct * b, pct * (b - a), val + 1, F(a + b, 2)]
+        ex_ = "Pour la loi uniforme, P(X ≤ x) = (x − a)/(b − a), donc x = a + p(b − a)."
+    return Draft(text, num(F(val)), dedup([num(F(w)) for w in wr], num(F(val))), ex_, src=SRC)
+
+
+@gen(C, "l2m-exponential", cap=90, cat="Lois continues")
+def exponential_q(rng, d):
+    lam = rng.choice([F(1), F(2), F(3), F(1, 2), F(1, 3), F(3, 2), F(1, 4), F(5), F(1, 5), F(2, 3), F(4)])
+    kind = rng.choice(["E", "V", "surv", "memory", "cdf"])
+    head = f"X suit la loi exponentielle de paramètre λ = {num(lam)}."
+    h = 1e-6
+    if kind == "E":
+        val = 1 / lam
+        assert close(simpson(lambda x: x * float(lam) * math.exp(-float(lam) * x), 0, 60 / float(lam), 40000), float(val), 1e-6)
+        text, wr = head + " Quelle est son espérance ?", [lam, 1 / (lam * lam), lam * lam, 2 / lam, lam + 1]
+        right, ex_ = num(val), "E(X) = 1/λ."
+    elif kind == "V":
+        val = 1 / (lam * lam)
+        assert close(simpson(lambda x: x * x * float(lam) * math.exp(-float(lam) * x), 0, 80 / float(lam), 60000) - float(1 / lam) ** 2, float(val), 1e-6)
+        text, wr = head + " Quelle est sa variance ?", [1 / lam, lam * lam, lam, 2 / (lam * lam), 1 / (lam * lam * lam)]
+        right, ex_ = num(val), "V(X) = 1/λ²."
+    elif kind in ("surv", "cdf"):
+        t = rng.randint(1, 5)
+        e_ = lam * t
+        surv = math.exp(-float(e_))
+        assert close(simpson(lambda x: float(lam) * math.exp(-float(lam) * x), t, t + 60 / float(lam), 40000), surv, 1e-6)
+        if kind == "surv":
+            text = head + f" Quelle est P(X > {t}) ?"
+            right = ex(-e_)
+            wr = [ex(e_), ex(-lam), "1 − " + ex(-e_), ex(-e_ * 2) if e_ != 0 else "0", ex(-t)]
+            ex_ = "P(X > t) = e^(−λt)."
+        else:
+            text = head + f" Quelle est P(X ≤ {t}) ?"
+            right = "1 − " + ex(-e_)
+            wr = [ex(-e_), "1 − " + ex(-lam), "1 − " + ex(e_), "1 − " + ex(-t), ex(e_)]
+            ex_ = "P(X ≤ t) = 1 − e^(−λt)."
+        wr = [w for w in wr if w != right]
+        return Draft(text, right, dedup(wr, right), ex_, src=SRC)
+    else:
+        s, t = rng.randint(1, 4), rng.randint(1, 4)
+        e_ = lam * t
+        text = head + f" Sachant que X > {s}, quelle est la probabilité que X > {s + t} ?"
+        right = ex(-e_)
+        # second method: ratio P(X > s+t) / P(X > s) computed from the survival function
+        assert close(math.exp(-float(lam) * (s + t)) / math.exp(-float(lam) * s), math.exp(-float(e_)), 1e-12)
+        wr = [ex(-lam * (s + t)), ex(-lam * s), ex(-lam), "1 − " + ex(-e_), ex(-e_ - lam * s) if lam * s != 0 else ex(-e_ - 1)]
+        wr = [w for w in wr if w != right]
+        return Draft(text, right, dedup(wr, right), "Absence de mémoire : P(X > s + t | X > s) = P(X > t) = e^(−λt).", src=SRC)
+    return Draft(text, right, dedup([num(F(w)) for w in wr], right), ex_, src=SRC)
+
+
+@gen(C, "l2m-joint-conditional", cap=70, cat="Variables aléatoires")
+def joint_conditional(rng, d):
+    N = rng.choice([10, 20, 20])
+    cuts = sorted(rng.sample(range(1, N), 3))
+    cnt = [cuts[0], cuts[1] - cuts[0], cuts[2] - cuts[1], N - cuts[2]]          # (0,0) (0,1) (1,0) (1,1)
+    p = {(0, 0): F(cnt[0], N), (0, 1): F(cnt[1], N), (1, 0): F(cnt[2], N), (1, 1): F(cnt[3], N)}
+    pop = [k for k, c in zip(p, cnt) for _ in range(c)]
+    kind = rng.choice(["cond", "marg"])
+    given_y = rng.choice([0, 1])
+    xv = rng.choice([0, 1])
+    if kind == "cond":
+        val = p[(xv, given_y)] / (p[(0, given_y)] + p[(1, given_y)])
+        sub = [t for t in pop if t[1] == given_y]
+        assert val == F(sum(1 for t in sub if t[0] == xv), len(sub))
+        text_q = f"Quelle est P(X = {xv} | Y = {given_y}) ?"
+        wr = [p[(xv, given_y)], p[(xv, given_y)] / (p[(xv, 0)] + p[(xv, 1)]), p[(xv, 0)] + p[(xv, 1)], p[(xv, given_y)] * (p[(0, given_y)] + p[(1, given_y)]), 1 - val]
+    else:
+        val = p[(0, given_y)] + p[(1, given_y)]
+        assert val == F(sum(1 for t in pop if t[1] == given_y), N)
+        text_q = f"Quelle est la loi marginale : P(Y = {given_y}) ?"
+        wr = [p[(xv, given_y)], p[(xv, given_y)] / val if val else F(1, 3), 1 - val, val / 2, p[(0, given_y)] * p[(1, given_y)]]
+    table = ", ".join(f"P({a} ; {b}) = {dec(v)}" for (a, b), v in p.items())
+    return Draft(f"Pour le couple (X ; Y) à valeurs dans {{0 ; 1}}², on donne {table}. {text_q}", dec(val), dedup([dec(F(w)) for w in wr], dec(val)),
+                 "Marginale : somme sur l'autre variable ; conditionnelle : P(A ∩ B) ÷ P(B).", src=SRC)
+
+
+@gen(C, "l2m-joint-covariance", cap=70, cat="Variables aléatoires")
+def joint_covariance(rng, d):
+    N = rng.choice([10, 20])
+    cuts = sorted(rng.sample(range(1, N), 3))
+    cnt = [cuts[0], cuts[1] - cuts[0], cuts[2] - cuts[1], N - cuts[2]]
+    keys = [(0, 0), (0, 1), (1, 0), (1, 1)]
+    p = {k: F(c, N) for k, c in zip(keys, cnt)}
+    xs = rng.choice([(0, 1), (0, 2), (1, 3), (-1, 1)])
+    ys = rng.choice([(0, 1), (0, 1), (1, 2), (0, 3)])
+    X = lambda i: xs[i]
+    Y = lambda j: ys[j]
+    EX = sum(X(i) * v for (i, j), v in p.items())
+    EY = sum(Y(j) * v for (i, j), v in p.items())
+    EXY = sum(X(i) * Y(j) * v for (i, j), v in p.items())
+    cov = EXY - EX * EY
+    cov2 = sum((X(i) - EX) * (Y(j) - EY) * v for (i, j), v in p.items())
+    assert cov == cov2
+    wr = [EXY, EX * EY, cov + 1, EXY + EX * EY, cov * 2, F(cov, 1) / 2 if cov else F(1, 7)]
+    table = ", ".join(f"P(X = {X(i)} ; Y = {Y(j)}) = {dec(v)}" for (i, j), v in p.items())
+    return Draft(f"Pour le couple (X ; Y), on donne {table}. Que vaut Cov(X, Y) ?", dec(cov), dedup([dec(F(w)) for w in wr], dec(cov)),
+                 f"E(X) = {dec(EX)}, E(Y) = {dec(EY)}, E(XY) = {dec(EXY)} ; Cov = E(XY) − E(X)E(Y) = {dec(cov)}.", src=SRC)
+
+
+@gen(C, "l2m-var-linear", cap=70, cat="Variables aléatoires")
+def var_linear(rng, d):
+    vx, vy = rng.randint(1, 12), rng.randint(1, 12)
+    a, b, c0 = nz(rng, -4, 4), nz(rng, -4, 4), rng.randint(-5, 5)
+    with_cov = rng.random() < 0.4
+    cv = rng.randint(-3, 3) if with_cov else 0
+    if with_cov and abs(cv) * abs(cv) >= vx * vy:
+        return None
+    val = a * a * vx + b * b * vy + 2 * a * b * cv
+    # second method: quadratic form v^T Sigma v with the covariance matrix
+    S = [[vx, cv], [cv, vy]]
+    vec = [a, b]
+    assert val == sum(vec[i] * S[i][j] * vec[j] for i in range(2) for j in range(2))
+    aX = f"{'' if a == 1 else (MINUS if a == -1 else num(a))}X"
+    bY = ("+ " if b > 0 else "− ") + ("" if abs(b) == 1 else str(abs(b))) + "Y"
+    cc = "" if c0 == 0 else (f" + {c0}" if c0 > 0 else f" − {abs(c0)}")
+    cond = f"X et Y sont indépendantes" if not with_cov else f"Cov(X, Y) = {num(cv)}"
+    wr = [a * vx + b * vy, a * a * vx + b * b * vy + (2 * a * b * cv if not with_cov else 0) + c0 * c0, a * a * vx - b * b * vy, (a + b) ** 2 * (vx + vy), a * a * vx + b * b * vy + a * b * cv if with_cov else a * a * vx + b * b * vy + a * b]
+    return Draft(f"Avec V(X) = {vx}, V(Y) = {vy} ; {cond}. Que vaut V({aX} {bY}{cc}) ?", num(val), dedup([num(F(w)) for w in wr], num(val)),
+                 f"V(aX + bY + c) = a²V(X) + b²V(Y) + 2ab·Cov(X, Y) = {a * a * vx} + {b * b * vy} + {2 * a * b * cv} = {val} (la constante c ne change pas la variance).", src=SRC)
