@@ -1,0 +1,125 @@
+# slug | level | years | fr | en | prereqs | minutes | tags
+# ---- Nombres et calcul : N0 ----
+count-10|N0|y0-1|Compter jusqu'à 10|Count to 10||15|nombres,oral
+quantities|N0|y0|Comparer des quantités (plus, moins, autant)|Compare quantities (more, fewer, same)||15|nombres,manipulation
+shapes-2d|N0|y0-1|Reconnaître les formes (carré, rond, triangle)|Recognise shapes (square, circle, triangle)||15|geometrie
+count-20|N0|y1|Compter et dénombrer jusqu'à 20|Count objects up to 20|count-10,quantities|20|nombres
+numerals-100|N0|y1|Lire et écrire les nombres jusqu'à 100|Read and write numbers to 100|count-20|25|nombres
+add-sub-20|N0|y1|Additionner et soustraire dans les 20|Add and subtract within 20|count-20|25|calcul
+money-time|N0|y1-2|Monnaie (FCFA) et heure|Money (FCFA) and telling the time|count-20|25|mesures,vie-pratique
+# ---- N1 primaire ----
+place-value|N1|y2|Unités, dizaines, centaines|Ones, tens and hundreds|numerals-100|20|nombres
+add-sub-100|N1|y2|Addition et soustraction jusqu'à 100, avec retenue|Add and subtract to 100 with carrying|add-sub-20,place-value|25|calcul
+compare-1000|N1|y2|Comparer et ranger les nombres jusqu'à 1000|Compare and order numbers to 1000|place-value|20|nombres
+add-sub-1000|N1|y3|Addition et soustraction jusqu'à 1000|Add and subtract to 1000|add-sub-100,compare-1000|25|calcul
+mult-tables|N1|y3|Tables de multiplication|Multiplication tables|add-sub-100|30|calcul
+div-concept|N1|y3|Sens de la division : partager, grouper|Meaning of division: sharing and grouping|mult-tables|20|calcul
+lines-angles|N1|y3|Droites, segments et angles droits|Lines, segments and right angles|shapes-2d|20|geometrie
+mult-written|N1|y4|Multiplication posée|Long multiplication|mult-tables,add-sub-1000|30|calcul
+frac-intro|N1|y4|Fractions simples (moitié, quart, tiers)|Simple fractions (half, quarter, third)|div-concept|25|fractions
+perimeter|N1|y4|Périmètre et aire du rectangle et du carré|Perimeter and area of rectangles and squares|mult-tables,lines-angles|25|geometrie,mesures
+units|N1|y4|Unités de longueur, masse, capacité|Units of length, mass and capacity|mult-tables|25|mesures
+stats-tables|N1|y4|Lire un tableau et un diagramme en barres|Read tables and bar charts|compare-1000|20|donnees
+div-written|N1|y5|Division posée (division euclidienne)|Long division with remainder|div-concept,mult-written|30|calcul
+big-numbers|N1|y5|Grands nombres : milliers, millions|Large numbers: thousands, millions|compare-1000|20|nombres
+decimals|N1|y5|Nombres décimaux|Decimal numbers|place-value,div-concept|30|nombres
+frac-equiv|N1|y5|Fractions égales et comparaison|Equivalent and compared fractions|frac-intro|25|fractions
+symmetry|N1|y5|Symétrie axiale|Line symmetry|shapes-2d,lines-angles|20|geometrie
+problem-solving|N1|y5|Résoudre un problème en plusieurs étapes|Solve multi-step word problems|add-sub-1000,mult-written|30|problemes
+decimal-ops|N1|y6|Opérations avec les nombres décimaux|Arithmetic with decimals|decimals,mult-written,div-written|30|calcul
+frac-add|N1|y6|Additionner et soustraire des fractions|Add and subtract fractions|frac-equiv|30|fractions
+percent|N1|y6|Pourcentages|Percentages|frac-equiv,decimals|30|proportionnalite
+ratio-prop|N1|y6|Proportionnalité et règle de trois|Proportion and the unitary method|mult-written,frac-equiv|30|proportionnalite
+area-tri-circ|N1|y6|Aire du triangle et du disque|Area of triangles and circles|perimeter,decimal-ops|30|geometrie
+volume|N1|y6|Volumes du cube et du pavé droit|Volume of cubes and cuboids|area-tri-circ|25|geometrie,mesures
+mean|N1|y6|Moyenne arithmétique|Arithmetic mean|decimal-ops,stats-tables|20|donnees
+# ---- N1 collège ----
+divisibility|N1|y7|Critères de divisibilité|Divisibility rules|div-written|20|arithmetique
+primes|N1|y7|Multiples, diviseurs et nombres premiers|Multiples, factors and primes|divisibility|25|arithmetique
+neg-ints|N1|y7|Nombres relatifs|Directed numbers|compare-1000|25|nombres
+frac-mult|N1|y7|Multiplier et diviser des fractions|Multiply and divide fractions|frac-add|30|fractions
+angles-tri|N1|y7|Angles et triangles|Angles and triangles|lines-angles|25|geometrie
+constructions|N1|y7|Constructions à la règle et au compas|Ruler-and-compass constructions|angles-tri|25|geometrie
+ints-ops|N1|y8|Opérations sur les nombres relatifs|Arithmetic with directed numbers|neg-ints|30|calcul
+powers|N1|y8|Puissances et écriture scientifique|Powers and standard form|ints-ops,decimal-ops|30|calcul
+gcd-lcm|N1|y8|PGCD et PPCM|HCF and LCM|primes|30|arithmetique
+alg-letters|N1|y8|Expressions littérales et substitution|Algebraic expressions and substitution|ints-ops|25|algebre
+eq-1|N1|y8|Équations du premier degré|Linear equations|alg-letters|30|algebre
+coords|N1|y8|Repérage dans le plan|Coordinates in the plane|neg-ints|25|geometrie
+roots|N1|y9|Racines carrées|Square roots|powers|30|calcul
+alg-expand|N1|y9|Développer et factoriser|Expand and factorise|alg-letters|30|algebre
+ineq-1|N1|y9|Inéquations du premier degré|Linear inequalities|eq-1|25|algebre
+func-lin|N1|y9|Fonctions linéaires et affines|Linear and affine functions|eq-1,coords|35|fonctions
+pythagoras|N1|y9|Théorème de Pythagore|Pythagoras' theorem|roots,perimeter|30|geometrie
+thales|N1|y9|Théorème de Thalès|The intercept theorem|ratio-prop,pythagoras|30|geometrie
+trig|N1|y9|Trigonométrie du triangle rectangle|Right-angled trigonometry|thales|35|geometrie
+stats-desc|N1|y9|Statistiques : effectifs, médiane, fréquences|Descriptive statistics|mean|30|donnees
+identities|N1|y10|Identités remarquables|Special products and identities|alg-expand|30|algebre
+sys-2|N1|y10|Systèmes de deux équations|Simultaneous equations|eq-1,func-lin|35|algebre
+func-graph|N1|y10|Représentation graphique des fonctions|Graphs of functions|func-lin|35|fonctions
+vectors|N1|y10|Vecteurs du plan|Vectors in the plane|coords,thales|35|geometrie
+transforms|N1|y10|Translations, rotations, homothéties|Translations, rotations and enlargements|vectors|30|geometrie
+proba-intro|N1|y10|Probabilités simples|Basic probability|frac-add,stats-desc|30|probabilites
+quad-eq|N1|y11|Équations du second degré|Quadratic equations|identities,roots|40|algebre
+circle-th|N1|y11|Cercle, angles inscrits, tangentes|Circle theorems and tangents|angles-tri,pythagoras|35|geometrie
+space-geo|N1|y11|Géométrie dans l'espace|Solid geometry|volume,pythagoras|35|geometrie
+trig-circle|N1|y11|Cercle trigonométrique|The trigonometric circle|trig,circle-th|35|trigonometrie
+func-quad|N1|y12|Fonction trinôme et parabole|Quadratic function and parabola|quad-eq,func-graph|40|fonctions
+seq|N1|y12|Suites arithmétiques et géométriques|Arithmetic and geometric sequences|func-lin,powers|40|suites
+deriv|N1|y12|Dérivation et tangente|Differentiation and tangents|func-quad|45|analyse
+dot-product|N1|y12|Produit scalaire|Dot product|vectors,trig-circle|35|geometrie
+analytic-geo|N1|y12|Géométrie analytique du plan|Coordinate geometry|vectors,func-lin|35|geometrie
+combinatorics|N1|y12|Dénombrement : arrangements, combinaisons|Counting: arrangements and combinations|proba-intro|40|probabilites
+limits|N1|y13|Limites et continuité|Limits and continuity|func-quad,seq|45|analyse
+deriv-app|N1|y13|Étude complète d'une fonction|Full study of a function|deriv,limits|45|analyse
+log-exp|N1|y13|Logarithme népérien et exponentielle|Natural logarithm and exponential|deriv-app|50|analyse
+integral|N1|y13|Calcul intégral et primitives|Integration and antiderivatives|deriv-app|50|analyse
+complex|N1|y13|Nombres complexes|Complex numbers|quad-eq,trig-circle|50|algebre
+proba-cond|N1|y13|Probabilités conditionnelles et loi binomiale|Conditional probability and the binomial law|combinatorics|45|probabilites
+diff-eq|N1|y13|Équations différentielles simples|Simple differential equations|log-exp,integral|40|analyse
+# ---- N1 supérieur ----
+linalg-1|N1|y14|Algèbre linéaire : matrices et systèmes|Linear algebra: matrices and systems|sys-2,complex|50|algebre
+analysis-1|N1|y14|Analyse réelle : suites et fonctions|Real analysis: sequences and functions|integral,limits|50|analyse
+stats-inf|N1|y15|Statistique inférentielle élémentaire|Elementary inferential statistics|proba-cond|50|donnees
+# ---- N2 : excellence nationale ----
+n2-number-logic|N2|y6|Casse-têtes numériques et logique du CM2|Number puzzles and logic at national contest level|problem-solving,decimal-ops|40|concours,raisonnement
+n2-rates|N2|y6|Vitesse, travail et robinets : problèmes à plusieurs données|Speed, work and tank problems with several data|ratio-prop,percent|40|concours,proportionnalite
+n2-area-cut|N2|y6|Aires par découpage et recomposition|Areas by cutting and rearranging|area-tri-circ,volume|40|concours,geometrie
+n2-fraction-puzzles|N2|y7|Fractions et partages en chaîne|Chained fraction and sharing problems|frac-mult,n2-rates|40|concours,fractions
+n2-arith-reasoning|N2|y8|Arithmétique raisonnée : parité, restes, chiffres|Reasoned arithmetic: parity, remainders, digits|gcd-lcm,n2-number-logic|45|concours,arithmetique
+n2-alg-modelling|N2|y9|Mettre en équation des situations complexes|Modelling complex situations with equations|eq-1,n2-fraction-puzzles|45|concours,algebre
+n2-geo-proof|N2|y9|Démontrer en géométrie : enchaîner Thalès, Pythagore, angles|Geometry proofs chaining Thales, Pythagoras and angles|thales,pythagoras,n2-area-cut|50|concours,geometrie,preuve
+n2-param-eq|N2|y10|Équations et inéquations avec paramètre|Equations and inequalities with a parameter|sys-2,identities,n2-alg-modelling|50|concours,algebre
+n2-int-divisibility|N2|y10|Divisibilité et congruences élémentaires|Divisibility and elementary congruences|gcd-lcm,n2-arith-reasoning|50|concours,arithmetique
+n2-extrema|N2|y11|Optimisation sans dérivée : extrema par encadrement|Optimisation without calculus|quad-eq,n2-param-eq|50|concours,algebre
+n2-combinatorics|N2|y12|Dénombrement et principe des tiroirs|Counting and the pigeonhole principle|combinatorics,n2-arith-reasoning|50|concours,probabilites
+n2-geo-circle|N2|y11|Géométrie du cercle et du triangle : problèmes de concours|Circle and triangle geometry: contest problems|circle-th,n2-geo-proof|55|concours,geometrie,preuve
+n2-sequences|N2|y12|Suites : récurrences, suites auxiliaires, sommes|Sequences: recurrences, auxiliary sequences, sums|seq,n2-extrema|55|concours,suites
+n2-func-param|N2|y12|Fonctions avec paramètre : étude et discussion|Functions with parameters: study and discussion|func-quad,deriv,n2-param-eq|55|concours,fonctions
+n2-analysis-bac|N2|y13|Analyse niveau meilleurs élèves du Bac C/D|Analysis at top Baccalauréat level|deriv-app,log-exp,integral,n2-func-param|60|concours,analyse
+n2-arith-z|N2|y13|Arithmétique dans Z : Bézout, Gauss, congruences|Arithmetic in Z: Bezout, Gauss, congruences|n2-int-divisibility,complex|60|concours,arithmetique
+n2-complex-geo|N2|y13|Complexes et géométrie : transformations, lieux|Complex numbers and geometry: transformations and loci|complex,n2-geo-circle|60|concours,geometrie
+n2-proba-advanced|N2|y13|Probabilités : lois, espérance et raisonnement fin|Probability: laws, expectation and subtle reasoning|proba-cond,n2-combinatorics|55|concours,probabilites
+n2-linalg|N2|y14|Algèbre linéaire : espaces vectoriels et rang|Linear algebra: vector spaces and rank|linalg-1,n2-arith-z|60|superieur,algebre
+n2-analysis-real|N2|y14|Analyse : ε-δ et suites de Cauchy (initiation)|Analysis: epsilon-delta and Cauchy sequences (intro)|analysis-1,n2-analysis-bac|60|superieur,analyse,preuve
+# ---- N3 : passerelle vers l'international ----
+n3-proof-induction|N3|y10|Preuve par récurrence et raisonnement par l'absurde|Proof by induction and by contradiction|n2-int-divisibility,n2-alg-modelling|55|olympiade,preuve
+n3-inequalities|N3|y11|Inégalités classiques : moyennes, réarrangement|Classical inequalities: means and rearrangement|n2-extrema|60|olympiade,algebre
+n3-number-theory|N3|y12|Théorie des nombres : petit théorème de Fermat, ordres|Number theory: Fermat's little theorem and orders|n2-int-divisibility,n3-proof-induction|65|olympiade,arithmetique
+n3-geo-synthetic|N3|y12|Géométrie synthétique : puissance d'un point, cercles|Synthetic geometry: power of a point and circles|n2-geo-circle|65|olympiade,geometrie
+n3-combinatorics|N3|y12|Combinatoire : inclusion-exclusion, invariants, jeux|Combinatorics: inclusion-exclusion, invariants and games|n2-combinatorics,n3-proof-induction|65|olympiade,combinatoire
+n3-functional-eq|N3|y12|Équations fonctionnelles élémentaires|Elementary functional equations|n2-func-param,n3-proof-induction|65|olympiade,algebre
+n3-polynomials|N3|y13|Polynômes : racines, Viète, interpolation|Polynomials: roots, Vieta and interpolation|n2-func-param,n3-inequalities|65|olympiade,algebre
+n3-modelling|N3|y13|Modélisation mathématique multi-étapes|Multi-step mathematical modelling|n2-analysis-bac,n2-proba-advanced|60|international,modelisation
+n3-analysis-rigour|N3|y13|Analyse rigoureuse : bornes, densité, convergence|Rigorous analysis: bounds, density, convergence|n2-analysis-bac,n3-proof-induction|65|international,analyse,preuve
+n3-linalg-abstract|N3|y14|Algèbre linéaire abstraite : applications linéaires, déterminants|Abstract linear algebra: linear maps and determinants|n2-linalg|65|international,algebre
+n3-probability-theory|N3|y14|Probabilités : variables aléatoires, loi des grands nombres|Probability: random variables and the law of large numbers|n2-proba-advanced,n3-analysis-rigour|65|international,probabilites
+# ---- N4 : excellence mondiale ----
+n4-inequalities-adv|N4|y13|Inégalités avancées : Cauchy-Schwarz, Jensen, SOS|Advanced inequalities: Cauchy-Schwarz, Jensen, SOS|n3-inequalities,n3-polynomials|75|olympiade-int,algebre
+n4-number-theory-adv|N4|y13|Théorie des nombres olympique : résidus quadratiques, lifting|Olympiad number theory: quadratic residues, lifting the exponent|n3-number-theory|75|olympiade-int,arithmetique
+n4-geo-projective|N4|y13|Géométrie olympique : inversion, birapport, projective|Olympiad geometry: inversion, cross-ratio, projective methods|n3-geo-synthetic|80|olympiade-int,geometrie
+n4-combinatorics-adv|N4|y13|Combinatoire extrémale et graphes : Hall, Ramsey, méthode probabiliste|Extremal combinatorics and graphs: Hall, Ramsey, probabilistic method|n3-combinatorics|80|olympiade-int,combinatoire
+n4-functional-adv|N4|y13|Équations fonctionnelles et polynômes olympiques|Olympiad functional equations and polynomials|n3-functional-eq,n3-polynomials|75|olympiade-int,algebre
+n4-analysis-uni|N4|y14|Analyse de niveau première année des meilleures universités|Analysis at first-year level of top universities|n3-analysis-rigour,n3-linalg-abstract|90|universite-int,analyse
+n4-algebra-uni|N4|y15|Algèbre abstraite : groupes, anneaux, corps (initiation)|Abstract algebra: groups, rings, fields (introduction)|n3-linalg-abstract,n3-number-theory|90|universite-int,algebre
+n4-research-problem|N4|y15|Résoudre un problème ouvert de modélisation et le rédiger|Solving and writing up an open modelling problem|n3-modelling,n3-probability-theory|90|universite-int,modelisation,preuve

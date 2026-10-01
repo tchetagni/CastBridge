@@ -1,0 +1,3373 @@
+{
+ "format": 1,
+ "domain": "mathematiques",
+ "prefix": "math",
+ "title": {
+  "fr": "Mathématiques",
+  "en": "Mathematics"
+ },
+ "skills": [
+  {
+   "id": "math.count-10",
+   "title": {
+    "fr": "Compter jusqu'à 10",
+    "en": "Count to 10"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    0,
+    1
+   ],
+   "classes": [
+    "mat",
+    "nursery",
+    "sil",
+    "class1"
+   ],
+   "exams": [],
+   "lots": [
+    "mat",
+    "nursery"
+   ],
+   "minutes": 15,
+   "tags": [
+    "nombres",
+    "oral"
+   ]
+  },
+  {
+   "id": "math.quantities",
+   "title": {
+    "fr": "Comparer des quantités (plus, moins, autant)",
+    "en": "Compare quantities (more, fewer, same)"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    0
+   ],
+   "classes": [
+    "mat",
+    "nursery"
+   ],
+   "exams": [],
+   "lots": [
+    "mat",
+    "nursery"
+   ],
+   "minutes": 15,
+   "tags": [
+    "nombres",
+    "manipulation"
+   ]
+  },
+  {
+   "id": "math.shapes-2d",
+   "title": {
+    "fr": "Reconnaître les formes (carré, rond, triangle)",
+    "en": "Recognise shapes (square, circle, triangle)"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    0,
+    1
+   ],
+   "classes": [
+    "mat",
+    "nursery",
+    "sil",
+    "class1"
+   ],
+   "exams": [],
+   "lots": [
+    "mat",
+    "nursery"
+   ],
+   "minutes": 15,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.count-20",
+   "title": {
+    "fr": "Compter et dénombrer jusqu'à 20",
+    "en": "Count objects up to 20"
+   },
+   "level": "N0",
+   "prereq": [
+    "math.count-10",
+    "math.quantities"
+   ],
+   "years": [
+    1
+   ],
+   "classes": [
+    "sil",
+    "class1"
+   ],
+   "exams": [],
+   "lots": [
+    "sil",
+    "class1"
+   ],
+   "minutes": 20,
+   "tags": [
+    "nombres"
+   ]
+  },
+  {
+   "id": "math.numerals-100",
+   "title": {
+    "fr": "Lire et écrire les nombres jusqu'à 100",
+    "en": "Read and write numbers to 100"
+   },
+   "level": "N0",
+   "prereq": [
+    "math.count-20"
+   ],
+   "years": [
+    1
+   ],
+   "classes": [
+    "sil",
+    "class1"
+   ],
+   "exams": [],
+   "lots": [
+    "sil",
+    "class1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "nombres"
+   ]
+  },
+  {
+   "id": "math.add-sub-20",
+   "title": {
+    "fr": "Additionner et soustraire dans les 20",
+    "en": "Add and subtract within 20"
+   },
+   "level": "N0",
+   "prereq": [
+    "math.count-20"
+   ],
+   "years": [
+    1
+   ],
+   "classes": [
+    "sil",
+    "class1"
+   ],
+   "exams": [],
+   "lots": [
+    "sil",
+    "class1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.money-time",
+   "title": {
+    "fr": "Monnaie (FCFA) et heure",
+    "en": "Money (FCFA) and telling the time"
+   },
+   "level": "N0",
+   "prereq": [
+    "math.count-20"
+   ],
+   "years": [
+    1,
+    2
+   ],
+   "classes": [
+    "sil",
+    "class1",
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "sil",
+    "class1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "mesures",
+    "vie-pratique"
+   ]
+  },
+  {
+   "id": "math.place-value",
+   "title": {
+    "fr": "Unités, dizaines, centaines",
+    "en": "Ones, tens and hundreds"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.numerals-100"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 20,
+   "tags": [
+    "nombres"
+   ]
+  },
+  {
+   "id": "math.add-sub-100",
+   "title": {
+    "fr": "Addition et soustraction jusqu'à 100, avec retenue",
+    "en": "Add and subtract to 100 with carrying"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.add-sub-20",
+    "math.place-value"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 25,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.compare-1000",
+   "title": {
+    "fr": "Comparer et ranger les nombres jusqu'à 1000",
+    "en": "Compare and order numbers to 1000"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.place-value"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 20,
+   "tags": [
+    "nombres"
+   ]
+  },
+  {
+   "id": "math.add-sub-1000",
+   "title": {
+    "fr": "Addition et soustraction jusqu'à 1000",
+    "en": "Add and subtract to 1000"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.add-sub-100",
+    "math.compare-1000"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 25,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.mult-tables",
+   "title": {
+    "fr": "Tables de multiplication",
+    "en": "Multiplication tables"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.add-sub-100"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 30,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.div-concept",
+   "title": {
+    "fr": "Sens de la division : partager, grouper",
+    "en": "Meaning of division: sharing and grouping"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.mult-tables"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 20,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.lines-angles",
+   "title": {
+    "fr": "Droites, segments et angles droits",
+    "en": "Lines, segments and right angles"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.shapes-2d"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 20,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.mult-written",
+   "title": {
+    "fr": "Multiplication posée",
+    "en": "Long multiplication"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.mult-tables",
+    "math.add-sub-1000"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 30,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.frac-intro",
+   "title": {
+    "fr": "Fractions simples (moitié, quart, tiers)",
+    "en": "Simple fractions (half, quarter, third)"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.div-concept"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "fractions"
+   ]
+  },
+  {
+   "id": "math.perimeter",
+   "title": {
+    "fr": "Périmètre et aire du rectangle et du carré",
+    "en": "Perimeter and area of rectangles and squares"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.mult-tables",
+    "math.lines-angles"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "geometrie",
+    "mesures"
+   ]
+  },
+  {
+   "id": "math.units",
+   "title": {
+    "fr": "Unités de longueur, masse, capacité",
+    "en": "Units of length, mass and capacity"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.mult-tables"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "mesures"
+   ]
+  },
+  {
+   "id": "math.stats-tables",
+   "title": {
+    "fr": "Lire un tableau et un diagramme en barres",
+    "en": "Read tables and bar charts"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.compare-1000"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 20,
+   "tags": [
+    "donnees"
+   ]
+  },
+  {
+   "id": "math.div-written",
+   "title": {
+    "fr": "Division posée (division euclidienne)",
+    "en": "Long division with remainder"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.div-concept",
+    "math.mult-written"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.big-numbers",
+   "title": {
+    "fr": "Grands nombres : milliers, millions",
+    "en": "Large numbers: thousands, millions"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.compare-1000"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 20,
+   "tags": [
+    "nombres"
+   ]
+  },
+  {
+   "id": "math.decimals",
+   "title": {
+    "fr": "Nombres décimaux",
+    "en": "Decimal numbers"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.place-value",
+    "math.div-concept"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "nombres"
+   ]
+  },
+  {
+   "id": "math.frac-equiv",
+   "title": {
+    "fr": "Fractions égales et comparaison",
+    "en": "Equivalent and compared fractions"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.frac-intro"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 25,
+   "tags": [
+    "fractions"
+   ]
+  },
+  {
+   "id": "math.symmetry",
+   "title": {
+    "fr": "Symétrie axiale",
+    "en": "Line symmetry"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.shapes-2d",
+    "math.lines-angles"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 20,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.problem-solving",
+   "title": {
+    "fr": "Résoudre un problème en plusieurs étapes",
+    "en": "Solve multi-step word problems"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.add-sub-1000",
+    "math.mult-written"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "problemes"
+   ]
+  },
+  {
+   "id": "math.decimal-ops",
+   "title": {
+    "fr": "Opérations avec les nombres décimaux",
+    "en": "Arithmetic with decimals"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.decimals",
+    "math.mult-written",
+    "math.div-written"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 30,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.frac-add",
+   "title": {
+    "fr": "Additionner et soustraire des fractions",
+    "en": "Add and subtract fractions"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.frac-equiv"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 30,
+   "tags": [
+    "fractions"
+   ]
+  },
+  {
+   "id": "math.percent",
+   "title": {
+    "fr": "Pourcentages",
+    "en": "Percentages"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.frac-equiv",
+    "math.decimals"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 30,
+   "tags": [
+    "proportionnalite"
+   ]
+  },
+  {
+   "id": "math.ratio-prop",
+   "title": {
+    "fr": "Proportionnalité et règle de trois",
+    "en": "Proportion and the unitary method"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.mult-written",
+    "math.frac-equiv"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 30,
+   "tags": [
+    "proportionnalite"
+   ]
+  },
+  {
+   "id": "math.area-tri-circ",
+   "title": {
+    "fr": "Aire du triangle et du disque",
+    "en": "Area of triangles and circles"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.perimeter",
+    "math.decimal-ops"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 30,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.volume",
+   "title": {
+    "fr": "Volumes du cube et du pavé droit",
+    "en": "Volume of cubes and cuboids"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.area-tri-circ"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 25,
+   "tags": [
+    "geometrie",
+    "mesures"
+   ]
+  },
+  {
+   "id": "math.mean",
+   "title": {
+    "fr": "Moyenne arithmétique",
+    "en": "Arithmetic mean"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.decimal-ops",
+    "math.stats-tables"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 20,
+   "tags": [
+    "donnees"
+   ]
+  },
+  {
+   "id": "math.divisibility",
+   "title": {
+    "fr": "Critères de divisibilité",
+    "en": "Divisibility rules"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.div-written"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 20,
+   "tags": [
+    "arithmetique"
+   ]
+  },
+  {
+   "id": "math.primes",
+   "title": {
+    "fr": "Multiples, diviseurs et nombres premiers",
+    "en": "Multiples, factors and primes"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.divisibility"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "arithmetique"
+   ]
+  },
+  {
+   "id": "math.neg-ints",
+   "title": {
+    "fr": "Nombres relatifs",
+    "en": "Directed numbers"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.compare-1000"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "nombres"
+   ]
+  },
+  {
+   "id": "math.frac-mult",
+   "title": {
+    "fr": "Multiplier et diviser des fractions",
+    "en": "Multiply and divide fractions"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.frac-add"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 30,
+   "tags": [
+    "fractions"
+   ]
+  },
+  {
+   "id": "math.angles-tri",
+   "title": {
+    "fr": "Angles et triangles",
+    "en": "Angles and triangles"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.lines-angles"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.constructions",
+   "title": {
+    "fr": "Constructions à la règle et au compas",
+    "en": "Ruler-and-compass constructions"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.angles-tri"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.ints-ops",
+   "title": {
+    "fr": "Opérations sur les nombres relatifs",
+    "en": "Arithmetic with directed numbers"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.neg-ints"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 30,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.powers",
+   "title": {
+    "fr": "Puissances et écriture scientifique",
+    "en": "Powers and standard form"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.ints-ops",
+    "math.decimal-ops"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 30,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.gcd-lcm",
+   "title": {
+    "fr": "PGCD et PPCM",
+    "en": "HCF and LCM"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.primes"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 30,
+   "tags": [
+    "arithmetique"
+   ]
+  },
+  {
+   "id": "math.alg-letters",
+   "title": {
+    "fr": "Expressions littérales et substitution",
+    "en": "Algebraic expressions and substitution"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.ints-ops"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 25,
+   "tags": [
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.eq-1",
+   "title": {
+    "fr": "Équations du premier degré",
+    "en": "Linear equations"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.alg-letters"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 30,
+   "tags": [
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.coords",
+   "title": {
+    "fr": "Repérage dans le plan",
+    "en": "Coordinates in the plane"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.neg-ints"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 25,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.roots",
+   "title": {
+    "fr": "Racines carrées",
+    "en": "Square roots"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.powers"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 30,
+   "tags": [
+    "calcul"
+   ]
+  },
+  {
+   "id": "math.alg-expand",
+   "title": {
+    "fr": "Développer et factoriser",
+    "en": "Expand and factorise"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.alg-letters"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 30,
+   "tags": [
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.ineq-1",
+   "title": {
+    "fr": "Inéquations du premier degré",
+    "en": "Linear inequalities"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.eq-1"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 25,
+   "tags": [
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.func-lin",
+   "title": {
+    "fr": "Fonctions linéaires et affines",
+    "en": "Linear and affine functions"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.eq-1",
+    "math.coords"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "fonctions"
+   ]
+  },
+  {
+   "id": "math.pythagoras",
+   "title": {
+    "fr": "Théorème de Pythagore",
+    "en": "Pythagoras' theorem"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.roots",
+    "math.perimeter"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 30,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.thales",
+   "title": {
+    "fr": "Théorème de Thalès",
+    "en": "The intercept theorem"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.ratio-prop",
+    "math.pythagoras"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 30,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.trig",
+   "title": {
+    "fr": "Trigonométrie du triangle rectangle",
+    "en": "Right-angled trigonometry"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.thales"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.stats-desc",
+   "title": {
+    "fr": "Statistiques : effectifs, médiane, fréquences",
+    "en": "Descriptive statistics"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.mean"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 30,
+   "tags": [
+    "donnees"
+   ]
+  },
+  {
+   "id": "math.identities",
+   "title": {
+    "fr": "Identités remarquables",
+    "en": "Special products and identities"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.alg-expand"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 30,
+   "tags": [
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.sys-2",
+   "title": {
+    "fr": "Systèmes de deux équations",
+    "en": "Simultaneous equations"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.eq-1",
+    "math.func-lin"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 35,
+   "tags": [
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.func-graph",
+   "title": {
+    "fr": "Représentation graphique des fonctions",
+    "en": "Graphs of functions"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.func-lin"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 35,
+   "tags": [
+    "fonctions"
+   ]
+  },
+  {
+   "id": "math.vectors",
+   "title": {
+    "fr": "Vecteurs du plan",
+    "en": "Vectors in the plane"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.coords",
+    "math.thales"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 35,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.transforms",
+   "title": {
+    "fr": "Translations, rotations, homothéties",
+    "en": "Translations, rotations and enlargements"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.vectors"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 30,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.proba-intro",
+   "title": {
+    "fr": "Probabilités simples",
+    "en": "Basic probability"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.frac-add",
+    "math.stats-desc"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 30,
+   "tags": [
+    "probabilites"
+   ]
+  },
+  {
+   "id": "math.quad-eq",
+   "title": {
+    "fr": "Équations du second degré",
+    "en": "Quadratic equations"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.identities",
+    "math.roots"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 40,
+   "tags": [
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.circle-th",
+   "title": {
+    "fr": "Cercle, angles inscrits, tangentes",
+    "en": "Circle theorems and tangents"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.angles-tri",
+    "math.pythagoras"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 35,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.space-geo",
+   "title": {
+    "fr": "Géométrie dans l'espace",
+    "en": "Solid geometry"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.volume",
+    "math.pythagoras"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 35,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.trig-circle",
+   "title": {
+    "fr": "Cercle trigonométrique",
+    "en": "The trigonometric circle"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.trig",
+    "math.circle-th"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 35,
+   "tags": [
+    "trigonometrie"
+   ]
+  },
+  {
+   "id": "math.func-quad",
+   "title": {
+    "fr": "Fonction trinôme et parabole",
+    "en": "Quadratic function and parabola"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.quad-eq",
+    "math.func-graph"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 40,
+   "tags": [
+    "fonctions"
+   ]
+  },
+  {
+   "id": "math.seq",
+   "title": {
+    "fr": "Suites arithmétiques et géométriques",
+    "en": "Arithmetic and geometric sequences"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.func-lin",
+    "math.powers"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 40,
+   "tags": [
+    "suites"
+   ]
+  },
+  {
+   "id": "math.deriv",
+   "title": {
+    "fr": "Dérivation et tangente",
+    "en": "Differentiation and tangents"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.func-quad"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "analyse"
+   ]
+  },
+  {
+   "id": "math.dot-product",
+   "title": {
+    "fr": "Produit scalaire",
+    "en": "Dot product"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.vectors",
+    "math.trig-circle"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 35,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.analytic-geo",
+   "title": {
+    "fr": "Géométrie analytique du plan",
+    "en": "Coordinate geometry"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.vectors",
+    "math.func-lin"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 35,
+   "tags": [
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.combinatorics",
+   "title": {
+    "fr": "Dénombrement : arrangements, combinaisons",
+    "en": "Counting: arrangements and combinations"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.proba-intro"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 40,
+   "tags": [
+    "probabilites"
+   ]
+  },
+  {
+   "id": "math.limits",
+   "title": {
+    "fr": "Limites et continuité",
+    "en": "Limits and continuity"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.func-quad",
+    "math.seq"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "analyse"
+   ]
+  },
+  {
+   "id": "math.deriv-app",
+   "title": {
+    "fr": "Étude complète d'une fonction",
+    "en": "Full study of a function"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.deriv",
+    "math.limits"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "analyse"
+   ]
+  },
+  {
+   "id": "math.log-exp",
+   "title": {
+    "fr": "Logarithme népérien et exponentielle",
+    "en": "Natural logarithm and exponential"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.deriv-app"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "analyse"
+   ]
+  },
+  {
+   "id": "math.integral",
+   "title": {
+    "fr": "Calcul intégral et primitives",
+    "en": "Integration and antiderivatives"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.deriv-app"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "analyse"
+   ]
+  },
+  {
+   "id": "math.complex",
+   "title": {
+    "fr": "Nombres complexes",
+    "en": "Complex numbers"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.quad-eq",
+    "math.trig-circle"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.proba-cond",
+   "title": {
+    "fr": "Probabilités conditionnelles et loi binomiale",
+    "en": "Conditional probability and the binomial law"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.combinatorics"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "probabilites"
+   ]
+  },
+  {
+   "id": "math.diff-eq",
+   "title": {
+    "fr": "Équations différentielles simples",
+    "en": "Simple differential equations"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.log-exp",
+    "math.integral"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 40,
+   "tags": [
+    "analyse"
+   ]
+  },
+  {
+   "id": "math.linalg-1",
+   "title": {
+    "fr": "Algèbre linéaire : matrices et systèmes",
+    "en": "Linear algebra: matrices and systems"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.sys-2",
+    "math.complex"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1",
+    "l1-en"
+   ],
+   "minutes": 50,
+   "tags": [
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.analysis-1",
+   "title": {
+    "fr": "Analyse réelle : suites et fonctions",
+    "en": "Real analysis: sequences and functions"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.integral",
+    "math.limits"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1",
+    "l1-en"
+   ],
+   "minutes": 50,
+   "tags": [
+    "analyse"
+   ]
+  },
+  {
+   "id": "math.stats-inf",
+   "title": {
+    "fr": "Statistique inférentielle élémentaire",
+    "en": "Elementary inferential statistics"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.proba-cond"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [
+    "bts",
+    "licence"
+   ],
+   "lots": [
+    "l2",
+    "l2-en"
+   ],
+   "minutes": 50,
+   "tags": [
+    "donnees"
+   ]
+  },
+  {
+   "id": "math.n2-number-logic",
+   "title": {
+    "fr": "Casse-têtes numériques et logique du CM2",
+    "en": "Number puzzles and logic at national contest level"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.problem-solving",
+    "math.decimal-ops"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [],
+   "lots": [
+    "cm2-exc",
+    "class6-exc"
+   ],
+   "minutes": 40,
+   "tags": [
+    "concours",
+    "raisonnement"
+   ]
+  },
+  {
+   "id": "math.n2-rates",
+   "title": {
+    "fr": "Vitesse, travail et robinets : problèmes à plusieurs données",
+    "en": "Speed, work and tank problems with several data"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.ratio-prop",
+    "math.percent"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [],
+   "lots": [
+    "cm2-exc",
+    "class6-exc"
+   ],
+   "minutes": 40,
+   "tags": [
+    "concours",
+    "proportionnalite"
+   ]
+  },
+  {
+   "id": "math.n2-area-cut",
+   "title": {
+    "fr": "Aires par découpage et recomposition",
+    "en": "Areas by cutting and rearranging"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.area-tri-circ",
+    "math.volume"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [],
+   "lots": [
+    "cm2-exc",
+    "class6-exc"
+   ],
+   "minutes": 40,
+   "tags": [
+    "concours",
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.n2-fraction-puzzles",
+   "title": {
+    "fr": "Fractions et partages en chaîne",
+    "en": "Chained fraction and sharing problems"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.frac-mult",
+    "math.n2-rates"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e-exc",
+    "form1-exc"
+   ],
+   "minutes": 40,
+   "tags": [
+    "concours",
+    "fractions"
+   ]
+  },
+  {
+   "id": "math.n2-arith-reasoning",
+   "title": {
+    "fr": "Arithmétique raisonnée : parité, restes, chiffres",
+    "en": "Reasoned arithmetic: parity, remainders, digits"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.gcd-lcm",
+    "math.n2-number-logic"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e-exc",
+    "form2-exc"
+   ],
+   "minutes": 45,
+   "tags": [
+    "concours",
+    "arithmetique"
+   ]
+  },
+  {
+   "id": "math.n2-alg-modelling",
+   "title": {
+    "fr": "Mettre en équation des situations complexes",
+    "en": "Modelling complex situations with equations"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.eq-1",
+    "math.n2-fraction-puzzles"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e-exc",
+    "form3-exc"
+   ],
+   "minutes": 45,
+   "tags": [
+    "concours",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n2-geo-proof",
+   "title": {
+    "fr": "Démontrer en géométrie : enchaîner Thalès, Pythagore, angles",
+    "en": "Geometry proofs chaining Thales, Pythagoras and angles"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.thales",
+    "math.pythagoras",
+    "math.n2-area-cut"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e-exc",
+    "form3-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "geometrie",
+    "preuve"
+   ]
+  },
+  {
+   "id": "math.n2-param-eq",
+   "title": {
+    "fr": "Équations et inéquations avec paramètre",
+    "en": "Equations and inequalities with a parameter"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.sys-2",
+    "math.identities",
+    "math.n2-alg-modelling"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [],
+   "lots": [
+    "3e-exc",
+    "form4-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n2-int-divisibility",
+   "title": {
+    "fr": "Divisibilité et congruences élémentaires",
+    "en": "Divisibility and elementary congruences"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.gcd-lcm",
+    "math.n2-arith-reasoning"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [],
+   "lots": [
+    "3e-exc",
+    "form4-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "arithmetique"
+   ]
+  },
+  {
+   "id": "math.n2-extrema",
+   "title": {
+    "fr": "Optimisation sans dérivée : extrema par encadrement",
+    "en": "Optimisation without calculus"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.quad-eq",
+    "math.n2-param-eq"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc",
+    "form5-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n2-combinatorics",
+   "title": {
+    "fr": "Dénombrement et principe des tiroirs",
+    "en": "Counting and the pigeonhole principle"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.combinatorics",
+    "math.n2-arith-reasoning"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "probabilites"
+   ]
+  },
+  {
+   "id": "math.n2-geo-circle",
+   "title": {
+    "fr": "Géométrie du cercle et du triangle : problèmes de concours",
+    "en": "Circle and triangle geometry: contest problems"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.circle-th",
+    "math.n2-geo-proof"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc",
+    "form5-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "geometrie",
+    "preuve"
+   ]
+  },
+  {
+   "id": "math.n2-sequences",
+   "title": {
+    "fr": "Suites : récurrences, suites auxiliaires, sommes",
+    "en": "Sequences: recurrences, auxiliary sequences, sums"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.seq",
+    "math.n2-extrema"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "suites"
+   ]
+  },
+  {
+   "id": "math.n2-func-param",
+   "title": {
+    "fr": "Fonctions avec paramètre : étude et discussion",
+    "en": "Functions with parameters: study and discussion"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.func-quad",
+    "math.deriv",
+    "math.n2-param-eq"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "fonctions"
+   ]
+  },
+  {
+   "id": "math.n2-analysis-bac",
+   "title": {
+    "fr": "Analyse niveau meilleurs élèves du Bac C/D",
+    "en": "Analysis at top Baccalauréat level"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.deriv-app",
+    "math.log-exp",
+    "math.integral",
+    "math.n2-func-param"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours",
+    "analyse"
+   ]
+  },
+  {
+   "id": "math.n2-arith-z",
+   "title": {
+    "fr": "Arithmétique dans Z : Bézout, Gauss, congruences",
+    "en": "Arithmetic in Z: Bezout, Gauss, congruences"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.n2-int-divisibility",
+    "math.complex"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours",
+    "arithmetique"
+   ]
+  },
+  {
+   "id": "math.n2-complex-geo",
+   "title": {
+    "fr": "Complexes et géométrie : transformations, lieux",
+    "en": "Complex numbers and geometry: transformations and loci"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.complex",
+    "math.n2-geo-circle"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours",
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.n2-proba-advanced",
+   "title": {
+    "fr": "Probabilités : lois, espérance et raisonnement fin",
+    "en": "Probability: laws, expectation and subtle reasoning"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.proba-cond",
+    "math.n2-combinatorics"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "probabilites"
+   ]
+  },
+  {
+   "id": "math.n2-linalg",
+   "title": {
+    "fr": "Algèbre linéaire : espaces vectoriels et rang",
+    "en": "Linear algebra: vector spaces and rank"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.linalg-1",
+    "math.n2-arith-z"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "superieur",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n2-analysis-real",
+   "title": {
+    "fr": "Analyse : ε-δ et suites de Cauchy (initiation)",
+    "en": "Analysis: epsilon-delta and Cauchy sequences (intro)"
+   },
+   "level": "N2",
+   "prereq": [
+    "math.analysis-1",
+    "math.n2-analysis-bac"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "superieur",
+    "analyse",
+    "preuve"
+   ]
+  },
+  {
+   "id": "math.n3-proof-induction",
+   "title": {
+    "fr": "Preuve par récurrence et raisonnement par l'absurde",
+    "en": "Proof by induction and by contradiction"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-int-divisibility",
+    "math.n2-alg-modelling"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [],
+   "lots": [
+    "3e-exc",
+    "form4-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "olympiade",
+    "preuve"
+   ]
+  },
+  {
+   "id": "math.n3-inequalities",
+   "title": {
+    "fr": "Inégalités classiques : moyennes, réarrangement",
+    "en": "Classical inequalities: means and rearrangement"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-extrema"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc",
+    "form5-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "olympiade",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n3-number-theory",
+   "title": {
+    "fr": "Théorie des nombres : petit théorème de Fermat, ordres",
+    "en": "Number theory: Fermat's little theorem and orders"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-int-divisibility",
+    "math.n3-proof-induction"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "olympiade",
+    "arithmetique"
+   ]
+  },
+  {
+   "id": "math.n3-geo-synthetic",
+   "title": {
+    "fr": "Géométrie synthétique : puissance d'un point, cercles",
+    "en": "Synthetic geometry: power of a point and circles"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-geo-circle"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "olympiade",
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.n3-combinatorics",
+   "title": {
+    "fr": "Combinatoire : inclusion-exclusion, invariants, jeux",
+    "en": "Combinatorics: inclusion-exclusion, invariants and games"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-combinatorics",
+    "math.n3-proof-induction"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "olympiade",
+    "combinatoire"
+   ]
+  },
+  {
+   "id": "math.n3-functional-eq",
+   "title": {
+    "fr": "Équations fonctionnelles élémentaires",
+    "en": "Elementary functional equations"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-func-param",
+    "math.n3-proof-induction"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "olympiade",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n3-polynomials",
+   "title": {
+    "fr": "Polynômes : racines, Viète, interpolation",
+    "en": "Polynomials: roots, Vieta and interpolation"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-func-param",
+    "math.n3-inequalities"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "olympiade",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n3-modelling",
+   "title": {
+    "fr": "Modélisation mathématique multi-étapes",
+    "en": "Multi-step mathematical modelling"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-analysis-bac",
+    "math.n2-proba-advanced"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "international",
+    "modelisation"
+   ]
+  },
+  {
+   "id": "math.n3-analysis-rigour",
+   "title": {
+    "fr": "Analyse rigoureuse : bornes, densité, convergence",
+    "en": "Rigorous analysis: bounds, density, convergence"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-analysis-bac",
+    "math.n3-proof-induction"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "international",
+    "analyse",
+    "preuve"
+   ]
+  },
+  {
+   "id": "math.n3-linalg-abstract",
+   "title": {
+    "fr": "Algèbre linéaire abstraite : applications linéaires, déterminants",
+    "en": "Abstract linear algebra: linear maps and determinants"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-linalg"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "international",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n3-probability-theory",
+   "title": {
+    "fr": "Probabilités : variables aléatoires, loi des grands nombres",
+    "en": "Probability: random variables and the law of large numbers"
+   },
+   "level": "N3",
+   "prereq": [
+    "math.n2-proba-advanced",
+    "math.n3-analysis-rigour"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "international",
+    "probabilites"
+   ]
+  },
+  {
+   "id": "math.n4-inequalities-adv",
+   "title": {
+    "fr": "Inégalités avancées : Cauchy-Schwarz, Jensen, SOS",
+    "en": "Advanced inequalities: Cauchy-Schwarz, Jensen, SOS"
+   },
+   "level": "N4",
+   "prereq": [
+    "math.n3-inequalities",
+    "math.n3-polynomials"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 75,
+   "tags": [
+    "olympiade-int",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n4-number-theory-adv",
+   "title": {
+    "fr": "Théorie des nombres olympique : résidus quadratiques, lifting",
+    "en": "Olympiad number theory: quadratic residues, lifting the exponent"
+   },
+   "level": "N4",
+   "prereq": [
+    "math.n3-number-theory"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 75,
+   "tags": [
+    "olympiade-int",
+    "arithmetique"
+   ]
+  },
+  {
+   "id": "math.n4-geo-projective",
+   "title": {
+    "fr": "Géométrie olympique : inversion, birapport, projective",
+    "en": "Olympiad geometry: inversion, cross-ratio, projective methods"
+   },
+   "level": "N4",
+   "prereq": [
+    "math.n3-geo-synthetic"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 80,
+   "tags": [
+    "olympiade-int",
+    "geometrie"
+   ]
+  },
+  {
+   "id": "math.n4-combinatorics-adv",
+   "title": {
+    "fr": "Combinatoire extrémale et graphes : Hall, Ramsey, méthode probabiliste",
+    "en": "Extremal combinatorics and graphs: Hall, Ramsey, probabilistic method"
+   },
+   "level": "N4",
+   "prereq": [
+    "math.n3-combinatorics"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 80,
+   "tags": [
+    "olympiade-int",
+    "combinatoire"
+   ]
+  },
+  {
+   "id": "math.n4-functional-adv",
+   "title": {
+    "fr": "Équations fonctionnelles et polynômes olympiques",
+    "en": "Olympiad functional equations and polynomials"
+   },
+   "level": "N4",
+   "prereq": [
+    "math.n3-functional-eq",
+    "math.n3-polynomials"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 75,
+   "tags": [
+    "olympiade-int",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n4-analysis-uni",
+   "title": {
+    "fr": "Analyse de niveau première année des meilleures universités",
+    "en": "Analysis at first-year level of top universities"
+   },
+   "level": "N4",
+   "prereq": [
+    "math.n3-analysis-rigour",
+    "math.n3-linalg-abstract"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 90,
+   "tags": [
+    "universite-int",
+    "analyse"
+   ]
+  },
+  {
+   "id": "math.n4-algebra-uni",
+   "title": {
+    "fr": "Algèbre abstraite : groupes, anneaux, corps (initiation)",
+    "en": "Abstract algebra: groups, rings, fields (introduction)"
+   },
+   "level": "N4",
+   "prereq": [
+    "math.n3-linalg-abstract",
+    "math.n3-number-theory"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 90,
+   "tags": [
+    "universite-int",
+    "algebre"
+   ]
+  },
+  {
+   "id": "math.n4-research-problem",
+   "title": {
+    "fr": "Résoudre un problème ouvert de modélisation et le rédiger",
+    "en": "Solving and writing up an open modelling problem"
+   },
+   "level": "N4",
+   "prereq": [
+    "math.n3-modelling",
+    "math.n3-probability-theory"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 90,
+   "tags": [
+    "universite-int",
+    "modelisation",
+    "preuve"
+   ]
+  }
+ ]
+}

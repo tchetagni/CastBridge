@@ -51,6 +51,8 @@ class LessonValidator(private val knownLessons: Set<String> = emptySet()) {
             if (l.minutes !in 1..240) e += "$w: durée ${l.minutes} min hors 1..240"
             for (pr in l.prerequisites) if (pr !in lessonIds && pr !in knownLessons) e += "$w: prérequis $pr introuvable"
             if (l.id in l.prerequisites) e += "$w: prérequis de lui-même"
+            l.level?.let { if (it !in castbridge.core.curriculum.Level.KEYS) e += "$w: niveau « $it » inconnu (N0..N4)" }
+            if (l.skill != null && !castbridge.core.curriculum.SkillGraph.ID.matches(l.skill)) e += "$w: identifiant de compétence « ${l.skill} » invalide"
             l.objectives.forEach { md(it, "$w objectif", e) }
             l.blocks.forEachIndexed { k, b ->
                 val bw = "$w bloc #$k"
@@ -128,7 +130,10 @@ class LessonValidator(private val knownLessons: Set<String> = emptySet()) {
         md(x.prompt, "$w énoncé", e); len(x.prompt, MAX_BLOCK_CHARS, "$w énoncé", e)
         x.tex?.let { tex(it, w, e) }
         x.figure?.let { figure(it, "$w figure", e, warn) }
-        if (x.difficulty !in 1..3) e += "$w: difficulté ${x.difficulty} hors 1..3"
+        if (x.difficulty !in 1..5) e += "$w: difficulté ${x.difficulty} hors 1..5"
+        x.level?.let { if (it !in castbridge.core.curriculum.Level.KEYS) e += "$w: niveau « $it » inconnu (N0..N4)" }
+        if (x.tier.excellence && x.difficulty < 3) e += "$w: un exercice ${x.tier.key} a une difficulté ≥ 3 (${x.difficulty})"
+        x.calibration.forEach { (k, v) -> if (k !in castbridge.core.curriculum.Level.KEYS || v !in 0.0..1.0) e += "$w: calibration « $k » = $v invalide (niveau N0..N4, taux 0..1)" }
         if (x.kind != ExerciseKind.PROBLEM && x.points <= 0) e += "$w: points ≤ 0"
         if (x.kind != ExerciseKind.PROBLEM && x.explanation.isBlank()) e += "$w: explication (corrigé) manquante"
         md(x.explanation, "$w explication", e)

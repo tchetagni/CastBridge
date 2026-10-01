@@ -1,0 +1,1029 @@
+{
+ "format": 1,
+ "domain": "english",
+ "prefix": "eng",
+ "title": {
+  "fr": "Langue anglaise",
+  "en": "English language"
+ },
+ "skills": [
+  {
+   "id": "eng.greetings",
+   "title": {
+    "fr": "Salutations et mots de la classe",
+    "en": "Greetings and classroom words"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    0,
+    1
+   ],
+   "classes": [
+    "mat",
+    "nursery",
+    "sil",
+    "class1"
+   ],
+   "exams": [],
+   "lots": [
+    "mat",
+    "nursery"
+   ],
+   "minutes": 20,
+   "tags": [
+    "oral"
+   ]
+  },
+  {
+   "id": "eng.alphabet-en",
+   "title": {
+    "fr": "L'alphabet et les sons anglais",
+    "en": "The English alphabet and sounds"
+   },
+   "level": "N0",
+   "prereq": [
+    "eng.greetings"
+   ],
+   "years": [
+    1
+   ],
+   "classes": [
+    "sil",
+    "class1"
+   ],
+   "exams": [],
+   "lots": [
+    "sil",
+    "class1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "eng.numbers-colours",
+   "title": {
+    "fr": "Nombres, couleurs, famille",
+    "en": "Numbers, colours and family"
+   },
+   "level": "N0",
+   "prereq": [
+    "eng.greetings"
+   ],
+   "years": [
+    1
+   ],
+   "classes": [
+    "sil",
+    "class1"
+   ],
+   "exams": [],
+   "lots": [
+    "sil",
+    "class1"
+   ],
+   "minutes": 20,
+   "tags": [
+    "vocabulaire"
+   ]
+  },
+  {
+   "id": "eng.read-words-en",
+   "title": {
+    "fr": "Lire des mots simples en anglais",
+    "en": "Read simple English words"
+   },
+   "level": "N0",
+   "prereq": [
+    "eng.alphabet-en"
+   ],
+   "years": [
+    1,
+    2
+   ],
+   "classes": [
+    "sil",
+    "class1",
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "sil",
+    "class1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "eng.simple-sentences-en",
+   "title": {
+    "fr": "Phrases simples : I am, I have",
+    "en": "Simple sentences: I am, I have"
+   },
+   "level": "N0",
+   "prereq": [
+    "eng.read-words-en",
+    "eng.numbers-colours"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 25,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.present-simple",
+   "title": {
+    "fr": "Présent simple et to be",
+    "en": "Present simple and to be"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.simple-sentences-en"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 30,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.nouns-plurals",
+   "title": {
+    "fr": "Noms, pluriels, articles",
+    "en": "Nouns, plurals and articles"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.simple-sentences-en"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 25,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.reading-short-en",
+   "title": {
+    "fr": "Comprendre un texte court en anglais",
+    "en": "Short text comprehension"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.read-words-en",
+    "eng.nouns-plurals"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 25,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "eng.spelling-en",
+   "title": {
+    "fr": "Orthographe anglaise courante",
+    "en": "Common English spelling"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.reading-short-en"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "orthographe"
+   ]
+  },
+  {
+   "id": "eng.present-continuous",
+   "title": {
+    "fr": "Présent continu",
+    "en": "Present continuous"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.present-simple"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.adjectives-en",
+   "title": {
+    "fr": "Adjectifs et comparaison",
+    "en": "Adjectives and comparison"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.nouns-plurals"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.past-simple",
+   "title": {
+    "fr": "Prétérit simple (réguliers et irréguliers)",
+    "en": "Simple past (regular and irregular)"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.present-simple"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.prepositions",
+   "title": {
+    "fr": "Prépositions de lieu et de temps",
+    "en": "Prepositions of place and time"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.nouns-plurals"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 25,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.paragraph-en",
+   "title": {
+    "fr": "Écrire un paragraphe",
+    "en": "Write a paragraph"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.spelling-en",
+    "eng.past-simple"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 35,
+   "tags": [
+    "expression"
+   ]
+  },
+  {
+   "id": "eng.fslc-reading",
+   "title": {
+    "fr": "Lecture et grammaire du FSLC",
+    "en": "FSLC reading and grammar"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.reading-short-en",
+    "eng.past-simple"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 35,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "eng.fslc-writing",
+   "title": {
+    "fr": "Rédaction guidée du FSLC",
+    "en": "FSLC guided writing"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.paragraph-en",
+    "eng.present-continuous"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 35,
+   "tags": [
+    "examen",
+    "expression"
+   ]
+  },
+  {
+   "id": "eng.future-modals",
+   "title": {
+    "fr": "Futur et modaux (will, can, must)",
+    "en": "Future and modals"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.past-simple"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 30,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.perfect-tenses",
+   "title": {
+    "fr": "Present perfect et past continuous",
+    "en": "Present perfect and past continuous"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.past-simple",
+    "eng.present-continuous"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.letters-en",
+   "title": {
+    "fr": "Lettres informelles et formelles",
+    "en": "Informal and formal letters"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.paragraph-en"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "expression"
+   ]
+  },
+  {
+   "id": "eng.conditionals",
+   "title": {
+    "fr": "Conditionnels et subordonnées",
+    "en": "Conditionals and subordinate clauses"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.future-modals",
+    "eng.perfect-tenses"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.reported-speech",
+   "title": {
+    "fr": "Discours rapporté et voix passive",
+    "en": "Reported speech and passive voice"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.perfect-tenses"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.composition-en",
+   "title": {
+    "fr": "Composition : narrative, descriptive, argumentative",
+    "en": "Composition writing"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.letters-en",
+    "eng.conditionals"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 45,
+   "tags": [
+    "expression"
+   ]
+  },
+  {
+   "id": "eng.comprehension-en",
+   "title": {
+    "fr": "Compréhension et résumé",
+    "en": "Comprehension and summary"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.reading-short-en",
+    "eng.reported-speech"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 40,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "eng.gce-ol-english",
+   "title": {
+    "fr": "English Language GCE O Level : paper 1 et 2",
+    "en": "English Language GCE O Level"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.composition-en",
+    "eng.comprehension-en"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 50,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "eng.literature-en",
+   "title": {
+    "fr": "Littérature anglaise et africaine : analyse",
+    "en": "English and African literature: analysis"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.comprehension-en"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "litterature"
+   ]
+  },
+  {
+   "id": "eng.gce-al-english",
+   "title": {
+    "fr": "English Language GCE A Level",
+    "en": "GCE A Level English"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.gce-ol-english",
+    "eng.literature-en"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 55,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "eng.academic-en",
+   "title": {
+    "fr": "Anglais académique et professionnel",
+    "en": "Academic and professional English"
+   },
+   "level": "N1",
+   "prereq": [
+    "eng.gce-al-english"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1",
+    "l1-en"
+   ],
+   "minutes": 50,
+   "tags": [
+    "superieur"
+   ]
+  },
+  {
+   "id": "eng.n2-vocab-idiom",
+   "title": {
+    "fr": "Vocabulaire étendu, idiomes, mots composés",
+    "en": "Extended vocabulary and idioms"
+   },
+   "level": "N2",
+   "prereq": [
+    "eng.letters-en",
+    "eng.perfect-tenses"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e-exc",
+    "form2-exc"
+   ],
+   "minutes": 40,
+   "tags": [
+    "concours"
+   ]
+  },
+  {
+   "id": "eng.n2-grammar-precision",
+   "title": {
+    "fr": "Grammaire de précision : inversion, subjonctif, collocations",
+    "en": "Precision grammar"
+   },
+   "level": "N2",
+   "prereq": [
+    "eng.conditionals",
+    "eng.n2-vocab-idiom"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e-exc",
+    "form3-exc"
+   ],
+   "minutes": 45,
+   "tags": [
+    "concours",
+    "grammaire"
+   ]
+  },
+  {
+   "id": "eng.n2-writing-voice",
+   "title": {
+    "fr": "Composition d'excellence : voix, structure, registre",
+    "en": "Excellence-level composition"
+   },
+   "level": "N2",
+   "prereq": [
+    "eng.composition-en",
+    "eng.n2-grammar-precision"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [],
+   "lots": [
+    "3e-exc",
+    "form4-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "expression"
+   ]
+  },
+  {
+   "id": "eng.n2-critical-reading",
+   "title": {
+    "fr": "Lecture critique et analyse de texte avancée",
+    "en": "Critical reading and advanced text analysis"
+   },
+   "level": "N2",
+   "prereq": [
+    "eng.comprehension-en",
+    "eng.n2-writing-voice"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc",
+    "form5-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "lecture"
+   ]
+  },
+  {
+   "id": "eng.n2-literary-analysis",
+   "title": {
+    "fr": "Essai littéraire argumenté",
+    "en": "Argued literary essay"
+   },
+   "level": "N2",
+   "prereq": [
+    "eng.literature-en",
+    "eng.n2-critical-reading"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "litterature"
+   ]
+  },
+  {
+   "id": "eng.n2-top-national",
+   "title": {
+    "fr": "Anglais niveau meilleurs candidats du GCE A Level",
+    "en": "Top-national A Level English"
+   },
+   "level": "N2",
+   "prereq": [
+    "eng.gce-al-english",
+    "eng.n2-literary-analysis"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours"
+   ]
+  },
+  {
+   "id": "eng.n3-ielts-cambridge",
+   "title": {
+    "fr": "Anglais niveau Cambridge C1-C2 / IELTS 8",
+    "en": "English at Cambridge C1-C2 level"
+   },
+   "level": "N3",
+   "prereq": [
+    "eng.n2-top-national"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "international"
+   ]
+  },
+  {
+   "id": "eng.n3-rhetoric-en",
+   "title": {
+    "fr": "Rhétorique et écriture argumentative internationale",
+    "en": "International argumentative writing"
+   },
+   "level": "N3",
+   "prereq": [
+    "eng.n3-ielts-cambridge"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "international",
+    "expression"
+   ]
+  },
+  {
+   "id": "eng.n3-world-lit",
+   "title": {
+    "fr": "Littérature mondiale en anglais : lecture comparée",
+    "en": "World literature in English"
+   },
+   "level": "N3",
+   "prereq": [
+    "eng.n2-literary-analysis",
+    "eng.n3-ielts-cambridge"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "international",
+    "litterature"
+   ]
+  }
+ ]
+}

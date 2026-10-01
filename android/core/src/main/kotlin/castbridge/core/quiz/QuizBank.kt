@@ -39,6 +39,11 @@ data class Question(
     val updatedAt: String? = null,
     /** How the answer was checked: "computed" (the answer comes from a calculation, tested), "fact" (table of sourced facts), "import" (written then imported), null = bundled/reviewed. */
     val verif: String? = null,
+    /** Curriculum graph (additive, optional, docs/CONTENT-ARCHITECTURE.md § 5): skill id, learner level "N0".."N4" (`level` stays the school class), lot scope, target success rate by learner level. */
+    val skill: String? = null,
+    val nlevel: String? = null,
+    val lot: String? = null,
+    val calib: Map<String, Double> = emptyMap(),
 ) {
     /** Same question with its choices reordered by [rng] (the bank's answer positions do not leak into the game). */
     fun shuffled(rng: Random): Question {
@@ -78,6 +83,8 @@ class QuizBank(val all: List<Question>) {
             if (q.explanation.isBlank()) errs += "$w: explication vide"
             if (q.source.isBlank()) errs += "$w: source vide"
             if (q.difficulty !in 1..5) errs += "$w: difficulté hors 1..5"
+            q.nlevel?.let { if (it !in castbridge.core.curriculum.Level.KEYS) errs += "$w: niveau $it inconnu (N0..N4)" }
+            q.calib.forEach { (k, v) -> if (k !in castbridge.core.curriculum.Level.KEYS || v !in 0.0..1.0) errs += "$w: calibration $k=$v invalide" }
             if (q.choices.size != 4) errs += "$w: il faut 4 choix"
             if (q.choices.any { it.isBlank() }) errs += "$w: choix vide"
             if (q.choices.map(::norm).toSet().size != q.choices.size) errs += "$w: choix en double"
@@ -264,6 +271,8 @@ class QuizBank(val all: List<Question>) {
                     field = m.str("field"),
                     lang = m.str("lang") ?: "fr",
                     updatedAt = m.str("updatedAt"),
+                    skill = m.str("skill"), nlevel = m.str("nlevel"), lot = m.str("lot"),
+                    calib = (m["calib"] as? Map<*, *>)?.mapNotNull { (k, v) -> (k as? String)?.let { kk -> (v as? Number)?.toDouble()?.let { kk to it } } }?.toMap() ?: emptyMap(),
                 )
             })
         }

@@ -1,0 +1,45 @@
+# slug | level | years | fr | en | prereqs | minutes | tags
+living-things|N0|y0-2|Êtres vivants et non vivants|Living and non-living things||20|eveil
+body-senses|N0|y1-3|Le corps humain et les cinq sens|The human body and the five senses|living-things|20|corps
+plants-animals|N0|y2|Plantes et animaux de chez nous|Plants and animals around us|living-things|20|eveil,cameroun
+hygiene-health|N0|y2-3|Hygiène, alimentation et santé|Hygiene, food and health|body-senses|25|sante
+growth-plants|N1|y4|Croissance et besoins des plantes|Growth and needs of plants|plants-animals|25|plantes
+food-chain|N1|y5|Chaînes alimentaires|Food chains|plants-animals|25|ecologie
+digestion-basic|N1|y5|Digestion et nutriments|Digestion and nutrients|hygiene-health|25|corps
+malaria-prevention|N1|y5|Paludisme, choléra, VIH : prévenir|Malaria, cholera, HIV: prevention|hygiene-health|30|sante,cameroun
+cep-science-svt|N1|y6|Éveil scientifique du CEP : vivant et santé|CEP science: living world and health|growth-plants,food-chain,digestion-basic,malaria-prevention|35|examen
+cell|N1|y7|La cellule, unité du vivant|The cell|cep-science-svt|35|cellule
+classification|N1|y7|Classer les êtres vivants|Classifying living things|cep-science-svt|30|classification
+nutrition-plants|N1|y8|Photosynthèse et nutrition des végétaux|Photosynthesis and plant nutrition|cell|35|plantes
+respiration|N1|y8|Respiration chez les êtres vivants|Respiration in living things|cell|35|corps
+reproduction-plants|N1|y8|Reproduction des plantes à fleurs|Reproduction in flowering plants|nutrition-plants|30|plantes
+circulation|N1|y9|Sang et circulation|Blood and circulation|respiration|35|corps
+digestive-system|N1|y9|Appareil digestif et absorption|Digestive system and absorption|digestion-basic,cell|35|corps
+reproduction-human|N1|y9|Reproduction humaine et puberté|Human reproduction and puberty|circulation|35|corps,sante
+ecosystems|N1|y9|Écosystèmes et équilibres, forêt du Cameroun|Ecosystems and balance, Cameroon's forests|food-chain,nutrition-plants|35|ecologie,cameroun
+immunity|N1|y10|Défenses de l'organisme, vaccination|Body defences and vaccination|circulation,malaria-prevention|40|sante
+genetics-1|N1|y10|Hérédité : chromosomes et gènes (initiation)|Heredity: chromosomes and genes|cell,reproduction-human|40|genetique
+nervous|N1|y10|Système nerveux et réflexes|Nervous system and reflexes|body-senses,circulation|40|corps
+geology-1|N1|y10|Roches, sol et érosion|Rocks, soil and erosion|ecosystems|35|geologie
+bepc-svt|N1|y10|SVT du BEPC|BEPC life and earth science|immunity,genetics-1,nervous,geology-1|45|examen
+metabolism|N1|y11|Métabolisme : enzymes et énergie cellulaire|Metabolism: enzymes and cellular energy|respiration,digestive-system|45|cellule
+genetics-2|N1|y11|Génétique : lois de Mendel et croisements|Genetics: Mendel's laws and crosses|genetics-1|45|genetique
+geology-2|N1|y12|Tectonique des plaques, volcanisme|Plate tectonics and volcanism|geology-1|45|geologie,cameroun
+evolution|N1|y12|Évolution et biodiversité|Evolution and biodiversity|genetics-2,classification|45|evolution
+physiology-adv|N1|y12|Physiologie : muscle, hormones, régulations|Physiology: muscle, hormones, regulation|nervous,metabolism|50|corps
+molecular-bio|N1|y13|Biologie moléculaire : ADN, synthèse des protéines|Molecular biology: DNA and protein synthesis|genetics-2,metabolism|55|genetique
+immunology-bac|N1|y13|Immunologie et réponse spécifique|Immunology and specific response|immunity,molecular-bio|50|sante
+bac-svt|N1|y13|SVT du Bac C/D|Baccalauréat life and earth science|molecular-bio,immunology-bac,evolution,geology-2,physiology-adv|60|examen
+bio-uni|N1|y14|Biologie cellulaire et moléculaire de première année|First-year cell and molecular biology|bac-svt|55|superieur
+# N2
+n2-data-bio|N2|y9|Lire, tracer et interpréter des données biologiques|Reading, plotting and interpreting biological data|digestive-system,ecosystems,math.stats-desc|40|concours,donnees
+n2-experimental-bio|N2|y10|Concevoir une expérience témoin en biologie|Designing a controlled biology experiment|n2-data-bio,genetics-1|45|concours,experimental
+n2-genetics-problems|N2|y11|Problèmes de génétique : liaison, pedigrees, probabilités|Genetics problems: linkage, pedigrees, probability|genetics-2,n2-experimental-bio|55|concours,genetique
+n2-physiology-model|N2|y12|Raisonner en physiologie : régulation et modèles|Physiology reasoning: regulation and models|physiology-adv,n2-genetics-problems|55|concours,corps
+n2-bac-bio-excellence|N2|y13|SVT du Bac au niveau des meilleurs candidats|Baccalauréat biology at top-candidate level|bac-svt,n2-physiology-model|65|concours
+n2-ecology-quant|N2|y13|Écologie quantitative : populations, flux, indicateurs|Quantitative ecology: populations, flows and indicators|ecosystems,n2-data-bio,math.log-exp|55|concours,ecologie
+# N3
+n3-molecular-mechanisms|N3|y13|Mécanismes moléculaires : régulation de l'expression des gènes|Molecular mechanisms: gene expression regulation|n2-bac-bio-excellence|65|olympiade
+n3-evolution-genomics|N3|y14|Évolution, génomique et phylogénie|Evolution, genomics and phylogeny|n2-genetics-problems,evolution|65|olympiade
+n3-biostats|N3|y15|Biostatistiques et plans d'étude|Biostatistics and study design|n2-ecology-quant,math.stats-inf|65|olympiade,donnees
+n3-lab-skills|N3|y14|Compétences de laboratoire et analyse de données de niveau olympiade|Olympiad lab skills and data analysis|n2-experimental-bio,n3-molecular-mechanisms|70|olympiade,experimental

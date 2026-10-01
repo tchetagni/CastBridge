@@ -1,0 +1,1233 @@
+{
+ "format": 1,
+ "domain": "svt",
+ "prefix": "svt",
+ "title": {
+  "fr": "Sciences de la vie et de la Terre",
+  "en": "Biology and Earth science"
+ },
+ "skills": [
+  {
+   "id": "svt.living-things",
+   "title": {
+    "fr": "Êtres vivants et non vivants",
+    "en": "Living and non-living things"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    0,
+    1,
+    2
+   ],
+   "classes": [
+    "mat",
+    "nursery",
+    "sil",
+    "class1",
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "mat",
+    "nursery"
+   ],
+   "minutes": 20,
+   "tags": [
+    "eveil"
+   ]
+  },
+  {
+   "id": "svt.body-senses",
+   "title": {
+    "fr": "Le corps humain et les cinq sens",
+    "en": "The human body and the five senses"
+   },
+   "level": "N0",
+   "prereq": [
+    "svt.living-things"
+   ],
+   "years": [
+    1,
+    2,
+    3
+   ],
+   "classes": [
+    "sil",
+    "class1",
+    "cp",
+    "class2",
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "sil",
+    "class1"
+   ],
+   "minutes": 20,
+   "tags": [
+    "corps"
+   ]
+  },
+  {
+   "id": "svt.plants-animals",
+   "title": {
+    "fr": "Plantes et animaux de chez nous",
+    "en": "Plants and animals around us"
+   },
+   "level": "N0",
+   "prereq": [
+    "svt.living-things"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 20,
+   "tags": [
+    "eveil",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "svt.hygiene-health",
+   "title": {
+    "fr": "Hygiène, alimentation et santé",
+    "en": "Hygiene, food and health"
+   },
+   "level": "N0",
+   "prereq": [
+    "svt.body-senses"
+   ],
+   "years": [
+    2,
+    3
+   ],
+   "classes": [
+    "cp",
+    "class2",
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 25,
+   "tags": [
+    "sante"
+   ]
+  },
+  {
+   "id": "svt.growth-plants",
+   "title": {
+    "fr": "Croissance et besoins des plantes",
+    "en": "Growth and needs of plants"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.plants-animals"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "plantes"
+   ]
+  },
+  {
+   "id": "svt.food-chain",
+   "title": {
+    "fr": "Chaînes alimentaires",
+    "en": "Food chains"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.plants-animals"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 25,
+   "tags": [
+    "ecologie"
+   ]
+  },
+  {
+   "id": "svt.digestion-basic",
+   "title": {
+    "fr": "Digestion et nutriments",
+    "en": "Digestion and nutrients"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.hygiene-health"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 25,
+   "tags": [
+    "corps"
+   ]
+  },
+  {
+   "id": "svt.malaria-prevention",
+   "title": {
+    "fr": "Paludisme, choléra, VIH : prévenir",
+    "en": "Malaria, cholera, HIV: prevention"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.hygiene-health"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "sante",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "svt.cep-science-svt",
+   "title": {
+    "fr": "Éveil scientifique du CEP : vivant et santé",
+    "en": "CEP science: living world and health"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.growth-plants",
+    "svt.food-chain",
+    "svt.digestion-basic",
+    "svt.malaria-prevention"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 35,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "svt.cell",
+   "title": {
+    "fr": "La cellule, unité du vivant",
+    "en": "The cell"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.cep-science-svt"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 35,
+   "tags": [
+    "cellule"
+   ]
+  },
+  {
+   "id": "svt.classification",
+   "title": {
+    "fr": "Classer les êtres vivants",
+    "en": "Classifying living things"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.cep-science-svt"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 30,
+   "tags": [
+    "classification"
+   ]
+  },
+  {
+   "id": "svt.nutrition-plants",
+   "title": {
+    "fr": "Photosynthèse et nutrition des végétaux",
+    "en": "Photosynthesis and plant nutrition"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.cell"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "plantes"
+   ]
+  },
+  {
+   "id": "svt.respiration",
+   "title": {
+    "fr": "Respiration chez les êtres vivants",
+    "en": "Respiration in living things"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.cell"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "corps"
+   ]
+  },
+  {
+   "id": "svt.reproduction-plants",
+   "title": {
+    "fr": "Reproduction des plantes à fleurs",
+    "en": "Reproduction in flowering plants"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.nutrition-plants"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 30,
+   "tags": [
+    "plantes"
+   ]
+  },
+  {
+   "id": "svt.circulation",
+   "title": {
+    "fr": "Sang et circulation",
+    "en": "Blood and circulation"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.respiration"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "corps"
+   ]
+  },
+  {
+   "id": "svt.digestive-system",
+   "title": {
+    "fr": "Appareil digestif et absorption",
+    "en": "Digestive system and absorption"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.digestion-basic",
+    "svt.cell"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "corps"
+   ]
+  },
+  {
+   "id": "svt.reproduction-human",
+   "title": {
+    "fr": "Reproduction humaine et puberté",
+    "en": "Human reproduction and puberty"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.circulation"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "corps",
+    "sante"
+   ]
+  },
+  {
+   "id": "svt.ecosystems",
+   "title": {
+    "fr": "Écosystèmes et équilibres, forêt du Cameroun",
+    "en": "Ecosystems and balance, Cameroon's forests"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.food-chain",
+    "svt.nutrition-plants"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "ecologie",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "svt.immunity",
+   "title": {
+    "fr": "Défenses de l'organisme, vaccination",
+    "en": "Body defences and vaccination"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.circulation",
+    "svt.malaria-prevention"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 40,
+   "tags": [
+    "sante"
+   ]
+  },
+  {
+   "id": "svt.genetics-1",
+   "title": {
+    "fr": "Hérédité : chromosomes et gènes (initiation)",
+    "en": "Heredity: chromosomes and genes"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.cell",
+    "svt.reproduction-human"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 40,
+   "tags": [
+    "genetique"
+   ]
+  },
+  {
+   "id": "svt.nervous",
+   "title": {
+    "fr": "Système nerveux et réflexes",
+    "en": "Nervous system and reflexes"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.body-senses",
+    "svt.circulation"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 40,
+   "tags": [
+    "corps"
+   ]
+  },
+  {
+   "id": "svt.geology-1",
+   "title": {
+    "fr": "Roches, sol et érosion",
+    "en": "Rocks, soil and erosion"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.ecosystems"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 35,
+   "tags": [
+    "geologie"
+   ]
+  },
+  {
+   "id": "svt.bepc-svt",
+   "title": {
+    "fr": "SVT du BEPC",
+    "en": "BEPC life and earth science"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.immunity",
+    "svt.genetics-1",
+    "svt.nervous",
+    "svt.geology-1"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 45,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "svt.metabolism",
+   "title": {
+    "fr": "Métabolisme : enzymes et énergie cellulaire",
+    "en": "Metabolism: enzymes and cellular energy"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.respiration",
+    "svt.digestive-system"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 45,
+   "tags": [
+    "cellule"
+   ]
+  },
+  {
+   "id": "svt.genetics-2",
+   "title": {
+    "fr": "Génétique : lois de Mendel et croisements",
+    "en": "Genetics: Mendel's laws and crosses"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.genetics-1"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 45,
+   "tags": [
+    "genetique"
+   ]
+  },
+  {
+   "id": "svt.geology-2",
+   "title": {
+    "fr": "Tectonique des plaques, volcanisme",
+    "en": "Plate tectonics and volcanism"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.geology-1"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "geologie",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "svt.evolution",
+   "title": {
+    "fr": "Évolution et biodiversité",
+    "en": "Evolution and biodiversity"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.genetics-2",
+    "svt.classification"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "evolution"
+   ]
+  },
+  {
+   "id": "svt.physiology-adv",
+   "title": {
+    "fr": "Physiologie : muscle, hormones, régulations",
+    "en": "Physiology: muscle, hormones, regulation"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.nervous",
+    "svt.metabolism"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "corps"
+   ]
+  },
+  {
+   "id": "svt.molecular-bio",
+   "title": {
+    "fr": "Biologie moléculaire : ADN, synthèse des protéines",
+    "en": "Molecular biology: DNA and protein synthesis"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.genetics-2",
+    "svt.metabolism"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 55,
+   "tags": [
+    "genetique"
+   ]
+  },
+  {
+   "id": "svt.immunology-bac",
+   "title": {
+    "fr": "Immunologie et réponse spécifique",
+    "en": "Immunology and specific response"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.immunity",
+    "svt.molecular-bio"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "sante"
+   ]
+  },
+  {
+   "id": "svt.bac-svt",
+   "title": {
+    "fr": "SVT du Bac C/D",
+    "en": "Baccalauréat life and earth science"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.molecular-bio",
+    "svt.immunology-bac",
+    "svt.evolution",
+    "svt.geology-2",
+    "svt.physiology-adv"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 60,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "svt.bio-uni",
+   "title": {
+    "fr": "Biologie cellulaire et moléculaire de première année",
+    "en": "First-year cell and molecular biology"
+   },
+   "level": "N1",
+   "prereq": [
+    "svt.bac-svt"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1",
+    "l1-en"
+   ],
+   "minutes": 55,
+   "tags": [
+    "superieur"
+   ]
+  },
+  {
+   "id": "svt.n2-data-bio",
+   "title": {
+    "fr": "Lire, tracer et interpréter des données biologiques",
+    "en": "Reading, plotting and interpreting biological data"
+   },
+   "level": "N2",
+   "prereq": [
+    "svt.digestive-system",
+    "svt.ecosystems",
+    "math.stats-desc"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e-exc",
+    "form3-exc"
+   ],
+   "minutes": 40,
+   "tags": [
+    "concours",
+    "donnees"
+   ]
+  },
+  {
+   "id": "svt.n2-experimental-bio",
+   "title": {
+    "fr": "Concevoir une expérience témoin en biologie",
+    "en": "Designing a controlled biology experiment"
+   },
+   "level": "N2",
+   "prereq": [
+    "svt.n2-data-bio",
+    "svt.genetics-1"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [],
+   "lots": [
+    "3e-exc",
+    "form4-exc"
+   ],
+   "minutes": 45,
+   "tags": [
+    "concours",
+    "experimental"
+   ]
+  },
+  {
+   "id": "svt.n2-genetics-problems",
+   "title": {
+    "fr": "Problèmes de génétique : liaison, pedigrees, probabilités",
+    "en": "Genetics problems: linkage, pedigrees, probability"
+   },
+   "level": "N2",
+   "prereq": [
+    "svt.genetics-2",
+    "svt.n2-experimental-bio"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc",
+    "form5-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "genetique"
+   ]
+  },
+  {
+   "id": "svt.n2-physiology-model",
+   "title": {
+    "fr": "Raisonner en physiologie : régulation et modèles",
+    "en": "Physiology reasoning: regulation and models"
+   },
+   "level": "N2",
+   "prereq": [
+    "svt.physiology-adv",
+    "svt.n2-genetics-problems"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "corps"
+   ]
+  },
+  {
+   "id": "svt.n2-bac-bio-excellence",
+   "title": {
+    "fr": "SVT du Bac au niveau des meilleurs candidats",
+    "en": "Baccalauréat biology at top-candidate level"
+   },
+   "level": "N2",
+   "prereq": [
+    "svt.bac-svt",
+    "svt.n2-physiology-model"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "concours"
+   ]
+  },
+  {
+   "id": "svt.n2-ecology-quant",
+   "title": {
+    "fr": "Écologie quantitative : populations, flux, indicateurs",
+    "en": "Quantitative ecology: populations, flows and indicators"
+   },
+   "level": "N2",
+   "prereq": [
+    "svt.ecosystems",
+    "svt.n2-data-bio",
+    "math.log-exp"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "ecologie"
+   ]
+  },
+  {
+   "id": "svt.n3-molecular-mechanisms",
+   "title": {
+    "fr": "Mécanismes moléculaires : régulation de l'expression des gènes",
+    "en": "Molecular mechanisms: gene expression regulation"
+   },
+   "level": "N3",
+   "prereq": [
+    "svt.n2-bac-bio-excellence"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "olympiade"
+   ]
+  },
+  {
+   "id": "svt.n3-evolution-genomics",
+   "title": {
+    "fr": "Évolution, génomique et phylogénie",
+    "en": "Evolution, genomics and phylogeny"
+   },
+   "level": "N3",
+   "prereq": [
+    "svt.n2-genetics-problems",
+    "svt.evolution"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "olympiade"
+   ]
+  },
+  {
+   "id": "svt.n3-biostats",
+   "title": {
+    "fr": "Biostatistiques et plans d'étude",
+    "en": "Biostatistics and study design"
+   },
+   "level": "N3",
+   "prereq": [
+    "svt.n2-ecology-quant",
+    "math.stats-inf"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "olympiade",
+    "donnees"
+   ]
+  },
+  {
+   "id": "svt.n3-lab-skills",
+   "title": {
+    "fr": "Compétences de laboratoire et analyse de données de niveau olympiade",
+    "en": "Olympiad lab skills and data analysis"
+   },
+   "level": "N3",
+   "prereq": [
+    "svt.n2-experimental-bio",
+    "svt.n3-molecular-mechanisms"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "olympiade",
+    "experimental"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1131 @@
+{
+ "format": 1,
+ "domain": "histoire-geo-ecm",
+ "prefix": "hge",
+ "title": {
+  "fr": "Histoire-géographie-ECM",
+  "en": "History, geography and civic education"
+ },
+ "skills": [
+  {
+   "id": "hge.my-place",
+   "title": {
+    "fr": "Mon école, ma famille, mon village",
+    "en": "My school, family and village"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    0,
+    1,
+    2
+   ],
+   "classes": [
+    "mat",
+    "nursery",
+    "sil",
+    "class1",
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "mat",
+    "nursery"
+   ],
+   "minutes": 20,
+   "tags": [
+    "ecm",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "hge.space-orientation",
+   "title": {
+    "fr": "Se repérer : droite, gauche, plan, points cardinaux",
+    "en": "Orientation: left, right, plan and compass points"
+   },
+   "level": "N0",
+   "prereq": [
+    "hge.my-place"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 20,
+   "tags": [
+    "geo"
+   ]
+  },
+  {
+   "id": "hge.time-past",
+   "title": {
+    "fr": "Hier, aujourd'hui, demain : le temps qui passe",
+    "en": "Time: past, present, future"
+   },
+   "level": "N0",
+   "prereq": [
+    "hge.my-place"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 20,
+   "tags": [
+    "histoire"
+   ]
+  },
+  {
+   "id": "hge.rules-living",
+   "title": {
+    "fr": "Vivre ensemble : règles, respect, droits de l'enfant",
+    "en": "Living together: rules, respect, children's rights"
+   },
+   "level": "N0",
+   "prereq": [
+    "hge.my-place"
+   ],
+   "years": [
+    1,
+    2
+   ],
+   "classes": [
+    "sil",
+    "class1",
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "sil",
+    "class1"
+   ],
+   "minutes": 20,
+   "tags": [
+    "ecm"
+   ]
+  },
+  {
+   "id": "hge.symbols-cm",
+   "title": {
+    "fr": "Les symboles du Cameroun : drapeau, hymne, devise",
+    "en": "Symbols of Cameroon: flag, anthem, motto"
+   },
+   "level": "N0",
+   "prereq": [
+    "hge.rules-living"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 20,
+   "tags": [
+    "ecm",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "hge.map-reading",
+   "title": {
+    "fr": "Lire une carte et un plan",
+    "en": "Reading maps and plans"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.space-orientation"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "geo"
+   ]
+  },
+  {
+   "id": "hge.cm-regions",
+   "title": {
+    "fr": "Les régions du Cameroun",
+    "en": "The regions of Cameroon"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.map-reading",
+    "hge.symbols-cm"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 30,
+   "tags": [
+    "geo",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "hge.timeline",
+   "title": {
+    "fr": "Frise chronologique et repères du temps",
+    "en": "Timelines and dates"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.time-past"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "histoire"
+   ]
+  },
+  {
+   "id": "hge.cm-before-colonial",
+   "title": {
+    "fr": "Royaumes et peuples du Cameroun avant la colonisation",
+    "en": "Kingdoms and peoples of Cameroon before colonisation"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.timeline",
+    "hge.cm-regions"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 35,
+   "tags": [
+    "histoire",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "hge.cm-colonisation",
+   "title": {
+    "fr": "Du Kamerun à l'indépendance : 1884-1961",
+    "en": "From Kamerun to independence 1884-1961"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.cm-before-colonial"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 40,
+   "tags": [
+    "histoire",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "hge.institutions-cm",
+   "title": {
+    "fr": "Les institutions du Cameroun",
+    "en": "Institutions of Cameroon"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.symbols-cm"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "ecm",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "hge.cep-hge",
+   "title": {
+    "fr": "Histoire, géographie, ECM du CEP",
+    "en": "CEP history, geography, civics"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.cm-colonisation",
+    "hge.institutions-cm",
+    "hge.cm-regions"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 40,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "hge.africa-geo",
+   "title": {
+    "fr": "Géographie de l'Afrique : reliefs, climats, populations",
+    "en": "Geography of Africa"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.cep-hge"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 40,
+   "tags": [
+    "geo"
+   ]
+  },
+  {
+   "id": "hge.ancient-africa",
+   "title": {
+    "fr": "Grandes civilisations africaines : Égypte, Mali, Zimbabwe",
+    "en": "Great African civilisations"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.cep-hge"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 40,
+   "tags": [
+    "histoire"
+   ]
+  },
+  {
+   "id": "hge.citizenship-1",
+   "title": {
+    "fr": "Citoyenneté, droits et devoirs",
+    "en": "Citizenship, rights and duties"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.institutions-cm"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 35,
+   "tags": [
+    "ecm"
+   ]
+  },
+  {
+   "id": "hge.slave-trade",
+   "title": {
+    "fr": "Traites négrières et leurs effets",
+    "en": "The slave trades and their effects"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.ancient-africa"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 40,
+   "tags": [
+    "histoire"
+   ]
+  },
+  {
+   "id": "hge.world-geo",
+   "title": {
+    "fr": "Continents, océans et grands ensembles du monde",
+    "en": "Continents, oceans and world regions"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.africa-geo"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 40,
+   "tags": [
+    "geo"
+   ]
+  },
+  {
+   "id": "hge.cm-geo-economy",
+   "title": {
+    "fr": "Économie et villes du Cameroun",
+    "en": "Economy and cities of Cameroon"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.cm-regions",
+    "hge.africa-geo"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 40,
+   "tags": [
+    "geo",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "hge.colonisation-africa",
+   "title": {
+    "fr": "La colonisation de l'Afrique",
+    "en": "The colonisation of Africa"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.slave-trade"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 40,
+   "tags": [
+    "histoire"
+   ]
+  },
+  {
+   "id": "hge.democracy-ecm",
+   "title": {
+    "fr": "Démocratie, justice, pouvoirs publics",
+    "en": "Democracy, justice and public powers"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.citizenship-1"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 40,
+   "tags": [
+    "ecm"
+   ]
+  },
+  {
+   "id": "hge.independence-africa",
+   "title": {
+    "fr": "Les indépendances africaines",
+    "en": "African independence"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.colonisation-africa"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 45,
+   "tags": [
+    "histoire"
+   ]
+  },
+  {
+   "id": "hge.bepc-hge",
+   "title": {
+    "fr": "Histoire-géographie-ECM du BEPC",
+    "en": "BEPC history-geography-civics"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.independence-africa",
+    "hge.cm-geo-economy",
+    "hge.democracy-ecm"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 45,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "hge.world-wars",
+   "title": {
+    "fr": "Les deux guerres mondiales",
+    "en": "The two world wars"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.colonisation-africa"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 45,
+   "tags": [
+    "histoire"
+   ]
+  },
+  {
+   "id": "hge.globalisation",
+   "title": {
+    "fr": "Mondialisation et développement",
+    "en": "Globalisation and development"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.world-geo",
+    "hge.cm-geo-economy"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 45,
+   "tags": [
+    "geo"
+   ]
+  },
+  {
+   "id": "hge.ecm-human-rights",
+   "title": {
+    "fr": "Droits de l'homme et institutions internationales",
+    "en": "Human rights and international institutions"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.democracy-ecm"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 40,
+   "tags": [
+    "ecm"
+   ]
+  },
+  {
+   "id": "hge.cm-contemporary",
+   "title": {
+    "fr": "Le Cameroun depuis 1960 : État, unité, défis",
+    "en": "Cameroon since 1960"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.independence-africa",
+    "hge.institutions-cm"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "histoire",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "hge.cold-war",
+   "title": {
+    "fr": "Guerre froide et nouveau monde",
+    "en": "Cold War and the new world"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.world-wars"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "histoire"
+   ]
+  },
+  {
+   "id": "hge.geo-sustain",
+   "title": {
+    "fr": "Environnement, ressources et développement durable",
+    "en": "Environment, resources and sustainability"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.globalisation"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "geo"
+   ]
+  },
+  {
+   "id": "hge.bac-hge",
+   "title": {
+    "fr": "Histoire-géographie du Bac",
+    "en": "Baccalauréat history-geography"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.cm-contemporary",
+    "hge.cold-war",
+    "hge.geo-sustain",
+    "hge.ecm-human-rights"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 60,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "hge.methods-hist",
+   "title": {
+    "fr": "Méthodes de l'historien et du géographe (L1)",
+    "en": "Historical and geographical methods"
+   },
+   "level": "N1",
+   "prereq": [
+    "hge.bac-hge"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1",
+    "l1-en"
+   ],
+   "minutes": 50,
+   "tags": [
+    "superieur"
+   ]
+  },
+  {
+   "id": "hge.n2-source-analysis",
+   "title": {
+    "fr": "Analyser des sources : document, auteur, point de vue",
+    "en": "Source analysis: document, author, viewpoint"
+   },
+   "level": "N2",
+   "prereq": [
+    "hge.colonisation-africa",
+    "hge.cm-geo-economy"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e-exc",
+    "form3-exc"
+   ],
+   "minutes": 45,
+   "tags": [
+    "concours",
+    "methode"
+   ]
+  },
+  {
+   "id": "hge.n2-hist-argument",
+   "title": {
+    "fr": "Composition d'histoire argumentée",
+    "en": "Argued history essay"
+   },
+   "level": "N2",
+   "prereq": [
+    "hge.independence-africa",
+    "hge.n2-source-analysis"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [],
+   "lots": [
+    "3e-exc",
+    "form4-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "expression"
+   ]
+  },
+  {
+   "id": "hge.n2-geo-spatial",
+   "title": {
+    "fr": "Raisonnement géographique : croquis, échelles, comparaisons",
+    "en": "Geographic reasoning: sketch maps, scale and comparison"
+   },
+   "level": "N2",
+   "prereq": [
+    "hge.globalisation",
+    "hge.n2-source-analysis"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc",
+    "form5-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "geo"
+   ]
+  },
+  {
+   "id": "hge.n2-civic-reasoning",
+   "title": {
+    "fr": "Raisonnement civique : cas, arguments et institutions",
+    "en": "Civic reasoning: cases, arguments, institutions"
+   },
+   "level": "N2",
+   "prereq": [
+    "hge.ecm-human-rights",
+    "hge.n2-hist-argument"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc",
+    "form5-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "ecm"
+   ]
+  },
+  {
+   "id": "hge.n2-dissertation-hist",
+   "title": {
+    "fr": "Dissertation d'histoire-géographie de haut niveau",
+    "en": "High-level history-geography essay"
+   },
+   "level": "N2",
+   "prereq": [
+    "hge.cm-contemporary",
+    "hge.cold-war",
+    "hge.n2-geo-spatial"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours",
+    "expression"
+   ]
+  },
+  {
+   "id": "hge.n2-bac-hge-excellence",
+   "title": {
+    "fr": "Histoire-géographie du Bac niveau meilleurs candidats",
+    "en": "Top-candidate Baccalauréat history-geography"
+   },
+   "level": "N2",
+   "prereq": [
+    "hge.bac-hge",
+    "hge.n2-dissertation-hist",
+    "hge.n2-civic-reasoning"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "concours"
+   ]
+  },
+  {
+   "id": "hge.n3-historiography",
+   "title": {
+    "fr": "Historiographie de l'Afrique et débats internationaux",
+    "en": "African historiography and international debates"
+   },
+   "level": "N3",
+   "prereq": [
+    "hge.n2-bac-hge-excellence"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "international",
+    "histoire"
+   ]
+  },
+  {
+   "id": "hge.n3-comparative-geo",
+   "title": {
+    "fr": "Géographie comparée : territoires, données, SIG (initiation)",
+    "en": "Comparative geography: territories, data, GIS (intro)"
+   },
+   "level": "N3",
+   "prereq": [
+    "hge.n2-geo-spatial",
+    "hge.methods-hist"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "international",
+    "geo"
+   ]
+  },
+  {
+   "id": "hge.n3-intl-relations",
+   "title": {
+    "fr": "Relations internationales et droit international (initiation)",
+    "en": "International relations and law (intro)"
+   },
+   "level": "N3",
+   "prereq": [
+    "hge.n2-civic-reasoning",
+    "hge.cold-war"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "international",
+    "ecm"
+   ]
+  }
+ ]
+}

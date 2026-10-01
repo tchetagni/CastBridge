@@ -1,0 +1,1346 @@
+{
+ "format": 1,
+ "domain": "francais",
+ "prefix": "fra",
+ "title": {
+  "fr": "Langue française",
+  "en": "French language"
+ },
+ "skills": [
+  {
+   "id": "fra.listen-speak",
+   "title": {
+    "fr": "Écouter, parler, raconter en français",
+    "en": "Listen, speak and retell in French"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    0
+   ],
+   "classes": [
+    "mat"
+   ],
+   "exams": [],
+   "lots": [
+    "mat"
+   ],
+   "minutes": 20,
+   "tags": [
+    "oral"
+   ]
+  },
+  {
+   "id": "fra.sounds",
+   "title": {
+    "fr": "Reconnaître les sons et les syllabes",
+    "en": "Recognise sounds and syllables"
+   },
+   "level": "N0",
+   "prereq": [
+    "fra.listen-speak"
+   ],
+   "years": [
+    0,
+    1
+   ],
+   "classes": [
+    "mat",
+    "sil"
+   ],
+   "exams": [],
+   "lots": [
+    "mat"
+   ],
+   "minutes": 20,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "fra.letters",
+   "title": {
+    "fr": "Connaître les lettres et les écrire",
+    "en": "Know and write the letters"
+   },
+   "level": "N0",
+   "prereq": [
+    "fra.sounds"
+   ],
+   "years": [
+    1
+   ],
+   "classes": [
+    "sil"
+   ],
+   "exams": [],
+   "lots": [
+    "sil"
+   ],
+   "minutes": 25,
+   "tags": [
+    "ecriture"
+   ]
+  },
+  {
+   "id": "fra.read-syllables",
+   "title": {
+    "fr": "Lire des syllabes et de petits mots",
+    "en": "Read syllables and short words"
+   },
+   "level": "N0",
+   "prereq": [
+    "fra.letters"
+   ],
+   "years": [
+    1
+   ],
+   "classes": [
+    "sil"
+   ],
+   "exams": [],
+   "lots": [
+    "sil"
+   ],
+   "minutes": 25,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "fra.read-sentences",
+   "title": {
+    "fr": "Lire une phrase simple",
+    "en": "Read a simple sentence"
+   },
+   "level": "N0",
+   "prereq": [
+    "fra.read-syllables"
+   ],
+   "years": [
+    1
+   ],
+   "classes": [
+    "sil"
+   ],
+   "exams": [],
+   "lots": [
+    "sil"
+   ],
+   "minutes": 25,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "fra.write-words",
+   "title": {
+    "fr": "Écrire des mots et une phrase",
+    "en": "Write words and a sentence"
+   },
+   "level": "N0",
+   "prereq": [
+    "fra.letters",
+    "fra.read-syllables"
+   ],
+   "years": [
+    1,
+    2
+   ],
+   "classes": [
+    "sil",
+    "cp"
+   ],
+   "exams": [],
+   "lots": [
+    "sil"
+   ],
+   "minutes": 25,
+   "tags": [
+    "ecriture"
+   ]
+  },
+  {
+   "id": "fra.alpha-adult",
+   "title": {
+    "fr": "Alphabétisation des adultes : lire et écrire ses premiers mots",
+    "en": "Adult literacy: first words"
+   },
+   "level": "N0",
+   "prereq": [
+    "fra.sounds"
+   ],
+   "years": [
+    1
+   ],
+   "classes": [
+    "sil"
+   ],
+   "exams": [],
+   "lots": [
+    "sil"
+   ],
+   "minutes": 30,
+   "tags": [
+    "adultes"
+   ]
+  },
+  {
+   "id": "fra.fluent-reading",
+   "title": {
+    "fr": "Lire un texte court avec aisance",
+    "en": "Read a short text fluently"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.read-sentences"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp"
+   ],
+   "exams": [],
+   "lots": [
+    "cp"
+   ],
+   "minutes": 25,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "fra.sentence",
+   "title": {
+    "fr": "La phrase : majuscule, point, ordre des mots",
+    "en": "The sentence"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.write-words"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp"
+   ],
+   "exams": [],
+   "lots": [
+    "cp"
+   ],
+   "minutes": 20,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "fra.nouns-articles",
+   "title": {
+    "fr": "Noms, articles, singulier et pluriel",
+    "en": "Nouns, articles, singular and plural"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.sentence"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp"
+   ],
+   "exams": [],
+   "lots": [
+    "cp"
+   ],
+   "minutes": 20,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "fra.verb-present",
+   "title": {
+    "fr": "Le verbe et le présent",
+    "en": "The verb and the present tense"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.sentence"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "conjugaison"
+   ]
+  },
+  {
+   "id": "fra.adjective",
+   "title": {
+    "fr": "L'adjectif et l'accord",
+    "en": "The adjective and agreement"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.nouns-articles"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "fra.spelling-basic",
+   "title": {
+    "fr": "Orthographe : sons complexes, accents",
+    "en": "Spelling: complex sounds and accents"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.write-words",
+    "fra.fluent-reading"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "orthographe"
+   ]
+  },
+  {
+   "id": "fra.reading-comp-1",
+   "title": {
+    "fr": "Comprendre un texte court",
+    "en": "Understand a short text"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.fluent-reading"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1"
+   ],
+   "minutes": 25,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "fra.passe-futur",
+   "title": {
+    "fr": "Passé composé, imparfait, futur",
+    "en": "Past and future tenses"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.verb-present"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2"
+   ],
+   "minutes": 30,
+   "tags": [
+    "conjugaison"
+   ]
+  },
+  {
+   "id": "fra.sentence-types",
+   "title": {
+    "fr": "Types et formes de phrases",
+    "en": "Types of sentences"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.sentence"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2"
+   ],
+   "minutes": 25,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "fra.functions-1",
+   "title": {
+    "fr": "Sujet, verbe, compléments",
+    "en": "Subject, verb, complements"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.sentence-types"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2"
+   ],
+   "minutes": 30,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "fra.dictation",
+   "title": {
+    "fr": "Dictée et accords simples",
+    "en": "Dictation and simple agreement"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.spelling-basic",
+    "fra.adjective"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2"
+   ],
+   "minutes": 30,
+   "tags": [
+    "orthographe"
+   ]
+  },
+  {
+   "id": "fra.vocab-family",
+   "title": {
+    "fr": "Mots de la même famille, synonymes, contraires",
+    "en": "Word families, synonyms and antonyms"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.reading-comp-1"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2"
+   ],
+   "minutes": 25,
+   "tags": [
+    "vocabulaire"
+   ]
+  },
+  {
+   "id": "fra.short-text",
+   "title": {
+    "fr": "Rédiger un court texte (récit, lettre)",
+    "en": "Write a short text (story, letter)"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.functions-1",
+    "fra.dictation"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1"
+   ],
+   "minutes": 35,
+   "tags": [
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.agreement-pp",
+   "title": {
+    "fr": "Accord du participe passé (être, avoir)",
+    "en": "Past participle agreement"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.passe-futur",
+    "fra.functions-1"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1"
+   ],
+   "minutes": 35,
+   "tags": [
+    "orthographe"
+   ]
+  },
+  {
+   "id": "fra.complex-sent",
+   "title": {
+    "fr": "Phrase simple et phrase complexe",
+    "en": "Simple and complex sentences"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.functions-1"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1"
+   ],
+   "minutes": 30,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "fra.reading-comp-2",
+   "title": {
+    "fr": "Comprendre et résumer un texte",
+    "en": "Understand and summarise a text"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.reading-comp-1",
+    "fra.vocab-family"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1"
+   ],
+   "minutes": 30,
+   "tags": [
+    "lecture"
+   ]
+  },
+  {
+   "id": "fra.cep-writing",
+   "title": {
+    "fr": "Expression écrite du CEP : rédaction guidée",
+    "en": "CEP written expression"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.short-text",
+    "fra.agreement-pp"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2"
+   ],
+   "exams": [
+    "cep"
+   ],
+   "lots": [
+    "cm2"
+   ],
+   "minutes": 40,
+   "tags": [
+    "examen",
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.cep-grammar",
+   "title": {
+    "fr": "Grammaire, conjugaison, orthographe du CEP",
+    "en": "CEP grammar, conjugation and spelling"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.complex-sent",
+    "fra.agreement-pp"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2"
+   ],
+   "exams": [
+    "cep"
+   ],
+   "lots": [
+    "cm2"
+   ],
+   "minutes": 40,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "fra.cep-reading",
+   "title": {
+    "fr": "Lecture et compréhension du CEP",
+    "en": "CEP reading comprehension"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.reading-comp-2"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2"
+   ],
+   "exams": [
+    "cep"
+   ],
+   "lots": [
+    "cm2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "examen",
+    "lecture"
+   ]
+  },
+  {
+   "id": "fra.tenses-moods",
+   "title": {
+    "fr": "Temps et modes : indicatif, impératif, conditionnel",
+    "en": "Tenses and moods"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.passe-futur"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e"
+   ],
+   "exams": [],
+   "lots": [
+    "6e"
+   ],
+   "minutes": 35,
+   "tags": [
+    "conjugaison"
+   ]
+  },
+  {
+   "id": "fra.narration",
+   "title": {
+    "fr": "Le récit : schéma narratif et points de vue",
+    "en": "Narration: narrative structure"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.short-text",
+    "fra.cep-reading"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e"
+   ],
+   "exams": [],
+   "lots": [
+    "6e"
+   ],
+   "minutes": 35,
+   "tags": [
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.subordinate",
+   "title": {
+    "fr": "Propositions subordonnées",
+    "en": "Subordinate clauses"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.complex-sent",
+    "fra.tenses-moods"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e"
+   ],
+   "exams": [],
+   "lots": [
+    "5e"
+   ],
+   "minutes": 40,
+   "tags": [
+    "grammaire"
+   ]
+  },
+  {
+   "id": "fra.description-dialogue",
+   "title": {
+    "fr": "Description et dialogue",
+    "en": "Description and dialogue"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.narration"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e"
+   ],
+   "exams": [],
+   "lots": [
+    "5e"
+   ],
+   "minutes": 35,
+   "tags": [
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.figures-speech",
+   "title": {
+    "fr": "Figures de style et registres",
+    "en": "Figures of speech and registers"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.description-dialogue"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e"
+   ],
+   "exams": [],
+   "lots": [
+    "4e"
+   ],
+   "minutes": 35,
+   "tags": [
+    "litterature"
+   ]
+  },
+  {
+   "id": "fra.argumentation-1",
+   "title": {
+    "fr": "L'argumentation simple : thèse, arguments, exemples",
+    "en": "Basic argumentation"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.description-dialogue"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e"
+   ],
+   "exams": [],
+   "lots": [
+    "4e"
+   ],
+   "minutes": 40,
+   "tags": [
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.bepc-writing",
+   "title": {
+    "fr": "Rédaction du BEPC : contraction, expression",
+    "en": "BEPC writing"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.argumentation-1",
+    "fra.subordinate"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e"
+   ],
+   "minutes": 45,
+   "tags": [
+    "examen",
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.bepc-grammar",
+   "title": {
+    "fr": "Grammaire et conjugaison du BEPC",
+    "en": "BEPC grammar and conjugation"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.subordinate",
+    "fra.figures-speech"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e"
+   ],
+   "minutes": 40,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "fra.text-analysis",
+   "title": {
+    "fr": "Analyse d'un texte littéraire",
+    "en": "Literary text analysis"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.figures-speech",
+    "fra.bepc-writing"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde"
+   ],
+   "minutes": 45,
+   "tags": [
+    "litterature"
+   ]
+  },
+  {
+   "id": "fra.essay-dissertation",
+   "title": {
+    "fr": "La dissertation et le commentaire (initiation)",
+    "en": "Essay and commentary (introduction)"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.argumentation-1",
+    "fra.text-analysis"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde"
+   ],
+   "minutes": 50,
+   "tags": [
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.poetry-theatre",
+   "title": {
+    "fr": "Poésie et théâtre : lecture analytique",
+    "en": "Poetry and theatre: close reading"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.text-analysis"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere"
+   ],
+   "minutes": 45,
+   "tags": [
+    "litterature"
+   ]
+  },
+  {
+   "id": "fra.probatoire-essay",
+   "title": {
+    "fr": "Dissertation et commentaire du Probatoire",
+    "en": "Probatoire essay and commentary"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.essay-dissertation",
+    "fra.poetry-theatre"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere"
+   ],
+   "minutes": 55,
+   "tags": [
+    "examen",
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.african-lit",
+   "title": {
+    "fr": "Littérature africaine et camerounaise d'expression française",
+    "en": "African and Cameroonian literature in French"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.text-analysis"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere"
+   ],
+   "minutes": 45,
+   "tags": [
+    "litterature",
+    "cameroun"
+   ]
+  },
+  {
+   "id": "fra.bac-philo-writing",
+   "title": {
+    "fr": "Épreuve de français du Bac : dissertation littéraire",
+    "en": "Baccalauréat French writing"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.probatoire-essay",
+    "fra.african-lit"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle"
+   ],
+   "exams": [
+    "bac"
+   ],
+   "lots": [
+    "tle"
+   ],
+   "minutes": 55,
+   "tags": [
+    "examen",
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.academic-writing",
+   "title": {
+    "fr": "Écrits universitaires : synthèse, exposé, rapport",
+    "en": "University writing: synthesis, presentation, report"
+   },
+   "level": "N1",
+   "prereq": [
+    "fra.bac-philo-writing"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1"
+   ],
+   "exams": [],
+   "lots": [
+    "l1"
+   ],
+   "minutes": 50,
+   "tags": [
+    "superieur"
+   ]
+  },
+  {
+   "id": "fra.n2-concours-text",
+   "title": {
+    "fr": "Compréhension fine et rédaction de concours du CM2",
+    "en": "Close reading and writing at top CM2 level"
+   },
+   "level": "N2",
+   "prereq": [
+    "fra.cep-reading",
+    "fra.cep-writing"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2"
+   ],
+   "exams": [],
+   "lots": [
+    "cm2-exc"
+   ],
+   "minutes": 45,
+   "tags": [
+    "concours"
+   ]
+  },
+  {
+   "id": "fra.n2-vocab-rich",
+   "title": {
+    "fr": "Vocabulaire riche, nuances et étymologie",
+    "en": "Rich vocabulary, nuance and etymology"
+   },
+   "level": "N2",
+   "prereq": [
+    "fra.vocab-family",
+    "fra.subordinate"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e"
+   ],
+   "exams": [],
+   "lots": [
+    "5e-exc"
+   ],
+   "minutes": 40,
+   "tags": [
+    "concours",
+    "vocabulaire"
+   ]
+  },
+  {
+   "id": "fra.n2-syntax-advanced",
+   "title": {
+    "fr": "Syntaxe avancée : modes, concordance des temps",
+    "en": "Advanced syntax: moods and sequence of tenses"
+   },
+   "level": "N2",
+   "prereq": [
+    "fra.subordinate",
+    "fra.n2-vocab-rich"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e"
+   ],
+   "exams": [],
+   "lots": [
+    "4e-exc"
+   ],
+   "minutes": 45,
+   "tags": [
+    "concours",
+    "grammaire"
+   ]
+  },
+  {
+   "id": "fra.n2-writing-style",
+   "title": {
+    "fr": "Style et composition de rédaction d'excellence",
+    "en": "Style and composition at excellence level"
+   },
+   "level": "N2",
+   "prereq": [
+    "fra.bepc-writing",
+    "fra.n2-syntax-advanced"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e"
+   ],
+   "exams": [],
+   "lots": [
+    "3e-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.n2-literary-essay",
+   "title": {
+    "fr": "Commentaire composé de haut niveau",
+    "en": "High-level literary commentary"
+   },
+   "level": "N2",
+   "prereq": [
+    "fra.text-analysis",
+    "fra.n2-writing-style"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "litterature"
+   ]
+  },
+  {
+   "id": "fra.n2-dissertation",
+   "title": {
+    "fr": "Dissertation argumentée : problématique et plan",
+    "en": "Argued essay: problem and plan"
+   },
+   "level": "N2",
+   "prereq": [
+    "fra.probatoire-essay",
+    "fra.n2-literary-essay"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours",
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.n2-concours-general",
+   "title": {
+    "fr": "Dissertation et commentaire niveau concours général",
+    "en": "Essay and commentary at top-national level"
+   },
+   "level": "N2",
+   "prereq": [
+    "fra.bac-philo-writing",
+    "fra.n2-dissertation"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "concours",
+    "expression"
+   ]
+  },
+  {
+   "id": "fra.n3-rhetoric",
+   "title": {
+    "fr": "Rhétorique et stylistique comparées",
+    "en": "Rhetoric and comparative stylistics"
+   },
+   "level": "N3",
+   "prereq": [
+    "fra.n2-literary-essay"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "international",
+    "litterature"
+   ]
+  },
+  {
+   "id": "fra.n3-comparative-lit",
+   "title": {
+    "fr": "Littérature comparée francophone et mondiale",
+    "en": "Comparative francophone and world literature"
+   },
+   "level": "N3",
+   "prereq": [
+    "fra.n2-concours-general",
+    "fra.african-lit"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "international",
+    "litterature"
+   ]
+  },
+  {
+   "id": "fra.n3-research-writing",
+   "title": {
+    "fr": "Écriture de recherche : argumentation soutenue et sources",
+    "en": "Research writing: sustained argument and sources"
+   },
+   "level": "N3",
+   "prereq": [
+    "fra.n2-concours-general",
+    "fra.academic-writing"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "international",
+    "expression"
+   ]
+  }
+ ]
+}
