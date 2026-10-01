@@ -1,0 +1,4392 @@
+{
+ "format": 1,
+ "generatedBy": "tools/content-map/map_existing.py",
+ "minScore": 0.12,
+ "learn": [
+  {
+   "pack": "bac-maths",
+   "lesson": "bac-maths-complexes",
+   "title": "Nombres complexes : formes algébrique, trigonométrique et exponentielle",
+   "domain": "mathematiques",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "math.complex",
+    "score": 0.216,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "math.diff-eq",
+     "score": 0.133,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "math.log-exp",
+     "score": 0.12,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bac-maths",
+   "lesson": "bac-maths-etude-fonction",
+   "title": "Limites, continuité, dérivabilité et étude d'une fonction",
+   "domain": "mathematiques",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "math.limits",
+    "score": 0.28,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.deriv-app",
+     "score": 0.244,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "math.diff-eq",
+     "score": 0.203,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bac-maths",
+   "lesson": "bac-maths-integrales",
+   "title": "Primitives et calcul intégral",
+   "domain": "mathematiques",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "math.integral",
+    "score": 0.348,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.diff-eq",
+     "score": 0.132,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "math.deriv-app",
+     "score": 0.119,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bac-maths",
+   "lesson": "bac-maths-ln-exp",
+   "title": "Fonctions logarithme népérien et exponentielle",
+   "domain": "mathematiques",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "math.log-exp",
+    "score": 0.261,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.diff-eq",
+     "score": 0.133,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "math.limits",
+     "score": 0.133,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bac-maths",
+   "lesson": "bac-maths-suites",
+   "title": "Suites numériques : arithmétiques, géométriques, récurrence, convergence",
+   "domain": "mathematiques",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "math.seq",
+    "score": 0.255,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.limits",
+     "score": 0.143,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "math.analysis-1",
+     "score": 0.074,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bac-physique-chimie",
+   "lesson": "bac-physique-chimie-acides-bases",
+   "title": "Acides, bases, pH et dosages",
+   "domain": "physique-chimie",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "phc.acids-titration",
+    "score": 0.357,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.chem-adv",
+     "score": 0.117,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "phc.bac-pc",
+     "score": 0.113,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bac-physique-chimie",
+   "lesson": "bac-physique-chimie-cinetique",
+   "title": "Cinétique chimique : vitesse de réaction",
+   "domain": "physique-chimie",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "phc.kinetics-eq",
+    "score": 0.173,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.bac-pc",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "phc.chem-adv",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bac-physique-chimie",
+   "lesson": "bac-physique-chimie-newton",
+   "title": "Lois de Newton et mouvement dans le champ de pesanteur",
+   "domain": "physique-chimie",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "phc.mech-adv",
+    "score": 0.204,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.oscillations",
+     "score": 0.091,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "phc.em-fields",
+     "score": 0.077,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bac-physique-chimie",
+   "lesson": "bac-physique-chimie-radioactivite",
+   "title": "Radioactivité et loi de décroissance",
+   "domain": "physique-chimie",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "phc.nuclear",
+    "score": 0.295,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.bac-pc",
+     "score": 0.117,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "phc.chem-adv",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bac-physique-chimie",
+   "lesson": "bac-physique-chimie-oscillateur",
+   "title": "L'oscillateur mécanique : le pendule élastique",
+   "domain": "physique-chimie",
+   "lot": "learn:tle",
+   "proposed": {
+    "skill": "phc.oscillations",
+    "score": 0.166,
+    "level": "N1",
+    "lot": "tle",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.rc-rl",
+     "score": 0.157,
+     "level": "N1",
+     "lot": "tle"
+    },
+    {
+     "skill": "phc.mech-adv",
+     "score": 0.12,
+     "level": "N1",
+     "lot": "tle"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-francais",
+   "lesson": "bepc-francais-subordonnees",
+   "title": "Les propositions subordonnées : relative, complétive, circonstancielles",
+   "domain": "francais",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "fra.bepc-grammar",
+    "score": 0.144,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.text-analysis",
+     "score": 0.087,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "fra.bepc-writing",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-francais",
+   "lesson": "bepc-francais-voix-passive",
+   "title": "La voix active et la voix passive",
+   "domain": "francais",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "fra.bepc-grammar",
+    "score": 0.152,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.text-analysis",
+     "score": 0.094,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "fra.bepc-writing",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-francais",
+   "lesson": "bepc-francais-discours-rapporte",
+   "title": "Le discours direct et le discours indirect",
+   "domain": "francais",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "fra.bepc-grammar",
+    "score": 0.135,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.text-analysis",
+     "score": 0.079,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "fra.bepc-writing",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-francais",
+   "lesson": "bepc-francais-expression-ecrite",
+   "title": "Compréhension de texte et expression écrite : narration, lettre, argumentation",
+   "domain": "francais",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "fra.argumentation-1",
+    "score": 0.154,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.bepc-writing",
+     "score": 0.133,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "fra.essay-dissertation",
+     "score": 0.077,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-maths",
+   "lesson": "bepc-maths-identites",
+   "title": "Calcul littéral : développer et factoriser",
+   "domain": "mathematiques",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "math.identities",
+    "score": 0.22,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "math.alg-expand",
+     "score": 0.187,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "math.sys-2",
+     "score": 0.143,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-maths",
+   "lesson": "bepc-maths-equations",
+   "title": "Équations, inéquations du 1er degré et systèmes",
+   "domain": "mathematiques",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "math.sys-2",
+    "score": 0.375,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.quad-eq",
+     "score": 0.217,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "math.ineq-1",
+     "score": 0.198,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-maths",
+   "lesson": "bepc-maths-affines",
+   "title": "Fonctions linéaires et fonctions affines",
+   "domain": "mathematiques",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "math.func-lin",
+    "score": 0.308,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.func-graph",
+     "score": 0.255,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "math.sys-2",
+     "score": 0.153,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-maths",
+   "lesson": "bepc-maths-pythagore",
+   "title": "Le théorème de Pythagore et sa réciproque",
+   "domain": "mathematiques",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "math.pythagoras",
+    "score": 0.387,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.trig",
+     "score": 0.327,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "math.thales",
+     "score": 0.258,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-maths",
+   "lesson": "bepc-maths-thales",
+   "title": "Le théorème de Thalès et sa réciproque",
+   "domain": "mathematiques",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "math.thales",
+    "score": 0.217,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "math.sys-2",
+     "score": 0.158,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "math.pythagoras",
+     "score": 0.108,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-pct",
+   "lesson": "bepc-pct-acidebase",
+   "title": "Atomes, ions, solutions, pH et réactions acide-base",
+   "domain": "physique-chimie",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "phc.solutions-acid",
+    "score": 0.338,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.mol-mole",
+     "score": 0.127,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "phc.bepc-pct",
+     "score": 0.117,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-pct",
+   "lesson": "bepc-pct-electricite",
+   "title": "Circuits électriques, loi d'Ohm, puissance et énergie",
+   "domain": "physique-chimie",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "phc.ohm-law",
+    "score": 0.226,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.work-power",
+     "score": 0.174,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "phc.newton-laws",
+     "score": 0.107,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-pct",
+   "lesson": "bepc-pct-poids",
+   "title": "Poids, masse et forces",
+   "domain": "physique-chimie",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "phc.newton-laws",
+    "score": 0.112,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.kinematics",
+     "score": 0.091,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "phc.bepc-pct",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "bepc-pct",
+   "lesson": "bepc-pct-optique",
+   "title": "Réflexion de la lumière et lentilles convergentes",
+   "domain": "physique-chimie",
+   "lot": "learn:3e",
+   "proposed": {
+    "skill": "phc.light-optics",
+    "score": 0.227,
+    "level": "N1",
+    "lot": "3e",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.newton-laws",
+     "score": 0.093,
+     "level": "N1",
+     "lot": "3e"
+    },
+    {
+     "skill": "phc.bepc-pct",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "3e"
+    }
+   ]
+  },
+  {
+   "pack": "cep-francais",
+   "lesson": "cep-francais-accords-fiche",
+   "title": "Les accords : groupe nominal, sujet-verbe, participe passé",
+   "domain": "francais",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "fra.agreement-pp",
+    "score": 0.426,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.cep-grammar",
+     "score": 0.125,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "fra.reading-comp-2",
+     "score": 0.081,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-francais",
+   "lesson": "cep-francais-conjugaison-fiche",
+   "title": "Conjuguer au présent, à l'imparfait, au futur simple et au passé composé",
+   "domain": "francais",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "fra.agreement-pp",
+    "score": 0.196,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.complex-sent",
+     "score": 0.16,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "fra.tenses-moods",
+     "score": 0.139,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-francais",
+   "lesson": "cep-francais-homophones-fiche",
+   "title": "Les homophones grammaticaux : a/à, et/est, son/sont, on/ont, ce/se, ces/ses",
+   "domain": "francais",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "fra.cep-grammar",
+    "score": 0.133,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.reading-comp-2",
+     "score": 0.089,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "fra.agreement-pp",
+     "score": 0.079,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-francais",
+   "lesson": "cep-francais-phrase-fiche",
+   "title": "La phrase : types, formes, nature et fonction des mots",
+   "domain": "francais",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "fra.complex-sent",
+    "score": 0.16,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.cep-grammar",
+     "score": 0.119,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "fra.reading-comp-2",
+     "score": 0.074,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-francais",
+   "lesson": "cep-francais-redaction-fiche",
+   "title": "La rédaction : raconter, décrire, écrire une lettre",
+   "domain": "francais",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "fra.cep-writing",
+    "score": 0.286,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.short-text",
+     "score": 0.251,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "fra.reading-comp-2",
+     "score": 0.158,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-maths",
+   "lesson": "cep-maths-nombres",
+   "title": "Les grands nombres, les décimaux et les 4 opérations",
+   "domain": "mathematiques",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "math.decimal-ops",
+    "score": 0.295,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.decimals",
+     "score": 0.2,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "math.big-numbers",
+     "score": 0.151,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-maths",
+   "lesson": "cep-maths-fractions",
+   "title": "Les fractions simples",
+   "domain": "mathematiques",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "math.frac-equiv",
+    "score": 0.28,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.frac-add",
+     "score": 0.237,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "math.frac-mult",
+     "score": 0.093,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-maths",
+   "lesson": "cep-maths-proportion",
+   "title": "Proportionnalité et pourcentages",
+   "domain": "mathematiques",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "math.percent",
+    "score": 0.315,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.ratio-prop",
+     "score": 0.144,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "math.area-tri-circ",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-maths",
+   "lesson": "cep-maths-mesures-geo",
+   "title": "Mesures, périmètres, aires et volumes",
+   "domain": "mathematiques",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "math.volume",
+    "score": 0.486,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.area-tri-circ",
+     "score": 0.286,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "math.angles-tri",
+     "score": 0.222,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-maths",
+   "lesson": "cep-maths-problemes",
+   "title": "Résoudre des problèmes : partages, prix, vitesse et intérêts",
+   "domain": "mathematiques",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "math.problem-solving",
+    "score": 0.2,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "math.mean",
+     "score": 0.139,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "math.area-tri-circ",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-sciences",
+   "lesson": "cep-sciences-corps-humain",
+   "title": "Le corps humain : digestion, respiration, circulation du sang",
+   "domain": "svt",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "svt.digestion-basic",
+    "score": 0.196,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.cep-science-phys",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "svt.cep-science-svt",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-sciences",
+   "lesson": "cep-sciences-matiere-energie",
+   "title": "La matière et l'énergie : l'eau et l'électricité",
+   "domain": "svt",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "phc.electricity-simple",
+    "score": 0.365,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.states-change",
+     "score": 0.338,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "phc.cep-science-phys",
+     "score": 0.185,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-sciences",
+   "lesson": "cep-sciences-plantes-environnement",
+   "title": "Les plantes et l'environnement",
+   "domain": "svt",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "svt.cep-science-svt",
+    "score": 0.113,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "svt.cell",
+     "score": 0.1,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "svt.classification",
+     "score": 0.076,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "cep-sciences",
+   "lesson": "cep-sciences-hygiene-sante",
+   "title": "Hygiène et santé : paludisme, eau potable, vaccination",
+   "domain": "svt",
+   "lot": "learn:cm2",
+   "proposed": {
+    "skill": "svt.malaria-prevention",
+    "score": 0.209,
+    "level": "N1",
+    "lot": "cm2",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "svt.cep-science-svt",
+     "score": 0.116,
+     "level": "N1",
+     "lot": "cm2"
+    },
+    {
+     "skill": "phc.states-change",
+     "score": 0.079,
+     "level": "N1",
+     "lot": "cm2"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-english",
+   "lesson": "fslc-english-reading-comprehension",
+   "title": "Reading comprehension: information, vocabulary and main idea",
+   "domain": "english",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "eng.fslc-reading",
+    "score": 0.123,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "eng.fslc-writing",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-english",
+   "lesson": "fslc-english-tenses-main",
+   "title": "Tenses: present, past, present perfect and future",
+   "domain": "english",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "eng.future-modals",
+    "score": 0.139,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "eng.past-simple",
+     "score": 0.139,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "eng.fslc-reading",
+     "score": 0.13,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-english",
+   "lesson": "fslc-english-grammar-main",
+   "title": "Grammar: concord, plurals, pronouns and prepositions",
+   "domain": "english",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "eng.prepositions",
+    "score": 0.224,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "eng.past-simple",
+     "score": 0.129,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "eng.fslc-reading",
+     "score": 0.125,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-english",
+   "lesson": "fslc-english-composition-main",
+   "title": "Composition: the friendly letter and the short story",
+   "domain": "english",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "eng.fslc-writing",
+    "score": 0.114,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "eng.paragraph-en",
+     "score": 0.076,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "eng.past-simple",
+     "score": 0.06,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-maths",
+   "lesson": "fslc-maths-fractions",
+   "title": "Fractions, decimals and percentages",
+   "domain": "mathematiques",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "math.frac-add",
+    "score": 0.366,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.frac-equiv",
+     "score": 0.211,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "math.percent",
+     "score": 0.186,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-maths",
+   "lesson": "fslc-maths-measurement",
+   "title": "Measurement and geometry: perimeter, area and volume",
+   "domain": "mathematiques",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "math.area-tri-circ",
+    "score": 0.295,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "math.volume",
+     "score": 0.277,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "math.angles-tri",
+     "score": 0.115,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-maths",
+   "lesson": "fslc-maths-whole-numbers",
+   "title": "Whole numbers and the four operations",
+   "domain": "mathematiques",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "math.frac-add",
+    "score": 0.225,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "math.frac-mult",
+     "score": 0.175,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "math.big-numbers",
+     "score": 0.148,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-maths",
+   "lesson": "fslc-maths-word-problems",
+   "title": "Word problems: sharing, profit and loss, speed, simple interest",
+   "domain": "mathematiques",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "math.percent",
+    "score": 0.161,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "math.problem-solving",
+     "score": 0.128,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "math.area-tri-circ",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-science",
+   "lesson": "fslc-science-human-body",
+   "title": "The human body: digestion, breathing and blood circulation",
+   "domain": "svt",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "svt.digestion-basic",
+    "score": 0.085,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.cep-science-phys",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "svt.cep-science-svt",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-science",
+   "lesson": "fslc-science-living-environment",
+   "title": "Plants, animals and the environment",
+   "domain": "svt",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "svt.food-chain",
+    "score": 0.149,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "svt.classification",
+     "score": 0.126,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "svt.cep-science-svt",
+     "score": 0.103,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-science",
+   "lesson": "fslc-science-health-hygiene",
+   "title": "Health and hygiene: malaria, safe water and vaccination",
+   "domain": "svt",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "svt.cep-science-svt",
+    "score": 0.105,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.states-change",
+     "score": 0.066,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "svt.malaria-prevention",
+     "score": 0.058,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "fslc-science",
+   "lesson": "fslc-science-matter-energy",
+   "title": "Matter and energy: water and a simple electric circuit",
+   "domain": "svt",
+   "lot": "learn:class6",
+   "proposed": {
+    "skill": "phc.states-change",
+    "score": 0.218,
+    "level": "N1",
+    "lot": "class6",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "phc.cep-science-phys",
+     "score": 0.166,
+     "level": "N1",
+     "lot": "class6"
+    },
+    {
+     "skill": "phc.electricity-simple",
+     "score": 0.157,
+     "level": "N1",
+     "lot": "class6"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-biology",
+   "lesson": "gceol-biology-cells",
+   "title": "Plant and animal cells",
+   "domain": "svt",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "svt.genetics-2",
+    "score": 0.05,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "svt.metabolism",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-biology",
+   "lesson": "gceol-biology-ecology",
+   "title": "Food chains, energy flow, the carbon cycle and conservation",
+   "domain": "svt",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "svt.metabolism",
+    "score": 0.114,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "svt.genetics-2",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-biology",
+   "lesson": "gceol-biology-genetics",
+   "title": "Monohybrid inheritance",
+   "domain": "svt",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "svt.genetics-2",
+    "score": 0.184,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "svt.genetics-1",
+     "score": 0.072,
+     "level": "N1",
+     "lot": "form5"
+    },
+    {
+     "skill": "svt.metabolism",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-biology",
+   "lesson": "gceol-biology-photosynthesis",
+   "title": "Photosynthesis and limiting factors",
+   "domain": "svt",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "svt.genetics-2",
+    "score": 0.05,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "svt.metabolism",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-biology",
+   "lesson": "gceol-biology-digestion",
+   "title": "Human digestion and enzymes",
+   "domain": "svt",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "svt.metabolism",
+    "score": 0.116,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "svt.genetics-2",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-english",
+   "lesson": "gceol-english-composition",
+   "title": "Composition: letters and the argumentative essay",
+   "domain": "english",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "eng.gce-ol-english",
+    "score": 0.251,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "eng.composition-en",
+     "score": 0.201,
+     "level": "N1",
+     "lot": "form5"
+    },
+    {
+     "skill": "eng.literature-en",
+     "score": 0.058,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-english",
+   "lesson": "gceol-english-tenses",
+   "title": "Tenses and subject–verb concord",
+   "domain": "english",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "eng.gce-ol-english",
+    "score": 0.26,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "eng.literature-en",
+     "score": 0.061,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-english",
+   "lesson": "gceol-english-reported",
+   "title": "Reported speech",
+   "domain": "english",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "eng.gce-ol-english",
+    "score": 0.27,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "eng.literature-en",
+     "score": 0.064,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-english",
+   "lesson": "gceol-english-reading",
+   "title": "Reading comprehension: inference and vocabulary in context",
+   "domain": "english",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "eng.gce-ol-english",
+    "score": 0.27,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "eng.comprehension-en",
+     "score": 0.09,
+     "level": "N1",
+     "lot": "form5"
+    },
+    {
+     "skill": "eng.composition-en",
+     "score": 0.073,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-english",
+   "lesson": "gceol-english-summary",
+   "title": "Summary writing",
+   "domain": "english",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "eng.gce-ol-english",
+    "score": 0.29,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "high"
+   },
+   "alternatives": [
+    {
+     "skill": "eng.comprehension-en",
+     "score": 0.098,
+     "level": "N1",
+     "lot": "form5"
+    },
+    {
+     "skill": "eng.composition-en",
+     "score": 0.08,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-maths",
+   "lesson": "gceol-maths-equations",
+   "title": "Quadratic and simultaneous equations",
+   "domain": "mathematiques",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "math.quad-eq",
+    "score": 0.233,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "math.sys-2",
+     "score": 0.183,
+     "level": "N1",
+     "lot": "form5"
+    },
+    {
+     "skill": "math.func-graph",
+     "score": 0.091,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-maths",
+   "lesson": "gceol-maths-venn",
+   "title": "Sets and Venn diagrams",
+   "domain": "mathematiques",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "math.circle-th",
+    "score": 0.05,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "math.quad-eq",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    },
+    {
+     "skill": "math.space-geo",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-maths",
+   "lesson": "gceol-maths-statistics",
+   "title": "Statistics and probability",
+   "domain": "mathematiques",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "math.proba-intro",
+    "score": 0.183,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "math.circle-th",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    },
+    {
+     "skill": "math.quad-eq",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "gceol-maths",
+   "lesson": "gceol-maths-trigonometry",
+   "title": "Trigonometry and bearings",
+   "domain": "mathematiques",
+   "lot": "learn:form5",
+   "proposed": {
+    "skill": "math.circle-th",
+    "score": 0.189,
+    "level": "N1",
+    "lot": "form5",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "math.deriv",
+     "score": 0.088,
+     "level": "N1",
+     "lot": "form5"
+    },
+    {
+     "skill": "math.quad-eq",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "form5"
+    }
+   ]
+  },
+  {
+   "pack": "maternelle-decouverte",
+   "lesson": "maternelle-decouverte-compter",
+   "title": "Compter jusqu'à 10",
+   "domain": "mathematiques",
+   "lot": "learn:mat",
+   "proposed": null,
+   "alternatives": []
+  },
+  {
+   "pack": "maternelle-decouverte",
+   "lesson": "maternelle-decouverte-couleurs",
+   "title": "Les couleurs",
+   "domain": "mathematiques",
+   "lot": "learn:mat",
+   "proposed": null,
+   "alternatives": []
+  },
+  {
+   "pack": "maternelle-decouverte",
+   "lesson": "maternelle-decouverte-formes",
+   "title": "Les formes",
+   "domain": "mathematiques",
+   "lot": "learn:mat",
+   "proposed": null,
+   "alternatives": []
+  },
+  {
+   "pack": "probatoire-francais",
+   "lesson": "probatoire-francais-commentaire-compose",
+   "title": "Le commentaire composé",
+   "domain": "francais",
+   "lot": "learn:1ere",
+   "proposed": {
+    "skill": "fra.text-analysis",
+    "score": 0.148,
+    "level": "N1",
+    "lot": "1ere",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.probatoire-essay",
+     "score": 0.124,
+     "level": "N1",
+     "lot": "1ere"
+    },
+    {
+     "skill": "fra.poetry-theatre",
+     "score": 0.119,
+     "level": "N1",
+     "lot": "1ere"
+    }
+   ]
+  },
+  {
+   "pack": "probatoire-francais",
+   "lesson": "probatoire-francais-discussion-argumenter",
+   "title": "La discussion",
+   "domain": "francais",
+   "lot": "learn:1ere",
+   "proposed": {
+    "skill": "fra.poetry-theatre",
+    "score": 0.122,
+    "level": "N1",
+    "lot": "1ere",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.essay-dissertation",
+     "score": 0.077,
+     "level": "N1",
+     "lot": "1ere"
+    },
+    {
+     "skill": "fra.text-analysis",
+     "score": 0.077,
+     "level": "N1",
+     "lot": "1ere"
+    }
+   ]
+  },
+  {
+   "pack": "probatoire-francais",
+   "lesson": "probatoire-francais-dissertation-litteraire",
+   "title": "La dissertation littéraire",
+   "domain": "francais",
+   "lot": "learn:1ere",
+   "proposed": {
+    "skill": "fra.essay-dissertation",
+    "score": 0.151,
+    "level": "N1",
+    "lot": "1ere",
+    "confidence": "medium"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.text-analysis",
+     "score": 0.151,
+     "level": "N1",
+     "lot": "1ere"
+    },
+    {
+     "skill": "fra.bac-philo-writing",
+     "score": 0.126,
+     "level": "N1",
+     "lot": "1ere"
+    }
+   ]
+  },
+  {
+   "pack": "probatoire-francais",
+   "lesson": "probatoire-francais-resume-texte",
+   "title": "Le résumé de texte",
+   "domain": "francais",
+   "lot": "learn:1ere",
+   "proposed": {
+    "skill": "fra.text-analysis",
+    "score": 0.074,
+    "level": "N1",
+    "lot": "1ere",
+    "confidence": "low"
+   },
+   "alternatives": [
+    {
+     "skill": "fra.african-lit",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "1ere"
+    },
+    {
+     "skill": "fra.poetry-theatre",
+     "score": 0.05,
+     "level": "N1",
+     "lot": "1ere"
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "pack": "general-p1",
+   "lot": "quiz:culture-cm",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Afrique : géographie",
+     "questions": 12,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : histoire",
+     "questions": 23,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : histoire et culture",
+     "questions": 14,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : langues",
+     "questions": 14,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : pays et capitales",
+     "questions": 53,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : économie",
+     "questions": 21,
+     "proposed": null
+    },
+    {
+     "category": "Calendrier",
+     "questions": 36,
+     "proposed": null
+    },
+    {
+     "category": "Calendrier camerounais",
+     "questions": 167,
+     "proposed": null
+    },
+    {
+     "category": "Culture camerounaise",
+     "questions": 2,
+     "proposed": null
+    },
+    {
+     "category": "Fuseaux horaires",
+     "questions": 130,
+     "proposed": null
+    },
+    {
+     "category": "Gastronomie",
+     "questions": 8,
+     "proposed": null
+    },
+    {
+     "category": "Géographie du Cameroun",
+     "questions": 145,
+     "proposed": null
+    },
+    {
+     "category": "Histoire (repères)",
+     "questions": 76,
+     "proposed": null
+    },
+    {
+     "category": "Histoire du Cameroun",
+     "questions": 120,
+     "proposed": null
+    },
+    {
+     "category": "Histoire et institutions",
+     "questions": 15,
+     "proposed": null
+    },
+    {
+     "category": "Histoire, arts et monde",
+     "questions": 14,
+     "proposed": null
+    },
+    {
+     "category": "Institutions et entreprises",
+     "questions": 21,
+     "proposed": null
+    },
+    {
+     "category": "Langues du Cameroun",
+     "questions": 1,
+     "proposed": null
+    },
+    {
+     "category": "Littérature",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Monde : pays et capitales",
+     "questions": 96,
+     "proposed": null
+    },
+    {
+     "category": "Monde : économie",
+     "questions": 3,
+     "proposed": null
+    },
+    {
+     "category": "Musique",
+     "questions": 1,
+     "proposed": null
+    },
+    {
+     "category": "Nature du Cameroun",
+     "questions": 12,
+     "proposed": null
+    },
+    {
+     "category": "Nature et ressources du Cameroun",
+     "questions": 1,
+     "proposed": null
+    },
+    {
+     "category": "Peuples du Cameroun",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Sciences",
+     "questions": 12,
+     "proposed": null
+    },
+    {
+     "category": "Sciences et nature",
+     "questions": 13,
+     "proposed": null
+    },
+    {
+     "category": "Sport",
+     "questions": 10,
+     "proposed": null
+    },
+    {
+     "category": "Sport mondial",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Villes du Cameroun",
+     "questions": 22,
+     "proposed": null
+    },
+    {
+     "category": "Éducation",
+     "questions": 6,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "general-p2",
+   "lot": "quiz:culture-cm",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Afrique : géographie",
+     "questions": 9,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : histoire",
+     "questions": 37,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : histoire et culture",
+     "questions": 10,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : langues",
+     "questions": 6,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : pays et capitales",
+     "questions": 47,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : économie",
+     "questions": 19,
+     "proposed": null
+    },
+    {
+     "category": "Calendrier",
+     "questions": 39,
+     "proposed": null
+    },
+    {
+     "category": "Calendrier camerounais",
+     "questions": 176,
+     "proposed": null
+    },
+    {
+     "category": "Culture camerounaise",
+     "questions": 2,
+     "proposed": null
+    },
+    {
+     "category": "Fuseaux horaires",
+     "questions": 145,
+     "proposed": null
+    },
+    {
+     "category": "Gastronomie",
+     "questions": 2,
+     "proposed": null
+    },
+    {
+     "category": "Géographie du Cameroun",
+     "questions": 163,
+     "proposed": null
+    },
+    {
+     "category": "Histoire (repères)",
+     "questions": 62,
+     "proposed": null
+    },
+    {
+     "category": "Histoire du Cameroun",
+     "questions": 110,
+     "proposed": null
+    },
+    {
+     "category": "Histoire et institutions",
+     "questions": 12,
+     "proposed": null
+    },
+    {
+     "category": "Histoire, arts et monde",
+     "questions": 15,
+     "proposed": null
+    },
+    {
+     "category": "Institutions et entreprises",
+     "questions": 14,
+     "proposed": null
+    },
+    {
+     "category": "Langues du Cameroun",
+     "questions": 2,
+     "proposed": null
+    },
+    {
+     "category": "Littérature",
+     "questions": 2,
+     "proposed": null
+    },
+    {
+     "category": "Monde : pays et capitales",
+     "questions": 90,
+     "proposed": null
+    },
+    {
+     "category": "Monde : économie",
+     "questions": 8,
+     "proposed": null
+    },
+    {
+     "category": "Musique",
+     "questions": 5,
+     "proposed": null
+    },
+    {
+     "category": "Nature du Cameroun",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Nature et ressources du Cameroun",
+     "questions": 3,
+     "proposed": null
+    },
+    {
+     "category": "Peuples du Cameroun",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Sciences",
+     "questions": 11,
+     "proposed": null
+    },
+    {
+     "category": "Sciences et nature",
+     "questions": 22,
+     "proposed": null
+    },
+    {
+     "category": "Sport",
+     "questions": 11,
+     "proposed": null
+    },
+    {
+     "category": "Sport mondial",
+     "questions": 4,
+     "proposed": null
+    },
+    {
+     "category": "Villes du Cameroun",
+     "questions": 24,
+     "proposed": null
+    },
+    {
+     "category": "Éducation",
+     "questions": 4,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "general-p3",
+   "lot": "quiz:culture-cm",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Afrique : géographie",
+     "questions": 11,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : histoire",
+     "questions": 30,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : histoire et culture",
+     "questions": 11,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : langues",
+     "questions": 8,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : pays et capitales",
+     "questions": 58,
+     "proposed": null
+    },
+    {
+     "category": "Afrique : économie",
+     "questions": 13,
+     "proposed": null
+    },
+    {
+     "category": "Calendrier",
+     "questions": 45,
+     "proposed": null
+    },
+    {
+     "category": "Calendrier camerounais",
+     "questions": 161,
+     "proposed": null
+    },
+    {
+     "category": "Culture camerounaise",
+     "questions": 4,
+     "proposed": null
+    },
+    {
+     "category": "Fuseaux horaires",
+     "questions": 125,
+     "proposed": null
+    },
+    {
+     "category": "Gastronomie",
+     "questions": 6,
+     "proposed": null
+    },
+    {
+     "category": "Géographie du Cameroun",
+     "questions": 171,
+     "proposed": null
+    },
+    {
+     "category": "Histoire (repères)",
+     "questions": 82,
+     "proposed": null
+    },
+    {
+     "category": "Histoire du Cameroun",
+     "questions": 110,
+     "proposed": null
+    },
+    {
+     "category": "Histoire et institutions",
+     "questions": 8,
+     "proposed": null
+    },
+    {
+     "category": "Histoire, arts et monde",
+     "questions": 14,
+     "proposed": null
+    },
+    {
+     "category": "Institutions et entreprises",
+     "questions": 21,
+     "proposed": null
+    },
+    {
+     "category": "Langues du Cameroun",
+     "questions": 3,
+     "proposed": null
+    },
+    {
+     "category": "Littérature",
+     "questions": 3,
+     "proposed": null
+    },
+    {
+     "category": "Monde : pays et capitales",
+     "questions": 86,
+     "proposed": null
+    },
+    {
+     "category": "Monde : économie",
+     "questions": 6,
+     "proposed": null
+    },
+    {
+     "category": "Musique",
+     "questions": 5,
+     "proposed": null
+    },
+    {
+     "category": "Nature du Cameroun",
+     "questions": 3,
+     "proposed": null
+    },
+    {
+     "category": "Nature et ressources du Cameroun",
+     "questions": 2,
+     "proposed": null
+    },
+    {
+     "category": "Peuples du Cameroun",
+     "questions": 8,
+     "proposed": null
+    },
+    {
+     "category": "Sciences",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Sciences et nature",
+     "questions": 17,
+     "proposed": null
+    },
+    {
+     "category": "Sport",
+     "questions": 13,
+     "proposed": null
+    },
+    {
+     "category": "Sport mondial",
+     "questions": 10,
+     "proposed": null
+    },
+    {
+     "category": "Villes du Cameroun",
+     "questions": 23,
+     "proposed": null
+    },
+    {
+     "category": "Éducation",
+     "questions": 4,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "cm2-p1",
+   "lot": "quiz:cm2",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Calcul",
+     "questions": 248,
+     "proposed": {
+      "skill": "math.decimal-ops",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Conjugaison",
+     "questions": 48,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Fractions",
+     "questions": 98,
+     "proposed": {
+      "skill": "math.frac-add",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Français",
+     "questions": 30,
+     "proposed": null
+    },
+    {
+     "category": "Grammaire",
+     "questions": 4,
+     "proposed": {
+      "skill": "eng.fslc-reading",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Géométrie",
+     "questions": 78,
+     "proposed": {
+      "skill": "math.angles-tri",
+      "score": 0.577,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Histoire-géographie et civisme",
+     "questions": 7,
+     "proposed": {
+      "skill": "hge.cep-hge",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Logique",
+     "questions": 40,
+     "proposed": null
+    },
+    {
+     "category": "Mesures",
+     "questions": 98,
+     "proposed": {
+      "skill": "math.volume",
+      "score": 0.428,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres",
+     "questions": 166,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.5,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres décimaux",
+     "questions": 197,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.707,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Orthographe",
+     "questions": 23,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Problèmes",
+     "questions": 224,
+     "proposed": {
+      "skill": "math.problem-solving",
+      "score": 0.333,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Sciences",
+     "questions": 7,
+     "proposed": {
+      "skill": "svt.cep-science-svt",
+      "score": 0.366,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Statistiques",
+     "questions": 27,
+     "proposed": null
+    },
+    {
+     "category": "Vocabulaire",
+     "questions": 10,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "cm2-p2",
+   "lot": "quiz:cm2",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Calcul",
+     "questions": 226,
+     "proposed": {
+      "skill": "math.decimal-ops",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Conjugaison",
+     "questions": 72,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Fractions",
+     "questions": 103,
+     "proposed": {
+      "skill": "math.frac-add",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Français",
+     "questions": 24,
+     "proposed": null
+    },
+    {
+     "category": "Grammaire",
+     "questions": 5,
+     "proposed": {
+      "skill": "eng.fslc-reading",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Géométrie",
+     "questions": 92,
+     "proposed": {
+      "skill": "math.angles-tri",
+      "score": 0.577,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Histoire-géographie et civisme",
+     "questions": 7,
+     "proposed": {
+      "skill": "hge.cep-hge",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Logique",
+     "questions": 31,
+     "proposed": null
+    },
+    {
+     "category": "Mesures",
+     "questions": 110,
+     "proposed": {
+      "skill": "math.volume",
+      "score": 0.428,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres",
+     "questions": 169,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.5,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres décimaux",
+     "questions": 180,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.707,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Orthographe",
+     "questions": 26,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Problèmes",
+     "questions": 221,
+     "proposed": {
+      "skill": "math.problem-solving",
+      "score": 0.333,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Sciences",
+     "questions": 5,
+     "proposed": {
+      "skill": "svt.cep-science-svt",
+      "score": 0.366,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Statistiques",
+     "questions": 27,
+     "proposed": null
+    },
+    {
+     "category": "Vocabulaire",
+     "questions": 7,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "cm2-p3",
+   "lot": "quiz:cm2",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Calcul",
+     "questions": 259,
+     "proposed": {
+      "skill": "math.decimal-ops",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Conjugaison",
+     "questions": 65,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Fractions",
+     "questions": 84,
+     "proposed": {
+      "skill": "math.frac-add",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Français",
+     "questions": 40,
+     "proposed": null
+    },
+    {
+     "category": "Grammaire",
+     "questions": 3,
+     "proposed": {
+      "skill": "eng.fslc-reading",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Géométrie",
+     "questions": 92,
+     "proposed": {
+      "skill": "math.angles-tri",
+      "score": 0.577,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Histoire-géographie et civisme",
+     "questions": 7,
+     "proposed": {
+      "skill": "hge.cep-hge",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Logique",
+     "questions": 34,
+     "proposed": null
+    },
+    {
+     "category": "Mesures",
+     "questions": 102,
+     "proposed": {
+      "skill": "math.volume",
+      "score": 0.428,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres",
+     "questions": 142,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.5,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres décimaux",
+     "questions": 206,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.707,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Orthographe",
+     "questions": 29,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Problèmes",
+     "questions": 206,
+     "proposed": {
+      "skill": "math.problem-solving",
+      "score": 0.333,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Sciences",
+     "questions": 7,
+     "proposed": {
+      "skill": "svt.cep-science-svt",
+      "score": 0.366,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Statistiques",
+     "questions": 23,
+     "proposed": null
+    },
+    {
+     "category": "Vocabulaire",
+     "questions": 6,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "cm2-p4",
+   "lot": "quiz:cm2",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Calcul",
+     "questions": 261,
+     "proposed": {
+      "skill": "math.decimal-ops",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Conjugaison",
+     "questions": 67,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Fractions",
+     "questions": 100,
+     "proposed": {
+      "skill": "math.frac-add",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Français",
+     "questions": 35,
+     "proposed": null
+    },
+    {
+     "category": "Grammaire",
+     "questions": 1,
+     "proposed": {
+      "skill": "eng.fslc-reading",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Géométrie",
+     "questions": 85,
+     "proposed": {
+      "skill": "math.angles-tri",
+      "score": 0.577,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Histoire-géographie et civisme",
+     "questions": 7,
+     "proposed": {
+      "skill": "hge.cep-hge",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Logique",
+     "questions": 28,
+     "proposed": null
+    },
+    {
+     "category": "Mesures",
+     "questions": 113,
+     "proposed": {
+      "skill": "math.volume",
+      "score": 0.428,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres",
+     "questions": 151,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.5,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres décimaux",
+     "questions": 165,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.707,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Orthographe",
+     "questions": 30,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Problèmes",
+     "questions": 208,
+     "proposed": {
+      "skill": "math.problem-solving",
+      "score": 0.333,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Sciences",
+     "questions": 7,
+     "proposed": {
+      "skill": "svt.cep-science-svt",
+      "score": 0.366,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Statistiques",
+     "questions": 37,
+     "proposed": null
+    },
+    {
+     "category": "Vocabulaire",
+     "questions": 9,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "cm2-p5",
+   "lot": "quiz:cm2",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Calcul",
+     "questions": 220,
+     "proposed": {
+      "skill": "math.decimal-ops",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Conjugaison",
+     "questions": 76,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Fractions",
+     "questions": 76,
+     "proposed": {
+      "skill": "math.frac-add",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Français",
+     "questions": 28,
+     "proposed": null
+    },
+    {
+     "category": "Grammaire",
+     "questions": 3,
+     "proposed": {
+      "skill": "eng.fslc-reading",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Géométrie",
+     "questions": 76,
+     "proposed": {
+      "skill": "math.angles-tri",
+      "score": 0.577,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Histoire-géographie et civisme",
+     "questions": 7,
+     "proposed": {
+      "skill": "hge.cep-hge",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Logique",
+     "questions": 31,
+     "proposed": null
+    },
+    {
+     "category": "Mesures",
+     "questions": 85,
+     "proposed": {
+      "skill": "math.volume",
+      "score": 0.428,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres",
+     "questions": 171,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.5,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Nombres décimaux",
+     "questions": 192,
+     "proposed": {
+      "skill": "math.decimals",
+      "score": 0.707,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Orthographe",
+     "questions": 26,
+     "proposed": {
+      "skill": "fra.cep-grammar",
+      "score": 0.404,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Problèmes",
+     "questions": 260,
+     "proposed": {
+      "skill": "math.problem-solving",
+      "score": 0.333,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Sciences",
+     "questions": 7,
+     "proposed": {
+      "skill": "svt.cep-science-svt",
+      "score": 0.366,
+      "level": "N1",
+      "lot": "cm2"
+     }
+    },
+    {
+     "category": "Statistiques",
+     "questions": 36,
+     "proposed": null
+    },
+    {
+     "category": "Vocabulaire",
+     "questions": 10,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "3e-p1",
+   "lot": "quiz:3e",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre",
+     "questions": 466,
+     "proposed": {
+      "skill": "math.sys-2",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Fonctions",
+     "questions": 161,
+     "proposed": {
+      "skill": "math.func-graph",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Français et anglais",
+     "questions": 2,
+     "proposed": null
+    },
+    {
+     "category": "Géométrie",
+     "questions": 128,
+     "proposed": {
+      "skill": "math.space-geo",
+      "score": 0.5,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Histoire-géographie et civisme",
+     "questions": 6,
+     "proposed": {
+      "skill": "hge.bepc-hge",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Nombres",
+     "questions": 90,
+     "proposed": null
+    },
+    {
+     "category": "Physique-Chimie",
+     "questions": 269,
+     "proposed": {
+      "skill": "phc.bepc-pct",
+      "score": 0.55,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Probabilités",
+     "questions": 64,
+     "proposed": {
+      "skill": "math.proba-intro",
+      "score": 0.55,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "SVT",
+     "questions": 2,
+     "proposed": {
+      "skill": "svt.bepc-svt",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Statistiques",
+     "questions": 153,
+     "proposed": {
+      "skill": "math.stats-desc",
+      "score": 0.378,
+      "level": "N1",
+      "lot": "3e"
+     }
+    }
+   ]
+  },
+  {
+   "pack": "3e-p2",
+   "lot": "quiz:3e",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre",
+     "questions": 462,
+     "proposed": {
+      "skill": "math.sys-2",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Fonctions",
+     "questions": 149,
+     "proposed": {
+      "skill": "math.func-graph",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Français et anglais",
+     "questions": 4,
+     "proposed": null
+    },
+    {
+     "category": "Géométrie",
+     "questions": 118,
+     "proposed": {
+      "skill": "math.space-geo",
+      "score": 0.5,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Histoire-géographie et civisme",
+     "questions": 5,
+     "proposed": {
+      "skill": "hge.bepc-hge",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Nombres",
+     "questions": 109,
+     "proposed": null
+    },
+    {
+     "category": "Physique-Chimie",
+     "questions": 278,
+     "proposed": {
+      "skill": "phc.bepc-pct",
+      "score": 0.55,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Probabilités",
+     "questions": 64,
+     "proposed": {
+      "skill": "math.proba-intro",
+      "score": 0.55,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "SVT",
+     "questions": 6,
+     "proposed": {
+      "skill": "svt.bepc-svt",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Statistiques",
+     "questions": 145,
+     "proposed": {
+      "skill": "math.stats-desc",
+      "score": 0.378,
+      "level": "N1",
+      "lot": "3e"
+     }
+    }
+   ]
+  },
+  {
+   "pack": "3e-p3",
+   "lot": "quiz:3e",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre",
+     "questions": 462,
+     "proposed": {
+      "skill": "math.sys-2",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Fonctions",
+     "questions": 162,
+     "proposed": {
+      "skill": "math.func-graph",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Français et anglais",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Géométrie",
+     "questions": 118,
+     "proposed": {
+      "skill": "math.space-geo",
+      "score": 0.5,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Histoire-géographie et civisme",
+     "questions": 4,
+     "proposed": {
+      "skill": "hge.bepc-hge",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Nombres",
+     "questions": 97,
+     "proposed": null
+    },
+    {
+     "category": "Physique-Chimie",
+     "questions": 261,
+     "proposed": {
+      "skill": "phc.bepc-pct",
+      "score": 0.55,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Probabilités",
+     "questions": 50,
+     "proposed": {
+      "skill": "math.proba-intro",
+      "score": 0.55,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "SVT",
+     "questions": 10,
+     "proposed": {
+      "skill": "svt.bepc-svt",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Statistiques",
+     "questions": 169,
+     "proposed": {
+      "skill": "math.stats-desc",
+      "score": 0.378,
+      "level": "N1",
+      "lot": "3e"
+     }
+    }
+   ]
+  },
+  {
+   "pack": "3e-p4",
+   "lot": "quiz:3e",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre",
+     "questions": 500,
+     "proposed": {
+      "skill": "math.sys-2",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Fonctions",
+     "questions": 168,
+     "proposed": {
+      "skill": "math.func-graph",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Français et anglais",
+     "questions": 3,
+     "proposed": null
+    },
+    {
+     "category": "Géométrie",
+     "questions": 129,
+     "proposed": {
+      "skill": "math.space-geo",
+      "score": 0.5,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Histoire-géographie et civisme",
+     "questions": 4,
+     "proposed": {
+      "skill": "hge.bepc-hge",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Nombres",
+     "questions": 93,
+     "proposed": null
+    },
+    {
+     "category": "Physique-Chimie",
+     "questions": 236,
+     "proposed": {
+      "skill": "phc.bepc-pct",
+      "score": 0.55,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Probabilités",
+     "questions": 51,
+     "proposed": {
+      "skill": "math.proba-intro",
+      "score": 0.55,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "SVT",
+     "questions": 3,
+     "proposed": {
+      "skill": "svt.bepc-svt",
+      "score": 0.458,
+      "level": "N1",
+      "lot": "3e"
+     }
+    },
+    {
+     "category": "Statistiques",
+     "questions": 153,
+     "proposed": {
+      "skill": "math.stats-desc",
+      "score": 0.378,
+      "level": "N1",
+      "lot": "3e"
+     }
+    }
+   ]
+  },
+  {
+   "pack": "tle-p1",
+   "lot": "quiz:tle",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre",
+     "questions": 143,
+     "proposed": {
+      "skill": "math.complex",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Analyse",
+     "questions": 653,
+     "proposed": {
+      "skill": "math.diff-eq",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Dénombrement",
+     "questions": 23,
+     "proposed": {
+      "skill": "math.combinatorics",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Géométrie dans l'espace",
+     "questions": 82,
+     "proposed": {
+      "skill": "math.analytic-geo",
+      "score": 0.316,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Nombres complexes",
+     "questions": 93,
+     "proposed": {
+      "skill": "math.complex",
+      "score": 0.682,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Physique-Chimie",
+     "questions": 128,
+     "proposed": {
+      "skill": "phc.bac-pc",
+      "score": 0.521,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Probabilités",
+     "questions": 69,
+     "proposed": {
+      "skill": "math.combinatorics",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "SVT et chimie",
+     "questions": 8,
+     "proposed": {
+      "skill": "svt.bac-svt",
+      "score": 0.317,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Suites",
+     "questions": 214,
+     "proposed": {
+      "skill": "math.seq",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Trigonométrie",
+     "questions": 13,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "tle-p2",
+   "lot": "quiz:tle",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre",
+     "questions": 104,
+     "proposed": {
+      "skill": "math.complex",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Analyse",
+     "questions": 659,
+     "proposed": {
+      "skill": "math.diff-eq",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Dénombrement",
+     "questions": 20,
+     "proposed": {
+      "skill": "math.combinatorics",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Géométrie dans l'espace",
+     "questions": 68,
+     "proposed": {
+      "skill": "math.analytic-geo",
+      "score": 0.316,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Nombres complexes",
+     "questions": 86,
+     "proposed": {
+      "skill": "math.complex",
+      "score": 0.682,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Physique-Chimie",
+     "questions": 162,
+     "proposed": {
+      "skill": "phc.bac-pc",
+      "score": 0.521,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Probabilités",
+     "questions": 64,
+     "proposed": {
+      "skill": "math.combinatorics",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "SVT et chimie",
+     "questions": 1,
+     "proposed": {
+      "skill": "svt.bac-svt",
+      "score": 0.317,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Suites",
+     "questions": 246,
+     "proposed": {
+      "skill": "math.seq",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Trigonométrie",
+     "questions": 15,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "tle-p3",
+   "lot": "quiz:tle",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre",
+     "questions": 133,
+     "proposed": {
+      "skill": "math.complex",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Analyse",
+     "questions": 652,
+     "proposed": {
+      "skill": "math.diff-eq",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Dénombrement",
+     "questions": 28,
+     "proposed": {
+      "skill": "math.combinatorics",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Géométrie dans l'espace",
+     "questions": 84,
+     "proposed": {
+      "skill": "math.analytic-geo",
+      "score": 0.316,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Nombres complexes",
+     "questions": 85,
+     "proposed": {
+      "skill": "math.complex",
+      "score": 0.682,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Physique-Chimie",
+     "questions": 129,
+     "proposed": {
+      "skill": "phc.bac-pc",
+      "score": 0.521,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Probabilités",
+     "questions": 64,
+     "proposed": {
+      "skill": "math.combinatorics",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "SVT et chimie",
+     "questions": 5,
+     "proposed": {
+      "skill": "svt.bac-svt",
+      "score": 0.317,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Suites",
+     "questions": 232,
+     "proposed": {
+      "skill": "math.seq",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Trigonométrie",
+     "questions": 13,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "tle-p4",
+   "lot": "quiz:tle",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre",
+     "questions": 106,
+     "proposed": {
+      "skill": "math.complex",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Analyse",
+     "questions": 653,
+     "proposed": {
+      "skill": "math.diff-eq",
+      "score": 0.497,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Dénombrement",
+     "questions": 34,
+     "proposed": {
+      "skill": "math.combinatorics",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Géométrie dans l'espace",
+     "questions": 73,
+     "proposed": {
+      "skill": "math.analytic-geo",
+      "score": 0.316,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Nombres complexes",
+     "questions": 102,
+     "proposed": {
+      "skill": "math.complex",
+      "score": 0.682,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Physique-Chimie",
+     "questions": 151,
+     "proposed": {
+      "skill": "phc.bac-pc",
+      "score": 0.521,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Probabilités",
+     "questions": 62,
+     "proposed": {
+      "skill": "math.combinatorics",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "SVT et chimie",
+     "questions": 5,
+     "proposed": {
+      "skill": "svt.bac-svt",
+      "score": 0.317,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Suites",
+     "questions": 223,
+     "proposed": {
+      "skill": "math.seq",
+      "score": 0.408,
+      "level": "N1",
+      "lot": "tle"
+     }
+    },
+    {
+     "category": "Trigonométrie",
+     "questions": 16,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "l1-droit-p1",
+   "lot": "quiz:droit-l1",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Droit civil",
+     "questions": 19,
+     "proposed": null
+    },
+    {
+     "category": "Droit constitutionnel",
+     "questions": 14,
+     "proposed": null
+    },
+    {
+     "category": "Droit international et droits de l'homme",
+     "questions": 8,
+     "proposed": null
+    },
+    {
+     "category": "Droit pénal",
+     "questions": 13,
+     "proposed": null
+    },
+    {
+     "category": "Introduction au droit",
+     "questions": 26,
+     "proposed": null
+    },
+    {
+     "category": "OHADA et droit des affaires",
+     "questions": 16,
+     "proposed": null
+    },
+    {
+     "category": "Organisation judiciaire",
+     "questions": 10,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "l1-eco-p1",
+   "lot": "quiz:economie-l1",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Commerce international",
+     "questions": 91,
+     "proposed": null
+    },
+    {
+     "category": "Comptabilité",
+     "questions": 48,
+     "proposed": null
+    },
+    {
+     "category": "Concepts d'économie",
+     "questions": 14,
+     "proposed": null
+    },
+    {
+     "category": "Fiscalité (Cameroun)",
+     "questions": 8,
+     "proposed": null
+    },
+    {
+     "category": "Macroéconomie",
+     "questions": 132,
+     "proposed": null
+    },
+    {
+     "category": "Mathématiques financières",
+     "questions": 124,
+     "proposed": null
+    },
+    {
+     "category": "Microéconomie",
+     "questions": 663,
+     "proposed": null
+    },
+    {
+     "category": "Statistiques",
+     "questions": 143,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "l1-eco-p2",
+   "lot": "quiz:economie-l1",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Commerce international",
+     "questions": 96,
+     "proposed": null
+    },
+    {
+     "category": "Comptabilité",
+     "questions": 64,
+     "proposed": null
+    },
+    {
+     "category": "Concepts d'économie",
+     "questions": 12,
+     "proposed": null
+    },
+    {
+     "category": "Fiscalité (Cameroun)",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Macroéconomie",
+     "questions": 138,
+     "proposed": null
+    },
+    {
+     "category": "Mathématiques financières",
+     "questions": 113,
+     "proposed": null
+    },
+    {
+     "category": "Microéconomie",
+     "questions": 631,
+     "proposed": null
+    },
+    {
+     "category": "Statistiques",
+     "questions": 161,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "l1-eco-p3",
+   "lot": "quiz:economie-l1",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Commerce international",
+     "questions": 85,
+     "proposed": null
+    },
+    {
+     "category": "Comptabilité",
+     "questions": 46,
+     "proposed": null
+    },
+    {
+     "category": "Concepts d'économie",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Fiscalité (Cameroun)",
+     "questions": 11,
+     "proposed": null
+    },
+    {
+     "category": "Macroéconomie",
+     "questions": 127,
+     "proposed": null
+    },
+    {
+     "category": "Mathématiques financières",
+     "questions": 99,
+     "proposed": null
+    },
+    {
+     "category": "Microéconomie",
+     "questions": 654,
+     "proposed": null
+    },
+    {
+     "category": "Statistiques",
+     "questions": 193,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "l1-eco-p4",
+   "lot": "quiz:economie-l1",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Commerce international",
+     "questions": 102,
+     "proposed": null
+    },
+    {
+     "category": "Comptabilité",
+     "questions": 47,
+     "proposed": null
+    },
+    {
+     "category": "Concepts d'économie",
+     "questions": 11,
+     "proposed": null
+    },
+    {
+     "category": "Fiscalité (Cameroun)",
+     "questions": 3,
+     "proposed": null
+    },
+    {
+     "category": "Macroéconomie",
+     "questions": 130,
+     "proposed": null
+    },
+    {
+     "category": "Mathématiques financières",
+     "questions": 104,
+     "proposed": null
+    },
+    {
+     "category": "Microéconomie",
+     "questions": 622,
+     "proposed": null
+    },
+    {
+     "category": "Statistiques",
+     "questions": 203,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "l1-maths-p1",
+   "lot": "quiz:mathematiques-l1",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre linéaire",
+     "questions": 726,
+     "proposed": null
+    },
+    {
+     "category": "Analyse",
+     "questions": 51,
+     "proposed": null
+    },
+    {
+     "category": "Arithmétique",
+     "questions": 184,
+     "proposed": null
+    },
+    {
+     "category": "Concepts de mathématiques",
+     "questions": 4,
+     "proposed": null
+    },
+    {
+     "category": "Dénombrement",
+     "questions": 98,
+     "proposed": null
+    },
+    {
+     "category": "Logique",
+     "questions": 3,
+     "proposed": null
+    },
+    {
+     "category": "Nombres complexes",
+     "questions": 6,
+     "proposed": null
+    },
+    {
+     "category": "Polynômes",
+     "questions": 179,
+     "proposed": null
+    },
+    {
+     "category": "Séries",
+     "questions": 58,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "l1-maths-p2",
+   "lot": "quiz:mathematiques-l1",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre linéaire",
+     "questions": 710,
+     "proposed": null
+    },
+    {
+     "category": "Analyse",
+     "questions": 57,
+     "proposed": null
+    },
+    {
+     "category": "Arithmétique",
+     "questions": 185,
+     "proposed": null
+    },
+    {
+     "category": "Concepts de mathématiques",
+     "questions": 7,
+     "proposed": null
+    },
+    {
+     "category": "Dénombrement",
+     "questions": 88,
+     "proposed": null
+    },
+    {
+     "category": "Logique",
+     "questions": 1,
+     "proposed": null
+    },
+    {
+     "category": "Nombres complexes",
+     "questions": 4,
+     "proposed": null
+    },
+    {
+     "category": "Polynômes",
+     "questions": 196,
+     "proposed": null
+    },
+    {
+     "category": "Séries",
+     "questions": 61,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "l1-maths-p3",
+   "lot": "quiz:mathematiques-l1",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre linéaire",
+     "questions": 684,
+     "proposed": null
+    },
+    {
+     "category": "Analyse",
+     "questions": 66,
+     "proposed": null
+    },
+    {
+     "category": "Arithmétique",
+     "questions": 192,
+     "proposed": null
+    },
+    {
+     "category": "Concepts de mathématiques",
+     "questions": 5,
+     "proposed": null
+    },
+    {
+     "category": "Dénombrement",
+     "questions": 105,
+     "proposed": null
+    },
+    {
+     "category": "Nombres complexes",
+     "questions": 9,
+     "proposed": null
+    },
+    {
+     "category": "Polynômes",
+     "questions": 185,
+     "proposed": null
+    },
+    {
+     "category": "Séries",
+     "questions": 63,
+     "proposed": null
+    }
+   ]
+  },
+  {
+   "pack": "l1-maths-p4",
+   "lot": "quiz:mathematiques-l1",
+   "level": "N1",
+   "categories": [
+    {
+     "category": "Algèbre linéaire",
+     "questions": 700,
+     "proposed": null
+    },
+    {
+     "category": "Analyse",
+     "questions": 57,
+     "proposed": null
+    },
+    {
+     "category": "Arithmétique",
+     "questions": 175,
+     "proposed": null
+    },
+    {
+     "category": "Concepts de mathématiques",
+     "questions": 10,
+     "proposed": null
+    },
+    {
+     "category": "Dénombrement",
+     "questions": 93,
+     "proposed": null
+    },
+    {
+     "category": "Logique",
+     "questions": 1,
+     "proposed": null
+    },
+    {
+     "category": "Nombres complexes",
+     "questions": 6,
+     "proposed": null
+    },
+    {
+     "category": "Polynômes",
+     "questions": 208,
+     "proposed": null
+    },
+    {
+     "category": "Séries",
+     "questions": 59,
+     "proposed": null
+    }
+   ]
+  }
+ ],
+ "unmatched": [
+  {
+   "kind": "lesson",
+   "id": "bepc-pct-poids",
+   "title": "Poids, masse et forces"
+  },
+  {
+   "kind": "lesson",
+   "id": "cep-sciences-plantes-environnement",
+   "title": "Les plantes et l'environnement"
+  },
+  {
+   "kind": "lesson",
+   "id": "fslc-english-composition-main",
+   "title": "Composition: the friendly letter and the short story"
+  },
+  {
+   "kind": "lesson",
+   "id": "fslc-science-human-body",
+   "title": "The human body: digestion, breathing and blood circulation"
+  },
+  {
+   "kind": "lesson",
+   "id": "fslc-science-health-hygiene",
+   "title": "Health and hygiene: malaria, safe water and vaccination"
+  },
+  {
+   "kind": "lesson",
+   "id": "gceol-biology-cells",
+   "title": "Plant and animal cells"
+  },
+  {
+   "kind": "lesson",
+   "id": "gceol-biology-ecology",
+   "title": "Food chains, energy flow, the carbon cycle and conservation"
+  },
+  {
+   "kind": "lesson",
+   "id": "gceol-biology-photosynthesis",
+   "title": "Photosynthesis and limiting factors"
+  },
+  {
+   "kind": "lesson",
+   "id": "gceol-biology-digestion",
+   "title": "Human digestion and enzymes"
+  },
+  {
+   "kind": "lesson",
+   "id": "gceol-maths-venn",
+   "title": "Sets and Venn diagrams"
+  },
+  {
+   "kind": "lesson",
+   "id": "maternelle-decouverte-compter",
+   "title": "Compter jusqu'à 10"
+  },
+  {
+   "kind": "lesson",
+   "id": "maternelle-decouverte-couleurs",
+   "title": "Les couleurs"
+  },
+  {
+   "kind": "lesson",
+   "id": "maternelle-decouverte-formes",
+   "title": "Les formes"
+  },
+  {
+   "kind": "lesson",
+   "id": "probatoire-francais-resume-texte",
+   "title": "Le résumé de texte"
+  }
+ ]
+}

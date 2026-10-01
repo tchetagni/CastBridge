@@ -66,6 +66,29 @@ def scopes():
     return out
 
 
+def paths():
+    """Learner paths = ORDERED SETS OF LOTS (rule B): class by class, base lots first, then excellence, then phone-only media."""
+    def lots_of(years, langs):
+        out = []
+        for lang in langs:
+            for y in years:
+                sc = YEARS[y][0 if lang == "fr" else 1]
+                out += ["learn:" + sc, "quiz:" + sc, "learn:" + sc + "-exc", "quiz:" + sc + "-exc", "learn:" + sc + "-media"]
+        return out
+    defs = [("primaire-fr", "Parcours primaire francophone (maternelle à CM2)", "Francophone primary path (nursery to CM2)", range(0, 7), ["fr"]),
+            ("college-fr", "Parcours collège francophone (6e à 3e)", "Francophone lower-secondary path (6e to 3e)", range(7, 11), ["fr"]),
+            ("lycee-fr", "Parcours lycée francophone (2nde à Terminale)", "Francophone upper-secondary path (2nde to Tle)", range(11, 14), ["fr"]),
+            ("primaire-en", "Parcours primaire anglophone (Nursery à Class 6)", "Anglophone primary path (Nursery to Class 6)", range(0, 7), ["en"]),
+            ("secondaire-en", "Parcours secondaire anglophone (Form 1 à Upper Sixth)", "Anglophone secondary path (Form 1 to Upper Sixth)", range(7, 14), ["en"]),
+            ("superieur", "Parcours supérieur (L1-L2 / BTS)", "Higher-education path (L1-L2 / HND)", range(14, 16), ["fr", "en"]),
+            ("scolarite-fr", "Toute la scolarité francophone, maternelle à Terminale", "Whole francophone schooling, nursery to Tle", range(0, 14), ["fr"]),
+            ("scolarite-en", "Toute la scolarité anglophone, Nursery à Upper Sixth", "Whole anglophone schooling, Nursery to Upper Sixth", range(0, 14), ["en"])]
+    res = [{"id": i, "title": {"fr": f, "en": e}, "lots": lots_of(ys, ls)} for i, f, e, ys, ls in defs]
+    res.append({"id": "adulte-debutant", "title": {"fr": "Adulte débutant : alphabétisation, vie pratique, puis primaire", "en": "Adult beginner: literacy, practical life, then primary"},
+                "lots": ["learn:alpha-adultes", "quiz:alpha-adultes", "learn:vie-pratique", "quiz:vie-pratique"] + lots_of(range(1, 7), ["fr"])})
+    return res
+
+
 def parse_years(t):
     t = t.strip().lstrip("y")
     if "-" in t:
@@ -113,7 +136,7 @@ def gen_domain(name):
 
 def main():
     check = "--check" in sys.argv
-    files = {"scopes.json": {"format": 1, "scopes": scopes()}}
+    files = {"scopes.json": {"format": 1, "scopes": scopes()}, "paths.json": {"format": 1, "paths": paths()}}
     for d in DOMAINS:
         if os.path.exists(os.path.join(HERE, "seed", d + ".txt")):
             files[d + ".json"] = gen_domain(d)
