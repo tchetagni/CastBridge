@@ -48,3 +48,7 @@ Encodage minimal d'une touche : `08 01 12 <len> "<code>"` envoyé dans une trame
   avec détection de version/échec et repli sur une autre stratégie.
 - Ne jamais envoyer de commande à un appareil inconnu : l'utilisateur choisit la TV, un test réversible (volume +/−) demande
   confirmation visuelle avant d'enregistrer la stratégie comme « fonctionne ».
+
+## Implémentation dans CastBridge (2026-10-01)
+Stratégie `cvte` (`core/…/remote/smart/Strategies.kt`, statut **stable**, volume vérifié) : encodeur protobuf écrit à la main (`Pb`, sans dépendance) ; `CvteMessage.key(code)` produit exactement `08 01 12 <len> "<code>"` (tests : `24`, `25`, `4`, `23`) ; client WebSocket minimal (`WsClient`, trames masquées, ping→pong) ; lecture du JSON d'information (`CvteInfo`, le `status` 500 n'est **pas** une erreur) ; point d'accès depuis un enregistrement DNS-SD `_share._tcp` (`websocket_port`, repli sur `device_ip`, port 8125 par défaut) ; **reconnexion** silencieuse au premier envoi après une coupure (la TV ferme les liaisons inactives). L'app avertit l'owner que la TV **n'exige aucune authentification** (risque réseau).
+Types d'événements : seuls les types 1 (touche) et 4 (clic, décodage seulement) sont codés ; **aucun autre type n'a été confirmé** (curseur, molette, voix, jeu : toujours à relever par observation sur la TV).
