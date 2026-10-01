@@ -23,6 +23,8 @@ def fr(level, subject):
     if key not in core.COURSES:
         core.COURSES[key] = dict(track="secondary", level=FR_LEVELS[level], field=FR_FIELDS[subject], prefix="ly-" + key,
                                  label="Lycée · %s · %s" % (FR_LEVELS[level], FR_LABELS[subject]))
+        if subject == "angl":                         # English class of the francophone lycée: the questions are written in English
+            core.COURSES[key]["lang"] = "en"
     return key
 
 
