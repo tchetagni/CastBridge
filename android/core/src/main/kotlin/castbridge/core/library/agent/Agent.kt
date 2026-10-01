@@ -114,7 +114,8 @@ class LibraryAgent(
         val stats = Stats(files.size, files.size - renames - infos.count { it.parsed.kind == Kind.UNKNOWN }, renames, infos.count { it.parsed.kind == Kind.UNKNOWN },
             dupExtras.size, dupExtras.sumOf { it.bytes }, aiUsed)
         progress(Progress(Phase.DONE))
-        return Analysis(snapshot, infos, plan, insights(snapshot, plan, groups), stats, habits)
+        val health = Health.assess(snapshot, planItems, groups, plan, ctx, habits)
+        return Analysis(snapshot, infos, plan, insights(snapshot, plan, groups, health), stats, habits, health)
     }
 
     private val aiKeys = HashSet<String>()
@@ -122,7 +123,7 @@ class LibraryAgent(
     private fun dateOf(ms: Long): String? = if (ms <= 0) null else java.time.Instant.ofEpochMilli(ms).atZone(ctx.zone).toLocalDate().toString()
 
     /** Discreet advice computed from a finished analysis (also used alone, without fingerprints, for the library banner). */
-    fun insights(snapshot: LibrarySnapshot, plan: Plan, groups: List<DupGroup>): List<Insight> {
+    fun insights(snapshot: LibrarySnapshot, plan: Plan, groups: List<DupGroup>, health: HealthReport? = null): List<Insight> {
         val out = ArrayList<Insight>()
         val n = plan.renames.count { it.toName != null }
         if (n > 0) out += Insight("names", Insight.NOTICE, if (n == 1) "1 fichier mal nommé" else "$n fichiers mal nommés")
@@ -144,6 +145,14 @@ class LibraryAgent(
         val old = plan.trash.filter { it.why == TrashWhy.WATCHED_OLD }
         if (old.isNotEmpty()) out += Insight("old", Insight.INFO, "${old.size} fichier(s) déjà vus depuis longtemps occupent " + Text.size(old.sumOf { it.bytes }), old.sumOf { it.bytes })
         val mv = plan.moves
+        // numbers over the whole library (only when they add something to the lines above)
+        health?.headline(ctx.uiLang)?.let { h -> if (listOf(dups.isNotEmpty(), versions.isNotEmpty(), old.isNotEmpty(), health.of(FindingType.BROKEN_FILE).any { it.bytes > 0 }).count { it } >= 2) out += Insight("recoverable", Insight.NOTICE, h, health.recoverableBytes) }
+        health?.of(FindingType.BROKEN_FILE)?.filter { it.bytes > 0 || it.changes.isNotEmpty() }?.takeIf { it.isNotEmpty() }?.let { b ->
+            out += Insight("broken", Insight.NOTICE, if (b.size == 1) "1 fichier vide ou incomplet" else "${b.size} fichiers vides ou incomplets", b.sumOf { it.bytes })
+        }
+        health?.of(FindingType.MISSING_EPISODES)?.sortedByDescending { it.priority }?.takeIf { it.isNotEmpty() }?.let { m ->
+            out += Insight("missing", if (m.first().severity >= Insight.NOTICE) Insight.NOTICE else Insight.INFO, m.first().title + (if (m.size > 1) " (+${m.size - 1})" else ""))
+        }
         if (mv.isNotEmpty()) out += Insight("move", Insight.INFO, "${mv.size} fichier(s) peuvent aller sur la clé pour libérer " + Text.size(mv.sumOf { it.bytes }), mv.sumOf { it.bytes })
         return out
     }

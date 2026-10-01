@@ -6,7 +6,11 @@ enum class ChangeType { RENAME, MOVE, TRASH }
 /** Who proposed the change: the local rules, what the user corrected before, or the optional AI model. */
 enum class Source { RULES, LEARNED, AI }
 
-enum class TrashWhy { DUPLICATE, LOWER_QUALITY, WATCHED_OLD }
+enum class TrashWhy { DUPLICATE, LOWER_QUALITY, WATCHED_OLD,
+    /** Interrupted download (.part, .aria2…): only proposed by [Health], never ticked. */
+    PARTIAL,
+    /** File of 0 byte: only proposed by [Health], never ticked. */
+    EMPTY }
 
 /**
  * One proposed change, shown to the user with its "before → after". Nothing happens until the user ticks it and confirms.
@@ -87,4 +91,6 @@ data class ItemInfo(val file: FileRef, val parsed: Parsed, val proposal: Proposa
 
 data class Stats(val files: Int, val wellNamed: Int, val toRename: Int, val unknown: Int, val duplicateGroups: Int, val duplicateBytes: Long, val aiUsed: Int)
 
-data class Analysis(val snapshot: LibrarySnapshot, val items: List<ItemInfo>, val plan: Plan, val insights: List<Insight>, val stats: Stats, val habits: Habits = Habits.NONE)
+data class Analysis(val snapshot: LibrarySnapshot, val items: List<ItemInfo>, val plan: Plan, val insights: List<Insight>, val stats: Stats, val habits: Habits = Habits.NONE,
+                    /** State of the library: incomplete series, quality duplicates, broken files, recoverable space, priorities (see [Health]). */
+                    val health: HealthReport = HealthReport.EMPTY)
