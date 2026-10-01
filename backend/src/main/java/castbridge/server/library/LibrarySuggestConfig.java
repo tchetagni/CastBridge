@@ -1,8 +1,8 @@
 package castbridge.server.library;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +13,14 @@ public class LibrarySuggestConfig {
     @Bean
     @ConditionalOnMissingBean(NameSuggester.class)
     NameSuggester nameSuggester(LibrarySuggestProperties props, ObjectMapper json) {
-        return props.llmConfigured() ? new LlmNameSuggester(props.llmUrl(), props.llmApiKey(), props.llmModel(), json) : new DisabledNameSuggester();
+        if (!props.llmConfigured()) return new DisabledNameSuggester();
+        LlmProvider provider = new HttpLlmProvider(props.provider(), props.llmUrl(), props.llmApiKey(), json);
+        return new LlmNameSuggester(provider, props.llmModel(), PromptRegistry.load(props.promptVersion()), props.maxOutputTokens(),
+                LibrarySuggestProperties.OPENAI.equals(props.provider()), json);
+    }
+
+    @Bean
+    CostMeter libraryCostMeter(LibrarySuggestProperties props) {
+        return new CostMeter(props.priceInPerMtok(), props.priceOutPerMtok(), props.dailyBudgetUsd(), props.perDeviceDailyItems(), System::currentTimeMillis);
     }
 }
