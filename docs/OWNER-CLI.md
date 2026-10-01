@@ -1,4 +1,7 @@
-# Outil de bureau « castbridge-owner » (ligne de commande)
+# Outil de bureau « castbridge-owner » (ligne de commande de dépannage)
+
+> **Outil officiel : `castbridge-activation-desktop.jar`** (module `tools/activation-desktop`, guide `docs/ACTIVATION-TOOLS.md`) : coffre protégé par **scrypt** (mémoire-dure), **licences et postes**, **registre signé**, **codes QR**, fenêtre graphique, journal d'audit. **Utilisez celui-là.** Le présent outil (`castbridge-owner.jar`, PBKDF2) reste comme **dépannage minimal** : ses coffres ne sont **pas** compatibles avec ceux de l'outil officiel. Aucun coffre n'ayant encore été créé, il n'y a rien à migrer : créez votre clé avec l'outil officiel (`cle-creer`).
+
 
 Génère les activations à partir de ce que la TV affiche ou exporte. Fonctionne **hors ligne**, sur Mac, Windows et Linux (Java 17 ou plus). Même bibliothèque d'émission que le téléphone propriétaire et le serveur (`docs/ACTIVATION-FORMAT.md`).
 Fichier : `castbridge-owner.jar` (construit par `cd android && gradle :core:ownerToolJar`, résultat `android/core/build/libs/`), copié dans `~/CastBridge-release/owner/` avec un lanceur.
