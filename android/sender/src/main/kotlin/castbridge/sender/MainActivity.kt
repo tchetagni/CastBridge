@@ -11,6 +11,8 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.items
@@ -93,7 +95,14 @@ class MainActivity : ComponentActivity() {
             topBar = {
                 Column {
                     TopAppBar(
-                        title = { CastBridgeLogo(32.dp) },
+                        title = {
+                            // hidden entry (nothing on screen mentions it): 7 taps on the logo then a long press. Only reacts if this build carries the owner's hash.
+                            val seq = remember { castbridge.core.owner.TapSequence() }
+                            val hidden = if (castbridge.owner.SuperAdmin.enabled) Modifier.pointerInput(Unit) {
+                                detectTapGestures(onTap = { seq.tap() }, onLongPress = { if (seq.longPress()) castbridge.owner.SuperAdmin.open(this@MainActivity) })
+                            } else Modifier
+                            Box(hidden) { CastBridgeLogo(32.dp) }
+                        },
                         actions = {
                             IconButton({ ParentalActivity.open(this@MainActivity) }) { Icon(Icons.Filled.Lock, "Contrôle parental") }
                             IconButton({ settings = true }) { CbIcon(R.drawable.ic_cb_reglages, "Réglages") }

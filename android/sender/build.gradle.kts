@@ -24,6 +24,7 @@ android {
 }
 dependencies {
     implementation(project(":core"))
+    implementation(project(":ownerlib"))      // « Super administration » : entrée cachée du titre, protégée par mot de passe (aucun lien avec le serveur)
     implementation("androidx.activity:activity-compose:1.10.1")
     implementation(platform("androidx.compose:compose-bom:2025.02.00"))
     implementation("androidx.compose.material3:material3")

@@ -1,6 +1,8 @@
 plugins { kotlin("jvm") }  // pure-logic module shared by the Android apps
 dependencies {
     api("org.nanohttpd:nanohttpd:2.3.1")
+    // bcrypt (Apache-2.0) : la porte « Super administration » vérifie le mot de passe contre un haché injecté à la compilation (docs/OWNER-CONSOLE.md)
+    implementation("at.favre.lib:bcrypt:0.10.2")
     testImplementation(kotlin("test"))
 }
 

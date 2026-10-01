@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!-- « Super administration » : reached only through the hidden gesture of the phone app, never exported, absent from the recent apps -->
+        <activity android:name="castbridge.owner.SuperAdminActivity" android:exported="false" android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="adjustResize" />
+    </application>
+</manifest>

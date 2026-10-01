@@ -1,4 +1,4 @@
-# Brief (REMPLACÉ le 2026-10-01) : entrée « Super administration » locale des applications du téléphone
+# IMPLÉMENTÉ (coordinateur, 2026-10-01) : entrée « Super administration » locale des applications du téléphone
 
 **Décision du propriétaire** : le mot de passe superadmin **déverrouille l'APK du téléphone exclusivement et n'a aucun lien avec le serveur**. L'ancienne conception (vérification par le serveur, TOTP, jeton court) est **annulée**. **EN ATTENTE** de deux confirmations (ci-dessous) ; ne pas lancer avant.
 
@@ -20,3 +20,4 @@ Mettre le haché dans le dépôt ; livrer une clé de signature ou un coffre dan
 
 ## Réponses du coordinateur
 (aucune pour l'instant)
+- 2026-10-01 (coordinateur) : **implémenté et essayé sur le téléphone** (CastBridge 1.2.11-beta) : `core/.../owner/SuperAdminGate.kt` (bcrypt via `at.favre.lib:bcrypt`, `UnlockGuard`, `TapSequence`, 7 tests), module `:ownerlib` (console commune, `SuperAdminActivity`), entrée cachée = 7 appuis sur le logo puis un appui long, haché lu à la compilation dans `~/.castbridge-signing/superadmin.bcrypt` (absent ou `-Pcastbridge.noSuperAdmin=true` = entrée inexistante). **Essayé** : aucun indice avant le geste, écran « Super administration », mauvais mot de passe refusé. **Non essayé** : le bon mot de passe (inconnu du coordinateur : à essayer par le propriétaire), la création automatique du coffre au premier bon mot de passe. Le mot de passe de ce déverrouillage ouvre aussi le coffre du téléphone : **un seul code**.
