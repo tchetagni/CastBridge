@@ -1,0 +1,1135 @@
+{
+ "chapter": "form3-physics-motion",
+ "lessons": [
+  {
+   "id": "form3-physics-speed-acceleration",
+   "title": "Speed, velocity and acceleration",
+   "minutes": 25,
+   "programRef": "Form 3 Physics — Speed, velocity, acceleration, motion graphs, falling bodies (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish distance from displacement and speed from velocity.",
+    "Calculate average speed and acceleration.",
+    "Interpret dot patterns (ticker tape) for steady and increasing speed."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-physics-motion-e01",
+    "form3-physics-motion-e02",
+    "form3-physics-motion-e03",
+    "form3-physics-motion-e04",
+    "form3-physics-motion-e05",
+    "form3-physics-motion-e06"
+   ],
+   "selfCheck": [
+    "form3-physics-speed-acceleration-q1",
+    "form3-physics-speed-acceleration-q2",
+    "form3-physics-speed-acceleration-q3",
+    "form3-physics-speed-acceleration-q4",
+    "form3-physics-speed-acceleration-q5"
+   ],
+   "reviewNotes": [
+    "Convention a = (v − u)/t; check whether the syllabus writes 'retardation' for deceleration.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Scalars and vectors",
+     "md": "A **scalar** has size only (distance, speed, mass, time). A **vector** has size and **direction** (displacement, velocity, force, acceleration). **Distance** is the length of the path travelled; **displacement** is the straight-line distance from start to finish in a given direction. **Speed** = distance ÷ time; **velocity** = displacement ÷ time, in a stated direction."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 240,
+        "y": 22,
+        "text": "constant speed: equal gaps",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 40,
+        "cy": 48,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 48,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 48,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 48,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 240,
+        "cy": 48,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 290,
+        "cy": 48,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 340,
+        "cy": 48,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 390,
+        "cy": 48,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 440,
+        "cy": 48,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 100,
+        "text": "speeding up: gaps get bigger",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 126,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 38,
+        "cy": 126,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 54,
+        "cy": 126,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 78,
+        "cy": 126,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 126,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 126,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 198,
+        "cy": 126,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 254,
+        "cy": 126,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 156,
+        "text": "(the time between two dots is always the same)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Dots made at equal time intervals: steady speed and increasing speed.",
+     "alt": "Two rows of dots: the top row evenly spaced, the bottom row with spacing that grows."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Acceleration",
+     "md": "**Acceleration** is the rate of change of velocity: **a = (v − u) ÷ t**, where u is the initial velocity, v the final velocity and t the time. Unit: **m/s²**. A **negative** acceleration is a **deceleration** (slowing down). Uniform acceleration means constant acceleration."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Speed and velocity are not the same: a car going round a circuit at 20 m/s has a changing velocity because its direction changes.\n- Acceleration is not speed: a body can be fast with zero acceleration.\n- Use u for the start and v for the end; do not swap them."
+    },
+    {
+     "type": "example",
+     "title": "Acceleration of a car",
+     "statement": "A car starts from rest and reaches 20 m/s in 8 s. Find its acceleration.",
+     "steps": [
+      "u = 0, v = 20 m/s, t = 8 s.",
+      "a = (20 − 0) ÷ 8 = 2.5 m/s²."
+     ],
+     "answer": "2.5 m/s²"
+    },
+    {
+     "type": "example",
+     "title": "Deceleration",
+     "statement": "A bus slows from 15 m/s to 5 m/s in 4 s. Find its acceleration.",
+     "steps": [
+      "a = (v − u) ÷ t = (5 − 15) ÷ 4.",
+      "= −2.5 m/s², a deceleration of 2.5 m/s²."
+     ],
+     "answer": "−2.5 m/s²"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-physics-motion-e01"
+    }
+   ],
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-graphs",
+   "title": "Motion graphs",
+   "minutes": 25,
+   "programRef": "Form 3 Physics — Speed, velocity, acceleration, motion graphs, falling bodies (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read distance-time and velocity-time graphs.",
+    "Find speed from a gradient and acceleration from the slope of a v-t graph.",
+    "Find distance from the area under a velocity-time graph."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-physics-motion-e07",
+    "form3-physics-motion-e08",
+    "form3-physics-motion-e09",
+    "form3-physics-motion-e10",
+    "form3-physics-motion-e11",
+    "form3-physics-motion-e12"
+   ],
+   "selfCheck": [
+    "form3-physics-motion-graphs-q1",
+    "form3-physics-motion-graphs-q2",
+    "form3-physics-motion-graphs-q3",
+    "form3-physics-motion-graphs-q4",
+    "form3-physics-motion-graphs-q5"
+   ],
+   "reviewNotes": [
+    "Graphs are drawn in the app with plain line segments; check that the syllabus expects area under the v-t graph in Form 3.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Distance-time graphs",
+     "md": "The **gradient** of a distance-time graph is the **speed**. A straight sloping line shows **constant speed**, a steeper line a higher speed, a **horizontal line** an object at rest, and a **curve** a changing speed."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 20,
+      "ymin": 0,
+      "ymax": 12,
+      "grid": 2,
+      "w": 420,
+      "h": 260,
+      "curves": [],
+      "points": [],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 5,
+        "y2": 10,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 5,
+        "y1": 10,
+        "x2": 15,
+        "y2": 10,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 15,
+        "y1": 10,
+        "x2": 20,
+        "y2": 0,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "t (s)",
+      "ylabel": "v (m/s)"
+     },
+     "caption": "A velocity-time graph: speeding up, constant speed, slowing down.",
+     "alt": "A graph of velocity (m/s) against time (s): a line rising from 0 to 10 m/s in 5 s, flat at 10 m/s until 15 s, then falling to 0 at 20 s."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Velocity-time graphs",
+     "md": "On a **velocity-time graph**: the **gradient** is the **acceleration** (a rising line is positive, a falling line negative, a flat line zero acceleration at constant velocity). The **area under the graph** is the **distance travelled**. For the graph above the area is two triangles and a rectangle."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A horizontal line is **rest** on a distance-time graph but **constant velocity** on a velocity-time graph.\n- Read the axes first: the same shape means different things on different graphs.\n- Use the scales to get the gradient: rise ÷ run with units."
+    },
+    {
+     "type": "example",
+     "title": "Acceleration and distance from the graph",
+     "statement": "Use the graph: find the acceleration in the first 5 s and the total distance travelled in 20 s.",
+     "steps": [
+      "Acceleration = gradient = (10 − 0) ÷ 5 = 2 m/s².",
+      "Area = ½ × 5 × 10 + 10 × 10 + ½ × 5 × 10 = 25 + 100 + 25 = 150 m."
+     ],
+     "answer": "2 m/s²; 150 m"
+    },
+    {
+     "type": "example",
+     "title": "Speed from a distance-time graph",
+     "statement": "A distance-time graph is a straight line from (0 s, 0 m) to (20 s, 100 m). Find the speed.",
+     "steps": [
+      "Speed = gradient = rise ÷ run.",
+      "100 ÷ 20 = 5 m/s."
+     ],
+     "answer": "5 m/s"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-physics-motion-e07"
+    }
+   ],
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-falling-bodies",
+   "title": "Uniform acceleration and falling bodies",
+   "minutes": 25,
+   "programRef": "Form 3 Physics — Speed, velocity, acceleration, motion graphs, falling bodies (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use v = u + at and s = ½(u + v)t for uniform acceleration.",
+    "State that all bodies fall with the same acceleration in the absence of air resistance (g = 10 m/s²).",
+    "Solve simple free-fall problems."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-physics-motion-e13",
+    "form3-physics-motion-e14",
+    "form3-physics-motion-e15",
+    "form3-physics-motion-e16",
+    "form3-physics-motion-e17",
+    "form3-physics-motion-e18"
+   ],
+   "selfCheck": [
+    "form3-physics-falling-bodies-q1",
+    "form3-physics-falling-bodies-q2",
+    "form3-physics-falling-bodies-q3",
+    "form3-physics-falling-bodies-q4",
+    "form3-physics-falling-bodies-q5"
+   ],
+   "reviewNotes": [
+    "g = 10 m/s² is used (rounded); s = ut + ½at² and v² = u² + 2as are left to the later course, avoiding duplication with the Form 5 pack.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Equations for uniform acceleration",
+     "md": "For constant acceleration a, starting at velocity u:\n\n**v = u + at**\n\n**s = ½(u + v) t** (distance = average velocity × time)\n\nSigns: take the direction of motion as positive. Both equations come from the velocity-time graph: the first from its gradient, the second from the area of the trapezium."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Free fall",
+     "md": "When air resistance is small, **all objects fall with the same acceleration** called the **acceleration of free fall, g**. In this course **g = 10 m/s²** (a more exact value is 9.8 m/s²). A dropped object starts with u = 0, so **v = gt**, and the distance fallen is **h = ½ g t²**. In air, a feather falls slower than a stone because of **air resistance**, not because it is lighter."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 250,
+      "bars": [
+       {
+        "label": "1 s",
+        "value": 5,
+        "color": "lightblue"
+       },
+       {
+        "label": "2 s",
+        "value": 20,
+        "color": "blue"
+       },
+       {
+        "label": "3 s",
+        "value": 45,
+        "color": "purple"
+       }
+      ]
+     },
+     "caption": "Distance fallen from rest (metres) after 1, 2 and 3 s, with g = 10 m/s².",
+     "alt": "A bar chart: 5 m after 1 s, 20 m after 2 s, 45 m after 3 s."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Distance fallen is **not** proportional to time: it grows with t², so in the second second the object falls farther than in the first.\n- Weight does not change the acceleration of free fall in a vacuum.\n- Remember u = 0 for 'dropped from rest', but not for 'thrown downward'."
+    },
+    {
+     "type": "example",
+     "title": "Dropped from a height",
+     "statement": "A stone is dropped from a bridge 20 m above a river (g = 10 m/s²). Find the time to reach the water and the speed on impact.",
+     "steps": [
+      "h = ½ g t², so 20 = 5 t² and t² = 4, t = 2 s.",
+      "v = g t = 10 × 2 = 20 m/s."
+     ],
+     "answer": "2 s; 20 m/s"
+    },
+    {
+     "type": "example",
+     "title": "Braking",
+     "statement": "A car moving at 24 m/s brakes uniformly to rest in 6 s. Find the braking distance.",
+     "steps": [
+      "s = ½(u + v)t = ½ × (24 + 0) × 6.",
+      "= 72 m."
+     ],
+     "answer": "72 m"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-physics-motion-e13"
+    }
+   ],
+   "chapter": "form3-physics-motion"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-physics-motion-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-speed-acceleration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cyclist travels 1200 m in 4 minutes. Find the average speed in m/s.",
+   "answer": 5,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "4 min = 240 s; 1200 ÷ 240 = 5 m/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-speed-acceleration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A motorbike speeds up from 4 m/s to 16 m/s in 6 s. Find its acceleration in m/s².",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "m/s²",
+   "explanation": "(16 − 4) ÷ 6 = 2 m/s².",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-physics-speed-acceleration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is a vector?",
+   "choices": [
+    "mass",
+    "velocity",
+    "time",
+    "speed"
+   ],
+   "answer": 1,
+   "explanation": "Velocity has direction.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-speed-acceleration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A train slows from 30 m/s to rest in 20 s. What is its acceleration (m/s²)?",
+   "answer": -1.5,
+   "tolerance": 0.01,
+   "unit": "m/s²",
+   "explanation": "(0 − 30) ÷ 20 = −1.5 m/s².",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-speed-acceleration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A runner completes one lap of a 400 m track in 80 s. State her average speed and her average velocity over the lap, and explain the difference.",
+   "model": "Average speed = 400 ÷ 80 = 5 m/s. Her displacement over one full lap is zero so the average velocity is 0 m/s; speed uses the distance covered, velocity uses displacement.",
+   "rubric": [
+    "1 mark: speed 5 m/s",
+    "1 mark: velocity 0 m/s",
+    "1 mark: reason (displacement zero)"
+   ],
+   "explanation": "Average speed = 400 ÷ 80 = 5 m/s. Her displacement over one full lap is zero so the average velocity is 0 m/s; speed uses the distance covered, velocity uses displacement.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-physics-speed-acceleration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A car moves off from rest with uniform acceleration 3 m/s² for 6 s, then travels at constant velocity for 10 s.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Velocity reached after 6 s (m/s).",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "v = u + at = 0 + 3 × 6 = 18 m/s.",
+     "unit": "m/s",
+     "id": "form3-physics-motion-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Distance travelled in the 10 s at constant velocity (m).",
+     "answer": 180,
+     "tolerance": 0,
+     "explanation": "18 × 10 = 180 m.",
+     "unit": "m",
+     "id": "form3-physics-motion-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Acceleration during the constant-velocity stage (m/s²).",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "Velocity does not change so a = 0.",
+     "unit": "m/s²",
+     "id": "form3-physics-motion-e06-c"
+    }
+   ],
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-speed-acceleration-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-speed-acceleration",
+   "prompt": "The unit of acceleration is:",
+   "choices": [
+    "m",
+    "m/s²",
+    "m/s",
+    "N"
+   ],
+   "answer": 1,
+   "explanation": "Change of velocity per second.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-speed-acceleration-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-speed-acceleration",
+   "prompt": "A negative acceleration means the object is:",
+   "choices": [
+    "slowing down",
+    "turning",
+    "speeding up",
+    "at rest always"
+   ],
+   "answer": 0,
+   "explanation": "Deceleration.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-speed-acceleration-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-speed-acceleration",
+   "prompt": "Velocity differs from speed because velocity has:",
+   "choices": [
+    "less time",
+    "direction",
+    "more mass",
+    "no unit"
+   ],
+   "answer": 1,
+   "explanation": "It is a vector.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-speed-acceleration-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-speed-acceleration",
+   "prompt": "Acceleration is calculated from:",
+   "choices": [
+    "v × t",
+    "(v − u) ÷ t",
+    "u ÷ t",
+    "(v + u) × t"
+   ],
+   "answer": 1,
+   "explanation": "Change in velocity over time.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-speed-acceleration-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-speed-acceleration",
+   "prompt": "Dots on a ticker tape that get further apart show:",
+   "choices": [
+    "slowing down",
+    "speeding up",
+    "rest",
+    "constant speed"
+   ],
+   "answer": 1,
+   "explanation": "More distance in the same time.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-physics-motion-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A horizontal line on a velocity-time graph at 8 m/s shows:",
+   "choices": [
+    "rest",
+    "deceleration",
+    "constant acceleration",
+    "constant velocity"
+   ],
+   "answer": 3,
+   "explanation": "Velocity does not change.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-motion-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "On a velocity-time graph a line rises from 0 to 12 m/s in 4 s. Find the acceleration in m/s².",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "m/s²",
+   "explanation": "12 ÷ 4 = 3 m/s².",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-motion-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A body moves at a steady 6 m/s for 10 s. Find the distance, as the area under its v-t graph.",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "6 × 10 = 60 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-motion-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "On a distance-time graph a line that gets steeper means that the object is:",
+   "choices": [
+    "at rest",
+    "slowing down",
+    "speeding up",
+    "returning"
+   ],
+   "answer": 2,
+   "explanation": "The gradient (speed) increases.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-motion-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A v-t graph is a triangle with base 8 s and height 10 m/s. Find the distance travelled.",
+   "answer": 40,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "½ × 8 × 10 = 40 m.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-physics-motion-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A train starts from rest and accelerates uniformly to 20 m/s in 10 s. It then travels at 20 m/s for 30 s and brakes uniformly to a stop in 10 s.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Acceleration in the first 10 s (m/s²).",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "20 ÷ 10 = 2 m/s².",
+     "unit": "m/s²",
+     "id": "form3-physics-motion-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total distance travelled (m). Use area: two triangles and a rectangle.",
+     "answer": 800,
+     "tolerance": 0,
+     "explanation": "½ × 10 × 20 + 30 × 20 + ½ × 10 × 20 = 100 + 600 + 100 = 800 m.",
+     "unit": "m",
+     "id": "form3-physics-motion-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Average speed for the whole 50 s (m/s).",
+     "answer": 16,
+     "tolerance": 0,
+     "explanation": "800 ÷ 50 = 16 m/s.",
+     "unit": "m/s",
+     "id": "form3-physics-motion-e12-c"
+    }
+   ],
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-graphs-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-motion-graphs",
+   "prompt": "The area under a velocity-time graph gives the:",
+   "choices": [
+    "mass",
+    "speed",
+    "acceleration",
+    "distance travelled"
+   ],
+   "answer": 3,
+   "explanation": "Area = distance.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-graphs-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-motion-graphs",
+   "prompt": "The gradient of a distance-time graph gives the:",
+   "choices": [
+    "speed",
+    "acceleration",
+    "force",
+    "distance"
+   ],
+   "answer": 0,
+   "explanation": "Slope = speed.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-graphs-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-motion-graphs",
+   "prompt": "A flat line on a distance-time graph means the object is:",
+   "choices": [
+    "at rest",
+    "falling",
+    "moving at constant speed",
+    "accelerating"
+   ],
+   "answer": 0,
+   "explanation": "Distance stays the same.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-graphs-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-motion-graphs",
+   "prompt": "A falling line on a velocity-time graph shows:",
+   "choices": [
+    "acceleration",
+    "deceleration",
+    "constant velocity",
+    "rest"
+   ],
+   "answer": 1,
+   "explanation": "Velocity decreases.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-graphs-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-motion-graphs",
+   "prompt": "A triangle on a v-t graph has an area equal to:",
+   "choices": [
+    "base × height",
+    "base ÷ height",
+    "½ × base × height",
+    "base + height"
+   ],
+   "answer": 2,
+   "explanation": "Triangle area.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-falling-bodies",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ball is dropped from rest. What is its velocity after 3 s? (g = 10 m/s²)",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "v = gt = 10 × 3 = 30 m/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-falling-bodies",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A car accelerates from 5 m/s with a = 2 m/s² for 4 s. Find the final velocity.",
+   "answer": 13,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "v = u + at = 5 + 8 = 13 m/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-physics-falling-bodies",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a vacuum a coin and a feather fall:",
+   "choices": [
+    "the coin faster",
+    "the feather faster",
+    "with the same acceleration",
+    "not at all"
+   ],
+   "answer": 2,
+   "explanation": "Free fall acceleration is the same for all bodies.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-falling-bodies",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How far does a stone fall from rest in 2 s? (g = 10 m/s²)",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "h = ½ × 10 × 4 = 20 m.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-falling-bodies",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bus travelling at 12 m/s brakes to rest uniformly in 5 s. Find the braking distance.",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "s = ½ × (12 + 0) × 5 = 30 m.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-motion-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-physics-falling-bodies",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A mango falls from a branch 5 m above the ground (g = 10 m/s², ignore air resistance).",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Time to reach the ground (s).",
+     "answer": 1,
+     "tolerance": 0.01,
+     "explanation": "5 = 5 t², t = 1 s.",
+     "unit": "s",
+     "id": "form3-physics-motion-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Speed just before it hits the ground (m/s).",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "v = gt = 10 m/s.",
+     "unit": "m/s",
+     "id": "form3-physics-motion-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why would a light leaf take longer to fall than the mango from the same branch?",
+     "model": "Air resistance affects the light, broad leaf much more, so it accelerates less; without air all would fall together.",
+     "rubric": [
+      "1 mark: air resistance",
+      "1 mark: bigger effect on a light/broad leaf"
+     ],
+     "explanation": "Air resistance affects the light, broad leaf much more, so it accelerates less; without air all would fall together.",
+     "id": "form3-physics-motion-e18-c"
+    }
+   ],
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-falling-bodies-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-falling-bodies",
+   "prompt": "The acceleration of free fall used in this course is:",
+   "choices": [
+    "1 m/s²",
+    "0 m/s²",
+    "10 m/s²",
+    "100 m/s²"
+   ],
+   "answer": 2,
+   "explanation": "g = 10 m/s².",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-falling-bodies-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-falling-bodies",
+   "prompt": "A stone dropped from rest has velocity after 2 s of:",
+   "choices": [
+    "10 m/s",
+    "40 m/s",
+    "5 m/s",
+    "20 m/s"
+   ],
+   "answer": 3,
+   "explanation": "v = gt.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-falling-bodies-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-falling-bodies",
+   "prompt": "The equation v = u + at is correct for:",
+   "choices": [
+    "any motion",
+    "constant acceleration",
+    "objects at rest only",
+    "motion in circles only"
+   ],
+   "answer": 1,
+   "explanation": "It assumes uniform acceleration.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-falling-bodies-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-falling-bodies",
+   "prompt": "A feather falls slower than a stone in air mainly because of:",
+   "choices": [
+    "its colour",
+    "gravity being weaker",
+    "its smell",
+    "air resistance"
+   ],
+   "answer": 3,
+   "explanation": "Air drag.",
+   "chapter": "form3-physics-motion"
+  },
+  {
+   "id": "form3-physics-falling-bodies-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-falling-bodies",
+   "prompt": "Distance fallen from rest is proportional to:",
+   "choices": [
+    "time squared",
+    "mass",
+    "time",
+    "speed only"
+   ],
+   "answer": 0,
+   "explanation": "h = ½gt².",
+   "chapter": "form3-physics-motion"
+  }
+ ]
+}

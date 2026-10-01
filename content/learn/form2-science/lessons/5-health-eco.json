@@ -1,0 +1,935 @@
+{
+ "chapter": "form2-science-health-eco",
+ "lessons": [
+  {
+   "id": "form2-science-disease",
+   "title": "Diseases and how to prevent them",
+   "minutes": 25,
+   "programRef": "Form 2 Basic Science — Disease prevention and ecosystems (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name types of germs and ways diseases spread.",
+    "Describe malaria, its spread and prevention.",
+    "Explain how hygiene and vaccination protect health."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-science-health-eco-e01",
+    "form2-science-health-eco-e02",
+    "form2-science-health-eco-e03",
+    "form2-science-health-eco-e04",
+    "form2-science-health-eco-e05",
+    "form2-science-health-eco-e06"
+   ],
+   "selfCheck": [
+    "form2-science-disease-q1",
+    "form2-science-disease-q2",
+    "form2-science-disease-q3",
+    "form2-science-disease-q4",
+    "form2-science-disease-q5"
+   ],
+   "reviewNotes": [
+    "All health content is conservative and general; to be reviewed by a health worker. Check the names of national vaccination programme and advice on fever treatment.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Germs and disease",
+     "md": "**Pathogens** are germs that cause disease: **bacteria** (cholera, typhoid, tuberculosis), **viruses** (influenza, measles, polio), **protozoa** (malaria) and **fungi** (ringworm). They spread through **air**, **unsafe water and food**, **contact**, and **vectors** (animals such as mosquitoes). Antibiotics work on bacteria, **not on viruses**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 39.0,
+        "w": 101.5,
+        "h": 48,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 60.75,
+        "y": 60.0,
+        "text": "Mosquito bites",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60.75,
+        "y": 74.0,
+        "text": "a sick person",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 114.5,
+        "y1": 63.0,
+        "x2": 126.5,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 129.5,
+        "y": 39.0,
+        "w": 101.5,
+        "h": 48,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 180.25,
+        "y": 60.0,
+        "text": "Parasite grows",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180.25,
+        "y": 74.0,
+        "text": "in mosquito",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 234.0,
+        "y1": 63.0,
+        "x2": 246.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 249.0,
+        "y": 39.0,
+        "w": 101.5,
+        "h": 48,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 299.75,
+        "y": 60.0,
+        "text": "Mosquito bites",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 299.75,
+        "y": 74.0,
+        "text": "another person",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 353.5,
+        "y1": 63.0,
+        "x2": 365.5,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 368.5,
+        "y": 39.0,
+        "w": 101.5,
+        "h": 48,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 419.25,
+        "y": 60.0,
+        "text": "That person",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 419.25,
+        "y": 74.0,
+        "text": "may fall ill",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "How malaria is passed on.",
+     "alt": "Four boxes joined by arrows: a mosquito bites a sick person, the parasite grows in the mosquito, the mosquito bites another person, and that person may fall ill."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Malaria",
+     "md": "**Malaria** is caused by a parasite (*Plasmodium*) spread by the bite of the **female *Anopheles* mosquito**. Symptoms include fever, shivering and headache. Prevention: sleep under an **insecticide-treated net**, remove standing water, clear bush around homes, use window screens. **Anyone with fever should go to a health centre for a test and proper treatment**; do not self-treat with leftover drugs."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Other diseases and protection",
+     "md": "**Cholera and typhoid** spread through contaminated water and food: drink safe water, wash hands with soap, cook food well and use latrines. **Vaccination** (immunisation) teaches the body to defend itself against a disease before it meets it; children should receive the vaccines recommended by the national programme at health centres."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Malaria is not caused by drinking dirty water or by eating oily food: it is carried by mosquitoes.\n- Antibiotics do not cure colds or flu, which are caused by viruses.\n- Vaccines do not cause the disease they protect against."
+    },
+    {
+     "type": "example",
+     "title": "Break the chain",
+     "statement": "Name two actions that stop a household from catching malaria.",
+     "steps": [
+      "Stop mosquitoes biting: sleep under a treated net.",
+      "Stop them breeding: empty containers holding stagnant water."
+     ],
+     "answer": "Use a treated net and remove standing water."
+    },
+    {
+     "type": "example",
+     "title": "Which germ?",
+     "statement": "A child has watery diarrhoea after drinking unsafe well water. Which type of disease is this likely to be, and what should the family do first?",
+     "steps": [
+      "Water-borne diseases such as cholera are caused by bacteria in unsafe water.",
+      "The child must take fluids and be taken to a health centre quickly."
+     ],
+     "answer": "A water-borne disease; give fluids and get medical help."
+    },
+    {
+     "type": "exercise",
+     "ref": "form2-science-health-eco-e01"
+    }
+   ],
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-ecosystems",
+   "title": "Ecosystems and food chains",
+   "minutes": 25,
+   "programRef": "Form 2 Basic Science — Disease prevention and ecosystems (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define habitat, population, community and ecosystem.",
+    "Draw food chains and name producers, consumers and decomposers.",
+    "Describe human effects on the environment and conservation."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-science-health-eco-e07",
+    "form2-science-health-eco-e08",
+    "form2-science-health-eco-e09",
+    "form2-science-health-eco-e10",
+    "form2-science-health-eco-e11",
+    "form2-science-health-eco-e12"
+   ],
+   "selfCheck": [
+    "form2-science-ecosystems-q1",
+    "form2-science-ecosystems-q2",
+    "form2-science-ecosystems-q3",
+    "form2-science-ecosystems-q4",
+    "form2-science-ecosystems-q5"
+   ],
+   "reviewNotes": [
+    "Protected areas named (Korup, Waza) are real national parks; wording to be checked. Energy loss along chains stated qualitatively (no percentage).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Habitats and ecosystems",
+     "md": "A **habitat** is the place where an organism lives (a pond, a forest floor). All the members of one kind in a habitat form a **population**; all the populations together form a **community**. A community with its non-living surroundings (soil, water, light, temperature) is an **ecosystem**, for example a rainforest or a savannah."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 43.0,
+        "w": 98.5,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 59.25,
+        "y": 60.0,
+        "text": "Maize",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 59.25,
+        "y": 74.0,
+        "text": "plant",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 111.5,
+        "y1": 63.0,
+        "x2": 127.5,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 130.5,
+        "y": 43.0,
+        "w": 98.5,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 179.75,
+        "y": 67.0,
+        "text": "Grasshopper",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 232.0,
+        "y1": 63.0,
+        "x2": 248.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 251.0,
+        "y": 43.0,
+        "w": 98.5,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 300.25,
+        "y": 67.0,
+        "text": "Chicken",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 352.5,
+        "y1": 63.0,
+        "x2": 368.5,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 371.5,
+        "y": 43.0,
+        "w": 98.5,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 420.75,
+        "y": 67.0,
+        "text": "Human",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A food chain: arrows show the direction of energy flow.",
+     "alt": "Four boxes joined by arrows: maize, grasshopper, chicken, human."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Food chains",
+     "md": "A **food chain** shows who eats whom; the arrow means 'is eaten by' and shows the flow of energy. **Producers** (green plants) make food using sunlight. **Consumers** eat other organisms: **herbivores** (primary consumers), **carnivores** (secondary or tertiary consumers) and **omnivores**. **Decomposers** (bacteria, fungi) break down dead matter and return nutrients to the soil. Many chains join into a **food web**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "People and the environment",
+     "md": "Cutting forests, burning bush, overfishing, hunting and pollution can destroy habitats and reduce the number of species. **Conservation** protects them: protected areas such as Korup (rainforest) and Waza (savannah), replanting trees, fishing rules and cleaning rivers. Energy is lost at each step of a chain, so food chains are short."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The arrow points to the animal that **eats**, not the one that is eaten.\n- A food chain always starts with a **producer**, not an animal.\n- Decomposers are not 'waste': they recycle nutrients."
+    },
+    {
+     "type": "example",
+     "title": "Name the roles",
+     "statement": "In the chain grass → goat → human, name the producer, the primary consumer and the top consumer.",
+     "steps": [
+      "Grass makes food by photosynthesis: producer.",
+      "The goat eats grass: primary consumer. The human eats the goat: top consumer."
+     ],
+     "answer": "Producer: grass; primary consumer: goat; top consumer: human."
+    },
+    {
+     "type": "example",
+     "title": "What if the producers disappear?",
+     "statement": "Drought kills most of the grass in a grazing area. Predict the effect on goats and humans in the chain grass → goat → human.",
+     "steps": [
+      "Goats have less food, so their number falls.",
+      "Humans then have fewer goats to eat."
+     ],
+     "answer": "Fewer goats and less food for humans."
+    },
+    {
+     "type": "exercise",
+     "ref": "form2-science-health-eco-e07"
+    }
+   ],
+   "chapter": "form2-science-health-eco"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form2-science-health-eco-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-science-disease",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Malaria is spread by:",
+   "choices": [
+    "dirty water only",
+    "female Anopheles mosquitoes",
+    "cold weather",
+    "houseflies"
+   ],
+   "answer": 1,
+   "explanation": "The vector is the female Anopheles mosquito.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form2-science-disease",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each disease with how it is mainly spread.",
+   "pairs": [
+    [
+     "malaria",
+     "mosquito bite"
+    ],
+    [
+     "cholera",
+     "contaminated water or food"
+    ],
+    [
+     "measles",
+     "droplets in the air"
+    ],
+    [
+     "ringworm",
+     "contact with an infected person or surface"
+    ]
+   ],
+   "explanation": "Standard routes.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-science-disease",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Antibiotics are the right treatment for the common cold.",
+   "answer": false,
+   "explanation": "Colds are caused by viruses.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form2-science-disease",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A mosquito net protects a sleeper because it:",
+   "choices": [
+    "stops mosquitoes biting at night",
+    "stops all diseases",
+    "cools the room",
+    "kills the parasite in the blood"
+   ],
+   "answer": 0,
+   "explanation": "It is a physical barrier (treated nets also kill).",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-science-disease",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe three ways a family can prevent cholera.",
+   "model": "Drink safe water (boiled or treated); wash hands with soap before eating and after the toilet; cook food well and cover it; use a latrine (any three).",
+   "rubric": [
+    "1 mark each, maximum 3"
+   ],
+   "explanation": "Drink safe water (boiled or treated); wash hands with soap before eating and after the toilet; cook food well and cover it; use a latrine (any three).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-science-disease",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a town the rainy season brings many puddles and a rise in fever cases.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why do more mosquitoes appear?",
+     "choices": [
+      "they breed in standing water",
+      "they follow cars",
+      "rain makes them hungry",
+      "they come from the sea"
+     ],
+     "answer": 0,
+     "explanation": "Larvae need still water.",
+     "id": "form2-science-health-eco-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which action helps most?",
+     "choices": [
+      "close all windows only",
+      "boil the rain",
+      "avoid walking",
+      "empty or cover containers that hold water"
+     ],
+     "answer": 3,
+     "explanation": "It removes breeding sites.",
+     "id": "form2-science-health-eco-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "What should a person with a fever do?",
+     "model": "Go to a health centre for a test and correct treatment and rest; do not self-medicate.",
+     "rubric": [
+      "1 mark: seek medical care",
+      "1 mark: avoid self-medication"
+     ],
+     "explanation": "Go to a health centre for a test and correct treatment and rest; do not self-medicate.",
+     "id": "form2-science-health-eco-e06-c"
+    }
+   ],
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-disease-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-disease",
+   "prompt": "Pathogens are:",
+   "choices": [
+    "kinds of rock",
+    "parts of a plant",
+    "types of food",
+    "germs that cause disease"
+   ],
+   "answer": 3,
+   "explanation": "Bacteria and viruses are examples.",
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-disease-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-disease",
+   "prompt": "The parasite that causes malaria is carried by a:",
+   "choices": [
+    "snail",
+    "housefly",
+    "mosquito",
+    "frog"
+   ],
+   "answer": 2,
+   "explanation": "A vector.",
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-disease-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-disease",
+   "prompt": "Vaccination helps by:",
+   "choices": [
+    "cleaning the water",
+    "making the body fat",
+    "preparing the body to fight a disease",
+    "curing every disease"
+   ],
+   "answer": 2,
+   "explanation": "It stimulates defences.",
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-disease-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-disease",
+   "prompt": "Which action helps prevent typhoid?",
+   "choices": [
+    "washing hands with soap",
+    "sleeping late",
+    "eating more salt",
+    "wearing dark clothes"
+   ],
+   "answer": 0,
+   "explanation": "Hygiene stops spread.",
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-disease-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-disease",
+   "prompt": "Standing water around a house encourages:",
+   "choices": [
+    "rusting",
+    "soil erosion",
+    "mosquito breeding",
+    "tooth decay"
+   ],
+   "answer": 2,
+   "explanation": "Larvae grow in still water.",
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-science-ecosystems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The organisms that make food from sunlight are:",
+   "choices": [
+    "carnivores",
+    "producers",
+    "decomposers",
+    "consumers"
+   ],
+   "answer": 1,
+   "explanation": "Green plants.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form2-science-ecosystems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each term with its meaning.",
+   "pairs": [
+    [
+     "habitat",
+     "where an organism lives"
+    ],
+    [
+     "producer",
+     "makes its own food"
+    ],
+    [
+     "decomposer",
+     "breaks down dead matter"
+    ],
+    [
+     "herbivore",
+     "eats only plants"
+    ]
+   ],
+   "explanation": "Standard definitions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-science-ecosystems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A food chain starts with an animal.",
+   "answer": false,
+   "explanation": "It starts with a producer, a green plant.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form2-science-ecosystems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the chain algae → tilapia → heron, the tilapia is the:",
+   "choices": [
+    "producer",
+    "top predator only",
+    "primary consumer",
+    "decomposer"
+   ],
+   "answer": 2,
+   "explanation": "It eats the producer.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-science-ecosystems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why deforestation can reduce the number of animal species in an area.",
+   "model": "Trees provide food and shelter; when they are cut the animals lose their habitat and food and may die or move away.",
+   "rubric": [
+    "1 mark: loss of habitat",
+    "1 mark: loss of food/shelter"
+   ],
+   "explanation": "Trees provide food and shelter; when they are cut the animals lose their habitat and food and may die or move away.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-health-eco-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-science-ecosystems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Food chain in a pond: algae → tadpole → fish → heron.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The producer is:",
+     "choices": [
+      "fish",
+      "algae",
+      "tadpole",
+      "heron"
+     ],
+     "answer": 1,
+     "explanation": "It photosynthesises.",
+     "id": "form2-science-health-eco-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "How many consumers are there?",
+     "choices": [
+      "4",
+      "3",
+      "2",
+      "1"
+     ],
+     "answer": 1,
+     "explanation": "Tadpole, fish and heron.",
+     "id": "form2-science-health-eco-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "If all the fish die, what happens to the number of tadpoles and herons? Explain.",
+     "model": "The tadpoles increase for a while because there are fewer predators, while the herons decrease because they lose their food.",
+     "rubric": [
+      "1 mark: tadpoles increase",
+      "1 mark: herons decrease"
+     ],
+     "explanation": "The tadpoles increase for a while because there are fewer predators, while the herons decrease because they lose their food.",
+     "id": "form2-science-health-eco-e12-c"
+    }
+   ],
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-ecosystems-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-ecosystems",
+   "prompt": "Decomposers include:",
+   "choices": [
+    "grasses",
+    "birds",
+    "lions",
+    "bacteria and fungi"
+   ],
+   "answer": 3,
+   "explanation": "They break down dead remains.",
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-ecosystems-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-ecosystems",
+   "prompt": "The arrow in a food chain shows:",
+   "choices": [
+    "the colour of food",
+    "the age of animals",
+    "the way an animal walks",
+    "the flow of energy"
+   ],
+   "answer": 3,
+   "explanation": "Energy moves up the chain.",
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-ecosystems-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-ecosystems",
+   "prompt": "An animal that eats only plants is a:",
+   "choices": [
+    "herbivore",
+    "omnivore",
+    "decomposer",
+    "carnivore"
+   ],
+   "answer": 0,
+   "explanation": "Herb = plant.",
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-ecosystems-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-ecosystems",
+   "prompt": "A community together with its surroundings forms an:",
+   "choices": [
+    "organ",
+    "ecosystem",
+    "market",
+    "atom"
+   ],
+   "answer": 1,
+   "explanation": "Living and non-living parts.",
+   "chapter": "form2-science-health-eco"
+  },
+  {
+   "id": "form2-science-ecosystems-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-ecosystems",
+   "prompt": "Which action helps conservation?",
+   "choices": [
+    "bush burning",
+    "dumping rubbish",
+    "replanting trees",
+    "overfishing"
+   ],
+   "answer": 2,
+   "explanation": "It rebuilds habitats.",
+   "chapter": "form2-science-health-eco"
+  }
+ ]
+}

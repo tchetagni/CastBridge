@@ -1,0 +1,911 @@
+{
+ "chapter": "form4-chemistry-mole",
+ "lessons": [
+  {
+   "id": "form4-chemistry-mole-basics",
+   "title": "Relative masses and the mole",
+   "minutes": 30,
+   "programRef": "Form 4 Chemistry — Relative masses, the mole, reacting masses and volumes (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate relative formula masses.",
+    "Use n = m ÷ M to convert between mass and amount in moles.",
+    "Calculate percentage composition and find an empirical formula."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-chemistry-mole-e01",
+    "form4-chemistry-mole-e02",
+    "form4-chemistry-mole-e03",
+    "form4-chemistry-mole-e04",
+    "form4-chemistry-mole-e05",
+    "form4-chemistry-mole-e06"
+   ],
+   "selfCheck": [
+    "form4-chemistry-mole-basics-q1",
+    "form4-chemistry-mole-basics-q2",
+    "form4-chemistry-mole-basics-q3",
+    "form4-chemistry-mole-basics-q4",
+    "form4-chemistry-mole-basics-q5"
+   ],
+   "reviewNotes": [
+    "A_r values are the usual school ones (Cl = 35.5, Cu = 64). The Avogadro constant is given as 6.0 × 10²³ for calculations; check if 6.02 is expected.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Relative masses and the mole",
+     "md": "Relative atomic masses (A_r): H 1, C 12, N 14, O 16, Na 23, Mg 24, Al 27, S 32, Cl 35.5, K 39, Ca 40, Fe 56, Cu 64, Zn 65. The **relative formula mass (M_r)** is the sum of the A_r values: M_r(H₂SO₄) = 2 + 32 + 64 = **98**. The **mole** is the amount of substance containing **6.0 × 10²³** particles (the Avogadro constant, more exactly 6.02 × 10²³). The **molar mass M** is the mass of one mole in **g/mol** and equals the M_r (or A_r) in grams."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         20,
+         110,
+         160,
+         290,
+         160
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 155,
+        "y1": 90,
+        "x2": 245,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 90,
+        "x2": 200,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 70,
+        "text": "m",
+        "size": 20,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 135,
+        "text": "n",
+        "size": 20,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 242,
+        "y": 135,
+        "text": "M",
+        "size": 20,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 188,
+        "text": "m = n × M     n = m ÷ M     M = m ÷ n",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 208,
+        "text": "m: mass in g,  n: moles,  M: molar mass in g/mol",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The mole triangle: cover the quantity you want.",
+     "alt": "A triangle divided into three parts with m at the top and n and M at the bottom, with the three formulae m = n × M, n = m ÷ M and M = m ÷ n."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Calculations",
+     "md": "**n = m ÷ M**, **m = n × M**; number of particles = **n × 6.0 × 10²³**. **Percentage by mass of an element** = (A_r × number of atoms ÷ M_r) × 100. **Empirical formula** (simplest ratio of atoms): (1) write the masses or percentages; (2) divide each by its A_r; (3) divide by the smallest; (4) round to whole numbers. Example: 2.4 g Mg and 1.6 g O → 0.1 mol and 0.1 mol → ratio 1 : 1 → **MgO**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Use the **M_r of the whole formula**: for CaCO₃ it is 40 + 12 + 48 = 100.\n- A bracket multiplies: M_r of Ca(OH)₂ is 40 + 2 × (16 + 1) = 74.\n- The empirical formula is a ratio, not the true number of atoms: the molecular formula may be a multiple of it (CH₂ for C₂H₄)."
+    },
+    {
+     "type": "example",
+     "title": "Moles in a mass",
+     "statement": "How many moles are in 4.9 g of sulphuric acid, H₂SO₄ (M = 98 g/mol)?",
+     "steps": [
+      "n = m ÷ M.",
+      "4.9 ÷ 98 = 0.05 mol."
+     ],
+     "answer": "0.05 mol"
+    },
+    {
+     "type": "example",
+     "title": "Percentage of nitrogen",
+     "statement": "Find the percentage of nitrogen in ammonium nitrate, NH₄NO₃ (M_r = 80).",
+     "steps": [
+      "There are 2 N atoms: 2 × 14 = 28.",
+      "28 ÷ 80 × 100 = 35 %."
+     ],
+     "answer": "35 %"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-chemistry-mole-e01"
+    }
+   ],
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-reacting-quantities",
+   "title": "Reacting masses, gas volumes and concentration",
+   "minutes": 35,
+   "programRef": "Form 4 Chemistry — Relative masses, the mole, reacting masses and volumes (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use balanced equations to calculate reacting masses and gas volumes.",
+    "Calculate concentration and carry out a titration calculation.",
+    "Calculate percentage yield."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-chemistry-mole-e07",
+    "form4-chemistry-mole-e08",
+    "form4-chemistry-mole-e09",
+    "form4-chemistry-mole-e10",
+    "form4-chemistry-mole-e11",
+    "form4-chemistry-mole-e12"
+   ],
+   "selfCheck": [
+    "form4-chemistry-reacting-quantities-q1",
+    "form4-chemistry-reacting-quantities-q2",
+    "form4-chemistry-reacting-quantities-q3",
+    "form4-chemistry-reacting-quantities-q4",
+    "form4-chemistry-reacting-quantities-q5"
+   ],
+   "reviewNotes": [
+    "Molar volume 24 dm³/mol at r.t.p. (some syllabuses use 22.4 dm³ at s.t.p.); check which one the syllabus uses. All numerical answers were recomputed in the generator with assertions.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mass and volume calculations",
+     "md": "1. Write the **balanced equation**.\n2. Convert the known mass to **moles** (n = m ÷ M).\n3. Use the **mole ratio** from the equation.\n4. Convert the moles of the wanted substance to **mass** (n × M) or **gas volume** (n × 24 dm³ at room temperature and pressure; the molar volume of a gas is **24 dm³/mol** at r.t.p.)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Concentration and titration",
+     "md": "**Concentration (mol/dm³) c = n ÷ V** (V in dm³; 1 dm³ = 1000 cm³), so **n = c × V**. Concentration in g/dm³ = c × M. In a **titration** a **burette** adds acid to a measured volume of alkali in a flask with an indicator until it just changes colour (the **end-point**, read to 0.05 cm³); repeat until two results agree within 0.10 cm³ (**concordant**)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 305,
+      "items": [
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 10,
+        "w": 20,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 20,
+        "x2": 150,
+        "y2": 20,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 36,
+        "x2": 150,
+        "y2": 36,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 52,
+        "x2": 150,
+        "y2": 52,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 68,
+        "x2": 150,
+        "y2": 68,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 84,
+        "x2": 150,
+        "y2": 84,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 100,
+        "x2": 150,
+        "y2": 100,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 116,
+        "x2": 150,
+        "y2": 116,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 132,
+        "x2": 150,
+        "y2": 132,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 148,
+        "x2": 150,
+        "y2": 148,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 141,
+        "y": 20,
+        "w": 18,
+        "h": 60,
+        "stroke": "none",
+        "width": 0,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 136,
+        "y": 162,
+        "w": 28,
+        "h": 8,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "grey"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 170,
+        "x2": 150,
+        "y2": 190,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 250,
+        "w": 120,
+        "h": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         135,
+         205,
+         135,
+         220,
+         110,
+         250,
+         190,
+         250,
+         165,
+         220,
+         165,
+         205
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": false
+       },
+       {
+        "t": "poly",
+        "pts": [
+         122,
+         235,
+         110,
+         250,
+         190,
+         250,
+         178,
+         235
+        ],
+        "stroke": "ink",
+        "width": 1.5,
+        "closed": true,
+        "fill": "lightorange"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 40,
+        "x2": 250,
+        "y2": 30,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 254,
+        "y": 34,
+        "text": "burette (acid)",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 165,
+        "y1": 235,
+        "x2": 250,
+        "y2": 230,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 254,
+        "y": 234,
+        "text": "conical flask: alkali + indicator",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 253,
+        "x2": 250,
+        "y2": 268,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 254,
+        "y": 272,
+        "text": "white tile",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 292,
+        "text": "start reading 0.0 cm³, end reading 20.0 cm³",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A titration set-up.",
+     "alt": "A burette of acid above a conical flask containing alkali and indicator standing on a white tile, with the note start reading 0.0 cm³ and end reading 20.0 cm³."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Percentage yield",
+     "md": "**Percentage yield = (actual mass obtained ÷ theoretical mass) × 100**. The yield is below 100 % because of incomplete reactions, losses when filtering and transferring and side reactions."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Convert cm³ to dm³ **before** using c = n ÷ V: 25 cm³ = 0.025 dm³.\n- Use the **mole ratio**, not the mass ratio, from the equation.\n- Use 24 dm³/mol only for gases at room temperature and pressure."
+    },
+    {
+     "type": "example",
+     "title": "Reacting mass",
+     "statement": "4.8 g of magnesium burns completely in oxygen. Find the mass of magnesium oxide formed (2Mg + O₂ → 2MgO; A_r: Mg 24, O 16).",
+     "steps": [
+      "n(Mg) = 4.8 ÷ 24 = 0.20 mol; ratio Mg : MgO = 1 : 1, so 0.20 mol MgO.",
+      "m = 0.20 × 40 = 8.0 g."
+     ],
+     "answer": "8.0 g"
+    },
+    {
+     "type": "example",
+     "title": "Titration",
+     "statement": "25.0 cm³ of 0.100 mol/dm³ NaOH needs 20.0 cm³ of HCl for neutralisation. Find the concentration of the acid (NaOH + HCl → NaCl + H₂O).",
+     "steps": [
+      "n(NaOH) = 0.100 × 0.0250 = 0.00250 mol = n(HCl) (1 : 1).",
+      "c(HCl) = 0.00250 ÷ 0.0200 = 0.125 mol/dm³."
+     ],
+     "answer": "0.125 mol/dm³"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-chemistry-mole-e07"
+    }
+   ],
+   "chapter": "form4-chemistry-mole"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-chemistry-mole-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-chemistry-mole-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the relative formula mass of calcium carbonate, CaCO₃.",
+   "answer": 100,
+   "tolerance": 0,
+   "explanation": "40 + 12 + 3 × 16 = 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-chemistry-mole-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many moles are in 25 g of CaCO₃?",
+   "answer": 0.25,
+   "tolerance": 0.001,
+   "unit": "mol",
+   "explanation": "25 ÷ 100 = 0.25 mol.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-chemistry-mole-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the mass of 0.5 mol of water, H₂O? (A_r: H = 1, O = 16)",
+   "answer": 9,
+   "tolerance": 0,
+   "unit": "g",
+   "explanation": "M = 18 g/mol; 0.5 × 18 = 9 g.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-chemistry-mole-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many molecules are there in 0.5 mol of a substance? Give your answer as a number multiplied by 10²³ (answer the number only, with 6.0 × 10²³ per mole).",
+   "answer": 3.0,
+   "tolerance": 0.01,
+   "explanation": "0.5 × 6.0 = 3.0 (× 10²³).",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-chemistry-mole-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the percentage of oxygen in water by mass (A_r: H = 1, O = 16), to 1 d.p.",
+   "answer": 88.9,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "16 ÷ 18 × 100 = 88.9 %.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-chemistry-mole-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A fertiliser called urea has the formula CO(NH₂)₂. (A_r: C = 12, O = 16, N = 14, H = 1)",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Relative formula mass of urea.",
+     "answer": 60,
+     "tolerance": 0,
+     "explanation": "12 + 16 + 2 × (14 + 2) = 60.",
+     "id": "form4-chemistry-mole-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Percentage of nitrogen in urea (1 d.p.).",
+     "answer": 46.7,
+     "tolerance": 0.1,
+     "explanation": "28 ÷ 60 × 100 = 46.7 %.",
+     "unit": "%",
+     "id": "form4-chemistry-mole-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Compared with ammonium nitrate (35 % N), urea supplies:",
+     "choices": [
+      "less nitrogen per kilogram",
+      "more nitrogen per kilogram",
+      "no nitrogen",
+      "the same nitrogen per kilogram"
+     ],
+     "answer": 1,
+     "explanation": "46.7 % is higher than 35 %.",
+     "id": "form4-chemistry-mole-e06-c"
+    }
+   ],
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-basics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-mole-basics",
+   "prompt": "The mole is the amount of substance containing:",
+   "choices": [
+    "6.0 × 10²³ particles",
+    "1000 particles",
+    "6.0 × 10²² particles",
+    "1 gram"
+   ],
+   "answer": 0,
+   "explanation": "Avogadro constant.",
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-basics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-mole-basics",
+   "prompt": "The formula linking moles and mass is:",
+   "choices": [
+    "n = m × M",
+    "n = m − M",
+    "n = m + M",
+    "n = m ÷ M"
+   ],
+   "answer": 3,
+   "explanation": "Moles = mass ÷ molar mass.",
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-basics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-mole-basics",
+   "prompt": "The M_r of NaCl is:",
+   "choices": [
+    "58",
+    "35.5",
+    "23",
+    "58.5"
+   ],
+   "answer": 3,
+   "explanation": "23 + 35.5.",
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-basics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-mole-basics",
+   "prompt": "An empirical formula shows:",
+   "choices": [
+    "the mass of the sample",
+    "the simplest whole-number ratio of atoms",
+    "the colour",
+    "the number of molecules"
+   ],
+   "answer": 1,
+   "explanation": "Simplest ratio.",
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-basics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-mole-basics",
+   "prompt": "How many grams are in 2 mol of NaOH (M = 40 g/mol)?",
+   "choices": [
+    "8 g",
+    "42 g",
+    "80 g",
+    "20 g"
+   ],
+   "answer": 2,
+   "explanation": "2 × 40.",
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-chemistry-reacting-quantities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Zinc (6.5 g) reacts with excess dilute HCl: Zn + 2HCl → ZnCl₂ + H₂. Find the volume of hydrogen at r.t.p. in dm³ (A_r Zn = 65; 24 dm³/mol).",
+   "answer": 2.4,
+   "tolerance": 0.05,
+   "unit": "dm³",
+   "explanation": "n(Zn) = 0.10 mol; n(H₂) = 0.10 mol; V = 0.10 × 24 = 2.4 dm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-chemistry-reacting-quantities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Heating 50 g of calcium carbonate gives calcium oxide and carbon dioxide. Find the mass of calcium oxide in g (M of CaCO₃ = 100, CaO = 56).",
+   "answer": 28,
+   "tolerance": 0.1,
+   "unit": "g",
+   "explanation": "n(CaCO₃) = 0.50 mol; m(CaO) = 0.50 × 56 = 28 g.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-chemistry-reacting-quantities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the concentration in mol/dm³ of a solution containing 0.50 mol in 250 cm³.",
+   "answer": 2.0,
+   "tolerance": 0.01,
+   "unit": "mol/dm³",
+   "explanation": "250 cm³ = 0.250 dm³; 0.50 ÷ 0.250 = 2.0 mol/dm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-chemistry-reacting-quantities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A reaction should give 8.0 g of product (theoretical) but only 6.4 g is obtained. Find the percentage yield.",
+   "answer": 80,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "6.4 ÷ 8.0 × 100 = 80 %.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-chemistry-reacting-quantities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Calculate the volume, in dm³ at r.t.p., of 0.50 mol of carbon dioxide (24 dm³/mol).",
+   "answer": 12,
+   "tolerance": 0,
+   "unit": "dm³",
+   "explanation": "0.50 × 24 = 12 dm³.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-mole-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-chemistry-reacting-quantities",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a titration, 20.0 cm³ of sodium hydroxide of unknown concentration is neutralised by 25.0 cm³ of 0.200 mol/dm³ hydrochloric acid (NaOH + HCl → NaCl + H₂O).",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of HCl used (mol).",
+     "answer": 0.005,
+     "tolerance": 0.0001,
+     "explanation": "0.200 × 0.0250 = 0.00500 mol.",
+     "unit": "mol",
+     "id": "form4-chemistry-mole-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of NaOH in the flask (mol).",
+     "answer": 0.005,
+     "tolerance": 0.0001,
+     "explanation": "Ratio 1 : 1, so 0.00500 mol.",
+     "unit": "mol",
+     "id": "form4-chemistry-mole-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Concentration of the NaOH (mol/dm³).",
+     "answer": 0.25,
+     "tolerance": 0.001,
+     "explanation": "0.00500 ÷ 0.0200 = 0.250 mol/dm³.",
+     "unit": "mol/dm³",
+     "id": "form4-chemistry-mole-e12-c"
+    }
+   ],
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-reacting-quantities-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-reacting-quantities",
+   "prompt": "The molar volume of a gas at r.t.p. is about:",
+   "choices": [
+    "1 dm³/mol",
+    "100 dm³/mol",
+    "22 cm³/mol",
+    "24 dm³/mol"
+   ],
+   "answer": 3,
+   "explanation": "Used in this course.",
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-reacting-quantities-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-reacting-quantities",
+   "prompt": "Concentration in mol/dm³ is calculated by:",
+   "choices": [
+    "moles ÷ volume in dm³",
+    "moles × volume",
+    "volume ÷ moles",
+    "mass ÷ moles"
+   ],
+   "answer": 0,
+   "explanation": "c = n/V.",
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-reacting-quantities-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-reacting-quantities",
+   "prompt": "The end-point of a titration is when:",
+   "choices": [
+    "the burette is empty",
+    "the acid stops dissolving",
+    "the flask is full",
+    "the indicator just changes colour"
+   ],
+   "answer": 3,
+   "explanation": "Neutralisation point.",
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-reacting-quantities-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-reacting-quantities",
+   "prompt": "Percentage yield equals:",
+   "choices": [
+    "actual × theoretical",
+    "actual ÷ theoretical × 100",
+    "theoretical ÷ actual × 100",
+    "actual + theoretical"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "chapter": "form4-chemistry-mole"
+  },
+  {
+   "id": "form4-chemistry-reacting-quantities-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-reacting-quantities",
+   "prompt": "In 2Mg + O₂ → 2MgO, 2 mol of Mg gives how many mol of MgO?",
+   "choices": [
+    "2",
+    "1",
+    "4",
+    "0.5"
+   ],
+   "answer": 0,
+   "explanation": "Ratio 1 : 1.",
+   "chapter": "form4-chemistry-mole"
+  }
+ ]
+}

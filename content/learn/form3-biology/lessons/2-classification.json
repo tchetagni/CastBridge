@@ -1,0 +1,749 @@
+{
+ "chapter": "form3-biology-classification",
+ "lessons": [
+  {
+   "id": "form3-biology-classification",
+   "title": "Classifying living things and using keys",
+   "minutes": 30,
+   "programRef": "Form 3 Biology — Characteristics of living things, classification (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "List the seven characteristics of living things.",
+    "Describe the five kingdoms and the vertebrate groups.",
+    "Use and construct a dichotomous key and write scientific names correctly."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-biology-classification-e01",
+    "form3-biology-classification-e02",
+    "form3-biology-classification-e03",
+    "form3-biology-classification-e04",
+    "form3-biology-classification-e05",
+    "form3-biology-classification-e06"
+   ],
+   "selfCheck": [
+    "form3-biology-classification-q1",
+    "form3-biology-classification-q2",
+    "form3-biology-classification-q3",
+    "form3-biology-classification-q4",
+    "form3-biology-classification-q5"
+   ],
+   "reviewNotes": [
+    "Five-kingdom scheme as in common school texts (some courses use three domains). Check whether annelids and myriapods are required at this level.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Living things and kingdoms",
+     "md": "All living things show **MRS GREN**: movement, respiration, sensitivity, growth, reproduction, excretion, nutrition. **Classification** puts organisms into groups. The **five kingdoms**: **animals** (many cells, no walls, feed on others), **plants** (green, cell walls, photosynthesis), **fungi** (mushrooms, moulds, yeast: feed on dead matter with threads called hyphae), **protoctists** (mostly single-celled, e.g. *Amoeba*, the malaria parasite) and **prokaryotes** (bacteria, no nucleus)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 146,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 35.0,
+        "text": "Fish",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 49.0,
+        "text": "gills, scales, fins",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 35.0,
+        "text": "Amphibians",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 49.0,
+        "text": "moist skin, eggs in water",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 35.0,
+        "text": "Reptiles",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 49.0,
+        "text": "dry scaly skin, eggs on land",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 80,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 105.0,
+        "text": "Birds",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 119.0,
+        "text": "feathers, wings, beak",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 80,
+        "w": 144.0,
+        "h": 56,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 105.0,
+        "text": "Mammals",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 119.0,
+        "text": "hair, milk, live young*",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The five groups of vertebrates (*most mammals give birth to live young).",
+     "alt": "Five boxes: fish, amphibians, reptiles, birds and mammals with key features of each."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Vertebrates, invertebrates and names",
+     "md": "**Vertebrates** have a backbone: fish, amphibians, reptiles, birds, mammals. **Invertebrates** do not: **insects** (6 legs, 3 body parts, usually wings), **arachnids** (8 legs, 2 body parts), **crustaceans** (crabs, prawns), **molluscs** (snails), **annelids** (earthworms), **myriapods** (centipedes, millipedes). Each species has a two-part **scientific name** in italics (genus then species, e.g. *Homo sapiens*), used worldwide."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "A dichotomous key",
+     "md": "A **dichotomous key** is a series of paired questions with only two answers (yes or no); each answer leads to the next question or to a name. Make one by choosing clear **visible features** (feathers, hair, fins), starting with the feature that separates the most organisms. Features such as size or colour are poor choices because they vary."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 12,
+        "w": 150,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 34,
+        "text": "Has feathers?",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 29,
+        "x2": 270,
+        "y2": 29,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 24,
+        "text": "yes",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 272,
+        "y": 12,
+        "w": 130,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 337,
+        "y": 34,
+        "text": "bird (hen)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 46,
+        "x2": 95,
+        "y2": 82,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 111,
+        "y": 68,
+        "text": "no",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 82,
+        "w": 150,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 104,
+        "text": "Has hair or fur?",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 99,
+        "x2": 270,
+        "y2": 99,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 94,
+        "text": "yes",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 272,
+        "y": 82,
+        "w": 130,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 337,
+        "y": 104,
+        "text": "mammal (goat)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 116,
+        "x2": 95,
+        "y2": 152,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 111,
+        "y": 138,
+        "text": "no",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 152,
+        "w": 150,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 174,
+        "text": "Has fins and gills?",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 169,
+        "x2": 270,
+        "y2": 169,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 164,
+        "text": "yes",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 272,
+        "y": 152,
+        "w": 130,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 337,
+        "y": 174,
+        "text": "fish (tilapia)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 186,
+        "x2": 95,
+        "y2": 222,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 111,
+        "y": 208,
+        "text": "no",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 222,
+        "w": 150,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 244,
+        "text": "amphibian (frog)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A key to four animals.",
+     "alt": "A flow chart: has feathers, yes bird (hen); no, has hair or fur, yes mammal (goat); no, has fins and gills, yes fish (tilapia); no, amphibian (frog)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A bat is a **mammal** (hair, milk) even though it flies; a whale is a mammal, not a fish.\n- A spider is not an insect: it has 8 legs.\n- Scientific names: genus has a capital letter, species is lower case, both are underlined or in italics."
+    },
+    {
+     "type": "example",
+     "title": "Use the key",
+     "statement": "Use the key in the figure to name an animal that has no feathers and has fur.",
+     "steps": [
+      "Question 1 (feathers?): no, go to question 2.",
+      "Question 2 (hair or fur?): yes, it is a mammal (goat)."
+     ],
+     "answer": "A mammal (goat)"
+    },
+    {
+     "type": "example",
+     "title": "Group the animal",
+     "statement": "An animal has 8 legs and two body parts. Which group is it and is it a vertebrate?",
+     "steps": [
+      "Eight legs and two body parts are the features of an arachnid.",
+      "It has no backbone so it is an invertebrate."
+     ],
+     "answer": "An arachnid (invertebrate)"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-biology-classification-e01"
+    }
+   ],
+   "chapter": "form3-biology-classification"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-biology-classification-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-biology-classification",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which kingdom contains organisms that feed on dead matter using hyphae?",
+   "choices": [
+    "animals",
+    "fungi",
+    "protoctists",
+    "plants"
+   ],
+   "answer": 1,
+   "explanation": "Moulds and mushrooms.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-biology-classification",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each animal with its group.",
+   "pairs": [
+    [
+     "tilapia",
+     "fish"
+    ],
+    [
+     "frog",
+     "amphibian"
+    ],
+    [
+     "lizard",
+     "reptile"
+    ],
+    [
+     "parrot",
+     "bird"
+    ]
+   ],
+   "explanation": "Standard groups.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-biology-classification",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Insects have eight legs.",
+   "answer": false,
+   "explanation": "Insects have six legs; spiders have eight.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-classification",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which feature is best to use in a dichotomous key?",
+   "choices": [
+    "colour of the animal",
+    "how big the animal is",
+    "how fast it runs",
+    "presence of feathers"
+   ],
+   "answer": 3,
+   "explanation": "A clear feature that does not vary.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-classification",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe three differences between plants and animals.",
+   "model": "Plants make their own food by photosynthesis and animals feed on other organisms; plant cells have cell walls and chloroplasts and animal cells do not; plants do not move from place to place and animals usually do.",
+   "rubric": [
+    "1 mark each, maximum 3"
+   ],
+   "explanation": "Plants make their own food by photosynthesis and animals feed on other organisms; plant cells have cell walls and chloroplasts and animal cells do not; plants do not move from place to place and animals usually do.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-biology-classification",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student collects a housefly, a centipede, a crab and a snail.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which one is an insect?",
+     "choices": [
+      "housefly",
+      "crab",
+      "centipede",
+      "snail"
+     ],
+     "answer": 0,
+     "explanation": "Six legs and three body parts.",
+     "id": "form3-biology-classification-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which one is a mollusc?",
+     "choices": [
+      "crab",
+      "centipede",
+      "snail",
+      "housefly"
+     ],
+     "answer": 2,
+     "explanation": "Soft body, usually with a shell.",
+     "id": "form3-biology-classification-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State one feature that all four share and one that separates the vertebrates from them.",
+     "model": "They all lack a backbone (are invertebrates) and all show MRS GREN; vertebrates have a backbone.",
+     "rubric": [
+      "1 mark: a shared feature",
+      "1 mark: backbone"
+     ],
+     "explanation": "They all lack a backbone (are invertebrates) and all show MRS GREN; vertebrates have a backbone.",
+     "id": "form3-biology-classification-e06-c"
+    }
+   ],
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-classification",
+   "prompt": "The 'G' in MRS GREN stands for:",
+   "choices": [
+    "genes",
+    "growth",
+    "gravity",
+    "gills"
+   ],
+   "answer": 1,
+   "explanation": "Growth.",
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-classification",
+   "prompt": "The first part of a scientific name is the:",
+   "choices": [
+    "genus",
+    "kingdom",
+    "species",
+    "family"
+   ],
+   "answer": 0,
+   "explanation": "Binomial naming.",
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-classification",
+   "prompt": "Fish, birds and mammals all belong to the group called:",
+   "choices": [
+    "invertebrates",
+    "protoctists",
+    "vertebrates",
+    "fungi"
+   ],
+   "answer": 2,
+   "explanation": "They have a backbone.",
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-classification",
+   "prompt": "Bacteria belong to the kingdom of:",
+   "choices": [
+    "prokaryotes",
+    "animals",
+    "fungi",
+    "plants"
+   ],
+   "answer": 0,
+   "explanation": "No nucleus.",
+   "chapter": "form3-biology-classification"
+  },
+  {
+   "id": "form3-biology-classification-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-classification",
+   "prompt": "A dichotomous key uses questions that have:",
+   "choices": [
+    "three answers",
+    "ten answers",
+    "no answers",
+    "two possible answers"
+   ],
+   "answer": 3,
+   "explanation": "Yes or no.",
+   "chapter": "form3-biology-classification"
+  }
+ ]
+}

@@ -1,0 +1,451 @@
+{
+ "chapter": "form3-physics-pressure",
+ "lessons": [
+  {
+   "id": "form3-physics-pressure",
+   "title": "Pressure in solids, liquids and the atmosphere",
+   "minutes": 30,
+   "programRef": "Form 3 Physics — Pressure in solids, liquids and the atmosphere (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define pressure and calculate it with P = F / A.",
+    "Calculate the pressure at a depth in a liquid with P = ρgh.",
+    "State atmospheric pressure and describe a simple hydraulic system."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-physics-pressure-e01",
+    "form3-physics-pressure-e02",
+    "form3-physics-pressure-e03",
+    "form3-physics-pressure-e04",
+    "form3-physics-pressure-e05",
+    "form3-physics-pressure-e06"
+   ],
+   "selfCheck": [
+    "form3-physics-pressure-q1",
+    "form3-physics-pressure-q2",
+    "form3-physics-pressure-q3",
+    "form3-physics-pressure-q4",
+    "form3-physics-pressure-q5"
+   ],
+   "reviewNotes": [
+    "Atmospheric pressure quoted as about 10⁵ Pa (standard value 101 325 Pa); the hydraulic jack uses simple numbers.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Pressure",
+     "md": "**Pressure = force ÷ area**, **P = F / A**. The SI unit is the **pascal (Pa) = 1 N/m²**. The same force on a **smaller area** gives a **bigger pressure**: a knife is sharp, a nail is pointed, tractors have wide tyres and snow shoes spread the weight. Force is the weight (N) when an object rests on a surface."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Pressure in a liquid",
+     "md": "Pressure in a liquid **increases with depth** and acts equally in **all directions**; it is the same at the same depth. **P = ρ × g × h** (ρ = density in kg/m³, g = 10 N/kg, h = depth in m). For water at 5 m depth: 1000 × 10 × 5 = **50 000 Pa**. This is why a dam wall is thicker at the bottom."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 225,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 20,
+        "w": 160,
+        "h": 190,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 63,
+        "y": 17,
+        "w": 154,
+        "h": 8,
+        "stroke": "none",
+        "width": 0,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 216,
+        "y": 56,
+        "w": 8,
+        "h": 8,
+        "stroke": "none",
+        "width": 0,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 224,
+        "y1": 60,
+        "x2": 264,
+        "y2": 60,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 64,
+        "text": "least pressure",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 216,
+        "y": 106,
+        "w": 8,
+        "h": 8,
+        "stroke": "none",
+        "width": 0,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 224,
+        "y1": 110,
+        "x2": 304,
+        "y2": 110,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 114,
+        "text": "more pressure",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 216,
+        "y": 156,
+        "w": 8,
+        "h": 8,
+        "stroke": "none",
+        "width": 0,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 224,
+        "y1": 160,
+        "x2": 344,
+        "y2": 160,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 164,
+        "text": "greatest pressure",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 120,
+        "text": "water",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 25,
+        "x2": 40,
+        "y2": 205,
+        "color": "grey",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 118,
+        "text": "depth",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Water jets from a tank: the deeper the hole, the stronger the jet.",
+     "alt": "A tank of water with three holes in its side; the jet from the lowest hole travels farthest, the top one least."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Atmospheric pressure and hydraulics",
+     "md": "The air above us exerts **atmospheric pressure**, about **100 000 Pa (10⁵ Pa)** at sea level; it is lower at high altitude (for example on Mount Cameroon). A **barometer** measures it (a mercury barometer reads about 760 mm). In a **hydraulic system** pressure in a liquid is passed on equally: F₂ = F₁ × A₂ ÷ A₁, so a small force on a small piston gives a large force on a large piston."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Use the **area in contact**, in m² (1 m² = 10 000 cm²).\n- Liquid pressure depends on **depth** and density, not on the shape or the width of the container.\n- A hydraulic press does not give extra energy: the small piston moves farther."
+    },
+    {
+     "type": "example",
+     "title": "Pressure under shoes",
+     "statement": "A student weighs 600 N and the area of her shoe soles in contact with the ground is 0.030 m². Find the pressure.",
+     "steps": [
+      "P = F ÷ A.",
+      "600 ÷ 0.030 = 20 000 Pa."
+     ],
+     "answer": "20 000 Pa"
+    },
+    {
+     "type": "example",
+     "title": "Pressure at a depth",
+     "statement": "A diver is 5.0 m below the surface of a freshwater lake (ρ = 1000 kg/m³, g = 10 N/kg). Find the pressure caused by the water.",
+     "steps": [
+      "P = ρ g h.",
+      "1000 × 10 × 5.0 = 50 000 Pa."
+     ],
+     "answer": "50 000 Pa"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-physics-pressure-e01"
+    }
+   ],
+   "chapter": "form3-physics-pressure"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-physics-pressure-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A force of 200 N acts on an area of 0.5 m². Find the pressure in Pa.",
+   "answer": 400,
+   "tolerance": 0,
+   "unit": "Pa",
+   "explanation": "200 ÷ 0.5 = 400 Pa.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the pressure at a depth of 2 m in water. (ρ = 1000 kg/m³, g = 10 N/kg)",
+   "answer": 20000,
+   "tolerance": 0,
+   "unit": "Pa",
+   "explanation": "1000 × 10 × 2 = 20 000 Pa.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why do camels have wide feet?",
+   "choices": [
+    "to reduce pressure on sand",
+    "to increase pressure on sand",
+    "to keep them warm",
+    "to make them taller"
+   ],
+   "answer": 0,
+   "explanation": "A larger area gives a smaller pressure.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A brick of weight 40 N rests on its face of area 0.02 m². Find the pressure in Pa.",
+   "answer": 2000,
+   "tolerance": 0,
+   "unit": "Pa",
+   "explanation": "40 ÷ 0.02 = 2000 Pa.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why the base of a dam wall is built much thicker than the top.",
+   "model": "Water pressure increases with depth, so the water pushes much harder on the lower part of the wall; a thicker base can withstand the larger force.",
+   "rubric": [
+    "1 mark: pressure increases with depth",
+    "1 mark: thicker wall resists larger force"
+   ],
+   "explanation": "Water pressure increases with depth, so the water pushes much harder on the lower part of the wall; a thicker base can withstand the larger force.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a hydraulic jack the small piston has an area of 0.002 m² and the large piston 0.04 m². A force of 100 N is applied to the small piston.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Pressure in the liquid (Pa).",
+     "answer": 50000,
+     "tolerance": 0,
+     "explanation": "100 ÷ 0.002 = 50 000 Pa.",
+     "unit": "Pa",
+     "id": "form3-physics-pressure-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Force on the large piston (N).",
+     "answer": 2000,
+     "tolerance": 0,
+     "explanation": "50 000 × 0.04 = 2000 N.",
+     "unit": "N",
+     "id": "form3-physics-pressure-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "To raise the load 1 cm the small piston must move:",
+     "choices": [
+      "1 cm",
+      "0.05 cm",
+      "20 cm",
+      "2 cm"
+     ],
+     "answer": 2,
+     "explanation": "The area ratio is 20, so the distance ratio is also 20.",
+     "id": "form3-physics-pressure-e06-c"
+    }
+   ],
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-pressure",
+   "prompt": "The unit of pressure is the:",
+   "choices": [
+    "pascal",
+    "joule",
+    "newton",
+    "watt"
+   ],
+   "answer": 0,
+   "explanation": "Pa = N/m².",
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-pressure",
+   "prompt": "Pressure equals:",
+   "choices": [
+    "mass × area",
+    "force × area",
+    "force ÷ area",
+    "area ÷ force"
+   ],
+   "answer": 2,
+   "explanation": "P = F/A.",
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-pressure",
+   "prompt": "Pressure in a liquid increases with:",
+   "choices": [
+    "width of container",
+    "time",
+    "depth",
+    "colour"
+   ],
+   "answer": 2,
+   "explanation": "P = ρgh.",
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-pressure",
+   "prompt": "Atmospheric pressure at sea level is about:",
+   "choices": [
+    "10 Pa",
+    "100 000 Pa",
+    "1000 Pa",
+    "100 Pa"
+   ],
+   "answer": 1,
+   "explanation": "About 10⁵ Pa.",
+   "chapter": "form3-physics-pressure"
+  },
+  {
+   "id": "form3-physics-pressure-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-pressure",
+   "prompt": "A sharp knife cuts easily because its edge has a:",
+   "choices": [
+    "small area giving a large pressure",
+    "large area",
+    "low density",
+    "large mass"
+   ],
+   "answer": 0,
+   "explanation": "Small area.",
+   "chapter": "form3-physics-pressure"
+  }
+ ]
+}

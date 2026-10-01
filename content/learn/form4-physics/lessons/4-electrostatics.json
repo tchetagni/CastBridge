@@ -1,0 +1,467 @@
+{
+ "chapter": "form4-physics-electrostatics",
+ "lessons": [
+  {
+   "id": "form4-physics-static-electricity",
+   "title": "Static electricity",
+   "minutes": 25,
+   "programRef": "Form 4 Physics — Electric charge and electrostatics (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain charging by friction in terms of the movement of electrons.",
+    "State the laws of electric charges and describe the gold-leaf electroscope.",
+    "Describe uses and dangers of static electricity."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-physics-electrostatics-e01",
+    "form4-physics-electrostatics-e02",
+    "form4-physics-electrostatics-e03",
+    "form4-physics-electrostatics-e04",
+    "form4-physics-electrostatics-e05",
+    "form4-physics-electrostatics-e06"
+   ],
+   "selfCheck": [
+    "form4-physics-static-electricity-q1",
+    "form4-physics-static-electricity-q2",
+    "form4-physics-static-electricity-q3",
+    "form4-physics-static-electricity-q4",
+    "form4-physics-static-electricity-q5"
+   ],
+   "reviewNotes": [
+    "Which material becomes positive or negative depends on the pair; the stated pairs (polythene/cloth, perspex/silk) are the usual school ones.",
+    "Thunderstorm safety is general advice; to be reviewed.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Electric charge",
+     "md": "Atoms contain **positive protons** and **negative electrons**; normally they are **neutral**. Rubbing two insulators together **transfers electrons**: the one that gains electrons becomes **negative**, the one that loses them becomes **positive**. A polythene rod rubbed with a cloth usually becomes negative; a perspex rod rubbed with silk usually becomes positive. Charge is measured in **coulombs (C)**; the charge of one electron is about **1.6 × 10⁻¹⁹ C**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Laws of charges",
+     "md": "**Like charges repel; unlike charges attract.** A charged object also attracts small **uncharged** pieces (paper bits) because it induces opposite charge on the near side. **Conductors** (metals) let charge flow; **insulators** (plastic, glass, dry wood) do not. Charge is **conserved**: it is only moved, never created."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 80,
+        "w": 100,
+        "h": 110,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 38,
+        "x2": 210,
+        "y2": 125,
+        "color": "grey",
+        "width": 5
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 28,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 125,
+        "x2": 188,
+        "y2": 172,
+        "color": "orange",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 125,
+        "x2": 232,
+        "y2": 172,
+        "color": "orange",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 224,
+        "y1": 28,
+        "x2": 300,
+        "y2": 18,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 22,
+        "text": "metal cap",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 70,
+        "x2": 300,
+        "y2": 62,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 66,
+        "text": "metal rod",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 232,
+        "y1": 160,
+        "x2": 300,
+        "y2": 150,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 154,
+        "text": "gold leaf",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 135,
+        "x2": 90,
+        "y2": 135,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 86,
+        "y": 139,
+        "text": "glass case",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 208,
+        "text": "like charges on rod and leaf: they repel",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A gold-leaf electroscope with a charged cap: the leaf rises.",
+     "alt": "A glass case with a metal rod topped by a cap; at the bottom a gold leaf rises away from the rod; labels for cap, rod, leaf and case."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Gold-leaf electroscope",
+     "md": "Charge on the cap spreads to the rod and leaf; as both carry the **same** charge the leaf is **repelled** and rises. Touching the cap with a finger **earths** it and the leaf falls. The electroscope shows whether a body is charged (and, with a known charge, the sign by induction), but not directly how much charge there is."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Uses and dangers",
+     "md": "Uses: **paint spraying** (charged droplets spread evenly), **photocopiers**, **dust removal** in chimneys. Dangers: sparks can ignite fuel vapour, so **fuel tankers are earthed**; **lightning** can kill, so tall buildings have a **lightning conductor** (a thick metal strip to earth). In a thunderstorm shelter inside a building and stay away from open ground, tall isolated trees and water."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Only electrons move in solids; protons stay in the nucleus.\n- A body charged positively has **lost** electrons, it has not gained protons.\n- A charged rod attracts an uncharged object, so attraction alone does not prove an object is charged."
+    },
+    {
+     "type": "example",
+     "title": "Which sign?",
+     "statement": "A cloth rubs a polythene rod and the rod becomes negative. What charge has the cloth and why?",
+     "steps": [
+      "Electrons moved from the cloth to the rod.",
+      "The cloth lost electrons so it is positive, with equal and opposite charge."
+     ],
+     "answer": "Positive, equal in size."
+    },
+    {
+     "type": "example",
+     "title": "Number of electrons",
+     "statement": "A rod gains a charge of 3.2 × 10⁻⁹ C. How many electrons has it gained? (e = 1.6 × 10⁻¹⁹ C)",
+     "steps": [
+      "n = Q ÷ e.",
+      "3.2 × 10⁻⁹ ÷ 1.6 × 10⁻¹⁹ = 2 × 10¹⁰ electrons."
+     ],
+     "answer": "2 × 10¹⁰ electrons"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-physics-electrostatics-e01"
+    }
+   ],
+   "chapter": "form4-physics-electrostatics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-physics-electrostatics-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two negatively charged balloons are brought near each other. They:",
+   "choices": [
+    "do nothing",
+    "repel",
+    "swap charge",
+    "attract"
+   ],
+   "answer": 1,
+   "explanation": "Like charges repel.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-electrostatics-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A body becomes positive by gaining protons.",
+   "answer": false,
+   "explanation": "It becomes positive by losing electrons.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-electrostatics-e03",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form4-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each item with its role.",
+   "pairs": [
+    [
+     "lightning conductor",
+     "carries lightning current to earth"
+    ],
+    [
+     "earthing a fuel tanker",
+     "prevents a dangerous spark"
+    ],
+    [
+     "gold-leaf electroscope",
+     "detects charge"
+    ],
+    [
+     "paint sprayer",
+     "uses charged droplets"
+    ]
+   ],
+   "explanation": "Standard applications.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-electrostatics-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many electrons are needed to make 1.6 × 10⁻⁹ C of charge? (e = 1.6 × 10⁻¹⁹ C)",
+   "answer": 10000000000.0,
+   "tolerance": 1000000.0,
+   "explanation": "1.6 × 10⁻⁹ ÷ 1.6 × 10⁻¹⁹ = 10¹⁰.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-electrostatics-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a plastic ruler rubbed on dry hair can pick up small pieces of paper.",
+   "model": "Rubbing charges the ruler. It induces the opposite charge on the near side of the paper pieces, which are then attracted to it more strongly than the same charges on their far side are repelled.",
+   "rubric": [
+    "1 mark: ruler charged by friction",
+    "1 mark: induced opposite charge attracts the paper"
+   ],
+   "explanation": "Rubbing charges the ruler. It induces the opposite charge on the near side of the paper pieces, which are then attracted to it more strongly than the same charges on their far side are repelled.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-electrostatics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-physics-static-electricity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A positively charged rod is brought near the cap of a neutral gold-leaf electroscope without touching.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Electrons in the metal are:",
+     "choices": [
+      "removed from the atom",
+      "pushed down to the leaf",
+      "attracted up to the cap",
+      "destroyed"
+     ],
+     "answer": 2,
+     "explanation": "Unlike charges attract.",
+     "id": "form4-physics-electrostatics-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The leaf rises because the leaf and rod:",
+     "choices": [
+      "gain the same (positive) charge",
+      "melt",
+      "become neutral",
+      "gain opposite charges"
+     ],
+     "answer": 0,
+     "explanation": "Electrons moved towards the cap, leaving the leaf positive.",
+     "id": "form4-physics-electrostatics-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "What happens when the rod is taken away?",
+     "model": "The electrons return and the leaf falls because the electroscope is neutral again.",
+     "rubric": [
+      "1 mark for leaf falls"
+     ],
+     "explanation": "The electrons return and the leaf falls because the electroscope is neutral again.",
+     "id": "form4-physics-electrostatics-e06-c"
+    }
+   ],
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-static-electricity-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-static-electricity",
+   "prompt": "Rubbing a polythene rod with a cloth transfers:",
+   "choices": [
+    "atoms",
+    "protons",
+    "electrons",
+    "neutrons"
+   ],
+   "answer": 2,
+   "explanation": "Electrons are the mobile charges.",
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-static-electricity-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-static-electricity",
+   "prompt": "The unit of electric charge is the:",
+   "choices": [
+    "volt",
+    "ohm",
+    "coulomb",
+    "ampere"
+   ],
+   "answer": 2,
+   "explanation": "C.",
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-static-electricity-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-static-electricity",
+   "prompt": "Which of these cannot let charge flow easily?",
+   "choices": [
+    "salt water",
+    "aluminium",
+    "dry plastic",
+    "copper"
+   ],
+   "answer": 2,
+   "explanation": "No free electrons.",
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-static-electricity-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-static-electricity",
+   "prompt": "A lightning conductor works by:",
+   "choices": [
+    "attracting rain",
+    "carrying the charge safely to the ground",
+    "stopping the thunder",
+    "making light"
+   ],
+   "answer": 1,
+   "explanation": "Thick metal strip to earth.",
+   "chapter": "form4-physics-electrostatics"
+  },
+  {
+   "id": "form4-physics-static-electricity-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-static-electricity",
+   "prompt": "Unlike charges:",
+   "choices": [
+    "repel",
+    "melt",
+    "disappear",
+    "attract"
+   ],
+   "answer": 3,
+   "explanation": "Opposite charges.",
+   "chapter": "form4-physics-electrostatics"
+  }
+ ]
+}
