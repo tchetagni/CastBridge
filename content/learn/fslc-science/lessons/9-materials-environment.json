@@ -1,0 +1,1225 @@
+{
+ "chapter": "fslc-science-materials-environment",
+ "lessons": [
+  {
+   "id": "fslc-science-materials-properties",
+   "title": "Materials and their properties",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name common materials and their properties.",
+    "Choose a suitable material for a job and give the reason.",
+    "Tell natural from man-made materials and reversible from irreversible changes."
+   ],
+   "prerequisites": [
+    "fslc-science-matter-energy"
+   ],
+   "exercises": [
+    "fslc-science-materials-environment-e01",
+    "fslc-science-materials-environment-e02",
+    "fslc-science-materials-environment-e03",
+    "fslc-science-materials-environment-e04",
+    "fslc-science-materials-environment-e05",
+    "fslc-science-materials-environment-e06"
+   ],
+   "selfCheck": [
+    "fslc-science-materials-properties-q1",
+    "fslc-science-materials-properties-q2",
+    "fslc-science-materials-properties-q3",
+    "fslc-science-materials-properties-q4",
+    "fslc-science-materials-properties-q5"
+   ],
+   "reviewNotes": [
+    "Rusting and egg cooking are given as irreversible changes (standard examples). Floating/sinking and density are intentionally left out.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Materials",
+     "md": "Everything is made of **materials**. **Natural** materials come from plants, animals or the earth: wood, cotton, wool, leather, clay, stone. **Man-made** materials are made by people: plastic, glass, nylon, cement. Every material has **properties**: hard or soft, rigid or flexible, strong or weak, rough or smooth, waterproof or absorbent, transparent or opaque, conductor or insulator, magnetic or not."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 19,
+        "y": 14,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 76.5,
+        "y": 40,
+        "text": "Wood",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 76.5,
+        "y": 62,
+        "text": "hard, burns",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 14,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 199.5,
+        "y": 40,
+        "text": "Metal",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 199.5,
+        "y": 62,
+        "text": "conducts heat",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 265,
+        "y": 14,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 322.5,
+        "y": 40,
+        "text": "Plastic",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 322.5,
+        "y": 62,
+        "text": "waterproof",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 19,
+        "y": 84,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 76.5,
+        "y": 110,
+        "text": "Glass",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 76.5,
+        "y": 132,
+        "text": "transparent",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 84,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 199.5,
+        "y": 110,
+        "text": "Cloth",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 199.5,
+        "y": 132,
+        "text": "soft, flexible",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 265,
+        "y": 84,
+        "w": 115,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 322.5,
+        "y": 110,
+        "text": "Rubber",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 322.5,
+        "y": 132,
+        "text": "stretches",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Common materials and one property of each.",
+     "alt": "Six boxes: wood is hard and burns, metal conducts heat, plastic is waterproof, glass is transparent, cloth is soft and flexible and rubber stretches."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Choosing a material",
+     "md": "Ask: what must the object **do**? Then pick the material with the right property. An umbrella needs a **waterproof** cover. A window needs **transparent** glass. A cooking pot needs a **conductor** of heat (metal), but its handle needs an **insulator** (wood or plastic). A towel needs an **absorbent** cloth."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Changes in materials",
+     "md": "In a **reversible** change the material can come back: ice melts to water and water freezes to ice. In an **irreversible** change a **new** material is made and we cannot go back: burning wood, cooking an egg, rusting iron, baking a cake. Heating, cooling and mixing can all cause changes."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Giving a reason that does not match the job (a window made of wood because wood is strong, when we need to see through it).\n- Thinking that all plastics are the same: they differ in strength and flexibility.\n- Saying that melting wax is irreversible: it can go solid again when it cools, so it is reversible."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Which material is best for the handle of a kettle: metal, wood or glass? Give a reason.",
+     "steps": [
+      "The kettle becomes very hot.",
+      "The handle must not let the heat pass, so we need an insulator.",
+      "Wood (or plastic) is an insulator; metal is a conductor."
+     ],
+     "answer": "Wood (or plastic), because it is an insulator and stays cool."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Say whether each change is reversible or irreversible: (a) ice melting, (b) wood burning.",
+     "steps": [
+      "(a) Water can freeze again into ice: reversible.",
+      "(b) Burning wood makes ash and smoke, new materials: irreversible."
+     ],
+     "answer": "(a) reversible; (b) irreversible."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-environment-waste",
+   "title": "Protecting the environment: pollution and waste",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the kinds of pollution and give their causes and effects.",
+    "Use the three Rs: reduce, reuse and recycle.",
+    "Say how to manage waste and protect trees, water and soil."
+   ],
+   "prerequisites": [
+    "fslc-science-living-environment"
+   ],
+   "exercises": [
+    "fslc-science-materials-environment-e07",
+    "fslc-science-materials-environment-e08",
+    "fslc-science-materials-environment-e09",
+    "fslc-science-materials-environment-e10",
+    "fslc-science-materials-environment-e11",
+    "fslc-science-materials-environment-e12"
+   ],
+   "selfCheck": [
+    "fslc-science-environment-waste-q1",
+    "fslc-science-environment-waste-q2",
+    "fslc-science-environment-waste-q3",
+    "fslc-science-environment-waste-q4",
+    "fslc-science-environment-waste-q5"
+   ],
+   "reviewNotes": [
+    "Statements that plastic 'does not rot easily' are kept general. Local rules on waste (burning, sorting) differ; to be checked by the school or a health worker.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Pollution",
+     "md": "**Pollution** is adding harmful things to the air, water or soil. **Air pollution**: smoke from burning rubbish, old vehicles and factories. **Water pollution**: rubbish, oil, soap or chemicals in rivers and streams. **Soil pollution**: dumped waste, plastic and chemicals. **Noise pollution**: very loud sounds. Pollution harms people (coughs, stomach illnesses), animals and plants."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 100,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 76,
+        "text": "Reduce",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 40,
+        "w": 100,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 76,
+        "text": "Reuse",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 40,
+        "w": 100,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 76,
+        "text": "Recycle",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 122,
+        "y1": 70,
+        "x2": 148,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 252,
+        "y1": 70,
+        "x2": 278,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 140,
+        "text": "Buy less. Use again. Make into new things.",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The three Rs: reduce, reuse, recycle.",
+     "alt": "Three boxes joined by arrows: Reduce, Reuse and Recycle. A line of text says buy less, use again, make into new things."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Managing waste",
+     "md": "**Biodegradable** waste rots and goes back to the soil (food scraps, leaves, paper, banana peel). Put it in a compost heap. **Non-biodegradable** waste does not rot easily (plastic bags, bottles, tins). **Reduce** what you throw away, **reuse** bottles and bags, **recycle** where possible. Put rubbish in bins and never in drains or rivers: blocked drains cause floods and breed mosquitoes."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Protecting nature",
+     "md": "Plant trees: they give shade, food and oxygen, hold the soil and give homes to animals. **Deforestation** (cutting trees without planting) causes erosion and destroys habitats. Save water: close the tap, collect rain, do not waste. Keep rivers and the school compound clean. Washing hands after handling rubbish keeps us healthy."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Burning plastic: it makes poisonous smoke.\n- Throwing rubbish into drains or streams, thinking that the rain will carry it away.\n- Thinking that one person cannot help: a clean school compound begins with each pupil.\n- Mixing biodegradable and non-biodegradable waste in one heap."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Sort into biodegradable and non-biodegradable: banana peel, plastic bag, dry leaves, tin.",
+     "steps": [
+      "Banana peel and dry leaves rot in the soil: biodegradable.",
+      "A plastic bag and a tin do not rot easily: non-biodegradable."
+     ],
+     "answer": "Biodegradable: banana peel, dry leaves. Non-biodegradable: plastic bag, tin."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A school wants to reduce its waste. Give three ideas using the three Rs.",
+     "steps": [
+      "Reduce: use both sides of the paper.",
+      "Reuse: refill water bottles and use cloth bags.",
+      "Recycle: make compost from leaves and food scraps."
+     ],
+     "answer": "Use both sides of paper (reduce), refill bottles (reuse) and compost leaves (recycle)."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-science-materials-environment"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "fslc-science-materials-environment-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-materials-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which material is waterproof?",
+   "choices": [
+    "plastic",
+    "a sponge",
+    "cotton cloth",
+    "paper"
+   ],
+   "answer": 0,
+   "explanation": "Plastic does not let water through.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-materials-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a natural material?",
+   "choices": [
+    "plastic",
+    "cement",
+    "cotton",
+    "nylon"
+   ],
+   "answer": 2,
+   "explanation": "Cotton comes from a plant.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-materials-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which property makes glass suitable for windows?",
+   "choices": [
+    "magnetic",
+    "transparent",
+    "rough",
+    "opaque"
+   ],
+   "answer": 1,
+   "explanation": "We can see through transparent glass.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-materials-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Burning wood is a reversible change.",
+   "answer": false,
+   "explanation": "Burning makes ash and smoke: new materials that cannot be turned back.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-materials-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the object with the best material.",
+   "pairs": [
+    [
+     "raincoat",
+     "waterproof plastic"
+    ],
+    [
+     "window",
+     "clear glass"
+    ],
+    [
+     "saucepan",
+     "metal"
+    ],
+    [
+     "towel",
+     "absorbent cotton"
+    ]
+   ],
+   "explanation": "Choose according to the property needed.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-materials-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school needs to make a cover for a notice board that stands outside. The cover must let people read the notice, keep rain out and be strong.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which property is needed so that people can read the notice?",
+     "choices": [
+      "opaque",
+      "magnetic",
+      "flexible",
+      "transparent"
+     ],
+     "answer": 3,
+     "explanation": "They must see through the cover.",
+     "id": "fslc-science-materials-environment-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which property keeps the rain out?",
+     "choices": [
+      "waterproof",
+      "absorbent",
+      "soft",
+      "heavy"
+     ],
+     "answer": 0,
+     "explanation": "It must not let water through.",
+     "id": "fslc-science-materials-environment-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which material is the best choice?",
+     "choices": [
+      "clear plastic or glass",
+      "cardboard",
+      "wood",
+      "cloth"
+     ],
+     "answer": 0,
+     "explanation": "It is transparent and waterproof.",
+     "id": "fslc-science-materials-environment-e06-c"
+    }
+   ],
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-properties-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-materials-properties",
+   "prompt": "Which material is flexible?",
+   "choices": [
+    "stone",
+    "iron",
+    "rubber",
+    "glass"
+   ],
+   "answer": 2,
+   "explanation": "Rubber bends and stretches.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-properties-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-materials-properties",
+   "prompt": "Which material conducts heat well?",
+   "choices": [
+    "wool",
+    "metal",
+    "wood",
+    "plastic"
+   ],
+   "answer": 1,
+   "explanation": "Metals are conductors.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-properties-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-materials-properties",
+   "prompt": "Ice melting is...",
+   "choices": [
+    "reversible",
+    "irreversible",
+    "rusting",
+    "burning"
+   ],
+   "answer": 0,
+   "explanation": "Water can freeze again.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-properties-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-materials-properties",
+   "prompt": "Which is a man-made material?",
+   "choices": [
+    "stone",
+    "plastic",
+    "wool",
+    "wood"
+   ],
+   "answer": 1,
+   "explanation": "Plastic is made in factories.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-properties-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-materials-properties",
+   "prompt": "An absorbent material...",
+   "choices": [
+    "is hard",
+    "soaks up water",
+    "keeps water out",
+    "is transparent"
+   ],
+   "answer": 1,
+   "explanation": "A sponge is absorbent.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which waste is biodegradable?",
+   "choices": [
+    "plastic bag",
+    "tin can",
+    "banana peel",
+    "glass bottle"
+   ],
+   "answer": 2,
+   "explanation": "It rots and goes back to the soil.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What does 'reuse' mean?",
+   "choices": [
+    "use something again",
+    "burn",
+    "throw away",
+    "buy more"
+   ],
+   "answer": 0,
+   "explanation": "Reuse = use again.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which causes air pollution?",
+   "choices": [
+    "planting trees",
+    "washing clothes",
+    "burning rubbish",
+    "composting"
+   ],
+   "answer": 2,
+   "explanation": "Smoke pollutes the air.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e10",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Throwing rubbish into drains can cause floods.",
+   "answer": true,
+   "explanation": "Blocked drains cannot carry rainwater away.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e11",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the problem with a good solution.",
+   "pairs": [
+    [
+     "too much plastic waste",
+     "reuse bags and bottles"
+    ],
+    [
+     "cut trees",
+     "plant new trees"
+    ],
+    [
+     "dirty river",
+     "do not throw rubbish in it"
+    ],
+    [
+     "food scraps",
+     "make compost"
+    ]
+   ],
+   "explanation": "Each solution tackles its problem.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The compound of a school is covered with plastic bags and food scraps. Pupils want to clean it and keep it clean.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What should they do with food scraps and leaves?",
+     "choices": [
+      "throw them in the stream",
+      "burn them with plastic",
+      "make compost",
+      "leave them"
+     ],
+     "answer": 2,
+     "explanation": "Compost returns nutrients to the soil.",
+     "id": "fslc-science-materials-environment-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What should they do with the plastic bags?",
+     "choices": [
+      "burn them in the open",
+      "throw them in the drain",
+      "bury them near the well",
+      "collect them in bins and reuse or recycle them"
+     ],
+     "answer": 3,
+     "explanation": "Burning gives poisonous smoke.",
+     "id": "fslc-science-materials-environment-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which pupil habit helps most?",
+     "choices": [
+      "everyone using the bins every day",
+      "burning everything",
+      "leaving the cleaning to the teacher",
+      "throwing rubbish on the road"
+     ],
+     "answer": 0,
+     "explanation": "Clean habits start with each pupil.",
+     "id": "fslc-science-materials-environment-e12-c"
+    }
+   ],
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-environment-waste-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-environment-waste",
+   "prompt": "The three Rs are reduce, reuse and...",
+   "choices": [
+    "remove",
+    "return",
+    "recycle",
+    "repeat"
+   ],
+   "answer": 2,
+   "explanation": "Recycle means making old things into new ones.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-environment-waste-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-environment-waste",
+   "prompt": "Which is non-biodegradable?",
+   "choices": [
+    "plastic bottle",
+    "dry leaves",
+    "banana peel",
+    "paper"
+   ],
+   "answer": 0,
+   "explanation": "Plastic does not rot easily.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-environment-waste-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-environment-waste",
+   "prompt": "Trees help the environment by...",
+   "choices": [
+    "making smoke",
+    "polluting the air",
+    "holding the soil and giving oxygen",
+    "causing erosion"
+   ],
+   "answer": 2,
+   "explanation": "Trees are very useful.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-environment-waste-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-environment-waste",
+   "prompt": "Deforestation means...",
+   "choices": [
+    "cleaning rivers",
+    "planting trees",
+    "making compost",
+    "cutting down forests"
+   ],
+   "answer": 3,
+   "explanation": "Cutting without replanting harms the environment.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-environment-waste-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-science-environment-waste",
+   "prompt": "Rubbish should be put...",
+   "choices": [
+    "in a river",
+    "in a drain",
+    "in the road",
+    "in a bin"
+   ],
+   "answer": 3,
+   "explanation": "Bins keep places clean.",
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is a living thing?",
+   "choices": [
+    "a goat",
+    "a motorbike",
+    "a stone",
+    "water"
+   ],
+   "answer": 0,
+   "explanation": "A goat shows all the signs of life.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of a plant makes food?",
+   "choices": [
+    "the seeds",
+    "the stem",
+    "the leaves",
+    "the roots"
+   ],
+   "answer": 2,
+   "explanation": "Photosynthesis happens in the leaves.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which animal is a mammal?",
+   "choices": [
+    "a hen",
+    "a lizard",
+    "a bat",
+    "a frog"
+   ],
+   "answer": 2,
+   "explanation": "A bat has fur and feeds its young with milk.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m04",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which sense organ do we use to hear?",
+   "choices": [
+    "the eye",
+    "the skin",
+    "the ear",
+    "the nose"
+   ],
+   "answer": 2,
+   "explanation": "The ear is the organ of hearing.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m05",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which food mostly gives energy?",
+   "choices": [
+    "water",
+    "fish",
+    "oranges",
+    "cassava"
+   ],
+   "answer": 3,
+   "explanation": "Cassava is rich in starch.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m06",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which soil is best for most crops?",
+   "choices": [
+    "loam",
+    "gravel",
+    "clay soil",
+    "sandy soil"
+   ],
+   "answer": 0,
+   "explanation": "Loam holds water and air and has humus.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which material is an insulator of electricity?",
+   "choices": [
+    "aluminium",
+    "iron",
+    "rubber",
+    "copper"
+   ],
+   "answer": 2,
+   "explanation": "Rubber does not let electricity pass.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is biodegradable?",
+   "choices": [
+    "tin can",
+    "banana peel",
+    "glass bottle",
+    "plastic bag"
+   ],
+   "answer": 1,
+   "explanation": "It rots and returns to the soil.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m09",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mrs Nji plants three beans in pots. Pot 1 has soil, water and light. Pot 2 has soil and light, but no water. Pot 3 has soil and water, but is kept in a dark cupboard. After two weeks only the beans in pot 1 are healthy.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is missing in pot 2?",
+     "choices": [
+      "soil",
+      "water",
+      "light",
+      "seeds"
+     ],
+     "answer": 1,
+     "explanation": "Pot 2 was not watered.",
+     "id": "fslc-science-materials-environment-m09-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is missing in pot 3?",
+     "choices": [
+      "seeds",
+      "water",
+      "soil",
+      "light"
+     ],
+     "answer": 3,
+     "explanation": "Pot 3 was in the dark.",
+     "id": "fslc-science-materials-environment-m09-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "What does the experiment show?",
+     "choices": [
+      "plants need only soil",
+      "plants grow best in the dark",
+      "plants need water and light to grow well",
+      "water harms beans"
+     ],
+     "answer": 2,
+     "explanation": "Only pot 1 had everything.",
+     "id": "fslc-science-materials-environment-m09-c"
+    }
+   ],
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m10",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school kitchen cooks for the pupils. The cook uses a metal pot with a plastic handle. After cooking, the pot is washed and left in the sun.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why is the pot made of metal?",
+     "choices": [
+      "metal is an insulator",
+      "metal is transparent",
+      "metal floats",
+      "metal conducts heat well"
+     ],
+     "answer": 3,
+     "explanation": "Heat passes through metal to the food.",
+     "id": "fslc-science-materials-environment-m10-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why is the handle plastic?",
+     "choices": [
+      "plastic is magnetic",
+      "plastic is a conductor",
+      "plastic is an insulator, so it stays cool",
+      "plastic is heavy"
+     ],
+     "answer": 2,
+     "explanation": "It does not let the heat pass.",
+     "id": "fslc-science-materials-environment-m10-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which food group does rice mostly belong to?",
+     "choices": [
+      "body-building foods",
+      "water",
+      "energy foods",
+      "protective foods"
+     ],
+     "answer": 2,
+     "explanation": "Rice is rich in starch.",
+     "id": "fslc-science-materials-environment-m10-c"
+    }
+   ],
+   "chapter": "fslc-science-materials-environment"
+  },
+  {
+   "id": "fslc-science-materials-environment-m11",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "fslc-science-environment-waste",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write a balanced meal for a Class 6 pupil using local foods. Say which food gives energy, which helps the body to grow and which gives vitamins, and give one rule of food hygiene.",
+   "model": "Boiled plantain with fish and eru leaves, and an orange. Plantain gives energy. Fish helps the body to grow (protein). Eru leaves and the orange give vitamins. Drink clean, safe water. Rule: wash your hands with soap before eating.",
+   "rubric": "Marks (out of 4): one food for energy (1), one for growth (1), one for vitamins (1), one correct hygiene rule (1).",
+   "explanation": "Boiled plantain with fish and eru leaves, and an orange. Plantain gives energy. Fish helps the body to grow (protein). Eru leaves and the orange give vitamins. Drink clean, safe water. Rule: wash your hands with soap before eating.",
+   "difficulty": 2,
+   "points": 4,
+   "chapter": "fslc-science-materials-environment"
+  }
+ ]
+}

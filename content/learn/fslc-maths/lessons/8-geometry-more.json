@@ -1,0 +1,1078 @@
+{
+ "chapter": "fslc-maths-geometry-more",
+ "lessons": [
+  {
+   "id": "fslc-maths-angles-triangles",
+   "title": "Angles and triangles",
+   "minutes": 30,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name acute, right, obtuse, straight and reflex angles.",
+    "Use the angle facts: 180° in a triangle and on a straight line, 360° round a point.",
+    "Name triangles by their sides and angles and find missing angles."
+   ],
+   "prerequisites": [
+    "fslc-maths-measurement"
+   ],
+   "exercises": [
+    "fslc-maths-geometry-more-e01",
+    "fslc-maths-geometry-more-e02",
+    "fslc-maths-geometry-more-e03",
+    "fslc-maths-geometry-more-e04",
+    "fslc-maths-geometry-more-e05",
+    "fslc-maths-geometry-more-e06"
+   ],
+   "selfCheck": [
+    "fslc-maths-angles-triangles-q1",
+    "fslc-maths-angles-triangles-q2",
+    "fslc-maths-angles-triangles-q3",
+    "fslc-maths-angles-triangles-q4",
+    "fslc-maths-angles-triangles-q5"
+   ],
+   "reviewNotes": [
+    "Constructing angles with a protractor is not included in this lesson (practical work); to be added by the teacher.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Kinds of angles",
+     "md": "We measure angles in degrees (°). An **acute** angle is less than 90°. A **right angle** is exactly 90°. An **obtuse** angle is between 90° and 180°. A **straight** angle is 180°. A **reflex** angle is between 180° and 360°. A full turn is 360°."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 235,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         190,
+         340,
+         190,
+         220,
+         40
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 215,
+        "text": "50°",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 215,
+        "text": "65°",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 28,
+        "text": "?",
+        "size": 18,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 180,
+        "text": "a triangle: 50° + 65° + ? = 180°",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The three angles of a triangle add up to 180°.",
+     "alt": "A blue triangle. Two corners are marked 50 degrees and 65 degrees. The top corner has a question mark. The angles add up to 180 degrees."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Angle facts",
+     "md": "- The angles of a **triangle** add up to **180°**.\n- Angles on a **straight line** add up to **180°**.\n- Angles round a **point** add up to **360°**.\n- In an **isosceles** triangle two sides are equal and the two base angles are equal. In an **equilateral** triangle all sides are equal and each angle is 60°."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using 360° for a triangle (that is for a point).\n- In an isosceles triangle, writing the same angle for **all three** corners. Only the two base angles are equal.\n- Reading the wrong scale on a protractor: start from 0 on the side where the arm points."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Two angles of a triangle are 65° and 50°. Find the third angle.",
+     "steps": [
+      "The three angles add up to 180°.",
+      "65° + 50° = 115°.",
+      "Third angle = 180° − 115° = 65°."
+     ],
+     "answer": "65°."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "An isosceles triangle has an angle of 40° at the top (between the two equal sides). Find the base angles.",
+     "steps": [
+      "Sum of the two base angles: 180° − 40° = 140°.",
+      "The two base angles are equal: 140° ÷ 2 = 70° each."
+     ],
+     "answer": "70° and 70°."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-circles",
+   "title": "Circles: circumference and area",
+   "minutes": 30,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the parts of a circle: centre, radius, diameter, circumference.",
+    "Calculate the circumference and the area using π = 3.14.",
+    "Solve simple problems about wheels and round gardens."
+   ],
+   "prerequisites": [
+    "fslc-maths-measurement"
+   ],
+   "exercises": [
+    "fslc-maths-geometry-more-e07",
+    "fslc-maths-geometry-more-e08",
+    "fslc-maths-geometry-more-e09",
+    "fslc-maths-geometry-more-e10",
+    "fslc-maths-geometry-more-e11",
+    "fslc-maths-geometry-more-e12"
+   ],
+   "selfCheck": [
+    "fslc-maths-circles-q1",
+    "fslc-maths-circles-q2",
+    "fslc-maths-circles-q3",
+    "fslc-maths-circles-q4",
+    "fslc-maths-circles-q5"
+   ],
+   "reviewNotes": [
+    "The text states clearly that π = 3.14 is used; check that the FSLC uses 3.14 (some books use 22/7).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parts of a circle",
+     "md": "The **radius** (r) goes from the centre to the edge. The **diameter** (d) goes right across through the centre: d = 2 × r. The **circumference** is the distance round the circle. In this course we use **π = 3.14** (π is about 3.14159, and we round it to 3.14)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 3,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 280,
+        "y2": 120,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 120,
+        "x2": 258,
+        "y2": 63,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 110,
+        "text": "diameter",
+        "size": 13,
+        "anchor": "middle",
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 100,
+        "text": "radius",
+        "size": 13,
+        "anchor": "start",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 228,
+        "text": "circumference = the distance round the circle",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Diameter, radius and circumference.",
+     "alt": "A circle with its centre marked. A blue line across the circle through the centre is the diameter. A red line from the centre to the edge is the radius."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Circle formulas (π = 3.14)",
+     "md": "- **Circumference**: C = π × d = 2 × π × r.\n- **Area**: A = π × r × r (radius **squared**).\nThe circumference is a length (cm, m). The area is in square units (cm², m²). Always find the **radius** first: if you are given the diameter, divide it by 2."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the **diameter** in the area formula. Find r = d ÷ 2 first.\n- Writing r × 2 instead of r × r for the area: for r = 7, r × r = 49, not 14.\n- Writing cm instead of cm² for an area."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A circle has a radius of 7 cm. Find its circumference and its area (π = 3.14).",
+     "steps": [
+      "Circumference = 2 × 3.14 × 7 = 6.28 × 7 = 43.96 cm.",
+      "Area = 3.14 × 7 × 7 = 3.14 × 49 = 153.86 cm²."
+     ],
+     "answer": "C = 43.96 cm; A = 153.86 cm²."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A round flower bed has a diameter of 20 m. What is its area (π = 3.14)?",
+     "steps": [
+      "Radius = 20 ÷ 2 = 10 m.",
+      "Area = 3.14 × 10 × 10 = 314 m²."
+     ],
+     "answer": "314 m²."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-area-volume-more",
+   "title": "Area, perimeter and volume: compound shapes and solids",
+   "minutes": 35,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the area and perimeter of compound (L-shaped) figures.",
+    "Use the area of a parallelogram and a triangle.",
+    "Find the volume of a cuboid and change cm³ to litres."
+   ],
+   "prerequisites": [
+    "fslc-maths-measurement"
+   ],
+   "exercises": [
+    "fslc-maths-geometry-more-e13",
+    "fslc-maths-geometry-more-e14",
+    "fslc-maths-geometry-more-e15",
+    "fslc-maths-geometry-more-e16",
+    "fslc-maths-geometry-more-e17",
+    "fslc-maths-geometry-more-e18"
+   ],
+   "selfCheck": [
+    "fslc-maths-area-volume-more-q1",
+    "fslc-maths-area-volume-more-q2",
+    "fslc-maths-area-volume-more-q3",
+    "fslc-maths-area-volume-more-q4",
+    "fslc-maths-area-volume-more-q5"
+   ],
+   "reviewNotes": [
+    "This lesson goes beyond the basic 'Measurement and geometry' lesson (compound shapes, capacity). Check the syllabus for parallelogram and compound shapes.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "More formulas",
+     "md": "- **Rectangle**: A = l × w; P = 2 × (l + w).\n- **Parallelogram**: A = base × height (the height is straight up, not the slanted side).\n- **Triangle**: A = (base × height) ÷ 2.\n- **Cuboid**: V = l × w × h, in cm³ or m³.\n- **Capacity**: 1 litre = 1,000 cm³ (so 1 m³ = 1,000 litres)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         80,
+         30,
+         240,
+         30,
+         240,
+         90,
+         320,
+         90,
+         320,
+         190,
+         80,
+         190
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 212,
+        "text": "12 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 62,
+        "y": 112,
+        "text": "8 m",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 62,
+        "text": "4 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 142,
+        "text": "3 m",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 112,
+        "text": "L-shape",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An L-shape: a 12 m by 8 m rectangle with a 4 m by 3 m corner removed.",
+     "alt": "A blue L-shaped figure. The bottom is 12 metres and the left side is 8 metres. The missing corner at the top right is 4 metres wide and 3 metres high."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Compound shapes",
+     "md": "Cut the shape into rectangles (or triangles) you know, or take a small piece away from a big rectangle. For the L-shape: area = 12 × 8 − 4 × 3 = 96 − 12 = 84 m². For the **perimeter**, add all the outside sides. Taking a corner out of a rectangle does not change its perimeter."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding the **inside** lines to the perimeter.\n- Using the slanted side as the height of a parallelogram or triangle.\n- Forgetting to change units: cm³ to litres means **divide by 1,000**. Do not mix m and cm in the same formula."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the area and perimeter of the L-shape in the picture (12 m by 8 m with a 4 m by 3 m corner removed).",
+     "steps": [
+      "Area of the big rectangle: 12 × 8 = 96 m². Area removed: 4 × 3 = 12 m².",
+      "Area of the L-shape: 96 − 12 = 84 m².",
+      "Perimeter = 12 + 8 + 12 + 8 = 40 m (same as the big rectangle)."
+     ],
+     "answer": "Area 84 m²; perimeter 40 m."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A water tank is 50 cm long, 40 cm wide and 30 cm high. How many litres can it hold?",
+     "steps": [
+      "Volume = 50 × 40 × 30 = 60,000 cm³.",
+      "1 litre = 1,000 cm³, so 60,000 ÷ 1,000 = 60 litres."
+     ],
+     "answer": "60 litres."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-geometry-more"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "fslc-maths-geometry-more-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-angles-triangles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two angles of a triangle are 72° and 48°. What is the third angle?",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "72 + 48 = 120. 180 − 120 = 60.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-angles-triangles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An angle of 135° is...",
+   "choices": [
+    "obtuse",
+    "acute",
+    "right",
+    "reflex"
+   ],
+   "answer": 0,
+   "explanation": "It is between 90° and 180°, so it is obtuse.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-angles-triangles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two angles on a straight line are 118° and x. Find x.",
+   "answer": 62,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "180 − 118 = 62.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-angles-triangles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An isosceles triangle has a top angle of 50°. How big is each base angle?",
+   "answer": 65,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "(180 − 50) ÷ 2 = 65.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-angles-triangles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A triangle can have two right angles.",
+   "answer": false,
+   "explanation": "Two right angles already make 180°, so there would be no angle left for the third corner.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-angles-triangles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In triangle PQR, angle P = 48° and angle Q = 67°. The side QR is extended in a straight line to a point S.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find angle R inside the triangle.",
+     "answer": 65,
+     "tolerance": 0,
+     "explanation": "180 − 48 − 67 = 65°.",
+     "unit": "°",
+     "id": "fslc-maths-geometry-more-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What type of triangle is PQR by its angles?",
+     "choices": [
+      "right-angled",
+      "obtuse-angled",
+      "equilateral",
+      "acute-angled"
+     ],
+     "answer": 3,
+     "explanation": "All three angles (48°, 67°, 65°) are less than 90°.",
+     "id": "fslc-maths-geometry-more-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find angle PRS (on the straight line QS, next to angle R).",
+     "answer": 115,
+     "tolerance": 0,
+     "explanation": "Angles on a straight line add to 180°: 180 − 65 = 115°.",
+     "unit": "°",
+     "id": "fslc-maths-geometry-more-e06-c"
+    }
+   ],
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-angles-triangles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-angles-triangles",
+   "prompt": "How many degrees are there in a full turn?",
+   "choices": [
+    "360°",
+    "180°",
+    "100°",
+    "90°"
+   ],
+   "answer": 0,
+   "explanation": "A full turn is 360°.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-angles-triangles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-angles-triangles",
+   "prompt": "The angles of a triangle add up to...",
+   "choices": [
+    "90°",
+    "180°",
+    "360°",
+    "100°"
+   ],
+   "answer": 1,
+   "explanation": "This is true for every triangle.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-angles-triangles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-angles-triangles",
+   "prompt": "A triangle with 3 equal sides is called...",
+   "choices": [
+    "scalene",
+    "equilateral",
+    "right-angled",
+    "isosceles"
+   ],
+   "answer": 1,
+   "explanation": "Equi means equal; each angle is 60°.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-angles-triangles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-angles-triangles",
+   "prompt": "Which angle is acute?",
+   "choices": [
+    "120°",
+    "90°",
+    "200°",
+    "35°"
+   ],
+   "answer": 3,
+   "explanation": "An acute angle is less than 90°.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-angles-triangles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-angles-triangles",
+   "prompt": "Angles round a point add up to...",
+   "choices": [
+    "180°",
+    "270°",
+    "360°",
+    "90°"
+   ],
+   "answer": 2,
+   "explanation": "They make a full turn.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the circumference of a circle with radius 7 cm (π = 3.14).",
+   "answer": 43.96,
+   "tolerance": 0.01,
+   "unit": "cm",
+   "explanation": "2 × 3.14 × 7 = 43.96.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the area of a circle of radius 10 m (π = 3.14).",
+   "answer": 314,
+   "tolerance": 0,
+   "unit": "m²",
+   "explanation": "3.14 × 10 × 10 = 314.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The diameter of a circle is 18 cm. Its radius is...",
+   "choices": [
+    "18 cm",
+    "36 cm",
+    "9 cm",
+    "6 cm"
+   ],
+   "answer": 2,
+   "explanation": "Radius = diameter ÷ 2 = 9 cm.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A round garden has a radius of 5 m. Fencing costs 800 FCFA per metre. What is the cost of fencing all round it (π = 3.14, in FCFA)?",
+   "answer": 25120,
+   "tolerance": 1,
+   "explanation": "C = 2 × 3.14 × 5 = 31.4 m. Cost = 31.4 × 800 = 25,120 FCFA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If the radius of a circle doubles, its circumference doubles too.",
+   "answer": true,
+   "explanation": "C = 2 × π × r, so twice the radius gives twice the circumference. (The area becomes four times bigger!)",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The wheel of a bicycle has a diameter of 70 cm. Use π = 3.14.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the circumference of the wheel.",
+     "answer": 219.8,
+     "tolerance": 0.1,
+     "explanation": "C = 3.14 × 70 = 219.8 cm.",
+     "unit": "cm",
+     "id": "fslc-maths-geometry-more-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How far does the bicycle go in 100 turns of the wheel (in cm)?",
+     "answer": 21980,
+     "tolerance": 1,
+     "explanation": "219.8 × 100 = 21,980 cm.",
+     "unit": "cm",
+     "id": "fslc-maths-geometry-more-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Give this distance in metres.",
+     "answer": 219.8,
+     "tolerance": 0.1,
+     "explanation": "21,980 ÷ 100 = 219.8 m.",
+     "unit": "m",
+     "id": "fslc-maths-geometry-more-e12-c"
+    }
+   ],
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-circles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-circles",
+   "prompt": "The distance round a circle is called its...",
+   "choices": [
+    "area",
+    "circumference",
+    "diameter",
+    "radius"
+   ],
+   "answer": 1,
+   "explanation": "It is the perimeter of the circle.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-circles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-circles",
+   "prompt": "A circle has radius 3 cm. What is its diameter?",
+   "choices": [
+    "1.5 cm",
+    "3 cm",
+    "9 cm",
+    "6 cm"
+   ],
+   "answer": 3,
+   "explanation": "Diameter = 2 × radius.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-circles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-circles",
+   "prompt": "Which formula gives the area of a circle?",
+   "choices": [
+    "2 × π × r",
+    "r × r × 2",
+    "π × d",
+    "π × r × r"
+   ],
+   "answer": 3,
+   "explanation": "The area uses the radius squared.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-circles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-circles",
+   "prompt": "Area of a circle with radius 2 m (π = 3.14)?",
+   "choices": [
+    "12.56 m",
+    "12.56 m²",
+    "25.12 m²",
+    "6.28 m²"
+   ],
+   "answer": 1,
+   "explanation": "3.14 × 2 × 2 = 12.56 m².",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-circles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-circles",
+   "prompt": "The value of π that we use is about...",
+   "choices": [
+    "3",
+    "1.34",
+    "3.14",
+    "31.4"
+   ],
+   "answer": 2,
+   "explanation": "π ≈ 3.14.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-area-volume-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A parallelogram has a base of 10 cm and a height of 6 cm. Find its area.",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "10 × 6 = 60.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-area-volume-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the volume of a cuboid 8 cm long, 5 cm wide and 3 cm high.",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "8 × 5 × 3 = 120.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-area-volume-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A tank has a volume of 60,000 cm³. How many litres is that?",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "litres",
+   "explanation": "60,000 ÷ 1,000 = 60.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-area-volume-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A room is 6 m by 4 m. It is covered with square tiles of side 50 cm. How many tiles are needed?",
+   "answer": 96,
+   "tolerance": 0,
+   "explanation": "Floor: 6 m × 4 m = 24 m² = 240,000 cm². One tile: 50 × 50 = 2,500 cm². 240,000 ÷ 2,500 = 96 tiles.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-area-volume-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An L-shaped field is a 20 m by 15 m rectangle with a 5 m by 4 m corner removed. What is its area?",
+   "answer": 280,
+   "tolerance": 0,
+   "unit": "m²",
+   "explanation": "300 − 20 = 280 m².",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-geometry-more-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-area-volume-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A rectangular water tank is 80 cm long, 50 cm wide and 40 cm high.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the volume of the tank in cm³?",
+     "answer": 160000,
+     "tolerance": 0,
+     "explanation": "80 × 50 × 40 = 160,000 cm³.",
+     "unit": "cm³",
+     "id": "fslc-maths-geometry-more-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many litres can it hold when it is full?",
+     "answer": 160,
+     "tolerance": 0,
+     "explanation": "160,000 ÷ 1,000 = 160 litres.",
+     "unit": "litres",
+     "id": "fslc-maths-geometry-more-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "It is filled to 3/4 of its height. How many 10-litre buckets of water are in it?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "3/4 of 160 = 120 litres. 120 ÷ 10 = 12 buckets.",
+     "unit": "buckets",
+     "id": "fslc-maths-geometry-more-e18-c"
+    }
+   ],
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-area-volume-more-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-area-volume-more",
+   "prompt": "The volume of a cuboid is found by...",
+   "choices": [
+    "2 × (l + w)",
+    "l × w ÷ 2",
+    "l + w + h",
+    "l × w × h"
+   ],
+   "answer": 3,
+   "explanation": "We multiply the three dimensions.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-area-volume-more-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-area-volume-more",
+   "prompt": "A triangle has base 8 cm and height 5 cm. Its area is...",
+   "choices": [
+    "13 cm²",
+    "20 cm²",
+    "20 cm",
+    "40 cm²"
+   ],
+   "answer": 1,
+   "explanation": "(8 × 5) ÷ 2 = 20 cm².",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-area-volume-more-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-area-volume-more",
+   "prompt": "1 litre equals...",
+   "choices": [
+    "10 cm³",
+    "100 cm³",
+    "1,000 cm³",
+    "10,000 cm³"
+   ],
+   "answer": 2,
+   "explanation": "A litre is a cube of 10 cm: 10 × 10 × 10 = 1,000 cm³.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-area-volume-more-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-area-volume-more",
+   "prompt": "Volume is measured in...",
+   "choices": [
+    "degrees",
+    "square units (cm²)",
+    "units (cm)",
+    "cubic units (cm³)"
+   ],
+   "answer": 3,
+   "explanation": "Volume is three-dimensional.",
+   "chapter": "fslc-maths-geometry-more"
+  },
+  {
+   "id": "fslc-maths-area-volume-more-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-area-volume-more",
+   "prompt": "A square has a side of 9 m. Its perimeter is...",
+   "choices": [
+    "81 m",
+    "27 m",
+    "18 m",
+    "36 m"
+   ],
+   "answer": 3,
+   "explanation": "4 × 9 = 36 m.",
+   "chapter": "fslc-maths-geometry-more"
+  }
+ ]
+}

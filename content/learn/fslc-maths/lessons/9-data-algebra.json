@@ -1,0 +1,1414 @@
+{
+ "chapter": "fslc-maths-data-algebra",
+ "lessons": [
+  {
+   "id": "fslc-maths-data-handling",
+   "title": "Data: tables, tally charts, pictographs and bar charts",
+   "minutes": 25,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Collect data with a tally chart and make a frequency table.",
+    "Read and draw a pictograph and a bar chart.",
+    "Answer questions about data (total, most popular, difference)."
+   ],
+   "prerequisites": [
+    "fslc-maths-averages",
+    "fslc-maths-fractions"
+   ],
+   "exercises": [
+    "fslc-maths-data-algebra-e01",
+    "fslc-maths-data-algebra-e02",
+    "fslc-maths-data-algebra-e03",
+    "fslc-maths-data-algebra-e04",
+    "fslc-maths-data-algebra-e05",
+    "fslc-maths-data-algebra-e06"
+   ],
+   "selfCheck": [
+    "fslc-maths-data-handling-q1",
+    "fslc-maths-data-handling-q2",
+    "fslc-maths-data-handling-q3",
+    "fslc-maths-data-handling-q4",
+    "fslc-maths-data-handling-q5"
+   ],
+   "reviewNotes": [
+    "Data in the survey are invented for practice. Drawing charts on squared paper is practical work not tested here.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Collecting and showing data",
+     "md": "**Data** are pieces of information, for example the favourite fruit of each pupil. We count with a **tally chart**: one stroke for each answer, and a bar across for every fifth one. The numbers form a **frequency table**. Then we can show them in a **pictograph** (one symbol stands for a number of items) or in a **bar chart** (the height of each bar shows the number)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Mango",
+        "value": 12,
+        "color": "blue"
+       },
+       {
+        "label": "Pawpaw",
+        "value": 8,
+        "color": "blue"
+       },
+       {
+        "label": "Orange",
+        "value": 10,
+        "color": "blue"
+       },
+       {
+        "label": "Banana",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "Pineapple",
+        "value": 4,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Favourite fruit of 40 pupils.",
+     "alt": "A bar chart. Mango is 12 pupils, pawpaw 8, orange 10, banana 6 and pineapple 4."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reading a chart",
+     "md": "1. Read the title and the labels.\n2. Look at the scale: what does one step stand for?\n3. Read the value of each bar from the top of the bar.\n4. Check that the values add up to the total number asked.\nFor a pictograph, read the key: if one ☺ stands for 4 pupils, then 3 ☺ stand for 12 pupils."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Not reading the **scale** or the key of the pictograph.\n- Reading the bar next to the right one.\n- Giving the **name** (mango) when the question asks for the **number** (12), or the opposite."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "40 pupils chose their favourite fruit: mango 12, pawpaw 8, orange 10, banana 6, pineapple 4. What fraction of the pupils chose mango? Give it as a percentage.",
+     "steps": [
+      "Fraction: 12 out of 40, that is 12/40.",
+      "Percentage: 12 ÷ 40 × 100 = 30%."
+     ],
+     "answer": "12/40 = 3/10 = 30%."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "In a pictograph, one ☺ stands for 4 pupils. How many ☺ are needed for 10 pupils?",
+     "steps": [
+      "10 ÷ 4 = 2 remainder 2.",
+      "We draw 2 whole ☺ and a half ☺ (which stands for 2 pupils)."
+     ],
+     "answer": "2 and a half symbols."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-probability-intro",
+   "title": "Introduction to probability",
+   "minutes": 25,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the words impossible, unlikely, even chance, likely and certain.",
+    "Calculate the probability of an event as a fraction or a decimal.",
+    "Use a coin, a die and a bag of coloured balls as examples."
+   ],
+   "prerequisites": [
+    "fslc-maths-fractions"
+   ],
+   "exercises": [
+    "fslc-maths-data-algebra-e07",
+    "fslc-maths-data-algebra-e08",
+    "fslc-maths-data-algebra-e09",
+    "fslc-maths-data-algebra-e10",
+    "fslc-maths-data-algebra-e11",
+    "fslc-maths-data-algebra-e12"
+   ],
+   "selfCheck": [
+    "fslc-maths-probability-intro-q1",
+    "fslc-maths-probability-intro-q2",
+    "fslc-maths-probability-intro-q3",
+    "fslc-maths-probability-intro-q4",
+    "fslc-maths-probability-intro-q5"
+   ],
+   "reviewNotes": [
+    "Probability may be only an enrichment topic at Class 6; check with the official syllabus (not all versions include it).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Probability",
+     "md": "**Probability** tells us how likely it is that something happens. It is a number from **0** (impossible) to **1** (certain). **Probability = number of favourable outcomes ÷ number of possible outcomes.** If all outcomes are equally likely, a coin shows heads with probability 1/2."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 100,
+        "x2": 360,
+        "y2": 100,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 90,
+        "x2": 40,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 90,
+        "x2": 200,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 90,
+        "x2": 360,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 70,
+        "text": "0",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 70,
+        "text": "1/2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 70,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 135,
+        "text": "Impossible",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 135,
+        "text": "Even chance",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 135,
+        "text": "Certain",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 180,
+        "text": "Probability is always between 0 and 1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The probability scale from 0 to 1.",
+     "alt": "A line with three marks. At the left is 0, impossible. In the middle is 1/2, even chance. At the right is 1, certain."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Examples",
+     "md": "- A coin: 2 outcomes (head, tail). P(head) = 1/2 = 0.5.\n- A die has 6 faces. P(even number) = 3/6 = 1/2, because 2, 4 and 6 are even.\n- A bag with 3 red, 5 blue and 2 green balls has 10 balls. P(red) = 3/10 = 0.3.\n- P(not red) = 1 − 0.3 = 0.7."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Dividing by the number of **other** outcomes instead of the **total** number (the bag has 10 balls, not 7).\n- Thinking that after 3 heads the next coin is 'sure' to be a tail. Each throw is new: the chance is still 1/2.\n- Giving a probability bigger than 1 or smaller than 0."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A bag holds 3 red, 5 blue and 2 green balls. One ball is taken without looking. Find the probability that it is blue.",
+     "steps": [
+      "Total number of balls: 3 + 5 + 2 = 10.",
+      "Blue balls: 5.",
+      "P(blue) = 5/10 = 1/2 = 0.5."
+     ],
+     "answer": "P(blue) = 1/2."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A fair die is rolled once. What is the probability of a number greater than 4?",
+     "steps": [
+      "The numbers greater than 4 are 5 and 6: 2 outcomes.",
+      "There are 6 possible outcomes.",
+      "P = 2/6 = 1/3."
+     ],
+     "answer": "1/3."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-algebra-intro",
+   "title": "Introduction to algebra: simple equations",
+   "minutes": 30,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use a letter for an unknown number.",
+    "Solve one-step and two-step equations by doing the same to both sides.",
+    "Write and solve an equation from a word problem."
+   ],
+   "prerequisites": [
+    "fslc-maths-whole-numbers"
+   ],
+   "exercises": [
+    "fslc-maths-data-algebra-e13",
+    "fslc-maths-data-algebra-e14",
+    "fslc-maths-data-algebra-e15",
+    "fslc-maths-data-algebra-e16",
+    "fslc-maths-data-algebra-e17",
+    "fslc-maths-data-algebra-e18"
+   ],
+   "selfCheck": [
+    "fslc-maths-algebra-intro-q1",
+    "fslc-maths-algebra-intro-q2",
+    "fslc-maths-algebra-intro-q3",
+    "fslc-maths-algebra-intro-q4",
+    "fslc-maths-algebra-intro-q5"
+   ],
+   "reviewNotes": [
+    "Only equations with one unknown and whole-number solutions; check the syllabus level (algebra may be limited to 'finding the missing number').",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Letters for numbers",
+     "md": "In algebra a **letter** stands for a number we do not know yet. **3x** means 3 × x. An **equation** says that two things are equal, for example x + 7 = 15. To **solve** it we find the value of x that makes it true. To check, put the answer back in the equation."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 90,
+        "x2": 340,
+        "y2": 90,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         90,
+         175,
+         160,
+         225,
+         160
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 90,
+        "w": 100,
+        "h": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 90,
+        "w": 100,
+        "h": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 70,
+        "text": "x + 7",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 70,
+        "text": "15",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 195,
+        "text": "Both sides are equal: take 7 from each side, x = 8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An equation is like a balance: do the same on both sides.",
+     "alt": "A balance with a blue pan holding x plus 7 and a green pan holding 15. Text says to take 7 from each side, so x is 8."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Solving an equation",
+     "md": "Do the **opposite** operation, on **both** sides, to get x alone. x + 7 = 15: subtract 7 from both sides, x = 8. 3x = 21: divide both sides by 3, x = 7. x ÷ 4 = 5: multiply both sides by 4, x = 20. For 2x + 5 = 17: first subtract 5 (2x = 12), then divide by 2 (x = 6)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Changing only **one** side of the equation.\n- Using the **same** operation instead of the opposite: for x + 7 = 15 writing x = 15 + 7.\n- In a two-step equation, dividing first and forgetting to divide **everything**."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Solve 2x + 5 = 17.",
+     "steps": [
+      "Subtract 5 from both sides: 2x = 17 − 5 = 12.",
+      "Divide both sides by 2: x = 6.",
+      "Check: 2 × 6 + 5 = 17. It is correct."
+     ],
+     "answer": "x = 6."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "I think of a number. I multiply it by 3 and subtract 4. The answer is 11. What is my number?",
+     "steps": [
+      "Let the number be x. Then 3x − 4 = 11.",
+      "Add 4 to both sides: 3x = 15.",
+      "Divide by 3: x = 5."
+     ],
+     "answer": "The number is 5."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-data-algebra"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "fslc-maths-data-algebra-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Total number of pupils in the survey: 12 + 8 + 10 + 6 + 4. Find the total.",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "12 + 8 = 20; 20 + 10 = 30; 30 + 6 = 36; 36 + 4 = 40.",
+   "difficulty": 1,
+   "points": 1,
+   "figure": {
+    "kind": "bars",
+    "w": 400,
+    "h": 240,
+    "bars": [
+     {
+      "label": "Mango",
+      "value": 12,
+      "color": "blue"
+     },
+     {
+      "label": "Pawpaw",
+      "value": 8,
+      "color": "blue"
+     },
+     {
+      "label": "Orange",
+      "value": 10,
+      "color": "blue"
+     },
+     {
+      "label": "Banana",
+      "value": 6,
+      "color": "blue"
+     },
+     {
+      "label": "Pineapple",
+      "value": 4,
+      "color": "blue"
+     }
+    ]
+   },
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which fruit is the most popular?",
+   "choices": [
+    "Banana",
+    "Mango",
+    "Pineapple",
+    "Pawpaw"
+   ],
+   "answer": 1,
+   "explanation": "Mango has the tallest bar (12).",
+   "difficulty": 1,
+   "points": 1,
+   "figure": {
+    "kind": "bars",
+    "w": 400,
+    "h": 240,
+    "bars": [
+     {
+      "label": "Mango",
+      "value": 12,
+      "color": "blue"
+     },
+     {
+      "label": "Pawpaw",
+      "value": 8,
+      "color": "blue"
+     },
+     {
+      "label": "Orange",
+      "value": 10,
+      "color": "blue"
+     },
+     {
+      "label": "Banana",
+      "value": 6,
+      "color": "blue"
+     },
+     {
+      "label": "Pineapple",
+      "value": 4,
+      "color": "blue"
+     }
+    ]
+   },
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many more pupils chose mango than pineapple?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "12 − 4 = 8.",
+   "difficulty": 1,
+   "points": 1,
+   "figure": {
+    "kind": "bars",
+    "w": 400,
+    "h": 240,
+    "bars": [
+     {
+      "label": "Mango",
+      "value": 12,
+      "color": "blue"
+     },
+     {
+      "label": "Pawpaw",
+      "value": 8,
+      "color": "blue"
+     },
+     {
+      "label": "Orange",
+      "value": 10,
+      "color": "blue"
+     },
+     {
+      "label": "Banana",
+      "value": 6,
+      "color": "blue"
+     },
+     {
+      "label": "Pineapple",
+      "value": 4,
+      "color": "blue"
+     }
+    ]
+   },
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a pictograph, one symbol stands for 5 books. A class has 35 books. How many symbols are drawn?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "35 ÷ 5 = 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the fruit survey, pawpaw was chosen by 20% of the pupils.",
+   "answer": true,
+   "explanation": "8 ÷ 40 × 100 = 20%.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A shopkeeper sold these numbers of bags of rice on five days: Monday 20, Tuesday 35, Wednesday 25, Thursday 40, Friday 30.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many bags did he sell in all?",
+     "answer": 150,
+     "tolerance": 0,
+     "explanation": "20 + 35 + 25 + 40 + 30 = 150.",
+     "unit": "bags",
+     "id": "fslc-maths-data-algebra-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What was the mean number of bags sold per day?",
+     "answer": 30,
+     "tolerance": 0,
+     "explanation": "150 ÷ 5 = 30.",
+     "unit": "bags",
+     "id": "fslc-maths-data-algebra-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is the difference between the best day and the worst day?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "Best 40 (Thursday), worst 20 (Monday). 40 − 20 = 20.",
+     "unit": "bags",
+     "id": "fslc-maths-data-algebra-e06-c"
+    }
+   ],
+   "figure": {
+    "kind": "bars",
+    "w": 400,
+    "h": 240,
+    "bars": [
+     {
+      "label": "Mon",
+      "value": 20,
+      "color": "blue"
+     },
+     {
+      "label": "Tue",
+      "value": 35,
+      "color": "blue"
+     },
+     {
+      "label": "Wed",
+      "value": 25,
+      "color": "blue"
+     },
+     {
+      "label": "Thu",
+      "value": 40,
+      "color": "blue"
+     },
+     {
+      "label": "Fri",
+      "value": 30,
+      "color": "blue"
+     }
+    ],
+    "unit": "bags"
+   },
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-handling-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-data-handling",
+   "prompt": "A tally chart shows ||||| |||. What number is this?",
+   "choices": [
+    "13",
+    "5",
+    "8",
+    "7"
+   ],
+   "answer": 2,
+   "explanation": "||||| is 5, plus 3 more strokes = 8.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-handling-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-data-handling",
+   "prompt": "In a pictograph, ☺ = 6 pupils. How many pupils are shown by 4 ☺?",
+   "choices": [
+    "64",
+    "4",
+    "24",
+    "10"
+   ],
+   "answer": 2,
+   "explanation": "4 × 6 = 24.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-handling-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-data-handling",
+   "prompt": "Which chart uses the height of bars?",
+   "choices": [
+    "Tally chart",
+    "Bar chart",
+    "Pictograph",
+    "Frequency table"
+   ],
+   "answer": 1,
+   "explanation": "A bar chart shows the numbers by the height of its bars.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-handling-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-data-handling",
+   "prompt": "A frequency table shows...",
+   "choices": [
+    "the average of the data",
+    "the order of the pupils",
+    "how many times each item occurs",
+    "the date of the survey"
+   ],
+   "answer": 2,
+   "explanation": "Frequency means the number of times.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-handling-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-data-handling",
+   "prompt": "6 out of 24 pupils walk to school. What percentage is this?",
+   "choices": [
+    "75%",
+    "6%",
+    "30%",
+    "25%"
+   ],
+   "answer": 3,
+   "explanation": "6 ÷ 24 = 1/4 = 25%.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-probability-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the probability of getting a head when you toss a fair coin?",
+   "choices": [
+    "1/2",
+    "1/4",
+    "1",
+    "2"
+   ],
+   "answer": 0,
+   "explanation": "There are two equally likely outcomes; one is a head.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-probability-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A fair die is rolled. What is the probability of an even number? (Give a decimal.)",
+   "answer": 0.5,
+   "tolerance": 0.01,
+   "explanation": "3 even numbers out of 6: 3/6 = 0.5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-probability-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bag has 3 red, 5 blue and 2 green balls. What is the probability of taking a red ball? (Give a decimal.)",
+   "answer": 0.3,
+   "tolerance": 0.01,
+   "explanation": "3 red out of 10 balls: 3/10 = 0.3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-probability-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the same bag, what is the probability that the ball is NOT green? (Give a decimal.)",
+   "answer": 0.8,
+   "tolerance": 0.01,
+   "explanation": "8 balls are not green: 8/10 = 0.8. Or 1 − 0.2 = 0.8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-probability-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A probability can be equal to 1.5.",
+   "answer": false,
+   "explanation": "A probability is never more than 1 (certain).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-probability-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A spinner has 8 equal sections: 3 red, 2 blue and 3 yellow. It is spun once.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the probability of blue? (decimal)",
+     "answer": 0.25,
+     "tolerance": 0.01,
+     "explanation": "2/8 = 1/4 = 0.25.",
+     "id": "fslc-maths-data-algebra-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is the probability of red or yellow? (decimal)",
+     "answer": 0.75,
+     "tolerance": 0.01,
+     "explanation": "(3 + 3)/8 = 6/8 = 0.75.",
+     "id": "fslc-maths-data-algebra-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The spinner is spun 40 times. About how many times do you expect blue?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "1/4 of 40 = 10 times (this is only an expected number; the real result may differ).",
+     "id": "fslc-maths-data-algebra-e12-c"
+    }
+   ],
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-probability-intro-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-probability-intro",
+   "prompt": "The probability of an impossible event is...",
+   "choices": [
+    "0",
+    "100",
+    "1",
+    "1/2"
+   ],
+   "answer": 0,
+   "explanation": "Impossible means it can never happen: 0.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-probability-intro-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-probability-intro",
+   "prompt": "A bag has 4 white and 6 black balls. P(white) = ",
+   "choices": [
+    "4/10",
+    "1/4",
+    "6/10",
+    "4/6"
+   ],
+   "answer": 0,
+   "explanation": "4 white out of 10 balls.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-probability-intro-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-probability-intro",
+   "prompt": "Which probability means 'certain'?",
+   "choices": [
+    "10",
+    "1",
+    "0",
+    "0.5"
+   ],
+   "answer": 1,
+   "explanation": "Certain events have probability 1.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-probability-intro-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-probability-intro",
+   "prompt": "A die is rolled. The probability of getting 6 is...",
+   "choices": [
+    "1/3",
+    "1/6",
+    "6",
+    "1/2"
+   ],
+   "answer": 1,
+   "explanation": "One face out of six.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-probability-intro-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-probability-intro",
+   "prompt": "If P(rain) = 0.3, then P(no rain) = ",
+   "choices": [
+    "1.3",
+    "0.3",
+    "0.7",
+    "0"
+   ],
+   "answer": 2,
+   "explanation": "1 − 0.3 = 0.7.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve x + 7 = 15.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "Subtract 7 from both sides: x = 15 − 7 = 8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve 3x = 21.",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "Divide both sides by 3: x = 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the value of 3a + 2 when a = 4.",
+   "answer": 14,
+   "tolerance": 0,
+   "explanation": "3 × 4 + 2 = 12 + 2 = 14.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve x ÷ 4 = 5.",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "Multiply both sides by 4: x = 20.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "I think of a number, multiply it by 3 and subtract 4. The answer is 11. What is the number?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "3x − 4 = 11, so 3x = 15 and x = 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mr Che buys 4 books at x FCFA each and a school bag for 500 FCFA. He pays 2,100 FCFA in all.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which equation shows this?",
+     "choices": [
+      "x + 500 = 2100",
+      "4x − 500 = 2100",
+      "4x + 500 = 2100",
+      "4 + x + 500 = 2100"
+     ],
+     "answer": 2,
+     "explanation": "4 books cost 4x. Adding the bag: 4x + 500 = 2,100.",
+     "id": "fslc-maths-data-algebra-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Solve it to find x (the price of one book, in FCFA).",
+     "answer": 400,
+     "tolerance": 0,
+     "explanation": "4x = 2,100 − 500 = 1,600. x = 1,600 ÷ 4 = 400.",
+     "unit": "FCFA",
+     "id": "fslc-maths-data-algebra-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What do 3 of these books cost?",
+     "answer": 1200,
+     "tolerance": 0,
+     "explanation": "3 × 400 = 1,200 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-data-algebra-e18-c"
+    }
+   ],
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-algebra-intro-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-algebra-intro",
+   "prompt": "In algebra, 5y means...",
+   "choices": [
+    "50 + y",
+    "5 + y",
+    "5 × y",
+    "5 − y"
+   ],
+   "answer": 2,
+   "explanation": "A number next to a letter means multiply.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-algebra-intro-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-algebra-intro",
+   "prompt": "Solve x − 4 = 10.",
+   "choices": [
+    "x = 14",
+    "x = 6",
+    "x = 40",
+    "x = 2.5"
+   ],
+   "answer": 0,
+   "explanation": "Add 4 to both sides: x = 14.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-algebra-intro-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-algebra-intro",
+   "prompt": "Solve 5x = 35.",
+   "choices": [
+    "x = 40",
+    "x = 175",
+    "x = 7",
+    "x = 30"
+   ],
+   "answer": 2,
+   "explanation": "Divide both sides by 5.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-algebra-intro-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-algebra-intro",
+   "prompt": "If 2x + 1 = 9, then x is...",
+   "choices": [
+    "5",
+    "8",
+    "4",
+    "10"
+   ],
+   "answer": 2,
+   "explanation": "2x = 8, so x = 4.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-algebra-intro-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-algebra-intro",
+   "prompt": "To solve x + 6 = 10 we...",
+   "choices": [
+    "divide both sides by 6",
+    "add 6 to both sides",
+    "multiply both sides by 6",
+    "subtract 6 from both sides"
+   ],
+   "answer": 3,
+   "explanation": "The opposite of + 6 is − 6.",
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Round 4,865,129 to the nearest 100,000.",
+   "answer": 4900000,
+   "tolerance": 0,
+   "explanation": "The ten-thousands digit is 6, so round up: 4,900,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the HCF of 36 and 48?",
+   "choices": [
+    "12",
+    "6",
+    "24",
+    "144"
+   ],
+   "answer": 0,
+   "explanation": "Common factors: 1, 2, 3, 4, 6, 12. The highest is 12.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the LCM of 6 and 9.",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "Multiples of 9: 9, 18. 18 is also a multiple of 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m04",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Share 48 mangoes between Ada and Bih in the ratio 1 : 3. How many mangoes does Ada (the smaller share) get?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "4 parts: 48 ÷ 4 = 12 for one part. Ada gets 12.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m05",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the mean of 6, 9, 12, 15 and 18.",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "Total 60 ÷ 5 = 12.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m06",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two angles of a triangle are 38° and 79°. Find the third angle.",
+   "answer": 63,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "180 − 38 − 79 = 63.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the area of a circle of radius 4 cm (π = 3.14).",
+   "answer": 50.24,
+   "tolerance": 0.01,
+   "unit": "cm²",
+   "explanation": "3.14 × 4 × 4 = 50.24 cm².",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve 2x + 3 = 19.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "2x = 16, so x = 8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m09",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A shopkeeper in Limbe buys 20 crates of eggs at 2,000 FCFA a crate. He sells all of them at 2,300 FCFA a crate.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How much did he pay for the 20 crates?",
+     "answer": 40000,
+     "tolerance": 0,
+     "explanation": "20 × 2,000 = 40,000 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-data-algebra-m09-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is his total profit?",
+     "answer": 6000,
+     "tolerance": 0,
+     "explanation": "He receives 20 × 2,300 = 46,000 FCFA. Profit = 46,000 − 40,000 = 6,000 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-data-algebra-m09-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is his percentage profit?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "6,000 ÷ 40,000 × 100 = 15%.",
+     "unit": "%",
+     "id": "fslc-maths-data-algebra-m09-c"
+    }
+   ],
+   "chapter": "fslc-maths-data-algebra"
+  },
+  {
+   "id": "fslc-maths-data-algebra-m10",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-algebra-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A rectangular tank is 60 cm long, 40 cm wide and 50 cm high. A tap fills it at 8 litres per minute.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is the volume of the tank in litres?",
+     "answer": 120,
+     "tolerance": 0,
+     "explanation": "60 × 40 × 50 = 120,000 cm³ = 120 litres.",
+     "unit": "litres",
+     "id": "fslc-maths-data-algebra-m10-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many minutes does the tap take to fill it?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "120 ÷ 8 = 15 minutes.",
+     "unit": "minutes",
+     "id": "fslc-maths-data-algebra-m10-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What percentage of the tank is full after 6 minutes?",
+     "answer": 40,
+     "tolerance": 0,
+     "explanation": "In 6 minutes: 6 × 8 = 48 litres. 48 ÷ 120 × 100 = 40%.",
+     "unit": "%",
+     "id": "fslc-maths-data-algebra-m10-c"
+    }
+   ],
+   "chapter": "fslc-maths-data-algebra"
+  }
+ ]
+}

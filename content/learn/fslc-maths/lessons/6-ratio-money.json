@@ -1,0 +1,1520 @@
+{
+ "chapter": "fslc-maths-ratio-money",
+ "lessons": [
+  {
+   "id": "fslc-maths-ratio-proportion",
+   "title": "Ratio and proportion",
+   "minutes": 30,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write and simplify a ratio.",
+    "Share a quantity in a given ratio.",
+    "Solve direct proportion problems with the unitary method."
+   ],
+   "prerequisites": [
+    "fslc-maths-factors-multiples",
+    "fslc-maths-fractions"
+   ],
+   "exercises": [
+    "fslc-maths-ratio-money-e01",
+    "fslc-maths-ratio-money-e02",
+    "fslc-maths-ratio-money-e03",
+    "fslc-maths-ratio-money-e04",
+    "fslc-maths-ratio-money-e05",
+    "fslc-maths-ratio-money-e06"
+   ],
+   "selfCheck": [
+    "fslc-maths-ratio-proportion-q1",
+    "fslc-maths-ratio-proportion-q2",
+    "fslc-maths-ratio-proportion-q3",
+    "fslc-maths-ratio-proportion-q4",
+    "fslc-maths-ratio-proportion-q5"
+   ],
+   "reviewNotes": [
+    "The existing word-problems lesson also uses the unitary method; overlap is deliberate (revision).",
+    "Inverse proportion is introduced only informally.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ratio",
+     "md": "A **ratio** compares two quantities of the same kind. If a class has 12 girls and 18 boys, the ratio of girls to boys is 12 : 18. We simplify it by dividing both numbers by their HCF (6): 12 : 18 = 2 : 3. The order matters: boys to girls is 3 : 2."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 60,
+        "w": 40,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 60,
+        "w": 40,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 60,
+        "w": 40,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 60,
+        "w": 40,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 60,
+        "w": 40,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 60,
+        "w": 40,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 60,
+        "w": 40,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 60,
+        "w": 40,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 140,
+        "text": "3 parts",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 140,
+        "text": "5 parts",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 30,
+        "text": "Ratio 3 : 5  (8 parts in all)",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 185,
+        "text": "56,000 FCFA ÷ 8 = 7,000 FCFA for one part",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Sharing 56,000 FCFA in the ratio 3 : 5.",
+     "alt": "A bar cut into 8 equal boxes. The first 3 boxes are blue and the other 5 are yellow. Text says one part is 7,000 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Sharing in a ratio",
+     "md": "1. Add the parts: 3 + 5 = 8 parts.\n2. Find one part: total ÷ number of parts.\n3. Multiply by each ratio number.\n4. Check: the shares must add up to the total."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Direct proportion (unitary method)",
+     "md": "When one quantity doubles, the other doubles too. First find the value of **one** unit, then multiply. If 5 kg of rice cost 4,500 FCFA, then 1 kg costs 4,500 ÷ 5 = 900 FCFA, and 8 kg cost 8 × 900 = 7,200 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Sharing the total by the **ratio numbers** (3 and 5) instead of by the **number of parts** (8).\n- Giving the answers in the wrong order.\n- Using direct proportion when it is **inverse**: more workers means **fewer** days."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Share 56,000 FCFA between Ada and Bih in the ratio 3 : 5.",
+     "steps": [
+      "Number of parts: 3 + 5 = 8.",
+      "One part: 56,000 ÷ 8 = 7,000 FCFA.",
+      "Ada: 3 × 7,000 = 21,000 FCFA. Bih: 5 × 7,000 = 35,000 FCFA. Check: 21,000 + 35,000 = 56,000."
+     ],
+     "answer": "Ada gets 21,000 FCFA and Bih gets 35,000 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "5 kg of rice cost 4,500 FCFA. How much do 8 kg cost?",
+     "steps": [
+      "One kilogram: 4,500 ÷ 5 = 900 FCFA.",
+      "Eight kilograms: 8 × 900 = 7,200 FCFA."
+     ],
+     "answer": "7,200 FCFA."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-money-fcfa",
+   "title": "Money and FCFA: bills, change and budgets",
+   "minutes": 25,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add, subtract and multiply amounts of money in FCFA.",
+    "Work out the change, a total bill and the best buy.",
+    "Plan a simple budget and savings."
+   ],
+   "prerequisites": [
+    "fslc-maths-whole-numbers"
+   ],
+   "exercises": [
+    "fslc-maths-ratio-money-e07",
+    "fslc-maths-ratio-money-e08",
+    "fslc-maths-ratio-money-e09",
+    "fslc-maths-ratio-money-e10",
+    "fslc-maths-ratio-money-e11",
+    "fslc-maths-ratio-money-e12"
+   ],
+   "selfCheck": [
+    "fslc-maths-money-fcfa-q1",
+    "fslc-maths-money-fcfa-q2",
+    "fslc-maths-money-fcfa-q3",
+    "fslc-maths-money-fcfa-q4",
+    "fslc-maths-money-fcfa-q5"
+   ],
+   "reviewNotes": [
+    "Banknote denominations quoted (1,000 / 2,000 / 5,000 / 10,000 FCFA) and 'coins' are given in general terms; check that they match the notes and coins in circulation.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Money in Cameroon",
+     "md": "In Cameroon we use the **franc CFA** (FCFA). We use notes (for example 1,000, 2,000, 5,000 and 10,000 FCFA) and coins. **Total cost = unit price × quantity**. **Change = money given − total bill**. A good habit: estimate first, then calculate exactly."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 110,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 78,
+        "text": "1,000",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 40,
+        "w": 110,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 78,
+        "text": "2,000",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 40,
+        "w": 110,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 78,
+        "text": "5,000",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 130,
+        "text": "1 note of 5,000 FCFA = 5 notes of 1,000 FCFA",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 160,
+        "text": "Total = unit price × quantity",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Three FCFA notes and the rule for a total.",
+     "alt": "Three rectangles shaped like notes, marked 1,000, 2,000 and 5,000. Under them are two lines of text about notes and the total."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Best buy",
+     "md": "To compare two offers, find the **price of one** item in each offer. The offer with the lower price per item is the best buy. Example: 3 pens for 1,200 FCFA is 1,200 ÷ 3 = 400 FCFA each; 5 pens for 1,900 FCFA is 380 FCFA each: the second offer is better."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting a line of the shopping list when you add.\n- Counting the change from the wrong note.\n- Comparing the **total** prices of offers with different quantities: always compare the price **of one**."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "At Mokolo market, Mama Joy buys 3 kg of tomatoes at 600 FCFA per kg, 2 loaves of bread at 450 FCFA each and one bottle of oil at 1,250 FCFA. She pays with a 5,000 FCFA note. What is her change?",
+     "steps": [
+      "Tomatoes: 3 × 600 = 1,800 FCFA.",
+      "Bread: 2 × 450 = 900 FCFA. Oil: 1,250 FCFA.",
+      "Total bill: 1,800 + 900 + 1,250 = 3,950 FCFA.",
+      "Change: 5,000 − 3,950 = 1,050 FCFA."
+     ],
+     "answer": "Her change is 1,050 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A pupil saves 1,500 FCFA each week. In how many weeks will she have 18,000 FCFA?",
+     "steps": [
+      "Number of weeks = 18,000 ÷ 1,500.",
+      "1,500 × 10 = 15,000 and 1,500 × 2 = 3,000, so 12 weeks give 18,000."
+     ],
+     "answer": "12 weeks."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-profit-loss-interest",
+   "title": "Profit, loss, discount and simple interest",
+   "minutes": 30,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate profit, loss and percentage profit or loss.",
+    "Calculate a discount and a sale price.",
+    "Use the simple interest formula."
+   ],
+   "prerequisites": [
+    "fslc-maths-ratio-proportion",
+    "fslc-maths-money-fcfa"
+   ],
+   "exercises": [
+    "fslc-maths-ratio-money-e13",
+    "fslc-maths-ratio-money-e14",
+    "fslc-maths-ratio-money-e15",
+    "fslc-maths-ratio-money-e16",
+    "fslc-maths-ratio-money-e17",
+    "fslc-maths-ratio-money-e18"
+   ],
+   "selfCheck": [
+    "fslc-maths-profit-loss-interest-q1",
+    "fslc-maths-profit-loss-interest-q2",
+    "fslc-maths-profit-loss-interest-q3",
+    "fslc-maths-profit-loss-interest-q4",
+    "fslc-maths-profit-loss-interest-q5"
+   ],
+   "reviewNotes": [
+    "Interest rates and amounts are only for practice, not real bank rates. Check that the syllabus asks for simple interest with time in years only.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Profit and loss",
+     "md": "The **cost price** (CP) is what a trader pays to buy goods. The **selling price** (SP) is what he sells them for. If SP is more than CP: **profit = SP − CP**. If SP is less than CP: **loss = CP − SP**. The percentage is always taken on the **cost price**: percentage profit = (profit ÷ CP) × 100."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 40,
+        "w": 160,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 66,
+        "text": "Cost price",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 88,
+        "text": "CP",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 40,
+        "w": 160,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 66,
+        "text": "Selling price",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 88,
+        "text": "SP",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 140,
+        "text": "SP > CP: profit = SP − CP",
+        "size": 15,
+        "anchor": "middle",
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 170,
+        "text": "SP < CP: loss = CP − SP",
+        "size": 15,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 200,
+        "text": "Percentage = profit (or loss) ÷ CP × 100",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Cost price, selling price, profit and loss.",
+     "alt": "Two boxes labelled cost price and selling price. Below, three lines say how to find profit, loss and the percentage."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Discount and simple interest",
+     "md": "A **discount** is a reduction of the marked price: discount = marked price × rate ÷ 100; sale price = marked price − discount. **Simple interest**: I = (P × R × T) ÷ 100, where P is the money saved or borrowed, R the yearly rate in % and T the time in years. The **amount** is P + I."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Dividing the profit by the **selling** price instead of the **cost** price.\n- Using months for T: the rate is **per year**, so change months to years first (6 months = 0.5 year).\n- Forgetting to add the interest to the money saved when the question asks for the **amount**."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A trader buys goods for 8,000 FCFA and sells them for 10,000 FCFA. Find his percentage profit.",
+     "steps": [
+      "Profit = 10,000 − 8,000 = 2,000 FCFA.",
+      "Percentage profit = 2,000 ÷ 8,000 × 100 = 25%."
+     ],
+     "answer": "Profit 2,000 FCFA, that is 25%."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the simple interest on 50,000 FCFA at 6% a year for 3 years, and the amount.",
+     "steps": [
+      "I = 50,000 × 6 × 3 ÷ 100 = 900,000 ÷ 100 = 9,000 FCFA.",
+      "Amount = 50,000 + 9,000 = 59,000 FCFA."
+     ],
+     "answer": "Interest 9,000 FCFA; amount 59,000 FCFA."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-averages",
+   "title": "Averages: mean, median, mode and range",
+   "minutes": 25,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the mean (average) of a set of numbers.",
+    "Find the median, the mode and the range.",
+    "Solve simple problems about averages."
+   ],
+   "prerequisites": [
+    "fslc-maths-whole-numbers"
+   ],
+   "exercises": [
+    "fslc-maths-ratio-money-e19",
+    "fslc-maths-ratio-money-e20",
+    "fslc-maths-ratio-money-e21",
+    "fslc-maths-ratio-money-e22",
+    "fslc-maths-ratio-money-e23",
+    "fslc-maths-ratio-money-e24"
+   ],
+   "selfCheck": [
+    "fslc-maths-averages-q1",
+    "fslc-maths-averages-q2",
+    "fslc-maths-averages-q3",
+    "fslc-maths-averages-q4",
+    "fslc-maths-averages-q5"
+   ],
+   "reviewNotes": [
+    "Median with an even number of values and the range: confirm they are in the Class 6 syllabus (enrichment otherwise).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The mean (average)",
+     "md": "**Mean = total of the values ÷ number of values.** Example: the marks 12, 15, 9, 14 and 10 add up to 60. There are 5 pupils, so the mean is 60 ÷ 5 = 12. The mean can be a number that is not in the list."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Ada",
+        "value": 12,
+        "color": "blue"
+       },
+       {
+        "label": "Bih",
+        "value": 15,
+        "color": "blue"
+       },
+       {
+        "label": "Che",
+        "value": 9,
+        "color": "blue"
+       },
+       {
+        "label": "Dina",
+        "value": 14,
+        "color": "blue"
+       },
+       {
+        "label": "Eko",
+        "value": 10,
+        "color": "blue"
+       }
+      ],
+      "unit": "marks"
+     },
+     "caption": "Marks of five pupils: the mean is 12.",
+     "alt": "A bar chart of five pupils called Ada, Bih, Che, Dina and Eko. Their marks are 12, 15, 9, 14 and 10."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Median, mode and range",
+     "md": "- **Median**: the middle value when the numbers are in order. With an even number of values, find the mean of the two middle ones.\n- **Mode**: the value that appears **most often**.\n- **Range**: the biggest value minus the smallest value."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Finding the median **without** putting the numbers in order first.\n- Dividing the total by the wrong number of values.\n- Mixing up the mode (most frequent) and the mean."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Four numbers have a mean of 8. A fifth number is added and the mean becomes 9. Find the fifth number.",
+     "steps": [
+      "Total of the four numbers: 4 × 8 = 32.",
+      "Total of five numbers: 5 × 9 = 45.",
+      "Fifth number: 45 − 32 = 13."
+     ],
+     "answer": "The fifth number is 13."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the median and the range of 2, 10, 4, 6.",
+     "steps": [
+      "Put in order: 2, 4, 6, 10.",
+      "There are 4 values, so the median is the mean of the two middle ones: (4 + 6) ÷ 2 = 5.",
+      "Range = 10 − 2 = 8."
+     ],
+     "answer": "Median 5; range 8."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-ratio-money"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "fslc-maths-ratio-money-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Simplify the ratio 24 : 36.",
+   "choices": [
+    "4 : 6",
+    "12 : 18",
+    "2 : 3",
+    "3 : 2"
+   ],
+   "answer": 2,
+   "explanation": "The HCF of 24 and 36 is 12. 24 ÷ 12 = 2 and 36 ÷ 12 = 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Share 90 mangoes between two children in the ratio 2 : 1. How many mangoes does the bigger share have?",
+   "answer": 60,
+   "tolerance": 0,
+   "explanation": "3 parts: one part is 30. The bigger share is 2 × 30 = 60 mangoes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "4 exercise books cost 1,800 FCFA. What is the cost of 7 books?",
+   "answer": 3150,
+   "tolerance": 0,
+   "explanation": "One book: 1,800 ÷ 4 = 450 FCFA. Seven books: 7 × 450 = 3,150 FCFA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "To make a green paint, blue and yellow are mixed in the ratio 2 : 3. How many litres of blue are needed with 12 litres of yellow?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "12 litres of yellow is 4 litres per part (12 ÷ 3). Blue = 2 × 4 = 8 litres.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The ratios 4 : 6 and 6 : 9 are equal.",
+   "answer": true,
+   "explanation": "Both simplify to 2 : 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer has 24 hectares. He plants maize and cassava in the ratio 5 : 3.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many hectares of maize?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "8 parts: one part = 24 ÷ 8 = 3 ha. Maize: 5 × 3 = 15 ha.",
+     "unit": "ha",
+     "id": "fslc-maths-ratio-money-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many hectares of cassava?",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "3 × 3 = 9 ha.",
+     "unit": "ha",
+     "id": "fslc-maths-ratio-money-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "6 workers weed the whole farm in 8 days. How many days will 4 workers need, working at the same speed?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "Total work: 6 × 8 = 48 worker-days. 48 ÷ 4 = 12 days. (Fewer workers means more days.)",
+     "unit": "days",
+     "id": "fslc-maths-ratio-money-e06-c"
+    }
+   ],
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-proportion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-ratio-proportion",
+   "prompt": "Simplify 15 : 25.",
+   "choices": [
+    "5 : 3",
+    "15 : 5",
+    "3 : 5",
+    "1 : 2"
+   ],
+   "answer": 2,
+   "explanation": "Divide both by 5.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-proportion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-ratio-proportion",
+   "prompt": "Share 60 sweets in the ratio 1 : 2. What is the smaller share?",
+   "choices": [
+    "40",
+    "15",
+    "20",
+    "30"
+   ],
+   "answer": 2,
+   "explanation": "3 parts, 60 ÷ 3 = 20 for one part.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-proportion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-ratio-proportion",
+   "prompt": "3 pens cost 450 FCFA. How much do 5 pens cost?",
+   "choices": [
+    "900 FCFA",
+    "750 FCFA",
+    "675 FCFA",
+    "150 FCFA"
+   ],
+   "answer": 1,
+   "explanation": "One pen costs 150 FCFA; five cost 750 FCFA.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-proportion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-ratio-proportion",
+   "prompt": "In a class, boys : girls = 4 : 5. There are 20 boys. How many girls?",
+   "choices": [
+    "30",
+    "25",
+    "16",
+    "9"
+   ],
+   "answer": 1,
+   "explanation": "One part = 20 ÷ 4 = 5. Girls: 5 × 5 = 25.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-proportion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-ratio-proportion",
+   "prompt": "2 tap-fillers fill a tank in 6 hours. How long will 3 equal fillers take?",
+   "choices": [
+    "12 hours",
+    "3 hours",
+    "9 hours",
+    "4 hours"
+   ],
+   "answer": 3,
+   "explanation": "Work = 2 × 6 = 12. 12 ÷ 3 = 4 hours.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bill is 7,350 FCFA. You pay with 10,000 FCFA. How much is your change (in FCFA)?",
+   "answer": 2650,
+   "tolerance": 0,
+   "explanation": "10,000 − 7,350 = 2,650 FCFA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "3 notebooks cost 250 FCFA each and 2 pens cost 100 FCFA each. What is the total?",
+   "choices": [
+    "1,050 FCFA",
+    "850 FCFA",
+    "350 FCFA",
+    "950 FCFA"
+   ],
+   "answer": 3,
+   "explanation": "3 × 250 = 750; 2 × 100 = 200; 750 + 200 = 950 FCFA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many 500 FCFA notes make 12,000 FCFA?",
+   "answer": 24,
+   "tolerance": 0,
+   "explanation": "12,000 ÷ 500 = 24.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the best buy: 3 bars of soap for 1,200 FCFA, or 5 bars for 1,900 FCFA?",
+   "choices": [
+    "They cost the same per bar",
+    "5 bars for 1,900 FCFA",
+    "Not possible to say",
+    "3 bars for 1,200 FCFA"
+   ],
+   "answer": 1,
+   "explanation": "1,200 ÷ 3 = 400 per bar; 1,900 ÷ 5 = 380 per bar. 380 is cheaper.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ngu earns 45,000 FCFA a month. He spends 3/5 of it. How much does he keep (in FCFA)?",
+   "answer": 18000,
+   "tolerance": 0,
+   "explanation": "He spends 45,000 ÷ 5 × 3 = 27,000. He keeps 45,000 − 27,000 = 18,000 FCFA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Before the school year, Mrs Fon buys 4 exercise books at 350 FCFA each, a school bag at 6,500 FCFA and 3 pencils at 100 FCFA each.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the total cost of the exercise books?",
+     "answer": 1400,
+     "tolerance": 0,
+     "explanation": "4 × 350 = 1,400 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-ratio-money-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the total bill?",
+     "answer": 8200,
+     "tolerance": 0,
+     "explanation": "1,400 + 6,500 + 300 = 8,200 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-ratio-money-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "She pays with two 5,000 FCFA notes. What is her change?",
+     "answer": 1800,
+     "tolerance": 0,
+     "explanation": "10,000 − 8,200 = 1,800 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-ratio-money-e12-c"
+    }
+   ],
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-money-fcfa-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-money-fcfa",
+   "prompt": "A pupil buys 4 mangoes at 150 FCFA each. How much does she pay?",
+   "choices": [
+    "550 FCFA",
+    "300 FCFA",
+    "600 FCFA",
+    "154 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "4 × 150 = 600 FCFA.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-money-fcfa-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-money-fcfa",
+   "prompt": "What is the change from 2,000 FCFA after buying goods for 1,450 FCFA?",
+   "choices": [
+    "650 FCFA",
+    "550 FCFA",
+    "3,450 FCFA",
+    "450 FCFA"
+   ],
+   "answer": 1,
+   "explanation": "2,000 − 1,450 = 550.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-money-fcfa-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-money-fcfa",
+   "prompt": "How many 1,000 FCFA notes are there in 15,000 FCFA?",
+   "choices": [
+    "5",
+    "150",
+    "15",
+    "10"
+   ],
+   "answer": 2,
+   "explanation": "15,000 ÷ 1,000 = 15.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-money-fcfa-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-money-fcfa",
+   "prompt": "6 pencils cost 900 FCFA. What does one pencil cost?",
+   "choices": [
+    "540 FCFA",
+    "150 FCFA",
+    "300 FCFA",
+    "6,000 FCFA"
+   ],
+   "answer": 1,
+   "explanation": "900 ÷ 6 = 150.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-money-fcfa-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-money-fcfa",
+   "prompt": "Total cost = ...",
+   "choices": [
+    "unit price + quantity",
+    "quantity − unit price",
+    "unit price ÷ quantity",
+    "unit price × quantity"
+   ],
+   "answer": 3,
+   "explanation": "We multiply the price of one by the number of items.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-profit-loss-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A seller buys a radio for 4,500 FCFA and sells it for 5,400 FCFA. What is his profit (in FCFA)?",
+   "answer": 900,
+   "tolerance": 0,
+   "explanation": "5,400 − 4,500 = 900 FCFA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-profit-loss-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An item costing 2,000 FCFA is sold for 1,500 FCFA. What is the percentage loss?",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "Loss = 500 FCFA; 500 ÷ 2,000 × 100 = 25%.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-profit-loss-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the simple interest on 20,000 FCFA at 5% a year for 2 years (in FCFA).",
+   "answer": 2000,
+   "tolerance": 0,
+   "explanation": "20,000 × 5 × 2 ÷ 100 = 2,000 FCFA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-profit-loss-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A shirt is marked 12,000 FCFA. In a sale there is a 10% discount. What is the sale price (in FCFA)?",
+   "answer": 10800,
+   "tolerance": 0,
+   "explanation": "Discount = 1,200 FCFA. Sale price = 12,000 − 1,200 = 10,800 FCFA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-profit-loss-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A man saves 40,000 FCFA. After 2 years the simple interest is 6,400 FCFA. What is the yearly rate?",
+   "answer": 8,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "R = I × 100 ÷ (P × T) = 640,000 ÷ 80,000 = 8%.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-profit-loss-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A trader in Kumba buys 50 bags of groundnuts at 4,000 FCFA a bag. He sells 40 bags at 5,000 FCFA a bag and the remaining 10 bags at 3,000 FCFA a bag.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What did he pay for all the bags?",
+     "answer": 200000,
+     "tolerance": 0,
+     "explanation": "50 × 4,000 = 200,000 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-ratio-money-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How much money did he receive in total?",
+     "answer": 230000,
+     "tolerance": 0,
+     "explanation": "40 × 5,000 = 200,000 and 10 × 3,000 = 30,000. Total 230,000 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-ratio-money-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is his percentage profit?",
+     "answer": 15.0,
+     "tolerance": 0,
+     "explanation": "Profit = 30,000. 30,000 ÷ 200,000 × 100 = 15%.",
+     "unit": "%",
+     "id": "fslc-maths-ratio-money-e18-c"
+    }
+   ],
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-profit-loss-interest-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-profit-loss-interest",
+   "prompt": "CP = 6,000 FCFA and SP = 7,500 FCFA. What is the profit?",
+   "choices": [
+    "13,500 FCFA",
+    "1,000 FCFA",
+    "25 FCFA",
+    "1,500 FCFA"
+   ],
+   "answer": 3,
+   "explanation": "7,500 − 6,000 = 1,500.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-profit-loss-interest-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-profit-loss-interest",
+   "prompt": "We calculate a percentage profit on the...",
+   "choices": [
+    "discount",
+    "profit",
+    "selling price",
+    "cost price"
+   ],
+   "answer": 3,
+   "explanation": "Percentage profit = profit ÷ cost price × 100.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-profit-loss-interest-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-profit-loss-interest",
+   "prompt": "A discount of 20% on 5,000 FCFA is...",
+   "choices": [
+    "1,000 FCFA",
+    "4,000 FCFA",
+    "2,000 FCFA",
+    "100 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "20 ÷ 100 × 5,000 = 1,000 FCFA.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-profit-loss-interest-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-profit-loss-interest",
+   "prompt": "Simple interest on 10,000 FCFA at 10% for 1 year is...",
+   "choices": [
+    "1,000 FCFA",
+    "11,000 FCFA",
+    "10,000 FCFA",
+    "100 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "10,000 × 10 × 1 ÷ 100 = 1,000.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-profit-loss-interest-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-profit-loss-interest",
+   "prompt": "CP = 800 FCFA, SP = 600 FCFA. The result is...",
+   "choices": [
+    "a profit of 200 FCFA",
+    "no profit and no loss",
+    "a loss of 600 FCFA",
+    "a loss of 200 FCFA"
+   ],
+   "answer": 3,
+   "explanation": "SP is less than CP, so it is a loss: 800 − 600 = 200.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the mean of 8, 12, 10, 14 and 6.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "Total = 50. 50 ÷ 5 = 10.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the median of 3, 9, 5, 7, 1?",
+   "choices": [
+    "3",
+    "7",
+    "5",
+    "9"
+   ],
+   "answer": 2,
+   "explanation": "In order: 1, 3, 5, 7, 9. The middle value is 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e21",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the mode of 4, 6, 6, 7, 9, 6, 4?",
+   "choices": [
+    "9",
+    "6",
+    "4",
+    "7"
+   ],
+   "answer": 1,
+   "explanation": "6 appears three times, more than any other number.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The mean of five numbers is 20. Four of them are 18, 22, 25 and 15. Find the fifth number.",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "Total = 5 × 20 = 100. The four add to 80. The fifth is 100 − 80 = 20.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The range of 3, 8, 5, 11 and 2 is 9.",
+   "answer": true,
+   "explanation": "Biggest 11, smallest 2: 11 − 2 = 9.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-ratio-money-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A puff-puff seller's daily sales (FCFA) from Monday to Saturday were: 4,500; 5,200; 3,800; 6,100; 5,000; 5,400.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the total of the six days?",
+     "answer": 30000,
+     "tolerance": 0,
+     "explanation": "4,500 + 5,200 + 3,800 + 6,100 + 5,000 + 5,400 = 30,000 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-ratio-money-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the mean daily sale?",
+     "answer": 5000,
+     "tolerance": 0,
+     "explanation": "30,000 ÷ 6 = 5,000 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-ratio-money-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the range of the sales?",
+     "answer": 2300,
+     "tolerance": 0,
+     "explanation": "6,100 − 3,800 = 2,300 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-ratio-money-e24-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How much must she sell on Sunday so that the mean of the 7 days is 5,200 FCFA?",
+     "answer": 6400,
+     "tolerance": 0,
+     "explanation": "7 × 5,200 = 36,400. 36,400 − 30,000 = 6,400 FCFA.",
+     "unit": "FCFA",
+     "id": "fslc-maths-ratio-money-e24-d"
+    }
+   ],
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-averages-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-averages",
+   "prompt": "The mean of 5, 7 and 12 is...",
+   "choices": [
+    "24",
+    "8",
+    "7",
+    "12"
+   ],
+   "answer": 1,
+   "explanation": "Total 24 ÷ 3 = 8.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-averages-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-averages",
+   "prompt": "The range of 14, 6, 9 and 20 is...",
+   "choices": [
+    "6",
+    "29",
+    "20",
+    "14"
+   ],
+   "answer": 3,
+   "explanation": "20 − 6 = 14.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-averages-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-averages",
+   "prompt": "The median of 2, 4, 6, 8, 10 is...",
+   "choices": [
+    "30",
+    "8",
+    "5",
+    "6"
+   ],
+   "answer": 3,
+   "explanation": "The numbers are in order; the middle one is 6.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-averages-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-averages",
+   "prompt": "In the list 1, 2, 2, 3, 3, 3, 4 the mode is...",
+   "choices": [
+    "2",
+    "3",
+    "4",
+    "2.5"
+   ],
+   "answer": 1,
+   "explanation": "3 appears most often.",
+   "chapter": "fslc-maths-ratio-money"
+  },
+  {
+   "id": "fslc-maths-averages-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-averages",
+   "prompt": "Total 90 for 6 values. The mean is...",
+   "choices": [
+    "540",
+    "84",
+    "96",
+    "15"
+   ],
+   "answer": 3,
+   "explanation": "90 ÷ 6 = 15.",
+   "chapter": "fslc-maths-ratio-money"
+  }
+ ]
+}

@@ -1,0 +1,1402 @@
+{
+ "chapter": "fslc-maths-place-factors",
+ "lessons": [
+  {
+   "id": "fslc-maths-place-value",
+   "title": "Place value and large numbers",
+   "minutes": 25,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read, write and compare numbers up to hundreds of millions.",
+    "Give the value of a digit in a large number.",
+    "Round a number to the nearest 10, 100, 1,000 or 100,000."
+   ],
+   "prerequisites": [
+    "fslc-maths-whole-numbers"
+   ],
+   "exercises": [
+    "fslc-maths-place-factors-e01",
+    "fslc-maths-place-factors-e02",
+    "fslc-maths-place-factors-e03",
+    "fslc-maths-place-factors-e04",
+    "fslc-maths-place-factors-e05",
+    "fslc-maths-place-factors-e06"
+   ],
+   "selfCheck": [
+    "fslc-maths-place-value-q1",
+    "fslc-maths-place-value-q2",
+    "fslc-maths-place-value-q3",
+    "fslc-maths-place-value-q4",
+    "fslc-maths-place-value-q5"
+   ],
+   "reviewNotes": [
+    "Names of places above millions (billions) are left out; the Class 6 syllabus limit (millions or hundreds of millions) is to be checked.",
+    "Use of commas vs spaces to group digits: commas used here, as in Cameroonian anglophone textbooks (to be checked).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Place value",
+     "md": "The **value** of a digit depends on its **place** in the number. In 4,236,508 the digit 2 is in the hundred-thousands place, so its value is 200,000. The digit 3 is in the ten-thousands place, so its value is 30,000."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 40,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 75,
+        "y": 40,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 125,
+        "y": 40,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 175,
+        "y": 40,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 225,
+        "y": 40,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 275,
+        "y": 40,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 325,
+        "y": 40,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 72,
+        "text": "M",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 72,
+        "text": "HTh",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 72,
+        "text": "TTh",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 72,
+        "text": "Th",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 72,
+        "text": "H",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 72,
+        "text": "T",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 72,
+        "text": "O",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 90,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 75,
+        "y": 90,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 125,
+        "y": 90,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 175,
+        "y": 90,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 225,
+        "y": 90,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 275,
+        "y": 90,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 325,
+        "y": 90,
+        "w": 50,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 125,
+        "text": "4",
+        "size": 22,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 125,
+        "text": "2",
+        "size": 22,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 125,
+        "text": "3",
+        "size": 22,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 125,
+        "text": "6",
+        "size": 22,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 125,
+        "text": "5",
+        "size": 22,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 125,
+        "text": "0",
+        "size": 22,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 125,
+        "text": "8",
+        "size": 22,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 175,
+        "text": "M = millions   HTh = hundred thousands   TTh = ten thousands",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 195,
+        "text": "Th = thousands   H = hundreds   T = tens   O = ones",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The number 4,236,508 in a place-value table.",
+     "alt": "A table with seven boxes. The headings are M, HTh, TTh, Th, H, T and O. Under them are the digits 4, 2, 3, 6, 5, 0 and 8."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reading big numbers",
+     "md": "Group the digits in threes from the right: 4,236,508. Read each group and add its name. We say: four **million**, two hundred and thirty-six **thousand**, five hundred and eight. A zero in a place means that place is empty, but we must write the zero."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rounding",
+     "md": "To round to the nearest 1,000: look at the digit just on the right (the hundreds digit). If it is **5 or more**, add one to the thousands digit. If it is **less than 5**, keep it. Then put zeros after. Example: 365,482 gives 365,000 because the hundreds digit is 4."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing 'four million two hundred thirty-six' for 4,236,508: you forget the thousands.\n- Confusing the **digit** (3) with its **value** (30,000).\n- Dropping a zero: five million and sixty-three is 5,000,063, not 563."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write 4,236,508 in words. What is the value of the digit 3?",
+     "steps": [
+      "Group the digits: 4 | 236 | 508.",
+      "Read: four million, two hundred and thirty-six thousand, five hundred and eight.",
+      "The 3 is in the ten-thousands place: its value is 3 × 10,000 = 30,000."
+     ],
+     "answer": "Four million, two hundred and thirty-six thousand, five hundred and eight; the value of 3 is 30,000."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Round 365,482 to the nearest 1,000 and to the nearest 10,000.",
+     "steps": [
+      "Nearest 1,000: the hundreds digit is 4 (less than 5), so we keep 365 thousand: 365,000.",
+      "Nearest 10,000: look at the thousands digit, 5. It is 5 or more, so the 6 ten-thousands becomes 7: 370,000."
+     ],
+     "answer": "365,000 and 370,000."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-factors-multiples",
+   "title": "Factors, multiples, HCF and LCM",
+   "minutes": 30,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the factors and multiples of a number.",
+    "Recognise prime numbers and write a number as a product of primes.",
+    "Find the HCF and the LCM of two or three numbers."
+   ],
+   "prerequisites": [
+    "fslc-maths-place-value"
+   ],
+   "exercises": [
+    "fslc-maths-place-factors-e07",
+    "fslc-maths-place-factors-e08",
+    "fslc-maths-place-factors-e09",
+    "fslc-maths-place-factors-e10",
+    "fslc-maths-place-factors-e11",
+    "fslc-maths-place-factors-e12"
+   ],
+   "selfCheck": [
+    "fslc-maths-factors-multiples-q1",
+    "fslc-maths-factors-multiples-q2",
+    "fslc-maths-factors-multiples-q3",
+    "fslc-maths-factors-multiples-q4",
+    "fslc-maths-factors-multiples-q5"
+   ],
+   "reviewNotes": [
+    "Prime factorisation and HCF/LCM by prime factors are shown briefly; check that the syllabus expects the listing method.",
+    "Divisibility tests (by 3, 9...) are not covered in this lesson.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Factors and multiples",
+     "md": "A **factor** of a number divides it exactly. The factors of 24 are 1, 2, 3, 4, 6, 8, 12 and 24. A **multiple** of a number is in its times table: the multiples of 6 are 6, 12, 18, 24, 30... A **prime number** has exactly two factors, 1 and itself: 2, 3, 5, 7, 11, 13... The number 1 is not prime."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 45,
+        "x2": 130,
+        "y2": 95,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 45,
+        "x2": 270,
+        "y2": 95,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 125,
+        "x2": 90,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 125,
+        "x2": 170,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 125,
+        "x2": 230,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 125,
+        "x2": 310,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 30,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 36,
+        "text": "60",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 110,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 116,
+        "text": "6",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 270,
+        "cy": 110,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 116,
+        "text": "10",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 188,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 194,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 170,
+        "cy": 188,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 194,
+        "text": "3",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 188,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 194,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 310,
+        "cy": 188,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 194,
+        "text": "5",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A factor tree for 60: 60 = 2 × 2 × 3 × 5.",
+     "alt": "A tree. 60 splits into 6 and 10. Then 6 splits into 2 and 3, and 10 splits into 2 and 5. The bottom numbers 2, 3, 2 and 5 are prime."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "HCF and LCM",
+     "md": "The **HCF** (highest common factor) is the biggest number that divides both numbers. The **LCM** (lowest common multiple) is the smallest number that both numbers divide. Method: list the factors (or multiples) of each number, then pick the biggest common factor (or the smallest common multiple)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Mixing up HCF and LCM: the HCF is **small** (never bigger than the numbers), the LCM is **big** (never smaller than the numbers).\n- Saying that 1 is a prime number, or that 9 is prime (9 = 3 × 3).\n- Forgetting that 2 is the only **even** prime number."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the HCF of 24 and 36.",
+     "steps": [
+      "Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24.",
+      "Factors of 36: 1, 2, 3, 4, 6, 9, 12, 18, 36.",
+      "The common factors are 1, 2, 3, 4, 6 and 12. The biggest is 12."
+     ],
+     "answer": "HCF = 12."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the LCM of 12 and 18.",
+     "steps": [
+      "Multiples of 12: 12, 24, 36, 48...",
+      "Multiples of 18: 18, 36, 54...",
+      "The first number in both lists is 36."
+     ],
+     "answer": "LCM = 36."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-number-patterns",
+   "title": "Number patterns",
+   "minutes": 25,
+   "programRef": "MINEDUB National Syllabus, Mathematics, Level III (Classes 5-6) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the rule of a number pattern and continue it.",
+    "Recognise square, triangular, odd and even numbers.",
+    "Use a rule to find any term of a simple pattern."
+   ],
+   "prerequisites": [
+    "fslc-maths-factors-multiples"
+   ],
+   "exercises": [
+    "fslc-maths-place-factors-e13",
+    "fslc-maths-place-factors-e14",
+    "fslc-maths-place-factors-e15",
+    "fslc-maths-place-factors-e16",
+    "fslc-maths-place-factors-e17",
+    "fslc-maths-place-factors-e18"
+   ],
+   "selfCheck": [
+    "fslc-maths-number-patterns-q1",
+    "fslc-maths-number-patterns-q2",
+    "fslc-maths-number-patterns-q3",
+    "fslc-maths-number-patterns-q4",
+    "fslc-maths-number-patterns-q5"
+   ],
+   "reviewNotes": [
+    "Triangular numbers named in the lesson; check that they are in the syllabus (otherwise they are enrichment).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Number patterns",
+     "md": "A **sequence** is a list of numbers that follows a rule. Each number is a **term**. In 3, 7, 11, 15... we **add 4** each time. In 2, 6, 18, 54... we **multiply by 3** each time. To find the rule, look at the difference or the ratio between neighbouring terms."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 230,
+      "bars": [
+       {
+        "label": "1",
+        "value": 1,
+        "color": "blue"
+       },
+       {
+        "label": "4",
+        "value": 4,
+        "color": "blue"
+       },
+       {
+        "label": "9",
+        "value": 9,
+        "color": "blue"
+       },
+       {
+        "label": "16",
+        "value": 16,
+        "color": "blue"
+       },
+       {
+        "label": "25",
+        "value": 25,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "The first five square numbers: 1, 4, 9, 16, 25.",
+     "alt": "A bar chart with five bars of growing height. The bars are 1, 4, 9, 16 and 25. They are the squares of 1, 2, 3, 4 and 5."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Special sequences",
+     "md": "- **Square numbers**: 1, 4, 9, 16, 25... (1×1, 2×2, 3×3...).\n- **Triangular numbers**: 1, 3, 6, 10, 15... (add 2, then 3, then 4...).\n- **Odd numbers**: 1, 3, 5, 7... **Even numbers**: 2, 4, 6, 8...\n- **Powers of 2**: 1, 2, 4, 8, 16, 32..."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rule for any term",
+     "md": "For a pattern that adds the same number d each time and starts at a, the term number n is: a + (n − 1) × d. Example: 3, 7, 11, 15... has a = 3 and d = 4. The 20th term is 3 + 19 × 4 = 79."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Checking only the first two terms. Always check the rule on **all** the terms you know.\n- In the 'n-th term' formula, using n × d instead of (n − 1) × d: the first term has no jump yet."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the next two terms: 5, 9, 13, 17, ...",
+     "steps": [
+      "Differences: 9 − 5 = 4, 13 − 9 = 4, 17 − 13 = 4. The rule is add 4.",
+      "17 + 4 = 21 and 21 + 4 = 25."
+     ],
+     "answer": "21 and 25."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Pattern: 4, 7, 10, 13... What is the 15th term?",
+     "steps": [
+      "The first term is 4 and we add 3 each time.",
+      "15th term = 4 + (15 − 1) × 3 = 4 + 42 = 46."
+     ],
+     "answer": "46."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "fslc-maths-place-factors"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "fslc-maths-place-factors-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the value of the digit 7 in 3,472,150?",
+   "answer": 70000,
+   "tolerance": 0,
+   "explanation": "The 7 is in the ten-thousands place: 7 × 10,000 = 70,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which number is the largest?",
+   "choices": [
+    "1,095,000",
+    "1,009,500",
+    "1,905,000",
+    "1,090,500"
+   ],
+   "answer": 2,
+   "explanation": "Compare the millions first (all 1), then the hundred-thousands digit: 9 is the biggest in 1,905,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Round 8,649,731 to the nearest 100,000.",
+   "answer": 8600000,
+   "tolerance": 0,
+   "explanation": "The ten-thousands digit is 4 (less than 5), so we keep 8,600,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In 5,060,203 the digit 6 has the value 60,000.",
+   "answer": true,
+   "explanation": "5,060,203: the 5 is millions, the 0 hundred-thousands, the 6 ten-thousands. So 6 is worth 60,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write as a number: 2 millions, 5 ten-thousands, 7 hundreds and 3 ones.",
+   "answer": 2050703,
+   "tolerance": 0,
+   "explanation": "2,000,000 + 50,000 + 700 + 3 = 2,050,703. The empty places (hundred-thousands, thousands, tens) are zeros.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cocoa cooperative sold 3,479,260 kg of cocoa in one season.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the value of the digit 4?",
+     "answer": 400000,
+     "tolerance": 0,
+     "explanation": "The 4 is in the hundred-thousands place: 400,000.",
+     "unit": "kg",
+     "id": "fslc-maths-place-factors-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Round the mass to the nearest 100,000 kg.",
+     "answer": 3500000,
+     "tolerance": 0,
+     "explanation": "The ten-thousands digit is 7, so we round up: 3,500,000.",
+     "unit": "kg",
+     "id": "fslc-maths-place-factors-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many more kilograms are needed to reach 4,000,000 kg?",
+     "answer": 520740,
+     "tolerance": 0,
+     "explanation": "4,000,000 − 3,479,260 = 520,740.",
+     "unit": "kg",
+     "id": "fslc-maths-place-factors-e06-c"
+    }
+   ],
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-value-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-place-value",
+   "prompt": "What is the value of 5 in 6,250,310?",
+   "choices": [
+    "5,000",
+    "500,000",
+    "50,000",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "The 5 is in the ten-thousands place.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-value-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-place-value",
+   "prompt": "How do we write 'two million, forty thousand and nine'?",
+   "choices": [
+    "2,040,009",
+    "200,409",
+    "2,400,009",
+    "2,040,090"
+   ],
+   "answer": 0,
+   "explanation": "2,000,000 + 40,000 + 9. Empty places are zeros.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-value-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-place-value",
+   "prompt": "Round 74,860 to the nearest 1,000.",
+   "choices": [
+    "75,000",
+    "74,900",
+    "74,000",
+    "70,000"
+   ],
+   "answer": 0,
+   "explanation": "The hundreds digit is 8, so round up to 75,000.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-value-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-place-value",
+   "prompt": "Which is smaller: 3,099,999 or 3,100,000?",
+   "choices": [
+    "Cannot say",
+    "3,100,000",
+    "3,099,999",
+    "They are equal"
+   ],
+   "answer": 2,
+   "explanation": "Both have 3 millions; 099,999 is less than 100,000.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-value-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-place-value",
+   "prompt": "In 9,008,004 how many hundred-thousands are there?",
+   "choices": [
+    "0",
+    "4",
+    "8",
+    "9"
+   ],
+   "answer": 0,
+   "explanation": "The hundred-thousands place holds 0.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these numbers is prime?",
+   "choices": [
+    "21",
+    "29",
+    "39",
+    "27"
+   ],
+   "answer": 1,
+   "explanation": "21 = 3 × 7, 27 = 3 × 9 and 39 = 3 × 13. Only 29 has just two factors.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the HCF of 18 and 45.",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "Factors of 18: 1, 2, 3, 6, 9, 18. Factors of 45: 1, 3, 5, 9, 15, 45. The biggest common one is 9.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the LCM of 15 and 20.",
+   "answer": 60,
+   "tolerance": 0,
+   "explanation": "Multiples of 20: 20, 40, 60. 60 is also a multiple of 15 (15 × 4).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many factors does 24 have?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "1, 2, 3, 4, 6, 8, 12, 24: that is 8 factors.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the LCM of 4, 6 and 10.",
+   "answer": 60,
+   "tolerance": 0,
+   "explanation": "Multiples of 10: 10, 20, 30, 40, 50, 60. The first one that 4 and 6 also divide is 60.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A baker in Bafoussam packs 48 buns and 72 puff-puffs into identical bags. Each bag has the same number of buns and the same number of puff-puffs, with nothing left over. He wants as many bags as possible.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many bags can he make?",
+     "answer": 24,
+     "tolerance": 0,
+     "explanation": "This is the HCF of 48 and 72. 48 = 2 × 2 × 2 × 2 × 3 and 72 = 2 × 2 × 2 × 3 × 3, so HCF = 2 × 2 × 2 × 3 = 24.",
+     "id": "fslc-maths-place-factors-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many buns are in each bag?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "48 ÷ 24 = 2 buns.",
+     "id": "fslc-maths-place-factors-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many puff-puffs are in each bag?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "72 ÷ 24 = 3 puff-puffs.",
+     "id": "fslc-maths-place-factors-e12-c"
+    }
+   ],
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-factors-multiples-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-factors-multiples",
+   "prompt": "Which number is a factor of 30?",
+   "choices": [
+    "9",
+    "15",
+    "4",
+    "20"
+   ],
+   "answer": 1,
+   "explanation": "30 ÷ 15 = 2 exactly. The others do not divide 30.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-factors-multiples-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-factors-multiples",
+   "prompt": "What is the HCF of 12 and 30?",
+   "choices": [
+    "3",
+    "12",
+    "60",
+    "6"
+   ],
+   "answer": 3,
+   "explanation": "Common factors are 1, 2, 3, 6. The highest is 6.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-factors-multiples-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-factors-multiples",
+   "prompt": "What is the LCM of 6 and 8?",
+   "choices": [
+    "48",
+    "14",
+    "2",
+    "24"
+   ],
+   "answer": 3,
+   "explanation": "Multiples of 8: 8, 16, 24. 24 is a multiple of 6 too.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-factors-multiples-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-factors-multiples",
+   "prompt": "Which list has only prime numbers?",
+   "choices": [
+    "3, 15, 19",
+    "2, 11, 17",
+    "1, 3, 5",
+    "2, 9, 13"
+   ],
+   "answer": 1,
+   "explanation": "9 and 15 are not prime and 1 is not prime.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-factors-multiples-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-factors-multiples",
+   "prompt": "Two bells ring every 4 minutes and every 6 minutes. They ring together now. After how many minutes will they ring together again?",
+   "choices": [
+    "2",
+    "12",
+    "10",
+    "24"
+   ],
+   "answer": 1,
+   "explanation": "LCM of 4 and 6 is 12.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-number-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the next term: 2, 6, 18, 54, ...",
+   "answer": 162,
+   "tolerance": 0,
+   "explanation": "Each term is multiplied by 3: 54 × 3 = 162.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "fslc-maths-number-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is a square number?",
+   "choices": [
+    "49",
+    "50",
+    "45",
+    "48"
+   ],
+   "answer": 0,
+   "explanation": "49 = 7 × 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "fslc-maths-number-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the missing term: 100, 90, 80, ?, 60.",
+   "answer": 70,
+   "tolerance": 0,
+   "explanation": "We subtract 10 each time: 80 − 10 = 70.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-number-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The pattern 6, 11, 16, 21... adds 5 each time. What is the 10th term?",
+   "answer": 51,
+   "tolerance": 0,
+   "explanation": "6 + 9 × 5 = 6 + 45 = 51.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "fslc-maths-number-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The sum of the first three odd numbers (1 + 3 + 5) is a square number.",
+   "answer": true,
+   "explanation": "1 + 3 + 5 = 9 = 3 × 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-place-factors-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "fslc-maths-number-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mbarga builds triangles with stones. Triangle 1 uses 1 stone, triangle 2 uses 3, triangle 3 uses 6, triangle 4 uses 10.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many stones are in triangle 5?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "We add 2, 3, 4, then 5: 10 + 5 = 15.",
+     "unit": "stones",
+     "id": "fslc-maths-place-factors-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many stones are in triangle 7?",
+     "answer": 28,
+     "tolerance": 0,
+     "explanation": "Triangle 6 = 15 + 6 = 21; triangle 7 = 21 + 7 = 28.",
+     "unit": "stones",
+     "id": "fslc-maths-place-factors-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "What is the rule?",
+     "choices": [
+      "Add one more stone than last time",
+      "Add 4 stones each time",
+      "Add 2 stones each time",
+      "Double the last number"
+     ],
+     "answer": 0,
+     "explanation": "The jumps are 2, 3, 4, 5: they grow by one each time.",
+     "id": "fslc-maths-place-factors-e18-c"
+    }
+   ],
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-number-patterns-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-number-patterns",
+   "prompt": "What is the next term of 1, 4, 9, 16, ...?",
+   "choices": [
+    "20",
+    "25",
+    "32",
+    "24"
+   ],
+   "answer": 1,
+   "explanation": "These are square numbers: 5 × 5 = 25.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-number-patterns-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-number-patterns",
+   "prompt": "What is the rule of 80, 40, 20, 10?",
+   "choices": [
+    "Divide by 4",
+    "Divide by 2",
+    "Subtract 40",
+    "Subtract 10"
+   ],
+   "answer": 1,
+   "explanation": "Each term is half of the one before.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-number-patterns-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-number-patterns",
+   "prompt": "The sequence starts 7, 12, 17... What is the 4th term?",
+   "choices": [
+    "22",
+    "20",
+    "24",
+    "27"
+   ],
+   "answer": 0,
+   "explanation": "Add 5 each time: 17 + 5 = 22.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-number-patterns-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-number-patterns",
+   "prompt": "Which sequence is made of even numbers only?",
+   "choices": [
+    "6, 12, 18, 24",
+    "2, 4, 7, 8",
+    "5, 10, 15, 20",
+    "1, 2, 4, 8, 9"
+   ],
+   "answer": 0,
+   "explanation": "Every term of 6, 12, 18, 24 is divisible by 2.",
+   "chapter": "fslc-maths-place-factors"
+  },
+  {
+   "id": "fslc-maths-number-patterns-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "fslc-maths-number-patterns",
+   "prompt": "Find the 10th term of the sequence 3, 6, 9, 12...",
+   "choices": [
+    "33",
+    "27",
+    "30",
+    "13"
+   ],
+   "answer": 2,
+   "explanation": "It is the 3 times table: 3 × 10 = 30.",
+   "chapter": "fslc-maths-place-factors"
+  }
+ ]
+}

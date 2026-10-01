@@ -10,14 +10,66 @@
   "subject": "sciences",
   "exam": "FSLC",
   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Science and Technology; to be checked against the official texts",
-  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
   "status": "draft",
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-01",
   "chapters": [
-    {"id": "fslc-science-body", "title": "The human body", "order": 1, "programRef": "Level III — The human body: digestion, breathing, blood circulation (to be checked against the official texts)"},
-    {"id": "fslc-science-health", "title": "Health and hygiene", "order": 2, "programRef": "Level III — Health education: malaria, safe water, hygiene, vaccination (to be checked against the official texts)"},
-    {"id": "fslc-science-environment", "title": "Plants, animals and the environment", "order": 3, "programRef": "Level III — Living things and the environment: plants, germination, food chains, pollution (to be checked against the official texts)"},
-    {"id": "fslc-science-matter", "title": "Matter and energy", "order": 4, "programRef": "Level III — Matter and energy: states of water, the water cycle, simple electric circuits, safety (to be checked against the official texts)"}
+    {
+      "id": "fslc-science-body",
+      "title": "The human body",
+      "order": 1,
+      "programRef": "Level III — The human body: digestion, breathing, blood circulation (to be checked against the official texts)"
+    },
+    {
+      "id": "fslc-science-health",
+      "title": "Health and hygiene",
+      "order": 2,
+      "programRef": "Level III — Health education: malaria, safe water, hygiene, vaccination (to be checked against the official texts)"
+    },
+    {
+      "id": "fslc-science-environment",
+      "title": "Plants, animals and the environment",
+      "order": 3,
+      "programRef": "Level III — Living things and the environment: plants, germination, food chains, pollution (to be checked against the official texts)"
+    },
+    {
+      "id": "fslc-science-matter",
+      "title": "Matter and energy",
+      "order": 4,
+      "programRef": "Level III — Matter and energy: states of water, the water cycle, simple electric circuits, safety (to be checked against the official texts)"
+    },
+    {
+      "id": "fslc-science-living-things",
+      "title": "Living things: characteristics, plants and animals",
+      "order": 5,
+      "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts"
+    },
+    {
+      "id": "fslc-science-senses-nutrition",
+      "title": "The senses, teeth and nutrition",
+      "order": 6,
+      "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts"
+    },
+    {
+      "id": "fslc-science-earth-farming",
+      "title": "Soil, farming, air, water and weather",
+      "order": 7,
+      "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts"
+    },
+    {
+      "id": "fslc-science-energy-forces",
+      "title": "Light, heat, sound, magnets, forces and electricity",
+      "order": 8,
+      "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts"
+    },
+    {
+      "id": "fslc-science-materials-environment",
+      "title": "Materials, environment and waste",
+      "order": 9,
+      "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Elementary Science and Technology; to be checked against the official texts"
+    }
   ],
   "mockExams": [
     {
@@ -29,8 +81,55 @@
       "reviewNote": "Paper format, length and marking scheme to be checked against the official FSLC texts.",
       "instructions": "Answer all the questions. Each question is marked out of 5; the paper is marked out of 20. Read each question carefully before you answer. This is an original practice paper: its format is to be checked against the official texts.",
       "sections": [
-        {"title": "Part A — The human body and health", "exercises": ["fslc-science-mock-body", "fslc-science-mock-health"]},
-        {"title": "Part B — Living things, matter and energy", "exercises": ["fslc-science-mock-env", "fslc-science-mock-matter"]}
+        {
+          "title": "Part A — The human body and health",
+          "exercises": [
+            "fslc-science-mock-body",
+            "fslc-science-mock-health"
+          ]
+        },
+        {
+          "title": "Part B — Living things, matter and energy",
+          "exercises": [
+            "fslc-science-mock-env",
+            "fslc-science-mock-matter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fslc-science-mock-2",
+      "title": "FSLC mock paper 2 — Science",
+      "minutes": 60,
+      "outOf": 20,
+      "instructions": "Answer all the questions. Part A has 8 short questions (1 mark each); Part B has two problems (4 marks each); Part C is one written question (4 marks). Total: 20 marks. This is an original practice paper: its format is to be checked against the official texts.",
+      "sections": [
+        {
+          "title": "Part A — Short questions (8 marks)",
+          "exercises": [
+            "fslc-science-materials-environment-m01",
+            "fslc-science-materials-environment-m02",
+            "fslc-science-materials-environment-m03",
+            "fslc-science-materials-environment-m04",
+            "fslc-science-materials-environment-m05",
+            "fslc-science-materials-environment-m06",
+            "fslc-science-materials-environment-m07",
+            "fslc-science-materials-environment-m08"
+          ]
+        },
+        {
+          "title": "Part B — Problems (8 marks)",
+          "exercises": [
+            "fslc-science-materials-environment-m09",
+            "fslc-science-materials-environment-m10"
+          ]
+        },
+        {
+          "title": "Part C — Written answer (4 marks)",
+          "exercises": [
+            "fslc-science-materials-environment-m11"
+          ]
+        }
       ]
     }
   ]
