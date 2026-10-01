@@ -69,9 +69,27 @@ from ..core import near_floats                    # noqa: E402
 _TAIL = re.compile(r"^(.*\?) \((.+)\)$", re.S)
 
 
+_IMPERATIVES = [(re.compile(r"^Find (.*)\.$", re.S), r"What is \1?"), (re.compile(r"^Evaluate (.*)\.$", re.S), r"What is the value of \1?"),
+                (re.compile(r"^Simplify (.*)\.$", re.S), r"What is \1 in its simplest form?"), (re.compile(r"^Solve (.*)\.$", re.S), r"What are the solutions of \1?"),
+                (re.compile(r"^Differentiate (.*) with respect to x\.$", re.S), r"What is the derivative of \1 with respect to x?"),
+                (re.compile(r"^Write (.*) in standard form\.$", re.S), r"How is \1 written in standard form?"), (re.compile(r"^Calculate (.*)\.$", re.S), r"What is \1?"),
+                (re.compile(r"^Express (.*)\.$", re.S), r"How can you express \1?"), (re.compile(r"^State (.*)\.$", re.S), r"What is \1?")]
+
+
+def questionize(text):
+    """English imperatives (« Find … ») become questions: the pipeline requires the text to end with « ? »."""
+    if text.endswith("?"):
+        return text
+    for rx, rep in _IMPERATIVES:
+        if rx.match(text):
+            return rx.sub(rep, text)
+    return text
+
+
 def tidy(d):
     """A question must end with « ? » : a trailing note in brackets (« (g = 10 N/kg) ») is moved in front of the question;
     wrong answers that are negative (when the right one is not) or 0 are dropped, as no student would hesitate on them."""
+    d.text = questionize(d.text)
     m = _TAIL.match(d.text)
     if m:
         note = m.group(2)
