@@ -2,7 +2,7 @@
 
 Notes d'interopérabilité écrites avec nos mots, à partir de l'observation de la TV de référence de l'owner et de l'analyse
 locale d'une app de télécommande installée sur son téléphone. Aucun code ni ressource du fabricant n'est reproduit dans ce
-dépôt (le code décompilé ne doit jamais y entrer). Statut : **observé, partiellement vérifié sur matériel** (2026-10-01).
+dépôt (le code décompilé ne doit jamais y entrer). Statut : **vérifié sur matériel** (2026-10-01, touches de volume).
 
 ## Découverte (mDNS / DNS-SD)
 - Type de service `_share._tcp` : la TV annonce une instance (vue : « BytelloRemoteServer ») ; le type `_maxhubmobile._tcp`
@@ -41,7 +41,7 @@ Encodage minimal d'une touche : `08 01 12 <len> "<code>"` envoyé dans une trame
 ## Vérification sur la TV de référence (Amlogic « SMART_TV », Android 14)
 - Poignée de main WebSocket sur le port 8125 : **réussie**, trame d'information reçue (nom, capacités, 1280×720).
 - Envoi de deux touches (volume + puis volume −, effet net nul) : acceptées par la TV (elle répond par une trame JSON) ;
-  l'effet visible à l'écran reste **à confirmer** par l'owner.
+  **effet visible confirmé par l'owner** (la barre de volume de la TV a bougé) : le protocole est donc validé de bout en bout sur la TV de référence.
 
 ## Limites et prudence
 - Protocole propre au fabricant, non documenté, susceptible de changer : à isoler derrière une « stratégie » remplaçable,
