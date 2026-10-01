@@ -79,7 +79,7 @@ object TvConnect {
             routes = Routes(gateway = { TvService.running?.gateway?.proxy() }),
             queue = EventQueue(File(app.filesDir, "telemetry/events.jsonl")),
             crashes = CrashStore(File(app.filesDir, "crashes")),
-            keys = keys, hooks = Hooks, quiz = QuizSync(QuizHub.cachedSource(app), quizFile),
+            keys = keys, hooks = Hooks, quiz = QuizSync(QuizHub.cachedSource(app), quizFile), quizPacks = QuizHub.packHook(app, keys),
         )
         link = l
         agent = ConnectAgent(l)

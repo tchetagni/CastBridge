@@ -50,5 +50,7 @@ tasks.test {
     environment("LC_ALL", "C.UTF-8")
     // « Apprendre »: the tests validate every pack source of the repository (docs/LEARN.md)
     systemProperty("learn.content", learnContent.absolutePath)
+    // Question packs built by tools/quiz-bank (docs/QUIZ.md): the tests check their integrity
+    systemProperty("quiz.dist", rootProject.projectDir.parentFile.resolve("content/quiz/dist").absolutePath)
     inputs.dir(learnContent).withPropertyName("learnContent").optional()
 }
