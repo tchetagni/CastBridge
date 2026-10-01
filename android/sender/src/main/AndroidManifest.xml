@@ -94,6 +94,9 @@
             android:icon="@drawable/ic_cb_telecommande" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter><action android:name="android.service.quicksettings.action.QS_TILE" /></intent-filter>
         </service>
+        <!-- « Activer la TV » : paste the activation key, send it to the paired TV by Bluetooth (open to everyone; the key is signed) -->
+        <activity android:name=".ActivateTvActivity" android:exported="false" android:label="Activer la TV"
+            android:theme="@style/Theme.CastBridge" android:windowSoftInputMode="adjustResize" />
         <!-- Parental control (docs/PARENTAL.md): the parent's own screen -->
         <activity android:name=".ParentalActivity" android:exported="false" android:label="Contrôle parental"
             android:theme="@style/Theme.CastBridge" android:windowSoftInputMode="adjustResize" />

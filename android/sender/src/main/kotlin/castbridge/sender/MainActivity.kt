@@ -104,6 +104,7 @@ class MainActivity : ComponentActivity() {
                             Box(hidden) { CastBridgeLogo(32.dp) }
                         },
                         actions = {
+                            TextButton({ ActivateTvActivity.open(this@MainActivity) }) { Text("Activer la TV") }
                             IconButton({ ParentalActivity.open(this@MainActivity) }) { Icon(Icons.Filled.Lock, "Contrôle parental") }
                             IconButton({ settings = true }) { CbIcon(R.drawable.ic_cb_reglages, "Réglages") }
                         },
