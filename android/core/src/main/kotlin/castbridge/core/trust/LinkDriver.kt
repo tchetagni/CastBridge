@@ -110,6 +110,16 @@ class LinkDriver(
         store.loadCredential(tv.address)?.let { if (it.token == token) store.clearCredential(tv.address) }
     }
 
+    /** A session obtained by the pairing flow becomes the current one (credential stored, state "connected" at once). */
+    @Synchronized fun adopt(s: LinkSession) {
+        val now = env.now()
+        saved.upsert(s.tv, makeDefault = true)
+        session = s; issuedAt = now; lastHelloAt = now; gate.clear(s.tv.address); rejected = false
+        store.saveCredential(s.tv.address, StoredCredential(s.credential, now, s.expiresAt))
+        model = machine.reduce((model ?: machine.initial(true, s.tv.name)).copy(shown = LinkState.Connecting, since = 0), connected(s), now)
+        last = null
+    }
+
     /** Forgets the TV locally (the user chose « Oublier » or « Réassocier »). */
     @Synchronized fun forget(address: String) {
         saved.remove(address); store.clearCredential(address); gate.clear(TrustRegistry.norm(address))

@@ -13,6 +13,9 @@ class RemoteSession(
     private val listener: Listener,
     private val pingMs: Long = 4000,
     var target: RemoteTarget = RemoteTarget.AUTO,
+    /** The TV refused the phone's token (expired or revoked; not a wrong PIN, so nothing is counted against it): ask the link layer for a new one. [connect] must then present the new credential. */
+    private val onTokenRejected: () -> Unit = {},
+    private val maxTokenRetries: Int = 8,
 ) {
     enum class Link { CONNECTING, CONNECTED, OFFLINE, BAD_PIN }
     data class Status(val link: Link, val via: String? = null, val rttMs: Long? = null, val message: String? = null)
@@ -67,13 +70,14 @@ class RemoteSession(
         var link: RemoteTransport? = null
         var failures = 0
         var lastPing = 0L
+        var tokenRetries = 0
         while (running) {
             try {
                 if (link == null) {
                     set(Status(if (failures == 0) Link.CONNECTING else Link.OFFLINE, message = status.message))
                     link = try { connect() } catch (e: IOException) {
                         failures++
-                        set(Status(Link.OFFLINE, message = e.message ?: "TV injoignable"))
+                        set(Status(Link.OFFLINE, message = castbridge.core.trust.LinkText.failure(e)))
                         queue.take(minOf(3000L, 250L shl minOf(failures, 4)))   // wait, but wake up early if a key is pressed
                         continue
                     }
@@ -89,6 +93,11 @@ class RemoteSession(
                 val t0 = System.nanoTime()
                 val r = l.send("POST", ev.route, ev.query(queue.sid))
                 val rtt = (System.nanoTime() - t0) / 1_000_000
+                if (badToken(r)) {                      // the key stays queued (same number): it is sent once the new token is in use
+                    if (!tokenLost(++tokenRetries)) break
+                    closeQuietly(link); link = null; continue
+                }
+                tokenRetries = 0
                 queue.ack(ev.seq)
                 rttMs = rttMs?.let { (it * 3 + rtt) / 4 } ?: rtt
                 runCatching { listener.answered(ev, r, rtt) }
@@ -97,6 +106,9 @@ class RemoteSession(
                     r.status in 200..299 -> if (status.link != Link.CONNECTED || status.via != l.name) set(Status(Link.CONNECTED, l.name, rttMs))
                     else -> runCatching { listener.refused(ev, message(r)) }
                 }
+            } catch (e: TokenRefused) {
+                if (!tokenLost(++tokenRetries)) break
+                closeQuietly(link); link = null
             } catch (e: IOException) {
                 closeQuietly(link); link = null
                 failures++
@@ -111,10 +123,23 @@ class RemoteSession(
 
     val isRunning: Boolean get() = running
 
+    private class TokenRefused : IOException("token refused")
+    private fun badToken(r: RemoteReply) = r.status == 401 && "bad token" in r.body
+
+    /** An expired token: say so calmly, ask for a new one and wait a little (never a wrong-PIN verdict, unless it keeps failing). False = give up. */
+    private fun tokenLost(n: Int): Boolean {
+        if (n > maxTokenRetries) { set(Status(Link.BAD_PIN, message = "L'autorisation de ce téléphone n'est plus acceptée par la TV : réassociez la TV.")); queue.clear(); return false }
+        set(Status(Link.OFFLINE, message = "Autorisation de la TV à renouveler…"))
+        runCatching { onTokenRejected() }
+        queue.take(minOf(5000L, 500L shl minOf(n, 4)))
+        return true
+    }
+
     private fun ping(l: RemoteTransport) {
         val t0 = System.nanoTime()
         val r = l.send("GET", "state", "")
         val rtt = (System.nanoTime() - t0) / 1_000_000
+        if (badToken(r)) throw TokenRefused()
         if (r.status == 401) { set(Status(Link.BAD_PIN, l.name, message = if ("locked" in r.body) "Trop d'essais : la TV attend une minute" else "Code PIN refusé par la TV")); return }
         rttMs = rttMs?.let { (it * 3 + rtt) / 4 } ?: rtt
         set(Status(Link.CONNECTED, l.name, rttMs))

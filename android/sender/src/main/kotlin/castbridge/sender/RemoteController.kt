@@ -91,12 +91,12 @@ object RemoteController {
         current = key
         _tv.value = null
         val app = ctx.applicationContext
-        val s = RemoteSession(RemoteQueue(), { open(app, tv, pin, btFallback) }, object : RemoteSession.Listener {
+        val s = RemoteSession(RemoteQueue(), { open(app, tv, TvLinkManager.credentialFor(tv.pinKey) ?: pin, btFallback) }, object : RemoteSession.Listener {
             override fun status(s: RemoteSession.Status) { _status.value = s }
             override fun state(json: String) { RemoteTvState.parse(json)?.let { _tv.value = it } }
             override fun refused(e: RemoteEvent, message: String) { _notice.value = System.currentTimeMillis() to message }
             override fun answered(e: RemoteEvent, r: RemoteReply, rttMs: Long) { _lastRtt.value = rttMs }
-        }, pingMs = 3000)
+        }, pingMs = 3000, onTokenRejected = { TvLinkManager.tokenRejected(TvLinkManager.credentialFor(tv.pinKey) ?: pin) })
         s.target = if (RemotePrefs(app).wholeTv) RemoteTarget.AUTO else RemoteTarget.APP
         session = s
         s.start()
