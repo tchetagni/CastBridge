@@ -82,7 +82,7 @@ add("ce1", "pca-ce1-en-phrases", [
     ("Quel petit mot met-on devant « apple » pour dire « une pomme » ?", "an", ["a", "the", "some"], "On emploie « an » devant un mot qui commence par un son voyelle.", 2),
     ("Quel petit mot met-on devant « book » pour dire « un livre » ?", "a", ["an", "the", "some"], "On emploie « a » devant un mot qui commence par un son consonne.", 1),
     ("Comment dit-on « Je suis content » en anglais ?", "I am happy", ["I am hungry", "I am sad", "I am tired", "I am cold"], "« Happy » veut dire « content, heureux ».", 1),
-    ("Comment dit-on « J'ai faim » en anglais ?", "I am hungry", ["I am happy", "I am tired", "I am thirsty", "I am angry"], "En anglais, on dit « je suis affamé » (I am hungry).", 2),
+    ("Comment dit-on « J'ai faim » en anglais ?", "I am hungry", ["I am happy", "I am tired", "I am thirsty", "I am angry"], "En anglais, on dit « I am hungry » (littéralement « je suis affamé »).", 2),
     ("Quel est le pluriel de « cat » ?", "cats", ["cates", "cat's", "cattes", "caties"], "En général, on ajoute un « s » au singulier.", 1),
     ("Que veut dire « Where is the cat » ?", "Où est le chat ?", ["Qui est le chat ?", "Quel est le chat ?", "Comment va le chat ?", "Quand vient le chat ?"], "« Where » veut dire « où ».", 2),
 ], "pca-en-gram", "Anglais")
@@ -156,7 +156,7 @@ pairs("cm2", "pca-cm2-en-compar", [("tall", "taller"), ("big", "bigger"), ("smal
       "Quel est le comparatif de supériorité de l'adjectif « {a} » ?", "De quel adjectif « {b} » est-il le comparatif de supériorité ?", region=W, cat="Anglais", src="pca-en-gram", diff=3, expl="Le comparatif de « {a} » est « {b} ».")
 en("cm2", "pca-cm2-en-matieres", [("histoire", "history"), ("géographie", "geography"), ("langue française", "French"), ("langue anglaise", "English"), ("sciences", "science"), ("musique", "music")], 2,
    fwd="Comment dit-on la matière « {a} » en anglais ?", rev="Quelle matière scolaire désigne « {b} » ?")
-en("cm2", "pca-cm2-en-transport", [("voiture", "car"), ("avion", "plane"), ("vélo", "bicycle"), ("bateau", "boat"), ("pirogue", "canoe"), ("route", "road"), ("pont", "bridge"), ("rue", "street")], 2)
+en("cm2", "pca-cm2-en-transport", [("voiture", "car"), ("avion", "plane"), ("vélo", "bicycle"), ("bateau", "boat"), ("pirogue", "canoe"), ("route", "road"), ("pont", "bridge")], 2)
 en("cm2", "pca-cm2-en-emotions", [("fatigué", "tired"), ("affamé (qui a faim)", "hungry"), ("assoiffé (qui a soif)", "thirsty"), ("en colère", "angry"), ("effrayé", "afraid"), ("content", "happy")], 2,
    fwd="Comment dit-on « {a} » en anglais ?", rev="Que veut dire l'adjectif « {b} » ?")
 add("cm2", "pca-cm2-en-gram", [
@@ -204,7 +204,7 @@ add("6e", "pca-6e-en-gram", [
     ("Quel mot interrogatif sert à demander le lieu ?", "Where", ["When", "Why", "Who", "How"], "« Where » veut dire « où ».", 1),
     ("Quel mot interrogatif sert à demander le moment ?", "When", ["Where", "Who", "How", "Whose"], "« When » veut dire « quand ».", 2),
     ("Quel mot interrogatif sert à demander la cause ?", "Why", ["What", "Where", "How", "Which"], "« Why » veut dire « pourquoi ».", 2),
-    ("Quelle préposition complète « I get up ___ six o'clock » ?", "at", ["on", "in", "by", "to"], "On emploie « at » devant une heure précise.", 2),
+    ("Quelle préposition complète « I get up ___ six o'clock » ?", "at", ["on", "in", "of", "to"], "On emploie « at » devant une heure précise.", 2),
     ("Quelle préposition complète « My birthday is ___ Monday » ?", "on", ["at", "in", "by", "to"], "On emploie « on » devant un jour de la semaine.", 2),
     ("Quelle préposition complète « We have a holiday ___ August » ?", "in", ["on", "at", "by", "to"], "On emploie « in » devant un mois.", 2),
     ("Quel est le pluriel de « city » ?", "cities", ["citys", "cityes", "city's", "citis"], "Après une consonne, « y » devient « ies ».", 3),
@@ -232,7 +232,8 @@ add("6e", "pca-6e-en-gram", [
 
 # ============================================================ ANGLAIS : 5e
 verbs("5e", "pca-5e-en-prets", [("begin", "began"), ("break", "broke"), ("bring", "brought"), ("choose", "chose"), ("drive", "drove"), ("fall", "fell"), ("feel", "felt"), ("find", "found"), ("fly", "flew"), ("forget", "forgot"), ("grow", "grew"), ("hear", "heard"), ("keep", "kept"), ("know", "knew"), ("leave", "left"), ("lose", "lost"), ("meet", "met"), ("pay", "paid"), ("sell", "sold"), ("sit", "sat"), ("sleep", "slept"), ("speak", "spoke"), ("stand", "stood"), ("swim", "swam")], "le prétérit", 3)
-en("5e", "pca-5e-en-corps", [("estomac", "stomach"), ("dos", "back"), ("gorge", "throat"), ("cœur", "heart"), ("peau", "skin"), ("cheveux", "hair"), ("doigt", "finger"), ("genou", "knee"), ("cou", "neck"), ("épaule", "shoulder"), ("coude", "elbow"), ("cheville", "ankle")], 3)
+en("5e", "pca-5e-en-corps", [("estomac", "stomach"), ("dos", "back"), ("gorge", "throat"), ("cœur", "heart"), ("peau", "skin"), ("cheveux", "hair"), ("doigt", "finger"), ("genou", "knee"), ("cou", "neck"), ("épaule", "shoulder"), ("coude", "elbow"), ("cheville", "ankle")], 3,
+   rev="Que veut dire « {b} » (partie du corps) en français ?")
 en("5e", "pca-5e-en-metiers", [("avocat", "lawyer"), ("ingénieur", "engineer"), ("mécanicien", "mechanic"), ("soldat", "soldier"), ("juge", "judge"), ("cuisinier", "cook"), ("commerçant", "shopkeeper"), ("électricien", "electrician"), ("menuisier", "carpenter"), ("coiffeur", "hairdresser")], 3,
    fwd="Comment dit-on le métier « {a} » en anglais ?", rev="Quel métier désigne le mot anglais « {b} » ?")
 add("5e", "pca-5e-en-gram", [
@@ -273,7 +274,7 @@ add("5e", "pca-5e-en-gram", [
 verbs("4e", "pca-4e-en-pp", [("go", "gone"), ("do", "done"), ("see", "seen"), ("eat", "eaten"), ("give", "given"), ("take", "taken"), ("write", "written"), ("begin", "begun"), ("drink", "drunk"), ("swim", "swum"), ("sing", "sung"), ("buy", "bought"), ("bring", "brought"), ("catch", "caught"), ("teach", "taught"), ("know", "known"), ("grow", "grown"), ("fly", "flown"), ("forget", "forgotten")], "le participe passé", 3)
 pairs("4e", "pca-4e-en-phrasal", [("look for", "chercher"), ("give up", "abandonner"), ("turn on", "allumer"), ("turn off", "éteindre"), ("get up", "se lever"), ("look after", "s'occuper de"), ("find out", "découvrir (une information)"), ("put on", "mettre (un vêtement)"), ("wake up", "se réveiller"), ("sit down", "s'asseoir"), ("come back", "revenir"), ("fill in", "remplir (un formulaire)"), ("run out of", "ne plus avoir de"), ("carry on", "continuer")],
       "Que veut dire le verbe à particule « {a} » ?", "Quel verbe à particule anglais veut dire « {b} » ?", region=W, cat="Anglais", src="pca-en-gram", diff=4, expl="« {a} » veut dire « {b} ».")
-en("4e", "pca-4e-en-societe", [("environnement", "environment"), ("gouvernement", "government"), ("santé", "health"), ("pauvreté", "poverty"), ("chômage", "unemployment"), ("liberté", "freedom"), ("paix", "peace"), ("guerre", "war"), ("connaissance", "knowledge"), ("échec", "failure"), ("conseil", "advice"), ("rêve", "dream"), ("vérité", "truth"), ("peur", "fear")], 3)
+en("4e", "pca-4e-en-societe", [("environnement", "environment"), ("gouvernement", "government"), ("santé", "health"), ("pauvreté", "poverty"), ("chômage", "unemployment"), ("liberté", "freedom"), ("paix", "peace"), ("guerre", "war"), ("connaissance (savoir)", "knowledge"), ("échec", "failure"), ("conseil (avis donné à quelqu'un)", "advice"), ("rêve", "dream"), ("vérité", "truth"), ("peur", "fear")], 3)
 add("4e", "pca-4e-en-gram", [
     ("Quelle phrase est correcte ?", "I have lived here for five years", ["I have live here for five years", "I am living here since five years", "I lived here since five years", "I have lived here since five years"], "Le present perfect se forme avec « have + participe passé ».", 4),
     ("Quel mot complète « She has worked here ___ 2019 » ?", "since", ["for", "ago", "during", "from"], "« Since » introduit un point de départ dans le temps.", 4),
@@ -304,7 +305,7 @@ add("4e", "pca-4e-en-gram", [
     ("Quelle est la bonne orthographe de « nécessaire » en anglais ?", "necessary", ["neccessary", "necesary", "necessery", "necesssary"], "Un seul « c » et deux « s ».", 4),
     ("Quelle est la bonne orthographe du prétérit de « occur » ?", "occurred", ["occured", "ocurred", "occurrd", "occurered"], "On double le « r » avant « ed ».", 5),
     ("Quelle est la bonne orthographe de « séparé » en anglais ?", "separate", ["seperate", "separete", "seperete", "separat"], "« Separate » contient « par » au milieu.", 4),
-    ("Quelle est la bonne orthographe de « certainement » en anglais ?", "definitely", ["definately", "definitly", "defenitely", "definatly"], "« Definitely » se termine par « -itely ».", 5),
+    ("Quelle est la bonne orthographe de « sans aucun doute » (adverbe) en anglais ?", "definitely", ["definately", "definitly", "defenitely", "definatly"], "« Definitely » se termine par « -itely ».", 5),
 ], "pca-en-gram", "Anglais")
 
 # ============================================================ ANGLAIS : 3e
@@ -334,7 +335,7 @@ add("3e", "pca-3e-en-gram", [
     ("Quelle expression anglaise signifie « avoir hâte de » ?", "look forward to", ["look after", "look for", "look at", "look up"], "« I look forward to your reply » = « J'attends votre réponse avec impatience ».", 4),
     ("Que veut dire « I had my hair cut » ?", "Je me suis fait couper les cheveux", ["J'ai coupé les cheveux de quelqu'un", "Je coupe mes cheveux moi-même", "Je n'ai pas de cheveux", "Mes cheveux étaient longs"], "« Have + objet + participe » indique qu'on fait faire quelque chose.", 5),
     ("Quelle phrase est correcte ?", "I have lived in Bamenda since 2015", ["I live in Bamenda since 2015", "I am living in Bamenda since 2015", "I lived in Bamenda since 2015", "I have lived in Bamenda for 2015"], "Avec « since » et un état qui continue, on emploie le present perfect.", 4),
-    ("Quel mot complète « Neither Awa ___ Kofi came » ?", "nor", ["or", "and", "but", "neither"], "« Neither... nor » veut dire « ni... ni ».", 4),
+    ("Quel mot complète « Neither Awa ___ Kofi came » ?", "nor", ["so", "and", "but", "neither"], "« Neither... nor » veut dire « ni... ni ».", 4),
     ("Quel mot complète « She is old ___ to vote » ?", "enough", ["too", "very", "so", "much"], "« Enough » se place après l'adjectif.", 4),
     ("Que veut dire « I'd rather stay » ?", "Je préférerais rester", ["Je devrais rester", "J'ai déjà resté", "Je ne reste pas", "Je suis resté"], "« Would rather » exprime une préférence.", 5),
     ("Quelle forme complète « He ___ me a story last night » ?", "told", ["said", "spoke", "talked", "tell"], "On dit « tell someone a story ».", 4),
@@ -358,7 +359,7 @@ def info(course, tpl, rows, src="pca-info-mat"):
 dpairs("ce2", "pca-ce2-info-materiel", [
     ("l'écran", "Afficher les images et les textes"), ("le clavier", "Écrire des lettres et des chiffres"), ("la souris", "Déplacer le pointeur et cliquer"),
     ("l'imprimante", "Imprimer un document sur papier"), ("la clé USB", "Transporter et copier des fichiers"), ("le haut-parleur", "Diffuser les sons"),
-    ("le microphone", "Enregistrer la voix"), ("la webcam", "Filmer pour les appels vidéo"), ("le scanner", "Numériser un document papier"),
+    ("le microphone", "Enregistrer la voix"), ("le scanner", "Numériser un document papier"),
     ("l'unité centrale", "Traiter les informations de l'ordinateur"),
 ], "À quoi sert %s ?" % "{a}", "Quel élément de l'informatique sert à {b} ?", "pca-info-mat", I_, W, 1, "Rôle de {a} : {low}.")
 info("ce2", "pca-ce2-info", [
@@ -384,10 +385,10 @@ info("ce2", "pca-ce2-info", [
 dpairs("cm1", "pca-cm1-info-raccourci", [
     ("Ctrl + C", "Copier"), ("Ctrl + V", "Coller"), ("Ctrl + X", "Couper"), ("Ctrl + Z", "Annuler la dernière action"),
     ("Ctrl + S", "Enregistrer"), ("Ctrl + A", "Tout sélectionner"), ("Ctrl + P", "Imprimer"), ("Ctrl + F", "Rechercher"),
-], "Que fait le raccourci clavier {a} ?", "Quel raccourci clavier permet de {b} ?", "pca-info-mat", I_, W, 2, "Le raccourci {a} permet de {low}.")
+], "Que fait le raccourci clavier {a} ?", "Quel raccourci clavier correspond à l'action « {b} » ?", "pca-info-mat", I_, W, 2, "Le raccourci {a} permet de {low}.")
 dpairs("cm1", "pca-cm1-info-extension", [
     (".jpg", "Une image"), (".mp3", "Un son ou une musique"), (".docx", "Un document de traitement de texte"), (".xlsx", "Un classeur de tableur"),
-    (".mp4", "Une vidéo"), (".txt", "Un texte brut sans mise en forme"), (".pptx", "Une présentation en diapositives"), (".zip", "Une archive compressée"),
+    (".pptx", "Une présentation en diapositives"), (".zip", "Une archive compressée"),
 ], "Quel type de fichier porte l'extension « {a} » ?", None, "pca-info-mat", I_, W, 3, "L'extension {a} désigne : {low}.")
 info("cm1", "pca-cm1-info", [
     ("Que veut dire « logiciel » ?", "Un programme qui fonctionne sur un ordinateur", ["Une pièce de l'ordinateur", "Un câble", "Un écran", "Une prise électrique"], "Un logiciel ne se touche pas : c'est une suite d'instructions.", 1),
@@ -446,7 +447,7 @@ info("cm2", "pca-cm2-info", [
     ("Quel logiciel sert à créer des tableaux de calcul ?", "Un tableur", ["Un navigateur", "Un antivirus", "Un lecteur vidéo", "Un logiciel de dessin"], "Excel et LibreOffice Calc sont des tableurs.", 2),
     ("Quel logiciel sert à écrire et mettre en forme une lettre ?", "Un traitement de texte", ["Un tableur", "Un navigateur", "Un antivirus", "Un lecteur de musique"], "Word et LibreOffice Writer sont des traitements de texte.", 2),
     ("Comment appelle-t-on l'image affichée en arrière-plan du bureau de l'ordinateur ?", "Le fond d'écran", ["Le pointeur", "Le dossier", "La corbeille", "La police"], "On peut le personnaliser avec une photo.", 1),
-    ("Quelle est l'extension habituelle d'un document de traitement de texte Word récent ?", ".docx", [".xlsx", ".mp3", ".jpg", ".zip"], "L'extension se trouve à la fin du nom du fichier.", 3),
+    ("Quelle est l'extension d'un document Word enregistré au format moderne (depuis Word 2007) ?", ".docx", [".xlsx", ".mp3", ".jpg", ".zip"], "L'extension se trouve à la fin du nom du fichier.", 3),
 ], "pca-info-algo")
 
 # ---------------------------------------------------------------- 6e
@@ -485,7 +486,7 @@ info("6e", "pca-6e-info", [
     ("Quel dispositif permet d'accéder à un réseau Wi-Fi ?", "Un routeur ou une box", ["Une souris", "Un scanner", "Un clavier", "Une imprimante"], "Le routeur relie les appareils au réseau.", 3),
     ("Que veut dire « Mo » dans la taille d'un fichier ?", "Mégaoctet", ["Millioctet", "Mégabit seulement", "Mégamètre", "Mégaohm"], "Un mégaoctet est plus grand qu'un kilooctet.", 3),
     ("Windows est un exemple de quoi ?", "Un système d'exploitation", ["Un tableur", "Un navigateur", "Un antivirus", "Un moteur de recherche"], "Il gère le matériel et lance les logiciels.", 2),
-    ("Lequel de ces périphériques est un périphérique d'entrée ?", "Le clavier", ["L'imprimante", "Le haut-parleur", "Le vidéoprojecteur", "Le casque"], "Un périphérique d'entrée envoie des informations à l'ordinateur.", 3),
+    ("Lequel de ces périphériques est un périphérique d'entrée ?", "Le clavier", ["L'imprimante", "Le haut-parleur", "Le vidéoprojecteur", "L'enceinte"], "Un périphérique d'entrée envoie des informations à l'ordinateur.", 3),
     ("Lequel de ces périphériques est un périphérique de sortie ?", "L'imprimante", ["Le clavier", "La souris", "Le microphone", "Le scanner"], "Un périphérique de sortie restitue des informations.", 3),
 ], "pca-info-net")
 
@@ -506,7 +507,7 @@ info("5e", "pca-5e-info", [
     ("Qu'est-ce que l'hameçonnage (phishing) ?", "Une tentative de voler des informations en imitant un message de confiance", ["Une sauvegarde automatique", "Un jeu en ligne", "Une mise à jour obligatoire", "Un antivirus gratuit"], "Il faut se méfier des liens reçus par message.", 3),
     ("Que fait la double authentification ?", "Elle demande une seconde preuve d'identité en plus du mot de passe", ["Elle double la vitesse d'Internet", "Elle copie le compte", "Elle supprime le mot de passe", "Elle ouvre deux fenêtres"], "Par exemple un code reçu sur un téléphone.", 4),
     ("Quel format d'image est compressé avec perte de qualité ?", "JPEG", ["TXT", "ZIP", "XLSX", "PDF"], "Le JPEG réduit la taille en perdant des détails.", 5),
-    ("Quel format d'image permet de gérer la transparence ?", "PNG", ["JPEG", "MP3", "TXT", "DOCX"], "Le PNG conserve les détails sans perte.", 5),
+    ("Parmi ces formats, lequel permet de gérer la transparence d'une image ?", "PNG", ["JPEG", "MP3", "TXT", "DOCX"], "Le PNG conserve les détails sans perte.", 5),
     ("Que signifie RVB pour une couleur à l'écran ?", "Rouge, vert, bleu", ["Rose, violet, blanc", "Rouge, violet, blanc", "Rond, vide, brillant", "Réseau, vidéo, bit"], "Chaque pixel mélange ces trois lumières.", 3),
     ("Que désigne la résolution d'une image ?", "Le nombre de pixels qui la compose", ["Le nom du fichier", "Le poids du papier", "La vitesse d'Internet", "La couleur de l'écran"], "Plus il y a de pixels, plus l'image est détaillée.", 4),
     ("Que veut dire LAN ?", "Réseau local", ["Réseau mondial", "Logiciel antivirus", "Langage de programmation", "Lecteur de mémoire"], "LAN vient de Local Area Network.", 5),
@@ -575,10 +576,10 @@ info("4e", "pca-4e-info", [
 # ---------------------------------------------------------------- 3e
 info("3e", "pca-3e-info", [
     ("Que vaut le nombre binaire 11111111 en écriture décimale ?", "255", ["256", "128", "127", "511"], "C'est la plus grande valeur codée sur un octet.", 5),
-    ("Combien vaut A en hexadécimal ?", "10", ["A", "11", "9", "16"], "Les chiffres hexadécimaux vont de 0 à 9 puis de A à F.", 5),
-    ("Combien vaut F en hexadécimal ?", "15", ["16", "14", "10", "255"], "A = 10, B = 11, C = 12, D = 13, E = 14, F = 15.", 5),
-    ("Combien vaut FF en hexadécimal ?", "255", ["256", "15", "225", "16"], "15 × 16 + 15 = 255.", 5),
-    ("Que vaut 10 en hexadécimal ?", "16", ["10", "8", "2", "100"], "1 × 16 + 0 = 16.", 5),
+    ("Quelle valeur décimale représente le chiffre hexadécimal A ?", "10", ["A", "11", "9", "16"], "Les chiffres hexadécimaux vont de 0 à 9 puis de A à F.", 5),
+    ("Quelle valeur décimale représente le chiffre hexadécimal F ?", "15", ["16", "14", "10", "255"], "A = 10, B = 11, C = 12, D = 13, E = 14, F = 15.", 5),
+    ("Quelle valeur décimale représente le nombre hexadécimal FF ?", "255", ["256", "15", "225", "16"], "15 × 16 + 15 = 255.", 5),
+    ("Quelle valeur décimale représente le nombre hexadécimal 10 ?", "16", ["10", "8", "2", "100"], "1 × 16 + 0 = 16.", 5),
     ("Quelle couleur correspond à rgb(255, 0, 0) ?", "Rouge", ["Vert", "Bleu", "Jaune", "Noir"], "Le rouge est à son maximum, le vert et le bleu à zéro.", 4),
     ("Quelle couleur correspond à rgb(0, 0, 0) ?", "Noir", ["Blanc", "Rouge", "Gris clair", "Jaune"], "Aucune lumière : l'écran est noir.", 4),
     ("Quelle couleur correspond à rgb(255, 255, 255) ?", "Blanc", ["Noir", "Rouge", "Gris foncé", "Bleu"], "Les trois couleurs sont au maximum.", 4),
@@ -586,7 +587,7 @@ info("3e", "pca-3e-info", [
     ("Combien de pixels contient une image de 1000 × 500 pixels ?", "500 000", ["1 500", "50 000", "5 000", "5 000 000"], "1000 × 500 = 500 000.", 4),
     ("Quel est le nombre maximum d'essais nécessaires pour trouver un nombre entre 1 et 100 par dichotomie ?", "7", ["5", "10", "50", "100"], "2 puissance 7 vaut 128, qui dépasse 100 ; 2 puissance 6 vaut 64.", 5),
     ("Quel est le nombre maximum d'essais pour trouver un nombre entre 1 et 1000 par dichotomie ?", "10", ["7", "100", "500", "1000"], "2 puissance 10 vaut 1024, qui dépasse 1000.", 5),
-    ("Que valent x en Python après x = 5 puis x = x + 2 ?", "7", ["5", "2", "52", "x + 2"], "La nouvelle valeur est calculée avec l'ancienne.", 4),
+    ("Que vaut x en Python après x = 5 puis x = x + 2 ?", "7", ["5", "2", "52", "x + 2"], "La nouvelle valeur est calculée avec l'ancienne.", 4),
     ("Que fait en Python for i in range(3): print(i) ?", "Il affiche 0, 1 puis 2", ["Il affiche 1, 2 puis 3", "Il affiche 3 fois le mot i", "Il affiche 0, 1, 2 et 3", "Il n'affiche rien"], "range(3) produit les entiers 0, 1 et 2.", 5),
     ("Quels nombres produit range(1, 4) en Python ?", "1, 2 et 3", ["1, 2, 3 et 4", "0, 1, 2 et 3", "2, 3 et 4", "1 et 4"], "La borne de fin est exclue.", 5),
     ("Que renvoie en Python 10 % 3 ?", "1", ["3", "0", "3,33", "7"], "10 = 3 × 3 + 1.", 4),
@@ -622,7 +623,7 @@ add("cm2", "pca-cm2-ecm-inst", [
     ("Où siègent les députés ?", "À l'Assemblée nationale", ["Au Sénat", "À la mairie", "À la Cour suprême", "À la préfecture"], "L'Assemblée nationale est l'une des deux chambres du Parlement.", 2),
     ("Quel est le rôle principal d'un député ?", "Voter les lois et représenter le peuple", ["Juger les voleurs", "Diriger une commune", "Commander l'armée", "Soigner les malades"], "Les députés sont élus par les citoyens.", 2),
     ("Quel est le rôle d'un juge ?", "Appliquer la loi en rendant la justice", ["Voter les lois", "Construire les routes", "Soigner les malades", "Enseigner aux élèves"], "Le juge est neutre et indépendant.", 2),
-    ("Quelles institutions jugent les personnes qui ont enfreint la loi ?", "Les tribunaux", ["Les écoles", "Les hôpitaux", "Les marchés", "Les mairies"], "Il existe des tribunaux dans chaque département.", 1),
+    ("Quelles institutions jugent les personnes qui ont enfreint la loi ?", "Les tribunaux", ["Les écoles", "Les hôpitaux", "Les marchés", "Les mairies"], "Les tribunaux sont des institutions de l'État.", 1),
     ("Quel pouvoir fait les lois ?", "Le pouvoir législatif", ["Le pouvoir exécutif", "Le pouvoir judiciaire", "Le pouvoir municipal", "Le pouvoir militaire"], "Il est exercé par le Parlement.", 2),
     ("Quel pouvoir applique les lois et dirige le pays ?", "Le pouvoir exécutif", ["Le pouvoir législatif", "Le pouvoir judiciaire", "Le pouvoir religieux", "Le pouvoir sportif"], "Il est exercé par le président et le gouvernement.", 2),
     ("Quel pouvoir rend la justice ?", "Le pouvoir judiciaire", ["Le pouvoir législatif", "Le pouvoir exécutif", "Le pouvoir municipal", "Le pouvoir scolaire"], "Il est exercé par les magistrats dans les tribunaux.", 2),
@@ -678,7 +679,7 @@ add("3e", "pca-3e-ecm-inst", [
     ("Comment le président de la République du Cameroun est-il élu ?", "Au suffrage universel direct", ["Par le Sénat", "Par le Conseil constitutionnel", "Par les maires", "Par tirage au sort"], "Les citoyens votent directement pour le candidat de leur choix.", 3),
     ("Quel est l'âge minimal pour être candidat à l'élection présidentielle au Cameroun ?", "35 ans", ["25 ans", "30 ans", "40 ans", "45 ans"], "La Constitution fixe aussi d'autres conditions.", 4),
     ("Qui nomme les membres du gouvernement au Cameroun ?", "Le président de la République", ["Le Sénat", "L'Assemblée nationale", "La Cour suprême", "Les gouverneurs"], "Le Premier ministre est lui aussi nommé par le président.", 3),
-    ("Qui assure l'intérim de la présidence en cas de vacance du pouvoir selon la Constitution ?", "Le président du Sénat", ["Le Premier ministre", "Le président de l'Assemblée nationale", "Le président de la Cour suprême", "Le ministre de la Défense"], "Le Conseil constitutionnel constate la vacance.", 5),
+    ("Qui assure l'intérim de la présidence en cas de vacance du pouvoir selon la Constitution ?", "Le président du Sénat", ["Le Premier ministre", "Le président de l'Assemblée nationale", "Le président de la Cour suprême", "Le ministre de la Défense"], "C'est la Constitution qui prévoit cet intérim.", 5),
     ("De quoi se compose le Parlement du Cameroun ?", "De l'Assemblée nationale et du Sénat", ["Du Sénat et de la Cour suprême", "De l'Assemblée nationale et du Conseil constitutionnel", "Des ministres et des préfets", "De la Cour suprême et du gouvernement"], "Le Parlement exerce le pouvoir législatif.", 3),
     ("Quelle est la durée normale du mandat d'un député prévue par la Constitution ?", "5 ans", ["3 ans", "4 ans", "6 ans", "7 ans"], "Une loi peut exceptionnellement proroger un mandat.", 4),
     ("Combien de sénateurs chaque région du Cameroun compte-t-elle ?", "10", ["5", "7", "3", "12"], "Sept sont élus et trois sont nommés par le président de la République.", 4),
@@ -728,7 +729,7 @@ add("3e", "pca-3e-ecm-monde", [
     ("Quel jour célèbre-t-on la Journée des Nations unies ?", "Le 24 octobre", ["Le 10 décembre", "Le 20 novembre", "Le 1er janvier", "Le 5 juin"], "La Charte est entrée en vigueur le 24 octobre 1945.", 5),
     ("En quelle année l'Union africaine a-t-elle succédé à l'OUA ?", "2002", ["1963", "1990", "1999", "2010"], "Elle a été lancée à Durban, en Afrique du Sud.", 4),
     ("Quel jour célèbre-t-on la Journée de l'Afrique ?", "Le 25 mai", ["Le 20 mai", "Le 16 juin", "Le 1er mai", "Le 11 février"], "Elle commémore la création de l'OUA le 25 mai 1963.", 4),
-    ("Comment s'appelle le plan de développement de l'Union africaine à l'horizon d'un siècle après les indépendances ?", "L'Agenda 2063", ["L'Agenda 2030", "Le plan Marshall", "Le traité d'Abuja", "Le pacte de Varsovie"], "Il vise une Afrique intégrée et prospère.", 5),
+    ("Comment s'appelle le plan de développement de l'Union africaine à l'horizon 2063, cent ans après la création de l'OUA ?", "L'Agenda 2063", ["L'Agenda 2030", "Le plan Marshall", "Le traité d'Abuja", "Le pacte de Varsovie"], "Il vise une Afrique intégrée et prospère.", 5),
     ("Combien de pays compte la CEMAC ?", "6", ["4", "5", "8", "10"], "Cameroun, Centrafrique, Congo, Gabon, Guinée équatoriale et Tchad.", 4),
     ("Dans quelle ville se trouve le siège de la Banque des États de l'Afrique centrale (BEAC) ?", "Yaoundé", ["Douala", "Libreville", "Brazzaville", "N'Djamena"], "La BEAC émet le franc CFA de la zone CEMAC.", 4),
     ("À quelles organisations internationales le Cameroun appartient-il à la fois ?", "Le Commonwealth et la Francophonie", ["Le Commonwealth seulement", "La Francophonie seulement", "L'OTAN et l'Union européenne", "La Ligue arabe et l'OPEP"], "Le Cameroun a rejoint le Commonwealth en 1995.", 4),
