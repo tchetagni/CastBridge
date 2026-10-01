@@ -31,4 +31,7 @@ Rapport final court en français : correctif, tests avant/après, ce qui reste �
 Suis `docs/COORDINATION.md` : rapport vivant `docs/agent-reports/bt-tunnel-keepalive.md` sur ta branche (STATUT en première ligne, une ligne par jalon, QUESTION si bloqué).
 
 ## Réponses du coordinateur
-(aucune pour l'instant ; relis cette section à chaque jalon)
+- 2026-10-01 14:55 (coordinateur, constat du propriétaire, Wi-Fi du téléphone coupé) : la télécommande rétablit des connexions Bluetooth **instables et successives** (elle se reconnecte en boucle) **en affichant « Wi-Fi »**. Deux défauts à corriger en plus du reste :
+  1. **Étiquette fausse** : `core/.../remote/RemoteClient.kt:117` (`override val name = "Wi-Fi"`) ; la barre de la télécommande affiche « Wi-Fi · 472 ms » alors que les requêtes passent par le tunnel Bluetooth (`http://127.0.0.1:<port>`). Détermine la vraie voie (Wi-Fi LAN / Wi-Fi Direct / tunnel Bluetooth / canal CBTR) et affiche-la ; test JVM de l'étiquette.
+  2. **Bascules en boucle** : après la perte d'une voie, ne repasse pas en « hors ligne » puis « connecté » à chaque requête. Hystérésis comme dans `LinkMachine` (2 résultats identiques + 3 s minimum avant de changer l'affichage), une seule reconnexion à la fois, courbe de réessai ; un état stable « Bluetooth seulement » doit rester affiché tant que la liaison tient.
+  Critère de réussite : Wi-Fi du téléphone coupé, la télécommande (flèches, volume) reste en ligne plusieurs minutes, affiche « Bluetooth », sans clignoter.
