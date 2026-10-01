@@ -185,7 +185,29 @@ curl -s "$CB/api/v1/quiz/draw?track=higher&level=L1&field=droit&count=15&seed=42
 
 Un appareil bloqué (jeton d'appareil en `Authorization`, ou `deviceId`) reçoit `403`.
 
+### Packs de questions (appareils)
+
+Les grosses banques (≈ 1 500 questions par lot, ≈ 75 Ko chacun) ne passent pas par la synchro ci-dessus : voir docs/QUIZ.md § 6 quater.
+
+`GET /api/v1/quiz/packs?course=primary/CM2&deviceId=` : catalogue signé (`course` facultatif ; `503` si le serveur n'a pas de clé de signature) :
+
+```json
+{"format":1,"version":1,"tvCapBytes":11000000,"totalBytes":1744374,"packs":[
+ {"id":"cm2-p1","track":"primary","level":"CM2","field":null,"part":1,"parts":5,"version":1,
+  "file":"quiz-cm2-p1-v1.quiz.zip","size":73504,"sha256":"…","questions":1305,"keyId":"…","signature":"base64"}]}
+```
+
+La signature Ed25519 (même clé que les mises à jour, `GET /api/v1/updates/public-key`) porte sur les lignes
+`castbridge-quiz-pack-v1`, `id=`, `course=` (`track[/level[/field]]`), `part=`, `parts=`, `version=`, `file=`, `size=`, `sha256=`, `questions=`
+jointes par `\n` (pas de saut de ligne final). Seuls les lots dont le fichier a la taille et l'empreinte annoncées sont listés.
+
+`GET /api/v1/quiz/packs/{file}` (`quiz-<parcours>-p<n>-v<n>.quiz.zip`) : l'archive, avec `ETag: "<sha256>"`, `Accept-Ranges: bytes`,
+plages simples (`206`, `416`), `If-Range`, `If-None-Match` (`304`) ; `404` pour un nom inconnu ou non annoncé. Un appareil bloqué reçoit `403`.
+
 ### Administration
+
+`GET /api/v1/admin/quiz/coverage` : par parcours, questions publiées sur le serveur, questions des lots, total et **nombre de parties sans
+répétition** garanties (objectif 300 ; 70/20/10 pour la culture générale), avec ce qui manque. Même tableau dans `/admin/quiz`.
 
 ```sh
 cba "$CB/api/v1/admin/quiz/questions?status=draft&track=&level=&field=&region=&q=capitale&page=0&size=50"

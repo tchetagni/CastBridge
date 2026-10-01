@@ -13,6 +13,25 @@
            th:text="${s == 'draft'} ? |Brouillons (${stats.parStatut['draft'] ?: 0})| : (${s == 'reviewed'} ? |Validées (${stats.parStatut['reviewed'] ?: 0})| : (${s == 'rejected'} ? |Rejetées (${stats.parStatut['rejected'] ?: 0})| : 'Toutes'))"></a>
     </p>
 
+    <section class="card" id="coverage">
+        <h2>Parties sans répétition <small th:text="|objectif : ${targetGames} parties de 15 questions par parcours|"></small></h2>
+        <p class="muted small">Une question n'est jamais reposée au même joueur avant 300 parties du même parcours : il faut 4 500 questions
+            par parcours (culture générale : 70 % Cameroun, 20 % Afrique, 10 % Monde). Questions publiées sur le serveur + lots téléchargeables par les TV.</p>
+        <table class="compact">
+            <tr><th>Parcours</th><th class="num">Publiées</th><th class="num">Lots</th><th class="num">Total</th><th class="num">Parties</th><th>État</th><th class="num">Manque</th></tr>
+            <tr th:each="c : ${coverage}">
+                <td th:text="${c.label}"></td>
+                <td class="num" th:text="${c.server}"></td>
+                <td class="num" th:text="${c.packs}"></td>
+                <td class="num" th:text="${c.total}"></td>
+                <td class="num" th:text="${c.games}"></td>
+                <td><span class="badge" th:classappend="${c.enough} ? 'good' : 'warn'"
+                          th:text="${c.enough} ? |suffisante (${c.games} parties)| : |insuffisante : ${c.games} / ${c.targetGames}|"></span></td>
+                <td class="num" th:text="${c.missing}"></td>
+            </tr>
+        </table>
+    </section>
+
     <form class="filters" method="get" th:action="@{/admin/quiz}">
         <input type="hidden" name="status" th:value="${status}">
         <input type="search" name="q" th:value="${q}" placeholder="Texte ou catégorie…">

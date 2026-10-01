@@ -24,7 +24,7 @@ téléphone ni réseau) ou **à plusieurs** : chacun répond sur son téléphone
 | Secondaire | 6e à Tle ; Form 1 à 5, Lower / Upper Sixth |
 | Supérieur | L1, L2, L3, par filière : droit, économie, mathématiques, physique, psychologie, géographie, littérature, histoire, informatique, chimie, biologie, philosophie, sociologie |
 
-Un niveau ou une filière sans questions s'affiche « bientôt » : il suffit d'ajouter des questions avec ce `level` / `field`
+Chaque parcours indique sous son nom « *N questions · M parties sans répétition (objectif 300)* » (§ 6 bis). Un niveau ou une filière sans questions s'affiche « bientôt » : il suffit d'ajouter des questions avec ce `level` / `field`
 pour l'ouvrir (§ 6). Dans le POC : culture générale, **CM2, 3e, Tle, L1 droit, L1 économie, L1 mathématiques**.
 
 | Façon de jouer | Qui joue | Réseau |
@@ -132,8 +132,139 @@ mauvaises réponses plausibles mais clairement fausses.
 `cm-nat-011` (Debundscha), `cm-sym-009` (balance des armoiries), `cm-lang-008` (« a-ka-u-ku »), `sup-l1-droit-002`
 (formulée sur la loi de révision du 18 janvier 1996).
 
-Contenu du POC : 200 questions de culture générale (140 CM, 40 AF, 20 Monde ; 28-29 par difficulté pour le Cameroun, 8
+Contenu embarqué dans l'APK (inchangé) : 200 questions de culture générale (140 CM, 40 AF, 20 Monde ; 28-29 par difficulté pour le Cameroun, 8
 pour l'Afrique, 4 pour le Monde), 120 questions scolaires (CM2, 3e, Tle, L1 droit / économie / mathématiques, 20 chacune).
+
+## 6 bis. Règle des 300 parties : une question ne revient pas avant 300 parties
+
+Demande d'Esaie : « des quiz où la répétition d'une question demande au moins 300 parties ». Règle retenue : **une même
+question n'est jamais reposée au même joueur (ou au même appareil) avant que 300 parties du même parcours se soient
+écoulées depuis**, tant que la banque le permet.
+
+**Mécanisme** (`core/.../quiz/QuizHistory.kt`, `QuizBank.kt`, `QuizRoom.kt`) :
+
+- Un **historique par profil et par parcours** : le numéro de la partie à laquelle chaque `id` a été posé. Profils : `host` =
+  le joueur de la TV (partie solo à la télécommande, Millionnaire sans téléphone) ; `dev:<identifiant du téléphone>` = chaque
+  téléphone (l'identifiant que la page de jeu envoie déjà à l'inscription). Parcours = `general`, `primary/CM2`,
+  `secondary/3e`, `higher/L1/droit`… (`QuestionFilter.courseKey`).
+- `QuizBank.draw(..., history, minGapGames = 300)` n'écarte jamais au hasard : il exclut toute question posée dans les
+  300 dernières parties du parcours (`age < 300`), en gardant les quotas 70/20/10 et la difficulté croissante. Les questions
+  de la banque non posées depuis le plus longtemps sont préférées ; en Duel / avec plusieurs téléphones, c'est l'**union**
+  des historiques des joueurs connectés (une question vue par l'un d'eux est exclue), à défaut celui de l'hôte.
+- **Seules les questions réellement affichées sont comptées** : une partie perdue à la question 3 n'« use » pas les douze
+  suivantes.
+- **Banque trop petite** : on reprend d'abord la question de la région **posée le plus longtemps auparavant**, à ±1 de la
+  difficulté voulue si possible (jamais une question récente tirée au hasard). Les quotas 70/20/10 ne sont cassés que si une
+  région n'a plus aucune question. `QuizBank.drawDetailed` renvoie un `DrawReport` (nombre de reprises, plus petit écart en
+  parties, quotas touchés) ; la salle l'expose (`settings.repeats` dans l'état) : le signalement n'est jamais silencieux.
+- **Stockage** : un fichier texte par profil dans `files/quiz/history/` (`CBQH1`, une ligne par question : `id numéro-de-partie`),
+  uniquement les 300 dernières parties de chaque parcours (≈ 4 500 lignes au maximum par parcours, 80 à 100 Ko), écriture
+  atomique (fichier temporaire + renommage, ancienne version gardée en `.bak`), en tâche de fond : une partie n'attend jamais
+  le disque. Fichier endommagé : les lignes lisibles sont gardées, sinon la sauvegarde `.bak`, sinon historique vide. 24 profils
+  au plus (les moins récents sont supprimés), 1 Mo par fichier au plus.
+- `QuizBank.remainingFresh(filter, history)` → `Freshness(pool, fresh, freshByRegion, gamesLeft, capacityGames)`. L'écran de
+  choix de partie de la TV affiche par parcours « *N questions · M parties sans répétition (objectif 300)* » ; `/admin` du
+  serveur affiche le même tableau (« Parties sans répétition ») avec ce qui manque.
+
+**Taille de banque requise** : 300 parties × 15 questions = **4 500 questions par parcours** (≈ 3 150 Cameroun, 900 Afrique,
+450 Monde pour la culture générale), avec au moins 900 par niveau de difficulté. Le test JVM `QuizNoRepeatTest` le vérifie
+avec une banque simulée de 4 500 questions (aucune répétition sur 300 parties, écart minimal ≥ 300 sur 900 parties).
+
+## 6 ter. Volume de contenu : le pipeline `tools/quiz-bank/`
+
+Le mécanisme est inutile sans ~4 500 questions par parcours. Elles ne sont **pas** écrites à la main : `tools/quiz-bank/`
+(Python, bibliothèque standard seulement) les produit de façon **reproductible** (mêmes `id`, mêmes archives à chaque
+exécution) et les contrôle. Les questions sortent en statut **`review`** (« à vérifier ») : rien n'est présenté comme sûr.
+
+```sh
+python3 tools/quiz-bank/quizbank.py check     # génère + contrôle, rien d'écrit (code 1 s'il y a une erreur)
+python3 tools/quiz-bank/quizbank.py build     # écrit content/quiz/dist (packs, catalog.json, coverage.json, sources.json)
+python3 tools/quiz-bank/quizbank.py report    # tableau de couverture par parcours
+python3 -m unittest discover -s tools/quiz-bank   # tests du pipeline
+```
+
+| Source | Où | Ce que c'est | Statut / `verif` |
+|---|---|---|---|
+| Générateurs programmatiques | `qb/gen/*.py` | calcul exact (fractions, dérivées vérifiées numériquement, intégrales par Simpson, dénombrements par force brute) : arithmétique, fractions, FCFA, mesures (CM2) ; algèbre, Pythagore, Thalès, trigonométrie, physique-chimie (3e) ; analyse, complexes, suites, probabilités, physique (Tle) ; matrices, séries, arithmétique modulaire (L1 maths) ; équilibre, élasticités, intérêts, comptabilité, TVA 19,25 % (L1 éco) ; calendrier, fuseaux, siècles (culture générale) ; conjugaison, pluriels (CM2 français) | `review` + `verif: computed` |
+| Faits sourcés | `qb/facts/*.py` | tables de faits (régions, départements, villes, fleuves, pays d'Afrique, capitales, histoire, personnalités, concepts de droit, d'économie…) avec une **fiche source par fait** (`sources.json` : où comparer ; la fiche ne prétend jamais que la vérification a été faite) | `review` + `verif: fact` |
+| Lots importés | `content/quiz/batches/*.json` | questions écrites par des experts ou par une IA, importées par `quizbank.py import lot.json` (validation, jamais `approved` à l'import) | `review` + `verif: import` |
+| Relecture humaine | `content/quiz/approvals.json` | `quizbank.py approve ids.txt --by "Nom" --date 2026-10-15` : les `id` relus passent `approved` | `approved` |
+
+**Contrôle qualité automatique** (`qb/qc.py`, appliqué à chaque `build` ; une question en erreur est exclue et listée dans
+`rejected.json`) : champs obligatoires ; 4 choix distincts (casse, accents et ponctuation ignorés) ; index de réponse valide ;
+la question finit par « ? » ; longueurs ; pas de « toutes ces réponses » ; espaces mal placés ; parenthèses et guillemets
+fermés ; **doublons exacts** et **quasi-doublons** (même réponse et mots proches, formulation identique de deux modèles) ;
+orthographe de base (noms propres fréquents) ; **équilibre des bonnes réponses A/B/C/D** (±5 points) ; difficulté 1..5 ;
+répartition 70/20/10 et nombre de parties garanties (`coverage.json`) ; part d'un modèle dans un parcours (≤ 8 %) et part du
+calcul (≤ 80 % en culture générale et en droit). Les générateurs se vérifient eux-mêmes (substitution, valeur numérique,
+force brute) ; une vérification qui échoue est un bogue du générateur, jamais une question.
+
+**Règle d'honnêteté sur le statut `review`** : une question **calculée** a sa réponse prouvée par le calcul mais sa
+formulation n'a pas été lue par un enseignant ; une question **factuelle** repose sur des connaissances de l'assistant, à
+confronter à sa fiche source. L'appli applique donc : `approved` → jouable ; `review` + `verif: computed` → jouable
+(`QuizBank.parse(..., computedPlayable = true)`, pour les lots seulement) ; `review` + `fact` / `import` → **exclue des parties**
+tant qu'un humain ne l'a pas approuvée. Pour tout exclure jusqu'à relecture complète, mettre `computedPlayable = false`
+dans `QuizPackFormat.read`.
+
+**Ajouter du contenu** :
+1. un modèle calculé : une fonction `@gen("tle", "tle-mon-modele", cap=200, cat="Analyse")` dans `qb/gen/…` qui renvoie un
+   `Draft(texte, bonne_réponse, mauvaises_réponses, explication)` ; les mauvaises réponses sont des erreurs typiques ;
+2. des faits : `fq(...)` ou `pairs(...)` dans `qb/facts/…` avec une fiche `source(...)` ;
+3. un lot rédigé : un fichier JSON (voir l'en-tête de `qb/importer.py`) puis `quizbank.py import` ;
+4. `quizbank.py build`, relire `coverage.json` et `sources.json`, committer `content/quiz/`, copier `content/quiz/dist` dans le dossier
+   des lots du serveur (`CASTBRIDGE_QUIZ_PACKS_DIR`).
+
+**Chiffres réels (build `v1`, 2026-10-01)** — questions par parcours, toutes `review`, **0 `approved`** :
+
+| Parcours | Questions | dont calculées | dont factuelles | Parties sans répétition (par effectif / par difficulté) | Manque pour 300 |
+|---|---:|---:|---:|---|---|
+| Culture générale | 3 205 (CM 1 639 · AF 591 · Monde 975) | 1 260 | 1 945 | 156 / 84 | CM ≈ 1 510, AF ≈ 310 |
+| Primaire · CM2 | 6 523 | 6 455 | 68 | 434 / 390 | rien |
+| Secondaire · 3e | 5 361 | 5 305 | 56 | 357 / 322 | rien |
+| Secondaire · Tle | 5 701 | 5 682 | 19 | 380 / 373 | rien |
+| Supérieur · L1 Droit | 106 | 0 | 106 | 7 / 0 | ≈ 4 400 |
+| Supérieur · L1 Économie | 4 889 | 4 845 | 44 | 325 / 318 | rien |
+| Supérieur · L1 Mathématiques | 5 236 | 5 210 | 26 | 349 / 335 | rien |
+
+Lecture honnête : **CM2, 3e, Tle, L1 éco et L1 maths dépassent 4 500 questions, mais ≈ 99 % sont des variantes numériques de 33
+à 52 modèles** (une question « 347 + 286 » n'est pas la même que « 512 + 98 », mais ce n'est pas du contenu éditorial) ; ce
+volume tient les 300 parties sans répétition, pas la variété des sujets. **La culture générale n'atteint pas 300 parties** (≈ 150,
+limitée par la part « Cameroun » : 70 % de 4 500 = 3 150 questions camerounaises, nous en avons 1 639 dont 490 de calendrier
+calculé) et **le droit est loin du compte** (106) : ces contenus demandent de vrais rédacteurs et relecteurs — c'est le rôle
+de `quizbank.py import` + `approve`. Les « parties par difficulté » comptent 3 questions par niveau de difficulté : la culture
+générale n'a que 252 questions de niveau 5, ce qui donne 84 parties avec une montée régulière 1→5 (au-delà, le tirage
+prend la difficulté voisine).
+
+## 6 quater. Packs de questions : chargement dynamique sur la TV
+
+La TV ne reçoit pas les ~27 000 questions dans l'APK (la banque embarquée reste ≈ 320 questions, 0 octet de plus) : elles sont
+découpées en **packs** (`.quiz.zip`) téléchargés **seulement quand l'historique montre qu'il reste moins de 60 parties
+fraîches** (`QUIZ_PACK_THRESHOLD_GAMES`) sur un parcours joué.
+
+- **Format** : une archive par parcours et par lot de ≈ 1 500 questions (`quiz-cm2-p1-v1.quiz.zip` = `manifest.json` +
+  `questions.json`, ≈ 75 Ko). Les lots d'un même parcours ont la même répartition (région, difficulté) : n'importe quel lot est
+  une mini-banque jouable. **Densité réelle : ≈ 17 800 questions par Mo** compressé ; les 25 packs du dépôt pèsent 1,74 Mo au total.
+- **Signés** : le catalogue `GET /api/v1/quiz/packs` donne pour chaque lot `sha256`, taille, version et une **signature Ed25519**
+  (même clé que les mises à jour, `UpdateKeys`) du texte `castbridge-quiz-pack-v1\nid=…\ncourse=…\npart=…\nparts=…\nversion=…\nfile=…\nsize=…\nsha256=…\nquestions=…`.
+  La TV refuse tout lot dont la signature, la taille, l'empreinte, le contenu ou le parcours ne correspondent pas
+  (`QuizPackStore.install`). Une version plus ancienne n'écrase jamais une plus récente.
+- **Plafond global : 11 Mo** (`QUIZ_PACK_MAX_BYTES = 11 000 000` octets) pour tous les packs téléchargés. Au-delà, on retire d'abord
+  les lots **épuisés** (toutes leurs questions posées dans les 300 dernières parties), puis ceux des parcours **jamais joués**
+  ici, les plus anciens d'abord ; un lot du parcours en cours qui a encore des questions fraîches n'est jamais retiré, et si
+  rien ne peut partir sans perdre des questions utiles l'installation est refusée.
+- **Où** : la clé USB si elle est présente (`CastBridge/QuizPacks/cache`), sinon le stockage externe de l'appli, jamais la
+  mémoire interne de la TV si on peut l'éviter (et alors 200 Mo doivent rester libres). Les packs **posés tels quels** dans
+  `CastBridge/QuizPacks/` d'une clé USB sont aussi lus (sans plafond, sans téléchargement ; contenu vérifié).
+- **Sources, dans l'ordre** : (1) le serveur, en direct ou **par la passerelle Internet du téléphone** (Bluetooth/Wi-Fi, c'est la
+  route de repli de `Routes`) ; (2) le **relais par le téléphone** : l'appli téléphone (onglet Quiz) demande à la TV de quoi elle a
+  besoin (`GET /api/quiz/packs/status`, PIN), télécharge les lots et les lui envoie (`POST /api/quiz/packs/push?info=…`) ; la TV
+  les contrôle comme les siens ; (3) la banque embarquée : la TV reste **jouable hors ligne**.
+- **Reprise** : le téléchargement continue après une coupure (requêtes `Range` + `If-Range` sur l'empreinte, fichier `.part`),
+  3 tentatives par lot avec pause croissante, puis source suivante.
+- **Serveur** (`backend/`) : `CASTBRIDGE_QUIZ_PACKS_DIR` (défaut `{CASTBRIDGE_STORAGE_DIR}/quiz-packs`) contient `catalog.json` + les
+  `.quiz.zip` copiés de `content/quiz/dist` ; le serveur n'annonce que les lots dont le fichier correspond à la taille et à
+  l'empreinte, et signe le catalogue à la demande. `GET /api/v1/quiz/packs/{fichier}` accepte les plages (206/416) ;
+  `GET /api/v1/admin/quiz/coverage` et la page `/admin/quiz` (« Parties sans répétition ») donnent la couverture.
 
 ## 7. Format d'échange avec le futur serveur de questions
 

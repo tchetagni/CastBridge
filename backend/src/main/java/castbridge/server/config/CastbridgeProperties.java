@@ -37,7 +37,8 @@ public record CastbridgeProperties(
         if (publicBaseUrl == null) publicBaseUrl = "";
         if (rateLimit == null) rateLimit = new RateLimit(120, 60);
         if (packages == null) packages = new Packages("castbridge.receiver", "castbridge.sender");
-        if (quiz == null) quiz = new Quiz(true, 365);
+        if (quiz == null) quiz = new Quiz(true, 365, null);
+        if (quiz.packsDir() == null) quiz = new Quiz(quiz.seed(), quiz.tombstoneDays(), storageDir.resolve("quiz-packs"));
         if (devices == null) devices = new Devices(365, 30, 30, 180, 15, 900);
         if (geo == null) geo = new Geo(null, null);
     }
@@ -61,8 +62,13 @@ public record CastbridgeProperties(
         }
     }
 
-    /** @param seed import the bundled bank when the table is empty; @param tombstoneDays how long deletions are remembered for sync */
-    public record Quiz(boolean seed, int tombstoneDays) {}
+    /**
+     * @param seed          import the bundled bank when the table is empty
+     * @param tombstoneDays how long deletions are remembered for sync
+     * @param packsDir      folder with the question packs built by tools/quiz-bank (catalog.json + *.quiz.zip), served to the TVs;
+     *                      CASTBRIDGE_QUIZ_PACKS_DIR, default {storage-dir}/quiz-packs
+     */
+    public record Quiz(boolean seed, int tombstoneDays, Path packsDir) {}
 
     /**
      * @param retentionDays     devices not seen for that long are forgotten

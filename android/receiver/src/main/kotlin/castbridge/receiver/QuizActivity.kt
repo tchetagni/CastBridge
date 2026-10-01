@@ -225,6 +225,14 @@ class QuizActivity : Activity() {
     private fun push(step: String) { steps += step; render() }
     private fun goHome() { room?.backToLobby(); steps.clear(); steps += "home"; stage.calm = false; render() }
     private fun count(f: QuestionFilter) = room?.bank?.count(f) ?: 0
+    /** "240 questions, environ 16 parties sans repetition": the bank's size against the goal of 300 games without repeat (docs/QUIZ.md). */
+    private fun bankNote(f: QuestionFilter): String {
+        val n = count(f)
+        val fr = room?.freshness(f) ?: return "$n questions"
+        val goal = fr.minGapGames
+        return if (fr.capacityGames >= goal) "$n questions · $goal parties sans répétition garanties"
+        else "$n questions · ≈ ${fr.capacityGames} parties sans répétition (objectif $goal)"
+    }
     private fun afterFilter() = push(if (play == QuizRoom.Play.STAKE) "stake" else "format")
     private var duelFormat = castbridge.core.quiz.QuizDuel.Format.CLASSIC
     private var stakeChosen = 100L
@@ -299,17 +307,17 @@ class QuizActivity : Activity() {
                 Choice(b, t.mapIndexed { i, e -> "${i + 1}. ${e.name}  ${e.detail}" }.joinToString("\n")) { }
             }.ifEmpty { listOf(Choice("Pas encore de score", "Jouez une partie pour inscrire le premier record !") { goHome() }) })
             "track" -> Triple("Quel parcours ?", play.label, listOf(
-                Choice(Track.GENERAL.label, "70 % Cameroun · 20 % Afrique · 10 % Monde") { pickTrack(Track.GENERAL) },
+                Choice(Track.GENERAL.label, "70 % Cameroun · 20 % Afrique · 10 % Monde\n" + bankNote(QuestionFilter.GENERAL)) { pickTrack(Track.GENERAL) },
                 Choice(Track.PRIMARY.label, "Du SIL au CM2 · Class 1 à 6") { pickTrack(Track.PRIMARY) },
                 Choice(Track.SECONDARY.label, "De la 6e à la Terminale · Form 1 à Upper Sixth") { pickTrack(Track.SECONDARY) },
                 Choice(Track.HIGHER.label, "Licence 1 à 3, par filière") { pickTrack(Track.HIGHER) }))
             "level" -> Triple("Quel niveau ?", track.label, QuizCatalog.levels(track).map { l ->
                 val n = count(QuestionFilter(track, l.key))
-                Choice(l.label, if (n > 0) "$n questions" else "bientôt", n > 0) { level = l.key; if (track == Track.HIGHER) push("field") else afterFilter() }
+                Choice(l.label, if (n > 0) bankNote(QuestionFilter(track, l.key)) else "bientôt", n > 0) { level = l.key; if (track == Track.HIGHER) push("field") else afterFilter() }
             })
             "field" -> Triple("Quelle filière ?", "${track.label} · ${level ?: ""}", QuizCatalog.fields.map { f ->
                 val n = count(QuestionFilter(track, level, f.key))
-                Choice(f.label, if (n > 0) "$n questions" else "bientôt", n > 0) { field = f.key; afterFilter() }
+                Choice(f.label, if (n > 0) bankNote(QuestionFilter(track, level, f.key)) else "bientôt", n > 0) { field = f.key; afterFilter() }
             })
             "stake" -> Triple("Quelle mise par joueur ?", "${QuizRoom.TOKENS_LABEL} : sans aucune valeur, rien à payer. La cagnotte est partagée selon le classement.",
                 listOf(50L, 100L, 200L).map { m -> Choice("$m jetons", if (m == 100L) "conseillé" else null) { stakeChosen = m; push("duel-format") } })
@@ -322,7 +330,7 @@ class QuizActivity : Activity() {
                     steps.clear(); render()
                 }
             })
-            else -> Triple("Comment jouer ?", QuestionFilter(track, level, field).label, listOf(
+            else -> Triple("Comment jouer ?", QuestionFilter(track, level, field).let { it.label + "  ·  " + bankNote(it) }, listOf(
                 Choice("Seul, à la télécommande", if (play == QuizRoom.Play.PRACTICE) "Question après question, avec les explications"
                     else "15 questions, jokers simulés : battez votre record") { launchSolo() },
                 Choice("Millionnaire avec le public", "Un candidat ; les autres aident depuis leur téléphone") { launch(QuizRoom.Mode.MILLIONAIRE) },

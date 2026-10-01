@@ -74,7 +74,8 @@ class AdminWebTest extends ApiTestBase {
         mvc.perform(get("/admin/devices/00000000-0000-0000-0000-000000000000").with(admin())).andExpect(status().isNotFound())
                 .andExpect(content().string(containsString("Appareil introuvable")));
         mvc.perform(get("/admin/releases").with(admin())).andExpect(status().isOk()).andExpect(content().string(containsString("Publier un APK")));
-        mvc.perform(get("/admin/quiz").with(admin())).andExpect(status().isOk()).andExpect(content().string(containsString("Banque de questions")));
+        mvc.perform(get("/admin/quiz").with(admin())).andExpect(status().isOk()).andExpect(content().string(containsString("Banque de questions")))
+                .andExpect(content().string(containsString("Parties sans répétition"))).andExpect(content().string(containsString("insuffisante")));
         mvc.perform(get("/admin/quiz").param("status", "reviewed").param("track", "higher").with(admin())).andExpect(status().isOk());
         mvc.perform(get("/admin/quiz/export").param("format", "csv").param("status", "all").with(admin())).andExpect(status().isOk())
                 .andExpect(content().string(containsString("uuid;lang;track")));

@@ -53,5 +53,7 @@ tasks.test {
     // Charte graphique: the tests read branding/design-tokens.json (contrasts, generated Kotlin in sync)
     systemProperty("branding.dir", rootProject.projectDir.parentFile.resolve("branding").absolutePath)
     inputs.dir(rootProject.projectDir.parentFile.resolve("branding")).withPropertyName("branding").optional()
+    // Question packs built by tools/quiz-bank (docs/QUIZ.md): the tests check their integrity
+    systemProperty("quiz.dist", rootProject.projectDir.parentFile.resolve("content/quiz/dist").absolutePath)
     inputs.dir(learnContent).withPropertyName("learnContent").optional()
 }

@@ -24,12 +24,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import castbridge.core.net.HttpLite
+import castbridge.core.quiz.HttpTvPackEndpoint
 import castbridge.core.quiz.Json
+import castbridge.core.quiz.QuizPackRelay
+import castbridge.core.quiz.ServerPackSource
+import castbridge.core.update.UpdateKeys
 import castbridge.core.tv.TvClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
@@ -71,6 +77,19 @@ fun QuizScreen() {
         }
     }
 
+    // The TV running low on questions without a route of its own gets them from the phone (Internet here): docs/QUIZ.md, « Packs de questions ».
+    var packMessage by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(tv?.base, pin) {
+        if (tv == null || pin.isEmpty()) return@LaunchedEffect
+        packMessage = withContext(Dispatchers.IO) {
+            runCatching {
+                val keys = UpdateKeys.PUBLIC_KEYS + listOf(BuildConfig.EXTRA_UPDATE_KEY).filter { it.isNotBlank() }
+                val server = ServerPackSource(PhoneConnect.state.baseUrl, HttpLite(), PhoneConnect.state.deviceToken, PhoneConnect.state.deviceId, keys, "serveur")
+                QuizPackRelay(server, HttpTvPackEndpoint(tv.base, pin), File(ctx.cacheDir, "quiz-packs")).sync().takeIf { it.pushed.isNotEmpty() }?.message
+            }.getOrNull()
+        }
+    }
+
     playing?.let { url ->
         BackHandler { playing = null }
         GamePage(url)
@@ -104,6 +123,7 @@ fun QuizScreen() {
             else -> ""
         }
         if (status.isNotEmpty()) Text(status, color = MaterialTheme.colorScheme.primary)
+        packMessage?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
 
         if (tv != null && roomOpen != true) {
             Button(enabled = pin.isNotEmpty() && !busy, onClick = {

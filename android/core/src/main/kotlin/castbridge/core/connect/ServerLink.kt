@@ -4,6 +4,7 @@ import castbridge.core.device.DeviceClient
 import castbridge.core.device.DeviceFacts
 import castbridge.core.device.DeviceReport
 import castbridge.core.net.HttpLite
+import castbridge.core.quiz.QuizPackManager
 import castbridge.core.quiz.QuizSync
 import castbridge.core.telemetry.Consent
 import castbridge.core.telemetry.EventQueue
@@ -46,6 +47,8 @@ class ServerLink(
     private val keys: List<String>,
     private val hooks: Hooks,
     private val quiz: QuizSync? = null,
+    /** Question packs (docs/QUIZ.md): refilled when the anti-repetition history runs low; the TV only. */
+    private val quizPacks: QuizPackHook? = null,
     private val clock: () -> Long = { System.currentTimeMillis() },
     private val schedule: UpdateSchedule = UpdateSchedule(deviceSeed = state.installId.hashCode().toLong()),
     private val sleep: (Long) -> Unit = { Thread.sleep(it) },
@@ -165,6 +168,7 @@ class ServerLink(
             val due = state.quizSyncedAt == 0L || now - state.quizSyncedAt >= QUIZ_PERIOD_MS || now < state.quizSyncedAt
             if (due && now - state.quizAttemptAt >= QUIZ_RETRY_MS) syncQuiz()
         }
+        if (quizPacks != null && !state.blocked && now - quizPackAttemptAt >= QUIZ_PACK_PERIOD_MS) refillQuizPacks()
     }
 
     /** Heartbeat (registers first if needed); true if the server answered. */
@@ -335,7 +339,22 @@ class ServerLink(
         return msg
     }
 
+    private var quizPackAttemptAt = 0L
+
+    /**
+     * Downloads the next question pack(s) of the courses running low on fresh games (nothing when the history shows enough),
+     * directly or through the phone's gateway; the packs are signed by the server, checked, and capped at 11 MB in total.
+     */
+    fun refillQuizPacks(): String = synchronized(lock) {
+        val h = quizPacks ?: return "indisponible"
+        quizPackAttemptAt = clock()
+        return try {
+            routes.call({ r: QuizPackManager.Report -> r.unreachable }) { p -> h.refill(state.baseUrl, http(p), state.deviceToken, state.deviceId) }.message
+        } catch (e: IOException) { "Serveur injoignable : lots de questions non mis à jour" }
+    }
+
     companion object {
+        const val QUIZ_PACK_PERIOD_MS = 6 * 3_600_000L
         const val QUIZ_PERIOD_MS = 24 * 3_600_000L
         const val QUIZ_RETRY_MS = 30 * 60_000L
         private val ESSENTIAL_EVENT = castbridge.core.telemetry.EventCatalog.ESSENTIAL
@@ -358,4 +377,9 @@ class ConnectAgent(val link: ServerLink, private val tickMs: Long = 60_000) {
     fun post(block: ServerLink.() -> Unit) { runCatching { ex.execute { runCatching { link.block() } } } }
 
     fun stop() { ex.shutdownNow() }
+}
+
+/** What the TV does to refill its question packs once the link has a route to the server (see [ServerLink.refillQuizPacks]). */
+fun interface QuizPackHook {
+    fun refill(baseUrl: String, http: castbridge.core.net.HttpLite, deviceToken: String?, deviceId: String?): QuizPackManager.Report
 }

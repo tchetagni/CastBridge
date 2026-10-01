@@ -3,8 +3,18 @@ package castbridge.receiver
 import android.app.Activity
 import android.content.Intent
 import android.content.Context
+import castbridge.core.connect.QuizPackHook
 import castbridge.core.quiz.CachedQuestionSource
+import castbridge.core.quiz.PackedQuestionSource
+import castbridge.core.quiz.QuestionFilter
+import castbridge.core.quiz.QuizPackApi
+import castbridge.core.quiz.QuizPackManager
+import castbridge.core.quiz.QuizPackStore
+import castbridge.core.quiz.ServerPackSource
+import castbridge.core.quiz.courseKey
+import castbridge.core.quiz.filterOfCourse
 import castbridge.core.quiz.QuestionSource
+import castbridge.core.quiz.QuizHistoryBook
 import castbridge.core.quiz.VirtualWallet
 import castbridge.core.quiz.QuizHttp
 import castbridge.core.quiz.QuizRoom
@@ -24,6 +34,11 @@ object QuizHub {
     /** Demo tokens only (no real money): see docs/QUIZ.md, « Mise payante ». */
     private val wallet = VirtualWallet()
     @Volatile private var source: CachedQuestionSource? = null
+    /** Anti-repetition histories (the TV's own + one per phone), in files/quiz/history: see docs/QUIZ.md, Règle des 300 parties. */
+    @Volatile private var histories: QuizHistoryBook? = null
+    fun historyBook(ctx: Context): QuizHistoryBook = histories ?: synchronized(this) {
+        histories ?: QuizHistoryBook(File(ctx.applicationContext.filesDir, "quiz/history")).also { histories = it }
+    }
 
     /**
      * Bundled questions, plus those received from the CastBridge server (QuizSync, daily or « Mettre à jour les questions »)
@@ -32,14 +47,68 @@ object QuizHub {
     fun cachedSource(ctx: Context): CachedQuestionSource = source ?: synchronized(this) {
         source ?: CachedQuestionSource(File(ctx.applicationContext.filesDir, "quiz/questions-cache.json")).also { source = it }
     }
-    private fun source(ctx: Context): QuestionSource = cachedSource(ctx)
+    private fun source(ctx: Context): QuestionSource = questionSource(ctx)
+
+    // ------------------------------------------------------------------ question packs (docs/QUIZ.md, « Packs de questions »)
+    @Volatile private var packed: PackedQuestionSource? = null
+    @Volatile private var packStore: QuizPackStore? = null
+    @Volatile private var packManager: QuizPackManager? = null
+
+    /** `CastBridge/QuizPacks` of the USB drives / volumes: packs found there are played as they are (no download, no size cap). */
+    fun driveDirs(): List<File> = LearnHub.packDirs().filter { it.third }.map { File(it.second.parentFile, "QuizPacks") }.distinctBy { it.absolutePath }
+
+    /** Where downloaded packs are kept: the USB drive when there is one, else the app's external storage; never the TV's internal flash if avoidable. */
+    private fun packCacheDir(ctx: Context): Pair<File, Long> {
+        LearnHub.packDirs().firstOrNull { it.third && !it.first.contains("racine") }?.let { return File(it.second.parentFile, "QuizPacks/cache") to 0L }
+        ctx.applicationContext.getExternalFilesDir("quiz-packs")?.let { return it to 0L }
+        return File(ctx.applicationContext.filesDir, "quiz/packs") to (200L shl 20)      // internal flash: keep 200 MB free
+    }
+
+    @Synchronized fun packStore(ctx: Context): QuizPackStore {
+        val (dir, minFree) = packCacheDir(ctx)
+        packStore?.takeIf { it.dir.absolutePath == dir.absolutePath }?.let { return it }
+        return QuizPackStore(dir, minFreeBytes = minFree, publicKeys = castbridge.core.update.UpdateKeys.PUBLIC_KEYS + extraKeys).also { packStore = it; packManager = null }
+    }
+    @Volatile private var extraKeys: List<String> = emptyList()
+
+    /** The bank in use: bundled + server cache + installed packs + USB packs. */
+    @Synchronized fun questionSource(ctx: Context): PackedQuestionSource {
+        val store = packStore(ctx)
+        packed?.takeIf { packedFor === store }?.let { return it }
+        return PackedQuestionSource(cachedSource(ctx), store, ::driveDirs).also { packed = it; packedFor = store }
+    }
+    private var packedFor: QuizPackStore? = null
+
+    @Synchronized fun packManager(ctx: Context): QuizPackManager {
+        val store = packStore(ctx)
+        return packManager ?: QuizPackManager(store, combined = { questionSource(ctx).bank() }, history = { historyBook(ctx).host },
+            onChanged = { questionSource(ctx).refresh() }, played = { historyBook(ctx).host.courses() }).also { packManager = it }
+    }
+
+    private fun watched(ctx: Context): List<QuestionFilter> =
+        (listOf(QuestionFilter.GENERAL) + historyBook(ctx).host.courses().mapNotNull { filterOfCourse(it) }).distinctBy { it.courseKey }
+
+    /** PIN routes the phone uses to push packs (docs/QUIZ.md § relais par le téléphone). */
+    fun packApi(ctx: Context): QuizPackApi = QuizPackApi(packStore(ctx), packManager(ctx)) { watched(ctx) }
+
+    /** Called by the server link: refills the courses that are running low on fresh games, from the server (direct or through the phone). */
+    fun packHook(ctx: Context, keys: List<String>): QuizPackHook {
+        extraKeys = keys
+        return QuizPackHook { baseUrl, http, token, deviceId ->
+            val m = packManager(ctx)
+            val src = ServerPackSource(baseUrl, http, token, deviceId, castbridge.core.update.UpdateKeys.PUBLIC_KEYS + keys)
+            val reports = m.needs(watched(ctx)).sortedBy { it.freshGames }.mapNotNull { n -> filterOfCourse(n.course)?.let { m.refill(it, listOf(src), maxPacks = 2) } }
+            reports.firstOrNull { it.installed.isNotEmpty() || it.unreachable } ?: reports.firstOrNull()
+                ?: QuizPackManager.Report("-", 0, 0, emptyList(), emptyList(), null, "Assez de questions pour 60 parties sans répétition sur chaque parcours joué")
+        }
+    }
     /** Public routes (no PIN) for the TV's HTTP server. */
     val http = QuizHttp({ room })
 
     /** Opens a fresh room (new code), closing the previous one. */
     @Synchronized fun open(ctx: Context): QuizRoom {
         room?.close()
-        return QuizRoom(source(ctx).bank(), asked = asked, wallet = wallet).also { room = it }
+        return QuizRoom(source(ctx).bank(), asked = asked, wallet = wallet, histories = historyBook(ctx)).also { room = it }
     }
 
     @Synchronized fun close(r: QuizRoom?) {
