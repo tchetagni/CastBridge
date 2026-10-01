@@ -1,0 +1,545 @@
+{
+ "chapter": "cm1-maths-geometrie",
+ "lessons": [
+  {
+   "id": "cm1-maths-angles",
+   "title": "Les angles et les triangles",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Géométrie : angles, triangles (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître un angle droit, aigu, obtus avec l'équerre.",
+    "Nommer un triangle : quelconque, isocèle, équilatéral, rectangle.",
+    "Utiliser les propriétés des côtés et des angles pour décrire un triangle."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-maths-angles-01",
+    "cm1-maths-angles-02",
+    "cm1-maths-angles-03",
+    "cm1-maths-angles-04",
+    "cm1-maths-angles-05",
+    "cm1-maths-angles-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-angles-q1",
+    "cm1-maths-angles-q2",
+    "cm1-maths-angles-q3",
+    "cm1-maths-angles-q4",
+    "cm1-maths-angles-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le niveau du CM1 (mesure au rapporteur ? seulement reconnaissance avec l'équerre ?).",
+    "Contrôler visuellement les figures : angle droit et triangles."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les angles",
+     "md": "Un **angle** est formé par deux demi-droites qui partent d'un même point, le **sommet**.\n\n- **Angle droit** : 90° (comme le coin d'une feuille). On le vérifie avec l'**équerre**.\n- **Angle aigu** : plus petit qu'un angle droit.\n- **Angle obtus** : plus grand qu'un angle droit.\n- **Angle plat** : 180°."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 170,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 150,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 130,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 120,
+        "x2": 320,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 120,
+        "x2": 230,
+        "y2": 30,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "angle",
+        "x": 230,
+        "y": 120,
+        "from": 0,
+        "to": 90,
+        "r": 22,
+        "right": true,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 410,
+        "y1": 120,
+        "x2": 500,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 410,
+        "y1": 120,
+        "x2": 360,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 150,
+        "text": "aigu",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 150,
+        "text": "droit",
+        "size": 16,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 150,
+        "text": "obtus",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un angle aigu, un angle droit, un angle obtus.",
+     "alt": "Trois angles dessinés : un angle aigu (plus petit que l'angle droit), un angle droit marqué par un petit carré et un angle obtus (plus ouvert que l'angle droit)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les triangles particuliers",
+     "md": "- **Triangle quelconque** : côtés de longueurs différentes.\n- **Triangle isocèle** : **deux côtés égaux** (et deux angles égaux).\n- **Triangle équilatéral** : **trois côtés égaux**.\n- **Triangle rectangle** : un **angle droit**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 190,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         150,
+         40,
+         50,
+         150,
+         150
+        ],
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "angle",
+        "x": 40,
+        "y": 150,
+        "from": 0,
+        "to": 90,
+        "r": 18,
+        "right": true,
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         260,
+         150,
+         360,
+         150,
+         310,
+         40
+        ],
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         430,
+         150,
+         530,
+         150,
+         480,
+         63
+        ],
+        "fill": "lightorange",
+        "stroke": "red"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 178,
+        "text": "rectangle",
+        "size": 15,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 178,
+        "text": "isocèle",
+        "size": 15,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 480,
+        "y": 178,
+        "text": "équilatéral",
+        "size": 15,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Trois triangles particuliers.",
+     "alt": "Trois triangles : un triangle rectangle avec un angle droit, un triangle isocèle avec deux côtés égaux et un triangle équilatéral avec trois côtés égaux."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : nommer un triangle",
+     "statement": "Un triangle a des côtés de 5 cm, 5 cm et 8 cm. Quel est son nom ?",
+     "steps": [
+      {
+       "md": "Deux côtés sont égaux (5 cm et 5 cm)."
+      },
+      {
+       "md": "Les trois côtés ne sont pas égaux (8 cm)."
+      }
+     ],
+     "answer": "**C'est un triangle isocèle.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : angle manquant",
+     "statement": "Deux angles côte à côte forment un angle droit. L'un mesure 50°. Combien mesure l'autre ?",
+     "steps": [
+      {
+       "md": "Un angle droit mesure 90°."
+      },
+      {
+       "md": "90 − 50 = 40."
+      }
+     ],
+     "answer": "**40°**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'un triangle équilatéral n'est pas isocèle (il a bien deux côtés égaux).\n- Juger un angle droit « à l'œil » : on utilise l'équerre.\n- Confondre aigu et obtus."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-angles-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-angles-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-angles-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-angles-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-angles-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-angles-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-angles-01",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Un angle de 90° est un angle…",
+   "choices": [
+    "aigu",
+    "obtus",
+    "plat",
+    "droit"
+   ],
+   "answer": 3,
+   "explanation": "90° = angle droit.",
+   "points": 1,
+   "lesson": "cm1-maths-angles",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-angles-02",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un angle de 120° est obtus.",
+   "answer": true,
+   "explanation": "Il est plus grand que 90° et plus petit que 180°.",
+   "points": 1,
+   "lesson": "cm1-maths-angles",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-angles-03",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque triangle à sa propriété.",
+   "pairs": [
+    [
+     "équilatéral",
+     "trois côtés égaux"
+    ],
+    [
+     "isocèle",
+     "deux côtés égaux"
+    ],
+    [
+     "rectangle",
+     "un angle droit"
+    ],
+    [
+     "quelconque",
+     "trois côtés différents"
+    ]
+   ],
+   "explanation": "Chaque nom correspond à une propriété des côtés ou des angles.",
+   "points": 2,
+   "lesson": "cm1-maths-angles",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-angles-04",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Un triangle de côtés 6 cm, 6 cm et 6 cm est…",
+   "choices": [
+    "isocèle seulement",
+    "rectangle",
+    "équilatéral",
+    "quelconque"
+   ],
+   "answer": 2,
+   "explanation": "Trois côtés égaux : équilatéral.",
+   "points": 1,
+   "lesson": "cm1-maths-angles",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-angles-05",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Deux angles forment un angle droit. L'un mesure 50°. Combien mesure l'autre (en degrés) ?",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "90 − 50 = 40.",
+   "unit": "°",
+   "points": 1,
+   "lesson": "cm1-maths-angles",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-angles-06",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Le triangle ABC a AB = 6 cm, AC = 6 cm et BC = 4 cm.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature du triangle ABC ?",
+     "choices": [
+      "équilatéral",
+      "isocèle en A",
+      "rectangle",
+      "quelconque"
+     ],
+     "answer": 1,
+     "explanation": "AB = AC : deux côtés égaux, le sommet commun est A.",
+     "id": "cm1-maths-angles-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le triangle ABC est équilatéral.",
+     "answer": false,
+     "explanation": "BC = 4 cm ≠ 6 cm : seulement deux côtés égaux.",
+     "id": "cm1-maths-angles-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur totale des trois côtés ?",
+     "answer": 16,
+     "tolerance": 0,
+     "explanation": "6 + 6 + 4 = 16 cm.",
+     "unit": "cm",
+     "id": "cm1-maths-angles-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-angles",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-angles-q1",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Un angle plat mesure…",
+   "choices": [
+    "180°",
+    "90°",
+    "45°",
+    "360°"
+   ],
+   "answer": 0,
+   "explanation": "Un angle plat est un demi-tour.",
+   "lesson": "cm1-maths-angles"
+  },
+  {
+   "id": "cm1-maths-angles-q2",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel instrument vérifie un angle droit ?",
+   "choices": [
+    "le compas",
+    "le rapporteur seulement",
+    "la règle graduée",
+    "l'équerre"
+   ],
+   "answer": 3,
+   "explanation": "L'équerre a un angle droit.",
+   "lesson": "cm1-maths-angles"
+  },
+  {
+   "id": "cm1-maths-angles-q3",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Un triangle rectangle a…",
+   "choices": [
+    "trois côtés égaux",
+    "deux angles obtus",
+    "un angle droit",
+    "un angle plat"
+   ],
+   "answer": 2,
+   "explanation": "Rectangle : un angle droit.",
+   "lesson": "cm1-maths-angles"
+  },
+  {
+   "id": "cm1-maths-angles-q4",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Un angle de 30° est…",
+   "choices": [
+    "droit",
+    "aigu",
+    "obtus",
+    "plat"
+   ],
+   "answer": 1,
+   "explanation": "Plus petit que 90°.",
+   "lesson": "cm1-maths-angles"
+  },
+  {
+   "id": "cm1-maths-angles-q5",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Un triangle isocèle a…",
+   "choices": [
+    "deux côtés égaux",
+    "trois côtés égaux",
+    "un angle droit",
+    "aucun côté égal"
+   ],
+   "answer": 0,
+   "explanation": "Isocèle : au moins deux côtés égaux.",
+   "lesson": "cm1-maths-angles"
+  }
+ ]
+}

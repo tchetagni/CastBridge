@@ -1,0 +1,511 @@
+{
+ "chapter": "cm1-maths-proportionnalite",
+ "lessons": [
+  {
+   "id": "cm1-maths-problemes",
+   "title": "Résoudre un problème",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Résolution de problèmes (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire un énoncé, repérer la question et les données utiles.",
+    "Résoudre un problème à plusieurs étapes.",
+    "Rédiger une phrase-réponse et vérifier."
+   ],
+   "prerequisites": [
+    "cm1-maths-calcul"
+   ],
+   "exercises": [
+    "cm1-maths-problemes-01",
+    "cm1-maths-problemes-02",
+    "cm1-maths-problemes-03",
+    "cm1-maths-problemes-04",
+    "cm1-maths-problemes-05",
+    "cm1-maths-problemes-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-problemes-q1",
+    "cm1-maths-problemes-q2",
+    "cm1-maths-problemes-q3",
+    "cm1-maths-problemes-q4",
+    "cm1-maths-problemes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la progressivité des problèmes à étapes pour le CM1.",
+    "Les prix sont fictifs ; le diagramme en barres est une figure générée (vérifier la lisibilité)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les étapes",
+     "md": "1. Je **lis** l'énoncé en entier.\n2. Je **souligne la question**.\n3. Je note les **données utiles** (certaines peuvent être inutiles).\n4. Je choisis les **opérations**, dans l'ordre.\n5. Je **calcule** et j'écris l'unité.\n6. J'écris une **phrase-réponse** et je **vérifie**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 85,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 40,
+        "w": 85,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 40,
+        "w": 85,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 40,
+        "w": 85,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 390,
+        "y": 40,
+        "w": 75,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 475,
+        "y": 40,
+        "w": 75,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 70,
+        "text": "Lire",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 147,
+        "y": 70,
+        "text": "Question",
+        "size": 15,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 242,
+        "y": 70,
+        "text": "Données",
+        "size": 15,
+        "color": "orange",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 337,
+        "y": 70,
+        "text": "Opérations",
+        "size": 14,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 427,
+        "y": 70,
+        "text": "Calculer",
+        "size": 14,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 512,
+        "y": 70,
+        "text": "Répondre",
+        "size": 14,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 125,
+        "text": "Les six étapes pour résoudre un problème",
+        "size": 15,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les étapes de résolution.",
+     "alt": "Six cases à la suite : lire, repérer la question, repérer les données, choisir les opérations, calculer, répondre."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Problème à plusieurs étapes",
+     "md": "Quand il faut plus d'une opération, je cherche d'abord ce qu'on peut calculer avec les données : c'est une **question cachée**.\n\n*Exemple* : 12 mangues à 75 FCFA, je paie avec 1 000 FCFA. Combien me rend-on ? Question cachée : combien coûtent les mangues ? (12 × 75 = 900). Puis 1 000 − 900 = 100."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une donnée inutile",
+     "statement": "Un car de 52 places fait 3 voyages pleins. Le billet coûte 3 500 FCFA. Combien de voyageurs ont été transportés ?",
+     "steps": [
+      {
+       "md": "La question porte sur le nombre de voyageurs : le prix est inutile."
+      },
+      {
+       "md": "52 × 3 = 156."
+      }
+     ],
+     "answer": "**156 voyageurs.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : deux étapes",
+     "statement": "Un cageot contient 24 oranges. Il y a 15 cageots. 38 oranges sont abîmées. Combien d'oranges sont bonnes ?",
+     "steps": [
+      {
+       "md": "Question cachée : combien d'oranges en tout ? 15 × 24 = 360."
+      },
+      {
+       "md": "360 − 38 = 322."
+      }
+     ],
+     "answer": "**322 oranges bonnes.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser toutes les données, même inutiles.\n- Oublier l'unité dans la réponse.\n- Ne pas relire la question à la fin."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-problemes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-problemes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-problemes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-problemes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-problemes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-problemes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-problemes-01",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Quelle est la première étape pour résoudre un problème ?",
+   "choices": [
+    "calculer tout de suite",
+    "écrire la réponse",
+    "choisir au hasard",
+    "lire l'énoncé en entier"
+   ],
+   "answer": 3,
+   "explanation": "On commence toujours par lire attentivement.",
+   "points": 1,
+   "lesson": "cm1-maths-problemes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-problemes-02",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Une mangue coûte 75 FCFA. Amina en achète 12 et paie avec un billet de 1 000 FCFA. Combien lui rend-on (FCFA) ?",
+   "answer": 100,
+   "tolerance": 0,
+   "explanation": "12 × 75 = 900 ; 1 000 − 900 = 100 FCFA.",
+   "unit": "FCFA",
+   "points": 1,
+   "lesson": "cm1-maths-problemes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-problemes-03",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans un problème, toutes les données sont toujours utiles.",
+   "answer": false,
+   "explanation": "Faux : certaines données peuvent être inutiles pour répondre à la question.",
+   "points": 1,
+   "lesson": "cm1-maths-problemes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-problemes-04",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Un car de 52 places fait 3 voyages pleins entre Yaoundé et Bafoussam. Le billet coûte 3 500 FCFA. Combien de voyageurs ont été transportés ?",
+   "answer": 156,
+   "tolerance": 0,
+   "explanation": "52 × 3 = 156. Le prix n'est pas utile ici.",
+   "unit": "voyageurs",
+   "points": 1,
+   "lesson": "cm1-maths-problemes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-problemes-05",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "open",
+   "prompt": "Résous et rédige : un cageot contient 24 oranges. Il y a 15 cageots. 38 oranges sont abîmées. Combien d'oranges sont bonnes ?",
+   "model": "15 × 24 = 360 oranges en tout ; 360 − 38 = 322. Il y a 322 oranges bonnes.",
+   "rubric": [
+    "Question cachée : 15 × 24.",
+    "Soustraction des oranges abîmées.",
+    "Phrase-réponse avec l'unité."
+   ],
+   "explanation": "15 × 24 = 360 ; 360 − 38 = 322.",
+   "points": 3,
+   "lesson": "cm1-maths-problemes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-problemes-06",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Une boutique vend des sacs de riz toute la semaine : lundi 12, mardi 8, mercredi 15, jeudi 10, vendredi 20. Un sac coûte 18 000 FCFA.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de sacs ont été vendus en tout ?",
+     "answer": 65,
+     "tolerance": 0,
+     "explanation": "12 + 8 + 15 + 10 + 20 = 65 sacs.",
+     "unit": "sacs",
+     "id": "cm1-maths-problemes-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel jour a-t-on vendu le plus de sacs ?",
+     "choices": [
+      "lundi",
+      "mardi",
+      "vendredi",
+      "jeudi"
+     ],
+     "answer": 2,
+     "explanation": "20 sacs : le maximum.",
+     "id": "cm1-maths-problemes-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle somme représente la vente de la semaine ?",
+     "answer": 1170000,
+     "tolerance": 0,
+     "explanation": "65 × 18 000 = 1 170 000 FCFA.",
+     "unit": "FCFA",
+     "id": "cm1-maths-problemes-06-c",
+     "points": 1
+    }
+   ],
+   "figure": {
+    "kind": "bars",
+    "bars": [
+     {
+      "label": "Lun",
+      "value": 12,
+      "color": "blue"
+     },
+     {
+      "label": "Mar",
+      "value": 8,
+      "color": "blue"
+     },
+     {
+      "label": "Mer",
+      "value": 15,
+      "color": "blue"
+     },
+     {
+      "label": "Jeu",
+      "value": 10,
+      "color": "blue"
+     },
+     {
+      "label": "Ven",
+      "value": 20,
+      "color": "orange"
+     }
+    ],
+    "unit": "sacs",
+    "w": 400,
+    "h": 240
+   },
+   "lesson": "cm1-maths-problemes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-problemes-q1",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Une phrase-réponse commence par…",
+   "choices": [
+    "un calcul seulement",
+    "reprendre les mots de la question",
+    "un dessin",
+    "un point d'interrogation"
+   ],
+   "answer": 1,
+   "explanation": "On répond avec une phrase complète et l'unité.",
+   "lesson": "cm1-maths-problemes"
+  },
+  {
+   "id": "cm1-maths-problemes-q2",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Une « question cachée » est…",
+   "choices": [
+    "une question à résoudre avant de répondre",
+    "une erreur dans l'énoncé",
+    "un résultat connu",
+    "une unité"
+   ],
+   "answer": 0,
+   "explanation": "C'est une étape intermédiaire du problème.",
+   "lesson": "cm1-maths-problemes"
+  },
+  {
+   "id": "cm1-maths-problemes-q3",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "12 cageots de 24 oranges : combien d'oranges ?",
+   "choices": [
+    "36",
+    "248",
+    "2 880",
+    "288"
+   ],
+   "answer": 3,
+   "explanation": "12 × 24 = 288.",
+   "lesson": "cm1-maths-problemes"
+  },
+  {
+   "id": "cm1-maths-problemes-q4",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Après avoir calculé, il faut…",
+   "choices": [
+    "effacer l'énoncé",
+    "changer l'opération",
+    "vérifier la réponse",
+    "passer sans lire"
+   ],
+   "answer": 2,
+   "explanation": "On vérifie la cohérence du résultat.",
+   "lesson": "cm1-maths-problemes"
+  },
+  {
+   "id": "cm1-maths-problemes-q5",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Un sac de 25 kg et un autre de 40 kg : masse totale ?",
+   "choices": [
+    "15 kg",
+    "65 kg",
+    "1 000 kg",
+    "625 kg"
+   ],
+   "answer": 1,
+   "explanation": "25 + 40 = 65.",
+   "lesson": "cm1-maths-problemes"
+  }
+ ]
+}

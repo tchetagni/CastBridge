@@ -1,0 +1,517 @@
+{
+ "chapter": "cm1-maths-mesures",
+ "lessons": [
+  {
+   "id": "cm1-maths-mesures",
+   "title": "Longueurs, masses, capacités et durées",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Mesures : longueurs, masses, capacités, durées (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Convertir des longueurs, des masses et des capacités.",
+    "Convertir et calculer des durées.",
+    "Choisir l'unité adaptée."
+   ],
+   "prerequisites": [
+    "cm1-maths-decimaux"
+   ],
+   "exercises": [
+    "cm1-maths-mesures-01",
+    "cm1-maths-mesures-02",
+    "cm1-maths-mesures-03",
+    "cm1-maths-mesures-04",
+    "cm1-maths-mesures-05",
+    "cm1-maths-mesures-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-mesures-q1",
+    "cm1-maths-mesures-q2",
+    "cm1-maths-mesures-q3",
+    "cm1-maths-mesures-q4",
+    "cm1-maths-mesures-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les conversions et les calculs de durées.",
+    "Les temps de trajet sont fictifs (pas de données réelles)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Longueurs",
+     "md": "km, hm, dam, m, dm, cm, mm : en passant d'une unité à la suivante vers la droite, on **multiplie par 10**.\n\n- 3,5 km = 3 500 m.\n- 250 cm = 2,5 m."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 66,
+        "text": "km",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 96,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 131,
+        "y": 66,
+        "text": "hm",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 172,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 207,
+        "y": 66,
+        "text": "dam",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 248,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "text",
+        "x": 283,
+        "y": 66,
+        "text": "m",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 324,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 359,
+        "y": 66,
+        "text": "dm",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 400,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 66,
+        "text": "cm",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 476,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 511,
+        "y": 66,
+        "text": "mm",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 20,
+        "text": "de gauche à droite : × 10 à chaque case",
+        "size": 14,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 115,
+        "text": "de droite à gauche : ÷ 10 à chaque case",
+        "size": 14,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le tableau des longueurs.",
+     "alt": "Sept cases : km, hm, dam, m, dm, cm, mm. À droite on multiplie par 10 à chaque case, à gauche on divise par 10."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Masses et capacités",
+     "md": "- **Masse** : 1 t = 1 000 kg ; 1 kg = 1 000 g. (2,5 kg = 2 500 g)\n- **Capacité** : 1 L = 10 dL = 100 cL = 1 000 mL. (75 cL = 0,75 L)"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Durées",
+     "md": "1 h = 60 min ; 1 min = 60 s. Pour calculer une durée, on avance par étapes : de 7 h 40 à 8 h (20 min), puis à 10 h (2 h), puis à 10 h 15 (15 min). Total : 2 h 35 min.\n\nAttention : les durées ne sont pas décimales (1,5 h = 1 h 30 min)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : convertir",
+     "statement": "Convertis 3,5 km en mètres et 250 cm en mètres.",
+     "steps": [
+      {
+       "md": "3,5 km × 1 000 = 3 500 m."
+      },
+      {
+       "md": "250 cm ÷ 100 = 2,5 m."
+      }
+     ],
+     "answer": "**3 500 m ; 2,5 m**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une durée",
+     "statement": "Mballa part à 6 h 45 et arrive à 8 h 35. Quelle est la durée du trajet ?",
+     "steps": [
+      {
+       "md": "De 6 h 45 à 7 h : 15 min. De 7 h à 8 h : 1 h. De 8 h à 8 h 35 : 35 min."
+      },
+      {
+       "md": "15 + 60 + 35 = 110 min = 1 h 50 min."
+      }
+     ],
+     "answer": "**1 h 50 min**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Multiplier par 100 au lieu de 1 000 (km → m).\n- Calculer les durées en base 10.\n- Oublier l'unité."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-mesures-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-mesures-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-mesures-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-mesures-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-mesures-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-mesures-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-mesures-01",
+   "chapter": "cm1-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Convertis 3,5 km en mètres.",
+   "answer": 3500,
+   "tolerance": 0,
+   "explanation": "1 km = 1 000 m : 3,5 × 1 000 = 3 500 m.",
+   "unit": "m",
+   "points": 1,
+   "lesson": "cm1-maths-mesures",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-mesures-02",
+   "chapter": "cm1-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Convertis 250 cm en mètres.",
+   "answer": 2.5,
+   "tolerance": 0,
+   "explanation": "250 ÷ 100 = 2,5 m.",
+   "unit": "m",
+   "points": 1,
+   "lesson": "cm1-maths-mesures",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-mesures-03",
+   "chapter": "cm1-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque égalité exacte.",
+   "pairs": [
+    [
+     "1 m",
+     "100 cm"
+    ],
+    [
+     "1 kg",
+     "1 000 g"
+    ],
+    [
+     "1 L",
+     "1 000 mL"
+    ],
+    [
+     "1 h",
+     "60 min"
+    ]
+   ],
+   "explanation": "Conversions usuelles.",
+   "points": 2,
+   "lesson": "cm1-maths-mesures",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-mesures-04",
+   "chapter": "cm1-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Une bouteille contient 75 cL. Combien de litres contiennent 4 bouteilles ?",
+   "answer": 3.0,
+   "tolerance": 0,
+   "explanation": "4 × 75 = 300 cL = 3 L.",
+   "unit": "L",
+   "points": 1,
+   "lesson": "cm1-maths-mesures",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-mesures-05",
+   "chapter": "cm1-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Un car part à 7 h 40 et arrive à 10 h 15. Quelle est la durée du trajet en minutes ?",
+   "answer": 155,
+   "tolerance": 0,
+   "explanation": "De 7 h 40 à 10 h 15 : 2 h 35 min = 120 + 35 = 155 min.",
+   "unit": "min",
+   "points": 1,
+   "lesson": "cm1-maths-mesures",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-mesures-06",
+   "chapter": "cm1-maths-mesures",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Mballa part de chez lui à 6 h 45 pour aller au marché de Bafoussam. Le trajet dure 1 h 50 min et il habite à 12 km du marché.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "À quelle heure arrive-t-il ?",
+     "choices": [
+      "8 h 15",
+      "8 h 35",
+      "7 h 95",
+      "8 h 05"
+     ],
+     "answer": 1,
+     "explanation": "6 h 45 + 1 h 50 = 8 h 35 (45 + 50 = 95 min = 1 h 35).",
+     "id": "cm1-maths-mesures-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la durée du trajet en minutes ?",
+     "answer": 110,
+     "tolerance": 0,
+     "explanation": "1 h 50 min = 60 + 50 = 110 min.",
+     "unit": "min",
+     "id": "cm1-maths-mesures-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle distance, en mètres, sépare sa maison du marché ?",
+     "answer": 12000,
+     "tolerance": 0,
+     "explanation": "12 km = 12 000 m.",
+     "unit": "m",
+     "id": "cm1-maths-mesures-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-mesures",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-mesures-q1",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "1 kg =",
+   "choices": [
+    "1 000 g",
+    "100 g",
+    "10 g",
+    "10 000 g"
+   ],
+   "answer": 0,
+   "explanation": "1 kg = 1 000 g.",
+   "lesson": "cm1-maths-mesures"
+  },
+  {
+   "id": "cm1-maths-mesures-q2",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "2 h 30 min =",
+   "choices": [
+    "230 min",
+    "130 min",
+    "250 min",
+    "150 min"
+   ],
+   "answer": 3,
+   "explanation": "2 × 60 + 30 = 150.",
+   "lesson": "cm1-maths-mesures"
+  },
+  {
+   "id": "cm1-maths-mesures-q3",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle unité pour mesurer la distance Yaoundé – Douala ?",
+   "choices": [
+    "le millimètre",
+    "le gramme",
+    "le kilomètre",
+    "le litre"
+   ],
+   "answer": 2,
+   "explanation": "Pour les grandes distances : le kilomètre.",
+   "lesson": "cm1-maths-mesures"
+  },
+  {
+   "id": "cm1-maths-mesures-q4",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "1,5 L en mL :",
+   "choices": [
+    "150 mL",
+    "1 500 mL",
+    "15 mL",
+    "15 000 mL"
+   ],
+   "answer": 1,
+   "explanation": "1,5 × 1 000 = 1 500.",
+   "lesson": "cm1-maths-mesures"
+  },
+  {
+   "id": "cm1-maths-mesures-q5",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "1 tonne =",
+   "choices": [
+    "1 000 kg",
+    "100 kg",
+    "10 kg",
+    "10 000 kg"
+   ],
+   "answer": 0,
+   "explanation": "1 t = 1 000 kg.",
+   "lesson": "cm1-maths-mesures"
+  }
+ ]
+}

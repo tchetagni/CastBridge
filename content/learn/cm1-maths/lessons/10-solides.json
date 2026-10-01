@@ -1,0 +1,452 @@
+{
+ "chapter": "cm1-maths-geometrie",
+ "lessons": [
+  {
+   "id": "cm1-maths-solides",
+   "title": "Les solides",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Géométrie : solides et patrons (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître le cube, le pavé droit, le prisme, la pyramide, le cylindre, le cône et la sphère.",
+    "Compter les faces, les arêtes et les sommets d'un solide.",
+    "Reconnaître un patron de cube."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-maths-solides-01",
+    "cm1-maths-solides-02",
+    "cm1-maths-solides-03",
+    "cm1-maths-solides-04",
+    "cm1-maths-solides-05",
+    "cm1-maths-solides-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-solides-q1",
+    "cm1-maths-solides-q2",
+    "cm1-maths-solides-q3",
+    "cm1-maths-solides-q4",
+    "cm1-maths-solides-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les nombres de faces, d'arêtes et de sommets (cube, pavé, prisme, pyramide) : F + S − A = 2.",
+    "Contrôler visuellement les figures."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Faces, arêtes, sommets",
+     "md": "Un solide a des **faces** (surfaces plates), des **arêtes** (segments où deux faces se rejoignent) et des **sommets** (coins)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 200,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         70,
+         140,
+         70,
+         140,
+         170,
+         40,
+         170
+        ],
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         70,
+         80,
+         30,
+         180,
+         30,
+         140,
+         70
+        ],
+        "fill": "lightyellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         140,
+         70,
+         180,
+         30,
+         180,
+         130,
+         140,
+         170
+        ],
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 190,
+        "text": "cube",
+        "size": 16,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         300,
+         140,
+         420,
+         140,
+         390,
+         30
+        ],
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         420,
+         140,
+         460,
+         110,
+         390,
+         30
+        ],
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 170,
+        "text": "pyramide à base carrée",
+        "size": 15,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un cube et une pyramide.",
+     "alt": "Un cube dessiné en perspective avec trois faces visibles, et une pyramide à base carrée avec deux faces triangulaires visibles."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelques solides",
+     "md": "- **Cube** : 6 faces carrées, 12 arêtes, 8 sommets.\n- **Pavé droit** : 6 faces rectangulaires, 12 arêtes, 8 sommets.\n- **Prisme droit à base triangulaire** : 5 faces, 9 arêtes, 6 sommets.\n- **Pyramide à base carrée** : 5 faces, 8 arêtes, 5 sommets.\n- **Cylindre** : 2 disques et une surface courbe. **Cône** : un disque et une surface courbe. **Sphère** : une surface entièrement courbe (une balle)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le patron",
+     "md": "Un **patron** est le dessin à plat qu'on découpe puis plie pour fabriquer un solide. Le patron d'un cube comporte **6 carrés** identiques."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : compter",
+     "statement": "Combien d'arêtes a un cube de 5 cm de côté ? Combien de centimètres de ruban pour les couvrir toutes ?",
+     "steps": [
+      {
+       "md": "Un cube a 12 arêtes."
+      },
+      {
+       "md": "Chaque arête mesure 5 cm : 12 × 5 = 60."
+      }
+     ],
+     "answer": "**12 arêtes ; 60 cm de ruban.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : reconnaître",
+     "statement": "Un solide a 5 faces : 1 carré et 4 triangles. Quel est son nom ?",
+     "steps": [
+      {
+       "md": "Une base carrée et des faces triangulaires qui se rejoignent en un sommet."
+      },
+      {
+       "md": "C'est une pyramide."
+      }
+     ],
+     "answer": "**Pyramide à base carrée.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier les faces cachées ou les arêtes cachées.\n- Dire que le cylindre a des arêtes droites : il a des arêtes courbes.\n- Confondre carré et cube : le carré est plat."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-solides-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-solides-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-solides-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-solides-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-solides-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-solides-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-solides-01",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Combien de faces a un cube ?",
+   "choices": [
+    "6",
+    "4",
+    "8",
+    "12"
+   ],
+   "answer": 0,
+   "explanation": "Un cube a 6 faces carrées.",
+   "points": 1,
+   "lesson": "cm1-maths-solides",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-solides-02",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Combien de sommets a un pavé droit ?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "Un pavé droit a 8 sommets, comme un cube.",
+   "points": 1,
+   "lesson": "cm1-maths-solides",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-solides-03",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque solide à sa description.",
+   "pairs": [
+    [
+     "cube",
+     "6 faces carrées"
+    ],
+    [
+     "cylindre",
+     "2 disques et une surface courbe"
+    ],
+    [
+     "pyramide à base carrée",
+     "5 faces"
+    ],
+    [
+     "sphère",
+     "surface entièrement courbe"
+    ]
+   ],
+   "explanation": "Chaque solide a sa description.",
+   "points": 2,
+   "lesson": "cm1-maths-solides",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-solides-04",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un pavé droit a 12 arêtes.",
+   "answer": true,
+   "explanation": "Quatre en haut, quatre en bas, quatre verticales : 12 arêtes.",
+   "points": 1,
+   "lesson": "cm1-maths-solides",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-solides-05",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Combien d'arêtes a un prisme droit à base triangulaire ?",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "3 arêtes en haut, 3 en bas, 3 verticales : 9.",
+   "points": 1,
+   "lesson": "cm1-maths-solides",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-solides-06",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Amina colle un ruban sur toutes les arêtes d'un dé en forme de cube de 5 cm de côté.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien d'arêtes le cube a-t-il ?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "Un cube a 12 arêtes.",
+     "id": "cm1-maths-solides-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle longueur de ruban faut-il ?",
+     "answer": 60,
+     "tolerance": 0,
+     "explanation": "12 × 5 = 60 cm.",
+     "unit": "cm",
+     "id": "cm1-maths-solides-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Combien de carrés compte un patron du cube ?",
+     "choices": [
+      "4",
+      "8",
+      "12",
+      "6"
+     ],
+     "answer": 3,
+     "explanation": "Un patron du cube a 6 carrés.",
+     "id": "cm1-maths-solides-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-solides",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-solides-q1",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Les coins d'un solide sont…",
+   "choices": [
+    "les faces",
+    "les arêtes",
+    "les sommets",
+    "les patrons"
+   ],
+   "answer": 2,
+   "explanation": "Les coins sont les sommets.",
+   "lesson": "cm1-maths-solides"
+  },
+  {
+   "id": "cm1-maths-solides-q2",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Une balle a la forme…",
+   "choices": [
+    "d'un cube",
+    "d'une sphère",
+    "d'un pavé",
+    "d'un prisme"
+   ],
+   "answer": 1,
+   "explanation": "La sphère est entièrement courbe.",
+   "lesson": "cm1-maths-solides"
+  },
+  {
+   "id": "cm1-maths-solides-q3",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Un cylindre a…",
+   "choices": [
+    "deux faces planes (disques)",
+    "six faces carrées",
+    "aucune face courbe",
+    "cinq faces triangulaires"
+   ],
+   "answer": 0,
+   "explanation": "Deux disques et une surface courbe.",
+   "lesson": "cm1-maths-solides"
+  },
+  {
+   "id": "cm1-maths-solides-q4",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Combien de faces a une pyramide à base carrée ?",
+   "choices": [
+    "4",
+    "6",
+    "8",
+    "5"
+   ],
+   "answer": 3,
+   "explanation": "1 carré + 4 triangles.",
+   "lesson": "cm1-maths-solides"
+  },
+  {
+   "id": "cm1-maths-solides-q5",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Un patron sert à…",
+   "choices": [
+    "mesurer un angle",
+    "tracer un cercle",
+    "fabriquer un solide",
+    "compter les sommets"
+   ],
+   "answer": 2,
+   "explanation": "On découpe et on plie le patron.",
+   "lesson": "cm1-maths-solides"
+  }
+ ]
+}
