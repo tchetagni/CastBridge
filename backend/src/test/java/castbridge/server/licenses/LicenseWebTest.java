@@ -233,4 +233,35 @@ class LicenseWebTest extends LicenseTestBase {
                 .andReturn().getResponse().getContentAsString();
         assertThat(csv).startsWith("licence;client;type;etat;").contains("'=HYPERLINK").doesNotContain(";=HYPERLINK");
     }
+
+    @Test
+    void registryPageShowsTheReconciliationReportAndConflictDecisions() throws Exception {
+        String lic = "lic-" + Long.toString(RND.nextLong() & 0xffffffL, 36);
+        long at = java.time.Instant.now().minusSeconds(7200).toEpochMilli();
+        Dev a = dev(), b = dev();
+        var events = List.of(licenseEvent(DESKTOP, at, lic, 1, 2), issueEvent(DESKTOP, at + 1000, lic, seatOf(lic, a), "tv", "production", a, nonce()),
+                issueEvent(PHONE, at + 2000, lic, seatOf(lic, b), "tv", "production", b, nonce()),            // over quota: a conflict to decide
+                licenseEvent(STRANGER, at + 3000, "lic-" + Long.toString(RND.nextLong() & 0xffffffL, 36), 1, 2)); // unknown key: refused
+        byte[] file = registryFile(events);
+        // simulation first: a report, nothing applied
+        String dry = mvc.perform(multipart("/admin/licenses/registry/import").file(new MockMultipartFile("file", "registre.json", "application/json", file)).param("dryRun", "on").with(csrf()).with(as(BOSS)))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(dry).contains("Rapport de simulation").contains("UNKNOWN_KEY").contains("OVER_QUOTA");
+        assertThat(jdbc.queryForObject("select count(*) from lic_license where license_id = ?", Integer.class, lic)).isZero();
+        // real import: the report, then the conflict waits for a decision (with a reason)
+        String real = mvc.perform(multipart("/admin/licenses/registry/import").file(new MockMultipartFile("file", "registre.json", "application/json", file)).with(csrf()).with(as(BOSS)))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(real).contains("Rapport de réconciliation").contains("événement").contains("refusé");
+        var conflict = ledger.conflicts("OPEN", 0, 50).items().stream().filter(c -> lic.equals(c.licenseId())).findFirst().orElseThrow();
+        String page = mvc.perform(get("/admin/licenses/registry").with(as(BOSS))).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(page).contains("OVER_QUOTA").contains("name=\"decision\"");
+        mvc.perform(post("/admin/licenses/registry/conflicts/" + conflict.id()).with(csrf()).with(as(BOSS)).param("decision", "accept")).andExpect(status().is3xxRedirection());
+        assertThat(ledger.conflict(conflict.id()).status()).isEqualTo("OPEN"); // no reason: nothing decided
+        mvc.perform(post("/admin/licenses/registry/conflicts/" + conflict.id()).with(csrf()).with(as(BOSS)).param("decision", "accept").param("reason", "le client a acheté un poste de plus"))
+                .andExpect(status().is3xxRedirection());
+        assertThat(ledger.conflict(conflict.id()).status()).isEqualTo("ACCEPTED");
+        assertThat(licenses.get(lic).seatsAllowed()).isEqualTo(2);
+        // the support account sees the page but cannot decide
+        assertThat(call(SUPPORT_USER, HttpMethod.POST, "/admin/licenses/registry/conflicts/" + conflict.id(), "decision", "reject", "reason", "essai")).isEqualTo(403);
+    }
 }

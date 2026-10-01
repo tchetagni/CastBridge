@@ -209,12 +209,13 @@ public class LedgerService {
             if (!e.kid().equals(f.get("kid"))) return "kid";
             switch (e.type()) {
                 case "license" -> {
-                    if (!WireActivation.ID.matcher(f.get("license")).matches() || f.get("license").equals(WireActivation.TRIAL_LICENSE)) return "license";
+                    if (!Validate.licenseId(f.get("license")).equals(f.get("license"))) return "license";
                     Validate.range(Integer.parseInt(f.get("seats")), "seats", 1, 1000);
                     Validate.range(Integer.parseInt(f.getOrDefault("maxTransfersPerYear", "2")), "cap", 0, 100);
                 }
                 case "issue" -> {
-                    if (!WireActivation.ID.matcher(f.get("license")).matches() || !Validate.SEAT_ID.matcher(f.get("seat")).matches()) return "ids";
+                    if (!f.get("license").equals(WireActivation.TRIAL_LICENSE) && !Validate.licenseId(f.get("license")).equals(f.get("license"))) return "ids";
+                    if (!Validate.SEAT_ID.matcher(f.get("seat")).matches()) return "ids";
                     if (!f.get("subject").equals("tv") && !f.get("subject").equals("phone")) return "subject";
                     if (!f.get("kind").equals("trial") && !f.get("kind").equals("production")) return "kind";
                     if (!WireActivation.HEX.matcher(f.get("nonce")).matches()) return "nonce";
@@ -223,7 +224,7 @@ public class LedgerService {
                     if (e.factors().isEmpty() || !e.factors().values().stream().allMatch(h -> h.matches("[0-9a-f]{32}"))) return "factors";
                 }
                 case "transfer" -> {
-                    if (!WireActivation.ID.matcher(f.get("license")).matches() || !Validate.SEAT_ID.matcher(f.get("seat")).matches()) return "ids";
+                    if (!Validate.licenseId(f.get("license")).equals(f.get("license")) || !Validate.SEAT_ID.matcher(f.get("seat")).matches()) return "ids";
                     Validate.range(Integer.parseInt(f.get("k")), "k", 1, 5);
                     if (e.factors().isEmpty() || !e.factors().values().stream().allMatch(h -> h.matches("[0-9a-f]{32}"))) return "factors";
                 }
@@ -387,7 +388,7 @@ public class LedgerService {
             jdbc.update("INSERT INTO lic_issuance (license_pk, seat_pk, seat_id, device_code, kind, subject, kid, nonce, issued_at, not_before, not_after, issuer, channel, token_fingerprint, source)"
                             + " VALUES (?,?,?,?,?,?,?,?,?,NULL,?,?,?,?,'IMPORT')", l.id(), seatPk, seatId, deviceCode, f.get("kind").toUpperCase(java.util.Locale.ROOT), f.get("subject"), e.kid(), f.get("nonce"),
                     LicenseService.ts(at), LicenseService.ts(Instant.ofEpochMilli(Long.parseLong(f.get("notAfter")))), AuditLog.clip(trusted.nameOf(e.kid()), 64),
-                    "ledger-" + AuditLog.clip(trusted.nameOf(e.kid()), 12), e.id() + "0".repeat(48));
+                    "ledger-" + AuditLog.clip(trusted.nameOf(e.kid()), 12), Hashing.sha256Hex(e.text()));
         } catch (DuplicateKeyException ex) {
             // same nonce already recorded
         }

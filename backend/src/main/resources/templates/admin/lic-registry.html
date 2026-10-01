@@ -27,7 +27,7 @@
     </div>
     <section class="card" th:if="${report != null}">
         <h2 th:text="${report.dryRun} ? 'Rapport de simulation (rien n\'a été modifié)' : 'Rapport de réconciliation'"></h2>
-        <p>Outil <b th:text="${report.tool}"></b> · <span th:text="${report.entries}"></span> entrée(s) :
+        <p><span th:text="${report.entries}"></span> événement(s) :
             <b th:text="${report.applied}"></b> appliquée(s), <b th:text="${report.duplicates}"></b> déjà connue(s), <b th:text="${report.ignored}"></b> ignorée(s),
             <b th:text="${report.rejections.size()}"></b> refusée(s), <b th:text="${report.conflicts.size()}"></b> conflit(s). Politique : <b th:text="${report.policy}"></b>.</p>
         <ul th:unless="${report.rejections.isEmpty()}"><li th:each="r : ${report.rejections}"><span class="badge bad" th:text="${r.reason}"></span> événement <span class="mono" th:text="${r.eventId}"></span> : refusé (jamais appliqué)</li></ul>

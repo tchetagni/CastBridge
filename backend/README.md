@@ -242,7 +242,7 @@ Gestion des licences, des postes, des bouquets et du registre hors ligne, dans `
   `CASTBRIDGE_LICENSES_PUBLIC_ROUTES=false` (défaut) éteint séparément `GET /api/v1/revocations` et `GET /api/v1/entitlements/me`.
 - **Secrets en fichiers** (dossier `CASTBRIDGE_LICENSES_SECRETS_DIR`, défaut `/run/secrets`, jamais dans l'image ni le dépôt) : `license-signing.key` (clé Ed25519 du serveur, portée limitée : ni transfert ni « tout ouvert »), `license-totp.key` (AES-256, base64, protège les secrets TOTP), `license-audit.key` (HMAC du journal d'audit, optionnel).
   Surcouche Docker facultative : `docker-compose.licenses.yml`.
-- **Variables** : `CASTBRIDGE_LICENSES_TRIAL_ISSUANCE` (`manual` par défaut), `_REQUIRE_TOTP` (`true`), `_DEFAULT_GRACE_DAYS` (14), `_DEFAULT_TRANSFER_CAP` (2), `_LEDGER_KEYS` (`kid:desktop|phone:base64,…`), `_MAX_IMPORT_BYTES`, `_MAX_IMPORT_ENTRIES`, `_BURST_PER_10_MIN`.
+- **Variables** : `CASTBRIDGE_LICENSES_TRIAL_ISSUANCE` (`manual` par défaut), `_REQUIRE_TOTP` (`true`), `_DEFAULT_GRACE_DAYS` (14), `_DEFAULT_TRANSFER_CAP` (2), `_TRUSTED_KEYS` (`nom:clé publique base64:PORTÉE+PORTÉE,…`, portées de `docs/ACTIVATION-FORMAT.md` § 2), `_WINDOW_DAYS` (30), `_MAX_IMPORT_BYTES`, `_MAX_IMPORT_ENTRIES`, `_BURST_PER_10_MIN`.
 - **Rôles** des comptes web : propriétaire (avec double authentification TOTP), support (lecture + réémission), lecture seule. Les comptes existants deviennent propriétaires.
 - **Sauvegarde** : `backup.sh` produit en plus `castbridge-licenses-*.sql.gz` (tables `lic_*` + `admin_user`) et journalise la tête du journal d'audit ; les trois fichiers de secrets sont à sauvegarder à part, chiffrés.
 
