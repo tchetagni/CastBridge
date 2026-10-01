@@ -42,6 +42,8 @@ data class StorageVolume(
     /** Measured sequential write speed (bytes/s, fsync included), 0 = not measured. */
     val writeBps: Long = 0,
     val note: String? = null,
+    /** `<clé>/Download/CastBridge/` when [dir] lives there (data that outlives the app), else null (app-private folder). */
+    val heavyRoot: File? = null,
 ) {
     /** The internal volume is never limited by what we detect (the detection is only meaningful for removable media). */
     val maxFileBytes: Long get() = if (kind == VolumeKind.INTERNAL) Long.MAX_VALUE else fs.maxFileBytes

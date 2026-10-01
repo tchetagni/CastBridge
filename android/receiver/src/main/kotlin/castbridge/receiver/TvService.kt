@@ -212,7 +212,7 @@ class TvService : Service(), Device {
                 .then(QuizHub.packApi(this)),   // question packs pushed by the phone (docs/QUIZ.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
-            safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
+            safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library, readoptJson = { readoptState },
             publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
             tokenAuth = trust::verifyToken, peers = btApi?.peers,
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
@@ -538,7 +538,31 @@ class TvService : Service(), Device {
     // ------------------------------------------------------------------ storage (docs/STORAGE.md)
 
     fun rescanAsync(remeasure: Boolean = false) {
-        runCatching { bg.execute { runCatching { server?.storageChanged(remeasure) }; updateStorageStatus() } }
+        runCatching { bg.execute { runCatching { server?.storageChanged(remeasure) }; runCatching { readopt() }; updateStorageStatus() } }
+    }
+
+    /** JSON of the last re-adoption scan (additive `heavy.readopt` of /api/storage). */
+    @Volatile private var readoptState: String? = null
+    private val readoptDone = HashSet<String>()
+
+    /**
+     * Re-adoption (docs/STORAGE.md): once per plug-in of a drive, scan `Download/CastBridge/` only (bounded), rewrite the index
+     * (atomic), and let the library rebuild itself from the files (listings read the folder; thumbnails are a regenerable cache).
+     * `.part` files are found by the registry and resumed by the phone. Never deletes, never executes anything found.
+     */
+    private fun readopt() {
+        val drives = registry.volumes().filter { it.kind == VolumeKind.REMOVABLE && it.heavyRoot != null }
+        readoptDone.retainAll(drives.map { it.id }.toSet())          // a drive that left is scanned again when it returns
+        for (v in drives) {
+            if (!readoptDone.add(v.id)) continue
+            val root = v.heavyRoot ?: continue
+            val r = castbridge.core.tv.UsbReadopt.scan(root)
+            castbridge.core.tv.UsbReadopt.refreshIndex(root, v.id, r, System.currentTimeMillis())
+            runCatching { castbridge.core.tv.SafeSettings.read(root) }                     // validated, not applied automatically
+            readoptState = "{\"drive\":${ReceiverServer.q(v.id)},\"index\":${ReceiverServer.q(r.index.name.lowercase())},\"files\":${r.files.size}," +
+                "\"parts\":${r.parts.size},\"duplicates\":${r.duplicates.size},\"ignored\":${r.ignored.size},\"truncated\":${r.truncated}}"
+            server?.storageChanged()
+        }
     }
 
     fun updateStorageStatus() {
