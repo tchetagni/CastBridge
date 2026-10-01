@@ -52,6 +52,20 @@ private fun savedAddress(ctx: Context) = ctx.getSharedPreferences("castbridge_pa
 /** The TV of the home tab (found on the network), or an address typed by hand (emulators, « ma TV n'apparaît pas »). */
 @Composable
 private fun ParentalTvPicker(ctx: Context, content: @Composable (ParentalClient) -> Unit) {
+    // The TV this phone is already linked to (plug and play): its address and token, no discovery and no PIN to type.
+    val link by TvLinkManager.state.collectAsState()
+    (link as? LinkUi.Connected)?.session?.let { s ->
+        val b = s.base
+        if (b != null && castbridge.core.trust.TvAuth.isUsable(s.credential)) {
+            val client = remember(b, s.credential) { ParentalClient(b, s.credential) }
+            content(client); return
+        }
+        if (b == null) {
+            Text("${s.tv.name} est joignable par Bluetooth seulement : le contrôle parental a besoin du Wi-Fi de la maison. Connectez le téléphone et la TV au même Wi-Fi.",
+                color = MaterialTheme.colorScheme.error)
+            return
+        }
+    }
     val name = remember { ctx.getSharedPreferences("castbridge_home", Context.MODE_PRIVATE).getString("tv", null) }
     val pins = remember { PinStore(ctx) }
     val discovery = remember { TvDiscovery(ctx) }
@@ -76,8 +90,8 @@ private fun ParentalTvPicker(ctx: Context, content: @Composable (ParentalClient)
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
         }
     }
-    if (found != null && pin.isEmpty() && !useManual) { Text("Entrez d'abord le code (PIN) de la TV dans l'onglet « CastBridge TV ».", color = MaterialTheme.colorScheme.error); return }
-    if (base == null || pin.length != 6) return
+    if (found != null && pin.isEmpty() && !useManual) { Text("Ajoutez d'abord la TV dans l'onglet « CastBridge TV » (bouton « Ajouter ma TV »), ou entrez son code de connexion.", color = MaterialTheme.colorScheme.error); return }
+    if (base == null || !castbridge.core.trust.TvAuth.isUsable(pin)) return
     val client = remember(base, pin) { ParentalClient(base, pin) }
     content(client)
 }
