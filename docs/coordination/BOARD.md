@@ -14,3 +14,4 @@
 | content-phase1 | castbridge-content uniquement | (branche autorisée dans castbridge-content) | TERMINÉ (vague 1 : 8 paquets N2/N4) | rapport lu |
 | languages-architect | docs/LANGUES.md, core/.../learn/lang*, graph/langue-* | claude/languages-architect | LANCÉ | catégorie Langues (7 langues, 6 Go) : conception d'abord |
 | content-phase2 | castbridge-content uniquement | idem | LANCÉ | Quiz N2/N4, autres classes/matières, animations ; session permanente des contenus d'apprentissage |
+| trial-edition | tools/trial-edition, core/.../lots* (additif), docs/TRIAL-EDITION.md | claude/trial-edition | LANCÉ | essai 100 Mo couvrant tout le catalogue ; le contenu complet continue |
