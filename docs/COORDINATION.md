@@ -19,5 +19,9 @@ Pas de conversation, des **fichiers courts, à ajout seul** (pas de conflits). T
 `tools/coord-status.sh` : récupère le dépôt et affiche, par branche `claude/*`, le statut, l'âge, le dernier jalon et la question éventuelle.
 Les routines sont suivies par leurs exécutions (`list_runs`). Une session ouverte à la main n'est suivie que par son rapport : ouvre-la toi-même pour le reste.
 
+## Nouveaux ordres sans relancer la session
+Une session qui a fini relit `docs/coordination/ORDRES.md` (sur `origin/integration/agents`) toutes les minutes ; règles et format dans ce fichier.
+Le coordinateur ajoute une ligne `ORDRE n …` qui pointe vers un cahier. Rien n'est exécuté en dehors de ce fichier et des cahiers.
+
 ## Ce qui reste manuel (propriétaire)
 Approbations (accès aux dépôts, branches), installation sur la TV, tout ce qui touche au serveur de production.
