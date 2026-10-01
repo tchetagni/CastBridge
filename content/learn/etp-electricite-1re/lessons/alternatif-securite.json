@@ -1,0 +1,848 @@
+{
+ "chapter": "etp-electricite-1re-alternatif-securite",
+ "lessons": [
+  {
+   "id": "etp-electricite-1re-alternatif",
+   "title": "Le courant alternatif sinusoïdal monophasé",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir période, fréquence, valeur maximale et valeur efficace.",
+    "Passer de la période à la fréquence et inversement.",
+    "Calculer une valeur efficace ou maximale.",
+    "Lire une période et une amplitude sur un oscillogramme et comprendre le déphasage."
+   ],
+   "prerequisites": [
+    "etp-electricite-1re-ohm"
+   ],
+   "exercises": [
+    "etp-electricite-1re-alternatif-01",
+    "etp-electricite-1re-alternatif-02",
+    "etp-electricite-1re-alternatif-03",
+    "etp-electricite-1re-alternatif-04",
+    "etp-electricite-1re-alternatif-05",
+    "etp-electricite-1re-alternatif-06"
+   ],
+   "selfCheck": [
+    "etp-electricite-1re-alternatif-q1",
+    "etp-electricite-1re-alternatif-q2",
+    "etp-electricite-1re-alternatif-q3",
+    "etp-electricite-1re-alternatif-q4",
+    "etp-electricite-1re-alternatif-q5"
+   ],
+   "reviewNotes": [
+    "Notion de déphasage volontairement limitée au décalage temporel entre deux sinusoïdes de même fréquence.",
+    "Vérifier le facteur 1/√2 (valeur efficace d'une sinusoïde)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Tension alternative sinusoïdale",
+     "md": "Une tension **alternative sinusoïdale** change de sens périodiquement et suit une courbe en sinus. Elle s'écrit $u(t) = U_{max} \\sin(2\\pi f t)$ si l'on prend l'origine des temps au passage par zéro. $U_{max}$ est la **valeur maximale** (amplitude).",
+     "tex": "u(t) = U_{max}\\,\\sin(2\\pi f t)"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Période et fréquence",
+     "md": "La **période** $T$ (en secondes, s) est la durée d'une oscillation complète. La **fréquence** $f$ (en hertz, Hz) est le nombre d'oscillations par seconde.",
+     "tex": "f = \\frac{1}{T} \\;\\; T = \\frac{1}{f}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Valeur efficace",
+     "md": "La **valeur efficace** $U_{eff}$ est la valeur d'une tension continue qui produirait le même effet thermique dans un résistor. C'est celle qu'indiquent un voltmètre ou un ampèremètre en mode alternatif. Pour une sinusoïde :",
+     "tex": "U_{eff} = \\frac{U_{max}}{\\sqrt{2}} \\;\\; U_{max} = U_{eff}\\times\\sqrt{2}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 40,
+      "ymin": -12,
+      "ymax": 12,
+      "grid": 5,
+      "xlabel": "t (ms)",
+      "ylabel": "u (V)",
+      "curves": [
+       {
+        "expr": "10*sin(2*pi*x/20)",
+        "color": "blue",
+        "label": "u1"
+       },
+       {
+        "expr": "10*sin(2*pi*(x-5)/20)",
+        "color": "red",
+        "label": "u2"
+       }
+      ],
+      "points": [
+       {
+        "x": 5,
+        "y": 10,
+        "label": "Umax",
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Deux tensions sinusoïdales de période 20 ms et d'amplitude 10 V ; la rouge est en retard de 5 ms.",
+     "alt": "Deux sinusoïdes d'amplitude 10 V et de période 20 ms tracées entre 0 et 40 ms. La courbe rouge est identique à la bleue décalée vers la droite de 5 ms, soit un quart de période."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Déphasage (notion)",
+     "md": "Deux tensions de même fréquence peuvent être **décalées** dans le temps. Si l'une est en retard de $\\Delta t$ sur l'autre, le **déphasage** vaut, en degrés, une fraction de 360° égale à $\\Delta t / T$ (une période complète = 360°).",
+     "tex": "\\varphi = 360° \\times \\frac{\\Delta t}{T}"
+    },
+    {
+     "type": "example",
+     "title": "Période d'un réseau",
+     "statement": "Une tension alternative a une fréquence de 50 Hz. Quelle est sa période ?",
+     "steps": [
+      {
+       "md": "$T = 1/f$.",
+       "tex": "T = \\frac{1}{50}"
+      },
+      {
+       "md": "On calcule et on convertit.",
+       "tex": "T = 0,02\\ \\text{s} = 20\\ \\text{ms}"
+      }
+     ],
+     "answer": "**T = 20 ms.**"
+    },
+    {
+     "type": "example",
+     "title": "Valeur maximale",
+     "statement": "La valeur efficace d'une tension sinusoïdale est 230 V. Quelle est sa valeur maximale ?",
+     "steps": [
+      {
+       "md": "$U_{max} = U_{eff} \\times \\sqrt{2}$, avec $\\sqrt{2} \\approx 1{,}414$.",
+       "tex": "U_{max} = 230 \\times 1,414"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "U_{max} \\approx 325\\ \\text{V}"
+      }
+     ],
+     "answer": "**U_max ≈ 325 V.**"
+    },
+    {
+     "type": "example",
+     "title": "Déphasage",
+     "statement": "Deux tensions de période 10 ms ont un décalage de 2,5 ms. Quel est le déphasage ?",
+     "steps": [
+      {
+       "md": "Fraction de période : 2,5 / 10 = 0,25."
+      },
+      {
+       "md": "On multiplie par 360°.",
+       "tex": "\\varphi = 360° \\times 0,25 = 90°"
+      }
+     ],
+     "answer": "**90°** (un quart de période)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre valeur efficace et valeur maximale : un voltmètre en alternatif affiche la valeur efficace.\n- Diviser par 2 au lieu de $\\sqrt{2}$.\n- Oublier de convertir les millisecondes : 20 ms = 0,02 s.\n- Lire sur l'oscilloscope la valeur « crête à crête » (de bas en haut) comme l'amplitude : l'amplitude est la moitié."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour un récepteur purement résistif, la puissance se calcule avec les valeurs efficaces : $P = U_{eff} \\times I_{eff}$.",
+      "Les réseaux domestiques utilisent une tension alternative ; la valeur de sa fréquence et de sa tension dépend du pays et est donnée par l'énoncé."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-electricite-1re-alternatif-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-securite",
+   "title": "Sécurité électrique : principes généraux",
+   "minutes": 30,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Identifier les principaux risques du courant électrique.",
+    "Citer les dispositifs de protection et leur rôle.",
+    "Appliquer les règles de prévention et de conduite à tenir.",
+    "Vérifier avec un calcul si une installation est surchargée (données fournies)."
+   ],
+   "prerequisites": [
+    "etp-electricite-1re-kirchhoff-puissance"
+   ],
+   "exercises": [
+    "etp-electricite-1re-securite-01",
+    "etp-electricite-1re-securite-02",
+    "etp-electricite-1re-securite-03",
+    "etp-electricite-1re-securite-04",
+    "etp-electricite-1re-securite-05",
+    "etp-electricite-1re-securite-06"
+   ],
+   "selfCheck": [
+    "etp-electricite-1re-securite-q1",
+    "etp-electricite-1re-securite-q2",
+    "etp-electricite-1re-securite-q3",
+    "etp-electricite-1re-securite-q4",
+    "etp-electricite-1re-securite-q5"
+   ],
+   "reviewNotes": [
+    "Fiche de principes généraux : aucune valeur de seuil de danger n'est affirmée. À faire relire par un enseignant ou un électricien habilité, notamment les consignes de secours.",
+    "Les calibres de fusible utilisés dans les exercices sont fournis par l'énoncé."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les risques",
+     "md": "Le courant électrique présente trois risques principaux : l'**électrisation** ou **électrocution** (passage du courant dans le corps, pouvant provoquer des brûlures, des contractions musculaires, un arrêt du coeur), l'**incendie** (échauffement de fils ou de prises surchargés, court-circuit) et les **brûlures** par arc électrique.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Principes de prévention",
+     "md": "- Ne jamais intervenir sur une installation **sous tension** : couper et vérifier l'absence de tension d'abord.\n- Ne jamais toucher un appareil électrique avec les mains mouillées ou pieds dans l'eau.\n- Utiliser des appareils et câbles **en bon état** (isolant intact) ; ne pas bricoler ni surcharger une multiprise.\n- Porter les équipements de protection adaptés (gants isolants, chaussures de sécurité) et des outils isolés.\n- Faire réaliser les travaux par une personne **qualifiée**.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 55,
+        "w": 80,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 80.25,
+        "text": "Source",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 55,
+        "w": 100,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 80.25,
+        "text": "Protection",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 55,
+        "w": 80,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 80.25,
+        "text": "Appareil",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 75,
+        "x2": 130,
+        "y2": 75,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 75,
+        "x2": 270,
+        "y2": 75,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 125,
+        "text": "coupe le circuit si surintensité ou fuite",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un dispositif de protection est placé entre la source et l'appareil.",
+     "alt": "Trois rectangles reliés par des flèches : Source, Protection (orange), Appareil. Une légende précise que la protection coupe le circuit en cas de surintensité ou de fuite de courant."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dispositifs de protection (rôles)",
+     "md": "- **Fusible / disjoncteur** : coupe le circuit en cas de **surintensité** (court-circuit, surcharge) pour éviter l'échauffement.\n- **Disjoncteur différentiel** : coupe le circuit en cas de **fuite de courant** vers la terre, par exemple si une personne touche une partie sous tension.\n- **Mise à la terre** : relie les masses métalliques à la terre pour écouler un défaut d'isolement.\n- **Isolation** des conducteurs : empêche le contact direct avec les parties sous tension.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "En cas d'accident",
+     "md": "1. **Couper le courant** (disjoncteur, prise) avant de toucher la victime, sans vous mettre en danger.\n2. Si on ne peut pas couper, éloigner la victime avec un objet **sec et non conducteur**, sans la toucher directement.\n3. **Alerter les secours** et donner les premiers soins si l'on est formé.\n4. Ne jamais éteindre un feu électrique avec de l'eau tant que le courant n'est pas coupé.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Vérifier une surcharge",
+     "statement": "Sur une prise, on branche deux appareils de 1 150 W et 920 W, sous 230 V. Le circuit est protégé par un disjoncteur de calibre 16 A (donné par l'énoncé). Y a-t-il surcharge ?",
+     "steps": [
+      {
+       "md": "Puissance totale : on additionne.",
+       "tex": "P = 1150 + 920 = 2070\\ \\text{W}"
+      },
+      {
+       "md": "Intensité : $I = P/U$.",
+       "tex": "I = \\frac{2070}{230} = 9\\ \\text{A}"
+      },
+      {
+       "md": "On compare au calibre : 9 A < 16 A."
+      }
+     ],
+     "answer": "**I = 9 A, inférieure à 16 A : pas de surcharge.**"
+    },
+    {
+     "type": "example",
+     "title": "Limite atteinte",
+     "statement": "On ajoute un troisième appareil de 1 610 W au circuit précédent. Que se passe-t-il (même disjoncteur de 16 A) ?",
+     "steps": [
+      {
+       "md": "Nouvelle puissance : $1\\,150 + 920 + 1\\,610 = 3\\,680$ W.",
+       "tex": "P = 3680\\ \\text{W}"
+      },
+      {
+       "md": "Intensité : $3\\,680 / 230$.",
+       "tex": "I = 16\\ \\text{A}"
+      },
+      {
+       "md": "C'est la valeur du calibre : on est à la limite, au moindre appareil de plus le disjoncteur coupe."
+      }
+     ],
+     "answer": "**I = 16 A : circuit à sa limite.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'une tension « faible » est toujours sans danger : le danger dépend aussi des conditions (humidité, durée, état du corps).\n- Remplacer un fusible par un fil ou par un calibre plus fort : on supprime la protection.\n- Toucher la victime avant d'avoir coupé le courant.\n- Utiliser des rallonges et multiprises abîmées ou surchargées.",
+     "review": true
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le terme « consignation » désigne la procédure de mise en sécurité d'une installation avant intervention (séparer, condamner, vérifier l'absence de tension).",
+      "Les règles précises de sécurité (distances, habilitations, normes) sont fixées par la réglementation et par l'employeur : se référer toujours aux textes en vigueur."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-electricite-1re-securite-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-electricite-1re-alternatif-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "Une tension alternative a une période de 20 ms. Quelle est sa fréquence en hertz ?",
+   "explanation": "$f = 1/T = 1/0{,}02 = 50$ Hz.",
+   "mistakes": [
+    "Oublier de convertir 20 ms en 0,02 s."
+   ],
+   "source": "Exercice original",
+   "answer": 50,
+   "tolerance": 0,
+   "unit": "Hz"
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "Un voltmètre en position alternatif (AC) indique la valeur :",
+   "explanation": "Les multimètres en AC affichent la valeur efficace.",
+   "source": "Exercice original",
+   "choices": [
+    "maximale",
+    "efficace",
+    "moyenne toujours nulle",
+    "crête à crête"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "Pour une tension sinusoïdale, la valeur efficace est égale à la valeur maximale.",
+   "explanation": "$U_{eff} = U_{max}/\\sqrt{2}$, plus petite que $U_{max}$.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "Une tension sinusoïdale a une valeur maximale de 20 V. Calculer sa valeur efficace (arrondie au centième).",
+   "explanation": "$U_{eff} = 20/\\sqrt{2} \\approx 20/1{,}414 \\approx 14,14$ V.",
+   "source": "Exercice original",
+   "answer": 14.14213562373095,
+   "tolerance": 0.02,
+   "unit": "V"
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "Deux tensions de période 10 ms sont décalées de 2,5 ms. Quel est le déphasage en degrés ?",
+   "explanation": "$2{,}5/10 = 0{,}25$ période : $360° \\times 0{,}25 = 90°$.",
+   "source": "Exercice original",
+   "answer": 90.0,
+   "tolerance": 0,
+   "unit": "°"
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "À l'oscilloscope, on observe une sinusoïde. Le réglage vertical est de 2 V par division ; le balayage de 2 ms par division. L'amplitude (du zéro au sommet) occupe 3 divisions ; une période complète occupe 5 divisions.",
+   "method": "Nombre de divisions × réglage ; puis formules.",
+   "mistakes": [
+    "Confondre amplitude et crête à crête."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-electricite-1re-alternatif-06-a",
+     "points": 1,
+     "prompt": "Valeur maximale (V).",
+     "explanation": "$3 \\times 2 = 6$ V.",
+     "kind": "numeric",
+     "answer": 6,
+     "tolerance": 0,
+     "unit": "V"
+    },
+    {
+     "id": "etp-electricite-1re-alternatif-06-b",
+     "points": 1,
+     "prompt": "Période (ms).",
+     "explanation": "$5 \\times 2 = 10$ ms.",
+     "kind": "numeric",
+     "answer": 10,
+     "tolerance": 0,
+     "unit": "ms"
+    },
+    {
+     "id": "etp-electricite-1re-alternatif-06-c",
+     "points": 1,
+     "prompt": "Fréquence (Hz).",
+     "explanation": "$f = 1/T = 1/0{,}01 = 100$ Hz.",
+     "kind": "numeric",
+     "answer": 100.0,
+     "tolerance": 0,
+     "unit": "Hz"
+    },
+    {
+     "id": "etp-electricite-1re-alternatif-06-d",
+     "points": 1,
+     "prompt": "Valeur efficace (V, arrondie au centième).",
+     "explanation": "$6/\\sqrt{2} \\approx 4,24$ V.",
+     "kind": "numeric",
+     "answer": 4.242640687119285,
+     "tolerance": 0.02,
+     "unit": "V"
+    }
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "L'unité de fréquence est :",
+   "choices": [
+    "le hertz",
+    "la seconde",
+    "le watt",
+    "le degré"
+   ],
+   "answer": 0,
+   "explanation": "Hertz (Hz)."
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "Période 4 ms : fréquence :",
+   "choices": [
+    "4 Hz",
+    "25 Hz",
+    "250 Hz",
+    "0,25 Hz"
+   ],
+   "answer": 2,
+   "explanation": "$1/0{,}004 = 250$ Hz."
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "Pour $U_{max}$ = 100 V, $U_{eff}$ vaut environ :",
+   "choices": [
+    "50 V",
+    "141 V",
+    "71 V",
+    "200 V"
+   ],
+   "answer": 2,
+   "explanation": "$100/1{,}414 \\approx 71$ V."
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "Un décalage d'une demi-période correspond à un déphasage de :",
+   "choices": [
+    "90°",
+    "45°",
+    "360°",
+    "180°"
+   ],
+   "answer": 3,
+   "explanation": "Une demi-période = 180°."
+  },
+  {
+   "id": "etp-electricite-1re-alternatif-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-alternatif",
+   "prompt": "La valeur efficace d'une tension alternative est :",
+   "choices": [
+    "toujours supérieure à la valeur maximale",
+    "celle d'une tension continue de même effet thermique",
+    "toujours nulle",
+    "égale à la période"
+   ],
+   "answer": 1,
+   "explanation": "C'est sa définition."
+  },
+  {
+   "id": "etp-electricite-1re-securite-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Le rôle principal d'un fusible est de :",
+   "explanation": "Il fond ou déclenche quand l'intensité dépasse sa limite.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "augmenter la tension",
+    "couper le circuit en cas de surintensité",
+    "mesurer la puissance",
+    "stocker l'énergie"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-electricite-1re-securite-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Avant d'intervenir sur une prise, il suffit de se mettre pieds nus pour être plus sensible au courant.",
+   "explanation": "C'est dangereux : on coupe l'alimentation et on se protège avec des équipements isolants.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "etp-electricite-1re-securite-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Associe chaque dispositif à son rôle.",
+   "explanation": "Chaque dispositif protège contre un risque précis.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Fusible",
+     "coupe en cas de surintensité"
+    ],
+    [
+     "Disjoncteur différentiel",
+     "coupe en cas de fuite de courant"
+    ],
+    [
+     "Mise à la terre",
+     "écoule un défaut d'isolement"
+    ],
+    [
+     "Gaine isolante",
+     "empêche le contact direct"
+    ]
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-securite-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Un appareil de 2 760 W est alimenté sous 230 V (donnée). Quelle intensité appelle-t-il ?",
+   "explanation": "$I = P/U = 2760/230 = 12$ A.",
+   "source": "Exercice original",
+   "answer": 12.0,
+   "tolerance": 0,
+   "unit": "A"
+  },
+  {
+   "id": "etp-electricite-1re-securite-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Tu vois une personne collée à un fil électrique dénudé. Décris, dans l'ordre, ce que tu dois faire.",
+   "explanation": "Voir le modèle.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "1) Ne pas la toucher directement. 2) Couper le courant (disjoncteur, prise, interrupteur général). 3) Si impossible, l'écarter avec un objet sec et isolant. 4) Appeler les secours et donner les premiers soins si l'on est formé.",
+   "rubric": [
+    "Couper le courant avant tout contact.",
+    "Ne pas se mettre soi-même en danger.",
+    "Alerter les secours.",
+    "Premiers soins si l'on est formé."
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-securite-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Dans un atelier, une prise alimente quatre appareils de 1 000 W, 1 200 W, 800 W et 700 W sous 230 V. Le circuit est protégé par un disjoncteur de 16 A (donnée de l'énoncé).",
+   "method": "P totale, puis I = P/U, puis comparaison au calibre.",
+   "mistakes": [
+    "Changer le calibre au lieu de réduire la charge."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "parts": [
+    {
+     "id": "etp-electricite-1re-securite-06-a",
+     "points": 1,
+     "prompt": "Puissance totale (W).",
+     "explanation": "$1000 + 1200 + 800 + 700 = 3 700$ W.",
+     "kind": "numeric",
+     "answer": 3700,
+     "tolerance": 0,
+     "unit": "W"
+    },
+    {
+     "id": "etp-electricite-1re-securite-06-b",
+     "points": 1,
+     "prompt": "Intensité totale (A), arrondie au dixième.",
+     "explanation": "$I = 3 700/230 \\approx 16,1$ A.",
+     "kind": "numeric",
+     "answer": 16.08695652173913,
+     "tolerance": 0.1,
+     "unit": "A"
+    },
+    {
+     "id": "etp-electricite-1re-securite-06-c",
+     "points": 1,
+     "prompt": "Que va-t-il se passer ?",
+     "explanation": "16,1 A dépasse 16 A : surcharge, le disjoncteur déclenche.",
+     "kind": "mcq",
+     "choices": [
+      "Rien, I < 16 A",
+      "Le disjoncteur va déclencher (I > 16 A)",
+      "La tension va doubler",
+      "Les appareils deviendront isolants"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-electricite-1re-securite-06-d",
+     "points": 2,
+     "prompt": "Que faire ? Pourquoi ne faut-il pas installer un disjoncteur de calibre supérieur ?",
+     "explanation": "Le calibre est choisi pour protéger les fils.",
+     "kind": "open",
+     "model": "Répartir les appareils sur plusieurs circuits ou en retirer. Un calibre plus fort laisserait passer un courant que les fils ne supportent pas : risque d'échauffement et d'incendie.",
+     "rubric": [
+      "Réduire ou répartir la charge.",
+      "Les câbles sont dimensionnés pour une intensité maximale.",
+      "Risque d'incendie."
+     ],
+     "review": true
+    }
+   ]
+  },
+  {
+   "id": "etp-electricite-1re-securite-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Un disjoncteur différentiel détecte :",
+   "choices": [
+    "une fuite de courant",
+    "la fréquence",
+    "la couleur des fils",
+    "le prix du kWh"
+   ],
+   "answer": 0,
+   "explanation": "Il compare les courants et coupe en cas de fuite."
+  },
+  {
+   "id": "etp-electricite-1re-securite-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Avant d'intervenir sur un circuit, on doit :",
+   "choices": [
+    "le laisser sous tension",
+    "le mettre hors tension et vérifier l'absence de tension",
+    "toucher les fils pour vérifier",
+    "mouiller les mains"
+   ],
+   "answer": 1,
+   "explanation": "Couper puis vérifier."
+  },
+  {
+   "id": "etp-electricite-1re-securite-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Une multiprise surchargée risque surtout :",
+   "choices": [
+    "de refroidir",
+    "de s'échauffer et de provoquer un incendie",
+    "d'augmenter la tension",
+    "de produire du courant"
+   ],
+   "answer": 1,
+   "explanation": "La surintensité échauffe les conducteurs."
+  },
+  {
+   "id": "etp-electricite-1re-securite-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "Face à une victime d'électrisation, en premier :",
+   "choices": [
+    "la toucher",
+    "couper le courant",
+    "lui donner de l'eau",
+    "attendre"
+   ],
+   "answer": 1,
+   "explanation": "Couper le courant sans se mettre en danger."
+  },
+  {
+   "id": "etp-electricite-1re-securite-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-electricite-1re-securite",
+   "prompt": "La mise à la terre sert à :",
+   "choices": [
+    "écouler un défaut d'isolement",
+    "augmenter la puissance",
+    "mesurer la fréquence",
+    "remplacer le fusible"
+   ],
+   "answer": 0,
+   "explanation": "Elle évite que les masses métalliques portent une tension dangereuse."
+  }
+ ]
+}

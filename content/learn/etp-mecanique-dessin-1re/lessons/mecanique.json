@@ -1,0 +1,1298 @@
+{
+ "chapter": "etp-mecanique-dessin-1re-mecanique",
+ "lessons": [
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre",
+   "title": "Forces, équilibre et moment d'une force",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire une force (point d'application, direction, sens, intensité).",
+    "Calculer un poids et appliquer l'équilibre de forces alignées.",
+    "Calculer le moment d'une force par rapport à un axe.",
+    "Appliquer l'équilibre d'un levier : somme des moments."
+   ],
+   "exercises": [
+    "etp-mecanique-dessin-1re-forces-equilibre-01",
+    "etp-mecanique-dessin-1re-forces-equilibre-02",
+    "etp-mecanique-dessin-1re-forces-equilibre-03",
+    "etp-mecanique-dessin-1re-forces-equilibre-04",
+    "etp-mecanique-dessin-1re-forces-equilibre-05",
+    "etp-mecanique-dessin-1re-forces-equilibre-06"
+   ],
+   "selfCheck": [
+    "etp-mecanique-dessin-1re-forces-equilibre-q1",
+    "etp-mecanique-dessin-1re-forces-equilibre-q2",
+    "etp-mecanique-dessin-1re-forces-equilibre-q3",
+    "etp-mecanique-dessin-1re-forces-equilibre-q4",
+    "etp-mecanique-dessin-1re-forces-equilibre-q5"
+   ],
+   "reviewNotes": [
+    "On prend g = 10 N/kg (valeur arrondie, donnée dans les énoncés).",
+    "Limité aux forces alignées et aux leviers avec forces perpendiculaires au bras."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Force",
+     "md": "Une **force** modélise l'action d'un corps sur un autre. Elle est caractérisée par son **point d'application**, sa **direction**, son **sens** et son **intensité** (en newtons, N). On la représente par une flèche. Le **poids** d'un corps de masse $m$ est la force verticale vers le bas :",
+     "tex": "P = m \\times g \\; (g = 10\\ \\text{N/kg donné})"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équilibre de forces alignées",
+     "md": "Un solide soumis à des forces de même direction est en équilibre si la **somme algébrique** des forces est nulle : les forces vers le haut compensent celles vers le bas (en comptant un sens positif).",
+     "tex": "\\sum F = 0"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moment d'une force",
+     "md": "Le **moment** d'une force $F$ par rapport à un axe de rotation est le produit de $F$ par le **bras de levier** $d$, distance de l'axe à la droite d'action de la force (mesurée perpendiculairement). Il s'exprime en newtons-mètres (N·m).",
+     "tex": "M = F \\times d"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équilibre en rotation, levier",
+     "md": "Un solide qui peut tourner autour d'un axe est en équilibre si la somme des moments qui le font tourner dans un sens est égale à la somme des moments dans le sens contraire. Pour un levier à deux forces :",
+     "tex": "F_1 \\times d_1 = F_2 \\times d_2"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 190,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 110,
+        "x2": 400,
+        "y2": 110,
+        "color": "ink",
+        "width": 6
+       },
+       {
+        "t": "poly",
+        "pts": [
+         150,
+         112,
+         130,
+         150,
+         170,
+         150
+        ],
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 50,
+        "x2": 70,
+        "y2": 105,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 40,
+        "text": "400 N",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 370,
+        "y1": 50,
+        "x2": 370,
+        "y2": 105,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 40,
+        "text": "F2 ?",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 170,
+        "x2": 150,
+        "y2": 170,
+        "color": "ink",
+        "width": 1,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 185,
+        "text": "0,5 m",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 170,
+        "x2": 370,
+        "y2": 170,
+        "color": "ink",
+        "width": 1,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 185,
+        "text": "d2",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 135,
+        "text": "pivot",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un levier en équilibre autour d'un pivot : F1 = 400 N à 0,5 m du pivot.",
+     "alt": "Une barre horizontale posée sur un pivot triangulaire. À gauche, une force de 400 N vers le bas à 0,5 m du pivot ; à droite, une force inconnue F2 à une distance d2 du pivot."
+    },
+    {
+     "type": "example",
+     "title": "Poids et équilibre",
+     "statement": "Une caisse de 50 kg repose sur une table (g = 10 N/kg). Quelle force la table exerce-t-elle sur elle ?",
+     "steps": [
+      {
+       "md": "Poids de la caisse : $P = m \\times g$.",
+       "tex": "P = 50 \\times 10 = 500\\ \\text{N}"
+      },
+      {
+       "md": "Équilibre : la force de la table (vers le haut) compense le poids.",
+       "tex": "R = P = 500\\ \\text{N}"
+      }
+     ],
+     "answer": "**R = 500 N, vers le haut.**"
+    },
+    {
+     "type": "example",
+     "title": "Levier",
+     "statement": "Pour le levier de la figure (F1 = 400 N, d1 = 0,5 m, d2 = 2 m), quelle force F2 maintient l'équilibre ?",
+     "steps": [
+      {
+       "md": "Équilibre des moments : $F_1 d_1 = F_2 d_2$.",
+       "tex": "400 \\times 0,5 = F_2 \\times 2"
+      },
+      {
+       "md": "Moment de F1 : 200 N·m, donc $F_2 = 200/2$.",
+       "tex": "F_2 = 100\\ \\text{N}"
+      }
+     ],
+     "answer": "**F₂ = 100 N** : en allongeant le bras, on réduit la force nécessaire."
+    },
+    {
+     "type": "example",
+     "title": "Moment d'une clé",
+     "statement": "On serre un écrou avec une clé en appliquant 150 N perpendiculairement au manche, à 0,30 m de l'axe. Quel est le moment ?",
+     "steps": [
+      {
+       "md": "$M = F \\times d$.",
+       "tex": "M = 150 \\times 0,30"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "M = 45\\ \\text{N·m}"
+      }
+     ],
+     "answer": "**M = 45 N·m.** Avec un manche plus long, le même effort donne un moment plus grand."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre masse (kg) et poids (N).\n- Mesurer le bras de levier le long de la barre au lieu de la distance perpendiculaire à la direction de la force.\n- Oublier de convertir les cm en m avant de calculer un moment en N·m.\n- Additionner des moments de sens contraires sans signe."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Quand la force n'est pas perpendiculaire au bras, on utilise le bras de levier réel (la distance perpendiculaire à la droite d'action).",
+      "Un levier est dit « gagnant » si on peut soulever une grande force avec une petite : il faut un grand bras du côté de l'effort."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-mecanique-dessin-1re-forces-equilibre-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance",
+   "title": "Travail, puissance mécanique et rendement",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer le travail d'une force constante de même direction que le déplacement.",
+    "Calculer le travail du poids lors d'une élévation.",
+    "Calculer une puissance P = W/t.",
+    "Calculer un rendement et en déduire les pertes."
+   ],
+   "prerequisites": [
+    "etp-mecanique-dessin-1re-forces-equilibre"
+   ],
+   "exercises": [
+    "etp-mecanique-dessin-1re-travail-puissance-01",
+    "etp-mecanique-dessin-1re-travail-puissance-02",
+    "etp-mecanique-dessin-1re-travail-puissance-03",
+    "etp-mecanique-dessin-1re-travail-puissance-04",
+    "etp-mecanique-dessin-1re-travail-puissance-05",
+    "etp-mecanique-dessin-1re-travail-puissance-06"
+   ],
+   "selfCheck": [
+    "etp-mecanique-dessin-1re-travail-puissance-q1",
+    "etp-mecanique-dessin-1re-travail-puissance-q2",
+    "etp-mecanique-dessin-1re-travail-puissance-q3",
+    "etp-mecanique-dessin-1re-travail-puissance-q4",
+    "etp-mecanique-dessin-1re-travail-puissance-q5"
+   ],
+   "reviewNotes": [
+    "Cas limité à une force constante dans la direction du déplacement ; g = 10 N/kg donné par l'énoncé."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Travail d'une force",
+     "md": "Quand une force constante $F$ déplace son point d'application d'une distance $d$ **dans sa propre direction**, son **travail** est (en joules, J) :",
+     "tex": "W = F \\times d"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Soulever une charge",
+     "md": "Pour soulever une charge de masse $m$ d'une hauteur $h$ à vitesse constante, la force à exercer est égale au poids : le travail utile vaut",
+     "tex": "W = m \\times g \\times h"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Puissance mécanique",
+     "md": "La **puissance** est le travail fourni par seconde (en watts, W) :",
+     "tex": "P = \\frac{W}{t}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Rendement",
+     "md": "Une machine reçoit une puissance (ou énergie) **absorbée** et en restitue une partie **utile** ; le reste est **perdu** (frottements, chaleur…). Le **rendement** $\\eta$ (lettre grecque êta) est un nombre sans unité compris entre 0 et 1 (ou en pourcentage) :",
+     "tex": "\\eta = \\frac{P_{utile}}{P_{absorbée}} = \\frac{W_{utile}}{W_{absorbé}}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 50,
+        "w": 110,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 80.25,
+        "text": "Absorbée",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 50,
+        "w": 110,
+        "h": 50,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 215.0,
+        "y": 80.25,
+        "text": "Machine",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 20,
+        "w": 110,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365.0,
+        "y": 45.25,
+        "text": "Utile",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 90,
+        "w": 110,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365.0,
+        "y": 115.25,
+        "text": "Pertes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 75,
+        "x2": 160,
+        "y2": 75,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 65,
+        "x2": 310,
+        "y2": 40,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 85,
+        "x2": 310,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Bilan de puissance d'une machine : utile + pertes = absorbée.",
+     "alt": "Un rectangle Absorbée relié à un rectangle Machine, lui-même relié à deux rectangles : Utile (vert) et Pertes (orange)."
+    },
+    {
+     "type": "example",
+     "title": "Élever un sac",
+     "statement": "Un ouvrier monte un sac de 20 kg à 3 m de hauteur en 12 s (g = 10 N/kg). Quel travail, quelle puissance ?",
+     "steps": [
+      {
+       "md": "Poids : $20 \\times 10 = 200$ N. Travail : $W = F \\times h$.",
+       "tex": "W = 200 \\times 3 = 600\\ \\text{J}"
+      },
+      {
+       "md": "Puissance : $P = W/t$.",
+       "tex": "P = \\frac{600}{12} = 50\\ \\text{W}"
+      }
+     ],
+     "answer": "**W = 600 J ; P = 50 W.**"
+    },
+    {
+     "type": "example",
+     "title": "Rendement d'un moteur",
+     "statement": "Un moteur absorbe 800 W et fournit 600 W de puissance utile. Quel est son rendement, et quelle puissance est perdue ?",
+     "steps": [
+      {
+       "md": "$\\eta = P_u / P_a$.",
+       "tex": "\\eta = \\frac{600}{800} = 0,75"
+      },
+      {
+       "md": "Soit un pourcentage, et les pertes : $800 - 600$.",
+       "tex": "\\eta = 75\\ \\%\\;;\\; P_{pertes} = 200\\ \\text{W}"
+      }
+     ],
+     "answer": "**η = 75 % ; pertes : 200 W.**"
+    },
+    {
+     "type": "example",
+     "title": "Tirer un chariot",
+     "statement": "On tire un chariot avec une force constante de 250 N, dans le sens du déplacement, sur 40 m. Quel travail ?",
+     "steps": [
+      {
+       "md": "$W = F \\times d$.",
+       "tex": "W = 250 \\times 40"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "W = 10 000\\ \\text{J} = 10\\ \\text{kJ}"
+      }
+     ],
+     "answer": "**W = 10 000 J.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser la masse en kg à la place de la force en N.\n- Donner un rendement supérieur à 1 (ou 100 %) : c'est impossible, il y a toujours des pertes.\n- Confondre travail (J) et puissance (W) : la puissance dépend du temps.\n- Oublier de convertir les minutes en secondes pour la puissance en watts."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le watt est un joule par seconde : 1 W = 1 J/s. Le cheval-vapeur est une ancienne unité de puissance, encore rencontrée.",
+      "Pour plusieurs machines en chaîne, le rendement total est le produit des rendements."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-mecanique-dessin-1re-travail-puissance-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "title": "Vitesse et mouvement rectiligne uniforme",
+   "minutes": 35,
+   "programRef": "Programme de la classe de 1re, séries F (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une vitesse moyenne v = d/t.",
+    "Convertir km/h et m/s.",
+    "Écrire et utiliser l'équation horaire x = x0 + v·t.",
+    "Résoudre un problème de rencontre de deux mobiles."
+   ],
+   "exercises": [
+    "etp-mecanique-dessin-1re-vitesse-mouvement-01",
+    "etp-mecanique-dessin-1re-vitesse-mouvement-02",
+    "etp-mecanique-dessin-1re-vitesse-mouvement-03",
+    "etp-mecanique-dessin-1re-vitesse-mouvement-04",
+    "etp-mecanique-dessin-1re-vitesse-mouvement-05",
+    "etp-mecanique-dessin-1re-vitesse-mouvement-06"
+   ],
+   "selfCheck": [
+    "etp-mecanique-dessin-1re-vitesse-mouvement-q1",
+    "etp-mecanique-dessin-1re-vitesse-mouvement-q2",
+    "etp-mecanique-dessin-1re-vitesse-mouvement-q3",
+    "etp-mecanique-dessin-1re-vitesse-mouvement-q4",
+    "etp-mecanique-dessin-1re-vitesse-mouvement-q5"
+   ],
+   "reviewNotes": [
+    "Les distances et durées des exemples sont fictives."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Vitesse moyenne",
+     "md": "La **vitesse moyenne** est la distance parcourue divisée par la durée du parcours. En unités SI : $d$ en mètres, $t$ en secondes, $v$ en m/s.",
+     "tex": "v = \\frac{d}{t} \\;\\; d = v \\times t \\;\\; t = \\frac{d}{v}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Conversions",
+     "md": "Pour passer de **m/s à km/h**, on multiplie par **3,6**. Pour passer de **km/h à m/s**, on divise par 3,6. (Car 1 m/s = 3,6 km/h.)"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Mouvement rectiligne uniforme",
+     "md": "Un mobile est en **mouvement rectiligne uniforme** si sa trajectoire est une droite et si sa vitesse est **constante**. Sa position à l'instant $t$ est donnée par l'**équation horaire** ($x_0$ : position à $t = 0$) :",
+     "tex": "x = x_0 + v \\times t"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 260,
+      "grid": 2,
+      "xlabel": "t (s)",
+      "ylabel": "x (m)",
+      "curves": [
+       {
+        "expr": "25*x",
+        "color": "blue",
+        "label": "x(t)"
+       }
+      ],
+      "points": [
+       {
+        "x": 4,
+        "y": 100,
+        "label": "100 m à 4 s",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Position d'un mobile à 25 m/s : une droite passant par l'origine.",
+     "alt": "Un graphique position-temps : une droite qui part de l'origine et monte régulièrement, avec le point (4 s ; 100 m) marqué ; sa pente est 25 m/s."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Lire le graphique",
+     "md": "Dans un mouvement uniforme, le graphique de la position en fonction du temps est une **droite**. Sa **pente** est la vitesse. Plus la droite est raide, plus le mobile est rapide."
+    },
+    {
+     "type": "example",
+     "title": "Convertir une vitesse",
+     "statement": "Une moto roule à 90 km/h. Quelle est sa vitesse en m/s ?",
+     "steps": [
+      {
+       "md": "On divise par 3,6.",
+       "tex": "v = \\frac{90}{3,6}"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "v = 25\\ \\text{m/s}"
+      }
+     ],
+     "answer": "**25 m/s.**"
+    },
+    {
+     "type": "example",
+     "title": "Durée d'un trajet",
+     "statement": "Deux villes sont distantes de 240 km (donnée fictive). Quelle est la durée d'un trajet à la vitesse constante de 80 km/h ?",
+     "steps": [
+      {
+       "md": "$t = d / v$.",
+       "tex": "t = \\frac{240}{80}"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "t = 3\\ \\text{h}"
+      }
+     ],
+     "answer": "**3 h.**"
+    },
+    {
+     "type": "example",
+     "title": "Tapis roulant",
+     "statement": "Dans un atelier, un tapis roulant se déplace à 0,5 m/s. Combien de temps une caisse met-elle pour parcourir les 12 m du tapis ?",
+     "steps": [
+      {
+       "md": "$t = d / v$.",
+       "tex": "t = \\frac{12}{0,5}"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "t = 24\\ \\text{s}"
+      }
+     ],
+     "answer": "**24 s.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Multiplier par 3,6 pour passer de km/h à m/s (c'est l'inverse).\n- Mélanger des km avec des secondes sans convertir.\n- Confondre 1,5 h avec 1 h 50 min : 1,5 h = 1 h 30 min.\n- Oublier $x_0$ dans l'équation horaire quand le mobile ne part pas de l'origine."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La vitesse moyenne n'est pas la vitesse instantanée : un véhicule qui s'arrête et repart a une vitesse moyenne plus faible que sa vitesse de croisière.",
+      "Quand deux mobiles se rencontrent, ils ont la même position au même instant : on égale leurs équations horaires."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-mecanique-dessin-1re-vitesse-mouvement-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Calculer le poids d'un sac de 25 kg (g = 10 N/kg).",
+   "explanation": "$P = m \\times g = 25 \\times 10 = 250$ N.",
+   "source": "Exercice original",
+   "answer": 250,
+   "tolerance": 0,
+   "unit": "N"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Une force de 80 N est appliquée à 0,25 m de l'axe, perpendiculairement au bras. Calculer son moment (N·m).",
+   "explanation": "$M = 80 \\times 0{,}25 = 20$ N·m.",
+   "source": "Exercice original",
+   "answer": 20.0,
+   "tolerance": 0.01,
+   "unit": "N·m"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Un solide soumis à deux forces opposées de même direction et de même intensité est en équilibre.",
+   "explanation": "La somme des forces est nulle.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Levier : F1 = 300 N à d1 = 0,8 m du pivot. À quelle distance d2 du pivot faut-il appliquer F2 = 120 N, de l'autre côté, pour l'équilibre (m) ?",
+   "explanation": "$F_1 d_1 = F_2 d_2$ donc $d_2 = 300 \\times 0{,}8 / 120 = 240/120 = 2$ m.",
+   "source": "Exercice original",
+   "answer": 2.0,
+   "tolerance": 0.01,
+   "unit": "m"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Pourquoi une clé à long manche permet-elle de desserrer plus facilement un écrou ?",
+   "explanation": "Voir le modèle.",
+   "source": "Exercice original",
+   "model": "Le moment est M = F × d. Avec un manche plus long, le bras de levier d augmente : pour obtenir le même moment, il faut une force F plus petite (ou, avec la même force, on obtient un moment plus grand).",
+   "rubric": [
+    "Citer M = F × d.",
+    "Relier longueur du manche et bras de levier.",
+    "Conclure sur la force nécessaire."
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Deux ouvriers portent ensemble une poutre à l'aide de deux cordes verticales. Le poids de la poutre est de 600 N et son centre est à 1,5 m de l'ouvrier A et à 0,5 m de l'ouvrier B (on néglige la masse des cordes ; axe de rotation au niveau du point B).",
+   "method": "Écrire d'abord l'équilibre des moments autour d'un point bien choisi, puis celui des forces.",
+   "mistakes": [
+    "Oublier la distance totale entre A et B (2 m) pour le bras de FA."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-mecanique-dessin-1re-forces-equilibre-06-a",
+     "points": 1,
+     "prompt": "Écrire l'équilibre des moments par rapport à B : le poids (600 N, bras 0,5 m) fait tourner dans un sens ; la force FA de A (bras 2 m) dans l'autre. Calculer FA (N).",
+     "explanation": "$F_A \\times 2 = 600 \\times 0{,}5$, donc $F_A = 300/2 = 150$ N.",
+     "kind": "numeric",
+     "answer": 150.0,
+     "tolerance": 0.1,
+     "unit": "N"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-forces-equilibre-06-b",
+     "points": 1,
+     "prompt": "Écrire l'équilibre des forces verticales et calculer la force FB de B (N).",
+     "explanation": "$F_A + F_B = 600$ donc $F_B = 600 - 150 = 450$ N.",
+     "kind": "numeric",
+     "answer": 450,
+     "tolerance": 0,
+     "unit": "N"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-forces-equilibre-06-c",
+     "points": 1,
+     "prompt": "Quel ouvrier supporte la plus grande charge ?",
+     "explanation": "B est le plus près du centre de la poutre : il porte 450 N contre 150 N.",
+     "kind": "mcq",
+     "choices": [
+      "A",
+      "B",
+      "Les deux autant",
+      "On ne peut pas savoir"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-forces-equilibre-06-d",
+     "points": 1,
+     "prompt": "Pour que A porte autant que B, il faudrait le placer à la même distance du centre que B.",
+     "explanation": "Charges égales si les bras sont égaux : le centre doit être au milieu.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "L'unité de force est :",
+   "choices": [
+    "le newton",
+    "le kilogramme",
+    "le joule",
+    "le pascal"
+   ],
+   "answer": 0,
+   "explanation": "Newton (N)."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Le poids d'une masse de 12 kg (g = 10 N/kg) est :",
+   "choices": [
+    "1,2 N",
+    "12 N",
+    "120 N",
+    "1 200 N"
+   ],
+   "answer": 2,
+   "explanation": "$12 \\times 10 = 120$ N."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Le moment d'une force s'exprime en :",
+   "choices": [
+    "N·m",
+    "N/m",
+    "m/s",
+    "W"
+   ],
+   "answer": 0,
+   "explanation": "Moment = force × distance."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Doubler le bras de levier (même force) :",
+   "choices": [
+    "double le moment",
+    "divise le moment par 2",
+    "ne change rien",
+    "annule le moment"
+   ],
+   "answer": 0,
+   "explanation": "$M = F \\times d$."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-forces-equilibre-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-forces-equilibre",
+   "prompt": "Un levier est en équilibre si :",
+   "choices": [
+    "les forces sont égales",
+    "les moments dans chaque sens sont égaux",
+    "les bras sont égaux",
+    "les masses sont égales"
+   ],
+   "answer": 1,
+   "explanation": "Égalité des moments."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Une force de 120 N déplace un objet de 5 m dans sa propre direction. Calculer le travail (J).",
+   "explanation": "$W = 120 \\times 5 = 600$ J.",
+   "source": "Exercice original",
+   "answer": 600,
+   "tolerance": 0,
+   "unit": "J"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Un travail de 900 J est fourni en 30 s. Quelle puissance (W) ?",
+   "explanation": "$P = W/t = 900/30 = 30$ W.",
+   "source": "Exercice original",
+   "answer": 30.0,
+   "tolerance": 0,
+   "unit": "W"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Quel rendement est impossible pour une machine réelle ?",
+   "explanation": "Un rendement ne peut pas dépasser 1 : on ne peut pas restituer plus d'énergie qu'on en reçoit.",
+   "source": "Exercice original",
+   "choices": [
+    "0,4",
+    "0,85",
+    "1,2",
+    "0,99"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Un monte-charge élève une charge de 150 kg à 4 m de hauteur (g = 10 N/kg). Quel travail utile (J) ?",
+   "explanation": "$W = m g h = 150 \\times 10 \\times 4 = 6\\,000$ J.",
+   "source": "Exercice original",
+   "answer": 6000,
+   "tolerance": 0,
+   "unit": "J"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Une machine reçoit 500 W et en restitue 400 W de puissance utile. Quel est son rendement (en %) ?",
+   "explanation": "$\\eta = 400/500 = 0{,}8$ soit 80 %.",
+   "source": "Exercice original",
+   "answer": 80.0,
+   "tolerance": 0.1,
+   "unit": "%"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Un monte-charge soulève une charge de 200 kg à 6 m de hauteur en 20 s (g = 10 N/kg). Le moteur absorbe une puissance de 1 000 W.",
+   "method": "Travail utile, puissance utile, rendement, puis bilan des pertes.",
+   "mistakes": [
+    "Calculer le rendement avec des grandeurs d'unités différentes (J et W)."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-mecanique-dessin-1re-travail-puissance-06-a",
+     "points": 1,
+     "prompt": "Travail utile (J).",
+     "explanation": "$W = m g h = 200 \\times 10 \\times 6 = 12 000$ J.",
+     "kind": "numeric",
+     "answer": 12000,
+     "tolerance": 0,
+     "unit": "J"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-travail-puissance-06-b",
+     "points": 1,
+     "prompt": "Puissance utile (W).",
+     "explanation": "$P_u = W/t = 12 000/20 = 600$ W.",
+     "kind": "numeric",
+     "answer": 600.0,
+     "tolerance": 0,
+     "unit": "W"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-travail-puissance-06-c",
+     "points": 1,
+     "prompt": "Rendement (en %).",
+     "explanation": "$\\eta = 600/1000 = 0,6$, soit 60 %.",
+     "kind": "numeric",
+     "answer": 60.0,
+     "tolerance": 0.1,
+     "unit": "%"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-travail-puissance-06-d",
+     "points": 1,
+     "prompt": "Énergie perdue pendant la montée (J).",
+     "explanation": "Énergie absorbée : $1000 \\times 20 = 20 000$ J ; pertes : $20 000 - 12 000 = 8 000$ J.",
+     "kind": "numeric",
+     "answer": 8000,
+     "tolerance": 0,
+     "unit": "J"
+    }
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Le travail d'une force se mesure en :",
+   "choices": [
+    "watts",
+    "joules",
+    "newtons",
+    "mètres"
+   ],
+   "answer": 1,
+   "explanation": "Joule (J)."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Le rendement d'une machine est :",
+   "choices": [
+    "P absorbée / P utile",
+    "P utile / P absorbée",
+    "P utile × P absorbée",
+    "P pertes / P utile"
+   ],
+   "answer": 1,
+   "explanation": "Utile sur absorbée."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Soulever 10 kg de 2 m (g = 10) demande un travail de :",
+   "choices": [
+    "20 J",
+    "100 J",
+    "200 J",
+    "2 000 J"
+   ],
+   "answer": 2,
+   "explanation": "$10 \\times 10 \\times 2 = 200$ J."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Un travail de 1 000 J en 10 s correspond à :",
+   "choices": [
+    "10 W",
+    "100 W",
+    "1 000 W",
+    "10 000 W"
+   ],
+   "answer": 1,
+   "explanation": "$P = W/t = 100$ W."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-travail-puissance-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-travail-puissance",
+   "prompt": "Un rendement de 0,6 signifie :",
+   "choices": [
+    "60 % de l'énergie est perdue",
+    "60 % de l'énergie absorbée est utile",
+    "la machine produit de l'énergie",
+    "le moteur ne perd rien"
+   ],
+   "answer": 1,
+   "explanation": "$\\eta = 0{,}6$ = 60 % utile."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "Un cycliste parcourt 45 km en 3 h à vitesse constante. Quelle est sa vitesse (km/h) ?",
+   "explanation": "$v = d/t = 45/3 = 15$ km/h.",
+   "source": "Exercice original",
+   "answer": 15.0,
+   "tolerance": 0,
+   "unit": "km/h"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "Convertir 72 km/h en m/s.",
+   "explanation": "$72 / 3{,}6 = 20$ m/s.",
+   "source": "Exercice original",
+   "answer": 20.0,
+   "tolerance": 0,
+   "unit": "m/s"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "Un mobile à vitesse constante de 5 m/s roule pendant 8 s. La distance parcourue est :",
+   "explanation": "$d = v \\times t = 5 \\times 8 = 40$ m.",
+   "source": "Exercice original",
+   "choices": [
+    "0,6 m",
+    "13 m",
+    "40 m",
+    "1,6 m"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "Un mobile part de la position x0 = 50 m avec v = 4 m/s. Quelle est sa position à t = 15 s (m) ?",
+   "explanation": "$x = 50 + 4 \\times 15 = 110$ m.",
+   "source": "Exercice original",
+   "answer": 110,
+   "tolerance": 0,
+   "unit": "m"
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "Dans un mouvement uniforme, le graphique position-temps est une parabole.",
+   "explanation": "C'est une droite : la vitesse constante donne une variation linéaire de la position.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "Un camion A part de l'origine à la vitesse constante de 20 m/s. À cet instant, un camion B, déjà à 300 m devant, roule dans le même sens à 10 m/s.",
+   "method": "Écrire les deux équations horaires, les égaler, résoudre, vérifier.",
+   "mistakes": [
+    "Écrire xB = 300 − 10t alors que B roule dans le même sens."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-mecanique-dessin-1re-vitesse-mouvement-06-a",
+     "points": 1,
+     "prompt": "Vitesse de A en km/h.",
+     "explanation": "$20 \\times 3{,}6 = 72$ km/h.",
+     "kind": "numeric",
+     "answer": 72,
+     "tolerance": 0,
+     "unit": "km/h"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-vitesse-mouvement-06-b",
+     "points": 1,
+     "prompt": "Équations horaires (x en m, t en s) :",
+     "explanation": "A part de 0 avec 20 m/s ; B part de 300 m avec 10 m/s, dans le même sens.",
+     "kind": "mcq",
+     "choices": [
+      "xA = 20t ; xB = 300 + 10t",
+      "xA = 20t ; xB = 300 - 10t",
+      "xA = 300 + 20t ; xB = 10t",
+      "xA = 10t ; xB = 300 + 20t"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-vitesse-mouvement-06-c",
+     "points": 1,
+     "prompt": "Instant où A rattrape B (s).",
+     "explanation": "$20t = 300 + 10t$ donc $10t = 300$ et $t = 30$ s.",
+     "kind": "numeric",
+     "answer": 30.0,
+     "tolerance": 0,
+     "unit": "s"
+    },
+    {
+     "id": "etp-mecanique-dessin-1re-vitesse-mouvement-06-d",
+     "points": 1,
+     "prompt": "Position de la rencontre (m).",
+     "explanation": "$x_A = 20 \\times 30 = 600$ m (vérification : $300 + 10 \\times 30 = 600$ m).",
+     "kind": "numeric",
+     "answer": 600.0,
+     "tolerance": 0,
+     "unit": "m"
+    }
+   ]
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "La vitesse constante en ligne droite caractérise :",
+   "choices": [
+    "un mouvement uniforme",
+    "une chute",
+    "un freinage",
+    "un arrêt"
+   ],
+   "answer": 0,
+   "explanation": "Mouvement rectiligne uniforme."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "36 km/h valent :",
+   "choices": [
+    "10 m/s",
+    "129,6 m/s",
+    "36 m/s",
+    "100 m/s"
+   ],
+   "answer": 0,
+   "explanation": "$36/3{,}6 = 10$ m/s."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "Un mobile à 10 m/s parcourt 1 km en :",
+   "choices": [
+    "10 s",
+    "100 s",
+    "1 000 s",
+    "0,1 s"
+   ],
+   "answer": 1,
+   "explanation": "$t = 1000/10 = 100$ s."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "La pente d'un graphique position-temps (mouvement uniforme) est :",
+   "choices": [
+    "la distance",
+    "la vitesse",
+    "le temps",
+    "la force"
+   ],
+   "answer": 1,
+   "explanation": "Pente = vitesse."
+  },
+  {
+   "id": "etp-mecanique-dessin-1re-vitesse-mouvement-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-mecanique-dessin-1re-vitesse-mouvement",
+   "prompt": "À t = 0, x0 = 20 m et v = 5 m/s. À t = 4 s :",
+   "choices": [
+    "24 m",
+    "40 m",
+    "100 m",
+    "25 m"
+   ],
+   "answer": 1,
+   "explanation": "$20 + 5 \\times 4 = 40$ m."
+  }
+ ]
+}
