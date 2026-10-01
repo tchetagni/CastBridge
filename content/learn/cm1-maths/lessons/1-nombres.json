@@ -1,0 +1,631 @@
+{
+ "chapter": "cm1-maths-nombres",
+ "lessons": [
+  {
+   "id": "cm1-maths-nombres",
+   "title": "Les grands nombres jusqu'au million",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Nombres entiers jusqu'au million (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire et écrire en chiffres et en lettres les nombres jusqu'au million.",
+    "Donner la valeur d'un chiffre dans un nombre.",
+    "Comparer, ranger et arrondir des grands nombres."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-maths-nombres-01",
+    "cm1-maths-nombres-02",
+    "cm1-maths-nombres-03",
+    "cm1-maths-nombres-04",
+    "cm1-maths-nombres-05",
+    "cm1-maths-nombres-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-nombres-q1",
+    "cm1-maths-nombres-q2",
+    "cm1-maths-nombres-q3",
+    "cm1-maths-nombres-q4",
+    "cm1-maths-nombres-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le million (1 000 000) est bien le plafond attendu en CM1 (reconstitué).",
+    "Les habitants des villages sont fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les classes",
+     "md": "Un grand nombre s'écrit en **classes de trois chiffres** : la classe des **unités**, celle des **mille**, celle des **millions**. On laisse un espace entre les classes.\n\n*Exemple* : 345 620 = 345 **mille** 620."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 15,
+        "w": 180,
+        "h": 30,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 36,
+        "text": "Classe des mille",
+        "size": 15,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 45,
+        "w": 60,
+        "h": 26,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 64,
+        "text": "c",
+        "size": 14,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 71,
+        "w": 60,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 100,
+        "text": "3",
+        "size": 24,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 45,
+        "w": 60,
+        "h": 26,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 64,
+        "text": "d",
+        "size": 14,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 71,
+        "w": 60,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 100,
+        "text": "4",
+        "size": 24,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 45,
+        "w": 60,
+        "h": 26,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 64,
+        "text": "u",
+        "size": 14,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 71,
+        "w": 60,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 100,
+        "text": "5",
+        "size": 24,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 15,
+        "w": 180,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 36,
+        "text": "Classe des unités",
+        "size": 15,
+        "color": "orange",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 45,
+        "w": 60,
+        "h": 26,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 64,
+        "text": "c",
+        "size": 14,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 71,
+        "w": 60,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 100,
+        "text": "6",
+        "size": 24,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 45,
+        "w": 60,
+        "h": 26,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 64,
+        "text": "d",
+        "size": 14,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 71,
+        "w": 60,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 100,
+        "text": "2",
+        "size": 24,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 45,
+        "w": 60,
+        "h": 26,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 410.0,
+        "y": 64,
+        "text": "u",
+        "size": 14,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 71,
+        "w": 60,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 410.0,
+        "y": 100,
+        "text": "0",
+        "size": 24,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 135,
+        "text": "c = centaines, d = dizaines, u = unités",
+        "size": 14,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le tableau de numération : 345 620.",
+     "alt": "Un tableau à deux classes. Classe des mille : 3 centaines, 4 dizaines, 5 unités. Classe des unités : 6 centaines, 2 dizaines, 0 unité."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Valeur d'un chiffre",
+     "md": "La valeur d'un chiffre dépend de sa **place**. Dans 345 620 :\n\n- 3 est le chiffre des **centaines de mille** (valeur 300 000) ;\n- 4 : dizaines de mille (40 000) ; 5 : unités de mille (5 000) ;\n- 6 : centaines (600) ; 2 : dizaines (20) ; 0 : unités.\n\nUn million = 1 000 000 = 1 000 milliers."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Comparer, ranger, arrondir",
+     "md": "- On compare **chiffre par chiffre**, en partant de la gauche. Le nombre qui a le plus de chiffres est le plus grand.\n- **Arrondir** à la centaine : on regarde le chiffre des dizaines (0 à 4 : on garde ; 5 à 9 : on ajoute 1 centaine). 47 826 → 47 800."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : écrire en chiffres",
+     "statement": "Écris en chiffres : deux cent huit mille quatre cent trois.",
+     "steps": [
+      {
+       "md": "Classe des mille : « deux cent huit » → 208."
+      },
+      {
+       "md": "Classe des unités : « quatre cent trois » → 403."
+      },
+      {
+       "md": "On assemble : 208 403."
+      }
+     ],
+     "answer": "**208 403**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : arrondir",
+     "statement": "Arrondis 47 826 au millier le plus proche.",
+     "steps": [
+      {
+       "md": "Le chiffre des unités de mille est 7. Le chiffre suivant (centaines) est 8 : plus de 5."
+      },
+      {
+       "md": "On ajoute 1 millier : 48 000."
+      }
+     ],
+     "answer": "**47 826 ≈ 48 000**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier des zéros : *trois cent mille cinq* s'écrit 300 005, pas 3 005.\n- Comparer en regardant le dernier chiffre au lieu du premier.\n- Arrondir en regardant le mauvais chiffre."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-nombres-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-nombres-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-nombres-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-nombres-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-nombres-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-nombres-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-nombres-01",
+   "chapter": "cm1-maths-nombres",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Écris en chiffres : trois cent quarante-cinq mille six cent vingt.",
+   "answer": 345620,
+   "tolerance": 0,
+   "explanation": "Classe des mille : 345 ; classe des unités : 620. On écrit 345 620.",
+   "method": "Une classe = trois chiffres.",
+   "points": 1,
+   "lesson": "cm1-maths-nombres",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-nombres-02",
+   "chapter": "cm1-maths-nombres",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Dans le nombre 528 614, quel est le chiffre des dizaines de mille ?",
+   "choices": [
+    "5",
+    "2",
+    "8",
+    "6"
+   ],
+   "answer": 1,
+   "explanation": "528 614 : 5 centaines de mille, 2 dizaines de mille, 8 unités de mille. Le chiffre est 2.",
+   "points": 1,
+   "lesson": "cm1-maths-nombres",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-nombres-03",
+   "chapter": "cm1-maths-nombres",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : 98 765 est plus petit que 100 000.",
+   "answer": true,
+   "explanation": "98 765 a 5 chiffres, 100 000 en a 6. Donc 98 765 < 100 000.",
+   "points": 1,
+   "lesson": "cm1-maths-nombres",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-nombres-04",
+   "chapter": "cm1-maths-nombres",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Quel est le plus grand nombre ?",
+   "choices": [
+    "98 540",
+    "89 540",
+    "98 450",
+    "89 450"
+   ],
+   "answer": 0,
+   "explanation": "On compare à partir de la gauche : 98 540 et 98 450 ont 98 ; puis 5 > 4. Donc 98 540.",
+   "points": 1,
+   "lesson": "cm1-maths-nombres",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-nombres-05",
+   "chapter": "cm1-maths-nombres",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Arrondis 47 826 au millier le plus proche.",
+   "answer": 48000,
+   "tolerance": 0,
+   "explanation": "Chiffre des centaines : 8 (plus de 5) : on passe au millier supérieur : 48 000.",
+   "points": 1,
+   "lesson": "cm1-maths-nombres",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-nombres-06",
+   "chapter": "cm1-maths-nombres",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Trois villages imaginaires comptent : Eboa 12 480 habitants, Nkolo 9 735 habitants, Mbali 15 062 habitants.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien d'habitants en tout ?",
+     "answer": 37277,
+     "tolerance": 0,
+     "explanation": "12 480 + 9 735 + 15 062 = 37 277.",
+     "unit": "habitants",
+     "id": "cm1-maths-nombres-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel village est le plus peuplé ?",
+     "choices": [
+      "Eboa",
+      "Nkolo",
+      "Eboa et Nkolo à égalité",
+      "Mbali"
+     ],
+     "answer": 3,
+     "explanation": "15 062 > 12 480 > 9 735 : Mbali est le plus peuplé.",
+     "id": "cm1-maths-nombres-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Arrondis le total à la centaine la plus proche.",
+     "answer": 37300,
+     "tolerance": 0,
+     "explanation": "37 277 : chiffre des dizaines 7 → on ajoute 1 centaine : 37 300.",
+     "unit": "habitants",
+     "id": "cm1-maths-nombres-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-nombres",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-nombres-q1",
+   "chapter": "cm1-maths-nombres",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Combien de chiffres a un nombre à la classe des mille complète ?",
+   "choices": [
+    "1 seul chiffre",
+    "2 chiffres",
+    "au moins 4 chiffres",
+    "3 chiffres au plus"
+   ],
+   "answer": 2,
+   "explanation": "Dès qu'il y a des mille, le nombre a 4 chiffres ou plus.",
+   "lesson": "cm1-maths-nombres"
+  },
+  {
+   "id": "cm1-maths-nombres-q2",
+   "chapter": "cm1-maths-nombres",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Valeur du chiffre 7 dans 270 413 ?",
+   "choices": [
+    "7 000",
+    "70 000",
+    "700 000",
+    "700"
+   ],
+   "answer": 1,
+   "explanation": "7 est en position des dizaines de mille : 70 000.",
+   "lesson": "cm1-maths-nombres"
+  },
+  {
+   "id": "cm1-maths-nombres-q3",
+   "chapter": "cm1-maths-nombres",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel nombre vaut 6 centaines de mille et 4 unités ?",
+   "choices": [
+    "600 004",
+    "6 004",
+    "60 004",
+    "640 000"
+   ],
+   "answer": 0,
+   "explanation": "600 000 + 4 = 600 004.",
+   "lesson": "cm1-maths-nombres"
+  },
+  {
+   "id": "cm1-maths-nombres-q4",
+   "chapter": "cm1-maths-nombres",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Combien de milliers dans un million ?",
+   "choices": [
+    "100",
+    "10 000",
+    "10",
+    "1 000"
+   ],
+   "answer": 3,
+   "explanation": "1 000 000 = 1 000 × 1 000.",
+   "lesson": "cm1-maths-nombres"
+  },
+  {
+   "id": "cm1-maths-nombres-q5",
+   "chapter": "cm1-maths-nombres",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Arrondi de 3 458 à la centaine :",
+   "choices": [
+    "3 400",
+    "3 460",
+    "3 500",
+    "3 000"
+   ],
+   "answer": 2,
+   "explanation": "Dizaines : 5 → on monte à 3 500.",
+   "lesson": "cm1-maths-nombres"
+  }
+ ]
+}

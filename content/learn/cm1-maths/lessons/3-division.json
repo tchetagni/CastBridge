@@ -1,0 +1,447 @@
+{
+ "chapter": "cm1-maths-calcul",
+ "lessons": [
+  {
+   "id": "cm1-maths-division",
+   "title": "La division par un nombre à deux chiffres",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Calcul : division euclidienne par un nombre à deux chiffres (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Calculer un quotient et un reste (division euclidienne).",
+    "Vérifier une division : dividende = diviseur × quotient + reste.",
+    "Résoudre un problème de partage ou de groupement."
+   ],
+   "prerequisites": [
+    "cm1-maths-calcul"
+   ],
+   "exercises": [
+    "cm1-maths-division-01",
+    "cm1-maths-division-02",
+    "cm1-maths-division-03",
+    "cm1-maths-division-04",
+    "cm1-maths-division-05",
+    "cm1-maths-division-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-division-q1",
+    "cm1-maths-division-q2",
+    "cm1-maths-division-q3",
+    "cm1-maths-division-q4",
+    "cm1-maths-division-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier à la calculatrice les quotients et restes.",
+    "Un exercice contenait une phrase de brouillon : à relire (reformuler l'exercice 4)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Division euclidienne",
+     "md": "Diviser 1 575 par 24, c'est chercher combien de fois 24 « entre » dans 1 575.\n\n- **Dividende** : 1 575 ; **diviseur** : 24 ; **quotient** : 65 ; **reste** : 15.\n- Le reste est **toujours plus petit que le diviseur**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Vérifier",
+     "md": "dividende = diviseur × quotient + reste\n\n1 575 = 24 × 65 + 15 → 24 × 65 = 1 560 ; 1 560 + 15 = 1 575."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 150,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 56,
+        "text": "1 575 ÷ 24",
+        "size": 18,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 30,
+        "w": 150,
+        "h": 38,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 56,
+        "text": "quotient 65",
+        "size": 18,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 30,
+        "w": 150,
+        "h": 38,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 455,
+        "y": 56,
+        "text": "reste 15",
+        "size": 18,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 49,
+        "x2": 198,
+        "y2": 49,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 49,
+        "x2": 378,
+        "y2": 49,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 105,
+        "text": "24 × 65 + 15 = 1 575",
+        "size": 20,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 130,
+        "text": "preuve de la division",
+        "size": 14,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Une division et sa preuve.",
+     "alt": "La division 1 575 ÷ 24 donne un quotient de 65 et un reste de 15 ; on vérifie avec 24 × 65 + 15 = 1 575."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode pour poser",
+     "md": "1. J'estime le quotient avec des multiples de 24 (24 × 10 = 240).\n2. Je cherche le plus grand multiple de 24 qui ne dépasse pas le morceau du dividende.\n3. Je soustrais ; j'abaisse le chiffre suivant ; je recommence.\n4. Je vérifie avec la preuve."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : quotient et reste",
+     "statement": "Divise 1 575 par 24.",
+     "steps": [
+      {
+       "md": "24 × 60 = 1 440 ; 1 575 − 1 440 = 135."
+      },
+      {
+       "md": "24 × 5 = 120 ; 135 − 120 = 15."
+      },
+      {
+       "md": "Quotient : 60 + 5 = 65 ; reste 15."
+      }
+     ],
+     "answer": "**1 575 = 24 × 65 + 15**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un problème de groupement",
+     "statement": "On range 500 œufs dans des boîtes de 12. Combien de boîtes pleines ?",
+     "steps": [
+      {
+       "md": "500 ÷ 12 : 12 × 41 = 492."
+      },
+      {
+       "md": "500 − 492 = 8 : il reste 8 œufs."
+      },
+      {
+       "md": "Le reste est plus petit que 12 : c'est bon."
+      }
+     ],
+     "answer": "**41 boîtes pleines et 8 œufs restants.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Un reste plus grand que le diviseur : il faut continuer.\n- Oublier un zéro au quotient.\n- Se tromper entre « boîtes pleines » (quotient) et « restes »."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-division-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-division-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-division-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-division-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-division-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-division-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-division-01",
+   "chapter": "cm1-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Calcule le quotient de 756 par 12.",
+   "answer": 63,
+   "tolerance": 0,
+   "explanation": "12 × 63 = 756 ; le reste est 0. Quotient : 63.",
+   "points": 1,
+   "lesson": "cm1-maths-division",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-division-02",
+   "chapter": "cm1-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Calcule le reste de 1 000 ÷ 36.",
+   "answer": 28,
+   "tolerance": 0,
+   "explanation": "36 × 27 = 972 ; 1 000 − 972 = 28. Reste : 28.",
+   "points": 1,
+   "lesson": "cm1-maths-division",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-division-03",
+   "chapter": "cm1-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans une division par 24, le reste peut être 30.",
+   "answer": false,
+   "explanation": "Faux : le reste est toujours plus petit que le diviseur (ici moins de 24).",
+   "points": 1,
+   "lesson": "cm1-maths-division",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-division-04",
+   "chapter": "cm1-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "On répartit 1 250 FCFA... non : 840 mangues en cageots de 24. Combien de cageots pleins ?",
+   "answer": 35,
+   "tolerance": 0,
+   "explanation": "24 × 35 = 840 ; il y a 35 cageots pleins et aucun reste.",
+   "points": 1,
+   "lesson": "cm1-maths-division",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-division-05",
+   "chapter": "cm1-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Un car de 45 places. 300 élèves doivent voyager. Combien de cars faut-il ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "300 ÷ 45 : quotient 6, reste 30. Il faut un 7e car pour les 30 élèves restants : 7 cars.",
+   "unit": "cars",
+   "method": "S'il reste des personnes, il faut un car de plus.",
+   "points": 1,
+   "lesson": "cm1-maths-division",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-division-06",
+   "chapter": "cm1-maths-calcul",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Une coopérative de Bafoussam a récolté 2 450 kg de café et le met dans des sacs de 35 kg.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de sacs pleins ?",
+     "answer": 70,
+     "tolerance": 0,
+     "explanation": "35 × 70 = 2 450 : 70 sacs pleins, aucun reste.",
+     "unit": "sacs",
+     "id": "cm1-maths-division-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Elle vend chaque sac 28 000 FCFA. Quelle somme obtient-elle ?",
+     "answer": 1960000,
+     "tolerance": 0,
+     "explanation": "70 × 28 000 = 1 960 000 FCFA.",
+     "unit": "FCFA",
+     "id": "cm1-maths-division-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Cette somme est partagée équitablement entre 28 familles. Combien reçoit chaque famille ?",
+     "answer": 70000,
+     "tolerance": 0,
+     "explanation": "1 960 000 ÷ 28 = 70 000 FCFA.",
+     "unit": "FCFA",
+     "id": "cm1-maths-division-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-division",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-division-q1",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Le reste d'une division est toujours…",
+   "choices": [
+    "plus petit que le diviseur",
+    "plus grand que le diviseur",
+    "égal au quotient",
+    "égal au dividende"
+   ],
+   "answer": 0,
+   "explanation": "Sinon on pourrait encore diviser.",
+   "lesson": "cm1-maths-division"
+  },
+  {
+   "id": "cm1-maths-division-q2",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Si 7 × 13 + 2 = 93, alors 93 ÷ 13 a pour quotient…",
+   "choices": [
+    "13",
+    "2",
+    "93",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "93 = 13 × 7 + 2 : quotient 7, reste 2.",
+   "lesson": "cm1-maths-division"
+  },
+  {
+   "id": "cm1-maths-division-q3",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quotient de 250 ÷ 25 :",
+   "choices": [
+    "100",
+    "11",
+    "10",
+    "9"
+   ],
+   "answer": 2,
+   "explanation": "25 × 10 = 250.",
+   "lesson": "cm1-maths-division"
+  },
+  {
+   "id": "cm1-maths-division-q4",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Reste de 100 ÷ 12 :",
+   "choices": [
+    "8",
+    "4",
+    "0",
+    "12"
+   ],
+   "answer": 1,
+   "explanation": "12 × 8 = 96 ; 100 − 96 = 4.",
+   "lesson": "cm1-maths-division"
+  },
+  {
+   "id": "cm1-maths-division-q5",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Preuve d'une division :",
+   "choices": [
+    "diviseur × quotient + reste = dividende",
+    "dividende + reste = diviseur",
+    "quotient − reste = diviseur",
+    "diviseur + quotient = dividende"
+   ],
+   "answer": 0,
+   "explanation": "C'est la relation de la division euclidienne.",
+   "lesson": "cm1-maths-division"
+  }
+ ]
+}

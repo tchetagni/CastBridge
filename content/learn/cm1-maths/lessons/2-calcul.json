@@ -1,0 +1,443 @@
+{
+ "chapter": "cm1-maths-calcul",
+ "lessons": [
+  {
+   "id": "cm1-maths-calcul",
+   "title": "Additions, soustractions et multiplications posées",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Calcul : addition, soustraction, multiplication posées (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Poser et effectuer une addition et une soustraction de grands nombres.",
+    "Multiplier par un nombre à 1 ou 2 chiffres.",
+    "Contrôler un résultat (ordre de grandeur, preuve)."
+   ],
+   "prerequisites": [
+    "cm1-maths-nombres"
+   ],
+   "exercises": [
+    "cm1-maths-calcul-01",
+    "cm1-maths-calcul-02",
+    "cm1-maths-calcul-03",
+    "cm1-maths-calcul-04",
+    "cm1-maths-calcul-05",
+    "cm1-maths-calcul-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-calcul-q1",
+    "cm1-maths-calcul-q2",
+    "cm1-maths-calcul-q3",
+    "cm1-maths-calcul-q4",
+    "cm1-maths-calcul-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les calculs avec une calculatrice ; vérifier la technique de multiplication posée (produits partiels) attendue en CM1."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Addition et soustraction",
+     "md": "On pose en **alignant les chiffres** de même rang (unités sous unités). On calcule de droite à gauche en gérant les **retenues**.\n\n- 3 482 + 1 759 = 5 241.\n- 6 000 − 2 487 = 3 513. Preuve : 3 513 + 2 487 = 6 000."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La multiplication",
+     "md": "Pour multiplier par un nombre à deux chiffres, on multiplie par les unités, puis par les dizaines (en décalant d'un rang), puis on additionne.\n\n**Exemple** : 346 × 24 → 346 × 4 = 1 384 ; 346 × 20 = 6 920 ; total 8 304."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 280,
+        "y": 25,
+        "text": "346 × 24",
+        "size": 20,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 40,
+        "w": 200,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 61,
+        "text": "346 × 4 = 1 384",
+        "size": 17,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 80,
+        "w": 200,
+        "h": 30,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 101,
+        "text": "346 × 20 = 6 920",
+        "size": 17,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 60,
+        "w": 200,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 87,
+        "text": "8 304",
+        "size": 22,
+        "color": "orange",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 262,
+        "y1": 55,
+        "x2": 296,
+        "y2": 78,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 262,
+        "y1": 95,
+        "x2": 296,
+        "y2": 82,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 145,
+        "text": "Produit partiel 1 + produit partiel 2",
+        "size": 15,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Deux produits partiels.",
+     "alt": "Le calcul 346 × 24 se fait en deux étapes : 346 × 4 = 1 384 et 346 × 20 = 6 920 ; leur somme donne 8 304."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Contrôler",
+     "md": "1. **Ordre de grandeur** : 346 × 24 est proche de 350 × 20 = 7 000 ; 8 304 est cohérent.\n2. **Preuve** de la soustraction par l'addition.\n3. Relire les retenues."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : soustraction",
+     "statement": "Calcule 5 004 − 1 876.",
+     "steps": [
+      {
+       "md": "On pose : 5 004 − 1 876 en alignant les chiffres."
+      },
+      {
+       "md": "On utilise des retenues successives."
+      },
+      {
+       "md": "Résultat : 3128. Preuve : 3128 + 1 876 = 5 004."
+      }
+     ],
+     "answer": "**3128**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : multiplication",
+     "statement": "Calcule 258 × 36.",
+     "steps": [
+      {
+       "md": "258 × 6 = 1 548."
+      },
+      {
+       "md": "258 × 30 = 7 740."
+      },
+      {
+       "md": "1 548 + 7 740 = 9 288."
+      }
+     ],
+     "answer": "**9 288**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de décaler d'un rang le deuxième produit.\n- Se tromper de retenue en soustraction avec des zéros.\n- Ne pas vérifier le résultat."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-calcul-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-calcul-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-calcul-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-calcul-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-calcul-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-calcul-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-calcul-01",
+   "chapter": "cm1-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Calcule : 3 482 + 1 759",
+   "answer": 5241,
+   "tolerance": 0,
+   "explanation": "3 482 + 1 759 = 5 241.",
+   "points": 1,
+   "lesson": "cm1-maths-calcul",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-calcul-02",
+   "chapter": "cm1-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Calcule : 6 000 − 2 487",
+   "answer": 3513,
+   "tolerance": 0,
+   "explanation": "6 000 − 2 487 = 3 513 (preuve : 3 513 + 2 487 = 6 000).",
+   "points": 1,
+   "lesson": "cm1-maths-calcul",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-calcul-03",
+   "chapter": "cm1-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : 346 × 24 = 8 304.",
+   "answer": true,
+   "explanation": "346 × 4 = 1 384 ; 346 × 20 = 6 920 ; total 8 304.",
+   "points": 1,
+   "lesson": "cm1-maths-calcul",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-calcul-04",
+   "chapter": "cm1-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Calcule : 405 × 27",
+   "answer": 10935,
+   "tolerance": 0,
+   "explanation": "405 × 7 = 2 835 ; 405 × 20 = 8 100 ; 2 835 + 8 100 = 10 935.",
+   "points": 1,
+   "lesson": "cm1-maths-calcul",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-calcul-05",
+   "chapter": "cm1-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Une commerçante vend 48 sacs de riz à 12 500 FCFA le sac. Combien reçoit-elle ?",
+   "answer": 600000,
+   "tolerance": 0,
+   "explanation": "48 × 12 500 = 600 000. Elle reçoit 600 000 FCFA.",
+   "unit": "FCFA",
+   "method": "Prix du sac × nombre de sacs.",
+   "points": 1,
+   "lesson": "cm1-maths-calcul",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-calcul-06",
+   "chapter": "cm1-maths-calcul",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Un transporteur de Douala charge 245 caisses de bananes de 18 kg chacune, puis 132 caisses de 25 kg.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la masse des 245 caisses de 18 kg ?",
+     "answer": 4410,
+     "tolerance": 0,
+     "explanation": "245 × 18 = 4 410. Soit 4 410 kg.",
+     "unit": "kg",
+     "id": "cm1-maths-calcul-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la masse des 132 caisses de 25 kg ?",
+     "answer": 3300,
+     "tolerance": 0,
+     "explanation": "132 × 25 = 3 300. Soit 3 300 kg.",
+     "unit": "kg",
+     "id": "cm1-maths-calcul-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la masse totale transportée ?",
+     "answer": 7710,
+     "tolerance": 0,
+     "explanation": "4 410 + 3 300 = 7 710. Soit 7 710 kg.",
+     "unit": "kg",
+     "id": "cm1-maths-calcul-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-calcul",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-calcul-q1",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Pour poser une addition, on aligne…",
+   "choices": [
+    "les chiffres de gauche",
+    "les chiffres de même rang",
+    "les nombres au hasard",
+    "les virgules seulement"
+   ],
+   "answer": 1,
+   "explanation": "Unités sous unités, dizaines sous dizaines, etc.",
+   "lesson": "cm1-maths-calcul"
+  },
+  {
+   "id": "cm1-maths-calcul-q2",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Résultat de 1 250 + 3 800 :",
+   "choices": [
+    "5 050",
+    "4 950",
+    "5 000",
+    "4 050"
+   ],
+   "answer": 0,
+   "explanation": "1 250 + 3 800 = 5 050.",
+   "lesson": "cm1-maths-calcul"
+  },
+  {
+   "id": "cm1-maths-calcul-q3",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Résultat de 50 × 30 :",
+   "choices": [
+    "150",
+    "15 000",
+    "1 050",
+    "1 500"
+   ],
+   "answer": 3,
+   "explanation": "5 × 3 = 15, puis deux zéros : 1 500.",
+   "lesson": "cm1-maths-calcul"
+  },
+  {
+   "id": "cm1-maths-calcul-q4",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel est l'ordre de grandeur de 298 × 12 ?",
+   "choices": [
+    "environ 360",
+    "environ 36 000",
+    "environ 3 600",
+    "environ 600"
+   ],
+   "answer": 2,
+   "explanation": "300 × 12 = 3 600.",
+   "lesson": "cm1-maths-calcul"
+  },
+  {
+   "id": "cm1-maths-calcul-q5",
+   "chapter": "cm1-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Preuve de 900 − 456 = 444 :",
+   "choices": [
+    "444 − 456 = 0",
+    "444 + 456 = 900",
+    "900 + 456 = 444",
+    "444 × 456"
+   ],
+   "answer": 1,
+   "explanation": "On vérifie par addition : 444 + 456 = 900.",
+   "lesson": "cm1-maths-calcul"
+  }
+ ]
+}
