@@ -1,0 +1,197 @@
+{
+ "chapter": "1re-chimie-cd-ch-matiere",
+ "lessons": [],
+ "exercises": [
+  {
+   "id": "1re-chimie-cd-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "prompt": "EXERCICE 1 — Un alcool saturé A, de formule $\\text{C}_n\\text{H}_{2n+1}\\text{OH}$, a pour masse molaire 60 g/mol. Données : $M(\\text{C}) = 12$, $M(\\text{H}) = 1$, $M(\\text{O}) = 16$ g/mol ; volume molaire $V_m = 24$ L/mol.",
+   "method": "Formule générale, masse molaire, équation, quantités de matière.",
+   "mistakes": [
+    "Oublier le O de la fonction alcool dans la masse molaire.",
+    "Oublier le facteur 3 entre A et CO₂."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-chimie-cd-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Détermine n.",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "$M = 12n + (2n + 1) + 16 + 1 = 14n + 18 = 60$, donc $n = 3$ : A est C₃H₇OH."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex1-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Combien d'alcools ont la formule C₃H₇OH ?",
+     "choices": [
+      "2 : le propan-1-ol et le propan-2-ol",
+      "1 : le propan-1-ol seulement",
+      "3 : propan-1-ol, propan-2-ol et propan-3-ol",
+      "4 : avec les isomères de chaîne"
+     ],
+     "answer": 0,
+     "explanation": "Avec 3 carbones, la chaîne est linéaire ; –OH est sur le carbone 1 (extrémité) ou le carbone 2 (milieu). « Propan-3-ol » est le même composé que le propan-1-ol (on numérote dans l'autre sens)."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "On écrit la combustion complète : $2\\,\\text{C}_3\\text{H}_7\\text{OH} + x\\,\\text{O}_2 \\to 6\\,\\text{CO}_2 + 8\\,\\text{H}_2\\text{O}$. Calcule x.",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "Atomes d'oxygène : à droite $6 \\times 2 + 8 = 20$ ; à gauche $2 \\times 1 + 2x$. Donc $2x = 18$ et $x = 9$."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex1-d",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "On brûle complètement 3,0 g de A. Calcule le volume de dioxyde de carbone formé, mesuré dans les conditions où $V_m = 24$ L/mol (en L).",
+     "answer": 3.6,
+     "tolerance": 0.01,
+     "unit": "L",
+     "explanation": "$n(\\text{A}) = \\frac{3{,}0}{60} = 0{,}050$ mol ; $n(\\text{CO}_2) = 3 \\times 0{,}050 = 0{,}15$ mol ; $V = 0{,}15 \\times 24 = 3{,}6$ L."
+    }
+   ]
+  },
+  {
+   "id": "1re-chimie-cd-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "prompt": "EXERCICE 2 — Une lame de cuivre est plongée dans une solution de nitrate d'argent ; il se forme un dépôt d'argent et la solution devient bleue. Données : $E^\\circ(\\text{Ag}^+/\\text{Ag}) = 0{,}80$ V ; $E^\\circ(\\text{Cu}^{2+}/\\text{Cu}) = 0{,}34$ V ; $M(\\text{Cu}) = 64$ g/mol ; $M(\\text{Ag}) = 108$ g/mol.",
+   "method": "Oxydant et réducteur, équation bilan, quantités de matière, f.é.m., pôles.",
+   "mistakes": [
+    "Oublier le coefficient 2 devant Ag⁺.",
+    "Inverser les pôles de la pile."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-chimie-cd-blanc-ex2-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Parmi ces espèces, laquelle est l'oxydant qui réagit ?",
+     "choices": [
+      "$\\text{Ag}^+$",
+      "$\\text{Cu}$",
+      "$\\text{Cu}^{2+}$",
+      "$\\text{Ag}$"
+     ],
+     "answer": 0,
+     "explanation": "Les ions $\\text{Ag}^+$ gagnent des électrons : $\\text{Ag}^+ + e^- \\to \\text{Ag}$ (dépôt d'argent). Le cuivre est le réducteur."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Écris les demi-équations et l'équation bilan $\\text{Cu} + x\\,\\text{Ag}^+ \\to \\text{Cu}^{2+} + x\\,\\text{Ag}$. Donne la valeur de x.",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "$\\text{Cu} = \\text{Cu}^{2+} + 2e^-$ et $\\text{Ag}^+ + e^- = \\text{Ag}$ (à multiplier par 2) : $\\text{Cu} + 2\\,\\text{Ag}^+ \\to \\text{Cu}^{2+} + 2\\,\\text{Ag}$, donc x = 2."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "1,28 g de cuivre ont été consommés. Calcule la masse d'argent déposée (en g).",
+     "answer": 4.32,
+     "tolerance": 0.01,
+     "unit": "g",
+     "explanation": "$n(\\text{Cu}) = \\frac{1{,}28}{64} = 0{,}020$ mol ; $n(\\text{Ag}) = 2 \\times 0{,}020 = 0{,}040$ mol ; $m = 0{,}040 \\times 108 = 4{,}32$ g."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "On réalise une pile Cu | Cu²⁺ || Ag⁺ | Ag. Calcule sa f.é.m. standard (en V).",
+     "answer": 0.46,
+     "tolerance": 0.005,
+     "unit": "V",
+     "explanation": "$e = E^\\circ_+ - E^\\circ_- = 0{,}80 - 0{,}34 = 0{,}46$ V."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex2-e",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Dans cette pile, quel métal constitue le pôle positif ?",
+     "choices": [
+      "L'argent, où se produit la réduction des ions $\\text{Ag}^+$",
+      "Le cuivre, où se produit l'oxydation",
+      "L'argent, où se produit l'oxydation",
+      "Le cuivre, où se produit la réduction"
+     ],
+     "answer": 0,
+     "explanation": "Le couple de potentiel le plus élevé ($\\text{Ag}^+/\\text{Ag}$) fournit la cathode (réduction) : c'est le pôle +."
+    }
+   ]
+  },
+  {
+   "id": "1re-chimie-cd-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "prompt": "EXERCICE 3 — On dissout 2,0 g d'hydroxyde de sodium dans de l'eau pour obtenir 500 mL de solution S ($M(\\text{NaOH}) = 40$ g/mol ; température 25 °C).",
+   "method": "Concentration, pH d'une base forte, dilution, équivalence, pH d'un acide fort.",
+   "mistakes": [
+    "Oublier de convertir 500 mL en 0,500 L.",
+    "Utiliser $-\\log C$ pour la soude."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-chimie-cd-blanc-ex3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la concentration molaire de S (en mol/L).",
+     "answer": 0.1,
+     "tolerance": 0.001,
+     "unit": "mol/L",
+     "explanation": "$n = \\frac{2{,}0}{40} = 0{,}050$ mol ; $C = \\frac{0{,}050}{0{,}500} = 0{,}10$ mol/L."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule le pH de S.",
+     "answer": 13,
+     "tolerance": 0.01,
+     "explanation": "Base forte : $\\text{pH} = 14 + \\log 0{,}10 = 13{,}0$."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex3-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "On prélève 10,0 mL de S et on complète à 1,00 L avec de l'eau. Calcule le pH de la solution obtenue.",
+     "answer": 11,
+     "tolerance": 0.01,
+     "explanation": "Le facteur de dilution est $\\frac{1000}{10} = 100$ : $C' = 1{,}0 \\times 10^{-3}$ mol/L, donc $\\text{pH} = 14 + \\log 10^{-3} = 11{,}0$ (le pH diminue de 2)."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex3-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "On dose 20,0 mL d'une solution d'acide chlorhydrique par la solution S. L'équivalence est atteinte pour 15,0 mL de S. Calcule la concentration de l'acide (en mol/L).",
+     "answer": 0.075,
+     "tolerance": 0.0005,
+     "unit": "mol/L",
+     "explanation": "$C_aV_a = C_bV_b$ : $C_a = \\frac{0{,}10 \\times 15{,}0}{20{,}0} = 0{,}075$ mol/L."
+    },
+    {
+     "id": "1re-chimie-cd-blanc-ex3-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule le pH de la solution d'acide chlorhydrique avant dosage (arrondi au centième).",
+     "answer": 1.12,
+     "tolerance": 0.01,
+     "explanation": "Acide fort : $\\text{pH} = -\\log 0{,}075 \\approx 1{,}12$."
+    }
+   ]
+  }
+ ]
+}

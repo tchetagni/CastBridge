@@ -1,0 +1,606 @@
+{
+ "chapter": "1re-chimie-cd-ch-redox",
+ "lessons": [
+  {
+   "id": "1re-chimie-cd-redox",
+   "chapter": "1re-chimie-cd-ch-redox",
+   "title": "Oxydoréduction et piles : couples, demi-équations, pile Daniell",
+   "minutes": 45,
+   "programRef": "1re C/D — Chimie : oxydoréduction, piles électrochimiques (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme de 1re C et D ; à relire par un enseignant",
+   "objectives": [
+    "Identifier oxydant, réducteur et couple redox ; écrire des demi-équations et l'équation d'une réaction.",
+    "Prévoir le sens d'une réaction spontanée avec les potentiels standard.",
+    "Décrire la pile Daniell (pôles, réactions, f.é.m.) et faire un bilan de matière et de charge."
+   ],
+   "prerequisites": [
+    "1re-chimie-cd-matiere"
+   ],
+   "exercises": [
+    "1re-chimie-cd-ox-01",
+    "1re-chimie-cd-ox-02",
+    "1re-chimie-cd-ox-03",
+    "1re-chimie-cd-ox-04",
+    "1re-chimie-cd-ox-05",
+    "1re-chimie-cd-ox-06"
+   ],
+   "selfCheck": [
+    "1re-chimie-cd-ox-q1",
+    "1re-chimie-cd-ox-q2",
+    "1re-chimie-cd-ox-q3",
+    "1re-chimie-cd-ox-q4",
+    "1re-chimie-cd-ox-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Écrire des demi-équations et des équations d'oxydoréduction équilibrées.\n- Prévoir une réaction spontanée.\n- Étudier la pile Daniell et calculer une quantité d'électricité."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Oxydant, réducteur, couple",
+     "md": "Un **oxydant** est une espèce capable de **gagner** des électrons ; un **réducteur** est une espèce capable d'en **perdre**.\nUn **couple** Ox/Red est décrit par la demi-équation : $\\text{Ox} + n\\,e^- = \\text{Red}$.\n- **Oxydation** : perte d'électrons (le réducteur est oxydé) ;\n- **Réduction** : gain d'électrons (l'oxydant est réduit).\nExemples : $\\text{Cu}^{2+}/\\text{Cu}$ ; $\\text{Zn}^{2+}/\\text{Zn}$ ; $\\text{Fe}^{3+}/\\text{Fe}^{2+}$ ; $\\text{Ag}^+/\\text{Ag}$ ; $\\text{H}^+/\\text{H}_2$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : équilibrer une demi-équation",
+     "md": "1. Écrire les deux espèces du couple.\n2. Équilibrer l'élément principal (autre que O et H).\n3. Équilibrer O avec $\\text{H}_2\\text{O}$, puis H avec $\\text{H}^+$ (milieu acide).\n4. Équilibrer les charges avec des électrons.\nExemple : $\\text{MnO}_4^- + 8\\,\\text{H}^+ + 5\\,e^- = \\text{Mn}^{2+} + 4\\,\\text{H}_2\\text{O}$ (charges : −1 + 8 − 5 = +2 des deux côtés)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équation d'une réaction d'oxydoréduction",
+     "md": "On l'obtient en additionnant deux demi-équations (dans le sens oxydant 1 + réducteur 2) multipliées pour que le nombre d'électrons gagnés égale celui d'électrons perdus ; les électrons disparaissent du bilan.\nExemple : $\\text{Zn} + \\text{Cu}^{2+} \\to \\text{Zn}^{2+} + \\text{Cu}$.\nLe bilan doit conserver les éléments **et** la charge électrique."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Potentiels standard et sens spontané",
+     "md": "Valeurs usuelles à 25 °C (conditions standard, données dans l'énoncé) :\n$E^\\circ(\\text{Zn}^{2+}/\\text{Zn}) = -0{,}76$ V ; $E^\\circ(\\text{Fe}^{2+}/\\text{Fe}) = -0{,}44$ V ; $E^\\circ(\\text{H}^+/\\text{H}_2) = 0{,}00$ V ; $E^\\circ(\\text{Cu}^{2+}/\\text{Cu}) = +0{,}34$ V ; $E^\\circ(\\text{Ag}^+/\\text{Ag}) = +0{,}80$ V.\n**Règle** : l'oxydant du couple de **plus grand** potentiel réagit spontanément avec le réducteur du couple de **plus petit** potentiel (« règle du gamma »)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La pile Daniell",
+     "md": "Pile formée de deux demi-piles reliées par un **pont salin** et un circuit extérieur : Zn | Zn²⁺ || Cu²⁺ | Cu.\n- **Pôle −** (anode) : zinc, **oxydation** $\\text{Zn} \\to \\text{Zn}^{2+} + 2\\,e^-$ ;\n- **Pôle +** (cathode) : cuivre, **réduction** $\\text{Cu}^{2+} + 2\\,e^- \\to \\text{Cu}$.\nLes électrons circulent **dans le circuit extérieur** du pôle − vers le pôle + ; le courant conventionnel circule en sens inverse. La f.é.m. standard est $e = E^\\circ_+ - E^\\circ_- = 0{,}34 - (-0{,}76) = 1{,}10$ V."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 262,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 100,
+        "w": 130,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 100,
+        "w": 130,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 97,
+        "y": 70,
+        "w": 16,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "rect",
+        "x": 287,
+        "y": 70,
+        "w": 16,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 105,
+        "y1": 70,
+        "x2": 105,
+        "y2": 35,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 105,
+        "y1": 35,
+        "x2": 295,
+        "y2": 35,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 295,
+        "y1": 35,
+        "x2": 295,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 35,
+        "x2": 250,
+        "y2": 35,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 22,
+        "text": "e⁻",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         140,
+         118,
+         140,
+         85,
+         260,
+         85,
+         260,
+         118
+        ],
+        "stroke": "grey",
+        "width": 6,
+        "closed": false
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 75,
+        "text": "pont salin",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 58,
+        "y": 58,
+        "text": "pôle −",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 362,
+        "y": 58,
+        "text": "pôle +",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 190,
+        "text": "Zn",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 190,
+        "text": "Cu",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 212,
+        "text": "Zn²⁺",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 212,
+        "text": "Cu²⁺",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Pile Daniell : l'électrode de zinc (pôle −) s'oxyde, les électrons (flèche rouge) vont vers le cuivre (pôle +) où les ions Cu²⁺ sont réduits ; le pont salin ferme le circuit.",
+     "alt": "Deux béchers reliés par un pont salin en arche. À gauche une lame de zinc dans une solution d'ions zinc, à droite une lame de cuivre dans une solution bleue d'ions cuivre. Un fil relie les deux lames, avec une flèche rouge d'électrons allant du zinc vers le cuivre."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Quantité d'électricité et masse transformée",
+     "md": "Une intensité constante $I$ pendant la durée $t$ transporte la charge $Q = I\\,t$ (en C, avec $t$ en s).\nLa quantité d'électrons échangés est $n(e^-) = \\frac{Q}{F}$, où $F \\approx 96\\,500$ C/mol est le faraday.\nPour une demi-équation à $z$ électrons : $n(\\text{espèce}) = \\frac{n(e^-)}{z}$, puis $m = n \\times M$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : équation d'une réaction",
+     "statement": "Un clou de fer plongé dans une solution contenant des ions cuivre(II) se recouvre de cuivre. Écris les demi-équations et l'équation de la réaction.",
+     "steps": [
+      {
+       "md": "Couples : $\\text{Cu}^{2+}/\\text{Cu}$ et $\\text{Fe}^{2+}/\\text{Fe}$. Le fer perd des électrons, le cuivre(II) en gagne :",
+       "tex": "\\text{Fe} = \\text{Fe}^{2+} + 2\\,e^- \\quad ; \\quad \\text{Cu}^{2+} + 2\\,e^- = \\text{Cu}"
+      },
+      {
+       "md": "Les deux demi-équations échangent 2 électrons : on additionne.",
+       "tex": "\\text{Fe} + \\text{Cu}^{2+} \\to \\text{Fe}^{2+} + \\text{Cu}"
+      },
+      {
+       "md": "Contrôle : $E^\\circ(\\text{Cu}^{2+}/\\text{Cu}) = 0{,}34$ V est supérieur à $E^\\circ(\\text{Fe}^{2+}/\\text{Fe}) = -0{,}44$ V : la réaction est bien spontanée."
+      }
+     ],
+     "answer": "**Fe + Cu²⁺ → Fe²⁺ + Cu**, réaction spontanée."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : bilan sur la pile Daniell",
+     "statement": "Une pile Daniell débite un courant constant de 0,10 A pendant 1 h. Calcule la charge échangée et la masse de zinc consommée ($M(\\text{Zn}) = 65$ g/mol ; $F = 96\\,500$ C/mol).",
+     "steps": [
+      {
+       "md": "Durée : 1 h = 3 600 s. Charge :",
+       "tex": "Q = I\\,t = 0{,}10 \\times 3600 = 360\\ \\text{C}"
+      },
+      {
+       "md": "Quantité d'électrons :",
+       "tex": "n(e^-) = \\frac{360}{96\\,500} \\approx 3{,}73 \\times 10^{-3}\\ \\text{mol}"
+      },
+      {
+       "md": "Chaque atome de zinc libère 2 électrons : $n(\\text{Zn}) = \\frac{3{,}73 \\times 10^{-3}}{2} \\approx 1{,}87 \\times 10^{-3}$ mol, d'où",
+       "tex": "m = n\\,M \\approx 1{,}87 \\times 10^{-3} \\times 65 \\approx 0{,}12\\ \\text{g}"
+      }
+     ],
+     "answer": "**Q = 360 C ; environ 0,12 g de zinc consommé.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : bilan en milieu acide",
+     "statement": "Écris l'équation de la réaction entre les ions permanganate $\\text{MnO}_4^-$ et les ions fer(II) en milieu acide (couples $\\text{MnO}_4^-/\\text{Mn}^{2+}$ et $\\text{Fe}^{3+}/\\text{Fe}^{2+}$).",
+     "steps": [
+      {
+       "md": "Demi-équations :",
+       "tex": "\\text{MnO}_4^- + 8\\,\\text{H}^+ + 5\\,e^- = \\text{Mn}^{2+} + 4\\,\\text{H}_2\\text{O} \\quad ; \\quad \\text{Fe}^{2+} = \\text{Fe}^{3+} + e^-"
+      },
+      {
+       "md": "Pour égaliser les électrons, on multiplie la 2e demi-équation par 5 puis on additionne :",
+       "tex": "\\text{MnO}_4^- + 8\\,\\text{H}^+ + 5\\,\\text{Fe}^{2+} \\to \\text{Mn}^{2+} + 4\\,\\text{H}_2\\text{O} + 5\\,\\text{Fe}^{3+}"
+      },
+      {
+       "md": "Vérification de la charge : à gauche $-1 + 8 + 10 = +17$ ; à droite $+2 + 15 = +17$."
+      }
+     ],
+     "answer": "**MnO₄⁻ + 8 H⁺ + 5 Fe²⁺ → Mn²⁺ + 4 H₂O + 5 Fe³⁺**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Placer les électrons du mauvais côté d'une demi-équation, ou oublier d'équilibrer les charges.\n- Confondre l'anode (oxydation) et la cathode (réduction), et inverser les pôles de la pile : dans une pile, l'anode est le pôle −.\n- Faire circuler les électrons dans la solution : ils passent par le fil, les ions par la solution et le pont salin.\n- Additionner des demi-équations sans égaliser les électrons.\n- Appliquer la règle du gamma à l'envers (c'est l'oxydant du potentiel le plus élevé qui réagit)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-chimie-cd-ox-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-chimie-cd-ox-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-chimie-cd-ox-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La rouille est une oxydation du fer par le dioxygène en présence d'eau ; on protège l'acier en le recouvrant de zinc (galvanisation), car le zinc est plus réducteur que le fer.",
+      "Une pile s'use quand l'un des réactifs est épuisé ; une pile rechargeable permet d'inverser la réaction avec un courant imposé."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Potentiels standard utilisés (Zn²⁺/Zn −0,76 V ; Fe²⁺/Fe −0,44 V ; H⁺/H₂ 0,00 V ; Cu²⁺/Cu +0,34 V ; Ag⁺/Ag +0,80 V) : valeurs usuelles à re-vérifier, et toujours annoncées dans les énoncés.",
+    "Vérifier si le programme de 1re C/D utilise les nombres d'oxydation et la formule de Nernst ; ils ne sont pas traités ici.",
+    "Vérifier si les piles et l'électrolyse (faraday, F ≈ 96 500 C/mol) relèvent de la 1re ou de la Tle.",
+    "Le calcul de la f.é.m. suppose les conditions standard (solutions à 1 mol/L, 25 °C) ; la pile réelle débite une tension un peu plus faible."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-chimie-cd-ox-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Dans le couple $\\text{Cu}^{2+}/\\text{Cu}$, quelle espèce est le réducteur ?",
+   "choices": [
+    "$\\text{Cu}^{2+}$",
+    "$e^-$",
+    "Cu",
+    "$\\text{H}^+$"
+   ],
+   "answer": 2,
+   "explanation": "Le réducteur est la forme réduite, celle qui peut perdre des électrons : $\\text{Cu} = \\text{Cu}^{2+} + 2e^-$.",
+   "method": "Ox + ne⁻ = Red : le réducteur est à droite.",
+   "mistakes": [
+    "Confondre l'ion et le métal."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ox-02",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Associe chaque couple à sa demi-équation.",
+   "pairs": [
+    [
+     "Cu²⁺/Cu",
+     "Cu²⁺ + 2e⁻ = Cu"
+    ],
+    [
+     "Fe³⁺/Fe²⁺",
+     "Fe³⁺ + e⁻ = Fe²⁺"
+    ],
+    [
+     "Ag⁺/Ag",
+     "Ag⁺ + e⁻ = Ag"
+    ],
+    [
+     "Zn²⁺/Zn",
+     "Zn²⁺ + 2e⁻ = Zn"
+    ]
+   ],
+   "explanation": "Chaque demi-équation s'écrit Ox + ne⁻ = Red ; n est la différence de charge entre Ox et Red.",
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ox-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Calcule la f.é.m. standard d'une pile Daniell sachant que $E^\\circ(\\text{Cu}^{2+}/\\text{Cu}) = 0{,}34$ V et $E^\\circ(\\text{Zn}^{2+}/\\text{Zn}) = -0{,}76$ V (en V).",
+   "answer": 1.1,
+   "tolerance": 0.005,
+   "unit": "V",
+   "explanation": "$e = E^\\circ_+ - E^\\circ_- = 0{,}34 - (-0{,}76) = 1{,}10$ V.",
+   "method": "f.é.m. = potentiel du pôle + − potentiel du pôle −.",
+   "mistakes": [
+    "Oublier le signe moins du potentiel du zinc et trouver −0,42 V."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ox-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Une lame de zinc de 1,3 g est entièrement consommée dans une solution contenant un excès d'ions $\\text{Cu}^{2+}$ (réaction $\\text{Zn} + \\text{Cu}^{2+} \\to \\text{Zn}^{2+} + \\text{Cu}$). Calcule la masse de cuivre déposée (en g). $M(\\text{Zn}) = 65$ g/mol ; $M(\\text{Cu}) = 64$ g/mol.",
+   "answer": 1.28,
+   "tolerance": 0.005,
+   "unit": "g",
+   "explanation": "$n(\\text{Zn}) = \\frac{1{,}3}{65} = 0{,}020$ mol. Les coefficients valent 1 : $n(\\text{Cu}) = 0{,}020$ mol, soit $m = 0{,}020 \\times 64 = 1{,}28$ g.",
+   "method": "Quantité de zinc, rapport stœchiométrique, masse de cuivre.",
+   "mistakes": [
+    "Garder la masse de zinc comme masse de cuivre."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ox-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Dans la réaction $\\text{MnO}_4^- + 8\\,\\text{H}^+ + 5\\,\\text{Fe}^{2+} \\to \\text{Mn}^{2+} + 4\\,\\text{H}_2\\text{O} + 5\\,\\text{Fe}^{3+}$, combien d'ions $\\text{Fe}^{2+}$ réagissent avec un ion $\\text{MnO}_4^-$ ?",
+   "choices": [
+    "1",
+    "2",
+    "5",
+    "8"
+   ],
+   "answer": 2,
+   "explanation": "Un ion permanganate gagne 5 électrons ; chaque ion fer(II) en cède un seul : il en faut 5.",
+   "method": "Égaliser le nombre d'électrons gagnés et perdus.",
+   "mistakes": [
+    "Prendre le coefficient de H⁺."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ox-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Une pile Daniell fonctionne dans les conditions standard. Elle débite un courant constant de 0,20 A pendant 30 minutes. Données : $E^\\circ(\\text{Cu}^{2+}/\\text{Cu}) = 0{,}34$ V ; $E^\\circ(\\text{Zn}^{2+}/\\text{Zn}) = -0{,}76$ V ; $M(\\text{Zn}) = 65$ g/mol ; $F = 96\\,500$ C/mol.",
+   "method": "Pôles et réactions, f.é.m., charge $Q = It$, quantité d'électrons, quantité de zinc, masse.",
+   "mistakes": [
+    "Oublier de convertir 30 min en secondes.",
+    "Oublier le facteur 2 (2 électrons par atome de zinc)."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-chimie-cd-ox-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle électrode constitue le pôle négatif de la pile ?",
+     "choices": [
+      "La lame de zinc, siège d'une oxydation",
+      "La lame de cuivre, siège d'une réduction",
+      "La lame de zinc, siège d'une réduction",
+      "La lame de cuivre, siège d'une oxydation"
+     ],
+     "answer": 0,
+     "explanation": "Le zinc, plus réducteur ($E^\\circ$ plus faible), s'oxyde : $\\text{Zn} \\to \\text{Zn}^{2+} + 2e^-$. Il fournit les électrons : c'est le pôle −."
+    },
+    {
+     "id": "1re-chimie-cd-ox-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la f.é.m. de la pile (en V).",
+     "answer": 1.1,
+     "tolerance": 0.005,
+     "unit": "V",
+     "explanation": "$e = 0{,}34 - (-0{,}76) = 1{,}10$ V."
+    },
+    {
+     "id": "1re-chimie-cd-ox-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la charge qui a traversé le circuit (en C).",
+     "answer": 360,
+     "tolerance": 0,
+     "unit": "C",
+     "explanation": "$Q = I t = 0{,}20 \\times 1800 = 360$ C."
+    },
+    {
+     "id": "1re-chimie-cd-ox-06-d",
+     "kind": "numeric",
+     "points": 2.5,
+     "prompt": "Calcule la masse de zinc consommée (en g, arrondie au millième).",
+     "answer": 0.121,
+     "tolerance": 0.001,
+     "unit": "g",
+     "explanation": "$n(e^-) = \\frac{360}{96\\,500} \\approx 3{,}73 \\times 10^{-3}$ mol ; $n(\\text{Zn}) = \\frac{3{,}73 \\times 10^{-3}}{2} \\approx 1{,}87 \\times 10^{-3}$ mol ; $m = 1{,}87 \\times 10^{-3} \\times 65 \\approx 0{,}121$ g."
+    }
+   ]
+  },
+  {
+   "id": "1re-chimie-cd-ox-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Lors d'une oxydation, une espèce :",
+   "choices": [
+    "gagne des électrons",
+    "gagne des protons",
+    "perd des neutrons",
+    "perd des électrons"
+   ],
+   "answer": 3,
+   "explanation": "Oxydation = perte d'électrons."
+  },
+  {
+   "id": "1re-chimie-cd-ox-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Dans une pile, la réduction a lieu :",
+   "choices": [
+    "à la cathode, pôle +",
+    "à l'anode, pôle −",
+    "dans le pont salin",
+    "dans le fil de connexion"
+   ],
+   "answer": 0,
+   "explanation": "La cathode est le siège de la réduction ; dans une pile c'est le pôle +."
+  },
+  {
+   "id": "1re-chimie-cd-ox-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Avec $E^\\circ(\\text{Ag}^+/\\text{Ag}) = 0{,}80$ V et $E^\\circ(\\text{Cu}^{2+}/\\text{Cu}) = 0{,}34$ V, quelle réaction est spontanée ?",
+   "choices": [
+    "$\\text{Ag} + \\text{Cu}^{2+} \\to \\text{Ag}^+ + \\text{Cu}$",
+    "$\\text{Cu} + 2\\,\\text{Ag}^+ \\to \\text{Cu}^{2+} + 2\\,\\text{Ag}$",
+    "$2\\,\\text{Ag} + \\text{Cu}^{2+} \\to 2\\,\\text{Ag}^+ + \\text{Cu}$",
+    "$2\\,\\text{Ag} + 2\\,\\text{H}^+ \\to 2\\,\\text{Ag}^+ + \\text{H}_2$"
+   ],
+   "answer": 1,
+   "explanation": "L'oxydant du couple de potentiel le plus élevé ($\\text{Ag}^+$) réagit avec le réducteur du couple de potentiel le plus bas (Cu)."
+  },
+  {
+   "id": "1re-chimie-cd-ox-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "Dans le circuit extérieur d'une pile, les électrons circulent :",
+   "choices": [
+    "du pôle + vers le pôle −",
+    "dans les deux sens à la fois",
+    "du pôle − vers le pôle +",
+    "dans la solution"
+   ],
+   "answer": 2,
+   "explanation": "Le courant conventionnel va de + vers − à l'extérieur, les électrons vont en sens inverse."
+  },
+  {
+   "id": "1re-chimie-cd-ox-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-redox",
+   "prompt": "La demi-équation $\\text{Fe}^{3+} + e^- = \\text{Fe}^{2+}$ montre que $\\text{Fe}^{3+}$ est :",
+   "choices": [
+    "un réducteur",
+    "un métal",
+    "un solvant",
+    "un oxydant"
+   ],
+   "answer": 3,
+   "explanation": "Il gagne un électron : c'est l'oxydant du couple."
+  }
+ ]
+}

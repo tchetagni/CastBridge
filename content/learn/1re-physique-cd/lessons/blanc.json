@@ -1,0 +1,200 @@
+{
+ "chapter": "1re-physique-cd-ch-dynamique",
+ "lessons": [],
+ "exercises": [
+  {
+   "id": "1re-physique-cd-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "prompt": "EXERCICE 1 — Un solide de masse 10 kg est lancé vers le haut, depuis le bas d'un plan incliné de 30° sur l'horizontale, avec une vitesse de 6 m/s. Il subit une force de frottement constante de valeur 10 N, opposée au mouvement. On prend g = 10 N/kg.",
+   "method": "Bilan des forces, 2e loi projetée, théorème de l'énergie cinétique.",
+   "mistakes": [
+    "Garder un signe positif pour l'accélération de freinage.",
+    "Oublier le frottement dans la 2e loi."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-physique-cd-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Montre que l'accélération pendant la montée est −6 m/s² (donne la valeur numérique).",
+     "answer": -6,
+     "tolerance": 0,
+     "unit": "m/s²",
+     "explanation": "Projection le long de la pente, orientée vers le haut : $-mg\\sin 30\\degree - f = ma$, donc $a = -\\frac{50 + 10}{10} = -6$ m/s²."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la distance parcourue avant l'arrêt (en m).",
+     "answer": 3,
+     "tolerance": 0,
+     "unit": "m",
+     "explanation": "$v^2 - v_0^2 = 2ad$ avec $v = 0$ : $d = \\frac{-36}{2 \\times (-6)} = 3$ m."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la somme des travaux des forces pendant la montée (en J).",
+     "answer": -180,
+     "tolerance": 0,
+     "unit": "J",
+     "explanation": "Théorème de l'énergie cinétique : $\\sum W = \\Delta E_c = 0 - \\frac{1}{2} \\times 10 \\times 36 = -180$ J. Vérification : poids $-10 \\times 10 \\times 3 \\times 0{,}5 = -150$ J, frottement $-10 \\times 3 = -30$ J."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex1-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la durée de la montée (en s).",
+     "answer": 1,
+     "tolerance": 0,
+     "unit": "s",
+     "explanation": "$v = v_0 + at = 0$ donc $t = \\frac{-6}{-6} = 1$ s."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex1-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule l'énergie mécanique perdue pendant la montée (en J, valeur positive).",
+     "answer": 30,
+     "tolerance": 0,
+     "unit": "J",
+     "explanation": "L'énergie mécanique diminue du travail (résistant) du frottement : $|W(\\vec f)| = 10 \\times 3 = 30$ J."
+    }
+   ]
+  },
+  {
+   "id": "1re-physique-cd-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "prompt": "EXERCICE 2 — Partie A : un circuit en série comprend un générateur (E = 20 V, r = 2 Ω), un moteur (E' = 8 V, r' = 1 Ω) et un résistor R = 5 Ω. Partie B : un condensateur de 200 µF, initialement déchargé, est relié à un résistor de 5 kΩ et à une source idéale de tension E = 10 V.",
+   "method": "Pouillet puis lois d'Ohm de chaque dipôle ; charge d'un condensateur $u_C = E(1 - e^{-t/\\tau})$.",
+   "mistakes": [
+    "Oublier r' dans le total de Pouillet.",
+    "Ne pas convertir µF et kΩ."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-physique-cd-blanc-ex2-a",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Partie A. Calcule l'intensité du courant (en A).",
+     "answer": 1.5,
+     "tolerance": 0,
+     "unit": "A",
+     "explanation": "Pouillet : $I = \\frac{20 - 8}{2 + 1 + 5} = \\frac{12}{8} = 1{,}5$ A."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Partie A. Calcule la tension aux bornes du générateur (en V).",
+     "answer": 17,
+     "tolerance": 0,
+     "unit": "V",
+     "explanation": "$U = E - rI = 20 - 2 \\times 1{,}5 = 17$ V."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Partie A. Calcule la puissance mécanique utile du moteur, donnée par $E'I$ (en W).",
+     "answer": 12,
+     "tolerance": 0,
+     "unit": "W",
+     "explanation": "$E'I = 8 \\times 1{,}5 = 12$ W. (La puissance électrique reçue est $UI$ avec $U = E' + r'I = 9{,}5$ V, soit 14,25 W ; la différence, 2,25 W, est perdue par effet Joule dans le moteur.)"
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Partie B. Calcule la constante de temps du circuit RC (en s).",
+     "answer": 1,
+     "tolerance": 0,
+     "unit": "s",
+     "explanation": "$\\tau = RC = 5\\,000 \\times 200 \\times 10^{-6} = 1$ s."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex2-e",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Partie B. Calcule la tension aux bornes du condensateur à t = 2 s (en V, arrondie au centième).",
+     "answer": 8.65,
+     "tolerance": 0.01,
+     "unit": "V",
+     "explanation": "$u_C(2) = 10\\,(1 - e^{-2}) \\approx 10 \\times 0{,}8647 \\approx 8{,}65$ V."
+    }
+   ]
+  },
+  {
+   "id": "1re-physique-cd-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "prompt": "EXERCICE 3 — Partie A : un plateau de platine tourne à vitesse constante à 45 tours par minute. Un point P est à 12 cm de l'axe. Partie B : un conducteur rectiligne de longueur utile 8 cm, parcouru par un courant de 2,5 A, est placé dans un champ magnétique uniforme de 0,4 T.",
+   "method": "Conversion en unités SI, puis formules du cours.",
+   "mistakes": [
+    "Oublier de convertir tours par minute et centimètres."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-physique-cd-blanc-ex3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Partie A. Calcule la vitesse angulaire du plateau (en rad/s, arrondie au centième).",
+     "answer": 4.71,
+     "tolerance": 0.01,
+     "unit": "rad/s",
+     "explanation": "45 tr/min = $\\frac{45 \\times 2\\pi}{60} = 1{,}5\\pi \\approx 4{,}71$ rad/s."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Partie A. Calcule la vitesse du point P (en m/s, arrondie au centième).",
+     "answer": 0.57,
+     "tolerance": 0.01,
+     "unit": "m/s",
+     "explanation": "$v = R\\omega = 0{,}12 \\times 4{,}712 \\approx 0{,}57$ m/s."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex3-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Partie A. Calcule l'accélération de P (en m/s², arrondie au centième).",
+     "answer": 2.66,
+     "tolerance": 0.01,
+     "unit": "m/s²",
+     "explanation": "$a = R\\omega^2 = 0{,}12 \\times 4{,}712^2 \\approx 2{,}66$ m/s², dirigée vers l'axe."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex3-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Partie B. Calcule la force de Laplace quand le conducteur est perpendiculaire au champ (en N).",
+     "answer": 0.08,
+     "tolerance": 0.001,
+     "unit": "N",
+     "explanation": "$F = ILB = 2{,}5 \\times 0{,}08 \\times 0{,}4 = 0{,}08$ N."
+    },
+    {
+     "id": "1re-physique-cd-blanc-ex3-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Partie B. Calcule la force quand le conducteur fait un angle de 30° avec le champ (en N).",
+     "answer": 0.04,
+     "tolerance": 0.001,
+     "unit": "N",
+     "explanation": "$F = 0{,}08 \\times \\sin 30\\degree = 0{,}04$ N."
+    }
+   ]
+  }
+ ]
+}

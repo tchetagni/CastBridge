@@ -1,0 +1,424 @@
+{
+ "chapter": "1re-physique-cd-ch-electricite",
+ "lessons": [
+  {
+   "id": "1re-physique-cd-electricite",
+   "chapter": "1re-physique-cd-ch-electricite",
+   "title": "Électricité : lois d'Ohm et de Pouillet, générateurs, récepteurs, condensateur",
+   "minutes": 50,
+   "programRef": "1re C/D — Électricité : dipôles, lois d'Ohm et de Pouillet, condensateur (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme de 1re C et D ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser les lois d'Ohm (résistor, générateur, récepteur) et la loi de Pouillet.",
+    "Calculer des résistances équivalentes, des intensités, des tensions et des puissances.",
+    "Connaître la charge et la décharge d'un condensateur dans un circuit RC (constante de temps, énergie)."
+   ],
+   "exercises": [
+    "1re-physique-cd-el-01",
+    "1re-physique-cd-el-02",
+    "1re-physique-cd-el-03",
+    "1re-physique-cd-el-04",
+    "1re-physique-cd-el-05",
+    "1re-physique-cd-el-06"
+   ],
+   "selfCheck": [
+    "1re-physique-cd-el-q1",
+    "1re-physique-cd-el-q2",
+    "1re-physique-cd-el-q3",
+    "1re-physique-cd-el-q4",
+    "1re-physique-cd-el-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Appliquer U = RI, la loi des nœuds et la loi des mailles.\n- Utiliser la loi de Pouillet avec générateurs et récepteurs.\n- Étudier la charge et la décharge d'un condensateur."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Lois fondamentales",
+     "md": "- **Loi d'Ohm** (résistor, convention récepteur) : $U = R\\,I$ ($U$ en V, $I$ en A, $R$ en Ω).\n- **Loi des nœuds** : la somme des intensités qui arrivent à un nœud est égale à la somme de celles qui en repartent.\n- **Loi des mailles** : la somme algébrique des tensions le long d'une maille fermée est nulle.\n- **Puissance reçue** par un dipôle : $P = U\\,I$ ; **effet Joule** dans un résistor : $P = R\\,I^2$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Association de résistors",
+     "md": "- **En série** (même intensité) : $R_{eq} = R_1 + R_2 + \\ldots$\n- **En dérivation** (même tension) : $\\frac{1}{R_{eq}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\ldots$ ; pour deux résistors, $R_{eq} = \\frac{R_1 R_2}{R_1 + R_2}$.\nLa résistance équivalente en dérivation est toujours plus petite que la plus petite des résistances."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Générateur, récepteur, loi de Pouillet",
+     "md": "- **Générateur** (force électromotrice $E$, résistance interne $r$) : $U = E - r\\,I$.\n- **Récepteur actif** (moteur, électrolyseur ; force contre-électromotrice $E'$, résistance $r'$) : $U = E' + r'\\,I$.\n- **Pouillet** (circuit en série) : $I = \\frac{\\sum E - \\sum E'}{\\sum R}$, où $\\sum R$ est la somme de toutes les résistances, internes comprises.\n- Rendement d'un générateur : $\\eta = \\frac{UI}{EI} = \\frac{U}{E}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Condensateur",
+     "md": "Un condensateur de capacité $C$ (en farads, F) portant la tension $u_C$ a la charge $q = C\\,u_C$ et l'énergie $W_C = \\frac{1}{2}\\,C\\,u_C^2$.\n- En **dérivation** : $C_{eq} = C_1 + C_2$ ; en **série** : $\\frac{1}{C_{eq}} = \\frac{1}{C_1} + \\frac{1}{C_2}$.\n- Ordres de grandeur : 1 µF = 10⁻⁶ F ; 1 kΩ = 10³ Ω."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Circuit RC : charge et décharge",
+     "md": "Avec un résistor $R$ en série, de constante de temps $\\tau = R\\,C$ (en s) :\n- **charge** sous la tension $E$ : $u_C(t) = E\\,(1 - e^{-t/\\tau})$ ;\n- **décharge** : $u_C(t) = E\\,e^{-t/\\tau}$.\nÀ $t = \\tau$ : $u_C \\approx 0{,}63\\,E$ (charge) ou $0{,}37\\,E$ (décharge). Au bout de $5\\tau$, le régime permanent est pratiquement atteint (99 %). La tension aux bornes d'un condensateur ne varie jamais brusquement."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 270,
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 14,
+      "grid": 2,
+      "xlabel": "t (s)",
+      "ylabel": "u (V)",
+      "curves": [
+       {
+        "expr": "12*(1-exp(-x/2))",
+        "color": "blue",
+        "label": "charge"
+       },
+       {
+        "expr": "12*exp(-x/2)",
+        "color": "red",
+        "label": "décharge"
+       }
+      ],
+      "points": [
+       {
+        "x": 2,
+        "y": 7.59,
+        "label": "t = τ",
+        "color": "green"
+       }
+      ],
+      "segments": []
+     },
+     "caption": "Charge (bleu) et décharge (rouge) d'un condensateur sous E = 12 V avec τ = 2 s : à t = τ, la tension de charge a atteint 63 % de E, soit 7,6 V environ.",
+     "alt": "Deux courbes : l'une croît de 0 vers 12 V (charge), l'autre décroît de 12 V vers 0 (décharge). Un point vert marque t = 2 s sur la courbe de charge, à environ 7,6 V."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : étudier un circuit en série",
+     "md": "1. Repérer les dipôles et leur type (résistor, générateur, récepteur actif).\n2. Calculer la résistance totale (en série : somme ; dérivations : résistance équivalente).\n3. Appliquer Pouillet pour trouver $I$.\n4. Calculer les tensions avec les lois d'Ohm de chaque dipôle, puis les puissances et le rendement."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : générateur et résistor",
+     "statement": "Un générateur (E = 12 V, r = 1 Ω) alimente un résistor de R = 5 Ω. Calcule l'intensité, la tension aux bornes du générateur, la puissance utile et le rendement.",
+     "steps": [
+      {
+       "md": "Pouillet :",
+       "tex": "I = \\frac{E}{R + r} = \\frac{12}{6} = 2\\ \\text{A}"
+      },
+      {
+       "md": "Tension aux bornes du générateur :",
+       "tex": "U = E - rI = 12 - 1 \\times 2 = 10\\ \\text{V}"
+      },
+      {
+       "md": "Puissance utile (reçue par R) et puissance totale :",
+       "tex": "P_u = UI = 20\\ \\text{W} \\quad ; \\quad P_t = EI = 24\\ \\text{W}"
+      },
+      {
+       "md": "Rendement :",
+       "tex": "\\eta = \\frac{20}{24} \\approx 0{,}83 = 83\\ \\%"
+      }
+     ],
+     "answer": "**I = 2 A ; U = 10 V ; Pu = 20 W ; rendement ≈ 83 %.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : charger un condensateur",
+     "statement": "Un condensateur de 470 µF est chargé à travers un résistor de 10 kΩ sous E = 12 V. Calcule la constante de temps, la tension à t = τ et l'énergie finale stockée.",
+     "steps": [
+      {
+       "md": "Constante de temps ($470\\ \\mu\\text{F} = 4{,}7 \\times 10^{-4}$ F ; $10\\ \\text{k}\\Omega = 10^4\\ \\Omega$) :",
+       "tex": "\\tau = RC = 10^4 \\times 4{,}7 \\times 10^{-4} = 4{,}7\\ \\text{s}"
+      },
+      {
+       "md": "À $t = \\tau$ :",
+       "tex": "u_C = 12\\,(1 - e^{-1}) \\approx 12 \\times 0{,}632 \\approx 7{,}6\\ \\text{V}"
+      },
+      {
+       "md": "Énergie finale ($u_C = E = 12$ V) :",
+       "tex": "\\frac{1}{2}CE^2 = \\frac{1}{2} \\times 4{,}7 \\times 10^{-4} \\times 144 \\approx 0{,}034\\ \\text{J}"
+      }
+     ],
+     "answer": "**τ = 4,7 s ; u(τ) ≈ 7,6 V ; énergie ≈ 0,034 J (34 mJ).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la résistance interne $r$ dans le total de Pouillet.\n- Appliquer $U = RI$ à un moteur ou à un générateur (il y a une force (contre-)électromotrice).\n- Additionner les inverses pour des résistors en série (c'est pour la dérivation).\n- Ne pas convertir µF en F ou kΩ en Ω.\n- Penser que le condensateur se charge instantanément : il faut environ $5\\tau$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-el-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-el-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-el-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La loi des mailles, appliquée au circuit RC, donne $E = RC\\frac{du_C}{dt} + u_C$ : c'est cette équation différentielle dont les formules ci-dessus sont les solutions.",
+      "Un flash d'appareil photo utilise un condensateur : il se charge lentement, puis se décharge presque instantanément dans la lampe."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si la charge et la décharge du condensateur (circuit RC, exponentielles) sont au programme de 1re C/D ou de Tle ; ici elles sont présentées sans résoudre l'équation différentielle.",
+    "Vérifier la convention de notation (f.é.m. E, f.c.é.m. E') et la présentation de la loi de Pouillet attendue.",
+    "L'étude des oscillations (circuit RLC) et du courant alternatif n'est pas traitée."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-physique-cd-el-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "Un résistor de 47 Ω est parcouru par un courant de 0,2 A. Calcule la tension à ses bornes (en V).",
+   "answer": 9.4,
+   "tolerance": 0.01,
+   "unit": "V",
+   "explanation": "$U = RI = 47 \\times 0{,}2 = 9{,}4$ V.",
+   "method": "$U = RI$.",
+   "mistakes": [
+    "Diviser au lieu de multiplier."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-el-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "Deux résistors de 12 Ω et 4 Ω sont montés en dérivation. Calcule la résistance équivalente (en Ω).",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "Ω",
+   "explanation": "$R_{eq} = \\frac{12 \\times 4}{12 + 4} = 3\\ \\Omega$ (plus petite que 4 Ω, comme prévu).",
+   "method": "Produit sur somme pour deux résistors en dérivation.",
+   "mistakes": [
+    "Additionner : 16 Ω."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-el-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "Un générateur (E = 9 V, r = 2 Ω) débite un courant de 0,5 A. Calcule la tension à ses bornes (en V).",
+   "answer": 8,
+   "tolerance": 0,
+   "unit": "V",
+   "explanation": "$U = E - rI = 9 - 2 \\times 0{,}5 = 8$ V.",
+   "method": "$U = E - rI$.",
+   "mistakes": [
+    "Écrire $U = E + rI$."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-el-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "Un circuit en série comprend un générateur (E = 24 V, r = 2 Ω), un moteur (E' = 6 V, r' = 1 Ω) et un résistor R = 3 Ω. Calcule l'intensité du courant (en A).",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "A",
+   "explanation": "Pouillet : $I = \\frac{24 - 6}{2 + 1 + 3} = \\frac{18}{6} = 3$ A.",
+   "method": "Pouillet avec la f.c.é.m. au numérateur retranchée.",
+   "mistakes": [
+    "Additionner E et E' au numérateur (5 A)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-el-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "Un condensateur de 100 µF se charge à travers 22 kΩ sous E = 10 V. Quelle est la tension à ses bornes au bout de $t = \\tau$ (en V, arrondie au centième) ?",
+   "answer": 6.32,
+   "tolerance": 0.01,
+   "unit": "V",
+   "explanation": "$\\tau = 22 \\times 10^3 \\times 100 \\times 10^{-6} = 2{,}2$ s ; à $t = \\tau$, $u_C = 10 \\times (1 - e^{-1}) \\approx 6{,}32$ V.",
+   "method": "À t = τ, $u_C = 0{,}632\\,E$ pendant la charge.",
+   "mistakes": [
+    "Donner 3,68 V (valeur pour la décharge)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-el-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "Un générateur (E = 12 V, r = 1 Ω) alimente un circuit extérieur formé de deux résistors R1 = 6 Ω et R2 = 3 Ω montés en dérivation, l'ensemble étant en série avec un résistor R3 = 3 Ω.",
+   "method": "Résistance équivalente, loi de Pouillet, tension de la dérivation, loi d'Ohm.",
+   "mistakes": [
+    "Oublier la résistance interne dans Pouillet (on trouverait 2,4 A).",
+    "Oublier que le courant principal se partage entre R1 et R2."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-physique-cd-el-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la résistance équivalente du circuit extérieur (en Ω).",
+     "answer": 5,
+     "tolerance": 0,
+     "unit": "Ω",
+     "explanation": "Dérivation : $\\frac{6 \\times 3}{6 + 3} = 2\\ \\Omega$ ; en série avec R3 : $2 + 3 = 5\\ \\Omega$."
+    },
+    {
+     "id": "1re-physique-cd-el-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'intensité du courant principal (en A).",
+     "answer": 2,
+     "tolerance": 0,
+     "unit": "A",
+     "explanation": "Pouillet : $I = \\frac{E}{R_{ext} + r} = \\frac{12}{5 + 1} = 2$ A."
+    },
+    {
+     "id": "1re-physique-cd-el-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la tension aux bornes du générateur (en V).",
+     "answer": 10,
+     "tolerance": 0,
+     "unit": "V",
+     "explanation": "$U = E - rI = 12 - 1 \\times 2 = 10$ V."
+    },
+    {
+     "id": "1re-physique-cd-el-06-d",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule l'intensité dans R1 (en A, arrondie au centième).",
+     "answer": 0.67,
+     "tolerance": 0.01,
+     "unit": "A",
+     "explanation": "La tension aux bornes de la dérivation est $2 \\times 2 = 4$ V ; $I_1 = \\frac{4}{6} \\approx 0{,}67$ A (et $I_2 = \\frac{4}{3} \\approx 1{,}33$ A, d'où $I_1 + I_2 = 2$ A)."
+    }
+   ]
+  },
+  {
+   "id": "1re-physique-cd-el-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "Deux résistors de même résistance R en série ont une résistance équivalente :",
+   "choices": [
+    "R/2",
+    "R",
+    "2R",
+    "R²"
+   ],
+   "answer": 2,
+   "explanation": "En série, les résistances s'additionnent."
+  },
+  {
+   "id": "1re-physique-cd-el-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "La loi des nœuds exprime la conservation :",
+   "choices": [
+    "de la tension",
+    "de la résistance",
+    "de la puissance",
+    "de l'intensité (de la charge électrique)"
+   ],
+   "answer": 3,
+   "explanation": "Ce qui entre dans un nœud en ressort : la charge ne s'accumule pas."
+  },
+  {
+   "id": "1re-physique-cd-el-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "La constante de temps d'un circuit RC est :",
+   "choices": [
+    "$\\tau = RC$",
+    "$\\tau = R/C$",
+    "$\\tau = C/R$",
+    "$\\tau = R + C$"
+   ],
+   "answer": 0,
+   "explanation": "Avec R en Ω et C en F, $RC$ s'exprime en secondes."
+  },
+  {
+   "id": "1re-physique-cd-el-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "Pour un moteur de f.c.é.m. E' et de résistance r', la tension à ses bornes est :",
+   "choices": [
+    "$U = E' - r'I$",
+    "$U = E' + r'I$",
+    "$U = r'I$ seulement",
+    "$U = E'/r'$"
+   ],
+   "answer": 1,
+   "explanation": "Un récepteur actif reçoit de l'énergie : la tension est la somme de la f.c.é.m. et de la chute ohmique."
+  },
+  {
+   "id": "1re-physique-cd-el-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-electricite",
+   "prompt": "Un condensateur de 2 µF est chargé sous 10 V. Sa charge est :",
+   "choices": [
+    "$2 \\times 10^{-6}$ C",
+    "20 C",
+    "$2 \\times 10^{-5}$ C",
+    "$5 \\times 10^{6}$ C"
+   ],
+   "answer": 2,
+   "explanation": "$q = Cu = 2 \\times 10^{-6} \\times 10 = 2 \\times 10^{-5}$ C."
+  }
+ ]
+}

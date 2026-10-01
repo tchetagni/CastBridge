@@ -1,0 +1,505 @@
+{
+ "chapter": "1re-chimie-cd-ch-matiere",
+ "lessons": [
+  {
+   "id": "1re-chimie-cd-matiere",
+   "chapter": "1re-chimie-cd-ch-matiere",
+   "title": "Quantité de matière, concentrations, dilution et dosage",
+   "minutes": 45,
+   "programRef": "1re C/D — Chimie : quantité de matière, solutions, dosages (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme de 1re C et D ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une quantité de matière à partir d'une masse, d'un volume de gaz ou d'une concentration.",
+    "Calculer et utiliser les concentrations molaire et massique ; préparer une solution par dissolution ou dilution.",
+    "Exploiter un dosage simple à l'équivalence."
+   ],
+   "exercises": [
+    "1re-chimie-cd-qm-01",
+    "1re-chimie-cd-qm-02",
+    "1re-chimie-cd-qm-03",
+    "1re-chimie-cd-qm-04",
+    "1re-chimie-cd-qm-05",
+    "1re-chimie-cd-qm-06"
+   ],
+   "selfCheck": [
+    "1re-chimie-cd-qm-q1",
+    "1re-chimie-cd-qm-q2",
+    "1re-chimie-cd-qm-q3",
+    "1re-chimie-cd-qm-q4",
+    "1re-chimie-cd-qm-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Passer de la masse, du volume ou de la concentration à la quantité de matière.\n- Réaliser des calculs de dilution.\n- Exploiter l'équivalence d'un dosage."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Quantité de matière",
+     "md": "La quantité de matière $n$ s'exprime en moles (mol).\n- À partir de la masse : $n = \\frac{m}{M}$ ($m$ en g, $M$ masse molaire en g/mol).\n- À partir du nombre d'entités : $n = \\frac{N}{N_A}$ avec $N_A \\approx 6{,}02 \\times 10^{23}$ mol⁻¹.\n- Pour un **gaz** : $n = \\frac{V}{V_m}$ ; le volume molaire $V_m$ dépend de la température et de la pression (environ 24 L/mol à 20 °C et 1 atm, 22,4 L/mol à 0 °C : il est donné dans l'énoncé)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Masse molaire",
+     "md": "La masse molaire moléculaire est la somme des masses molaires atomiques. Valeurs usuelles arrondies : H = 1 ; C = 12 ; N = 14 ; O = 16 ; Na = 23 ; S = 32 ; Cl = 35,5 g/mol.\nExemples : $M(\\text{H}_2\\text{O}) = 2 \\times 1 + 16 = 18$ g/mol ; $M(\\text{NaCl}) = 23 + 35{,}5 = 58{,}5$ g/mol.\nLes valeurs utilisées sont toujours rappelées dans l'énoncé."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Concentrations",
+     "md": "Pour un soluté dissous dans un volume $V$ de solution :\n- concentration **molaire** : $C = \\frac{n}{V}$ (mol/L, avec $V$ en L) ;\n- concentration **massique** : $C_m = \\frac{m}{V}$ (g/L) ;\n- lien : $C_m = C \\times M$.\nUn volume en mL se convertit en L : 250 mL = 0,250 L."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Dilution",
+     "md": "Diluer, c'est ajouter du solvant : la quantité de soluté **ne change pas**. Donc :\n$C_i\\,V_i = C_f\\,V_f$,\net le facteur de dilution est $F = \\frac{C_i}{C_f} = \\frac{V_f}{V_i}$.\n**Protocole** : prélever $V_i$ avec une pipette jaugée, la verser dans une fiole jaugée de volume $V_f$, ajouter de l'eau distillée jusqu'aux 3/4, agiter, puis compléter au trait de jauge."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 70,
+        "w": 110,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 50,
+        "text": "Solution mère",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 130,
+        "text": "Ci = 0,50 mol/L",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 152,
+        "text": "Vi = 25 mL",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 130,
+        "x2": 235,
+        "y2": 130,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 192,
+        "y": 112,
+        "text": "+ eau",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 40,
+        "w": 140,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 30,
+        "text": "Solution fille",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 125,
+        "text": "Cf = 0,050 mol/L",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 147,
+        "text": "Vf = 250 mL",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 214,
+        "text": "n = Ci × Vi = Cf × Vf",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Dilution : 25 mL de solution mère à 0,50 mol/L sont complétés avec de l'eau jusqu'à 250 mL ; la concentration est divisée par 10 (facteur de dilution F = 10).",
+     "alt": "Deux récipients reliés par une flèche : à gauche la solution mère (0,50 mol/L, 25 mL), à droite la solution fille (0,050 mol/L, 250 mL), obtenue en ajoutant de l'eau."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Dosage à l'équivalence",
+     "md": "Doser, c'est déterminer une concentration inconnue grâce à une réaction totale et rapide avec un réactif de concentration connue. À l'**équivalence**, les réactifs ont été introduits dans les proportions de l'équation. Pour $a\\,A + b\\,B \\to \\ldots$ :\n$\\frac{n_A}{a} = \\frac{n_B}{b}$.\nSi $a = b = 1$ : $C_A\\,V_A = C_B\\,V_B$. L'équivalence est repérée par un changement de couleur d'un indicateur ou par pH-métrie."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : dissolution",
+     "statement": "On dissout 5,85 g de chlorure de sodium dans de l'eau pour obtenir 500 mL de solution. Calcule la concentration molaire et la concentration massique ($M(\\text{NaCl}) = 58{,}5$ g/mol).",
+     "steps": [
+      {
+       "md": "Quantité de matière :",
+       "tex": "n = \\frac{m}{M} = \\frac{5{,}85}{58{,}5} = 0{,}100\\ \\text{mol}"
+      },
+      {
+       "md": "Concentration molaire ($V = 0{,}500$ L) :",
+       "tex": "C = \\frac{n}{V} = \\frac{0{,}100}{0{,}500} = 0{,}200\\ \\text{mol/L}"
+      },
+      {
+       "md": "Concentration massique :",
+       "tex": "C_m = \\frac{5{,}85}{0{,}500} = 11{,}7\\ \\text{g/L} = C \\times M"
+      }
+     ],
+     "answer": "**C = 0,200 mol/L ; Cm = 11,7 g/L.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : préparer une solution diluée",
+     "statement": "On veut préparer 250 mL de solution à 0,050 mol/L à partir d'une solution mère à 0,50 mol/L. Quel volume de solution mère faut-il prélever ?",
+     "steps": [
+      {
+       "md": "Conservation de la quantité de soluté :",
+       "tex": "C_i V_i = C_f V_f"
+      },
+      {
+       "md": "Donc :",
+       "tex": "V_i = \\frac{C_f V_f}{C_i} = \\frac{0{,}050 \\times 250}{0{,}50} = 25\\ \\text{mL}"
+      },
+      {
+       "md": "Contrôle : le facteur de dilution est $F = 0{,}50 \\div 0{,}050 = 10$ et $250 \\div 10 = 25$ mL."
+      }
+     ],
+     "answer": "**On prélève 25 mL de solution mère et on complète à 250 mL.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : un dosage",
+     "statement": "On dose 10,0 mL d'une solution d'acide chlorhydrique (HCl) avec de la soude (NaOH) à 0,10 mol/L. L'équivalence est atteinte pour 12,5 mL de soude versés. Équation : $\\text{H}_3\\text{O}^+ + \\text{HO}^- \\to 2\\,\\text{H}_2\\text{O}$.",
+     "steps": [
+      {
+       "md": "À l'équivalence, les coefficients valent 1 : $n_{acide} = n_{base}$ versée.",
+       "tex": "C_a V_a = C_b V_b"
+      },
+      {
+       "md": "Donc :",
+       "tex": "C_a = \\frac{0{,}10 \\times 12{,}5}{10{,}0} = 0{,}125\\ \\text{mol/L}"
+      }
+     ],
+     "answer": "**C = 0,125 mol/L** (les volumes peuvent rester en mL dans un rapport)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Garder un volume en mL dans $C = n/V$ : convertir en L.\n- Confondre $C$ (mol/L) et $C_m$ (g/L).\n- Dans une dilution, écrire $V_i = V_f$ ou oublier que $V_f$ est le volume **total** après dilution (et non le volume d'eau ajouté).\n- Utiliser $C_A V_A = C_B V_B$ quand les coefficients stœchiométriques ne sont pas égaux à 1.\n- Utiliser un volume molaire sans vérifier les conditions (température et pression)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-chimie-cd-qm-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-chimie-cd-qm-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-chimie-cd-qm-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "En laboratoire, la verrerie jaugée (pipette jaugée, fiole jaugée) est utilisée pour les volumes précis ; une éprouvette graduée est moins précise.",
+      "Pour une même quantité de soluté, plus on ajoute de solvant, plus la concentration baisse : un sirop trop sucré se dilue avec de l'eau."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le volume molaire est donné dans l'énoncé (24 L/mol à 20 °C, 1 atm ; 22,4 L/mol à 0 °C) : vérifier la valeur privilégiée dans les programmes camerounais.",
+    "Le dosage est traité ici de façon introductive (équivalence, relation stœchiométrique) ; la courbe pH = f(V), le pH à la demi-équivalence et le choix de l'indicateur sont à vérifier selon le programme.",
+    "Les masses molaires sont arrondies (Cl = 35,5 g/mol)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-chimie-cd-qm-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "Calcule la quantité de matière contenue dans 36 g d'eau ($M = 18$ g/mol), en mol.",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "mol",
+   "explanation": "$n = \\frac{m}{M} = \\frac{36}{18} = 2$ mol.",
+   "method": "$n = m/M$.",
+   "mistakes": [
+    "Multiplier m par M (648)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-qm-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "Quelle quantité de matière de gaz contiennent 6,0 L de gaz dans des conditions où $V_m = 24$ L/mol (en mol) ?",
+   "answer": 0.25,
+   "tolerance": 0.001,
+   "unit": "mol",
+   "explanation": "$n = \\frac{V}{V_m} = \\frac{6{,}0}{24} = 0{,}25$ mol.",
+   "method": "$n = V/V_m$.",
+   "mistakes": [
+    "Écrire $n = V_m / V$ (4 mol)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-qm-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "On dissout 0,40 mol d'un soluté dans de l'eau pour obtenir 250 mL de solution. Calcule la concentration molaire (en mol/L).",
+   "answer": 1.6,
+   "tolerance": 0.001,
+   "unit": "mol/L",
+   "explanation": "$C = \\frac{n}{V} = \\frac{0{,}40}{0{,}250} = 1{,}6$ mol/L.",
+   "method": "Convertir 250 mL en 0,250 L.",
+   "mistakes": [
+    "Utiliser 250 au lieu de 0,250 (0,0016 mol/L)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-qm-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "On veut préparer 500 mL de solution à 0,10 mol/L à partir d'une solution mère à 2,0 mol/L. Quel volume de solution mère faut-il prélever (en mL) ?",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "mL",
+   "explanation": "$V_i = \\frac{C_f V_f}{C_i} = \\frac{0{,}10 \\times 500}{2{,}0} = 25$ mL.",
+   "method": "$C_iV_i = C_fV_f$.",
+   "mistakes": [
+    "Prélever 475 mL (le volume d'eau à ajouter)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-qm-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "On dose 20,0 mL d'une solution d'acide sulfurique ($\\text{H}_2\\text{SO}_4$) par de la soude à 0,10 mol/L. L'équivalence est atteinte pour 16,0 mL. Équation : $\\text{H}_2\\text{SO}_4 + 2\\,\\text{NaOH} \\to \\text{Na}_2\\text{SO}_4 + 2\\,\\text{H}_2\\text{O}$. Calcule la concentration de l'acide (en mol/L).",
+   "answer": 0.04,
+   "tolerance": 0.0005,
+   "unit": "mol/L",
+   "explanation": "$n(\\text{NaOH}) = 0{,}10 \\times 0{,}0160 = 1{,}6 \\times 10^{-3}$ mol. Par la stœchiométrie $n(\\text{acide}) = \\frac{1{,}6 \\times 10^{-3}}{2} = 8{,}0 \\times 10^{-4}$ mol, donc $C = \\frac{8{,}0 \\times 10^{-4}}{0{,}0200} = 0{,}040$ mol/L.",
+   "method": "$n_A/a = n_B/b$ avec $a = 1$ et $b = 2$.",
+   "mistakes": [
+    "Écrire $C_AV_A = C_BV_B$ (0,08 mol/L) sans tenir compte du coefficient 2."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-qm-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "On étudie un vinaigre fictif dont l'acide est l'acide éthanoïque, $\\text{CH}_3\\text{COOH}$ ($M = 60$ g/mol). On le dilue 10 fois, puis on dose 20,0 mL de la solution diluée par de la soude à 0,10 mol/L ; l'équivalence est atteinte pour 14,0 mL. Équation : $\\text{CH}_3\\text{COOH} + \\text{HO}^- \\to \\text{CH}_3\\text{COO}^- + \\text{H}_2\\text{O}$.",
+   "method": "Équivalence, puis facteur de dilution, puis $C_m = CM$.",
+   "mistakes": [
+    "Oublier de multiplier par le facteur de dilution.",
+    "Convertir mal les mL en L."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-chimie-cd-qm-06-a",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule la concentration de l'acide dans la solution diluée (en mol/L).",
+     "answer": 0.07,
+     "tolerance": 0.0005,
+     "unit": "mol/L",
+     "explanation": "Les coefficients valent 1 : $C_dV_d = C_bV_b$ donc $C_d = \\frac{0{,}10 \\times 14{,}0}{20{,}0} = 0{,}070$ mol/L."
+    },
+    {
+     "id": "1re-chimie-cd-qm-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "En déduire la concentration du vinaigre non dilué (en mol/L).",
+     "answer": 0.7,
+     "tolerance": 0.005,
+     "unit": "mol/L",
+     "explanation": "La solution a été diluée 10 fois : $C = 10 \\times 0{,}070 = 0{,}70$ mol/L."
+    },
+    {
+     "id": "1re-chimie-cd-qm-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la concentration massique de l'acide dans le vinaigre (en g/L).",
+     "answer": 42,
+     "tolerance": 0.1,
+     "unit": "g/L",
+     "explanation": "$C_m = C \\times M = 0{,}70 \\times 60 = 42$ g/L."
+    },
+    {
+     "id": "1re-chimie-cd-qm-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quelle masse d'acide contiennent 100 mL de ce vinaigre (en g) ?",
+     "answer": 4.2,
+     "tolerance": 0.01,
+     "unit": "g",
+     "explanation": "$m = C_m \\times V = 42 \\times 0{,}100 = 4{,}2$ g."
+    }
+   ]
+  },
+  {
+   "id": "1re-chimie-cd-qm-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "La concentration molaire d'une solution s'exprime en :",
+   "choices": [
+    "g/mol",
+    "mol",
+    "mol/L",
+    "L/mol"
+   ],
+   "answer": 2,
+   "explanation": "$C = n/V$ : moles par litre."
+  },
+  {
+   "id": "1re-chimie-cd-qm-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "On dissout 4,0 g de NaOH ($M = 40$ g/mol) dans 0,50 L de solution. La concentration est :",
+   "choices": [
+    "0,10 mol/L",
+    "2,0 mol/L",
+    "0,080 mol/L",
+    "0,20 mol/L"
+   ],
+   "answer": 3,
+   "explanation": "$n = 4{,}0/40 = 0{,}10$ mol ; $C = 0{,}10/0{,}50 = 0{,}20$ mol/L."
+  },
+  {
+   "id": "1re-chimie-cd-qm-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "Lors d'une dilution, quelle grandeur reste constante ?",
+   "choices": [
+    "la quantité de matière de soluté",
+    "la concentration",
+    "le volume de la solution",
+    "la masse volumique"
+   ],
+   "answer": 0,
+   "explanation": "On ajoute seulement du solvant : $n = C_iV_i = C_fV_f$."
+  },
+  {
+   "id": "1re-chimie-cd-qm-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "Le facteur de dilution est 20. On veut 100 mL de solution fille. On prélève :",
+   "choices": [
+    "20 mL de solution mère",
+    "5 mL de solution mère",
+    "2 mL de solution mère",
+    "95 mL de solution mère"
+   ],
+   "answer": 1,
+   "explanation": "$V_i = V_f/F = 100/20 = 5$ mL."
+  },
+  {
+   "id": "1re-chimie-cd-qm-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-matiere",
+   "prompt": "La relation entre $C$ (mol/L), $C_m$ (g/L) et $M$ (g/mol) est :",
+   "choices": [
+    "$C_m = C / M$",
+    "$C = C_m \\times M$",
+    "$C_m = C \\times M$",
+    "$C_m = M / C$"
+   ],
+   "answer": 2,
+   "explanation": "En multipliant des mol/L par des g/mol, on obtient des g/L."
+  }
+ ]
+}
