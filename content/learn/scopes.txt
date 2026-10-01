@@ -1,0 +1,11 @@
+# « Apprendre » : les lots. UN lot = UNE classe/un niveau (scope), construit par `tools/build-learn-lots` (docs/LEARN.md § Lots).
+# Les identifiants de packs (dossiers de content/learn/) restent la source de vérité ; ce tableau les rattache à un lot.
+# Format : scope | titre du lot | ids des packs (séparés par des espaces). Un pack est dans UN seul lot.
+# Un lot est autonome : les prérequis d'une fiche ne sortent pas du lot (vérifié par la construction).
+maternelle | Maternelle | maternelle-decouverte
+cm2 | CM2 – CEP | cep-francais cep-maths cep-sciences
+class6 | Class 6 – FSLC | fslc-english fslc-maths fslc-science
+3e | 3e – BEPC | bepc-francais bepc-maths bepc-pct
+form5 | Form 5 – GCE O Level | gceol-biology gceol-english gceol-maths
+1ere | Première – Probatoire | probatoire-francais
+tle-cd | Terminale C/D – Bac | bac-maths bac-physique-chimie

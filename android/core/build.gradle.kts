@@ -36,6 +36,26 @@ tasks.register<JavaExec>("buildLearnPacks") {
     args("build", learnContent.absolutePath, layout.buildDirectory.dir("learn-packs").get().asFile.absolutePath)
 }
 
+// Lots (docs/LEARN.md § Lots): one zip per class + lots-catalog.json (the LotMeta list for the server's publish endpoint).
+// -Pupdate bumps the version of the lots whose content changed and rewrites content/learn/lots.json; fails above 3 MB per lot.
+tasks.register<JavaExec>("buildLearnLots") {
+    group = "castbridge"
+    description = "Builds every « Apprendre » lot (one per class) + lots-catalog.json into build/learn-lots and prints the size report"
+    dependsOn(tasks.named("compileKotlin"))
+    classpath = learnToolClasspath
+    mainClass.set("castbridge.core.learn.LearnTool")
+    args(listOf("lots", learnContent.absolutePath, layout.buildDirectory.dir("learn-lots").get().asFile.absolutePath) + (if (project.hasProperty("update")) listOf("--update") else emptyList()))
+}
+
+tasks.register<JavaExec>("reviewLearn") {
+    group = "castbridge"
+    description = "Writes docs/LEARN-REVIEW.md: per lot, what the teachers must verify"
+    dependsOn(tasks.named("compileKotlin"))
+    classpath = learnToolClasspath
+    mainClass.set("castbridge.core.learn.LearnTool")
+    args("review", learnContent.absolutePath, rootProject.projectDir.parentFile.resolve("docs/LEARN-REVIEW.md").absolutePath)
+}
+
 tasks.register<JavaExec>("checkLearnContent") {
     group = "castbridge"
     description = "Validates the « Apprendre » sources and prints the coverage table"

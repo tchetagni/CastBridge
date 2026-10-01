@@ -26,6 +26,9 @@ interface LessonSource {
 class PackRef(val manifest: PackManifest, val origin: String, val file: File? = null, val bytes: () -> InputStream, val removable: Boolean = false) {
     /** The source that listed this reference (set by [LearnLibrary]). */
     @Volatile var source: LessonSource? = null
+    /** The lot (class) this pack belongs to, when its source knows it (installed lot, embedded catalog); else guessed from the level. */
+    var lot: String? = null
+    val scope: String? get() = lot ?: LearnScopes.guess(manifest)
     val id get() = manifest.id
     val version get() = manifest.version
     override fun toString() = "${manifest.id} v${manifest.version} ($origin)"
@@ -39,7 +42,7 @@ class EmbeddedLessonSource(private val base: String = "/castbridge/learn/embedde
         LearnCatalogFile.parse(cat).mapNotNull { item ->
             val f = item.file ?: return@mapNotNull null
             val m = runCatching { res(f)?.use { PackReader.manifest(it) } }.getOrNull() ?: return@mapNotNull null
-            PackRef(m, origin, null, { res(f) ?: throw IOException("ressource $f absente") })
+            PackRef(m, origin, null, { res(f) ?: throw IOException("ressource $f absente") }).also { it.lot = item.scope }
         }
     }
     private fun res(name: String): InputStream? = EmbeddedLessonSource::class.java.getResourceAsStream(base + name)
