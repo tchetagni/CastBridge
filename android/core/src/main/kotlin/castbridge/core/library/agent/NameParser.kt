@@ -43,13 +43,16 @@ data class Parsed(
 ) {
     val titleKey: String get() = Text.key(title)
 
+    /** Same series whatever the spelling (spaces, dots, camelCase): used for the identity of an episode and for the series folders. */
+    val groupKey: String get() = Text.groupKey(title)
+
     /** What makes two files "the same thing" whatever their quality, or null if unknown. */
     val identity: String?
         get() = when {
             title.isBlank() -> null
-            kind == Kind.SERIES && season != null && episode != null -> "s:$titleKey:$season:$episode"
-            kind == Kind.SERIES && date != null -> "d:$titleKey:$date"
-            kind == Kind.MOVIE -> "m:$titleKey:${year ?: ""}" + (edition?.let { ":$it" } ?: "") + (part?.let { "#$it" } ?: "")
+            kind == Kind.SERIES && season != null && episode != null -> "s:$groupKey:$season:$episode"
+            kind == Kind.SERIES && date != null -> "d:$groupKey:$date"
+            kind == Kind.MOVIE -> "m:$groupKey:${year ?: ""}" + (edition?.let { ":$it" } ?: "") + (part?.let { "#$it" } ?: "")
             (kind == Kind.MUSIC || kind == Kind.CLIP) && artist != null -> "a:${Text.key(artist)}:$titleKey"
             else -> null
         }

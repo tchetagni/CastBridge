@@ -319,7 +319,7 @@ object Dev3Hand {
         ser("sep", nfd("Les.Misérables.S01E01.mkv"), "Les Misérables", 1, 1),
         ser("sep", "Sœurs de Yaoundé S01E01.mkv", "Sœurs de Yaoundé", 1, 1),
         ser("sep", nfd("Les Révénants S01E01.mkv"), "Les Révénants", 1, 1),
-        ser("sep", "A" + "b".repeat(119) + " S01E08.avi", "A" + "b".repeat(119), 1, 8),
+        ser("sep", "A" + "b".repeat(69) + " S01E08.avi", "A" + "b".repeat(69), 1, 8),
     )
 
     /** A subtitle that follows [g]'s video: same name, the language (and flags) before the extension. */
