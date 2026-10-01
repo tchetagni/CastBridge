@@ -129,7 +129,30 @@ open class ConsoleActivity : ComponentActivity() {
             if (uri != null) runCatching { contentResolver.openOutputStream(uri)?.use { it.write((fileContent ?: "").toByteArray()) } }
                 .onSuccess { info = "Fichier « activation » enregistré : copiez-le dans Download/CastBridge de la clé USB de la TV." }.onFailure { error = "Enregistrement impossible : ${it.message}" }
         }
+        var tvs by remember { mutableStateOf(TvBluetooth.paired(this@ConsoleActivity)) }; var chosen by remember { mutableStateOf<TvBluetooth.Tv?>(null) }
+        var btBusy by remember { mutableStateOf(false) }; var btMsg by remember { mutableStateOf<String?>(null) }
+        val askBt = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { tvs = TvBluetooth.paired(this@ConsoleActivity) }
+        fun onBt(work: () -> String?) { btBusy = true; btMsg = null
+            Thread { val r = runCatching(work).fold({ it }, { it.message ?: "Échec" }); runOnUiThread { btMsg = r; btBusy = false } }.start() }
         Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("TV en Bluetooth (sans rien saisir)", style = MaterialTheme.typography.titleSmall)
+                if (!TvBluetooth.permitted(this@ConsoleActivity)) {
+                    Text("Autorisez le Bluetooth pour voir vos TV appairées.", style = MaterialTheme.typography.bodySmall)
+                    Button({ if (android.os.Build.VERSION.SDK_INT >= 31) askBt.launch(android.Manifest.permission.BLUETOOTH_CONNECT) }) { Text("Autoriser") }
+                } else if (tvs.isEmpty()) Text("Aucun appareil appairé : appairez d'abord la TV (réglages Bluetooth du téléphone).", style = MaterialTheme.typography.bodySmall)
+                else {
+                    tvs.forEach { tv -> FilterChip(chosen?.address == tv.address, { chosen = tv; btMsg = null }, { Text(tv.name) }) }
+                    Button({ val tv = chosen ?: return@Button
+                        onBt { TvBluetooth.with(this@ConsoleActivity, tv.address) { c -> c.deviceInfo() }?.let { info -> runOnUiThread { input = info; token = null; error = null }; "Demande lue : code de la TV rempli ci-dessous. Choisissez Essai ou Production, puis Générer." } ?: "La TV n'a pas donné son code" }
+                    }, enabled = chosen != null && !btBusy, modifier = Modifier.fillMaxWidth()) { Text("1. Lire le code de la TV") }
+                    Button({ val tv = chosen ?: return@Button; val t = token ?: return@Button
+                        onBt { TvBluetooth.with(this@ConsoleActivity, tv.address) { c -> c.sendActivation(t) }.let { a -> if (a.ok) { store.journal("envoi-bt", tv.name, "-", "-", 0); "TV activée par Bluetooth." } else "Refusée par la TV : ${a.message}" } }
+                    }, enabled = chosen != null && token != null && !btBusy, modifier = Modifier.fillMaxWidth()) { Text("3. Envoyer l'activation à la TV") }
+                    Text("2. Entre les deux : « Générer » (plus bas).", style = MaterialTheme.typography.bodySmall)
+                }
+                btMsg?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
+            } }
             OutlinedTextField(input, { input = it; token = null; error = null }, label = { Text("Code d'appareil (XXXX-XXXX-XXXX-XXXX) ou demande d'appareil complète") },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 90.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

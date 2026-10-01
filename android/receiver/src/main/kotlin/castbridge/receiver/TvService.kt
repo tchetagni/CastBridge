@@ -176,6 +176,9 @@ class TvService : Service(), Device {
             main.postDelayed(this, 5_000)
         }
     }
+    private var ownerBt: OwnerBtHost? = null
+    fun startOwnerChannel() { if (ownerBt == null) ownerBt = OwnerBtHost(this); runCatching { ownerBt?.start() } }
+
     private fun watchForActivation() {
         setStatus("0-storage", "Usage soumis à autorisation : activation requise")
         main.removeCallbacks(activationWatch); main.postDelayed(activationWatch, 5_000)
@@ -187,6 +190,7 @@ class TvService : Service(), Device {
         if (started) return
         // A locked TV starts no server, no pairing, no sending, no telemetry: only a watch for the activation (the activation screen or the USB file unlocks it)
         ActivationCenter.init(this)
+        startOwnerChannel()                                      // the owner's phone can push the activation by Bluetooth, locked or not
         if (ActivationCenter.locked()) { watchForActivation(); return }
         started = true
         prefs = TvPrefs(this)
@@ -395,6 +399,7 @@ class TvService : Service(), Device {
 
     fun onPermissionsReady() {
         hookCapture()
+        startOwnerChannel()
         bt?.start()
         btApi?.start()
         gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted, ::gatewayStatus)
@@ -793,6 +798,7 @@ class TvService : Service(), Device {
         path == "/api/bluetooth" && method == "GET" -> bt?.let { ApiReply(200, it.stateJson(statuses["1-bt"])) }
         path == "/api/bluetooth/discoverable" && method == "POST" -> {
             if (bt?.hasPermission() == true) bt?.start()
+            startOwnerChannel()
             val msg = onScreen { act -> (act as? PlayerActivity)?.makeDiscoverable(); "Demande envoyée : acceptez-la sur l'écran de la TV" }
             ApiReply(202, """{"message":${ReceiverServer.q(msg ?: "")}}""")
         }
@@ -937,7 +943,7 @@ class TvService : Service(), Device {
             (volumeCallback as? android.os.storage.StorageManager.StorageVolumeCallback)?.let { getSystemService(android.os.storage.StorageManager::class.java).unregisterStorageVolumeCallback(it) }
         }
         main.removeCallbacks(storageTick)
-        bt?.stop(); btApi?.stop(); wd?.stop(); ssh?.stop(); updater?.stop(); gateway?.stop()
+        ownerBt?.stop(); bt?.stop(); btApi?.stop(); wd?.stop(); ssh?.stop(); updater?.stop(); gateway?.stop()
         server?.stop(); server = null
         library?.worker?.stopped = true
         releaseLocks()

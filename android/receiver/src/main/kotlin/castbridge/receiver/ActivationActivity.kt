@@ -100,7 +100,16 @@ class ActivationActivity : Activity() {
         finish()
     }
 
-    override fun onResume() { super.onResume(); h.post(poll) }
+    override fun onResume() {
+        super.onResume(); h.post(poll)
+        // the owner's phone pushes the activation by Bluetooth: on recent Android that needs the permission, asked here because a locked TV asks nothing else
+        if (android.os.Build.VERSION.SDK_INT >= 31 && checkSelfPermission(android.Manifest.permission.BLUETOOTH_CONNECT) != android.content.pm.PackageManager.PERMISSION_GRANTED)
+            runCatching { requestPermissions(arrayOf(android.Manifest.permission.BLUETOOTH_CONNECT), 77) }
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 77) TvService.running?.startOwnerChannel()
+    }
     override fun onPause() { super.onPause(); h.removeCallbacks(poll) }
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean =
         if (keyCode == KeyEvent.KEYCODE_BACK && ActivationCenter.state() is GateState.Locked) true else super.onKeyDown(keyCode, event)      // no way out while locked

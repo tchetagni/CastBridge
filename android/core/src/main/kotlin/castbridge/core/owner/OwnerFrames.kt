@@ -10,7 +10,7 @@ import java.io.InputStream
  * [type:1][length:2 big-endian][payload]. Nothing here is secret: every command inside is signed (see [OwnerCommand]).
  */
 object OwnerFrames {
-    const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000004"
+    const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000005"
     const val MAGIC = "CBTO"
     const val MAX_PAYLOAD = 4096
 

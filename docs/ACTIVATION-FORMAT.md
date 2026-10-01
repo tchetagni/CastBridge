@@ -106,7 +106,7 @@ Un ordre ne peut **jamais** accorder plus que la portée de sa clé ; la clé du
 | Canal | Contenu exact |
 |---|---|
 | **Fichier** | `Download/CastBridge/activation` : le jeton `cbx1…` + un LF. Lu au démarrage et à l'insertion de la clé USB (CRLF, BOM UTF-8 et lignes vides tolérés). |
-| **Bluetooth** | service propriétaire `7c5e3b9a-4d2f-4c61-9b0e-cb0000000004` : trame `ACTIVATION` (type 8) dont la charge utile est le jeton ASCII (§ 5) ; un ordre voyage dans le même type de trame ou dans le canal des ordres. |
+| **Bluetooth** | service propriétaire `7c5e3b9a-4d2f-4c61-9b0e-cb0000000005` (le `…04` est pris par le tunnel API partagé, `BtProtocol.API_MUX_SERVICE_UUID`) : trame `ACTIVATION` (type 8) dont la charge utile est le jeton ASCII (§ 5) ; un ordre voyage dans le même type de trame ou dans le canal des ordres. |
 | **QR** | le jeton tel quel (ASCII, une ligne). |
 | **Texte saisissable complet** | `GroupedText` : octets ASCII du jeton précédés de leur **longueur sur 2 octets (grand-boutiste)**, en Base32 Crockford, complétés par des `0` à un multiple de 4 caractères, puis groupes de **5** = 4 de données + 1 contrôle (sel = rang du groupe, à partir de 1), séparés par `-`. Très long (≈ 1 500 caractères) : à réserver à un copier-coller. |
 | **Clé compacte** (saisie manuelle) | § 4.1 ; **165 caractères**, 33 groupes. |

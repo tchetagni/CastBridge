@@ -25,7 +25,7 @@ Format et vérificateur : TRIAL-EDITION.md § 6 (`Activation`, `CompactActivatio
 La console du téléphone propriétaire est l'un des **trois outils d'émission** (avec l'application de bureau et le serveur) : même bibliothèque `ActivationIssuer`, **une clé par outil, jamais partagée** (`kid` et **portées** : bureau = toutes, téléphone = toutes sauf `REGISTRY`, serveur = essai + production + révocation, **sans « tout ouvert » ni transfert**) ; un outil compromis se révoque seul. Le **transfert** de licence (portée `TRANSFER`) se fait ici ou sur le bureau, **jamais depuis le serveur** ; le **registre signé** des licences se synchronise entre les trois outils (voir TRIAL-EDITION.md § 12 et ACTIVATION-FORMAT.md § 8-9). Écran « Générer un jeton » : voir `docs/agent-briefs/activation-tools.md`.
 
 ## 5. Canal Bluetooth propriétaire (additif)
-Un **service dédié** (`7c5e3b9a-4d2f-4c61-9b0e-cb0000000004`, après le service API `…03`), jamais mélangé aux services existants : les anciennes TV et les anciens téléphones **ne le voient pas** (rétrocompatible, rien à migrer). Trames (`OwnerFrames`) : magique `CBTO` une fois, puis `[type:1][longueur:2][charge utile]`, 4 096 octets au plus :
+Un **service dédié** (`7c5e3b9a-4d2f-4c61-9b0e-cb0000000005`, après le tunnel API partagé `…04`), jamais mélangé aux services existants : les anciennes TV et les anciens téléphones **ne le voient pas** (rétrocompatible, rien à migrer). Trames (`OwnerFrames`) : magique `CBTO` une fois, puis `[type:1][longueur:2][charge utile]`, 4 096 octets au plus :
 
 | Type | Sens | Contenu |
 |---|---|---|
@@ -79,3 +79,7 @@ Pendant cette phase **aucun serveur n'est dans la boucle** : la console produit 
 3. **Actions** : *Diagnostic*, *Remise à zéro de l'essai*, **Débloquer** (choix de lots ou bouquets + durée ≤ 30 j), **Tout ouvert** (durée réglable ≤ 30 j, avec rappel : « revient aux droits acquis à la fin, rien n'est supprimé »), **Activation** (essai / production, canal Bluetooth / fichier pour clé USB / clé saisissable à lire à voix haute par groupes de 5).
 4. **Journal d'audit** visible, exportable sans secret ; **rotation** et **révocation** de clés.
 5. Bandeau permanent « Version propriétaire : ne pas diffuser ».
+
+## Envoi de l'activation par Bluetooth (implémenté, 0.14.1-beta TV / 1.2.13-beta téléphone)
+Onglet « Activer » de la console : (1) choisir la TV appairée puis **Lire le code de la TV** (la demande d'appareil complète remplit le champ), (2) **Générer**, (3) **Envoyer l'activation à la TV**. La TV vérifie comme pour une saisie ou un fichier (signature, appareil, portée de la clé) ; trois refus sur une liaison la coupent. Le service `…05` est ouvert même quand la TV est verrouillée ; sur Android 12+ la TV demande la permission Bluetooth sur l'écran d'activation. Non encore testé sur de vrais appareils (l'émulateur n'a pas de Bluetooth) : tests JVM de bout en bout avec le vrai émetteur/vérificateur (`OwnerChannelTest`).
+

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
     <application>
         <!-- « Super administration » : reached only through the hidden gesture of the phone app, never exported, absent from the recent apps -->
         <activity android:name="castbridge.owner.SuperAdminActivity" android:exported="false" android:excludeFromRecents="true"
