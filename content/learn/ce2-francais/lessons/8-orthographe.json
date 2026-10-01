@@ -1,0 +1,1120 @@
+{
+ "chapter": "ce2-francais-orthographe",
+ "lessons": [
+  {
+   "id": "ce2-francais-accords",
+   "title": "Les accords : groupe nominal et sujet-verbe",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE2 — Français (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Orthographe grammaticale : accords",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Accorder déterminant et adjectif avec le nom.",
+    "Former le pluriel des noms courants.",
+    "Accorder le verbe avec son sujet."
+   ],
+   "prerequisites": [
+    "ce2-francais-pronoms"
+   ],
+   "exercises": [
+    "ce2-francais-accords-01",
+    "ce2-francais-accords-02",
+    "ce2-francais-accords-03",
+    "ce2-francais-accords-04",
+    "ce2-francais-accords-05",
+    "ce2-francais-accords-06"
+   ],
+   "selfCheck": [
+    "ce2-francais-accords-q1",
+    "ce2-francais-accords-q2",
+    "ce2-francais-accords-q3",
+    "ce2-francais-accords-q4",
+    "ce2-francais-accords-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les pluriels irréguliers exigés au CE2 (-al/-aux, -eau/-eaux, -eu/-eux, noms en -s, -x, -z)."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Les accords"
+    },
+    {
+     "type": "text",
+     "md": "En français, certains mots **changent de forme** pour s'accorder avec d'autres. On accorde dans le **groupe nominal** et entre le **sujet** et le **verbe**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Dans le groupe nominal",
+     "md": "Le **nom** commande : le déterminant et l'adjectif prennent son **genre** (masculin / féminin) et son **nombre** (singulier / pluriel).\n\n- une mangue mûre → des mangues **mûres**\n- un petit chat → des **petits** chats\n\nPluriel des noms : en général **-s** ; **-x** pour les noms en -eau, -eu (des bateaux, des cheveux) ; **-aux** pour beaucoup de noms en -al (des animaux). Les noms en -s, -x, -z ne changent pas (un nez, des nez)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le nom « filles » commande l'accord du déterminant, de l'adjectif et du verbe.",
+     "alt": "La phrase « Les petites filles chantent » : des flèches partent du nom filles vers Les et petites (féminin pluriel) et vers le verbe chantent (3e personne du pluriel).",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 90,
+        "w": 60,
+        "h": 40,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 116.3,
+        "text": "Les",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 90,
+        "w": 100,
+        "h": 40,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 116.3,
+        "text": "petites",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 90,
+        "w": 100,
+        "h": 40,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 116.3,
+        "text": "filles",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 90,
+        "w": 130,
+        "h": 40,
+        "stroke": "red",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 395.0,
+        "y": 116.3,
+        "text": "chantent",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 90,
+        "x2": 250,
+        "y2": 60,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 60,
+        "x2": 50,
+        "y2": 60,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 60,
+        "x2": 50,
+        "y2": 88,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 60,
+        "x2": 140,
+        "y2": 88,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 45,
+        "text": "féminin pluriel",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 130,
+        "x2": 250,
+        "y2": 160,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 160,
+        "x2": 395,
+        "y2": 160,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 395,
+        "y1": 160,
+        "x2": 395,
+        "y2": 132,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 185,
+        "text": "3e personne du pluriel",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le verbe et son sujet",
+     "md": "Le verbe s'accorde avec son **sujet** en personne et en nombre.\n\n- Les enfants **jouent**. (sujet : les enfants → ils)\n- Le panier de mangues **est** lourd. (sujet : le panier → il)\n\nAstuce : je trouve le sujet avec **« Qui est-ce qui ? »**, puis je le remplace par un pronom."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : mettre au pluriel",
+     "statement": "Écris au pluriel : « Le vieux chauffeur conduit un taxi jaune. »",
+     "steps": [
+      {
+       "md": "**Le vieux chauffeur** → **les vieux chauffeurs**. Le verbe suit : **conduisent**."
+      },
+      {
+       "md": "**un taxi jaune** → **des taxis jaunes**."
+      }
+     ],
+     "answer": "**Les vieux chauffeurs conduisent des taxis jaunes.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le sujet est loin du verbe",
+     "statement": "Complète : « Les élèves de la classe de Mme Essomba (chanter) une chanson. »",
+     "steps": [
+      {
+       "md": "Qui est-ce qui chante ? **Les élèves**, pas « Mme Essomba »."
+      },
+      {
+       "md": "Les élèves = ils → **chantent**."
+      }
+     ],
+     "answer": "**Les élèves de la classe de Mme Essomba chantent une chanson.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Accorder le verbe avec le mot le plus proche : *Le panier de mangues **est** lourd.*\n- Oublier le **-nt** : ils chante**nt**.\n- Écrire *ils chantes* : jamais de -s avec ils."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-accords-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-accords-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-accords-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-accords-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-accords-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-accords-06"
+    }
+   ]
+  },
+  {
+   "id": "ce2-francais-homophones",
+   "title": "Les homophones : a/à, et/est, on/ont, son/sont",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE2 — Français (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Orthographe grammaticale : homophones",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Distinguer a et à, et et est, on et ont, son et sont.",
+    "Utiliser une astuce de remplacement.",
+    "Corriger une erreur d'homophone."
+   ],
+   "prerequisites": [
+    "ce2-francais-pronoms",
+    "ce2-francais-present-er"
+   ],
+   "exercises": [
+    "ce2-francais-homophones-01",
+    "ce2-francais-homophones-02",
+    "ce2-francais-homophones-03",
+    "ce2-francais-homophones-04",
+    "ce2-francais-homophones-05",
+    "ce2-francais-homophones-06"
+   ],
+   "selfCheck": [
+    "ce2-francais-homophones-q1",
+    "ce2-francais-homophones-q2",
+    "ce2-francais-homophones-q3",
+    "ce2-francais-homophones-q4",
+    "ce2-francais-homophones-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les paires d'homophones attendues au CE2 (ces/ses, ce/se, la/là/l'a ne sont pas traitées ici)."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Les homophones"
+    },
+    {
+     "type": "text",
+     "md": "Des mots qui se **prononcent pareil** mais qui s'écrivent **différemment** sont des **homophones**. Pour ne pas se tromper, on utilise une **astuce de remplacement**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quatre paires à connaître",
+     "md": "- **a** (verbe avoir) / **à** (petit mot) : *Il **a** faim. Il va **à** Douala.*\n- **et** (relie) / **est** (verbe être) : *Paul **et** Marie. Il **est** là.*\n- **on** (= il) / **ont** (verbe avoir) : *On chante. Ils **ont** chanté.*\n- **son** (= mon) / **sont** (verbe être) : *Son cahier. Ils **sont** là.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Les astuces pour choisir entre les homophones.",
+     "alt": "Un tableau à quatre lignes : a se remplace par avait, est par était, ont par avaient, sont par étaient.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 130,
+        "h": 45,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 38.8,
+        "text": "a / à",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 400,
+        "h": 45,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 38.45,
+        "text": "a → avait    (il avait faim)",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 62,
+        "w": 130,
+        "h": 45,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 90.8,
+        "text": "et / est",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 62,
+        "w": 400,
+        "h": 45,
+        "stroke": "green",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 90.45,
+        "text": "est → était    (il était là)",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 114,
+        "w": 130,
+        "h": 45,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 142.8,
+        "text": "on / ont",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 114,
+        "w": 400,
+        "h": 45,
+        "stroke": "orange",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 142.45,
+        "text": "ont → avaient    (ils avaient)",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 166,
+        "w": 130,
+        "h": 45,
+        "stroke": "red",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 194.8,
+        "text": "son / sont",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 166,
+        "w": 400,
+        "h": 45,
+        "stroke": "red",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 194.45,
+        "text": "sont → étaient    (ils étaient)",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "La méthode",
+     "md": "1. Je remplace le petit mot par **avait** (ou **était**, **avaient**, **étaient**).\n2. Si la phrase garde son sens, j'écris le verbe (**a, est, ont, sont**).\n3. Sinon, j'écris l'autre mot (**à, et, on, son**)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : a ou à ?",
+     "statement": "Complète : « Marie ___ un vélo et elle va ___ l'école. »",
+     "steps": [
+      {
+       "md": "« Marie **avait** un vélo » : la phrase a du sens → **a**."
+      },
+      {
+       "md": "« elle va **avait** l'école » : impossible → **à**."
+      }
+     ],
+     "answer": "**Marie a un vélo et elle va à l'école.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ont ou on ?",
+     "statement": "Complète : « ___ chante ensemble et les enfants ___ faim. »",
+     "steps": [
+      {
+       "md": "« ___ chante » : je peux dire **il** chante → **on**."
+      },
+      {
+       "md": "« les enfants ___ faim » : je peux dire **avaient** faim → **ont**."
+      }
+     ],
+     "answer": "**On chante ensemble et les enfants ont faim.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- **Son** (= mon) devant un nom ; **sont** devant un participe ou un adjectif.\n- **Et** ne se remplace pas par « était ».\n- **À** garde un accent grave, **a** n'en a pas."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-homophones-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-homophones-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-homophones-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-homophones-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-homophones-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-homophones-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-francais-accords-01",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Complète : « Des mangues bien ___. » (mûr)",
+   "choices": [
+    "mûres",
+    "mûre",
+    "mûrs",
+    "mûr"
+   ],
+   "answer": 0,
+   "explanation": "« des mangues » : féminin pluriel. On ajoute -e et -s : **mûres**.",
+   "method": "Chercher le nom, son genre et son nombre.",
+   "mistakes": [
+    "Oublier le -e du féminin."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-accords-02",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Vrai ou faux : le pluriel de « un cheval » est « des chevaux ».",
+   "answer": true,
+   "explanation": "Vrai. Les noms en -al font souvent -aux.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-accords-03",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Associe chaque nom à son pluriel.",
+   "pairs": [
+    [
+     "un animal",
+     "des animaux"
+    ],
+    [
+     "un chapeau",
+     "des chapeaux"
+    ],
+    [
+     "un nez",
+     "des nez"
+    ],
+    [
+     "un enfant",
+     "des enfants"
+    ]
+   ],
+   "explanation": "-al → -aux ; -eau → -eaux ; un nez ne change pas ; pluriel normal -s.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-accords-04",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Complète : « Le panier de mangues ___ lourd. »",
+   "choices": [
+    "sont",
+    "est",
+    "es",
+    "êtes"
+   ],
+   "answer": 1,
+   "explanation": "Le sujet est « le panier » (un seul panier) : il **est**.",
+   "method": "Trouver le vrai sujet.",
+   "mistakes": [
+    "Accorder avec « mangues »."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-accords-05",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Mets au pluriel : « Le petit oiseau chante une jolie chanson. »",
+   "model": "Les petits oiseaux chantent des jolies chansons. (ou : de jolies chansons)",
+   "rubric": [
+    "Les petits oiseaux : déterminant, adjectif et nom au pluriel.",
+    "chantent : verbe au pluriel.",
+    "des jolies chansons (ou de jolies chansons)."
+   ],
+   "explanation": "Tout le groupe sujet passe au pluriel, donc le verbe aussi : chantent. Le COD aussi : chansons.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-accords-06",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Accorde correctement.",
+   "method": "Trouver ce qui commande l'accord.",
+   "mistakes": [
+    "Mettre un -s à un verbe avec ils."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "prompt": "Ma cousine est ___ (content).",
+     "choices": [
+      "content",
+      "contentes",
+      "contente",
+      "contents"
+     ],
+     "answer": 2,
+     "explanation": "« ma cousine » : féminin singulier → **contente**.",
+     "points": 1,
+     "id": "ce2-francais-accords-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "Quel est le pluriel de « un journal » ?",
+     "choices": [
+      "des journals",
+      "des journauxs",
+      "des journales",
+      "des journaux"
+     ],
+     "answer": 3,
+     "explanation": "-al → -aux.",
+     "points": 1,
+     "id": "ce2-francais-accords-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "prompt": "Vrai ou faux : on écrit « ils chantes ».",
+     "answer": false,
+     "explanation": "Faux. Avec ils : « ils chantent ».",
+     "points": 1,
+     "id": "ce2-francais-accords-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-francais-accords-q1",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Quel est le pluriel de « un cheveu » ?",
+   "choices": [
+    "des cheveux",
+    "des cheveus",
+    "des chevaux",
+    "des cheveu"
+   ],
+   "answer": 0,
+   "explanation": "Les noms en -eu font -eux : des cheveux.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-accords-q2",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Complète : « Elle est ___. » (petit)",
+   "choices": [
+    "petit",
+    "petite",
+    "petits",
+    "petites"
+   ],
+   "answer": 1,
+   "explanation": "Sujet « elle » : féminin singulier → petite.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-accords-q3",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Complète : « Les oiseaux ___ dans l'arbre. » (chanter)",
+   "choices": [
+    "chante",
+    "chantes",
+    "chantent",
+    "chantons"
+   ],
+   "answer": 2,
+   "explanation": "Sujet « les oiseaux » = ils → -ent.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-accords-q4",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Le verbe s'accorde avec…",
+   "choices": [
+    "son adjectif",
+    "le dernier mot",
+    "le complément de lieu",
+    "son sujet"
+   ],
+   "answer": 3,
+   "explanation": "Le verbe s'accorde en personne et en nombre avec son sujet.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-accords-q5",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-accords",
+   "prompt": "Quel est le pluriel de « un bateau » ?",
+   "choices": [
+    "des bateaux",
+    "des bateaus",
+    "des bateau",
+    "des batos"
+   ],
+   "answer": 0,
+   "explanation": "Les noms en -eau font -eaux.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-01",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Complète : « Paul ___ un grand frère. »",
+   "choices": [
+    "à",
+    "a",
+    "as",
+    "ah"
+   ],
+   "answer": 1,
+   "explanation": "On peut dire « Paul **avait** un grand frère » : verbe avoir → **a**.",
+   "method": "Remplacer par avait.",
+   "mistakes": [
+    "Écrire « à » avec un accent."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-02",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Vrai ou faux : dans « Il va à Douala », on peut remplacer « à » par « avait ».",
+   "answer": false,
+   "explanation": "Faux. « Il va avait Douala » n'a pas de sens : on écrit **à**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-03",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Associe chaque mot à son astuce.",
+   "pairs": [
+    [
+     "a",
+     "on peut dire « avait »"
+    ],
+    [
+     "est",
+     "on peut dire « était »"
+    ],
+    [
+     "ont",
+     "on peut dire « avaient »"
+    ],
+    [
+     "sont",
+     "on peut dire « étaient »"
+    ]
+   ],
+   "explanation": "On remplace par l'imparfait du même verbe.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-04",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Complète : « Les enfants ___ des mangues. »",
+   "choices": [
+    "on",
+    "sont",
+    "ont",
+    "a"
+   ],
+   "answer": 2,
+   "explanation": "On peut dire « les enfants **avaient** des mangues » : **ont**.",
+   "method": "Remplacer par avaient.",
+   "mistakes": [
+    "Confondre on et ont."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-05",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Corrige : « Ma sœur est à Yaoundé et mon frère et à Bamenda. Ils on faim. »",
+   "model": "Ma sœur est à Yaoundé et mon frère est à Bamenda. Ils ont faim.",
+   "rubric": [
+    "« mon frère est à Bamenda » : est (était).",
+    "« Ils ont faim » : ont (avaient)."
+   ],
+   "explanation": "« mon frère **était** à Bamenda » : verbe être → est. « Ils **avaient** faim » : ont.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-06",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Choisis le bon mot.",
+   "method": "Remplacer par avait, était, avaient, étaient.",
+   "mistakes": [
+    "Oublier de tester avec l'imparfait."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "prompt": "Mon frère ___ un ballon.",
+     "choices": [
+      "à",
+      "as",
+      "ah",
+      "a"
+     ],
+     "answer": 3,
+     "explanation": "Avait un ballon : **a**.",
+     "points": 1,
+     "id": "ce2-francais-homophones-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "prompt": "Marie ___ Ibrahim sont amis.",
+     "choices": [
+      "et",
+      "est",
+      "e",
+      "ai"
+     ],
+     "answer": 0,
+     "explanation": "On ne peut pas dire « était » : **et** (relie deux noms).",
+     "points": 1,
+     "id": "ce2-francais-homophones-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "Ils ___ partis hier.",
+     "choices": [
+      "son",
+      "sont",
+      "ont",
+      "sons"
+     ],
+     "answer": 1,
+     "explanation": "Ils **étaient** partis : **sont**.",
+     "points": 1,
+     "id": "ce2-francais-homophones-06-c"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "___ parle fort dans la cour.",
+     "choices": [
+      "Ont",
+      "An",
+      "On",
+      "Un"
+     ],
+     "answer": 2,
+     "explanation": "On peut dire « il parle » : **on**.",
+     "points": 1,
+     "id": "ce2-francais-homophones-06-d"
+    }
+   ]
+  },
+  {
+   "id": "ce2-francais-homophones-q1",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Par quel mot peut-on remplacer « est » ?",
+   "choices": [
+    "avait",
+    "avaient",
+    "étaient",
+    "était"
+   ],
+   "answer": 3,
+   "explanation": "« est » est le verbe être : on peut dire « était ».",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-q2",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Complète : « Il ___ la fièvre. »",
+   "choices": [
+    "a",
+    "à",
+    "as",
+    "ah"
+   ],
+   "answer": 0,
+   "explanation": "Il **avait** la fièvre : verbe avoir.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-q3",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Complète : « Ils ___ des cahiers. »",
+   "choices": [
+    "on",
+    "ont",
+    "sont",
+    "son"
+   ],
+   "answer": 1,
+   "explanation": "Ils **avaient** des cahiers : ont.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-q4",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Complète : « Mes amis ___ arrivés. »",
+   "choices": [
+    "son",
+    "ont",
+    "sont",
+    "on"
+   ],
+   "answer": 2,
+   "explanation": "Mes amis **étaient** arrivés : sont.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-homophones-q5",
+   "chapter": "ce2-francais-orthographe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-homophones",
+   "prompt": "Complète : « Tu vas ___ l'école. »",
+   "choices": [
+    "a",
+    "as",
+    "ah",
+    "à"
+   ],
+   "answer": 3,
+   "explanation": "On ne peut pas dire « tu vas avait l'école » : à.",
+   "source": "Exercice original"
+  }
+ ]
+}
