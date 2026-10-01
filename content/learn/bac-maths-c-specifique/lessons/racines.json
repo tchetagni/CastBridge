@@ -1,0 +1,538 @@
+{
+ "chapter": "bac-maths-c-specifique-ch-racines",
+ "lessons": [
+  {
+   "id": "bac-maths-c-specifique-racines",
+   "title": "Racines n-ièmes de l'unité et équations $z^n = Z$",
+   "minutes": 35,
+   "programRef": "Tle C — Nombres complexes : racines n-ièmes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Déterminer les racines n-ièmes de l'unité.",
+    "Résoudre $z^n = Z$ avec la forme exponentielle.",
+    "Représenter les solutions comme sommets d'un polygone régulier.",
+    "Utiliser la somme des racines n-ièmes."
+   ],
+   "exercises": [
+    "bac-maths-c-specifique-rac-01",
+    "bac-maths-c-specifique-rac-02",
+    "bac-maths-c-specifique-rac-03",
+    "bac-maths-c-specifique-rac-04",
+    "bac-maths-c-specifique-rac-05",
+    "bac-maths-c-specifique-rac-06"
+   ],
+   "selfCheck": [
+    "bac-maths-c-specifique-rac-q1",
+    "bac-maths-c-specifique-rac-q2",
+    "bac-maths-c-specifique-rac-q3",
+    "bac-maths-c-specifique-rac-q4",
+    "bac-maths-c-specifique-rac-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Dans cette fiche",
+     "md": "Résoudre $z^n = 1$ et $z^n = Z$ dans $\\mathbb{C}$, placer les solutions (polygones réguliers), utiliser leur somme et les racines cubiques de l'unité."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Racines n-ièmes de l'unité",
+     "md": "Pour $n \\geq 1$, l'équation $z^n = 1$ a exactement **n solutions** dans $\\mathbb{C}$ :\n$z_k = e^{\\frac{2ik\\pi}{n}} = \\cos\\frac{2k\\pi}{n} + i\\sin\\frac{2k\\pi}{n}$, pour $k = 0, 1, \\ldots, n - 1$.\nLeur module est 1 : leurs images sont sur le **cercle trigonométrique** et forment un polygone régulier à n côtés dont un sommet est le point 1."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propriétés",
+     "md": "Posons $\\omega = e^{\\frac{2i\\pi}{n}}$ : les racines sont $1, \\omega, \\omega^2, \\ldots, \\omega^{n-1}$.\n- Pour $n \\geq 2$ : $1 + \\omega + \\omega^2 + \\cdots + \\omega^{n-1} = 0$ (somme d'une suite géométrique de raison $\\omega \\neq 1$ avec $\\omega^n = 1$).\n- Le conjugué d'une racine est une racine ($\\overline{z_k} = z_{n-k}$).\n- Pour $n = 3$ : $j = e^{\\frac{2i\\pi}{3}}$ et $1 + j + j^2 = 0$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : $z^n = Z$ avec $Z \\neq 0$",
+     "md": "1. Écrire $Z = r e^{i\\theta}$ (forme exponentielle).\n2. Poser $z = \\rho e^{i\\varphi}$ : $\\rho^n = r$ et $n\\varphi \\equiv \\theta \\quad (\\text{mod } 2\\pi)$.\n3. Solutions : $z_k = \\sqrt[n]{r}\\; e^{\\frac{i(\\theta + 2k\\pi)}{n}}$, $k = 0, \\ldots, n - 1$.\nLes n images sont sur un cercle de rayon $\\sqrt[n]{r}$, sommets d'un polygone régulier."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 230,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 112,
+        "x2": 300,
+        "y2": 112,
+        "color": "lightgrey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 220,
+        "x2": 160,
+        "y2": 8,
+        "color": "lightgrey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 112,
+        "r": 88,
+        "stroke": "grey"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         248,
+         112,
+         204,
+         36,
+         116,
+         36,
+         72,
+         112,
+         116,
+         188,
+         204,
+         188
+        ],
+        "stroke": "blue",
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "circle",
+        "cx": 248,
+        "cy": 112,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 276,
+        "y": 117,
+        "text": "z0",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 204,
+        "cy": 36,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 18,
+        "text": "z1",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 116,
+        "cy": 36,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 98,
+        "y": 18,
+        "text": "z2",
+        "size": 14,
+        "color": "blue",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 72,
+        "cy": 112,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 44,
+        "y": 117,
+        "text": "z3",
+        "size": 14,
+        "color": "blue",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 116,
+        "cy": 188,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 98,
+        "y": 212,
+        "text": "z4",
+        "size": 14,
+        "color": "blue",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 204,
+        "cy": 188,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 212,
+        "text": "z5",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Les six racines sixièmes de l'unité $z_0, \\ldots, z_5$ sont les sommets d'un hexagone régulier inscrit dans le cercle trigonométrique.",
+     "alt": "Un hexagone régulier bleu inscrit dans un cercle gris centré à l'origine du repère, avec six sommets repérés z0 à z5, z0 étant le point d'affixe 1 sur l'axe horizontal."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : racines cubiques de l'unité",
+     "statement": "Résous $z^3 = 1$ dans $\\mathbb{C}$.",
+     "steps": [
+      {
+       "md": "Les solutions sont $z_k = e^{\\frac{2ik\\pi}{3}}$ pour $k = 0, 1, 2$.",
+       "tex": "z_0 = 1"
+      },
+      {
+       "md": "Pour $k = 1$ et $k = 2$ : $\\cos\\frac{2\\pi}{3} = -\\frac{1}{2}$ et $\\sin\\frac{2\\pi}{3} = \\frac{\\sqrt{3}}{2}$.",
+       "tex": "z_1 = -\\frac{1}{2} + i\\frac{\\sqrt{3}}{2} = j \\qquad z_2 = -\\frac{1}{2} - i\\frac{\\sqrt{3}}{2} = j^2 = \\overline{j}"
+      },
+      {
+       "md": "Contrôle : $z_0 + z_1 + z_2 = 1 - \\frac{1}{2} - \\frac{1}{2} = 0$."
+      }
+     ],
+     "answer": "**$S = \\left\\{1,\\ -\\frac{1}{2} + i\\frac{\\sqrt{3}}{2},\\ -\\frac{1}{2} - i\\frac{\\sqrt{3}}{2}\\right\\}$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : $z^4 = -16$",
+     "statement": "Résous $z^4 = -16$ dans $\\mathbb{C}$.",
+     "steps": [
+      {
+       "md": "$-16 = 16\\,e^{i\\pi}$. Donc $\\rho^4 = 16$ ($\\rho = 2$) et $4\\varphi \\equiv \\pi \\quad (\\text{mod } 2\\pi)$.",
+       "tex": "z_k = 2\\,e^{\\frac{i(\\pi + 2k\\pi)}{4}}, \\quad k = 0, 1, 2, 3"
+      },
+      {
+       "md": "Pour $k = 0$ : $2e^{i\\pi/4} = \\sqrt{2} + i\\sqrt{2}$. Les trois autres se déduisent par rotations successives d'angle $\\frac{\\pi}{2}$.",
+       "tex": "z_0 = \\sqrt{2}(1 + i),\\ z_1 = \\sqrt{2}(-1 + i),\\ z_2 = \\sqrt{2}(-1 - i),\\ z_3 = \\sqrt{2}(1 - i)"
+      },
+      {
+       "md": "Contrôle : $(\\sqrt{2}(1 + i))^2 = 2 \\times 2i = 4i$ et $(4i)^2 = -16$."
+      }
+     ],
+     "answer": "**Quatre solutions : $\\sqrt{2}(\\pm 1 \\pm i)$.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier des solutions : une équation $z^n = Z$ en a **exactement n** dans $\\mathbb{C}$.\n- Prendre $\\sqrt[n]{r}$ de la mauvaise façon (module) ou oublier de diviser **aussi l'argument** par n.\n- Oublier le terme $2k\\pi$ avant de diviser par n.\n- Écrire $\\sqrt{-16} = 4i$ pour une équation de degré 4 : on perd la moitié des solutions.\n- Oublier que $1 + \\omega + \\cdots + \\omega^{n-1} = 0$ seulement pour $n \\geq 2$."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-c-specifique-rac-01"
+    },
+    {
+     "type": "text",
+     "md": "**Vérifier par Python** : avec cmath, on calcule [cmath.exp(2j*cmath.pi*k/n) for k in range(n)], on vérifie que z**n est proche de 1 et que la somme est proche de 0 ; pour $z^n = Z$, on utilise abs(Z)**(1/n) et cmath.phase(Z)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Ce choix de contenu (racines n-ièmes de l'unité) est un complément de la série C ; selon le programme officiel, on pourrait plutôt y trouver barycentres, isométries ou lieux géométriques : à confirmer par un enseignant.",
+      "Les racines n-ièmes servent à construire des polygones réguliers (pentagone, hexagone) et à résoudre des équations de degré supérieur."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Choix éditorial : racines n-ièmes de l'unité à la place de « barycentres/isométries et lieux géométriques » ; à arbitrer avec le programme officiel de Tle C (barycentres et lieux relèvent plutôt de la 1re).",
+    "La forme exponentielle $e^{i\\theta}$ est supposée connue (voir le pack bac-maths, chapitre complexes) ; vérifier la notation en usage (cos + i sin ou exponentielle)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-c-specifique-rac-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Quelles sont les racines quatrièmes de l'unité ?",
+   "choices": [
+    "$1,\\ i,\\ -1,\\ -i$",
+    "$1,\\ -1$ seulement",
+    "$1,\\ i,\\ 2i,\\ 3i$",
+    "$1,\\ 1 + i,\\ -1,\\ -1 - i$"
+   ],
+   "answer": 0,
+   "explanation": "$z_k = e^{\\frac{2ik\\pi}{4}} = i^k$ : $1, i, -1, -i$.",
+   "method": "$z_k = e^{2ik\\pi/n}$.",
+   "mistakes": [
+    "Ne donner que les solutions réelles."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Calcule la somme des racines septièmes de l'unité.",
+   "answer": 0,
+   "tolerance": 0,
+   "explanation": "Pour $n \\geq 2$, $1 + \\omega + \\cdots + \\omega^{n-1} = \\frac{1 - \\omega^n}{1 - \\omega} = 0$.",
+   "method": "Somme d'une suite géométrique de raison $\\omega \\neq 1$.",
+   "mistakes": [
+    "Répondre 1 (en ne comptant que le terme $z_0$)."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Le nombre $-1$ est une racine cubique de l'unité.",
+   "answer": false,
+   "explanation": "$(-1)^3 = -1 \\neq 1$ : $-1$ n'est pas solution de $z^3 = 1$ (c'est une racine cubique de $-1$).",
+   "method": "Vérifier $z^3 = 1$.",
+   "mistakes": [
+    "Confondre racine cubique de 1 et racine cubique de −1."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Parmi les six solutions de $z^6 = 64$, combien ont une partie réelle strictement positive ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "$z_k = 2e^{ik\\pi/3}$ : parties réelles $2, 1, -1, -2, -1, 1$ pour $k = 0, \\ldots, 5$. Trois sont strictement positives ($k = 0, 1, 5$).",
+   "method": "Écrire les six solutions $2e^{ik\\pi/3}$ et lire les parties réelles.",
+   "mistakes": [
+    "Compter $k = 0$ seulement.",
+    "Oublier $k = 5$ (conjugué de $z_1$)."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Calcule $1 + 2\\cos\\frac{2\\pi}{5} + 2\\cos\\frac{4\\pi}{5}$ (indication : partie réelle de la somme des racines cinquièmes de l'unité).",
+   "answer": 0,
+   "tolerance": 0.0001,
+   "explanation": "Les racines sont $1, \\omega, \\omega^2, \\overline{\\omega^2}, \\overline{\\omega}$ avec $\\omega = e^{2i\\pi/5}$. Leur somme est nulle, donc sa partie réelle aussi : $1 + 2\\cos\\frac{2\\pi}{5} + 2\\cos\\frac{4\\pi}{5} = 0$.",
+   "method": "Regrouper racines conjuguées : $\\omega + \\overline{\\omega} = 2\\cos\\frac{2\\pi}{5}$.",
+   "mistakes": [
+    "Oublier le « 1 » de la racine $z_0$."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "On considère l'équation (E) : $z^3 = 8i$ dans $\\mathbb{C}$.",
+   "parts": [
+    {
+     "id": "bac-maths-c-specifique-rac-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le module commun des solutions ?",
+     "explanation": "$|z|^3 = |8i| = 8$ donc $|z| = 2$.",
+     "answer": 2,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-rac-06-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "$8i = 8e^{i\\pi/2}$. Donne, en degrés, l'argument de la solution $z_0$ (k = 0).",
+     "explanation": "$\\text{arg } z_0 = \\frac{\\pi/2}{3} = \\frac{\\pi}{6}$, soit 30° : $z_0 = 2e^{i\\pi/6} = \\sqrt{3} + i$.",
+     "answer": 30,
+     "tolerance": 0.5,
+     "unit": "°"
+    },
+    {
+     "id": "bac-maths-c-specifique-rac-06-c",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quel est l'ensemble des solutions ?",
+     "explanation": "$z_k = 2e^{i(\\pi/6 + 2k\\pi/3)}$ : arguments 30°, 150°, 270°, soit $\\sqrt{3} + i$, $-\\sqrt{3} + i$, $-2i$. Contrôle : $(-2i)^3 = -8i^3 = 8i$.",
+     "choices": [
+      "$\\{2i,\\ -\\sqrt{3} - i,\\ \\sqrt{3} - i\\}$",
+      "$\\{\\sqrt{3} + i,\\ -\\sqrt{3} + i,\\ -2i\\}$",
+      "$\\{\\sqrt{3} + i,\\ \\sqrt{3} - i,\\ 2\\}$",
+      "$\\{2i\\}$"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "bac-maths-c-specifique-rac-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la somme des trois solutions.",
+     "explanation": "$(\\sqrt{3} + i) + (-\\sqrt{3} + i) + (-2i) = 0$ : somme nulle comme pour toute équation $z^n = Z$, $n \\geq 2$.",
+     "answer": 0,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-rac-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Les images des solutions forment un triangle équilatéral inscrit dans le cercle de centre O et de rayon 2. Calcule son aire (arrondie à 0,001).",
+     "explanation": "Le côté vaut $R\\sqrt{3} = 2\\sqrt{3}$, l'aire $\\frac{\\sqrt{3}}{4} \\times 12 = 3\\sqrt{3} \\approx 5{,}196$.",
+     "answer": 5.196,
+     "tolerance": 0.001
+    }
+   ],
+   "method": "Forme exponentielle de $8i$, formule des racines n-ièmes, contrôles par la somme.",
+   "mistakes": [
+    "Oublier le $2k\\pi$.",
+    "Oublier de diviser l'argument par 3."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Combien l'équation $z^5 = 1$ a-t-elle de solutions dans $\\mathbb{C}$ ?",
+   "choices": [
+    "1",
+    "5",
+    "2",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "Une équation $z^n = Z$ avec $Z \\neq 0$ a exactement n solutions complexes.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Les racines n-ièmes de l'unité ont toutes pour module :",
+   "choices": [
+    "n",
+    "$\\frac{1}{n}$",
+    "1",
+    "$2\\pi$"
+   ],
+   "answer": 2,
+   "explanation": "$|z|^n = 1$ donc $|z| = 1$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Le nombre j = $e^{2i\\pi/3}$ vérifie :",
+   "choices": [
+    "$j^2 = 1$",
+    "$j = \\overline{j}$",
+    "$j^3 = -1$",
+    "$1 + j + j^2 = 0$"
+   ],
+   "answer": 3,
+   "explanation": "j est racine cubique de l'unité différente de 1 : $1 + j + j^2 = 0$ et $j^3 = 1$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Les racines sixièmes de l'unité forment :",
+   "choices": [
+    "un hexagone régulier",
+    "un carré",
+    "un triangle équilatéral",
+    "un pentagone régulier"
+   ],
+   "answer": 0,
+   "explanation": "Six points régulièrement répartis sur le cercle : un hexagone régulier.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-rac-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Pour $z^3 = 8$, les solutions ont pour module :",
+   "choices": [
+    "8",
+    "2",
+    "$\\frac{8}{3}$",
+    "$\\sqrt{8}$"
+   ],
+   "answer": 1,
+   "explanation": "$|z|^3 = 8$ donc $|z| = 2$.",
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

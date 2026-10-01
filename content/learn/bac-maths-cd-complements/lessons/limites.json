@@ -1,0 +1,428 @@
+{
+ "chapter": "bac-maths-cd-complements-ch-limites",
+ "lessons": [
+  {
+   "id": "bac-maths-cd-complements-limites",
+   "title": "Limites : comparaison, croissances comparées, branches infinies",
+   "minutes": 35,
+   "programRef": "Tle C/D — Limites de fonctions, croissances comparées, asymptotes et branches infinies (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser les théorèmes de comparaison et des gendarmes.",
+    "Appliquer les croissances comparées de ln et exp.",
+    "Déterminer asymptotes (horizontale, verticale, oblique) et branches paraboliques.",
+    "Étudier la position relative d'une courbe et d'une asymptote."
+   ],
+   "exercises": [
+    "bac-maths-cd-complements-lim-01",
+    "bac-maths-cd-complements-lim-02",
+    "bac-maths-cd-complements-lim-03",
+    "bac-maths-cd-complements-lim-04",
+    "bac-maths-cd-complements-lim-05",
+    "bac-maths-cd-complements-lim-06"
+   ],
+   "selfCheck": [
+    "bac-maths-cd-complements-lim-q1",
+    "bac-maths-cd-complements-lim-q2",
+    "bac-maths-cd-complements-lim-q3",
+    "bac-maths-cd-complements-lim-q4",
+    "bac-maths-cd-complements-lim-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Dans cette fiche",
+     "md": "Utiliser les théorèmes de comparaison et des gendarmes, appliquer les croissances comparées, et déterminer asymptotes et branches infinies d'une courbe."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Théorèmes de comparaison",
+     "md": "Au voisinage de $+\\infty$ (ou en un réel a) :\n- si $f(x) \\geq g(x)$ et $\\lim g = +\\infty$, alors $\\lim f = +\\infty$ ;\n- si $f(x) \\leq g(x)$ et $\\lim g = -\\infty$, alors $\\lim f = -\\infty$ ;\n- **gendarmes** : si $g(x) \\leq f(x) \\leq h(x)$ et $\\lim g = \\lim h = L$, alors $\\lim f = L$ ;\n- si $|f(x) - L| \\leq u(x)$ avec $\\lim u = 0$, alors $\\lim f = L$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Croissances comparées",
+     "md": "Pour tout entier $n \\geq 1$ :\n- $\\lim_{x \\to +\\infty} \\frac{e^x}{x^n} = +\\infty$ et $\\lim_{x \\to +\\infty} x^n e^{-x} = 0$ ;\n- $\\lim_{x \\to +\\infty} \\frac{\\ln x}{x^n} = 0$ ;\n- $\\lim_{x \\to 0^+} x^n \\ln x = 0$ ;\n- $\\lim_{x \\to -\\infty} x^n e^{x} = 0$.\nEn résumé : l'exponentielle l'emporte sur toute puissance, toute puissance l'emporte sur le logarithme."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : branches infinies quand $\\lim_{x \\to +\\infty} f(x) = \\pm\\infty$",
+     "md": "On étudie $\\frac{f(x)}{x}$ :\n- limite ∞ : **branche parabolique de direction (Oy)** ;\n- limite 0 : branche parabolique de direction (Ox) ;\n- limite $a \\neq 0$ : on calcule $f(x) - ax$ ;\n   - limite finie b : **asymptote oblique** $y = ax + b$ ;\n   - limite infinie : branche parabolique de direction la droite $y = ax$."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Autres asymptotes",
+     "md": "- $\\lim_{x \\to \\pm\\infty} f(x) = L$ : asymptote **horizontale** $y = L$.\n- $\\lim_{x \\to a} f(x) = \\pm\\infty$ : asymptote **verticale** $x = a$.\n- Pour la position de la courbe, on étudie le **signe** de $f(x) - (ax + b)$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 4,
+      "ymin": -1,
+      "ymax": 10,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "w": 400,
+      "h": 280,
+      "curves": [
+       {
+        "expr": "2*x+1+exp(-x)",
+        "color": "blue",
+        "label": "courbe de g"
+       },
+       {
+        "expr": "2*x+1",
+        "color": "red",
+        "label": "y = 2x + 1"
+       }
+      ],
+      "points": [],
+      "segments": []
+     },
+     "caption": "Courbe de $g(x) = 2x + 1 + e^{-x}$ (bleu) et de son asymptote oblique $y = 2x + 1$ (rouge) en $+\\infty$ : la courbe est au-dessus de la droite.",
+     "alt": "Deux courbes qui se rapprochent quand x augmente : une courbe bleue qui descend d'abord en x négatif puis monte, et une droite rouge de pente 2. Les deux sont presque confondues pour x grand."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : comparaison et gendarmes",
+     "statement": "Calcule $\\lim_{x \\to +\\infty}(x + \\sin x)$ et $\\lim_{x \\to +\\infty}\\frac{\\sin x}{x}$.",
+     "steps": [
+      {
+       "md": "Pour tout x, $\\sin x \\geq -1$, donc $x + \\sin x \\geq x - 1$. Or $\\lim (x - 1) = +\\infty$.",
+       "tex": "\\lim_{x \\to +\\infty}(x + \\sin x) = +\\infty"
+      },
+      {
+       "md": "Pour $x > 0$ : $-1 \\leq \\sin x \\leq 1$, donc $-\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq \\frac{1}{x}$."
+      },
+      {
+       "md": "Les deux encadrants tendent vers 0 : théorème des gendarmes.",
+       "tex": "\\lim_{x \\to +\\infty}\\frac{\\sin x}{x} = 0"
+      }
+     ],
+     "answer": "**$x + \\sin x \\to +\\infty$** et **$\\frac{\\sin x}{x} \\to 0$**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : croissances comparées et branche parabolique",
+     "statement": "Étudie la branche infinie de la courbe de $f(x) = x - \\ln x$ en $+\\infty$.",
+     "steps": [
+      {
+       "md": "$\\lim f(x) = +\\infty$ : on écrit $f(x) = x\\left(1 - \\frac{\\ln x}{x}\\right)$ et, par croissances comparées, $\\frac{\\ln x}{x} \\to 0$.",
+       "tex": "\\lim_{x \\to +\\infty} f(x) = +\\infty"
+      },
+      {
+       "md": "Ensuite $\\frac{f(x)}{x} = 1 - \\frac{\\ln x}{x} \\to 1$ : on calcule $f(x) - x = -\\ln x$.",
+       "tex": "\\lim_{x \\to +\\infty}\\left(f(x) - x\\right) = -\\infty"
+      },
+      {
+       "md": "La limite est infinie : pas d'asymptote."
+      }
+     ],
+     "answer": "**Branche parabolique de direction la droite $y = x$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : asymptote oblique",
+     "statement": "Montre que la droite $y = 2x + 1$ est asymptote à la courbe de $g(x) = 2x + 1 + e^{-x}$ en $+\\infty$ et étudie la position.",
+     "steps": [
+      {
+       "md": "$g(x) - (2x + 1) = e^{-x}$, et $\\lim_{x \\to +\\infty} e^{-x} = 0$.",
+       "tex": "\\lim_{x \\to +\\infty}\\left(g(x) - (2x + 1)\\right) = 0"
+      },
+      {
+       "md": "Donc $y = 2x + 1$ est asymptote oblique. De plus $e^{-x} > 0$ pour tout x :"
+      }
+     ],
+     "answer": "**Asymptote oblique $y = 2x + 1$ ; la courbe est toujours au-dessus.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire « $\\infty - \\infty = 0$ » ou « $\\frac{\\infty}{\\infty} = 1$ » : ce sont des formes indéterminées.\n- Utiliser un théorème de comparaison sans vérifier l'inégalité **pour tout x assez grand**.\n- Oublier de passer à l'inverse en multipliant un encadrement par un nombre négatif.\n- Conclure à une asymptote oblique avant d'avoir montré que $f(x) - ax$ a une **limite finie**.\n- Oublier la condition $x > 0$ pour diviser un encadrement par x."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-cd-complements-lim-01"
+    },
+    {
+     "type": "text",
+     "md": "**Vérifier par Python** : sympy donne les limites avec limit(f, x, oo) (oo représente l'infini) ; par exemple limit(exp(x)/x^3, x, oo) renvoie oo. La valeur d'un quotient en un grand nombre (x = 1000) aide aussi à conjecturer."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les limites usuelles et les opérations sur les limites sont traitées dans la fiche « Limites, continuité, dérivabilité et étude d'une fonction » du pack bac-maths ; la présente fiche les complète.",
+      "Les croissances comparées se démontrent à partir de $e^x \\geq \\frac{x^2}{2}$ pour $x \\geq 0$ ou par étude de fonction : démonstration à vérifier au programme."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le pack bac-maths traite déjà limites usuelles et asymptotes de base ; cette fiche en est le complément (comparaison, croissances comparées, branches paraboliques) : vérifier le chevauchement.",
+    "La notion de branche parabolique est-elle exigible en Tle D ? À confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-cd-complements-lim-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "Calcule $\\lim_{x \\to +\\infty}\\frac{3x^2 + x}{x^2 - 1}$.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "On factorise par $x^2$ : $\\frac{3 + 1/x}{1 - 1/x^2} \\to \\frac{3}{1} = 3$.",
+   "method": "Terme de plus haut degré au numérateur et au dénominateur.",
+   "mistakes": [
+    "Répondre $+\\infty$ en voyant « ∞/∞ »."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "Quelle est la limite de $\\frac{e^x}{x^3}$ quand x tend vers $+\\infty$ ?",
+   "choices": [
+    "0",
+    "1",
+    "$+\\infty$",
+    "$e^{3}$"
+   ],
+   "answer": 2,
+   "explanation": "Par croissances comparées, l'exponentielle l'emporte sur toute puissance de x.",
+   "method": "Croissances comparées.",
+   "mistakes": [
+    "Croire que x³ domine e^x."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "$\\lim_{x \\to 0^+} x \\ln x = 0$.",
+   "answer": true,
+   "explanation": "C'est une croissance comparée : $x^n \\ln x \\to 0$ quand $x \\to 0^+$ pour $n \\geq 1$.",
+   "method": "Croissances comparées en 0.",
+   "mistakes": [
+    "Penser à la forme « 0 × (−∞) » comme à une limite nécessairement infinie."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "La courbe de $f(x) = \\frac{2x^2 - x + 3}{x - 1}$ admet en $+\\infty$ une asymptote oblique $y = ax + b$. Donne b.",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "$2x^2 - x + 3 = (x - 1)(2x + 1) + 4$, donc $f(x) = 2x + 1 + \\frac{4}{x - 1}$. Comme $\\frac{4}{x - 1} \\to 0$, l'asymptote est $y = 2x + 1$ : $a = 2$, $b = 1$.",
+   "method": "Division euclidienne du numérateur par le dénominateur.",
+   "mistakes": [
+    "Répondre 3 (le terme constant du numérateur)."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "Calcule $\\lim_{x \\to +\\infty}\\frac{2x + \\sin x}{x}$.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "$\\frac{2x + \\sin x}{x} = 2 + \\frac{\\sin x}{x}$ et $-\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq \\frac{1}{x}$ : par les gendarmes $\\frac{\\sin x}{x} \\to 0$. La limite vaut 2.",
+   "method": "Séparer en deux termes puis encadrer.",
+   "mistakes": [
+    "Dire que $\\sin x$ « tend vers quelque chose »."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "Soit f la fonction définie sur $]0\\,;\\,+\\infty[$ par $f(x) = x - 1 + \\frac{\\ln x}{x}$ et $(C)$ sa courbe.",
+   "parts": [
+    {
+     "id": "bac-maths-cd-complements-lim-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Que vaut $\\lim_{x \\to +\\infty}\\frac{\\ln x}{x}$ ?",
+     "explanation": "C'est une croissance comparée : $\\ln x$ est négligeable devant x en $+\\infty$.",
+     "answer": 0,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-cd-complements-lim-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la limite de f en $+\\infty$ ?",
+     "explanation": "$x - 1 \\to +\\infty$ et $\\frac{\\ln x}{x} \\to 0$ : la somme tend vers $+\\infty$.",
+     "choices": [
+      "0",
+      "$+\\infty$",
+      "$-1$",
+      "$-\\infty$"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "bac-maths-cd-complements-lim-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Montre que $(C)$ a une asymptote oblique $y = x + b$ en $+\\infty$ et donne b.",
+     "explanation": "$f(x) - (x - 1) = \\frac{\\ln x}{x} \\to 0$ : l'asymptote est $y = x - 1$, donc $b = -1$.",
+     "answer": -1,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-cd-complements-lim-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule l'écart $f(e) - (e - 1)$ entre la courbe et l'asymptote en $x = e$, arrondi à 0,001.",
+     "explanation": "$f(e) - (e - 1) = \\frac{\\ln e}{e} = \\frac{1}{e} \\approx 0{,}368 > 0$ : (C) est au-dessus de l'asymptote. Plus généralement, la position est donnée par le signe de $\\ln x$.",
+     "answer": 0.368,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-lim-06-e",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la limite de f en $0^+$ ?",
+     "explanation": "$x - 1 \\to -1$ et $\\frac{\\ln x}{x} = \\ln x \\times \\frac{1}{x}$ avec $\\ln x \\to -\\infty$ et $\\frac{1}{x} \\to +\\infty$ : le produit tend vers $-\\infty$. L'axe des ordonnées est asymptote verticale.",
+     "choices": [
+      "$-\\infty$",
+      "$+\\infty$",
+      "$-1$",
+      "0"
+     ],
+     "answer": 0
+    }
+   ],
+   "method": "Croissances comparées, puis $f(x) - (ax + b)$, signe pour la position, limite en 0.",
+   "mistakes": [
+    "Dire que $\\frac{\\ln x}{x} \\to 1$ ou $+\\infty$.",
+    "Oublier de justifier l'asymptote par $f(x) - (x - 1) \\to 0$."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "$\\lim_{x \\to +\\infty}\\frac{\\ln x}{x}$ vaut :",
+   "choices": [
+    "1",
+    "$+\\infty$",
+    "0",
+    "$-\\infty$"
+   ],
+   "answer": 2,
+   "explanation": "Croissances comparées : x l'emporte sur $\\ln x$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "$\\lim_{x \\to +\\infty} x e^{-x}$ vaut :",
+   "choices": [
+    "$+\\infty$",
+    "1",
+    "$-\\infty$",
+    "0"
+   ],
+   "answer": 3,
+   "explanation": "$x e^{-x} = \\frac{x}{e^x}$ et $e^x$ l'emporte sur x.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "Si $g(x) \\leq f(x) \\leq h(x)$ avec $\\lim g = \\lim h = 5$, alors :",
+   "choices": [
+    "$\\lim f = 5$",
+    "$\\lim f = 0$",
+    "f n'a pas de limite",
+    "$\\lim f = +\\infty$"
+   ],
+   "answer": 0,
+   "explanation": "C'est le théorème des gendarmes.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "Si $f(x) \\geq x^2$ pour tout x, alors en $+\\infty$ :",
+   "choices": [
+    "$\\lim f = 0$",
+    "$\\lim f = +\\infty$",
+    "$\\lim f = -\\infty$",
+    "on ne peut rien dire"
+   ],
+   "answer": 1,
+   "explanation": "Comme $x^2 \\to +\\infty$, le théorème de comparaison donne $\\lim f = +\\infty$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-lim-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-limites",
+   "prompt": "Si $\\frac{f(x)}{x} \\to 2$ et $f(x) - 2x \\to 3$ en $+\\infty$, alors la courbe admet :",
+   "choices": [
+    "l'asymptote horizontale $y = 3$",
+    "une branche parabolique de direction (Oy)",
+    "l'asymptote oblique $y = 2x + 3$",
+    "l'asymptote verticale $x = 2$"
+   ],
+   "answer": 2,
+   "explanation": "Les deux limites donnent $a = 2$ et $b = 3$ : asymptote oblique $y = 2x + 3$.",
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

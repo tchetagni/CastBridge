@@ -1,0 +1,388 @@
+{
+ "chapter": "bac-maths-c-specifique-ch-arith",
+ "lessons": [
+  {
+   "id": "bac-maths-c-specifique-arith",
+   "title": "Arithmétique dans $\\mathbb{Z}$ : PGCD, Bézout, Gauss, congruences",
+   "minutes": 40,
+   "programRef": "Tle C — Arithmétique dans Z : divisibilité, division euclidienne, PGCD, Bézout, Gauss, congruences (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser la division euclidienne et l'algorithme d'Euclide.",
+    "Appliquer les théorèmes de Bézout et de Gauss.",
+    "Résoudre $ax + by = c$ dans $\\mathbb{Z}^2$.",
+    "Calculer avec des congruences (restes de puissances)."
+   ],
+   "exercises": [
+    "bac-maths-c-specifique-ari-01",
+    "bac-maths-c-specifique-ari-02",
+    "bac-maths-c-specifique-ari-03",
+    "bac-maths-c-specifique-ari-04",
+    "bac-maths-c-specifique-ari-05",
+    "bac-maths-c-specifique-ari-06"
+   ],
+   "selfCheck": [
+    "bac-maths-c-specifique-ari-q1",
+    "bac-maths-c-specifique-ari-q2",
+    "bac-maths-c-specifique-ari-q3",
+    "bac-maths-c-specifique-ari-q4",
+    "bac-maths-c-specifique-ari-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Dans cette fiche",
+     "md": "Maîtriser divisibilité et division euclidienne, calculer un PGCD (algorithme d'Euclide), utiliser les théorèmes de Bézout et de Gauss, résoudre $ax + by = c$ et travailler avec les congruences."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Divisibilité et division euclidienne",
+     "md": "Pour a, b entiers relatifs, **b divise a** s'il existe un entier k tel que $a = bk$.\n**Division euclidienne** de a par $b > 0$ : il existe un unique couple (q, r) avec $a = bq + r$ et $0 \\leq r < b$. Si $d$ divise a et b, il divise $a + b$, $a - b$ et toute combinaison $au + bv$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "PGCD, PPCM, nombres premiers",
+     "md": "Le **PGCD** de a et b est leur plus grand diviseur commun ; a et b sont **premiers entre eux** si $\\text{PGCD}(a, b) = 1$. Algorithme d'Euclide : $\\text{PGCD}(a, b) = \\text{PGCD}(b, r)$ où r est le reste de la division de a par b ; le dernier reste non nul est le PGCD. De plus $\\text{PGCD}(a, b) \\times \\text{PPCM}(a, b) = |ab|$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Bézout et Gauss",
+     "md": "- **Bézout** : a et b sont premiers entre eux si et seulement s'il existe des entiers u et v avec $au + bv = 1$. Plus généralement $au + bv = \\text{PGCD}(a, b)$ a des solutions.\n- **Gauss** : si a divise bc et si a est premier avec b, alors **a divise c**.\n- $ax + by = c$ a des solutions entières si et seulement si $\\text{PGCD}(a, b)$ divise c."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Congruences",
+     "md": "$a \\equiv b \\quad (\\text{mod } n)$ signifie que n divise $a - b$ (même reste dans la division par n). On peut additionner, soustraire, multiplier et élever à une puissance des congruences de même module : si $a \\equiv b$ et $c \\equiv d$ alors $a + c \\equiv b + d$, $ac \\equiv bd$, $a^k \\equiv b^k$. **On ne divise pas** une congruence sans précaution."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthodes types",
+     "md": "- **Équation $ax + by = c$** : trouver une solution particulière $(x_0, y_0)$ (Bézout puis multiplication), puis la solution générale $x = x_0 + \\frac{b}{d}k$, $y = y_0 - \\frac{a}{d}k$ avec $d = \\text{PGCD}(a, b)$.\n- **Puissances modulo n** : chercher la période des restes de $a^k$.\n- **Nombre de diviseurs** : si $N = p_1^{\\alpha_1} \\cdots p_r^{\\alpha_r}$, il y en a $(\\alpha_1 + 1) \\cdots (\\alpha_r + 1)$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : PGCD et identité de Bézout",
+     "statement": "Calcule $\\text{PGCD}(252, 198)$ et trouve u, v entiers tels que $252u + 198v = \\text{PGCD}$.",
+     "steps": [
+      {
+       "md": "Algorithme d'Euclide :",
+       "tex": "252 = 198 \\times 1 + 54 \\quad 198 = 54 \\times 3 + 36 \\quad 54 = 36 \\times 1 + 18 \\quad 36 = 18 \\times 2 + 0"
+      },
+      {
+       "md": "Le dernier reste non nul est 18. On remonte : $18 = 54 - 36 = 54 - (198 - 3 \\times 54) = 4 \\times 54 - 198$, puis avec $54 = 252 - 198$ :",
+       "tex": "18 = 4 \\times 252 - 5 \\times 198"
+      },
+      {
+       "md": "Contrôle : $1\\,008 - 990 = 18$."
+      }
+     ],
+     "answer": "**PGCD(252, 198) = 18**, avec $u = 4$ et $v = -5$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : congruences et périodes",
+     "statement": "Quel est le reste de la division de $7^{2026}$ par 5 ?",
+     "steps": [
+      {
+       "md": "$7 \\equiv 2 \\quad (\\text{mod } 5)$ ; on calcule les puissances de 2 modulo 5 : $2^1 \\equiv 2$, $2^2 \\equiv 4$, $2^3 \\equiv 3$, $2^4 \\equiv 1$. La période est 4."
+      },
+      {
+       "md": "$2026 = 4 \\times 506 + 2$, donc $7^{2026} \\equiv 2^{2026} = (2^4)^{506} \\times 2^2 \\equiv 1 \\times 4$.",
+       "tex": "7^{2026} \\equiv 4 \\quad (\\text{mod } 5)"
+      }
+     ],
+     "answer": "**Le reste est 4.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : équation $17x + 5y = 3$",
+     "statement": "Résous dans $\\mathbb{Z}^2$ l'équation $17x + 5y = 3$.",
+     "steps": [
+      {
+       "md": "PGCD(17, 5) = 1 divise 3 : il y a des solutions. $17 \\times (-2) + 5 \\times 7 = 1$, donc en multipliant par 3 :",
+       "tex": "(x_0, y_0) = (-6,\\ 21)"
+      },
+      {
+       "md": "Si (x, y) est solution, $17(x + 6) = -5(y - 21)$. 5 divise $17(x + 6)$ et est premier avec 17 : par Gauss, 5 divise $x + 6$."
+      },
+      {
+       "md": "On pose $x + 6 = 5k$, d'où $y - 21 = -17k$ :",
+       "tex": "x = -6 + 5k,\\ y = 21 - 17k \\quad (k \\in \\mathbb{Z})"
+      }
+     ],
+     "answer": "**Les solutions sont les couples $(-6 + 5k,\\ 21 - 17k)$, k entier.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la condition $0 \\leq r < b$ : un reste négatif n'est pas un reste de division euclidienne.\n- Appliquer Gauss sans vérifier que a est **premier avec** b.\n- Affirmer qu'une équation $ax + by = c$ a des solutions sans vérifier que le PGCD de a et b divise c.\n- Simplifier une congruence par un nombre non premier avec le module.\n- Mal remonter l'algorithme d'Euclide (erreurs de signes)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-c-specifique-ari-01"
+    },
+    {
+     "type": "text",
+     "md": "**Vérifier par Python** : math.gcd(252, 198) renvoie 18 ; pow(7, 2026, 5) renvoie 4 ; un balayage de x de −10 à 10 retrouve les solutions de $17x + 5y = 3$ ; sympy.divisor_count(360) renvoie 24 et factorint(360) donne la décomposition."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le petit théorème de Fermat (si p est premier et ne divise pas a, alors $a^{p-1} \\equiv 1 \\quad (\\text{mod } p)$) est parfois au programme de Tle C ; à vérifier sur le texte officiel.",
+      "Critères de divisibilité par 3, 9 : un nombre est divisible par 3 (resp. 9) si la somme de ses chiffres l'est ; ils se démontrent avec les congruences modulo 3 et 9."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le programme officiel de Tle C comprend-il le petit théorème de Fermat, la numération en base b, les critères de divisibilité ? À confirmer ; seules les bases ci-dessus sont couvertes.",
+    "La notation $\\mathbb{Z}$ et les conventions (PPCM) peuvent varier selon le manuel utilisé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-c-specifique-ari-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Calcule PGCD(84, 36).",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "$84 = 36 \\times 2 + 12$ puis $36 = 12 \\times 3 + 0$. Le dernier reste non nul est 12.",
+   "method": "Algorithme d'Euclide.",
+   "mistakes": [
+    "Confondre PGCD et PPCM (252)."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Quel est le reste de la division euclidienne de 1234 par 17 ?",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "$17 \\times 72 = 1224$ et $1234 - 1224 = 10$ avec $0 \\leq 10 < 17$. Donc $1234 = 17 \\times 72 + 10$.",
+   "method": "Chercher le plus grand multiple de 17 inférieur à 1234.",
+   "mistakes": [
+    "Prendre 73 comme quotient et obtenir un reste négatif −7."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "$17 \\equiv -4 \\quad (\\text{mod } 7)$.",
+   "answer": true,
+   "explanation": "$17 - (-4) = 21 = 7 \\times 3$ : 7 divise la différence.",
+   "method": "$a \\equiv b \\quad (\\text{mod } n)$ si n divise $a - b$.",
+   "mistakes": [
+    "Calculer $17 - 4 = 13$ au lieu de $17 + 4$."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Quel est le plus petit entier naturel x tel que $7x \\equiv 3 \\quad (\\text{mod } 11)$ ?",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "On teste : $7 \\times 0 = 0$, $7 \\times 1 = 7$, $7 \\times 2 = 14 = 11 + 3 \\equiv 3$. Donc $x = 2$. (7 est premier avec 11, la solution est unique modulo 11.)",
+   "method": "Essayer les restes 0 à 10, ou multiplier par l'inverse de 7 modulo 11 (qui est 8).",
+   "mistakes": [
+    "Diviser 3 par 7 « modulo 11 » sans inverse."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Combien l'entier 360 admet-il de diviseurs positifs ?",
+   "answer": 24,
+   "tolerance": 0,
+   "explanation": "$360 = 2^3 \\times 3^2 \\times 5$. Le nombre de diviseurs est $(3 + 1)(2 + 1)(1 + 1) = 4 \\times 3 \\times 2 = 24$.",
+   "method": "Décomposition en facteurs premiers puis produit des (exposant + 1).",
+   "mistakes": [
+    "Oublier le diviseur 1 et le diviseur 360 lui-même.",
+    "Additionner les exposants (6)."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Un vendeur de Douala dispose uniquement de deux sortes de jetons, de 17 et de 5 unités. On cherche les couples d'entiers (x, y), positifs ou négatifs, tels que $17x + 5y = 3$ (un entier négatif représente des jetons rendus).",
+   "parts": [
+    {
+     "id": "bac-maths-c-specifique-ari-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule PGCD(17, 5).",
+     "explanation": "$17 = 5 \\times 3 + 2$, $5 = 2 \\times 2 + 1$, $2 = 1 \\times 2 + 0$ : PGCD = 1.",
+     "answer": 1,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-ari-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On a $17u + 5 \\times 7 = 1$. Détermine u.",
+     "explanation": "$17u = 1 - 35 = -34$ donc $u = -2$.",
+     "answer": -2,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-ari-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Déduis-en l'abscisse $x_0$ d'une solution particulière de $17x + 5y = 3$.",
+     "explanation": "On multiplie par 3 : $x_0 = 3 \\times (-2) = -6$ et $y_0 = 21$.",
+     "answer": -6,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-ari-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Les solutions sont $x = -6 + 5k$, $y = 21 - 17k$. Quelle est la plus petite valeur positive de x ?",
+     "explanation": "$-6 + 5k > 0$ pour $k \\geq 2$ : $x = 4$ (avec $y = -13$ : $68 - 65 = 3$).",
+     "answer": 4,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-ari-06-e",
+     "kind": "truefalse",
+     "points": 1.5,
+     "prompt": "Il existe des solutions avec x et y tous deux positifs ou nuls.",
+     "explanation": "$x \\geq 0$ impose $k \\geq 2$ et $y \\geq 0$ impose $k \\leq 1$ (car $21 - 17k \\geq 0 \\Leftrightarrow k \\leq 1{,}23$) : aucun entier ne convient.",
+     "answer": false
+    }
+   ],
+   "method": "Bézout, solution particulière, théorème de Gauss, puis discussion sur k.",
+   "mistakes": [
+    "Oublier de multiplier la relation de Bézout par 3.",
+    "Se tromper de signe dans $y = 21 - 17k$."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Que vaut PGCD(12, 18) ?",
+   "choices": [
+    "3",
+    "36",
+    "2",
+    "6"
+   ],
+   "answer": 3,
+   "explanation": "$18 = 12 + 6$, $12 = 6 \\times 2$ : PGCD = 6 (36 est le PPCM).",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Le théorème de Gauss dit : si a divise bc et si a est premier avec b, alors :",
+   "choices": [
+    "a divise c",
+    "a divise b",
+    "b divise c",
+    "a est premier avec c"
+   ],
+   "answer": 0,
+   "explanation": "C'est l'énoncé du théorème de Gauss.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Si $a \\equiv 3 \\quad (\\text{mod } 5)$, quel est le reste de la division de $a^2$ par 5 ?",
+   "choices": [
+    "9",
+    "4",
+    "3",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "$3^2 = 9 \\equiv 4 \\quad (\\text{mod } 5)$ : le reste est 4 ; on élève la congruence au carré.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "L'équation $6x + 9y = 5$ n'a pas de solution entière parce que :",
+   "choices": [
+    "6 et 9 sont premiers entre eux",
+    "5 est un nombre premier",
+    "PGCD(6, 9) = 3 ne divise pas 5",
+    "6 est pair"
+   ],
+   "answer": 2,
+   "explanation": "Il faut que PGCD(a, b) divise c ; ici 3 ne divise pas 5.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-ari-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Si a et b sont premiers entre eux, il existe u, v entiers avec :",
+   "choices": [
+    "$au + bv = a + b$",
+    "$au + bv = ab$",
+    "$au = bv$",
+    "$au + bv = 1$"
+   ],
+   "answer": 3,
+   "explanation": "C'est le théorème de Bézout.",
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

@@ -1,0 +1,228 @@
+{
+ "chapter": "bac-maths-c-specifique-ch-racines",
+ "lessons": [],
+ "exercises": [
+  {
+   "id": "bac-maths-c-specifique-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-c-specifique-arith",
+   "prompt": "Exercice 1 (arithmétique). On s'intéresse aux entiers naturels n tels que $n \\equiv 3 \\quad (\\text{mod } 7)$ et à l'équation (E) : $11x - 7y = 5$ dans $\\mathbb{Z}^2$.",
+   "parts": [
+    {
+     "id": "bac-maths-c-specifique-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le reste de la division de $3^{100}$ par 7 ? (période de 3^k modulo 7 : 6)",
+     "explanation": "$3^6 \\equiv 1 \\quad (\\text{mod } 7)$ ; $100 = 6 \\times 16 + 4$ donc $3^{100} \\equiv 3^4 = 81 = 77 + 4$. Le reste est 4.",
+     "answer": 4,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule PGCD(11, 7).",
+     "explanation": "11 = 7 × 1 + 4, 7 = 4 × 1 + 3, 4 = 3 × 1 + 1 : PGCD = 1.",
+     "answer": 1,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Trouve la plus petite valeur positive de x vérifiant (E) (on a $11x \\equiv 5 \\quad (\\text{mod } 7)$).",
+     "explanation": "$11 \\equiv 4 \\quad (\\text{mod } 7)$ : $4x \\equiv 5$. Pour $x = 3$ : $11 \\times 3 - 5 = 28 = 7 \\times 4$, donc $y = 4$ et $(3, 4)$ est solution ($33 - 28 = 5$).",
+     "answer": 3,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex1-d",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle est la solution générale de (E) ?",
+     "explanation": "Si (x, y) est solution, $11(x - 3) = 7(y - 4)$ : 7 divise $x - 3$ (Gauss), d'où $x = 3 + 7k$ et $y = 4 + 11k$.",
+     "choices": [
+      "$(3 + 7k,\\ 4 + 11k)$, k entier",
+      "$(3 + 11k,\\ 4 + 7k)$, k entier",
+      "$(3 - 7k,\\ 4 + 11k)$, k entier",
+      "$(3k,\\ 4k)$, k entier"
+     ],
+     "answer": 0
+    }
+   ],
+   "method": "Congruences, Euclide, Bézout, Gauss.",
+   "mistakes": [
+    "Se tromper de coefficient dans la solution générale."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Exercice 2 (similitudes). Le plan complexe est muni d'un repère orthonormé direct. s est la similitude directe d'écriture complexe $z' = (1 + i)z + 2 - i$ (centre $\\Omega(1 + 2i)$, rapport $\\sqrt{2}$, angle $\\frac{\\pi}{4}$). A est le point d'affixe 1.",
+   "parts": [
+    {
+     "id": "bac-maths-c-specifique-blanc-ex2-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Détermine l'affixe de A' = s(A) : donne sa partie réelle.",
+     "explanation": "$z_{A'} = (1 + i) + 2 - i = 3$.",
+     "answer": 3,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la distance $\\Omega A$ (arrondie à 0,001).",
+     "explanation": "$\\Omega A = |1 - (1 + 2i)| = |-2i| = 2$.",
+     "answer": 2,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la distance $\\Omega A'$ (arrondie à 0,001).",
+     "explanation": "$\\Omega A' = |3 - 1 - 2i| = |2 - 2i| = 2\\sqrt{2} \\approx 2{,}828$, soit $\\sqrt{2} \\times \\Omega A$.",
+     "answer": 2.828,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Un triangle de l'ensemble de départ a pour aire 5. Quelle est l'aire de son image par s ?",
+     "explanation": "Les aires sont multipliées par $(\\sqrt{2})^2 = 2$ : 10.",
+     "answer": 10,
+     "tolerance": 0
+    }
+   ],
+   "method": "Éléments caractéristiques, effet sur les distances et les aires.",
+   "mistakes": [
+    "Multiplier l'aire par le rapport au lieu de son carré."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Exercice 3 (coniques). Dans un repère orthonormé, $(H)$ a pour équation $\\frac{x^2}{9} - \\frac{y^2}{16} = 1$.",
+   "parts": [
+    {
+     "id": "bac-maths-c-specifique-blanc-ex3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule c (abscisse positive des foyers).",
+     "explanation": "$c = \\sqrt{9 + 16} = 5$.",
+     "answer": 5,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'excentricité (arrondie à 0,001).",
+     "explanation": "$e = \\frac{5}{3} \\approx 1{,}667$.",
+     "answer": 1.667,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex3-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Donne la pente positive d'une asymptote (arrondie à 0,001).",
+     "explanation": "Les asymptotes sont $y = \\pm\\frac{4}{3}x$ : pente $\\frac{4}{3} \\approx 1{,}333$.",
+     "answer": 1.333,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex3-d",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Le point $M(5, \\frac{16}{3})$ appartient à $(H)$.",
+     "explanation": "$\\frac{25}{9} - \\frac{256}{9 \\times 16} = \\frac{25}{9} - \\frac{16}{9} = 1$.",
+     "answer": true
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex3-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Pour ce point M, calcule $|MF - MF'|$ avec $F(5, 0)$ et $F'(-5, 0)$.",
+     "explanation": "$MF = \\frac{16}{3}$ et $MF' = \\sqrt{100 + \\frac{256}{9}} = \\frac{34}{3}$ ; la différence vaut $\\frac{18}{3} = 6 = 2a$.",
+     "answer": 6,
+     "tolerance": 0.001
+    }
+   ],
+   "method": "Équation réduite, $c^2 = a^2 + b^2$, propriété bifocale.",
+   "mistakes": [
+    "Utiliser $c^2 = a^2 - b^2$."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-blanc-ex4",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-c-specifique-racines",
+   "prompt": "Exercice 4 (racines n-ièmes). On résout dans $\\mathbb{C}$ l'équation $z^3 = 1$ ; $j = e^{2i\\pi/3}$.",
+   "parts": [
+    {
+     "id": "bac-maths-c-specifique-blanc-ex4-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien d'éléments l'ensemble des solutions contient-il ?",
+     "explanation": "Une équation $z^3 = 1$ a trois solutions : $1$, $j$ et $j^2$.",
+     "answer": 3,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex4-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Donne la partie réelle de j (arrondie à 0,01).",
+     "explanation": "$\\cos\\frac{2\\pi}{3} = -\\frac{1}{2}$.",
+     "answer": -0.5,
+     "tolerance": 0.01
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex4-c",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Que vaut $1 + j + j^2$ ?",
+     "explanation": "$1 + j + j^2 = \\frac{1 - j^3}{1 - j} = 0$.",
+     "choices": [
+      "1",
+      "$-1$",
+      "0",
+      "$3$"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "bac-maths-c-specifique-blanc-ex4-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule $j^{2026}$ : donne sa partie imaginaire sous forme décimale (arrondie à 0,001).",
+     "explanation": "$2026 = 3 \\times 675 + 1$ donc $j^{2026} = j$ et sa partie imaginaire est $\\frac{\\sqrt{3}}{2} \\approx 0{,}866$.",
+     "answer": 0.866,
+     "tolerance": 0.001
+    }
+   ],
+   "method": "Racines cubiques de l'unité, $j^3 = 1$, réduction des exposants modulo 3.",
+   "mistakes": [
+    "Oublier de réduire l'exposant modulo 3."
+   ],
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

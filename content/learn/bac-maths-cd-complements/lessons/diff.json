@@ -1,0 +1,441 @@
+{
+ "chapter": "bac-maths-cd-complements-ch-diff",
+ "lessons": [
+  {
+   "id": "bac-maths-cd-complements-diff",
+   "title": "Équations différentielles $y' = ay + b$ et $y'' + ay' + by = 0$",
+   "minutes": 35,
+   "programRef": "Tle C/D — Équations différentielles du premier et du second ordre à coefficients constants (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Résoudre $y' = ay$ et $y' = ay + b$.",
+    "Résoudre $y'' + ay' + by = 0$ selon le signe de $\\Delta$.",
+    "Déterminer la solution vérifiant des conditions initiales.",
+    "Modéliser un phénomène d'évolution (refroidissement, décroissance)."
+   ],
+   "exercises": [
+    "bac-maths-cd-complements-dif-01",
+    "bac-maths-cd-complements-dif-02",
+    "bac-maths-cd-complements-dif-03",
+    "bac-maths-cd-complements-dif-04",
+    "bac-maths-cd-complements-dif-05",
+    "bac-maths-cd-complements-dif-06"
+   ],
+   "selfCheck": [
+    "bac-maths-cd-complements-dif-q1",
+    "bac-maths-cd-complements-dif-q2",
+    "bac-maths-cd-complements-dif-q3",
+    "bac-maths-cd-complements-dif-q4",
+    "bac-maths-cd-complements-dif-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Dans cette fiche",
+     "md": "Résoudre $y' = ay + b$ et $y'' + ay' + by = 0$, déterminer la solution vérifiant des conditions initiales, et modéliser un phénomène simple (refroidissement, décroissance)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équation $y' = ay$ et $y' = ay + b$ (a ≠ 0)",
+     "md": "- $y' = ay$ : les solutions sont $y(x) = C e^{ax}$, C réel quelconque.\n- $y' = ay + b$ : on ajoute la solution constante $-\\frac{b}{a}$ : $y(x) = C e^{ax} - \\frac{b}{a}$.\nUne **condition initiale** $y(x_0) = y_0$ fixe C : il y a alors **une seule** solution."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équation $y'' + ay' + by = 0$",
+     "md": "On résout l'**équation caractéristique** $r^2 + ar + b = 0$, de discriminant $\\Delta = a^2 - 4b$ :\n- $\\Delta > 0$, racines $r_1 \\neq r_2$ : $y = A e^{r_1 x} + B e^{r_2 x}$ ;\n- $\\Delta = 0$, racine double r : $y = (Ax + B) e^{rx}$ ;\n- $\\Delta < 0$, racines $\\alpha \\pm i\\beta$ : $y = e^{\\alpha x}(A \\cos \\beta x + B \\sin \\beta x)$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : conditions initiales",
+     "md": "Pour $y'' + ay' + by = 0$, avec $y(0)$ et $y'(0)$ donnés :\n1. écrire la solution générale en A et B ;\n2. calculer $y'(x)$ ;\n3. remplacer x par 0 dans y et dans y' : on obtient un système de deux équations en A et B ;\n4. résoudre, puis écrire la solution. **Vérifier** : on retrouve bien $y(0)$ et $y'(0)$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 1,
+      "ymin": -6,
+      "ymax": 8,
+      "grid": 2,
+      "xlabel": "x",
+      "ylabel": "y",
+      "w": 400,
+      "h": 280,
+      "curves": [
+       {
+        "expr": "3-2*exp(2*x)",
+        "color": "red",
+        "label": "C = −2"
+       },
+       {
+        "expr": "3-exp(2*x)",
+        "color": "blue",
+        "label": "C = −1"
+       },
+       {
+        "expr": "3",
+        "color": "grey",
+        "label": "C = 0"
+       },
+       {
+        "expr": "3+exp(2*x)",
+        "color": "green",
+        "label": "C = 1"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 1,
+        "label": "(0 ; 1)",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Quelques solutions de $y' = 2y - 6$ : $y = Ce^{2x} + 3$. La condition $y(0) = 1$ sélectionne la courbe rouge (C = −2).",
+     "alt": "Quatre courbes exponentielles qui se déduisent les unes des autres par la valeur de C : la droite horizontale y = 3 (C = 0) et des courbes au-dessus ou au-dessous. La courbe rouge passe par le point (0 ; 1)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : $y' = ay + b$",
+     "statement": "Résous $y' = 2y - 6$ avec $y(0) = 1$.",
+     "steps": [
+      {
+       "md": "Solution générale : $a = 2$, $b = -6$, donc la solution constante est $-\\frac{b}{a} = 3$.",
+       "tex": "y(x) = C e^{2x} + 3"
+      },
+      {
+       "md": "Condition initiale : $y(0) = C + 3 = 1$, donc $C = -2$.",
+       "tex": "y(x) = 3 - 2e^{2x}"
+      },
+      {
+       "md": "Vérification : $y'(x) = -4e^{2x}$ et $2y - 6 = 6 - 4e^{2x} - 6 = -4e^{2x}$."
+      }
+     ],
+     "answer": "**$y(x) = 3 - 2e^{2x}$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : $y'' + ay' + by = 0$",
+     "statement": "Résous $y'' - 3y' + 2y = 0$ avec $y(0) = 1$ et $y'(0) = 0$.",
+     "steps": [
+      {
+       "md": "Équation caractéristique $r^2 - 3r + 2 = 0$ : $\\Delta = 1$, racines 1 et 2.",
+       "tex": "y = A e^{x} + B e^{2x}"
+      },
+      {
+       "md": "$y' = Ae^{x} + 2Be^{2x}$. Conditions : $A + B = 1$ et $A + 2B = 0$. On soustrait : $B = -1$, puis $A = 2$."
+      },
+      {
+       "md": "Solution :",
+       "tex": "y(x) = 2e^{x} - e^{2x}"
+      }
+     ],
+     "answer": "**$y(x) = 2e^{x} - e^{2x}$.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : modéliser une évolution",
+     "md": "Une grandeur dont la vitesse de variation est proportionnelle à l'écart avec une valeur d'équilibre $T_e$ vérifie $T' = -k(T - T_e)$ : c'est $y' = ay + b$ avec $a = -k$ et $b = kT_e$. La solution est $T(t) = T_e + (T_0 - T_e)e^{-kt}$ et la grandeur tend vers $T_e$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la solution constante $-\\frac{b}{a}$ dans $y' = ay + b$.\n- Écrire $-\\frac{b}{a}$ avec le mauvais signe.\n- Dans le cas $\\Delta < 0$, oublier que $\\alpha$ est la partie réelle et $\\beta$ la partie imaginaire des racines.\n- Appliquer la condition $y'(0)$ sur y au lieu de y'.\n- Ne pas vérifier la solution trouvée."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-cd-complements-dif-01"
+    },
+    {
+     "type": "text",
+     "md": "**Vérifier par Python** : avec sympy, on définit y, on calcule diff(y, x), diff(y, x, 2) et on vérifie que simplify(y'' + a y' + b y) vaut 0 ; on évalue aussi y(0) et y'(0). Toutes les solutions de cette fiche ont été contrôlées ainsi."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le cas général $y'' + ay' + by = 0$ à coefficients réels est traité ici avec $\\Delta < 0$ sous forme trigonométrique ; l'usage des nombres complexes pour trouver cette forme relève du chapitre sur les complexes.",
+      "Les équations avec second membre non nul pour l'ordre 2 ne sont pas traitées dans cette fiche."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le programme officiel de Tle C/D peut se limiter à $y' = ay + b$ ; le second ordre est peut-être réservé à la série C ou hors programme : à confirmer.",
+    "Le cas $\\Delta < 0$ suppose les racines complexes ; vérifier la forme attendue de la solution (cos/sin) dans le manuel utilisé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-cd-complements-dif-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Quelle est la solution générale de $y' = -2y$ ?",
+   "choices": [
+    "$y(x) = Ce^{2x}$",
+    "$y(x) = -2x + C$",
+    "$y(x) = Ce^{-2x}$",
+    "$y(x) = e^{-2x} + C$"
+   ],
+   "answer": 2,
+   "explanation": "Les solutions de $y' = ay$ sont $Ce^{ax}$ ; ici $a = -2$.",
+   "method": "$y' = ay \\Rightarrow y = Ce^{ax}$.",
+   "mistakes": [
+    "Oublier le signe de a.",
+    "Ajouter la constante au lieu de la multiplier."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Soit f la solution de $y' = 2y + 4$ telle que $f(0) = 1$. Calcule $f(1)$, arrondi à 0,01.",
+   "answer": 20.17,
+   "tolerance": 0.01,
+   "explanation": "Solution constante : $-\\frac{4}{2} = -2$. $f(x) = Ce^{2x} - 2$ ; $f(0) = C - 2 = 1$ donne $C = 3$. Donc $f(1) = 3e^2 - 2 \\approx 20{,}17$.",
+   "method": "Solution générale, puis condition initiale.",
+   "mistakes": [
+    "Prendre la solution constante +2 au lieu de −2.",
+    "Trouver C = 1 en oubliant le terme constant."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Quelle est la solution générale de $y'' - 5y' + 6y = 0$ ?",
+   "choices": [
+    "$y = Ae^{2x} + Be^{3x}$",
+    "$y = Ae^{-2x} + Be^{-3x}$",
+    "$y = (Ax + B)e^{2x}$",
+    "$y = e^{2x}(A\\cos 3x + B\\sin 3x)$"
+   ],
+   "answer": 0,
+   "explanation": "$r^2 - 5r + 6 = (r - 2)(r - 3)$ : racines 2 et 3, donc $y = Ae^{2x} + Be^{3x}$.",
+   "method": "Équation caractéristique puis signe de $\\Delta$.",
+   "mistakes": [
+    "Prendre les opposés des racines.",
+    "Confondre avec le cas de la racine double."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Soit f la solution de $y'' + 2y' + 5y = 0$ avec $f(0) = 1$ et $f'(0) = 1$. Calcule $f\\left(\\frac{\\pi}{4}\\right)$, arrondi à 0,001.",
+   "answer": 0.456,
+   "tolerance": 0.001,
+   "explanation": "$r^2 + 2r + 5 = 0$ : $\\Delta = -16$, $r = -1 \\pm 2i$. $f = e^{-x}(A\\cos 2x + B\\sin 2x)$ ; $f(0) = A = 1$ ; $f'(0) = -A + 2B = 1$ donne $B = 1$. Donc $f\\left(\\frac{\\pi}{4}\\right) = e^{-\\pi/4}(0 + 1) \\approx 0{,}456$.",
+   "method": "$\\Delta < 0$ : forme $e^{\\alpha x}(A\\cos\\beta x + B\\sin\\beta x)$.",
+   "mistakes": [
+    "Oublier de dériver le facteur $e^{-x}$ pour $f'(0)$.",
+    "Prendre $\\beta = 4$ au lieu de 2."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Soit f la solution de $y'' - 4y' + 4y = 0$ avec $f(0) = 1$ et $f'(0) = 0$. Calcule $f(1)$, arrondi à 0,001.",
+   "answer": -7.389,
+   "tolerance": 0.001,
+   "explanation": "Racine double 2 : $f = (Ax + B)e^{2x}$. $f(0) = B = 1$. $f'(x) = (A + 2Ax + 2B)e^{2x}$, donc $f'(0) = A + 2B = 0$ et $A = -2$. $f(x) = (1 - 2x)e^{2x}$ et $f(1) = -e^2 \\approx -7{,}389$.",
+   "method": "Racine double : $(Ax + B)e^{rx}$ ; dériver avec la règle du produit.",
+   "mistakes": [
+    "Oublier le terme $A e^{2x}$ dans la dérivée du produit."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Une boisson à 85 °C est posée dans une salle de classe à 25 °C (valeurs fictives). Sa température T(t), en °C, au bout de t minutes, vérifie la loi de refroidissement $T'(t) = -0{,}1\\,(T(t) - 25)$ avec $T(0) = 85$.",
+   "parts": [
+    {
+     "id": "bac-maths-cd-complements-dif-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Cette équation s'écrit sous la forme $T' = aT + b$ avec :",
+     "explanation": "$T' = -0{,}1T + 2{,}5$ ; la solution constante est $-\\frac{b}{a} = 25$.",
+     "choices": [
+      "a = 0,1 et b = 25",
+      "a = −0,1 et b = 2,5",
+      "a = −0,1 et b = −2,5",
+      "a = −25 et b = 0,1"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "bac-maths-cd-complements-dif-06-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Donne T(t) sous la forme $25 + Ce^{-0{,}1t}$ et calcule la valeur de C.",
+     "explanation": "$T(0) = 25 + C = 85$ donc $C = 60$ et $T(t) = 25 + 60e^{-0{,}1t}$.",
+     "answer": 60,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-cd-complements-dif-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la température au bout de 10 minutes, arrondie à 0,1 °C.",
+     "explanation": "$T(10) = 25 + 60e^{-1} \\approx 47{,}07$ °C.",
+     "answer": 47.1,
+     "tolerance": 0.1,
+     "unit": "°C"
+    },
+    {
+     "id": "bac-maths-cd-complements-dif-06-d",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Au bout de combien de minutes la température atteint-elle 45 °C ? (arrondi à 0,1 min)",
+     "explanation": "$25 + 60e^{-0{,}1t} = 45 \\Leftrightarrow e^{-0{,}1t} = \\frac{1}{3} \\Leftrightarrow t = 10\\ln 3 \\approx 10{,}99$ min, soit environ 11,0 min.",
+     "answer": 11.0,
+     "tolerance": 0.1,
+     "unit": "min"
+    },
+    {
+     "id": "bac-maths-cd-complements-dif-06-e",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Vers quelle valeur T(t) tend-elle quand t tend vers $+\\infty$ ?",
+     "explanation": "$e^{-0{,}1t} \\to 0$, donc $T(t) \\to 25$ : la boisson se met à la température de la salle.",
+     "choices": [
+      "0 °C",
+      "25 °C, la température de la salle",
+      "85 °C",
+      "Elle tend vers $+\\infty$"
+     ],
+     "answer": 1
+    }
+   ],
+   "method": "Écrire $T' = aT + b$, solution générale, condition initiale, puis ln pour résoudre en t.",
+   "mistakes": [
+    "Chercher C avec $T(0) = 60$ au lieu de 85.",
+    "Oublier de diviser par −0,1 en résolvant $e^{-0{,}1t} = \\frac{1}{3}$."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Les solutions de $y' = 5y$ sont :",
+   "choices": [
+    "$Ce^{-5x}$",
+    "$5x + C$",
+    "$e^{5x} + C$",
+    "$Ce^{5x}$"
+   ],
+   "answer": 3,
+   "explanation": "Pour $y' = ay$, on a $y = Ce^{ax}$ avec $a = 5$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "La solution constante de $y' = 3y - 9$ est :",
+   "choices": [
+    "3",
+    "−3",
+    "9",
+    "−9"
+   ],
+   "answer": 0,
+   "explanation": "On résout $0 = 3y - 9$ : $y = 3$, soit $-\\frac{b}{a} = -\\frac{-9}{3} = 3$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "L'équation caractéristique de $y'' + 3y' + 2y = 0$ est :",
+   "choices": [
+    "$r^2 + 3r - 2 = 0$",
+    "$r^2 + 3r + 2 = 0$",
+    "$3r^2 + 2r = 0$",
+    "$r + 3 + 2 = 0$"
+   ],
+   "answer": 1,
+   "explanation": "On remplace $y''$ par $r^2$, $y'$ par r et y par 1.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Si $\\Delta = 0$ avec racine double r, les solutions sont :",
+   "choices": [
+    "$Ae^{rx} + Be^{rx}$",
+    "$e^{rx}(A\\cos x + B\\sin x)$",
+    "$(Ax + B)e^{rx}$",
+    "$Ae^{rx} + B$"
+   ],
+   "answer": 2,
+   "explanation": "Dans le cas de la racine double, on multiplie par un polynôme de degré 1.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-dif-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Si $\\Delta < 0$ et que les racines sont $-1 \\pm 3i$, les solutions sont :",
+   "choices": [
+    "$e^{3x}(A\\cos x + B\\sin x)$",
+    "$Ae^{-x} + Be^{3x}$",
+    "$e^{x}(A\\cos 3x + B\\sin 3x)$",
+    "$e^{-x}(A\\cos 3x + B\\sin 3x)$"
+   ],
+   "answer": 3,
+   "explanation": "$\\alpha = -1$ et $\\beta = 3$ : $e^{\\alpha x}(A\\cos\\beta x + B\\sin\\beta x)$.",
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}
