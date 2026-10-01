@@ -89,7 +89,7 @@ object ParentalHub {
         engineOrNull = ParentalEngine(PrefsKv(c.getSharedPreferences(PREFS, Context.MODE_PRIVATE)))
         // reports and their signing keys live in their own preferences file (excluded from backups, see backup_rules.xml)
         val rkv = PrefsKv(c.getSharedPreferences(PREFS_REPORTS, Context.MODE_PRIVATE))
-        val trusted = { addr: String -> TvService.running?.btTrusted(addr) == true }
+        val trusted = { addr: String -> runCatching { TvService.running?.btTrusted(addr) == true }.getOrDefault(false) }
         val tvName = { TvService.running?.tvName() ?: "CastBridge TV" }
         val recipients = ReportRecipients(rkv, trusted)
         val outbox = ReportOutbox(rkv)
@@ -101,7 +101,7 @@ object ParentalHub {
         engine.supervisionProbe = { supervisionInfo() }
         apiOrNull = ParentalApi(engine, learnProfiles = { learnProfiles() }, installed = { AppCatalog.launcherApps(c) }, appEnv = { AppCatalog.env(c) },
             supervisionSetup = { setupMap() }, reports = rp,
-            trustedPhones = { TvService.running?.trust?.list()?.map { it.address to it.name }.orEmpty() }) { }
+            trustedPhones = { runCatching { TvService.running?.trust?.list()?.map { it.address to it.name } }.getOrNull().orEmpty() }) { }
         ForegroundWatcher.onChange = { pkg -> main.post { onForeground(pkg) } }
         ForegroundWatcher.start(c)
         lastTick = SystemClock.elapsedRealtime()

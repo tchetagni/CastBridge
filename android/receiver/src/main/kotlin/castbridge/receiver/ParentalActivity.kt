@@ -464,7 +464,7 @@ class ParentalActivity : Activity() {
         val rp = ParentalHub.reports
         val cfg = rp.config()
         section("Téléphones qui reçoivent les rapports")
-        val phones = TvService.running?.trust?.list().orEmpty()
+        val phones = runCatching { TvService.running?.trust?.list() }.getOrNull().orEmpty()
         if (phones.isEmpty()) note("Aucun téléphone de confiance. Ajoutez d'abord le téléphone du parent avec « Ajouter un téléphone » (accueil de la TV).")
         for (ph in phones) {
             val on = rp.recipients.isRecipient(ph.address)
