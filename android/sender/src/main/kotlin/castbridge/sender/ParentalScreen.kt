@@ -64,9 +64,9 @@ private fun ParentalTvPicker(ctx: Context, content: @Composable (ParentalClient)
 }
 
 /** Runs a call off the main thread and turns a failure into the TV's own French words. */
-private suspend fun <T> io(f: () -> T): Result<T> = withContext(Dispatchers.IO) { runCatching(f) }
+internal suspend fun <T> io(f: () -> T): Result<T> = withContext(Dispatchers.IO) { runCatching(f) }
 
-private fun why(e: Throwable): String = when {
+internal fun why(e: Throwable): String = when {
     e is ParentalError && e.code == 404 -> "Cette TV n'a pas encore le contrôle parental : mettez à jour l'app CastBridge TV."
     e is ParentalError -> e.message.orEmpty()
     else -> "La TV ne répond pas (${e.message ?: e.javaClass.simpleName})."
@@ -134,7 +134,7 @@ private fun PinInput(v: String, onV: (String) -> Unit, label: String) =
         visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
 
 @Composable
-private fun Picker(label: String, options: List<String>, selected: Int, onPick: (Int) -> Unit) {
+internal fun Picker(label: String, options: List<String>, selected: Int, onPick: (Int) -> Unit) {
     var open by remember { mutableStateOf(false) }
     Box {
         OutlinedButton(onClick = { open = true }, Modifier.fillMaxWidth()) { Text("$label : ${options.getOrNull(selected) ?: "—"}", maxLines = 1) }
@@ -143,11 +143,11 @@ private fun Picker(label: String, options: List<String>, selected: Int, onPick: 
 }
 
 @Composable
-private fun CheckRow(label: String, checked: Boolean, onChange: (Boolean) -> Unit) =
+internal fun CheckRow(label: String, checked: Boolean, onChange: (Boolean) -> Unit) =
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) { Checkbox(checked, onChange); Text(label, style = MaterialTheme.typography.bodyMedium) }
 
 @Composable
-private fun SwitchRow(title: String, sub: String?, checked: Boolean, onChange: (Boolean) -> Unit) =
+internal fun SwitchRow(title: String, sub: String?, checked: Boolean, onChange: (Boolean) -> Unit) =
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) { Text(title, style = MaterialTheme.typography.bodyLarge); sub?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) } }
         Switch(checked, onChange)
@@ -281,6 +281,9 @@ private fun Editor(client: ParentalClient, loaded: ParentalClient.Loaded, pin: S
     }
 
     HorizontalDivider()
+    WholeTvPanel(client, cfg.profiles, pin, scope, onMsg)
+
+    HorizontalDivider()
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         OutlinedButton({ changePin = true }) { Text("Changer le code parental") }
         TextButton(onForget) { Text("Verrouiller cet écran") }
@@ -312,8 +315,15 @@ private fun ReportView(r: Map<String, Any?>?) {
     days.forEach { d ->
         Text(d["day"].toString(), style = MaterialTheme.typography.labelMedium)
         @Suppress("UNCHECKED_CAST") (d["profiles"] as? List<Map<String, Any?>>).orEmpty().forEach { p ->
-            Text("${p["name"]} : lecture ${p["play"]} min · jeux ${p["games"]} min · téléchargements ${p["downloads"]} min", style = MaterialTheme.typography.bodyMedium)
+            Text("${p["name"]} : lecture ${p["play"]} min · jeux ${p["games"]} min · téléchargements ${p["downloads"]} min · autres applications ${p["apps"] ?: 0} min", style = MaterialTheme.typography.bodyMedium)
+            @Suppress("UNCHECKED_CAST") (p["byApp"] as? List<Map<String, Any?>>).orEmpty().take(6).forEach { a ->
+                Text("   ${a["label"]} : ${a["min"]} min", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         }
+    }
+    @Suppress("UNCHECKED_CAST") (r["supervision"] as? Map<String, Any?>)?.let { Text(it["label"].toString(), style = MaterialTheme.typography.bodySmall) }
+    @Suppress("UNCHECKED_CAST") (r["tamper"] as? List<Map<String, Any?>>).orEmpty().take(3).forEach { t ->
+        Text("⚠ ${t["what"]}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
     }
     if (blocked.isNotEmpty()) {
         Text("Contenus bloqués récemment", style = MaterialTheme.typography.labelMedium)

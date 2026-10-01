@@ -84,6 +84,8 @@
         </service>
         <!-- Library assistant (docs/LIBRARY-AGENT.md): the optional weekly suggestion (off by default) and the screen it opens -->
         <service android:name=".agent.ProactiveJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- Reports of the parental control pulled from the TV over Bluetooth (docs/PARENTAL.md); runs only on a designated phone -->
+        <service android:name=".ParentalSyncJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
         <activity android:name=".agent.AssistantActivity" android:exported="false" android:label="Ranger ma bibliothèque"
             android:theme="@style/Theme.CastBridge" />
         <service android:name=".UploadService" android:exported="false"
