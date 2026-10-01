@@ -206,7 +206,7 @@ interface VolumeStore {
 }
 
 /** [VolumeStore] over a plain folder (internal storage or a removable volume's app folder). */
-class FileStore(override val volume: StorageVolume, private val free: () -> Long = { volume.dir.usableSpace }) : VolumeStore {
+open class FileStore(override val volume: StorageVolume, private val free: () -> Long = { volume.dir.usableSpace }) : VolumeStore {
     val dir: File get() = volume.dir
     override val progressive get() = true
 
@@ -236,7 +236,20 @@ class FileStore(override val volume: StorageVolume, private val free: () -> Long
     override fun open(name: String, from: Long): InputStream = java.io.FileInputStream(f(name)).also { if (from > 0) it.channel.position(from) }
     override fun deleteFinal(name: String) = f(name).delete()
     override fun deletePart(name: String) { p(name).delete() }
-    override fun rename(from: String, to: String) = f(from).renameTo(File(dir, to))
+    /**
+     * Renames in place and never replaces anything (a POSIX rename silently overwrites an existing target: two renames to the same
+     * name would lose a file). On a case-insensitive volume a change of case only ("film.mkv" -> "Film.mkv") is the same entry: allowed.
+     * On a removable drive the renamed entry is synced to the medium before returning (a drive is often pulled right after).
+     */
+    override fun rename(from: String, to: String): Boolean {
+        val src = f(from)
+        val dst = File(dir, to)
+        if (!src.isFile) return false
+        if (dst.exists() && !(volume.fs.caseInsensitive && src.name.equals(to, ignoreCase = true) && src.name != to)) return false
+        if (!src.renameTo(dst)) return false
+        if (volume.kind != VolumeKind.INTERNAL) runCatching { java.io.FileInputStream(dst).use { it.fd.sync() } }
+        return true
+    }
     override fun list(): List<StoreEntry> = dir.listFiles().orEmpty()
         .filter { it.isFile && !it.name.startsWith(".") && !it.name.endsWith(Meta.SUFFIX) }
         .map { if (it.name.endsWith(Storage.PART)) StoreEntry(it.name.removeSuffix(Storage.PART), it.length(), true) else StoreEntry(it.name, it.length(), false) }

@@ -5,6 +5,8 @@ import castbridge.core.tv.ApiReply
 import castbridge.core.tv.FileLocks
 import castbridge.core.tv.FileStore
 import castbridge.core.tv.LibraryMeta
+import castbridge.core.tv.NameSpace
+import castbridge.core.tv.VolumeKind
 import castbridge.core.tv.ReceiverServer
 import castbridge.core.tv.ReceiverServer.Companion.q
 import castbridge.core.tv.Storage
@@ -35,8 +37,8 @@ class TrashApi(
     private val library: LibraryMeta? = null,
     private val now: () -> Long = System::currentTimeMillis,
     private val retentionMs: Long = RETENTION_MS,
-    /** True while [name] is being copied to another volume. */
-    private val busy: (String) -> Boolean = { false },
+    /** Why [name] must not be touched right now (moving, being uploaded, being streamed to a phone), or null. Asked on every put. */
+    private val busy: (String) -> String? = { null },
 ) : ApiExtension {
 
     private data class Item(val id: String, val name: String, val volume: StorageVolume, val file: File, val at: Long, val size: Long)
@@ -85,7 +87,7 @@ class TrashApi(
     private fun put(name: String, volume: String?): ApiReply {
         val n = ReceiverServer.safeName(name) ?: return err(400, "bad name")
         if (playing()?.let { p -> p == n || volumes.volumes().any { it.storedName(n) == p } } == true) return err(409, "playing")
-        if (busy(n)) return err(409, "moving")
+        busy(n)?.let { return err(409, it) }
         items(purgeExpired = true)                                                   // keeps the bin tidy
         synchronized(FileLocks.of(File("/castbridge-locks"), n)) {
             val hits = volumes.volumes().filter { volume.isNullOrEmpty() || it.id == volume }.mapNotNull { v ->
@@ -101,6 +103,7 @@ class TrashApi(
             val target = File(bin, "${id}__$stored")
             if (target.name.toByteArray(Charsets.UTF_8).size > 250) return err(400, "name too long for the bin")
             if (!src.renameTo(target)) return err(500, "rename failed")
+            syncQuietly(v, target)
             library?.deleted(stored, size)
             Storage.forget(dir, stored)
             return ApiReply(200, """{"id":${q(id)},"name":${q(stored)},"volume":${q(v.id)},"size":$size}""")
@@ -111,21 +114,30 @@ class TrashApi(
         if (!ID.matches(id)) return err(400, "bad id")
         val it = items(purgeExpired = true).firstOrNull { it.id == id } ?: return err(404, "not in the bin (expired?)")
         val dir = dirOf(it.volume) ?: return err(503, "volume unavailable")
-        // the TV library has one name space: a name taken on ANY volume is taken
-        fun taken(n: String) = volumes.volumes().any { v -> volumes.store(v).let { s -> s.finalSize(v.storedName(n)) != null || s.partSize(v.storedName(n)) > 0 } }
-        var name = it.name
-        if (taken(name)) {
-            val dot = name.lastIndexOf('.').takeIf { d -> d > 0 && name.length - d <= 6 } ?: name.length
-            val base = name.substring(0, dot); val ext = name.substring(dot)
-            var i = 1
-            name = "$base (restauré)$ext"
-            while (taken(name)) { i++; name = "$base (restauré $i)$ext" }
+        // the TV library has one name space: a name taken on ANY volume is taken. The check and the rename are one step
+        // (a POSIX rename replaces an existing file silently), shared with /api/rename through [NameSpace].
+        synchronized(NameSpace.lock) {
+            fun taken(n: String) = volumes.volumes().any { v -> volumes.store(v).let { s -> s.finalSize(v.storedName(n)) != null || s.partSize(v.storedName(n)) > 0 } }
+            var name = it.name
+            if (taken(name)) {
+                val dot = name.lastIndexOf('.').takeIf { d -> d > 0 && name.length - d <= 6 } ?: name.length
+                val base = name.substring(0, dot); val ext = name.substring(dot)
+                var i = 1
+                name = "$base (restauré)$ext"
+                while (taken(name)) { i++; name = "$base (restauré $i)$ext" }
+            }
+            val stored = it.volume.storedName(name)
+            val target = File(dir, stored)
+            if (target.exists()) return err(409, "target exists")
+            if (!it.file.renameTo(target)) return err(500, "rename failed")
+            syncQuietly(it.volume, target)
+            return ApiReply(200, """{"name":${q(stored)},"volume":${q(it.volume.id)},"size":${it.size}}""")
         }
-        val stored = it.volume.storedName(name)
-        val target = File(dir, stored)
-        if (target.exists()) return err(409, "target exists")
-        if (!it.file.renameTo(target)) return err(500, "rename failed")
-        return ApiReply(200, """{"name":${q(stored)},"volume":${q(it.volume.id)},"size":${it.size}}""")
+    }
+
+    /** A removable drive is often pulled right after a change: make the renamed entry reach the medium. */
+    private fun syncQuietly(v: StorageVolume, f: File) {
+        if (v.kind != VolumeKind.INTERNAL) runCatching { java.io.FileInputStream(f).use { it.fd.sync() } }
     }
 
     private fun purge(id: String): ApiReply {

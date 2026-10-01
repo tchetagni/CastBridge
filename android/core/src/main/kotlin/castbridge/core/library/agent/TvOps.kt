@@ -102,7 +102,10 @@ class TvLibraryOps(private val client: TvClient, private val sleep: (Long) -> Un
         return OpResult.Fail(when {
             e.code == 401 -> "code PIN refusé"
             msg == "target exists" -> "ce nom existe déjà sur la TV"
-            msg == "moving" || msg == "playing" -> "le fichier est en cours d'utilisation"
+            msg == "moving" -> "le fichier est en cours de déplacement"
+            msg == "playing" -> "le fichier est en cours de lecture"
+            msg == "streaming" -> "le fichier est en cours de lecture sur un téléphone"
+            msg == "uploading" -> "le fichier est en cours d'envoi"
             msg == "not found" || msg == "no such file" -> "fichier introuvable sur la TV"
             msg == "not in the bin" || msg.startsWith("not in the bin") -> "n'est plus dans la corbeille (expiré ?)"
             else -> msg
@@ -110,7 +113,7 @@ class TvLibraryOps(private val client: TvClient, private val sleep: (Long) -> Un
     }
 
     override fun rename(loc: Loc, newName: String): OpResult = try {
-        client.rename(loc.name, newName); changed(); OpResult.Ok(loc.copy(name = newName))
+        client.rename(loc.name, newName, safe = true); changed(); OpResult.Ok(loc.copy(name = newName))
     } catch (e: TvClient.HttpError) { httpFail(e) } catch (e: java.io.IOException) { OpResult.Fail("TV injoignable : ${e.message}") }
 
     @Suppress("UNCHECKED_CAST")
