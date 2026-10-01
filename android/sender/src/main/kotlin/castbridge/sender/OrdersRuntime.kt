@@ -38,8 +38,11 @@ object OrdersRuntime {
         queue = OrderQueue(FileQueueStore(File(app.filesDir, "orders/queue.json")))
     }
 
-    /** Device code of each TV paired with this phone, learnt from the TV's DEVICE_INFO frame ([OwnerFrames.parseDeviceInfo]); address (Bluetooth) → code. */
-    fun learnTvCode(address: String, code: String) { sp.edit().putString("code:$address", code).apply() }
+    /** Device code of each TV paired with this phone, learnt from the TV's DEVICE_INFO frame ([OwnerFrames.parseDeviceInfo], the whole text is kept to register the TV with the server); address (Bluetooth) → code. */
+    fun learnTvCode(address: String, deviceInfo: String) {
+        val code = OwnerFrames.parseDeviceInfo(deviceInfo)?.first ?: return
+        if (sp.getString("code:$address", null) != code) sp.edit().putString("code:$address", code).putString("info:$address", deviceInfo).remove("paired:$address").apply()
+    }
     private fun codeOf(address: String): String? = sp.getString("code:$address", null)
     private fun pairedCodes(): Map<String, String> = TvLinkManager.saved.list().mapNotNull { tv -> codeOf(tv.address)?.let { it to tv.address } }.toMap()
 
@@ -47,7 +50,13 @@ object OrdersRuntime {
     fun syncNow(): Boolean {
         val st = PhoneConnect.state
         if (st.needsConsent || st.blocked || st.deviceToken.isNullOrBlank()) return false
-        return OrderCourier(queue, HttpOrderServer(st.baseUrl, st.deviceToken!!)).syncServer(pairedCodes().keys)
+        val server = HttpOrderServer(st.baseUrl, st.deviceToken!!)
+        for (tv in TvLinkManager.saved.list()) {          // tell the server which TVs this phone carries (once per TV), then fetch from the start
+            val info = sp.getString("info:${tv.address}", null) ?: continue
+            if (sp.getBoolean("paired:${tv.address}", false)) continue
+            if (server.pair(info)) { sp.edit().putBoolean("paired:${tv.address}", true).apply(); queue.resetCursor() }
+        }
+        return OrderCourier(queue, server).syncServer(pairedCodes().keys)
     }
 
     /** With a link to a TV (Bluetooth now; the Wi-Fi tunnel only needs another [OrderLink]): hand over its orders, collect the acknowledgements. */

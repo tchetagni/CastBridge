@@ -44,6 +44,9 @@ class OrderQueue(private val store: QueueStore, private val now: () -> Long = Sy
         items[k] = QueuedOrder(tv, token, e.keyId, e.seq, e.expiresAt, now()); persist(); true
     }
 
+    /** A TV was just paired: orders released earlier for it must be fetched too. */
+    fun resetCursor() = synchronized(lock) { cursor = 0; persist() }
+
     fun setCursor(c: Long) = synchronized(lock) { if (c > cursor) { cursor = c; persist() } }
 
     /** The TV judged an order: it leaves the queue and its acknowledgement waits for the server. */

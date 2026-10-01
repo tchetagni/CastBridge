@@ -10,6 +10,7 @@ import java.io.OutputStream
 /**
  * HTTP side of the phone (docs/ORDRES.md § Serveur), authenticated by the DEVICE token like the lots (`Authorization: Bearer`):
  *   GET  /api/v1/orders?since=<cursor>   → {"cursor":n,"orders":[{"tv":"<device code>","token":"cbx1…"}]}   only the TVs paired with this phone
+ *   POST /api/v1/orders/pair             ← {"deviceInfo":"code=…\nk=…\nfactor=…"}  once per TV (the TV's device request)
  *   POST /api/v1/orders/acks             ← {"acks":[{"tv":"<device code>","ack":"<OrderAck text>"}]}           technical acknowledgements only
  * Any failure (no Internet, 4xx, 5xx, bad JSON) = null / false: the phone just tries again at the next job.
  */
@@ -22,6 +23,11 @@ class HttpOrderServer(baseUrl: String, private val deviceToken: String, private 
         if (r.code != 200) return null
         parseFetched(r.body)
     }.getOrNull()
+
+    /** `POST /api/v1/orders/pair` {"deviceInfo": the TV's DEVICE_INFO text}: tells the server this phone carries the orders of that TV (the server recomputes the code from the factors). */
+    fun pair(deviceInfo: String): Boolean = runCatching {
+        http.request("POST", "$base/api/v1/orders/pair", jsonBody = JsonLite.write(mapOf("deviceInfo" to deviceInfo)), headers = auth()).code in 200..299
+    }.getOrDefault(false)
 
     override fun postAcks(acks: List<PendingAck>): Boolean = runCatching {
         http.request("POST", "$base/api/v1/orders/acks", jsonBody = acksBody(acks), headers = auth()).code in 200..299
