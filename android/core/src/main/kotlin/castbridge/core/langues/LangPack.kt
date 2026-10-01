@@ -28,11 +28,11 @@ enum class LangExerciseKind(val key: String) {
 /** [answers]: accepted answers (dictation, cloze, translate, order = the right sentence); [choices]/[correct]: mcq/truefalse; [pairs]: match; [words]: shuffled pieces (order). */
 data class LangExercise(
     val id: String, val kind: LangExerciseKind, val prompt: String, val audio: String?, val answers: List<String>,
-    val choices: List<String>, val correct: Int?, val pairs: List<Pair<String, String>>, val words: List<String>, val model: String?, val skill: Skill,
+    val choices: List<String>, val correct: Int?, val pairs: List<Pair<String, String>>, val words: List<String>, val model: String?, val skill: LangSkill,
 )
 
 data class LangUnit(
-    val id: String, val title: String, val minutes: Int, val skills: List<Skill>, val prerequisites: List<String>,
+    val id: String, val title: String, val minutes: Int, val skills: List<LangSkill>, val prerequisites: List<String>,
     val vocab: List<VocabItem>, val dialogues: List<Dialogue>, val grammar: List<GrammarNote>, val exercises: List<LangExercise>,
     val stories: List<Story>, val cards: List<Card>, val animations: List<AnimRef>,
 )
@@ -65,7 +65,7 @@ object LangPackJson {
         if (fmt > FORMAT) throw ParseError("langue.json : format $fmt non pris en charge (max $FORMAT)")
         val id = root.req("id", "langue.json")
         val parts = LangLots.parse(id.substringBeforeLast("-v")) ?: throw ParseError("langue.json : id « $id » n'est pas <cible>-<niveau>-<thème>-<départ>")
-        val declared = LangLots.Parts(Lang.of(root.str("target")) ?: throw ParseError("langue.json : langue cible inconnue"), Level.of(root.str("level")) ?: throw ParseError("langue.json : niveau inconnu"),
+        val declared = LangLots.Parts(Lang.of(root.str("target")) ?: throw ParseError("langue.json : langue cible inconnue"), LangLevel.of(root.str("level")) ?: throw ParseError("langue.json : niveau inconnu"),
             root.req("theme", "langue.json"), Lang.of(root.str("source")) ?: throw ParseError("langue.json : langue de départ inconnue"))
         if (declared != parts) throw ParseError("langue.json : id et champs target/level/theme/source incohérents")
         val units = root.l("units").mapIndexed { k, u -> unit(u.o("unité #$k")) }
@@ -85,7 +85,7 @@ object LangPackJson {
 
     private fun unit(m: Map<String, Any?>): LangUnit {
         val id = m.req("id", "unité"); val w = "unité $id"
-        return LangUnit(id, m.req("title", w), m.int("minutes") ?: 10, m.ss("skills").map { Skill.of(it) ?: throw ParseError("$w : compétence inconnue « $it »") }, m.ss("prerequisites"),
+        return LangUnit(id, m.req("title", w), m.int("minutes") ?: 10, m.ss("skills").map { LangSkill.of(it) ?: throw ParseError("$w : compétence inconnue « $it »") }, m.ss("prerequisites"),
             m.l("vocab").map { v -> v.o("$w : vocab").let { VocabItem(it.req("id", w), it.req("term", w), it.str("reading"), it.req("gloss", w), it.str("pos"), it.str("audio"), it.str("image")) } },
             m.l("dialogues").map { d -> d.o("$w : dialogue").let { Dialogue(it.req("id", w), it.req("title", w), it.l("lines").map { x -> line(x.o("$w : réplique"), w) }, it.str("audio"), it.str("video")) } },
             m.l("grammar").map { g -> g.o("$w : grammaire").let { x -> GrammarNote(x.req("id", w), x.req("title", w), x.req("md", w), x.l("examples").map { e -> e.o(w).let { it.req("text", w) to it.req("tr", w) } }) } },
@@ -99,13 +99,13 @@ object LangPackJson {
         val id = m.req("id", "exercice"); val w = "exercice $id"
         val kind = LangExerciseKind.of(m.str("kind")) ?: throw ParseError("$w : \"kind\" inconnu « ${m.str("kind")} »")
         return LangExercise(id, kind, m.req("prompt", w), m.str("audio"), m.ss("answers"), m.ss("choices"), m.int("correct"),
-            m.l("pairs").map { p -> p.o(w).let { it.req("a", w) to it.req("b", w) } }, m.ss("words"), m.str("model"), Skill.of(m.str("skill")) ?: defaultSkill(kind))
+            m.l("pairs").map { p -> p.o(w).let { it.req("a", w) to it.req("b", w) } }, m.ss("words"), m.str("model"), LangSkill.of(m.str("skill")) ?: defaultSkill(kind))
     }
 
     fun defaultSkill(k: LangExerciseKind) = when (k) {
-        LangExerciseKind.DICTATION -> Skill.LISTENING; LangExerciseKind.SPEAK -> Skill.SPEAKING
-        LangExerciseKind.WRITE, LangExerciseKind.TRANSLATE, LangExerciseKind.STROKES, LangExerciseKind.ORDER -> Skill.WRITING
-        else -> Skill.READING
+        LangExerciseKind.DICTATION -> LangSkill.LISTENING; LangExerciseKind.SPEAK -> LangSkill.SPEAKING
+        LangExerciseKind.WRITE, LangExerciseKind.TRANSLATE, LangExerciseKind.STROKES, LangExerciseKind.ORDER -> LangSkill.WRITING
+        else -> LangSkill.READING
     }
 }
 

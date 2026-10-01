@@ -24,7 +24,7 @@ class LangBudget(root: Map<String, Any?>) {
     private fun pct(m: Map<String, Any?>) = m.mapValues { (it.value as Number).toInt() }
 
     /** Budget of one (language, level) cell, in KB. Media = envelope cell − text; [mediaByKind] splits it. */
-    data class Cell(val lang: Lang, val level: Level, val totalKb: Long, val textKb: Long) {
+    data class Cell(val lang: Lang, val level: LangLevel, val totalKb: Long, val textKb: Long) {
         val mediaKb get() = totalKb - textKb
     }
 
@@ -41,11 +41,11 @@ class LangBudget(root: Map<String, Any?>) {
     fun transversalKb(): Long = envelopeMb * 1024L * transversalPct / 100
     fun reserveKb(): Long = envelopeMb * 1024L * reservePct / 100
 
-    fun cell(l: Lang, lv: Level): Cell {
+    fun cell(l: Lang, lv: LangLevel): Cell {
         val p = profile.getValue(l.code)
         return Cell(l, lv, languageKb(l) * levelPct.getValue(p).getValue(lv.name) / 100, textKb.getValue(p).toLong())
     }
-    fun cells(): List<Cell> = Lang.entries.flatMap { l -> Level.entries.map { cell(l, it) } }
+    fun cells(): List<Cell> = Lang.entries.flatMap { l -> LangLevel.entries.map { cell(l, it) } }
 
     /** Number of media lots (≤ 100 MB each) needed for a cell, at least 1 when it has media. */
     fun mediaLots(c: Cell): Int = ((c.mediaKb * 1024 + mediaLotMax - 1) / mediaLotMax).toInt().coerceAtLeast(if (c.mediaKb > 0) 1 else 0)
@@ -72,7 +72,7 @@ class LangBudget(root: Map<String, Any?>) {
 }
 
 /** What a learner follows: languages (target + start), where they are. */
-data class LearnerLang(val target: Lang, val source: Lang, val level: Level)
+data class LearnerLang(val target: Lang, val source: Lang, val level: LangLevel)
 
 /** Which language lots the phone keeps / sends to the TV. Pure and deterministic, like `LotPlanner`. */
 object LangPlanner {

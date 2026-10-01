@@ -41,15 +41,15 @@ object Srs {
 
 /** Placement test (docs/LANGUES.md § 1.5): staircase from A1 upward, 3 items per level and skill; a level is reached with ≥ 2 of 3 right (≥ 67 %) and every lower level too. */
 object Placement {
-    data class Answer(val level: Level, val skill: Skill, val correct: Boolean)
-    data class Result(val bySkill: Map<Skill, Level>, val overall: Level)
+    data class Answer(val level: LangLevel, val skill: LangSkill, val correct: Boolean)
+    data class Result(val bySkill: Map<LangSkill, LangLevel>, val overall: LangLevel)
 
     const val ITEMS_PER_STEP = 3
     const val PASS = 2
 
     /** The level to ask next for [skill], or null when the staircase stopped (failed a step) or reached the top. */
-    fun nextLevel(answers: List<Answer>, skill: Skill): Level? {
-        var level = Level.A1
+    fun nextLevel(answers: List<Answer>, skill: LangSkill): LangLevel? {
+        var level = LangLevel.A1
         while (true) {
             val here = answers.filter { it.skill == skill && it.level == level }
             if (here.size < ITEMS_PER_STEP) return level
@@ -59,9 +59,9 @@ object Placement {
     }
 
     fun evaluate(answers: List<Answer>): Result {
-        val by = Skill.entries.associateWith { s ->
-            var reached = Level.A0
-            var level: Level? = Level.A1
+        val by = LangSkill.entries.associateWith { s ->
+            var reached = LangLevel.A0
+            var level: LangLevel? = LangLevel.A1
             while (level != null) {
                 val here = answers.filter { it.skill == s && it.level == level }
                 if (here.size < ITEMS_PER_STEP || here.count { it.correct } < PASS) break
@@ -71,15 +71,15 @@ object Placement {
         }
         // Overall = average of the four skills, rounded down: one weak skill does not hide the others, but the profile keeps them apart.
         val avg = by.values.sumOf { it.ordinal } / by.size
-        return Result(by, Level.entries[avg])
+        return Result(by, LangLevel.entries[avg])
     }
 }
 
-/** Skill graph of one language (`graph/langue-<code>.json`): nodes with prerequisites; must be acyclic, prerequisites never above the node's level. */
-data class SkillNode(val id: String, val level: Level, val skill: Skill?, val title: String, val requires: List<String>, val unit: String?)
-data class SkillGraph(val lang: Lang, val nodes: List<SkillNode>) {
+/** LangSkill graph of one language (`graph/langue-<code>.json`): nodes with prerequisites; must be acyclic, prerequisites never above the node's level. */
+data class LangSkillNode(val id: String, val level: LangLevel, val skill: LangSkill?, val title: String, val requires: List<String>, val unit: String?)
+data class LangSkillGraph(val lang: Lang, val nodes: List<LangSkillNode>) {
     private val byId = nodes.associateBy { it.id }
-    fun available(mastered: Set<String>): List<SkillNode> = nodes.filter { it.id !in mastered && mastered.containsAll(it.requires) }
+    fun available(mastered: Set<String>): List<LangSkillNode> = nodes.filter { it.id !in mastered && mastered.containsAll(it.requires) }
     fun errors(): List<String> {
         val e = ArrayList<String>()
         if (byId.size != nodes.size) e += "identifiants de nœuds en double"
@@ -99,13 +99,15 @@ data class SkillGraph(val lang: Lang, val nodes: List<SkillNode>) {
     }
 
     companion object {
-        fun parse(text: String): SkillGraph {
+        /** Reads `content/graph/langue-<code>.json` (the content-architecture domain format; extra fields `cefr` and `skill`). The N-level of the shared ladder is ignored here: a language is laid out on the CEFR. */
+        fun parse(text: String): LangSkillGraph {
             val root = castbridge.core.quiz.Json.obj(text)
-            val lang = Lang.of(root["lang"] as? String) ?: throw IllegalArgumentException("graphe : langue inconnue")
-            @Suppress("UNCHECKED_CAST") val raw = root["nodes"] as? List<Map<String, Any?>> ?: throw IllegalArgumentException("graphe : nodes manquant")
-            return SkillGraph(lang, raw.map { n ->
-                SkillNode(n["id"] as String, Level.of(n["level"] as? String) ?: throw IllegalArgumentException("graphe : niveau inconnu"), Skill.of(n["skill"] as? String),
-                    n["title"] as String, (n["requires"] as? List<*>)?.filterIsInstance<String>().orEmpty(), n["unit"] as? String)
+            val lang = Lang.of((root["prefix"] as? String)) ?: throw IllegalArgumentException("graphe : langue (prefix) inconnue")
+            @Suppress("UNCHECKED_CAST") val raw = root["skills"] as? List<Map<String, Any?>> ?: throw IllegalArgumentException("graphe : skills manquant")
+            return LangSkillGraph(lang, raw.map { n ->
+                @Suppress("UNCHECKED_CAST") val title = (n["title"] as? Map<String, Any?>)?.get("fr") as? String ?: throw IllegalArgumentException("graphe : titre fr manquant")
+                LangSkillNode(n["id"] as String, LangLevel.of(n["cefr"] as? String) ?: throw IllegalArgumentException("graphe : niveau cefr inconnu"), LangSkill.of(n["skill"] as? String),
+                    title, (n["prereq"] as? List<*>)?.filterIsInstance<String>().orEmpty(), (n["unit"] as? String))
             })
         }
     }
