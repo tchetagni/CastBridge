@@ -184,7 +184,7 @@ def scan_langues(inv, repo, cfg):
             sub = "langues/%s/%s" % (lang, lv.upper())
             inv.add_sub(sub, "langues", 1, "%s %s" % (lang, lv.upper()), lang)
             inv.lots[("langues", "%s-%s" % (lang, lv.lower()))] = {"title": "Langues %s %s" % (lang, lv.upper()), "cat": "langues"}
-            inv.lots[("langues-media", "%s-%s" % (lang, lv.lower()))] = {"title": "Médias %s %s" % (lang, lv.upper()), "cat": "langues"}
+            inv.lots[("langmedia", "%s-%s" % (lang, lv.lower()))] = {"title": "Médias %s %s" % (lang, lv.upper()), "cat": "langues"}
     for ldir in sorted(glob.glob(os.path.join(base, "*", "langue.json"))):
         pk = load(ldir)
         lang, lv = pk["target"], pk["level"].upper()
@@ -208,7 +208,7 @@ def scan_langues(inv, repo, cfg):
             if m.get("license") not in cfg["allowedLicenses"]:
                 inv.extra.setdefault("unlicensed", []).append(mid)
                 continue
-            inv.add(Item("langues", sub, "media", pk["id"] + ":" + mid, ("langues-media", cell), int(m["bytes"]),
+            inv.add(Item("langues", sub, "media", pk["id"] + ":" + mid, ("langmedia", cell), int(m["bytes"]),
                          (("lot", 400),), obj=m, mkind=m.get("kind"), ms=int(m.get("durationMs", 0)), mid=mid, pack=pk["id"]))
         inv.extra[("pack", pk["id"])] = {"pack": {k: v for k, v in pk.items() if k != "units"}, "dir": pack_dir}
 
@@ -250,7 +250,7 @@ class Selection:
         self.warnings = []
 
     def lot_limit(self, lot):
-        return self.cfg["mediaLotMaxBytes"] if lot[0] == "langues-media" else self.cfg["textLotMaxBytes"]
+        return self.cfg["mediaLotMaxBytes"] if lot[0] == "langmedia" else self.cfg["textLotMaxBytes"]
 
     def price(self, it):
         return it.cost + sum(c for k, c in it.opens if (it.lot, k) not in self.opened)
@@ -522,7 +522,7 @@ def _project_lot(inv, chosen, lot, cfg):
             units = [_strip_audio(i.obj, keep) for i in sorted(mine, key=lambda x: x.a["order"])]
             pk = dict(ex["pack"], units=units, edition="trial")
             out[pid + "/langue.json"] = jb(pk)
-    elif feature == "langues-media":
+    elif feature == "langmedia":
         for pid in sorted({i.a["pack"] for i in items}):
             ms = sorted((i for i in items if i.a["pack"] == pid), key=lambda x: x.a["mid"])
             out[pid + "/media.json"] = jb({"format": 1, "media": [m.obj for m in ms]})
@@ -532,7 +532,7 @@ def _project_lot(inv, chosen, lot, cfg):
 
 
 def inv_media(inv, chosen, lot, pid):
-    media_lot = ("langues-media", lot[1])
+    media_lot = ("langmedia", lot[1])
     return [i for i in inv.items.values() if i.lot == media_lot and i.a["pack"] == pid and i.uid in chosen]
 
 
@@ -563,9 +563,9 @@ def bundles(inv):
         out.append({"id": "classe-" + scope, "type": "classe", "title": inv.scopes[scope], "lots": [key(l) for l in lots], "rawBytes": sum(full[l] for l in lots)})
     for l in sorted(l for l in full if l[0] == "quiz"):
         out.append({"id": "quiz-" + l[1], "type": "quiz", "title": inv.lots[l]["title"], "lots": [key(l)], "rawBytes": full[l]})
-    langs = sorted({l[1].split("-")[0] for l in full if l[0].startswith("langues")})
+    langs = sorted({l[1].split("-")[0] for l in full if l[0].startswith("lang")})
     for lang in langs:
-        lots = sorted(l for l in full if l[0].startswith("langues") and l[1].split("-")[0] == lang)
+        lots = sorted(l for l in full if l[0].startswith("lang") and l[1].split("-")[0] == lang)
         out.append({"id": "langue-" + lang, "type": "langue", "title": "Langue " + lang, "lots": [key(l) for l in lots], "rawBytes": sum(full[l] for l in lots)})
     allots = sorted(full)
     out.append({"id": "tout", "type": "tout", "title": "Tout le catalogue", "lots": [key(l) for l in allots], "rawBytes": sum(full.values())})
@@ -622,7 +622,7 @@ def violations(inv, sel, cfg, files):
         if not any(i.uid in sel.chosen and i.lot == ("learn", scope) for i in inv.items.values()):
             v.append("classe sans échantillon : " + scope)
     for lot, f in sorted(files.items()):
-        lim = cfg["mediaLotMaxBytes"] if lot[0] == "langues-media" else cfg["textLotMaxBytes"]
+        lim = cfg["mediaLotMaxBytes"] if lot[0] == "langmedia" else cfg["textLotMaxBytes"]
         b = sum(fsize(x) for x in f.values())
         if b > lim:
             v.append("lot d'essai trop gros : %s:%s = %d > %d" % (lot[0], lot[1], b, lim))
@@ -643,7 +643,7 @@ def previous_uids(man):
     """Les éléments déjà dans l'essai (pour ne pas les faire sortir sans raison quand le contenu grandit)."""
     out = set()
     for lot in man.get("lots", []):
-        cat = "langues" if lot["feature"].startswith("langues") else lot["feature"]
+        cat = "langues" if lot["feature"].startswith("lang") else lot["feature"]
         for it in lot["items"]:
             out.add("%s/%s" % (cat, it))
     return out

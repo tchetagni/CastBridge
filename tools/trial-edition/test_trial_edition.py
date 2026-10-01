@@ -137,7 +137,7 @@ class BudgetTest(Base):
         cfg = dict(self.cfg, textLotMaxBytes=12000)
         inv, sel, files, v = self.run_sel(cfg=cfg)
         for lot, f in files.items():
-            if lot[0] != "langues-media":
+            if lot[0] != "langmedia":
                 self.assertLessEqual(sum(te.fsize(x) for x in f.values()), 12000, lot)
 
 
