@@ -81,7 +81,8 @@ class BtSshGatewayService : Service() {
 
     private fun open(label: String, handshake: Boolean, addr: String, uuid: String, host: String, port: Int, onState: (TunnelGateway.State) -> Unit): TunnelGateway? {
         lateinit var gw: TunnelGateway
-        gw = TunnelGateway(label, handshake, { dial(addr, uuid, label) }, maxLinks = if (handshake) 4 else 2,
+        gw = TunnelGateway(label, handshake, { dial(addr, uuid, label) },
+            dialShared = if (handshake) ({ dial(addr, BtProtocol.API_MUX_SERVICE_UUID, label) }) else null, maxLinks = if (handshake) 4 else 2, connectLock = castbridge.core.tunnel.BtConnectLock.of(addr),
             log = { Log.i(TAG, it) }, onChange = { onState(gw.state) })
         return try { gw.start(host, port); gw } catch (e: IOException) {
             note("Port $port déjà utilisé sur le téléphone (${e.message})"); null
@@ -98,7 +99,8 @@ class BtSshGatewayService : Service() {
         val dev = adapter.getRemoteDevice(addr)
         if (dev.bondState != BluetoothDevice.BOND_BONDED) throw BtDialException("La TV n'est plus appairée avec ce téléphone (réglages Bluetooth)")
         var last: IOException? = null
-        repeat(2) { attempt ->       // a second try with a fresh socket also refreshes a stale SDP answer (the TV re-published the service)
+        // ONE attempt per call: LinkPool (core) owns the retries (lock, >= 1.5 s after a close, growing waits with jitter, 3 tries), never a tight loop
+        repeat(1) { attempt ->
             val sock = dev.createRfcommSocketToServiceRecord(UUID.fromString(uuid))     // secure: authenticated and encrypted by the pairing
             val guard = timers.schedule(Runnable { runCatching { sock.close() } }, DIAL_LIMIT_S, TimeUnit.SECONDS)
             try {
@@ -111,7 +113,6 @@ class BtSshGatewayService : Service() {
             } catch (e: IOException) {
                 guard.cancel(false); runCatching { sock.close() }; last = e
                 Log.i(TAG, "$label: connect attempt ${attempt + 1} failed: ${e.message}")
-                if (attempt == 0) Thread.sleep(600)
             }
         }
         throw BtDialException("Service introuvable ou fermé par la TV (${last?.message}). Sur la TV : MENU > Administration " +
@@ -204,6 +205,9 @@ fun BtSshGatewayPanel() {
         Text("Active vers ${st.tv}", style = MaterialTheme.typography.bodyMedium)
         if (st.api.running) {
             Text("API : http://${st.api.listen}   ·   ${st.api.active} liaison(s)   ·   envoyés ${formatSize(st.api.up)}, reçus ${formatSize(st.api.down)}", style = MaterialTheme.typography.bodyMedium)
+            Text("Liaisons Bluetooth : ${st.api.links} ouverte(s), ${st.api.linksOpened} ouverture(s) depuis le début" +
+                (if (st.api.shared == true) " · liaison partagée" else if (st.api.shared == false) " · TV ancienne : une liaison par requête" else "") +
+                (st.api.lastClose?.let { " · dernière fermeture : $it" } ?: ""), style = MaterialTheme.typography.bodySmall)
             Text("Depuis ce téléphone (Termux) : curl -H 'X-CB-Pin: <code>' http://${st.api.listen}/api/hello", fontFamily = FontFamily.Monospace, style = MaterialTheme.typography.bodySmall)
             st.api.message?.let { Text("API — $it", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error) }
         }

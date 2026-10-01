@@ -74,6 +74,8 @@ object BtProtocol {
     const val SSH_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000002"
     /** Third RFCOMM service: a byte tunnel to the TV's own HTTP API (127.0.0.1:8765), see castbridge.core.tunnel.TcpTunnel and docs/ADMIN.md. */
     const val API_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000003"
+    /** Fourth RFCOMM service: the same HTTP API over ONE shared link per phone (frames, see castbridge.core.tunnel.MuxSession). The third service stays for old phones/TVs. */
+    const val API_MUX_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000004"
     const val OK = 0
     const val ERR_MAGIC = 1
     const val ERR_PIN = 2

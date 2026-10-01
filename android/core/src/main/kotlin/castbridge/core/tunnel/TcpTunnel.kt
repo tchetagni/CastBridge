@@ -69,6 +69,7 @@ class TcpTunnel(
 
     private class Entry(val id: Int, val peer: String, val name: String, val since: Long) {
         @Volatile var relay: ByteRelay? = null
+        @Volatile var session: MuxSession? = null
         val evicted = AtomicBoolean(false)
         @Volatile var lastSeen = since
     }
@@ -83,10 +84,14 @@ class TcpTunnel(
 
     fun active(): List<Active> = synchronized(lock) {
         entries.values.filter { !it.evicted.get() }.sortedBy { it.since }
-            .map { Active(it.peer, it.name, it.since, it.relay?.bytesAtoB?.get() ?: 0, it.relay?.bytesBtoA?.get() ?: 0) }
+            .map { Active(it.peer, it.name, it.since, it.relay?.bytesAtoB?.get() ?: it.session?.bytesIn?.get() ?: 0, it.relay?.bytesBtoA?.get() ?: it.session?.bytesOut?.get() ?: 0) }
     }
 
     /** Bytes relayed since the start, finished links included: (phone -> TV, TV -> phone). */
+    /** Shared links (mux) open now, and why the last one closed (for "Mes TV" and the TV's diagnostic). */
+    fun muxLinks(): Int = synchronized(lock) { entries.values.count { it.session != null && !it.evicted.get() } }
+    @Volatile var lastClose: String? = null; private set
+
     fun totals(): Pair<Long, Long> = (totalUp.get() + active().sumOf { it.bytesUp }) to (totalDown.get() + active().sumOf { it.bytesDown })
 
     private fun refuse(peer: String, code: Int, message: String, output: OutputStream, close: () -> Unit): Outcome {
@@ -101,11 +106,11 @@ class TcpTunnel(
     private fun take(peer: String, name: String): Entry? = synchronized(lock) {
         var live = entries.values.filter { !it.evicted.get() }
         if (live.size >= maxConnections) {
-            val stale = live.minByOrNull { it.relay?.lastActivity ?: it.lastSeen }
-            val t = stale?.let { it.relay?.lastActivity ?: it.lastSeen }
+            val stale = live.minByOrNull { it.relay?.lastActivity ?: it.session?.lastRx ?: it.lastSeen }
+            val t = stale?.let { it.relay?.lastActivity ?: it.session?.lastRx ?: it.lastSeen }
             if (stale != null && t != null && now() - t >= evictIdleMs && stale.evicted.compareAndSet(false, true)) {
                 log("$label: link of ${stale.peer} silent for ${(now() - t) / 1000} s closed to make room")
-                stale.relay?.close()
+                stale.relay?.close(); stale.session?.close("fermée pour faire de la place")
                 live = entries.values.filter { !it.evicted.get() }
             }
         }
@@ -165,6 +170,77 @@ class TcpTunnel(
             if (port >= 0) peers.unregister(port)
             synchronized(lock) { entries.remove(entry.id) }
             runCatching(onChange)
+        }
+    }
+
+    /**
+     * Serves a shared link ("CastBridge API v2", see [MuxSession]) until it ends (blocking): the phone opens one stream per local
+     * HTTP connection, each joined to a fresh loopback connection exactly as [serve] does (same attribution, same server checks).
+     * The link stays open while the phone pings (every ~15 s) or data flows; it is closed after [idleMs] without any frame.
+     */
+    fun serveMux(peer: String, name: String, input: InputStream, output: OutputStream, close: () -> Unit, onChange: () -> Unit = {}): Outcome {
+        admit(peer)?.let { return refuse(peer, TunnelStatus.REFUSED, it, output, close) }
+        val entry = take(peer, name)
+            ?: return refuse(peer, TunnelStatus.BUSY, "toutes les liaisons Bluetooth de la TV sont occupées (max $maxConnections)", output, close)
+        var session: MuxSession? = null
+        try {
+            runCatching(onChange)
+            output.write(TunnelStatus.OK); output.flush()
+            log("$label: shared link from $peer open")
+            val done = java.util.concurrent.CountDownLatch(1)
+            val rin = input; val rout = output; val rclose = close
+            val link = object : castbridge.core.tv.Link { override val input = rin; override val output = rout; override fun close() { rclose() } }
+            val s = MuxSession(link, onOpen = { st -> serveStream(peer, st) }, onClosed = { done.countDown() }, now = now)
+            session = s; entry.session = s
+            if (entry.evicted.get()) s.close("fermée pour faire de la place")
+            s.start()
+            val watch = Thread({
+                try {
+                    while (!s.isClosed) {
+                        Thread.sleep(watchStepMs)
+                        val silent = now() - s.lastRx
+                        if (silent > idleMs()) {
+                            lastError = "liaison Bluetooth fermée après ${silent / 1000} s sans échange"
+                            log("$label: shared link from $peer silent for ${silent / 1000} s, closed"); s.close("silence de ${silent / 1000} s"); break
+                        }
+                    }
+                } catch (_: InterruptedException) {}
+            }, "bt-$label-muxwatch").apply { isDaemon = true; start() }
+            done.await()
+            watch.interrupt()
+            lastClose = s.closeReason
+            log("$label: shared link from $peer closed (${s.closeReason}; in ${s.bytesIn.get()} B, out ${s.bytesOut.get()} B)")
+            return Outcome(true, TunnelStatus.OK, null, s.bytesIn.get(), s.bytesOut.get())
+        } catch (e: IOException) {
+            lastError = "liaison interrompue : ${e.javaClass.simpleName}"; lastClose = lastError
+            log("$label: shared link from $peer failed: ${e.javaClass.simpleName}")
+            return Outcome(false, TunnelStatus.INTERNAL, lastError)
+        } finally {
+            session?.let { totalUp.addAndGet(it.bytesIn.get()); totalDown.addAndGet(it.bytesOut.get()) }
+            session?.close(); runCatching(close)
+            synchronized(lock) { entries.remove(entry.id) }
+            runCatching(onChange)
+        }
+    }
+
+    /** One stream of a shared link: a fresh, attributed loopback connection to the local server, relayed until either end closes. */
+    private fun serveStream(peer: String, st: MuxStream) {
+        val sock = Socket()
+        var port = -1
+        try {
+            sock.bind(InetSocketAddress("127.0.0.1", 0))
+            port = sock.localPort
+            peers.register(port, "bt:$peer")
+            try { sock.connect(InetSocketAddress("127.0.0.1", targetPort), connectTimeoutMs) }
+            catch (e: IOException) { lastError = targetDownMessage; log("$label: stream from $peer: $targetDownMessage"); st.close(); return }
+            sock.tcpNoDelay = true
+            val r = ByteRelay(st.input, st.output, sock.getInputStream(), sock.getOutputStream(), { st.close() }, { sock.close() }, bufferBytes, "bt-$label-s").start()
+            r.join()
+        } catch (e: IOException) {
+            log("$label: stream from $peer failed: ${e.javaClass.simpleName}"); st.close()
+        } finally {
+            runCatching { sock.close() }; st.close()
+            if (port >= 0) peers.unregister(port)
         }
     }
 }

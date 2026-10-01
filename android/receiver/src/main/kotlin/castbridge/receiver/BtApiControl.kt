@@ -45,14 +45,19 @@ class BtApiControl(
         serve = { peer, name, i, o, close, onChange -> tunnel.serve(peer, name, i, o, close, onChange) },
         activeNames = { tunnel.active().map { it.name } }, lastError = { tunnel.lastError }, status = status)
 
-    fun start() = bridge.start()
-    fun stop() = bridge.stop()
+    /** Fourth service ("CastBridge API v2"): ONE shared link per phone carrying several HTTP connections (castbridge.core.tunnel.MuxSession). The old service above stays for old phones. */
+    private val sharedBridge = BtTunnelBridge(ctx, "$TAG-v2", "API par Bluetooth", "CastBridge API v2", BtTunnelBridge.uuid(BtProtocol.API_MUX_SERVICE_UUID),
+        serve = { peer, name, i, o, close, onChange -> tunnel.serveMux(peer, name, i, o, close, onChange) },
+        activeNames = { tunnel.active().map { it.name } }, lastError = { tunnel.lastError }, status = { /* the v1 bridge owns the status line */ })
+
+    fun start() { bridge.start(); sharedBridge.start() }
+    fun stop() { sharedBridge.stop(); bridge.stop() }
 
     fun enable(on: Boolean) { enabled = on; bridge.refresh() }
 
     private fun json(): String {
         val q = ReceiverServer::q
-        return """{"enabled":$enabled,"listening":${bridge.running},"maxConnections":4,"refused":${tunnel.refused},""" +
+        return """{"enabled":$enabled,"listening":${bridge.running},"maxConnections":4,"refused":${tunnel.refused},"sharedLinks":${tunnel.muxLinks()},"sharedListening":${sharedBridge.running},"lastClose":${tunnel.lastClose?.let(q) ?: "null"},""" +
             """"lastError":${tunnel.lastError?.let(q) ?: "null"},"active":[""" + tunnel.active().joinToString(",") { q(it.name) } + "]}"
     }
 
