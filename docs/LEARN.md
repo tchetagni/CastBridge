@@ -57,29 +57,35 @@ Figures : chaque étiquette est placée en évitant les autres (graphiques, fris
 vérifie qu'**aucune étiquette ne recouvre une autre** dans toutes les figures du contenu. Focus D-pad : premier élément
 focalisé à chaque écran, ◀ ▶ se déplacent entre boutons tant qu'il y en a, sinon changent de page.
 
-## 2. Couverture réelle du contenu livré (septembre 2026)
+## 2. Couverture réelle du contenu livré (octobre 2026)
 
-`tools/build-learn-packs --check` imprime ce tableau (colonne « À vérifier » = notes de relecture + éléments `review`) :
+`tools/build-learn-packs --check` imprime ce tableau (les packs `bepc-svt`, `bepc-histoire-geo`, `bepc-english`, `bac-philosophie`, `gceal-maths`, `licence-droit` sont **nouveaux** : 3 fiches chacun, brouillon, à relire ; voir § 4b) (colonne « À vérifier » = notes de relecture + éléments `review`) :
 
 | Pack | Examen | Niveau | Matière | Fiches | Exercices (dont auto-éval.) | Épreuves blanches | Illustrations | À vérifier |
 |---|---|---|---|---|---|---|---|---|
-| cep-maths | CEP | CM2 | Mathématiques | 5 | 61 (25) | 1 | 10 | 5 |
-| cep-francais | CEP | CM2 | Français | 5 | 59 (25) | 1 | 5 | 6 |
-| cep-sciences | CEP | CM2 | Sciences | 4 | 47 (20) | 1 | 6 | 9 |
-| fslc-maths | FSLC | Class 6 | Mathematics | 4 | 52 (20) | 1 | 8 | 8 |
-| fslc-english | FSLC | Class 6 | English Language | 4 | 48 (20) | 1 | 5 | 5 |
-| fslc-science | FSLC | Class 6 | Science | 4 | 52 (20) | 1 | 6 | 8 |
-| bepc-maths | BEPC | 3e | Mathématiques | 5 | 59 (25) | 1 | 7 | 4 |
+| bac-maths | Baccalauréat | Tle | Mathématiques | 5 | 58 (25) | 1 | 5 | 9 |
+| bac-philosophie | Baccalauréat | Tle | Philosophie | 3 | 36 (15) | 1 | 3 | 10 |
+| bac-physique-chimie | Baccalauréat | Tle | Physique-Chimie | 5 | 59 (25) | 1 | 7 | 8 |
+| bepc-english | BEPC | 3e | Anglais | 3 | 36 (15) | 1 | 3 | 2 |
 | bepc-francais | BEPC | 3e | Français | 4 | 47 (20) | 1 | 4 | 8 |
+| bepc-histoire-geo | BEPC | 3e | Histoire-Géographie-ECM | 3 | 36 (15) | 1 | 3 | 20 |
+| bepc-maths | BEPC | 3e | Mathématiques | 5 | 59 (25) | 1 | 8 | 4 |
 | bepc-pct | BEPC | 3e | Physique-chimie (PCT) | 4 | 48 (20) | 1 | 6 | 8 |
-| gceol-maths | GCE O Level | Form 5 | Mathematics | 4 | 48 (20) | 1 | 10 | 6 |
-| gceol-english | GCE O Level | Form 5 | English Language | 5 | 59 (25) | 1 | 6 | 6 |
+| bepc-svt | BEPC | 3e | SVT | 3 | 36 (15) | 1 | 3 | 14 |
+| cep-francais | CEP | CM2 | Français | 5 | 59 (25) | 1 | 5 | 6 |
+| cep-maths | CEP | CM2 | Mathématiques | 5 | 61 (25) | 1 | 10 | 5 |
+| cep-sciences | CEP | CM2 | Sciences | 4 | 47 (20) | 1 | 6 | 9 |
+| fslc-english | FSLC | Class 6 | English Language | 4 | 48 (20) | 1 | 5 | 5 |
+| fslc-maths | FSLC | Class 6 | Mathematics | 4 | 52 (20) | 1 | 8 | 8 |
+| fslc-science | FSLC | Class 6 | Science | 4 | 52 (20) | 1 | 6 | 8 |
+| gceal-maths | GCE A Level | Upper Sixth | Mathematics | 3 | 36 (15) | 1 | 5 | 4 |
 | gceol-biology | GCE O Level | Form 5 | Biology | 5 | 59 (25) | 1 | 12 | 6 |
-| probatoire-francais | Probatoire (A, C, D) | 1re | Français | 4 | 46 (20) | 1 | 4 | 13 |
-| bac-maths | Bac (C, D) | Tle | Mathématiques | 5 | 58 (25) | 1 | 5 | 9 |
-| bac-physique-chimie | Bac (C, D) | Tle | Physique-Chimie | 5 | 59 (25) | 1 | 7 | 8 |
+| gceol-english | GCE O Level | Form 5 | English Language | 5 | 59 (25) | 1 | 6 | 6 |
+| gceol-maths | GCE O Level | Form 5 | Mathematics | 4 | 48 (20) | 1 | 10 | 6 |
+| licence-droit | — | L1 | Droit | 3 | 38 (15) | 1 | 2 | 11 |
 | maternelle-decouverte | — | MS | Découverte du monde | 3 | 18 (0) | 0 | 30 | 5 |
-| **Total** | | | | **70** | **820 (335)** | **15** | **137** | **124** |
+| probatoire-francais | Probatoire | 1re | Français | 4 | 46 (20) | 1 | 4 | 13 |
+| **Total (22 packs)** | | | | **88** | **1038 (425)** | **21** | **151** | **175** |
 
 Chapitres traités — CEP maths : numération et 4 opérations, fractions, proportionnalité/pourcentages, mesures (FCFA,
 durées) et géométrie, problèmes (partages, prix, vitesse moyenne, intérêts simples). CEP français : accords,
@@ -182,13 +188,12 @@ plus tard, **en ligne**.
 
 - **Socle embarqué** : packs listés dans `content/learn/embedded.txt` (aujourd'hui : maternelle + mathématiques de
   chaque examen), zippés dans les ressources de `:core` à la compilation (`gradle :core:embedLearnPacks`, automatique).
-  **~130 ko** ; budget testé : **5 Mo compressés** au maximum (`LearnContentTest.embeddedBudget`).
+  **~130 ko** ; budget testé : **5 Mo compressés** au maximum (`LearnContentTest.embeddedBudget`) et, depuis les lots, **3 Mo pour Apprendre** (§ 4b). C'est le **socle de démonstration** : le reste du catalogue arrive par lots.
 - **Pack** = zip `<id>-v<version>.learn.zip` :
   `manifest.json` (id, version, titre, langue, cursus, niveau, matière, examen, statut, taille, nombre de fiches /
   exercices / épreuves, date, **sha256 et taille de chaque fichier**, `signature` Ed25519 facultative) + `pack.json` +
   `lessons/*.json` + `media/` (images webp/svg compressées, audio facultatif). **Jamais de vidéo dans un pack.**
-  Construction reproductible (entrées triées, dates fixes). Les 16 packs du POC pèsent de 11 à 33 ko chacun (~420 ko
-  au total).
+  Construction reproductible (entrées triées, dates fixes). Les 22 packs pèsent de 11 à 33 ko chacun (~500 ko au total) ; ils sont regroupés en lots (§ 4b).
 - **Vérification avant activation** (`PackReader`) : chemins sûrs, limites de taille (64 Mo décompressés, 2000
   fichiers), chaque fichier du manifest présent avec la bonne taille et le bon **sha256**, aucun fichier non déclaré,
   **signature Ed25519** exigée dès qu'une clé de confiance est configurée (`PackSignatures` ; clé brute 32 octets en
@@ -209,6 +214,113 @@ plus tard, **en ligne**.
   **Supprimer** un pack libère la place ; les progrès des élèves sont gardés.
 - **Outil** : `tools/build-learn-packs [dossier]` (ou `gradle :core:buildLearnPacks`) valide tout puis écrit les zips et
   `catalog.json` ; `tools/build-learn-packs --check` valide et imprime la couverture.
+
+## 4b. Lots : une classe = un lot (hors ligne d'abord)
+
+**Règle du propriétaire.** La TV ne porte que **~10 Mo au maximum** de données Apprendre + Quiz. Le téléphone en gère jusqu'à
+**100 Mo** : il les télécharge du serveur à la première synchronisation (il a plus de place et une connexion plus fiable) puis
+les livre à la TV. Les mises à jour se font **par lots homogènes** (un lot = toutes les données d'une classe). **Le mode différé
+(hors ligne) est prioritaire : la TV n'a le plus souvent pas d'Internet.** Conséquences, vérifiées par les tests :
+
+- tout écran et tout exercice d'Apprendre fonctionne avec les seuls lots que la TV détient : **aucun appel réseau, aucun
+  indicateur d'attente du réseau** (le code `learn/` et `lots/` n'utilise ni `java.net` ni socket : test) ;
+- le téléphone télécharge dès qu'il a Internet et livre à la TV dès que les deux peuvent se parler (c'est le rôle du cadre
+  commun des lots : `LotSync`, `LotPlanner`, `LotPush`… ; Apprendre n'en refait rien et ne dépend que du contrat
+  `castbridge.core.lots.LotApi`) ;
+- les deux appareils affichent la **fraîcheur** (« données du 12 sept. ») et ne disent jamais qu'Internet est requis ;
+- la progression des élèves est locale à chaque appareil, survit aux mises à jour de lots et se **fusionne** (ci-dessous).
+
+### Tableau des lots (`content/learn/scopes.txt` : l'UNIQUE source)
+Les identifiants de packs (dossiers de `content/learn/`) restent la source de vérité ; `scopes.txt` les rattache à un lot
+(`scope | titre | packs`). Un pack est dans un seul lot ; un lot est autonome (prérequis internes : vérifié à la construction).
+
+| Scope | Lot | Packs | Fiches | Taille (v1) |
+|---|---|---|---|---|
+| `maternelle` | Maternelle | maternelle-decouverte | 3 | 11,4 Ko |
+| `cm2` | CM2 – CEP | cep-francais, cep-maths, cep-sciences | 14 | 76,8 Ko |
+| `class6` | Class 6 – FSLC | fslc-english, fslc-maths, fslc-science | 12 | 67,5 Ko |
+| `3e` | 3e – BEPC | bepc-english, bepc-francais, bepc-histoire-geo, bepc-maths, bepc-pct, bepc-svt | 22 | 118,3 Ko |
+| `form5` | Form 5 – GCE O Level | gceol-biology, gceol-english, gceol-maths | 14 | 83,8 Ko |
+| `1ere` | Première – Probatoire | probatoire-francais | 4 | 30,4 Ko |
+| `tle-cd` | Terminale C/D – Bac | bac-maths, bac-physique-chimie | 10 | 57,6 Ko |
+| `tle-commun` | Terminale (toutes séries) – Philosophie | bac-philosophie | 3 | 15,3 Ko |
+| `upper-sixth` | Upper Sixth – GCE A Level | gceal-maths | 3 | 12,5 Ko |
+| `droit-l1` | Licence 1 – Droit | licence-droit | 3 | 14,7 Ko |
+
+Total **488 Ko** pour 10 lots (le plus gros : 118 Ko ; plafond par lot : **3 Mo**). Les autres classes (cp…5e, 4e, 2nde,
+Form 1-4, Class 1-5, Lower Sixth, tle-a, L2/L3, économie) n'ont pas encore de contenu : leurs scopes existent déjà dans
+l'échelle `LearnScopes` pour que le planificateur de la TV sache les ordonner le jour venu.
+
+### Format d'un lot et construction
+- Un lot = **un zip** `learn-<scope>-v<version>.lot.zip` : `lot.json` (index : scope, titre, **version**, **date** des données,
+  empreinte du contenu, pour chaque pack son sha256 et pour **chaque fiche une empreinte de contenu**) + `packs/<id>-v<n>.learn.zip`
+  (les packs existants, stockés tels quels : chacun garde son manifest, ses sha256 et sa signature). Reproductible.
+- **La version ne change que si le contenu change** : `content/learn/lots.json` enregistre, par lot, version + empreinte + date.
+  Le build **échoue** si un lot a changé sans `--update` (qui incrémente la version des seuls lots modifiés et réécrit
+  `lots.json`) : le registre versionné est toujours cohérent avec le contenu (test).
+- Outil : `tools/build-learn-lots [dossier]` (ou `gradle :core:buildLearnLots`, `-Pupdate` pour incrémenter) écrit les lots,
+  `lots-catalog.json` (liste `LotMeta`, feature `learn`, prête pour la publication serveur) et imprime la **taille de chaque lot et le
+  total**. Il **échoue** si un lot dépasse **3 Mo** (la TV doit toujours pouvoir en garder plusieurs), si un pack n'a pas de lot ou si
+  un prérequis sort du lot. `tools/build-learn-lots --review` régénère `docs/LEARN-REVIEW.md` (ci-dessous).
+- Empreinte d'une fiche : fiche + exercices et auto-évaluations qu'elle liste, **sans** statut de relecture, auteur ni notes : un
+  enseignant qui approuve une fiche ne la fait pas passer en « mise à jour » chez les élèves.
+
+### Côté appareil : `LearnLotConsumer` (feature `learn`, cœur pur, `LotConsumer` du contrat)
+- `install(meta, fichier)` : vérifie la taille, le **sha256**, `minAppVersion`, puis tout le lot (`LotReader` : entrées sûres, limites,
+  chaque pack vérifié par `PackReader` + `LessonValidator`, empreintes des fiches = celles de l'index) ; écrit dans un dossier de
+  travail puis le **renomme** (atomique) en `<racine>/<scope>/v<version>/{lot.zip, meta.json}` ; **l'ancienne version n'est supprimée
+  qu'après** : un lot corrompu, tronqué, interrompu ou falsifié ne fait rien perdre (retour arrière = ne rien changer).
+  Une version est immuable : même version avec un autre contenu, ou version plus ancienne que l'installée = refus.
+- `remove`, `installed()` (liste de `LotMeta`), `installedAll()` (avec la date des données), `diskBytes()`, `lessonHash()`.
+- Racine par défaut : `filesDir/lots/learn` sur la TV comme sur le téléphone (le cadre commun installe les lots reçus avec ce consommateur).
+- **Lecture** : `LearnLotSource` expose les lots installés comme une `LessonSource`, placée **avant** le socle embarqué dans
+  `LearnLibrary` (même pack : la version la plus haute, puis la première source). `LearnLotCatalog` = vue « classes disponibles,
+  fiches par classe » (lots installés + packs de démarrage).
+
+### Budget de la TV et priorité
+- **Socle (starter) de l'APK TV** = les packs de `content/learn/embedded.txt` : maternelle + mathématiques de CM2, Class 6, 3e, Form 5
+  et Tle C/D, soit **un pack de démonstration par cycle, 131 795 octets (0,13 Mo)** pour un plafond de 3 Mo (test :
+  `starterStaysWithinItsShareOfTheTvBudget`) ; avec le socle du Quiz (≈ 2 Mo) on reste sous 5 Mo, donc **au moins 5 Mo restent pour les lots
+  poussés** sur les 10 Mo (`LotBudget.TV_MAX_BYTES`). Tous les autres packs sont **hors de l'APK** et du jar de `:core`
+  (`embedLearnPacks` ne zippe que `embedded.txt`) ; le téléphone reçoit le catalogue complet par lots.
+- `learnPriority(classe)` / `learnPriority(profils)` (pures) : les scopes classés pour le planificateur de la TV : **la classe de l'élève
+  d'abord**, puis l'année au-dessus, celle en dessous, deux au-dessus… dans son sous-système (fr / en / licence) ; plusieurs élèves =
+  fusion alternée (la classe de chacun avant le deuxième choix de n'importe qui). Classe inconnue = liste vide.
+
+### Progression : survit aux mises à jour, fusion téléphone ↔ TV
+- `LessonState.hash` garde l'empreinte de la version de la fiche que l'élève a lue ; `LearnProgress.lessonUpdated()` : si l'empreinte du lot a changé,
+  **le score reste** et la fiche est signalée « ↻ Fiche mise à jour depuis ta dernière lecture » (le signalement disparaît quand l'élève
+  a relu la nouvelle version jusqu'à la fin). Un fichier de progression d'avant les lots se charge sans signalement.
+- **Règle de fusion** (`LearnMerge`, répétable et indépendante de l'ordre, ne perd rien) : même élève = même prénom ; **dernière écriture
+  gagne par exercice** pour l'état de révision (dernier résultat, boîte de Leitner, échéance = ceux de la tentative la plus récente) et le
+  **meilleur score est gardé** (`ExerciseState.best`, nombre de réussites et d'essais = le plus grand des deux) ; fiche : vue / terminée si
+  l'une des deux, étoiles et temps = le plus grand, page et empreinte = celles de la visite la plus récente ; épreuves blanches et badges :
+  union ; série de jours : celle du jour le plus récent ; événements de télémétrie : restent locaux. Identifiants d'élèves en collision :
+  renumérotés. **Pas encore branché** : le téléphone ne stocke pas encore de progression (lecture individuelle sans suivi) ; la fusion est prête
+  et testée dans `:core` pour le jour où les deux appareils se rencontrent.
+
+### Écrans
+- **CastBridge-TV** : écran Contenus : « Mes classes sur cette TV » (version, taille, date des données ; « contenu de démarrage de l'app » pour
+  le socle), plus de « en ligne : bientôt » ni de « Télécharger ce contenu » : une matière absente dit « à envoyer depuis le téléphone ».
+- **CastBridge** (téléphone), onglet Apprendre : **Mes classes** : par classe, version installée, taille, « données du … », « mise à jour disponible »,
+  « sur la TV », et l'appel à l'action « Télécharger 3e – BEPC : 4,2 Mo » quand la classe n'est pas encore sur le téléphone ; une classe
+  sélectionnée filtre la liste des packs ; tout se lit hors ligne. Le bouton appelle `LearnLotsHooks.download` (à brancher par le cadre
+  commun / l'écran Données) ; tant qu'il ne l'est pas, le texte renvoie à « Données ». `LearnLotsHooks.catalog` / `onTv` : le catalogue du
+  serveur gardé au dernier lien (affiché hors ligne) et les classes que la TV a déclarées.
+
+### Relecture par lot (`docs/LEARN-REVIEW.md`, généré)
+`LearnTool review` (ou `tools/build-learn-lots --review`) écrit, **lot par lot et pack par pack**, les fiches non certifiées et chaque point
+signalé « à vérifier » (notes de relecture, blocs et exercices `review`) : le propriétaire fait relire par lot. Un test vérifie que le
+fichier est à jour. **Rien ne devient « relu » ni « certifié » sans un humain** : le statut de chaque pack/fiche reste `draft`.
+
+### Contenu ajouté (octobre 2026, tout `draft`, programmes officiels du Cameroun comme référence, texte original)
+6 packs de 3 fiches, ~21 exercices notés + 15 auto-évaluations, 1 épreuve blanche /20 chacun : **SVT 3e** (reproduction et planification
+familiale, IST/VIH/paludisme, roches et volcanisme), **HG-ECM 3e** (symboles et institutions, géographie du Cameroun, de la colonisation à la
+réunification), **anglais 3e** (present perfect / simple past, conditionnels, compréhension), **philosophie Tle** (méthode de la dissertation,
+liberté, conscience), **GCE A Level Pure Mathematics** (dérivation, intégration, suites), **Licence 1 Droit** (règle de droit et hiérarchie des normes,
+droit objectif/subjectif, personnalité juridique). Les faits douteux sont en `review` / `reviewNotes` (dates, attributions d'auteurs, institutions,
+âge de la majorité…) ; aucun texte de manuel n'est repris. **Manques par classe** : voir § 9 ; encore sans contenu : SIL/CP-CM1, 6e-4e, 2nde, Form 1-4,
+Class 1-5, Lower Sixth, Terminale A, L2-L3 (et économie), le français/anglais de plusieurs examens, programme spécifique C du Bac.
 
 ## 5. Serveur bridge.sti-cm.com — routes à prévoir
 
@@ -283,7 +395,7 @@ ouvrir une fiche précise), **Parents** (tableau de bord, contenus de la TV).
 - `:core` (JVM, testé) : `LearnCatalog`, `LessonModel`, `LessonJson`, `LessonValidator`, `Markdown`, `Formula`
   (`Tex`, `TexLayout`), `Figure`, `Scene` (+ `SvgPath`), `Expr`, `Packs` (manifest, `PackReader`, `PackBuilder`,
   `PackSignatures`), `LessonSource` (`EmbeddedLessonSource`, `DirectoryLessonSource`, `LearnLibrary`, `PackInstaller`,
-  `RemoteLessonApi`), `Marking` (`Answer`, `Mark`, `Shuffle`, `LessonDeck`, `MockExamSession`), `Progress`
+  `RemoteLessonApi`), lots (`LearnScopes`, `LearnLots`, `LearnLotConsumer`, `LearnMerge`, `LearnReview`, `lots/LotApi`), `Marking` (`Answer`, `Mark`, `Shuffle`, `LessonDeck`, `MockExamSession`), `Progress`
   (`LearnProgress`, `LearnStore`), `LearnApi`, `LearnQuiz`, `LearnTool` (CLI check/build/embed).
 - `:receiver` : `LearnActivity` (profils, accueil, examens, programme, packs, récompenses, contenus), `LearnReader`
   (lecteur, séries, épreuve blanche, correction), `LearnExercise`, `LearnViews` (`LearnStyle`, `FigureView`,
@@ -295,7 +407,7 @@ ouvrir une fiche précise), **Parents** (tableau de bord, contenus de la TV).
   épreuve blanche, profils, étoiles, révisions, séries, tableau de bord, persistance, télémétrie, API) et
   `LearnContentTest` (tout le contenu : validation, couverture par examen, réponses cohérentes, formules et figures,
   prérequis sans cycle, pas de vidéo, pas d'étiquette superposée, export vers le quiz, packs reproductibles, budget
-  embarqué). `gradle :core:test` vert.
+  embarqué) et `LearnLotsTest` (lots : table, construction reproductible, plafond 3 Mo, versions, installation atomique, retour arrière, lot corrompu/falsifié, usage sans réseau, priorité, budget du socle, progression et fusion, rapport de relecture). `gradle :core:test` vert (931 tests).
 - Essais sur émulateurs Android TV (API 34) **1280×720 @160 dpi** et **1920×1080 @320 dpi** : création de profil à la
   télécommande, accueil, examen BEPC, fiches (définitions, formules, exemples révélés pas à pas), figures (graphiques,
   circuit, optique, Punnett, relèvements, barres, comptage), séries d'exercices (QCM, pavé numérique), épreuve blanche
@@ -320,4 +432,5 @@ ouvrir une fiche précise), **Parents** (tableau de bord, contenus de la TV).
   accord parental.
 - À valider sur la vraie TV (GaiaOS / Amlogic 32 bits) : moteur TextToSpeech présent et voix française/anglaise,
   lecture de `CastBridge/Packs` à la racine de la clé, fluidité, clavier de la TV pour le prénom, mémoire.
-- Téléphone : progression locale pour la lecture individuelle, envoi d'un pack vers la TV en un geste.
+- Téléphone : progression locale pour la lecture individuelle (la fusion avec celle de la TV est prête : § 4b), branchement des boutons « Télécharger » sur le cadre commun des lots.
+- Lots : vérifier sur la vraie TV (32 bits, peu de RAM) la lecture depuis `lot.zip` et l'ordre de rangement quand le budget de 10 Mo est atteint ; signature Ed25519 des packs d'un lot (clé à épingler).
