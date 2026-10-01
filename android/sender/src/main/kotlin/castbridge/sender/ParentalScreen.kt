@@ -2,6 +2,10 @@ package castbridge.sender
 
 import android.content.Context
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -25,7 +29,22 @@ import kotlinx.coroutines.withContext
 fun ParentalSection() {
     val ctx = LocalContext.current
     Text("Contrôle parental", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
-    ParentalTvPicker(ctx) { client -> ParentalPanel(client) }
+    Text("Vidéos adaptées à l'âge, horaires, temps d'écran, rapport d'activité : un écran dédié.", style = MaterialTheme.typography.bodySmall)
+    OutlinedButton({ ParentalActivity.open(ctx) }) { Text("Ouvrir le contrôle parental") }
+}
+
+/** The dedicated screen (see [ParentalActivity]): the TV's rules, behind the parental PIN. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ParentalScreen(onClose: () -> Unit) {
+    val ctx = LocalContext.current
+    Column(Modifier.fillMaxSize()) {
+        TopAppBar(title = { Text("Contrôle parental") }, navigationIcon = { IconButton(onClose) { Icon(Icons.Filled.ArrowBack, "Retour") } },
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
+        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            ParentalTvPicker(ctx) { client -> ParentalPanel(client) }
+        }
+    }
 }
 
 private fun savedAddress(ctx: Context) = ctx.getSharedPreferences("castbridge_parental_phone", Context.MODE_PRIVATE)

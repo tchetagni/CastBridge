@@ -82,6 +82,9 @@
             android:icon="@drawable/ic_cb_telecommande" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter><action android:name="android.service.quicksettings.action.QS_TILE" /></intent-filter>
         </service>
+        <!-- Parental control (docs/PARENTAL.md): the parent's own screen -->
+        <activity android:name=".ParentalActivity" android:exported="false" android:label="Contrôle parental"
+            android:theme="@style/Theme.CastBridge" android:windowSoftInputMode="adjustResize" />
         <!-- Library assistant (docs/LIBRARY-AGENT.md): the optional weekly suggestion (off by default) and the screen it opens -->
         <service android:name=".agent.ProactiveJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
         <activity android:name=".agent.AssistantActivity" android:exported="false" android:label="Ranger ma bibliothèque"

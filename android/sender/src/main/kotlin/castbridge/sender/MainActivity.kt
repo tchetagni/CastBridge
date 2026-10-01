@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -86,7 +87,10 @@ class MainActivity : ComponentActivity() {
                 Column {
                     TopAppBar(
                         title = { CastBridgeLogo(32.dp) },
-                        actions = { IconButton({ settings = true }) { CbIcon(R.drawable.ic_cb_reglages, "Réglages") } },
+                        actions = {
+                            IconButton({ ParentalActivity.open(this@MainActivity) }) { Icon(Icons.Filled.Lock, "Contrôle parental") }
+                            IconButton({ settings = true }) { CbIcon(R.drawable.ic_cb_reglages, "Réglages") }
+                        },
                         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface),
                     )
                     // scrollable: four tabs never squeeze or wrap their labels on a narrow phone
