@@ -1,0 +1,2226 @@
+{
+ "chapter": "5e-francais-expression",
+ "lessons": [
+  {
+   "id": "5e-francais-recit",
+   "title": "Rédiger un récit au passé avec dialogue",
+   "minutes": 35,
+   "programRef": "5e — Expression écrite : le récit (passé simple, imparfait, dialogue) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Rédiger un récit au passé en respectant le schéma narratif.",
+    "Insérer un dialogue correctement ponctué."
+   ],
+   "prerequisites": [
+    "5e-francais-recit-passe",
+    "5e-francais-plus-que-parfait"
+   ],
+   "exercises": [
+    "5e-francais-recit-01",
+    "5e-francais-recit-02",
+    "5e-francais-recit-03",
+    "5e-francais-recit-04",
+    "5e-francais-recit-05",
+    "5e-francais-recit-06"
+   ],
+   "selfCheck": [
+    "5e-francais-recit-q1",
+    "5e-francais-recit-q2",
+    "5e-francais-recit-q3",
+    "5e-francais-recit-q4",
+    "5e-francais-recit-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Démarche",
+     "md": "1. **Lire le sujet** : contraintes (personnage, lieu, sentiment, temps).\n2. **Planifier** les cinq étapes du schéma narratif.\n3. **Rédiger** : passé simple (actions) / imparfait (décor) / plus-que-parfait (avant).\n4. **Insérer un dialogue** : tiret, verbe de parole, nouvelle ligne.\n5. **Relire** : accords, ponctuation, répétitions, cohérence des temps."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les étapes d'une rédaction.",
+     "alt": "Cinq cadres reliés : sujet, plan, brouillon, relecture, copie.",
+     "figure": {
+      "kind": "shapes",
+      "w": 307,
+      "h": 164,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 12,
+        "w": 67,
+        "h": 46,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 41.5,
+        "y": 42,
+        "text": "Sujet",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 77,
+        "y1": 35,
+        "x2": 97,
+        "y2": 35,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 99,
+        "y": 12,
+        "w": 58,
+        "h": 46,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 128.0,
+        "y": 42,
+        "text": "Plan",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 159,
+        "y1": 35,
+        "x2": 179,
+        "y2": 35,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 181,
+        "y": 12,
+        "w": 102,
+        "h": 46,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 232.0,
+        "y": 42,
+        "text": "Brouillon",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 88,
+        "w": 102,
+        "h": 46,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 59.0,
+        "y": 118,
+        "text": "Relecture",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 111,
+        "x2": 132,
+        "y2": 111,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 134,
+        "y": 88,
+        "w": 67,
+        "h": 46,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 167.5,
+        "y": 118,
+        "text": "Copie",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pour un récit vivant",
+     "md": "- Commence par un **cadre** (lieu, moment, personnage).\n- Utilise des **connecteurs de temps** : *soudain, aussitôt, quelques instants plus tard*.\n- Montre les **sentiments** par des gestes (*ses mains tremblaient*).\n- Insère **quelques répliques**, pas un long dialogue.\n- Termine par une **situation finale** claire."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un plan",
+     "statement": "Plan pour « La panne d'électricité pendant les devoirs ».",
+     "steps": [
+      {
+       "md": "SI : Amina fait ses devoirs le soir. EP : le courant s'arrête brusquement."
+      },
+      {
+       "md": "Péripéties : elle cherche une bougie, appelle sa mère. Dénouement : le courant revient. SF : elle finit ses devoirs en souriant."
+      }
+     ],
+     "answer": "**Un plan en cinq phrases**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : insérer un dialogue",
+     "statement": "Ajoute une réplique dans : « Amina appela sa mère. »",
+     "steps": [
+      {
+       "md": "Ajoute le tiret et un verbe de parole."
+      },
+      {
+       "md": "On écrit : Amina appela sa mère. — Maman, il n'y a plus de lumière ! cria-t-elle."
+      }
+     ],
+     "answer": "**Amina appela sa mère. — Maman, il n'y a plus de lumière ! cria-t-elle.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger passé simple et présent.\n- Dialogue sans retour à la ligne ni tiret.\n- Oublier la situation finale.\n- Phrases trop courtes et sans connecteurs."
+    }
+   ],
+   "reviewNotes": [
+    "Les consignes et critères sont indicatifs ; le barème de la rédaction officielle n'est pas reproduit."
+   ]
+  },
+  {
+   "id": "5e-francais-lettre",
+   "title": "La lettre : lettre amicale et lettre de demande",
+   "minutes": 30,
+   "programRef": "5e — Expression écrite : la lettre (amicale, administrative simple) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Rédiger une lettre amicale ou familiale.",
+    "Rédiger une lettre de demande simple adressée à un responsable."
+   ],
+   "prerequisites": [
+    "5e-francais-pronoms"
+   ],
+   "exercises": [
+    "5e-francais-lettre-01",
+    "5e-francais-lettre-02",
+    "5e-francais-lettre-03",
+    "5e-francais-lettre-04",
+    "5e-francais-lettre-05",
+    "5e-francais-lettre-06"
+   ],
+   "selfCheck": [
+    "5e-francais-lettre-q1",
+    "5e-francais-lettre-q2",
+    "5e-francais-lettre-q3",
+    "5e-francais-lettre-q4",
+    "5e-francais-lettre-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Lettre amicale",
+     "md": "Lieu, date ; **Cher / Chère…,** ; corps (nouvelles, questions, remerciements) ; formule de politesse (*Je t'embrasse*, *À bientôt*) ; signature. On emploie le **tutoiement** et un langage courant."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Lettre de demande (simple)",
+     "md": "En haut à gauche : nom et adresse de l'expéditeur. En haut à droite : lieu et date, puis nom du destinataire. **Objet :** (une ligne). **Monsieur le Directeur,** (appel). Corps : présentation, **demande**, **raison**. Formule de politesse : *Veuillez agréer, Monsieur le Directeur, l'expression de mes salutations respectueuses.* Signature. On emploie le **vouvoiement** et un langage soutenu ou courant."
+    },
+    {
+     "type": "illustration",
+     "caption": "La mise en page d'une lettre de demande.",
+     "alt": "Une feuille avec l'expéditeur en haut à gauche, le lieu et la date et le destinataire à droite, l'objet, la formule d'appel, la demande, la formule de politesse et la signature.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 300,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 540,
+        "h": 280,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 40,
+        "text": "Expéditeur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 535,
+        "y": 40,
+        "text": "Lieu, date",
+        "size": 14,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 535,
+        "y": 70,
+        "text": "Destinataire",
+        "size": 14,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 110,
+        "text": "Objet : demande de ...",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 150,
+        "text": "Monsieur le Directeur,",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 190,
+        "text": "(demande + raison)",
+        "size": 14,
+        "color": "grey",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 235,
+        "text": "Formule de politesse",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 535,
+        "y": 270,
+        "text": "Signature",
+        "size": 14,
+        "color": "ink",
+        "anchor": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : l'objet",
+     "statement": "Écris l'objet d'une lettre pour demander l'autorisation d'emprunter des livres.",
+     "steps": [
+      {
+       "md": "L'objet résume la demande en quelques mots, sans phrase complète."
+      },
+      {
+       "md": "On le place avant la formule d'appel."
+      }
+     ],
+     "answer": "**Objet : demande d'autorisation d'emprunt de livres**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la demande",
+     "statement": "Écris la phrase de demande : « Je ___ (vouloir) emprunter des livres. »",
+     "steps": [
+      {
+       "md": "Le ton doit être poli : conditionnel de politesse ou formule d'usage."
+      },
+      {
+       "md": "« Je voudrais » ou « J'ai l'honneur de solliciter »."
+      }
+     ],
+     "answer": "**J'ai l'honneur de solliciter l'autorisation d'emprunter des livres à la bibliothèque.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Tutoyer un directeur ; vouvoyer un ami.\n- Oublier la raison de la demande.\n- Formule de politesse trop courte (« Merci, au revoir »).\n- Oublier l'objet dans une lettre administrative."
+    }
+   ],
+   "reviewNotes": [
+    "Les formules administratives (« J'ai l'honneur de solliciter… », « Veuillez agréer… ») suivent l'usage scolaire courant ; à confirmer avec le modèle imposé par le programme."
+   ]
+  },
+  {
+   "id": "5e-francais-resume",
+   "title": "Résumer un texte et rédiger un compte rendu",
+   "minutes": 30,
+   "programRef": "5e — Expression écrite : le résumé et le compte rendu (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dégager l'essentiel d'un texte et le reformuler en peu de mots.",
+    "Rédiger un compte rendu simple d'un événement."
+   ],
+   "prerequisites": [
+    "5e-francais-argumentatif"
+   ],
+   "exercises": [
+    "5e-francais-resume-01",
+    "5e-francais-resume-02",
+    "5e-francais-resume-03",
+    "5e-francais-resume-04",
+    "5e-francais-resume-05",
+    "5e-francais-resume-06"
+   ],
+   "selfCheck": [
+    "5e-francais-resume-q1",
+    "5e-francais-resume-q2",
+    "5e-francais-resume-q3",
+    "5e-francais-resume-q4",
+    "5e-francais-resume-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Résumer un texte",
+     "md": "1. **Lire** et comprendre : de quoi parle le texte ?\n2. **Souligner** les idées essentielles de chaque paragraphe.\n3. **Supprimer** les exemples, les détails, les comparaisons.\n4. **Reformuler** avec ses mots, au même temps et à la même personne que le texte.\n5. **Vérifier** la longueur demandée (par exemple le quart du texte)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rédiger un compte rendu",
+     "md": "Un **compte rendu** raconte **fidèlement** un événement (visite, match, réunion, sortie). Il répond aux questions : **Qui ? Quoi ? Où ? Quand ? Comment ?** On emploie le **passé**, l'ordre **chronologique** et un langage clair. On peut conclure par une **appréciation**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les questions d'un compte rendu.",
+     "alt": "Un tableau : qui, quoi, où, quand, comment, avec le contenu attendu pour chacun.",
+     "figure": {
+      "kind": "shapes",
+      "w": 338,
+      "h": 224,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 100,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 28,
+        "text": "Question",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 4,
+        "w": 230,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 28,
+        "text": "Contenu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 64,
+        "text": "Qui ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 40,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 64,
+        "text": "les personnes concernées",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 100,
+        "text": "Quoi ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 76,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 100,
+        "text": "ce qui s'est passé",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 136,
+        "text": "Où ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 112,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 136,
+        "text": "le lieu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 172,
+        "text": "Quand ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 148,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 172,
+        "text": "la date et l'heure",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 208,
+        "text": "Comment ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 184,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 208,
+        "text": "le déroulement",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : résumer",
+     "statement": "Résume en une phrase : « Le village organise chaque année une fête de la récolte. Les habitants apportent des paniers de maïs et de manioc. Ensuite, ils dansent et partagent un grand repas. »",
+     "steps": [
+      {
+       "md": "Idée essentielle : une fête de la récolte annuelle."
+      },
+      {
+       "md": "On garde l'essentiel : cadeaux de récolte, danse, repas partagé."
+      }
+     ],
+     "answer": "**Chaque année, le village fête la récolte par un partage de produits, des danses et un repas commun.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un compte rendu",
+     "statement": "Écris l'introduction d'un compte rendu de la sortie à la bibliothèque.",
+     "steps": [
+      {
+       "md": "Qui : la classe de 5e. Quoi : visite. Où : bibliothèque municipale. Quand : mardi 14 octobre."
+      },
+      {
+       "md": "On les place dans une phrase."
+      }
+     ],
+     "answer": "**Mardi 14 octobre, la classe de 5e a visité la bibliothèque municipale.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Recopier des phrases du texte au lieu de reformuler.\n- Garder les exemples et les détails dans un résumé.\n- Ajouter son avis dans un résumé (il appartient au commentaire).\n- Raconter dans le désordre un compte rendu."
+    }
+   ],
+   "reviewNotes": [
+    "La longueur d'un résumé (par exemple un quart ou un tiers du texte) est une convention de classe ; à confirmer."
+   ]
+  },
+  {
+   "id": "5e-francais-poesie",
+   "title": "La poésie : mètre, rimes et figures",
+   "minutes": 30,
+   "programRef": "5e — Lecture : le texte poétique (versification, figures de style) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître rimes masculines et féminines, octosyllabe et alexandrin.",
+    "Repérer comparaison, métaphore, personnification, hyperbole, antithèse et répétition."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-francais-poesie-01",
+    "5e-francais-poesie-02",
+    "5e-francais-poesie-03",
+    "5e-francais-poesie-04",
+    "5e-francais-poesie-05",
+    "5e-francais-poesie-06"
+   ],
+   "selfCheck": [
+    "5e-francais-poesie-q1",
+    "5e-francais-poesie-q2",
+    "5e-francais-poesie-q3",
+    "5e-francais-poesie-q4",
+    "5e-francais-poesie-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Mètre et rimes",
+     "md": "- Le **mètre** est le nombre de syllabes d'un vers : **octosyllabe** (8), **alexandrin** (12). Le **e muet** devant une consonne compte, à la fin du vers il ne compte pas.\n- Une rime est **féminine** si elle finit par un **e muet** (*douce / mousse*), **masculine** sinon (*jour / amour*).\n- Schémas : plates (AABB), croisées (ABAB), embrassées (ABBA)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Figures de style",
+     "md": "- **Comparaison** (*comme*) ; **métaphore** (sans outil) ; **personnification** (action humaine).\n- **Hyperbole** : exagération (*Je meurs de faim*).\n- **Antithèse** : opposition de deux idées (*le jour et la nuit*).\n- **Répétition** (ou anaphore) : un mot répété pour insister."
+    },
+    {
+     "type": "illustration",
+     "caption": "Compter les syllabes.",
+     "alt": "Un tableau avec deux vers découpés en syllabes et le nombre de syllabes : huit pour chacun.",
+     "figure": {
+      "kind": "shapes",
+      "w": 477,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 317,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 28,
+        "text": "Vers",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 4,
+        "w": 152,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 397.0,
+        "y": 28,
+        "text": "Syllabes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 317,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 64,
+        "text": "Le-vent-chan-te-dans-les-pal-miers",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 40,
+        "w": 152,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 397.0,
+        "y": 64,
+        "text": "8 (octosyllabe)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 317,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 100,
+        "text": "La-nuit-s'é-teint-et-le-jour-naît",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 76,
+        "w": 152,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 397.0,
+        "y": 100,
+        "text": "8 (octosyllabe)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "text",
+     "md": "Poème étudié (original) : « Le vent chante dans les palmiers, / La mer est un grand miroir bleu. / Les enfants courent sur le sable, / Le soleil sourit dans leurs yeux. »"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : les figures",
+     "statement": "Relève une métaphore et une personnification.",
+     "steps": [
+      {
+       "md": "« La mer est un grand miroir bleu » : sans outil de comparaison → métaphore."
+      },
+      {
+       "md": "« Le vent chante », « Le soleil sourit » → personnification."
+      }
+     ],
+     "answer": "**métaphore : la mer est un miroir ; personnification : le vent chante, le soleil sourit**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : les rimes",
+     "statement": "Étudie les rimes du poème.",
+     "steps": [
+      {
+       "md": "Fins de vers : palmiers / bleu / sable / yeux. « bleu » et « yeux » riment (masculines). « palmiers » et « sable » ne riment pas."
+      },
+      {
+       "md": "Schéma : le 2e et le 4e vers riment (xAxA)."
+      }
+     ],
+     "answer": "**Rimes sur les vers 2 et 4 (bleu / yeux) : rimes masculines.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Compter les lettres au lieu des syllabes.\n- Compter le e muet final : il ne compte pas à la fin du vers.\n- Confondre hyperbole et mensonge : l'hyperbole exagère pour exprimer un sentiment."
+    }
+   ],
+   "reviewNotes": [
+    "Poème original écrit pour CastBridge.",
+    "Le comptage des syllabes (e muet, diérèse) est limité aux cas simples : octosyllabe et alexandrin."
+   ]
+  },
+  {
+   "id": "5e-francais-dictee",
+   "title": "La dictée préparée : participes, homophones, accords",
+   "minutes": 30,
+   "programRef": "5e — Orthographe : dictée préparée (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Préparer et justifier les difficultés d'une dictée.",
+    "Appliquer accords, participes passés et homophones."
+   ],
+   "prerequisites": [
+    "5e-francais-participe-passe",
+    "5e-francais-homophones-2"
+   ],
+   "exercises": [
+    "5e-francais-dictee-01",
+    "5e-francais-dictee-02",
+    "5e-francais-dictee-03",
+    "5e-francais-dictee-04",
+    "5e-francais-dictee-05",
+    "5e-francais-dictee-06"
+   ],
+   "selfCheck": [
+    "5e-francais-dictee-q1",
+    "5e-francais-dictee-q2",
+    "5e-francais-dictee-q3",
+    "5e-francais-dictee-q4",
+    "5e-francais-dictee-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Préparer une dictée de 5e",
+     "md": "1. **Lire** le texte et en comprendre le sens.\n2. **Repérer** : accords du participe passé, sujets éloignés, homophones (*c'est/s'est, sa/ça, leur/leurs, quelle/qu'elle*), verbes au passé simple et à l'imparfait.\n3. **Justifier** chaque accord : *les mangues qu'elle a cueillies* (COD « que » = les mangues, avant le verbe).\n4. **Mémoriser** les mots difficiles.\n5. **Relire** en cherchant les erreurs d'accord."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les étapes de la préparation d'une dictée.",
+     "alt": "Cinq cadres reliés : je lis, je souligne, je justifie, je mémorise, je relis.",
+     "figure": {
+      "kind": "shapes",
+      "w": 394,
+      "h": 164,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 12,
+        "w": 76,
+        "h": 46,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 46.0,
+        "y": 42,
+        "text": "Je lis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 86,
+        "y1": 35,
+        "x2": 106,
+        "y2": 35,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 108,
+        "y": 12,
+        "w": 119,
+        "h": 46,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 167.5,
+        "y": 42,
+        "text": "Je souligne",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 229,
+        "y1": 35,
+        "x2": 249,
+        "y2": 35,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 251,
+        "y": 12,
+        "w": 119,
+        "h": 46,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 310.5,
+        "y": 42,
+        "text": "Je justifie",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 88,
+        "w": 119,
+        "h": 46,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 67.5,
+        "y": 118,
+        "text": "Je mémorise",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 129,
+        "y1": 111,
+        "x2": 149,
+        "y2": 111,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 151,
+        "y": 88,
+        "w": 93,
+        "h": 46,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 197.5,
+        "y": 118,
+        "text": "Je relis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "text",
+     "md": "Texte de dictée : « Les mangues que Nkeng avait cueillies étaient mûres. Il les posa dans un panier et se mit en route vers le marché. Sur le chemin, quelques voisins l'arrêtèrent : leurs enfants voulaient goûter. Il leur en offrit trois. Quelle joie c'était pour eux ! »"
+    },
+    {
+     "type": "audio",
+     "text": "Les mangues que Nkeng avait cueillies étaient mûres. Il les posa dans un panier et se mit en route vers le marché. Sur le chemin, quelques voisins l'arrêtèrent : leurs enfants voulaient goûter. Il leur en offrit trois. Quelle joie c'était pour eux !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le participe",
+     "statement": "Justifie l'orthographe de « cueillies » dans la dictée.",
+     "steps": [
+      {
+       "md": "Le verbe « avait cueillies » est au plus-que-parfait avec avoir."
+      },
+      {
+       "md": "Le COD « que » représente « Les mangues » (féminin pluriel) et se trouve avant le verbe : accord → cueillies."
+      }
+     ],
+     "answer": "**cueillies : COD placé avant, féminin pluriel**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : les homophones",
+     "statement": "Justifie « leur en » et « leurs enfants ».",
+     "steps": [
+      {
+       "md": "« Il leur en offrit » : « leur » = à eux, pronom invariable."
+      },
+      {
+       "md": "« leurs enfants » : déterminant devant un nom pluriel : leurs."
+      }
+     ],
+     "answer": "**leur (pronom invariable) ; leurs (déterminant pluriel)**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier d'accorder « cueillies » avec « mangues ».\n- Écrire « Quel(le) joie » : on écrit **Quelle joie** (devant un nom féminin).\n- Écrire « l'arretèrent » : passé simple de arrêter, accent : *arrêtèrent*.\n- Oublier le « t » de *c'était*."
+    }
+   ],
+   "reviewNotes": [
+    "Texte de dictée original. Le lecteur audio de l'app peut le lire (voix de synthèse)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps utilise-t-on pour les actions principales ?",
+   "choices": [
+    "L'imparfait",
+    "Le passé simple",
+    "Le futur",
+    "Le conditionnel"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Premier plan.",
+   "id": "5e-francais-recit-01",
+   "tier": "application",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel signe introduit une réplique ?",
+   "choices": [
+    "La virgule",
+    "Le point-virgule",
+    "La parenthèse",
+    "Le tiret"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tiret + passage à la ligne.",
+   "id": "5e-francais-recit-02",
+   "tier": "application",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel connecteur marque une rupture ?",
+   "choices": [
+    "Chaque jour",
+    "Autrefois",
+    "Toujours",
+    "Soudain"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Brusque événement.",
+   "id": "5e-francais-recit-03",
+   "tier": "application",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase contient un plus-que-parfait pour une action antérieure ?",
+   "choices": [
+    "Quand elle arriva, le bus partit.",
+    "Quand elle arriva, le bus était déjà parti.",
+    "Quand elle arrive, le bus part.",
+    "Quand elle arrivera, le bus partira."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le départ est antérieur à l'arrivée.",
+   "id": "5e-francais-recit-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à son temps.",
+   "pairs": [
+    [
+     "La nuit était noire.",
+     "imparfait"
+    ],
+    [
+     "Un chien aboya.",
+     "passé simple"
+    ],
+    [
+     "Il avait entendu un bruit.",
+     "plus-que-parfait"
+    ],
+    [
+     "Il ira voir demain.",
+     "futur"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque temps a un rôle précis dans le récit.",
+   "id": "5e-francais-recit-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Sujet : « Tu rentres seul(e) un soir d'orage ; quelque chose d'inattendu se produit. » Rédige un récit de 12 à 15 lignes avec les cinq étapes, un dialogue de deux répliques et les trois temps du passé.",
+   "model": "Ce soir-là, le ciel était noir et le vent soufflait avec violence. Je rentrais de chez mon oncle, le cœur battant. Soudain, un éclair déchira la nuit et j'aperçus un petit chien tremblant sous un arbre. — N'aie pas peur, murmurai-je. Il leva la tête et vint contre moi. Je l'avais déjà vu près du marché : il avait dû se perdre. Je l'enveloppai dans ma veste et le ramenai à la maison. Le lendemain, son maître vint le chercher et me remercia en souriant.",
+   "rubric": [
+    "Les cinq étapes du schéma narratif.",
+    "Passé simple, imparfait et plus-que-parfait employés correctement.",
+    "Un dialogue bien ponctué.",
+    "Cohérence, orthographe et ponctuation."
+   ],
+   "points": 8,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-recit-06",
+   "tier": "examen",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la dernière étape d'un récit ?",
+   "choices": [
+    "L'élément perturbateur",
+    "La situation finale",
+    "Le titre",
+    "La morale obligatoire"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le nouvel état.",
+   "id": "5e-francais-recit-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe de parole convient pour une réplique murmurée ?",
+   "choices": [
+    "murmura",
+    "hurla",
+    "rugit",
+    "tonna"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Murmurer.",
+   "id": "5e-francais-recit-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que doit-on faire à la fin d'une rédaction ?",
+   "choices": [
+    "Ajouter une page blanche",
+    "Supprimer le plan",
+    "Relire pour corriger",
+    "Recopier sans lire"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La relecture.",
+   "id": "5e-francais-recit-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps place une action avant une autre action passée ?",
+   "choices": [
+    "Le passé simple",
+    "Le plus-que-parfait",
+    "Le futur",
+    "Le présent"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Antériorité.",
+   "id": "5e-francais-recit-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le dialogue dans un récit est signalé par…",
+   "choices": [
+    "des parenthèses",
+    "un tiret et un verbe de parole",
+    "des majuscules",
+    "des points de suspension"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tiret + verbe de parole.",
+   "id": "5e-francais-recit-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pronom emploie-t-on dans une lettre à un directeur ?",
+   "choices": [
+    "vous",
+    "tu",
+    "on",
+    "toi"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Respect : vouvoiement.",
+   "id": "5e-francais-lettre-01",
+   "tier": "application",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule d'appel convient à un directeur ?",
+   "choices": [
+    "Salut,",
+    "Monsieur le Directeur,",
+    "Cher ami,",
+    "Hello,"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Appel respectueux.",
+   "id": "5e-francais-lettre-02",
+   "tier": "application",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où met-on l'objet ?",
+   "choices": [
+    "Après la signature",
+    "Avant la formule d'appel",
+    "Au milieu du corps",
+    "Il n'y en a jamais"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dans une lettre administrative.",
+   "id": "5e-francais-lettre-03",
+   "tier": "application",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase convient à une lettre de demande ?",
+   "choices": [
+    "Je veux aller à la sortie.",
+    "Laissez-moi aller à la sortie !",
+    "Je vais à la sortie, ok ?",
+    "Je voudrais solliciter votre autorisation pour participer à la sortie."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Ton poli et clair.",
+   "id": "5e-francais-lettre-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque élément à sa place.",
+   "pairs": [
+    [
+     "Objet : demande d'absence",
+     "avant la formule d'appel"
+    ],
+    [
+     "Monsieur le Directeur,",
+     "formule d'appel"
+    ],
+    [
+     "Veuillez agréer mes salutations respectueuses.",
+     "formule de politesse"
+    ],
+    [
+     "Mballa",
+     "signature"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque élément a sa place dans la lettre.",
+   "id": "5e-francais-lettre-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris une lettre au directeur de ton collège pour demander l'autorisation de t'absenter un après-midi pour un événement familial. Respecte la présentation, l'objet, l'appel, la demande, la raison et la politesse.",
+   "model": "Mballa Paul\nClasse de 5e A\n\nYaoundé, le 15 octobre 2026\nÀ Monsieur le Directeur\nObjet : demande d'autorisation d'absence\nMonsieur le Directeur,\nJ'ai l'honneur de solliciter votre autorisation pour m'absenter vendredi après-midi, car j'assiste au mariage de ma cousine. Je m'engage à rattraper les cours manqués.\nVeuillez agréer, Monsieur le Directeur, l'expression de mes salutations respectueuses.\nMballa Paul",
+   "rubric": [
+    "Présentation complète (expéditeur, lieu et date, destinataire, objet).",
+    "Ton respectueux et vouvoiement.",
+    "Demande et raison clairement exprimées.",
+    "Formule de politesse finale et signature ; orthographe soignée."
+   ],
+   "points": 6,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-lettre-06",
+   "tier": "examen",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le but d'une lettre de demande ?",
+   "choices": [
+    "Obtenir une autorisation ou un service",
+    "Raconter une histoire",
+    "Décrire un paysage",
+    "Faire rimer des mots"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle sollicite quelque chose.",
+   "id": "5e-francais-lettre-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps adoucit une demande ?",
+   "choices": [
+    "L'impératif",
+    "Le passé simple",
+    "Le futur antérieur",
+    "Le conditionnel"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Je voudrais…",
+   "id": "5e-francais-lettre-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que met-on dans « Objet » ?",
+   "choices": [
+    "La signature",
+    "Une blague",
+    "Le sujet de la lettre en quelques mots",
+    "Une phrase très longue"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Résumé de la demande.",
+   "id": "5e-francais-lettre-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule finale convient à un directeur ?",
+   "choices": [
+    "Bises",
+    "À plus",
+    "Veuillez agréer mes salutations respectueuses",
+    "Cordialement vôtre ami"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Formule de politesse officielle.",
+   "id": "5e-francais-lettre-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une lettre amicale, on emploie…",
+   "choices": [
+    "le vouvoiement obligatoire",
+    "le tutoiement",
+    "seulement le conditionnel",
+    "un objet"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On parle à un proche.",
+   "id": "5e-francais-lettre-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-lettre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que supprime-t-on dans un résumé ?",
+   "choices": [
+    "La thèse",
+    "Les exemples et les détails",
+    "L'idée principale",
+    "Les idées essentielles"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On garde l'essentiel.",
+   "id": "5e-francais-resume-01",
+   "tier": "application",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quelle question un compte rendu ne répond-il pas ?",
+   "choices": [
+    "Qui ?",
+    "Où ?",
+    "Quand ?",
+    "Quel est ton avis ?"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'appréciation est facultative.",
+   "id": "5e-francais-resume-02",
+   "tier": "application",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans quel ordre raconte-t-on un compte rendu ?",
+   "choices": [
+    "Au hasard",
+    "Du plus petit au plus grand",
+    "Chronologique",
+    "Du dernier au premier"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dans l'ordre des événements.",
+   "id": "5e-francais-resume-03",
+   "tier": "application",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le meilleur résumé de « Amina cueille des fruits, les lave, puis les vend au marché » ?",
+   "choices": [
+    "Amina lave.",
+    "Amina aime les fruits.",
+    "Amina vend des fruits qu'elle a cueillis.",
+    "Il y a un marché."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il garde l'essentiel.",
+   "id": "5e-francais-resume-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque question à ce qu'elle précise.",
+   "pairs": [
+    [
+     "Qui ?",
+     "les personnes"
+    ],
+    [
+     "Où ?",
+     "le lieu"
+    ],
+    [
+     "Quand ?",
+     "la date"
+    ],
+    [
+     "Quoi ?",
+     "l'événement"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Les cinq questions du compte rendu.",
+   "id": "5e-francais-resume-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Rédige un compte rendu de 6 à 8 lignes d'un match de football disputé dans ton quartier (qui, quoi, où, quand, comment) avec une courte appréciation finale.",
+   "model": "Samedi 11 octobre, l'équipe du quartier des Palmiers a affronté celle de Bonamoussadi sur le terrain municipal. Le match a commencé à seize heures. Dès la première mi-temps, Boris a marqué un but. Les adversaires ont égalisé à la fin du match. Le match s'est terminé sur un score de un à un. Ce fut une rencontre équilibrée et très animée.",
+   "rubric": [
+    "Les cinq questions sont traitées.",
+    "Ordre chronologique.",
+    "Temps du passé corrects.",
+    "Une appréciation finale brève."
+   ],
+   "points": 6,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-resume-06",
+   "tier": "examen",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que doit conserver un résumé ?",
+   "choices": [
+    "Tous les exemples",
+    "L'idée principale",
+    "Toutes les comparaisons",
+    "Les dialogues complets"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'essentiel.",
+   "id": "5e-francais-resume-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quel temps rédige-t-on un compte rendu d'un événement terminé ?",
+   "choices": [
+    "Au futur",
+    "À l'impératif",
+    "Au passé",
+    "Au subjonctif"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'événement a eu lieu.",
+   "id": "5e-francais-resume-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'un compte rendu ?",
+   "choices": [
+    "Une poésie",
+    "Un récit fidèle d'un événement",
+    "Un conte",
+    "Une description de paysage"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il rapporte des faits.",
+   "id": "5e-francais-resume-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle erreur éviter dans un résumé ?",
+   "choices": [
+    "Reformuler",
+    "Respecter la longueur",
+    "Garder l'essentiel",
+    "Recopier le texte"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut reformuler.",
+   "id": "5e-francais-resume-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle question donne la date ?",
+   "choices": [
+    "Qui ?",
+    "Où ?",
+    "Quoi ?",
+    "Quand ?"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Quand = moment.",
+   "id": "5e-francais-resume-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de syllabes dans un alexandrin ?",
+   "choices": [
+    "8",
+    "10",
+    "12",
+    "6"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Alexandrin : 12.",
+   "id": "5e-francais-poesie-01",
+   "tier": "application",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle figure est « Je suis mort de fatigue » ?",
+   "choices": [
+    "Une comparaison",
+    "Une personnification",
+    "Une hyperbole",
+    "Une antithèse"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Exagération.",
+   "id": "5e-francais-poesie-02",
+   "tier": "application",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle rime est féminine ?",
+   "choices": [
+    "jour / amour",
+    "bleu / yeux",
+    "bois / toit",
+    "douce / mousse"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le mot finit par un e muet.",
+   "id": "5e-francais-poesie-03",
+   "tier": "application",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expression est une antithèse ?",
+   "choices": [
+    "Le jour comme un diamant",
+    "Le jour et la nuit",
+    "Le jour chante",
+    "Le jour se lève"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Deux idées opposées.",
+   "id": "5e-francais-poesie-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque expression à sa figure.",
+   "pairs": [
+    [
+     "Il pleut des cordes",
+     "hyperbole"
+    ],
+    [
+     "La lune sourit",
+     "personnification"
+    ],
+    [
+     "Rapide comme l'éclair",
+     "comparaison"
+    ],
+    [
+     "Ce garçon est un lion",
+     "métaphore"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque figure a son effet.",
+   "id": "5e-francais-poesie-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris un poème de quatre vers sur la nuit ou l'aube. Utilise une personnification, une comparaison et fais rimer les vers 2 et 4.",
+   "model": "La nuit couvre le village, / Son manteau est noir comme du charbon. / La lune veille sur les cases / Et les étoiles chantent leur chanson.",
+   "rubric": [
+    "Quatre vers.",
+    "Une personnification et une comparaison.",
+    "Rimes entre les vers 2 et 4.",
+    "Vocabulaire soigné."
+   ],
+   "points": 5,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-poesie-06",
+   "tier": "examen",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle figure fait parler la nature comme un humain ?",
+   "choices": [
+    "L'antithèse",
+    "La personnification",
+    "L'hyperbole",
+    "La métonymie"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle donne vie aux choses.",
+   "id": "5e-francais-poesie-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot signale une comparaison ?",
+   "choices": [
+    "comme",
+    "mais",
+    "puis",
+    "car"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Comparaison.",
+   "id": "5e-francais-poesie-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un octosyllabe a…",
+   "choices": [
+    "12 syllabes",
+    "8 syllabes",
+    "10 syllabes",
+    "6 syllabes"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Octo = huit.",
+   "id": "5e-francais-poesie-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est une rime masculine ?",
+   "choices": [
+    "table / sable",
+    "douce / mousse",
+    "jour / amour",
+    "lune / brune"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les rimes féminines finissent par un e muet.",
+   "id": "5e-francais-poesie-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle figure oppose deux idées ?",
+   "choices": [
+    "L'antithèse",
+    "La comparaison",
+    "La personnification",
+    "L'hyperbole"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Joie / tristesse.",
+   "id": "5e-francais-poesie-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-poesie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Les fruits que j'ai (acheter) sont frais. »",
+   "choices": [
+    "acheté",
+    "achetée",
+    "achetés",
+    "achetées"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COD avant, masculin pluriel.",
+   "id": "5e-francais-dictee-01",
+   "tier": "application",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Ils ______ ont offert un panier. » (à eux)",
+   "choices": [
+    "leurs",
+    "leure",
+    "l'heur",
+    "leur"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pronom invariable.",
+   "id": "5e-francais-dictee-02",
+   "tier": "application",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « ______ belle journée ! »",
+   "choices": [
+    "Quelle",
+    "Quel",
+    "Qu'elle",
+    "Quels"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Exclamatif devant un nom féminin singulier.",
+   "id": "5e-francais-dictee-03",
+   "tier": "application",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Elle c'est levée tôt et s'est une belle matinée.",
+    "Elle s'est levée tôt et c'est une belle matinée.",
+    "Elle s'est levé tôt et c'est une belle matinée.",
+    "Elle c'est levée tôt et c'est une belle matinée."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 3,
+   "explanation": "S'est + participe accordé ; c'est = cela est.",
+   "id": "5e-francais-dictee-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque mot de la dictée à sa justification.",
+   "pairs": [
+    [
+     "arrêtèrent",
+     "passé simple, 3e pers. pluriel"
+    ],
+    [
+     "cueillies",
+     "COD avant, féminin pluriel"
+    ],
+    [
+     "mûres",
+     "accord avec mangues"
+    ],
+    [
+     "étaient",
+     "imparfait, 3e pers. pluriel"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque mot illustre une règle.",
+   "id": "5e-francais-dictee-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Recopie en corrigeant les fautes : « Les lettres qu'elle a écrit étaient longues. Il leurs a donné ses cahiers, sa lui a fait plaisir. Quel est c'est amis qu'elle voyait ? »",
+   "model": "« Les lettres qu'elle a écrites étaient longues. Il leur a donné ses cahiers, ça lui a fait plaisir. Quels sont ces amis qu'elle voyait ? »",
+   "rubric": [
+    "« écrites » avec COD avant.",
+    "« leur » (pronom) et « ça » (cela).",
+    "« Quels sont ces amis ».",
+    "Aucune faute nouvelle."
+   ],
+   "points": 5,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-dictee-06",
+   "tier": "examen",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faut-il faire d'abord pour préparer une dictée ?",
+   "choices": [
+    "L'apprendre par cœur sans lire",
+    "Lire et comprendre le texte",
+    "Ne pas la lire",
+    "Recopier sans comprendre"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Comprendre pour mieux accorder.",
+   "id": "5e-francais-dictee-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « les mangues qu'il a cueillies », que représente « que » ?",
+   "choices": [
+    "Le sujet",
+    "Un adverbe",
+    "Une préposition",
+    "Le COD placé avant le verbe"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il représente « les mangues ».",
+   "id": "5e-francais-dictee-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi écrit-on « leurs enfants » ?",
+   "choices": [
+    "Parce que « leurs » est un pronom",
+    "Parce que « leurs » est un déterminant devant un nom pluriel",
+    "Parce que c'est un verbe",
+    "Parce que le nom est singulier"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Déterminant possessif pluriel.",
+   "id": "5e-francais-dictee-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'écrit le passé simple de « arrêter » avec « ils » ?",
+   "choices": [
+    "arrêtèrent",
+    "arrêtaient",
+    "arreteront",
+    "arrêtent"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Passé simple : -èrent.",
+   "id": "5e-francais-dictee-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot signifie « cela » ?",
+   "choices": [
+    "ça",
+    "sa",
+    "ces",
+    "ses"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ça = cela.",
+   "id": "5e-francais-dictee-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

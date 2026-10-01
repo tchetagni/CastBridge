@@ -1,0 +1,1666 @@
+{
+ "chapter": "5e-francais-orthographe",
+ "lessons": [
+  {
+   "id": "5e-francais-participe-passe",
+   "title": "L'accord du participe passé",
+   "minutes": 35,
+   "programRef": "5e — Orthographe grammaticale : accord du participe passé (être, avoir, verbes pronominaux simples) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Accorder le participe passé employé avec être, avec avoir (COD placé avant) et seul.",
+    "Reconnaître les cas simples des verbes pronominaux."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-francais-participe-passe-01",
+    "5e-francais-participe-passe-02",
+    "5e-francais-participe-passe-03",
+    "5e-francais-participe-passe-04",
+    "5e-francais-participe-passe-05",
+    "5e-francais-participe-passe-06"
+   ],
+   "selfCheck": [
+    "5e-francais-participe-passe-q1",
+    "5e-francais-participe-passe-q2",
+    "5e-francais-participe-passe-q3",
+    "5e-francais-participe-passe-q4",
+    "5e-francais-participe-passe-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les trois règles de base",
+     "md": "1. **Employé seul** (comme adjectif) : il s'accorde avec le nom : *des fruits **mûrs**, une porte **fermée**.*\n2. **Avec être** : il s'accorde avec le **sujet** : *Elle est **partie**. Ils sont **arrivés**.*\n3. **Avec avoir** : il s'accorde avec le **COD s'il est placé avant le verbe**, sinon il reste **invariable** : *Amina a **acheté** des mangues. / Les mangues qu'Amina a **achetées**.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Avec avoir, tout dépend de la place du COD.",
+     "alt": "Deux lignes de cadres : le COD « Les mangues » est avant, donc « a achetées » s'accorde ; le COD « des mangues » est après, donc « a acheté » est invariable.",
+     "figure": {
+      "kind": "shapes",
+      "w": 416,
+      "h": 188,
+      "items": [
+       {
+        "t": "text",
+        "x": 74.0,
+        "y": 22,
+        "text": "COD",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 32,
+        "w": 124,
+        "h": 42,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 74.0,
+        "y": 59,
+        "text": "Les mangues",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 194.0,
+        "y": 22,
+        "text": "sujet",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 146,
+        "y": 32,
+        "w": 96,
+        "h": 42,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 194.0,
+        "y": 59,
+        "text": "qu'Amina",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 328.0,
+        "y": 22,
+        "text": "participe accordé",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 252,
+        "y": 32,
+        "w": 152,
+        "h": 42,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 328.0,
+        "y": 59,
+        "text": "a achetées",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 46.0,
+        "y": 114,
+        "text": "sujet",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 124,
+        "w": 68,
+        "h": 42,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 46.0,
+        "y": 151,
+        "text": "Amina",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 178.0,
+        "y": 114,
+        "text": "participe invariable",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 124,
+        "w": 176,
+        "h": 42,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 178.0,
+        "y": 151,
+        "text": "a acheté",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 338.0,
+        "y": 114,
+        "text": "COD après",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 276,
+        "y": 124,
+        "w": 124,
+        "h": 42,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 338.0,
+        "y": 151,
+        "text": "des mangues",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Avec avoir : comment faire ?",
+     "md": "1. Cherche le **COD** (qui ? quoi ?).\n2. Regarde sa place : **avant** le verbe (souvent *que*, *les*, *la*, *l'*, *te*) → on accorde ; **après** → pas d'accord.\n\nVerbes pronominaux (*se laver*) : accord avec le **sujet** (*Elles se sont lavées*), sauf si le pronom est **COI** (*Elles se sont parlé*) ou s'il y a un **COD après** (*Elle s'est lavé les mains*)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : avec avoir",
+     "statement": "Accorde : « Les lettres que Boris a (écrire) sont longues. »",
+     "steps": [
+      {
+       "md": "COD de « a écrit » : « que » représente « Les lettres », placé avant → accord."
+      },
+      {
+       "md": "« lettres » est féminin pluriel : écrites."
+      }
+     ],
+     "answer": "**Les lettres que Boris a écrites sont longues.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : être et pronominal",
+     "statement": "Accorde : « Amina est (sortir) et les filles se sont (laver) les mains. »",
+     "steps": [
+      {
+       "md": "« est sortie » : être → accord avec « Amina » (féminin singulier)."
+      },
+      {
+       "md": "« se sont lavé les mains » : le COD « les mains » est après → invariable."
+      }
+     ],
+     "answer": "**Amina est sortie et les filles se sont lavé les mains.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Accorder avec le sujet quand l'auxiliaire est avoir : *Elle a mangée* est faux.\n- Oublier l'accord quand le COD est « que » ou « les » : *Les devoirs qu'il a fait* est faux, on écrit *faits*.\n- Accorder « fait » dans « Elle a fait une tarte » : le COD est après."
+    }
+   ],
+   "reviewNotes": [
+    "Les cas d'accord du participe des verbes pronominaux (réfléchi, réciproque, COD après) sont réduits à trois exemples ; à compléter selon le programme.",
+    "Le participe suivi d'un infinitif (« les enfants qu'il a vus jouer ») n'est pas traité."
+   ]
+  },
+  {
+   "id": "5e-francais-homophones-2",
+   "title": "Homophones : c'est/s'est, sa/ça, la/là/l'a, leur/leurs, quel/qu'elle",
+   "minutes": 30,
+   "programRef": "5e — Orthographe grammaticale : homophones grammaticaux (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer c'est/s'est, sa/ça, la/là/l'a, leur/leurs, quel(le)/qu'elle(s).",
+    "Utiliser un test de remplacement pour chacun."
+   ],
+   "prerequisites": [
+    "5e-francais-participe-passe"
+   ],
+   "exercises": [
+    "5e-francais-homophones-2-01",
+    "5e-francais-homophones-2-02",
+    "5e-francais-homophones-2-03",
+    "5e-francais-homophones-2-04",
+    "5e-francais-homophones-2-05",
+    "5e-francais-homophones-2-06"
+   ],
+   "selfCheck": [
+    "5e-francais-homophones-2-q1",
+    "5e-francais-homophones-2-q2",
+    "5e-francais-homophones-2-q3",
+    "5e-francais-homophones-2-q4",
+    "5e-francais-homophones-2-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Les tests de remplacement.",
+     "alt": "Un tableau avec les homophones c'est/s'est, sa/ça, la/là/l'a, leur/leurs, quel/qu'elle, leur test et un exemple.",
+     "figure": {
+      "kind": "shapes",
+      "w": 724,
+      "h": 224,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 143,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 28,
+        "text": "Homophones",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 4,
+        "w": 230,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 262.0,
+        "y": 28,
+        "text": "Test",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 4,
+        "w": 343,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 548.5,
+        "y": 28,
+        "text": "Exemple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 64,
+        "text": "c'est / s'est",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 40,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 262.0,
+        "y": 64,
+        "text": "cela est / il était",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 40,
+        "w": 343,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 548.5,
+        "y": 64,
+        "text": "C'est beau. Il s'est levé.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 100,
+        "text": "sa / ça",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 76,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 262.0,
+        "y": 100,
+        "text": "ma / cela",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 76,
+        "w": 343,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 548.5,
+        "y": 100,
+        "text": "Sa sœur chante. Ça va ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 136,
+        "text": "la / là / l'a",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 112,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 262.0,
+        "y": 136,
+        "text": "une / ici / l'avait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 112,
+        "w": 343,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 548.5,
+        "y": 136,
+        "text": "La porte est là. Il l'a vue.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 172,
+        "text": "leur / leurs",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 148,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 262.0,
+        "y": 172,
+        "text": "lui / (nom pluriel)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 148,
+        "w": 343,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 548.5,
+        "y": 172,
+        "text": "Je leur parle. Leurs amis.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 208,
+        "text": "quel / qu'elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 184,
+        "w": 230,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 262.0,
+        "y": 208,
+        "text": "quelle chance / que elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 184,
+        "w": 343,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 548.5,
+        "y": 208,
+        "text": "Quelle joie ! Je crois qu'elle vient.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les tests",
+     "md": "- **c'est** = *cela est* ; **s'est** = se + verbe être, devant un participe : *il s'est lavé* (on peut dire *il s'était lavé*).\n- **sa** = déterminant (*ma, ta, sa*) ; **ça** = *cela* : *Ça m'amuse.*\n- **la** = déterminant ou pronom (*une, la*) ; **là** = ici (accent grave) ; **l'a** = *l'avait* : *Il l'a vue.*\n- **leur** pronom (invariable, = *à eux*) ; **leur(s)** déterminant (s au pluriel) : *leurs amis*.\n- **quel(le)(s)** devant un nom ; **qu'elle(s)** = *que elle*."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir",
+     "statement": "Complète : « Il ___ levé tôt et ___ une belle matinée. »",
+     "steps": [
+      {
+       "md": "« Il se lève » : verbe pronominal au passé composé → s'est levé (on peut dire « s'était »)."
+      },
+      {
+       "md": "« cela est une belle matinée » → c'est."
+      }
+     ],
+     "answer": "**Il s'est levé tôt et c'est une belle matinée.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : leur / leurs",
+     "statement": "Complète : « Je ___ parle et je vois ___ amis. »",
+     "steps": [
+      {
+       "md": "« Je leur parle » (= à eux) : pronom invariable : leur."
+      },
+      {
+       "md": "« leurs amis » (nom pluriel) : déterminant : leurs."
+      }
+     ],
+     "answer": "**Je leur parle et je vois leurs amis.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire *Il c'est lavé* : avec un participe passé, on écrit **s'est**.\n- Écrire *Ça sœur* ou *Sa va* : *sa sœur*, *ça va*.\n- Écrire *leurs* après un verbe : *Je leur donne*, jamais *leurs*.\n- Oublier l'accent de *là* (lieu)."
+    }
+   ],
+   "reviewNotes": [
+    "Cette fiche complète les homophones vus en 6e (a/à, et/est, on/ont, son/sont, ou/où, ce/se, ces/ses)."
+   ]
+  },
+  {
+   "id": "5e-francais-accords-particuliers",
+   "title": "Accords particuliers : adjectifs de couleur, vingt et cent",
+   "minutes": 25,
+   "programRef": "5e — Orthographe grammaticale : accords particuliers (adjectifs de couleur, adjectifs numéraux) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Accorder correctement les adjectifs de couleur simples et composés.",
+    "Écrire « vingt » et « cent » avec ou sans s."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-francais-accords-particuliers-01",
+    "5e-francais-accords-particuliers-02",
+    "5e-francais-accords-particuliers-03",
+    "5e-francais-accords-particuliers-04",
+    "5e-francais-accords-particuliers-05",
+    "5e-francais-accords-particuliers-06"
+   ],
+   "selfCheck": [
+    "5e-francais-accords-particuliers-q1",
+    "5e-francais-accords-particuliers-q2",
+    "5e-francais-accords-particuliers-q3",
+    "5e-francais-accords-particuliers-q4",
+    "5e-francais-accords-particuliers-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les adjectifs de couleur",
+     "md": "- **Couleurs simples** (*rouge, vert, bleu, jaune, noir, blanc, gris*) : elles **s'accordent** : *des robes rouges*.\n- **Noms utilisés comme couleurs** (*orange, marron, cerise, citron, crème…*) : **invariables** : *des chaussures marron*.\n- **Couleurs composées** (*bleu clair, vert foncé*) : **invariables** : *des yeux bleu clair*.\n\nExceptions courantes qui s'accordent : *rose, mauve, pourpre, fauve*."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Vingt et cent",
+     "md": "**Vingt** et **cent** prennent un **s** quand ils sont **multipliés** et **non suivis** d'un autre nombre : *quatre-vingts élèves, deux cents mètres*.\n\nS'ils sont suivis d'un autre nombre, ils restent **invariables** : *quatre-vingt-deux, deux cent trois*. **Mille** est toujours invariable : *deux mille*."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quelques exemples de chaque règle.",
+     "alt": "Un tableau : des robes rouges, des sacs marron, des yeux bleu clair, quatre-vingts élèves, quatre-vingt-trois élèves, chacun avec sa règle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 530,
+      "h": 224,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 239,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 28,
+        "text": "Écriture",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 243,
+        "y": 4,
+        "w": 283,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 384.5,
+        "y": 28,
+        "text": "Règle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 239,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 64,
+        "text": "des robes rouges",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 243,
+        "y": 40,
+        "w": 283,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 384.5,
+        "y": 64,
+        "text": "couleur simple : accord",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 239,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 100,
+        "text": "des sacs marron",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 243,
+        "y": 76,
+        "w": 283,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 384.5,
+        "y": 100,
+        "text": "nom de fruit : invariable",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 239,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 136,
+        "text": "des yeux bleu clair",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 243,
+        "y": 112,
+        "w": 283,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 384.5,
+        "y": 136,
+        "text": "composée : invariable",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 239,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 172,
+        "text": "quatre-vingts élèves",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 243,
+        "y": 148,
+        "w": 283,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 384.5,
+        "y": 172,
+        "text": "vingt multiplié, rien après",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 239,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 208,
+        "text": "quatre-vingt-trois élèves",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 243,
+        "y": 184,
+        "w": 283,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 384.5,
+        "y": 208,
+        "text": "suivi d'un nombre : invariable",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : couleurs",
+     "statement": "Accorde : « Des chemises (bleu clair) et des pantalons (marron). »",
+     "steps": [
+      {
+       "md": "« bleu clair » est une couleur composée : invariable."
+      },
+      {
+       "md": "« marron » est un nom de fruit employé comme couleur : invariable."
+      }
+     ],
+     "answer": "**Des chemises bleu clair et des pantalons marron.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : vingt et cent",
+     "statement": "Écris en lettres : « 80 élèves, 82 élèves, 200 mètres, 205 mètres ».",
+     "steps": [
+      {
+       "md": "80 : quatre-vingts (multiplié, rien après) ; 82 : quatre-vingt-deux (suivi d'un nombre)."
+      },
+      {
+       "md": "200 : deux cents ; 205 : deux cent cinq."
+      }
+     ],
+     "answer": "**quatre-vingts élèves, quatre-vingt-deux élèves, deux cents mètres, deux cent cinq mètres**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire *des robes oranges* : *orange* est invariable.\n- Écrire *quatre-vingt élèves* sans s : multiplié et non suivi d'un nombre → *quatre-vingts*.\n- Écrire *deux milles* : *mille* est invariable."
+    }
+   ],
+   "reviewNotes": [
+    "Les rectifications orthographiques de 1990 (traits d'union dans les nombres) sont tolérées ; vérifier la convention suivie en classe.",
+    "Les exceptions « rose, mauve, pourpre, fauve, écarlate » varient parfois selon les ouvrages."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Elle est (arriver) hier. »",
+   "choices": [
+    "arrivé",
+    "arrivés",
+    "arrivée",
+    "arrivées"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Être : accord avec « elle ».",
+   "id": "5e-francais-participe-passe-01",
+   "tier": "application",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Amina a (manger) des mangues. »",
+   "choices": [
+    "mangée",
+    "mangés",
+    "mangées",
+    "mangé"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COD après le verbe : invariable.",
+   "id": "5e-francais-participe-passe-02",
+   "tier": "application",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Les mangues qu'elle a (acheter) sont mûres. »",
+   "choices": [
+    "acheté",
+    "achetés",
+    "achetée",
+    "achetées"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COD « que » = les mangues placé avant : accord.",
+   "id": "5e-francais-participe-passe-03",
+   "tier": "application",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Les chansons qu'ils ont chanté étaient belles.",
+    "Les chansons qu'ils ont chantées étaient belles.",
+    "Les chansons qu'ils ont chantés étaient belles.",
+    "Les chansons qu'ils ont chantée étaient belles."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "COD avant : féminin pluriel.",
+   "id": "5e-francais-participe-passe-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase au participe correct.",
+   "pairs": [
+    [
+     "Ils sont (partir).",
+     "partis"
+    ],
+    [
+     "Elle a (voir) la mer.",
+     "vu"
+    ],
+    [
+     "La mer qu'elle a (voir).",
+     "vue"
+    ],
+    [
+     "Elles se sont (laver).",
+     "lavées"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Être : sujet ; avoir : COD avant ; pronominal : sujet.",
+   "id": "5e-francais-participe-passe-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Recopie en accordant les participes : « Les devoirs que j'ai (finir) hier étaient difficiles. Mes sœurs sont (rentrer) tard. Elles se sont (parler) longtemps. »",
+   "model": "Les devoirs que j'ai finis hier étaient difficiles. Mes sœurs sont rentrées tard. Elles se sont parlé longtemps.",
+   "rubric": [
+    "« finis » : COD avant, masculin pluriel.",
+    "« rentrées » : être, féminin pluriel.",
+    "« parlé » invariable (se = COI).",
+    "Phrases recopiées sans autre faute."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-participe-passe-06",
+   "tier": "examen",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec quel mot le participe passé employé avec être s'accorde-t-il ?",
+   "choices": [
+    "Le COD",
+    "Le COI",
+    "Le sujet",
+    "L'adverbe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle est partie.",
+   "id": "5e-francais-participe-passe-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand accorde-t-on le participe passé avec avoir ?",
+   "choices": [
+    "Toujours",
+    "Jamais",
+    "Quand le COD est placé avant le verbe",
+    "Quand le sujet est féminin"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COD avant = accord.",
+   "id": "5e-francais-participe-passe-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la bonne forme : « Les pommes qu'il a (cueillir) » ?",
+   "choices": [
+    "cueilli",
+    "cueillis",
+    "cueillies",
+    "cueillie"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COD « les pommes » avant → féminin pluriel.",
+   "id": "5e-francais-participe-passe-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase respecte l'accord du participe passé ?",
+   "choices": [
+    "Elle a mangé du pain.",
+    "Elle a mangée du pain.",
+    "Elle est mangé du pain.",
+    "Elle a mangés du pain."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COD après : invariable.",
+   "id": "5e-francais-participe-passe-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Elles se sont parlé », pourquoi « parlé » est-il invariable ?",
+   "choices": [
+    "Parce que c'est un infinitif",
+    "Le pronom « se » est un COI",
+    "Parce qu'il y a un COD avant",
+    "Parce que le sujet est masculin"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On parle à quelqu'un (COI).",
+   "id": "5e-francais-participe-passe-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « ______ une belle journée. »",
+   "choices": [
+    "S'est",
+    "Sais",
+    "Ces",
+    "C'est"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On peut dire « cela est ».",
+   "id": "5e-francais-homophones-2-01",
+   "tier": "application",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Le chat ______ endormi près du feu. »",
+   "choices": [
+    "c'est",
+    "ces",
+    "s'est",
+    "sait"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il s'était endormi (verbe pronominal).",
+   "id": "5e-francais-homophones-2-02",
+   "tier": "application",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Je ______ prête mon vélo. » (à eux)",
+   "choices": [
+    "leur",
+    "leurs",
+    "leure",
+    "l'heure"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pronom invariable.",
+   "id": "5e-francais-homophones-2-03",
+   "tier": "application",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis la phrase correcte :",
+   "choices": [
+    "Sa me plaît : ça musique est la, je l'ai écoutée.",
+    "Ça me plaît : ça musique est là, je la écoutée.",
+    "Ça me plaît : sa musique est là, je l'ai écoutée.",
+    "Sa me plaît : sa musique est la, je l'a écoutée."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Ça = cela ; sa musique ; là (lieu) ; je l'ai écoutée.",
+   "id": "5e-francais-homophones-2-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque homophone à son test.",
+   "pairs": [
+    [
+     "c'est",
+     "cela est"
+    ],
+    [
+     "l'a",
+     "l'avait"
+    ],
+    [
+     "là",
+     "ici"
+    ],
+    [
+     "qu'elle",
+     "que elle"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque homophone se remplace par une autre forme.",
+   "id": "5e-francais-homophones-2-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Recopie en corrigeant : « Quelle chance, ces mon ami ! Sa va ? Il ses lavé et il leurs a parlé. Je crois quelle vient. »",
+   "model": "« Quelle chance, c'est mon ami ! Ça va ? Il s'est lavé et il leur a parlé. Je crois qu'elle vient. »",
+   "rubric": [
+    "« c'est », « Ça », « s'est », « leur », « qu'elle » corrects.",
+    "La ponctuation est conservée.",
+    "Aucune faute nouvelle."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-homophones-2-06",
+   "tier": "examen",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel test permet de reconnaître « c'est » ?",
+   "choices": [
+    "Le remplacer par « ici »",
+    "Le remplacer par « l'avait »",
+    "Le remplacer par « cela est »",
+    "Le mettre au pluriel"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est = cela est.",
+   "id": "5e-francais-homophones-2-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est correcte : « Il ______ lavé » ?",
+   "choices": [
+    "c'est",
+    "ces",
+    "ses",
+    "s'est"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Participe + verbe pronominal.",
+   "id": "5e-francais-homophones-2-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est correcte : « ______ va bien » ?",
+   "choices": [
+    "Sa",
+    "Çà",
+    "Ça",
+    "Sas"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ça = cela.",
+   "id": "5e-francais-homophones-2-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Je ______ ai donné un cadeau » (à eux). Quel mot ?",
+   "choices": [
+    "leurs",
+    "leur",
+    "leure",
+    "l'heur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pronom invariable.",
+   "id": "5e-francais-homophones-2-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie « qu'elle » ?",
+   "choices": [
+    "quelle",
+    "qui elle",
+    "que elle",
+    "quel elle"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« qu'elle » est la contraction de « que » et « elle ».",
+   "id": "5e-francais-homophones-2-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-homophones-2",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Des fleurs (rouge) »",
+   "choices": [
+    "rouge",
+    "rougent",
+    "rouges",
+    "rouge s"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Couleur simple : accord.",
+   "id": "5e-francais-accords-particuliers-01",
+   "tier": "application",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Des écharpes (orange) »",
+   "choices": [
+    "oranges",
+    "orange",
+    "orangés",
+    "orangent"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nom de fruit : invariable.",
+   "id": "5e-francais-accords-particuliers-02",
+   "tier": "application",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment écrire 200 ?",
+   "choices": [
+    "deux cent",
+    "deux cents",
+    "deux-cents",
+    "deux cents-"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Cent multiplié et non suivi d'un nombre : cents.",
+   "id": "5e-francais-accords-particuliers-03",
+   "tier": "application",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment écrire 280 ?",
+   "choices": [
+    "deux cents quatre-vingts",
+    "deux cent quatre-vingt",
+    "deux cents quatre-vingt",
+    "deux cent quatre-vingts"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 3,
+   "explanation": "« cent » est suivi d'un nombre : invariable ; « quatre-vingts » n'est suivi de rien.",
+   "id": "5e-francais-accords-particuliers-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque nombre à son écriture.",
+   "pairs": [
+    [
+     "80",
+     "quatre-vingts"
+    ],
+    [
+     "81",
+     "quatre-vingt-un"
+    ],
+    [
+     "300",
+     "trois cents"
+    ],
+    [
+     "301",
+     "trois cent un"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Vingt et cent prennent s s'ils sont multipliés et non suivis.",
+   "id": "5e-francais-accords-particuliers-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris en lettres : « Il y a 400 élèves, 85 professeurs et 2 000 livres. Ils portent des vestes (vert foncé) et des cravates (marron). »",
+   "model": "Il y a quatre cents élèves, quatre-vingt-cinq professeurs et deux mille livres. Ils portent des vestes vert foncé et des cravates marron.",
+   "rubric": [
+    "« quatre cents » avec s.",
+    "« quatre-vingt-cinq » sans s.",
+    "« deux mille » invariable.",
+    "« vert foncé » et « marron » invariables."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-accords-particuliers-06",
+   "tier": "examen",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle écriture est correcte ?",
+   "choices": [
+    "des tissus marrons",
+    "des tissus marron",
+    "des tissu marron",
+    "des tissus marronnes"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nom employé comme couleur : invariable.",
+   "id": "5e-francais-accords-particuliers-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment écrit-on 80 personnes ?",
+   "choices": [
+    "quatre-vingts personnes",
+    "quatre-vingt personnes",
+    "quatre-vingts-personnes",
+    "quatre-vingte personnes"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Vingt multiplié et non suivi : s.",
+   "id": "5e-francais-accords-particuliers-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel adjectif est invariable ?",
+   "choices": [
+    "bleu foncé",
+    "rouge",
+    "vert",
+    "jaune"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Couleur composée.",
+   "id": "5e-francais-accords-particuliers-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'écrit « 2000 » en lettres ?",
+   "choices": [
+    "deux milles",
+    "deux mil s",
+    "deux mille",
+    "deux-milles"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Mille ne prend jamais de s.",
+   "id": "5e-francais-accords-particuliers-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Cent trois » : pourquoi « cent » sans s ?",
+   "choices": [
+    "Parce qu'il est suivi d'un nombre",
+    "Parce qu'il est au singulier",
+    "Parce qu'il est un adjectif de couleur",
+    "Parce qu'il est un verbe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Cent suivi d'un nombre est invariable.",
+   "id": "5e-francais-accords-particuliers-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-accords-particuliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

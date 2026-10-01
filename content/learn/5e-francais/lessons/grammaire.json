@@ -1,0 +1,3986 @@
+{
+ "chapter": "5e-francais-grammaire",
+ "lessons": [
+  {
+   "id": "5e-francais-propositions",
+   "title": "La phrase simple et la phrase complexe : les propositions",
+   "minutes": 30,
+   "programRef": "5e — Grammaire : phrase simple, phrase complexe, propositions indépendantes, principale et subordonnée (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Compter les propositions d'une phrase d'après les verbes conjugués.",
+    "Distinguer juxtaposition, coordination et subordination."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-francais-propositions-01",
+    "5e-francais-propositions-02",
+    "5e-francais-propositions-03",
+    "5e-francais-propositions-04",
+    "5e-francais-propositions-05",
+    "5e-francais-propositions-06"
+   ],
+   "selfCheck": [
+    "5e-francais-propositions-q1",
+    "5e-francais-propositions-q2",
+    "5e-francais-propositions-q3",
+    "5e-francais-propositions-q4",
+    "5e-francais-propositions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Proposition, phrase simple, phrase complexe",
+     "md": "Une **proposition** est un groupe de mots organisé autour d'**un verbe conjugué**. Une **phrase simple** contient **une** proposition. Une **phrase complexe** en contient **au moins deux** : on compte donc les verbes conjugués.\n\n*Il pleut.* (1 verbe) / *Il pleut et nous restons à la maison.* (2 verbes)"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Trois façons de relier les propositions",
+     "md": "- **Juxtaposition** : sans mot de liaison, avec une ponctuation (virgule, point-virgule, deux-points) : *Il arrive, il sourit.*\n- **Coordination** : avec une **conjonction de coordination** (*mais, ou, et, donc, or, ni, car*) : *Il arrive et il sourit.*\n- **Subordination** : une proposition **dépend** d'une autre (la **principale**) grâce à un mot subordonnant (*qui, que, quand, parce que, si…*) : *Il sourit **quand** il arrive.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Coordination (en haut) et subordination (en bas).",
+     "alt": "Deux lignes de cadres : Il pleut (indépendante) mais (coordination) nous sortons (indépendante) ; Nous sortons (principale) quand (subordonnant) la pluie s'arrête (subordonnée).",
+     "figure": {
+      "kind": "shapes",
+      "w": 467,
+      "h": 188,
+      "items": [
+       {
+        "t": "text",
+        "x": 67.5,
+        "y": 22,
+        "text": "indépendante",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 32,
+        "w": 111,
+        "h": 42,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 67.5,
+        "y": 59,
+        "text": "Il pleut",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 188.5,
+        "y": 22,
+        "text": "coordination",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 133,
+        "y": 32,
+        "w": 111,
+        "h": 42,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 188.5,
+        "y": 59,
+        "text": "mais",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 320.5,
+        "y": 22,
+        "text": "indépendante",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 254,
+        "y": 32,
+        "w": 133,
+        "h": 42,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 320.5,
+        "y": 59,
+        "text": "nous sortons",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 78.5,
+        "y": 114,
+        "text": "principale",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 124,
+        "w": 133,
+        "h": 42,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 78.5,
+        "y": 151,
+        "text": "Nous sortons",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210.5,
+        "y": 114,
+        "text": "subordonnant",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 155,
+        "y": 124,
+        "w": 111,
+        "h": 42,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.5,
+        "y": 151,
+        "text": "quand",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 365.5,
+        "y": 114,
+        "text": "subordonnée",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 276,
+        "y": 124,
+        "w": 179,
+        "h": 42,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 365.5,
+        "y": 151,
+        "text": "la pluie s'arrête",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : compter les propositions",
+     "statement": "Combien de propositions : « Le vent se lève, les arbres plient et les oiseaux se taisent. » ?",
+     "steps": [
+      {
+       "md": "On repère les verbes conjugués : se lève, plient, se taisent."
+      },
+      {
+       "md": "Trois verbes → trois propositions, reliées par une virgule (juxtaposition) et par « et » (coordination)."
+      }
+     ],
+     "answer": "**3 propositions**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : principale et subordonnée",
+     "statement": "Identifie la principale et la subordonnée : « Amina rit parce que son frère raconte une blague. »",
+     "steps": [
+      {
+       "md": "Deux verbes : rit et raconte."
+      },
+      {
+       "md": "« parce que » est un mot subordonnant : « son frère raconte une blague » est la subordonnée ; « Amina rit » est la principale."
+      }
+     ],
+     "answer": "**principale : Amina rit ; subordonnée : parce que son frère raconte une blague**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Compter les mots ou les virgules au lieu des verbes conjugués.\n- Oublier les verbes à l'infinitif et au participe : *Il veut partir* a **un seul** verbe conjugué (veut).\n- Confondre coordination et subordination : *et, mais, ou…* coordonnent ; *parce que, quand, si…* subordonnent."
+    }
+   ],
+   "reviewNotes": [
+    "Le vocabulaire « indépendante / principale / subordonnée » est standard ; certains manuels ajoutent « proposition incise ».",
+    "La subordonnée complétive n'est ici qu'évoquée ; elle est approfondie en 3e (voir le pack bepc-francais)."
+   ]
+  },
+  {
+   "id": "5e-francais-relatives",
+   "title": "La proposition subordonnée relative",
+   "minutes": 30,
+   "programRef": "5e — Grammaire : la proposition subordonnée relative et les pronoms relatifs (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une subordonnée relative et son antécédent.",
+    "Choisir le pronom relatif (qui, que, où, dont) et accorder le verbe."
+   ],
+   "prerequisites": [
+    "5e-francais-propositions"
+   ],
+   "exercises": [
+    "5e-francais-relatives-01",
+    "5e-francais-relatives-02",
+    "5e-francais-relatives-03",
+    "5e-francais-relatives-04",
+    "5e-francais-relatives-05",
+    "5e-francais-relatives-06"
+   ],
+   "selfCheck": [
+    "5e-francais-relatives-q1",
+    "5e-francais-relatives-q2",
+    "5e-francais-relatives-q3",
+    "5e-francais-relatives-q4",
+    "5e-francais-relatives-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La relative",
+     "md": "La **proposition subordonnée relative** complète un nom ou un pronom appelé **antécédent**. Elle est introduite par un **pronom relatif** : **qui, que, où, dont**. Elle fonctionne comme un **adjectif** : *L'élève **qui chante** est ma sœur.*"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Choisir le pronom relatif",
+     "md": "- **qui** : sujet du verbe qui suit : *le chat **qui** dort*.\n- **que (qu')** : COD : *le livre **que** tu lis*.\n- **où** : lieu ou temps : *la ville **où** il habite*, *le jour **où** nous partons*.\n- **dont** : complément introduit par **de** : *le livre **dont** je parle* (je parle **de** ce livre).\n\nLe verbe de la relative introduite par **qui** s'accorde avec l'**antécédent** : *C'est moi qui **suis** là.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Une proposition subordonnée relative.",
+     "alt": "Trois cadres : Le livre (antécédent), que (pronom relatif), tu lis (subordonnée relative).",
+     "figure": {
+      "kind": "shapes",
+      "w": 443,
+      "h": 117,
+      "items": [
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 22,
+        "text": "antécédent",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 32,
+        "w": 96,
+        "h": 42,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 59,
+        "text": "Le livre",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 181.5,
+        "y": 22,
+        "text": "pronom relatif",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 118,
+        "y": 32,
+        "w": 127,
+        "h": 42,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 181.5,
+        "y": 59,
+        "text": "que",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 343.0,
+        "y": 22,
+        "text": "subordonnée relative",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 255,
+        "y": 32,
+        "w": 176,
+        "h": 42,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 343.0,
+        "y": 59,
+        "text": "tu lis",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir le pronom",
+     "statement": "Complète : « Voici la maison ___ mon oncle a construite. » ",
+     "steps": [
+      {
+       "md": "Le pronom remplace « la maison », COD de « a construite » (mon oncle a construit la maison) → que."
+      },
+      {
+       "md": "Accord du participe construite avec « la maison » placée avant (COD) : -e."
+      }
+     ],
+     "answer": "**Voici la maison que mon oncle a construite.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dont",
+     "statement": "Relie : « J'admire ce chanteur. Tu m'as parlé de ce chanteur. »",
+     "steps": [
+      {
+       "md": "« parler de » : le complément est introduit par « de » → dont."
+      },
+      {
+       "md": "On remplace le second « ce chanteur » par « dont »."
+      }
+     ],
+     "answer": "**J'admire ce chanteur dont tu m'as parlé.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire *Le livre qui je lis* : le COD demande « que ».\n- Oublier l'accord du verbe avec l'antécédent : *Les enfants qui jouent*.\n- Utiliser « dont » sans « de » dans le verbe : *Le livre dont je lis* est faux ; on dit *que je lis*."
+    }
+   ],
+   "reviewNotes": [
+    "« lequel, auquel » sont laissés de côté ; la relative sans antécédent (« Qui dort dîne ») est ignorée."
+   ]
+  },
+  {
+   "id": "5e-francais-circonstanciels",
+   "title": "Les compléments circonstanciels",
+   "minutes": 30,
+   "programRef": "5e — Grammaire : les compléments circonstanciels (lieu, temps, manière, cause, but, moyen) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître les compléments circonstanciels de lieu, temps, manière, cause, but, moyen.",
+    "Identifier leur nature (groupe nominal, adverbe, proposition)."
+   ],
+   "prerequisites": [
+    "5e-francais-propositions"
+   ],
+   "exercises": [
+    "5e-francais-circonstanciels-01",
+    "5e-francais-circonstanciels-02",
+    "5e-francais-circonstanciels-03",
+    "5e-francais-circonstanciels-04",
+    "5e-francais-circonstanciels-05",
+    "5e-francais-circonstanciels-06"
+   ],
+   "selfCheck": [
+    "5e-francais-circonstanciels-q1",
+    "5e-francais-circonstanciels-q2",
+    "5e-francais-circonstanciels-q3",
+    "5e-francais-circonstanciels-q4",
+    "5e-francais-circonstanciels-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Définition",
+     "md": "Un **complément circonstanciel** (CC) indique les **circonstances** de l'action. Il est **déplaçable** et **supprimable**. Il peut être un **groupe nominal** (*ce matin*), un **groupe prépositionnel** (*dans la cour*), un **adverbe** (*hier*) ou une **subordonnée** (*quand il pleut*)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les compléments circonstanciels.",
+     "alt": "Un tableau avec la circonstance, la question qui permet de la trouver et un exemple, pour lieu, temps, manière, cause, but et moyen.",
+     "figure": {
+      "kind": "shapes",
+      "w": 568,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 126,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 28,
+        "text": "Circonstance",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 4,
+        "w": 169,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 214.5,
+        "y": 28,
+        "text": "Question",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 4,
+        "w": 265,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 431.5,
+        "y": 28,
+        "text": "Exemple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 126,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 64,
+        "text": "lieu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 40,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 214.5,
+        "y": 64,
+        "text": "où ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 40,
+        "w": 265,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 431.5,
+        "y": 64,
+        "text": "Il joue dans la cour.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 126,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 100,
+        "text": "temps",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 76,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 214.5,
+        "y": 100,
+        "text": "quand ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 76,
+        "w": 265,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 431.5,
+        "y": 100,
+        "text": "Il joue après l'école.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 126,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 136,
+        "text": "manière",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 112,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 214.5,
+        "y": 136,
+        "text": "comment ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 112,
+        "w": 265,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 431.5,
+        "y": 136,
+        "text": "Il joue joyeusement.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 126,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 172,
+        "text": "cause",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 148,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 214.5,
+        "y": 172,
+        "text": "pourquoi ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 148,
+        "w": 265,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 431.5,
+        "y": 172,
+        "text": "Il rit à cause de la blague.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 126,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 208,
+        "text": "but",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 184,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 214.5,
+        "y": 208,
+        "text": "pour quoi faire ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 184,
+        "w": 265,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 431.5,
+        "y": 208,
+        "text": "Il court pour gagner.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 126,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 244,
+        "text": "moyen",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 220,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 214.5,
+        "y": 244,
+        "text": "avec quoi ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 220,
+        "w": 265,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 431.5,
+        "y": 244,
+        "text": "Il écrit avec un stylo.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : trouver la circonstance",
+     "statement": "Donne le type de chaque CC : « Hier, Mballa est arrivé en moto pour voir sa mère. » (Hier / en moto / pour voir sa mère)",
+     "steps": [
+      {
+       "md": "« Hier » : quand ? → temps. « en moto » : avec quoi ? → moyen."
+      },
+      {
+       "md": "« pour voir sa mère » : dans quel but ? → but."
+      }
+     ],
+     "answer": "**Hier : temps ; en moto : moyen ; pour voir sa mère : but**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la nature du CC",
+     "statement": "Quelle est la nature de « parce qu'il pleuvait » dans « Nous sommes restés parce qu'il pleuvait » ?",
+     "steps": [
+      {
+       "md": "Il y a un verbe conjugué (pleuvait) et un subordonnant (parce que)."
+      },
+      {
+       "md": "C'est une proposition subordonnée circonstancielle de cause."
+      }
+     ],
+     "answer": "**CC de cause, nature : proposition subordonnée**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre CC et COI : *Il pense à son frère* (COI, lié au verbe) / *Il pense à Yaoundé, le soir* (CC de temps).\n- Croire qu'un CC est toujours après le verbe : *Après la pluie, le soleil revient.*\n- Confondre cause (pourquoi ?) et but (pour quoi faire ?)."
+    }
+   ],
+   "reviewNotes": [
+    "Comparaison, opposition, condition et conséquence sont renvoyées à la 4e/3e."
+   ]
+  },
+  {
+   "id": "5e-francais-voix",
+   "title": "La voix active et la voix passive (initiation)",
+   "minutes": 25,
+   "programRef": "5e — Grammaire : voix active, voix passive (initiation) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une phrase active ou passive.",
+    "Transformer une phrase active en passive en gardant le temps."
+   ],
+   "prerequisites": [
+    "5e-francais-circonstanciels"
+   ],
+   "exercises": [
+    "5e-francais-voix-01",
+    "5e-francais-voix-02",
+    "5e-francais-voix-03",
+    "5e-francais-voix-04",
+    "5e-francais-voix-05",
+    "5e-francais-voix-06"
+   ],
+   "selfCheck": [
+    "5e-francais-voix-q1",
+    "5e-francais-voix-q2",
+    "5e-francais-voix-q3",
+    "5e-francais-voix-q4",
+    "5e-francais-voix-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Deux voix",
+     "md": "À la **voix active**, le sujet **fait** l'action : *Le tailleur coud la robe.* À la **voix passive**, le sujet **subit** l'action : *La robe est cousue par le tailleur.* L'auteur de l'action devient le **complément d'agent** (introduit par **par**)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Passer de l'actif au passif",
+     "md": "1. Le **COD** de l'actif devient le **sujet** du passif.\n2. Le verbe devient **être (au même temps) + participe passé**, qui s'accorde avec le nouveau sujet.\n3. Le **sujet** de l'actif devient le **complément d'agent** (*par…*).\n\n*Le vent a renversé l'arbre.* → *L'arbre a été renversé par le vent.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Actif (en haut) et passif (en bas).",
+     "alt": "Deux lignes de cadres : Le vent (sujet) a renversé (verbe) l'arbre (COD) ; L'arbre (sujet) a été renversé (être + participe) par le vent (complément d'agent).",
+     "figure": {
+      "kind": "shapes",
+      "w": 441,
+      "h": 188,
+      "items": [
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 22,
+        "text": "sujet",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 32,
+        "w": 86,
+        "h": 42,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 59,
+        "text": "Le vent",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 22,
+        "text": "verbe actif",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 108,
+        "y": 32,
+        "w": 114,
+        "h": 42,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 59,
+        "text": "a renversé",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 22,
+        "text": "COD",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 232,
+        "y": 32,
+        "w": 86,
+        "h": 42,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 59,
+        "text": "l'arbre",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 114,
+        "text": "sujet",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 124,
+        "w": 86,
+        "h": 42,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 151,
+        "text": "L'arbre",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 183.5,
+        "y": 114,
+        "text": "être + participe",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 108,
+        "y": 124,
+        "w": 151,
+        "h": 42,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 183.5,
+        "y": 151,
+        "text": "a été renversé",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 349.0,
+        "y": 114,
+        "text": "complément d'agent",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 269,
+        "y": 124,
+        "w": 160,
+        "h": 42,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 349.0,
+        "y": 151,
+        "text": "par le vent",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : actif vers passif",
+     "statement": "Transforme : « Les élèves ont nettoyé la classe. »",
+     "steps": [
+      {
+       "md": "COD « la classe » → sujet. Le verbe « ont nettoyé » (passé composé) devient « a été nettoyée » (passé composé de être + nettoyée)."
+      },
+      {
+       "md": "Le sujet « Les élèves » devient « par les élèves »."
+      }
+     ],
+     "answer": "**La classe a été nettoyée par les élèves.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : reconnaître",
+     "statement": "La phrase « Mballa est félicité par son oncle » est-elle active ou passive ?",
+     "steps": [
+      {
+       "md": "Le verbe est « est félicité » : être + participe passé."
+      },
+      {
+       "md": "Le complément d'agent « par son oncle » est présent : voix passive."
+      }
+     ],
+     "answer": "**voix passive**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Changer le temps du verbe : *a renversé* → *a été renversé* (passé composé), pas *est renversé*.\n- Oublier l'accord du participe : *La robe est cousue.*\n- Passiver un verbe sans COD : *Il dort* ne peut pas être mis au passif."
+    }
+   ],
+   "reviewNotes": [
+    "L'étude détaillée (verbe pronominal, passif sans agent) est renvoyée à la 3e ; voir le pack bepc-francais."
+   ]
+  },
+  {
+   "id": "5e-francais-pronoms",
+   "title": "Les pronoms personnels, possessifs et démonstratifs",
+   "minutes": 30,
+   "programRef": "5e — Grammaire : les pronoms (personnels, possessifs, démonstratifs) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer pronoms personnels sujets et compléments (le, la, les, lui, leur, en, y).",
+    "Reconnaître pronoms possessifs et démonstratifs."
+   ],
+   "prerequisites": [
+    "5e-francais-relatives"
+   ],
+   "exercises": [
+    "5e-francais-pronoms-01",
+    "5e-francais-pronoms-02",
+    "5e-francais-pronoms-03",
+    "5e-francais-pronoms-04",
+    "5e-francais-pronoms-05",
+    "5e-francais-pronoms-06"
+   ],
+   "selfCheck": [
+    "5e-francais-pronoms-q1",
+    "5e-francais-pronoms-q2",
+    "5e-francais-pronoms-q3",
+    "5e-francais-pronoms-q4",
+    "5e-francais-pronoms-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Les pronoms personnels.",
+     "alt": "Un tableau des pronoms personnels : sujet, COD et COI pour chaque personne.",
+     "figure": {
+      "kind": "shapes",
+      "w": 337,
+      "h": 296,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 100,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 28,
+        "text": "Personne",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 28,
+        "text": "Sujet",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 221,
+        "y": 4,
+        "w": 56,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 249.0,
+        "y": 28,
+        "text": "COD",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 277,
+        "y": 4,
+        "w": 56,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 28,
+        "text": "COI",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 64,
+        "text": "1re sing.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 221,
+        "y": 40,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 249.0,
+        "y": 64,
+        "text": "me",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 277,
+        "y": 40,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 64,
+        "text": "me",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 100,
+        "text": "2e sing.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 221,
+        "y": 76,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 249.0,
+        "y": 100,
+        "text": "te",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 277,
+        "y": 76,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 100,
+        "text": "te",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 136,
+        "text": "3e masc.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 136,
+        "text": "il",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 221,
+        "y": 112,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 249.0,
+        "y": 136,
+        "text": "le",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 277,
+        "y": 112,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 136,
+        "text": "lui",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 172,
+        "text": "3e fém.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 172,
+        "text": "elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 221,
+        "y": 148,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 249.0,
+        "y": 172,
+        "text": "la",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 277,
+        "y": 148,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 172,
+        "text": "lui",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 208,
+        "text": "1re plur.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 208,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 221,
+        "y": 184,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 249.0,
+        "y": 208,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 277,
+        "y": 184,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 208,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 244,
+        "text": "2e plur.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 244,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 221,
+        "y": 220,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 249.0,
+        "y": 244,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 277,
+        "y": 220,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 244,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 256,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 280,
+        "text": "3e plur.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104,
+        "y": 256,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 162.5,
+        "y": 280,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 221,
+        "y": 256,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 249.0,
+        "y": 280,
+        "text": "les",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 277,
+        "y": 256,
+        "w": 56,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 280,
+        "text": "leur",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pronoms COD et COI",
+     "md": "- **le, la, les** remplacent un COD : *Je vois **Amina** → Je **la** vois.*\n- **lui, leur** remplacent un COI de personne : *Je parle **à Amina** → Je **lui** parle.*\n- **en** remplace un complément en **de** ; **y** remplace un complément en **à** ou de lieu : *Je viens **de la ville** → J'**en** viens.*"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Possessifs et démonstratifs",
+     "md": "- **Pronoms possessifs** : *le mien, la mienne, les miens / les miennes, le tien, le sien, le nôtre, le vôtre, le leur…* : *Ce cahier est **le mien**.*\n- **Pronoms démonstratifs** : *celui, celle, ceux, celles, celui-ci, celle-là, ce, ceci, cela* : *Je prends **celui-ci**.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : remplacer",
+     "statement": "Remplace les groupes soulignés par un pronom : « Boris donne le ballon à ses amis. » (le ballon / à ses amis)",
+     "steps": [
+      {
+       "md": "« le ballon » est COD : le."
+      },
+      {
+       "md": "« à ses amis » est COI pluriel : leur."
+      }
+     ],
+     "answer": "**Boris le leur donne.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : reconnaître",
+     "statement": "Nature de « le mien » dans « Ton sac est neuf, le mien est vieux. » ?",
+     "steps": [
+      {
+       "md": "« le mien » remplace « mon sac » : c'est un pronom."
+      },
+      {
+       "md": "Il exprime la possession : pronom possessif."
+      }
+     ],
+     "answer": "**pronom possessif (remplace « mon sac »)**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre *le* pronom et *le* déterminant : *Je le vois* (pronom) / *le chat* (déterminant).\n- Écrire *Je lui vois* au lieu de *Je le vois* : « voir qqn » = COD.\n- Écrire *Je leur parle* avec « leurs » : le pronom *leur* ne prend jamais de s."
+    }
+   ],
+   "reviewNotes": [
+    "L'ordre de plusieurs pronoms (« Je le lui donne ») est seulement évoqué."
+   ]
+  },
+  {
+   "id": "5e-francais-discours",
+   "title": "Le discours direct et le discours indirect (initiation)",
+   "minutes": 30,
+   "programRef": "5e — Grammaire : discours rapporté (direct, indirect), initiation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer discours direct et indirect.",
+    "Transformer une phrase de discours direct en discours indirect au présent et au passé."
+   ],
+   "prerequisites": [
+    "5e-francais-pronoms",
+    "5e-francais-propositions"
+   ],
+   "exercises": [
+    "5e-francais-discours-01",
+    "5e-francais-discours-02",
+    "5e-francais-discours-03",
+    "5e-francais-discours-04",
+    "5e-francais-discours-05",
+    "5e-francais-discours-06"
+   ],
+   "selfCheck": [
+    "5e-francais-discours-q1",
+    "5e-francais-discours-q2",
+    "5e-francais-discours-q3",
+    "5e-francais-discours-q4",
+    "5e-francais-discours-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Rapporter des paroles",
+     "md": "Le **discours direct** reproduit les paroles exactes, entre guillemets : *Amina dit : « Je viens demain. »*. Le **discours indirect** les rapporte sans guillemets, dans une subordonnée introduite par **que**, **si**, **de** ou un mot interrogatif : *Amina dit qu'elle vient demain.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Exemples de transformation.",
+     "alt": "Un tableau avec quatre phrases au discours direct et leur transformation au discours indirect.",
+     "figure": {
+      "kind": "shapes",
+      "w": 443,
+      "h": 188,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 196,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 102.0,
+        "y": 28,
+        "text": "Direct",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 4,
+        "w": 239,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 319.5,
+        "y": 28,
+        "text": "Indirect",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 196,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 102.0,
+        "y": 64,
+        "text": "« Je suis fatigué. »",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 40,
+        "w": 239,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 319.5,
+        "y": 64,
+        "text": "Il dit qu'il est fatigué.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 196,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 102.0,
+        "y": 100,
+        "text": "« Viens ! »",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 76,
+        "w": 239,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 319.5,
+        "y": 100,
+        "text": "Il m'ordonne de venir.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 196,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 102.0,
+        "y": 136,
+        "text": "« Où vas-tu ? »",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 112,
+        "w": 239,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 319.5,
+        "y": 136,
+        "text": "Il demande où je vais.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 196,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 102.0,
+        "y": 172,
+        "text": "« Viens-tu ? »",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 148,
+        "w": 239,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 319.5,
+        "y": 172,
+        "text": "Il demande si je viens.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les changements",
+     "md": "1. On supprime les **guillemets** et on ajoute **que / si / de**.\n2. Les **pronoms** et déterminants changent (*je → il, mon → son*).\n3. La **ponctuation** change (plus de « ? » ni de « ! » dans la phrase indirecte).\n4. Si le verbe introducteur est **au passé**, les temps changent : présent → imparfait (*Il a dit qu'il était fatigué*), futur → conditionnel, passé composé → plus-que-parfait."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : déclaration",
+     "statement": "Mets au discours indirect : « Mballa dit : « Je vais au marché. » »",
+     "steps": [
+      {
+       "md": "On supprime les guillemets et on ajoute « que »."
+      },
+      {
+       "md": "« Je » devient « il »."
+      }
+     ],
+     "answer": "**Mballa dit qu'il va au marché.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : au passé",
+     "statement": "Mets au discours indirect : « Amina a répondu : « Je ferai mes devoirs demain. » »",
+     "steps": [
+      {
+       "md": "Verbe introducteur au passé : « ferai » (futur) devient « ferait » (conditionnel), « Je » → « elle »."
+      },
+      {
+       "md": "« demain » devient « le lendemain »."
+      }
+     ],
+     "answer": "**Amina a répondu qu'elle ferait ses devoirs le lendemain.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Garder « je » ou « mon » : on change les pronoms.\n- Garder le point d'interrogation : *Il demande où vas-tu ?* est faux ; *Il demande où je vais.*\n- Oublier de changer le temps quand le verbe introducteur est au passé."
+    }
+   ],
+   "reviewNotes": [
+    "La concordance complète des temps est vue en 3e (pack bepc-francais).",
+    "On limite les transformations à des phrases courtes."
+   ]
+  },
+  {
+   "id": "5e-francais-expansions",
+   "title": "Les expansions du nom : épithète, apposition, complément, relative",
+   "minutes": 25,
+   "programRef": "5e — Grammaire : expansions du groupe nominal (adjectif épithète, apposition, complément du nom, relative) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer épithète, apposition, complément du nom et proposition relative.",
+    "Enrichir un groupe nominal par plusieurs expansions."
+   ],
+   "prerequisites": [
+    "5e-francais-relatives"
+   ],
+   "exercises": [
+    "5e-francais-expansions-01",
+    "5e-francais-expansions-02",
+    "5e-francais-expansions-03",
+    "5e-francais-expansions-04",
+    "5e-francais-expansions-05",
+    "5e-francais-expansions-06"
+   ],
+   "selfCheck": [
+    "5e-francais-expansions-q1",
+    "5e-francais-expansions-q2",
+    "5e-francais-expansions-q3",
+    "5e-francais-expansions-q4",
+    "5e-francais-expansions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quatre expansions",
+     "md": "- **Adjectif épithète** : *une **belle** robe*.\n- **Complément du nom** : *une robe **de coton***.\n- **Apposition** : mot ou groupe placé près du nom, séparé par une virgule ou deux-points : *Mballa, **mon oncle**, est arrivé.*\n- **Proposition relative** : *la robe **que j'ai cousue***."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un groupe nominal étendu.",
+     "alt": "Cinq cadres : la (déterminant), robe (noyau), verte (épithète), de coton (complément du nom), que j'ai cousue (relative).",
+     "figure": {
+      "kind": "shapes",
+      "w": 527,
+      "h": 139,
+      "items": [
+       {
+        "t": "text",
+        "x": 35.0,
+        "y": 22,
+        "text": "dét.",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 32,
+        "w": 46,
+        "h": 42,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 35.0,
+        "y": 59,
+        "text": "la",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 97.5,
+        "y": 22,
+        "text": "noyau",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 68,
+        "y": 32,
+        "w": 59,
+        "h": 42,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 97.5,
+        "y": 59,
+        "text": "robe",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 176.0,
+        "y": 22,
+        "text": "épithète",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 137,
+        "y": 32,
+        "w": 78,
+        "h": 42,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 176.0,
+        "y": 59,
+        "text": "verte",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 284.5,
+        "y": 22,
+        "text": "compl. du nom",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 225,
+        "y": 32,
+        "w": 119,
+        "h": 42,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 284.5,
+        "y": 59,
+        "text": "de coton",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 434.5,
+        "y": 22,
+        "text": "relative",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 354,
+        "y": 32,
+        "w": 161,
+        "h": 42,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 434.5,
+        "y": 59,
+        "text": "que j'ai cousue",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : reconnaître l'apposition",
+     "statement": "Quelle est la fonction de « mon oncle » dans « Mballa, mon oncle, est arrivé » ?",
+     "steps": [
+      {
+       "md": "« mon oncle » est séparé de « Mballa » par des virgules."
+      },
+      {
+       "md": "Il donne une précision sur Mballa : apposition."
+      }
+     ],
+     "answer": "**apposition**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : enrichir",
+     "statement": "Enrichis « un manguier » avec les quatre expansions.",
+     "steps": [
+      {
+       "md": "Épithète : « grand » ; complément du nom : « du village »."
+      },
+      {
+       "md": "Apposition : « arbre centenaire » ; relative : « qui donne de l'ombre »."
+      }
+     ],
+     "answer": "**un grand manguier du village, qui donne de l'ombre**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre apposition et attribut : *Mballa, mon oncle, arrive* (apposition) / *Mballa est mon oncle* (attribut).\n- Oublier les virgules de l'apposition.\n- Mal accorder l'épithète."
+    }
+   ],
+   "reviewNotes": [
+    "L'apposition est une notion que certains programmes réservent à la 4e ; à ajuster."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Combien de propositions dans « Nkeng ouvre la porte et il entre » ?",
+   "choices": [
+    "Une",
+    "Trois",
+    "Deux",
+    "Quatre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux verbes conjugués : ouvre, entre.",
+   "id": "5e-francais-propositions-01",
+   "tier": "application",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot coordonne les propositions de « Il veut sortir mais il pleut » ?",
+   "choices": [
+    "il",
+    "veut",
+    "mais",
+    "sortir"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« mais » est une conjonction de coordination.",
+   "id": "5e-francais-propositions-02",
+   "tier": "application",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Je sais qu'il viendra. » La proposition « qu'il viendra » est…",
+   "choices": [
+    "une indépendante",
+    "une principale",
+    "une subordonnée",
+    "une proposition juxtaposée"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« que » est un mot subordonnant : la proposition dépend de « Je sais ».",
+   "id": "5e-francais-propositions-03",
+   "tier": "application",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de propositions dans « Elle a décidé de partir tôt pour éviter les embouteillages » ?",
+   "choices": [
+    "Deux",
+    "Trois",
+    "Une",
+    "Quatre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Un seul verbe conjugué (a décidé) ; « partir » et « éviter » sont à l'infinitif.",
+   "mistakes": [
+    "Compter aussi les infinitifs."
+   ],
+   "id": "5e-francais-propositions-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase au mode de liaison des propositions.",
+   "pairs": [
+    [
+     "Il arrive, il s'assoit.",
+     "juxtaposition"
+    ],
+    [
+     "Il arrive et il s'assoit.",
+     "coordination"
+    ],
+    [
+     "Il s'assoit quand il arrive.",
+     "subordination"
+    ],
+    [
+     "Il arrive : il s'assoit.",
+     "juxtaposition avec deux-points"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Ponctuation seule, conjonction de coordination ou mot subordonnant.",
+   "id": "5e-francais-propositions-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Phrase : « Boris range ses cahiers, puis il part à l'école parce qu'il est en retard. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Combien de propositions contient cette phrase ?",
+     "choices": [
+      "Deux",
+      "Quatre",
+      "Trois",
+      "Une"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Verbes : range, part, est.",
+     "id": "5e-francais-propositions-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel mot subordonne « il est en retard » ?",
+     "choices": [
+      "parce que",
+      "puis",
+      "il",
+      "Boris"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "« parce que » introduit la subordonnée.",
+     "id": "5e-francais-propositions-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Comment sont reliées les deux premières propositions ?",
+     "choices": [
+      "Par une subordination",
+      "Par un deux-points",
+      "Elles ne sont pas reliées",
+      "Par une virgule et « puis »"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Juxtaposition et coordination avec « puis ».",
+     "id": "5e-francais-propositions-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-francais-propositions-06",
+   "tier": "examen",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment reconnaît-on le nombre de propositions d'une phrase ?",
+   "choices": [
+    "En comptant les virgules",
+    "En comptant les verbes conjugués",
+    "En comptant les mots",
+    "En comptant les noms"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une proposition = un verbe conjugué.",
+   "id": "5e-francais-propositions-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est complexe ?",
+   "choices": [
+    "Il rit.",
+    "Il rit parce qu'il est content.",
+    "Il est content.",
+    "Quel bonheur !"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux verbes conjugués.",
+   "id": "5e-francais-propositions-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la fonction de « car » dans « Il court, car il est en retard » ?",
+   "choices": [
+    "Préposition",
+    "Pronom",
+    "Conjonction de coordination",
+    "Verbe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« car » coordonne deux propositions.",
+   "id": "5e-francais-propositions-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est un subordonnant ?",
+   "choices": [
+    "mais",
+    "quand",
+    "ou",
+    "donc"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« quand » introduit une subordonnée.",
+   "id": "5e-francais-propositions-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Elle rit quand il parle », la principale est…",
+   "choices": [
+    "quand il parle",
+    "il parle",
+    "rit quand",
+    "Elle rit"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle ne dépend d'aucune autre.",
+   "id": "5e-francais-propositions-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « L'enfant ______ pleure a faim. »",
+   "choices": [
+    "que",
+    "qui",
+    "dont",
+    "où"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le pronom est sujet de « pleure ».",
+   "id": "5e-francais-relatives-01",
+   "tier": "application",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Le village ______ j'habite est calme. »",
+   "choices": [
+    "qui",
+    "que",
+    "où",
+    "dont"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il s'agit d'un lieu.",
+   "id": "5e-francais-relatives-02",
+   "tier": "application",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Le livre ______ tu lis est passionnant. »",
+   "choices": [
+    "qui",
+    "que",
+    "dont",
+    "où"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le pronom est COD de « lis ».",
+   "id": "5e-francais-relatives-03",
+   "tier": "application",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Le film que je t'ai parlé est drôle.",
+    "Le film dont je t'ai parlé est drôle.",
+    "Le film qui je t'ai parlé est drôle.",
+    "Le film où je t'ai parlé est drôle."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« parler de » demande « dont ».",
+   "id": "5e-francais-relatives-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase au rôle du pronom relatif.",
+   "pairs": [
+    [
+     "L'homme qui chante est mon oncle.",
+     "sujet"
+    ],
+    [
+     "L'homme que je vois est mon oncle.",
+     "COD"
+    ],
+    [
+     "La ville où je vis est grande.",
+     "lieu"
+    ],
+    [
+     "Le sujet dont je parle est simple.",
+     "complément en de"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque pronom a un rôle précis dans la relative.",
+   "id": "5e-francais-relatives-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Relie chaque paire de phrases par un pronom relatif : a) Voici le tailleur. Il a cousu ma chemise. b) J'aime la chanson. Tu chantes cette chanson. c) Nous visitons le musée. Je t'ai parlé de ce musée.",
+   "model": "a) Voici le tailleur qui a cousu ma chemise. b) J'aime la chanson que tu chantes. c) Nous visitons le musée dont je t'ai parlé.",
+   "rubric": [
+    "a) « qui » (sujet).",
+    "b) « que » (COD).",
+    "c) « dont » (complément en de).",
+    "Les phrases sont complètes."
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-relatives-06",
+   "tier": "examen",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle d'une proposition relative ?",
+   "choices": [
+    "Remplacer un verbe",
+    "Poser une question",
+    "Compléter un nom ou un pronom",
+    "Donner un ordre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle fonctionne comme un adjectif.",
+   "id": "5e-francais-relatives-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pronom relatif remplace un COD ?",
+   "choices": [
+    "qui",
+    "où",
+    "que",
+    "dont"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« que » est COD.",
+   "id": "5e-francais-relatives-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « le jour où il est parti », « où » indique…",
+   "choices": [
+    "le but",
+    "la manière",
+    "le temps",
+    "la cause"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« où » peut exprimer le temps.",
+   "id": "5e-francais-relatives-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« dont » remplace un complément introduit par…",
+   "choices": [
+    "à",
+    "de",
+    "avec",
+    "sur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dont = de + antécédent.",
+   "id": "5e-francais-relatives-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Les filles qui chantent sont heureuses », avec quoi s'accorde « chantent » ?",
+   "choices": [
+    "Avec l'antécédent « les filles »",
+    "Avec « heureuses »",
+    "Avec « sont »",
+    "Avec le dernier mot"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« qui » représente « les filles ».",
+   "id": "5e-francais-relatives-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le CC de lieu dans « Les enfants jouent sous le manguier » ?",
+   "choices": [
+    "Les enfants",
+    "jouent",
+    "sous le manguier",
+    "sous"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il répond à « où ? ».",
+   "id": "5e-francais-circonstanciels-01",
+   "tier": "application",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Elle travaille dur pour réussir » : « pour réussir » est un CC de…",
+   "choices": [
+    "cause",
+    "lieu",
+    "temps",
+    "but"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il indique le but poursuivi.",
+   "id": "5e-francais-circonstanciels-02",
+   "tier": "application",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Il est tombé à cause de la pluie » : le CC exprime…",
+   "choices": [
+    "le but",
+    "le moyen",
+    "le lieu",
+    "la cause"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« pourquoi est-il tombé ? »",
+   "id": "5e-francais-circonstanciels-03",
+   "tier": "application",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Nous partirons dès que la pluie cessera », quelle est la circonstance ?",
+   "choices": [
+    "La cause",
+    "Le temps",
+    "Le lieu",
+    "Le moyen"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« dès que » exprime le temps.",
+   "id": "5e-francais-circonstanciels-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque groupe souligné à sa circonstance.",
+   "pairs": [
+    [
+     "Il part demain.",
+     "temps"
+    ],
+    [
+     "Il parle doucement.",
+     "manière"
+    ],
+    [
+     "Il voyage en bus.",
+     "moyen"
+    ],
+    [
+     "Il court pour la médaille.",
+     "but"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Utilise les questions quand ? comment ? avec quoi ? pour quoi faire ?",
+   "id": "5e-francais-circonstanciels-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Phrase : « Ce matin, Amina est allée au marché à pied pour acheter du poisson. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le CC de temps ?",
+     "choices": [
+      "au marché",
+      "Ce matin",
+      "à pied",
+      "pour acheter du poisson"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "quand ? → ce matin.",
+     "id": "5e-francais-circonstanciels-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le CC de moyen ou de manière ?",
+     "choices": [
+      "à pied",
+      "au marché",
+      "Ce matin",
+      "du poisson"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "comment / avec quoi ? → à pied.",
+     "id": "5e-francais-circonstanciels-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que représente « pour acheter du poisson » ?",
+     "choices": [
+      "Un COD",
+      "Un CC de but",
+      "Un CC de cause",
+      "Un attribut"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Dans quel but ? → acheter du poisson.",
+     "id": "5e-francais-circonstanciels-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-francais-circonstanciels-06",
+   "tier": "examen",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle caractéristique d'un CC le distingue d'un COD ?",
+   "choices": [
+    "Il est toujours après le verbe",
+    "Il est déplaçable et supprimable",
+    "Il est obligatoire",
+    "Il répond à qui ? quoi ?"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le CC n'est pas indispensable.",
+   "id": "5e-francais-circonstanciels-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle question permet de trouver un CC de cause ?",
+   "choices": [
+    "Où ?",
+    "Quand ?",
+    "Pourquoi ?",
+    "Comment ?"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Cause = pourquoi.",
+   "id": "5e-francais-circonstanciels-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Il pleure de joie », « de joie » est un CC de…",
+   "choices": [
+    "but",
+    "cause",
+    "lieu",
+    "temps"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il pleure à cause de la joie.",
+   "id": "5e-francais-circonstanciels-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un CC peut être…",
+   "choices": [
+    "une proposition subordonnée",
+    "seulement un adverbe",
+    "seulement un verbe",
+    "seulement un nom propre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Groupe nominal, adverbe ou subordonnée.",
+   "id": "5e-francais-circonstanciels-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Après le repas, nous chantons » : « Après le repas » est un CC de…",
+   "choices": [
+    "lieu",
+    "temps",
+    "but",
+    "cause"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Quand ? → après le repas.",
+   "id": "5e-francais-circonstanciels-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-circonstanciels",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est au passif ?",
+   "choices": [
+    "Le gardien ferme la porte.",
+    "Le gardien a fermé la porte.",
+    "Le gardien fermera la porte.",
+    "La porte est fermée par le gardien."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Être + participe + complément d'agent.",
+   "id": "5e-francais-voix-01",
+   "tier": "application",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Le chien mord le facteur » → « Le facteur ______ par le chien. »",
+   "choices": [
+    "a mordu",
+    "mord",
+    "est mordu",
+    "était mordu"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le temps reste le présent.",
+   "id": "5e-francais-voix-02",
+   "tier": "application",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans « Le gâteau est mangé par les enfants », « le gâteau » est le sujet.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "À la voix passive, le sujet subit l'action.",
+   "id": "5e-francais-voix-03",
+   "tier": "application",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme passive de « Boris lira ce livre » ?",
+   "choices": [
+    "Ce livre sera lu par Boris.",
+    "Ce livre est lu par Boris.",
+    "Ce livre a été lu par Boris.",
+    "Boris sera lu par ce livre."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le futur de lire → sera lu.",
+   "id": "5e-francais-voix-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase active à sa forme passive.",
+   "pairs": [
+    [
+     "Amina cueille des fleurs.",
+     "Des fleurs sont cueillies par Amina."
+    ],
+    [
+     "Amina a cueilli des fleurs.",
+     "Des fleurs ont été cueillies par Amina."
+    ],
+    [
+     "Amina cueillera des fleurs.",
+     "Des fleurs seront cueillies par Amina."
+    ],
+    [
+     "Amina cueillait des fleurs.",
+     "Des fleurs étaient cueillies par Amina."
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Le temps de « être » est celui du verbe actif.",
+   "id": "5e-francais-voix-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Mets à la voix passive : a) « La pluie inonde les rues. » b) « Les villageois ont construit un pont. » c) « Le maître récompensera les meilleurs élèves. »",
+   "model": "a) Les rues sont inondées par la pluie. b) Un pont a été construit par les villageois. c) Les meilleurs élèves seront récompensés par le maître.",
+   "rubric": [
+    "Le COD devient sujet.",
+    "Le verbe est conjugué avec « être » au même temps.",
+    "L'accord du participe est correct.",
+    "Le complément d'agent est introduit par « par »."
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-voix-06",
+   "tier": "examen",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que le complément d'agent ?",
+   "choices": [
+    "Celui qui subit l'action",
+    "Un adverbe",
+    "Un COD",
+    "Celui qui fait l'action dans une phrase passive"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Introduit par « par ».",
+   "id": "5e-francais-voix-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment se forme le passif ?",
+   "choices": [
+    "avoir + infinitif",
+    "aller + infinitif",
+    "être + infinitif",
+    "être + participe passé"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le temps de « être » est celui du verbe actif.",
+   "id": "5e-francais-voix-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient le COD à la voix passive ?",
+   "choices": [
+    "Le sujet",
+    "Le complément d'agent",
+    "L'attribut",
+    "Un adverbe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COD → sujet.",
+   "id": "5e-francais-voix-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est à la voix active ?",
+   "choices": [
+    "Le toit est réparé par mon père.",
+    "Mon père répare le toit.",
+    "Le toit a été réparé.",
+    "Le toit sera réparé par mon père."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le sujet fait l'action.",
+   "id": "5e-francais-voix-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Elle est aimée de tous », « de tous » est un…",
+   "choices": [
+    "complément d'agent",
+    "COD",
+    "attribut",
+    "CC de lieu"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Après certains verbes, le complément d'agent est introduit par « de ».",
+   "id": "5e-francais-voix-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-voix",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Remplace le COD : « Amina cueille des mangues. »",
+   "choices": [
+    "Amina les cueille.",
+    "Amina lui cueille.",
+    "Amina en cueille.",
+    "Amina y cueille."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« des mangues » = quantité : « en ».",
+   "id": "5e-francais-pronoms-01",
+   "tier": "application",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Remplace le COI : « Je parle à mon frère. »",
+   "choices": [
+    "Je le parle.",
+    "Je lui parle.",
+    "Je la parle.",
+    "Je y parle."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COI de personne : lui.",
+   "id": "5e-francais-pronoms-02",
+   "tier": "application",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pronom remplace « la maison » dans « J'aime la maison » ?",
+   "choices": [
+    "lui",
+    "la",
+    "leur",
+    "y"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COD féminin singulier : la.",
+   "id": "5e-francais-pronoms-03",
+   "tier": "application",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Ces chaussures sont ______ (à moi). »",
+   "choices": [
+    "les miennes",
+    "les mienne",
+    "le mien",
+    "mes"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Pronom possessif féminin pluriel.",
+   "id": "5e-francais-pronoms-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase au pronom utilisé.",
+   "pairs": [
+    [
+     "Je le regarde.",
+     "COD"
+    ],
+    [
+     "Je lui écris.",
+     "COI"
+    ],
+    [
+     "J'en prends.",
+     "complément en de"
+    ],
+    [
+     "Celui-ci est mieux.",
+     "démonstratif"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Pronom personnel COD / COI, « en », démonstratif.",
+   "id": "5e-francais-pronoms-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Réécris chaque phrase en remplaçant les groupes soulignés par des pronoms : a) Nkeng prête son vélo à son cousin. b) J'ai rencontré ces enfants. c) Nous parlons de notre voyage.",
+   "model": "a) Nkeng le lui prête. b) Je les ai rencontrés. c) Nous en parlons.",
+   "rubric": [
+    "« le lui » pour a (le vélo, à son cousin).",
+    "« les » pour b, avec l'accord du participe (rencontrés).",
+    "« en » pour c.",
+    "Les phrases sont correctes et complètes."
+   ],
+   "points": 3,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-pronoms-06",
+   "tier": "examen",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pronom remplace « à Boris » ?",
+   "choices": [
+    "le",
+    "les",
+    "en",
+    "lui"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COI de personne : lui.",
+   "id": "5e-francais-pronoms-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pronom remplace « de la ville » ?",
+   "choices": [
+    "en",
+    "y",
+    "lui",
+    "leur"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« en » remplace un complément en de.",
+   "id": "5e-francais-pronoms-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Le mien » est un pronom…",
+   "choices": [
+    "possessif",
+    "démonstratif",
+    "relatif",
+    "indéfini"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il remplace « mon + nom ».",
+   "id": "5e-francais-pronoms-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le pronom COD de la 3e personne du pluriel ?",
+   "choices": [
+    "les",
+    "leur",
+    "lui",
+    "eux"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Je les vois.",
+   "id": "5e-francais-pronoms-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est un pronom démonstratif ?",
+   "choices": [
+    "celle-ci",
+    "la mienne",
+    "chacun",
+    "lequel"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Celle-ci désigne une personne ou une chose.",
+   "id": "5e-francais-pronoms-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-pronoms",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est au discours indirect ?",
+   "choices": [
+    "Elle dit : « Je suis contente. »",
+    "Elle dit : « Quelle joie ! »",
+    "« Je suis contente », dit-elle.",
+    "Elle dit qu'elle est contente."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il n'y a pas de guillemets.",
+   "id": "5e-francais-discours-01",
+   "tier": "application",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Il demande : « Viens-tu ? » » → « Il demande ______ je viens. »",
+   "choices": [
+    "si",
+    "que",
+    "de",
+    "qui"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Question sans mot interrogatif : « si ».",
+   "id": "5e-francais-discours-02",
+   "tier": "application",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Il dit : « J'ai faim. » » → « Il dit ______ a faim. »",
+   "choices": [
+    "qu'ils",
+    "qu'elle",
+    "qu'il",
+    "que je"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Je → il, et « que » devient « qu' » devant voyelle.",
+   "id": "5e-francais-discours-03",
+   "tier": "application",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Mets au discours indirect : « Elle a dit : « Je partirai demain. » »",
+   "choices": [
+    "Elle a dit qu'elle partirait le lendemain.",
+    "Elle a dit qu'elle partira demain.",
+    "Elle a dit que je partirai demain.",
+    "Elle a dit qu'elle partait demain."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Futur → conditionnel ; demain → le lendemain.",
+   "id": "5e-francais-discours-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase directe à sa transformation indirecte (présent).",
+   "pairs": [
+    [
+     "Il dit : « Je chante. »",
+     "Il dit qu'il chante."
+    ],
+    [
+     "Il demande : « Qui chante ? »",
+     "Il demande qui chante."
+    ],
+    [
+     "Il ordonne : « Chante ! »",
+     "Il ordonne de chanter."
+    ],
+    [
+     "Il demande : « Chantes-tu ? »",
+     "Il demande si je chante."
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Selon le type de phrase, on emploie que, un mot interrogatif, de ou si.",
+   "id": "5e-francais-discours-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Transforme au discours indirect : a) Boris dit : « J'aime ce film. » b) Amina demande : « Où sont mes clés ? » c) Le maître ordonne : « Rangez vos cahiers ! »",
+   "model": "a) Boris dit qu'il aime ce film. b) Amina demande où sont ses clés. c) Le maître ordonne de ranger les cahiers (ou « de ranger leurs cahiers »).",
+   "rubric": [
+    "« que », pronoms et ponctuation corrects.",
+    "Interrogation indirecte avec « où ».",
+    "Ordre exprimé avec « de + infinitif »."
+   ],
+   "points": 3,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-discours-06",
+   "tier": "examen",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que supprime-t-on au discours indirect ?",
+   "choices": [
+    "Le verbe",
+    "Le sujet",
+    "Les guillemets",
+    "Les noms"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On n'écrit plus les paroles exactes.",
+   "id": "5e-francais-discours-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot introduit une déclaration au discours indirect ?",
+   "choices": [
+    "si",
+    "comment",
+    "où",
+    "que"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il dit que…",
+   "id": "5e-francais-discours-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient « demain » après un verbe introducteur au passé ?",
+   "choices": [
+    "hier",
+    "le lendemain",
+    "aujourd'hui",
+    "ce soir"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Demain → le lendemain.",
+   "id": "5e-francais-discours-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient « Je » dans « Il dit : « Je pars » » ?",
+   "choices": [
+    "je",
+    "il",
+    "nous",
+    "elle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il dit qu'il part.",
+   "id": "5e-francais-discours-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle ponctuation disparaît dans « Il demande où je vais » ?",
+   "choices": [
+    "Le point",
+    "La virgule",
+    "Le point d'interrogation",
+    "Les deux-points"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La question devient indirecte.",
+   "id": "5e-francais-discours-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-discours",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la fonction de « de bois » dans « une table de bois » ?",
+   "choices": [
+    "Complément du nom",
+    "Épithète",
+    "Apposition",
+    "Relative"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Introduit par « de ».",
+   "id": "5e-francais-expansions-01",
+   "tier": "application",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expansion contient un verbe conjugué ?",
+   "choices": [
+    "La proposition relative",
+    "L'épithète",
+    "Le complément du nom",
+    "L'apposition"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Exemple : qui chante.",
+   "id": "5e-francais-expansions-02",
+   "tier": "application",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans « Ma sœur, une chanteuse, vient d'arriver », « une chanteuse » est une apposition.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il est séparé par des virgules.",
+   "id": "5e-francais-expansions-03",
+   "tier": "application",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase contient une apposition ?",
+   "choices": [
+    "La capitale du Cameroun est grande.",
+    "Yaoundé est belle.",
+    "Yaoundé est la ville où j'habite.",
+    "Yaoundé, capitale du Cameroun, est une grande ville."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« capitale du Cameroun » précise Yaoundé entre virgules.",
+   "id": "5e-francais-expansions-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque expansion à son exemple.",
+   "pairs": [
+    [
+     "épithète",
+     "un grand arbre"
+    ],
+    [
+     "complément du nom",
+     "un arbre du village"
+    ],
+    [
+     "apposition",
+     "Mballa, mon oncle"
+    ],
+    [
+     "relative",
+     "un arbre qui donne de l'ombre"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Quatre moyens d'enrichir un nom.",
+   "id": "5e-francais-expansions-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Enrichis le groupe nominal « le marché » avec un adjectif épithète, un complément du nom, une apposition et une relative, dans une même phrase.",
+   "model": "Le marché, lieu de rencontre, animé de la ville, qui ouvre à l'aube, attire des centaines de clients. (Une autre réponse correcte est possible.)",
+   "rubric": [
+    "Un adjectif épithète ou participe.",
+    "Un complément du nom.",
+    "Une apposition entre virgules.",
+    "Une proposition relative."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-expansions-06",
+   "tier": "examen",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel signe encadre souvent une apposition ?",
+   "choices": [
+    "Des guillemets",
+    "Des parenthèses obligatoirement",
+    "Des virgules",
+    "Des tirets obligatoires"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle est séparée du nom.",
+   "id": "5e-francais-expansions-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la fonction de « qui chante » dans « l'élève qui chante » ?",
+   "choices": [
+    "COD",
+    "Relative complément de l'antécédent",
+    "Attribut",
+    "Apposition"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle précise « l'élève ».",
+   "id": "5e-francais-expansions-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Une robe de soie » : « de soie » est…",
+   "choices": [
+    "un complément du nom",
+    "un COD",
+    "un CC de lieu",
+    "une relative"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Préposition + nom.",
+   "id": "5e-francais-expansions-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expansion s'accorde obligatoirement avec le nom ?",
+   "choices": [
+    "Le complément du nom",
+    "La relative",
+    "L'adjectif épithète",
+    "L'apposition"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'épithète prend le genre et le nombre du nom.",
+   "id": "5e-francais-expansions-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Boris, mon ami, rit », que représente « mon ami » ?",
+   "choices": [
+    "Un COD",
+    "Une apposition",
+    "Un attribut",
+    "Un adverbe"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il précise Boris.",
+   "id": "5e-francais-expansions-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-expansions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
