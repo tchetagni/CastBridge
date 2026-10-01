@@ -187,7 +187,7 @@ class MockExamSession(val pack: Pack, val spec: MockExamSpec, val startedAt: Lon
          */
         fun auto(pack: Pack, seed: Long, minutes: Int = 60, targetPoints: Double = 20.0): MockExamSpec? {
             val pool = pack.exercises.filter { !it.review && it.tier != ExerciseTier.SELFCHECK && it.parts.none { p -> p.review } }
-                .sortedByDescending { if (it.tier == ExerciseTier.EXAM) 2 else if (it.tier == ExerciseTier.DEEPER) 1 else 0 }
+                .sortedByDescending { it.tier.rank }
             if (pool.isEmpty()) return null
             val rng = Random(seed)
             val byChapter = pack.chapters.associate { c -> c.id to pool.filter { it.chapter == c.id }.shuffled(rng).toMutableList() }

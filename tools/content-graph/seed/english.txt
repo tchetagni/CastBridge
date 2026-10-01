@@ -1,0 +1,39 @@
+# slug | level | years | fr | en | prereqs | minutes | tags
+greetings|N0|y0-1|Salutations et mots de la classe|Greetings and classroom words||20|oral
+alphabet-en|N0|y1|L'alphabet et les sons anglais|The English alphabet and sounds|greetings|25|lecture
+numbers-colours|N0|y1|Nombres, couleurs, famille|Numbers, colours and family|greetings|20|vocabulaire
+read-words-en|N0|y1-2|Lire des mots simples en anglais|Read simple English words|alphabet-en|25|lecture
+simple-sentences-en|N0|y2|Phrases simples : I am, I have|Simple sentences: I am, I have|read-words-en,numbers-colours|25|grammaire
+present-simple|N1|y3|Présent simple et to be|Present simple and to be|simple-sentences-en|30|grammaire
+nouns-plurals|N1|y3|Noms, pluriels, articles|Nouns, plurals and articles|simple-sentences-en|25|grammaire
+reading-short-en|N1|y3|Comprendre un texte court en anglais|Short text comprehension|read-words-en,nouns-plurals|25|lecture
+spelling-en|N1|y4|Orthographe anglaise courante|Common English spelling|reading-short-en|25|orthographe
+present-continuous|N1|y4|Présent continu|Present continuous|present-simple|25|grammaire
+adjectives-en|N1|y4|Adjectifs et comparaison|Adjectives and comparison|nouns-plurals|25|grammaire
+past-simple|N1|y5|Prétérit simple (réguliers et irréguliers)|Simple past (regular and irregular)|present-simple|30|grammaire
+prepositions|N1|y5|Prépositions de lieu et de temps|Prepositions of place and time|nouns-plurals|25|grammaire
+paragraph-en|N1|y5|Écrire un paragraphe|Write a paragraph|spelling-en,past-simple|35|expression
+fslc-reading|N1|y6|Lecture et grammaire du FSLC|FSLC reading and grammar|reading-short-en,past-simple|35|examen
+fslc-writing|N1|y6|Rédaction guidée du FSLC|FSLC guided writing|paragraph-en,present-continuous|35|examen,expression
+future-modals|N1|y7|Futur et modaux (will, can, must)|Future and modals|past-simple|30|grammaire
+perfect-tenses|N1|y8|Present perfect et past continuous|Present perfect and past continuous|past-simple,present-continuous|35|grammaire
+letters-en|N1|y8|Lettres informelles et formelles|Informal and formal letters|paragraph-en|35|expression
+conditionals|N1|y9|Conditionnels et subordonnées|Conditionals and subordinate clauses|future-modals,perfect-tenses|35|grammaire
+reported-speech|N1|y9|Discours rapporté et voix passive|Reported speech and passive voice|perfect-tenses|35|grammaire
+composition-en|N1|y10|Composition : narrative, descriptive, argumentative|Composition writing|letters-en,conditionals|45|expression
+comprehension-en|N1|y10|Compréhension et résumé|Comprehension and summary|reading-short-en,reported-speech|40|lecture
+gce-ol-english|N1|y11|English Language GCE O Level : paper 1 et 2|English Language GCE O Level|composition-en,comprehension-en|50|examen
+literature-en|N1|y12|Littérature anglaise et africaine : analyse|English and African literature: analysis|comprehension-en|45|litterature
+gce-al-english|N1|y13|English Language GCE A Level|GCE A Level English|gce-ol-english,literature-en|55|examen
+academic-en|N1|y14|Anglais académique et professionnel|Academic and professional English|gce-al-english|50|superieur
+# N2
+n2-vocab-idiom|N2|y8|Vocabulaire étendu, idiomes, mots composés|Extended vocabulary and idioms|letters-en,perfect-tenses|40|concours
+n2-grammar-precision|N2|y9|Grammaire de précision : inversion, subjonctif, collocations|Precision grammar|conditionals,n2-vocab-idiom|45|concours,grammaire
+n2-writing-voice|N2|y10|Composition d'excellence : voix, structure, registre|Excellence-level composition|composition-en,n2-grammar-precision|50|concours,expression
+n2-critical-reading|N2|y11|Lecture critique et analyse de texte avancée|Critical reading and advanced text analysis|comprehension-en,n2-writing-voice|50|concours,lecture
+n2-literary-analysis|N2|y12|Essai littéraire argumenté|Argued literary essay|literature-en,n2-critical-reading|55|concours,litterature
+n2-top-national|N2|y13|Anglais niveau meilleurs candidats du GCE A Level|Top-national A Level English|gce-al-english,n2-literary-analysis|60|concours
+# N3
+n3-ielts-cambridge|N3|y13|Anglais niveau Cambridge C1-C2 / IELTS 8|English at Cambridge C1-C2 level|n2-top-national|60|international
+n3-rhetoric-en|N3|y14|Rhétorique et écriture argumentative internationale|International argumentative writing|n3-ielts-cambridge|60|international,expression
+n3-world-lit|N3|y14|Littérature mondiale en anglais : lecture comparée|World literature in English|n2-literary-analysis,n3-ielts-cambridge|60|international,litterature
