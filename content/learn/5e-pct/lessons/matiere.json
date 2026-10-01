@@ -1,0 +1,1917 @@
+{
+ "chapter": "5e-pct-matiere",
+ "lessons": [
+  {
+   "id": "5e-pct-etats-changements",
+   "title": "États de la matière et changements d'état",
+   "minutes": 25,
+   "programRef": "5e — Les états physiques de la matière et leurs changements (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer solide, liquide et gaz par leurs propriétés.",
+    "Nommer les changements d'état et connaître les températures de l'eau.",
+    "Lire un thermomètre."
+   ],
+   "prerequisites": [
+    "5e-pct-volume"
+   ],
+   "exercises": [
+    "5e-pct-etats-changements-01",
+    "5e-pct-etats-changements-02",
+    "5e-pct-etats-changements-03",
+    "5e-pct-etats-changements-04",
+    "5e-pct-etats-changements-05",
+    "5e-pct-etats-changements-06"
+   ],
+   "selfCheck": [
+    "5e-pct-etats-changements-q1",
+    "5e-pct-etats-changements-q2",
+    "5e-pct-etats-changements-q3",
+    "5e-pct-etats-changements-q4",
+    "5e-pct-etats-changements-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les trois états",
+     "md": "- **Solide** : forme propre, volume propre (une pierre).\n- **Liquide** : volume propre, mais prend la forme du récipient ; sa surface libre est horizontale (l'eau).\n- **Gaz** : ni forme propre ni volume propre ; il occupe tout l'espace disponible et se comprime (l'air)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Représentation des particules dans les trois états.",
+     "alt": "Trois cadres : particules rangées et serrées (solide), proches et mobiles (liquide), éloignées les unes des autres (gaz).",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 15,
+        "y": 30,
+        "w": 140,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 30,
+        "w": 140,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 325,
+        "y": 30,
+        "w": 140,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 35,
+        "cy": 55,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 35,
+        "cy": 80,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 35,
+        "cy": 105,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 35,
+        "cy": 130,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 55,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 80,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 105,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 130,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 85,
+        "cy": 55,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 85,
+        "cy": 80,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 85,
+        "cy": 105,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 85,
+        "cy": 130,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 55,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 80,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 105,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 130,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 135,
+        "cy": 55,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 135,
+        "cy": 80,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 135,
+        "cy": 105,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 135,
+        "cy": 130,
+        "r": 9,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 108,
+        "r": 9,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 215,
+        "cy": 112,
+        "r": 9,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 240,
+        "cy": 106,
+        "r": 9,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 265,
+        "cy": 112,
+        "r": 9,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 292,
+        "cy": 108,
+        "r": 9,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 90,
+        "r": 9,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 228,
+        "cy": 92,
+        "r": 9,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 255,
+        "cy": 88,
+        "r": 9,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 282,
+        "cy": 92,
+        "r": 9,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 345,
+        "cy": 60,
+        "r": 9,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 420,
+        "cy": 52,
+        "r": 9,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 385,
+        "cy": 95,
+        "r": 9,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 445,
+        "cy": 105,
+        "r": 9,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 115,
+        "r": 9,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 20,
+        "text": "solide",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 20,
+        "text": "liquide",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 20,
+        "text": "gaz",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 155,
+        "text": "rangées serrées",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 155,
+        "text": "proches, mobiles",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 155,
+        "text": "éloignées",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les changements d'état",
+     "md": "- Solide → liquide : **fusion** ; liquide → solide : **solidification**.\n- Liquide → gaz : **vaporisation** (évaporation ou ébullition) ; gaz → liquide : **liquéfaction** (condensation).\n- Pour l'eau (au niveau de la mer) : fusion de la glace à **0 °C**, ébullition à **100 °C**.\n- Pendant le changement d'état d'un corps pur, la température **reste constante**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Chauffage de la glace : paliers de température pendant la fusion et l'ébullition.",
+     "alt": "Courbe de température en fonction du temps avec un palier à 0 °C pendant la fusion et un palier à 100 °C pendant l'ébullition.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 220,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 190,
+        "x2": 440,
+        "y2": 190,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 190,
+        "x2": 60,
+        "y2": 20,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 15,
+        "text": "°C",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 212,
+        "text": "temps",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 190,
+        "text": "0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 100,
+        "text": "100",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 100,
+        "x2": 440,
+        "y2": 100,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 190,
+        "x2": 130,
+        "y2": 190,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 190,
+        "x2": 210,
+        "y2": 190,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 190,
+        "x2": 300,
+        "y2": 100,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 100,
+        "x2": 400,
+        "y2": 100,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 175,
+        "text": "glace",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 160,
+        "text": "eau liquide",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 85,
+        "text": "vapeur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 208,
+        "text": "fusion",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 120,
+        "text": "ébullition",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : nommer le changement",
+     "statement": "De la buée se forme sur un miroir de salle de bain. Quel est le changement d'état ?",
+     "steps": [
+      {
+       "md": "La vapeur d'eau (gaz) de l'air chaud touche le miroir froid."
+      },
+      {
+       "md": "Elle redevient de l'eau liquide : c'est le passage gaz → liquide."
+      }
+     ],
+     "answer": "**Liquéfaction (condensation)**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire un thermomètre",
+     "statement": "On chauffe de l'eau : le thermomètre indique 100 °C et reste à 100 °C pendant que l'eau bout. Que peut-on conclure ?",
+     "steps": [
+      {
+       "md": "100 °C est la température d'ébullition de l'eau (au niveau de la mer)."
+      },
+      {
+       "md": "Pendant le changement d'état, la température reste constante même si l'on continue de chauffer."
+      }
+     ],
+     "answer": "**La température reste à 100 °C tant qu'il reste de l'eau liquide.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la température continue de monter pendant l'ébullition.\n- Confondre **fusion** (solide → liquide) et **solidification** (liquide → solide).\n- Dire que « l'eau disparaît » en séchant : elle s'évapore, devenant un gaz invisible.\n- Toucher un thermomètre à mercure cassé : il faut prévenir l'adulte (danger)."
+    }
+   ],
+   "reviewNotes": [
+    "Modèle de particules présenté de façon qualitative : à vérifier s'il est au programme de 5e.",
+    "Températures de fusion (0 °C) et d'ébullition (100 °C) valables à la pression atmosphérique normale (niveau de la mer)."
+   ]
+  },
+  {
+   "id": "5e-pct-melanges-corps-purs",
+   "title": "Mélanges, solutions et corps purs",
+   "minutes": 25,
+   "programRef": "5e — Mélanges, corps purs, solutions (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer mélange homogène et hétérogène.",
+    "Reconnaître un corps pur.",
+    "Utiliser le vocabulaire des solutions (solvant, soluté, dissolution)."
+   ],
+   "prerequisites": [
+    "5e-pct-etats-changements"
+   ],
+   "exercises": [
+    "5e-pct-melanges-corps-purs-01",
+    "5e-pct-melanges-corps-purs-02",
+    "5e-pct-melanges-corps-purs-03",
+    "5e-pct-melanges-corps-purs-04",
+    "5e-pct-melanges-corps-purs-05",
+    "5e-pct-melanges-corps-purs-06"
+   ],
+   "selfCheck": [
+    "5e-pct-melanges-corps-purs-q1",
+    "5e-pct-melanges-corps-purs-q2",
+    "5e-pct-melanges-corps-purs-q3",
+    "5e-pct-melanges-corps-purs-q4",
+    "5e-pct-melanges-corps-purs-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Mélange homogène, hétérogène",
+     "md": "Un **mélange homogène** a le même aspect partout : on ne distingue qu'une seule phase (eau sucrée). Un **mélange hétérogène** laisse voir plusieurs phases (eau + sable, eau + huile). Un **corps pur** est formé d'un seul constituant (eau distillée, sucre pur) ; la plupart des corps du quotidien sont des mélanges."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trois mélanges : un homogène et deux hétérogènes.",
+     "alt": "Trois béchers : eau sucrée sans dépôt, eau avec sable au fond, eau avec une couche d'huile au-dessus.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 40,
+        "w": 120,
+        "h": 110,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 40,
+        "w": 120,
+        "h": 110,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 335,
+        "y": 40,
+        "w": 120,
+        "h": 110,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 181,
+        "y": 130,
+        "w": 118,
+        "h": 19,
+        "fill": "yellow",
+        "stroke": "yellow",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 336,
+        "y": 41,
+        "w": 118,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "lightyellow",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 28,
+        "text": "eau sucrée",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 28,
+        "text": "eau + sable",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 28,
+        "text": "eau + huile",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 175,
+        "text": "homogène",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 175,
+        "text": "hétérogène",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 175,
+        "text": "hétérogène",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 125,
+        "text": "sable",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 66,
+        "text": "huile",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Vocabulaire des solutions",
+     "md": "Quand une substance **se dissout** dans un liquide, on obtient une **solution**. Le liquide est le **solvant** (l'eau), la substance dissoute est le **soluté** (le sucre, le sel). Au-delà d'une certaine quantité, le soluté ne se dissout plus : la solution est **saturée**. Lors d'une dissolution, la **masse totale se conserve**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conservation de la masse",
+     "statement": "On dissout 10 g de sucre dans 100 g d'eau. Quelle est la masse de la solution obtenue ?",
+     "steps": [
+      {
+       "md": "Le sucre dissous ne disparaît pas : il est toujours dans le mélange."
+      },
+      {
+       "md": "Masse totale :",
+       "tex": "100 + 10 = 110\\ \\text{g}"
+      }
+     ],
+     "answer": "**110 g**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : classer des mélanges",
+     "statement": "Classe : l'eau salée, le jus d'orange avec pulpe visible, l'eau + huile.",
+     "steps": [
+      {
+       "md": "Eau salée : une seule phase, mélange homogène (une solution)."
+      },
+      {
+       "md": "Jus avec pulpe visible et eau + huile : plusieurs phases visibles, mélanges hétérogènes."
+      }
+     ],
+     "answer": "**Eau salée homogène ; les deux autres hétérogènes**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que le sucre « disparaît » : il est dissous, mais sa masse est conservée.\n- Croire que « transparent » signifie « corps pur » : l'eau salée est transparente mais c'est un mélange.\n- Confondre soluté et solvant.\n- Goûter les solutions préparées au laboratoire : interdit."
+    }
+   ],
+   "reviewNotes": [
+    "Notion de saturation / solubilité traitée qualitativement.",
+    "Vérifier si la concentration massique est au programme de 5e (non traitée ici)."
+   ]
+  },
+  {
+   "id": "5e-pct-separation",
+   "title": "Séparer les constituants d'un mélange",
+   "minutes": 30,
+   "programRef": "5e — Techniques de séparation des constituants d'un mélange (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Choisir la technique de séparation adaptée (filtration, décantation, évaporation, distillation).",
+    "Décrire un montage de filtration et de distillation."
+   ],
+   "prerequisites": [
+    "5e-pct-melanges-corps-purs"
+   ],
+   "exercises": [
+    "5e-pct-separation-01",
+    "5e-pct-separation-02",
+    "5e-pct-separation-03",
+    "5e-pct-separation-04",
+    "5e-pct-separation-05",
+    "5e-pct-separation-06"
+   ],
+   "selfCheck": [
+    "5e-pct-separation-q1",
+    "5e-pct-separation-q2",
+    "5e-pct-separation-q3",
+    "5e-pct-separation-q4",
+    "5e-pct-separation-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelle technique choisir ?",
+     "md": "- **Filtration** : séparer un solide insoluble d'un liquide (eau + sable).\n- **Décantation** : laisser reposer ; le solide tombe, ou deux liquides non mélangés se séparent (huile au-dessus de l'eau). On sépare ensuite avec une ampoule à décanter.\n- **Évaporation** : récupérer un solide dissous (le sel) en faisant partir le liquide.\n- **Distillation** : récupérer le liquide d'une solution ou séparer des liquides d'ébullitions différentes."
+    },
+    {
+     "type": "illustration",
+     "caption": "Montage de filtration : le filtrat (liquide limpide) est recueilli dans le bécher.",
+     "alt": "Entonnoir garni d'un papier filtre au-dessus d'un bécher qui recueille le liquide filtré.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 270,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         130,
+         40,
+         270,
+         40,
+         215,
+         130,
+         185,
+         130
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 130,
+        "x2": 200,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 160,
+        "w": 140,
+        "h": 90,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 131,
+        "y": 205,
+        "w": 138,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "lightblue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 175,
+        "r": 3,
+        "fill": "blue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 188,
+        "r": 3,
+        "fill": "blue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 56,
+        "w": 100,
+        "h": 20,
+        "fill": "brown",
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 55,
+        "text": "entonnoir",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 60,
+        "text": "sable retenu",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 100,
+        "text": "papier filtre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 215,
+        "text": "filtrat",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 55,
+        "x2": 130,
+        "y2": 60,
+        "color": "ink",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 62,
+        "x2": 252,
+        "y2": 66,
+        "color": "ink",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 98,
+        "x2": 228,
+        "y2": 90,
+        "color": "ink",
+        "width": 1,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "illustration",
+     "caption": "Principe d'une distillation : la vapeur est refroidie et redevient liquide.",
+     "alt": "Un ballon chauffé, un tube refroidi par un réfrigérant et un récepteur qui reçoit le liquide distillé.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 230,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 150,
+        "r": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 80,
+        "w": 20,
+        "h": 35,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 205,
+        "text": "ballon",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 225,
+        "text": "avec la solution",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 85,
+        "x2": 250,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 60,
+        "x2": 390,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 50,
+        "w": 130,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 40,
+        "text": "réfrigérant",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 130,
+        "w": 90,
+        "h": 70,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 381,
+        "y": 170,
+        "w": 88,
+        "h": 29,
+        "fill": "lightblue",
+        "stroke": "lightblue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 425,
+        "y": 220,
+        "text": "récepteur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 390,
+        "y1": 100,
+        "x2": 425,
+        "y2": 130,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 100,
+        "text": "chauffage",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : eau boueuse",
+     "statement": "De l'eau boueuse contient de la terre. Comment obtenir une eau plus claire ?",
+     "steps": [
+      {
+       "md": "On laisse reposer : la terre se dépose (décantation)."
+      },
+      {
+       "md": "On verse doucement l'eau au-dessus, puis on la passe dans un filtre (filtration)."
+      }
+     ],
+     "answer": "**Décantation puis filtration**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : récupérer le sel",
+     "statement": "Comment récupérer le sel contenu dans de l'eau de mer ?",
+     "steps": [
+      {
+       "md": "Le sel est dissous : la filtration ne le retient pas."
+      },
+      {
+       "md": "On fait évaporer l'eau (chauffage doux ou soleil) : le sel reste (évaporation)."
+      }
+     ],
+     "answer": "**Évaporation (marais salants au soleil, par exemple)**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Sécurité au laboratoire",
+     "md": "- Les flammes et les liquides chauds sont manipulés avec l'accord du professeur.\n- Porter des lunettes de protection.\n- Ne jamais goûter ni sentir directement un produit.\n- L'eau filtrée ou décantée n'est **pas** forcément potable."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que la filtration sépare un sel dissous : non, il passe à travers le filtre.\n- Oublier que la décantation demande du temps.\n- Confondre le **filtrat** (liquide récupéré) et le **résidu** (solide retenu)."
+    }
+   ],
+   "reviewNotes": [
+    "Les schémas sont simplifiés ; l'expérience de distillation est à réaliser uniquement par ou avec l'enseignant."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "La glace qui devient de l'eau liquide : quel est le nom du changement d'état ?",
+   "choices": [
+    "La solidification",
+    "La liquéfaction",
+    "La fusion",
+    "La vaporisation"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Solide → liquide : fusion.",
+   "id": "5e-pct-etats-changements-01",
+   "tier": "application",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un gaz a un volume propre.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un gaz occupe tout l'espace disponible : il n'a ni forme ni volume propres.",
+   "id": "5e-pct-etats-changements-02",
+   "tier": "application",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "À quelle température (en °C) l'eau pure bout-elle au niveau de la mer ?",
+   "answer": 100,
+   "unit": "°C",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La température d'ébullition de l'eau est 100 °C.",
+   "id": "5e-pct-etats-changements-03",
+   "tier": "application",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque changement à son nom.",
+   "pairs": [
+    [
+     "solide → liquide",
+     "fusion"
+    ],
+    [
+     "liquide → solide",
+     "solidification"
+    ],
+    [
+     "liquide → gaz",
+     "vaporisation"
+    ],
+    [
+     "gaz → liquide",
+     "liquéfaction"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "On nomme le changement par l'état de départ et d'arrivée.",
+   "id": "5e-pct-etats-changements-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi l'eau d'une flaque disparaît-elle sous le soleil ?",
+   "choices": [
+    "Elle fond",
+    "Elle s'évapore en vapeur d'eau",
+    "Elle se solidifie",
+    "Elle est absorbée par l'air qui la détruit"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Elle passe de l'état liquide à l'état gazeux (évaporation).",
+   "id": "5e-pct-etats-changements-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris chauffe un bloc de glace et relève la température toutes les minutes : −5 °C, 0 °C, 0 °C, 0 °C, 4 °C, 12 °C…",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la température pendant la fusion de la glace ? (en °C)",
+     "answer": 0,
+     "unit": "°C",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Pendant la fusion, la température reste à 0 °C : palier.",
+     "id": "5e-pct-etats-changements-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Pourquoi la température reste-t-elle constante pendant 3 minutes ?",
+     "choices": [
+      "Le thermomètre est en panne",
+      "La chaleur sert à faire fondre la glace",
+      "La glace n'absorbe pas de chaleur",
+      "L'eau est déjà gazeuse"
+     ],
+     "answer": 1,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "La chaleur reçue sert au changement d'état, pas à augmenter la température.",
+     "id": "5e-pct-etats-changements-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que se passera-t-il si Boris continue de chauffer jusqu'à 100 °C ?",
+     "model": "L'eau liquide se met à bouillir : elle se vaporise et la température reste à 100 °C pendant l'ébullition.",
+     "rubric": [
+      "Cite l'ébullition",
+      "Indique le palier à 100 °C"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-pct-etats-changements-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-etats-changements-06",
+   "tier": "examen",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel état n'a pas de forme propre mais a un volume propre ?",
+   "choices": [
+    "Le solide",
+    "Le gaz",
+    "Aucun état",
+    "Le liquide"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un liquide prend la forme du récipient mais garde son volume.",
+   "id": "5e-pct-etats-changements-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le passage de l'état gazeux à l'état liquide s'appelle :",
+   "choices": [
+    "La fusion",
+    "La liquéfaction",
+    "La vaporisation",
+    "La solidification"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Gaz → liquide : liquéfaction ou condensation.",
+   "id": "5e-pct-etats-changements-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quelle température fond la glace ?",
+   "choices": [
+    "0 °C",
+    "100 °C",
+    "−10 °C",
+    "37 °C"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La glace fond à 0 °C.",
+   "id": "5e-pct-etats-changements-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pendant l'ébullition de l'eau, la température :",
+   "choices": [
+    "augmente sans cesse",
+    "reste constante",
+    "diminue",
+    "devient négative"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Palier de température pendant le changement d'état.",
+   "id": "5e-pct-etats-changements-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que mesure un thermomètre ?",
+   "choices": [
+    "La masse",
+    "Le volume",
+    "La longueur",
+    "La température"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le thermomètre sert à mesurer la température.",
+   "id": "5e-pct-etats-changements-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-etats-changements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'eau sucrée est :",
+   "choices": [
+    "un mélange homogène",
+    "un mélange hétérogène",
+    "un corps pur",
+    "un solide"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ne distingue qu'une seule phase.",
+   "id": "5e-pct-melanges-corps-purs-01",
+   "tier": "application",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans l'eau salée, quel est le soluté ?",
+   "choices": [
+    "L'eau",
+    "L'air",
+    "Le sel",
+    "Le récipient"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le soluté est la substance dissoute.",
+   "id": "5e-pct-melanges-corps-purs-02",
+   "tier": "application",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "On dissout 20 g de sel dans 200 g d'eau. Quelle est la masse de la solution ? (en g)",
+   "answer": 220,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "200 + 20 = 220 g (la masse se conserve).",
+   "id": "5e-pct-melanges-corps-purs-03",
+   "tier": "application",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'eau du robinet est un corps pur.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Elle contient des substances dissoutes : c'est un mélange (homogène).",
+   "id": "5e-pct-melanges-corps-purs-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand on ajoute du sel dans l'eau et qu'un dépôt de sel reste au fond malgré l'agitation, la solution est :",
+   "choices": [
+    "diluée",
+    "saturée",
+    "distillée",
+    "un corps pur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le sel ne peut plus se dissoudre : saturation.",
+   "id": "5e-pct-melanges-corps-purs-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng prépare du sirop : 150 g d'eau et 30 g de sucre dans un verre.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la masse du sirop obtenu ? (en g)",
+     "answer": 180,
+     "unit": "g",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "150 + 30 = 180 g.",
+     "id": "5e-pct-melanges-corps-purs-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le solvant ?",
+     "choices": [
+      "Le sucre",
+      "Le sirop",
+      "Le verre",
+      "L'eau"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le solvant est le liquide qui dissout.",
+     "id": "5e-pct-melanges-corps-purs-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Il fait ensuite évaporer toute l'eau. Que reste-t-il et quelle masse retrouve-t-il environ ?",
+     "model": "Il reste le sucre dissous (30 g environ), car seule l'eau s'évapore.",
+     "rubric": [
+      "Il reste le sucre",
+      "Environ 30 g"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-pct-melanges-corps-purs-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-melanges-corps-purs-06",
+   "tier": "examen",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un mélange dont on distingue plusieurs phases est :",
+   "choices": [
+    "hétérogène",
+    "homogène",
+    "un corps pur",
+    "une solution limpide"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plusieurs phases visibles : hétérogène.",
+   "id": "5e-pct-melanges-corps-purs-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une solution, le solvant est :",
+   "choices": [
+    "la substance dissoute",
+    "le dépôt au fond",
+    "le liquide qui dissout",
+    "le filtre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Exemple : l'eau dans l'eau sucrée.",
+   "id": "5e-pct-melanges-corps-purs-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lors d'une dissolution, la masse totale :",
+   "choices": [
+    "diminue",
+    "se conserve",
+    "double",
+    "disparaît"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Rien ne se perd : la masse totale reste la même.",
+   "id": "5e-pct-melanges-corps-purs-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Laquelle de ces substances est un corps pur ?",
+   "choices": [
+    "Le lait",
+    "L'air",
+    "L'eau distillée",
+    "Le jus de canne"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'eau distillée ne contient (presque) que de l'eau.",
+   "id": "5e-pct-melanges-corps-purs-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une solution saturée est une solution dans laquelle :",
+   "choices": [
+    "il n'y a pas de soluté",
+    "il y a trop de solvant",
+    "le soluté ne se dissout plus",
+    "tout est solide"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Limite de dissolution atteinte.",
+   "id": "5e-pct-melanges-corps-purs-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-melanges-corps-purs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle technique sépare du sable mélangé à de l'eau ?",
+   "choices": [
+    "La filtration",
+    "L'évaporation",
+    "La distillation seule",
+    "La congélation"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le sable est un solide insoluble : on le retient avec un filtre.",
+   "id": "5e-pct-separation-01",
+   "tier": "application",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour séparer l'huile de l'eau, on utilise :",
+   "choices": [
+    "la filtration",
+    "l'évaporation",
+    "la fusion",
+    "la décantation"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux liquides non mélangés se séparent par décantation.",
+   "id": "5e-pct-separation-02",
+   "tier": "application",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut récupérer le sel d'une eau salée par évaporation.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'eau part, le sel reste.",
+   "id": "5e-pct-separation-03",
+   "tier": "application",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le liquide limpide recueilli après une filtration s'appelle :",
+   "choices": [
+    "le résidu",
+    "le filtrat",
+    "le soluté",
+    "le ménisque"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le solide retenu par le filtre est le résidu.",
+   "id": "5e-pct-separation-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe le mélange à la bonne technique.",
+   "pairs": [
+    [
+     "eau + sable",
+     "filtration"
+    ],
+    [
+     "eau + huile",
+     "décantation"
+    ],
+    [
+     "eau salée (récupérer le sel)",
+     "évaporation"
+    ],
+    [
+     "eau salée (récupérer l'eau)",
+     "distillation"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque technique est adaptée à un type de mélange.",
+   "id": "5e-pct-separation-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina a une bouteille d'eau trouble contenant de la terre fine et un peu de sel dissous. Elle veut récupérer une eau claire.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Décris les étapes pour obtenir une eau claire.",
+     "model": "Laisser reposer pour que la terre se dépose, puis filtrer avec un papier filtre ; l'eau obtenue est claire mais contient toujours du sel dissous.",
+     "rubric": [
+      "Cite la décantation",
+      "Cite la filtration",
+      "Indique que le sel reste dissous"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-pct-separation-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Pour obtenir une eau pratiquement sans sel, quelle technique ajouter ?",
+     "choices": [
+      "La décantation",
+      "La distillation",
+      "La filtration seule",
+      "L'agitation"
+     ],
+     "answer": 1,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Seule la distillation sépare l'eau du sel dissous en recueillant la vapeur condensée.",
+     "id": "5e-pct-separation-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-separation-06",
+   "tier": "examen",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel instrument porte le papier filtre ?",
+   "choices": [
+    "Une éprouvette",
+    "Un thermomètre",
+    "Un entonnoir",
+    "Une balance"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le papier filtre est plié dans un entonnoir.",
+   "id": "5e-pct-separation-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le solide retenu par le filtre est :",
+   "choices": [
+    "le filtrat",
+    "le solvant",
+    "le résidu",
+    "la vapeur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Résidu = ce qui reste dans le filtre.",
+   "id": "5e-pct-separation-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la distillation, le réfrigérant sert à :",
+   "choices": [
+    "chauffer le liquide",
+    "filtrer le sable",
+    "mesurer la masse",
+    "condenser la vapeur"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La vapeur est refroidie et redevient liquide.",
+   "id": "5e-pct-separation-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle technique permet d'obtenir du sel à partir d'eau salée ?",
+   "choices": [
+    "La décantation",
+    "L'évaporation",
+    "La filtration",
+    "La solidification"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On évapore l'eau, le sel cristallise.",
+   "id": "5e-pct-separation-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Peut-on boire une eau simplement filtrée ?",
+   "choices": [
+    "Non, pas forcément",
+    "Oui toujours",
+    "Oui si elle est trouble",
+    "Oui si elle est colorée"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La filtration n'élimine pas les microbes ni les substances dissoutes.",
+   "id": "5e-pct-separation-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-separation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

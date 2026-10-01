@@ -1,0 +1,1815 @@
+{
+ "chapter": "4e-pct-matiere",
+ "lessons": [
+  {
+   "id": "4e-pct-masse-volumique",
+   "title": "La masse volumique",
+   "minutes": 30,
+   "programRef": "4e — Masse volumique d'un corps (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir la masse volumique et ses unités.",
+    "Calculer ρ, m ou V.",
+    "Prévoir si un corps flotte."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-pct-masse-volumique-01",
+    "4e-pct-masse-volumique-02",
+    "4e-pct-masse-volumique-03",
+    "4e-pct-masse-volumique-04",
+    "4e-pct-masse-volumique-05",
+    "4e-pct-masse-volumique-06"
+   ],
+   "selfCheck": [
+    "4e-pct-masse-volumique-q1",
+    "4e-pct-masse-volumique-q2",
+    "4e-pct-masse-volumique-q3",
+    "4e-pct-masse-volumique-q4",
+    "4e-pct-masse-volumique-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Masse volumique",
+     "md": "La **masse volumique** d'un corps est la masse d'une unité de volume de ce corps : $\\rho = \\frac{m}{V}$. Unités : **g/cm³** (ou g/mL, kg/L) et **kg/m³**. Pour l'eau : $\\rho = 1$ g/cm³ = 1 000 kg/m³.",
+     "tex": "\\rho = \\frac{m}{V}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Valeurs usuelles (arrondies)",
+     "md": "- Eau : 1 g/cm³. Huile : environ 0,9 g/cm³.\n- Aluminium : 2,7 g/cm³ ; fer : 7,8 g/cm³ ; cuivre : 8,9 g/cm³.\n- Conversion : 1 g/cm³ = 1 000 kg/m³.\nOn en déduit $m = \\rho \\times V$ et $V = \\frac{m}{\\rho}$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Masses volumiques de quelques corps (g/cm³, valeurs arrondies).",
+     "alt": "Diagramme en barres : huile 0,9 ; eau 1 ; aluminium 2,7 ; fer 7,8 ; cuivre 8,9 g/cm³.",
+     "figure": {
+      "kind": "bars",
+      "w": 440,
+      "h": 250,
+      "bars": [
+       {
+        "label": "Huile",
+        "value": 0.9,
+        "color": "yellow"
+       },
+       {
+        "label": "Eau",
+        "value": 1,
+        "color": "blue"
+       },
+       {
+        "label": "Aluminium",
+        "value": 2.7,
+        "color": "grey"
+       },
+       {
+        "label": "Fer",
+        "value": 7.8,
+        "color": "brown"
+       },
+       {
+        "label": "Cuivre",
+        "value": 8.9,
+        "color": "orange"
+       }
+      ],
+      "unit": "g/cm³"
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Flotter ou couler",
+     "md": "Un corps **flotte** sur un liquide si sa masse volumique est **inférieure** à celle du liquide ; il **coule** si elle est supérieure. L'huile (0,9) flotte sur l'eau (1) ; le fer (7,8) coule dans l'eau."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer ρ",
+     "statement": "Un morceau d'aluminium de 54 g a un volume de 20 cm³. Calcule sa masse volumique.",
+     "steps": [
+      {
+       "md": "On applique ρ = m / V avec m en g et V en cm³."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "\\rho = \\frac{54}{20} = 2{,}7\\ \\text{g/cm}^3"
+      }
+     ],
+     "answer": "**2,7 g/cm³**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : calculer une masse",
+     "statement": "Quelle est la masse de 5 L d'huile de masse volumique 0,9 kg/L ?",
+     "steps": [
+      {
+       "md": "On utilise m = ρ × V avec ρ en kg/L et V en L."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "m = 0{,}9 \\times 5 = 4{,}5\\ \\text{kg}"
+      }
+     ],
+     "answer": "**4,5 kg**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger les unités (g avec m³, ou kg avec cm³) : convertir d'abord.\n- Confondre masse volumique et masse : un petit morceau de fer et un gros ont la **même** masse volumique.\n- Dire qu'un corps « lourd » coule toujours : un gros bateau en fer flotte grâce à sa forme (il contient de l'air)."
+    }
+   ],
+   "reviewNotes": [
+    "Valeurs de ρ données arrondies (fer 7,8 ; cuivre 8,9 ; aluminium 2,7 g/cm³ ; huile alimentaire ~0,9 g/cm³ selon l'huile).",
+    "La notion de masse volumique peut se trouver en 5e ou 4e selon le programme : à vérifier."
+   ]
+  },
+  {
+   "id": "4e-pct-atomes-molecules",
+   "title": "Atomes et molécules (initiation)",
+   "minutes": 25,
+   "programRef": "4e — Atomes et molécules : initiation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Savoir que la matière est faite d'atomes.",
+    "Lire la formule d'une molécule.",
+    "Compter les atomes."
+   ],
+   "prerequisites": [
+    "4e-pct-masse-volumique"
+   ],
+   "exercises": [
+    "4e-pct-atomes-molecules-01",
+    "4e-pct-atomes-molecules-02",
+    "4e-pct-atomes-molecules-03",
+    "4e-pct-atomes-molecules-04",
+    "4e-pct-atomes-molecules-05",
+    "4e-pct-atomes-molecules-06"
+   ],
+   "selfCheck": [
+    "4e-pct-atomes-molecules-q1",
+    "4e-pct-atomes-molecules-q2",
+    "4e-pct-atomes-molecules-q3",
+    "4e-pct-atomes-molecules-q4",
+    "4e-pct-atomes-molecules-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Atomes et molécules",
+     "md": "Toute la matière est formée de minuscules particules, les **atomes**. Un atome est désigné par un **symbole** (H, O, C, N, Fe, Cu, Na…). Une **molécule** est un assemblage d'atomes liés entre eux ; on l'écrit avec une **formule** : H₂O (eau), CO₂ (dioxyde de carbone), O₂ (dioxygène)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Modèles de quelques molécules et d'un atome de carbone.",
+     "alt": "Modèles compacts : molécule d'eau, de dioxyde de carbone, de dioxygène et un atome de carbone.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 190,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 100,
+        "r": 22,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 106,
+        "text": "O",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 140,
+        "r": 14,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 146,
+        "text": "H",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 140,
+        "r": 14,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 146,
+        "text": "H",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 25,
+        "text": "H₂O",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 180,
+        "text": "eau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 100,
+        "r": 20,
+        "fill": "grey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 106,
+        "text": "C",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 147,
+        "cy": 100,
+        "r": 20,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 147,
+        "y": 106,
+        "text": "O",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 233,
+        "cy": 100,
+        "r": 20,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 233,
+        "y": 106,
+        "text": "O",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 25,
+        "text": "CO₂",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 180,
+        "text": "dioxyde de carbone",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 100,
+        "r": 20,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 106,
+        "text": "O",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 372,
+        "cy": 100,
+        "r": 20,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 372,
+        "y": 106,
+        "text": "O",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 25,
+        "text": "O₂",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 180,
+        "text": "dioxygène",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 445,
+        "cy": 100,
+        "r": 20,
+        "fill": "grey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 106,
+        "text": "C",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 25,
+        "text": "C",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 180,
+        "text": "carbone",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Lire une formule",
+     "md": "L'**indice** après un symbole donne le nombre d'atomes : H₂O = **2** atomes d'hydrogène et **1** d'oxygène (3 atomes). Le **coefficient** devant la formule donne le nombre de molécules : 3 H₂O = 3 molécules d'eau, soit 6 atomes H et 3 atomes O."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : compter les atomes",
+     "statement": "Combien d'atomes y a-t-il dans une molécule de méthane CH₄ ?",
+     "steps": [
+      {
+       "md": "Un atome de carbone (C, indice 1 non écrit)."
+      },
+      {
+       "md": "Quatre atomes d'hydrogène (H₄). Total : 1 + 4."
+      }
+     ],
+     "answer": "**5 atomes**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : plusieurs molécules",
+     "statement": "Combien d'atomes d'oxygène dans 4 molécules de CO₂ ?",
+     "steps": [
+      {
+       "md": "Une molécule de CO₂ contient 2 atomes d'oxygène."
+      },
+      {
+       "md": "Pour 4 molécules :",
+       "tex": "4 \\times 2 = 8"
+      }
+     ],
+     "answer": "**8 atomes d'oxygène**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre atome et molécule : O est un atome, O₂ est une molécule.\n- Oublier que l'indice 1 ne s'écrit pas.\n- Confondre coefficient (nombre de molécules) et indice (atomes dans la molécule).\n- Écrire les symboles sans majuscule : Co (cobalt) n'est pas CO."
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact non consulté : niveau d'initiation, sans structure interne de l'atome (réservé à la 3e).",
+    "Couleurs des modèles moléculaires : convention usuelle (O rouge, H blanc/bleu clair, C noir/gris)."
+   ]
+  },
+  {
+   "id": "4e-pct-corps-reactions",
+   "title": "Corps simples, corps composés et transformation chimique",
+   "minutes": 30,
+   "programRef": "4e — Corps simples et composés, réaction chimique, combustions (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer corps simple et corps composé.",
+    "Décrire une transformation chimique : réactifs, produits, conservation de la masse.",
+    "Identifier quelques gaz."
+   ],
+   "prerequisites": [
+    "4e-pct-atomes-molecules"
+   ],
+   "exercises": [
+    "4e-pct-corps-reactions-01",
+    "4e-pct-corps-reactions-02",
+    "4e-pct-corps-reactions-03",
+    "4e-pct-corps-reactions-04",
+    "4e-pct-corps-reactions-05",
+    "4e-pct-corps-reactions-06"
+   ],
+   "selfCheck": [
+    "4e-pct-corps-reactions-q1",
+    "4e-pct-corps-reactions-q2",
+    "4e-pct-corps-reactions-q3",
+    "4e-pct-corps-reactions-q4",
+    "4e-pct-corps-reactions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Corps simple et corps composé",
+     "md": "Un **corps simple** est formé d'un seul type d'atome (O₂, H₂, Fe, C). Un **corps composé** est formé d'atomes différents (H₂O, CO₂, CH₄). Une molécule peut être d'un corps simple (O₂) ou d'un corps composé (CO₂)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Transformation chimique",
+     "md": "Dans une **transformation chimique**, des corps (les **réactifs**) disparaissent et d'autres (les **produits**) apparaissent : on écrit un bilan **réactifs → produits**. Exemple : carbone + dioxygène → dioxyde de carbone. Pendant la transformation, la **masse totale se conserve** (la somme des masses des réactifs = celle des produits)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Bilan de la combustion complète du carbone.",
+     "alt": "Schéma : carbone plus dioxygène donne dioxyde de carbone, avec la conservation de la masse.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 15,
+        "y": 50,
+        "w": 120,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 85,
+        "text": "carbone",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 85,
+        "text": "+",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 50,
+        "w": 130,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 85,
+        "text": "dioxygène",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 80,
+        "x2": 350,
+        "y2": 80,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 50,
+        "w": 110,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 76,
+        "text": "dioxyde",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 96,
+        "text": "de carbone",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 40,
+        "text": "réactifs",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 40,
+        "text": "réactifs",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 40,
+        "text": "produit",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 150,
+        "text": "masse des réactifs = masse des produits",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reconnaître quelques gaz",
+     "md": "- **Dioxyde de carbone** : trouble l'eau de chaux.\n- **Dioxygène** : ravive une braise (bûchette incandescente qui rougit).\n- **Vapeur d'eau** : fait passer le sulfate de cuivre anhydre du blanc au bleu.\nTests réalisés avec l'enseignant (produits irritants)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conservation de la masse",
+     "statement": "Dans une combustion, 12 g de carbone réagissent avec 32 g de dioxygène. Quelle masse de dioxyde de carbone se forme ?",
+     "steps": [
+      {
+       "md": "Masse des réactifs : 12 + 32 = 44 g."
+      },
+      {
+       "md": "Conservation de la masse : la masse des produits est égale à 44 g."
+      }
+     ],
+     "answer": "**44 g**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : proportions",
+     "statement": "Avec ces proportions (12 g C pour 32 g O₂), quelle masse de CO₂ obtient-on pour 3 g de carbone ?",
+     "steps": [
+      {
+       "md": "3 g = 12 g ÷ 4 : toutes les masses sont divisées par 4."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "44 \\div 4 = 11\\ \\text{g}"
+      }
+     ],
+     "answer": "**11 g de CO₂** (avec 8 g de dioxygène)"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la matière « disparaît » quand un feu brûle : la masse des produits (dont les gaz) est égale à celle des réactifs.\n- Confondre changement d'état (même corps : eau → vapeur) et transformation chimique (nouveaux corps).\n- Ranger O₂ parmi les corps composés : il est simple."
+    }
+   ],
+   "reviewNotes": [
+    "Conservation de la masse : principe solide (Lavoisier) ; les masses atomiques C = 12, O = 16 (g/mol) sont utilisées uniquement pour obtenir un rapport 12 : 32 : 44 à titre d'exemple.",
+    "Tests d'identification : eau de chaux (CO₂), braise (O₂), sulfate de cuivre anhydre (eau) : manipulation par le professeur."
+   ]
+  },
+  {
+   "id": "4e-pct-acides-bases",
+   "title": "Solutions acides, basiques et neutres",
+   "minutes": 30,
+   "programRef": "4e — Solutions aqueuses acides, basiques, neutres ; indicateurs, pH (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer solutions acides, basiques et neutres.",
+    "Utiliser des indicateurs colorés et l'échelle de pH.",
+    "Respecter les règles de sécurité."
+   ],
+   "prerequisites": [
+    "4e-pct-corps-reactions"
+   ],
+   "exercises": [
+    "4e-pct-acides-bases-01",
+    "4e-pct-acides-bases-02",
+    "4e-pct-acides-bases-03",
+    "4e-pct-acides-bases-04",
+    "4e-pct-acides-bases-05",
+    "4e-pct-acides-bases-06"
+   ],
+   "selfCheck": [
+    "4e-pct-acides-bases-q1",
+    "4e-pct-acides-bases-q2",
+    "4e-pct-acides-bases-q3",
+    "4e-pct-acides-bases-q4",
+    "4e-pct-acides-bases-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Acide, base, neutre",
+     "md": "Une solution est **acide**, **basique** ou **neutre**. Le jus de citron, le vinaigre sont acides ; l'eau savonneuse, la lessive sont basiques ; l'eau pure est neutre. Le **pH** mesure l'acidité : pH < 7 acide, pH = 7 neutre, pH > 7 basique (échelle de 0 à 14)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Échelle de pH et exemples.",
+     "alt": "Une échelle de 0 à 14 avec une zone acide, une zone neutre au pH 7 et une zone basique.",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 160,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 40,
+        "w": 160,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 40,
+        "w": 160,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 65,
+        "text": "acide",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 65,
+        "text": "neutre",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 65,
+        "text": "basique",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 105,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 105,
+        "text": "7",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 490,
+        "y": 105,
+        "text": "14",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 135,
+        "text": "citron",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 135,
+        "text": "vinaigre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 135,
+        "text": "eau pure",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 135,
+        "text": "savon",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 450,
+        "y": 135,
+        "text": "soude",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Indicateurs colorés",
+     "md": "- **BBT (bleu de bromothymol)** : jaune en milieu acide, vert en milieu neutre, bleu en milieu basique.\n- **Phénolphtaléine** : incolore en milieu acide ou neutre, rose en milieu basique.\n- **Papier pH** : on compare la couleur à une échelle fournie.\n- Le jus de chou rouge est aussi un indicateur naturel."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Sécurité",
+     "md": "- Ne jamais goûter ni sentir de près une solution.\n- Les acides et bases concentrés brûlent : seul le professeur les manipule.\n- Ne jamais mélanger l'eau de Javel avec du vinaigre ou un détartrant : gaz toxique.\n- Si une solution touche la peau : rincer longuement à l'eau."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : BBT",
+     "statement": "Quelques gouttes de BBT dans le jus de citron donnent une couleur jaune. Que conclure ?",
+     "steps": [
+      {
+       "md": "Le BBT est jaune en milieu acide."
+      },
+      {
+       "md": "Le jus de citron est donc acide (pH < 7)."
+      }
+     ],
+     "answer": "**Jus acide**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire un pH",
+     "statement": "Une solution a un pH de 10. Est-elle acide, basique ou neutre ? Et avec la phénolphtaléine ?",
+     "steps": [
+      {
+       "md": "pH = 10 est supérieur à 7 : la solution est basique."
+      },
+      {
+       "md": "En milieu basique, la phénolphtaléine devient rose."
+      }
+     ],
+     "answer": "**Basique ; rose**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que « pH grand » veut dire « acide » : c'est l'inverse, pH < 7 acide.\n- Confondre phénolphtaléine incolore (acide ou neutre) et « eau pure ».\n- Penser que tout liquide de cuisine est sans danger : le vinaigre est un acide.\n- Goûter pour tester."
+    }
+   ],
+   "reviewNotes": [
+    "pH et échelle 0-14 peuvent être au programme de 3e seulement (le pack bepc-pct traite le pH) : à vérifier.",
+    "Valeurs de pH approximatives (citron ~2, vinaigre ~3, eau pure 7, savon ~9-10).",
+    "Mélange javel + acide dangereux (gaz toxique) : mentionné en sécurité."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Un morceau de fer de volume 5 cm³ a une masse de 39 g. Calcule ρ (en g/cm³).",
+   "answer": 7.8,
+   "tolerance": 0.01,
+   "unit": "g/cm³",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "39 ÷ 5 = 7,8 g/cm³.",
+   "id": "4e-pct-masse-volumique-01",
+   "tier": "application",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la masse de 200 cm³ d'aluminium (ρ = 2,7 g/cm³) ? (en g)",
+   "answer": 540,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "m = ρ × V = 2,7 × 200 = 540 g.",
+   "id": "4e-pct-masse-volumique-02",
+   "tier": "application",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 g/cm³ est égal à :",
+   "choices": [
+    "1 kg/m³",
+    "1 000 kg/m³",
+    "100 kg/m³",
+    "10 000 kg/m³"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 g/cm³ = 1 000 kg/m³ (l'eau).",
+   "id": "4e-pct-masse-volumique-03",
+   "tier": "application",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un liquide a une masse volumique de 0,8 g/cm³. Quel volume occupent 200 g de ce liquide ? (en cm³)",
+   "answer": 250,
+   "unit": "cm³",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "V = m / ρ = 200 ÷ 0,8 = 250 cm³.",
+   "id": "4e-pct-masse-volumique-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un matériau a une masse volumique de 0,6 g/cm³. Dans l'eau, il :",
+   "choices": [
+    "coule",
+    "se dissout",
+    "flotte",
+    "se transforme en gaz"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "0,6 < 1 : il flotte.",
+   "id": "4e-pct-masse-volumique-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris veut identifier le métal d'une bille. Sa masse est 31,2 g. Il la plonge dans une éprouvette : le niveau passe de 40 mL à 44 mL.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le volume de la bille ? (en cm³)",
+     "answer": 4,
+     "unit": "cm³",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "V = 44 − 40 = 4 mL = 4 cm³.",
+     "id": "4e-pct-masse-volumique-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule sa masse volumique (en g/cm³).",
+     "answer": 7.8,
+     "tolerance": 0.01,
+     "unit": "g/cm³",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "ρ = 31,2 ÷ 4 = 7,8 g/cm³.",
+     "id": "4e-pct-masse-volumique-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel métal est le plus probable ?",
+     "choices": [
+      "Le fer",
+      "L'aluminium",
+      "Le cuivre",
+      "L'eau"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "7,8 g/cm³ est la valeur du fer.",
+     "id": "4e-pct-masse-volumique-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Volume par déplacement d'eau, puis ρ = m / V.",
+   "id": "4e-pct-masse-volumique-06",
+   "tier": "examen",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule donne la masse volumique ?",
+   "choices": [
+    "ρ = m × V",
+    "ρ = V / m",
+    "ρ = m + V",
+    "ρ = m / V"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Masse divisée par volume.",
+   "id": "4e-pct-masse-volumique-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la masse volumique de l'eau ?",
+   "choices": [
+    "10 g/cm³",
+    "0,1 g/cm³",
+    "1 g/cm³",
+    "1 000 g/cm³"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 g/cm³ = 1 000 kg/m³.",
+   "id": "4e-pct-masse-volumique-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un corps de ρ = 2 g/cm³ dans l'eau :",
+   "choices": [
+    "flotte",
+    "reste entre deux eaux toujours",
+    "fond",
+    "coule"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 > 1 : il coule.",
+   "id": "4e-pct-masse-volumique-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la masse de 10 cm³ de cuivre (ρ = 8,9 g/cm³) ?",
+   "choices": [
+    "0,89 g",
+    "8,9 g",
+    "890 g",
+    "89 g"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "8,9 × 10 = 89 g.",
+   "id": "4e-pct-masse-volumique-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si on coupe un bloc de fer en deux, la masse volumique de chaque morceau :",
+   "choices": [
+    "est divisée par deux",
+    "est doublée",
+    "devient nulle",
+    "ne change pas"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "ρ est une propriété du matériau.",
+   "id": "4e-pct-masse-volumique-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-masse-volumique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que représente la formule H₂O ?",
+   "choices": [
+    "Un atome d'eau",
+    "Une molécule d'eau",
+    "Un mélange",
+    "Un corps solide"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "H₂O : 2 H + 1 O.",
+   "id": "4e-pct-atomes-molecules-01",
+   "tier": "application",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien d'atomes y a-t-il dans une molécule de CO₂ ?",
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 carbone + 2 oxygènes = 3 atomes.",
+   "id": "4e-pct-atomes-molecules-02",
+   "tier": "application",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien d'atomes d'hydrogène dans 3 molécules d'eau ?",
+   "answer": 6,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 2 = 6.",
+   "id": "4e-pct-atomes-molecules-03",
+   "tier": "application",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien d'atomes au total dans 2 molécules d'ammoniac NH₃ ?",
+   "answer": 8,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Une molécule : 1 N + 3 H = 4 atomes ; deux molécules : 8 atomes.",
+   "id": "4e-pct-atomes-molecules-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe le symbole à l'élément.",
+   "pairs": [
+    [
+     "H",
+     "hydrogène"
+    ],
+    [
+     "O",
+     "oxygène"
+    ],
+    [
+     "C",
+     "carbone"
+    ],
+    [
+     "Fe",
+     "fer"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Symboles à connaître.",
+   "id": "4e-pct-atomes-molecules-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans l'air, on trouve du dioxygène O₂, du diazote N₂ et un peu de dioxyde de carbone CO₂.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien d'atomes dans 5 molécules de O₂ ?",
+     "answer": 10,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "5 × 2 = 10 atomes.",
+     "id": "4e-pct-atomes-molecules-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Lequel de ces corps est une molécule formée de deux atomes identiques ?",
+     "choices": [
+      "N₂",
+      "CO₂",
+      "H₂O",
+      "CH₄"
+     ],
+     "answer": 0,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "N₂ : deux atomes d'azote.",
+     "id": "4e-pct-atomes-molecules-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique la différence entre O et O₂.",
+     "model": "O est un atome d'oxygène seul ; O₂ est une molécule formée de deux atomes d'oxygène : c'est le dioxygène de l'air.",
+     "rubric": [
+      "Distingue atome et molécule",
+      "Cite que O₂ contient deux atomes"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-pct-atomes-molecules-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-atomes-molecules-06",
+   "tier": "examen",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un atome est :",
+   "choices": [
+    "un mélange de molécules",
+    "un liquide",
+    "un gaz uniquement",
+    "une particule très petite constituant la matière"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La matière est constituée d'atomes.",
+   "id": "4e-pct-atomes-molecules-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le symbole du fer est :",
+   "choices": [
+    "F",
+    "Fe",
+    "Fr",
+    "Fi"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fe vient du latin ferrum.",
+   "id": "4e-pct-atomes-molecules-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans H₂SO₄ il y a combien d'atomes d'hydrogène ?",
+   "choices": [
+    "2",
+    "1",
+    "4",
+    "6"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'indice 2 après H.",
+   "id": "4e-pct-atomes-molecules-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le coefficient 3 devant H₂O signifie :",
+   "choices": [
+    "3 atomes d'oxygène seulement",
+    "3 molécules d'eau",
+    "3 atomes d'hydrogène",
+    "la masse 3 g"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Coefficient = nombre de molécules.",
+   "id": "4e-pct-atomes-molecules-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le dioxyde de carbone CO₂ est :",
+   "choices": [
+    "un atome",
+    "une molécule à 3 atomes",
+    "une molécule à 2 atomes",
+    "un métal"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 C + 2 O.",
+   "id": "4e-pct-atomes-molecules-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-atomes-molecules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel est un corps simple ?",
+   "choices": [
+    "L'eau H₂O",
+    "Le dioxyde de carbone CO₂",
+    "Le dioxygène O₂",
+    "Le méthane CH₄"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "O₂ n'est formé que d'oxygène.",
+   "id": "4e-pct-corps-reactions-01",
+   "tier": "application",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment reconnaît-on le dioxyde de carbone ?",
+   "choices": [
+    "Il trouble l'eau de chaux",
+    "Il ravive une braise",
+    "Il bleuit le sulfate de cuivre",
+    "Il est coloré"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Test de l'eau de chaux.",
+   "id": "4e-pct-corps-reactions-02",
+   "tier": "application",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "24 g de carbone brûlent complètement avec 64 g de dioxygène. Masse de dioxyde de carbone formée ? (en g)",
+   "answer": 88,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "24 + 64 = 88 g.",
+   "id": "4e-pct-corps-reactions-03",
+   "tier": "application",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'évaporation de l'eau est une transformation chimique.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "C'est un changement d'état : le corps reste de l'eau.",
+   "id": "4e-pct-corps-reactions-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Avec les proportions 12 g C → 44 g CO₂, quelle masse de carbone faut-il pour obtenir 22 g de CO₂ ?",
+   "answer": 6,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "22 = 44 ÷ 2 : il faut 12 ÷ 2 = 6 g de carbone.",
+   "id": "4e-pct-corps-reactions-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa brûle de la paille de fer (fer) dans un flacon fermé avec de l'air : après refroidissement, la balance indique la même masse qu'avant, mais la paille est devenue noirâtre.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Que peut-on dire de cette transformation ?",
+     "choices": [
+      "La matière a disparu",
+      "C'est une transformation chimique avec conservation de la masse",
+      "C'est un simple changement d'état",
+      "La masse a augmenté car le flacon est ouvert"
+     ],
+     "answer": 1,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Nouveau corps formé (oxyde de fer) ; flacon fermé donc masse conservée.",
+     "id": "4e-pct-corps-reactions-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Quels sont les réactifs ?",
+     "model": "Le fer et le dioxygène de l'air enfermé dans le flacon.",
+     "rubric": [
+      "Cite le fer",
+      "Cite le dioxygène"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-pct-corps-reactions-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-corps-reactions-06",
+   "tier": "examen",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un corps composé est formé :",
+   "choices": [
+    "d'un seul type d'atome",
+    "d'atomes de plusieurs types",
+    "toujours de gaz",
+    "de mélange"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Exemple : H₂O.",
+   "id": "4e-pct-corps-reactions-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « carbone + dioxygène → dioxyde de carbone », le produit est :",
+   "choices": [
+    "le dioxyde de carbone",
+    "le carbone",
+    "le dioxygène",
+    "l'air"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le produit est à droite de la flèche.",
+   "id": "4e-pct-corps-reactions-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une transformation chimique, la masse totale :",
+   "choices": [
+    "augmente toujours",
+    "se conserve",
+    "diminue toujours",
+    "est nulle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conservation de la masse.",
+   "id": "4e-pct-corps-reactions-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel test reconnaît le dioxygène ?",
+   "choices": [
+    "Il trouble l'eau de chaux",
+    "Il ravive une braise",
+    "Il bleuit le sulfate de cuivre",
+    "Il éteint toute flamme"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Test de la braise.",
+   "id": "4e-pct-corps-reactions-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La fusion de la glace est :",
+   "choices": [
+    "une transformation chimique",
+    "un changement d'état physique",
+    "une combustion",
+    "une réaction avec le dioxygène"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La glace et l'eau sont le même corps.",
+   "id": "4e-pct-corps-reactions-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-corps-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une solution de pH = 3 est :",
+   "choices": [
+    "basique",
+    "acide",
+    "neutre",
+    "saline"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "pH < 7 : acide.",
+   "id": "4e-pct-acides-bases-01",
+   "tier": "application",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le BBT est bleu dans :",
+   "choices": [
+    "une solution basique",
+    "une solution acide",
+    "une solution neutre",
+    "aucune solution"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Bleu en milieu basique.",
+   "id": "4e-pct-acides-bases-02",
+   "tier": "application",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le pH d'une solution neutre ?",
+   "answer": 7,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une solution neutre a un pH de 7.",
+   "id": "4e-pct-acides-bases-03",
+   "tier": "application",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La phénolphtaléine incolore dans une solution signifie que celle-ci est :",
+   "choices": [
+    "acide ou neutre",
+    "basique uniquement",
+    "colorée",
+    "très concentrée"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Elle ne devient rose qu'en milieu basique.",
+   "id": "4e-pct-acides-bases-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe la solution à sa nature.",
+   "pairs": [
+    [
+     "jus de citron",
+     "acide"
+    ],
+    [
+     "eau pure",
+     "neutre"
+    ],
+    [
+     "eau savonneuse",
+     "basique"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Valeurs de pH usuelles.",
+   "id": "4e-pct-acides-bases-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina teste trois solutions A, B, C avec du BBT : A est jaune, B est vert, C est bleu.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle solution est neutre ?",
+     "choices": [
+      "A",
+      "C",
+      "B",
+      "Aucune"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Vert : neutre.",
+     "id": "4e-pct-acides-bases-06-a"
+    },
+    {
+     "kind": "matching",
+     "prompt": "Classe les solutions.",
+     "pairs": [
+      [
+       "A",
+       "acide"
+      ],
+      [
+       "B",
+       "neutre"
+      ],
+      [
+       "C",
+       "basique"
+      ]
+     ],
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Jaune acide, vert neutre, bleu basique.",
+     "id": "4e-pct-acides-bases-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Ajoute de l'eau pure à A : que devient le pH et pourquoi ?",
+     "model": "Le pH se rapproche de 7 (il augmente) car la solution est diluée.",
+     "rubric": [
+      "Le pH augmente vers 7",
+      "Parle de dilution"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-pct-acides-bases-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-acides-bases-06",
+   "tier": "examen",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la zone d'un pH égal à 7 ?",
+   "choices": [
+    "L'acidité forte",
+    "La basicité forte",
+    "Le vide",
+    "La neutralité"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "pH 7 : neutre.",
+   "id": "4e-pct-acides-bases-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le citron est :",
+   "choices": [
+    "acide",
+    "basique",
+    "neutre",
+    "un indicateur"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "pH autour de 2.",
+   "id": "4e-pct-acides-bases-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La phénolphtaléine est rose dans :",
+   "choices": [
+    "une solution basique",
+    "une solution acide",
+    "une solution neutre",
+    "l'eau pure"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Rose en milieu basique.",
+   "id": "4e-pct-acides-bases-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que ne faut-il jamais faire avec un produit chimique inconnu ?",
+   "choices": [
+    "L'étiqueter",
+    "Le goûter",
+    "Le lire",
+    "Le mettre à l'écart"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Danger d'intoxication.",
+   "id": "4e-pct-acides-bases-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que ne faut-il jamais mélanger à l'eau de Javel ?",
+   "choices": [
+    "L'eau pure",
+    "Le sol sec",
+    "Un acide (vinaigre, détartrant)",
+    "L'air"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il se dégage un gaz toxique.",
+   "id": "4e-pct-acides-bases-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-acides-bases",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

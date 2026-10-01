@@ -1,0 +1,938 @@
+{
+ "chapter": "5e-pct-mesures",
+ "lessons": [
+  {
+   "id": "5e-pct-longueur-masse",
+   "title": "Mesurer une longueur et une masse",
+   "minutes": 20,
+   "programRef": "5e — Grandeurs et mesures : longueur et masse (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer les unités de longueur et de masse et convertir.",
+    "Choisir l'instrument adapté et lire une mesure correctement."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-pct-longueur-masse-01",
+    "5e-pct-longueur-masse-02",
+    "5e-pct-longueur-masse-03",
+    "5e-pct-longueur-masse-04",
+    "5e-pct-longueur-masse-05",
+    "5e-pct-longueur-masse-06"
+   ],
+   "selfCheck": [
+    "5e-pct-longueur-masse-q1",
+    "5e-pct-longueur-masse-q2",
+    "5e-pct-longueur-masse-q3",
+    "5e-pct-longueur-masse-q4",
+    "5e-pct-longueur-masse-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Grandeur et unité",
+     "md": "Une **grandeur** est ce qu'on peut mesurer (longueur, masse, volume, température…). Une mesure s'écrit toujours avec un **nombre** et une **unité** : 4,5 cm, 2 kg. Dans le Système international, l'unité de longueur est le **mètre (m)** et celle de masse est le **kilogramme (kg)**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Conversions à connaître",
+     "md": "- 1 km = 1 000 m ; 1 m = 100 cm = 1 000 mm.\n- 1 t = 1 000 kg ; 1 kg = 1 000 g ; 1 g = 1 000 mg.\nPour passer d'une unité à une plus petite, on **multiplie** ; à une plus grande, on **divise**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Mesure d'un crayon avec une règle graduée.",
+     "alt": "Un crayon dont l'extrémité s'arrête à la graduation 4,5 cm d'une règle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 50,
+        "w": 400,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 50,
+        "x2": 20,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 50,
+        "x2": 100,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 50,
+        "x2": 180,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 50,
+        "x2": 260,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 50,
+        "x2": 340,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 420,
+        "y1": 50,
+        "x2": 420,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 50,
+        "x2": 60,
+        "y2": 70,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 50,
+        "x2": 140,
+        "y2": 70,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 50,
+        "x2": 220,
+        "y2": 70,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 50,
+        "x2": 300,
+        "y2": 70,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 50,
+        "x2": 380,
+        "y2": 70,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 112,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 112,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 112,
+        "text": "2",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 112,
+        "text": "3",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 112,
+        "text": "4",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 420,
+        "y": 112,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 135,
+        "text": "cm",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 18,
+        "w": 340,
+        "h": 22,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 34,
+        "text": "crayon : 4,5 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Bien mesurer",
+     "md": "1. Placer le zéro de la règle contre une extrémité de l'objet.\n2. Regarder la graduation **de face** (œil perpendiculaire à la règle).\n3. Lire la valeur et écrire l'unité. La mesure est précise à environ une graduation près.\n4. Pour une masse : poser l'objet sur la balance déjà tarée (réglée sur zéro)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : convertir une longueur",
+     "statement": "Un tuyau mesure 2,5 km. Exprime sa longueur en mètres.",
+     "steps": [
+      {
+       "md": "1 km = 1 000 m : on passe à une plus petite unité, donc on multiplie."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "2{,}5 \\times 1\\,000 = 2\\,500"
+      }
+     ],
+     "answer": "**2 500 m**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : convertir une masse",
+     "statement": "Un sac de riz a une masse de 25 kg. Donne sa masse en grammes puis en tonnes.",
+     "steps": [
+      {
+       "md": "En grammes : 1 kg = 1 000 g.",
+       "tex": "25 \\times 1\\,000 = 25\\,000\\ \\text{g}"
+      },
+      {
+       "md": "En tonnes : 1 t = 1 000 kg, on divise.",
+       "tex": "25 \\div 1\\,000 = 0{,}025\\ \\text{t}"
+      }
+     ],
+     "answer": "**25 000 g ou 0,025 t**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier l'unité ou la confondre (cm au lieu de mm).\n- Multiplier au lieu de diviser (ou l'inverse) dans une conversion.\n- Lire la règle de côté : l'erreur de lecture est alors grande.\n- Oublier de tarer la balance : la masse du récipient s'ajoute à celle de l'objet."
+    }
+   ],
+   "reviewNotes": [
+    "Programme officiel exact non consulté : répartition longueur/masse/volume entre 5e et 6e à vérifier.",
+    "Notion d'incertitude traitée de façon très simple (précision = plus petite graduation)."
+   ]
+  },
+  {
+   "id": "5e-pct-volume",
+   "title": "Mesurer un volume",
+   "minutes": 25,
+   "programRef": "5e — Mesure d'un volume (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Convertir des unités de volume (L, mL, cm³, m³).",
+    "Mesurer un volume de liquide avec une éprouvette et un volume de solide par déplacement d'eau."
+   ],
+   "prerequisites": [
+    "5e-pct-longueur-masse"
+   ],
+   "exercises": [
+    "5e-pct-volume-01",
+    "5e-pct-volume-02",
+    "5e-pct-volume-03",
+    "5e-pct-volume-04",
+    "5e-pct-volume-05",
+    "5e-pct-volume-06"
+   ],
+   "selfCheck": [
+    "5e-pct-volume-q1",
+    "5e-pct-volume-q2",
+    "5e-pct-volume-q3",
+    "5e-pct-volume-q4",
+    "5e-pct-volume-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Volume",
+     "md": "Le **volume** est la place occupée par un corps. L'unité SI est le **mètre cube (m³)**. En pratique on utilise le **litre (L)** et le **millilitre (mL)**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Équivalences",
+     "md": "- 1 L = 1 dm³ = 1 000 mL.\n- 1 mL = 1 cm³.\n- 1 m³ = 1 000 L.\nUn pavé : $V = L \\times l \\times h$ ; un cube d'arête $a$ : $V = a \\times a \\times a$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mesurer avec une éprouvette graduée",
+     "md": "1. Poser l'éprouvette sur une table horizontale.\n2. Verser le liquide, puis placer l'œil à la hauteur de la surface.\n3. Lire la graduation au **bas du ménisque** (la petite courbure de l'eau).\n**Solide irrégulier :** on mesure $V_1$ (eau seule), on plonge le solide, on mesure $V_2$. Alors $V = V_2 - V_1$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Volume d'une pierre par déplacement d'eau : V = 58 − 40 = 18 mL.",
+     "alt": "Deux éprouvettes : le niveau de l'eau passe de 40 mL à 58 mL quand on plonge une pierre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 40,
+        "w": 60,
+        "h": 160,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 61,
+        "y": 120,
+        "w": 58,
+        "h": 80,
+        "fill": "lightblue",
+        "stroke": "lightblue",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 140,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 126,
+        "text": "40 mL",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 40,
+        "w": 60,
+        "h": 160,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 301,
+        "y": 90,
+        "w": 58,
+        "h": 110,
+        "fill": "lightblue",
+        "stroke": "lightblue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 180,
+        "r": 14,
+        "fill": "grey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 90,
+        "x2": 380,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 96,
+        "text": "58 mL",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 225,
+        "text": "avant",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 225,
+        "text": "avec la pierre",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 120,
+        "text": "+ pierre",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 135,
+        "x2": 285,
+        "y2": 135,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : volume d'une pierre",
+     "statement": "Le niveau d'eau passe de 40 mL à 58 mL après immersion d'une pierre. Quel est son volume ?",
+     "steps": [
+      {
+       "md": "Le volume de la pierre est la différence des deux lectures."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "V = 58 - 40 = 18\\ \\text{mL}"
+      },
+      {
+       "md": "1 mL = 1 cm³, donc V = 18 cm³."
+      }
+     ],
+     "answer": "**18 mL = 18 cm³**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : volume d'un pavé",
+     "statement": "Une boîte a pour dimensions 10 cm, 5 cm et 4 cm. Quel est son volume en cm³ puis en litres ?",
+     "steps": [
+      {
+       "md": "Volume :",
+       "tex": "10 \\times 5 \\times 4 = 200\\ \\text{cm}^3"
+      },
+      {
+       "md": "1 L = 1 000 cm³ : on divise par 1 000."
+      },
+      {
+       "md": "Conversion :",
+       "tex": "200 \\div 1\\,000 = 0{,}2\\ \\text{L}"
+      }
+     ],
+     "answer": "**200 cm³ = 0,2 L**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Lire le haut du ménisque au lieu du bas.\n- Confondre litre et mètre cube : 1 m³ = **1 000** L.\n- Oublier de soustraire $V_1$ : on obtient alors le volume total, pas celui du solide.\n- Mesurer un volume de solide avec une règle quand le solide a une forme irrégulière."
+    }
+   ],
+   "reviewNotes": [
+    "Programme officiel exact non consulté.",
+    "Formules de volumes (cube, pavé) supposées vues en mathématiques ; à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 3,2 m en centimètres.",
+   "answer": 320,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 m = 100 cm, donc 3,2 × 100 = 320 cm.",
+   "id": "5e-pct-longueur-masse-01",
+   "tier": "application",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 450 g en kilogrammes.",
+   "answer": 0.45,
+   "tolerance": 0.0001,
+   "unit": "kg",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 kg = 1 000 g : 450 ÷ 1 000 = 0,45 kg.",
+   "id": "5e-pct-longueur-masse-02",
+   "tier": "application",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel instrument utilise-t-on pour mesurer la masse d'une mangue ?",
+   "choices": [
+    "Une règle",
+    "Un thermomètre",
+    "Une balance",
+    "Une éprouvette graduée"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La masse se mesure avec une balance.",
+   "id": "5e-pct-longueur-masse-03",
+   "tier": "application",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un camion transporte 1,2 t de ciment. Exprime cette masse en kilogrammes.",
+   "answer": 1200,
+   "unit": "kg",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "1 t = 1 000 kg : 1,2 × 1 000 = 1 200 kg.",
+   "id": "5e-pct-longueur-masse-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur une règle graduée en millimètres, on lit 7,3 cm. Quelle est cette longueur en mm ?",
+   "answer": 73,
+   "unit": "mm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "1 cm = 10 mm : 7,3 × 10 = 73 mm.",
+   "id": "5e-pct-longueur-masse-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Au marché, Amina achète trois sacs de 25 kg de haricots et un petit sac de 500 g de piments.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la masse totale en kilogrammes ?",
+     "answer": 75.5,
+     "tolerance": 0.001,
+     "unit": "kg",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "3 × 25 = 75 kg ; 500 g = 0,5 kg ; total 75 + 0,5 = 75,5 kg.",
+     "id": "5e-pct-longueur-masse-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Exprime cette masse totale en grammes.",
+     "answer": 75500,
+     "unit": "g",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "75,5 × 1 000 = 75 500 g.",
+     "id": "5e-pct-longueur-masse-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Pour peser le petit sac de piments, quel instrument est le plus adapté ?",
+     "choices": [
+      "Une balance de précision (au gramme)",
+      "Un pèse-camion",
+      "Une règle",
+      "Une éprouvette"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Une petite masse se mesure avec une balance sensible ; un pèse-camion est conçu pour des tonnes.",
+     "id": "5e-pct-longueur-masse-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-longueur-masse-06",
+   "tier": "examen",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité de masse du Système international ?",
+   "choices": [
+    "Le gramme",
+    "Le kilogramme",
+    "La tonne",
+    "Le litre"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le kilogramme (kg) est l'unité SI de masse.",
+   "id": "5e-pct-longueur-masse-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de millimètres y a-t-il dans 1 mètre ?",
+   "choices": [
+    "10",
+    "100",
+    "10 000",
+    "1 000"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 m = 100 cm = 1 000 mm.",
+   "id": "5e-pct-longueur-masse-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment doit-on regarder la graduation d'une règle ?",
+   "choices": [
+    "De côté, en biais",
+    "De très loin",
+    "De face, l'œil perpendiculaire à la règle",
+    "Les yeux fermés"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une lecture de côté fausse la valeur.",
+   "id": "5e-pct-longueur-masse-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie « tarer » une balance ?",
+   "choices": [
+    "La nettoyer",
+    "La poser sur un mur",
+    "Peser deux objets à la fois",
+    "La régler sur zéro avec le récipient posé"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On tare pour ne pas compter la masse du récipient.",
+   "id": "5e-pct-longueur-masse-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une longueur de 0,5 km vaut :",
+   "choices": [
+    "50 m",
+    "500 m",
+    "5 m",
+    "5 000 m"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "0,5 × 1 000 = 500 m.",
+   "id": "5e-pct-longueur-masse-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-longueur-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 1,5 L en millilitres.",
+   "answer": 1500,
+   "unit": "mL",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 L = 1 000 mL : 1,5 × 1 000 = 1 500 mL.",
+   "id": "5e-pct-volume-01",
+   "tier": "application",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 250 mL en litres.",
+   "answer": 0.25,
+   "tolerance": 0.0001,
+   "unit": "L",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "250 ÷ 1 000 = 0,25 L.",
+   "id": "5e-pct-volume-02",
+   "tier": "application",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Dans une éprouvette, l'eau passe de 30 mL à 47 mL après immersion d'un caillou. Quel est le volume du caillou (en mL) ?",
+   "answer": 17,
+   "unit": "mL",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "V = 47 − 30 = 17 mL.",
+   "id": "5e-pct-volume-03",
+   "tier": "application",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un réservoir contient 2 m³ d'eau. Combien de litres cela fait-il ?",
+   "answer": 2000,
+   "unit": "L",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "1 m³ = 1 000 L ; 2 × 1 000 = 2 000 L.",
+   "id": "5e-pct-volume-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un pavé a pour dimensions 20 cm, 10 cm et 5 cm. Quel est son volume en litres ?",
+   "answer": 1,
+   "unit": "L",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "20 × 10 × 5 = 1 000 cm³ = 1 L.",
+   "id": "5e-pct-volume-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa remplit un bidon de 20 L avec des bouteilles de 1,5 L qu'il vide complètement dans le bidon.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le volume de 13 bouteilles ? (en L)",
+     "answer": 19.5,
+     "tolerance": 0.001,
+     "unit": "L",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "13 × 1,5 = 19,5 L.",
+     "id": "5e-pct-volume-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de bouteilles pleines peut-il verser au maximum sans dépasser 20 L ?",
+     "answer": 13,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "14 × 1,5 = 21 L dépasse 20 L ; 13 × 1,5 = 19,5 L convient.",
+     "id": "5e-pct-volume-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel volume reste-t-il à remplir dans le bidon après ces 13 bouteilles ? (en L)",
+     "answer": 0.5,
+     "tolerance": 0.001,
+     "unit": "L",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "20 − 19,5 = 0,5 L.",
+     "id": "5e-pct-volume-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-volume-06",
+   "tier": "examen",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un litre est égal à :",
+   "choices": [
+    "100 mL",
+    "10 mL",
+    "10 000 mL",
+    "1 000 mL"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 L = 1 000 mL.",
+   "id": "5e-pct-volume-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où lit-on le niveau de l'eau dans une éprouvette ?",
+   "choices": [
+    "Au bas du ménisque",
+    "Au haut du ménisque",
+    "Sur le bord supérieur",
+    "Sur le pied de l'éprouvette"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On lit la graduation qui touche le bas de la courbure.",
+   "id": "5e-pct-volume-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment mesure-t-on le volume d'une pierre de forme irrégulière ?",
+   "choices": [
+    "Avec une balance",
+    "Avec un thermomètre",
+    "Avec un chronomètre",
+    "Par déplacement d'eau dans une éprouvette"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "V = V₂ − V₁ avec l'éprouvette.",
+   "id": "5e-pct-volume-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 mL est égal à :",
+   "choices": [
+    "1 dm³",
+    "1 m³",
+    "10 cm³",
+    "1 cm³"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 mL = 1 cm³ et 1 L = 1 dm³.",
+   "id": "5e-pct-volume-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le volume d'un cube d'arête 3 cm ?",
+   "choices": [
+    "9 cm³",
+    "27 cm³",
+    "12 cm³",
+    "6 cm³"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 3 × 3 = 27 cm³.",
+   "id": "5e-pct-volume-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-volume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

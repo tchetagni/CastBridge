@@ -1,0 +1,388 @@
+{
+ "chapter": "5e-pct-techno",
+ "lessons": [
+  {
+   "id": "5e-pct-objets-techniques",
+   "title": "Objets techniques, outils et schémas",
+   "minutes": 30,
+   "programRef": "5e — Technologie : objets techniques simples, outils, matériaux, dessin (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir besoin, fonction et objet technique.",
+    "Associer outils et usages ; connaître les règles de sécurité.",
+    "Lire un croquis coté et utiliser une échelle."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-pct-objets-techniques-01",
+    "5e-pct-objets-techniques-02",
+    "5e-pct-objets-techniques-03",
+    "5e-pct-objets-techniques-04",
+    "5e-pct-objets-techniques-05",
+    "5e-pct-objets-techniques-06"
+   ],
+   "selfCheck": [
+    "5e-pct-objets-techniques-q1",
+    "5e-pct-objets-techniques-q2",
+    "5e-pct-objets-techniques-q3",
+    "5e-pct-objets-techniques-q4",
+    "5e-pct-objets-techniques-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Besoin et objet technique",
+     "md": "Un **besoin** est ce dont on a envie ou ce qu'il faut pour vivre (se couper, s'éclairer, se déplacer). Un **objet technique** est un objet fabriqué pour répondre à un besoin : un couteau, une lampe, une brouette. Sa **fonction d'usage** dit à quoi il sert."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Outils usuels",
+     "md": "- **Marteau** : enfoncer un clou.\n- **Scie** : couper le bois ou le métal.\n- **Tournevis** : visser / dévisser.\n- **Pince** : serrer, couper un fil.\n- **Lime** : user, polir.\n- **Mètre, équerre** : mesurer, tracer.\nChoisir l'outil adapté évite les accidents."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Sécurité à l'atelier",
+     "md": "- Maintenir la pièce solidement avant de scier.\n- Couper en s'éloignant du corps.\n- Porter des protections si besoin (lunettes, gants).\n- Ranger les outils après usage ; ne pas courir avec un outil."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Dessin à l'échelle",
+     "md": "Une échelle $\\frac{1}{10}$ signifie que 1 cm sur le dessin représente 10 cm dans la réalité. Pour trouver la longueur dessinée : **longueur réelle ÷ dénominateur**. Pour trouver la longueur réelle : **longueur dessinée × dénominateur**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Plaque avec un trou central : dessin coté.",
+     "alt": "Un rectangle avec un trou au centre et des cotes de longueur et de largeur.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 50,
+        "w": 240,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 100,
+        "r": 25,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 175,
+        "x2": 300,
+        "y2": 175,
+        "color": "blue",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 200,
+        "text": "24 cm",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 50,
+        "x2": 325,
+        "y2": 150,
+        "color": "blue",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 105,
+        "text": "10 cm",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 40,
+        "text": "plaque percée (échelle 1/10)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir l'outil",
+     "statement": "On veut raccourcir une planche de bois. Quel outil choisir ?",
+     "steps": [
+      {
+       "md": "Il faut couper : on utilise une scie."
+      },
+      {
+       "md": "On mesure d'abord avec un mètre et on trace un trait."
+      }
+     ],
+     "answer": "**Une scie (après mesure et traçage)**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : échelle",
+     "statement": "Un meuble mesure 120 cm de long. On le dessine à l'échelle 1/10. Quelle longueur sur le dessin ?",
+     "steps": [
+      {
+       "md": "1/10 : on divise la longueur réelle par 10."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "120 \\div 10 = 12\\ \\text{cm}"
+      }
+     ],
+     "answer": "**12 cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser un tournevis comme levier ou comme ciseau : il peut glisser et blesser.\n- Mélanger les unités dans une échelle (cm et m).\n- Oublier de préciser l'échelle sur le dessin.\n- Ne pas fixer la pièce avant de la couper."
+    }
+   ],
+   "reviewNotes": [
+    "Contenu de technologie de 5e (APC) à vérifier : le programme précis peut mettre l'accent sur d'autres thèmes (matériaux, énergie, chaîne de fabrication)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel outil sert à visser ?",
+   "choices": [
+    "Une scie",
+    "Une lime",
+    "Un tournevis",
+    "Un marteau"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le tournevis visse et dévisse.",
+   "id": "5e-pct-objets-techniques-01",
+   "tier": "application",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "À l'échelle 1/5, une pièce de 40 cm est dessinée avec quelle longueur (en cm) ?",
+   "answer": 8,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "40 ÷ 5 = 8 cm.",
+   "id": "5e-pct-objets-techniques-02",
+   "tier": "application",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une lampe est un objet technique.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle répond au besoin de s'éclairer.",
+   "id": "5e-pct-objets-techniques-03",
+   "tier": "application",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur un dessin à l'échelle 1/20, une porte mesure 10 cm. Quelle est sa hauteur réelle (en cm) ?",
+   "answer": 200,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "10 × 20 = 200 cm = 2 m.",
+   "id": "5e-pct-objets-techniques-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe l'outil à son usage.",
+   "pairs": [
+    [
+     "scie",
+     "couper"
+    ],
+    [
+     "lime",
+     "polir"
+    ],
+    [
+     "pince",
+     "serrer"
+    ],
+    [
+     "marteau",
+     "enfoncer un clou"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque outil a une fonction.",
+   "id": "5e-pct-objets-techniques-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng veut fabriquer une petite étagère en bois : planche de 80 cm. Il dessine d'abord un plan à l'échelle 1/10.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur de la planche sur le plan ? (en cm)",
+     "answer": 8,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "80 ÷ 10 = 8 cm.",
+     "id": "5e-pct-objets-techniques-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Cite deux outils qu'il utilisera et une précaution de sécurité.",
+     "model": "Un mètre pour mesurer et une scie pour couper ; maintenir solidement la planche avant de scier.",
+     "rubric": [
+      "Cite deux outils adaptés",
+      "Donne une précaution de sécurité"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-pct-objets-techniques-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-objets-techniques-06",
+   "tier": "examen",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un besoin est :",
+   "choices": [
+    "une pièce de rechange",
+    "un outil",
+    "ce qui conduit à créer un objet technique",
+    "une échelle"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un objet technique répond à un besoin.",
+   "id": "5e-pct-objets-techniques-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À l'échelle 1/10, 50 cm réels donnent :",
+   "choices": [
+    "500 cm",
+    "5 cm",
+    "0,5 cm",
+    "60 cm"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "50 ÷ 10 = 5 cm.",
+   "id": "5e-pct-objets-techniques-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avant de scier, on doit :",
+   "choices": [
+    "la tenir en l'air",
+    "fixer la pièce",
+    "courir",
+    "chauffer la scie"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fixer évite les accidents.",
+   "id": "5e-pct-objets-techniques-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel instrument sert à mesurer une longueur ?",
+   "choices": [
+    "Le mètre ruban",
+    "La balance",
+    "Le thermomètre",
+    "Le chronomètre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le mètre sert à mesurer.",
+   "id": "5e-pct-objets-techniques-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La fonction d'usage d'un objet est :",
+   "choices": [
+    "ce à quoi il sert",
+    "sa couleur",
+    "son prix",
+    "son poids uniquement"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition.",
+   "id": "5e-pct-objets-techniques-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-objets-techniques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

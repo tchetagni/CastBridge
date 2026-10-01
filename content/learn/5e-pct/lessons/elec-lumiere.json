@@ -1,0 +1,927 @@
+{
+ "chapter": "5e-pct-elec-lumiere",
+ "lessons": [
+  {
+   "id": "5e-pct-circuit-simple",
+   "title": "Le circuit électrique simple",
+   "minutes": 30,
+   "programRef": "5e — Électricité : circuit simple, conducteurs et isolants, sécurité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Réaliser et schématiser un circuit simple avec les symboles normalisés.",
+    "Distinguer conducteurs et isolants.",
+    "Connaître les règles de sécurité électrique."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-pct-circuit-simple-01",
+    "5e-pct-circuit-simple-02",
+    "5e-pct-circuit-simple-03",
+    "5e-pct-circuit-simple-04",
+    "5e-pct-circuit-simple-05",
+    "5e-pct-circuit-simple-06"
+   ],
+   "selfCheck": [
+    "5e-pct-circuit-simple-q1",
+    "5e-pct-circuit-simple-q2",
+    "5e-pct-circuit-simple-q3",
+    "5e-pct-circuit-simple-q4",
+    "5e-pct-circuit-simple-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Circuit électrique",
+     "md": "Un **circuit électrique simple** est une boucle fermée comprenant un **générateur** (pile), un **récepteur** (lampe) et des **fils**, souvent avec un **interrupteur**. La lampe brille seulement si le circuit est **fermé**, sans coupure."
+    },
+    {
+     "type": "illustration",
+     "caption": "Circuit simple : pile, interrupteur et lampe.",
+     "alt": "Schéma d'une boucle contenant une pile, un interrupteur et une lampe.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 360,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 60,
+        "y2": 200,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 60,
+        "x2": 360,
+        "y2": 200,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 200,
+        "x2": 150,
+        "y2": 200,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 200,
+        "x2": 360,
+        "y2": 200,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 200,
+        "x2": 175,
+        "y2": 180,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 200,
+        "r": 3,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 200,
+        "r": 3,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 228,
+        "text": "interrupteur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 195,
+        "y1": 40,
+        "x2": 195,
+        "y2": 80,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 225,
+        "y1": 50,
+        "x2": 225,
+        "y2": 70,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 25,
+        "text": "pile",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 360,
+        "cy": 130,
+        "r": 24,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 344,
+        "y1": 114,
+        "x2": 376,
+        "y2": 146,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 344,
+        "y1": 146,
+        "x2": 376,
+        "y2": 114,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 130,
+        "text": "lampe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 40,
+        "text": "−",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 40,
+        "text": "+",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Conducteurs et isolants",
+     "md": "- **Conducteurs** : laissent passer le courant (cuivre, fer, aluminium, graphite, l'eau salée, le corps humain).\n- **Isolants** : ne le laissent pas passer (plastique, bois sec, caoutchouc, verre, air sec).\nLes fils sont en cuivre et gainés de plastique."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Sécurité",
+     "md": "- Le courant du secteur (220 V) est dangereux, parfois mortel.\n- Ne jamais toucher les prises, les fils dénudés ou un appareil avec les mains mouillées.\n- Ne jamais réparer un appareil branché.\n- Un **court-circuit** (fil reliant directement les bornes de la pile) échauffe les fils : à éviter.\n- En TP : pile de 4,5 V seulement."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : la lampe ne brille pas",
+     "statement": "Une lampe branchée à une pile ne s'allume pas. Cite deux causes possibles.",
+     "steps": [
+      {
+       "md": "Le circuit est ouvert : un fil est débranché ou l'interrupteur est ouvert."
+      },
+      {
+       "md": "Ou bien la lampe est grillée, ou la pile est usée."
+      }
+     ],
+     "answer": "**Circuit ouvert ; lampe grillée ; pile usée**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : tester un matériau",
+     "statement": "On place une pièce de métal puis un morceau de bois sec dans un circuit avec une lampe. La lampe brille avec le métal seulement. Que conclure ?",
+     "steps": [
+      {
+       "md": "Avec le métal, le courant passe : la lampe brille."
+      },
+      {
+       "md": "Avec le bois sec, le courant ne passe pas."
+      }
+     ],
+     "answer": "**Le métal est conducteur, le bois sec est isolant**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le courant « se consomme » dans la lampe : il circule en boucle.\n- Dessiner un circuit non fermé et croire qu'il fonctionne.\n- Penser que le corps humain est un isolant.\n- Confondre court-circuit et circuit fermé normal."
+    }
+   ],
+   "reviewNotes": [
+    "Tension du secteur au Cameroun : 220 V (à confirmer).",
+    "Manipulations avec pile 4,5 V uniquement.",
+    "Sens conventionnel du courant introduit en 5e ou en 4e : à vérifier."
+   ]
+  },
+  {
+   "id": "5e-pct-lumiere-ombre",
+   "title": "La lumière : sources, propagation et ombre",
+   "minutes": 25,
+   "programRef": "5e — Optique : sources, propagation rectiligne, ombres (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer sources de lumière et objets éclairés.",
+    "Énoncer la propagation rectiligne de la lumière.",
+    "Expliquer la formation d'une ombre."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-pct-lumiere-ombre-01",
+    "5e-pct-lumiere-ombre-02",
+    "5e-pct-lumiere-ombre-03",
+    "5e-pct-lumiere-ombre-04",
+    "5e-pct-lumiere-ombre-05",
+    "5e-pct-lumiere-ombre-06"
+   ],
+   "selfCheck": [
+    "5e-pct-lumiere-ombre-q1",
+    "5e-pct-lumiere-ombre-q2",
+    "5e-pct-lumiere-ombre-q3",
+    "5e-pct-lumiere-ombre-q4",
+    "5e-pct-lumiere-ombre-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Sources et objets éclairés",
+     "md": "Une **source primaire** produit sa propre lumière (Soleil, lampe allumée, flamme). Un objet **éclairé** (Lune, livre, mur) renvoie la lumière reçue : il n'en produit pas. On voit un objet quand la lumière qu'il émet ou renvoie arrive dans notre œil."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Propagation rectiligne",
+     "md": "Dans un milieu **transparent et homogène** (air, eau pure, vide), la lumière se propage en **ligne droite**. On la représente par un **rayon lumineux** (une droite avec une flèche). Sa vitesse est d'environ **300 000 km/s** (dans le vide et l'air)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Transparent, translucide, opaque",
+     "md": "- **Transparent** : laisse passer la lumière (verre) ; on voit nettement à travers.\n- **Translucide** : laisse passer la lumière mais on ne voit pas nettement (papier calque).\n- **Opaque** : ne laisse pas passer la lumière (bois, métal) ; il donne une **ombre**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Ombre d'un objet opaque éclairé par une petite source.",
+     "alt": "Une source, un objet opaque et un écran avec une zone sombre : l'ombre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 40,
+        "cy": 120,
+        "r": 8,
+        "fill": "yellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 150,
+        "text": "source",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 90,
+        "w": 14,
+        "h": 60,
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 227,
+        "y": 170,
+        "text": "objet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 402,
+        "y1": 20,
+        "x2": 402,
+        "y2": 220,
+        "color": "grey",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 420,
+        "y": 235,
+        "text": "écran",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 120,
+        "x2": 227,
+        "y2": 90,
+        "color": "orange",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 227,
+        "y1": 90,
+        "x2": 402,
+        "y2": 60,
+        "color": "orange",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 120,
+        "x2": 227,
+        "y2": 150,
+        "color": "orange",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 227,
+        "y1": 150,
+        "x2": 402,
+        "y2": 180,
+        "color": "orange",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "rect",
+        "x": 398,
+        "y": 60,
+        "w": 8,
+        "h": 120,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 450,
+        "y": 120,
+        "text": "ombre",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : taille d'une ombre",
+     "statement": "Une petite lampe, un objet de 10 cm de haut placé à mi-chemin entre la lampe et un mur. Quelle est la hauteur de l'ombre sur le mur ?",
+     "steps": [
+      {
+       "md": "L'objet est à la moitié de la distance lampe-mur : l'ombre est agrandie par deux."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "10 \\times 2 = 20\\ \\text{cm}"
+      }
+     ],
+     "answer": "**20 cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : distance parcourue",
+     "statement": "La lumière met environ 8 minutes à venir du Soleil. Peut-on dire qu'elle va « instantanément » ?",
+     "steps": [
+      {
+       "md": "Non : la vitesse est très grande mais pas infinie."
+      },
+      {
+       "md": "Elle parcourt environ 300 000 km chaque seconde."
+      }
+     ],
+     "answer": "**Non : la lumière a une vitesse finie**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que la Lune est une source de lumière : elle renvoie celle du Soleil.\n- Croire que la lumière a besoin d'air pour voyager : elle se propage dans le vide.\n- Regarder directement le Soleil : danger pour les yeux (jamais sans protection).\n- Confondre ombre et reflet."
+    }
+   ],
+   "reviewNotes": [
+    "Vitesse de la lumière : environ 300 000 km/s dans le vide (arrondi).",
+    "Le calcul de taille de l'ombre repose sur des triangles semblables (Thalès) : à vérifier la pertinence en 5e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle de l'interrupteur ?",
+   "choices": [
+    "Ouvrir ou fermer le circuit",
+    "Produire du courant",
+    "Produire de la lumière",
+    "Mesurer la tension"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'interrupteur coupe ou rétablit le passage du courant.",
+   "id": "5e-pct-circuit-simple-01",
+   "tier": "application",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel de ces matériaux est un isolant ?",
+   "choices": [
+    "Le cuivre",
+    "Le fer",
+    "Le plastique",
+    "L'aluminium"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le plastique ne conduit pas le courant.",
+   "id": "5e-pct-circuit-simple-02",
+   "tier": "application",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la lampe brille si le circuit est ouvert.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut un circuit fermé.",
+   "id": "5e-pct-circuit-simple-03",
+   "tier": "application",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi les fils électriques sont-ils entourés de plastique ?",
+   "choices": [
+    "Pour augmenter le courant",
+    "Pour isoler et protéger",
+    "Pour produire de la lumière",
+    "Pour les rendre solides comme le fer"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le plastique est isolant : il protège contre les chocs et les courts-circuits.",
+   "id": "5e-pct-circuit-simple-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque élément à son rôle.",
+   "pairs": [
+    [
+     "pile",
+     "générateur"
+    ],
+    [
+     "lampe",
+     "récepteur"
+    ],
+    [
+     "fil de cuivre",
+     "conducteur"
+    ],
+    [
+     "interrupteur",
+     "ouvre ou ferme le circuit"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Rôles des éléments du circuit.",
+   "id": "5e-pct-circuit-simple-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina branche une lampe à une pile avec deux fils et un interrupteur ; la lampe ne s'allume pas quand elle ferme l'interrupteur.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Propose trois vérifications à faire pour trouver la panne.",
+     "model": "Vérifier que tous les fils sont bien serrés aux bornes ; vérifier que la pile n'est pas usée ; essayer la lampe avec une autre pile pour voir si elle est grillée.",
+     "rubric": [
+      "Contrôle des connexions",
+      "Contrôle de la pile",
+      "Contrôle de la lampe"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-pct-circuit-simple-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle précaution de sécurité faut-il respecter avec le courant du secteur ?",
+     "choices": [
+      "Le tester avec une pile",
+      "Ne jamais le manipuler avec des mains mouillées",
+      "Toucher les fils pour vérifier",
+      "Utiliser des fils sans gaine"
+     ],
+     "answer": 1,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Le courant du secteur est dangereux et l'eau améliore la conduction.",
+     "id": "5e-pct-circuit-simple-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-circuit-simple-06",
+   "tier": "examen",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un circuit simple, la pile est :",
+   "choices": [
+    "le récepteur",
+    "l'interrupteur",
+    "l'isolant",
+    "le générateur"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La pile fournit l'énergie électrique.",
+   "id": "5e-pct-circuit-simple-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un matériau qui laisse passer le courant est :",
+   "choices": [
+    "un isolant",
+    "un récepteur",
+    "un conducteur",
+    "un fusible"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition d'un conducteur.",
+   "id": "5e-pct-circuit-simple-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le circuit est fermé lorsque :",
+   "choices": [
+    "la pile est en dehors du circuit",
+    "le courant peut faire une boucle complète",
+    "un fil est coupé",
+    "l'interrupteur est ouvert"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il n'y a aucune coupure.",
+   "id": "5e-pct-circuit-simple-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faut-il éviter absolument ?",
+   "choices": [
+    "Utiliser une pile de 4,5 V",
+    "Toucher des fils dénudés d'un appareil branché",
+    "Utiliser une lampe",
+    "Utiliser un interrupteur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Danger d'électrocution.",
+   "id": "5e-pct-circuit-simple-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le sens conventionnel du courant à l'extérieur de la pile ?",
+   "choices": [
+    "De la borne − vers la borne +",
+    "Dans les deux sens à la fois",
+    "Il n'y en a pas",
+    "De la borne + vers la borne −"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Convention : du + vers le −.",
+   "id": "5e-pct-circuit-simple-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-circuit-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Laquelle est une source primaire de lumière ?",
+   "choices": [
+    "Le Soleil",
+    "La Lune",
+    "Un miroir",
+    "Un mur blanc"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le Soleil produit sa lumière.",
+   "id": "5e-pct-lumiere-ombre-01",
+   "tier": "application",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un objet qui ne laisse pas passer la lumière est :",
+   "choices": [
+    "opaque",
+    "transparent",
+    "translucide",
+    "une source"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Opaque = bloque la lumière.",
+   "id": "5e-pct-lumiere-ombre-02",
+   "tier": "application",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans l'air, la lumière se propage en ligne droite.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Propagation rectiligne dans un milieu transparent homogène.",
+   "id": "5e-pct-lumiere-ombre-03",
+   "tier": "application",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un objet de 15 cm est placé à mi-distance entre une petite source et un écran. Quelle est la hauteur de l'ombre (en cm) ?",
+   "answer": 30,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le rapport de distances est 2 : 15 × 2 = 30 cm.",
+   "id": "5e-pct-lumiere-ombre-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque matériau à sa catégorie.",
+   "pairs": [
+    [
+     "verre clair",
+     "transparent"
+    ],
+    [
+     "papier calque",
+     "translucide"
+    ],
+    [
+     "planche en bois",
+     "opaque"
+    ],
+    [
+     "flamme",
+     "source primaire"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Selon le passage de la lumière.",
+   "id": "5e-pct-lumiere-ombre-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa éclaire une balle avec une lampe de poche dans une pièce sombre ; une ombre apparaît sur le mur.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Pourquoi l'ombre existe-t-elle ?",
+     "choices": [
+      "La balle produit du noir",
+      "Le mur brille",
+      "La balle opaque arrête une partie de la lumière qui se propage en ligne droite",
+      "La lumière tourne autour de la balle"
+     ],
+     "answer": 2,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "La lumière se propage en ligne droite et est bloquée.",
+     "id": "5e-pct-lumiere-ombre-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que devient la taille de l'ombre si Mballa rapproche la balle de la lampe ?",
+     "model": "L'ombre devient plus grande, car l'objet intercepte un faisceau plus large issu de la lampe.",
+     "rubric": [
+      "Dit que l'ombre grandit",
+      "Fait référence à la propagation rectiligne"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-pct-lumiere-ombre-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-lumiere-ombre-06",
+   "tier": "examen",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La lumière se propage :",
+   "choices": [
+    "en zigzag",
+    "seulement dans l'air",
+    "en ligne droite dans un milieu transparent homogène",
+    "seulement la nuit"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Propagation rectiligne.",
+   "id": "5e-pct-lumiere-ombre-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La Lune est :",
+   "choices": [
+    "une source primaire",
+    "un objet éclairé",
+    "un corps transparent",
+    "une étoile"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle renvoie la lumière du Soleil.",
+   "id": "5e-pct-lumiere-ombre-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La vitesse de la lumière est environ :",
+   "choices": [
+    "300 km/s",
+    "300 000 km/s",
+    "3 000 km/h",
+    "30 km/s"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Environ 300 000 km/s.",
+   "id": "5e-pct-lumiere-ombre-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que représente un rayon lumineux ?",
+   "choices": [
+    "Le trajet de la lumière",
+    "Une source",
+    "Un obstacle",
+    "Un écran"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Droite orientée.",
+   "id": "5e-pct-lumiere-ombre-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un matériau translucide :",
+   "choices": [
+    "arrête toute la lumière",
+    "est toujours coloré",
+    "laisse passer la lumière mais on ne voit pas nettement à travers",
+    "est une source"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Exemple : papier calque.",
+   "id": "5e-pct-lumiere-ombre-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-lumiere-ombre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
