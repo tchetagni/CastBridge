@@ -49,8 +49,14 @@ class MainActivity : ComponentActivity() {
         PhoneConnect.agent.post { if (update.file != null) offerInstall(true) else checkUpdate(castbridge.core.update.UpdateSchedule.Trigger.USER) }
     }
 
+    override fun onStart() {
+        super.onStart()
+        ParentalSession.onForeground()        // the Parental tab locks again after a few minutes in the background
+    }
+
     override fun onStop() {
         super.onStop()
+        ParentalSession.onBackground()
         PhoneConnect.screens.leave()
     }
 
@@ -76,9 +82,10 @@ class MainActivity : ComponentActivity() {
         var settings by rememberSaveable { mutableStateOf(false) }
         // screen_time per tab (ids of EventCatalog: the "CastBridge TV" tab is the app's home)
         val tabScreens = listOf("cast", "home", "games", "player", "learn")
-        LaunchedEffect(tab, settings) { if (!settings) PhoneConnect.screens.enter(tabScreens[tab]) }
+        // the Parental tab (index 5) is never reported to the telemetry
+        LaunchedEffect(tab, settings) { if (!settings) tabScreens.getOrNull(tab)?.let { PhoneConnect.screens.enter(it) } }
         fun select(i: Int) {
-            if (i != tab) listOf("cast", null, "games", "player", "learn")[i]?.let { PhoneConnect.feature(it, "tile") }
+            if (i != tab) listOf("cast", null, "games", "player", "learn", null)[i]?.let { PhoneConnect.feature(it, "tile") }
             tab = i
         }
         Scaffold(
@@ -101,6 +108,7 @@ class MainActivity : ComponentActivity() {
                         LeadingIconTab(tab == 2, onClick = { select(2) }, text = { Text("Jeux", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_quiz, null, ic) })
                         LeadingIconTab(tab == 3, onClick = { select(3) }, text = { Text("Sur le téléphone", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_sur_le_telephone, null, ic) })
                         LeadingIconTab(tab == 4, onClick = { select(4) }, text = { Text("Apprendre", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_apprendre, null, ic) })
+                        LeadingIconTab(tab == 5, onClick = { select(5) }, text = { Text("Parental", maxLines = 1) }, icon = { Icon(Icons.Filled.Lock, null, ic) })
                     }
                 }
             },
@@ -109,7 +117,7 @@ class MainActivity : ComponentActivity() {
             Column(Modifier.padding(pad).fillMaxSize()) {
                 // sub-brand wordmark (branding/logo) above the Apprendre tab; the Jeux tab shows its own cards
                 if (tab == 4) SubBrandHeader(R.drawable.logo_apprendre_horizontal, "Apprendre")
-                Box(Modifier.weight(1f).fillMaxWidth()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> GamesScreen(); 3 -> castbridge.sender.player.PhoneLibraryScreen(); else -> LearnScreen() } }
+                Box(Modifier.weight(1f).fillMaxWidth()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> GamesScreen(); 3 -> castbridge.sender.player.PhoneLibraryScreen(); 5 -> ParentalTab(); else -> LearnScreen() } }
             }
         }
         MoveHandler()

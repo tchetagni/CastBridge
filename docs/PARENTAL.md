@@ -199,3 +199,52 @@ Réception et stockage local (**150 rapports, 90 jours à compter de la récepti
 - Un téléphone éteint, hors de portée ou sans Bluetooth ne reçoit rien tant que la TV est loin (les rapports attendent jusqu'à 14 jours).
 - Pas de livraison par le Wi-Fi/réseau local dans cette version : le HTTP de la TV ne sait pas, d'après le jeton, quel téléphone il a en face pour appliquer la désignation sans code parental. Le Bluetooth prouve l'identité du téléphone ; le Wi-Fi serait une suite possible (jeton de téléphone + même signature).
 - Si le parent perd son téléphone, retirer le téléphone de la liste de confiance de la TV (« Retirer ») coupe aussi les rapports.
+
+## Onglet Parental (téléphone)
+
+Un **onglet « Parental »** de l'app CastBridge (après « Apprendre ») détaille toute l'activité de la TV, avec tous les rapports possibles. Le cadenas de la barre d'application ouvre **le même contenu** (`ParentalActivity` → `ParentalTab`) : un seul endroit. L'ancien éditeur des règles (profils, horaires, limites, règles par application, surveillance de toute la TV) est la section « Règles de la TV » de l'onglet.
+
+### Accès et sécurité
+
+- **Code parental** demandé **une fois par séance** ; il est vérifié **par la TV** (`POST /config/get`, même verrouillage progressif), gardé **en mémoire seulement**, jamais écrit ni journalisé, oublié au verrouillage. Aucun code parental : création guidée dans l'onglet.
+- **Verrouillage automatique** après 3 minutes en arrière-plan (`TabLock`, testé) ou par le bouton « Verrouiller ». `FLAG_SECURE` : pas de capture d'écran ni d'aperçu dans les apps récentes.
+- **TV éteinte ou hors de portée** : la TV ne peut pas vérifier le code. L'onglet s'ouvre alors en **lecture seule** avec le verrouillage d'écran du téléphone (aucun code stocké) : pas de purge, pas de réglage de la TV, pas de règles.
+
+### Écrans
+
+| Écran | Contenu |
+|---|---|
+| Tableau de bord | Par profil, aujourd'hui (ou le dernier jour reçu, dit clairement) : temps contre limite, répartition (anneau), activités principales, blocages, alertes, état de la surveillance, âge de la dernière synchronisation. |
+| Activité | Chronologie par jour et par profil, filtres (vidéos, jeux, Apprendre, Quiz, téléchargements, applications, blocages, alertes), détail au toucher. |
+| Par application | Minutes par application, jour / semaine / mois / plage, **MEILLEUR EFFORT**. |
+| Apprendre et Quiz | Classe, fiches, étoiles, série, temps, réussite par matière, points faibles, épreuves blanches, badges ; parties de Quiz. |
+| Rapports | Jour / semaine / mois / plage, par profil et tous profils, comparaison avec la période précédente (écart et tendance, **par jour reçu** : une période incomplète ne ressemble pas à une baisse), objectifs contre réalisé, classements, carte d'usage par heure et jour, heures de pointe, séances les plus longues, usage tardif (22 h – 6 h), hors des heures autorisées, blocages, tentatives de déverrouillage, alertes de manipulation. |
+| Exports | Résumé en **texte**, en **PDF** (`PdfDocument`), **CSV** des événements : feuille de partage d'Android, **rien n'est envoyé nulle part**. |
+| Alertes | Historique avec gravité et action, préférences par profil et horaires des rapports (réglages existants de la TV), statut du téléphone destinataire. |
+| Données | Conservation (90 jours par défaut, 30 à 365, et 20 000 événements au plus), purge par profil / par TV / totale (**code redemandé**), dernière synchronisation, « Demander les rapports à la TV », sélecteur de TV s'il y en a plusieurs. |
+
+Graphiques dessinés avec `Canvas` (barres, ligne, anneau, carte de chaleur), couleurs du thème (clair et sombre), alternative textuelle pour chacun, et chaque nombre est aussi écrit en toutes lettres. Une donnée manquante est un **trou en pointillés**, jamais une barre à zéro.
+
+### Qualité des données (règle absolue)
+
+Chaque chiffre porte son étiquette (symbole + mot, jamais la couleur seule) :
+
+- **● MESURÉ** : CastBridge-TV, compté par la TV elle-même, systématiquement : sessions de vidéos (titre, durée), jeux, Quiz, téléchargements, Apprendre (fiches, exercices, épreuves, score, série), tentatives de déverrouillage, blocages, dépassements de temps ou d'heures.
+- **◐ MEILLEUR EFFORT** : les autres applications de la TV, vues par la surveillance de toute la TV **quand elle est active et autorisée** (minutes par application).
+- **○ INDISPONIBLE** : surveillance inactive ou non autorisée, TV éteinte, aucun rapport reçu, journal non reçu. **Jamais un zéro, jamais un nombre d'apparence mesurée** : l'écran écrit « indisponible » et pourquoi. Un jour sans rapport est un **trou**, pas un zéro ; une période avec des trous est dite « incomplète : X j sur Y reçus ».
+
+L'état « Surveillance de toute la TV : active / non autorisée / indisponible sur cette TV » est en haut de chaque écran, avec ce qu'il implique. Sur la TV d'Esaie le service d'accessibilité ne peut pas être activé : les minutes des autres applications peuvent manquer (dites **indisponibles**), le suivi de CastBridge-TV reste complet. Le temps total n'additionne jamais les deux sources en un seul chiffre : « CastBridge-TV (mesuré) » et « autres applications (~, meilleur effort) » sont séparés ; une limite est comparée à « au moins X min » quand les autres applications ne sont pas mesurées.
+
+### Hors ligne d'abord, aucun serveur
+
+Tout se lit depuis la **copie locale** du téléphone (`ParentalLedger`, préférences privées `castbridge_parental_ledger`, **hors sauvegardes**). Les rapports y arrivent par la livraison différée **existante** (outbox de la TV, tirage Bluetooth du téléphone désigné) et par la demande manuelle (Bluetooth, et rapport en direct par Wi-Fi si la TV est liée et le code connu) : un seul chemin, `absorb`, idempotent (doublons par identifiant de rapport et d'événement, rapports en retard ou dans le désordre sans effet sur le résultat, un jour = le rapport le plus récent de la TV, un rapport quotidien l'emporte sur le total d'un hebdomadaire). L'âge des données et les périodes incomplètes sont affichés. **Règle documentée : aucun envoi des données parentales à un serveur, aucun cloud.** Elles ne quittent le téléphone que par les boutons de partage du parent. Le code parental n'est ni stocké ni journalisé. Aucun composant exporté nouveau (le `FileProvider` du partage n'est pas exporté ; l'onglet n'est jamais compté dans la télémétrie).
+
+### Ce que la TV envoie en plus (champs additifs du rapport quotidien, anciens téléphones : ignorés)
+
+- `events` : journal de CastBridge-TV des dernières 26 h (`TvJournal`, borné à 400 événements / 8 jours, 80 par rapport) : `{id, ts, t, title, min, score, detail}`. Les sessions viennent du compteur d'usage existant (`SessionTracker` : vidéo ouverte, Quiz, Échecs, téléchargements), les tentatives de déverrouillage du code refusé (jamais le code).
+- `learn` : résumé d'Apprendre de l'élève lié au profil, construit depuis le suivi existant (`LearnProgress.dashboard`) ; fiches et épreuves du jour dans `events`.
+- Rien de nouveau n'est collecté. **Pas encore branché côté TV** : le score d'une partie de Quiz (la durée l'est ; le score reste « non transmis »), la télécommande (utilisation) ; le journal les accepte déjà (`TvJournal.record`).
+
+### Code
+
+Logique pure, testée en JVM : `castbridge.core.parental.tab` (`ParentalLedger`, `ReportAggregator`, `Trends`/`Goals`, `Heatmap`/`UseStats`, `Period`, `Exports` (texte, PDF paginé, CSV), `LearnInsights`, `TabLock`, `LiveReport`, `TvJournal`, `SessionTracker`). Android : `ParentalTab.kt`, `ParentalReportsUi.kt`, `ParentalCharts.kt`, `ParentalExport.kt`, `ParentalData.kt` (module `:sender`).

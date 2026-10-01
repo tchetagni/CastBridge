@@ -51,7 +51,7 @@ private fun savedAddress(ctx: Context) = ctx.getSharedPreferences("castbridge_pa
 
 /** The TV of the home tab (found on the network), or an address typed by hand (emulators, « ma TV n'apparaît pas »). */
 @Composable
-private fun ParentalTvPicker(ctx: Context, content: @Composable (ParentalClient) -> Unit) {
+internal fun ParentalTvPicker(ctx: Context, content: @Composable (ParentalClient) -> Unit) {
     // The TV this phone is already linked to (plug and play): its address and token, no discovery and no PIN to type.
     val link by TvLinkManager.state.collectAsState()
     (link as? LinkUi.Connected)?.session?.let { s ->
@@ -106,7 +106,7 @@ internal fun why(e: Throwable): String = when {
 }
 
 @Composable
-private fun ParentalPanel(client: ParentalClient) {
+internal fun ParentalPanel(client: ParentalClient, initialPin: String? = null) {
     val scope = rememberCoroutineScope()
     var status by remember(client) { mutableStateOf<Map<String, Any?>?>(null) }
     var msg by remember(client) { mutableStateOf<String?>(null) }
@@ -119,6 +119,8 @@ private fun ParentalPanel(client: ParentalClient) {
 
     fun reload() = scope.launch { io { client.status() }.onSuccess { status = it; msg = null }.onFailure { msg = why(it) } }
     LaunchedEffect(client) { reload() }
+    // opened from the Parental tab: the PIN of the session is used, the parent is not asked twice
+    LaunchedEffect(client) { if (initialPin != null) io { client.load(initialPin) }.onSuccess { loaded = it; pin = initialPin } }
 
     msg?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
     val s = status ?: run { if (msg == null) LinearProgressIndicator(Modifier.fillMaxWidth()); return }
@@ -162,7 +164,7 @@ private fun ParentalPanel(client: ParentalClient) {
 }
 
 @Composable
-private fun PinInput(v: String, onV: (String) -> Unit, label: String) =
+internal fun PinInput(v: String, onV: (String) -> Unit, label: String) =
     OutlinedTextField(v, { onV(it.filter { c -> c.isDigit() }.take(ParentalPins.MAX)) }, Modifier.fillMaxWidth(), singleLine = true, label = { Text(label) },
         visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
 
