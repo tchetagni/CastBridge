@@ -1,0 +1,538 @@
+{
+ "chapter": "cm2-english-questions",
+ "lessons": [
+  {
+   "id": "cm2-english-questions-fiche",
+   "title": "Poser des questions et y répondre",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Anglais : questions et réponses courtes (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Poser une question avec be, do et does.",
+    "Utiliser les mots interrogatifs.",
+    "Donner une réponse courte."
+   ],
+   "prerequisites": [
+    "cm2-english-present-fiche"
+   ],
+   "exercises": [
+    "cm2-english-questions-01",
+    "cm2-english-questions-02",
+    "cm2-english-questions-03",
+    "cm2-english-questions-04",
+    "cm2-english-questions-05",
+    "cm2-english-questions-06"
+   ],
+   "selfCheck": [
+    "cm2-english-questions-q1",
+    "cm2-english-questions-q2",
+    "cm2-english-questions-q3",
+    "cm2-english-questions-q4",
+    "cm2-english-questions-q5"
+   ],
+   "reviewNotes": [
+    "Anglais d'initiation en classe francophone : vérifier le niveau attendu au CM2 et le vocabulaire grammatical utilisé (français et anglais).",
+    "Vérifier la présentation des mots interrogatifs au CM2."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les mots interrogatifs",
+     "md": "**Who** (qui) · **What** (quoi) · **Where** (où) · **When** (quand) · **Why** (pourquoi) · **How** (comment) · **How many** (combien, avec des noms qu'on compte) · **How much** (combien, pour le prix)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 280,
+        "y": 22,
+        "text": "Les mots pour poser une question",
+        "size": 17,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 14,
+        "y": 44,
+        "w": 166,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 97,
+        "y": 70,
+        "text": "Who?",
+        "size": 18,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 97,
+        "y": 92,
+        "text": "qui",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 196,
+        "y": 44,
+        "w": 166,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 279,
+        "y": 70,
+        "text": "What?",
+        "size": 18,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 279,
+        "y": 92,
+        "text": "quoi",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 378,
+        "y": 44,
+        "w": 166,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 461,
+        "y": 70,
+        "text": "Where?",
+        "size": 18,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 461,
+        "y": 92,
+        "text": "où",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 14,
+        "y": 118,
+        "w": 166,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 97,
+        "y": 144,
+        "text": "When?",
+        "size": 18,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 97,
+        "y": 166,
+        "text": "quand",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 196,
+        "y": 118,
+        "w": 166,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 279,
+        "y": 144,
+        "text": "Why?",
+        "size": 18,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 279,
+        "y": 166,
+        "text": "pourquoi",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 378,
+        "y": 118,
+        "w": 166,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 461,
+        "y": 144,
+        "text": "How?",
+        "size": 18,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 461,
+        "y": 166,
+        "text": "comment",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les mots interrogatifs.",
+     "alt": "Six cases : Who? (qui), What? (quoi), Where? (où), When? (quand), Why? (pourquoi), How? (comment)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les questions avec be",
+     "md": "On **inverse** le sujet et be.\n\n- She **is** ten. → **Is** she ten? — Yes, she is.\n- They **are** in class. → **Are** they in class? — No, they aren't."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : question avec be",
+     "statement": "Pose la question : « Amina is in Bamenda. »",
+     "steps": [
+      {
+       "md": "On met **is** au début : Is Amina…"
+      },
+      {
+       "md": "Question complète : **Is Amina in Bamenda?**"
+      }
+     ],
+     "answer": "**Is Amina in Bamenda?**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les questions au présent simple",
+     "md": "On utilise **Do** (I, you, we, they) ou **Does** (he, she, it) + sujet + verbe de **base**.\n\n- **Do** you like rice? — Yes, I **do**. / No, I **don't**.\n- **Does** she live in Douala? — Yes, she **does**. / No, she **doesn't**.\n- **Where do** you live? — I live in Kribi."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : poser la question",
+     "statement": "Pose la question : « Paul plays football on Saturday. »",
+     "steps": [
+      {
+       "md": "Paul = he : on utilise **Does**."
+      },
+      {
+       "md": "Le verbe revient à la forme de base : **play**."
+      }
+     ],
+     "answer": "**Does Paul play football on Saturday?**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « Does she likes tea? » est faux : après does, **pas de -s** : Does she like tea?\n- « Where you live? » est faux : il faut **do** : Where do you live?\n- Répondre « Yes, she likes » : la réponse courte est **Yes, she does**."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-english-questions-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "How old are you? — I am ten. How much is it? — It is 500 FCFA.",
+      "À l'oral, la voix monte à la fin d'une question fermée (oui / non)."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle question est correcte ?",
+   "choices": [
+    "Does Ngono like fish?",
+    "Does Ngono likes fish?",
+    "Do Ngono like fish?",
+    "Ngono does like fish?"
+   ],
+   "answer": 0,
+   "explanation": "Does + sujet + verbe de base.",
+   "method": "Does pour he/she/it.",
+   "id": "cm2-english-questions-01",
+   "chapter": "cm2-english-questions",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-english-questions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Is they in class? » est correct.",
+   "answer": false,
+   "explanation": "On dit **Are they in class?**",
+   "id": "cm2-english-questions-02",
+   "chapter": "cm2-english-questions",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-english-questions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque mot interrogatif à sa signification.",
+   "pairs": [
+    [
+     "Where",
+     "où"
+    ],
+    [
+     "Why",
+     "pourquoi"
+    ],
+    [
+     "When",
+     "quand"
+    ],
+    [
+     "Who",
+     "qui"
+    ]
+   ],
+   "explanation": "Where = où ; Why = pourquoi ; When = quand ; Who = qui.",
+   "points": 2,
+   "id": "cm2-english-questions-03",
+   "chapter": "cm2-english-questions",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm2-english-questions-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« ___ do you live? — I live in Limbé. »",
+   "choices": [
+    "Who",
+    "When",
+    "Where",
+    "Why"
+   ],
+   "answer": 2,
+   "explanation": "La réponse donne un lieu : Where.",
+   "mistakes": [
+    "Confondre Where et When."
+   ],
+   "id": "cm2-english-questions-04",
+   "chapter": "cm2-english-questions",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-english-questions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris trois questions à poser à un nouvel ami (en anglais).",
+   "model": "What is your name? Where do you live? Do you like football?",
+   "rubric": [
+    "Trois questions.",
+    "Bonne structure (do/does/is/are).",
+    "Orthographe correcte."
+   ],
+   "explanation": "Utilise des mots interrogatifs et do/does.",
+   "points": 3,
+   "mistakes": [
+    "Oublier do/does."
+   ],
+   "id": "cm2-english-questions-05",
+   "chapter": "cm2-english-questions",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-english-questions-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Lis le dialogue : « — Do you live in Douala? — No, I don't. I live in Yaoundé. — Does your brother live in Yaoundé too? — Yes, he does. » Réponds aux questions.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Where does the speaker live?",
+     "choices": [
+      "In Douala",
+      "In Garoua",
+      "In Kribi",
+      "In Yaoundé"
+     ],
+     "answer": 3,
+     "explanation": "Il répond : « I live in Yaoundé. »",
+     "id": "cm2-english-questions-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Vrai ou faux : The brother lives in Yaoundé too.",
+     "answer": true,
+     "explanation": "« Yes, he does. »",
+     "id": "cm2-english-questions-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la bonne réponse courte à « Do you live in Douala? » ?",
+     "choices": [
+      "No, I doesn't.",
+      "No, I don't.",
+      "No, I am not.",
+      "No, I haven't."
+     ],
+     "answer": 1,
+     "explanation": "Do you…? → No, I don't.",
+     "id": "cm2-english-questions-06-c",
+     "points": 1
+    }
+   ],
+   "method": "Relis le dialogue et repère do / does.",
+   "id": "cm2-english-questions-06",
+   "chapter": "cm2-english-questions",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cm2-english-questions-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« ___ she a teacher? »",
+   "choices": [
+    "Does",
+    "Do",
+    "Is",
+    "Are"
+   ],
+   "answer": 2,
+   "explanation": "She + be : Is she…?",
+   "id": "cm2-english-questions-q1",
+   "chapter": "cm2-english-questions",
+   "tier": "autoeval",
+   "lesson": "cm2-english-questions-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« ___ they play football? »",
+   "choices": [
+    "Do",
+    "Does",
+    "Are",
+    "Is"
+   ],
+   "answer": 0,
+   "explanation": "They + do.",
+   "id": "cm2-english-questions-q2",
+   "chapter": "cm2-english-questions",
+   "tier": "autoeval",
+   "lesson": "cm2-english-questions-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« How ___ is it? — It's 500 FCFA. »",
+   "choices": [
+    "many",
+    "old",
+    "much",
+    "long"
+   ],
+   "answer": 2,
+   "explanation": "Pour le prix : How much.",
+   "id": "cm2-english-questions-q3",
+   "chapter": "cm2-english-questions",
+   "tier": "autoeval",
+   "lesson": "cm2-english-questions-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« ___ do you go to school? — At seven. »",
+   "choices": [
+    "When",
+    "Where",
+    "Who",
+    "Why"
+   ],
+   "answer": 0,
+   "explanation": "Heure : When.",
+   "id": "cm2-english-questions-q4",
+   "chapter": "cm2-english-questions",
+   "tier": "autoeval",
+   "lesson": "cm2-english-questions-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Réponds : « Does he like rice? » (oui)",
+   "choices": [
+    "Yes, he is.",
+    "Yes, he do.",
+    "Yes, he has.",
+    "Yes, he does."
+   ],
+   "answer": 3,
+   "explanation": "Does he…? → Yes, he does.",
+   "id": "cm2-english-questions-q5",
+   "chapter": "cm2-english-questions",
+   "tier": "autoeval",
+   "lesson": "cm2-english-questions-fiche",
+   "points": 1
+  }
+ ]
+}
