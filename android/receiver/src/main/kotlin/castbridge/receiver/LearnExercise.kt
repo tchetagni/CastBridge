@@ -29,6 +29,9 @@ class ExerciseView(
     private val round: Int = 0,
     private val onAnswer: (Answer, Mark) -> Unit,
     private val onContinue: () -> Unit,
+    /** « Signaler une erreur » (null = no button) and the beta mark ("bêta : non validé") of the exercise. */
+    private val onReport: ((Exercise) -> Unit)? = null,
+    private val mark: String? = null,
 ) {
     val view: LinearLayout = LinearLayout(st.act).apply { orientation = LinearLayout.VERTICAL }
     private val en = lang == "en"
@@ -63,6 +66,7 @@ class ExerciseView(
             col.addView(st.text(st.md(x.prompt), 24f, Color.WHITE), view.lp(bottom = st.px(8)))
             col.addView(st.text(t("Question ${part + 1} sur ${x.parts.size}", "Question ${part + 1} of ${x.parts.size}") + "  ·  " + pts(c.points), 20f, LearnStyle.ACCENT, true))
         }
+        mark?.let { col.addView(st.text("⚑ $it", 18f, LearnStyle.GOLD)) }
         col.addView(st.text(st.md(c.prompt), 28f, Color.WHITE, x.kind != ExerciseKind.PROBLEM), view.lp(bottom = st.px(8)))
         (c.tex ?: x.tex.takeIf { part == 0 && x.kind == ExerciseKind.PROBLEM })?.let { col.addView(FormulaView(st.act, it, st.px(34).toFloat()), view.lp()) }
         val fig = c.figure ?: x.figure
@@ -230,6 +234,7 @@ class ExerciseView(
             else { if (x.kind == ExerciseKind.PROBLEM && partAnswers.size >= x.parts.size) finishProblemAfterCorrection() else onContinue() }
         }
         box.addView(next, box.lp(-2, -2, top = st.px(8))); firstFocus = next
+        onReport?.let { rep -> box.addView(st.button(t("Signaler une erreur", "Report an error"), size = 19f) { rep(x) }, box.lp(-2, -2, top = st.px(6))) }
     }
 
     private var problemReported = false

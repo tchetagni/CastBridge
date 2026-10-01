@@ -209,7 +209,8 @@ class TvService : Service(), Device {
                 .then(castbridge.core.library.agent.TrashApi(registry, playing = { playerBridge.state().takeIf { it.state != "idle" }?.name }, library = library,
                     busy = { name -> server?.busyReason(name) }, folders = folderIndex, changed = { server?.changed() }))
                 .then(castbridge.core.tv.FoldersApi(folderIndex) { server?.libraryItems()?.map { it.name }?.toSet().orEmpty() })
-                .then(QuizHub.packApi(this)),   // question packs pushed by the phone (docs/QUIZ.md)
+                .then(QuizHub.packApi(this))   // question packs pushed by the phone (docs/QUIZ.md)
+                .then(castbridge.core.content.ContentFeedbackApi { TvConnect.feedback }),   // reports handed to the phone (docs/CONTENT-VALIDATION.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,

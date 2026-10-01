@@ -79,6 +79,10 @@ class PrefsStore(ctx: Context, name: String) : KeyValueStore {
 @SuppressLint("StaticFieldLeak")
 object PhoneConnect {
     private lateinit var app: Context
+    /** Content reports and per item usage totals (docs/CONTENT-VALIDATION.md); set by [init]. This phone uploads them, and those handed over by the TV. */
+    @Volatile var feedback: castbridge.core.content.ContentFeedback? = null; private set
+    /** Release channel set by the server for this phone ("beta" testers play content that is not validated yet). */
+    fun channel(): castbridge.core.content.Channel = castbridge.core.content.Channel.of(if (::state.isInitialized) state.channel else null)
     lateinit var state: ConnectState; private set
     lateinit var link: ServerLink; private set
     lateinit var agent: ConnectAgent; private set
@@ -103,12 +107,14 @@ object PhoneConnect {
         crashes = CrashStore(File(app.filesDir, "crashes"))
         updater = PhoneUpdater(app) { _version.value++ }
         val keys = UpdateKeys.PUBLIC_KEYS + listOf(BuildConfig.EXTRA_UPDATE_KEY).filter { it.isNotBlank() }
+        val fb = castbridge.core.content.ContentFeedback(File(app.filesDir, "content"), { castbridge.core.content.Channel.of(state.channel) }, { link.telemetry })
+        feedback = fb
         link = ServerLink(
             app = "phone",
             installed = ServerLink.Installed(versionCode, versionName, Build.SUPPORTED_ABIS.toList(), Build.VERSION.SDK_INT),
             state = state, facts = { PhoneFacts(app, state) }, salt = "castbridge-phone", routes = Routes(),
             queue = EventQueue(File(app.filesDir, "telemetry/events.jsonl")), crashes = crashes,
-            keys = keys, hooks = updater,
+            keys = keys, hooks = updater, feedback = fb,
         )
         agent = ConnectAgent(link)
     }

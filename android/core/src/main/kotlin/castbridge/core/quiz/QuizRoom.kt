@@ -337,6 +337,9 @@ class QuizRoom(
     /** The question on screen (Millionaire or Duel), or null. */
     fun currentQuestion(): Question? = synchronized(lock) { game?.question ?: duel?.question }
 
+    /** The TV host reports the question on screen (Millionaire or Duel). */
+    fun hostReport(reason: String): Boolean = synchronized(lock) { currentQuestion()?.let { reportAct(it.id, reason) == Act.OK } ?: false }
+
     /** [arg] = "reason" or "reason|short text" (reasons: castbridge.core.content.ReportReason keys). */
     private fun reportAct(questionId: String?, arg: String?): Act {
         val q = currentQuestion() ?: return Act.IGNORED

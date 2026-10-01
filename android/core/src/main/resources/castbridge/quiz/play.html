@@ -136,6 +136,20 @@ async function act(action, choice, arg) {
   busy = false;
 }
 
+// ---------- « Signaler une erreur » (docs/CONTENT-VALIDATION.md) ----------
+const REASONS = [["wrong_answer", "Réponse fausse"], ["ambiguous", "Question ambiguë"], ["language", "Faute de langue"],
+  ["out_of_scope", "Hors programme"], ["difficulty", "Trop facile ou trop difficile"], ["other", "Autre"]];
+function reportButton() {
+  return $("button", { class: "ghost", onclick: async () => {
+    const k = prompt("Signaler une erreur : pourquoi ?\n" + REASONS.map((r, i) => (i + 1) + " = " + r[1]).join("\n"));
+    if (k === null) return; const r = REASONS[parseInt(k, 10) - 1]; if (!r) return;
+    const n = (prompt("Précision (facultatif, sans donnée personnelle) :") || "").replace(/[|]/g, " ").slice(0, 200);
+    await act("report", null, r[0] + "|" + n); alert("Signalement transmis à la TV : merci !");
+  } }, "Signaler une erreur");
+}
+// the beta mark of a question that nobody validated yet ("bêta : non validé"), null on the stable channel
+const betaMark = q => q && q.mark ? $("p", { class: "muted center" }, "⚑ " + q.mark) : null;
+
 // ---------- screens ----------
 function renderJoin() {
   who.textContent = "";
@@ -223,7 +237,7 @@ function renderDuel(s) {
   const d = s.duel, q = d.question, head = $("div", { class: "row" }, $("span", { class: "pill" }, "Question " + (d.index + 1) + "/" + d.count), $("span", { class: "pill center" }, q.category), $("span", { class: "pill", id: "tsec", style: "text-align:right" }));
   if (d.phase === "QUESTION") {
     const mine = d.myAnswer;
-    return show(head, timerBar(), $("div", { class: "card q" }, fr(q.text)),
+    return show(head, timerBar(), betaMark(q), $("div", { class: "card q" }, fr(q.text)),
       answers(q, { selected: mine, disabled: mine !== null && mine !== undefined, onPick: i => act("answer", i) }),
       $("p", { class: "muted center" }, mine !== null && mine !== undefined ? "Réponse " + L[mine] + " envoyée ✓ — attendez les autres (" + d.answeredCount + "/" + s.players.length + ")" : "Touchez votre réponse : plus vous êtes rapide, plus vous gagnez de points."));
   }
@@ -231,7 +245,7 @@ function renderDuel(s) {
   if (d.phase === "REVEAL") return show(head,
     $("div", { class: "card center" }, o ? $("div", { class: "big " + (o.correct ? "ok" : "bad") }, o.correct ? "✓ +" + o.points : (d.myAnswer === null || d.myAnswer === undefined ? "⏱ Trop tard" : "✗ Raté")) : null,
       $("p", {}, "Bonne réponse : " + L[q.answer] + " — " + q.choices[q.answer]), $("p", { class: "muted" }, q.explanation || "")),
-    answers(q, { selected: d.myAnswer, answer: q.answer, disabled: true }));
+    answers(q, { selected: d.myAnswer, answer: q.answer, disabled: true }), betaMark(q), reportButton());
   const list = $("ul", { class: "pl" }, d.ranking.map(r => $("li", { class: s.me && r.id === s.me.id ? "me" : "" },
     $("span", {}, r.rank + ". " + r.name), $("span", {}, r.score + " pts" + (r.gained ? "  (+" + r.gained + ")" : "")))));
   if (d.phase === "BOARD") return show(head, $("h2", {}, "Classement"), me ? $("p", { class: "big" }, me.rank + (me.rank === 1 ? "er" : "e")) : null, list, $("p", { class: "muted center" }, "Question suivante dans un instant…"));
@@ -299,6 +313,7 @@ function renderCandidate(s, head, qcard) {
     if (g.phase === "REVEALED") {
       out.push($("div", { class: "card center" }, $("div", { class: "big " + (g.lastCorrect ? "ok" : "bad") }, g.lastCorrect ? "✓ " + (g.practice ? "Bonne réponse" : fcfa(g.ladder[g.index])) : (g.practice ? "✗ Raté" : "✗ Perdu")), $("p", { class: "muted" }, q.explanation || "")));
       out.push($("button", { class: "primary", onclick: () => act("next") }, (g.lastCorrect || g.practice) && g.index + 1 < g.levels ? "Question suivante" : "Voir le résultat"));
+      out.push(betaMark(q), reportButton());
     }
   }
   if (g.audience) out.push($("div", { class: "card" }, $("p", {}, "👥 Avis du public" + (g.audienceReal ? "" : " (simulé)") + " : " + g.audience.map((v, i) => L[i] + " " + v + " %").join(" · "))));

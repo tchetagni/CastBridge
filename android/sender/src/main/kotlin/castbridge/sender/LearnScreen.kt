@@ -142,10 +142,12 @@ private fun PhoneReader(pack: Pack, lesson: Lesson, onExercises: (String) -> Uni
             when (val p = deck.pages[page]) {
                 LessonDeck.Page.Intro -> {
                     Text("${lesson.minutes} min", color = MaterialTheme.colorScheme.primary)
+                    castbridge.core.content.PlayPolicy.mark(lesson, PhoneConnect.channel())?.let { Text("⚑ $it", color = MaterialTheme.colorScheme.tertiary) }
                     lesson.objectives.forEach { Text(md("- $it")) }
+                    ReportErrorButton { r, n -> PhoneReports.lesson(pack, lesson, r, n) }
                 }
                 is LessonDeck.Page.Content -> PhoneBlock(p.block, revealed)
-                is LessonDeck.Page.Exercise -> PhoneExercise(p.exercise, pack.lang) {}
+                is LessonDeck.Page.Exercise -> PhoneExercise(p.exercise, pack.lang, pack = pack) {}
                 LessonDeck.Page.End -> {
                     Text("Fiche terminée !", style = MaterialTheme.typography.headlineSmall)
                     if (lesson.exercises.isNotEmpty()) Button(onClick = { onExercises("graded") }, Modifier.fillMaxWidth()) { Text("Exercices de la fiche (${lesson.exercises.size})") }
@@ -260,19 +262,20 @@ private fun PhoneSeries(pack: Pack, items: List<Exercise>, done: () -> Unit) {
             return@Column
         }
         Text("${i + 1} / ${items.size}", color = MaterialTheme.colorScheme.primary)
-        key(items[i].id) { PhoneExercise(items[i], pack.lang, onNext = { i++ }) { if (it.correct) right++ } }
+        key(items[i].id) { PhoneExercise(items[i], pack.lang, onNext = { i++ }, pack = pack) { if (it.correct) right++ } }
     }
 }
 
 /** One exercise on the phone, corrected at once (problems: parts one after the other). */
 @Composable
-private fun PhoneExercise(x: Exercise, lang: String, onNext: (() -> Unit)? = null, onMark: (Mark) -> Unit) {
+private fun PhoneExercise(x: Exercise, lang: String, onNext: (() -> Unit)? = null, pack: Pack? = null, onMark: (Mark) -> Unit) {
     var part by remember(x.id) { mutableStateOf(0) }
     var mark by remember(x.id, part) { mutableStateOf<Mark?>(null) }
     var showModel by remember(x.id, part) { mutableStateOf(false) }
     var num by remember(x.id, part) { mutableStateOf("") }
     val q = if (x.kind == ExerciseKind.PROBLEM) x.parts[part] else x
     if (x.kind == ExerciseKind.PROBLEM) { Text(md(x.prompt)); Text("Question ${part + 1} / ${x.parts.size}", color = MaterialTheme.colorScheme.primary) }
+    castbridge.core.content.PlayPolicy.mark(x, PhoneConnect.channel())?.let { Text("⚑ $it", color = MaterialTheme.colorScheme.tertiary, style = MaterialTheme.typography.bodySmall) }
     Text(md(q.prompt), fontWeight = FontWeight.SemiBold)
     (q.figure ?: x.figure)?.let { PhoneFigure(it) }
     q.tex?.let { PhoneFormula(it) }
@@ -301,6 +304,7 @@ private fun PhoneExercise(x: Exercise, lang: String, onNext: (() -> Unit)? = nul
         (if (x.kind == ExerciseKind.PROBLEM) x else q).method?.let { Text(md("**Méthode :** $it"), style = MaterialTheme.typography.bodySmall) }
         val last = x.kind != ExerciseKind.PROBLEM || part >= x.parts.size - 1
         if (!last) Button(onClick = { part++ }) { Text("Question suivante") } else onNext?.let { Button(onClick = it) { Text("Continuer") } }
+        if (pack != null) ReportErrorButton { r, n -> PhoneReports.exercise(pack, x, r, n) }
     }
 }
 

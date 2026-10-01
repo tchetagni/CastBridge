@@ -81,7 +81,7 @@ object QuizHub {
 
     @Synchronized fun packManager(ctx: Context): QuizPackManager {
         val store = packStore(ctx)
-        return packManager ?: QuizPackManager(store, combined = { questionSource(ctx).bank() }, history = { historyBook(ctx).host },
+        return packManager ?: QuizPackManager(store, combined = { questionSource(ctx).bank().forChannel(TvConnect.channel()) }, history = { historyBook(ctx).host },
             onChanged = { questionSource(ctx).refresh() }, played = { historyBook(ctx).host.courses() }).also { packManager = it }
     }
 
@@ -108,7 +108,8 @@ object QuizHub {
     /** Opens a fresh room (new code), closing the previous one. */
     @Synchronized fun open(ctx: Context): QuizRoom {
         room?.close()
-        return QuizRoom(source(ctx).bank(), asked = asked, wallet = wallet, histories = historyBook(ctx)).also { room = it }
+        return QuizRoom(source(ctx).bank().forChannel(TvConnect.channel()), asked = asked, wallet = wallet, histories = historyBook(ctx))
+            .also { it.feedback = TvConnect.feedback; room = it }
     }
 
     @Synchronized fun close(r: QuizRoom?) {

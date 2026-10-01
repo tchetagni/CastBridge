@@ -53,6 +53,10 @@ object TvConnect {
     private const val TAG = "CastBridgeConnect"
     @Volatile var link: ServerLink? = null; private set
     @Volatile var agent: ConnectAgent? = null; private set
+    /** Content reports and per item usage totals (docs/CONTENT-VALIDATION.md); set by [init]. */
+    @Volatile var feedback: castbridge.core.content.ContentFeedback? = null; private set
+    /** Release channel set by the server for this TV ("beta" testers play content that is not validated yet). */
+    fun channel(): castbridge.core.content.Channel = castbridge.core.content.Channel.of(link?.state?.channel)
     private lateinit var app: Context
     private val main = Handler(Looper.getMainLooper())
     private val listeners = CopyOnWriteArrayList<() -> Unit>()
@@ -71,6 +75,8 @@ object TvConnect {
         val code = pi?.let { if (Build.VERSION.SDK_INT >= 28) it.longVersionCode.toInt() else it.versionCode } ?: 0
         val keys = (UpdateKeys.PUBLIC_KEYS + BuildConfig.EXTRA_UPDATE_KEY).filter { it.isNotBlank() }
         val quizFile = File(app.filesDir, "quiz/questions-cache.json")
+        val fb = castbridge.core.content.ContentFeedback(File(app.filesDir, "content"), { castbridge.core.content.Channel.of(state.channel) }, { link?.telemetry })
+        feedback = fb
         val l = ServerLink(
             app = "tv",
             installed = ServerLink.Installed(code, pi?.versionName, Build.SUPPORTED_ABIS.toList(), Build.VERSION.SDK_INT),
@@ -80,6 +86,7 @@ object TvConnect {
             queue = EventQueue(File(app.filesDir, "telemetry/events.jsonl")),
             crashes = CrashStore(File(app.filesDir, "crashes")),
             keys = keys, hooks = Hooks, quiz = QuizSync(QuizHub.cachedSource(app), quizFile), quizPacks = QuizHub.packHook(app, keys),
+            feedback = fb,
         )
         link = l
         agent = ConnectAgent(l)
