@@ -62,7 +62,8 @@ data class QuizPackInfo(
 object QuizPackFormat {
     const val MAX_ENTRY = 16L shl 20
     class PackError(message: String) : Exception(message)
-    class Content(val manifest: Map<String, Any?>, val bank: QuizBank)
+    /** [index] / [questionsRaw]: the optional `index.json` of a lot (docs/QUIZ.md, « Lots ») and the raw `questions.json`, for [QuizLotFormat]. */
+    class Content(val manifest: Map<String, Any?>, val bank: QuizBank, val index: ByteArray? = null, val questionsRaw: ByteArray? = null)
 
     fun sha256(file: File): String {
         val md = MessageDigest.getInstance("SHA-256")
@@ -76,7 +77,9 @@ object QuizPackFormat {
         try {
             ZipFile(file).use { z ->
                 val entries = z.entries().toList()
-                if (entries.size != 2 || entries.map { it.name }.toSet() != setOf("manifest.json", "questions.json")) throw PackError("contenu du pack inattendu")
+                val names = entries.map { it.name }.toSet()
+                if (entries.size != names.size || !names.containsAll(listOf("manifest.json", "questions.json")) || !setOf("manifest.json", "questions.json", "index.json").containsAll(names))
+                    throw PackError("contenu du pack inattendu")
                 fun text(name: String): ByteArray {
                     val e = z.getEntry(name) ?: throw PackError("$name manquant")
                     if (e.size > MAX_ENTRY) throw PackError("$name trop gros")
@@ -97,7 +100,13 @@ object QuizPackFormat {
                 bank.validate().firstOrNull()?.let { throw PackError("question invalide : $it") }
                 if (bank.all.any { !filter.matches(it) }) throw PackError("question hors parcours")
                 if ((manifest["questions"] as? Number)?.toInt() != bank.all.size) throw PackError("nombre de questions incohérent")
-                return Content(manifest, bank)
+                val index = if ("index.json" in names) text("index.json") else null
+                if (index != null) {
+                    @Suppress("UNCHECKED_CAST")
+                    val d = ((manifest["files"] as? Map<String, Any?>)?.get("index.json") as? Map<String, Any?>)?.get("sha256") as? String
+                    if (d == null || !d.equals(MessageDigest.getInstance("SHA-256").digest(index).joinToString("") { "%02x".format(it) }, ignoreCase = true)) throw PackError("empreinte de l'index invalide")
+                }
+                return Content(manifest, bank, index, if (index != null) qbytes else null)
             }
         } catch (e: PackError) { throw e } catch (e: Exception) { throw PackError("pack illisible : ${e.message ?: e.javaClass.simpleName}") }
     }
@@ -342,6 +351,8 @@ class PackedQuestionSource(
     private val base: QuestionSource,
     private val store: QuizPackStore?,
     private val driveDirs: () -> List<File> = { emptyList() },
+    /** Lots installed through the lots framework (docs/QUIZ.md, « Lots »): they come last, so a lot question replaces a bundled or pack one with the same id. */
+    private val lots: QuizLotConsumer? = null,
 ) : QuestionSource {
     private class Built(val bank: QuizBank, val baseBank: QuizBank, val drive: String)
     @Volatile private var built: Built? = null
@@ -363,7 +374,8 @@ class PackedQuestionSource(
     private fun driveFiles(): List<File> = runCatching { driveDirs() }.getOrDefault(emptyList()).flatMap { d ->
         d.listFiles { f -> f.isFile && f.name.endsWith(QUIZ_PACK_SUFFIX) }?.sortedBy { it.name }.orEmpty()
     }
-    private fun driveSignature() = driveFiles().joinToString("|") { "${it.path}:${it.length()}:${it.lastModified()}" }
+    private fun driveSignature() = driveFiles().joinToString("|") { "${it.path}:${it.length()}:${it.lastModified()}" } +
+        lots?.installed().orEmpty().joinToString("|", prefix = "#") { "${it.id.scope}:${it.sha256}" }
 
     private fun build(baseBank: QuizBank, sig: String): Built {
         var bank = baseBank
@@ -372,7 +384,9 @@ class PackedQuestionSource(
         for (f in driveFiles()) runCatching { QuizPackFormat.read(f).bank.all }.getOrNull()?.let { fromDrive += it }
         if (fromStore.isNotEmpty()) bank = bank.merge(QuizBank(fromStore))
         if (fromDrive.isNotEmpty()) bank = bank.merge(QuizBank(fromDrive))
-        origin = base.origin + (if (fromStore.isNotEmpty()) " + ${fromStore.size} questions de lots" else "") + (if (fromDrive.isNotEmpty()) " + ${fromDrive.size} de la clé USB" else "")
+        val fromLots = lots?.bank()?.all.orEmpty()
+        if (fromLots.isNotEmpty()) bank = bank.merge(QuizBank(fromLots))
+        origin = base.origin + (if (fromLots.isNotEmpty()) " + ${fromLots.size} questions des thèmes installés" else "") + (if (fromStore.isNotEmpty()) " + ${fromStore.size} questions de lots" else "") + (if (fromDrive.isNotEmpty()) " + ${fromDrive.size} de la clé USB" else "")
         return Built(bank, baseBank, sig)
     }
 }
