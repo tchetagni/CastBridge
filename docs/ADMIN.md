@@ -404,6 +404,8 @@ curl / app téléphone --TCP--> 127.0.0.1:18765 --RFCOMM « CastBridge API »-->
 
 **Ports locaux sur le téléphone** : SSH `127.0.0.1:2222`, API `127.0.0.1:18765`. L'API n'est **jamais** exposée sur le réseau (seul le SSH offre l'option « réseau local »).
 
+**Liaison partagée (v2).** Quatrième service `…0004` (« CastBridge API v2 ») : une seule liaison RFCOMM par téléphone, réutilisée par toutes les requêtes HTTP (trames, garde-vivant, réessais bornés) ; le service `…0003` reste pour les anciens téléphones. Détail : `docs/BT-PLUG-AND-PLAY.md`, « Liaison API persistante ».
+
 ### Qui peut ouvrir une liaison API (règle de confiance)
 1. L'appareil doit être **appairé** (Android l'affirme par le socket sécurisé ; l'adresse n'est jamais celle que l'appareil « annonce »).
 2. Et **soit** l'interrupteur de la TV « API par Bluetooth » est actif (**actif par défaut** : le service fichiers accepte déjà un appareil appairé avec le bon code ;

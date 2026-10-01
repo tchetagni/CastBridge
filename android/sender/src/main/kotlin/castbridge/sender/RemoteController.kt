@@ -166,7 +166,7 @@ object RemoteController {
             if (adapter == null || !adapter.isEnabled) throw IOException(if (wifiError != null) "TV injoignable par le Wi-Fi, et le Bluetooth du téléphone est éteint" else "Bluetooth éteint")
             val sock = adapter.getRemoteDevice(bt).createRfcommSocketToServiceRecord(UUID.fromString(BtProtocol.SERVICE_UUID))
             try {
-                sock.connect()
+                synchronized(castbridge.core.tunnel.BtConnectLock.of(bt)) { sock.connect() }      // never beside the API tunnel's connect() to the same TV
                 RemoteBt.handshake(sock.inputStream, sock.outputStream, pin)
                 return RemoteBt.Transport(sock.inputStream, sock.outputStream, sock)
             } catch (e: BtProtocol.Refused) {
