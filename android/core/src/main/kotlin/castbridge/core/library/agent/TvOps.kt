@@ -12,12 +12,15 @@ object TvSnapshot {
     @Suppress("UNCHECKED_CAST")
     fun read(client: TvClient, now: Long = System.currentTimeMillis()): LibrarySnapshot {
         val lib = JsonLite.obj(client.library())
+        // the TV evaluates the parental control (it owns the configuration) and says so per file; a TV that does not is treated as "all protected"
+        val aware = lib.bool("guard") == true
         val files = (lib["files"] as? List<Map<String, Any?>>).orEmpty().map { o ->
             FileRef(Origin.TV, o.str("name").orEmpty(), o.long("size") ?: 0, o.long("mtime") ?: 0, volumeId = o.str("volume").orEmpty(), folder = "",
                 durationMs = o.long("durationMs") ?: 0, watched = o.bool("watched") ?: false, playedAtMs = o.long("playedAt") ?: 0,
-                resumeMs = o.long("resumeMs") ?: 0, playing = o.bool("playing") ?: false)
+                resumeMs = o.long("resumeMs") ?: 0, playing = o.bool("playing") ?: false,
+                guarded = !aware || o.bool("protected") != false)
         }.filter { it.name.isNotEmpty() }
-        return LibrarySnapshot(Origin.TV, files, volumes(client), now)
+        return LibrarySnapshot(Origin.TV, files, volumes(client), now, childActive = lib.bool("childActive") == true, guardUnsupported = !aware)
     }
 
     @Suppress("UNCHECKED_CAST")

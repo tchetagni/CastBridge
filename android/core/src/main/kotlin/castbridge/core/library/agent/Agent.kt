@@ -25,9 +25,16 @@ class LibraryAgent(
 ) {
     private val labels = Labels(ctx.uiLang)
 
-    fun analyze(snapshot: LibrarySnapshot, progress: (Progress) -> Unit = {}, cancelled: () -> Boolean = { false }): Analysis {
-        val files = snapshot.files
+    fun analyze(snapshotIn: LibrarySnapshot, progress: (Progress) -> Unit = {}, cancelled: () -> Boolean = { false }): Analysis {
+        // ---- parental control first: a protected file is not even looked at (no name parsed, listed, fingerprinted or sent)
+        val childActive = snapshotIn.childActive || ctx.guard.childProfileActive
+        val (guarded, visible) = snapshotIn.files.partition { it.guarded || ctx.guard.isProtected(it) }
+        val protectedCount = snapshotIn.protectedCount + guarded.size
+        val files = visible
+        val snapshot = snapshotIn.copy(files = visible, childActive = childActive, protectedCount = protectedCount)
         val notes = ArrayList<String>()
+        if (snapshotIn.guardUnsupported) notes += TvGuardNotes.UNSUPPORTED
+        else if (protectedCount > 0) notes += TvGuardNotes.protectedNote(protectedCount)
         progress(Progress(Phase.UNDERSTAND, 0, files.size))
 
         // ---- understand every name (local, deterministic)
@@ -46,18 +53,17 @@ class LibraryAgent(
         for (f in files) {
             val p = parse(f)
             when {
-                ctx.guard.childProfileActive -> skipped += Skipped(f, "profil enfant actif : aucune modification")
-                ctx.guard.isProtected(f) -> skipped += Skipped(f, "protégé par le contrôle parental")
+                childActive -> skipped += Skipped(f, "profil enfant actif : aucune modification")
                 f.playing -> skipped += Skipped(f, "en cours de lecture")
                 learned?.isIgnored(p.titleKey) == true || learned?.isIgnored(f.name.lowercase()) == true -> skipped += Skipped(f, "vous avez demandé de ne plus y toucher")
                 else -> plannable += f
             }
         }
-        if (ctx.guard.childProfileActive) notes += "Un profil enfant est actif : l'assistant ne propose que des conseils, il ne modifie rien."
+        if (childActive) notes += "Un profil enfant est actif : l'assistant ne propose que des conseils, il ne modifie rien."
 
         // ---- optional model for the ambiguous names
         var aiUsed = 0
-        if (ctx.aiAllowed && model != null && !ctx.guard.childProfileActive && !cancelled()) {
+        if (ctx.aiAllowed && model != null && !childActive && !cancelled()) {
             val plannableSet = plannable.map { it.key }.toSet()
             val pool = files.filter { it.key in plannableSet }.map { f -> ItemInfo(f, parse(f), Proposal(f.name, f.folder, ""), Source.RULES) }
             val picks = AiApply.select(pool, ctx.guard)
@@ -107,7 +113,7 @@ class LibraryAgent(
         val plannableKeys = plannable.map { it.key }.toSet()
         val groups = Duplicates.find(plannable, ::parse, fps, removable, habits)
         val planItems = infos.filter { it.file.key in plannableKeys }
-        val plan = Planner(ctx, learned).plan(snapshot, planItems, groups, skipped).let { it.copy(notes = notes + it.notes) }
+        val plan = Planner(ctx, learned).plan(snapshot, planItems, groups, skipped).let { it.copy(notes = notes + it.notes, childActive = childActive) }
 
         val renames = plan.renames.count { it.toName != null }
         val dupExtras = groups.filter { it.kind != DupKind.VERSION }

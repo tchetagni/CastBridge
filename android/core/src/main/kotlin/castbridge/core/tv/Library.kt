@@ -29,6 +29,16 @@ interface LibraryMeta {
     fun deleted(name: String, size: Long) {}
 }
 
+/**
+ * What the parental control says about the library, for the phone's assistant: the names it must never touch, and whether a child
+ * profile is active. Evaluated on the TV (which owns the configuration); the answer is put in `/api/library`.
+ */
+interface ContentFlags {
+    fun childActive(): Boolean
+    /** Names (of [items]) protected from the assistant. */
+    fun protectedNames(items: List<LibraryItem>): Set<String>
+}
+
 /** Broad kind of a stored file, from its extension: the library shows videos and audio as cards, the rest under "Autres fichiers". */
 enum class MediaType {
     VIDEO, AUDIO, OTHER;

@@ -60,7 +60,8 @@ class ReceiverServer(
      * except on the routes [castbridge.core.trust.TvAuth.tokenMayCall] keeps for the PIN. Returns the phone's address, or null.
      */
     private val tokenAuth: ((String?) -> String?)? = null,
-) : NanoHTTPD(port) {
+    /** Parental control as seen by the phone's library assistant (`protected` per file, `childActive`); null = the TV does not say. */
+    private val contentFlags: ContentFlags? = null,) : NanoHTTPD(port) {
 
     /** Single internal folder (tests, simple setups). */
     constructor(
@@ -617,13 +618,17 @@ class ReceiverServer(
 
     fun libraryJson(): String {
         val sorted = libraryItems()
-        return sorted.joinToString(",", "{\"files\":[", "") { i ->
+        val flags = contentFlags
+        val prot = flags?.protectedNames(sorted).orEmpty()
+        val head = if (flags == null) "{\"files\":[" else "{\"guard\":true,\"childActive\":${flags.childActive()},\"files\":["
+        return sorted.joinToString(",", head, "") { i ->
             val m = i.meta
             "{\"name\":${q(i.name)},\"title\":${q(i.title)},\"size\":${i.size},\"mtime\":${i.mtime}," +
                 "\"volume\":${q(i.volumeId)},\"volumeLabel\":${q(i.volumeLabel)},\"kind\":${q(i.volumeKind.name.lowercase())}," +
                 "\"type\":${q(i.type.name.lowercase())}," +
                 "\"durationMs\":${m.durationMs},\"resumeMs\":${m.resumeMs},\"watched\":${m.watched},\"playedAt\":${m.playedAtMs}," +
-                "\"hasThumb\":${m.hasThumb},\"duplicate\":${i.duplicate},\"playing\":${i.playing}}"
+                "\"hasThumb\":${m.hasThumb},\"duplicate\":${i.duplicate},\"playing\":${i.playing}" +
+                (if (flags != null) ",\"protected\":${i.name in prot}" else "") + "}"
         } + "],\"count\":${sorted.size}}"
     }
 

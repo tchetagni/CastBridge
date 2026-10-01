@@ -201,7 +201,9 @@ class TvService : Service(), Device {
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
             publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
-            tokenAuth = trust::verifyToken)
+            tokenAuth = trust::verifyToken,
+            // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
+            contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine))
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {
