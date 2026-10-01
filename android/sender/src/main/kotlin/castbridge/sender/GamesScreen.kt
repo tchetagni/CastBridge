@@ -89,6 +89,7 @@ private fun GamesList(onOpen: (String) -> Unit) {
                 }
             }
         }
+        LotsEntry()      // « Données hors ligne » of Quiz and Apprendre (docs/LOTS.md)
     }
 }
 

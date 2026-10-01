@@ -206,6 +206,7 @@ object TvLinkManager {
                     saved.upsert(s.tv)
                     storeCredential(s)
                     _state.value = LinkUi.Connected(s)
+                    runCatching { LotsRuntime.requestDelivery(app) }     // deferred lots waiting for this TV go now (no-op when the queue is empty)
                     // No IP route: start the Bluetooth API gateway (visible app only) and plan again, so that the library, the remote,
                     // the parental settings... work over Bluetooth alone.
                     if (s.base == null && foreground && BtSshGatewayService.ensureApi(app, tv.address, s.tv.name)) { session = null; pause(2_000) }
