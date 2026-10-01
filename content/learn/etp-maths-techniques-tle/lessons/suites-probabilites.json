@@ -1,0 +1,817 @@
+{
+ "chapter": "etp-maths-techniques-tle-suites-probabilites",
+ "lessons": [
+  {
+   "id": "etp-maths-techniques-tle-suites",
+   "title": "Suites arithmétiques et géométriques",
+   "minutes": 45,
+   "programRef": "Programme de la classe de terminale, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une suite arithmétique ou géométrique.",
+    "Calculer un terme de rang n.",
+    "Calculer la somme de termes consécutifs.",
+    "Modéliser une épargne, une augmentation ou une dépréciation."
+   ],
+   "exercises": [
+    "etp-maths-techniques-tle-suites-01",
+    "etp-maths-techniques-tle-suites-02",
+    "etp-maths-techniques-tle-suites-03",
+    "etp-maths-techniques-tle-suites-04",
+    "etp-maths-techniques-tle-suites-05",
+    "etp-maths-techniques-tle-suites-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-tle-suites-q1",
+    "etp-maths-techniques-tle-suites-q2",
+    "etp-maths-techniques-tle-suites-q3",
+    "etp-maths-techniques-tle-suites-q4",
+    "etp-maths-techniques-tle-suites-q5"
+   ],
+   "reviewNotes": [
+    "Taux et montants fictifs (donnés par l'énoncé)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite arithmétique",
+     "md": "Une suite $(u_n)$ est **arithmétique** de **raison** $r$ si l'on passe d'un terme au suivant en **ajoutant** $r$ : $u_{n+1} = u_n + r$. Alors $u_n = u_0 + n\\,r$. Somme des $n + 1$ premiers termes $u_0, \\ldots, u_n$ :",
+     "tex": "S = (n + 1) \\times \\frac{u_0 + u_n}{2}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite géométrique",
+     "md": "Une suite $(u_n)$ est **géométrique** de **raison** $q$ si l'on passe d'un terme au suivant en **multipliant** par $q$ : $u_{n+1} = q\\,u_n$. Alors $u_n = u_0\\,q^n$. Pour $q \\neq 1$, somme de $u_0, \\ldots, u_n$ :",
+     "tex": "S = u_0 \\times \\frac{1 - q^{n+1}}{1 - q}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reconnaître et interpréter",
+     "md": "- Variation **constante en valeur** (ajouter 5 000 chaque année) : arithmétique.\n- Variation **en pourcentage** (+ 5 % par an) : géométrique de raison $q = 1 + \\text{taux}$ ; baisse de 10 % : $q = 0{,}9$.\n- Géométrique avec $q > 1$ : croissance ; $0 < q < 1$ : décroissance."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "valeur",
+      "bars": [
+       {
+        "label": "u0",
+        "value": 100.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "u1",
+        "value": 110.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "u2",
+        "value": 121.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "u3",
+        "value": 133.1,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "u4",
+        "value": 146.4,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "u5",
+        "value": 161.1,
+        "color": [
+         "blue"
+        ]
+       }
+      ]
+     },
+     "caption": "Premiers termes de la suite géométrique u₀ = 100, q = 1,1.",
+     "alt": "Diagramme en barres de six termes : 100 ; 110 ; 121 ; 133,1 ; 146,4 ; 161,1. Chaque barre est 1,1 fois la précédente."
+    },
+    {
+     "type": "example",
+     "title": "Arithmétique",
+     "statement": "$u_0 = 3$ et $r = 4$. Calculer $u_{10}$ et la somme $u_0 + \\ldots + u_{10}$.",
+     "steps": [
+      {
+       "md": "Terme général.",
+       "tex": "u_{10} = 3 + 10 \\times 4 = 43"
+      },
+      {
+       "md": "11 termes (de $u_0$ à $u_{10}$).",
+       "tex": "S = 11 \\times \\frac{3 + 43}{2} = 253"
+      }
+     ],
+     "answer": "**u₁₀ = 43 ; S = 253.**"
+    },
+    {
+     "type": "example",
+     "title": "Géométrique",
+     "statement": "$u_0 = 100$ et $q = 1{,}1$. Calculer $u_5$ et la somme de $u_0$ à $u_4$.",
+     "steps": [
+      {
+       "md": "Terme général.",
+       "tex": "u_5 = 100 \\times 1,1^5 = 161,051"
+      },
+      {
+       "md": "Somme de 5 termes.",
+       "tex": "S = 100 \\times \\frac{1 - 1,1^5}{1 - 1,1} = 610,510"
+      }
+     ],
+     "answer": "**u₅ = 161,051 ; S = 610,510.**"
+    },
+    {
+     "type": "example",
+     "title": "Épargne",
+     "statement": "On place 500 000 FCFA à intérêts composés au taux supposé de 5 % par an (donnée fictive). Quel capital après 3 ans ?",
+     "steps": [
+      {
+       "md": "Chaque année, le capital est multiplié par $q = 1 + 0{,}05 = 1{,}05$ : suite géométrique, $u_0 = 500\\,000$.",
+       "tex": "q = 1,05"
+      },
+      {
+       "md": "Après 3 ans.",
+       "tex": "u_3 = 500\\,000 \\times 1,05^3 = 578 812,5"
+      }
+     ],
+     "answer": "**≈ 578 813 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre le nombre de termes ($n + 1$ de $u_0$ à $u_n$) et le rang $n$ dans la somme.\n- Prendre $q = 0{,}05$ pour une hausse de 5 % : c'est $q = 1{,}05$.\n- Additionner la raison d'une suite géométrique (ou multiplier celle d'une arithmétique).\n- Utiliser la formule de somme géométrique avec $q = 1$ (le dénominateur serait nul)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour une suite géométrique avec $|q| < 1$, les termes se rapprochent de 0 quand $n$ grandit.",
+      "On peut aussi numéroter à partir de $u_1$ : la formule devient alors $u_n = u_1 + (n-1)r$."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-tle-suites-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites",
+   "title": "Probabilités élémentaires et dénombrement",
+   "minutes": 45,
+   "programRef": "Programme de la classe de terminale, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une probabilité dans une situation d'équiprobabilité.",
+    "Utiliser le principe multiplicatif, les permutations et les combinaisons.",
+    "Utiliser l'événement contraire et la formule de la réunion.",
+    "Résoudre un problème de tirage simple."
+   ],
+   "exercises": [
+    "etp-maths-techniques-tle-probabilites-01",
+    "etp-maths-techniques-tle-probabilites-02",
+    "etp-maths-techniques-tle-probabilites-03",
+    "etp-maths-techniques-tle-probabilites-04",
+    "etp-maths-techniques-tle-probabilites-05",
+    "etp-maths-techniques-tle-probabilites-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-tle-probabilites-q1",
+    "etp-maths-techniques-tle-probabilites-q2",
+    "etp-maths-techniques-tle-probabilites-q3",
+    "etp-maths-techniques-tle-probabilites-q4",
+    "etp-maths-techniques-tle-probabilites-q5"
+   ],
+   "reviewNotes": [
+    "Hors périmètre : probabilités conditionnelles, lois binomiale et normale.",
+    "Contextes fictifs (lots de pièces, élection de délégués)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "Une **expérience aléatoire** a plusieurs issues possibles ; l'ensemble de toutes les issues est l'**univers** $\\Omega$. Un **événement** $A$ est une partie de $\\Omega$. Quand toutes les issues sont **équiprobables** :",
+     "tex": "P(A) = \\frac{\\text{nombre d'issues favorables}}{\\text{nombre d'issues possibles}}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Règles de calcul",
+     "md": "- $0 \\leq P(A) \\leq 1$ ; $P(\\Omega) = 1$.\n- Événement contraire : $P(\\overline{A}) = 1 - P(A)$.\n- Réunion : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.\n- $A$ et $B$ **incompatibles** ($A \\cap B$ vide) : $P(A \\cup B) = P(A) + P(B)$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Dénombrer",
+     "md": "- **Principe multiplicatif** : $n_1$ choix, puis $n_2$ choix, etc. : on multiplie $n_1 \\times n_2 \\times \\cdots$.\n- **Permutations** : ranger $n$ objets distincts dans un ordre : $n! = n \\times (n-1) \\times \\cdots \\times 1$.\n- **Combinaisons** : choisir $k$ objets parmi $n$, sans ordre :",
+     "tex": "C_n^k = \\frac{n!}{k!\\,(n - k)!}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 60,
+        "w": 90,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 87.25,
+        "text": "Choix 1",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 60,
+        "w": 90,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 87.25,
+        "text": "Choix 2",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 60,
+        "w": 90,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 87.25,
+        "text": "Choix 3",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 82,
+        "text": "×",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 82,
+        "text": "×",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 140,
+        "text": "nombre total = n1 × n2 × n3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Principe multiplicatif : on multiplie le nombre de choix à chaque étape.",
+     "alt": "Trois rectangles Choix 1, Choix 2 et Choix 3 séparés par des signes de multiplication, avec la légende : nombre total = n1 × n2 × n3."
+    },
+    {
+     "type": "example",
+     "title": "Un code",
+     "statement": "Un code est formé de 4 chiffres (0 à 9, répétitions permises). Combien de codes ? Quelle probabilité de deviner au hasard ?",
+     "steps": [
+      {
+       "md": "Principe multiplicatif : 10 choix pour chaque chiffre.",
+       "tex": "10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000"
+      },
+      {
+       "md": "Un seul code correct.",
+       "tex": "P = \\frac{1}{10\\,000} = 0,0001"
+      }
+     ],
+     "answer": "**10 000 codes ; probabilité 1/10 000 = 0,0001.**"
+    },
+    {
+     "type": "example",
+     "title": "Choisir une délégation",
+     "statement": "Dans une classe de 8 élèves, on choisit 3 délégués (sans ordre). Combien de choix ? Et si on désigne président, secrétaire, trésorier (ordre important) ?",
+     "steps": [
+      {
+       "md": "Sans ordre : combinaisons.",
+       "tex": "C_8^3 = \\frac{8!}{3!\\,5!} = \\frac{8 \\times 7 \\times 6}{3 \\times 2 \\times 1} = 56"
+      },
+      {
+       "md": "Avec ordre : $8 \\times 7 \\times 6$ ; on retrouve aussi $3! \\times C_8^3$.",
+       "tex": "8 \\times 7 \\times 6 = 336"
+      }
+     ],
+     "answer": "**56 délégations ; 336 bureaux ordonnés.**"
+    },
+    {
+     "type": "example",
+     "title": "Tirage dans un lot",
+     "statement": "Un lot de 10 pièces contient 3 pièces défectueuses. On en prélève 2 au hasard. Probabilité qu'aucune ne soit défectueuse ?",
+     "steps": [
+      {
+       "md": "Nombre de tirages possibles.",
+       "tex": "C_{10}^2 = \\frac{10 \\times 9}{2} = 45"
+      },
+      {
+       "md": "Tirages sans pièce défectueuse : 2 parmi les 7 bonnes.",
+       "tex": "C_7^2 = 21"
+      },
+      {
+       "md": "Probabilité.",
+       "tex": "P = \\frac{21}{45} = \\frac{7}{15} \\approx 0,467"
+      }
+     ],
+     "answer": "**P = 7/15 ≈ 0,467.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre combinaison (sans ordre) et arrangement (avec ordre).\n- Additionner au lieu de multiplier dans le principe multiplicatif.\n- Appliquer $P = \\text{favorables}/\\text{possibles}$ quand les issues ne sont pas équiprobables.\n- Oublier de soustraire $P(A \\cap B)$ dans la formule de la réunion."
+    },
+    {
+     "type": "more",
+     "items": [
+      "$C_n^k = C_n^{n-k}$ et $C_n^0 = C_n^n = 1$ : utile pour simplifier les calculs.",
+      "Les probabilités conditionnelles et la loi binomiale seront vues ensuite ; elles généralisent ces notions."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-tle-probabilites-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-maths-techniques-tle-suites-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "Suite arithmétique : $u_0 = 5$, $r = 3$. Calculer $u_8$.",
+   "explanation": "$u_8 = 5 + 8 \\times 3 = 29$.",
+   "source": "Exercice original",
+   "answer": 29,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "Suite géométrique : $u_0 = 2$, $q = 3$. Calculer $u_4$.",
+   "explanation": "$u_4 = 2 \\times 3^4 = 2 \\times 81 = 162$.",
+   "source": "Exercice original",
+   "answer": 162,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "Une augmentation de 8 % par an correspond à une raison :",
+   "explanation": "$q = 1 + 0{,}08 = 1{,}08$.",
+   "source": "Exercice original",
+   "choices": [
+    "0,08",
+    "1,8",
+    "1,08",
+    "8"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "Somme des 10 premiers entiers non nuls, $1 + 2 + \\ldots + 10$ (suite arithmétique).",
+   "explanation": "Dix termes, premier 1, dernier 10 : $10 \\times (1 + 10)/2 = 55$.",
+   "source": "Exercice original",
+   "answer": 55.0,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "La suite 2, 6, 18, 54, … est géométrique de raison 3.",
+   "explanation": "$6/2 = 18/6 = 54/18 = 3$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "Un employé (cas fictif) a un salaire mensuel initial de 120 000 FCFA, augmenté de 5 000 FCFA chaque année. Par ailleurs, une machine achetée 2 000 000 FCFA perd 10 % de sa valeur chaque année.",
+   "method": "Identifier le type de suite avant d'appliquer la formule.",
+   "mistakes": [
+    "Utiliser q = 0,1 pour une baisse de 10 %."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-tle-suites-06-a",
+     "points": 1,
+     "prompt": "La suite des salaires annuels est :",
+     "explanation": "On ajoute une valeur fixe chaque année : arithmétique, $r = 5\\,000$.",
+     "kind": "mcq",
+     "choices": [
+      "géométrique de raison 5 000",
+      "arithmétique de raison 5 000",
+      "arithmétique de raison 1,05",
+      "constante"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-maths-techniques-tle-suites-06-b",
+     "points": 1,
+     "prompt": "Salaire mensuel après 10 ans (FCFA).",
+     "explanation": "$120\\,000 + 10 \\times 5\\,000 = 170 000$.",
+     "kind": "numeric",
+     "answer": 170000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-techniques-tle-suites-06-c",
+     "points": 1,
+     "prompt": "Somme des 11 salaires mensuels $u_0$ à $u_{10}$ (FCFA).",
+     "explanation": "$11 \\times (120\\,000 + 170 000)/2 = 1 595 000$.",
+     "kind": "numeric",
+     "answer": 1595000.0,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-techniques-tle-suites-06-d",
+     "points": 1,
+     "prompt": "Valeur de la machine après 3 ans (FCFA).",
+     "explanation": "$q = 0{,}9$ ; $2\\,000\\,000 \\times 0{,}9^3 = 1 458 000$ FCFA.",
+     "kind": "numeric",
+     "answer": 1458000.0000000002,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "Dans une suite arithmétique, on passe d'un terme au suivant en :",
+   "choices": [
+    "multipliant",
+    "ajoutant un nombre fixe",
+    "élevant au carré",
+    "divisant par n"
+   ],
+   "answer": 1,
+   "explanation": "On ajoute la raison."
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "$u_n = 4 \\times 2^n$ est :",
+   "choices": [
+    "arithmétique",
+    "géométrique de raison 2",
+    "géométrique de raison 4",
+    "constante"
+   ],
+   "answer": 1,
+   "explanation": "$q = 2$, $u_0 = 4$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "Une baisse de 20 % correspond à $q$ =",
+   "choices": [
+    "0,2",
+    "1,2",
+    "0,8",
+    "−0,2"
+   ],
+   "answer": 2,
+   "explanation": "$q = 1 - 0{,}2 = 0{,}8$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "Somme de $u_0 = 2$ à $u_{3} = 11$ (arithmétique, 4 termes) :",
+   "choices": [
+    "26",
+    "13",
+    "52",
+    "24"
+   ],
+   "answer": 0,
+   "explanation": "$4 \\times (2+11)/2 = 26$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-suites-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-suites",
+   "prompt": "Suite géométrique $q = 1$ : les termes sont :",
+   "choices": [
+    "tous égaux",
+    "croissants",
+    "décroissants",
+    "alternés"
+   ],
+   "answer": 0,
+   "explanation": "Multiplier par 1 ne change rien."
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "On lance un dé équilibré à 6 faces. Quelle est la probabilité d'obtenir un nombre pair (arrondie au centième) ?",
+   "explanation": "Issues favorables : 2, 4, 6 ; $3/6 = 0{,}5$.",
+   "source": "Exercice original",
+   "answer": 0.5,
+   "tolerance": 0.001
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "Combien d'ordres de passage différents pour 4 candidats ?",
+   "explanation": "$4! = 4 \\times 3 \\times 2 \\times 1 = 24$.",
+   "source": "Exercice original",
+   "answer": 24,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "Si $P(A) = 0{,}3$, alors $P(\\overline{A})$ vaut :",
+   "explanation": "$1 - 0{,}3 = 0{,}7$.",
+   "source": "Exercice original",
+   "choices": [
+    "0,3",
+    "0,7",
+    "1,3",
+    "−0,3"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "Combien de façons de choisir 2 élèves parmi 6 ?",
+   "explanation": "$C_6^2 = 6 \\times 5 / 2 = 15$.",
+   "source": "Exercice original",
+   "answer": 15,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "Un restaurant propose 4 plats et 3 desserts. Combien de menus (1 plat + 1 dessert) ?",
+   "explanation": "Principe multiplicatif : $4 \\times 3 = 12$.",
+   "source": "Exercice original",
+   "answer": 12,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "Un lot de 12 ampoules contient 4 ampoules défectueuses. On en choisit 3 au hasard, simultanément.",
+   "method": "Compter les cas favorables avec des combinaisons, puis diviser ; utiliser l'événement contraire pour « au moins un ».",
+   "mistakes": [
+    "Compter les tirages avec ordre au numérateur et sans ordre au dénominateur."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-tle-probabilites-06-a",
+     "points": 1,
+     "prompt": "Nombre de tirages possibles.",
+     "explanation": "$C_{12}^3 = 12 \\times 11 \\times 10 / 6 = 220$.",
+     "kind": "numeric",
+     "answer": 220,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-maths-techniques-tle-probabilites-06-b",
+     "points": 1,
+     "prompt": "Probabilité qu'aucune ne soit défectueuse (arrondie au millième).",
+     "explanation": "$C_8^3 / C_{12}^3 = 56/220 \\approx 0,255$.",
+     "kind": "numeric",
+     "answer": 0.2545454545454545,
+     "tolerance": 0.001
+    },
+    {
+     "id": "etp-maths-techniques-tle-probabilites-06-c",
+     "points": 1,
+     "prompt": "Probabilité qu'exactement une soit défectueuse (arrondie au millième).",
+     "explanation": "1 défectueuse parmi 4 et 2 bonnes parmi 8 : $4 \\times C_8^2 = 4 \\times 28 = 112$ ; $112/220 \\approx 0,509$.",
+     "kind": "numeric",
+     "answer": 0.509090909090909,
+     "tolerance": 0.001
+    },
+    {
+     "id": "etp-maths-techniques-tle-probabilites-06-d",
+     "points": 1,
+     "prompt": "Probabilité d'avoir au moins une ampoule défectueuse (arrondie au millième).",
+     "explanation": "Événement contraire de « aucune » : $1 - 0,255 \\approx 0,745$.",
+     "kind": "numeric",
+     "answer": 0.7454545454545455,
+     "tolerance": 0.001
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "$5!$ vaut :",
+   "choices": [
+    "25",
+    "60",
+    "120",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "$5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "$C_5^2$ vaut :",
+   "choices": [
+    "10",
+    "20",
+    "7",
+    "25"
+   ],
+   "answer": 0,
+   "explanation": "$5 \\times 4 / 2 = 10$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "Pour deux événements incompatibles A et B :",
+   "choices": [
+    "$P(A \\cup B) = P(A) \\times P(B)$",
+    "$P(A \\cup B) = P(A) + P(B)$",
+    "$P(A \\cup B) = 0$",
+    "$P(A) = P(B)$"
+   ],
+   "answer": 1,
+   "explanation": "Réunion d'événements incompatibles : on additionne."
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "Probabilité de tirer un as dans un jeu de 52 cartes (4 as) :",
+   "choices": [
+    "1/4",
+    "1/13",
+    "1/52",
+    "4/13"
+   ],
+   "answer": 1,
+   "explanation": "$4/52 = 1/13$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-probabilites-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-probabilites",
+   "prompt": "Une probabilité est toujours :",
+   "choices": [
+    "un entier",
+    "un nombre entre 0 et 1",
+    "négative",
+    "supérieure à 1"
+   ],
+   "answer": 1,
+   "explanation": "$0 \\leq P \\leq 1$."
+  }
+ ]
+}

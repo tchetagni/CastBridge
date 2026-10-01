@@ -1,0 +1,404 @@
+{
+ "chapter": "sup-l1-statistiques-descriptives-series-doubles",
+ "lessons": [
+  {
+   "id": "sup-l1-statistiques-descriptives-regression",
+   "title": "Séries doubles : covariance, corrélation et régression",
+   "minutes": 55,
+   "programRef": "Statistiques descriptives de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Représenter un nuage de points et le point moyen.",
+    "Calculer la covariance et le coefficient de corrélation linéaire.",
+    "Déterminer la droite de régression de $y$ en $x$ par les moindres carrés.",
+    "Interpréter pente, ordonnée à l'origine et limites d'une prévision."
+   ],
+   "prerequisites": [
+    "sup-l1-statistiques-descriptives-dispersion"
+   ],
+   "exercises": [
+    "sup-l1-statistiques-descriptives-regression-01",
+    "sup-l1-statistiques-descriptives-regression-02",
+    "sup-l1-statistiques-descriptives-regression-03",
+    "sup-l1-statistiques-descriptives-regression-04",
+    "sup-l1-statistiques-descriptives-regression-05",
+    "sup-l1-statistiques-descriptives-regression-06"
+   ],
+   "selfCheck": [
+    "sup-l1-statistiques-descriptives-regression-q1",
+    "sup-l1-statistiques-descriptives-regression-q2",
+    "sup-l1-statistiques-descriptives-regression-q3",
+    "sup-l1-statistiques-descriptives-regression-q4",
+    "sup-l1-statistiques-descriptives-regression-q5"
+   ],
+   "reviewNotes": [
+    "Les formules sont données avec la convention « division par $n$ » ; la corrélation ne dépend pas de ce choix.",
+    "Données fictives ; l'interprétation causale (corrélation ≠ causalité) est à souligner par l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Série double et nuage",
+     "md": "Une **série double** donne, pour $n$ individus, deux caractères quantitatifs $(x_i,y_i)$. Le **nuage de points** les représente dans un repère ; le **point moyen** est $G(\\bar{x},\\bar{y})$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Covariance",
+     "md": "La **covariance** est $\\text{cov}(x,y)=\\frac{1}{n}\\sum (x_i-\\bar{x})(y_i-\\bar{y})=\\overline{xy}-\\bar{x}\\,\\bar{y}$. Elle est positive si $x$ et $y$ évoluent plutôt dans le même sens, négative sinon.",
+     "tex": "\\text{cov}(x,y)=\\overline{xy}-\\bar{x}\\,\\bar{y}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Corrélation linéaire",
+     "md": "Le **coefficient de corrélation linéaire** est $r=\\frac{\\text{cov}(x,y)}{\\sigma_{x}\\,\\sigma_{y}}$. On a toujours $-1≤r≤1$. $|r|$ proche de 1 : points presque alignés ; $r$ proche de 0 : pas de lien **linéaire**. Une forte corrélation **ne prouve pas** une relation de cause à effet.",
+     "tex": "r=\\frac{\\text{cov}(x,y)}{\\sigma_{x}\\,\\sigma_{y}}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Droite de régression (moindres carrés)",
+     "md": "La droite de régression de $y$ en $x$ est $y=a\\,x+b$ avec $a=\\frac{\\text{cov}(x,y)}{V(x)}$ et $b=\\bar{y}-a\\,\\bar{x}$. Elle **passe par le point moyen** $G$ et minimise la somme des carrés des écarts verticaux $(y_i-ax_i-b)^{2}$.",
+     "tex": "a=\\frac{\\text{cov}(x,y)}{V(x)}\\,\\, b=\\bar{y}-a\\bar{x}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 270,
+      "xmin": 0,
+      "xmax": 8,
+      "ymin": 0,
+      "ymax": 12,
+      "grid": 1,
+      "xlabel": "x : publicité (milliers de FCFA)",
+      "ylabel": "y : ventes",
+      "curves": [
+       {
+        "expr": "1.2x+1.8",
+        "color": "red",
+        "label": "droite de régression"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 3,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 2,
+        "y": 5,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 3,
+        "y": 4,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 4,
+        "y": 7,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 5,
+        "y": 8,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 6,
+        "y": 9,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 3.5,
+        "y": 6,
+        "label": "G",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Nuage de points, point moyen G (3,5 ; 6) et droite de régression y = 1,2x + 1,8.",
+     "alt": "Six points bleus presque alignés, croissants, avec le point moyen G en vert au milieu et la droite rouge qui passe au plus près des points."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — covariance et corrélation",
+     "statement": "Six boutiques fictives : dépenses publicitaires $x$ (milliers de FCFA) : 1, 2, 3, 4, 5, 6 ; ventes $y$ (centaines de milliers de FCFA) : 3, 5, 4, 7, 8, 9. Calculer $\\bar{x}$, $\\bar{y}$, la covariance et $r$.",
+     "steps": [
+      {
+       "md": "$\\bar{x}=\\frac{21}{6}=3{,}5$ et $\\bar{y}=\\frac{36}{6}=6$.",
+       "tex": "\\bar{x}=3{,}5 \\quad \\bar{y}=6"
+      },
+      {
+       "md": "$\\overline{xy}=\\frac{3+10+12+28+40+54}{6}=\\frac{147}{6}=24{,}5$ ; $\\text{cov}=24{,}5-3{,}5×6=3{,}5$.",
+       "tex": "\\text{cov}(x,y)=24{,}5-21=3{,}5"
+      },
+      {
+       "md": "$V(x)=\\frac{91}{6}-3{,}5^{2}≈2{,}917$ ; $V(y)=\\frac{244}{6}-36≈4{,}667$.",
+       "tex": "\\sigma_{x}≈1{,}708 \\quad \\sigma_{y}≈2{,}160"
+      },
+      {
+       "md": "$r=\\frac{3{,}5}{1{,}708×2{,}160}≈0{,}949$ : très forte corrélation linéaire positive."
+      }
+     ],
+     "answer": "**cov = 3,5 ; $r≈0{,}95$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — droite de régression et prévision",
+     "statement": "Avec les données précédentes, déterminer la droite de régression de $y$ en $x$ et prévoir les ventes pour $x=7$.",
+     "steps": [
+      {
+       "md": "$a=\\frac{\\text{cov}}{V(x)}=\\frac{3{,}5}{35/12}=1{,}2$.",
+       "tex": "a=\\frac{3{,}5}{2{,}9167}=1{,}2"
+      },
+      {
+       "md": "$b=\\bar{y}-a\\bar{x}=6-1{,}2×3{,}5=1{,}8$.",
+       "tex": "b = 6 - 4{,}2 = 1{,}8"
+      },
+      {
+       "md": "Droite : $y=1{,}2\\,x+1{,}8$. Pour $x=7$ : $y=1{,}2×7+1{,}8=10{,}2$."
+      },
+      {
+       "md": "Interprétation : 1 000 FCFA de publicité en plus sont associés, en moyenne, à 1,2 centaine de milliers de FCFA de ventes en plus. Prévision hors de l'intervalle observé (1 à 6) : à prendre avec prudence."
+      }
+     ],
+     "answer": "**$y=1{,}2x+1{,}8$ ; prévision pour $x=7$ : 10,2.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Conclure « $x$ cause $y$ » parce que $r$ est proche de 1.\n- Dire que $r≈0$ prouve l'absence de lien : seul un lien **linéaire** est mesuré.\n- Confondre la droite de régression de $y$ en $x$ et celle de $x$ en $y$ (elles sont différentes sauf si $|r|=1$).\n- Utiliser la droite pour prévoir très loin des données observées (extrapolation)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le coefficient de détermination $r^{2}$ est la part de la variation de $y$ « expliquée » par la droite (ici $r^{2}≈0{,}90$).",
+      "Les deux droites de régression ($y$ en $x$ et $x$ en $y$) se coupent au point moyen $G$."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-statistiques-descriptives-regression-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "Les points sont (1, 2), (2, 4), (3, 6). Quelle est la pente de la droite de régression ?",
+   "explanation": "Les points sont alignés sur $y=2x$ : pente 2 (et $r=1$).",
+   "source": "Exercice original",
+   "answer": 2,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "Un coefficient de corrélation $r=-0{,}92$ indique :",
+   "explanation": "$|r|$ proche de 1 et $r<0$.",
+   "source": "Exercice original",
+   "choices": [
+    "une faible relation linéaire",
+    "une forte relation linéaire décroissante",
+    "une relation linéaire croissante",
+    "une relation de cause à effet"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "La droite de régression de $y$ en $x$ passe par le point moyen $G(\\bar{x},\\bar{y})$.",
+   "explanation": "Car $b=\\bar{y}-a\\bar{x}$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "Pour une série, $\\text{cov}(x,y)=12$, $V(x)=4$, $\\bar{x}=5$ et $\\bar{y}=20$. Quelle est l'ordonnée à l'origine $b$ de la droite de régression ?",
+   "explanation": "$a=\\frac{12}{4}=3$ ; $b=20-3×5=5$.",
+   "source": "Exercice original",
+   "answer": 5.0,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "On a $\\text{cov}(x,y)=6$, $\\sigma_{x}=2$ et $\\sigma_{y}=4$. Calculer $r$.",
+   "explanation": "$r=\\frac{6}{2×4}=0{,}75$.",
+   "source": "Exercice original",
+   "answer": 0.75,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "Un vendeur fictif de glaces à Limbé relève, sur 4 journées, la température $x$ (en °C) : 22, 24, 26, 28, et le nombre de glaces vendues $y$ (en dizaines) : 10, 14, 17, 23.",
+   "method": "Calculer moyennes, covariance, variance de x, pente puis ordonnée.",
+   "mistakes": [
+    "Utiliser la variance de y au dénominateur de la pente."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-statistiques-descriptives-regression-06-a",
+     "points": 1,
+     "prompt": "Calculer $\\bar{x}$.",
+     "explanation": "$\\frac{22+24+26+28}{4}=25$.",
+     "kind": "numeric",
+     "answer": 25,
+     "tolerance": 0,
+     "unit": "°C"
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-regression-06-b",
+     "points": 1,
+     "prompt": "Calculer $\\text{cov}(x,y)$.",
+     "explanation": "$\\bar{y}=16$ ; $\\overline{xy}=\\frac{220+336+442+644}{4}=410{,}5$ ; $410{,}5-25×16=10{,}5$.",
+     "kind": "numeric",
+     "answer": 10.5,
+     "tolerance": 0.01
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-regression-06-c",
+     "points": 1,
+     "prompt": "Calculer la pente $a$ de la droite de régression de $y$ en $x$.",
+     "explanation": "$V(x)=\\frac{484+576+676+784}{4}-625=5$ ; $a=\\frac{10{,}5}{5}=2{,}1$.",
+     "kind": "numeric",
+     "answer": 2.1,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l1-statistiques-descriptives-regression-06-d",
+     "points": 1,
+     "prompt": "Calculer l'ordonnée à l'origine $b$.",
+     "explanation": "$b=\\bar{y}-a\\bar{x}=16-2{,}1×25=-36{,}5$.",
+     "kind": "numeric",
+     "answer": -36.5,
+     "tolerance": 0.001
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "La pente de la droite de régression de $y$ en $x$ est :",
+   "choices": [
+    "$\\frac{\\text{cov}(x,y)}{V(y)}$",
+    "$\\text{cov}(x,y)$",
+    "$\\frac{\\text{cov}(x,y)}{V(x)}$",
+    "$r$"
+   ],
+   "answer": 2,
+   "explanation": "Pente = covariance sur la variance de la variable explicative."
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "Le coefficient de corrélation vérifie :",
+   "choices": [
+    "$-1≤r≤1$",
+    "$0≤r≤2$",
+    "$r>1$ possible",
+    "$r≥0$ toujours"
+   ],
+   "answer": 0,
+   "explanation": "Inégalité de Cauchy–Schwarz (admise)."
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "Si $r=0$ :",
+   "choices": [
+    "il n'y a aucun lien",
+    "les points sont alignés",
+    "il n'y a pas de lien linéaire",
+    "$x$ est constant"
+   ],
+   "answer": 2,
+   "explanation": "Un lien non linéaire (parabole) peut exister."
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "La méthode des moindres carrés minimise :",
+   "choices": [
+    "la somme des carrés des écarts verticaux",
+    "la somme des écarts",
+    "la distance au point moyen",
+    "l'écart-type de $x$"
+   ],
+   "answer": 0,
+   "explanation": "$\\sum (y_i-ax_i-b)^{2}$."
+  },
+  {
+   "id": "sup-l1-statistiques-descriptives-regression-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-statistiques-descriptives-regression",
+   "prompt": "Une forte corrélation entre deux variables prouve :",
+   "choices": [
+    "une relation de cause à effet",
+    "que la droite passe par l'origine",
+    "que les variances sont égales",
+    "seulement une association linéaire, pas une causalité"
+   ],
+   "answer": 3,
+   "explanation": "Une troisième variable peut expliquer les deux."
+  }
+ ]
+}

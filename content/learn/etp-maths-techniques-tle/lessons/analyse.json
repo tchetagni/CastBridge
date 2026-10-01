@@ -1,0 +1,1254 @@
+{
+ "chapter": "etp-maths-techniques-tle-analyse",
+ "lessons": [
+  {
+   "id": "etp-maths-techniques-tle-derivees",
+   "title": "Dérivées et applications : variations et optimisation",
+   "minutes": 50,
+   "programRef": "Programme de la classe de terminale, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer la dérivée d'une fonction polynôme, d'un produit et d'un quotient simples.",
+    "Déterminer l'équation d'une tangente.",
+    "Étudier les variations d'une fonction par le signe de sa dérivée.",
+    "Résoudre un problème d'optimisation simple."
+   ],
+   "exercises": [
+    "etp-maths-techniques-tle-derivees-01",
+    "etp-maths-techniques-tle-derivees-02",
+    "etp-maths-techniques-tle-derivees-03",
+    "etp-maths-techniques-tle-derivees-04",
+    "etp-maths-techniques-tle-derivees-05",
+    "etp-maths-techniques-tle-derivees-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-tle-derivees-q1",
+    "etp-maths-techniques-tle-derivees-q2",
+    "etp-maths-techniques-tle-derivees-q3",
+    "etp-maths-techniques-tle-derivees-q4",
+    "etp-maths-techniques-tle-derivees-q5"
+   ],
+   "reviewNotes": [
+    "On suppose connue la notion de limite (intuitive) ; la définition rigoureuse de la dérivée n'est pas développée."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nombre dérivé et tangente",
+     "md": "Le **nombre dérivé** $f'(a)$ est la **pente de la tangente** à la courbe de $f$ au point d'abscisse $a$. La tangente a pour équation :",
+     "tex": "y = f'(a)\\,(x - a) + f(a)"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dérivées usuelles",
+     "md": "- $(k)' = 0$ ; $(x)' = 1$ ; $(x^n)' = n\\,x^{n-1}$.\n- $(ku)' = k\\,u'$ ; $(u + v)' = u' + v'$.\n- $(uv)' = u'v + uv'$ ; $\\left(\\dfrac{u}{v}\\right)' = \\dfrac{u'v - uv'}{v^2}$ (avec $v \\neq 0$).\n- $\\left(\\dfrac{1}{x}\\right)' = -\\dfrac{1}{x^2}$ ; $(\\sqrt{x})' = \\dfrac{1}{2\\sqrt{x}}$ pour $x > 0$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dérivée et variations",
+     "md": "Sur un intervalle : si $f'(x) > 0$, $f$ est **strictement croissante** ; si $f'(x) < 0$, **strictement décroissante**. Un **extremum** (maximum ou minimum) apparaît en un point où $f'$ s'annule **en changeant de signe**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 260,
+      "xmin": -2,
+      "xmax": 4,
+      "ymin": -4,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^3-3*x^2+2",
+        "color": "blue",
+        "label": "f(x)"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 2,
+        "label": "max local",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": -2,
+        "label": "min local",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Courbe de f(x) = x³ − 3x² + 2 : maximum local en (0 ; 2), minimum local en (2 ; −2).",
+     "alt": "Une courbe en forme de N qui monte jusqu'au point (0 ; 2), redescend jusqu'au point (2 ; -2), puis remonte."
+    },
+    {
+     "type": "example",
+     "title": "Variations d'un polynôme",
+     "statement": "Étudier $f(x) = x^3 - 3x^2 + 2$.",
+     "steps": [
+      {
+       "md": "Dérivée : $f'(x) = 3x^2 - 6x = 3x(x - 2)$.",
+       "tex": "f'(x) = 3x(x-2)"
+      },
+      {
+       "md": "Signe : $f'$ est un trinôme de coefficient 3 > 0, négatif entre ses racines 0 et 2, positif à l'extérieur. Donc $f$ croît sur $]-\\infty\\,;\\,0]$, décroît sur $[0\\,;\\,2]$, croît sur $[2\\,;\\,+\\infty[$."
+      },
+      {
+       "md": "Extremums : $f(0) = 2$ (maximum local) et $f(2) = 8 - 12 + 2 = -2$ (minimum local).",
+       "tex": "f(0) = 2 \\;;\\; f(2) = -2"
+      }
+     ],
+     "answer": "**Maximum local 2 en 0 ; minimum local -2 en 2.**"
+    },
+    {
+     "type": "example",
+     "title": "Tangente",
+     "statement": "Équation de la tangente à $f(x) = x^2$ au point d'abscisse 1.",
+     "steps": [
+      {
+       "md": "$f'(x) = 2x$ donc $f'(1) = 2$ ; $f(1) = 1$."
+      },
+      {
+       "md": "On applique la formule.",
+       "tex": "y = 2(x - 1) + 1 = 2x - 1"
+      }
+     ],
+     "answer": "**y = 2x − 1.**"
+    },
+    {
+     "type": "example",
+     "title": "Optimisation : un enclos",
+     "statement": "Un éleveur dispose de 40 m de grillage pour clôturer un enclos rectangulaire contre un mur (3 côtés seulement). Quelles dimensions donnent l'aire maximale ?",
+     "steps": [
+      {
+       "md": "Soit $x$ la largeur (côtés perpendiculaires au mur) ; la longueur est $40 - 2x$. Aire :",
+       "tex": "A(x) = x(40 - 2x) = 40x - 2x^2 \\quad (0 < x < 20)"
+      },
+      {
+       "md": "Dérivée : $A'(x) = 40 - 4x$ ; elle s'annule en $x = 10$, positive avant, négative après : c'est un maximum.",
+       "tex": "A'(x) = 40 - 4x = 0 \\Rightarrow x = 10"
+      },
+      {
+       "md": "Dimensions : largeur 10 m, longueur $40 - 20 = 20$ m.",
+       "tex": "A(10) = 200\\ \\text{m}^2"
+      }
+     ],
+     "answer": "**10 m sur 20 m, aire maximale 200 m².**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dériver un produit comme le produit des dérivées : $(uv)' \\neq u'v'$.\n- Oublier le $-$ dans $(1/x)' = -1/x^2$.\n- Annuler la dérivée sans vérifier le changement de signe : $f'(a)=0$ ne suffit pas pour un extremum.\n- Oublier de vérifier que la solution est dans l'intervalle du problème (ici $0 < x < 20$)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une fonction dérivable est continue, mais la réciproque est fausse (exemple : la valeur absolue en 0).",
+      "En physique, la vitesse est la dérivée de la position par rapport au temps."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-tle-derivees-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln",
+   "title": "Fonctions exponentielle et logarithme népérien",
+   "minutes": 50,
+   "programRef": "Programme de la classe de terminale, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser les propriétés algébriques de exp et de ln.",
+    "Résoudre des équations avec exp et ln.",
+    "Dériver exp(ax+b) et ln(x) et en déduire les variations.",
+    "Modéliser une croissance ou une décroissance exponentielle."
+   ],
+   "prerequisites": [
+    "etp-maths-techniques-tle-derivees"
+   ],
+   "exercises": [
+    "etp-maths-techniques-tle-exp-ln-01",
+    "etp-maths-techniques-tle-exp-ln-02",
+    "etp-maths-techniques-tle-exp-ln-03",
+    "etp-maths-techniques-tle-exp-ln-04",
+    "etp-maths-techniques-tle-exp-ln-05",
+    "etp-maths-techniques-tle-exp-ln-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-tle-exp-ln-q1",
+    "etp-maths-techniques-tle-exp-ln-q2",
+    "etp-maths-techniques-tle-exp-ln-q3",
+    "etp-maths-techniques-tle-exp-ln-q4",
+    "etp-maths-techniques-tle-exp-ln-q5"
+   ],
+   "reviewNotes": [
+    "Valeurs approchées utilisées : e ≈ 2,718 ; ln 2 ≈ 0,693 ; ln 10 ≈ 2,303 — à vérifier à la calculatrice.",
+    "Les contextes de modélisation (valeur d'une machine, population de bactéries) sont fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Exponentielle",
+     "md": "La fonction **exponentielle** $x \\to e^x$ (avec $e \\approx 2{,}718$) est définie sur $\\mathbb{R}$, **strictement positive** et **égale à sa dérivée** : $(e^x)' = e^x$. Elle est donc strictement croissante. Pour $a$ et $b$ réels :",
+     "tex": "e^{a+b} = e^a \\times e^b \\; e^{-a} = \\frac{1}{e^a} \\; (e^a)^n = e^{na}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Logarithme népérien",
+     "md": "Le **logarithme népérien** $\\ln$ est la fonction **réciproque** de l'exponentielle, définie pour $x > 0$ : $\\ln(e^x) = x$ et $e^{\\ln x} = x$. Sa dérivée est $(\\ln x)' = 1/x$ : elle est strictement croissante. $\\ln 1 = 0$ et $\\ln e = 1$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propriétés de ln",
+     "md": "Pour $a > 0$ et $b > 0$ :",
+     "tex": "\\ln(ab) = \\ln a + \\ln b \\; \\ln\\frac{a}{b} = \\ln a - \\ln b \\; \\ln(a^n) = n\\ln a"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 300,
+      "xmin": -3,
+      "xmax": 5,
+      "ymin": -3,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "exp(x)",
+        "color": "blue",
+        "label": "exp"
+       },
+       {
+        "expr": "ln(x)",
+        "color": "red",
+        "label": "ln"
+       },
+       {
+        "expr": "x",
+        "color": "grey",
+        "label": "y = x"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 1,
+        "label": "(0 ; 1)",
+        "color": "blue"
+       },
+       {
+        "x": 1,
+        "y": 0,
+        "label": "(1 ; 0)",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Les courbes de exp (bleu) et ln (rouge) sont symétriques par rapport à la droite y = x.",
+     "alt": "Deux courbes : l'exponentielle passe par (0 ; 1) et monte très vite ; le logarithme passe par (1 ; 0) et monte lentement ; elles sont symétriques par rapport à la droite y = x (en gris)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Résoudre des équations",
+     "md": "- $e^{x} = a$ (avec $a > 0$) $\\Leftrightarrow x = \\ln a$.\n- $\\ln x = b \\Leftrightarrow x = e^{b}$ (avec $x > 0$).\n- On pense à vérifier le **domaine** : l'argument d'un $\\ln$ doit être strictement positif.\n- Dérivation : $(e^{ax+b})' = a\\,e^{ax+b}$."
+    },
+    {
+     "type": "example",
+     "title": "Équation exponentielle",
+     "statement": "Résoudre $e^{2x} = 5$.",
+     "steps": [
+      {
+       "md": "On applique ln aux deux membres.",
+       "tex": "2x = \\ln 5"
+      },
+      {
+       "md": "On isole $x$ ; $\\ln 5 \\approx 1{,}609$.",
+       "tex": "x = \\frac{\\ln 5}{2} \\approx 0,805"
+      }
+     ],
+     "answer": "**x ≈ 0,805.**"
+    },
+    {
+     "type": "example",
+     "title": "Équation logarithmique",
+     "statement": "Résoudre $\\ln(x - 1) = 2$.",
+     "steps": [
+      {
+       "md": "Domaine : $x - 1 > 0$ donc $x > 1$."
+      },
+      {
+       "md": "On passe à l'exponentielle : $x - 1 = e^2$.",
+       "tex": "x = 1 + e^2 \\approx 1 + 7,389 = 8,389"
+      },
+      {
+       "md": "Cette valeur est bien supérieure à 1 : elle est acceptée."
+      }
+     ],
+     "answer": "**x = 1 + e² ≈ 8,389.**"
+    },
+    {
+     "type": "example",
+     "title": "Dépréciation d'une machine",
+     "statement": "La valeur d'une machine (en FCFA, fictive) est $V(t) = 2\\,000\\,000\\,e^{-0{,}1t}$, $t$ en années. Au bout de combien de temps la valeur est-elle divisée par 2 ?",
+     "steps": [
+      {
+       "md": "On cherche $t$ tel que $V(t) = 1\\,000\\,000$ : $e^{-0{,}1t} = 1/2$.",
+       "tex": "e^{-0,1t} = \\frac{1}{2}"
+      },
+      {
+       "md": "On prend ln : $-0{,}1t = \\ln(1/2) = -\\ln 2$.",
+       "tex": "t = \\frac{\\ln 2}{0,1}"
+      },
+      {
+       "md": "Avec $\\ln 2 \\approx 0{,}693$.",
+       "tex": "t \\approx 6,9\\ \\text{ans}"
+      }
+     ],
+     "answer": "**≈ 6,9 ans.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $\\ln(a + b) = \\ln a + \\ln b$ : c'est faux, c'est le *produit* qui devient somme.\n- Oublier la condition $x > 0$ dans une équation avec $\\ln$.\n- Dériver $e^{2x}$ en $e^{2x}$ : il manque le facteur 2.\n- Penser que $e^x$ peut être négatif ou nul : toujours strictement positif."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Croissances comparées (admises) : $e^x$ croît plus vite que n'importe quelle puissance de $x$, et $\\ln x$ plus lentement.",
+      "Le logarithme décimal $\\log x = \\ln x / \\ln 10$ intervient en physique (décibels, pH)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-tle-exp-ln-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale",
+   "title": "Primitives et intégrale",
+   "minutes": 50,
+   "programRef": "Programme de la classe de terminale, séries techniques (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir une primitive et en calculer pour les fonctions usuelles.",
+    "Calculer une intégrale avec une primitive.",
+    "Interpréter une intégrale comme une aire (fonction positive).",
+    "Appliquer l'intégrale à une distance ou une quantité cumulée."
+   ],
+   "prerequisites": [
+    "etp-maths-techniques-tle-derivees",
+    "etp-maths-techniques-tle-exp-ln"
+   ],
+   "exercises": [
+    "etp-maths-techniques-tle-integrale-01",
+    "etp-maths-techniques-tle-integrale-02",
+    "etp-maths-techniques-tle-integrale-03",
+    "etp-maths-techniques-tle-integrale-04",
+    "etp-maths-techniques-tle-integrale-05",
+    "etp-maths-techniques-tle-integrale-06"
+   ],
+   "selfCheck": [
+    "etp-maths-techniques-tle-integrale-q1",
+    "etp-maths-techniques-tle-integrale-q2",
+    "etp-maths-techniques-tle-integrale-q3",
+    "etp-maths-techniques-tle-integrale-q4",
+    "etp-maths-techniques-tle-integrale-q5"
+   ],
+   "reviewNotes": [
+    "Aucun calcul d'aire entre deux courbes ni d'intégration par parties : hors périmètre de la fiche."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Primitive",
+     "md": "Une **primitive** de $f$ sur un intervalle est une fonction $F$ dont la dérivée est $f$ : $F' = f$. Si $F$ est une primitive, toutes les primitives sont $F + C$ ($C$ constante)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Primitives usuelles",
+     "md": "- $f(x) = k$ : $F(x) = kx$.\n- $f(x) = x^n$ ($n \\neq -1$) : $F(x) = \\dfrac{x^{n+1}}{n+1}$.\n- $f(x) = \\dfrac{1}{x}$ (sur $x>0$) : $F(x) = \\ln x$.\n- $f(x) = e^{x}$ : $F(x) = e^{x}$ ; $f(x) = e^{ax+b}$ : $F(x) = \\dfrac{1}{a}e^{ax+b}$.\n- Linéarité : $F + G$ pour $f + g$ ; $kF$ pour $kf$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Intégrale",
+     "md": "Si $F$ est une primitive de $f$ sur $[a\\,;\\,b]$, l'**intégrale** de $a$ à $b$ est $\\int_a^b f(x)\\,dx = F(b) - F(a)$, notée aussi $[F(x)]_a^b$. Si $f \\geq 0$, c'est l'**aire** (en unités d'aire) du domaine entre la courbe, l'axe des abscisses et les droites $x = a$, $x = b$.",
+     "tex": "\\int_a^b f(x)\\,dx = F(b) - F(a)"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40.0,
+         220.0,
+         43.0,
+         219.9,
+         46.0,
+         219.6,
+         49.0,
+         219.2,
+         52.0,
+         218.6,
+         55.0,
+         217.8,
+         58.0,
+         216.8,
+         61.0,
+         215.6,
+         64.0,
+         214.2,
+         67.0,
+         212.7,
+         70.0,
+         211.0,
+         73.0,
+         209.1,
+         76.0,
+         207.0,
+         79.0,
+         204.8,
+         82.0,
+         202.4,
+         85.0,
+         199.8,
+         88.0,
+         197.0,
+         91.0,
+         194.0,
+         94.0,
+         190.8,
+         97.0,
+         187.5,
+         100.0,
+         184.0,
+         103.0,
+         180.3,
+         106.0,
+         176.4,
+         109.0,
+         172.4,
+         112.0,
+         168.2,
+         115.0,
+         163.8,
+         118.0,
+         159.2,
+         121.0,
+         154.4,
+         124.0,
+         149.4,
+         127.0,
+         144.3,
+         130.0,
+         139.0,
+         130,
+         220,
+         40,
+         220
+        ],
+        "fill": "lightblue",
+        "stroke": "blue",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 220,
+        "x2": 160,
+        "y2": 220,
+        "color": "ink",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 230,
+        "x2": 40,
+        "y2": 20,
+        "color": "ink",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 94.0,
+        "y": 200,
+        "text": "aire",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 240,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 240,
+        "text": "0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 138,
+        "y": 137.0,
+        "text": "y = f(x)",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start"
+       }
+      ]
+     },
+     "caption": "L'intégrale de f entre 0 et 3 est l'aire du domaine coloré sous la courbe.",
+     "alt": "Une courbe croissante qui part de l'origine, avec la région située sous la courbe, au-dessus de l'axe horizontal et entre les abscisses 0 et 3 coloriée en bleu : c'est l'aire égale à l'intégrale."
+    },
+    {
+     "type": "example",
+     "title": "Intégrale d'un polynôme",
+     "statement": "Calculer $\\int_0^3 (2x + 1)\\,dx$.",
+     "steps": [
+      {
+       "md": "Primitive de $2x + 1$ : $F(x) = x^2 + x$.",
+       "tex": "F(x) = x^2 + x"
+      },
+      {
+       "md": "$F(3) - F(0)$.",
+       "tex": "F(3) - F(0) = (9 + 3) - 0 = 12"
+      }
+     ],
+     "answer": "**12.**"
+    },
+    {
+     "type": "example",
+     "title": "Intégrale de 1/x",
+     "statement": "Calculer $\\int_1^e \\dfrac{1}{x}\\,dx$.",
+     "steps": [
+      {
+       "md": "Primitive : $\\ln x$.",
+       "tex": "[\\ln x]_1^e"
+      },
+      {
+       "md": "$\\ln e - \\ln 1 = 1 - 0$.",
+       "tex": "= 1"
+      }
+     ],
+     "answer": "**1.**"
+    },
+    {
+     "type": "example",
+     "title": "Aire sous une parabole",
+     "statement": "Aire (en unités d'aire) du domaine sous $y = x^2$ entre $x = 0$ et $x = 3$.",
+     "steps": [
+      {
+       "md": "Primitive de $x^2$ : $x^3/3$.",
+       "tex": "F(x) = \\frac{x^3}{3}"
+      },
+      {
+       "md": "$f \\geq 0$ : aire = $F(3) - F(0)$.",
+       "tex": "\\frac{27}{3} - 0 = 9"
+      }
+     ],
+     "answer": "**9 unités d'aire.**"
+    },
+    {
+     "type": "example",
+     "title": "Distance parcourue",
+     "statement": "Un mobile a la vitesse $v(t) = 6t$ (m/s). Quelle distance parcourt-il entre $t = 0$ et $t = 5$ s ?",
+     "steps": [
+      {
+       "md": "La distance est l'intégrale de la vitesse. Primitive de $6t$ : $3t^2$.",
+       "tex": "d = \\int_0^5 6t\\,dt = [3t^2]_0^5"
+      },
+      {
+       "md": "On calcule.",
+       "tex": "3 \\times 25 - 0 = 75\\ \\text{m}"
+      }
+     ],
+     "answer": "**75 m.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de diviser par $n+1$ dans la primitive de $x^n$.\n- Inverser $F(b) - F(a)$ en $F(a) - F(b)$ : le signe change.\n- Dire qu'une intégrale est toujours une aire : c'est une aire seulement si $f \\geq 0$ sur $[a\\,;\\,b]$ ; sinon l'intégrale peut être négative.\n- Oublier la constante $C$ quand on cherche **toutes** les primitives (inutile pour calculer une intégrale définie)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Valeur moyenne d'une fonction sur $[a\\,;\\,b]$ : $\\dfrac{1}{b-a}\\int_a^b f(x)\\,dx$.",
+      "Si $f$ est négative, l'aire est l'opposé de l'intégrale ; on découpe alors l'intervalle selon le signe de $f$."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-techniques-tle-integrale-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-maths-techniques-tle-derivees-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "Calculer $f'(2)$ pour $f(x) = x^3 + 4x$.",
+   "explanation": "$f'(x) = 3x^2 + 4$ donc $f'(2) = 12 + 4 = 16$.",
+   "source": "Exercice original",
+   "answer": 16,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "La dérivée de $f(x) = 5x^2 - 3x + 7$ est :",
+   "explanation": "$(5x^2)' = 10x$, $(-3x)' = -3$, $(7)' = 0$.",
+   "source": "Exercice original",
+   "choices": [
+    "10x − 3",
+    "10x − 3 + 7",
+    "5x − 3",
+    "10x² − 3"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "Si $f'(x) < 0$ sur un intervalle, alors $f$ est décroissante sur cet intervalle.",
+   "explanation": "C'est la propriété du lien entre signe de la dérivée et variations.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "Quelle est l'abscisse du minimum de $f(x) = x^2 - 6x + 5$ ?",
+   "explanation": "$f'(x) = 2x - 6 = 0$ donne $x = 3$ ; $f'$ passe de négative à positive : minimum.",
+   "source": "Exercice original",
+   "answer": 3,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "La dérivée de $f(x) = x \\cdot (x + 1)$ est $f'(x) = 2x + 1$. Quelle est la pente de la tangente en $x = 3$ ?",
+   "explanation": "$f'(3) = 2 \\times 3 + 1 = 7$. (On vérifie avec $(uv)' = u'v + uv' = (x+1) + x = 2x + 1$.)",
+   "source": "Exercice original",
+   "answer": 7,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "On fabrique une boîte sans couvercle à partir d'une plaque carrée de 12 dm de côté, en découpant un carré de côté $x$ dm dans chaque coin puis en repliant. Le volume (en dm³) est $V(x) = x(12 - 2x)^2$ pour $0 < x < 6$.",
+   "method": "Dériver, étudier le signe de la dérivée, conclure sur l'extremum et le calculer.",
+   "mistakes": [
+    "Oublier de rejeter la racine hors de l'intervalle."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-tle-derivees-06-a",
+     "points": 1,
+     "prompt": "Après développement, $V(x) = 4x^3 - 48x^2 + 144x$. Quelle est sa dérivée ?",
+     "explanation": "$(4x^3)' = 12x^2$, $(-48x^2)' = -96x$, $(144x)' = 144$.",
+     "kind": "mcq",
+     "choices": [
+      "12x² − 96x + 144",
+      "12x² − 48x + 144",
+      "4x² − 48x + 144",
+      "12x³ − 96x² + 144x"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-maths-techniques-tle-derivees-06-b",
+     "points": 1,
+     "prompt": "$V'(x) = 12(x - 2)(x - 6)$. Quelle valeur de $x$ dans $]0\\,;\\,6[$ annule $V'$ ?",
+     "explanation": "$V'(x) = 0$ pour $x = 2$ ou $x = 6$ ; seule $x = 2$ est dans l'intervalle.",
+     "kind": "numeric",
+     "answer": 2,
+     "tolerance": 0,
+     "unit": "dm"
+    },
+    {
+     "id": "etp-maths-techniques-tle-derivees-06-c",
+     "points": 1,
+     "prompt": "$V$ est croissante sur $]0\\,;\\,2]$ et décroissante sur $[2\\,;\\,6[$.",
+     "explanation": "Entre 0 et 2, $(x-2)<0$ et $(x-6)<0$ : produit positif, donc $V'>0$. Entre 2 et 6, $V'<0$.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-maths-techniques-tle-derivees-06-d",
+     "points": 1,
+     "prompt": "Volume maximal (dm³).",
+     "explanation": "$V(2) = 2 \\times (12 - 4)^2 = 2 \\times 64 = 128$ dm³.",
+     "kind": "numeric",
+     "answer": 128,
+     "tolerance": 0,
+     "unit": "dm³"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "La dérivée de $x^4$ est :",
+   "choices": [
+    "$4x^3$",
+    "$x^3$",
+    "$4x^4$",
+    "$3x^4$"
+   ],
+   "answer": 0,
+   "explanation": "$(x^n)' = nx^{n-1}$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "Le nombre dérivé en $a$ est :",
+   "choices": [
+    "l'image de $a$",
+    "la pente de la tangente en $a$",
+    "l'aire sous la courbe",
+    "la limite en l'infini"
+   ],
+   "answer": 1,
+   "explanation": "Pente de la tangente."
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "Si $f'$ s'annule en changeant de signe de + à −, il y a :",
+   "choices": [
+    "un minimum local",
+    "un maximum local",
+    "un point d'inflexion obligatoire",
+    "aucune particularité"
+   ],
+   "answer": 1,
+   "explanation": "Croissante puis décroissante : maximum local."
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "$(3x^2)'$ vaut :",
+   "choices": [
+    "$3x$",
+    "$6x^2$",
+    "$6x$",
+    "$9x$"
+   ],
+   "answer": 2,
+   "explanation": "$3 \\times 2x = 6x$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-derivees-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-derivees",
+   "prompt": "Tangente à $f(x) = x^2$ en $a = 2$ : pente :",
+   "choices": [
+    "2",
+    "4",
+    "8",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "$f'(2) = 4$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "Simplifier : $\\ln(e^3)$.",
+   "explanation": "$\\ln(e^x) = x$, donc $\\ln(e^3) = 3$.",
+   "source": "Exercice original",
+   "answer": 3,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "$e^2 \\times e^3$ est égal à :",
+   "explanation": "$e^a e^b = e^{a+b}$.",
+   "source": "Exercice original",
+   "choices": [
+    "$e^6$",
+    "$e^5$",
+    "$2e^5$",
+    "$e^{1}$"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "$\\ln(a \\times b) = \\ln a + \\ln b$ pour $a, b > 0$.",
+   "explanation": "Propriété fondamentale du logarithme.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "Résoudre $\\ln x = 0$.",
+   "explanation": "$x = e^0 = 1$.",
+   "source": "Exercice original",
+   "answer": 1,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "Calculer la pente de la tangente à $f(x) = e^{3x}$ en $x = 0$.",
+   "explanation": "$f'(x) = 3e^{3x}$ ; $f'(0) = 3 \\times e^0 = 3$.",
+   "source": "Exercice original",
+   "answer": 3,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "Une culture contient initialement 500 bactéries (cas fictif). Le nombre de bactéries après $t$ heures est $N(t) = 500\\,e^{0{,}2t}$.",
+   "method": "Remplacer, dériver avec le facteur 0,2, résoudre avec ln.",
+   "mistakes": [
+    "Oublier le facteur 0,2 en dérivant."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-tle-exp-ln-06-a",
+     "points": 1,
+     "prompt": "Nombre de bactéries après 10 h (arrondi à l'unité).",
+     "explanation": "$N(10) = 500 e^{2} \\approx 500 \\times 7{,}389 \\approx 3 695$.",
+     "kind": "numeric",
+     "answer": 3695,
+     "tolerance": 1
+    },
+    {
+     "id": "etp-maths-techniques-tle-exp-ln-06-b",
+     "points": 1,
+     "prompt": "$N'(t)$ vaut :",
+     "explanation": "$(e^{0{,}2t})' = 0{,}2e^{0{,}2t}$ ; $500 \\times 0{,}2 = 100$.",
+     "kind": "mcq",
+     "choices": [
+      "$100\\,e^{0,2t}$",
+      "$500\\,e^{0,2t}$",
+      "$0{,}2\\,e^{0,2t}$",
+      "$100\\,e^{0,2}$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-maths-techniques-tle-exp-ln-06-c",
+     "points": 1,
+     "prompt": "La population est strictement croissante.",
+     "explanation": "$N'(t) > 0$ pour tout $t$.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-maths-techniques-tle-exp-ln-06-d",
+     "points": 2,
+     "prompt": "Temps de doublement (h, arrondi au centième).",
+     "explanation": "$500e^{0,2t} = 1000 \\Rightarrow e^{0,2t} = 2 \\Rightarrow t = \\ln 2 / 0{,}2 \\approx 3,47$ h.",
+     "kind": "numeric",
+     "answer": 3.465735902799726,
+     "tolerance": 0.01,
+     "unit": "h"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "Pour tout réel $x$, $e^x$ est :",
+   "choices": [
+    "négatif",
+    "positif ou nul",
+    "strictement positif",
+    "entier"
+   ],
+   "answer": 2,
+   "explanation": "$e^x > 0$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "$\\ln 1$ vaut :",
+   "choices": [
+    "0",
+    "1",
+    "e",
+    "n'existe pas"
+   ],
+   "answer": 0,
+   "explanation": "$\\ln 1 = 0$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "$(\\ln x)'$ vaut :",
+   "choices": [
+    "$\\ln x$",
+    "$x$",
+    "$1/x$",
+    "$e^x$"
+   ],
+   "answer": 2,
+   "explanation": "Dérivée de ln : $1/x$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "L'équation $e^x = -2$ :",
+   "choices": [
+    "a une solution",
+    "n'a pas de solution",
+    "a deux solutions",
+    "se résout avec ln 2"
+   ],
+   "answer": 1,
+   "explanation": "$e^x$ est toujours positif."
+  },
+  {
+   "id": "etp-maths-techniques-tle-exp-ln-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-exp-ln",
+   "prompt": "$\\ln(8)$ peut s'écrire :",
+   "choices": [
+    "$2\\ln 4$",
+    "$3\\ln 2$",
+    "$8\\ln 1$",
+    "$\\ln 4 + 4$"
+   ],
+   "answer": 1,
+   "explanation": "$8 = 2^3$ donc $\\ln 8 = 3\\ln 2$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "Calculer $\\int_0^2 3x^2\\,dx$.",
+   "explanation": "Primitive : $x^3$. $F(2) - F(0) = 8 - 0 = 8$.",
+   "source": "Exercice original",
+   "answer": 8,
+   "tolerance": 0
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "Une primitive de $f(x) = 4x$ est :",
+   "explanation": "$(2x^2)' = 4x$.",
+   "source": "Exercice original",
+   "choices": [
+    "$4$",
+    "$2x^2$",
+    "$4x^2$",
+    "$x^2/4$"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "Une fonction n'a qu'une seule primitive.",
+   "explanation": "Si $F$ est une primitive, $F + C$ aussi pour toute constante $C$.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "Calculer $\\int_1^3 (x + 2)\\,dx$.",
+   "explanation": "Primitive : $x^2/2 + 2x$. $F(3) = 4{,}5 + 6 = 10{,}5$ ; $F(1) = 0{,}5 + 2 = 2{,}5$ ; différence : 8.",
+   "source": "Exercice original",
+   "answer": 8.0,
+   "tolerance": 0.001
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "Aire sous $y = e^x$ entre 0 et 1 (arrondie au centième).",
+   "explanation": "$[e^x]_0^1 = e - 1 \\approx 1{,}72$.",
+   "source": "Exercice original",
+   "answer": 1.718281828459045,
+   "tolerance": 0.01
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "Un réservoir se remplit avec un débit variable $q(t) = 2t + 4$ (litres par minute), $t$ en minutes, de $t = 0$ à $t = 5$ (données fictives).",
+   "method": "Primitive, puis F(b) − F(a), puis interprétation.",
+   "mistakes": [
+    "Oublier de soustraire F(0) (ici nul)."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-techniques-tle-integrale-06-a",
+     "points": 1,
+     "prompt": "Une primitive de $q$ est :",
+     "explanation": "$(t^2 + 4t)' = 2t + 4$.",
+     "kind": "mcq",
+     "choices": [
+      "$t^2 + 4t$",
+      "$2t^2 + 4t$",
+      "$t^2 + 4$",
+      "$2 + 4t$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-maths-techniques-tle-integrale-06-b",
+     "points": 1,
+     "prompt": "Volume d'eau ajouté entre 0 et 5 min (litres).",
+     "explanation": "$[t^2 + 4t]_0^5 = 25 + 20 = 45$ L.",
+     "kind": "numeric",
+     "answer": 45,
+     "tolerance": 0,
+     "unit": "L"
+    },
+    {
+     "id": "etp-maths-techniques-tle-integrale-06-c",
+     "points": 1,
+     "prompt": "Débit à $t = 5$ (L/min).",
+     "explanation": "$q(5) = 2 \\times 5 + 4 = 14$.",
+     "kind": "numeric",
+     "answer": 14,
+     "tolerance": 0,
+     "unit": "L/min"
+    },
+    {
+     "id": "etp-maths-techniques-tle-integrale-06-d",
+     "points": 1,
+     "prompt": "Le volume ajouté entre $t = 0$ et $t = 5$ est l'aire sous la courbe de $q$ (car $q \\geq 0$).",
+     "explanation": "Intégrale d'une fonction positive = aire sous la courbe.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "Une primitive de $f(x) = 6x^2$ est :",
+   "choices": [
+    "$12x$",
+    "$2x^3$",
+    "$6x^3$",
+    "$x^3/3$"
+   ],
+   "answer": 1,
+   "explanation": "$(2x^3)' = 6x^2$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "$\\int_a^b f(x)\\,dx$ vaut :",
+   "choices": [
+    "$F(a) - F(b)$",
+    "$F(b) - F(a)$",
+    "$F(a) + F(b)$",
+    "$f(b) \\times f(a)$"
+   ],
+   "answer": 1,
+   "explanation": "Définition."
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "$\\int_0^1 1\\,dx$ vaut :",
+   "choices": [
+    "0",
+    "1",
+    "2",
+    "e"
+   ],
+   "answer": 1,
+   "explanation": "Primitive $x$ ; $1 - 0 = 1$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "Une primitive de $e^{2x}$ est :",
+   "choices": [
+    "$2e^{2x}$",
+    "$e^{2x}/2$",
+    "$e^{x}$",
+    "$e^{2x}$"
+   ],
+   "answer": 1,
+   "explanation": "$(e^{2x}/2)' = e^{2x}$."
+  },
+  {
+   "id": "etp-maths-techniques-tle-integrale-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-techniques-tle-integrale",
+   "prompt": "Si $f \\geq 0$, l'intégrale de $a$ à $b$ représente :",
+   "choices": [
+    "la pente",
+    "la dérivée",
+    "une aire",
+    "un angle"
+   ],
+   "answer": 2,
+   "explanation": "L'aire sous la courbe."
+  }
+ ]
+}
