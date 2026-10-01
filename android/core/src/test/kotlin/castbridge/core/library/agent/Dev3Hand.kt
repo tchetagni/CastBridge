@@ -1,0 +1,332 @@
+package castbridge.core.library.agent
+
+/**
+ * DEV-3: hand-written cases for the exhaustive catalogue of docs/NAMING-PATTERNS.md (one family per `cat`). Tuning IS allowed on this set.
+ * The expected values are written from the TRUE metadata (title, season, episode, year…) of each name, never from what the parser answers.
+ * Disjoint from the frozen sets (checked by [Dev3CorpusTest]) and from GELÉ-3 (other titles).
+ */
+object Dev3Hand {
+    internal fun nfd(s: String) = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD)
+    internal fun ext(input: String) = input.substringAfterLast('.')
+
+    /** A series episode. [epTitle] and [tag] ("[VOSTFR]") are part of the expected file name. */
+    internal fun ser(cat: String, input: String, title: String, sn: Int?, ep: Int?, epEnd: Int? = null, epTitle: String? = null, tag: String = "", folderIn: String = "", lang: String = "fr"): GCase {
+        val marker = buildString {
+            if (sn != null && ep != null) { append("S%02dE%02d".format(sn, ep)); epEnd?.let { append("-E%02d".format(it)) } }
+            else if (ep != null) append("E%02d".format(ep))
+            else append("S%02d".format(sn))
+        }
+        val name = "$title – $marker" + (epTitle?.let { " – $it" } ?: "") + tag + "." + ext(input)
+        val folder = if (sn != null) "Séries/$title/Saison %02d".format(sn) else "Séries/$title"
+        return GCase(cat, Case(input, name, folder, Kind.SERIES, 0, folderIn, lang))
+    }
+
+    /** A daily show: no season / episode, the date is the identity; the "season" folder is the year. */
+    internal fun daily(cat: String, input: String, title: String, date: String) =
+        GCase(cat, Case(input, "$title – $date.${ext(input)}", "Séries/$title/Saison ${date.take(4)}", Kind.SERIES))
+
+    internal fun mov(cat: String, input: String, title: String, year: Int?, tag: String = "", sub: String = "", kind: Kind = Kind.MOVIE, part: String = ""): GCase {
+        val dir = title + (year?.let { " ($it)" } ?: "")
+        return GCase(cat, Case(input, "$dir$part$tag${sub}.${ext(input)}", "Films/$dir", kind))
+    }
+
+    internal fun unk(cat: String, input: String) = GCase(cat, Case(input, input.replace(" - ", " – "), "À trier", Kind.UNKNOWN))
+    internal fun other(cat: String, input: String, name: String, folder: String, kind: Kind, folderIn: String = "", dur: Int = 0) = GCase(cat, Case(input, name, folder, kind, dur, folderIn))
+
+    val CASES: List<GCase> = listOf(
+        // ---------------------------------------------------------------- épisodes : formes du marqueur
+        ser("ep-forms", "Prison Break [S01-E08].avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break (S01-E08).avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break [S01E08].avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break (S01E08).avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break S01-E08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break S01_E08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison_Break_S01_E08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison.Break.S01.E08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break S1E8.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break s1.e8.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break S01xE08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break [1x08].avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break - 1x08 - Buried.avi", "Prison Break", 1, 8, epTitle = "Buried"),
+        ser("ep-forms", "Prison Break - [S01E08] - Buried.avi", "Prison Break", 1, 8, epTitle = "Buried"),
+        ser("ep-forms", "Prison Break - Season 1 Episode 8.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break - Saison 01 - Episode 08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break S01 Ep08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break S01.Ep.08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison.Break.S01E08.HDTV.XviD-LOL.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "Prison Break Ep08.avi", "Prison Break", null, 8),
+        ser("ep-forms", "Prison Break E08.avi", "Prison Break", null, 8),
+        ser("ep-forms", "Prison Break Season 1.mkv", "Prison Break", 1, null),
+        ser("ep-forms", "PrisonBreakS01E08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "PrisonBreak.S01E08.avi", "Prison Break", 1, 8),
+        ser("ep-forms", "PrisonBreak_S01E08_VOSTFR.avi", "Prison Break", 1, 8, tag = " [VOSTFR]"),
+        // numérotation à 3-4 chiffres (seulement avec des preuves de série : étiquette de série, pas d'année)
+        ser("ep-number", "Prison.Break.108.HDTV.XviD.avi", "Prison Break", 1, 8),
+        ser("ep-number", "Prison Break 0108 HDTV.avi", "Prison Break", 1, 8),
+        ser("ep-number", "Prison.Break.212.720p.HDTV.x264.mkv", "Prison Break", 2, 12),
+        ser("ep-number", "the.big.bang.theory.1004.hdtv-lol.mp4", "The Big Bang Theory", 10, 4),
+        ser("ep-number", "Fahrenheit.451.WEB-DL.x264.mkv", "Fahrenheit 451", null, null).let { GCase("ep-number", Case(it.c.input, "Fahrenheit 451.mkv", "Films/Fahrenheit 451", Kind.MOVIE)) },
+        ser("ep-number", "Apollo 13 720p BluRay.mkv", "Apollo 13", null, null).let { GCase("ep-number", Case(it.c.input, "Apollo 13.mkv", "Films/Apollo 13", Kind.MOVIE)) },
+        ser("ep-number", "Blade.Runner.2049.2017.1080p.BluRay.x264.mkv", "Blade Runner 2049", null, null).let { GCase("ep-number", Case(it.c.input, "Blade Runner 2049 (2017).mkv", "Films/Blade Runner 2049 (2017)", Kind.MOVIE)) },
+        // marqueurs sans saison
+        unk("ep-bare", "Dragon Ball Z Kai - 12.mkv"),
+        unk("ep-bare", "Série Maison #04.mp4"),
+        ser("ep-bare", "#04.mp4", "Prison Break", 2, 4, folderIn = "Prison Break/Saison 2"),
+        ser("ep-bare", "[04].mp4", "Prison Break", 2, 4, folderIn = "Prison Break/Saison 2"),
+        ser("ep-bare", "Episode 04.mkv", "Prison Break", 2, 4, folderIn = "Prison Break/Season 2"),
+        ser("ep-bare", "E04.mkv", "Prison Break", 2, 4, folderIn = "Prison Break/S02"),
+        ser("ep-bare", "Ep.04.mkv", "Prison Break", 2, 4, folderIn = "Prison Break/Saison II"),
+        ser("ep-bare", "Prison Break - 04 - Cut Off.mkv", "Prison Break", 2, 4, epTitle = "Cut Off", folderIn = "Prison Break/Saison 2"),
+        // anime : numérotation absolue
+        unk("ep-anime", "One Piece - 1045.mkv"),
+        ser("ep-anime", "[SubsPlease] Spy x Family - 12 (1080p) [A1B2C3D4].mkv", "Spy X Family", null, 12),
+        ser("ep-anime", "[Erai-raws] Jujutsu Kaisen - 47 [1080p][Multiple Subtitle].mkv", "Jujutsu Kaisen", null, 47),
+        ser("ep-anime", "[Anime Land] Blue Lock - 05 [720p].mkv", "Blue Lock", null, 5),
+        ser("ep-anime", "[HorribleSubs] Gintama - 100v2 [480p].mkv", "Gintama", null, 100),
+        ser("ep-anime", "[Group] Mob Psycho 100 - 03 [1080p].mkv", "Mob Psycho 100", null, 3),
+        ser("ep-anime", "[Judas] Vinland Saga - S02E05.mkv", "Vinland Saga", 2, 5),
+        ser("ep-anime", "Naruto Episode 220 VOSTFR.mkv", "Naruto", null, 220, tag = " [VOSTFR]"),
+        ser("ep-anime", "Bleach.ep.366.vostfr.720p.mkv", "Bleach", null, 366, tag = " [VOSTFR]"),
+        // épisodes multiples
+        ser("ep-multi", "Friends.S02E01E02.mkv", "Friends", 2, 1, 2),
+        ser("ep-multi", "Friends S02E01-E02.mkv", "Friends", 2, 1, 2),
+        ser("ep-multi", "Friends S02E01-02.mkv", "Friends", 2, 1, 2),
+        ser("ep-multi", "Friends S02E01+E02.mkv", "Friends", 2, 1, 2),
+        ser("ep-multi", "Friends 2x01-02.mkv", "Friends", 2, 1, 2),
+        ser("ep-multi", "Friends S02E01 E02.mkv", "Friends", 2, 1, 2),
+        ser("ep-multi", "Friends.S02E01E02E03.mkv", "Friends", 2, 1, 3),
+        // spéciaux
+        ser("ep-special", "Doctor Who S00E01 Time Crash.mkv", "Doctor Who", 0, 1, epTitle = "Time Crash"),
+        ser("ep-special", "Doctor.Who.S00E03.mkv", "Doctor Who", 0, 3),
+        ser("ep-special", "Fairy Tail OVA 2.mkv", "Fairy Tail", 0, 2),
+        ser("ep-special", "[Group] Bleach OVA [720p].mkv", "Bleach", 0, 1),
+        ser("ep-special", "Black Mirror SP01.mkv", "Black Mirror", 0, 1),
+        ser("ep-special", "Episode 01.mkv", "Sherlock", 0, 1, folderIn = "Sherlock/Specials"),
+        ser("ep-special", "Episode 02.mkv", "Sherlock", 0, 2, folderIn = "Sherlock/Season 0"),
+        mov("ep-special", "Special.Forces.2011.1080p.BluRay.mkv", "Special Forces", 2011),
+        mov("ep-special", "Rocky Special Edition 1976 720p.mkv", "Rocky Special Edition", 1976),
+        // séries quotidiennes par date
+        daily("ep-date", "The Daily Show 2024.03.15.mp4", "The Daily Show", "2024-03-15"),
+        daily("ep-date", "The Daily Show 2024-03-15.mp4", "The Daily Show", "2024-03-15"),
+        daily("ep-date", "The.Daily.Show.2024.03.15.720p.WEB.h264.mkv", "The Daily Show", "2024-03-15"),
+        daily("ep-date", "The Daily Show 15-03-2024.mp4", "The Daily Show", "2024-03-15"),
+        daily("ep-date", "The Daily Show 15.03.2024.mp4", "The Daily Show", "2024-03-15"),
+        daily("ep-date", "The Daily Show 20240315.mp4", "The Daily Show", "2024-03-15"),
+        daily("ep-date", "Le Grand Journal 2016-05-12.mp4", "Le Grand Journal", "2016-05-12"),
+        // une date ambiguë (jour/mois ≤ 12) n'est jamais devinée : on garde le nom
+        GCase("ep-date", Case("The Daily Show 03-04-2024.mp4", "The Daily Show 03-04-2024.mp4", "À trier", Kind.UNKNOWN)),
+        // parties
+        mov("ep-part", "Kill Bill 2003 CD1.avi", "Kill Bill", 2003, part = " - part1"),
+        mov("ep-part", "Kill Bill.2003.CD2.avi", "Kill Bill", 2003, part = " - part2"),
+        mov("ep-part", "Heat 1995 Part 1.avi", "Heat", 1995, part = " - part1"),
+        mov("ep-part", "Heat 1995 Pt.2.avi", "Heat", 1995, part = " - part2"),
+        mov("ep-part", "Heat 1995 Partie 2.avi", "Heat", 1995, part = " - part2"),
+        mov("ep-part", "Dune Part Two 2024 1080p.mkv", "Dune Part Two", 2024),
+        mov("ep-part", "Harry Potter and the Deathly Hallows Part 2 2011.mkv", "Harry Potter and the Deathly Hallows Part 2", 2011),
+        // ---------------------------------------------------------------- épisodes : mots dans toutes les langues
+        ser("lang-words", "Narcos Temporada 2 Capítulo 5.mkv", "Narcos", 2, 5),
+        ser("lang-words", "Narcos Temporada 2 Capitulo 5.mkv", "Narcos", 2, 5),
+        ser("lang-words", "Narcos T02 Cap 05.mkv", "Narcos", 2, 5),
+        ser("lang-words", "Narcos Temporada 2 Cap.5.mkv", "Narcos", 2, 5),
+        ser("lang-words", "Dark Temporada 3 Episódio 4.mkv", "Dark", 3, 4),
+        ser("lang-words", "Dark Staffel 3 Folge 4.mkv", "Dark", 3, 4),
+        ser("lang-words", "Dark - Staffel 3 - Folge 4.mkv", "Dark", 3, 4),
+        ser("lang-words", "Gomorra Stagione 2 Episodio 6.mkv", "Gomorra", 2, 6),
+        ser("lang-words", "Gomorra Stagione 2 Ep 6.mkv", "Gomorra", 2, 6),
+        ser("lang-words", "Penoza Seizoen 2 Aflevering 6.mkv", "Penoza", 2, 6),
+        ser("lang-words", "Bonusfamiljen Säsong 2 Avsnitt 6.mkv", "Bonusfamiljen", 2, 6),
+        ser("lang-words", "Wiedźmin Sezon 2 Odcinek 6.mkv", "Wiedźmin", 2, 6),
+        ser("lang-words", "Diriliş Sezon 2 Bölüm 6.mkv", "Diriliş", 2, 6),
+        ser("lang-words", "Diriliş 2. Sezon 6. Bölüm.mkv", "Diriliş", 2, 6),
+        ser("lang-words", "Игра престолов Сезон 2 Серия 6.mkv", "Игра престолов", 2, 6),
+        ser("lang-words", "Игра престолов 2 сезон 6 серия.mkv", "Игра престолов", 2, 6),
+        ser("lang-words", "المسلسل الموسم 2 الحلقة 6.mkv", "المسلسل", 2, 6),
+        ser("lang-words", "المسلسل الحلقة 6.mkv", "المسلسل", null, 6),
+        ser("lang-words", "权力的游戏 第2季第6集.mkv", "权力的游戏", 2, 6),
+        ser("lang-words", "权力的游戏 第2季 第6集.mkv", "权力的游戏", 2, 6),
+        ser("lang-words", "Attack on Titan 第2期 第6話.mkv", "Attack On Titan", 2, 6),
+        ser("lang-words", "進撃の巨人 第2期 第6話.mkv", "進撃の巨人", 2, 6),
+        ser("lang-words", "오징어 게임 시즌 2 6화.mkv", "오징어 게임", 2, 6),
+        ser("lang-words", "Les Revenants Saison 2 Épisode 6.mkv", "Les Revenants", 2, 6),
+        ser("lang-words", "Les Revenants Saison II Episode 6.mkv", "Les Revenants", 2, 6),
+        ser("lang-words", "Narcos Temporada II Capítulo 6.mkv", "Narcos", 2, 6),
+        // dossiers parents
+        ser("folder", "Episode 6.mkv", "Narcos", 2, 6, folderIn = "Narcos/Temporada 2"),
+        ser("folder", "Folge 6.mkv", "Dark", 3, 6, folderIn = "Dark/Staffel 3"),
+        ser("folder", "6.mkv", "Les Revenants", 2, 6, folderIn = "Les Revenants/Saison 02"),
+        ser("folder", "06.mkv", "Les Revenants", 2, 6, folderIn = "Les Revenants/Saison II"),
+        ser("folder", "E06.mkv", "Vikings", 4, 6, folderIn = "Vikings/S4"),
+        ser("folder", "Episode 06.mkv", "Vikings", 4, 6, folderIn = "Vikings/Season 04"),
+        ser("folder", "Episode 06.mkv", "Vikings", 4, 6, folderIn = "Séries/Vikings/Saison 4"),
+        ser("folder", "Ep 06.mkv", "Vikings", 4, 6, folderIn = "Vikings/Stagione 4"),
+        // ---------------------------------------------------------------- films
+        mov("film-year", "Inception (2010).mkv", "Inception", 2010),
+        mov("film-year", "Inception [2010].mkv", "Inception", 2010),
+        mov("film-year", "Inception.2010.mkv", "Inception", 2010),
+        mov("film-year", "Inception_2010_720p.mkv", "Inception", 2010),
+        mov("film-year", "Inception - 2010.mkv", "Inception", 2010),
+        mov("film-year", "Inception (2010) 1080p BluRay.mkv", "Inception", 2010),
+        mov("film-year", "Inception.(2010).FRENCH.BDRip.x264.mkv", "Inception", 2010),
+        mov("film-year", "Inception.2010.Remux.2160p.mkv", "Inception", 2010),
+        mov("film-seq", "Toy Story 4 (2019).mkv", "Toy Story 4", 2019),
+        mov("film-seq", "Rocky II 1979 1080p.mkv", "Rocky II", 1979),
+        mov("film-seq", "Rocky.III.1982.720p.mkv", "Rocky III", 1982),
+        mov("film-seq", "Matrix Reloaded 2003.mkv", "Matrix Reloaded", 2003),
+        mov("film-seq", "Kung Fu Panda 2 2011 BluRay.mkv", "Kung Fu Panda 2", 2011),
+        mov("film-seq", "Twilight Chapitre 3 Hésitation 2010.mkv", "Twilight Chapitre 3 Hésitation", 2010),
+        mov("film-seq", "Fast X Part Two 2025 1080p.mkv", "Fast X Part Two", 2025),
+        mov("film-seq", "Kill Bill Vol. 2 2004.avi", "Kill Bill Vol 2", 2004),
+        mov("film-seq", "Shrek 2 (2004) VF.mkv", "Shrek 2", 2004),
+        mov("film-edition", "Blade Runner 1982 Director's Cut 1080p.mkv", "Blade Runner", 1982),
+        mov("film-edition", "Blade.Runner.1982.Directors.Cut.1080p.mkv", "Blade Runner", 1982),
+        mov("film-edition", "Aliens 1986 Extended Cut 1080p BluRay.mkv", "Aliens", 1986),
+        mov("film-edition", "Aliens.1986.Extended.1080p.mkv", "Aliens", 1986),
+        mov("film-edition", "Gladiator.2000.Unrated.720p.mkv", "Gladiator", 2000),
+        mov("film-edition", "Gladiator 2000 Remastered 4K.mkv", "Gladiator", 2000),
+        mov("film-edition", "Dunkirk.2017.IMAX.1080p.mkv", "Dunkirk", 2017),
+        mov("film-edition", "Avatar 2009 3D HSBS 1080p.mkv", "Avatar", 2009),
+        mov("film-edition", "Avatar.2009.3D.mkv", "Avatar", 2009),
+        mov("film-edition", "Apocalypse Now 1979 Final Cut 1080p.mkv", "Apocalypse Now", 1979),
+        mov("film-edition", "Apocalypse Now 1979 Theatrical Cut.mkv", "Apocalypse Now", 1979),
+        mov("film-edition", "Leon.1994.Uncut.720p.mkv", "Leon", 1994),
+        mov("film-numtitle", "300 (2006).mkv", "300", 2006),
+        mov("film-numtitle", "300.2006.1080p.BluRay.mkv", "300", 2006),
+        mov("film-numtitle", "1917 (2019).mkv", "1917", 2019),
+        mov("film-numtitle", "1917.2019.1080p.mkv", "1917", 2019),
+        mov("film-numtitle", "2012 (2009).mkv", "2012", 2009),
+        mov("film-numtitle", "21 Jump Street (2012).mkv", "21 Jump Street", 2012),
+        mov("film-numtitle", "21.Jump.Street.2012.720p.mkv", "21 Jump Street", 2012),
+        mov("film-numtitle", "10 Cloverfield Lane 2016 1080p.mkv", "10 Cloverfield Lane", 2016),
+        mov("film-numtitle", "2001 A Space Odyssey 1968.mkv", "2001 A Space Odyssey", 1968),
+        mov("film-numtitle", "12 Years a Slave 2013 BluRay.mkv", "12 Years a Slave", 2013),
+        mov("film-numtitle", "1917.1080p.BluRay.x264.mkv", "1917", null),
+        unk("film-numtitle", "1917.mkv"),
+        unk("film-numtitle", "300.mkv"),
+        unk("film-numtitle", "2012.mkv"),
+        unk("film-numtitle", "101.mkv"),
+        // ---------------------------------------------------------------- bruit de téléchargement
+        ser("noise", "Prison.Break.S01E08.FRENCH.720p.HDTV.x264-LOL.avi", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.VFF.720p.WEB.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.VF2.720p.WEB.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.SUBFRENCH.720p.WEB.mkv", "Prison Break", 1, 8, tag = " [VOSTFR]"),
+        ser("noise", "Prison.Break.S01E08.MULTi.1080p.WEBRip.x265-HEVC.mkv", "Prison Break", 1, 8, tag = " [MULTI]"),
+        ser("noise", "Prison.Break.S01E08.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.1080p.NF.WEB-DL.DDP5.1.Atmos.x264.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.2160p.DSNP.WEB-DL.DDP5.1.HDR.HEVC.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.1080p.HMAX.WEB-DL.DD5.1.x264.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.1080p.ATVP.WEB-DL.DDP5.1.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.1080p.PCOK.WEB-DL.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.1080p.10bit.AV1.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.PROPER.720p.HDTV.x264-DIMENSION.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.REPACK.720p.HDTV.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison.Break.S01E08.iNTERNAL.720p.HDTV.mkv", "Prison Break", 1, 8),
+        ser("noise", "Prison Break S01E08 720p x265 10bit HEVC DDP5.1.mkv", "Prison Break", 1, 8),
+        mov("noise", "Inception.2010.TRUEFRENCH.BDRip.x264.mkv", "Inception", 2010),
+        mov("noise", "Inception.2010.FRENCH.DVDRip.XviD.avi", "Inception", 2010),
+        mov("noise", "Inception.2010.VOSTFR.1080p.BluRay.mkv", "Inception", 2010, tag = " [VOSTFR]"),
+        mov("noise", "Inception.2010.MULTi.1080p.BluRay.x264.mkv", "Inception", 2010, tag = " [MULTI]"),
+        mov("noise", "Inception.2010.1080p.BluRay.DTS-HD.MA.5.1.x264.mkv", "Inception", 2010),
+        mov("noise", "Inception.2010.1080p.BluRay.Atmos.TrueHD.7.1.mkv", "Inception", 2010),
+        ser("noise-africa", "[NetNaija.com] Blood Sisters S01E02.mp4", "Blood Sisters", 1, 2),
+        ser("noise-africa", "www.o2tvseries.com - Blood Sisters S01E02.mp4", "Blood Sisters", 1, 2),
+        ser("noise-africa", "TFPDL - Blood Sisters S01E02 720p.mkv", "Blood Sisters", 1, 2),
+        ser("noise-africa", "Blood.Sisters.S01E02.720p.WEB.x264[TFPDL].mkv", "Blood Sisters", 1, 2),
+        ser("noise-africa", "[9jaRocks.com] Blood Sisters S01E02.mkv", "Blood Sisters", 1, 2),
+        ser("noise-africa", "Blood Sisters S01E02 (Waploaded.com).mp4", "Blood Sisters", 1, 2),
+        ser("noise-africa", "Waploaded.com - Blood Sisters S01E02.mp4", "Blood Sisters", 1, 2),
+        ser("noise-africa", "Blood Sisters S01E02 - NetNaija.mp4", "Blood Sisters", 1, 2),
+        mov("noise-africa", "[NetNaija.com] King of Boys (2018).mp4", "King Of Boys", 2018),
+        mov("noise-africa", "King.of.Boys.2018.720p.WEB-DL.x264.[9jaRocks.Com].mkv", "King Of Boys", 2018),
+        mov("noise-africa", "TFPDL.Lionheart.2018.720p.WEB.mkv", "Lionheart", 2018),
+        // WhatsApp / Telegram : pas un film, pas une série
+        other("noise-chat", "VID-20240315-WA0012.mp4", "Vidéo WhatsApp – 2024-03-15 (12).mp4", "Famille", Kind.PERSONAL),
+        other("noise-chat", "IMG-20240315-WA0012.jpg", "Photo WhatsApp – 2024-03-15 (12).jpg", "Famille", Kind.PHOTO),
+        other("noise-chat", "AUD-20240315-WA0003.opus", "Audio WhatsApp – 2024-03-15 (3).opus", "Famille", Kind.PERSONAL),
+        other("noise-chat", "PTT-20240315-WA0003.opus", "Audio WhatsApp – 2024-03-15 (3).opus", "Famille", Kind.PERSONAL),
+        other("noise-chat", "WhatsApp Video 2024-03-15 at 14.22.11.mp4", "Vidéo WhatsApp – 2024-03-15 14h22.mp4", "Famille", Kind.PERSONAL),
+        other("noise-chat", "WhatsApp Video 2024-03-15 at 14.22.11 (1).mp4", "Vidéo WhatsApp – 2024-03-15 14h22.mp4", "Famille", Kind.PERSONAL),
+        other("noise-chat", "video_2024-03-15_14-22-11.mp4", "Vidéo Telegram – 2024-03-15 14h22.mp4", "Famille", Kind.PERSONAL),
+        ser("noise-chat", "@NollyMovies Blood Sisters S01E02.mp4", "Blood Sisters", 1, 2),
+        ser("noise-chat", "Blood Sisters S01E02 @NollyMovies.mp4", "Blood Sisters", 1, 2),
+        ser("noise-chat", "Blood Sisters S01E02 t.me/nollyfilms.mp4", "Blood Sisters", 1, 2),
+        ser("noise-chat", "t.me_nollyfilms_Blood.Sisters.S01E02.mp4", "Blood Sisters", 1, 2),
+        mov("noise-chat", "@cinema_afrik Lionheart 2018.mp4", "Lionheart", 2018),
+        mov("noise-chat", "Lionheart 2018 720p t.me/cinema_afrik.mp4", "Lionheart", 2018),
+        mov("noise-chat", "Forwarded Lionheart 2018 720p.mp4", "Lionheart", 2018),
+        // ---------------------------------------------------------------- sous-titres
+        ser("subs", "Prison.Break.S01E08.fr.srt", "Prison Break", 1, 8, tag = "").let { sub(it, "fr") },
+        ser("subs", "Prison.Break.S01E08.eng.forced.srt", "Prison Break", 1, 8).let { sub(it, "en.forced") },
+        ser("subs", "Prison.Break.S01E08.fr.sdh.srt", "Prison Break", 1, 8).let { sub(it, "fr.sdh") },
+        ser("subs", "Prison.Break.S01E08.pt-BR.ass", "Prison Break", 1, 8).let { sub(it, "pt-BR") },
+        ser("subs", "Prison.Break.S01E08.fre.srt", "Prison Break", 1, 8).let { sub(it, "fr") },
+        ser("subs", "Prison.Break.S01E08.es.vtt", "Prison Break", 1, 8).let { sub(it, "es") },
+        ser("subs", "Prison.Break.S01E08.deu.srt", "Prison Break", 1, 8).let { sub(it, "de") },
+        ser("subs", "Prison.Break.S01E08.ita.srt", "Prison Break", 1, 8).let { sub(it, "it") },
+        ser("subs", "Prison.Break.S01E08.ar.srt", "Prison Break", 1, 8).let { sub(it, "ar") },
+        ser("subs", "Prison.Break.S01E08.fr.forced.srt", "Prison Break", 1, 8).let { sub(it, "fr.forced") },
+        ser("subs", "Prison.Break.S01E08.en.hi.srt", "Prison Break", 1, 8).let { sub(it, "en.sdh") },
+        mov("subs", "Inception (2010).fr.srt", "Inception", 2010, sub = ".fr"),
+        mov("subs", "Inception (2010).fra.srt", "Inception", 2010, sub = ".fr"),
+        mov("subs", "Inception (2010).eng.srt", "Inception", 2010, sub = ".en"),
+        mov("subs", "Inception.2010.1080p.BluRay.en.forced.srt", "Inception", 2010, sub = ".en.forced"),
+        mov("subs", "Inception.2010.1080p.BluRay.zh.srt", "Inception", 2010, sub = ".zh"),
+        mov("subs", "Inception.2010.1080p.BluRay.ja.vtt", "Inception", 2010, sub = ".ja"),
+        mov("subs", "Inception.2010.1080p.BluRay.kor.srt", "Inception", 2010, sub = ".ko"),
+        mov("subs", "Inception.2010.1080p.BluRay.rus.srt", "Inception", 2010, sub = ".ru"),
+        mov("subs", "Inception.2010.1080p.BluRay.pt-BR.srt", "Inception", 2010, sub = ".pt-BR"),
+        mov("subs", "Inception.2010.1080p.BluRay.nl.srt", "Inception", 2010, sub = ".nl"),
+        mov("subs", "Inception.2010.1080p.BluRay.sv.srt", "Inception", 2010, sub = ".sv"),
+        mov("subs", "Inception.2010.1080p.BluRay.pl.srt", "Inception", 2010, sub = ".pl"),
+        mov("subs", "Inception.2010.1080p.BluRay.tr.srt", "Inception", 2010, sub = ".tr"),
+        mov("subs", "Inception.2010.1080p.BluRay.vtt", "Inception", 2010),
+        // « it » est aussi un mot de titre : sans point devant, jamais une langue
+        unk("subs", "Stranger Than It.srt"),
+        // ---------------------------------------------------------------- musique
+        other("music", "01 - Last Last.mp3", "01 – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "01. Last Last.mp3", "01 – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "01 Last Last.mp3", "01 – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "01_Last_Last.mp3", "01 – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "A1 Burna Boy - Last Last.mp3", "Burna Boy – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy - Last Last (feat. Tems).mp3", "Burna Boy – Last Last (feat. Tems).mp3", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy ft. Tems - Last Last.mp3", "Burna Boy feat. Tems – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy ft Tems - Last Last.mp3", "Burna Boy feat. Tems – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy feat. Tems - Last Last.mp3", "Burna Boy feat. Tems – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy - Last Last (Live).mp3", "Burna Boy – Last Last (Live).mp3", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy - Last Last (Remix).mp3", "Burna Boy – Last Last (Remix).mp3", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy - Last Last (Official Audio).mp3", "Burna Boy – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy - Last Last [Lyrics].mp3", "Burna Boy – Last Last.mp3", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy - Last Last (Official Video).mp4", "Burna Boy – Last Last.mp4", "Clips", Kind.CLIP, dur = 3),
+        other("music", "Burna Boy - Last Last [Official Music Video].mp4", "Burna Boy – Last Last.mp4", "Clips", Kind.CLIP, dur = 3),
+        other("music", "03 - Last Last.mp3", "03 – Last Last.mp3", "Musique", Kind.MUSIC, folderIn = "Burna Boy/CD1"),
+        other("music", "Burna Boy - Last Last.flac", "Burna Boy – Last Last.flac", "Musique", Kind.MUSIC),
+        other("music", "Burna Boy - Last Last (320kbps).mp3", "Burna Boy – Last Last.mp3", "Musique", Kind.MUSIC),
+        // ---------------------------------------------------------------- cours
+        other("course", "01. Introduction.mp4", "01. Introduction.mp4", "Cours", Kind.COURSE, folderIn = "Cours de Python"),
+        other("course", "Section 1 - Lecture 2 - Variables.mp4", "Section 1 – Lecture 2 – Variables.mp4", "Cours", Kind.COURSE),
+        other("course", "Module 3 - Les fonctions.mp4", "Module 3 – Les fonctions.mp4", "Cours/Informatique", Kind.COURSE, folderIn = "Formation Python"),
+        other("course", "Chapitre 4 : Les limites.mp4", "Chapitre 4 – Les limites.mp4", "Cours/Mathématiques", Kind.COURSE, folderIn = "Cours de Maths"),
+        other("course", "Leçon 5 - Les fractions.mp4", "Leçon 5 – Les fractions.mp4", "Cours/Mathématiques", Kind.COURSE),
+        other("course", "Lesson 5 - Fractions.mp4", "Lesson 5 – Fractions.mp4", "Cours", Kind.COURSE),
+        // ---------------------------------------------------------------- séparateurs, casse, Unicode
+        ser("sep", "prison break s01e08.avi", "Prison Break", 1, 8),
+        ser("sep", "PRISON BREAK S01E08.avi", "Prison Break", 1, 8),
+        ser("sep", "Prison     Break    S01E08.avi", "Prison Break", 1, 8),
+        ser("sep", "Prison-Break-S01E08.avi", "Prison Break", 1, 8),
+        ser("sep", "prison_break_s01e08.avi", "Prison Break", 1, 8),
+        ser("sep", "Prison.Break.S01E08.AVI", "Prison Break", 1, 8),
+        ser("sep", nfd("Le Bureau des Légendes S02E03.mkv"), "Le Bureau des Légendes", 2, 3),
+        ser("sep", "Les Misérables S01E01.mkv", "Les Misérables", 1, 1),
+        ser("sep", nfd("Les.Misérables.S01E01.mkv"), "Les Misérables", 1, 1),
+        ser("sep", "Sœurs de Yaoundé S01E01.mkv", "Sœurs de Yaoundé", 1, 1),
+        ser("sep", nfd("Les Révénants S01E01.mkv"), "Les Révénants", 1, 1),
+        ser("sep", "A".repeat(100) + " S01E08.avi", "A".repeat(100), 1, 8).let { GCase("sep", Case(it.c.input, "A".repeat(100) + " – S01E08.avi", "Séries/" + "A".repeat(100) + "/Saison 01", Kind.SERIES)) },
+    )
+
+    /** A subtitle that follows [g]'s video: same name, the language (and flags) before the extension. */
+    internal fun sub(g: GCase, subLang: String): GCase {
+        val c = g.c
+        val ext = c.input.substringAfterLast('.')
+        val base = c.name.substringBeforeLast('.')
+        return GCase("subs", Case(c.input, "$base.$subLang.$ext", c.folder, c.kind, c.dur, c.folderIn, c.lang))
+    }
+}
