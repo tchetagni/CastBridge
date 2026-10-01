@@ -1,0 +1,890 @@
+{
+ "chapter": "form2-geography-climate",
+ "lessons": [
+  {
+   "id": "form2-geography-climate-factors",
+   "title": "Factors that affect climate",
+   "minutes": 20,
+   "programRef": "Cameroon anglophone secondary Geography syllabus, Form 2 — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the main factors influencing temperature and rainfall",
+    "Explain relief rainfall and the rain shadow",
+    "Calculate the fall of temperature with height",
+    "Describe the climate types of Cameroon"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-geography-climate-e01",
+    "form2-geography-climate-e02",
+    "form2-geography-climate-e03",
+    "form2-geography-climate-e04",
+    "form2-geography-climate-e05",
+    "form2-geography-climate-e06"
+   ],
+   "selfCheck": [
+    "form2-geography-climate-factors-q1",
+    "form2-geography-climate-factors-q2",
+    "form2-geography-climate-factors-q3",
+    "form2-geography-climate-factors-q4",
+    "form2-geography-climate-factors-q5"
+   ],
+   "reviewNotes": [
+    "Teacher to verify the lapse rate used in the syllabus (6.5 °C per 1000 m or 1 °C per 150 m), the description of the climate zones of Cameroon (number of rainy seasons) and the monsoon wording.",
+    "Draft for teacher review: this course follows the Cameroon anglophone secondary Geography syllabus as generally understood; scope and level per Form, places, figures and examples must be checked against the official syllabus and a current atlas before release."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "The climate of a place depends on several factors. **Latitude**: places near the Equator receive more direct sunlight and are warmer than places near the poles. **Altitude**: temperature falls as we go higher. **Distance from the sea**: the sea warms and cools slowly, so coasts have smaller temperature ranges than inland places. **Ocean currents**, **winds** and **relief** also matter."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         150,
+         140,
+         50,
+         210,
+         150
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         210,
+         150,
+         300,
+         110,
+         390,
+         150
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 150,
+        "w": 400,
+        "h": 12,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 90,
+        "x2": 100,
+        "y2": 80,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 70,
+        "text": "Moist wind",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 175,
+        "text": "Windward: heavy rain",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 175,
+        "text": "Leeward: dry (rain shadow)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 40,
+        "text": "Mountain",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Relief rainfall and rain shadow",
+     "alt": "A mountain with a wind arrow on its windward side, rain there and a dry side beyond."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Temperature and height",
+     "md": "Air gets colder with height by about **6.5 °C for every 1000 m** (about 1 °C per 150 m). If the temperature at sea level is 28 °C, the temperature at 1000 m is about 28 − 6.5 = 21.5 °C. This explains why the Grassfields around Bamenda are cooler than the coast at Limbe."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Relief rainfall",
+     "md": "Moist wind from the sea is forced to rise over mountains. It cools, water vapour condenses into cloud and **rain falls on the windward slope**. The air then descends on the other side, warms and is dry: the **leeward** side is a **rain shadow**. Mount Cameroon's windward coast is among the wettest places in Africa."
+    },
+    {
+     "type": "text",
+     "md": "**Climates of Cameroon.** The **south** has an equatorial climate: hot all year, with heavy rain and two rainy seasons. The **coast** is very wet, mostly from the monsoon wind from the south-west Atlantic, with a long rainy season. The **Adamawa and highlands** are cooler. The **north** has a tropical climate with one long dry season and one rainy season, and the **Far North** is drier, near the Sahel."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- It is not true that every hot place is dry: equatorial lands are hot and very wet.\n- Temperature falls with height, so it does not rise on mountains.\n- The windward side gets the rain; the leeward side is drier. Do not mix them up."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: temperature on a hill",
+     "statement": "At sea level the temperature is 30 °C. What is the temperature at a place 2000 m high, using 6.5 °C per 1000 m?",
+     "steps": [
+      "Fall for 2000 m = 2 × 6.5 = 13 °C.",
+      "Temperature = 30 − 13 = 17 °C.",
+      "The result is in degrees Celsius."
+     ],
+     "answer": "17 °C."
+    },
+    {
+     "type": "example",
+     "title": "Example 2: explain a rain shadow",
+     "statement": "Why is the leeward side of a mountain range often dry?",
+     "steps": [
+      "Moist air rises on the windward side and loses its water as rain.",
+      "When it descends on the leeward side it is warmed and has little moisture left.",
+      "So the leeward side receives little rain."
+     ],
+     "answer": "Because the air has lost its moisture on the windward side."
+    }
+   ],
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-vegetation",
+   "title": "Vegetation zones of Africa and Cameroon",
+   "minutes": 20,
+   "programRef": "Cameroon anglophone secondary Geography syllabus, Form 2 — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define natural vegetation",
+    "Describe equatorial forest, savanna and desert vegetation",
+    "Relate vegetation to climate",
+    "Locate the vegetation belts in Cameroon"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-geography-climate-e07",
+    "form2-geography-climate-e08",
+    "form2-geography-climate-e09",
+    "form2-geography-climate-e10",
+    "form2-geography-climate-e11",
+    "form2-geography-climate-e12"
+   ],
+   "selfCheck": [
+    "form2-geography-vegetation-q1",
+    "form2-geography-vegetation-q2",
+    "form2-geography-vegetation-q3",
+    "form2-geography-vegetation-q4",
+    "form2-geography-vegetation-q5"
+   ],
+   "reviewNotes": [
+    "Teacher to verify the tree species named (mahogany, iroko, ebony), the extent of each vegetation zone in Cameroon and the syllabus wording (Sahel/Sudan/Guinea savanna).",
+    "Draft for teacher review: this course follows the Cameroon anglophone secondary Geography syllabus as generally understood; scope and level per Form, places, figures and examples must be checked against the official syllabus and a current atlas before release."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "**Natural vegetation** is the plant cover that grows without being planted by people. It depends mainly on **climate** (temperature and rainfall) and **soil**. In Africa the vegetation forms rough belts on either side of the Equator: **equatorial forest** near the Equator, then **savanna** (tropical grassland), then **semi-desert** and **desert**, like the Sahara in the north."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 136,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 20,
+        "text": "Vegetation belts",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 34,
+        "w": 127,
+        "h": 96,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 73,
+        "y": 56,
+        "text": "Rainforest",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 73,
+        "y": 80,
+        "text": "Very wet",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 73,
+        "y": 102,
+        "text": "Tall trees",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 73,
+        "y": 124,
+        "text": "Layers",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 34,
+        "w": 127,
+        "h": 96,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 56,
+        "text": "Savanna",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 80,
+        "text": "Wet + dry",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 102,
+        "text": "Tall grass",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 124,
+        "text": "Few trees",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 283,
+        "y": 34,
+        "w": 127,
+        "h": 96,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 347,
+        "y": 56,
+        "text": "Desert",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 347,
+        "y": 80,
+        "text": "Very dry",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 347,
+        "y": 102,
+        "text": "Shrubs",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 347,
+        "y": 124,
+        "text": "Bare soil",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Three belts of vegetation",
+     "alt": "Three columns describing rainforest, savanna and desert."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Equatorial rainforest",
+     "md": "Hot and wet all year. Trees are tall, evergreen and close together, forming **layers**: tall emergent trees, the closed canopy, smaller trees and shrubs, and a dark forest floor. Many kinds of trees grow (mahogany, iroko, ebony). It is found in the south and east of Cameroon and in the Congo Basin."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Savanna and desert",
+     "md": "**Savanna**: a long dry season and a wet season. Tall grasses with scattered, flat-topped trees such as acacia and baobab; grass dries and is often burnt in the dry season. **Semi-desert and desert**: very low rain, bare ground, thorny shrubs and succulents with small leaves or thick stems to save water."
+    },
+    {
+     "type": "text",
+     "md": "In **Cameroon**, the forest covers much of the south; the **Adamawa** plateau and the northern lowlands have savanna; the **Far North** is Sahel-type steppe with thorny trees; and the **highlands** have mountain grassland and forests that change with height. The **coast** has mangrove swamps in river estuaries."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Be careful",
+     "md": "- Savanna is not forest: grass dominates, with only scattered trees.\n- Plants in dry areas are adapted to save water (thick stems, small leaves, deep or wide roots).\n- Human activities such as farming, burning and logging have changed much natural vegetation."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: match vegetation to climate",
+     "statement": "A region is hot all year with over 2000 mm of rain spread through the year. Which vegetation is likely?",
+     "steps": [
+      "Hot and constantly wet conditions suit large trees.",
+      "These conditions occur near the Equator.",
+      "The vegetation is equatorial rainforest."
+     ],
+     "answer": "Equatorial rainforest."
+    },
+    {
+     "type": "example",
+     "title": "Example 2: adaptation",
+     "statement": "Why do many desert plants have thick stems and small or no leaves?",
+     "steps": [
+      "Water is scarce in deserts.",
+      "Thick stems store water and small leaves lose less water.",
+      "These features are adaptations to drought."
+     ],
+     "answer": "To store water and reduce water loss."
+    }
+   ],
+   "chapter": "form2-geography-climate"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form2-geography-climate-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-geography-climate-factors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The side of a mountain facing the rain-bearing wind is the",
+   "choices": [
+    "leeward side",
+    "shadow side only",
+    "river side",
+    "windward side"
+   ],
+   "answer": 3,
+   "explanation": "It receives relief rainfall.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-geography-climate-factors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Temperature falls as altitude increases.",
+   "answer": true,
+   "explanation": "About 6.5 °C per 1000 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-geography-climate-factors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The temperature at sea level is 26 °C. What is it at 1000 m (use 6.5 °C per 1000 m)? Give the answer in °C.",
+   "answer": 19.5,
+   "tolerance": 0.01,
+   "unit": "°C",
+   "explanation": "26 − 6.5 = 19.5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-geography-climate-factors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "At the coast, the temperature is 29 °C. What is it at 1500 m, with a fall of 6.5 °C per 1000 m?",
+   "answer": 19.25,
+   "tolerance": 0.05,
+   "unit": "°C",
+   "explanation": "1500 m: fall = 1.5 × 6.5 = 9.75; 29 − 9.75 = 19.25.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-geography-climate-factors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why Bamenda is cooler than Douala, although both are in Cameroon.",
+   "model": "Bamenda is much higher above sea level, and temperature falls with height (about 6.5 °C per 1000 m), while Douala is on the low coast.",
+   "rubric": "1 mark: altitude; 1 mark: fall with height; 1 mark: coast is low and hotter.",
+   "explanation": "Bamenda is much higher above sea level, and temperature falls with height (about 6.5 °C per 1000 m), while Douala is on the low coast.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-geography-climate-factors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A mountain range in a tropical country has sea on its south side and the rain-bearing wind comes from the south.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which side gets the heavy rain?",
+     "choices": [
+      "neither",
+      "both equally",
+      "the north (leeward) slopes",
+      "the south (windward) slopes"
+     ],
+     "answer": 3,
+     "explanation": "The wind meets the mountain from the south.",
+     "id": "form2-geography-climate-e06-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The north side is in the rain shadow.",
+     "answer": true,
+     "explanation": "Leeward slopes are drier.",
+     "id": "form2-geography-climate-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "A town at 1300 m with sea-level temperature 28 °C: what is its temperature (6.5 °C per 1000 m)? Answer to 1 decimal place.",
+     "answer": 19.6,
+     "tolerance": 0.1,
+     "explanation": "1.3 × 6.5 = 8.45; 28 − 8.45 = 19.55 ≈ 19.6.",
+     "unit": "°C",
+     "id": "form2-geography-climate-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name two factors besides altitude that affect temperature.",
+     "model": "Latitude, distance from the sea, ocean currents, winds and cloud cover.",
+     "rubric": "1 mark per factor.",
+     "explanation": "Latitude, distance from the sea, ocean currents, winds and cloud cover.",
+     "id": "form2-geography-climate-e06-d"
+    }
+   ],
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-factors-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-climate-factors",
+   "prompt": "Which factor makes the Equator hotter than the poles?",
+   "choices": [
+    "grid reference",
+    "latitude",
+    "map scale",
+    "longitude"
+   ],
+   "answer": 1,
+   "explanation": "Direct sunlight is stronger near the Equator.",
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-factors-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-climate-factors",
+   "prompt": "A rain shadow is found on the",
+   "choices": [
+    "leeward side of mountains",
+    "sea side",
+    "equator only",
+    "windward side"
+   ],
+   "answer": 0,
+   "explanation": "Descending air is dry.",
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-factors-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-climate-factors",
+   "prompt": "The temperature drop with height is about",
+   "choices": [
+    "6.5 °C per 1000 m",
+    "65 °C per 100 m",
+    "0 °C per 1000 m",
+    "2 °C per metre"
+   ],
+   "answer": 0,
+   "explanation": "This is the usual rule of thumb.",
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-factors-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-climate-factors",
+   "prompt": "The climate of southern Cameroon is mainly",
+   "choices": [
+    "polar",
+    "Mediterranean",
+    "desert",
+    "equatorial"
+   ],
+   "answer": 3,
+   "explanation": "Hot and wet with two rainy seasons.",
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-factors-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-climate-factors",
+   "prompt": "The Far North of Cameroon is generally",
+   "choices": [
+    "drier than the south",
+    "polar",
+    "always flooded",
+    "wetter than the coast"
+   ],
+   "answer": 0,
+   "explanation": "It is near the Sahel.",
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-geography-vegetation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which vegetation has tall grass and scattered flat-topped trees?",
+   "choices": [
+    "equatorial rainforest",
+    "mangrove",
+    "ice cap",
+    "savanna"
+   ],
+   "answer": 3,
+   "explanation": "Savanna is tropical grassland.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-geography-vegetation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mangroves grow in muddy coastal swamps in the tropics.",
+   "answer": true,
+   "explanation": "They are found in estuaries such as the Wouri.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e09",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form2-geography-vegetation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each vegetation type to a typical area of Cameroon.",
+   "pairs": [
+    [
+     "Rainforest",
+     "South and East"
+    ],
+    [
+     "Savanna",
+     "Adamawa and North"
+    ],
+    [
+     "Mangrove",
+     "Coast"
+    ]
+   ],
+   "explanation": "Vegetation follows climate.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form2-geography-vegetation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An adaptation of a desert plant is",
+   "choices": [
+    "storing water in thick stems",
+    "needing constant rain",
+    "growing very tall leaves",
+    "shedding all roots"
+   ],
+   "answer": 0,
+   "explanation": "Water saving is key.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-geography-vegetation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe the layers of the equatorial rainforest and explain why the forest floor is dark.",
+   "model": "Emergent trees, the closed canopy, a lower layer of small trees and shrubs, and the ground. The thick canopy blocks most sunlight so little reaches the floor.",
+   "rubric": "2 marks for layers; 1 mark for the canopy blocking light.",
+   "explanation": "Emergent trees, the closed canopy, a lower layer of small trees and shrubs, and the ground. The thick canopy blocks most sunlight so little reaches the floor.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-climate-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-geography-vegetation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student compares two places: Place X (hot, rain all year) and Place Y (hot, one long dry season).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which vegetation is likely in X?",
+     "choices": [
+      "tundra",
+      "desert",
+      "rainforest",
+      "savanna"
+     ],
+     "answer": 2,
+     "explanation": "Constant rain suits forest.",
+     "id": "form2-geography-climate-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which vegetation is likely in Y?",
+     "choices": [
+      "rainforest",
+      "polar",
+      "savanna",
+      "tundra"
+     ],
+     "answer": 2,
+     "explanation": "A dry season favours grass.",
+     "id": "form2-geography-climate-e12-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Grass fires are common in the dry season in savanna.",
+     "answer": true,
+     "explanation": "Dry grass burns easily.",
+     "id": "form2-geography-climate-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name two ways people have changed natural vegetation in Cameroon.",
+     "model": "Clearing forest for farms and plantations, logging, bush burning, grazing, building roads and towns.",
+     "rubric": "1 mark per way.",
+     "explanation": "Clearing forest for farms and plantations, logging, bush burning, grazing, building roads and towns.",
+     "id": "form2-geography-climate-e12-d"
+    }
+   ],
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-vegetation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-vegetation",
+   "prompt": "Natural vegetation depends mainly on",
+   "choices": [
+    "names of towns",
+    "climate and soil",
+    "map scale",
+    "time zones"
+   ],
+   "answer": 1,
+   "explanation": "Climate and soil control plant growth.",
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-vegetation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-vegetation",
+   "prompt": "The emergent layer of the rainforest consists of",
+   "choices": [
+    "crops",
+    "the tallest trees",
+    "mosses only",
+    "grass"
+   ],
+   "answer": 1,
+   "explanation": "They rise above the canopy.",
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-vegetation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-vegetation",
+   "prompt": "The Sahara is a",
+   "choices": [
+    "desert",
+    "mangrove coast",
+    "rainforest",
+    "wet savanna"
+   ],
+   "answer": 0,
+   "explanation": "It is the large desert in northern Africa.",
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-vegetation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-vegetation",
+   "prompt": "Baobab and acacia are typical of",
+   "choices": [
+    "mangrove coasts",
+    "polar regions",
+    "deep sea",
+    "savanna"
+   ],
+   "answer": 3,
+   "explanation": "They suit the dry-wet climate.",
+   "chapter": "form2-geography-climate"
+  },
+  {
+   "id": "form2-geography-vegetation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-vegetation",
+   "prompt": "The vegetation of Cameroon's Far North is mainly",
+   "choices": [
+    "dry steppe with thorny trees",
+    "ice",
+    "thick rainforest",
+    "mangrove only"
+   ],
+   "answer": 0,
+   "explanation": "It is near the Sahel.",
+   "chapter": "form2-geography-climate"
+  }
+ ]
+}

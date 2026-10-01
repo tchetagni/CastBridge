@@ -1,0 +1,418 @@
+{
+ "chapter": "form2-geography-position",
+ "lessons": [
+  {
+   "id": "form2-geography-lat-long-time",
+   "title": "Latitude, longitude and time",
+   "minutes": 20,
+   "programRef": "Cameroon anglophone secondary Geography syllabus, Form 2 — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define latitude and longitude and give the position of a place",
+    "Explain why the Earth is divided into time zones",
+    "Calculate the time difference from the difference in longitude"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-geography-position-e01",
+    "form2-geography-position-e02",
+    "form2-geography-position-e03",
+    "form2-geography-position-e04",
+    "form2-geography-position-e05",
+    "form2-geography-position-e06"
+   ],
+   "selfCheck": [
+    "form2-geography-lat-long-time-q1",
+    "form2-geography-lat-long-time-q2",
+    "form2-geography-lat-long-time-q3",
+    "form2-geography-lat-long-time-q4",
+    "form2-geography-lat-long-time-q5"
+   ],
+   "reviewNotes": [
+    "Teacher to verify Cameroon's latitude/longitude limits (approximate), the use of GMT+1 as the national time, and the syllabus handling of local versus standard time.",
+    "Draft for teacher review: this course follows the Cameroon anglophone secondary Geography syllabus as generally understood; scope and level per Form, places, figures and examples must be checked against the official syllabus and a current atlas before release."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "To find a place on the globe we use a network of imaginary lines. **Parallels of latitude** are circles round the Earth parallel to the Equator. The Equator is **0°**; the poles are **90° N** and **90° S**. **Meridians of longitude** are half-circles from pole to pole. The **Prime Meridian** (0°) passes through Greenwich, London. Longitude is measured east or west of it, up to **180°**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 215,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 105,
+        "r": 80,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 105,
+        "x2": 230,
+        "y2": 105,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 108,
+        "text": "Equator 0°",
+        "size": 12,
+        "anchor": "start",
+        "color": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 25,
+        "x2": 150,
+        "y2": 185,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 18,
+        "text": "Prime Meridian 0°",
+        "size": 12,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 82,
+        "y1": 65,
+        "x2": 218,
+        "y2": 65,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 82,
+        "y1": 145,
+        "x2": 218,
+        "y2": 145,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 68,
+        "text": "Latitude 30° N",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 148,
+        "text": "Latitude 30° S",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 40,
+        "x2": 205,
+        "y2": 170,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 202,
+        "text": "Longitude lines run pole to pole",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Equator, Prime Meridian and some lines",
+     "alt": "A circle with the Equator, the Prime Meridian and parallels drawn on it."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Latitude and longitude",
+     "md": "**Latitude** is the angle north or south of the Equator. **Longitude** is the angle east or west of the Prime Meridian. A position is written with latitude first, then longitude, for example **4° N, 9° E**. Cameroon lies roughly between **2° N and 13° N** and between **8° E and 16° E**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Time and longitude",
+     "md": "The Earth turns 360° in 24 hours, so it turns **15° in one hour** (360 ÷ 24), or **1° in 4 minutes**. Places to the **east** have the Sun earlier, so their time is **ahead**; places to the west are **behind**. Time difference (hours) = difference in longitude ÷ 15."
+    },
+    {
+     "type": "text",
+     "md": "**Local time** is set by the Sun: it is noon when the Sun is highest. Because local time changes from place to place, countries use **standard time**, based on a chosen meridian. The world is divided into **time zones**, about 15° wide. Cameroon uses one standard time for the whole country, which is one hour ahead of Greenwich Mean Time (GMT)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Latitude (parallels) measures north–south; longitude (meridians) measures east–west.\n- Going east, add time; going west, subtract time.\n- Do not multiply by 15 when you should divide: 30° of longitude is 30 ÷ 15 = 2 hours, not 450 hours."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: time difference",
+     "statement": "Town A is at 0° and town B is at 45° E. When it is 12 noon at A, what is the time at B?",
+     "steps": [
+      "Difference in longitude = 45°.",
+      "Time difference = 45 ÷ 15 = 3 hours.",
+      "B is east, so it is ahead: 12:00 + 3 h = 15:00."
+     ],
+     "answer": "15:00 (3 p.m.)."
+    },
+    {
+     "type": "example",
+     "title": "Example 2: going west",
+     "statement": "A place is at 30° W. When it is 10 a.m. at the Prime Meridian, what is the time there?",
+     "steps": [
+      "Difference = 30°, so 30 ÷ 15 = 2 hours.",
+      "West means behind.",
+      "10:00 − 2 h = 08:00."
+     ],
+     "answer": "08:00 (8 a.m.)."
+    }
+   ],
+   "chapter": "form2-geography-position"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form2-geography-position-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-geography-lat-long-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In Form 2 geography, lines of latitude are called",
+   "choices": [
+    "parallels",
+    "isobars",
+    "meridians",
+    "contours"
+   ],
+   "answer": 0,
+   "explanation": "Parallels run east-west, parallel to the Equator.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-position-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-geography-lat-long-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The Prime Meridian passes through Greenwich.",
+   "answer": true,
+   "explanation": "It is 0° longitude.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-position-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-geography-lat-long-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many degrees of longitude does the Earth turn in 3 hours?",
+   "answer": 45,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "15° per hour × 3 = 45°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-position-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-geography-lat-long-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two towns are 60° of longitude apart. What is the time difference, in hours?",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "hours",
+   "explanation": "60 ÷ 15 = 4 hours.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-position-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-geography-lat-long-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why places to the east of Cameroon, such as towns in East Africa, see the sunrise earlier than Cameroon does.",
+   "model": "The Earth rotates from west to east, so places further east turn into the sunlight before places further west; this is why their time is ahead.",
+   "rubric": "1 mark: rotation west to east; 1 mark: east sees the Sun first; 1 mark: time ahead.",
+   "explanation": "The Earth rotates from west to east, so places further east turn into the sunlight before places further west; this is why their time is ahead.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-position-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-geography-lat-long-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "It is 14:00 GMT at the Prime Meridian.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the time at 75° E, in 24-hour clock hours?",
+     "answer": 19,
+     "tolerance": 0,
+     "explanation": "75 ÷ 15 = 5 hours ahead; 14 + 5 = 19.",
+     "unit": "h",
+     "id": "form2-geography-position-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the hour at 45° W? (24-hour clock)",
+     "answer": 11,
+     "tolerance": 0,
+     "explanation": "45 ÷ 15 = 3 hours behind; 14 − 3 = 11.",
+     "unit": "h",
+     "id": "form2-geography-position-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Cameroon's standard time is",
+     "choices": [
+      "the same as New York",
+      "GMT − 1",
+      "GMT + 1",
+      "GMT + 5"
+     ],
+     "answer": 2,
+     "explanation": "Cameroon is one hour ahead of GMT.",
+     "id": "form2-geography-position-e06-c"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Places east of the Prime Meridian are ahead of GMT.",
+     "answer": true,
+     "explanation": "They see the Sun earlier.",
+     "id": "form2-geography-position-e06-d"
+    }
+   ],
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-lat-long-time-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-lat-long-time",
+   "prompt": "Latitude is measured from the",
+   "choices": [
+    "North Pole only",
+    "Prime Meridian",
+    "Equator",
+    "Tropic of Cancer only"
+   ],
+   "answer": 2,
+   "explanation": "0° latitude is the Equator.",
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-lat-long-time-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-lat-long-time",
+   "prompt": "The time zone difference for each 15° of longitude is",
+   "choices": [
+    "1 hour",
+    "4 hours",
+    "15 hours",
+    "1 minute"
+   ],
+   "answer": 0,
+   "explanation": "360° ÷ 24 h = 15° per hour.",
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-lat-long-time-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-lat-long-time",
+   "prompt": "Longitude is measured east and west up to",
+   "choices": [
+    "23½°",
+    "180°",
+    "90°",
+    "360°"
+   ],
+   "answer": 1,
+   "explanation": "Longitude ranges from 0° to 180° E or W.",
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-lat-long-time-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-lat-long-time",
+   "prompt": "Places east of Greenwich have a time that is",
+   "choices": [
+    "always the same",
+    "unrelated to the Sun",
+    "ahead of GMT",
+    "behind GMT"
+   ],
+   "answer": 2,
+   "explanation": "East means earlier Sun and later clock.",
+   "chapter": "form2-geography-position"
+  },
+  {
+   "id": "form2-geography-lat-long-time-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-lat-long-time",
+   "prompt": "A position is written as",
+   "choices": [
+    "height then depth",
+    "longitude then latitude",
+    "scale then key",
+    "latitude then longitude"
+   ],
+   "answer": 3,
+   "explanation": "For example 4° N, 9° E.",
+   "chapter": "form2-geography-position"
+  }
+ ]
+}
