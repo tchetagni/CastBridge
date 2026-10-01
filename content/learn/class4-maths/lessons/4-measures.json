@@ -1,0 +1,1838 @@
+{
+ "chapter": "class4-maths-measures",
+ "lessons": [
+  {
+   "id": "class4-maths-length-mass-capacity",
+   "title": "Length, mass and capacity",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Know the units of length, mass and capacity.",
+    "Change from a big unit to a small unit and back.",
+    "Add and subtract measures."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-measures-e01",
+    "class4-maths-measures-e02",
+    "class4-maths-measures-e03",
+    "class4-maths-measures-e04",
+    "class4-maths-measures-e05",
+    "class4-maths-measures-e06"
+   ],
+   "selfCheck": [
+    "class4-maths-length-mass-capacity-q1",
+    "class4-maths-length-mass-capacity-q2",
+    "class4-maths-length-mass-capacity-q3",
+    "class4-maths-length-mass-capacity-q4",
+    "class4-maths-length-mass-capacity-q5"
+   ],
+   "reviewNotes": [
+    "Centilitre is included because it is used on some local packaging; teacher to decide emphasis.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The units",
+     "md": "We measure **length** in kilometres (km), metres (m), centimetres (cm) and millimetres (mm). **Mass** (weight) is in tonnes (t), kilograms (kg) and grams (g). **Capacity** (how much a container holds) is in litres (l), centilitres (cl) and millilitres (ml)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 10,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 30.0,
+        "text": "Length",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 30.0,
+        "text": "Mass",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 10,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 320.0,
+        "y": 30.0,
+        "text": "Capacity",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 40,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 60.0,
+        "text": "1 km = 1,000 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 40,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 60.0,
+        "text": "1 kg = 1,000 g",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 40,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 320.0,
+        "y": 60.0,
+        "text": "1 l = 1,000 ml",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 70,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 90.0,
+        "text": "1 m = 100 cm",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 70,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 90.0,
+        "text": "1 t = 1,000 kg",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 70,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 320.0,
+        "y": 90.0,
+        "text": "1 l = 100 cl",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 100,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 120.0,
+        "text": "1 cm = 10 mm",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 100,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 100,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       }
+      ]
+     },
+     "caption": "Units of length, mass and capacity.",
+     "alt": "A table with three columns: length (km, m, cm, mm), mass (kg, g, tonne) and capacity (litre, ml, cl) with their conversions."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Changing units",
+     "md": "To change a **big unit to a small unit**, **multiply**: 2.5 km = 2.5 × 1,000 = 2,500 m. To change a **small unit to a big unit**, **divide**: 3,400 g = 3,400 ÷ 1,000 = 3.4 kg. Write the unit in every answer."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Mixing metres and centimetres in the same sum: change first.\n- Multiplying when you should divide.\n- Writing 1 m = 10 cm (it is 100 cm).\n- Writing kg for litres or the other way round."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Change 3 km 250 m into metres.",
+     "steps": [
+      "3 km = 3 × 1,000 = 3,000 m.",
+      "3,000 m + 250 m = 3,250 m."
+     ],
+     "answer": "3,250 m"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A bag holds 2 kg of rice. How many grams are in 4 bags?",
+     "steps": [
+      "1 kg = 1,000 g, so 2 kg = 2,000 g.",
+      "4 × 2,000 = 8,000 g."
+     ],
+     "answer": "8,000 g (8 kg)"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-time",
+   "title": "Telling the time and measuring time",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read the time on a clock to 5 minutes and in the 24-hour form.",
+    "Change between hours, minutes and seconds.",
+    "Work out how long an activity lasts."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-measures-e07",
+    "class4-maths-measures-e08",
+    "class4-maths-measures-e09",
+    "class4-maths-measures-e10",
+    "class4-maths-measures-e11",
+    "class4-maths-measures-e12"
+   ],
+   "selfCheck": [
+    "class4-maths-time-q1",
+    "class4-maths-time-q2",
+    "class4-maths-time-q3",
+    "class4-maths-time-q4",
+    "class4-maths-time-q5"
+   ],
+   "reviewNotes": [
+    "Months/weeks: '52 weeks (about)' used loosely; a year has 52 weeks and 1 or 2 days.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Units of time",
+     "md": "1 minute = 60 seconds. 1 hour = 60 minutes. 1 day = 24 hours. 1 week = 7 days. 1 year = 12 months = 52 weeks (about). The **short hand** shows hours, the **long hand** shows minutes. When the long hand is at 9 it is **quarter to**; at 3 it is **quarter past**; at 6 it is **half past**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 200,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 92.0,
+        "r": 70,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 128.0,
+        "y": 48.50257738807144,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 148.49742261192858,
+        "y": 69.0,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 156.0,
+        "y": 97.0,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 148.49742261192858,
+        "y": 125.0,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 128.0,
+        "y": 145.49742261192856,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 153.0,
+        "text": "6",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 72.00000000000001,
+        "y": 145.49742261192858,
+        "text": "7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 51.50257738807143,
+        "y": 125.0,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 44.0,
+        "y": 97.0,
+        "text": "9",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 51.50257738807144,
+        "y": 69.0,
+        "text": "10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 71.99999999999997,
+        "y": 48.50257738807145,
+        "text": "11",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 99.99999999999999,
+        "y": 41.0,
+        "text": "12",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 92.0,
+        "x2": 135.10742223542888,
+        "y2": 106.54197042987342,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 92.0,
+        "x2": 44.0,
+        "y2": 92.0,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 92.0,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 182.0,
+        "text": "3:45 (quarter to four)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "The clock shows a quarter to four.",
+     "alt": "A clock face with the short hand near the 4 and the long hand on the 9, labelled 3:45."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "24-hour clock",
+     "md": "After 12 noon, add 12 to the hour to get the 24-hour time: 2:30 p.m. is **14:30**, and 9:15 p.m. is **21:15**. Midnight is 00:00. To find how long something lasts, subtract the start time from the end time (change hours into minutes if needed)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Counting 100 minutes in an hour: there are 60.\n- Writing 3:45 as 'quarter past 3'.\n- Forgetting to add 12 after noon.\n- Subtracting hours and minutes as if they were decimals: 9:40 to 14:25 is 4 h 45 min, not 5 h 15."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A film starts at 9:40 a.m. and ends at 2:25 p.m. How long is it?",
+     "steps": [
+      "Write the end in 24-hour time: 14:25. Change both to minutes: 14 h 25 = 865 min; 9 h 40 = 580 min.",
+      "865 − 580 = 285 min = 4 h 45 min."
+     ],
+     "answer": "4 hours 45 minutes"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Write 8:15 p.m. in 24-hour time.",
+     "steps": [
+      "It is after noon, so add 12 to 8: 20.",
+      "Keep the minutes: 20:15."
+     ],
+     "answer": "20:15",
+     "figure": {
+      "kind": "shapes",
+      "w": 200,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 92.0,
+        "r": 70,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 128.0,
+        "y": 48.50257738807144,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 148.49742261192858,
+        "y": 69.0,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 156.0,
+        "y": 97.0,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 148.49742261192858,
+        "y": 125.0,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 128.0,
+        "y": 145.49742261192856,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 153.0,
+        "text": "6",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 72.00000000000001,
+        "y": 145.49742261192858,
+        "text": "7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 51.50257738807143,
+        "y": 125.0,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 44.0,
+        "y": 97.0,
+        "text": "9",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 51.50257738807144,
+        "y": 69.0,
+        "text": "10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 71.99999999999997,
+        "y": 48.50257738807145,
+        "text": "11",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 99.99999999999999,
+        "y": 41.0,
+        "text": "12",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 92.0,
+        "x2": 64.8925777645711,
+        "y2": 106.54197042987342,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 92.0,
+        "x2": 156.0,
+        "y2": 92.0,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 92.0,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 182.0,
+        "text": "8:15",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-money",
+   "title": "Money: FCFA, bills and change",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add and subtract amounts in FCFA.",
+    "Work out the total cost and the change.",
+    "Make a simple bill."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-measures-e13",
+    "class4-maths-measures-e14",
+    "class4-maths-measures-e15",
+    "class4-maths-measures-e16",
+    "class4-maths-measures-e17",
+    "class4-maths-measures-e18"
+   ],
+   "selfCheck": [
+    "class4-maths-money-q1",
+    "class4-maths-money-q2",
+    "class4-maths-money-q3",
+    "class4-maths-money-q4",
+    "class4-maths-money-q5"
+   ],
+   "reviewNotes": [
+    "Coins/notes list given as typical examples (verify current denominations). Prices are illustrative.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "FCFA",
+     "md": "In Cameroon we use the **CFA franc (FCFA)**. Coins and notes are, for example, 100, 500 FCFA (coins) and 1,000, 2,000, 5,000 and 10,000 FCFA (notes). A **bill** (or receipt) lists the items, the price of each and the **total**. **Change** = money given − total cost."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 10,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 29.0,
+        "text": "Item",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 10,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 29.0,
+        "text": "Price (FCFA)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 38,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 57.0,
+        "text": "Notebook",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 38,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 57.0,
+        "text": "250",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 66,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 85.0,
+        "text": "Pen",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 66,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 85.0,
+        "text": "100",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 94,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 113.0,
+        "text": "Ruler",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 94,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 113.0,
+        "text": "150",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 122,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 141.0,
+        "text": "Bag",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 122,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 141.0,
+        "text": "3,500",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A price list at a school shop.",
+     "alt": "A table of items and prices: notebook 250 FCFA, pen 100 FCFA, ruler 150 FCFA, bag 3,500 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Bills and change",
+     "md": "1. Multiply **quantity × price** for each item.\n2. **Add** the results to get the total.\n3. **Subtract** the total from the money given to find the change.\nProfit = selling price − cost price (introduced later)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting to multiply by the quantity.\n- Giving change that is bigger than the money paid.\n- Forgetting the unit FCFA.\n- Adding wrongly in the thousands column."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Ndip buys 4 notebooks, 3 pens and 1 ruler using the price list. How much does he pay?",
+     "steps": [
+      "Notebooks: 4 × 250 = 1,000. Pens: 3 × 100 = 300. Ruler: 150.",
+      "Total: 1,000 + 300 + 150 = 1,450 FCFA."
+     ],
+     "answer": "1,450 FCFA",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 10,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 29.0,
+        "text": "Item",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 10,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 29.0,
+        "text": "Price (FCFA)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 38,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 57.0,
+        "text": "Notebook",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 38,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 57.0,
+        "text": "250",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 66,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 85.0,
+        "text": "Pen",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 66,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 85.0,
+        "text": "100",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 94,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 113.0,
+        "text": "Ruler",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 94,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 113.0,
+        "text": "150",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 122,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 141.0,
+        "text": "Bag",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 215.0,
+        "y": 122,
+        "w": 120,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 141.0,
+        "text": "3,500",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "He pays with a 2,000 FCFA note. What is his change?",
+     "steps": [
+      "Change = 2,000 − 1,450.",
+      "2,000 − 1,450 = 550."
+     ],
+     "answer": "550 FCFA"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-measures"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class4-maths-measures-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-length-mass-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Change 5 m into centimetres.",
+   "answer": 500,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "5 × 100 = 500.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-length-mass-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Change 4,000 g into kilograms.",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "4,000 ÷ 1,000 = 4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-length-mass-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which unit is best for measuring the distance from Douala to Yaoundé?",
+   "choices": [
+    "kilometres",
+    "grams",
+    "centimetres",
+    "millilitres"
+   ],
+   "answer": 0,
+   "explanation": "Long distances are in km.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-length-mass-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bottle holds 750 ml. How many ml in 4 bottles? (Answer in litres.)",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "l",
+   "explanation": "4 × 750 = 3,000 ml = 3 l.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-length-mass-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "2.5 kg is the same as 2,500 g.",
+   "answer": true,
+   "explanation": "2.5 × 1,000 = 2,500.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-length-mass-capacity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A trader in Bafoussam sells yams. He has a 50 kg bag and sells 12,500 g and then 8 kg 500 g.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kg is 12,500 g?",
+     "answer": 12.5,
+     "tolerance": 0.001,
+     "explanation": "12,500 ÷ 1,000 = 12.5.",
+     "unit": "kg",
+     "id": "class4-maths-measures-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kg did he sell in all?",
+     "answer": 21.0,
+     "tolerance": 0.001,
+     "explanation": "12.5 + 8.5 = 21.",
+     "unit": "kg",
+     "id": "class4-maths-measures-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many kg are left in the bag?",
+     "answer": 29,
+     "tolerance": 0,
+     "explanation": "50 − 21 = 29.",
+     "unit": "kg",
+     "id": "class4-maths-measures-e06-c"
+    }
+   ],
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-length-mass-capacity-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-length-mass-capacity",
+   "prompt": "Class 4 Maths (Length, mass and capacity) – 1 km equals...",
+   "choices": [
+    "10 m",
+    "100 m",
+    "1,000 m",
+    "10,000 m"
+   ],
+   "answer": 2,
+   "explanation": "Kilo means thousand.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-length-mass-capacity-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-length-mass-capacity",
+   "prompt": "Class 4 Maths (Length, mass and capacity) – Which unit measures how much water a bucket holds?",
+   "choices": [
+    "litre",
+    "kilogram",
+    "metre",
+    "hour"
+   ],
+   "answer": 0,
+   "explanation": "Capacity is in litres.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-length-mass-capacity-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-length-mass-capacity",
+   "prompt": "Class 4 Maths (Length, mass and capacity) – 2 l = ... ml",
+   "choices": [
+    "20",
+    "200",
+    "2,000",
+    "20,000"
+   ],
+   "answer": 2,
+   "explanation": "2 × 1,000.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-length-mass-capacity-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-length-mass-capacity",
+   "prompt": "Class 4 Maths (Length, mass and capacity) – To change kg into g we...",
+   "choices": [
+    "divide by 1,000",
+    "multiply by 1,000",
+    "subtract 1,000",
+    "add 1,000"
+   ],
+   "answer": 1,
+   "explanation": "Big unit to small unit: multiply.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-length-mass-capacity-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-length-mass-capacity",
+   "prompt": "Class 4 Maths (Length, mass and capacity) – 300 cm = ... m",
+   "choices": [
+    "300",
+    "0.3",
+    "3",
+    "30"
+   ],
+   "answer": 2,
+   "explanation": "300 ÷ 100.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many minutes are in 3 hours?",
+   "answer": 180,
+   "tolerance": 0,
+   "unit": "min",
+   "explanation": "3 × 60 = 180.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is 4:30 p.m. in 24-hour time?",
+   "choices": [
+    "4:30",
+    "18:30",
+    "14:30",
+    "16:30"
+   ],
+   "answer": 3,
+   "explanation": "4 + 12 = 16.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which time is 'quarter past 7'?",
+   "choices": [
+    "7:30",
+    "6:45",
+    "7:15",
+    "7:45"
+   ],
+   "answer": 2,
+   "explanation": "15 minutes after 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "School starts at 7:30 a.m. and ends at 1:15 p.m. How many minutes is that?",
+   "answer": 345,
+   "tolerance": 0,
+   "unit": "min",
+   "explanation": "7:30 to 13:15 = 5 h 45 min = 345 min.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "2 hours 30 minutes is the same as 150 minutes.",
+   "answer": true,
+   "explanation": "2 × 60 + 30 = 150.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-time",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bus leaves Bamenda at 6:45 a.m. and reaches Douala at 1:20 p.m.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the arrival time in 24-hour form?",
+     "choices": [
+      "13:20",
+      "3:20",
+      "11:20",
+      "1:20"
+     ],
+     "answer": 0,
+     "explanation": "1 + 12 = 13.",
+     "id": "class4-maths-measures-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many minutes was the journey?",
+     "answer": 395,
+     "tolerance": 0,
+     "explanation": "6:45 to 13:20: 6 h 35 min = 395 min.",
+     "unit": "min",
+     "id": "class4-maths-measures-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "How long is that in hours and minutes?",
+     "choices": [
+      "6 h 35 min",
+      "7 h 35 min",
+      "6 h 20 min",
+      "5 h 35 min"
+     ],
+     "answer": 0,
+     "explanation": "395 = 6 × 60 + 35.",
+     "id": "class4-maths-measures-e12-c"
+    }
+   ],
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-time-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-time",
+   "prompt": "Class 4 Maths (Telling the time and measuring time) – How many seconds are in 2 minutes?",
+   "choices": [
+    "60",
+    "100",
+    "200",
+    "120"
+   ],
+   "answer": 3,
+   "explanation": "2 × 60.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-time-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-time",
+   "prompt": "Class 4 Maths (Telling the time and measuring time) – Half past 6 is...",
+   "choices": [
+    "6:15",
+    "6:30",
+    "6:45",
+    "7:30"
+   ],
+   "answer": 1,
+   "explanation": "Half an hour after 6.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-time-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-time",
+   "prompt": "Class 4 Maths (Telling the time and measuring time) – 9:00 p.m. in 24-hour time is...",
+   "choices": [
+    "21:00",
+    "12:09",
+    "9:00",
+    "19:00"
+   ],
+   "answer": 0,
+   "explanation": "9 + 12 = 21.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-time-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-time",
+   "prompt": "Class 4 Maths (Telling the time and measuring time) – How many days are in a week?",
+   "choices": [
+    "5",
+    "6",
+    "10",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "Seven days.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-time-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-time",
+   "prompt": "Class 4 Maths (Telling the time and measuring time) – From 10:15 to 11:00 is...",
+   "choices": [
+    "1 hour",
+    "45 minutes",
+    "15 minutes",
+    "30 minutes"
+   ],
+   "answer": 1,
+   "explanation": "10:15 to 11:00.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-money",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "5 pens cost 100 FCFA each. How much in all?",
+   "answer": 500,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "5 × 100 = 500.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-money",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Change from a 1,000 FCFA note after buying goods for 650 FCFA?",
+   "answer": 350,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "1,000 − 650 = 350.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-money",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which note is worth the most?",
+   "choices": [
+    "5,000 FCFA",
+    "1,000 FCFA",
+    "10,000 FCFA",
+    "2,000 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "10,000 is the largest.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-money",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bag costs 3,500 FCFA. Ako has 2,750 FCFA. How much more does she need?",
+   "answer": 750,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "3,500 − 2,750 = 750.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-money",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If a total is 1,450 FCFA and you pay 1,500 FCFA, the change is 50 FCFA.",
+   "answer": true,
+   "explanation": "1,500 − 1,450 = 50.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-measures-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-money",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mama Sali sells 6 bunches of bananas at 400 FCFA each and 10 pieces of puff-puff at 50 FCFA each.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Money from the bananas?",
+     "answer": 2400,
+     "tolerance": 0,
+     "explanation": "6 × 400 = 2,400.",
+     "unit": "FCFA",
+     "id": "class4-maths-measures-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Money from the puff-puff?",
+     "answer": 500,
+     "tolerance": 0,
+     "explanation": "10 × 50 = 500.",
+     "unit": "FCFA",
+     "id": "class4-maths-measures-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Total money?",
+     "answer": 2900,
+     "tolerance": 0,
+     "explanation": "2,400 + 500 = 2,900.",
+     "unit": "FCFA",
+     "id": "class4-maths-measures-e18-c"
+    }
+   ],
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-money-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-money",
+   "prompt": "Class 4 Maths (Money) – The money used in Cameroon is the...",
+   "choices": [
+    "dollar",
+    "naira",
+    "euro",
+    "CFA franc (FCFA)"
+   ],
+   "answer": 3,
+   "explanation": "FCFA is the currency of Cameroon.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-money-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-money",
+   "prompt": "Class 4 Maths (Money) – 3 books at 500 FCFA each cost...",
+   "choices": [
+    "1,500 FCFA",
+    "1,000 FCFA",
+    "2,000 FCFA",
+    "503 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "3 × 500.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-money-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-money",
+   "prompt": "Class 4 Maths (Money) – Change = ...",
+   "choices": [
+    "money given − total cost",
+    "total × money",
+    "total cost − money given",
+    "money given + total"
+   ],
+   "answer": 0,
+   "explanation": "What is returned to you.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-money-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-money",
+   "prompt": "Class 4 Maths (Money) – A list of items, prices and the total is a...",
+   "choices": [
+    "bill",
+    "pattern",
+    "poem",
+    "map"
+   ],
+   "answer": 0,
+   "explanation": "Also called a receipt.",
+   "chapter": "class4-maths-measures"
+  },
+  {
+   "id": "class4-maths-money-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-money",
+   "prompt": "Class 4 Maths (Money) – If you pay 5,000 FCFA for goods of 3,200 FCFA, the change is...",
+   "choices": [
+    "1,800 FCFA",
+    "1,200 FCFA",
+    "8,200 FCFA",
+    "2,800 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "5,000 − 3,200.",
+   "chapter": "class4-maths-measures"
+  }
+ ]
+}

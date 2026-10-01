@@ -1,0 +1,1890 @@
+{
+ "chapter": "class5-maths-data-money",
+ "lessons": [
+  {
+   "id": "class5-maths-averages",
+   "title": "Averages: mean, median, mode and range",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the mean (average) of a set of numbers.",
+    "Find the median, the mode and the range.",
+    "Use the mean to solve problems."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-data-money-e01",
+    "class5-maths-data-money-e02",
+    "class5-maths-data-money-e03",
+    "class5-maths-data-money-e04",
+    "class5-maths-data-money-e05",
+    "class5-maths-data-money-e06"
+   ],
+   "selfCheck": [
+    "class5-maths-averages-q1",
+    "class5-maths-averages-q2",
+    "class5-maths-averages-q3",
+    "class5-maths-averages-q4",
+    "class5-maths-averages-q5"
+   ],
+   "reviewNotes": [
+    "Median for an even number of values may be left out by the school; it is mentioned briefly.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Mean",
+     "md": "The **mean** (or average) = **total ÷ number of items**. The marks 12, 16, 9 and 14 add up to 51; there are 4 marks; the mean is 51 ÷ 4 = 12.75. The mean can be a decimal, and it need not be one of the numbers."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Ako",
+        "value": 12,
+        "color": "blue"
+       },
+       {
+        "label": "Bih",
+        "value": 16,
+        "color": "blue"
+       },
+       {
+        "label": "Che",
+        "value": 9,
+        "color": "blue"
+       },
+       {
+        "label": "Dina",
+        "value": 14,
+        "color": "blue"
+       }
+      ],
+      "unit": "Marks out of 20"
+     },
+     "caption": "The marks of four pupils out of 20.",
+     "alt": "A bar chart: Ako 12, Bih 16, Che 9, Dina 14 marks out of 20."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Median, mode and range",
+     "md": "Put the numbers in **order**. The **median** is the **middle** number (for 3, 5, 7, 9, 11 it is 7; with two middle numbers, take the number halfway between). The **mode** is the number that appears **most often**. The **range** is the **biggest minus the smallest**: for 9, 12, 14, 15 it is 15 − 9 = 6."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Dividing by the wrong number: divide by the **number of items**, not by the biggest value.\n- Not putting the numbers in order before finding the median.\n- Saying that there is no mode when two numbers tie (both are modes).\n- Mixing range and mean."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the mean mark of the four pupils: 12, 16, 9, 14.",
+     "steps": [
+      "Add: 12 + 16 + 9 + 14 = 51.",
+      "Divide by 4: 51 ÷ 4 = 12.75."
+     ],
+     "answer": "12.75",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Ako",
+        "value": 12,
+        "color": "blue"
+       },
+       {
+        "label": "Bih",
+        "value": 16,
+        "color": "blue"
+       },
+       {
+        "label": "Che",
+        "value": 9,
+        "color": "blue"
+       },
+       {
+        "label": "Dina",
+        "value": 14,
+        "color": "blue"
+       }
+      ],
+      "unit": "Marks out of 20"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the median, mode and range of 4, 7, 4, 9, 6, 4, 8.",
+     "steps": [
+      "Order: 4, 4, 4, 6, 7, 8, 9. The middle (4th) number is 6. The number 4 appears 3 times.",
+      "Range = 9 − 4 = 5."
+     ],
+     "answer": "Median 6; mode 4; range 5."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-probability",
+   "title": "Chance and probability (introduction)",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use words such as impossible, unlikely, likely and certain.",
+    "Write the probability of an event as a fraction.",
+    "List the possible outcomes of simple experiments."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-data-money-e07",
+    "class5-maths-data-money-e08",
+    "class5-maths-data-money-e09",
+    "class5-maths-data-money-e10",
+    "class5-maths-data-money-e11",
+    "class5-maths-data-money-e12"
+   ],
+   "selfCheck": [
+    "class5-maths-probability-q1",
+    "class5-maths-probability-q2",
+    "class5-maths-probability-q3",
+    "class5-maths-probability-q4",
+    "class5-maths-probability-q5"
+   ],
+   "reviewNotes": [
+    "Probability is only an introduction (equally likely outcomes).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Chance",
+     "md": "**Probability** tells how likely something is. An event can be **impossible** (cannot happen), **unlikely**, **even chance**, **likely** or **certain** (must happen). Probability is a number from **0** (impossible) to **1** (certain). Examples: the sun rising tomorrow is certain; a goat flying is impossible."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 20,
+        "w": 220,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 110,
+        "text": "A bag: 3 red and 2 green marbles",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 135,
+        "text": "P(red) = 3/5   P(green) = 2/5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A bag with 3 red and 2 green marbles.",
+     "alt": "A box with three red and two green marbles. Below, the probability of red is 3 over 5 and of green is 2 over 5."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Counting outcomes",
+     "md": "If all outcomes are **equally likely**: probability = (number of ways the event can happen) ÷ (total number of outcomes). With 3 red and 2 green marbles there are 5 equally likely marbles, so P(red) = $\\frac{3}{5}$. A fair coin has 2 outcomes: heads or tails, each with probability $\\frac{1}{2}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing the probability as more than 1 (it cannot be).\n- Counting only the favourable outcomes and not the total.\n- Thinking that after 3 heads a coin is 'due' tails: each toss is independent.\n- Confusing 'unlikely' with 'impossible'."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A bag has 3 red and 2 green marbles. What is the probability of taking a red marble?",
+     "steps": [
+      "Favourable outcomes (red) = 3. Total marbles = 5.",
+      "Probability = 3/5."
+     ],
+     "answer": "3/5",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 20,
+        "w": 220,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 110,
+        "text": "A bag: 3 red and 2 green marbles",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 135,
+        "text": "P(red) = 3/5   P(green) = 2/5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A fair dice is rolled. What is the probability of getting an even number?",
+     "steps": [
+      "The even numbers are 2, 4 and 6: 3 favourable outcomes out of 6.",
+      "3/6 = 1/2."
+     ],
+     "answer": "1/2"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-profit-loss",
+   "title": "Profit, loss and percentage profit",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say what cost price and selling price are.",
+    "Find profit or loss.",
+    "Find the profit or loss as a percentage of the cost price."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-data-money-e13",
+    "class5-maths-data-money-e14",
+    "class5-maths-data-money-e15",
+    "class5-maths-data-money-e16",
+    "class5-maths-data-money-e17",
+    "class5-maths-data-money-e18"
+   ],
+   "selfCheck": [
+    "class5-maths-profit-loss-q1",
+    "class5-maths-profit-loss-q2",
+    "class5-maths-profit-loss-q3",
+    "class5-maths-profit-loss-q4",
+    "class5-maths-profit-loss-q5"
+   ],
+   "reviewNotes": [
+    "Percentage profit is based on cost price, as is usual in school books; check local convention.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Profit and loss",
+     "md": "The **cost price (CP)** is what the trader pays to buy goods. The **selling price (SP)** is what the trader sells them for. If SP is **more** than CP there is a **profit**: profit = SP − CP. If SP is **less** than CP there is a **loss**: loss = CP − SP."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 116,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 10,
+        "w": 110,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 31.0,
+        "text": "Cost price",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 110,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 31.0,
+        "text": "Selling price",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 250.0,
+        "y": 10,
+        "w": 120,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 31.0,
+        "text": "Result",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 42,
+        "w": 110,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 63.0,
+        "text": "5,000",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 42,
+        "w": 110,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 63.0,
+        "text": "6,500",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250.0,
+        "y": 42,
+        "w": 120,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 63.0,
+        "text": "Profit 1,500",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 74,
+        "w": 110,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 95.0,
+        "text": "8,000",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 74,
+        "w": 110,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 95.0,
+        "text": "7,000",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250.0,
+        "y": 74,
+        "w": 120,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 95.0,
+        "text": "Loss 1,000",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Profit and loss examples.",
+     "alt": "A table with cost price, selling price and result: 5,000 to 6,500 is a profit of 1,500; 8,000 to 7,000 is a loss of 1,000."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Percentage profit",
+     "md": "Percentage profit = (profit ÷ cost price) × 100. If a trader buys for 5,000 FCFA and sells for 6,500 FCFA, the profit is 1,500 FCFA and the percentage profit is 1,500 ÷ 5,000 × 100 = 30%. Always divide by the **cost price**, not by the selling price."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Dividing the profit by the selling price.\n- Mixing profit and loss: check which price is bigger.\n- Forgetting the unit FCFA.\n- Forgetting that profit is not the same as the money received."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A trader buys a sack of rice for 18,000 FCFA and sells it for 21,000 FCFA. Find the profit.",
+     "steps": [
+      "SP is bigger than CP, so there is a profit.",
+      "Profit = 21,000 − 18,000 = 3,000."
+     ],
+     "answer": "3,000 FCFA profit."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the percentage profit in Example 1.",
+     "steps": [
+      "Percentage profit = profit ÷ CP × 100 = 3,000 ÷ 18,000 × 100.",
+      "3,000 ÷ 18,000 = 1/6, and 1/6 × 100 = 16.7 (to 1 decimal place)."
+     ],
+     "answer": "About 16.7%"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-simple-interest",
+   "title": "Simple interest (introduction)",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say what principal, rate, time and interest are.",
+    "Calculate simple interest with the formula.",
+    "Find the total amount after some years."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-data-money-e19",
+    "class5-maths-data-money-e20",
+    "class5-maths-data-money-e21",
+    "class5-maths-data-money-e22",
+    "class5-maths-data-money-e23",
+    "class5-maths-data-money-e24"
+   ],
+   "selfCheck": [
+    "class5-maths-simple-interest-q1",
+    "class5-maths-simple-interest-q2",
+    "class5-maths-simple-interest-q3",
+    "class5-maths-simple-interest-q4",
+    "class5-maths-simple-interest-q5"
+   ],
+   "reviewNotes": [
+    "Interest and 'njangi' are mentioned as examples; whether the curriculum includes simple interest in Class 5 is to be checked (it may be Class 6).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Interest",
+     "md": "When you **save** or **borrow** money, a bank or a savings group (njangi) may pay or charge **interest**. The money saved or borrowed is the **principal (P)**. The **rate (R)** is the percentage per year. The **time (T)** is the number of years. **Simple interest** is the same amount each year."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 104,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 10,
+        "w": 90,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 32.0,
+        "text": "Principal",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 120.0,
+        "y": 10,
+        "w": 90,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 32.0,
+        "text": "Rate",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 10,
+        "w": 80,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 32.0,
+        "text": "Time",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 10,
+        "w": 80,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 32.0,
+        "text": "Interest",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 44,
+        "w": 90,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 66.0,
+        "text": "50,000",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 120.0,
+        "y": 44,
+        "w": 90,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 66.0,
+        "text": "5% a year",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 44,
+        "w": 80,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 66.0,
+        "text": "2 years",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 44,
+        "w": 80,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 66.0,
+        "text": "5,000",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An example of simple interest.",
+     "alt": "A table: principal 50,000 FCFA, rate 5 per cent a year, time 2 years, interest 5,000 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formula",
+     "md": "Simple interest $I = \\frac{P \\times R \\times T}{100}$. Example: P = 50,000 FCFA, R = 5%, T = 2 years: I = 50,000 × 5 × 2 ÷ 100 = 5,000 FCFA. The **amount** at the end = principal + interest = 55,000 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting to divide by 100.\n- Using months instead of years.\n- Giving only the interest when the question asks for the total amount.\n- Thinking the interest grows each year (that is compound interest, not studied here)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the simple interest on 50,000 FCFA at 5% a year for 2 years.",
+     "steps": [
+      "Use I = P × R × T ÷ 100 = 50,000 × 5 × 2 ÷ 100.",
+      "50,000 × 5 × 2 = 500,000, and 500,000 ÷ 100 = 5,000."
+     ],
+     "answer": "5,000 FCFA",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 104,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 10,
+        "w": 90,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 32.0,
+        "text": "Principal",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 120.0,
+        "y": 10,
+        "w": 90,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 32.0,
+        "text": "Rate",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 10,
+        "w": 80,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 32.0,
+        "text": "Time",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 10,
+        "w": 80,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 32.0,
+        "text": "Interest",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 44,
+        "w": 90,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 66.0,
+        "text": "50,000",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 120.0,
+        "y": 44,
+        "w": 90,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 66.0,
+        "text": "5% a year",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 44,
+        "w": 80,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 66.0,
+        "text": "2 years",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 44,
+        "w": 80,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 66.0,
+        "text": "5,000",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "What is the total amount after those 2 years?",
+     "steps": [
+      "Amount = principal + interest.",
+      "50,000 + 5,000 = 55,000."
+     ],
+     "answer": "55,000 FCFA"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-data-money"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class5-maths-data-money-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the mean of 6, 8 and 10.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "24 ÷ 3 = 8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the range of 3, 11, 7, 5.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "11 − 3 = 8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The mode of 2, 3, 3, 5, 3, 7 is...",
+   "choices": [
+    "5",
+    "3",
+    "7",
+    "2"
+   ],
+   "answer": 1,
+   "explanation": "3 appears most often.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The mean of 5 numbers is 12. What is their total?",
+   "answer": 60,
+   "tolerance": 0,
+   "explanation": "5 × 12 = 60.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The median of 3, 5, 7, 9, 11 is 7.",
+   "answer": true,
+   "explanation": "7 is the middle number.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-averages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A Class 5 teacher in Bamenda records the number of books read by 6 pupils: 4, 6, 3, 6, 8, 5.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the total?",
+     "answer": 32,
+     "tolerance": 0,
+     "explanation": "4+6+3+6+8+5 = 32.",
+     "id": "class5-maths-data-money-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the mean? (Give a decimal.)",
+     "answer": 5.333333333333333,
+     "tolerance": 0.01,
+     "explanation": "32 ÷ 6 = 5.33...",
+     "id": "class5-maths-data-money-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "What is the mode?",
+     "choices": [
+      "6",
+      "3",
+      "5",
+      "8"
+     ],
+     "answer": 0,
+     "explanation": "6 appears twice.",
+     "id": "class5-maths-data-money-e06-c"
+    }
+   ],
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-averages-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-averages",
+   "prompt": "Class 5 Maths (Averages) – The mean of 4, 6 and 8 is...",
+   "choices": [
+    "18",
+    "6",
+    "8",
+    "4"
+   ],
+   "answer": 1,
+   "explanation": "18 ÷ 3 = 6.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-averages-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-averages",
+   "prompt": "Class 5 Maths (Averages) – The range of 12, 20, 15 is...",
+   "choices": [
+    "47",
+    "8",
+    "12",
+    "20"
+   ],
+   "answer": 1,
+   "explanation": "20 − 12.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-averages-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-averages",
+   "prompt": "Class 5 Maths (Averages) – The mode is the number that...",
+   "choices": [
+    "is the biggest",
+    "is the total",
+    "is in the middle",
+    "appears most often"
+   ],
+   "answer": 3,
+   "explanation": "Most frequent.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-averages-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-averages",
+   "prompt": "Class 5 Maths (Averages) – The median of 1, 3, 5 is...",
+   "choices": [
+    "1",
+    "5",
+    "3",
+    "9"
+   ],
+   "answer": 2,
+   "explanation": "The middle.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-averages-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-averages",
+   "prompt": "Class 5 Maths (Averages) – To find a mean we add the numbers then...",
+   "choices": [
+    "take the middle",
+    "divide by how many there are",
+    "multiply by how many",
+    "subtract the smallest"
+   ],
+   "answer": 1,
+   "explanation": "Total ÷ number of items.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which event is certain?",
+   "choices": [
+    "It rains in the desert every day",
+    "The next baby is a boy",
+    "A goat flies",
+    "Tomorrow comes after today"
+   ],
+   "answer": 3,
+   "explanation": "Certain events must happen.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A dice is rolled. How many outcomes are there?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "1, 2, 3, 4, 5, 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A fair coin is tossed. The probability of heads is...",
+   "choices": [
+    "1/2",
+    "0",
+    "2",
+    "1"
+   ],
+   "answer": 0,
+   "explanation": "One of two equal outcomes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bag has 4 blue and 6 yellow balls. The probability of blue is...",
+   "choices": [
+    "4/6",
+    "4/10",
+    "10/4",
+    "6/10"
+   ],
+   "answer": 1,
+   "explanation": "4 favourable out of 10 balls.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A probability can be 3/2.",
+   "answer": false,
+   "explanation": "Probability is never more than 1.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-probability",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A spinner has 8 equal sections: 4 are red, 3 are blue and 1 is green.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the probability of red?",
+     "choices": [
+      "8/4",
+      "4/4",
+      "4/8",
+      "1/8"
+     ],
+     "answer": 2,
+     "explanation": "4 red out of 8.",
+     "id": "class5-maths-data-money-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the probability of green?",
+     "choices": [
+      "1/1",
+      "7/8",
+      "1/4",
+      "1/8"
+     ],
+     "answer": 3,
+     "explanation": "1 green out of 8.",
+     "id": "class5-maths-data-money-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which colour is the most likely?",
+     "choices": [
+      "red",
+      "blue",
+      "green",
+      "all the same"
+     ],
+     "answer": 0,
+     "explanation": "Red has the most sections.",
+     "id": "class5-maths-data-money-e12-c"
+    }
+   ],
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-probability-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-probability",
+   "prompt": "Class 5 Maths (Chance and probability (introduction)) – A probability of 0 means the event is...",
+   "choices": [
+    "certain",
+    "likely",
+    "impossible",
+    "even"
+   ],
+   "answer": 2,
+   "explanation": "It cannot happen.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-probability-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-probability",
+   "prompt": "Class 5 Maths (Chance and probability (introduction)) – A probability of 1 means the event is...",
+   "choices": [
+    "impossible",
+    "even",
+    "certain",
+    "unlikely"
+   ],
+   "answer": 2,
+   "explanation": "It must happen.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-probability-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-probability",
+   "prompt": "Class 5 Maths (Chance and probability (introduction)) – The chance of getting tails on a fair coin is...",
+   "choices": [
+    "1/4",
+    "2/3",
+    "1/2",
+    "1/3"
+   ],
+   "answer": 2,
+   "explanation": "Two equal outcomes.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-probability-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-probability",
+   "prompt": "Class 5 Maths (Chance and probability (introduction)) – A bag has 2 red and 3 blue counters. P(blue) =",
+   "choices": [
+    "2/3",
+    "3/2",
+    "3/5",
+    "2/5"
+   ],
+   "answer": 2,
+   "explanation": "3 out of 5.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-probability-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-probability",
+   "prompt": "Class 5 Maths (Chance and probability (introduction)) – We can write a probability as a...",
+   "choices": [
+    "time",
+    "fraction",
+    "mass",
+    "length"
+   ],
+   "answer": 1,
+   "explanation": "For example 1/6.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-profit-loss",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "CP = 5,000 FCFA, SP = 6,500 FCFA. Find the profit.",
+   "answer": 1500,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "6,500 − 5,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-profit-loss",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "CP = 8,000 FCFA, SP = 7,000 FCFA. Find the loss.",
+   "answer": 1000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "8,000 − 7,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-profit-loss",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If the selling price is bigger than the cost price there is a...",
+   "choices": [
+    "loss",
+    "tax",
+    "profit",
+    "discount"
+   ],
+   "answer": 2,
+   "explanation": "Profit = SP − CP.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-profit-loss",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A trader buys 20 bags of charcoal at 1,500 FCFA each and sells all for 36,000 FCFA. Find the profit.",
+   "answer": 6000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "CP = 30,000; profit = 6,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-profit-loss",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "CP = 4,000 FCFA and profit = 1,000 FCFA. Find the percentage profit.",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "1,000 ÷ 4,000 × 100 = 25.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-profit-loss",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mama Bih buys 50 pineapples at 200 FCFA each. She sells 40 of them at 350 FCFA each, and the other 10 at 100 FCFA each.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What did she pay for the pineapples?",
+     "answer": 10000,
+     "tolerance": 0,
+     "explanation": "50 × 200 = 10,000.",
+     "unit": "FCFA",
+     "id": "class5-maths-data-money-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How much did she receive in all?",
+     "answer": 15000,
+     "tolerance": 0,
+     "explanation": "40 × 350 = 14,000 and 10 × 100 = 1,000; total 15,000.",
+     "unit": "FCFA",
+     "id": "class5-maths-data-money-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is her percentage profit?",
+     "answer": 50,
+     "tolerance": 0,
+     "explanation": "Profit 5,000; 5,000 ÷ 10,000 × 100 = 50.",
+     "unit": "%",
+     "id": "class5-maths-data-money-e18-c"
+    }
+   ],
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-profit-loss-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-profit-loss",
+   "prompt": "Class 5 Maths (Profit, loss and percentage profit) – Profit = ...",
+   "choices": [
+    "cost price − selling price",
+    "selling price × cost price",
+    "selling price − cost price",
+    "cost price + selling price"
+   ],
+   "answer": 2,
+   "explanation": "When SP > CP.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-profit-loss-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-profit-loss",
+   "prompt": "Class 5 Maths (Profit, loss and percentage profit) – Buying at 2,000 FCFA and selling at 1,500 FCFA gives a...",
+   "choices": [
+    "loss of 500 FCFA",
+    "profit of 3,500 FCFA",
+    "loss of 1,500 FCFA",
+    "profit of 500 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "CP − SP = 500.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-profit-loss-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-profit-loss",
+   "prompt": "Class 5 Maths (Profit, loss and percentage profit) – Percentage profit is found by dividing profit by...",
+   "choices": [
+    "the selling price",
+    "the number of items",
+    "the cost price",
+    "the loss"
+   ],
+   "answer": 2,
+   "explanation": "Then multiply by 100.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-profit-loss-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-profit-loss",
+   "prompt": "Class 5 Maths (Profit, loss and percentage profit) – The price a trader pays to buy goods is the...",
+   "choices": [
+    "discount",
+    "cost price",
+    "selling price",
+    "profit"
+   ],
+   "answer": 1,
+   "explanation": "CP.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-profit-loss-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-profit-loss",
+   "prompt": "Class 5 Maths (Profit, loss and percentage profit) – CP 200 and profit 50: percentage profit =",
+   "choices": [
+    "4%",
+    "25%",
+    "250%",
+    "50%"
+   ],
+   "answer": 1,
+   "explanation": "50/200 = 1/4.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-simple-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Simple interest on 20,000 FCFA at 10% a year for 1 year.",
+   "answer": 2000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "20,000 × 10 × 1 ÷ 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-simple-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Simple interest on 10,000 FCFA at 4% a year for 3 years.",
+   "answer": 1200,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "10,000 × 4 × 3 ÷ 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e21",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-simple-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the formula the letter R stands for...",
+   "choices": [
+    "rate",
+    "rice",
+    "ratio",
+    "result"
+   ],
+   "answer": 0,
+   "explanation": "Rate per cent per year.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-simple-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How much money is there after 2 years if you save 40,000 FCFA at 5% simple interest a year?",
+   "answer": 44000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "Interest 4,000; total 44,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-simple-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "With simple interest, the interest is the same each year.",
+   "answer": true,
+   "explanation": "It is always calculated on the first principal.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-data-money-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-simple-interest",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A savings group in Bafoussam lends Mr Ngu 80,000 FCFA at 6% a year for 2 years.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the interest?",
+     "answer": 9600,
+     "tolerance": 0,
+     "explanation": "80,000 × 6 × 2 ÷ 100 = 9,600.",
+     "unit": "FCFA",
+     "id": "class5-maths-data-money-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the total he must pay back?",
+     "answer": 89600,
+     "tolerance": 0,
+     "explanation": "80,000 + 9,600 = 89,600.",
+     "unit": "FCFA",
+     "id": "class5-maths-data-money-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How much does he pay back each month if he pays equally over the 24 months?",
+     "answer": 3733.3333333333335,
+     "tolerance": 1,
+     "explanation": "89,600 ÷ 24 = about 3,733.",
+     "unit": "FCFA",
+     "id": "class5-maths-data-money-e24-c"
+    }
+   ],
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-simple-interest-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-simple-interest",
+   "prompt": "Class 5 Maths (Simple interest (introduction)) – The money you save or borrow is the...",
+   "choices": [
+    "interest",
+    "amount",
+    "rate",
+    "principal"
+   ],
+   "answer": 3,
+   "explanation": "Principal = starting money.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-simple-interest-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-simple-interest",
+   "prompt": "Class 5 Maths (Simple interest (introduction)) – Simple interest on 1,000 FCFA at 10% for 1 year is...",
+   "choices": [
+    "1,010 FCFA",
+    "100 FCFA",
+    "1,000 FCFA",
+    "10 FCFA"
+   ],
+   "answer": 1,
+   "explanation": "1,000 × 10 ÷ 100.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-simple-interest-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-simple-interest",
+   "prompt": "Class 5 Maths (Simple interest (introduction)) – Amount =",
+   "choices": [
+    "principal × rate",
+    "interest ÷ time",
+    "principal − interest",
+    "principal + interest"
+   ],
+   "answer": 3,
+   "explanation": "The total at the end.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-simple-interest-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-simple-interest",
+   "prompt": "Class 5 Maths (Simple interest (introduction)) – In simple interest the time T is in...",
+   "choices": [
+    "years",
+    "days",
+    "months",
+    "hours"
+   ],
+   "answer": 0,
+   "explanation": "Rate is per year.",
+   "chapter": "class5-maths-data-money"
+  },
+  {
+   "id": "class5-maths-simple-interest-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-simple-interest",
+   "prompt": "Class 5 Maths (Simple interest (introduction)) – Interest on 5,000 FCFA at 2% for 2 years is...",
+   "choices": [
+    "500 FCFA",
+    "20 FCFA",
+    "200 FCFA",
+    "2,000 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "5,000 × 2 × 2 ÷ 100.",
+   "chapter": "class5-maths-data-money"
+  }
+ ]
+}

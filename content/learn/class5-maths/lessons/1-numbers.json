@@ -1,0 +1,1609 @@
+{
+ "chapter": "class5-maths-numbers",
+ "lessons": [
+  {
+   "id": "class5-maths-large-numbers",
+   "title": "Large numbers: hundreds of thousands and millions",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read and write numbers up to millions.",
+    "Say the place value of any digit.",
+    "Round large numbers and compare them."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-numbers-e01",
+    "class5-maths-numbers-e02",
+    "class5-maths-numbers-e03",
+    "class5-maths-numbers-e04",
+    "class5-maths-numbers-e05",
+    "class5-maths-numbers-e06"
+   ],
+   "selfCheck": [
+    "class5-maths-large-numbers-q1",
+    "class5-maths-large-numbers-q2",
+    "class5-maths-large-numbers-q3",
+    "class5-maths-large-numbers-q4",
+    "class5-maths-large-numbers-q5"
+   ],
+   "reviewNotes": [
+    "Millions are named; billions are not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Places and periods",
+     "md": "After the thousands come the **hundred thousands (HTh)** and then the **millions (M)**. 1,000,000 is **one million**: ten hundred thousands. We group digits in threes from the right: 2,050,000 is **two million and fifty thousand**. In 345,678 the 3 is worth 300,000."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 104,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 32.0,
+        "text": "HTh",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 32.0,
+        "text": "TTh",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 32.0,
+        "text": "Th",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 32.0,
+        "text": "H",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 32.0,
+        "text": "T",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 320.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 32.0,
+        "text": "U",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 66.0,
+        "text": "3",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 66.0,
+        "text": "4",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 66.0,
+        "text": "5",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 66.0,
+        "text": "6",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 66.0,
+        "text": "7",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 320.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 66.0,
+        "text": "8",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "345,678 in a place-value table.",
+     "alt": "A table with columns HTh, TTh, Th, H, T, U and the digits 3, 4, 5, 6, 7, 8."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 104,
+      "items": [
+       {
+        "t": "rect",
+        "x": 11.0,
+        "y": 10,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 32.0,
+        "text": "M",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 10,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 92.0,
+        "y": 32.0,
+        "text": "HTh",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 119.0,
+        "y": 10,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 146.0,
+        "y": 32.0,
+        "text": "TTh",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 173.0,
+        "y": 10,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 32.0,
+        "text": "Th",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 227.0,
+        "y": 10,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 254.0,
+        "y": 32.0,
+        "text": "H",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 281.0,
+        "y": 10,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 308.0,
+        "y": 32.0,
+        "text": "T",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 335.0,
+        "y": 10,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 362.0,
+        "y": 32.0,
+        "text": "U",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 11.0,
+        "y": 44,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 66.0,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 65.0,
+        "y": 44,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 92.0,
+        "y": 66.0,
+        "text": "0",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 119.0,
+        "y": 44,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 146.0,
+        "y": 66.0,
+        "text": "5",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 173.0,
+        "y": 44,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 66.0,
+        "text": "0",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 227.0,
+        "y": 44,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 254.0,
+        "y": 66.0,
+        "text": "0",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 281.0,
+        "y": 44,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 308.0,
+        "y": 66.0,
+        "text": "0",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 335.0,
+        "y": 44,
+        "w": 54,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 362.0,
+        "y": 66.0,
+        "text": "0",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "2,050,000 in a place-value table.",
+     "alt": "A table with columns M, HTh, TTh, Th, H, T, U and the digits 2, 0, 5, 0, 0, 0, 0."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rounding and comparing",
+     "md": "To compare, count the digits first, then compare from the left. To round to the nearest 1,000, look at the **hundreds digit**: 5 or more rounds up. So 345,678 is 346,000 to the nearest thousand and 350,000 to the nearest ten thousand."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing too many or too few zeros: **one million** has six zeros.\n- Writing 'two million fifty thousand' as 2,50,000 instead of 2,050,000.\n- Changing digits to the left when rounding.\n- Thinking that 99,999 is bigger than 100,000."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write 'four million, three hundred and six thousand and twelve' in figures.",
+     "steps": [
+      "Millions: 4. Thousands: 306. Hundreds, tens, units: 012.",
+      "Write them together: 4,306,012."
+     ],
+     "answer": "4,306,012"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Round 345,678 to the nearest 10,000.",
+     "steps": [
+      "The ten-thousands digit is 4; the next digit (thousands) is 5.",
+      "5 rounds up, so 40,000 becomes 50,000: the answer is 350,000."
+     ],
+     "answer": "350,000"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-factors-multiples",
+   "title": "Factors, multiples, primes, HCF and LCM",
+   "minutes": 35,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "List the factors and multiples of a number.",
+    "Tell prime and composite numbers apart.",
+    "Find the HCF and the LCM of two small numbers."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-numbers-e07",
+    "class5-maths-numbers-e08",
+    "class5-maths-numbers-e09",
+    "class5-maths-numbers-e10",
+    "class5-maths-numbers-e11",
+    "class5-maths-numbers-e12"
+   ],
+   "selfCheck": [
+    "class5-maths-factors-multiples-q1",
+    "class5-maths-factors-multiples-q2",
+    "class5-maths-factors-multiples-q3",
+    "class5-maths-factors-multiples-q4",
+    "class5-maths-factors-multiples-q5"
+   ],
+   "reviewNotes": [
+    "Whether HCF/LCM are taught by listing or by prime factors at this level to be checked; listing is used here.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Factors and multiples",
+     "md": "A **factor** of a number divides it exactly: the factors of 24 are 1, 2, 3, 4, 6, 8, 12 and 24. A **multiple** of a number is in its times table: multiples of 6 are 6, 12, 18, 24... A **prime number** has exactly two factors, 1 and itself (2, 3, 5, 7, 11, 13...). 1 is not prime. Other numbers above 1 are **composite**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 14,
+        "w": 88,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 40,
+        "text": "1 × 24",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 62,
+        "text": "pair",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 108,
+        "y": 14,
+        "w": 88,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 152.0,
+        "y": 40,
+        "text": "2 × 12",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 152.0,
+        "y": 62,
+        "text": "pair",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 204,
+        "y": 14,
+        "w": 88,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 248.0,
+        "y": 40,
+        "text": "3 × 8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 248.0,
+        "y": 62,
+        "text": "pair",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 14,
+        "w": 88,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 344.0,
+        "y": 40,
+        "text": "4 × 6",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 344.0,
+        "y": 62,
+        "text": "pair",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The factor pairs of 24.",
+     "alt": "Four boxes with the factor pairs 1 times 24, 2 times 12, 3 times 8 and 4 times 6."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "HCF and LCM",
+     "md": "The **HCF** (highest common factor) is the biggest number that divides both: factors of 12 are 1, 2, 3, 4, 6, 12 and of 18 are 1, 2, 3, 6, 9, 18, so HCF = 6. The **LCM** (lowest common multiple) is the smallest number in both times tables: multiples of 4 are 4, 8, 12 and of 6 are 6, 12, so LCM = 12."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Divisibility tests",
+     "md": "A number is divisible by **2** if it ends in 0, 2, 4, 6 or 8; by **5** if it ends in 0 or 5; by **10** if it ends in 0; by **3** if the sum of its digits is divisible by 3; by **9** if the sum of its digits is divisible by 9."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that 1 is a prime number, or that 2 is not prime (2 is the only even prime).\n- Mixing factors and multiples: factors are smaller or equal, multiples are bigger or equal.\n- Giving the HCF when the question asks for the LCM."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the HCF and the LCM of 12 and 18.",
+     "steps": [
+      "Factors of 12: 1, 2, 3, 4, 6, 12. Factors of 18: 1, 2, 3, 6, 9, 18. The biggest common factor is 6.",
+      "Multiples of 12: 12, 24, 36. Multiples of 18: 18, 36. The first common multiple is 36."
+     ],
+     "answer": "HCF 6; LCM 36."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Is 51 a prime number?",
+     "steps": [
+      "Test 3: 5 + 1 = 6, which is divisible by 3, so 51 is divisible by 3.",
+      "51 = 3 × 17, so it has more than two factors: it is not prime."
+     ],
+     "answer": "No, 51 = 3 × 17."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-order-of-operations",
+   "title": "Order of operations (BODMAS)",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use brackets, multiplication, division, addition and subtraction in the right order.",
+    "Solve mixed calculations.",
+    "Write a calculation for a story."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-numbers-e13",
+    "class5-maths-numbers-e14",
+    "class5-maths-numbers-e15",
+    "class5-maths-numbers-e16",
+    "class5-maths-numbers-e17",
+    "class5-maths-numbers-e18"
+   ],
+   "selfCheck": [
+    "class5-maths-order-of-operations-q1",
+    "class5-maths-order-of-operations-q2",
+    "class5-maths-order-of-operations-q3",
+    "class5-maths-order-of-operations-q4",
+    "class5-maths-order-of-operations-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "BODMAS",
+     "md": "When a calculation has more than one operation, work in this order: **B**rackets, **O**rders (powers like 2²), **D**ivision and **M**ultiplication (left to right), **A**ddition and **S**ubtraction (left to right). So 8 + 4 × 3 = 8 + 12 = 20, but (8 + 4) × 3 = 12 × 3 = 36."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 184,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 8,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 30.0,
+        "text": "B  — Brackets first",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 50,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 72.0,
+        "text": "O  — Orders (powers) next",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 92,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 114.0,
+        "text": "D M — Divide and Multiply, left to right",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 134,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 156.0,
+        "text": "A S — Add and Subtract, left to right",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The order of operations.",
+     "alt": "Four stacked boxes: brackets first, orders next, divide and multiply from left to right, add and subtract from left to right."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Same level: left to right",
+     "md": "Division and multiplication have the **same rank**, so we go from left to right: 24 ÷ 4 × 3 = 6 × 3 = 18. Addition and subtraction also have the same rank: 10 − 3 + 2 = 7 + 2 = 9."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Working from left to right without thinking: 8 + 4 × 3 is **not** 36.\n- Ignoring the brackets.\n- Doing the addition before the division: 20 − 12 ÷ 4 = 20 − 3 = 17, not 2."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Work out 20 − 12 ÷ 4.",
+     "steps": [
+      "Division first: 12 ÷ 4 = 3.",
+      "Then subtract: 20 − 3 = 17."
+     ],
+     "answer": "17"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Work out (15 + 5) × 3 − 4.",
+     "steps": [
+      "Brackets first: 15 + 5 = 20.",
+      "Multiply: 20 × 3 = 60. Subtract: 60 − 4 = 56."
+     ],
+     "answer": "56"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-numbers"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class5-maths-numbers-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-large-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the value of 6 in 462,310?",
+   "choices": [
+    "600,000",
+    "6",
+    "60,000",
+    "6,000"
+   ],
+   "answer": 2,
+   "explanation": "6 is in the ten thousands place.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-large-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write in figures: 3 million and 5,000.",
+   "answer": 3005000,
+   "tolerance": 0,
+   "explanation": "3,000,000 + 5,000 = 3,005,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-large-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which number is the biggest?",
+   "choices": [
+    "999,999",
+    "1,000,000",
+    "990,000",
+    "100,000"
+   ],
+   "answer": 1,
+   "explanation": "One million is 1 more than 999,999.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-large-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Round 4,567,890 to the nearest million.",
+   "answer": 5000000,
+   "tolerance": 0,
+   "explanation": "The hundred-thousands digit is 5, so round up.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-large-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "There are 10 hundred thousands in one million.",
+   "answer": true,
+   "explanation": "10 × 100,000 = 1,000,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-large-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cocoa cooperative in the Centre Region produced 1,250,000 kg of cocoa in one year and 980,000 kg in the next year.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kg did it produce in the two years together?",
+     "answer": 2230000,
+     "tolerance": 0,
+     "explanation": "1,250,000 + 980,000 = 2,230,000.",
+     "unit": "kg",
+     "id": "class5-maths-numbers-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kg more in the first year?",
+     "answer": 270000,
+     "tolerance": 0,
+     "explanation": "1,250,000 − 980,000 = 270,000.",
+     "unit": "kg",
+     "id": "class5-maths-numbers-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Round the first year's amount to the nearest million.",
+     "answer": 1000000,
+     "tolerance": 0,
+     "explanation": "The hundred thousands digit is 2: round down.",
+     "id": "class5-maths-numbers-e06-c"
+    }
+   ],
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-large-numbers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-large-numbers",
+   "prompt": "Class 5 Maths (Large numbers) – How many zeros are in one million?",
+   "choices": [
+    "3",
+    "6",
+    "5",
+    "7"
+   ],
+   "answer": 1,
+   "explanation": "1,000,000 has six zeros.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-large-numbers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-large-numbers",
+   "prompt": "Class 5 Maths (Large numbers) – The value of 7 in 7,430,000 is...",
+   "choices": [
+    "7,000",
+    "70,000",
+    "700,000",
+    "7,000,000"
+   ],
+   "answer": 3,
+   "explanation": "7 millions.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-large-numbers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-large-numbers",
+   "prompt": "Class 5 Maths (Large numbers) – Round 76,500 to the nearest thousand.",
+   "choices": [
+    "76,000",
+    "80,000",
+    "76,500",
+    "77,000"
+   ],
+   "answer": 3,
+   "explanation": "5 goes up.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-large-numbers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-large-numbers",
+   "prompt": "Class 5 Maths (Large numbers) – Which is 2,000,000 + 30,000 + 400?",
+   "choices": [
+    "2,300,400",
+    "230,400",
+    "2,030,400",
+    "2,034,000"
+   ],
+   "answer": 2,
+   "explanation": "Place each part.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-large-numbers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-large-numbers",
+   "prompt": "Class 5 Maths (Large numbers) – Which number is the smallest?",
+   "choices": [
+    "989,899",
+    "999,998",
+    "1,000,000",
+    "998,899"
+   ],
+   "answer": 0,
+   "explanation": "989,899 has the smallest ten-thousands digit among the six-digit numbers.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these is a prime number?",
+   "choices": [
+    "13",
+    "21",
+    "27",
+    "15"
+   ],
+   "answer": 0,
+   "explanation": "13 has only the factors 1 and 13.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many factors has 24?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "1, 2, 3, 4, 6, 8, 12, 24.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the LCM of 3 and 5.",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "Multiples of 3: 3,6,9,12,15; of 5: 5,10,15.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the HCF of 20 and 30.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "Common factors: 1, 2, 5, 10. The highest is 10.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If a number ends in 5 it is divisible by 5.",
+   "answer": true,
+   "explanation": "Test for 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two buses leave the Bamenda motor park together. Bus A leaves again every 4 hours and bus B every 6 hours.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "After how many hours will both leave together again?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "LCM of 4 and 6 is 12.",
+     "unit": "hours",
+     "id": "class5-maths-numbers-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What kind of number is 12?",
+     "choices": [
+      "a prime number",
+      "a composite number",
+      "a decimal",
+      "an odd number"
+     ],
+     "answer": 1,
+     "explanation": "12 has more than two factors.",
+     "id": "class5-maths-numbers-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "A teacher has 24 pencils and 36 erasers and wants equal sets with nothing left over. What is the biggest number of sets?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "HCF of 24 and 36 is 12.",
+     "id": "class5-maths-numbers-e12-c"
+    }
+   ],
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-factors-multiples-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-factors-multiples",
+   "prompt": "Class 5 Maths (Factors, multiples, primes, HCF and LCM) – Which number is a factor of 20?",
+   "choices": [
+    "3",
+    "30",
+    "8",
+    "5"
+   ],
+   "answer": 3,
+   "explanation": "20 ÷ 5 = 4.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-factors-multiples-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-factors-multiples",
+   "prompt": "Class 5 Maths (Factors, multiples, primes, HCF and LCM) – The first multiple of 7 after 14 is...",
+   "choices": [
+    "28",
+    "17",
+    "15",
+    "21"
+   ],
+   "answer": 3,
+   "explanation": "7 × 3 = 21.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-factors-multiples-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-factors-multiples",
+   "prompt": "Class 5 Maths (Factors, multiples, primes, HCF and LCM) – Which number is divisible by 9?",
+   "choices": [
+    "729",
+    "731",
+    "728",
+    "730"
+   ],
+   "answer": 0,
+   "explanation": "7 + 2 + 9 = 18, divisible by 9.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-factors-multiples-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-factors-multiples",
+   "prompt": "Class 5 Maths (Factors, multiples, primes, HCF and LCM) – The LCM of 2 and 3 is...",
+   "choices": [
+    "23",
+    "1",
+    "6",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "Smallest number in both times tables.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-factors-multiples-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-factors-multiples",
+   "prompt": "Class 5 Maths (Factors, multiples, primes, HCF and LCM) – The only even prime number is...",
+   "choices": [
+    "0",
+    "4",
+    "1",
+    "2"
+   ],
+   "answer": 3,
+   "explanation": "All other even numbers have the factor 2.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-order-of-operations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 6 + 4 × 5.",
+   "answer": 26,
+   "tolerance": 0,
+   "explanation": "Multiply first: 20, then add 6 = 26.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-order-of-operations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out (6 + 4) × 5.",
+   "answer": 50,
+   "tolerance": 0,
+   "explanation": "Brackets first: 10 × 5 = 50.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-order-of-operations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 30 − 10 ÷ 2.",
+   "choices": [
+    "20",
+    "15",
+    "10",
+    "25"
+   ],
+   "answer": 3,
+   "explanation": "10 ÷ 2 = 5, then 30 − 5 = 25.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-order-of-operations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 24 ÷ 4 × 3.",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "Left to right: 6 × 3 = 18.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-order-of-operations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "2 + 3 × 4 gives the same answer as (2 + 3) × 4.",
+   "answer": false,
+   "explanation": "2 + 12 = 14 but 5 × 4 = 20.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-numbers-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-order-of-operations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mama Ako buys 3 packets of biscuits at 250 FCFA and 2 bottles of juice at 400 FCFA. She pays 2,000 FCFA.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Write and work out 3 × 250 + 2 × 400.",
+     "answer": 1550,
+     "tolerance": 0,
+     "explanation": "750 + 800 = 1,550.",
+     "unit": "FCFA",
+     "id": "class5-maths-numbers-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Work out the change: 2,000 − (3 × 250 + 2 × 400).",
+     "answer": 450,
+     "tolerance": 0,
+     "explanation": "2,000 − 1,550 = 450.",
+     "unit": "FCFA",
+     "id": "class5-maths-numbers-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which expression shows the cost of 5 items if 3 cost 250 each and 2 cost 400 each?",
+     "choices": [
+      "3 × 250 + 2 × 400",
+      "5 × 650",
+      "3 + 250 × 2 + 400",
+      "(3 + 2) × (250 + 400)"
+     ],
+     "answer": 0,
+     "explanation": "Each group is multiplied, then added.",
+     "id": "class5-maths-numbers-e18-c"
+    }
+   ],
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-order-of-operations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-order-of-operations",
+   "prompt": "Class 5 Maths (Order of operations (BODMAS)) – Work out 5 + 2 × 3.",
+   "choices": [
+    "13",
+    "30",
+    "21",
+    "11"
+   ],
+   "answer": 3,
+   "explanation": "Multiply first.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-order-of-operations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-order-of-operations",
+   "prompt": "Class 5 Maths (Order of operations (BODMAS)) – What does the B in BODMAS stand for?",
+   "choices": [
+    "Big",
+    "Brackets",
+    "Bottom",
+    "Before"
+   ],
+   "answer": 1,
+   "explanation": "Brackets come first.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-order-of-operations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-order-of-operations",
+   "prompt": "Class 5 Maths (Order of operations (BODMAS)) – Work out 18 ÷ (6 − 3).",
+   "choices": [
+    "6",
+    "0",
+    "9",
+    "3"
+   ],
+   "answer": 0,
+   "explanation": "6 − 3 = 3, then 18 ÷ 3.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-order-of-operations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-order-of-operations",
+   "prompt": "Class 5 Maths (Order of operations (BODMAS)) – Work out 12 − 4 + 2.",
+   "choices": [
+    "10",
+    "14",
+    "6",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "Left to right.",
+   "chapter": "class5-maths-numbers"
+  },
+  {
+   "id": "class5-maths-order-of-operations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-order-of-operations",
+   "prompt": "Class 5 Maths (Order of operations (BODMAS)) – Work out 3 + 12 ÷ 3.",
+   "choices": [
+    "5",
+    "15",
+    "4",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "12 ÷ 3 = 4, then 3 + 4.",
+   "chapter": "class5-maths-numbers"
+  }
+ ]
+}

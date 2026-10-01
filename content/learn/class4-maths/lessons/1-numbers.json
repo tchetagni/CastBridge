@@ -1,0 +1,1698 @@
+{
+ "chapter": "class4-maths-numbers",
+ "lessons": [
+  {
+   "id": "class4-maths-place-value",
+   "title": "Place value up to 100,000",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read and write numbers up to 100,000 in figures and in words.",
+    "Say the value of each digit.",
+    "Write a number in expanded form."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-numbers-e01",
+    "class4-maths-numbers-e02",
+    "class4-maths-numbers-e03",
+    "class4-maths-numbers-e04",
+    "class4-maths-numbers-e05",
+    "class4-maths-numbers-e06"
+   ],
+   "selfCheck": [
+    "class4-maths-place-value-q1",
+    "class4-maths-place-value-q2",
+    "class4-maths-place-value-q3",
+    "class4-maths-place-value-q4",
+    "class4-maths-place-value-q5"
+   ],
+   "reviewNotes": [
+    "Number words follow common British usage (e.g. 'five hundred and eight'); check the local convention for commas versus spaces.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Place value",
+     "md": "Each digit in a number has a **place** and a **value**. From the right we have: **units (U)**, **tens (T)**, **hundreds (H)**, **thousands (Th)** and **ten thousands (TTh)**. In 45,372 the digit 4 means 4 ten thousands, which is 40,000. The digit 5 means 5 thousands, which is 5,000."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 104,
+      "items": [
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 32.0,
+        "text": "TTh",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 32.0,
+        "text": "Th",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 32.0,
+        "text": "H",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 32.0,
+        "text": "T",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 320.0,
+        "y": 32.0,
+        "text": "U",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 66.0,
+        "text": "4",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 66.0,
+        "text": "5",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 66.0,
+        "text": "3",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 66.0,
+        "text": "7",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 320.0,
+        "y": 66.0,
+        "text": "2",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The number 45,372 in a place-value table.",
+     "alt": "A table with five columns: TTh, Th, H, T, U. The digits written below are 4, 5, 3, 7 and 2."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Expanded form",
+     "md": "45,372 = 40,000 + 5,000 + 300 + 70 + 2. We use a comma between the thousands and the hundreds to make a big number easy to read. The biggest 5-digit number is 99,999. One more is **100,000**, which is one hundred thousand."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing the comma in the wrong place: 45,372 is right, 4,5372 is wrong.\n- Forgetting the zero place holder: **thirty thousand and five** is 30,005, not 305.\n- Mixing the **digit** (5) with its **value** (5,000)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write the number 36,508 in words and in expanded form.",
+     "steps": [
+      "Read the places: 3 TTh, 6 Th, 5 H, 0 T, 8 U.",
+      "Words: thirty-six thousand, five hundred and eight.",
+      "Expanded form: 30,000 + 6,000 + 500 + 0 + 8."
+     ],
+     "answer": "Thirty-six thousand, five hundred and eight; 30,000 + 6,000 + 500 + 8.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 104,
+      "items": [
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 32.0,
+        "text": "TTh",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 32.0,
+        "text": "Th",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 32.0,
+        "text": "H",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 32.0,
+        "text": "T",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 10,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 320.0,
+        "y": 32.0,
+        "text": "U",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 66.0,
+        "text": "4",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 66.0,
+        "text": "5",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 66.0,
+        "text": "3",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 66.0,
+        "text": "7",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 44,
+        "w": 60,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 320.0,
+        "y": 66.0,
+        "text": "2",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "What is the value of the digit 7 in 72,914?",
+     "steps": [
+      "Find the place of the 7: it is the first digit, so it is in the ten thousands place.",
+      "Value = 7 × 10,000 = 70,000."
+     ],
+     "answer": "70,000"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-compare-order-round",
+   "title": "Comparing, ordering and rounding numbers",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Compare numbers with <, > and =.",
+    "Order numbers from smallest to biggest and back.",
+    "Round to the nearest 10, 100 and 1,000."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-numbers-e07",
+    "class4-maths-numbers-e08",
+    "class4-maths-numbers-e09",
+    "class4-maths-numbers-e10",
+    "class4-maths-numbers-e11",
+    "class4-maths-numbers-e12"
+   ],
+   "selfCheck": [
+    "class4-maths-compare-order-round-q1",
+    "class4-maths-compare-order-round-q2",
+    "class4-maths-compare-order-round-q3",
+    "class4-maths-compare-order-round-q4",
+    "class4-maths-compare-order-round-q5"
+   ],
+   "reviewNotes": [
+    "Rounding half up (5 goes up) is the convention taught in primary schools.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Comparing",
+     "md": "To compare two numbers, first count the digits: the number with **more digits** is bigger. If they have the same number of digits, compare the **left-most digits** first. The sign **<** means *less than*, **>** means *greater than*. Example: 4,352 < 4,520 because 3 hundreds are less than 5 hundreds."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rounding",
+     "md": "Look at the digit **to the right** of the place you round to. If it is **0, 1, 2, 3 or 4**, keep the digit and make the rest zeros. If it is **5, 6, 7, 8 or 9**, add 1 to the digit. So 67 rounds to 70 (nearest ten) and 4,352 rounds to 4,400 (nearest hundred)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 100,
+      "items": [
+       {
+        "t": "line",
+        "x1": 18,
+        "y1": 58,
+        "x2": 382,
+        "y2": 58,
+        "color": "ink",
+        "width": 3,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 30.0,
+        "y1": 51,
+        "x2": 30.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 84,
+        "text": "60",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 64.0,
+        "y1": 51,
+        "x2": 64.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 64.0,
+        "y": 84,
+        "text": "61",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 98.0,
+        "y1": 51,
+        "x2": 98.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 98.0,
+        "y": 84,
+        "text": "62",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 132.0,
+        "y1": 51,
+        "x2": 132.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 132.0,
+        "y": 84,
+        "text": "63",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 166.0,
+        "y1": 51,
+        "x2": 166.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 166.0,
+        "y": 84,
+        "text": "64",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 51,
+        "x2": 200.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 84,
+        "text": "65",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 234.0,
+        "y1": 51,
+        "x2": 234.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 234.0,
+        "y": 84,
+        "text": "66",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 268.0,
+        "y1": 51,
+        "x2": 268.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 268.0,
+        "y": 84,
+        "text": "67",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 302.0,
+        "y1": 51,
+        "x2": 302.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 302.0,
+        "y": 84,
+        "text": "68",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 336.0,
+        "y1": 51,
+        "x2": 336.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 336.0,
+        "y": 84,
+        "text": "69",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 370.0,
+        "y1": 51,
+        "x2": 370.0,
+        "y2": 65,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 370.0,
+        "y": 84,
+        "text": "70",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 268.0,
+        "cy": 58,
+        "r": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 268.0,
+        "y": 40,
+        "text": "67",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "67 is closer to 70 than to 60.",
+     "alt": "A number line from 60 to 70 with a red dot at 67, nearer to 70."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Comparing only the last digits: 2,999 is **less** than 3,000, even though 9 is more than 0.\n- Rounding the wrong way when the digit is 5: **5 goes up**, so 250 rounds to 300 (nearest hundred).\n- Changing the digits on the left when you should keep them: rounding 4,352 to the nearest hundred gives 4,400, not 5,400."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Put in order, smallest first: 5,208; 5,028; 5,280; 4,999.",
+     "steps": [
+      "Compare the thousands: 4,999 is the smallest (4 thousands).",
+      "The others have 5 thousands. Compare hundreds: 5,028 has 0, 5,208 has 2 and 5,280 has 2. Then compare tens: 0 < 8, so 5,208 < 5,280."
+     ],
+     "answer": "4,999; 5,028; 5,208; 5,280."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Round 6,748 to the nearest 10, 100 and 1,000.",
+     "steps": [
+      "Nearest ten: the units digit is 8, so go up: 6,750.",
+      "Nearest hundred: the tens digit is 4, so stay: 6,700. Nearest thousand: the hundreds digit is 7, so go up: 7,000."
+     ],
+     "answer": "6,750; 6,700; 7,000."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-patterns",
+   "title": "Number patterns and sequences",
+   "minutes": 20,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the rule of a number pattern.",
+    "Continue a pattern up and down.",
+    "Count in 2s, 5s, 10s, 25s, 100s and 1,000s."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-numbers-e13",
+    "class4-maths-numbers-e14",
+    "class4-maths-numbers-e15",
+    "class4-maths-numbers-e16",
+    "class4-maths-numbers-e17",
+    "class4-maths-numbers-e18"
+   ],
+   "selfCheck": [
+    "class4-maths-patterns-q1",
+    "class4-maths-patterns-q2",
+    "class4-maths-patterns-q3",
+    "class4-maths-patterns-q4",
+    "class4-maths-patterns-q5"
+   ],
+   "reviewNotes": [
+    "Position-to-term reasoning (heap 9) is an extension; teacher to decide if it is suitable for all pupils.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Number patterns",
+     "md": "A **number pattern** (or sequence) follows a **rule**. 5, 10, 15, 20, 25 is a pattern: the rule is **add 5**. In 100, 90, 80, 70 the rule is **subtract 10**. To find the rule, subtract two numbers that are side by side. Check that the rule works for every step."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 14,
+        "w": 80,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 40,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 62,
+        "text": "+5",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 115,
+        "y": 14,
+        "w": 80,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 155.0,
+        "y": 40,
+        "text": "10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 155.0,
+        "y": 62,
+        "text": "+5",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 205,
+        "y": 14,
+        "w": 80,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 40,
+        "text": "15",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 62,
+        "text": "+5",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 14,
+        "w": 80,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 40,
+        "text": "20",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 62,
+        "text": "+5",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Counting in 5s: add 5 every time.",
+     "alt": "Four boxes with the numbers 5, 10, 15 and 20. Under each is written plus 5."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Counting patterns",
+     "md": "Count in **2s**: 2, 4, 6, 8... (even numbers). Count in **5s**: numbers end in 0 or 5. Count in **25s**: 25, 50, 75, 100. Count in **1,000s**: 3,000, 4,000, 5,000. Some patterns **multiply**: 2, 4, 8, 16 (times 2)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Finding the rule from only one pair: check at least two steps.\n- Mixing add and multiply: 2, 4, 6 adds 2, but 2, 4, 8 doubles.\n- Counting backwards by mistake: 100, 75, 50 subtracts 25."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the rule and the next two numbers: 120, 150, 180, 210, ...",
+     "steps": [
+      "Subtract neighbours: 150 − 120 = 30, 180 − 150 = 30.",
+      "The rule is add 30. Next: 210 + 30 = 240 and 240 + 30 = 270."
+     ],
+     "answer": "Add 30; 240, 270."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A pattern starts at 1,000 and goes down by 250. Write the first five terms.",
+     "steps": [
+      "Start: 1,000. Subtract 250 each time.",
+      "1,000 − 250 = 750; 750 − 250 = 500; 500 − 250 = 250; 250 − 250 = 0."
+     ],
+     "answer": "1,000; 750; 500; 250; 0."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-numbers"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class4-maths-numbers-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the value of the digit 6 in 56,420?",
+   "choices": [
+    "6",
+    "60,000",
+    "600",
+    "6,000"
+   ],
+   "answer": 3,
+   "explanation": "6 is in the thousands place, so its value is 6,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write in figures: 8 thousands, 2 hundreds, 0 tens and 5 units.",
+   "answer": 8205,
+   "tolerance": 0,
+   "explanation": "8,000 + 200 + 0 + 5 = 8,205.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the number 'twenty thousand and thirty'?",
+   "choices": [
+    "200,030",
+    "2,030",
+    "20,300",
+    "20,030"
+   ],
+   "answer": 3,
+   "explanation": "20,000 + 30 = 20,030.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The digit 3 in 83,251 has the value 3,000.",
+   "answer": true,
+   "explanation": "3 is in the thousands place.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each number to its words.",
+   "pairs": [
+    [
+     "4,050",
+     "four thousand and fifty"
+    ],
+    [
+     "40,500",
+     "forty thousand, five hundred"
+    ],
+    [
+     "45,000",
+     "forty-five thousand"
+    ],
+    [
+     "5,040",
+     "five thousand and forty"
+    ]
+   ],
+   "explanation": "Read the places carefully; zeros keep the places.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-place-value",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ebot sells cocoa. One year he sold 65,430 kg and the next year 54,360 kg.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the value of the digit 5 in 65,430?",
+     "choices": [
+      "500",
+      "50,000",
+      "5,000",
+      "5"
+     ],
+     "answer": 2,
+     "explanation": "5 is in the thousands place.",
+     "id": "class4-maths-numbers-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many thousands are there in 65,430? (Give the digit in the thousands place.)",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "65,430 = 6 TTh + 5 Th + ...",
+     "id": "class4-maths-numbers-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which number is written in expanded form 50,000 + 4,000 + 300 + 60?",
+     "choices": [
+      "54,360",
+      "45,360",
+      "5,436",
+      "54,306"
+     ],
+     "answer": 0,
+     "explanation": "Put each part in its place.",
+     "id": "class4-maths-numbers-e06-c"
+    }
+   ],
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-place-value-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-place-value",
+   "prompt": "Class 4 Maths (Place value up to 100,000) – What is the value of 2 in 82,150?",
+   "choices": [
+    "200",
+    "20",
+    "20,000",
+    "2,000"
+   ],
+   "answer": 3,
+   "explanation": "2 is in the thousands place.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-place-value-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-place-value",
+   "prompt": "Class 4 Maths (Place value up to 100,000) – Which number comes just after 99,999?",
+   "choices": [
+    "100,000",
+    "999,999",
+    "10,000",
+    "99,990"
+   ],
+   "answer": 0,
+   "explanation": "99,999 + 1 = 100,000.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-place-value-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-place-value",
+   "prompt": "Class 4 Maths (Place value up to 100,000) – Which is 7,000 + 400 + 5?",
+   "choices": [
+    "7,405",
+    "745",
+    "74,005",
+    "7,450"
+   ],
+   "answer": 0,
+   "explanation": "Write 7, 4, 0 and 5.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-place-value-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-place-value",
+   "prompt": "Class 4 Maths (Place value up to 100,000) – In 30,205, what does the digit 0 in the tens place show?",
+   "choices": [
+    "no tens",
+    "no units",
+    "zero thousands",
+    "ten tens"
+   ],
+   "answer": 0,
+   "explanation": "The zero holds the place.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-place-value-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-place-value",
+   "prompt": "Class 4 Maths (Place value up to 100,000) – How many ten thousands are in 70,000?",
+   "choices": [
+    "700",
+    "70",
+    "1",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "70,000 = 7 × 10,000.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-compare-order-round",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which sign makes this true? 7,450 __ 7,405",
+   "choices": [
+    "=",
+    "<",
+    "+",
+    ">"
+   ],
+   "answer": 3,
+   "explanation": "The hundreds are the same; 5 tens > 0 tens.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-compare-order-round",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Round 3,462 to the nearest hundred.",
+   "answer": 3500,
+   "tolerance": 0,
+   "explanation": "Tens digit is 6, so go up: 3,500.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-compare-order-round",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the biggest?",
+   "choices": [
+    "14,999",
+    "40,120",
+    "4,999",
+    "9,999"
+   ],
+   "answer": 1,
+   "explanation": "40,120 has 4 ten thousands; 14,999 has only 1 ten thousand; the other two have four digits.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e10",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-compare-order-round",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Rounded to the nearest thousand, 8,500 becomes 9,000.",
+   "answer": true,
+   "explanation": "The hundreds digit is 5, so the thousand goes up.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e11",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-compare-order-round",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each number with its value rounded to the nearest 10.",
+   "pairs": [
+    [
+     "73",
+     "70"
+    ],
+    [
+     "78",
+     "80"
+    ],
+    [
+     "125",
+     "130"
+    ],
+    [
+     "124",
+     "120"
+    ]
+   ],
+   "explanation": "Look at the units digit: 5 or more goes up.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-compare-order-round",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A market in Bafoussam counted the people on four days: 12,408; 12,840; 12,084; 12,480.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which day had the most people?",
+     "choices": [
+      "12,840",
+      "12,408",
+      "12,480",
+      "12,084"
+     ],
+     "answer": 0,
+     "explanation": "Compare hundreds: 8 is the biggest.",
+     "id": "class4-maths-numbers-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Round the smallest number to the nearest thousand.",
+     "answer": 12000,
+     "tolerance": 0,
+     "explanation": "The smallest is 12,084; hundreds digit is 0, so 12,000.",
+     "id": "class4-maths-numbers-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which list is in order, smallest first?",
+     "choices": [
+      "12,084; 12,480; 12,408; 12,840",
+      "12,840; 12,480; 12,408; 12,084",
+      "12,408; 12,084; 12,480; 12,840",
+      "12,084; 12,408; 12,480; 12,840"
+     ],
+     "answer": 3,
+     "explanation": "Compare hundreds then tens.",
+     "id": "class4-maths-numbers-e12-c"
+    }
+   ],
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-compare-order-round-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-compare-order-round",
+   "prompt": "Class 4 Maths (Comparing, ordering and rounding numbers) – Rounded to the nearest 10, 245 is...",
+   "choices": [
+    "250",
+    "200",
+    "300",
+    "240"
+   ],
+   "answer": 0,
+   "explanation": "5 goes up.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-compare-order-round-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-compare-order-round",
+   "prompt": "Class 4 Maths (Comparing, ordering and rounding numbers) – Which number is the smallest?",
+   "choices": [
+    "3,099",
+    "3,909",
+    "9,300",
+    "3,990"
+   ],
+   "answer": 0,
+   "explanation": "Compare hundreds: 0 is the smallest.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-compare-order-round-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-compare-order-round",
+   "prompt": "Class 4 Maths (Comparing, ordering and rounding numbers) – Rounded to the nearest thousand, 3,600 is...",
+   "choices": [
+    "4,000",
+    "3,600",
+    "4,600",
+    "3,000"
+   ],
+   "answer": 0,
+   "explanation": "The hundreds digit 6 makes the thousands go up.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-compare-order-round-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-compare-order-round",
+   "prompt": "Class 4 Maths (Comparing, ordering and rounding numbers) – Which sign goes between 2,500 and 2,050?",
+   "choices": [
+    "<",
+    "=",
+    ">",
+    "-"
+   ],
+   "answer": 2,
+   "explanation": "5 hundreds is more than 0 hundreds.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-compare-order-round-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-compare-order-round",
+   "prompt": "Class 4 Maths (Comparing, ordering and rounding numbers) – The number line shows 67 between 60 and 70; it is nearer to...",
+   "choices": [
+    "65",
+    "60",
+    "70",
+    "100"
+   ],
+   "answer": 2,
+   "explanation": "67 is 3 away from 70 and 7 from 60.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the rule? 7, 14, 21, 28",
+   "choices": [
+    "add 7",
+    "multiply by 7",
+    "subtract 7",
+    "add 14"
+   ],
+   "answer": 0,
+   "explanation": "Each step adds 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Continue the pattern: 50, 100, 150, 200, __",
+   "answer": 250,
+   "tolerance": 0,
+   "explanation": "The rule is add 50.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which number is next? 3,000; 4,000; 5,000; __",
+   "choices": [
+    "7,000",
+    "5,100",
+    "5,500",
+    "6,000"
+   ],
+   "answer": 3,
+   "explanation": "Add 1,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e16",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The pattern 2, 4, 8, 16 follows the rule add 2.",
+   "answer": false,
+   "explanation": "2 + 2 = 4, but 4 + 2 = 6, not 8. The rule is multiply by 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e17",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each pattern to its rule.",
+   "pairs": [
+    [
+     "10, 20, 30",
+     "add 10"
+    ],
+    [
+     "90, 80, 70",
+     "subtract 10"
+    ],
+    [
+     "3, 6, 12",
+     "multiply by 2"
+    ],
+    [
+     "100, 75, 50",
+     "subtract 25"
+    ]
+   ],
+   "explanation": "Check two steps each time.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-numbers-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-patterns",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A trader in Limbe puts mangoes in heaps. Heap 1 has 12, heap 2 has 17, heap 3 has 22 and heap 4 has 27.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the rule?",
+     "choices": [
+      "add 5",
+      "multiply by 2",
+      "add 12",
+      "add 10"
+     ],
+     "answer": 0,
+     "explanation": "17 − 12 = 5.",
+     "id": "class4-maths-numbers-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many mangoes are in heap 6?",
+     "answer": 37,
+     "tolerance": 0,
+     "explanation": "Heap 5 = 32, heap 6 = 37.",
+     "id": "class4-maths-numbers-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "In which heap number will there be 52 mangoes? (Count: 12 is heap 1.)",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "52 = 12 + 5 × 8, so it is heap 9.",
+     "id": "class4-maths-numbers-e18-c"
+    }
+   ],
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-patterns-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-patterns",
+   "prompt": "Class 4 Maths (Number patterns and sequences) – What is the next number in 6, 12, 18, 24?",
+   "choices": [
+    "32",
+    "30",
+    "36",
+    "28"
+   ],
+   "answer": 1,
+   "explanation": "The rule is add 6.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-patterns-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-patterns",
+   "prompt": "Class 4 Maths (Number patterns and sequences) – Which number is in the pattern of counting in 5s?",
+   "choices": [
+    "63",
+    "62",
+    "68",
+    "65"
+   ],
+   "answer": 3,
+   "explanation": "Numbers in 5s end in 0 or 5.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-patterns-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-patterns",
+   "prompt": "Class 4 Maths (Number patterns and sequences) – The rule of 80, 70, 60 is...",
+   "choices": [
+    "add 20",
+    "add 10",
+    "subtract 10",
+    "multiply by 2"
+   ],
+   "answer": 2,
+   "explanation": "Each step is 10 less.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-patterns-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-patterns",
+   "prompt": "Class 4 Maths (Number patterns and sequences) – What is the next number in 1, 2, 4, 8?",
+   "choices": [
+    "14",
+    "10",
+    "16",
+    "12"
+   ],
+   "answer": 2,
+   "explanation": "Multiply by 2.",
+   "chapter": "class4-maths-numbers"
+  },
+  {
+   "id": "class4-maths-patterns-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-patterns",
+   "prompt": "Class 4 Maths (Number patterns and sequences) – What comes before 500 when counting in 100s?",
+   "choices": [
+    "490",
+    "400",
+    "499",
+    "600"
+   ],
+   "answer": 1,
+   "explanation": "100 less.",
+   "chapter": "class4-maths-numbers"
+  }
+ ]
+}

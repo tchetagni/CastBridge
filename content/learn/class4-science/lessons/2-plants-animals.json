@@ -1,0 +1,1323 @@
+{
+ "chapter": "class4-science-plants-animals",
+ "lessons": [
+  {
+   "id": "class4-science-plants",
+   "title": "Parts of a plant and what plants need",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Elementary Science and Technology; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the parts of a flowering plant and say what each does.",
+    "Say what plants need to grow.",
+    "Describe how a seed germinates."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-science-plants-animals-e01",
+    "class4-science-plants-animals-e02",
+    "class4-science-plants-animals-e03",
+    "class4-science-plants-animals-e04",
+    "class4-science-plants-animals-e05",
+    "class4-science-plants-animals-e06"
+   ],
+   "selfCheck": [
+    "class4-science-plants-q1",
+    "class4-science-plants-q2",
+    "class4-science-plants-q3",
+    "class4-science-plants-q4",
+    "class4-science-plants-q5"
+   ],
+   "reviewNotes": [
+    "Photosynthesis is named but not explained; level appropriate for Class 4 to be checked.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parts and jobs",
+     "md": "**Roots** hold the plant in the soil and take in water. The **stem** holds the plant up and carries water to the leaves. **Leaves** make food for the plant using sunlight (this is **photosynthesis**). The **flower** makes seeds, and the **fruit** holds the seeds. A **seed** can grow into a new plant."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 140,
+        "w": 340,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 200,
+        "y2": 55,
+        "color": "green",
+        "width": 6
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         105,
+         245,
+         80,
+         250,
+         105
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "green"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         105,
+         155,
+         80,
+         150,
+         105
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 45,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 165,
+        "y2": 195,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 200,
+        "y2": 205,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 235,
+        "y2": 195,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 35,
+        "text": "flower",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 90,
+        "text": "leaf",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 214,
+        "y": 125,
+        "text": "stem",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 190,
+        "text": "roots",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 175,
+        "text": "soil",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The parts of a flowering plant.",
+     "alt": "A plant in the soil with roots below, a stem, two leaves and a flower on top, each labelled."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "What plants need",
+     "md": "Plants need **light**, **water**, **air** (carbon dioxide), **warmth** and **soil** (for minerals and support). A seed needs **water, air and warmth** to start to grow (**germinate**); it does not need light at first. First the **root** comes out, then the **shoot** grows up towards the light."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Thinking that plants eat soil: they take water and minerals from the soil and make their own food in the leaves.\n- Saying that leaves take in water: the **roots** take in water.\n- Thinking that a seed needs sunlight to germinate."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Which part of the plant takes in water from the soil, and which part makes food?",
+     "steps": [
+      "Water enters through the roots.",
+      "The leaves make food using sunlight."
+     ],
+     "answer": "Roots take in water; leaves make food.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 140,
+        "w": 340,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 200,
+        "y2": 55,
+        "color": "green",
+        "width": 6
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         105,
+         245,
+         80,
+         250,
+         105
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "green"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         105,
+         155,
+         80,
+         150,
+         105
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 45,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 165,
+        "y2": 195,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 200,
+        "y2": 205,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 235,
+        "y2": 195,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 35,
+        "text": "flower",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 90,
+        "text": "leaf",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 214,
+        "y": 125,
+        "text": "stem",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 190,
+        "text": "roots",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 175,
+        "text": "soil",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Bih puts a bean seed in damp cotton wool in a dark cupboard. It germinates. What does this show?",
+     "steps": [
+      "The seed had water, air and warmth, but no light.",
+      "So a seed does not need light to germinate."
+     ],
+     "answer": "A seed does not need light to germinate."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-animals",
+   "title": "Groups of animals",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Elementary Science and Technology; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Group animals as mammals, birds, reptiles, amphibians, fish and insects.",
+    "Say what herbivores, carnivores and omnivores eat.",
+    "Tell where some animals live (habitats)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-science-plants-animals-e07",
+    "class4-science-plants-animals-e08",
+    "class4-science-plants-animals-e09",
+    "class4-science-plants-animals-e10",
+    "class4-science-plants-animals-e11",
+    "class4-science-plants-animals-e12"
+   ],
+   "selfCheck": [
+    "class4-science-animals-q1",
+    "class4-science-animals-q2",
+    "class4-science-animals-q3",
+    "class4-science-animals-q4",
+    "class4-science-animals-q5"
+   ],
+   "reviewNotes": [
+    "Classification simplified; check how the textbook handles amphibians and vertebrates/invertebrates.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Animal groups",
+     "md": "**Mammals** have hair or fur and feed their babies with **milk** (goat, cow, bat, human). **Birds** have feathers, wings and lay eggs (hen, parrot). **Reptiles** have dry scaly skin and lay eggs (lizard, snake, crocodile). **Amphibians** have moist skin and begin life in water (frog). **Fish** live in water, with gills, fins and scales. **Insects** have **6 legs** and 3 body parts (ant, bee, housefly)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 202,
+      "items": [
+       {
+        "t": "rect",
+        "x": 25.0,
+        "y": 10,
+        "w": 100,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 28.0,
+        "text": "Group",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 125.0,
+        "y": 10,
+        "w": 110,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 28.0,
+        "text": "Body cover",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 235.0,
+        "y": 10,
+        "w": 140,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 28.0,
+        "text": "Examples",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 25.0,
+        "y": 36,
+        "w": 100,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 54.0,
+        "text": "mammals",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 125.0,
+        "y": 36,
+        "w": 110,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 54.0,
+        "text": "hair or fur",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 235.0,
+        "y": 36,
+        "w": 140,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 54.0,
+        "text": "goat, bat, human",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 25.0,
+        "y": 62,
+        "w": 100,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 80.0,
+        "text": "birds",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 125.0,
+        "y": 62,
+        "w": 110,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 80.0,
+        "text": "feathers",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 235.0,
+        "y": 62,
+        "w": 140,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 80.0,
+        "text": "hen, parrot",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 25.0,
+        "y": 88,
+        "w": 100,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 106.0,
+        "text": "reptiles",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 125.0,
+        "y": 88,
+        "w": 110,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 106.0,
+        "text": "dry scales",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 235.0,
+        "y": 88,
+        "w": 140,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 106.0,
+        "text": "lizard, snake",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 25.0,
+        "y": 114,
+        "w": 100,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 132.0,
+        "text": "amphibians",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 125.0,
+        "y": 114,
+        "w": 110,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 132.0,
+        "text": "moist skin",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 235.0,
+        "y": 114,
+        "w": 140,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 132.0,
+        "text": "frog",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 25.0,
+        "y": 140,
+        "w": 100,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 158.0,
+        "text": "fish",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 125.0,
+        "y": 140,
+        "w": 110,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 158.0,
+        "text": "wet scales",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 235.0,
+        "y": 140,
+        "w": 140,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 158.0,
+        "text": "tilapia",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 25.0,
+        "y": 166,
+        "w": 100,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 184.0,
+        "text": "insects",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 125.0,
+        "y": 166,
+        "w": 110,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 184.0,
+        "text": "hard cover",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 235.0,
+        "y": 166,
+        "w": 140,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 184.0,
+        "text": "ant, bee",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Groups of animals.",
+     "alt": "A table of six animal groups with their body cover and examples: mammals, birds, reptiles, amphibians, fish and insects."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "What animals eat and where they live",
+     "md": "**Herbivores** eat plants (goat, cow, elephant). **Carnivores** eat other animals (lion, snake, eagle). **Omnivores** eat both (human, pig, chicken). A **habitat** is the place where an animal lives: forest, river, savanna, house. A spider has 8 legs, so it is **not** an insect."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Calling a bat a bird: it has fur and feeds its young with milk, so it is a **mammal**.\n- Saying that a spider is an insect (6 legs; spiders have 8).\n- Calling a whale or a dolphin a fish: they are mammals.\n- Thinking that all snakes are dangerous: many are harmless, but keep away from all wild snakes."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A hen has feathers and lays eggs. Which group is it?",
+     "steps": [
+      "Feathers and eggs are the signs of birds.",
+      "A hen is a bird."
+     ],
+     "answer": "Bird"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Is a goat a herbivore, a carnivore or an omnivore?",
+     "steps": [
+      "A goat eats grass and leaves.",
+      "It eats only plants: it is a herbivore."
+     ],
+     "answer": "Herbivore"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-science-plants-animals"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class4-science-plants-animals-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-science-plants",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of a plant holds it in the soil?",
+   "choices": [
+    "leaf",
+    "flower",
+    "fruit",
+    "roots"
+   ],
+   "answer": 3,
+   "explanation": "Roots anchor the plant.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-science-plants",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Where does a plant make its food?",
+   "choices": [
+    "in the flower only",
+    "in the soil",
+    "in the leaves",
+    "in the roots"
+   ],
+   "answer": 2,
+   "explanation": "Leaves make food using sunlight.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-science-plants",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is NOT needed by a germinating seed?",
+   "choices": [
+    "air",
+    "warmth",
+    "light",
+    "water"
+   ],
+   "answer": 2,
+   "explanation": "Seeds germinate in the dark under the soil.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-science-plants",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A plant kept in a dark cupboard for weeks will grow healthy green leaves.",
+   "answer": false,
+   "explanation": "Plants need light to make food.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class4-science-plants",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each plant part with its job.",
+   "pairs": [
+    [
+     "roots",
+     "take in water"
+    ],
+    [
+     "stem",
+     "carries water up"
+    ],
+    [
+     "leaf",
+     "makes food"
+    ],
+    [
+     "flower",
+     "makes seeds"
+    ]
+   ],
+   "explanation": "Each part has a job.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-science-plants",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ako plants 3 bean seeds in three cups. Cup A gets water and light. Cup B gets light but no water. Cup C gets water but is kept in a dark box. After two weeks A is green and tall, B has not grown, C is tall but pale.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why did cup B not grow?",
+     "choices": [
+      "it had no flowers",
+      "it had no soil",
+      "it was too bright",
+      "it had no water"
+     ],
+     "answer": 3,
+     "explanation": "Seeds need water to germinate.",
+     "id": "class4-science-plants-animals-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why is the plant in cup C pale?",
+     "choices": [
+      "it had no light",
+      "it had no roots",
+      "it had no soil",
+      "it had too much water"
+     ],
+     "answer": 0,
+     "explanation": "Leaves need light to be green and healthy.",
+     "id": "class4-science-plants-animals-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which cup shows what plants need to grow well?",
+     "choices": [
+      "B and C",
+      "A",
+      "B",
+      "C"
+     ],
+     "answer": 1,
+     "explanation": "Cup A has both water and light.",
+     "id": "class4-science-plants-animals-e06-c"
+    }
+   ],
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-plants",
+   "prompt": "Class 4 Science (Parts of a plant and what plants need) – Which part of the plant makes seeds?",
+   "choices": [
+    "the root",
+    "the soil",
+    "the stem",
+    "the flower"
+   ],
+   "answer": 3,
+   "explanation": "Flowers make seeds.",
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-plants",
+   "prompt": "Class 4 Science (Parts of a plant and what plants need) – The stem of a plant...",
+   "choices": [
+    "holds it up and carries water",
+    "is under the soil",
+    "takes in sunlight only",
+    "makes seeds"
+   ],
+   "answer": 0,
+   "explanation": "Support and transport.",
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-plants",
+   "prompt": "Class 4 Science (Parts of a plant and what plants need) – A germinating seed needs...",
+   "choices": [
+    "water, air and warmth",
+    "light only",
+    "stones",
+    "plastic"
+   ],
+   "answer": 0,
+   "explanation": "Three things.",
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-plants",
+   "prompt": "Class 4 Science (Parts of a plant and what plants need) – The first part that comes out of a seed is the...",
+   "choices": [
+    "leaf",
+    "fruit",
+    "flower",
+    "root"
+   ],
+   "answer": 3,
+   "explanation": "Then the shoot.",
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-plants",
+   "prompt": "Class 4 Science (Parts of a plant and what plants need) – Leaves make food using...",
+   "choices": [
+    "moonlight only",
+    "soil",
+    "sand",
+    "sunlight"
+   ],
+   "answer": 3,
+   "explanation": "Photosynthesis.",
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-science-animals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which animal is a mammal?",
+   "choices": [
+    "a hen",
+    "a tilapia",
+    "a goat",
+    "a lizard"
+   ],
+   "answer": 2,
+   "explanation": "A goat has hair and gives milk.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-science-animals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many legs has an insect?",
+   "choices": [
+    "4",
+    "6",
+    "10",
+    "8"
+   ],
+   "answer": 1,
+   "explanation": "Insects have six legs.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-science-animals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which animal eats only plants?",
+   "choices": [
+    "a lion",
+    "an eagle",
+    "a crocodile",
+    "a cow"
+   ],
+   "answer": 3,
+   "explanation": "A cow is a herbivore.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-science-animals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A group of children counts 3 ants and 2 spiders. How many legs do the 3 ants have altogether?",
+   "answer": 18,
+   "tolerance": 0,
+   "unit": "legs",
+   "explanation": "3 × 6 = 18 legs (spiders are not insects).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-science-animals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bat is a mammal.",
+   "answer": true,
+   "explanation": "It has fur and feeds its babies milk.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-plants-animals-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-science-animals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An animal has dry scaly skin, lays eggs on land and has four legs and a long tail. It lives near the river.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which group does this animal belong to?",
+     "choices": [
+      "reptiles",
+      "insects",
+      "mammals",
+      "birds"
+     ],
+     "answer": 0,
+     "explanation": "Dry scaly skin and eggs on land.",
+     "id": "class4-science-plants-animals-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which of these could it be?",
+     "choices": [
+      "a frog",
+      "a bat",
+      "a lizard",
+      "a hen"
+     ],
+     "answer": 2,
+     "explanation": "A lizard is a reptile.",
+     "id": "class4-science-plants-animals-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "What do we call the place where it lives?",
+     "choices": [
+      "its skin",
+      "its habitat",
+      "its family",
+      "its food"
+     ],
+     "answer": 1,
+     "explanation": "Habitat = home of an animal.",
+     "id": "class4-science-plants-animals-e12-c"
+    }
+   ],
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-animals-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-animals",
+   "prompt": "Class 4 Science (Groups of animals) – A frog is a...",
+   "choices": [
+    "insect",
+    "amphibian",
+    "bird",
+    "reptile"
+   ],
+   "answer": 1,
+   "explanation": "It begins life in water.",
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-animals-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-animals",
+   "prompt": "Class 4 Science (Groups of animals) – An animal that eats both plants and animals is an...",
+   "choices": [
+    "insect",
+    "carnivore",
+    "omnivore",
+    "herbivore"
+   ],
+   "answer": 2,
+   "explanation": "For example a human.",
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-animals-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-animals",
+   "prompt": "Class 4 Science (Groups of animals) – A bat is a...",
+   "choices": [
+    "bird",
+    "mammal",
+    "reptile",
+    "insect"
+   ],
+   "answer": 1,
+   "explanation": "It feeds its young with milk.",
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-animals-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-animals",
+   "prompt": "Class 4 Science (Groups of animals) – The place where an animal lives is its...",
+   "choices": [
+    "meal",
+    "skin",
+    "habitat",
+    "family"
+   ],
+   "answer": 2,
+   "explanation": "For example a river or a forest.",
+   "chapter": "class4-science-plants-animals"
+  },
+  {
+   "id": "class4-science-animals-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-science-animals",
+   "prompt": "Class 4 Science (Groups of animals) – Which animal lays eggs and has feathers?",
+   "choices": [
+    "a goat",
+    "a snake",
+    "a cow",
+    "a parrot"
+   ],
+   "answer": 3,
+   "explanation": "Birds have feathers.",
+   "chapter": "class4-science-plants-animals"
+  }
+ ]
+}

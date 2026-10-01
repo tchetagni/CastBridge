@@ -1,0 +1,335 @@
+{
+ "chapter": "class4-maths-data",
+ "lessons": [
+  {
+   "id": "class4-maths-pictograph-bar",
+   "title": "Tables, pictographs and bar charts",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read information from a table, a pictograph and a bar chart.",
+    "Draw a simple bar chart from a table.",
+    "Answer questions about data (most, least, total, difference)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-data-e01",
+    "class4-maths-data-e02",
+    "class4-maths-data-e03",
+    "class4-maths-data-e04",
+    "class4-maths-data-e05",
+    "class4-maths-data-e06"
+   ],
+   "selfCheck": [
+    "class4-maths-pictograph-bar-q1",
+    "class4-maths-pictograph-bar-q2",
+    "class4-maths-pictograph-bar-q3",
+    "class4-maths-pictograph-bar-q4",
+    "class4-maths-pictograph-bar-q5"
+   ],
+   "reviewNotes": [
+    "Data are invented for teaching.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Data and charts",
+     "md": "**Data** is information we collect, for example the number of kg of tomatoes sold each day. We can show data in a **table**, in a **pictograph** (pictures, with a key such as 1 picture = 2 kg) or in a **bar chart** (bars: the taller the bar, the bigger the number)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 250,
+      "bars": [
+       {
+        "label": "Mon",
+        "value": 14,
+        "color": "blue"
+       },
+       {
+        "label": "Tue",
+        "value": 18,
+        "color": "blue"
+       },
+       {
+        "label": "Wed",
+        "value": 11,
+        "color": "blue"
+       },
+       {
+        "label": "Thu",
+        "value": 16,
+        "color": "blue"
+       },
+       {
+        "label": "Fri",
+        "value": 9,
+        "color": "blue"
+       }
+      ],
+      "unit": "Kg of tomatoes sold"
+     },
+     "caption": "Kilograms of tomatoes sold in a market in one week.",
+     "alt": "A bar chart: Monday 14, Tuesday 18, Wednesday 11, Thursday 16, Friday 9."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reading a bar chart",
+     "md": "1. Read the **title** and the **labels**.\n2. Look at the **scale** on the side: how much is each line worth?\n3. Read the value at the top of each bar.\n4. Answer: **most** = tallest bar, **least** = shortest bar, **total** = add all bars, **difference** = subtract."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Not reading the scale: the numbers on the side may go up in 2s or 5s.\n- Forgetting the key of a pictograph: one picture can stand for more than 1.\n- Saying that the longest word in the title is the most: read the data."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Using the bar chart, on which day were the most tomatoes sold and how many in all?",
+     "steps": [
+      "The tallest bar is Tuesday: 18 kg.",
+      "Total = 14 + 18 + 11 + 16 + 9 = 68 kg."
+     ],
+     "answer": "Tuesday (18 kg); total 68 kg."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A pictograph shows that 1 picture = 5 mangoes. Ako has 6 pictures. How many mangoes?",
+     "steps": [
+      "Use the key: each picture is 5 mangoes.",
+      "6 × 5 = 30."
+     ],
+     "answer": "30 mangoes",
+     "figure": {
+      "kind": "count",
+      "n": 6,
+      "shape": "circle",
+      "color": "orange",
+      "perRow": 6,
+      "w": 400,
+      "h": 110
+     }
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-data"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class4-maths-data-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-pictograph-bar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "On which day were the fewest tomatoes sold?",
+   "choices": [
+    "Tuesday",
+    "Monday",
+    "Thursday",
+    "Friday"
+   ],
+   "answer": 3,
+   "explanation": "Friday has the shortest bar: 9 kg.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-data-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-pictograph-bar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many kg were sold on Monday and Tuesday together?",
+   "answer": 32,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "14 + 18 = 32.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-data-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-pictograph-bar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many more kg were sold on Tuesday than on Wednesday?",
+   "answer": 7,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "18 − 11 = 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-data-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-pictograph-bar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a pictograph, one picture always stands for exactly 1 thing.",
+   "answer": false,
+   "explanation": "The key tells how many each picture is worth.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-data-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-pictograph-bar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a pictograph 1 picture = 20 pupils. There are 7 pictures. How many pupils?",
+   "answer": 140,
+   "tolerance": 0,
+   "explanation": "7 × 20 = 140.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-data-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-pictograph-bar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A class of 40 pupils chose their favourite food: ndolé 12, rice 15, fufu corn 8, plantain 5.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Check the total: how many pupils voted?",
+     "answer": 40,
+     "tolerance": 0,
+     "explanation": "12 + 15 + 8 + 5 = 40.",
+     "id": "class4-maths-data-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which food is the most popular?",
+     "choices": [
+      "ndolé",
+      "fufu corn",
+      "rice",
+      "plantain"
+     ],
+     "answer": 2,
+     "explanation": "Rice has 15 votes.",
+     "id": "class4-maths-data-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many more pupils chose rice than plantain?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "15 − 5 = 10.",
+     "id": "class4-maths-data-e06-c"
+    }
+   ],
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-pictograph-bar-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-pictograph-bar",
+   "prompt": "Class 4 Maths (Tables, pictographs and bar charts) – In a bar chart the tallest bar shows...",
+   "choices": [
+    "the biggest number",
+    "the title",
+    "the smallest number",
+    "the total"
+   ],
+   "answer": 0,
+   "explanation": "Taller = bigger.",
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-pictograph-bar-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-pictograph-bar",
+   "prompt": "Class 4 Maths (Tables, pictographs and bar charts) – 1 picture = 10 books. 4 pictures mean...",
+   "choices": [
+    "40 books",
+    "4 books",
+    "14 books",
+    "400 books"
+   ],
+   "answer": 0,
+   "explanation": "4 × 10.",
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-pictograph-bar-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-pictograph-bar",
+   "prompt": "Class 4 Maths (Tables, pictographs and bar charts) – Collected information is called...",
+   "choices": [
+    "data",
+    "a picture",
+    "a shape",
+    "a story"
+   ],
+   "answer": 0,
+   "explanation": "Data can be shown in tables and charts.",
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-pictograph-bar-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-pictograph-bar",
+   "prompt": "Class 4 Maths (Tables, pictographs and bar charts) – To find a total from a chart we...",
+   "choices": [
+    "divide by 2",
+    "multiply the bars",
+    "subtract the values",
+    "add all the values"
+   ],
+   "answer": 3,
+   "explanation": "Add every bar.",
+   "chapter": "class4-maths-data"
+  },
+  {
+   "id": "class4-maths-pictograph-bar-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-pictograph-bar",
+   "prompt": "Class 4 Maths (Tables, pictographs and bar charts) – Tomatoes sold on Mon, Tue, Wed: 14, 18, 11 kg. Total?",
+   "choices": [
+    "44 kg",
+    "43 kg",
+    "33 kg",
+    "13 kg"
+   ],
+   "answer": 1,
+   "explanation": "14 + 18 + 11 = 43.",
+   "chapter": "class4-maths-data"
+  }
+ ]
+}
