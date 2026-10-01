@@ -1,0 +1,967 @@
+{
+ "chapter": "sup-l1-macroeconomie-compta",
+ "lessons": [
+  {
+   "id": "sup-l1-macroeconomie-pib",
+   "title": "Circuit économique, valeur ajoutée et PIB",
+   "minutes": 50,
+   "programRef": "L1 — Comptabilité nationale : circuit, valeur ajoutée, PIB (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Représenter le circuit économique simple et nommer les flux réels et monétaires.",
+    "Calculer la valeur ajoutée d'une entreprise et d'une filière.",
+    "Calculer le PIB par les trois approches (production, dépenses, revenus) et vérifier leur égalité.",
+    "Distinguer consommation intermédiaire et produit final."
+   ],
+   "exercises": [
+    "sup-l1-macroeconomie-pib-01",
+    "sup-l1-macroeconomie-pib-02",
+    "sup-l1-macroeconomie-pib-03",
+    "sup-l1-macroeconomie-pib-04",
+    "sup-l1-macroeconomie-pib-05",
+    "sup-l1-macroeconomie-pib-06",
+    "sup-l1-macroeconomie-pib-07"
+   ],
+   "selfCheck": [
+    "sup-l1-macroeconomie-pib-q1",
+    "sup-l1-macroeconomie-pib-q2",
+    "sup-l1-macroeconomie-pib-q3",
+    "sup-l1-macroeconomie-pib-q4",
+    "sup-l1-macroeconomie-pib-q5"
+   ],
+   "reviewNotes": [
+    "Les trois approches sont présentées dans une version simplifiée (impôts nets des subventions regroupés) ; vérifier la présentation exacte du cours.",
+    "Aucun chiffre réel : toutes les valeurs sont fictives et en unités monétaires arbitraires."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le circuit économique",
+     "md": "Le **circuit économique** décrit les flux entre agents. Dans sa version simple : les **ménages** offrent du travail et reçoivent des **revenus** ; les **entreprises** produisent des biens et services et reçoivent la **dépense** des ménages. Flux **réels** (travail, biens) et flux **monétaires** (revenus, dépenses) circulent en sens opposés. Les administrations, les banques et le reste du monde enrichissent ce schéma."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 100,
+        "w": 130,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 130.25,
+        "text": "Ménages",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 100,
+        "w": 130,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 355.0,
+        "y": 130.25,
+        "text": "Entreprises",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 112,
+        "x2": 290,
+        "y2": 112,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 104,
+        "text": "revenus",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 138,
+        "x2": 150,
+        "y2": 138,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 160,
+        "text": "dépenses",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 85,
+        "y1": 100,
+        "x2": 85,
+        "y2": 40,
+        "color": "green",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 70,
+        "text": "travail",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 355,
+        "y1": 40,
+        "x2": 355,
+        "y2": 100,
+        "color": "green",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 70,
+        "text": "biens",
+        "size": 13,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 210,
+        "w": 140,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 234.9,
+        "text": "Banques : épargne",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 150,
+        "x2": 160,
+        "y2": 210,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 230,
+        "x2": 380,
+        "y2": 150,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Circuit économique simple, avec le canal de l'épargne.",
+     "alt": "Deux rectangles, Ménages à gauche et Entreprises à droite. Deux flèches rouges horizontales : revenus vers les ménages et dépenses vers les entreprises. Flèches vertes : le travail va des ménages vers les entreprises, les biens des entreprises vers les ménages. En bas, un rectangle Banques relié en pointillés aux deux agents pour montrer l'épargne et l'investissement."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Valeur ajoutée",
+     "md": "La **valeur ajoutée** (VA) d'une entreprise est la richesse qu'elle crée : sa **production** moins les **consommations intermédiaires** (biens et services achetés et utilisés tout entiers dans le processus de production).",
+     "tex": "VA = \\text{production} - \\text{consommations intermédiaires}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Pas de double compte",
+     "md": "On ne compte dans le PIB que la valeur **ajoutée** à chaque étape, sinon les produits intermédiaires seraient comptés plusieurs fois. Pour une filière complète, la somme des valeurs ajoutées est égale à la valeur du **produit final**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "unit": "valeur ajoutée",
+      "bars": [
+       {
+        "label": "Coton",
+        "value": 200,
+        "color": [
+         "green"
+        ]
+       },
+       {
+        "label": "Filature",
+        "value": 250,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Tissage",
+        "value": 350,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Confection",
+        "value": 700,
+        "color": [
+         "purple"
+        ]
+       }
+      ]
+     },
+     "caption": "Valeur ajoutée à chaque étape d'une filière textile (exemple 1).",
+     "alt": "Quatre barres : coton 200, filature 250, tissage 350, confection 700. Leur somme est 1 500, valeur du vêtement final."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — filière textile",
+     "statement": "Dans une filière fictive : le cotonculteur produit pour 200 sans consommation intermédiaire ; la filature produit 450 en achetant 200 de coton ; le tissage produit 800 en achetant 450 de fil ; la confection produit 1 500 en achetant 800 de tissu. Calcule la VA de chaque étape et leur somme.",
+     "steps": [
+      {
+       "md": "VA = production − consommations intermédiaires, étape par étape :"
+      },
+      {
+       "md": "Coton : 200 − 0 = 200 ; filature : 450 − 200 = 250 ; tissage : 800 − 450 = 350 ; confection : 1 500 − 800 = 700.",
+       "tex": "200,\\ 250,\\ 350,\\ 700"
+      },
+      {
+       "md": "Somme : 200 + 250 + 350 + 700 = 1500, soit exactement la valeur du produit final (1 500)."
+      }
+     ],
+     "answer": "**VA totale = 1500 = valeur du bien final.**"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Les trois approches du PIB",
+     "md": "Le **produit intérieur brut** (PIB) mesure la valeur des biens et services produits sur le territoire pendant une période. Trois calculs aboutissent au même résultat :\n- **production** : somme des VA + impôts sur les produits − subventions sur les produits ;\n- **dépenses** : $PIB = C + I + G + X - M$ ;\n- **revenus** : rémunérations des salariés + excédent brut d'exploitation + impôts nets des subventions sur la production et les importations.",
+     "tex": "PIB = C + I + G + (X - M)"
+    },
+    {
+     "type": "text",
+     "md": "**C** : consommation finale des ménages ; **I** : investissement (formation brute de capital fixe et variation des stocks) ; **G** : dépenses publiques de consommation ; **X** et **M** : exportations et importations. Le PIB est « brut » car on n'a pas retranché la consommation de capital fixe (usure des équipements) ; « intérieur » car il se rapporte au territoire, quelle que soit la nationalité des producteurs."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — les trois approches",
+     "statement": "Pour une économie fictive : C = 620 ; I = 180 ; G = 150 ; X = 130 ; M = 170. Par ailleurs : rémunérations 470, excédent brut d'exploitation 360, impôts nets de subventions 80 ; somme des VA des branches 830, impôts nets sur les produits 80. Calcule le PIB par chaque approche.",
+     "steps": [
+      {
+       "md": "Dépenses : PIB = 620 + 180 + 150 + 130 − 170 = 910.",
+       "tex": "PIB = 620+180+150+130-170 = 910"
+      },
+      {
+       "md": "Revenus : 470 + 360 + 80 = 910."
+      },
+      {
+       "md": "Production : 830 + 80 = 910."
+      },
+      {
+       "md": "Les trois approches donnent le même PIB : c'est une identité comptable."
+      }
+     ],
+     "answer": "**PIB = 910 (unités monétaires) par les trois approches.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner les **productions** de toutes les entreprises : on compte plusieurs fois les produits intermédiaires.\n- **Ajouter** les importations dans la formule des dépenses : elles se **retranchent** (X − M).\n- Compter l'achat d'un bien d'occasion ou un transfert (allocation) dans le PIB : ce ne sont pas des productions de la période.\n- Confondre **PIB** (territoire) et revenu des nationaux."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le **PNB/RNB** ajoute les revenus nets reçus du reste du monde : il mesure ce que gagnent les résidents.",
+      "Le PIB ignore le travail domestique non marchand et une grande partie de l'activité informelle mal mesurée : il n'est pas une mesure complète du bien-être.",
+      "Le PIB net = PIB − consommation de capital fixe."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-macroeconomie-pib-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel",
+   "title": "PIB nominal, PIB réel, déflateur et croissance",
+   "minutes": 45,
+   "programRef": "L1 — Comptabilité nationale : PIB nominal et réel, déflateur (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer PIB nominal et PIB réel.",
+    "Calculer le PIB réel à prix constants et le déflateur du PIB.",
+    "Calculer un taux de croissance et un PIB par habitant.",
+    "Interpréter l'écart entre croissance nominale et croissance réelle."
+   ],
+   "prerequisites": [
+    "sup-l1-macroeconomie-pib"
+   ],
+   "exercises": [
+    "sup-l1-macroeconomie-pib-reel-01",
+    "sup-l1-macroeconomie-pib-reel-02",
+    "sup-l1-macroeconomie-pib-reel-03",
+    "sup-l1-macroeconomie-pib-reel-04",
+    "sup-l1-macroeconomie-pib-reel-05",
+    "sup-l1-macroeconomie-pib-reel-06",
+    "sup-l1-macroeconomie-pib-reel-07"
+   ],
+   "selfCheck": [
+    "sup-l1-macroeconomie-pib-reel-q1",
+    "sup-l1-macroeconomie-pib-reel-q2",
+    "sup-l1-macroeconomie-pib-reel-q3",
+    "sup-l1-macroeconomie-pib-reel-q4",
+    "sup-l1-macroeconomie-pib-reel-q5"
+   ],
+   "reviewNotes": [
+    "Convention : déflateur = PIB nominal / PIB réel × 100, avec année de base = 100 ; vérifier la convention de calcul utilisée par l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "PIB nominal et PIB réel",
+     "md": "Le **PIB nominal** évalue la production de l'année aux **prix de l'année**. Il peut augmenter parce que les quantités produites augmentent ou parce que les prix montent. Le **PIB réel** évalue la production de l'année aux **prix d'une année de base** (prix constants) : il mesure la variation des **quantités** seules."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Déflateur du PIB",
+     "md": "Le **déflateur du PIB** est un indice de prix qui rapporte le PIB nominal au PIB réel (base 100 pour l'année de base) :",
+     "tex": "\\text{déflateur} = \\frac{PIB\\ \\text{nominal}}{PIB\\ \\text{réel}} \\times 100"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Taux de croissance",
+     "md": "Le **taux de croissance** entre deux années est la variation relative. On parle de **croissance économique** lorsqu'on utilise le PIB **réel** :",
+     "tex": "g = \\frac{PIB_t - PIB_{t-1}}{PIB_{t-1}} \\times 100"
+    },
+    {
+     "type": "text",
+     "md": "Le **PIB par habitant** est le PIB divisé par la population : c'est un indicateur du niveau de production moyen (pas du revenu réel de chacun)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "unit": "unités",
+      "bars": [
+       {
+        "label": "Nominal an 0",
+        "value": 700000,
+        "color": [
+         "grey"
+        ]
+       },
+       {
+        "label": "Nominal an 1",
+        "value": 862000,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Réel an 1",
+        "value": 740000,
+        "color": [
+         "green"
+        ]
+       }
+      ]
+     },
+     "caption": "PIB nominal des années 0 et 1, et PIB réel de l'année 1 (exemple 1).",
+     "alt": "Trois barres : PIB nominal de l'année 0 égal à 700 000, PIB nominal de l'année 1 égal à 862 000 et PIB réel de l'année 1 (prix de l'année 0) égal à 740 000."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — une économie à deux produits",
+     "statement": "Année 0 (base) : 1000 kg de manioc à 200 et 500 m de tissu à 1 000. Année 1 : 1 100 kg de manioc à 240 et 520 m de tissu à 1 150. Calcule PIB nominal, PIB réel, déflateur et taux de croissance.",
+     "steps": [
+      {
+       "md": "PIB nominal année 0 : 1000×200 + 500×1 000 = 700 000. Année 1 : 1 100×240 + 520×1 150 = 862 000."
+      },
+      {
+       "md": "PIB réel année 1 (prix de l'année 0) : 1 100×200 + 520×1 000 = 740 000."
+      },
+      {
+       "md": "Déflateur année 1 = 862 000 / 740 000 × 100 ≈ 116,5,",
+       "tex": "\\frac{862000}{740000} \\times 100 \\approx 116.5"
+      },
+      {
+       "md": "Croissance réelle = (740 000 − 700 000) / 700 000 ≈ 5,7 % ; croissance nominale ≈ 23,1 %,"
+      }
+     ],
+     "answer": "**Réel : 740 000 ; déflateur ≈ 116,5 ; croissance réelle ≈ 5,7 % (nominale 23,1 %),**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — retrouver le PIB réel",
+     "statement": "Un pays a un PIB nominal de 18 000 et un déflateur de 120 en année A ; 20 160 et 126 en année B (prix de base = 100). Population en B : 4 millions d'habitants (PIB en milliards). Calcule les PIB réels, la croissance, l'inflation mesurée par le déflateur et le PIB réel par habitant en B.",
+     "steps": [
+      {
+       "md": "PIB réel = nominal / déflateur × 100 : A : 18 000/120×100 = 15 000 ; B : 20 160/126×100 = 16 000."
+      },
+      {
+       "md": "Croissance réelle = (16 000 − 15 000)/15 000 ≈ 6,67 %,"
+      },
+      {
+       "md": "Inflation (déflateur) = (126 − 120)/120 = 5 %."
+      },
+      {
+       "md": "PIB réel par habitant en B = 16 000 / 4 = 4 000 (milliards par million d'habitants, soit milliers d'unités par habitant)."
+      }
+     ],
+     "answer": "**Croissance réelle ≈ 6,67 % ; inflation = 5 % ; PIB réel/habitant = 4 000,**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Interpréter une hausse du PIB **nominal** comme une hausse de la production : une partie vient peut-être de la hausse des prix.\n- Diviser dans le mauvais sens pour le déflateur (c'est nominal / réel).\n- Oublier de multiplier par 100.\n- Confondre croissance (variation du **réel**) et inflation (variation des prix)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le **PIB en volume** est la terminologie courante des comptables nationaux pour le PIB réel.",
+      "On distingue le déflateur (panier de toute la production) de l'indice des prix à la consommation (panier de consommation des ménages).",
+      "Les comparaisons internationales utilisent souvent des taux de change ou des parités de pouvoir d'achat."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-macroeconomie-pib-reel-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-macroeconomie-pib-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Une boulangerie produit pour 500 000 FCFA de pain en achetant 320 000 FCFA de farine et d'autres intrants. Calcule sa valeur ajoutée.",
+   "explanation": "VA = 500 000 − 320 000 = 180 000 FCFA.",
+   "method": "VA = production − consommations intermédiaires.",
+   "mistakes": [
+    "Prendre la production comme valeur ajoutée."
+   ],
+   "source": "Exercice original",
+   "answer": 180000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "C = 400 ; I = 120 ; G = 100 ; X = 90 ; M = 110. Calcule le PIB (approche des dépenses).",
+   "explanation": "PIB = 400 + 120 + 100 + 90 − 110 = 600.",
+   "method": "C + I + G + X − M.",
+   "mistakes": [
+    "Additionner M."
+   ],
+   "source": "Exercice original",
+   "answer": 600.0,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Les consommations intermédiaires sont comptées dans le PIB par l'approche de la production.",
+   "explanation": "On retranche les consommations intermédiaires pour obtenir la valeur ajoutée ; seule la VA entre dans le PIB.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Lequel de ces éléments est exclu du PIB de l'année ?",
+   "explanation": "Une moto d'occasion a déjà été comptée l'année de sa production ; seule la commission éventuelle d'un intermédiaire serait comptée.",
+   "mistakes": [
+    "Compter les transactions d'occasion."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Un pagne produit et vendu cette année",
+    "L'investissement en machines neuves",
+    "La revente d'une moto d'occasion entre deux particuliers",
+    "Un service de coiffure facturé"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Une filière a trois étapes : A produit 300 (sans CI) ; B produit 700 en achetant 300 ; C produit 1 200 en achetant 700. Calcule la somme des valeurs ajoutées.",
+   "explanation": "VA : 300 + 400 + 500 = 1 200 = valeur du produit final.",
+   "method": "Somme des VA = produit final.",
+   "source": "Exercice original",
+   "answer": 1200.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Pourquoi les trois approches du PIB doivent-elles donner le même résultat ?",
+   "explanation": "Une production vendue est une dépense ; la valeur ajoutée est distribuée en revenus.",
+   "method": "Parcourir le circuit : production, dépense, revenu.",
+   "source": "Exercice original",
+   "model": "Chaque unité produite génère une dépense (quelqu'un l'achète) et un revenu (distribué aux facteurs et à l'État). La valeur de la production, la dépense totale et les revenus distribués sont trois façons de mesurer la même richesse ; les écarts éventuels (stocks) sont retenus dans l'investissement.",
+   "rubric": [
+    "Production = dépense",
+    "Production = revenus distribués",
+    "Notion d'identité comptable",
+    "Rôle des stocks (facultatif)"
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Une économie fictive a les agrégats suivants (en milliards d'unités monétaires) : C = 1 240 ; I = 360 ; G = 300 ; X = 260 ; M = 340. Par ailleurs, les rémunérations des salariés s'élèvent à 940 et les impôts nets de subventions à 160.",
+   "method": "Utiliser l'identité PIB = dépenses = revenus = production.",
+   "mistakes": [
+    "Oublier le signe de M.",
+    "Inverser le sens de l'identité pour trouver l'EBE."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-macroeconomie-pib-07-a",
+     "points": 1,
+     "prompt": "Calcule le PIB par l'approche des dépenses.",
+     "explanation": "1 240 + 360 + 300 + 260 − 340 = 1820.",
+     "kind": "numeric",
+     "answer": 1820.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-pib-07-b",
+     "points": 1,
+     "prompt": "Quel est l'excédent brut d'exploitation (approche des revenus) ?",
+     "explanation": "PIB = rémunérations + EBE + impôts nets ⇒ EBE = 1820 − 940 − 160 = 720.",
+     "kind": "numeric",
+     "answer": 720.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-pib-07-c",
+     "points": 1,
+     "prompt": "Quel est le solde commercial X − M ?",
+     "explanation": "260 − 340 = −80 : déficit commercial.",
+     "kind": "numeric",
+     "answer": -80.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-pib-07-d",
+     "points": 1,
+     "prompt": "Si le PIB est de 1 820 et la somme des VA de 1 650, que valent les impôts nets sur les produits ?",
+     "explanation": "PIB = ΣVA + impôts nets sur les produits ⇒ 1 820 − 1 650 = 170.",
+     "kind": "mcq",
+     "choices": [
+      "170",
+      "3 470",
+      "−170",
+      "1 650"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "La valeur ajoutée est égale à :",
+   "choices": [
+    "Les impôts payés",
+    "Le chiffre d'affaires",
+    "La production − les consommations intermédiaires",
+    "La production + les consommations intermédiaires"
+   ],
+   "answer": 2,
+   "explanation": "VA = production − CI."
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Dans PIB = C + I + G + X − M, M désigne :",
+   "choices": [
+    "Les importations",
+    "Les marges",
+    "Les ménages",
+    "La monnaie"
+   ],
+   "answer": 0,
+   "explanation": "M = importations."
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Le PIB mesure la production :",
+   "choices": [
+    "Des nationaux où qu'ils soient",
+    "Réalisée sur le territoire",
+    "Des seuls ménages",
+    "Des seules entreprises publiques"
+   ],
+   "answer": 1,
+   "explanation": "Intérieur = territoire."
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Une entreprise produit 900 avec 400 de CI. Sa VA est :",
+   "choices": [
+    "1 300",
+    "500",
+    "400",
+    "900"
+   ],
+   "answer": 1,
+   "explanation": "900 − 400 = 500."
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib",
+   "prompt": "Les flux monétaires circulent par rapport aux flux réels :",
+   "choices": [
+    "Uniquement vers l'État",
+    "Sans lien",
+    "En sens opposé",
+    "Dans le même sens"
+   ],
+   "answer": 2,
+   "explanation": "Le travail va aux entreprises, les revenus aux ménages."
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "PIB nominal = 5 400 ; déflateur = 120. Calcule le PIB réel.",
+   "explanation": "PIB réel = 5 400 / 120 × 100 = 4 500.",
+   "method": "Réel = nominal / déflateur × 100.",
+   "source": "Exercice original",
+   "answer": 4500.0,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Le PIB réel passe de 4 000 à 4 200. Calcule le taux de croissance, en %.",
+   "explanation": "(4 200 − 4 000)/4 000 = 0,05 = 5 %.",
+   "method": "Variation relative du PIB réel.",
+   "source": "Exercice original",
+   "answer": 5.0,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Si le PIB nominal augmente de 8 % et les prix de 8 %, la production en volume stagne.",
+   "explanation": "La hausse nominale est entièrement due aux prix (approximation) : le PIB réel ne bouge pas.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Le PIB nominal a augmenté de 12 % et le déflateur de 5 %. Que dire de la croissance réelle (approximation) ?",
+   "explanation": "Croissance réelle ≈ croissance nominale − inflation = 12 − 5 = 7 %. (Exact : 1,12/1,05 − 1 ≈ 6,7 %.)",
+   "mistakes": [
+    "Additionner au lieu de soustraire."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Environ 60 %",
+    "Environ 0 %",
+    "Environ 17 %",
+    "Environ 7 %"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "PIB nominal 2025 = 9 000, PIB réel 2025 (prix 2020) = 7 500. Calcule le déflateur 2025.",
+   "explanation": "9 000 / 7 500 × 100 = 120.",
+   "method": "Déflateur = nominal / réel × 100.",
+   "source": "Exercice original",
+   "answer": 120.0,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Un journal annonce « le PIB du pays a augmenté de 15 % ». Quelle question poses-tu avant de parler d'enrichissement ?",
+   "explanation": "Le chiffre ne dit rien sur les quantités tant qu'on ignore l'évolution des prix.",
+   "method": "Nominal ? Prix ? Habitant ?",
+   "source": "Exercice original",
+   "model": "Il faut savoir si l'on parle du PIB nominal ou réel. Si les prix ont aussi monté de 12 %, la croissance réelle est faible. Il faut aussi regarder la population (PIB par habitant) et la répartition.",
+   "rubric": [
+    "Distinction nominal/réel",
+    "Rôle de l'inflation",
+    "PIB par habitant (facultatif)"
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Un pays a un PIB nominal de 25 000 en année 0 (base 100) et de 29 400 en année 1, avec un déflateur de 112 en année 1. La population est de 3 millions en année 0 et de 3,06 millions en année 1.",
+   "method": "PIB réel = nominal/déflateur×100 ; croissance ; PIB par habitant = PIB / population.",
+   "mistakes": [
+    "Utiliser le PIB nominal pour mesurer la croissance."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-macroeconomie-pib-reel-07-a",
+     "points": 1,
+     "prompt": "Calcule le PIB réel de l'année 1.",
+     "explanation": "29 400/112×100 = 26 250.",
+     "kind": "numeric",
+     "answer": 26250.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-pib-reel-07-b",
+     "points": 1,
+     "prompt": "Calcule le taux de croissance réelle, en %.",
+     "explanation": "(26 250 − 25 000)/25 000 = 0.0500, soit 5 %.",
+     "kind": "numeric",
+     "answer": 5.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-pib-reel-07-c",
+     "points": 1,
+     "prompt": "Calcule la variation du PIB réel par habitant, en % (arrondi à 0,1).",
+     "explanation": "PIB réel/hab : année 0 = 8 333,33 ; année 1 = 8 578,43 ; variation = 0.00 %.",
+     "kind": "numeric",
+     "answer": 2.9,
+     "tolerance": 0.06
+    },
+    {
+     "id": "sup-l1-macroeconomie-pib-reel-07-d",
+     "points": 1,
+     "prompt": "Que dire du niveau de vie moyen (approximation) ?",
+     "explanation": "La population a augmenté de 2 % : le PIB réel par habitant progresse moins vite que le PIB réel total.",
+     "kind": "mcq",
+     "choices": [
+      "Il a baissé",
+      "On ne peut pas le savoir",
+      "Il a progressé, mais moins vite que le PIB réel",
+      "Il a progressé plus vite que le PIB réel"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Le PIB réel est évalué :",
+   "choices": [
+    "Aux prix courants",
+    "Aux prix d'une année de base",
+    "Sans prix",
+    "En monnaie étrangère"
+   ],
+   "answer": 1,
+   "explanation": "Prix constants."
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Le déflateur du PIB vaut 125. Cela signifie, par rapport à la base 100, que les prix ont augmenté de :",
+   "choices": [
+    "25 %",
+    "125 %",
+    "12,5 %",
+    "100 %"
+   ],
+   "answer": 0,
+   "explanation": "125/100 − 1 = 25 %."
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Si PIB nominal = 6 300 et déflateur = 105, le PIB réel est :",
+   "choices": [
+    "660 000",
+    "6 000",
+    "5 700",
+    "6 615"
+   ],
+   "answer": 1,
+   "explanation": "6 300/105×100 = 6 000."
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Le taux de croissance économique se mesure avec le PIB :",
+   "choices": [
+    "Réel",
+    "Brut des importations",
+    "Par habitant uniquement",
+    "Nominal"
+   ],
+   "answer": 0,
+   "explanation": "On veut isoler les quantités."
+  },
+  {
+   "id": "sup-l1-macroeconomie-pib-reel-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-pib-reel",
+   "prompt": "Le PIB par habitant est :",
+   "choices": [
+    "PIB × population",
+    "PIB / population",
+    "PIB − population",
+    "Population / PIB"
+   ],
+   "answer": 1,
+   "explanation": "Production moyenne par habitant."
+  }
+ ]
+}

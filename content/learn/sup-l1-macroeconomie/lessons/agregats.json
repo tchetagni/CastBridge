@@ -1,0 +1,769 @@
+{
+ "chapter": "sup-l1-macroeconomie-agregats",
+ "lessons": [
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne",
+   "title": "Consommation, épargne et investissement",
+   "minutes": 45,
+   "programRef": "L1 — Consommation, épargne, investissement (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Écrire une fonction de consommation et en déduire l'épargne.",
+    "Calculer propension moyenne et propension marginale à consommer et à épargner.",
+    "Définir l'investissement et en citer les déterminants.",
+    "Expliquer l'égalité entre épargne et investissement dans une économie fermée simple."
+   ],
+   "prerequisites": [
+    "sup-l1-macroeconomie-pib-reel"
+   ],
+   "exercises": [
+    "sup-l1-macroeconomie-conso-epargne-01",
+    "sup-l1-macroeconomie-conso-epargne-02",
+    "sup-l1-macroeconomie-conso-epargne-03",
+    "sup-l1-macroeconomie-conso-epargne-04",
+    "sup-l1-macroeconomie-conso-epargne-05",
+    "sup-l1-macroeconomie-conso-epargne-06",
+    "sup-l1-macroeconomie-conso-epargne-07"
+   ],
+   "selfCheck": [
+    "sup-l1-macroeconomie-conso-epargne-q1",
+    "sup-l1-macroeconomie-conso-epargne-q2",
+    "sup-l1-macroeconomie-conso-epargne-q3",
+    "sup-l1-macroeconomie-conso-epargne-q4",
+    "sup-l1-macroeconomie-conso-epargne-q5"
+   ],
+   "reviewNotes": [
+    "Fonction de consommation linéaire C = C0 + cY ; les paramètres sont fictifs et fournis par l'énoncé."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Consommation et épargne",
+     "md": "Le revenu disponible $Y_d$ des ménages se répartit entre **consommation** $C$ et **épargne** $S$ :",
+     "tex": "Y_d = C + S \\Rightarrow S = Y_d - C"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Fonction de consommation",
+     "md": "On modélise la consommation par une fonction linéaire du revenu : $C = C_0 + cY$, où $C_0 > 0$ est la **consommation incompressible** (indépendante du revenu) et $c \\in ]0 ; 1[$ la **propension marginale à consommer**. L'épargne est alors $S = -C_0 + (1-c)Y$.",
+     "tex": "C = C_0 + cY \\quad ; \\quad S = -C_0 + (1-c)\\,Y"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Propensions",
+     "md": "- **Propension moyenne à consommer** : $PMC = C/Y$ ;\n- **Propension marginale à consommer** : $c = \\Delta C/\\Delta Y$ ;\n- **Propension marginale à épargner** : $s = \\Delta S/\\Delta Y = 1 - c$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 420,
+      "h": 280,
+      "xmin": 0,
+      "xmax": 2000,
+      "ymin": 0,
+      "ymax": 2000,
+      "grid": 500,
+      "xlabel": "revenu Y",
+      "ylabel": "consommation C",
+      "curves": [
+       {
+        "expr": "200+0.8*x",
+        "color": "blue",
+        "label": "C = 200 + 0,8Y"
+       },
+       {
+        "expr": "x",
+        "color": "grey",
+        "label": "C = Y"
+       }
+      ],
+      "points": [
+       {
+        "x": 1000,
+        "y": 1000,
+        "label": "seuil (1 000)",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Fonction de consommation C = 200 + 0,8 Y et droite C = Y.",
+     "alt": "La droite de consommation, d'ordonnée à l'origine 200 et de pente 0,8, coupe la première bissectrice C = Y au point (1 000 ; 1 000). Avant ce point, la consommation dépasse le revenu (épargne négative) ; après, elle lui est inférieure."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — consommation et épargne",
+     "statement": "C = 200 + 0.8Y (en milliers de FCFA). Calcule C, S et la propension moyenne à consommer pour Y = 1 000 puis Y = 1 500.",
+     "steps": [
+      {
+       "md": "Pour Y = 1 000 : C = 200 + 0.8×1 000 = 1000. S = 1 000 − 1000 = 0. PMC = 1."
+      },
+      {
+       "md": "Pour Y = 1 500 : C = 200 + 0,8×1 500 = 1400, S = 1 500 − 1400 = 100, PMC = 0,933,"
+      },
+      {
+       "md": "Vérification de c : ΔC/ΔY = (1400 − 1000)/(1 500 − 1 000) = 0.8."
+      }
+     ],
+     "answer": "**Y = 1 000 : C = 1 000, S = 0 ; Y = 1 500 : C = 1 400, S = 100 ; c = 0,8.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — propensions d'un ménage",
+     "statement": "Le revenu d'un ménage passe de 150 000 à 180 000 FCFA par mois ; sa consommation passe de 130 000 à 154 000. Calcule la propension marginale à consommer et à épargner, et la PMC dans chaque situation.",
+     "steps": [
+      {
+       "md": "ΔY = 30 000 ; ΔC = 24 000 ⇒ c = 24 000/30 000 = 0.8."
+      },
+      {
+       "md": "s = 1 − c = 0.2 (vérification : ΔS = 6 000, ΔS/ΔY = 0.2)."
+      },
+      {
+       "md": "PMC avant = 130 000/150 000 ≈ 0,867 ; après = 154 000/180 000 ≈ 0,856 : la part consommée baisse quand le revenu augmente,"
+      }
+     ],
+     "answer": "**c = 0.8 ; s = 0.2.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'investissement",
+     "md": "L'**investissement** désigne l'achat de biens de production durables (machines, bâtiments, véhicules utilitaires) et la variation des stocks : on parle de **formation brute de capital fixe** (FBCF) pour la partie durable. Ses déterminants principaux : le **taux d'intérêt** (coût du financement), les **anticipations** de demande et de profit, la **capacité de production** déjà installée, la confiance et le climat des affaires."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Épargne et investissement",
+     "md": "Dans une économie fermée sans État, l'identité comptable $Y = C + I$ et $Y = C + S$ donne **S = I** (après coup). Dans le raisonnement économique, la question est celle du **mécanisme** : épargne collectée par les banques → financement des investissements ; investissement → revenus futurs."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre propension **moyenne** ($C/Y$) et **marginale** ($\\Delta C/\\Delta Y$).\n- Croire que $s$ et $c$ peuvent être supérieurs à 1 ou que $c + s \\neq 1$.\n- Oublier que $C_0$ n'est pas l'épargne : pour $Y$ faible, $S$ peut être négative (désépargne).\n- Confondre « investir » au sens courant (placer de l'argent) et au sens économique (acheter du capital productif)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Chez Keynes, la consommation dépend surtout du revenu courant ; la théorie du **cycle de vie** et du **revenu permanent** soulignent le rôle du revenu futur anticipé.",
+      "L'**épargne forcée** et le microcrédit sont des canaux de financement de l'investissement des petites entreprises dans plusieurs pays.",
+      "L'investissement est volatil : il est souvent la composante qui explique le plus les fluctuations de la demande."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-macroeconomie-conso-epargne-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage",
+   "title": "Inflation et chômage",
+   "minutes": 50,
+   "programRef": "L1 — Inflation et chômage : définitions générales (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer un indice de prix à panier fixe et un taux d'inflation.",
+    "Interpréter un indice et passer d'un salaire nominal à un salaire réel.",
+    "Définir population active, chômeur, taux de chômage, taux d'activité.",
+    "Distinguer chômage frictionnel, structurel et conjoncturel."
+   ],
+   "prerequisites": [
+    "sup-l1-macroeconomie-pib-reel"
+   ],
+   "exercises": [
+    "sup-l1-macroeconomie-inflation-chomage-01",
+    "sup-l1-macroeconomie-inflation-chomage-02",
+    "sup-l1-macroeconomie-inflation-chomage-03",
+    "sup-l1-macroeconomie-inflation-chomage-04",
+    "sup-l1-macroeconomie-inflation-chomage-05",
+    "sup-l1-macroeconomie-inflation-chomage-06",
+    "sup-l1-macroeconomie-inflation-chomage-07"
+   ],
+   "selfCheck": [
+    "sup-l1-macroeconomie-inflation-chomage-q1",
+    "sup-l1-macroeconomie-inflation-chomage-q2",
+    "sup-l1-macroeconomie-inflation-chomage-q3",
+    "sup-l1-macroeconomie-inflation-chomage-q4",
+    "sup-l1-macroeconomie-inflation-chomage-q5"
+   ],
+   "reviewNotes": [
+    "Définition du chômage : formulation générale (sans emploi, disponible, à la recherche d'un emploi) ; vérifier la définition exacte employée dans le cours. Aucun chiffre réel de chômage ou d'inflation n'est cité.",
+    "Les paniers et prix sont fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Inflation",
+     "md": "L'**inflation** est une hausse **générale et durable** du niveau des prix. Elle se mesure par la variation d'un **indice des prix**. La hausse d'un seul prix ou une hausse ponctuelle n'est pas de l'inflation. À l'inverse, une baisse générale et durable est une **déflation** ; un ralentissement de l'inflation est une **désinflation**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Indice de prix à panier fixe",
+     "md": "L'**indice des prix à la consommation** compare le coût d'un **panier fixe** de biens (quantités $q_0$ de l'année de base) aux prix de deux années :",
+     "tex": "I_t = \\frac{\\sum p_t \\, q_0}{\\sum p_0 \\, q_0} \\times 100"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Taux d'inflation",
+     "md": "Le **taux d'inflation** entre deux dates est la variation relative de l'indice :",
+     "tex": "\\pi = \\frac{I_t - I_{t-1}}{I_{t-1}} \\times 100"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — indice et inflation",
+     "statement": "Un ménage type achète chaque mois 20 kg de riz, 5 kg de poisson et 30 trajets de transport. Prix en année 0 : riz 500, poisson 1 500, transport 200 FCFA. Prix en année 1 : 540, 1 650, 250 FCFA. Calcule l'indice de l'année 1 (base 100) et l'inflation.",
+     "steps": [
+      {
+       "md": "Coût du panier année 0 : 20×500 + 5×1 500 + 30×200 = 10 000 + 7 500 + 6 000 = 23 500."
+      },
+      {
+       "md": "Coût du panier année 1 : 20×540 + 5×1 650 + 30×250 = 10 800 + 8 250 + 7 500 = 26 550."
+      },
+      {
+       "md": "Indice année 1 = 26 550 / 23 500 × 100 ≈ 113,0, Inflation entre 0 et 1 ≈ 13,0 %,",
+       "tex": "\\frac{26550}{23500}\\times 100 \\approx 113.0"
+      }
+     ],
+     "answer": "**Indice ≈ 113,0 ; inflation ≈ 13,0 %,**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — salaire nominal et réel",
+     "statement": "Le salaire nominal d'un employé passe de 150 000 à 162 000 FCFA ; l'indice des prix passe de 112.5 à 118.0. Calcule l'inflation, le salaire réel de chaque année (en pouvoir d'achat base 100) et conclus.",
+     "steps": [
+      {
+       "md": "Inflation = (118,0 − 112,5)/112,5 ≈ 4,89 %,"
+      },
+      {
+       "md": "Salaire réel = nominal / indice × 100 : avant 150 000/112.5×100 ≈ 133 333,33 ; après 162 000/118.0×100 ≈ 137 288,14."
+      },
+      {
+       "md": "Le salaire nominal progresse de 8 %, le salaire réel de 2,97 % : le pouvoir d'achat augmente moins vite que le salaire affiché,"
+      }
+     ],
+     "answer": "**Salaire réel : ≈ 133 333,33 → ≈ 137 288,14.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les mesures du chômage",
+     "md": "Dans une définition générale, un **chômeur** est une personne **sans emploi**, **disponible** pour travailler et qui **recherche activement** un emploi. La **population active** regroupe les actifs occupés et les chômeurs. Les autres personnes en âge de travailler (étudiants, personnes au foyer, retraités…) sont **inactives**.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Taux de chômage et taux d'activité",
+     "md": "On calcule le taux de chômage sur la population **active**, et le taux d'activité sur la population **en âge de travailler** :",
+     "tex": "\\text{taux de chômage} = \\frac{\\text{chômeurs}}{\\text{population active}} \\times 100 \\quad ; \\quad \\text{taux d'activité} = \\frac{\\text{population active}}{\\text{population en âge de travailler}} \\times 100"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — taux de chômage",
+     "statement": "Dans une ville fictive, la population en âge de travailler compte 20 000 personnes, dont 11 400 actifs occupés et 600 chômeurs. Calcule la population active, le taux de chômage, le taux d'activité et le taux d'emploi.",
+     "steps": [
+      {
+       "md": "Population active = 11 400 + 600 = 12 000."
+      },
+      {
+       "md": "Taux de chômage = 600/12 000 = 5 %.",
+       "tex": "\\frac{600}{12000}\\times 100 = 5"
+      },
+      {
+       "md": "Taux d'activité = 12 000/20 000 = 60 % ; taux d'emploi = 11 400/20 000 = 57 %."
+      }
+     ],
+     "answer": "**Chômage 5 % ; activité 60 % ; emploi 57 %.**"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Types de chômage",
+     "md": "- **Frictionnel** : temps de transition entre deux emplois ;\n- **Structurel** : décalage durable entre les qualifications et les emplois offerts ;\n- **Conjoncturel** : insuffisance de la demande en période de ralentissement.\nLe **sous-emploi** (temps partiel subi, emplois très peu rémunérés) échappe à la statistique du chômage."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer le taux de chômage sur la population **totale** : le dénominateur est la population **active**.\n- Compter les étudiants ou les personnes au foyer comme chômeurs : sans recherche d'emploi, ils sont inactifs.\n- Dire que l'inflation est la hausse d'**un** prix.\n- Confondre un indice (niveau) et un taux (variation)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'inflation peut être **par la demande**, **par les coûts** (hausse des intrants importés) ou **importée**.",
+      "Une inflation élevée pénalise les revenus fixes et l'épargne non rémunérée ; elle avantage les emprunteurs à taux fixe.",
+      "Dans de nombreux pays en développement, une grande part de l'emploi est informelle : le taux de chômage seul ne décrit pas la précarité."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-macroeconomie-inflation-chomage-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "C = 100 + 0,75Y. Calcule C pour Y = 800.",
+   "explanation": "C = 100 + 0,75 × 800 = 700.",
+   "source": "Exercice original",
+   "answer": 700.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "Avec C = 100 + 0,75Y et Y = 800, calcule l'épargne.",
+   "explanation": "S = Y − C = 800 − 700 = 100.",
+   "method": "S = Y − C.",
+   "source": "Exercice original",
+   "answer": 100.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "La propension marginale à consommer est toujours comprise entre 0 et 1 dans le modèle de base.",
+   "explanation": "Une part seulement de chaque franc supplémentaire est consommée, le reste est épargné : 0 < c < 1.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "Si c = 0,9, la propension marginale à épargner vaut :",
+   "explanation": "s = 1 − c = 0,1.",
+   "mistakes": [
+    "Confondre s et c."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "1,9",
+    "−0,9",
+    "0,9",
+    "0,1"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "C = 50 + 0,6Y. À quel revenu l'épargne est-elle nulle (C = Y) ?",
+   "explanation": "Y = 50 + 0,6Y ⇒ 0,4Y = 50 ⇒ Y = 125.",
+   "method": "Poser C = Y et résoudre.",
+   "source": "Exercice original",
+   "answer": 125.0,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "Pourquoi la propension moyenne à consommer diminue-t-elle quand le revenu augmente dans le modèle C = C0 + cY ?",
+   "explanation": "PMC = C/Y = C0/Y + c, décroissante en Y.",
+   "method": "Diviser la fonction de consommation par Y.",
+   "source": "Exercice original",
+   "model": "PMC = C/Y = C0/Y + c. Quand Y augmente, le terme C0/Y diminue : la part consommée tend vers c. Intuitivement, une partie fixe de la consommation pèse de moins en moins dans un revenu plus grand.",
+   "rubric": [
+    "Écrire PMC = C0/Y + c",
+    "Constater que C0/Y baisse",
+    "Conclusion : PMC tend vers c"
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "Dans une économie fictive, la consommation des ménages est C = 120 + 0.75Y (milliards d'unités). Le revenu national est Y = 2 000.",
+   "method": "C, puis S = Y − C, puis propensions.",
+   "mistakes": [
+    "Calculer ΔS avec c au lieu de 1 − c."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-macroeconomie-conso-epargne-07-a",
+     "points": 1,
+     "prompt": "Calcule la consommation.",
+     "explanation": "C = 120 + 0.75×2 000 = 1620.",
+     "kind": "numeric",
+     "answer": 1620.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-conso-epargne-07-b",
+     "points": 1,
+     "prompt": "Calcule l'épargne.",
+     "explanation": "S = 2 000 − 1620 = 380.",
+     "kind": "numeric",
+     "answer": 380.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-conso-epargne-07-c",
+     "points": 1,
+     "prompt": "Calcule la propension moyenne à consommer (arrondi à 0,01).",
+     "explanation": "PMC = 1620/2 000 = 0.810 ≈ 0.81.",
+     "kind": "numeric",
+     "answer": 0.81,
+     "tolerance": 0.005
+    },
+    {
+     "id": "sup-l1-macroeconomie-conso-epargne-07-d",
+     "points": 1,
+     "prompt": "Si Y augmente de 200, de combien augmente l'épargne ?",
+     "explanation": "ΔS = (1 − c)ΔY = 0.25 × 200 = 50.",
+     "kind": "numeric",
+     "answer": 50.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "La propension marginale à épargner s'écrit :",
+   "choices": [
+    "C/Y",
+    "C0",
+    "c − 1",
+    "1 − c"
+   ],
+   "answer": 3,
+   "explanation": "s + c = 1."
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "C = 80 + 0,5Y. Pour Y = 400, l'épargne est :",
+   "choices": [
+    "280",
+    "−80",
+    "120",
+    "0"
+   ],
+   "answer": 2,
+   "explanation": "C = 280 ; S = 400 − 280 = 120."
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "Un taux d'intérêt plus élevé tend, toutes choses égales par ailleurs, à :",
+   "choices": [
+    "Annuler la consommation",
+    "Stimuler l'investissement",
+    "Supprimer l'épargne",
+    "Freiner l'investissement"
+   ],
+   "answer": 3,
+   "explanation": "Le financement coûte plus cher."
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "Dans une économie fermée sans État, comptablement :",
+   "choices": [
+    "S = G",
+    "S = C",
+    "S = I",
+    "I = C"
+   ],
+   "answer": 2,
+   "explanation": "Y = C + I = C + S."
+  },
+  {
+   "id": "sup-l1-macroeconomie-conso-epargne-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-conso-epargne",
+   "prompt": "La FBCF correspond à :",
+   "choices": [
+    "Des salaires",
+    "Des impôts",
+    "Des achats de biens de production durables",
+    "Des importations de biens de consommation"
+   ],
+   "answer": 2,
+   "explanation": "Investissement en capital fixe."
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Indice des prix : 120 puis 126. Calcule le taux d'inflation, en %.",
+   "explanation": "(126 − 120)/120 = 0,05 = 5 %.",
+   "source": "Exercice original",
+   "answer": 5.0,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Population active : 8 000 ; chômeurs : 640. Calcule le taux de chômage, en %.",
+   "explanation": "640/8 000 = 0,08 = 8 %.",
+   "mistakes": [
+    "Utiliser la population totale au dénominateur."
+   ],
+   "source": "Exercice original",
+   "answer": 8.0,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Une étudiante à temps plein, qui ne cherche pas d'emploi, est :",
+   "explanation": "Sans recherche d'emploi, elle ne fait pas partie de la population active.",
+   "source": "Exercice original",
+   "choices": [
+    "Chômeuse",
+    "Inactive",
+    "Sous-employée",
+    "Active occupée"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Si l'inflation passe de 8 % à 5 %, les prix baissent.",
+   "explanation": "Ils continuent d'augmenter, mais moins vite : c'est une désinflation, non une déflation.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Salaire nominal 180 000 FCFA ; indice des prix 120 (base 100). Calcule le salaire réel (pouvoir d'achat en FCFA de la base).",
+   "explanation": "180 000/120 × 100 = 150 000.",
+   "method": "Réel = nominal / indice × 100.",
+   "source": "Exercice original",
+   "answer": 150000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Explique pourquoi une hausse de 4 % du salaire nominal peut s'accompagner d'une baisse du pouvoir d'achat.",
+   "explanation": "Le pouvoir d'achat dépend du rapport entre revenu et prix.",
+   "method": "Salaire réel = nominal / indice.",
+   "source": "Exercice original",
+   "model": "Si les prix augmentent de plus de 4 % (par exemple 6 %), le salaire réel (nominal / indice) diminue : on peut acheter moins de biens malgré un salaire affiché plus élevé.",
+   "rubric": [
+    "Distinguer nominal et réel",
+    "Comparer salaire (4 %) et prix",
+    "Conclusion sur le pouvoir d'achat"
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Dans une région fictive : population en âge de travailler 50 000 ; actifs occupés 27 000 ; chômeurs 3 000. L'indice des prix est de 100 en 2023 et de 108 en 2024.",
+   "method": "Définir la population active avant de calculer les taux.",
+   "mistakes": [
+    "Mauvais dénominateur."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-macroeconomie-inflation-chomage-07-a",
+     "points": 1,
+     "prompt": "Population active ?",
+     "explanation": "27 000 + 3 000 = 30 000.",
+     "kind": "numeric",
+     "answer": 30000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-inflation-chomage-07-b",
+     "points": 1,
+     "prompt": "Taux de chômage, en % ?",
+     "explanation": "3 000/30 000 = 10 %.",
+     "kind": "numeric",
+     "answer": 10.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-inflation-chomage-07-c",
+     "points": 1,
+     "prompt": "Taux d'activité, en % ?",
+     "explanation": "30 000/50 000 = 60 %.",
+     "kind": "numeric",
+     "answer": 60.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-macroeconomie-inflation-chomage-07-d",
+     "points": 1,
+     "prompt": "Inflation 2023-2024, en % ?",
+     "explanation": "(108 − 100)/100 = 8 %.",
+     "kind": "numeric",
+     "answer": 8.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "L'inflation est :",
+   "choices": [
+    "Une hausse du chômage",
+    "Une baisse des salaires",
+    "Une hausse générale et durable des prix",
+    "Une hausse d'un seul prix"
+   ],
+   "answer": 2,
+   "explanation": "Définition."
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Le taux de chômage se calcule :",
+   "choices": [
+    "Sur la population totale",
+    "Sur les salariés seulement",
+    "Sur les inactifs",
+    "Sur la population active"
+   ],
+   "answer": 3,
+   "explanation": "Chômeurs/population active."
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Un salaire nominal progresse de 3 % pendant que les prix progressent de 5 % : le pouvoir d'achat :",
+   "choices": [
+    "Double",
+    "Diminue",
+    "Reste inchangé",
+    "Augmente"
+   ],
+   "answer": 1,
+   "explanation": "Le salaire réel baisse."
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Le chômage dû au décalage durable entre qualifications et emplois est :",
+   "choices": [
+    "Saisonnier uniquement",
+    "Frictionnel",
+    "Conjoncturel",
+    "Structurel"
+   ],
+   "answer": 3,
+   "explanation": "Définition du chômage structurel."
+  },
+  {
+   "id": "sup-l1-macroeconomie-inflation-chomage-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-macroeconomie-inflation-chomage",
+   "prompt": "Un indice passant de 110 à 121 correspond à une inflation de :",
+   "choices": [
+    "1,1 %",
+    "21 %",
+    "10 %",
+    "11 %"
+   ],
+   "answer": 2,
+   "explanation": "121/110 − 1 = 10 %."
+  }
+ ]
+}

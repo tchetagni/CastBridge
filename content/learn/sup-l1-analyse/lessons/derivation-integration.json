@@ -1,0 +1,1183 @@
+{
+ "chapter": "sup-l1-analyse-derivation-integration",
+ "lessons": [
+  {
+   "id": "sup-l1-analyse-derivation",
+   "title": "Dérivation et étude de fonctions",
+   "minutes": 50,
+   "programRef": "Analyse de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer la dérivée d'une fonction avec les règles usuelles.",
+    "Déterminer une équation de tangente.",
+    "Étudier les variations et les extrema d'une fonction.",
+    "Interpréter le coût marginal et optimiser un bénéfice."
+   ],
+   "prerequisites": [
+    "sup-l1-analyse-limites-continuite"
+   ],
+   "exercises": [
+    "sup-l1-analyse-derivation-01",
+    "sup-l1-analyse-derivation-02",
+    "sup-l1-analyse-derivation-03",
+    "sup-l1-analyse-derivation-04",
+    "sup-l1-analyse-derivation-05",
+    "sup-l1-analyse-derivation-06"
+   ],
+   "selfCheck": [
+    "sup-l1-analyse-derivation-q1",
+    "sup-l1-analyse-derivation-q2",
+    "sup-l1-analyse-derivation-q3",
+    "sup-l1-analyse-derivation-q4",
+    "sup-l1-analyse-derivation-q5"
+   ],
+   "reviewNotes": [
+    "Interprétation du coût marginal comme approximation du coût d'une unité supplémentaire : vérifier la formulation avec le cours d'économie.",
+    "Chiffres fictifs en milliers de FCFA."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nombre dérivé et tangente",
+     "md": "$f$ est **dérivable en $a$** si le taux d'accroissement $\\frac{f(a+h)-f(a)}{h}$ a une limite finie quand $h→0$ ; cette limite est le **nombre dérivé** $f'(a)$. La **tangente** à la courbe en $a$ a pour équation $y=f'(a)(x-a)+f(a)$ ; $f'(a)$ est sa pente."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dérivées usuelles",
+     "md": "$(x^{n})'=n\\,x^{n-1}$ ; $(\\frac{1}{x})'=-\\frac{1}{x^{2}}$ ; $(\\sqrt{x})'=\\frac{1}{2\\sqrt{x}}$ ; $(e^{x})'=e^{x}$ ; $(\\ln x)'=\\frac{1}{x}$.",
+     "tex": "(x^{n})' = n\\,x^{n-1} \\,\\, (e^{x})' = e^{x} \\,\\, (\\ln x)' = \\frac{1}{x}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Règles de dérivation",
+     "md": "$(u+v)'=u'+v'$ ; $(k\\,u)'=k\\,u'$ ; $(u\\,v)'=u'v+u\\,v'$ ; $\\left(\\frac{u}{v}\\right)'=\\frac{u'v-u\\,v'}{v^{2}}$ ; $(e^{u})'=u'\\,e^{u}$ ; $(\\ln u)'=\\frac{u'}{u}$ ; $(u^{n})'=n\\,u'\\,u^{n-1}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Variations et extrema",
+     "md": "Sur un intervalle : $f'≥0$ ⇒ $f$ croissante ; $f'≤0$ ⇒ $f$ décroissante. Si $f'$ s'annule **en changeant de signe** en $a$, $f$ admet un **extremum local** en $a$ (maximum si $f'$ passe de + à −, minimum de − à +)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Coût marginal",
+     "md": "En économie, le **coût marginal** est $C_m(q)=C'(q)$. Il approche le coût de production de **la $(q+1)$-ième unité** : $C(q+1)-C(q)≈C'(q)$. De même, la recette marginale est $R'(q)$. Le bénéfice $B=R-C$ est maximal (dans les cas usuels) quand $R'(q)=C'(q)$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 270,
+      "xmin": -1,
+      "xmax": 5,
+      "ymin": -2,
+      "ymax": 8,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^3-6x^2+9x+1",
+        "color": "blue",
+        "label": "f"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 5,
+        "label": "max local (1;5)",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 1,
+        "label": "min local (3;1)",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Courbe de f(x)=x³−6x²+9x+1 avec ses deux extrema locaux.",
+     "alt": "Courbe qui monte jusqu'au point (1 ; 5), descend jusqu'au point (3 ; 1), puis remonte."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — étude de fonction",
+     "statement": "Étudier les variations de $f(x)=x^{3}-6x^{2}+9x+1$.",
+     "steps": [
+      {
+       "md": "On dérive : $f'(x)=3x^{2}-12x+9=3(x-1)(x-3)$.",
+       "tex": "f'(x) = 3x^{2} - 12x + 9 = 3(x-1)(x-3)"
+      },
+      {
+       "md": "Signe : $f'>0$ pour $x<1$, $f'<0$ pour $1<x<3$, $f'>0$ pour $x>3$ (trinôme positif à l'extérieur des racines)."
+      },
+      {
+       "md": "$f$ croît sur $]-∞\\,;1]$, décroît sur $[1\\,;3]$, croît sur $[3\\,;+∞[$."
+      },
+      {
+       "md": "Extrema : $f(1)=5$ (maximum local), $f(3)=1$ (minimum local).",
+       "tex": "f(1) = 5 \\quad f(3) = 1"
+      }
+     ],
+     "answer": "**Maximum local 5 en $x=1$ ; minimum local 1 en $x=3$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — coût marginal",
+     "statement": "Le coût de production (en milliers de FCFA) de $q$ tonnes d'une denrée est $C(q)=0{,}5q^{2}+20q+400$. Calculer le coût marginal à $q=30$ et le comparer à $C(31)-C(30)$.",
+     "steps": [
+      {
+       "md": "$C'(q)=q+20$, donc $C_m(30)=50$.",
+       "tex": "C'(q) = q + 20 ⇒ C'(30) = 50"
+      },
+      {
+       "md": "$C(30)=0{,}5×900+600+400=1450$ et $C(31)=480{,}5+620+400=1500{,}5$."
+      },
+      {
+       "md": "Écart réel : $1500{,}5-1450=50{,}5$, très proche de 50."
+      }
+     ],
+     "answer": "**$C_m(30)=50$ (milliers de FCFA) ; écart réel 50,5.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — bénéfice maximal",
+     "statement": "Avec le coût de l'exemple 2 et un prix de vente de 80 (milliers de FCFA) la tonne, $B(q)=80q-C(q)=-0{,}5q^{2}+60q-400$. Quelle production maximise le bénéfice ?",
+     "steps": [
+      {
+       "md": "$B'(q)=-q+60$.",
+       "tex": "B'(q) = -q + 60"
+      },
+      {
+       "md": "$B'(q)=0$ ⇔ $q=60$ ; $B'>0$ avant 60 et $B'<0$ après : c'est un maximum."
+      },
+      {
+       "md": "$B(60)=-1800+3600-400=1400$.",
+       "tex": "B(60) = -1800 + 3600 - 400 = 1400"
+      },
+      {
+       "md": "Vérification : $R'(q)=80$ et $C'(60)=80$ : recette marginale = coût marginal."
+      }
+     ],
+     "answer": "**Production optimale : 60 tonnes ; bénéfice maximal : 1 400 milliers de FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dériver un produit comme $(uv)'=u'v'$ : c'est faux.\n- Oublier le facteur $u'$ dans $(e^{u})'$ ou $(\\ln u)'$.\n- Conclure à un extremum parce que $f'(a)=0$ sans vérifier le **changement de signe** (ex. $x^{3}$ en 0).\n- Prendre le coût marginal pour le coût moyen $\\frac{C(q)}{q}$."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le coût moyen $\\frac{C(q)}{q}$ est minimal quand coût marginal = coût moyen.",
+      "La dérivée seconde (voir fiche suivante) précise la concavité et aide à confirmer un maximum."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-analyse-derivation-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2",
+   "title": "Développements limités d'ordre 2",
+   "minutes": 40,
+   "programRef": "Analyse de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Comprendre la notion de développement limité (DL) d'ordre 2 en 0.",
+    "Utiliser les DL usuels.",
+    "Approcher une valeur numérique à l'aide d'un DL.",
+    "Lever une forme indéterminée avec un DL."
+   ],
+   "prerequisites": [
+    "sup-l1-analyse-derivation"
+   ],
+   "exercises": [
+    "sup-l1-analyse-dl-ordre2-01",
+    "sup-l1-analyse-dl-ordre2-02",
+    "sup-l1-analyse-dl-ordre2-03",
+    "sup-l1-analyse-dl-ordre2-04",
+    "sup-l1-analyse-dl-ordre2-05",
+    "sup-l1-analyse-dl-ordre2-06"
+   ],
+   "selfCheck": [
+    "sup-l1-analyse-dl-ordre2-q1",
+    "sup-l1-analyse-dl-ordre2-q2",
+    "sup-l1-analyse-dl-ordre2-q3",
+    "sup-l1-analyse-dl-ordre2-q4",
+    "sup-l1-analyse-dl-ordre2-q5"
+   ],
+   "reviewNotes": [
+    "Notion introduite sans reste en o(x²) formel : le reste est noté $x^{2}\\varepsilon(x)$ ; vérifier la convention avec l'enseignant.",
+    "Seul l'ordre 2 en 0 est traité."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "DL d'ordre 2 en 0",
+     "md": "Dire que $f$ admet un **développement limité d'ordre 2 en 0** signifie qu'il existe des réels $a_0,a_1,a_2$ tels que $f(x)=a_0+a_1x+a_2x^{2}+x^{2}\\varepsilon(x)$, avec $\\varepsilon(x)→0$ quand $x→0$. On dit que $f$ est approchée près de 0 par un **polynôme de degré ≤ 2**, l'erreur étant négligeable devant $x^{2}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formule de Taylor-Young (ordre 2)",
+     "md": "Si $f$ est deux fois dérivable en 0 (avec $f''$ continue), alors $f(x)=f(0)+f'(0)\\,x+\\frac{f''(0)}{2}\\,x^{2}+x^{2}\\varepsilon(x)$. La tangente en 0 correspond aux deux premiers termes.",
+     "tex": "f(x) = f(0) + f'(0)\\,x + \\frac{f''(0)}{2}\\,x^{2} + x^{2}\\varepsilon(x)"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "DL usuels à l'ordre 2 en 0",
+     "md": "- $e^{x}=1+x+\\frac{x^{2}}{2}+x^{2}\\varepsilon(x)$\n- $\\ln(1+x)=x-\\frac{x^{2}}{2}+x^{2}\\varepsilon(x)$\n- $\\frac{1}{1-x}=1+x+x^{2}+x^{2}\\varepsilon(x)$\n- $\\cos x=1-\\frac{x^{2}}{2}+x^{2}\\varepsilon(x)$ ; $\\sin x=x+x^{2}\\varepsilon(x)$\n- $(1+x)^{\\alpha}=1+\\alpha x+\\frac{\\alpha(\\alpha-1)}{2}x^{2}+x^{2}\\varepsilon(x)$"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Calculer avec les DL",
+     "md": "**Somme** : on additionne coefficient par coefficient. **Produit** : on multiplie les polynômes et on **supprime** tous les termes de degré > 2. **Substitution** : pour $e^{2x}$, on remplace $x$ par $2x$ dans le DL de $e^{x}$. Pour une limite en 0, on remplace chaque fonction par son DL puis on simplifie."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": -2,
+      "xmax": 2,
+      "ymin": -1,
+      "ymax": 4,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "exp(x)",
+        "color": "blue",
+        "label": "e^x"
+       },
+       {
+        "expr": "1+x+x^2/2",
+        "color": "red",
+        "label": "DL2"
+       }
+      ]
+     },
+     "caption": "La parabole 1 + x + x²/2 (rouge) colle à e^x (bleu) près de 0 et s'en écarte ensuite.",
+     "alt": "Deux courbes quasi confondues autour de x=0 ; pour x proche de 2 la parabole reste en dessous de la courbe de l'exponentielle."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — DL par substitution",
+     "statement": "Donner le DL d'ordre 2 en 0 de $e^{2x}$ et de $\\ln(1+3x)$.",
+     "steps": [
+      {
+       "md": "Pour $e^{2x}$ : $1+2x+\\frac{(2x)^{2}}{2}=1+2x+2x^{2}$.",
+       "tex": "e^{2x} = 1 + 2x + 2x^{2} + x^{2}\\varepsilon(x)"
+      },
+      {
+       "md": "Pour $\\ln(1+3x)$ : $3x-\\frac{(3x)^{2}}{2}=3x-\\frac{9}{2}x^{2}$.",
+       "tex": "\\ln(1+3x) = 3x - \\frac{9}{2}x^{2} + x^{2}\\varepsilon(x)"
+      }
+     ],
+     "answer": "**$e^{2x}≈1+2x+2x^{2}$ ; $\\ln(1+3x)≈3x-4{,}5x^{2}$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — approximation",
+     "statement": "Approcher $e^{0{,}1}$ et $\\sqrt{1{,}2}$ avec un DL d'ordre 2, puis comparer avec la valeur exacte.",
+     "steps": [
+      {
+       "md": "$e^{0{,}1}≈1+0{,}1+\\frac{0{,}01}{2}=1{,}105$.",
+       "tex": "1 + 0{,}1 + 0{,}005 = 1{,}105"
+      },
+      {
+       "md": "$\\sqrt{1+x}=1+\\frac{x}{2}-\\frac{x^{2}}{8}$ ; pour $x=0{,}2$ : $1+0{,}1-0{,}005=1{,}095$.",
+       "tex": "1 + 0{,}1 - 0{,}005 = 1{,}095"
+      },
+      {
+       "md": "Valeurs « exactes » : $e^{0{,}1}≈1.10517$ et $\\sqrt{1{,}2}≈1.09545$ : l'erreur est de l'ordre du millième."
+      }
+     ],
+     "answer": "**$e^{0{,}1}≈1{,}105$ ; $\\sqrt{1{,}2}≈1{,}095$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — limite",
+     "statement": "Calculer $\\lim_{x→0}\\frac{e^{x}-1-x}{x^{2}}$.",
+     "steps": [
+      {
+       "md": "On remplace $e^{x}$ par $1+x+\\frac{x^{2}}{2}+x^{2}\\varepsilon(x)$.",
+       "tex": "e^{x} - 1 - x = \\frac{x^{2}}{2} + x^{2}\\varepsilon(x)"
+      },
+      {
+       "md": "On divise par $x^{2}$ : $\\frac{1}{2}+\\varepsilon(x)$.",
+       "tex": "\\frac{e^{x}-1-x}{x^{2}} = \\frac{1}{2} + \\varepsilon(x)"
+      },
+      {
+       "md": "Comme $\\varepsilon(x)→0$, la limite est $\\frac{1}{2}$."
+      }
+     ],
+     "answer": "**Limite : $\\frac{1}{2}$.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Garder des termes de degré 3 ou plus après un produit : à l'ordre 2 on les supprime.\n- Utiliser un DL **en 0** loin de 0 : l'approximation devient mauvaise (voir le graphique).\n- Oublier le $\\frac{1}{2}$ de $\\frac{x^{2}}{2}$ dans $e^{x}$.\n- Écrire $\\sin x≈x-\\frac{x^{2}}{2}$ : la fonction sinus a un terme en $x^{2}$ nul."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le signe de $a_2$ indique si la courbe est au-dessus ($a_2>0$) ou au-dessous ($a_2<0$) de sa tangente près de 0.",
+      "À l'ordre supérieur, on obtient des approximations encore meilleures (ordres 3, 4…)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-analyse-dl-ordre2-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo",
+   "title": "Primitives, intégrales et équations différentielles",
+   "minutes": 55,
+   "programRef": "Analyse de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer des primitives usuelles.",
+    "Calculer une intégrale avec une primitive, une intégration par parties ou un changement de variable simple.",
+    "Résoudre une équation différentielle $y'=ay+b$ avec condition initiale.",
+    "Interpréter une intégrale en économie (coût cumulé)."
+   ],
+   "prerequisites": [
+    "sup-l1-analyse-derivation"
+   ],
+   "exercises": [
+    "sup-l1-analyse-integrales-edo-01",
+    "sup-l1-analyse-integrales-edo-02",
+    "sup-l1-analyse-integrales-edo-03",
+    "sup-l1-analyse-integrales-edo-04",
+    "sup-l1-analyse-integrales-edo-05",
+    "sup-l1-analyse-integrales-edo-06"
+   ],
+   "selfCheck": [
+    "sup-l1-analyse-integrales-edo-q1",
+    "sup-l1-analyse-integrales-edo-q2",
+    "sup-l1-analyse-integrales-edo-q3",
+    "sup-l1-analyse-integrales-edo-q4",
+    "sup-l1-analyse-integrales-edo-q5"
+   ],
+   "reviewNotes": [
+    "Fiche dense (primitives, intégrales, équations différentielles) : possibilité de la scinder en deux selon le volume horaire.",
+    "Équations différentielles : seul le cas $y'=ay+b$ à coefficients constants est traité."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Primitive",
+     "md": "$F$ est une **primitive** de $f$ sur un intervalle si $F'=f$. Deux primitives de $f$ diffèrent d'une **constante**. Primitives usuelles (à $+C$ près) : $x^{n}→\\frac{x^{n+1}}{n+1}$ ($n≠-1$) ; $\\frac{1}{x}→\\ln|x|$ ; $e^{x}→e^{x}$ ; $\\cos x→\\sin x$ ; $\\sin x→-\\cos x$ ; $u'e^{u}→e^{u}$ ; $\\frac{u'}{u}→\\ln|u|$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Intégrale",
+     "md": "Si $f$ est continue sur $[a\\,;b]$ et $F$ une primitive de $f$, $\\int_a^b f(x)\\,dx=F(b)-F(a)$. Propriétés : **linéarité**, **relation de Chasles** $\\int_a^c=\\int_a^b+\\int_b^c$. Si $f≥0$ et $a≤b$, l'intégrale est l'**aire** sous la courbe, en unités d'aire ; si $f$ change de signe, c'est une aire algébrique."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Intégration par parties et changement de variable",
+     "md": "**Par parties** : $\\int_a^b u\\,v'\\,dx=\\left[u\\,v\\right]_a^b-\\int_a^b u'\\,v\\,dx$ (on choisit $u$ simple à dériver). **Changement de variable** : si on pose $t=\\varphi(x)$, alors $\\varphi'(x)\\,dx=dt$ et les bornes deviennent $\\varphi(a)$, $\\varphi(b)$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équation $y'=ay+b$",
+     "md": "Pour $a≠0$, les solutions de $y'=ay+b$ sur ℝ sont $y(x)=C\\,e^{ax}-\\frac{b}{a}$ avec $C$ réel. Une **condition initiale** $y(x_0)=y_0$ détermine $C$ de manière unique. Le terme $-\\frac{b}{a}$ est la solution constante (« équilibre »)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 250,
+      "xmin": 0,
+      "xmax": 3,
+      "ymin": 0,
+      "ymax": 5,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^2/2+1",
+        "color": "blue",
+        "label": "f"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 1,
+        "y1": 0,
+        "x2": 1,
+        "y2": 1.5,
+        "color": "red",
+        "dash": true
+       },
+       {
+        "x1": 2,
+        "y1": 0,
+        "x2": 2,
+        "y2": 3,
+        "color": "red",
+        "dash": true
+       }
+      ]
+     },
+     "caption": "L'intégrale de 1 à 2 est l'aire sous la courbe entre les deux traits rouges.",
+     "alt": "Courbe croissante ; deux segments verticaux en x=1 et x=2 délimitent la région sous la courbe dont l'aire est l'intégrale."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — primitive",
+     "statement": "Calculer $\\int_0^2 (3x^{2}+1)\\,dx$.",
+     "steps": [
+      {
+       "md": "Une primitive est $F(x)=x^{3}+x$.",
+       "tex": "F(x) = x^{3} + x"
+      },
+      {
+       "md": "$F(2)=8+2=10$ et $F(0)=0$.",
+       "tex": "F(2) - F(0) = 10 - 0"
+      }
+     ],
+     "answer": "**Valeur : 10.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — intégration par parties",
+     "statement": "Calculer $\\int_0^1 x\\,e^{x}\\,dx$.",
+     "steps": [
+      {
+       "md": "On pose $u=x$ et $v'=e^{x}$, donc $u'=1$ et $v=e^{x}$."
+      },
+      {
+       "md": "$\\int_0^1 x e^{x}dx=\\left[x e^{x}\\right]_0^1-\\int_0^1 e^{x}dx$.",
+       "tex": "= \\left[x e^{x}\\right]_0^1 - \\int_0^1 e^{x}dx"
+      },
+      {
+       "md": "$=e-(e-1)=1$.",
+       "tex": "= e - (e - 1) = 1"
+      }
+     ],
+     "answer": "**Valeur : 1.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — changement de variable",
+     "statement": "Calculer $\\int_0^1 \\frac{2x}{x^{2}+1}\\,dx$.",
+     "steps": [
+      {
+       "md": "On pose $t=x^{2}+1$ : $dt=2x\\,dx$. Bornes : $x=0⇒t=1$ ; $x=1⇒t=2$."
+      },
+      {
+       "md": "$\\int_1^2 \\frac{dt}{t}=\\left[\\ln t\\right]_1^2=\\ln 2$.",
+       "tex": "\\int_1^2 \\frac{1}{t}dt = \\ln 2 - \\ln 1"
+      }
+     ],
+     "answer": "**Valeur : $\\ln 2≈0.6931$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — équation différentielle",
+     "statement": "Résoudre $y'=2y+6$ avec $y(0)=1$.",
+     "steps": [
+      {
+       "md": "Solutions générales : $y=Ce^{2x}-\\frac{6}{2}=Ce^{2x}-3$.",
+       "tex": "y(x) = C e^{2x} - 3"
+      },
+      {
+       "md": "Condition : $y(0)=C-3=1$, donc $C=4$.",
+       "tex": "C - 3 = 1 ⇒ C = 4"
+      },
+      {
+       "md": "Vérification : $y'=8e^{2x}$ et $2y+6=8e^{2x}-6+6$ ✓."
+      }
+     ],
+     "answer": "**$y(x)=4e^{2x}-3$.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de changer les **bornes** après un changement de variable.\n- Oublier le terme $[uv]$ dans l'intégration par parties, ou le signe « − ».\n- Écrire $\\int \\frac{1}{x}dx=\\frac{1}{x}$ ou $\\ln x$ sans valeur absolue sur un intervalle négatif.\n- Oublier la constante $C$ pour une primitive, ou la solution d'équilibre $-\\frac{b}{a}$."
+    },
+    {
+     "type": "more",
+     "items": [
+      "En économie, si $R_m(q)$ est la recette marginale, la recette totale est $R(q)=\\int_0^q R_m(t)\\,dt$ (avec $R(0)=0$).",
+      "Les équations différentielles modélisent des croissances (population, capital) : $y'=ay$ donne une croissance exponentielle."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-analyse-integrales-edo-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-analyse-derivation-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "Soit $f(x)=2x^{3}-5x+1$. Calculer $f'(2)$.",
+   "explanation": "$f'(x)=6x^{2}-5$, donc $f'(2)=24-5=19$.",
+   "source": "Exercice original",
+   "answer": 19,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-analyse-derivation-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "La dérivée de $x\\,e^{x}$ est :",
+   "explanation": "$(uv)'=u'v+uv'=1·e^{x}+x·e^{x}=(1+x)e^{x}$.",
+   "source": "Exercice original",
+   "choices": [
+    "$e^{x}$",
+    "$(1+x)\\,e^{x}$",
+    "$x\\,e^{x}$",
+    "$x^{2}e^{x}$"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-analyse-derivation-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "La dérivée de $\\ln(2x)$ est $\\frac{1}{x}$.",
+   "explanation": "$(\\ln u)'=\\frac{u'}{u}=\\frac{2}{2x}=\\frac{1}{x}$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-analyse-derivation-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "Soit $f(x)=x^{2}-4x+3$. La tangente en $a=3$ a pour équation $y=mx+b$. Donner $b$.",
+   "explanation": "$f'(x)=2x-4$ donc $f'(3)=2$ ; $f(3)=0$. $y=2(x-3)+0=2x-6$ : $b=-6$.",
+   "method": "Appliquer $y=f'(a)(x-a)+f(a)$ puis développer.",
+   "mistakes": [
+    "Oublier $f(a)$ dans la formule."
+   ],
+   "source": "Exercice original",
+   "answer": -6,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-analyse-derivation-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "Le coût (en milliers de FCFA) est $C(q)=0{,}2q^{2}+15q+800$. Calculer le coût marginal pour $q=50$.",
+   "explanation": "$C'(q)=0{,}4q+15$ ; $C'(50)=35$.",
+   "source": "Exercice original",
+   "answer": 35.0,
+   "tolerance": 0.001,
+   "unit": "milliers de FCFA"
+  },
+  {
+   "id": "sup-l1-analyse-derivation-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "Un fabricant fictif vend sa production 130 (milliers de FCFA) l'unité. Son coût est $C(q)=q^{2}+10q+900$. Le bénéfice est donc $B(q)=130q-C(q)=-q^{2}+120q-900$.",
+   "method": "Dériver B, résoudre B'=0, étudier le signe, calculer B au point trouvé.",
+   "mistakes": [
+    "Oublier de vérifier que B' change de signe."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-analyse-derivation-06-a",
+     "points": 1,
+     "prompt": "Calculer $B'(10)$.",
+     "explanation": "$B'(q)=-2q+120$ ; $B'(10)=100$.",
+     "kind": "numeric",
+     "answer": 100,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-analyse-derivation-06-b",
+     "points": 1,
+     "prompt": "Pour quelle quantité $q$ le bénéfice est-il maximal ?",
+     "explanation": "$B'(q)=0$ ⇔ $q=60$ ; $B'$ passe de + à −.",
+     "kind": "numeric",
+     "answer": 60,
+     "tolerance": 0,
+     "unit": "unités"
+    },
+    {
+     "id": "sup-l1-analyse-derivation-06-c",
+     "points": 1,
+     "prompt": "Quel est le bénéfice maximal ?",
+     "explanation": "$B(60)=-3600+7200-900=2700$.",
+     "kind": "numeric",
+     "answer": 2700,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    },
+    {
+     "id": "sup-l1-analyse-derivation-06-d",
+     "points": 1,
+     "prompt": "Que vaut $C'(60)$, le coût marginal à l'optimum ?",
+     "explanation": "$C'(q)=2q+10$ ; $C'(60)=130$, égal à la recette marginale (le prix 130).",
+     "kind": "mcq",
+     "choices": [
+      "120",
+      "130",
+      "60",
+      "900"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-analyse-derivation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "La dérivée de $\\frac{1}{x}$ est :",
+   "choices": [
+    "$\\frac{1}{x^{2}}$",
+    "$\\ln x$",
+    "$-\\frac{1}{x}$",
+    "$-\\frac{1}{x^{2}}$"
+   ],
+   "answer": 3,
+   "explanation": "$(x^{-1})'=-x^{-2}$."
+  },
+  {
+   "id": "sup-l1-analyse-derivation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "Si $f'<0$ sur un intervalle, alors $f$ y est :",
+   "choices": [
+    "décroissante",
+    "croissante",
+    "constante",
+    "nulle"
+   ],
+   "answer": 0,
+   "explanation": "Signe de la dérivée = sens de variation."
+  },
+  {
+   "id": "sup-l1-analyse-derivation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "La dérivée de $e^{3x}$ est :",
+   "choices": [
+    "$e^{3x}$",
+    "$3x\\,e^{3x}$",
+    "$3e^{3x}$",
+    "$e^{3}$"
+   ],
+   "answer": 2,
+   "explanation": "$(e^{u})'=u'e^{u}$ avec $u=3x$."
+  },
+  {
+   "id": "sup-l1-analyse-derivation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "Le coût marginal est :",
+   "choices": [
+    "le coût total divisé par $q$",
+    "le coût fixe",
+    "la recette moins le coût",
+    "la dérivée du coût total"
+   ],
+   "answer": 3,
+   "explanation": "$C_m=C'$ ; le coût moyen est $C/q$."
+  },
+  {
+   "id": "sup-l1-analyse-derivation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-derivation",
+   "prompt": "L'équation de la tangente en $a$ est :",
+   "choices": [
+    "$y=f(a)(x-a)+f'(a)$",
+    "$y=f'(a)(x-a)+f(a)$",
+    "$y=f'(x)$",
+    "$y=f(a)x$"
+   ],
+   "answer": 1,
+   "explanation": "La pente est $f'(a)$ et la droite passe par $(a\\,;f(a))$."
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Quel est le coefficient de $x^{2}$ dans le DL d'ordre 2 en 0 de $e^{3x}$ ?",
+   "explanation": "$\\frac{(3x)^{2}}{2}=\\frac{9}{2}x^{2}$ : coefficient $4{,}5$.",
+   "source": "Exercice original",
+   "answer": 4.5,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Le DL d'ordre 2 en 0 de $\\cos x$ est :",
+   "explanation": "Le cosinus est pair et vaut 1 en 0 ; $\\cos''(0)=-1$ d'où $-\\frac{x^{2}}{2}$.",
+   "source": "Exercice original",
+   "choices": [
+    "$1+\\frac{x^{2}}{2}$",
+    "$x-\\frac{x^{2}}{2}$",
+    "$1-\\frac{x^{2}}{2}$",
+    "$1-x$"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Le DL d'ordre 2 en 0 de $\\sin x$ est $x-\\frac{x^{2}}{2}$.",
+   "explanation": "Faux : $\\sin x=x+x^{2}\\varepsilon(x)$ ; le coefficient de $x^{2}$ est 0 (le DL à l'ordre 3 contient $-\\frac{x^{3}}{6}$).",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Avec le DL d'ordre 2 de $\\ln(1+x)$, donner une valeur approchée de $\\ln(1{,}05)$.",
+   "explanation": "$x=0{,}05$ : $0{,}05-\\frac{0{,}0025}{2}=0{,}04875$.",
+   "source": "Exercice original",
+   "answer": 0.04875,
+   "tolerance": 1e-05
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Calculer $\\lim_{x→0}\\frac{\\cos x-1}{x^{2}}$.",
+   "explanation": "$\\cos x-1=-\\frac{x^{2}}{2}+x^{2}\\varepsilon(x)$ ; on divise par $x^{2}$ : limite $-\\frac{1}{2}$.",
+   "source": "Exercice original",
+   "answer": -0.5,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "On pose $f(x)=\\frac{e^{x}}{1+x}$ pour $x>-1$. On donne $\\frac{1}{1+x}=1-x+x^{2}+x^{2}\\varepsilon(x)$.",
+   "method": "Multiplier les DL, supprimer les termes de degré > 2, lire les coefficients.",
+   "mistakes": [
+    "Garder les termes en $x^{3}$ et $x^{4}$."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-analyse-dl-ordre2-06-a",
+     "points": 1,
+     "prompt": "Dans le produit $(1+x+\\frac{x^{2}}{2})(1-x+x^{2})$, quel est le coefficient de $x$ ?",
+     "explanation": "Termes en $x$ : $1×(-x)+x×1=0$.",
+     "kind": "numeric",
+     "answer": 0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-analyse-dl-ordre2-06-b",
+     "points": 1,
+     "prompt": "Quel est le coefficient de $x^{2}$ ?",
+     "explanation": "Termes en $x^{2}$ : $1×x^{2}+x×(-x)+\\frac{x^{2}}{2}×1=1-1+\\frac{1}{2}=\\frac{1}{2}$.",
+     "kind": "numeric",
+     "answer": 0.5,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l1-analyse-dl-ordre2-06-c",
+     "points": 1,
+     "prompt": "Que vaut $\\lim_{x→0}\\frac{f(x)-1}{x^{2}}$ ?",
+     "explanation": "$f(x)=1+\\frac{x^{2}}{2}+x^{2}\\varepsilon(x)$ ; donc $\\frac{f(x)-1}{x^{2}}→\\frac{1}{2}$.",
+     "kind": "mcq",
+     "choices": [
+      "$\\frac{1}{2}$",
+      "0",
+      "1",
+      "$-\\frac{1}{2}$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "sup-l1-analyse-dl-ordre2-06-d",
+     "points": 1,
+     "prompt": "Près de 0, la courbe de $f$ est par rapport à sa tangente $y=1$ :",
+     "explanation": "Coefficient de $x^{2}$ positif : $f(x)-1≈\\frac{x^{2}}{2}>0$. Contrôle : $f(0{,}1)≈1.004701>1$.",
+     "kind": "mcq",
+     "choices": [
+      "au-dessous",
+      "confondue",
+      "au-dessus",
+      "on ne peut pas savoir"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Le DL d'ordre 2 en 0 de $\\frac{1}{1-x}$ est :",
+   "choices": [
+    "$1+x+x^{2}$",
+    "$1-x+x^{2}$",
+    "$1+x+\\frac{x^{2}}{2}$",
+    "$1-x$"
+   ],
+   "answer": 0,
+   "explanation": "Série géométrique : $1+x+x^{2}+…$"
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Le DL d'ordre 2 de $e^{x}$ en 0 est :",
+   "choices": [
+    "$1+x+x^{2}$",
+    "$x+\\frac{x^{2}}{2}$",
+    "$1+\\frac{x^{2}}{2}$",
+    "$1+x+\\frac{x^{2}}{2}$"
+   ],
+   "answer": 3,
+   "explanation": "$f(0)=f'(0)=f''(0)=1$ : $1+x+\\frac{x^{2}}{2}$."
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Dans la formule de Taylor-Young, le coefficient de $x^{2}$ est :",
+   "choices": [
+    "$f''(0)$",
+    "$\\frac{f''(0)}{2}$",
+    "$f'(0)$",
+    "$\\frac{f'(0)}{2}$"
+   ],
+   "answer": 1,
+   "explanation": "On divise la dérivée seconde par $2!=2$."
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Le DL d'ordre 2 de $\\ln(1+x)$ en 0 est :",
+   "choices": [
+    "$x+\\frac{x^{2}}{2}$",
+    "$x-\\frac{x^{2}}{2}$",
+    "$1+x$",
+    "$x-x^{2}$"
+   ],
+   "answer": 1,
+   "explanation": "$\\ln(1)=0$, $f'(0)=1$, $f''(0)=-1$."
+  },
+  {
+   "id": "sup-l1-analyse-dl-ordre2-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-dl-ordre2",
+   "prompt": "Un DL en 0 donne une bonne approximation :",
+   "choices": [
+    "pour tout $x$ réel",
+    "uniquement pour $x$ grand",
+    "seulement pour $x=0$",
+    "pour $x$ proche de 0"
+   ],
+   "answer": 3,
+   "explanation": "L'erreur est négligeable devant $x^{2}$ seulement près de 0."
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "Calculer $\\int_1^3 2x\\,dx$.",
+   "explanation": "Primitive $x^{2}$ ; $9-1=8$.",
+   "source": "Exercice original",
+   "answer": 8,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "Une primitive de $e^{2x}$ est :",
+   "explanation": "On dérive $\\frac{1}{2}e^{2x}$ : $\\frac{1}{2}×2e^{2x}=e^{2x}$.",
+   "source": "Exercice original",
+   "choices": [
+    "$\\frac{1}{2}e^{2x}$",
+    "$2e^{2x}$",
+    "$e^{2x}$",
+    "$\\frac{1}{2}e^{x}$"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "Une intégrale $\\int_a^b f$ est toujours positive.",
+   "explanation": "Faux : si $f$ est négative sur $[a\\,;b]$, l'intégrale est négative (aire algébrique).",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "Calculer $\\int_1^{e} \\ln x\\,dx$ (indication : $u=\\ln x$, $v'=1$).",
+   "explanation": "$\\int \\ln x\\,dx=x\\ln x-x$. De $1$ à $e$ : $(e-e)-(0-1)=1$.",
+   "source": "Exercice original",
+   "answer": 1,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "On considère $y'=-y+5$ avec $y(0)=2$. Calculer $y(\\ln 3)$.",
+   "explanation": "$y=Ce^{-x}+5$ ; $y(0)=C+5=2$ donc $C=-3$. $y(\\ln 3)=5-3e^{-\\ln 3}=5-3×\\frac{1}{3}=4$.",
+   "source": "Exercice original",
+   "answer": 4,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "Une entreprise fictive a un coût marginal $C_m(q)=0{,}6q+20$ (en milliers de FCFA) et des coûts fixes de 500 (milliers de FCFA), car $C(0)=500$.",
+   "method": "Intégrer le coût marginal, fixer la constante par C(0)=500, calculer les valeurs.",
+   "mistakes": [
+    "Oublier la constante des coûts fixes."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-analyse-integrales-edo-06-a",
+     "points": 1,
+     "prompt": "Quelle primitive de $C_m$ donne le coût total $C(q)$ ?",
+     "explanation": "Primitive de $0{,}6q+20$ : $0{,}3q^{2}+20q+K$, et $C(0)=500$ impose $K=500$.",
+     "kind": "mcq",
+     "choices": [
+      "$C(q)=0{,}6q^{2}+20q+500$",
+      "$C(q)=0{,}3q^{2}+20q$",
+      "$C(q)=0{,}3q^{2}+20q+500$",
+      "$C(q)=0{,}6q+20$"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "sup-l1-analyse-integrales-edo-06-b",
+     "points": 1,
+     "prompt": "Calculer $C(10)$.",
+     "explanation": "$0{,}3×100+200+500=730$.",
+     "kind": "numeric",
+     "answer": 730,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    },
+    {
+     "id": "sup-l1-analyse-integrales-edo-06-c",
+     "points": 1,
+     "prompt": "Calculer l'augmentation du coût entre 10 et 20 unités : $\\int_{10}^{20} C_m(q)\\,dq$.",
+     "explanation": "$[0{,}3q^{2}+20q]_{10}^{20}=(120+400)-(30+200)=290$.",
+     "kind": "numeric",
+     "answer": 290,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    },
+    {
+     "id": "sup-l1-analyse-integrales-edo-06-d",
+     "points": 1,
+     "prompt": "Cette intégrale est égale à :",
+     "explanation": "Par définition de l'intégrale d'une dérivée : $\\int_{10}^{20}C'=C(20)-C(10)$ Ici $C(20)=120+400+500=1020$ et $1020-730=290$.",
+     "kind": "mcq",
+     "choices": [
+      "$C(20)+C(10)$",
+      "$C(20)×C(10)$",
+      "$C'(20)$",
+      "$C(20)-C(10)$"
+     ],
+     "answer": 3
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "Une primitive de $\\frac{1}{x}$ sur $]0\\,;+∞[$ est :",
+   "choices": [
+    "$-\\frac{1}{x^{2}}$",
+    "$\\ln x$",
+    "$e^{x}$",
+    "$\\frac{x^{2}}{2}$"
+   ],
+   "answer": 1,
+   "explanation": "$(\\ln x)'=\\frac{1}{x}$."
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "Les solutions de $y'=3y$ sont :",
+   "choices": [
+    "$y=e^{3x}+C$",
+    "$y=3Ce^{x}$",
+    "$y=Ce^{3x}$",
+    "$y=Cx^{3}$"
+   ],
+   "answer": 2,
+   "explanation": "Cas $b=0$, $a=3$."
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "$\\int_a^b f(x)\\,dx$ vaut :",
+   "choices": [
+    "$F(b)-F(a)$",
+    "$F(a)-F(b)$",
+    "$F(b-a)$",
+    "$F(b)$ seulement"
+   ],
+   "answer": 0,
+   "explanation": "Avec $F$ primitive de $f$."
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "L'intégration par parties s'écrit :",
+   "choices": [
+    "$\\int uv'=[uv]+\\int u'v$",
+    "$\\int uv'=\\int u\\int v'$",
+    "$\\int uv'=[uv]-\\int u'v$",
+    "$\\int uv'=u'v-uv'$"
+   ],
+   "answer": 2,
+   "explanation": "Elle découle de $(uv)'=u'v+uv'$."
+  },
+  {
+   "id": "sup-l1-analyse-integrales-edo-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-analyse-integrales-edo",
+   "prompt": "Si $y'=ay+b$ ($a≠0$), la solution constante est :",
+   "choices": [
+    "$-\\frac{b}{a}$",
+    "$\\frac{b}{a}$",
+    "$b$",
+    "$-ab$"
+   ],
+   "answer": 0,
+   "explanation": "$0=ay+b$ ⇒ $y=-\\frac{b}{a}$."
+  }
+ ]
+}

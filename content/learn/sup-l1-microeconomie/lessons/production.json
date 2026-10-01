@@ -1,0 +1,448 @@
+{
+ "chapter": "sup-l1-microeconomie-production",
+ "lessons": [
+  {
+   "id": "sup-l1-microeconomie-couts",
+   "title": "Coûts de production, concurrence parfaite et monopole",
+   "minutes": 55,
+   "programRef": "L1 — Théorie de la firme : coûts, concurrence parfaite, monopole (introduction) (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer coûts fixes, variables, totaux, moyens et marginal, et les calculer à partir d'un tableau.",
+    "Déterminer la production qui maximise le profit en concurrence parfaite (Rm = P = Cm).",
+    "Expliquer la différence entre preneur de prix et faiseur de prix.",
+    "Calculer le prix, la quantité et le profit d'un monopole à partir d'une demande linéaire."
+   ],
+   "prerequisites": [
+    "sup-l1-microeconomie-equilibre"
+   ],
+   "exercises": [
+    "sup-l1-microeconomie-couts-01",
+    "sup-l1-microeconomie-couts-02",
+    "sup-l1-microeconomie-couts-03",
+    "sup-l1-microeconomie-couts-04",
+    "sup-l1-microeconomie-couts-05",
+    "sup-l1-microeconomie-couts-06",
+    "sup-l1-microeconomie-couts-07"
+   ],
+   "selfCheck": [
+    "sup-l1-microeconomie-couts-q1",
+    "sup-l1-microeconomie-couts-q2",
+    "sup-l1-microeconomie-couts-q3",
+    "sup-l1-microeconomie-couts-q4",
+    "sup-l1-microeconomie-couts-q5"
+   ],
+   "reviewNotes": [
+    "Introduction seulement : pas de conditions de second ordre, ni de seuil de fermeture traité en détail.",
+    "Données chiffrées fictives (milliers de FCFA) ; vérifier la notation des coûts (CT, CVM, CM, Cm) du cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les coûts",
+     "md": "- **Coût fixe** $CF$ : indépendant de la quantité produite (loyer, machine) ;\n- **Coût variable** $CV(Q)$ : dépend de la quantité (matières premières, énergie) ;\n- **Coût total** : $CT = CF + CV$ ;\n- **Coût moyen** : $CM = CT/Q$ ; **coût variable moyen** : $CVM = CV/Q$ ;\n- **Coût marginal** : coût de la dernière unité produite, $C_m = \\Delta CT/\\Delta Q$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Lien coût moyen – coût marginal",
+     "md": "Le coût marginal coupe le coût moyen **en son minimum** : tant que $C_m < CM$, le coût moyen baisse ; dès que $C_m > CM$, il monte. Le coût marginal finit par croître avec la production (rendements décroissants)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Profit",
+     "md": "Le **profit** est la différence entre la recette totale et le coût total :",
+     "tex": "\\Pi = RT - CT = P\\,Q - CT"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "unit": "milliers FCFA",
+      "bars": [
+       {
+        "label": "Q=1",
+        "value": 30.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Q=2",
+        "value": 19.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Q=3",
+        "value": 14.7,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Q=4",
+        "value": 13.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Q=5",
+        "value": 12.4,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Q=6",
+        "value": 12.7,
+        "color": [
+         "blue"
+        ]
+       }
+      ]
+     },
+     "caption": "Coût moyen CM pour Q = 1 à 6 (tableau de l'exemple 1).",
+     "alt": "Six barres : CM vaut 30, 19, 14,7, 13, 12,4 puis 12,7 milliers de FCFA ; le coût moyen baisse puis remonte légèrement à la sixième unité."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — tableau de coûts",
+     "statement": "Une savonnerie a un coût fixe de 20 (milliers de FCFA). Ses coûts variables pour Q = 1 à 6 caisses sont : 10, 18, 24, 32, 42, 56. Construis CT, CM et Cm.",
+     "steps": [
+      {
+       "md": "CT = CF + CV : 30, 38, 44, 52, 62, 76.",
+       "tex": "CT = 20 + CV"
+      },
+      {
+       "md": "CM = CT/Q : 30,0, 19,0, 14,7, 13,0, 12,4, 12,7."
+      },
+      {
+       "md": "Cm = variation de CT : 10, 8, 6, 8, 10, 14 (le premier = CV(1) = 10)."
+      },
+      {
+       "md": "Le coût moyen est minimal à 5 caisses (12,4) : Cm = 10 < 12,4 jusque-là ; à la 6e, Cm = 14 > CM : le CM remonte."
+      }
+     ],
+     "answer": "**Le CM passe de 30 à 12,4 puis remonte à 12,7 ; Cm croise CM près de son minimum.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Concurrence parfaite",
+     "md": "Un marché est en **concurrence parfaite** si : de nombreux petits vendeurs et acheteurs, produit homogène, libre entrée et sortie, information parfaite. L'entreprise est alors **preneuse de prix** : elle ne peut pas influencer le prix $P$ du marché. Sa recette marginale est égale au prix : $R_m = P$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Maximiser le profit en concurrence parfaite",
+     "md": "L'entreprise augmente sa production tant que la recette de la dernière unité dépasse son coût. Le profit est maximal lorsque :",
+     "tex": "R_m = P = C_m"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — producteur preneur de prix",
+     "statement": "Avec les coûts de la savonnerie, le prix du marché est P = 13. Quelle production choisir et quel profit ?",
+     "steps": [
+      {
+       "md": "On produit tant que Cm ≤ P : Cm = 10, 8, 6, 8, 10, 14 ; Cm(5) = 10 ≤ 13 mais Cm(6) = 14 > 13. Donc Q = 5."
+      },
+      {
+       "md": "Recette = 13 × 5 = 65. Coût total CT(5) = 62."
+      },
+      {
+       "md": "Profit = 65 − 62 = 3 (milliers de FCFA).",
+       "tex": "\\Pi = 65 - 62 = 3"
+      }
+     ],
+     "answer": "**Production : 5 caisses ; profit : 3 milliers de FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Monopole",
+     "md": "Un **monopole** est un marché où un seul vendeur fait face à toute la demande, sans substitut proche et avec des barrières à l'entrée. Le monopoleur est **faiseur de prix** : pour vendre plus, il doit baisser son prix, donc la recette marginale est **inférieure** au prix ($R_m < P$). Il choisit $R_m = C_m$, puis lit le prix sur la courbe de demande."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — monopole",
+     "statement": "Demande inverse P = 60 − 2Q ; coût total CT = 12Q + 50 (donc Cm = 12). Détermine Q, P et le profit du monopoleur, puis compare à la concurrence parfaite.",
+     "steps": [
+      {
+       "md": "Recette totale RT = P·Q = 60Q − 2Q² ; recette marginale Rm = 60 − 4Q.",
+       "tex": "R_m = 60 - 4Q"
+      },
+      {
+       "md": "Rm = Cm : 60 − 4Q = 12 ⇒ Q = 48/4 = 12. Prix : P = 60 − 2×12 = 36.",
+       "tex": "Q = 12, \\quad P = 36"
+      },
+      {
+       "md": "Profit = 36×12 − (12×12 + 50) = 432 − 194 = 238."
+      },
+      {
+       "md": "En concurrence parfaite, P = Cm = 12 donne Q = (60 − 12)/2 = 24 : le monopole produit moins (12 contre 24) et vend plus cher (36 contre 12)."
+      }
+     ],
+     "answer": "**Monopole : Q = 12, P = 36, profit = 238 ; concurrence : Q = 24, P = 12.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $R_m = P$ pour un monopole : c'est vrai **seulement** en concurrence parfaite.\n- Lire le prix de monopole sur la courbe de Rm au lieu de la **courbe de demande**.\n- Oublier les coûts fixes dans le profit.\n- Croire que l'entreprise produit là où le coût **moyen** est minimal : elle produit là où Rm = Cm."
+    },
+    {
+     "type": "more",
+     "items": [
+      "À long terme, en concurrence parfaite avec libre entrée, le profit économique tend vers zéro : le prix s'aligne sur le minimum du coût moyen.",
+      "Le monopole entraîne une perte d'efficacité (quantité plus faible, prix plus élevé) ; d'où l'intérêt de la régulation ou du contrôle de la concurrence.",
+      "Entre les deux : concurrence monopolistique et oligopole (non traités ici)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-microeconomie-couts-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-microeconomie-couts-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "Coût fixe 15 000 FCFA ; coût variable pour 100 unités : 45 000 FCFA. Calcule le coût total pour 100 unités.",
+   "explanation": "CT = CF + CV = 15 000 + 45 000 = 60 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 60000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "Avec CT(100) = 60 000 FCFA, calcule le coût moyen.",
+   "explanation": "CM = 60 000/100 = 600 FCFA par unité.",
+   "source": "Exercice original",
+   "answer": 600.0,
+   "tolerance": 0,
+   "unit": "FCFA/unité"
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "Le coût marginal est :",
+   "explanation": "Variation du coût total quand Q augmente d'une unité.",
+   "mistakes": [
+    "Confondre coût marginal et coût moyen."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Le coût moyen minimal",
+    "Le coût fixe",
+    "Le coût total divisé par Q",
+    "Le coût de la dernière unité produite (ΔCT/ΔQ)"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "En concurrence parfaite, une entreprise choisit librement son prix de vente.",
+   "explanation": "Elle est preneuse de prix : le prix vient du marché.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "Avec le tableau de l'exemple 1 et un prix de marché P = 9, quelle quantité (nombre de caisses) maximise le profit ?",
+   "explanation": "Cm = 10, 8, 6, 8, 10, 14. Cm ≤ 9 pour Q = 2, 3 et 4 ; Cm(5) = 10 > 9. On retient Q = 4 (Cm croissant, dernière unité encore rentable).",
+   "method": "Prendre la plus grande Q telle que Cm ≤ P, dans la partie croissante du Cm.",
+   "mistakes": [
+    "Retenir Q = 2 parce que Cm(2) = 8 est le premier à passer sous 9 : le Cm baisse d'abord avant de croître."
+   ],
+   "source": "Exercice original",
+   "answer": 4.0,
+   "tolerance": 0,
+   "unit": "caisses"
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "Explique pourquoi la recette marginale d'un monopole est inférieure au prix.",
+   "explanation": "La baisse de prix s'applique à toute la production vendue.",
+   "method": "Raisonner sur deux niveaux de ventes.",
+   "source": "Exercice original",
+   "model": "Pour vendre une unité de plus, le monopoleur doit baisser le prix de toutes les unités. La recette gagnée sur la nouvelle unité (son prix) est diminuée de la perte sur les unités précédentes qui se vendent moins cher : Rm < P.",
+   "rubric": [
+    "Baisser le prix pour vendre plus",
+    "Effet de la baisse sur toutes les unités",
+    "Conclusion Rm < P"
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "Un opérateur unique de transport fluvial fait face à la demande P = 80 − 4Q (P en centaines de FCFA par passager, Q en dizaines de passagers). Son coût total est CT = 8Q + 120.",
+   "method": "Rm = Cm donne Q ; la demande donne P ; profit = RT − CT.",
+   "mistakes": [
+    "Lire P sur la courbe de Rm.",
+    "Oublier le coût fixe."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-microeconomie-couts-07-a",
+     "points": 1,
+     "prompt": "Quelle est sa recette marginale pour Q = 5 ? (Rm = 80 − 8Q)",
+     "explanation": "Rm = 80 − 8×5 = 40.",
+     "kind": "numeric",
+     "answer": 40.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-microeconomie-couts-07-b",
+     "points": 1,
+     "prompt": "Quelle quantité maximise son profit ?",
+     "explanation": "Rm = Cm : 80 − 8Q = 8 ⇒ Q = 72/8 = 9.",
+     "kind": "numeric",
+     "answer": 9.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-microeconomie-couts-07-c",
+     "points": 1,
+     "prompt": "Quel prix fixe-t-il ?",
+     "explanation": "On lit le prix sur la demande : P = 80 − 4×9 = 44.",
+     "kind": "numeric",
+     "answer": 44.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-microeconomie-couts-07-d",
+     "points": 1,
+     "prompt": "Quel est son profit ?",
+     "explanation": "RT = 44×9 = 396 ; CT = 8×9 + 120 = 192 ; profit = 204.",
+     "kind": "numeric",
+     "answer": 204.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "CT = 500 + 20Q. Pour Q = 10, le coût moyen vaut :",
+   "choices": [
+    "700",
+    "20",
+    "520",
+    "70"
+   ],
+   "answer": 3,
+   "explanation": "CT = 700 ; CM = 700/10 = 70."
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "En concurrence parfaite, la condition de maximisation du profit est :",
+   "choices": [
+    "Rm = P = Cm",
+    "Rm = 0",
+    "P = CF",
+    "P = CM minimal"
+   ],
+   "answer": 0,
+   "explanation": "Un franc de plus rapporte P ; on produit tant que Cm ≤ P."
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "Un monopoleur choisit sa quantité en égalisant :",
+   "choices": [
+    "Rm et Cm",
+    "P et le CM minimal",
+    "CF et CV",
+    "P et Cm"
+   ],
+   "answer": 0,
+   "explanation": "Rm = Cm, puis le prix est lu sur la demande."
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "Par rapport à la concurrence parfaite, un monopole produit en général :",
+   "choices": [
+    "Autant au même prix",
+    "Moins et plus cher",
+    "Plus et moins cher",
+    "Plus et plus cher"
+   ],
+   "answer": 1,
+   "explanation": "Il restreint la quantité pour faire monter le prix."
+  },
+  {
+   "id": "sup-l1-microeconomie-couts-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-microeconomie-couts",
+   "prompt": "Quand Cm est inférieur à CM, le coût moyen :",
+   "choices": [
+    "Est constant",
+    "Diminue",
+    "Augmente",
+    "Devient égal à CF"
+   ],
+   "answer": 1,
+   "explanation": "Une unité moins chère que la moyenne tire la moyenne vers le bas."
+  }
+ ]
+}
