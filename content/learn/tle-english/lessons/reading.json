@@ -1,0 +1,554 @@
+{
+ "chapter": "tle-english-reading",
+ "lessons": [
+  {
+   "id": "tle-english-reading-comprehension",
+   "title": "Reading comprehension",
+   "minutes": 40,
+   "programRef": "Tle — Anglais : compréhension de l'écrit (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; textes d'exemple écrits pour CastBridge ; à relire par un enseignant",
+   "objectives": [
+    "Appliquer une méthode de lecture en quatre temps.",
+    "Répondre aux questions de détail, d'inférence, de vocabulaire et de référence.",
+    "Justifier une réponse True/False par une citation.",
+    "Répondre en reformulant dans ses propres mots."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-english-rea-01",
+    "tle-english-rea-02",
+    "tle-english-rea-03",
+    "tle-english-rea-04",
+    "tle-english-rea-05",
+    "tle-english-rea-06"
+   ],
+   "selfCheck": [
+    "tle-english-rea-q1",
+    "tle-english-rea-q2",
+    "tle-english-rea-q3",
+    "tle-english-rea-q4",
+    "tle-english-rea-q5"
+   ],
+   "reviewNotes": [
+    "Textes originaux et fictifs (personnages inventés : Clarisse, Brice, Kevin) ; lieux réels (Bafoussam, Bamenda, Limbe, Garoua) cités sans fait chiffré : à relire par un enseignant.",
+    "Types de questions de l'épreuve d'anglais du Bac (compréhension, vocabulaire, résumé) : format exact à vérifier sur le texte officiel.",
+    "Difficulté lexicale à adapter : certains textes (migration, TIC) peuvent être trop longs pour un écran de téléphone ; l'enseignant peut les raccourcir."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La compréhension de l'écrit",
+     "md": "Lire un texte et répondre à des questions qui testent la compréhension **globale** (idée générale), le **détail** (information précise), l'**inférence** (ce que le texte suggère), le **vocabulaire** (sens d'un mot en contexte) et les **mots de référence** (it, they, which…).\n\nLes textes de cette fiche sont **originaux et fictifs**, sur des thèmes familiers : migration urbaine, TIC, environnement, citoyenneté."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 6,
+        "y": 20,
+        "w": 92,
+        "h": 80,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 50,
+        "text": "1. Skim",
+        "size": 15,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 74,
+        "text": "title, gist",
+        "size": 12
+       },
+       {
+        "t": "rect",
+        "x": 108,
+        "y": 20,
+        "w": 92,
+        "h": 80,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 154,
+        "y": 50,
+        "text": "2. Questions",
+        "size": 15,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 154,
+        "y": 74,
+        "text": "read first",
+        "size": 12
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 20,
+        "w": 92,
+        "h": 80,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 256,
+        "y": 50,
+        "text": "3. Read",
+        "size": 15,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 256,
+        "y": 74,
+        "text": "closely",
+        "size": 12
+       },
+       {
+        "t": "rect",
+        "x": 312,
+        "y": 20,
+        "w": 100,
+        "h": 80,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 362,
+        "y": 50,
+        "text": "4. Answer",
+        "size": 15,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 362,
+        "y": 74,
+        "text": "own words",
+        "size": 12
+       },
+       {
+        "t": "line",
+        "x1": 99,
+        "y1": 60,
+        "x2": 107,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 201,
+        "y1": 60,
+        "x2": 209,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 303,
+        "y1": 60,
+        "x2": 311,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 130,
+        "text": "Check the text for evidence",
+        "size": 15,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Quatre temps pour aborder un texte : survol, questions, lecture fine, réponse justifiée.",
+     "alt": "Quatre cadres reliés par des flèches : 1 Skim (title, gist), 2 Questions (read first), 3 Read closely, 4 Answer (own words) ; en bas la phrase « Check the text for evidence »."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode en quatre temps",
+     "md": "1. **Skim** : lire le titre, la première et la dernière phrase pour saisir le sujet.\n2. Lire **les questions** avant le texte pour savoir quoi chercher.\n3. **Lire attentivement** et souligner les mots-clés.\n4. **Répondre** en phrases complètes, avec ses propres mots, en revenant au texte pour vérifier la preuve.\n\nPour *True or False*, on **justifie** toujours par une phrase du texte."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Types de questions et stratégies",
+     "md": "- **Idée générale** : de quoi parle l'ensemble du texte ? (ni trop large, ni trop précis).\n- **Détail** : *scanning* (chercher un mot-clé).\n- **Inférence** : ce qui est suggéré sans être dit ; chercher des indices.\n- **Vocabulaire** : deviner par le contexte, les préfixes et suffixes, la famille de mots.\n- **Référence** : à quel nom renvoie it, they, this ?\n- **Opinion** : donner son avis et le justifier."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Répondre dans ses propres mots",
+     "md": "- Commencer par reprendre la question : *Why did Clarisse leave? She left because…*\n- **Ne pas recopier** des phrases entières : reformuler (synonymes, structure différente).\n- Rester **fidèle** au texte : pas d'opinion sans qu'on la demande.\n- Une **citation** n'est demandée que si la consigne dit *quote* ou *justify*.\n- Faire attention au **temps** (past, present) et à l'orthographe."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Lexique des quatre thèmes",
+     "md": "**Migration urbaine** : rural exodus, to migrate, unemployment, opportunity, hardship.\n**TIC** : connection, device, online, to download, digital, power cut.\n**Environnement** : pollution, waste, to recycle, drain, climate, volunteer.\n**Citoyenneté** : rights, duty, community, authorities, to vote, to participate.\nAssocier chaque mot à un exemple vécu aide à le retenir."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : idée générale, détail, vocabulaire, référence",
+     "statement": "Text (fictional): « Every September, young people crowd the bus station in Bafoussam. Many hope to find work in Douala or Yaoundé. Clarisse, 18, is one of them. « In the village I helped my aunt in the fields, but I want to learn a trade, » she says. Her cousin has promised her a bed, not a job. She knows that city life is expensive and that nothing is guaranteed. Still, she is determined. »\n\nQuestions: 1) Main idea? 2) Quote a sentence showing she knows the risks. 3) Meaning of « determined »? 4) What does « one of them » refer to?",
+     "steps": [
+      {
+       "md": "**1)** Le texte parle de jeunes qui migrent vers les villes, avec l'exemple de Clarisse : *Young people leave villages for cities, hoping for work, despite the risks.*"
+      },
+      {
+       "md": "**2)** Il faut citer : *« She knows that city life is expensive and that nothing is guaranteed. »*"
+      },
+      {
+       "md": "**3)** *Determined* = résolue, décidée, qui ne renonce pas ; le contexte (« Still ») montre qu'elle persiste malgré les difficultés."
+      },
+      {
+       "md": "**4)** *Them* renvoie aux **young people** qui viennent chercher du travail ; *one of them* = l'une de ces jeunes personnes."
+      }
+     ],
+     "answer": "1) Young people migrating to cities. 2) Quotation above. 3) Resolute, not giving up. 4) The young people who come to look for work."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : True or False, justifiez",
+     "statement": "Text (fictional): « Brice runs a small phone-repair stall in Bamenda. On Saturdays he teaches children to build simple web pages on two old laptops. « Technology should not belong only to rich people, » he says. Last month one of his pupils designed a page for her mother's tailoring business, and three new customers found them online. Brice admits that power cuts and slow connections are a daily problem. However, he believes that patience can overcome most obstacles. »\n\nTrue or False? Justify with a quotation: « Brice never has problems with his equipment. »",
+     "steps": [
+      {
+       "md": "**Repérer le mot-clé** : *problems* ; chercher dans le texte *power cuts*, *slow connections*."
+      },
+      {
+       "md": "La phrase du texte : *« Brice admits that power cuts and slow connections are a daily problem. »* La phrase d'énoncé affirme le contraire (never)."
+      }
+     ],
+     "answer": "**False.** « Brice admits that power cuts and slow connections are a daily problem. »"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Les pièges de la compréhension",
+     "md": "- **Copier** le texte sans reformuler.\n- Répondre **hors texte** (avec ses idées) à une question de compréhension.\n- Citer **sans guillemets** ou une phrase trop longue.\n- **True/False** sans justification.\n- Confondre **thème** (le sujet) et **idée générale** (ce qu'on en dit).\n- Ignorer les **mots de référence** : they, it, this renvoient à un nom précis."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-english-rea-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-english-rea-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-english-rea-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Chaque semaine, lire un court article en anglais et noter cinq mots nouveaux avec leur contexte.",
+      "S'entraîner à résumer un paragraphe en une phrase."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-english-rea-01",
+   "kind": "matching",
+   "points": 3,
+   "prompt": "Associez chaque type de question à la stratégie à adopter.",
+   "pairs": [
+    [
+     "Idée générale",
+     "Survoler le titre et la première et dernière phrase"
+    ],
+    [
+     "Détail précis",
+     "Repérer un mot-clé dans le texte (scanning)"
+    ],
+    [
+     "Inférence",
+     "Chercher des indices pour comprendre ce qui est suggéré"
+    ],
+    [
+     "Vocabulaire en contexte",
+     "Observer le contexte, le préfixe, la famille du mot"
+    ],
+    [
+     "Mot de référence (they, it)",
+     "Chercher le nom auquel il renvoie"
+    ],
+    [
+     "True or False + justify",
+     "Citer la phrase du texte qui prouve la réponse"
+    ]
+   ],
+   "explanation": "Une stratégie par type de question : cela évite de relire le texte entier à chaque réponse.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original, style Bac",
+   "method": "Type de question puis stratégie.",
+   "mistakes": [
+    "Répondre à une inférence par un simple copier-coller."
+   ]
+  },
+  {
+   "id": "tle-english-rea-02",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Text (fictional): « Students of a secondary school in Limbe decided to clean the stream behind their campus. For three Saturdays they collected plastic bottles and bags. The headteacher admitted that she had not expected so many volunteers. Now the group plants trees along the bank, and neighbours have begun to join them. « A clean stream is not a gift, » says one student. « It is a habit. » » What is the main idea?",
+   "choices": [
+    "Students cleaned a stream and made it a lasting habit for the community.",
+    "Students were punished for dirtying a stream.",
+    "Neighbours refused to help the school.",
+    "The headteacher planted all the trees alone."
+   ],
+   "answer": 0,
+   "explanation": "Le texte raconte une action collective d'élèves pour nettoyer un cours d'eau, qui inspire aussi les voisins : l'idée générale est la première proposition.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-english-rea-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "Text (fictional): « After the rainy season, a youth club in Garoua cleaned the neighbourhood market. Volunteers repaired drains, swept the alleys and put up signs against littering. The chairman of the traders thanked them but reminded everyone that keeping a place clean is a duty shared by traders, customers and local authorities. « Being a citizen is not only about rights, » he said. « It is also about what we do for others. » » True or false: the chairman says that citizenship is only about rights.",
+   "answer": false,
+   "explanation": "Faux. Le président affirme : « Being a citizen is not only about rights. It is also about what we do for others. » Il insiste donc sur les devoirs aussi.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-english-rea-04",
+   "kind": "open",
+   "points": 4,
+   "prompt": "Text (fictional): « Students of a secondary school in Limbe decided to clean the stream behind their campus. For three Saturdays they collected plastic bottles and bags. The headteacher admitted that she had not expected so many volunteers. Now the group plants trees along the bank, and neighbours have begun to join them. « A clean stream is not a gift, » says one student. « It is a habit. » » Answer in your own words: a) Why was the headteacher surprised? b) What does the student mean by « It is a habit »?",
+   "model": "a) The headteacher was surprised because many more students than she had expected volunteered to help. b) The student means that keeping the stream clean is not a single action but something to do regularly, as part of daily life.",
+   "rubric": [
+    "Réponse a) fidèle au texte, reformulée (2 points).",
+    "Réponse b) interprétation correcte (habitude, régularité) (2 points)."
+   ],
+   "explanation": "On reformule : « surprised » n'est pas dans le texte, c'est « had not expected ».",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original, style Bac",
+   "method": "Reformuler, rester fidèle.",
+   "mistakes": [
+    "Recopier la phrase du texte."
+   ]
+  },
+  {
+   "id": "tle-english-rea-05",
+   "kind": "open",
+   "points": 4,
+   "prompt": "Text (fictional): « Brice runs a small phone-repair stall in Bamenda. On Saturdays he teaches children to build simple web pages on two old laptops. « Technology should not belong only to rich people, » he says. Last month one of his pupils designed a page for her mother's tailoring business, and three new customers found them online. Brice admits that power cuts and slow connections are a daily problem. However, he believes that patience can overcome most obstacles. » a) What does « obstacles » mean? b) What does « them » refer to in « found them online »? c) What is Brice's attitude to difficulties?",
+   "model": "a) Obstacles are difficulties or barriers that make progress hard. b) « Them » refers to the mother and her tailoring business (the people of the business). c) Brice is optimistic and patient: he thinks that patience can overcome most obstacles.",
+   "rubric": [
+    "Vocabulaire correct (1 point).",
+    "Référence correcte (1 point).",
+    "Attitude identifiée et justifiée (2 points)."
+   ],
+   "explanation": "Les trois questions testent le vocabulaire, la référence et l'inférence : trois stratégies différentes.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original, style Bac",
+   "method": "Contexte, référence, inférence.",
+   "mistakes": [
+    "Confondre « them » avec les clients."
+   ]
+  },
+  {
+   "id": "tle-english-rea-06",
+   "kind": "problem",
+   "prompt": "Text (fictional): « Kevin, a young agronomist, has come back to his village with a laptop and a mobile phone. Every morning he checks market prices online and sends them by text message to local farmers. « Before, buyers fixed the price and we accepted it, » says one farmer. Kevin does not want to leave the countryside. « Cities need food, » he says, « and food comes from here. Why should the best minds all go to town? » »",
+   "parts": [
+    {
+     "id": "tle-english-rea-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the main idea of the text?",
+     "choices": [
+      "A farmer refuses to sell his crops.",
+      "A young agronomist uses technology to help farmers in his village.",
+      "Cities no longer need food.",
+      "Kevin wants to leave the village for Douala."
+     ],
+     "answer": 1,
+     "explanation": "Le texte montre Kevin utilisant un ordinateur et un téléphone pour informer les agriculteurs des prix."
+    },
+    {
+     "id": "tle-english-rea-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What does the word « fixed » mean in « buyers fixed the price » ?",
+     "choices": [
+      "repaired",
+      "fastened",
+      "decided",
+      "cleaned"
+     ],
+     "answer": 2,
+     "explanation": "Dans ce contexte, « fix a price » signifie décider, imposer un prix."
+    },
+    {
+     "id": "tle-english-rea-06-c",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why does Kevin send market prices by text message? Answer in your own words.",
+     "model": "He sends them so that local farmers know the prices before they sell. This helps them avoid accepting low prices set by buyers.",
+     "rubric": [
+      "Raison correcte (1 point).",
+      "Reformulation sans copier (1 point)."
+     ],
+     "explanation": "La raison se déduit : informer pour mieux négocier."
+    },
+    {
+     "id": "tle-english-rea-06-d",
+     "kind": "open",
+     "points": 3,
+     "prompt": "In about forty words, say whether technology can help rural areas. Give one reason and one example.",
+     "model": "Yes, technology can help rural areas because it gives people access to information. For example, a farmer who knows market prices can negotiate better. However, this requires electricity and a network, so governments should invest in them.",
+     "rubric": [
+      "Position claire (1 point).",
+      "Une raison et un exemple (1 point).",
+      "Anglais correct, longueur proche de quarante mots (1 point)."
+     ],
+     "explanation": "Une opinion bien construite : position, raison, exemple, nuance."
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original, style Bac",
+   "method": "Idée générale, vocabulaire, reformulation, opinion.",
+   "mistakes": [
+    "Répondre hors texte."
+   ]
+  },
+  {
+   "id": "tle-english-rea-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "What is « scanning » ?",
+   "choices": [
+    "Looking quickly for specific information",
+    "Reading every word slowly",
+    "Translating the text into French",
+    "Reading only the title"
+   ],
+   "answer": 0,
+   "explanation": "Scanning = chercher une information précise.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original"
+  },
+  {
+   "id": "tle-english-rea-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "For a True/False question, you should:",
+   "choices": [
+    "Guess",
+    "Justify with a sentence from the text",
+    "Give your own opinion",
+    "Translate the question"
+   ],
+   "answer": 1,
+   "explanation": "La justification par le texte est la règle.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original"
+  },
+  {
+   "id": "tle-english-rea-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "In « The students cleaned the stream because they cared about it », « they » refers to:",
+   "choices": [
+    "the stream",
+    "the headteacher",
+    "the students",
+    "the neighbours"
+   ],
+   "answer": 2,
+   "explanation": "Le pronom they reprend le sujet de la première proposition.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original"
+  },
+  {
+   "id": "tle-english-rea-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "An inference question asks for:",
+   "choices": [
+    "A word-for-word quotation",
+    "The title of the text",
+    "The author's name",
+    "What the text suggests without saying it directly"
+   ],
+   "answer": 3,
+   "explanation": "Il faut déduire à partir d'indices.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original"
+  },
+  {
+   "id": "tle-english-rea-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "To answer in your own words, you should:",
+   "choices": [
+    "Reformulate the idea",
+    "Copy the whole sentence",
+    "Skip the question",
+    "Translate literally from French"
+   ],
+   "answer": 0,
+   "explanation": "Reformuler prouve que l'on a compris.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-reading-comprehension",
+   "source": "Exercice original"
+  }
+ ]
+}

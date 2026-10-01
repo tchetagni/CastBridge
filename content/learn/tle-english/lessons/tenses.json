@@ -1,0 +1,550 @@
+{
+ "chapter": "tle-english-tenses",
+ "lessons": [
+  {
+   "id": "tle-english-tenses-aspect",
+   "title": "Tenses and aspect : review with exceptions",
+   "minutes": 40,
+   "programRef": "Tle — Anglais : temps et aspects (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; textes d'exemple écrits pour CastBridge ; à relire par un enseignant",
+   "objectives": [
+    "Choisir entre present simple/continuous, present perfect/past simple.",
+    "Employer les temps du passé et les formes du futur.",
+    "Repérer les verbes d'état et les exceptions fréquentes.",
+    "Corriger les erreurs de calque du français."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-english-ten-01",
+    "tle-english-ten-02",
+    "tle-english-ten-03",
+    "tle-english-ten-04",
+    "tle-english-ten-05",
+    "tle-english-ten-06"
+   ],
+   "selfCheck": [
+    "tle-english-ten-q1",
+    "tle-english-ten-q2",
+    "tle-english-ten-q3",
+    "tle-english-ten-q4",
+    "tle-english-ten-q5"
+   ],
+   "reviewNotes": [
+    "Théorie et exceptions conformes à l'anglais standard ; le programme officiel de Tle (A, C, D) peut limiter ou ajouter des points : à vérifier.",
+    "Les exercices d'anglais suivent le style courant des épreuves de Terminale ; format exact et barème de l'épreuve : à vérifier sur le texte officiel.",
+    "Variante britannique privilégiée (present perfect avec yet, already) ; l'américain peut accepter le past simple : à signaler par l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Tense et aspect",
+     "md": "Un verbe anglais exprime un **temps** (present, past, future) et un **aspect** : **simple** (fait, habitude), **continuous** (action en cours, temporaire), **perfect** (lien avec un autre moment), **perfect continuous** (durée jusqu'à un moment).\n\nExemple : *She works* (habitude) ; *She is working* (en ce moment) ; *She has worked* (résultat) ; *She has been working* (durée, jusqu'à maintenant)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 80,
+        "x2": 400,
+        "y2": 80,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 80,
+        "r": 8,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 62,
+        "text": "NOW",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 104,
+        "w": 130,
+        "h": 70,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 128,
+        "text": "Past simple",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 150,
+        "text": "finished: ago",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 166,
+        "text": "yesterday, in 2020",
+        "size": 12
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 104,
+        "w": 130,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 128,
+        "text": "Present perfect",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 150,
+        "text": "link to now: since,",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 166,
+        "text": "for, already, yet",
+        "size": 12
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 104,
+        "w": 130,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 128,
+        "text": "Future",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 150,
+        "text": "will, going to,",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 166,
+        "text": "present continuous",
+        "size": 12
+       }
+      ]
+     },
+     "caption": "Trois repères pour choisir : fini et daté, lié au présent, ou futur.",
+     "alt": "Une ligne du temps avec NOW au centre ; dessous, trois cadres : Past simple (finished: ago, yesterday, in 2020), Present perfect (link to now: since, for, already, yet), Future (will, going to, present continuous)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Present : simple ou continuous",
+     "md": "**Present simple** : habitudes, vérités générales, horaires : *The train leaves at 7.*\n**Present continuous** : action en cours ou temporaire ; plan arrangé ; avec *always* pour une habitude agaçante : *He is always losing his keys.*\n\n**Stative verbs** (know, like, love, want, believe, belong, understand…) ne se mettent normalement **pas** au continuous : *I know the answer*, non *I am knowing*."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Present perfect ou past simple",
+     "md": "**Past simple** : fait terminé, **moment précis** (yesterday, last week, in 2018, two years ago) : *I met him in 2019.*\n**Present perfect** : lien avec le présent ; moment non précisé ; **for** (durée) / **since** (point de départ) ; *already, yet, just, ever, never* : *I have lived here for ten years.*\n\nOn n'emploie **jamais** present perfect avec une date passée : *I have seen him yesterday* est faux."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les temps du passé",
+     "md": "**Past continuous** : action en cours quand une autre arrive : *I was cooking when the lights went out.*\n**Past perfect** : antérieur à un autre fait passé : *When we arrived, the match had started.*\n**Used to / would** : habitudes passées (*used to* aussi pour les états ; *would* seulement pour les actions répétées)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Exprimer le futur",
+     "md": "- **will** : décision immédiate, prédiction, promesse.\n- **be going to** : intention ou prédiction fondée sur un indice (*Look at the clouds: it is going to rain*).\n- **Present continuous** : arrangement personnel (*I'm meeting him on Friday*).\n- **Present simple** : horaire.\nAprès *when, if, as soon as, before, until, after* : **present simple** pour le futur : *I'll call you when I arrive.*"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Choisir le bon temps",
+     "md": "1. Y a-t-il un **marqueur** (yesterday, since, for, already, at the moment, tomorrow) ?\n2. L'action est-elle **terminée** et datée, ou liée au présent ?\n3. Est-elle **en cours** ou **habituelle** ?\n4. Quel est le **verbe** (stative ou d'action) ?\n5. Relire la phrase entière : le temps doit s'accorder avec le contexte."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir le temps",
+     "statement": "Complete: 1) She ______ (live) in Douala since 2019. 2) He ______ (arrive) yesterday at 5. 3) We ______ (wait) for an hour when the bus finally came.",
+     "steps": [
+      {
+       "md": "**1) since 2019** : point de départ, état qui continue : present perfect : *She has lived* (ou *has been living*)."
+      },
+      {
+       "md": "**2) yesterday at 5** : moment précis dans le passé : past simple : *He arrived*."
+      },
+      {
+       "md": "**3) for an hour when…** : durée avant un événement passé : past perfect continuous : *We had been waiting* ; on accepte *were waiting* selon le contexte."
+      }
+     ],
+     "answer": "1) has lived ; 2) arrived ; 3) had been waiting."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : les exceptions fréquentes",
+     "statement": "Choose: a) *I have been / gone to Yaoundé twice.* b) *It is the first time I eat / have eaten ndolé.* c) *I will call you when I will arrive / arrive.*",
+     "steps": [
+      {
+       "md": "**a)** *have been to* : être allé et revenu (expérience) ; *have gone to* : parti, pas encore revenu. Ici deux fois : **have been**."
+      },
+      {
+       "md": "**b)** Après *It is the first time*, on emploie le **present perfect** : *have eaten*."
+      },
+      {
+       "md": "**c)** Après *when* (futur), on emploie le **present simple** : *when I arrive*."
+      }
+     ],
+     "answer": "a) have been ; b) have eaten ; c) arrive."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Les pièges des temps",
+     "md": "- **Present perfect + date** (*in 2020, yesterday*) : interdit.\n- **Stative verbs** au continuous : *I am wanting* est faux.\n- *Since* avec une durée (*since two years*) : utilisez **for**.\n- **Will** après *when/if* : *if it will rain* est faux.\n- Calque du français : *I am here since Monday* est faux ; il faut *I have been here since Monday*.\n- Oubli de l'**aspect** : *I have worked* ≠ *I have been working*."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-english-ten-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-english-ten-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-english-ten-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Faire une fiche personnelle des marqueurs temporels et du temps qui les accompagne.",
+      "Relire ses dernières copies et souligner chaque erreur de temps."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-english-ten-01",
+   "kind": "matching",
+   "points": 3,
+   "prompt": "Associez chaque phrase à l'usage du temps qu'elle illustre.",
+   "pairs": [
+    [
+     "The train leaves at 7 a.m.",
+     "Present simple : horaire"
+    ],
+    [
+     "He is always losing his keys.",
+     "Present continuous : habitude agaçante"
+    ],
+    [
+     "I have lived here since 2019.",
+     "Present perfect : état commencé dans le passé"
+    ],
+    [
+     "I was cooking when the lights went out.",
+     "Past continuous : action en cours interrompue"
+    ],
+    [
+     "They had left before we arrived.",
+     "Past perfect : antérieur à un fait passé"
+    ],
+    [
+     "Look at the clouds: it is going to rain.",
+     "Be going to : prédiction fondée sur un indice"
+    ]
+   ],
+   "explanation": "Chaque temps traduit un point de vue différent sur l'action. Repérez les marqueurs : since, when, before, look at…",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original, style Bac",
+   "method": "Marqueur, puis usage.",
+   "mistakes": [
+    "Confondre present perfect et past simple."
+   ]
+  },
+  {
+   "id": "tle-english-ten-02",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Choose the correct sentence.",
+   "choices": [
+    "She works here since 2018.",
+    "She worked here since 2018.",
+    "She is working here since 2018.",
+    "She has worked here since 2018."
+   ],
+   "answer": 3,
+   "explanation": "« Since 2018 » exige le present perfect (ou perfect continuous) : *has worked*. Le present simple ou le past simple ne conviennent pas avec *since*.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-english-ten-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "True or false: « I have seen him yesterday » is correct English.",
+   "answer": false,
+   "explanation": "Faux. Avec un moment précis du passé (*yesterday*), on emploie le past simple : *I saw him yesterday*.",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-english-ten-04",
+   "kind": "open",
+   "points": 4,
+   "prompt": "Put the verbs in brackets in the correct tense: « Last year, I (visit) Limbe for the first time. I (never see) such a beautiful beach before. While I (walk) along the shore, a fisherman (sell) fresh fish. I (already decide) to come back next summer. »",
+   "model": "Last year, I **visited** Limbe for the first time. I **had never seen** such a beautiful beach before. While I **was walking** along the shore, a fisherman **was selling** fresh fish. I **had already decided** to come back next summer.",
+   "rubric": [
+    "visited : past simple après « last year » (1 point).",
+    "had never seen : past perfect, antérieur (1 point).",
+    "was walking / was selling : past continuous (1 point).",
+    "had already decided : past perfect (1 point)."
+   ],
+   "explanation": "Dans un récit au passé, le past perfect sert à situer une action avant les autres.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original, style Bac",
+   "method": "Ordre des actions, marqueurs.",
+   "mistakes": [
+    "Mettre le present perfect dans un récit daté."
+   ]
+  },
+  {
+   "id": "tle-english-ten-05",
+   "kind": "open",
+   "points": 4,
+   "prompt": "Correct the mistakes (one per sentence): 1) I am knowing the answer. 2) She has gone to Garoua last week. 3) If it will rain, we will stay home. 4) He lives here since 2015. 5) When I will arrive, I will call you.",
+   "model": "1) I **know** the answer (stative verb). 2) She **went** to Garoua last week (past simple with a date). 3) If it **rains**, we will stay home (present simple after if). 4) He **has lived** here since 2015 (present perfect with since). 5) When I **arrive**, I will call you (present simple after when).",
+   "rubric": [
+    "Verbe d'état corrigé (1 point).",
+    "Past simple avec « last week » (1 point).",
+    "Present simple après if/when, deux phrases (1 point).",
+    "Present perfect avec « since » (1 point)."
+   ],
+   "explanation": "Cinq phrases, cinq règles distinctes : repérez le marqueur de temps pour chacune.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original, style Bac",
+   "method": "Marqueur, règle, correction.",
+   "mistakes": [
+    "Corriger sans justifier."
+   ]
+  },
+  {
+   "id": "tle-english-ten-06",
+   "kind": "problem",
+   "prompt": "Text (fictional): « Amina (live) in Bamenda for five years. Last month she (move) to Douala, where she (work) in a bank. She (not decide) yet whether she (stay) there. Tomorrow she (meet) her new manager at 9, and she (be) nervous because she (never speak) to him before. »",
+   "parts": [
+    {
+     "id": "tle-english-ten-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Choose the correct form: « Amina ____ in Bamenda for five years. »",
+     "choices": [
+      "has lived",
+      "lived (until last month)",
+      "is living",
+      "had living"
+     ],
+     "answer": 1,
+     "explanation": "Elle a quitté Bamenda le mois dernier : fait terminé, daté par le contexte : past simple *lived*. Sans ce contexte, *has lived* serait possible, mais ici l'action est terminée."
+    },
+    {
+     "id": "tle-english-ten-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Choose the correct form: « She ____ yet whether she will stay. »",
+     "choices": [
+      "didn't decide",
+      "isn't deciding",
+      "hasn't decided",
+      "won't decide"
+     ],
+     "answer": 2,
+     "explanation": "Avec *yet*, on emploie le present perfect : *hasn't decided*."
+    },
+    {
+     "id": "tle-english-ten-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Choose the correct form: « Tomorrow she ____ her new manager at 9. »",
+     "choices": [
+      "meets always",
+      "has met",
+      "met",
+      "is meeting"
+     ],
+     "answer": 3,
+     "explanation": "Rendez-vous arrangé : present continuous à valeur de futur. *Is meeting* convient."
+    },
+    {
+     "id": "tle-english-ten-06-d",
+     "kind": "open",
+     "points": 3,
+     "prompt": "Write two sentences about your plans for next weekend: one with « be going to » and one with « will ».",
+     "model": "I am going to visit my cousin in Yaoundé because we have already planned it. I think I will take the bus, but I will call her first if the tickets are too expensive.",
+     "rubric": [
+      "Be going to correct (1 point).",
+      "Will correct (1 point).",
+      "Grammar and spelling correct (1 point)."
+     ],
+     "explanation": "*Be going to* exprime un projet ; *will* une décision spontanée ou une prédiction."
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original, style Bac",
+   "method": "Temps selon le contexte.",
+   "mistakes": [
+    "Present perfect avec une date.",
+    "Will après if/when."
+   ]
+  },
+  {
+   "id": "tle-english-ten-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Which sentence uses the present perfect correctly?",
+   "choices": [
+    "I have known him in 2015.",
+    "I know him since ten years.",
+    "I am knowing him for ten years.",
+    "I have known him for ten years."
+   ],
+   "answer": 3,
+   "explanation": "For + durée avec un verbe d'état : present perfect.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original"
+  },
+  {
+   "id": "tle-english-ten-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "« I will call you when I ____ »",
+   "choices": [
+    "arrive",
+    "will arrive",
+    "arrived",
+    "am arriving always"
+   ],
+   "answer": 0,
+   "explanation": "Après when (futur), present simple.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original"
+  },
+  {
+   "id": "tle-english-ten-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Which verb is normally NOT used in the continuous form?",
+   "choices": [
+    "run",
+    "know",
+    "write",
+    "play"
+   ],
+   "answer": 1,
+   "explanation": "Know est un stative verb.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original"
+  },
+  {
+   "id": "tle-english-ten-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "« When we arrived, the film ____ »",
+   "choices": [
+    "starts",
+    "has started",
+    "had started",
+    "was start"
+   ],
+   "answer": 2,
+   "explanation": "Antérieur à un fait passé : past perfect.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original"
+  },
+  {
+   "id": "tle-english-ten-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Which expression goes with the past simple?",
+   "choices": [
+    "since 2020",
+    "for a long time",
+    "already",
+    "two years ago"
+   ],
+   "answer": 3,
+   "explanation": "Une durée finie datée avec « ago » : past simple.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "tle-english-tenses-aspect",
+   "source": "Exercice original"
+  }
+ ]
+}
