@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
@@ -86,7 +87,7 @@ public class LedgerService {
 
     // ------------------------------------------------------------------ export
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public byte[] export(Actor actor) {
         actor.require(Role.Permission.LEDGER_EXPORT, props.requireTotp());
         if (!keyring.present()) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Aucune clé de signature serveur : export impossible");
@@ -150,7 +151,7 @@ public class LedgerService {
 
     // ------------------------------------------------------------------ import
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public ImportReport importLedger(Actor actor, byte[] file, boolean dryRun) {
         actor.require(Role.Permission.LEDGER_IMPORT, props.requireTotp());
         if (file == null || file.length == 0) throw ApiException.badRequest("Fichier de registre vide");
@@ -295,9 +296,12 @@ public class LedgerService {
     }
 
     private Result applyIssuance(Entry e, boolean force) {
-        List<Long> exists = jdbc.queryForList("SELECT id FROM lic_license WHERE license_id = ?", Long.class, e.licenseId());
-        if (exists.isEmpty()) return Result.conflict("UNKNOWN_LICENSE", "Licence inconnue du serveur : " + e.licenseId());
-        LicenseService.LicenseRow l = licenses.lock(e.licenseId());
+        LicenseService.LicenseRow l;
+        try {
+            l = licenses.lock(e.licenseId());
+        } catch (ApiException ex) {
+            return Result.conflict("UNKNOWN_LICENSE", "Licence inconnue du serveur : " + e.licenseId());
+        }
         Integer dup = jdbc.queryForObject("SELECT COUNT(*) FROM lic_issuance WHERE license_pk = ? AND nonce = ?", Integer.class, l.id(), e.nonce());
         if (dup != null && dup > 0) return Result.duplicate();
         if (!force) {
@@ -333,9 +337,12 @@ public class LedgerService {
     }
 
     private Result applyTransfer(Entry e, long importId, boolean force) {
-        List<Long> exists = jdbc.queryForList("SELECT id FROM lic_license WHERE license_id = ?", Long.class, e.licenseId());
-        if (exists.isEmpty()) return Result.conflict("UNKNOWN_LICENSE", "Licence inconnue du serveur : " + e.licenseId());
-        LicenseService.LicenseRow l = licenses.lock(e.licenseId());
+        LicenseService.LicenseRow l;
+        try {
+            l = licenses.lock(e.licenseId());
+        } catch (ApiException ex) {
+            return Result.conflict("UNKNOWN_LICENSE", "Licence inconnue du serveur : " + e.licenseId());
+        }
         Integer dup = jdbc.queryForObject("SELECT COUNT(*) FROM lic_transfer WHERE license_pk = ? AND from_device_code = ? AND to_device_code = ? AND at = ?", Integer.class,
                 l.id(), e.fromDevice(), e.deviceCode(), Timestamp.from(e.at()));
         if (dup != null && dup > 0) return Result.duplicate();
@@ -390,7 +397,7 @@ public class LedgerService {
     }
 
     /** Manual decision: accept = apply the entry anyway (raising the quota if needed), reject = keep it out. The reason is mandatory. */
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public ConflictRow decide(Actor actor, long id, boolean accept, String reason) {
         actor.require(Role.Permission.LEDGER_IMPORT, props.requireTotp());
         String why = Validate.reason(reason);

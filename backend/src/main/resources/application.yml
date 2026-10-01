@@ -103,6 +103,24 @@ castbridge:
   geo:
     country-header: ${CASTBRIDGE_GEO_COUNTRY_HEADER:}
     database-file: ${CASTBRIDGE_GEOIP_DB:}
+  # Licence module (docs/LICENSE-ADMIN.md): OFF by default. Secrets (signing key, TOTP key, audit key) are FILES in the secrets
+  # folder, never values in this file.
+  licenses:
+    enabled: ${CASTBRIDGE_LICENSES_ENABLED:false}
+    public-routes: ${CASTBRIDGE_LICENSES_PUBLIC_ROUTES:false}
+    trial-issuance: ${CASTBRIDGE_LICENSES_TRIAL_ISSUANCE:manual}
+    secrets-dir: ${CASTBRIDGE_LICENSES_SECRETS_DIR:/run/secrets}
+    signing-key-file: ${CASTBRIDGE_LICENSES_SIGNING_KEY_FILE:license-signing.key}
+    totp-key: ${CASTBRIDGE_LICENSES_TOTP_KEY:}
+    require-totp: ${CASTBRIDGE_LICENSES_REQUIRE_TOTP:true}
+    default-grace-days: ${CASTBRIDGE_LICENSES_DEFAULT_GRACE_DAYS:14}
+    default-transfer-cap: ${CASTBRIDGE_LICENSES_DEFAULT_TRANSFER_CAP:2}
+    # trusted public keys of the offline tools: "kid:desktop:base64,kid:phone:base64"
+    ledger-keys: ${CASTBRIDGE_LICENSES_LEDGER_KEYS:}
+    max-import-bytes: ${CASTBRIDGE_LICENSES_MAX_IMPORT_BYTES:5000000}
+    max-import-entries: ${CASTBRIDGE_LICENSES_MAX_IMPORT_ENTRIES:5000}
+    burst-per10-min: ${CASTBRIDGE_LICENSES_BURST_PER_10_MIN:10}
+
   # Optional AI layer of the phone's library assistant (POST /api/v1/library/suggest, docs/LIBRARY-AGENT.md).
   # No key = no model: the endpoint answers available:false and calls nothing. NEVER put a key in this file.
   library:

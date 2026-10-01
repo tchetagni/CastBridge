@@ -234,6 +234,18 @@ de 30 minutes (cookie `CBSESSION` HttpOnly, Secure, SameSite=Strict), CSRF sur t
 L'API d'administration (`/api/v1/admin/**`, jeton Bearer) offre les mêmes fonctions pour les scripts et la CI ; le
 jeton n'ouvre pas l'interface web et la session web n'ouvre pas l'API.
 
+## Licences (module éteint par défaut)
+
+Gestion des licences, des postes, des bouquets et du registre hors ligne, dans `/admin/licenses` et `/api/v1/admin/licenses/**` : **guide complet dans `../docs/LICENSE-ADMIN.md`**
+(créer une licence, activer une TV, libérer un poste, importer le registre, révoquer, déploiement sûr, retour arrière, restauration).
+- **Interrupteur** : `CASTBRIDGE_LICENSES_ENABLED=false` (défaut) = les pages et l'API répondent 404 ; les migrations V50–V52 (tables `lic_*`, 4 colonnes de `admin_user`) s'appliquent quand même, sans rien changer d'existant.
+  `CASTBRIDGE_LICENSES_PUBLIC_ROUTES=false` (défaut) éteint séparément `GET /api/v1/revocations` et `GET /api/v1/entitlements/me`.
+- **Secrets en fichiers** (dossier `CASTBRIDGE_LICENSES_SECRETS_DIR`, défaut `/run/secrets`, jamais dans l'image ni le dépôt) : `license-signing.key` (clé Ed25519 du serveur, portée limitée : ni transfert ni « tout ouvert »), `license-totp.key` (AES-256, base64, protège les secrets TOTP), `license-audit.key` (HMAC du journal d'audit, optionnel).
+  Surcouche Docker facultative : `docker-compose.licenses.yml`.
+- **Variables** : `CASTBRIDGE_LICENSES_TRIAL_ISSUANCE` (`manual` par défaut), `_REQUIRE_TOTP` (`true`), `_DEFAULT_GRACE_DAYS` (14), `_DEFAULT_TRANSFER_CAP` (2), `_LEDGER_KEYS` (`kid:desktop|phone:base64,…`), `_MAX_IMPORT_BYTES`, `_MAX_IMPORT_ENTRIES`, `_BURST_PER_10_MIN`.
+- **Rôles** des comptes web : propriétaire (avec double authentification TOTP), support (lecture + réémission), lecture seule. Les comptes existants deviennent propriétaires.
+- **Sauvegarde** : `backup.sh` produit en plus `castbridge-licenses-*.sql.gz` (tables `lic_*` + `admin_user`) et journalise la tête du journal d'audit ; les trois fichiers de secrets sont à sauvegarder à part, chiffrés.
+
 ## Sauvegardes
 
 `backup.sh` : `mysqldump --single-transaction` compressé (vérifié complet), rétention 14 jours, et copie miroir des

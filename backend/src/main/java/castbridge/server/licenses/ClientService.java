@@ -84,7 +84,7 @@ public class ClientService {
     }
 
     /** Right of access / portability: everything held about the client, as JSON-ready data (no activation text: none is stored). */
-    @Transactional(readOnly = true)
+    @Transactional // not read-only: the export itself is written to the audit log (MySQL refuses writes on a read-only connection)
     public Map<String, Object> export(Actor actor, long id) {
         actor.require(Role.Permission.CLIENT_PRIVACY, props.requireTotp());
         ClientRow c = get(id);

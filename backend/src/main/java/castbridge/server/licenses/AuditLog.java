@@ -53,7 +53,8 @@ public class AuditLog {
     /** Appends one entry in the caller's transaction (the action and its audit line commit or fail together). */
     @Transactional(propagation = Propagation.MANDATORY)
     public void record(Actor actor, String action, String targetType, String targetId, String reason, Map<String, ?> details) {
-        Instant at = Instant.now().truncatedTo(ChronoUnit.MICROS);
+        // whole seconds: the hash must not depend on the fractional-second precision of the database or of its driver
+        Instant at = Instant.now().truncatedTo(ChronoUnit.SECONDS);
         // the head row serializes every writer: concurrent appends cannot fork the chain
         Map<String, Object> head = jdbc.queryForMap("SELECT last_id, last_hash FROM lic_audit_head WHERE id = 1 FOR UPDATE");
         long lastId = ((Number) head.get("last_id")).longValue();
@@ -71,8 +72,7 @@ public class AuditLog {
 
     String hash(String prev, Instant at, String actor, String role, String channel, String action, String type, String target,
                 String reason, String details) {
-        String data = String.join("\u001f", prev, Long.toString(at.truncatedTo(ChronoUnit.MICROS).getEpochSecond() * 1_000_000L
-                + at.getNano() / 1000), nz(clip(actor, 64)), role, channel, action, type, nz(clip(target, 64)), nz(reason), nz(details));
+        String data = String.join("\u001f", prev, Long.toString(at.getEpochSecond()), nz(clip(actor, 64)), role, channel, action, type, nz(clip(target, 64)), nz(reason), nz(details));
         byte[] bytes = data.getBytes(StandardCharsets.UTF_8);
         return HexFormat.of().formatHex(hmacKey == null ? Hashing.sha256(bytes) : Hashing.hmac("HmacSHA256", hmacKey, bytes));
     }

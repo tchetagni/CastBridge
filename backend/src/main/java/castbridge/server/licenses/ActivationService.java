@@ -17,6 +17,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -56,11 +57,11 @@ public class ActivationService {
 
     public String format() { return encoder.formatName(); }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public Activation issue(Actor actor, IssueRequest req, String channel) { return issue(actor, req, channel, false); }
 
     /** Re-issue for a seat that already exists (support role allowed): never consumes a seat. */
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public Activation reissue(Actor actor, String licenseId, String deviceCode, String channel) {
         return issue(actor, new IssueRequest(licenseId, deviceCode, null, null, null), channel, true);
     }
@@ -103,13 +104,15 @@ public class ActivationService {
                 Integer.toString(l.seatsAllowed())));
 
         // 2. idempotence: the same request returns the same activation, without a new seat nor a new row
-        List<Map<String, Object>> prior = jdbc.queryForList("SELECT * FROM lic_issuance WHERE idem_key = ?", idem);
+        record Prior(Instant issuedAt, String nonce, String fingerprint) {}
+        List<Prior> prior = jdbc.query("SELECT issued_at, nonce, token_fingerprint FROM lic_issuance WHERE idem_key = ?",
+                (rs, i) -> new Prior(rs.getTimestamp("issued_at").toInstant(), rs.getString("nonce"), rs.getString("token_fingerprint")), idem);
         if (!prior.isEmpty()) {
-            Map<String, Object> p = prior.get(0);
-            Instant issuedAt = ((Timestamp) p.get("issued_at")).toInstant();
-            ActivationRequest r = new ActivationRequest(licenseId, code, kind, products, issuedAt, expires, HexFormat.of().parseHex((String) p.get("nonce")), l.seatsAllowed());
+            Prior p = prior.get(0);
+            Instant issuedAt = p.issuedAt();
+            ActivationRequest r = new ActivationRequest(licenseId, code, kind, products, issuedAt, expires, HexFormat.of().parseHex(p.nonce()), l.seatsAllowed());
             SignedActivation s = signer.sign(r);
-            if (!s.fingerprint().equals(p.get("token_fingerprint"))) {
+            if (!s.fingerprint().equals(p.fingerprint())) {
                 throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "La réémission ne correspond pas à l'activation d'origine (clé ou format changés) : contactez le propriétaire");
             }
             licenses.allocateSeat(l, code, req.factorsHash(), now);
@@ -120,7 +123,7 @@ public class ActivationService {
         // 3. new activation: seat first (under the lock), then signature; a failure rolls everything back
         LicenseService.SeatOutcome seat = licenses.allocateSeat(l, code, req.factorsHash(), now);
         byte[] nonce = java.util.Arrays.copyOf(Hashing.sha256(("nonce|" + idem).getBytes(StandardCharsets.UTF_8)), 16);
-        Instant issuedAt = now.truncatedTo(ChronoUnit.MICROS);
+        Instant issuedAt = now.truncatedTo(ChronoUnit.SECONDS); // second granularity: survives any database precision
         SignedActivation s = signer.sign(new ActivationRequest(licenseId, code, kind, products, issuedAt, expires, nonce, l.seatsAllowed()));
         Long seatId = jdbc.queryForObject("SELECT id FROM lic_seat WHERE license_pk = ? AND device_code = ?", Long.class, l.id(), code);
         try {

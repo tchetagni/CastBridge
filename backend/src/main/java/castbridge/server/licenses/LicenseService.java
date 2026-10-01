@@ -23,6 +23,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -211,7 +212,7 @@ public class LicenseService {
     public record NewLicense(String licenseId, Long clientId, String kind, Integer seats, Instant startAt, Instant endAt, Integer graceDays,
                              Integer transferCap, List<String> productIds) {}
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public LicenseRow create(Actor actor, NewLicense n) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         if (n.clientId() == null) throw ApiException.badRequest("Client obligatoire");
@@ -277,14 +278,18 @@ public class LicenseService {
         }
     }
 
-    /** Takes the row lock of the licence: every seat decision happens under it. */
+    /**
+     * Takes the row lock of the licence: every seat decision happens under it. The mutating methods run in READ COMMITTED
+     * (MySQL's default REPEATABLE READ would freeze the snapshot at the first plain read and hide a seat committed by the
+     * transaction we waited for), so each statement after the lock sees the latest committed seats.
+     */
     LicenseRow lock(String licenseId) {
         List<Long> ids = jdbc.queryForList("SELECT id FROM lic_license WHERE license_id = ? FOR UPDATE", Long.class, licenseId);
         if (ids.isEmpty()) throw ApiException.notFound("Licence introuvable : " + licenseId);
         return get(licenseId);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public LicenseRow suspend(Actor actor, String licenseId, String reason) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         String why = Validate.reason(reason);
@@ -295,7 +300,7 @@ public class LicenseService {
         return get(licenseId);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public LicenseRow resume(Actor actor, String licenseId, String reason) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         String why = Validate.reason(reason);
@@ -307,7 +312,7 @@ public class LicenseService {
     }
 
     /** Revocation is final: the licence is also written to the revocation list served to the devices. */
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public LicenseRow revoke(Actor actor, String licenseId, String reason) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         String why = Validate.reason(reason);
@@ -322,7 +327,7 @@ public class LicenseService {
     }
 
     /** Sets a new end date (null = no end). Only forward in time unless a reason is given. */
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public LicenseRow extend(Actor actor, String licenseId, Instant newEnd, String reason) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         LicenseRow l = lock(licenseId);
@@ -337,7 +342,7 @@ public class LicenseService {
         return get(licenseId);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public LicenseRow setSeats(Actor actor, String licenseId, Integer seats, String reason) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         int n = Validate.range(seats, "Nombre de postes", 1, 1000);
@@ -351,7 +356,7 @@ public class LicenseService {
         return get(licenseId);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public LicenseRow update(Actor actor, String licenseId, Integer graceDays, Integer transferCap, String reason) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         LicenseRow l = lock(licenseId);
@@ -362,7 +367,7 @@ public class LicenseService {
         return get(licenseId);
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public LicenseRow addProduct(Actor actor, String licenseId, String productId, Instant endsAt) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         LicenseRow l = lock(licenseId);
@@ -374,7 +379,7 @@ public class LicenseService {
     }
 
     /** Frees a seat (the TV loses it at its next online check): reason mandatory. */
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public LicenseRow releaseSeat(Actor actor, String licenseId, String deviceCode, String reason) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         String why = Validate.reason(reason);
@@ -441,15 +446,16 @@ public class LicenseService {
 
     /** Marks as EXPIRED the licences whose grace period is over (the effective state is already computed on read). */
     @Scheduled(cron = "0 20 3 * * *", zone = "Africa/Douala")
-    @Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public int expireDue() {
         Instant now = Instant.now();
         int n = 0;
-        for (Map<String, Object> r : jdbc.queryForList("SELECT license_id, end_at, grace_days FROM lic_license WHERE state = 'ACTIVE' AND end_at < ? LIMIT 500", ts(now))) {
-            Instant end = ((Timestamp) r.get("end_at")).toInstant();
-            if (now.isAfter(end.plus(Duration.ofDays(((Number) r.get("grace_days")).longValue())))) {
-                setState((String) r.get("license_id"), "EXPIRED", "fin de validité et période de grâce dépassées");
-                audit.record(new Actor("system", Role.OWNER, "system", true), "LICENSE_EXPIRE", "LICENSE", (String) r.get("license_id"), null, null);
+        record Due(String licenseId, Instant end, int grace) {}
+        for (Due d : jdbc.query("SELECT license_id, end_at, grace_days FROM lic_license WHERE state = 'ACTIVE' AND end_at < ? LIMIT 500",
+                (rs, i) -> new Due(rs.getString("license_id"), rs.getTimestamp("end_at").toInstant(), rs.getInt("grace_days")), ts(now))) {
+            if (now.isAfter(d.end().plus(Duration.ofDays(d.grace())))) {
+                setState(d.licenseId(), "EXPIRED", "fin de validité et période de grâce dépassées");
+                audit.record(new Actor("system", Role.OWNER, "system", true), "LICENSE_EXPIRE", "LICENSE", d.licenseId(), null, null);
                 n++;
             }
         }
