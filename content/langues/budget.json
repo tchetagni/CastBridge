@@ -1,0 +1,18 @@
+{
+  "comment": "Enveloppe « Langues » (docs/LANGUES.md § 6). Source UNIQUE des poids : lue par tools/content-budget (Python) et par castbridge.core.langues.LangBudget (Kotlin, testé). 1 Go = 1024 Mo.",
+  "envelopeMb": 6144,
+  "restOfBaseMb": 3072,
+  "textLotMaxBytes": 3145728,
+  "mediaLotMaxBytes": 104857600,
+  "languageWeightsPercent": {"zh": 17, "ja": 17, "en": 13, "de": 12, "es": 11, "it": 10, "fr": 11},
+  "transversalPercent": 3,
+  "reservePercent": 6,
+  "levels": ["A0", "A1", "A2", "B1", "B2", "C1", "C2", "NATIF"],
+  "levelWeightsPercent": {
+    "standard": {"A0": 3, "A1": 9, "A2": 13, "B1": 17, "B2": 19, "C1": 17, "C2": 12, "NATIF": 10},
+    "cjk":      {"A0": 6, "A1": 12, "A2": 14, "B1": 16, "B2": 17, "C1": 14, "C2": 11, "NATIF": 10}
+  },
+  "profileOf": {"zh": "cjk", "ja": "cjk", "en": "standard", "de": "standard", "es": "standard", "it": "standard", "fr": "standard"},
+  "textKbPerLanguageLevel": {"standard": 2048, "cjk": 3072},
+  "mediaSplitPercent": {"audio": 55, "video": 25, "image": 12, "other": 8}
+}
