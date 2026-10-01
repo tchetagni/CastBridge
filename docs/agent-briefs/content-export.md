@@ -20,3 +20,9 @@ de contenu du dépôt CastBridge et ne supprime rien de `content/` là-bas. Ce c
 4. Pousser sur `claude/initial-import` (petits commits). Ne PAS pousser sur `main` : le propriétaire fusionnera.
 5. Rapport final en français, court, dans `docs/agent-reports/<date>-content-export.md` du dépôt CastBridge sur la branche `claude/content-export` (créée depuis integration/agents) :
    ce qui a été importé, tailles, ce qui manque, difficultés (LFS, droits), et la commande exacte pour copier vers le serveur (sans l'exécuter).
+
+## Coordination
+Suis `docs/COORDINATION.md` : rapport vivant `docs/agent-reports/content-export.md` sur ta branche (STATUT en première ligne, une ligne par jalon, QUESTION si bloqué).
+
+## Réponses du coordinateur
+(aucune pour l'instant ; relis cette section à chaque jalon)

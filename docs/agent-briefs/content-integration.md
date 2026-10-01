@@ -21,3 +21,9 @@ Lancer `cd android && gradle :core:test` (harnais `:core` seul si le plugin Andr
 5. Budgets : `gradle :core:checkLearnContent`, outil `content-budget` si présent : aucun lot TV > 3 Mo, aucun fichier > 50 Mo, total < 3 Go. Rapporter les tailles.
 6. Ne PAS déplacer le contenu vers `castbridge-content` dans ce chantier (le propriétaire le décidera après le vert) ; ne rien produire sur le serveur.
 Rapport final en français : tests avant/après, ce qui a été supprimé ou renommé (liste), budgets, ce qui reste à faire.
+
+## Coordination
+Suis `docs/COORDINATION.md` : rapport vivant `docs/agent-reports/content-integration.md` sur ta branche (STATUT en première ligne, une ligne par jalon, QUESTION si bloqué).
+
+## Réponses du coordinateur
+(aucune pour l'instant ; relis cette section à chaque jalon)

@@ -26,3 +26,9 @@ Lire : `docs/BT-PLUG-AND-PLAY.md` (service « CastBridge API »), `docs/ADMIN.md
    simultanées, TV qui ferme à 30 s) ; diagnostic dans « Mes TV » : nombre de liaisons ouvertes, dernier motif de fermeture.
 6. Docs : `docs/BT-PLUG-AND-PLAY.md`, `docs/HANDOFF.md` (entrée datée). Ne compile pas Android si impossible (le dire) : le propriétaire teste sur matériel.
 Rapport final court en français : correctif, tests avant/après, ce qui reste à valider sur la TV.
+
+## Coordination
+Suis `docs/COORDINATION.md` : rapport vivant `docs/agent-reports/bt-tunnel-keepalive.md` sur ta branche (STATUT en première ligne, une ligne par jalon, QUESTION si bloqué).
+
+## Réponses du coordinateur
+(aucune pour l'instant ; relis cette section à chaque jalon)
