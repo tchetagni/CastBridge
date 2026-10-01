@@ -20,3 +20,4 @@
 | deferred-orders | core/.../policy*, backend/ (file d'ordres), protocole Bluetooth additif, tâche téléphone | claude/deferred-orders | PRÊT À LANCER (format livré) | serveur → téléphone → TV : ordres différés signés, liste blanche d'actions |
 | content-langues-w1 | castbridge-content uniquement | idem | LANCÉ | Langues vague 1 : A0–A2 des 7 langues (lots libres SA / lots réservés séparés) |
 | owner-cli (local) | core/.../owner/OwnerCli.kt, docs/OWNER-CLI.md | integration/agents | LIVRÉ (coordinateur) | CLI d'activation Mac/Windows/Linux, 9 tests ; le reste de activation-tools bâtit dessus |
+| naming-patterns | core/.../library/agent/NameParser*, SeriesClassifier, docs/NAMING-PATTERNS.md, content/naming | claude/naming-patterns | LANCÉ | catalogue exhaustif des expressions du moteur d'organisation ; corpus DEV-3 / GELÉ-3 |

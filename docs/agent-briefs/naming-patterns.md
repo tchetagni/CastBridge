@@ -1,0 +1,32 @@
+# Brief : catalogue exhaustif des expressions régulières du moteur d'organisation
+
+Agent cloud. Base `origin/integration/agents`. Branche `claude/naming-patterns`. Protocole `docs/COORDINATION.md` (rapport vivant `docs/agent-reports/naming-patterns.md`). Pas de PR, pas de main. Français, aucun secret.
+Lire : `docs/LIBRARY-AGENT.md` (§ 3 moteur de règles, méthode des jeux DEV / GELÉ / GELÉ-DUR), `core/.../library/agent/NameParser.kt`, `Namer.kt`, `SeriesClassifier.kt`, `core/src/test/.../naming*` et `content/naming/`.
+
+## Pourquoi
+Le propriétaire veut que le moteur d'organisation (renommage, classement « Titre / Saison NN », dossiers) reconnaisse **toutes les formes réalistes** de noms de fichiers. Un défaut réel vient d'être trouvé sur sa TV : `Prison Break [S01-E08].avi` n'était **pas reconnu** (les crochets autour du marqueur d'épisode le faisaient prendre pour une étiquette de téléchargement), alors que `(S01-E08)` l'était. Il y en a d'autres : trouve-les **méthodiquement**, pas au hasard.
+
+## À faire
+1. **Inventaire par familles** (tableau dans `docs/NAMING-PATTERNS.md` : famille, exemple, expression, remarques, source, reconnu aujourd'hui oui/non) :
+   - **Épisodes** : `S01E01`, `S1E1`, `S01.E01`, `S01-E01`, `S01_E01`, `S01xE01`, `[S01-E01]`, `(S01E01)`, `1x01`, `101` / `0101` (numérotation à 3-4 chiffres), `Ep01`, `E01`, `#01`, `- 01 -`, `[01]`, numérotation **absolue des anime** (`- 1045`, `[Groupe] Titre - 12 [1080p]`), épisodes **multiples** (`S01E01E02`, `S01E01-E02`, `S01E01-02`), **spéciaux** (`S00E01`, `OVA`, `Special`, `SP01`), **séries quotidiennes par date** (`2024.03.15`, `15-03-2024`, `20240315`), parties (`Part 1`, `Pt.2`, `Partie 3`, `CD1`), **mots dans toutes les langues** (fr : Saison/Épisode, en, es : Temporada/Capítulo/Cap, pt : Temporada/Episódio, de : Staffel/Folge, it : Stagione/Episodio, nl, sv, pl, tr : Sezon/Bölüm, ru : Сезон/Серия, ar : الموسم/الحلقة, zh : 第1季第1集, ja : 第1期/第1話, ko : 시즌/화), **dossiers parents** (`Season 1`, `Saison 01`, `S01`, `Temporada 2`), chiffres romains (`Saison II`).
+   - **Films** : années (`(2010)`, `[2010]`, `.2010.`), suites et sagas (`2`, `II`, `Part Two`, `Chapitre 3`, `Vol. 2`), éditions (`Director's Cut`, `Extended`, `Unrated`, `Remastered`, `IMAX`, `3D`, `Remux`), titres commençant par un nombre (`2012`, `1917`, `300`, `21 Jump Street`) qui ne doivent **pas** être pris pour des épisodes ni des années.
+   - **Bruit de téléchargement** : sites, groupes de diffusion, qualités, codecs, langues (`VOSTFR`, `MULTi`, `TRUEFRENCH`, `FRENCH`, `VFF`, `VF2`, `SUBFRENCH`), `WEB-DL`, `WEBRip`, `HDTV`, `BluRay`, `x264/x265/HEVC/AV1`, `DDP5.1`, `Atmos`, `10bit`, `PROPER`, `REPACK`, `iNTERNAL`, **marques de plateformes** (`AMZN`, `NF`, `DSNP`, `HMAX`), sites **africains et nigérians** (NetNaija, o2tvseries, TFPDL, 9jarocks, Waploaded), **WhatsApp / Telegram** (`VID-20240315-WA0012`, `Video WhatsApp`, `@canal`, `t.me/…`, `Forwarded`).
+   - **Sous-titres** : `.fr.srt`, `.eng.forced.srt`, `.fr.sdh.srt`, `.pt-BR.ass`, `.vtt`, codes à 2 et 3 lettres.
+   - **Musique** : `01 - Titre`, `01. Titre`, `A1`, `CD1/`, `Disc 2`, `feat.`, `ft.`, `(Live)`, `(Remix)`, `(Official Audio)`, `[Lyrics]`.
+   - **Cours** : `01. Introduction`, `Section 1 - Lecture 2`, `Module 3`, `Chapitre 4 : …`, `Leçon 5`.
+   - **Séparateurs et casse** : points, tirets bas, espaces, camelCase (`PrisonBreakS01E08`), accents composés/décomposés (NFD), majuscules, caractères Unicode, noms de 255 caractères.
+2. **Sources honnêtes** : appuie-toi sur les **conventions documentées publiquement** (documentation de nommage de Kodi, Plex, Jellyfin, Sonarr, TheTVDB) pour **lister les formes** ; **ne copie aucune expression ni aucun code** de ces projets (licences GPL/propriétaires incompatibles avec la nôtre) : **dérive tes expressions toi-même** (salle blanche) et note, pour chaque famille, la source documentaire et sa licence dans le catalogue. Pas d'accès réseau dans ta session ? Dis-le et travaille depuis les formes que tu connais, en le signalant.
+3. **Corriger le moteur sans le dégrader** : chaque famille non reconnue devient une règle (dans `NameParser`, en petits commits), avec **test d'abord**. **Les faux positifs sont plus graves que les oublis** (prendre un film pour une épisode range un film dans un dossier de série) : conserve les seuils de confiance, privilégie « inconnu » à « faux ». Tous les tests existants restent verts ; les jeux **GELÉ** et **GELÉ-DUR** existants ne servent **jamais** à régler une règle.
+4. **Méthode de mesure** : crée un nouveau jeu de réglage **DEV-3** (noms générés + écrits à la main sur les familles ci-dessus) et un nouveau jeu **GELÉ-3** (titres disjoints, graine fixe, jamais utilisé pour régler) ; rapporte **avant / après** : taux de reconnaissance, taux de faux positifs (films pris pour séries, bruit conservé dans le titre, saison ou épisode faux), par famille.
+5. **Sécurité des expressions (ReDoS)** : teste chaque expression sur des noms **pathologiques** (255 caractères répétitifs, crochets imbriqués, millions de variantes) avec un **délai maximal** ; remplace toute expression à retour arrière catastrophique par un balayage manuel ou des constructions atomiques.
+6. **Regroupement des titres** pour le classement « Titre / Saison » : même série écrite `Prison Break`, `Prison.Break`, `PrisonBreak`, `Prison Break (2005)`, `prison break` → **un seul dossier** (clé de regroupement testée) ; **versions française et originale** (`La Casa de Papel` / `Money Heist`) : propose une petite **table d'alias** facultative et vérifiable, sans jamais fusionner à tort deux séries distinctes (`The Flash (1990)` / `The Flash (2014)`, `Doctor Who` 1963 / 2005).
+7. Livrables : `docs/NAMING-PATTERNS.md` (catalogue + méthode + mesures + limites connues), extensions de `NameParser`, `SeriesClassifier` adapté si besoin, corpus et tests, mise à jour de `docs/LIBRARY-AGENT.md`, `docs/HANDOFF.md`. `cd android && gradle :core:test` (banc « core seul » si le plugin Android est introuvable ; dis ce qui n'a pas été compilé).
+
+## À ne pas faire
+Pas d'IA ni d'appel réseau dans le moteur (il reste 100 % local) ; pas de renommage destructif ; pas de changement des noms de dossiers par défaut déjà documentés sans le dire ; pas de copie de code sous licence incompatible.
+
+## Coordination
+Rapport vivant ; relis la section ci-dessous à chaque jalon.
+
+## Réponses du coordinateur
+(aucune pour l'instant)
