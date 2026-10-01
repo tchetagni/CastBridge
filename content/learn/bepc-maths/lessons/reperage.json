@@ -1,0 +1,401 @@
+{
+ "chapter": "bepc-maths-reperage",
+ "lessons": [
+  {
+   "id": "bepc-maths-reperage",
+   "title": "Droites dans un repère : distance, milieu, équation",
+   "minutes": 35,
+   "programRef": "3e — Repérage, droites : équation réduite, parallélisme, perpendicularité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer la distance entre deux points et les coordonnées d'un milieu.",
+    "Déterminer l'équation réduite d'une droite, reconnaître des droites parallèles ou perpendiculaires."
+   ],
+   "prerequisites": [
+    "bepc-maths-affines",
+    "bepc-maths-pythagore"
+   ],
+   "exercises": [
+    "bepc-maths-reperage-01",
+    "bepc-maths-reperage-02",
+    "bepc-maths-reperage-03",
+    "bepc-maths-reperage-04",
+    "bepc-maths-reperage-05",
+    "bepc-maths-reperage-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-reperage-q1",
+    "bepc-maths-reperage-q2",
+    "bepc-maths-reperage-q3",
+    "bepc-maths-reperage-q4",
+    "bepc-maths-reperage-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Distance et milieu",
+     "md": "Dans un repère orthonormé, pour $A(x_A\\,;\\,y_A)$ et $B(x_B\\,;\\,y_B)$ :",
+     "tex": "AB=\\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}\\qquad I\\left(\\frac{x_A+x_B}{2}\\,;\\,\\frac{y_A+y_B}{2}\\right)"
+    },
+    {
+     "type": "illustration",
+     "caption": "La droite (AB) : y = x + 1 ; la droite d, perpendiculaire à (AB) en son milieu M : y = −x + 3.",
+     "alt": "Un repère avec les points A, B, leur milieu M et deux droites perpendiculaires qui se coupent en M.",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3,
+      "xmax": 6,
+      "ymin": -2,
+      "ymax": 6,
+      "grid": 1,
+      "w": 400,
+      "h": 300,
+      "curves": [
+       {
+        "expr": "x+1",
+        "color": "blue",
+        "label": "(AB)"
+       },
+       {
+        "expr": "-x+3",
+        "color": "red",
+        "label": "d"
+       }
+      ],
+      "points": [
+       {
+        "x": -2,
+        "y": -1,
+        "label": "A",
+        "color": "blue"
+       },
+       {
+        "x": 4,
+        "y": 5,
+        "label": "B",
+        "color": "blue"
+       },
+       {
+        "x": 1,
+        "y": 2,
+        "label": "M",
+        "color": "red"
+       }
+      ],
+      "segments": []
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équation réduite d'une droite",
+     "md": "Une droite non verticale a une équation $y=ax+b$ : $a$ est le **coefficient directeur** (pente), $b$ l'**ordonnée à l'origine**. Si la droite passe par $A$ et $B$ avec $x_A\\neq x_B$ : $a=\\frac{y_B-y_A}{x_B-x_A}$, puis on trouve $b$ avec les coordonnées de $A$.\n- Deux droites sont **parallèles** si elles ont le même $a$.\n- Elles sont **perpendiculaires** si $a\\times a'=-1$ (repère orthonormé)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : équation de (AB)",
+     "statement": "Détermine l'équation réduite de la droite passant par $A(-2\\,;\\,-1)$ et $B(4\\,;\\,5)$.",
+     "steps": [
+      {
+       "md": "Coefficient directeur :",
+       "tex": "a=\\frac{5-(-1)}{4-(-2)}=\\frac{6}{6}=1"
+      },
+      {
+       "md": "$A$ est sur la droite : $-1=1\\times(-2)+b$, donc $b=1$.",
+       "tex": "y=x+1"
+      }
+     ],
+     "answer": "**$y=x+1$**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : distance et milieu",
+     "statement": "Avec les mêmes points, calcule $AB$ et les coordonnées du milieu $M$ de $[AB]$.",
+     "steps": [
+      {
+       "md": "Distance :",
+       "tex": "AB=\\sqrt{6^2+6^2}=\\sqrt{72}=6\\sqrt{2}"
+      },
+      {
+       "md": "Milieu :",
+       "tex": "M\\left(\\frac{-2+4}{2}\\,;\\,\\frac{-1+5}{2}\\right)=(1\\,;\\,2)"
+      }
+     ],
+     "answer": "**$AB=6\\sqrt{2}\\approx8{,}49$ et $M(1\\,;\\,2)$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Inverser numérateur et dénominateur de la pente : $a=\\frac{\\Delta y}{\\Delta x}$.\n- Mal gérer les signes : $5-(-1)=6$.\n- Penser que perpendiculaire signifie « $a$ opposé » : c'est $a'=-\\frac{1}{a}$.\n- Oublier de vérifier que le point connu vérifie bien l'équation."
+    }
+   ],
+   "reviewNotes": [
+    "La condition de perpendicularité $a\\times a'=-1$ est parfois hors programme de 3e : à vérifier.",
+    "Repère orthonormé supposé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Calcule l'abscisse du milieu de $[AB]$ pour $A(2\\,;\\,-1)$ et $B(8\\,;\\,5)$.",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{2+8}{2}=5$.",
+   "id": "bepc-maths-reperage-01",
+   "tier": "application",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule la distance entre $A(1\\,;\\,2)$ et $B(4\\,;\\,6)$.",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\sqrt{3^2+4^2}=\\sqrt{25}=5$.",
+   "id": "bepc-maths-reperage-02",
+   "tier": "application",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le coefficient directeur de la droite passant par $A(0\\,;\\,1)$ et $B(2\\,;\\,7)$ ?",
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$a=\\frac{7-1}{2-0}=3$.",
+   "id": "bepc-maths-reperage-03",
+   "tier": "application",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'équation de la droite passant par $A(1\\,;\\,3)$ et $B(3\\,;\\,7)$ ?",
+   "choices": [
+    "$y=2x+3$",
+    "$y=2x+1$",
+    "$y=\\frac{1}{2}x+3$",
+    "$y=4x-1$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$a=\\frac{7-3}{3-1}=2$ ; $3=2\\times1+b$ donc $b=1$.",
+   "id": "bepc-maths-reperage-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est l'ordonnée à l'origine de la parallèle à $y=3x-2$ passant par $(1\\,;\\,5)$ ?",
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Même pente 3 : $5=3\\times1+b$ donc $b=2$.",
+   "id": "bepc-maths-reperage-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un repère orthonormé, on donne $A(-2\\,;\\,-1)$ et $B(4\\,;\\,5)$. On note $M$ le milieu de $[AB]$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'ordonnée de $M$ ?",
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\frac{-1+5}{2}=2$.",
+     "id": "bepc-maths-reperage-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le coefficient directeur de $(AB)$ ?",
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\frac{5-(-1)}{4-(-2)}=1$.",
+     "id": "bepc-maths-reperage-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'ordonnée à l'origine de $(AB)$ ?",
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$-1=1\\times(-2)+b$ donc $b=1$ : $(AB)\\,:\\,y=x+1$.",
+     "id": "bepc-maths-reperage-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "La médiatrice de $[AB]$ passe par $M$ et est perpendiculaire à $(AB)$. Quelle est son ordonnée à l'origine ?",
+     "answer": 3,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Pente $-1$ (car $1\\times(-1)=-1$) : $2=-1\\times1+b$ donc $b=3$ : $y=-x+3$.",
+     "id": "bepc-maths-reperage-06-d"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule $AB$, arrondie au centième.",
+     "answer": 8.49,
+     "tolerance": 0.01,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$AB=\\sqrt{36+36}=6\\sqrt{2}\\approx8{,}49$.",
+     "id": "bepc-maths-reperage-06-e"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Pente par $\\frac{\\Delta y}{\\Delta x}$ ; perpendiculaire : produit des pentes égal à $-1$.",
+   "figure": {
+    "kind": "plot",
+    "xmin": -3,
+    "xmax": 6,
+    "ymin": -2,
+    "ymax": 6,
+    "grid": 1,
+    "w": 400,
+    "h": 300,
+    "curves": [
+     {
+      "expr": "x+1",
+      "color": "blue",
+      "label": "(AB)"
+     },
+     {
+      "expr": "-x+3",
+      "color": "red",
+      "label": "d"
+     }
+    ],
+    "points": [
+     {
+      "x": -2,
+      "y": -1,
+      "label": "A",
+      "color": "blue"
+     },
+     {
+      "x": 4,
+      "y": 5,
+      "label": "B",
+      "color": "blue"
+     },
+     {
+      "x": 1,
+      "y": 2,
+      "label": "M",
+      "color": "red"
+     }
+    ],
+    "segments": []
+   },
+   "id": "bepc-maths-reperage-06",
+   "tier": "examen",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le milieu de $[AB]$ pour $A(0\\,;\\,0)$ et $B(6\\,;\\,-4)$ est...",
+   "choices": [
+    "$(6\\,;\\,-4)$",
+    "$(3\\,;\\,-2)$",
+    "$(-3\\,;\\,2)$",
+    "$(3\\,;\\,2)$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On fait la moyenne des abscisses et celle des ordonnées.",
+   "id": "bepc-maths-reperage-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux droites de même coefficient directeur sont...",
+   "choices": [
+    "perpendiculaires",
+    "sécantes",
+    "confondues obligatoirement",
+    "parallèles"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même pente : même direction.",
+   "id": "bepc-maths-reperage-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle droite est perpendiculaire à $y=2x+1$ ?",
+   "choices": [
+    "$y=-2x+1$",
+    "$y=2x-1$",
+    "$y=-\\frac{1}{2}x+4$",
+    "$y=\\frac{1}{2}x$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$2\\times\\left(-\\frac{1}{2}\\right)=-1$.",
+   "id": "bepc-maths-reperage-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans $y=-3x+7$, l'ordonnée à l'origine est...",
+   "choices": [
+    "−3",
+    "3",
+    "7",
+    "−7"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est le terme constant $b$.",
+   "id": "bepc-maths-reperage-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La distance entre $(0\\,;\\,0)$ et $(5\\,;\\,12)$ est...",
+   "choices": [
+    "17",
+    "7",
+    "60",
+    "13"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\sqrt{25+144}=13$.",
+   "id": "bepc-maths-reperage-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-reperage",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

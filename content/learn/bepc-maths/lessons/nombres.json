@@ -1,0 +1,912 @@
+{
+ "chapter": "bepc-maths-nombres",
+ "lessons": [
+  {
+   "id": "bepc-maths-radicaux",
+   "title": "Racines carrées et radicaux : règles de calcul",
+   "minutes": 30,
+   "programRef": "3e — Racines carrées : propriétés, simplification, écriture sans radical au dénominateur (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Simplifier une racine carrée.",
+    "Additionner, multiplier et rendre rationnel un dénominateur.",
+    "Utiliser les radicaux dans un problème de géométrie."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-maths-radicaux-01",
+    "bepc-maths-radicaux-02",
+    "bepc-maths-radicaux-03",
+    "bepc-maths-radicaux-04",
+    "bepc-maths-radicaux-05",
+    "bepc-maths-radicaux-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-radicaux-q1",
+    "bepc-maths-radicaux-q2",
+    "bepc-maths-radicaux-q3",
+    "bepc-maths-radicaux-q4",
+    "bepc-maths-radicaux-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Règles de calcul",
+     "md": "Pour $a\\geq0$ et $b\\geq0$ : $\\sqrt{a\\times b}=\\sqrt{a}\\times\\sqrt{b}$ ; pour $b>0$ : $\\sqrt{\\frac{a}{b}}=\\frac{\\sqrt{a}}{\\sqrt{b}}$ ; $\\sqrt{a^2}=a$ ; $(\\sqrt{a})^2=a$.\n\nAttention : en général $\\sqrt{a+b}\\neq\\sqrt{a}+\\sqrt{b}$."
+    },
+    {
+     "type": "illustration",
+     "caption": "La diagonale d'un carré de côté 1 vaut √2 (Pythagore).",
+     "alt": "Un carré de côté 1 avec sa diagonale de longueur racine de 2, et un carré d'aire 2.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 30,
+        "w": 140,
+        "h": 140,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 170,
+        "x2": 170,
+        "y2": 30,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 195,
+        "text": "1",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 18,
+        "y": 105,
+        "text": "1",
+        "size": 17,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 90,
+        "text": "√2",
+        "size": 18,
+        "color": "red",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 30,
+        "w": 140,
+        "h": 140,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 105,
+        "text": "aire 2",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Simplifier et regrouper",
+     "md": "- Pour simplifier, faire apparaître un carré parfait : $\\sqrt{50}=\\sqrt{25\\times2}=5\\sqrt{2}$.\n- On additionne les radicaux **semblables** : $3\\sqrt{2}+5\\sqrt{2}=8\\sqrt{2}$.\n- **Dénominateur sans radical** : on multiplie en haut et en bas par ce radical : $\\frac{6}{\\sqrt{3}}=\\frac{6\\sqrt{3}}{3}=2\\sqrt{3}$.\n- Utile : $(a+\\sqrt{b})(a-\\sqrt{b})=a^2-b$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : simplifier",
+     "statement": "Écris sous la forme $a\\sqrt{b}$ avec $b$ le plus petit possible : $\\sqrt{75}$. Puis calcule $A=\\sqrt{75}-2\\sqrt{3}$.",
+     "steps": [
+      {
+       "md": "On cherche le plus grand carré parfait qui divise 75 : 25.",
+       "tex": "\\sqrt{75}=\\sqrt{25\\times3}=5\\sqrt{3}"
+      },
+      {
+       "md": "Radicaux semblables :",
+       "tex": "A=5\\sqrt{3}-2\\sqrt{3}=3\\sqrt{3}"
+      }
+     ],
+     "answer": "**$\\sqrt{75}=5\\sqrt{3}$ et $A=3\\sqrt{3}$**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dénominateur et produit",
+     "statement": "Rends rationnel le dénominateur de $\\frac{6}{\\sqrt{3}}$ et calcule $(2+\\sqrt{3})(2-\\sqrt{3})$.",
+     "steps": [
+      {
+       "md": "On multiplie par $\\sqrt{3}$ en haut et en bas :",
+       "tex": "\\frac{6}{\\sqrt{3}}=\\frac{6\\sqrt{3}}{3}=2\\sqrt{3}"
+      },
+      {
+       "md": "Identité $(a+b)(a-b)=a^2-b^2$ :",
+       "tex": "(2+\\sqrt{3})(2-\\sqrt{3})=4-3=1"
+      }
+     ],
+     "answer": "**$2\\sqrt{3}$ et 1**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $\\sqrt{9+16}=3+4=7$ : c'est $\\sqrt{25}=5$.\n- Additionner des radicaux différents : $\\sqrt{2}+\\sqrt{3}\\neq\\sqrt{5}$.\n- Oublier le carré en sortant un facteur : $\\sqrt{50}=5\\sqrt{2}$ car on sort $\\sqrt{25}=5$, pas 25.\n- Écrire $\\sqrt{x^2}=x$ pour $x$ négatif."
+    }
+   ],
+   "reviewNotes": [
+    "La rationalisation du dénominateur peut n'être qu'esquissée dans le programme officiel : à vérifier.",
+    "Les valeurs approchées sont arrondies avec une calculatrice : tolérances indiquées."
+   ]
+  },
+  {
+   "id": "bepc-maths-encadrement",
+   "title": "Ordre, encadrement, valeurs approchées et intervalles",
+   "minutes": 30,
+   "programRef": "3e — Ordre dans R, encadrement, valeurs approchées, intervalles (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Comparer des nombres et utiliser les propriétés de l'ordre.",
+    "Encadrer un nombre et donner une valeur approchée (arrondi, troncature).",
+    "Utiliser la notation des intervalles."
+   ],
+   "prerequisites": [
+    "bepc-maths-radicaux"
+   ],
+   "exercises": [
+    "bepc-maths-encadrement-01",
+    "bepc-maths-encadrement-02",
+    "bepc-maths-encadrement-03",
+    "bepc-maths-encadrement-04",
+    "bepc-maths-encadrement-05",
+    "bepc-maths-encadrement-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-encadrement-q1",
+    "bepc-maths-encadrement-q2",
+    "bepc-maths-encadrement-q3",
+    "bepc-maths-encadrement-q4",
+    "bepc-maths-encadrement-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Ordre et opérations",
+     "md": "- On peut ajouter (ou retrancher) le même nombre aux deux membres d'une inégalité : $a<b\\Rightarrow a+c<b+c$.\n- Multiplier par un nombre **positif** conserve le sens ; multiplier par un nombre **négatif** le renverse.\n- Pour comparer $a$ et $b$ : on étudie le signe de $a-b$, ou on compare leurs carrés si les deux sont positifs."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Encadrement et valeur approchée",
+     "md": "Un **encadrement** de $x$ d'**amplitude** $0{,}01$ est une double inégalité $a\\leq x\\leq b$ avec $b-a=0{,}01$. Par exemple $1{,}41<\\sqrt{2}<1{,}42$ : 1,41 est la valeur approchée **par défaut** (et la troncature), 1,42 la valeur approchée **par excès**. L'**arrondi** est celle des deux qui est la plus proche."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'intervalle [1 ; 4[ : tous les nombres de 1 (inclus) à 4 (exclu).",
+     "alt": "Une droite graduée avec le segment de 1 à 4, 1 avec un rond plein et 4 avec un rond vide.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 110,
+      "items": [
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 70,
+        "x2": 410,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 64,
+        "x2": 30,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 96,
+        "text": "−1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 82,
+        "y1": 64,
+        "x2": 82,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 82,
+        "y": 96,
+        "text": "0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 134,
+        "y1": 64,
+        "x2": 134,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 134,
+        "y": 96,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 186,
+        "y1": 64,
+        "x2": 186,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 186,
+        "y": 96,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 238,
+        "y1": 64,
+        "x2": 238,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 238,
+        "y": 96,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 64,
+        "x2": 290,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 96,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 342,
+        "y1": 64,
+        "x2": 342,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 96,
+        "text": "5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 394,
+        "y1": 64,
+        "x2": 394,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 394,
+        "y": 96,
+        "text": "6",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 72,
+        "y1": 70,
+        "x2": 280,
+        "y2": 70,
+        "color": "blue",
+        "width": 6
+       },
+       {
+        "t": "circle",
+        "cx": 72,
+        "cy": 70,
+        "r": 8,
+        "fill": "blue",
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 280,
+        "cy": 70,
+        "r": 8,
+        "fill": "white",
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 72,
+        "y": 36,
+        "text": "[1",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 36,
+        "text": "4[",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Intervalles",
+     "md": "- $[a\\,;\\,b]$ : $a\\leq x\\leq b$ (bornes incluses).\n- $]a\\,;\\,b[$ : $a<x<b$ (bornes exclues).\n- $[a\\,;\\,b[$ : $a\\leq x<b$.\n- $[a\\,;\\,+\\infty[$ : $x\\geq a$. Le crochet est toujours ouvert du côté de l'infini."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : opérations sur un encadrement",
+     "statement": "On sait que $3\\leq x\\leq5$. Encadre $2x+1$ puis $-x$.",
+     "steps": [
+      {
+       "md": "On multiplie par 2 (positif) :",
+       "tex": "6\\leq2x\\leq10"
+      },
+      {
+       "md": "On ajoute 1 :",
+       "tex": "7\\leq2x+1\\leq11"
+      },
+      {
+       "md": "On multiplie par $-1$ : les inégalités se renversent :",
+       "tex": "-5\\leq-x\\leq-3"
+      }
+     ],
+     "answer": "**$7\\leq2x+1\\leq11$ et $-5\\leq-x\\leq-3$**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : comparer",
+     "statement": "Compare $3\\sqrt{2}$ et $4$.",
+     "steps": [
+      {
+       "md": "Les deux nombres sont positifs : on compare leurs carrés.",
+       "tex": "(3\\sqrt{2})^2=18\\quad 4^2=16"
+      },
+      {
+       "md": "Comme $18>16$, on a $3\\sqrt{2}>4$."
+      }
+     ],
+     "answer": "**$3\\sqrt{2}>4$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de renverser l'inégalité en multipliant par un négatif.\n- Soustraire les encadrements membre à membre : si $2\\leq a\\leq3$ et $1\\leq b\\leq2$, alors $0\\leq a-b\\leq2$ (on fait $a_{\\min}-b_{\\max}$ et $a_{\\max}-b_{\\min}$).\n- Confondre arrondi et troncature : 3,678 arrondi au centième donne 3,68 mais tronqué 3,67."
+    }
+   ],
+   "reviewNotes": [
+    "La notation des intervalles ([a ; b], ]a ; b[) peut être présentée avec des crochets tournés dans certains manuels (ex. [a ; b[ ou [a, b[)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Écris $\\sqrt{18}$ sous la forme $a\\sqrt{b}$.",
+   "choices": [
+    "$2\\sqrt{3}$",
+    "$9\\sqrt{2}$",
+    "$3\\sqrt{2}$",
+    "$6\\sqrt{3}$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$18=9\\times2$ donc $\\sqrt{18}=3\\sqrt{2}$.",
+   "id": "bepc-maths-radicaux-01",
+   "tier": "application",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $\\sqrt{12}\\times\\sqrt{3}$.",
+   "answer": 6,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\sqrt{12\\times3}=\\sqrt{36}=6$.",
+   "id": "bepc-maths-radicaux-02",
+   "tier": "application",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule $5\\sqrt{2}+3\\sqrt{2}$.",
+   "choices": [
+    "$8\\sqrt{2}$",
+    "$8\\sqrt{4}$",
+    "$15\\sqrt{2}$",
+    "$8$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On additionne les coefficients des radicaux semblables : $5+3=8$.",
+   "id": "bepc-maths-radicaux-03",
+   "tier": "application",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $(3+\\sqrt{2})(3-\\sqrt{2})$.",
+   "answer": 7,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$(a+b)(a-b)=a^2-b^2$ : $9-2=7$.",
+   "id": "bepc-maths-radicaux-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Rends rationnel le dénominateur de $\\frac{1}{\\sqrt{5}}$.",
+   "choices": [
+    "$\\frac{1}{5}$",
+    "$\\frac{\\sqrt{5}}{5}$",
+    "$\\sqrt{5}$",
+    "$\\frac{5}{\\sqrt{5}}$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On multiplie en haut et en bas par $\\sqrt{5}$ : $\\frac{\\sqrt{5}}{5}$.",
+   "id": "bepc-maths-radicaux-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un carré a une aire de 72 cm².",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la longueur de son côté ?",
+     "choices": [
+      "$36$ cm",
+      "$8\\sqrt{2}$ cm",
+      "$2\\sqrt{6}$ cm",
+      "$6\\sqrt{2}$ cm"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\sqrt{72}=\\sqrt{36\\times2}=6\\sqrt{2}$.",
+     "id": "bepc-maths-radicaux-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur de sa diagonale (en cm) ?",
+     "answer": 12,
+     "unit": "cm",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$d^2=72+72=144$ donc $d=12$ cm (on retrouve $6\\sqrt{2}\\times\\sqrt{2}=12$).",
+     "id": "bepc-maths-radicaux-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est son périmètre, arrondi au centième (en cm) ?",
+     "answer": 33.94,
+     "tolerance": 0.01,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$4\\times6\\sqrt{2}=24\\sqrt{2}\\approx33{,}94$ cm.",
+     "id": "bepc-maths-radicaux-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Le côté d'un carré d'aire $A$ est $\\sqrt{A}$ ; la diagonale est le côté multiplié par $\\sqrt{2}$.",
+   "id": "bepc-maths-radicaux-06",
+   "tier": "examen",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la valeur de $\\sqrt{49}\\times\\sqrt{4}$ ?",
+   "choices": [
+    "11",
+    "28",
+    "53",
+    "14"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$7\\times2=14$.",
+   "id": "bepc-maths-radicaux-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut $\\sqrt{200}$ simplifié ?",
+   "choices": [
+    "$10\\sqrt{2}$",
+    "$20\\sqrt{10}$",
+    "$2\\sqrt{10}$",
+    "$100\\sqrt{2}$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$200=100\\times2$ donc $\\sqrt{200}=10\\sqrt{2}$.",
+   "id": "bepc-maths-radicaux-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$\\sqrt{2}+\\sqrt{8}$ est égal à...",
+   "choices": [
+    "$\\sqrt{10}$",
+    "$4$",
+    "$2\\sqrt{2}$",
+    "$3\\sqrt{2}$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\sqrt{8}=2\\sqrt{2}$ donc la somme vaut $3\\sqrt{2}$.",
+   "id": "bepc-maths-radicaux-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle égalité est fausse ?",
+   "choices": [
+    "$\\sqrt{16\\times9}=\\sqrt{16}\\times\\sqrt{9}$",
+    "$(\\sqrt{7})^2=7$",
+    "$\\sqrt{16+9}=\\sqrt{16}+\\sqrt{9}$",
+    "$\\sqrt{25}=5$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\sqrt{25}=5$ alors que $4+3=7$.",
+   "id": "bepc-maths-radicaux-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le conjugué de $3+\\sqrt{2}$ ?",
+   "choices": [
+    "$-3-\\sqrt{2}$",
+    "$3-\\sqrt{2}$",
+    "$\\sqrt{2}+3$",
+    "$\\frac{1}{3+\\sqrt{2}}$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le conjugué change le signe devant le radical : le produit des deux est $9-2=7$.",
+   "id": "bepc-maths-radicaux-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-radicaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Arrondis 3,14159 au centième.",
+   "answer": 3.14,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le chiffre suivant (1) est inférieur à 5 : on garde 3,14.",
+   "id": "bepc-maths-encadrement-01",
+   "tier": "application",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel encadrement de $\\sqrt{2}\\approx1{,}41421$ est d'amplitude $0{,}01$ ?",
+   "choices": [
+    "$1{,}4<\\sqrt{2}<1{,}5$",
+    "$1{,}41<\\sqrt{2}<1{,}43$",
+    "$1{,}41<\\sqrt{2}<1{,}42$",
+    "$1<\\sqrt{2}<2$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$1{,}42-1{,}41=0{,}01$ et $1{,}41<1{,}41421<1{,}42$.",
+   "id": "bepc-maths-encadrement-02",
+   "tier": "application",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre appartient à l'intervalle $[-2\\,;\\,5[$ ?",
+   "choices": [
+    "$5$",
+    "$-3$",
+    "$-2$",
+    "$6$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La borne $-2$ est incluse (crochet fermé) ; 5 est exclu ; $-3$ et $6$ sont hors de l'intervalle.",
+   "id": "bepc-maths-encadrement-03",
+   "tier": "application",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "On sait que $3\\leq x\\leq5$. Quelle est la borne supérieure d'un encadrement de $2x+1$ ?",
+   "answer": 11,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$2\\times5+1=11$.",
+   "id": "bepc-maths-encadrement-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Compare $3\\sqrt{2}$ et $4$.",
+   "choices": [
+    "$3\\sqrt{2}<4$",
+    "$3\\sqrt{2}=4$",
+    "$3\\sqrt{2}>4$",
+    "On ne peut pas comparer"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$(3\\sqrt{2})^2=18>16=4^2$ et les deux nombres sont positifs.",
+   "id": "bepc-maths-encadrement-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un rectangle a une longueur $L$ et une largeur $l$ mesurées avec incertitude : $12{,}4\\leq L\\leq12{,}6$ et $7{,}9\\leq l\\leq8{,}1$ (en cm).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la plus petite valeur possible du périmètre (en cm) ?",
+     "answer": 40.6,
+     "tolerance": 0.01,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$2\\times(12{,}4+7{,}9)=2\\times20{,}3=40{,}6$.",
+     "id": "bepc-maths-encadrement-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la plus grande valeur possible du périmètre (en cm) ?",
+     "answer": 41.4,
+     "tolerance": 0.01,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$2\\times(12{,}6+8{,}1)=2\\times20{,}7=41{,}4$.",
+     "id": "bepc-maths-encadrement-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la plus petite valeur possible de l'aire (en cm²) ?",
+     "answer": 97.96,
+     "tolerance": 0.01,
+     "unit": "cm²",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Les nombres étant positifs : $12{,}4\\times7{,}9=97{,}96$.",
+     "id": "bepc-maths-encadrement-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Pour un produit de nombres positifs, on multiplie les bornes inférieures entre elles et les bornes supérieures entre elles.",
+   "id": "bepc-maths-encadrement-06",
+   "tier": "examen",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si $a<b$ et $c<0$, alors...",
+   "choices": [
+    "$ac<bc$",
+    "$ac=bc$",
+    "$a+c>b+c$",
+    "$ac>bc$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Multiplier par un négatif renverse l'ordre.",
+   "id": "bepc-maths-encadrement-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'arrondi de 2,678 au dixième est...",
+   "choices": [
+    "2,6",
+    "2,67",
+    "2,68",
+    "2,7"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le chiffre des centièmes (7) est supérieur à 4 : on arrondit au supérieur.",
+   "id": "bepc-maths-encadrement-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'intervalle $]1\\,;\\,3]$ contient...",
+   "choices": [
+    "1 mais pas 3",
+    "3 mais pas 1",
+    "1 et 3",
+    "ni 1 ni 3"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le crochet fermé est du côté de 3.",
+   "id": "bepc-maths-encadrement-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le sens de l'inégalité si on multiplie $2<5$ par $-1$ ?",
+   "choices": [
+    "$-2<-5$",
+    "$2>5$",
+    "$-2=-5$",
+    "$-2>-5$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le sens est renversé.",
+   "id": "bepc-maths-encadrement-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$x\\geq4$ s'écrit en intervalle...",
+   "choices": [
+    "$]4\\,;\\,+\\infty[$",
+    "$]-\\infty\\,;\\,4]$",
+    "$[4\\,;\\,+\\infty[$",
+    "$[4\\,;\\,+\\infty]$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La borne 4 est incluse et on est ouvert du côté de $+\\infty$.",
+   "id": "bepc-maths-encadrement-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-encadrement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

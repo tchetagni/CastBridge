@@ -1,0 +1,1298 @@
+{
+ "chapter": "4e-maths-geometrie",
+ "lessons": [
+  {
+   "id": "4e-maths-pythagore",
+   "title": "La relation de Pythagore",
+   "minutes": 30,
+   "programRef": "4e — Relation de Pythagore et sa réciproque (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer un côté d'un triangle rectangle.",
+    "Utiliser la réciproque pour montrer qu'un triangle est rectangle."
+   ],
+   "prerequisites": [
+    "4e-maths-racines"
+   ],
+   "exercises": [
+    "4e-maths-pythagore-01",
+    "4e-maths-pythagore-02",
+    "4e-maths-pythagore-03",
+    "4e-maths-pythagore-04",
+    "4e-maths-pythagore-05",
+    "4e-maths-pythagore-06"
+   ],
+   "selfCheck": [
+    "4e-maths-pythagore-q1",
+    "4e-maths-pythagore-q2",
+    "4e-maths-pythagore-q3",
+    "4e-maths-pythagore-q4",
+    "4e-maths-pythagore-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Théorème de Pythagore",
+     "md": "Dans un triangle **rectangle**, le carré de l'hypoténuse (le côté opposé à l'angle droit) est égal à la somme des carrés des deux autres côtés. Si $ABC$ est rectangle en $A$ :",
+     "tex": "BC^2=AB^2+AC^2"
+    },
+    {
+     "type": "illustration",
+     "caption": "Pour le triangle de côtés 3, 4 et 5 : 9+16=25.",
+     "alt": "Un triangle rectangle avec un carré sur chaque côté, d'aires 16, 9 et 25.",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 320,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         0,
+         100,
+         120,
+         100,
+         120,
+         220,
+         0,
+         220
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         120,
+         220,
+         210,
+         220,
+         210,
+         310,
+         120,
+         310
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         120,
+         100,
+         210,
+         220,
+         330,
+         130,
+         240,
+         10
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         120,
+         220,
+         120,
+         100,
+         210,
+         220
+        ],
+        "fill": "white",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 168,
+        "text": "16",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 165,
+        "y": 270,
+        "text": "9",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 115,
+        "text": "25",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "angle",
+        "x": 120,
+        "y": 220,
+        "from": 0,
+        "to": 90,
+        "r": 16,
+        "color": "red",
+        "right": true
+       },
+       {
+        "t": "text",
+        "x": 108,
+        "y": 240,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 108,
+        "y": 96,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 240,
+        "text": "C",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Réciproque",
+     "md": "Si, dans un triangle, le carré du plus grand côté est égal à la somme des carrés des deux autres, alors le triangle est **rectangle**, l'angle droit étant en face du plus grand côté. Si l'égalité est fausse, le triangle n'est pas rectangle."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer un côté",
+     "statement": "Dans $ABC$ rectangle en $A$, $AB=6$ cm et $AC=8$ cm. Calcule $BC$. Puis, avec $BC=13$ et $AB=5$, calcule $AC$.",
+     "steps": [
+      {
+       "md": "Hypoténuse $BC$ :",
+       "tex": "BC^2=6^2+8^2=36+64=100 \\Rightarrow BC=10"
+      },
+      {
+       "md": "Côté $AC$ :",
+       "tex": "AC^2=13^2-5^2=169-25=144 \\Rightarrow AC=12"
+      }
+     ],
+     "answer": "**$BC=10$ cm et $AC=12$ cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : réciproque",
+     "statement": "Le triangle de côtés 7, 24 et 25 est-il rectangle ? Et celui de côtés 5, 6 et 8 ?",
+     "steps": [
+      {
+       "md": "Plus grand côté 25 :",
+       "tex": "25^2=625\\quad 7^2+24^2=49+576=625"
+      },
+      {
+       "md": "Égalité vraie : le premier triangle est rectangle."
+      },
+      {
+       "md": "Plus grand côté 8 :",
+       "tex": "8^2=64\\quad 5^2+6^2=61"
+      }
+     ],
+     "answer": "**Le premier est rectangle ; le second ne l'est pas (64 ≠ 61).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Appliquer Pythagore à un triangle qui n'est pas rectangle.\n- Oublier que l'hypoténuse est le plus long côté : si on cherche un côté de l'angle droit, on **soustrait**.\n- Terminer avec $BC^2=100$ sans prendre la racine carrée.\n- Pour la réciproque, comparer avec un autre côté que le plus grand."
+    }
+   ],
+   "reviewNotes": [
+    "Le pack BEPC (3e) reprend ce théorème avec des problèmes plus longs ; ici, niveau 4e."
+   ]
+  },
+  {
+   "id": "4e-maths-milieux",
+   "title": "Droite des milieux et initiation au théorème de Thalès",
+   "minutes": 30,
+   "programRef": "4e — Droite des milieux ; initiation au théorème de Thalès (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser la droite des milieux et sa réciproque.",
+    "Appliquer des rapports égaux dans un triangle coupé par une parallèle à un côté."
+   ],
+   "prerequisites": [
+    "4e-maths-proportionnalite"
+   ],
+   "exercises": [
+    "4e-maths-milieux-01",
+    "4e-maths-milieux-02",
+    "4e-maths-milieux-03",
+    "4e-maths-milieux-04",
+    "4e-maths-milieux-05",
+    "4e-maths-milieux-06"
+   ],
+   "selfCheck": [
+    "4e-maths-milieux-q1",
+    "4e-maths-milieux-q2",
+    "4e-maths-milieux-q3",
+    "4e-maths-milieux-q4",
+    "4e-maths-milieux-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Droite des milieux",
+     "md": "Si $I$ et $J$ sont les milieux de $[AB]$ et $[AC]$, alors $(IJ)$ est parallèle à $(BC)$ et $IJ=\\frac{1}{2}BC$.\n\n**Réciproque** : si $I$ est le milieu de $[AB]$ et si la parallèle à $(BC)$ passant par $I$ coupe $[AC]$ en $J$, alors $J$ est le milieu de $[AC]$."
+    },
+    {
+     "type": "illustration",
+     "caption": "I et J sont les milieux de [AB] et [AC] : IJ est la moitié de BC.",
+     "alt": "Un triangle ABC avec le segment IJ joignant les milieux de AB et AC, parallèle à BC et deux fois plus court.",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 260,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         180,
+         30,
+         40,
+         220,
+         340,
+         220
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 20,
+        "text": "A",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 238,
+        "text": "B",
+        "size": 18,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 238,
+        "text": "C",
+        "size": 18,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 125,
+        "x2": 250,
+        "y2": 125,
+        "color": "blue",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 98,
+        "y": 128,
+        "text": "I",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 128,
+        "text": "J",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 112,
+        "text": "7 cm",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 252,
+        "text": "BC = 14 cm",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Initiation à Thalès",
+     "md": "Si $M\\in[AB]$, $N\\in[AC]$ et $(MN)\\parallel(BC)$, alors les rapports sont égaux :",
+     "tex": "\\frac{AM}{AB}=\\frac{AN}{AC}=\\frac{MN}{BC}"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : droite des milieux",
+     "statement": "Dans $ABC$, $AB=8$, $AC=10$, $BC=12$ (cm). $I$, $J$, $K$ sont les milieux de $[AB]$, $[AC]$ et $[BC]$. Quel est le périmètre de $IJK$ ?",
+     "steps": [
+      {
+       "md": "Chaque côté de $IJK$ est la moitié du côté parallèle de $ABC$ : $IJ=6$, $IK=5$ (côté parallèle à $AC$), $JK=4$."
+      },
+      {
+       "md": "Périmètre :",
+       "tex": "6+5+4=15"
+      }
+     ],
+     "answer": "**15 cm** (la moitié du périmètre de ABC, qui vaut 30 cm)"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : Thalès",
+     "statement": "$(MN)\\parallel(BC)$, $AM=3$, $AB=5$, $AN=4{,}5$ et $BC=10$ (cm). Calcule $AC$ et $MN$.",
+     "steps": [
+      {
+       "md": "On écrit les rapports :",
+       "tex": "\\frac{3}{5}=\\frac{4{,}5}{AC}=\\frac{MN}{10}"
+      },
+      {
+       "md": "Produit en croix :",
+       "tex": "AC=\\frac{4{,}5\\times5}{3}=7{,}5"
+      },
+      {
+       "md": "De même :",
+       "tex": "MN=\\frac{3\\times10}{5}=6"
+      }
+     ],
+     "answer": "**$AC=7{,}5$ cm et $MN=6$ cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser la propriété sans avoir justifié que les droites sont parallèles (ou que les points sont des milieux).\n- Mélanger les côtés des rapports : $AM$ va avec $AB$ (petit sur grand, même sommet $A$).\n- Dire que $IJ=BC\\div2$ alors que $I$ et $J$ ne sont pas des milieux."
+    }
+   ],
+   "reviewNotes": [
+    "Dans certains programmes, le théorème de Thalès complet est réservé à la 3e ; ici seulement le cas du triangle."
+   ]
+  },
+  {
+   "id": "4e-maths-cosinus",
+   "title": "Le cosinus d'un angle aigu",
+   "minutes": 30,
+   "programRef": "4e — Cosinus d'un angle aigu (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir le cosinus d'un angle aigu dans un triangle rectangle.",
+    "Calculer une longueur ou un angle avec le cosinus (calculatrice)."
+   ],
+   "prerequisites": [
+    "4e-maths-pythagore",
+    "4e-maths-fractions"
+   ],
+   "exercises": [
+    "4e-maths-cosinus-01",
+    "4e-maths-cosinus-02",
+    "4e-maths-cosinus-03",
+    "4e-maths-cosinus-04",
+    "4e-maths-cosinus-05",
+    "4e-maths-cosinus-06"
+   ],
+   "selfCheck": [
+    "4e-maths-cosinus-q1",
+    "4e-maths-cosinus-q2",
+    "4e-maths-cosinus-q3",
+    "4e-maths-cosinus-q4",
+    "4e-maths-cosinus-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cosinus",
+     "md": "Dans un triangle rectangle, le cosinus d'un angle aigu est le quotient du **côté adjacent** à cet angle par l'**hypoténuse**. Si $ABC$ est rectangle en $A$ :",
+     "tex": "\\cos\\widehat{B}=\\frac{AB}{BC}=\\frac{\\text{côté adjacent}}{\\text{hypoténuse}}"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le cosinus de l'angle en B compare le côté adjacent à l'hypoténuse.",
+     "alt": "Un triangle rectangle en A avec l'angle B marqué, le côté adjacent, l'hypoténuse et le côté opposé nommés.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 250,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         200,
+         300,
+         200,
+         300,
+         60
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "angle",
+        "x": 300,
+        "y": 200,
+        "from": 90,
+        "to": 180,
+        "r": 18,
+        "color": "red",
+        "right": true
+       },
+       {
+        "t": "angle",
+        "x": 40,
+        "y": 200,
+        "from": 0,
+        "to": 28,
+        "r": 44,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 218,
+        "text": "B",
+        "size": 18,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 218,
+        "text": "A",
+        "size": 18,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 48,
+        "text": "C",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 222,
+        "text": "côté adjacent à B",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 112,
+        "text": "hypoténuse",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 135,
+        "text": "côté opposé",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Valeurs à connaître",
+     "md": "$\\cos60\\degree=0{,}5$, $\\cos45\\degree\\approx0{,}71$, $\\cos30\\degree\\approx0{,}87$, $\\cos0\\degree=1$ et $\\cos90\\degree=0$. Le cosinus d'un angle aigu est toujours compris entre 0 et 1 (l'hypoténuse est le plus grand côté). Avec la calculatrice, la touche « cos⁻¹ » donne l'angle à partir du cosinus."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : trouver un angle",
+     "statement": "$ABC$ est rectangle en $A$ avec $AB=4$ cm et $BC=5$ cm. Calcule l'angle $\\widehat{B}$ au degré près.",
+     "steps": [
+      {
+       "md": "Cosinus de B :",
+       "tex": "\\cos\\widehat{B}=\\frac{AB}{BC}=\\frac{4}{5}=0{,}8"
+      },
+      {
+       "md": "Avec la calculatrice (cos⁻¹) :",
+       "tex": "\\widehat{B}\\approx36{,}9\\degree"
+      }
+     ],
+     "answer": "**$\\widehat{B}\\approx37\\degree$**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : trouver un côté",
+     "statement": "$ABC$ est rectangle en $A$, $BC=12$ cm et $\\widehat{B}=40\\degree$. Calcule $AB$ au dixième près.",
+     "steps": [
+      {
+       "md": "On écrit le cosinus :",
+       "tex": "\\cos40\\degree=\\frac{AB}{12}"
+      },
+      {
+       "md": "Donc :",
+       "tex": "AB=12\\times\\cos40\\degree\\approx12\\times0{,}766\\approx9{,}2"
+      }
+     ],
+     "answer": "**$AB\\approx9{,}2$ cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser le cosinus avec le côté **opposé** : il faut le côté adjacent.\n- Inverser le quotient : le cosinus est toujours inférieur ou égal à 1.\n- Calculatrice en radians ou en grades au lieu des degrés.\n- Appliquer le cosinus à l'angle droit ou dans un triangle non rectangle."
+    }
+   ],
+   "reviewNotes": [
+    "Le sinus et la tangente sont habituellement vus en 3e ; vérifier si le cosinus est bien au programme de 4e.",
+    "La calculatrice doit être réglée en degrés. Les valeurs sont arrondies."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "ABC est rectangle en A avec $AB=9$ cm et $AC=12$ cm. Calcule $BC$ (en cm).",
+   "answer": 15,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$BC^2=81+144=225$ donc $BC=15$ cm.",
+   "id": "4e-maths-pythagore-01",
+   "tier": "application",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "ABC est rectangle en A avec $BC=17$ cm et $AB=8$ cm. Calcule $AC$ (en cm).",
+   "answer": 15,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$AC^2=17^2-8^2=289-64=225$ donc $AC=15$ cm.",
+   "mistakes": [
+    "Additionner au lieu de soustraire quand on cherche un côté de l'angle droit."
+   ],
+   "id": "4e-maths-pythagore-02",
+   "tier": "application",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un triangle de côtés 6 cm, 8 cm et 10 cm est rectangle.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$6^2+8^2=36+64=100=10^2$ : la réciproque de Pythagore s'applique.",
+   "id": "4e-maths-pythagore-03",
+   "tier": "application",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un rectangle mesure 24 cm sur 7 cm. Quelle est la longueur de sa diagonale (en cm) ?",
+   "answer": 25,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La diagonale est l'hypoténuse d'un triangle rectangle de côtés 24 et 7 : $576+49=625$ donc $25$ cm.",
+   "id": "4e-maths-pythagore-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle a pour côtés 8, 15 et 16. Que peut-on dire ?",
+   "choices": [
+    "Il n'est pas rectangle",
+    "Il est rectangle",
+    "Il est équilatéral",
+    "On ne peut pas conclure"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$8^2+15^2=64+225=289$ alors que $16^2=256$ : l'égalité est fausse.",
+   "id": "4e-maths-pythagore-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une échelle de 2,5 m est appuyée contre un mur vertical. Le pied de l'échelle est à 1,5 m du mur.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "À quelle hauteur (en m) l'échelle touche-t-elle le mur ?",
+     "answer": 2,
+     "unit": "m",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$h^2=2{,}5^2-1{,}5^2=6{,}25-2{,}25=4$ donc $h=2$ m.",
+     "id": "4e-maths-pythagore-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On éloigne le pied de l'échelle à 0,7 m du mur, l'échelle touchant toujours le mur. Quelle hauteur (en m) atteint-elle maintenant ?",
+     "answer": 2.4,
+     "unit": "m",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$h^2=2{,}5^2-0{,}7^2=6{,}25-0{,}49=5{,}76$ donc $h=2{,}4$ m.",
+     "id": "4e-maths-pythagore-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Le sol, le mur et l'échelle forment un triangle rectangle dont l'échelle est l'hypoténuse.",
+   "id": "4e-maths-pythagore-06",
+   "tier": "examen",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un triangle ABC rectangle en B, quelle est l'hypoténuse ?",
+   "choices": [
+    "[AB]",
+    "[BC]",
+    "[AC]",
+    "On ne sait pas"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'hypoténuse est opposée à l'angle droit, donc c'est [AC].",
+   "id": "4e-maths-pythagore-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle rectangle a des côtés de l'angle droit 3 et 4. Quelle est l'hypoténuse ?",
+   "choices": [
+    "7",
+    "12",
+    "25",
+    "5"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$9+16=25$ donc l'hypoténuse est $\\sqrt{25}=5$.",
+   "id": "4e-maths-pythagore-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle égalité traduit Pythagore dans $RST$ rectangle en $S$ ?",
+   "choices": [
+    "$RS^2=RT^2+ST^2$",
+    "$RT=RS+ST$",
+    "$ST^2=RS^2+RT^2$",
+    "$RT^2=RS^2+ST^2$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'hypoténuse est $[RT]$ : son carré est la somme des carrés des deux autres côtés.",
+   "id": "4e-maths-pythagore-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle de côtés 5, 12, 13 est...",
+   "choices": [
+    "équilatéral",
+    "rectangle",
+    "isocèle en 12",
+    "impossible"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$25+144=169=13^2$ : il est rectangle.",
+   "id": "4e-maths-pythagore-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La diagonale d'un carré de côté 1 vaut...",
+   "choices": [
+    "2",
+    "1",
+    "$\\frac{1}{2}$",
+    "$\\sqrt{2}$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$d^2=1^2+1^2=2$ donc $d=\\sqrt{2}$.",
+   "id": "4e-maths-pythagore-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-pythagore",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$I$ et $J$ sont les milieux de $[AB]$ et $[AC]$ ; $BC=18$ cm. Calcule $IJ$ (en cm).",
+   "answer": 9,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$IJ=\\frac{1}{2}BC=9$ cm.",
+   "id": "4e-maths-milieux-01",
+   "tier": "application",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$I$ et $J$ sont les milieux de $[AB]$ et $[AC]$ ; $IJ=5{,}5$ cm. Calcule $BC$ (en cm).",
+   "answer": 11,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$BC=2\\times IJ=11$ cm.",
+   "id": "4e-maths-milieux-02",
+   "tier": "application",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$I$ et $J$ sont les milieux de $[AB]$ et $[AC]$. Quelle conclusion est correcte ?",
+   "choices": [
+    "$(IJ)\\perp(BC)$",
+    "$IJ=BC$",
+    "$(IJ)\\parallel(BC)$",
+    "$(IJ)\\parallel(AB)$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La droite des milieux est parallèle au troisième côté.",
+   "id": "4e-maths-milieux-03",
+   "tier": "application",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$(MN)\\parallel(BC)$ avec $AM=2$, $AB=5$ et $AC=10$. Calcule $AN$.",
+   "answer": 4,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$\\frac{AM}{AB}=\\frac{AN}{AC}$ donc $AN=\\frac{2\\times10}{5}=4$.",
+   "id": "4e-maths-milieux-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un triangle ABC a pour côtés $AB=14$, $AC=18$, $BC=22$ (cm). Quel est le périmètre du triangle formé par les milieux des trois côtés (en cm) ?",
+   "answer": 27,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le périmètre est la moitié de celui de ABC : $(14+18+22)\\div2=54\\div2=27$ cm.",
+   "id": "4e-maths-milieux-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans le triangle $ABC$, $M\\in[AB]$ et $N\\in[AC]$ avec $(MN)\\parallel(BC)$. On donne $AM=4$, $AB=10$, $AN=6$ et $BC=15$ (cm).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule $AC$ (en cm).",
+     "answer": 15,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\frac{AM}{AB}=\\frac{AN}{AC}$ : $\\frac{4}{10}=\\frac{6}{AC}$ donc $AC=\\frac{6\\times10}{4}=15$ cm.",
+     "id": "4e-maths-milieux-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule $MN$ (en cm).",
+     "answer": 6,
+     "unit": "cm",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$\\frac{MN}{BC}=\\frac{4}{10}$ donc $MN=0{,}4\\times15=6$ cm.",
+     "id": "4e-maths-milieux-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule $NC$ (en cm).",
+     "answer": 9,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$N$ est sur $[AC]$ : $NC=AC-AN=15-6=9$ cm.",
+     "id": "4e-maths-milieux-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Écrire d'abord les rapports égaux avec le sommet A, puis choisir ceux qui contiennent l'inconnue.",
+   "figure": {
+    "kind": "shapes",
+    "w": 380,
+    "h": 260,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       180,
+       30,
+       40,
+       220,
+       340,
+       220
+      ],
+      "fill": "lightyellow",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 180,
+      "y": 20,
+      "text": "A",
+      "size": 18,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 28,
+      "y": 238,
+      "text": "B",
+      "size": 18,
+      "color": "ink",
+      "anchor": "end",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 352,
+      "y": 238,
+      "text": "C",
+      "size": 18,
+      "color": "ink",
+      "anchor": "start",
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 124,
+      "y1": 106,
+      "x2": 244,
+      "y2": 106,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "text",
+      "x": 112,
+      "y": 104,
+      "text": "M",
+      "size": 16,
+      "color": "ink",
+      "anchor": "end",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 256,
+      "y": 104,
+      "text": "N",
+      "size": 16,
+      "color": "ink",
+      "anchor": "start",
+      "bold": true
+     }
+    ]
+   },
+   "id": "4e-maths-milieux-06",
+   "tier": "examen",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un triangle, un segment joignant les milieux de deux côtés mesure...",
+   "choices": [
+    "le double du troisième côté",
+    "autant que le troisième côté",
+    "le tiers du troisième côté",
+    "la moitié du troisième côté"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la propriété de la droite des milieux.",
+   "id": "4e-maths-milieux-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec $(MN)\\parallel(BC)$, quelle égalité est vraie ?",
+   "choices": [
+    "$\\frac{AM}{AB}=\\frac{AN}{AC}$",
+    "$\\frac{AM}{AB}=\\frac{AC}{AN}$",
+    "$\\frac{AM}{MB}=\\frac{AN}{AC}$",
+    "$\\frac{AM}{BC}=\\frac{AN}{AB}$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On compare les segments partant de A et leurs correspondants.",
+   "id": "4e-maths-milieux-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si $I$ est le milieu de $[AB]$ et $(IJ)\\parallel(BC)$ avec $J\\in[AC]$, alors...",
+   "choices": [
+    "J est au tiers de [AC]",
+    "IJ = BC",
+    "J est le milieu de [AC]",
+    "(IJ) est perpendiculaire à (AC)"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la réciproque de la droite des milieux.",
+   "id": "4e-maths-milieux-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$IJ=7$ cm est la droite des milieux : quelle est la longueur du troisième côté ?",
+   "choices": [
+    "3,5 cm",
+    "14 cm",
+    "7 cm",
+    "21 cm"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le troisième côté vaut $2\\times IJ$.",
+   "id": "4e-maths-milieux-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le coefficient de réduction si $AM=3$ et $AB=12$ ?",
+   "choices": [
+    "4",
+    "0,75",
+    "0,25",
+    "9"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{3}{12}=0{,}25$.",
+   "id": "4e-maths-milieux-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-milieux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "ABC rectangle en A : $AB=6$ cm et $BC=10$ cm. Calcule $\\cos\\widehat{B}$.",
+   "answer": 0.6,
+   "tolerance": 0.001,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\cos\\widehat{B}=\\frac{6}{10}=0{,}6$.",
+   "id": "4e-maths-cosinus-01",
+   "tier": "application",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "ABC rectangle en A : $BC=20$ cm et $\\widehat{B}=60\\degree$. Calcule $AB$ (en cm).",
+   "answer": 10,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$AB=20\\times\\cos60\\degree=20\\times0{,}5=10$ cm.",
+   "id": "4e-maths-cosinus-02",
+   "tier": "application",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans ABC rectangle en A, quel est le côté adjacent à l'angle $\\widehat{C}$ ?",
+   "choices": [
+    "[AB]",
+    "[BC]",
+    "[AC]",
+    "[BA] et [AC]"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le côté adjacent à C (qui n'est pas l'hypoténuse) est [AC].",
+   "id": "4e-maths-cosinus-03",
+   "tier": "application",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "ABC rectangle en A : $\\cos\\widehat{B}=0{,}5$. Quelle est la mesure de $\\widehat{B}$ (en degrés) ?",
+   "answer": 60,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On cherche l'angle dont le cosinus vaut 0,5 : c'est $60\\degree$.",
+   "id": "4e-maths-cosinus-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "ABC rectangle en A : $AB=7{,}2$ cm et $\\cos\\widehat{B}=0{,}6$. Calcule $BC$ (en cm).",
+   "answer": 12,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$BC=\\frac{AB}{\\cos\\widehat{B}}=\\frac{7{,}2}{0{,}6}=12$ cm.",
+   "id": "4e-maths-cosinus-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une échelle de 6 m est appuyée contre un mur. Elle fait un angle de $60\\degree$ avec le sol.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "À quelle distance du mur (en m) se trouve le pied de l'échelle ?",
+     "answer": 3,
+     "unit": "m",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Le pied et l'échelle forment l'angle de $60\\degree$ : distance $=6\\times\\cos60\\degree=3$ m.",
+     "id": "4e-maths-cosinus-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "À quelle hauteur (en m, arrondie au centième) touche-t-elle le mur ?",
+     "answer": 5.2,
+     "tolerance": 0.01,
+     "unit": "m",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Pythagore : $h^2=6^2-3^2=27$ donc $h=\\sqrt{27}\\approx5{,}196$ m, soit 5,20 m.",
+     "id": "4e-maths-cosinus-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Le cosinus donne la distance au mur (côté adjacent) ; Pythagore donne la hauteur.",
+   "id": "4e-maths-cosinus-06",
+   "tier": "examen",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la définition du cosinus d'un angle aigu d'un triangle rectangle ?",
+   "choices": [
+    "côté opposé ÷ hypoténuse",
+    "hypoténuse ÷ côté adjacent",
+    "côté adjacent ÷ hypoténuse",
+    "côté adjacent ÷ côté opposé"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est le quotient du côté adjacent par l'hypoténuse.",
+   "id": "4e-maths-cosinus-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un cosinus peut-il valoir 1,3 dans un triangle rectangle ?",
+   "choices": [
+    "Oui",
+    "Non",
+    "Seulement si l'angle est de 45°",
+    "Seulement pour 90°"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le côté adjacent est plus petit que l'hypoténuse : le quotient est inférieur à 1.",
+   "id": "4e-maths-cosinus-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut $\\cos60\\degree$ ?",
+   "choices": [
+    "1",
+    "0",
+    "0,6",
+    "0,5"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "À connaître : $\\cos60\\degree=0{,}5$.",
+   "id": "4e-maths-cosinus-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si $\\cos\\widehat{B}=\\frac{3}{5}$ et $BC=10$, alors $AB$ vaut...",
+   "choices": [
+    "6",
+    "5",
+    "3",
+    "15"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$AB=10\\times\\frac{3}{5}=6$.",
+   "id": "4e-maths-cosinus-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Réglage de la calculatrice pour mesurer en degrés : mode...",
+   "choices": [
+    "RAD",
+    "GRAD",
+    "FIX",
+    "DEG"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le mode DEG (degrés) est celui du collège.",
+   "id": "4e-maths-cosinus-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cosinus",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

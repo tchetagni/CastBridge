@@ -1,0 +1,375 @@
+{
+ "chapter": "bepc-maths-epreuve-blanche-2",
+ "lessons": [],
+ "exercises": [
+  {
+   "kind": "problem",
+   "prompt": "On donne $A=\\sqrt{50}-3\\sqrt{2}+\\sqrt{8}$ et $B=(3+\\sqrt{5})(3-\\sqrt{5})$.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Écris $A$ sous la forme $a\\sqrt{2}$.",
+     "choices": [
+      "$6\\sqrt{2}$",
+      "$4\\sqrt{2}$",
+      "$2\\sqrt{2}$",
+      "$\\sqrt{55}$"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\sqrt{50}=5\\sqrt{2}$ et $\\sqrt{8}=2\\sqrt{2}$ donc $A=5\\sqrt{2}-3\\sqrt{2}+2\\sqrt{2}=4\\sqrt{2}$.",
+     "id": "bepc-maths-ep2-01-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule $B$.",
+     "answer": 4,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$(a+b)(a-b)=a^2-b^2$ : $9-5=4$.",
+     "id": "bepc-maths-ep2-01-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Rends rationnel le dénominateur de $\\frac{6}{\\sqrt{3}}$.",
+     "choices": [
+      "$\\frac{6}{3}$",
+      "$6\\sqrt{3}$",
+      "$3\\sqrt{2}$",
+      "$2\\sqrt{3}$"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\frac{6}{\\sqrt{3}}=\\frac{6\\sqrt{3}}{3}=2\\sqrt{3}$.",
+     "id": "bepc-maths-ep2-01-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Donne la valeur approchée de $A$ arrondie au dixième.",
+     "answer": 5.7,
+     "tolerance": 0.05,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$4\\sqrt{2}\\approx4\\times1{,}4142=5{,}657$, soit 5,7.",
+     "id": "bepc-maths-ep2-01-d"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Simplifier chaque radical avant d'additionner.",
+   "id": "bepc-maths-ep2-01",
+   "tier": "examen",
+   "lesson": "bepc-maths-problemes-types",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans une classe de 40 élèves, on a relevé le nombre de livres lus pendant les vacances : 0 livre : 4 élèves ; 1 livre : 9 ; 2 livres : 12 ; 3 livres : 8 ; 4 livres : 7.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'effectif total ?",
+     "answer": 40,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$4+9+12+8+7=40$.",
+     "id": "bepc-maths-ep2-02-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la moyenne de livres lus par élève ?",
+     "answer": 2.125,
+     "tolerance": 0.01,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\frac{0+9+24+24+28}{40}=\\frac{85}{40}=2{,}125$.",
+     "id": "bepc-maths-ep2-02-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la médiane de la série ?",
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les 20e et 21e valeurs sont toutes deux égales à 2 (effectifs cumulés : 4, 13, 25).",
+     "id": "bepc-maths-ep2-02-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel pourcentage des élèves a lu au moins 3 livres ?",
+     "answer": 37.5,
+     "tolerance": 0.01,
+     "unit": "%",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\frac{8+7}{40}=\\frac{15}{40}=0{,}375$.",
+     "id": "bepc-maths-ep2-02-d"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Utiliser les effectifs cumulés pour la médiane.",
+   "id": "bepc-maths-ep2-02",
+   "tier": "examen",
+   "lesson": "bepc-maths-problemes-types",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un entonnoir a la forme d'un cône de révolution de rayon de base 6 cm et de hauteur 8 cm.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la génératrice du cône (en cm).",
+     "answer": 10,
+     "unit": "cm",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$l^2=6^2+8^2=100$ donc $l=10$ cm.",
+     "id": "bepc-maths-ep2-03-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule son volume, arrondi au dixième (en cm³).",
+     "answer": 301.6,
+     "tolerance": 0.1,
+     "unit": "cm³",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$V=\\frac{1}{3}\\pi\\times36\\times8=96\\pi\\approx301{,}6$ cm³.",
+     "id": "bepc-maths-ep2-03-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'angle entre une génératrice et le plan de la base, au dixième de degré.",
+     "answer": 53.1,
+     "tolerance": 0.1,
+     "unit": "°",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Dans le triangle formé par le rayon, la hauteur et la génératrice : $\\cos\\alpha=\\frac{6}{10}=0{,}6$ donc $\\alpha\\approx53{,}1\\degree$.",
+     "id": "bepc-maths-ep2-03-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Pythagore, puis formule du volume, puis cosinus.",
+   "figure": {
+    "kind": "shapes",
+    "w": 260,
+    "h": 220,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       130,
+       20,
+       60,
+       170,
+       200,
+       170
+      ],
+      "fill": "lightyellow",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "path",
+      "d": "M60 170 A70 18 0 0 0 200 170",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "path",
+      "d": "M60 170 A70 18 0 0 1 200 170",
+      "stroke": "grey",
+      "width": 1
+     },
+     {
+      "t": "line",
+      "x1": 130,
+      "y1": 20,
+      "x2": 130,
+      "y2": 170,
+      "color": "red",
+      "width": 2,
+      "dash": true
+     },
+     {
+      "t": "line",
+      "x1": 130,
+      "y1": 170,
+      "x2": 200,
+      "y2": 170,
+      "color": "blue",
+      "width": 2,
+      "dash": true
+     },
+     {
+      "t": "text",
+      "x": 122,
+      "y": 100,
+      "text": "h",
+      "size": 16,
+      "color": "red",
+      "anchor": "end",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 166,
+      "y": 164,
+      "text": "r",
+      "size": 16,
+      "color": "blue",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 178,
+      "y": 92,
+      "text": "l",
+      "size": 16,
+      "color": "ink",
+      "anchor": "start",
+      "bold": true
+     }
+    ]
+   },
+   "id": "bepc-maths-ep2-03",
+   "tier": "examen",
+   "lesson": "bepc-maths-problemes-types",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un repère orthonormé, on donne $A(-1\\,;\\,0)$, $B(3\\,;\\,4)$ et $C(5\\,;\\,0)$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule $AB$, arrondie au centième.",
+     "answer": 5.66,
+     "tolerance": 0.01,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\vec{AB}\\,(4\\,;\\,4)$ et $AB=\\sqrt{32}=4\\sqrt{2}\\approx5{,}66$.",
+     "id": "bepc-maths-ep2-04-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'abscisse du milieu $I$ de $[AC]$ ?",
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\frac{-1+5}{2}=2$.",
+     "id": "bepc-maths-ep2-04-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'ordonnée à l'origine de la droite $(AB)$ ?",
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$a=\\frac{4-0}{3-(-1)}=1$ ; $0=1\\times(-1)+b$ donc $b=1$ : $y=x+1$.",
+     "id": "bepc-maths-ep2-04-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "$ABCD$ est un parallélogramme. Quelle est l'ordonnée de $D$ ?",
+     "answer": -4,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\vec{AB}=\\vec{DC}$ : $D=C-\\vec{AB}=(5-4\\,;\\,0-4)=(1\\,;\\,-4)$.",
+     "id": "bepc-maths-ep2-04-d"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Les droites $(AB)$ et $(BC)$ sont-elles perpendiculaires ?",
+     "choices": [
+      "Oui",
+      "Non",
+      "On ne peut pas savoir",
+      "Seulement si $AB=BC$"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Pentes : $a_{AB}=1$ et $a_{BC}=\\frac{0-4}{5-3}=-2$ ; le produit vaut $-2\\neq-1$.",
+     "id": "bepc-maths-ep2-04-e"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'aire du triangle $ABC$ (en unités d'aire).",
+     "answer": 12,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Base $AC=6$ sur l'axe des abscisses, hauteur $=4$ (ordonnée de $B$) : $\\frac{6\\times4}{2}=12$.",
+     "id": "bepc-maths-ep2-04-f"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Utiliser les coordonnées : vecteurs, pentes, aire par base × hauteur.",
+   "figure": {
+    "kind": "plot",
+    "xmin": -2,
+    "xmax": 6,
+    "ymin": -1,
+    "ymax": 5,
+    "grid": 1,
+    "w": 400,
+    "h": 280,
+    "curves": [],
+    "points": [
+     {
+      "x": -1,
+      "y": 0,
+      "label": "A",
+      "color": "blue"
+     },
+     {
+      "x": 3,
+      "y": 4,
+      "label": "B",
+      "color": "blue"
+     },
+     {
+      "x": 5,
+      "y": 0,
+      "label": "C",
+      "color": "blue"
+     }
+    ],
+    "segments": [
+     {
+      "x1": -1,
+      "y1": 0,
+      "x2": 3,
+      "y2": 4,
+      "color": "ink",
+      "dash": true
+     },
+     {
+      "x1": 3,
+      "y1": 4,
+      "x2": 5,
+      "y2": 0,
+      "color": "ink",
+      "dash": true
+     },
+     {
+      "x1": -1,
+      "y1": 0,
+      "x2": 5,
+      "y2": 0,
+      "color": "ink",
+      "dash": true
+     }
+    ]
+   },
+   "id": "bepc-maths-ep2-04",
+   "tier": "examen",
+   "lesson": "bepc-maths-problemes-types",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

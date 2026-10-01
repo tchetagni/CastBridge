@@ -1,0 +1,918 @@
+{
+ "chapter": "4e-maths-cercle",
+ "lessons": [
+  {
+   "id": "4e-maths-cercle",
+   "title": "Droite et cercle : position relative et tangente",
+   "minutes": 25,
+   "programRef": "4e — Position relative d'une droite et d'un cercle ; tangente (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Déterminer la position d'une droite par rapport à un cercle.",
+    "Utiliser la tangente (perpendiculaire au rayon) avec Pythagore."
+   ],
+   "prerequisites": [
+    "4e-maths-pythagore"
+   ],
+   "exercises": [
+    "4e-maths-cercle-01",
+    "4e-maths-cercle-02",
+    "4e-maths-cercle-03",
+    "4e-maths-cercle-04",
+    "4e-maths-cercle-05",
+    "4e-maths-cercle-06"
+   ],
+   "selfCheck": [
+    "4e-maths-cercle-q1",
+    "4e-maths-cercle-q2",
+    "4e-maths-cercle-q3",
+    "4e-maths-cercle-q4",
+    "4e-maths-cercle-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Position d'une droite et d'un cercle",
+     "md": "Soit un cercle de centre $O$ et de rayon $r$, et $d$ la distance de $O$ à la droite $(D)$.\n- $d<r$ : la droite est **sécante** (elle coupe le cercle en 2 points).\n- $d=r$ : la droite est **tangente** (un seul point commun).\n- $d>r$ : la droite est **extérieure** (aucun point commun)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les trois positions : sécante, tangente, extérieure.",
+     "alt": "Trois cercles avec une droite qui coupe, touche ou ne touche pas le cercle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 450,
+      "h": 210,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 75,
+        "cy": 80,
+        "r": 45,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 75,
+        "cy": 80,
+        "r": 3,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 63,
+        "x2": 140,
+        "y2": 63,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 190,
+        "text": "sécante",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 225,
+        "cy": 80,
+        "r": 45,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 225,
+        "cy": 80,
+        "r": 3,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 125,
+        "x2": 290,
+        "y2": 125,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 190,
+        "text": "tangente",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 375,
+        "cy": 80,
+        "r": 45,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 375,
+        "cy": 80,
+        "r": 3,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 152,
+        "x2": 440,
+        "y2": 152,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 190,
+        "text": "extérieure",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Tangente",
+     "md": "La tangente en un point $T$ du cercle est **perpendiculaire au rayon** $[OT]$. Dans le triangle $OTA$ rectangle en $T$ (avec $A$ sur la tangente), on peut utiliser Pythagore : $OA^2=OT^2+TA^2$. Une corde dont $H$ est le milieu vérifie $(OH)\\perp$ corde."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : longueur de la tangente",
+     "statement": "Un cercle de centre $O$ a pour rayon 5 cm. $A$ est un point tel que $OA=13$ cm et $T$ le point de contact d'une tangente issue de $A$. Calcule $AT$.",
+     "steps": [
+      {
+       "md": "$(AT)$ est tangente en $T$ : le triangle $OTA$ est rectangle en $T$."
+      },
+      {
+       "md": "Pythagore :",
+       "tex": "AT^2=OA^2-OT^2=169-25=144"
+      },
+      {
+       "md": "Donc :",
+       "tex": "AT=12"
+      }
+     ],
+     "answer": "**$AT=12$ cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : corde",
+     "statement": "Dans un cercle de rayon 5 cm, une droite est à 3 cm du centre. Quelle est la longueur de la corde ?",
+     "steps": [
+      {
+       "md": "$3<5$ : la droite est sécante. Soit $H$ le pied de la perpendiculaire issue de $O$ : $OH=3$ et $H$ est le milieu de la corde."
+      },
+      {
+       "md": "Dans le triangle rectangle de côtés $OH$, $HA$ et $OA=5$ :",
+       "tex": "HA^2=25-9=16 \\Rightarrow HA=4"
+      },
+      {
+       "md": "La corde mesure $2\\times4=8$ cm."
+      }
+     ],
+     "answer": "**8 cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire qu'une droite est tangente parce qu'elle « a l'air » de toucher le cercle : il faut comparer $d$ et $r$.\n- Confondre rayon et diamètre ($d$ n'est pas le diamètre).\n- Oublier que la corde vaut **le double** de $HA$.\n- Utiliser Pythagore sans avoir justifié l'angle droit."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si la tangente et la longueur d'une corde sont au programme de 4e (parfois en 3e)."
+   ]
+  },
+  {
+   "id": "4e-maths-angle-inscrit",
+   "title": "Angle inscrit et angle au centre",
+   "minutes": 25,
+   "programRef": "4e — Angle inscrit, angle au centre (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer angle inscrit et angle au centre.",
+    "Utiliser « l'angle au centre est le double de l'angle inscrit » et le triangle rectangle inscrit dans un demi-cercle."
+   ],
+   "prerequisites": [
+    "4e-maths-cercle"
+   ],
+   "exercises": [
+    "4e-maths-angle-inscrit-01",
+    "4e-maths-angle-inscrit-02",
+    "4e-maths-angle-inscrit-03",
+    "4e-maths-angle-inscrit-04",
+    "4e-maths-angle-inscrit-05",
+    "4e-maths-angle-inscrit-06"
+   ],
+   "selfCheck": [
+    "4e-maths-angle-inscrit-q1",
+    "4e-maths-angle-inscrit-q2",
+    "4e-maths-angle-inscrit-q3",
+    "4e-maths-angle-inscrit-q4",
+    "4e-maths-angle-inscrit-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "Un **angle inscrit** a son sommet sur le cercle et ses côtés qui coupent le cercle. Un **angle au centre** a son sommet au centre $O$. Ils **interceptent le même arc** quand leurs côtés passent par les mêmes extrémités $A$ et $B$ de l'arc."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'angle au centre (140°) est le double de l'angle inscrit (70°) qui intercepte le même arc.",
+     "alt": "Un cercle avec les points A, B, M, l'angle au centre AOB de 140 degrés et l'angle inscrit AMB de 70 degrés.",
+     "figure": {
+      "kind": "shapes",
+      "w": 330,
+      "h": 270,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 140,
+        "r": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 140,
+        "x2": 56.0,
+        "y2": 174.2,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 140,
+        "x2": 244.0,
+        "y2": 174.2,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 40,
+        "x2": 56.0,
+        "y2": 174.2,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 40,
+        "x2": 244.0,
+        "y2": 174.2,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 140,
+        "r": 3,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 46.0,
+        "y": 168.2,
+        "text": "A",
+        "size": 17,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 254.0,
+        "y": 168.2,
+        "text": "B",
+        "size": 17,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 28,
+        "text": "M",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 158,
+        "text": "O",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 205,
+        "text": "au centre : 140°",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 84,
+        "text": "70°",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propriétés",
+     "md": "- **Angle au centre = 2 × angle inscrit** (même arc).\n- Deux angles inscrits qui interceptent le même arc sont **égaux**.\n- Un triangle inscrit dont un côté est un diamètre est **rectangle** (l'angle droit est en face du diamètre) : l'angle au centre de $180\\degree$ donne un angle inscrit de $90\\degree$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calcul",
+     "statement": "Un angle au centre $\\widehat{AOB}$ mesure $80\\degree$. Quelle est la mesure d'un angle inscrit $\\widehat{AMB}$ qui intercepte le même arc ? Et si $\\widehat{AMB}=35\\degree$, que vaut $\\widehat{AOB}$ ?",
+     "steps": [
+      {
+       "md": "Angle inscrit = moitié de l'angle au centre :",
+       "tex": "\\widehat{AMB}=\\frac{80}{2}=40\\degree"
+      },
+      {
+       "md": "Dans l'autre sens, on double :",
+       "tex": "\\widehat{AOB}=2\\times35=70\\degree"
+      }
+     ],
+     "answer": "**$40\\degree$ puis $70\\degree$**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : demi-cercle",
+     "statement": "$[AB]$ est un diamètre, $C$ est sur le cercle et $\\widehat{CAB}=50\\degree$. Calcule $\\widehat{ABC}$.",
+     "steps": [
+      {
+       "md": "$[AB]$ est un diamètre : le triangle $ABC$ est rectangle en $C$."
+      },
+      {
+       "md": "La somme des angles vaut $180\\degree$ :",
+       "tex": "\\widehat{ABC}=180-90-50=40\\degree"
+      }
+     ],
+     "answer": "**$40\\degree$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre doubler et diviser par deux.\n- Comparer des angles qui n'interceptent pas le même arc.\n- Affirmer qu'un triangle est rectangle sans savoir que l'un de ses côtés est un diamètre.\n- Oublier que l'angle droit est en face du diamètre."
+    }
+   ],
+   "reviewNotes": [
+    "Selon les manuels, l'angle inscrit peut être étudié en 3e ; à vérifier sur le programme officiel de 4e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Un cercle a pour rayon 4 cm. Une droite est à 4 cm du centre. Sa position ?",
+   "choices": [
+    "sécante",
+    "extérieure",
+    "tangente",
+    "passant par le centre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$d=r=4$ : la droite touche le cercle en un seul point.",
+   "id": "4e-maths-cercle-01",
+   "tier": "application",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un cercle a pour rayon 4 cm. Une droite est à 6 cm du centre. Sa position ?",
+   "choices": [
+    "sécante",
+    "extérieure",
+    "tangente",
+    "confondue avec le cercle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$d=6>4=r$ : aucun point commun.",
+   "id": "4e-maths-cercle-02",
+   "tier": "application",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Rayon 10 cm. Une droite est à 6 cm du centre. Quelle est la longueur de la corde (en cm) ?",
+   "answer": 16,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$HA^2=100-36=64$ donc $HA=8$ ; la corde vaut $2\\times8=16$ cm.",
+   "id": "4e-maths-cercle-03",
+   "tier": "application",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$OA=10$ cm, rayon 6 cm, $(AT)$ tangente en $T$. Calcule $AT$ (en cm).",
+   "answer": 8,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$AT^2=100-36=64$ donc $AT=8$ cm.",
+   "id": "4e-maths-cercle-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une tangente issue de $A$ a pour longueur $AT=15$ cm et $OA=17$ cm. Quel est le rayon du cercle (en cm) ?",
+   "answer": 8,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$OT^2=OA^2-AT^2=289-225=64$ donc $OT=8$ cm.",
+   "id": "4e-maths-cercle-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un cercle de centre $O$ a pour rayon 9 cm. $A$ est tel que $OA=15$ cm ; $(AT)$ est tangente au cercle en $T$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule $AT$ (en cm).",
+     "answer": 12,
+     "unit": "cm",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$AT^2=15^2-9^2=225-81=144$ donc $AT=12$ cm.",
+     "id": "4e-maths-cercle-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la mesure de l'angle $\\widehat{TOA}$ (en degrés, arrondie au dixième).",
+     "answer": 53.1,
+     "tolerance": 0.2,
+     "unit": "°",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$\\cos\\widehat{TOA}=\\frac{OT}{OA}=\\frac{9}{15}=0{,}6$ donc $\\widehat{TOA}\\approx53{,}1\\degree$.",
+     "id": "4e-maths-cercle-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Le triangle OTA est rectangle en T ; $[OA]$ est l'hypoténuse.",
+   "id": "4e-maths-cercle-06",
+   "tier": "examen",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La tangente en $T$ est...",
+   "choices": [
+    "perpendiculaire à $(OT)$",
+    "parallèle à $(OT)$",
+    "confondue avec $(OT)$",
+    "toujours égale au diamètre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La tangente est perpendiculaire au rayon au point de contact.",
+   "id": "4e-maths-cercle-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de points communs a une droite sécante avec un cercle ?",
+   "choices": [
+    "0",
+    "1",
+    "3",
+    "2"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une sécante coupe le cercle en deux points.",
+   "id": "4e-maths-cercle-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle condition rend une droite tangente ?",
+   "choices": [
+    "$d<r$",
+    "$d=r$",
+    "$d>r$",
+    "$d=2r$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La distance du centre à la droite est égale au rayon.",
+   "id": "4e-maths-cercle-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un cercle de rayon 13, une droite est à 5 du centre. La corde mesure...",
+   "choices": [
+    "12",
+    "26",
+    "24",
+    "18"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$HA^2=169-25=144$ donc $HA=12$ et la corde vaut 24.",
+   "id": "4e-maths-cercle-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une droite est extérieure à un cercle si...",
+   "choices": [
+    "elle passe par le centre",
+    "elle n'a aucun point commun avec lui",
+    "elle est tangente",
+    "elle coupe le cercle deux fois"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la définition de la position extérieure.",
+   "id": "4e-maths-cercle-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un angle au centre mesure $80\\degree$. Quelle est la mesure (en degrés) de l'angle inscrit qui intercepte le même arc ?",
+   "answer": 40,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Angle inscrit $=80\\div2=40\\degree$.",
+   "id": "4e-maths-angle-inscrit-01",
+   "tier": "application",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un angle inscrit mesure $35\\degree$. Quelle est la mesure (en degrés) de l'angle au centre associé ?",
+   "answer": 70,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Angle au centre $=2\\times35=70\\degree$.",
+   "id": "4e-maths-angle-inscrit-02",
+   "tier": "application",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un triangle inscrit dans un cercle dont un côté est un diamètre est rectangle.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'angle au centre de $180\\degree$ correspond à un angle inscrit de $90\\degree$ : l'angle droit est opposé au diamètre.",
+   "id": "4e-maths-angle-inscrit-03",
+   "tier": "application",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$[AB]$ est un diamètre, $C$ est sur le cercle et $\\widehat{CAB}=50\\degree$. Calcule $\\widehat{ABC}$ (en degrés).",
+   "answer": 40,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le triangle est rectangle en $C$ : $\\widehat{ABC}=180-90-50=40\\degree$.",
+   "id": "4e-maths-angle-inscrit-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un angle inscrit mesure $(2x+10)\\degree$ et l'angle au centre associé mesure $(6x-10)\\degree$. Trouve $x$.",
+   "answer": 15,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'angle au centre est le double : $6x-10=2(2x+10)=4x+20$ donc $2x=30$ et $x=15$. Vérification : inscrit $40\\degree$, centre $80\\degree$.",
+   "id": "4e-maths-angle-inscrit-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un cercle de centre $O$, $[AB]$ est un diamètre et $C$ un point du cercle tel que $\\widehat{CAB}=32\\degree$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de $\\widehat{ACB}$ (en degrés) ?",
+     "answer": 90,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$[AB]$ est un diamètre : le triangle $ABC$ est rectangle en $C$.",
+     "id": "4e-maths-angle-inscrit-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de $\\widehat{ABC}$ (en degrés) ?",
+     "answer": 58,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$180-90-32=58\\degree$.",
+     "id": "4e-maths-angle-inscrit-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de l'angle au centre $\\widehat{COB}$ (en degrés) ?",
+     "answer": 64,
+     "unit": "°",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$\\widehat{COB}$ et $\\widehat{CAB}$ interceptent le même arc $[CB]$ : $\\widehat{COB}=2\\times32=64\\degree$.",
+     "id": "4e-maths-angle-inscrit-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Repérer le diamètre, puis relier angle inscrit et angle au centre qui interceptent le même arc.",
+   "figure": {
+    "kind": "shapes",
+    "w": 330,
+    "h": 270,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 150,
+      "cy": 140,
+      "r": 100,
+      "fill": "lightyellow",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 50,
+      "y1": 140,
+      "x2": 250,
+      "y2": 140,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 50,
+      "y1": 140,
+      "x2": 193.8,
+      "y2": 50.1,
+      "color": "ink",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 250,
+      "y1": 140,
+      "x2": 193.8,
+      "y2": 50.1,
+      "color": "ink",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 140,
+      "x2": 193.8,
+      "y2": 50.1,
+      "color": "red",
+      "width": 2,
+      "dash": true
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 160,
+      "text": "A",
+      "size": 17,
+      "color": "ink",
+      "anchor": "end",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 260,
+      "y": 160,
+      "text": "B",
+      "size": 17,
+      "color": "ink",
+      "anchor": "start",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 199.8,
+      "y": 42.1,
+      "text": "C",
+      "size": 17,
+      "color": "ink",
+      "anchor": "start",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 160,
+      "text": "O",
+      "size": 16,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     }
+    ]
+   },
+   "id": "4e-maths-angle-inscrit-06",
+   "tier": "examen",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un angle au centre de $120\\degree$ intercepte un arc. L'angle inscrit correspondant mesure...",
+   "choices": [
+    "$240\\degree$",
+    "$60\\degree$",
+    "$120\\degree$",
+    "$30\\degree$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On divise par 2.",
+   "id": "4e-maths-angle-inscrit-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où est le sommet d'un angle inscrit ?",
+   "choices": [
+    "Au centre",
+    "À l'extérieur",
+    "Sur le cercle",
+    "Sur le diamètre uniquement"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Par définition, il est sur le cercle.",
+   "id": "4e-maths-angle-inscrit-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux angles inscrits qui interceptent le même arc sont...",
+   "choices": [
+    "égaux",
+    "supplémentaires",
+    "le double l'un de l'autre",
+    "complémentaires"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils valent chacun la moitié du même angle au centre.",
+   "id": "4e-maths-angle-inscrit-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un angle inscrit dans un demi-cercle mesure...",
+   "choices": [
+    "$45\\degree$",
+    "$180\\degree$",
+    "$60\\degree$",
+    "$90\\degree$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le triangle est rectangle.",
+   "id": "4e-maths-angle-inscrit-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si l'angle inscrit vaut $27\\degree$, l'angle au centre vaut...",
+   "choices": [
+    "$13{,}5\\degree$",
+    "$54\\degree$",
+    "$27\\degree$",
+    "$63\\degree$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On double : $2\\times27=54$.",
+   "id": "4e-maths-angle-inscrit-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-angle-inscrit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

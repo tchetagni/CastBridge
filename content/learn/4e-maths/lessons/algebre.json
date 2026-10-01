@@ -1,0 +1,971 @@
+{
+ "chapter": "4e-maths-algebre",
+ "lessons": [
+  {
+   "id": "4e-maths-litteral",
+   "title": "Calcul littéral : réduire, développer, factoriser",
+   "minutes": 25,
+   "programRef": "4e — Calcul littéral : réduction, développement, factorisation simple (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Réduire une expression littérale.",
+    "Développer avec la distributivité simple et double.",
+    "Factoriser avec un facteur commun simple."
+   ],
+   "prerequisites": [
+    "4e-maths-relatifs"
+   ],
+   "exercises": [
+    "4e-maths-litteral-01",
+    "4e-maths-litteral-02",
+    "4e-maths-litteral-03",
+    "4e-maths-litteral-04",
+    "4e-maths-litteral-05",
+    "4e-maths-litteral-06"
+   ],
+   "selfCheck": [
+    "4e-maths-litteral-q1",
+    "4e-maths-litteral-q2",
+    "4e-maths-litteral-q3",
+    "4e-maths-litteral-q4",
+    "4e-maths-litteral-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Réduire une expression",
+     "md": "Réduire, c'est regrouper les termes de même nature : $3x+5x=8x$ et $4x^2+x^2=5x^2$, mais $3x+x^2$ ne se réduit pas. Une lettre représente un nombre quelconque ; on peut remplacer la lettre par un nombre pour calculer la valeur de l'expression."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Distributivité",
+     "md": "$k(a+b)=ka+kb$ et $k(a-b)=ka-kb$. Développer, c'est passer du produit à la somme ; **factoriser**, c'est faire le chemin inverse en repérant un facteur commun : $6x+9=3(2x+3)$.\n\nPour deux parenthèses : $(a+b)(c+d)=ac+ad+bc+bd$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Aire du grand rectangle : (x+5)(x+2)=x²+5x+2x+10.",
+     "alt": "Un rectangle découpé en quatre parties d'aires x², 5x, 2x et 10.",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 30,
+        "w": 140,
+        "h": 140,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 30,
+        "w": 100,
+        "h": 140,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 170,
+        "w": 140,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 170,
+        "w": 100,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 105,
+        "text": "x²",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 105,
+        "text": "5x",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 202,
+        "text": "2x",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 202,
+        "text": "10",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 22,
+        "text": "x",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 22,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 105,
+        "text": "x",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 202,
+        "text": "2",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : développer",
+     "statement": "Développe et réduis $A=3(2x-5)$ puis $B=(x+2)(x+5)$.",
+     "steps": [
+      {
+       "md": "Distributivité simple :",
+       "tex": "A=3\\times2x-3\\times5=6x-15"
+      },
+      {
+       "md": "Double distributivité :",
+       "tex": "B=x^2+5x+2x+10"
+      },
+      {
+       "md": "On réduit :",
+       "tex": "B=x^2+7x+10"
+      }
+     ],
+     "answer": "**$A=6x-15$ et $B=x^2+7x+10$**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : factoriser",
+     "statement": "Factorise $C=4x+12$ et $D=5x^2-10x$.",
+     "steps": [
+      {
+       "md": "Le facteur commun de $4x$ et $12$ est 4 :",
+       "tex": "C=4(x+3)"
+      },
+      {
+       "md": "Dans $5x^2-10x$, le facteur commun est $5x$ :",
+       "tex": "D=5x(x-2)"
+      }
+     ],
+     "answer": "**$C=4(x+3)$ et $D=5x(x-2)$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Ne développer que le premier terme : $3(x+4)=3x+12$, pas $3x+4$.\n- Oublier le signe moins : $-2(x-3)=-2x+6$.\n- Réduire des termes qui ne sont pas semblables : $x+x^2\\neq x^3$.\n- Après factorisation, contrôler en redéveloppant."
+    }
+   ],
+   "reviewNotes": [
+    "Les identités remarquables sont généralement traitées en 3e : elles ne figurent pas ici (voir le pack BEPC)."
+   ]
+  },
+  {
+   "id": "4e-maths-equations",
+   "title": "Équations et inéquations du premier degré",
+   "minutes": 30,
+   "programRef": "4e — Équations et inéquations du premier degré à une inconnue (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Résoudre une équation du type $ax+b=c$ ou avec parenthèses.",
+    "Résoudre une inéquation du premier degré et représenter ses solutions.",
+    "Mettre un problème en équation."
+   ],
+   "prerequisites": [
+    "4e-maths-litteral"
+   ],
+   "exercises": [
+    "4e-maths-equations-01",
+    "4e-maths-equations-02",
+    "4e-maths-equations-03",
+    "4e-maths-equations-04",
+    "4e-maths-equations-05",
+    "4e-maths-equations-06"
+   ],
+   "selfCheck": [
+    "4e-maths-equations-q1",
+    "4e-maths-equations-q2",
+    "4e-maths-equations-q3",
+    "4e-maths-equations-q4",
+    "4e-maths-equations-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Équation",
+     "md": "Résoudre une équation d'inconnue $x$, c'est trouver toutes les valeurs de $x$ qui rendent l'égalité vraie. On ne change pas les solutions en ajoutant (ou en retranchant) le même nombre aux deux membres, ni en les multipliant (ou les divisant) par un même nombre non nul."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les étapes",
+     "md": "1. Développer et réduire chaque membre.\n2. Regrouper les termes en $x$ d'un côté, les nombres de l'autre.\n3. Diviser par le coefficient de $x$.\n4. **Vérifier** en remplaçant $x$ par la solution."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Inéquations",
+     "md": "On résout comme une équation avec **une exception** : quand on multiplie ou divise par un nombre **négatif**, le sens de l'inégalité change : $-2x>-4$ donne $x<2$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les solutions de x<2 : tous les nombres à gauche de 2, 2 exclu (rond vide).",
+     "alt": "Une droite graduée avec la demi-droite des nombres inférieurs à 2, le point 2 non inclus.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 110,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 70,
+        "x2": 400,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 64,
+        "x2": 40,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 96,
+        "text": "−2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 84,
+        "y1": 64,
+        "x2": 84,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 84,
+        "y": 96,
+        "text": "−1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 128,
+        "y1": 64,
+        "x2": 128,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 128,
+        "y": 96,
+        "text": "0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 172,
+        "y1": 64,
+        "x2": 172,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 96,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 216,
+        "y1": 64,
+        "x2": 216,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 216,
+        "y": 96,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 64,
+        "x2": 260,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 96,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 304,
+        "y1": 64,
+        "x2": 304,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 96,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 348,
+        "y1": 64,
+        "x2": 348,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 348,
+        "y": 96,
+        "text": "5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 392,
+        "y1": 64,
+        "x2": 392,
+        "y2": 76,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 392,
+        "y": 96,
+        "text": "6",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 70,
+        "x2": 216,
+        "y2": 70,
+        "color": "blue",
+        "width": 5
+       },
+       {
+        "t": "circle",
+        "cx": 216,
+        "cy": 70,
+        "r": 8,
+        "fill": "white",
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 216,
+        "y": 34,
+        "text": "x < 2",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : équation",
+     "statement": "Résous $3x-7=11$ puis $2(x+3)=x+10$.",
+     "steps": [
+      {
+       "md": "On ajoute 7, puis on divise par 3 :",
+       "tex": "3x=18 \\Rightarrow x=6"
+      },
+      {
+       "md": "Deuxième équation, on développe :",
+       "tex": "2x+6=x+10"
+      },
+      {
+       "md": "On regroupe : $2x-x=10-6$.",
+       "tex": "x=4"
+      }
+     ],
+     "answer": "**$x=6$ et $x=4$** (vérifier : $2(4+3)=14=4+10$)"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : inéquation",
+     "statement": "Résous $5-2x>1$.",
+     "steps": [
+      {
+       "md": "On retranche 5 aux deux membres :",
+       "tex": "-2x>-4"
+      },
+      {
+       "md": "On divise par $-2$ : le sens change !",
+       "tex": "x<2"
+      }
+     ],
+     "answer": "**$x<2$**, c'est-à-dire tous les nombres strictement inférieurs à 2."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de changer le sens en divisant par un négatif.\n- Se tromper de signe en passant un terme de l'autre côté : $x+3=7$ donne $x=7-3$.\n- Ne pas vérifier la solution.\n- Mélanger équation (une valeur) et inéquation (une infinité de valeurs)."
+    }
+   ],
+   "reviewNotes": [
+    "Le changement de sens de l'inégalité en multipliant ou divisant par un négatif est parfois repoussé en 3e : à vérifier."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Calcule la valeur de $3x-5$ pour $x=4$.",
+   "answer": 7,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$3\\times4-5=12-5=7$.",
+   "id": "4e-maths-litteral-01",
+   "tier": "application",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Développe $2(x+7)$.",
+   "choices": [
+    "$2x+7$",
+    "$x+14$",
+    "$2x+9$",
+    "$2x+14$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On multiplie chaque terme par 2 : $2x+2\\times7=2x+14$.",
+   "id": "4e-maths-litteral-02",
+   "tier": "application",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Factorise $6x+9$.",
+   "choices": [
+    "$3(2x+9)$",
+    "$6(x+9)$",
+    "$2(3x+9)$",
+    "$3(2x+3)$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 divise 6 et 9 : $6x+9=3\\times2x+3\\times3=3(2x+3)$.",
+   "id": "4e-maths-litteral-03",
+   "tier": "application",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "On développe $(x+3)(x+4)$ et on réduit. Quel est le coefficient de $x$ ?",
+   "answer": 7,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$(x+3)(x+4)=x^2+4x+3x+12=x^2+7x+12$ : le coefficient de $x$ est 7.",
+   "id": "4e-maths-litteral-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Réduis $5x-2(x-3)$.",
+   "choices": [
+    "$3x+6$",
+    "$3x-6$",
+    "$3x-3$",
+    "$7x-6$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$-2(x-3)=-2x+6$ donc $5x-2x+6=3x+6$.",
+   "mistakes": [
+    "Oublier de changer le signe de $-3$ en $+6$."
+   ],
+   "id": "4e-maths-litteral-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un champ rectangulaire a pour longueur $(x+5)$ m et pour largeur $(x+2)$ m, où $x$ est un nombre positif.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la forme développée et réduite de l'aire ?",
+     "choices": [
+      "$x^2+10$",
+      "$x^2+7x+10$",
+      "$2x+14$",
+      "$x^2+7x+7$"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$(x+5)(x+2)=x^2+2x+5x+10=x^2+7x+10$.",
+     "id": "4e-maths-litteral-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire (en m²) pour $x=3$ ?",
+     "answer": 40,
+     "unit": "m²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Longueur 8 m, largeur 5 m : $8\\times5=40$ m². On peut vérifier : $9+21+10=40$.",
+     "id": "4e-maths-litteral-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le périmètre (en m) pour $x=3$ ?",
+     "answer": 26,
+     "unit": "m",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$2\\times(8+5)=26$ m.",
+     "id": "4e-maths-litteral-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Calculer avec la forme factorisée (plus simple) et vérifier avec la forme développée.",
+   "id": "4e-maths-litteral-06",
+   "tier": "examen",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme réduite de $4x+7x$ ?",
+   "choices": [
+    "$28x$",
+    "$11x$",
+    "$11x^2$",
+    "$11$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On additionne les coefficients de $x$ : $4+7=11$.",
+   "id": "4e-maths-litteral-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut $-3(x-2)$ une fois développé ?",
+   "choices": [
+    "$-3x-6$",
+    "$-3x+6$",
+    "$-3x-2$",
+    "$3x-6$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$-3\\times x=-3x$ et $-3\\times(-2)=+6$.",
+   "id": "4e-maths-litteral-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le facteur commun de $8x+12$ ?",
+   "choices": [
+    "2x",
+    "8",
+    "4",
+    "12"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le plus grand diviseur commun de 8 et 12 est 4 : $8x+12=4(2x+3)$.",
+   "id": "4e-maths-litteral-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expression n'est pas réductible ?",
+   "choices": [
+    "$3x+x$",
+    "$3x+x^2$",
+    "$3x^2+x^2$",
+    "$3x-x$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$x$ et $x^2$ ne sont pas des termes semblables.",
+   "id": "4e-maths-litteral-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la valeur de $2x+1$ pour $x=-3$ ?",
+   "choices": [
+    "−7",
+    "−5",
+    "7",
+    "−2"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$2\\times(-3)+1=-6+1=-5$.",
+   "id": "4e-maths-litteral-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-litteral",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Résous $4x+3=19$.",
+   "answer": 4,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$4x=19-3=16$ donc $x=16\\div4=4$.",
+   "id": "4e-maths-equations-01",
+   "tier": "application",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Résous $7-x=2$.",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$-x=2-7=-5$ donc $x=5$.",
+   "mistakes": [
+    "Répondre $x=-5$ : on divise aussi le second membre par $-1$."
+   ],
+   "id": "4e-maths-equations-02",
+   "tier": "application",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles sont les solutions de $2x-1\\leq5$ ?",
+   "choices": [
+    "$x\\leq3$",
+    "$x\\geq3$",
+    "$x\\leq2$",
+    "$x\\leq 4$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$2x\\leq6$ puis $x\\leq3$ : on divise par 2, positif, le sens ne change pas.",
+   "id": "4e-maths-equations-03",
+   "tier": "application",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Résous $3(x-2)=2x+5$.",
+   "answer": 11,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$3x-6=2x+5$ donc $3x-2x=5+6$ et $x=11$. Vérification : $3\\times9=27=22+5$.",
+   "id": "4e-maths-equations-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Résous $4-3x<10$.",
+   "choices": [
+    "$x<-2$",
+    "$x>2$",
+    "$x>-2$",
+    "$x<2$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$-3x<6$ ; on divise par $-3$ et le sens change : $x>-2$.",
+   "mistakes": [
+    "Garder le sens $<$ en divisant par un négatif."
+   ],
+   "id": "4e-maths-equations-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina a 2 000 FCFA. Elle achète un cahier à 450 FCFA et plusieurs stylos à 175 FCFA l'unité. On note $n$ le nombre de stylos.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle inéquation traduit « Amina ne dépasse pas son budget » ?",
+     "choices": [
+      "$450+175n\\geq2000$",
+      "$175n\\leq2000$",
+      "$450n+175\\leq2000$",
+      "$450+175n\\leq2000$"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le prix total est $450+175n$ et il doit rester inférieur ou égal à 2 000.",
+     "id": "4e-maths-equations-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le nombre maximal de stylos qu'elle peut acheter ?",
+     "answer": 8,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$175n\\leq1550$ donc $n\\leq8{,}857\\dots$ ; $n$ est entier : $n=8$ au plus.",
+     "id": "4e-maths-equations-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien lui reste-t-il alors (en FCFA) ?",
+     "answer": 150,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$450+175\\times8=1\\,850$ et $2\\,000-1\\,850=150$ FCFA.",
+     "id": "4e-maths-equations-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Poser l'inéquation, la résoudre, puis tenir compte du fait que $n$ est un entier.",
+   "id": "4e-maths-equations-06",
+   "tier": "examen",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la solution de $x+9=4$ ?",
+   "choices": [
+    "5",
+    "13",
+    "−5",
+    "−13"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$x=4-9=-5$.",
+   "id": "4e-maths-equations-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la solution de $5x=-20$ ?",
+   "choices": [
+    "4",
+    "−100",
+    "15",
+    "−4"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On divise les deux membres par 5.",
+   "id": "4e-maths-equations-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour $-x>3$, la bonne conclusion est...",
+   "choices": [
+    "$x>-3$",
+    "$x>3$",
+    "$x<3$",
+    "$x<-3$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On multiplie par $-1$ : le sens change.",
+   "id": "4e-maths-equations-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle valeur vérifie $2x+1=9$ ?",
+   "choices": [
+    "$x=4$",
+    "$x=5$",
+    "$x=10$",
+    "$x=3$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$2\\times4+1=9$.",
+   "id": "4e-maths-equations-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le premier pas pour résoudre $2(x+1)=x+5$ ?",
+   "choices": [
+    "Diviser par $x$",
+    "Élever au carré",
+    "Développer $2(x+1)$",
+    "Supprimer les parenthèses sans calcul"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On commence par développer pour obtenir $2x+2=x+5$.",
+   "id": "4e-maths-equations-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-equations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
