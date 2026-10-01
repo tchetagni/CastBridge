@@ -1,0 +1,901 @@
+{
+ "chapter": "etp-compta-generale-1re-enregistrement",
+ "lessons": [
+  {
+   "id": "etp-compta-generale-1re-journal",
+   "title": "Journal, grand livre et balance",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Rédiger une écriture au journal.",
+    "Reporter les écritures dans les comptes du grand livre.",
+    "Calculer le solde d'un compte.",
+    "Dresser une balance et vérifier l'égalité des totaux."
+   ],
+   "prerequisites": [
+    "etp-compta-generale-1re-comptes"
+   ],
+   "exercises": [
+    "etp-compta-generale-1re-journal-01",
+    "etp-compta-generale-1re-journal-02",
+    "etp-compta-generale-1re-journal-03",
+    "etp-compta-generale-1re-journal-04",
+    "etp-compta-generale-1re-journal-05",
+    "etp-compta-generale-1re-journal-06"
+   ],
+   "selfCheck": [
+    "etp-compta-generale-1re-journal-q1",
+    "etp-compta-generale-1re-journal-q2",
+    "etp-compta-generale-1re-journal-q3",
+    "etp-compta-generale-1re-journal-q4",
+    "etp-compta-generale-1re-journal-q5"
+   ],
+   "reviewNotes": [
+    "Présentation simplifiée du journal et de la balance ; les modèles officiels peuvent différer.",
+    "Les noms de comptes et le plan comptable suivent le cadre SYSCOHADA en termes généraux : à faire relire par un enseignant de comptabilité."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Journal",
+     "md": "Le **journal** est le registre où l'on note les opérations **jour après jour**, dans l'ordre chronologique. Chaque écriture comprend : la date, le compte débité, le compte crédité, le montant et un libellé (explication)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Grand livre",
+     "md": "Le **grand livre** rassemble tous les comptes. On y **reporte** chaque écriture du journal : le montant est recopié au débit d'un compte et au crédit de l'autre."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Balance",
+     "md": "La **balance** est un tableau qui liste tous les comptes avec leurs totaux (débit, crédit) et leurs soldes. Elle sert de **contrôle** : le total des débits doit égaler le total des crédits."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Chaîne comptable",
+     "md": "1. Pièce justificative (facture, reçu).\n2. Écriture au **journal**.\n3. Report au **grand livre**.\n4. Calcul des soldes et **balance**.\n5. Contrôle : total débit = total crédit."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 120,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 60.25,
+        "text": "Journal",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 30,
+        "w": 120,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 60.25,
+        "text": "Grand livre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 30,
+        "w": 120,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 60.25,
+        "text": "Balance",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 30,
+        "w": 120,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 490.0,
+        "y": 60.25,
+        "text": "Bilan",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 55,
+        "x2": 150,
+        "y2": 55,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 55,
+        "x2": 290,
+        "y2": 55,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 410,
+        "y1": 55,
+        "x2": 430,
+        "y2": 55,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "De l'écriture au bilan.",
+     "alt": "Quatre rectangles reliés par des flèches : journal, grand livre, balance, bilan."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Journal et solde",
+     "statement": "Trois opérations d'une entreprise fictive : (1) apport en banque de 1 000 000 FCFA ; (2) achat de matériel de 300 000 payé par la banque ; (3) retrait de 100 000 de la banque pour la caisse. Écrire les écritures et calculer le solde de la banque.",
+     "steps": [
+      {
+       "md": "Écritures : (1) Débit Banque / Crédit Capital 1 000 000 ; (2) Débit Matériel / Crédit Banque 300 000 ; (3) Débit Caisse / Crédit Banque 100 000."
+      },
+      {
+       "md": "Dans le compte Banque : débit = 1 000 000 ; crédit = 300 000 + 100 000 = 400 000.",
+       "tex": "1000000 - (300000 + 100000) = 600000"
+      }
+     ],
+     "answer": "**Solde débiteur de la banque : 600 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Balance",
+     "statement": "À partir des soldes ci-dessus, dresser la balance et la contrôler.",
+     "steps": [
+      {
+       "md": "Soldes débiteurs : Banque 600 000 ; Matériel 300 000 ; Caisse 100 000. Solde créditeur : Capital 1 000 000."
+      },
+      {
+       "md": "Total des soldes débiteurs :",
+       "tex": "600000 + 300000 + 100000 = 1000000"
+      },
+      {
+       "md": "Total des soldes créditeurs : 1 000 000. Les deux totaux sont égaux : la balance est équilibrée."
+      }
+     ],
+     "answer": "**Totaux : 1 000 000 FCFA de chaque côté.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Recopier un montant d'un seul côté lors du report.\n- Se tromper de sens en calculant le solde (débit − crédit pour un compte d'actif).\n- Penser qu'une balance équilibrée prouve qu'il n'y a **aucune** erreur : un compte erroné des deux côtés ne se voit pas."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le journal est tenu au fur et à mesure ; le grand livre permet de connaître à tout moment le solde de chaque compte.",
+      "Dans la pratique, le journal est souvent divisé en journaux auxiliaires (achats, ventes, banque, caisse) ; ici on étudie le principe."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-compta-generale-1re-journal-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-operations",
+   "title": "Opérations courantes et TVA",
+   "minutes": 50,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Enregistrer achats, ventes, règlements et frais.",
+    "Distinguer hors taxes (HT), TVA et toutes taxes comprises (TTC).",
+    "Calculer la TVA collectée, la TVA déductible et la TVA à payer.",
+    "Écrire les écritures d'une vente et d'un achat avec TVA."
+   ],
+   "prerequisites": [
+    "etp-compta-generale-1re-comptes",
+    "etp-compta-generale-1re-journal"
+   ],
+   "exercises": [
+    "etp-compta-generale-1re-operations-01",
+    "etp-compta-generale-1re-operations-02",
+    "etp-compta-generale-1re-operations-03",
+    "etp-compta-generale-1re-operations-04",
+    "etp-compta-generale-1re-operations-05",
+    "etp-compta-generale-1re-operations-06"
+   ],
+   "selfCheck": [
+    "etp-compta-generale-1re-operations-q1",
+    "etp-compta-generale-1re-operations-q2",
+    "etp-compta-generale-1re-operations-q3",
+    "etp-compta-generale-1re-operations-q4",
+    "etp-compta-generale-1re-operations-q5"
+   ],
+   "reviewNotes": [
+    "Le taux de TVA est TOUJOURS donné par l'énoncé (valeurs fictives d'exercice) ; ne pas l'affirmer comme règle fiscale.",
+    "Les noms de comptes de TVA sont donnés sans numéros : à adapter au plan comptable utilisé en classe.",
+    "Les noms de comptes et le plan comptable suivent le cadre SYSCOHADA en termes généraux : à faire relire par un enseignant de comptabilité."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "HT, TVA, TTC",
+     "md": "- **HT** : prix hors taxe. **TVA** : taxe sur la valeur ajoutée, calculée sur le prix HT. **TTC** : prix toutes taxes comprises, payé par le client.\n- **TTC = HT + TVA**, et **TVA = HT × taux**.\n- Dans les exercices, le **taux est donné par l'énoncé**.",
+     "tex": "\\text{TTC} = \\text{HT} + \\text{TVA} = \\text{HT} \\times (1 + t)",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "TVA collectée et déductible",
+     "md": "- La **TVA collectée** est celle que l'entreprise facture à ses clients sur ses ventes.\n- La **TVA déductible** est celle qu'elle paie à ses fournisseurs sur ses achats.\n- **TVA à payer à l'État = collectée − déductible** (si le résultat est positif).",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Écritures types",
+     "md": "- **Achat** à crédit : on débite Achats (HT) et TVA déductible, on crédite Fournisseurs (TTC).\n- **Vente** à crédit : on débite Clients (TTC), on crédite Ventes (HT) et TVA collectée.\n- **Règlement** : on débite Fournisseurs (ou on crédite Clients) contre Banque ou Caisse.\n- **Frais** (transport, loyer, électricité) : charge au débit, trésorerie au crédit."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 110,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 70.25,
+        "text": "Prix HT",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 40,
+        "w": 110,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 70.25,
+        "text": "+ TVA",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 40,
+        "w": 110,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 345.0,
+        "y": 70.25,
+        "text": "= TTC",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 115,
+        "text": "400 000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 115,
+        "text": "77 000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 115,
+        "text": "477 000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 480,
+        "y": 70,
+        "text": "taux fictif 19,25 %",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "HT, TVA et TTC pour un taux supposé de 19,25 %.",
+     "alt": "Trois cases : prix HT 400 000, TVA 77 000, TTC 477 000 FCFA, avec la mention taux fictif 19,25 %."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Vente à crédit avec TVA",
+     "statement": "On suppose un taux de TVA de 19,25 % (donnée de l'énoncé). L'entreprise fictive « Fotso Distribution » vend à crédit des marchandises pour 400 000 FCFA HT. Écrire l'écriture.",
+     "steps": [
+      {
+       "md": "TVA = HT × taux :",
+       "tex": "400000 \\times 0,1925 = 77000"
+      },
+      {
+       "md": "TTC = HT + TVA :",
+       "tex": "400000 + 77000 = 477000"
+      },
+      {
+       "md": "Écriture : débit Clients 477 000 ; crédit Ventes de marchandises 400 000 ; crédit TVA collectée 77 000."
+      }
+     ],
+     "answer": "**Le client doit 477 000 FCFA TTC ; débit 477 000 = crédits 400 000 + 77 000.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — TVA à payer",
+     "statement": "Sur un mois, avec le même taux supposé de 19,25 % : ventes 2 000 000 FCFA HT, achats 1 200 000 FCFA HT. Calculer la TVA à payer.",
+     "steps": [
+      {
+       "md": "TVA collectée :",
+       "tex": "2000000 \\times 0,1925 = 385000"
+      },
+      {
+       "md": "TVA déductible :",
+       "tex": "1200000 \\times 0,1925 = 231000"
+      },
+      {
+       "md": "TVA à payer = collectée − déductible :",
+       "tex": "385000 - 231000 = 154000"
+      }
+     ],
+     "answer": "**TVA à payer : 154 000 FCFA.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer la TVA sur le TTC au lieu du HT.\n- Mettre la TVA dans la charge (Achats) : la TVA déductible a son compte propre.\n- Confondre TVA collectée (sur les ventes) et déductible (sur les achats).\n- Oublier que le client paie le TTC."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La TVA est supportée finalement par le consommateur : l'entreprise la collecte pour l'État et déduit celle qu'elle a payée.",
+      "Cherche toujours dans l'énoncé le taux à utiliser : il peut varier selon l'exercice et la législation en vigueur."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-compta-generale-1re-operations-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-compta-generale-1re-journal-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Compte Caisse : débit total 250 000 FCFA, crédit total 190 000 FCFA. Quel est le solde débiteur ?",
+   "explanation": "250 000 − 190 000 = 60 000 FCFA.",
+   "method": "Solde = débit − crédit.",
+   "source": "Exercice original",
+   "answer": 60000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Le journal enregistre les opérations…",
+   "explanation": "Le journal est chronologique.",
+   "source": "Exercice original",
+   "choices": [
+    "Par ordre chronologique",
+    "Par ordre alphabétique",
+    "Par montant croissant",
+    "Seulement à la fin de l'année"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Dans une balance, le total des débits est égal au total des crédits.",
+   "explanation": "C'est la conséquence de la partie double.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Compte Clients : débit 480 000, crédit 350 000 (encaissements). Quel est le solde (FCFA) ?",
+   "explanation": "480 000 − 350 000 = 130 000 : les clients doivent encore 130 000.",
+   "source": "Exercice original",
+   "answer": 130000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Explique, avec tes mots, la différence entre le journal et le grand livre.",
+   "explanation": "Le journal est le premier enregistrement ; le grand livre en est le classement par compte.",
+   "source": "Exercice original",
+   "model": "Le journal note les opérations dans l'ordre des dates, chacune avec ses deux comptes. Le grand livre regroupe les opérations compte par compte, ce qui permet de lire l'historique et le solde de chaque compte.",
+   "rubric": [
+    "Le journal est chronologique.",
+    "Le grand livre est classé par compte.",
+    "Le grand livre reprend les écritures du journal."
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Entreprise fictive. Opérations : (1) apport en banque de 800 000 FCFA ; (2) achat de marchandises payé par la banque, 250 000 FCFA ; (3) retrait de 50 000 FCFA de la banque pour la caisse.",
+   "method": "Calculer les totaux par compte, puis les soldes, puis contrôler.",
+   "mistakes": [
+    "Oublier le retrait lors du calcul des crédits de la banque."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-compta-generale-1re-journal-06-a",
+     "points": 1,
+     "prompt": "Total des débits du compte Banque (FCFA) ?",
+     "explanation": "Seul l'apport (1) est au débit de la banque.",
+     "kind": "numeric",
+     "answer": 800000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-journal-06-b",
+     "points": 1,
+     "prompt": "Total des crédits du compte Banque (FCFA) ?",
+     "explanation": "250 000 + 50 000 = 300 000.",
+     "kind": "numeric",
+     "answer": 300000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-journal-06-c",
+     "points": 1,
+     "prompt": "Solde débiteur de la banque (FCFA) ?",
+     "explanation": "800 000 − 300 000 = 500 000.",
+     "kind": "numeric",
+     "answer": 500000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-journal-06-d",
+     "points": 2,
+     "prompt": "Total des soldes débiteurs de la balance (FCFA) : Banque + Achats + Caisse ?",
+     "explanation": "Banque 500 000 + Achats 250 000 + Caisse 50 000 = 800 000, égal au capital créditeur de 800 000.",
+     "kind": "numeric",
+     "answer": 800000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Le report consiste à…",
+   "choices": [
+    "Supprimer une écriture",
+    "Copier les écritures du journal dans les comptes du grand livre",
+    "Calculer le bilan",
+    "Payer une dette"
+   ],
+   "answer": 1,
+   "explanation": "Reporter = passer du journal au grand livre."
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Si un compte d'actif a un débit de 90 000 et un crédit de 40 000, son solde est…",
+   "choices": [
+    "Débiteur de 50 000",
+    "Créditeur de 50 000",
+    "Débiteur de 130 000",
+    "Nul"
+   ],
+   "answer": 0,
+   "explanation": "90 000 − 40 000 = 50 000 au débit."
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "La balance sert surtout à…",
+   "choices": [
+    "Calculer la TVA",
+    "Fixer les prix",
+    "Classer les factures",
+    "Contrôler l'égalité des débits et des crédits"
+   ],
+   "answer": 3,
+   "explanation": "C'est un contrôle."
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Une écriture au journal contient…",
+   "choices": [
+    "Un seul compte",
+    "Seulement un montant",
+    "Un compte débité et un compte crédité",
+    "Un nom de client"
+   ],
+   "answer": 2,
+   "explanation": "Deux comptes au moins, et un montant."
+  },
+  {
+   "id": "etp-compta-generale-1re-journal-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-journal",
+   "prompt": "Une pièce justificative est par exemple…",
+   "choices": [
+    "Une balance",
+    "Une facture",
+    "Un bilan",
+    "Un grand livre"
+   ],
+   "answer": 1,
+   "explanation": "La facture justifie l'écriture."
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "Taux supposé 10 % (donné par l'énoncé). Prix HT : 50 000 FCFA. Quelle est la TVA ?",
+   "explanation": "TVA = 50 000 × 0,10 = 5 000 FCFA.",
+   "method": "TVA = HT × taux.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": 5000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "HT = 80 000 FCFA, TVA = 15 400 FCFA. Quel est le TTC ?",
+   "explanation": "TTC = 80 000 + 15 400 = 95 400.",
+   "source": "Exercice original",
+   "answer": 95400,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "Quand l'entreprise achète à crédit, quel compte est crédité ?",
+   "explanation": "On crédite Fournisseurs du montant TTC dû ; on débite Achats (HT) et TVA déductible.",
+   "source": "Exercice original",
+   "choices": [
+    "Fournisseurs (TTC)",
+    "Ventes",
+    "Clients",
+    "TVA collectée"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "Taux supposé 19,25 %. TTC d'une vente = 238 500 FCFA. Quel est le prix HT ? (arrondir à l'unité)",
+   "explanation": "TTC = HT × 1,1925, donc HT = 238 500 ÷ 1,1925 = 200 000.",
+   "method": "Diviser le TTC par (1 + taux).",
+   "mistakes": [
+    "Retrancher 19,25 % du TTC au lieu de diviser par 1,1925."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "answer": 200000,
+   "tolerance": 1,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "Si la TVA collectée est de 300 000 et la TVA déductible de 180 000 FCFA, l'entreprise doit 120 000 FCFA à l'État.",
+   "explanation": "300 000 − 180 000 = 120 000.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "Taux de TVA supposé : 18 % (donnée de l'énoncé). L'entreprise fictive « Ngono Négoce » vend des marchandises pour 600 000 FCFA HT et en a acheté pour 350 000 FCFA HT sur la période.",
+   "method": "Calculer chaque TVA sur le HT, puis soustraire.",
+   "mistakes": [
+    "Utiliser le TTC comme base."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Taux fictif d'exercice.",
+   "parts": [
+    {
+     "id": "etp-compta-generale-1re-operations-06-a",
+     "points": 1,
+     "prompt": "TVA collectée (FCFA) ?",
+     "explanation": "600 000 × 0,18 = 108 000.",
+     "kind": "numeric",
+     "answer": 108000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "review": true
+    },
+    {
+     "id": "etp-compta-generale-1re-operations-06-b",
+     "points": 1,
+     "prompt": "TVA déductible (FCFA) ?",
+     "explanation": "350 000 × 0,18 = 63 000.",
+     "kind": "numeric",
+     "answer": 63000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "review": true
+    },
+    {
+     "id": "etp-compta-generale-1re-operations-06-c",
+     "points": 2,
+     "prompt": "TVA à payer (FCFA) ?",
+     "explanation": "108 000 − 63 000 = 45 000.",
+     "kind": "numeric",
+     "answer": 45000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "review": true
+    },
+    {
+     "id": "etp-compta-generale-1re-operations-06-d",
+     "points": 1,
+     "prompt": "Montant TTC facturé au client pour la vente (FCFA) ?",
+     "explanation": "600 000 + 108 000 = 708 000.",
+     "kind": "numeric",
+     "answer": 708000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "La TVA se calcule sur…",
+   "choices": [
+    "Le prix TTC",
+    "Le prix HT",
+    "Le bénéfice",
+    "Le capital"
+   ],
+   "answer": 1,
+   "explanation": "TVA = HT × taux."
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "TTC = ",
+   "choices": [
+    "HT + TVA",
+    "HT − TVA",
+    "TVA × HT",
+    "HT ÷ TVA"
+   ],
+   "answer": 0,
+   "explanation": "Le TTC est le HT augmenté de la TVA."
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "La TVA facturée aux clients s'appelle…",
+   "choices": [
+    "TVA déductible",
+    "TVA à crédit",
+    "TVA nulle",
+    "TVA collectée"
+   ],
+   "answer": 3,
+   "explanation": "C'est la TVA collectée."
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "TVA à payer = ",
+   "choices": [
+    "Déductible − collectée",
+    "Collectée + déductible",
+    "Collectée − déductible",
+    "HT − TTC"
+   ],
+   "answer": 2,
+   "explanation": "On déduit ce qu'on a déjà payé."
+  },
+  {
+   "id": "etp-compta-generale-1re-operations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-operations",
+   "prompt": "Un loyer payé par banque s'enregistre…",
+   "choices": [
+    "Produit au crédit",
+    "Charge au débit, banque au crédit",
+    "Banque au débit",
+    "Capital au débit"
+   ],
+   "answer": 1,
+   "explanation": "Charge débitée, trésorerie créditée."
+  }
+ ]
+}

@@ -1,0 +1,392 @@
+{
+ "chapter": "etp-compta-generale-1re-fin-periode",
+ "lessons": [
+  {
+   "id": "etp-compta-generale-1re-amort-resultat",
+   "title": "Amortissement linéaire et résultat",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer pourquoi une immobilisation perd de la valeur.",
+    "Calculer une annuité d'amortissement linéaire.",
+    "Déterminer la valeur nette comptable.",
+    "Calculer le résultat comme produits − charges."
+   ],
+   "prerequisites": [
+    "etp-compta-generale-1re-comptes",
+    "etp-compta-generale-1re-operations"
+   ],
+   "exercises": [
+    "etp-compta-generale-1re-amort-resultat-01",
+    "etp-compta-generale-1re-amort-resultat-02",
+    "etp-compta-generale-1re-amort-resultat-03",
+    "etp-compta-generale-1re-amort-resultat-04",
+    "etp-compta-generale-1re-amort-resultat-05",
+    "etp-compta-generale-1re-amort-resultat-06"
+   ],
+   "selfCheck": [
+    "etp-compta-generale-1re-amort-resultat-q1",
+    "etp-compta-generale-1re-amort-resultat-q2",
+    "etp-compta-generale-1re-amort-resultat-q3",
+    "etp-compta-generale-1re-amort-resultat-q4",
+    "etp-compta-generale-1re-amort-resultat-q5"
+   ],
+   "reviewNotes": [
+    "Amortissement linéaire sans prorata temporis ; durée et valeur résiduelle données par l'énoncé.",
+    "Résultat simplifié (produits − charges) : à adapter si l'enseignant utilise le compte de résultat complet.",
+    "Les noms de comptes et le plan comptable suivent le cadre SYSCOHADA en termes généraux : à faire relire par un enseignant de comptabilité."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Amortissement",
+     "md": "L'**amortissement** constate la **perte de valeur** d'une immobilisation (matériel, véhicule, bâtiment) qui s'use ou devient dépassée. On répartit son coût sur la durée d'utilisation : chaque année, une partie est comptée comme une **charge**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Amortissement linéaire",
+     "md": "Dans la méthode **linéaire**, l'annuité est constante : **annuité = valeur d'origine ÷ durée** (durée en années, valeur résiduelle supposée nulle). Le **taux** est 1 ÷ durée. La **valeur nette comptable (VNC)** = valeur d'origine − amortissements cumulés.",
+     "tex": "a = \\frac{V}{n} \\qquad \\text{VNC} = V - \\text{amortissements cumulés}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Résultat",
+     "md": "Le **résultat** de la période = **produits − charges**. Positif : **bénéfice** ; négatif : **perte**.",
+     "tex": "\\text{Résultat} = \\text{Produits} - \\text{Charges}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Relever valeur d'origine et durée.\n2. Calculer l'annuité.\n3. Mettre l'annuité dans les charges (dotation aux amortissements).\n4. Calculer le résultat : produits − charges.\n5. Pour le bilan, utiliser la VNC."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "milliers de FCFA",
+      "bars": [
+       {
+        "label": "Achat",
+        "value": 1200.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "An 1",
+        "value": 960.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "An 2",
+        "value": 720.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "An 3",
+        "value": 480.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "An 4",
+        "value": 240.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "An 5",
+        "value": 0.0,
+        "color": [
+         "blue"
+        ]
+       }
+      ]
+     },
+     "caption": "VNC d'un matériel de 1 200 000 FCFA amorti sur 5 ans.",
+     "alt": "Histogramme décroissant : 1 200, 960, 720, 480, 240 puis 0 milliers de FCFA, de l'achat à l'année 5."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Annuité et VNC",
+     "statement": "Un matériel fictif coûte 1 200 000 FCFA et est amorti sur 5 ans en linéaire. Calculer l'annuité et la VNC après 2 ans.",
+     "steps": [
+      {
+       "md": "Annuité = valeur ÷ durée :",
+       "tex": "1200000 \\div 5 = 240000"
+      },
+      {
+       "md": "Amortissements cumulés après 2 ans :",
+       "tex": "2 \\times 240000 = 480000"
+      },
+      {
+       "md": "VNC = valeur − amortissements cumulés :",
+       "tex": "1200000 - 480000 = 720000"
+      }
+     ],
+     "answer": "**Annuité : 240 000 FCFA ; VNC après 2 ans : 720 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Résultat",
+     "statement": "Produits (ventes) : 5 400 000 FCFA. Charges : achats 2 800 000, loyer 600 000, salaires 900 000, plus la dotation aux amortissements de l'exemple 1 (240 000). Calculer le résultat.",
+     "steps": [
+      {
+       "md": "Total des charges :",
+       "tex": "2800000 + 600000 + 900000 + 240000 = 4540000"
+      },
+      {
+       "md": "Résultat = produits − charges :",
+       "tex": "5400000 - 4540000 = 860000"
+      }
+     ],
+     "answer": "**Bénéfice : 860 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'amortissement est une **sortie d'argent** : c'est une charge calculée, sans paiement.\n- Oublier la dotation dans les charges.\n- Confondre annuité et VNC.\n- Diviser par le mauvais nombre d'années."
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'amortissement n'est pas appliqué aux terrains, qui ne s'usent pas normalement.",
+      "Il existe d'autres méthodes (dégressif) ; au programme de base on étudie surtout le linéaire."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-compta-generale-1re-amort-resultat-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "Un véhicule de 3 000 000 FCFA est amorti en linéaire sur 6 ans. Quelle est l'annuité ?",
+   "explanation": "3 000 000 ÷ 6 = 500 000.",
+   "method": "Annuité = valeur ÷ durée.",
+   "source": "Exercice original",
+   "answer": 500000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "Produits : 2 500 000 ; charges : 1 900 000 FCFA. Quel est le résultat ?",
+   "explanation": "2 500 000 − 1 900 000 = 600 000 : bénéfice.",
+   "source": "Exercice original",
+   "answer": 600000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "Si les charges dépassent les produits, l'entreprise réalise une perte.",
+   "explanation": "Résultat = produits − charges est négatif : perte.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "Matériel de 900 000 FCFA amorti sur 4 ans en linéaire. Quelle est la VNC après 3 ans ?",
+   "explanation": "Annuité = 900 000 ÷ 4 = 225 000. Cumul après 3 ans = 675 000. VNC = 900 000 − 675 000 = 225 000.",
+   "method": "Annuité, cumul, VNC.",
+   "source": "Exercice original",
+   "answer": 225000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "Quel est le taux d'amortissement linéaire d'un bien amorti sur 8 ans ?",
+   "explanation": "Taux = 1 ÷ 8 = 0,125 = 12,5 %.",
+   "method": "Taux = 1 ÷ durée.",
+   "source": "Exercice original",
+   "choices": [
+    "8 %",
+    "12,5 %",
+    "10 %",
+    "80 %"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "Entreprise fictive « Tchoua Négoce », exercice annuel. Produits : 7 000 000 FCFA. Charges : achats 4 200 000 ; salaires 1 500 000 ; loyer 600 000. Elle possède un matériel acheté 2 000 000 FCFA, amorti en linéaire sur 5 ans.",
+   "method": "Annuité, charges totales, résultat, VNC.",
+   "mistakes": [
+    "Oublier d'inclure la dotation dans les charges."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-compta-generale-1re-amort-resultat-06-a",
+     "points": 1,
+     "prompt": "Annuité d'amortissement (FCFA) ?",
+     "explanation": "2 000 000 ÷ 5 = 400 000.",
+     "kind": "numeric",
+     "answer": 400000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-amort-resultat-06-b",
+     "points": 1,
+     "prompt": "Total des charges, dotation comprise (FCFA) ?",
+     "explanation": "4 200 000 + 1 500 000 + 600 000 + 400 000 = 6 700 000.",
+     "kind": "numeric",
+     "answer": 6700000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-amort-resultat-06-c",
+     "points": 2,
+     "prompt": "Résultat de l'exercice (FCFA) ?",
+     "explanation": "7 000 000 − 6 700 000 = 300 000 : bénéfice.",
+     "kind": "numeric",
+     "answer": 300000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-amort-resultat-06-d",
+     "points": 1,
+     "prompt": "VNC du matériel après 1 an (FCFA) ?",
+     "explanation": "2 000 000 − 400 000 = 1 600 000.",
+     "kind": "numeric",
+     "answer": 1600000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "L'amortissement linéaire donne…",
+   "choices": [
+    "Une annuité croissante",
+    "Une annuité constante",
+    "Aucune charge",
+    "Une dette"
+   ],
+   "answer": 1,
+   "explanation": "Annuité constante."
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "La VNC est…",
+   "choices": [
+    "Valeur d'origine − amortissements cumulés",
+    "Valeur d'origine + amortissements",
+    "Le prix de vente",
+    "Le capital"
+   ],
+   "answer": 0,
+   "explanation": "C'est la valeur restante au bilan."
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "La dotation aux amortissements est…",
+   "choices": [
+    "Un produit",
+    "Une dette",
+    "Un capital",
+    "Une charge"
+   ],
+   "answer": 3,
+   "explanation": "C'est une charge calculée."
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "Un résultat négatif est…",
+   "choices": [
+    "Un bénéfice",
+    "Un capital",
+    "Une perte",
+    "Une TVA"
+   ],
+   "answer": 2,
+   "explanation": "Charges > produits."
+  },
+  {
+   "id": "etp-compta-generale-1re-amort-resultat-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-amort-resultat",
+   "prompt": "Le résultat se calcule par…",
+   "choices": [
+    "Charges − produits",
+    "Produits − charges",
+    "Actif − passif",
+    "TTC − HT"
+   ],
+   "answer": 1,
+   "explanation": "Résultat = produits − charges."
+  }
+ ]
+}

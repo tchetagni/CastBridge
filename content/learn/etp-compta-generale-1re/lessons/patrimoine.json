@@ -1,0 +1,984 @@
+{
+ "chapter": "etp-compta-generale-1re-patrimoine",
+ "lessons": [
+  {
+   "id": "etp-compta-generale-1re-bilan",
+   "title": "Le patrimoine et le bilan",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer ce que l'entreprise possède (actif) de ce qu'elle doit (passif).",
+    "Classer un élément dans le bon poste du bilan.",
+    "Établir un bilan simple et vérifier l'équation fondamentale.",
+    "Calculer le capital (ressources propres) par différence."
+   ],
+   "exercises": [
+    "etp-compta-generale-1re-bilan-01",
+    "etp-compta-generale-1re-bilan-02",
+    "etp-compta-generale-1re-bilan-03",
+    "etp-compta-generale-1re-bilan-04",
+    "etp-compta-generale-1re-bilan-05",
+    "etp-compta-generale-1re-bilan-06"
+   ],
+   "selfCheck": [
+    "etp-compta-generale-1re-bilan-q1",
+    "etp-compta-generale-1re-bilan-q2",
+    "etp-compta-generale-1re-bilan-q3",
+    "etp-compta-generale-1re-bilan-q4",
+    "etp-compta-generale-1re-bilan-q5"
+   ],
+   "reviewNotes": [
+    "Vocabulaire du bilan volontairement simplifié (actif immobilisé, circulant, trésorerie ; capitaux propres, dettes).",
+    "Les noms de comptes et le plan comptable suivent le cadre SYSCOHADA en termes généraux : à faire relire par un enseignant de comptabilité."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Patrimoine",
+     "md": "Le **patrimoine** d'une entreprise est l'ensemble de ce qu'elle **possède** (les *biens* et les sommes qu'on lui doit) et de ce qu'elle **doit** (ses *dettes*) à une date donnée."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Actif et passif",
+     "md": "- L'**actif** regroupe ce que l'entreprise possède ou qu'on lui doit : terrain, matériel, marchandises en stock, créances sur les clients, argent en banque et en caisse.\n- Le **passif** regroupe l'origine de l'argent : le **capital** apporté par le propriétaire et les **dettes** (emprunt, fournisseurs)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Équation fondamentale",
+     "md": "À tout moment : **Actif = Passif**, c'est-à-dire **Actif = Capitaux propres + Dettes**. Le bilan est donc toujours équilibré.",
+     "tex": "\\text{Actif} = \\text{Capitaux propres} + \\text{Dettes}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Classer un élément",
+     "md": "1. Est-ce un bien ou une somme que l'on nous doit ? Actif.\n2. Est-ce une somme que l'on doit payer ou un apport du propriétaire ? Passif.\n3. Dans l'actif : durable (immobilisation), à écouler (stock, créances) ou liquide (banque, caisse)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "text",
+        "x": 100,
+        "y": 24,
+        "text": "ACTIF",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 24,
+        "text": "PASSIF",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 36,
+        "w": 200,
+        "h": 200,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 215,
+        "y": 36,
+        "w": 195,
+        "h": 200,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 18,
+        "y": 44,
+        "w": 184,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 73.9,
+        "text": "Immobilisations",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 18,
+        "y": 100,
+        "w": 184,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 134.9,
+        "text": "Stocks et créances",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 18,
+        "y": 166,
+        "w": 184,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 200.9,
+        "text": "Banque et caisse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 223,
+        "y": 44,
+        "w": 179,
+        "h": 90,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 312.5,
+        "y": 93.9,
+        "text": "Capital",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 223,
+        "y": 140,
+        "w": 179,
+        "h": 86,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 312.5,
+        "y": 187.9,
+        "text": "Dettes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Structure simplifiée du bilan.",
+     "alt": "Deux colonnes égales : à gauche l'actif (immobilisations, stocks et créances, banque et caisse), à droite le passif (capital et dettes)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Établir un bilan",
+     "statement": "La boutique fictive « Mbarga Tissus » possède : matériel 600 000 FCFA, marchandises 450 000, clients (créances) 150 000, banque 300 000, caisse 100 000. Elle a reçu 1 000 000 de capital, a un emprunt de 400 000 et doit 200 000 à ses fournisseurs. Dresser le bilan.",
+     "steps": [
+      {
+       "md": "On additionne l'actif :",
+       "tex": "600000 + 450000 + 150000 + 300000 + 100000 = 1600000"
+      },
+      {
+       "md": "On additionne le passif :",
+       "tex": "1000000 + 400000 + 200000 = 1600000"
+      },
+      {
+       "md": "On compare : les deux totaux sont égaux, le bilan est équilibré."
+      }
+     ],
+     "answer": "**Total actif = total passif = 1 600 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Retrouver le capital",
+     "statement": "Une entreprise fictive a un actif total de 2 500 000 FCFA et des dettes totales de 1 100 000 FCFA. Quel est son capital (capitaux propres) ?",
+     "steps": [
+      {
+       "md": "On part de l'équation : Actif = Capitaux propres + Dettes.",
+       "tex": "\\text{Capitaux propres} = \\text{Actif} - \\text{Dettes}"
+      },
+      {
+       "md": "On remplace :",
+       "tex": "2500000 - 1100000 = 1400000"
+      }
+     ],
+     "answer": "**Capitaux propres = 1 400 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mettre une créance client au **passif** : c'est une somme que l'on nous doit, donc à l'**actif**.\n- Oublier que les dettes fournisseurs sont au passif.\n- Croire que l'actif est plus grand que le passif : les deux totaux sont toujours égaux."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le bilan est une photographie à une date précise (par exemple le 31 décembre). Un autre jour, les montants changent mais l'égalité reste vraie.",
+      "Dans le cadre comptable régional (SYSCOHADA), le bilan est présenté avec un classement précis des postes ; ici on retient seulement la logique générale."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-compta-generale-1re-bilan-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes",
+   "title": "Les comptes et la partie double",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer ce qu'est un compte et son fonctionnement en T.",
+    "Appliquer la règle du débit et du crédit selon la nature du compte.",
+    "Enregistrer une opération en partie double.",
+    "Situer les classes de comptes du plan comptable."
+   ],
+   "prerequisites": [
+    "etp-compta-generale-1re-bilan"
+   ],
+   "exercises": [
+    "etp-compta-generale-1re-comptes-01",
+    "etp-compta-generale-1re-comptes-02",
+    "etp-compta-generale-1re-comptes-03",
+    "etp-compta-generale-1re-comptes-04",
+    "etp-compta-generale-1re-comptes-05",
+    "etp-compta-generale-1re-comptes-06"
+   ],
+   "selfCheck": [
+    "etp-compta-generale-1re-comptes-q1",
+    "etp-compta-generale-1re-comptes-q2",
+    "etp-compta-generale-1re-comptes-q3",
+    "etp-compta-generale-1re-comptes-q4",
+    "etp-compta-generale-1re-comptes-q5"
+   ],
+   "reviewNotes": [
+    "Règles débit/crédit classiques (actif augmente au débit, passif augmente au crédit, charges au débit, produits au crédit) : à confirmer par un enseignant.",
+    "Les classes 1 à 9 sont citées en termes généraux ; vérifier les intitulés exacts."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Compte",
+     "md": "Un **compte** suit l'évolution d'un élément (caisse, banque, clients, ventes...). On le représente en **T** : la partie gauche est le **débit**, la partie droite est le **crédit**. *Débit* et *crédit* ne veulent pas dire « perte » et « gain » : ce sont seulement la gauche et la droite."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Règle du débit et du crédit",
+     "md": "- Compte d'**actif** (caisse, banque, stock, matériel, clients) : il **augmente au débit** et **diminue au crédit**.\n- Compte de **passif** (capital, emprunt, fournisseurs) : il **augmente au crédit** et **diminue au débit**.\n- **Charge** (achats, loyer...) : au **débit**. **Produit** (ventes...) : au **crédit**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Partie double",
+     "md": "Toute opération a **deux faces** : un compte est débité, un autre est crédité, **pour le même montant**. Ainsi, pour chaque opération, **total des débits = total des crédits**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode d'enregistrement",
+     "md": "1. Lire l'opération et repérer les deux comptes touchés.\n2. Pour chacun, dire s'il augmente ou diminue.\n3. Appliquer la règle : débit ou crédit.\n4. Vérifier que le montant débité égale le montant crédité."
+    },
+    {
+     "type": "text",
+     "md": "**Les classes de comptes** (cadre SYSCOHADA, en termes généraux) : classe 1 ressources durables ; classe 2 actif immobilisé ; classe 3 stocks ; classe 4 comptes de tiers (clients, fournisseurs...) ; classe 5 trésorerie ; classe 6 charges ; classe 7 produits ; classe 8 autres charges et autres produits ; classe 9 engagements et comptabilité analytique.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "text",
+        "x": 130.0,
+        "y": 22,
+        "text": "Caisse (actif)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 15,
+        "y1": 34,
+        "x2": 245,
+        "y2": 34,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130.0,
+        "y1": 34,
+        "x2": 130.0,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 52,
+        "text": "Débit",
+        "size": 13,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 52,
+        "text": "Crédit",
+        "size": 13,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 76,
+        "text": "200 000",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 420.0,
+        "y": 22,
+        "text": "Capital (passif)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 305,
+        "y1": 34,
+        "x2": 535,
+        "y2": 34,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 420.0,
+        "y1": 34,
+        "x2": 420.0,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 355.0,
+        "y": 52,
+        "text": "Débit",
+        "size": 13,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 485.0,
+        "y": 52,
+        "text": "Crédit",
+        "size": 13,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 485.0,
+        "y": 76,
+        "text": "200 000",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Apport de 200 000 FCFA en caisse.",
+     "alt": "Deux comptes en T : Caisse avec 200 000 au débit, Capital avec 200 000 au crédit."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Apport en caisse",
+     "statement": "Le propriétaire apporte 200 000 FCFA en espèces à son entreprise. Enregistrer l'opération.",
+     "steps": [
+      {
+       "md": "Comptes touchés : Caisse (actif, augmente) et Capital (passif, augmente)."
+      },
+      {
+       "md": "Caisse augmente : on la **débite**. Capital augmente : on le **crédite**."
+      },
+      {
+       "md": "Vérification : débit 200 000 = crédit 200 000."
+      }
+     ],
+     "answer": "**Débit Caisse 200 000 ; crédit Capital 200 000.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Paiement d'un fournisseur",
+     "statement": "L'entreprise paie en espèces 75 000 FCFA qu'elle devait à un fournisseur. Enregistrer.",
+     "steps": [
+      {
+       "md": "Comptes touchés : Fournisseurs (passif, la dette diminue) et Caisse (actif, diminue)."
+      },
+      {
+       "md": "Une dette qui diminue se **débite** ; la caisse qui diminue se **crédite**."
+      }
+     ],
+     "answer": "**Débit Fournisseurs 75 000 ; crédit Caisse 75 000.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que « débit » veut dire « diminution » : pour la caisse, le débit **augmente** le compte.\n- Oublier la deuxième face de l'opération.\n- Débiter et créditer des montants différents."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le **solde** d'un compte est la différence entre le total du débit et celui du crédit : s'il y a plus au débit, le solde est débiteur, sinon créditeur.",
+      "Les comptes de charges et de produits servent à calculer le résultat de la période (fiche 5)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-compta-generale-1re-comptes-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-compta-generale-1re-bilan-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Matériel 800 000 FCFA, stock 300 000 FCFA, banque 250 000 FCFA. Quel est le total de l'actif ?",
+   "explanation": "800 000 + 300 000 + 250 000 = 1 350 000.",
+   "method": "Additionner tous les éléments de l'actif.",
+   "mistakes": [
+    "Oublier un poste dans l'addition."
+   ],
+   "source": "Exercice original",
+   "answer": 1350000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Quel élément figure au passif du bilan ?",
+   "explanation": "Un emprunt est une dette : il est au passif. Les trois autres éléments sont des biens ou des créances, donc à l'actif.",
+   "method": "Se demander : est-ce que je possède, ou est-ce que je dois ?",
+   "source": "Exercice original",
+   "choices": [
+    "Le stock de marchandises",
+    "Une somme due par un client",
+    "Un emprunt bancaire",
+    "L'argent en caisse"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Une somme que nous doit un client est une dette de l'entreprise.",
+   "explanation": "C'est une **créance** : l'entreprise attend de l'argent, elle est donc à l'actif. La dette serait une somme que l'entreprise doit payer.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Actif total : 3 200 000 FCFA ; dettes : 1 250 000 FCFA. Calculer les capitaux propres.",
+   "explanation": "Capitaux propres = Actif − Dettes = 3 200 000 − 1 250 000 = 1 950 000.",
+   "method": "Équation fondamentale.",
+   "source": "Exercice original",
+   "answer": 1950000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Associe chaque élément à sa catégorie.",
+   "explanation": "Le camion est un bien durable ; les marchandises sont un stock ; ce que doit le client est une créance ; ce que l'on doit au fournisseur est une dette.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Camion de livraison",
+     "Immobilisation (actif)"
+    ],
+    [
+     "Marchandises en magasin",
+     "Stock (actif)"
+    ],
+    [
+     "Somme due par un client",
+     "Créance (actif)"
+    ],
+    [
+     "Somme due à un fournisseur",
+     "Dette (passif)"
+    ]
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Au 31 décembre, l'entreprise fictive « Atangana Services » possède : bâtiment 2 000 000 FCFA, matériel de bureau 500 000, stock 700 000, créances clients 400 000, banque 600 000, caisse 100 000. Elle a un emprunt de 1 500 000 FCFA et des dettes fournisseurs de 300 000 FCFA.",
+   "method": "Additionner l'actif, additionner les dettes, soustraire pour le capital.",
+   "mistakes": [
+    "Mettre la caisse au passif.",
+    "Oublier que payer une dette réduit aussi la banque."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-compta-generale-1re-bilan-06-a",
+     "points": 1,
+     "prompt": "Total de l'actif (FCFA) ?",
+     "explanation": "2 000 000 + 500 000 + 700 000 + 400 000 + 600 000 + 100 000 = 4 300 000.",
+     "kind": "numeric",
+     "answer": 4300000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-bilan-06-b",
+     "points": 1,
+     "prompt": "Total des dettes (FCFA) ?",
+     "explanation": "1 500 000 + 300 000 = 1 800 000.",
+     "kind": "numeric",
+     "answer": 1800000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-bilan-06-c",
+     "points": 2,
+     "prompt": "Capital (capitaux propres) de l'entreprise (FCFA) ?",
+     "explanation": "Capitaux propres = Actif − Dettes = 4 300 000 − 1 800 000 = 2 500 000.",
+     "kind": "numeric",
+     "answer": 2500000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-bilan-06-d",
+     "points": 2,
+     "prompt": "L'entreprise rembourse 100 000 FCFA à un fournisseur par la banque. Quel est le nouveau total de l'actif (FCFA) ?",
+     "explanation": "La banque baisse de 100 000 (actif) et la dette fournisseur baisse de 100 000 (passif). Actif = 4 300 000 − 100 000 = 4 200 000.",
+     "kind": "numeric",
+     "answer": 4200000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Le bilan est équilibré lorsque…",
+   "choices": [
+    "Actif > Passif",
+    "Actif = Passif",
+    "Passif = 0",
+    "Capital = Dettes"
+   ],
+   "answer": 1,
+   "explanation": "Le bilan est toujours équilibré : Actif = Passif."
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Les marchandises en magasin sont…",
+   "choices": [
+    "Un stock (actif)",
+    "Un élément du passif",
+    "Un capital",
+    "Une dette"
+   ],
+   "answer": 0,
+   "explanation": "Ce sont des biens possédés : stock, à l'actif."
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Capital + Dettes représente…",
+   "choices": [
+    "L'actif seulement",
+    "Le résultat",
+    "La trésorerie",
+    "Le total du passif"
+   ],
+   "answer": 3,
+   "explanation": "Capital (capitaux propres) + dettes = passif."
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "Un emprunt à la banque est…",
+   "choices": [
+    "Une créance",
+    "Une immobilisation",
+    "Une dette",
+    "Un stock"
+   ],
+   "answer": 2,
+   "explanation": "On doit rembourser : c'est une dette (passif)."
+  },
+  {
+   "id": "etp-compta-generale-1re-bilan-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-bilan",
+   "prompt": "L'argent en caisse est classé…",
+   "choices": [
+    "Au passif",
+    "À l'actif (trésorerie)",
+    "En dettes",
+    "Dans le capital"
+   ],
+   "answer": 1,
+   "explanation": "Argent disponible : actif, trésorerie."
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Quand la caisse augmente, on la…",
+   "explanation": "La caisse est un compte d'actif : il augmente au débit.",
+   "source": "Exercice original",
+   "choices": [
+    "Débite",
+    "Crédite",
+    "Ni l'un ni l'autre",
+    "Débite puis crédite"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Le compte « Fournisseurs » (dette) augmente quand on le…",
+   "explanation": "Un compte de passif augmente au crédit.",
+   "source": "Exercice original",
+   "choices": [
+    "Débite",
+    "Solde",
+    "Crédite",
+    "Annule"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Dans une opération en partie double, le total débité est égal au total crédité.",
+   "explanation": "C'est le principe de la partie double.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "L'entreprise achète du matériel à 300 000 FCFA et le paie par la banque. Quel enregistrement ?",
+   "explanation": "Le matériel (actif) augmente : débit. La banque (actif) diminue : crédit.",
+   "method": "Chercher ce qui augmente et ce qui diminue.",
+   "source": "Exercice original",
+   "choices": [
+    "Débit Banque / crédit Matériel",
+    "Débit Matériel / crédit Banque",
+    "Débit Matériel / crédit Capital",
+    "Débit Caisse / crédit Matériel"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Associe chaque compte à sa classe (cadre SYSCOHADA, termes généraux).",
+   "explanation": "Stocks : classe 3 ; clients : tiers, classe 4 ; banque : trésorerie, classe 5 ; ventes : produits, classe 7.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Classes à confirmer avec le plan comptable.",
+   "pairs": [
+    [
+     "Stock de marchandises",
+     "Classe 3"
+    ],
+    [
+     "Clients",
+     "Classe 4"
+    ],
+    [
+     "Banque",
+     "Classe 5"
+    ],
+    [
+     "Ventes de marchandises",
+     "Classe 7"
+    ]
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Trois opérations d'une entreprise fictive : (1) apport en banque de 500 000 FCFA par le propriétaire ; (2) achat de matériel de 120 000 FCFA payé par la banque ; (3) paiement par la banque d'une dette fournisseur de 80 000 FCFA.",
+   "method": "Pour chaque opération, nommer deux comptes, dire augmentation ou diminution, appliquer la règle.",
+   "mistakes": [
+    "Inverser débit et crédit sur la banque."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-compta-generale-1re-comptes-06-a",
+     "points": 1,
+     "prompt": "Opération (1) : quel est le compte crédité ?",
+     "explanation": "La banque est débitée (elle augmente) ; le capital est crédité.",
+     "kind": "mcq",
+     "choices": [
+      "Banque",
+      "Capital",
+      "Matériel",
+      "Fournisseurs"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-compta-generale-1re-comptes-06-b",
+     "points": 1,
+     "prompt": "Opération (2) : de combien le compte Banque est-il crédité (FCFA) ?",
+     "explanation": "Le matériel est débité de 120 000 ; la banque est créditée du même montant.",
+     "kind": "numeric",
+     "answer": 120000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-comptes-06-c",
+     "points": 2,
+     "prompt": "Solde du compte Banque après les trois opérations (FCFA) ? On suppose un solde initial nul.",
+     "explanation": "Débit : 500 000. Crédits : 120 000 + 80 000 = 200 000. Solde débiteur = 300 000.",
+     "kind": "numeric",
+     "answer": 300000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-compta-generale-1re-comptes-06-d",
+     "points": 1,
+     "prompt": "Opération (3) : quel compte est débité ?",
+     "explanation": "La dette fournisseur diminue : on débite Fournisseurs ; on crédite Banque.",
+     "kind": "mcq",
+     "choices": [
+      "Banque",
+      "Capital",
+      "Fournisseurs",
+      "Matériel"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Un compte en T comporte…",
+   "choices": [
+    "Un crédit à gauche et un débit à droite",
+    "Un débit à gauche et un crédit à droite",
+    "Seulement un débit",
+    "Trois colonnes"
+   ],
+   "answer": 1,
+   "explanation": "Débit à gauche, crédit à droite."
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Une charge (achats, loyer) s'enregistre normalement…",
+   "choices": [
+    "Au débit",
+    "Au crédit",
+    "Au passif",
+    "Dans le capital"
+   ],
+   "answer": 0,
+   "explanation": "Les charges sont débitées."
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Les comptes de trésorerie appartiennent à la classe…",
+   "choices": [
+    "1",
+    "2",
+    "7",
+    "5"
+   ],
+   "answer": 3,
+   "explanation": "Classe 5 (banque, caisse)."
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Un compte de passif diminue…",
+   "choices": [
+    "Au crédit",
+    "Jamais",
+    "Au débit",
+    "Au crédit seulement le dimanche"
+   ],
+   "answer": 2,
+   "explanation": "Un compte de passif diminue au débit."
+  },
+  {
+   "id": "etp-compta-generale-1re-comptes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-compta-generale-1re-comptes",
+   "prompt": "Un produit (vente) s'enregistre…",
+   "choices": [
+    "Au débit",
+    "Au crédit",
+    "À l'actif",
+    "Sans écriture"
+   ],
+   "answer": 1,
+   "explanation": "Les produits sont crédités."
+  }
+ ]
+}

@@ -1,0 +1,758 @@
+{
+ "chapter": "etp-maths-commerciales-1re-financier",
+ "lessons": [
+  {
+   "id": "etp-maths-commerciales-1re-interets",
+   "title": "Intérêts simples et escompte commercial",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer l'intérêt simple selon la durée (années, mois, jours).",
+    "Calculer la valeur acquise d'un capital.",
+    "Retrouver le taux, le capital ou la durée.",
+    "Calculer l'escompte commercial et la valeur actuelle d'un effet."
+   ],
+   "prerequisites": [
+    "etp-maths-commerciales-1re-pourcentages"
+   ],
+   "exercises": [
+    "etp-maths-commerciales-1re-interets-01",
+    "etp-maths-commerciales-1re-interets-02",
+    "etp-maths-commerciales-1re-interets-03",
+    "etp-maths-commerciales-1re-interets-04",
+    "etp-maths-commerciales-1re-interets-05",
+    "etp-maths-commerciales-1re-interets-06"
+   ],
+   "selfCheck": [
+    "etp-maths-commerciales-1re-interets-q1",
+    "etp-maths-commerciales-1re-interets-q2",
+    "etp-maths-commerciales-1re-interets-q3",
+    "etp-maths-commerciales-1re-interets-q4",
+    "etp-maths-commerciales-1re-interets-q5"
+   ],
+   "reviewNotes": [
+    "Année commerciale de 360 jours (diviseur 36 000) : convention d'exercice à confirmer avec le cours.",
+    "Formule d'escompte commercial (simple) : taux et durées donnés par l'énoncé.",
+    "Aucune référence légale (taux d'intérêt) ; tous les taux sont fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Intérêt simple",
+     "md": "Un capital prêté ou placé rapporte un **intérêt**. En **intérêt simple**, l'intérêt est calculé chaque année sur le **même capital**, sans ajouter les intérêts passés."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formules",
+     "md": "Pour un capital C, un taux annuel t % et une durée :\n- en années n : I = C × t × n ÷ 100\n- en mois m : I = C × t × m ÷ 1 200\n- en jours j : I = C × t × j ÷ 36 000 (année de 360 jours)",
+     "tex": "I = \\frac{C \\times t \\times n}{100}",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Valeur acquise",
+     "md": "La **valeur acquise** est le capital augmenté des intérêts : **A = C + I**.",
+     "tex": "A = C + I"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Escompte commercial",
+     "md": "Escompter un effet de commerce (ex. une lettre de change), c'est le **négocier avant l'échéance** auprès d'une banque. **Escompte = N × t × j ÷ 36 000**, où N est la valeur nominale et j le nombre de jours restant jusqu'à l'échéance. **Valeur actuelle = N − escompte**.",
+     "tex": "E = \\frac{N \\times t \\times j}{36\\,000} \\qquad V = N - E",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "milliers de FCFA",
+      "bars": [
+       {
+        "label": "Année 0",
+        "value": 600,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Année 1",
+        "value": 636,
+        "color": [
+         "green"
+        ]
+       },
+       {
+        "label": "Année 2",
+        "value": 672,
+        "color": [
+         "green"
+        ]
+       },
+       {
+        "label": "Année 3",
+        "value": 708,
+        "color": [
+         "green"
+        ]
+       }
+      ]
+     },
+     "caption": "Capital de 600 000 FCFA à 6 % en intérêt simple.",
+     "alt": "Histogramme : 600, 636, 672 puis 708 milliers de FCFA ; chaque année ajoute la même somme de 36 000 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Intérêt sur plusieurs années",
+     "statement": "On place 600 000 FCFA à 6 % pendant 2 ans (intérêt simple, taux fictif). Calculer l'intérêt et la valeur acquise.",
+     "steps": [
+      {
+       "md": "Intérêt :",
+       "tex": "I = \\frac{600000 \\times 6 \\times 2}{100} = 72000"
+      },
+      {
+       "md": "Valeur acquise :",
+       "tex": "600000 + 72000 = 672000"
+      }
+     ],
+     "answer": "**Intérêt 72 000 FCFA ; valeur acquise 672 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Durée en jours",
+     "statement": "450 000 FCFA sont placés à 8 % pendant 90 jours (année de 360 jours). Intérêt ?",
+     "steps": [
+      {
+       "md": "La durée est en jours : on utilise le diviseur 36 000."
+      },
+      {
+       "md": "On calcule :",
+       "tex": "I = \\frac{450000 \\times 8 \\times 90}{36000} = 9000"
+      }
+     ],
+     "answer": "**9 000 FCFA.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — Escompte",
+     "statement": "Un effet de 800 000 FCFA est escompté 60 jours avant l'échéance au taux de 9 %. Calculer l'escompte et la valeur actuelle.",
+     "steps": [
+      {
+       "md": "Escompte :",
+       "tex": "E = \\frac{800000 \\times 9 \\times 60}{36000} = 12000"
+      },
+      {
+       "md": "Valeur actuelle :",
+       "tex": "800000 - 12000 = 788000"
+      }
+     ],
+     "answer": "**Escompte 12 000 FCFA ; la banque verse 788 000 FCFA.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger les unités : taux annuel mais durée en mois ou jours sans adapter la formule.\n- Oublier d'ajouter l'intérêt au capital pour la valeur acquise.\n- Calculer l'escompte sur la valeur actuelle au lieu de la valeur nominale."
+    },
+    {
+     "type": "more",
+     "items": [
+      "En intérêts composés, les intérêts rapportent eux-mêmes des intérêts : on utilise une suite géométrique (dernière fiche).",
+      "Dans la pratique, les conditions d'escompte comprennent aussi des commissions ; ici seule la formule simple est utilisée."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-commerciales-1re-interets-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes",
+   "title": "Partages proportionnels et moyennes pondérées",
+   "minutes": 40,
+   "programRef": "Programme de la classe de 1re, séries G (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Partager une somme proportionnellement à des nombres donnés.",
+    "Calculer une moyenne pondérée.",
+    "Calculer un prix moyen d'achat.",
+    "Interpréter les coefficients."
+   ],
+   "prerequisites": [
+    "etp-maths-commerciales-1re-pourcentages"
+   ],
+   "exercises": [
+    "etp-maths-commerciales-1re-partages-moyennes-01",
+    "etp-maths-commerciales-1re-partages-moyennes-02",
+    "etp-maths-commerciales-1re-partages-moyennes-03",
+    "etp-maths-commerciales-1re-partages-moyennes-04",
+    "etp-maths-commerciales-1re-partages-moyennes-05",
+    "etp-maths-commerciales-1re-partages-moyennes-06"
+   ],
+   "selfCheck": [
+    "etp-maths-commerciales-1re-partages-moyennes-q1",
+    "etp-maths-commerciales-1re-partages-moyennes-q2",
+    "etp-maths-commerciales-1re-partages-moyennes-q3",
+    "etp-maths-commerciales-1re-partages-moyennes-q4",
+    "etp-maths-commerciales-1re-partages-moyennes-q5"
+   ],
+   "reviewNotes": [
+    "Exemples fictifs ; partage inversement proportionnel seulement évoqué.",
+    "Vérifier l'usage de « moyenne pondérée » dans les bulletins."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Partage proportionnel",
+     "md": "Partager une somme S **proportionnellement** à des nombres a, b, c, c'est donner à chacun une part proportionnelle à son nombre. On calcule la **valeur d'une part** : S ÷ (a + b + c). Puis chaque bénéficiaire reçoit sa valeur de part × son nombre.",
+     "tex": "\\text{part de } A = \\frac{S}{a+b+c} \\times a"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne pondérée",
+     "md": "Si des valeurs x₁, x₂, … ont des coefficients (poids) c₁, c₂, … , la **moyenne pondérée** est la somme des produits divisée par la somme des coefficients.",
+     "tex": "m = \\frac{c_1 x_1 + c_2 x_2 + \\cdots}{c_1 + c_2 + \\cdots}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Écrire un tableau valeurs / coefficients.\n2. Multiplier chaque valeur par son coefficient.\n3. Additionner, puis diviser par la somme des coefficients.\n4. Vérifier : la moyenne est entre la plus petite et la plus grande valeur."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "milliers de FCFA",
+      "bars": [
+       {
+        "label": "Associé A",
+        "value": 600,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Associé B",
+        "value": 400,
+        "color": [
+         "green"
+        ]
+       },
+       {
+        "label": "Associé C",
+        "value": 200,
+        "color": [
+         "orange"
+        ]
+       }
+      ]
+     },
+     "caption": "Partage de 1 200 000 FCFA selon les apports 3, 2 et 1.",
+     "alt": "Trois barres : A reçoit 600, B 400 et C 200 milliers de FCFA, dans le rapport 3, 2, 1."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Partage proportionnel",
+     "statement": "Trois vendeuses fictives se partagent une prime de 900 000 FCFA proportionnellement à 2, 3 et 4 jours travaillés. Quelle part chacune reçoit-elle ?",
+     "steps": [
+      {
+       "md": "Total des nombres :",
+       "tex": "2 + 3 + 4 = 9"
+      },
+      {
+       "md": "Valeur d'une part :",
+       "tex": "900000 \\div 9 = 100000"
+      },
+      {
+       "md": "Parts :",
+       "tex": "100000 \\times 2 = 200000 ; 100000 \\times 3 = 300000 ; 100000 \\times 4 = 400000"
+      }
+     ],
+     "answer": "**200 000 ; 300 000 ; 400 000 FCFA** (total 900 000)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Bénéfice entre associés",
+     "statement": "Un bénéfice de 1 200 000 FCFA est partagé entre trois associés selon leurs apports : 3 000 000, 2 000 000 et 1 000 000 FCFA.",
+     "steps": [
+      {
+       "md": "Total des apports : 6 000 000. Valeur par franc apporté :",
+       "tex": "\\frac{1200000}{6000000} = 0,2"
+      },
+      {
+       "md": "Parts : 3 000 000 × 0,2 = 600 000 ; 2 000 000 × 0,2 = 400 000 ; 1 000 000 × 0,2 = 200 000."
+      }
+     ],
+     "answer": "**600 000 ; 400 000 ; 200 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — Moyenne pondérée",
+     "statement": "Notes d'un élève fictif : 12 (coefficient 3), 15 (coefficient 2), 9 (coefficient 1). Moyenne ?",
+     "steps": [
+      {
+       "md": "Somme des produits :",
+       "tex": "12 \\times 3 + 15 \\times 2 + 9 \\times 1 = 75"
+      },
+      {
+       "md": "Somme des coefficients : 3 + 2 + 1 = 6."
+      },
+      {
+       "md": "Moyenne :",
+       "tex": "\\frac{75}{6} = 12,5"
+      }
+     ],
+     "answer": "**Moyenne : 12,5 sur 20.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer la moyenne simple (12 + 15 + 9) ÷ 3 sans tenir compte des coefficients.\n- Diviser par le nombre de valeurs au lieu de la somme des coefficients.\n- Oublier de vérifier que le total des parts redonne la somme partagée."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dans un **partage inversement proportionnel**, la part est plus petite quand le nombre est plus grand (par exemple une prime selon les retards).",
+      "Le prix moyen d'achat est une moyenne pondérée par les quantités."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-maths-commerciales-1re-partages-moyennes-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-maths-commerciales-1re-interets-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "Intérêt de 200 000 FCFA placés à 5 % pendant 3 ans (intérêt simple) ?",
+   "explanation": "200 000 × 5 × 3 ÷ 100 = 30 000.",
+   "source": "Exercice original",
+   "answer": 30000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "Intérêt de 360 000 FCFA à 10 % pendant 6 mois ?",
+   "explanation": "360 000 × 10 × 6 ÷ 1 200 = 18 000.",
+   "method": "Pour les mois, diviser par 1 200.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": 18000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "En intérêt simple, l'intérêt annuel reste le même chaque année.",
+   "explanation": "Il est toujours calculé sur le capital de départ.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "Un capital de 500 000 FCFA rapporte 40 000 FCFA d'intérêt en 2 ans (intérêt simple). Quel est le taux annuel (en %) ?",
+   "explanation": "t = 100 × I ÷ (C × n) = 100 × 40 000 ÷ (500 000 × 2) = 4 %.",
+   "method": "Isoler t dans I = C t n ÷ 100.",
+   "source": "Exercice original",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "Un effet de 300 000 FCFA est escompté 30 jours avant l'échéance à 12 %. Quel est l'escompte ?",
+   "explanation": "300 000 × 12 × 30 ÷ 36 000 = 3 000.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": 3000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "Une entreprise fictive escompte un effet de 1 200 000 FCFA, 45 jours avant l'échéance, au taux de 10 % (taux d'exercice, année de 360 jours).",
+   "method": "Appliquer E = N t j ÷ 36 000 puis soustraire.",
+   "mistakes": [
+    "Utiliser 100 au lieu de 36 000 avec des jours."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Convention de calcul à confirmer.",
+   "parts": [
+    {
+     "id": "etp-maths-commerciales-1re-interets-06-a",
+     "points": 2,
+     "prompt": "Montant de l'escompte (FCFA) ?",
+     "explanation": "E = 1 200 000 × 10 × 45 ÷ 36 000 = 15 000.",
+     "kind": "numeric",
+     "answer": 15000.0,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "review": true
+    },
+    {
+     "id": "etp-maths-commerciales-1re-interets-06-b",
+     "points": 1,
+     "prompt": "Valeur actuelle de l'effet (FCFA) ?",
+     "explanation": "1 200 000 − 15 000 = 1 185 000.",
+     "kind": "numeric",
+     "answer": 1185000.0,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-interets-06-c",
+     "points": 1,
+     "prompt": "L'escompte augmenterait si…",
+     "explanation": "E est proportionnel au taux, à la durée et à la valeur nominale.",
+     "kind": "mcq",
+     "choices": [
+      "La durée avant l'échéance était plus longue",
+      "La durée était plus courte",
+      "Le taux était plus faible",
+      "La valeur nominale était plus faible"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "Valeur acquise = ",
+   "choices": [
+    "C − I",
+    "C × I",
+    "I ÷ C",
+    "C + I"
+   ],
+   "answer": 3,
+   "explanation": "Capital plus intérêts."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "Avec une durée en jours, on divise par…",
+   "choices": [
+    "100",
+    "1 200",
+    "36 000",
+    "365"
+   ],
+   "answer": 2,
+   "explanation": "Année commerciale : 36 000."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "En intérêt simple, doubler la durée…",
+   "choices": [
+    "Divise l'intérêt par 2",
+    "Double l'intérêt",
+    "Ne change rien",
+    "Triple l'intérêt"
+   ],
+   "answer": 1,
+   "explanation": "L'intérêt est proportionnel à la durée."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "La valeur actuelle commerciale d'un effet est…",
+   "choices": [
+    "N − escompte",
+    "N + escompte",
+    "N × taux",
+    "Escompte ÷ N"
+   ],
+   "answer": 0,
+   "explanation": "On retire l'escompte de la valeur nominale."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-interets-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-interets",
+   "prompt": "L'escompte est calculé sur…",
+   "choices": [
+    "La valeur actuelle",
+    "Le capital initial",
+    "Le taux",
+    "La valeur nominale"
+   ],
+   "answer": 3,
+   "explanation": "Base : valeur nominale N."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "On partage 500 000 FCFA entre deux personnes proportionnellement à 2 et 3. Quelle est la plus grande part ?",
+   "explanation": "Total 5 ; une part = 100 000 ; la plus grande : 3 × 100 000 = 300 000.",
+   "source": "Exercice original",
+   "answer": 300000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Notes 10 (coef 1) et 16 (coef 2). Moyenne pondérée ?",
+   "explanation": "(10 + 32) ÷ 3 = 14.",
+   "source": "Exercice original",
+   "answer": 14.0,
+   "tolerance": 0,
+   "unit": "/20"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Dans un partage proportionnel, la somme des parts est égale à la somme partagée.",
+   "explanation": "Chaque franc est distribué : le total des parts redonne S.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Un commerçant fictif achète 100 kg de maïs à 500 FCFA/kg puis 300 kg à 600 FCFA/kg. Quel est le prix moyen par kg ?",
+   "explanation": "Coût total : 50 000 + 180 000 = 230 000 ; quantité : 400 kg ; 230 000 ÷ 400 = 575.",
+   "method": "Prix moyen = coût total ÷ quantité totale.",
+   "source": "Exercice original",
+   "answer": 575.0,
+   "tolerance": 0,
+   "unit": "FCFA/kg"
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Trois associés apportent 1, 2 et 5 millions de FCFA. Le bénéfice de 400 000 FCFA est partagé proportionnellement. Que reçoit celui qui a apporté 2 millions ?",
+   "explanation": "Total des apports : 8 millions ; 400 000 ÷ 8 = 50 000 par million ; 2 × 50 000 = 100 000.",
+   "method": "Valeur d'une part, puis multiplication.",
+   "source": "Exercice original",
+   "choices": [
+    "80 000",
+    "100 000",
+    "160 000",
+    "200 000"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Trois commerçants fictifs créent une société avec des apports de 2, 3 et 5 millions de FCFA. Le bénéfice annuel est de 1 500 000 FCFA, partagé proportionnellement aux apports.",
+   "method": "Valeur d'une part, puis parts, puis contrôle du total.",
+   "mistakes": [
+    "Partager à parts égales."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-maths-commerciales-1re-partages-moyennes-06-a",
+     "points": 1,
+     "prompt": "Valeur du million d'apport (FCFA de bénéfice par million) ?",
+     "explanation": "Total des apports : 10 millions ; 1 500 000 ÷ 10 = 150 000.",
+     "kind": "numeric",
+     "answer": 150000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-partages-moyennes-06-b",
+     "points": 1,
+     "prompt": "Part de celui qui a apporté 2 millions (FCFA) ?",
+     "explanation": "2 × 150 000 = 300 000.",
+     "kind": "numeric",
+     "answer": 300000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-partages-moyennes-06-c",
+     "points": 1,
+     "prompt": "Part de celui qui a apporté 5 millions (FCFA) ?",
+     "explanation": "5 × 150 000 = 750 000.",
+     "kind": "numeric",
+     "answer": 750000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-maths-commerciales-1re-partages-moyennes-06-d",
+     "points": 1,
+     "prompt": "Les trois parts totalisent 1 500 000 FCFA.",
+     "explanation": "300 000 + 450 000 + 750 000 = 1 500 000.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Pour un partage proportionnel à 1, 2 et 3, la valeur d'une part est S divisé par…",
+   "choices": [
+    "6",
+    "3",
+    "2",
+    "1"
+   ],
+   "answer": 0,
+   "explanation": "1 + 2 + 3 = 6."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Moyenne pondérée de 10 (coef 2) et 20 (coef 3) :",
+   "choices": [
+    "15",
+    "14",
+    "12",
+    "16"
+   ],
+   "answer": 3,
+   "explanation": "(20 + 60) ÷ 5 = 16."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Dans une moyenne pondérée, on divise par…",
+   "choices": [
+    "Le nombre de valeurs",
+    "La plus grande valeur",
+    "La somme des coefficients",
+    "100"
+   ],
+   "answer": 2,
+   "explanation": "Somme des coefficients."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Si les parts sont proportionnelles à 1, 1 et 2, la personne « 2 » reçoit…",
+   "choices": [
+    "Le quart de la somme",
+    "La moitié de la somme",
+    "Le tiers de la somme",
+    "Toute la somme"
+   ],
+   "answer": 1,
+   "explanation": "Total 4 parts ; 2 parts sur 4 = la moitié."
+  },
+  {
+   "id": "etp-maths-commerciales-1re-partages-moyennes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-maths-commerciales-1re-partages-moyennes",
+   "prompt": "Le prix moyen d'achat est une moyenne…",
+   "choices": [
+    "Pondérée par les quantités",
+    "Simple obligatoirement",
+    "Des marges",
+    "Des taux"
+   ],
+   "answer": 0,
+   "explanation": "Chaque prix compte selon la quantité achetée."
+  }
+ ]
+}

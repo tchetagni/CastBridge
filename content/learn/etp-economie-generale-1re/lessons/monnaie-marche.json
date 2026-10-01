@@ -1,0 +1,761 @@
+{
+ "chapter": "etp-economie-generale-1re-monnaie-marche",
+ "lessons": [
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche",
+   "title": "Monnaie, marché, prix et inflation",
+   "minutes": 50,
+   "programRef": "Programme de la classe de 1re, séries G/STT (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer les fonctions de la monnaie.",
+    "Lire une courbe d'offre et de demande et repérer l'équilibre.",
+    "Prévoir l'effet d'un prix trop haut ou trop bas.",
+    "Calculer un taux d'inflation et interpréter le pouvoir d'achat."
+   ],
+   "prerequisites": [
+    "etp-economie-generale-1re-production-revenus"
+   ],
+   "exercises": [
+    "etp-economie-generale-1re-monnaie-marche-01",
+    "etp-economie-generale-1re-monnaie-marche-02",
+    "etp-economie-generale-1re-monnaie-marche-03",
+    "etp-economie-generale-1re-monnaie-marche-04",
+    "etp-economie-generale-1re-monnaie-marche-05",
+    "etp-economie-generale-1re-monnaie-marche-06"
+   ],
+   "selfCheck": [
+    "etp-economie-generale-1re-monnaie-marche-q1",
+    "etp-economie-generale-1re-monnaie-marche-q2",
+    "etp-economie-generale-1re-monnaie-marche-q3",
+    "etp-economie-generale-1re-monnaie-marche-q4",
+    "etp-economie-generale-1re-monnaie-marche-q5"
+   ],
+   "reviewNotes": [
+    "Courbes et chiffres fictifs ; le rôle de la banque centrale n'est évoqué qu'en général.",
+    "Vérifier la définition de l'inflation et du pouvoir d'achat avec le cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Monnaie",
+     "md": "La **monnaie** est ce que tout le monde accepte pour payer. Elle a trois fonctions : **intermédiaire des échanges** (acheter et vendre sans troc), **unité de compte** (exprimer les prix) et **réserve de valeur** (garder du pouvoir d'achat pour plus tard). Au Cameroun, la monnaie est le franc CFA, émis par une banque centrale régionale.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Marché, offre et demande",
+     "md": "Le **marché** est le lieu (réel ou virtuel) où acheteurs et vendeurs se rencontrent. La **demande** est la quantité que les acheteurs veulent acheter à un prix donné : elle **baisse** quand le prix monte. L'**offre** est la quantité que les vendeurs veulent vendre : elle **augmente** quand le prix monte."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Prix d'équilibre",
+     "md": "Le **prix d'équilibre** est celui où offre et demande sont égales. Si le prix est **trop haut**, l'offre dépasse la demande (**excédent**) et le prix tend à baisser. S'il est **trop bas**, la demande dépasse l'offre (**pénurie**) et le prix tend à monter."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Inflation",
+     "md": "L'**inflation** est une hausse générale et durable des prix. On la mesure avec un **indice des prix**. Taux d'inflation = (indice final − indice initial) ÷ indice initial × 100. Quand les prix montent plus vite que les revenus, le **pouvoir d'achat** baisse.",
+     "tex": "\\text{taux d'inflation} = \\frac{I_1 - I_0}{I_0} \\times 100"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 40,
+      "ymin": 0,
+      "ymax": 110,
+      "grid": 10,
+      "xlabel": "Quantité",
+      "ylabel": "Prix",
+      "curves": [
+       {
+        "expr": "100-2*x",
+        "color": "blue",
+        "label": "Demande"
+       },
+       {
+        "expr": "10+4*x",
+        "color": "red",
+        "label": "Offre"
+       }
+      ],
+      "points": [
+       {
+        "x": 15,
+        "y": 70,
+        "label": "Équilibre",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Offre, demande et équilibre (exemple fictif).",
+     "alt": "Une droite descendante (demande) et une droite montante (offre) se coupent au point d'équilibre, pour une quantité de 15 et un prix de 70 en unités fictives."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Équilibre",
+     "statement": "Sur un marché fictif, la demande est P = 100 − 2Q et l'offre P = 10 + 4Q (P en centaines de FCFA, Q en unités). Trouver l'équilibre.",
+     "steps": [
+      {
+       "md": "À l'équilibre, les deux prix sont égaux :",
+       "tex": "100 - 2Q = 10 + 4Q"
+      },
+      {
+       "md": "On regroupe : 90 = 6Q, donc :",
+       "tex": "Q = \\frac{90}{6} = 15"
+      },
+      {
+       "md": "On remplace dans la demande :",
+       "tex": "P = 100 - 2 \\times 15 = 70"
+      }
+     ],
+     "answer": "**Équilibre : 15 unités au prix de 70.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Prix trop élevé",
+     "statement": "Sur le même marché, le prix est fixé à 90. Que se passe-t-il ?",
+     "steps": [
+      {
+       "md": "Demande à 90 : 90 = 100 − 2Q donne Q = 5.",
+       "tex": "Q_d = 5"
+      },
+      {
+       "md": "Offre à 90 : 90 = 10 + 4Q donne Q = 20.",
+       "tex": "Q_o = 20"
+      },
+      {
+       "md": "L'offre (20) dépasse la demande (5) : excédent de 15 unités. Les vendeurs devront baisser le prix."
+      }
+     ],
+     "answer": "**Excédent de 15 unités : le prix tend à baisser vers 70.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — Taux d'inflation",
+     "statement": "L'indice des prix d'un panier fictif passe de 100 à 108 en un an. Taux d'inflation ?",
+     "steps": [
+      {
+       "md": "Variation de l'indice :",
+       "tex": "108 - 100 = 8"
+      },
+      {
+       "md": "Taux :",
+       "tex": "\\frac{8}{100} \\times 100 = 8"
+      }
+     ],
+     "answer": "**Inflation de 8 % : le panier coûte 8 % de plus.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la demande augmente quand le prix monte : c'est l'offre qui augmente.\n- Confondre inflation (hausse générale des prix) et hausse du prix d'un seul produit.\n- Penser que si les prix montent de 8 % et le salaire de 8 %, le pouvoir d'achat baisse : il est resté **stable**."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un déplacement de la demande (par exemple à l'approche d'une fête) déplace aussi l'équilibre.",
+      "La monnaie peut aussi être scripturale (comptes bancaires) ou électronique (mobile money), pas seulement les pièces et billets."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-economie-generale-1re-monnaie-marche-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur",
+   "title": "Le commerce extérieur de base",
+   "minutes": 35,
+   "programRef": "Programme de la classe de 1re, séries G/STT (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir importations, exportations et balance commerciale.",
+    "Calculer le solde et le taux de couverture.",
+    "Expliquer pourquoi les pays échangent.",
+    "Décrire en termes simples le protectionnisme."
+   ],
+   "prerequisites": [
+    "etp-economie-generale-1re-monnaie-marche"
+   ],
+   "exercises": [
+    "etp-economie-generale-1re-commerce-exterieur-01",
+    "etp-economie-generale-1re-commerce-exterieur-02",
+    "etp-economie-generale-1re-commerce-exterieur-03",
+    "etp-economie-generale-1re-commerce-exterieur-04",
+    "etp-economie-generale-1re-commerce-exterieur-05",
+    "etp-economie-generale-1re-commerce-exterieur-06"
+   ],
+   "selfCheck": [
+    "etp-economie-generale-1re-commerce-exterieur-q1",
+    "etp-economie-generale-1re-commerce-exterieur-q2",
+    "etp-economie-generale-1re-commerce-exterieur-q3",
+    "etp-economie-generale-1re-commerce-exterieur-q4",
+    "etp-economie-generale-1re-commerce-exterieur-q5"
+   ],
+   "reviewNotes": [
+    "Chiffres fictifs (pays imaginaire) ; ne pas les comparer aux données réelles.",
+    "Vérifier le vocabulaire sur la balance commerciale avec le cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Importations et exportations",
+     "md": "Les **importations** sont les biens et services achetés à l'étranger ; les **exportations** sont ceux vendus à l'étranger. Un pays échange parce qu'il ne produit pas tout, ou pas au même coût que les autres."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Solde et taux de couverture",
+     "md": "- **Solde commercial** = exportations − importations (**excédent** s'il est positif, **déficit** s'il est négatif).\n- **Taux de couverture** = exportations ÷ importations × 100.",
+     "tex": "\\text{Solde} = X - M \\qquad \\text{Taux de couverture} = \\frac{X}{M} \\times 100"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Pourquoi échanger ?",
+     "md": "Chaque pays se **spécialise** dans ce qu'il produit le mieux ou à moindre coût (matières premières, produits agricoles, produits transformés) et **achète le reste**. L'échange élargit le choix des consommateurs mais crée une dépendance vis-à-vis de l'étranger."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Protectionnisme et libre-échange",
+     "md": "Le **libre-échange** laisse les marchandises circuler sans obstacles. Le **protectionnisme** protège les producteurs nationaux (droits de douane, quotas) mais peut renchérir les produits importés. Les États combinent souvent les deux."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "milliards de FCFA (fictif)",
+      "bars": [
+       {
+        "label": "Exportations",
+        "value": 500,
+        "color": [
+         "green"
+        ]
+       },
+       {
+        "label": "Importations",
+        "value": 650,
+        "color": [
+         "red"
+        ]
+       }
+      ]
+     },
+     "caption": "Exportations et importations d'un pays imaginaire.",
+     "alt": "Deux barres : exportations 500 (vertes) et importations 650 (rouges) milliards de FCFA fictifs, soit un déficit de 150."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Solde et taux de couverture",
+     "statement": "Un pays imaginaire exporte pour 500 milliards de FCFA et importe pour 650 milliards. Calculer le solde et le taux de couverture.",
+     "steps": [
+      {
+       "md": "Solde :",
+       "tex": "500 - 650 = -150"
+      },
+      {
+       "md": "Taux de couverture :",
+       "tex": "\\frac{500}{650} \\times 100 \\approx 76,9"
+      }
+     ],
+     "answer": "**Déficit de 150 milliards ; les exportations couvrent environ 76,9 % des importations.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Excédent",
+     "statement": "Un autre pays imaginaire exporte 420 et importe 360 milliards de FCFA. Quelle est sa situation ?",
+     "steps": [
+      {
+       "md": "Solde :",
+       "tex": "420 - 360 = 60"
+      },
+      {
+       "md": "Taux de couverture :",
+       "tex": "\\frac{420}{360} \\times 100 \\approx 116,7"
+      }
+     ],
+     "answer": "**Excédent de 60 milliards ; taux de couverture supérieur à 100 % (environ 116,7 %).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Inverser exportations et importations dans le solde.\n- Penser qu'un déficit est toujours grave : tout dépend de sa cause et de sa durée.\n- Croire que le taux de couverture ne peut pas dépasser 100 % : au-dessus de 100 %, il y a excédent."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La balance commerciale n'est qu'une partie de la balance des paiements, qui compte aussi les services, les revenus et les capitaux.",
+      "Un pays exportateur de matières premières est sensible aux variations de leurs prix sur le marché mondial."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-economie-generale-1re-commerce-exterieur-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "Quand le prix d'un produit augmente, en général la demande…",
+   "explanation": "Les acheteurs achètent moins quand c'est plus cher.",
+   "source": "Exercice original",
+   "choices": [
+    "Augmente",
+    "Baisse",
+    "Ne change jamais",
+    "Double"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "La monnaie permet de comparer la valeur de biens très différents.",
+   "explanation": "C'est sa fonction d'unité de compte.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "Un prix supérieur au prix d'équilibre provoque…",
+   "explanation": "L'offre dépasse la demande : excédent.",
+   "source": "Exercice original",
+   "choices": [
+    "Une pénurie",
+    "Un excédent d'offre",
+    "Une inflation générale",
+    "Une hausse de la demande"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "L'indice des prix passe de 125 à 130. Calculer le taux d'inflation (en %, arrondi au dixième).",
+   "explanation": "(130 − 125) ÷ 125 × 100 = 4,0 %.",
+   "source": "Exercice original",
+   "answer": 4.0,
+   "tolerance": 0.1,
+   "unit": "%"
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "Les prix augmentent de 6 % dans l'année, ton salaire de 3 %. Que devient ton pouvoir d'achat ? Explique.",
+   "explanation": "Le pouvoir d'achat évolue comme revenu ÷ prix.",
+   "source": "Exercice original",
+   "model": "Mon pouvoir d'achat baisse : mon salaire augmente moins vite que les prix, donc avec le même salaire j'achète un peu moins de biens qu'avant.",
+   "rubric": [
+    "Constat d'une baisse.",
+    "Comparaison des deux hausses.",
+    "Explication en termes de quantités achetées."
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "Marché fictif de tomates : demande P = 120 − 2Q ; offre P = 20 + 3Q (P en FCFA par tas, Q en dizaines de tas).",
+   "method": "Égaler offre et demande, puis tester un prix donné.",
+   "mistakes": [
+    "Inverser offre et demande."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-economie-generale-1re-monnaie-marche-06-a",
+     "points": 2,
+     "prompt": "Quantité d'équilibre Q ?",
+     "explanation": "120 − 2Q = 20 + 3Q donne 100 = 5Q, soit Q = 20.",
+     "kind": "numeric",
+     "answer": 20,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-economie-generale-1re-monnaie-marche-06-b",
+     "points": 1,
+     "prompt": "Prix d'équilibre P (FCFA) ?",
+     "explanation": "P = 120 − 2 × 20 = 80 (et 20 + 3 × 20 = 80).",
+     "kind": "numeric",
+     "answer": 80,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-economie-generale-1re-monnaie-marche-06-c",
+     "points": 2,
+     "prompt": "Au prix de 50 FCFA, quelle est la demande Q_d ?",
+     "explanation": "50 = 120 − 2Q donne Q = 35.",
+     "kind": "numeric",
+     "answer": 35,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-economie-generale-1re-monnaie-marche-06-d",
+     "points": 1,
+     "prompt": "À 50 FCFA, on observe…",
+     "explanation": "Offre à 50 : 50 = 20 + 3Q donne Q = 10 ; la demande (35) dépasse l'offre (10) : pénurie.",
+     "kind": "mcq",
+     "choices": [
+      "Un excédent d'offre",
+      "Une pénurie",
+      "L'équilibre",
+      "Une inflation"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "Quelle fonction de la monnaie permet de garder du pouvoir d'achat ?",
+   "choices": [
+    "Unité de compte",
+    "Intermédiaire des échanges",
+    "Troc",
+    "Réserve de valeur"
+   ],
+   "answer": 3,
+   "explanation": "Réserve de valeur."
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "Quand le prix baisse, l'offre en général…",
+   "choices": [
+    "Augmente",
+    "Ne change pas",
+    "Baisse",
+    "Devient infinie"
+   ],
+   "answer": 2,
+   "explanation": "Les vendeurs offrent moins à un prix plus bas."
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "L'inflation est…",
+   "choices": [
+    "La baisse d'un seul prix",
+    "Une hausse générale et durable des prix",
+    "Une hausse du chômage",
+    "Un impôt"
+   ],
+   "answer": 1,
+   "explanation": "Hausse générale et durable."
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "À l'équilibre…",
+   "choices": [
+    "Offre = demande",
+    "Offre > demande",
+    "Demande > offre",
+    "Prix = 0"
+   ],
+   "answer": 0,
+   "explanation": "Les deux quantités sont égales."
+  },
+  {
+   "id": "etp-economie-generale-1re-monnaie-marche-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-monnaie-marche",
+   "prompt": "Si les prix montent de 5 % et le revenu de 5 %, le pouvoir d'achat est…",
+   "choices": [
+    "En forte baisse",
+    "En forte hausse",
+    "Nul",
+    "À peu près stable"
+   ],
+   "answer": 3,
+   "explanation": "Les deux évolutions se compensent."
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Un pays exporte 300 et importe 240 (milliards de FCFA, fictifs). Solde ?",
+   "explanation": "300 − 240 = 60 : excédent.",
+   "source": "Exercice original",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "milliards de FCFA"
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Une marchandise achetée à l'étranger est…",
+   "explanation": "Acheter à l'étranger : importer.",
+   "source": "Exercice original",
+   "choices": [
+    "Une exportation",
+    "Une importation",
+    "Une subvention",
+    "Un impôt"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Un taux de couverture inférieur à 100 % indique un déficit commercial.",
+   "explanation": "Les exportations ne couvrent pas les importations.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Exportations 450, importations 600 (milliards, fictifs). Taux de couverture (en %) ?",
+   "explanation": "450 ÷ 600 × 100 = 75 %.",
+   "source": "Exercice original",
+   "answer": 75,
+   "tolerance": 0,
+   "unit": "%"
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Associe chaque notion à sa définition.",
+   "explanation": "Définitions de base du commerce extérieur.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Exportation",
+     "Vente à l'étranger"
+    ],
+    [
+     "Importation",
+     "Achat à l'étranger"
+    ],
+    [
+     "Droit de douane",
+     "Taxe sur un produit importé"
+    ],
+    [
+     "Libre-échange",
+     "Circulation sans obstacles"
+    ]
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Un pays imaginaire a exporté pour 800 milliards de FCFA et importé pour 700 milliards une année, puis exporté 780 et importé 845 l'année suivante.",
+   "method": "Solde = X − M, couverture = X ÷ M.",
+   "mistakes": [
+    "Inverser X et M."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-economie-generale-1re-commerce-exterieur-06-a",
+     "points": 1,
+     "prompt": "Solde de la première année (milliards) ?",
+     "explanation": "800 − 700 = 100 : excédent.",
+     "kind": "numeric",
+     "answer": 100,
+     "tolerance": 0,
+     "unit": "milliards"
+    },
+    {
+     "id": "etp-economie-generale-1re-commerce-exterieur-06-b",
+     "points": 1,
+     "prompt": "Solde de la deuxième année (milliards) ?",
+     "explanation": "780 − 845 = −65 : déficit.",
+     "kind": "numeric",
+     "answer": -65,
+     "tolerance": 0,
+     "unit": "milliards"
+    },
+    {
+     "id": "etp-economie-generale-1re-commerce-exterieur-06-c",
+     "points": 2,
+     "prompt": "Taux de couverture de la deuxième année (en %, arrondi à l'unité) ?",
+     "explanation": "780 ÷ 845 × 100 ≈ 92,3 %.",
+     "kind": "numeric",
+     "answer": 92,
+     "tolerance": 0.6,
+     "unit": "%"
+    },
+    {
+     "id": "etp-economie-generale-1re-commerce-exterieur-06-d",
+     "points": 2,
+     "prompt": "Donne une raison pour laquelle ce pays peut importer malgré un déficit.",
+     "explanation": "Les importations répondent à des besoins non couverts par la production nationale.",
+     "kind": "open",
+     "model": "Il peut manquer de certains produits qu'il ne fabrique pas, ou les trouver moins chers à l'étranger ; il peut financer le déficit par des recettes de services, des emprunts ou des réserves.",
+     "rubric": [
+      "Une raison économique cohérente.",
+      "Lien avec le manque de production ou le prix."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Un excédent commercial signifie…",
+   "choices": [
+    "X > M",
+    "X < M",
+    "X = 0",
+    "M = 0"
+   ],
+   "answer": 0,
+   "explanation": "Exportations supérieures aux importations."
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Le taux de couverture se calcule…",
+   "choices": [
+    "M ÷ X × 100",
+    "X − M",
+    "X + M",
+    "X ÷ M × 100"
+   ],
+   "answer": 3,
+   "explanation": "Exportations divisées par importations."
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Le protectionnisme vise à…",
+   "choices": [
+    "Supprimer les frontières",
+    "Augmenter les importations",
+    "Protéger les producteurs nationaux",
+    "Baisser les salaires"
+   ],
+   "answer": 2,
+   "explanation": "Il protège la production nationale."
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Pourquoi les pays échangent-ils ?",
+   "choices": [
+    "Pour supprimer la monnaie",
+    "Ils ne produisent pas tout au même coût",
+    "Pour éviter le travail",
+    "Pour fixer l'inflation"
+   ],
+   "answer": 1,
+   "explanation": "Spécialisation et complémentarité."
+  },
+  {
+   "id": "etp-economie-generale-1re-commerce-exterieur-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-economie-generale-1re-commerce-exterieur",
+   "prompt": "Un déficit de 50 avec M = 250 signifie X = ",
+   "choices": [
+    "200",
+    "300",
+    "50",
+    "250"
+   ],
+   "answer": 0,
+   "explanation": "X = M − 50 = 200."
+  }
+ ]
+}

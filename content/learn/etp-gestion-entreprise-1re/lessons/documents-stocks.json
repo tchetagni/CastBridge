@@ -1,0 +1,922 @@
+{
+ "chapter": "etp-gestion-entreprise-1re-documents-stocks",
+ "lessons": [
+  {
+   "id": "etp-gestion-entreprise-1re-documents",
+   "title": "Les documents commerciaux",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries G1/G2/G3 et STT (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître bon de commande, bon de livraison, facture et reçu.",
+    "Replacer ces documents dans l'ordre d'une vente.",
+    "Établir une facture : brut, remise, net, TVA, TTC.",
+    "Repérer les mentions usuelles d'une facture."
+   ],
+   "prerequisites": [
+    "etp-gestion-entreprise-1re-organisation"
+   ],
+   "exercises": [
+    "etp-gestion-entreprise-1re-documents-01",
+    "etp-gestion-entreprise-1re-documents-02",
+    "etp-gestion-entreprise-1re-documents-03",
+    "etp-gestion-entreprise-1re-documents-04",
+    "etp-gestion-entreprise-1re-documents-05",
+    "etp-gestion-entreprise-1re-documents-06"
+   ],
+   "selfCheck": [
+    "etp-gestion-entreprise-1re-documents-q1",
+    "etp-gestion-entreprise-1re-documents-q2",
+    "etp-gestion-entreprise-1re-documents-q3",
+    "etp-gestion-entreprise-1re-documents-q4",
+    "etp-gestion-entreprise-1re-documents-q5"
+   ],
+   "reviewNotes": [
+    "Les mentions obligatoires d'une facture ne sont pas listées précisément : seulement des mentions usuelles (à comparer au droit applicable).",
+    "Le taux de TVA est donné par l'énoncé (valeur fictive).",
+    "Entreprises fictives."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les quatre documents",
+     "md": "- **Bon de commande** : émis par l'**acheteur** pour demander des marchandises.\n- **Bon de livraison** : accompagne les marchandises ; le client le **signe** à la réception.\n- **Facture** : émise par le **vendeur** ; elle réclame le paiement.\n- **Reçu** : remis par le vendeur au client après **paiement** ; il prouve qu'on a payé."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Mentions usuelles d'une facture",
+     "md": "Nom et coordonnées du vendeur et du client, **date**, **numéro**, désignation des articles, **quantités**, **prix unitaires**, montant **hors taxe (HT)**, **TVA**, montant **toutes taxes comprises (TTC)**, conditions de paiement.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Calcul d'une facture",
+     "md": "**Brut** = somme (quantité × prix unitaire). **Remise** = brut × taux de remise. **Net commercial** = brut − remise. **TVA** = net commercial × taux (taux donné par l'énoncé). **TTC** = net + TVA.",
+     "tex": "TTC = (\\text{Brut} - \\text{Remise}) \\times (1 + t)",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 55,
+        "w": 100,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 81.55,
+        "text": "Commande",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 125,
+        "y": 55,
+        "w": 100,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 81.55,
+        "text": "Livraison",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 245,
+        "y": 55,
+        "w": 100,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 295.0,
+        "y": 81.55,
+        "text": "Facture",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 365,
+        "y": 55,
+        "w": 90,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 410.0,
+        "y": 81.55,
+        "text": "Paiement",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 475,
+        "y": 55,
+        "w": 80,
+        "h": 44,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 515.0,
+        "y": 81.55,
+        "text": "Reçu",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 105,
+        "y1": 77,
+        "x2": 125,
+        "y2": 77,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 225,
+        "y1": 77,
+        "x2": 245,
+        "y2": 77,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 77,
+        "x2": 365,
+        "y2": 77,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 455,
+        "y1": 77,
+        "x2": 475,
+        "y2": 77,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 118,
+        "text": "Acheteur",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 118,
+        "text": "Vendeur",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 118,
+        "text": "Vendeur",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 118,
+        "text": "Acheteur",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 515,
+        "y": 118,
+        "text": "Vendeur",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les documents d'une vente, dans l'ordre.",
+     "alt": "Chaîne de cinq étapes : commande (acheteur), livraison (vendeur), facture (vendeur), paiement (acheteur), reçu (vendeur)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Établir une facture",
+     "statement": "La papeterie fictive « Ndongo Bureau » vend à une école : 10 cahiers de dessin à 8 500 FCFA et 12 règles à 2 500 FCFA. Remise de 10 %. On suppose un taux de TVA de 10 % (donnée de l'énoncé). Calculer le net à payer.",
+     "steps": [
+      {
+       "md": "Brut :",
+       "tex": "10 \\times 8500 + 12 \\times 2500 = 115000"
+      },
+      {
+       "md": "Remise de 10 % :",
+       "tex": "115000 \\times 0,10 = 11500 ; net = 115000 - 11500 = 103500"
+      },
+      {
+       "md": "TVA et TTC :",
+       "tex": "103500 \\times 0,10 = 10350 ; 103500 + 10350 = 113850"
+      }
+     ],
+     "answer": "**Net à payer (TTC) : 113 850 FCFA.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Acompte et reçu",
+     "statement": "L'école verse la moitié de la facture à la commande (56 925 FCFA) et le reste à la livraison. Quels documents remet le vendeur ?",
+     "steps": [
+      {
+       "md": "À chaque paiement, le vendeur remet un **reçu** : un premier reçu de 56 925 FCFA (acompte), puis un second."
+      },
+      {
+       "md": "La facture indique le total (113 850 FCFA) ; le solde à payer après l'acompte est :",
+       "tex": "113850 - 56925 = 56925"
+      }
+     ],
+     "answer": "**Deux reçus de 56 925 FCFA chacun ; la facture reste la même.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **facture** (demande de paiement) et **reçu** (preuve de paiement).\n- Calculer la TVA sur le brut au lieu du net commercial.\n- Ne pas faire signer le bon de livraison : on perd la preuve de la réception."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un **avoir** est un document par lequel le vendeur rembourse ou réduit une facture (marchandise retournée, erreur de prix).",
+      "Chaque document est conservé en plusieurs exemplaires : une copie reste à l'entreprise pour sa comptabilité."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-gestion-entreprise-1re-documents-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks",
+   "title": "La gestion simple des stocks",
+   "minutes": 45,
+   "programRef": "Programme de la classe de 1re, séries G1/G2/G3 et STT (MINESEC) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer pourquoi et comment on gère un stock.",
+    "Tenir une fiche de stock en quantités.",
+    "Calculer le stock final et un coût moyen unitaire pondéré.",
+    "Déterminer un seuil d'alerte simple."
+   ],
+   "prerequisites": [
+    "etp-gestion-entreprise-1re-documents"
+   ],
+   "exercises": [
+    "etp-gestion-entreprise-1re-stocks-01",
+    "etp-gestion-entreprise-1re-stocks-02",
+    "etp-gestion-entreprise-1re-stocks-03",
+    "etp-gestion-entreprise-1re-stocks-04",
+    "etp-gestion-entreprise-1re-stocks-05",
+    "etp-gestion-entreprise-1re-stocks-06"
+   ],
+   "selfCheck": [
+    "etp-gestion-entreprise-1re-stocks-q1",
+    "etp-gestion-entreprise-1re-stocks-q2",
+    "etp-gestion-entreprise-1re-stocks-q3",
+    "etp-gestion-entreprise-1re-stocks-q4",
+    "etp-gestion-entreprise-1re-stocks-q5"
+   ],
+   "reviewNotes": [
+    "Méthode du coût moyen unitaire pondéré (CMUP) présentée dans sa forme la plus simple ; d'autres méthodes (premier entré premier sorti) ne sont qu'évoquées.",
+    "Seuil d'alerte simplifié (consommation × délai).",
+    "Quantités et prix fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Stock",
+     "md": "Le **stock** est l'ensemble des marchandises, matières ou fournitures que l'entreprise garde en réserve pour vendre ou produire sans interruption. Un stock **trop faible** provoque des ruptures (clients mécontents) ; un stock **trop élevé** coûte cher (argent immobilisé, pertes, vols)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Stock final",
+     "md": "**Stock final = stock initial + entrées − sorties.** La **fiche de stock** note, article par article, chaque entrée et chaque sortie avec sa date.",
+     "tex": "SF = SI + E - S"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Coût moyen unitaire pondéré",
+     "md": "Le **CMUP** est le prix moyen d'une unité en stock : **(valeur du stock initial + valeur des entrées) ÷ (quantité initiale + quantités entrées)**. Les sorties sont évaluées à ce coût moyen.",
+     "tex": "CMUP = \\frac{\\text{Valeur initiale} + \\text{Valeur des entrées}}{\\text{Quantités initiale} + \\text{entrées}}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Seuil d'alerte",
+     "md": "On commande quand le stock descend au **seuil d'alerte** : **consommation par jour × délai de réapprovisionnement** (en jours), éventuellement augmentée d'une petite marge de sécurité."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "unités",
+      "bars": [
+       {
+        "label": "Début",
+        "value": 200,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Après entrées",
+        "value": 350,
+        "color": [
+         "green"
+        ]
+       },
+       {
+        "label": "Après 1res sorties",
+        "value": 230,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Fin",
+        "value": 140,
+        "color": [
+         "red"
+        ]
+       }
+      ]
+     },
+     "caption": "Évolution d'un stock (fiche de l'exemple 1).",
+     "alt": "Quatre barres : 200 unités au début, 350 après les entrées, 230 après les premières sorties, 140 à la fin."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Fiche de stock",
+     "statement": "Une boutique fictive a 200 bidons d'huile en stock. Elle reçoit 150 bidons, puis en vend 120 et 90 dans la semaine. Quel est le stock final ?",
+     "steps": [
+      {
+       "md": "Entrées totales : 150. Sorties totales :",
+       "tex": "120 + 90 = 210"
+      },
+      {
+       "md": "Stock final :",
+       "tex": "200 + 150 - 210 = 140"
+      }
+     ],
+     "answer": "**Stock final : 140 bidons.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — CMUP",
+     "statement": "Stock initial : 100 sacs à 4 000 FCFA. Entrée : 50 sacs à 4 600 FCFA. Puis sortie de 80 sacs. Calculer le CMUP, la valeur des sorties et le stock final en valeur.",
+     "steps": [
+      {
+       "md": "Valeur initiale : 400 000 ; valeur des entrées : 230 000. Quantité : 150.",
+       "tex": "CMUP = \\frac{400000 + 230000}{150} = 4200"
+      },
+      {
+       "md": "Sorties :",
+       "tex": "80 \\times 4200 = 336000"
+      },
+      {
+       "md": "Stock final : 70 sacs :",
+       "tex": "70 \\times 4200 = 294000"
+      }
+     ],
+     "answer": "**CMUP 4 200 FCFA ; sorties 336 000 FCFA ; stock final 294 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier d'ajouter les entrées ou de retirer les sorties.\n- Calculer la moyenne simple des prix (4 000 et 4 600) au lieu de la moyenne **pondérée** par les quantités.\n- Commander trop tard : le seuil d'alerte doit tenir compte du délai de livraison."
+    },
+    {
+     "type": "more",
+     "items": [
+      "On fait aussi un **inventaire** : on compte physiquement le stock pour le comparer à la fiche. Les écarts peuvent venir de vols, de casse ou d'erreurs.",
+      "Dans la méthode « premier entré, premier sorti », on suppose que les unités les plus anciennes sortent d'abord."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-gestion-entreprise-1re-stocks-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-gestion-entreprise-1re-documents-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Quel document le client signe-t-il à la réception des marchandises ?",
+   "explanation": "Le bon de livraison signé prouve la réception.",
+   "source": "Exercice original",
+   "choices": [
+    "Le bon de commande",
+    "Le bon de livraison",
+    "La facture",
+    "Le reçu"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Facture : 20 articles à 3 500 FCFA. Quel est le montant brut ?",
+   "explanation": "20 × 3 500 = 70 000.",
+   "source": "Exercice original",
+   "answer": 70000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Le reçu prouve que le client a payé.",
+   "explanation": "C'est sa fonction.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Brut 200 000 FCFA, remise 5 %, TVA supposée 10 % (énoncé). Quel est le TTC ?",
+   "explanation": "Net = 200 000 × 0,95 = 190 000 ; TVA = 19 000 ; TTC = 209 000.",
+   "method": "Brut, remise, net, TVA, TTC.",
+   "mistakes": [
+    "Appliquer la TVA avant la remise."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "answer": 209000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Associe chaque document à son émetteur.",
+   "explanation": "Qui émet quoi : la commande vient de l'acheteur, les autres du vendeur (le client signe le bon de livraison).",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Bon de commande",
+     "L'acheteur"
+    ],
+    [
+     "Facture",
+     "Le vendeur"
+    ],
+    [
+     "Reçu",
+     "Le vendeur après paiement"
+    ],
+    [
+     "Bon de livraison",
+     "Le livreur, signé par le client"
+    ]
+   ]
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Une quincaillerie fictive reçoit une commande : 15 seaux à 4 000 FCFA et 6 marteaux à 2 500 FCFA. Remise de 8 %. Taux de TVA supposé : 10 % (donné par l'énoncé).",
+   "method": "Brut, remise, net, TVA, TTC.",
+   "mistakes": [
+    "Calculer la TVA sur le brut."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Taux fictif d'exercice.",
+   "parts": [
+    {
+     "id": "etp-gestion-entreprise-1re-documents-06-a",
+     "points": 1,
+     "prompt": "Montant brut (FCFA) ?",
+     "explanation": "15 × 4 000 + 6 × 2 500 = 60 000 + 15 000 = 75 000.",
+     "kind": "numeric",
+     "answer": 75000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-gestion-entreprise-1re-documents-06-b",
+     "points": 1,
+     "prompt": "Net commercial (FCFA) ?",
+     "explanation": "Remise : 75 000 × 0,08 = 6 000 ; net = 69 000.",
+     "kind": "numeric",
+     "answer": 69000.0,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-gestion-entreprise-1re-documents-06-c",
+     "points": 2,
+     "prompt": "Montant TTC (FCFA) ?",
+     "explanation": "TVA = 69 000 × 0,10 = 6 900 ; TTC = 75 900.",
+     "kind": "numeric",
+     "answer": 75900.0,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "review": true
+    },
+    {
+     "id": "etp-gestion-entreprise-1re-documents-06-d",
+     "points": 1,
+     "prompt": "Quand le client paie, le vendeur lui remet…",
+     "explanation": "Le reçu prouve le paiement.",
+     "kind": "mcq",
+     "choices": [
+      "Un bon de commande",
+      "Un reçu",
+      "Un bon de livraison",
+      "Un organigramme"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Qui établit la facture ?",
+   "choices": [
+    "L'acheteur",
+    "Le livreur",
+    "Le vendeur",
+    "La banque"
+   ],
+   "answer": 2,
+   "explanation": "La facture est émise par le vendeur."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Dans une vente, l'ordre normal est…",
+   "choices": [
+    "Reçu, facture, commande",
+    "Commande, livraison, facture, paiement, reçu",
+    "Livraison, reçu, commande",
+    "Paiement, commande, facture"
+   ],
+   "answer": 1,
+   "explanation": "Chronologie habituelle."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Net commercial = ",
+   "choices": [
+    "Brut − remise",
+    "Brut + TVA",
+    "TTC − remise",
+    "Brut ÷ remise"
+   ],
+   "answer": 0,
+   "explanation": "On enlève la remise du brut."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "TTC = ",
+   "choices": [
+    "Net − TVA",
+    "Brut − net",
+    "Net × remise",
+    "Net + TVA"
+   ],
+   "answer": 3,
+   "explanation": "On ajoute la TVA."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-documents-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-documents",
+   "prompt": "Le bon de livraison sert à…",
+   "choices": [
+    "Demander le paiement",
+    "Passer une commande",
+    "Prouver la réception des marchandises",
+    "Calculer la marge"
+   ],
+   "answer": 2,
+   "explanation": "Il est signé à la réception."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "Stock initial 80 ; entrées 40 ; sorties 55. Stock final ?",
+   "explanation": "80 + 40 − 55 = 65.",
+   "source": "Exercice original",
+   "answer": 65,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "La fiche de stock sert à…",
+   "explanation": "Elle trace les mouvements d'un article.",
+   "source": "Exercice original",
+   "choices": [
+    "Suivre les entrées et sorties d'un article",
+    "Établir la facture",
+    "Calculer l'impôt",
+    "Classer le courrier"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "Un stock trop élevé n'a aucun coût pour l'entreprise.",
+   "explanation": "Il immobilise de l'argent et peut causer des pertes (péremption, vol, casse).",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "On vend en moyenne 12 unités par jour ; le fournisseur livre en 5 jours. Quel est le seuil d'alerte ?",
+   "explanation": "Seuil = 12 × 5 = 60 unités.",
+   "method": "Consommation par jour × délai.",
+   "source": "Exercice original",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "unités"
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "Stock initial : 50 kg à 800 FCFA ; entrée de 150 kg à 1 200 FCFA. CMUP ?",
+   "explanation": "(50 × 800 + 150 × 1 200) ÷ 200 = (40 000 + 180 000) ÷ 200 = 1 100.",
+   "method": "Moyenne pondérée par les quantités.",
+   "mistakes": [
+    "Faire (800 + 1 200) ÷ 2 = 1 000."
+   ],
+   "source": "Exercice original",
+   "answer": 1100.0,
+   "tolerance": 0,
+   "unit": "FCFA/kg"
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "Une boutique fictive de produits vivriers a 300 kg de riz en stock, valorisés à 500 FCFA/kg. Elle reçoit 200 kg à 575 FCFA/kg, puis vend 350 kg dans le mois.",
+   "method": "Quantité finale, CMUP, valeur finale.",
+   "mistakes": [
+    "Évaluer le stock final au prix de la dernière entrée."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-gestion-entreprise-1re-stocks-06-a",
+     "points": 1,
+     "prompt": "Stock final en quantité (kg) ?",
+     "explanation": "300 + 200 − 350 = 150.",
+     "kind": "numeric",
+     "answer": 150,
+     "tolerance": 0,
+     "unit": "kg"
+    },
+    {
+     "id": "etp-gestion-entreprise-1re-stocks-06-b",
+     "points": 2,
+     "prompt": "CMUP (FCFA/kg) ?",
+     "explanation": "(300 × 500 + 200 × 575) ÷ 500 = (150 000 + 115 000) ÷ 500 = 530.",
+     "kind": "numeric",
+     "answer": 530.0,
+     "tolerance": 0,
+     "unit": "FCFA/kg"
+    },
+    {
+     "id": "etp-gestion-entreprise-1re-stocks-06-c",
+     "points": 2,
+     "prompt": "Valeur du stock final (FCFA) ?",
+     "explanation": "150 × 530 = 79 500.",
+     "kind": "numeric",
+     "answer": 79500.0,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-gestion-entreprise-1re-stocks-06-d",
+     "points": 1,
+     "prompt": "Si la boutique vend 14 kg par jour avec un délai de livraison de 4 jours, son seuil d'alerte est de 56 kg.",
+     "explanation": "14 × 4 = 56.",
+     "kind": "truefalse",
+     "answer": true
+    }
+   ]
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "Stock final = ",
+   "choices": [
+    "SI − entrées + sorties",
+    "Entrées − sorties",
+    "SI × entrées",
+    "SI + entrées − sorties"
+   ],
+   "answer": 3,
+   "explanation": "Formule de base."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "Le CMUP est une moyenne…",
+   "choices": [
+    "Simple des prix",
+    "Des quantités",
+    "Pondérée par les quantités",
+    "Des remises"
+   ],
+   "answer": 2,
+   "explanation": "Chaque prix compte selon la quantité."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "Un stock trop faible peut provoquer…",
+   "choices": [
+    "Une baisse du capital",
+    "Une rupture de stock",
+    "Un surplus",
+    "Une facture"
+   ],
+   "answer": 1,
+   "explanation": "On ne peut plus servir les clients."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "Le seuil d'alerte dépend…",
+   "choices": [
+    "De la consommation et du délai de livraison",
+    "Du nom du fournisseur",
+    "De la couleur des articles",
+    "Du nombre de clients seulement"
+   ],
+   "answer": 0,
+   "explanation": "Consommation × délai."
+  },
+  {
+   "id": "etp-gestion-entreprise-1re-stocks-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-gestion-entreprise-1re-stocks",
+   "prompt": "L'inventaire consiste à…",
+   "choices": [
+    "Calculer la TVA",
+    "Signer une facture",
+    "Classer le courrier",
+    "Compter physiquement le stock"
+   ],
+   "answer": 3,
+   "explanation": "Comptage réel, comparé à la fiche."
+  }
+ ]
+}
