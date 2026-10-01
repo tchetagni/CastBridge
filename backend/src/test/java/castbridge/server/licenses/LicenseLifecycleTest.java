@@ -69,7 +69,7 @@ class LicenseLifecycleTest extends LicenseTestBase {
         Dev d = dev();
         var a = issue(l.licenseId(), d);
         var f = decode(a);
-        assertThat(a.text()).startsWith("cba1.");
+        assertThat(a.text()).startsWith("cbx1.");
         assertThat(f.kind()).isEqualTo("production");
         assertThat(f.subject()).isEqualTo("tv");
         assertThat(f.license()).isEqualTo(l.licenseId());

@@ -11,11 +11,11 @@ import org.springframework.http.HttpStatus;
  */
 public final class ScopedActivationSigner implements ActivationSigner {
     /**
-     * Powers of the server key, fixed in code (docs/ACTIVATION-FORMAT.md § 2): trial, production (à la carte, abonnement, ré-activation), revocation
-     * lists and registry. NEVER transfer, NEVER "tout ouvert" (COMMAND_OPEN_ALL), no owner command.
+     * Powers of the server key, fixed in code (docs/ACTIVATION-FORMAT.md § 2): trial, production (à la carte, abonnement), re-activation of an existing seat, revocation
+     * lists, registry and deferred orders (POLICY). NEVER transfer, NEVER "tout ouvert" (COMMAND_OPEN_ALL), no owner command.
      */
     public static final Set<SignerScope> SERVER_SCOPES = java.util.Collections.unmodifiableSet(
-            EnumSet.of(SignerScope.ISSUE_TRIAL, SignerScope.ISSUE_PRODUCTION, SignerScope.REVOKE, SignerScope.REGISTRY));
+            EnumSet.of(SignerScope.ISSUE_TRIAL, SignerScope.ISSUE_PRODUCTION, SignerScope.REACTIVATE, SignerScope.REVOKE, SignerScope.REGISTRY, SignerScope.POLICY));
 
     private final ActivationSigner delegate;
     private final Set<SignerScope> scopes;
@@ -46,6 +46,8 @@ public final class ScopedActivationSigner implements ActivationSigner {
         boolean openAll = r.kind() == IssueKind.OPEN_ALL || r.rights().stream().anyMatch(x -> x.startsWith("openall|"));
         if (openAll && !scopes.contains(SignerScope.COMMAND_OPEN_ALL)) throw openAllRefused();
         if (r.kind() == IssueKind.TRANSFER && !scopes.contains(SignerScope.TRANSFER)) throw transferRefused();
+        // a production activation needs ISSUE_PRODUCTION or REACTIVATE (the format: a REACTIVATE-only key re-issues an existing seat, the registry replay refuses it a new one)
+        if (r.kind() == IssueKind.PRODUCTION && scopes.contains(SignerScope.REACTIVATE)) return;
         if (!scopes.contains(r.kind().required())) throw new ApiException(HttpStatus.FORBIDDEN, "Cette clé n'a pas la portée " + r.kind().required());
     }
 

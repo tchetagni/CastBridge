@@ -69,7 +69,7 @@ class LicenseApiTest extends LicenseTestBase {
         Dev dv = dev();
         JsonNode act = api(post("/api/v1/admin/licenses/" + first + "/activations").content(json.createObjectNode().put("deviceRequest", dv.text()).toString()), 200);
         assertThat(act.get("reused").asBoolean()).isFalse();
-        assertThat(act.get("text").asText()).startsWith("cba1.");
+        assertThat(act.get("text").asText()).startsWith("cbx1.");
         String seat = act.get("seatId").asText();
         JsonNode again = api(post("/api/v1/admin/licenses/" + first + "/reissue").content(json.createObjectNode().put("seatId", seat).toString()), 200);
         assertThat(again.get("text").asText()).isEqualTo(act.get("text").asText());
@@ -171,27 +171,32 @@ class LicenseApiTest extends LicenseTestBase {
         assertThat(jdbc.queryForObject("select count(*) from lic_sighting where device_code = ?", Integer.class, d.code())).isGreaterThanOrEqualTo(2);
         assertThat(jdbc.queryForList("select source_ref from lic_sighting where device_code = ?", String.class, d.code())).allSatisfy(s -> assertThat(s).hasSize(16).doesNotContain("."));
 
-        // revocation list: public, signed with the server key (REVOKE scope), the cbr1 format of docs/ACTIVATION-FORMAT.md § 7
+        // revocation list: public, signed with the server key (REVOKE scope), an envelope cbx1 of type revocation (docs/ACTIVATION-FORMAT.md § 7)
         licenses.releaseSeat(OWNER, l.licenseId(), act.seatId(), "poste libéré pour le test");
         String lostKid = kid(key());
         licenses.revokeKey(OWNER, lostKid, "clé perdue (test)");
         String list = mvc.perform(get("/api/v1/revocations")).andExpect(status().isOk()).andExpect(header().string("Cache-Control", containsString("no-store")))
                 .andExpect(header().string("Content-Type", containsString("text/plain"))).andReturn().getResponse().getContentAsString();
-        assertThat(list).startsWith("cbr1.").doesNotContain("\n");
+        assertThat(list).startsWith("cbx1.").doesNotContain("\n");
         String[] parts = list.split("\\.");
         assertThat(parts).hasSize(3);
         byte[] payload = Base64.getUrlDecoder().decode(parts[1]);
         byte[] sig = Base64.getDecoder().decode(parts[2]);
         assertThat(LicenseKeyring.verify(Base64.getDecoder().decode(keyring.publicKeyBase64()), payload, sig)).isTrue();
-        String text = new String(payload, java.nio.charset.StandardCharsets.UTF_8);
-        String[] lines = text.split("\n");
-        assertThat(lines[0]).isEqualTo("castbridge-revocation-v1");
-        assertThat(lines[1]).isEqualTo("kid=" + keyring.kid());
-        assertThat(lines[2]).startsWith("issuedAt=");
-        assertThat(text).contains("key=" + lostKid).contains("seat=" + l.licenseId() + "|" + act.seatId() + "|");
+        Envelope env = Envelope.decode(list);
+        assertThat(env).isNotNull();
+        assertThat(env.type()).isEqualTo("revocation");
+        assertThat(env.kid()).isEqualTo(keyring.kid());
+        assertThat(env.target()).isEqualTo(Envelope.Target.ANY);
+        assertThat(env.body()).contains("key=" + lostKid).anyMatch(x -> x.startsWith("seat=" + l.licenseId() + "|" + act.seatId() + "|"));
         // keys sorted, then seats sorted (canonical)
-        java.util.List<String> body = java.util.Arrays.stream(lines).skip(3).toList();
-        assertThat(body).isSorted().allMatch(x -> x.startsWith("key=") || x.startsWith("seat="));
+        assertThat(env.body()).isSorted().allMatch(x -> x.startsWith("key=") || x.startsWith("seat="));
+        // a device that trusts the server key (REVOKE) reads it back with the verifier of the format
+        var ring = new EnvelopeVerifier.Ring().add(new EnvelopeVerifier.TrustedKey(keyring.kid(), Base64.getDecoder().decode(keyring.publicKeyBase64()), ScopedActivationSigner.SERVER_SCOPES));
+        var rev = new EnvelopeVerifier(ring, EnvelopeVerifier.Revocations.none(), new EnvelopeVerifier.SeqState(), "tv").verifyRevocation(list);
+        assertThat(rev).isNotNull();
+        assertThat(rev.keys()).contains(lostKid);
+        assertThat(rev.seats()).containsKey(l.licenseId() + "|" + act.seatId());
         // the released seat no longer entitles the device
         mvc.perform(get("/api/v1/entitlements/me").param("deviceCode", d.code()).header("Authorization", "Bearer " + token)).andExpect(jsonPath("$.entitled").value(false));
         // a forged payload does not verify

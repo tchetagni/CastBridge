@@ -199,6 +199,8 @@ public class LedgerService {
             default -> null;
         };
         if (need == null) return "MALFORMED";
+        // a key that may only REACTIVATE re-issues an existing seat (§ 2): it passes here, applyIssue refuses it the creation of a seat
+        if (e.type().equals("issue") && !"trial".equals(f.get("kind")) && key.allows(SignerScope.REACTIVATE)) return null;
         return key.allows(need) ? null : "KEY_NOT_ALLOWED";
     }
 
@@ -220,6 +222,7 @@ public class LedgerService {
                     if (!f.get("kind").equals("trial") && !f.get("kind").equals("production")) return "kind";
                     if (!WireActivation.HEX.matcher(f.get("nonce")).matches()) return "nonce";
                     Long.parseLong(f.get("notAfter"));
+                    if (f.containsKey("seq") && Long.parseLong(f.get("seq")) < 0) return "seq";
                     Validate.range(Integer.parseInt(f.get("k")), "k", 1, 5);
                     if (e.factors().isEmpty() || !e.factors().values().stream().allMatch(h -> h.matches("[0-9a-f]{32}"))) return "factors";
                 }
@@ -341,6 +344,9 @@ public class LedgerService {
                 return Result.applied();
             }
         }
+        // creating a seat needs ISSUE_PRODUCTION: a key that may only REACTIVATE re-issues the seat of a hardware that already has one
+        TrustedKeys.Key signer = trusted.find(e.kid());
+        if (signer != null && !signer.allows(SignerScope.ISSUE_PRODUCTION)) return Result.rejected("KEY_NOT_ALLOWED");
         // a new seat (or a released one coming back): needs a free slot
         int active = licenses.activeSeats(l.id());
         if (!l.state().equals("REVOKED") && active >= l.seatsAllowed()) {

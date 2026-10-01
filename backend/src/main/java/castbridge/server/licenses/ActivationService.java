@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Issues (and re-issues) activations with the SERVER key, in the wire format of docs/ACTIVATION-FORMAT.md ({@code cba1}). Rules:
+ * Issues (and re-issues) activations with the SERVER key, in the wire format of docs/ACTIVATION-FORMAT.md ({@code cbx1}). Rules:
  * <ul>
  *   <li>the scope of the key is enforced before anything is written: no transfer, no "tout ouvert" (403);</li>
  *   <li>the device is identified by its REQUEST (code + k + factor fingerprints, never raw values); the same hardware (k of n factors) keeps its
@@ -64,7 +64,7 @@ public class ActivationService {
     public record Activation(String text, String kid, String nonce, String fingerprint, String kind, String subject, Instant issuedAt, Instant notAfter, String licenseId,
                              String seatId, String deviceCode, boolean reused, boolean newSeat, String format) {}
 
-    public String format() { return "cba1 (docs/ACTIVATION-FORMAT.md)"; }
+    public String format() { return "cbx1 (docs/ACTIVATION-FORMAT.md)"; }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public Activation issue(Actor actor, IssueRequest req, String channel) { return issue(actor, req, channel, false); }
@@ -153,6 +153,10 @@ public class ActivationService {
         // an activation is revoked when issuedAt <= the revocation date of its seat: a seat released earlier must get a LATER issue date
         Timestamp lastRev = jdbc.queryForObject("SELECT MAX(revoked_at) FROM lic_revocation WHERE license_id = ? AND seat_id = ?", Timestamp.class, l.wireId(), seatId);
         Instant issuedAt = lastRev != null && !lastRev.toInstant().isBefore(nowI) ? lastRev.toInstant().plusSeconds(1) : nowI;
+        // the sequence number of the key is the issue date (docs/ACTIVATION-FORMAT.md § 3.2) and a device refuses an activation OLDER than the last one it saw for this key:
+        // an issue date is never earlier than the previous one of this key (only when a release bumped the previous one into the future)
+        Timestamp lastIssued = jdbc.queryForObject("SELECT MAX(issued_at) FROM lic_issuance WHERE kid = ?", Timestamp.class, signer.kid());
+        if (lastIssued != null && lastIssued.toInstant().isAfter(issuedAt)) issuedAt = lastIssued.toInstant();
         String nonce = HexOf(Hashing.sha256(("nonce|" + idem + "|" + issuedAt.toEpochMilli()).getBytes(StandardCharsets.UTF_8)), 16);
         SignedActivation s = signer.sign(new ActivationRequest(kind, subject, l.wireId(), seatId, device, rights, issuedAt.toEpochMilli(), issuedAt.toEpochMilli(), window, nonce));
         jdbc.update("INSERT INTO lic_issuance (license_pk, seat_pk, seat_id, device_code, kind, subject, kid, nonce, issued_at, not_before, not_after, issuer, channel, token_fingerprint, source, idem_key)"

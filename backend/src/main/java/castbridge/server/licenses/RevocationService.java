@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 /**
  * What the TV and the phone may ask the server (routes OFF by default, switch castbridge.licenses.public-routes):
  * <ul>
- *   <li>GET /api/v1/revocations : the signed revocation list {@code cbr1.…} (docs/ACTIVATION-FORMAT.md § 7): revoked keys and revoked seats with their
+ *   <li>GET /api/v1/revocations : the signed revocation list {@code cbx1.…} (docs/ACTIVATION-FORMAT.md § 7): revoked keys and revoked seats with their
  *       date; a device merges it into what it already knows and applies it at its next online check;</li>
  *   <li>GET /api/v1/entitlements/me?deviceCode=… : what the licence of this device code says now (state, bouquets, end), after the existing
  *       device authentication; it also records a sighting for the abuse alerts.</li>
@@ -39,7 +39,7 @@ public class RevocationService {
         this.props = props;
     }
 
-    /** The signed list as one line of text ({@code cbr1.<payload>.<signature>}). */
+    /** The signed list as one line of text ({@code cbx1.<payload>.<signature>}). */
     public String signedList() {
         if (!keyring.present()) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Liste de révocation indisponible : aucune clé de signature serveur");
         Set<String> keys = new HashSet<>();

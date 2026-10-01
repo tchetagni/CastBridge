@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Signs an activation (the {@code cba1} token a TV or phone verifies offline, docs/ACTIVATION-FORMAT.md). The wire format is the one of
+ * Signs an activation (the {@code cbx1} token a TV or phone verifies offline, docs/ACTIVATION-FORMAT.md). The wire format is the one of
  * {@code castbridge.core.owner.ActivationIssuer} (module {@code core}); the server is a Java tool, so {@link Ed25519ActivationSigner} is a
  * port of the specification, verified byte for byte against tools/activation/test-vectors.json (WireFormatVectorsTest): same inputs, same bytes.
  *
@@ -22,7 +22,7 @@ public interface ActivationSigner {
     SignedActivation sign(ActivationRequest request);
 
     /** The scopes of the format (§ 2). The server key never holds TRANSFER nor COMMAND_OPEN_ALL. */
-    enum SignerScope { ISSUE_TRIAL, ISSUE_PRODUCTION, COMMAND_SUPPORT, COMMAND_UNLOCK, COMMAND_OPEN_ALL, TRANSFER, REVOKE, REGISTRY }
+    enum SignerScope { ISSUE_TRIAL, ISSUE_PRODUCTION, COMMAND_SUPPORT, COMMAND_UNLOCK, COMMAND_OPEN_ALL, TRANSFER, REVOKE, REGISTRY, REACTIVATE, POLICY }
 
     /** What an issuance is for; each kind needs one scope. TRANSFER and OPEN_ALL exist only to be refused to the server key. */
     enum IssueKind {
@@ -44,10 +44,20 @@ public interface ActivationSigner {
      * @param notBefore  start of the installation window, in ms (≤ issuedAt)
      * @param windowDays installation window, 1 to 366 days
      * @param nonce      8 to 64 hexadecimal digits, unique per issuance
+     * @param seq        sequence number of the key (never goes back: a device refuses an activation older than the last one it saw for this key); null = {@code issuedAt}
      */
     record ActivationRequest(IssueKind kind, String subject, String license, String seat, DeviceIdentity.Request device, List<String> rights, long issuedAt,
-                             long notBefore, int windowDays, String nonce) {}
+                             long notBefore, int windowDays, String nonce, Long seq) {
+        public ActivationRequest(IssueKind kind, String subject, String license, String seat, DeviceIdentity.Request device, List<String> rights, long issuedAt, long notBefore,
+                                 int windowDays, String nonce) {
+            this(kind, subject, license, seat, device, rights, issuedAt, notBefore, windowDays, nonce, null);
+        }
+    }
 
     /** @param text the activation to give to the owner (copy / file / QR); never logged, only its fingerprint is kept */
-    record SignedActivation(String text, String kid, String nonce, String fingerprint, String seat, long notBefore, long notAfter) {}
+    record SignedActivation(String text, String kid, String nonce, String fingerprint, String seat, long notBefore, long notAfter, long seq) {
+        public SignedActivation(String text, String kid, String nonce, String fingerprint, String seat, long notBefore, long notAfter) {
+            this(text, kid, nonce, fingerprint, seat, notBefore, notAfter, 0L);
+        }
+    }
 }

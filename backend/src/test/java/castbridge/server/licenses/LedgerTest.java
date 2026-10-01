@@ -230,7 +230,7 @@ class LedgerTest extends LicenseTestBase {
         byte[] file = ledger.export(OWNER);
         JsonNode root = json.readTree(file);
         assertThat(root.get("format").asText()).isEqualTo(LedgerService.FORMAT);
-        assertThat(root.get("events").toString()).contains(l.licenseId()).contains(imported).doesNotContain("cba1.");
+        assertThat(root.get("events").toString()).contains(l.licenseId()).contains(imported).doesNotContain("cbx1.");
         // every exported event verifies against its author's key and its id matches its text
         for (JsonNode n : root.get("events")) {
             RegistryEvent e = RegistryEvent.fromJson(n);
