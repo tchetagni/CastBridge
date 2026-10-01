@@ -90,8 +90,8 @@ class LinkDriver(
     val currentModel: LinkMachine.Model? @Synchronized get() = model
 
     /** The token to present to the TV right now, or null: kept while valid even if the link is lost, never one the TV refused. */
-    @Synchronized fun credential(): String? {
-        val tv = saved.default() ?: return null
+    @Synchronized fun credential(address: String? = null): String? {
+        val tv = (address?.let { saved.get(it) } ?: saved.default()) ?: return null
         val now = env.now()
         session?.takeIf { it.tv.address == tv.address && now < it.expiresAt - skewMs && gate.allows(tv.address, it.credential) }?.let { return it.credential }
         return store.loadCredential(tv.address)?.takeIf { now < it.expiresAt - skewMs && gate.allows(tv.address, it.token) }?.token

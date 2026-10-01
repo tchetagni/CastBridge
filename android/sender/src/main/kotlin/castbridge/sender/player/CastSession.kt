@@ -106,7 +106,7 @@ object CastSession {
                 throw e
             } catch (e: Exception) {
                 ended(false, e.javaClass.simpleName)
-                update { it.copy(phase = Remote.Phase.FAILED, message = "Échec : ${e.message ?: e.javaClass.simpleName}") }
+                update { it.copy(phase = Remote.Phase.FAILED, message = "Échec : " + castbridge.core.trust.LinkText.failure(e)) }
             }
         }
     }
@@ -126,7 +126,7 @@ object CastSession {
             } catch (e: TvClient.HttpError) {
                 throw CastFailure(when {
                     e.code == 404 -> "Cette TV CastBridge est trop ancienne pour la lecture en direct : mettez-la à jour (0.6.5), ou choisissez « Copier sur la TV et lire »."
-                    e.code == 401 -> "PIN refusé par la TV."
+                    e.code == 401 -> castbridge.core.trust.LinkText.http(401, e.message.orEmpty())
                     e.code == 409 -> TvClient.str(e.message.orEmpty().substringAfter(": "), "message") ?: "La TV doit être au premier plan : ouvrez CastBridge sur la TV."
                     else -> e.message ?: "Refusé par la TV"
                 })

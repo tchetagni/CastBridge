@@ -207,7 +207,7 @@ class TvService : Service(), Device {
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
             publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
-            tokenAuth = trust::verifyToken,
+            tokenAuth = { t -> trust.verifyToken(t)?.also { presence.seen(it) } },     // a phone using its token is "connecté"
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
             contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex)
         try {
@@ -251,7 +251,7 @@ class TvService : Service(), Device {
 
     private val helloHandler by lazy {
         castbridge.core.trust.HelloHandler(trust, pairing, ::btBonded, ::tvName, runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?",
-            { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(false) }) { p -> phoneConnected(p) }
+            { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(false) }, { p -> phoneConnected(p) }, castbridge.core.trust.AttemptLimiter(global = 40, perPeer = 10))
     }
 
     fun btHello(peer: String, peerName: String?, requestTrust: Boolean) = helloHandler.handle(peer, peerName, requestTrust)
@@ -264,12 +264,16 @@ class TvService : Service(), Device {
         getSystemService(BluetoothManager::class.java)?.adapter?.getRemoteDevice(address)?.bondState == BluetoothDevice.BOND_BONDED
     }.getOrDefault(false)
 
-    /** Banner « <téléphone> connecté », at most once per 10 minutes per phone (the phone renews its token in the background). */
+    /** Who is around, truthfully (« connecté », « liaison reprise », « téléphone déconnecté »): see castbridge.core.trust.PhonePresence. */
+    val presence = castbridge.core.trust.PhonePresence()
+
+    /** Banner « <téléphone> connecté » at most once per 10 minutes per phone; a reconnection after a link loss is only a quiet status line. */
     private fun phoneConnected(p: castbridge.core.trust.TrustedPhone) {
-        val t = System.currentTimeMillis()
-        val last = lastBanner[p.address] ?: 0
-        lastBanner[p.address] = t
-        if (t - last > 10 * 60_000L) { notice("${p.name} connecté"); setStatus("1-phone", "Téléphone connecté : ${p.name}") }
+        when (presence.seen(p.address, p.name)) {
+            castbridge.core.trust.PhonePresence.Event.BANNER -> { notice("${p.name} connecté"); setStatus("1-phone", "Téléphone connecté : ${p.name}") }
+            castbridge.core.trust.PhonePresence.Event.RECONNECTED -> setStatus("1-phone", "Liaison reprise : ${p.name}")
+            castbridge.core.trust.PhonePresence.Event.NONE -> {}
+        }
     }
 
     private var captureHooked = false

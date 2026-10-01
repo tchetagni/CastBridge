@@ -19,9 +19,14 @@ import android.util.Log
 import castbridge.core.trust.BtTransport
 import castbridge.core.trust.BtUnavailable
 import castbridge.core.trust.Candidates
+import castbridge.core.trust.LinkDriver
+import castbridge.core.trust.LinkState
+import castbridge.core.trust.LinkView
+import castbridge.core.trust.PairFlow
+import castbridge.core.trust.PairStep
+import castbridge.core.trust.Trigger
 import castbridge.core.trust.LinkSession
 import castbridge.core.trust.PhoneLink
-import castbridge.core.trust.ReconnectPolicy
 import castbridge.core.trust.SavedTv
 import castbridge.core.trust.SavedTvs
 import castbridge.core.trust.TrustPersistence
@@ -71,25 +76,22 @@ class AndroidBtTransport(private val ctx: Context) : BtTransport {
     }
 }
 
-/** What the screens show about the plug-and-play link. */
+/** What the screens show about the plug-and-play link; the wording and the single action come from the state machine ([LinkView]). */
 sealed class LinkUi {
     object NoTv : LinkUi()
-    data class BluetoothProblem(val reason: BtUnavailable.Reason) : LinkUi()
-    data class Connecting(val tv: SavedTv) : LinkUi()
-    data class Connected(val session: LinkSession) : LinkUi()
-    /** The TV does not answer (off, out of range, Bluetooth off there): retried quietly. */
-    data class Absent(val tv: SavedTv, val why: String, val failures: Int = 0) : LinkUi()
-    /** The TV answered "I do not know you" (or refused): the user has to add it again. */
-    data class Refused(val tv: SavedTv, val code: Int, val message: String, val needsPairing: Boolean) : LinkUi()
+    /** A TV whose credential is usable: kept (with [view] "Liaison perdue, reconnexion…") while the link is being re-established. */
+    data class Connected(val session: LinkSession, val view: LinkView? = null) : LinkUi()
+    /** Everything else: connecting, unreachable, forgotten by the TV, Bluetooth problems... */
+    data class Status(val view: LinkView, val tv: SavedTv?) : LinkUi()
 }
 
 /**
  * Plug and play, phone side: keeps the link to the default TV alive by itself.
  *
- * Opening the app (or the screen turning on, the network changing, Bluetooth coming back, the TV's link appearing) wakes the loop;
- * it asks the TV "HELLO" over the paired Bluetooth link, receives the TV's name, Wi-Fi addresses and this phone's token, tests which
- * address answers, and publishes [state]. The token is renewed in the background at half of its life, so nobody is ever asked for
- * a code. When the TV is off it retries with a growing delay (2 s ... 1 min) only while the app is visible.
+ * The loop only sleeps and calls [LinkDriver.step] (castbridge.core.trust), which decides everything and is tested with a fake TV and a fake
+ * clock: HELLO over the paired Bluetooth link, the fastest route, keep-alive, route fallback and return, token renewal at half of its life,
+ * reset detection, backoff with jitter, and which failures are never retried. Wake-ups: the app opening, Bluetooth / bond / network / screen
+ * broadcasts, the user's « Réessayer »; in the background a periodic job ([LinkJobService]) does the same one step.
  * The 6-digit PIN is never requested, never stored and never displayed by this path.
  */
 object TvLinkManager {
@@ -97,26 +99,33 @@ object TvLinkManager {
     private lateinit var app: Context
     private lateinit var creds: SharedPreferences
     lateinit var saved: SavedTvs; private set
+    lateinit var driver: LinkDriver; private set
+    private lateinit var linkEnv: AndroidLinkEnv
     private val _state = MutableStateFlow<LinkUi>(LinkUi.NoTv)
     val state: StateFlow<LinkUi> = _state
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var job: Job? = null
-    private val wake = Channel<Unit>(Channel.CONFLATED)
+    private val wake = Channel<Trigger>(Channel.CONFLATED)
     @Volatile var foreground = false; private set
-    @Volatile private var session: LinkSession? = null
-    @Volatile private var issuedAt = 0L
     private var registered = false
+    private var pendingReassociate: SavedTv? = null
 
     @Synchronized fun init(ctx: Context) {
         if (::app.isInitialized) return
         app = ctx.applicationContext
         creds = app.getSharedPreferences("castbridge_trust", Context.MODE_PRIVATE)
         saved = SavedTvs(PrefsPersistence(creds, "tvs"))
-        if (saved.list().isEmpty()) _state.value = LinkUi.NoTv
+        linkEnv = AndroidLinkEnv(app) { foreground }
+        driver = LinkDriver(PhoneLink(AndroidBtTransport(app), linkEnv::probe, { Build.VERSION.SDK_INT >= 29 }), linkEnv, saved, PrefsLinkStore(creds),
+            canJoinWifiDirect = { Build.VERSION.SDK_INT >= 29 })
+        if (saved.list().isNotEmpty()) LinkJobService.schedulePeriodic(app)
     }
 
-    /** The phone's "BLUETOOTH_CONNECT" etc. may be granted later: the screens call this after a grant. */
-    fun poke() { wake.trySend(Unit) }
+    /** A grant, a token rejected by a screen... : look again soon (never forces a TV that said "I do not know you" to answer). */
+    fun poke() { wake.trySend(Trigger.APP_OPENED) }
+
+    /** The user pressed « Réessayer » / came back from the Bluetooth settings. */
+    fun retryNow() { wake.trySend(Trigger.USER) }
 
     fun setForeground(on: Boolean) { foreground = on; if (on) { start(); poke() } }
 
@@ -128,173 +137,123 @@ object TvLinkManager {
         job = scope.launch { loop() }
     }
 
+    /** One step from the background job: no loop, no UI. */
+    fun stepOnce(trigger: Trigger) {
+        if (!::app.isInitialized || saved.list().isEmpty()) return
+        publish(driver.step(trigger))
+    }
+
     // ---- credential for the existing screens: PinStore.get(key) asks here first ----
 
-    /** The token to use instead of the PIN for [key] (TV name, "bt:<address>", "host:port"), or null (use the PIN, if any). */
+    /** The token to use instead of the PIN for [key] (TV name, "bt:<address>", "host:port"), or null (use the PIN, if any). Never a token the TV refused or that expired. */
     fun credentialFor(key: String?): String? {
         val tv = savedFor(key) ?: return null
-        val raw = creds.getString("cred.${tv.address}", null) ?: return null
-        val (token, exp) = raw.split('|').takeIf { it.size == 2 } ?: return null
-        return token.takeIf { (exp.toLongOrNull() ?: 0) > System.currentTimeMillis() }
+        return driver.credential(tv.address)
     }
 
     fun savedFor(key: String?): SavedTv? = if (key == null || !::saved.isInitialized) null
         else saved.list().firstOrNull { t -> key == t.mdns || key == t.name || key == "bt:${t.address}" || t.lastIps.any { "$it:${t.port}" == key } }
 
-    private fun storeCredential(s: LinkSession) {
-        creds.edit().putString("cred.${s.tv.address}", "${s.credential}|${s.expiresAt}").apply()
+    /** The live token for the TV answering at this base URL ("http://host:port"), or null. */
+    fun credentialForBase(base: String): String? {
+        val host = runCatching { java.net.URI(base).host }.getOrNull() ?: return null
+        return savedForHost(host)?.let { driver.credential(it.address) }
     }
 
+    fun savedForHost(host: String): SavedTv? = if (!::saved.isInitialized) null else saved.list().firstOrNull { t -> t.lastIps.contains(host) }
+
+    /** A call to the TV's API was answered "bad token": the token is dropped for good and a new HELLO follows. */
+    fun tokenRejected(token: String) { if (::driver.isInitialized) { driver.reportTokenRejected(token); wake.trySend(Trigger.USER) } }
+
     fun forget(address: String) {
-        saved.remove(address)
-        creds.edit().remove("cred.${TrustRegistry.norm(address)}").apply()
-        if (session?.tv?.address == TrustRegistry.norm(address)) { session = null }
-        _state.value = saved.default()?.let { LinkUi.Connecting(it) } ?: LinkUi.NoTv
+        driver.forget(address)
+        publish(driver.step(Trigger.USER))
         poke()
     }
 
-    fun makeDefault(address: String) { saved.setDefault(address); session = null; poke() }
+    fun makeDefault(address: String) { saved.setDefault(address); retryNow() }
+
+    // ---- « Réassocier »: forget locally, then the whole pairing flow starts by itself in « Ajouter ma TV » ----
+
+    fun requestReassociate(address: String) {
+        pendingReassociate = saved.get(address)
+        forget(address)
+    }
+
+    fun takeReassociate(): SavedTv? = pendingReassociate.also { pendingReassociate = null }
+
+    // ---- diagnostics ----
+
+    fun diagnose(onStep: (castbridge.core.trust.DiagStep) -> Unit): castbridge.core.trust.DiagReport {
+        val tv = saved.default()
+        return castbridge.core.trust.Diagnostics(AndroidDiagEnv(app, linkEnv, AndroidBtTransport(app))) { addr -> PrefsLinkStore(creds).loadCredential(addr) }.run(tv, onStep)
+    }
 
     // ---- the loop ----
 
-    private fun btProblem(): BtUnavailable.Reason? {
-        val ad = app.getSystemService(BluetoothManager::class.java)?.adapter ?: return BtUnavailable.Reason.NO_ADAPTER
-        if (!hasBtPermission(app)) return BtUnavailable.Reason.NO_PERMISSION
-        @SuppressLint("MissingPermission") val on = runCatching { ad.isEnabled }.getOrDefault(false)
-        return if (on) null else BtUnavailable.Reason.OFF
-    }
-
-    private fun link() = PhoneLink(AndroidBtTransport(app), ::reachable, { Build.VERSION.SDK_INT >= 29 })
-
-    /** Does this address answer like a CastBridge TV? (short timeout: the phone may simply be on another network). */
-    fun reachable(base: String): Boolean = runCatching {
-        val c = java.net.URL("$base/api/hello").openConnection() as java.net.HttpURLConnection
-        c.connectTimeout = 1200; c.readTimeout = 1200
-        c.responseCode == 200 && c.inputStream.use { it.readBytes() }.decodeToString().contains("castbridge-tv")
-    }.getOrDefault(false)
-
-    private suspend fun pause(ms: Long) { withTimeoutOrNull(ms) { wake.receive() } }
-
-    private suspend fun loop() {
-        var failures = 0
-        while (scope.isActive) {
-            val tv = saved.default()
-            if (tv == null) { session = null; _state.value = LinkUi.NoTv; wake.receive(); continue }
-            val problem = btProblem()
-            if (problem != null) {
-                session = null; _state.value = LinkUi.BluetoothProblem(problem)
-                pause(if (foreground) 5_000 else 10 * 60_000L)       // Bluetooth coming back or a permission grant also wake the loop
-                continue
-            }
-            // Connected: keep it (renew at half of the token's life, verify the Wi-Fi address from time to time).
-            val cur = session
-            if (cur != null && cur.tv.address == tv.address) {
-                val due = ReconnectPolicy.renewAt(issuedAt, cur.expiresAt)
-                val now = System.currentTimeMillis()
-                val stillGood = now < due && (cur.base?.let { reachable(it) } ?: (now - issuedAt < 60_000))
-                if (stillGood) { pause(minOf(due - now, 15_000).coerceAtLeast(1_000)); continue }
-            }
-            // keep the "introuvable" card steady while retrying: flipping to "Connexion…" at every attempt made its buttons vanish under the finger
-            if (session == null && _state.value !is LinkUi.Absent) _state.value = LinkUi.Connecting(tv)
-            when (val r = link().connect(tv)) {
-                is PhoneLink.Result.Connected -> {
-                    failures = 0
-                    val s = r.session
-                    session = s; issuedAt = System.currentTimeMillis()
-                    saved.upsert(s.tv)
-                    storeCredential(s)
-                    _state.value = LinkUi.Connected(s)
-                }
-                is PhoneLink.Result.TvAbsent -> {
-                    failures++; session = null
-                    _state.value = LinkUi.Absent(tv, r.why, failures)
-                    if (foreground) pause(ReconnectPolicy.retryDelayMs(failures)) else wake.receive()
-                }
-                is PhoneLink.Result.BluetoothProblem -> { session = null; _state.value = LinkUi.BluetoothProblem(r.reason); pause(5_000) }
-                is PhoneLink.Result.Refused -> {
-                    session = null
-                    _state.value = LinkUi.Refused(tv, r.code, r.message, r.needsPairing)
-                    // a refusal is not a network glitch: wait for the user (Retry / Add again) or for the app to come back
-                    if (r.code == BtProtocol.ERR_MAGIC || r.needsPairing) wake.receive() else pause(30_000)
-                }
-            }
+    private fun publish(step: LinkDriver.Step) {
+        val tv = saved.default()
+        val s = step.session
+        val v = step.view
+        _state.value = when {
+            tv == null || v.state is LinkState.NoTv -> LinkUi.NoTv
+            s != null && s.tv.address == tv.address && (v.state.isGood || v.state is LinkState.Reconnecting) -> LinkUi.Connected(s, v)
+            else -> LinkUi.Status(v, tv)
         }
     }
 
-    // ---- wake-ups: Bluetooth on/off, the TV's link, the network ----
+    private suspend fun loop() {
+        var trigger = Trigger.APP_OPENED
+        while (scope.isActive) {
+            val step = driver.step(trigger)
+            publish(step)
+            val d = step.nextInMs
+            trigger = if (d == null) wake.receive() else withTimeoutOrNull(d) { wake.receive() } ?: Trigger.TIMER
+        }
+    }
+
+    // ---- wake-ups: Bluetooth on/off, ACL up/down, bond, screen, the network ----
 
     @Synchronized private fun registerTriggers() {
         if (registered) return
         registered = true
         val f = IntentFilter().apply {
-            addAction(BluetoothAdapter.ACTION_STATE_CHANGED); addAction(BluetoothDevice.ACTION_ACL_CONNECTED); addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED)
+            addAction(BluetoothAdapter.ACTION_STATE_CHANGED); addAction(BluetoothDevice.ACTION_ACL_CONNECTED); addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
+            addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED); addAction(Intent.ACTION_SCREEN_ON)
         }
-        val r = object : BroadcastReceiver() { override fun onReceive(c: Context, i: Intent) { poke() } }
-        if (Build.VERSION.SDK_INT >= 33) app.registerReceiver(r, f, Context.RECEIVER_EXPORTED) else app.registerReceiver(r, f)
+        val r = object : BroadcastReceiver() {
+            override fun onReceive(c: Context, i: Intent) {
+                wake.trySend(when (i.action) {
+                    BluetoothDevice.ACTION_ACL_CONNECTED -> Trigger.ACL_CONNECTED
+                    BluetoothDevice.ACTION_ACL_DISCONNECTED -> Trigger.ACL_DISCONNECTED
+                    BluetoothAdapter.ACTION_STATE_CHANGED -> Trigger.BLUETOOTH_STATE
+                    BluetoothDevice.ACTION_BOND_STATE_CHANGED -> Trigger.BOND_STATE
+                    else -> Trigger.SCREEN_ON
+                })
+            }
+        }
+        registerSystemReceiver(app, r, f)
         runCatching {
             app.getSystemService(ConnectivityManager::class.java).registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
-                override fun onAvailable(network: Network) { poke() }
-                override fun onLost(network: Network) { poke() }
+                override fun onAvailable(network: Network) { wake.trySend(Trigger.NETWORK) }
+                override fun onLost(network: Network) { wake.trySend(Trigger.NETWORK) }
             })
         }.onFailure { Log.w(TAG, "network callback: ${it.javaClass.simpleName}") }
     }
 
-    // ---- « Ajouter ma TV » ----
+    // ---- « Ajouter ma TV » / « Réassocier » ----
 
-    sealed class PairStep {
-        object Bonding : PairStep()
-        object WaitingOwner : PairStep()
-        data class Done(val tv: SavedTv) : PairStep()
-        data class Failed(val message: String, val retry: Boolean) : PairStep()
-    }
-
-    /** Pairs (Android's numeric comparison on both screens), then asks the TV's owner to approve this phone. Blocks: call from IO. */
-    @SuppressLint("MissingPermission")
+    /**
+     * Pairs (Android's numeric comparison on both screens), asks the TV's owner to approve this phone, and repairs a stale bond on the way
+     * ([PairFlow]). Blocks: call from IO. The last step passed to [onStep] is [PairStep.Done] or [PairStep.Failed].
+     */
     fun pair(candidate: TvCandidate, onStep: (PairStep) -> Unit) {
-        val ad = app.getSystemService(BluetoothManager::class.java)?.adapter
-        if (ad == null || !ad.isEnabled) { onStep(PairStep.Failed("Activez le Bluetooth du téléphone.", true)); return }
-        runCatching { ad.cancelDiscovery() }
-        val dev = ad.getRemoteDevice(candidate.address)
-        onStep(PairStep.Bonding)
-        if (!ensureBonded(dev)) { onStep(PairStep.Failed("L'association Bluetooth n'a pas abouti. Vérifiez que les codes affichés sur le téléphone et sur la TV sont identiques, puis réessayez.", true)); return }
-        onStep(PairStep.WaitingOwner)
-        val tv0 = SavedTv(TrustRegistry.norm(candidate.address), candidate.name.ifBlank { "Ma TV" }, addedAt = System.currentTimeMillis())
-        when (val r = link().connect(tv0, requestTrust = true)) {
-            is PhoneLink.Result.Connected -> {
-                val s = r.session
-                saved.upsert(s.tv, makeDefault = true); storeCredential(s)
-                session = s; issuedAt = System.currentTimeMillis(); _state.value = LinkUi.Connected(s)
-                poke()
-                onStep(PairStep.Done(s.tv))
-            }
-            is PhoneLink.Result.Refused -> onStep(PairStep.Failed(r.message, r.code != BtProtocol.ERR_DENIED))
-            is PhoneLink.Result.TvAbsent -> onStep(PairStep.Failed("La TV ne répond pas : ouvrez CastBridge TV sur la TV, écran « Ajouter un téléphone », puis réessayez.", true))
-            is PhoneLink.Result.BluetoothProblem -> onStep(PairStep.Failed("Bluetooth indisponible sur ce téléphone.", false))
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun ensureBonded(dev: BluetoothDevice, timeoutMs: Long = 90_000): Boolean {
-        if (dev.bondState == BluetoothDevice.BOND_BONDED) return true
-        val latch = CountDownLatch(1)
-        var ok = false
-        val r = object : BroadcastReceiver() {
-            @Suppress("DEPRECATION")
-            override fun onReceive(c: Context, i: Intent) {
-                val d = i.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
-                if (d?.address != dev.address) return
-                when (i.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR)) {
-                    BluetoothDevice.BOND_BONDED -> { ok = true; latch.countDown() }
-                    BluetoothDevice.BOND_NONE -> if (i.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, 0) == BluetoothDevice.BOND_BONDING) latch.countDown()
-                }
-            }
-        }
-        app.registerReceiver(r, IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED))
-        try {
-            if (!dev.createBond()) return dev.bondState == BluetoothDevice.BOND_BONDED
-            latch.await(timeoutMs, TimeUnit.MILLISECONDS)
-        } finally { runCatching { app.unregisterReceiver(r) } }
-        return ok || dev.bondState == BluetoothDevice.BOND_BONDED
+        val address = TrustRegistry.norm(candidate.address)
+        // the install id of an earlier pairing is meaningless for a new one: do not claim it
+        val tv0 = (saved.get(address) ?: SavedTv(address, candidate.name.ifBlank { "Ma TV" }, addedAt = System.currentTimeMillis())).copy(installId = null)
+        val flow = PairFlow(PhoneLink(AndroidBtTransport(app), linkEnv::probe, { Build.VERSION.SDK_INT >= 29 }), AndroidPairEnv(app, linkEnv))
+        val r = flow.run(tv0, onStep)
+        if (r is PairStep.Done) { LinkJobService.schedulePeriodic(app); driver.adopt(r.session); publish(driver.step(Trigger.USER)); poke() }
     }
 }
 

@@ -102,7 +102,7 @@ private suspend fun <T> io(f: () -> T): Result<T> = withContext(Dispatchers.IO) 
 private fun why(e: Throwable): String = when {
     e is ParentalError && e.code == 404 -> "Cette TV n'a pas encore le contrôle parental : mettez à jour l'app CastBridge TV."
     e is ParentalError -> e.message.orEmpty()
-    else -> "La TV ne répond pas (${e.message ?: e.javaClass.simpleName})."
+    else -> castbridge.core.trust.LinkText.failure(e)       // a French sentence, never the exception text
 }
 
 @Composable
