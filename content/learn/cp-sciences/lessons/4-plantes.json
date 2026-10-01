@@ -1,0 +1,482 @@
+{
+ "chapter": "cp-sciences-plantes-ch",
+ "lessons": [
+  {
+   "id": "cp-sciences-plantes-fiche",
+   "title": "Les plantes",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Découverte du monde / sciences : les plantes (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les parties d'une plante.",
+    "Dire ce dont une plante a besoin pour vivre.",
+    "Citer des plantes que l'on mange."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cp-sciences-plantes-01",
+    "cp-sciences-plantes-02",
+    "cp-sciences-plantes-03",
+    "cp-sciences-plantes-04",
+    "cp-sciences-plantes-05",
+    "cp-sciences-plantes-06"
+   ],
+   "selfCheck": [
+    "cp-sciences-plantes-q1",
+    "cp-sciences-plantes-q2",
+    "cp-sciences-plantes-q3",
+    "cp-sciences-plantes-q4",
+    "cp-sciences-plantes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que « la fleur devient un fruit » est acceptable pour le CP (simplification).",
+    "L'arachide a une graine qui se forme sous terre : le formuler avec un enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Une plante a des racines, une tige, des feuilles et parfois des fleurs.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les parties d'une plante",
+     "md": "Une plante a plusieurs parties.\n\n- Les **racines** sont dans la terre. Elles boivent l'eau.\n- La **tige** porte la plante.\n- Les **feuilles** sont vertes.\n- La **fleur** devient souvent un **fruit**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 300,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 215,
+        "w": 400,
+        "h": 75,
+        "fill": "lightorange",
+        "stroke": "brown"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 215,
+        "x2": 210,
+        "y2": 110,
+        "color": "green",
+        "width": 6
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 26,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 270,
+        "cy": 120,
+        "r": 26,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 70,
+        "r": 26,
+        "fill": "pink",
+        "stroke": "red"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 215,
+        "x2": 170,
+        "y2": 265,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 215,
+        "x2": 250,
+        "y2": 265,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 215,
+        "x2": 210,
+        "y2": 270,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 70,
+        "text": "la fleur",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 68,
+        "x2": 238,
+        "y2": 70,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 115,
+        "text": "la feuille",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 105,
+        "y1": 118,
+        "x2": 124,
+        "y2": 120,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 165,
+        "text": "la tige",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 305,
+        "y1": 162,
+        "x2": 214,
+        "y2": 165,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 255,
+        "text": "les racines",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 252,
+        "x2": 185,
+        "y2": 255,
+        "color": "grey",
+        "width": 1
+       }
+      ]
+     },
+     "caption": "Les parties d'une plante",
+     "alt": "Une plante dessinée avec ses racines dans la terre, sa tige, deux feuilles vertes et une fleur rose."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ce qu'il faut à une plante",
+     "md": "Pour vivre et grandir, une plante a besoin d'**eau**, de **lumière** et de **terre**. Sans eau, elle se fane."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le manioc",
+     "statement": "On mange la racine du manioc. Où est cette partie ?",
+     "steps": [
+      {
+       "md": "La racine est sous la terre."
+      },
+      {
+       "md": "On creuse pour la sortir."
+      }
+     ],
+     "answer": "**La racine du manioc est dans la terre.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la plante qui se fane",
+     "statement": "Paul oublie d'arroser sa plante pendant longtemps. Que se passe-t-il ?",
+     "steps": [
+      {
+       "md": "Les racines n'ont plus d'eau."
+      },
+      {
+       "md": "Les feuilles deviennent jaunes et tombent."
+      }
+     ],
+     "answer": "**La plante se fane, car elle manque d'eau.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention !",
+     "md": "On ne mange pas une plante ou un fruit inconnu. Certaines plantes sont dangereuses."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-plantes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-plantes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-plantes-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le plantain, la mangue, la papaye et l'ananas sont des fruits. L'arachide pousse sous la terre."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie de la plante est dans la terre ?",
+   "explanation": "Les **racines** sont dans la terre.",
+   "id": "cp-sciences-plantes-01",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 1,
+   "choices": [
+    "les feuilles",
+    "les racines",
+    "la fleur",
+    "la tige"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une plante a besoin d'eau pour vivre.",
+   "answer": true,
+   "explanation": "Oui. Sans eau, la plante se fane.",
+   "id": "cp-sciences-plantes-02",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque partie de la plante à sa description.",
+   "pairs": [
+    [
+     "les racines",
+     "dans la terre"
+    ],
+    [
+     "les feuilles",
+     "vertes"
+    ],
+    [
+     "la tige",
+     "porte la plante"
+    ],
+    [
+     "la fleur",
+     "colorée"
+    ]
+   ],
+   "explanation": "Les racines sont dans la terre, les feuilles sont vertes, la tige porte la plante, la fleur est colorée.",
+   "id": "cp-sciences-plantes-03",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Ibrahim oublie d'arroser sa plante. Que fait la plante ?",
+   "explanation": "Sans eau, la plante se **fane**.",
+   "id": "cp-sciences-plantes-04",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 1,
+   "choices": [
+    "elle chante",
+    "elle devient une pierre",
+    "elle marche",
+    "elle se fane"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "De quoi une plante n'a-t-elle PAS besoin pour grandir ?",
+   "explanation": "Une plante a besoin d'eau, de lumière et de terre. Pas de bonbons.",
+   "id": "cp-sciences-plantes-05",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 1,
+   "choices": [
+    "d'eau",
+    "de bonbons",
+    "de lumière",
+    "de terre"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Dessine avec des mots une plante : écris le nom de trois de ses parties.",
+   "model": "Une plante a des racines, une tige et des feuilles.",
+   "rubric": [
+    "Trois parties sont citées.",
+    "Les noms sont bien écrits."
+   ],
+   "explanation": "On peut aussi écrire : la fleur, le fruit.",
+   "id": "cp-sciences-plantes-06",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie est verte ?",
+   "explanation": "Les feuilles sont vertes.",
+   "id": "cp-sciences-plantes-q1",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 1,
+   "choices": [
+    "la racine",
+    "la terre",
+    "le caillou",
+    "la feuille"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que boivent les racines ?",
+   "explanation": "Les racines absorbent l'eau de la terre.",
+   "id": "cp-sciences-plantes-q2",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 1,
+   "choices": [
+    "le sable",
+    "l'eau",
+    "l'huile",
+    "le sel"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie porte la plante ?",
+   "explanation": "La tige porte la plante.",
+   "id": "cp-sciences-plantes-q3",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 1,
+   "choices": [
+    "la fleur",
+    "le fruit",
+    "la feuille",
+    "la tige"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle plante donne un fruit ?",
+   "explanation": "Le papayer donne la papaye.",
+   "id": "cp-sciences-plantes-q4",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 1,
+   "choices": [
+    "le caillou",
+    "le papayer",
+    "la chaise",
+    "le tambour"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient souvent une fleur ?",
+   "explanation": "La fleur devient souvent un fruit.",
+   "id": "cp-sciences-plantes-q5",
+   "chapter": "cp-sciences-plantes-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-plantes-fiche",
+   "points": 1,
+   "choices": [
+    "un caillou",
+    "un animal",
+    "de l'eau",
+    "un fruit"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  }
+ ]
+}

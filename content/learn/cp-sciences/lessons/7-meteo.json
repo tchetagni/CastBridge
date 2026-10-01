@@ -1,0 +1,384 @@
+{
+ "chapter": "cp-sciences-meteo-ch",
+ "lessons": [
+  {
+   "id": "cp-sciences-meteo-fiche",
+   "title": "Le temps qu'il fait",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "CP — Découverte du monde / sciences : la météo et les saisons (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Décrire le temps qu'il fait.",
+    "Lire un petit tableau de la météo de la semaine.",
+    "Choisir un habit adapté au temps."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cp-sciences-meteo-01",
+    "cp-sciences-meteo-02",
+    "cp-sciences-meteo-03",
+    "cp-sciences-meteo-04",
+    "cp-sciences-meteo-05",
+    "cp-sciences-meteo-06"
+   ],
+   "selfCheck": [
+    "cp-sciences-meteo-q1",
+    "cp-sciences-meteo-q2",
+    "cp-sciences-meteo-q3",
+    "cp-sciences-meteo-q4",
+    "cp-sciences-meteo-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la formulation « deux grandes saisons » (le climat varie selon les régions du Cameroun) : à confirmer par un enseignant.",
+    "Le diagramme est un exemple inventé, pas une donnée réelle."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Aujourd'hui, il pleut. Je prends mon parapluie.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La météo",
+     "md": "La **météo**, c'est le temps qu'il fait : du **soleil**, des **nuages**, de la **pluie**, du **vent**, un **orage**.\n\nLe temps change d'un jour à l'autre."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les saisons",
+     "md": "Dans beaucoup de régions du Cameroun, il y a deux grandes saisons : la **saison sèche**, avec peu de pluie, et la **saison des pluies**, avec beaucoup de pluie."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "jours",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "soleil",
+        "value": 3,
+        "color": "yellow"
+       },
+       {
+        "label": "pluie",
+        "value": 2,
+        "color": "blue"
+       },
+       {
+        "label": "nuages",
+        "value": 2,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "Le temps de la semaine d'Essomba",
+     "alt": "Un diagramme en barres : 3 jours de soleil, 2 jours de pluie, 2 jours de nuages."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire le diagramme",
+     "statement": "Combien de jours de pluie dans la semaine d'Essomba ?",
+     "steps": [
+      {
+       "md": "On regarde la barre « pluie »."
+      },
+      {
+       "md": "Elle monte jusqu'à 2."
+      }
+     ],
+     "answer": "**Il y a eu 2 jours de pluie.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : bien s'habiller",
+     "statement": "Il pleut fort. Que prend Ngono pour aller à l'école ?",
+     "steps": [
+      {
+       "md": "Elle veut rester au sec."
+      },
+      {
+       "md": "Elle prend un parapluie ou un imperméable."
+      }
+     ],
+     "answer": "**Un parapluie.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention !",
+     "md": "Pendant un orage, on ne reste pas sous un grand arbre. On entre dans une maison."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-meteo-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-meteo-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-meteo-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les paysans regardent le ciel pour savoir quand semer."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps fait-il quand de l'eau tombe du ciel ?",
+   "explanation": "Quand de l'eau tombe des nuages, **il pleut**.",
+   "id": "cp-sciences-meteo-01",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "choices": [
+    "il fait soleil",
+    "il pleut",
+    "il fait chaud",
+    "il neige"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la météo ne change jamais.",
+   "answer": false,
+   "explanation": "Faux. Le temps change d'un jour à l'autre.",
+   "id": "cp-sciences-meteo-02",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Regarde le diagramme de la semaine d'Essomba. Combien de jours de soleil ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "La barre « soleil » monte à 3.",
+   "figure": {
+    "kind": "bars",
+    "unit": "jours",
+    "w": 420,
+    "h": 240,
+    "bars": [
+     {
+      "label": "soleil",
+      "value": 3,
+      "color": "yellow"
+     },
+     {
+      "label": "pluie",
+      "value": 2,
+      "color": "blue"
+     },
+     {
+      "label": "nuages",
+      "value": 2,
+      "color": "grey"
+     }
+    ]
+   },
+   "unit": "jours",
+   "id": "cp-sciences-meteo-03",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que prend-on s'il pleut ?",
+   "explanation": "On prend un parapluie.",
+   "id": "cp-sciences-meteo-04",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "choices": [
+    "des lunettes de soleil",
+    "un ballon",
+    "un tambour",
+    "un parapluie"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans le diagramme, quelle barre est la plus haute ?",
+   "explanation": "La barre du soleil est la plus haute (3 jours).",
+   "figure": {
+    "kind": "bars",
+    "unit": "jours",
+    "w": 420,
+    "h": 240,
+    "bars": [
+     {
+      "label": "soleil",
+      "value": 3,
+      "color": "yellow"
+     },
+     {
+      "label": "pluie",
+      "value": 2,
+      "color": "blue"
+     },
+     {
+      "label": "nuages",
+      "value": 2,
+      "color": "grey"
+     }
+    ]
+   },
+   "id": "cp-sciences-meteo-05",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "choices": [
+    "pluie",
+    "soleil",
+    "nuages",
+    "aucune"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris une phrase pour dire le temps qu'il fait aujourd'hui.",
+   "model": "Aujourd'hui, il fait soleil et il y a un peu de vent.",
+   "rubric": [
+    "La phrase décrit le temps.",
+    "La phrase commence par une majuscule et finit par un point."
+   ],
+   "explanation": "Toute phrase juste sur le temps du jour est acceptée.",
+   "id": "cp-sciences-meteo-06",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'y a-t-il dans le ciel quand il pleut ?",
+   "explanation": "Les nuages donnent la pluie.",
+   "id": "cp-sciences-meteo-q1",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "choices": [
+    "des étoiles seulement",
+    "des ballons",
+    "du sable",
+    "des nuages"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle saison a peu de pluie ?",
+   "explanation": "La saison sèche a peu de pluie.",
+   "id": "cp-sciences-meteo-q2",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "choices": [
+    "la saison des pluies",
+    "la saison sèche",
+    "la saison des mangues",
+    "la saison des jeux"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait-on pendant un orage ?",
+   "explanation": "On se met à l'abri dans une maison.",
+   "id": "cp-sciences-meteo-q3",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "choices": [
+    "on monte à l'arbre",
+    "on reste sous un grand arbre",
+    "on joue dehors",
+    "on entre dans une maison"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que porte-t-on sous un grand soleil ?",
+   "explanation": "On protège sa tête du soleil avec un chapeau.",
+   "id": "cp-sciences-meteo-q4",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "choices": [
+    "un manteau de laine",
+    "un chapeau",
+    "un parapluie",
+    "des bottes"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire « météo » ?",
+   "explanation": "La météo, c'est le temps qu'il fait.",
+   "id": "cp-sciences-meteo-q5",
+   "chapter": "cp-sciences-meteo-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-meteo-fiche",
+   "points": 1,
+   "choices": [
+    "le nom d'un animal",
+    "une fête",
+    "un repas",
+    "le temps qu'il fait"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  }
+ ]
+}

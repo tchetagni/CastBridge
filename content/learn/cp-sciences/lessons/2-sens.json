@@ -1,0 +1,530 @@
+{
+ "chapter": "cp-sciences-sens-ch",
+ "lessons": [
+  {
+   "id": "cp-sciences-sens-fiche",
+   "title": "Les cinq sens",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "CP — Découverte du monde / sciences : les cinq sens (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les cinq sens.",
+    "Associer chaque sens à son organe.",
+    "Choisir le bon sens pour une situation."
+   ],
+   "prerequisites": [
+    "cp-sciences-corps-fiche"
+   ],
+   "exercises": [
+    "cp-sciences-sens-01",
+    "cp-sciences-sens-02",
+    "cp-sciences-sens-03",
+    "cp-sciences-sens-04",
+    "cp-sciences-sens-05",
+    "cp-sciences-sens-06"
+   ],
+   "selfCheck": [
+    "cp-sciences-sens-q1",
+    "cp-sciences-sens-q2",
+    "cp-sciences-sens-q3",
+    "cp-sciences-sens-q4",
+    "cp-sciences-sens-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la liste des saveurs de base adaptée au CP (sucré, salé, acide, amer).",
+    "Vérifier le message de prudence sur les produits inconnus."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Je vois avec mes yeux. J'entends avec mes oreilles. Je sens avec mon nez.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les sens",
+     "md": "Mon corps a **cinq sens**. Ils me font découvrir le monde.\n\n- Je **vois** avec les yeux : la vue.\n- J'**entends** avec les oreilles : l'ouïe.\n- Je **sens** avec le nez : l'odorat.\n- Je **goûte** avec la langue : le goût.\n- Je **touche** avec la peau : le toucher."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 200.0,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 34,
+        "text": "Sens",
+        "size": 16,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 10,
+        "w": 200.0,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 34,
+        "text": "Organe",
+        "size": 16,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 46,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 68.44,
+        "text": "la vue",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 46,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 68.44,
+        "text": "les yeux",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 80,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 102.44,
+        "text": "l'ouïe",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 80,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 102.44,
+        "text": "les oreilles",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 114,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 136.44,
+        "text": "l'odorat",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 114,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 136.44,
+        "text": "le nez",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 148,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 170.44,
+        "text": "le goût",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 148,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 170.44,
+        "text": "la langue",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 182,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 204.44,
+        "text": "le toucher",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 182,
+        "w": 200.0,
+        "h": 34,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 204.44,
+        "text": "la peau",
+        "size": 15
+       }
+      ]
+     },
+     "caption": "Les cinq sens et leurs organes",
+     "alt": "Un tableau à deux colonnes : la vue et les yeux, l'ouïe et les oreilles, l'odorat et le nez, le goût et la langue, le toucher et la peau."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : la mangue",
+     "statement": "Amina tient une mangue. Quels sens utilise-t-elle ?",
+     "steps": [
+      {
+       "md": "Elle **voit** la couleur jaune et orange avec ses yeux."
+      },
+      {
+       "md": "Elle **touche** la peau lisse avec ses doigts."
+      },
+      {
+       "md": "Elle **sent** le parfum avec son nez, puis elle **goûte** : c'est sucré."
+      }
+     ],
+     "answer": "**La vue, le toucher, l'odorat et le goût.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le tam-tam",
+     "statement": "Mballa entend le tam-tam de loin. Quel sens utilise-t-il ?",
+     "steps": [
+      {
+       "md": "Un son arrive jusqu'à lui."
+      },
+      {
+       "md": "Les sons se reçoivent avec les oreilles."
+      }
+     ],
+     "answer": "**L'ouïe, avec les oreilles.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les goûts",
+     "md": "La langue reconnaît le **sucré**, le **salé**, l'**acide** et l'**amer**. Le nez aide à reconnaître les goûts : quand on est enrhumé, on goûte moins bien."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention !",
+     "md": "On ne goûte pas un produit inconnu. Un produit de ménage ou un médicament, on ne le goûte jamais sans un adulte."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-sens-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-sens-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-sens-03"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Avec quoi entend-on ?",
+   "explanation": "On entend avec les **oreilles**.",
+   "id": "cp-sciences-sens-01",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 1,
+   "choices": [
+    "les yeux",
+    "les oreilles",
+    "le nez",
+    "les mains"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on sent les odeurs avec le nez.",
+   "answer": true,
+   "explanation": "Oui. Le nez est l'organe de l'odorat.",
+   "id": "cp-sciences-sens-02",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque sens à son organe.",
+   "pairs": [
+    [
+     "la vue",
+     "les yeux"
+    ],
+    [
+     "l'ouïe",
+     "les oreilles"
+    ],
+    [
+     "l'odorat",
+     "le nez"
+    ],
+    [
+     "le goût",
+     "la langue"
+    ]
+   ],
+   "explanation": "Chaque sens a son organe : yeux, oreilles, nez, langue.",
+   "id": "cp-sciences-sens-03",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Fotso tient un galet lisse et froid. Quel sens utilise-t-il ?",
+   "explanation": "Lisse et froid : on le sent avec la peau, c'est le **toucher**.",
+   "id": "cp-sciences-sens-04",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 1,
+   "choices": [
+    "l'ouïe",
+    "le goût",
+    "l'odorat",
+    "le toucher"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien y a-t-il de sens ?",
+   "explanation": "Il y a cinq sens.",
+   "id": "cp-sciences-sens-05",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 1,
+   "choices": [
+    "trois",
+    "cinq",
+    "quatre",
+    "six"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Tu manges une mangue. Écris un sens que tu utilises et dis comment.",
+   "model": "Je goûte la mangue avec ma langue. C'est sucré.",
+   "rubric": [
+    "Un sens est nommé.",
+    "L'organe ou l'action est donné."
+   ],
+   "explanation": "D'autres réponses sont possibles : je vois la couleur avec mes yeux, je sens le parfum avec mon nez.",
+   "id": "cp-sciences-sens-06",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel sens permet de voir ?",
+   "explanation": "La vue permet de voir.",
+   "id": "cp-sciences-sens-q1",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 1,
+   "choices": [
+    "l'ouïe",
+    "le goût",
+    "l'odorat",
+    "la vue"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe permet de goûter ?",
+   "explanation": "On goûte avec la langue.",
+   "id": "cp-sciences-sens-q2",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 1,
+   "choices": [
+    "le nez",
+    "la langue",
+    "l'oreille",
+    "le doigt"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec quoi touche-t-on ?",
+   "explanation": "Le toucher passe par la peau.",
+   "id": "cp-sciences-sens-q3",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 1,
+   "choices": [
+    "les yeux",
+    "les oreilles",
+    "le nez",
+    "la peau"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un chien aboie. Quel sens utilises-tu pour l'entendre ?",
+   "explanation": "On entend avec les oreilles : c'est l'ouïe.",
+   "id": "cp-sciences-sens-q4",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 1,
+   "choices": [
+    "la vue",
+    "l'ouïe",
+    "l'odorat",
+    "le toucher"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que ne fait-on jamais avec un produit inconnu ?",
+   "explanation": "On ne goûte jamais un produit inconnu.",
+   "id": "cp-sciences-sens-q5",
+   "chapter": "cp-sciences-sens-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-sens-fiche",
+   "points": 1,
+   "choices": [
+    "le regarder",
+    "le montrer à un adulte",
+    "le laisser",
+    "le goûter"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  }
+ ]
+}

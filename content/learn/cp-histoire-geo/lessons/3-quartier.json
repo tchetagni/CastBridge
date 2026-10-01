@@ -1,0 +1,627 @@
+{
+ "chapter": "cp-histoire-geo-quartier-ch",
+ "lessons": [
+  {
+   "id": "cp-histoire-geo-quartier-fiche",
+   "title": "Mon quartier, mon village",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Histoire-Géographie-ECM : le quartier, le village, la ville (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer des lieux du quartier ou du village.",
+    "Distinguer un village et une ville.",
+    "Lire un plan simple."
+   ],
+   "prerequisites": [
+    "cp-histoire-geo-ecole-fiche"
+   ],
+   "exercises": [
+    "cp-histoire-geo-quartier-01",
+    "cp-histoire-geo-quartier-02",
+    "cp-histoire-geo-quartier-03",
+    "cp-histoire-geo-quartier-04",
+    "cp-histoire-geo-quartier-05",
+    "cp-histoire-geo-quartier-06"
+   ],
+   "selfCheck": [
+    "cp-histoire-geo-quartier-q1",
+    "cp-histoire-geo-quartier-q2",
+    "cp-histoire-geo-quartier-q3",
+    "cp-histoire-geo-quartier-q4",
+    "cp-histoire-geo-quartier-q5"
+   ],
+   "reviewNotes": [
+    "Le plan est un exemple fictif, pas une carte réelle.",
+    "Vérifier le rôle de la mairie (acte de naissance) : formulation simplifiée pour le CP."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Dans mon quartier, il y a une école, un marché et un centre de santé.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le quartier, le village, la ville",
+     "md": "Un **village** est un petit lieu, avec peu de maisons, souvent entouré de champs.\n\nUne **ville** est plus grande, avec beaucoup de maisons, de routes et de voitures. Une ville est divisée en **quartiers**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Des lieux utiles",
+     "md": "- L'**école** : on y apprend.\n- Le **marché** : on y achète et on y vend.\n- Le **centre de santé** : on y soigne les malades.\n- La **mairie** : on y fait des papiers, comme l'acte de naissance.\n- La **route** : on y circule."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 0,
+        "y": 105,
+        "w": 460,
+        "h": 40,
+        "fill": "lightgrey",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 132,
+        "text": "la route",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 20,
+        "w": 100,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 62,
+        "text": "l'école",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 20,
+        "w": 100,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 62,
+        "text": "le marché",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 20,
+        "w": 100,
+        "h": 70,
+        "fill": "lightblue",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 55,
+        "text": "le centre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 75,
+        "text": "de santé",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 165,
+        "w": 100,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 205,
+        "text": "ma maison",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 165,
+        "w": 100,
+        "h": 70,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 205,
+        "text": "la mairie",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 165,
+        "w": 100,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 205,
+        "text": "le terrain",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Le plan d'un quartier",
+     "alt": "Un plan simple avec une route au milieu, l'école, le marché et le centre de santé en haut, ma maison, la mairie et le terrain de jeu en bas."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : où acheter ?",
+     "statement": "Marie veut acheter des tomates. Où va-t-elle ?",
+     "steps": [
+      {
+       "md": "On vend et on achète des légumes au marché."
+      },
+      {
+       "md": "Sur le plan, le marché est en haut, au milieu."
+      }
+     ],
+     "answer": "**Elle va au marché.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : village ou ville ?",
+     "statement": "Il y a peu de maisons, des champs de manioc et une seule école. C'est…",
+     "steps": [
+      {
+       "md": "Peu de maisons et des champs : c'est petit et calme."
+      },
+      {
+       "md": "Une ville aurait beaucoup de maisons et de routes."
+      }
+     ],
+     "answer": "**C'est un village.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention !",
+     "md": "Yaoundé et Douala sont des villes. Un quartier n'est pas une ville : c'est une partie d'une ville."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-histoire-geo-quartier-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-histoire-geo-quartier-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-histoire-geo-quartier-03"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Où soigne-t-on les malades ?",
+   "explanation": "On soigne les malades au **centre de santé**.",
+   "id": "cp-histoire-geo-quartier-01",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 1,
+   "choices": [
+    "au marché",
+    "au centre de santé",
+    "à l'école",
+    "sur la route"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : Yaoundé est une ville.",
+   "answer": true,
+   "explanation": "Oui. Yaoundé est une grande ville, la capitale du Cameroun.",
+   "id": "cp-histoire-geo-quartier-02",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque lieu à son usage.",
+   "pairs": [
+    [
+     "l'école",
+     "apprendre"
+    ],
+    [
+     "le marché",
+     "acheter"
+    ],
+    [
+     "le centre de santé",
+     "se soigner"
+    ],
+    [
+     "la route",
+     "circuler"
+    ]
+   ],
+   "explanation": "Chaque lieu a son usage.",
+   "id": "cp-histoire-geo-quartier-03",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur le plan, où est la mairie ?",
+   "explanation": "La mairie est en bas, entre ma maison et le terrain.",
+   "figure": {
+    "kind": "shapes",
+    "w": 460,
+    "h": 250,
+    "items": [
+     {
+      "t": "rect",
+      "x": 0,
+      "y": 105,
+      "w": 460,
+      "h": 40,
+      "fill": "lightgrey",
+      "stroke": "grey"
+     },
+     {
+      "t": "text",
+      "x": 230,
+      "y": 132,
+      "text": "la route",
+      "size": 14,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "rect",
+      "x": 30,
+      "y": 20,
+      "w": 100,
+      "h": 70,
+      "fill": "lightyellow",
+      "stroke": "ink"
+     },
+     {
+      "t": "text",
+      "x": 80,
+      "y": 62,
+      "text": "l'école",
+      "size": 15,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "rect",
+      "x": 180,
+      "y": 20,
+      "w": 100,
+      "h": 70,
+      "fill": "lightgreen",
+      "stroke": "ink"
+     },
+     {
+      "t": "text",
+      "x": 230,
+      "y": 62,
+      "text": "le marché",
+      "size": 15,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "rect",
+      "x": 330,
+      "y": 20,
+      "w": 100,
+      "h": 70,
+      "fill": "lightblue",
+      "stroke": "ink"
+     },
+     {
+      "t": "text",
+      "x": 380,
+      "y": 55,
+      "text": "le centre",
+      "size": 15,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 380,
+      "y": 75,
+      "text": "de santé",
+      "size": 15,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "rect",
+      "x": 30,
+      "y": 165,
+      "w": 100,
+      "h": 70,
+      "fill": "lightorange",
+      "stroke": "ink"
+     },
+     {
+      "t": "text",
+      "x": 80,
+      "y": 205,
+      "text": "ma maison",
+      "size": 15,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "rect",
+      "x": 180,
+      "y": 165,
+      "w": 100,
+      "h": 70,
+      "fill": "white",
+      "stroke": "ink"
+     },
+     {
+      "t": "text",
+      "x": 230,
+      "y": 205,
+      "text": "la mairie",
+      "size": 15,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "rect",
+      "x": 330,
+      "y": 165,
+      "w": 100,
+      "h": 70,
+      "fill": "lightgreen",
+      "stroke": "ink"
+     },
+     {
+      "t": "text",
+      "x": 380,
+      "y": 205,
+      "text": "le terrain",
+      "size": 15,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     }
+    ]
+   },
+   "id": "cp-histoire-geo-quartier-04",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 1,
+   "choices": [
+    "en haut à gauche",
+    "en haut à droite",
+    "sur la route",
+    "en bas, au milieu"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qui est plus grand ?",
+   "explanation": "Une ville est plus grande qu'un village.",
+   "id": "cp-histoire-geo-quartier-05",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 1,
+   "choices": [
+    "un village",
+    "une ville",
+    "une maison",
+    "une classe"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris deux lieux de ton quartier ou de ton village.",
+   "model": "Dans mon quartier, il y a une école et un marché.",
+   "rubric": [
+    "Deux lieux sont nommés."
+   ],
+   "explanation": "Chaque élève répond selon son quartier.",
+   "review": true,
+   "reviewNote": "Réponse personnelle liée au lieu de vie de l'élève.",
+   "id": "cp-histoire-geo-quartier-06",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où achète-t-on des légumes ?",
+   "explanation": "On achète au marché.",
+   "id": "cp-histoire-geo-quartier-q1",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 1,
+   "choices": [
+    "à l'école",
+    "au centre de santé",
+    "à la mairie",
+    "au marché"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un village est…",
+   "explanation": "Un village est petit.",
+   "id": "cp-histoire-geo-quartier-q2",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 1,
+   "choices": [
+    "très grand",
+    "petit",
+    "sans maison",
+    "sans habitants"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une ville est divisée en…",
+   "explanation": "Une ville est divisée en quartiers.",
+   "id": "cp-histoire-geo-quartier-q3",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 1,
+   "choices": [
+    "champs",
+    "rivières",
+    "forêts",
+    "quartiers"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où va-t-on apprendre ?",
+   "explanation": "On apprend à l'école.",
+   "id": "cp-histoire-geo-quartier-q4",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 1,
+   "choices": [
+    "au marché",
+    "à l'école",
+    "à la route",
+    "au stade"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle ville est la capitale du Cameroun ?",
+   "explanation": "Yaoundé est la capitale.",
+   "id": "cp-histoire-geo-quartier-q5",
+   "chapter": "cp-histoire-geo-quartier-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-histoire-geo-quartier-fiche",
+   "points": 1,
+   "choices": [
+    "Douala",
+    "Garoua",
+    "Bamenda",
+    "Yaoundé"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  }
+ ]
+}
