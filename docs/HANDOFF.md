@@ -4,6 +4,7 @@
 > Dernière mise à jour : 2026-10-01, branche `feat/ssh`. **Règle du propriétaire : ce document se met à jour en temps réel** (à chaque fusion, publication, lancement/fin d'agent, décision ou problème), commité et poussé aussitôt.
 
 ## 0. Journal en direct (le plus récent en haut)
+- 2026-10-01 : `feat/charte` terminée par son agent (logo/icônes/thèmes/polices/contrastes WCAG/guide PDF 16 p., APK +≈240 Ko) ; fusion vers `feat/ssh` en cours (conflits attendus : accueil TV, Theme.kt).
 - 2026-10-01 : `feat/parental` fusionnée (`17e9838`). Agents en cours : `feat/charte` (charte graphique), `feat/quiz-no-repeat` (300 parties sans répétition, packs < 11 Mo), `feat/library-agent` (assistant de rangement). Les agents « cloud » tournent en fait sur le Mac d'Esaie (dossiers `.claude/worktrees/`) : le Mac doit rester allumé.
 - 2026-10-01 : `feat/games-hub` et `feat/bt-plug-and-play` fusionnées ; TV 0.12.0 / téléphone 1.1-beta compilés, **pas encore installés** (la TV a la 0.11 ; la 0.11.1 est sur la clé USB).
 - 2026-10-01 : audit des modifications d'autres IA terminé : ne pas fusionner `wip/external-ai-changes` (voir §3).
