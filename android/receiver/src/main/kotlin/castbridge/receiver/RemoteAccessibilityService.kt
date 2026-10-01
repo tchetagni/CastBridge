@@ -15,14 +15,21 @@ import castbridge.core.remote.TextMode
  * pressing OK in other apps (AccessibilityNodeInfo), typing in the focused field (ACTION_SET_TEXT).
  *
  * What it does NOT do: it reads no screen content on its own, keeps nothing, sends nothing anywhere; accessibility events
- * are ignored. It acts only when an order arrives from a phone that gave the TV's PIN (RemoteHub, /api/remote/…).
+ * are ignored (except the package name of the window in front, when the parent enabled the supervision of the whole TV). It acts only when an order arrives from a phone that gave the TV's PIN (RemoteHub, /api/remote/…).
  * Limits: no power on/off, no HDMI-CEC, no real key codes (MENU, digits…) for other apps; some launchers ignore accessibility.
  */
 class RemoteAccessibilityService : AccessibilityService() {
     override fun onServiceConnected() { instance = this }
     override fun onUnbind(intent: android.content.Intent?): Boolean { if (instance === this) instance = null; return super.onUnbind(intent) }
     override fun onDestroy() { if (instance === this) instance = null; super.onDestroy() }
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) { /* nothing is read or kept */ }
+    /**
+     * Nothing is read or kept. One exception, only while the parent switched the supervision of the whole TV on (docs/PARENTAL.md): the
+     * PACKAGE NAME of the window that just opened is passed to the foreground detector (no text, no content, nothing stored or sent).
+     */
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
+        if (event?.eventType != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return
+        event.packageName?.toString()?.let { ForegroundWatcher.onWindowChanged(it) }
+    }
     override fun onInterrupt() {}
 
     fun global(action: Int): Boolean = performGlobalAction(action)

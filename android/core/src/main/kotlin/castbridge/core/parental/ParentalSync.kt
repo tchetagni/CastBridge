@@ -216,3 +216,46 @@ object ReportSync {
         return SyncResult(stored, rejected, designated, phoneId, tvName)
     }
 }
+
+/** French sentences for the notification and the list of reports on the phone (pure, so that they are tested). */
+object ReportText {
+    fun minutes(m: Long): String = if (m >= 60) "${m / 60} h ${"%02d".format(m % 60)}" else "$m min"
+
+    private fun name(r: StoredReport) = ((r.body["profile"] as? Map<*, *>)?.get("name") as? String) ?: "Enfant"
+
+    fun title(r: StoredReport): String = when (r.kind) {
+        "daily" -> "Rapport du jour : ${name(r)}"
+        "weekly" -> "Rapport de la semaine : ${name(r)}"
+        else -> when (r.body["alert"]) {
+            "limit" -> "Temps d'écran atteint"; "blocked" -> "Application bloquée"
+            "tamper" -> "Surveillance de la TV affaiblie"; "newapp" -> "Nouvelle application sur la TV"
+            else -> "Contrôle parental"
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    fun text(r: StoredReport): String = when (r.kind) {
+        "daily", "weekly" -> {
+            val total = (r.body["totalMin"] as? Number)?.toLong() ?: 0L
+            val apps = (r.body[if (r.kind == "daily") "apps" else "topApps"] as? List<Map<String, Any?>>).orEmpty().take(3)
+            val warn = (r.body["supervision"] as? Map<String, Any?>)?.takeIf { it["state"] != "active" && it["state"] != "off" }?.let { " ⚠ " + it["label"] }
+            val tamper = (r.body["tamper"] as? List<*>)?.size ?: (r.body["tamperCount"] as? Number)?.toInt() ?: 0
+            buildString {
+                append("${minutes(total)} d'écran")
+                if (apps.isNotEmpty()) append(" : " + apps.joinToString(", ") { "${it["label"]} ${minutes((it["min"] as? Number)?.toLong() ?: 0)}" })
+                (r.body["blocked"] as? List<*>)?.size?.takeIf { it > 0 }?.let { append(" · $it blocage(s)") }
+                (r.body["blockedCount"] as? Number)?.toInt()?.takeIf { it > 0 }?.let { append(" · $it blocage(s)") }
+                if (tamper > 0) append(" · surveillance affaiblie")
+                warn?.let { append(it) }
+            }
+        }
+        else -> (r.body["text"] as? String) ?: ""
+    }
+
+    /** One notification for a batch: the report itself when there is one, else a count. */
+    fun notification(batch: List<StoredReport>): Pair<String, String>? = when {
+        batch.isEmpty() -> null
+        batch.size == 1 -> title(batch[0]) to text(batch[0])
+        else -> "${batch.size} nouveaux rapports parentaux" to batch.sortedByDescending { it.ts }.take(3).joinToString(" · ") { title(it) }
+    }
+}

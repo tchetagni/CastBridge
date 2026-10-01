@@ -11,7 +11,16 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.content.Intent
 import castbridge.core.parental.AgeBand
+import castbridge.core.parental.AppCategory
+import castbridge.core.parental.AppRule
+import castbridge.core.parental.AppRules
+import castbridge.core.parental.AppSettings
+import castbridge.core.parental.AppState
+import castbridge.core.parental.NewAppDefault
+import castbridge.core.parental.ProfileReportOptions
+import castbridge.core.trust.TrustedPhone
 import castbridge.core.parental.Category
 import castbridge.core.parental.ChildProfile
 import castbridge.core.parental.OverAge
@@ -158,6 +167,16 @@ class ParentalActivity : Activity() {
         row("Vidéos non classées : ${c.unrated.label}", "Par défaut, une vidéo que vous n'avez pas classée est réservée aux adultes.") {
             e.edit { it.copy(unrated = if (it.unrated == Rating.ADULT) Rating.ALL else Rating.ADULT) }; render()
         }
+        section("Toute la TV")
+        val sup = e.supervision()
+        row(sup.state.label, (sup.detail?.let { "$it. " } ?: "") + "YouTube, Netflix, navigateur, jeux… : temps compté et applications bloquables. OK pour régler.") {
+            startActivity(Intent(this@ParentalActivity, SupervisionSetupActivity::class.java))
+        }
+        row("Applications de la TV", "Autorisée, bloquée, durée limitée ou code parental, application par application") {
+            val first = c.active() ?: c.profiles.firstOrNull()
+            if (first == null) ParentalUi.info(this@ParentalActivity, "Créez un profil", "Ajoutez d'abord un profil d'enfant : « Profils des enfants ».") else push(appsPage(first.id))
+        }
+        row("Rapports vers le téléphone du parent", "${ParentalHub.reports.recipients.active().size} téléphone(s) désigné(s) · résumés et alertes par Bluetooth") { push(reportsPage()) }
         section("Parents")
         row("Activité d'aujourd'hui", "Temps passé par profil et contenus bloqués") { showActivity() }
         row("Durée du déverrouillage parent : ${c.sessionMin} min", "Après le code sur un écran verrouillé, les règles sont suspendues ce temps-là.") {
@@ -197,7 +216,17 @@ class ParentalActivity : Activity() {
         val sb = StringBuilder()
         @Suppress("UNCHECKED_CAST") val ps = (today?.get("profiles") as? List<Map<String, Any?>>).orEmpty()
         if (ps.isEmpty()) sb.append("Aucune activité enregistrée aujourd'hui.\n")
-        for (p in ps) sb.append("${p["name"]} : lecture ${p["play"]} min, jeux ${p["games"]} min, téléchargements ${p["downloads"]} min\n")
+        for (p in ps) {
+            sb.append("${p["name"]} : lecture ${p["play"]} min, jeux ${p["games"]} min, téléchargements ${p["downloads"]} min, autres applications ${p["apps"]} min\n")
+            @Suppress("UNCHECKED_CAST") val top = (p["byApp"] as? List<Map<String, Any?>>).orEmpty().take(4)
+            if (top.isNotEmpty()) sb.append("   " + top.joinToString(", ") { "${it["label"]} ${it["min"]} min" } + "\n")
+        }
+        @Suppress("UNCHECKED_CAST") val sv = r["supervision"] as? Map<String, Any?>
+        sv?.let { sb.append("\n${it["label"]}\n") }
+        @Suppress("UNCHECKED_CAST") val tamper = (r["tamper"] as? List<Map<String, Any?>>).orEmpty().take(3)
+        for (t in tamper) sb.append("⚠ ${java.text.SimpleDateFormat("dd/MM HH:mm", java.util.Locale.FRANCE).format(java.util.Date((t["ts"] as Number).toLong()))} ${t["what"]}\n")
+        @Suppress("UNCHECKED_CAST") val news = (r["newApps"] as? List<Map<String, Any?>>).orEmpty()
+        if (news.isNotEmpty()) sb.append("Nouvelles applications à valider : ${news.joinToString { it["label"].toString() }}\n")
         @Suppress("UNCHECKED_CAST") val blocked = (r["blocked"] as List<Map<String, Any?>>).take(8)
         if (blocked.isNotEmpty()) {
             sb.append("\nBloqué récemment :\n")
@@ -351,6 +380,142 @@ class ParentalActivity : Activity() {
         ParentalUi.choose(this, "${r.kind.label} : ${r.match}", listOf("Changer le classement", "Supprimer cette règle")) { w ->
             if (w == 1) { e.edit { c -> c.copy(rules = c.rules.filterIndexed { i, _ -> i != index }) }; render() }
             else pickRating("Nouveau classement") { nr -> e.edit { c -> c.copy(rules = c.rules.mapIndexed { i, x -> if (i == index) x.copy(rating = nr) else x }) }; render() }
+        }
+    }
+
+    // ------------------------------------------------------------------ apps of the whole TV
+
+    private fun stateText(p: ChildProfile, s: AppSettings, a: castbridge.core.parental.InstalledApp): String {
+        val r = s.rule(p.id, a.pkg)
+        val cat = (r?.category ?: a.category).label
+        val st = when {
+            r != null -> r.state.label + if (r.state == AppState.LIMITED) " : ${r.limitMin} min par jour" else ""
+            s.isNew(a.pkg) -> "Nouvelle application : " + s.newApp.label.lowercase()
+            else -> "Autorisée (aucune règle)"
+        }
+        return "$st · $cat"
+    }
+
+    private fun appsPage(profileId: String): Page = Page("Applications de la TV", "Règles de ${e.config().profile(profileId)?.name ?: "—"} pour les autres applications") {
+        val p = e.config().profile(profileId) ?: return@Page
+        val apps = AppCatalog.launcherApps(this@ParentalActivity).sortedBy { it.label.lowercase() }
+        e.syncInstalled(apps)                                   // the first time is the baseline: nothing is « nouvelle » on the setup day
+        val s = e.appSettings()
+        val env = AppCatalog.env(this@ParentalActivity)
+        note("CastBridge TV (Apprendre inclus), l'accueil de la TV et le système ne sont jamais bloquables : on peut toujours revenir à l'accueil. Les Réglages suivent la catégorie « Réglages » du profil.")
+        if (e.config().profiles.size > 1) row("Profil : ${p.name}", "OK pour changer de profil") {
+            val ps = e.config().profiles
+            ParentalUi.choose(this@ParentalActivity, "Règles de quel profil ?", ps.map { it.name }, ps.indexOfFirst { it.id == profileId }) { i -> stack.removeAt(stack.size - 1); push(appsPage(ps[i].id)) }
+        }
+        row("Nouvelle application installée : ${s.newApp.label.lowercase()}", "Une application installée après la configuration s'affiche « Nouvelle » et suit ce choix jusqu'à votre validation. OK pour changer.") {
+            e.editApps { it.copy(newApp = if (it.newApp == NewAppDefault.BLOCK) NewAppDefault.ALLOW else NewAppDefault.BLOCK) }; render()
+        }
+        if (s.news.isNotEmpty()) row("${s.news.size} nouvelle(s) application(s) à valider", s.news.joinToString { it.label }) {
+            e.editApps { it.copy(known = it.known + it.news.map { n -> n.pkg }) }; toast("Applications validées."); render()
+        }
+        row("Régler toute une catégorie", "Navigateurs, jeux, vidéo et streaming… d'un seul coup") { bulk(p, apps, env) }
+        section("Applications (${apps.size})")
+        for (a in apps) {
+            val never = AppRules.neverBlockable(a.pkg, env)
+            val title = a.label + if (s.isNew(a.pkg)) "  · NOUVELLE" else ""
+            if (never) row(title, "Toujours autorisée (CastBridge TV, accueil ou système)") { ParentalUi.info(this@ParentalActivity, a.label, "Cette application ne peut pas être bloquée : sans elle, la TV n'aurait plus d'accueil.") }
+            else row(title, stateText(p, s, a)) { editApp(p, a) }
+        }
+    }
+
+    private fun askState(title: String, onPick: (AppState?, Int) -> Unit) {
+        val labels = AppState.values().map { it.label } + "Retirer la règle"
+        ParentalUi.choose(this, title, labels) { i ->
+            if (i >= AppState.values().size) { onPick(null, 0); return@choose }
+            val st = AppState.values()[i]
+            if (st != AppState.LIMITED) { onPick(st, 0); return@choose }
+            val opts = listOf(15, 30, 45, 60, 90, 120)
+            ParentalUi.choose(this, "Durée par jour", opts.map { "$it minutes" }) { m -> onPick(st, opts[m]) }
+        }
+    }
+
+    private fun applyRules(p: ChildProfile, pkgs: List<String>, st: AppState?, limit: Int, category: AppCategory? = null) {
+        e.editApps { s ->
+            val cur = s.rules[p.id].orEmpty()
+            val keep = cur.filterNot { it.pkg in pkgs }
+            val added = if (st == null) emptyList() else pkgs.map { pkg -> AppRule(pkg, st, limit, category ?: cur.firstOrNull { it.pkg == pkg }?.category) }
+            s.copy(rules = s.rules + (p.id to (keep + added).takeLast(AppSettings.MAX_RULES_PER_PROFILE)), known = s.known + pkgs)
+        }
+        render()
+    }
+
+    private fun editApp(p: ChildProfile, a: castbridge.core.parental.InstalledApp) =
+        askState("${a.label} pour ${p.name}") { st, limit -> applyRules(p, listOf(a.pkg), st, limit) }
+
+    private fun bulk(p: ChildProfile, apps: List<castbridge.core.parental.InstalledApp>, env: castbridge.core.parental.AppEnv) {
+        val cats = AppCategory.values()
+        ParentalUi.choose(this, "Quelle catégorie ?", cats.map { c -> "${c.label} (${apps.count { it.category == c && !AppRules.neverBlockable(it.pkg, env) }})" }) { ci ->
+            val pkgs = apps.filter { it.category == cats[ci] && !AppRules.neverBlockable(it.pkg, env) }.map { it.pkg }
+            if (pkgs.isEmpty()) { toast("Aucune application dans cette catégorie."); return@choose }
+            askState("${cats[ci].label} : ${pkgs.size} application(s)") { st, limit -> applyRules(p, pkgs, st, limit, cats[ci]) }
+        }
+    }
+
+    // ------------------------------------------------------------------ reports to the parent's phone
+
+    private val dayNames = listOf("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche")
+
+    private fun reportsPage(): Page = Page("Rapports vers le téléphone du parent", "Envoyés par Bluetooth au téléphone désigné : jamais à un serveur.") {
+        val rp = ParentalHub.reports
+        val cfg = rp.config()
+        section("Téléphones qui reçoivent les rapports")
+        val phones = TvService.running?.trust?.list().orEmpty()
+        if (phones.isEmpty()) note("Aucun téléphone de confiance. Ajoutez d'abord le téléphone du parent avec « Ajouter un téléphone » (accueil de la TV).")
+        for (ph in phones) {
+            val on = rp.recipients.isRecipient(ph.address)
+            row(ph.name + if (on) "  — reçoit les rapports" else "", if (on) "OK pour le retirer (code parental demandé)" else "OK pour le désigner (code parental demandé)") { designate(ph, on) }
+        }
+        note("Le téléphone d'un enfant ne reçoit rien tant que vous ne l'avez pas désigné ici. ${rp.outbox.count()} rapport(s) attendent la prochaine connexion du téléphone (conservés 14 jours au plus).")
+        section("Quand")
+        val times = (0 until 48).map { it * 30 }
+        row("Résumé quotidien à ${TimeWindow.fmt(cfg.dailyAtMin)}", "L'heure à laquelle le résumé du jour part. OK pour changer.") {
+            ParentalUi.choose(this@ParentalActivity, "Heure du résumé", times.map { TimeWindow.fmt(it) }, times.indexOf(cfg.dailyAtMin)) { i -> rp.saveConfig(cfg.copy(dailyAtMin = times[i]), null); render() }
+        }
+        row("Résumé hebdomadaire : ${dayNames[cfg.weeklyDow - 1].lowercase()}", "Jour d'envoi, à la même heure. OK pour changer.") {
+            ParentalUi.choose(this@ParentalActivity, "Jour du résumé de la semaine", dayNames, cfg.weeklyDow - 1) { i -> rp.saveConfig(cfg.copy(weeklyDow = i + 1), null); render() }
+        }
+        section("Par enfant")
+        for (p in e.config().profiles) row(p.name, optionsText(cfg.options(p.id))) { push(profileReportPage(p.id)) }
+        row("Envoyer un rapport maintenant", "Le résumé du jour de chaque enfant, pour tester la liaison") {
+            val n = rp.sendNow()
+            toast(if (n == 0) "Aucun téléphone désigné : rien à envoyer." else "$n rapport(s) prêt(s) : le téléphone les recevra à sa prochaine connexion.")
+            render()
+        }
+    }
+
+    private fun optionsText(o: ProfileReportOptions) = buildList {
+        add(if (o.daily) "résumé quotidien" else "pas de résumé quotidien"); add(if (o.weekly) "résumé hebdo" else "pas de résumé hebdo")
+        val alerts = listOfNotNull("limite".takeIf { o.alertLimit }, "application bloquée".takeIf { o.alertBlocked }, "altération".takeIf { o.alertTamper }, "nouvelle application".takeIf { o.alertNewApp })
+        add(if (alerts.isEmpty()) "aucune alerte" else "alertes : " + alerts.joinToString(", "))
+    }.joinToString(" · ")
+
+    private fun profileReportPage(id: String): Page = Page(e.config().profile(id)?.name ?: "Profil", "Ce qui est envoyé au téléphone du parent") {
+        val rp = ParentalHub.reports
+        val o = rp.config().options(id)
+        fun change(f: (ProfileReportOptions) -> ProfileReportOptions) { val c = rp.config(); rp.saveConfig(c.copy(profiles = c.profiles + (id to f(c.options(id)))), null); render() }
+        fun onOff(b: Boolean) = if (b) "oui" else "non"
+        row("Résumé quotidien : ${onOff(o.daily)}", "Temps par application, contenus bloqués, état de la surveillance") { change { it.copy(daily = !it.daily) } }
+        row("Résumé hebdomadaire : ${onOff(o.weekly)}", "Les sept derniers jours") { change { it.copy(weekly = !it.weekly) } }
+        section("Alertes immédiates")
+        row("Temps ou heures atteints : ${onOff(o.alertLimit)}") { change { it.copy(alertLimit = !it.alertLimit) } }
+        row("Application bloquée essayée : ${onOff(o.alertBlocked)}") { change { it.copy(alertBlocked = !it.alertBlocked) } }
+        row("Surveillance affaiblie (accès retiré…) : ${onOff(o.alertTamper)}", "Valable pour toute la TV : envoyée si un profil la demande") { change { it.copy(alertTamper = !it.alertTamper) } }
+        row("Nouvelle application installée : ${onOff(o.alertNewApp)}", "Valable pour toute la TV : envoyée si un profil la demande") { change { it.copy(alertNewApp = !it.alertNewApp) } }
+    }
+
+    /** Designating or removing a recipient always asks the parental PIN, even during a parent session. */
+    private fun designate(ph: TrustedPhone, on: Boolean) {
+        ParentalUi.pinDialog(this, if (on) "Retirer ${ph.name} des rapports" else "Désigner ${ph.name}", "Code parental (4 à 6 chiffres)",
+            check = { pin -> ParentalHub.pinError(e.verifyPin(pin)) }) {
+            val rp = ParentalHub.reports
+            val err = if (on) rp.recipients.remove(ph.address, pinVerified = true).also { rp.outbox.dropRecipient(ph.address) } else rp.recipients.designate(ph.address, pinVerified = true)
+            toast(err ?: if (on) "${ph.name} ne reçoit plus les rapports." else "${ph.name} recevra les rapports à sa prochaine connexion Bluetooth.")
+            render()
         }
     }
 }

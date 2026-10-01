@@ -19,12 +19,17 @@ import castbridge.core.parental.ParentalKeys
  */
 class ParentalLockActivity : Activity() {
     private var target: String? = null
+    /** Whole-TV supervision: the app that was refused (to bring back after the PIN) and why (« apppin » = that app only asked for the PIN). */
+    private var targetPkg: String? = null
+    private var code: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ParentalHub.init(this)
         val reason = intent.getStringExtra(EXTRA_REASON) ?: "Cet écran est protégé par le contrôle parental."
         target = intent.getStringExtra(EXTRA_TARGET)
+        targetPkg = intent.getStringExtra(EXTRA_PKG)
+        code = intent.getStringExtra(EXTRA_CODE)
         val root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL; gravity = Gravity.CENTER
             val p = TvStyle.dp(this@ParentalLockActivity, 40); setPadding(p, p, p, p)
@@ -48,15 +53,27 @@ class ParentalLockActivity : Activity() {
         first?.requestFocus()
     }
 
+    /** A second refusal while the lock screen is open (another app, another reason): show the new one. */
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        recreate()
+    }
+
     private fun askPin() {
         val e = ParentalHub.engine
         if (!e.hasPin()) { goHome(); return }
         ParentalUi.pinDialog(this, "Code parental", "Saisissez le code pour déverrouiller la TV ${e.config().sessionMin} minutes.",
             check = { pin -> ParentalHub.pinError(e.verifyPin(pin)) }, onOk = {
-                e.startSession()
+                val pkg = targetPkg
+                // an app set to « Code parental requis » opens for that app only; any other refusal opens a parent session
+                if (pkg != null && code == "apppin") e.grantApp(pkg) else e.startSession()
                 val cls = target?.let { runCatching { Class.forName(it) }.getOrNull() }
                 finish()
-                if (cls != null && Activity::class.java.isAssignableFrom(cls)) runCatching { startActivity(Intent(this, cls)) }
+                if (pkg != null) {
+                    val i = packageManager.getLeanbackLaunchIntentForPackage(pkg) ?: packageManager.getLaunchIntentForPackage(pkg)
+                    if (i != null) runCatching { startActivity(i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
+                } else if (cls != null && Activity::class.java.isAssignableFrom(cls)) runCatching { startActivity(Intent(this, cls)) }
             })
     }
 
@@ -74,6 +91,15 @@ class ParentalLockActivity : Activity() {
     companion object {
         private const val EXTRA_REASON = "reason"
         private const val EXTRA_TARGET = "target"
+        private const val EXTRA_PKG = "pkg"
+        private const val EXTRA_CODE = "code"
+
+        /** Lock screen in front of another app of the TV (whole-TV supervision). Started from the background: needs « Afficher par-dessus les autres apps ». */
+        fun showForApp(ctx: Context, reason: String, pkg: String, code: String) {
+            val i = Intent(ctx, ParentalLockActivity::class.java).putExtra(EXTRA_REASON, reason).putExtra(EXTRA_PKG, pkg).putExtra(EXTRA_CODE, code)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            runCatching { ctx.startActivity(i) }
+        }
 
         /** Shows the lock screen over whatever is on the TV. [target] is the screen to bring back after a correct PIN. */
         fun show(ctx: Context, reason: String, target: Class<out Activity>?) {

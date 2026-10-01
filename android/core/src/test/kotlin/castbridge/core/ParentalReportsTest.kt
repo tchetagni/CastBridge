@@ -520,3 +520,20 @@ class ParentalAppsApiTest {
         assertEquals(AppState.BLOCKED, rig.engine.appSettings().rule("c1", "a.x")!!.state)
     }
 }
+
+class ParentalReportTextTest {
+    private fun rep(kind: String, body: Map<String, Any?>) = StoredReport("i", "TV", 1, kind, body)
+
+    @Test fun sentences() {
+        assertEquals("1 h 05", ReportText.minutes(65)); assertEquals("45 min", ReportText.minutes(45))
+        val alert = rep("alert", mapOf("alert" to "blocked", "text" to "Léa a essayé d'ouvrir « Jeu »"))
+        assertEquals("Application bloquée", ReportText.title(alert)); assertEquals("Léa a essayé d'ouvrir « Jeu »", ReportText.text(alert))
+        val daily = rep("daily", mapOf("profile" to mapOf("name" to "Léa"), "totalMin" to 80, "apps" to listOf(mapOf("label" to "YouTube", "min" to 50), mapOf("label" to "Jeu", "min" to 20)),
+            "blocked" to listOf(mapOf("what" to "x")), "supervision" to mapOf("state" to "unauthorized", "label" to "Surveillance de toute la TV : non autorisée")))
+        assertEquals("Rapport du jour : Léa", ReportText.title(daily))
+        val t = ReportText.text(daily)
+        assertTrue(t.startsWith("1 h 20 d'écran : YouTube 50 min, Jeu 20 min")); assertTrue(t.contains("1 blocage(s)")); assertTrue(t.contains("non autorisée"))
+        assertNull(ReportText.notification(emptyList()))
+        assertEquals("2 nouveaux rapports parentaux", ReportText.notification(listOf(alert, daily))!!.first)
+    }
+}
