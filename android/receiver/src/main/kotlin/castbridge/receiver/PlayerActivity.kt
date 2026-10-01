@@ -539,6 +539,9 @@ class PlayerActivity : Activity(), TvService.Screen {
                         if (sshOn) { ssh?.disable(); flash("SSH désactivé") }
                         else Thread { runCatching { ssh?.enable() }.onFailure { e -> main.post { flash("SSH impossible : ${e.message}") } } }.start()
                     },
+                    ((if (s?.btApi?.enabled != false) "Couper" else "Activer") + " l'API par Bluetooth (tout par Bluetooth, sans Wi-Fi)") to {
+                        s?.btApi?.let { it.setEnabled(!it.enabled); flash("API par Bluetooth : " + if (it.enabled) "activée" else "coupée (téléphones de confiance seulement)") }
+                    },
                     "Adresse de la page web" to { flash("Ouvrez http://${TvService.localIp() ?: "?"}:${ReceiverServer.PORT} — code $pin") },
                 ))
             },
@@ -559,7 +562,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val s = svc ?: return
         val ip = TvService.localIp()
         val labels = mapOf("0-storage" to "Stockage", "1-bt" to "Bluetooth", "2-wd" to "Wi-Fi Direct (sans box)", "3-usb" to "Import depuis une clé",
-            "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "5-update" to "Installation d'applications",
+            "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "4-api-bt" to "API par Bluetooth", "5-update" to "Installation d'applications",
             "5-notice" to "Dernier événement", "9-server" to "Serveur", "1-phone" to "Téléphone connecté")
         val info = buildList {
             add("Code de connexion (à saisir une fois sur le téléphone)" to ParentalHub.shownPin(pin))

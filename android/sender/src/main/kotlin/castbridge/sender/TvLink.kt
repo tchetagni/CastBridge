@@ -164,12 +164,14 @@ object TvLinkManager {
         return if (on) null else BtUnavailable.Reason.OFF
     }
 
-    private fun link() = PhoneLink(AndroidBtTransport(app), ::reachable, { Build.VERSION.SDK_INT >= 29 })
+    private fun link() = PhoneLink(AndroidBtTransport(app), ::reachable, { Build.VERSION.SDK_INT >= 29 },
+        tunnelBase = { BtSshGatewayService.apiBase(saved.default()?.address) })     // route of last resort: the TV's API through the Bluetooth gateway
 
     /** Does this address answer like a CastBridge TV? (short timeout: the phone may simply be on another network). */
     fun reachable(base: String): Boolean = runCatching {
         val c = java.net.URL("$base/api/hello").openConnection() as java.net.HttpURLConnection
-        c.connectTimeout = 1200; c.readTimeout = 1200
+        val slow = if (base.startsWith("http://127.0.0.1")) 10_000 else 1200       // through the Bluetooth gateway: connecting the RFCOMM link takes seconds
+        c.connectTimeout = slow; c.readTimeout = slow
         c.responseCode == 200 && c.inputStream.use { it.readBytes() }.decodeToString().contains("castbridge-tv")
     }.getOrDefault(false)
 
@@ -203,6 +205,9 @@ object TvLinkManager {
                     saved.upsert(s.tv)
                     storeCredential(s)
                     _state.value = LinkUi.Connected(s)
+                    // No IP route: start the Bluetooth API gateway (visible app only) and plan again, so that the library, the remote,
+                    // the parental settings... work over Bluetooth alone.
+                    if (s.base == null && foreground && BtSshGatewayService.ensureApi(app, tv.address, s.tv.name)) { session = null; pause(2_000) }
                 }
                 is PhoneLink.Result.TvAbsent -> {
                     failures++; session = null

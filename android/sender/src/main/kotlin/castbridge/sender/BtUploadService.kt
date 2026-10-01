@@ -89,6 +89,7 @@ class BtUploadService : Service() {
                     if (joined == null) null else try { _route.value = r.label; castChannel = "wifidirect"; httpUpload(uri, name, total, r.base, pin, name) } finally { leaveWifiDirect(joined) }
                 }
                 LinkPlanner.Route.Bluetooth -> null                // below
+                is LinkPlanner.Route.BluetoothTunnel -> null       // not planned here: simple sends keep CBT1 (the tunnel serves the other screens)
             }
             if (res == ResumableUpload.State.Done || (res is ResumableUpload.State.Failed && res.reason != "liaison perdue")) { finish(res); return }
             if (r == LinkPlanner.Route.Bluetooth) break

@@ -25,7 +25,7 @@ class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStat
         },
     )
     /** SSH over Bluetooth: an RFCOMM byte tunnel to this server, on only while SSH is on (docs/ADMIN.md). */
-    private val tunnel: SshTunnel = SshTunnel(server.peers, server.port, maxConnections = 2)
+    private val tunnel: SshTunnel = SshTunnel(server.peers, server.port, maxConnections = 2, log = { Log.i(TAG, it) })   // refusals and ends of link, with their reason
     private val bridge: BtSshBridge = BtSshBridge(ctx, tunnel, onBtStatus)
 
     val running get() = server.running
@@ -74,7 +74,7 @@ class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStat
         }
         return """{"enabled":${server.running},"port":${server.port},"idleMinutes":${server.policy.idleMinutes},""" +
             """"secondsLeft":${server.policy.secondsLeft()},"fingerprint":${server.hostKeyFingerprint()?.let(ReceiverServer::q) ?: "null"},""" +
-            """"keys":[$keys],"bluetooth":{"listening":${bridge.running},"maxConnections":2,"active":[""" +
+            """"keys":[$keys],"bluetooth":{"listening":${bridge.running},"maxConnections":2,"lastError":${tunnel.lastError?.let(ReceiverServer::q) ?: "null"},"active":[""" +
             tunnel.active().joinToString(",") { ReceiverServer.q(it.name) } + "]}}"
     }
 
