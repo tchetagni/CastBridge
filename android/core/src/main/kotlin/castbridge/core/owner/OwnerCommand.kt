@@ -27,7 +27,7 @@ data class OwnerCommand(
 
         fun payload(keyId: String, power: Power, action: String, challenge: String, k: Int, factors: Map<FactorKind, String>,
                     bundleIds: List<String>, lots: List<LotId>, days: Int): String = buildList {
-            add(FORMAT); add("keyId=$keyId"); add("power=${power.name.lowercase()}"); add("action=$action"); add("challenge=$challenge"); add("k=$k")
+            add(FORMAT); add("kid=$keyId"); add("power=${power.name.lowercase()}"); add("action=$action"); add("challenge=$challenge"); add("k=$k")
             factors.toSortedMap().forEach { (f, fp) -> add("factor=${f.name}|$fp") }
             add("bundles=${bundleIds.sorted().joinToString(",")}")
             add("lots=${lots.map(LotNames::key).sorted().joinToString(",")}")
@@ -41,7 +41,7 @@ data class OwnerCommand(
             val lines = text.split('\n')
             require(lines[0] == FORMAT)
             fun field(i: Int, key: String) = lines[i].also { require(it.startsWith("$key=")) }.substringAfter('=')
-            val keyId = field(1, "keyId").also { require(ID.matches(it)) }
+            val keyId = field(1, "kid").also { require(ID.matches(it)) }
             val power = Power.valueOf(field(2, "power").uppercase())
             val action = field(3, "action").also { require(it.isEmpty() || ID.matches(it)) }
             val challenge = field(4, "challenge").also { require(HEX.matches(it)) }
@@ -100,6 +100,9 @@ class ChallengeBook(private val uptimeMs: () -> Long, private val random: Secure
     }
 
     fun spentSnapshot(): List<String> = spent.toList()
+
+    /** Test and vector support: marks [challenges] as issued by this TV just now (a real TV only ever issues its own). */
+    fun restore(challenges: List<String>) { val now = uptimeMs(); challenges.forEach { open[it] = now } }
 }
 
 class OwnerCommandVerifier(private val keys: KeyRing, private val challenges: ChallengeBook) {
@@ -108,7 +111,7 @@ class OwnerCommandVerifier(private val keys: KeyRing, private val challenges: Ch
         val key = keys.find(c.keyId) ?: return no(Rejection.UNKNOWN_KEY, "Clé inconnue de cette TV")
         if (keys.isRevoked(c.keyId)) return no(Rejection.REVOKED_KEY, "Clé révoquée")
         if (!key.verify(c.canonicalPayload(), c.signature)) return no(Rejection.BAD_SIGNATURE, "Signature invalide")
-        if (c.power.rank > key.maxPower.rank) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'a pas ce pouvoir")
+        if (!key.allows(c.power)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'a pas ce pouvoir")
         if (!DeviceIdentity.matches(c.factors, c.k, device)) return no(Rejection.WRONG_DEVICE, "Commande destinée à une autre TV")
         if (c.power == Power.SUPPORT && c.action !in OwnerCommand.SUPPORT_ACTIONS) return no(Rejection.BAD_COMMAND, "Action de support inconnue")
         if (c.power == Power.UNLOCK && c.bundleIds.isEmpty() && c.lots.isEmpty()) return no(Rejection.BAD_COMMAND, "Déblocage sans contenu")

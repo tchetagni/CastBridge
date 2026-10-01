@@ -14,3 +14,4 @@ JALONS :
 - 2026-10-01 | outil tools/trial-edition (sélection, vérification, build) + 17 tests Python OK | commit 64749d6+
 - 2026-10-01 | modèle d'édition (Edition, LotMeta.edition additif, lots <lot>-trial), Entitlement 3 droits, EditionPolicy, TrialBudget + 32 tests JVM verts (96 lots.*) ; bug corrigé : nom de fichier d'un lot à portée avec tiret (feature = un seul mot) | commit f546ffc+
 - 2026-10-01 | docs TRIAL-EDITION.md, OWNER-CONSOLE.md, HANDOFF, rapport final | voir git log
+- 2026-10-01 | PRIORITÉ coordinateur : docs/ACTIVATION-FORMAT.md + tools/activation/test-vectors.json (65 vecteurs) + verify_vectors.py indépendant (70 contrôles verts) + ActivationIssuer/ActivationVerifier (kid, portées de clé, sujet tv/phone, licence, poste, droit « tout ouvert »), 50 tests owner verts ; reste : licences/transfert/registre, option A (verrou) | voir git log

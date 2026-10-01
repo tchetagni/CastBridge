@@ -12,32 +12,31 @@ import kotlin.test.*
 private val day = 24L * 3600 * 1000
 private const val T0 = 1_800_000_000_000L          // an instant in 2027
 
-private fun keyPair(): KeyPair = KeyPairGenerator.getInstance("Ed25519").generateKeyPair()
-private fun pubB64(p: KeyPair) = Base64.getEncoder().encodeToString(p.public.encoded.copyOfRange(12, 44))
-private fun sign(p: KeyPair, text: String) = Base64.getEncoder().encodeToString(Signature.getInstance("Ed25519").run { initSign(p.private); update(text.toByteArray(Charsets.UTF_8)); sign() })
-private fun signBytes(p: KeyPair, text: String) = Signature.getInstance("Ed25519").run { initSign(p.private); update(text.toByteArray(Charsets.UTF_8)); sign() }
 
-/** A test console: one key pair, the ring a TV would embed, helpers that build signed artefacts the way the real console will. */
-private class Console(val pair: KeyPair = keyPair(), val maxPower: Power = Power.OPEN_ALL) {
-    val keyId = KeyRing.idOf(pubB64(pair))
-    val trusted = TrustedKey(keyId, pubB64(pair), maxPower)
+/** A test console: one signing key, the ring a TV would embed, helpers that build signed artefacts the way the real console will (raw, so tests can build invalid ones too). */
+private class Console(seed: ByteArray = ByteArray(32).also { SecureRandom().nextBytes(it) }, val maxPower: Power = Power.OPEN_ALL) {
+    val signer = Ed25519Signer(seed)
+    val keyId = signer.keyId
+    val trusted = signer.trusted(KeyScope.upTo(maxPower))
     fun ring(revoked: Set<String> = emptySet()) = KeyRing(listOf(trusted), revoked)
+    private fun sig(text: String) = Base64.getEncoder().encodeToString(signer.sign(text.toByteArray(Charsets.UTF_8)))
 
     fun activation(fp: Fingerprints, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = emptyList(), issued: Long = T0, from: Long = T0 - day,
-                   to: Long = T0 + 300 * day, k: Int = DeviceIdentity.kFor(fp.n), nonce: String = "ab".repeat(8)): String {
-        val payload = Activation.payload(kind, keyId, nonce, issued, from, to, k, fp.byKind, rights)
-        return Activation(kind, keyId, nonce, issued, from, to, k, fp.byKind, rights, sign(pair, payload)).encode()
+                   to: Long = T0 + 300 * day, k: Int = DeviceIdentity.kFor(fp.n), nonce: String = "ab".repeat(8), subject: Subject = Subject.TV,
+                   license: String = if (kind == ActivationKind.TRIAL) "trial" else "lic-1", seat: String = SeatIds.of(license, fp)): String {
+        val payload = Activation.payload(kind, subject, keyId, nonce, issued, from, to, license, seat, k, fp.byKind, rights)
+        return Activation(kind, subject, keyId, nonce, issued, from, to, license, seat, k, fp.byKind, rights, sig(payload)).encode()
     }
 
     fun command(fp: Fingerprints, challenge: String, power: Power = Power.OPEN_ALL, days: Int = 30, action: String = "", bundles: List<String> = emptyList(),
                 lots: List<LotId> = emptyList(), k: Int = DeviceIdentity.kFor(fp.n)): String {
         val payload = OwnerCommand.payload(keyId, power, action, challenge, k, fp.byKind, bundles, lots, days)
-        return OwnerCommand(keyId, power, action, challenge, k, fp.byKind, bundles, lots, days, sign(pair, payload)).encode()
+        return OwnerCommand(keyId, power, action, challenge, k, fp.byKind, bundles, lots, days, sig(payload)).encode()
     }
 
     fun compact(code: String, kind: ActivationKind = ActivationKind.TRIAL, notBeforeDay: Int = ((T0 - CompactActivation.EPOCH_MS) / day).toInt() - 1, window: Int = 200, setId: Int = 0): String {
         val h = CompactActivation.Header(kind, CompactActivation.keyTag(keyId), notBeforeDay, window, setId, CompactActivation.bindOf(code))
-        return CompactActivation.encode(h, signBytes(pair, CompactActivation.signedText(h.bytes())))
+        return CompactActivation.encode(h, signer.sign(CompactActivation.signedText(h.bytes()).toByteArray(Charsets.UTF_8)))
     }
 }
 
@@ -136,8 +135,10 @@ class ActivationTest {
         rejected(ActivationVerifier(console.ring(revoked = setOf(console.keyId))).verify(tok, fp, T0), Rejection.REVOKED_KEY)
         rejected(v.verify("garbage", fp, T0), Rejection.MALFORMED)
         // a key claiming the id of the real one but signing with its own pair
-        val liar = Console(keyPair()); val liarTok = Activation.payload(ActivationKind.PRODUCTION, console.keyId, "ab".repeat(8), T0, T0 - day, T0 + day, 4, fp.byKind, emptyList())
-        rejected(v.verify(Activation(ActivationKind.PRODUCTION, console.keyId, "ab".repeat(8), T0, T0 - day, T0 + day, 4, fp.byKind, emptyList(), sign(liar.pair, liarTok)).encode(), fp, T0), Rejection.BAD_SIGNATURE)
+        val liar = Console(); val seat = SeatIds.of("lic-1", fp)
+        val liarTok = Activation.payload(ActivationKind.PRODUCTION, Subject.TV, console.keyId, "ab".repeat(8), T0, T0 - day, T0 + day, "lic-1", seat, 4, fp.byKind, emptyList())
+        rejected(v.verify(Activation(ActivationKind.PRODUCTION, Subject.TV, console.keyId, "ab".repeat(8), T0, T0 - day, T0 + day, "lic-1", seat, 4, fp.byKind, emptyList(),
+            Base64.getEncoder().encodeToString(liar.signer.sign(liarTok.toByteArray()))).encode(), fp, T0), Rejection.BAD_SIGNATURE)
     }
 
     @Test fun aKeyNeverExceedsItsPower() {

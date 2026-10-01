@@ -17,7 +17,7 @@ Une application téléphone **indistribuable**, à droits de superadmin, à acc�
 Texte canonique signé, relu depuis le texte même qui a été signé :
 ```
 castbridge-owner-command-v1
-keyId=<16 hex>            power=support|unlock|openall      action=<diagnostic|reset-trial|vide>
+keyId=<16 hex>            power=support|unlock|open_all      action=<diagnostic|reset-trial|vide>
 challenge=<hex>           k=<n>        factor=<FACTEUR>|<empreinte>   (une ligne par facteur, triées)
 bundles=<ids>   lots=<fonction:scope,…>   days=<n>
 ```

@@ -9,39 +9,58 @@ import java.util.Base64
 
 enum class ActivationKind { TRIAL, PRODUCTION }
 
+/** The device an activation is for: the TV or the phone (each has its own rights and is one seat of a licence). */
+enum class Subject { TV, PHONE }
+
 /**
- * A signed activation for ONE TV (docs/TRIAL-EDITION.md § Activation). It signs the SET of factor fingerprints (the TV accepts it when
- * k of the n match, [DeviceIdentity.matches]), the rights (same [Right] types as the phone token) and the window in which it may be INSTALLED
- * ([notBefore], [notAfter]; at most 1 year in the offline phase). Once installed it stays: a purchase is definitive, a subscription carries its own end date.
- * Until one is installed the TV opens no content at all; a TRIAL activation opens the trial only.
+ * A signed activation for ONE device (docs/ACTIVATION-FORMAT.md). It signs the SET of factor fingerprints (the device accepts it when k of the n
+ * match, [DeviceIdentity.matches]), the licence and seat it belongs to, the rights (same [Right] types as the phone token) and the window in which it
+ * may be INSTALLED ([notBefore], [notAfter]; at most 1 year in the offline phase). Once installed it stays: a purchase is definitive, a subscription
+ * carries its own end date. With the activation requirement on, nothing opens until one is installed; a TRIAL activation opens the trial only.
  */
 data class Activation(
-    val kind: ActivationKind, val keyId: String, val nonce: String, val issuedAt: Long, val notBefore: Long, val notAfter: Long,
+    val kind: ActivationKind, val subject: Subject, val keyId: String, val nonce: String, val issuedAt: Long, val notBefore: Long, val notAfter: Long,
+    /** Licence the seat belongs to ("trial" for a trial key). */
+    val license: String, /** Seat of the licence this device occupies; the same hardware keeps the same seat. */ val seat: String,
     val k: Int, val factors: Map<FactorKind, String>, val rights: List<Right>, val signature: String,
 ) {
-    fun canonicalPayload(): String = payload(kind, keyId, nonce, issuedAt, notBefore, notAfter, k, factors, rights)
+    fun canonicalPayload(): String = payload(kind, subject, keyId, nonce, issuedAt, notBefore, notAfter, license, seat, k, factors, rights)
 
-    /** "cba1.<payload base64url>.<signature base64>": a file `activation` in Download/CastBridge, or the Bluetooth payload. */
+    /** "cba1.<payload base64url, no padding>.<signature base64 with padding>": a file `activation` in Download/CastBridge, the Bluetooth payload, a QR code. */
     fun encode(): String = "$PREFIX." + Base64.getUrlEncoder().withoutPadding().encodeToString(canonicalPayload().toByteArray(Charsets.UTF_8)) + "." + signature
 
     companion object {
         const val FORMAT = "castbridge-activation-v1"
         const val PREFIX = "cba1"
-        private val HEX = Regex("^[0-9a-f]{8,64}$")
-        private val ID = Regex("^[a-z0-9][a-z0-9-]{0,63}$")
+        const val FILE_NAME = "activation"
+        const val TRIAL_LICENSE = "trial"
+        val HEX = Regex("^[0-9a-f]{8,64}$")
+        val ID = Regex("^[a-z0-9][a-z0-9-]{0,63}$")
         private val FP = Regex("^[0-9a-f]{32}$")
 
-        fun payload(kind: ActivationKind, keyId: String, nonce: String, issuedAt: Long, notBefore: Long, notAfter: Long, k: Int,
-                    factors: Map<FactorKind, String>, rights: List<Right>): String = buildList {
-            add(FORMAT); add("kind=${kind.name.lowercase()}"); add("keyId=$keyId"); add("nonce=$nonce")
-            add("issuedAt=$issuedAt"); add("notBefore=$notBefore"); add("notAfter=$notAfter"); add("k=$k")
+        fun payload(kind: ActivationKind, subject: Subject, keyId: String, nonce: String, issuedAt: Long, notBefore: Long, notAfter: Long, license: String,
+                    seat: String, k: Int, factors: Map<FactorKind, String>, rights: List<Right>): String = buildList {
+            add(FORMAT); add("kind=${kind.name.lowercase()}"); add("subject=${subject.name.lowercase()}"); add("kid=$keyId"); add("nonce=$nonce")
+            add("issuedAt=$issuedAt"); add("notBefore=$notBefore"); add("notAfter=$notAfter"); add("license=$license"); add("seat=$seat"); add("k=$k")
             factors.toSortedMap().forEach { (f, fp) -> add("factor=${f.name}|$fp") }
             rights.map(::rightLine).sorted().forEach { add("right=$it") }
         }.joinToString("\n")
 
-        private fun rightLine(r: Right) = when (r) {
+        fun rightLine(r: Right) = when (r) {
             is Right.Purchase -> "purchase|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.grantedAt}"
             is Right.Subscription -> "subscription|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.startsAt}|${r.endsAt}|${r.graceMs}|${if (r.autoRenew) 1 else 0}"
+            is Right.OpenAll -> "openall|${r.productId}|${r.startsAt}|${r.endsAt}"
+        }
+
+        fun parseRight(line: String): Right {
+            val f = line.split('|')
+            fun ids(s: String) = s.split(',').filter { it.isNotEmpty() }.onEach { require(ID.matches(it)) }
+            return when (f[0]) {
+                "purchase" -> { require(f.size == 4 && ID.matches(f[1])); Right.Purchase(f[1], ids(f[2]), f[3].toLong()) }
+                "subscription" -> { require(f.size == 7 && ID.matches(f[1])); Right.Subscription(f[1], ids(f[2]), f[3].toLong(), f[4].toLong(), f[5].toLong(), f[6] == "1") }
+                "openall" -> { require(f.size == 4 && ID.matches(f[1])); Right.OpenAll(f[1], f[2].toLong(), f[3].toLong()) }
+                else -> error("right")
+            }
         }
 
         fun decode(token: String): Activation? = runCatching {
@@ -52,23 +71,19 @@ data class Activation(
             require(lines[0] == FORMAT)
             fun field(i: Int, key: String) = lines[i].also { require(it.startsWith("$key=")) }.substringAfter('=')
             val kind = ActivationKind.valueOf(field(1, "kind").uppercase())
-            val keyId = field(2, "keyId").also { require(ID.matches(it) || HEX.matches(it)) }
-            val nonce = field(3, "nonce").also { require(HEX.matches(it)) }
+            val subject = Subject.valueOf(field(2, "subject").uppercase())
+            val keyId = field(3, "kid").also { require(HEX.matches(it)) }
+            val nonce = field(4, "nonce").also { require(HEX.matches(it)) }
+            val license = field(8, "license").also { require(ID.matches(it)) }
+            val seat = field(9, "seat").also { require(HEX.matches(it)) }
             val factors = LinkedHashMap<FactorKind, String>(); val rights = ArrayList<Right>()
-            for (l in lines.drop(8)) when {
+            for (l in lines.drop(11)) when {
                 l.startsWith("factor=") -> l.removePrefix("factor=").split('|').let { require(it.size == 2 && FP.matches(it[1])); factors[FactorKind.valueOf(it[0])] = it[1] }
-                l.startsWith("right=") -> {
-                    val f = l.removePrefix("right=").split('|')
-                    fun ids(s: String) = s.split(',').filter { it.isNotEmpty() }.onEach { require(ID.matches(it)) }
-                    rights += when (f[0]) {
-                        "purchase" -> { require(f.size == 4 && ID.matches(f[1])); Right.Purchase(f[1], ids(f[2]), f[3].toLong()) }
-                        "subscription" -> { require(f.size == 7 && ID.matches(f[1])); Right.Subscription(f[1], ids(f[2]), f[3].toLong(), f[4].toLong(), f[5].toLong(), f[6] == "1") }
-                        else -> error("right")
-                    }
-                }
+                l.startsWith("right=") -> rights += parseRight(l.removePrefix("right="))
                 else -> error("line")
             }
-            val a = Activation(kind, keyId, nonce, field(4, "issuedAt").toLong(), field(5, "notBefore").toLong(), field(6, "notAfter").toLong(), field(7, "k").toInt(), factors, rights, parts[2])
+            val a = Activation(kind, subject, keyId, nonce, field(5, "issuedAt").toLong(), field(6, "notBefore").toLong(), field(7, "notAfter").toLong(),
+                license, seat, field(10, "k").toInt(), factors, rights, parts[2])
             require(a.canonicalPayload() == text)
             a
         }.getOrNull()
@@ -76,28 +91,49 @@ data class Activation(
 }
 
 enum class Rejection {
-    MALFORMED, UNKNOWN_KEY, REVOKED_KEY, KEY_NOT_ALLOWED, BAD_SIGNATURE, WRONG_DEVICE, NOT_YET_VALID, WINDOW_CLOSED, WINDOW_TOO_LONG, REPLAY, CHALLENGE_EXPIRED, BAD_COMMAND
+    MALFORMED, UNKNOWN_KEY, REVOKED_KEY, KEY_NOT_ALLOWED, BAD_SIGNATURE, WRONG_DEVICE, WRONG_SUBJECT, NOT_YET_VALID, WINDOW_CLOSED, WINDOW_TOO_LONG,
+    REPLAY, CHALLENGE_EXPIRED, BAD_COMMAND, REVOKED_SEAT, TRANSFER_LIMIT, UNKNOWN_LICENSE, NO_SEAT_LEFT, BAD_RIGHTS
 }
 
 sealed class ActivationResult {
     data class Accepted(val activation: Activation, val weakIdentity: Boolean) : ActivationResult()
-    /** [suspect] = signature good but the hardware does not match: the TV goes back to the trial with a manual unlock, never a flat refusal. */
+    /** [suspect] = signature good but the hardware does not match: the device keeps what it already has and offers the manual unlock, never a flat refusal. */
     data class Rejected(val reason: Rejection, val message: String, val suspect: Boolean = false) : ActivationResult()
 }
 
-/** Checks an activation on the TV (pure, no clock of its own: the caller passes the [TvClock] time). */
-class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Long = MAX_OFFLINE_WINDOW_MS, private val skewMs: Long = 24L * 3600 * 1000) {
-    companion object { const val MAX_OFFLINE_WINDOW_MS = 366L * 24 * 3600 * 1000 }
+/** What a device has been told to forget (docs/ACTIVATION-FORMAT.md § Révocation): keys and seats. Applied when the device next receives a signed list. */
+class RevocationState(val keys: Set<String> = emptySet(), val seats: Map<String, Long> = emptyMap()) {
+    /** An activation is revoked if its seat was revoked at or after its issue date (a later re-issue for the same seat is valid again). */
+    fun seatRevoked(a: Activation): Boolean = seats["${a.license}|${a.seat}"]?.let { a.issuedAt <= it } ?: false
+    fun merge(o: RevocationState) = RevocationState(keys + o.keys, (seats.keys + o.seats.keys).associateWith { maxOf(seats[it] ?: 0L, o.seats[it] ?: 0L) })
+}
+
+/**
+ * Checks an activation on the device (pure, no clock of its own: the caller passes the [TvClock] time). The key must be known, not revoked, and have the scope the
+ * activation needs; the licence seat must not be revoked. [expect] is the kind of device doing the check.
+ */
+class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Long = MAX_OFFLINE_WINDOW_MS, private val skewMs: Long = 24L * 3600 * 1000,
+                         private val revocations: RevocationState = RevocationState(), private val expect: Subject = Subject.TV) {
+    companion object {
+        const val MAX_OFFLINE_WINDOW_MS = 366L * 24 * 3600 * 1000
+        const val MAX_OPEN_ALL_MS = 30L * 24 * 3600 * 1000
+    }
 
     fun verify(token: String, device: Fingerprints, nowMs: Long): ActivationResult {
         val a = Activation.decode(token) ?: return no(Rejection.MALFORMED, "Activation illisible")
-        val key = keys.find(a.keyId) ?: return no(Rejection.UNKNOWN_KEY, "Activation signée par une clé inconnue de cette TV")
-        if (keys.isRevoked(a.keyId)) return no(Rejection.REVOKED_KEY, "Activation signée par une clé révoquée")
+        val key = keys.find(a.keyId) ?: return no(Rejection.UNKNOWN_KEY, "Activation signée par une clé inconnue de cet appareil")
+        if (keys.isRevoked(a.keyId) || a.keyId in revocations.keys) return no(Rejection.REVOKED_KEY, "Activation signée par une clé révoquée")
         if (!key.verify(a.canonicalPayload(), a.signature)) return no(Rejection.BAD_SIGNATURE, "Signature de l'activation invalide")
+        val need = if (a.kind == ActivationKind.TRIAL) KeyScope.ISSUE_TRIAL else KeyScope.ISSUE_PRODUCTION
+        if (!key.allows(need)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'a pas le droit de délivrer ce type d'activation")
+        if (a.rights.any { it is Right.OpenAll } && !key.allows(KeyScope.COMMAND_OPEN_ALL)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer « tout ouvert »")
+        if (a.kind == ActivationKind.TRIAL && a.rights.isNotEmpty()) return no(Rejection.BAD_RIGHTS, "Une clé d'essai ne porte aucun droit")
+        if (a.rights.filterIsInstance<Right.OpenAll>().any { it.endsAt - it.startsAt > MAX_OPEN_ALL_MS || it.endsAt <= it.startsAt }) return no(Rejection.BAD_RIGHTS, "« Tout ouvert » : 30 jours au plus")
+        if (a.subject != expect) return no(Rejection.WRONG_SUBJECT, "Cette activation est celle d'un autre type d'appareil")
         if (a.notAfter - a.notBefore > maxWindowMs) return no(Rejection.WINDOW_TOO_LONG, "Fenêtre d'installation trop longue (1 an au plus)")
-        if (a.kind == ActivationKind.PRODUCTION && key.maxPower.rank < Power.UNLOCK.rank) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer d'activation de production")
         if (!DeviceIdentity.matches(a.factors, a.k, device))
-            return ActivationResult.Rejected(Rejection.WRONG_DEVICE, "Cette activation n'est pas celle de cette TV : version d'essai, déblocage manuel possible", suspect = true)
+            return ActivationResult.Rejected(Rejection.WRONG_DEVICE, "Cette activation n'est pas celle de cet appareil : déblocage manuel possible", suspect = true)
+        if (revocations.seatRevoked(a)) return no(Rejection.REVOKED_SEAT, "Ce poste de la licence a été transféré ou révoqué")
         val now = maxOf(nowMs, a.issuedAt)          // a signed message proves time has reached its issue date
         if (now + skewMs < a.notBefore) return no(Rejection.NOT_YET_VALID, "Activation pas encore valable")
         if (now > a.notAfter) return no(Rejection.WINDOW_CLOSED, "Activation périmée : à refaire")
@@ -127,7 +163,8 @@ object TvGate {
             SubStatus(s, when { nowMs < s.startsAt -> SubState.NOT_STARTED; nowMs < s.endsAt -> SubState.ACTIVE; nowMs < s.endsAt + s.graceMs -> SubState.GRACE; else -> SubState.EXPIRED })
         }
         val subscribed = subs.filter { it.state == SubState.ACTIVE || it.state == SubState.GRACE }.flatMap { it.right.bundleIds }.toSortedSet()
-        val openAll = live.filter { it.power == Power.OPEN_ALL }.maxOfOrNull { it.untilMs }
+        val openAllRights = rights.filterIsInstance<Right.OpenAll>().filter { nowMs >= it.startsAt && nowMs < it.endsAt }.maxOfOrNull { it.endsAt }
+        val openAll = listOfNotNull(live.filter { it.power == Power.OPEN_ALL }.maxOfOrNull { it.untilMs }, openAllRights).maxOrNull()
         val extraBundles = live.flatMap { it.bundleIds }.toSortedSet()
         val extraLots = live.flatMap { it.lots }.toSet()
         val bundles = (subscribed + extraBundles + if (openAll != null) setOf("tout") else emptySet()).toSortedSet()
@@ -208,12 +245,13 @@ object CompactActivation {
         val key = candidates.firstOrNull { keyTag(it.keyId) == p.header.keyTag } ?: return ActivationResult.Rejected(Rejection.UNKNOWN_KEY, "Clé inconnue de cette TV")
         if (keys.isRevoked(key.keyId)) return ActivationResult.Rejected(Rejection.REVOKED_KEY, "Clé révoquée")
         if (!key.verify(signedText(p.header.bytes()), Base64.getEncoder().encodeToString(p.signature))) return ActivationResult.Rejected(Rejection.BAD_SIGNATURE, "Signature invalide")
+        if (!key.allows(if (p.header.kind == ActivationKind.TRIAL) KeyScope.ISSUE_TRIAL else KeyScope.ISSUE_PRODUCTION)) return ActivationResult.Rejected(Rejection.KEY_NOT_ALLOWED, "Cette clé n'a pas ce droit")
         if (!p.header.bind.contentEquals(bindOf(deviceCode))) return ActivationResult.Rejected(Rejection.WRONG_DEVICE, "Cette clé n'est pas celle de cette TV", suspect = true)
         val from = EPOCH_MS + p.header.notBeforeDay * DAY_MS
         val to = from + p.header.windowDays * DAY_MS
         if (p.header.windowDays > 366) return ActivationResult.Rejected(Rejection.WINDOW_TOO_LONG, "Fenêtre trop longue")
         if (nowMs + skewMs < from) return ActivationResult.Rejected(Rejection.NOT_YET_VALID, "Clé pas encore valable")
         if (nowMs > to) return ActivationResult.Rejected(Rejection.WINDOW_CLOSED, "Clé périmée")
-        return ActivationResult.Accepted(Activation(p.header.kind, key.keyId, "", from, from, to, 0, emptyMap(), emptyList(), ""), weakIdentity = false)
+        return ActivationResult.Accepted(Activation(p.header.kind, Subject.TV, key.keyId, "", from, from, to, Activation.TRIAL_LICENSE, "", 0, emptyMap(), emptyList(), ""), weakIdentity = false)
     }
 }

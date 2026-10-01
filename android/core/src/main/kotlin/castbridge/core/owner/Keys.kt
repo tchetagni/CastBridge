@@ -14,8 +14,36 @@ enum class Power(val rank: Int, /** Longest validity the TV grants for this powe
     OPEN_ALL(3, 30),
 }
 
-/** A public key the TV accepts. Several at once (rotation, spare key kept offline); [maxPower] limits what it may command. */
-data class TrustedKey(val keyId: String, val publicKeyBase64: String, val maxPower: Power = Power.OPEN_ALL) {
+/**
+ * What a key may sign (docs/ACTIVATION-FORMAT.md § Clés et portées). One key per tool (desk, owner phone, server), never a shared key: a compromised
+ * tool is revoked on its own, and a key never exceeds its scopes (the server key has no [COMMAND_OPEN_ALL] and no [TRANSFER]).
+ */
+enum class KeyScope {
+    ISSUE_TRIAL, ISSUE_PRODUCTION, COMMAND_SUPPORT, COMMAND_UNLOCK, COMMAND_OPEN_ALL,
+    /** Move a licence seat to other hardware: desk and owner phone only, never the server. */
+    TRANSFER,
+    /** Sign revocation lists. */
+    REVOKE,
+    /** Sign licence registries (the synchronisation file of the three tools). */
+    REGISTRY;
+
+    companion object {
+        val ALL: Set<KeyScope> = values().toSet()
+        /** Scopes of a key that may command up to [power] and issue activations (the old "maximum power" model). */
+        fun upTo(power: Power): Set<KeyScope> = buildSet {
+            add(COMMAND_SUPPORT)
+            if (power.rank >= Power.UNLOCK.rank) { add(COMMAND_UNLOCK); add(ISSUE_TRIAL); add(ISSUE_PRODUCTION) }
+            if (power.rank >= Power.OPEN_ALL.rank) { add(COMMAND_OPEN_ALL); add(TRANSFER); add(REVOKE); add(REGISTRY) }
+        }
+        fun of(p: Power) = when (p) { Power.SUPPORT -> COMMAND_SUPPORT; Power.UNLOCK -> COMMAND_UNLOCK; Power.OPEN_ALL -> COMMAND_OPEN_ALL }
+    }
+}
+
+/** A public key the TV accepts, with its scopes. Several at once (rotation, spare key kept offline). */
+data class TrustedKey(val keyId: String, val publicKeyBase64: String, val scopes: Set<KeyScope> = KeyScope.ALL) {
+    fun allows(scope: KeyScope) = scope in scopes
+    fun allows(power: Power) = KeyScope.of(power) in scopes
+
     fun verify(message: String, signatureBase64: String): Boolean = try {
         Ed25519.verify(Base64.getDecoder().decode(publicKeyBase64.trim()), message.toByteArray(Charsets.UTF_8), Base64.getDecoder().decode(signatureBase64))
     } catch (e: IllegalArgumentException) { false }

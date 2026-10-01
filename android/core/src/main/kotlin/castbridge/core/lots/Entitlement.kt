@@ -27,6 +27,13 @@ sealed class Right {
     /** [endsAt] and [graceMs] decide the state; [autoRenew] is information for the screen (the server renews and re-issues the token). */
     data class Subscription(override val productId: String, override val bundleIds: List<String>, val startsAt: Long, val endsAt: Long,
                             val graceMs: Long, val autoRenew: Boolean) : Right()
+
+    /** « Tout ouvert » : every bundle (the "tout" bundle) between [startsAt] and [endsAt], at most 30 days, no grace. Needs a key with the open-all scope. */
+    data class OpenAll(override val productId: String, val startsAt: Long, val endsAt: Long) : Right() {
+        override val bundleIds: List<String> get() = listOf(ALL_BUNDLE)
+    }
+
+    companion object { const val ALL_BUNDLE = "tout" }
 }
 
 /** The signed content of a token. Everything the evaluation uses is in the signed [canonicalPayload]; nothing is read from elsewhere. */
@@ -50,13 +57,14 @@ data class Entitlement(val deviceId: String, val issuedAt: Long, val keyId: Stri
             add(FORMAT)
             add("device=$deviceId")
             add("issuedAt=$issuedAt")
-            add("keyId=$keyId")
+            add("kid=$keyId")
             rights.map(::line).sorted().forEach { add("right=$it") }
         }.joinToString("\n")
 
         private fun line(r: Right) = when (r) {
             is Right.Purchase -> "purchase|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.grantedAt}"
             is Right.Subscription -> "subscription|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.startsAt}|${r.endsAt}|${r.graceMs}|${if (r.autoRenew) 1 else 0}"
+            is Right.OpenAll -> "openall|${r.productId}|${r.startsAt}|${r.endsAt}"
         }
 
         /** Null when the text is not a well-formed token (the signature is NOT checked here). */
@@ -69,7 +77,7 @@ data class Entitlement(val deviceId: String, val issuedAt: Long, val keyId: Stri
             fun field(i: Int, k: String) = lines[i].also { require(it.startsWith("$k=")) }.substringAfter('=')
             val device = field(1, "device").also { require(DEVICE.matches(it)) }
             val issued = field(2, "issuedAt").toLong()
-            val keyId = field(3, "keyId")
+            val keyId = field(3, "kid")
             val rights = lines.drop(4).map { l ->
                 require(l.startsWith("right="))
                 val f = l.removePrefix("right=").split('|')
@@ -77,6 +85,7 @@ data class Entitlement(val deviceId: String, val issuedAt: Long, val keyId: Stri
                 when (f[0]) {
                     "purchase" -> { require(f.size == 4 && ID.matches(f[1])); Right.Purchase(f[1], ids(f[2]), f[3].toLong()) }
                     "subscription" -> { require(f.size == 7 && ID.matches(f[1])); Right.Subscription(f[1], ids(f[2]), f[3].toLong(), f[4].toLong(), f[5].toLong(), f[6] == "1") }
+                    "openall" -> { require(f.size == 4 && ID.matches(f[1])); Right.OpenAll(f[1], f[2].toLong(), f[3].toLong()) }
                     else -> error("right")
                 }
             }
@@ -141,7 +150,9 @@ object Entitlements {
                 else -> SubState.EXPIRED
             })
         }
-        val subscribed = subs.filter { it.state == SubState.ACTIVE || it.state == SubState.GRACE }.flatMap { it.right.bundleIds }.toSortedSet()
+        val openAllOn = e.rights.filterIsInstance<Right.OpenAll>().any { now >= it.startsAt && now < it.endsAt }
+        val subscribed = (subs.filter { it.state == SubState.ACTIVE || it.state == SubState.GRACE }.flatMap { it.right.bundleIds } +
+            if (openAllOn) listOf(Right.ALL_BUNDLE) else emptyList()).toSortedSet()
         val msg = when {
             subs.any { it.state == SubState.GRACE } -> "Abonnement terminé : reconnectez-vous à Internet pour le renouveler (tolérance en cours)"
             subs.any { it.state == SubState.EXPIRED } -> "Abonnement terminé : vos achats restent, le reste repasse en version d'essai"
