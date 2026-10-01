@@ -123,7 +123,7 @@ class LessonDeck(val pack: Pack, val lesson: Lesson) {
             is Block.Example -> (listOf(b.title, Markdown.spoken(b.statement, lang)) +
                 b.steps.take(revealed).map { s -> Markdown.spoken(s.md, lang) + (s.tex?.let { t -> " " + runCatching { Tex.parse(t).spoken(lang) }.getOrDefault("") } ?: "") } +
                 (if (revealed > b.steps.size) listOfNotNull(b.answer?.let { Markdown.spoken(it, lang) }) else emptyList())).joinToString(". ")
-            is Block.Illustration -> listOfNotNull(b.caption, b.alt.takeIf { it != b.caption }).joinToString(". ")
+            is Block.Illustration -> (listOfNotNull(b.caption, b.alt.takeIf { it != b.caption }) + (b.animation?.captions ?: emptyList())).joinToString(". ")
             is Block.Audio -> b.text
             is Block.More -> b.items.joinToString(". ") { Markdown.spoken(it, lang) }
             is Block.Video -> b.title

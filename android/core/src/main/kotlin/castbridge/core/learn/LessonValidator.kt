@@ -70,7 +70,8 @@ class LessonValidator(private val knownLessons: Set<String> = emptySet()) {
                         b.answer?.let { md(it, "$bw réponse", e) }
                         b.figure?.let { figure(it, "$bw figure", e, warn); illustrations++ }
                     }
-                    is Block.Illustration -> { figure(b.figure, bw, e, warn); illustrations++; if (b.alt.isBlank()) e += "$bw: texte alternatif (alt) manquant" }
+                    is Block.Illustration -> { figure(b.figure, bw, e, warn); illustrations++; if (b.alt.isBlank()) e += "$bw: texte alternatif (alt) manquant"
+                        b.animation?.let { AnimationRules.check(it, b.figure, b.alt, "$bw animation", e, warn) } }
                     is Block.Video -> if (b.src != null && !(b.src.startsWith("library:") || b.src.startsWith("https://") || b.src.startsWith("http://")))
                         e += "$bw: source vidéo « ${b.src} » : library:<nom> ou URL http(s) seulement"
                     is Block.Audio -> if (b.text.isBlank()) e += "$bw: texte vide"

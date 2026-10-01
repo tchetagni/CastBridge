@@ -81,8 +81,8 @@ object LessonJson {
             "example" -> Block.Example(m.req("title", w), m.req("statement", w),
                 m.l("steps").mapIndexed { k, o -> when (o) { is String -> Step(o); else -> o.obj("$w étape #$k").let { s -> Step(s.s("md") ?: "", s.s("tex")) } } },
                 m.s("answer"), m["figure"]?.let { figure(it.obj("$w figure"), "$w figure") }, rv)
-            "illustration" -> Block.Illustration(figure((m["figure"] ?: throw ParseError("$w : \"figure\" manquant")).obj("$w figure"), "$w figure"),
-                m.s("caption"), m.s("alt") ?: m.s("caption") ?: "", rv)
+            "illustration" -> figure((m["figure"] ?: throw ParseError("$w : \"figure\" manquant")).obj("$w figure"), "$w figure").let { fig ->
+                Block.Illustration(fig, m.s("caption"), m.s("alt") ?: m.s("caption") ?: "", rv, m["animation"]?.let { AnimationJson.parse(it.obj("$w animation"), "$w animation", fig) }) }
             "video" -> Block.Video(m.req("title", w), m.s("src"), m.s("credit"), m.s("license"))
             "audio" -> Block.Audio(m.req("text", w), m.s("lang") ?: "fr-FR")
             "exercise" -> Block.ExerciseRef(m.req("ref", w))
@@ -141,7 +141,7 @@ object LessonJson {
         }
     }
 
-    private fun shape(m: Map<String, Any?>, w: String): Shape {
+    internal fun shape(m: Map<String, Any?>, w: String): Shape {
         fun n(k: String) = m.d(k) ?: throw ParseError("$w : \"$k\" manquant")
         fun stroke() = if (m.containsKey("stroke")) m.s("stroke") else "ink"
         val width = m.d("width") ?: 2.0
