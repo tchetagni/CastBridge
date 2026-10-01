@@ -307,10 +307,10 @@ def pdy(terms):
 
 
 # ======================================================================================================== ANALYSE
-@gen(C, "l2m-improper-power", cap=80, cat="Intégrales généralisées")
+@gen(C, "l2m-improper-power", cap=50, cat="Intégrales généralisées")
 def improper_power(rng, d):
     if rng.random() < 0.6:
-        c, a = rng.randint(1, 6), rng.randint(2, 6)
+        c, a = rng.randint(1, 9), rng.randint(2, 8)
         val = F(1, (a - 1) * c ** (a - 1))
         # second method: substitution t = 1/x  ->  integral over ]0, 1/c] of t^(a-2) dt
         assert val == F(1, c) ** (a - 1) / (a - 1)
@@ -319,7 +319,7 @@ def improper_power(rng, d):
         return Draft(f"Que vaut l'intégrale généralisée de 1/x{sup(a)} sur [{c} ; +∞[ ?", right, wr,
                      f"Une primitive est −1/({a - 1}x^{a - 1}) ; elle tend vers 0 en +∞, d'où la valeur 1/({a - 1}·{c ** (a - 1)}) = {right}.", src=SRC)
     q, p = rng.choice([(2, 1), (3, 1), (3, 2), (4, 1), (4, 3)])      # exponent p/q < 1
-    m = rng.randint(1, 3)
+    m = rng.randint(1, 5)
     c = m ** q
     a = F(p, q)
     val = F(m) ** (q - p) / (1 - a)
@@ -365,10 +365,10 @@ def improper_converge_a(rng, d):
     return Draft(text, num(right), [num(w) for w in wr], ex_, src=SRC)
 
 
-@gen(C, "l2m-improper-exp", cap=80, cat="Intégrales généralisées")
+@gen(C, "l2m-improper-exp", cap=43, cat="Intégrales généralisées")
 def improper_exp(rng, d):
     if rng.random() < 0.55:
-        n, a = rng.randint(0, 4), rng.choice([1, 2, 3, 4, 5, 6])
+        n, a = rng.randint(0, 5), rng.choice([1, 2, 3, 4, 5, 6, 7, 8])
         val = F(math.factorial(n), a ** (n + 1))
         num_val = simpson(lambda x: x ** n * math.exp(-a * x), 0, 40.0 / a, 20000)
         assert close(num_val, float(val), 1e-6)
@@ -377,7 +377,7 @@ def improper_exp(rng, d):
         wr = [num(F(math.factorial(n), a ** n)), num(F(1, a ** (n + 1))), num(F(math.factorial(n + 1), a ** (n + 1))), num(F(n + 1, a ** (n + 1))), num(F(math.factorial(n), a ** (n + 2)))]
         return Draft(f"Que vaut l'intégrale généralisée de {xp}{exx(-a)} sur [0 ; +∞[ ?", right, wr,
                      f"∫₀^∞ xⁿe^(−ax)dx = n!/a^(n+1) : ici {n}!/{a}^{n + 1} = {right}.", src=SRC)
-    a, c = rng.randint(1, 5), rng.randint(1, 4)
+    a, c = rng.randint(1, 6), rng.randint(1, 6)
     val = math.exp(-a * c) / a
     assert close(simpson(lambda x: math.exp(-a * x), c, c + 40.0 / a, 20000), val, 1e-6)
     def form(e_, den):
@@ -391,8 +391,8 @@ def improper_exp(rng, d):
 
 @gen(C, "l2m-ibp-exp", cap=90, cat="Intégration")
 def ibp_exp(rng, d):
-    a = nz(rng, -3, 3)
-    p, q = nz(rng, -4, 4), rng.randint(-3, 3)
+    a = nz(rng, -5, 5)
+    p, q = nz(rng, -6, 6), rng.randint(-5, 5)
     A = F(p + q, a) - F(p, a * a)
     B = F(p, a * a) - F(q, a)
     val = float(A) * math.exp(a) + float(B)
@@ -410,7 +410,7 @@ def ibp_exp(rng, d):
 
 @gen(C, "l2m-ibp-log", cap=80, cat="Intégration")
 def ibp_log(rng, d):
-    n, k = rng.randint(1, 5), rng.randint(1, 4)
+    n, k = rng.randint(1, 6), rng.randint(1, 6)
     b = rng.choice([2, 3, 4, 5, "e"])
     xn = "x" if n == 1 else "x" + sup(n)
     kk = "" if k == 1 else f"{k}"
@@ -457,10 +457,10 @@ def pi_val(t):
     return float(t[0]) * PI ** 2 + float(t[1]) * PI + float(t[2])
 
 
-@gen(C, "l2m-ibp-trig", cap=70, cat="Intégration")
+@gen(C, "l2m-ibp-trig", cap=28, cat="Intégration")
 def ibp_trig(rng, d):
     fun, ub, ubv, (c2, c1, c0) = rng.choice(_PI_TABLE)
-    k = rng.randint(1, 5)
+    k = rng.randint(1, 9)
     c2, c1, c0 = F(c2) * k, F(c1) * k, F(c0) * k
     val = pi_val((c2, c1, c0))
     assert close(simpson(lambda x: k * _PI_FUN[fun](x), 0, ubv, 4000), val, 1e-7)
@@ -475,7 +475,7 @@ def ibp_trig(rng, d):
 
 @gen(C, "l2m-subst-poly", cap=90, cat="Intégration")
 def subst_poly(rng, d):
-    m, n, c, b = rng.randint(1, 3), rng.randint(2, 4), rng.randint(1, 6), rng.randint(1, 2)
+    m, n, c, b = rng.randint(1, 3), rng.randint(2, 5), rng.randint(1, 9), rng.randint(1, 2)
     val = F((b ** (m + 1) + c) ** (n + 1) - c ** (n + 1), (m + 1) * (n + 1))
     # second method: expand (x^(m+1)+c)^n, multiply by x^m, integrate term by term
     tot = F(0)
@@ -507,3 +507,173 @@ def subst_log(rng, d):
     kk = "" if k == 1 else f"{k}"
     return Draft(f"Que vaut ∫ de 0 à {b} de {kk}{xm}/(x{sup(m + 1)} + {c}) dx ?", right, wr,
                  f"Avec u = x{sup(m + 1)} + {c}, du = {m + 1}x^{m}dx : on obtient {num(A)}·[ln u] entre {c} et {b ** (m + 1) + c}.", src=SRC)
+
+
+# ---- séries entières
+def _radius_cases():
+    """(text of the general term, function n -> |a_n| as Fraction (exact, n >= 1), radius as Fraction / 'inf' / 0)."""
+    return None
+
+
+@gen(C, "l2m-radius", cap=72, cat="Séries entières")
+def radius_q(rng, d):
+    a = rng.randint(2, 9)
+    p = rng.randint(0, 3)
+    kind = rng.choice(["a-pow", "a-pow-n", "inv", "inv-n", "sq", "fact-inv", "fact", "geo2", "sqrt"])
+    npow = "" if p == 0 else ("n" if p == 1 else "n" + sup(p))
+    if kind == "a-pow":      # sum a^n x^n / n^p
+        coefn = lambda n: F(a ** n, n ** p)
+        term, R = f"{a}ⁿxⁿ" + (f"/{npow}" if p else ""), F(1, a)
+    elif kind == "a-pow-n":  # sum n^p x^n / a^n
+        coefn = lambda n: F(n ** p, a ** n)
+        term, R = (f"{npow}xⁿ/{a}ⁿ" if p else f"xⁿ/{a}ⁿ"), F(a)
+    elif kind == "inv":      # sum x^n / (n^p a^n)... with n+1 shift
+        coefn = lambda n: F(1, (n + 1) ** p * a ** n)
+        term, R = (f"xⁿ/((n + 1){sup(p)}·{a}ⁿ)" if p > 1 else (f"xⁿ/((n + 1)·{a}ⁿ)" if p == 1 else f"xⁿ/{a}ⁿ")), F(a)
+    elif kind == "inv-n":    # sum (a x)^n / n!  -> infinite
+        coefn = lambda n: F(a ** n, math.factorial(n))
+        term, R = f"({a}x)ⁿ/n!", "inf"
+    elif kind == "sq":       # sum x^(2n) / a^n  (coefficients of x^(2n)), R = sqrt(a) for a perfect square
+        a = rng.choice([4, 9, 16, 25, 36, 49])
+        coefn = lambda n: F(1, a ** n)
+        term, R = f"x²ⁿ/{a}ⁿ", F(math.isqrt(a))
+    elif kind == "fact-inv":  # sum n! x^n
+        coefn = lambda n: F(math.factorial(n))
+        term, R = "n!·xⁿ", 0
+    elif kind == "fact":
+        coefn = lambda n: F(n ** n, 1)
+        term, R = "nⁿ·xⁿ", 0
+    elif kind == "geo2":     # sum (n+a)/(n+1) ... x^n -> R=1
+        coefn = lambda n: F(n + a, n + 1)
+        term, R = f"(n + {a})xⁿ/(n + 1)", F(1)
+    else:                    # sum x^(2n) a^n  -> R = 1/sqrt(a)
+        a = rng.choice([4, 9, 16, 25, 36, 49])
+        coefn = lambda n: F(a ** n)
+        term, R = f"{a}ⁿx²ⁿ", F(1, math.isqrt(a))
+    # independent numeric check: ratio test at large n (squared radius for the x^(2n) series)
+    if kind in ("sq", "sqrt"):
+        r = coefn(400) / coefn(401)
+        assert abs(math.sqrt(float(r)) - float(R)) < 1e-9
+    elif R == "inf":
+        assert coefn(600) / coefn(601) > 50
+    elif R == 0:
+        assert coefn(60) / coefn(61) < F(1, 20)
+    else:
+        r = coefn(3000) / coefn(3001)
+        assert abs(float(r) - float(R)) < 0.02 * float(R) + 1e-3, (kind, r, R)
+    if R == "inf":
+        right = "R = +∞"
+    elif R == 0:
+        right = "R = 0"
+    else:
+        right = "R = " + num(R)
+    cands = []
+    if R not in ("inf", 0):
+        cands += ["R = " + num(F(1) / R), "R = 1", "R = +∞", "R = 0", "R = " + num(R * R), "R = " + num(R + 1)]
+    elif R == "inf":
+        cands += ["R = 1", "R = 0", f"R = {a}", f"R = 1/{a}"]
+    else:
+        cands += ["R = 1", "R = +∞", f"R = {a}", f"R = 1/{a}"]
+    wr = dedup(cands, right)
+    return Draft(f"Quel est le rayon de convergence R de la série entière Σ {term} (somme sur n ≥ 1) ?", right, wr,
+                 "On applique le critère de d'Alembert au rapport des coefficients successifs (puis la racine carrée pour les puissances x²ⁿ).", src=SRC)
+
+
+@gen(C, "l2m-series-sum", cap=90, cat="Séries entières")
+def series_sum(rng, d):
+    q = rng.randint(2, 8)
+    p = rng.randint(1, q - 1)
+    r = F(p, q) * rng.choice([1, -1])
+    kind = rng.choice(["n", "n1", "n2", "nn1"])
+    one = 1 - r
+    if kind == "n":
+        val, name, lo = r / one ** 2, "n·rⁿ", 1
+        wr = [1 / one ** 2, r / one, 1 / one, r * (1 + r) / one ** 3, r / one ** 3]
+    elif kind == "n1":
+        val, name, lo = 1 / one ** 2, "(n + 1)·rⁿ", 0
+        wr = [r / one ** 2, 1 / one, r / one, 1 / one ** 3, (1 + r) / one ** 2]
+    elif kind == "n2":
+        val, name, lo = r * (1 + r) / one ** 3, "n²·rⁿ", 1
+        wr = [r / one ** 2, (1 + r) / one ** 3, r * (1 + r) / one ** 2, 2 * r / one ** 3, r / one ** 3]
+    else:
+        val, name, lo = 2 * r ** 2 / one ** 3, "n(n − 1)·rⁿ", 2
+        wr = [2 * r / one ** 3, r ** 2 / one ** 3, 2 * r ** 2 / one ** 2, r ** 2 / one ** 2, 2 * r ** 2 / one ** 3 * one]
+    f = lambda n: {"n": n * r ** n, "n1": (n + 1) * r ** n, "n2": n * n * r ** n, "nn1": n * (n - 1) * r ** n}[kind]
+    tot = 0.0
+    for n in range(lo, 1500):
+        tot += float(f(n)) if n < 120 else float(r) ** n * {"n": n, "n1": n + 1, "n2": n * n, "nn1": n * (n - 1)}[kind]
+    assert abs(tot - float(val)) < 1e-9
+    wr = [num(w) for w in wr]
+    right = num(val)
+    name = name.replace("r", f"({num(r)})")
+    return Draft(f"Quelle est la somme de la série Σ {name} (n ≥ {lo}) ?", right, wr,
+                 "On dérive terme à terme la série géométrique Σ rⁿ = 1/(1 − r), valable pour |r| < 1.", src=SRC)
+
+
+def _series_ref(kind, a, kmax):
+    """Independent Taylor coefficients by recurrences (exact Fractions)."""
+    c = [F(0)] * (kmax + 1)
+    if kind == "exp":           # f' = a f
+        c[0] = F(1)
+        for k in range(kmax):
+            c[k + 1] = a * c[k] / (k + 1)
+    elif kind == "geo":         # 1/(1-ax)
+        for k in range(kmax + 1):
+            c[k] = F(a) ** k
+    elif kind == "log":         # ln(1+ax): integral of a/(1+ax)
+        for k in range(1, kmax + 1):
+            c[k] = (-1) ** (k + 1) * F(a) ** k / k
+    elif kind == "sin":         # f'' = -a^2 f, f(0)=0, f'(0)=a
+        c[1] = F(a)
+        for k in range(2, kmax + 1):
+            c[k] = -a * a * c[k - 2] / (k * (k - 1))
+    elif kind == "cos":
+        c[0] = F(1)
+        for k in range(2, kmax + 1):
+            c[k] = -a * a * c[k - 2] / (k * (k - 1))
+    elif kind == "binom":       # (1+x)^alpha, alpha = a (Fraction)
+        c[0] = F(1)
+        for k in range(kmax):
+            c[k + 1] = c[k] * (a - k) / (k + 1)
+    return c
+
+
+@gen(C, "l2m-maclaurin-coeff", cap=90, cat="Séries entières")
+def maclaurin_coeff(rng, d):
+    kind = rng.choice(["exp", "geo", "log", "sin", "cos", "binom", "inv2"])
+    a = rng.randint(2, 6) * rng.choice([1, -1])
+    k = rng.randint(2, 7)
+    if kind == "exp":
+        val, fn = F(a) ** k / math.factorial(k), f"e^({a}x)".replace("^(" + str(a) + "x)", "^(" + num(a) + "x)")
+    elif kind == "geo":
+        val, fn = F(a) ** k, f"1/(1 − {a}x)" if a > 0 else f"1/(1 + {abs(a)}x)"
+    elif kind == "log":
+        val, fn = (-1) ** (k + 1) * F(a) ** k / k, f"ln(1 + {a}x)" if a > 0 else f"ln(1 − {abs(a)}x)"
+    elif kind == "sin":
+        k = rng.choice([3, 5, 7])
+        val, fn = (-1) ** ((k - 1) // 2) * F(a) ** k / math.factorial(k), f"sin({a}x)" if a > 0 else f"sin({num(a)}x)"
+    elif kind == "cos":
+        k = rng.choice([2, 4, 6])
+        val, fn = (-1) ** (k // 2) * F(a) ** k / math.factorial(k), f"cos({a}x)" if a > 0 else f"cos({num(a)}x)"
+    elif kind == "binom":
+        al = F(rng.choice([1, 3, 5, 7, -1, -3]), 2)
+        a = al
+        val = F(1)
+        for j in range(k):
+            val = val * (al - j) / (j + 1)
+        fn = f"(1 + x)^({num(al)})"
+    else:
+        val, fn = F(k + 1) * F(a) ** k, f"1/(1 − {a}x)²" if a > 0 else f"1/(1 + {abs(a)}x)²"
+    if kind == "inv2":      # derivative of the geometric series
+        ref = _series_ref("geo", a, k + 1)
+        assert ref[k + 1] * (k + 1) == a * val
+    else:
+        ref = _series_ref(kind, a, k)
+        assert ref[k] == val, (kind, a, k, ref[k], val)
+    right = num(val)
+    wr = [num(val * 2), num(val * k), num(val / k) if kind not in ("geo",) else num(val + 1), num(F(a) ** k), num(val + 1), num(val * math.factorial(k))]
+    if kind == "binom":
+        wr = [num(F(1) * al ** k / math.factorial(k)), num(val * 2), num(val + 1), num(al ** k), num(val * k)]
+    wr = dedup(wr, right)
+    return Draft(f"Quel est le coefficient de x{sup(k)} dans le développement en série entière de {fn} en 0 ?", right, wr,
+                 "Le coefficient s'obtient par la formule du développement usuel (ou par la relation de récurrence des coefficients).", src=SRC)

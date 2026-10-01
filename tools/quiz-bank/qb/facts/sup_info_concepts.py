@@ -55,20 +55,6 @@ classify(L1, "inf1-logi", {
     "un client de messagerie": ["Thunderbird", "Outlook", "Apple Mail"],
 }, cat="Logiciel", src=S, fwd="À quelle catégorie de logiciels ou de langages appartient {item} ?", rev="Lequel de ces noms désigne {group} ?", expl="{item} est {group}.", diff=1)
 
-table(L1, "inf1-os", [
-    ("un système d'exploitation", "gère le matériel et fournit aux applications les services de base", 1),
-    ("un pilote (driver)", "permet au système de dialoguer avec un périphérique précis", 2),
-    ("une application", "répond à un besoin de l'utilisateur, comme écrire, calculer ou communiquer", 1),
-    ("un fichier", "regroupe des données portant un nom et enregistrées sur un support", 1),
-    ("un dossier (répertoire)", "sert à ranger et organiser des fichiers", 1),
-    ("une extension de fichier", "suffixe du nom qui indique en général le type du contenu", 2),
-    ("une interface graphique", "permet d'utiliser la machine avec fenêtres, icônes et pointeur", 1),
-    ("une ligne de commande", "permet de donner des ordres au système en tapant du texte", 2),
-    ("une mise à jour", "corrige des défauts ou failles, ou apporte des fonctions à un logiciel", 1),
-    ("un utilitaire de compression", "réduit la taille de fichiers pour les stocker ou les envoyer", 2),
-    ("un gestionnaire de tâches", "affiche les programmes en cours et les ressources qu'ils consomment", 3),
-], cat="Logiciel", src=S, fwd="Quelle description est correcte pour : {a} ?", rev="Parmi ces termes, lequel {b} ?", expl="{A} {b}.")
-
 table(L1, "inf1-lic", [
     ("un logiciel libre", "laisse à chacun la liberté de l'utiliser, de l'étudier, de le modifier et de le redistribuer", 2),
     ("un logiciel propriétaire", "est distribué avec des restrictions fixées par son éditeur, sans accès libre au code", 2),
@@ -266,25 +252,6 @@ mcq(L1, "inf1-algo-m", [
     ("Quelle est la valeur de la division entière 7 divisé par 2 dans un langage qui calcule des entiers ?", "3", ["3,5", "4", "2", "1"], "7 = 2×3 + 1.", 2),
 ], cat="Algorithmique et programmation", src=S)
 
-table(L1, "inf1-bure", [
-    ("une cellule", "est l'intersection d'une ligne et d'une colonne dans un tableur", 1),
-    ("un classeur", "est le fichier d'un tableur qui regroupe une ou plusieurs feuilles", 2),
-    ("une formule de tableur", "commence en général par le signe égal et calcule une valeur", 1),
-    ("une référence relative", "s'adapte quand on recopie la formule vers une autre cellule", 3),
-    ("une référence absolue", "reste figée sur une cellule précise, notée avec des signes dollar", 3),
-    ("la fonction SOMME", "additionne les valeurs d'une plage de cellules", 1),
-    ("la fonction MOYENNE", "calcule la moyenne arithmétique d'une plage de cellules", 1),
-    ("un tableau croisé dynamique", "résume et regroupe de grandes quantités de données selon plusieurs critères", 3),
-    ("un filtre", "n'affiche que les lignes qui répondent à un critère", 2),
-    ("un style de paragraphe", "regroupe des réglages de mise en forme appliqués d'un seul coup", 2),
-    ("une table des matières automatique", "se génère à partir des titres structurés par des styles", 3),
-    ("un en-tête et un pied de page", "affichent un contenu répété en haut et en bas de chaque page", 1),
-    ("le publipostage", "fusionne un document modèle avec une liste de destinataires", 3),
-    ("un diaporama", "enchaîne des diapositives pour une présentation devant un public", 1),
-    ("un graphique", "représente visuellement des données chiffrées d'un tableau", 1),
-    ("le tri", "range les lignes selon l'ordre croissant ou décroissant d'une colonne", 1),
-], cat="Bureautique", src=S, fwd="Quelle description est correcte pour : {a} ?", rev="Parmi ces termes, lequel {b} ?", expl="{A} {b}.")
-
 mcq(L1, "inf1-bure-m", [
     ("Où se trouve la cellule B3 dans un tableur ?", "Dans la colonne B, à la ligne 3", ["Dans la ligne B, à la colonne 3", "À la troisième feuille", "Dans la plage A1:B3 seulement", "À la fois en colonne 3 et en ligne 3"], "La lettre repère la colonne, le nombre la ligne.", 1),
     ("Si A1 contient 4, A2 contient 6 et A3 contient 8, que renvoie =SOMME(A1:A3) ?", "18", ["12", "6", "24", "A1:A3"], "4 + 6 + 8 = 18.", 1),
@@ -300,17 +267,6 @@ mcq(L1, "inf1-bure-m", [
     ("Quel type de graphique convient le mieux pour montrer une évolution dans le temps ?", "Une courbe", ["Un secteur (camembert)", "Un nuage de mots", "Un organigramme", "Un tableau à une seule cellule"], "La courbe met en évidence les variations successives.", 2),
     ("Quel type de graphique convient le mieux pour montrer la part de chaque catégorie dans un total ?", "Un secteur (camembert)", ["Une courbe", "Un nuage de points", "Un histogramme de dates", "Un diagramme de Gantt"], "Il représente des proportions d'un tout.", 2),
 ], cat="Bureautique", src=S)
-
-table(L1, "inf1-mail", [
-    ("le champ « Cc » d'un courriel", "met des destinataires en copie, visibles de tous", 2),
-    ("le champ « Cci » ou « Bcc »", "met des destinataires en copie cachée, invisibles des autres", 2),
-    ("une pièce jointe", "est un fichier envoyé avec le message", 1),
-    ("une adresse électronique", "est composée d'un nom d'utilisateur, d'un arobase et d'un nom de domaine", 1),
-    ("le dossier de courrier indésirable", "reçoit les messages jugés comme du spam", 2),
-    ("une liste de diffusion", "relaie un même message à tous ses abonnés", 3),
-    ("une signature de courriel", "est un bloc de texte ajouté automatiquement en fin de message", 2),
-    ("la netiquette", "regroupe les règles de bonne conduite dans les échanges en ligne", 2),
-], cat="Internet et Web", src=S, fwd="Quelle description est correcte pour : {a} ?", rev="Parmi ces termes, lequel {b} ?", expl="{A} {b}.")
 
 table(L1, "inf1-donn", [
     ("une donnée personnelle", "est toute information se rapportant à une personne identifiée ou identifiable", 2),
@@ -363,17 +319,6 @@ table(L2, "inf2-arch", [
     ("le registre d'état", "contient des indicateurs sur le résultat de la dernière opération, comme zéro ou retenue", 4),
 ], cat="Architecture des ordinateurs", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
 
-table(L2, "inf2-gate", [
-    ("la porte ET", "donne 1 seulement si toutes ses entrées valent 1", 2),
-    ("la porte OU", "donne 1 si au moins une de ses entrées vaut 1", 2),
-    ("la porte NON", "inverse la valeur de son unique entrée", 1),
-    ("la porte OU exclusif (XOR)", "donne 1 si ses deux entrées sont différentes", 3),
-    ("la porte NON-ET (NAND)", "donne 0 seulement si toutes ses entrées valent 1", 3),
-    ("la porte NON-OU (NOR)", "donne 1 seulement si toutes ses entrées valent 0", 3),
-    ("un demi-additionneur", "additionne deux bits et produit une somme et une retenue", 4),
-    ("une bascule (flip-flop)", "mémorise un bit tant que le circuit est alimenté", 4),
-], cat="Architecture des ordinateurs", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
-
 mcq(L2, "inf2-arch-m", [
     ("Dans quel ordre s'enchaînent les étapes de base du cycle d'exécution d'une instruction ?", "Chargement, décodage, exécution", ["Exécution, décodage, chargement", "Décodage, chargement, exécution", "Chargement, exécution, décodage", "Décodage, exécution, chargement"], "Le processeur lit l'instruction, la décode, puis l'exécute.", 2),
     ("Combien d'octets peut-on adresser avec 16 bits d'adresse, un octet par adresse ?", "65 536", ["16", "256", "1 024", "16 384"], "2^16 = 65 536.", 3),
@@ -403,16 +348,6 @@ classify(L2, "inf2-osi", {
 }, cat="Réseaux", src=S, fwd="À quelle couche du modèle OSI rattache-t-on {item} ?", rev="Lequel de ces éléments se rattache à {group} du modèle OSI ?", expl="{item} relève de {group}.", diff=3,
     diffs={"ICMP": 4, "PPP": 4, "un commutateur (switch)": 4, "une adresse MAC": 4, "UDP": 3, "SSH": 4})
 
-pairs(L2, "inf2-osi-n", [
-    ("la couche 1 du modèle OSI", "La couche physique", 3),
-    ("la couche 2 du modèle OSI", "La couche liaison de données", 3),
-    ("la couche 3 du modèle OSI", "La couche réseau", 3),
-    ("la couche 4 du modèle OSI", "La couche transport", 3),
-    ("la couche 5 du modèle OSI", "La couche session", 4),
-    ("la couche 6 du modèle OSI", "La couche présentation", 4),
-    ("la couche 7 du modèle OSI", "La couche application", 3),
-], region="WORLD", cat="Réseaux", src=S, fwd="Comment s'appelle {a} ?", rev="Quel numéro porte, dans le modèle OSI, cette couche : {b} ?", expl="{a} est {b}.")
-
 table(L2, "inf2-proc", [
     ("un processus", "est un programme en cours d'exécution, avec son espace mémoire et ses ressources", 2),
     ("un thread (fil d'exécution)", "est un flot d'exécution qui partage l'espace mémoire de son processus", 3),
@@ -429,18 +364,6 @@ table(L2, "inf2-proc", [
     ("un processus à l'état « prêt »", "n'attend plus que l'ordonnanceur lui donne le processeur", 3),
     ("un processus à l'état « bloqué »", "attend un événement extérieur, comme la fin d'une entrée-sortie", 3),
     ("un processus à l'état « en exécution »", "utilise actuellement le processeur", 2),
-], cat="Systèmes d'exploitation", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
-
-table(L2, "inf2-sched", [
-    ("l'ordonnancement FCFS (premier arrivé, premier servi)", "sert les processus dans l'ordre d'arrivée", 2),
-    ("l'ordonnancement du plus court d'abord (SJF)", "choisit le processus dont la durée d'exécution estimée est la plus courte", 3),
-    ("l'ordonnancement circulaire (Round Robin)", "donne à chaque processus une tranche de temps à tour de rôle", 3),
-    ("l'ordonnancement par priorités", "choisit le processus dont la priorité est la plus élevée", 3),
-    ("un ordonnancement préemptif", "peut retirer le processeur à un processus avant qu'il ait fini", 4),
-    ("un ordonnancement non préemptif", "laisse le processus s'exécuter jusqu'à ce qu'il se bloque ou se termine", 4),
-    ("le quantum de temps", "est la durée maximale d'une tranche accordée à un processus", 3),
-    ("le vieillissement (aging)", "relève peu à peu la priorité des processus qui attendent longtemps pour éviter la famine", 5),
-    ("l'effet de convoi", "survient quand un long processus fait attendre derrière lui plusieurs processus courts", 5),
 ], cat="Systèmes d'exploitation", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
 
 mcq(L2, "inf2-sched-m", [
@@ -484,21 +407,6 @@ mcq(L2, "inf2-mem-m", [
     ("Pourquoi la mémoire virtuelle améliore-t-elle l'isolation entre processus ?", "Chaque processus a ses propres adresses, traduites vers des zones physiques distinctes", ["Parce qu'elle chiffre tout le disque", "Parce qu'elle interdit le multitâche", "Parce qu'elle donne la même adresse physique à tous", "Parce qu'elle supprime le noyau"], "Les tables de pages empêchent d'accéder à la mémoire d'un autre processus.", 4),
 ], cat="Systèmes d'exploitation", src=S)
 
-table(L2, "inf2-fs", [
-    ("un système de fichiers", "organise la façon dont des données nommées sont stockées sur un support", 2),
-    ("un inode", "est une structure de type Unix qui contient les métadonnées d'un fichier, hors son nom", 5),
-    ("un chemin absolu", "part de la racine de l'arborescence", 2),
-    ("un chemin relatif", "part du répertoire courant", 2),
-    ("un lien symbolique", "est un fichier particulier qui désigne un autre chemin", 4),
-    ("la journalisation", "note les opérations avant de les appliquer pour limiter la corruption après une panne", 5),
-    ("le montage", "rattache un système de fichiers à l'arborescence visible", 4),
-    ("une partition", "est une portion d'un disque traitée comme un volume distinct", 2),
-    ("le formatage", "prépare un volume à recevoir un système de fichiers", 2),
-    ("les droits d'accès", "précisent qui peut lire, écrire ou exécuter un fichier", 2),
-    ("la racine", "est le répertoire situé au sommet de l'arborescence", 2),
-    ("les métadonnées d'un fichier", "décrivent le fichier, comme sa taille, ses dates ou ses droits", 3),
-], cat="Systèmes d'exploitation", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
-
 mcq(L2, "inf2-fs-m", [
     ("Sous Unix, quels droits représente le code octal 755 pour un fichier ?", "rwxr-xr-x", ["rw-r--r--", "rwxrwxrwx", "r-xr-xr-x", "rwx------"], "7 = rwx, 5 = r-x pour le groupe et pour les autres.", 4),
     ("Sous Unix, quels droits représente le code octal 644 ?", "rw-r--r--", ["rwxr-xr-x", "rw-rw-rw-", "r--r--r--", "rwx------"], "6 = rw-, 4 = r--.", 4),
@@ -527,38 +435,6 @@ table(L2, "inf2-proto", [
     ("la traduction d'adresses (NAT)", "remplace des adresses privées par une adresse publique au passage d'un routeur", 4),
 ], cat="Réseaux", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
 
-pairs(L2, "inf2-port", [
-    ("HTTP", "80", 2), ("HTTPS", "443", 2), ("SSH", "22", 3), ("FTP (canal de commande)", "21", 4),
-    ("SMTP (échange entre serveurs)", "25", 4), ("DNS", "53", 3), ("POP3", "110", 5), ("IMAP", "143", 5), ("Telnet", "23", 4),
-], region="WORLD", cat="Réseaux", src=S, fwd="Quel numéro de port est attribué par défaut à : {a} ?", rev="Quel protocole utilise par défaut le port {b} ?", expl="{a} utilise par défaut le port {b}.")
-
-pairs(L2, "inf2-dnsrec", [
-    ("un enregistrement A", "Il associe un nom à une adresse IPv4", 4),
-    ("un enregistrement AAAA", "Il associe un nom à une adresse IPv6", 4),
-    ("un enregistrement MX", "Il désigne les serveurs qui reçoivent le courrier d'un domaine", 4),
-    ("un enregistrement CNAME", "Il fait d'un nom l'alias d'un autre nom", 4),
-    ("un enregistrement NS", "Il désigne les serveurs de noms qui font autorité pour une zone", 5),
-    ("un enregistrement PTR", "Il associe une adresse IP à un nom (résolution inverse)", 5),
-], region="WORLD", cat="Réseaux", src=S, fwd="Quel est le rôle de {a} dans le DNS ?", rev="De quel enregistrement DNS s'agit-il : {b} ?", expl="{a} : {b}.")
-
-pairs(L2, "inf2-http", [
-    ("200", "La requête a réussi", 2),
-    ("301", "La ressource a été déplacée définitivement", 4),
-    ("401", "Une authentification est requise", 4),
-    ("403", "L'accès est refusé malgré une requête comprise", 4),
-    ("404", "La ressource demandée est introuvable", 1),
-    ("500", "Le serveur a rencontré une erreur interne", 3),
-    ("503", "Le service est temporairement indisponible", 4),
-], region="WORLD", cat="Réseaux", src=S, fwd="Que signifie le code de statut HTTP {a} ?", rev="Quel code de statut HTTP signifie : {b} ?", expl="Code {a} : {b}.")
-
-pairs(L2, "inf2-meth", [
-    ("GET", "Lire une ressource sans la modifier", 2),
-    ("POST", "Envoyer des données à traiter par le serveur", 3),
-    ("PUT", "Remplacer ou créer une ressource à une adresse donnée", 4),
-    ("DELETE", "Supprimer une ressource", 3),
-    ("HEAD", "Obtenir seulement les en-têtes de la réponse", 5),
-], region="WORLD", cat="Réseaux", src=S, fwd="À quoi sert surtout la méthode HTTP {a} ?", rev="Quelle méthode HTTP sert à : {b} ?", expl="{a} : {b}.")
-
 table(L2, "inf2-ip", [
     ("une adresse IPv4", "est codée sur 32 bits et souvent écrite en quatre nombres séparés par des points", 2),
     ("une adresse IPv6", "est codée sur 128 bits et écrite en groupes hexadécimaux", 3),
@@ -577,19 +453,6 @@ table(L2, "inf2-ip", [
     ("le TTL", "limite la durée de vie d'un paquet en décomptant les routeurs traversés", 4),
     ("la latence", "est le délai que met une donnée pour aller d'un point à un autre", 3),
     ("la bande passante", "est la capacité maximale de transmission d'une liaison", 3),
-], cat="Réseaux", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
-
-table(L2, "inf2-lan", [
-    ("un réseau local (LAN)", "couvre une zone restreinte comme une maison, une salle ou un bâtiment", 1),
-    ("un réseau étendu (WAN)", "relie des sites géographiquement éloignés", 2),
-    ("une topologie en étoile", "relie chaque machine à un équipement central", 3),
-    ("une topologie en bus", "relie toutes les machines à un même câble partagé", 3),
-    ("une topologie en anneau", "relie chaque machine à deux voisines pour former une boucle", 4),
-    ("un réseau privé virtuel (VPN)", "relie des sites ou des machines à travers Internet par un tunnel chiffré", 3),
-    ("une zone démilitarisée (DMZ)", "isole des serveurs exposés à Internet du réseau interne", 4),
-    ("un réseau poste à poste (pair à pair)", "fait jouer à chaque machine à la fois le rôle de client et de serveur", 3),
-    ("le modèle client-serveur", "répartit les rôles entre machines qui demandent et machines qui fournissent des services", 2),
-    ("un VLAN", "sépare logiquement des machines d'un même commutateur en réseaux distincts", 5),
 ], cat="Réseaux", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
 
 mcq(L2, "inf2-ip-m", [
@@ -692,18 +555,6 @@ mcq(L2, "inf2-sql-m", [
     ("Comment représente-t-on dans un modèle relationnel qu'un étudiant suit plusieurs cours et qu'un cours a plusieurs étudiants ?", "Par une table d'association avec deux clés étrangères", ["Par une seule colonne contenant une liste", "Par une clé primaire double dans Etudiant", "En répétant le cours dans chaque ligne d'étudiant", "Il est impossible de le représenter"], "Une association n-n devient une table à part.", 4),
 ], cat="Bases de données", src=S)
 
-table(L2, "inf2-acid", [
-    ("une transaction", "regroupe des opérations traitées comme un tout, validé ou annulé", 2),
-    ("l'atomicité", "garantit qu'une transaction est exécutée entièrement ou pas du tout", 3),
-    ("la cohérence (ACID)", "garantit qu'une transaction fait passer la base d'un état valide à un autre état valide", 4),
-    ("l'isolation", "garantit que des transactions simultanées n'interfèrent pas de façon visible", 4),
-    ("la durabilité", "garantit qu'une transaction validée survit à une panne", 3),
-    ("COMMIT", "valide définitivement les modifications d'une transaction", 3),
-    ("ROLLBACK", "annule les modifications d'une transaction non validée", 3),
-    ("un verrou", "empêche temporairement d'autres transactions d'accéder à une donnée", 4),
-    ("une lecture sale (dirty read)", "lit une donnée modifiée par une transaction qui n'est pas encore validée", 5),
-], cat="Bases de données", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
-
 mcq(L2, "inf2-acid-m", [
     ("Lors d'un virement, le compte A est débité puis une panne survient avant le crédit du compte B. Quelle propriété ACID doit éviter cette situation ?", "L'atomicité", ["La durabilité", "L'isolation", "L'indexation", "La normalisation"], "Tout ou rien : le débit doit être annulé.", 3),
     ("Après un COMMIT, le serveur de la base s'arrête brutalement. Quelle propriété garantit que la transaction est conservée au redémarrage ?", "La durabilité", ["L'atomicité", "La cohérence", "L'isolation", "La normalisation"], "Les changements validés sont stockés de façon durable.", 3),
@@ -790,23 +641,6 @@ table(L3, "inf3-sd", [
     ("un graphe", "est formé de sommets reliés par des arêtes ou des arcs", 2),
 ], cat="Structures de données", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
 
-table(L3, "inf3-graphe", [
-    ("une arête", "relie deux sommets dans un graphe non orienté", 2),
-    ("un arc", "relie deux sommets dans un graphe orienté, dans un sens précis", 3),
-    ("un graphe pondéré", "associe un poids ou un coût à chaque arête", 3),
-    ("le degré d'un sommet", "est le nombre d'arêtes incidentes à ce sommet", 3),
-    ("un cycle", "est un chemin qui revient à son sommet de départ", 3),
-    ("un graphe connexe", "permet d'aller de n'importe quel sommet à n'importe quel autre", 3),
-    ("un graphe orienté acyclique (DAG)", "n'a aucun cycle suivant le sens des arcs", 4),
-    ("une liste d'adjacence", "mémorise pour chaque sommet la liste de ses voisins", 4),
-    ("une matrice d'adjacence", "est un tableau carré qui indique pour chaque couple de sommets s'ils sont reliés", 4),
-    ("le parcours en largeur", "explore les sommets par distance croissante depuis la source, en s'aidant d'une file", 4),
-    ("le parcours en profondeur", "suit un chemin le plus loin possible avant de revenir en arrière", 4),
-    ("un arbre couvrant", "relie tous les sommets d'un graphe connexe sans former de cycle", 5),
-    ("le tri topologique", "ordonne les sommets d'un DAG pour que chaque arc aille d'un sommet vers un suivant", 5),
-    ("l'algorithme de Dijkstra", "calcule les plus courts chemins depuis un sommet, avec des poids positifs ou nuls", 5),
-], cat="Structures de données", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
-
 mcq(L3, "inf3-sd-m", [
     ("On empile 1, 2, 3 dans cet ordre sur une pile, puis on dépile une fois. Quelle valeur est retirée ?", "3", ["1", "2", "Aucune", "Les trois"], "Dernier entré, premier sorti.", 1),
     ("On enfile 1, 2, 3 dans cet ordre dans une file, puis on défile une fois. Quelle valeur est retirée ?", "1", ["3", "2", "Aucune", "Les trois"], "Premier entré, premier sorti.", 1),
@@ -868,20 +702,6 @@ mcq(L3, "inf3-cplx-m", [
     ("Quelle relation entre P et NP est certaine ?", "P est inclus dans NP", ["NP est inclus strictement dans P", "P et NP sont disjoints", "P est égal à NP, prouvé", "NP contient seulement des problèmes sans solution"], "Tout problème résoluble en temps polynomial se vérifie aussi en temps polynomial.", 5),
 ], cat="Complexité", src=S)
 
-table(L3, "inf3-tri", [
-    ("le tri à bulles", "échange à répétition des voisins mal ordonnés jusqu'à ce que plus rien ne bouge", 2),
-    ("le tri par sélection", "cherche le minimum de la partie non triée pour le placer à la suite de la partie triée", 3),
-    ("le tri par insertion", "insère chaque nouvel élément à sa place dans la partie déjà triée", 3),
-    ("le tri fusion", "coupe la liste en deux, trie chaque moitié, puis fusionne les moitiés triées", 3),
-    ("le tri rapide (quicksort)", "choisit un pivot et répartit les éléments entre plus petits et plus grands, puis recommence", 4),
-    ("le tri par tas", "construit un tas puis en extrait répétitivement le maximum", 5),
-    ("le tri par dénombrement", "compte les occurrences de chaque valeur d'un petit intervalle d'entiers, sans comparer", 5),
-    ("un tri stable", "conserve l'ordre relatif des éléments qui ont une clé égale", 4),
-    ("un tri en place", "n'utilise qu'une quantité de mémoire supplémentaire négligeable ou constante", 4),
-    ("la recherche dichotomique", "compare avec l'élément du milieu d'une suite triée pour écarter une moitié", 3),
-    ("la recherche séquentielle", "examine un à un les éléments jusqu'à trouver la valeur voulue", 1),
-], cat="Tri et recherche", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
-
 mcq(L3, "inf3-tri-m", [
     ("Quel est le tableau [5, 2, 4, 1] après un premier passage complet du tri à bulles (comparaisons de voisins de gauche à droite, ordre croissant) ?", "[2, 4, 1, 5]", ["[1, 2, 4, 5]", "[2, 5, 4, 1]", "[5, 4, 2, 1]", "[2, 1, 4, 5]"], "5 « remonte » jusqu'à la fin : 2,5,4,1 → 2,4,5,1 → 2,4,1,5.", 4),
     ("Quel est le tableau [4, 3, 1, 2] après la première étape du tri par sélection (ordre croissant) ?", "[1, 3, 4, 2]", ["[1, 4, 3, 2]", "[3, 4, 1, 2]", "[1, 2, 3, 4]", "[2, 3, 1, 4]"], "On échange le minimum (1) avec le premier élément.", 4),
@@ -913,19 +733,6 @@ table(L3, "inf3-gl", [
     ("la refactorisation", "améliore la structure interne du code sans changer son comportement visible", 4),
     ("un prototype", "est une version simplifiée construite pour valider une idée ou un besoin", 3),
     ("le cahier des charges", "décrit les exigences attendues du produit à réaliser", 2),
-], cat="Génie logiciel", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
-
-table(L3, "inf3-uml", [
-    ("un diagramme de classes", "montre les classes, leurs attributs, leurs méthodes et leurs relations", 3),
-    ("un diagramme de cas d'utilisation", "montre les acteurs et les fonctionnalités que le système leur offre", 3),
-    ("un diagramme de séquence", "montre les messages échangés dans le temps entre des objets", 4),
-    ("un diagramme d'activité", "décrit l'enchaînement d'actions, avec décisions et parallélisme", 4),
-    ("un diagramme d'états-transitions", "décrit les états d'un objet et les événements qui le font changer d'état", 5),
-    ("une relation de généralisation (héritage) UML", "relie une classe plus spécifique à une classe plus générale", 4),
-    ("une composition UML", "est une association forte où les parties ne survivent pas au tout", 5),
-    ("une agrégation UML", "est une association « tout et parties » où les parties peuvent exister seules", 5),
-    ("un acteur UML", "est une entité extérieure qui interagit avec le système", 4),
-    ("la cardinalité (multiplicité)", "précise combien d'instances peuvent être reliées par une association", 4),
 ], cat="Génie logiciel", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
 
 table(L3, "inf3-test", [
@@ -1007,21 +814,6 @@ table(L3, "inf3-secu", [
     ("le principe du moindre privilège", "n'accorde que les droits nécessaires à la tâche", 4),
 ], cat="Sécurité", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
 
-table(L3, "inf3-att", [
-    ("une attaque par force brute", "essaie systématiquement toutes les combinaisons possibles d'un secret", 2),
-    ("une attaque par dictionnaire", "teste des mots de passe courants issus d'une liste", 3),
-    ("une injection SQL", "glisse du code SQL dans une saisie qui est ensuite interprétée comme requête", 4),
-    ("une attaque XSS", "fait exécuter un script malveillant par le navigateur d'autres visiteurs d'un site", 5),
-    ("une attaque CSRF", "pousse le navigateur d'un utilisateur connecté à envoyer à son insu une requête à un site", 5),
-    ("une attaque de l'homme du milieu", "s'interpose dans un échange pour l'espionner ou le modifier", 4),
-    ("un déni de service distribué (DDoS)", "submerge un service de requêtes provenant de nombreuses machines", 3),
-    ("l'hameçonnage ciblé (spear phishing)", "vise une personne précise avec un message personnalisé pour tromper", 4),
-    ("une faille « zero-day »", "est une vulnérabilité exploitée avant qu'un correctif soit disponible", 5),
-    ("une porte dérobée (backdoor)", "est un accès caché qui contourne l'authentification normale", 4),
-    ("une table arc-en-ciel (rainbow table)", "est une table précalculée d'empreintes pour retrouver des mots de passe hachés", 5),
-    ("la défense en profondeur", "empile plusieurs couches de protection pour qu'une seule faille ne suffise pas", 4),
-], cat="Sécurité", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
-
 mcq(L3, "inf3-secu-m", [
     ("Dix personnes veulent chacune pouvoir communiquer en privé avec chacune des neuf autres par chiffrement symétrique, une clé distincte par paire. Combien de clés faut-il ?", "45", ["10", "90", "20", "100"], "10 × 9 / 2 = 45 paires.", 5),
     ("Avec le chiffrement asymétrique, combien de paires de clés faut-il pour que 10 personnes puissent échanger en privé deux à deux ?", "10", ["45", "20", "90", "1"], "Chacune possède sa propre paire (publique, privée).", 5),
@@ -1045,3 +837,95 @@ mcq(L3, "inf3-secu-m", [
     ("Combien de codes un attaquant doit-il essayer au plus pour deviner un code de 4 chiffres décimaux ?", "10 000", ["40", "1 000", "9 999", "100 000"], "10^4 combinaisons de 0000 à 9999.", 3),
     ("Un mot de passe de 8 caractères choisis parmi 26 lettres minuscules offre combien de combinaisons ?", "26 puissance 8", ["26 × 8", "8 puissance 26", "26 + 8", "8 × 8"], "Chaque position offre 26 possibilités.", 4),
 ], cat="Sécurité", src=S)
+
+table(L3, "inf3-ia", [
+    ("l'apprentissage supervisé", "apprend à partir d'exemples dont la bonne réponse (étiquette) est fournie", 3),
+    ("l'apprentissage non supervisé", "cherche des structures dans des données sans étiquettes, comme des groupes", 3),
+    ("l'apprentissage par renforcement", "apprend par essais en maximisant une récompense cumulée", 4),
+    ("la classification", "prédit une catégorie parmi un ensemble fini de classes", 3),
+    ("la régression", "prédit une valeur numérique continue", 3),
+    ("le surapprentissage (overfitting)", "colle trop aux données d'entraînement et généralise mal à de nouvelles données", 4),
+    ("l'ensemble de test", "sert à évaluer le modèle final sur des données qu'il n'a pas vues à l'entraînement", 4),
+    ("un hyperparamètre", "est un réglage fixé avant l'entraînement, comme le nombre de couches", 5),
+    ("un réseau de neurones", "combine des unités simples reliées par des poids ajustés à l'entraînement", 3),
+    ("la descente de gradient", "ajuste les paramètres pas à pas dans le sens qui réduit la fonction de perte", 5),
+    ("l'apprentissage profond (deep learning)", "utilise des réseaux de neurones à plusieurs couches successives", 3),
+    ("le partitionnement (clustering)", "regroupe des données semblables sans étiquettes préalables", 4),
+    ("la validation croisée", "évalue un modèle en alternant les parties des données servant à l'entraîner et à le tester", 5),
+    ("le test de Turing", "juge si une machine peut se faire passer pour un humain dans une conversation", 3),
+    ("un biais algorithmique", "est une tendance systématique d'un modèle à favoriser ou défavoriser certains cas ou groupes", 4),
+    ("une hallucination d'un modèle de langage", "est une réponse plausible mais fausse ou inventée", 3),
+], cat="Intelligence artificielle", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
+
+mcq(L3, "inf3-ia-m", [
+    ("Un modèle atteint 99 % d'exactitude à l'entraînement mais 60 % sur de nouvelles données. De quoi souffre-t-il probablement ?", "De surapprentissage", ["De sous-apprentissage", "D'un manque de mémoire vive", "D'une panne du processeur", "D'une erreur de syntaxe"], "Il a mémorisé l'entraînement au lieu de généraliser.", 4),
+    ("Un modèle obtient de mauvais résultats à la fois sur les données d'entraînement et sur de nouvelles données. De quoi souffre-t-il probablement ?", "De sous-apprentissage", ["De surapprentissage", "De biais d'échantillonnage uniquement", "D'une trop grande précision", "D'une corruption du disque"], "Le modèle est trop simple pour capturer la structure des données.", 4),
+    ("Quel type de problème est la prédiction du prix d'un logement à partir de sa surface ?", "Régression", ["Classification binaire", "Partitionnement", "Renforcement pur"], "La sortie est une valeur numérique continue.", 3),
+    ("Quel type de problème est la décision « spam ou non » pour un courriel ?", "Classification", ["Régression", "Partitionnement sans étiquettes", "Compression"], "La sortie est une catégorie parmi deux.", 3),
+    ("De quelle famille d'apprentissage relève le regroupement de clients en segments inconnus à l'avance ?", "L'apprentissage non supervisé", ["L'apprentissage supervisé", "Le test de Turing", "Le chiffrement symétrique"], "Il n'y a pas d'étiquettes fournies.", 4),
+    ("Sur 10 messages détectés comme spam par un filtre, 8 en sont vraiment ; quelle est la précision du filtre ?", "0,8", ["0,2", "0,5", "8"], "Précision = vrais positifs / tous les positifs prédits = 8/10.", 4),
+    ("Un filtre détecte 8 spams sur les 12 qui existent. Quel est son rappel ?", "2/3", ["8/10", "1/2", "12/8"], "Rappel = vrais positifs / tous les positifs réels = 8/12.", 5),
+    ("Sur 100 exemples, un modèle en classe correctement 90. Quelle est son exactitude (accuracy) ?", "90 %", ["10 %", "100 %", "45 %"], "Exactitude = bonnes prédictions / total.", 3),
+    ("Pourquoi une exactitude de 99 % peut-elle être trompeuse si 99 % des exemples appartiennent à la même classe ?", "Parce qu'un modèle qui prédit toujours cette classe aurait déjà 99 %", ["Parce que 99 % est impossible", "Parce que l'exactitude ne se calcule jamais", "Parce que la classe rare est toujours détectée", "Parce que le modèle est toujours juste"], "Il faut regarder aussi précision et rappel.", 5),
+    ("Dans un classifieur des k plus proches voisins avec k = 3, les trois voisins d'un point sont de classes A, B et A. Quelle classe est prédite ?", "A", ["B", "Aucune", "C"], "Vote majoritaire : deux voisins sur trois.", 3),
+    ("Pourquoi sépare-t-on les données en ensembles d'entraînement et de test ?", "Pour mesurer la capacité du modèle à généraliser à des données inédites", ["Pour accélérer l'entraînement uniquement", "Pour dupliquer les données", "Pour chiffrer les données", "Pour supprimer les valeurs rares"], "Tester sur les données d'entraînement masquerait le surapprentissage.", 4),
+    ("Un modèle de langage est entraîné à produire du texte probable. Pourquoi peut-il affirmer une chose fausse avec assurance ?", "Parce qu'il génère des suites plausibles sans vérifier la vérité des faits", ["Parce qu'il consulte toujours Internet en direct", "Parce qu'il a un esprit de contradiction", "Parce qu'il ne calcule jamais de probabilité", "Parce que la vérité n'existe pas"], "La plausibilité n'implique pas l'exactitude.", 4),
+    ("Un système de recrutement entraîné sur des embauches passées défavorise un groupe. D'où peut venir le problème ?", "Des biais présents dans les données d'entraînement", ["D'une panne réseau", "D'un écran trop petit", "D'un excès de mémoire vive", "D'un virus informatique"], "Un modèle reproduit ce que contiennent ses données.", 4),
+], cat="Intelligence artificielle", src=S)
+
+table(L3, "inf3-web", [
+    ("HTML", "décrit la structure et le contenu d'une page web", 1),
+    ("CSS", "décrit la présentation d'une page : couleurs, polices, mise en page", 1),
+    ("JavaScript", "ajoute du comportement dynamique aux pages et s'exécute en général dans le navigateur", 2),
+    ("le DOM", "est la représentation en arbre d'une page, manipulable par des scripts", 4),
+    ("une balise HTML", "délimite un élément de la page, par exemple un paragraphe ou un lien", 2),
+    ("un sélecteur CSS", "désigne les éléments auxquels s'applique une règle de style", 3),
+    ("une media query", "adapte le style selon les caractéristiques de l'écran, pour un site responsive", 4),
+    ("le développement front-end", "concerne la partie de l'application qui s'exécute et s'affiche chez l'utilisateur", 2),
+    ("le développement back-end", "concerne la partie qui s'exécute sur le serveur : logique, données, sécurité", 2),
+    ("un cookie", "est une petite donnée stockée par le navigateur et renvoyée au site à chaque requête", 3),
+    ("le caractère « sans état » de HTTP", "signifie que chaque requête est traitée indépendamment des précédentes", 4),
+    ("un réseau de diffusion de contenu (CDN)", "répartit des copies de ressources sur des serveurs proches des utilisateurs", 4),
+    ("AJAX", "permet à une page d'échanger des données avec le serveur sans se recharger entièrement", 4),
+    ("la politique d'origine identique (same-origin)", "limite les accès entre pages d'origines différentes dans le navigateur", 5),
+], cat="Développement web", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
+
+mcq(L3, "inf3-web-m", [
+    ("Dans une API REST, quelle requête convient pour obtenir la liste des clients sans rien modifier ?", "GET /clients", ["POST /clients", "DELETE /clients", "PUT /clients/obtenir"], "GET sert à lire.", 3),
+    ("Dans une API REST, quelle requête convient pour supprimer le client numéro 7 ?", "DELETE /clients/7", ["GET /clients/7", "POST /clients/7/lire", "PUT /clients"], "DELETE supprime la ressource identifiée.", 3),
+    ("Dans une API REST, quelle requête convient pour créer un nouveau client ?", "POST /clients avec les données du client", ["GET /clients/nouveau", "DELETE /clients", "HEAD /clients"], "POST ajoute une ressource à la collection.", 3),
+    ("Parmi ces méthodes HTTP, lesquelles sont idempotentes par définition de la norme ?", "GET, PUT et DELETE", ["POST seulement", "POST et PATCH toujours", "Aucune", "Seulement HEAD"], "Répéter ces requêtes laisse le serveur dans le même état.", 5),
+    ("Comment écrit-on correctement en JSON un objet de clé « nom » et de valeur « Awa » ?", "{\"nom\": \"Awa\"}", ["<fiche><nom>Awa</nom></fiche>", "nom devient la valeur Awa", "[nom; Awa; fin]"], "JSON utilise des accolades, des guillemets et deux-points.", 3),
+    ("Quel langage décrit la structure d'une page, quel langage sa présentation ?", "HTML pour la structure, CSS pour la présentation", ["CSS pour la structure, HTML pour la présentation", "HTML pour la base de données, CSS pour le serveur", "JavaScript pour la structure, HTML pour le serveur", "CSS pour la logique serveur, JavaScript pour les polices"], "Les deux jouent des rôles séparés.", 2),
+    ("Dans le modèle de boîte CSS, quelle zone sépare le contenu de la bordure ?", "Le remplissage (padding)", ["La marge (margin)", "La bordure elle-même", "Le fond de page"], "La marge est à l'extérieur de la bordure.", 4),
+    ("Dans l'URL https://exemple.org/produits?id=3#avis, quelle partie est le chemin ?", "/produits", ["id=3", "avis", "https"], "Le chemin suit le nom d'hôte, avant « ? ».", 4),
+    ("Dans la même URL, que représente « id=3 » ?", "Un paramètre de requête (query string)", ["Le schéma", "Le fragment", "Le nom de domaine"], "Il suit le point d'interrogation.", 4),
+    ("Pourquoi ne doit-on pas faire confiance aux seules validations faites côté navigateur ?", "Parce qu'un utilisateur peut les contourner ; le serveur doit revalider", ["Parce que le navigateur ne sait pas lire HTML", "Parce que JavaScript est interdit", "Parce que le serveur ne reçoit rien", "Parce que le navigateur chiffre tout"], "Le client n'est pas sous le contrôle du développeur.", 4),
+    ("Que fait un navigateur lorsqu'il reçoit la réponse HTTP 301 ?", "Il suit la redirection permanente vers la nouvelle adresse", ["Il affiche une erreur serveur", "Il supprime le site", "Il ignore la réponse", "Il redemande le même URL indéfiniment"], "301 indique un déplacement définitif.", 4),
+], cat="Développement web", src=S)
+
+table(L3, "inf3-compil", [
+    ("l'analyse lexicale", "découpe le texte du programme en unités appelées lexèmes ou jetons", 3),
+    ("l'analyse syntaxique", "vérifie que les jetons respectent la grammaire du langage et construit un arbre", 4),
+    ("l'analyse sémantique", "vérifie le sens du programme, par exemple les types et les déclarations", 4),
+    ("un arbre syntaxique abstrait (AST)", "représente la structure d'un programme sous forme d'arbre sans les détails de surface", 5),
+    ("la table des symboles", "mémorise les noms déclarés et leurs propriétés pendant la compilation", 5),
+    ("la génération de code", "produit le code cible, comme du code machine ou du code intermédiaire", 4),
+    ("l'optimisation", "transforme le code pour qu'il soit plus rapide ou plus petit sans changer son résultat", 4),
+    ("l'éditeur de liens (linker)", "assemble des fichiers objets et des bibliothèques en un exécutable", 5),
+    ("le bytecode", "est un code intermédiaire exécuté par une machine virtuelle", 4),
+    ("la compilation à la volée (JIT)", "traduit en code machine pendant l'exécution les parties souvent utilisées", 5),
+    ("une expression régulière", "décrit un ensemble de chaînes de caractères par un motif", 4),
+    ("une grammaire hors contexte", "décrit par des règles de production la syntaxe de nombreux langages de programmation", 5),
+], cat="Compilation", src=S, fwd=FW, rev=RV, expl="{A} {b}.")
+
+mcq(L3, "inf3-compil-m", [
+    ("Combien de jetons (lexèmes) l'analyse lexicale produit-elle pour « a = b + 1 » ?", "5", ["3", "4", "6", "1"], "a, =, b, +, 1.", 4),
+    ("Dans quel ordre s'enchaînent les grandes phases d'un compilateur classique ?", "Analyse lexicale, syntaxique, sémantique, génération de code", ["Syntaxique, lexicale, génération, sémantique", "Génération, lexicale, syntaxique, sémantique", "Sémantique, lexicale, génération, syntaxique", "Optimisation, lexicale, syntaxique, exécution"], "On part du texte pour aboutir au code cible.", 4),
+    ("Une instruction « x = 3 + » est refusée. De quel type d'erreur s'agit-il ?", "Une erreur de syntaxe", ["Une erreur lexicale seulement", "Une erreur d'exécution", "Une erreur de matériel"], "L'expression est incomplète par rapport à la grammaire.", 4),
+    ("Dans un langage à typage statique, l'addition d'un nombre et d'une chaîne non convertible est refusée à la compilation. Quelle phase la détecte ?", "L'analyse sémantique", ["L'analyse lexicale", "L'édition de liens", "Le chargement"], "C'est une erreur de types.", 5),
+    ("Quelle phase signale l'utilisation d'une variable jamais déclarée ?", "L'analyse sémantique", ["L'analyse lexicale", "Le pare-feu", "Le système de fichiers"], "La table des symboles ne contient pas ce nom.", 5),
+    ("Quelle est la différence entre un compilateur et un programme qui exécute du bytecode ?", "Le compilateur produit un code cible ; la machine virtuelle exécute un code intermédiaire", ["Aucune", "Le bytecode est du texte lisible par les humains", "La machine virtuelle ne peut rien exécuter", "Le compilateur n'existe que pour le Web"], "Les deux approches peuvent se combiner.", 5),
+    ("Quel outil transforme du code assembleur en code machine ?", "Un assembleur", ["Un éditeur de liens", "Un interpréteur de commandes", "Un navigateur"], "L'assembleur traduit mnémoniques en binaire.", 4),
+    ("Que sont, dans un code source, des mots comme « si », « tant que » ou « retour » (selon le langage) ?", "Des mots-clés réservés du langage", ["Des noms de variables libres", "Des commentaires", "Des adresses mémoire"], "Ils ont une signification fixée par le langage.", 3),
+], cat="Compilation", src=S)
