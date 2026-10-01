@@ -78,13 +78,12 @@ table(L2, "eco2-mic-marche", [
     ("le monopsone", "un seul acheteur face à de nombreux vendeurs", 3),
     ("l'oligopsone", "quelques acheteurs seulement face à de nombreux vendeurs", 4),
     ("le monopole bilatéral", "un vendeur unique face à un acheteur unique", 4),
-    ("le duopole", "un marché où deux firmes seulement se font face", 2),
     ("le cartel", "un accord entre firmes pour restreindre la production et soutenir les prix", 2),
     ("le monopole naturel", "un marché où une firme unique produit au moindre coût grâce à des coûts moyens décroissants", 4),
 ], cat="Microéconomie : structures de marché", src="sup-eco-micro",
     fwd="Quelle est la caractéristique de {a} ?", rev="Quelle structure de marché est décrite par : {b} ?")
 
-table(L2, "eco2-mic-ext", [
+table(L3, "eco3-mic-ext", [
     ("une externalité positive", "un effet bénéfique de l'activité d'un agent sur des tiers, sans compensation", 2),
     ("une externalité négative", "un coût imposé à des tiers par l'activité d'un agent, sans compensation", 2),
     ("l'internalisation d'une externalité", "sa prise en compte dans les calculs de l'agent qui la cause", 3),
@@ -101,7 +100,7 @@ table(L2, "eco2-mic-ext", [
 ], cat="Microéconomie : externalités, biens publics, information", src="sup-eco-micro",
     fwd="Comment définit-on {a} ?", rev="De quelle notion s'agit-il : {b} ?")
 
-table(L2, "eco2-mic-jeux", [
+table(L3, "eco3-mic-jeux", [
     ("un équilibre de Nash", "une situation où aucun joueur n'a intérêt à changer seul de stratégie", 3),
     ("une stratégie dominante", "une stratégie meilleure pour un joueur quelle que soit celle des autres", 3),
     ("une stratégie dominée", "une stratégie moins bonne qu'une autre quel que soit le choix des autres", 3),
@@ -134,7 +133,7 @@ table(L2, "eco2-pensee-aut", [
 ], cat="Histoire de la pensée économique", src="sup-eco-pensee",
     fwd="Quel apport est associé à {a} ?", rev="Quel économiste est associé à cet apport : {b} ?")
 
-table(L2, "eco2-pensee-mod", [
+table(L3, "eco3-pensee-mod", [
     ("Franco Modigliani", "l'hypothèse du cycle de vie de l'épargne et de la consommation", 4),
     ("Robert Solow", "un modèle de croissance où le progrès technique est exogène", 3),
     ("Robert Lucas", "la critique selon laquelle les comportements changent avec la politique menée", 5),
@@ -167,8 +166,6 @@ split(L2, L3, "eco2-mic-q1", [
     ("Que caractérise le court terme dans la théorie du producteur ?", "Au moins un facteur de production est fixe", ["Aucun facteur n'est fixe, tous peuvent être ajustés", "Le prix des biens est fixe", "La production est nécessairement nulle"], "Le long terme est la période où tous les facteurs sont ajustables.", 2),
     ("Que stipule la loi des rendements marginaux décroissants ?", "Au-delà d'un seuil, chaque unité de facteur variable ajoute moins à la production que la précédente", ["La production diminue dès la première unité de travail", "Le coût fixe baisse avec la production", "La productivité moyenne est toujours décroissante"], "Cela s'observe quand on ajoute un facteur à des facteurs fixes.", 3),
     ("Que signifient des rendements d'échelle croissants ?", "Multiplier tous les facteurs par λ multiplie la production par plus de λ", ["Multiplier un seul facteur multiplie la production par plus de λ", "La production diminue quand on ajoute du travail", "Le coût marginal est constant"], "Il s'agit d'une propriété de long terme, tous facteurs variant dans la même proportion.", 3),
-    ("Une fonction de production Y = K^0,3 · L^0,7 présente quels rendements d'échelle ?", "Constants", ["Croissants", "Décroissants", "Nuls"], "La somme des exposants vaut 1 : doubler K et L double Y.", 4),
-    ("Une fonction de production Y = K^0,6 · L^0,6 présente quels rendements d'échelle ?", "Croissants", ["Constants", "Décroissants", "Nuls"], "La somme des exposants (1,2) dépasse 1.", 4),
     ("Quelle est la condition de maximisation du profit d'une firme preneuse de prix ?", "Le prix est égal au coût marginal (avec un coût marginal croissant)", ["Le prix est égal au coût fixe moyen", "La recette totale est égale au coût total", "Le coût moyen est minimal quel que soit le prix"], "Produire jusqu'à ce que la recette marginale (le prix) égale le coût marginal.", 3),
     ("Quelle est la condition de maximisation du profit d'un monopole ?", "La recette marginale est égale au coût marginal", ["Le prix est égal au coût marginal", "Le prix est égal au coût moyen minimal", "La recette moyenne est égale à zéro"], "Au monopole, le prix excède la recette marginale.", 3),
     ("Pour un monopole face à une demande décroissante, que peut-on dire de la recette marginale par rapport au prix ?", "Elle lui est inférieure", ["Elle lui est égale", "Elle lui est supérieure", "Elle est toujours constante"], "Pour vendre une unité de plus, il doit baisser le prix sur toutes les unités.", 4),
@@ -258,9 +255,8 @@ table(L2, "eco2-mac-chom", [
 
 table(L2, "eco2-mac-infl", [
     ("l'inflation par la demande", "une hausse des prix due à une demande globale supérieure à l'offre disponible", 3),
-    ("l'inflation par les coûts", "une hausse des prix due à l'augmentation des coûts de production", 3),
+    ("l'inflation par les coûts", "une hausse des prix due à l'augmentation des coûts de production intérieurs (salaires, marges)", 3),
     ("l'inflation importée", "une hausse des prix due au renchérissement des produits achetés à l'étranger", 3),
-    ("la spirale prix-salaires", "l'entraînement mutuel des hausses de salaires et des hausses de prix", 3),
     ("l'hyperinflation", "une inflation extrêmement rapide qui détruit la valeur de la monnaie", 3),
     ("la désinflation", "un ralentissement du rythme de hausse des prix sans baisse du niveau des prix", 4),
     ("la stagflation", "la coexistence d'une faible croissance, d'un chômage élevé et d'une inflation forte", 3),
@@ -269,11 +265,9 @@ table(L2, "eco2-mac-infl", [
 ], cat="Macroéconomie : inflation", src="sup-eco-macro",
     fwd="Comment définit-on {a} ?", rev="Quel concept d'inflation correspond à : {b} ?")
 
-table(L2, "eco2-mac-pol", [
+table(L3, "eco3-mac-pol", [
     ("la politique budgétaire", "l'action sur l'économie par les dépenses publiques, les impôts et le solde du budget", 2),
     ("la politique monétaire", "l'action sur l'économie par les taux d'intérêt et la quantité de monnaie", 2),
-    ("la politique de relance", "l'action visant à stimuler la demande globale par plus de dépenses ou moins d'impôts", 2),
-    ("la politique de rigueur", "l'action visant à réduire le déficit par moins de dépenses ou plus d'impôts", 2),
     ("la politique de change", "l'action sur la valeur de la monnaie nationale par rapport aux devises", 3),
     ("la politique structurelle", "l'action sur les institutions et les structures de l'économie à long terme", 4),
     ("les stabilisateurs automatiques", "les mécanismes budgétaires qui amortissent les fluctuations sans nouvelle décision", 4),
@@ -290,7 +284,6 @@ table(L2, "eco2-mac-pol", [
 table(L2, "eco2-mon-concepts", [
     ("la monnaie fiduciaire", "les pièces et billets, dont la valeur repose sur la confiance", 2),
     ("la monnaie scripturale", "les soldes de comptes bancaires mobilisables par chèque, virement ou carte", 2),
-    ("la monnaie divisionnaire", "les pièces de faible valeur servant aux petits paiements", 3),
     ("la monnaie marchandise", "un bien utilisé comme monnaie parce qu'il a une valeur propre", 3),
     ("la base monétaire", "les billets en circulation et les réserves des banques auprès de la banque centrale", 4),
     ("la liquidité d'un actif", "la facilité avec laquelle il se convertit en moyen de paiement sans perte", 2),
@@ -305,15 +298,13 @@ table(L2, "eco2-mon-concepts", [
 ], cat="Monnaie et banque", src="sup-eco-monnaie",
     fwd="Comment définit-on {a} ?", rev="Quel concept monétaire correspond à : {b} ?")
 
-table(L2, "eco2-mon-risques", [
+table(L3, "eco3-mon-risques", [
     ("le risque de crédit", "la possibilité qu'un emprunteur ne rembourse pas tout ou partie de sa dette", 2),
     ("le risque de liquidité", "la possibilité de ne pouvoir faire face aux retraits ou échéances à court terme", 3),
     ("le risque de taux", "la possibilité de perte liée à la variation des taux d'intérêt", 3),
     ("le risque de change", "la possibilité de perte liée à la variation du cours d'une monnaie", 3),
-    ("le risque de marché", "la possibilité de perte liée à la variation du prix des actifs financiers détenus", 3),
     ("le risque opérationnel", "la possibilité de perte due à des défaillances de procédures, de personnes ou de systèmes", 4),
     ("le risque systémique", "la possibilité que la défaillance d'un acteur se propage à tout le système financier", 4),
-    ("la ruée bancaire", "le retrait massif et simultané de dépôts par des épargnants qui craignent pour leur banque", 3),
     ("la solvabilité d'une banque", "son aptitude à honorer ses dettes à long terme grâce à ses fonds propres", 4),
 ], cat="Monnaie et banque : risques", src="sup-eco-monnaie",
     fwd="Comment définit-on {a} ?", rev="Quel risque ou notion bancaire est décrit ici : {b} ?")
@@ -329,7 +320,7 @@ table(L2, "eco2-com-instr", [
     ("les termes de l'échange", "le rapport entre l'indice des prix des exportations et celui des importations", 4),
     ("le taux de couverture", "le rapport des exportations aux importations", 3),
     ("le protectionnisme éducateur", "la protection temporaire d'industries naissantes pour qu'elles deviennent compétitives", 4),
-    ("une barrière non tarifaire", "une mesure autre qu'un droit de douane qui gêne les importations, comme une norme", 3),
+    ("une barrière non tarifaire", "une mesure autre qu'un droit ou un quota qui gêne les importations, comme une norme technique", 3),
 ], cat="Commerce international", src="sup-eco-commerce",
     fwd="Comment définit-on {a} en commerce international ?", rev="Quel concept de commerce international est décrit ici : {b} ?")
 
@@ -342,7 +333,7 @@ table(L2, "eco2-com-integ", [
 ], cat="Commerce international : intégration régionale", src="sup-eco-commerce",
     fwd="Comment définit-on {a} ?", rev="De quel niveau d'intégration s'agit-il : {b} ?")
 
-table(L2, "eco2-com-change", [
+table(L3, "eco3-com-change", [
     ("le taux de change nominal", "le prix d'une monnaie exprimé en unités d'une autre", 2),
     ("le taux de change réel", "le taux nominal corrigé des écarts de prix entre pays", 4),
     ("un régime de change fixe", "un régime où la banque centrale maintient la parité de la monnaie avec une autre ou un panier", 3),
@@ -356,7 +347,7 @@ table(L2, "eco2-com-change", [
 ], cat="Commerce international : change", src="sup-eco-commerce",
     fwd="Comment définit-on {a} ?", rev="Quel concept de change est décrit ici : {b} ?")
 
-table(L2, "eco2-com-bp", [
+table(L3, "eco3-com-bp", [
     ("la balance courante", "le solde des échanges de biens, de services, de revenus et de transferts courants", 3),
     ("le compte financier", "les mouvements d'investissements directs, de portefeuille et d'autres placements", 4),
     ("les réserves de change", "les actifs en devises détenus par la banque centrale", 3),
@@ -409,7 +400,7 @@ split(L2, L3, "eco2-mac-q1", [
     ("Dans le modèle keynésien simple sans impôts ni importations, si la propension marginale à consommer vaut c, que vaut le multiplicateur ?", "1/(1 − c)", ["1/c", "c/(1 − c)", "(1 − c)/c"], "Chaque euro de dépense initial est dépensé en proportion c à chaque tour.", 3),
     ("Que montre le théorème d'Haavelmo du budget équilibré ?", "Dans le modèle simple, une hausse égale des dépenses et des impôts accroît le revenu du même montant", ["Un budget équilibré ne peut jamais exister", "Les dépenses publiques réduisent toujours le revenu", "Les impôts augmentent toujours le revenu davantage que les dépenses"], "Le multiplicateur du budget équilibré vaut 1.", 5),
     ("Quelle est l'idée de l'équivalence ricardienne (Barro) ?", "Un déficit n'accroît pas la demande : les ménages épargnent en prévision des impôts futurs", ["Les prix ne dépendent que des coûts", "Un déficit relance toujours l'activité", "La dette extérieure est toujours soutenable"], "Le mode de financement (impôt ou dette) devient indifférent.", 5),
-    ("Que peut-on dire de la soutenabilité de la dette si le taux de croissance dépasse le taux d'intérêt, avec un solde primaire nul ?", "Le ratio dette/PIB tend à baisser", ["Le ratio dette/PIB augmente nécessairement", "La dette devient nulle", "L'inflation est forcément nulle"], "Le dénominateur croît plus vite que les intérêts.", 5),
+    ("Que peut-on dire de la soutenabilité de la dette si la croissance du PIB nominal dépasse le taux d'intérêt, avec un solde primaire nul ?", "Le ratio dette/PIB tend à baisser", ["Le ratio dette/PIB augmente nécessairement", "La dette devient nulle", "L'inflation est forcément nulle"], "Le dénominateur croît plus vite que les intérêts.", 5),
     ("Comment s'écrit en principe la dynamique de la dette en pourcentage du PIB ?", "Elle dépend de l'écart entre le taux d'intérêt et la croissance, et du solde primaire", ["Elle dépend seulement du taux de change", "Elle dépend uniquement du taux de chômage", "Elle dépend de l'âge moyen des contribuables"], "Un écart intérêt-croissance positif alourdit le ratio, un excédent primaire l'allège.", 5),
 ], cat="Macroéconomie", src="sup-eco-macro")
 
@@ -428,7 +419,7 @@ split(L2, L3, "eco2-mon-q1", [
     ("Quel effet a une hausse des réserves obligatoires ?", "Elle réduit la capacité de crédit des banques", ["Elle augmente la capacité de crédit des banques", "Elle augmente directement les prix", "Elle supprime le risque de crédit"], "Les banques ont moins de ressources à prêter.", 3),
     ("Quelle est la différence essentielle entre marché monétaire et marché financier ?", "Le marché monétaire traite les capitaux à court terme, le marché financier les capitaux à long terme", ["Le marché monétaire est réservé aux particuliers", "Le marché financier ne traite que des devises", "Il n'y a aucune différence"], "Actions et obligations relèvent du marché financier.", 3),
     ("Qu'est-ce que le marché interbancaire ?", "Le marché où les banques se prêtent des liquidités à court terme", ["Le marché où les banques vendent des actions à leurs clients", "Le marché où l'État fixe le prix de l'or", "Le marché des changes manuels"], "Il fait partie du marché monétaire.", 3),
-    ("Que représente une action ?", "Une part de capital d'une société donnant droit aux dividendes et à des droits de vote", ["Une créance remboursable à échéance avec intérêts fixes", "Un dépôt à vue", "Un billet à ordre"], "L'actionnaire est propriétaire d'une fraction de la société.", 2),
+    ("Que représente une action ?", "Une part de capital d'une société, donnant en principe droit à des dividendes et à un vote", ["Une créance remboursable à échéance avec intérêts fixes", "Un dépôt à vue", "Un billet à ordre"], "L'actionnaire est propriétaire d'une fraction de la société.", 2),
     ("Que représente une obligation ?", "Une part d'emprunt, créance sur l'émetteur rémunérée par des intérêts", ["Une part de capital d'une société", "Un droit de vote en assemblée", "Un titre de propriété immobilière"], "Le porteur est prêteur, non propriétaire.", 2),
     ("Que se passe-t-il sur le marché primaire ?", "Les titres nouvellement émis sont vendus pour la première fois", ["Les titres déjà émis sont échangés entre investisseurs", "Les devises sont échangées", "Les dettes sont annulées"], "Le marché secondaire est celui de la revente.", 3),
     ("Qu'est-ce que l'intermédiation financière ?", "Le rôle des banques qui collectent l'épargne et la transforment en crédits", ["La fixation des prix agricoles", "La gestion du budget de l'État", "La collecte de l'impôt"], "Elle met en relation agents à capacité et à besoin de financement.", 3),
@@ -503,10 +494,10 @@ split3("eco2-cemac-q1", [
     ("Quelle institution émet le franc CFA utilisé au Cameroun ?", "La Banque des États de l'Afrique centrale (BEAC)", ["La Banque centrale des États de l'Afrique de l'Ouest (BCEAO)", "La Banque de France", "La Banque mondiale"], "La BEAC est la banque centrale de la CEMAC.", 2),
     ("Dans quelle ville se trouve le siège de la BEAC ?", "Yaoundé", ["Douala", "Libreville", "Brazzaville"], "Le siège de la BEAC est à Yaoundé.", 2),
     ("Quelle institution émet le franc CFA en Afrique de l'Ouest ?", "La BCEAO", ["La BEAC", "La BAD", "La BDEAC"], "La BCEAO est la banque centrale de l'UEMOA.", 2),
-    ("Combien d'États compte la CEMAC ?", "Six", ["Quatre", "Huit", "Onze"], "Cameroun, Congo, Gabon, Guinée équatoriale, République centrafricaine et Tchad.", 2),
+    ("Combien d'États compte la CEMAC ?", "Six", ["Quatre", "Huit", "Onze"], "Cameroun, République du Congo, Gabon, Guinée équatoriale, République centrafricaine et Tchad.", 2),
     ("Lequel de ces pays est membre de la CEMAC ?", "Le Gabon", ["Le Sénégal", "Le Ghana", "La Côte d'Ivoire"], "Le Sénégal et la Côte d'Ivoire sont dans l'UEMOA, le Ghana a sa propre monnaie.", 2),
     ("Lequel de ces pays n'est pas membre de la CEMAC ?", "Le Nigeria", ["Le Tchad", "La Guinée équatoriale", "La République centrafricaine"], "Le Nigeria a sa propre monnaie, le naira.", 3),
-    ("Lequel de ces pays n'est pas membre de la CEMAC ?", "Le Mali", ["Le Congo", "Le Gabon", "Le Cameroun"], "Le Mali appartient à l'UEMOA.", 3),
+    ("Lequel de ces pays n'est pas membre de la CEMAC ?", "Le Mali", ["La République du Congo", "Le Gabon", "Le Cameroun"], "Le Mali appartient à l'UEMOA.", 3),
     ("Quel est le rôle de la COBAC ?", "Contrôler et superviser les établissements de crédit de la zone CEMAC", ["Émettre les billets de la zone", "Fixer le taux de change du franc CFA", "Arbitrer les litiges commerciaux"], "C'est l'autorité de supervision bancaire de la zone.", 3),
     ("Quelle est la mission principale de la BEAC ?", "Garantir la stabilité de la monnaie et mener la politique monétaire commune", ["Collecter les impôts des États membres", "Gérer les écoles de la région", "Fixer les prix des produits agricoles"], "Elle émet le franc CFA et conduit la politique monétaire commune.", 2),
     ("Comment la parité du franc CFA est-elle caractérisée ?", "Elle est fixe par rapport à l'euro", ["Elle flotte librement chaque jour", "Elle est fixée par un vote de l'OMC", "Elle est déterminée par le prix de l'or uniquement"], "Le franc CFA est arrimé à l'euro, avec une parité fixe.", 3),
@@ -735,3 +726,404 @@ split3("eco2-dev-q1", [
     ("Dans quel secteur classe-t-on la construction de routes et de bâtiments ?", "Le secteur secondaire", ["Le secteur primaire", "Le secteur tertiaire", "Le secteur extractif"], "Le BTP est classé avec l'industrie.", 2),
     ("Dans quel secteur classe-t-on le transport de marchandises ?", "Le secteur tertiaire", ["Le secteur primaire", "Le secteur secondaire", "Le secteur extractif"], "C'est un service.", 1),
 ], cat="Développement économique", src="sup-eco-dev")
+
+# =====================================================================================================================
+# L1 : NOTIONS DE BASE
+# =====================================================================================================================
+table(L1, "eco1-agents", [
+    ("les ménages", "les agents qui consomment, offrent leur travail et épargnent une part de leur revenu", 1),
+    ("les entreprises", "les agents qui produisent des biens et des services destinés au marché", 1),
+    ("les administrations publiques", "les agents qui fournissent des services collectifs et redistribuent des revenus", 2),
+    ("les institutions financières", "les agents qui collectent l'épargne et accordent des crédits", 2),
+    ("le reste du monde", "les agents non résidents qui échangent avec l'économie nationale", 2),
+], cat="Bases de l'économie : agents économiques", src="sup-eco-macro",
+    fwd="Quel est le rôle économique de {a} ?", rev="De quels agents économiques s'agit-il : {b} ?")
+
+table(L1, "eco1-biens", [
+    ("un bien de consommation", "un bien destiné à satisfaire directement les besoins des ménages", 1),
+    ("un bien d'équipement", "un bien durable utilisé pour produire d'autres biens", 2),
+    ("un bien intermédiaire", "un bien transformé ou consommé au cours du processus de production", 2),
+    ("un bien durable", "un bien qui peut être utilisé de nombreuses fois", 1),
+    ("un bien non durable", "un bien détruit ou consommé dès la première utilisation", 1),
+    ("un service", "une prestation immatérielle qui ne se stocke pas", 1),
+    ("un bien libre", "un bien disponible en abondance, sans coût de production ni prix", 2),
+    ("un bien économique", "un bien rare, qui exige des ressources pour être produit et qui a un prix", 2),
+], cat="Bases de l'économie : biens et services", src="sup-eco-micro",
+    fwd="Comment définit-on {a} ?", rev="De quel type de bien ou de service s'agit-il : {b} ?")
+
+table(L1, "eco1-marche", [
+    ("l'offre", "la quantité qu'un producteur est prêt à vendre à un prix donné", 1),
+    ("la demande", "la quantité que les acheteurs souhaitent acquérir à un prix donné", 1),
+    ("le prix d'équilibre", "le prix auquel l'offre et la demande s'égalisent", 1),
+    ("une pénurie", "une situation où la demande dépasse l'offre au prix en vigueur", 2),
+    ("un excédent", "une situation où l'offre dépasse la demande au prix en vigueur", 2),
+    ("un prix plafond", "un prix maximal fixé par la loi ou par l'autorité", 2),
+    ("un prix plancher", "un prix minimal fixé par la loi ou par l'autorité", 2),
+    ("la concurrence", "la rivalité entre vendeurs ou entre acheteurs sur un marché", 1),
+    ("une élasticité", "la sensibilité d'une quantité à la variation d'une autre variable, en pourcentage", 3),
+], cat="Bases de l'économie : marché", src="sup-eco-micro",
+    fwd="Que signifie {a} ?", rev="Quelle notion de marché correspond à : {b} ?")
+
+table(L1, "eco1-monnaie", [
+    ("la monnaie", "tout moyen de paiement généralement accepté dans les échanges", 1),
+    ("le troc", "l'échange direct d'un bien contre un autre, sans monnaie", 1),
+    ("une banque commerciale", "un établissement qui reçoit des dépôts et accorde des crédits", 1),
+    ("un dépôt bancaire", "une somme confiée à une banque par un client", 1),
+    ("un crédit", "une somme avancée à un emprunteur contre remboursement et intérêts", 1),
+    ("l'intérêt", "la rémunération payée par l'emprunteur au prêteur", 1),
+    ("le taux d'intérêt", "le prix de l'argent prêté, exprimé en pourcentage du capital", 2),
+    ("une bourse de valeurs", "un marché où s'échangent des titres comme les actions et les obligations", 2),
+    ("un virement", "un transfert d'argent d'un compte bancaire à un autre", 1),
+], cat="Bases de l'économie : monnaie et banque", src="sup-eco-monnaie",
+    fwd="Que signifie {a} ?", rev="Quelle notion monétaire correspond à : {b} ?")
+
+table(L1, "eco1-budget", [
+    ("le budget de l'État", "le document qui prévoit et autorise les recettes et les dépenses publiques de l'année", 2),
+    ("un impôt direct", "un impôt prélevé directement sur le revenu ou le patrimoine du contribuable", 2),
+    ("un impôt indirect", "un impôt prélevé sur la dépense ou la consommation, comme la TVA", 2),
+    ("une subvention", "une aide financière publique versée à une entreprise ou à un secteur", 2),
+    ("la redistribution", "le transfert de revenus d'un groupe à un autre par les impôts et les prestations", 3),
+    ("le salaire", "la rémunération du travail d'un salarié", 1),
+    ("le profit", "la différence entre les recettes et les coûts d'une entreprise", 1),
+    ("le chiffre d'affaires", "le total des ventes d'une entreprise sur une période", 1),
+    ("la productivité", "le rapport entre la production obtenue et les ressources utilisées", 2),
+    ("la division du travail", "la répartition des tâches entre travailleurs pour accroître la productivité", 2),
+], cat="Bases de l'économie : finances publiques et entreprise", src="sup-eco-macro",
+    fwd="Que signifie {a} ?", rev="Quelle notion correspond à : {b} ?")
+
+table(L1, "eco1-ecoles", [
+    ("les mercantilistes", "l'idée que la richesse repose sur l'accumulation de métaux précieux grâce à l'excédent commercial", 3),
+    ("les physiocrates", "l'idée que la terre est la source de toute richesse", 3),
+    ("les classiques", "l'étude de la croissance, de la division du travail et des vertus du marché libre", 3),
+    ("les marginalistes", "l'idée que la valeur dépend de l'utilité de la dernière unité consommée", 4),
+    ("les keynésiens", "l'idée que la demande globale détermine l'activité à court terme et que l'État peut la soutenir", 3),
+    ("les monétaristes", "l'idée que la monnaie est le principal déterminant de l'inflation", 3),
+    ("les marxistes", "une critique du capitalisme fondée sur l'exploitation du travail et la lutte des classes", 3),
+], cat="Histoire de la pensée économique", src="sup-eco-pensee",
+    fwd="Quelle idée centrale caractérise {a} ?", rev="Quelle école de pensée est caractérisée par : {b} ?")
+
+classify(L1, "eco1-cls-agent", {
+    "un ménage": ["une famille qui achète sa nourriture au marché", "un salarié qui épargne une partie de son salaire", "un étudiant qui paie son loyer"],
+    "une entreprise": ["une brasserie qui produit de la bière", "un atelier de menuiserie qui vend des meubles", "une société de transport qui vend des billets"],
+    "une administration publique": ["un ministère qui construit des routes", "un hôpital public géré par l'État", "la direction des impôts"],
+    "une institution financière": ["une banque commerciale qui accorde des crédits", "une compagnie d'assurance", "une institution de microfinance"],
+}, cat="Bases de l'économie : agents économiques", src="sup-eco-macro",
+    fwd="Dans quelle catégorie d'agents économiques range-t-on {item} ?", rev="Lequel de ces exemples illustre la catégorie « {group} » ?", diff=1)
+
+classify(L1, "eco1-cls-biens", {
+    "un bien de consommation": ["un paquet de biscuits acheté par un ménage", "une paire de chaussures achetée pour un usage personnel", "une bouteille d'eau achetée au marché"],
+    "un bien d'équipement": ["un tracteur utilisé dans une exploitation agricole", "une machine à coudre dans un atelier", "un camion de livraison d'une entreprise"],
+    "un bien intermédiaire": ["la farine achetée par une boulangerie", "le bois acheté par un menuisier", "le cacao brut acheté par une usine de transformation"],
+    "un service": ["une consultation médicale", "une course en taxi", "un cours particulier"],
+}, cat="Bases de l'économie : biens et services", src="sup-eco-micro",
+    fwd="De quelle catégorie relève {item} ?", rev="Lequel de ces exemples correspond à la catégorie « {group} » ?", diff=2)
+
+classify(L1, "eco1-cls-zone", {
+    "un État membre de la CEMAC": ["le Cameroun", "le Gabon", "le Tchad", "la République centrafricaine", "la Guinée équatoriale", "la République du Congo"],
+    "un État membre de l'UEMOA": ["le Sénégal", "la Côte d'Ivoire", "le Mali", "le Burkina Faso", "le Niger", "le Togo"],
+    "un État d'Afrique de l'Est": ["le Kenya", "la Tanzanie", "l'Ouganda", "l'Éthiopie"],
+    "un État d'Afrique australe": ["la Zambie", "le Botswana", "la Namibie", "le Mozambique"],
+}, cat="Zone franc et CEMAC", src="sup-eco-cemac", region="AF",
+    fwd="À quel ensemble appartient {item} ?", rev="Lequel de ces pays relève de la catégorie « {group} » ?", diff=2)
+
+classify(L2, "eco2-cls-chom", {
+    "le chômage frictionnel": ["un diplômé qui cherche son premier poste depuis quelques semaines", "un salarié qui a démissionné et compare plusieurs offres"],
+    "le chômage structurel": ["un ouvrier dont le métier a disparu faute de formation adaptée", "des chômeurs dans une région sans entreprise alors que des offres existent ailleurs"],
+    "le chômage conjoncturel": ["des licenciements dus à un net recul de la demande pendant une récession", "des embauches gelées parce que les commandes baissent partout"],
+    "le chômage saisonnier": ["des ouvriers agricoles sans travail entre deux récoltes", "des guides touristiques sans emploi en basse saison"],
+}, cat="Macroéconomie : emploi et chômage", src="sup-eco-macro",
+    fwd="De quel type de chômage relève la situation suivante : {item} ?", rev="Laquelle de ces situations correspond à « {group} » ?", diff=3)
+
+classify(L2, "eco2-cls-marche", {
+    "un monopole": ["une entreprise unique fournissant l'eau d'une ville sans aucun concurrent", "une société unique de chemin de fer sans concurrent"],
+    "un oligopole": ["un marché de la bière dominé par deux ou trois grandes brasseries", "un marché du ciment partagé entre quelques cimentiers"],
+    "une concurrence monopolistique": ["les restaurants d'une grande ville, chacun avec sa propre carte", "les salons de coiffure d'un quartier proposant des services différents"],
+    "une concurrence pure et parfaite": ["des milliers de petits cultivateurs de maïs vendant un produit identique", "des centaines de petits producteurs de tomates preneurs de prix"],
+}, cat="Microéconomie : structures de marché", src="sup-eco-micro",
+    fwd="Quelle structure de marché illustre la situation suivante : {item} ?", rev="Laquelle de ces situations illustre « {group} » ?", diff=3)
+
+classify(L2, "eco2-cls-politique", {
+    "la politique budgétaire": ["une hausse des dépenses d'investissement public", "une baisse de l'impôt sur le revenu", "la création d'un nouvel impôt indirect"],
+    "la politique monétaire": ["une baisse du taux directeur", "une hausse des réserves obligatoires", "des achats de titres par la banque centrale"],
+    "la politique commerciale": ["l'instauration d'un quota d'importation", "la hausse d'un droit de douane", "une subvention à l'exportation"],
+    "la politique de change": ["la dévaluation officielle de la monnaie", "l'achat de sa propre monnaie par la banque centrale sur le marché des changes", "le passage d'un change fixe à un change flottant"],
+}, cat="Macroéconomie : politiques économiques", src="sup-eco-macro",
+    fwd="De quelle politique économique relève {item} ?", rev="Laquelle de ces mesures relève de « {group} » ?", diff=3)
+
+classify(L3, "eco3-cls-info", {
+    "la sélection adverse": ["un assureur ne distingue pas les conducteurs prudents des imprudents avant la signature", "un vendeur connaît la qualité d'une voiture d'occasion que l'acheteur ignore"],
+    "l'aléa moral": ["un assuré contre le vol néglige de fermer sa porte", "un emprunteur prend des risques excessifs une fois le crédit accordé"],
+    "la signalisation": ["un candidat obtient un diplôme coûteux pour montrer sa capacité", "une entreprise offre une longue garantie pour prouver la qualité de ses produits"],
+    "le passager clandestin": ["un habitant profite de l'éclairage public sans participer aux frais", "un membre d'un groupe ne travaille pas en comptant sur les autres"],
+}, cat="Microéconomie : externalités, biens publics, information", src="sup-eco-micro",
+    fwd="Quel problème économique illustre la situation suivante : {item} ?", rev="Laquelle de ces situations illustre « {group} » ?", diff=4)
+
+split3("eco2-eco-q1", [
+    ("Dans le circuit économique simple, que reçoivent les ménages en échange de leur travail ?", "Des revenus, notamment des salaires", ["Des machines", "Des impôts", "Des devises étrangères"], "Les entreprises versent des revenus qui financent la consommation.", 1),
+    ("Pour un bien normal, que provoque une hausse du revenu des consommateurs sur la courbe de demande ?", "Elle la déplace vers la droite", ["Elle la déplace vers la gauche", "Elle la rend verticale", "Elle ne la modifie pas"], "À chaque prix, les consommateurs demandent davantage.", 2),
+    ("Que provoque une hausse du coût des matières premières sur la courbe d'offre ?", "Elle la déplace vers la gauche", ["Elle la déplace vers la droite", "Elle la rend horizontale", "Elle la laisse inchangée"], "À chaque prix, les producteurs offrent moins.", 2),
+    ("Que provoque une amélioration de la technologie de production sur la courbe d'offre ?", "Elle la déplace vers la droite", ["Elle la déplace vers la gauche", "Elle la rend verticale", "Elle la supprime"], "Les coûts baissent, l'offre augmente.", 2),
+    ("Que provoque une hausse du prix d'un bien substitut sur la demande du bien considéré ?", "Elle la déplace vers la droite", ["Elle la déplace vers la gauche", "Elle la supprime", "Elle l'immobilise"], "Les consommateurs se reportent sur le bien considéré.", 2),
+    ("Une variation du prix du bien lui-même provoque quel type de mouvement ?", "Un déplacement le long de la courbe de demande", ["Un déplacement de toute la courbe de demande", "Une hausse du revenu", "Un déplacement de la courbe d'offre"], "Seuls les autres facteurs déplacent la courbe.", 2),
+    ("Que se passe-t-il si la demande dépasse l'offre au prix en vigueur ?", "Le prix tend à augmenter", ["Le prix tend à baisser", "Le prix reste inchangé nécessairement", "L'offre disparaît"], "La pénurie pousse le prix à la hausse jusqu'à l'équilibre.", 1),
+    ("Qu'indique un point situé à l'intérieur de la frontière des possibilités de production ?", "Un sous-emploi ou une inefficacité dans l'usage des ressources", ["Un niveau de production inatteignable", "Une production maximale", "Un coût d'opportunité nul"], "On pourrait produire davantage avec les mêmes ressources.", 2),
+    ("Qu'indique un point situé au-delà de la frontière des possibilités de production ?", "Un niveau de production inatteignable avec les ressources actuelles", ["Un niveau de production efficace", "Une inefficacité", "Un point d'équilibre"], "Les ressources ne le permettent pas.", 2),
+    ("Lequel de ces éléments est un coût variable pour une boulangerie ?", "La farine consommée", ["Le loyer du local", "L'assurance annuelle du bâtiment", "L'amortissement du four"], "Les coûts variables dépendent du volume produit.", 1),
+    ("Lequel de ces éléments est un coût fixe à court terme pour une boulangerie ?", "Le loyer du local", ["La farine consommée", "L'électricité consommée par les fours quand ils tournent", "Les emballages utilisés"], "Un coût fixe ne dépend pas du volume produit.", 2),
+    ("Lequel de ces impôts est un impôt indirect ?", "La taxe sur la valeur ajoutée", ["L'impôt sur le revenu des personnes", "L'impôt sur les bénéfices des sociétés", "L'impôt sur le patrimoine"], "Il frappe la consommation et non le revenu.", 2),
+    ("Lequel de ces impôts est un impôt direct ?", "L'impôt sur le revenu des personnes", ["La taxe sur la valeur ajoutée", "Un droit de douane", "Un droit d'accises"], "Il est prélevé sur le revenu du contribuable.", 2),
+    ("Lequel de ces éléments relève de la monnaie scripturale ?", "Un solde disponible sur un compte courant", ["Un billet de banque", "Une pièce de monnaie", "Une lettre de change"], "Elle existe sous forme d'écritures dans les livres des banques.", 2),
+    ("Qui accorde les crédits aux particuliers et aux entreprises ?", "Les banques commerciales", ["La banque centrale en priorité", "Le Parlement", "Le tribunal"], "Les banques commerciales financent l'économie par le crédit.", 1),
+    ("Que fait en général l'inflation au pouvoir d'achat d'un revenu nominal inchangé ?", "Elle le réduit", ["Elle l'augmente", "Elle le laisse inchangé", "Elle le rend nul"], "Les prix montent alors que le revenu stagne.", 1),
+    ("Dans quelle catégorie classe-t-on un étudiant à temps plein qui ne cherche pas d'emploi ?", "Les inactifs", ["Les chômeurs", "Les actifs occupés", "Les sous-employés"], "Il n'est pas en recherche active d'emploi.", 2),
+    ("Quel auteur est associé à l'expression « main invisible » ?", "Adam Smith", ["Karl Marx", "John Maynard Keynes", "Léon Walras"], "Smith décrit comment la poursuite de l'intérêt personnel peut servir l'intérêt collectif.", 1),
+    ("Quel auteur est associé à l'idée de lutte des classes dans l'analyse du capitalisme ?", "Karl Marx", ["Adam Smith", "David Ricardo", "Jean-Baptiste Say"], "Marx oppose les détenteurs du capital aux travailleurs.", 2),
+    ("Quel auteur est associé à l'idée que l'État peut soutenir la demande en période de crise ?", "John Maynard Keynes", ["Jean-Baptiste Say", "Thomas Malthus", "Friedrich Hayek"], "Keynes défend une politique de relance contra-cyclique.", 2),
+    ("Quel auteur craignait que la population croisse plus vite que les subsistances ?", "Thomas Malthus", ["Adam Smith", "Karl Marx", "Léon Walras"], "Son Essai sur le principe de population est célèbre.", 2),
+    ("Que signifie la loi des débouchés de Jean-Baptiste Say ?", "L'offre crée sa propre demande", ["La demande crée sa propre offre", "Les prix sont toujours rigides", "L'État fixe la demande"], "Les produits s'échangent contre des produits.", 3),
+    ("Qu'étudie la macroéconomie ?", "Les grands agrégats comme la production, l'emploi, les prix et la monnaie au niveau d'une économie", ["Le comportement d'un consommateur isolé", "La comptabilité d'une entreprise", "Le droit des contrats"], "Elle s'oppose à la microéconomie, centrée sur les décisions individuelles.", 1),
+    ("Qu'étudie la microéconomie ?", "Les décisions des agents individuels et le fonctionnement des marchés particuliers", ["Le PIB d'un pays", "L'inflation générale", "Le solde de la balance des paiements"], "Consommateurs, entreprises et marchés en sont les objets.", 1),
+    ("Quelle est la différence entre une analyse positive et une analyse normative ?", "L'analyse positive décrit ce qui est, la normative dit ce qui devrait être", ["L'analyse positive dit ce qui devrait être, la normative décrit ce qui est", "Il n'y a aucune différence", "L'une est mathématique, l'autre juridique"], "La positive énonce des faits vérifiables, la normative des jugements de valeur.", 3),
+    ("Que signifie l'expression « toutes choses égales par ailleurs » (ceteris paribus) ?", "On étudie l'effet d'une variable en gardant les autres constantes", ["On suppose que tout varie ensemble", "On étudie seulement les prix", "On supprime les hypothèses"], "Cela permet d'isoler une relation causale.", 2),
+    ("Que mesure un indice des prix à la consommation égal à 110 par rapport à une base 100 ?", "Une hausse de 10 % des prix du panier par rapport à la période de base", ["Une baisse de 10 % des prix", "Une hausse de 110 %", "Une hausse de 1,1 %"], "L'indice compare le panier à la période de référence.", 2),
+    ("Quelle est la différence entre un stock et un flux ?", "Un stock se mesure à un instant, un flux sur une période", ["Un stock se mesure sur une période, un flux à un instant", "Il n'y a aucune différence", "Un stock est monétaire, un flux est réel"], "La dette est un stock, le déficit annuel est un flux.", 2),
+    ("Dans quel cas parle-t-on de bien public pur ?", "Un bien non rival et non exclusif", ["Un bien vendu par l'État", "Un bien rival et exclusif", "Un bien importé"], "L'éclairage public en est un exemple.", 2),
+], cat="Bases de l'économie", src="sup-eco-micro")
+
+# =====================================================================================================================
+# PETITS CALCULS À DONNÉES FICTIVES (chaque résultat est recalculé par une seconde méthode : fractions exactes)
+# =====================================================================================================================
+from fractions import Fraction as _F
+from ..core import fr as _fr, NB as _NB
+
+
+def _pc(x, dec=1):
+    """Pourcentage à la française à partir d'un Fraction ou d'un nombre."""
+    return _fr(float(x), dec) + _NB + "%"
+
+
+def _nq(course, tpl, text, right, wrongs, expl, d, cat, src="sup-eco-macro"):
+    ws = [w for w in dict.fromkeys(wrongs) if w != right]
+    assert len(ws) >= 3, text
+    fq(course, tpl, text, right, ws[:4], expl, src, "WORLD", cat, d)
+
+
+# --- L1 : taux de chômage
+for A, C in [(4_500_000, 500_000), (2_400_000, 600_000), (8_500_000, 1_500_000)]:
+    r = _F(C, A + C) * 100
+    assert abs(float(r) - (C * 100 / (A + C))) < 1e-9
+    _nq(L1, "eco1-num-chom", "Dans un pays fictif, on compte %s actifs occupés et %s chômeurs. Quel est le taux de chômage ?" % (_fr(A), _fr(C)),
+        _pc(r), [_pc(_F(C, A) * 100), _pc(_F(A, A + C) * 100), _pc(r + 5), _pc(r - 3 if r > 5 else r + 8)],
+        "Taux de chômage = chômeurs / (actifs occupés + chômeurs) = %s / %s." % (_fr(C), _fr(A + C)), 2, "Macroéconomie : emploi et chômage")
+
+# --- L1 : taux de croissance
+for P0, P1 in [(2000, 2100), (5000, 5400), (1600, 1680)]:
+    r = _F(P1 - P0, P0) * 100
+    assert abs(float(r) - ((P1 / P0 - 1) * 100)) < 1e-9
+    _nq(L1, "eco1-num-croiss", "Le PIB réel d'un pays fictif passe de %s à %s milliards de FCFA d'une année à la suivante. Quel est le taux de croissance ?" % (_fr(P0), _fr(P1)),
+        _pc(r), [_pc(_F(P1 - P0, P1) * 100), _pc(_F(P1, P0) * 100), _pc(r + 2), _pc(r * 2)],
+        "Taux de croissance = (PIB final − PIB initial) / PIB initial.", 2, "Macroéconomie : croissance")
+
+# --- L1 : inflation à partir d'un indice des prix
+for I0, I1 in [(100, 106), (125, 130), (200, 210)]:
+    r = _F(I1 - I0, I0) * 100
+    assert abs(float(r) - ((I1 / I0 - 1) * 100)) < 1e-9
+    _nq(L1, "eco1-num-infl", "L'indice des prix à la consommation d'un pays fictif passe de %s à %s. Quel est le taux d'inflation sur la période ?" % (_fr(I0), _fr(I1)),
+        _pc(r), [_pc(I1 - I0), _pc(_F(I1 - I0, I1) * 100), _pc(r + 2), _pc(_F(I1, I0) * 100)],
+        "Inflation = (indice final − indice initial) / indice initial.", 2, "Macroéconomie : inflation")
+
+# --- L1 : taux de couverture
+for X, M in [(600, 800), (900, 600), (450, 500)]:
+    r = _F(X, M) * 100
+    assert abs(float(r) - (X / M * 100)) < 1e-9
+    _nq(L1, "eco1-num-couv", "Un pays fictif exporte pour %s milliards de FCFA et importe pour %s milliards de FCFA. Quel est son taux de couverture ?" % (_fr(X), _fr(M)),
+        _pc(r), [_pc(_F(M, X) * 100), _pc(_F(X, X + M) * 100), _pc(_F(X - M, M) * 100 if X != M else r + 3), _pc(r + 10)],
+        "Taux de couverture = exportations / importations.", 2, "Commerce international")
+
+# --- L1 / L2 : prix d'équilibre (offre et demande linéaires)
+for course, (a, b, c, d), diff in [(L1, (100, 2, 10, 3), 2), (L1, (200, 4, 20, 5), 2), (L2, (90, 1, -10, 4), 3), (L2, (500, 10, 50, 20), 3)]:
+    P = _F(a - c, b + d)
+    assert P.denominator == 1 and a - b * P == c + d * P
+    Q = a - b * P
+    _nq(course, "eco%s-num-eq" % course[1], "La demande est Qd = %d − %dP et l'offre Qs = %s + %dP. Quel est le prix d'équilibre ?" % (a, b, str(c).replace("-", "−"), d),
+        _fr(int(P)), [_fr(int(Q)), _fr((a + c) // (b + d)), _fr(int(P) + 5), _fr(int(P) - 4)],
+        "On résout Qd = Qs : P = (a − c)/(b + d) = %s." % _fr(int(P)), diff, "Microéconomie : équilibre de marché", "sup-eco-micro")
+
+# --- L2 : PIB par les dépenses
+for C, I, G, X, M in [(600, 200, 150, 100, 120), (2000, 500, 600, 400, 300)]:
+    Y = C + I + G + (X - M)
+    _nq(L2, "eco2-num-pib", "Dans une économie ouverte fictive, C = %s, I = %s, G = %s, X = %s et M = %s (en milliards de FCFA). Quel est le PIB par l'optique des dépenses ?" % (_fr(C), _fr(I), _fr(G), _fr(X), _fr(M)),
+        _fr(Y), [_fr(C + I + G + X + M), _fr(C + I + G), _fr(C + I + G + M - X), _fr(Y + 100)],
+        "PIB = C + I + G + X − M.", 2, "Macroéconomie : comptabilité nationale")
+
+# --- L2 : déflateur et PIB réel
+for N, R in [(2400, 2000), (1800, 2000)]:
+    r = _F(N, R) * 100
+    assert abs(float(r) - (N / R * 100)) < 1e-9
+    _nq(L2, "eco2-num-defl", "Le PIB nominal d'un pays fictif est de %s et son PIB réel (à prix constants) de %s. Quel est le déflateur du PIB (base 100) ?" % (_fr(N), _fr(R)),
+        _fr(float(r), 1), [_fr(float(_F(R, N) * 100), 1), _fr(N - R), _fr(float(r) + 10, 1), _fr(float(r) - 10, 1)],
+        "Déflateur = PIB nominal / PIB réel × 100.", 3, "Macroéconomie : comptabilité nationale")
+for N, D in [(3300, 110), (4800, 120)]:
+    R = _F(N * 100, D)
+    assert R.denominator == 1
+    _nq(L2, "eco2-num-pibreel", "Le PIB nominal est de %s milliards de FCFA et le déflateur du PIB de %s (base 100). Quel est le PIB réel ?" % (_fr(N), _fr(D)),
+        _fr(int(R)), [_fr(N * D // 100), _fr(N - D), _fr(int(R) + 100), _fr(int(R) - 150)],
+        "PIB réel = PIB nominal / déflateur × 100.", 3, "Macroéconomie : comptabilité nationale")
+
+# --- L2 : multiplicateur keynésien simple
+for c, dG in [(_F(3, 4), 100), (_F(4, 5), 50), (_F(9, 10), 20)]:
+    k = 1 / (1 - c)
+    dY = k * dG
+    assert dY.denominator == 1
+    _nq(L2, "eco2-num-mult", "Dans un modèle keynésien simple (ni impôts ni importations), la propension marginale à consommer vaut %s. Une hausse des dépenses publiques de %s milliards de FCFA accroît le revenu de combien ?" % (_fr(float(c), 2), _fr(dG)),
+        _fr(int(dY)) + " milliards", [_fr(int(c * dG / (1 - c))) + " milliards", _fr(dG) + " milliards", _fr(int(dG / c)) + " milliards", _fr(int(dY) + dG) + " milliards"],
+        "ΔY = ΔG/(1 − c) = %s." % _fr(int(dY)), 3, "Macroéconomie : multiplicateur")
+
+# --- L2 : élasticité-prix
+for dp, dq in [(5, -10), (4, -6), (10, -5)]:
+    e = _F(dq, dp)
+    assert abs(float(e) - (dq / dp)) < 1e-9
+    _nq(L2, "eco2-num-elast", "Quand le prix d'un bien augmente de %d %%, la quantité demandée diminue de %d %%. Quelle est la valeur absolue de l'élasticité-prix de la demande ?" % (dp, -dq),
+        _fr(abs(float(e)), 2), [_fr(abs(float(1 / e)), 2), _fr(abs(float(e)) + 1, 2), _fr(abs(float(dq - dp)), 2), _fr(abs(float(dq)), 2)],
+        "|Élasticité| = variation relative de la quantité / variation relative du prix = %s." % _fr(abs(float(e)), 2), 3, "Microéconomie : élasticités", "sup-eco-micro")
+
+# --- L2 : coût marginal
+for q0, c0, c1 in [(10, 500, 530), (50, 2500, 2580)]:
+    _nq(L2, "eco2-num-cmg", "Le coût total d'une firme est de %s FCFA pour %d unités et de %s FCFA pour %d unités. Quel est le coût marginal de la %de unité ?" % (_fr(c0), q0, _fr(c1), q0 + 1, q0 + 1),
+        _fr(c1 - c0) + _NB + "FCFA", [_fr(c0 // q0) + _NB + "FCFA", _fr(c1) + _NB + "FCFA", _fr(c1 // (q0 + 1)) + _NB + "FCFA", _fr(c1 - c0 + 20) + _NB + "FCFA"],
+        "Coût marginal = variation du coût total pour une unité de plus.", 2, "Microéconomie : coûts", "sup-eco-micro")
+
+# --- L2 : seuil de rentabilité
+for CF, p, cv in [(600_000, 1500, 900), (2_000_000, 2500, 1500)]:
+    q = _F(CF, p - cv)
+    assert q.denominator == 1 and q * p - q * cv - CF == 0
+    _nq(L2, "eco2-num-seuil", "Une entreprise a des coûts fixes de %s FCFA, vend à %s FCFA l'unité et supporte un coût variable de %s FCFA par unité. Quel est son seuil de rentabilité en quantités ?" % (_fr(CF), _fr(p), _fr(cv)),
+        _fr(int(q)) + " unités", [_fr(CF // p) + " unités", _fr(CF // cv) + " unités", _fr(CF // (p + cv)) + " unités", _fr(int(q) + 500) + " unités"],
+        "Seuil = coûts fixes / (prix − coût variable unitaire).", 3, "Microéconomie : coûts", "sup-eco-micro")
+
+# --- L2 : valeur actuelle
+for FV, n, r in [(1_100_000, 1, _F(1, 10)), (1_440_000, 2, _F(1, 5))]:
+    V = _F(FV) / (1 + r) ** n
+    assert V.denominator == 1
+    V = int(V)
+    _nq(L2, "eco2-num-actu", "Quelle est la valeur actuelle d'une somme de %s FCFA reçue dans %d an%s, avec un taux d'actualisation de %s ?" % (_fr(FV), n, "s" if n > 1 else "", _pc(r * 100, 0)),
+        _fr(V) + _NB + "FCFA", [_fr(int(FV * (1 - r))) + _NB + "FCFA", _fr(FV - int(FV * r * n)) + _NB + "FCFA", _fr(int(FV * (1 + r) ** n)) + _NB + "FCFA", _fr(V + 100_000) + _NB + "FCFA"],
+        "Valeur actuelle = valeur future / (1 + taux)^n.", 3, "Finance : actualisation", "sup-eco-monnaie")
+
+# --- L2 : multiplicateur de crédit simple
+for D0, rr in [(2_000_000, _F(1, 10)), (4_000_000, _F(1, 4))]:
+    tot = D0 / rr
+    assert tot.denominator == 1
+    tot = int(tot)
+    # seconde méthode : somme de la série géométrique D0 (1 + (1-r) + (1-r)^2 + ...) tronquée très loin
+    s = sum(D0 * (1 - rr) ** k for k in range(400))
+    assert abs(float(s) - tot) < 1e-6 * tot
+    _nq(L2, "eco2-num-credit", "Dans le modèle simple de création monétaire (réserves obligatoires de %s, aucune fuite en billets, aucune réserve excédentaire), un dépôt initial de %s FCFA permet au maximum un total de dépôts de combien ?" % (_pc(rr * 100, 0), _fr(D0)),
+        _fr(tot) + _NB + "FCFA", [_fr(int(D0 * rr)) + _NB + "FCFA", _fr(int(D0 * (1 - rr))) + _NB + "FCFA", _fr(int(D0 / (1 - rr))) + _NB + "FCFA", _fr(tot + D0) + _NB + "FCFA"],
+        "Total des dépôts = dépôt initial / taux de réserves.", 4, "Monnaie et banque", "sup-eco-monnaie")
+
+# --- L3 : indice de Herfindahl-Hirschman
+for shares in [(40, 30, 20, 10), (50, 30, 20), (60, 20, 10, 10)]:
+    assert sum(shares) == 100
+    h = sum(s * s for s in shares)
+    _nq(L3, "eco3-num-hhi", "Sur un marché, les parts de marché des firmes sont de %s %%. Quel est l'indice de Herfindahl-Hirschman (parts en pourcentage) ?" % ", ".join(str(s) for s in shares),
+        _fr(h), [_fr(100), _fr(h // 100), _fr(max(shares) ** 2), _fr(h - min(shares) ** 2)],
+        "HHI = somme des carrés des parts de marché.", 4, "Microéconomie : concentration", "sup-eco-micro")
+
+# --- L3 : indice de Lerner
+for P, Cm in [(100, 80), (200, 150)]:
+    L = _F(P - Cm, P)
+    assert abs(float(L) - ((P - Cm) / P)) < 1e-9
+    _nq(L3, "eco3-num-lerner", "Une firme vend à %s FCFA, son coût marginal étant de %s FCFA. Quel est son indice de Lerner ?" % (_fr(P), _fr(Cm)),
+        _fr(float(L), 2), [_fr(float(_F(P - Cm, Cm)), 2), _fr(float(_F(Cm, P)), 2), _fr(P - Cm), _fr(float(L) + 0.1, 2)],
+        "Indice de Lerner = (prix − coût marginal) / prix.", 4, "Microéconomie : pouvoir de marché", "sup-eco-micro")
+
+# --- L3 : monopole à demande linéaire (vérifié par recherche du maximum)
+for a, b, c in [(100, 2, 20), (80, 1, 20), (120, 3, 30)]:
+    Qm = _F(a - c, 2 * b)
+    assert Qm.denominator == 1
+    Qm = int(Qm)
+    best = max(range(0, a // b + 1), key=lambda q: (a - b * q - c) * q)
+    assert best == Qm
+    Pm = a - b * Qm
+    assert Pm == (a + c) // 2
+    _nq(L3, "eco3-num-mono", "Un monopole fait face à la demande inverse P = %d − %dQ et a un coût marginal constant de %d. Quel prix maximise son profit ?" % (a, b, c),
+        _fr(Pm), [_fr(c), _fr((a - c) // b), _fr(Pm + 10), _fr(Pm - 10)],
+        "Recette marginale = a − 2bQ égale au coût marginal : Q = %d, d'où P = %d." % (Qm, Pm), 4, "Microéconomie : monopole", "sup-eco-micro")
+
+# --- L3 : duopole de Cournot symétrique
+for a, b, c in [(100, 1, 10), (120, 2, 30)]:
+    q = _F(a - c, 3 * b)
+    assert q.denominator == 1
+    q = int(q)
+    # seconde méthode : itération des fonctions de réaction q_i = (a - c - b q_j)/(2b)
+    x = _F(0)
+    y = _F(0)
+    for _ in range(200):
+        x, y = (a - c - b * y) / (2 * b), (a - c - b * x) / (2 * b)
+    assert abs(float(x) - q) < 1e-9 and abs(float(y) - q) < 1e-9
+    P = a - b * 2 * q
+    _nq(L3, "eco3-num-cournot", "Deux firmes identiques se font concurrence en quantités (Cournot) avec la demande inverse P = %d − %dQ et un coût marginal de %d. Quelle quantité produit chaque firme ?" % (a, b, c),
+        _fr(q), [_fr((a - c) // (2 * b)), _fr((a - c) // b), _fr(q + 5), _fr((a - c) // (4 * b))],
+        "Chaque firme produit (a − c)/(3b) = %d ; le prix d'équilibre est %d." % (q, P), 5, "Microéconomie : oligopole", "sup-eco-micro")
+
+# --- L3 : capital par tête à l'état régulier (Solow, y = racine de k)
+for s, nd in [(_F(1, 5), _F(1, 10)), (_F(3, 10), _F(1, 10)), (_F(1, 4), _F(1, 20))]:
+    k = (s / nd) ** 2
+    assert k.denominator == 1
+    x = 1.0
+    for _ in range(20000):
+        x = x + float(s) * x ** 0.5 - float(nd) * x
+    assert abs(x - float(k)) < 1e-6
+    k = int(k)
+    _nq(L3, "eco3-num-solow", "Dans un modèle de Solow sans progrès technique, la production par tête est y = √k, le taux d'épargne vaut %s et le taux (croissance de la population + dépréciation) vaut %s. Quel est le capital par tête à l'état régulier ?" % (_pc(s * 100, 0), _pc(nd * 100, 0)),
+        _fr(k), [_fr(int(s / nd)), _fr(int((s / nd) ** 3)) if (s / nd) ** 3 != k else _fr(k + 7), _fr(k + 5), _fr(max(1, k - 3))],
+        "À l'état régulier, s·√k = (n + δ)·k, donc √k = s/(n + δ) et k = (s/(n + δ))².", 5, "Macroéconomie : croissance")
+
+# --- L3 : multiplicateur avec importations
+for c, m in [(_F(4, 5), _F(1, 5)), (_F(9, 10), _F(1, 10)), (_F(3, 5), _F(2, 5))]:
+    k = 1 / (1 - c + m)
+    assert abs(float(k) - (1 / (1 - float(c) + float(m)))) < 1e-9
+    _nq(L3, "eco3-num-multopen", "Dans un modèle keynésien d'économie ouverte sans impôts, la propension marginale à consommer est %s et la propension marginale à importer %s. Quel est le multiplicateur des dépenses ?" % (_fr(float(c), 1), _fr(float(m), 1)),
+        _fr(float(k), 2), [_fr(float(1 / (1 - c)), 2), _fr(float(1 / (1 + m)), 2), _fr(float(1 / (c + m)), 2), _fr(float(k) + 1, 2)],
+        "k = 1/(1 − c + m) : une partie de la dépense s'échappe vers l'étranger.", 4, "Macroéconomie : multiplicateur")
+
+# --- L3 : multiplicateur du budget équilibré (impôts forfaitaires)
+for c, X in [(_F(4, 5), 100), (_F(3, 4), 200)]:
+    k = 1 / (1 - c)
+    dY = k * X - c * k * X
+    assert dY == X
+    _nq(L3, "eco3-num-haavelmo", "Dans un modèle keynésien simple avec impôts forfaitaires et une propension marginale à consommer de %s, l'État accroît ses dépenses et ses impôts de %s milliards de FCFA chacun. De combien varie le revenu ?" % (_fr(float(c), 2), _fr(X)),
+        _fr(X) + " milliards", [_fr(int(k * X)) + " milliards", _fr(int(c * k * X)) + " milliards", _fr(0) + " milliard", _fr(int(k * X + c * k * X)) + " milliards"],
+        "ΔY = ΔG/(1 − c) − c·ΔT/(1 − c) = ΔG quand ΔT = ΔG : le multiplicateur du budget équilibré vaut 1.", 5, "Macroéconomie : multiplicateur")
+
+# --- L3 : solde courant = épargne − investissement
+for S, I in [(300, 250), (180, 220)]:
+    ca = S - I
+    lab = lambda v: ("Un excédent de %s" % _fr(v)) if v > 0 else ("Un déficit de %s" % _fr(-v))
+    _nq(L3, "eco3-num-courant", "Une économie ouverte fictive a une épargne nationale de %s et un investissement de %s milliards de FCFA. Quel est son solde courant ?" % (_fr(S), _fr(I)),
+        lab(ca) + " milliards", [lab(-ca) + " milliards", "Un solde nul", lab(S + I) + " milliards", lab(ca * 2) + " milliards"],
+        "Solde courant = épargne nationale − investissement.", 4, "Macroéconomie : balance des paiements")
+
+# --- L3 : prix payé par les acheteurs après une taxe unitaire sur les vendeurs
+for a, b, d, t in [(100, 2, 3, 5), (120, 3, 5, 8), (150, 2, 3, 5)]:
+    P1 = _F(a + d * t, b + d)
+    P0 = _F(a, b + d)
+    assert P1.denominator == 1 and P0.denominator == 1
+    Qd = a - b * P1
+    Qs = d * (P1 - t)
+    assert Qd == Qs
+    _nq(L3, "eco3-num-taxe", "La demande est Qd = %d − %dP et l'offre Qs = %dP. Une taxe de %d FCFA par unité est prélevée sur les vendeurs. Quel est le nouveau prix payé par les acheteurs ?" % (a, b, d, t),
+        _fr(int(P1)), [_fr(int(P0)), _fr(int(P0) + t), _fr(int(P1) - t), _fr(int(P1) + 3)],
+        "L'offre devient Qs = %d(P − %d) ; l'égalité avec la demande donne P = %d (avant taxe : %d)." % (d, t, int(P1), int(P0)), 4, "Microéconomie : incidence d'une taxe", "sup-eco-micro")
+
+# --- L3 : rendements d'échelle d'une fonction Cobb-Douglas
+for al, be in [(_F(3, 10), _F(7, 10)), (_F(1, 2), _F(2, 5)), (_F(3, 5), _F(3, 5))]:
+    tot = al + be
+    lam = 2.0
+    ratio = (lam ** float(al)) * (lam ** float(be))
+    label = "Constants" if tot == 1 else ("Croissants" if tot > 1 else "Décroissants")
+    assert (abs(ratio - 2) < 1e-9) == (label == "Constants") and (ratio > 2 + 1e-9) == (label == "Croissants")
+    _nq(L3, "eco3-num-rend", "Quels sont les rendements d'échelle d'une fonction de production Y = K^%s · L^%s ?" % (_fr(float(al), 1), _fr(float(be), 1)),
+        label, [x for x in ("Constants", "Croissants", "Décroissants", "Nuls") if x != label],
+        "La somme des exposants vaut %s : %s." % (_fr(float(tot), 1), "doubler les facteurs " + ("double" if tot == 1 else "plus que double" if tot > 1 else "moins que double") + " la production"), 4, "Microéconomie : producteur", "sup-eco-micro")

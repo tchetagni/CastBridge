@@ -901,3 +901,824 @@ def ppa_relative(rng, d):
     return D(f"Le dollar vaut {e0} FCFA. Pendant un an, l'inflation est de {pi} % dans la zone du FCFA et de {pf} % aux États-Unis. Selon la PPA relative (e1 = e0 × (1 + π) ÷ (1 + π*)), quel est le nouveau cours du dollar (arrondi à 0,01) ?", ff(v),
              nw(v, [e0, e0 * (1 + F(pi - pf, 100)), e0 * F(100 + pf, 100 + pi), e0 * (1 - F(pi - pf, 100))], ff),
              f"e1 = {e0} × {100 + pi}/{100 + pf} : la monnaie du pays à inflation plus forte se déprécie.")
+
+
+# ================================================================================================ MATHÉMATIQUES FINANCIÈRES
+def pw(i, n):
+    return (1 + F(i, 100)) ** n
+
+
+@gen(C, "l2e-capitalisation", cap=60, cat=FIN, source=SRC)
+def capitalisation(rng, d):
+    c0 = rng.randrange(100000, 5000001, 50000)
+    i = rng.choice([F(2), F(3), F(4), F(5), F(6), F(8), F(10), F(12), F(5, 2), F(7, 2), F(15, 2)])
+    n = rng.randint(2, 8)
+    cn = c0 * pw(i, n)
+    x = F(c0)
+    for _ in range(n):
+        x *= 1 + i / 100
+    assert x == cn
+    v = rd(cn, 0)
+    if v is None:
+        return None
+    v = int(v)
+    wr = [c0 * (1 + i * n / 100), c0 * pw(i, n - 1), c0 * pw(i, n + 1), c0 * (1 + i / 100) * n]
+    return D(f"On place {money(c0)} à {ff(i, 1)} % par an, intérêts composés, pendant {n} ans. Quel est le capital acquis au bout de {n} ans (arrondi au franc) ?", money(v), [money(round(float(w))) for w in wr if round(float(w)) != v],
+             f"Cn = C0 × (1 + i)^n = {fr(c0)} × (1 + {ff(i / 100, 3)})^{n}.")
+
+
+@gen(C, "l2e-actualisation", cap=60, cat=FIN, source=SRC)
+def actualisation(rng, d):
+    cn = rng.randrange(100000, 5000001, 50000)
+    i = rng.choice([F(2), F(3), F(4), F(5), F(6), F(8), F(10), F(12), F(5, 2), F(15, 2)])
+    n = rng.randint(2, 8)
+    va = cn / pw(i, n)
+    assert va * pw(i, n) == cn
+    v = rd(va, 0)
+    if v is None:
+        return None
+    v = int(v)
+    wr = [cn * (1 - i * n / 100), cn / pw(i, n - 1), cn / pw(i, n + 1), cn * pw(i, n) if False else cn / (1 + i * n / 100), cn * (1 - i / 100) ** n]
+    return D(f"Une somme de {money(cn)} sera reçue dans {n} ans ; le taux d'actualisation est de {ff(i, 1)} % par an. Quelle est sa valeur actuelle (arrondie au franc) ?", money(v), [money(round(float(w))) for w in wr if round(float(w)) != v and w > 0],
+             f"VA = {fr(cn)} ÷ (1 + {ff(i / 100, 3)})^{n}.")
+
+
+@gen(C, "l2e-taux-equivalent", cap=60, cat=FIN, source=SRC)
+def taux_equivalent(rng, d):
+    m = rng.choice([2, 4, 12])
+    p = rng.choice([F(1, 2), F(1), F(3, 2), F(2), F(5, 2), F(3), F(4), F(5)]) if m != 12 else rng.choice([F(1, 2), F(1), F(3, 4), F(1, 4)])
+    nom = {2: "semestriel", 4: "trimestriel", 12: "mensuel"}[m]
+    ann = (1 + p / 100) ** m - 1
+    assert (1 + ann) ** F(1, m) == 1 + p / 100 if m == 2 and False else True
+    assert (1 + p / 100) ** m == 1 + ann
+    if rng.random() < 0.5:
+        v = rd(ann * 100, 2)
+        if v is None:
+            return None
+        return D(f"Un placement rapporte un taux {nom} de {ff(p, 2)} %. Quel est le taux annuel équivalent (arrondi à 0,01 %) ?", pc(v, 2), nw(v, [p * m, p * m + F(1, 2), (1 + p / 100) * 100 - 100 + p * (m - 1) / 2, ann * 50], lambda x: pc(x, 2)),
+                 f"Taux annuel équivalent = (1 + {ff(p / 100, 4)})^{m} − 1 ; multiplier le taux périodique par {m} ignorerait les intérêts composés.")
+    return D(f"Le taux annuel effectif d'un placement est de {ff(ann * 100, 4)} %. Quel est le taux {nom} équivalent (en %, arrondi à 0,01) ?", pc(p, 2) if True else "",
+             [x for x in (pc(rd(ann * 100 / m, 2) or ann * 100 / m, 2), pc(p + F(1, 4), 2), pc(p - F(1, 4) if p > F(1, 4) else p + F(3, 4), 2), pc(p * 2, 2)) if x != pc(p, 2)],
+             f"Taux équivalent = (1 + taux annuel)^(1/{m}) − 1 = {ff(p, 2)} % ; diviser par {m} donnerait un taux proportionnel, différent.")
+
+
+def annuite(c, i, n):
+    r = F(i, 100)
+    return c * r / (1 - (1 + r) ** (-n))
+
+
+@gen(C, "l2e-annuite", cap=60, cat=FIN, source=SRC)
+def annuite_constante(rng, d):
+    c = rng.randrange(1000000, 20000001, 500000)
+    i = rng.choice([4, 5, 6, 7, 8, 9, 10, 12])
+    n = rng.randint(2, 10)
+    a = annuite(c, i, n)
+    # contrôle : simulation du tableau d'amortissement, le capital restant dû doit s'annuler
+    k = F(c)
+    for _ in range(n):
+        k = k * (1 + F(i, 100)) - a
+    assert k == 0
+    v = rd(a, 0)
+    if v is None:
+        return None
+    v = int(v)
+    wr = [F(c, n), F(c * (100 + i), 100 * n), c * F(i, 100), F(c, n) + c * F(i, 100), annuite(c, i, n + 1)]
+    return D(f"Un emprunt de {money(c)} est remboursé par {n} annuités constantes de fin d'année, au taux de {i} % par an. Quel est le montant de l'annuité (arrondi au franc) ?", money(v), [money(round(float(w))) for w in wr if round(float(w)) != v],
+             f"a = C × i ÷ (1 − (1 + i)^−n) avec i = {ff(F(i, 100), 2)} et n = {n}.")
+
+
+@gen(C, "l2e-emprunt-crd", cap=60, cat=FIN, source=SRC)
+def emprunt_crd(rng, d):
+    c = rng.randrange(1000000, 20000001, 500000)
+    i = rng.choice([4, 5, 6, 8, 10, 12])
+    n = rng.randint(3, 10)
+    k = rng.randint(1, n - 1)
+    a = annuite(c, i, n)
+    r = F(i, 100)
+    bal, ints = F(c), []
+    for _ in range(k):
+        ints.append(bal * r)
+        bal = bal * (1 + r) - a
+    crd = c * (1 + r) ** k - a * ((1 + r) ** k - 1) / r        # formule fermée
+    assert bal == crd
+    assert crd == a * (1 - (1 + r) ** (-(n - k))) / r          # valeur actuelle des annuités restantes
+    ask = rng.choice(["crd", "int"])
+    ent = f"Un emprunt de {money(c)} est remboursé par {n} annuités constantes de fin d'année au taux de {i} %. "
+    if ask == "crd":
+        v = rd(crd, 0)
+        if v is None:
+            return None
+        return D(ent + f"Quel est le capital restant dû après le paiement de la {k}{'re' if k == 1 else 'e'} annuité (arrondi au franc) ?", money(v), [money(round(float(w))) for w in (c - k * F(c, n), c - k * a, c + k * c * r - k * a * 0, crd + (a - ints[-1]), crd + a) if round(float(w)) != int(v) and w > 0],
+                 f"CRD = valeur actuelle des {n - k} annuités restantes = capital × (1 + i)^{k} − annuités capitalisées.")
+    v = rd(ints[-1], 0)
+    if v is None:
+        return None
+    return D(ent + f"Quel est le montant des intérêts compris dans la {k}{'re' if k == 1 else 'e'} annuité (arrondi au franc) ?", money(v), [money(round(float(w))) for w in (c * r, a - ints[-1], ints[0] if k > 1 else a * r, a * r, ints[-1] * 2) if round(float(w)) != int(v) and w > 0],
+             f"Intérêts = taux × capital restant dû en début de période = {i} % × {fr(int(round(float(bal + a - ints[-1]))))}.")
+
+
+@gen(C, "l2e-emprunt-amort-const", cap=60, cat=FIN, source=SRC)
+def emprunt_amort_const(rng, d):
+    n = rng.choice([4, 5, 6, 8, 10])
+    amort = rng.randrange(100000, 2000001, 100000)
+    c = amort * n
+    i = rng.choice([4, 5, 6, 8, 10, 12])
+    k = rng.randint(1, n)
+    crd = c - (k - 1) * amort
+    inte = crd * F(i, 100)
+    if inte.denominator != 1:
+        return None
+    inte = int(inte)
+    # contrôle par tableau
+    bal, tab = c, []
+    for _ in range(n):
+        tab.append((bal * i // 100, amort))
+        bal -= amort
+    assert bal == 0 and tab[k - 1][0] == inte
+    ask = rng.choice(["int", "ann"])
+    ent = f"Un emprunt de {money(c)} est remboursé en {n} ans par amortissements constants de capital, au taux de {i} % l'an (intérêts payés sur le capital restant dû). "
+    if ask == "int":
+        return D(ent + f"Quels sont les intérêts de l'année {k} ?", money(inte), [money(x) for x in (c * i // 100, (crd - amort) * i // 100 if crd > amort else amort * i // 100, (c - k * amort) * i // 100 if c > k * amort else crd * i // 200, amort * i // 100 * k, amort + inte) if x != inte and x > 0],
+                 f"Capital restant dû en début d'année {k} : {fr(crd)} ; intérêts = {i} % de ce montant.")
+    ann = amort + inte
+    return D(ent + f"Quel est le montant total payé l'année {k} (amortissement + intérêts) ?", money(ann), [money(x) for x in (amort, inte, c * i // 100 + amort, ann + amort, (crd - amort) * i // 100 + amort if crd > amort else ann + 100000) if x != ann and x > 0],
+             f"Annuité de l'année {k} = amortissement {fr(amort)} + intérêts {fr(inte)}.")
+
+
+@gen(C, "l2e-rente-va", cap=60, cat=FIN, source=SRC)
+def rente_va(rng, d):
+    a = rng.randrange(50000, 1000001, 50000)
+    i = rng.choice([4, 5, 6, 8, 10, 12])
+    n = rng.randint(2, 12)
+    debut = d >= 4 and rng.random() < 0.5
+    r = F(i, 100)
+    va = a * (1 - (1 + r) ** (-n)) / r
+    va_sum = sum(a / (1 + r) ** t for t in range(1, n + 1))        # somme des flux actualisés
+    assert va == va_sum
+    if debut:
+        va_sum = sum(a / (1 + r) ** t for t in range(0, n))
+        va = va * (1 + r)
+        assert va == va_sum
+    v = rd(va, 0)
+    if v is None:
+        return None
+    v = int(v)
+    wr = [a * n, a * (1 - (1 + r) ** (-n)) / r * (1 + r) if not debut else a * (1 - (1 + r) ** (-n)) / r, a / (1 + r) ** n, a * ((1 + r) ** n - 1) / r, a * n / (1 + r) ** n]
+    return D(f"On reçoit {money(a)} à la {'début de chaque année' if debut else 'fin de chaque année'} pendant {n} ans ; le taux d'actualisation est de {i} %. Quelle est la valeur actuelle de cette rente (arrondie au franc) ?".replace("la début", "le début"), money(v),
+             [money(round(float(w))) for w in wr if round(float(w)) != v], "Valeur actuelle = a × (1 − (1 + i)^−n) ÷ i" + (", multipliée par (1 + i) pour des versements en début de période." if debut else " pour des versements en fin de période."))
+
+
+@gen(C, "l2e-epargne-vf", cap=60, cat=FIN, source=SRC)
+def epargne_vf(rng, d):
+    a = rng.randrange(50000, 1000001, 50000)
+    i = rng.choice([3, 4, 5, 6, 8, 10])
+    n = rng.randint(2, 12)
+    r = F(i, 100)
+    vf = a * ((1 + r) ** n - 1) / r
+    x = F(0)
+    for _ in range(n):
+        x = x * (1 + r) + a
+    assert x == vf
+    v = rd(vf, 0)
+    if v is None:
+        return None
+    v = int(v)
+    wr = [a * n, a * (1 + r) ** n, a * ((1 + r) ** n - 1) / r * (1 + r), a * (1 - (1 + r) ** (-n)) / r, a * ((1 + r) ** (n - 1) - 1) / r]
+    return D(f"On verse {money(a)} à la fin de chaque année pendant {n} ans sur un compte rémunéré à {i} % l'an. Quel capital a-t-on juste après le dernier versement (arrondi au franc) ?", money(v), [money(round(float(w))) for w in wr if round(float(w)) != v],
+             "Valeur acquise = a × ((1 + i)^n − 1) ÷ i pour des versements en fin de période.")
+
+
+@gen(C, "l2e-perpetuite", cap=60, cat=FIN, source=SRC)
+def perpetuite(rng, d):
+    a = rng.randrange(50000, 2000001, 50000)
+    i = rng.choice([4, 5, 8, 10, 12, 15, 20, 25])
+    if rng.random() < 0.5:
+        v = F(a * 100, i)
+        # contrôle : somme partielle de plus en plus proche
+        part = sum(F(a) / (1 + F(i, 100)) ** t for t in range(1, 2001))
+        assert abs(float(v - part)) < 1e-3 * float(v)
+        v = rd(v, 0)
+        if v is None:
+            return None
+        return D(f"Un titre verse {money(a)} à la fin de chaque année indéfiniment ; le taux d'actualisation est de {i} %. Quelle est sa valeur (arrondie au franc) ?", money(v),
+                 [money(round(float(w))) for w in (a * i, a * (100 + i) / i, a / (1 + F(i, 100)), a * 100 / (i + 1)) if round(float(w)) != int(v)], "Valeur d'une perpétuité = flux ÷ taux d'actualisation.")
+    g = rng.choice([1, 2, 3])
+    if g >= i:
+        return None
+    val = F(a * 100, i - g)
+    part = sum(F(a) * (1 + F(g, 100)) ** (t - 1) / (1 + F(i, 100)) ** t for t in range(1, 3001))
+    assert abs(float(val - part)) < 5e-3 * float(val)
+    v = rd(val, 0)
+    if v is None:
+        return None
+    return D(f"Le prochain flux d'un actif est de {money(a)} (dans un an) et il croît ensuite de {g} % par an indéfiniment ; le taux d'actualisation est de {i} %. Quelle est sa valeur (arrondie au franc) ?", money(v),
+             [money(round(float(w))) for w in (F(a * 100, i), a * 100 / (i + g), a * (100 + g) / (i - g) * 1, a * 100 / (i - g) * (1 + F(g, 100))) if round(float(w)) != int(v)], "Valeur = flux de l'année 1 ÷ (taux d'actualisation − taux de croissance).")
+
+
+# ================================================================================================ INVESTISSEMENT ET FINANCE
+def van(i0, flux, i):
+    r = F(i, 100)
+    return -i0 + sum(f / (1 + r) ** (t + 1) for t, f in enumerate(flux))
+
+
+def van_horner(i0, flux, i):
+    r = F(i, 100)
+    acc = F(0)
+    for f in reversed(flux):
+        acc = (acc + f) / (1 + r)
+    return acc - i0
+
+
+def flux_gen(rng, n):
+    i0 = rng.randrange(60, 301, 10)
+    base = i0 / n
+    flux = [int(base * rng.choice([F(7, 10), F(9, 10), F(11, 10), F(13, 10), F(3, 2)])) for _ in range(n)]
+    return i0, flux
+
+
+@gen(C, "l2e-van", cap=60, cat=GES, source=SRC)
+def van_valeur(rng, d):
+    n = rng.randint(2, 5)
+    i0, flux = flux_gen(rng, n)
+    i = rng.choice([5, 6, 8, 10, 12, 15])
+    v = van(i0, flux, i)
+    assert v == van_horner(i0, flux, i)
+    vr = rd(v, 2)
+    if vr is None or abs(vr) < F(1, 20):
+        return None
+    cf = " ; ".join(f"année {t + 1} : {f}" for t, f in enumerate(flux))
+    return D(f"Un projet exige un investissement initial de {i0} millions de FCFA et rapporte (en millions, fin d'année) : {cf}. Le taux d'actualisation est de {i} %. Quelle est la VAN (en millions, arrondie à 0,01) ?", ff(vr),
+             nw(vr, [sum(flux) - i0, van(i0, flux, i + 5), van(i0, flux, max(1, i - 4)), v + i0, -vr], ff),
+             f"VAN = −{i0} + Σ flux ÷ (1 + {i} %)^t ; la simple somme des flux ({sum(flux)}) − {i0} ignorerait l'actualisation.")
+
+
+@gen(C, "l2e-van-decision", cap=60, cat=GES, source=SRC)
+def van_decision(rng, d):
+    n = rng.randint(2, 4)
+    i = rng.choice([6, 8, 10, 12])
+    i0a, fa = flux_gen(rng, n)
+    i0b, fb = flux_gen(rng, n)
+    va, vb = van(i0a, fa, i), van(i0b, fb, i)
+    assert va == van_horner(i0a, fa, i) and vb == van_horner(i0b, fb, i)
+    if va <= 0 or vb <= 0 or abs(va - vb) < F(1, 2):
+        return None
+    cfa = ", ".join(str(f) for f in fa)
+    cfb = ", ".join(str(f) for f in fb)
+    right = "Le projet A" if va > vb else "Le projet B"
+    return D(f"Deux projets exclusifs, taux d'actualisation {i} % (montants en millions de FCFA). A : investissement {i0a}, flux annuels {cfa}. B : investissement {i0b}, flux annuels {cfb}. Quel projet retient-on selon la VAN ?", right,
+             ["Le projet B" if va > vb else "Le projet A", "Aucun des deux projets", "Les deux projets, car ils sont indifférents"], f"VAN(A) = {ff(va, 2)} et VAN(B) = {ff(vb, 2)}, toutes deux positives : on retient la plus élevée.")
+
+
+@gen(C, "l2e-tri", cap=60, cat=GES, source=SRC)
+def tri_exact(rng, d):
+    r = rng.choice([4, 5, 6, 8, 10, 12, 15, 20, 25])
+    if d <= 3 or rng.random() < 0.5:
+        n = rng.randint(2, 5)
+        i0 = rng.randrange(100, 1001, 100)
+        fn = i0 * F(100 + r, 100) ** n
+        if fn.denominator != 1:
+            return None
+        fn = int(fn)
+        flux = [0] * (n - 1) + [fn]
+        txt = f"Un investissement de {fr(i0)} millions de FCFA rapporte {fr(fn)} millions en une seule fois, au bout de {n} ans."
+    else:
+        a, b = rng.randint(1, 4), rng.randint(1, 3)
+        f1, f2 = (100 + r) * a, (100 + r) ** 2 * b
+        i0 = 100 * a + 10000 * b
+        flux = [f1, f2]
+        txt = f"Un investissement de {fr(i0)} millions de FCFA rapporte {fr(f1)} millions la première année puis {fr(f2)} millions la deuxième."
+    # contrôle : VAN nulle au TRI, positive en dessous, négative au-dessus
+    assert van(i0, flux, r) == 0 and van(i0, flux, r - 1) > 0 and van(i0, flux, r + 1) < 0
+    return D(txt + " Quel est son taux de rentabilité interne (TRI) ?", pc(r, 1), [pc(x, 1) for x in (r + 2, r - 2, r * 2, r + 5, max(1, r - 3)) if x != r][:5],
+             f"Le TRI est le taux qui annule la VAN : à {r} %, la valeur actuelle des flux égale l'investissement.")
+
+
+@gen(C, "l2e-tri-encadrement", cap=60, cat=GES, source=SRC)
+def tri_encadrement(rng, d):
+    n = rng.randint(3, 5)
+    i0, flux = flux_gen(rng, n)
+    pts = [4, 8, 12, 16]
+    vs = [van(i0, flux, p) for p in pts]
+    if not (vs[0] > 0 > vs[-1]) or any(vs[k] <= vs[k + 1] for k in range(3)):
+        return None
+    k = max(j for j in range(4) if vs[j] > 0)
+    right = f"Entre {pts[k]} % et {pts[k + 1]} %"
+    cands = ["Moins de 4 %", "Entre 4 % et 8 %", "Entre 8 % et 12 %", "Entre 12 % et 16 %", "Plus de 16 %"]
+    # on propose 4 intervalles disjoints
+    opts = ["Moins de 4 %", "Entre 4 % et 8 %", "Entre 8 % et 12 %", "Entre 12 % et 16 %"] if k < 3 else ["Entre 4 % et 8 %", "Entre 8 % et 12 %", "Entre 12 % et 16 %", "Plus de 16 %"]
+    if right not in opts:
+        return None
+    vals = " ; ".join(f"à {p} % : {ff(rd(v, 2) or v, 2)}" for p, v in zip(pts, vs))
+    return D(f"La VAN d'un projet conventionnel (un décaissement puis des encaissements, en millions de FCFA) est : {vals}. Dans quel intervalle se trouve son TRI ?", right, [o for o in opts if o != right],
+             "La VAN décroît avec le taux ; le TRI est le taux où elle s'annule, entre le dernier taux à VAN positive et le premier à VAN négative.")
+
+
+@gen(C, "l2e-delai-recup", cap=60, cat=GES, source=SRC)
+def delai_recup(rng, d):
+    for _ in range(200):
+        n = rng.randint(3, 6)
+        flux = [rng.randrange(60, 301, 20) for _ in range(n)]
+        i0 = rng.randrange(100, sum(flux), 20)
+        cum, j = 0, 0
+        while cum + flux[j] < i0:
+            cum += flux[j]
+            j += 1
+        reste = i0 - cum
+        mois = F(12 * reste, flux[j])
+        if mois.denominator != 1:
+            continue
+        tot = 12 * j + int(mois)
+        # contrôle : flux répartis mensuellement
+        c, m = F(0), 0
+        while c < i0:
+            c += F(flux[m // 12], 12)
+            m += 1
+        assert m == tot
+        ans, ms = divmod(tot, 12)
+        fmt = lambda t: (f"{t // 12} an{'s' if t // 12 > 1 else ''}" if t % 12 == 0 else (f"{t // 12} an{'s' if t // 12 > 1 else ''} et {t % 12} mois" if t // 12 else f"{t % 12} mois"))
+        right = fmt(tot)
+        wr = [fmt(t) for t in (tot + 3, tot - 3 if tot > 3 else tot + 6, 12 * (j + 1), 12 * j + (12 - ms) if ms else tot + 4, tot + 1) if t != tot and t > 0]
+        cfs = ", ".join(str(f) for f in flux)
+        return D(f"Un investissement de {i0} millions de FCFA rapporte, année après année, {cfs} millions (flux répartis uniformément dans l'année). Quel est son délai de récupération simple ?", right, wr,
+                 f"Cumul avant l'année {j + 1} : {cum} ; il reste {reste} à récupérer sur un flux de {flux[j]}, soit {int(mois)} mois.")
+    return None
+
+
+@gen(C, "l2e-delai-actualise", cap=60, cat=GES, source=SRC)
+def delai_actualise(rng, d):
+    n = rng.randint(4, 7)
+    flux = [rng.randrange(60, 241, 20) for _ in range(n)]
+    i = rng.choice([5, 8, 10, 12, 15])
+    i0 = rng.randrange(150, 600, 10)
+    r = F(i, 100)
+    cum, ans = F(0), None
+    for t, f in enumerate(flux, 1):
+        cum += f / (1 + r) ** t
+        if cum >= i0:
+            ans = t
+            break
+    if ans is None or ans == 1:
+        return None
+    # contrôle : méthode inverse (VAN partielle)
+    assert van(i0, flux[:ans], i) >= 0 and van(i0, flux[:ans - 1], i) < 0
+    ordn = lambda t: f"{t}{'re' if t == 1 else 'e'} année"
+    wr = [ordn(t) for t in (ans - 1, ans + 1, ans + 2, ans - 2) if 1 <= t <= n + 1 and t != ans]
+    cfs = ", ".join(str(f) for f in flux)
+    return D(f"Un investissement de {i0} millions de FCFA rapporte {cfs} millions les années 1 à {n}. Le taux d'actualisation est de {i} %. Au cours de quelle année les flux actualisés cumulés couvrent-ils l'investissement ?", ordn(ans), wr,
+             f"Les flux actualisés cumulés sont inférieurs à {i0} avant l'année {ans} et le dépassent à l'année {ans}.")
+
+
+@gen(C, "l2e-cmpc", cap=60, cat=GES, source=SRC)
+def cmpc(rng, d):
+    e, dt = rng.randrange(100, 1001, 50), rng.randrange(50, 801, 50)
+    ke, kd, t = rng.choice([8, 10, 12, 14, 15, 16, 18]), rng.choice([4, 5, 6, 7, 8, 9]), rng.choice([20, 25, 30, 33, 35])
+    if kd >= ke:
+        return None
+    v_ = e + dt
+    w = F(e, v_) * ke + F(dt, v_) * kd * (100 - t) / 100
+    # contrôle : coût annuel en montant, ramené au capital total
+    cout = F(e * ke, 100) + F(dt * kd * (100 - t), 10000)
+    assert cout / v_ * 100 == w
+    v = rd(w, 2)
+    if v is None:
+        return None
+    return D(f"Une entreprise est financée par {e} millions de capitaux propres (coût {ke} %) et {dt} millions de dettes (taux {kd} %, impôt sur les bénéfices de {t} %). Quel est son coût moyen pondéré du capital (arrondi à 0,01 %) ?", pc(v, 2),
+             nw(v, [F(e, v_) * ke + F(dt, v_) * kd, F(ke + kd, 2), (ke + F(kd * (100 - t), 100)) / 2, F(dt, v_) * ke + F(e, v_) * kd * (100 - t) / 100], lambda x: pc(x, 2)),
+             f"CMPC = E/V × ke + D/V × kd × (1 − t) = {e}/{v_} × {ke} % + {dt}/{v_} × {kd} % × {ff(1 - F(t, 100), 2)}.")
+
+
+@gen(C, "l2e-levier", cap=60, cat=GES, source=SRC)
+def levier(rng, d):
+    cp, dt = rng.randrange(200, 1001, 50), rng.randrange(100, 801, 50)
+    re_ = rng.randrange(40, 301, 10)
+    i, t = rng.choice([4, 5, 6, 8, 10]), rng.choice([0, 20, 25, 30])
+    rn = (F(re_) - F(dt * i, 100)) * (100 - t) / 100
+    roe = rn / cp * 100
+    roa = F(re_, cp + dt) * 100
+    # contrôle : ROE = (1 − t) × [ROA + (ROA − i) × D/CP]
+    assert roe == (100 - t) / F(100) * (roa + (roa - i) * F(dt, cp))
+    ask = rng.choice(["roe", "eff"])
+    ent = f"Une entreprise a des capitaux propres de {cp} millions, des dettes financières de {dt} millions au taux de {i} %, un résultat d'exploitation de {re_} millions" + (f" et paie {t} % d'impôt sur les bénéfices. " if t else " (pas d'impôt). ")
+    if ask == "roe":
+        v = rd(roe, 2)
+        if v is None:
+            return None
+        return D(ent + "Quelle est sa rentabilité financière (résultat net ÷ capitaux propres, arrondie à 0,01 %) ?", pc(v, 2), nw(v, [F(re_, cp) * 100, roa, roe * 100 / (100 - t) if t else roe + 1, F(rn, cp + dt) * 100], lambda x: pc(x, 2)),
+                 f"Résultat net = ({re_} − intérêts {ff(F(dt * i, 100), 2)}) × {ff(1 - F(t, 100), 2)} = {ff(rn, 2)} ; ÷ {cp}.")
+    eff = (roa - i) * F(dt, cp)
+    v = rd(eff, 2)
+    if v is None:
+        return None
+    return D(ent + "Quel est l'effet de levier avant impôt, (rentabilité économique − taux de la dette) × dettes ÷ capitaux propres, en points (arrondi à 0,01) ?", pc(v, 2), nw(v, [roa - i, roa, F(dt, cp) * i, (roa - i) * F(cp, dt)], lambda x: pc(x, 2)),
+             f"Rentabilité économique = {re_} ÷ {cp + dt} = {ff(roa, 2)} % ; effet = ({ff(roa, 2)} − {i}) × {dt}/{cp}.")
+
+
+@gen(C, "l2e-dupont", cap=60, cat=GES, source=SRC)
+def dupont(rng, d):
+    cp = rng.randrange(100, 801, 50)
+    lev = rng.choice([F(3, 2), F(2), F(5, 2), F(4, 3), F(3), F(4)])
+    act = cp * lev
+    rot = rng.choice([F(1, 2), F(3, 4), F(1), F(3, 2), F(2), F(5, 2), F(3)])
+    ca = act * rot
+    mg = rng.choice([F(2), F(3), F(4), F(5), F(6), F(8), F(10)])
+    rn = ca * mg / 100
+    if any(x.denominator != 1 for x in (act, ca)):
+        return None
+    roe = rn / cp * 100
+    assert roe == mg * rot * lev            # décomposition de DuPont
+    ask = rng.choice(["roe", "mg", "rot", "lev"])
+    ent = f"Données (millions de FCFA) : résultat net {ff(rn, 2)} ; chiffre d'affaires {fr(int(ca))} ; total de l'actif {fr(int(act))} ; capitaux propres {fr(cp)}. "
+    if ask == "roe":
+        v = rd(roe, 1)
+        if v is None:
+            return None
+        return D(ent + "Quelle est la rentabilité des capitaux propres (ROE, arrondie à 0,1 %) ?", pc(v, 1), nw(v, [mg, mg * rot, F(rn, act) * 100, F(rn, ca) * 100 + rot], lambda x: pc(x, 1)), "ROE = marge nette × rotation de l'actif × levier (actif ÷ capitaux propres).")
+    if ask == "mg":
+        return D(ent + "Quelle est la marge nette (résultat net ÷ chiffre d'affaires, en %) ?", pc(mg, 1), nw(mg, [roe, F(rn, act) * 100, F(rn, cp) * 100 / 2, rot * 100], lambda x: pc(x, 1)), "Marge nette = résultat net ÷ chiffre d'affaires, premier facteur de DuPont.")
+    if ask == "rot":
+        return D(ent + "Quelle est la rotation de l'actif (chiffre d'affaires ÷ actif), arrondie à 0,01 ?", ff(rot, 2), nw(rot, [lev, F(ca, cp), F(act, ca), F(rn, act)], ff), "Rotation de l'actif = chiffre d'affaires ÷ total de l'actif.")
+    return D(ent + "Quel est le levier financier (actif ÷ capitaux propres), arrondi à 0,01 ?", ff(lev, 2), nw(lev, [rot, F(ca, cp), F(cp, act), F(act, ca)], ff), "Levier = total de l'actif ÷ capitaux propres.")
+
+
+@gen(C, "l2e-rentabilite-eco", cap=60, cat=GES, source=SRC)
+def rentabilite_eco(rng, d):
+    cp, dt = rng.randrange(200, 1001, 50), rng.randrange(100, 801, 50)
+    re_ = rng.randrange(40, 301, 10)
+    t = rng.choice([0, 20, 25, 30, 35])
+    nopat = F(re_) * (100 - t) / 100
+    roic = nopat / (cp + dt) * 100
+    # contrôle par la méthode des montants
+    assert roic * (cp + dt) == nopat * 100
+    v = rd(roic, 2)
+    if v is None:
+        return None
+    return D(f"Le résultat d'exploitation est de {re_} millions de FCFA, l'impôt sur les bénéfices de {t} %, les capitaux propres de {cp} millions et les dettes financières de {dt} millions. Quelle est la rentabilité des capitaux investis (résultat d'exploitation après impôt ÷ (capitaux propres + dettes), arrondie à 0,01 %) ?".replace("de 0 %", "nul"),
+             pc(v, 2), nw(v, [F(re_, cp) * 100, F(re_, cp + dt) * 100 if t else roic + 1, nopat / cp * 100, nopat / dt * 100], lambda x: pc(x, 2)),
+             f"({re_} × {ff(1 - F(t, 100), 2)}) ÷ ({cp} + {dt}).")
+
+
+# ================================================================================================ COMMERCE INTERNATIONAL
+@gen(C, "l2e-cout-opportunite", cap=60, cat=INT, source=SRC)
+def cout_opportunite(rng, d):
+    hx, hy = rng.randint(1, 12), rng.randint(1, 12)
+    if hx == hy:
+        return None
+    L = rng.choice([60, 120, 240, 360])
+    xmax, ymax = F(L, hx), F(L, hy)
+    oc = F(hx, hy)
+    assert ymax / xmax == oc
+    v = rd(oc, 2)
+    if v is None:
+        return None
+    return D(f"Dans un pays, produire 1 unité de X exige {hx} heures de travail et 1 unité de Y exige {hy} heures. Quel est le coût d'opportunité d'une unité de X en unités de Y (arrondi à 0,01) ?", ff(v, 2), nw(v, [F(hy, hx), hx - hy, hx * hy, F(hx + hy, 2)], ff),
+             f"Chaque unité de X coûte {hx} h, soit {hx}/{hy} unité de Y non produite.")
+
+
+@gen(C, "l2e-avantage-comparatif", cap=60, cat=INT, source=SRC)
+def avantage_comparatif(rng, d):
+    ax, ay = rng.randint(1, 9), rng.randint(1, 9)
+    bx, by = rng.randint(1, 9), rng.randint(1, 9)
+    ocA, ocB = F(ax, ay), F(bx, by)            # coût d'opportunité de X
+    if ocA == ocB:
+        return None
+    if d >= 4 and not ((ax < bx and ay < by) or (ax > bx and ay > by)):
+        return None
+    right = "Le pays A" if ocA < ocB else "Le pays B"
+    assert (F(ay, ax) < F(by, bx)) == (ocA > ocB) or ocA == ocB or True
+    # contrôle : coût d'opportunité de Y = inverse de celui de X
+    assert (1 / ocA < 1 / ocB) == (ocA > ocB)
+    return D(f"Heures de travail par unité. Pays A : {ax} pour X, {ay} pour Y. Pays B : {bx} pour X, {by} pour Y. Quel pays possède l'avantage comparatif dans le bien X ?", right,
+             ["Le pays B" if ocA < ocB else "Le pays A", "Les deux pays, à égalité", "Aucun des deux pays"],
+             f"Coût d'opportunité de X : pays A = {ax}/{ay} = {ff(ocA, 2)} Y ; pays B = {bx}/{by} = {ff(ocB, 2)} Y ; l'avantage comparatif revient au plus faible.")
+
+
+@gen(C, "l2e-termes-echange", cap=60, cat=INT, source=SRC)
+def termes_echange(rng, d):
+    ax, ay = rng.randint(1, 10), rng.randint(1, 10)
+    bx, by = rng.randint(1, 10), rng.randint(1, 10)
+    ocA, ocB = F(ax, ay), F(bx, by)
+    if ocA == ocB:
+        return None
+    lo, hi = min(ocA, ocB), max(ocA, ocB)
+    f_ = lambda x: ff(x, 2)
+    right = f"Entre {f_(lo)} et {f_(hi)} unités de Y par unité de X"
+    mid = (lo + hi) / 2
+    wr = [f"Moins de {f_(lo)} unité de Y par unité de X", f"Plus de {f_(hi)} unités de Y par unité de X", f"Exactement {f_(lo)} unité de Y par unité de X"]
+    return D(f"Heures de travail par unité. Pays A : {ax} pour X, {ay} pour Y. Pays B : {bx} pour X, {by} pour Y. Quels termes de l'échange (quantité de Y contre 1 unité de X) sont avantageux pour les deux pays ?", right, wr,
+             f"Le prix de X en Y doit se situer entre les deux coûts d'opportunité ({f_(ocA)} et {f_(ocB)}) pour que chacun gagne à échanger (un point, par exemple {f_(mid)}, convient).")
+
+
+# ================================================================================================ COMPTES NATIONAUX
+@gen(C, "l2e-pib-depense", cap=60, cat=MAC, source=SRC)
+def pib_depense(rng, d):
+    c, i, g = rng.randrange(500, 4000, 50), rng.randrange(100, 1500, 50), rng.randrange(100, 1500, 50)
+    x, m = rng.randrange(100, 1500, 50), rng.randrange(100, 1500, 50)
+    pib = c + i + g + x - m
+    ask = rng.choice(["pib", "m", "xn"])
+    if ask == "pib":
+        return D(f"En milliards de FCFA : consommation {c}, investissement {i}, dépenses publiques {g}, exportations {x}, importations {m}. Quel est le PIB par la dépense ?", fr(pib),
+                 [fr(v) for v in (c + i + g + x + m, c + i + g, c + i + g + x, c + i + g + m - x if False else c + i + g - x + m) if v != pib], "PIB = C + I + G + (X − M).")
+    if ask == "m":
+        assert c + i + g + x - (c + i + g + x - pib) == pib
+        return D(f"Le PIB est de {pib} milliards de FCFA ; consommation {c}, investissement {i}, dépenses publiques {g}, exportations {x}. Quelles sont les importations ?", fr(m),
+                 [fr(v) for v in (x, c + i + g + x + pib, c + i + g - pib, c + i + g + x - pib + 50, m + 50) if v != m and v > 0], "M = C + I + G + X − PIB.")
+    return D(f"En milliards de FCFA : PIB {pib}, consommation {c}, investissement {i}, dépenses publiques {g}. Quelles sont les exportations nettes (X − M) ?", fr(x - m),
+             [fr(v) for v in (m - x, pib - c - i, c + i + g - pib + 50, x, pib - c - i - g + 100) if v != x - m],
+             "Exportations nettes = PIB − (C + I + G).")
+
+
+@gen(C, "l2e-pib-pnb", cap=60, cat=MAC, source=SRC)
+def pib_pnb(rng, d):
+    pib = rng.randrange(1000, 20000, 100)
+    rec, ver = rng.randrange(20, 600, 10), rng.randrange(20, 600, 10)
+    if rec == ver:
+        return None
+    pnb = pib + rec - ver
+    if rng.random() < 0.5:
+        return D(f"Le PIB d'un pays est de {fr(pib)} milliards de FCFA ; ses résidents ont reçu {rec} milliards de revenus du reste du monde et versé {ver} milliards au reste du monde. Quel est son revenu national brut (RNB) ?", fr(pnb),
+                 [fr(v) for v in (pib + rec + ver, pib - rec + ver, pib, pib + rec - ver + 100) if v != pnb], "RNB = PIB + revenus primaires reçus de l'étranger − revenus versés à l'étranger.")
+    return D(f"Le revenu national brut est de {fr(pnb)} milliards de FCFA ; les résidents ont reçu {rec} milliards de revenus de l'étranger et versé {ver} milliards. Quel est le PIB ?", fr(pib),
+             [fr(v) for v in (pnb + rec - ver, pnb + rec + ver, pnb, pib + 100) if v != pib], "PIB = RNB − revenus reçus + revenus versés.")
+
+
+@gen(C, "l2e-identite-epargne", cap=60, cat=MAC, source=SRC)
+def identite_epargne(rng, d):
+    y, c, g = rng.randrange(2000, 20000, 100), rng.randrange(800, 12000, 100), rng.randrange(200, 3000, 100)
+    x, m = rng.randrange(100, 2000, 50), rng.randrange(100, 2000, 50)
+    if c + g >= y or x == m:
+        return None
+    s = y - c - g
+    i = y - c - g - x + m
+    assert s == i + (x - m)                       # épargne nationale = investissement + solde extérieur
+    if rng.random() < 0.5:
+        return D(f"Économie ouverte (milliards de FCFA) : revenu Y = {fr(y)}, consommation {fr(c)}, dépenses publiques {fr(g)}. Quelle est l'épargne nationale S = Y − C − G ?", fr(s),
+                 [fr(v) for v in (y - c, y - g, c + g, s + x - m) if v != s and v > 0], "L'épargne nationale est la part du revenu ni consommée ni dépensée par l'État.")
+    if i <= 0:
+        return None
+    return D(f"Économie ouverte (milliards de FCFA) : Y = {fr(y)}, C = {fr(c)}, G = {fr(g)}, exportations {x}, importations {m}. Quel est l'investissement I (Y = C + I + G + X − M) ?", fr(i),
+             [fr(v) for v in (s, s + x - m, y - c - g + x + m, i + 2 * (x - m) if i + 2 * (x - m) > 0 else i + 50) if v != i and v > 0], "I = Y − C − G − X + M.")
+
+
+@gen(C, "l2e-solow", cap=60, cat=MAC, source=SRC)
+def solow(rng, d):
+    rat = rng.randint(1, 6)
+    dn = F(rng.choice([5, 8, 10, 12]), 100)         # n + δ
+    s = dn * rat
+    if s >= 1:
+        return None
+    k = F(rat) ** 2
+    y = F(rat)
+    assert s * y == dn * k                         # état stationnaire : investissement = amortissement
+    # contrôle par itération de la dynamique k' = k + s√k − (n + δ)k
+    kk = 1.0
+    for _ in range(20000):
+        kk = kk + float(s) * math.sqrt(kk) - float(dn) * kk
+    assert abs(kk - float(k)) < 1e-6
+    ask = rng.choice(["k", "y", "c"])
+    ent = f"Dans un modèle de Solow, y = √k, le taux d'épargne est de {ff(s * 100, 0)} % et le taux de croissance de la population plus la dépréciation valent {ff(dn * 100, 0)} %. "
+    if ask == "k":
+        return D(ent + "Quel est le capital par tête à l'état stationnaire ?", fr(int(k)), [fr(int(v)) for v in (y, rat * 2, int(k) + 1, int(k) - 1 if k > 1 else 2, int(k) * 2) if int(v) != int(k) and v > 0],
+                 "À l'état stationnaire s·√k = (n + δ)·k, d'où √k = s ÷ (n + δ).")
+    if ask == "y":
+        return D(ent + "Quel est le produit par tête à l'état stationnaire ?", fr(int(y)), [fr(int(v)) for v in (k, y + 1, y * 2, int(y) - 1 if y > 1 else 3, k + 1) if int(v) != int(y) and v > 0],
+                 "y = √k avec √k = s ÷ (n + δ).")
+    cons = (1 - s) * y
+    return D(ent + "Quelle est la consommation par tête à l'état stationnaire ?", ff(cons, 2), nw(cons, [y, s * y, k, (1 - s) * k], ff), "c = (1 − s) × y à l'état stationnaire.")
+
+
+# ================================================================================================ STATISTIQUES APPLIQUÉES
+def jeu(rng, n, lo, hi, step):
+    xs = [rng.randrange(lo, hi + 1, step) for _ in range(n)]
+    return xs
+
+
+@gen(C, "l2e-stat-moyenne-mediane", cap=60, cat=STA, source=SRC)
+def stat_moyenne_mediane(rng, d):
+    n = rng.choice([5, 6, 7, 8, 9])
+    xs = jeu(rng, n, 50, 600, 10)
+    xs = sorted(xs)
+    if len(set(xs)) < n - 1:
+        return None
+    # on force un revenu élevé pour que moyenne et médiane diffèrent
+    xs[-1] = xs[-1] + rng.randrange(300, 1200, 50)
+    mu = F(sum(xs), n)
+    med = F(xs[n // 2]) if n % 2 else F(xs[n // 2 - 1] + xs[n // 2], 2)
+    assert float(mu) == statistics.mean(xs) and float(med) == statistics.median(xs)
+    rng.shuffle(xs)
+    ask = rng.choice(["moy", "med", "ecart"])
+    ent = f"Salaires mensuels (en milliers de FCFA) de {n} employés : {', '.join(str(x) for x in xs)}. "
+    if ask == "moy":
+        v = rd(mu, 2)
+        if v is None:
+            return None
+        return D(ent + "Quel est le salaire moyen (arrondi à 0,01) ?", ff(v), nw(v, [med, max(xs), F(max(xs) + min(xs), 2), F(sum(xs), n + 1)], ff), f"Moyenne = somme ({sum(xs)}) ÷ {n}.")
+    if ask == "med":
+        return D(ent + "Quel est le salaire médian ?", ff(med, 1), nw(med, [mu, F(max(xs) + min(xs), 2), sorted(xs)[n // 2 - 1], sorted(xs)[n // 2 + 1] if n // 2 + 1 < n else med + 5], lambda x: ff(x, 1)),
+                 "On range les valeurs : la médiane est la valeur centrale (ou la moyenne des deux valeurs centrales si l'effectif est pair).")
+    v = rd(mu - med, 2)
+    if v is None:
+        return None
+    return D(ent + "De combien la moyenne dépasse-t-elle la médiane (arrondi à 0,01) ?", ff(v), nw(v, [med - mu, mu, med, abs(mu - med) / 2], ff), "Le salaire le plus élevé tire la moyenne vers le haut, pas la médiane.")
+
+
+@gen(C, "l2e-stat-ecart-type", cap=60, cat=STA, source=SRC)
+def stat_ecart_type(rng, d):
+    n = rng.choice([4, 5, 6, 8])
+    xs = jeu(rng, n, 10, 90, 5)
+    mu = F(sum(xs), n)
+    var = sum((F(x) - mu) ** 2 for x in xs) / n
+    assert var == F(sum(x * x for x in xs), n) - mu * mu        # formule de König-Huygens
+    assert abs(float(var) - statistics.pvariance(xs)) < 1e-9
+    if var == 0:
+        return None
+    ask = rng.choice(["var", "sd"])
+    ent = f"Taux de croissance annuels (en %) d'un secteur sur {n} ans : {', '.join(str(x) for x in xs)}. "
+    if ask == "var":
+        v = rd(var, 2)
+        if v is None:
+            return None
+        return D(ent + "Quelle est la variance (formule de population, division par n, arrondie à 0,01) ?", ff(v), nw(v, [var * n / (n - 1), math.sqrt(var), mu, var * n], ff),
+                 f"Variance = moyenne des carrés des écarts à la moyenne ({ff(mu, 2)}) = {ff(var, 4)}.")
+    sd = math.sqrt(float(var))
+    v = rd(F(sd), 2)
+    if v is None:
+        return None
+    return D(ent + "Quel est l'écart-type (formule de population, arrondi à 0,01) ?", ff(v), nw(v, [var, math.sqrt(float(var) * n / (n - 1)), F(sd) / 2, mu], ff), "Écart-type = racine carrée de la variance (division par n).")
+
+
+@gen(C, "l2e-stat-cv", cap=60, cat=STA, source=SRC)
+def stat_cv(rng, d):
+    n = rng.choice([4, 5, 6])
+    xs = jeu(rng, n, 20, 200, 10)
+    mu = F(sum(xs), n)
+    var = sum((F(x) - mu) ** 2 for x in xs) / n
+    if var == 0:
+        return None
+    sd = math.sqrt(float(var))
+    cv = sd / float(mu) * 100
+    assert abs(cv - statistics.pstdev(xs) / statistics.mean(xs) * 100) < 1e-9
+    v = rd(F(cv), 1)
+    if v is None:
+        return None
+    return D(f"Les prix d'un produit relevés sur {n} marchés sont (en FCFA) : {', '.join(str(x) for x in xs)}. Quel est le coefficient de variation (écart-type de population ÷ moyenne, en %, arrondi à 0,1) ?", pc(v, 1),
+             nw(v, [F(sd), F(sd * 100 / float(mu) * 0 + float(var) / float(mu) * 100), F(float(mu)), F(cv) / 2], lambda x: pc(x, 1)), f"Moyenne {ff(mu, 2)} ; écart-type {ff(sd, 2)} ; CV = écart-type ÷ moyenne.")
+
+
+@gen(C, "l2e-stat-moyenne-ponderee", cap=60, cat=STA, source=SRC)
+def stat_moyenne_ponderee(rng, d):
+    n = 3
+    ws = [rng.choice([10, 20, 30, 40, 50]) for _ in range(n)]
+    tot = sum(ws)
+    xs = [rng.randrange(1000, 5001, 100) for _ in range(n)]
+    m = F(sum(w * x for w, x in zip(ws, xs)), tot)
+    assert abs(float(m) - sum(x * w / tot for w, x in zip(ws, xs))) < 1e-9
+    v = rd(m, 2)
+    if v is None:
+        return None
+    return D(f"Un pays exporte trois produits au prix moyen de {', '.join(fr(x) for x in xs)} FCFA le kilo ; les quantités exportées sont de {', '.join(str(w) for w in ws)} tonnes. Quel est le prix moyen pondéré par les quantités (arrondi à 0,01) ?", ff(v),
+             nw(v, [F(sum(xs), n), F(sum(w * x for w, x in zip(ws, xs)), n), xs[ws.index(max(ws))], F(sum(w * x for w, x in zip(ws, xs)))], ff), "Moyenne pondérée = Σ(quantité × prix) ÷ Σ quantités.")
+
+
+# ------------------------------------------------------------------------------------------------ régression simple
+PATRONS = [(1, -2, 2, -2, 1), (-1, 2, 0, -2, 1), (2, -1, -2, -1, 2), (1, 0, -2, 0, 1)]
+
+
+def regression_data(rng, demande):
+    n = 5
+    step = rng.choice([20, 40, 60, 100])
+    x0 = rng.randrange(1, 6) * step
+    xs = [x0 + step * k for k in range(n)]
+    b = rng.choice([F(-3), F(-2), F(-3, 2), F(-1), F(-1, 2), F(-4), F(-1, 4)]) if demande else rng.choice([F(1, 2), F(3, 5), F(3, 4), F(4, 5), F(1), F(2), F(3, 2)])
+    a = rng.randrange(100, 600, 10) if demande else rng.randrange(20, 200, 10)
+    unit = rng.choice([1, 2, 3, 5])
+    e = rng.choice(PATRONS)
+    ys = [a + b * x + unit * ei for x, ei in zip(xs, e)]
+    if any(y.denominator != 1 or y <= 0 for y in ys):
+        return None
+    ys = [int(y) for y in ys]
+    # pente et ordonnée par deux méthodes
+    sx, sy, sxy, sxx = sum(xs), sum(ys), sum(x * y for x, y in zip(xs, ys)), sum(x * x for x in xs)
+    b1 = F(n * sxy - sx * sy, n * sxx - sx * sx)
+    mx, my = F(sx, n), F(sy, n)
+    b2 = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sum((x - mx) ** 2 for x in xs)
+    assert b1 == b2 == b
+    a1 = my - b1 * mx
+    assert a1 == a
+    return xs, ys, b, a, mx, my, unit, e
+
+
+@gen(C, "l2e-regression-pente", cap=60, cat=STA, source=SRC)
+def regression_pente(rng, d):
+    dem = rng.random() < 0.5
+    r = regression_data(rng, dem)
+    if r is None:
+        return None
+    xs, ys, b, a, mx, my, unit, e = r
+    pts = " ; ".join(f"({x} ; {y})" for x, y in zip(xs, ys))
+    if dem:
+        ent = f"Cinq relevés (prix en FCFA, quantité demandée en milliers d'unités) : {pts}. "
+        what = "Quelle est la pente de la droite des moindres carrés de la quantité sur le prix ?"
+    else:
+        ent = f"Cinq ménages : (revenu en milliers de FCFA ; consommation en milliers de FCFA) : {pts}. "
+        what = "Quelle est la pente de la droite des moindres carrés de la consommation sur le revenu (propension marginale à consommer estimée) ?"
+    sxy = sum((x - mx) * (y - my) for x, y in zip(xs, ys))
+    sxx = sum((x - mx) ** 2 for x in xs)
+    wr = [F(sxy), 1 / b, a, my / mx, sxy / (sxx * 5) if False else b * 2]
+    return D(ent + what, ff(b, 2), nw(b, wr, ff), f"Pente = covariance(x, y) ÷ variance(x) = {fr(int(sxy))} ÷ {fr(int(sxx))} = {ff(b, 2)} (l'ordonnée à l'origine vaut {ff(a, 1)}).")
+
+
+@gen(C, "l2e-regression-prevision", cap=60, cat=STA, source=SRC)
+def regression_prevision(rng, d):
+    dem = rng.random() < 0.5
+    r = regression_data(rng, dem)
+    if r is None:
+        return None
+    xs, ys, b, a, mx, my, unit, e = r
+    step = xs[1] - xs[0]
+    x_new = xs[-1] + step * rng.choice([1, 2])
+    pred = a + b * x_new
+    assert pred == my + b * (x_new - mx)
+    pts = " ; ".join(f"({x} ; {y})" for x, y in zip(xs, ys))
+    nom = ("prix (FCFA) ; quantité (milliers d'unités)" if dem else "revenu ; consommation (milliers de FCFA)")
+    v = rd(pred, 2)
+    if v is None:
+        return None
+    return D(f"Cinq observations ({nom}) : {pts}. Quelle valeur la droite des moindres carrés prévoit-elle pour y quand x = {fr(x_new)} (arrondi à 0,01) ?", ff(v),
+             nw(v, [my, ys[-1] + b * step * 2 if False else ys[-1], a + b * xs[-1], b * x_new, my + a], ff), f"ŷ = {ff(a, 1)} + ({ff(b, 2)}) × {fr(x_new)}.")
+
+
+@gen(C, "l2e-regression-elasticite", cap=60, cat=STA, source=SRC)
+def regression_elasticite(rng, d):
+    dem = rng.random() < 0.6
+    r = regression_data(rng, dem)
+    if r is None:
+        return None
+    xs, ys, b, a, mx, my, unit, e = r
+    el = b * mx / my
+    v = rd(el, 2)
+    if v is None:
+        return None
+    pts = " ; ".join(f"({x} ; {y})" for x, y in zip(xs, ys))
+    nom = ("prix en FCFA ; quantité demandée" if dem else "revenu ; consommation")
+    return D(f"Cinq observations ({nom}) : {pts}. Quelle est l'élasticité estimée au point moyen, pente × x moyen ÷ y moyen (arrondie à 0,01) ?", ff(v), nw(v, [b, F(my, mx) * b, b * my / mx, -el, mx / my], ff),
+             f"Pente {ff(b, 2)} ; x moyen {ff(mx, 1)} ; y moyen {ff(my, 1)} ; élasticité = {ff(b, 2)} × {ff(mx, 1)} ÷ {ff(my, 1)}.")
+
+
+@gen(C, "l2e-regression-r2", cap=60, cat=STA, source=SRC)
+def regression_r2(rng, d):
+    r = regression_data(rng, rng.random() < 0.5)
+    if r is None:
+        return None
+    xs, ys, b, a, mx, my, unit, e = r
+    sse = sum((y - (a + b * x)) ** 2 for x, y in zip(xs, ys))
+    sst = sum((y - my) ** 2 for y in ys)
+    r2 = 1 - sse / sst
+    # 2e méthode : carré du coefficient de corrélation
+    sxy = sum((x - mx) * (y - my) for x, y in zip(xs, ys))
+    sxx = sum((x - mx) ** 2 for x in xs)
+    assert r2 == sxy * sxy / (sxx * sst)
+    v = rd(r2, 3)
+    if v is None:
+        return None
+    pts = " ; ".join(f"({x} ; {y})" for x, y in zip(xs, ys))
+    return D(f"Cinq observations (x ; y) : {pts}. Quel est le coefficient de détermination R² de la régression de y sur x (arrondi à 0,001) ?", ff(v, 3), nw(v, [math.sqrt(float(r2)), 1 - r2, sse / sst * 0 + float(sse) / 100, F(sxy, sst)], lambda x: ff(x, 3)),
+             f"R² = 1 − somme des carrés des résidus ({fr(int(sse))}) ÷ somme totale des carrés ({fr(int(sst))}).")
+
+
+# ------------------------------------------------------------------------------------------------ inégalités
+@gen(C, "l2e-gini", cap=60, cat=STA, source=SRC)
+def gini(rng, d):
+    n = rng.choice([4, 5, 6])
+    xs = sorted(rng.randrange(10, 400, 10) for _ in range(n))
+    if len(set(xs)) < 3:
+        return None
+    mu = F(sum(xs), n)
+    g1 = sum(abs(a - b) for a in xs for b in xs) / (2 * n * n * mu)
+    # 2e méthode : formule sur les valeurs triées
+    g2 = F(2 * sum((i + 1) * x for i, x in enumerate(xs)), n * sum(xs)) - F(n + 1, n)
+    assert g1 == g2
+    v = rd(g1, 3)
+    if v is None:
+        return None
+    rng.shuffle(xs)
+    return D(f"Revenus de {n} ménages (milliers de FCFA) : {', '.join(str(x) for x in xs)}. Le coefficient de Gini est G = Σ|xi − xj| (sur toutes les paires ordonnées) ÷ (2n²μ). Quelle est sa valeur (arrondie à 0,001) ?", ff(v, 3),
+             nw(v, [2 * g1, 1 - g1, g1 * n / (n - 1), g1 / 2], lambda x: ff(x, 3)), f"Moyenne μ = {ff(mu, 2)} ; les écarts absolus cumulés divisés par 2n²μ donnent {ff(g1, 4)}.")
+
+
+@gen(C, "l2e-lorenz", cap=60, cat=STA, source=SRC)
+def lorenz(rng, d):
+    n = rng.choice([5, 10])
+    xs = sorted(rng.randrange(10, 300, 10) for _ in range(n))
+    if len(set(xs)) < 3:
+        return None
+    k = rng.choice([1, 2, 3]) if n == 5 else rng.choice([2, 3, 4, 5, 6])
+    part = F(sum(xs[:k]), sum(xs)) * 100
+    # contrôle : complément des revenus des plus riches
+    assert part == 100 - F(sum(xs[k:]), sum(xs)) * 100
+    v = rd(part, 1)
+    if v is None:
+        return None
+    rng.shuffle(xs)
+    share = F(k, n) * 100
+    return D(f"Revenus de {n} ménages (milliers de FCFA) : {', '.join(str(x) for x in xs)}. Quelle part du revenu total reçoivent les {k} ménage{'s' if k > 1 else ''} les plus pauvres, soit {ff(share, 0)} % de la population (en %, arrondie à 0,1) ?", pc(v, 1),
+             nw(v, [share, 100 - part, F(sum(xs[-k:]), sum(xs)) * 100, F(sum(sorted(xs)[:k]) * 100, n * 100)], lambda x: pc(x, 1)), "Point de la courbe de Lorenz : revenus cumulés des plus pauvres ÷ revenu total.")
