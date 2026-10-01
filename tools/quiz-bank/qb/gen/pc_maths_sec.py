@@ -362,7 +362,7 @@ def frac_compare2(rng, d, g, lg):
 
 # ------------------------------------------------------------------------------------------------ puissances
 def power_val(rng, d, g, lg):
-    base = rng.randint(2, 9 if d < 4 else 12)
+    base = rng.choice([b for b in range(2, 9 if d < 4 else 13) if b != 10])
     n = rng.randint(2, 4 if base > 5 else 5)
     r = base ** n
     t = ask(lg, f"Combien vaut {base}{sup(n)}", f"What is {base}{sup(n)}")

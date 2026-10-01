@@ -1,7 +1,17 @@
 """Shared helpers of the scope « primaire et premier cycle » (CP..4e, Class 1-6, Form 1-3): bilingual formatting, names,
 shopping items, and `reg`, which registers one generator model for several courses at once (one grade profile each)."""
+import json
+import os
+from pathlib import Path
+
 from ..core import NB, fr, gen
 from ..courses_pc import GRADE, PC_COURSES
+
+# Per-model caps computed by tools/quiz-bank/pc_tune.py (no model above 7.5 % of its course); PC_TUNE=1 lifts them to measure.
+CAPS_FILE = Path(__file__).with_name("pc_caps.json")
+CAPS = json.loads(CAPS_FILE.read_text(encoding="utf-8")) if CAPS_FILE.is_file() else {}
+TUNING = bool(os.environ.get("PC_TUNE"))
+LOW_COURSES = {"cp", "ce1", "class1", "class2"}
 
 LANG = {k: c["lang"] for k, c in PC_COURSES.items()}
 FR_COURSES = [k for k in PC_COURSES if LANG[k] == "fr"]
@@ -82,7 +92,9 @@ def reg(tpl, fn, courses, cap=200, cat="Calcul", diffs=(1, 2, 3, 4, 5), src_fr=N
         def make(fn=fn, g=g, lg=lg):
             return lambda rng, d: fn(rng, d, g, lg)
 
-        gen(c, "%s-%s" % (c, tpl), cap=cap, diffs=diffs, cat=cat if lg == "fr" else CAT_EN.get(cat, cat), region=region, source=source)(make())
+        key = "%s-%s" % (c, tpl)
+        eff = (600 if c in LOW_COURSES else 300) if TUNING else CAPS.get(key, cap)
+        gen(c, key, cap=eff, diffs=diffs, cat=cat if lg == "fr" else CAT_EN.get(cat, cat), region=region, source=source)(make())
 
 
 def plaus(rng, right, lo=0, hi=None, unit=1, n=8):

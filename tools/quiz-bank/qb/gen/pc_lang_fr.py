@@ -439,7 +439,7 @@ COD_S = [("Awa", "mange", "une mangue"), ("Le maître", "écrit", "une phrase"),
 
 def cod_q(rng, d, g, lg):
     s, v, cod = rng.choice(COD_S)
-    adv = rng.choice(["chaque jour", "à la maison", "avec soin", "en ce moment", "tous les matins"])
+    adv = rng.choice(["chaque jour", "à la maison", "avec soin", "en ce moment", "chaque matin"])
     sent = f"{s} {v} {cod} {adv}."
     return Draft(f"Dans la phrase « {sent} », quel est le complément d'objet direct (COD) du verbe « {v} » ?", cod, [s, adv, v, "tout de suite"],
                  f"On pose la question : {v} quoi ? Réponse : {cod}.")
