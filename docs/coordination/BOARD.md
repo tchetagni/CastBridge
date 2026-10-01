@@ -17,3 +17,4 @@
 | trial-edition | tools/trial-edition, core/.../lots* (additif), docs/TRIAL-EDITION.md | claude/trial-edition | LANCÉ | essai 100 Mo couvrant tout le catalogue ; le contenu complet continue |
 | activation-tools | tools/activation, bureau JVM, backend/ (routes admin), noyau console téléphone | claude/activation-tools | EN ATTENTE du format filaire de trial-edition | générateurs de jetons : bureau, téléphone propriétaire, serveur |
 | license-admin | backend/ (module licences, migrations ≥ V50, admin) | claude/license-admin | LANCÉ | gestion robuste des licences en ligne ; clé serveur : ni transfert ni « tout ouvrir » |
+| deferred-orders | core/.../policy*, backend/ (file d'ordres), protocole Bluetooth additif, tâche téléphone | claude/deferred-orders | EN ATTENTE du format filaire de trial-edition | serveur → téléphone → TV : ordres différés signés, liste blanche d'actions |
