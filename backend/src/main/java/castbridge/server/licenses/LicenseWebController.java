@@ -152,7 +152,7 @@ public class LicenseWebController {
         }
     }
 
-    @GetMapping("/admin/licenses/{licenseId:[A-Z0-9][A-Z0-9-]{5,38}[A-Z0-9]}")
+    @GetMapping("/admin/licenses/{licenseId:[a-z0-9][a-z0-9-]{2,63}}")
     public String detail(Authentication auth, @PathVariable String licenseId, Model m) {
         read(auth, Role.Permission.LICENSE_READ, m);
         m.addAttribute("x", licenses.detail(licenseId));
@@ -184,18 +184,18 @@ public class LicenseWebController {
 
     /** Confirmation page of a destructive action: what will happen, a mandatory reason, an explicit tick. */
     @GetMapping("/admin/licenses/{licenseId}/confirm/{action}")
-    public String confirm(Authentication auth, @PathVariable String licenseId, @PathVariable String action, @RequestParam(required = false) String device, Model m) {
+    public String confirm(Authentication auth, @PathVariable String licenseId, @PathVariable String action, @RequestParam(required = false) String seat, Model m) {
         read(auth, Role.Permission.LICENSE_READ, m);
         String text = switch (action) {
             case "suspend" -> "Suspendre la licence : plus aucune activation ne sera émise ; les appareils déjà activés gardent leurs droits jusqu'à la prochaine vérification en ligne.";
             case "resume" -> "Réactiver la licence suspendue.";
             case "revoke" -> "RÉVOQUER la licence : action définitive. Tous ses postes sont libérés et la licence entre dans la liste de révocation envoyée aux appareils.";
-            case "release" -> "Libérer le poste " + DeviceCode.masked(device == null ? "" : device) + " : l'appareil perdra son droit à sa prochaine vérification en ligne.";
+            case "release" -> "Libérer le poste " + (seat == null ? "" : seat) + " : l'appareil perdra son droit à sa prochaine vérification en ligne (liste de révocation signée).";
             default -> throw ApiException.notFound("Action inconnue");
         };
         m.addAttribute("license", licenses.get(licenseId));
         m.addAttribute("action", action);
-        m.addAttribute("device", device);
+        m.addAttribute("seat", seat);
         m.addAttribute("text", text);
         m.addAttribute("sub", "list");
         return "admin/lic-confirm";
@@ -203,20 +203,20 @@ public class LicenseWebController {
 
     @PostMapping("/admin/licenses/{licenseId}/do/{action}")
     public String doAction(Authentication auth, @PathVariable String licenseId, @PathVariable String action, @RequestParam(required = false) String reason,
-                           @RequestParam(required = false) String device, @RequestParam(required = false) String confirm, RedirectAttributes ra) {
+                           @RequestParam(required = false) String seat, @RequestParam(required = false) String confirm, RedirectAttributes ra) {
         String target = "/admin/licenses/" + licenseId;
         try {
             confirmed(confirm);
         } catch (ApiException e) {
             ra.addFlashAttribute("error", e.getMessage());
-            return "redirect:" + target + "/confirm/" + action + (device == null ? "" : "?device=" + java.net.URLEncoder.encode(device, StandardCharsets.UTF_8));
+            return "redirect:" + target + "/confirm/" + action + (seat == null ? "" : "?seat=" + java.net.URLEncoder.encode(seat, StandardCharsets.UTF_8));
         }
         Actor a = actor(auth);
         return switch (action) {
             case "suspend" -> back(ra, target, "Licence suspendue", () -> licenses.suspend(a, licenseId, reason));
             case "resume" -> back(ra, target, "Licence réactivée", () -> licenses.resume(a, licenseId, reason));
             case "revoke" -> back(ra, target, "Licence révoquée", () -> licenses.revoke(a, licenseId, reason));
-            case "release" -> back(ra, target, "Poste libéré", () -> licenses.releaseSeat(a, licenseId, device, reason));
+            case "release" -> back(ra, target, "Poste libéré", () -> licenses.releaseSeat(a, licenseId, seat, reason));
             default -> throw ApiException.notFound("Action inconnue");
         };
     }
@@ -224,27 +224,30 @@ public class LicenseWebController {
     // ------------------------------------------------------------------ issuing
 
     @GetMapping("/admin/licenses/issue")
-    public String issueForm(Authentication auth, @RequestParam(required = false) String licenseId, @RequestParam(required = false) String deviceCode, Model m) {
+    public String issueForm(Authentication auth, @RequestParam(required = false) String licenseId, Model m) {
         read(auth, Role.Permission.REISSUE, m);
         m.addAttribute("licenseId", licenseId);
-        m.addAttribute("deviceCode", deviceCode);
         m.addAttribute("format", activations.format());
         m.addAttribute("keyLoaded", keyring.present());
+        m.addAttribute("defaultWindow", props.windowDays());
         m.addAttribute("sub", "issue");
         return "admin/lic-issue";
     }
 
     @PostMapping("/admin/licenses/issue")
-    public String issue(Authentication auth, @RequestParam String licenseId, @RequestParam String deviceCode, @RequestParam(required = false) String reissue, Model m) {
+    public String issue(Authentication auth, @RequestParam String licenseId, @RequestParam(defaultValue = "tv") String subject, @RequestParam String deviceRequest,
+                        @RequestParam(required = false) Integer windowDays, @RequestParam(required = false) String reissue, Model m) {
         Actor a = read(auth, Role.Permission.REISSUE, m);
         m.addAttribute("licenseId", licenseId);
-        m.addAttribute("deviceCode", deviceCode);
+        m.addAttribute("subject", subject);
+        m.addAttribute("deviceRequest", deviceRequest);
         m.addAttribute("format", activations.format());
         m.addAttribute("keyLoaded", keyring.present());
+        m.addAttribute("defaultWindow", props.windowDays());
         m.addAttribute("sub", "issue");
         try {
-            var act = "on".equals(reissue) ? activations.reissue(a, Validate.licenseId(licenseId), deviceCode, "server-web")
-                    : activations.issue(a, new ActivationService.IssueRequest(licenseId, deviceCode, null, null, null), "server-web");
+            var act = "on".equals(reissue) ? activations.reissue(a, Validate.licenseId(licenseId), subject, deviceRequest, "server-web")
+                    : activations.issue(a, new ActivationService.IssueRequest(licenseId, subject, deviceRequest, null, null, windowDays), "server-web");
             m.addAttribute("act", act);
             m.addAttribute("qr", QrSvg.dataUri(act.text()));
         } catch (ApiException e) {
@@ -254,10 +257,10 @@ public class LicenseWebController {
         return "admin/lic-issue";
     }
 
-    /** The activation as a file named "activation" (to drop in Download/CastBridge/ of the USB key): re-derived, never stored. */
-    @GetMapping("/admin/licenses/{licenseId}/seats/{device}/activation")
-    public ResponseEntity<byte[]> activationFile(Authentication auth, @PathVariable String licenseId, @PathVariable String device) {
-        var act = activations.reissue(actor(auth), Validate.licenseId(licenseId), device, "server-web");
+    /** The activation as a file named "activation" (to drop in Download/CastBridge/ of the USB key): re-derived from the seat, never stored. */
+    @GetMapping("/admin/licenses/{licenseId}/seats/{seat}/activation")
+    public ResponseEntity<byte[]> activationFile(Authentication auth, @PathVariable String licenseId, @PathVariable String seat) {
+        var act = activations.reissueSeat(actor(auth), licenseId, seat, "server-web");
         return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"activation\"")
                 .body((act.text() + "\n").getBytes(StandardCharsets.UTF_8));
     }
@@ -345,9 +348,10 @@ public class LicenseWebController {
 
     @PostMapping("/admin/licenses/products")
     public String productCreate(Authentication auth, @RequestParam String productId, @RequestParam String title, @RequestParam String kind, @RequestParam(required = false) Integer durationDays,
-                                @RequestParam(required = false) String lots, RedirectAttributes ra) {
+                                @RequestParam(required = false) String lots, @RequestParam(required = false) String bundles, RedirectAttributes ra) {
         List<String> lotList = lots == null ? List.of() : java.util.Arrays.stream(lots.split("[\\s,;]+")).filter(s -> !s.isBlank()).toList();
-        return back(ra, "/admin/licenses/products", "Bouquet créé", () -> products.create(actor(auth), new ProductService.NewProduct(productId, title, kind, durationDays, lotList, null, null)));
+        List<String> bundleList = bundles == null ? List.of() : java.util.Arrays.stream(bundles.split("[\\s,;]+")).filter(s -> !s.isBlank()).toList();
+        return back(ra, "/admin/licenses/products", "Produit créé", () -> products.create(actor(auth), new ProductService.NewProduct(productId, title, kind, durationDays, lotList, null, null, bundleList)));
     }
 
     @PostMapping("/admin/licenses/products/{productId}/active")
@@ -401,14 +405,15 @@ public class LicenseWebController {
     }
 
     @PostMapping("/admin/licenses/registry/import")
-    public String registryImport(Authentication auth, @RequestParam("file") MultipartFile file, @RequestParam(required = false) String dryRun, Model m) {
+    public String registryImport(Authentication auth, @RequestParam("file") MultipartFile file, @RequestParam(required = false) String dryRun,
+                                 @RequestParam(required = false) String auto, Model m) {
         Actor a = read(auth, Role.Permission.LICENSE_READ, m);
         m.addAttribute("sub", "registry");
         m.addAttribute("keyLoaded", keyring.present());
         try {
             if (file.isEmpty()) throw ApiException.badRequest("Choisissez un fichier de registre");
             if (file.getSize() > props.maxImportBytes()) throw ApiException.badRequest("Fichier trop volumineux");
-            var report = ledger.importLedger(a, file.getBytes(), "on".equals(dryRun));
+            var report = ledger.importLedger(a, file.getBytes(), "on".equals(dryRun), "on".equals(auto));
             m.addAttribute("report", report);
         } catch (ApiException e) {
             denied(e);

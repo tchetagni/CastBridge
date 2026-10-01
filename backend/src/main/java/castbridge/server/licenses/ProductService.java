@@ -29,9 +29,14 @@ public class ProductService {
     }
 
     public record ProductRow(long id, String productId, String title, String kind, Integer durationDays, String tariffRef, String tariffNote,
-                             boolean active, List<String> lots, Instant createdAt) {}
+                             boolean active, List<String> bundles, List<String> lots, Instant createdAt) {}
 
-    public record NewProduct(String productId, String title, String kind, Integer durationDays, List<String> lots, String tariffRef, String tariffNote) {}
+    /** @param bundles identifiers of the content bundles (manifest of docs/TRIAL-EDITION.md) the rights of this product carry; empty = the product id itself */
+    public record NewProduct(String productId, String title, String kind, Integer durationDays, List<String> lots, String tariffRef, String tariffNote, List<String> bundles) {
+        public NewProduct(String productId, String title, String kind, Integer durationDays, List<String> lots, String tariffRef, String tariffNote) {
+            this(productId, title, kind, durationDays, lots, tariffRef, tariffNote, null);
+        }
+    }
 
     public List<ProductRow> list() {
         return jdbc.query("SELECT * FROM lic_product ORDER BY product_id LIMIT 500", (rs, i) -> map(rs));
@@ -46,8 +51,9 @@ public class ProductService {
     private ProductRow map(java.sql.ResultSet rs) throws java.sql.SQLException {
         long id = rs.getLong("id");
         List<String> lots = jdbc.queryForList("SELECT lot_id FROM lic_product_lot WHERE product_pk = ? ORDER BY lot_id", String.class, id);
+        List<String> bundles = jdbc.queryForList("SELECT bundle_id FROM lic_product_bundle WHERE product_pk = ? ORDER BY bundle_id", String.class, id);
         return new ProductRow(id, rs.getString("product_id"), rs.getString("title"), rs.getString("kind"), (Integer) rs.getObject("duration_days"),
-                rs.getString("tariff_ref"), rs.getString("tariff_note"), rs.getBoolean("active"), lots, LicenseService.inst(rs, "created_at"));
+                rs.getString("tariff_ref"), rs.getString("tariff_note"), rs.getBoolean("active"), bundles.isEmpty() ? List.of(rs.getString("product_id")) : bundles, lots, LicenseService.inst(rs, "created_at"));
     }
 
     @Transactional
@@ -81,6 +87,9 @@ public class ProductService {
         }
         long id = keys.getKey().longValue();
         for (String lot : lots) jdbc.update("INSERT INTO lic_product_lot (product_pk, lot_id) VALUES (?,?)", id, lot);
+        for (String b : new TreeSet<>(n.bundles() == null ? List.<String>of() : n.bundles().stream().map(Validate::bundleId).toList())) {
+            jdbc.update("INSERT INTO lic_product_bundle (product_pk, bundle_id) VALUES (?,?)", id, b);
+        }
         audit.record(actor, "PRODUCT_CREATE", "PRODUCT", pid, null, java.util.Map.of("kind", kind, "lots", lots.size()));
         return get(pid);
     }

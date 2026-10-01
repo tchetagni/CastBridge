@@ -122,25 +122,40 @@ public class LicenseApiController {
         return licenses.addProduct(actor(), Validate.licenseId(licenseId), b.productId(), Validate.instant(b.endsAt(), "Fin du bouquet", true));
     }
 
-    public record ReleaseBody(String deviceCode, String reason) {}
+    public record ReleaseBody(String seatId, String reason) {}
 
     @PostMapping("/{licenseId}/seats/release")
     public LicenseService.LicenseRow release(@PathVariable String licenseId, @RequestBody ReleaseBody b) {
-        return licenses.releaseSeat(actor(), Validate.licenseId(licenseId), b.deviceCode(), b.reason());
+        return licenses.releaseSeat(actor(), Validate.licenseId(licenseId), b.seatId(), b.reason());
     }
 
-    public record IssueBody(String deviceCode, String kind, List<String> productIds, String factorsHash) {}
+    /**
+     * @param deviceRequest the device's "demande d'appareil" (code=…, k=…, factor=TYPE|hash…): the code alone does not allow to build an activation
+     * @param subject       tv (default) or phone
+     */
+    public record IssueBody(String subject, String deviceRequest, String kind, List<String> productIds, Integer windowDays) {}
 
     @PostMapping("/{licenseId}/activations")
     public ActivationService.Activation issue(@PathVariable String licenseId, @RequestBody IssueBody b) {
-        return activations.issue(actor(), new ActivationService.IssueRequest(licenseId, b.deviceCode(), b.kind(), b.productIds(), b.factorsHash()), "server-api");
+        return activations.issue(actor(), new ActivationService.IssueRequest(licenseId, b.subject(), b.deviceRequest(), b.kind(), b.productIds(), b.windowDays()), "server-api");
     }
 
-    public record ReissueBody(String deviceCode) {}
+    /** Re-issue: by seat id (the hardware is already on the seat) or from a pasted device request. */
+    public record ReissueBody(String seatId, String subject, String deviceRequest) {}
 
     @PostMapping("/{licenseId}/reissue")
     public ActivationService.Activation reissue(@PathVariable String licenseId, @RequestBody ReissueBody b) {
-        return activations.reissue(actor(), Validate.licenseId(licenseId), b.deviceCode(), "server-api");
+        if (b.seatId() != null && !b.seatId().isBlank()) return activations.reissueSeat(actor(), licenseId, b.seatId(), "server-api");
+        return activations.reissue(actor(), Validate.licenseId(licenseId), b.subject(), b.deviceRequest(), "server-api");
+    }
+
+    public record KeyRevokeBody(String kid, String reason) {}
+
+    /** Revokes a signing key (kid): it goes into the signed revocation list and the registry. */
+    @PostMapping("/keys/revoke")
+    public Map<String, Object> revokeKey(@RequestBody KeyRevokeBody b) {
+        licenses.revokeKey(actor(), b.kid(), b.reason());
+        return Map.of("revoked", b.kid());
     }
 
     @GetMapping("/devices/{code}")
@@ -232,9 +247,11 @@ public class LicenseApiController {
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"registre-" + Instant.now().toString().substring(0, 10) + ".json\"").body(b);
     }
 
+    /** @param policy review (default: conflicts wait for a decision) or auto (the format's own resolution, for scripts) */
     @PostMapping(value = "/ledger/import", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, "text/plain"})
-    public LedgerService.ImportReport ledgerImport(@RequestBody byte[] body, @RequestParam(defaultValue = "false") boolean dryRun) throws IOException {
-        return ledger.importLedger(actor(), body, dryRun);
+    public LedgerService.ImportReport ledgerImport(@RequestBody byte[] body, @RequestParam(defaultValue = "false") boolean dryRun, @RequestParam(defaultValue = "review") String policy) throws IOException {
+        if (!policy.equals("review") && !policy.equals("auto")) throw ApiException.badRequest("policy : review ou auto");
+        return ledger.importLedger(actor(), body, dryRun, policy.equals("auto"));
     }
 
     @GetMapping("/ledger/conflicts")

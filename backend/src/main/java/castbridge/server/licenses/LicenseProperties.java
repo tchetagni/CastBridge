@@ -17,7 +17,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @param requireTotp      true = an OWNER account without TOTP can read but not change anything
  * @param defaultGraceDays grace period after the end date of a new licence
  * @param defaultTransferCap transfers allowed per licence and year, for a new licence
- * @param ledgerKeys       public keys trusted to sign a ledger file: "kid:tool:base64(raw 32-byte public key)", tool = desktop|phone
+ * @param trustedKeys      public keys of the offline tools trusted to sign registry events: "name:base64(raw 32-byte public key):SCOPE+SCOPE"
+ *                         (scopes of docs/ACTIVATION-FORMAT.md § 2; an entry without explicit scopes is ignored)
+ * @param windowDays       default installation window of an activation, in days (1 to 366)
  * @param maxImportBytes   size limit of an imported ledger file
  * @param maxImportEntries entries limit of an imported ledger file
  * @param burstPer10Min    issuances per licence in 10 minutes above which an alert is raised
@@ -33,10 +35,11 @@ public record LicenseProperties(
         Boolean requireTotp,
         Integer defaultGraceDays,
         Integer defaultTransferCap,
-        List<String> ledgerKeys,
+        List<String> trustedKeys,
         Integer maxImportBytes,
         Integer maxImportEntries,
-        Integer burstPer10Min) {
+        Integer burstPer10Min,
+        Integer windowDays) {
 
     public LicenseProperties {
         if (trialIssuance == null || !trialIssuance.equals("automatic")) trialIssuance = "manual";
@@ -45,9 +48,10 @@ public record LicenseProperties(
         if (requireTotp == null) requireTotp = true;
         if (defaultGraceDays == null) defaultGraceDays = 14;
         if (defaultTransferCap == null) defaultTransferCap = 2;
-        if (ledgerKeys == null) ledgerKeys = List.of();
+        if (trustedKeys == null) trustedKeys = List.of();
         if (maxImportBytes == null) maxImportBytes = 5_000_000;
         if (maxImportEntries == null) maxImportEntries = 5000;
         if (burstPer10Min == null) burstPer10Min = 10;
+        if (windowDays == null || windowDays < 1 || windowDays > 366) windowDays = 30;
     }
 }

@@ -42,13 +42,13 @@ public class AbuseService {
         // 1. the same device code holds an ACTIVE seat in several licences
         for (Map<String, Object> r : jdbc.queryForList("SELECT device_code, COUNT(DISTINCT license_pk) AS n FROM lic_seat WHERE state = 'ACTIVE' AND anonymized = FALSE"
                 + " GROUP BY device_code HAVING COUNT(DISTINCT license_pk) > 1 LIMIT 50")) {
-            out.add(new Alert("DUPLICATE_DEVICE", "warn", DeviceCode.masked((String) r.get("device_code")), "Même appareil sur " + r.get("n") + " licences actives"));
+            out.add(new Alert("DUPLICATE_DEVICE", "warn", DeviceIdentity.masked((String) r.get("device_code")), "Même appareil sur " + r.get("n") + " licences actives"));
         }
         // 2. one device code seen from several phones (>= 2) or several IP addresses (>= 3) within 24 h
         for (Map<String, Object> r : jdbc.queryForList("SELECT device_code, channel, COUNT(DISTINCT source_ref) AS n FROM lic_sighting WHERE seen_at >= ?"
                 + " GROUP BY device_code, channel HAVING (channel = 'phone' AND COUNT(DISTINCT source_ref) >= 2) OR (channel = 'ip' AND COUNT(DISTINCT source_ref) >= 3) LIMIT 50", Timestamp.from(now.minus(Duration.ofHours(24))))) {
             boolean phone = "phone".equals(r.get("channel"));
-            out.add(new Alert("MULTI_SOURCE", "warn", DeviceCode.masked((String) r.get("device_code")),
+            out.add(new Alert("MULTI_SOURCE", "warn", DeviceIdentity.masked((String) r.get("device_code")),
                     "Vu depuis " + r.get("n") + (phone ? " téléphones" : " adresses IP") + " en 24 h"));
         }
         // 3. seats above the quota, or an import waiting on a quota decision
@@ -93,7 +93,8 @@ public class AbuseService {
         m.put("revoked", jdbc.queryForObject("SELECT COUNT(*) FROM lic_license WHERE state = 'REVOKED'", Long.class));
         m.put("seatsUsed", jdbc.queryForObject("SELECT COUNT(*) FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk WHERE s.state = 'ACTIVE' AND l.state IN ('ACTIVE','SUSPENDED')", Long.class));
         m.put("seatsAllowed", jdbc.queryForObject("SELECT COALESCE(SUM(seats_allowed), 0) FROM lic_license WHERE state IN ('ACTIVE','SUSPENDED')", Long.class));
-        m.put("trialsIssued", jdbc.queryForObject("SELECT COUNT(*) FROM lic_issuance WHERE kind = 'TRIAL'", Long.class));
+        // distinct trial seats in the registry (own issuances and those imported from the offline tools)
+        m.put("trialsIssued", jdbc.queryForObject("SELECT COUNT(DISTINCT seat_id) FROM lic_event WHERE type = 'issue' AND kind = 'trial'", Long.class));
         m.put("openConflicts", jdbc.queryForObject("SELECT COUNT(*) FROM lic_conflict WHERE status = 'OPEN'", Long.class));
         List<Alert> alerts = alerts();
         m.put("alerts", alerts);

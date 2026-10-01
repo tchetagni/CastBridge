@@ -10,25 +10,42 @@ import java.util.regex.Pattern;
 
 /** Strict validation of every input of the module (pages, API, files): length, alphabet, range, French messages. */
 public final class Validate {
-    public static final Pattern LICENSE_ID = Pattern.compile("[A-Z0-9][A-Z0-9-]{5,38}[A-Z0-9]");
-    public static final Pattern PRODUCT_ID = Pattern.compile("[a-z0-9][a-z0-9._-]{1,46}[a-z0-9]");
+    /** Licence id as written in the activations (docs/ACTIVATION-FORMAT.md § 3.2: [a-z0-9][a-z0-9-]{0,63}); "trial" is reserved for trial keys. */
+    public static final Pattern LICENSE_ID = Pattern.compile("[a-z0-9][a-z0-9-]{2,63}");
+    /** Words used by the pages of the module: a licence cannot take them as an identifier. */
+    private static final java.util.Set<String> RESERVED = java.util.Set.of("list", "new", "issue", "device", "clients", "products", "audit", "registry", "security", "export");
+    public static final Pattern PRODUCT_ID = Pattern.compile("[a-z0-9][a-z0-9-]{1,63}");
+    public static final Pattern BUNDLE_ID = Pattern.compile("[a-z0-9][a-z0-9-]{0,63}");
+    public static final Pattern SEAT_ID = Pattern.compile("[0-9a-f]{16}");
     public static final Pattern LOT_ID = Pattern.compile("[a-z0-9][a-z0-9._/-]{0,62}[a-z0-9]");
     public static final Pattern USERNAME = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._@-]{2,62}");
 
     private Validate() {}
 
     public static String licenseId(String s) {
-        String t = s == null ? "" : s.trim().toUpperCase(java.util.Locale.ROOT);
-        if (!LICENSE_ID.matcher(t).matches()) {
-            throw ApiException.badRequest("Identifiant de licence invalide : 7 à 40 caractères, lettres majuscules, chiffres et tirets");
+        String t = s == null ? "" : s.trim().toLowerCase(java.util.Locale.ROOT);
+        if (!LICENSE_ID.matcher(t).matches() || t.equals(WireActivation.TRIAL_LICENSE) || RESERVED.contains(t)) {
+            throw ApiException.badRequest("Identifiant de licence invalide : 3 à 64 caractères (minuscules, chiffres, tirets), « trial » est réservé aux clés d'essai");
         }
+        return t;
+    }
+
+    public static String seatId(String s) {
+        String t = s == null ? "" : s.trim().toLowerCase(java.util.Locale.ROOT);
+        if (!SEAT_ID.matcher(t).matches()) throw ApiException.badRequest("Identifiant de poste invalide (16 chiffres hexadécimaux)");
+        return t;
+    }
+
+    public static String bundleId(String s) {
+        String t = s == null ? "" : s.trim();
+        if (!BUNDLE_ID.matcher(t).matches()) throw ApiException.badRequest("Identifiant de bouquet de contenu invalide : « " + AuditLog.clip(t, 30) + " » (minuscules, chiffres, tirets)");
         return t;
     }
 
     public static String productId(String s) {
         String t = s == null ? "" : s.trim();
         if (!PRODUCT_ID.matcher(t).matches()) {
-            throw ApiException.badRequest("Identifiant de bouquet invalide : 3 à 48 caractères (minuscules, chiffres, . _ -)");
+            throw ApiException.badRequest("Identifiant de produit invalide : 2 à 64 caractères (minuscules, chiffres, tirets)");
         }
         return t;
     }

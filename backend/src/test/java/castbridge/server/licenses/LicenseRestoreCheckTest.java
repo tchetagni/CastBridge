@@ -19,7 +19,7 @@ class LicenseRestoreCheckTest {
     void restoredDatabaseHasAVerifiableAuditChain() {
         var ds = new DriverManagerDataSource(System.getProperty("cb.restore.url"), System.getProperty("cb.restore.user", ""), System.getProperty("cb.restore.password", ""));
         var db = new JdbcTemplate(ds);
-        var audit = new AuditLog(db, new LicenseProperties(true, false, null, Path.of("/nonexistent"), null, null, null, null, null, null, null, null, null));
+        var audit = new AuditLog(db, new LicenseProperties(true, false, null, Path.of("/nonexistent"), null, null, null, null, null, null, null, null, null, null));
         var v = audit.verify();
         System.out.println("RESTORE audit rows=" + v.rows() + " ok=" + v.ok() + " head=" + audit.headHash() + " licences=" + db.queryForObject("select count(*) from lic_license", Integer.class)
                 + " postes=" + db.queryForObject("select count(*) from lic_seat", Integer.class) + " emissions=" + db.queryForObject("select count(*) from lic_issuance", Integer.class));

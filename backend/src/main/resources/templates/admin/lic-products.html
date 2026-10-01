@@ -11,12 +11,13 @@
     <div class="cols">
         <section class="card">
             <div class="scroll"><table class="list">
-                <thead><tr><th>Bouquet</th><th>Type</th><th>Durée</th><th>Lots</th><th>État</th></tr></thead>
+                <thead><tr><th>Produit</th><th>Type</th><th>Durée</th><th>Bouquets de contenu</th><th>Lots</th><th>État</th></tr></thead>
                 <tbody>
                 <tr th:each="p : ${items}">
                     <td><b th:text="${p.title}"></b><br><small class="mono" th:text="${p.productId}"></small></td>
                     <td th:text="${p.kind == 'ABONNEMENT'} ? 'Abonnement' : 'À la carte'"></td>
                     <td th:text="${p.durationDays == null} ? '—' : |${p.durationDays} j|"></td>
+                    <td class="wrap small mono" th:text="${#strings.listJoin(p.bundles, ', ')}"></td>
                     <td class="wrap small" th:text="${#strings.listJoin(p.lots, ', ')}"></td>
                     <td>
                         <span class="badge" th:classappend="${p.active} ? 'good' : 'warn'" th:text="${p.active} ? 'actif' : 'désactivé'"></span>
@@ -27,18 +28,19 @@
                         </form>
                     </td>
                 </tr>
-                <tr th:if="${items.isEmpty()}"><td colspan="5">Aucun bouquet.</td></tr>
+                <tr th:if="${items.isEmpty()}"><td colspan="6">Aucun produit.</td></tr>
                 </tbody>
             </table></div>
         </section>
         <section class="card" th:if="${canWrite}">
             <h2>Nouveau bouquet</h2>
             <form th:action="@{/admin/licenses/products}" method="post" class="stack">
-                <div class="row"><label>Identifiant <input type="text" name="productId" required maxlength="48" pattern="[a-z0-9][a-z0-9._-]{1,46}[a-z0-9]" placeholder="classe-3e"></label>
+                <div class="row"><label>Identifiant <input type="text" name="productId" required maxlength="48" pattern="[a-z0-9][a-z0-9-]{1,63}" placeholder="p-classe-3e"></label>
                     <label>Type <select name="kind"><option value="A_LA_CARTE">À la carte</option><option value="ABONNEMENT">Abonnement</option></select></label>
                     <label>Durée (jours, abonnement) <input type="number" name="durationDays" min="1" max="3660"></label></div>
                 <label>Titre <input type="text" name="title" required maxlength="160"></label>
-                <label>Lots couverts (identifiants séparés par des espaces ou virgules) <textarea name="lots" rows="3" maxlength="4000"></textarea></label>
+                <label>Bouquets de contenu portés par les droits (identifiants du manifeste, ex. classe-cm2 ; vide = l'identifiant du produit) <textarea name="bundles" rows="2" maxlength="2000"></textarea></label>
+                <label>Lots couverts (information ; identifiants séparés par des espaces ou virgules) <textarea name="lots" rows="3" maxlength="4000"></textarea></label>
                 <button type="submit">Créer</button>
             </form>
         </section>

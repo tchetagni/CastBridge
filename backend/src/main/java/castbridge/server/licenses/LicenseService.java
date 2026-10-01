@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Locale;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,17 +36,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LicenseService {
     private static final Logger log = LoggerFactory.getLogger(LicenseService.class);
-    private static final String ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    private static final String ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789";
 
     private final JdbcTemplate jdbc;
     private final AuditLog audit;
     private final LicenseProperties props;
+    private final RegistryStore registry;
     private final SecureRandom random = new SecureRandom();
 
-    public LicenseService(JdbcTemplate jdbc, AuditLog audit, LicenseProperties props) {
+    public LicenseService(JdbcTemplate jdbc, AuditLog audit, LicenseProperties props, RegistryStore registry) {
         this.jdbc = jdbc;
         this.audit = audit;
         this.props = props;
+        this.registry = registry;
     }
 
     // ------------------------------------------------------------------ views
@@ -55,17 +58,20 @@ public class LicenseService {
                              Instant createdAt, String createdBy) {
         /** ACTIVE, GRACE (ended, inside the grace period), SUSPENDED, REVOKED or EXPIRED. */
         public String effectiveState() { return effective(state, endAt, graceDays, Instant.now()); }
+
+        /** The licence identifier as written in the activations: "trial" for a trial licence. */
+        public String wireId() { return "TRIAL".equals(kind) ? WireActivation.TRIAL_LICENSE : licenseId; }
     }
 
-    public record SeatRow(long id, String deviceCode, String state, Instant firstSeen, Instant lastSeen, Instant releasedAt,
-                          String releasedReason, boolean anonymized, int factors, Integer slotNo) {}
+    public record SeatRow(long id, String seatId, String subject, String deviceCode, String state, Instant firstSeen, Instant lastSeen, Instant releasedAt,
+                          String releasedReason, boolean anonymized, int factors, int k, Integer slotNo, String factorsText) {}
 
     public record ProductRef(long id, String productId, String title, String kind, Instant addedAt, Instant endsAt) {}
 
-    public record IssuanceRow(long id, String deviceCode, String kind, String kid, String nonce, Instant issuedAt, Instant expiresAt,
+    public record IssuanceRow(long id, String seatId, String deviceCode, String kind, String subject, String kid, String nonce, Instant issuedAt, Instant notAfter,
                               String issuer, String channel, String fingerprint, String source) {}
 
-    public record TransferRow(long id, String fromDevice, String toDevice, String signedBy, Instant at, boolean accepted) {}
+    public record TransferRow(long id, String seatId, String fromDevice, String toDevice, String signedBy, Instant at, boolean accepted) {}
 
     public record Detail(LicenseRow license, List<SeatRow> seats, List<ProductRef> products, List<IssuanceRow> issuances,
                          List<TransferRow> transfers, List<AuditLog.Entry> history, int transfersLastYear) {}
@@ -93,6 +99,13 @@ public class LicenseService {
                 rs.getString("created_by"));
     }
 
+    static SeatRow seat(ResultSet rs) throws SQLException {
+        String factors = rs.getString("factors");
+        return new SeatRow(rs.getLong("id"), rs.getString("seat_id"), rs.getString("subject"), rs.getString("device_code"), rs.getString("state"), inst(rs, "first_seen"),
+                inst(rs, "last_seen"), inst(rs, "released_at"), rs.getString("released_reason"), rs.getBoolean("anonymized"),
+                factors == null || factors.isBlank() ? 0 : factors.split(",").length, rs.getInt("k"), (Integer) rs.getObject("slot_no"), factors);
+    }
+
     // ------------------------------------------------------------------ queries
 
     public record Filter(String q, String state, Long clientId, String productId, Integer expiringDays, String sort, boolean desc) {}
@@ -103,10 +116,12 @@ public class LicenseService {
         Timestamp now = Timestamp.from(Instant.now());
         if (f.q() != null && !f.q().isBlank()) {
             String q = f.q().trim();
-            where.append(" AND (l.license_id LIKE ? ESCAPE '!' OR c.name LIKE ? ESCAPE '!' OR EXISTS (SELECT 1 FROM lic_seat s2 WHERE s2.license_pk = l.id AND s2.device_code LIKE ? ESCAPE '!'))");
-            args.add(Validate.like(q.toUpperCase(java.util.Locale.ROOT)));
+            where.append(" AND (l.license_id LIKE ? ESCAPE '!' OR c.name LIKE ? ESCAPE '!' OR EXISTS (SELECT 1 FROM lic_seat s2 WHERE s2.license_pk = l.id"
+                    + " AND (s2.device_code LIKE ? ESCAPE '!' OR s2.seat_id LIKE ? ESCAPE '!')))");
+            args.add(Validate.like(q.toLowerCase(Locale.ROOT)));
             args.add(Validate.like(q));
-            args.add(Validate.like(q.toUpperCase(java.util.Locale.ROOT)));
+            args.add(Validate.like(q.toUpperCase(Locale.ROOT)));
+            args.add(Validate.like(q.toLowerCase(Locale.ROOT)));
         }
         if (f.state() != null && !f.state().isBlank()) {
             switch (f.state()) {
@@ -162,18 +177,14 @@ public class LicenseService {
     @Transactional(readOnly = true)
     public Detail detail(String licenseId) {
         LicenseRow l = get(licenseId);
-        List<SeatRow> seats = jdbc.query("SELECT * FROM lic_seat WHERE license_pk = ? ORDER BY first_seen, id",
-                (rs, i) -> new SeatRow(rs.getLong("id"), rs.getString("device_code"), rs.getString("state"), inst(rs, "first_seen"), inst(rs, "last_seen"),
-                        inst(rs, "released_at"), rs.getString("released_reason"), rs.getBoolean("anonymized"),
-                        rs.getString("factors_hash") == null || rs.getString("factors_hash").isBlank() ? 0 : rs.getString("factors_hash").split(",").length,
-                        (Integer) rs.getObject("slot_no")), l.id());
+        List<SeatRow> seats = jdbc.query("SELECT * FROM lic_seat WHERE license_pk = ? ORDER BY first_seen, id", (rs, i) -> seat(rs), l.id());
         List<ProductRef> products = productsOf(l.id());
         List<IssuanceRow> iss = jdbc.query("SELECT * FROM lic_issuance WHERE license_pk = ? ORDER BY id DESC LIMIT 100",
-                (rs, i) -> new IssuanceRow(rs.getLong("id"), rs.getString("device_code"), rs.getString("kind"), rs.getString("kid"), rs.getString("nonce"),
-                        inst(rs, "issued_at"), inst(rs, "expires_at"), rs.getString("issuer"), rs.getString("channel"), rs.getString("token_fingerprint"),
+                (rs, i) -> new IssuanceRow(rs.getLong("id"), rs.getString("seat_id"), rs.getString("device_code"), rs.getString("kind"), rs.getString("subject"), rs.getString("kid"),
+                        rs.getString("nonce"), inst(rs, "issued_at"), inst(rs, "not_after"), rs.getString("issuer"), rs.getString("channel"), rs.getString("token_fingerprint"),
                         rs.getString("source")), l.id());
         List<TransferRow> tr = jdbc.query("SELECT * FROM lic_transfer WHERE license_pk = ? ORDER BY at DESC LIMIT 100",
-                (rs, i) -> new TransferRow(rs.getLong("id"), rs.getString("from_device_code"), rs.getString("to_device_code"), rs.getString("signed_by"),
+                (rs, i) -> new TransferRow(rs.getLong("id"), rs.getString("seat_id"), rs.getString("from_device_code"), rs.getString("to_device_code"), rs.getString("signed_by"),
                         inst(rs, "at"), rs.getBoolean("accepted")), l.id());
         int lastYear = transfersSince(l.id(), Instant.now().minus(Duration.ofDays(365)));
         return new Detail(l, seats, products, iss, tr, audit.forTarget("LICENSE", licenseId, 200), lastYear);
@@ -186,25 +197,33 @@ public class LicenseService {
                         inst(rs, "ends_at")), licensePk);
     }
 
+    List<String> bundlesOf(long productPk, String productId) {
+        List<String> b = jdbc.queryForList("SELECT bundle_id FROM lic_product_bundle WHERE product_pk = ? ORDER BY bundle_id", String.class, productPk);
+        return b.isEmpty() ? List.of(productId) : b;
+    }
+
     int transfersSince(long licensePk, Instant since) {
         return jdbc.queryForObject("SELECT COUNT(*) FROM lic_transfer WHERE license_pk = ? AND accepted = TRUE AND at >= ?", Integer.class, licensePk, ts(since));
     }
 
-    /** Looks a device code up across all licences (support: "which licence is this TV on?"). */
+    /** Looks a device code up across all licences (support: "which licence is this TV on?"): current seat codes and the codes of past activations. */
     public List<Map<String, Object>> byDeviceCode(String code) {
-        String c = DeviceCode.normalize(code);
-        return jdbc.query("SELECT l.license_id, l.state, l.end_at, l.grace_days, c.name AS client_name, s.state AS seat_state, s.first_seen, s.last_seen"
-                        + " FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk JOIN lic_client c ON c.id = l.client_id WHERE s.device_code = ? ORDER BY s.last_seen DESC LIMIT 50",
+        String c = DeviceIdentity.normalize(code);
+        return jdbc.query("SELECT DISTINCT l.license_id, l.state, l.end_at, l.grace_days, c.name AS client_name, s.seat_id, s.subject, s.state AS seat_state, s.first_seen, s.last_seen"
+                        + " FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk JOIN lic_client c ON c.id = l.client_id"
+                        + " WHERE s.device_code = ? OR s.id IN (SELECT i.seat_pk FROM lic_issuance i WHERE i.device_code = ? AND i.seat_pk IS NOT NULL) ORDER BY s.last_seen DESC LIMIT 50",
                 (rs, i) -> {
                     Map<String, Object> m = new LinkedHashMap<>();
                     m.put("licenseId", rs.getString("license_id"));
                     m.put("client", rs.getString("client_name"));
                     m.put("licenseState", effective(rs.getString("state"), inst(rs, "end_at"), rs.getInt("grace_days"), Instant.now()));
+                    m.put("seatId", rs.getString("seat_id"));
+                    m.put("subject", rs.getString("subject"));
                     m.put("seatState", rs.getString("seat_state"));
                     m.put("firstSeen", inst(rs, "first_seen"));
                     m.put("lastSeen", inst(rs, "last_seen"));
                     return m;
-                }, c);
+                }, c, c);
     }
 
     // ------------------------------------------------------------------ commands
@@ -225,7 +244,7 @@ public class LicenseService {
         if (n.endAt() != null && !n.endAt().isAfter(start)) throw ApiException.badRequest("La fin doit être postérieure au début");
         int grace = Validate.range(n.graceDays() == null ? props.defaultGraceDays() : n.graceDays(), "Période de grâce (jours)", 0, 365);
         int cap = Validate.range(n.transferCap() == null ? props.defaultTransferCap() : n.transferCap(), "Plafond de transferts par an", 0, 100);
-        String licenseId = n.licenseId() == null || n.licenseId().isBlank() ? newLicenseId() : Validate.licenseId(n.licenseId());
+        String licenseId = n.licenseId() == null || n.licenseId().isBlank() ? newLicenseId(kind.equals("TRIAL") ? "essai" : "lic") : Validate.licenseId(n.licenseId());
         Instant now = Instant.now();
         GeneratedKeyHolder keys = new GeneratedKeyHolder();
         try {
@@ -255,9 +274,9 @@ public class LicenseService {
         return get(licenseId);
     }
 
-    String newLicenseId() {
+    String newLicenseId(String prefix) {
         for (int attempt = 0; attempt < 10; attempt++) {
-            StringBuilder sb = new StringBuilder("LIC-");
+            StringBuilder sb = new StringBuilder(prefix + "-");
             for (int i = 0; i < 10; i++) {
                 if (i == 5) sb.append('-');
                 sb.append(ALPHABET.charAt(random.nextInt(ALPHABET.length())));
@@ -319,9 +338,11 @@ public class LicenseService {
         LicenseRow l = lock(licenseId);
         if (l.state().equals("REVOKED")) throw ApiException.conflict("Cette licence est déjà révoquée");
         setState(licenseId, "REVOKED", why);
-        jdbc.update("UPDATE lic_seat SET state = 'RELEASED', slot_no = NULL, released_at = ?, released_reason = 'licence révoquée' WHERE license_pk = ? AND state = 'ACTIVE'",
-                ts(Instant.now()), l.id());
-        jdbc.update("INSERT INTO lic_revocation (license_id, reason, revoked_by, revoked_at) VALUES (?,?,?,?)", licenseId, why, actor.name(), ts(Instant.now()));
+        // every active seat is revoked in the signed revocation list (at this instant: an activation issued before is revoked) and in the registry
+        Instant now = Instant.now();
+        List<String> seatIds = jdbc.queryForList("SELECT seat_id FROM lic_seat WHERE license_pk = ? AND state = 'ACTIVE'", String.class, l.id());
+        jdbc.update("UPDATE lic_seat SET state = 'RELEASED', slot_no = NULL, released_at = ?, released_reason = 'licence révoquée' WHERE license_pk = ? AND state = 'ACTIVE'", ts(now), l.id());
+        for (String seat : seatIds) revokeSeatRow(l.wireId(), seat, why, actor.name(), now);
         audit.record(actor, "LICENSE_REVOKE", "LICENSE", licenseId, why, Map.of("seatsFreed", l.seatsUsed()));
         return get(licenseId);
     }
@@ -378,18 +399,41 @@ public class LicenseService {
         return get(licenseId);
     }
 
-    /** Frees a seat (the TV loses it at its next online check): reason mandatory. */
+    /** Frees a seat (the device loses its right at its next online check, through the signed revocation list): reason mandatory. */
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public LicenseRow releaseSeat(Actor actor, String licenseId, String deviceCode, String reason) {
+    public LicenseRow releaseSeat(Actor actor, String licenseId, String seatId, String reason) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         String why = Validate.reason(reason);
-        String code = DeviceCode.normalize(deviceCode);
+        String seat = Validate.seatId(seatId);
         LicenseRow l = lock(licenseId);
-        int n = jdbc.update("UPDATE lic_seat SET state = 'RELEASED', slot_no = NULL, released_at = ?, released_reason = ? WHERE license_pk = ? AND device_code = ? AND state = 'ACTIVE'",
-                ts(Instant.now()), why, l.id(), code);
-        if (n == 0) throw ApiException.notFound("Aucun poste actif pour ce code d'appareil dans cette licence");
-        audit.record(actor, "SEAT_RELEASE", "LICENSE", licenseId, why, Map.of("device", DeviceCode.masked(code)));
+        Instant now = Instant.now();
+        int n = jdbc.update("UPDATE lic_seat SET state = 'RELEASED', slot_no = NULL, released_at = ?, released_reason = ? WHERE license_pk = ? AND seat_id = ? AND state = 'ACTIVE'",
+                ts(now), why, l.id(), seat);
+        if (n == 0) throw ApiException.notFound("Aucun poste actif avec cet identifiant dans cette licence");
+        revokeSeatRow(l.wireId(), seat, why, actor.name(), now);
+        audit.record(actor, "SEAT_RELEASE", "LICENSE", licenseId, why, Map.of("seat", seat));
         return get(licenseId);
+    }
+
+    /** Writes the seat to the revocation list (and, with the server key, to the registry as a signed `revoke` event). */
+    void revokeSeatRow(String wireLicense, String seatId, String reason, String by, Instant instant) {
+        Instant at = instant.truncatedTo(java.time.temporal.ChronoUnit.SECONDS); // whole seconds, like the issue dates (an activation is revoked when issuedAt <= this date)
+        jdbc.update("INSERT INTO lic_revocation (license_id, seat_id, reason, revoked_by, revoked_at) VALUES (?,?,?,?,?)", wireLicense, seatId, AuditLog.clip(reason, 500), AuditLog.clip(by, 64), ts(at));
+        registry.emitRevokeSeat(wireLicense, seatId, at);
+    }
+
+    /** Revokes a signing key (kid): devices drop everything signed by it when they receive the list. Reason mandatory. */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public void revokeKey(Actor actor, String kid, String reason) {
+        actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
+        String why = Validate.reason(reason);
+        if (kid == null || !kid.matches("[0-9a-f]{16}")) throw ApiException.badRequest("kid invalide (16 chiffres hexadécimaux)");
+        Integer n = jdbc.queryForObject("SELECT COUNT(*) FROM lic_revocation WHERE kid = ?", Integer.class, kid);
+        if (n != null && n > 0) throw ApiException.conflict("Cette clé est déjà révoquée");
+        Instant now = Instant.now();
+        jdbc.update("INSERT INTO lic_revocation (kid, reason, revoked_by, revoked_at) VALUES (?,?,?,?)", kid, why, actor.name(), ts(now));
+        registry.emitRevokeKey(kid, now);
+        audit.record(actor, "KEY_REVOKE", "KEY", kid, why, null);
     }
 
     private void setState(String licenseId, String state, String reason) {
@@ -400,30 +444,46 @@ public class LicenseService {
 
     public enum SeatOutcome { CREATED, REUSED, REACTIVATED }
 
-    /**
-     * Gives the device a seat of the licence. MUST be called inside a transaction that holds {@link #lock}.
-     * An already ACTIVE seat is reused and consumes nothing (same hardware re-activated). Otherwise the lowest free slot
-     * in 1..quota is taken; none free = 409.
-     */
-    SeatOutcome allocateSeat(LicenseRow l, String deviceCode, String factorsHash, Instant seenAt) {
-        List<Map<String, Object>> existing = jdbc.queryForList("SELECT id, state FROM lic_seat WHERE license_pk = ? AND device_code = ?", l.id(), deviceCode);
-        if (!existing.isEmpty() && "ACTIVE".equals(existing.get(0).get("state"))) {
-            jdbc.update("UPDATE lic_seat SET last_seen = ?, factors_hash = COALESCE(?, factors_hash) WHERE id = ?", ts(seenAt), factorsHash, existing.get(0).get("id"));
-            return SeatOutcome.REUSED;
+    /** @param seat the seat row (after the change); @param outcome what happened */
+    public record SeatResult(SeatRow seat, SeatOutcome outcome) {}
+
+    /** The ACTIVE seat of this licence and subject whose hardware matches the device (k of n factors, § 8.3), or null. MUST run under the licence lock. */
+    SeatRow findMatchingSeat(LicenseRow l, String subject, DeviceIdentity.Request device) {
+        for (SeatRow s : jdbc.query("SELECT * FROM lic_seat WHERE license_pk = ? AND state = 'ACTIVE' AND subject = ? AND anonymized = FALSE ORDER BY first_seen, id",
+                (rs, i) -> seat(rs), l.id(), subject)) {
+            if (DeviceIdentity.matches(DeviceIdentity.parseStored(s.factorsText()), s.k(), device.factors())) return s;
         }
+        return null;
+    }
+
+    /**
+     * Gives the device a seat of the licence (docs/ACTIVATION-FORMAT.md § 8.3). MUST be called inside a transaction that holds {@link #lock}.
+     * The same hardware (at least k factors out of n, even after a module was replaced) keeps its seat and consumes nothing, whichever tool
+     * answers; otherwise a new seat takes the lowest free slot in 1..quota (default seat id: SHA-256 of licence and factor set); none free = 409
+     * (a transfer is then needed, and the server never signs one).
+     */
+    SeatResult allocateSeat(LicenseRow l, String subject, DeviceIdentity.Request device, Instant seenAt) {
+        SeatRow match = findMatchingSeat(l, subject, device);
+        if (match != null) {
+            jdbc.update("UPDATE lic_seat SET last_seen = ? WHERE id = ?", ts(seenAt), match.id());
+            return new SeatResult(match, SeatOutcome.REUSED);
+        }
+        String seatId = WireActivation.defaultSeat(l.wireId(), device.factors());
+        List<SeatRow> same = jdbc.query("SELECT * FROM lic_seat WHERE license_pk = ? AND seat_id = ?", (rs, i) -> seat(rs), l.id(), seatId);
         int slot = freeSlot(l);
         try {
-            if (existing.isEmpty()) {
-                jdbc.update("INSERT INTO lic_seat (license_pk, device_code, slot_no, state, factors_hash, first_seen, last_seen) VALUES (?,?,?,'ACTIVE',?,?,?)",
-                        l.id(), deviceCode, slot, factorsHash, ts(seenAt), ts(seenAt));
-                return SeatOutcome.CREATED;
+            if (same.isEmpty()) {
+                jdbc.update("INSERT INTO lic_seat (license_pk, seat_id, subject, device_code, factors, k, slot_no, state, first_seen, last_seen) VALUES (?,?,?,?,?,?,?,'ACTIVE',?,?)",
+                        l.id(), seatId, subject, device.code(), device.factorsText(), device.k(), slot, ts(seenAt), ts(seenAt));
+                return new SeatResult(jdbc.query("SELECT * FROM lic_seat WHERE license_pk = ? AND seat_id = ?", (rs, i) -> seat(rs), l.id(), seatId).get(0), SeatOutcome.CREATED);
             }
-            jdbc.update("UPDATE lic_seat SET state = 'ACTIVE', slot_no = ?, released_at = NULL, released_reason = NULL, last_seen = ?, factors_hash = COALESCE(?, factors_hash) WHERE id = ?",
-                    slot, ts(seenAt), factorsHash, existing.get(0).get("id"));
-            return SeatOutcome.REACTIVATED;
+            // a released seat of the same hardware comes back (it takes a free slot again)
+            jdbc.update("UPDATE lic_seat SET state = 'ACTIVE', slot_no = ?, released_at = NULL, released_reason = NULL, last_seen = ?, device_code = ?, factors = ?, k = ?, anonymized = FALSE WHERE id = ?",
+                    slot, ts(seenAt), device.code(), device.factorsText(), device.k(), same.get(0).id());
+            return new SeatResult(jdbc.query("SELECT * FROM lic_seat WHERE id = ?", (rs, i) -> seat(rs), same.get(0).id()).get(0), SeatOutcome.REACTIVATED);
         } catch (DuplicateKeyException e) {
             // cannot happen under the row lock; the constraint is the safety net
-            log.warn("seat slot constraint hit on licence {}", l.licenseId());
+            log.warn("seat constraint hit on licence {}", l.licenseId());
             throw ApiException.conflict("Quota de postes atteint (" + l.seatsAllowed() + "/" + l.seatsAllowed() + ")");
         }
     }
@@ -433,7 +493,7 @@ public class LicenseService {
         jdbc.query("SELECT slot_no FROM lic_seat WHERE license_pk = ? AND state = 'ACTIVE'", rs -> { used.set(rs.getInt(1)); }, l.id());
         int slot = used.nextClearBit(1);
         if (slot > l.seatsAllowed()) {
-            throw ApiException.conflict("Quota de postes atteint (" + used.cardinality() + "/" + l.seatsAllowed() + ") : libérez un poste ou augmentez le quota");
+            throw ApiException.conflict("Plus de poste disponible (" + used.cardinality() + "/" + l.seatsAllowed() + ") : libérez un poste, augmentez le quota, ou faites un transfert avec le bureau ou le téléphone propriétaire (le serveur ne signe jamais un transfert)");
         }
         return slot;
     }

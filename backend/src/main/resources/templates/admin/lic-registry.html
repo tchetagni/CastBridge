@@ -8,13 +8,14 @@
     <h1>Registre des licences</h1>
     <nav th:replace="~{admin/lic-nav :: sub}"></nav>
     <p class="flash err" th:if="${error}"><span th:text="${error}"></span><span th:each="d : ${details}"><br><span th:text="${d}"></span></span></p>
-    <p><small>Le registre est un fichier JSON signé : il synchronise le serveur avec les outils hors ligne (bureau, téléphone propriétaire). L'import est idempotent ; les conflits attendent votre décision. Le serveur ne signe jamais un transfert : il enregistre seulement ceux du registre.</small></p>
+    <p><small>Le registre est un fichier JSON d'événements signés (format castbridge-licence-registry-v1) : il synchronise le serveur avec les outils hors ligne (bureau, téléphone propriétaire). L'import est idempotent ; les conflits attendent votre décision. Le serveur ne signe jamais un transfert : il enregistre seulement ceux du registre.</small></p>
     <div class="cols">
         <section class="card" th:if="${canWrite}">
             <h2>Importer</h2>
             <form th:action="@{/admin/licenses/registry/import}" method="post" enctype="multipart/form-data" class="stack">
                 <label>Fichier de registre (.json) <input type="file" name="file" accept=".json,application/json" required></label>
                 <label class="check"><input type="checkbox" name="dryRun" checked> Simulation d'abord (ne change rien, montre le rapport)</label>
+                <label class="check"><input type="checkbox" name="auto"> Résolution automatique selon le format (fusion des doublons, quota relevé, plafond refusé) : sinon les conflits attendent votre décision</label>
                 <button type="submit">Importer</button>
             </form>
         </section>
@@ -28,7 +29,9 @@
         <h2 th:text="${report.dryRun} ? 'Rapport de simulation (rien n\'a été modifié)' : 'Rapport de réconciliation'"></h2>
         <p>Outil <b th:text="${report.tool}"></b> · <span th:text="${report.entries}"></span> entrée(s) :
             <b th:text="${report.applied}"></b> appliquée(s), <b th:text="${report.duplicates}"></b> déjà connue(s), <b th:text="${report.ignored}"></b> ignorée(s),
-            <b th:text="${report.conflicts.size()}"></b> conflit(s).</p>
+            <b th:text="${report.rejections.size()}"></b> refusée(s), <b th:text="${report.conflicts.size()}"></b> conflit(s). Politique : <b th:text="${report.policy}"></b>.</p>
+        <ul th:unless="${report.rejections.isEmpty()}"><li th:each="r : ${report.rejections}"><span class="badge bad" th:text="${r.reason}"></span> événement <span class="mono" th:text="${r.eventId}"></span> : refusé (jamais appliqué)</li></ul>
+        <ul th:unless="${report.warnings.isEmpty()}"><li th:each="w : ${report.warnings}"><span class="badge warn">avertissement</span> <span th:text="${w}"></span></li></ul>
         <ul th:unless="${report.conflicts.isEmpty()}"><li th:each="c : ${report.conflicts}"><span class="badge warn" th:text="${c.type}"></span> <span th:text="${c.detail}"></span></li></ul>
     </section>
     <section class="card">
@@ -50,9 +53,9 @@
     <section class="card">
         <h2>Derniers imports</h2>
         <div class="scroll"><table class="list">
-            <thead><tr><th>Date</th><th>Outil</th><th>Par</th><th>Entrées</th><th>Appliquées</th><th>Doublons</th><th>Conflits</th></tr></thead>
-            <tbody><tr th:each="i : ${imports}"><td th:text="${i.imported_at}"></td><td th:text="${i.tool}"></td><td th:text="${i.imported_by}"></td><td th:text="${i.entries}"></td>
-                <td th:text="${i.applied}"></td><td th:text="${i.duplicates}"></td><td th:text="${i.conflicts}"></td></tr>
+            <thead><tr><th>Date</th><th>Par</th><th>Événements</th><th>Appliqués</th><th>Déjà connus</th><th>Refusés</th><th>Conflits</th></tr></thead>
+            <tbody><tr th:each="i : ${imports}"><td th:text="${i.imported_at}"></td><td th:text="${i.imported_by}"></td><td th:text="${i.entries}"></td>
+                <td th:text="${i.applied}"></td><td th:text="${i.duplicates}"></td><td th:text="${i.rejected}"></td><td th:text="${i.conflicts}"></td></tr>
             <tr th:if="${imports.isEmpty()}"><td colspan="7">Aucun import.</td></tr></tbody>
         </table></div>
     </section>

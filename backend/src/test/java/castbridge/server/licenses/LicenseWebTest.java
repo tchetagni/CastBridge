@@ -64,8 +64,9 @@ class LicenseWebTest extends LicenseTestBase {
     @Test
     void roleMatrixIsEnforcedOnTheServer() throws Exception {
         var l = license(5);
-        String dev = code();
-        issue(l.licenseId(), dev);
+        Dev dv = dev();
+        var act = issue(l.licenseId(), dv);
+        String dev = dv.code(), seat = act.seatId();
         String base = "/admin/licenses";
         // reads
         row("tableau de bord", 200, 200, 200, 200, c(HttpMethod.GET, base));
@@ -81,11 +82,11 @@ class LicenseWebTest extends LicenseTestBase {
         row("vérifier l'audit", 302, 302, 302, 403, c(HttpMethod.POST, base + "/audit/verify"));
         // issuing
         row("formulaire d'émission", 200, 200, 200, 403, c(HttpMethod.GET, base + "/issue"));
-        row("réémission (poste existant)", 200, 200, 200, 403, c(HttpMethod.POST, base + "/issue", "licenseId", l.licenseId(), "deviceCode", dev, "reissue", "on"));
-        row("activation en fichier", 200, 200, 200, 403, c(HttpMethod.GET, base + "/" + l.licenseId() + "/seats/" + dev + "/activation"));
+        row("réémission (poste existant)", 200, 200, 200, 403, c(HttpMethod.POST, base + "/issue", "licenseId", l.licenseId(), "deviceRequest", dv.text(), "reissue", "on"));
+        row("activation en fichier", 200, 200, 200, 403, c(HttpMethod.GET, base + "/" + l.licenseId() + "/seats/" + seat + "/activation"));
         row("émission pour un NOUVEL appareil", 200, 403, 403, 403, who -> {
             try {
-                return call(who, HttpMethod.POST, base + "/issue", "licenseId", license(2).licenseId(), "deviceCode", code());
+                return call(who, HttpMethod.POST, base + "/issue", "licenseId", license(2).licenseId(), "deviceRequest", dev().text());
             } catch (Exception e) {
                 throw new IllegalStateException(e);
             }
@@ -94,7 +95,7 @@ class LicenseWebTest extends LicenseTestBase {
         row("nouveau client", 302, 403, 403, 403, c(HttpMethod.POST, base + "/clients", "name", "Client matrice"));
         row("nouveau bouquet", 302, 403, 403, 403, who -> {
             try {
-                return call(who, HttpMethod.POST, base + "/products", "productId", "mx-" + who + "-" + code().substring(0, 4).toLowerCase(), "title", "T", "kind", "A_LA_CARTE");
+                return call(who, HttpMethod.POST, base + "/products", "productId", "mx-" + who + "-" + Long.toHexString(RND.nextLong() & 0xffffffL), "title", "T", "kind", "A_LA_CARTE");
             } catch (Exception e) {
                 throw new IllegalStateException(e);
             }
@@ -118,9 +119,8 @@ class LicenseWebTest extends LicenseTestBase {
         row("libérer un poste", 302, 403, 403, 403, who -> {
             try {
                 var x = license(1);
-                String d = code();
-                issue(x.licenseId(), d);
-                return call(who, HttpMethod.POST, base + "/" + x.licenseId() + "/do/release", "reason", "motif de test", "confirm", "on", "device", d);
+                var a = issue(x.licenseId(), dev());
+                return call(who, HttpMethod.POST, base + "/" + x.licenseId() + "/do/release", "reason", "motif de test", "confirm", "on", "seat", a.seatId());
             } catch (Exception e) {
                 throw new IllegalStateException(e);
             }
@@ -163,10 +163,10 @@ class LicenseWebTest extends LicenseTestBase {
     @Test
     void pagesKeepTheStrictContentSecurityPolicyAndHaveNoInlineScriptOrStyle() throws Exception {
         var l = license(2);
-        issue(l.licenseId(), code());
+        issue(l.licenseId(), dev());
         licenses.suspend(OWNER, l.licenseId(), "pour voir la page");
         String base = "/admin/licenses";
-        List<String> pages = List.of(base, base + "/list", base + "/new", base + "/" + l.licenseId(), base + "/" + l.licenseId() + "/confirm/revoke", base + "/issue", base + "/device?code=" + code(),
+        List<String> pages = List.of(base, base + "/list", base + "/new", base + "/" + l.licenseId(), base + "/" + l.licenseId() + "/confirm/revoke", base + "/issue", base + "/device?code=" + dev().code(),
                 base + "/clients", base + "/clients/" + l.clientId(), base + "/clients/" + l.clientId() + "/erase", base + "/products", base + "/audit", base + "/registry", base + "/security");
         for (String p : pages) {
             MvcResult r = mvc.perform(get(p).with(as(BOSS))).andExpect(status().isOk()).andExpect(header().string("Content-Security-Policy", org.hamcrest.Matchers.containsString("script-src 'self'")))
@@ -207,18 +207,22 @@ class LicenseWebTest extends LicenseTestBase {
     @Test
     void issueFormShowsTheActivationQrAndTheProvisionalFormatWarning() throws Exception {
         var l = license(1);
-        String dev = code();
-        String html = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l.licenseId()).param("deviceCode", dev.toLowerCase()))
+        Dev d = dev();
+        String html = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l.licenseId()).param("deviceRequest", d.text()))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-        assertThat(html).contains("CBP0.").contains("data:image/svg+xml;base64,").contains("provisoire").contains("Télécharger");
-        // invalid device code: a clear message, nothing consumed
-        String bad = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l.licenseId()).param("deviceCode", "12345"))
+        assertThat(html).contains("cba1.").contains("data:image/svg+xml;base64,").contains("ACTIVATION-FORMAT").contains("Télécharger").contains("(nouveau)");
+        // invalid or altered device request: a clear message, nothing consumed
+        String bad = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l.licenseId()).param("deviceRequest", "code=12345"))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-        assertThat(bad).contains("Code d&#39;appareil invalide").doesNotContain("CBP0.");
+        assertThat(bad).contains("Demande d&#39;appareil").doesNotContain("cba1.");
+        String codeOnly = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l.licenseId()).param("deviceRequest", "code=" + dev().code()))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(codeOnly).contains("sans facteur").doesNotContain("cba1.");
         assertThat(licenses.get(l.licenseId()).seatsUsed()).isEqualTo(1);
-        String file = mvc.perform(get("/admin/licenses/" + l.licenseId() + "/seats/" + dev + "/activation").with(as(SUPPORT_USER))).andExpect(status().isOk())
+        String seat = licenses.detail(l.licenseId()).seats().get(0).seatId();
+        String file = mvc.perform(get("/admin/licenses/" + l.licenseId() + "/seats/" + seat + "/activation").with(as(SUPPORT_USER))).andExpect(status().isOk())
                 .andExpect(header().string("Content-Disposition", org.hamcrest.Matchers.containsString("activation"))).andReturn().getResponse().getContentAsString();
-        assertThat(file).startsWith("CBP0.");
+        assertThat(file).startsWith("cba1.");
     }
 
     @Test

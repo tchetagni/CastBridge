@@ -17,7 +17,7 @@ CREATE INDEX ix_lic_client_name ON lic_client (name);
 
 CREATE TABLE lic_product (
     id            BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    product_id    VARCHAR(48)  NOT NULL,
+    product_id    VARCHAR(64)  NOT NULL,
     title         VARCHAR(160) NOT NULL,
     -- A_LA_CARTE (définitif) ou ABONNEMENT (tant que valide)
     kind          VARCHAR(16)  NOT NULL,
@@ -32,7 +32,16 @@ CREATE TABLE lic_product (
     CONSTRAINT ck_lic_product_duration CHECK (duration_days IS NULL OR duration_days BETWEEN 1 AND 3660)
 );
 
--- lots couverts par un bouquet (identifiants de lots de docs/LOTS.md : « feature/scope »)
+-- bouquets (identifiants du manifeste de docs/TRIAL-EDITION.md, ex. « classe-cm2 », « tout ») que les droits de ce produit portent dans l'activation ;
+-- à défaut, le bouquet porte l'identifiant du produit
+CREATE TABLE lic_product_bundle (
+    product_pk BIGINT      NOT NULL,
+    bundle_id  VARCHAR(64) NOT NULL,
+    PRIMARY KEY (product_pk, bundle_id),
+    CONSTRAINT fk_lic_product_bundle FOREIGN KEY (product_pk) REFERENCES lic_product (id) ON DELETE CASCADE
+);
+
+-- lots couverts par un bouquet (identifiants de lots de docs/LOTS.md : « feature/scope »), à titre d'information
 CREATE TABLE lic_product_lot (
     product_pk BIGINT      NOT NULL,
     lot_id     VARCHAR(64) NOT NULL,

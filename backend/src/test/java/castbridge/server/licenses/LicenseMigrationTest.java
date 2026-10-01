@@ -50,7 +50,7 @@ class LicenseMigrationTest extends LicenseTestBase {
         assertThat(db.queryForObject("select count(*) from lot", Integer.class)).isEqualTo(lots);
         List<String> tables = db.queryForList("select table_name from information_schema.tables where table_name like 'lic\\_%'", String.class);
         assertThat(tables).contains("lic_client", "lic_product", "lic_license", "lic_seat", "lic_issuance", "lic_transfer", "lic_revocation", "lic_audit", "lic_audit_head",
-                "lic_ledger_import", "lic_conflict", "lic_sighting", "lic_license_product", "lic_product_lot");
+                "lic_ledger_import", "lic_conflict", "lic_sighting", "lic_license_product", "lic_product_lot", "lic_product_bundle", "lic_seat_alias", "lic_event");
         // uniqueness, foreign keys, indexes exist
         assertThat(db.queryForObject("select count(*) from information_schema.table_constraints where table_name = 'lic_license' and constraint_type = 'UNIQUE'", Integer.class)).isGreaterThanOrEqualTo(1);
         assertThat(db.queryForObject("select count(*) from information_schema.table_constraints where constraint_type = 'FOREIGN KEY' and table_name like 'lic\\_%'", Integer.class)).isGreaterThanOrEqualTo(8);
@@ -80,19 +80,18 @@ class LicenseMigrationTest extends LicenseTestBase {
         assertThatThrownBy(() -> jdbc.update("insert into lic_license (license_id, client_id, kind, state, seats_allowed, start_at, created_by, created_at, updated_at) values (?,?,?,?,?,now(),?,now(),now())",
                 l.licenseId(), l.clientId(), "PAID", "ACTIVE", 1, "t")).as("licenseId unique").isInstanceOf(org.springframework.dao.DuplicateKeyException.class);
         assertThatThrownBy(() -> jdbc.update("insert into lic_license (license_id, client_id, kind, state, seats_allowed, start_at, created_by, created_at, updated_at) values (?,?,?,?,?,now(),?,now(),now())",
-                "LIC-FK0000-NOCLIENT", 987654, "PAID", "ACTIVE", 1, "t")).as("foreign key").isInstanceOf(org.springframework.dao.DataIntegrityViolationException.class);
+                "lic-fk0000-noclient", 987654, "PAID", "ACTIVE", 1, "t")).as("foreign key").isInstanceOf(org.springframework.dao.DataIntegrityViolationException.class);
         assertThatThrownBy(() -> jdbc.update("insert into lic_revocation (reason, revoked_by, revoked_at) values ('x','y',now())")).as("a revocation targets something").isInstanceOf(org.springframework.dao.DataIntegrityViolationException.class);
-        String code = code();
-        issue(l.licenseId(), code);
-        assertThatThrownBy(() -> jdbc.update("insert into lic_seat (license_pk, device_code, slot_no, state, first_seen, last_seen) values (?,?,NULL,'RELEASED',now(),now())", l.id(), code))
-                .as("one seat row per (licence, device)").isInstanceOf(org.springframework.dao.DuplicateKeyException.class);
+        var a = issue(l.licenseId(), dev());
+        assertThatThrownBy(() -> jdbc.update("insert into lic_seat (license_pk, seat_id, device_code, factors, slot_no, state, first_seen, last_seen) values (?,?,?,?,NULL,'RELEASED',now(),now())", l.id(), a.seatId(), "AAAA-AAAA-AAAA-AAAA", "x"))
+                .as("one seat row per (licence, seat id)").isInstanceOf(org.springframework.dao.DuplicateKeyException.class);
     }
 
     @Test
     void aDumpRestoredElsewhereHasTheSameCountsAndAVerifiableAuditChain() throws Exception {
         var l = license(3);
-        issue(l.licenseId(), code());
-        issue(l.licenseId(), code());
+        issue(l.licenseId(), dev());
+        issue(l.licenseId(), dev());
         licenses.suspend(OWNER, l.licenseId(), "avant la sauvegarde");
         licenses.resume(OWNER, l.licenseId(), "après la sauvegarde");
         long rows = audit.verify().rows();
@@ -105,7 +104,7 @@ class LicenseMigrationTest extends LicenseTestBase {
             ScriptUtils.executeSqlScript(c, new org.springframework.core.io.FileSystemResource(dump));
         }
         var db = new JdbcTemplate(ds);
-        var restoredAudit = new AuditLog(db, new LicenseProperties(true, false, null, Path.of("/nonexistent"), null, null, null, null, null, null, null, null, null));
+        var restoredAudit = new AuditLog(db, new LicenseProperties(true, false, null, Path.of("/nonexistent"), null, null, null, null, null, null, null, null, null, null));
         var v = restoredAudit.verify();
         assertThat(v.ok()).as(String.valueOf(v.problem())).isTrue();
         assertThat(v.rows()).isEqualTo(rows);

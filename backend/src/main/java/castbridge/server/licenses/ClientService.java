@@ -100,8 +100,8 @@ public class ClientService {
             m.put("seatsAllowed", l.seatsAllowed());
             m.put("startAt", l.startAt());
             m.put("endAt", l.endAt());
-            m.put("seats", jdbc.queryForList("SELECT device_code, state, first_seen, last_seen, anonymized FROM lic_seat WHERE license_pk = ? ORDER BY id", l.id()));
-            m.put("issuances", jdbc.queryForList("SELECT device_code, kind, kid, issued_at, expires_at, issuer, channel, source FROM lic_issuance WHERE license_pk = ? ORDER BY id", l.id()));
+            m.put("seats", jdbc.queryForList("SELECT seat_id, subject, device_code, state, first_seen, last_seen, anonymized FROM lic_seat WHERE license_pk = ? ORDER BY id", l.id()));
+            m.put("issuances", jdbc.queryForList("SELECT seat_id, device_code, kind, kid, issued_at, not_after, issuer, channel, source FROM lic_issuance WHERE license_pk = ? ORDER BY id", l.id()));
             lic.add(m);
         }
         out.put("licenses", lic);
@@ -111,7 +111,8 @@ public class ClientService {
 
     /**
      * Right to erasure: name, contact and notes are wiped, the seats are ANONYMIZED, not deleted (so the seat count and the
-     * licence history stay coherent): the device code becomes ANON-&lt;hash&gt;, factor hashes and sightings are deleted.
+     * licence history stay coherent): the device code becomes ANON-&lt;hash&gt;, factor hashes and sightings are deleted, and the registry events
+     * carrying the hardware fingerprints are no longer kept nor exported (a tombstone stops a later import from bringing them back).
      * A device anonymized this way that comes back is a new device for the licence (documented limit).
      */
     @Transactional
@@ -123,16 +124,18 @@ public class ClientService {
         Instant now = Instant.now();
         jdbc.update("UPDATE lic_client SET name = ?, contact = NULL, notes = NULL, erased_at = ?, updated_at = ? WHERE id = ?", "Client effacé n° " + id, LicenseService.ts(now), LicenseService.ts(now), id);
         int seats = 0;
-        for (Map<String, Object> s : jdbc.queryForList("SELECT s.id, s.license_pk, s.device_code FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk WHERE l.client_id = ? AND s.anonymized = FALSE", id)) {
+        for (Map<String, Object> s : jdbc.queryForList("SELECT s.id, s.license_pk, s.seat_id, s.device_code FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk WHERE l.client_id = ? AND s.anonymized = FALSE", id)) {
             String code = (String) s.get("device_code");
             String anon = "ANON-" + Hashing.sha256Hex("anon|" + id + "|" + code).substring(0, 16).toUpperCase(java.util.Locale.ROOT);
             long lp = ((Number) s.get("license_pk")).longValue();
-            jdbc.update("UPDATE lic_seat SET device_code = ?, factors_hash = NULL, anonymized = TRUE WHERE id = ?", anon, s.get("id"));
-            jdbc.update("UPDATE lic_issuance SET device_code = ? WHERE license_pk = ? AND device_code = ?", anon, lp, code);
-            jdbc.update("UPDATE lic_transfer SET from_device_code = ? WHERE license_pk = ? AND from_device_code = ?", anon, lp, code);
-            jdbc.update("UPDATE lic_transfer SET to_device_code = ? WHERE license_pk = ? AND to_device_code = ?", anon, lp, code);
-            jdbc.update("UPDATE lic_revocation SET device_code = ? WHERE device_code = ?", anon, code);
+            // every device code this seat ever had (a replaced module changes it) becomes the same opaque value
+            jdbc.update("UPDATE lic_issuance SET device_code = ? WHERE license_pk = ? AND seat_id = ?", anon, lp, s.get("seat_id"));
+            jdbc.update("UPDATE lic_transfer SET from_device_code = ? WHERE license_pk = ? AND seat_id = ?", anon, lp, s.get("seat_id"));
+            jdbc.update("UPDATE lic_transfer SET to_device_code = ? WHERE license_pk = ? AND seat_id = ?", anon, lp, s.get("seat_id"));
             jdbc.update("DELETE FROM lic_sighting WHERE device_code = ?", code);
+            // the registry copies of the seat's events carry the hardware fingerprints: the server forgets them (the signed originals stay with the tools)
+            jdbc.update("UPDATE lic_event SET text = NULL, erased = TRUE WHERE type IN ('issue','transfer') AND seat_id = ?", s.get("seat_id"));
+            jdbc.update("UPDATE lic_seat SET device_code = ?, factors = '', anonymized = TRUE WHERE id = ?", anon, s.get("id"));
             seats++;
         }
         audit.record(actor, "CLIENT_ERASE", "CLIENT", Long.toString(id), why, Map.of("seatsAnonymized", seats));
