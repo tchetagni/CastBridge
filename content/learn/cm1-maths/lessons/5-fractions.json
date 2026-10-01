@@ -1,0 +1,447 @@
+{
+ "chapter": "cm1-maths-decimaux",
+ "lessons": [
+  {
+   "id": "cm1-maths-fractions",
+   "title": "Les fractions",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Fractions simples et fractions décimales (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire et écrire une fraction ; dire ce que représentent numérateur et dénominateur.",
+    "Calculer une fraction d'une quantité.",
+    "Comparer une fraction à 1 et additionner des fractions de même dénominateur."
+   ],
+   "prerequisites": [
+    "cm1-maths-decimaux"
+   ],
+   "exercises": [
+    "cm1-maths-fractions-01",
+    "cm1-maths-fractions-02",
+    "cm1-maths-fractions-03",
+    "cm1-maths-fractions-04",
+    "cm1-maths-fractions-05",
+    "cm1-maths-fractions-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-fractions-q1",
+    "cm1-maths-fractions-q2",
+    "cm1-maths-fractions-q3",
+    "cm1-maths-fractions-q4",
+    "cm1-maths-fractions-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le programme du CM1 sur les fractions (fractions simples, fractions décimales, comparaison à 1).",
+    "Les fractions sont écrites en LaTeX \\frac ; vérifier leur lisibilité à l'écran."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Une fraction",
+     "md": "Une **fraction** exprime une part d'un tout partagé en **parts égales**.\n\n$\\frac{3}{4}$ : le **dénominateur** (4) dit en combien de parts égales on partage ; le **numérateur** (3) dit combien de parts on prend. On lit « trois quarts »."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40.0,
+        "y": 30,
+        "w": 50.0,
+        "h": 50,
+        "fill": "orange",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 90.0,
+        "y": 30,
+        "w": 50.0,
+        "h": 50,
+        "fill": "orange",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 30,
+        "w": 50.0,
+        "h": 50,
+        "fill": "orange",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190.0,
+        "y": 30,
+        "w": 50.0,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 240.0,
+        "y": 30,
+        "w": 50.0,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 30,
+        "w": 50.0,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 340.0,
+        "y": 30,
+        "w": 50.0,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 390.0,
+        "y": 30,
+        "w": 50.0,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 110,
+        "text": "3 parts sur 8 : trois huitièmes",
+        "size": 16,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Une bande partagée en 8 parts égales.",
+     "alt": "Une bande divisée en huit parts égales dont trois sont colorées."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Fraction d'une quantité",
+     "md": "Prendre $\\frac{3}{4}$ de 24, c'est diviser 24 par 4 (= 6) puis multiplier par 3 (= 18).\n\nOn calcule : 24 ÷ 4 = 6 ; 6 × 3 = 18."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Comparer, additionner",
+     "md": "- $\\frac{1}{2}$ = 0,5 ; $\\frac{1}{4}$ = 0,25 ; $\\frac{7}{10}$ = 0,7.\n- Si le numérateur est plus petit que le dénominateur, la fraction est **inférieure à 1** ; s'il est égal, elle vaut 1 ; s'il est plus grand, elle est **supérieure à 1**.\n- Même dénominateur : on additionne les numérateurs. $\\frac{2}{9}+\\frac{5}{9}=\\frac{7}{9}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : fraction d'une quantité",
+     "statement": "Un planteur a 40 kg de cacao. Il vend $\\frac{3}{8}$ de son cacao. Combien de kg vend-il ?",
+     "steps": [
+      {
+       "md": "On partage 40 en 8 parts : 40 ÷ 8 = 5 kg par part."
+      },
+      {
+       "md": "Il prend 3 parts : 5 × 3 = 15 kg."
+      }
+     ],
+     "answer": "**Il vend 15 kg.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : somme de fractions",
+     "statement": "Calcule $\\frac{2}{9}+\\frac{5}{9}$.",
+     "steps": [
+      {
+       "md": "Même dénominateur : 9. On additionne les numérateurs : 2 + 5 = 7."
+      },
+      {
+       "md": "On garde le dénominateur : $\\frac{7}{9}$."
+      }
+     ],
+     "answer": "**$\\frac{7}{9}$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner aussi les dénominateurs : $\\frac{2}{9}+\\frac{5}{9}$ ne fait pas $\\frac{7}{18}$.\n- Partager en parts inégales : les parts doivent être égales.\n- Confondre numérateur et dénominateur."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-fractions-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-fractions-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-fractions-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-fractions-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-fractions-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-fractions-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-fractions-01",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Dans $\\frac{3}{5}$, le dénominateur est…",
+   "choices": [
+    "5",
+    "3",
+    "8",
+    "15"
+   ],
+   "answer": 0,
+   "explanation": "Le dénominateur est le nombre du bas : il indique le nombre de parts égales.",
+   "points": 1,
+   "lesson": "cm1-maths-fractions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-fractions-02",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : $\\frac{7}{4}$ est supérieur à 1.",
+   "answer": true,
+   "explanation": "7 est plus grand que 4 : on a plus qu'un entier.",
+   "points": 1,
+   "lesson": "cm1-maths-fractions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-fractions-03",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque fraction à son écriture décimale.",
+   "pairs": [
+    [
+     "$\\frac{1}{2}$",
+     "0,5"
+    ],
+    [
+     "$\\frac{1}{4}$",
+     "0,25"
+    ],
+    [
+     "$\\frac{3}{10}$",
+     "0,3"
+    ],
+    [
+     "$\\frac{75}{100}$",
+     "0,75"
+    ]
+   ],
+   "explanation": "1/2 = 0,5 ; 1/4 = 0,25 ; 3/10 = 0,3 ; 75/100 = 0,75.",
+   "points": 2,
+   "lesson": "cm1-maths-fractions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-fractions-04",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Calcule les trois quarts de 24.",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "24 ÷ 4 = 6 ; 6 × 3 = 18.",
+   "points": 1,
+   "lesson": "cm1-maths-fractions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-fractions-05",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Calcule : $\\frac{2}{9}+\\frac{5}{9}$",
+   "choices": [
+    "$\\frac{7}{18}$",
+    "$\\frac{10}{9}$",
+    "$\\frac{3}{9}$",
+    "$\\frac{7}{9}$"
+   ],
+   "answer": 3,
+   "explanation": "On additionne les numérateurs et on garde le dénominateur.",
+   "points": 1,
+   "lesson": "cm1-maths-fractions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-fractions-06",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Un sac contient 40 kg de riz. Une commerçante de Maroua en vend $\\frac{1}{4}$ le lundi et $\\frac{3}{8}$ le mardi.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de kg vend-elle le lundi ?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "40 ÷ 4 = 10 kg.",
+     "unit": "kg",
+     "id": "cm1-maths-fractions-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de kg vend-elle le mardi ?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "40 ÷ 8 = 5 ; 5 × 3 = 15 kg.",
+     "unit": "kg",
+     "id": "cm1-maths-fractions-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de kg reste-t-il après ces deux jours ?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "40 − 10 − 15 = 15 kg.",
+     "unit": "kg",
+     "id": "cm1-maths-fractions-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-fractions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-fractions-q1",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Le numérateur de $\\frac{5}{8}$ est…",
+   "choices": [
+    "8",
+    "13",
+    "5",
+    "3"
+   ],
+   "answer": 2,
+   "explanation": "Le numérateur est le nombre du haut.",
+   "lesson": "cm1-maths-fractions"
+  },
+  {
+   "id": "cm1-maths-fractions-q2",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "$\\frac{1}{2}$ de 30 vaut…",
+   "choices": [
+    "60",
+    "15",
+    "3",
+    "30"
+   ],
+   "answer": 1,
+   "explanation": "30 ÷ 2 = 15.",
+   "lesson": "cm1-maths-fractions"
+  },
+  {
+   "id": "cm1-maths-fractions-q3",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle fraction est égale à 1 ?",
+   "choices": [
+    "$\\frac{6}{6}$",
+    "$\\frac{6}{7}$",
+    "$\\frac{7}{6}$",
+    "$\\frac{1}{6}$"
+   ],
+   "answer": 0,
+   "explanation": "Numérateur égal au dénominateur.",
+   "lesson": "cm1-maths-fractions"
+  },
+  {
+   "id": "cm1-maths-fractions-q4",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "$\\frac{7}{10}$ en écriture décimale :",
+   "choices": [
+    "7,10",
+    "0,07",
+    "70",
+    "0,7"
+   ],
+   "answer": 3,
+   "explanation": "7 dixièmes = 0,7.",
+   "lesson": "cm1-maths-fractions"
+  },
+  {
+   "id": "cm1-maths-fractions-q5",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "$\\frac{3}{7}+\\frac{2}{7}$ =",
+   "choices": [
+    "$\\frac{5}{14}$",
+    "$\\frac{6}{7}$",
+    "$\\frac{5}{7}$",
+    "$\\frac{1}{7}$"
+   ],
+   "answer": 2,
+   "explanation": "3 + 2 = 5 ; le dénominateur reste 7.",
+   "lesson": "cm1-maths-fractions"
+  }
+ ]
+}

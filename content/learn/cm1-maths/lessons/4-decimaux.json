@@ -1,0 +1,505 @@
+{
+ "chapter": "cm1-maths-decimaux",
+ "lessons": [
+  {
+   "id": "cm1-maths-decimaux",
+   "title": "Les nombres décimaux",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Nombres décimaux (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire et écrire un nombre décimal (dixièmes, centièmes).",
+    "Comparer et ranger des nombres décimaux.",
+    "Additionner et soustraire des décimaux, multiplier et diviser par 10 et 100."
+   ],
+   "prerequisites": [
+    "cm1-maths-nombres"
+   ],
+   "exercises": [
+    "cm1-maths-decimaux-01",
+    "cm1-maths-decimaux-02",
+    "cm1-maths-decimaux-03",
+    "cm1-maths-decimaux-04",
+    "cm1-maths-decimaux-05",
+    "cm1-maths-decimaux-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-decimaux-q1",
+    "cm1-maths-decimaux-q2",
+    "cm1-maths-decimaux-q3",
+    "cm1-maths-decimaux-q4",
+    "cm1-maths-decimaux-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les calculs décimaux ; vérifier que la multiplication/division des décimaux par 10 et 100 est bien au programme du CM1."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Partie entière et partie décimale",
+     "md": "Un nombre décimal s'écrit avec une **virgule**. À gauche : la **partie entière**. À droite : la **partie décimale** (dixièmes, centièmes…).\n\n12,75 = 12 unités + 7 dixièmes + 5 centièmes.\n\n1 dixième = 0,1 = $\\frac{1}{10}$ ; 1 centième = 0,01 = $\\frac{1}{100}$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 70,
+        "x2": 520,
+        "y2": 70,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 110,
+        "text": "2",
+        "size": 18,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 110,
+        "text": "2,5",
+        "size": 18,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 520,
+        "y": 110,
+        "text": "3",
+        "size": 18,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 62,
+        "x2": 40,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 88,
+        "y1": 62,
+        "x2": 88,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 136,
+        "y1": 62,
+        "x2": 136,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 184,
+        "y1": 62,
+        "x2": 184,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 232,
+        "y1": 62,
+        "x2": 232,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 62,
+        "x2": 280,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 328,
+        "y1": 62,
+        "x2": 328,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 376,
+        "y1": 62,
+        "x2": 376,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 424,
+        "y1": 62,
+        "x2": 424,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 472,
+        "y1": 62,
+        "x2": 472,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 520,
+        "y1": 62,
+        "x2": 520,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 232,
+        "cy": 70,
+        "r": 7,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 48,
+        "text": "2,4",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Une droite graduée de 2 à 3.",
+     "alt": "Une droite graduée en dixièmes de 2 à 3. Les repères 2, 2,5 et 3 sont indiqués. Un point rouge marque 2,4."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Comparer des décimaux",
+     "md": "On compare d'abord les parties entières, puis les dixièmes, puis les centièmes.\n\n- 2,5 et 2,45 : même partie entière ; dixièmes : 5 > 4. Donc **2,5 > 2,45**. (2,5 = 2,50.)\n- Un nombre n'est pas plus grand parce qu'il a plus de chiffres après la virgule."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Calculer avec des décimaux",
+     "md": "- **Addition, soustraction** : on aligne les virgules (virgule sous virgule).\n- ×10 : la virgule se décale d'un rang vers la droite (3,25 × 10 = 32,5). ×100 : de deux rangs.\n- ÷10 : un rang vers la gauche (32,5 ÷ 10 = 3,25)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : additionner",
+     "statement": "Calcule 12,75 + 8,6.",
+     "steps": [
+      {
+       "md": "On écrit 8,6 comme 8,60 pour aligner les virgules."
+      },
+      {
+       "md": "12,75 + 8,60 : centièmes 5 ; dixièmes 7 + 6 = 13 (on pose 3, retenue 1) ; unités 2 + 8 + 1 = 11 ; dizaines 1."
+      },
+      {
+       "md": "Résultat : 21,35."
+      }
+     ],
+     "answer": "**21,35**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ranger",
+     "statement": "Range du plus petit au plus grand : 3,09 ; 3,9 ; 3,19 ; 3,1.",
+     "steps": [
+      {
+       "md": "Toutes les parties entières sont 3."
+      },
+      {
+       "md": "On compare les dixièmes : 0 (3,09) ; 9 (3,9) ; 1 (3,19) ; 1 (3,1). Pour 3,19 et 3,1 : 3,10 < 3,19."
+      }
+     ],
+     "answer": "**3,09 < 3,1 < 3,19 < 3,9**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que 2,45 > 2,5 parce que 45 > 5.\n- Mal aligner les chiffres dans une addition (aligner à droite au lieu des virgules).\n- Décaler la virgule dans le mauvais sens."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-decimaux-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-decimaux-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-decimaux-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-decimaux-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-decimaux-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-decimaux-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-decimaux-01",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Quel est le chiffre des centièmes de 36,47 ?",
+   "choices": [
+    "4",
+    "3",
+    "6",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "36,47 : 4 dixièmes, 7 centièmes.",
+   "points": 1,
+   "lesson": "cm1-maths-decimaux",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-decimaux-02",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : 2,5 > 2,45.",
+   "answer": true,
+   "explanation": "Même partie entière ; 5 dixièmes > 4 dixièmes.",
+   "points": 1,
+   "lesson": "cm1-maths-decimaux",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-decimaux-03",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Calcule : 12,75 + 8,6",
+   "answer": 21.35,
+   "tolerance": 0,
+   "explanation": "12,75 + 8,60 = 21,35.",
+   "points": 1,
+   "lesson": "cm1-maths-decimaux",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-decimaux-04",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Quel est le plus grand de ces nombres ?",
+   "choices": [
+    "3,09",
+    "3,19",
+    "3,9",
+    "3,1"
+   ],
+   "answer": 2,
+   "explanation": "Tous ont 3 unités ; les dixièmes : 9 est le plus grand.",
+   "points": 1,
+   "lesson": "cm1-maths-decimaux",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-decimaux-05",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Calcule : 3,25 × 10",
+   "answer": 32.5,
+   "tolerance": 0,
+   "explanation": "Multiplier par 10 décale la virgule d'un rang vers la droite : 32,5.",
+   "points": 1,
+   "lesson": "cm1-maths-decimaux",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-decimaux-06",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Une couturière de Garoua a 8,5 m de tissu. Elle utilise 3,75 m pour une robe, puis 2,4 m pour une chemise.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle longueur de tissu a-t-elle utilisée en tout ?",
+     "answer": 6.15,
+     "tolerance": 0,
+     "explanation": "3,75 + 2,40 = 6,15 m.",
+     "unit": "m",
+     "id": "cm1-maths-decimaux-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle longueur lui reste-t-il ?",
+     "answer": 2.35,
+     "tolerance": 0,
+     "explanation": "8,50 − 6,15 = 2,35 m.",
+     "unit": "m",
+     "id": "cm1-maths-decimaux-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Peut-elle encore couper un morceau de 2,5 m ?",
+     "answer": false,
+     "explanation": "Non : 2,35 m < 2,5 m.",
+     "id": "cm1-maths-decimaux-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-decimaux",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-decimaux-q1",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Dans 5,08, le chiffre 8 est celui des…",
+   "choices": [
+    "dixièmes",
+    "centièmes",
+    "unités",
+    "dizaines"
+   ],
+   "answer": 1,
+   "explanation": "Après la virgule : 0 dixième, 8 centièmes.",
+   "lesson": "cm1-maths-decimaux"
+  },
+  {
+   "id": "cm1-maths-decimaux-q2",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "0,5 est égal à…",
+   "choices": [
+    "5 dixièmes",
+    "5 centièmes",
+    "5 unités",
+    "50 dixièmes"
+   ],
+   "answer": 0,
+   "explanation": "0,5 = $\\frac{5}{10}$.",
+   "lesson": "cm1-maths-decimaux"
+  },
+  {
+   "id": "cm1-maths-decimaux-q3",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel signe : 4,3 … 4,30 ?",
+   "choices": [
+    "<",
+    ">",
+    "on ne peut pas savoir",
+    "="
+   ],
+   "answer": 3,
+   "explanation": "On peut ajouter un zéro à droite de la partie décimale sans changer la valeur.",
+   "lesson": "cm1-maths-decimaux"
+  },
+  {
+   "id": "cm1-maths-decimaux-q4",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Résultat de 6,4 + 1,7 :",
+   "choices": [
+    "7,11",
+    "7,1",
+    "8,1",
+    "8,11"
+   ],
+   "answer": 2,
+   "explanation": "6,4 + 1,7 = 8,1.",
+   "lesson": "cm1-maths-decimaux"
+  },
+  {
+   "id": "cm1-maths-decimaux-q5",
+   "chapter": "cm1-maths-decimaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Résultat de 45 ÷ 10 :",
+   "choices": [
+    "450",
+    "4,5",
+    "0,45",
+    "45,0"
+   ],
+   "answer": 1,
+   "explanation": "Diviser par 10 décale la virgule d'un rang vers la gauche.",
+   "lesson": "cm1-maths-decimaux"
+  }
+ ]
+}

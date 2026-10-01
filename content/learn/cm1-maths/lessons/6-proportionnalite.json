@@ -1,0 +1,546 @@
+{
+ "chapter": "cm1-maths-proportionnalite",
+ "lessons": [
+  {
+   "id": "cm1-maths-proportionnalite",
+   "title": "La proportionnalité",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Proportionnalité (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître une situation de proportionnalité.",
+    "Compléter un tableau de proportionnalité (coefficient, retour à l'unité).",
+    "Résoudre un problème de proportionnalité."
+   ],
+   "prerequisites": [
+    "cm1-maths-calcul"
+   ],
+   "exercises": [
+    "cm1-maths-proportionnalite-01",
+    "cm1-maths-proportionnalite-02",
+    "cm1-maths-proportionnalite-03",
+    "cm1-maths-proportionnalite-04",
+    "cm1-maths-proportionnalite-05",
+    "cm1-maths-proportionnalite-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-proportionnalite-q1",
+    "cm1-maths-proportionnalite-q2",
+    "cm1-maths-proportionnalite-q3",
+    "cm1-maths-proportionnalite-q4",
+    "cm1-maths-proportionnalite-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les prix donnés : contexte camerounais plausible mais valeurs fictives (pas de statistiques)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Grandeurs proportionnelles",
+     "md": "Deux grandeurs sont **proportionnelles** quand on passe de l'une à l'autre en **multipliant toujours par le même nombre** (le **coefficient**).\n\nSi 1 cahier coûte 250 FCFA, 2 cahiers coûtent 500 FCFA, 3 cahiers 750 FCFA."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 130,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 56,
+        "text": "Cahiers",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 75,
+        "w": 130,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "red"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 101,
+        "text": "Prix (FCFA)",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 30,
+        "w": 85,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 202,
+        "y": 56,
+        "text": "1",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 75,
+        "w": 85,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 202,
+        "y": 101,
+        "text": "250",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 255,
+        "y": 30,
+        "w": 85,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 297,
+        "y": 56,
+        "text": "2",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 255,
+        "y": 75,
+        "w": 85,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 297,
+        "y": 101,
+        "text": "500",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 30,
+        "w": 85,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 392,
+        "y": 56,
+        "text": "3",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 75,
+        "w": 85,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 392,
+        "y": 101,
+        "text": "750",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 445,
+        "y": 30,
+        "w": 85,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 487,
+        "y": 56,
+        "text": "6",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 445,
+        "y": 75,
+        "w": 85,
+        "h": 40,
+        "fill": null,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 487,
+        "y": 101,
+        "text": "1 500",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 150,
+        "text": "On multiplie toujours par 250 pour passer de la ligne 1 à la ligne 2",
+        "size": 14,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un tableau de proportionnalité.",
+     "alt": "Un tableau à deux lignes : cahiers (1, 2, 3, 6) et prix en FCFA (250, 500, 750, 1 500). On multiplie par 250."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Trois façons de calculer",
+     "md": "1. **Le coefficient** : prix = nombre × 250.\n2. **Le retour à l'unité** : je cherche le prix d'un cahier, puis je multiplie.\n3. **Les propriétés** : si 2 cahiers coûtent 500 FCFA, 4 cahiers coûtent 2 × 500 = 1 000 FCFA ; 5 cahiers = 2 cahiers + 3 cahiers."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Quand ce n'est pas proportionnel",
+     "md": "L'âge d'un enfant et sa taille ne sont **pas** proportionnels : à 10 ans on ne mesure pas deux fois plus qu'à 5 ans. La proportionnalité demande que **tout double quand l'autre double**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : retour à l'unité",
+     "statement": "6 stylos coûtent 900 FCFA. Combien coûtent 10 stylos ?",
+     "steps": [
+      {
+       "md": "Un stylo : 900 ÷ 6 = 150 FCFA."
+      },
+      {
+       "md": "10 stylos : 150 × 10 = 1 500 FCFA."
+      }
+     ],
+     "answer": "**1 500 FCFA**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : recette",
+     "statement": "Pour 4 personnes il faut 300 g de riz. Combien pour 10 personnes ?",
+     "steps": [
+      {
+       "md": "Pour 1 personne : 300 ÷ 4 = 75 g."
+      },
+      {
+       "md": "Pour 10 personnes : 75 × 10 = 750 g."
+      }
+     ],
+     "answer": "**750 g de riz**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Ajouter le même nombre à chaque ligne au lieu de multiplier.\n- Croire que toute situation est proportionnelle.\n- Oublier de revenir à la grandeur demandée (unité)."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-proportionnalite-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-proportionnalite-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-proportionnalite-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-proportionnalite-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-proportionnalite-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-proportionnalite-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-proportionnalite-01",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "3 cahiers coûtent 750 FCFA. Combien coûtent 5 cahiers ?",
+   "answer": 1250,
+   "tolerance": 0,
+   "explanation": "Un cahier : 750 ÷ 3 = 250 FCFA ; 5 cahiers : 250 × 5 = 1 250 FCFA.",
+   "unit": "FCFA",
+   "points": 1,
+   "lesson": "cm1-maths-proportionnalite",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-02",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : si 2 kg de riz coûtent 1 400 FCFA, 4 kg coûtent 2 800 FCFA.",
+   "answer": true,
+   "explanation": "4 kg est le double de 2 kg : le prix double aussi, 2 × 1 400 = 2 800 FCFA.",
+   "points": 1,
+   "lesson": "cm1-maths-proportionnalite",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-03",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Quelle situation est proportionnelle ?",
+   "choices": [
+    "L'âge d'un enfant et sa taille.",
+    "Le prix de sacs de riz identiques en fonction de leur nombre.",
+    "La pointure et l'âge.",
+    "La température et l'heure."
+   ],
+   "answer": 1,
+   "explanation": "Avec des sacs identiques, le prix est proportionnel au nombre de sacs.",
+   "points": 1,
+   "lesson": "cm1-maths-proportionnalite",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-04",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "6 stylos coûtent 900 FCFA. Combien coûtent 10 stylos ?",
+   "answer": 1500,
+   "tolerance": 0,
+   "explanation": "900 ÷ 6 = 150 ; 150 × 10 = 1 500 FCFA.",
+   "unit": "FCFA",
+   "points": 1,
+   "lesson": "cm1-maths-proportionnalite",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-05",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Pour 4 personnes il faut 300 g de riz. Combien de grammes pour 10 personnes ?",
+   "answer": 750,
+   "tolerance": 0,
+   "explanation": "300 ÷ 4 = 75 ; 75 × 10 = 750 g.",
+   "unit": "g",
+   "points": 1,
+   "lesson": "cm1-maths-proportionnalite",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-06",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Un cycliste roule à vitesse constante et parcourt 15 km en 1 heure.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle distance parcourt-il en 3 heures ?",
+     "answer": 45,
+     "tolerance": 0,
+     "explanation": "15 × 3 = 45 km.",
+     "unit": "km",
+     "id": "cm1-maths-proportionnalite-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle distance parcourt-il en 4 heures ?",
+     "answer": 60,
+     "tolerance": 0,
+     "explanation": "15 × 4 = 60 km.",
+     "unit": "km",
+     "id": "cm1-maths-proportionnalite-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien d'heures lui faut-il pour parcourir 90 km ?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "90 ÷ 15 = 6 heures.",
+     "unit": "h",
+     "id": "cm1-maths-proportionnalite-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-proportionnalite",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-q1",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Dans un tableau de proportionnalité, on passe d'une ligne à l'autre en…",
+   "choices": [
+    "multipliant par le même nombre",
+    "additionnant le même nombre",
+    "soustrayant toujours 5",
+    "changeant à chaque colonne"
+   ],
+   "answer": 0,
+   "explanation": "C'est la définition du coefficient de proportionnalité.",
+   "lesson": "cm1-maths-proportionnalite"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-q2",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Si 1 kg de tomates coûte 400 FCFA, 3 kg coûtent…",
+   "choices": [
+    "403 FCFA",
+    "800 FCFA",
+    "1 000 FCFA",
+    "1 200 FCFA"
+   ],
+   "answer": 3,
+   "explanation": "400 × 3 = 1 200.",
+   "lesson": "cm1-maths-proportionnalite"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-q3",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel coefficient dans 2 → 500, 4 → 1 000 ?",
+   "choices": [
+    "2",
+    "500",
+    "250",
+    "1 000"
+   ],
+   "answer": 2,
+   "explanation": "500 ÷ 2 = 250.",
+   "lesson": "cm1-maths-proportionnalite"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-q4",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle phrase est vraie ?",
+   "choices": [
+    "Si l'une augmente de 1, l'autre aussi.",
+    "Si une quantité double, l'autre double aussi.",
+    "Les deux grandeurs sont toujours égales.",
+    "Le coefficient change à chaque ligne."
+   ],
+   "answer": 1,
+   "explanation": "C'est la propriété de la proportionnalité.",
+   "lesson": "cm1-maths-proportionnalite"
+  },
+  {
+   "id": "cm1-maths-proportionnalite-q5",
+   "chapter": "cm1-maths-proportionnalite",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Retour à l'unité : 5 crayons coûtent 750 FCFA ; 1 crayon coûte…",
+   "choices": [
+    "150 FCFA",
+    "75 FCFA",
+    "250 FCFA",
+    "1 500 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "750 ÷ 5 = 150.",
+   "lesson": "cm1-maths-proportionnalite"
+  }
+ ]
+}
