@@ -1,0 +1,50 @@
+{
+ "format": 1,
+ "comment": "Politique de demandes. Valeurs par défaut modifiables par le propriétaire ; aucune ne désigne une voix.",
+ "varieties": {
+  "zh": "zh-CN",
+  "ja": "ja-JP",
+  "de": "de-DE",
+  "it": "it-IT",
+  "fr": "fr-FR",
+  "en": null,
+  "es": null
+ },
+ "varietiesComment": "null = à choisir par le propriétaire (en-GB / en-US, es-ES / es-LATAM) : la demande est alors marquée « variété à choisir »",
+ "register": {
+  "A0": "lent",
+  "A1": "lent",
+  "A2": "intermediaire"
+ },
+ "registerDefault": "naturel",
+ "speakerGender": {
+  "A": "f",
+  "B": "m"
+ },
+ "speakerGenderDefault": "neutre",
+ "ageBand": "adulte",
+ "audio": {
+  "wordMaxDurationS": 4,
+  "wordBitrateKbps": 16,
+  "phraseMaxDurationS": 20,
+  "phraseBitrateKbps": 24,
+  "dialogueMaxDurationS": 120,
+  "sampleRateHz": 16000,
+  "channels": 1,
+  "codec": "opus",
+  "container": "ogg",
+  "targetLufs": -16
+ },
+ "image": {
+  "maxBytes": 122880,
+  "format": "webp",
+  "preferVector": true
+ },
+ "video": {
+  "maxDurationS": 30,
+  "maxHeight": 480,
+  "codec": "h264"
+ },
+ "imageTemplate": "Illustration simple et neutre de : {label}. Figure vectorielle de préférence ; aucun visage de personne réelle ni personne identifiable.",
+ "videoTemplate": "Courte vidéo (30 s au plus, 480p au plus, sans personne réelle) illustrant : {label}."
+}
