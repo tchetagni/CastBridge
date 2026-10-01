@@ -1,7 +1,16 @@
 # CastBridge : passation (handoff)
 
 > À tenir à jour à chaque étape. **Aucun secret ici** (mots de passe, PIN, jetons, clés) : voir « Où sont les secrets ».
-> Dernière mise à jour : 2026-10-01, branche `feat/ssh`. **Règle du propriétaire : ce document se met à jour en temps réel** (à chaque fusion, publication, lancement/fin d'agent, décision ou problème), commité et poussé aussitôt.
+> Dernière mise à jour : 2026-10-01 (commit `2d6446f`+), branche `feat/ssh`. **Règle du propriétaire : ce document se met à jour en temps réel** (à chaque fusion, publication, lancement/fin d'agent, décision ou problème), commité et poussé aussitôt.
+
+## Reprendre dans une session cloud (lire d'abord)
+- **Dépôt** : `git@github.com:tchetagni/CastBridge.git`. **Branche à utiliser : `feat/ssh`** (tout y est fusionné et poussé). **Ne pas partir de `main`** : elle est restée à l'état initial (186 commits de retard). Créer sa branche de travail depuis `origin/feat/ssh`.
+- **Noms** : l'app du téléphone s'appelle **CastBridge**, celle de la TV **CastBridge-TV** (modules Gradle `:sender` / `:receiver`, applicationId inchangés).
+- **Construire / tester** : voir §5 (Gradle 8.14.3, SDK 35, pas de wrapper). Le dépôt ne contient ni `build/`, ni `local.properties`, ni secret : définir `ANDROID_HOME`. Dans le cloud, pas d'appareil physique ni de TV : tests JVM (`:core:test`, `:sshd:test`, `backend ./mvnw -q test`), compilation des APK et émulateurs seulement.
+- **Ce qui n'existe PAS dans le dépôt** (ne se reconstitue pas) : accès SSH au serveur et à la TV, clé de signature de production (`secrets/`), mots de passe/PIN, clé de debug du Mac (`~/.android/debug.keystore`, nécessaire pour que les mises à jour s'installent par-dessus l'existant). Un agent cloud ne peut donc **ni déployer, ni installer, ni signer** : il propose des branches.
+- **Règle** : une branche par chantier (`feat/...`), commits par étape, pas de fusion sans tests ; mettre ce document à jour **en temps réel** (§0) à chaque étape, dans le même commit.
+- **Ne jamais fusionner `wip/external-ai-changes`** (code d'autres IA non revu, voir §0 et `docs/AUDIT-EXTERNAL-CHANGES.md` sur `audit/external-ai`).
+- **Tests instables connus** : `TvSshServerTest.unknownKeyIsRefusedAndAddressGetsLocked`, `TrustTest.onlyTrustedPhonesGetTokensAndRevocationKillsThem`, `ChessRelayTest.availabilityProbe` (port occupé) : relancer avant de conclure à une régression.
 
 ## 0. Journal en direct (le plus récent en haut)
 - 2026-10-01 : CastBridge-TV **0.13.0 (code 24)** publiée sur la clé (`Download/CastBridge-TV-0.13.0.apk`, 29,7 Mo, sha256 `ffe31c24…ad161` vérifié) — **à installer par Esaie** (la TV est en 0.12.1) ; CastBridge **1.2-beta (code 10)** installée en USB sur le S21+. Contient tout : charte, Jeux/Sudoku, Bluetooth plug and play, contrôle parental, quiz 300 parties + packs, assistant de bibliothèque (+ dossiers TV, corbeille), adresse serveur masquée. Rien de ceci n'est encore validé sur matériel réel.
@@ -35,11 +44,11 @@
 ## 2. État des versions
 | Élément | Version | Où |
 |---|---|---|
-| App TV | 0.11.1 (versionCode 21) | clé USB de la TV : `Download/CastBridge-TV-0.11.1.apk` (armeabi-v7a, sha256 `50d6c815…37e95`) ; la TV tournait en 0.11 (corrige la bibliothèque illisible : crochet `]` en trop dans `/api/library`) |
-| App téléphone | 1.0-beta (versionCode 8) | installée sur le Samsung S21+ d'Esaie (sans `feat/connect`) |
-| Serveur | commit `992db18` | https://bridge.sti-cm.com (en ligne, sain) |
+| CastBridge-TV (app TV) | 0.13.0 (code 24) | clé USB de la TV : `Download/CastBridge-TV-0.13.0.apk` (armeabi-v7a, sha256 `ffe31c24…ad161`) ; la TV tourne en 0.12.1 tant qu'Esaie ne l'a pas installée |
+| CastBridge (app téléphone) | 1.2-beta (code 10) | installée en USB sur le Samsung S21+ d'Esaie (utilisateur principal ; la copie « Dual App » n'est pas à jour) |
+| Serveur | **déployé : commit `992db18`** (ancien) | https://bridge.sti-cm.com (en ligne, sain). **Le code du dépôt a depuis reçu** : thème/favicon de `/admin`, packs de questions du quiz (`CASTBRIDGE_QUIZ_PACKS_DIR`), aide IA de l'assistant (`/api/v1/library/suggest`, sans clé), catalogue d'événements `games`/`sudoku` — **rien de cela n'est déployé** (décision d'Esaie) |
 
-Branche d'intégration : **`feat/ssh`** (poussée sur `origin` et sur le dépôt du serveur, branche `main`). Toutes les fonctionnalités y sont fusionnées.
+Branche d'intégration : **`feat/ssh`** (poussée sur GitHub `origin` et sur le dépôt du serveur `bridge`, branche `main`). Toutes les fonctionnalités des agents y sont fusionnées. La `main` de **GitHub** est périmée (état initial).
 
 ## 3. Branches (une par fonctionnalité, fusionnées dans `feat/ssh`)
 `feat/tv-admin` (PIN, page web, USB, lecture pendant l'envoi) · `feat/tv-usb-storage` (volumes multiples) · `feat/tv-library-player` (bibliothèque, lecteur, service, UX) · `feat/tv-quiz` · `feat/tv-chess` · `feat/tv-downloads` (aria2) · `feat/phone-player` · `feat/phone-remote` · `feat/backend` · `feat/learn` (Apprendre).
@@ -95,14 +104,25 @@ ssh ubuntu@bridge.sti-cm.com 'cd ~/castbridge/services/castbridge/backend && git
 - Télémétrie : deux niveaux de consentement (essentiel / statistiques d'usage), conformité à la loi camerounaise 2024/017 (**texte à faire relire par un juriste**).
 - Mot de passe admin : 12 caractères minimum imposés ; Esaie a choisi un mot de passe conforme (voir « Où sont les secrets »).
 
-## 8. À faire / en attente
-1. Publier les APK via `/admin` et vérifier le premier enregistrement réel d'une TV (`feat/connect` est fusionnée).
-2. **Appliquer la charte graphique** (en cours : `feat/charte`) (`branding/`) aux apps : couleurs, typographies, icônes des tuiles, icône d'app et bannière TV, anneau de focus. Avant : corriger les paires de couleurs qui échouent en WCAG AA pour le texte courant (or clair sur blanc 3,6 ; accent clair 3,3 ; blanc sur vert 3,4 ; gris `#6E7A93` sur fond sombre 4,4), refaire la mise en page du guide PDF (logos déformés aux p. 4-7 et 11), ajouter les icônes manquantes (Apprendre, Télécommande, Sur le téléphone, Internet/passerelle), envisager de distinguer le symbole d'un casque audio.
-3. Clé de signature de release + secrets GitHub (`release.yml`) : à décider.
-4. Contenu d'Apprendre : **124 points « à vérifier »**, tout est en brouillon, relecture par des enseignants (deux sous-systèmes) et par un agent de santé ; matières non couvertes : HG-ECM, SVT, anglais BEPC, philosophie, GCE A Level, licence ; vidéos (droits).
-5. Quiz : 3 questions à relire (docs/QUIZ.md) ; serveur en ligne pour la banque. **Règle des 300 parties** (branche `feat/quiz-no-repeat`, non fusionnée) : historique anti-répétition par profil et parcours, `QuizBank.remainingFresh`, indicateur dans l'écran de choix et dans `/admin/quiz`, packs de questions signés (plafond 11 Mo, reprise, relais par le téléphone) et pipeline `tools/quiz-bank/` : ≈ 26 000 questions `review` produites (CM2, 3e, Tle, L1 éco, L1 maths > 4 500 mais calculées à ≈ 99 % ; culture générale 3 205 ≈ 156 parties ; **droit 106**) ; **0 question `approved`** : relecture humaine et rédaction du contenu camerounais/africain/droit à organiser (docs/QUIZ.md § 6 bis à 6 quater). Copier `content/quiz/dist` dans `CASTBRIDGE_QUIZ_PACKS_DIR` du serveur pour publier les packs.
-6. Échecs en ligne : nécessite les routes du serveur listées dans `docs/CHESS.md` § 6 (non implémentées).
-7. Défauts connus : « Bravo » affiché même sur une mauvaise réponse dans certaines explications d'Apprendre ; sous-titres de tuiles tronqués ; indices `C_f` des figures non rendus ; l'installation d'APK par Wi-Fi n'a pas de confirmation silencieuse garantie sur GaiaOS.
+## 8. À faire / en attente (état au 2026-10-01)
+**Décisions d'Esaie attendues**
+1. Quiz : autoriser les questions *calculées* en `review` avant relecture (`computedPlayable = true` actuellement) ou tout bloquer ?
+2. Deux clés SSH inconnues autorisées sur la TV (`letcheta@TCHETAGNIs-MBP.lan`, dont une préfixée `HltitGwF`) : à confirmer puis retirer (`/api/ssh/key`).
+3. Contrôle parental : le blocage par catégorie « Jeux » suffit-il pour Quiz/Échecs (pas de filtre par âge) ?
+4. IA serveur de l'assistant : activer ? (fournisseur, budget, texte de consentement à faire relire ; procédure § 15 de `docs/LIBRARY-AGENT.md`).
+5. Clé de signature de release + secrets GitHub (`release.yml`) ; migration = une réinstallation manuelle.
+6. Renommer les modules Gradle `:sender`/`:receiver` en `:castbridge`/`:castbridge-tv` (jamais les applicationId) : à faire seulement quand aucune branche d'agent n'est ouverte.
+7. Fusionner `feat/ssh` dans la `main` de GitHub (périmée) ?
+
+**À faire (technique)**
+- **Valider sur le matériel d'Esaie** tout le lot 0.13.0 / 1.2-beta (voir §9) ; premier enregistrement réel d'une TV auprès du serveur (`feat/connect` jamais testée en production).
+- **Déployer le serveur** à jour (`deploy.sh`) et y publier les APK et les packs de quiz ; renseigner `CASTBRIDGE_QUIZ_PACKS_DIR`.
+- Deux tuiles d'accueil TV portent l'id `bluetooth` (statistiques confondues) ; écran Échecs TV sans logo ; tuiles Jeux/Contrôle parental sans icône de la charte ; le téléphone n'affiche pas encore les dossiers virtuels de la TV (champ `folder`) ; la 1.2-beta n'affiche pas l'icône Jeux dédiée (utilise Quiz).
+- **Contenu** : quiz culture générale 156/300 parties sans répétition (manque ≈ 1 500 questions Cameroun + 300 Afrique), droit 7/300 (manque ≈ 4 400) ; **0 question `approved`**, tout est à relire ; Apprendre : 124 points « à vérifier » (enseignants), matières non couvertes (HG-ECM, SVT, anglais BEPC, philosophie, GCE A Level, licence) ; 3 questions de quiz à relire.
+- Échecs en ligne : routes serveur de `docs/CHESS.md` § 6 non implémentées.
+- Assistant : pas de reprise d'un rangement interrompu après redémarrage (`recover()` non branché) ; doublons du téléphone jugés sans empreinte.
+- Défauts connus d'Apprendre : « Bravo » affiché sur une mauvaise réponse dans certaines explications ; indices `C_f` des figures non rendus.
+- Texte de télémétrie (loi camerounaise 2024/017) et texte de consentement IA : relecture par un juriste.
 
 ## 9. Non vérifié sur la vraie TV (à faire avec Esaie)
 Démarrage automatique après redémarrage de la TV (signal de démarrage sur GaiaOS, économie d'énergie) ; « Afficher par-dessus les autres apps » et lancement depuis l'arrière-plan ; lecture pendant l'envoi (libVLC 32 bits) ; écran de réglages « Installer des apps inconnues » ; focus à la télécommande dans tous les écrans (quiz, échecs, Apprendre) ; aria2 (exécution du binaire natif, DHT, débit sur exFAT) ; SSH par Bluetooth ; télécommande (latence, service d'accessibilité) ; miniatures ; passerelle Internet Bluetooth (la liaison tombait après quelques secondes : cause exacte non trouvée, la version téléphone affiche désormais l'erreur).
