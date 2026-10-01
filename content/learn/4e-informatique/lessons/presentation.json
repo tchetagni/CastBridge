@@ -1,0 +1,424 @@
+{
+ "chapter": "4e-informatique-presentation",
+ "lessons": [
+  {
+   "id": "4e-informatique-diaporama",
+   "title": "Réaliser un diaporama",
+   "minutes": 25,
+   "programRef": "4e — Présentation assistée par ordinateur (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Structurer une présentation en diapositives.",
+    "Appliquer les règles de lisibilité."
+   ],
+   "prerequisites": [
+    "4e-informatique-os-fichiers"
+   ],
+   "exercises": [
+    "4e-informatique-diaporama-01",
+    "4e-informatique-diaporama-02",
+    "4e-informatique-diaporama-03",
+    "4e-informatique-diaporama-04",
+    "4e-informatique-diaporama-05",
+    "4e-informatique-diaporama-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-diaporama-q1",
+    "4e-informatique-diaporama-q2",
+    "4e-informatique-diaporama-q3",
+    "4e-informatique-diaporama-q4",
+    "4e-informatique-diaporama-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Diaporama",
+     "md": "Un **diaporama** est une suite de **diapositives** projetées l'une après l'autre pour appuyer un exposé. Une diapositive contient un titre, un peu de texte, des images, des schémas. Le diaporama ne remplace pas l'orateur : il l'aide."
+    },
+    {
+     "type": "illustration",
+     "caption": "La structure d'un diaporama.",
+     "alt": "Quatre blocs : titre, plan, contenu, conclusion.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 127,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 57.0,
+        "y": 43,
+        "text": "Titre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 107.0,
+        "y1": 37,
+        "x2": 129.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 132.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 179.0,
+        "y": 43,
+        "text": "Plan",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 229.0,
+        "y1": 37,
+        "x2": 251.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 254.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 301.0,
+        "y": 43,
+        "text": "Contenu",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 351.0,
+        "y1": 37,
+        "x2": 373.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 376.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 423.0,
+        "y": 43,
+        "text": "Conclusion",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Règles de lisibilité",
+     "md": "- Une idée par diapositive, quelques mots-clés plutôt que des phrases entières.\n- Texte assez grand pour être lu du fond de la classe ; fond et texte bien contrastés.\n- Peu de couleurs et une seule police ; images utiles et nettes.\n- Animations et transitions rares : elles ne doivent pas détourner l'attention.\n- Relire pour corriger les fautes ; citer l'origine des images."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : améliorer une diapositive",
+     "statement": "Une diapositive contient 12 lignes de texte en petits caractères. Que proposes-tu ?",
+     "steps": [
+      {
+       "md": "Garder seulement les idées principales : 3 à 5 lignes courtes."
+      },
+      {
+       "md": "Agrandir le texte et déplacer les détails dans les paroles de l'orateur ou sur d'autres diapositives."
+      }
+     ],
+     "answer": "**Moins de texte, plus grand, une idée par diapositive**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : plan d'exposé",
+     "statement": "Amina présente le palmier à huile en 6 diapositives. Propose un plan.",
+     "steps": [
+      {
+       "md": "1 : titre et nom. 2 : plan."
+      },
+      {
+       "md": "3 et 4 : contenu (où il pousse, ses usages). 5 : conclusion. 6 : sources et remerciements."
+      }
+     ],
+     "answer": "**Titre, plan, deux de contenu, conclusion, sources**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Lire le texte de la diapositive mot à mot.\n- Mettre texte clair sur fond clair.\n- Multiplier les effets sonores et animations.\n- Copier-coller des images sans indiquer la source."
+    }
+   ],
+   "reviewNotes": [
+    "Les valeurs conseillées (taille de texte, nombre de lignes) sont des usages courants, pas des règles officielles."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Une bonne diapositive contient surtout :",
+   "choices": [
+    "Un long paragraphe",
+    "Dix couleurs différentes",
+    "Des mots-clés et une image utile",
+    "Un texte minuscule"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut aider l'orateur sans surcharger.",
+   "id": "4e-informatique-diaporama-01",
+   "tier": "application",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut lire entièrement le texte de la diapositive à voix haute pour présenter.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'orateur doit expliquer avec ses mots, pas lire.",
+   "id": "4e-informatique-diaporama-02",
+   "tier": "application",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie vient en dernier dans un exposé ?",
+   "choices": [
+    "Le plan",
+    "Le titre",
+    "La page de garde",
+    "La conclusion (puis les sources)"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le plan se place au début.",
+   "id": "4e-informatique-diaporama-03",
+   "tier": "application",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle combinaison est la plus lisible ?",
+   "choices": [
+    "Texte jaune sur fond blanc",
+    "Texte gris clair sur fond blanc",
+    "Texte noir sur fond blanc",
+    "Texte vert sur fond rouge"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il faut un fort contraste.",
+   "id": "4e-informatique-diaporama-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi limiter les animations ?",
+   "choices": [
+    "Elles sont interdites",
+    "Elles détournent l'attention",
+    "Elles pèsent un octet",
+    "Elles effacent le texte"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'attention doit rester sur le message.",
+   "id": "4e-informatique-diaporama-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris prépare un exposé de 5 minutes sur la sécurité routière avec des diapositives.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Environ combien de diapositives conseillerais-tu, à raison d'une minute par diapositive ?",
+     "answer": 5,
+     "tolerance": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "5 minutes ÷ 1 minute par diapositive = 5 diapositives.",
+     "id": "4e-informatique-diaporama-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose le titre et le contenu des diapositives.",
+     "model": "Titre ; plan ; dangers ; règles à respecter ; conclusion.",
+     "rubric": [
+      "Titre",
+      "Plan cohérent",
+      "Conclusion"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-informatique-diaporama-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-diaporama-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un diaporama est fait de :",
+   "choices": [
+    "Diapositives",
+    "Cellules",
+    "Dossiers",
+    "Octets"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On parle de diapositives.",
+   "id": "4e-informatique-diaporama-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien d'idées principales par diapositive ?",
+   "choices": [
+    "Une",
+    "Dix",
+    "Cinquante",
+    "Aucune"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une idée claire par diapositive.",
+   "id": "4e-informatique-diaporama-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une image copiée sur Internet doit être accompagnée de :",
+   "choices": [
+    "D'un mot de passe",
+    "D'un virus",
+    "Sa source",
+    "D'une animation"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On cite l'origine des documents.",
+   "id": "4e-informatique-diaporama-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi relire le diaporama ?",
+   "choices": [
+    "Pour l'effacer",
+    "Pour changer de logiciel",
+    "Pour corriger les fautes",
+    "Pour le chiffrer"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les fautes nuisent à la qualité.",
+   "id": "4e-informatique-diaporama-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La première diapositive est généralement :",
+   "choices": [
+    "La conclusion",
+    "Le titre",
+    "Les sources",
+    "Un tableau"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On commence par le titre et l'auteur.",
+   "id": "4e-informatique-diaporama-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-diaporama",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

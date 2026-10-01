@@ -1,0 +1,483 @@
+{
+ "chapter": "bepc-maths-cercle",
+ "lessons": [
+  {
+   "id": "bepc-maths-polygones",
+   "title": "Angles inscrits et polygones réguliers",
+   "minutes": 30,
+   "programRef": "3e — Angles inscrits, angle au centre, polygones réguliers (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser l'angle au centre et l'angle inscrit.",
+    "Calculer les angles et les mesures d'un polygone régulier inscrit dans un cercle."
+   ],
+   "prerequisites": [
+    "bepc-maths-pythagore"
+   ],
+   "exercises": [
+    "bepc-maths-polygones-01",
+    "bepc-maths-polygones-02",
+    "bepc-maths-polygones-03",
+    "bepc-maths-polygones-04",
+    "bepc-maths-polygones-05",
+    "bepc-maths-polygones-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-polygones-q1",
+    "bepc-maths-polygones-q2",
+    "bepc-maths-polygones-q3",
+    "bepc-maths-polygones-q4",
+    "bepc-maths-polygones-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Angles dans un cercle",
+     "md": "- L'angle au centre est le **double** de tout angle inscrit qui intercepte le même arc.\n- Deux angles inscrits qui interceptent le même arc sont égaux.\n- Un angle inscrit qui intercepte un demi-cercle est droit."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Polygone régulier à $n$ côtés",
+     "md": "Un polygone régulier a tous ses côtés égaux et tous ses angles égaux ; ses sommets sont sur un cercle de centre $O$.\n- Angle au centre : $\\frac{360\\degree}{n}$.\n- Angle intérieur du polygone : $180\\degree-\\frac{360\\degree}{n}$.\n- L'hexagone régulier de rayon $r$ a pour côté $r$ (triangles équilatéraux)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un hexagone régulier inscrit : chaque angle au centre mesure 60°.",
+     "alt": "Un hexagone régulier ABCDEF inscrit dans un cercle de centre O, avec les rayons tracés.",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 285,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 140,
+        "r": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         250.0,
+         140.0,
+         200.0,
+         53.4,
+         100.0,
+         53.4,
+         50.0,
+         140.0,
+         100.0,
+         226.6,
+         200.0,
+         226.6
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 140,
+        "x2": 250.0,
+        "y2": 140.0,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 140,
+        "x2": 200.0,
+        "y2": 53.4,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 140,
+        "x2": 100.0,
+        "y2": 53.4,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 140,
+        "x2": 50.0,
+        "y2": 140.0,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 140,
+        "x2": 100.0,
+        "y2": 226.6,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 140,
+        "x2": 200.0,
+        "y2": 226.6,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 140,
+        "r": 3,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270.0,
+        "y": 146.0,
+        "text": "A",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 42.1,
+        "text": "B",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 42.1,
+        "text": "C",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 146.0,
+        "text": "D",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 249.9,
+        "text": "E",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 249.9,
+        "text": "F",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 130,
+        "text": "60°",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : angles",
+     "statement": "Pour un pentagone régulier, calcule l'angle au centre et l'angle intérieur.",
+     "steps": [
+      {
+       "md": "Angle au centre :",
+       "tex": "\\frac{360}{5}=72\\degree"
+      },
+      {
+       "md": "Angle intérieur :",
+       "tex": "180-72=108\\degree"
+      }
+     ],
+     "answer": "**$72\\degree$ et $108\\degree$**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : hexagone",
+     "statement": "Un hexagone régulier est inscrit dans un cercle de rayon 6 cm. Donne son périmètre et son aire (valeur approchée).",
+     "steps": [
+      {
+       "md": "Chacun des 6 triangles $OAB$ est équilatéral : $AB=OA=6$ cm."
+      },
+      {
+       "md": "Périmètre :",
+       "tex": "6\\times6=36\\text{ cm}"
+      },
+      {
+       "md": "Aire d'un triangle équilatéral de côté 6 : $\\frac{\\sqrt{3}}{4}\\times36=9\\sqrt{3}$ ; pour 6 triangles :",
+       "tex": "54\\sqrt{3}\\approx93{,}5\\text{ cm}^2"
+      }
+     ],
+     "answer": "**Périmètre 36 cm ; aire environ 93,5 cm²**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre angle au centre ($\\frac{360}{n}$) et angle intérieur ($180-\\frac{360}{n}$).\n- Dire que l'angle inscrit est le double de l'angle au centre : c'est l'inverse.\n- Utiliser « 180° ÷ n » pour l'angle au centre.\n- Oublier que l'hexagone se découpe en 6 triangles équilatéraux."
+    }
+   ],
+   "reviewNotes": [
+    "Ce thème est parfois enseigné en 4e : un résumé est aussi dans le pack 4e-maths.",
+    "Aire d'un hexagone régulier : valeur approchée avec $\\sqrt{3}\\approx1{,}732$."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Quel est l'angle au centre d'un octogone régulier (en degrés) ?",
+   "answer": 45,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{360}{8}=45\\degree$.",
+   "id": "bepc-maths-polygones-01",
+   "tier": "application",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est l'angle intérieur d'un pentagone régulier (en degrés) ?",
+   "answer": 108,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$180-\\frac{360}{5}=180-72=108\\degree$.",
+   "id": "bepc-maths-polygones-02",
+   "tier": "application",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un polygone régulier a un angle au centre de $40\\degree$. Combien de côtés a-t-il ?",
+   "choices": [
+    "8",
+    "10",
+    "18",
+    "9"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$n=\\frac{360}{40}=9$.",
+   "id": "bepc-maths-polygones-03",
+   "tier": "application",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un hexagone régulier a pour côté 6 cm. Quel est son aire, arrondie au dixième (en cm²) ?",
+   "answer": 93.5,
+   "tolerance": 0.1,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "6 triangles équilatéraux de côté 6 cm : $6\\times9\\sqrt{3}=54\\sqrt{3}\\approx93{,}5$.",
+   "id": "bepc-maths-polygones-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un angle inscrit mesure $(3x+5)\\degree$ et l'angle au centre qui intercepte le même arc mesure $(8x-10)\\degree$. Trouve $x$.",
+   "answer": 10,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'angle au centre est le double : $8x-10=2(3x+5)=6x+10$, soit $2x=20$ et $x=10$. Vérification : inscrit $35\\degree$, centre $70\\degree$.",
+   "id": "bepc-maths-polygones-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un hexagone régulier $ABCDEF$ de centre $O$ est inscrit dans un cercle de rayon 5 cm.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de l'angle $\\widehat{AOB}$ (en degrés) ?",
+     "answer": 60,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\frac{360}{6}=60\\degree$.",
+     "id": "bepc-maths-polygones-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur du côté $AB$ (en cm) ?",
+     "answer": 5,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$OAB$ est isocèle avec un angle de $60\\degree$ : il est équilatéral, donc $AB=5$ cm.",
+     "id": "bepc-maths-polygones-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est l'angle inscrit $\\widehat{ACB}$ (en degrés) ?",
+     "answer": 30,
+     "unit": "°",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$\\widehat{ACB}$ intercepte l'arc $AB$ : il vaut la moitié de $\\widehat{AOB}$, soit $30\\degree$.",
+     "id": "bepc-maths-polygones-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le périmètre de l'hexagone (en cm) ?",
+     "answer": 30,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$6\\times5=30$ cm.",
+     "id": "bepc-maths-polygones-06-d"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Un triangle isocèle avec un angle de 60° est équilatéral.",
+   "id": "bepc-maths-polygones-06",
+   "tier": "examen",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'angle au centre d'un carré inscrit vaut...",
+   "choices": [
+    "$45\\degree$",
+    "$90\\degree$",
+    "$60\\degree$",
+    "$180\\degree$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{360}{4}=90$.",
+   "id": "bepc-maths-polygones-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un angle inscrit de $25\\degree$ correspond à un angle au centre de...",
+   "choices": [
+    "$50\\degree$",
+    "$12{,}5\\degree$",
+    "$25\\degree$",
+    "$65\\degree$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On double.",
+   "id": "bepc-maths-polygones-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la somme des angles au centre d'un polygone régulier ?",
+   "choices": [
+    "$180\\degree$",
+    "$90\\degree$",
+    "$360\\degree$",
+    "$720\\degree$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils font un tour complet.",
+   "id": "bepc-maths-polygones-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les triangles $OAB$ d'un hexagone régulier sont...",
+   "choices": [
+    "rectangles",
+    "isocèles non équilatéraux",
+    "quelconques",
+    "équilatéraux"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Angle au centre $60\\degree$ et $OA=OB$ : équilatéraux.",
+   "id": "bepc-maths-polygones-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'angle intérieur d'un triangle équilatéral ?",
+   "choices": [
+    "$30\\degree$",
+    "$90\\degree$",
+    "$60\\degree$",
+    "$120\\degree$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$180-\\frac{360}{3}=60$.",
+   "id": "bepc-maths-polygones-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-polygones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

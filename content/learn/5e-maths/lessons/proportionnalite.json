@@ -1,0 +1,764 @@
+{
+ "chapter": "5e-maths-proportionnalite",
+ "lessons": [
+  {
+   "id": "5e-maths-proportionnalite-echelles",
+   "title": "Tableaux de proportionnalité, vitesse et échelles",
+   "minutes": 30,
+   "programRef": "5e — Proportionnalité : tableaux, quatrième proportionnelle, échelle, vitesse moyenne (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître et compléter un tableau de proportionnalité.",
+    "Utiliser une échelle et la relation vitesse – distance – durée."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-maths-proportionnalite-echelles-01",
+    "5e-maths-proportionnalite-echelles-02",
+    "5e-maths-proportionnalite-echelles-03",
+    "5e-maths-proportionnalite-echelles-04",
+    "5e-maths-proportionnalite-echelles-05",
+    "5e-maths-proportionnalite-echelles-06"
+   ],
+   "selfCheck": [
+    "5e-maths-proportionnalite-echelles-q1",
+    "5e-maths-proportionnalite-echelles-q2",
+    "5e-maths-proportionnalite-echelles-q3",
+    "5e-maths-proportionnalite-echelles-q4",
+    "5e-maths-proportionnalite-echelles-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Proportionnalité",
+     "md": "Un tableau est de **proportionnalité** si on passe de la première ligne à la seconde en multipliant par un même nombre k (coefficient). Pour trouver une valeur manquante : produit en croix, ou retour à l'unité. Dans $\\frac{a}{b} = \\frac{c}{d}$, on a $a \\times d = b \\times c$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Distance parcourue à vitesse constante.",
+     "alt": "Tableau : durée 2, 3, 5 heures ; distance 120, 180, 300 kilomètres.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 30,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 30,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 30,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 66,
+        "w": 100,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 66,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 66,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 66,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 54,
+        "text": "Durée (h)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 54,
+        "text": "2",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 54,
+        "text": "3",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 54,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 90,
+        "text": "Distance (km)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 90,
+        "text": "120",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 90,
+        "text": "180",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 90,
+        "text": "300",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 130,
+        "text": "Vitesse constante : 60 km par heure",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Vitesse et échelle",
+     "md": "- À vitesse constante : $v = \\frac{d}{t}$, donc $d = v \\times t$ et $t = \\frac{d}{v}$.\n- **Échelle** : si une carte est à l'échelle $\\frac{1}{50\\,000}$, 1 cm sur la carte représente 50 000 cm = 500 m dans la réalité."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : quatrième proportionnelle",
+     "statement": "Pour 4 kg de farine, on utilise 6 œufs. Combien d'œufs pour 10 kg ?",
+     "steps": [
+      {
+       "md": "Le coefficient est 6 ÷ 4 = 1,5 œuf par kg."
+      },
+      {
+       "md": "Pour 10 kg :",
+       "tex": "10 \\times 1{,}5 = 15"
+      }
+     ],
+     "answer": "**15 œufs**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : échelle",
+     "statement": "Sur un plan à l'échelle 1/200, une salle mesure 6 cm. Quelle est sa longueur réelle ?",
+     "steps": [
+      {
+       "md": "6 cm × 200 = 1 200 cm."
+      },
+      {
+       "md": "On convertit : 1 200 cm = 12 m."
+      }
+     ],
+     "answer": "**12 m**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Appliquer la proportionnalité à tort : l'âge et la taille ne le sont pas.\n- Oublier de convertir : une échelle donne des cm, on convertit en m ou km.\n- Écrire v = t ÷ d au lieu de v = d ÷ t."
+    }
+   ],
+   "reviewNotes": [
+    "La vitesse moyenne est parfois vue en 4e ; vérifier le programme.",
+    "Les distances sont arrondies ; aucune distance réelle entre villes n'est donnée."
+   ]
+  },
+  {
+   "id": "5e-maths-pourcentages",
+   "title": "Pourcentages : calculer, augmenter, diminuer",
+   "minutes": 25,
+   "programRef": "5e — Pourcentages : calcul, augmentation, réduction (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer un pourcentage d'une quantité.",
+    "Calculer le résultat d'une augmentation ou d'une réduction en pourcentage."
+   ],
+   "prerequisites": [
+    "5e-maths-proportionnalite-echelles"
+   ],
+   "exercises": [
+    "5e-maths-pourcentages-01",
+    "5e-maths-pourcentages-02",
+    "5e-maths-pourcentages-03",
+    "5e-maths-pourcentages-04",
+    "5e-maths-pourcentages-05",
+    "5e-maths-pourcentages-06"
+   ],
+   "selfCheck": [
+    "5e-maths-pourcentages-q1",
+    "5e-maths-pourcentages-q2",
+    "5e-maths-pourcentages-q3",
+    "5e-maths-pourcentages-q4",
+    "5e-maths-pourcentages-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Pourcentage d'une quantité",
+     "md": "$p\\,\\%$ de $Q$ vaut $\\frac{p}{100} \\times Q$. Exemple : 15 % de 2 000 = $\\frac{15}{100} \\times 2\\,000 = 300$. Pour trouver quel pourcentage représente $a$ par rapport à $b$ : $\\frac{a}{b} \\times 100$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un prix de 100 % augmenté ou diminué de 20 %.",
+     "alt": "Diagramme en barres : 100 pour cent, 80 pour cent après réduction de 20 pour cent, 120 pour cent après augmentation.",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Prix initial",
+        "value": 100,
+        "color": "blue"
+       },
+       {
+        "label": "Après −20 %",
+        "value": 80,
+        "color": "green"
+       },
+       {
+        "label": "Après +20 %",
+        "value": 120,
+        "color": "orange"
+       }
+      ],
+      "unit": "%"
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Augmentation et réduction",
+     "md": "- Réduction de $p\\,\\%$ : on calcule la réduction puis on la **soustrait** : prix final = prix × $\\left(1 - \\frac{p}{100}\\right)$.\n- Augmentation de $p\\,\\%$ : on **ajoute** : prix final = prix × $\\left(1 + \\frac{p}{100}\\right)$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : réduction",
+     "statement": "Une chemise coûte 12 000 FCFA. Elle est soldée de 15 %. Quel est le prix soldé ?",
+     "steps": [
+      {
+       "md": "Réduction :",
+       "tex": "\\frac{15}{100} \\times 12\\,000 = 1\\,800"
+      },
+      {
+       "md": "12 000 − 1 800 = 10 200."
+      }
+     ],
+     "answer": "**10 200 FCFA**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : quel pourcentage ?",
+     "statement": "Sur 40 élèves, 14 sont des filles de 6e. Quel pourcentage cela représente-t-il ?",
+     "steps": [
+      {
+       "md": "On calcule la proportion :",
+       "tex": "\\frac{14}{40} = 0{,}35"
+      },
+      {
+       "md": "0,35 = 35 %."
+      }
+     ],
+     "answer": "**35 %**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Augmenter de 20 % puis diminuer de 20 % ne ramène pas au prix de départ : les deux 20 % ne portent pas sur le même prix.\n- Confondre « 20 % de 50 » (= 10) et « 50 % de 20 » (= 10 aussi, mais ce n'est pas toujours le cas).\n- Oublier de soustraire (réduction) ou d'ajouter (augmentation)."
+    }
+   ],
+   "reviewNotes": [
+    "Aucune taxe réelle (TVA) n'est citée pour éviter une information invérifiable."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Un car roule à 70 km/h pendant 3 h. Quelle distance parcourt-il (km) ?",
+   "answer": 210,
+   "unit": "km",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "d = 70 × 3 = 210 km.",
+   "id": "5e-maths-proportionnalite-echelles-01",
+   "tier": "application",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Si 3 m de tissu coûtent 4 500 FCFA, combien coûtent 5 m (FCFA) ?",
+   "answer": 7500,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 500 ÷ 3 = 1 500 par mètre ; × 5 = 7 500.",
+   "id": "5e-maths-proportionnalite-echelles-02",
+   "tier": "application",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Échelle 1/1 000 : 4 cm sur le plan représentent combien de mètres ?",
+   "answer": 40,
+   "unit": "m",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 × 1 000 = 4 000 cm = 40 m.",
+   "id": "5e-maths-proportionnalite-echelles-03",
+   "tier": "application",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une moto parcourt 150 km en 2 h 30 min, soit 2,5 h. Quelle est sa vitesse moyenne (km/h) ?",
+   "answer": 60,
+   "unit": "km/h",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "150 ÷ 2,5 = 60.",
+   "id": "5e-maths-proportionnalite-echelles-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur une carte, deux villages sont distants de 7 cm. L'échelle est 1/100 000. Quelle est la distance réelle (km) ?",
+   "answer": 7,
+   "unit": "km",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "7 × 100 000 = 700 000 cm = 7 km.",
+   "id": "5e-maths-proportionnalite-echelles-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina veut préparer une recette de beignets pour 4 personnes qui utilise 500 g de farine et 3 œufs. Elle invite 10 personnes.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le coefficient entre le nombre de personnes pour 4 et pour 10 ?",
+     "answer": 2.5,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "10 ÷ 4 = 2,5.",
+     "id": "5e-maths-proportionnalite-echelles-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle quantité de farine (g) faut-il ?",
+     "answer": 1250,
+     "unit": "g",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "500 × 2,5 = 1 250 g.",
+     "id": "5e-maths-proportionnalite-echelles-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien d'œufs faut-il (arrondi à l'entier supérieur) ?",
+     "answer": 8,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3 × 2,5 = 7,5 ; on arrondit à 8 œufs.",
+     "id": "5e-maths-proportionnalite-echelles-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-proportionnalite-echelles-06",
+   "tier": "examen",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un tableau est de proportionnalité si",
+   "choices": [
+    "les nombres de la première ligne augmentent",
+    "on passe d'une ligne à l'autre en multipliant par le même nombre",
+    "on additionne le même nombre",
+    "les deux lignes sont égales"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition du coefficient de proportionnalité.",
+   "id": "5e-maths-proportionnalite-echelles-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un cycliste roule à 15 km/h pendant 2 h. La distance parcourue est",
+   "choices": [
+    "30 km",
+    "7,5 km",
+    "17 km",
+    "150 km"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "15 × 2 = 30.",
+   "id": "5e-maths-proportionnalite-echelles-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À l'échelle 1/500, 2 cm représentent",
+   "choices": [
+    "1 m",
+    "100 m",
+    "10 m",
+    "1 000 m"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 500 = 1 000 cm = 10 m.",
+   "id": "5e-maths-proportionnalite-echelles-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans le produit en croix, si 2/5 = x/15, alors x vaut",
+   "choices": [
+    "5",
+    "6",
+    "7,5",
+    "30"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 15 ÷ 5 = 6.",
+   "id": "5e-maths-proportionnalite-echelles-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour une vitesse constante de 60 km/h, la durée pour 90 km est",
+   "choices": [
+    "0,5 h",
+    "2 h",
+    "150 h",
+    "1,5 h"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "90 ÷ 60 = 1,5.",
+   "id": "5e-maths-proportionnalite-echelles-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-proportionnalite-echelles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 20 % de 350.",
+   "answer": 70,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "350 × 20 ÷ 100 = 70.",
+   "id": "5e-maths-pourcentages-01",
+   "tier": "application",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 5 % de 800.",
+   "answer": 40,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "800 × 5 ÷ 100 = 40.",
+   "id": "5e-maths-pourcentages-02",
+   "tier": "application",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un article à 5 000 FCFA est augmenté de 10 %. Quel est le nouveau prix (FCFA) ?",
+   "answer": 5500,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10 % de 5 000 = 500 ; 5 000 + 500 = 5 500.",
+   "id": "5e-maths-pourcentages-03",
+   "tier": "application",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel pourcentage représente 18 par rapport à 24 (%) ?",
+   "answer": 75,
+   "unit": "%",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "18/24 = 0,75 = 75 %.",
+   "id": "5e-maths-pourcentages-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Après une réduction de 30 %, un sac coûte 14 000 FCFA. Quel était son prix initial (FCFA) ?",
+   "answer": 20000,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 3,
+   "explanation": "Le prix payé est 70 % du prix initial : 14 000 ÷ 0,7 = 20 000.",
+   "method": "Prix payé = 70 % du prix initial.",
+   "id": "5e-maths-pourcentages-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un collège de 500 élèves, 55 % sont des filles. Parmi les filles, 20 % sont en 5e.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de filles y a-t-il ?",
+     "answer": 275,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "500 × 55 ÷ 100 = 275.",
+     "id": "5e-maths-pourcentages-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de filles sont en 5e ?",
+     "answer": 55,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "20 % de 275 = 55.",
+     "id": "5e-maths-pourcentages-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel pourcentage des 500 élèves ces filles de 5e représentent-elles (%) ?",
+     "answer": 11,
+     "unit": "%",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "55/500 = 0,11 = 11 %.",
+     "id": "5e-maths-pourcentages-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-pourcentages-06",
+   "tier": "examen",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "50 % d'une quantité, c'est",
+   "choices": [
+    "le quart",
+    "la moitié",
+    "le dixième",
+    "le double"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "50/100 = 1/2.",
+   "id": "5e-maths-pourcentages-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "25 % de 120 vaut",
+   "choices": [
+    "25",
+    "30",
+    "95",
+    "300"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "120 ÷ 4 = 30.",
+   "id": "5e-maths-pourcentages-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un prix de 2 000 FCFA diminué de 10 % devient",
+   "choices": [
+    "1 800 FCFA",
+    "1 000 FCFA",
+    "1 990 FCFA",
+    "2 200 FCFA"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 000 − 200 = 1 800.",
+   "id": "5e-maths-pourcentages-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction est égale à 40 % ?",
+   "choices": [
+    "4/5",
+    "2/5",
+    "1/4",
+    "40/10"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "40/100 = 2/5.",
+   "id": "5e-maths-pourcentages-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur 60 personnes, 15 ont voté « non ». Quel pourcentage ?",
+   "choices": [
+    "15 %",
+    "4 %",
+    "25 %",
+    "75 %"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "15/60 = 1/4 = 25 %.",
+   "id": "5e-maths-pourcentages-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-pourcentages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

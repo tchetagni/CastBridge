@@ -1,0 +1,1244 @@
+{
+ "chapter": "bepc-pct-meca2",
+ "lessons": [
+  {
+   "id": "bepc-pct-travail-energie",
+   "title": "Travail, puissance mécanique et énergies cinétique et potentielle",
+   "minutes": 30,
+   "programRef": "3e — Mécanique : travail d'une force, puissance, énergie mécanique (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer le travail d'une force constante dans la direction du déplacement.",
+    "Calculer une puissance mécanique.",
+    "Calculer les énergies potentielle de pesanteur et cinétique."
+   ],
+   "prerequisites": [
+    "bepc-pct-poids"
+   ],
+   "exercises": [
+    "bepc-pct-travail-energie-01",
+    "bepc-pct-travail-energie-02",
+    "bepc-pct-travail-energie-03",
+    "bepc-pct-travail-energie-04",
+    "bepc-pct-travail-energie-05",
+    "bepc-pct-travail-energie-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-travail-energie-q1",
+    "bepc-pct-travail-energie-q2",
+    "bepc-pct-travail-energie-q3",
+    "bepc-pct-travail-energie-q4",
+    "bepc-pct-travail-energie-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le travail d'une force",
+     "md": "Quand une force $F$ constante déplace son point d'application d'une distance $d$ **dans sa propre direction**, elle effectue un **travail** $W = F \\times d$. $F$ en newtons, $d$ en mètres, $W$ en **joules** (J). Soulever une charge de 20 kg ($F = 200$ N) sur 3 m demande un travail de $200 \\times 3 = 600$ J.",
+     "tex": "W = F \\times d"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Puissance mécanique",
+     "md": "La **puissance** mesure la rapidité avec laquelle un travail est effectué. Elle s'exprime en watts (W) quand $W$ est en joules et $t$ en secondes.",
+     "tex": "P = \\frac{W}{t}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Énergie potentielle de pesanteur",
+     "md": "Un corps de masse $m$ placé à la hauteur $h$ au-dessus du sol possède de l'énergie à cause de sa position : $E_p = m \\times g \\times h$ (en joules, avec $m$ en kg, $h$ en m, $g = 10$ N/kg).",
+     "tex": "E_p = m \\times g \\times h"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Énergie cinétique",
+     "md": "Un corps de masse $m$ en mouvement à la vitesse $v$ possède l'énergie cinétique $E_c = \\frac{1}{2} m v^2$ ($m$ en kg, $v$ en m/s). Si la vitesse double, l'énergie est multipliée par 4. Pendant une chute sans frottement, l'énergie potentielle se transforme en énergie cinétique : leur somme reste constante.",
+     "tex": "E_c = \\frac{1}{2} \\, m \\, v^2"
+    },
+    {
+     "type": "illustration",
+     "caption": "Plus le corps est haut, plus son énergie potentielle est grande.",
+     "alt": "Un objet de masse m à la hauteur h au-dessus du sol, avec son poids dirigé vers le bas.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 200,
+        "w": 300,
+        "h": 12,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 62,
+        "text": "m",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 80,
+        "x2": 200,
+        "y2": 190,
+        "color": "blue",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 70,
+        "x2": 300,
+        "y2": 200,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 140,
+        "text": "h",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 70,
+        "x2": 200,
+        "y2": 120,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 105,
+        "text": "poids",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 100,
+        "text": "Ep = m × g × h",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 232,
+        "text": "sol",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : monter un sac",
+     "statement": "Un ouvrier soulève un sac de 40 kg à 6 m de hauteur en 30 s. Calcule le travail de la force exercée et la puissance (g = 10 N/kg).",
+     "steps": [
+      {
+       "md": "Force minimale : elle égale le poids :",
+       "tex": "F = m \\times g = 40 \\times 10 = 400 \\text{ N}"
+      },
+      {
+       "md": "Travail :",
+       "tex": "W = 400 \\times 6 = 2\\,400 \\text{ J}"
+      },
+      {
+       "md": "Puissance :",
+       "tex": "P = \\frac{2\\,400}{30} = 80 \\text{ W}"
+      }
+     ],
+     "answer": "**W = 2 400 J ; P = 80 W**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une voiture",
+     "statement": "Une voiture de 1 000 kg roule à 20 m/s (72 km/h). Calcule son énergie cinétique.",
+     "steps": [
+      {
+       "md": "On applique la formule :",
+       "tex": "E_c = \\frac{1}{2} \\times 1\\,000 \\times 20^2"
+      },
+      {
+       "md": "Calcul :",
+       "tex": "E_c = 500 \\times 400 = 200\\,000 \\text{ J} = 200 \\text{ kJ}"
+      }
+     ],
+     "answer": "**Ec = 200 000 J**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre masse (kg) et poids (N) : $F = m \\times g$ pour une charge soulevée.\n- Oublier le **carré** de la vitesse ou le facteur $\\frac{1}{2}$ dans $E_c$.\n- Utiliser des km/h au lieu de m/s : divise par 3,6 (72 km/h = 20 m/s).\n- Confondre watt (puissance) et joule (travail, énergie)."
+    }
+   ],
+   "reviewNotes": [
+    "Doute : l'énergie cinétique Ec = ½mv² et la conservation de l'énergie mécanique sont parfois traitées en classe supérieure ; à adapter au programme réel.",
+    "On prend g = 10 N/kg (certains manuels prennent 9,8 N/kg ; les résultats changent légèrement)."
+   ]
+  },
+  {
+   "id": "bepc-pct-pression-archimede",
+   "title": "Pression et poussée d'Archimède",
+   "minutes": 30,
+   "programRef": "3e — Mécanique : pression, poussée d'Archimède, flottaison (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une pression à partir d'une force et d'une surface.",
+    "Calculer la poussée d'Archimède sur un corps immergé.",
+    "Prévoir si un corps flotte ou coule."
+   ],
+   "prerequisites": [
+    "bepc-pct-poids"
+   ],
+   "exercises": [
+    "bepc-pct-pression-archimede-01",
+    "bepc-pct-pression-archimede-02",
+    "bepc-pct-pression-archimede-03",
+    "bepc-pct-pression-archimede-04",
+    "bepc-pct-pression-archimede-05",
+    "bepc-pct-pression-archimede-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-pression-archimede-q1",
+    "bepc-pct-pression-archimede-q2",
+    "bepc-pct-pression-archimede-q3",
+    "bepc-pct-pression-archimede-q4",
+    "bepc-pct-pression-archimede-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La pression",
+     "md": "Une force $F$ qui s'exerce perpendiculairement sur une surface $S$ crée une **pression** $p = \\frac{F}{S}$. $F$ en newtons, $S$ en m², $p$ en **pascals** (Pa) : 1 Pa = 1 N/m². Pour une même force, la pression est plus grande si la surface est plus petite : c'est pourquoi un couteau aiguisé coupe mieux et pourquoi on porte des chaussures larges sur un sol meuble.",
+     "tex": "p = \\frac{F}{S}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Unités de surface",
+     "md": "1 m² = 10 000 cm² et 1 dm² = 0,01 m². Avant de calculer, convertis toujours la surface en **m²** pour obtenir des pascals. L'atmosphère exerce autour de nous une pression d'environ 100 000 Pa (environ 1 bar)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La poussée d'Archimède",
+     "md": "Un corps plongé dans un liquide subit de la part du liquide une force verticale dirigée **vers le haut** : la **poussée d'Archimède** $\\Pi$. Sa valeur est égale au poids du liquide déplacé : $\\Pi = \\rho \\times V \\times g$ où $\\rho$ est la masse volumique du liquide (eau : 1 000 kg/m³), $V$ le volume immergé (en m³) et $g = 10$ N/kg.",
+     "tex": "\\Pi = \\rho_{\\text{liquide}} \\times V_{\\text{immergé}} \\times g"
+    },
+    {
+     "type": "illustration",
+     "caption": "Dans l'eau, le poids tire vers le bas et la poussée d'Archimède vers le haut.",
+     "alt": "Un bloc dans l'eau avec une flèche de poids vers le bas et une flèche de poussée vers le haut.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 120,
+        "w": 320,
+        "h": 120,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 120,
+        "x2": 360,
+        "y2": 120,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 130,
+        "w": 80,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 165,
+        "x2": 200,
+        "y2": 235,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 222,
+        "text": "poids P",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 165,
+        "x2": 200,
+        "y2": 70,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 80,
+        "text": "poussée Π",
+        "size": 16,
+        "color": "green",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 150,
+        "text": "eau",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Flotte ou coule ?",
+     "md": "Compare la poussée maximale (corps entièrement immergé) au poids : si $\\Pi > P$, le corps **flotte** (il remonte jusqu'à ce que $\\Pi = P$ avec seulement une partie immergée) ; si $\\Pi < P$, il **coule**. Le poids apparent d'un corps immergé est $P_{apparent} = P - \\Pi$ (c'est ce que lit un dynamomètre)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une caisse",
+     "statement": "Une caisse de 50 kg repose sur le sol par une face de 0,25 m². Calcule la pression exercée sur le sol (g = 10 N/kg).",
+     "steps": [
+      {
+       "md": "Force = poids :",
+       "tex": "F = 50 \\times 10 = 500 \\text{ N}"
+      },
+      {
+       "md": "Pression :",
+       "tex": "p = \\frac{500}{0{,}25} = 2\\,000 \\text{ Pa}"
+      }
+     ],
+     "answer": "**p = 2 000 Pa**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une pierre dans l'eau",
+     "statement": "Une pierre de 5 kg et de volume 2 dm³ est entièrement plongée dans l'eau. Calcule la poussée et le poids apparent.",
+     "steps": [
+      {
+       "md": "2 dm³ = 0,002 m³ ; poids de la pierre : 5 × 10 = 50 N."
+      },
+      {
+       "md": "Poussée :",
+       "tex": "\\Pi = 1\\,000 \\times 0{,}002 \\times 10 = 20 \\text{ N}"
+      },
+      {
+       "md": "Poids apparent :",
+       "tex": "P_{app} = 50 - 20 = 30 \\text{ N}"
+      }
+     ],
+     "answer": "**Π = 20 N ; poids apparent = 30 N**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Garder la surface en cm² : on trouve alors une pression 10 000 fois trop grande.\n- Confondre volume du corps et volume **immergé** quand le corps flotte.\n- Croire que la poussée dépend de la masse du corps : elle dépend du volume immergé et du liquide."
+    }
+   ],
+   "reviewNotes": [
+    "Doute : la formule Π = ρ × V × g est parfois donnée sous forme « poids du fluide déplacé » seulement au niveau 3e ; la formulation exacte est à ajuster.",
+    "Masses volumiques utilisées : eau douce 1 000 kg/m³ ; on prend g = 10 N/kg."
+   ]
+  },
+  {
+   "id": "bepc-pct-leviers",
+   "title": "Moment d'une force et leviers",
+   "minutes": 25,
+   "programRef": "3e — Mécanique : moment d'une force, équilibre d'un solide mobile autour d'un axe, leviers (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer le moment d'une force par rapport à un axe.",
+    "Appliquer la condition d'équilibre d'un levier.",
+    "Reconnaître des leviers de la vie courante."
+   ],
+   "prerequisites": [
+    "bepc-pct-poids"
+   ],
+   "exercises": [
+    "bepc-pct-leviers-01",
+    "bepc-pct-leviers-02",
+    "bepc-pct-leviers-03",
+    "bepc-pct-leviers-04",
+    "bepc-pct-leviers-05",
+    "bepc-pct-leviers-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-leviers-q1",
+    "bepc-pct-leviers-q2",
+    "bepc-pct-leviers-q3",
+    "bepc-pct-leviers-q4",
+    "bepc-pct-leviers-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le moment d'une force",
+     "md": "Pour faire tourner un objet autour d'un axe (ou pivot), l'effet d'une force $F$ dépend aussi de la **distance** $d$ entre l'axe et la droite d'action de la force (le bras de levier, mesuré perpendiculairement). Le **moment** vaut $M = F \\times d$, en newtons-mètres (N·m). Pour dévisser un écrou, on allonge la clef : $d$ augmente donc il faut moins de force.",
+     "tex": "M = F \\times d"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équilibre d'un levier",
+     "md": "Un levier est une barre qui peut tourner autour d'un point fixe (pivot). Il est en équilibre quand la somme des moments qui le font tourner dans un sens égale la somme de ceux qui le font tourner dans l'autre sens. Avec une force de chaque côté :",
+     "tex": "F_1 \\times d_1 = F_2 \\times d_2"
+    },
+    {
+     "type": "illustration",
+     "caption": "Un levier en équilibre : F1 × d1 = F2 × d2.",
+     "alt": "Une barre horizontale posée sur un pivot avec deux forces verticales à des distances différentes.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 230,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         220,
+         150,
+         190,
+         200,
+         250,
+         200
+        ],
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 135,
+        "w": 360,
+        "h": 15,
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 60,
+        "x2": 80,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 45,
+        "text": "F1",
+        "size": 18,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 60,
+        "x2": 340,
+        "y2": 130,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 45,
+        "text": "F2",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 175,
+        "x2": 220,
+        "y2": 175,
+        "color": "red",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 195,
+        "text": "d1",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 175,
+        "x2": 340,
+        "y2": 175,
+        "color": "blue",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 215,
+        "text": "d2",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 120,
+        "text": "pivot",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Leviers du quotidien",
+     "md": "La balançoire à bascule, la pince, la brouette, le pied-de-biche, les ciseaux, la clef à molette et la machette sont des applications de la rotation autour d'un axe. Un levier permet de **réduire la force** à exercer, mais il ne réduit **pas le travail** : on déplace alors le point de la force sur une plus grande distance."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : la balançoire",
+     "statement": "Sur une balançoire à bascule, Amina (30 kg) est à 2 m du pivot. Où doit s'asseoir Boris (40 kg) pour l'équilibre ?",
+     "steps": [
+      {
+       "md": "Poids : 300 N pour Amina, 400 N pour Boris. Équilibre :",
+       "tex": "300 \\times 2 = 400 \\times d"
+      },
+      {
+       "md": "Donc :",
+       "tex": "d = \\frac{600}{400} = 1{,}5 \\text{ m}"
+      }
+     ],
+     "answer": "**Boris s'assoit à 1,5 m du pivot.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : soulever une pierre",
+     "statement": "Avec une barre, on soulève une pierre de 100 kg dont le poids s'exerce à 0,2 m du pivot. On pousse à 1 m du pivot. Quelle force faut-il au minimum ?",
+     "steps": [
+      {
+       "md": "Poids de la pierre : 1 000 N.",
+       "tex": "F \\times 1 = 1\\,000 \\times 0{,}2"
+      },
+      {
+       "md": "Donc :",
+       "tex": "F = 200 \\text{ N}"
+      }
+     ],
+     "answer": "**F = 200 N** au lieu de 1 000 N."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mesurer la distance jusqu'à l'extrémité du levier au lieu de la mesurer **depuis le pivot**.\n- Mélanger masse et force : transforme les kg en newtons avec le poids ($m \\times g$) avant d'égaler les moments.\n- Croire qu'un levier « gagne de l'énergie » : le travail n'est pas diminué."
+    }
+   ],
+   "reviewNotes": [
+    "Doute : selon le programme, le « théorème des moments » peut apparaître en 3e ou plus tard ; à confirmer.",
+    "On prend g = 10 N/kg."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Une force de 50 N déplace un chariot de 4 m dans sa propre direction. Calcule son travail (en J).",
+   "answer": 200,
+   "unit": "J",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "W = F × d = 50 × 4 = 200 J.",
+   "id": "bepc-pct-travail-energie-01",
+   "tier": "application",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un pot de 3 kg est posé sur une étagère à 2 m du sol. Calcule son énergie potentielle (en J, g = 10 N/kg).",
+   "answer": 60,
+   "unit": "J",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ep = m × g × h = 3 × 10 × 2 = 60 J.",
+   "id": "bepc-pct-travail-energie-02",
+   "tier": "application",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une balle de 2 kg se déplace à 3 m/s. Calcule son énergie cinétique (en J).",
+   "answer": 9,
+   "unit": "J",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ec = ½ × 2 × 3² = 1 × 9 = 9 J.",
+   "id": "bepc-pct-travail-energie-03",
+   "tier": "application",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un moteur soulève une charge de 200 kg à 5 m de hauteur en 20 s. Calcule sa puissance utile (en W, g = 10 N/kg).",
+   "answer": 500,
+   "unit": "W",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Poids : 200 × 10 = 2 000 N ; W = 2 000 × 5 = 10 000 J ; P = 10 000 / 20 = 500 W.",
+   "id": "bepc-pct-travail-energie-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : si la vitesse d'un corps est doublée, son énergie cinétique est multipliée par 2.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Ec = ½ m v² : si v double, v² est multiplié par 4, donc Ec aussi.",
+   "mistakes": [
+    "Penser que l'énergie est proportionnelle à la vitesse."
+   ],
+   "id": "bepc-pct-travail-energie-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris lâche, sans vitesse initiale, une pierre de 0,5 kg du haut d'un balcon situé à 10 m du sol. On néglige les frottements de l'air et on prend g = 10 N/kg.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'énergie potentielle de la pierre au départ (en J).",
+     "answer": 50,
+     "unit": "J",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Ep = 0,5 × 10 × 10 = 50 J.",
+     "id": "bepc-pct-travail-energie-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est son énergie cinétique juste avant de toucher le sol (en J) ?",
+     "answer": 50,
+     "unit": "J",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Sans frottement, toute l'énergie potentielle devient énergie cinétique : Ec = 50 J.",
+     "id": "bepc-pct-travail-energie-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule sa vitesse à ce moment (en m/s, arrondie au dixième).",
+     "answer": 14.1,
+     "tolerance": 0.1,
+     "unit": "m/s",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "½ × 0,5 × v² = 50 donc v² = 200 et v = √200 ≈ 14,1 m/s.",
+     "id": "bepc-pct-travail-energie-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Conservation : Ep au départ = Ec à l'arrivée.",
+   "id": "bepc-pct-travail-energie-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité du travail d'une force ?",
+   "choices": [
+    "Le newton",
+    "Le watt",
+    "Le pascal",
+    "Le joule"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le travail s'exprime en joules (1 J = 1 N × 1 m).",
+   "id": "bepc-pct-travail-energie-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "De quelles grandeurs dépend l'énergie potentielle de pesanteur ?",
+   "choices": [
+    "De la vitesse seulement",
+    "De la masse et de la hauteur",
+    "De la couleur de l'objet",
+    "De la durée de la chute"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ep = m × g × h.",
+   "id": "bepc-pct-travail-energie-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La vitesse d'un cycliste est multipliée par 3. Par combien son énergie cinétique est-elle multipliée ?",
+   "choices": [
+    "3",
+    "9",
+    "6",
+    "27"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ec varie comme v² : 3² = 9.",
+   "id": "bepc-pct-travail-energie-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un travail de 1 200 J est effectué en 60 s. Quelle est la puissance ?",
+   "choices": [
+    "20 W",
+    "72 000 W",
+    "1 260 W",
+    "0,05 W"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "P = W / t = 1 200 / 60 = 20 W.",
+   "id": "bepc-pct-travail-energie-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de joules valent 3 kJ ?",
+   "choices": [
+    "30 J",
+    "300 J",
+    "3 000 J",
+    "0,003 J"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 kJ = 1 000 J, donc 3 kJ = 3 000 J.",
+   "id": "bepc-pct-travail-energie-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-travail-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une force de 600 N s'exerce perpendiculairement sur une surface de 0,3 m². Calcule la pression (en Pa).",
+   "answer": 2000,
+   "unit": "Pa",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "p = F / S = 600 / 0,3 = 2 000 Pa.",
+   "id": "bepc-pct-pression-archimede-01",
+   "tier": "application",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un bloc de volume 0,005 m³ est entièrement plongé dans l'eau (1 000 kg/m³). Calcule la poussée d'Archimède (en N, g = 10 N/kg).",
+   "answer": 50,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Π = 1 000 × 0,005 × 10 = 50 N.",
+   "id": "bepc-pct-pression-archimede-02",
+   "tier": "application",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi une lame de couteau bien aiguisée coupe-t-elle mieux ?",
+   "choices": [
+    "Elle est plus lourde",
+    "Sa surface de contact est très petite, donc la pression est grande",
+    "Sa surface de contact est grande",
+    "Elle exerce une force plus petite"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pour la même force, une plus petite surface donne une plus grande pression (p = F / S).",
+   "id": "bepc-pct-pression-archimede-03",
+   "tier": "application",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un élève de 60 kg se tient sur ses deux pieds ; chaque semelle touche le sol sur 0,04 m². Calcule la pression sur le sol (en Pa, g = 10 N/kg).",
+   "answer": 7500,
+   "unit": "Pa",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "F = 600 N ; S = 2 × 0,04 = 0,08 m² ; p = 600 / 0,08 = 7 500 Pa.",
+   "mistakes": [
+    "Ne prendre qu'un seul pied : on trouve 15 000 Pa."
+   ],
+   "id": "bepc-pct-pression-archimede-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un objet pèse 8 N dans l'air. Plongé dans l'eau, un dynamomètre indique 5 N. Quelle est la poussée d'Archimède (en N) ?",
+   "answer": 3,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Π = poids − poids apparent = 8 − 5 = 3 N.",
+   "id": "bepc-pct-pression-archimede-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un cube de bois de 1 dm³ (0,001 m³) a une masse de 0,6 kg. On le met dans l'eau (1 000 kg/m³, g = 10 N/kg).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule son poids (en N).",
+     "answer": 6,
+     "unit": "N",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "P = 0,6 × 10 = 6 N.",
+     "id": "bepc-pct-pression-archimede-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle serait la poussée s'il était entièrement immergé (en N) ?",
+     "answer": 10,
+     "unit": "N",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Π = 1 000 × 0,001 × 10 = 10 N, supérieure au poids : le cube flotte.",
+     "id": "bepc-pct-pression-archimede-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "À l'équilibre, le cube flotte et Π = P = 6 N. Quel volume est immergé (en cm³) ?",
+     "answer": 600,
+     "unit": "cm³",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "V = Π / (ρ × g) = 6 / (1 000 × 10) = 0,0006 m³ = 600 cm³ (60 % du cube).",
+     "id": "bepc-pct-pression-archimede-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Un corps qui flotte à l'équilibre : poussée = poids.",
+   "id": "bepc-pct-pression-archimede-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité de pression dans le Système international ?",
+   "choices": [
+    "Le newton",
+    "Le joule",
+    "Le watt",
+    "Le pascal"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La pression se mesure en pascals (Pa).",
+   "id": "bepc-pct-pression-archimede-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la direction de la poussée d'Archimède ?",
+   "choices": [
+    "Verticale, vers le bas",
+    "Verticale, vers le haut",
+    "Horizontale",
+    "Elle n'a pas de direction"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle s'oppose au poids : verticale et dirigée vers le haut.",
+   "id": "bepc-pct-pression-archimede-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la masse volumique de l'eau ?",
+   "choices": [
+    "Environ 1 kg/m³",
+    "Environ 10 kg/m³",
+    "Environ 1 000 kg/m³",
+    "Environ 100 000 kg/m³"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un litre d'eau a une masse d'environ 1 kg, donc 1 m³ en a 1 000.",
+   "id": "bepc-pct-pression-archimede-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour diminuer la pression exercée par une charge sur le sol, on peut :",
+   "choices": [
+    "Augmenter la surface d'appui",
+    "Diminuer la surface d'appui",
+    "Augmenter la force",
+    "Poser la charge sur une pointe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "p = F / S : plus S est grande, plus p est petite.",
+   "id": "bepc-pct-pression-archimede-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un corps pèse 20 N dans l'air et subit une poussée de 6 N dans l'eau. Quel est son poids apparent ?",
+   "choices": [
+    "26 N",
+    "6 N",
+    "120 N",
+    "14 N"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "P apparent = 20 − 6 = 14 N.",
+   "id": "bepc-pct-pression-archimede-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une force de 40 N s'exerce à 0,5 m de l'axe, perpendiculairement au bras. Calcule son moment (en N·m).",
+   "answer": 20,
+   "unit": "N·m",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "M = F × d = 40 × 0,5 = 20 N·m.",
+   "id": "bepc-pct-leviers-01",
+   "tier": "application",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un levier est en équilibre : F1 = 60 N à d1 = 0,4 m, et d2 = 0,2 m. Calcule F2 (en N).",
+   "answer": 120,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "F1 × d1 = 60 × 0,4 = 24 N·m ; F2 = 24 / 0,2 = 120 N.",
+   "id": "bepc-pct-leviers-02",
+   "tier": "application",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour dévisser plus facilement un écrou très serré, on doit :",
+   "choices": [
+    "Utiliser une clef plus courte",
+    "Tenir la clef près de l'écrou",
+    "Tirer parallèlement à la clef",
+    "Utiliser une clef plus longue"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une clef plus longue augmente la distance d, donc le moment M = F × d pour la même force.",
+   "id": "bepc-pct-leviers-03",
+   "tier": "application",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un arrache-clou : on exerce 150 N à 0,8 m du pivot ; le clou est à 0,1 m du pivot. Quelle force le clou subit-il (en N) ?",
+   "answer": 1200,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "150 × 0,8 = 120 N·m ; R = 120 / 0,1 = 1 200 N.",
+   "id": "bepc-pct-leviers-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : grâce à un levier, le travail à fournir pour soulever une charge à une hauteur donnée est diminué.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le levier diminue la force, mais le point d'application se déplace sur une plus grande distance : le travail n'est pas diminué.",
+   "id": "bepc-pct-leviers-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa veut soulever un tronc de 150 kg avec une barre de 2 m. Le tronc est placé à l'une des extrémités ; Mballa pousse sur l'autre extrémité. Le pivot est à 0,25 m du tronc (g = 10 N/kg).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la distance entre le pivot et l'endroit où Mballa pousse (en m) ?",
+     "answer": 1.75,
+     "unit": "m",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "2 − 0,25 = 1,75 m.",
+     "id": "bepc-pct-leviers-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle force minimale doit-il exercer (en N, arrondie à l'unité) ?",
+     "answer": 214,
+     "tolerance": 1,
+     "unit": "N",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Poids : 1 500 N ; F × 1,75 = 1 500 × 0,25 donc F = 375 / 1,75 ≈ 214 N.",
+     "id": "bepc-pct-leviers-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Si le pivot est à 0,5 m du tronc, quelle force faut-il (en N) ?",
+     "answer": 500,
+     "tolerance": 0.5,
+     "unit": "N",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Bras de l'effort : 1,5 m ; F = 1 500 × 0,5 / 1,5 = 500 N.",
+     "id": "bepc-pct-leviers-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Égalité des moments par rapport au pivot, avec le poids en newtons.",
+   "id": "bepc-pct-leviers-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité du moment d'une force ?",
+   "choices": [
+    "Le pascal",
+    "Le watt",
+    "Le joule par seconde",
+    "Le newton-mètre"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "M = F × d : newton × mètre.",
+   "id": "bepc-pct-leviers-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une barre pivote autour d'un point O. Quelle distance utilise-t-on pour le moment d'une force ?",
+   "choices": [
+    "La longueur totale de la barre",
+    "La masse de la barre",
+    "La vitesse de la force",
+    "La distance perpendiculaire de O à la droite d'action de la force"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le bras de levier est la distance mesurée perpendiculairement à la force.",
+   "id": "bepc-pct-leviers-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle égalité traduit l'équilibre d'un levier ?",
+   "choices": [
+    "F1 + d1 = F2 + d2",
+    "F1 × d1 = F2 × d2",
+    "F1 / d1 = F2 × d2",
+    "F1 × F2 = d1 × d2"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les moments des deux forces se compensent.",
+   "id": "bepc-pct-leviers-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux enfants s'assoient sur une balançoire à bascule. L'enfant le plus lourd doit s'asseoir :",
+   "choices": [
+    "Plus loin du pivot",
+    "Plus près du pivot",
+    "Exactement au même endroit",
+    "Sur le pivot lui-même"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pour équilibrer, le produit F × d doit être le même : plus F est grande, plus d est petite.",
+   "id": "bepc-pct-leviers-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un levier permet de :",
+   "choices": [
+    "Diminuer la force à exercer",
+    "Diminuer le travail à fournir",
+    "Créer de l'énergie",
+    "Annuler le poids de la charge"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On gagne en force mais on perd en distance : le travail reste le même.",
+   "id": "bepc-pct-leviers-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

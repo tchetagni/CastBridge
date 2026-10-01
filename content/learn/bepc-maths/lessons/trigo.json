@@ -1,0 +1,498 @@
+{
+ "chapter": "bepc-maths-trigo",
+ "lessons": [
+  {
+   "id": "bepc-maths-trigo",
+   "title": "Sinus, cosinus et tangente d'un angle aigu",
+   "minutes": 35,
+   "programRef": "3e — Trigonométrie du triangle rectangle (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir sinus, cosinus et tangente dans un triangle rectangle.",
+    "Calculer des longueurs et des angles.",
+    "Utiliser $\\cos^2+\\sin^2=1$ et les valeurs de 30°, 45°, 60°."
+   ],
+   "prerequisites": [
+    "bepc-maths-pythagore"
+   ],
+   "exercises": [
+    "bepc-maths-trigo-01",
+    "bepc-maths-trigo-02",
+    "bepc-maths-trigo-03",
+    "bepc-maths-trigo-04",
+    "bepc-maths-trigo-05",
+    "bepc-maths-trigo-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-trigo-q1",
+    "bepc-maths-trigo-q2",
+    "bepc-maths-trigo-q3",
+    "bepc-maths-trigo-q4",
+    "bepc-maths-trigo-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Définitions",
+     "md": "Dans un triangle $ABC$ rectangle en $A$, pour l'angle aigu $\\widehat{B}$ (adjacent : $AB$, opposé : $AC$, hypoténuse : $BC$) :",
+     "tex": "\\sin\\widehat{B}=\\frac{AC}{BC}\\quad\\cos\\widehat{B}=\\frac{AB}{BC}\\quad\\tan\\widehat{B}=\\frac{AC}{AB}"
+    },
+    {
+     "type": "illustration",
+     "caption": "Les trois côtés vus de l'angle B.",
+     "alt": "Un triangle rectangle en A avec l'angle B, le côté adjacent AB, l'hypoténuse BC et le côté opposé AC.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 235,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         190,
+         300,
+         190,
+         300,
+         50
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "angle",
+        "x": 300,
+        "y": 190,
+        "from": 90,
+        "to": 180,
+        "r": 18,
+        "color": "red",
+        "right": true
+       },
+       {
+        "t": "angle",
+        "x": 40,
+        "y": 190,
+        "from": 0,
+        "to": 28,
+        "r": 44,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 208,
+        "text": "B",
+        "size": 18,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 208,
+        "text": "A",
+        "size": 18,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 40,
+        "text": "C",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 212,
+        "text": "adjacent (AB)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 102,
+        "text": "hypoténuse",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 125,
+        "text": "opposé (AC)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Relations et valeurs remarquables",
+     "md": "- $\\tan\\alpha=\\frac{\\sin\\alpha}{\\cos\\alpha}$ et $\\cos^2\\alpha+\\sin^2\\alpha=1$.\n- $\\sin\\alpha$ et $\\cos\\alpha$ sont compris entre 0 et 1 pour un angle aigu.\n- $30\\degree$ : $\\sin=0{,}5$, $\\cos=\\frac{\\sqrt{3}}{2}$, $\\tan=\\frac{\\sqrt{3}}{3}$.\n- $45\\degree$ : $\\sin=\\cos=\\frac{\\sqrt{2}}{2}$, $\\tan=1$.\n- $60\\degree$ : $\\sin=\\frac{\\sqrt{3}}{2}$, $\\cos=0{,}5$, $\\tan=\\sqrt{3}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une longueur",
+     "statement": "$ABC$ est rectangle en $A$, $AB=5$ cm et $\\widehat{C}=30\\degree$. Calcule $BC$ puis $AC$.",
+     "steps": [
+      {
+       "md": "Le côté $AB$ est opposé à $\\widehat{C}$ ; l'hypoténuse est $BC$ :",
+       "tex": "\\sin30\\degree=\\frac{AB}{BC}\\Rightarrow BC=\\frac{5}{0{,}5}=10"
+      },
+      {
+       "md": "Pythagore pour $AC$ :",
+       "tex": "AC^2=100-25=75\\Rightarrow AC=5\\sqrt{3}\\approx8{,}66"
+      }
+     ],
+     "answer": "**$BC=10$ cm et $AC\\approx8{,}66$ cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un angle",
+     "statement": "$ABC$ est rectangle en $A$ avec $AB=6$ et $AC=8$. Calcule $\\widehat{B}$ au dixième de degré.",
+     "steps": [
+      {
+       "md": "Côté opposé $AC$, côté adjacent $AB$ : on utilise la tangente.",
+       "tex": "\\tan\\widehat{B}=\\frac{8}{6}\\approx1{,}333"
+      },
+      {
+       "md": "Avec la touche tan⁻¹ :",
+       "tex": "\\widehat{B}\\approx53{,}1\\degree"
+      }
+     ],
+     "answer": "**$\\widehat{B}\\approx53{,}1\\degree$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger opposé et adjacent : ils dépendent de l'angle considéré.\n- Calculatrice en radians.\n- Utiliser un rapport de longueurs dans un triangle non rectangle.\n- Pour un angle, utiliser sin au lieu de sin⁻¹ (touche « seconde »)."
+    }
+   ],
+   "reviewNotes": [
+    "Valeurs exactes de sin, cos, tan de 30°, 45°, 60° : à confirmer comme exigibles au programme.",
+    "Calculatrice en mode degrés ; tolérances précisées dans les exercices numériques."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "ABC rectangle en A : $AB=6$ et $AC=8$. Calcule $\\tan\\widehat{B}$ (valeur décimale, au centième).",
+   "answer": 1.33,
+   "tolerance": 0.01,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\tan\\widehat{B}=\\frac{AC}{AB}=\\frac{8}{6}\\approx1{,}33$.",
+   "id": "bepc-maths-trigo-01",
+   "tier": "application",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "ABC rectangle en A : $BC=10$ cm et $\\widehat{B}=30\\degree$. Calcule $AC$ (en cm).",
+   "answer": 5,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$AC=BC\\times\\sin30\\degree=10\\times0{,}5=5$ cm.",
+   "id": "bepc-maths-trigo-02",
+   "tier": "application",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule est correcte pour un angle aigu $\\widehat{B}$ ?",
+   "choices": [
+    "$\\sin\\widehat{B}=\\frac{\\text{adjacent}}{\\text{hypoténuse}}$",
+    "$\\sin\\widehat{B}=\\frac{\\text{opposé}}{\\text{adjacent}}$",
+    "$\\sin\\widehat{B}=\\frac{\\text{hypoténuse}}{\\text{opposé}}$",
+    "$\\sin\\widehat{B}=\\frac{\\text{opposé}}{\\text{hypoténuse}}$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le sinus compare le côté opposé à l'hypoténuse.",
+   "id": "bepc-maths-trigo-03",
+   "tier": "application",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$\\tan\\alpha=1$ avec $\\alpha$ aigu. Quelle est la mesure de $\\alpha$ (en degrés) ?",
+   "answer": 45,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "C'est une valeur remarquable : $\\tan45\\degree=1$.",
+   "id": "bepc-maths-trigo-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$\\alpha$ est un angle aigu avec $\\cos\\alpha=0{,}6$. Calcule $\\sin\\alpha$.",
+   "answer": 0.8,
+   "tolerance": 0.001,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$\\sin^2\\alpha=1-0{,}36=0{,}64$ donc $\\sin\\alpha=0{,}8$ (positif pour un angle aigu).",
+   "id": "bepc-maths-trigo-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Pour mesurer un manguier, Nkeng se place à 20 m de son pied, à l'horizontale. Il voit le sommet sous un angle de $35\\degree$ au-dessus de l'horizontale ; ses yeux sont à 1,6 m du sol.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la hauteur de l'arbre au-dessus du niveau des yeux (en m, au dixième) ?",
+     "answer": 14.0,
+     "tolerance": 0.05,
+     "unit": "m",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$h=20\\times\\tan35\\degree\\approx20\\times0{,}7002=14{,}0$ m.",
+     "id": "bepc-maths-trigo-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la hauteur totale du manguier (en m, au dixième) ?",
+     "answer": 15.6,
+     "tolerance": 0.05,
+     "unit": "m",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$14{,}0+1{,}6=15{,}6$ m.",
+     "id": "bepc-maths-trigo-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la distance de ses yeux au sommet (en m, au dixième) ?",
+     "answer": 24.4,
+     "tolerance": 0.1,
+     "unit": "m",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$\\cos35\\degree=\\frac{20}{d}$ donc $d=\\frac{20}{0{,}8192}\\approx24{,}4$ m.",
+     "id": "bepc-maths-trigo-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "La tangente relie la hauteur (opposé) et la distance (adjacent) ; le cosinus relie la distance et la visée (hypoténuse).",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 230,
+    "items": [
+     {
+      "t": "line",
+      "x1": 30,
+      "y1": 190,
+      "x2": 330,
+      "y2": 190,
+      "color": "brown",
+      "width": 4
+     },
+     {
+      "t": "line",
+      "x1": 330,
+      "y1": 190,
+      "x2": 330,
+      "y2": 40,
+      "color": "green",
+      "width": 6
+     },
+     {
+      "t": "line",
+      "x1": 60,
+      "y1": 150,
+      "x2": 330,
+      "y2": 190,
+      "color": "grey",
+      "width": 1
+     },
+     {
+      "t": "line",
+      "x1": 60,
+      "y1": 140,
+      "x2": 330,
+      "y2": 40,
+      "color": "red",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 60,
+      "y1": 140,
+      "x2": 330,
+      "y2": 140,
+      "color": "blue",
+      "width": 2,
+      "dash": true
+     },
+     {
+      "t": "angle",
+      "x": 60,
+      "y": 140,
+      "from": 0,
+      "to": 20,
+      "r": 40,
+      "color": "red"
+     },
+     {
+      "t": "text",
+      "x": 180,
+      "y": 214,
+      "text": "20 m",
+      "size": 16,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 342,
+      "y": 120,
+      "text": "arbre",
+      "size": 15,
+      "color": "ink",
+      "anchor": "start",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 125,
+      "text": "yeux",
+      "size": 15,
+      "color": "ink",
+      "anchor": "end",
+      "bold": true
+     }
+    ]
+   },
+   "id": "bepc-maths-trigo-06",
+   "tier": "examen",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$\\tan\\alpha$ est égal à...",
+   "choices": [
+    "$\\frac{\\cos\\alpha}{\\sin\\alpha}$",
+    "$\\sin\\alpha\\times\\cos\\alpha$",
+    "$\\sin\\alpha+\\cos\\alpha$",
+    "$\\frac{\\sin\\alpha}{\\cos\\alpha}$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la relation fondamentale de la tangente.",
+   "id": "bepc-maths-trigo-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut $\\sin30\\degree$ ?",
+   "choices": [
+    "0,5",
+    "1",
+    "$\\frac{\\sqrt{3}}{2}$",
+    "0"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "À connaître : $\\sin30\\degree=\\frac{1}{2}$.",
+   "id": "bepc-maths-trigo-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un angle aigu a pour $\\sin=0{,}8$. Son cosinus vaut...",
+   "choices": [
+    "0,2",
+    "0,8",
+    "0,6",
+    "1,8"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\cos^2=1-0{,}64=0{,}36$ donc $\\cos=0{,}6$.",
+   "id": "bepc-maths-trigo-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans ABC rectangle en B, $\\cos\\widehat{A}=...$",
+   "choices": [
+    "$\\frac{BC}{AC}$",
+    "$\\frac{AB}{AC}$",
+    "$\\frac{AB}{BC}$",
+    "$\\frac{AC}{AB}$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Adjacent à A : $AB$ ; hypoténuse : $AC$.",
+   "id": "bepc-maths-trigo-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour trouver un angle à partir de son sinus on utilise...",
+   "choices": [
+    "la touche sin⁻¹",
+    "la touche sin",
+    "une règle graduée",
+    "la touche √"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La fonction réciproque donne l'angle.",
+   "id": "bepc-maths-trigo-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-trigo",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

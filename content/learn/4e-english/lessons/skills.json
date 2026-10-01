@@ -1,0 +1,1496 @@
+{
+ "chapter": "4e-english-skills",
+ "lessons": [
+  {
+   "id": "4e-english-reading-comprehension",
+   "title": "Comprendre un texte court",
+   "minutes": 30,
+   "programRef": "4e — Reading comprehension (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Lire un texte en anglais et répondre à des questions (vrai / faux, questions ouvertes, vocabulaire).",
+    "Justifier une réponse avec une phrase du texte."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-english-reading-comprehension-01",
+    "4e-english-reading-comprehension-02",
+    "4e-english-reading-comprehension-03",
+    "4e-english-reading-comprehension-04",
+    "4e-english-reading-comprehension-05",
+    "4e-english-reading-comprehension-06"
+   ],
+   "selfCheck": [
+    "4e-english-reading-comprehension-q1",
+    "4e-english-reading-comprehension-q2",
+    "4e-english-reading-comprehension-q3",
+    "4e-english-reading-comprehension-q4",
+    "4e-english-reading-comprehension-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Lis le texte une première fois pour comprendre l'idée générale.\n2. Lis les questions, puis relis le texte en cherchant les réponses.\n3. Réponds avec **tes propres mots** en phrases complètes ; pour « Justify », recopie la phrase du texte qui prouve la réponse.\n4. Pour un mot inconnu, regarde le contexte."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les types de questions les plus fréquents.",
+     "alt": "Tableau des types de questions de lecture : vrai ou faux, questions Wh, vocabulaire, référence.",
+     "figure": {
+      "kind": "shapes",
+      "w": 471,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 156,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Question type",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 10,
+        "w": 295,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 35,
+        "text": "What to do",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "True / False",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 48,
+        "w": 295,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 73,
+        "text": "Vrai ou faux + justify",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "Wh- question",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 86,
+        "w": 295,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 111,
+        "text": "Who, what, when, where, why",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "Vocabulary",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 124,
+        "w": 295,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 149,
+        "text": "Find a word meaning…",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "Reference",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 162,
+        "w": 295,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 187,
+        "text": "What does « it » refer to ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "text",
+     "md": "**Texte d'entraînement.** On Saturday, Nkeng went to the market with his mother. They bought tomatoes, fish and a new bag. At noon it started to rain, so they waited under a big tree. When the rain stopped, they walked home. Nkeng was tired but happy because he had helped his mother."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : question Wh",
+     "statement": "Why did Nkeng and his mother wait under a tree ?",
+     "steps": [
+      {
+       "md": "Cherche « tree » dans le texte : « it started to rain, so they waited under a big tree »."
+      },
+      {
+       "md": "La cause est la pluie."
+      }
+     ],
+     "answer": "**Because it started to rain.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : vrai / faux + justify",
+     "statement": "True or false ? Nkeng was sad. Justify.",
+     "steps": [
+      {
+       "md": "La dernière phrase dit : « tired but happy »."
+      },
+      {
+       "md": "La réponse est donc faux, et on cite la phrase."
+      }
+     ],
+     "answer": "**False. « Nkeng was tired but happy. »**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Répondre avec des mots inventés au lieu de ce que dit le texte.\n- Recopier tout un paragraphe : choisis la phrase utile.\n- Oublier de justifier quand on demande « Justify »."
+    }
+   ],
+   "reviewNotes": [
+    "Textes originaux rédigés pour cette fiche ; niveau à ajuster selon la classe."
+   ]
+  },
+  {
+   "id": "4e-english-writing-letter",
+   "title": "Écrire une lettre amicale",
+   "minutes": 30,
+   "programRef": "4e — Guided writing : informal letter (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Respecter la présentation d'une lettre informelle.",
+    "Rédiger une courte lettre guidée à un ami."
+   ],
+   "prerequisites": [
+    "4e-english-future-forms"
+   ],
+   "exercises": [
+    "4e-english-writing-letter-01",
+    "4e-english-writing-letter-02",
+    "4e-english-writing-letter-03",
+    "4e-english-writing-letter-04",
+    "4e-english-writing-letter-05",
+    "4e-english-writing-letter-06"
+   ],
+   "selfCheck": [
+    "4e-english-writing-letter-q1",
+    "4e-english-writing-letter-q2",
+    "4e-english-writing-letter-q3",
+    "4e-english-writing-letter-q4",
+    "4e-english-writing-letter-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Plan d'une lettre amicale",
+     "md": "1. Ton adresse (en haut à droite) et la date.\n2. Salutation : **Dear Amina,**\n3. Introduction : « How are you ? I hope you are fine. »\n4. Corps : 2 ou 3 idées (une idée = un paragraphe).\n5. Conclusion : « Write soon. »\n6. Formule finale : **Yours, / Best wishes, / Your friend,** puis ton prénom."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les parties d'une lettre amicale.",
+     "alt": "Tableau des parties d'une lettre : adresse et date, salutation, paragraphes, fin.",
+     "figure": {
+      "kind": "shapes",
+      "w": 382,
+      "h": 248,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 156,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Place",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 10,
+        "w": 206,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 35,
+        "text": "Content",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "Top right",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 48,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 73,
+        "text": "Address + date",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "Left",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 86,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 111,
+        "text": "Dear Amina,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "Paragraph 1",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 124,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 149,
+        "text": "Greetings",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "Paragraph 2-3",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 162,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 187,
+        "text": "News / invitation",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "End",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 200,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 225,
+        "text": "Your friend, Boris",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple : lettre modèle",
+     "statement": "Écris à ton ami pour l'inviter à ton anniversaire.",
+     "steps": [
+      {
+       "md": "Dear Amina,"
+      },
+      {
+       "md": "How are you ? I'm fine. I'm writing to invite you to my birthday party on Saturday at 4 p.m. at my house."
+      },
+      {
+       "md": "We will eat cake and play games. Please come with your brother."
+      },
+      {
+       "md": "Write soon. Your friend, Boris"
+      }
+     ],
+     "answer": "**Lettre complète : salutation, invitation (quoi / quand / où), conclusion, signature.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple : formules utiles",
+     "statement": "Complète les formules : I am writing ____ invite you. / I look forward ____ hearing from you.",
+     "steps": [
+      {
+       "md": "to invite ; look forward to."
+      },
+      {
+       "md": "Après look forward to : forme en -ing."
+      }
+     ],
+     "answer": "**I am writing to invite you. / I look forward to hearing from you.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la salutation ou la signature.\n- Écrire « Dear friend, » sans virgule.\n- Mélanger les temps : décide si tu racontes (passé), décris (présent) ou invites (futur).\n- Écrire un seul bloc : fais des paragraphes."
+    }
+   ],
+   "reviewNotes": [
+    "Format de présentation (adresse, date) à confirmer avec les consignes d'examen locales."
+   ]
+  },
+  {
+   "id": "4e-english-writing-narrative-description",
+   "title": "Raconter une histoire et décrire",
+   "minutes": 30,
+   "programRef": "4e — Guided writing : narrative, description (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Rédiger un court récit au passé avec des connecteurs.",
+    "Décrire une personne ou un lieu en utilisant le présent et des adjectifs."
+   ],
+   "prerequisites": [
+    "4e-english-past-simple-continuous",
+    "4e-english-connectors"
+   ],
+   "exercises": [
+    "4e-english-writing-narrative-description-01",
+    "4e-english-writing-narrative-description-02",
+    "4e-english-writing-narrative-description-03",
+    "4e-english-writing-narrative-description-04",
+    "4e-english-writing-narrative-description-05",
+    "4e-english-writing-narrative-description-06"
+   ],
+   "selfCheck": [
+    "4e-english-writing-narrative-description-q1",
+    "4e-english-writing-narrative-description-q2",
+    "4e-english-writing-narrative-description-q3",
+    "4e-english-writing-narrative-description-q4",
+    "4e-english-writing-narrative-description-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Un récit (narrative)",
+     "md": "- Temps : **past simple** pour les événements, **past continuous** pour le décor.\n- Plan : situation de départ → problème → solution → fin.\n- Connecteurs : first, then, after that, suddenly, finally.\n- Exemple : « One morning, Mballa was walking to school when he found a wallet. »"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Une description",
+     "md": "- Temps : **présent simple** (is / has / wears).\n- Plan : vue générale → détails → impression personnelle.\n- Adjectifs avant le nom : a **tall** boy, a **big** green tree.\n- Exemple : « My mother is tall. She has short hair. She is very kind. »"
+    },
+    {
+     "type": "illustration",
+     "caption": "Récit ou description : choisir le temps.",
+     "alt": "Tableau comparant récit et description : temps et mots utiles.",
+     "figure": {
+      "kind": "shapes",
+      "w": 577,
+      "h": 152,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 136,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Type",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 146,
+        "y": 10,
+        "w": 166,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 158,
+        "y": 35,
+        "text": "Tense",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 312,
+        "y": 10,
+        "w": 255,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 324,
+        "y": 35,
+        "text": "Useful words",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 136,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "Narrative",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 146,
+        "y": 48,
+        "w": 166,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 158,
+        "y": 73,
+        "text": "past simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 312,
+        "y": 48,
+        "w": 255,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 324,
+        "y": 73,
+        "text": "suddenly, then, finally",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 136,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "Description",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 146,
+        "y": 86,
+        "w": 166,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 158,
+        "y": 111,
+        "text": "present simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 312,
+        "y": 86,
+        "w": 255,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 324,
+        "y": 111,
+        "text": "tall, big, kind",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : récit",
+     "statement": "Complète : One day, Amina ____ (find) a purse. She ____ (take) it to the police.",
+     "steps": [
+      {
+       "md": "Événements passés : past simple."
+      },
+      {
+       "md": "find → found ; take → took."
+      }
+     ],
+     "answer": "**found / took**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : description",
+     "statement": "Décris ton ami Boris (3 phrases).",
+     "steps": [
+      {
+       "md": "Présent : is, has."
+      },
+      {
+       "md": "Ajoute une impression personnelle."
+      }
+     ],
+     "answer": "**Boris is tall and thin. He has short black hair. I like him because he is funny.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Changer de temps sans raison dans un récit.\n- Dans une description, utiliser le passé : « My mother was tall » (si elle est vivante et présente, utilise is).\n- Oublier les connecteurs."
+    }
+   ],
+   "reviewNotes": [
+    "Nombre de mots attendu à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Texte : Amina lives in Garoua. Every morning she walks to school with her friend Boris. After school she helps her father in his shop. In the evening she studies, and on Sunday she plays football. Où habite Amina ?",
+   "choices": [
+    "In Douala",
+    "In Garoua",
+    "In Kribi",
+    "In Bamenda"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La première phrase : « lives in Garoua ».",
+   "id": "4e-english-reading-comprehension-01",
+   "tier": "application",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Texte : Amina lives in Garoua. Every morning she walks to school with her friend Boris. After school she helps her father in his shop. In the evening she studies, and on Sunday she plays football. Amina étudie le matin avant l'école.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le texte dit « In the evening she studies » : le soir.",
+   "id": "4e-english-reading-comprehension-02",
+   "tier": "application",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Texte : Amina lives in Garoua. Every morning she walks to school with her friend Boris. After school she helps her father in his shop. In the evening she studies, and on Sunday she plays football. Avec qui va-t-elle à l'école ?",
+   "choices": [
+    "With her father",
+    "Alone",
+    "With her mother",
+    "With Boris"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle y va « with her friend Boris ».",
+   "id": "4e-english-reading-comprehension-03",
+   "tier": "application",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Texte : The village of Nlong has a new well. Before, women walked two hours to fetch water. Now, the water is near the school, and children no longer arrive late. The villagers are proud of their well. Que signifie « fetch » ici ?",
+   "choices": [
+    "jeter",
+    "aller chercher",
+    "vendre",
+    "boire"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "fetch water = aller chercher de l'eau.",
+   "id": "4e-english-reading-comprehension-04",
+   "tier": "approfondissement",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Texte : The village of Nlong has a new well. Before, women walked two hours to fetch water. Now, the water is near the school, and children no longer arrive late. The villagers are proud of their well. Pourquoi les enfants arrivent-ils moins en retard ?",
+   "choices": [
+    "Because there is a new teacher.",
+    "Because school starts later.",
+    "Because the road is shorter.",
+    "Because the water is now near the school."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le puits est près de l'école.",
+   "id": "4e-english-reading-comprehension-05",
+   "tier": "approfondissement",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Texte : The village of Nlong has a new well. Before, women walked two hours to fetch water. Now, the water is near the school, and children no longer arrive late. The villagers are proud of their well.",
+   "parts": [
+    {
+     "kind": "truefalse",
+     "prompt": "Les villageois sont fiers de leur puits.",
+     "answer": true,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "« proud of their well ».",
+     "id": "4e-english-reading-comprehension-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Why did women walk two hours before ? Réponds par une phrase.",
+     "model": "Because there was no well in the village (they had to fetch water far away).",
+     "rubric": [
+      "Idée de l'eau lointaine",
+      "Phrase complète en anglais"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-english-reading-comprehension-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-english-reading-comprehension-06",
+   "tier": "examen",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faut-il faire pour répondre à « Justify » ?",
+   "choices": [
+    "Donner son avis",
+    "Traduire le texte",
+    "Citer une phrase du texte",
+    "Répondre par oui ou non"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Justify = prouver avec le texte.",
+   "id": "4e-english-reading-comprehension-q1",
+   "tier": "autoeval",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot interrogatif sert à demander une cause ?",
+   "choices": [
+    "Where",
+    "Who",
+    "Why",
+    "When"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Why = pourquoi.",
+   "id": "4e-english-reading-comprehension-q2",
+   "tier": "autoeval",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avant de répondre, on…",
+   "choices": [
+    "répond de mémoire",
+    "recopie le texte entier",
+    "lit les questions puis cherche dans le texte",
+    "ne lit que la fin"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Méthode de base.",
+   "id": "4e-english-reading-comprehension-q3",
+   "tier": "autoeval",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Who » demande…",
+   "choices": [
+    "une personne",
+    "un lieu",
+    "un moment",
+    "une cause"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Who = qui.",
+   "id": "4e-english-reading-comprehension-q4",
+   "tier": "autoeval",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Nkeng was tired but happy », « but » exprime…",
+   "choices": [
+    "une cause",
+    "une conséquence",
+    "un ordre",
+    "un contraste"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "tired / happy : idées opposées.",
+   "id": "4e-english-reading-comprehension-q5",
+   "tier": "autoeval",
+   "lesson": "4e-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle salutation convient à une lettre à Amina ?",
+   "choices": [
+    "Hello Amina.",
+    "To Amina:",
+    "Respected Amina,",
+    "Dear Amina,"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dear + prénom + virgule.",
+   "id": "4e-english-writing-letter-01",
+   "tier": "application",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule finale est correcte (ami) ?",
+   "choices": [
+    "Your friend, Boris",
+    "Faithfully, Boris",
+    "Boris yours truly the end",
+    "Goodbye letter"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Your friend, + prénom.",
+   "id": "4e-english-writing-letter-02",
+   "tier": "application",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où écrit-on la date dans une lettre ?",
+   "choices": [
+    "En haut, à droite",
+    "À la fin",
+    "Après le nom",
+    "Dans le premier paragraphe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Adresse et date en haut.",
+   "id": "4e-english-writing-letter-03",
+   "tier": "application",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : I look forward ____ you.",
+   "choices": [
+    "to see",
+    "seeing",
+    "see",
+    "to seeing"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "look forward to + -ing.",
+   "id": "4e-english-writing-letter-04",
+   "tier": "approfondissement",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase convient à la conclusion ?",
+   "choices": [
+    "Dear Amina,",
+    "Write soon.",
+    "Once upon a time…",
+    "First of all, wash your hands."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Conclusion : formule de fin.",
+   "id": "4e-english-writing-letter-05",
+   "tier": "approfondissement",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris à un ami ou une amie (60 à 80 mots) pour lui raconter tes dernières vacances. Utilise le past simple et pense à la salutation et à la signature.",
+   "model": "Dear Amina, How are you? I'm fine. Last week I went to Kribi with my family. We swam in the sea and ate fresh fish. It was great! Write soon. Your friend, Boris",
+   "rubric": [
+    "Salutation et signature",
+    "Past simple correct",
+    "Au moins 3 idées en paragraphes",
+    "Orthographe et ponctuation"
+   ],
+   "points": 6,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-english-writing-letter-06",
+   "tier": "examen",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une lettre amicale, on écrit…",
+   "choices": [
+    "Mr + prénom.",
+    "To whom, my friend",
+    "Dear + prénom,",
+    "Sir Dear"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Salutation.",
+   "id": "4e-english-writing-letter-q1",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« I am writing ____ you. » :",
+   "choices": [
+    "to invite",
+    "inviting",
+    "invite",
+    "to inviting"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "I am writing to + verbe.",
+   "id": "4e-english-writing-letter-q2",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule est une ouverture ?",
+   "choices": [
+    "Write soon.",
+    "Best wishes.",
+    "Goodbye.",
+    "How are you ?"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ouvre en demandant des nouvelles.",
+   "id": "4e-english-writing-letter-q3",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "On sépare les idées par…",
+   "choices": [
+    "des majuscules",
+    "des tirets",
+    "rien",
+    "des paragraphes"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une idée = un paragraphe.",
+   "id": "4e-english-writing-letter-q4",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Best wishes, » est…",
+   "choices": [
+    "une formule de fin",
+    "une salutation",
+    "une date",
+    "un titre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Formule finale.",
+   "id": "4e-english-writing-letter-q5",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-letter",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète le récit : Yesterday I ____ a snake.",
+   "choices": [
+    "saw",
+    "see",
+    "seen",
+    "have saw"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Récit au passé : saw.",
+   "id": "4e-english-writing-narrative-description-01",
+   "tier": "application",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une description, quel temps utilise-t-on ?",
+   "choices": [
+    "Le futur",
+    "Le past perfect",
+    "Le présent simple",
+    "Le passif"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "is, has, wears…",
+   "id": "4e-english-writing-narrative-description-02",
+   "tier": "application",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel connecteur est le meilleur pour une surprise ?",
+   "choices": [
+    "Finally",
+    "Suddenly",
+    "Usually",
+    "Because"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Suddenly = soudain.",
+   "id": "4e-english-writing-narrative-description-03",
+   "tier": "application",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : She ____ a beautiful long dress.",
+   "choices": [
+    "wear",
+    "is wearing",
+    "wore to be",
+    "wears being"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Description en cours : is wearing.",
+   "id": "4e-english-writing-narrative-description-04",
+   "tier": "approfondissement",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis le meilleur début de récit.",
+   "choices": [
+    "Mballa is a boy.",
+    "I like football.",
+    "First of all, wash your hands.",
+    "One evening, Mballa was walking home when he heard a noise."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Situation + événement.",
+   "id": "4e-english-writing-narrative-description-05",
+   "tier": "approfondissement",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris un court récit (60 à 80 mots) : « A surprise at school ». Utilise le past simple, au moins deux connecteurs et une phrase de description.",
+   "model": "One Monday, Amina arrived at school early. Suddenly, she saw a big box on the desk. She opened it and found twenty new books. Then the teacher smiled: they were a gift for the class. Everyone was very happy.",
+   "rubric": [
+    "Past simple correct",
+    "2 connecteurs",
+    "Début, problème, fin",
+    "Orthographe"
+   ],
+   "points": 6,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-english-writing-narrative-description-06",
+   "tier": "examen",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps pour raconter ?",
+   "choices": [
+    "Le présent simple",
+    "Le past simple",
+    "Le futur",
+    "L'impératif"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les événements terminés.",
+   "id": "4e-english-writing-narrative-description-q1",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« tall », « kind », « small » sont des…",
+   "choices": [
+    "adjectifs",
+    "verbes",
+    "connecteurs",
+    "pronoms"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils décrivent.",
+   "id": "4e-english-writing-narrative-description-q2",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Ordre normal : « a ____ boy »",
+   "choices": [
+    "tall boy a",
+    "boy tall a",
+    "a boy is",
+    "tall"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Adjectif avant le nom.",
+   "id": "4e-english-writing-narrative-description-q3",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Finally » sert à…",
+   "choices": [
+    "terminer une suite d'actions",
+    "commencer",
+    "contredire",
+    "donner un conseil"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Finally = enfin.",
+   "id": "4e-english-writing-narrative-description-q4",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « She has short hair », le verbe est…",
+   "choices": [
+    "has",
+    "short",
+    "hair",
+    "she"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "has = avoir.",
+   "id": "4e-english-writing-narrative-description-q5",
+   "tier": "autoeval",
+   "lesson": "4e-english-writing-narrative-description",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

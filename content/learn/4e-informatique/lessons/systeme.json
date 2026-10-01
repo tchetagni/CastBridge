@@ -1,0 +1,475 @@
+{
+ "chapter": "4e-informatique-systeme",
+ "lessons": [
+  {
+   "id": "4e-informatique-os-fichiers",
+   "title": "Système d'exploitation, dossiers et fichiers",
+   "minutes": 25,
+   "programRef": "4e — Système d'exploitation, organisation et gestion des fichiers (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dire à quoi sert un système d'exploitation.",
+    "Lire un chemin d'accès et une arborescence de dossiers.",
+    "Choisir entre copier, déplacer et supprimer un fichier."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-informatique-os-fichiers-01",
+    "4e-informatique-os-fichiers-02",
+    "4e-informatique-os-fichiers-03",
+    "4e-informatique-os-fichiers-04",
+    "4e-informatique-os-fichiers-05",
+    "4e-informatique-os-fichiers-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-os-fichiers-q1",
+    "4e-informatique-os-fichiers-q2",
+    "4e-informatique-os-fichiers-q3",
+    "4e-informatique-os-fichiers-q4",
+    "4e-informatique-os-fichiers-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Système d'exploitation",
+     "md": "Le **système d'exploitation** est le logiciel principal d'un ordinateur ou d'un téléphone. Il fait le lien entre l'utilisateur, les programmes et les composants (écran, clavier, mémoire, disque). Il lance les programmes, gère les fichiers et les périphériques et affiche l'interface (bureau, icônes, fenêtres). Exemples : Windows, Linux, Android."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fichier, dossier, arborescence",
+     "md": "Un **fichier** contient des données (texte, photo, programme…). Son nom se termine par une **extension** (.docx, .jpg, .mp3, .xlsx) qui indique son type. Un **dossier** regroupe des fichiers et d'autres dossiers. L'ensemble forme une **arborescence** ; le **chemin d'accès** décrit le trajet depuis la racine jusqu'au fichier."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une arborescence : le dossier Documents contient deux dossiers, chacun avec un fichier.",
+     "alt": "Un arbre de dossiers : Documents contient Maths et Anglais ; Maths contient devoir1.docx et Anglais contient liste.xlsx.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 10,
+        "w": 120,
+        "h": 32,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 32,
+        "text": "Documents",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 42,
+        "x2": 100,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 42,
+        "x2": 340,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 80,
+        "w": 120,
+        "h": 32,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 102,
+        "text": "Maths",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 80,
+        "w": 120,
+        "h": 32,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 102,
+        "text": "Anglais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 112,
+        "x2": 100,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 112,
+        "x2": 340,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 150,
+        "w": 140,
+        "h": 32,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 172,
+        "text": "devoir1.docx",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 150,
+        "w": 140,
+        "h": 32,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 172,
+        "text": "liste.xlsx",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Opérations sur les fichiers",
+     "md": "- **Copier** : le fichier existe à deux endroits.\n- **Déplacer** (couper puis coller) : le fichier change de place, il n'en reste qu'un.\n- **Renommer** : on change le nom, pas le contenu (garder l'extension).\n- **Supprimer** : le fichier va dans la corbeille ; il n'est vraiment effacé qu'en la vidant.\n- Pour retrouver un fichier : le chercher par nom ou par extension."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire un chemin",
+     "statement": "Le fichier liste.xlsx est dans Anglais, lui-même dans Documents. Écris son chemin.",
+     "steps": [
+      {
+       "md": "On part du dossier le plus haut : Documents."
+      },
+      {
+       "md": "On descend dans Anglais, puis on arrive au fichier."
+      },
+      {
+       "md": "On sépare par des barres : Documents / Anglais / liste.xlsx."
+      }
+     ],
+     "answer": "**Documents / Anglais / liste.xlsx**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir l'opération",
+     "statement": "Amina veut envoyer une photo à une amie tout en la gardant dans son téléphone. Que doit-elle faire : copier ou déplacer ?",
+     "steps": [
+      {
+       "md": "Elle veut garder l'original dans son téléphone."
+      },
+      {
+       "md": "Déplacer retirerait la photo de son dossier : ce n'est pas ce qu'elle veut."
+      },
+      {
+       "md": "Copier crée un exemplaire à envoyer."
+      }
+     ],
+     "answer": "**Copier**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Changer l'extension en renommant (« photo.jpg » en « photo.txt ») : le fichier ne s'ouvre plus correctement.\n- Croire qu'un fichier supprimé est effacé : il reste dans la corbeille.\n- Enregistrer sans regarder le dossier : on ne retrouve plus son travail. Choisir un dossier clair et un nom explicite."
+    }
+   ],
+   "reviewNotes": [
+    "Le programme officiel exact de 4e en informatique n'a pas pu être vérifié : thèmes proposés d'après la progression classique du collège.",
+    "Les noms de systèmes (Windows, Android…) ne sont cités qu'en exemples ; aucun logiciel précis n'est exigé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel fichier est probablement une photographie ?",
+   "choices": [
+    "vacances.xlsx",
+    "vacances.mp3",
+    "vacances.jpg",
+    "vacances.docx"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'extension .jpg est celle d'une image ; .xlsx est un tableur, .mp3 un son, .docx un document texte.",
+   "id": "4e-informatique-os-fichiers-01",
+   "tier": "application",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un dossier peut contenir d'autres dossiers.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est ce qui permet de construire une arborescence.",
+   "id": "4e-informatique-os-fichiers-02",
+   "tier": "application",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque action à son effet.",
+   "pairs": [
+    [
+     "Copier",
+     "Deux exemplaires du fichier"
+    ],
+    [
+     "Déplacer",
+     "Le fichier change de dossier"
+    ],
+    [
+     "Renommer",
+     "Le nom change, pas le contenu"
+    ],
+    [
+     "Supprimer",
+     "Envoi vers la corbeille"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque action a un effet précis ; ne pas les confondre évite de perdre des fichiers.",
+   "id": "4e-informatique-os-fichiers-03",
+   "tier": "application",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le chemin « Ecole / 4e / Maths / cours.docx » indique que cours.docx est dans le dossier :",
+   "choices": [
+    "Ecole",
+    "Maths",
+    "4e",
+    "cours"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le dernier dossier avant le fichier est celui qui le contient directement : Maths.",
+   "id": "4e-informatique-os-fichiers-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Mballa déplace le fichier note.txt du dossier A vers le dossier B. Où se trouve-t-il ensuite ?",
+   "choices": [
+    "Seulement dans A",
+    "Dans A et dans B",
+    "Seulement dans B",
+    "Nulle part"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Déplacer retire le fichier de A pour le mettre dans B.",
+   "id": "4e-informatique-os-fichiers-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris range ses fichiers : le dossier Collège contient Sciences et Français. Sciences contient exposé.pptx et schema.png.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Dessine ou décris l'arborescence (un dossier par ligne, avec décalage).",
+     "model": "Collège ; Sciences ; exposé.pptx ; schema.png ; Français (vide).",
+     "rubric": [
+      "Collège à la racine",
+      "Sciences et Français sous Collège",
+      "Les deux fichiers sous Sciences"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-informatique-os-fichiers-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris le chemin d'accès de schema.png et dis quel type de fichier c'est.",
+     "model": "Collège / Sciences / schema.png ; c'est une image (extension .png).",
+     "rubric": [
+      "Chemin complet dans le bon ordre",
+      "Type correctement déduit de l'extension"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-informatique-os-fichiers-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-os-fichiers-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle principal du système d'exploitation ?",
+   "choices": [
+    "Gérer les composants et lancer les programmes",
+    "Dessiner des images",
+    "Se connecter à Internet uniquement",
+    "Écrire des documents"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il fait le lien entre l'utilisateur, les programmes et le matériel.",
+   "id": "4e-informatique-os-fichiers-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que désigne l'extension d'un fichier ?",
+   "choices": [
+    "Son type",
+    "Sa taille",
+    "Son auteur",
+    "Sa date"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les lettres après le point (.mp3, .docx) indiquent le type de fichier.",
+   "id": "4e-informatique-os-fichiers-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où va un fichier supprimé normalement ?",
+   "choices": [
+    "Dans la corbeille",
+    "Dans le dossier Documents",
+    "Dans la mémoire vive",
+    "Il disparaît définitivement"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La corbeille permet de le récupérer tant qu'elle n'est pas vidée.",
+   "id": "4e-informatique-os-fichiers-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un ensemble de dossiers imbriqués s'appelle :",
+   "choices": [
+    "Une extension",
+    "Une arborescence",
+    "Un tableur",
+    "Un pixel"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les dossiers forment un arbre, d'où le mot arborescence.",
+   "id": "4e-informatique-os-fichiers-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle opération laisse le fichier à sa place et en crée un second exemplaire ?",
+   "choices": [
+    "Déplacer",
+    "Copier",
+    "Couper",
+    "Supprimer"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Copier duplique ; couper-coller et déplacer changent la place.",
+   "id": "4e-informatique-os-fichiers-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-os-fichiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

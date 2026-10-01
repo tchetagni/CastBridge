@@ -1,0 +1,969 @@
+{
+ "chapter": "5e-svt-respiration",
+ "lessons": [
+  {
+   "id": "5e-svt-respiration",
+   "title": "La respiration",
+   "minutes": 30,
+   "programRef": "5e — La respiration chez l'homme (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Nommer les voies respiratoires et les poumons.",
+    "Décrire les mouvements respiratoires.",
+    "Expliquer les échanges gazeux et comparer air inspiré et air expiré."
+   ],
+   "prerequisites": [
+    "5e-svt-digestion"
+   ],
+   "exercises": [
+    "5e-svt-respiration-01",
+    "5e-svt-respiration-02",
+    "5e-svt-respiration-03",
+    "5e-svt-respiration-04",
+    "5e-svt-respiration-05",
+    "5e-svt-respiration-06"
+   ],
+   "selfCheck": [
+    "5e-svt-respiration-q1",
+    "5e-svt-respiration-q2",
+    "5e-svt-respiration-q3",
+    "5e-svt-respiration-q4",
+    "5e-svt-respiration-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Respirer",
+     "md": "Respirer, c'est prélever du **dioxygène** dans l'air et rejeter du **dioxyde de carbone**. L'air entre par le nez ou la bouche, passe par la **trachée** puis les **bronches** et atteint les **poumons**, où se font les **échanges gazeux** avec le sang, dans de minuscules **alvéoles**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les voies respiratoires et les poumons (schéma simplifié).",
+     "alt": "La trachée se divise en deux bronches menant aux deux poumons, avec le diaphragme dessous.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 20,
+        "x2": 240,
+        "y2": 100,
+        "color": "ink",
+        "width": 8
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 100,
+        "x2": 190,
+        "y2": 130,
+        "color": "ink",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 100,
+        "x2": 290,
+        "y2": 130,
+        "color": "ink",
+        "width": 6
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         95,
+         230,
+         105,
+         230,
+         205,
+         170,
+         215,
+         150,
+         150
+        ],
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         280,
+         95,
+         250,
+         105,
+         250,
+         205,
+         310,
+         215,
+         330,
+         150
+        ],
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 225,
+        "x2": 330,
+        "y2": 225,
+        "color": "brown",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 40,
+        "text": "trachée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 36,
+        "x2": 248,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 95,
+        "text": "bronches",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 91,
+        "x2": 295,
+        "y2": 124,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 170,
+        "text": "poumon",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 166,
+        "x2": 322,
+        "y2": 165,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 240,
+        "text": "diaphragme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 236,
+        "x2": 325,
+        "y2": 227,
+        "color": "grey",
+        "width": 1
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les mouvements respiratoires",
+     "md": "- **Inspiration** : le diaphragme s'abaisse, les côtes se soulèvent, la cage thoracique augmente de volume : l'air entre dans les poumons.\n- **Expiration** : le diaphragme remonte, les côtes s'abaissent : l'air sort.\nOn peut compter la **fréquence respiratoire**, qui augmente à l'effort."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Air inspiré et air expiré",
+     "md": "L'air expiré est plus riche en **dioxyde de carbone** et en **vapeur d'eau** et plus pauvre en **dioxygène** que l'air inspiré. Le dioxyde de carbone **trouble l'eau de chaux** : si l'on souffle dans de l'eau de chaux avec une paille, elle devient blanche et trouble."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : comparer deux flacons",
+     "statement": "Amina fait barboter de l'air ambiant dans un flacon d'eau de chaux et son air expiré dans un autre. Seul le second se trouble. Que conclure ?",
+     "steps": [
+      {
+       "md": "L'eau de chaux se trouble en présence de dioxyde de carbone."
+      },
+      {
+       "md": "L'air expiré en contient donc davantage que l'air ambiant."
+      }
+     ],
+     "answer": "**Le corps rejette du dioxyde de carbone.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : effort et respiration",
+     "statement": "Au repos, Boris respire environ 16 fois par minute ; après une course, 30 fois par minute. Pourquoi ?",
+     "steps": [
+      {
+       "md": "À l'effort, les muscles consomment plus de dioxygène et produisent plus de dioxyde de carbone."
+      },
+      {
+       "md": "Il faut donc respirer plus vite pour renouveler l'air."
+      }
+     ],
+     "answer": "**La fréquence respiratoire augmente avec l'effort.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'air expiré ne contient plus de dioxygène : il en contient encore, mais moins.\n- Croire que les poumons se gonflent « tout seuls » : ce sont les muscles respiratoires qui agrandissent la cage thoracique.\n- Penser que la respiration a lieu seulement dans les poumons : chaque cellule consomme du dioxygène."
+    }
+   ],
+   "reviewNotes": [
+    "Pourcentages de gaz dans l'air expiré non donnés volontairement (valeurs variables). Hygiène respiratoire (tabac) : relecture par un agent de santé conseillée."
+   ]
+  },
+  {
+   "id": "5e-svt-circulation-sang",
+   "title": "Le sang et la circulation",
+   "minutes": 35,
+   "programRef": "5e — Le sang et la circulation sanguine (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer les constituants du sang et leur rôle.",
+    "Décrire le cœur, les vaisseaux et la double circulation de façon simple.",
+    "Relier circulation, respiration et nutrition."
+   ],
+   "prerequisites": [
+    "5e-svt-respiration"
+   ],
+   "exercises": [
+    "5e-svt-circulation-sang-01",
+    "5e-svt-circulation-sang-02",
+    "5e-svt-circulation-sang-03",
+    "5e-svt-circulation-sang-04",
+    "5e-svt-circulation-sang-05",
+    "5e-svt-circulation-sang-06"
+   ],
+   "selfCheck": [
+    "5e-svt-circulation-sang-q1",
+    "5e-svt-circulation-sang-q2",
+    "5e-svt-circulation-sang-q3",
+    "5e-svt-circulation-sang-q4",
+    "5e-svt-circulation-sang-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le sang",
+     "md": "Le sang est un liquide rouge formé du **plasma** (liquide jaunâtre, surtout de l'eau) et de cellules : les **globules rouges** (transportent le dioxygène), les **globules blancs** (défendent le corps contre les microbes) et les **plaquettes** (bouchent les blessures : coagulation). Il circule dans des **vaisseaux**, poussé par le **cœur**."
+    },
+    {
+     "type": "illustration",
+     "caption": "La double circulation : le cœur envoie le sang aux poumons puis aux organes.",
+     "alt": "Un schéma avec le cœur au centre, les poumons en haut et les organes en bas ; flèches rouges pour le sang riche en dioxygène et bleues pour le sang pauvre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 300,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 140,
+        "h": 40,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 35.0,
+        "text": "Poumons",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 130,
+        "w": 140,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 155.0,
+        "text": "Cœur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 250,
+        "w": 140,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 275.0,
+        "text": "Organes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 128,
+        "x2": 180,
+        "y2": 52,
+        "color": "blue",
+        "width": 4,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 52,
+        "x2": 260,
+        "y2": 128,
+        "color": "red",
+        "width": 4,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 172,
+        "x2": 260,
+        "y2": 248,
+        "color": "red",
+        "width": 4,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 248,
+        "x2": 180,
+        "y2": 172,
+        "color": "blue",
+        "width": 4,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 85,
+        "text": "pauvre en dioxygène",
+        "size": 14,
+        "color": "blue",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 272,
+        "y": 85,
+        "text": "riche en dioxygène",
+        "size": 14,
+        "color": "red",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 215,
+        "text": "pauvre en dioxygène",
+        "size": 14,
+        "color": "blue",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 272,
+        "y": 215,
+        "text": "riche en dioxygène",
+        "size": 14,
+        "color": "red",
+        "anchor": "start",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le cœur et les vaisseaux",
+     "md": "- Le **cœur** est un muscle creux, une pompe à **quatre cavités** (deux oreillettes, deux ventricules).\n- Les **artères** emportent le sang **hors du cœur** (paroi épaisse ; on sent le **pouls**).\n- Les **veines** ramènent le sang **vers le cœur**.\n- Les **capillaires**, très fins, relient artères et veines et permettent les échanges avec les organes."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Une double circulation",
+     "md": "Le sang passe **deux fois** par le cœur à chaque tour : la **petite circulation** (cœur – poumons : le sang se charge en dioxygène) puis la **grande circulation** (cœur – organes : il apporte dioxygène et nutriments et rapporte le dioxyde de carbone)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : prendre son pouls",
+     "statement": "Amina compte 18 battements en 15 secondes. Combien par minute ?",
+     "steps": [
+      {
+       "md": "Une minute = 60 s = 4 fois 15 s."
+      },
+      {
+       "md": "Calcul",
+       "tex": "18 \\times 4 = 72"
+      }
+     ],
+     "answer": "**Environ 72 battements par minute.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : suivre le dioxygène",
+     "statement": "Le dioxygène passe de l'air au sang : par où arrive-t-il aux muscles ?",
+     "steps": [
+      {
+       "md": "Dans les alvéoles, il passe dans le sang (globules rouges)."
+      },
+      {
+       "md": "Le cœur envoie ce sang riche en dioxygène par les artères jusqu'aux capillaires des muscles."
+      }
+     ],
+     "answer": "**Poumons → cœur → artères → capillaires des muscles.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que les artères transportent toujours du sang « rouge » et les veines du sang « bleu » : ce n'est vrai que pour la grande circulation ; les couleurs des schémas sont conventionnelles.\n- Croire que le sang se renouvelle à chaque tour : c'est le même sang qui circule en boucle.\n- Penser que le cœur « fabrique » le sang : il le pompe."
+    }
+   ],
+   "reviewNotes": [
+    "Le cœur est présenté avec quatre cavités ; le détail des valves et des vaisseaux (veines pulmonaires, aorte) est volontairement limité. Le pouls au repos « environ 70 battements par minute » est une valeur approchée à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'appellent les minuscules sacs où se font les échanges gazeux ?",
+   "choices": [
+    "Les bronches",
+    "Les alvéoles",
+    "Les artères",
+    "Les côtes"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les alvéoles pulmonaires sont entourées de capillaires.",
+   "id": "5e-svt-respiration-01",
+   "tier": "application",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'eau de chaux se trouble en présence de dioxyde de carbone.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est le test du dioxyde de carbone.",
+   "id": "5e-svt-respiration-02",
+   "tier": "application",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque organe à son rôle.",
+   "pairs": [
+    [
+     "Trachée",
+     "Conduit l'air vers les bronches"
+    ],
+    [
+     "Alvéoles",
+     "Échanges gazeux"
+    ],
+    [
+     "Diaphragme",
+     "Muscle respiratoire"
+    ],
+    [
+     "Bronches",
+     "Conduisent l'air dans chaque poumon"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque organe a sa fonction.",
+   "id": "5e-svt-respiration-03",
+   "tier": "application",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lors de l'inspiration :",
+   "choices": [
+    "Le diaphragme remonte",
+    "Les côtes s'abaissent",
+    "Le diaphragme s'abaisse",
+    "Le volume du thorax diminue"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le thorax augmente de volume : l'air entre.",
+   "id": "5e-svt-respiration-04",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi la fréquence respiratoire augmente-t-elle après une course ?",
+   "choices": [
+    "Les muscles ont besoin de plus de dioxygène",
+    "L'air est plus lourd",
+    "Les poumons rétrécissent",
+    "Le cœur s'arrête"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il faut davantage de dioxygène et évacuer plus de dioxyde de carbone.",
+   "id": "5e-svt-respiration-05",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng souffle avec une paille dans un verre d'eau de chaux claire ; il constate que l'eau devient trouble en quelques secondes.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel gaz est responsable de ce trouble ?",
+     "choices": [
+      "Le dioxygène",
+      "Le diazote",
+      "L'hydrogène",
+      "Le dioxyde de carbone"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "L'eau de chaux se trouble avec le dioxyde de carbone.",
+     "id": "5e-svt-respiration-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que prouve cette expérience sur la respiration ?",
+     "model": "Que l'air expiré contient du dioxyde de carbone : le corps rejette ce gaz en respirant.",
+     "rubric": [
+      "Gaz identifié",
+      "Lien avec la respiration"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-respiration-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose un témoin pour cette expérience.",
+     "model": "Faire barboter de l'air ambiant, avec une pompe ou une seringue, dans un autre verre d'eau de chaux : il ne se trouble pas (ou beaucoup moins).",
+     "rubric": [
+      "Un témoin avec air non expiré"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-respiration-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-svt-respiration-06",
+   "tier": "examen",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'air passe, dans cet ordre, par :",
+   "choices": [
+    "Les bronches, la trachée, les poumons, le nez",
+    "Les poumons, le nez, la trachée",
+    "Les fosses nasales, la trachée, les bronches, les poumons",
+    "L'estomac, la trachée, les poumons"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chemin de l'air inspiré.",
+   "id": "5e-svt-respiration-q1",
+   "tier": "autoeval",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel gaz est absorbé par le sang dans les alvéoles ?",
+   "choices": [
+    "Le dioxyde de carbone",
+    "La vapeur d'eau uniquement",
+    "L'hélium",
+    "Le dioxygène"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dioxygène passe de l'air vers le sang.",
+   "id": "5e-svt-respiration-q2",
+   "tier": "autoeval",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel gaz est évacué du sang vers l'air alvéolaire ?",
+   "choices": [
+    "Le dioxyde de carbone",
+    "Le dioxygène",
+    "Le diazote",
+    "L'amidon"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est un déchet de la respiration cellulaire.",
+   "id": "5e-svt-respiration-q3",
+   "tier": "autoeval",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel muscle intervient en bas de la cage thoracique pour respirer ?",
+   "choices": [
+    "Le biceps",
+    "Le diaphragme",
+    "Le cœur",
+    "L'estomac"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il s'abaisse à l'inspiration.",
+   "id": "5e-svt-respiration-q4",
+   "tier": "autoeval",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La fumée de tabac est :",
+   "choices": [
+    "Bonne pour la respiration",
+    "Nocive pour les poumons",
+    "Sans effet",
+    "Un aliment"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle abîme les voies respiratoires.",
+   "review": true,
+   "reviewNote": "À valider par un agent de santé.",
+   "id": "5e-svt-respiration-q5",
+   "tier": "autoeval",
+   "lesson": "5e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles cellules du sang transportent le dioxygène ?",
+   "choices": [
+    "Les globules blancs",
+    "Les plaquettes",
+    "Les globules rouges",
+    "Le plasma uniquement"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils contiennent l'hémoglobine.",
+   "id": "5e-svt-circulation-sang-01",
+   "tier": "application",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les veines ramènent le sang vers le cœur.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les artères l'en éloignent.",
+   "id": "5e-svt-circulation-sang-02",
+   "tier": "application",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque constituant à son rôle.",
+   "pairs": [
+    [
+     "Globules rouges",
+     "Transport du dioxygène"
+    ],
+    [
+     "Globules blancs",
+     "Défense contre les microbes"
+    ],
+    [
+     "Plaquettes",
+     "Coagulation"
+    ],
+    [
+     "Plasma",
+     "Liquide qui transporte les nutriments"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque constituant a un rôle.",
+   "id": "5e-svt-circulation-sang-03",
+   "tier": "application",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un pouls est compté : 20 battements en 20 secondes. Combien de battements par minute ?",
+   "answer": 60,
+   "unit": "battements/min",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "20 battements en 20 s → 3 × 20 = 60 par minute.",
+   "method": "Une minute = 3 × 20 secondes.",
+   "id": "5e-svt-circulation-sang-04",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel vaisseau est le plus fin et permet les échanges avec les organes ?",
+   "choices": [
+    "Le capillaire",
+    "L'artère",
+    "La veine",
+    "Le tube digestif"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les capillaires ont une paroi très mince.",
+   "id": "5e-svt-circulation-sang-05",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris se blesse légèrement au genou : le saignement s'arrête au bout de quelques minutes et une croûte se forme.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel élément du sang a surtout permis d'arrêter le saignement ?",
+     "choices": [
+      "Les globules rouges uniquement",
+      "Le plasma seul",
+      "Les globules blancs",
+      "Les plaquettes"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les plaquettes participent à la coagulation.",
+     "id": "5e-svt-circulation-sang-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Quel rôle jouent les globules blancs si la plaie est ensuite souillée par des microbes ?",
+     "model": "Ils défendent l'organisme en détruisant les microbes. Il faut aussi nettoyer la plaie.",
+     "rubric": [
+      "Rôle de défense",
+      "Conseil d'hygiène"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-circulation-sang-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pourquoi faut-il consulter si la plaie est profonde ou saigne beaucoup ?",
+     "model": "Parce qu'une perte importante de sang est dangereuse et qu'une plaie profonde peut s'infecter.",
+     "rubric": [
+      "Justification prudente"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-circulation-sang-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "review": true,
+   "reviewNote": "À valider par un agent de santé (premiers soins).",
+   "id": "5e-svt-circulation-sang-06",
+   "tier": "examen",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de cavités possède le cœur humain ?",
+   "choices": [
+    "Quatre",
+    "Deux",
+    "Six",
+    "Une"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux oreillettes et deux ventricules.",
+   "id": "5e-svt-circulation-sang-q1",
+   "tier": "autoeval",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les artères :",
+   "choices": [
+    "Ramènent le sang au cœur",
+    "Sont des capillaires",
+    "Emportent le sang hors du cœur",
+    "Transportent la lymphe uniquement"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le pouls se prend sur une artère.",
+   "id": "5e-svt-circulation-sang-q2",
+   "tier": "autoeval",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la petite circulation, le sang va :",
+   "choices": [
+    "Du cœur aux poumons et retour",
+    "Du cœur aux jambes uniquement",
+    "De l'estomac au cœur",
+    "Des poumons à l'estomac"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il se recharge en dioxygène.",
+   "id": "5e-svt-circulation-sang-q3",
+   "tier": "autoeval",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les globules blancs servent à :",
+   "choices": [
+    "Défendre le corps",
+    "Transporter le dioxygène",
+    "Digérer les aliments",
+    "Faire couler le sang"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils combattent les microbes.",
+   "id": "5e-svt-circulation-sang-q4",
+   "tier": "autoeval",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le cœur est :",
+   "choices": [
+    "Un muscle qui pompe le sang",
+    "Un os",
+    "Un vaisseau",
+    "Une glande digestive"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il se contracte régulièrement.",
+   "id": "5e-svt-circulation-sang-q5",
+   "tier": "autoeval",
+   "lesson": "5e-svt-circulation-sang",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

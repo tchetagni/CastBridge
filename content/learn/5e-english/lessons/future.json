@@ -1,0 +1,956 @@
+{
+ "chapter": "5e-english-future",
+ "lessons": [
+  {
+   "id": "5e-english-going-to",
+   "title": "The future with going to",
+   "minutes": 25,
+   "programRef": "5e — Anglais (APC), futur avec going to (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Exprimer un projet ou une intention avec going to.",
+    "Faire une prévision à partir de ce qu'on voit."
+   ],
+   "prerequisites": [
+    "5e-english-past-neg-questions"
+   ],
+   "exercises": [
+    "5e-english-going-to-01",
+    "5e-english-going-to-02",
+    "5e-english-going-to-03",
+    "5e-english-going-to-04",
+    "5e-english-going-to-05",
+    "5e-english-going-to-06"
+   ],
+   "selfCheck": [
+    "5e-english-going-to-q1",
+    "5e-english-going-to-q2",
+    "5e-english-going-to-q3",
+    "5e-english-going-to-q4",
+    "5e-english-going-to-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Forme",
+     "md": "**am / is / are + going to + verbe** : I **am going to** study. · She **is going to** visit her aunt. · They **are going to** play.\nNégation : She **isn't going to** come. Question : **Are** you **going to** travel ? — Yes, I am. / No, I'm not."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Deux emplois",
+     "md": "1. Un **projet décidé** à l'avance : I'm going to visit Kribi in August.\n2. Une **prévision avec une preuve** : Look at the clouds ! It's going to rain.\nIndicateurs : tomorrow, next week, next year, tonight, in two days."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les formes de going to.",
+     "alt": "Un tableau qui présente les formes affirmative, négative et interrogative de going to.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 460,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 34,
+        "text": "Phrase",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 34,
+        "text": "Type",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 46,
+        "w": 460,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 70,
+        "text": "I am going to play.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 70,
+        "text": "projet",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 82,
+        "w": 460,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 106,
+        "text": "She is not going to come.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 106,
+        "text": "négation",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 118,
+        "w": 460,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 142,
+        "text": "Are you going to travel?",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 142,
+        "text": "question",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 154,
+        "w": 460,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 178,
+        "text": "It is going to rain.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 178,
+        "text": "prévision",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : projet",
+     "statement": "Écris : « Demain, Boris va jouer au football. »",
+     "steps": [
+      {
+       "md": "Demain = tomorrow ; il = he → is going to."
+      },
+      {
+       "md": "jouer au football = play football."
+      }
+     ],
+     "answer": "**Tomorrow Boris is going to play football.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : prévision",
+     "statement": "Le ciel est noir. Que dis-tu ?",
+     "steps": [
+      {
+       "md": "Preuve visible : ciel noir."
+      },
+      {
+       "md": "It is going to rain."
+      }
+     ],
+     "answer": "**It's going to rain.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le verbe to be : « I going to study » → **I am going to study**.\n- « going to goes » : après going to, **verbe à l'infinitif**.\n- Confondre avec le présent continu de **go** : I'm going to school (je vais à l'école)."
+    }
+   ],
+   "reviewNotes": [
+    "Contraste going to / will : traité dans la fiche suivante."
+   ]
+  },
+  {
+   "id": "5e-english-will",
+   "title": "The future with will",
+   "minutes": 25,
+   "programRef": "5e — Anglais (APC), futur avec will (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Employer will pour une décision immédiate, une promesse ou une prévision.",
+    "Distinguer will et going to."
+   ],
+   "prerequisites": [
+    "5e-english-going-to"
+   ],
+   "exercises": [
+    "5e-english-will-01",
+    "5e-english-will-02",
+    "5e-english-will-03",
+    "5e-english-will-04",
+    "5e-english-will-05",
+    "5e-english-will-06"
+   ],
+   "selfCheck": [
+    "5e-english-will-q1",
+    "5e-english-will-q2",
+    "5e-english-will-q3",
+    "5e-english-will-q4",
+    "5e-english-will-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Forme",
+     "md": "**will** + infinitif (même forme pour tous les sujets) : I **will** help you. · She **will** come. Contraction : **I'll**, **she'll**.\nNégation : **won't** (will not). Question : **Will** you come ? — Yes, I will. / No, I won't."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Emplois",
+     "md": "- **Décision au moment de parler** : The phone is ringing. — I'll answer it.\n- **Promesse** : I will help you.\n- **Prévision** (opinion) : I think it **will** be hot tomorrow.\n- Avec : **I think…**, **probably**, **perhaps**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Going to ou will ?",
+     "alt": "Un tableau qui oppose going to et will.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 460,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 34,
+        "text": "Forme",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 34,
+        "text": "Emploi",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 46,
+        "w": 460,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 70,
+        "text": "going to",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 70,
+        "text": "projet, preuve visible",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 82,
+        "w": 460,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 106,
+        "text": "will",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 106,
+        "text": "décision, promesse, opinion",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 118,
+        "w": 460,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 142,
+        "text": "tomorrow",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 142,
+        "text": "les deux",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 154,
+        "w": 460,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 178,
+        "text": "now",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 178,
+        "text": "ni l'un ni l'autre",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : décision",
+     "statement": "Le professeur dit : « Who can open the window ? » Que réponds-tu ?",
+     "steps": [
+      {
+       "md": "Décision immédiate : will."
+      },
+      {
+       "md": "Contraction possible : I'll."
+      }
+     ],
+     "answer": "**I'll open it.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : promesse",
+     "statement": "Promets à ta mère de rentrer tôt.",
+     "steps": [
+      {
+       "md": "Promesse : I will + verbe."
+      },
+      {
+       "md": "rentrer = come home ; tôt = early."
+      }
+     ],
+     "answer": "**I will come home early.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « She wills come » : pas de -s.\n- « I will to go » : **I will go**.\n- « won't » = will not ; ne pas écrire « willn't »."
+    }
+   ],
+   "reviewNotes": [
+    "La distinction will / going to est simplifiée ; les manuels peuvent la présenter différemment."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « She ___ going to visit her aunt. »",
+   "choices": [
+    "is",
+    "are",
+    "am",
+    "does"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "she → is.",
+   "id": "5e-english-going-to-01",
+   "tier": "application",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "We going to travel tomorrow.",
+    "We are going to travel tomorrow.",
+    "We are go to travel tomorrow.",
+    "We are going to travelling tomorrow."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "be + going to + infinitif.",
+   "id": "5e-english-going-to-02",
+   "tier": "application",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Forme négative de « I am going to buy a bag » :",
+   "choices": [
+    "I don't going to buy a bag.",
+    "I'm not going to buy a bag.",
+    "I amn't going to buy a bag.",
+    "I not going to buy a bag."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "am + not.",
+   "id": "5e-english-going-to-03",
+   "tier": "application",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase exprime une prévision avec une preuve ?",
+   "choices": [
+    "Look at that car! It's going to crash.",
+    "I'm going to visit my aunt.",
+    "I went to the market.",
+    "I like football."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Preuve visible.",
+   "id": "5e-english-going-to-04",
+   "tier": "approfondissement",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Question correcte :",
+   "choices": [
+    "Do they going to play?",
+    "Are they going to play?",
+    "Are they going play?",
+    "They are going to play?"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "be + sujet + going to.",
+   "id": "5e-english-going-to-05",
+   "tier": "approfondissement",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris writes his plans: « Tomorrow I'm going to wash the car. On Saturday I'm going to play football. Next month I'm going to visit my grandmother. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Que va-t-il faire samedi ?",
+     "choices": [
+      "jouer au football",
+      "laver la voiture",
+      "visiter sa grand-mère",
+      "aller au marché"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "On Saturday I'm going to play football.",
+     "id": "5e-english-going-to-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quand va-t-il visiter sa grand-mère ?",
+     "choices": [
+      "le mois prochain",
+      "demain",
+      "samedi",
+      "hier"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Next month.",
+     "id": "5e-english-going-to-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris 3 phrases avec going to sur tes projets de la semaine prochaine.",
+     "model": "Next week I am going to study English. I am going to play football. I'm not going to travel.",
+     "rubric": [
+      "Trois phrases avec am/is/are going to.",
+      "Au moins une négative ou une question possible."
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-english-going-to-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-english-going-to-06",
+   "tier": "examen",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« We're going to win » exprime :",
+   "choices": [
+    "une habitude",
+    "un passé",
+    "une obligation",
+    "une intention ou une prévision"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "going to = futur.",
+   "id": "5e-english-going-to-q1",
+   "tier": "autoeval",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « They ___ going to buy a house. »",
+   "choices": [
+    "are",
+    "is",
+    "am",
+    "do"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "they → are.",
+   "id": "5e-english-going-to-q2",
+   "tier": "autoeval",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot signale le futur ?",
+   "choices": [
+    "yesterday",
+    "tomorrow",
+    "last week",
+    "ago"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "tomorrow = demain.",
+   "id": "5e-english-going-to-q3",
+   "tier": "autoeval",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Are you going to cook? » Réponse courte (oui) :",
+   "choices": [
+    "Yes, I do.",
+    "Yes, I am.",
+    "Yes, I'm going.",
+    "Yes, I go."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "be.",
+   "id": "5e-english-going-to-q4",
+   "tier": "autoeval",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Après « going to » on met :",
+   "choices": [
+    "le verbe en -ing",
+    "l'infinitif sans to",
+    "le verbe au passé",
+    "le verbe avec -s"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "going to + base.",
+   "id": "5e-english-going-to-q5",
+   "tier": "autoeval",
+   "lesson": "5e-english-going-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « I think it ___ rain tomorrow. »",
+   "choices": [
+    "will",
+    "wills",
+    "is will",
+    "does"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "will + infinitif.",
+   "id": "5e-english-will-01",
+   "tier": "application",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Négation de « He will come » :",
+   "choices": [
+    "He willn't come.",
+    "He doesn't will come.",
+    "He won't come.",
+    "He won't comes."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "will not = won't.",
+   "id": "5e-english-will-02",
+   "tier": "application",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Question correcte :",
+   "choices": [
+    "Do you will help me?",
+    "Will you help me?",
+    "Will you to help me?",
+    "You will help me?"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Will + sujet + verbe.",
+   "id": "5e-english-will-03",
+   "tier": "application",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« I'll carry your bag » est :",
+   "choices": [
+    "un projet décidé",
+    "une offre d'aide spontanée",
+    "une habitude",
+    "un fait passé"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "décision immédiate.",
+   "id": "5e-english-will-04",
+   "tier": "approfondissement",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est contractée ?",
+   "choices": [
+    "she'll",
+    "sheell",
+    "she'wil",
+    "shell'"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "she will → she'll.",
+   "id": "5e-english-will-05",
+   "tier": "approfondissement",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina is talking: « I think it will be hot tomorrow. I will take water. I won't forget my hat! »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Qu'est-ce qu'elle va prendre ?",
+     "choices": [
+      "de l'eau",
+      "son chapeau seulement",
+      "de la nourriture",
+      "un manteau"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "I will take water.",
+     "id": "5e-english-will-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« I won't forget my hat » veut dire :",
+     "choices": [
+      "J'ai oublié mon chapeau.",
+      "Je n'oublierai pas mon chapeau.",
+      "Je veux oublier.",
+      "Je ne l'ai pas."
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "won't = will not.",
+     "id": "5e-english-will-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris 3 phrases avec will ou won't : une promesse, une prévision, une décision immédiate.",
+     "model": "I will help you tomorrow. I think Cameroon will win. I'll open the door.",
+     "rubric": [
+      "Une promesse avec will.",
+      "Une prévision.",
+      "Une décision immédiate (I'll…)."
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-english-will-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-english-will-06",
+   "tier": "examen",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« They ___ be late. » (négatif)",
+   "choices": [
+    "won't",
+    "don't",
+    "aren't will",
+    "willn't"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "won't.",
+   "id": "5e-english-will-q1",
+   "tier": "autoeval",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe suit will ?",
+   "choices": [
+    "l'infinitif sans to",
+    "le verbe en -ing",
+    "le passé",
+    "to + verbe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "will + base.",
+   "id": "5e-english-will-q2",
+   "tier": "autoeval",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« I'll » est la forme courte de :",
+   "choices": [
+    "I shall not",
+    "I have",
+    "I will",
+    "I am"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "I will.",
+   "id": "5e-english-will-q3",
+   "tier": "autoeval",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est une promesse ?",
+   "choices": [
+    "I helped you.",
+    "I will help you.",
+    "I help you every day.",
+    "I am helping."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "will = promesse.",
+   "id": "5e-english-will-q4",
+   "tier": "autoeval",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Will she come? » Réponse courte (non) :",
+   "choices": [
+    "No, she won't.",
+    "No, she doesn't.",
+    "No, she isn't.",
+    "No, she willn't."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "will → won't.",
+   "id": "5e-english-will-q5",
+   "tier": "autoeval",
+   "lesson": "5e-english-will",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

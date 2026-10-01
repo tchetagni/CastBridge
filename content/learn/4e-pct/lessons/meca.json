@@ -1,0 +1,806 @@
+{
+ "chapter": "4e-pct-meca",
+ "lessons": [
+  {
+   "id": "4e-pct-poids-masse",
+   "title": "Poids et masse",
+   "minutes": 25,
+   "programRef": "4e — Poids et masse (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer masse et poids.",
+    "Calculer un poids avec P = m × g.",
+    "Utiliser le dynamomètre."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-pct-poids-masse-01",
+    "4e-pct-poids-masse-02",
+    "4e-pct-poids-masse-03",
+    "4e-pct-poids-masse-04",
+    "4e-pct-poids-masse-05",
+    "4e-pct-poids-masse-06"
+   ],
+   "selfCheck": [
+    "4e-pct-poids-masse-q1",
+    "4e-pct-poids-masse-q2",
+    "4e-pct-poids-masse-q3",
+    "4e-pct-poids-masse-q4",
+    "4e-pct-poids-masse-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Masse et poids",
+     "md": "La **masse** $m$ mesure la quantité de matière ; elle s'exprime en **kg** et ne change pas d'un lieu à un autre. Le **poids** $P$ est la force d'attraction exercée par la Terre sur un corps ; il s'exprime en **newtons (N)** et se mesure avec un **dynamomètre**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Relation poids-masse",
+     "md": "$P = m \\times g$, avec $g$ l'intensité de la pesanteur. Dans ce cours, **g = 10 N/kg** (valeur arrondie ; la valeur plus précise est environ 9,8 N/kg). Sur la Lune g ≈ 1,6 N/kg.",
+     "tex": "P = m \\times g"
+    },
+    {
+     "type": "illustration",
+     "caption": "Un dynamomètre mesure le poids d'un objet de masse 2 kg : P = 2 × 10 = 20 N.",
+     "alt": "Dynamomètre vertical avec un objet suspendu et une flèche rouge vers le bas : le poids.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 15,
+        "w": 80,
+        "h": 14,
+        "fill": "grey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 29,
+        "w": 30,
+        "h": 120,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 149,
+        "x2": 200,
+        "y2": 175,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 175,
+        "w": 60,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 200,
+        "text": "m = 2 kg",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 215,
+        "x2": 200,
+        "y2": 260,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 245,
+        "text": "P = 20 N",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 90,
+        "text": "dynamomètre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 90,
+        "x2": 185,
+        "y2": 90,
+        "color": "ink",
+        "width": 1,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer un poids",
+     "statement": "Quel est le poids d'un sac de 2,5 kg ? (g = 10 N/kg)",
+     "steps": [
+      {
+       "md": "Masse en kg : on peut appliquer P = m × g avec g = 10 N/kg."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "P = 2{,}5 \\times 10 = 25\\ \\text{N}"
+      }
+     ],
+     "answer": "**25 N**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : retrouver la masse",
+     "statement": "Le dynamomètre indique 450 N pour un sac de ciment. Quelle est sa masse ? (g = 10 N/kg)",
+     "steps": [
+      {
+       "md": "On isole m : m = P / g."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "m = \\frac{450}{10} = 45\\ \\text{kg}"
+      }
+     ],
+     "answer": "**45 kg**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre « poids en kg » : le poids se donne en newtons, la masse en kilogrammes.\n- Oublier de convertir les grammes en kilogrammes (800 g = 0,8 kg).\n- Dire que la masse change sur la Lune : seul le poids change.\n- Utiliser une balance pour mesurer un poids : la balance mesure la masse."
+    }
+   ],
+   "reviewNotes": [
+    "Convention : g = 10 N/kg (valeur arrondie ; g ≈ 9,8 N/kg à la surface de la Terre).",
+    "Sur la Lune g ≈ 1,6 N/kg (arrondi)."
+   ]
+  },
+  {
+   "id": "4e-pct-forces-equilibre",
+   "title": "Forces et équilibre d'un solide",
+   "minutes": 35,
+   "programRef": "4e — Forces ; équilibre d'un solide soumis à deux forces (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Décrire les effets d'une force.",
+    "Représenter une force par un vecteur.",
+    "Énoncer les conditions d'équilibre d'un solide soumis à deux forces."
+   ],
+   "prerequisites": [
+    "4e-pct-poids-masse"
+   ],
+   "exercises": [
+    "4e-pct-forces-equilibre-01",
+    "4e-pct-forces-equilibre-02",
+    "4e-pct-forces-equilibre-03",
+    "4e-pct-forces-equilibre-04",
+    "4e-pct-forces-equilibre-05",
+    "4e-pct-forces-equilibre-06"
+   ],
+   "selfCheck": [
+    "4e-pct-forces-equilibre-q1",
+    "4e-pct-forces-equilibre-q2",
+    "4e-pct-forces-equilibre-q3",
+    "4e-pct-forces-equilibre-q4",
+    "4e-pct-forces-equilibre-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Une force",
+     "md": "Une **force** agit sur un corps : elle peut le **mettre en mouvement**, **modifier** son mouvement, le **déformer** ou le **maintenir en équilibre**. Elle se mesure en **newtons (N)**. On la représente par un **vecteur** (flèche) qui précise : le **point d'application**, la **direction**, le **sens** et l'**intensité** (longueur de la flèche, selon une échelle)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Équilibre sous deux forces",
+     "md": "Un solide soumis à deux forces est en **équilibre** si ces forces ont :\n- la **même direction** (même droite d'action),\n- des **sens opposés**,\n- la **même intensité**.\nExemple : un objet suspendu à un fil : le poids $\\vec{P}$ et la tension du fil $\\vec{T}$ se compensent."
+    },
+    {
+     "type": "illustration",
+     "caption": "Objet suspendu en équilibre : T et P ont même direction, sens opposés, même intensité.",
+     "alt": "Un objet de 3 kg suspendu à un fil, et le schéma des forces : poids vers le bas, tension vers le haut.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 270,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 20,
+        "x2": 180,
+        "y2": 20,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 20,
+        "x2": 110,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 75,
+        "y": 90,
+        "w": 70,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 122,
+        "text": "3 kg",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 140,
+        "x2": 350,
+        "y2": 50,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 140,
+        "x2": 350,
+        "y2": 230,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 140,
+        "r": 5,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 35,
+        "text": "T = 30 N",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 252,
+        "text": "P = 30 N",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 180,
+        "text": "échelle :",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 200,
+        "text": "1 cm ↔ 10 N",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : équilibre",
+     "statement": "Un objet de masse 3 kg est suspendu à un fil et reste immobile. Quelle est la tension du fil ? (g = 10 N/kg)",
+     "steps": [
+      {
+       "md": "Poids : P = 3 × 10 = 30 N."
+      },
+      {
+       "md": "Équilibre : T a la même intensité que P, sens opposé."
+      }
+     ],
+     "answer": "**T = 30 N, dirigée vers le haut**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : représenter à l'échelle",
+     "statement": "Une force de 80 N est représentée avec l'échelle 1 cm ↔ 20 N. Quelle longueur de flèche ?",
+     "steps": [
+      {
+       "md": "On divise l'intensité par la valeur d'un cm."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "80 \\div 20 = 4\\ \\text{cm}"
+      }
+     ],
+     "answer": "**4 cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le sens ou le point d'application du vecteur.\n- Dire que des forces de même valeur mais de directions différentes s'équilibrent.\n- Confondre poids (vers le bas) et réaction du support (vers le haut).\n- Oublier l'échelle : une flèche sans échelle n'indique pas la valeur."
+    }
+   ],
+   "reviewNotes": [
+    "Équilibre sous deux forces seulement ; frottements non traités (vérifier le programme).",
+    "g = 10 N/kg."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le poids d'un objet de 4 kg ? (en N, g = 10 N/kg)",
+   "answer": 40,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 × 10 = 40 N.",
+   "id": "4e-pct-poids-masse-01",
+   "tier": "application",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un objet pèse 120 N. Quelle est sa masse ? (en kg, g = 10 N/kg)",
+   "answer": 12,
+   "unit": "kg",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "120 ÷ 10 = 12 kg.",
+   "id": "4e-pct-poids-masse-02",
+   "tier": "application",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel instrument mesure un poids ?",
+   "choices": [
+    "Le thermomètre",
+    "Le dynamomètre",
+    "L'éprouvette",
+    "La règle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dynamomètre mesure des forces.",
+   "id": "4e-pct-poids-masse-03",
+   "tier": "application",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une boîte de 800 g : quel est son poids (en N, g = 10 N/kg) ?",
+   "answer": 8,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "800 g = 0,8 kg ; 0,8 × 10 = 8 N.",
+   "id": "4e-pct-poids-masse-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur la Lune (g = 1,6 N/kg), quel est le poids d'un objet de 10 kg ? (en N)",
+   "answer": 16,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "10 × 1,6 = 16 N.",
+   "id": "4e-pct-poids-masse-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa a une masse de 55 kg. (g = 10 N/kg sur la Terre ; 1,6 N/kg sur la Lune)",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est son poids sur la Terre ? (en N)",
+     "answer": 550,
+     "unit": "N",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "55 × 10 = 550 N.",
+     "id": "4e-pct-poids-masse-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel serait son poids sur la Lune ? (en N)",
+     "answer": 88,
+     "unit": "N",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "55 × 1,6 = 88 N.",
+     "id": "4e-pct-poids-masse-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle serait sa masse sur la Lune ?",
+     "choices": [
+      "8,8 kg",
+      "88 kg",
+      "16 kg",
+      "55 kg"
+     ],
+     "answer": 3,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "La masse ne dépend pas du lieu.",
+     "id": "4e-pct-poids-masse-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-poids-masse-06",
+   "tier": "examen",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité du poids ?",
+   "choices": [
+    "Le newton",
+    "Le kilogramme",
+    "Le litre",
+    "Le mètre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le poids est une force.",
+   "id": "4e-pct-poids-masse-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La masse d'un corps change-t-elle sur la Lune ?",
+   "choices": [
+    "Oui, elle double",
+    "Non",
+    "Oui, elle devient nulle",
+    "Oui, elle est divisée par 6 toujours"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La masse est invariante.",
+   "id": "4e-pct-poids-masse-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La relation entre poids et masse est :",
+   "choices": [
+    "P = m / g",
+    "P = g / m",
+    "P = m + g",
+    "P = m × g"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Poids = masse × pesanteur.",
+   "id": "4e-pct-poids-masse-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec g = 10 N/kg, 3 kg pèsent :",
+   "choices": [
+    "30 N",
+    "3 N",
+    "13 N",
+    "300 N"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 10.",
+   "id": "4e-pct-poids-masse-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que mesure une balance de cuisine ?",
+   "choices": [
+    "La masse",
+    "Le poids en newtons exclusivement",
+    "La température",
+    "La tension"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle donne des kilogrammes ou grammes.",
+   "id": "4e-pct-poids-masse-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-poids-masse",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Laquelle n'est pas une caractéristique d'une force ?",
+   "choices": [
+    "Le point d'application",
+    "La couleur",
+    "La direction",
+    "L'intensité"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une force est définie par point d'application, direction, sens et intensité.",
+   "id": "4e-pct-forces-equilibre-01",
+   "tier": "application",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Échelle 1 cm ↔ 10 N : une force de 50 N est représentée par une flèche de combien de cm ?",
+   "answer": 5,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "50 ÷ 10 = 5 cm.",
+   "id": "4e-pct-forces-equilibre-02",
+   "tier": "application",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Échelle 1 cm ↔ 20 N : une flèche de 3 cm représente quelle force ? (en N)",
+   "answer": 60,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 20 = 60 N.",
+   "id": "4e-pct-forces-equilibre-03",
+   "tier": "application",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un corps immobile est suspendu à un dynamomètre qui indique 12 N. Quelle est sa masse ? (en kg, g = 10 N/kg)",
+   "answer": 1.2,
+   "tolerance": 0.01,
+   "unit": "kg",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Équilibre : P = 12 N ; m = 12 ÷ 10 = 1,2 kg.",
+   "id": "4e-pct-forces-equilibre-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un livre de 2 kg est posé sur une table. La réaction de la table est :",
+   "choices": [
+    "horizontale, de 20 N",
+    "verticale vers le bas, de 20 N",
+    "nulle",
+    "verticale, vers le haut, de 20 N"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Elle équilibre le poids (20 N, vers le bas).",
+   "id": "4e-pct-forces-equilibre-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une caisse de 15 kg est posée sur le sol et reste immobile. (g = 10 N/kg)",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le poids de la caisse. (en N)",
+     "answer": 150,
+     "unit": "N",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "15 × 10 = 150 N.",
+     "id": "4e-pct-forces-equilibre-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'intensité de la réaction du sol ? (en N)",
+     "answer": 150,
+     "unit": "N",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Équilibre : même intensité que le poids.",
+     "id": "4e-pct-forces-equilibre-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Représente (décris) les deux forces avec l'échelle 1 cm ↔ 50 N.",
+     "model": "Chaque flèche mesure 3 cm : le poids vers le bas, la réaction vers le haut, sur la même verticale et partant du même point.",
+     "rubric": [
+      "3 cm chacune",
+      "Sens opposés",
+      "Même direction"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-pct-forces-equilibre-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-forces-equilibre-06",
+   "tier": "examen",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un solide est en équilibre sous deux forces si elles ont :",
+   "choices": [
+    "même direction, sens opposés, même intensité",
+    "même sens",
+    "directions différentes",
+    "intensités différentes"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conditions d'équilibre.",
+   "id": "4e-pct-forces-equilibre-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La longueur d'un vecteur force est proportionnelle à :",
+   "choices": [
+    "la couleur",
+    "la masse volumique",
+    "l'intensité",
+    "la température"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Échelle.",
+   "id": "4e-pct-forces-equilibre-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité de force ?",
+   "choices": [
+    "Le newton",
+    "Le kilogramme",
+    "Le joule",
+    "Le mètre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Symbole N.",
+   "id": "4e-pct-forces-equilibre-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel effet n'est pas dû à une force ?",
+   "choices": [
+    "Déformer un ressort",
+    "Mettre en mouvement",
+    "Changer la couleur uniquement",
+    "Maintenir en équilibre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les effets d'une force concernent mouvement ou déformation.",
+   "id": "4e-pct-forces-equilibre-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un objet suspendu et immobile : le fil exerce une force :",
+   "choices": [
+    "vers le bas",
+    "horizontale",
+    "vers le haut",
+    "nulle"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle équilibre le poids.",
+   "id": "4e-pct-forces-equilibre-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-forces-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,456 @@
+{
+ "chapter": "6e-maths-proportionnalite",
+ "lessons": [
+  {
+   "id": "6e-maths-proportionnalite",
+   "title": "Proportionnalité et pourcentages simples",
+   "minutes": 30,
+   "programRef": "6e — Proportionnalité : tableaux, coefficient, règle de trois, pourcentages simples (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une situation de proportionnalité et compléter un tableau.",
+    "Utiliser la règle de trois (retour à l'unité) et calculer un pourcentage simple."
+   ],
+   "prerequisites": [
+    "6e-maths-fractions-operations"
+   ],
+   "exercises": [
+    "6e-maths-proportionnalite-01",
+    "6e-maths-proportionnalite-02",
+    "6e-maths-proportionnalite-03",
+    "6e-maths-proportionnalite-04",
+    "6e-maths-proportionnalite-05",
+    "6e-maths-proportionnalite-06"
+   ],
+   "selfCheck": [
+    "6e-maths-proportionnalite-q1",
+    "6e-maths-proportionnalite-q2",
+    "6e-maths-proportionnalite-q3",
+    "6e-maths-proportionnalite-q4",
+    "6e-maths-proportionnalite-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Tableau de proportionnalité",
+     "md": "Deux grandeurs sont **proportionnelles** si on passe de l'une à l'autre en multipliant par un même nombre, le **coefficient de proportionnalité**. Exemple : 1 kg d'arachides coûte 800 FCFA ; 3 kg coûtent 3 × 800 = 2 400 FCFA."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un tableau de proportionnalité (arachides).",
+     "alt": "Tableau à deux lignes : kilogrammes 1, 3, 5 et prix 800, 2 400, 4 000 FCFA.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 100,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 30,
+        "w": 100,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 30,
+        "w": 100,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 30,
+        "w": 100,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 70,
+        "w": 100,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 70,
+        "w": 100,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 70,
+        "w": 100,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 70,
+        "w": 100,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 56,
+        "text": "kg",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 56,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 56,
+        "text": "3",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 56,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 96,
+        "text": "FCFA",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 96,
+        "text": "800",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 96,
+        "text": "2 400",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 96,
+        "text": "4 000",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 135,
+        "text": "Coefficient : × 800",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Règle de trois et pourcentage",
+     "md": "**Retour à l'unité** : on cherche la valeur pour 1, puis on multiplie. Un **pourcentage** est une fraction de dénominateur 100 : $25\\,\\% = \\frac{25}{100} = \\frac{1}{4}$. Prendre 50 %, c'est diviser par 2 ; 25 %, par 4 ; 10 %, par 10."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : retour à l'unité",
+     "statement": "4 cahiers coûtent 1 200 FCFA. Combien coûtent 7 cahiers ?",
+     "steps": [
+      {
+       "md": "Prix d'un cahier : 1 200 ÷ 4 = 300 FCFA."
+      },
+      {
+       "md": "Prix de 7 cahiers : 300 × 7 = 2 100 FCFA."
+      }
+     ],
+     "answer": "**2 100 FCFA**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : pourcentage",
+     "statement": "Un pagne coûte 8 000 FCFA. Le commerçant accorde une réduction de 25 %. Quel est le prix payé ?",
+     "steps": [
+      {
+       "md": "25 % de 8 000 = 8 000 ÷ 4 = 2 000 FCFA."
+      },
+      {
+       "md": "Prix payé : 8 000 − 2 000 = 6 000 FCFA."
+      }
+     ],
+     "answer": "**6 000 FCFA**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que tout est proportionnel : l'âge d'un enfant et sa taille ne le sont pas.\n- Additionner au lieu de multiplier : si 2 kg coûtent 1 000 FCFA, 4 kg coûtent 2 000 FCFA (et non 1 002).\n- Confondre « réduction de 25 % » (on enlève) et « prix à 25 % » (on garde seulement le quart)."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si les pourcentages sont au programme de 6e ou de 5e (traités ici de façon simple : 10 %, 25 %, 50 %)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "3 kg de sucre coûtent 2 100 FCFA. Combien coûte 1 kg (FCFA) ?",
+   "answer": 700,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 100 ÷ 3 = 700.",
+   "id": "6e-maths-proportionnalite-01",
+   "tier": "application",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 50 % de 640.",
+   "answer": 320,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "50 % = la moitié : 640 ÷ 2 = 320.",
+   "id": "6e-maths-proportionnalite-02",
+   "tier": "application",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le coefficient de proportionnalité qui permet de passer de 4 à 20 ?",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "20 ÷ 4 = 5.",
+   "id": "6e-maths-proportionnalite-03",
+   "tier": "application",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un car roule à vitesse constante et parcourt 90 km en 1 h 30 min soit 1,5 h. Quelle distance parcourt-il en 4 h (km) ?",
+   "answer": 240,
+   "unit": "km",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "90 ÷ 1,5 = 60 km par heure ; 60 × 4 = 240 km.",
+   "id": "6e-maths-proportionnalite-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 10 % de 4 500 FCFA.",
+   "answer": 450,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "10 % = diviser par 10 : 4 500 ÷ 10 = 450.",
+   "id": "6e-maths-proportionnalite-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Au marché, 5 litres d'huile coûtent 6 000 FCFA.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le prix d'un litre (FCFA) ?",
+     "answer": 1200,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "6 000 ÷ 5 = 1 200.",
+     "id": "6e-maths-proportionnalite-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien coûtent 8 litres (FCFA) ?",
+     "answer": 9600,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "1 200 × 8 = 9 600.",
+     "id": "6e-maths-proportionnalite-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Avec 3 600 FCFA, combien de litres peut-on acheter ?",
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3 600 ÷ 1 200 = 3.",
+     "id": "6e-maths-proportionnalite-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-proportionnalite-06",
+   "tier": "examen",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle situation est une situation de proportionnalité ?",
+   "choices": [
+    "La taille d'un enfant selon son âge",
+    "Le nombre de buts selon le jour",
+    "La température selon l'heure",
+    "Le prix de n mètres de tissu à prix fixe le mètre"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Seul le prix du tissu se multiplie par un même nombre : le prix au mètre.",
+   "id": "6e-maths-proportionnalite-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "25 % d'une quantité, c'est",
+   "choices": [
+    "la moitié",
+    "le quart",
+    "le dixième",
+    "le tiers"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "25/100 = 1/4.",
+   "id": "6e-maths-proportionnalite-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un tableau de proportionnalité, 6 correspond à 15. À quoi correspond 12 ?",
+   "choices": [
+    "21",
+    "30",
+    "27",
+    "24"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "12 = 2 × 6, donc 2 × 15 = 30.",
+   "id": "6e-maths-proportionnalite-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un article à 5 000 FCFA est soldé à 20 % de réduction. Quelle réduction ?",
+   "choices": [
+    "2 000 FCFA",
+    "100 FCFA",
+    "4 000 FCFA",
+    "1 000 FCFA"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "20 % de 5 000 = 5 000 ÷ 5 = 1 000.",
+   "id": "6e-maths-proportionnalite-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "2 stylos coûtent 500 FCFA. Combien coûtent 6 stylos ?",
+   "choices": [
+    "1 000 FCFA",
+    "1 500 FCFA",
+    "506 FCFA",
+    "3 000 FCFA"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "6 = 3 × 2 donc 3 × 500 = 1 500.",
+   "id": "6e-maths-proportionnalite-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

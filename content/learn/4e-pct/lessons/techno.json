@@ -1,0 +1,807 @@
+{
+ "chapter": "4e-pct-techno",
+ "lessons": [
+  {
+   "id": "4e-pct-leviers",
+   "title": "Les leviers",
+   "minutes": 30,
+   "programRef": "4e — Technologie : leviers (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Identifier le point d'appui, la force motrice et la résistance.",
+    "Appliquer la loi du levier.",
+    "Reconnaître les trois genres."
+   ],
+   "prerequisites": [
+    "4e-pct-forces-equilibre"
+   ],
+   "exercises": [
+    "4e-pct-leviers-01",
+    "4e-pct-leviers-02",
+    "4e-pct-leviers-03",
+    "4e-pct-leviers-04",
+    "4e-pct-leviers-05",
+    "4e-pct-leviers-06"
+   ],
+   "selfCheck": [
+    "4e-pct-leviers-q1",
+    "4e-pct-leviers-q2",
+    "4e-pct-leviers-q3",
+    "4e-pct-leviers-q4",
+    "4e-pct-leviers-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le levier",
+     "md": "Un **levier** est une barre rigide qui pivote autour d'un **point d'appui**. On y applique une **force motrice** $F$ pour vaincre une **résistance** $R$ (la charge). Brouette, balançoire, pied-de-biche, ciseaux, pince sont des leviers."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Loi du levier (équilibre)",
+     "md": "À l'équilibre : **force × bras = résistance × bras**, avec les bras mesurés depuis le point d'appui : $F \\times d_1 = R \\times d_2$. Plus le bras de la force est long, plus la force nécessaire est petite.",
+     "tex": "F \\times d_1 = R \\times d_2"
+    },
+    {
+     "type": "illustration",
+     "caption": "Brouette : levier du 2e genre (résistance entre l'appui et la force).",
+     "alt": "Barre avec point d'appui à gauche, la charge de 600 N à 0,4 m et la force motrice inconnue à 1,2 m.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 115,
+        "w": 260,
+        "h": 10,
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         125,
+         45,
+         165,
+         75,
+         165
+        ],
+        "fill": "grey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 50,
+        "x2": 140,
+        "y2": 112,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 40,
+        "text": "R = 600 N",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 190,
+        "x2": 300,
+        "y2": 128,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 215,
+        "text": "F = ?",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 180,
+        "x2": 140,
+        "y2": 180,
+        "color": "ink",
+        "width": 1,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 198,
+        "text": "0,4 m",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 230,
+        "x2": 300,
+        "y2": 230,
+        "color": "ink",
+        "width": 1,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 223,
+        "text": "1,2 m",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 185,
+        "text": "appui",
+        "size": 14,
+        "color": "ink",
+        "anchor": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : brouette",
+     "statement": "Charge de 600 N à 0,4 m de l'axe de la roue ; la force est appliquée à 1,2 m. Quelle force faut-il ?",
+     "steps": [
+      {
+       "md": "Équilibre : F × 1,2 = 600 × 0,4.",
+       "tex": "F \\times 1{,}2 = 240"
+      },
+      {
+       "md": "Donc :",
+       "tex": "F = \\frac{240}{1{,}2} = 200\\ \\text{N}"
+      }
+     ],
+     "answer": "**F = 200 N**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : balançoire",
+     "statement": "Une fillette de 300 N est assise à 1,5 m du pivot. À quelle distance doit s'asseoir un garçon de 450 N pour équilibrer ?",
+     "steps": [
+      {
+       "md": "Équilibre : 300 × 1,5 = 450 × d.",
+       "tex": "450 = 450 \\times d"
+      },
+      {
+       "md": "On trouve :",
+       "tex": "d = 1\\ \\text{m}"
+      }
+     ],
+     "answer": "**1 m**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les trois genres",
+     "md": "- **1er genre** : l'appui est entre la force et la résistance (ciseaux, balançoire, pied-de-biche).\n- **2e genre** : la résistance est entre l'appui et la force (brouette, casse-noix).\n- **3e genre** : la force est entre l'appui et la résistance (pincette, canne à pêche)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mesurer les bras depuis la charge au lieu du point d'appui.\n- Mélanger les unités (cm et m).\n- Penser qu'un levier « crée » de l'énergie : il réduit seulement la force nécessaire.\n- Placer le point d'appui au mauvais endroit sur le schéma."
+    }
+   ],
+   "reviewNotes": [
+    "Loi du levier (F₁ × d₁ = F₂ × d₂) : relève peut-être de la 3e ; à vérifier.",
+    "Classement en genres : conventionnel."
+   ]
+  },
+  {
+   "id": "4e-pct-engrenages",
+   "title": "Engrenages et transmission du mouvement",
+   "minutes": 30,
+   "programRef": "4e — Technologie : transmission du mouvement (engrenages, chaîne, courroie) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Décrire un engrenage et la transmission par chaîne ou courroie.",
+    "Calculer la vitesse de rotation avec le nombre de dents."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-pct-engrenages-01",
+    "4e-pct-engrenages-02",
+    "4e-pct-engrenages-03",
+    "4e-pct-engrenages-04",
+    "4e-pct-engrenages-05",
+    "4e-pct-engrenages-06"
+   ],
+   "selfCheck": [
+    "4e-pct-engrenages-q1",
+    "4e-pct-engrenages-q2",
+    "4e-pct-engrenages-q3",
+    "4e-pct-engrenages-q4",
+    "4e-pct-engrenages-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Engrenage",
+     "md": "Un **engrenage** est formé de **roues dentées** qui s'engrènent. Deux roues dentées en contact tournent en **sens contraires**. Avec une **chaîne** (vélo) ou une **courroie**, les deux roues tournent dans le **même sens**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Relation vitesse-dents",
+     "md": "Si $Z$ est le nombre de dents et $N$ la vitesse de rotation (en tours par minute, tr/min) : $N_1 \\times Z_1 = N_2 \\times Z_2$. La plus petite roue tourne **le plus vite**.",
+     "tex": "N_1 \\times Z_1 = N_2 \\times Z_2"
+    },
+    {
+     "type": "illustration",
+     "caption": "Deux roues dentées : la petite (20 dents) entraîne la grande (40 dents).",
+     "alt": "Une petite roue dentée en contact avec une roue deux fois plus grande, avec leurs nombres de dents.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 120,
+        "r": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 120,
+        "r": 56,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 120,
+        "r": 100,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 120,
+        "r": 106,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 126,
+        "text": "Z₁ = 20",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 126,
+        "text": "Z₂ = 40",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 25,
+        "text": "roue menante",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 25,
+        "text": "roue menée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 210,
+        "text": "tourne vite",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 220,
+        "text": "tourne 2 fois moins vite",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : engrenage",
+     "statement": "Z₁ = 20 dents tourne à 60 tr/min et entraîne Z₂ = 40 dents. Quelle vitesse pour la roue 2 ?",
+     "steps": [
+      {
+       "md": "On utilise N₂ = N₁ × Z₁ / Z₂."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "N_2 = \\frac{60 \\times 20}{40} = 30\\ \\text{tr/min}"
+      }
+     ],
+     "answer": "**30 tr/min**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : vélo",
+     "statement": "Le pédalier a 48 dents, le pignon arrière 16 dents. Combien de tours fait le pignon (et la roue) pour un tour de pédalier ?",
+     "steps": [
+      {
+       "md": "Rapport : 48 ÷ 16.",
+       "tex": "\\frac{48}{16} = 3"
+      },
+      {
+       "md": "La roue fait 3 tours pour 1 tour de pédalier."
+      }
+     ],
+     "answer": "**3 tours**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la grande roue tourne le plus vite : c'est la petite.\n- Oublier que deux roues en contact tournent en sens opposés.\n- Confondre nombre de dents et diamètre.\n- Négliger que les roues doivent avoir des dents de même pas pour engrener."
+    }
+   ],
+   "reviewNotes": [
+    "Relation N₁ × Z₁ = N₂ × Z₂ : programme exact à vérifier (peut être limité au rapport qualitatif en 4e)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Charge R = 400 N à 0,5 m de l'appui ; la force est à 1 m. Quelle force F ? (en N)",
+   "answer": 200,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "F × 1 = 400 × 0,5 donc F = 200 N.",
+   "id": "4e-pct-leviers-01",
+   "tier": "application",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une brouette est un levier du :",
+   "choices": [
+    "2e genre",
+    "1er genre",
+    "3e genre",
+    "aucun genre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La charge est entre la roue (appui) et les mancherons.",
+   "id": "4e-pct-leviers-02",
+   "tier": "application",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un levier de 1er genre a l'appui :",
+   "choices": [
+    "entre la force et la résistance",
+    "à l'extrémité côté force",
+    "à l'extrémité côté charge",
+    "hors de la barre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition.",
+   "id": "4e-pct-leviers-03",
+   "tier": "application",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Pour soulever une pierre de 1 200 N avec un pied-de-biche, la pierre est à 0,2 m de l'appui. À 1,2 m, quelle force faut-il ? (en N)",
+   "answer": 200,
+   "unit": "N",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "F × 1,2 = 1 200 × 0,2 = 240, donc F = 200 N.",
+   "id": "4e-pct-leviers-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur une balançoire, un enfant de 200 N est à 1,5 m du pivot. Un autre de 300 N : à quelle distance du pivot, pour équilibrer ? (en m)",
+   "answer": 1,
+   "unit": "m",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "200 × 1,5 = 300 × d, d = 1 m.",
+   "id": "4e-pct-leviers-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng veut arracher un clou avec un pied-de-biche : la résistance du clou est 800 N, à 5 cm du point d'appui. Il pousse à 40 cm de l'appui.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle force doit-il exercer au minimum ? (en N)",
+     "answer": 100,
+     "unit": "N",
+     "points": 3,
+     "difficulty": 1,
+     "explanation": "F × 40 = 800 × 5 donc F = 4 000 ÷ 40 = 100 N.",
+     "id": "4e-pct-leviers-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "S'il pousse plus loin du point d'appui, la force nécessaire :",
+     "choices": [
+      "augmente",
+      "reste constante",
+      "diminue",
+      "devient nulle"
+     ],
+     "answer": 2,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Un bras plus long réduit la force.",
+     "id": "4e-pct-leviers-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-leviers-06",
+   "tier": "examen",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule traduit l'équilibre d'un levier ?",
+   "choices": [
+    "F × d₁ = R × d₂",
+    "F + d₁ = R + d₂",
+    "F / d₁ = R × d₂",
+    "F × R = d₁ × d₂"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Produits des forces et des bras.",
+   "id": "4e-pct-leviers-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les bras d'un levier se mesurent depuis :",
+   "choices": [
+    "la charge",
+    "la force",
+    "le point d'appui",
+    "le sol"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Distances au pivot.",
+   "id": "4e-pct-leviers-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel outil est un levier du 3e genre ?",
+   "choices": [
+    "La pincette",
+    "La brouette",
+    "Les ciseaux",
+    "La balançoire"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La force est entre l'appui et la résistance.",
+   "id": "4e-pct-leviers-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un long manche sur un levier :",
+   "choices": [
+    "augmente la force nécessaire",
+    "diminue la force nécessaire",
+    "n'a pas d'effet",
+    "supprime la charge"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plus le bras de force est long, moins il faut de force.",
+   "id": "4e-pct-leviers-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un levier fait gagner :",
+   "choices": [
+    "de l'énergie",
+    "de la force, au prix d'un plus grand déplacement",
+    "de la matière",
+    "du temps toujours"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ne gagne pas d'énergie.",
+   "id": "4e-pct-leviers-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-leviers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Z₁ = 10 dents tourne à 120 tr/min et entraîne Z₂ = 30 dents. N₂ ? (en tr/min)",
+   "answer": 40,
+   "unit": "tr/min",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "120 × 10 / 30 = 40 tr/min.",
+   "id": "4e-pct-engrenages-01",
+   "tier": "application",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux roues dentées en contact tournent :",
+   "choices": [
+    "dans le même sens",
+    "en sens contraires",
+    "sans tourner",
+    "dans tous les sens"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Contact direct inverse le sens.",
+   "id": "4e-pct-engrenages-02",
+   "tier": "application",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec une chaîne, les deux roues tournent :",
+   "choices": [
+    "en sens opposés",
+    "jamais",
+    "à la même vitesse toujours",
+    "dans le même sens"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La chaîne conserve le sens.",
+   "id": "4e-pct-engrenages-03",
+   "tier": "application",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une roue de 30 dents tourne à 120 tr/min et entraîne une roue de 10 dents. Vitesse de la petite roue ? (en tr/min)",
+   "answer": 360,
+   "unit": "tr/min",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "120 × 30 / 10 = 360 tr/min.",
+   "id": "4e-pct-engrenages-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Pédalier 40 dents, pignon 10 dents. Combien de tours de roue pour 5 tours de pédalier ?",
+   "answer": 20,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Rapport 4 : 5 × 4 = 20 tours.",
+   "id": "4e-pct-engrenages-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un moulin à manivelle, une roue de 15 dents entraîne une roue de 60 dents. La manivelle (roue de 15 dents) tourne à 80 tr/min.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la vitesse de la roue de 60 dents ? (en tr/min)",
+     "answer": 20,
+     "unit": "tr/min",
+     "points": 3,
+     "difficulty": 1,
+     "explanation": "80 × 15 / 60 = 20 tr/min.",
+     "id": "4e-pct-engrenages-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Cette transmission :",
+     "choices": [
+      "augmente la vitesse",
+      "ne change rien",
+      "supprime l'effort",
+      "diminue la vitesse et augmente l'effort transmis"
+     ],
+     "answer": 3,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "La roue menée est plus lente.",
+     "id": "4e-pct-engrenages-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-engrenages-06",
+   "tier": "examen",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle roue tourne le plus vite ?",
+   "choices": [
+    "La plus petite",
+    "La plus grande",
+    "Celle de même taille",
+    "Aucune"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Moins de dents : plus de tours.",
+   "id": "4e-pct-engrenages-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Z désigne :",
+   "choices": [
+    "le nombre de dents",
+    "la vitesse",
+    "la masse",
+    "le diamètre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Notation usuelle.",
+   "id": "4e-pct-engrenages-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle relation lie deux roues engrenées ?",
+   "choices": [
+    "N₁ + Z₁ = N₂ + Z₂",
+    "N₁ / Z₁ = N₂ × Z₂",
+    "N₁ × Z₁ = N₂ × Z₂",
+    "N₁ = Z₂"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Produit constant.",
+   "id": "4e-pct-engrenages-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Roue de 20 dents entraînant une roue de 20 dents : la vitesse :",
+   "choices": [
+    "est doublée",
+    "est divisée par deux",
+    "est nulle",
+    "ne change pas"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même nombre de dents.",
+   "id": "4e-pct-engrenages-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe permet une transmission à distance dans le même sens ?",
+   "choices": [
+    "Le contact direct",
+    "L'aimant",
+    "Le fil électrique",
+    "La chaîne"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chaîne ou courroie.",
+   "id": "4e-pct-engrenages-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-engrenages",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

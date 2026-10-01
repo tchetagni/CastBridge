@@ -1,0 +1,1389 @@
+{
+ "chapter": "bepc-svt-reproduction-heredite",
+ "lessons": [
+  {
+   "id": "bepc-svt-reproduction-humaine",
+   "title": "La reproduction humaine",
+   "minutes": 30,
+   "programRef": "3e — Reproduction humaine : appareils génitaux, fécondation, grossesse, puberté (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Nommer les organes reproducteurs et leurs rôles.",
+    "Décrire la fécondation, la nidation et le développement de l'embryon.",
+    "Citer des moyens de prévention des grossesses précoces et des IST."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-svt-reproduction-humaine-01",
+    "bepc-svt-reproduction-humaine-02",
+    "bepc-svt-reproduction-humaine-03",
+    "bepc-svt-reproduction-humaine-04",
+    "bepc-svt-reproduction-humaine-05",
+    "bepc-svt-reproduction-humaine-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-reproduction-humaine-q1",
+    "bepc-svt-reproduction-humaine-q2",
+    "bepc-svt-reproduction-humaine-q3",
+    "bepc-svt-reproduction-humaine-q4",
+    "bepc-svt-reproduction-humaine-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les appareils reproducteurs",
+     "md": "- **Chez l'homme** : les **testicules** fabriquent les **spermatozoïdes** (à partir de la puberté) ; ils passent par les canaux déférents puis l'urètre.\n- **Chez la femme** : les **ovaires** libèrent un **ovule** à peu près une fois par mois ; la **trompe** conduit l'ovule vers l'**utérus**, où l'embryon se développe."
+    },
+    {
+     "type": "illustration",
+     "caption": "Appareil génital féminin simplifié.",
+     "alt": "Suite : ovaire, trompe, utérus, vagin, avec la fécondation dans la trompe et la nidation dans l'utérus.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 300,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 120,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 32.0,
+        "text": "Ovaire",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 44,
+        "x2": 210,
+        "y2": 66,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 66,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 88.0,
+        "text": "Trompe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 100,
+        "x2": 210,
+        "y2": 122,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 122,
+        "w": 120,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 144.0,
+        "text": "Utérus",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 156,
+        "x2": 210,
+        "y2": 178,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 178,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 200.0,
+        "text": "Vagin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 83,
+        "text": "fécondation",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 139,
+        "text": "nidation",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 260,
+        "text": "Appareil génital féminin (schéma)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "De la fécondation à la naissance",
+     "md": "1. **Fécondation** : un spermatozoïde s'unit à l'ovule, en général dans la trompe ; l'**œuf** se forme.\n2. L'œuf se divise et descend vers l'utérus où il se fixe : la **nidation**.\n3. L'embryon, puis le fœtus, se développe avec l'aide du **placenta** et du cordon ombilical (nutriments et dioxygène de la mère ; déchets rendus à la mère).\n4. La grossesse dure **environ 9 mois**. Après la naissance, le lait maternel nourrit le bébé."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Puberté et cycle",
+     "md": "À la **puberté**, sous l'effet d'hormones, les organes reproducteurs deviennent fonctionnels et les caractères sexuels apparaissent. Chez la femme, un cycle d'environ 28 jours en moyenne conduit à l'ovulation, vers le milieu du cycle environ ; s'il n'y a pas de fécondation, la paroi de l'utérus est éliminée : ce sont les règles."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lieu de la fécondation",
+     "statement": "Où se rencontrent ovule et spermatozoïde ?",
+     "steps": [
+      {
+       "md": "L'ovule quitte l'ovaire et entre dans la trompe."
+      },
+      {
+       "md": "Les spermatozoïdes arrivés par le vagin et l'utérus peuvent le rencontrer dans la trompe."
+      }
+     ],
+     "answer": "**Dans la trompe, en général.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le rôle du placenta",
+     "statement": "Pourquoi le bébé n'a-t-il pas besoin de manger ni de respirer comme nous avant la naissance ?",
+     "steps": [
+      {
+       "md": "Les échanges se font à travers le placenta."
+      },
+      {
+       "md": "Le sang de la mère apporte nutriments et dioxygène, et reprend les déchets."
+      }
+     ],
+     "answer": "**Le placenta assure ces échanges.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la fécondation a lieu dans l'utérus : elle a lieu en général dans la trompe, la nidation dans l'utérus.\n- Croire que le sang de la mère et celui du bébé se mélangent : ils échangent à travers le placenta sans se mélanger.\n- Croire qu'on ne peut pas être enceinte « la première fois » : c'est faux ; une grossesse reste possible dès que les organes sont fonctionnels."
+    }
+   ],
+   "reviewNotes": [
+    "Sujet sensible : formulation neutre et prudente ; à faire relire par un agent de santé.",
+    "Durées (grossesse environ 9 mois, cycle environ 28 jours) à confirmer.",
+    "Contraception et IST : liste volontairement générale ; le programme officiel peut préciser."
+   ]
+  },
+  {
+   "id": "bepc-svt-chromosomes-genes",
+   "title": "Chromosomes, gènes et transmission des caractères",
+   "minutes": 30,
+   "programRef": "3e — Initiation à la génétique : ADN, chromosomes, gènes, gamètes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir caractère héréditaire, chromosome, gène, allèle.",
+    "Expliquer le passage de 46 à 23 chromosomes dans les gamètes puis le retour à 46.",
+    "Distinguer caractère héréditaire et caractère acquis."
+   ],
+   "prerequisites": [
+    "bepc-svt-reproduction-humaine"
+   ],
+   "exercises": [
+    "bepc-svt-chromosomes-genes-01",
+    "bepc-svt-chromosomes-genes-02",
+    "bepc-svt-chromosomes-genes-03",
+    "bepc-svt-chromosomes-genes-04",
+    "bepc-svt-chromosomes-genes-05",
+    "bepc-svt-chromosomes-genes-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-chromosomes-genes-q1",
+    "bepc-svt-chromosomes-genes-q2",
+    "bepc-svt-chromosomes-genes-q3",
+    "bepc-svt-chromosomes-genes-q4",
+    "bepc-svt-chromosomes-genes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Caractères, chromosomes, gènes",
+     "md": "Un **caractère héréditaire** est transmis des parents aux descendants (couleur du pelage d'une chèvre, forme des graines d'un pois). Les cellules contiennent un **noyau** avec des **chromosomes**, formés d'ADN. Un **gène** est une portion d'ADN qui commande un caractère ; ses différentes versions s'appellent des **allèles**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Nombre de chromosomes",
+     "md": "Chaque espèce a un nombre constant de chromosomes, en **paires** : l'être humain en a **46** (23 paires). Les **gamètes** (spermatozoïdes, ovules) n'en ont que **23**, un de chaque paire. À la fécondation, l'œuf retrouve **46** chromosomes : la moitié vient de chaque parent. Lors de la croissance, les cellules se divisent en gardant le même nombre de chromosomes (mitose)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Variation du nombre de chromosomes au cours de la reproduction.",
+     "alt": "Cellule du corps à 46, gamètes à 23, œuf à 46.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 330,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 190,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 32.0,
+        "text": "Cellule du corps : 46",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 115.0,
+        "y1": 44,
+        "x2": 115.0,
+        "y2": 80,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 80,
+        "w": 190,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 102.0,
+        "text": "Gamètes : 23",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 115.0,
+        "y1": 114,
+        "x2": 115.0,
+        "y2": 150,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 150,
+        "w": 190,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 115.0,
+        "y": 172.0,
+        "text": "Œuf : 46",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 62,
+        "text": "formation des gamètes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 132,
+        "text": "fécondation",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 250,
+        "text": "Chromosomes humains (nombres)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 285,
+        "text": "Un parent donne 23 : mère + père = 46",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : nombre de chromosomes d'un œuf",
+     "statement": "Une cellule du corps d'une espèce a 20 chromosomes. Combien en a un gamète ? Un œuf ?",
+     "steps": [
+      {
+       "md": "Un gamète a la moitié : 20 ÷ 2 = 10."
+      },
+      {
+       "md": "L'œuf réunit deux gamètes : 10 + 10 = 20."
+      }
+     ],
+     "answer": "**Gamète : 10 chromosomes. Œuf : 20.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : héréditaire ou acquis ?",
+     "statement": "Un coq perd une partie de sa crête dans un combat. Ses poussins auront-ils une crête abîmée ?",
+     "steps": [
+      {
+       "md": "Une blessure est un caractère acquis, non porté par les gènes."
+      },
+      {
+       "md": "Les caractères acquis ne se transmettent pas aux descendants."
+      }
+     ],
+     "answer": "**Non : c'est un caractère acquis.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'un enfant a la moitié de chaque parent « en mélange » : il reçoit des gènes des deux parents, pas un mélange de sang.\n- Croire que les gamètes ont 46 chromosomes.\n- Confondre gène (un caractère) et chromosome (un support portant beaucoup de gènes).\n- Croire qu'une cicatrice ou une habitude se transmet."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier la profondeur attendue (mitose, méiose : noms et schémas, ou seulement principe).",
+    "Fait solide utilisé : 46 chromosomes (23 paires) dans les cellules humaines ordinaires, 23 dans les gamètes.",
+    "Pas de généralisation sur les caractères humains : exemples pris chez les plantes et animaux."
+   ]
+  },
+  {
+   "id": "bepc-svt-croisements",
+   "title": "Croisements simples et lois de Mendel",
+   "minutes": 35,
+   "programRef": "3e — Hérédité : croisements d'un caractère (monohybridisme), lois de Mendel (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir lignée pure, hybride, dominant, récessif, génotype, phénotype.",
+    "Prévoir les résultats d'un croisement avec un échiquier de croisement.",
+    "Interpréter des proportions de descendants (3/4 et 1/4)."
+   ],
+   "prerequisites": [
+    "bepc-svt-chromosomes-genes"
+   ],
+   "exercises": [
+    "bepc-svt-croisements-01",
+    "bepc-svt-croisements-02",
+    "bepc-svt-croisements-03",
+    "bepc-svt-croisements-04",
+    "bepc-svt-croisements-05",
+    "bepc-svt-croisements-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-croisements-q1",
+    "bepc-svt-croisements-q2",
+    "bepc-svt-croisements-q3",
+    "bepc-svt-croisements-q4",
+    "bepc-svt-croisements-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "Une **lignée pure** donne toujours le même caractère. L'**hybride** (F1) est issu du croisement de deux lignées pures différentes. Un allèle **dominant** (majuscule, L) s'exprime même seul ; un allèle **récessif** (minuscule, l) ne s'exprime que s'il est en deux exemplaires. Le **génotype** est la combinaison d'allèles (LL, Ll, ll) ; le **phénotype** est le caractère observé."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Lois de Mendel (un caractère)",
+     "md": "1. **Uniformité de F1** : le croisement de deux lignées pures différentes donne des hybrides tous identiques.\n2. **Disjonction** : un hybride forme deux sortes de gamètes (L et l) en proportions égales.\n3. **F2** (hybrides croisés entre eux) : les proportions théoriques sont **3/4 du caractère dominant et 1/4 du récessif**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Échiquier de croisement de deux hybrides Ll.",
+     "alt": "Tableau 2 par 2 donnant LL, Ll, Ll et ll.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 20,
+        "w": 200,
+        "h": 2,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 70,
+        "text": "Ll × Ll",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 40,
+        "text": "gamètes de l'autre parent",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 90,
+        "w": 220,
+        "h": 120,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 90,
+        "x2": 220,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 150,
+        "x2": 330,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 165,
+        "y": 125,
+        "text": "LL",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 125,
+        "text": "Ll",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 165,
+        "y": 190,
+        "text": "Ll",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 190,
+        "text": "ll",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 165,
+        "y": 80,
+        "text": "L",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 80,
+        "text": "l",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 125,
+        "text": "L",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 190,
+        "text": "l",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "illustration",
+     "caption": "Proportions attendues en F2 pour un caractère dominant et un récessif.",
+     "alt": "Deux barres : 75 % de lisses et 25 % de ridées.",
+     "figure": {
+      "kind": "bars",
+      "w": 380,
+      "h": 220,
+      "bars": [
+       {
+        "label": "Lisses (3/4)",
+        "value": 75,
+        "color": "green"
+       },
+       {
+        "label": "Ridées (1/4)",
+        "value": 25,
+        "color": "orange"
+       }
+      ],
+      "unit": "% attendus en F2"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le pois",
+     "statement": "On croise un pois à graines lisses (lignée pure, LL) avec un pois à graines ridées (lignée pure, ll). Quel est le phénotype de F1 ? Quel est le génotype ?",
+     "steps": [
+      {
+       "md": "Les gamètes sont L et l."
+      },
+      {
+       "md": "Tous les descendants sont Ll."
+      },
+      {
+       "md": "L est dominant : ils sont tous lisses."
+      }
+     ],
+     "answer": "**F1 : tous lisses, génotype Ll.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : calculer en F2",
+     "statement": "Sur 400 graines issues de Ll × Ll, combien de graines lisses attend-on environ ?",
+     "steps": [
+      {
+       "md": "Les lisses (LL ou Ll) représentent 3/4."
+      },
+      {
+       "md": "3/4 de 400 :",
+       "tex": "\\frac{3}{4}\\times 400 = 300"
+      }
+     ],
+     "answer": "**Environ 300 graines lisses, 100 ridées.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Test de croisement",
+     "md": "Pour savoir si un individu au phénotype dominant est LL ou Ll, on le croise avec un individu récessif (ll). Si tous les descendants sont lisses, il est LL ; si on obtient environ la moitié de ridés, il est Ll."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que 3/4 signifie exactement trois sur quatre dans chaque petit échantillon : ce sont des proportions attendues sur de grands nombres.\n- Écrire Ll pour un individu au phénotype ridé : un récessif est toujours ll.\n- Confondre génotype et phénotype."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si le dihybridisme est au programme de 3e (non traité ici).",
+    "Exemple du pois à graines lisses/ridées : classique de Mendel ; proportions théoriques, observées avec fluctuations.",
+    "Les exemples sont pris chez les plantes et animaux, pas chez l'homme."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe produit les spermatozoïdes ?",
+   "choices": [
+    "Les ovaires",
+    "L'utérus",
+    "Les testicules",
+    "La vessie"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les testicules fabriquent les gamètes mâles.",
+   "id": "bepc-svt-reproduction-humaine-01",
+   "tier": "application",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où l'embryon se développe-t-il pendant la grossesse ?",
+   "choices": [
+    "Dans l'ovaire",
+    "Dans l'utérus",
+    "Dans la trompe seulement",
+    "Dans la vessie"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'utérus est la poche musculaire du développement.",
+   "id": "bepc-svt-reproduction-humaine-02",
+   "tier": "application",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la grossesse dure environ neuf mois.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Environ 40 semaines.",
+   "id": "bepc-svt-reproduction-humaine-03",
+   "tier": "application",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque terme à sa définition.",
+   "pairs": [
+    [
+     "Fécondation",
+     "Union spermatozoïde et ovule"
+    ],
+    [
+     "Nidation",
+     "Fixation de l'embryon dans l'utérus"
+    ],
+    [
+     "Placenta",
+     "Organe d'échanges mère-fœtus"
+    ],
+    [
+     "Ovulation",
+     "Libération de l'ovule"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque étape a un nom précis.",
+   "id": "bepc-svt-reproduction-humaine-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi les IST se transmettent par des rapports non protégés et cite un moyen de s'en protéger.",
+   "model": "Les microbes passent par les muqueuses lors de rapports ; le préservatif ou l'abstinence protège, et on consulte un agent de santé en cas de doute.",
+   "rubric": [
+    "Cause de transmission",
+    "Un moyen de prévention",
+    "Consultation"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-svt-reproduction-humaine-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina, 15 ans, pose des questions sur la grossesse à l'infirmière de l'école.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le nom de la cellule formée par la fécondation ?",
+     "choices": [
+      "L'embryon",
+      "Le placenta",
+      "L'œuf",
+      "La trompe"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La cellule œuf est la première cellule du futur bébé.",
+     "id": "bepc-svt-reproduction-humaine-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique comment le fœtus reçoit ce dont il a besoin.",
+     "model": "Par le placenta et le cordon ombilical : nutriments et dioxygène passent du sang de la mère vers le fœtus, qui renvoie ses déchets.",
+     "rubric": [
+      "Placenta et cordon",
+      "Entrées et déchets"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-reproduction-humaine-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-svt-reproduction-humaine-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le gamète femelle est :",
+   "choices": [
+    "Le spermatozoïde",
+    "L'ovule",
+    "L'œuf",
+    "Le fœtus"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'ovule est produit par l'ovaire.",
+   "id": "bepc-svt-reproduction-humaine-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La nidation est :",
+   "choices": [
+    "La naissance",
+    "La production d'ovule",
+    "L'éjaculation",
+    "La fixation de l'embryon dans l'utérus"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle suit la fécondation.",
+   "id": "bepc-svt-reproduction-humaine-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À la puberté, ce sont surtout :",
+   "choices": [
+    "Des vitamines",
+    "Des microbes",
+    "Des vaccins",
+    "Des hormones qui déclenchent les changements"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les hormones sexuelles agissent.",
+   "id": "bepc-svt-reproduction-humaine-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le placenta permet :",
+   "choices": [
+    "Les échanges entre le sang de la mère et celui du fœtus",
+    "La digestion du bébé",
+    "La respiration du bébé par ses poumons",
+    "La fabrication des ovules"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sans mélange des sangs.",
+   "id": "bepc-svt-reproduction-humaine-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les règles sont :",
+   "choices": [
+    "Un début de grossesse",
+    "L'élimination de la paroi de l'utérus",
+    "Une maladie",
+    "L'ovulation"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elles ont lieu en l'absence de fécondation.",
+   "id": "bepc-svt-reproduction-humaine-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reproduction-humaine",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de chromosomes a un spermatozoïde humain ?",
+   "answer": 23,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La moitié de 46.",
+   "id": "bepc-svt-chromosomes-genes-01",
+   "tier": "application",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui porte les gènes ?",
+   "choices": [
+    "Le sang seul",
+    "Les chromosomes",
+    "Les muscles",
+    "Les os"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les gènes sont des portions d'ADN sur les chromosomes.",
+   "id": "bepc-svt-chromosomes-genes-02",
+   "tier": "application",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une cicatrice se transmet aux enfants.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle est acquise, non héréditaire.",
+   "id": "bepc-svt-chromosomes-genes-03",
+   "tier": "application",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une espèce de plante a 14 chromosomes dans ses cellules du corps. Combien dans un grain de pollen ?",
+   "answer": 7,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "14 ÷ 2 = 7.",
+   "id": "bepc-svt-chromosomes-genes-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque terme à sa définition.",
+   "pairs": [
+    [
+     "Chromosome",
+     "Support de l'ADN dans le noyau"
+    ],
+    [
+     "Gène",
+     "Portion d'ADN commandant un caractère"
+    ],
+    [
+     "Gamète",
+     "Cellule reproductrice à n chromosomes"
+    ],
+    [
+     "Caractère acquis",
+     "Non transmis aux descendants"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Des niveaux différents d'organisation.",
+   "id": "bepc-svt-chromosomes-genes-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Chez une espèce animale, les cellules du corps ont 12 chromosomes.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de chromosomes a un gamète ?",
+     "answer": 6,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "12 ÷ 2 = 6.",
+     "id": "bepc-svt-chromosomes-genes-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de chromosomes a l'œuf après fécondation ?",
+     "answer": 12,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "6 + 6 = 12.",
+     "id": "bepc-svt-chromosomes-genes-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique pourquoi le nombre de chromosomes reste constant d'une génération à l'autre.",
+     "model": "Les gamètes n'ont que la moitié des chromosomes, et la fécondation rétablit le nombre complet.",
+     "rubric": [
+      "Gamètes à n",
+      "Fécondation qui rétablit 2n"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-chromosomes-genes-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-svt-chromosomes-genes-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un gène est :",
+   "choices": [
+    "Une cellule",
+    "Une portion d'ADN qui commande un caractère",
+    "Un organe",
+    "Un microbe"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il fait partie d'un chromosome.",
+   "id": "bepc-svt-chromosomes-genes-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le nombre de chromosomes d'une cellule humaine du corps est :",
+   "choices": [
+    "46",
+    "23",
+    "92",
+    "12"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "23 paires.",
+   "id": "bepc-svt-chromosomes-genes-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les gamètes ont :",
+   "choices": [
+    "La moitié des chromosomes",
+    "Le double",
+    "Aucun chromosome",
+    "Le même nombre que le corps"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un par paire.",
+   "id": "bepc-svt-chromosomes-genes-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un caractère héréditaire est :",
+   "choices": [
+    "Acquis par l'entraînement",
+    "Dû à une blessure",
+    "Dû à une maladie seulement",
+    "Transmis par les parents"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il dépend des gènes.",
+   "id": "bepc-svt-chromosomes-genes-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'ADN se trouve surtout :",
+   "choices": [
+    "Dans le noyau des cellules",
+    "Dans le sang plasma seul",
+    "Dans l'air",
+    "Dans l'estomac"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les chromosomes sont dans le noyau.",
+   "id": "bepc-svt-chromosomes-genes-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-chromosomes-genes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un hybride Ll au phénotype lisse : quel allèle est dominant ?",
+   "choices": [
+    "l (petit l)",
+    "Aucun",
+    "Les deux de la même façon",
+    "L (grand L)"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le caractère lisse s'exprime quand L est présent.",
+   "id": "bepc-svt-croisements-01",
+   "tier": "application",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les gamètes d'un individu Ll sont :",
+   "choices": [
+    "Seulement des gamètes à grand L",
+    "Seulement des gamètes à petit l",
+    "L et l en proportions égales",
+    "Des gamètes Ll tous identiques"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les deux allèles se séparent.",
+   "id": "bepc-svt-croisements-02",
+   "tier": "application",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : tous les individus de F1 sont identiques quand les parents sont de lignées pures.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est l'uniformité de F1.",
+   "id": "bepc-svt-croisements-03",
+   "tier": "application",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur 800 plants issus du croisement Ll × Ll, combien de plants à graines ridées attend-on environ ?",
+   "answer": 200,
+   "tolerance": 20,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "1/4 de 800 = 200.",
+   "id": "bepc-svt-croisements-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque génotype à son phénotype (L dominant lisse, l récessif ridé).",
+   "pairs": [
+    [
+     "Deux grands L",
+     "Lisse (pur)"
+    ],
+    [
+     "Un grand L, un petit l",
+     "Lisse (hybride)"
+    ],
+    [
+     "Deux petits l",
+     "Ridé"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Un seul L suffit pour être lisse.",
+   "id": "bepc-svt-croisements-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Chez une souris, la couleur grise (G) est dominante sur la couleur blanche (g). Une femelle grise de génotype inconnu est croisée avec un mâle blanc ; on obtient 5 souriceaux : 3 gris et 2 blancs.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le génotype du mâle blanc ?",
+     "choices": [
+      "gg, deux allèles récessifs",
+      "GG, deux allèles dominants",
+      "Gg, un de chaque",
+      "On ne peut pas savoir"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Un récessif est toujours gg.",
+     "id": "bepc-svt-croisements-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le génotype de la femelle grise ?",
+     "choices": [
+      "Gg, hétérozygote",
+      "GG, homozygote dominant",
+      "gg, homozygote récessif",
+      "Aucun"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Elle a donné des gamètes g (souriceaux blancs), donc elle porte un g.",
+     "id": "bepc-svt-croisements-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique ton raisonnement.",
+     "model": "Des souriceaux blancs (gg) ne peuvent venir que d'un gamète g de chaque parent ; la femelle porte donc g, et comme elle est grise, elle est Gg.",
+     "rubric": [
+      "Parle des gamètes",
+      "Conclut Gg"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-croisements-06-c"
+    }
+   ],
+   "difficulty": 3,
+   "id": "bepc-svt-croisements-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un allèle récessif s'exprime quand :",
+   "choices": [
+    "Il est seul",
+    "Il est en deux exemplaires",
+    "Il est mélangé à un dominant",
+    "Il est dans le sang"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "ll donne le phénotype récessif.",
+   "id": "bepc-svt-croisements-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un hybride est :",
+   "choices": [
+    "Issu de deux lignées pures différentes",
+    "Issu de deux parents identiques",
+    "Un clone",
+    "Une mutation"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "F1 est un hybride.",
+   "id": "bepc-svt-croisements-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les proportions théoriques de F2 sont :",
+   "choices": [
+    "1/2 et 1/2",
+    "1/4 et 3/4",
+    "3/4 dominants et 1/4 récessifs",
+    "Tous dominants"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Résultat de Ll × Ll.",
+   "id": "bepc-svt-croisements-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le phénotype est :",
+   "choices": [
+    "Le caractère observé",
+    "Le nombre de chromosomes",
+    "L'allèle caché",
+    "La cellule"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Visible.",
+   "id": "bepc-svt-croisements-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un génotype hétérozygote s'écrit :",
+   "choices": [
+    "LL, deux allèles dominants",
+    "ll, deux allèles récessifs",
+    "Ll, un de chaque allèle",
+    "Un seul allèle"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il porte deux allèles différents.",
+   "id": "bepc-svt-croisements-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-croisements",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

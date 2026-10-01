@@ -1,0 +1,523 @@
+{
+ "chapter": "6e-svt-chaines",
+ "lessons": [
+  {
+   "id": "6e-svt-chaines-alimentaires",
+   "title": "Les chaînes alimentaires",
+   "minutes": 25,
+   "programRef": "6e — Relations alimentaires entre êtres vivants (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Lire et construire une chaîne alimentaire.",
+    "Distinguer producteurs, consommateurs et décomposeurs.",
+    "Distinguer herbivores, carnivores et omnivores."
+   ],
+   "prerequisites": [
+    "6e-svt-milieu-ecosysteme",
+    "6e-svt-plantes-vertes"
+   ],
+   "exercises": [
+    "6e-svt-chaines-alimentaires-01",
+    "6e-svt-chaines-alimentaires-02",
+    "6e-svt-chaines-alimentaires-03",
+    "6e-svt-chaines-alimentaires-04",
+    "6e-svt-chaines-alimentaires-05",
+    "6e-svt-chaines-alimentaires-06"
+   ],
+   "selfCheck": [
+    "6e-svt-chaines-alimentaires-q1",
+    "6e-svt-chaines-alimentaires-q2",
+    "6e-svt-chaines-alimentaires-q3",
+    "6e-svt-chaines-alimentaires-q4",
+    "6e-svt-chaines-alimentaires-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Chaîne alimentaire",
+     "md": "Une **chaîne alimentaire** montre qui mange qui. La flèche signifie « **est mangé par** » : elle va de l'être mangé vers celui qui le mange. Elle commence toujours par un **producteur**, une plante verte qui fabrique sa matière par photosynthèse."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une chaîne alimentaire et le rôle des décomposeurs.",
+     "alt": "Chaîne herbe, criquet, grenouille, serpent, avec les décomposeurs qui recyclent les êtres morts.",
+     "figure": {
+      "kind": "shapes",
+      "w": 580,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 110,
+        "h": 46,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 38.0,
+        "text": "Herbe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 146,
+        "y": 10,
+        "w": 110,
+        "h": 46,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 201.0,
+        "y": 38.0,
+        "text": "Criquet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 282,
+        "y": 10,
+        "w": 110,
+        "h": 46,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 337.0,
+        "y": 38.0,
+        "text": "Grenouille",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 418,
+        "y": 10,
+        "w": 110,
+        "h": 46,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 473.0,
+        "y": 38.0,
+        "text": "Serpent",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 123,
+        "y1": 33,
+        "x2": 143,
+        "y2": 33,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 259,
+        "y1": 33,
+        "x2": 279,
+        "y2": 33,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 395,
+        "y1": 33,
+        "x2": 415,
+        "y2": 33,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 78,
+        "text": "producteur",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 201,
+        "y": 78,
+        "text": "consommateur 1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 337,
+        "y": 78,
+        "text": "consommateur 2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 473,
+        "y": 78,
+        "text": "consommateur 3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 125,
+        "w": 260,
+        "h": 40,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 150.0,
+        "text": "décomposeurs : champignons, bactéries",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 473,
+        "y1": 100,
+        "x2": 420,
+        "y2": 125,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 65,
+        "y1": 100,
+        "x2": 150,
+        "y2": 125,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les rôles",
+     "md": "- **Producteurs** : plantes vertes.\n- **Consommateurs** : animaux. **Herbivores** (mangent des végétaux), **carnivores** (mangent d'autres animaux), **omnivores** (les deux).\n- **Décomposeurs** (champignons, bactéries du sol) : ils transforment les êtres morts et les déchets en matière minérale qui nourrit de nouveau les plantes."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : construire une chaîne",
+     "statement": "Mballa observe un maïs, une poule et un faucon. Écris la chaîne.",
+     "steps": [
+      {
+       "md": "Le producteur est le maïs."
+      },
+      {
+       "md": "La poule mange le maïs ; le faucon mange la poule."
+      }
+     ],
+     "answer": "**Maïs → poule → faucon**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : conséquence d'une disparition",
+     "statement": "Dans la chaîne herbe → criquet → grenouille → serpent, que se passe-t-il si tous les criquets disparaissent ?",
+     "steps": [
+      {
+       "md": "Les grenouilles n'ont plus de nourriture : elles diminuent."
+      },
+      {
+       "md": "Les serpents en pâtissent à leur tour, et l'herbe peut trop se développer."
+      }
+     ],
+     "answer": "**Toute la chaîne est perturbée.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dessiner la flèche dans le mauvais sens : elle va de la proie vers le prédateur.\n- Commencer la chaîne par un animal : elle commence par un producteur.\n- Oublier les décomposeurs, qui bouclent le cycle de la matière."
+    }
+   ],
+   "reviewNotes": [
+    "Les exemples de chaînes sont simplifiés ; dans la nature, on parle plutôt de réseaux alimentaires. Vérifier si le programme parle de « niveaux trophiques »."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Par quoi commence toujours une chaîne alimentaire ?",
+   "choices": [
+    "Un carnivore",
+    "Un décomposeur",
+    "Un producteur (plante verte)",
+    "Un omnivore"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les plantes vertes fabriquent la matière organique.",
+   "id": "6e-svt-chaines-alimentaires-01",
+   "tier": "application",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans « herbe → mouton », la flèche signifie « est mangé par ».",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'herbe est mangée par le mouton.",
+   "id": "6e-svt-chaines-alimentaires-02",
+   "tier": "application",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque être vivant à son régime.",
+   "pairs": [
+    [
+     "Vache",
+     "Herbivore"
+    ],
+    [
+     "Lion",
+     "Carnivore"
+    ],
+    [
+     "Poule",
+     "Omnivore"
+    ],
+    [
+     "Champignon du sol",
+     "Décomposeur"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Herbivore : végétaux ; carnivore : animaux ; omnivore : les deux.",
+   "id": "6e-svt-chaines-alimentaires-03",
+   "tier": "application",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la chaîne « herbe → criquet → oiseau → serpent », quel est le consommateur de deuxième ordre ?",
+   "choices": [
+    "L'oiseau",
+    "L'herbe",
+    "Le criquet",
+    "Le serpent"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le criquet est le premier consommateur, l'oiseau le deuxième.",
+   "id": "6e-svt-chaines-alimentaires-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les décomposeurs du sol permettent :",
+   "choices": [
+    "De produire du dioxygène",
+    "De chasser les herbivores",
+    "De rendre les sels minéraux aux plantes",
+    "De fabriquer de la lumière"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Ils recyclent la matière des êtres morts.",
+   "id": "6e-svt-chaines-alimentaires-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans une plantation voisine, Amina note : les feuilles de manioc sont mangées par des chenilles, les chenilles par des oiseaux, et les oiseaux par un épervier.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Écris la chaîne alimentaire et indique le producteur.",
+     "model": "Manioc → chenille → oiseau → épervier. Le producteur est le manioc.",
+     "rubric": [
+      "Chaîne dans le bon ordre",
+      "Producteur identifié",
+      "Flèches dans le bon sens"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-chaines-alimentaires-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que peut-il se passer pour les oiseaux si on traite toute la plantation avec un produit qui tue toutes les chenilles ?",
+     "model": "Les oiseaux manquent de nourriture et peuvent diminuer ; l'épervier risque aussi d'en souffrir.",
+     "rubric": [
+      "Conséquence sur les oiseaux",
+      "Conséquence plus haut dans la chaîne"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-chaines-alimentaires-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-svt-chaines-alimentaires-06",
+   "tier": "examen",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un herbivore se nourrit :",
+   "choices": [
+    "D'autres animaux uniquement",
+    "De roches",
+    "De végétaux",
+    "D'air"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Herbivore = mange des plantes.",
+   "id": "6e-svt-chaines-alimentaires-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est un décomposeur ?",
+   "choices": [
+    "Le lion",
+    "Le maïs",
+    "Le champignon",
+    "La chèvre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Champignons et bactéries décomposent la matière morte.",
+   "id": "6e-svt-chaines-alimentaires-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « mil → oiseau → serpent », le serpent est :",
+   "choices": [
+    "Un producteur",
+    "Un carnivore",
+    "Un décomposeur",
+    "Un herbivore"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il mange un animal.",
+   "id": "6e-svt-chaines-alimentaires-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi les plantes vertes sont-elles appelées producteurs ?",
+   "choices": [
+    "Elles fabriquent de la matière organique",
+    "Elles produisent du fer",
+    "Elles fabriquent des animaux",
+    "Elles mangent de la viande"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La photosynthèse produit matière organique.",
+   "id": "6e-svt-chaines-alimentaires-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un omnivore mange :",
+   "choices": [
+    "Seulement des végétaux",
+    "Des végétaux et des animaux",
+    "Seulement de la viande",
+    "Rien"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Omnivore : régime varié.",
+   "id": "6e-svt-chaines-alimentaires-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-chaines-alimentaires",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

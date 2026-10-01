@@ -1,0 +1,926 @@
+{
+ "chapter": "5e-english-communication",
+ "lessons": [
+  {
+   "id": "5e-english-reading",
+   "title": "Reading comprehension",
+   "minutes": 35,
+   "programRef": "5e — Anglais (APC), compréhension de textes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Lire un texte de 100 mots environ et repérer les informations.",
+    "Répondre vrai/faux/non précisé, trouver le sens d'un mot dans le contexte et identifier à quoi renvoie un pronom."
+   ],
+   "prerequisites": [
+    "5e-english-past-neg-questions",
+    "5e-english-going-to"
+   ],
+   "exercises": [
+    "5e-english-reading-01",
+    "5e-english-reading-02",
+    "5e-english-reading-03",
+    "5e-english-reading-04",
+    "5e-english-reading-05",
+    "5e-english-reading-06"
+   ],
+   "selfCheck": [
+    "5e-english-reading-q1",
+    "5e-english-reading-q2",
+    "5e-english-reading-q3",
+    "5e-english-reading-q4",
+    "5e-english-reading-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Stratégies",
+     "md": "1. **Skimming** : lis vite pour comprendre l'idée générale (titre, première phrase).\n2. **Scanning** : cherche une information précise (un nom, un chiffre, une heure).\n3. Pour un mot inconnu : regarde le **contexte**.\n4. Pour un pronom (he, it, they) : cherche **qui** ou **quoi** il remplace.\n5. Vrai / Faux / **Not given** (le texte ne le dit pas)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Texte : Market day",
+     "md": "Saturday is market day in our town. At six o'clock the sellers arrive with fruit, vegetables and fish. Mama Rose sells tomatoes. Her prices are low, so many people buy from her. Last Saturday it rained and the market was quiet, but today the weather is sunny. I am helping my mother. We are going to sell bananas and plantains. After the market we will have lunch together."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les informations repérées (who, when, where, what).",
+     "alt": "Un tableau qui note qui, quand, où et quoi pour le texte du marché.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 460,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 34,
+        "text": "Question",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 34,
+        "text": "Information",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 46,
+        "w": 460,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 70,
+        "text": "Who?",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 70,
+        "text": "the narrator and her mother",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 82,
+        "w": 460,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 106,
+        "text": "When?",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 106,
+        "text": "Saturday, six o'clock",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 118,
+        "w": 460,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 142,
+        "text": "Where?",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 142,
+        "text": "the market in town",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 154,
+        "w": 460,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 178,
+        "text": "What?",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 178,
+        "text": "sell bananas and plantains",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : vrai, faux ou non précisé",
+     "statement": "Vrai, faux ou non précisé ? « Last Saturday the market was busy. »",
+     "steps": [
+      {
+       "md": "On cherche « Last Saturday » : it rained and the market was quiet."
+      },
+      {
+       "md": "Quiet ≠ busy : faux."
+      }
+     ],
+     "answer": "**False**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : pronom",
+     "statement": "Dans « Her prices are low », à qui renvoie « Her » ?",
+     "steps": [
+      {
+       "md": "La phrase précédente : Mama Rose sells tomatoes."
+      },
+      {
+       "md": "Her = Mama Rose."
+      }
+     ],
+     "answer": "**Mama Rose**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Répondre avec ce que tu sais, pas avec ce que dit le texte.\n- Confondre **False** (le texte dit le contraire) et **Not given** (le texte ne dit rien).\n- Ne pas relire la question."
+    }
+   ],
+   "reviewNotes": [
+    "Texte original ; les épreuves officielles peuvent contenir des textes plus longs et des questions de type différent."
+   ]
+  },
+  {
+   "id": "5e-english-letter-email",
+   "title": "Writing a letter or an email",
+   "minutes": 35,
+   "programRef": "5e — Anglais (APC), expression écrite guidée : lettre, e-mail (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Organiser une lettre ou un e-mail amical (formules d'ouverture et de fin).",
+    "Raconter, décrire et annoncer des projets avec des mots de liaison."
+   ],
+   "prerequisites": [
+    "5e-english-reading",
+    "5e-english-places"
+   ],
+   "exercises": [
+    "5e-english-letter-email-01",
+    "5e-english-letter-email-02",
+    "5e-english-letter-email-03",
+    "5e-english-letter-email-04",
+    "5e-english-letter-email-05",
+    "5e-english-letter-email-06"
+   ],
+   "selfCheck": [
+    "5e-english-letter-email-q1",
+    "5e-english-letter-email-q2",
+    "5e-english-letter-email-q3",
+    "5e-english-letter-email-q4",
+    "5e-english-letter-email-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Structure",
+     "md": "1. **Date** et ville (lettre) ou **To / Subject** (e-mail).\n2. **Dear** + prénom, (ou Hi + prénom).\n3. **Introduction** : remerciement ou nouvelles (Thank you for your letter. I hope you are well.)\n4. **Corps** : 2 paragraphes (passé, présent ou projets).\n5. **Conclusion** : Write soon! / See you soon!\n6. **Best wishes,** + prénom."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Mots de liaison",
+     "md": "**and** (et) · **but** (mais) · **because** (parce que) · **so** (donc) · **first** / **then** / **after that** / **finally** (d'abord, puis, ensuite, enfin)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Modèle : e-mail",
+     "md": "To: amina@example.com\nSubject: My holidays\nDear Amina,\nThank you for your message. I hope you are well. Last week I visited my grandmother in the village. First we cooked together, then we went to the river. It was great! Next month I am going to visit you in Yaoundé. Write soon!\nBest wishes,\nBoris"
+    },
+    {
+     "type": "illustration",
+     "caption": "Les parties d'un e-mail amical.",
+     "alt": "Un tableau des parties d'un e-mail : ouverture, introduction, corps et fin.",
+     "figure": {
+      "kind": "shapes",
+      "w": 470,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 450,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 34,
+        "text": "Partie",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 34,
+        "text": "Rôle",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 46,
+        "w": 450,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 70,
+        "text": "Dear Amina,",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 70,
+        "text": "ouverture",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 82,
+        "w": 450,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 106,
+        "text": "Thank you for…",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 106,
+        "text": "introduction",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 118,
+        "w": 450,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 142,
+        "text": "Last week… Next month…",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 142,
+        "text": "corps",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 154,
+        "w": 450,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 178,
+        "text": "Write soon! Best wishes",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 178,
+        "text": "fin",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lier deux phrases",
+     "statement": "Relie : « I like football. I don't like basketball. » avec un mot de liaison.",
+     "steps": [
+      {
+       "md": "Idée d'opposition : but."
+      },
+      {
+       "md": "On écrit une seule phrase."
+      }
+     ],
+     "answer": "**I like football but I don't like basketball.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ouverture et fin",
+     "statement": "Écris l'ouverture et la fin d'un message à ton ami Nkeng.",
+     "steps": [
+      {
+       "md": "Ouverture : Dear Nkeng, Thank you for your message."
+      },
+      {
+       "md": "Fin : Write soon! Best wishes, + ton prénom."
+      }
+     ],
+     "answer": "**Dear Nkeng, Thank you for your message. … Write soon! Best wishes, Amina**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la virgule après **Dear Amina,**.\n- Mélanger passé et futur sans mots repères (**last week**, **next month**).\n- Écrire un seul long paragraphe : fais 2 ou 3 paragraphes courts."
+    }
+   ],
+   "reviewNotes": [
+    "Les formules (Dear…, Yours/Best wishes) varient selon les manuels ; la lettre officielle n'est pas traitée. Nombre de mots attendu à l'examen : à vérifier."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "D'après le texte, à quelle heure arrivent les vendeurs ?",
+   "choices": [
+    "à sept heures",
+    "à midi",
+    "à huit heures",
+    "à six heures"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "At six o'clock.",
+   "id": "5e-english-reading-01",
+   "tier": "application",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vend Mama Rose ?",
+   "choices": [
+    "du poisson",
+    "des bananes",
+    "des plantains",
+    "des tomates"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Mama Rose sells tomatoes.",
+   "id": "5e-english-reading-02",
+   "tier": "application",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Aujourd'hui, il pleut.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "The text says: today the weather is sunny.",
+   "id": "5e-english-reading-03",
+   "tier": "application",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le texte dit : « We are going to sell bananas and plantains. » Que va-t-il se passer ?",
+   "choices": [
+    "Ils ont vendu des bananes hier.",
+    "Ils vont vendre des bananes et des plantains.",
+    "Ils vendent toujours des tomates.",
+    "Ils achètent des bananes."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "going to = futur proche.",
+   "id": "5e-english-reading-04",
+   "tier": "approfondissement",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi beaucoup de gens achètent chez Mama Rose ?",
+   "choices": [
+    "Parce qu'elle vend du poisson.",
+    "Parce que ses prix sont bas.",
+    "Parce qu'il pleut.",
+    "Parce qu'elle est la mère du narrateur."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Her prices are low, so many people buy from her.",
+   "id": "5e-english-reading-05",
+   "tier": "approfondissement",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Lis ce texte : « My cousin Nkeng lives in Garoua. He is twelve. He goes to school by bike. He loves football and he plays every Saturday. Yesterday his team won 2-1. Tomorrow he is going to visit his grandfather. »",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel âge a Nkeng ?",
+     "answer": 12,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "He is twelve.",
+     "id": "5e-english-reading-06-a"
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Nkeng va à l'école à pied.",
+     "answer": false,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "He goes to school by bike.",
+     "id": "5e-english-reading-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quand son équipe a-t-elle gagné ?",
+     "choices": [
+      "aujourd'hui",
+      "hier",
+      "demain",
+      "samedi prochain"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Yesterday his team won.",
+     "id": "5e-english-reading-06-c"
+    },
+    {
+     "kind": "open",
+     "prompt": "Réponds par une phrase complète : What is Nkeng going to do tomorrow?",
+     "model": "He is going to visit his grandfather.",
+     "rubric": [
+      "La phrase est complète.",
+      "La structure going to est correcte."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-english-reading-06-d"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-english-reading-06",
+   "tier": "examen",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire « skimming » ?",
+   "choices": [
+    "chercher un mot précis",
+    "lire vite pour l'idée générale",
+    "traduire tout",
+    "recopier le texte"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "skim = survoler.",
+   "id": "5e-english-reading-q1",
+   "tier": "autoeval",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Not given » signifie :",
+   "choices": [
+    "c'est vrai",
+    "c'est faux",
+    "c'est écrit deux fois",
+    "le texte ne le dit pas"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Information absente.",
+   "id": "5e-english-reading-q2",
+   "tier": "autoeval",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour un mot inconnu, on :",
+   "choices": [
+    "regarde le contexte",
+    "saute la phrase",
+    "abandonne",
+    "invente"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le contexte aide.",
+   "id": "5e-english-reading-q3",
+   "tier": "autoeval",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« sunny » veut dire :",
+   "choices": [
+    "pluvieux",
+    "nuageux",
+    "ensoleillé",
+    "froid"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "sunny = ensoleillé.",
+   "id": "5e-english-reading-q4",
+   "tier": "autoeval",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Nkeng is twelve. He plays football », « He » renvoie à :",
+   "choices": [
+    "Nkeng",
+    "football",
+    "twelve",
+    "school"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "He remplace Nkeng.",
+   "id": "5e-english-reading-q5",
+   "tier": "autoeval",
+   "lesson": "5e-english-reading",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment commence un e-mail amical ?",
+   "choices": [
+    "Dear Amina,",
+    "Goodbye Amina",
+    "Yours truly",
+    "Open your book"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dear + prénom.",
+   "id": "5e-english-letter-email-01",
+   "tier": "application",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Write soon! » signifie :",
+   "choices": [
+    "Écris lentement",
+    "Ne m'écris pas",
+    "Écris-moi vite !",
+    "J'écris demain"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "soon = bientôt.",
+   "id": "5e-english-letter-email-02",
+   "tier": "application",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot relie deux idées opposées ?",
+   "choices": [
+    "and",
+    "but",
+    "because",
+    "so"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "but = mais.",
+   "id": "5e-english-letter-email-03",
+   "tier": "application",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase annonce un projet ?",
+   "choices": [
+    "Last week I visited you.",
+    "I visit you every day.",
+    "I don't visit you.",
+    "Next month I am going to visit you."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "next month + going to.",
+   "id": "5e-english-letter-email-04",
+   "tier": "approfondissement",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot de liaison introduit une raison ?",
+   "choices": [
+    "but",
+    "then",
+    "finally",
+    "because"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "because = parce que.",
+   "id": "5e-english-letter-email-05",
+   "tier": "approfondissement",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris un e-mail de 6 à 8 phrases à un ami pour raconter tes dernières vacances (past simple) et annoncer un projet (going to ou will). Utilise Dear…, deux mots de liaison et Write soon.",
+   "model": "Dear Nkeng,\nThank you for your message. Last week I visited my uncle in Douala. First we went to the market, then we ate fish. It was fun but it was hot. Next month I am going to play in a football match. Write soon!\nBest wishes,\nAmina",
+   "rubric": [
+    "Ouverture avec Dear + prénom.",
+    "Au moins 6 phrases.",
+    "Past simple correct pour le passé.",
+    "Un projet au futur.",
+    "Deux mots de liaison.",
+    "Fin et signature."
+   ],
+   "points": 6,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-english-letter-email-06",
+   "tier": "examen",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où met-on la signature ?",
+   "choices": [
+    "au début",
+    "à la fin",
+    "au milieu",
+    "dans l'objet"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Signature : fin.",
+   "id": "5e-english-letter-email-q1",
+   "tier": "autoeval",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Subject » dans un e-mail est :",
+   "choices": [
+    "l'objet du message",
+    "le destinataire",
+    "la signature",
+    "la date"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Subject = objet.",
+   "id": "5e-english-letter-email-q2",
+   "tier": "autoeval",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« First, then, finally » servent à :",
+   "choices": [
+    "poser une question",
+    "compter",
+    "saluer",
+    "ordonner les événements"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "mots de liaison.",
+   "id": "5e-english-letter-email-q3",
+   "tier": "autoeval",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« I hope you are well » est :",
+   "choices": [
+    "une consigne",
+    "une phrase d'introduction",
+    "une négation",
+    "un projet"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Formule de politesse.",
+   "id": "5e-english-letter-email-q4",
+   "tier": "autoeval",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Best wishes » est :",
+   "choices": [
+    "une formule de fin",
+    "un début de lettre",
+    "une date",
+    "un mot interrogatif"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Formule finale.",
+   "id": "5e-english-letter-email-q5",
+   "tier": "autoeval",
+   "lesson": "5e-english-letter-email",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

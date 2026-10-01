@@ -1,0 +1,416 @@
+{
+ "chapter": "3e-informatique-securite",
+ "lessons": [
+  {
+   "id": "3e-informatique-securite-informatique",
+   "title": "Menaces, protection et sauvegarde",
+   "minutes": 35,
+   "programRef": "3e — Sécurité des données et des réseaux (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître les principales menaces (virus, hameçonnage, mot de passe faible).",
+    "Citer des moyens de protection (antivirus, mises à jour, mots de passe, sauvegarde).",
+    "Appliquer la règle des trois copies."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "3e-informatique-securite-informatique-01",
+    "3e-informatique-securite-informatique-02",
+    "3e-informatique-securite-informatique-03",
+    "3e-informatique-securite-informatique-04",
+    "3e-informatique-securite-informatique-05",
+    "3e-informatique-securite-informatique-06"
+   ],
+   "selfCheck": [
+    "3e-informatique-securite-informatique-q1",
+    "3e-informatique-securite-informatique-q2",
+    "3e-informatique-securite-informatique-q3",
+    "3e-informatique-securite-informatique-q4",
+    "3e-informatique-securite-informatique-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les menaces",
+     "md": "- **Virus et logiciels malveillants** : programmes qui s'installent à notre insu pour détruire ou voler des données.\n- **Hameçonnage** : faux message (courriel, SMS, site) qui imite une organisation pour obtenir mot de passe ou argent.\n- **Mot de passe faible** ou réutilisé partout : facile à deviner.\n- **Perte de données** : panne, vol, coupure de courant, fausse manipulation."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une menace appelle une protection.",
+     "alt": "Schéma : menace, protection, résultat, avec un exemple sous chaque bloc.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 122,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 128.0,
+        "h": 44,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 74.0,
+        "y": 43,
+        "text": "Menace",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 141.0,
+        "y1": 37,
+        "x2": 163.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 74.0,
+        "y": 80,
+        "text": "virus",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 166.0,
+        "y": 15,
+        "w": 128.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 43,
+        "text": "Protection",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 297.0,
+        "y1": 37,
+        "x2": 319.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 80,
+        "text": "antivirus + mises à jour",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 322.0,
+        "y": 15,
+        "w": 128.0,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 386.0,
+        "y": 43,
+        "text": "Résultat",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 386.0,
+        "y": 80,
+        "text": "machine saine",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Se protéger",
+     "md": "- **Antivirus** à jour et **mises à jour** du système.\n- **Mot de passe fort** : long, mélange de lettres, chiffres et symboles, différent pour chaque compte ; ne jamais le partager.\n- **Prudence** : ne pas cliquer sur un lien ou une pièce jointe douteuse ; vérifier l'expéditeur.\n- **Sauvegarde** : 3 copies des données importantes, sur 2 supports différents, dont 1 copie hors de l'appareil (clé, disque externe, autre lieu)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : reconnaître l'hameçonnage",
+     "statement": "Boris reçoit un SMS : « Votre compte sera fermé, envoyez votre code secret à ce numéro. » Que doit-il faire ?",
+     "steps": [
+      {
+       "md": "Aucune organisation sérieuse ne demande un code secret par SMS."
+      },
+      {
+       "md": "Il ne répond pas, ne clique sur aucun lien et signale le message à un adulte."
+      }
+     ],
+     "answer": "**Ne pas répondre : c'est probablement de l'hameçonnage**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : force d'un mot de passe",
+     "statement": "Combien de codes différents peut-on former avec 4 chiffres ? avec 8 chiffres ? avec 6 lettres minuscules ?",
+     "steps": [
+      {
+       "md": "4 chiffres : 10 × 10 × 10 × 10 = 10 000. 8 chiffres : 10 puissance 8 = 100 000 000."
+      },
+      {
+       "md": "6 lettres minuscules : 26 puissance 6 = 308 915 776."
+      }
+     ],
+     "answer": "**10 000 ; 100 000 000 ; 308 915 776**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser 1234, la date de naissance ou son prénom comme mot de passe.\n- Garder le même mot de passe partout : une fuite sur un site expose tous les comptes.\n- Croire que l'antivirus suffit : la prudence reste indispensable.\n- Garder la sauvegarde au même endroit que l'original : incendie ou vol détruisent les deux."
+    }
+   ],
+   "reviewNotes": [
+    "Pas de nom de logiciel ni de marque. Les chiffres de combinaisons sont des calculs mathématiques exacts, pas des statistiques d'attaques.",
+    "Règle de sauvegarde « 3-2-1 » : pratique courante ; adapter au contexte (peu de matériel, électricité instable)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot de passe est le plus solide ?",
+   "choices": [
+    "123456",
+    "amina",
+    "motdepasse",
+    "Mb7!kP2#rQ9z"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Long, avec lettres, chiffres et symboles, non devinable.",
+   "id": "3e-informatique-securite-informatique-01",
+   "tier": "application",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le hameçonnage est :",
+   "choices": [
+    "Un type de câble",
+    "Un antivirus",
+    "Un faux message qui cherche à voler des informations",
+    "Une sauvegarde"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On « pêche » les informations de la victime.",
+   "id": "3e-informatique-securite-informatique-02",
+   "tier": "application",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut prêter son mot de passe à un ami proche sans risque.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un mot de passe est personnel ; l'ami peut en faire un mauvais usage ou le perdre.",
+   "id": "3e-informatique-securite-informatique-03",
+   "tier": "application",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de codes de 3 chiffres différents (de 000 à 999) ?",
+   "answer": 1000,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "10 × 10 × 10 = 1 000.",
+   "id": "3e-informatique-securite-informatique-04",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi faut-il mettre à jour le système ?",
+   "choices": [
+    "Pour consommer plus",
+    "Pour effacer ses fichiers",
+    "Pour corriger des failles de sécurité",
+    "Pour changer le mot de passe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les mises à jour corrigent des faiblesses exploitées par les attaques.",
+   "id": "3e-informatique-securite-informatique-05",
+   "tier": "approfondissement",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng garde son seul exemplaire de ses devoirs sur la clé USB qu'il porte dans son sac.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Quel risque court-il ?",
+     "model": "Perte, vol, panne ou virus de la clé : il perdrait tous ses devoirs.",
+     "rubric": [
+      "Identifie la perte ou la panne"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-securite-informatique-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose un plan de sauvegarde en appliquant la règle des trois copies.",
+     "model": "Garder l'original sur l'ordinateur, une copie sur la clé et une copie sur un autre support ou chez un proche.",
+     "rubric": [
+      "Au moins trois copies",
+      "Deux supports différents",
+      "Une copie ailleurs"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "3e-informatique-securite-informatique-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "3e-informatique-securite-informatique-06",
+   "tier": "examen",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un antivirus sert à :",
+   "choices": [
+    "Écrire des textes",
+    "Détecter et supprimer des logiciels malveillants",
+    "Créer des tableurs",
+    "Augmenter l'écran"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est sa fonction.",
+   "id": "3e-informatique-securite-informatique-q1",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un bon mot de passe est :",
+   "choices": [
+    "Court et simple",
+    "Identique partout",
+    "Long et différent pour chaque compte",
+    "Le prénom"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Longueur et variété.",
+   "id": "3e-informatique-securite-informatique-q2",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où garder une copie de sauvegarde ?",
+   "choices": [
+    "Au même endroit que l'original",
+    "Dans le même dossier",
+    "Sur un autre support, si possible ailleurs",
+    "Nulle part"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pour résister à une panne ou un vol.",
+   "id": "3e-informatique-securite-informatique-q3",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un message inconnu avec une pièce jointe suspecte :",
+   "choices": [
+    "Ouvrir vite",
+    "Transmettre à tous",
+    "Répondre avec son mot de passe",
+    "Ne pas l'ouvrir"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Risque de virus.",
+   "id": "3e-informatique-securite-informatique-q4",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de codes de 2 chiffres (00 à 99) ?",
+   "choices": [
+    "20",
+    "100",
+    "10",
+    "99"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10 × 10 = 100.",
+   "id": "3e-informatique-securite-informatique-q5",
+   "tier": "autoeval",
+   "lesson": "3e-informatique-securite-informatique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

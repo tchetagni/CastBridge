@@ -1,0 +1,1319 @@
+{
+ "chapter": "5e-francais-lecture",
+ "lessons": [
+  {
+   "id": "5e-francais-recit-passe",
+   "title": "Étudier un récit au passé",
+   "minutes": 30,
+   "programRef": "5e — Lecture : le texte narratif (narrateur, temps du récit, schéma narratif) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Repérer le narrateur, le point de vue et les temps d'un récit au passé.",
+    "Distinguer premier plan (passé simple) et arrière-plan (imparfait)."
+   ],
+   "prerequisites": [
+    "5e-francais-passe-simple"
+   ],
+   "exercises": [
+    "5e-francais-recit-passe-01",
+    "5e-francais-recit-passe-02",
+    "5e-francais-recit-passe-03",
+    "5e-francais-recit-passe-04",
+    "5e-francais-recit-passe-05",
+    "5e-francais-recit-passe-06"
+   ],
+   "selfCheck": [
+    "5e-francais-recit-passe-q1",
+    "5e-francais-recit-passe-q2",
+    "5e-francais-recit-passe-q3",
+    "5e-francais-recit-passe-q4",
+    "5e-francais-recit-passe-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ce qu'on étudie dans un récit",
+     "md": "- Le **narrateur** : qui raconte ? (*je* = narrateur personnage ; *il/elle* = narrateur extérieur).\n- Le **cadre** : lieu et moment.\n- Les **personnages** et leurs sentiments.\n- Le **schéma narratif** et les **péripéties**.\n- Les **temps** : **passé simple** pour les actions principales (premier plan), **imparfait** pour le décor et les actions qui durent (arrière-plan)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les temps du récit au passé.",
+     "alt": "Un tableau avec trois lignes : arrière-plan à l'imparfait, premier plan au passé simple, antériorité au plus-que-parfait, chacune avec un exemple.",
+     "figure": {
+      "kind": "shapes",
+      "w": 604,
+      "h": 159,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 126,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 28,
+        "text": "Plan",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 4,
+        "w": 161,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.5,
+        "y": 28,
+        "text": "Temps",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 291,
+        "y": 4,
+        "w": 309,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 445.5,
+        "y": 28,
+        "text": "Exemple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 126,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 64,
+        "text": "arrière-plan",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 40,
+        "w": 161,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.5,
+        "y": 64,
+        "text": "imparfait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 291,
+        "y": 40,
+        "w": 309,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 445.5,
+        "y": 64,
+        "text": "La nuit tombait.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 126,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 100,
+        "text": "premier plan",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 76,
+        "w": 161,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.5,
+        "y": 100,
+        "text": "passé simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 291,
+        "y": 76,
+        "w": 309,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 445.5,
+        "y": 100,
+        "text": "Nkeng frappa à la porte.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 126,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 67.0,
+        "y": 136,
+        "text": "antériorité",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 112,
+        "w": 161,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.5,
+        "y": 136,
+        "text": "plus-que-parfait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 291,
+        "y": 112,
+        "w": 309,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 445.5,
+        "y": 136,
+        "text": "Il avait marché toute la journée.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "text",
+     "md": "Texte étudié : « Quand la nuit tomba, Nkeng était toujours sur la route. Il avait marché toute la journée sans croiser personne et ses jambes tremblaient de fatigue. Soudain, une lumière apparut entre les arbres. Il hâta le pas, frappa trois fois à la porte d'une petite case. Une vieille femme ouvrit, le regarda sans un mot, puis s'écarta pour le laisser entrer. »"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : temps du récit",
+     "statement": "Classe les verbes : tomba, était, avait marché, tremblaient, apparut, frappa.",
+     "steps": [
+      {
+       "md": "Passé simple (actions de premier plan) : tomba, apparut, frappa."
+      },
+      {
+       "md": "Imparfait (arrière-plan) : était, tremblaient. Plus-que-parfait (antérieur) : avait marché."
+      }
+     ],
+     "answer": "**passé simple : tomba, apparut, frappa ; imparfait : était, tremblaient ; plus-que-parfait : avait marché**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : narrateur et sentiments",
+     "statement": "Quel est le narrateur ? Quel sentiment éprouve Nkeng ?",
+     "steps": [
+      {
+       "md": "On lit « il », « Nkeng » : narrateur extérieur à l'histoire."
+      },
+      {
+       "md": "Ses jambes tremblent de fatigue, il hâte le pas en voyant la lumière : fatigue et soulagement."
+      }
+     ],
+     "answer": "**narrateur extérieur ; fatigue, puis espoir/soulagement**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre narrateur et auteur.\n- Mettre tous les verbes au passé simple, même ceux qui décrivent.\n- Oublier de citer le texte : *« Il hâta le pas »* prouve l'espoir de Nkeng."
+    }
+   ],
+   "reviewNotes": [
+    "Texte entièrement original.",
+    "La notion de « point de vue » (focalisation) est présentée en termes simples ; le vocabulaire savant est évité."
+   ]
+  },
+  {
+   "id": "5e-francais-portrait-lieu",
+   "title": "Étudier une description : portrait et lieu",
+   "minutes": 25,
+   "programRef": "5e — Lecture : le texte descriptif (portrait, lieu) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Repérer l'organisation, les expansions du nom et les comparaisons d'une description.",
+    "Dégager l'impression produite."
+   ],
+   "prerequisites": [
+    "5e-francais-expansions"
+   ],
+   "exercises": [
+    "5e-francais-portrait-lieu-01",
+    "5e-francais-portrait-lieu-02",
+    "5e-francais-portrait-lieu-03",
+    "5e-francais-portrait-lieu-04",
+    "5e-francais-portrait-lieu-05",
+    "5e-francais-portrait-lieu-06"
+   ],
+   "selfCheck": [
+    "5e-francais-portrait-lieu-q1",
+    "5e-francais-portrait-lieu-q2",
+    "5e-francais-portrait-lieu-q3",
+    "5e-francais-portrait-lieu-q4",
+    "5e-francais-portrait-lieu-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Étudier une description",
+     "md": "1. **Le sujet décrit** : qui ou quoi ? (le titre, la première phrase).\n2. **L'organisation** : de l'ensemble aux détails ? du haut vers le bas ?\n3. **Les procédés** : adjectifs, compléments du nom, relatives, comparaisons, métaphores.\n4. **L'impression** : douceur, mystère, force… ce que le texte fait ressentir."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le déroulé d'une description.",
+     "alt": "Trois cadres reliés : vue d'ensemble, détails, impression.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 111,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 12,
+        "w": 145,
+        "h": 46,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 80.5,
+        "y": 42,
+        "text": "Vue d'ensemble",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 155,
+        "y1": 35,
+        "x2": 175,
+        "y2": 35,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 177,
+        "y": 12,
+        "w": 84,
+        "h": 46,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 42,
+        "text": "Détails",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 263,
+        "y1": 35,
+        "x2": 283,
+        "y2": 35,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 285,
+        "y": 12,
+        "w": 111,
+        "h": 46,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.5,
+        "y": 42,
+        "text": "Impression",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "text",
+     "md": "Texte étudié (portrait) : « Tante Ngono était une grande femme au dos droit, qui marchait lentement comme une reine. Ses cheveux gris, noués dans un foulard jaune, encadraient un visage ridé aux yeux brillants. Elle portait toujours un pagne bleu, délavé par les lavages, et ses mains, usées par le travail, semblaient avoir tout appris. Tout le quartier la respectait. »"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : les procédés",
+     "statement": "Relève une comparaison, une relative et un complément du nom dans le texte étudié.",
+     "steps": [
+      {
+       "md": "Comparaison : « marchait lentement comme une reine ». Relative : « qui marchait lentement »."
+      },
+      {
+       "md": "Complément du nom : « de travail » dans « usées par le travail », ou « au dos droit »."
+      }
+     ],
+     "answer": "**comparaison : comme une reine ; relative : qui marchait… ; complément : au dos droit**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : l'impression",
+     "statement": "Quelle impression se dégage du portrait de tante Ngono ?",
+     "steps": [
+      {
+       "md": "Elle est « grande », « droite », elle marche « comme une reine », et « tout le quartier la respectait »."
+      },
+      {
+       "md": "On sent dignité et respect."
+      }
+     ],
+     "answer": "**Une impression de dignité et de sagesse.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Relever seulement les adjectifs et oublier les comparaisons et les relatives.\n- Parler du caractère sans le justifier par le texte.\n- Mélanger portrait physique et moral sans les distinguer."
+    }
+   ],
+   "reviewNotes": [
+    "Texte original ; la description est volontairement courte pour la lecture sur téléphone."
+   ]
+  },
+  {
+   "id": "5e-francais-argumentatif",
+   "title": "Le texte argumentatif simple",
+   "minutes": 30,
+   "programRef": "5e — Lecture : initiation au texte argumentatif (thèse, arguments, exemples) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Repérer la thèse, les arguments et les exemples d'un texte argumentatif.",
+    "Reconnaître les connecteurs logiques."
+   ],
+   "prerequisites": [
+    "5e-francais-circonstanciels"
+   ],
+   "exercises": [
+    "5e-francais-argumentatif-01",
+    "5e-francais-argumentatif-02",
+    "5e-francais-argumentatif-03",
+    "5e-francais-argumentatif-04",
+    "5e-francais-argumentatif-05",
+    "5e-francais-argumentatif-06"
+   ],
+   "selfCheck": [
+    "5e-francais-argumentatif-q1",
+    "5e-francais-argumentatif-q2",
+    "5e-francais-argumentatif-q3",
+    "5e-francais-argumentatif-q4",
+    "5e-francais-argumentatif-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Argumenter",
+     "md": "**Argumenter**, c'est **défendre une idée** (la **thèse**) pour **convaincre**. On donne des **arguments** (raisons) soutenus par des **exemples**. Les **connecteurs logiques** montrent les liens : **car, parce que** (cause), **donc, c'est pourquoi** (conséquence), **mais, pourtant** (opposition), **d'abord, ensuite, enfin** (ordre)."
+    },
+    {
+     "type": "illustration",
+     "caption": "La structure d'un texte argumentatif.",
+     "alt": "Quatre cadres reliés : thèse, argument 1 avec exemple, argument 2 avec exemple, conclusion.",
+     "figure": {
+      "kind": "shapes",
+      "w": 365,
+      "h": 164,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 12,
+        "w": 67,
+        "h": 46,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 41.5,
+        "y": 42,
+        "text": "Thèse",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 77,
+        "y1": 35,
+        "x2": 97,
+        "y2": 35,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 99,
+        "y": 12,
+        "w": 198,
+        "h": 46,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 198.0,
+        "y": 42,
+        "text": "Argument 1 + exemple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 88,
+        "w": 198,
+        "h": 46,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 107.0,
+        "y": 118,
+        "text": "Argument 2 + exemple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 208,
+        "y1": 111,
+        "x2": 228,
+        "y2": 111,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 88,
+        "w": 111,
+        "h": 46,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 285.5,
+        "y": 118,
+        "text": "Conclusion",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "text",
+     "md": "Texte étudié : « Il faut lire chaque jour. D'abord, la lecture enrichit le vocabulaire : un élève qui lit connaît plus de mots et s'exprime mieux. Ensuite, elle améliore l'orthographe, car on voit souvent les mots bien écrits. Enfin, lire est un plaisir : un bon livre fait voyager sans quitter sa chambre. C'est pourquoi chacun devrait lire un peu tous les jours. »"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : thèse et arguments",
+     "statement": "Relève la thèse et les arguments du texte.",
+     "steps": [
+      {
+       "md": "Thèse : « Il faut lire chaque jour. »"
+      },
+      {
+       "md": "Arguments : enrichit le vocabulaire ; améliore l'orthographe ; est un plaisir."
+      }
+     ],
+     "answer": "**Thèse : il faut lire chaque jour. Arguments : vocabulaire, orthographe, plaisir.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : connecteurs",
+     "statement": "Relève les connecteurs et indique leur rôle.",
+     "steps": [
+      {
+       "md": "« D'abord, ensuite, enfin » : ordre des arguments. « car » : cause."
+      },
+      {
+       "md": "« C'est pourquoi » : conséquence (conclusion)."
+      }
+     ],
+     "answer": "**d'abord/ensuite/enfin : ordre ; car : cause ; c'est pourquoi : conséquence**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Donner son avis sans argument (« c'est bien »).\n- Confondre argument (raison) et exemple (illustration).\n- Oublier les connecteurs : sans eux le texte n'est qu'une liste."
+    }
+   ],
+   "reviewNotes": [
+    "L'argumentation est souvent abordée plus nettement en 4e/3e ; la fiche est une initiation."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe du texte étudié est au plus-que-parfait ?",
+   "choices": [
+    "était",
+    "avait marché",
+    "apparut",
+    "ouvrit"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Auxiliaire à l'imparfait + participe.",
+   "id": "5e-francais-recit-passe-01",
+   "tier": "application",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi « tremblaient » est-il à l'imparfait ?",
+   "choices": [
+    "Il marque une action brève",
+    "Il exprime un ordre",
+    "Il annonce le futur",
+    "Il décrit un état qui dure"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Arrière-plan : état qui dure.",
+   "id": "5e-francais-recit-passe-02",
+   "tier": "application",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait Nkeng quand il voit la lumière ?",
+   "choices": [
+    "Il rebrousse chemin",
+    "Il s'endort",
+    "Il crie",
+    "Il hâte le pas"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il accélère.",
+   "id": "5e-francais-recit-passe-03",
+   "tier": "application",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle de « Soudain » ?",
+   "choices": [
+    "Il décrit un lieu",
+    "Il donne un ordre",
+    "Il ferme le récit",
+    "Il introduit un événement inattendu"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "C'est l'élément perturbateur.",
+   "id": "5e-francais-recit-passe-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à son rôle dans le récit.",
+   "pairs": [
+    [
+     "était",
+     "décor"
+    ],
+    [
+     "frappa",
+     "action principale"
+    ],
+    [
+     "avait marché",
+     "action antérieure"
+    ],
+    [
+     "tremblaient",
+     "état qui dure"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Imparfait = arrière-plan ; passé simple = premier plan ; plus-que-parfait = antériorité.",
+   "id": "5e-francais-recit-passe-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Réponds par des phrases justifiées par le texte : a) Quel est l'élément perturbateur ? b) Comment la vieille femme accueille-t-elle Nkeng ? c) À quel temps est écrit l'essentiel du récit ?",
+   "model": "a) L'élément perturbateur est l'apparition d'une lumière entre les arbres (« Soudain, une lumière apparut »). b) Elle l'accueille silencieusement : « le regarda sans un mot, puis s'écarta pour le laisser entrer ». c) Les actions sont au passé simple, le décor à l'imparfait.",
+   "rubric": [
+    "La réponse a) repère « Soudain, une lumière apparut ».",
+    "La réponse b) cite le texte.",
+    "La réponse c) distingue passé simple et imparfait.",
+    "Réponses rédigées en phrases complètes."
+   ],
+   "points": 5,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-recit-passe-06",
+   "tier": "examen",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert l'imparfait dans un récit au passé ?",
+   "choices": [
+    "À donner un ordre",
+    "À exprimer le futur",
+    "À faire avancer chaque action",
+    "À décrire le décor et les actions qui durent"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Arrière-plan.",
+   "id": "5e-francais-recit-passe-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un narrateur extérieur parle à la…",
+   "choices": [
+    "1re personne",
+    "2e personne du pluriel",
+    "3e personne",
+    "forme impérative"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il / elle.",
+   "id": "5e-francais-recit-passe-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe est au passé simple ?",
+   "choices": [
+    "ouvrait",
+    "ouvre",
+    "ouvrit",
+    "avait ouvert"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Terminaison -it.",
+   "id": "5e-francais-recit-passe-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot introduit un événement brusque ?",
+   "choices": [
+    "pendant",
+    "soudain",
+    "autrefois",
+    "chaque jour"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Connecteur de rupture.",
+   "id": "5e-francais-recit-passe-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment justifier une réponse sur un texte ?",
+   "choices": [
+    "En inventant",
+    "En citant le passage",
+    "En recopiant tout le texte",
+    "En changeant de sujet"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On cite les mots du texte.",
+   "id": "5e-francais-recit-passe-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-recit-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la couleur du foulard de tante Ngono ?",
+   "choices": [
+    "Bleu",
+    "Jaune",
+    "Gris",
+    "Rouge"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le texte dit « un foulard jaune ».",
+   "id": "5e-francais-portrait-lieu-01",
+   "tier": "application",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle comparaison trouve-t-on ?",
+   "choices": [
+    "des yeux brillants",
+    "un pagne bleu",
+    "comme une reine",
+    "tout le quartier"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle marche comme une reine.",
+   "id": "5e-francais-portrait-lieu-02",
+   "tier": "application",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le texte présente un portrait physique et un trait moral.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Physique : dos droit, visage ridé ; moral : respect de tout le quartier.",
+   "id": "5e-francais-portrait-lieu-03",
+   "tier": "application",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel adjectif du texte exprime l'usure ?",
+   "choices": [
+    "jaune",
+    "droit",
+    "délavé",
+    "lent"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« délavé » : couleur effacée par les lavages.",
+   "id": "5e-francais-portrait-lieu-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque groupe à son procédé.",
+   "pairs": [
+    [
+     "comme une reine",
+     "comparaison"
+    ],
+    [
+     "qui marchait lentement",
+     "proposition relative"
+    ],
+    [
+     "un visage ridé",
+     "adjectif épithète"
+    ],
+    [
+     "usées par le travail",
+     "participe épithète"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Différentes expansions du nom.",
+   "id": "5e-francais-portrait-lieu-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Étudie le texte en trois phrases : a) De quel type de texte s'agit-il ? b) Comment le portrait est-il organisé ? c) Quelle impression se dégage ?",
+   "model": "a) C'est un portrait de tante Ngono. b) Il va de l'allure générale (grande, dos droit) aux détails du visage, du foulard, du pagne et des mains, puis termine par le respect du quartier. c) Il donne une impression de dignité, de sagesse et de force tranquille.",
+   "rubric": [
+    "Le type de texte est nommé.",
+    "L'organisation est décrite avec des exemples.",
+    "L'impression est justifiée.",
+    "Phrases complètes."
+   ],
+   "points": 5,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-portrait-lieu-06",
+   "tier": "examen",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'étudie-t-on dans l'organisation d'une description ?",
+   "choices": [
+    "L'ordre dans lequel on présente les détails",
+    "La longueur du titre",
+    "Le nom de l'imprimeur",
+    "La couleur du papier"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "De l'ensemble au détail.",
+   "id": "5e-francais-portrait-lieu-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est un adjectif épithète ?",
+   "choices": [
+    "ridé",
+    "marchait",
+    "comme",
+    "portait"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« visage ridé ».",
+   "id": "5e-francais-portrait-lieu-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie « délavé » ?",
+   "choices": [
+    "Très propre",
+    "Neuf",
+    "Brillant",
+    "Dont la couleur est effacée par les lavages"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Délavé : pâli.",
+   "id": "5e-francais-portrait-lieu-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une comparaison est introduite par…",
+   "choices": [
+    "comme",
+    "mais",
+    "ainsi",
+    "donc"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Comme, tel, pareil à.",
+   "id": "5e-francais-portrait-lieu-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps domine dans le portrait de tante Ngono ?",
+   "choices": [
+    "Le futur",
+    "Le passé simple",
+    "L'impératif",
+    "L'imparfait"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il décrit un état durable.",
+   "id": "5e-francais-portrait-lieu-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-portrait-lieu",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la thèse du texte étudié ?",
+   "choices": [
+    "Lire est difficile.",
+    "Les livres sont chers.",
+    "On lit seulement à l'école.",
+    "Il faut lire chaque jour."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la première phrase.",
+   "id": "5e-francais-argumentatif-01",
+   "tier": "application",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel connecteur exprime la cause ?",
+   "choices": [
+    "donc",
+    "enfin",
+    "pourtant",
+    "car"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« elle améliore l'orthographe, car… »",
+   "id": "5e-francais-argumentatif-02",
+   "tier": "application",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel connecteur annonce la conclusion ?",
+   "choices": [
+    "C'est pourquoi",
+    "D'abord",
+    "Ensuite",
+    "Pourtant"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conséquence.",
+   "id": "5e-francais-argumentatif-03",
+   "tier": "application",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le deuxième argument du texte ?",
+   "choices": [
+    "La lecture améliore l'orthographe",
+    "La lecture enrichit le vocabulaire",
+    "Lire est un plaisir",
+    "Les livres sont beaux"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Après « Ensuite ».",
+   "id": "5e-francais-argumentatif-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque connecteur à son rôle.",
+   "pairs": [
+    [
+     "car",
+     "cause"
+    ],
+    [
+     "donc",
+     "conséquence"
+    ],
+    [
+     "mais",
+     "opposition"
+    ],
+    [
+     "d'abord",
+     "ordre"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Les connecteurs logiques organisent la pensée.",
+   "id": "5e-francais-argumentatif-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Défends l'idée « Il faut faire du sport » : écris un paragraphe de 6 à 8 lignes avec une thèse, deux arguments, un exemple et une conclusion. Utilise au moins trois connecteurs.",
+   "model": "Il faut faire du sport. D'abord, le sport garde en bonne santé, car il fortifie le cœur et les muscles. Par exemple, un élève qui court chaque matin se fatigue moins en classe. Ensuite, le sport apprend à travailler en équipe : au football, on gagne ensemble. C'est pourquoi chacun devrait pratiquer une activité sportive.",
+   "rubric": [
+    "Une thèse claire.",
+    "Deux arguments distincts.",
+    "Au moins un exemple.",
+    "Au moins trois connecteurs logiques et une conclusion."
+   ],
+   "points": 6,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-argumentatif-06",
+   "tier": "examen",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que la thèse ?",
+   "choices": [
+    "Un exemple",
+    "Un titre",
+    "Un mot de liaison",
+    "L'idée défendue"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La thèse est ce qu'on veut prouver.",
+   "id": "5e-francais-argumentatif-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert un exemple ?",
+   "choices": [
+    "À remplacer la thèse",
+    "À donner un ordre",
+    "À illustrer un argument",
+    "À terminer la phrase"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il rend l'argument concret.",
+   "id": "5e-francais-argumentatif-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel connecteur marque l'opposition ?",
+   "choices": [
+    "car",
+    "donc",
+    "puis",
+    "pourtant"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pourtant, mais, cependant.",
+   "id": "5e-francais-argumentatif-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel connecteur ouvre une série d'arguments ?",
+   "choices": [
+    "enfin",
+    "donc",
+    "d'abord",
+    "bref"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Premier argument.",
+   "id": "5e-francais-argumentatif-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le but d'un texte argumentatif ?",
+   "choices": [
+    "Raconter",
+    "Convaincre",
+    "Décrire un lieu",
+    "Faire rimer"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On défend une idée.",
+   "id": "5e-francais-argumentatif-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

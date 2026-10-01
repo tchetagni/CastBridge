@@ -1,0 +1,350 @@
+{
+ "chapter": "bepc-maths-statistiques",
+ "lessons": [
+  {
+   "id": "bepc-maths-statistiques",
+   "title": "Statistiques : classes, moyenne, médiane, étendue",
+   "minutes": 30,
+   "programRef": "3e — Statistiques : classes, centres, moyenne, médiane, étendue (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Regrouper des données en classes et calculer des effectifs et des fréquences.",
+    "Calculer une moyenne (avec centres de classes), une médiane et une étendue."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-maths-statistiques-01",
+    "bepc-maths-statistiques-02",
+    "bepc-maths-statistiques-03",
+    "bepc-maths-statistiques-04",
+    "bepc-maths-statistiques-05",
+    "bepc-maths-statistiques-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-statistiques-q1",
+    "bepc-maths-statistiques-q2",
+    "bepc-maths-statistiques-q3",
+    "bepc-maths-statistiques-q4",
+    "bepc-maths-statistiques-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Classes et centre de classe",
+     "md": "Quand les valeurs sont nombreuses, on les regroupe en **classes** $[a\\,;\\,b[$. Le **centre** d'une classe est $\\frac{a+b}{2}$. On calcule alors une moyenne **approchée** en remplaçant chaque valeur de la classe par son centre."
+    },
+    {
+     "type": "illustration",
+     "caption": "Tailles (en cm) de 20 élèves, regroupées en classes de 10 cm.",
+     "alt": "Un diagramme à bâtons : 3, 7, 6 et 4 élèves dans les classes de 140 à 180 cm.",
+     "figure": {
+      "kind": "bars",
+      "w": 440,
+      "h": 240,
+      "bars": [
+       {
+        "label": "[140;150[",
+        "value": 3,
+        "color": "blue"
+       },
+       {
+        "label": "[150;160[",
+        "value": 7,
+        "color": "blue"
+       },
+       {
+        "label": "[160;170[",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "[170;180[",
+        "value": 4,
+        "color": "blue"
+       }
+      ],
+      "unit": "élèves"
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Médiane et étendue",
+     "md": "- **Médiane** : on range les valeurs dans l'ordre croissant ; la médiane partage la série en deux groupes de même effectif. Effectif impair : valeur du milieu. Effectif pair : moyenne des deux valeurs du milieu.\n- **Étendue** : plus grande valeur moins plus petite valeur."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : moyenne par classes",
+     "statement": "Avec les classes du diagramme (effectifs 3, 7, 6, 4), calcule la moyenne approchée des tailles.",
+     "steps": [
+      {
+       "md": "Centres des classes : 145, 155, 165 et 175.",
+       "tex": "N=3+7+6+4=20"
+      },
+      {
+       "md": "Somme pondérée :",
+       "tex": "3\\times145+7\\times155+6\\times165+4\\times175=435+1085+990+700=3210"
+      },
+      {
+       "md": "Moyenne :",
+       "tex": "m=\\frac{3210}{20}=160{,}5"
+      }
+     ],
+     "answer": "**160,5 cm** (valeur approchée)"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : médiane",
+     "statement": "Détermine la médiane et l'étendue des notes : 7 ; 3 ; 9 ; 5 ; 11 ; 4.",
+     "steps": [
+      {
+       "md": "On range : 3 ; 4 ; 5 ; 7 ; 9 ; 11. Il y a 6 valeurs : la médiane est la moyenne des 3e et 4e.",
+       "tex": "\\frac{5+7}{2}=6"
+      },
+      {
+       "md": "Étendue :",
+       "tex": "11-3=8"
+      }
+     ],
+     "answer": "**Médiane 6 ; étendue 8**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Chercher la médiane sans ranger les valeurs.\n- Prendre l'extrémité de la classe au lieu du centre pour la moyenne.\n- Confondre moyenne et médiane : la moyenne est sensible aux valeurs extrêmes, pas la médiane.\n- Oublier de diviser par l'effectif total."
+    }
+   ],
+   "reviewNotes": [
+    "Les probabilités ne sont pas traitées dans ce pack : je ne suis pas certain qu'elles figurent au programme de 3e MINESEC.",
+    "Les données sont fictives. Vérifier si les fréquences cumulées et l'histogramme sont au programme."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le centre de la classe $[150\\,;\\,160[$ ?",
+   "answer": 155,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{150+160}{2}=155$.",
+   "id": "bepc-maths-statistiques-01",
+   "tier": "application",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est l'étendue de la série : 7 ; 12 ; 4 ; 15 ; 9 ?",
+   "answer": 11,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$15-4=11$.",
+   "id": "bepc-maths-statistiques-02",
+   "tier": "application",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la médiane de la série : 7 ; 3 ; 9 ; 5 ; 11 ?",
+   "answer": 7,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On range : 3 ; 5 ; 7 ; 9 ; 11. La valeur du milieu est 7.",
+   "id": "bepc-maths-statistiques-03",
+   "tier": "application",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la médiane de : 4 ; 6 ; 7 ; 9 ; 10 ; 12 ; 13 ; 20 (déjà rangées) ?",
+   "answer": 9.5,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "8 valeurs : moyenne des 4e et 5e, $\\frac{9+10}{2}=9{,}5$.",
+   "id": "bepc-maths-statistiques-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Classes $[0;10[$, $[10;20[$ et $[20;30[$ d'effectifs 4, 6 et 10. Quelle est la moyenne approchée ?",
+   "answer": 18,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Centres 5, 15, 25 : $\\frac{4\\times5+6\\times15+10\\times25}{20}=\\frac{20+90+250}{20}=18$.",
+   "id": "bepc-maths-statistiques-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Les tailles de 20 élèves sont regroupées ainsi : $[140;150[$ : 3 ; $[150;160[$ : 7 ; $[160;170[$ : 6 ; $[170;180[$ : 4.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la moyenne approchée des tailles (en cm) ?",
+     "answer": 160.5,
+     "tolerance": 0.01,
+     "unit": "cm",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Centres 145, 155, 165, 175 : $\\frac{3210}{20}=160{,}5$ cm.",
+     "id": "bepc-maths-statistiques-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel pourcentage des élèves mesure moins de 160 cm ?",
+     "answer": 50,
+     "unit": "%",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$3+7=10$ élèves sur 20 : $\\frac{10}{20}=50\\,\\%$.",
+     "id": "bepc-maths-statistiques-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'étendue maximale possible de la série (en cm, d'après les classes) ?",
+     "answer": 40,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Au plus : de 140 à 180, soit $180-140=40$ cm.",
+     "id": "bepc-maths-statistiques-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Multiplier chaque effectif par le centre de sa classe, additionner, puis diviser par 20.",
+   "figure": {
+    "kind": "bars",
+    "w": 440,
+    "h": 240,
+    "bars": [
+     {
+      "label": "[140;150[",
+      "value": 3,
+      "color": "blue"
+     },
+     {
+      "label": "[150;160[",
+      "value": 7,
+      "color": "blue"
+     },
+     {
+      "label": "[160;170[",
+      "value": 6,
+      "color": "blue"
+     },
+     {
+      "label": "[170;180[",
+      "value": 4,
+      "color": "blue"
+     }
+    ],
+    "unit": "élèves"
+   },
+   "id": "bepc-maths-statistiques-06",
+   "tier": "examen",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La médiane d'une série de 9 valeurs rangées est...",
+   "choices": [
+    "la 4e valeur",
+    "la moyenne de toutes les valeurs",
+    "la 5e valeur",
+    "la plus grande valeur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avec 9 valeurs, il y en a 4 de chaque côté de la 5e.",
+   "id": "bepc-maths-statistiques-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le centre de la classe $[20\\,;\\,30[$ ?",
+   "choices": [
+    "25",
+    "20",
+    "30",
+    "50"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{20+30}{2}=25$.",
+   "id": "bepc-maths-statistiques-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'étendue de 2 ; 8 ; 5 ; 11 est...",
+   "choices": [
+    "11",
+    "9",
+    "2",
+    "26"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$11-2=9$.",
+   "id": "bepc-maths-statistiques-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle statistique est la moins sensible aux valeurs extrêmes ?",
+   "choices": [
+    "La moyenne",
+    "La médiane",
+    "L'étendue",
+    "L'effectif total"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une valeur très grande déplace la moyenne mais pas la médiane.",
+   "id": "bepc-maths-statistiques-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une série de 40 données, l'effectif d'une classe est 10. Sa fréquence est...",
+   "choices": [
+    "10 %",
+    "40 %",
+    "25 %",
+    "4 %"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{10}{40}=0{,}25$.",
+   "id": "bepc-maths-statistiques-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

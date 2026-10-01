@@ -1,0 +1,1027 @@
+{
+ "chapter": "4e-pct-optique-energie",
+ "lessons": [
+  {
+   "id": "4e-pct-reflexion-refraction",
+   "title": "Réflexion et réfraction de la lumière",
+   "minutes": 30,
+   "programRef": "4e — Réflexion de la lumière (miroir plan) ; initiation à la réfraction (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Énoncer la loi de la réflexion.",
+    "Construire l'image d'un objet dans un miroir plan.",
+    "Décrire qualitativement la réfraction."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-pct-reflexion-refraction-01",
+    "4e-pct-reflexion-refraction-02",
+    "4e-pct-reflexion-refraction-03",
+    "4e-pct-reflexion-refraction-04",
+    "4e-pct-reflexion-refraction-05",
+    "4e-pct-reflexion-refraction-06"
+   ],
+   "selfCheck": [
+    "4e-pct-reflexion-refraction-q1",
+    "4e-pct-reflexion-refraction-q2",
+    "4e-pct-reflexion-refraction-q3",
+    "4e-pct-reflexion-refraction-q4",
+    "4e-pct-reflexion-refraction-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Loi de la réflexion",
+     "md": "Un rayon **incident** arrivant sur un miroir est renvoyé : c'est le rayon **réfléchi**. On trace la **normale** (perpendiculaire au miroir au point d'incidence). Les angles se mesurent par rapport à la normale. **Lois :** le rayon réfléchi est dans le plan d'incidence et l'angle de réflexion est égal à l'angle d'incidence : $r = i$.",
+     "tex": "r = i"
+    },
+    {
+     "type": "illustration",
+     "caption": "Réflexion sur un miroir plan : r = i (ici 40°).",
+     "alt": "Rayon incident et rayon réfléchi symétriques par rapport à la normale d'un miroir.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 180,
+        "x2": 340,
+        "y2": 180,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 180,
+        "x2": 60,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 180,
+        "x2": 85,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 180,
+        "x2": 110,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 145,
+        "y1": 180,
+        "x2": 135,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 180,
+        "x2": 160,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 195,
+        "y1": 180,
+        "x2": 185,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 180,
+        "x2": 210,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 245,
+        "y1": 180,
+        "x2": 235,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 180,
+        "x2": 260,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 295,
+        "y1": 180,
+        "x2": 285,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 180,
+        "x2": 310,
+        "y2": 195,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 40,
+        "x2": 200,
+        "y2": 180,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 30,
+        "text": "normale",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 73,
+        "x2": 200,
+        "y2": 180,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 180,
+        "x2": 290,
+        "y2": 73,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 60,
+        "text": "incident",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 60,
+        "text": "réfléchi",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 140,
+        "text": "i",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 228,
+        "y": 140,
+        "text": "r",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 215,
+        "text": "miroir",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Image dans un miroir plan, et réfraction",
+     "md": "Dans un miroir plan, l'image est **virtuelle**, de même taille que l'objet, **symétrique** par rapport au miroir : elle est à la même distance derrière le miroir.\n**Réfraction :** quand la lumière passe d'un milieu transparent à un autre (air → eau), elle **change de direction** ; en passant de l'air à l'eau, le rayon se **rapproche de la normale**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Réfraction air → eau : le rayon se rapproche de la normale (r < i).",
+     "alt": "Un rayon qui arrive de l'air sur l'eau est dévié vers la normale.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 130,
+        "w": 320,
+        "h": 110,
+        "fill": "lightblue",
+        "stroke": "lightblue",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 130,
+        "x2": 360,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 200,
+        "y2": 250,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 116,
+        "y1": 59,
+        "x2": 200,
+        "y2": 130,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 130,
+        "x2": 263,
+        "y2": 220,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 115,
+        "text": "air",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 160,
+        "text": "eau",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 158,
+        "y": 100,
+        "text": "i",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 180,
+        "text": "r",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "normale",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : réflexion",
+     "statement": "Un rayon arrive sur un miroir avec un angle d'incidence de 40°. Quel est l'angle de réflexion ? Quel est l'angle entre rayon incident et rayon réfléchi ?",
+     "steps": [
+      {
+       "md": "Loi de la réflexion : r = i = 40°."
+      },
+      {
+       "md": "Angle total entre les deux rayons :",
+       "tex": "i + r = 40\\degree + 40\\degree = 80\\degree"
+      }
+     ],
+     "answer": "**r = 40° ; 80° entre les rayons**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : image dans un miroir",
+     "statement": "Amina se tient à 1,5 m d'un miroir plan. À quelle distance est-elle de son image ?",
+     "steps": [
+      {
+       "md": "L'image est à 1,5 m derrière le miroir (symétrie)."
+      },
+      {
+       "md": "Distance totale :",
+       "tex": "1{,}5 + 1{,}5 = 3\\ \\text{m}"
+      }
+     ],
+     "answer": "**3 m**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mesurer les angles par rapport au miroir : on utilise la **normale**.\n- Penser que l'image est « dans » le miroir : elle est virtuelle (aucune lumière n'y passe).\n- Croire que la réfraction n'existe pas : une cuillère dans un verre d'eau paraît « cassée » et le fond d'une piscine semble plus proche."
+    }
+   ],
+   "reviewNotes": [
+    "La réfraction est qualitative (pas de loi de Snell-Descartes) ; à vérifier le niveau attendu.",
+    "Les angles de la figure de réfraction sont indicatifs (eau n ≈ 1,33)."
+   ]
+  },
+  {
+   "id": "4e-pct-energie",
+   "title": "L'énergie : formes, sources et conversions",
+   "minutes": 30,
+   "programRef": "4e — Énergie : formes, sources, conversions, conservation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer les formes d'énergie et les sources.",
+    "Décrire une chaîne énergétique.",
+    "Appliquer la conservation de l'énergie."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-pct-energie-01",
+    "4e-pct-energie-02",
+    "4e-pct-energie-03",
+    "4e-pct-energie-04",
+    "4e-pct-energie-05",
+    "4e-pct-energie-06"
+   ],
+   "selfCheck": [
+    "4e-pct-energie-q1",
+    "4e-pct-energie-q2",
+    "4e-pct-energie-q3",
+    "4e-pct-energie-q4",
+    "4e-pct-energie-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Énergie et formes",
+     "md": "L'**énergie** est ce qui permet de produire un effet (chauffer, éclairer, mettre en mouvement). Elle s'exprime en **joules (J)**. Formes : **chimique** (aliments, bois, pétrole), **électrique**, **thermique** (chaleur), **lumineuse**, **mécanique** (mouvement), **nucléaire**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sources d'énergie",
+     "md": "- **Renouvelables** : solaire, hydraulique (chutes d'eau, barrages comme celui d'Edéa), éolienne, biomasse.\n- **Non renouvelables** : pétrole, gaz naturel, charbon, uranium.\nL'énergie ne se crée pas et ne se détruit pas : elle **se transforme** (conservation de l'énergie)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Chaîne énergétique d'un éclairage solaire.",
+     "alt": "Soleil, panneau solaire puis lampe, avec les formes d'énergie échangées.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 50,
+        "w": 100,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 80,
+        "text": "Soleil",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 50,
+        "w": 120,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 80,
+        "text": "panneau",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 410,
+        "y": 50,
+        "w": 100,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 460,
+        "y": 80,
+        "text": "lampe",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 75,
+        "x2": 210,
+        "y2": 75,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 75,
+        "x2": 410,
+        "y2": 75,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 40,
+        "text": "lumineuse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 40,
+        "text": "électrique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 460,
+        "y": 125,
+        "text": "lumineuse + thermique",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : chaîne énergétique",
+     "statement": "Décris la chaîne d'énergie d'un ventilateur branché sur le secteur.",
+     "steps": [
+      {
+       "md": "Énergie électrique reçue par le moteur."
+      },
+      {
+       "md": "Le moteur la transforme en énergie mécanique (mouvement des pales) et un peu de chaleur."
+      }
+     ],
+     "answer": "**Électrique → mécanique + thermique**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : conservation",
+     "statement": "Une lampe reçoit 50 J d'énergie électrique et restitue 8 J sous forme lumineuse. Combien de joules sous forme de chaleur ?",
+     "steps": [
+      {
+       "md": "L'énergie se conserve : reçue = restituée."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "50 - 8 = 42\\ \\text{J}"
+      }
+     ],
+     "answer": "**42 J**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que l'énergie « se perd » : elle se transforme, souvent en chaleur non utile.\n- Confondre énergie et puissance.\n- Dire que le pétrole est renouvelable.\n- Oublier l'unité : le joule."
+    }
+   ],
+   "reviewNotes": [
+    "Pas de formule de calcul d'énergie (E = P × t, rendement) : peut relever de la 3e.",
+    "Mention du barrage d'Edéa (Sanaga) : fait classique ; mix électrique camerounais non détaillé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Angle d'incidence 35° : quel est l'angle de réflexion ? (en °)",
+   "answer": 35,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "r = i.",
+   "id": "4e-pct-reflexion-refraction-01",
+   "tier": "application",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Par rapport à quoi mesure-t-on les angles d'incidence et de réflexion ?",
+   "choices": [
+    "Le miroir",
+    "La normale",
+    "L'horizontale",
+    "L'œil"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les angles sont mesurés avec la normale.",
+   "id": "4e-pct-reflexion-refraction-02",
+   "tier": "application",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un objet est à 2 m d'un miroir plan. À quelle distance derrière le miroir se trouve l'image ? (en m)",
+   "answer": 2,
+   "unit": "m",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Symétrie : même distance.",
+   "id": "4e-pct-reflexion-refraction-03",
+   "tier": "application",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un rayon arrive avec i = 0° (selon la normale). Quel est l'angle de réflexion ? (en °)",
+   "answer": 0,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "r = i = 0° : le rayon revient sur lui-même.",
+   "id": "4e-pct-reflexion-refraction-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "L'angle d'incidence est 25°. Quel angle forment le rayon incident et le rayon réfléchi ? (en °)",
+   "answer": 50,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "25 + 25 = 50°.",
+   "id": "4e-pct-reflexion-refraction-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris plonge une cuillère dans un verre d'eau : elle semble cassée à la surface. Il éclaire ensuite le verre avec un laser jouet (sous la surveillance d'un adulte).",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel phénomène explique l'aspect cassé de la cuillère ?",
+     "choices": [
+      "La réflexion sur un miroir",
+      "L'ombre",
+      "La combustion",
+      "La réfraction de la lumière"
+     ],
+     "answer": 3,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "La lumière change de direction à l'interface eau-air.",
+     "id": "4e-pct-reflexion-refraction-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pourquoi ne faut-il jamais diriger un laser vers un œil ?",
+     "model": "Le faisceau concentré peut brûler la rétine et causer des lésions irréversibles.",
+     "rubric": [
+      "Parle du danger pour l'œil"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-pct-reflexion-refraction-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-reflexion-refraction-06",
+   "tier": "examen",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la réflexion, on a :",
+   "choices": [
+    "r = i",
+    "r = 2i",
+    "r = i + 90°",
+    "r = 0 toujours"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Loi de la réflexion.",
+   "id": "4e-pct-reflexion-refraction-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'image dans un miroir plan est :",
+   "choices": [
+    "virtuelle et symétrique",
+    "réelle et renversée",
+    "plus grande",
+    "plus petite"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même taille, symétrique.",
+   "id": "4e-pct-reflexion-refraction-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "En passant de l'air à l'eau, le rayon :",
+   "choices": [
+    "s'éloigne de la normale",
+    "se rapproche de la normale",
+    "ne change pas",
+    "disparaît"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Réfraction.",
+   "id": "4e-pct-reflexion-refraction-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La normale est :",
+   "choices": [
+    "perpendiculaire au miroir au point d'incidence",
+    "parallèle au miroir",
+    "le rayon réfléchi",
+    "le bord du miroir"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition.",
+   "id": "4e-pct-reflexion-refraction-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que représente « i » ?",
+   "choices": [
+    "L'indice du miroir",
+    "L'angle d'incidence",
+    "L'intensité",
+    "Le temps"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Angle entre le rayon incident et la normale.",
+   "id": "4e-pct-reflexion-refraction-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-reflexion-refraction",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle source d'énergie est renouvelable ?",
+   "choices": [
+    "Le pétrole",
+    "L'énergie solaire",
+    "Le charbon",
+    "Le gaz naturel"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le Soleil ne s'épuise pas à l'échelle humaine.",
+   "id": "4e-pct-energie-01",
+   "tier": "application",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un panneau solaire transforme l'énergie :",
+   "choices": [
+    "électrique en lumineuse",
+    "lumineuse en électrique",
+    "chimique en nucléaire",
+    "thermique en sonore"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Capte la lumière du Soleil.",
+   "id": "4e-pct-energie-02",
+   "tier": "application",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une lampe reçoit 100 J et restitue 12 J sous forme lumineuse. Chaleur dégagée ? (en J)",
+   "answer": 88,
+   "unit": "J",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "100 − 12 = 88 J.",
+   "id": "4e-pct-energie-03",
+   "tier": "application",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe l'appareil à la conversion.",
+   "pairs": [
+    [
+     "lampe",
+     "électrique → lumineuse"
+    ],
+    [
+     "moteur",
+     "électrique → mécanique"
+    ],
+    [
+     "radiateur",
+     "électrique → thermique"
+    ],
+    [
+     "pile",
+     "chimique → électrique"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Conversions usuelles.",
+   "id": "4e-pct-energie-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un barrage hydroélectrique transforme :",
+   "choices": [
+    "le pétrole en eau",
+    "l'énergie de l'eau en mouvement en énergie électrique",
+    "la lumière en bois",
+    "la chaleur en glace"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'eau fait tourner une turbine reliée à un alternateur.",
+   "id": "4e-pct-energie-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris compare une lampe à pétrole et une lampe solaire pour étudier le soir.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Cite un avantage et un inconvénient de chacune.",
+     "model": "Lampe solaire : renouvelable, sans fumée, mais dépend du soleil et a un coût initial ; lampe à pétrole : facile mais fumée, risque d'incendie, ressource non renouvelable.",
+     "rubric": [
+      "Avantage de la solaire",
+      "Inconvénient du pétrole",
+      "Un inconvénient de la solaire"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-pct-energie-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle lampe pollue le plus l'air de la pièce ?",
+     "choices": [
+      "La lampe à pétrole",
+      "La lampe solaire",
+      "Aucune",
+      "Les deux de la même façon"
+     ],
+     "answer": 0,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "La combustion du pétrole dégage des gaz et des fumées.",
+     "id": "4e-pct-energie-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-energie-06",
+   "tier": "examen",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité d'énergie ?",
+   "choices": [
+    "Le newton",
+    "Le watt",
+    "Le kilogramme",
+    "Le joule"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Symbole J.",
+   "id": "4e-pct-energie-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle énergie est stockée dans le bois ?",
+   "choices": [
+    "Électrique",
+    "Lumineuse",
+    "Nucléaire",
+    "Chimique"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Libérée par combustion.",
+   "id": "4e-pct-energie-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La conservation de l'énergie signifie :",
+   "choices": [
+    "elle disparaît dans les machines",
+    "elle se transforme sans disparaître",
+    "elle est toujours créée",
+    "elle augmente à chaque transformation"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Principe fondamental.",
+   "id": "4e-pct-energie-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est un combustible fossile ?",
+   "choices": [
+    "Le vent",
+    "Le pétrole",
+    "L'eau d'un barrage",
+    "Le Soleil"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Non renouvelable.",
+   "id": "4e-pct-energie-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que transforme une pile ?",
+   "choices": [
+    "L'énergie chimique en énergie électrique",
+    "Le courant en lumière",
+    "La chaleur en vent",
+    "Le mouvement en pétrole"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Réaction chimique interne.",
+   "id": "4e-pct-energie-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-energie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

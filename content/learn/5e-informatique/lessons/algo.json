@@ -1,0 +1,1216 @@
+{
+ "chapter": "5e-informatique-algo",
+ "lessons": [
+  {
+   "id": "5e-informatique-algorithme-notion",
+   "title": "Qu'est-ce qu'un algorithme ? L'ordinogramme",
+   "minutes": 30,
+   "programRef": "Programme d'informatique de 5e (MINESEC) — découpage exact à vérifier sur le texte officiel — initiation à l'algorithmique",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir un algorithme comme une suite ordonnée d'instructions qui résout un problème.",
+    "Lire et construire un ordinogramme simple (début, action, fin)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-informatique-algorithme-notion-01",
+    "5e-informatique-algorithme-notion-02",
+    "5e-informatique-algorithme-notion-03",
+    "5e-informatique-algorithme-notion-04",
+    "5e-informatique-algorithme-notion-05",
+    "5e-informatique-algorithme-notion-06"
+   ],
+   "selfCheck": [
+    "5e-informatique-algorithme-notion-q1",
+    "5e-informatique-algorithme-notion-q2",
+    "5e-informatique-algorithme-notion-q3",
+    "5e-informatique-algorithme-notion-q4",
+    "5e-informatique-algorithme-notion-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Algorithme",
+     "md": "Un **algorithme** est une **suite ordonnée d'instructions** précises qui permet de résoudre un problème ou de réaliser une tâche. Une recette de cuisine, un itinéraire ou la préparation du thé sont des algorithmes de la vie courante. L'ordre des instructions est essentiel."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Un bon algorithme",
+     "md": "- Il commence et se **termine**.\n- Chaque instruction est **claire, précise, exécutable**.\n- L'**ordre** est important : changer l'ordre peut changer le résultat.\n- Il décrit un **résultat** attendu.\nUn **programme** est un algorithme écrit dans un langage compréhensible par l'ordinateur."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'ordinogramme",
+     "md": "Un **ordinogramme** (ou organigramme) dessine un algorithme avec des formes reliées par des flèches : un **ovale** pour **Début** et **Fin**, un **rectangle** pour une **action**. On le lit de haut en bas en suivant les flèches."
+    },
+    {
+     "type": "illustration",
+     "caption": "Ordinogramme : préparer du thé.",
+     "alt": "Un ordinogramme vertical : Début, Remplir la casserole, Chauffer l'eau, Verser sur le thé, Fin.",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 10,
+        "w": 100,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 17
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 33,
+        "text": "Début",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 44,
+        "x2": 150,
+        "y2": 64,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 64,
+        "w": 180,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 88,
+        "text": "Remplir la casserole",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 100,
+        "x2": 150,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 120,
+        "w": 180,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 144,
+        "text": "Chauffer l'eau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 156,
+        "x2": 150,
+        "y2": 176,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 176,
+        "w": 180,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 200,
+        "text": "Verser sur le thé",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 212,
+        "x2": 150,
+        "y2": 232,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 232,
+        "w": 100,
+        "h": 26,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 13
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 251,
+        "text": "Fin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : remettre dans l'ordre",
+     "statement": "Remets dans l'ordre pour « envoyer un courriel » : cliquer sur Envoyer ; écrire le message ; ouvrir la messagerie ; saisir l'adresse du destinataire.",
+     "steps": [
+      {
+       "md": "On ouvre d'abord la messagerie."
+      },
+      {
+       "md": "Puis on saisit l'adresse, on écrit le message, et on envoie à la fin."
+      }
+     ],
+     "answer": "**Ouvrir la messagerie, saisir l'adresse, écrire le message, cliquer sur Envoyer.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un résultat",
+     "statement": "Un algorithme : « Choisir un nombre. Ajouter 5. Multiplier par 2. Écrire le résultat. » Que donne-t-il pour 3 ?",
+     "steps": [
+      {
+       "md": "On ajoute 5 :",
+       "tex": "3 + 5 = 8"
+      },
+      {
+       "md": "On multiplie par 2 :",
+       "tex": "8 \\times 2 = 16"
+      }
+     ],
+     "answer": "**Il écrit 16.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire une instruction vague (« faire le calcul ») au lieu d'une action précise.\n- Oublier une étape ou mélanger l'ordre.\n- Oublier la fin : un algorithme doit s'arrêter.\n- Confondre algorithme (idée, étapes) et programme (écrit dans un langage)."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 5e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Le formalisme de l'ordinogramme (formes) est la convention générale : ovale (début/fin), rectangle (action), losange (test). À confronter à la convention du programme officiel."
+   ]
+  },
+  {
+   "id": "5e-informatique-algorithme-conditions-boucles",
+   "title": "Conditions et boucles",
+   "minutes": 30,
+   "programRef": "Programme d'informatique de 5e (MINESEC) — découpage exact à vérifier sur le texte officiel — structures de contrôle (condition, répétition)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Écrire une condition (si… alors… sinon) et la lire dans un ordinogramme.",
+    "Écrire et suivre une boucle qui répète des instructions un nombre de fois donné ou tant qu'une condition est vraie."
+   ],
+   "prerequisites": [
+    "5e-informatique-algorithme-notion"
+   ],
+   "exercises": [
+    "5e-informatique-algorithme-conditions-boucles-01",
+    "5e-informatique-algorithme-conditions-boucles-02",
+    "5e-informatique-algorithme-conditions-boucles-03",
+    "5e-informatique-algorithme-conditions-boucles-04",
+    "5e-informatique-algorithme-conditions-boucles-05",
+    "5e-informatique-algorithme-conditions-boucles-06"
+   ],
+   "selfCheck": [
+    "5e-informatique-algorithme-conditions-boucles-q1",
+    "5e-informatique-algorithme-conditions-boucles-q2",
+    "5e-informatique-algorithme-conditions-boucles-q3",
+    "5e-informatique-algorithme-conditions-boucles-q4",
+    "5e-informatique-algorithme-conditions-boucles-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La condition",
+     "md": "Une **condition** permet à l'algorithme de **choisir** selon une situation : **Si** (condition) **alors** (action 1) **sinon** (action 2). La condition est une question dont la réponse est **vrai** ou **faux**, par exemple « la note est-elle supérieure ou égale à 10 ? ». Dans un ordinogramme, elle se dessine avec un **losange** et deux sorties : **Oui** et **Non**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Ordinogramme avec une condition : deux chemins possibles.",
+     "alt": "Un ordinogramme : Début, Lire la note, losange note supérieure ou égale à 10 ; Oui mène à Écrire Admis, Non mène à Écrire Refusé ; puis Fin.",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 370,
+      "items": [
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 10,
+        "w": 100,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 17
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 33,
+        "text": "Début",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 44,
+        "x2": 210,
+        "y2": 64,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 64,
+        "w": 160,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 88,
+        "text": "Lire la note",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 100,
+        "x2": 210,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         210,
+         120,
+         330,
+         170,
+         210,
+         220,
+         90,
+         170
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 175,
+        "text": "note ≥ 10 ?",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 220,
+        "x2": 210,
+        "y2": 250,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 240,
+        "text": "Oui",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 170,
+        "x2": 360,
+        "y2": 170,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 160,
+        "text": "Non",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 250,
+        "w": 120,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 274,
+        "text": "Écrire Admis",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 152,
+        "w": 130,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 425,
+        "y": 175,
+        "text": "Écrire Refusé",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 286,
+        "x2": 210,
+        "y2": 320,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 425,
+        "y1": 188,
+        "x2": 425,
+        "y2": 337,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 425,
+        "y1": 337,
+        "x2": 260,
+        "y2": 337,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 320,
+        "w": 100,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 17
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 343,
+        "text": "Fin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La boucle",
+     "md": "Une **boucle** répète des instructions. Deux formes : **Répéter n fois** (on connaît le nombre de répétitions) et **Tant que** (condition) **faire** (on répète tant que la condition est vraie). Il faut qu'une condition finisse par devenir fausse, sinon la boucle ne s'arrête jamais."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une boucle : « Bonjour » est écrit tant que le compteur est inférieur à 3.",
+     "alt": "Un ordinogramme avec un compteur initialisé à 0 ; tant que le compteur est inférieur à 3 on écrit Bonjour puis on ajoute 1 ; sinon Fin.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 360,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 100,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 17
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 33,
+        "text": "Début",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 44,
+        "x2": 200,
+        "y2": 64,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 64,
+        "w": 180,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 88,
+        "text": "mettre compteur à 0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 100,
+        "x2": 200,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         120,
+         320,
+         165,
+         200,
+         210,
+         80,
+         165
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 170,
+        "text": "compteur < 3 ?",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 210,
+        "x2": 200,
+        "y2": 240,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 232,
+        "text": "Oui",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 165,
+        "x2": 360,
+        "y2": 165,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 153,
+        "text": "Non",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 240,
+        "w": 180,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 264,
+        "text": "Écrire Bonjour",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 276,
+        "x2": 200,
+        "y2": 296,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 296,
+        "w": 180,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 320,
+        "text": "ajouter 1 au compteur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 314,
+        "x2": 50,
+        "y2": 314,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 314,
+        "x2": 50,
+        "y2": 165,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 165,
+        "x2": 80,
+        "y2": 165,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 147,
+        "w": 90,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 17
+       },
+       {
+        "t": "text",
+        "x": 405,
+        "y": 170,
+        "text": "Fin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Suivre un algorithme à la main",
+     "md": "On construit un tableau de suivi : on note à chaque étape la **valeur des variables** (comme le compteur). Pour la boucle de la figure : compteur = 0, on écrit Bonjour, compteur = 1 ; Bonjour, compteur = 2 ; Bonjour, compteur = 3 ; 3 < 3 est faux : fin. « Bonjour » est écrit **3 fois**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une condition",
+     "statement": "Algorithme : « Lire l'âge. Si âge ≥ 18 alors écrire Majeur, sinon écrire Mineur. » Que s'affiche-t-il pour 15 ?",
+     "steps": [
+      {
+       "md": "On teste : 15 ≥ 18 est faux."
+      },
+      {
+       "md": "On exécute donc la partie « sinon » : on écrit Mineur."
+      }
+     ],
+     "answer": "**Mineur**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une boucle avec somme",
+     "statement": "Total vaut 0. Répéter 4 fois : ajouter 5 à Total. Que vaut Total à la fin ?",
+     "steps": [
+      {
+       "md": "Après chaque tour : 5, 10, 15, 20."
+      },
+      {
+       "md": "Autrement dit :",
+       "tex": "4 \\times 5 = 20"
+      }
+     ],
+     "answer": "**Total = 20.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire une condition qui n'est ni vraie ni fausse (« la note est belle ? »).\n- Oublier de faire évoluer le compteur : la boucle devient infinie.\n- Se tromper d'un tour : compter à partir de 0 ou de 1 sans faire attention.\n- Mélanger les chemins Oui et Non dans l'ordinogramme."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 5e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Le pseudo-code est écrit en langage naturel (« Si… alors… sinon », « Répéter… fois »). La syntaxe officielle peut différer ; aucune programmation dans un langage précis n'est abordée ici."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Un algorithme est…",
+   "choices": [
+    "Un type de clavier",
+    "Un virus",
+    "Un câble",
+    "Une suite ordonnée d'instructions"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est une méthode pas à pas.",
+   "id": "5e-informatique-algorithme-notion-01",
+   "tier": "application",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans un algorithme, l'ordre des instructions n'a pas d'importance.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Changer l'ordre peut changer le résultat, ou le rendre impossible.",
+   "id": "5e-informatique-algorithme-notion-02",
+   "tier": "application",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque forme de l'ordinogramme à son rôle.",
+   "pairs": [
+    [
+     "Ovale",
+     "Début ou fin"
+    ],
+    [
+     "Rectangle",
+     "Action"
+    ],
+    [
+     "Flèche",
+     "Sens du déroulement"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Convention de base d'un ordinogramme.",
+   "id": "5e-informatique-algorithme-notion-03",
+   "tier": "application",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Algorithme : « Choisir un nombre. Le multiplier par 4. Retirer 3. Écrire le résultat. » Que donne-t-il pour 5 ?",
+   "answer": 17,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "5 × 4 = 20 ; 20 − 3 = 17.",
+   "id": "5e-informatique-algorithme-notion-04",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle suite décrit correctement « utiliser un distributeur de billets » (version simplifiée) ?",
+   "choices": [
+    "Retirer, insérer la carte, saisir le code",
+    "Choisir le montant, retirer, saisir le code",
+    "Insérer la carte, saisir le code, choisir le montant, retirer",
+    "Saisir le code, retirer, insérer la carte"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On s'identifie d'abord, puis on demande l'opération.",
+   "id": "5e-informatique-algorithme-notion-05",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Écris l'algorithme pour « calculer le prix de 3 cahiers à 300 FCFA l'un, puis payer avec un billet de 1 000 FCFA ».",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le prix des 3 cahiers ?",
+     "answer": 900,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3 × 300 = 900 FCFA.",
+     "id": "5e-informatique-algorithme-notion-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle monnaie doit-on rendre ?",
+     "answer": 100,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "1 000 − 900 = 100 FCFA.",
+     "id": "5e-informatique-algorithme-notion-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris les étapes de l'algorithme dans l'ordre.",
+     "model": "Début ; multiplier 3 par 300 ; soustraire le résultat de 1 000 ; écrire la monnaie ; fin.",
+     "rubric": [
+      "Étapes dans l'ordre",
+      "Début et fin présents"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-informatique-algorithme-notion-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-informatique-algorithme-notion-06",
+   "tier": "examen",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme représente le début d'un ordinogramme ?",
+   "choices": [
+    "Un losange",
+    "Un ovale",
+    "Un triangle",
+    "Un cercle de dessin"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Début et fin sont des ovales.",
+   "id": "5e-informatique-algorithme-notion-q1",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un algorithme dans un langage compris par l'ordinateur s'appelle…",
+   "choices": [
+    "Une cellule",
+    "Une clé USB",
+    "Un dossier",
+    "Un programme"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un programme est un algorithme codé.",
+   "id": "5e-informatique-algorithme-notion-q2",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle caractéristique est indispensable à un algorithme ?",
+   "choices": [
+    "De la musique",
+    "Des instructions précises dans un ordre logique",
+    "Un écran couleur",
+    "Un grand nombre de fichiers"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La précision et l'ordre assurent le résultat.",
+   "id": "5e-informatique-algorithme-notion-q3",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel exemple de la vie courante est un algorithme ?",
+   "choices": [
+    "Une recette de cuisine",
+    "Une couleur",
+    "Un vêtement",
+    "Un fruit"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une recette est une suite d'étapes pour un résultat.",
+   "id": "5e-informatique-algorithme-notion-q4",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient « 2 » avec l'algorithme : « ajouter 3, puis multiplier par 4 » ?",
+   "choices": [
+    "20",
+    "11",
+    "14",
+    "24"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "(2 + 3) × 4 = 20.",
+   "id": "5e-informatique-algorithme-notion-q5",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-notion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme d'ordinogramme représente une condition ?",
+   "choices": [
+    "L'ovale",
+    "Le rectangle",
+    "La flèche seule",
+    "Le losange"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le losange pose une question avec deux sorties.",
+   "id": "5e-informatique-algorithme-conditions-boucles-01",
+   "tier": "application",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une boucle répète des instructions.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est sa définition.",
+   "id": "5e-informatique-algorithme-conditions-boucles-02",
+   "tier": "application",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Compteur vaut 0. Répéter 6 fois : ajouter 1 au compteur. Que vaut le compteur à la fin ?",
+   "answer": 6,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ajoute 1 à chacun des 6 tours : 6.",
+   "id": "5e-informatique-algorithme-conditions-boucles-03",
+   "tier": "application",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Total vaut 0. Répéter 5 fois : ajouter 3 à Total. Que vaut Total ?",
+   "answer": 15,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "5 × 3 = 15.",
+   "id": "5e-informatique-algorithme-conditions-boucles-04",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Algorithme : « Lire la note. Si note ≥ 10 alors écrire Admis, sinon écrire Refusé. » Que s'écrit-il pour 10 ?",
+   "choices": [
+    "Refusé",
+    "Rien",
+    "Une erreur",
+    "Admis"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "10 ≥ 10 est vrai : on écrit Admis.",
+   "mistakes": [
+    "Oublier que « ≥ » inclut l'égalité."
+   ],
+   "id": "5e-informatique-algorithme-conditions-boucles-05",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Algorithme : « Total vaut 0. Compteur vaut 1. Tant que compteur ≤ 4 : ajouter compteur à Total ; ajouter 1 au compteur. Écrire Total. »",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Que vaut Total après le premier tour ?",
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Compteur = 1 : Total = 0 + 1 = 1 ; compteur devient 2.",
+     "id": "5e-informatique-algorithme-conditions-boucles-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de tours la boucle fait-elle ?",
+     "answer": 4,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Compteur prend les valeurs 1, 2, 3, 4 : 4 tours (elle s'arrête quand compteur = 5).",
+     "id": "5e-informatique-algorithme-conditions-boucles-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Que vaut Total à la fin ?",
+     "answer": 10,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "1 + 2 + 3 + 4 = 10.",
+     "id": "5e-informatique-algorithme-conditions-boucles-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-informatique-algorithme-conditions-boucles-06",
+   "tier": "examen",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert « sinon » dans « si… alors… sinon » ?",
+   "choices": [
+    "À indiquer l'action quand la condition est fausse",
+    "À recommencer le programme",
+    "À effacer le résultat",
+    "À choisir la couleur"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est l'autre chemin possible.",
+   "id": "5e-informatique-algorithme-conditions-boucles-q1",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle boucle s'arrête au bout d'un nombre connu de tours ?",
+   "choices": [
+    "Tant que 1 est égal à 1",
+    "Répéter n fois",
+    "Une boucle sans compteur ni condition",
+    "Aucune boucle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le nombre de répétitions est fixé à l'avance.",
+   "id": "5e-informatique-algorithme-conditions-boucles-q2",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que se passe-t-il si le compteur n'est jamais augmenté dans une boucle « tant que compteur < 3 » ?",
+   "choices": [
+    "Elle s'arrête tout de suite",
+    "La boucle ne s'arrête jamais",
+    "Elle écrit un seul mot",
+    "L'ordinateur s'éteint seul"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La condition reste vraie indéfiniment.",
+   "id": "5e-informatique-algorithme-conditions-boucles-q3",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la réponse à une condition ?",
+   "choices": [
+    "Rouge ou bleu",
+    "Grand ou petit",
+    "Vrai ou faux",
+    "Beau ou laid"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La condition doit être vérifiable.",
+   "id": "5e-informatique-algorithme-conditions-boucles-q4",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Total vaut 2. On ajoute 3 deux fois de suite. Quel est le total ?",
+   "choices": [
+    "5",
+    "8",
+    "6",
+    "10"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 + 3 + 3 = 8.",
+   "id": "5e-informatique-algorithme-conditions-boucles-q5",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-algorithme-conditions-boucles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

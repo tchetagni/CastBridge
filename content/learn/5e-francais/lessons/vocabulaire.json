@@ -1,0 +1,988 @@
+{
+ "chapter": "5e-francais-vocabulaire",
+ "lessons": [
+  {
+   "id": "5e-francais-registres",
+   "title": "Les registres de langue : familier, courant, soutenu",
+   "minutes": 25,
+   "programRef": "5e — Vocabulaire : les niveaux de langue (familier, courant, soutenu) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître le registre d'un mot ou d'une phrase.",
+    "Adapter son langage à la situation."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-francais-registres-01",
+    "5e-francais-registres-02",
+    "5e-francais-registres-03",
+    "5e-francais-registres-04",
+    "5e-francais-registres-05",
+    "5e-francais-registres-06"
+   ],
+   "selfCheck": [
+    "5e-francais-registres-q1",
+    "5e-francais-registres-q2",
+    "5e-francais-registres-q3",
+    "5e-francais-registres-q4",
+    "5e-francais-registres-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trois niveaux de langue",
+     "md": "- **Familier** : entre amis, à l'oral, mots relâchés : *Il bosse dur.*\n- **Courant** : langue de tous les jours, correcte : *Il travaille beaucoup.*\n- **Soutenu** : langue de l'écrit soigné, de la littérature, des discours : *Il s'acquitte de sa tâche avec ardeur.*\n\nLe **contexte** (à qui je parle ? où ?) décide du niveau."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quatre séries de mots de niveaux différents.",
+     "alt": "Un tableau à trois colonnes : familier, courant, soutenu, avec quatre séries de mots.",
+     "figure": {
+      "kind": "shapes",
+      "w": 307,
+      "h": 188,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 49.5,
+        "y": 28,
+        "text": "Familier",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 136.0,
+        "y": 28,
+        "text": "Courant",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 177,
+        "y": 4,
+        "w": 126,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 28,
+        "text": "Soutenu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 49.5,
+        "y": 64,
+        "text": "boulot",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 136.0,
+        "y": 64,
+        "text": "travail",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 177,
+        "y": 40,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 64,
+        "text": "labeur",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 49.5,
+        "y": 100,
+        "text": "bouffer",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 136.0,
+        "y": 100,
+        "text": "manger",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 177,
+        "y": 76,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 100,
+        "text": "se restaurer",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 91,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 49.5,
+        "y": 136,
+        "text": "bagnole",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 112,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 136.0,
+        "y": 136,
+        "text": "voiture",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 177,
+        "y": 112,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 136,
+        "text": "automobile",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 91,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 49.5,
+        "y": 172,
+        "text": "rigoler",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 148,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 136.0,
+        "y": 172,
+        "text": "rire",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 177,
+        "y": 148,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 172,
+        "text": "s'esclaffer",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer",
+     "statement": "Classe « bagnole », « voiture », « automobile ».",
+     "steps": [
+      {
+       "md": "« bagnole » : mot relâché de l'oral : familier."
+      },
+      {
+       "md": "« voiture » : mot de tous les jours : courant ; « automobile » : plus recherché : soutenu."
+      }
+     ],
+     "answer": "**bagnole : familier ; voiture : courant ; automobile : soutenu**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : adapter",
+     "statement": "Réécris en langage courant pour un directeur : « Salut, mon vieux, je bosse pas aujourd'hui. »",
+     "steps": [
+      {
+       "md": "Remplace « Salut, mon vieux » par « Bonjour, Monsieur »."
+      },
+      {
+       "md": "Remplace « je bosse pas » par « je ne travaille pas »."
+      }
+     ],
+     "answer": "**Bonjour, Monsieur, je ne travaille pas aujourd'hui.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Employer le familier dans une lettre officielle ou une rédaction.\n- Oublier la négation complète : *Je bosse pas* (familier) / *Je ne travaille pas*.\n- Croire que le soutenu est toujours préférable : il faut adapter le langage à la situation."
+    }
+   ],
+   "reviewNotes": [
+    "Les niveaux de langue varient selon les régions ; les exemples sont du français de référence."
+   ]
+  },
+  {
+   "id": "5e-francais-formation-mots",
+   "title": "Mots composés, abréviations, sigles et emprunts",
+   "minutes": 25,
+   "programRef": "5e — Vocabulaire : composition, abréviation, sigles, emprunts (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître un mot composé, une abréviation, un sigle, un emprunt.",
+    "Savoir écrire correctement ces mots."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-francais-formation-mots-01",
+    "5e-francais-formation-mots-02",
+    "5e-francais-formation-mots-03",
+    "5e-francais-formation-mots-04",
+    "5e-francais-formation-mots-05",
+    "5e-francais-formation-mots-06"
+   ],
+   "selfCheck": [
+    "5e-francais-formation-mots-q1",
+    "5e-francais-formation-mots-q2",
+    "5e-francais-formation-mots-q3",
+    "5e-francais-formation-mots-q4",
+    "5e-francais-formation-mots-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les procédés",
+     "md": "- **Mot composé** : plusieurs mots réunis (trait d'union ou non) : *porte-monnaie, chou-fleur, après-midi, pomme de terre, arc-en-ciel*.\n- **Abréviation** : mot raccourci : *télé* (télévision), *vélo* (vélocipède), *prof*, *ado*.\n- **Sigle** : initiales d'un groupe de mots : *ONU* (Organisation des Nations unies), *CAN* (Coupe d'Afrique des nations).\n- **Emprunt** : mot venu d'une autre langue : *football* (anglais), *pizza* (italien), *safari* (swahili), *sucre* (de l'arabe)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un exemple de chaque procédé.",
+     "alt": "Quatre cadres : mot composé porte-monnaie, abréviation télé, sigle ONU, emprunt football.",
+     "figure": {
+      "kind": "shapes",
+      "w": 381,
+      "h": 164,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 12,
+        "w": 154,
+        "h": 46,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 42,
+        "text": "porte + monnaie",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 164,
+        "y1": 35,
+        "x2": 184,
+        "y2": 35,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 12,
+        "w": 171,
+        "h": 46,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 271.5,
+        "y": 42,
+        "text": "télévision → télé",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 88,
+        "w": 50,
+        "h": 46,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 33.0,
+        "y": 118,
+        "text": "ONU",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 111,
+        "x2": 80,
+        "y2": 111,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 82,
+        "y": 88,
+        "w": 93,
+        "h": 46,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 128.5,
+        "y": 118,
+        "text": "football",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : reconnaître",
+     "statement": "Quel est le procédé : « arc-en-ciel », « ONU », « télé », « pizza » ?",
+     "steps": [
+      {
+       "md": "« arc-en-ciel » : plusieurs mots réunis → mot composé."
+      },
+      {
+       "md": "« ONU » : initiales → sigle ; « télé » : raccourci → abréviation ; « pizza » : mot italien → emprunt."
+      }
+     ],
+     "answer": "**composé ; sigle ; abréviation ; emprunt**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : écrire le sigle",
+     "statement": "Développe le sigle CAN et donne un exemple de phrase.",
+     "steps": [
+      {
+       "md": "CAN = Coupe d'Afrique des nations."
+      },
+      {
+       "md": "Phrase : « Le match de la CAN commence à vingt heures. »"
+      }
+     ],
+     "answer": "**CAN : Coupe d'Afrique des nations.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire un mot composé sans trait d'union quand il est obligatoire : *porte-monnaie*.\n- Mettre des points après un sigle : on écrit *ONU* ou *O.N.U.*, jamais *ONU.* au milieu d'une phrase sans raison.\n- Penser que tous les emprunts viennent de l'anglais : le français a pris des mots à beaucoup de langues."
+    }
+   ],
+   "reviewNotes": [
+    "Origines des emprunts (football, pizza, sucre, safari) : faits classiques de dictionnaire ; à confirmer dans un dictionnaire étymologique avant diffusion."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est familier ?",
+   "choices": [
+    "manger",
+    "se restaurer",
+    "bouffer",
+    "déjeuner"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« bouffer » est relâché.",
+   "id": "5e-francais-registres-01",
+   "tier": "application",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est de niveau courant ?",
+   "choices": [
+    "bagnole",
+    "automobile",
+    "voiture",
+    "caisse"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« voiture » est neutre.",
+   "id": "5e-francais-registres-02",
+   "tier": "application",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quel niveau appartient « s'esclaffer » ?",
+   "choices": [
+    "Familier",
+    "Soutenu",
+    "Courant",
+    "Argotique"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Rire bruyamment dans un registre recherché.",
+   "id": "5e-francais-registres-03",
+   "tier": "application",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est en langage courant ?",
+   "choices": [
+    "J'ai pas envie de sortir.",
+    "Il ne me sied point de sortir.",
+    "Je n'ai pas envie de sortir.",
+    "Pas envie de sortir, quoi !"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Négation complète, vocabulaire simple.",
+   "id": "5e-francais-registres-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à son niveau.",
+   "pairs": [
+    [
+     "J'ai trop la flemme !",
+     "familier"
+    ],
+    [
+     "Je suis fatigué.",
+     "courant"
+    ],
+    [
+     "Je ressens une grande lassitude.",
+     "soutenu"
+    ],
+    [
+     "Il est complètement crevé.",
+     "très familier"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Les mots et la construction indiquent le niveau.",
+   "id": "5e-francais-registres-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris la même demande de trois façons (familier, courant, soutenu) : tu veux demander à ton voisin de baisser la musique.",
+   "model": "Familier : « Eh, tu baisses ta zik ? » Courant : « Pourrais-tu baisser la musique, s'il te plaît ? » Soutenu : « Auriez-vous l'obligeance de bien vouloir réduire le volume de votre musique ? »",
+   "rubric": [
+    "Trois niveaux distincts.",
+    "Le familier est bien familier, le soutenu bien soutenu.",
+    "La demande reste la même.",
+    "Les phrases sont correctes."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-registres-06",
+   "tier": "examen",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel niveau de langue convient à une lettre au directeur ?",
+   "choices": [
+    "Le courant ou le soutenu",
+    "Le familier",
+    "L'argot",
+    "Le langage SMS"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Situation officielle.",
+   "id": "5e-francais-registres-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Boulot » est un mot…",
+   "choices": [
+    "familier",
+    "soutenu",
+    "courant",
+    "scientifique"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Synonyme familier de travail.",
+   "id": "5e-francais-registres-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est de niveau soutenu ?",
+   "choices": [
+    "boulot",
+    "labeur",
+    "taf",
+    "job"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Labeur : travail pénible, registre soutenu.",
+   "id": "5e-francais-registres-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qui décide du niveau de langue à employer ?",
+   "choices": [
+    "La longueur de la phrase",
+    "La couleur du cahier",
+    "La situation et l'interlocuteur",
+    "La ponctuation seule"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On adapte son langage.",
+   "id": "5e-francais-registres-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est courant ?",
+   "choices": [
+    "gamin",
+    "bambin",
+    "marmot",
+    "enfant"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les autres sont plus familiers ou littéraires.",
+   "id": "5e-francais-registres-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-registres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est un mot composé ?",
+   "choices": [
+    "télé",
+    "après-midi",
+    "ONU",
+    "pizza"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« après » + « midi », avec trait d'union.",
+   "id": "5e-francais-formation-mots-01",
+   "tier": "application",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Vélo » est…",
+   "choices": [
+    "une abréviation",
+    "un sigle",
+    "un emprunt",
+    "un mot composé"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Raccourci de « vélocipède ».",
+   "id": "5e-francais-formation-mots-02",
+   "tier": "application",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« ONU » est…",
+   "choices": [
+    "une abréviation",
+    "un mot composé",
+    "un verbe",
+    "un sigle"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Initiales d'Organisation des Nations unies.",
+   "id": "5e-francais-formation-mots-03",
+   "tier": "application",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est un emprunt à l'italien ?",
+   "choices": [
+    "télé",
+    "ONU",
+    "pizza",
+    "arc-en-ciel"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« pizza » vient de l'italien.",
+   "id": "5e-francais-formation-mots-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque mot à son procédé.",
+   "pairs": [
+    [
+     "chou-fleur",
+     "mot composé"
+    ],
+    [
+     "prof",
+     "abréviation"
+    ],
+    [
+     "CAN",
+     "sigle"
+    ],
+    [
+     "football",
+     "emprunt"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Quatre procédés de formation.",
+   "id": "5e-francais-formation-mots-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris quatre phrases courtes qui contiennent chacune : un mot composé, une abréviation, un sigle, un emprunt (en les nommant entre parenthèses).",
+   "model": "Je bois du jus dans un porte-gobelet (mot composé). Mon prof est gentil (abréviation). L'ONU est une organisation internationale (sigle). Nous jouons au football (emprunt).",
+   "rubric": [
+    "Chaque procédé est illustré.",
+    "Les mots sont correctement orthographiés.",
+    "Les procédés sont correctement nommés."
+   ],
+   "points": 4,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-formation-mots-06",
+   "tier": "examen",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'un sigle ?",
+   "choices": [
+    "Un mot raccourci",
+    "Un mot venu d'ailleurs",
+    "Un mot formé avec des initiales",
+    "Un mot de deux mots collés"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "ONU, CAN…",
+   "id": "5e-francais-formation-mots-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est un emprunt ?",
+   "choices": [
+    "porte-monnaie",
+    "télé",
+    "chou-fleur",
+    "safari"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Mot venu du swahili.",
+   "id": "5e-francais-formation-mots-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'abréviation de « télévision » ?",
+   "choices": [
+    "télévi",
+    "tévé",
+    "télé",
+    "téléviseur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Télé.",
+   "id": "5e-francais-formation-mots-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Pomme de terre » est…",
+   "choices": [
+    "un sigle",
+    "un mot composé sans trait d'union",
+    "une abréviation",
+    "un emprunt"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plusieurs mots forment un seul nom.",
+   "id": "5e-francais-formation-mots-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que remplace un trait d'union dans un mot composé ?",
+   "choices": [
+    "Il sépare les syllabes",
+    "Il marque le pluriel",
+    "Il marque le féminin",
+    "Il relie les éléments du mot"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Exemple : porte-monnaie.",
+   "id": "5e-francais-formation-mots-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-formation-mots",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

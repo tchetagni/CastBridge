@@ -1,0 +1,4047 @@
+{
+ "chapter": "5e-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "5e-francais-passe-simple",
+   "title": "Le passé simple à toutes les personnes",
+   "minutes": 30,
+   "programRef": "5e — Conjugaison : le passé simple de l'indicatif (toutes personnes) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Conjuguer au passé simple à toutes les personnes (1er, 2e groupe, être, avoir, verbes fréquents).",
+    "Distinguer passé simple et imparfait dans un récit."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-francais-passe-simple-01",
+    "5e-francais-passe-simple-02",
+    "5e-francais-passe-simple-03",
+    "5e-francais-passe-simple-04",
+    "5e-francais-passe-simple-05",
+    "5e-francais-passe-simple-06"
+   ],
+   "selfCheck": [
+    "5e-francais-passe-simple-q1",
+    "5e-francais-passe-simple-q2",
+    "5e-francais-passe-simple-q3",
+    "5e-francais-passe-simple-q4",
+    "5e-francais-passe-simple-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Le passé simple de cinq verbes.",
+     "alt": "Un tableau de conjugaison au passé simple de chanter, finir, être, avoir et prendre, pour six personnes.",
+     "figure": {
+      "kind": "shapes",
+      "w": 555,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 109,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 28,
+        "text": "chanter",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 28,
+        "text": "finir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 28,
+        "text": "être",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 28,
+        "text": "avoir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 510.0,
+        "y": 28,
+        "text": "prendre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 64,
+        "text": "chantai",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 64,
+        "text": "finis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 64,
+        "text": "fus",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 64,
+        "text": "eus",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 510.0,
+        "y": 64,
+        "text": "pris",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 100,
+        "text": "chantas",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 100,
+        "text": "finis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 100,
+        "text": "fus",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 100,
+        "text": "eus",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 510.0,
+        "y": 100,
+        "text": "pris",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 136,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 112,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 136,
+        "text": "chanta",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 112,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 136,
+        "text": "finit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 136,
+        "text": "fut",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 136,
+        "text": "eut",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 112,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 510.0,
+        "y": 136,
+        "text": "prit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 172,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 148,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 172,
+        "text": "chantâmes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 148,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 172,
+        "text": "finîmes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 148,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 172,
+        "text": "fûmes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 148,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 172,
+        "text": "eûmes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 148,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 510.0,
+        "y": 172,
+        "text": "prîmes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 208,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 184,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 208,
+        "text": "chantâtes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 184,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 208,
+        "text": "finîtes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 184,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 208,
+        "text": "fûtes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 184,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 208,
+        "text": "eûtes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 184,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 510.0,
+        "y": 208,
+        "text": "prîtes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 244,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 220,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 244,
+        "text": "chantèrent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 220,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 244,
+        "text": "finirent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 220,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 244,
+        "text": "furent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 220,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 244,
+        "text": "eurent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 220,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 510.0,
+        "y": 244,
+        "text": "prirent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les terminaisons",
+     "md": "- 1er groupe (et *aller*) : **-ai, -as, -a, -âmes, -âtes, -èrent**.\n- 2e groupe, *prendre*, *mettre*, *dire* et beaucoup d'autres : **-is, -is, -it, -îmes, -îtes, -irent**.\n- Verbes en **-u** (*avoir, être, pouvoir, vouloir, devoir, courir*) : **-us, -us, -ut, -ûmes, -ûtes, -urent**.\n- À part : *venir/tenir* (*je vins, ils vinrent*)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Passé simple ou imparfait ?",
+     "md": "Dans un récit au passé, l'**imparfait** décrit le décor et les actions qui durent ; le **passé simple** exprime des actions **courtes**, **terminées**, qui s'**enchaînent** : *Il pleuvait. Nkeng ouvrit la porte, sortit et courut.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Conjugue « finir » et « avoir » au passé simple avec « nous ».",
+     "steps": [
+      {
+       "md": "« finir » (2e groupe) : -îmes → nous finîmes."
+      },
+      {
+       "md": "« avoir » : radical eu- + -mes avec accent : nous eûmes."
+      }
+     ],
+     "answer": "**nous finîmes ; nous eûmes**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le bon temps",
+     "statement": "Complète : « Le soleil (briller) et les enfants (jouer) quand le tonnerre (gronder). »",
+     "steps": [
+      {
+       "md": "« briller » et « jouer » : actions qui durent et décor → imparfait."
+      },
+      {
+       "md": "« gronder » : action brève qui interrompt → passé simple."
+      }
+     ],
+     "answer": "**Le soleil brillait et les enfants jouaient quand le tonnerre gronda.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier que le passé simple du 1er groupe à « tu » prend s : *tu chantas*.\n- Écrire *il pris* au lieu de *il prit*.\n- Confondre *je finis* (présent ou passé simple) : le contexte aide.\n- Oublier l'accent circonflexe de *nous chantâmes / vous chantâtes*."
+    }
+   ],
+   "reviewNotes": [
+    "Les formes de 1re et 2e personnes du pluriel (-âmes, -âtes) sont rares à l'écrit courant ; elles sont données pour la conjugaison complète."
+   ]
+  },
+  {
+   "id": "5e-francais-plus-que-parfait",
+   "title": "Le plus-que-parfait",
+   "minutes": 25,
+   "programRef": "5e — Conjugaison : le plus-que-parfait de l'indicatif (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Former le plus-que-parfait avec avoir ou être à l'imparfait.",
+    "Utiliser le plus-que-parfait pour une action antérieure à une autre au passé."
+   ],
+   "prerequisites": [
+    "5e-francais-passe-simple"
+   ],
+   "exercises": [
+    "5e-francais-plus-que-parfait-01",
+    "5e-francais-plus-que-parfait-02",
+    "5e-francais-plus-que-parfait-03",
+    "5e-francais-plus-que-parfait-04",
+    "5e-francais-plus-que-parfait-05",
+    "5e-francais-plus-que-parfait-06"
+   ],
+   "selfCheck": [
+    "5e-francais-plus-que-parfait-q1",
+    "5e-francais-plus-que-parfait-q2",
+    "5e-francais-plus-que-parfait-q3",
+    "5e-francais-plus-que-parfait-q4",
+    "5e-francais-plus-que-parfait-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Former le plus-que-parfait",
+     "md": "**auxiliaire (avoir ou être) à l'imparfait + participe passé** : *j'avais chanté, tu avais fini, il était parti, nous étions arrivés.*\n\nLe choix de l'auxiliaire est le même qu'au passé composé. Avec **être**, le participe s'accorde avec le sujet : *elles étaient parties.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le plus-que-parfait avec avoir et être.",
+     "alt": "Un tableau du plus-que-parfait de chanter (avoir) et partir (être).",
+     "figure": {
+      "kind": "shapes",
+      "w": 690,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 178,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 28,
+        "text": "chanter (avoir)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 4,
+        "w": 387,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 28,
+        "text": "partir (être)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 178,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 64,
+        "text": "j'avais chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 40,
+        "w": 387,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 64,
+        "text": "j'étais parti(e)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 178,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 100,
+        "text": "tu avais chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 76,
+        "w": 387,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 100,
+        "text": "tu étais parti(e)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 136,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 112,
+        "w": 178,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 136,
+        "text": "il avait chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 112,
+        "w": 387,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 136,
+        "text": "il était parti / elle était partie",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 172,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 148,
+        "w": 178,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 172,
+        "text": "nous avions chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 148,
+        "w": 387,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 172,
+        "text": "nous étions parti(e)s",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 208,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 184,
+        "w": 178,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 208,
+        "text": "vous aviez chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 184,
+        "w": 387,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 208,
+        "text": "vous étiez parti(e)(s)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 244,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 220,
+        "w": 178,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 244,
+        "text": "ils avaient chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 220,
+        "w": 387,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 244,
+        "text": "ils étaient partis / elles étaient parties",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sa valeur",
+     "md": "Le plus-que-parfait exprime une action **antérieure** (qui s'est passée avant) à une autre action passée : *Quand Mballa **est arrivé**, le bus **était déjà parti**.* Il sert aussi à présenter ce qui s'est passé avant le moment du récit."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : former",
+     "statement": "Conjugue « finir » et « aller » au plus-que-parfait avec « elle ».",
+     "steps": [
+      {
+       "md": "« finir » : avoir à l'imparfait + fini → elle avait fini."
+      },
+      {
+       "md": "« aller » : être à l'imparfait + allée → elle était allée."
+      }
+     ],
+     "answer": "**elle avait fini ; elle était allée**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : antériorité",
+     "statement": "Complète : « Quand nous (arriver), le spectacle (commencer) déjà. »",
+     "steps": [
+      {
+       "md": "« arriver » : action de repère, au passé composé ou passé simple : sommes arrivés / arrivâmes."
+      },
+      {
+       "md": "« commencer » : action antérieure → plus-que-parfait : avait commencé."
+      }
+     ],
+     "answer": "**Quand nous sommes arrivés, le spectacle avait déjà commencé.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre plus-que-parfait (*il avait chanté*) et passé composé (*il a chanté*).\n- Oublier l'accord avec « être » : *elles étaient arrivées*.\n- Employer « avoir » avec un verbe de mouvement : *il avait allé* est faux."
+    }
+   ],
+   "reviewNotes": [
+    "Le programme peut exiger aussi le futur antérieur ; il n'est pas traité ici."
+   ]
+  },
+  {
+   "id": "5e-francais-conditionnel",
+   "title": "Le conditionnel présent",
+   "minutes": 25,
+   "programRef": "5e — Conjugaison : le conditionnel présent (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Former le conditionnel présent.",
+    "Employer le conditionnel pour la politesse, le souhait et l'hypothèse (si + imparfait)."
+   ],
+   "prerequisites": [
+    "5e-francais-passe-simple"
+   ],
+   "exercises": [
+    "5e-francais-conditionnel-01",
+    "5e-francais-conditionnel-02",
+    "5e-francais-conditionnel-03",
+    "5e-francais-conditionnel-04",
+    "5e-francais-conditionnel-05",
+    "5e-francais-conditionnel-06"
+   ],
+   "selfCheck": [
+    "5e-francais-conditionnel-q1",
+    "5e-francais-conditionnel-q2",
+    "5e-francais-conditionnel-q3",
+    "5e-francais-conditionnel-q4",
+    "5e-francais-conditionnel-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Former le conditionnel présent",
+     "md": "**radical du futur + terminaisons de l'imparfait** : **-rais, -rais, -rait, -rions, -riez, -raient**.\n\n*chanter → je chanterais ; finir → tu finirais ; aller → il irait ; avoir → nous aurions ; être → vous seriez.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le conditionnel présent de cinq verbes.",
+     "alt": "Un tableau du conditionnel présent de chanter, finir, être, avoir et aller.",
+     "figure": {
+      "kind": "shapes",
+      "w": 624,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 126,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 28,
+        "text": "chanter",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 4,
+        "w": 109,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 28,
+        "text": "finir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 401.5,
+        "y": 28,
+        "text": "être",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 447,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 28,
+        "text": "avoir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 538,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 579.0,
+        "y": 28,
+        "text": "aller",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 64,
+        "text": "chanterais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 40,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 64,
+        "text": "finirais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 401.5,
+        "y": 64,
+        "text": "serais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 447,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 64,
+        "text": "aurais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 538,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 579.0,
+        "y": 64,
+        "text": "irais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 100,
+        "text": "chanterais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 76,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 100,
+        "text": "finirais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 401.5,
+        "y": 100,
+        "text": "serais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 447,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 100,
+        "text": "aurais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 538,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 579.0,
+        "y": 100,
+        "text": "irais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 136,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 112,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 136,
+        "text": "chanterait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 112,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 136,
+        "text": "finirait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 112,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 401.5,
+        "y": 136,
+        "text": "serait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 447,
+        "y": 112,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 136,
+        "text": "aurait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 538,
+        "y": 112,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 579.0,
+        "y": 136,
+        "text": "irait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 172,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 148,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 172,
+        "text": "chanterions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 148,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 172,
+        "text": "finirions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 148,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 401.5,
+        "y": 172,
+        "text": "serions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 447,
+        "y": 148,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 172,
+        "text": "aurions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 538,
+        "y": 148,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 579.0,
+        "y": 172,
+        "text": "irions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 208,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 184,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 208,
+        "text": "chanteriez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 184,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 208,
+        "text": "finiriez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 184,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 401.5,
+        "y": 208,
+        "text": "seriez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 447,
+        "y": 184,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 208,
+        "text": "auriez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 538,
+        "y": 184,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 579.0,
+        "y": 208,
+        "text": "iriez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 244,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 220,
+        "w": 126,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 244,
+        "text": "chanteraient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 220,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 244,
+        "text": "finiraient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 220,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 401.5,
+        "y": 244,
+        "text": "seraient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 447,
+        "y": 220,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 492.5,
+        "y": 244,
+        "text": "auraient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 538,
+        "y": 220,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 579.0,
+        "y": 244,
+        "text": "iraient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Emplois",
+     "md": "- **Politesse** : *Pourriez-vous m'aider ?*\n- **Souhait** : *Je voudrais voyager.*\n- **Hypothèse** : **si + imparfait** dans la subordonnée, **conditionnel** dans la principale : *Si j'avais de l'argent, j'**achèterais** un vélo.*\n- **Futur dans le passé** : *Il a dit qu'il **viendrait**.*\n\nOn ne met **jamais** le conditionnel après « si » d'hypothèse."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : hypothèse",
+     "statement": "Complète : « Si nous (avoir) plus de temps, nous (visiter) le musée. »",
+     "steps": [
+      {
+       "md": "Après « si » : imparfait → avions."
+      },
+      {
+       "md": "Principale : conditionnel → visiterions."
+      }
+     ],
+     "answer": "**Si nous avions plus de temps, nous visiterions le musée.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : politesse",
+     "statement": "Rends cette demande plus polie : « Je veux un verre d'eau. »",
+     "steps": [
+      {
+       "md": "« veux » est au présent de l'indicatif : c'est direct et peu poli."
+      },
+      {
+       "md": "Remplace-le par le conditionnel de vouloir (radical « voudr- » + -ais) : voudrais."
+      }
+     ],
+     "answer": "**Je voudrais un verre d'eau.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire *Si j'aurais* : après « si » on emploie l'imparfait (*si j'avais*).\n- Confondre futur (*je chanterai*) et conditionnel (*je chanterais*) : -rai / -rais.\n- Oublier le radical irrégulier : *je ferais, je pourrais, je viendrais, je verrais*."
+    }
+   ],
+   "reviewNotes": [
+    "Selon le programme officiel, le conditionnel présent peut être étudié en 5e ou en 4e : à confirmer."
+   ]
+  },
+  {
+   "id": "5e-francais-subjonctif",
+   "title": "Le subjonctif présent (initiation)",
+   "minutes": 30,
+   "programRef": "5e — Conjugaison : le subjonctif présent (initiation) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître les emplois courants du subjonctif présent.",
+    "Conjuguer au subjonctif présent les verbes réguliers et être, avoir, aller, faire, pouvoir."
+   ],
+   "prerequisites": [
+    "5e-francais-conditionnel"
+   ],
+   "exercises": [
+    "5e-francais-subjonctif-01",
+    "5e-francais-subjonctif-02",
+    "5e-francais-subjonctif-03",
+    "5e-francais-subjonctif-04",
+    "5e-francais-subjonctif-05",
+    "5e-francais-subjonctif-06"
+   ],
+   "selfCheck": [
+    "5e-francais-subjonctif-q1",
+    "5e-francais-subjonctif-q2",
+    "5e-francais-subjonctif-q3",
+    "5e-francais-subjonctif-q4",
+    "5e-francais-subjonctif-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le subjonctif",
+     "md": "Le **subjonctif** est un mode qu'on emploie surtout dans une **subordonnée** introduite par **que**, après des verbes ou expressions de **volonté**, de **sentiment** ou de **nécessité** : *il faut que, je veux que, je souhaite que, bien que, pour que, avant que*. *Il faut que tu **viennes**.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le subjonctif présent.",
+     "alt": "Un tableau du subjonctif présent de chanter, finir, être, avoir et aller.",
+     "figure": {
+      "kind": "shapes",
+      "w": 581,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 143,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 4,
+        "w": 100,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 197.0,
+        "y": 28,
+        "text": "chanter",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 4,
+        "w": 109,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 28,
+        "text": "finir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 393.0,
+        "y": 28,
+        "text": "être",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 4,
+        "w": 65,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 462.5,
+        "y": 28,
+        "text": "avoir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 495,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 536.0,
+        "y": 28,
+        "text": "aller",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 64,
+        "text": "que je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 40,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 197.0,
+        "y": 64,
+        "text": "chante",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 40,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 64,
+        "text": "finisse",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 393.0,
+        "y": 64,
+        "text": "sois",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 40,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 462.5,
+        "y": 64,
+        "text": "aie",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 495,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 536.0,
+        "y": 64,
+        "text": "aille",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 100,
+        "text": "que tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 76,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 197.0,
+        "y": 100,
+        "text": "chantes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 76,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 100,
+        "text": "finisses",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 393.0,
+        "y": 100,
+        "text": "sois",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 76,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 462.5,
+        "y": 100,
+        "text": "aies",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 495,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 536.0,
+        "y": 100,
+        "text": "ailles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 136,
+        "text": "qu'il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 112,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 197.0,
+        "y": 136,
+        "text": "chante",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 112,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 136,
+        "text": "finisse",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 393.0,
+        "y": 136,
+        "text": "soit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 112,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 462.5,
+        "y": 136,
+        "text": "ait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 495,
+        "y": 112,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 536.0,
+        "y": 136,
+        "text": "aille",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 172,
+        "text": "que nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 148,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 197.0,
+        "y": 172,
+        "text": "chantions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 148,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 172,
+        "text": "finissions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 148,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 393.0,
+        "y": 172,
+        "text": "soyons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 148,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 462.5,
+        "y": 172,
+        "text": "ayons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 495,
+        "y": 148,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 536.0,
+        "y": 172,
+        "text": "allions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 208,
+        "text": "que vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 184,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 197.0,
+        "y": 208,
+        "text": "chantiez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 184,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 208,
+        "text": "finissiez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 184,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 393.0,
+        "y": 208,
+        "text": "soyez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 184,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 462.5,
+        "y": 208,
+        "text": "ayez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 495,
+        "y": 184,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 536.0,
+        "y": 208,
+        "text": "alliez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 143,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 75.5,
+        "y": 244,
+        "text": "qu'ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 147,
+        "y": 220,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 197.0,
+        "y": 244,
+        "text": "chantent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 247,
+        "y": 220,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.5,
+        "y": 244,
+        "text": "finissent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 220,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 393.0,
+        "y": 244,
+        "text": "soient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 220,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 462.5,
+        "y": 244,
+        "text": "aient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 495,
+        "y": 220,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 536.0,
+        "y": 244,
+        "text": "aillent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Terminaisons et verbes courants",
+     "md": "Pour la plupart des verbes : **-e, -es, -e, -ions, -iez, -ent** (radical de « ils » au présent : *ils finissent → que je finisse*).\n\n**faire** : *que je fasse* ; **pouvoir** : *que je puisse* ; **savoir** : *que je sache* ; **vouloir** : *que je veuille* ; **venir** : *que je vienne, que nous venions*."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Écris au subjonctif présent : « Il faut que tu (finir) tes devoirs. »",
+     "steps": [
+      {
+       "md": "Après « il faut que », on emploie le subjonctif."
+      },
+      {
+       "md": "Radical « finiss- » + -es : finisses."
+      }
+     ],
+     "answer": "**Il faut que tu finisses tes devoirs.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir le mode",
+     "statement": "Complète : « Je veux que vous (venir) à l'heure. »",
+     "steps": [
+      {
+       "md": "« je veux que » exprime une volonté : subjonctif."
+      },
+      {
+       "md": "Venir : que vous veniez."
+      }
+     ],
+     "answer": "**Je veux que vous veniez à l'heure.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Employer l'indicatif après « il faut que » : *il faut que tu viens* est faux.\n- Oublier le « i » de *que nous chantions* ou *que vous chantiez*.\n- Confondre *que tu sois* et *que tu soit* : *sois* se termine par s avec « tu »."
+    }
+   ],
+   "reviewNotes": [
+    "Il se peut que le subjonctif soit au programme de 4e plutôt que 5e : à confirmer ; la fiche reste utile en préparation."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « chanter » avec « nous » :",
+   "choices": [
+    "nous chantâmes",
+    "nous chantons",
+    "nous chantions",
+    "nous chanterons"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Terminaison -âmes.",
+   "id": "5e-francais-passe-simple-01",
+   "tier": "application",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « être » avec « ils » :",
+   "choices": [
+    "ils furent",
+    "ils étaient",
+    "ils seront",
+    "ils sont"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Être : fut / furent.",
+   "id": "5e-francais-passe-simple-02",
+   "tier": "application",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « avoir » avec « je » :",
+   "choices": [
+    "j'avais",
+    "j'aurai",
+    "j'ai",
+    "j'eus"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avoir : eus.",
+   "id": "5e-francais-passe-simple-03",
+   "tier": "application",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Quand le maître (entrer), les élèves (se lever). »",
+   "choices": [
+    "entrait … se levaient",
+    "entrera … se lèveront",
+    "entra … se levèrent",
+    "entre … se lèvent"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Deux actions qui s'enchaînent : passé simple.",
+   "id": "5e-francais-passe-simple-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à sa forme du passé simple avec « tu ».",
+   "pairs": [
+    [
+     "finir",
+     "tu finis"
+    ],
+    [
+     "prendre",
+     "tu pris"
+    ],
+    [
+     "avoir",
+     "tu eus"
+    ],
+    [
+     "aller",
+     "tu allas"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Les formes de la 2e personne.",
+   "id": "5e-francais-passe-simple-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Réécris au passé simple et à l'imparfait : « Je rentre à la maison, je pose mon sac et je prends mon goûter pendant que ma mère prépare le dîner. »",
+   "model": "Je rentrai à la maison, posai mon sac et pris mon goûter pendant que ma mère préparait le dîner.",
+   "rubric": [
+    "« rentrai, posai, pris » au passé simple.",
+    "« préparait » à l'imparfait.",
+    "La phrase reste cohérente."
+   ],
+   "points": 3,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-passe-simple-06",
+   "tier": "examen",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la terminaison de « tu » au passé simple pour un verbe du 1er groupe ?",
+   "choices": [
+    "-as",
+    "-es",
+    "-a",
+    "-us"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tu chantas.",
+   "id": "5e-francais-passe-simple-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « prendre » avec « il » :",
+   "choices": [
+    "il pris",
+    "il prenait",
+    "il prit",
+    "il prendra"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il prit.",
+   "id": "5e-francais-passe-simple-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un récit, quel temps décrit le décor ?",
+   "choices": [
+    "L'imparfait",
+    "Le passé simple",
+    "Le futur antérieur",
+    "L'impératif"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le décor est à l'imparfait.",
+   "id": "5e-francais-passe-simple-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « venir » avec « ils » :",
+   "choices": [
+    "ils venirent",
+    "ils vienrent",
+    "ils vinrent",
+    "ils venaient"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Venir : vint / vinrent.",
+   "id": "5e-francais-passe-simple-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Nous finîmes » : quel est l'infinitif ?",
+   "choices": [
+    "fini",
+    "finir",
+    "finé",
+    "finer"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Finir au passé simple.",
+   "id": "5e-francais-passe-simple-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le plus-que-parfait de « il chante » ?",
+   "choices": [
+    "il a chanté",
+    "il avait chanté",
+    "il chantait",
+    "il chantera"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Imparfait d'avoir + participe.",
+   "id": "5e-francais-plus-que-parfait-01",
+   "tier": "application",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Elles ______ (partir) quand nous sommes arrivés. »",
+   "choices": [
+    "avaient parti",
+    "sont parties",
+    "étaient parties",
+    "étaient partis"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Être à l'imparfait + participe accordé.",
+   "id": "5e-francais-plus-que-parfait-02",
+   "tier": "application",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Il avait fini » exprime une action antérieure à un autre fait passé.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la valeur d'antériorité du plus-que-parfait.",
+   "id": "5e-francais-plus-que-parfait-03",
+   "tier": "application",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Quand j'ai ouvert la porte, il a déjà quitté la maison.",
+    "Quand j'ai ouvert la porte, il avait déjà quitté la maison.",
+    "Quand j'avais ouvert la porte, il quitte la maison.",
+    "Quand j'ouvrirai la porte, il avait quitté la maison."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'action la plus ancienne est au plus-que-parfait.",
+   "id": "5e-francais-plus-que-parfait-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque infinitif au plus-que-parfait avec « nous ».",
+   "pairs": [
+    [
+     "manger",
+     "nous avions mangé"
+    ],
+    [
+     "arriver",
+     "nous étions arrivés"
+    ],
+    [
+     "finir",
+     "nous avions fini"
+    ],
+    [
+     "sortir",
+     "nous étions sortis"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Même choix d'auxiliaire qu'au passé composé.",
+   "id": "5e-francais-plus-que-parfait-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Complète le récit en mettant les verbes entre parenthèses au plus-que-parfait ou au passé simple : « Le chef (arriver) au village. Les habitants (préparer) un grand repas et ils (décorer) la place. »",
+   "model": "Le chef arriva au village. Les habitants avaient préparé un grand repas et avaient décoré la place.",
+   "rubric": [
+    "« arriva » au passé simple.",
+    "« avaient préparé » et « avaient décoré » au plus-que-parfait.",
+    "La logique chronologique est respectée."
+   ],
+   "points": 3,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-plus-que-parfait-06",
+   "tier": "examen",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment forme-t-on le plus-que-parfait ?",
+   "choices": [
+    "Présent de l'auxiliaire + participe passé",
+    "Imparfait de l'auxiliaire + participe passé",
+    "Futur de l'auxiliaire + participe passé",
+    "Infinitif + ais"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "J'avais mangé.",
+   "id": "5e-francais-plus-que-parfait-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que marque le plus-que-parfait ?",
+   "choices": [
+    "Une action future",
+    "Un ordre",
+    "Une habitude présente",
+    "Une action antérieure à une autre action passée"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Antériorité dans le passé.",
+   "id": "5e-francais-plus-que-parfait-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le plus-que-parfait de « elles arrivent » ?",
+   "choices": [
+    "elles avaient arrivé",
+    "elles arrivaient",
+    "elles seront arrivées",
+    "elles étaient arrivées"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Être à l'imparfait + participe accordé.",
+   "id": "5e-francais-plus-que-parfait-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est un plus-que-parfait ?",
+   "choices": [
+    "nous avons fini",
+    "nous avions fini",
+    "nous finissions",
+    "nous finirons"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Imparfait d'avoir + participe.",
+   "id": "5e-francais-plus-que-parfait-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Quand je suis arrivé, il avait mangé », quelle action est la plus ancienne ?",
+   "choices": [
+    "je suis arrivé",
+    "aucune",
+    "Les deux en même temps",
+    "il avait mangé"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plus-que-parfait = antérieur.",
+   "id": "5e-francais-plus-que-parfait-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-plus-que-parfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le conditionnel présent de « chanter » avec « tu » ?",
+   "choices": [
+    "chanteras",
+    "chantais",
+    "chanterais",
+    "chantes"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Radical du futur + -ais.",
+   "id": "5e-francais-conditionnel-01",
+   "tier": "application",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Si j'étais riche, je ______ (voyager) partout. »",
+   "choices": [
+    "voyagerais",
+    "voyagerai",
+    "voyageais",
+    "voyage"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conditionnel dans la principale.",
+   "id": "5e-francais-conditionnel-02",
+   "tier": "application",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme exprime la politesse ?",
+   "choices": [
+    "Pouvez m'aider.",
+    "Pouvait-vous m'aider ?",
+    "Pourriez-vous m'aider ?",
+    "Pourrez-vous m'aider hier ?"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le conditionnel adoucit la demande.",
+   "id": "5e-francais-conditionnel-03",
+   "tier": "application",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Si tu viendrais, nous jouerions ensemble.",
+    "Si tu venais, nous jouerions ensemble.",
+    "Si tu venais, nous jouons ensemble.",
+    "Si tu viens, nous jouerions ensemble."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Imparfait après si, conditionnel dans la principale.",
+   "id": "5e-francais-conditionnel-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à son conditionnel avec « nous ».",
+   "pairs": [
+    [
+     "faire",
+     "ferions"
+    ],
+    [
+     "pouvoir",
+     "pourrions"
+    ],
+    [
+     "venir",
+     "viendrions"
+    ],
+    [
+     "voir",
+     "verrions"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Les radicaux irréguliers sont les mêmes qu'au futur.",
+   "id": "5e-francais-conditionnel-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris quatre phrases d'hypothèse commençant par « Si j'avais… », « Si nous pouvions… », « Si tu étais… », « Si elle savait… ». Chaque phrase doit se terminer par un verbe au conditionnel.",
+   "model": "Si j'avais un vélo, j'irais à l'école plus vite. Si nous pouvions voyager, nous visiterions la côte. Si tu étais plus patient, tu réussirais. Si elle savait la vérité, elle serait triste.",
+   "rubric": [
+    "Après « si » : imparfait.",
+    "Dans la principale : conditionnel présent.",
+    "Orthographe des terminaisons -rais, -rait, -rions.",
+    "Phrases complètes et cohérentes."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-conditionnel-06",
+   "tier": "examen",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles sont les terminaisons du conditionnel présent ?",
+   "choices": [
+    "-rais, -rais, -rait, -rions, -riez, -raient",
+    "-rai, -ras, -ra, -rons, -rez, -ront",
+    "-ais, -ais, -ait, -ions, -iez, -aient",
+    "-is, -is, -it, -îmes, -îtes, -irent"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Radical du futur + terminaisons de l'imparfait.",
+   "id": "5e-francais-conditionnel-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est correcte après « si » d'hypothèse ?",
+   "choices": [
+    "Si j'aurais",
+    "Si j'aurai",
+    "Si j'ai eu",
+    "Si j'avais"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Imparfait.",
+   "id": "5e-francais-conditionnel-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le conditionnel présent d'« être » avec « ils » ?",
+   "choices": [
+    "étaient",
+    "seraient",
+    "seront",
+    "soient"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils seraient.",
+   "id": "5e-francais-conditionnel-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est un emploi du conditionnel ?",
+   "choices": [
+    "L'ordre",
+    "Un fait certain au présent",
+    "Un souvenir lointain",
+    "Le souhait"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Je voudrais…",
+   "id": "5e-francais-conditionnel-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est au conditionnel ?",
+   "choices": [
+    "Je partirai demain.",
+    "Je pars demain.",
+    "Je partirais demain.",
+    "Je partais demain."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Terminaison -rais.",
+   "id": "5e-francais-conditionnel-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Il faut que nous ______ (aller) au marché. »",
+   "choices": [
+    "allons",
+    "irons",
+    "allions",
+    "allaient"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Aller : que nous allions.",
+   "id": "5e-francais-subjonctif-01",
+   "tier": "application",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Je voudrais qu'elle ______ (être) heureuse. »",
+   "choices": [
+    "est",
+    "soit",
+    "sera",
+    "soient"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Subjonctif d'être : qu'elle soit.",
+   "id": "5e-francais-subjonctif-02",
+   "tier": "application",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Il faut que tu ______ (avoir) du courage. »",
+   "choices": [
+    "aies",
+    "as",
+    "avais",
+    "aura"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avoir : que tu aies.",
+   "id": "5e-francais-subjonctif-03",
+   "tier": "application",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Bien qu'il pleut, nous sortons.",
+    "Bien qu'il pleuve, nous sortons.",
+    "Bien qu'il pleuvait, nous sortons.",
+    "Bien qu'il pleuvra, nous sortons."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« bien que » est suivi du subjonctif : qu'il pleuve.",
+   "id": "5e-francais-subjonctif-04",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à son subjonctif avec « que je ».",
+   "pairs": [
+    [
+     "faire",
+     "fasse"
+    ],
+    [
+     "pouvoir",
+     "puisse"
+    ],
+    [
+     "savoir",
+     "sache"
+    ],
+    [
+     "vouloir",
+     "veuille"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Verbes à radical irrégulier.",
+   "id": "5e-francais-subjonctif-05",
+   "tier": "approfondissement",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris quatre phrases avec : « Il faut que… », « Je souhaite que… », « Bien que… » et « Pour que… », en conjuguant correctement un verbe au subjonctif présent dans chacune.",
+   "model": "Il faut que tu finisses ton travail. Je souhaite que tu viennes demain. Bien qu'il soit fatigué, il continue. Je répète pour que vous compreniez.",
+   "rubric": [
+    "Quatre phrases avec les expressions demandées.",
+    "Verbes conjugués au subjonctif présent.",
+    "Terminaisons correctes (-e, -es, -ions, -iez, -ent).",
+    "Phrases complètes et cohérentes."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-francais-subjonctif-06",
+   "tier": "examen",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expression est suivie du subjonctif ?",
+   "choices": [
+    "Il faut que",
+    "Je sais que",
+    "Je pense que",
+    "Il dit que"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nécessité : subjonctif.",
+   "id": "5e-francais-subjonctif-q1",
+   "tier": "autoeval",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase contient un subjonctif présent ?",
+   "choices": [
+    "Vous chantez tous les jours.",
+    "Il faut que vous chantiez.",
+    "Vous chanterez demain.",
+    "Vous avez chanté hier."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« il faut que » est suivi du subjonctif : que vous chantiez.",
+   "id": "5e-francais-subjonctif-q2",
+   "tier": "autoeval",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Subjonctif présent de « être » avec « tu » :",
+   "choices": [
+    "que tu es",
+    "que tu soit",
+    "que tu étais",
+    "que tu sois"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Que tu sois.",
+   "id": "5e-francais-subjonctif-q3",
+   "tier": "autoeval",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Subjonctif de « faire » avec « il » :",
+   "choices": [
+    "qu'il fait",
+    "qu'il fera",
+    "qu'il fasse",
+    "qu'il faisait"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Qu'il fasse.",
+   "id": "5e-francais-subjonctif-q4",
+   "tier": "autoeval",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles sont les terminaisons du subjonctif présent pour un verbe en -er ?",
+   "choices": [
+    "-ai, -as, -a",
+    "-e, -es, -e, -ions, -iez, -ent",
+    "-rais, -rait",
+    "-is, -it, -irent"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Que je chante, que nous chantions…",
+   "id": "5e-francais-subjonctif-q5",
+   "tier": "autoeval",
+   "lesson": "5e-francais-subjonctif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

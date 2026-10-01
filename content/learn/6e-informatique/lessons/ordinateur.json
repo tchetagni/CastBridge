@@ -1,0 +1,1254 @@
+{
+ "chapter": "6e-informatique-ordinateur",
+ "lessons": [
+  {
+   "id": "6e-informatique-materiel-logiciel",
+   "title": "Matériel et logiciel : les parties de l'ordinateur",
+   "minutes": 20,
+   "programRef": "Programme d'informatique de 6e (MINESEC) — découpage exact à vérifier sur le texte officiel — l'ordinateur et ses périphériques",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer le matériel (hardware) du logiciel (software).",
+    "Nommer les périphériques d'entrée, de sortie et les éléments de l'unité centrale."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "6e-informatique-materiel-logiciel-01",
+    "6e-informatique-materiel-logiciel-02",
+    "6e-informatique-materiel-logiciel-03",
+    "6e-informatique-materiel-logiciel-04",
+    "6e-informatique-materiel-logiciel-05",
+    "6e-informatique-materiel-logiciel-06"
+   ],
+   "selfCheck": [
+    "6e-informatique-materiel-logiciel-q1",
+    "6e-informatique-materiel-logiciel-q2",
+    "6e-informatique-materiel-logiciel-q3",
+    "6e-informatique-materiel-logiciel-q4",
+    "6e-informatique-materiel-logiciel-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Un ordinateur",
+     "md": "Un **ordinateur** est une machine qui reçoit des informations (**entrée**), les traite avec des programmes (**traitement**), les conserve (**mémoire**) et affiche ou imprime le résultat (**sortie**)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Schéma simplifié : entrée, traitement, sortie.",
+     "alt": "Trois cadres reliés par des flèches : entrée (clavier, souris, micro), traitement (processeur, mémoire, disque dur), sortie (écran, imprimante, haut-parleur).",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 150,
+        "h": 150,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 40,
+        "w": 150,
+        "h": 150,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 40,
+        "w": 140,
+        "h": 150,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 28,
+        "text": "ENTRÉE",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 28,
+        "text": "TRAITEMENT",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 28,
+        "text": "SORTIE",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 85,
+        "text": "Clavier",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 120,
+        "text": "Souris",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 155,
+        "text": "Micro",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 85,
+        "text": "Processeur",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 120,
+        "text": "Mémoire",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 155,
+        "text": "Disque dur",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 85,
+        "text": "Écran",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 120,
+        "text": "Imprimante",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 155,
+        "text": "Haut-parleur",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 115,
+        "x2": 190,
+        "y2": 115,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 115,
+        "x2": 370,
+        "y2": 115,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Matériel et logiciel",
+     "md": "- Le **matériel** (hardware) est tout ce qu'on peut toucher : écran, clavier, souris, unité centrale, imprimante.\n- Le **logiciel** (software) est l'ensemble des programmes : on ne peut pas le toucher.\n- Le **système d'exploitation** est le logiciel principal : il fait fonctionner la machine et permet de lancer les autres logiciels (les **applications**)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les périphériques",
+     "md": "- **Entrée** : ils envoient des informations à l'ordinateur (clavier, souris, scanner, micro, appareil photo).\n- **Sortie** : ils montrent ou restituent le résultat (écran, imprimante, haut-parleurs).\n- **Stockage** : ils conservent les fichiers (disque dur, clé USB, carte mémoire)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer",
+     "statement": "Classe « souris », « imprimante » et « clé USB » : entrée, sortie ou stockage ?",
+     "steps": [
+      {
+       "md": "La souris envoie les mouvements de la main à l'ordinateur : entrée."
+      },
+      {
+       "md": "L'imprimante met le résultat sur papier : sortie."
+      },
+      {
+       "md": "La clé USB garde des fichiers : stockage."
+      }
+     ],
+     "answer": "**Souris : entrée ; imprimante : sortie ; clé USB : stockage.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : matériel ou logiciel ?",
+     "statement": "Dans la salle informatique du collège, Amina cite : l'écran, un traitement de texte, le clavier, le système d'exploitation. Que sont-ils ?",
+     "steps": [
+      {
+       "md": "On peut toucher l'écran et le clavier : c'est du matériel."
+      },
+      {
+       "md": "Un traitement de texte et le système d'exploitation sont des programmes : ce sont des logiciels."
+      }
+     ],
+     "answer": "**Matériel : écran, clavier. Logiciel : traitement de texte, système d'exploitation.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Appeler « ordinateur » seulement l'écran : l'écran n'est qu'un périphérique, le « cerveau » est dans l'unité centrale.\n- Croire que le disque dur est un logiciel : c'est un composant matériel qui **stocke** les logiciels et les fichiers.\n- Confondre mémoire de travail (qui s'efface à l'extinction) et stockage durable (disque dur, clé USB)."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 6e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Vocabulaire : « périphérique d'entrée / de sortie », « unité centrale » ; vérifier les termes employés par le programme (ex. « écran = unité d'affichage »)."
+   ]
+  },
+  {
+   "id": "6e-informatique-demarrer-bureau",
+   "title": "Allumer, utiliser la souris, éteindre correctement",
+   "minutes": 20,
+   "programRef": "Programme d'informatique de 6e (MINESEC) — découpage exact à vérifier sur le texte officiel — prise en main de l'ordinateur",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Allumer et éteindre un ordinateur dans le bon ordre.",
+    "Reconnaître le bureau, les icônes et les fenêtres, et utiliser la souris (clic, double-clic, glisser)."
+   ],
+   "prerequisites": [
+    "6e-informatique-materiel-logiciel"
+   ],
+   "exercises": [
+    "6e-informatique-demarrer-bureau-01",
+    "6e-informatique-demarrer-bureau-02",
+    "6e-informatique-demarrer-bureau-03",
+    "6e-informatique-demarrer-bureau-04",
+    "6e-informatique-demarrer-bureau-05",
+    "6e-informatique-demarrer-bureau-06"
+   ],
+   "selfCheck": [
+    "6e-informatique-demarrer-bureau-q1",
+    "6e-informatique-demarrer-bureau-q2",
+    "6e-informatique-demarrer-bureau-q3",
+    "6e-informatique-demarrer-bureau-q4",
+    "6e-informatique-demarrer-bureau-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Allumer l'ordinateur",
+     "md": "1. Vérifier que l'ordinateur est bien branché (et le courant présent).\n2. Appuyer **une fois** sur le bouton de marche de l'unité centrale, puis allumer l'écran s'il a son propre bouton.\n3. Attendre la fin du démarrage : le **bureau** apparaît.\n4. Ouvrir sa session si on te le demande (nom d'utilisateur et mot de passe)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le bureau et les fenêtres",
+     "md": "Le **bureau** est l'écran d'accueil. On y voit des **icônes** (petits dessins qui représentent un logiciel, un dossier ou un fichier) et souvent une **barre** avec les programmes ouverts. Chaque programme ouvert s'affiche dans une **fenêtre** que l'on peut agrandir, réduire, déplacer ou fermer."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La souris",
+     "md": "- **Clic gauche** : sélectionner un élément.\n- **Double-clic** (deux clics rapides) : ouvrir.\n- **Clic droit** : afficher un menu avec des choix.\n- **Glisser-déposer** : maintenir le bouton gauche enfoncé, déplacer, puis relâcher."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : quel geste ?",
+     "statement": "Boris veut ouvrir un dossier posé sur le bureau. Quel geste fait-il ?",
+     "steps": [
+      {
+       "md": "Un simple clic ne fait que sélectionner l'icône."
+      },
+      {
+       "md": "Pour ouvrir, il faut deux clics rapides sur l'icône."
+      }
+     ],
+     "answer": "**Un double-clic gauche sur le dossier.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : éteindre",
+     "statement": "Mets dans l'ordre : couper le courant, fermer les fichiers et logiciels, choisir « Arrêter » dans le menu du système.",
+     "steps": [
+      {
+       "md": "On commence par fermer les logiciels en enregistrant son travail."
+      },
+      {
+       "md": "Ensuite, on demande l'arrêt dans le menu du système et on attend que l'écran s'éteigne."
+      },
+      {
+       "md": "Seulement après, si besoin, on coupe l'alimentation."
+      }
+     ],
+     "answer": "**1) fermer les fichiers et logiciels ; 2) « Arrêter » dans le menu ; 3) couper le courant.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Éteindre correctement",
+     "md": "On n'éteint **jamais** un ordinateur en débranchant le câble ou en appuyant longtemps sur le bouton, sauf blocage total. Cela peut abîmer les fichiers et le système. Il faut toujours **enregistrer**, **fermer** les logiciels puis utiliser la commande d'arrêt du système."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Cliquer plusieurs fois sur le bouton de marche pendant le démarrage : on attend.\n- Fermer la fenêtre et croire que le fichier est enregistré : fermer n'est pas enregistrer.\n- Double-cliquer trop lentement : le système comprend deux clics simples."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 6e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Les noms des éléments (bureau, barre des tâches, icône) varient selon le système d'exploitation : le cours reste générique, sans capture d'écran."
+   ]
+  },
+  {
+   "id": "6e-informatique-clavier-saisie",
+   "title": "Le clavier et la saisie d'un texte",
+   "minutes": 20,
+   "programRef": "Programme d'informatique de 6e (MINESEC) — découpage exact à vérifier sur le texte officiel — utilisation du clavier",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître les groupes de touches du clavier.",
+    "Utiliser les touches Entrée, Majuscule, Retour arrière, Suppr et la barre d'espace pour saisir un texte correct."
+   ],
+   "prerequisites": [
+    "6e-informatique-demarrer-bureau"
+   ],
+   "exercises": [
+    "6e-informatique-clavier-saisie-01",
+    "6e-informatique-clavier-saisie-02",
+    "6e-informatique-clavier-saisie-03",
+    "6e-informatique-clavier-saisie-04",
+    "6e-informatique-clavier-saisie-05",
+    "6e-informatique-clavier-saisie-06"
+   ],
+   "selfCheck": [
+    "6e-informatique-clavier-saisie-q1",
+    "6e-informatique-clavier-saisie-q2",
+    "6e-informatique-clavier-saisie-q3",
+    "6e-informatique-clavier-saisie-q4",
+    "6e-informatique-clavier-saisie-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les groupes de touches",
+     "md": "Le clavier AZERTY comporte : les **touches de lettres**, les **chiffres** (sur la rangée du haut ou le pavé numérique à droite), les **touches de ponctuation**, les **touches de fonction** (F1 à F12) et les **touches spéciales** (Entrée, Espace, Majuscule, Suppr, Retour arrière, flèches)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Plan très simplifié d'un clavier.",
+     "alt": "Un rectangle représentant le clavier avec des zones : chiffres et lettres, barre d'espace, touche Entrée et flèches.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 460,
+        "h": 170,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 25,
+        "w": 300,
+        "h": 45,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 54,
+        "text": "Chiffres et lettres",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 80,
+        "w": 300,
+        "h": 45,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 109,
+        "text": "Lettres A Z E R T Y…",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 135,
+        "w": 300,
+        "h": 35,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 159,
+        "text": "Barre d'espace",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 25,
+        "w": 115,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 397,
+        "y": 65,
+        "text": "Entrée",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 105,
+        "w": 115,
+        "h": 65,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 397,
+        "y": 143,
+        "text": "Flèches",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les touches utiles",
+     "md": "- **Espace** : laisse un blanc entre les mots.\n- **Entrée** : passe à la ligne (nouveau paragraphe).\n- **Majuscule** (maintenue) : écrit une lettre en majuscule ; **Verrouillage majuscules** : écrit tout en majuscules.\n- **Retour arrière** : efface à gauche du curseur ; **Suppr** : efface à droite.\n- **Flèches** : déplacent le curseur."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Taper correctement",
+     "md": "1. Place tes doigts sur la rangée du milieu et regarde l'écran plutôt que le clavier quand tu progresses.\n2. Mets une espace **après** une virgule ou un point, pas avant (en français on met une espace avant « ? », « ! » et « : »).\n3. Commence une phrase par une majuscule.\n4. Appuie sur **Entrée** seulement à la fin d'un paragraphe, pas à la fin de chaque ligne."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : corriger",
+     "statement": "Un élève a tapé « bonjour,je m'appelle  amina ». Que corriger ?",
+     "steps": [
+      {
+       "md": "Majuscule au début : « Bonjour »."
+      },
+      {
+       "md": "Une espace après la virgule : « Bonjour, je… »."
+      },
+      {
+       "md": "Deux espaces avant « amina » : n'en garder qu'une ; et « Amina » prend une majuscule."
+      }
+     ],
+     "answer": "**Bonjour, je m'appelle Amina.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : quelle touche ?",
+     "statement": "Boris a tapé un mot de trop juste avant le curseur. Quelle touche utilise-t-il pour effacer ?",
+     "steps": [
+      {
+       "md": "Le mot est à gauche du curseur."
+      },
+      {
+       "md": "La touche qui efface à gauche est Retour arrière."
+      }
+     ],
+     "answer": "**Retour arrière** (Suppr effacerait à droite)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Appuyer sur Entrée à la fin de chaque ligne : le texte se coupe mal si on change la largeur.\n- Mettre plusieurs espaces pour décaler un mot : on utilise plutôt les outils de mise en forme.\n- Laisser le verrouillage majuscules actif sans s'en rendre compte : tout le texte sort en capitales."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 6e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Disposition du clavier : l'AZERTY est supposé (usage francophone). Les noms des touches varient selon les marques : on reste sur des appellations courantes."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel élément est un périphérique d'entrée ?",
+   "choices": [
+    "Le clavier",
+    "L'écran",
+    "L'imprimante",
+    "Le haut-parleur"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le clavier envoie à l'ordinateur ce que l'on tape. Les trois autres restituent un résultat : ce sont des sorties.",
+   "id": "6e-informatique-materiel-logiciel-01",
+   "tier": "application",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un logiciel est une partie de l'ordinateur que l'on peut toucher.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ne touche pas un logiciel : c'est un programme. Ce que l'on touche est le matériel.",
+   "id": "6e-informatique-materiel-logiciel-02",
+   "tier": "application",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque élément à son rôle.",
+   "pairs": [
+    [
+     "Écran",
+     "Afficher le résultat"
+    ],
+    [
+     "Souris",
+     "Pointer et cliquer"
+    ],
+    [
+     "Imprimante",
+     "Mettre le résultat sur papier"
+    ],
+    [
+     "Disque dur",
+     "Garder les fichiers"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Écran et imprimante sont des sorties, la souris est une entrée, le disque dur sert au stockage.",
+   "id": "6e-informatique-materiel-logiciel-03",
+   "tier": "application",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Parmi ces éléments, lequel est un logiciel ?",
+   "choices": [
+    "Le processeur",
+    "Le système d'exploitation",
+    "Le disque dur",
+    "Le clavier"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le système d'exploitation est un programme. Processeur, disque dur et clavier sont du matériel.",
+   "id": "6e-informatique-materiel-logiciel-04",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Classe chaque appareil : entrée, sortie ou stockage.",
+   "pairs": [
+    [
+     "Scanner",
+     "Entrée d'images"
+    ],
+    [
+     "Imprimante",
+     "Sortie sur papier"
+    ],
+    [
+     "Clé USB",
+     "Stockage"
+    ],
+    [
+     "Haut-parleur",
+     "Sortie de sons"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Le scanner envoie des images à l'ordinateur ; l'imprimante et le haut-parleur restituent un résultat ; la clé USB conserve.",
+   "id": "6e-informatique-materiel-logiciel-05",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Au cybercafé du quartier, Mballa tape une lettre, l'enregistre sur une clé USB, puis l'imprime.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel périphérique utilise-t-il pour taper ?",
+     "choices": [
+      "L'imprimante",
+      "L'écran",
+      "Le clavier",
+      "Le scanner"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "On tape au clavier : c'est une entrée.",
+     "id": "6e-informatique-materiel-logiciel-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Où garde-t-il sa lettre pour l'emporter ?",
+     "choices": [
+      "Dans l'imprimante",
+      "Dans l'écran",
+      "Sur la clé USB",
+      "Dans la souris"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La clé USB est un périphérique de stockage amovible.",
+     "id": "6e-informatique-materiel-logiciel-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Cite un matériel et un logiciel qu'il a utilisés, et dis lequel est un périphérique de sortie.",
+     "model": "Matériel : clavier (ou écran, imprimante). Logiciel : le traitement de texte. L'imprimante est un périphérique de sortie.",
+     "rubric": [
+      "Un matériel correct",
+      "Un logiciel correct",
+      "La sortie correctement identifiée"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-informatique-materiel-logiciel-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-informatique-materiel-logiciel-06",
+   "tier": "examen",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait le système d'exploitation ?",
+   "choices": [
+    "Il imprime les documents",
+    "Il fait fonctionner l'ordinateur et permet de lancer les applications",
+    "Il remplace le clavier",
+    "Il sert à ranger la salle informatique"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est le logiciel de base, indispensable pour utiliser la machine.",
+   "id": "6e-informatique-materiel-logiciel-q1",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel appareil est à la fois pratique pour transporter des fichiers et un périphérique de stockage ?",
+   "choices": [
+    "La clé USB",
+    "Le moniteur",
+    "Le micro",
+    "La souris"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La clé USB conserve des fichiers et se transporte facilement.",
+   "id": "6e-informatique-materiel-logiciel-q2",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'écran est un périphérique de…",
+   "choices": [
+    "Entrée",
+    "Stockage",
+    "Traitement",
+    "Sortie"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il affiche le résultat : c'est une sortie.",
+   "id": "6e-informatique-materiel-logiciel-q3",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase décrit le matériel ?",
+   "choices": [
+    "L'ensemble des programmes",
+    "Les fichiers de l'élève",
+    "Ce que l'on peut toucher dans l'ordinateur",
+    "Les règles de la salle"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le matériel est la partie physique.",
+   "id": "6e-informatique-materiel-logiciel-q4",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans le schéma entrée, traitement, sortie, où se trouve le processeur ?",
+   "choices": [
+    "Dans l'entrée",
+    "Dans la sortie",
+    "Nulle part",
+    "Dans le traitement"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le processeur exécute les calculs : c'est le traitement.",
+   "id": "6e-informatique-materiel-logiciel-q5",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-materiel-logiciel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel geste de souris sert à ouvrir un dossier ?",
+   "choices": [
+    "Le clic droit",
+    "Le glisser-déposer",
+    "Le double-clic",
+    "Un seul clic sur le bureau vide"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le double-clic gauche ouvre l'élément. Le clic droit affiche un menu.",
+   "id": "6e-informatique-demarrer-bureau-01",
+   "tier": "application",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : pour éteindre proprement l'ordinateur, on peut simplement arracher le câble d'alimentation.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On risque d'abîmer les fichiers. Il faut utiliser la commande d'arrêt du système.",
+   "id": "6e-informatique-demarrer-bureau-02",
+   "tier": "application",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque geste à son effet.",
+   "pairs": [
+    [
+     "Clic gauche",
+     "Sélectionner"
+    ],
+    [
+     "Double-clic",
+     "Ouvrir"
+    ],
+    [
+     "Clic droit",
+     "Afficher un menu"
+    ],
+    [
+     "Glisser-déposer",
+     "Déplacer un élément"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Ces quatre gestes sont la base du travail à la souris.",
+   "id": "6e-informatique-demarrer-bureau-03",
+   "tier": "application",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la bonne suite pour terminer une séance ?",
+   "choices": [
+    "Enregistrer, fermer les logiciels, arrêter l'ordinateur",
+    "Arrêter, puis enregistrer",
+    "Couper le courant, puis fermer les logiciels",
+    "Fermer l'écran seulement"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On sauvegarde d'abord, on ferme ensuite, puis on arrête.",
+   "id": "6e-informatique-demarrer-bureau-04",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que représente une icône sur le bureau ?",
+   "choices": [
+    "Seulement une image décorative",
+    "Un logiciel, un dossier ou un fichier",
+    "La mémoire libre",
+    "Le nom de l'utilisateur uniquement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Une icône est un petit dessin qui représente un élément que l'on peut ouvrir.",
+   "id": "6e-informatique-demarrer-bureau-05",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans la salle informatique, l'ordinateur d'Amina semble « figé » : la souris ne bouge plus.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Que doit-elle faire en premier ?",
+     "choices": [
+      "Débrancher immédiatement le câble",
+      "Patienter un peu et prévenir le professeur",
+      "Frapper sur l'écran",
+      "Appuyer très vite sur toutes les touches"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "On attend, car la machine travaille peut-être, puis on demande de l'aide.",
+     "id": "6e-informatique-demarrer-bureau-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique pourquoi on ne doit pas éteindre brutalement un ordinateur qui fonctionne.",
+     "model": "Une extinction brutale peut abîmer les fichiers ouverts et le système, et on perd le travail non enregistré. Il faut utiliser la commande d'arrêt.",
+     "rubric": [
+      "Idée de fichiers abîmés ou travail perdu",
+      "Mention de la commande d'arrêt"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-informatique-demarrer-bureau-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-informatique-demarrer-bureau-06",
+   "tier": "examen",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la première étape pour allumer un ordinateur de bureau ?",
+   "choices": [
+    "Ouvrir un traitement de texte",
+    "Imprimer un document",
+    "Vérifier qu'il est branché",
+    "Taper son mot de passe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On s'assure d'abord de l'alimentation, puis on appuie sur le bouton de marche.",
+   "id": "6e-informatique-demarrer-bureau-q1",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait un clic droit ?",
+   "choices": [
+    "Il éteint l'ordinateur",
+    "Il supprime tout",
+    "Il agrandit l'écran",
+    "Il affiche un menu de choix"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le menu qui apparaît dépend de l'endroit cliqué.",
+   "id": "6e-informatique-demarrer-bureau-q2",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment appelle-t-on l'écran d'accueil avec les icônes ?",
+   "choices": [
+    "Le bureau",
+    "Le clavier",
+    "La corbeille de l'imprimante",
+    "Le câble"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le bureau est la surface de travail affichée au démarrage.",
+   "id": "6e-informatique-demarrer-bureau-q3",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que permet de faire une fenêtre ?",
+   "choices": [
+    "Afficher un programme ouvert, que l'on peut déplacer ou fermer",
+    "Imprimer une feuille",
+    "Brancher un périphérique",
+    "Réparer l'ordinateur"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chaque programme ouvert s'affiche dans sa fenêtre.",
+   "id": "6e-informatique-demarrer-bureau-q4",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avant d'arrêter l'ordinateur, que faut-il faire de son travail ?",
+   "choices": [
+    "L'enregistrer",
+    "Le laisser sans nom",
+    "L'effacer",
+    "Le cacher sur le bureau"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sans enregistrement, le travail non sauvegardé est perdu.",
+   "id": "6e-informatique-demarrer-bureau-q5",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-demarrer-bureau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle touche efface le caractère situé à gauche du curseur ?",
+   "choices": [
+    "Entrée",
+    "Retour arrière",
+    "Espace",
+    "Flèche droite"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Retour arrière efface vers la gauche ; Suppr efface vers la droite.",
+   "id": "6e-informatique-clavier-saisie-01",
+   "tier": "application",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on appuie sur Entrée à la fin de chaque ligne d'un paragraphe.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On appuie sur Entrée seulement pour commencer un nouveau paragraphe : le logiciel passe seul à la ligne.",
+   "id": "6e-informatique-clavier-saisie-02",
+   "tier": "application",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque touche à son rôle.",
+   "pairs": [
+    [
+     "Espace",
+     "Séparer deux mots"
+    ],
+    [
+     "Entrée",
+     "Nouveau paragraphe"
+    ],
+    [
+     "Suppr",
+     "Effacer à droite du curseur"
+    ],
+    [
+     "Majuscule",
+     "Écrire une capitale"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Ce sont les touches spéciales les plus utilisées.",
+   "id": "6e-informatique-clavier-saisie-03",
+   "tier": "application",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Tu veux écrire « Yaoundé » avec une capitale à Y. Que fais-tu ?",
+   "choices": [
+    "J'appuie deux fois sur Espace",
+    "J'appuie sur Entrée puis Y",
+    "Je tape y puis Suppr",
+    "Je maintiens Majuscule et je tape Y"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La touche Majuscule, maintenue, donne la lettre capitale.",
+   "id": "6e-informatique-clavier-saisie-04",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la bonne écriture ?",
+   "choices": [
+    "Bonjour ,comment vas-tu?",
+    "bonjour,comment vas-tu ?",
+    "Bonjour,comment  vas-tu ?",
+    "Bonjour, comment vas-tu ?"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Espace après la virgule, pas avant ; majuscule au début ; espace avant le point d'interrogation.",
+   "id": "6e-informatique-clavier-saisie-05",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Voici un texte mal saisi : « les élèves de 6e  vont au cybercafé,ils  tapent un exposé. » Réécris-le correctement et explique deux corrections.",
+   "model": "Les élèves de 6e vont au cybercafé, ils tapent un exposé. Corrections : majuscule en début de phrase ; espace unique entre les mots ; espace après la virgule.",
+   "rubric": [
+    "Texte final correct",
+    "Au moins deux corrections expliquées"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "6e-informatique-clavier-saisie-06",
+   "tier": "examen",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle touche permet de passer à un nouveau paragraphe ?",
+   "choices": [
+    "Entrée",
+    "Suppr",
+    "Retour arrière",
+    "Les flèches"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Entrée termine le paragraphe et commence le suivant.",
+   "id": "6e-informatique-clavier-saisie-q1",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait la touche Suppr ?",
+   "choices": [
+    "Elle écrit une majuscule",
+    "Elle efface le caractère à droite du curseur",
+    "Elle ferme le logiciel",
+    "Elle imprime le texte"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Suppr efface vers la droite.",
+   "id": "6e-informatique-clavier-saisie-q2",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où met-on l'espace avec une virgule ?",
+   "choices": [
+    "Après la virgule",
+    "Avant la virgule",
+    "Ni avant ni après",
+    "Avant et après"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On écrit « mot, mot » : l'espace suit la virgule.",
+   "id": "6e-informatique-clavier-saisie-q3",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi servent les flèches du clavier ?",
+   "choices": [
+    "À effacer le texte",
+    "À déplacer le curseur",
+    "À allumer l'écran",
+    "À imprimer"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elles font avancer le curseur sans rien modifier.",
+   "id": "6e-informatique-clavier-saisie-q4",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment obtenir une seule lettre majuscule ?",
+   "choices": [
+    "En maintenant Majuscule et en tapant la lettre",
+    "En tapant deux fois la lettre",
+    "En appuyant sur Suppr",
+    "En changeant d'écran"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La touche Majuscule agit tant qu'on la maintient.",
+   "id": "6e-informatique-clavier-saisie-q5",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-clavier-saisie",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

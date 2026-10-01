@@ -1,0 +1,940 @@
+{
+ "chapter": "6e-maths-fractions",
+ "lessons": [
+  {
+   "id": "6e-maths-fractions-lecture",
+   "title": "Fractions : lecture, représentation et comparaison",
+   "minutes": 25,
+   "programRef": "6e — Fractions : écriture, représentation, fractions égales, comparaison (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Lire et écrire une fraction, la représenter par une figure ou sur une droite graduée.",
+    "Reconnaître des fractions égales et comparer deux fractions."
+   ],
+   "prerequisites": [
+    "6e-maths-division-priorites"
+   ],
+   "exercises": [
+    "6e-maths-fractions-lecture-01",
+    "6e-maths-fractions-lecture-02",
+    "6e-maths-fractions-lecture-03",
+    "6e-maths-fractions-lecture-04",
+    "6e-maths-fractions-lecture-05",
+    "6e-maths-fractions-lecture-06"
+   ],
+   "selfCheck": [
+    "6e-maths-fractions-lecture-q1",
+    "6e-maths-fractions-lecture-q2",
+    "6e-maths-fractions-lecture-q3",
+    "6e-maths-fractions-lecture-q4",
+    "6e-maths-fractions-lecture-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fraction",
+     "md": "La fraction $\\frac{a}{b}$ (b ≠ 0) représente $a$ parts égales d'un tout partagé en $b$ parts égales. $a$ est le **numérateur**, $b$ le **dénominateur**. $\\frac{3}{8}$ se lit « trois huitièmes »."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un rectangle partagé en 8 parts égales, dont 3 sont coloriées.",
+     "alt": "Rectangle découpé en huit parts égales dont trois sont coloriées en orange.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 50,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 30,
+        "w": 50,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 30,
+        "w": 50,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 30,
+        "w": 50,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 30,
+        "w": 50,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 30,
+        "w": 50,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 30,
+        "w": 50,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 30,
+        "w": 50,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 105,
+        "text": "3 parts coloriées sur 8 : 3/8",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Fractions égales et comparaison",
+     "md": "- On ne change pas une fraction en multipliant (ou divisant) le numérateur et le dénominateur par un même nombre non nul : $\\frac{1}{2} = \\frac{3}{6}$.\n- Même dénominateur : la plus grande fraction a le plus grand numérateur.\n- Sinon, on réduit au même dénominateur. Une fraction est plus petite que 1 si son numérateur est plus petit que son dénominateur."
+    },
+    {
+     "type": "illustration",
+     "caption": "Des fractions sur une droite graduée en quarts.",
+     "alt": "Droite graduée de 0 à 1 avec les graduations un quart, un demi et trois quarts.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 120,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 60,
+        "x2": 410,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 50,
+        "x2": 40,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 50,
+        "x2": 130,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 50,
+        "x2": 220,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 50,
+        "x2": 310,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 400,
+        "y1": 50,
+        "x2": 400,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 95,
+        "text": "0",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 95,
+        "text": "1/4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 95,
+        "text": "1/2",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 95,
+        "text": "3/4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 95,
+        "text": "1",
+        "size": 18,
+        "color": "ink",
+        "anchor": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : fractions égales",
+     "statement": "Complète : $\\frac{3}{5} = \\frac{?}{20}$.",
+     "steps": [
+      {
+       "md": "On passe de 5 à 20 en multipliant par 4."
+      },
+      {
+       "md": "On multiplie aussi le numérateur par 4 :",
+       "tex": "\\frac{3}{5} = \\frac{3 \\times 4}{5 \\times 4} = \\frac{12}{20}"
+      }
+     ],
+     "answer": "**12/20**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : comparer",
+     "statement": "Compare $\\frac{2}{3}$ et $\\frac{5}{6}$.",
+     "steps": [
+      {
+       "md": "On réduit au même dénominateur 6 : $\\frac{2}{3} = \\frac{4}{6}$."
+      },
+      {
+       "md": "On compare les numérateurs : 4 < 5."
+      }
+     ],
+     "answer": "**2/3 < 5/6**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que $\\frac{1}{5}$ est plus grand que $\\frac{1}{3}$ parce que 5 > 3 : plus le dénominateur est grand, plus les parts sont petites.\n- Additionner numérateur et dénominateur pour « simplifier » : $\\frac{3}{6}$ n'est pas égal à $\\frac{1}{3}$.\n- Dessiner des parts inégales : le tout doit être partagé en parts égales."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier jusqu'où va la comparaison en 6e (même dénominateur, dénominateur multiple de l'autre)."
+   ]
+  },
+  {
+   "id": "6e-maths-fractions-operations",
+   "title": "Fractions : additions, soustractions et fraction d'une quantité",
+   "minutes": 30,
+   "programRef": "6e — Fractions : addition, soustraction, fraction d'une quantité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Additionner et soustraire des fractions de même dénominateur, ou de dénominateurs multiples l'un de l'autre.",
+    "Calculer la fraction d'une quantité."
+   ],
+   "prerequisites": [
+    "6e-maths-fractions-lecture"
+   ],
+   "exercises": [
+    "6e-maths-fractions-operations-01",
+    "6e-maths-fractions-operations-02",
+    "6e-maths-fractions-operations-03",
+    "6e-maths-fractions-operations-04",
+    "6e-maths-fractions-operations-05",
+    "6e-maths-fractions-operations-06"
+   ],
+   "selfCheck": [
+    "6e-maths-fractions-operations-q1",
+    "6e-maths-fractions-operations-q2",
+    "6e-maths-fractions-operations-q3",
+    "6e-maths-fractions-operations-q4",
+    "6e-maths-fractions-operations-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Additionner et soustraire",
+     "md": "Si les fractions ont le **même dénominateur**, on additionne (ou soustrait) les numérateurs et on garde le dénominateur : $\\frac{a}{c} + \\frac{b}{c} = \\frac{a + b}{c}$. Sinon, on réduit d'abord au même dénominateur."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Fraction d'une quantité",
+     "md": "Prendre $\\frac{a}{b}$ d'une quantité $Q$, c'est calculer $Q \\div b \\times a$. Exemple : les $\\frac{3}{5}$ de 40 : $40 \\div 5 = 8$ puis $8 \\times 3 = 24$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Fraction d'un ensemble : 3 cases sur 10.",
+     "alt": "Dix cases dont trois sont coloriées en bleu.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 105,
+        "text": "Les 3/10 de 10 cases : 3 cases",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : addition",
+     "statement": "Calcule $\\frac{3}{8} + \\frac{1}{4}$.",
+     "steps": [
+      {
+       "md": "On écrit $\\frac{1}{4} = \\frac{2}{8}$ pour avoir le même dénominateur."
+      },
+      {
+       "md": "On additionne les numérateurs :",
+       "tex": "\\frac{3}{8} + \\frac{2}{8} = \\frac{5}{8}"
+      }
+     ],
+     "answer": "**5/8**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : fraction d'une quantité",
+     "statement": "Un marché compte 60 vendeurs ; les $\\frac{2}{5}$ vendent des fruits. Combien vendent des fruits ?",
+     "steps": [
+      {
+       "md": "On divise par le dénominateur : 60 ÷ 5 = 12."
+      },
+      {
+       "md": "On multiplie par le numérateur : 12 × 2 = 24."
+      }
+     ],
+     "answer": "**24 vendeurs**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner les dénominateurs : $\\frac{1}{4} + \\frac{1}{4} = \\frac{2}{4}$, pas $\\frac{2}{8}$.\n- Oublier de réduire au même dénominateur avant d'additionner des fractions différentes.\n- Pour une fraction d'une quantité, diviser par le numérateur au lieu du dénominateur."
+    }
+   ],
+   "reviewNotes": [
+    "Le produit de deux fractions est vu en 5e/4e selon les programmes : non traité ici ; à vérifier."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction représente 2 parts sur 5 ?",
+   "choices": [
+    "2/5",
+    "5/2",
+    "2/7",
+    "3/5"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le numérateur compte les parts prises (2), le dénominateur le nombre total de parts (5).",
+   "id": "6e-maths-fractions-lecture-01",
+   "tier": "application",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Complète : 1/2 = ?/10. Quel est le numérateur manquant ?",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On multiplie 2 par 5 pour obtenir 10 : 1 × 5 = 5.",
+   "id": "6e-maths-fractions-lecture-02",
+   "tier": "application",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction est la plus grande ?",
+   "choices": [
+    "3/8",
+    "5/8",
+    "1/8",
+    "7/8"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même dénominateur : le plus grand numérateur donne la plus grande fraction.",
+   "id": "6e-maths-fractions-lecture-03",
+   "tier": "application",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Range dans l'ordre croissant : 1/2 ; 3/4 ; 1/4.",
+   "choices": [
+    "1/2 ; 1/4 ; 3/4",
+    "3/4 ; 1/2 ; 1/4",
+    "1/4 ; 3/4 ; 1/2",
+    "1/4 ; 1/2 ; 3/4"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "En quarts : 1/2 = 2/4. On range 1/4 < 2/4 < 3/4.",
+   "id": "6e-maths-fractions-lecture-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction est égale à 2/3 ?",
+   "choices": [
+    "2/6",
+    "8/12",
+    "6/8",
+    "5/6"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "2/3 = (2 × 4)/(3 × 4) = 8/12.",
+   "id": "6e-maths-fractions-lecture-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina a mangé 3/8 d'un gâteau et Boris 1/4 du même gâteau.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Exprime 1/4 en huitièmes : combien de huitièmes ?",
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "1/4 = 2/8.",
+     "id": "6e-maths-fractions-lecture-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Qui a mangé la plus grande part ?",
+     "choices": [
+      "Boris",
+      "Ils ont mangé autant",
+      "On ne peut pas savoir",
+      "Amina"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3/8 > 2/8.",
+     "id": "6e-maths-fractions-lecture-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle fraction du gâteau (en huitièmes, donner le numérateur) ont-ils mangé ensemble ?",
+     "answer": 5,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3/8 + 2/8 = 5/8.",
+     "id": "6e-maths-fractions-lecture-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-fractions-lecture-06",
+   "tier": "examen",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la fraction 7/12, le dénominateur est",
+   "choices": [
+    "7",
+    "19",
+    "5",
+    "12"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dénominateur est le nombre du bas : 12.",
+   "id": "6e-maths-fractions-lecture-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction est égale à 1/2 ?",
+   "choices": [
+    "2/3",
+    "1/4",
+    "4/8",
+    "3/8"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4/8 = (4 ÷ 4)/(8 ÷ 4) = 1/2.",
+   "id": "6e-maths-fractions-lecture-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction est plus petite que 1 ?",
+   "choices": [
+    "6/6",
+    "7/6",
+    "5/6",
+    "9/4"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Numérateur plus petit que dénominateur : 5 < 6.",
+   "id": "6e-maths-fractions-lecture-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction est la plus petite ?",
+   "choices": [
+    "1/10",
+    "1/2",
+    "1/5",
+    "1/8"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avec un même numérateur 1, plus le dénominateur est grand, plus la fraction est petite.",
+   "id": "6e-maths-fractions-lecture-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment lit-on 5/9 ?",
+   "choices": [
+    "cinq neufs",
+    "neuf cinquièmes",
+    "cinq neuvièmes",
+    "cinquante-neuf"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On lit le numérateur puis le dénominateur avec la terminaison « ième ».",
+   "id": "6e-maths-fractions-lecture-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-lecture",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule 2/7 + 3/7.",
+   "choices": [
+    "5/14",
+    "5/7",
+    "6/7",
+    "1/7"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même dénominateur : 2 + 3 = 5, on garde 7.",
+   "id": "6e-maths-fractions-operations-01",
+   "tier": "application",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule les 3/4 de 20.",
+   "answer": 15,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "20 ÷ 4 = 5 ; 5 × 3 = 15.",
+   "id": "6e-maths-fractions-operations-02",
+   "tier": "application",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule 7/9 − 4/9.",
+   "choices": [
+    "11/9",
+    "4/9",
+    "28/9",
+    "3/9"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "7 − 4 = 3 et on garde 9 : 3/9, soit 1/3.",
+   "mistakes": [
+    "Soustraire aussi les dénominateurs."
+   ],
+   "id": "6e-maths-fractions-operations-03",
+   "tier": "application",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule 1/2 + 1/6.",
+   "choices": [
+    "2/8",
+    "1/4",
+    "2/3",
+    "1/3"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "1/2 = 3/6 ; 3/6 + 1/6 = 4/6 = 2/3.",
+   "id": "6e-maths-fractions-operations-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un article coûte 90 FCFA de fabrication ; un vendeur en facture les 2/3. Combien (FCFA) ?",
+   "answer": 60,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "90 ÷ 3 = 30 ; 30 × 2 = 60.",
+   "id": "6e-maths-fractions-operations-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng a 12 000 FCFA. Il en dépense les 1/4 pour son transport et les 1/3 pour ses fournitures.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien dépense-t-il pour le transport (FCFA) ?",
+     "answer": 3000,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "12 000 ÷ 4 = 3 000.",
+     "id": "6e-maths-fractions-operations-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien dépense-t-il pour les fournitures (FCFA) ?",
+     "answer": 4000,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "12 000 ÷ 3 = 4 000.",
+     "id": "6e-maths-fractions-operations-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien lui reste-t-il (FCFA) ?",
+     "answer": 5000,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "12 000 − 3 000 − 4 000 = 5 000.",
+     "id": "6e-maths-fractions-operations-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-fractions-operations-06",
+   "tier": "examen",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le résultat de 5/12 + 4/12 ?",
+   "choices": [
+    "9/24",
+    "1/12",
+    "9/12",
+    "20/12"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "5 + 4 = 9, on garde 12.",
+   "id": "6e-maths-fractions-operations-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les 1/5 de 35 valent",
+   "choices": [
+    "5",
+    "30",
+    "7",
+    "175"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "35 ÷ 5 = 7.",
+   "id": "6e-maths-fractions-operations-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction obtient-on en calculant 1/2 + 1/4 ?",
+   "choices": [
+    "3/4",
+    "2/6",
+    "1/6",
+    "2/4"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1/2 = 2/4 puis 2/4 + 1/4 = 3/4.",
+   "id": "6e-maths-fractions-operations-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le résultat de 1 − 3/8 ?",
+   "choices": [
+    "2/8",
+    "5/8",
+    "3/7",
+    "4/8"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 = 8/8 ; 8/8 − 3/8 = 5/8.",
+   "id": "6e-maths-fractions-operations-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une classe de 40 élèves, 3/8 sont des filles. Combien de filles ?",
+   "choices": [
+    "5",
+    "24",
+    "15",
+    "120"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "40 ÷ 8 = 5 ; 5 × 3 = 15.",
+   "id": "6e-maths-fractions-operations-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-fractions-operations",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

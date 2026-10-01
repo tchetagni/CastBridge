@@ -1,0 +1,840 @@
+{
+ "chapter": "bepc-svt-hormones-immunite",
+ "lessons": [
+  {
+   "id": "bepc-svt-hormones",
+   "title": "Les hormones (initiation) et la régulation de la glycémie",
+   "minutes": 30,
+   "programRef": "3e — Hormones : glandes endocrines, glycémie, hormones sexuelles (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir hormone, glande, organe cible.",
+    "Comparer message nerveux et message hormonal.",
+    "Expliquer le rôle de l'insuline et ce qu'est le diabète (principe)."
+   ],
+   "prerequisites": [
+    "bepc-svt-reflexes"
+   ],
+   "exercises": [
+    "bepc-svt-hormones-01",
+    "bepc-svt-hormones-02",
+    "bepc-svt-hormones-03",
+    "bepc-svt-hormones-04",
+    "bepc-svt-hormones-05",
+    "bepc-svt-hormones-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-hormones-q1",
+    "bepc-svt-hormones-q2",
+    "bepc-svt-hormones-q3",
+    "bepc-svt-hormones-q4",
+    "bepc-svt-hormones-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hormone et glande",
+     "md": "Une **hormone** est une substance chimique fabriquée par une **glande endocrine**, déversée dans le **sang**, qui agit sur un **organe cible** à distance. Exemples : l'**insuline** (pancréas), les hormones **sexuelles** (testicules, ovaires), l'**adrénaline** (glandes surrénales), la **thyroxine** (thyroïde, qui a besoin d'iode)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Message nerveux ou hormonal ?",
+     "md": "- **Nerveux** : transmis par les nerfs, **très rapide**, effet bref (réflexe).\n- **Hormonal** : transmis par le sang, **plus lent**, effet durable (croissance, puberté, glycémie).\nLes deux systèmes travaillent ensemble pour maintenir l'équilibre du corps."
+    },
+    {
+     "type": "illustration",
+     "caption": "Évolution schématique de la glycémie autour d'un repas.",
+     "alt": "Points reliés : la glycémie monte après le repas puis revient vers 1 g/L.",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 4,
+      "ymin": 0,
+      "ymax": 2,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 0,
+        "y": 1,
+        "label": "à jeun",
+        "color": "blue"
+       },
+       {
+        "x": 1,
+        "y": 1.5,
+        "label": "après repas",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 1.2,
+        "color": "orange"
+       },
+       {
+        "x": 3,
+        "y": 1.0,
+        "label": "retour",
+        "color": "green"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 1,
+        "x2": 1,
+        "y2": 1.5,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 1,
+        "y1": 1.5,
+        "x2": 2,
+        "y2": 1.2,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 2,
+        "y1": 1.2,
+        "x2": 3,
+        "y2": 1.0,
+        "color": "grey",
+        "dash": true
+       }
+      ],
+      "xlabel": "temps (h)",
+      "ylabel": "glycémie (g/L)"
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La glycémie",
+     "md": "La **glycémie** est la quantité de glucose dans le sang (environ 1 g/L chez une personne en bonne santé à jeun). Après un repas, elle monte ; le pancréas libère de l'**insuline**, qui fait entrer le glucose dans les cellules et dans le foie : la glycémie redescend. Dans le **diabète**, l'insuline manque ou agit mal : la glycémie reste trop élevée. Il faut alors un suivi médical."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : message nerveux ou hormonal ?",
+     "statement": "Une personne retire sa main d'une flamme ; une autre grandit à l'adolescence. Dans quel cas parle-t-on de message hormonal ?",
+     "steps": [
+      {
+       "md": "Le retrait de la main est un réflexe nerveux, rapide."
+      },
+      {
+       "md": "La croissance et la puberté dépendent d'hormones, transportées par le sang et à effet durable."
+      }
+     ],
+     "answer": "**La croissance : message hormonal.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : après un repas",
+     "statement": "Après un repas riche en sucres, que fait l'organisme pour rétablir la glycémie ?",
+     "steps": [
+      {
+       "md": "La glycémie augmente."
+      },
+      {
+       "md": "Le pancréas libère de l'insuline ; le glucose est stocké ou utilisé : la glycémie revient vers sa valeur normale."
+      }
+     ],
+     "answer": "**L'insuline fait baisser la glycémie.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que l'insuline augmente la glycémie : elle la **diminue**.\n- Croire que les hormones passent par les nerfs : elles passent par le sang.\n- Croire que le diabète vient seulement d'avoir trop mangé de sucre : les causes sont diverses ; le suivi médical est nécessaire."
+    }
+   ],
+   "reviewNotes": [
+    "Glycémie normale à jeun : environ 1 g/L (valeur arrondie, à confirmer).",
+    "Diabète : formulation prudente, à faire relire par un agent de santé ; aucun conseil de traitement donné.",
+    "Vérifier si le programme exige le glucagon."
+   ]
+  },
+  {
+   "id": "bepc-svt-immunite-vaccination",
+   "title": "Immunité et vaccination",
+   "minutes": 35,
+   "programRef": "3e — Immunité : défense de l'organisme, vaccination, VIH/sida (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer antigène, anticorps, phagocytose.",
+    "Décrire une réponse immunitaire et la mémoire immunitaire.",
+    "Expliquer la vaccination et la différence avec un sérum."
+   ],
+   "prerequisites": [
+    "bepc-svt-hormones"
+   ],
+   "exercises": [
+    "bepc-svt-immunite-vaccination-01",
+    "bepc-svt-immunite-vaccination-02",
+    "bepc-svt-immunite-vaccination-03",
+    "bepc-svt-immunite-vaccination-04",
+    "bepc-svt-immunite-vaccination-05",
+    "bepc-svt-immunite-vaccination-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-immunite-vaccination-q1",
+    "bepc-svt-immunite-vaccination-q2",
+    "bepc-svt-immunite-vaccination-q3",
+    "bepc-svt-immunite-vaccination-q4",
+    "bepc-svt-immunite-vaccination-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Antigène, anticorps, phagocytose",
+     "md": "Un **antigène** est une substance étrangère (par exemple une partie d'un microbe) reconnue par l'organisme. Les **anticorps** sont des protéines fabriquées par certains globules blancs (lymphocytes) qui s'attachent aux antigènes. La **phagocytose** est la destruction de microbes par certains globules blancs qui les « avalent »."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Réponse immunitaire",
+     "md": "1. Le microbe entre : barrières franchies, phagocytes agissent (réponse rapide, non spécifique).\n2. Des lymphocytes reconnaissent l'antigène et fabriquent des anticorps adaptés (réponse spécifique, plusieurs jours).\n3. Certains lymphocytes gardent la **mémoire** : lors d'un second contact, la réponse est plus rapide et plus forte."
+    },
+    {
+     "type": "illustration",
+     "caption": "Deux niveaux de défense : phagocytes puis lymphocytes et anticorps.",
+     "alt": "Un microbe rencontre des phagocytes ; l'antigène stimule des lymphocytes qui fabriquent des anticorps.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 100,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 55.0,
+        "text": "Microbe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 50,
+        "x2": 140,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 30,
+        "w": 140,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 55.0,
+        "text": "Phagocytes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 120,
+        "w": 100,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 145.0,
+        "text": "Antigène",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 140,
+        "x2": 140,
+        "y2": 140,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 120,
+        "w": 140,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 145.0,
+        "text": "Lymphocytes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 140,
+        "x2": 310,
+        "y2": 140,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 120,
+        "w": 115,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 367.5,
+        "y": 145.0,
+        "text": "Anticorps",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 200,
+        "text": "Mémoire : réponse plus rapide au 2e contact",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Vaccin et sérum",
+     "md": "- **Vaccin** : contient un microbe affaibli ou tué, ou une partie inoffensive ; il **prévient** la maladie en créant une mémoire immunitaire (efficace dans la durée).\n- **Sérum** : contient des anticorps déjà prêts ; il **soigne ou protège rapidement**, mais pour un temps court (exemple : sérum antivenimeux, antitétanique en urgence).\nLe VIH attaque certains lymphocytes et affaiblit les défenses : prévention et suivi médical sont essentiels."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : second contact",
+     "statement": "Pourquoi une personne n'a-t-elle presque jamais deux fois la rougeole ?",
+     "steps": [
+      {
+       "md": "Lors du premier contact, des lymphocytes à mémoire se forment."
+      },
+      {
+       "md": "Au second contact, les anticorps sont produits plus vite et en plus grande quantité."
+      }
+     ],
+     "answer": "**Grâce à la mémoire immunitaire.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : vaccin ou sérum ?",
+     "statement": "Après une morsure de serpent venimeux, que donne-t-on en urgence : un vaccin ou un sérum ?",
+     "steps": [
+      {
+       "md": "On a besoin d'anticorps immédiatement."
+      },
+      {
+       "md": "Le sérum apporte des anticorps prêts à l'emploi ; un vaccin serait trop lent."
+      }
+     ],
+     "answer": "**Un sérum, à l'hôpital.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre vaccin (prévention, mémoire) et sérum (traitement immédiat).\n- Croire qu'un vaccin fait toujours totalement disparaître le risque : il le réduit fortement.\n- Croire que les antibiotiques soignent les virus.\n- Penser que le VIH se transmet par des contacts de la vie courante comme serrer la main : ce n'est pas le cas."
+    }
+   ],
+   "reviewNotes": [
+    "Santé : à faire relire par un agent de santé (vaccination, VIH/sida).",
+    "Niveau de détail (lymphocytes B/T) volontairement simplifié."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle glande fabrique l'insuline ?",
+   "choices": [
+    "La thyroïde",
+    "Les reins",
+    "Le pancréas",
+    "Le foie seulement"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le pancréas régule la glycémie.",
+   "id": "bepc-svt-hormones-01",
+   "tier": "application",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une hormone voyage dans :",
+   "choices": [
+    "Les nerfs",
+    "L'air",
+    "Le sang",
+    "Les os"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle agit à distance.",
+   "id": "bepc-svt-hormones-02",
+   "tier": "application",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un message nerveux est plus rapide qu'un message hormonal.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les nerfs conduisent très vite.",
+   "id": "bepc-svt-hormones-03",
+   "tier": "application",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque hormone ou glande à son rôle.",
+   "pairs": [
+    [
+     "Insuline",
+     "Fait baisser la glycémie"
+    ],
+    [
+     "Thyroxine",
+     "Thyroïde, a besoin d'iode"
+    ],
+    [
+     "Adrénaline",
+     "Prépare à l'effort ou au stress"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Hormones diverses.",
+   "id": "bepc-svt-hormones-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi on parle d'organe cible.",
+   "model": "Une hormone circule dans tout le corps mais n'agit que sur les organes qui ont des récepteurs pour elle.",
+   "rubric": [
+    "Circule partout",
+    "Agit sur certains organes"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-svt-hormones-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "La glycémie d'un patient à jeun est mesurée trois jours de suite : 1,0 ; 1,1 ; 1,0 g/L.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la moyenne (en g/L, arrondie à 0,01) ?",
+     "answer": 1.03,
+     "tolerance": 0.02,
+     "unit": "g/L",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "(1,0 + 1,1 + 1,0) ÷ 3 ≈ 1,03.",
+     "id": "bepc-svt-hormones-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que peut-on dire de ces valeurs ? Que conseille-t-on en cas de doute ?",
+     "model": "Proches de la valeur habituelle à jeun (environ 1 g/L) ; seul un agent de santé interprète les résultats.",
+     "rubric": [
+      "Compare à la valeur normale",
+      "Avis médical"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-hormones-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-svt-hormones-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La glycémie désigne :",
+   "choices": [
+    "Le taux de glucose dans le sang",
+    "La quantité de sel",
+    "La température",
+    "Le nombre de globules"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle est régulée.",
+   "id": "bepc-svt-hormones-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les hormones sexuelles sont fabriquées par :",
+   "choices": [
+    "Les testicules et les ovaires",
+    "L'estomac",
+    "Les poumons",
+    "La peau"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les glandes sexuelles.",
+   "id": "bepc-svt-hormones-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un organe cible est :",
+   "choices": [
+    "Celui qui la fabrique",
+    "Celui sur lequel agit l'hormone",
+    "Un nerf",
+    "Un os"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il possède des récepteurs.",
+   "id": "bepc-svt-hormones-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un manque d'iode peut gêner :",
+   "choices": [
+    "Le pancréas",
+    "Les poumons",
+    "Les reins",
+    "La thyroïde"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La thyroxine contient de l'iode.",
+   "id": "bepc-svt-hormones-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un effet hormonal est généralement :",
+   "choices": [
+    "Plus rapide et bref",
+    "Plus lent et plus durable",
+    "Instantané",
+    "Sans effet"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Transmission par le sang.",
+   "id": "bepc-svt-hormones-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-hormones",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les anticorps sont fabriqués par :",
+   "choices": [
+    "Les globules rouges",
+    "Des lymphocytes",
+    "Les plaquettes",
+    "Le cœur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ce sont des globules blancs.",
+   "id": "bepc-svt-immunite-vaccination-01",
+   "tier": "application",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La phagocytose consiste à :",
+   "choices": [
+    "Détruire des microbes en les avalant",
+    "Fabriquer du sang",
+    "Digérer un aliment",
+    "Coaguler le sang"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Action des phagocytes.",
+   "id": "bepc-svt-immunite-vaccination-02",
+   "tier": "application",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un vaccin crée une mémoire immunitaire.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le corps garde le souvenir de l'antigène.",
+   "id": "bepc-svt-immunite-vaccination-03",
+   "tier": "application",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque situation au traitement adapté.",
+   "pairs": [
+    [
+     "Prévenir la rougeole",
+     "Vaccin"
+    ],
+    [
+     "Morsure de serpent venimeux",
+     "Sérum"
+    ],
+    [
+     "Infection bactérienne diagnostiquée",
+     "Antibiotique prescrit"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque outil a son rôle.",
+   "id": "bepc-svt-immunite-vaccination-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi les rappels de vaccin sont utiles.",
+   "model": "Ils renforcent la mémoire immunitaire pour que la protection dure plus longtemps.",
+   "rubric": [
+    "Mémoire",
+    "Durée de la protection"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-svt-immunite-vaccination-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Voici une expérience sur des souris : le groupe A reçoit un vaccin, le groupe B non. Puis les deux reçoivent le microbe. Les souris A restent en bonne santé, les B tombent malades.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Que montre cette expérience ?",
+     "choices": [
+      "Le vaccin protège",
+      "Le microbe est inoffensif",
+      "Les souris B sont plus fortes",
+      "Aucune conclusion"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La différence est due au vaccin.",
+     "id": "bepc-svt-immunite-vaccination-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pourquoi le groupe B est-il un groupe témoin ?",
+     "model": "Il ne reçoit pas le vaccin : on compare pour montrer que la protection vient du vaccin.",
+     "rubric": [
+      "Rôle du témoin",
+      "Comparaison"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-immunite-vaccination-06-b"
+    }
+   ],
+   "difficulty": 3,
+   "id": "bepc-svt-immunite-vaccination-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un antigène est :",
+   "choices": [
+    "Un nutriment",
+    "Un organe",
+    "Un anticorps",
+    "Une substance reconnue comme étrangère"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il déclenche la réponse.",
+   "id": "bepc-svt-immunite-vaccination-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La mémoire immunitaire permet :",
+   "choices": [
+    "Une réponse plus rapide au second contact",
+    "De ne plus avoir de sang",
+    "De digérer",
+    "De respirer mieux"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Lymphocytes à mémoire.",
+   "id": "bepc-svt-immunite-vaccination-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un sérum contient :",
+   "choices": [
+    "Un microbe vivant",
+    "Des vitamines seulement",
+    "Des anticorps prêts",
+    "Du glucose"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il agit vite mais brièvement.",
+   "id": "bepc-svt-immunite-vaccination-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un vaccin contient :",
+   "choices": [
+    "Un antibiotique",
+    "De l'eau salée",
+    "Un microbe affaibli, tué ou une partie inoffensive",
+    "Un virus actif"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il stimule les défenses.",
+   "id": "bepc-svt-immunite-vaccination-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le VIH s'attaque à :",
+   "choices": [
+    "Aux os",
+    "Aux poumons seulement",
+    "Certains lymphocytes",
+    "À la peau"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il affaiblit l'immunité.",
+   "id": "bepc-svt-immunite-vaccination-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-immunite-vaccination",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

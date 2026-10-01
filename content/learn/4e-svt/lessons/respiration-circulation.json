@@ -1,0 +1,1333 @@
+{
+ "chapter": "4e-svt-respiration-circulation",
+ "lessons": [
+  {
+   "id": "4e-svt-respiration",
+   "title": "La respiration",
+   "minutes": 25,
+   "programRef": "4e — Respiration : appareil respiratoire, échanges gazeux (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Décrire le trajet de l'air dans l'appareil respiratoire.",
+    "Expliquer les échanges gazeux au niveau des alvéoles.",
+    "Distinguer ventilation et respiration cellulaire."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-svt-respiration-01",
+    "4e-svt-respiration-02",
+    "4e-svt-respiration-03",
+    "4e-svt-respiration-04",
+    "4e-svt-respiration-05",
+    "4e-svt-respiration-06"
+   ],
+   "selfCheck": [
+    "4e-svt-respiration-q1",
+    "4e-svt-respiration-q2",
+    "4e-svt-respiration-q3",
+    "4e-svt-respiration-q4",
+    "4e-svt-respiration-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Respirer",
+     "md": "Respirer, c'est prendre du **dioxygène** (O₂) dans l'air et rejeter du **dioxyde de carbone** (CO₂). Le dioxygène permet aux cellules de libérer l'énergie des nutriments. La **ventilation** est le mouvement de l'air qui entre (inspiration) et sort (expiration) des poumons."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trajet de l'air jusqu'aux alvéoles pulmonaires.",
+     "alt": "Une suite de cases : nez ou bouche, trachée, bronches, bronchioles, alvéoles.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 300,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 10,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 32.0,
+        "text": "Nez / bouche",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 44,
+        "x2": 205,
+        "y2": 62,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 62,
+        "w": 150,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 84.0,
+        "text": "Trachée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 96,
+        "x2": 205,
+        "y2": 114,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 114,
+        "w": 150,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 136.0,
+        "text": "Bronches",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 148,
+        "x2": 205,
+        "y2": 166,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 166,
+        "w": 150,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 188.0,
+        "text": "Bronchioles",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 200,
+        "x2": 205,
+        "y2": 218,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 218,
+        "w": 150,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 240.0,
+        "text": "Alvéoles",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 285,
+        "text": "O₂ vers le sang, CO₂ vers l'air",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Échanges gazeux",
+     "md": "Dans les **alvéoles** (très petits sacs d'air entourés de capillaires sanguins), le dioxygène passe de l'air vers le sang et le dioxyde de carbone passe du sang vers l'air. La grande surface totale des alvéoles et la finesse de leur paroi facilitent ces échanges. L'air expiré contient moins de dioxygène et plus de dioxyde de carbone que l'air inspiré."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : l'eau de chaux",
+     "statement": "On souffle avec une paille dans de l'eau de chaux limpide. Que se passe-t-il et pourquoi ?",
+     "steps": [
+      {
+       "md": "L'eau de chaux se trouble en présence de dioxyde de carbone."
+      },
+      {
+       "md": "L'air expiré en contient plus que l'air inspiré."
+      }
+     ],
+     "answer": "**L'eau de chaux se trouble : l'air expiré contient du CO₂.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le geste respiratoire",
+     "statement": "Décris les mouvements de la cage thoracique pendant l'inspiration.",
+     "steps": [
+      {
+       "md": "Les muscles respiratoires, dont le diaphragme, se contractent."
+      },
+      {
+       "md": "Les côtes se soulèvent, le volume de la cage thoracique augmente."
+      },
+      {
+       "md": "L'air entre dans les poumons."
+      }
+     ],
+     "answer": "**À l'inspiration, le volume de la cage thoracique augmente et l'air entre.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'on rejette uniquement du CO₂ : l'air expiré contient encore du dioxygène.\n- Confondre **respiration** (échanges de gaz) et **ventilation** (mouvement de l'air).\n- Croire que les poumons sont des muscles : ils sont passifs ; ce sont les muscles respiratoires qui agissent."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si le programme de 4e traite la respiration cellulaire.",
+    "Les pourcentages de gaz de l'air sont arrondis : environ 21 % de dioxygène, environ 78 % de diazote."
+   ]
+  },
+  {
+   "id": "4e-svt-circulation",
+   "title": "Le sang, le cœur et la circulation",
+   "minutes": 30,
+   "programRef": "4e — Sang et circulation sanguine (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Nommer les constituants du sang et leur rôle.",
+    "Décrire le cœur et la double circulation (principe).",
+    "Relier circulation, respiration et nutrition."
+   ],
+   "prerequisites": [
+    "4e-svt-digestion",
+    "4e-svt-respiration"
+   ],
+   "exercises": [
+    "4e-svt-circulation-01",
+    "4e-svt-circulation-02",
+    "4e-svt-circulation-03",
+    "4e-svt-circulation-04",
+    "4e-svt-circulation-05",
+    "4e-svt-circulation-06"
+   ],
+   "selfCheck": [
+    "4e-svt-circulation-q1",
+    "4e-svt-circulation-q2",
+    "4e-svt-circulation-q3",
+    "4e-svt-circulation-q4",
+    "4e-svt-circulation-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le sang",
+     "md": "Le sang circule dans les vaisseaux. Il contient : le **plasma** (liquide jaunâtre qui transporte nutriments et déchets), les **globules rouges** (transportent le dioxygène grâce à l'hémoglobine), les **globules blancs** (défense de l'organisme) et les **plaquettes** (coagulation)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Cœur et vaisseaux",
+     "md": "Le **cœur** est un muscle creux qui fait circuler le sang. Il possède 4 cavités : 2 oreillettes et 2 ventricules. Les **artères** quittent le cœur, les **veines** y retournent, et les **capillaires** (très fins) permettent les échanges avec les organes. Le sang passe par le cœur **deux fois** par tour complet : c'est la double circulation."
+    },
+    {
+     "type": "illustration",
+     "caption": "Principe simplifié de la double circulation.",
+     "alt": "Le cœur envoie du sang aux poumons et aux organes, puis le sang revient au cœur.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 280,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 130,
+        "r": 38,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 136,
+        "text": "Cœur",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 120,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 52.0,
+        "text": "Poumons",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 30,
+        "w": 120,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 52.0,
+        "text": "Organes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 105,
+        "x2": 120,
+        "y2": 66,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 105,
+        "x2": 300,
+        "y2": 66,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 190,
+        "x2": 175,
+        "y2": 155,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 190,
+        "x2": 245,
+        "y2": 155,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 210,
+        "text": "retour",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 210,
+        "text": "retour",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 262,
+        "text": "rouge : riche en O₂ ; bleu : pauvre en O₂",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : rôle des globules rouges",
+     "statement": "Pourquoi une personne anémique se fatigue-t-elle vite ?",
+     "steps": [
+      {
+       "md": "Les globules rouges transportent le dioxygène."
+      },
+      {
+       "md": "S'ils sont trop peu nombreux, les muscles reçoivent moins de dioxygène."
+      },
+      {
+       "md": "Ils libèrent moins d'énergie : fatigue."
+      }
+     ],
+     "answer": "**Moins de globules rouges, moins de dioxygène livré aux muscles.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : suivre une molécule",
+     "statement": "Un nutriment est absorbé dans l'intestin. Comment arrive-t-il à un muscle ?",
+     "steps": [
+      {
+       "md": "Il passe dans les capillaires de l'intestin."
+      },
+      {
+       "md": "Le sang le transporte, avec l'aide du cœur, vers les organes."
+      },
+      {
+       "md": "Dans les capillaires du muscle, il quitte le sang vers les cellules."
+      }
+     ],
+     "answer": "**Par le sang, via les vaisseaux.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que **toutes** les artères portent du sang riche en O₂ : l'artère qui va aux poumons porte un sang pauvre en O₂.\n- Croire que le sang « se fabrique » dans le cœur : il est produit surtout dans la moelle des os.\n- Confondre artères (qui partent du cœur) et veines (qui y reviennent)."
+    }
+   ],
+   "reviewNotes": [
+    "Niveau de détail du cœur (oreillettes, ventricules) à confirmer pour la 4e.",
+    "Le volume de sang et la fréquence cardiaque ne sont pas donnés (variables)."
+   ]
+  },
+  {
+   "id": "4e-svt-immunite-intro",
+   "title": "Microbes et défense de l'organisme (initiation)",
+   "minutes": 25,
+   "programRef": "4e — Initiation à l'immunité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir un microbe et citer des maladies infectieuses.",
+    "Décrire les barrières de l'organisme et le rôle des globules blancs.",
+    "Expliquer le principe de la vaccination."
+   ],
+   "prerequisites": [
+    "4e-svt-circulation"
+   ],
+   "exercises": [
+    "4e-svt-immunite-intro-01",
+    "4e-svt-immunite-intro-02",
+    "4e-svt-immunite-intro-03",
+    "4e-svt-immunite-intro-04",
+    "4e-svt-immunite-intro-05",
+    "4e-svt-immunite-intro-06"
+   ],
+   "selfCheck": [
+    "4e-svt-immunite-intro-q1",
+    "4e-svt-immunite-intro-q2",
+    "4e-svt-immunite-intro-q3",
+    "4e-svt-immunite-intro-q4",
+    "4e-svt-immunite-intro-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Microbes",
+     "md": "Les **microbes** sont des êtres vivants microscopiques : bactéries, virus, champignons microscopiques, parasites. Certains sont utiles (ceux de l'yaourt), d'autres provoquent des maladies dites **infectieuses**. Le paludisme est dû à un parasite transmis par un moustique ; le choléra est dû à une bactérie transmise par de l'eau ou des aliments contaminés."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Défenses du corps",
+     "md": "- **Barrières naturelles** : peau intacte, larmes, salive, mucus du nez.\n- **Défense active** : les globules blancs détruisent les microbes qui sont entrés.\n- **Fièvre** : souvent un signe que le corps se défend.\n- **Vaccination** : on présente à l'organisme un microbe affaibli, tué ou une de ses parties inoffensives, pour qu'il apprenne à le combattre à l'avance."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le microbe rencontre d'abord les barrières puis les globules blancs.",
+     "alt": "Schéma : microbe, barrières du corps, globules blancs.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 80,
+        "w": 100,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 105.0,
+        "text": "Microbe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 100,
+        "x2": 170,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 80,
+        "w": 110,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 225.0,
+        "y": 105.0,
+        "text": "Barrières",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 100,
+        "x2": 330,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 80,
+        "w": 85,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 372.5,
+        "y": 105.0,
+        "text": "Globules",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 372,
+        "y": 140,
+        "text": "blancs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 30,
+        "text": "Le microbe doit passer plusieurs défenses",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 200,
+        "text": "Un vaccin prépare ces défenses",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : prévenir le paludisme",
+     "statement": "Cite deux gestes pour limiter le paludisme.",
+     "steps": [
+      {
+       "md": "Le moustique transmet le parasite : il faut éviter les piqûres."
+      },
+      {
+       "md": "Dormir sous une moustiquaire et supprimer les eaux stagnantes où se développent les moustiques."
+      }
+     ],
+     "answer": "**Moustiquaire et élimination des eaux stagnantes.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : pourquoi se faire vacciner ?",
+     "statement": "Explique le principe d'un vaccin.",
+     "steps": [
+      {
+       "md": "Le vaccin contient une forme inoffensive du microbe."
+      },
+      {
+       "md": "Le corps fabrique des défenses."
+      },
+      {
+       "md": "Si le vrai microbe arrive plus tard, il est combattu plus vite."
+      }
+     ],
+     "answer": "**Le vaccin prépare le corps à se défendre.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que tous les microbes sont dangereux.\n- Croire que les antibiotiques soignent les virus : ils agissent sur certaines bactéries seulement, et sur avis médical.\n- Croire qu'un vaccin donne la maladie : il prépare le corps sans la provoquer (des effets légers sont possibles)."
+    }
+   ],
+   "reviewNotes": [
+    "Santé : formulation prudente, à faire relire par un agent de santé.",
+    "Vérifier si la 4e traite la vaccination ou seulement la 3e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel gaz se trouble l'eau de chaux ?",
+   "choices": [
+    "Le dioxygène",
+    "Le diazote",
+    "Le dioxyde de carbone",
+    "L'hélium"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le CO₂ forme un trouble blanc avec l'eau de chaux.",
+   "id": "4e-svt-respiration-01",
+   "tier": "application",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où se font les échanges gazeux ?",
+   "choices": [
+    "Dans la trachée",
+    "Dans les alvéoles",
+    "Dans le nez",
+    "Dans les bronches seulement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les alvéoles sont entourées de capillaires.",
+   "id": "4e-svt-respiration-02",
+   "tier": "application",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : à l'expiration, le volume de la cage thoracique diminue.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les côtes s'abaissent et l'air est chassé.",
+   "id": "4e-svt-respiration-03",
+   "tier": "application",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque gaz à son sens de passage au niveau des alvéoles.",
+   "pairs": [
+    [
+     "Dioxygène",
+     "Air vers sang"
+    ],
+    [
+     "Dioxyde de carbone",
+     "Sang vers air"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "L'O₂ entre dans le sang, le CO₂ en sort.",
+   "id": "4e-svt-respiration-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi on respire plus vite après une course.",
+   "model": "Pendant l'effort, les muscles consomment plus de dioxygène et produisent plus de CO₂ : la ventilation augmente pour fournir plus de O₂ et éliminer plus de CO₂.",
+   "rubric": [
+    "Les muscles consomment plus d'O₂",
+    "Plus de CO₂ à éliminer",
+    "La ventilation augmente"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-respiration-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Voici la composition approximative de l'air inspiré et expiré : dioxygène environ 21 % puis environ 16 % ; dioxyde de carbone environ 0,04 % puis environ 4 %.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "De combien de points (environ) le pourcentage de dioxygène diminue-t-il entre l'air inspiré et l'air expiré ?",
+     "answer": 5,
+     "tolerance": 0.5,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "21 − 16 = 5 points environ.",
+     "id": "4e-svt-respiration-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que montre l'augmentation du pourcentage de CO₂ ?",
+     "model": "Le corps produit du CO₂ qui est rejeté dans l'air expiré.",
+     "rubric": [
+      "Le corps produit du CO₂",
+      "Il est rejeté par l'expiration"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-respiration-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-respiration-06",
+   "tier": "examen",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle du dioxygène pour les cellules ?",
+   "choices": [
+    "Fabriquer les os",
+    "Produire la salive",
+    "Libérer l'énergie des nutriments",
+    "Filtrer le sang"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dioxygène permet l'utilisation des nutriments.",
+   "id": "4e-svt-respiration-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le trajet de l'air est :",
+   "choices": [
+    "Bronches, trachée, alvéoles",
+    "Alvéoles, bronches, trachée",
+    "Trachée, alvéoles, bronches",
+    "Trachée, bronches, alvéoles"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On va du conduit principal vers les plus petits.",
+   "id": "4e-svt-respiration-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel muscle intervient surtout dans la respiration ?",
+   "choices": [
+    "Le biceps",
+    "Le diaphragme",
+    "Le cœur seulement",
+    "La langue"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le diaphragme se contracte à l'inspiration.",
+   "id": "4e-svt-respiration-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi les alvéoles sont-elles efficaces ?",
+   "choices": [
+    "Paroi très épaisse",
+    "Elles sont peu nombreuses",
+    "Elles ne contiennent pas de sang",
+    "Surface totale grande et paroi fine"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Cela facilite le passage des gaz.",
+   "id": "4e-svt-respiration-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'air expiré contient par rapport à l'air inspiré :",
+   "choices": [
+    "Plus de dioxygène",
+    "Exactement la même composition",
+    "Pas de gaz",
+    "Plus de dioxyde de carbone"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le CO₂ augmente et le O₂ diminue.",
+   "id": "4e-svt-respiration-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-respiration",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle cellule du sang transporte le dioxygène ?",
+   "choices": [
+    "Le globule blanc",
+    "Le globule rouge",
+    "La plaquette",
+    "Le plasma"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'hémoglobine fixe le dioxygène.",
+   "id": "4e-svt-circulation-01",
+   "tier": "application",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de cavités possède le cœur humain ?",
+   "answer": 4,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 oreillettes + 2 ventricules = 4.",
+   "id": "4e-svt-circulation-02",
+   "tier": "application",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les veines ramènent le sang vers le cœur.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition des veines.",
+   "id": "4e-svt-circulation-03",
+   "tier": "application",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque élément du sang à sa fonction.",
+   "pairs": [
+    [
+     "Globule rouge",
+     "Transport du dioxygène"
+    ],
+    [
+     "Globule blanc",
+     "Défense"
+    ],
+    [
+     "Plaquette",
+     "Coagulation"
+    ],
+    [
+     "Plasma",
+     "Transport des nutriments dissous"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque constituant a un rôle propre.",
+   "id": "4e-svt-circulation-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi le sang rend la respiration et la nutrition inséparables.",
+   "model": "Le sang transporte le dioxygène (venant des poumons) et les nutriments (venant de l'intestin) vers les cellules, qui les utilisent pour fabriquer de l'énergie, et ramène le CO₂.",
+   "rubric": [
+    "Transport du O₂",
+    "Transport des nutriments",
+    "Retour du CO₂"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-circulation-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Lors d'une coupure, le sang cesse de couler après quelques minutes.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelles cellules interviennent dans la coagulation ?",
+     "choices": [
+      "Les globules rouges",
+      "Les globules blancs",
+      "Le plasma seul",
+      "Les plaquettes"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les plaquettes bouchent la plaie.",
+     "id": "4e-svt-circulation-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pourquoi faut-il bien nettoyer une plaie ?",
+     "model": "Pour éliminer les microbes qui pourraient entrer ; les globules blancs défendent le corps mais une infection peut se déclarer.",
+     "rubric": [
+      "Évoquer les microbes",
+      "Évoquer le risque d'infection"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-circulation-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-circulation-06",
+   "tier": "examen",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel vaisseau permet les échanges avec les organes ?",
+   "choices": [
+    "L'artère",
+    "La veine",
+    "Le capillaire",
+    "La trachée"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les capillaires ont une paroi très fine.",
+   "id": "4e-svt-circulation-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait le cœur ?",
+   "choices": [
+    "Il fabrique les nutriments",
+    "Il fait circuler le sang",
+    "Il filtre l'air",
+    "Il digère les aliments"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le cœur est une pompe musculaire.",
+   "id": "4e-svt-circulation-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que contient le plasma ?",
+   "choices": [
+    "Seulement du dioxygène",
+    "Des os",
+    "Eau, nutriments et déchets dissous",
+    "Des globules rouges seulement"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le plasma est le liquide du sang.",
+   "id": "4e-svt-circulation-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La double circulation signifie que le sang passe :",
+   "choices": [
+    "Une fois dans le cerveau",
+    "Deux fois dans le cœur par tour complet",
+    "Deux fois dans l'estomac",
+    "Jamais dans le cœur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il va aux poumons puis aux organes.",
+   "id": "4e-svt-circulation-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les artères :",
+   "choices": [
+    "Arrivent au cœur",
+    "Sont des capillaires",
+    "Partent du cœur",
+    "Contiennent de l'air"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les artères partent du cœur.",
+   "id": "4e-svt-circulation-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-circulation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle maladie est transmise par un moustique ?",
+   "choices": [
+    "Le choléra",
+    "Le paludisme",
+    "Le kwashiorkor",
+    "Le goitre"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le parasite est transmis par certains moustiques.",
+   "id": "4e-svt-immunite-intro-01",
+   "tier": "application",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la peau intacte est une barrière contre les microbes.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle empêche leur entrée.",
+   "id": "4e-svt-immunite-intro-02",
+   "tier": "application",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles cellules détruisent les microbes ?",
+   "choices": [
+    "Les globules rouges",
+    "Les plaquettes",
+    "Les cellules de la peau seulement",
+    "Les globules blancs"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils font partie de la défense.",
+   "id": "4e-svt-immunite-intro-03",
+   "tier": "application",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe maladie et mode de prévention.",
+   "pairs": [
+    [
+     "Paludisme",
+     "Moustiquaire"
+    ],
+    [
+     "Choléra",
+     "Eau potable et lavage des mains"
+    ],
+    [
+     "Rougeole",
+     "Vaccination"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "La prévention dépend du mode de transmission.",
+   "id": "4e-svt-immunite-intro-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi le lavage des mains protège.",
+   "model": "Il élimine des microbes sur les mains, donc limite leur passage dans la bouche ou les aliments.",
+   "rubric": [
+    "Parler des microbes",
+    "Lier aux aliments ou à la bouche"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-immunite-intro-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un village organise une campagne de vaccination.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Que contient un vaccin ?",
+     "choices": [
+      "Du sang frais",
+      "Du sucre seulement",
+      "Un médicament contre la douleur",
+      "Une forme inoffensive du microbe"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Il stimule les défenses.",
+     "id": "4e-svt-immunite-intro-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pourquoi vacciner beaucoup de personnes protège aussi les autres ?",
+     "model": "Moins de personnes sont malades, donc le microbe circule moins.",
+     "rubric": [
+      "Moins de malades",
+      "Moins de transmission"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-immunite-intro-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-immunite-intro-06",
+   "tier": "examen",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un microbe est :",
+   "choices": [
+    "Un être vivant microscopique",
+    "Un organe",
+    "Un nutriment",
+    "Un gaz"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Bactéries, virus, etc.",
+   "id": "4e-svt-immunite-intro-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le paludisme est transmis par :",
+   "choices": [
+    "L'eau de pluie seule",
+    "Le vent",
+    "Un moustique",
+    "Un sol sec"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le moustique est le vecteur.",
+   "id": "4e-svt-immunite-intro-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les barrières naturelles comprennent :",
+   "choices": [
+    "Les os",
+    "Les ongles seulement",
+    "Les dents seulement",
+    "La peau et les larmes"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elles bloquent l'entrée des microbes.",
+   "id": "4e-svt-immunite-intro-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un antibiotique agit sur :",
+   "choices": [
+    "Tous les virus",
+    "Le paludisme sans avis médical",
+    "Certaines bactéries",
+    "Les os"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il est prescrit par un professionnel.",
+   "id": "4e-svt-immunite-intro-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel principe est celui de la vaccination ?",
+   "choices": [
+    "Rendre malade volontairement",
+    "Entraîner l'organisme à se défendre",
+    "Remplacer le sang",
+    "Supprimer toutes les bactéries"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le vaccin prépare les défenses.",
+   "id": "4e-svt-immunite-intro-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-immunite-intro",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

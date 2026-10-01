@@ -1,0 +1,924 @@
+{
+ "chapter": "6e-svt-sante",
+ "lessons": [
+  {
+   "id": "6e-svt-hygiene-paludisme",
+   "title": "Hygiène, microbes et paludisme",
+   "minutes": 30,
+   "programRef": "6e — Hygiène et santé : maladies et prévention (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer pourquoi l'hygiène protège la santé.",
+    "Décrire comment le paludisme se transmet et comment l'éviter.",
+    "Citer des maladies liées à l'eau ou aux mains sales."
+   ],
+   "prerequisites": [
+    "6e-svt-eau"
+   ],
+   "exercises": [
+    "6e-svt-hygiene-paludisme-01",
+    "6e-svt-hygiene-paludisme-02",
+    "6e-svt-hygiene-paludisme-03",
+    "6e-svt-hygiene-paludisme-04",
+    "6e-svt-hygiene-paludisme-05",
+    "6e-svt-hygiene-paludisme-06"
+   ],
+   "selfCheck": [
+    "6e-svt-hygiene-paludisme-q1",
+    "6e-svt-hygiene-paludisme-q2",
+    "6e-svt-hygiene-paludisme-q3",
+    "6e-svt-hygiene-paludisme-q4",
+    "6e-svt-hygiene-paludisme-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hygiène et microbes",
+     "md": "Les **microbes** (bactéries, virus, parasites) sont des êtres vivants invisibles à l'œil nu. Certains provoquent des maladies. L'**hygiène** (corps, mains, aliments, maison, eau) réduit les risques : se laver les mains au savon avant de manger et après les toilettes, couvrir les aliments, boire une eau sûre."
+    },
+    {
+     "type": "illustration",
+     "caption": "Du gîte à la piqûre : le moustique se développe dans l'eau stagnante.",
+     "alt": "Quatre cases reliées : eau stagnante, larves, moustique, piqûre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 160,
+      "h": 288,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 140,
+        "h": 46,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 38.0,
+        "text": "Eau stagnante",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80.0,
+        "y1": 59,
+        "x2": 80.0,
+        "y2": 81,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 84,
+        "w": 140,
+        "h": 46,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 112.0,
+        "text": "Larves",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80.0,
+        "y1": 133,
+        "x2": 80.0,
+        "y2": 155,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 158,
+        "w": 140,
+        "h": 46,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 186.0,
+        "text": "Moustique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80.0,
+        "y1": 207,
+        "x2": 80.0,
+        "y2": 229,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 232,
+        "w": 140,
+        "h": 46,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 260.0,
+        "text": "Piqûre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le paludisme",
+     "md": "Le **paludisme** est une maladie due à un **parasite** transmis par la **piqûre** de certains moustiques (les femelles d'**anophèles**). Les moustiques se développent dans l'**eau stagnante**. Le malade a de la **fièvre**, des frissons, des maux de tête : il doit **consulter un centre de santé** sans attendre.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Prévenir le paludisme",
+     "md": "- Dormir sous une **moustiquaire**, de préférence imprégnée.\n- Supprimer les eaux stagnantes (vieux pneus, boîtes, flaques) près des habitations.\n- Garder les alentours propres, couvrir les récipients d'eau.\n- Aller au centre de santé dès les premiers signes ; ne pas se soigner seul.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : agir sur les gîtes",
+     "statement": "Autour de la maison de Mballa, des boîtes de conserve se remplissent d'eau à chaque pluie. Que faire ?",
+     "steps": [
+      {
+       "md": "L'eau stagnante est un lieu de ponte pour les moustiques."
+      },
+      {
+       "md": "Il faut vider, retourner ou jeter ces récipients à la poubelle."
+      }
+     ],
+     "answer": "**Supprimer les eaux stagnantes limite le nombre de moustiques.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : les mains",
+     "statement": "Pourquoi se laver les mains au savon avant de manger ?",
+     "steps": [
+      {
+       "md": "Les mains touchent beaucoup d'objets et peuvent porter des microbes."
+      },
+      {
+       "md": "Sans lavage, ils passent à la bouche avec les aliments et peuvent rendre malade (diarrhées, etc.)."
+      }
+     ],
+     "answer": "**Le lavage des mains réduit la transmission des microbes.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le paludisme vient du « soleil » ou de l'eau bue : il vient de la **piqûre** d'un moustique infecté.\n- Penser que la moustiquaire n'est utile que si on voit des moustiques.\n- Attendre ou se soigner sans avis : une fièvre doit être vue par un agent de santé."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le choléra et la typhoïde se transmettent surtout par l'eau et les aliments souillés, ou par les mains sales.",
+      "La vaccination protège contre plusieurs maladies : demander conseil au centre de santé."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "À FAIRE RELIRE PAR UN AGENT DE SANTÉ : formulations sur les maladies, les symptômes et la prévention. Aucun conseil de traitement n'est donné : toujours renvoyer vers un centre de santé.",
+    "Le paludisme est transmis par certains moustiques (anophèles femelles) et provoqué par un parasite ; à vérifier le vocabulaire attendu (« Plasmodium »)."
+   ]
+  },
+  {
+   "id": "6e-svt-alimentation",
+   "title": "Se nourrir de façon équilibrée",
+   "minutes": 25,
+   "programRef": "6e — Alimentation et santé (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Classer des aliments en trois groupes selon leur rôle.",
+    "Composer un repas équilibré avec des produits locaux.",
+    "Expliquer les risques d'une mauvaise alimentation."
+   ],
+   "prerequisites": [
+    "6e-svt-hygiene-paludisme"
+   ],
+   "exercises": [
+    "6e-svt-alimentation-01",
+    "6e-svt-alimentation-02",
+    "6e-svt-alimentation-03",
+    "6e-svt-alimentation-04",
+    "6e-svt-alimentation-05",
+    "6e-svt-alimentation-06"
+   ],
+   "selfCheck": [
+    "6e-svt-alimentation-q1",
+    "6e-svt-alimentation-q2",
+    "6e-svt-alimentation-q3",
+    "6e-svt-alimentation-q4",
+    "6e-svt-alimentation-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trois groupes d'aliments",
+     "md": "Selon leur rôle, on classe les aliments en trois groupes : les **aliments énergétiques** (donnent de l'énergie : manioc, plantain, riz, maïs, huile), les **aliments bâtisseurs** (construisent et réparent le corps : poisson, viande, œufs, haricots, arachides) et les **aliments protecteurs** (fruits et légumes, qui protègent le corps)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trois groupes d'aliments et des exemples.",
+     "alt": "Trois colonnes : énergétiques (manioc, plantain, riz), bâtisseurs (poisson, œufs, haricots) et protecteurs (papaye, tomate, légumes verts).",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 140,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 35.0,
+        "text": "Énergétiques",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 10,
+        "w": 140,
+        "h": 40,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 35.0,
+        "text": "Bâtisseurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 10,
+        "w": 140,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 400.0,
+        "y": 35.0,
+        "text": "Protecteurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 80,
+        "text": "manioc",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 105,
+        "text": "plantain",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 130,
+        "text": "riz, huile",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 80,
+        "text": "poisson",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 105,
+        "text": "œufs",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 130,
+        "text": "haricots",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 80,
+        "text": "papaye",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 105,
+        "text": "tomate",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 130,
+        "text": "légumes verts",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 175,
+        "text": "un repas équilibré contient les trois groupes",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Manger équilibré",
+     "md": "Un repas **équilibré** associe les trois groupes en quantité adaptée. On a aussi besoin de **boire de l'eau**. Manger toujours la même chose, trop peu ou trop gras, sucré ou salé peut nuire à la santé. Un enfant en croissance a besoin d'aliments bâtisseurs.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer des aliments",
+     "statement": "Classe : plantain, poisson, papaye, haricots, riz.",
+     "steps": [
+      {
+       "md": "Plantain et riz donnent de l'énergie."
+      },
+      {
+       "md": "Poisson et haricots construisent le corps ; la papaye protège (vitamines)."
+      }
+     ],
+     "answer": "**Énergétiques : plantain, riz. Bâtisseurs : poisson, haricots. Protecteurs : papaye.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : améliorer un repas",
+     "statement": "Le repas de Nkeng est composé uniquement de manioc et d'huile. Que lui conseiller d'ajouter ?",
+     "steps": [
+      {
+       "md": "Il manque des aliments bâtisseurs (poisson, haricots, œufs)."
+      },
+      {
+       "md": "Il manque aussi des fruits et légumes protecteurs."
+      }
+     ],
+     "answer": "**Ajouter du poisson ou des haricots et des légumes ou un fruit.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'un seul aliment peut tout apporter.\n- Penser que « beaucoup manger » suffit pour être en bonne santé : la variété compte.\n- Oublier de laver les fruits, les légumes et les mains avant de manger."
+    }
+   ],
+   "reviewNotes": [
+    "Classement des aliments en trois groupes (énergétiques, bâtisseurs, protecteurs) : à comparer au vocabulaire du programme. À faire relire par un agent de santé / nutritionniste pour les conseils.",
+    "Les nutriments (glucides, lipides, protides) sont précisés en 5e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Par quoi le paludisme est-il transmis ?",
+   "choices": [
+    "La piqûre de certains moustiques",
+    "Le soleil",
+    "Le vent",
+    "Une poignée de main"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le parasite est transmis par un moustique infecté.",
+   "id": "6e-svt-hygiene-paludisme-01",
+   "tier": "application",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les moustiques se développent dans l'eau stagnante.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Leurs larves vivent dans l'eau qui ne s'écoule pas.",
+   "id": "6e-svt-hygiene-paludisme-02",
+   "tier": "application",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque geste à son intérêt.",
+   "pairs": [
+    [
+     "Moustiquaire",
+     "Éviter les piqûres la nuit"
+    ],
+    [
+     "Vider les flaques",
+     "Réduire les gîtes à moustiques"
+    ],
+    [
+     "Se laver les mains",
+     "Éviter de transmettre des microbes"
+    ],
+    [
+     "Consulter vite",
+     "Recevoir un diagnostic et des soins"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque geste protège la santé.",
+   "id": "6e-svt-hygiene-paludisme-03",
+   "tier": "application",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel signe doit conduire à consulter rapidement ?",
+   "choices": [
+    "Un bon appétit",
+    "Une forte fièvre avec frissons",
+    "Un sommeil réparateur",
+    "Un nouveau cahier"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La fièvre peut annoncer le paludisme ou une autre maladie.",
+   "review": true,
+   "reviewNote": "Formulation à valider par un agent de santé.",
+   "id": "6e-svt-hygiene-paludisme-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle action est la plus efficace pour réduire les moustiques autour d'une maison ?",
+   "choices": [
+    "Supprimer les eaux stagnantes",
+    "Arroser les flaques davantage",
+    "Laisser des seaux ouverts",
+    "Garder de l'eau dans de vieux pneus"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Sans eau, pas de larves.",
+   "id": "6e-svt-hygiene-paludisme-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans le quartier d'Amina, beaucoup d'enfants ont de la fièvre à la saison des pluies. Un caniveau est bouché et des flaques s'y forment.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Explique le lien entre les flaques et les cas de fièvre (paludisme).",
+     "model": "Les flaques sont des gîtes à moustiques ; les moustiques infectés piquent les enfants et peuvent transmettre le paludisme.",
+     "rubric": [
+      "Lien flaque-moustique",
+      "Rôle de la piqûre"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-hygiene-paludisme-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose trois mesures pour protéger les enfants.",
+     "model": "Dormir sous moustiquaire, déboucher le caniveau et supprimer les eaux stagnantes, consulter vite le centre de santé en cas de fièvre.",
+     "rubric": [
+      "Trois mesures cohérentes"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-hygiene-paludisme-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "review": true,
+   "reviewNote": "À valider par un agent de santé.",
+   "id": "6e-svt-hygiene-paludisme-06",
+   "tier": "examen",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les microbes sont :",
+   "choices": [
+    "Des objets non vivants",
+    "Des roches",
+    "Des gaz",
+    "Des êtres vivants très petits"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils ne se voient qu'au microscope.",
+   "id": "6e-svt-hygiene-paludisme-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un bon moment pour se laver les mains est :",
+   "choices": [
+    "Jamais",
+    "Seulement le dimanche",
+    "Avant de manger",
+    "Quand on veut jouer"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avant les repas et après les toilettes.",
+   "id": "6e-svt-hygiene-paludisme-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel dispositif protège des piqûres de moustiques la nuit ?",
+   "choices": [
+    "La moustiquaire",
+    "Le cartable",
+    "La nappe",
+    "Le tableau"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle crée une barrière.",
+   "id": "6e-svt-hygiene-paludisme-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les larves de moustiques vivent :",
+   "choices": [
+    "Dans le feu",
+    "Dans l'eau stagnante",
+    "Dans le vent",
+    "Dans le sable sec"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elles ont besoin d'eau.",
+   "id": "6e-svt-hygiene-paludisme-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "En cas de forte fièvre, il faut :",
+   "choices": [
+    "Attendre sans rien faire",
+    "Consulter un centre de santé",
+    "Se cacher",
+    "Boire de l'eau sale"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Seul un agent de santé peut décider du traitement.",
+   "id": "6e-svt-hygiene-paludisme-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-hygiene-paludisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le poisson est un aliment :",
+   "choices": [
+    "Énergétique uniquement",
+    "Protecteur uniquement",
+    "Bâtisseur",
+    "Non alimentaire"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Riche en protéines, il construit le corps.",
+   "id": "6e-svt-alimentation-01",
+   "tier": "application",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les fruits et légumes font partie des aliments protecteurs.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils apportent des vitamines.",
+   "id": "6e-svt-alimentation-02",
+   "tier": "application",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque aliment à son groupe.",
+   "pairs": [
+    [
+     "Riz",
+     "Énergétique"
+    ],
+    [
+     "Œufs",
+     "Bâtisseur"
+    ],
+    [
+     "Orange",
+     "Protecteur"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Classement par rôle principal.",
+   "id": "6e-svt-alimentation-03",
+   "tier": "application",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour avoir un repas équilibré, il faut :",
+   "choices": [
+    "Associer les trois groupes d'aliments",
+    "Manger uniquement des fruits",
+    "Manger seulement des aliments gras",
+    "Sauter des repas"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La variété est la clé.",
+   "id": "6e-svt-alimentation-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel repas est le plus équilibré ?",
+   "choices": [
+    "Riz seul",
+    "Riz, haricots et légumes",
+    "Biscuits seuls",
+    "Jus sucré seul"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il associe énergétique, bâtisseur et protecteur.",
+   "id": "6e-svt-alimentation-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina prépare le déjeuner pour sa famille : elle dispose de bananes plantain, de poisson fumé, de gombo et de papaye.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Classe ces aliments en trois groupes.",
+     "model": "Plantain : énergétique. Poisson : bâtisseur. Gombo et papaye : protecteurs.",
+     "rubric": [
+      "Trois groupes correctement remplis"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-alimentation-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Dis pourquoi ce repas est équilibré et propose une boisson.",
+     "model": "Il contient les trois groupes. On peut boire de l'eau potable.",
+     "rubric": [
+      "Trois groupes présents",
+      "Eau mentionnée"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-alimentation-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-svt-alimentation-06",
+   "tier": "examen",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les aliments énergétiques servent à :",
+   "choices": [
+    "Donner de l'énergie",
+    "Éteindre un feu",
+    "Construire des murs",
+    "Protéger de la pluie"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ce sont les « carburants » du corps.",
+   "id": "6e-svt-alimentation-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel aliment est un bâtisseur ?",
+   "choices": [
+    "Le sucre pur",
+    "L'eau",
+    "Le sel",
+    "Le haricot"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Riche en protéines.",
+   "id": "6e-svt-alimentation-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les fruits et légumes sont riches en :",
+   "choices": [
+    "Vitamines",
+    "Fer à repasser",
+    "Plastique",
+    "Pétrole"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les vitamines protègent le corps.",
+   "id": "6e-svt-alimentation-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un repas équilibré :",
+   "choices": [
+    "Est toujours le même",
+    "Comporte des aliments variés",
+    "Ne contient jamais de fruits",
+    "Ne contient que du sucre"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La variété apporte tout ce qu'il faut.",
+   "id": "6e-svt-alimentation-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour rester en bonne santé, on doit aussi :",
+   "choices": [
+    "Boire de l'eau potable",
+    "Éviter de boire",
+    "Boire de l'eau sale",
+    "Boire seulement des boissons sucrées"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'eau est vitale.",
+   "id": "6e-svt-alimentation-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-alimentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

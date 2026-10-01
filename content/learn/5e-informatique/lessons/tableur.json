@@ -1,0 +1,1129 @@
+{
+ "chapter": "5e-informatique-tableur",
+ "lessons": [
+  {
+   "id": "5e-informatique-tableur-cellules",
+   "title": "Le tableur : lignes, colonnes, cellules",
+   "minutes": 25,
+   "programRef": "Programme d'informatique de 5e (MINESEC) — découpage exact à vérifier sur le texte officiel — tableur : présentation et saisie",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Nommer une cellule par sa colonne et sa ligne (B3) et une plage de cellules (B2:B5).",
+    "Saisir du texte, des nombres et distinguer un contenu de sa mise en forme."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-informatique-tableur-cellules-01",
+    "5e-informatique-tableur-cellules-02",
+    "5e-informatique-tableur-cellules-03",
+    "5e-informatique-tableur-cellules-04",
+    "5e-informatique-tableur-cellules-05",
+    "5e-informatique-tableur-cellules-06"
+   ],
+   "selfCheck": [
+    "5e-informatique-tableur-cellules-q1",
+    "5e-informatique-tableur-cellules-q2",
+    "5e-informatique-tableur-cellules-q3",
+    "5e-informatique-tableur-cellules-q4",
+    "5e-informatique-tableur-cellules-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Un tableur",
+     "md": "Un **tableur** est un logiciel qui range des données dans un grand tableau et fait des **calculs automatiques**. Les **colonnes** sont repérées par des lettres (A, B, C…), les **lignes** par des nombres (1, 2, 3…). Une **cellule** est repérée par sa colonne puis sa ligne : **B3** est la cellule de la colonne B, ligne 3."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une feuille de calcul : la cellule B3 (en jaune) contient 15.",
+     "alt": "Une feuille avec les colonnes A, B, C et les lignes 1 à 5 ; A1 Élève, B1 Note, A2 Amina, B2 12, A3 Boris, B3 15 en jaune, A4 Mballa, B4 9.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 225,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 10,
+        "w": 120,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 10,
+        "w": 120,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 10,
+        "w": 120,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 31,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 31,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 31,
+        "text": "C",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 30,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 74,
+        "w": 30,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 108,
+        "w": 30,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 142,
+        "w": 30,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 176,
+        "w": 30,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 63,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 97,
+        "text": "2",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 131,
+        "text": "3",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 165,
+        "text": "4",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 25,
+        "y": 199,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 360,
+        "h": 170,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 40,
+        "x2": 160,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 40,
+        "x2": 280,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 74,
+        "x2": 400,
+        "y2": 74,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 108,
+        "x2": 400,
+        "y2": 108,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 142,
+        "x2": 400,
+        "y2": 142,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 176,
+        "x2": 400,
+        "y2": 176,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 108,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 63,
+        "text": "Élève",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 63,
+        "text": "Note",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 97,
+        "text": "Amina",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 97,
+        "text": "12",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 131,
+        "text": "Boris",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 131,
+        "text": "15",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 165,
+        "text": "Mballa",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 165,
+        "text": "9",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Contenu d'une cellule",
+     "md": "- Une cellule contient du **texte** (aligné à gauche), un **nombre** (aligné à droite) ou une **formule** (qui commence par le signe =).\n- Une **plage** de cellules est un ensemble de cellules voisines : **B2:B4** désigne les cellules B2, B3 et B4.\n- On peut **mettre en forme** (gras, couleur, bordures, format du nombre) sans changer la valeur."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire une cellule",
+     "statement": "Dans la figure, que contient la cellule B3 ? et A4 ?",
+     "steps": [
+      {
+       "md": "Colonne B, ligne 3 : la note de Boris, 15."
+      },
+      {
+       "md": "Colonne A, ligne 4 : le nom Mballa."
+      }
+     ],
+     "answer": "**B3 contient 15 ; A4 contient « Mballa ».**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : nommer une plage",
+     "statement": "Comment désigner les trois notes (12, 15 et 9) ?",
+     "steps": [
+      {
+       "md": "Elles sont dans la colonne B, des lignes 2 à 4."
+      },
+      {
+       "md": "On écrit la première cellule, deux-points, la dernière."
+      }
+     ],
+     "answer": "**B2:B4**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire « 3B » au lieu de B3 : la **lettre** vient d'abord.\n- Taper un nombre avec un point ou une virgule inadaptée : le tableur peut le traiter comme du texte.\n- Mélanger une plage « B2:B4 » (trois cellules) avec deux cellules séparées."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 5e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Cours générique « un tableur » : pas de nom de logiciel ni de capture d'écran. Les noms des commandes diffèrent selon le logiciel."
+   ]
+  },
+  {
+   "id": "5e-informatique-tableur-formules",
+   "title": "Formules simples, somme, moyenne et graphique",
+   "minutes": 30,
+   "programRef": "Programme d'informatique de 5e (MINESEC) — découpage exact à vérifier sur le texte officiel — tableur : formules et graphiques",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Écrire une formule avec les opérateurs + − × ÷, la fonction somme et la fonction moyenne.",
+    "Recopier une formule et construire un graphique simple à partir d'une plage."
+   ],
+   "prerequisites": [
+    "5e-informatique-tableur-cellules"
+   ],
+   "exercises": [
+    "5e-informatique-tableur-formules-01",
+    "5e-informatique-tableur-formules-02",
+    "5e-informatique-tableur-formules-03",
+    "5e-informatique-tableur-formules-04",
+    "5e-informatique-tableur-formules-05",
+    "5e-informatique-tableur-formules-06"
+   ],
+   "selfCheck": [
+    "5e-informatique-tableur-formules-q1",
+    "5e-informatique-tableur-formules-q2",
+    "5e-informatique-tableur-formules-q3",
+    "5e-informatique-tableur-formules-q4",
+    "5e-informatique-tableur-formules-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Une formule",
+     "md": "Une **formule** est un calcul écrit dans une cellule, **précédé du signe =**. Elle utilise des **adresses de cellules** : si les valeurs changent, le résultat est recalculé automatiquement. Exemple : **=B2+B3** additionne les contenus de B2 et B3."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Opérateurs et fonctions",
+     "md": "- Addition **+**, soustraction **−**, multiplication avec l'astérisque (\\*), division **/**.\n- **=SOMME(B2:B4)** : additionne toute la plage.\n- **=MOYENNE(B2:B4)** : calcule la moyenne (somme divisée par le nombre de valeurs).\n- Les parenthèses fixent l'ordre des calculs."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le total d'une colonne est calculé par une formule (schéma simplifié).",
+     "alt": "Une barre de formule affichant =SOMME(B2:B5) au-dessus d'un petit tableau article et prix avec un total.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 380,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 34,
+        "text": "B6 :",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 34,
+        "text": "=SOMME(B2:B5)",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 60,
+        "w": 190,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 60,
+        "w": 190,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 81,
+        "text": "Article",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 81,
+        "text": "Prix (FCFA)",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 90,
+        "w": 190,
+        "h": 90,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 90,
+        "w": 190,
+        "h": 90,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 120,
+        "x2": 400,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 150,
+        "x2": 400,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 60,
+        "x2": 210,
+        "y2": 180,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 111,
+        "text": "Riz",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 111,
+        "text": "700",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 141,
+        "text": "Huile",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 141,
+        "text": "1200",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 171,
+        "text": "Total",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 171,
+        "text": "1900",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Le graphique",
+     "md": "1. Sélectionner les données (étiquettes et valeurs).\n2. Choisir le type de graphique : **colonnes** pour comparer, **secteurs** pour des parts d'un tout, **courbe** pour une évolution dans le temps.\n3. Ajouter un **titre** et nommer les axes.\n4. Vérifier que les valeurs lues sur le graphique correspondent au tableau."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : somme",
+     "statement": "Les cellules B2, B3 et B4 contiennent 500, 750 et 250 (FCFA). Quelle formule donne le total, et quel est-il ?",
+     "steps": [
+      {
+       "md": "Avec la fonction somme :",
+       "tex": "=SOMME(B2:B4)"
+      },
+      {
+       "md": "Calcul :",
+       "tex": "500 + 750 + 250 = 1500"
+      }
+     ],
+     "answer": "**=SOMME(B2:B4) donne 1 500 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : moyenne",
+     "statement": "Les notes d'Amina sont 12, 15, 9 et 16 dans B2:B5. Quelle est sa moyenne ?",
+     "steps": [
+      {
+       "md": "Somme des notes :",
+       "tex": "12 + 15 + 9 + 16 = 52"
+      },
+      {
+       "md": "On divise par le nombre de notes (4) :",
+       "tex": "52 \\div 4 = 13"
+      }
+     ],
+     "answer": "**=MOYENNE(B2:B5) donne 13.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le signe = : le tableur affiche la formule comme du simple texte.\n- Écrire le résultat à la main au lieu de la formule : il ne se met plus à jour si une valeur change.\n- Mal choisir la plage : une plage trop courte oublie une valeur.\n- Choisir un graphique en secteurs pour une évolution dans le temps."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 5e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Syntaxe : on utilise = B2+B3, =SOMME(B2:B4), =MOYENNE(B2:B4), avec * pour le produit et / pour la division dans la cellule. Le séparateur de plage (« : ») et le nom des fonctions peuvent varier selon la langue du logiciel : à vérifier."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Dans la cellule C7, quel est le nom de la colonne ?",
+   "choices": [
+    "7",
+    "C",
+    "CC",
+    "Aucun"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La lettre donne la colonne, le nombre donne la ligne.",
+   "id": "5e-informatique-tableur-cellules-01",
+   "tier": "application",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une formule commence toujours par le signe =.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le = indique au tableur qu'il doit calculer.",
+   "id": "5e-informatique-tableur-cellules-02",
+   "tier": "application",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque notion à son exemple.",
+   "pairs": [
+    [
+     "Cellule",
+     "D4"
+    ],
+    [
+     "Plage",
+     "B2:B4"
+    ],
+    [
+     "Colonne",
+     "C"
+    ],
+    [
+     "Ligne",
+     "7"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Une cellule, une plage, une colonne et une ligne se repèrent différemment.",
+   "id": "5e-informatique-tableur-cellules-03",
+   "tier": "application",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de cellules contient la plage B2:B6 ?",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "B2, B3, B4, B5, B6 : 5 cellules.",
+   "id": "5e-informatique-tableur-cellules-04",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de cellules contient la plage A1:C3 ? (3 colonnes, 3 lignes)",
+   "answer": 9,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "3 colonnes × 3 lignes = 9 cellules.",
+   "id": "5e-informatique-tableur-cellules-05",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina note les dépenses de sa semaine dans un tableur : la colonne A contient les jours (lundi à vendredi, lignes 2 à 6), la colonne B les montants en FCFA ; la ligne 1 contient les titres.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Dans quelle cellule est le montant du mercredi (3e jour) ?",
+     "choices": [
+      "B3",
+      "A4",
+      "B4",
+      "D2"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Lundi en ligne 2, mardi en ligne 3, mercredi en ligne 4 : B4.",
+     "id": "5e-informatique-tableur-cellules-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle plage contient tous les montants ?",
+     "choices": [
+      "B2:B6",
+      "A1:B1",
+      "B1:B6",
+      "A2:A6"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les montants sont dans la colonne B, lignes 2 à 6.",
+     "id": "5e-informatique-tableur-cellules-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique pourquoi un tableur est plus pratique qu'un cahier pour suivre ses dépenses.",
+     "model": "Il calcule automatiquement les totaux, se corrige facilement, et on peut en tirer un graphique.",
+     "rubric": [
+      "Calculs automatiques",
+      "Facilité de correction ou graphique"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-informatique-tableur-cellules-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-informatique-tableur-cellules-06",
+   "tier": "examen",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment est repérée la cellule de la colonne D, ligne 5 ?",
+   "choices": [
+    "5D",
+    "D.5",
+    "D5",
+    "DD5"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Lettre de colonne, puis numéro de ligne.",
+   "id": "5e-informatique-tableur-cellules-q1",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert principalement un tableur ?",
+   "choices": [
+    "À écouter de la musique",
+    "À dessiner à main levée",
+    "À envoyer un courriel",
+    "À organiser des données et faire des calculs automatiques"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est un outil de calcul et de présentation de données.",
+   "id": "5e-informatique-tableur-cellules-q2",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que représente « B2:B4 » ?",
+   "choices": [
+    "Deux cellules séparées",
+    "Les trois cellules B2, B3 et B4",
+    "Le résultat d'une addition",
+    "Une colonne entière"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le deux-points relie le début et la fin d'une plage.",
+   "id": "5e-informatique-tableur-cellules-q3",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un texte dans une cellule est généralement aligné…",
+   "choices": [
+    "À droite",
+    "À gauche",
+    "En haut de l'écran",
+    "Au hasard"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les nombres s'alignent à droite, les textes à gauche.",
+   "id": "5e-informatique-tableur-cellules-q4",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle cellule se trouve juste sous A1 ?",
+   "choices": [
+    "B1",
+    "B2",
+    "C1",
+    "A2"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même colonne A, ligne suivante.",
+   "id": "5e-informatique-tableur-cellules-q5",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-cellules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle cellule contient une formule ?",
+   "choices": [
+    "B2+B3",
+    "Somme",
+    "=B2+B3",
+    "12 + 15"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Seul le contenu qui commence par = est une formule.",
+   "id": "5e-informatique-tableur-formules-01",
+   "tier": "application",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la valeur de =SOMME(A1:A3) si A1 = 4, A2 = 6 et A3 = 10 ?",
+   "answer": 20,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 + 6 + 10 = 20.",
+   "id": "5e-informatique-tableur-formules-02",
+   "tier": "application",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la valeur de =MOYENNE(A1:A3) si A1 = 10, A2 = 14 et A3 = 18 ?",
+   "answer": 14,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Somme 42, nombre de valeurs 3 ; 42 ÷ 3 = 14.",
+   "method": "Moyenne = somme ÷ nombre de valeurs.",
+   "id": "5e-informatique-tableur-formules-03",
+   "tier": "application",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "B2 = 250 (prix unitaire en FCFA) et C2 = 4 (quantité). Que donne =B2\\*C2 ?",
+   "answer": 1000,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "250 × 4 = 1 000 FCFA.",
+   "id": "5e-informatique-tableur-formules-04",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque besoin au graphique adapté.",
+   "pairs": [
+    [
+     "Comparer les notes de 5 élèves",
+     "Colonnes"
+    ],
+    [
+     "Partager un budget en parts",
+     "Secteurs"
+    ],
+    [
+     "Suivre une température jour après jour",
+     "Courbe"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Colonnes : comparaison ; secteurs : parts ; courbe : évolution.",
+   "id": "5e-informatique-tableur-formules-05",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Au marché, Mballa note ses achats dans un tableur : riz 700 FCFA (B2), huile 1 200 FCFA (B3), sel 150 FCFA (B4), sucre 450 FCFA (B5).",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle formule donne le total des achats ?",
+     "choices": [
+      "=SOMME(B2:B5)",
+      "=SOMME(B2:B4)",
+      "=B2:B5",
+      "SOMME(B2:B5)"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La plage doit couvrir B2 à B5 et la formule doit commencer par =.",
+     "id": "5e-informatique-tableur-formules-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le total ?",
+     "answer": 2500,
+     "unit": "FCFA",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "700 + 1 200 + 150 + 450 = 2 500 FCFA.",
+     "id": "5e-informatique-tableur-formules-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le prix moyen d'un article ?",
+     "answer": 625,
+     "unit": "FCFA",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "2 500 ÷ 4 = 625 FCFA.",
+     "id": "5e-informatique-tableur-formules-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-informatique-tableur-formules-06",
+   "tier": "examen",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel signe commence une formule ?",
+   "choices": [
+    "Le signe +",
+    "Le signe #",
+    "Le signe =",
+    "Les guillemets"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sans =, le contenu est du texte.",
+   "id": "5e-informatique-tableur-formules-q1",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que calcule =MOYENNE(B2:B5) ?",
+   "choices": [
+    "Le produit des valeurs",
+    "La plus grande valeur",
+    "La moyenne des valeurs de B2 à B5",
+    "Le nombre de lignes"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle divise la somme par le nombre de valeurs.",
+   "id": "5e-informatique-tableur-formules-q2",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel avantage a une formule sur un résultat tapé à la main ?",
+   "choices": [
+    "Elle se met à jour si les valeurs changent",
+    "Elle est plus longue à écrire",
+    "Elle ne peut pas contenir de nombres",
+    "Elle empêche d'enregistrer"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le calcul automatique évite de tout refaire.",
+   "id": "5e-informatique-tableur-formules-q3",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel graphique convient pour comparer les prix de quatre produits ?",
+   "choices": [
+    "Un graphique en courbe du temps",
+    "Une photo",
+    "Un graphique en colonnes",
+    "Un tableau vide"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les colonnes permettent de comparer facilement des valeurs.",
+   "id": "5e-informatique-tableur-formules-q4",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que représente « B2\\*C2 » dans une formule ?",
+   "choices": [
+    "La somme de B2 et C2",
+    "La plage entre B2 et C2",
+    "Une division",
+    "Le produit de B2 par C2"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'astérisque note la multiplication.",
+   "id": "5e-informatique-tableur-formules-q5",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-tableur-formules",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,1280 @@
+{
+ "chapter": "4e-maths-proportionnalite",
+ "lessons": [
+  {
+   "id": "4e-maths-proportionnalite",
+   "title": "Proportionnalité, pourcentages et échelles",
+   "minutes": 30,
+   "programRef": "4e — Proportionnalité, pourcentages, échelles (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une situation de proportionnalité et utiliser le coefficient.",
+    "Calculer un pourcentage, une augmentation, une réduction.",
+    "Utiliser une échelle."
+   ],
+   "prerequisites": [
+    "4e-maths-fractions"
+   ],
+   "exercises": [
+    "4e-maths-proportionnalite-01",
+    "4e-maths-proportionnalite-02",
+    "4e-maths-proportionnalite-03",
+    "4e-maths-proportionnalite-04",
+    "4e-maths-proportionnalite-05",
+    "4e-maths-proportionnalite-06"
+   ],
+   "selfCheck": [
+    "4e-maths-proportionnalite-q1",
+    "4e-maths-proportionnalite-q2",
+    "4e-maths-proportionnalite-q3",
+    "4e-maths-proportionnalite-q4",
+    "4e-maths-proportionnalite-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Proportionnalité",
+     "md": "Deux grandeurs sont **proportionnelles** si on passe de l'une à l'autre en multipliant toujours par le même nombre, le **coefficient de proportionnalité**. Dans un tableau, les rapports « valeur de la 2e ligne ÷ valeur de la 1re » sont tous égaux."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un tableau de proportionnalité : le coefficient est le prix d'un kilogramme.",
+     "alt": "Un tableau à deux lignes : 5 kg coûtent 3 500 FCFA et 8 kg coûtent 5 600 FCFA, coefficient 700.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 90,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 30,
+        "w": 130,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 30,
+        "w": 130,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 70,
+        "w": 90,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 70,
+        "w": 130,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 70,
+        "w": 130,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 56,
+        "text": "kg de riz",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 56,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 56,
+        "text": "8",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 96,
+        "text": "prix (FCFA)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 96,
+        "text": "3 500",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 96,
+        "text": "5 600",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 20,
+        "text": "× 700 (coefficient)",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 134,
+        "text": "le prix de 1 kg est 700 FCFA",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pourcentages",
+     "md": "- Prendre $p\\%$ d'une quantité $Q$ : $Q\\times\\frac{p}{100}$ (20 % de 35 000 = 7 000).\n- **Augmenter** de $p\\%$ : multiplier par $1+\\frac{p}{100}$.\n- **Diminuer** de $p\\%$ : multiplier par $1-\\frac{p}{100}$.\n- Échelle $\\frac{1}{50\\,000}$ : 1 cm sur la carte représente 50 000 cm = 500 m dans la réalité."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : proportionnalité",
+     "statement": "5 kg de riz coûtent 3 500 FCFA. Combien coûtent 8 kg ?",
+     "steps": [
+      {
+       "md": "On trouve le prix d'1 kg :",
+       "tex": "3\\,500\\div5=700"
+      },
+      {
+       "md": "Puis le prix de 8 kg :",
+       "tex": "8\\times700=5\\,600"
+      }
+     ],
+     "answer": "**5 600 FCFA**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : réduction et échelle",
+     "statement": "Un article de 24 000 FCFA est réduit de 15 %. Sur une carte à l'échelle $\\frac{1}{50\\,000}$, deux villages sont à 4 cm : quelle est la distance réelle ?",
+     "steps": [
+      {
+       "md": "Prix réduit : on multiplie par $1-0{,}15=0{,}85$ :",
+       "tex": "24\\,000\\times0{,}85=20\\,400"
+      },
+      {
+       "md": "Distance : $4\\times50\\,000=200\\,000$ cm, soit 2 000 m, soit 2 km.",
+       "tex": "200\\,000\\text{ cm}=2\\text{ km}"
+      }
+     ],
+     "answer": "**20 400 FCFA et 2 km**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que tout est proportionnel : l'âge et la taille ne le sont pas.\n- Pour une réduction de 15 %, soustraire 15 FCFA : c'est 15 % **du prix**.\n- Oublier de convertir les unités avec l'échelle (cm en m, en km).\n- Augmenter de 20 % puis diminuer de 20 % ne ramène pas au prix de départ."
+    }
+   ],
+   "reviewNotes": [
+    "Les prix du marché sont fictifs. Vérifier la façon d'écrire les grands nombres (espaces)."
+   ]
+  },
+  {
+   "id": "4e-maths-statistiques",
+   "title": "Statistiques : effectifs, fréquences, moyenne, diagrammes",
+   "minutes": 30,
+   "programRef": "4e — Statistiques : effectif, fréquence, moyenne, diagrammes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dresser un tableau d'effectifs et de fréquences.",
+    "Calculer une moyenne.",
+    "Lire et construire un diagramme en bâtons ou circulaire."
+   ],
+   "prerequisites": [
+    "4e-maths-proportionnalite"
+   ],
+   "exercises": [
+    "4e-maths-statistiques-01",
+    "4e-maths-statistiques-02",
+    "4e-maths-statistiques-03",
+    "4e-maths-statistiques-04",
+    "4e-maths-statistiques-05",
+    "4e-maths-statistiques-06"
+   ],
+   "selfCheck": [
+    "4e-maths-statistiques-q1",
+    "4e-maths-statistiques-q2",
+    "4e-maths-statistiques-q3",
+    "4e-maths-statistiques-q4",
+    "4e-maths-statistiques-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "Dans une série statistique, chaque valeur du **caractère** étudié a un **effectif** (nombre de fois qu'elle apparaît). L'**effectif total** $N$ est la somme des effectifs. La **fréquence** d'une valeur est $\\frac{\\text{effectif}}{N}$ ; on l'exprime souvent en pourcentage."
+    },
+    {
+     "type": "illustration",
+     "caption": "Notes d'une classe de 20 élèves : valeur en abscisse, effectif en hauteur.",
+     "alt": "Un diagramme en bâtons : 2 élèves ont 8, 5 ont 10, 6 ont 12, 4 ont 14, 3 ont 16.",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "8",
+        "value": 2,
+        "color": "blue"
+       },
+       {
+        "label": "10",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "12",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "14",
+        "value": 4,
+        "color": "blue"
+       },
+       {
+        "label": "16",
+        "value": 3,
+        "color": "blue"
+       }
+      ],
+      "unit": "élèves"
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne",
+     "md": "La moyenne d'une série est la somme de toutes les valeurs divisée par l'effectif total. Avec des effectifs :",
+     "tex": "m=\\frac{n_1x_1+n_2x_2+\\dots+n_kx_k}{N}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Diagramme circulaire",
+     "md": "Dans un diagramme circulaire, l'angle d'un secteur est proportionnel à l'effectif : angle $=\\text{fréquence}\\times360\\degree$. Un quart des élèves correspond à un angle de $90\\degree$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : moyenne",
+     "statement": "Avec la série du diagramme (valeurs 8, 10, 12, 14, 16 ; effectifs 2, 5, 6, 4, 3), calcule l'effectif total puis la moyenne.",
+     "steps": [
+      {
+       "md": "Effectif total :",
+       "tex": "N=2+5+6+4+3=20"
+      },
+      {
+       "md": "Somme pondérée :",
+       "tex": "2\\times8+5\\times10+6\\times12+4\\times14+3\\times16=16+50+72+56+48=242"
+      },
+      {
+       "md": "Moyenne :",
+       "tex": "m=\\frac{242}{20}=12{,}1"
+      }
+     ],
+     "answer": "**$N=20$ et moyenne 12,1**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : fréquence et angle",
+     "statement": "Quelle est la fréquence des élèves ayant 10, et quel angle représente-t-elle dans un diagramme circulaire ?",
+     "steps": [
+      {
+       "md": "Fréquence :",
+       "tex": "\\frac{5}{20}=0{,}25=25\\%"
+      },
+      {
+       "md": "Angle :",
+       "tex": "0{,}25\\times360=90\\degree"
+      }
+     ],
+     "answer": "**25 % et $90\\degree$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer la moyenne des valeurs sans tenir compte des effectifs : $\\frac{8+10+12+14+16}{5}=12$ n'est pas la moyenne de la classe.\n- Oublier de diviser par l'effectif total.\n- Une somme de fréquences doit faire 1 (ou 100 %) : c'est un bon contrôle."
+    }
+   ],
+   "reviewNotes": [
+    "Les classes (regroupement en intervalles) et la médiane sont traitées en 3e dans cette progression : à confirmer.",
+    "Les données des exemples sont fictives."
+   ]
+  },
+  {
+   "id": "4e-maths-problemes",
+   "title": "Résoudre un problème : méthode et exemples",
+   "minutes": 30,
+   "programRef": "4e — Résolution de problèmes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Suivre une méthode pour résoudre un problème de la vie courante.",
+    "Mettre en équation, vérifier et rédiger.",
+    "Utiliser vitesse, durée et distance."
+   ],
+   "prerequisites": [
+    "4e-maths-equations",
+    "4e-maths-proportionnalite"
+   ],
+   "exercises": [
+    "4e-maths-problemes-01",
+    "4e-maths-problemes-02",
+    "4e-maths-problemes-03",
+    "4e-maths-problemes-04",
+    "4e-maths-problemes-05",
+    "4e-maths-problemes-06"
+   ],
+   "selfCheck": [
+    "4e-maths-problemes-q1",
+    "4e-maths-problemes-q2",
+    "4e-maths-problemes-q3",
+    "4e-maths-problemes-q4",
+    "4e-maths-problemes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Les quatre temps de la résolution d'un problème.",
+     "alt": "Quatre cases reliées par des flèches : lire, choisir l'inconnue, mettre en équation, résoudre et vérifier.",
+     "figure": {
+      "kind": "shapes",
+      "w": 490,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 105,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 62,
+        "y": 62,
+        "text": "1. Lire",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 62,
+        "y": 84,
+        "text": "l'énoncé",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 116,
+        "y1": 65,
+        "x2": 128,
+        "y2": 65,
+        "color": "grey",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 30,
+        "w": 105,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 182,
+        "y": 62,
+        "text": "2. Choisir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 182,
+        "y": 84,
+        "text": "l'inconnue",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 236,
+        "y1": 65,
+        "x2": 248,
+        "y2": 65,
+        "color": "grey",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 30,
+        "w": 105,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 302,
+        "y": 62,
+        "text": "3. Mettre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 302,
+        "y": 84,
+        "text": "en équation",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 356,
+        "y1": 65,
+        "x2": 368,
+        "y2": 65,
+        "color": "grey",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 30,
+        "w": 105,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 422,
+        "y": 62,
+        "text": "4. Résoudre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 422,
+        "y": 84,
+        "text": "et vérifier",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. **Lire** l'énoncé en entier et repérer ce qu'on cherche.\n2. **Choisir l'inconnue** : « Soit $x$ le prix (la longueur, l'âge…) de… » en précisant l'unité.\n3. **Mettre en équation** à partir des informations.\n4. **Résoudre**, puis **vérifier** dans l'énoncé et répondre par une phrase."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Vitesse, distance, durée",
+     "md": "Pour un mouvement à vitesse constante :",
+     "tex": "v=\\frac{d}{t}\\qquad d=v\\times t\\qquad t=\\frac{d}{v}"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : mise en équation",
+     "statement": "Mballa a 5 ans de plus que Nkeng. La somme de leurs âges est 35 ans. Quels sont leurs âges ?",
+     "steps": [
+      {
+       "md": "Soit $x$ l'âge de Nkeng. Alors Mballa a $x+5$ ans."
+      },
+      {
+       "md": "La somme est 35 :",
+       "tex": "x+(x+5)=35 \\Rightarrow 2x=30 \\Rightarrow x=15"
+      },
+      {
+       "md": "Nkeng a 15 ans et Mballa a $15+5=20$ ans. Vérification : $15+20=35$."
+      }
+     ],
+     "answer": "**Nkeng 15 ans, Mballa 20 ans**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : vitesse",
+     "statement": "Un bus parcourt 150 km en 2 h 30 min. Quelle est sa vitesse moyenne ?",
+     "steps": [
+      {
+       "md": "On convertit la durée : 2 h 30 min $=2{,}5$ h."
+      },
+      {
+       "md": "Vitesse :",
+       "tex": "v=\\frac{150}{2{,}5}=60\\text{ km/h}"
+      }
+     ],
+     "answer": "**60 km/h**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Ne pas définir l'inconnue (« soit $x$… ») avant de calculer.\n- Convertir 2 h 30 en 2,30 h : c'est 2,5 h.\n- Ne pas vérifier : une longueur négative ou un nombre de personnes décimal signale une erreur.\n- Oublier de conclure par une phrase."
+    }
+   ],
+   "reviewNotes": [
+    "Les prix et distances de la fiche sont fictifs."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "3 cahiers coûtent 1 200 FCFA. Combien coûtent 7 cahiers (en FCFA) ?",
+   "answer": 2800,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 cahier : $1\\,200\\div3=400$ ; 7 cahiers : $7\\times400=2\\,800$ FCFA.",
+   "id": "4e-maths-proportionnalite-01",
+   "tier": "application",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 15 % de 8 000.",
+   "answer": 1200,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$8\\,000\\times\\frac{15}{100}=1\\,200$.",
+   "id": "4e-maths-proportionnalite-02",
+   "tier": "application",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel de ces tableaux est de proportionnalité (1re ligne : 2, 5, 8) ?",
+   "choices": [
+    "2e ligne : 6, 15, 25",
+    "2e ligne : 6, 15, 24",
+    "2e ligne : 4, 7, 10",
+    "2e ligne : 6, 10, 14"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le coefficient est 3 : $2\\times3=6$, $5\\times3=15$, $8\\times3=24$.",
+   "id": "4e-maths-proportionnalite-03",
+   "tier": "application",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un loyer de 25 000 FCFA augmente de 12 %. Quel est le nouveau loyer (en FCFA) ?",
+   "answer": 28000,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$25\\,000\\times1{,}12=28\\,000$ FCFA.",
+   "id": "4e-maths-proportionnalite-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur une carte à l'échelle $\\frac{1}{200\\,000}$, deux villes sont distantes de 3,5 cm. Quelle est la distance réelle (en km) ?",
+   "answer": 7,
+   "unit": "km",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$3{,}5\\times200\\,000=700\\,000$ cm $=7\\,000$ m $=7$ km.",
+   "id": "4e-maths-proportionnalite-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans une boutique, un pagne coûte 18 000 FCFA. Pendant les soldes, une réduction de 25 % est appliquée.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le montant de la réduction (en FCFA) ?",
+     "answer": 4500,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$18\\,000\\times0{,}25=4\\,500$ FCFA.",
+     "id": "4e-maths-proportionnalite-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le prix soldé (en FCFA) ?",
+     "answer": 13500,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$18\\,000-4\\,500=13\\,500$ FCFA.",
+     "id": "4e-maths-proportionnalite-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Le dernier jour, une réduction supplémentaire de 10 % est appliquée sur le prix soldé. Quel est le nouveau prix (en FCFA) ?",
+     "answer": 12150,
+     "unit": "FCFA",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$13\\,500\\times0{,}90=12\\,150$ FCFA.",
+     "id": "4e-maths-proportionnalite-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Une réduction de $p\\%$ multiplie le prix par $1-\\frac{p}{100}$ ; deux réductions successives se calculent l'une après l'autre.",
+   "id": "4e-maths-proportionnalite-06",
+   "tier": "examen",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le coefficient de proportionnalité entre 4 et 14 ?",
+   "choices": [
+    "10",
+    "0,28",
+    "3,5",
+    "56"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$14\\div4=3{,}5$.",
+   "id": "4e-maths-proportionnalite-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 10 % de 3 500 ?",
+   "choices": [
+    "35",
+    "3 490",
+    "350",
+    "3 510"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10 % revient à diviser par 10.",
+   "id": "4e-maths-proportionnalite-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Par quel nombre multiplie-t-on pour augmenter de 8 % ?",
+   "choices": [
+    "0,08",
+    "0,92",
+    "1,08",
+    "8"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$1+\\frac{8}{100}=1{,}08$.",
+   "id": "4e-maths-proportionnalite-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À l'échelle $\\frac{1}{1000}$, 5 cm sur un plan représentent...",
+   "choices": [
+    "5 m",
+    "500 m",
+    "5 km",
+    "50 m"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$5\\times1\\,000=5\\,000$ cm $=50$ m.",
+   "id": "4e-maths-proportionnalite-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un prix baisse de 50 %. Par quoi est-il multiplié ?",
+   "choices": [
+    "0,05",
+    "1,5",
+    "50",
+    "0,5"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$1-0{,}50=0{,}5$.",
+   "id": "4e-maths-proportionnalite-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-proportionnalite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Dans un groupe de 20 familles, 8 ont exactement 1 enfant. Quelle est la fréquence de cette valeur, en pourcentage ?",
+   "answer": 40,
+   "unit": "%",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{8}{20}=0{,}4=40\\,\\%$.",
+   "id": "4e-maths-statistiques-01",
+   "tier": "application",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "On observe le nombre de frères et sœurs de 20 élèves : 0 (5 élèves), 1 (8 élèves), 2 (4 élèves), 3 (3 élèves). Quelle est la moyenne ?",
+   "answer": 1.25,
+   "tolerance": 0.001,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{0\\times5+1\\times8+2\\times4+3\\times3}{20}=\\frac{25}{20}=1{,}25$.",
+   "id": "4e-maths-statistiques-02",
+   "tier": "application",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un secteur d'un diagramme circulaire représente 5 élèves sur 20. Quel est son angle ?",
+   "choices": [
+    "$60\\degree$",
+    "$90\\degree$",
+    "$72\\degree$",
+    "$25\\degree$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{5}{20}\\times360=90$.",
+   "id": "4e-maths-statistiques-03",
+   "tier": "application",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Cinq notes : 12, 9, 15, 10, 14. Quelle est la moyenne ?",
+   "answer": 12,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$12+9+15+10+14=60$ et $60\\div5=12$.",
+   "id": "4e-maths-statistiques-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Trois notes sont 8, 12 et 13. Quelle 4e note donne une moyenne de 11 sur les 4 notes ?",
+   "answer": 11,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Somme totale nécessaire : $4\\times11=44$. $8+12+13=33$, donc la 4e note est $44-33=11$.",
+   "method": "Passer par la somme : moyenne × effectif.",
+   "id": "4e-maths-statistiques-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa vend du riz. Voici ses ventes de la semaine, en sacs : lundi 12 ; mardi 9 ; mercredi 15 ; jeudi 12 ; vendredi 18 ; samedi 24.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de sacs a-t-il vendus au total ?",
+     "answer": 90,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$12+9+15+12+18+24=90$.",
+     "id": "4e-maths-statistiques-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la moyenne journalière (en sacs) ?",
+     "answer": 15,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$90\\div6=15$ sacs par jour.",
+     "id": "4e-maths-statistiques-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Combien de jours ont des ventes strictement supérieures à la moyenne ?",
+     "choices": [
+      "1",
+      "3",
+      "4",
+      "2"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Seuls vendredi (18) et samedi (24) dépassent 15 ; mercredi vaut exactement 15.",
+     "id": "4e-maths-statistiques-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Additionner, diviser par le nombre de jours, puis comparer chaque valeur à la moyenne.",
+   "figure": {
+    "kind": "bars",
+    "w": 420,
+    "h": 240,
+    "bars": [
+     {
+      "label": "Lun",
+      "value": 12,
+      "color": "blue"
+     },
+     {
+      "label": "Mar",
+      "value": 9,
+      "color": "blue"
+     },
+     {
+      "label": "Mer",
+      "value": 15,
+      "color": "blue"
+     },
+     {
+      "label": "Jeu",
+      "value": 12,
+      "color": "blue"
+     },
+     {
+      "label": "Ven",
+      "value": 18,
+      "color": "blue"
+     },
+     {
+      "label": "Sam",
+      "value": 24,
+      "color": "blue"
+     }
+    ],
+    "unit": "sacs"
+   },
+   "id": "4e-maths-statistiques-06",
+   "tier": "examen",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut l'effectif total pour les effectifs 3, 5, 7 et 5 ?",
+   "choices": [
+    "20",
+    "15",
+    "4",
+    "5"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$3+5+7+5=20$.",
+   "id": "4e-maths-statistiques-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la fréquence d'une valeur d'effectif 6 dans une série de 24 ?",
+   "choices": [
+    "25 %",
+    "6 %",
+    "24 %",
+    "4 %"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{6}{24}=0{,}25$.",
+   "id": "4e-maths-statistiques-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La moyenne de 4, 6 et 11 est...",
+   "choices": [
+    "6",
+    "21",
+    "7",
+    "5"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{4+6+11}{3}=\\frac{21}{3}=7$.",
+   "id": "4e-maths-statistiques-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La somme de toutes les fréquences d'une série vaut...",
+   "choices": [
+    "0",
+    "10",
+    "1 (ou 100 %)",
+    "l'effectif total"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les fréquences se partagent le tout : leur somme est 1.",
+   "id": "4e-maths-statistiques-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel angle représente 50 % dans un diagramme circulaire ?",
+   "choices": [
+    "$50\\degree$",
+    "$90\\degree$",
+    "$360\\degree$",
+    "$180\\degree$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$0{,}5\\times360=180$.",
+   "id": "4e-maths-statistiques-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-statistiques",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un car parcourt 90 km en 1,5 h. Quelle est sa vitesse moyenne (en km/h) ?",
+   "answer": 60,
+   "unit": "km/h",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$v=\\frac{90}{1{,}5}=60$ km/h.",
+   "id": "4e-maths-problemes-01",
+   "tier": "application",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un cycliste roule à 45 km/h. Combien de temps (en heures) met-il pour 180 km ?",
+   "answer": 4,
+   "unit": "h",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$t=\\frac{180}{45}=4$ h.",
+   "id": "4e-maths-problemes-02",
+   "tier": "application",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "On partage 12 000 FCFA entre trois personnes dans les proportions 1, 2 et 3. Quelle est la plus grande part (en FCFA) ?",
+   "answer": 6000,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$1+2+3=6$ parts ; une part vaut $12\\,000\\div6=2\\,000$ ; la plus grande est $3\\times2\\,000=6\\,000$.",
+   "id": "4e-maths-problemes-03",
+   "tier": "application",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un rectangle a pour périmètre 36 cm ; sa longueur dépasse sa largeur de 4 cm. Quelle est sa largeur (en cm) ?",
+   "answer": 7,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Soit $l$ la largeur : $2(l+l+4)=36$ donc $2l+4=18$ et $l=7$. La longueur est 11 cm.",
+   "id": "4e-maths-problemes-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un commerçant achète 40 sacs à 12 500 FCFA et les revend avec 20 % de bénéfice sur le prix d'achat. Quel est son bénéfice total (en FCFA) ?",
+   "answer": 100000,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Bénéfice par sac : $12\\,500\\times0{,}20=2\\,500$ ; pour 40 sacs : $40\\times2\\,500=100\\,000$ FCFA.",
+   "id": "4e-maths-problemes-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un bus roule 2 h à 60 km/h, puis 1,5 h à 80 km/h.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle distance totale (en km) a-t-il parcourue ?",
+     "answer": 240,
+     "unit": "km",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$2\\times60=120$ km puis $1{,}5\\times80=120$ km : total 240 km.",
+     "id": "4e-maths-problemes-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est sa vitesse moyenne sur tout le trajet (en km/h, arrondie à 0,1) ?",
+     "answer": 68.6,
+     "tolerance": 0.1,
+     "unit": "km/h",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Durée totale $3{,}5$ h ; $\\frac{240}{3{,}5}\\approx68{,}57$ km/h, soit 68,6 km/h.",
+     "id": "4e-maths-problemes-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Il lui reste 60 km à faire à 90 km/h. Combien de minutes cela prend-il ?",
+     "answer": 40,
+     "unit": "min",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$\\frac{60}{90}=\\frac{2}{3}$ h, soit $\\frac{2}{3}\\times60=40$ minutes.",
+     "id": "4e-maths-problemes-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "La vitesse moyenne est la distance totale divisée par la durée totale, pas la moyenne des vitesses.",
+   "mistakes": [
+    "Faire la moyenne de 60 et 80 : on obtiendrait 70, ce qui est faux."
+   ],
+   "id": "4e-maths-problemes-06",
+   "tier": "examen",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un train parcourt 300 km à 100 km/h. Quelle est la durée du trajet ?",
+   "choices": [
+    "3 h",
+    "30 h",
+    "1/3 h",
+    "400 h"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$t=\\frac{300}{100}=3$ h.",
+   "id": "4e-maths-problemes-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "2 h 15 min en heures décimales, c'est...",
+   "choices": [
+    "2,15 h",
+    "2,5 h",
+    "2,25 h",
+    "2,1 h"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "15 min $=\\frac{15}{60}=0{,}25$ h.",
+   "id": "4e-maths-problemes-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la bonne première phrase pour un problème d'âges ?",
+   "choices": [
+    "$x=15$.",
+    "La réponse est 20.",
+    "Soit $x$ l'âge de Nkeng.",
+    "On calcule $2x$."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On commence toujours par définir l'inconnue.",
+   "id": "4e-maths-problemes-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux nombres ont pour somme 50 ; l'un est le quadruple de l'autre. Quel est le plus petit ?",
+   "choices": [
+    "10",
+    "40",
+    "12,5",
+    "25"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$x+4x=50$ donne $x=10$ et l'autre est 40.",
+   "id": "4e-maths-problemes-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si $v=60$ km/h et $t=0{,}5$ h, quelle distance est parcourue ?",
+   "choices": [
+    "120 km",
+    "60 km",
+    "0,5 km",
+    "30 km"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$d=v\\times t=60\\times0{,}5=30$ km.",
+   "id": "4e-maths-problemes-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-problemes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

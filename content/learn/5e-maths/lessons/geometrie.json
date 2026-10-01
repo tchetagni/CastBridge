@@ -1,0 +1,2488 @@
+{
+ "chapter": "5e-maths-geometrie",
+ "lessons": [
+  {
+   "id": "5e-maths-angles-paralleles",
+   "title": "Angles : opposés par le sommet, adjacents et droites parallèles",
+   "minutes": 30,
+   "programRef": "5e — Angles : opposés par le sommet, complémentaires, supplémentaires, angles et parallélisme (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître et utiliser des angles opposés par le sommet, adjacents, complémentaires et supplémentaires.",
+    "Utiliser les angles correspondants et alternes-internes formés par deux parallèles et une sécante."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-maths-angles-paralleles-01",
+    "5e-maths-angles-paralleles-02",
+    "5e-maths-angles-paralleles-03",
+    "5e-maths-angles-paralleles-04",
+    "5e-maths-angles-paralleles-05",
+    "5e-maths-angles-paralleles-06"
+   ],
+   "selfCheck": [
+    "5e-maths-angles-paralleles-q1",
+    "5e-maths-angles-paralleles-q2",
+    "5e-maths-angles-paralleles-q3",
+    "5e-maths-angles-paralleles-q4",
+    "5e-maths-angles-paralleles-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Angles opposés par le sommet",
+     "md": "Deux droites sécantes forment quatre angles. Deux angles **opposés par le sommet** sont égaux. Deux angles **adjacents** qui forment un angle plat sont **supplémentaires** : leur somme vaut 180°. Deux angles dont la somme vaut 90° sont **complémentaires**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Deux droites sécantes : les angles opposés par le sommet sont égaux.",
+     "alt": "Deux droites qui se coupent avec des angles de 70 degrés et de 110 degrés.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 190,
+      "items": [
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 95,
+        "x2": 323.9,
+        "y2": 35.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 95,
+        "x2": 116.1,
+        "y2": 155.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 95,
+        "x2": 202.6,
+        "y2": -3.5,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 95,
+        "x2": 237.4,
+        "y2": 193.5,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 242,
+        "y": 54,
+        "text": "70°",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 140,
+        "text": "70°",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 108,
+        "text": "110°",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 272,
+        "y": 84,
+        "text": "110°",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Parallèles et sécante",
+     "md": "Si deux droites parallèles sont coupées par une sécante, les angles **correspondants** sont égaux et les angles **alternes-internes** sont égaux. Réciproquement, si des angles correspondants (ou alternes-internes) sont égaux, les droites sont parallèles."
+    },
+    {
+     "type": "illustration",
+     "caption": "Angles correspondants : même position, même mesure (56°).",
+     "alt": "Deux droites horizontales parallèles coupées par une sécante, avec deux angles correspondants de 56 degrés.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 190,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 50,
+        "x2": 410,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 130,
+        "x2": 410,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 160,
+        "x2": 255,
+        "y2": 20,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 40,
+        "text": "(d)",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 120,
+        "text": "(d')",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "angle",
+        "x": 236.7,
+        "y": 50,
+        "from": 0,
+        "to": 56.3,
+        "r": 22,
+        "color": "red"
+       },
+       {
+        "t": "angle",
+        "x": 183.3,
+        "y": 130,
+        "from": 0,
+        "to": 56.3,
+        "r": 22,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 32,
+        "text": "56°",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 226,
+        "y": 112,
+        "text": "56°",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : opposés",
+     "statement": "Deux droites se coupent en O. Un angle mesure 48°. Donne la mesure de l'angle opposé et d'un angle adjacent.",
+     "steps": [
+      {
+       "md": "L'angle opposé par le sommet mesure aussi 48°."
+      },
+      {
+       "md": "L'angle adjacent est supplémentaire : 180 − 48 = 132°."
+      }
+     ],
+     "answer": "**48° et 132°**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : parallèles",
+     "statement": "(d) // (d'). Une sécante forme avec (d) un angle de 65°. Quel angle correspondant forme-t-elle avec (d') ?",
+     "steps": [
+      {
+       "md": "Les droites sont parallèles : les angles correspondants sont égaux."
+      },
+      {
+       "md": "L'angle correspondant mesure donc 65°."
+      }
+     ],
+     "answer": "**65°**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que deux angles adjacents sont toujours supplémentaires : ils doivent former un angle plat.\n- Utiliser « correspondants égaux » sans que les droites soient parallèles.\n- Confondre angles opposés par le sommet (égaux) et angles adjacents (non égaux en général)."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si les angles alternes-internes / correspondants sont au programme de 5e (parfois 4e) ; la réciproque n'est donnée que comme critère de parallélisme."
+   ]
+  },
+  {
+   "id": "5e-maths-somme-angles-triangle",
+   "title": "Somme des angles d'un triangle",
+   "minutes": 25,
+   "programRef": "5e — Triangles : somme des angles, triangles particuliers (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser que la somme des angles d'un triangle vaut 180°.",
+    "Déterminer les angles d'un triangle isocèle, équilatéral ou rectangle."
+   ],
+   "prerequisites": [
+    "5e-maths-angles-paralleles"
+   ],
+   "exercises": [
+    "5e-maths-somme-angles-triangle-01",
+    "5e-maths-somme-angles-triangle-02",
+    "5e-maths-somme-angles-triangle-03",
+    "5e-maths-somme-angles-triangle-04",
+    "5e-maths-somme-angles-triangle-05",
+    "5e-maths-somme-angles-triangle-06"
+   ],
+   "selfCheck": [
+    "5e-maths-somme-angles-triangle-q1",
+    "5e-maths-somme-angles-triangle-q2",
+    "5e-maths-somme-angles-triangle-q3",
+    "5e-maths-somme-angles-triangle-q4",
+    "5e-maths-somme-angles-triangle-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Somme des angles",
+     "md": "Dans un triangle, la somme des mesures des trois angles est égale à **180°**. Conséquences : un triangle **équilatéral** a trois angles de 60° ; un triangle **isocèle** a deux angles égaux (à la base) ; dans un triangle **rectangle**, les deux angles aigus sont complémentaires."
+    },
+    {
+     "type": "illustration",
+     "caption": "Dans ce triangle, le troisième angle mesure 60°.",
+     "alt": "Un triangle avec deux angles de 70 et 50 degrés et un angle inconnu.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         160,
+         300,
+         160,
+         140,
+         30
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 150,
+        "text": "70°",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 150,
+        "text": "50°",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 142,
+        "y": 70,
+        "text": "?",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 90,
+        "text": "70 + 50 = 120",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 115,
+        "text": "180 − 120 = 60",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : troisième angle",
+     "statement": "Un triangle a des angles de 62° et 48°. Combien mesure le troisième ?",
+     "steps": [
+      {
+       "md": "On additionne : 62 + 48 = 110."
+      },
+      {
+       "md": "On soustrait à 180 :",
+       "tex": "180 - 110 = 70"
+      }
+     ],
+     "answer": "**70°**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : isocèle",
+     "statement": "ABC est isocèle en A avec $\\widehat{A}$ = 40°. Quels sont les angles en B et C ?",
+     "steps": [
+      {
+       "md": "Les angles à la base sont égaux et 180 − 40 = 140° se partage entre eux."
+      },
+      {
+       "md": "140 ÷ 2 = 70."
+      }
+     ],
+     "answer": "**$\\widehat{B}$ = $\\widehat{C}$ = 70°**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier un angle dans la somme.\n- Dans un triangle isocèle, appliquer « deux angles égaux » à n'importe quels angles : ils sont à la base, du côté opposé au sommet principal.\n- Chercher 360° au lieu de 180° (360° est pour un quadrilatère)."
+    }
+   ],
+   "reviewNotes": [
+    "La somme des angles est parfois démontrée avec les parallèles (hors programme ici : énoncée comme propriété)."
+   ]
+  },
+  {
+   "id": "5e-maths-inegalite-triangulaire",
+   "title": "Inégalité triangulaire et construction de triangles",
+   "minutes": 25,
+   "programRef": "5e — Inégalité triangulaire, constructions de triangles (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser l'inégalité triangulaire pour savoir si un triangle existe.",
+    "Construire un triangle connaissant ses trois côtés ou deux côtés et l'angle compris."
+   ],
+   "prerequisites": [
+    "5e-maths-somme-angles-triangle"
+   ],
+   "exercises": [
+    "5e-maths-inegalite-triangulaire-01",
+    "5e-maths-inegalite-triangulaire-02",
+    "5e-maths-inegalite-triangulaire-03",
+    "5e-maths-inegalite-triangulaire-04",
+    "5e-maths-inegalite-triangulaire-05",
+    "5e-maths-inegalite-triangulaire-06"
+   ],
+   "selfCheck": [
+    "5e-maths-inegalite-triangulaire-q1",
+    "5e-maths-inegalite-triangulaire-q2",
+    "5e-maths-inegalite-triangulaire-q3",
+    "5e-maths-inegalite-triangulaire-q4",
+    "5e-maths-inegalite-triangulaire-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Inégalité triangulaire",
+     "md": "Dans un triangle ABC, chaque côté est plus petit que la somme des deux autres : $AB < AC + CB$. Pour savoir si on peut construire un triangle de côtés a, b, c, il suffit de vérifier que **le plus grand côté est plus petit que la somme des deux autres**. Si $AB = AC + CB$, les points A, C, B sont alignés (C est sur le segment [AB])."
+    },
+    {
+     "type": "illustration",
+     "caption": "3 + 4 > 6 : le triangle existe. Avec 3 + 4 = 7 exactement, le « triangle » est aplati.",
+     "alt": "Un triangle de côtés 6, 4 et 3 centimètres, et deux segments de 3 et 4 centimètres mis bout à bout.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 170,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         130,
+         200,
+         130,
+         120,
+         40
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 155,
+        "text": "6 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 80,
+        "text": "4 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 80,
+        "text": "3 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 100,
+        "x2": 340,
+        "y2": 100,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 100,
+        "x2": 420,
+        "y2": 100,
+        "color": "green",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 85,
+        "text": "3 cm",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 85,
+        "text": "4 cm",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 135,
+        "text": "3 + 4 = 7",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Construire un triangle",
+     "md": "**Trois côtés** : tracer le plus grand côté, puis deux arcs de cercle de rayons les deux autres longueurs, centrés sur ses extrémités ; leur intersection est le troisième sommet. **Deux côtés et l'angle compris** : tracer un côté, mesurer l'angle au rapporteur, reporter la longueur du second côté."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : existe-t-il ?",
+     "statement": "Peut-on construire un triangle de côtés 5 cm, 7 cm et 13 cm ?",
+     "steps": [
+      {
+       "md": "Le plus grand côté est 13 cm."
+      },
+      {
+       "md": "Somme des deux autres : 5 + 7 = 12. Comme 13 > 12, l'inégalité n'est pas vérifiée."
+      }
+     ],
+     "answer": "**Non, ce triangle n'existe pas.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : encadrer",
+     "statement": "Dans un triangle, deux côtés mesurent 4 cm et 9 cm. Entre quelles valeurs est le troisième côté c ?",
+     "steps": [
+      {
+       "md": "9 < 4 + c donc c > 5."
+      },
+      {
+       "md": "c < 4 + 9 = 13."
+      }
+     ],
+     "answer": "**5 cm < c < 13 cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Comparer seulement deux côtés : il faut tester le plus grand côté contre la somme des deux autres.\n- Accepter une somme égale : avec 3 + 4 = 7, le triangle est aplati (points alignés), ce n'est pas un vrai triangle.\n- Tracer les arcs de cercle avec de mauvais rayons."
+    }
+   ],
+   "reviewNotes": [
+    "Le cas d'égalité (points alignés) est mentionné ; vérifier le vocabulaire des manuels."
+   ]
+  },
+  {
+   "id": "5e-maths-parallelogramme",
+   "title": "Le parallélogramme et ses propriétés",
+   "minutes": 30,
+   "programRef": "5e — Parallélogramme : propriétés, reconnaissance, construction (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Connaître les propriétés des côtés, des angles et des diagonales d'un parallélogramme.",
+    "Reconnaître un parallélogramme et le construire."
+   ],
+   "prerequisites": [
+    "5e-maths-angles-paralleles"
+   ],
+   "exercises": [
+    "5e-maths-parallelogramme-01",
+    "5e-maths-parallelogramme-02",
+    "5e-maths-parallelogramme-03",
+    "5e-maths-parallelogramme-04",
+    "5e-maths-parallelogramme-05",
+    "5e-maths-parallelogramme-06"
+   ],
+   "selfCheck": [
+    "5e-maths-parallelogramme-q1",
+    "5e-maths-parallelogramme-q2",
+    "5e-maths-parallelogramme-q3",
+    "5e-maths-parallelogramme-q4",
+    "5e-maths-parallelogramme-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propriétés",
+     "md": "Un **parallélogramme** est un quadrilatère dont les côtés opposés sont parallèles. Alors : ses côtés opposés sont égaux ; ses angles opposés sont égaux ; deux angles consécutifs sont supplémentaires ; ses **diagonales se coupent en leur milieu**."
+    },
+    {
+     "type": "illustration",
+     "caption": "ABCD est un parallélogramme : ses diagonales se coupent en leur milieu O.",
+     "alt": "Un parallélogramme ABCD avec ses diagonales en pointillés qui se coupent en O.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 190,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         90,
+         150,
+         280,
+         150,
+         350,
+         50,
+         160,
+         50
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 150,
+        "x2": 350,
+        "y2": 50,
+        "color": "blue",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 150,
+        "x2": 160,
+        "y2": 50,
+        "color": "blue",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 160,
+        "text": "A",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 168,
+        "text": "B",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 368,
+        "y": 44,
+        "text": "C",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 40,
+        "text": "D",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 100,
+        "r": 4,
+        "fill": "red",
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 92,
+        "text": "O",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reconnaître un parallélogramme",
+     "md": "Un quadrilatère est un parallélogramme si : ses côtés opposés sont parallèles deux à deux ; **ou** ses côtés opposés sont égaux deux à deux ; **ou** deux côtés opposés sont parallèles et égaux ; **ou** ses diagonales se coupent en leur milieu."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculs",
+     "statement": "ABCD est un parallélogramme avec AB = 7 cm, BC = 4 cm et $\\widehat{A}$ = 65°. Donne CD, AD, le périmètre et $\\widehat{B}$.",
+     "steps": [
+      {
+       "md": "Côtés opposés égaux : CD = AB = 7 cm et AD = BC = 4 cm. Périmètre : 2 × (7 + 4) = 22 cm."
+      },
+      {
+       "md": "Angles consécutifs supplémentaires : $\\widehat{B}$ = 180 − 65 = 115°."
+      }
+     ],
+     "answer": "**CD = 7 cm ; AD = 4 cm ; P = 22 cm ; $\\widehat{B}$ = 115°**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : diagonales",
+     "statement": "Les diagonales [AC] et [BD] de ABCD se coupent en O. On a AC = 10 cm et BD = 6 cm. Que valent OA et OB ?",
+     "steps": [
+      {
+       "md": "O est le milieu des deux diagonales."
+      },
+      {
+       "md": "OA = 10 ÷ 2 = 5 cm et OB = 6 ÷ 2 = 3 cm."
+      }
+     ],
+     "answer": "**OA = 5 cm ; OB = 3 cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que les diagonales d'un parallélogramme sont égales : c'est vrai seulement pour le rectangle.\n- Croire que les diagonales sont perpendiculaires : c'est vrai pour le losange.\n- Confondre « côtés opposés égaux » (condition suffisante) avec « côtés consécutifs égaux » (losange)."
+    }
+   ],
+   "reviewNotes": [
+    "Les cas particuliers (rectangle, losange, carré) sont rappelés brièvement ; vérifier leurs propriétés des diagonales dans le programme de 5e."
+   ]
+  },
+  {
+   "id": "5e-maths-symetrie-centrale",
+   "title": "Symétrie centrale",
+   "minutes": 25,
+   "programRef": "5e — Symétrie centrale : symétrique d'un point et d'une figure, centre de symétrie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Construire le symétrique d'un point, d'un segment, d'une figure par rapport à un point.",
+    "Reconnaître un centre de symétrie et les propriétés conservées."
+   ],
+   "prerequisites": [
+    "5e-maths-parallelogramme"
+   ],
+   "exercises": [
+    "5e-maths-symetrie-centrale-01",
+    "5e-maths-symetrie-centrale-02",
+    "5e-maths-symetrie-centrale-03",
+    "5e-maths-symetrie-centrale-04",
+    "5e-maths-symetrie-centrale-05",
+    "5e-maths-symetrie-centrale-06"
+   ],
+   "selfCheck": [
+    "5e-maths-symetrie-centrale-q1",
+    "5e-maths-symetrie-centrale-q2",
+    "5e-maths-symetrie-centrale-q3",
+    "5e-maths-symetrie-centrale-q4",
+    "5e-maths-symetrie-centrale-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Symétrique d'un point",
+     "md": "Le symétrique de A par rapport au point O est le point A' tel que O soit le **milieu** de [AA']. Le symétrique de O est O lui-même."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le triangle A'B'C' est le symétrique de ABC par rapport à O.",
+     "alt": "Deux triangles opposés de part et d'autre d'un point O, reliés par des pointillés passant par O.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         40,
+         180,
+         60,
+         130,
+         110
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         340,
+         160,
+         260,
+         140,
+         310,
+         90
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 100,
+        "r": 4,
+        "fill": "red",
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 118,
+        "text": "O",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 40,
+        "x2": 340,
+        "y2": 160,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 60,
+        "x2": 260,
+        "y2": 140,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 110,
+        "x2": 310,
+        "y2": 90,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 88,
+        "y": 36,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 52,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 122,
+        "y": 128,
+        "text": "C",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 170,
+        "text": "A'",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 158,
+        "text": "B'",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 322,
+        "y": 84,
+        "text": "C'",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propriétés",
+     "md": "La symétrie centrale conserve les longueurs, les angles, le parallélisme et l'alignement. Le symétrique d'une droite est une droite **parallèle**. Une figure a un **centre de symétrie** O si elle est sa propre symétrique par rapport à O : le parallélogramme (centre : intersection des diagonales), le cercle (son centre)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : distances",
+     "statement": "A' est le symétrique de A par rapport à O et OA = 3,5 cm. Que vaut AA' ?",
+     "steps": [
+      {
+       "md": "O est le milieu de [AA'] donc OA' = OA = 3,5 cm."
+      },
+      {
+       "md": "AA' = 2 × 3,5 = 7 cm."
+      }
+     ],
+     "answer": "**AA' = 7 cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : centre de symétrie",
+     "statement": "Un parallélogramme ABCD a ses diagonales qui se coupent en O. Quel est le symétrique de B par rapport à O ?",
+     "steps": [
+      {
+       "md": "O est le milieu de [BD] (propriété des diagonales)."
+      },
+      {
+       "md": "Donc le symétrique de B est D."
+      }
+     ],
+     "answer": "**D**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre symétrie centrale (par rapport à un point) et symétrie axiale (par rapport à une droite).\n- Ne pas prolonger la droite (AO) assez loin pour reporter OA' = OA avec le compas.\n- Croire qu'un triangle quelconque a un centre de symétrie : seuls certains polygones en ont un."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier la formulation exacte (propriété du segment symétrique parallèle et de même longueur)."
+   ]
+  },
+  {
+   "id": "5e-maths-mediatrice",
+   "title": "Médiatrice d'un segment",
+   "minutes": 25,
+   "programRef": "5e — Médiatrice d'un segment : définition, propriété, construction (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir et construire la médiatrice d'un segment (règle et compas).",
+    "Utiliser que les points de la médiatrice sont à égale distance des extrémités."
+   ],
+   "prerequisites": [
+    "5e-maths-symetrie-centrale"
+   ],
+   "exercises": [
+    "5e-maths-mediatrice-01",
+    "5e-maths-mediatrice-02",
+    "5e-maths-mediatrice-03",
+    "5e-maths-mediatrice-04",
+    "5e-maths-mediatrice-05",
+    "5e-maths-mediatrice-06"
+   ],
+   "selfCheck": [
+    "5e-maths-mediatrice-q1",
+    "5e-maths-mediatrice-q2",
+    "5e-maths-mediatrice-q3",
+    "5e-maths-mediatrice-q4",
+    "5e-maths-mediatrice-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Médiatrice",
+     "md": "La **médiatrice** d'un segment [AB] est la droite perpendiculaire à (AB) passant par le milieu de [AB]. Propriété : un point appartient à la médiatrice de [AB] **si et seulement si** il est à la même distance de A et de B."
+    },
+    {
+     "type": "illustration",
+     "caption": "M est sur la médiatrice de [AB] : MA = MB.",
+     "alt": "Un segment AB, sa médiatrice verticale passant par le milieu I, et un point M sur cette médiatrice relié à A et B.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 130,
+        "x2": 360,
+        "y2": 130,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 20,
+        "x2": 220,
+        "y2": 190,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 80,
+        "cy": 130,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 360,
+        "cy": 130,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 130,
+        "r": 4,
+        "fill": "red",
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 50,
+        "r": 4,
+        "fill": "blue",
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 130,
+        "x2": 220,
+        "y2": 50,
+        "color": "blue",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 130,
+        "x2": 220,
+        "y2": 50,
+        "color": "blue",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 152,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 152,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 148,
+        "text": "I",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 48,
+        "text": "M",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 120,
+        "w": 10,
+        "h": 10,
+        "stroke": "red",
+        "width": 1
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Construire la médiatrice",
+     "md": "1. Ouvrir le compas à plus de la moitié de AB.\n2. Tracer deux arcs de cercle de même rayon, centrés en A puis en B.\n3. Les arcs se coupent en deux points ; la droite qui les joint est la médiatrice de [AB]."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : distances",
+     "statement": "M est sur la médiatrice de [AB] et MA = 5 cm. Que vaut MB ?",
+     "steps": [
+      {
+       "md": "Un point de la médiatrice est à égale distance de A et de B."
+      },
+      {
+       "md": "Donc MB = MA = 5 cm."
+      }
+     ],
+     "answer": "**MB = 5 cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : milieu",
+     "statement": "[AB] mesure 10 cm et I est le point d'intersection de la médiatrice et de (AB). Que vaut AI ?",
+     "steps": [
+      {
+       "md": "La médiatrice passe par le milieu de [AB]."
+      },
+      {
+       "md": "AI = 10 ÷ 2 = 5 cm."
+      }
+     ],
+     "answer": "**AI = 5 cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Prendre un rayon trop petit : les arcs ne se coupent pas (il faut plus que la moitié de AB).\n- Utiliser des rayons différents pour les deux arcs : il faut le même.\n- Croire que la médiatrice est « le segment » : c'est une droite entière."
+    }
+   ],
+   "reviewNotes": [
+    "La médiatrice est parfois étudiée en 6e ou en 4e selon les programmes ; vérifier la classe officielle."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Deux droites sécantes forment un angle de 35°. Quelle est la mesure de l'angle opposé par le sommet (°) ?",
+   "answer": 35,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les angles opposés par le sommet sont égaux.",
+   "id": "5e-maths-angles-paralleles-01",
+   "tier": "application",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Deux angles sont supplémentaires. L'un mesure 112°. Quelle est la mesure de l'autre (°) ?",
+   "answer": 68,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "180 − 112 = 68.",
+   "id": "5e-maths-angles-paralleles-02",
+   "tier": "application",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le complément d'un angle de 24° (°) ?",
+   "answer": 66,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "90 − 24 = 66.",
+   "id": "5e-maths-angles-paralleles-03",
+   "tier": "application",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "(d) // (d'). Deux angles alternes-internes ont pour mesures 3x° et 2x + 20°. Que vaut x ?",
+   "choices": [
+    "4",
+    "12",
+    "20",
+    "40"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 3,
+   "explanation": "Les angles sont égaux : 3x = 2x + 20 donc x = 20.",
+   "id": "5e-maths-angles-paralleles-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux angles sont égaux et supplémentaires. Leur mesure est",
+   "choices": [
+    "45°",
+    "60°",
+    "90°",
+    "180°"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "2a = 180 donc a = 90°.",
+   "id": "5e-maths-angles-paralleles-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Deux routes (d) et (d') sont parallèles et coupées par une troisième route (s). Un angle formé par (s) et (d) mesure 54°.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de l'angle correspondant avec (d') (°) ?",
+     "answer": 54,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Angles correspondants égaux.",
+     "id": "5e-maths-angles-paralleles-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de l'angle adjacent supplémentaire à celui de 54° (°) ?",
+     "answer": 126,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "180 − 54 = 126.",
+     "id": "5e-maths-angles-paralleles-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de l'angle opposé par le sommet à l'angle de 126° (°) ?",
+     "answer": 126,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les angles opposés par le sommet sont égaux.",
+     "id": "5e-maths-angles-paralleles-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-angles-paralleles-06",
+   "tier": "examen",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les angles opposés par le sommet sont",
+   "choices": [
+    "supplémentaires",
+    "complémentaires",
+    "égaux",
+    "toujours droits"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Propriété des angles opposés par le sommet.",
+   "id": "5e-maths-angles-paralleles-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux angles de 100° et 80° sont",
+   "choices": [
+    "complémentaires",
+    "égaux",
+    "supplémentaires",
+    "opposés par le sommet"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "100 + 80 = 180.",
+   "id": "5e-maths-angles-paralleles-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux angles de 30° et 60° sont",
+   "choices": [
+    "complémentaires",
+    "supplémentaires",
+    "égaux",
+    "adjacents"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "30 + 60 = 90.",
+   "id": "5e-maths-angles-paralleles-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux parallèles coupées par une sécante forment des angles alternes-internes",
+   "choices": [
+    "égaux",
+    "complémentaires",
+    "supplémentaires toujours",
+    "droits"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Propriété des parallèles.",
+   "id": "5e-maths-angles-paralleles-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si des angles correspondants sont égaux, alors les droites sont",
+   "choices": [
+    "perpendiculaires",
+    "parallèles",
+    "confondues obligatoirement",
+    "sécantes obligatoirement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Réciproque : critère de parallélisme.",
+   "id": "5e-maths-angles-paralleles-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-angles-paralleles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un triangle a des angles de 80° et 30°. Quel est le troisième (°) ?",
+   "answer": 70,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "180 − 110 = 70.",
+   "id": "5e-maths-somme-angles-triangle-01",
+   "tier": "application",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la mesure d'un angle d'un triangle équilatéral (°) ?",
+   "answer": 60,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "180 ÷ 3 = 60.",
+   "id": "5e-maths-somme-angles-triangle-02",
+   "tier": "application",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Dans un triangle rectangle, un angle aigu mesure 35°. Quel est l'autre angle aigu (°) ?",
+   "answer": 55,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "90 − 35 = 55.",
+   "id": "5e-maths-somme-angles-triangle-03",
+   "tier": "application",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un triangle isocèle a un angle à la base de 50°. Quel est l'angle au sommet principal (°) ?",
+   "answer": 80,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "180 − 2 × 50 = 80.",
+   "id": "5e-maths-somme-angles-triangle-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Les angles d'un triangle sont x, 2x et 3x. Quelle est la valeur de x (°) ?",
+   "answer": 30,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "6x = 180 donc x = 30.",
+   "id": "5e-maths-somme-angles-triangle-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng dessine un triangle EFG avec $\\widehat{E}$ = 58° et $\\widehat{F}$ = 64°.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de $\\widehat{G}$ (°) ?",
+     "answer": 58,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "180 − 58 − 64 = 58.",
+     "id": "5e-maths-somme-angles-triangle-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature du triangle EFG ?",
+     "choices": [
+      "Isocèle en E",
+      "Équilatéral",
+      "Rectangle",
+      "Isocèle en F"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\widehat{E}$ = $\\widehat{G}$ = 58°, donc les côtés [FG] et [FE] sont égaux : isocèle de sommet principal F.",
+     "id": "5e-maths-somme-angles-triangle-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la somme des trois angles de EFG (°) ?",
+     "answer": 180,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La somme des angles d'un triangle est toujours 180°.",
+     "id": "5e-maths-somme-angles-triangle-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-somme-angles-triangle-06",
+   "tier": "examen",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La somme des angles d'un triangle vaut",
+   "choices": [
+    "90°",
+    "360°",
+    "100°",
+    "180°"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Propriété fondamentale du triangle.",
+   "id": "5e-maths-somme-angles-triangle-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle ne peut pas avoir",
+   "choices": [
+    "deux angles droits",
+    "un angle droit",
+    "deux angles aigus",
+    "trois angles aigus"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux angles droits feraient déjà 180° : il n'y aurait plus de place pour le troisième.",
+   "id": "5e-maths-somme-angles-triangle-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle a deux angles de 45°. Il est",
+   "choices": [
+    "équilatéral",
+    "rectangle isocèle",
+    "obtus",
+    "impossible"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Troisième angle : 90°.",
+   "id": "5e-maths-somme-angles-triangle-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'angle au sommet d'un triangle isocèle est 100°. Chaque angle à la base vaut",
+   "choices": [
+    "80°",
+    "50°",
+    "100°",
+    "40°"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "(180 − 100) ÷ 2 = 40.",
+   "id": "5e-maths-somme-angles-triangle-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un triangle ABC, $\\widehat{A}$ = 90° et $\\widehat{B}$ = 25°. Alors $\\widehat{C}$ vaut",
+   "choices": [
+    "55°",
+    "75°",
+    "115°",
+    "65°"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "180 − 90 − 25 = 65.",
+   "id": "5e-maths-somme-angles-triangle-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-somme-angles-triangle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Peut-on construire un triangle de côtés 3 cm, 4 cm et 5 cm ?",
+   "choices": [
+    "Non, car 5 > 4",
+    "Non, car 3 + 4 = 7",
+    "Oui, car 3 < 5",
+    "Oui, car 5 < 3 + 4"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le plus grand côté (5) est inférieur à 3 + 4 = 7.",
+   "id": "5e-maths-inegalite-triangulaire-01",
+   "tier": "application",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Peut-on construire un triangle de côtés 2 cm, 3 cm et 6 cm ?",
+   "choices": [
+    "Non, car 6 > 2 + 3",
+    "Oui, car 2 < 3 < 6",
+    "Oui, car 6 < 2 × 3",
+    "Non, car 6 est pair"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 + 3 = 5 < 6.",
+   "id": "5e-maths-inegalite-triangulaire-02",
+   "tier": "application",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle série de longueurs peut former un triangle ?",
+   "choices": [
+    "7 ; 8 ; 10",
+    "2 ; 5 ; 8",
+    "1 ; 1 ; 3",
+    "4 ; 4 ; 9"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10 < 7 + 8 = 15.",
+   "id": "5e-maths-inegalite-triangulaire-03",
+   "tier": "application",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Deux côtés d'un triangle mesurent 6 cm et 10 cm. Quelle est la plus grande valeur entière possible du troisième côté (cm) ?",
+   "answer": 15,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il faut c < 16 : donc 15 au maximum.",
+   "id": "5e-maths-inegalite-triangulaire-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Deux côtés d'un triangle mesurent 6 cm et 10 cm. Quelle est la plus petite valeur entière possible du troisième côté (cm) ?",
+   "answer": 5,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il faut 10 < 6 + c donc c > 4 : 5 au minimum.",
+   "id": "5e-maths-inegalite-triangulaire-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris veut aller du village A au village C en passant par B. Il sait que AB = 12 km et BC = 5 km.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle distance totale parcourt-il par B (km) ?",
+     "answer": 17,
+     "unit": "km",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "12 + 5 = 17 km.",
+     "id": "5e-maths-inegalite-triangulaire-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle affirmation est vraie à propos de AC si A, B, C ne sont pas alignés ?",
+     "choices": [
+      "AC = 17 km",
+      "AC > 17 km",
+      "AC < 17 km",
+      "AC = 7 km exactement"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Inégalité triangulaire : AC < AB + BC.",
+     "id": "5e-maths-inegalite-triangulaire-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Si A, B et C sont alignés avec B entre A et C, que vaut AC ?",
+     "choices": [
+      "17 km",
+      "7 km",
+      "12 km",
+      "5 km"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "AC = AB + BC = 17.",
+     "id": "5e-maths-inegalite-triangulaire-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-inegalite-triangulaire-06",
+   "tier": "examen",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'inégalité triangulaire s'écrit pour tout triangle ABC :",
+   "choices": [
+    "AB < AC + CB",
+    "AB > AC + CB",
+    "AB = AC + CB toujours",
+    "AB + AC = 180"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un côté est plus petit que la somme des deux autres.",
+   "id": "5e-maths-inegalite-triangulaire-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Peut-on construire un triangle de côtés 5, 5 et 10 ?",
+   "choices": [
+    "Oui, il est isocèle",
+    "Oui, il est équilatéral",
+    "Oui, il est rectangle",
+    "Non, car 10 = 5 + 5"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Égalité : les points seraient alignés.",
+   "id": "5e-maths-inegalite-triangulaire-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour construire un triangle de trois côtés donnés, on utilise",
+   "choices": [
+    "le compas",
+    "seulement le rapporteur",
+    "seulement une calculatrice",
+    "un double décimètre uniquement"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux arcs de cercle donnent le troisième sommet.",
+   "id": "5e-maths-inegalite-triangulaire-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle a deux côtés de 8 et 5 cm. Le troisième peut mesurer",
+   "choices": [
+    "2 cm",
+    "13 cm",
+    "10 cm",
+    "14 cm"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut 3 < c < 13 : 10 convient.",
+   "id": "5e-maths-inegalite-triangulaire-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si AB = AC + CB, alors",
+   "choices": [
+    "C est sur le segment [AB]",
+    "ABC est équilatéral",
+    "ABC est rectangle",
+    "C est loin de [AB]"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les trois points sont alignés.",
+   "id": "5e-maths-inegalite-triangulaire-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-inegalite-triangulaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "ABCD est un parallélogramme avec AB = 9 cm. Que vaut CD (cm) ?",
+   "answer": 9,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Côtés opposés égaux.",
+   "id": "5e-maths-parallelogramme-01",
+   "tier": "application",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Dans un parallélogramme, un angle mesure 110°. Quelle est la mesure de l'angle opposé (°) ?",
+   "answer": 110,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Angles opposés égaux.",
+   "id": "5e-maths-parallelogramme-02",
+   "tier": "application",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Dans un parallélogramme, un angle mesure 110°. Quelle est la mesure d'un angle consécutif (°) ?",
+   "answer": 70,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "180 − 110 = 70.",
+   "id": "5e-maths-parallelogramme-03",
+   "tier": "application",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un quadrilatère a ses diagonales qui se coupent en leur milieu. C'est",
+   "choices": [
+    "forcément un carré",
+    "forcément un trapèze",
+    "un parallélogramme",
+    "un cerf-volant quelconque"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Critère de reconnaissance du parallélogramme.",
+   "id": "5e-maths-parallelogramme-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un parallélogramme a pour périmètre 40 cm et un côté de 12 cm. Quelle est la longueur du côté consécutif (cm) ?",
+   "answer": 8,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "40 ÷ 2 = 20 ; 20 − 12 = 8.",
+   "id": "5e-maths-parallelogramme-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina trace le parallélogramme ABCD tel que AB = 8 cm, AD = 5 cm et $\\widehat{DAB}$ = 70°. Ses diagonales se coupent en O ; AC = 12 cm.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur OC (cm) ?",
+     "answer": 6,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "O est le milieu de [AC] : 12 ÷ 2 = 6 cm.",
+     "id": "5e-maths-parallelogramme-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de $\\widehat{ABC}$ (°) ?",
+     "answer": 110,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\widehat{ABC}$ est consécutif à $\\widehat{DAB}$ : 180 − 70 = 110.",
+     "id": "5e-maths-parallelogramme-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le périmètre (cm) ?",
+     "answer": 26,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "2 × (8 + 5) = 26.",
+     "id": "5e-maths-parallelogramme-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-parallelogramme-06",
+   "tier": "examen",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un parallélogramme, les côtés opposés sont",
+   "choices": [
+    "perpendiculaires",
+    "seulement égaux",
+    "seulement parallèles à la diagonale",
+    "parallèles et égaux"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Propriété fondamentale.",
+   "id": "5e-maths-parallelogramme-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les diagonales d'un parallélogramme",
+   "choices": [
+    "sont toujours égales",
+    "se coupent en leur milieu",
+    "sont toujours perpendiculaires",
+    "ne se coupent pas"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Propriété des diagonales.",
+   "id": "5e-maths-parallelogramme-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux angles consécutifs d'un parallélogramme sont",
+   "choices": [
+    "égaux",
+    "supplémentaires",
+    "complémentaires",
+    "droits"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Leur somme est 180°.",
+   "id": "5e-maths-parallelogramme-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un quadrilatère à côtés opposés égaux deux à deux est",
+   "choices": [
+    "un parallélogramme",
+    "un trapèze",
+    "un triangle",
+    "un cercle"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Critère de reconnaissance.",
+   "id": "5e-maths-parallelogramme-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle figure est toujours un parallélogramme ?",
+   "choices": [
+    "Le trapèze",
+    "Le rectangle",
+    "Le cerf-volant",
+    "Le triangle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un rectangle a ses côtés opposés parallèles.",
+   "id": "5e-maths-parallelogramme-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-parallelogramme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "M' est le symétrique de M par rapport à O et OM = 6 cm. Que vaut MM' (cm) ?",
+   "answer": 12,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 6 = 12.",
+   "id": "5e-maths-symetrie-centrale-01",
+   "tier": "application",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Le symétrique d'un point par rapport à lui-même est lui-même.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "O est le milieu de [OO'] seulement si O' = O.",
+   "id": "5e-maths-symetrie-centrale-02",
+   "tier": "application",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Parmi ces figures, laquelle a un centre de symétrie ?",
+   "choices": [
+    "Le triangle équilatéral",
+    "Le trapèze quelconque",
+    "Le triangle isocèle",
+    "Le parallélogramme"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le centre est l'intersection des diagonales.",
+   "id": "5e-maths-symetrie-centrale-03",
+   "tier": "application",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le symétrique d'une droite (d) par rapport à un point O n'appartenant pas à (d) est",
+   "choices": [
+    "une droite perpendiculaire à (d)",
+    "la droite (d) elle-même",
+    "un cercle",
+    "une droite parallèle à (d)"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Propriété de la symétrie centrale.",
+   "id": "5e-maths-symetrie-centrale-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "[AB] mesure 5 cm et [A'B'] est son symétrique par rapport à O. Que vaut A'B' (cm) ?",
+   "answer": 5,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Conservation des longueurs.",
+   "id": "5e-maths-symetrie-centrale-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un repère, O est l'origine, A(3 ; 2) et B(−1 ; 4). A' et B' sont les symétriques de A et B par rapport à O.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'abscisse de A' ?",
+     "answer": -3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Par rapport à l'origine, on change le signe des deux coordonnées : A'(−3 ; −2).",
+     "id": "5e-maths-symetrie-centrale-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'ordonnée de B' ?",
+     "answer": -4,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "B'(1 ; −4).",
+     "id": "5e-maths-symetrie-centrale-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que peut-on dire des segments [AB] et [A'B'] ?",
+     "choices": [
+      "Ils sont perpendiculaires",
+      "Ils sont de longueurs différentes",
+      "Ils sont parallèles et de même longueur",
+      "Ils sont confondus"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La symétrie centrale transforme une droite en une droite parallèle et conserve les longueurs.",
+     "id": "5e-maths-symetrie-centrale-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-symetrie-centrale-06",
+   "tier": "examen",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le symétrique de A par rapport à O est le point A' tel que",
+   "choices": [
+    "(d) est le milieu de [AA']",
+    "O est le milieu de [AA']",
+    "OA = 2 OA'",
+    "AA' = 0"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition de la symétrie centrale.",
+   "id": "5e-maths-symetrie-centrale-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un cercle a pour centre de symétrie",
+   "choices": [
+    "aucun point",
+    "un point de la circonférence",
+    "son centre",
+    "tout point"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le centre du cercle est son centre de symétrie.",
+   "id": "5e-maths-symetrie-centrale-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La symétrie centrale conserve",
+   "choices": [
+    "seulement les angles",
+    "aucune longueur",
+    "les longueurs et les angles",
+    "seulement l'aire"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est une isométrie.",
+   "id": "5e-maths-symetrie-centrale-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles lettres majuscules ont un centre de symétrie ?",
+   "choices": [
+    "N et Z",
+    "A et M",
+    "E et F",
+    "L et T"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "N et Z se retrouvent identiques après un demi-tour.",
+   "id": "5e-maths-symetrie-centrale-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "A' est le symétrique de A par rapport à O. Que vaut OA' si OA = 4 cm ?",
+   "choices": [
+    "2 cm",
+    "4 cm",
+    "8 cm",
+    "0 cm"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "OA' = OA.",
+   "id": "5e-maths-symetrie-centrale-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-symetrie-centrale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La médiatrice de [AB] est",
+   "choices": [
+    "le segment [AB]",
+    "la droite parallèle à (AB)",
+    "un cercle de centre A",
+    "la droite perpendiculaire à (AB) en son milieu"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition.",
+   "id": "5e-maths-mediatrice-01",
+   "tier": "application",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "M est sur la médiatrice de [CD] et MC = 7,5 cm. Que vaut MD (cm) ?",
+   "answer": 7.5,
+   "tolerance": 0.001,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "MD = MC.",
+   "id": "5e-maths-mediatrice-02",
+   "tier": "application",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "La médiatrice de [EF] coupe [EF] en I et EF = 9 cm. Que vaut EI (cm) ?",
+   "answer": 4.5,
+   "tolerance": 0.001,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "9 ÷ 2 = 4,5.",
+   "id": "5e-maths-mediatrice-03",
+   "tier": "application",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un point P est tel que PA = 4 cm et PB = 6 cm. P est",
+   "choices": [
+    "sur la médiatrice de [AB]",
+    "au milieu de [AB]",
+    "pas sur la médiatrice de [AB]",
+    "sur le cercle de centre A"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "PA ≠ PB.",
+   "id": "5e-maths-mediatrice-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un puits doit être à égale distance de deux villages A et B distants de 12 km, sur la route (AB). À quelle distance de A se trouve-t-il (km) ?",
+   "answer": 6,
+   "unit": "km",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il est au milieu : 12 ÷ 2 = 6 km.",
+   "id": "5e-maths-mediatrice-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa veut installer un marché à égale distance de deux villages A et B, situés à 8 km l'un de l'autre.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Où peut-il placer le marché ?",
+     "choices": [
+      "Sur la droite (AB) uniquement",
+      "N'importe où",
+      "Sur un cercle de centre A",
+      "Sur la médiatrice de [AB]"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Points équidistants de A et B.",
+     "id": "5e-maths-mediatrice-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Si le marché est placé au point I milieu de [AB], quelle distance le sépare de A (km) ?",
+     "answer": 4,
+     "unit": "km",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "8 ÷ 2 = 4.",
+     "id": "5e-maths-mediatrice-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "S'il est placé en M sur la médiatrice, à 5 km de A, à quelle distance est-il de B (km) ?",
+     "answer": 5,
+     "unit": "km",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "MA = MB.",
+     "id": "5e-maths-mediatrice-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-mediatrice-06",
+   "tier": "examen",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La médiatrice d'un segment [AB] est perpendiculaire à",
+   "choices": [
+    "(AB)",
+    "aucune droite",
+    "un cercle",
+    "l'axe horizontal toujours"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Perpendiculaire à (AB) en son milieu.",
+   "id": "5e-maths-mediatrice-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un point de la médiatrice de [AB] vérifie",
+   "choices": [
+    "MA = 2 MB",
+    "MA = MB",
+    "MA + MB = 0",
+    "MA > MB"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Équidistance.",
+   "id": "5e-maths-mediatrice-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour construire la médiatrice, on trace deux arcs de même rayon centrés en",
+   "choices": [
+    "A seulement",
+    "le milieu I",
+    "M et N",
+    "A et B"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un arc centré en A, l'autre en B.",
+   "id": "5e-maths-mediatrice-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La médiatrice de [AB] passe par",
+   "choices": [
+    "le point A",
+    "le point B",
+    "aucun point du segment",
+    "le milieu de [AB]"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Par définition.",
+   "id": "5e-maths-mediatrice-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien un segment a-t-il de médiatrices ?",
+   "choices": [
+    "Une seule",
+    "Deux",
+    "Aucune",
+    "Une infinité"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une seule droite convient.",
+   "id": "5e-maths-mediatrice-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-mediatrice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

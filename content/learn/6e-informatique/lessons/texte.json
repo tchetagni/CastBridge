@@ -1,0 +1,803 @@
+{
+ "chapter": "6e-informatique-texte",
+ "lessons": [
+  {
+   "id": "6e-informatique-traitement-texte",
+   "title": "Le traitement de texte : saisir, mettre en forme, enregistrer, imprimer",
+   "minutes": 30,
+   "programRef": "Programme d'informatique de 6e (MINESEC) — découpage exact à vérifier sur le texte officiel — traitement de texte (premiers pas)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Saisir un texte et le mettre en forme (police, taille, gras, italique, souligné, alignement).",
+    "Enregistrer, rouvrir et imprimer un document."
+   ],
+   "prerequisites": [
+    "6e-informatique-clavier-saisie",
+    "6e-informatique-fichiers-dossiers"
+   ],
+   "exercises": [
+    "6e-informatique-traitement-texte-01",
+    "6e-informatique-traitement-texte-02",
+    "6e-informatique-traitement-texte-03",
+    "6e-informatique-traitement-texte-04",
+    "6e-informatique-traitement-texte-05",
+    "6e-informatique-traitement-texte-06"
+   ],
+   "selfCheck": [
+    "6e-informatique-traitement-texte-q1",
+    "6e-informatique-traitement-texte-q2",
+    "6e-informatique-traitement-texte-q3",
+    "6e-informatique-traitement-texte-q4",
+    "6e-informatique-traitement-texte-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Traitement de texte",
+     "md": "Un **traitement de texte** est un logiciel qui sert à écrire, corriger, mettre en forme, enregistrer et imprimer des documents. On peut modifier le texte autant de fois qu'on veut avant de l'imprimer."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La mise en forme",
+     "md": "- **Police** : le style des lettres ; **taille** : leur hauteur.\n- **Gras**, *italique*, souligné : pour faire ressortir un mot.\n- **Alignement** : à gauche, centré, à droite, justifié.\n- **Couleur** du texte.\nPour mettre en forme, on **sélectionne d'abord** le texte, puis on choisit l'effet."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une page de traitement de texte avec sa barre d'outils (schéma).",
+     "alt": "Une barre d'outils en haut avec Police, Taille, Gras, Italique et Aligner, puis une page contenant un titre centré et un paragraphe.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 440,
+        "h": 40,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 37,
+        "text": "Police",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 37,
+        "text": "Taille",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 37,
+        "text": "G",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 37,
+        "text": "I",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 37,
+        "text": "Aligner",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 55,
+        "w": 440,
+        "h": 135,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 90,
+        "text": "Titre centré en gras",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 130,
+        "text": "Un paragraphe aligné à gauche, saisi",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 155,
+        "text": "sans appuyer sur Entrée à chaque ligne.",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les gestes à connaître",
+     "md": "1. **Saisir** le texte sans mise en forme.\n2. **Sélectionner** (glisser avec la souris sur le texte).\n3. **Mettre en forme** avec la barre d'outils.\n4. **Enregistrer** : choisir un dossier et un nom clair, puis valider.\n5. **Aperçu avant impression**, puis **imprimer** (nombre de copies, pages)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : titre",
+     "statement": "Comment obtenir un titre centré, en gras, taille 18 ?",
+     "steps": [
+      {
+       "md": "On sélectionne la ligne du titre."
+      },
+      {
+       "md": "On clique sur « centrer », « gras » et on choisit la taille 18."
+      }
+     ],
+     "answer": "**Sélection, puis centrer + gras + taille 18.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : enregistrer",
+     "statement": "Amina a écrit une lettre. Que fait-elle pour la retrouver demain ?",
+     "steps": [
+      {
+       "md": "Elle choisit « Enregistrer sous », sélectionne le dossier « Français »."
+      },
+      {
+       "md": "Elle tape un nom clair, « lettre-correspondant », puis valide."
+      }
+     ],
+     "answer": "**Enregistrer dans le bon dossier avec un nom explicite.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mettre en forme sans sélectionner : rien ne change (ou tout change).\n- Imprimer sans aperçu : on gaspille du papier.\n- Aligner un titre avec des espaces au lieu du bouton « centrer »."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 6e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Cours générique « un traitement de texte » (pas de nom de logiciel ni de capture d'écran) : les noms des boutons varient selon le logiciel."
+   ]
+  },
+  {
+   "id": "6e-informatique-dessin-numerique",
+   "title": "Le dessin sur ordinateur",
+   "minutes": 20,
+   "programRef": "Programme d'informatique de 6e (MINESEC) — découpage exact à vérifier sur le texte officiel — logiciel de dessin",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser les outils d'un logiciel de dessin : formes, crayon, remplissage, gomme, couleurs.",
+    "Enregistrer un dessin sous forme de fichier image."
+   ],
+   "prerequisites": [
+    "6e-informatique-demarrer-bureau",
+    "6e-informatique-fichiers-dossiers"
+   ],
+   "exercises": [
+    "6e-informatique-dessin-numerique-01",
+    "6e-informatique-dessin-numerique-02",
+    "6e-informatique-dessin-numerique-03",
+    "6e-informatique-dessin-numerique-04",
+    "6e-informatique-dessin-numerique-05",
+    "6e-informatique-dessin-numerique-06"
+   ],
+   "selfCheck": [
+    "6e-informatique-dessin-numerique-q1",
+    "6e-informatique-dessin-numerique-q2",
+    "6e-informatique-dessin-numerique-q3",
+    "6e-informatique-dessin-numerique-q4",
+    "6e-informatique-dessin-numerique-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Un logiciel de dessin",
+     "md": "Un **logiciel de dessin** permet de créer des images avec la souris : tracer des lignes, des formes (rectangle, cercle), remplir de couleur, écrire du texte, effacer. Le résultat s'enregistre dans un **fichier image** (par exemple avec l'extension png ou jpg)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les outils principaux",
+     "md": "- **Crayon / pinceau** : dessin à main levée.\n- **Formes** : ligne, rectangle, ovale, polygone.\n- **Remplissage** (pot de peinture) : colorie une zone fermée.\n- **Gomme** : efface.\n- **Palette** : choisir une couleur.\n- **Sélection** : couper, copier, coller ou déplacer une partie du dessin."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une fenêtre de dessin : barre d'outils à gauche et zone de travail à droite.",
+     "alt": "Un rectangle gris à gauche pour les outils et une zone blanche contenant une maison (rectangle et triangle) et un soleil.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 80,
+        "h": 180,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 40,
+        "text": "Outils",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 10,
+        "w": 310,
+        "h": 180,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 100,
+        "w": 120,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         150,
+         100,
+         220,
+         45,
+         290,
+         100
+        ],
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 55,
+        "r": 22,
+        "fill": "yellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 185,
+        "text": "Une maison simple",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : dessiner une maison",
+     "statement": "Quels outils utilises-tu pour dessiner une maison avec un toit rouge ?",
+     "steps": [
+      {
+       "md": "Un rectangle pour les murs, un polygone (triangle) pour le toit."
+      },
+      {
+       "md": "Le remplissage pour colorier le toit en rouge."
+      }
+     ],
+     "answer": "**Rectangle + polygone, puis remplissage.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un trait raté",
+     "statement": "Mballa a tracé un trait de travers. Comment le corriger sans tout refaire ?",
+     "steps": [
+      {
+       "md": "Il peut annuler la dernière action (outil « Annuler »)."
+      },
+      {
+       "md": "Ou effacer le trait avec la gomme et le retracer."
+      }
+     ],
+     "answer": "**Annuler la dernière action, ou gommer puis retracer.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Le remplissage",
+     "md": "Le remplissage ne fonctionne bien que sur une **zone fermée**. S'il reste un petit trou dans la forme, la couleur « coule » sur tout le dessin : on annule, on ferme le trou, puis on recommence."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Enregistrer sous un nom comme « Sans titre » : on ne retrouve rien.\n- Utiliser la gomme alors qu'« Annuler » aurait suffi.\n- Oublier de choisir la couleur avant de tracer."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 6e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "On ne cite aucun logiciel précis. Le programme officiel peut préférer un logiciel donné ; à adapter selon le matériel du collège."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Que faut-il faire avant de mettre un mot en gras ?",
+   "choices": [
+    "Imprimer le document",
+    "Le sélectionner",
+    "Fermer le logiciel",
+    "Changer de dossier"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La mise en forme s'applique à la sélection.",
+   "id": "6e-informatique-traitement-texte-01",
+   "tier": "application",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut corriger un texte autant de fois qu'on veut avant de l'imprimer.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est un des grands avantages du traitement de texte.",
+   "id": "6e-informatique-traitement-texte-02",
+   "tier": "application",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque outil à son effet.",
+   "pairs": [
+    [
+     "Gras",
+     "Épaissir les lettres"
+    ],
+    [
+     "Centrer",
+     "Placer au milieu de la ligne"
+    ],
+    [
+     "Taille",
+     "Changer la hauteur des lettres"
+    ],
+    [
+     "Enregistrer",
+     "Garder le document sur le disque"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Outils de base de la mise en forme.",
+   "id": "6e-informatique-traitement-texte-03",
+   "tier": "application",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour voir le résultat avant de gaspiller du papier, on utilise…",
+   "choices": [
+    "La corbeille",
+    "Le verrouillage majuscules",
+    "L'aperçu avant impression",
+    "La souris sans fil"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'aperçu montre la page telle qu'elle sortira.",
+   "id": "6e-informatique-traitement-texte-04",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un élève veut faire une liste à puces propre. Quel est le meilleur réflexe ?",
+   "choices": [
+    "Utiliser la fonction « liste à puces » du logiciel",
+    "Taper des tirets avec beaucoup d'espaces",
+    "Imprimer chaque ligne séparément",
+    "Écrire en majuscules"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les outils du logiciel font le travail proprement.",
+   "id": "6e-informatique-traitement-texte-05",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris doit rédiger une affiche pour la journée du collège : titre, deux lignes de texte, puis l'imprimer.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle suite d'étapes est la bonne ?",
+     "choices": [
+      "Saisir, mettre en forme, enregistrer, aperçu, imprimer",
+      "Imprimer, saisir, enregistrer",
+      "Enregistrer, éteindre, saisir",
+      "Mettre en forme, éteindre l'écran"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "On crée, on soigne, on garde, on contrôle, puis on imprime.",
+     "id": "6e-informatique-traitement-texte-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Donne trois choix de mise en forme pour que l'affiche soit lisible.",
+     "model": "Titre centré en gras en grande taille ; texte en taille assez grande ; police simple et lisible, couleurs contrastées.",
+     "rubric": [
+      "Un titre mis en valeur",
+      "Une taille lisible",
+      "Un autre choix cohérent"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-informatique-traitement-texte-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-informatique-traitement-texte-06",
+   "tier": "examen",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle action enregistre un document ?",
+   "choices": [
+    "Cliquer sur « Gras »",
+    "Éteindre l'écran",
+    "Tourner la page",
+    "Choisir « Enregistrer » et donner un nom"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Enregistrer écrit le document sur le disque.",
+   "id": "6e-informatique-traitement-texte-q1",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert l'alignement « centré » ?",
+   "choices": [
+    "À effacer le texte",
+    "À copier le document",
+    "À placer le texte au milieu de la ligne",
+    "À réduire la police"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il est souvent utilisé pour les titres.",
+   "id": "6e-informatique-traitement-texte-q2",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait la touche Entrée dans un traitement de texte ?",
+   "choices": [
+    "Elle imprime",
+    "Elle enregistre",
+    "Elle ferme le logiciel",
+    "Elle commence un nouveau paragraphe"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Entrée sépare les paragraphes.",
+   "id": "6e-informatique-traitement-texte-q3",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que modifie la taille de la police ?",
+   "choices": [
+    "La hauteur des lettres",
+    "La couleur de l'écran",
+    "Le nom du fichier",
+    "Le dossier"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plus la taille est grande, plus les lettres sont grandes.",
+   "id": "6e-informatique-traitement-texte-q4",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel avantage a le traitement de texte sur l'écriture à la main ?",
+   "choices": [
+    "Il n'a pas besoin d'électricité",
+    "Il ne peut jamais se tromper",
+    "On peut corriger facilement avant d'imprimer",
+    "Il écrit tout seul"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La correction est simple et sans rature.",
+   "id": "6e-informatique-traitement-texte-q5",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-traitement-texte",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel outil sert à colorier l'intérieur d'une forme fermée ?",
+   "choices": [
+    "Le remplissage",
+    "La gomme",
+    "La règle",
+    "L'imprimante"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le pot de peinture remplit une zone fermée avec la couleur choisie.",
+   "id": "6e-informatique-dessin-numerique-01",
+   "tier": "application",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un dessin numérique s'enregistre dans un fichier.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Comme tout travail sur ordinateur, il est enregistré dans un fichier image.",
+   "id": "6e-informatique-dessin-numerique-02",
+   "tier": "application",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque outil à son usage.",
+   "pairs": [
+    [
+     "Gomme",
+     "Effacer une partie"
+    ],
+    [
+     "Crayon",
+     "Dessiner à main levée"
+    ],
+    [
+     "Palette",
+     "Choisir la couleur"
+    ],
+    [
+     "Rectangle",
+     "Tracer une forme à quatre côtés"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Outils de base d'un logiciel de dessin.",
+   "id": "6e-informatique-dessin-numerique-03",
+   "tier": "application",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le remplissage « déborde » sur tout le dessin. Pourquoi ?",
+   "choices": [
+    "La souris est trop lente",
+    "Le fichier est trop petit",
+    "La forme n'est pas complètement fermée",
+    "La clé USB est pleine"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Un trou laisse passer la couleur. Il faut fermer le contour.",
+   "id": "6e-informatique-dessin-numerique-04",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour dessiner un drapeau à trois bandes verticales, quelle stratégie est la plus simple ?",
+   "choices": [
+    "Dessiner à main levée sans règle",
+    "Écrire le mot « drapeau »",
+    "Imprimer d'abord",
+    "Tracer trois rectangles côte à côte puis les remplir"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les formes donnent des bords nets ; le remplissage colorie chaque bande.",
+   "id": "6e-informatique-dessin-numerique-05",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Décris, en cinq étapes, comment réaliser et enregistrer un dessin de ta maison avec un logiciel de dessin.",
+   "model": "Ouvrir le logiciel ; tracer les murs (rectangle) et le toit (polygone) ; ajouter porte et fenêtre ; colorier avec le remplissage ; enregistrer dans le bon dossier avec un nom clair.",
+   "rubric": [
+    "Ouvrir le logiciel",
+    "Utiliser des formes et des couleurs",
+    "Enregistrer avec un nom et un dossier"
+   ],
+   "points": 4,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "6e-informatique-dessin-numerique-06",
+   "tier": "examen",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle extension correspond à une image ?",
+   "choices": [
+    "txt",
+    "mp3 seulement",
+    "ordi",
+    "png"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le png est un format d'image courant.",
+   "id": "6e-informatique-dessin-numerique-q1",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait l'outil « Annuler » ?",
+   "choices": [
+    "Il éteint le logiciel",
+    "Il imprime",
+    "Il supprime la dernière action",
+    "Il agrandit l'écran"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il revient en arrière d'un pas.",
+   "id": "6e-informatique-dessin-numerique-q2",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel outil permet de tracer un cercle ?",
+   "choices": [
+    "Le remplissage",
+    "La gomme",
+    "La forme ovale",
+    "La palette"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On trace l'ovale en gardant éventuellement Majuscule pour un cercle parfait.",
+   "id": "6e-informatique-dessin-numerique-q3",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi une zone doit-elle être fermée pour le remplissage ?",
+   "choices": [
+    "Sinon le fichier devient plus lourd",
+    "Sinon la couleur déborde",
+    "Sinon la gomme se bloque",
+    "Sinon l'ordinateur s'éteint"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La couleur s'étend jusqu'aux limites tracées.",
+   "id": "6e-informatique-dessin-numerique-q4",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que choisit-on dans la palette ?",
+   "choices": [
+    "L'imprimante",
+    "Le dossier",
+    "La couleur",
+    "Le mot de passe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La palette propose les couleurs de tracé et de remplissage.",
+   "id": "6e-informatique-dessin-numerique-q5",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-dessin-numerique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

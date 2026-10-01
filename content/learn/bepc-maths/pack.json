@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "bepc-maths",
-  "version": 1,
+  "version": 2,
   "title": "Mathématiques — BEPC",
   "description": "Fiches « l'essentiel », exemples résolus, exercices type BEPC corrigés et épreuve blanche.",
   "lang": "fr",
@@ -10,15 +10,96 @@
   "subject": "maths",
   "exam": "BEPC",
   "programRef": "Programme officiel de mathématiques de la classe de 3e (MINESEC) — à vérifier sur le texte officiel",
-  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
   "status": "draft",
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-01",
   "chapters": [
-    {"id": "bepc-maths-calc", "title": "Calcul littéral et identités remarquables", "order": 1, "programRef": "3e — Activités numériques : calcul littéral, identités remarquables (à vérifier sur le texte officiel)"},
-    {"id": "bepc-maths-eq", "title": "Équations, inéquations et systèmes", "order": 2, "programRef": "3e — Activités numériques : équations et inéquations du 1er degré, systèmes de deux équations à deux inconnues (à vérifier sur le texte officiel)"},
-    {"id": "bepc-maths-geo", "title": "Géométrie du triangle rectangle", "order": 3, "programRef": "3e — Relations métriques dans le triangle rectangle"},
-    {"id": "bepc-maths-thales", "title": "Théorème de Thalès", "order": 4, "programRef": "3e — Activités géométriques : théorème de Thalès et réciproque (à vérifier sur le texte officiel)"},
-    {"id": "bepc-maths-fonc", "title": "Fonctions linéaires et affines", "order": 5, "programRef": "3e — Activités numériques : applications linéaires et affines (à vérifier sur le texte officiel)"}
+    {
+      "id": "bepc-maths-calc",
+      "title": "Calcul littéral et identités remarquables",
+      "order": 1,
+      "programRef": "3e — Activités numériques : calcul littéral, identités remarquables (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-eq",
+      "title": "Équations, inéquations et systèmes",
+      "order": 2,
+      "programRef": "3e — Activités numériques : équations et inéquations du 1er degré, systèmes de deux équations à deux inconnues (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-geo",
+      "title": "Géométrie du triangle rectangle",
+      "order": 3,
+      "programRef": "3e — Relations métriques dans le triangle rectangle"
+    },
+    {
+      "id": "bepc-maths-thales",
+      "title": "Théorème de Thalès",
+      "order": 4,
+      "programRef": "3e — Activités géométriques : théorème de Thalès et réciproque (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-fonc",
+      "title": "Fonctions linéaires et affines",
+      "order": 5,
+      "programRef": "3e — Activités numériques : applications linéaires et affines (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-nombres",
+      "title": "Racines carrées, encadrement et valeurs approchées",
+      "order": 6,
+      "programRef": "3e — Activités numériques : radicaux, ordre, encadrement, valeurs approchées, intervalles (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-statistiques",
+      "title": "Statistiques",
+      "order": 7,
+      "programRef": "3e — Organisation et gestion de données : séries statistiques, classes, médiane (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-trigo",
+      "title": "Trigonométrie du triangle rectangle",
+      "order": 8,
+      "programRef": "3e — Activités géométriques : sinus, cosinus, tangente d'un angle aigu (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-cercle",
+      "title": "Angles inscrits et polygones réguliers",
+      "order": 9,
+      "programRef": "3e — Activités géométriques : angle inscrit, angle au centre, polygones réguliers (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-transformations",
+      "title": "Vecteurs, translations et homothéties",
+      "order": 10,
+      "programRef": "3e — Activités géométriques : vecteurs, coordonnées, translation, homothétie (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-espace",
+      "title": "Géométrie dans l'espace",
+      "order": 11,
+      "programRef": "3e — Activités géométriques : pyramide, cône, sphère : aires et volumes (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-reperage",
+      "title": "Repérage et droites du plan",
+      "order": 12,
+      "programRef": "3e — Activités géométriques : repérage, distance, milieu, équations de droites (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-problemes",
+      "title": "Problèmes types BEPC",
+      "order": 13,
+      "programRef": "3e — Préparation au BEPC : problèmes de synthèse (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-maths-epreuve-blanche-2",
+      "title": "Épreuve blanche 2",
+      "order": 14,
+      "programRef": "3e — Entraînement au BEPC : deuxième épreuve blanche (à vérifier sur les textes officiels)"
+    }
   ],
   "mockExams": [
     {
@@ -28,9 +109,53 @@
       "instructions": "Durée : 2 heures. Noté sur 20. Trois parties indépendantes : activités numériques (8 points), activités géométriques (6 points), problème (6 points). Rédige chaque réponse et justifie tes calculs. Calculatrice selon le règlement de l'examen. Format (durée, barème, découpage en parties) proposé à titre d'entraînement : à vérifier sur les textes officiels.",
       "outOf": 20,
       "sections": [
-        {"title": "Partie A — Activités numériques (8 points)", "exercises": ["bepc-maths-be-01", "bepc-maths-be-02"]},
-        {"title": "Partie B — Activités géométriques (6 points)", "exercises": ["bepc-maths-be-03"]},
-        {"title": "Partie C — Problème (6 points)", "exercises": ["bepc-maths-be-04"]}
+        {
+          "title": "Partie A — Activités numériques (8 points)",
+          "exercises": [
+            "bepc-maths-be-01",
+            "bepc-maths-be-02"
+          ]
+        },
+        {
+          "title": "Partie B — Activités géométriques (6 points)",
+          "exercises": [
+            "bepc-maths-be-03"
+          ]
+        },
+        {
+          "title": "Partie C — Problème (6 points)",
+          "exercises": [
+            "bepc-maths-be-04"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bepc-maths-epreuve-2",
+      "title": "Épreuve blanche 2 de mathématiques — BEPC",
+      "minutes": 120,
+      "instructions": "Durée : 2 heures. Noté sur 20. Trois parties : activités numériques (8 points), activités géométriques (6 points), problème de repérage (6 points). Rédige chaque réponse et justifie tes calculs. Calculatrice selon le règlement. Format proposé à titre d'entraînement : à vérifier sur les textes officiels.",
+      "outOf": 20,
+      "sections": [
+        {
+          "title": "Partie A — Activités numériques (8 points)",
+          "exercises": [
+            "bepc-maths-ep2-01",
+            "bepc-maths-ep2-02"
+          ]
+        },
+        {
+          "title": "Partie B — Activités géométriques (6 points)",
+          "exercises": [
+            "bepc-maths-ep2-03"
+          ]
+        },
+        {
+          "title": "Partie C — Problème (6 points)",
+          "exercises": [
+            "bepc-maths-ep2-04"
+          ]
+        }
       ]
     }
   ]

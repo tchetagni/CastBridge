@@ -1,0 +1,458 @@
+{
+ "chapter": "6e-svt-vivant",
+ "lessons": [
+  {
+   "id": "6e-svt-vivant-non-vivant",
+   "title": "Êtres vivants et êtres non vivants",
+   "minutes": 20,
+   "programRef": "6e — Les caractères du vivant (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer les caractères communs aux êtres vivants.",
+    "Classer des objets de la nature en vivants et non-vivants."
+   ],
+   "prerequisites": [
+    "6e-svt-demarche-scientifique"
+   ],
+   "exercises": [
+    "6e-svt-vivant-non-vivant-01",
+    "6e-svt-vivant-non-vivant-02",
+    "6e-svt-vivant-non-vivant-03",
+    "6e-svt-vivant-non-vivant-04",
+    "6e-svt-vivant-non-vivant-05",
+    "6e-svt-vivant-non-vivant-06"
+   ],
+   "selfCheck": [
+    "6e-svt-vivant-non-vivant-q1",
+    "6e-svt-vivant-non-vivant-q2",
+    "6e-svt-vivant-non-vivant-q3",
+    "6e-svt-vivant-non-vivant-q4",
+    "6e-svt-vivant-non-vivant-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les caractères du vivant",
+     "md": "Un être vivant **naît**, **se nourrit**, **respire**, **grandit**, **réagit** à son milieu, **se reproduit** et finit par **mourir**. Un objet non vivant (pierre, eau, air, moto) ne fait pas tout cela."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quelques exemples d'êtres vivants et d'objets non vivants.",
+     "alt": "Deux colonnes : vivants (manguier, poule, champignon, poisson) et non vivants (pierre, eau, moto, sable).",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 190,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 10,
+        "w": 190,
+        "h": 36,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 34,
+        "text": "Vivants",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 34,
+        "text": "Non vivants",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 80,
+        "text": "manguier",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 112,
+        "text": "poule",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 144,
+        "text": "champignon",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 176,
+        "text": "poisson",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 80,
+        "text": "pierre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 112,
+        "text": "eau",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 144,
+        "text": "moto",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 176,
+        "text": "sable",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 10,
+        "x2": 215,
+        "y2": 190,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pour reconnaître un être vivant",
+     "md": "On cherche s'il **grandit**, se **nourrit**, **respire**, **réagit** et se **reproduit**. Un seul critère ne suffit pas : une moto bouge, mais elle ne naît pas, ne se nourrit pas et ne se reproduit pas. Une plante, même si elle ne se déplace pas, est vivante."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer",
+     "statement": "Amina trouve un caillou, un champignon, une voiture et un haricot qui germe. Lesquels sont vivants ?",
+     "steps": [
+      {
+       "md": "Le caillou ne se nourrit pas, ne grandit pas : non vivant."
+      },
+      {
+       "md": "La voiture se déplace mais ne grandit pas et ne se reproduit pas : non vivante."
+      },
+      {
+       "md": "Le champignon et le haricot qui germe grandissent, se nourrissent et se reproduisent : vivants."
+      }
+     ],
+     "answer": "**Vivants : le champignon et le haricot. Non vivants : le caillou et la voiture.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : prouver qu'un animal est vivant",
+     "statement": "Comment montrer qu'une chenille est un être vivant ?",
+     "steps": [
+      {
+       "md": "Elle mange des feuilles : elle se nourrit."
+      },
+      {
+       "md": "Elle grossit et change de forme : elle grandit."
+      },
+      {
+       "md": "Elle s'éloigne quand on la touche : elle réagit. Elle respire et se reproduira une fois adulte."
+      }
+     ],
+     "answer": "**Elle présente les caractères du vivant : nutrition, croissance, réaction, reproduction.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que ce qui **bouge** est vivant (une voiture, un nuage, l'eau d'une rivière).\n- Penser qu'une plante n'est pas vivante parce qu'elle **ne se déplace pas**.\n- Croire qu'un seul caractère suffit pour décider."
+    }
+   ],
+   "reviewNotes": [
+    "Le cas du feu, du nuage ou de la graine sèche est utile pour discuter mais peut dépasser le programme officiel."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Lequel de ces éléments est un être vivant ?",
+   "choices": [
+    "Le champignon",
+    "Le caillou",
+    "La moto",
+    "Le sable"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le champignon naît, se nourrit, se reproduit.",
+   "id": "6e-svt-vivant-non-vivant-01",
+   "tier": "application",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une plante est un être vivant même si elle ne se déplace pas.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle se nourrit, grandit, se reproduit et meurt.",
+   "id": "6e-svt-vivant-non-vivant-02",
+   "tier": "application",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque être ou objet à sa catégorie.",
+   "pairs": [
+    [
+     "Manguier",
+     "Vivant (plante)"
+    ],
+    [
+     "Poisson",
+     "Vivant (animal)"
+    ],
+    [
+     "Pierre",
+     "Non vivant (roche)"
+    ],
+    [
+     "Eau de pluie",
+     "Non vivant (liquide)"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Les deux premiers se nourrissent, grandissent, se reproduisent.",
+   "id": "6e-svt-vivant-non-vivant-03",
+   "tier": "application",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une voiture bouge, consomme du carburant et fait du bruit. Pourquoi n'est-elle pas vivante ?",
+   "choices": [
+    "Elle ne naît pas, ne grandit pas et ne se reproduit pas",
+    "Parce qu'elle est trop grosse",
+    "Parce qu'elle n'a pas de couleur",
+    "Parce qu'elle bouge"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Bouger ou consommer du carburant ne suffit pas : il faut tous les caractères du vivant.",
+   "id": "6e-svt-vivant-non-vivant-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Parmi ces caractères, lequel n'est PAS propre aux êtres vivants ?",
+   "choices": [
+    "Se reproduire",
+    "Grandir",
+    "Avoir une masse",
+    "Mourir"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Tout objet, vivant ou non, a une masse.",
+   "id": "6e-svt-vivant-non-vivant-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng a placé dans un panier : un œuf de poule, un morceau de bois mort, un tubercule d'igname qui a des pousses, une pierre.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Indique pour chaque objet s'il est vivant, non vivant ou en vie ralentie, et justifie en une phrase.",
+     "model": "La pierre est non vivante. Le tubercule d'igname qui pousse est vivant car il grandit et se nourrit de ses réserves. Le bois mort a été vivant mais ne l'est plus. L'œuf fécondé contient un être en développement, il est donc vivant ; sinon il ne se développera pas.",
+     "rubric": [
+      "Pierre : non vivant",
+      "Igname : vivant (croissance)",
+      "Bois mort : plus vivant",
+      "Au moins une justification par caractère du vivant"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-vivant-non-vivant-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel caractère montre que l'igname est vivant ?",
+     "choices": [
+      "Il a une couleur",
+      "Il grandit",
+      "Il est lourd",
+      "Il est dur"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La croissance est un caractère du vivant.",
+     "id": "6e-svt-vivant-non-vivant-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Pour chaque objet, cherche les caractères du vivant.",
+   "id": "6e-svt-vivant-non-vivant-06",
+   "tier": "examen",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel caractère n'appartient qu'aux êtres vivants ?",
+   "choices": [
+    "Se reproduire",
+    "Occuper de l'espace",
+    "Avoir une masse",
+    "Pouvoir se casser"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Seuls les vivants se reproduisent.",
+   "id": "6e-svt-vivant-non-vivant-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le nuage est-il un être vivant ?",
+   "choices": [
+    "Oui, car il bouge",
+    "Non, il ne naît pas et ne se nourrit pas",
+    "Oui, car il grossit",
+    "Oui, car il fait de la pluie"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Bouger ne suffit pas à prouver la vie.",
+   "id": "6e-svt-vivant-non-vivant-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel est un caractère du vivant ?",
+   "choices": [
+    "Être froid",
+    "Être dur",
+    "Réagir à son milieu",
+    "Être lourd"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un être vivant réagit (lumière, chaleur, contact).",
+   "id": "6e-svt-vivant-non-vivant-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient un être vivant à la fin de sa vie ?",
+   "choices": [
+    "Il devient une pierre",
+    "Il reste vivant toujours",
+    "Il meurt",
+    "Il se transforme en eau"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La mort est le dernier caractère du vivant.",
+   "id": "6e-svt-vivant-non-vivant-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel exemple est un être vivant ?",
+   "choices": [
+    "Le sable",
+    "L'eau",
+    "Le fer",
+    "Le poisson"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le poisson naît, se nourrit, respire et se reproduit.",
+   "id": "6e-svt-vivant-non-vivant-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-vivant-non-vivant",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,477 +1,2579 @@
 {
- "chapter": "bepc-histoire-geo-ch-hist",
+ "chapter": "bepc-histoire-geo-histoire",
  "lessons": [
   {
-   "id": "bepc-histoire-geo-hist",
-   "title": "Histoire : de la colonisation à la réunification",
-   "minutes": 30,
-   "programRef": "3e — Histoire : le Cameroun de la colonisation à l'indépendance et à la réunification (à vérifier sur le texte officiel)",
+   "id": "bepc-histoire-geo-cameroun-colonial",
+   "title": "Le Cameroun sous administration française et britannique (1916-1945)",
+   "minutes": 25,
+   "programRef": "3e — Histoire : le Cameroun colonial (mandat et tutelle) (à vérifier sur le texte officiel)",
    "status": "draft",
-   "author": "CastBridge (brouillon IA)",
-   "source": "Rédaction originale conforme au programme de 3e ; à relire par un enseignant",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
    "objectives": [
-    "Situer sur une frise les dates clés de l'histoire du Cameroun.",
-    "Distinguer indépendance (1960) et réunification (1961).",
-    "Expliquer le partage du Cameroun après la Première Guerre mondiale."
+    "Comparer l'administration du Cameroun français et du Cameroun britannique.",
+    "Citer les effets de la colonisation et le rôle du Cameroun pendant la Seconde Guerre mondiale."
    ],
    "prerequisites": [],
    "exercises": [
-    "bepc-histoire-geo-hist-01",
-    "bepc-histoire-geo-hist-02",
-    "bepc-histoire-geo-hist-03",
-    "bepc-histoire-geo-hist-04",
-    "bepc-histoire-geo-hist-05",
-    "bepc-histoire-geo-hist-06"
+    "bepc-histoire-geo-cameroun-colonial-01",
+    "bepc-histoire-geo-cameroun-colonial-02",
+    "bepc-histoire-geo-cameroun-colonial-03",
+    "bepc-histoire-geo-cameroun-colonial-04",
+    "bepc-histoire-geo-cameroun-colonial-05",
+    "bepc-histoire-geo-cameroun-colonial-06"
    ],
    "selfCheck": [
-    "bepc-histoire-geo-hist-q1",
-    "bepc-histoire-geo-hist-q2",
-    "bepc-histoire-geo-hist-q3",
-    "bepc-histoire-geo-hist-q4",
-    "bepc-histoire-geo-hist-q5"
+    "bepc-histoire-geo-cameroun-colonial-q1",
+    "bepc-histoire-geo-cameroun-colonial-q2",
+    "bepc-histoire-geo-cameroun-colonial-q3",
+    "bepc-histoire-geo-cameroun-colonial-q4",
+    "bepc-histoire-geo-cameroun-colonial-q5"
    ],
    "blocks": [
     {
      "type": "key",
-     "style": "definition",
-     "title": "La période allemande",
-     "md": "En **1884**, des chefs de la côte signent un traité avec des Allemands : le territoire, appelé **Kamerun**, devient un **protectorat allemand**. Il l'est jusqu'à la Première Guerre mondiale."
-    },
-    {
-     "type": "key",
-     "style": "propriete",
-     "title": "Le partage franco-britannique",
-     "md": "À l'issue de la Première Guerre mondiale (**1919**), l'Allemagne perd ses colonies. Le Cameroun est placé sous **mandat de la Société des Nations** et partagé entre la **France** (la plus grande partie) et le **Royaume-Uni**. Après 1945, il passe sous **tutelle de l'ONU** (**1946**).",
-     "review": true
+     "style": "retenir",
+     "title": "Deux administrations",
+     "md": "Après 1916, le Cameroun est partagé : la **France** administre la plus grande partie (Cameroun français, capitale Yaoundé) ; le **Royaume-Uni** administre une bande à l'ouest (Cameroun britannique), rattachée à l'administration du Nigeria voisin. Le régime est celui du **mandat** (SDN) puis de la **tutelle** (ONU, 1946)."
     },
     {
      "type": "key",
      "style": "retenir",
-     "title": "Indépendance et réunification",
-     "md": "- **1er janvier 1960** : indépendance du Cameroun sous administration française ; premier président : **Ahmadou Ahidjo**.\n- **11 février 1961** : consultation dans le Cameroun britannique ; la partie du sud choisit de rejoindre le Cameroun.\n- **1er octobre 1961** : **réunification**.\n- **20 mai 1972** : référendum, passage à l'État unitaire.",
-     "review": true
+     "title": "Effets et guerre mondiale",
+     "md": "- Infrastructures : routes, voies ferrées, ports, plantations, écoles de mission et d'État.\n- Contraintes : impôts, cultures obligatoires, travail imposé ; la loi de **1946** supprime le travail forcé dans les colonies françaises.\n- **Août 1940** : le Cameroun français rallie la France libre, dirigée par le général de Gaulle, pendant la Seconde Guerre mondiale."
     },
     {
      "type": "illustration",
+     "caption": "Repères de la période franco-britannique.",
+     "alt": "Frise de 1914 à 1950 : partage 1916, ralliement 1940, tutelle 1946.",
      "figure": {
       "kind": "timeline",
-      "from": 1880,
-      "to": 1980,
-      "w": 480,
+      "from": 1914,
+      "to": 1950,
+      "w": 520,
       "h": 240,
       "events": [
        {
-        "year": 1884,
-        "label": "1884"
+        "year": 1916,
+        "label": "Partage"
        },
        {
-        "year": 1919,
-        "label": "1919"
+        "year": 1940,
+        "label": "France libre"
        },
        {
         "year": 1946,
-        "label": "1946"
-       },
-       {
-        "year": 1960,
-        "label": "1960"
-       },
-       {
-        "year": 1961,
-        "label": "1961"
-       },
-       {
-        "year": 1972,
-        "label": "1972"
+        "label": "Tutelle"
        }
       ],
       "periods": [
        {
-        "from": 1884,
-        "to": 1919,
-        "label": "Allemagne",
-        "color": "orange"
-       },
-       {
-        "from": 1919,
-        "to": 1960,
-        "label": "France et Royaume-Uni",
-        "color": "blue"
+        "from": 1916,
+        "to": 1946,
+        "label": "Mandat",
+        "color": "lightorange"
        }
       ]
-     },
-     "caption": "Frise des dates clés.",
-     "alt": "Une frise de 1880 à 1980 avec les dates 1884, 1919, 1946, 1960, 1961 et 1972 ; deux périodes colorées : Allemagne puis France et Royaume-Uni."
+     }
     },
     {
      "type": "example",
-     "title": "Exemple 1 : ordonner des dates",
-     "statement": "Range du plus ancien au plus récent : réunification, protectorat allemand, indépendance, État unitaire.",
+     "title": "Exemple 1 : qui administre ?",
+     "statement": "Quelle puissance administre la partie ouest du Cameroun après 1916 ?",
      "steps": [
       {
-       "md": "Protectorat allemand : 1884."
+       "md": "Après le partage, l'ouest est confié au Royaume-Uni."
       },
       {
-       "md": "Indépendance : 1960 ; réunification : 1961."
-      },
-      {
-       "md": "État unitaire : 1972."
+       "md": "Cette partie est gérée avec le Nigeria voisin."
       }
      ],
-     "answer": "**Protectorat allemand, indépendance, réunification, État unitaire.**"
+     "answer": "**Le Royaume-Uni**"
     },
     {
      "type": "example",
-     "title": "Exemple 2 : calculer une durée",
-     "statement": "Combien d'années s'écoulent entre la réunification (1961) et le passage à l'État unitaire (1972) ?",
+     "title": "Exemple 2 : durée",
+     "statement": "Combien d'années entre le partage (1916) et la tutelle (1946) ?",
      "steps": [
       {
-       "md": "On prend la date la plus récente : 1972."
+       "md": "On repère les deux dates."
       },
       {
-       "md": "On soustrait la plus ancienne : 1972 − 1961 = 11."
+       "md": "On soustrait :",
+       "tex": "1946 - 1916 = 30"
       }
      ],
-     "answer": "**11 ans.**"
+     "answer": "**30 ans**"
     },
     {
      "type": "key",
      "style": "pieges",
      "title": "Erreurs fréquentes",
-     "md": "- Confondre **indépendance** (1960) et **réunification** (1961).\n- Croire que le Cameroun n'a eu qu'un seul colonisateur : Allemagne, puis France et Royaume-Uni.\n- Oublier que ces dates se placent dans l'ordre : 1884, 1919, 1946, 1960, 1961, 1972."
-    },
-    {
-     "type": "exercise",
-     "ref": "bepc-histoire-geo-hist-01"
+     "md": "- Confondre mandat (SDN) et tutelle (ONU).\n- Croire que la colonisation n'a eu que des effets positifs ou que des effets négatifs : on décrit les deux, faits à l'appui.\n- Penser que le Cameroun a été colonie « comme les autres » : il était sous mandat puis tutelle."
     }
    ],
    "reviewNotes": [
-    "Dates 1884, 1919, 1946, 1960, 1961 (11 février et 1er octobre) et 1972 (20 mai) : à vérifier sur le manuel officiel ; aucun nom de traité n'est donné volontairement.",
-    "Formulation du plébiscite de 1961 : le programme peut détailler le sort du Cameroun septentrional (Northern Cameroons) ; à compléter et à formuler avec prudence par l'enseignant.",
-    "Nom du premier président (Ahmadou Ahidjo) : fait connu ; l'exercice correspondant est marqué review.",
-    "Partage des territoires et mandats SDN / tutelle ONU : bloc review ; ne mentionne pas les personnalités du mouvement nationaliste (UPC, etc.) par prudence ; à ajouter si le programme l'exige."
+    "Repères : partage de 1916 ; mandats SDN ; tutelle ONU 1946 ; ralliement du Cameroun français à la France libre en août 1940 ; suppression du travail forcé en 1946 dans les colonies françaises (loi d'avril 1946). À faire relire.",
+    "Les modes d'administration (direct/indirect) sont présentés de façon simplifiée."
+   ]
+  },
+  {
+   "id": "bepc-histoire-geo-nationalisme",
+   "title": "Les mouvements nationalistes camerounais",
+   "minutes": 25,
+   "programRef": "3e — Histoire : les mouvements nationalistes et la marche vers l'indépendance (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer la naissance des mouvements nationalistes.",
+    "Citer l'UPC et quelques figures, ainsi que les partis du Cameroun britannique."
+   ],
+   "prerequisites": [
+    "bepc-histoire-geo-cameroun-colonial"
+   ],
+   "exercises": [
+    "bepc-histoire-geo-nationalisme-01",
+    "bepc-histoire-geo-nationalisme-02",
+    "bepc-histoire-geo-nationalisme-03",
+    "bepc-histoire-geo-nationalisme-04",
+    "bepc-histoire-geo-nationalisme-05",
+    "bepc-histoire-geo-nationalisme-06"
+   ],
+   "selfCheck": [
+    "bepc-histoire-geo-nationalisme-q1",
+    "bepc-histoire-geo-nationalisme-q2",
+    "bepc-histoire-geo-nationalisme-q3",
+    "bepc-histoire-geo-nationalisme-q4",
+    "bepc-histoire-geo-nationalisme-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le nationalisme",
+     "md": "Le **nationalisme** est un mouvement qui réclame l'indépendance et la fin de la domination étrangère. Au Cameroun, il se développe après la Seconde Guerre mondiale : les Camerounais demandent plus de droits, puis la fin de la tutelle."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Principaux acteurs",
+     "md": "- **L'UPC** (Union des populations du Cameroun), fondée en **1948** ; dirigeants : Ruben Um Nyobè, Félix Moumié, Ernest Ouandié. Elle est interdite en **1955**. Um Nyobè meurt en **1958**.\n- Au **Cameroun britannique**, des partis comme le KNC (Endeley) et le KNDP (Foncha) débattent de l'avenir : rester avec le Nigeria ou rejoindre le Cameroun."
+    },
+    {
+     "type": "illustration",
+     "caption": "La montée du nationalisme.",
+     "alt": "Frise de 1945 à 1962 : UPC 1948, interdiction 1955, 1958, indépendance 1960.",
+     "figure": {
+      "kind": "timeline",
+      "from": 1945,
+      "to": 1962,
+      "w": 520,
+      "h": 240,
+      "events": [
+       {
+        "year": 1948,
+        "label": "UPC"
+       },
+       {
+        "year": 1955,
+        "label": "Interdite"
+       },
+       {
+        "year": 1958,
+        "label": "Um Nyobè"
+       },
+       {
+        "year": 1960,
+        "label": "Indép."
+       }
+      ],
+      "periods": [
+       {
+        "from": 1948,
+        "to": 1960,
+        "label": "Nationalisme",
+        "color": "lightgreen"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : sigle",
+     "statement": "Que signifie UPC ?",
+     "steps": [
+      {
+       "md": "Chaque lettre est l'initiale d'un mot."
+      },
+      {
+       "md": "U = Union, P = Populations, C = Cameroun."
+      }
+     ],
+     "answer": "**Union des populations du Cameroun**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : situer",
+     "statement": "En quelle décennie l'UPC naît-elle ?",
+     "steps": [
+      {
+       "md": "Elle naît en 1948."
+      },
+      {
+       "md": "On calcule la décennie : les années 1940."
+      }
+     ],
+     "answer": "**Les années 1940**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser qu'il n'y avait qu'un seul courant : plusieurs partis, avec des opinions diverses.\n- Confondre UPC (1948) et indépendance (1960).\n- Oublier le Cameroun britannique : le débat y portait sur le choix entre Nigeria et Cameroun."
+    }
+   ],
+   "reviewNotes": [
+    "UPC fondée en avril 1948 ; Um Nyobè tué en septembre 1958 ; UPC interdite en 1955. Sujet sensible : exposé factuel minimal. Noms cités : Um Nyobè, Moumié, Ouandié (UPC) ; Endeley et Foncha au Cameroun britannique. À faire relire.",
+    "Ne pas détailler les violences du conflit : sources contestées."
+   ]
+  },
+  {
+   "id": "bepc-histoire-geo-independance-reunification",
+   "title": "L'indépendance (1960) et la réunification (1961)",
+   "minutes": 25,
+   "programRef": "3e — Histoire : l'indépendance et la réunification (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dater l'indépendance du Cameroun français et la réunification.",
+    "Expliquer le plébiscite de 1961 et la naissance de la Fédération."
+   ],
+   "prerequisites": [
+    "bepc-histoire-geo-nationalisme"
+   ],
+   "exercises": [
+    "bepc-histoire-geo-independance-reunification-01",
+    "bepc-histoire-geo-independance-reunification-02",
+    "bepc-histoire-geo-independance-reunification-03",
+    "bepc-histoire-geo-independance-reunification-04",
+    "bepc-histoire-geo-independance-reunification-05",
+    "bepc-histoire-geo-independance-reunification-06"
+   ],
+   "selfCheck": [
+    "bepc-histoire-geo-independance-reunification-q1",
+    "bepc-histoire-geo-independance-reunification-q2",
+    "bepc-histoire-geo-independance-reunification-q3",
+    "bepc-histoire-geo-independance-reunification-q4",
+    "bepc-histoire-geo-independance-reunification-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'indépendance du Cameroun français",
+     "md": "Le **1er janvier 1960**, le Cameroun français devient indépendant sous le nom de **République du Cameroun**. Ahmadou Ahidjo devient le premier président du pays. Le Cameroun entre à l'ONU en 1960."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le plébiscite et la réunification",
+     "md": "Au Cameroun britannique, un **plébiscite** a lieu le **11 février 1961** : le Nord choisit de rejoindre le Nigeria, le Sud de rejoindre le Cameroun. Le **1er octobre 1961**, les deux Cameroun forment la **République fédérale du Cameroun** (deux États fédérés). La Fédération est préparée notamment lors de la conférence de Foumban (juillet 1961)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Indépendance puis réunification.",
+     "alt": "Frise de 1958 à 1963 : indépendance en 1960, réunification en 1961.",
+     "figure": {
+      "kind": "timeline",
+      "from": 1958,
+      "to": 1963,
+      "w": 520,
+      "h": 240,
+      "events": [
+       {
+        "year": 1960,
+        "label": "Indép."
+       },
+       {
+        "year": 1961,
+        "label": "Réunif."
+       }
+      ],
+      "periods": [
+       {
+        "from": 1960,
+        "to": 1961,
+        "label": "1960-61",
+        "color": "lightblue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : plébiscite",
+     "statement": "Qu'est-ce qu'un plébiscite ?",
+     "steps": [
+      {
+       "md": "C'est une consultation où les habitants répondent à une question précise."
+      },
+      {
+       "md": "Ici : rejoindre le Nigeria ou le Cameroun."
+      }
+     ],
+     "answer": "**Un vote où la population choisit son avenir**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : calcul",
+     "statement": "Combien de temps sépare le 1er janvier 1960 du 1er octobre 1961 (en mois) ?",
+     "steps": [
+      {
+       "md": "De janvier 1960 à janvier 1961 : 12 mois."
+      },
+      {
+       "md": "De janvier 1961 à octobre 1961 : 9 mois, soit 21 mois."
+      }
+     ],
+     "answer": "**21 mois**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que tout le Cameroun devient indépendant en 1960 : seul le Cameroun français ; la partie britannique rejoint en 1961.\n- Confondre 11 février 1961 (plébiscite) et 1er octobre 1961 (Fédération).\n- Croire que le Nord du Cameroun britannique a rejoint le Cameroun : il a rejoint le Nigeria."
+    }
+   ],
+   "reviewNotes": [
+    "Repères : 1er janvier 1960 (Cameroun français) ; plébiscite 11 février 1961 ; 1er octobre 1961 (République fédérale). Résultats chiffrés non cités. Conférence de Foumban : juillet 1961 (à confirmer).",
+    "Indépendance du Nigeria : 1er octobre 1960."
+   ]
+  },
+  {
+   "id": "bepc-histoire-geo-construction-etat",
+   "title": "La construction de l'État camerounais depuis 1961",
+   "minutes": 25,
+   "programRef": "3e — Histoire : la construction de l'État camerounais (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dater les grandes étapes institutionnelles du Cameroun.",
+    "Expliquer le passage de la Fédération à l'État unitaire, puis au multipartisme."
+   ],
+   "prerequisites": [
+    "bepc-histoire-geo-independance-reunification"
+   ],
+   "exercises": [
+    "bepc-histoire-geo-construction-etat-01",
+    "bepc-histoire-geo-construction-etat-02",
+    "bepc-histoire-geo-construction-etat-03",
+    "bepc-histoire-geo-construction-etat-04",
+    "bepc-histoire-geo-construction-etat-05",
+    "bepc-histoire-geo-construction-etat-06"
+   ],
+   "selfCheck": [
+    "bepc-histoire-geo-construction-etat-q1",
+    "bepc-histoire-geo-construction-etat-q2",
+    "bepc-histoire-geo-construction-etat-q3",
+    "bepc-histoire-geo-construction-etat-q4",
+    "bepc-histoire-geo-construction-etat-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les étapes",
+     "md": "- **1961** : République fédérale du Cameroun.\n- **20 mai 1972** : référendum, la Fédération devient **République unie du Cameroun** (État unitaire).\n- **Novembre 1982** : Paul Biya devient président.\n- **1984** : le pays reprend le nom de **République du Cameroun**.\n- **Fin 1990** : retour au multipartisme.\n- **1996** : nouvelle Constitution."
+    },
+    {
+     "type": "illustration",
+     "caption": "Étapes institutionnelles.",
+     "alt": "Frise de 1960 à 2000 : 1961, 1972, 1982, 1990, 1996.",
+     "figure": {
+      "kind": "timeline",
+      "from": 1960,
+      "to": 2000,
+      "w": 560,
+      "h": 240,
+      "events": [
+       {
+        "year": 1961,
+        "label": "Fédération"
+       },
+       {
+        "year": 1972,
+        "label": "Unie"
+       },
+       {
+        "year": 1982,
+        "label": "Biya"
+       },
+       {
+        "year": 1990,
+        "label": "Multi."
+       },
+       {
+        "year": 1996,
+        "label": "Const."
+       }
+      ],
+      "periods": []
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "État unitaire et multipartisme",
+     "md": "Un **État unitaire** a un seul gouvernement et une seule loi pour tout le pays, alors qu'une **fédération** réunit plusieurs États fédérés. Le **multipartisme** autorise plusieurs partis politiques à se présenter aux élections."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : type d'État",
+     "statement": "En 1972, le Cameroun passe de la fédération à quoi ?",
+     "steps": [
+      {
+       "md": "La Fédération est supprimée."
+      },
+      {
+       "md": "Le pays devient une République unie."
+      }
+     ],
+     "answer": "**Un État unitaire**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : durée",
+     "statement": "Combien d'années entre 1961 et 1972 ?",
+     "steps": [
+      {
+       "md": "On repère les deux dates."
+      },
+      {
+       "md": "On calcule :",
+       "tex": "1972 - 1961 = 11"
+      }
+     ],
+     "answer": "**11 ans**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre République fédérale (1961), République unie (1972) et République du Cameroun (1984).\n- Penser que le multipartisme date de 1960 : il revient à la fin de 1990.\n- Mélanger les dates de l'indépendance et de l'unification."
+    }
+   ],
+   "reviewNotes": [
+    "Dates retenues : 20 mai 1972 (République unie) ; novembre 1982 (arrivée de Paul Biya) ; 1984 (République du Cameroun) ; fin 1990 (multipartisme) ; 18 janvier 1996 (Constitution) ; Sénat installé en 2013. À faire relire ; pas de jugement politique."
+   ]
+  },
+  {
+   "id": "bepc-histoire-geo-guerres-mondiales",
+   "title": "Les deux guerres mondiales",
+   "minutes": 25,
+   "programRef": "3e — Histoire : les deux guerres mondiales (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Situer les deux guerres mondiales et leurs principaux adversaires.",
+    "Décrire leurs conséquences, dont pour l'Afrique."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-histoire-geo-guerres-mondiales-01",
+    "bepc-histoire-geo-guerres-mondiales-02",
+    "bepc-histoire-geo-guerres-mondiales-03",
+    "bepc-histoire-geo-guerres-mondiales-04",
+    "bepc-histoire-geo-guerres-mondiales-05",
+    "bepc-histoire-geo-guerres-mondiales-06"
+   ],
+   "selfCheck": [
+    "bepc-histoire-geo-guerres-mondiales-q1",
+    "bepc-histoire-geo-guerres-mondiales-q2",
+    "bepc-histoire-geo-guerres-mondiales-q3",
+    "bepc-histoire-geo-guerres-mondiales-q4",
+    "bepc-histoire-geo-guerres-mondiales-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La Première Guerre mondiale (1914-1918)",
+     "md": "Elle oppose notamment la France, le Royaume-Uni et la Russie (Alliés) à l'Allemagne et à l'Autriche-Hongrie. Elle prend fin par l'armistice du **11 novembre 1918**. En 1919, le traité de Versailles impose des conditions à l'Allemagne, qui perd ses colonies, dont le Kamerun. Des soldats africains participent aux combats."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La Seconde Guerre mondiale (1939-1945)",
+     "md": "Elle commence en **1939** avec l'invasion de la Pologne par l'Allemagne nazie. Elle oppose les Alliés (dont le Royaume-Uni, l'URSS, les États-Unis et la France libre) aux pays de l'Axe (Allemagne, Italie, Japon). Elle s'achève en 1945 et conduit à la création de l'**ONU**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les deux guerres mondiales.",
+     "alt": "Frise de 1910 à 1950 avec deux périodes de guerre.",
+     "figure": {
+      "kind": "timeline",
+      "from": 1910,
+      "to": 1950,
+      "w": 560,
+      "h": 240,
+      "events": [
+       {
+        "year": 1914,
+        "label": "1914"
+       },
+       {
+        "year": 1918,
+        "label": "1918"
+       },
+       {
+        "year": 1939,
+        "label": "1939"
+       },
+       {
+        "year": 1945,
+        "label": "1945"
+       }
+      ],
+      "periods": [
+       {
+        "from": 1914,
+        "to": 1918,
+        "label": "1re guerre",
+        "color": "lightorange"
+       },
+       {
+        "from": 1939,
+        "to": 1945,
+        "label": "2de guerre",
+        "color": "lightblue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : durée",
+     "statement": "Combien d'années a duré la Première Guerre mondiale ?",
+     "steps": [
+      {
+       "md": "Début en 1914, fin en 1918."
+      },
+      {
+       "md": "On soustrait :",
+       "tex": "1918 - 1914 = 4"
+      }
+     ],
+     "answer": "**4 ans (environ)**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : conséquence",
+     "statement": "Quel est l'effet de la Première Guerre mondiale pour le Kamerun ?",
+     "steps": [
+      {
+       "md": "L'Allemagne perd ses colonies."
+      },
+      {
+       "md": "Le Cameroun est partagé entre la France et le Royaume-Uni."
+      }
+     ],
+     "answer": "**Fin de la présence allemande et partage franco-britannique**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Placer la Première Guerre en 1939 et la Seconde en 1914 : c'est l'inverse.\n- Croire que l'Afrique n'a pas été concernée : elle a fourni des soldats et des ressources.\n- Confondre armistice (cessez-le-feu) et traité de paix."
+    }
+   ],
+   "reviewNotes": [
+    "Dates retenues : 1914-1918 ; armistice du 11 novembre 1918 ; traité de Versailles 1919 ; 1939-1945. Aucune statistique de pertes citée."
+   ]
+  },
+  {
+   "id": "bepc-histoire-geo-decolonisation",
+   "title": "La décolonisation et les indépendances africaines",
+   "minutes": 25,
+   "programRef": "3e — Histoire : la décolonisation et l'accession des pays africains à l'indépendance (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir la décolonisation et citer ses étapes en Afrique.",
+    "Situer 1957, 1960 et 1963."
+   ],
+   "prerequisites": [
+    "bepc-histoire-geo-guerres-mondiales"
+   ],
+   "exercises": [
+    "bepc-histoire-geo-decolonisation-01",
+    "bepc-histoire-geo-decolonisation-02",
+    "bepc-histoire-geo-decolonisation-03",
+    "bepc-histoire-geo-decolonisation-04",
+    "bepc-histoire-geo-decolonisation-05",
+    "bepc-histoire-geo-decolonisation-06"
+   ],
+   "selfCheck": [
+    "bepc-histoire-geo-decolonisation-q1",
+    "bepc-histoire-geo-decolonisation-q2",
+    "bepc-histoire-geo-decolonisation-q3",
+    "bepc-histoire-geo-decolonisation-q4",
+    "bepc-histoire-geo-decolonisation-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Décolonisation",
+     "md": "La **décolonisation** est le processus par lequel les colonies deviennent des États indépendants. En Afrique, elle s'accélère après la Seconde Guerre mondiale."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Étapes en Afrique",
+     "md": "- **1955** : conférence de Bandung (Asie et Afrique contre le colonialisme).\n- **1957** : le Ghana, dirigé par Kwame Nkrumah, est le premier pays d'Afrique noire indépendant.\n- **1960** : « année de l'Afrique » : de nombreux États (dont le Cameroun français) accèdent à l'indépendance.\n- **1962** : indépendance de l'Algérie.\n- **1994** : fin de l'apartheid en Afrique du Sud."
+    },
+    {
+     "type": "illustration",
+     "caption": "Repères de la décolonisation en Afrique.",
+     "alt": "Frise de 1950 à 1995 : 1957, 1960, 1962 et 1994.",
+     "figure": {
+      "kind": "timeline",
+      "from": 1950,
+      "to": 1995,
+      "w": 560,
+      "h": 240,
+      "events": [
+       {
+        "year": 1957,
+        "label": "Ghana"
+       },
+       {
+        "year": 1960,
+        "label": "Année Afrique"
+       },
+       {
+        "year": 1962,
+        "label": "Algérie"
+       },
+       {
+        "year": 1994,
+        "label": "Apartheid fin"
+       }
+      ],
+      "periods": []
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le premier",
+     "statement": "Quel pays d'Afrique noire est indépendant le premier ?",
+     "steps": [
+      {
+       "md": "On repère la date de 1957."
+      },
+      {
+       "md": "C'est le Ghana de Kwame Nkrumah."
+      }
+     ],
+     "answer": "**Le Ghana (1957)**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lien",
+     "statement": "Pourquoi 1960 est-elle appelée « année de l'Afrique » ?",
+     "steps": [
+      {
+       "md": "Beaucoup de pays accèdent à l'indépendance cette année-là."
+      },
+      {
+       "md": "Le Cameroun français en fait partie."
+      }
+     ],
+     "answer": "**Parce que de nombreux États africains deviennent indépendants**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que toute l'Afrique est indépendante en 1960 : ce sont des dates échelonnées.\n- Confondre 1957 (Ghana) et 1960.\n- Oublier que certains pays ont connu des guerres d'indépendance (Algérie)."
+    }
+   ],
+   "reviewNotes": [
+    "Repères solides : Bandung 1955 ; Ghana 1957 ; 1960 « année de l'Afrique » ; Algérie 1962 ; fin de l'apartheid et élection de Mandela en 1994. Nombre exact d'indépendances de 1960 non cité."
+   ]
+  },
+  {
+   "id": "bepc-histoire-geo-onu-guerre-froide",
+   "title": "Le monde après 1945 : ONU et guerre froide",
+   "minutes": 25,
+   "programRef": "3e — Histoire : le monde après 1945 : ONU, guerre froide (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Présenter l'ONU, ses buts et ses principaux organes.",
+    "Décrire la guerre froide et sa fin."
+   ],
+   "prerequisites": [
+    "bepc-histoire-geo-guerres-mondiales"
+   ],
+   "exercises": [
+    "bepc-histoire-geo-onu-guerre-froide-01",
+    "bepc-histoire-geo-onu-guerre-froide-02",
+    "bepc-histoire-geo-onu-guerre-froide-03",
+    "bepc-histoire-geo-onu-guerre-froide-04",
+    "bepc-histoire-geo-onu-guerre-froide-05",
+    "bepc-histoire-geo-onu-guerre-froide-06"
+   ],
+   "selfCheck": [
+    "bepc-histoire-geo-onu-guerre-froide-q1",
+    "bepc-histoire-geo-onu-guerre-froide-q2",
+    "bepc-histoire-geo-onu-guerre-froide-q3",
+    "bepc-histoire-geo-onu-guerre-froide-q4",
+    "bepc-histoire-geo-onu-guerre-froide-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'ONU",
+     "md": "L'**Organisation des Nations unies** est fondée en **1945**, après la Seconde Guerre mondiale, pour maintenir la **paix** et la sécurité, défendre les droits de l'homme et favoriser le développement. Siège : New York. Organes principaux : Assemblée générale, **Conseil de sécurité**, Secrétaire général. Le Cameroun est membre depuis **1960**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La guerre froide",
+     "md": "Après 1945, le monde est dominé par deux grandes puissances rivales : les **États-Unis** (monde capitaliste) et l'**URSS** (monde communiste). Il n'y a pas de guerre directe entre elles : c'est la **guerre froide** (environ 1947-1991). Le mur de Berlin est construit en 1961 et ouvert en 1989 ; l'URSS disparaît en 1991."
+    },
+    {
+     "type": "illustration",
+     "caption": "Deux blocs rivaux.",
+     "alt": "Deux rectangles États-Unis et URSS reliés par une ligne pointillée.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 60,
+        "w": 160,
+        "h": 100,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 60,
+        "w": 160,
+        "h": 100,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 115,
+        "text": "États-Unis",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 115,
+        "text": "URSS",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 110,
+        "x2": 280,
+        "y2": 110,
+        "color": "red",
+        "width": 3,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 90,
+        "text": "rivalité",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 195,
+        "text": "Guerre froide",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : rôle",
+     "statement": "Quel est le but principal de l'ONU ?",
+     "steps": [
+      {
+       "md": "L'ONU est fondée après la guerre."
+      },
+      {
+       "md": "Son premier objectif est la paix."
+      }
+     ],
+     "answer": "**Maintenir la paix et la sécurité**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : durée",
+     "statement": "Combien d'années sépare 1945 (ONU) de 1960 (Cameroun membre) ?",
+     "steps": [
+      {
+       "md": "On repère les deux dates."
+      },
+      {
+       "md": "On soustrait :",
+       "tex": "1960 - 1945 = 15"
+      }
+     ],
+     "answer": "**15 ans**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre l'ONU (1945) avec la SDN (après 1919) et l'OUA (1963).\n- Penser que la guerre froide est une guerre sans aucune tension : elle était très tendue.\n- Placer la chute du mur de Berlin en 1961 : c'est sa construction."
+    }
+   ],
+   "reviewNotes": [
+    "ONU : fondée en 1945, siège à New York, Conseil de sécurité (15 membres dont 5 permanents). Guerre froide : environ 1947-1991 ; mur de Berlin construit en 1961 et ouvert en 1989 ; dissolution de l'URSS en 1991. À faire relire."
+   ]
+  },
+  {
+   "id": "bepc-histoire-geo-oua-ua",
+   "title": "De l'OUA à l'Union africaine",
+   "minutes": 20,
+   "programRef": "3e — Histoire : l'OUA et l'Union africaine (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dater la création de l'OUA (1963) et de l'Union africaine (2002).",
+    "Expliquer leurs objectifs."
+   ],
+   "prerequisites": [
+    "bepc-histoire-geo-decolonisation"
+   ],
+   "exercises": [
+    "bepc-histoire-geo-oua-ua-01",
+    "bepc-histoire-geo-oua-ua-02",
+    "bepc-histoire-geo-oua-ua-03",
+    "bepc-histoire-geo-oua-ua-04",
+    "bepc-histoire-geo-oua-ua-05",
+    "bepc-histoire-geo-oua-ua-06"
+   ],
+   "selfCheck": [
+    "bepc-histoire-geo-oua-ua-q1",
+    "bepc-histoire-geo-oua-ua-q2",
+    "bepc-histoire-geo-oua-ua-q3",
+    "bepc-histoire-geo-oua-ua-q4",
+    "bepc-histoire-geo-oua-ua-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'OUA (1963)",
+     "md": "L'**Organisation de l'unité africaine** est créée le **25 mai 1963** à Addis-Abeba (Éthiopie). Ses buts : soutenir la décolonisation, défendre la souveraineté des États, favoriser l'unité et la coopération entre les pays africains."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'Union africaine (2002)",
+     "md": "En **2002**, l'OUA est remplacée par l'**Union africaine** (UA). Elle vise à renforcer l'intégration politique et économique, à promouvoir la paix, la démocratie et le développement. Son siège est à Addis-Abeba. Elle regroupe environ 55 États (ordre de grandeur)."
+    },
+    {
+     "type": "illustration",
+     "caption": "De l'OUA à l'UA.",
+     "alt": "Frise de 1955 à 2010 : OUA de 1963 à 2002, UA depuis 2002.",
+     "figure": {
+      "kind": "timeline",
+      "from": 1955,
+      "to": 2010,
+      "w": 560,
+      "h": 240,
+      "events": [
+       {
+        "year": 1963,
+        "label": "OUA"
+       },
+       {
+        "year": 2002,
+        "label": "UA"
+       }
+      ],
+      "periods": [
+       {
+        "from": 1963,
+        "to": 2002,
+        "label": "OUA",
+        "color": "lightorange"
+       },
+       {
+        "from": 2002,
+        "to": 2010,
+        "label": "UA",
+        "color": "lightgreen"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : durée",
+     "statement": "Combien d'années l'OUA a-t-elle existé (1963 à 2002) ?",
+     "steps": [
+      {
+       "md": "On repère les deux dates."
+      },
+      {
+       "md": "On soustrait :",
+       "tex": "2002 - 1963 = 39"
+      }
+     ],
+     "answer": "**39 ans**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lieu",
+     "statement": "Dans quelle ville se trouve le siège de l'Union africaine ?",
+     "steps": [
+      {
+       "md": "L'OUA est née à Addis-Abeba."
+      },
+      {
+       "md": "L'UA y a gardé son siège."
+      }
+     ],
+     "answer": "**Addis-Abeba**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que l'OUA est créée en 1960 : c'est 1963.\n- Penser que l'UA a été fondée en 1963 : c'est 2002.\n- Confondre l'UA (continent) et la CEMAC (région)."
+    }
+   ],
+   "reviewNotes": [
+    "OUA créée le 25 mai 1963 à Addis-Abeba ; Union africaine lancée en 2002 (Durban), après un acte constitutif adopté à Lomé en 2000. Siège de l'UA : Addis-Abeba. Nombre de membres non cité (environ 55)."
    ]
   }
  ],
  "exercises": [
   {
-   "id": "bepc-histoire-geo-hist-01",
    "kind": "mcq",
-   "points": 1,
-   "prompt": "En quelle année le Cameroun français devient-il indépendant ?",
+   "prompt": "Quelle organisation attribue des mandats après 1919 ?",
    "choices": [
-    "1960",
-    "1884",
-    "1961",
-    "1972"
+    "L'ONU",
+    "L'Union africaine",
+    "La CEMAC",
+    "La Société des Nations"
    ],
-   "answer": 0,
-   "explanation": "Le Cameroun français est devenu indépendant le 1er janvier 1960.",
-   "tier": "application",
-   "difficulty": 1,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC"
-  },
-  {
-   "id": "bepc-histoire-geo-hist-02",
-   "kind": "truefalse",
+   "answer": 3,
    "points": 1,
-   "prompt": "Vrai ou faux : la réunification du Cameroun date du 1er octobre 1961.",
-   "answer": true,
-   "explanation": "Le 1er octobre 1961, le Cameroun britannique du sud se joint au Cameroun indépendant : c'est la réunification.",
-   "tier": "application",
    "difficulty": 1,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC"
+   "explanation": "La SDN, avant l'ONU.",
+   "id": "bepc-histoire-geo-cameroun-colonial-01",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
   },
   {
-   "id": "bepc-histoire-geo-hist-03",
+   "kind": "numeric",
+   "prompt": "En quelle année la tutelle de l'ONU commence-t-elle ?",
+   "answer": 1946,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La tutelle remplace le mandat en 1946.",
+   "id": "bepc-histoire-geo-cameroun-colonial-02",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le Cameroun britannique était rattaché à l'administration du Nigeria.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il était administré avec le Nigeria voisin.",
+   "id": "bepc-histoire-geo-cameroun-colonial-03",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
    "kind": "matching",
-   "points": 2,
-   "prompt": "Associe chaque date à l'événement.",
+   "prompt": "Associe chaque date à son événement.",
    "pairs": [
     [
-     "1884",
-     "Le Cameroun devient un protectorat allemand"
+     "1916",
+     "partage franco-britannique"
     ],
     [
-     "1960",
-     "Indépendance du Cameroun français"
+     "1940",
+     "ralliement à la France libre"
     ],
     [
-     "1961",
-     "Réunification du Cameroun"
-    ],
-    [
-     "1972",
-     "Passage à l'État unitaire"
+     "1946",
+     "début de la tutelle ONU"
     ]
    ],
-   "explanation": "1884 : protectorat allemand ; 1960 : indépendance ; 1961 : réunification ; 1972 : référendum et passage à l'État unitaire.",
-   "tier": "application",
-   "difficulty": 1,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC"
-  },
-  {
-   "id": "bepc-histoire-geo-hist-04",
-   "kind": "numeric",
    "points": 2,
-   "prompt": "Combien d'années séparent le début du protectorat allemand (1884) de l'indépendance du Cameroun français (1960) ?",
-   "answer": 76,
-   "tolerance": 0,
-   "unit": "ans",
-   "explanation": "1960 − 1884 = 76 ans.",
-   "tier": "approfondissement",
    "difficulty": 2,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC",
-   "method": "Soustraire la date la plus ancienne de la plus récente.",
-   "mistakes": [
-    "Se tromper dans la soustraction : 1960 − 1884 = 76 et non 86."
-   ]
+   "explanation": "Trois repères de la période.",
+   "id": "bepc-histoire-geo-cameroun-colonial-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
   },
   {
-   "id": "bepc-histoire-geo-hist-05",
    "kind": "mcq",
-   "points": 1,
-   "prompt": "Qui a été le premier président du Cameroun indépendant ?",
+   "prompt": "Quel est l'effet d'une voie ferrée coloniale ?",
    "choices": [
-    "Paul Biya",
-    "Ahmadou Ahidjo",
-    "Ruben Um Nyobè",
-    "Rudolf Duala Manga Bell"
+    "Elle supprime les plantations",
+    "Elle abolit les impôts",
+    "Elle crée l'ONU",
+    "Elle facilite le transport des produits"
    ],
-   "answer": 1,
-   "explanation": "Ahmadou Ahidjo est le premier président de la République du Cameroun, à partir de 1960.",
-   "tier": "approfondissement",
+   "answer": 3,
+   "points": 1,
    "difficulty": 2,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC",
-   "review": true,
-   "reviewNote": "Fait connu ; vérifier la formulation attendue au programme."
+   "explanation": "Les voies ferrées servaient surtout à évacuer les produits vers le port.",
+   "id": "bepc-histoire-geo-cameroun-colonial-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
   },
   {
-   "id": "bepc-histoire-geo-hist-06",
-   "kind": "problem",
-   "prompt": "Lors de la fête nationale, une classe prépare une frise des grandes dates du Cameroun.",
-   "parts": [
-    {
-     "id": "bepc-histoire-geo-hist-06-a",
-     "kind": "mcq",
-     "points": 1,
-     "prompt": "Après la Première Guerre mondiale, qui administre le Cameroun sous le contrôle de la Société des Nations ?",
-     "choices": [
-      "L'Allemagne seule",
-      "Les États-Unis",
-      "La France et le Royaume-Uni",
-      "Le Nigeria"
-     ],
-     "answer": 2,
-     "explanation": "L'Allemagne perd le Cameroun : il est partagé entre la France et le Royaume-Uni, sous mandat de la Société des Nations."
-    },
-    {
-     "id": "bepc-histoire-geo-hist-06-b",
-     "kind": "mcq",
-     "points": 1,
-     "prompt": "Quelle date correspond à la réunification ?",
-     "choices": [
-      "1960",
-      "1946",
-      "1884",
-      "1961"
-     ],
-     "answer": 3,
-     "explanation": "La réunification a lieu en 1961 (1er octobre)."
-    },
-    {
-     "id": "bepc-histoire-geo-hist-06-c",
-     "kind": "truefalse",
-     "points": 1,
-     "prompt": "Vrai ou faux : l'indépendance (1960) précède la réunification (1961).",
-     "answer": true,
-     "explanation": "1960 vient avant 1961."
-    },
-    {
-     "id": "bepc-histoire-geo-hist-06-d",
-     "kind": "open",
-     "points": 2,
-     "prompt": "Explique en deux phrases la différence entre « indépendance » et « réunification ».",
-     "model": "L'indépendance, c'est la fin de la tutelle étrangère : un pays devient maître de ses décisions (1960 pour le Cameroun français). La réunification, c'est le rapprochement des deux parties du Cameroun, française et britannique, en un seul État (1961).",
-     "rubric": [
-      "1 point : définition correcte de l'indépendance.",
-      "1 point : définition correcte de la réunification."
-     ],
-     "explanation": "Un mot clé par définition : liberté, union."
-    }
+   "kind": "open",
+   "prompt": "Compare en cinq lignes le Cameroun français et le Cameroun britannique entre 1916 et 1945.",
+   "model": "Le Cameroun français couvrait la plus grande partie du territoire, avec Yaoundé comme centre administratif ; le Cameroun britannique, à l'ouest, était rattaché au Nigeria. Les deux étaient sous mandat de la SDN puis, en 1946, sous tutelle de l'ONU.",
+   "rubric": [
+    "Les deux administrations sont citées.",
+    "Le rattachement au Nigeria est mentionné.",
+    "Mandat et tutelle sont cités."
    ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-histoire-geo-cameroun-colonial-06",
    "tier": "examen",
-   "difficulty": 2,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC",
-   "method": "Replacer les dates sur une frise du plus ancien au plus récent.",
-   "mistakes": [
-    "Confondre 1960 et 1961."
-   ]
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
   },
   {
-   "id": "bepc-histoire-geo-hist-q1",
    "kind": "mcq",
-   "points": 1,
-   "prompt": "Quelle puissance a établi un protectorat sur le Cameroun en 1884 ?",
+   "prompt": "Quel pays administre la plus grande partie du Cameroun après 1916 ?",
    "choices": [
-    "L'Allemagne",
     "La France",
-    "Le Royaume-Uni",
+    "L'Allemagne",
+    "L'Espagne",
     "Le Portugal"
    ],
    "answer": 0,
-   "explanation": "Le Cameroun (Kamerun) devient un protectorat allemand en 1884.",
-   "tier": "autoeval",
+   "points": 1,
    "difficulty": 1,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC"
+   "explanation": "Partage de 1916.",
+   "id": "bepc-histoire-geo-cameroun-colonial-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
   },
   {
-   "id": "bepc-histoire-geo-hist-q2",
    "kind": "mcq",
-   "points": 1,
-   "prompt": "Quelle date marque l'indépendance du Cameroun français ?",
+   "prompt": "Qui dirige la France libre ?",
    "choices": [
-    "20 mai 1972",
-    "1er janvier 1960",
-    "11 février 1961",
-    "1er octobre 1961"
-   ],
-   "answer": 1,
-   "explanation": "Le 1er janvier 1960.",
-   "tier": "autoeval",
-   "difficulty": 1,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC"
-  },
-  {
-   "id": "bepc-histoire-geo-hist-q3",
-   "kind": "mcq",
-   "points": 1,
-   "prompt": "Quelle est la date de la réunification ?",
-   "choices": [
-    "1er janvier 1960",
-    "20 mai 1972",
-    "1er octobre 1961",
-    "1884"
+    "Victor Schoelcher",
+    "Nachtigal",
+    "Le général de Gaulle",
+    "Um Nyobè"
    ],
    "answer": 2,
-   "explanation": "La réunification date du 1er octobre 1961.",
-   "tier": "autoeval",
+   "points": 1,
    "difficulty": 1,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC"
+   "explanation": "Charles de Gaulle.",
+   "id": "bepc-histoire-geo-cameroun-colonial-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
   },
   {
-   "id": "bepc-histoire-geo-hist-q4",
    "kind": "mcq",
-   "points": 1,
-   "prompt": "Que se passe-t-il en 1972 ?",
+   "prompt": "Quand le Cameroun français rallie-t-il la France libre ?",
    "choices": [
-    "L'indépendance",
-    "La conférence de Berlin",
-    "La réunification",
-    "Un référendum instaure l'État unitaire"
+    "En 1884",
+    "En 1961",
+    "En 1940",
+    "En 1807"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Août 1940.",
+   "id": "bepc-histoire-geo-cameroun-colonial-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le mandat est confié par :",
+   "choices": [
+    "l'ONU",
+    "l'Allemagne",
+    "la Société des Nations",
+    "l'OUA"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "SDN.",
+   "id": "bepc-histoire-geo-cameroun-colonial-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "En 1946, la tutelle est un régime créé par :",
+   "choices": [
+    "la SDN",
+    "l'ONU",
+    "les chefs duala",
+    "la CEMAC"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Régime de l'ONU.",
+   "id": "bepc-histoire-geo-cameroun-colonial-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-cameroun-colonial",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel parti fondé en 1948 réclame l'indépendance ?",
+   "choices": [
+    "Le KNDP",
+    "Le CPDM",
+    "L'UPC",
+    "La CEMAC"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'UPC.",
+   "id": "bepc-histoire-geo-nationalisme-01",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "En quelle année l'UPC est-elle interdite ?",
+   "answer": 1955,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Interdite en 1955.",
+   "id": "bepc-histoire-geo-nationalisme-02",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel dirigeant de l'UPC meurt en 1958 ?",
+   "choices": [
+    "Félix Moumié",
+    "Njoya",
+    "Duala Manga Bell",
+    "Ruben Um Nyobè"
    ],
    "answer": 3,
-   "explanation": "Le 20 mai 1972, un référendum met en place un État unitaire.",
-   "tier": "autoeval",
-   "difficulty": 1,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC"
-  },
-  {
-   "id": "bepc-histoire-geo-hist-q5",
-   "kind": "mcq",
    "points": 1,
-   "prompt": "Qui administre le Cameroun après 1919 ?",
-   "choices": [
-    "La France et le Royaume-Uni",
-    "L'Allemagne",
-    "L'Espagne",
-    "L'Italie"
-   ],
-   "answer": 0,
-   "explanation": "Après la Première Guerre mondiale, le territoire est partagé entre la France et le Royaume-Uni.",
-   "tier": "autoeval",
    "difficulty": 1,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC"
+   "explanation": "Um Nyobè meurt en 1958.",
+   "id": "bepc-histoire-geo-nationalisme-03",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
   },
   {
-   "id": "bepc-histoire-geo-mock-hist",
+   "kind": "matching",
+   "prompt": "Associe chaque nom à son rôle.",
+   "pairs": [
+    [
+     "Um Nyobè",
+     "dirigeant de l'UPC"
+    ],
+    [
+     "Foncha",
+     "leader du KNDP"
+    ],
+    [
+     "Endeley",
+     "leader du KNC"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Figures de la période.",
+   "id": "bepc-histoire-geo-nationalisme-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le nationalisme camerounais existe seulement dans le Nord.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il concerne tout le pays.",
+   "id": "bepc-histoire-geo-nationalisme-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
    "kind": "problem",
-   "prompt": "Partie C. Une classe construit une frise de l'histoire du Cameroun.",
+   "prompt": "On étudie le nationalisme camerounais entre 1948 et 1960.",
    "parts": [
     {
-     "id": "bepc-histoire-geo-mock-hist-a",
      "kind": "mcq",
-     "points": 1,
-     "prompt": "En quelle année le Cameroun devient-il un protectorat allemand ?",
+     "prompt": "Que réclame l'UPC ?",
      "choices": [
-      "1884",
-      "1919",
-      "1960",
-      "1972"
+      "Le retour des Allemands",
+      "La traite",
+      "L'indépendance",
+      "Un empire"
      ],
-     "answer": 0,
-     "explanation": "Le protectorat allemand débute en 1884."
-    },
-    {
-     "id": "bepc-histoire-geo-mock-hist-b",
-     "kind": "matching",
-     "points": 2,
-     "prompt": "Associe chaque date à l'événement.",
-     "pairs": [
-      [
-       "1960",
-       "Indépendance du Cameroun français"
-      ],
-      [
-       "1961",
-       "Réunification"
-      ],
-      [
-       "1972",
-       "État unitaire"
-      ]
-     ],
-     "explanation": "Indépendance 1960, réunification 1961, État unitaire 1972."
-    },
-    {
-     "id": "bepc-histoire-geo-mock-hist-c",
-     "kind": "numeric",
+     "answer": 2,
      "points": 1,
-     "prompt": "Combien d'années séparent l'indépendance (1960) de l'État unitaire (1972) ?",
-     "answer": 12,
-     "tolerance": 0,
-     "unit": "ans",
-     "explanation": "1972 − 1960 = 12 ans."
+     "difficulty": 1,
+     "explanation": "Fin de la tutelle.",
+     "id": "bepc-histoire-geo-nationalisme-06-a"
     },
     {
-     "id": "bepc-histoire-geo-mock-hist-d",
      "kind": "open",
-     "points": 2,
-     "prompt": "Explique brièvement pourquoi le Cameroun a connu plusieurs puissances étrangères avant 1960.",
-     "model": "Le Cameroun fut d'abord un protectorat allemand (1884). Après la Première Guerre mondiale (1919), l'Allemagne perd ses colonies : le territoire est partagé entre la France et le Royaume-Uni, sous le contrôle de la Société des Nations.",
+     "prompt": "Explique en trois lignes pourquoi le nationalisme se développe après la Seconde Guerre mondiale.",
+     "model": "Après 1945, l'idée d'autodétermination progresse, la tutelle de l'ONU rappelle l'objectif d'autonomie et les Camerounais réclament plus de droits.",
      "rubric": [
-      "1 point : période allemande.",
-      "1 point : partage franco-britannique après la guerre."
+      "Contexte de 1945.",
+      "Rôle de la tutelle.",
+      "Revendication d'indépendance."
      ],
-     "explanation": "Raconter dans l'ordre : Allemagne, puis France et Royaume-Uni."
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-histoire-geo-nationalisme-06-b"
     }
    ],
-   "tier": "examen",
    "difficulty": 2,
-   "lesson": "bepc-histoire-geo-hist",
-   "source": "Exercice original, style BEPC",
-   "method": "Remettre les dates dans l'ordre."
+   "id": "bepc-histoire-geo-nationalisme-06",
+   "tier": "examen",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire UPC ?",
+   "choices": [
+    "Union pour la Paix du Congo",
+    "Union des populations du Cameroun",
+    "Union des paysans de la Côte",
+    "Union des pays de la CEMAC"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sigle.",
+   "id": "bepc-histoire-geo-nationalisme-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le KNDP est un parti du :",
+   "choices": [
+    "Cameroun britannique",
+    "Cameroun français",
+    "Gabon",
+    "Tchad"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dirigé par Foncha.",
+   "id": "bepc-histoire-geo-nationalisme-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui est secrétaire général de l'UPC ?",
+   "choices": [
+    "Ruben Um Nyobè",
+    "Ahmadou Ahidjo",
+    "Paul Biya",
+    "John Ngu Foncha"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Um Nyobè dirige l'UPC.",
+   "id": "bepc-histoire-geo-nationalisme-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'UPC naît en :",
+   "choices": [
+    "1948",
+    "1884",
+    "1960",
+    "1990"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avril 1948.",
+   "id": "bepc-histoire-geo-nationalisme-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le nationalisme réclame :",
+   "choices": [
+    "la colonisation",
+    "l'indépendance",
+    "l'esclavage",
+    "la guerre froide"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fin de la domination étrangère.",
+   "id": "bepc-histoire-geo-nationalisme-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-nationalisme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "En quelle année le Cameroun français devient-il indépendant ?",
+   "answer": 1960,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1er janvier 1960.",
+   "id": "bepc-histoire-geo-independance-reunification-01",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui est le premier président du Cameroun indépendant ?",
+   "choices": [
+    "Ahmadou Ahidjo",
+    "Paul Biya",
+    "Ruben Um Nyobè",
+    "John Ngu Foncha"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ahidjo.",
+   "id": "bepc-histoire-geo-independance-reunification-02",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le plébiscite de 1961 a eu lieu au Cameroun britannique.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il a permis de choisir entre Nigeria et Cameroun.",
+   "id": "bepc-histoire-geo-independance-reunification-03",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque date à son événement.",
+   "pairs": [
+    [
+     "1er janvier 1960",
+     "indépendance du Cameroun français"
+    ],
+    [
+     "11 février 1961",
+     "plébiscite"
+    ],
+    [
+     "1er octobre 1961",
+     "République fédérale"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Trois dates clés.",
+   "id": "bepc-histoire-geo-independance-reunification-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où la partie nord du Cameroun britannique a-t-elle choisi de rester ?",
+   "choices": [
+    "Au Tchad",
+    "Au Gabon",
+    "Dans le Nigeria",
+    "En France"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Elle a rejoint le Nigeria.",
+   "id": "bepc-histoire-geo-independance-reunification-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Document : « Le 1er janvier 1960, un pays proclame son indépendance. Le 1er octobre 1961, deux territoires s'unissent. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel pays proclame son indépendance en 1960 ?",
+     "choices": [
+      "Le Gabon",
+      "Le Tchad",
+      "Le Nigeria",
+      "La République du Cameroun"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Cameroun français devenu République du Cameroun.",
+     "id": "bepc-histoire-geo-independance-reunification-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que se passe-t-il le 1er octobre 1961 ?",
+     "model": "La République du Cameroun et le Cameroun méridional (ex-britannique) forment la République fédérale du Cameroun.",
+     "rubric": [
+      "Deux territoires cités.",
+      "La Fédération est nommée."
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-histoire-geo-independance-reunification-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-histoire-geo-independance-reunification-06",
+   "tier": "examen",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand le Cameroun français devient-il indépendant ?",
+   "choices": [
+    "Le 1er octobre 1961",
+    "Le 20 mai 1972",
+    "Le 11 février 1961",
+    "Le 1er janvier 1960"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Indépendance de 1960.",
+   "id": "bepc-histoire-geo-independance-reunification-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle date correspond à la réunification ?",
+   "choices": [
+    "1er octobre 1961",
+    "1er janvier 1960",
+    "1884",
+    "1990"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fédération.",
+   "id": "bepc-histoire-geo-independance-reunification-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un plébiscite est :",
+   "choices": [
+    "une guerre",
+    "une loi",
+    "un traité commercial",
+    "un vote sur une question précise"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Consultation populaire.",
+   "id": "bepc-histoire-geo-independance-reunification-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le Cameroun fédéral compte :",
+   "choices": [
+    "deux États fédérés",
+    "dix États",
+    "un seul État",
+    "trois états"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Cameroun oriental et occidental.",
+   "id": "bepc-histoire-geo-independance-reunification-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui préside le Cameroun en 1960 ?",
+   "choices": [
+    "Njoya",
+    "Paul Biya",
+    "Gustav Nachtigal",
+    "Ahmadou Ahidjo"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Premier président.",
+   "id": "bepc-histoire-geo-independance-reunification-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-independance-reunification",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "En quelle année la République unie du Cameroun est-elle proclamée ?",
+   "answer": 1972,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Après le référendum du 20 mai 1972.",
+   "id": "bepc-histoire-geo-construction-etat-01",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que permet le multipartisme ?",
+   "choices": [
+    "Un seul parti",
+    "Pas d'élection",
+    "Plusieurs partis politiques",
+    "La monarchie"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pluralité de partis.",
+   "id": "bepc-histoire-geo-construction-etat-02",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : en 1961, le Cameroun devient une fédération.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "République fédérale.",
+   "id": "bepc-histoire-geo-construction-etat-03",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque date à son événement.",
+   "pairs": [
+    [
+     "1961",
+     "République fédérale"
+    ],
+    [
+     "1972",
+     "République unie"
+    ],
+    [
+     "1984",
+     "République du Cameroun"
+    ],
+    [
+     "1996",
+     "nouvelle Constitution"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Étapes.",
+   "id": "bepc-histoire-geo-construction-etat-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la date de la fête nationale actuelle liée à 1972 ?",
+   "choices": [
+    "Le 20 mai",
+    "Le 1er janvier",
+    "Le 11 février",
+    "Le 5 juin"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La fête nationale du 20 mai commémore le référendum de 1972.",
+   "id": "bepc-histoire-geo-construction-etat-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Résume en cinq lignes l'évolution des institutions du Cameroun entre 1961 et 1996.",
+   "model": "Fédération en 1961 ; État unitaire en 1972 ; arrivée de Paul Biya en 1982 ; nom République du Cameroun en 1984 ; multipartisme en 1990 ; Constitution de 1996.",
+   "rubric": [
+    "Quatre étapes au moins.",
+    "Dates correctes.",
+    "Vocabulaire exact."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-histoire-geo-construction-etat-06",
+   "tier": "examen",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie un État unitaire ?",
+   "choices": [
+    "Plusieurs États indépendants",
+    "Aucun gouvernement",
+    "Un seul gouvernement pour tout le pays",
+    "Une monarchie absolue"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un seul pouvoir central.",
+   "id": "bepc-histoire-geo-construction-etat-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand revient le multipartisme ?",
+   "choices": [
+    "1961",
+    "1972",
+    "1884",
+    "Fin 1990"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Années 1990.",
+   "id": "bepc-histoire-geo-construction-etat-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle Constitution est adoptée en 1996 ?",
+   "choices": [
+    "La Constitution du 18 janvier 1996",
+    "Celle de 1884",
+    "Celle de 1960 uniquement",
+    "Celle de l'ONU"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Constitution de 1996.",
+   "id": "bepc-histoire-geo-construction-etat-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel président arrive au pouvoir en novembre 1982 ?",
+   "choices": [
+    "Ahmadou Ahidjo",
+    "Paul Biya",
+    "Um Nyobè",
+    "Njoya"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Novembre 1982.",
+   "id": "bepc-histoire-geo-construction-etat-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le référendum de 1972 abolit :",
+   "choices": [
+    "la Fédération",
+    "l'ONU",
+    "la Constitution de 1996",
+    "les écoles"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Passage à l'État unitaire.",
+   "id": "bepc-histoire-geo-construction-etat-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-construction-etat",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "En quelle année la Seconde Guerre mondiale commence-t-elle ?",
+   "answer": 1939,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1939.",
+   "id": "bepc-histoire-geo-guerres-mondiales-01",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle organisation naît à la fin de la Seconde Guerre mondiale ?",
+   "choices": [
+    "La SDN",
+    "L'OUA",
+    "La CEMAC",
+    "L'ONU"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "ONU en 1945.",
+   "id": "bepc-histoire-geo-guerres-mondiales-02",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la Première Guerre mondiale se termine en 1918.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Armistice du 11 novembre 1918.",
+   "id": "bepc-histoire-geo-guerres-mondiales-03",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque guerre à ses dates.",
+   "pairs": [
+    [
+     "Première Guerre mondiale",
+     "1914-1918"
+    ],
+    [
+     "Seconde Guerre mondiale",
+     "1939-1945"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Dates des guerres.",
+   "id": "bepc-histoire-geo-guerres-mondiales-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pays perd ses colonies en 1919 ?",
+   "choices": [
+    "La France",
+    "Le Royaume-Uni",
+    "L'Allemagne",
+    "La Russie"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Versailles.",
+   "id": "bepc-histoire-geo-guerres-mondiales-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Compare en cinq lignes les deux guerres mondiales : dates, adversaires, conséquences.",
+   "model": "Première : 1914-1918, Alliés contre Allemagne et Autriche-Hongrie, perte des colonies allemandes. Seconde : 1939-1945, Alliés contre Axe, création de l'ONU.",
+   "rubric": [
+    "Dates des deux guerres.",
+    "Adversaires cités.",
+    "Une conséquence pour chacune."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-histoire-geo-guerres-mondiales-06",
+   "tier": "examen",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La Première Guerre mondiale débute en :",
+   "choices": [
+    "1939",
+    "1884",
+    "1914",
+    "1960"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1914.",
+   "id": "bepc-histoire-geo-guerres-mondiales-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'armistice de la Première Guerre est signé le :",
+   "choices": [
+    "8 mars 1945",
+    "20 mai 1972",
+    "11 novembre 1918",
+    "1er janvier 1960"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Armistice.",
+   "id": "bepc-histoire-geo-guerres-mondiales-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'Axe regroupe :",
+   "choices": [
+    "la France et le Royaume-Uni",
+    "l'Allemagne, l'Italie et le Japon",
+    "le Cameroun et le Gabon",
+    "l'ONU"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pays de l'Axe.",
+   "id": "bepc-histoire-geo-guerres-mondiales-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel événement ouvre la Seconde Guerre mondiale ?",
+   "choices": [
+    "La chute du mur de Berlin",
+    "L'invasion de la Pologne",
+    "La conférence de Berlin",
+    "La réunification"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1939.",
+   "id": "bepc-histoire-geo-guerres-mondiales-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'Afrique a participé à la guerre en fournissant :",
+   "choices": [
+    "des soldats et des ressources",
+    "des armes nucléaires",
+    "des satellites",
+    "des chars"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Contribution.",
+   "id": "bepc-histoire-geo-guerres-mondiales-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-guerres-mondiales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "En quelle année le Ghana devient-il indépendant ?",
+   "answer": 1957,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1957.",
+   "id": "bepc-histoire-geo-decolonisation-01",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel dirigeant mène le Ghana à l'indépendance ?",
+   "choices": [
+    "Ahmadou Ahidjo",
+    "Kwame Nkrumah",
+    "Nelson Mandela",
+    "Charles de Gaulle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nkrumah.",
+   "id": "bepc-histoire-geo-decolonisation-02",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : 1960 est appelée l'« année de l'Afrique ».",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nombreuses indépendances.",
+   "id": "bepc-histoire-geo-decolonisation-03",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque date à son fait.",
+   "pairs": [
+    [
+     "1957",
+     "indépendance du Ghana"
+    ],
+    [
+     "1960",
+     "année de l'Afrique"
+    ],
+    [
+     "1962",
+     "indépendance de l'Algérie"
+    ],
+    [
+     "1994",
+     "fin de l'apartheid"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Repères.",
+   "id": "bepc-histoire-geo-decolonisation-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que l'apartheid ?",
+   "choices": [
+    "Un régime de ségrégation raciale en Afrique du Sud",
+    "Un traité commercial",
+    "Un fleuve",
+    "Une langue"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Régime aboli en 1994.",
+   "id": "bepc-histoire-geo-decolonisation-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique en cinq lignes les causes de la décolonisation après 1945.",
+   "model": "La Seconde Guerre mondiale affaiblit les puissances coloniales ; l'ONU soutient le droit des peuples à disposer d'eux-mêmes ; des élites africaines et des mouvements nationalistes réclament l'indépendance.",
+   "rubric": [
+    "Affaiblissement des puissances.",
+    "Rôle de l'ONU.",
+    "Mouvements nationalistes."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-histoire-geo-decolonisation-06",
+   "tier": "examen",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Premier pays d'Afrique noire indépendant :",
+   "choices": [
+    "Le Cameroun",
+    "Le Gabon",
+    "Le Ghana",
+    "Le Nigeria"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1957.",
+   "id": "bepc-histoire-geo-decolonisation-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'année 1960 est associée à :",
+   "choices": [
+    "la traite",
+    "la fin de l'esclavage",
+    "de nombreuses indépendances africaines",
+    "la guerre de 1914"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Année de l'Afrique.",
+   "id": "bepc-histoire-geo-decolonisation-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pays devient indépendant en 1962 ?",
+   "choices": [
+    "Le Ghana",
+    "L'Algérie",
+    "Le Cameroun",
+    "Le Tchad"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1962.",
+   "id": "bepc-histoire-geo-decolonisation-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La décolonisation est :",
+   "choices": [
+    "la création de colonies",
+    "le processus d'indépendance des colonies",
+    "la guerre froide",
+    "une organisation commerciale"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition.",
+   "id": "bepc-histoire-geo-decolonisation-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui devient président d'Afrique du Sud en 1994 ?",
+   "choices": [
+    "Kwame Nkrumah",
+    "Ruben Um Nyobè",
+    "Nelson Mandela",
+    "Ahmadou Ahidjo"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fin de l'apartheid.",
+   "id": "bepc-histoire-geo-decolonisation-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-decolonisation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "En quelle année l'ONU est-elle fondée ?",
+   "answer": 1945,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1945.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-01",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe de l'ONU comprend cinq membres permanents ?",
+   "choices": [
+    "L'Assemblée générale",
+    "Le Parlement",
+    "Le Conseil de sécurité",
+    "La Cour suprême"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le Conseil de sécurité.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-02",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la guerre froide oppose surtout les États-Unis et l'URSS.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux superpuissances.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-03",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque organisation à son rôle.",
+   "pairs": [
+    [
+     "ONU",
+     "paix et sécurité dans le monde"
+    ],
+    [
+     "SDN",
+     "organisation d'avant 1945"
+    ],
+    [
+     "OUA",
+     "unité des États africains"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Organisations internationales.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel événement symbolise la fin de la guerre froide ?",
+   "choices": [
+    "La traite négrière",
+    "Le traité de 1884",
+    "L'indépendance du Ghana",
+    "La chute du mur de Berlin en 1989"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Chute du mur.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Présente l'ONU en cinq lignes : date, buts, organes.",
+   "model": "L'ONU est fondée en 1945 pour maintenir la paix, défendre les droits de l'homme et favoriser le développement. Organes : Assemblée générale, Conseil de sécurité, Secrétaire général. Siège à New York.",
+   "rubric": [
+    "Date.",
+    "Buts.",
+    "Au moins deux organes."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-06",
+   "tier": "examen",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Siège de l'ONU :",
+   "choices": [
+    "Paris",
+    "Yaoundé",
+    "New York",
+    "Addis-Abeba"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "New York.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le Cameroun est membre de l'ONU depuis :",
+   "choices": [
+    "1884",
+    "1960",
+    "1948",
+    "1963"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Après l'indépendance.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La guerre froide dure environ :",
+   "choices": [
+    "de 1914 à 1918",
+    "de 1947 à 1991",
+    "de 1884 à 1916",
+    "de 1960 à 1961"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Rivalité EU-URSS.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le mur de Berlin est ouvert en :",
+   "choices": [
+    "1961",
+    "1945",
+    "1991",
+    "1989"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chute en 1989.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui dirige l'ONU au quotidien ?",
+   "choices": [
+    "Le Pape",
+    "Le Secrétaire général",
+    "Le maire",
+    "Le chef de canton"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Secrétaire général.",
+   "id": "bepc-histoire-geo-onu-guerre-froide-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-onu-guerre-froide",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "En quelle année l'Union africaine est-elle créée ?",
+   "answer": 2002,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2002.",
+   "id": "bepc-histoire-geo-oua-ua-01",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans quelle ville est née l'OUA ?",
+   "choices": [
+    "Yaoundé",
+    "Paris",
+    "Lagos",
+    "Addis-Abeba"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Addis-Abeba.",
+   "id": "bepc-histoire-geo-oua-ua-02",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'UA a remplacé l'OUA.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "En 2002.",
+   "id": "bepc-histoire-geo-oua-ua-03",
+   "tier": "application",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque sigle à son sens.",
+   "pairs": [
+    [
+     "OUA",
+     "Organisation de l'unité africaine"
+    ],
+    [
+     "UA",
+     "Union africaine"
+    ],
+    [
+     "ONU",
+     "Organisation des Nations unies"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Sigles.",
+   "id": "bepc-histoire-geo-oua-ua-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel est un objectif de l'UA ?",
+   "choices": [
+    "Promouvoir la paix et le développement",
+    "Rétablir l'esclavage",
+    "Dissoudre les États",
+    "Interdire les écoles"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Paix, démocratie, développement.",
+   "id": "bepc-histoire-geo-oua-ua-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Présente en cinq lignes l'OUA et l'UA.",
+   "model": "L'OUA est créée en 1963 à Addis-Abeba pour l'unité africaine et la décolonisation ; l'UA lui succède en 2002 et vise l'intégration, la paix et le développement.",
+   "rubric": [
+    "Dates exactes.",
+    "Objectifs.",
+    "Lien OUA-UA."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-histoire-geo-oua-ua-06",
+   "tier": "examen",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'OUA est créée en :",
+   "choices": [
+    "1960",
+    "1884",
+    "1963",
+    "2002"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "25 mai 1963.",
+   "id": "bepc-histoire-geo-oua-ua-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'UA remplace l'OUA en :",
+   "choices": [
+    "1963",
+    "1990",
+    "2002",
+    "1916"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2002.",
+   "id": "bepc-histoire-geo-oua-ua-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Siège de l'UA :",
+   "choices": [
+    "New York",
+    "Douala",
+    "Genève",
+    "Addis-Abeba"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Éthiopie.",
+   "id": "bepc-histoire-geo-oua-ua-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'UA cherche surtout à :",
+   "choices": [
+    "rétablir les colonies",
+    "supprimer l'ONU",
+    "fermer les frontières",
+    "renforcer l'intégration africaine"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Intégration.",
+   "id": "bepc-histoire-geo-oua-ua-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les deux organisations concernent :",
+   "choices": [
+    "l'Afrique",
+    "l'Europe seulement",
+    "l'Amérique",
+    "l'Antarctique"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Continent africain.",
+   "id": "bepc-histoire-geo-oua-ua-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-histoire-geo-oua-ua",
+   "source": "Exercice original, rédigé pour CastBridge"
   }
  ]
 }

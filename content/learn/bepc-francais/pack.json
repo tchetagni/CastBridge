@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "bepc-francais",
-  "version": 1,
+  "version": 2,
   "title": "Français — BEPC",
   "description": "Grammaire de la phrase complexe, voix active et passive, discours rapporté, compréhension de texte et expression écrite : fiches « l'essentiel », exemples résolus pas à pas, exercices corrigés et épreuve blanche.",
   "lang": "fr",
@@ -10,23 +10,133 @@
   "subject": "francais",
   "exam": "BEPC",
   "programRef": "Programme officiel de français de la classe de 3e (MINESEC) — à vérifier sur le texte officiel",
-  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
   "status": "draft",
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-01",
   "chapters": [
-    {"id": "bepc-francais-phrase", "title": "La phrase complexe : les propositions subordonnées", "order": 1, "programRef": "3e — Grammaire : la phrase complexe (subordonnées relative, complétive, circonstancielles) — à vérifier sur le texte officiel"},
-    {"id": "bepc-francais-voix", "title": "La voix active et la voix passive", "order": 2, "programRef": "3e — Grammaire : les voix du verbe — à vérifier sur le texte officiel"},
-    {"id": "bepc-francais-discours", "title": "Le discours direct et le discours indirect", "order": 3, "programRef": "3e — Grammaire : le discours rapporté et la concordance des temps — à vérifier sur le texte officiel"},
-    {"id": "bepc-francais-expression", "title": "Compréhension de texte et expression écrite", "order": 4, "programRef": "3e — Lecture méthodique et expression écrite (narration, lettre, argumentation) — à vérifier sur le texte officiel"}
+    {
+      "id": "bepc-francais-phrase",
+      "title": "La phrase complexe : les propositions subordonnées",
+      "order": 1,
+      "programRef": "3e — Grammaire : la phrase complexe (subordonnées relative, complétive, circonstancielles) — à vérifier sur le texte officiel"
+    },
+    {
+      "id": "bepc-francais-voix",
+      "title": "La voix active et la voix passive",
+      "order": 2,
+      "programRef": "3e — Grammaire : les voix du verbe — à vérifier sur le texte officiel"
+    },
+    {
+      "id": "bepc-francais-discours",
+      "title": "Le discours direct et le discours indirect",
+      "order": 3,
+      "programRef": "3e — Grammaire : le discours rapporté et la concordance des temps — à vérifier sur le texte officiel"
+    },
+    {
+      "id": "bepc-francais-expression",
+      "title": "Compréhension de texte et expression écrite",
+      "order": 4,
+      "programRef": "3e — Lecture méthodique et expression écrite (narration, lettre, argumentation) — à vérifier sur le texte officiel"
+    },
+    {
+      "id": "bepc-francais-figures",
+      "title": "Figures de style et registres",
+      "order": 5,
+      "programRef": "3e — Lecture : figures de style, registres littéraires (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-francais-lecture",
+      "title": "Lecture et étude de textes",
+      "order": 6,
+      "programRef": "3e — Lecture : texte argumentatif, compréhension de texte, poème (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-francais-methodes",
+      "title": "Résumé, contraction et discussion",
+      "order": 7,
+      "programRef": "3e — Expression : résumé, contraction de texte, discussion (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-francais-langue",
+      "title": "Langue : conjugaison, orthographe et vocabulaire",
+      "order": 8,
+      "programRef": "3e — Étude de la langue : conjugaison de révision, orthographe, dictée, vocabulaire (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-francais-poesie",
+      "title": "Lecture de poèmes",
+      "order": 9,
+      "programRef": "3e — Lecture : le poème, versification (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-francais-redaction",
+      "title": "Rédaction : sujets d'imagination et de réflexion",
+      "order": 10,
+      "programRef": "3e — Expression écrite : sujets d'imagination, sujets de réflexion (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-francais-blanc2",
+      "title": "Épreuve blanche 2",
+      "order": 11,
+      "programRef": "3e — Entraînement au BEPC : épreuve de français (à vérifier sur le texte officiel)"
+    }
   ],
   "mockExams": [
-    {"id": "bepc-francais-blanc-1", "title": "Épreuve blanche de français — BEPC", "minutes": 120,
-     "instructions": "Épreuve d'entraînement originale en trois parties : compréhension de texte (8 points), maîtrise de la langue (6 points), expression écrite (6 points). Durée indicative : 2 heures. Le format, le barème et la durée de l'épreuve officielle de français du BEPC sont à vérifier sur les textes officiels. Réponds par des phrases complètes et soigne l'orthographe.",
-     "outOf": 20,
-     "sections": [
-       {"title": "Compréhension de texte (8 points)", "exercises": ["bepc-francais-eb-1"]},
-       {"title": "Maîtrise de la langue (6 points)", "exercises": ["bepc-francais-eb-2"]},
-       {"title": "Expression écrite (6 points)", "exercises": ["bepc-francais-eb-3"]}
-     ]}
+    {
+      "id": "bepc-francais-blanc-1",
+      "title": "Épreuve blanche de français — BEPC",
+      "minutes": 120,
+      "instructions": "Épreuve d'entraînement originale en trois parties : compréhension de texte (8 points), maîtrise de la langue (6 points), expression écrite (6 points). Durée indicative : 2 heures. Le format, le barème et la durée de l'épreuve officielle de français du BEPC sont à vérifier sur les textes officiels. Réponds par des phrases complètes et soigne l'orthographe.",
+      "outOf": 20,
+      "sections": [
+        {
+          "title": "Compréhension de texte (8 points)",
+          "exercises": [
+            "bepc-francais-eb-1"
+          ]
+        },
+        {
+          "title": "Maîtrise de la langue (6 points)",
+          "exercises": [
+            "bepc-francais-eb-2"
+          ]
+        },
+        {
+          "title": "Expression écrite (6 points)",
+          "exercises": [
+            "bepc-francais-eb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bepc-francais-blanc-2",
+      "title": "Épreuve blanche de français n° 2 — BEPC",
+      "minutes": 120,
+      "instructions": "Deuxième épreuve d'entraînement originale en trois parties : compréhension de texte (8 points), maîtrise de la langue (6 points), expression écrite (6 points). Durée indicative : 2 heures. Format, barème et durée de l'épreuve officielle à vérifier sur les textes officiels. Réponds par des phrases complètes.",
+      "outOf": 20,
+      "sections": [
+        {
+          "title": "Compréhension de texte (8 points)",
+          "exercises": [
+            "bepc-francais-epreuve-blanche-2-01"
+          ]
+        },
+        {
+          "title": "Maîtrise de la langue (6 points)",
+          "exercises": [
+            "bepc-francais-epreuve-blanche-2-02"
+          ]
+        },
+        {
+          "title": "Expression écrite (6 points)",
+          "exercises": [
+            "bepc-francais-epreuve-blanche-2-03"
+          ]
+        }
+      ]
+    }
   ]
 }

@@ -1,0 +1,1290 @@
+{
+ "chapter": "6e-informatique-fichiers",
+ "lessons": [
+  {
+   "id": "6e-informatique-fichiers-dossiers",
+   "title": "Fichiers et dossiers : organiser son travail",
+   "minutes": 25,
+   "programRef": "Programme d'informatique de 6e (MINESEC) — découpage exact à vérifier sur le texte officiel — gestion des fichiers et dossiers",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer un fichier d'un dossier et lire une arborescence.",
+    "Créer, renommer, copier, déplacer et supprimer un fichier ou un dossier."
+   ],
+   "prerequisites": [
+    "6e-informatique-demarrer-bureau"
+   ],
+   "exercises": [
+    "6e-informatique-fichiers-dossiers-01",
+    "6e-informatique-fichiers-dossiers-02",
+    "6e-informatique-fichiers-dossiers-03",
+    "6e-informatique-fichiers-dossiers-04",
+    "6e-informatique-fichiers-dossiers-05",
+    "6e-informatique-fichiers-dossiers-06"
+   ],
+   "selfCheck": [
+    "6e-informatique-fichiers-dossiers-q1",
+    "6e-informatique-fichiers-dossiers-q2",
+    "6e-informatique-fichiers-dossiers-q3",
+    "6e-informatique-fichiers-dossiers-q4",
+    "6e-informatique-fichiers-dossiers-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fichier, dossier, extension",
+     "md": "Un **fichier** contient une information (texte, image, son…). Un **dossier** est un « tiroir » qui range des fichiers et d'autres dossiers. Le nom d'un fichier se termine par une **extension** (après le point) qui indique son type : par exemple « lettre.txt » est un fichier texte."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une arborescence : un dossier principal contient des dossiers, qui contiennent des fichiers.",
+     "alt": "Un arbre de dossiers : Mes documents contient Français, Maths et Photos ; Français contient exposé.txt et Maths contient devoir.txt.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 10,
+        "w": 120,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 36,
+        "text": "Mes documents",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 50,
+        "x2": 240,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 80,
+        "x2": 400,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 80,
+        "x2": 80,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 400,
+        "y1": 80,
+        "x2": 400,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 80,
+        "x2": 240,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 100,
+        "w": 120,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 126,
+        "text": "Français",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 100,
+        "w": 120,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 126,
+        "text": "Maths",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 100,
+        "w": 120,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 126,
+        "text": "Photos",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 140,
+        "x2": 80,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 140,
+        "x2": 240,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 170,
+        "w": 120,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 196,
+        "text": "exposé.txt",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 170,
+        "w": 120,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 196,
+        "text": "devoir.txt",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 240,
+        "text": "Jaune : dossiers — Blanc : fichiers",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les opérations de base",
+     "md": "- **Créer** un dossier (menu du clic droit, « Nouveau »).\n- **Renommer** : changer le nom sans toucher au contenu (garder l'extension).\n- **Copier** : le fichier existe alors en deux endroits.\n- **Déplacer** : le fichier change de place (il n'est plus à l'ancien endroit).\n- **Supprimer** : le fichier va à la corbeille, d'où on peut le restaurer tant qu'elle n'est pas vidée."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire l'arborescence",
+     "statement": "D'après la figure, dans quel dossier se trouve « devoir.txt » ?",
+     "steps": [
+      {
+       "md": "On part de « Mes documents »."
+      },
+      {
+       "md": "La branche du milieu conduit au dossier « Maths », qui contient devoir.txt."
+      }
+     ],
+     "answer": "**Dans « Maths », lui-même dans « Mes documents ».**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : copier ou déplacer",
+     "statement": "Nkeng veut garder « exposé.txt » dans « Français » et en avoir aussi une version dans « Photos ». Que fait-il ?",
+     "steps": [
+      {
+       "md": "Il veut le fichier aux deux endroits : il ne faut pas le retirer de « Français »."
+      },
+      {
+       "md": "C'est donc une **copie**, puis un collage dans « Photos »."
+      }
+     ],
+     "answer": "**Il copie le fichier puis le colle dans l'autre dossier.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Bien nommer ses fichiers",
+     "md": "- Choisis un nom clair : « expose-histoire.txt » vaut mieux que « nouveau1 ».\n- Évite les noms identiques dans un même dossier.\n- Range par matière ou par thème : un dossier par matière, avec des sous-dossiers si besoin."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Effacer l'extension en renommant : le fichier ne s'ouvre plus avec le bon logiciel.\n- Enregistrer tout sur le bureau : on ne retrouve plus rien.\n- Croire que « déplacer » et « copier » sont identiques : déplacer ne laisse qu'un seul exemplaire."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 6e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Le cours reste générique (pas de capture d'écran, pas de nom de gestionnaire de fichiers) : à adapter au système installé dans l'établissement."
+   ]
+  },
+  {
+   "id": "6e-informatique-unites-information",
+   "title": "Mesurer l'information : octet, ko, Mo, Go",
+   "minutes": 25,
+   "programRef": "Programme d'informatique de 6e (MINESEC) — découpage exact à vérifier sur le texte officiel — unités de mesure de l'information",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Connaître les unités octet, kilo-octet, méga-octet et giga-octet.",
+    "Convertir ces unités et comparer la taille de fichiers avec la capacité d'un support."
+   ],
+   "prerequisites": [
+    "6e-informatique-fichiers-dossiers"
+   ],
+   "exercises": [
+    "6e-informatique-unites-information-01",
+    "6e-informatique-unites-information-02",
+    "6e-informatique-unites-information-03",
+    "6e-informatique-unites-information-04",
+    "6e-informatique-unites-information-05",
+    "6e-informatique-unites-information-06"
+   ],
+   "selfCheck": [
+    "6e-informatique-unites-information-q1",
+    "6e-informatique-unites-information-q2",
+    "6e-informatique-unites-information-q3",
+    "6e-informatique-unites-information-q4",
+    "6e-informatique-unites-information-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'octet",
+     "md": "L'**octet** (symbole **o**) est l'unité de base pour mesurer la quantité d'information stockée. Un octet suffit à mémoriser un caractère simple, par exemple une lettre. Un octet est formé de 8 **bits** (un bit vaut 0 ou 1)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Les multiples de l'octet",
+     "md": "**1 ko** (kilo-octet) = 1 000 octets.\n**1 Mo** (méga-octet) = 1 000 ko.\n**1 Go** (giga-octet) = 1 000 Mo.\nÀ chaque étape, on multiplie par 1 000 pour passer à l'unité supérieure en sens inverse (de Go vers Mo, de Mo vers ko…)."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'échelle des unités de mesure de l'information.",
+     "alt": "Quatre cases octet, ko, Mo, Go reliées par des flèches, chacune multipliant par 1000.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 40,
+        "w": 110,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 410,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 72,
+        "text": "octet",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 72,
+        "text": "ko",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 72,
+        "text": "Mo",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 460,
+        "y": 72,
+        "text": "Go",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 65,
+        "x2": 140,
+        "y2": 65,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 65,
+        "x2": 270,
+        "y2": 65,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 65,
+        "x2": 410,
+        "y2": 65,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 25,
+        "text": "×1000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 25,
+        "text": "×1000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 25,
+        "text": "×1000",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 115,
+        "text": "Chaque unité vaut 1 000 fois la précédente.",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ordres de grandeur",
+     "md": "- Un court message écrit : quelques centaines d'octets.\n- Une page de texte : quelques ko.\n- Une photo : de l'ordre de quelques Mo.\n- Un film : plusieurs centaines de Mo, souvent des Go.\n- Une clé USB ou un disque : on parle de Go."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : convertir",
+     "statement": "Convertis 3 Mo en ko, puis 4 000 Mo en Go.",
+     "steps": [
+      {
+       "md": "De Mo à ko, on multiplie par 1 000 :",
+       "tex": "3 \\times 1000 = 3000"
+      },
+      {
+       "md": "De Mo à Go, on divise par 1 000 :",
+       "tex": "4000 \\div 1000 = 4"
+      }
+     ],
+     "answer": "**3 Mo = 3 000 ko ; 4 000 Mo = 4 Go.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la clé est-elle assez grande ?",
+     "statement": "Mballa veut copier 3 vidéos de 700 Mo chacune sur une clé de 2 Go. Y a-t-il assez de place ?",
+     "steps": [
+      {
+       "md": "Total des vidéos :",
+       "tex": "3 \\times 700 = 2100 \\text{ Mo}"
+      },
+      {
+       "md": "La clé : 2 Go = 2 000 Mo.",
+       "tex": "2100 > 2000"
+      }
+     ],
+     "answer": "**Non : 2 100 Mo dépassent les 2 000 Mo de la clé.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre l'**octet** (o) et le **bit** (b) : un octet = 8 bits.\n- Se tromper de sens : pour passer à une unité plus petite on multiplie, à une unité plus grande on divise.\n- Comparer des unités différentes sans convertir (par exemple 500 Mo et 1 Go)."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 6e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Convention : on utilise 1 ko = 1000 octets (système décimal). Les systèmes d'exploitation affichent parfois 1 Ko = 1024 octets ; à confirmer avec le programme officiel. Le bit (8 bits = 1 octet) est cité en passant."
+   ]
+  },
+  {
+   "id": "6e-informatique-sauvegarde-supports",
+   "title": "Enregistrer, sauvegarder et protéger ses fichiers",
+   "minutes": 20,
+   "programRef": "Programme d'informatique de 6e (MINESEC) — découpage exact à vérifier sur le texte officiel — enregistrement, sauvegarde et supports de stockage",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer enregistrer et sauvegarder, et citer des supports de stockage.",
+    "Appliquer les bons gestes pour ne pas perdre son travail (virus, coupure de courant, clé USB)."
+   ],
+   "prerequisites": [
+    "6e-informatique-fichiers-dossiers"
+   ],
+   "exercises": [
+    "6e-informatique-sauvegarde-supports-01",
+    "6e-informatique-sauvegarde-supports-02",
+    "6e-informatique-sauvegarde-supports-03",
+    "6e-informatique-sauvegarde-supports-04",
+    "6e-informatique-sauvegarde-supports-05",
+    "6e-informatique-sauvegarde-supports-06"
+   ],
+   "selfCheck": [
+    "6e-informatique-sauvegarde-supports-q1",
+    "6e-informatique-sauvegarde-supports-q2",
+    "6e-informatique-sauvegarde-supports-q3",
+    "6e-informatique-sauvegarde-supports-q4",
+    "6e-informatique-sauvegarde-supports-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Enregistrer et sauvegarder",
+     "md": "**Enregistrer** : écrire le fichier sur le disque pour ne pas le perdre en fermant le logiciel ou en éteignant. **Sauvegarder** : faire une **copie de sécurité** à un autre endroit (clé USB, autre disque…), pour pouvoir retrouver son travail si l'original disparaît."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les supports de stockage",
+     "md": "- **Disque dur** de l'ordinateur (intérieur).\n- **Clé USB** : petite, transportable, mais facile à perdre.\n- **Disque dur externe** : grande capacité.\n- **Carte mémoire** (téléphone, appareil photo).\nAucun support n'est éternel : un seul exemplaire, c'est un risque."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le bon réflexe",
+     "statement": "Amina a fini son exposé de 15 pages. Que doit-elle faire avant de quitter le cybercafé ?",
+     "steps": [
+      {
+       "md": "Enregistrer le fichier sur le disque avec un nom clair."
+      },
+      {
+       "md": "En faire une copie sur sa clé USB (sauvegarde)."
+      }
+     ],
+     "answer": "**Enregistrer puis sauvegarder une copie sur la clé USB.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : où est la copie de sécurité ?",
+     "statement": "Boris garde son devoir uniquement sur le disque de l'ordinateur du collège. Est-il protégé ?",
+     "steps": [
+      {
+       "md": "Le fichier n'existe qu'à un seul endroit."
+      },
+      {
+       "md": "Si le disque tombe en panne ou si l'ordinateur est réinitialisé, tout est perdu."
+      }
+     ],
+     "answer": "**Non : il lui faut une deuxième copie ailleurs.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Virus et coupures",
+     "md": "Un **virus** est un programme malveillant qui peut abîmer ou voler des fichiers. Il se transmet souvent par des clés USB ou des fichiers inconnus. Ne branche pas une clé inconnue sans prudence. Pense aussi aux **coupures de courant** : enregistre souvent (toutes les quelques minutes) et utilise la commande « Éjecter » avant de retirer une clé."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Retirer la clé USB pendant la copie : le fichier peut être abîmé.\n- Penser que la corbeille est une sauvegarde.\n- Attendre la fin du travail pour enregistrer une première fois."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 6e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Les capacités citées (clé 8 Go…) sont des ordres de grandeur d'exemples, pas des données officielles."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'un dossier ?",
+   "choices": [
+    "Un type de logiciel",
+    "Un conteneur qui range des fichiers et d'autres dossiers",
+    "Une extension de fichier",
+    "Un périphérique de sortie"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dossier sert à ranger.",
+   "id": "6e-informatique-fichiers-dossiers-01",
+   "tier": "application",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : après un déplacement, le fichier est toujours présent à l'ancien emplacement.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un déplacement retire le fichier de l'ancien endroit ; c'est la copie qui laisse deux exemplaires.",
+   "id": "6e-informatique-fichiers-dossiers-02",
+   "tier": "application",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque opération à son effet.",
+   "pairs": [
+    [
+     "Copier",
+     "Obtenir un second exemplaire"
+    ],
+    [
+     "Déplacer",
+     "Changer de place"
+    ],
+    [
+     "Renommer",
+     "Changer le nom"
+    ],
+    [
+     "Supprimer",
+     "Envoyer à la corbeille"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Quatre opérations de base de gestion des fichiers.",
+   "id": "6e-informatique-fichiers-dossiers-03",
+   "tier": "application",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'extension du fichier « resume.txt » ?",
+   "choices": [
+    "resume",
+    "resume.",
+    "Le dossier parent",
+    "txt"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'extension est ce qui suit le dernier point : txt.",
+   "id": "6e-informatique-fichiers-dossiers-04",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour ranger les devoirs de maths de 6e, quel chemin est le plus logique ?",
+   "choices": [
+    "Bureau / divers / truc1",
+    "Mes documents / photos de famille",
+    "Mes documents / 6e / Maths / devoirs",
+    "Corbeille / maths"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Un rangement par classe et par matière permet de tout retrouver.",
+   "id": "6e-informatique-fichiers-dossiers-05",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina a quatre fichiers : « carte.png », « poeme.txt », « calcul.txt », « plan.png ». Elle veut créer deux dossiers : « Textes » et « Images ».",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quels fichiers vont dans « Textes » ?",
+     "choices": [
+      "carte.png et plan.png",
+      "carte.png et poeme.txt",
+      "plan.png et calcul.txt",
+      "poeme.txt et calcul.txt"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les fichiers .txt sont des textes ; les .png sont des images.",
+     "id": "6e-informatique-fichiers-dossiers-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique pourquoi garder l'extension en renommant un fichier est important.",
+     "model": "L'extension indique le type du fichier et donc le logiciel qui doit l'ouvrir ; sans elle, il peut ne plus s'ouvrir correctement.",
+     "rubric": [
+      "Rôle de l'extension",
+      "Conséquence si on la supprime"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-informatique-fichiers-dossiers-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-informatique-fichiers-dossiers-06",
+   "tier": "examen",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'appelle la partie du nom après le point (« .txt ») ?",
+   "choices": [
+    "Le dossier",
+    "L'extension",
+    "Le raccourci",
+    "La fenêtre"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle indique le type du fichier.",
+   "id": "6e-informatique-fichiers-dossiers-q1",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où va un fichier supprimé ?",
+   "choices": [
+    "Sur la clé USB",
+    "Dans l'écran",
+    "À la corbeille",
+    "Chez le voisin"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il peut être restauré tant que la corbeille n'est pas vidée.",
+   "id": "6e-informatique-fichiers-dossiers-q2",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une arborescence sert à…",
+   "choices": [
+    "Imprimer en couleur",
+    "Choisir un mot de passe",
+    "Régler la luminosité",
+    "Représenter l'organisation des dossiers et fichiers"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle montre quels éléments sont rangés dans quels dossiers.",
+   "id": "6e-informatique-fichiers-dossiers-q3",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien d'exemplaires du fichier existent après une copie ?",
+   "choices": [
+    "Un",
+    "Deux",
+    "Zéro",
+    "Dix"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'original reste, et la copie s'ajoute.",
+   "id": "6e-informatique-fichiers-dossiers-q4",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nom de fichier est le plus utile ?",
+   "choices": [
+    "nouveau",
+    "expose-svt-6e.txt",
+    "fichier1",
+    "aaaa"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un nom précis permet de retrouver le contenu.",
+   "id": "6e-informatique-fichiers-dossiers-q5",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-fichiers-dossiers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien d'octets y a-t-il dans 1 ko (convention du cours) ?",
+   "choices": [
+    "10",
+    "100",
+    "1 000 000",
+    "1 000"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un kilo-octet vaut mille octets.",
+   "id": "6e-informatique-unites-information-01",
+   "tier": "application",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 5 Mo en ko.",
+   "answer": 5000,
+   "unit": "ko",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 Mo = 1 000 ko, donc 5 × 1 000 = 5 000 ko.",
+   "method": "Pour aller vers une unité plus petite, on multiplie par 1 000.",
+   "id": "6e-informatique-unites-information-02",
+   "tier": "application",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 7 000 ko en Mo.",
+   "answer": 7,
+   "unit": "Mo",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 000 ko = 1 Mo, donc 7 000 ÷ 1 000 = 7 Mo.",
+   "id": "6e-informatique-unites-information-03",
+   "tier": "application",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une clé USB de 8 Go contient déjà 5 Go de fichiers. Combien de Mo restent-ils libres ?",
+   "answer": 3000,
+   "unit": "Mo",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "8 − 5 = 3 Go libres, soit 3 × 1 000 = 3 000 Mo.",
+   "id": "6e-informatique-unites-information-04",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une photo pèse 4 Mo. Combien de photos entrent sur une carte de 2 Go ?",
+   "answer": 500,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "2 Go = 2 000 Mo ; 2 000 ÷ 4 = 500 photos.",
+   "method": "Convertir d'abord la capacité dans la même unité que la photo.",
+   "id": "6e-informatique-unites-information-05",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Au cybercafé, Boris veut enregistrer sur une clé de 4 Go : un diaporama de 250 Mo, un film de 1,5 Go et des photos pour un total de 600 Mo.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le total en Mo ? (1,5 Go = 1 500 Mo)",
+     "answer": 2350,
+     "unit": "Mo",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "250 + 1 500 + 600 = 2 350 Mo.",
+     "id": "6e-informatique-unites-information-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Tout rentre-t-il sur la clé de 4 Go (4 000 Mo) ?",
+     "choices": [
+      "Non",
+      "Seulement le film",
+      "On ne peut pas savoir",
+      "Oui"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "2 350 Mo < 4 000 Mo : il reste 1 650 Mo.",
+     "id": "6e-informatique-unites-information-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de Mo restent libres ?",
+     "answer": 1650,
+     "unit": "Mo",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "4 000 − 2 350 = 1 650 Mo.",
+     "id": "6e-informatique-unites-information-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-informatique-unites-information-06",
+   "tier": "examen",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de bits dans un octet ?",
+   "choices": [
+    "2",
+    "10",
+    "8",
+    "1 000"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un octet est un groupe de 8 bits.",
+   "id": "6e-informatique-unites-information-q1",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle unité est la plus grande ?",
+   "choices": [
+    "Le ko",
+    "Le Mo",
+    "L'octet",
+    "Le Go"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Go > Mo > ko > octet.",
+   "id": "6e-informatique-unites-information-q2",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 Go est égal à…",
+   "choices": [
+    "100 Mo",
+    "10 ko",
+    "1 000 Mo",
+    "1 000 octets"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dans la convention du cours, 1 Go = 1 000 Mo.",
+   "id": "6e-informatique-unites-information-q3",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle taille est la plus probable pour une page de texte simple ?",
+   "choices": [
+    "Quelques ko",
+    "Plusieurs Go",
+    "Quelques centaines de Go",
+    "Moins d'un octet"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un texte occupe très peu de place.",
+   "id": "6e-informatique-unites-information-q4",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour convertir des Mo en ko, on…",
+   "choices": [
+    "Divise par 1 000",
+    "Ajoute 1 000",
+    "Ne change rien",
+    "Multiplie par 1 000"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le ko est 1 000 fois plus petit que le Mo.",
+   "id": "6e-informatique-unites-information-q5",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-unites-information",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'une sauvegarde ?",
+   "choices": [
+    "Une copie de sécurité faite à un autre endroit",
+    "Un virus",
+    "Un logiciel de dessin",
+    "Un périphérique de sortie"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La sauvegarde protège le travail en cas de perte de l'original.",
+   "id": "6e-informatique-sauvegarde-supports-01",
+   "tier": "application",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la corbeille est une vraie sauvegarde.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La corbeille contient des fichiers supprimés ; quand elle est vidée, ils disparaissent.",
+   "id": "6e-informatique-sauvegarde-supports-02",
+   "tier": "application",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque support à une caractéristique.",
+   "pairs": [
+    [
+     "Clé USB",
+     "Petite et transportable"
+    ],
+    [
+     "Disque dur externe",
+     "Grande capacité"
+    ],
+    [
+     "Carte mémoire",
+     "Dans un téléphone ou un appareil photo"
+    ],
+    [
+     "Disque dur interne",
+     "Dans l'unité centrale"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Quatre supports de stockage courants.",
+   "id": "6e-informatique-sauvegarde-supports-03",
+   "tier": "application",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi enregistre-t-on souvent pendant qu'on travaille ?",
+   "choices": [
+    "Pour limiter la perte en cas de coupure de courant",
+    "Pour que l'écran reste allumé",
+    "Pour accélérer l'imprimante",
+    "Pour effacer les anciens fichiers"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le travail non enregistré disparaît à la coupure.",
+   "id": "6e-informatique-sauvegarde-supports-04",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avant de retirer une clé USB, que fait-on ?",
+   "choices": [
+    "On l'arrache tout de suite",
+    "On redémarre l'imprimante",
+    "On utilise la commande pour l'éjecter",
+    "On vide la corbeille"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'éjection termine proprement les écritures en cours.",
+   "id": "6e-informatique-sauvegarde-supports-05",
+   "tier": "approfondissement",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng prépare un exposé pour la semaine prochaine. Il travaille au cybercafé, n'a qu'un seul fichier sur l'ordinateur loué et le gardera quelques jours.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel risque principal court-il ?",
+     "choices": [
+      "Que l'écran se casse seul",
+      "Que le clavier change de langue",
+      "Perdre son travail si le fichier n'existe qu'à un endroit",
+      "Rien du tout"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Sans copie, une panne ou un effacement par un autre utilisateur détruit le travail.",
+     "id": "6e-informatique-sauvegarde-supports-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose un plan de sauvegarde en trois actions.",
+     "model": "Enregistrer souvent ; copier le fichier sur une clé USB (ou envoyer à soi-même) ; garder une deuxième copie ailleurs et éjecter la clé proprement.",
+     "rubric": [
+      "Enregistrer régulièrement",
+      "Faire une copie sur un autre support",
+      "Une précaution supplémentaire (éjection, 2e copie)"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-informatique-sauvegarde-supports-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-informatique-sauvegarde-supports-06",
+   "tier": "examen",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la meilleure habitude pour un travail important ?",
+   "choices": [
+    "Ne rien enregistrer",
+    "Garder au moins deux copies sur deux supports",
+    "Tout laisser sur le bureau",
+    "Utiliser un seul support"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux exemplaires réduisent le risque de perte.",
+   "id": "6e-informatique-sauvegarde-supports-q1",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un virus est…",
+   "choices": [
+    "Un type de clavier",
+    "Une unité de mesure",
+    "Un programme malveillant",
+    "Une extension de fichier"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il peut abîmer ou voler des fichiers.",
+   "id": "6e-informatique-sauvegarde-supports-q2",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la fonction principale d'une clé USB ?",
+   "choices": [
+    "Stocker et transporter des fichiers",
+    "Afficher des images",
+    "Imprimer",
+    "Taper du texte"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est un support de stockage amovible.",
+   "id": "6e-informatique-sauvegarde-supports-q3",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que doit-on éviter avec une clé USB inconnue ?",
+   "choices": [
+    "L'ouvrir sans précaution sur sa machine",
+    "La ranger",
+    "La nommer",
+    "La regarder"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle peut contenir un virus.",
+   "id": "6e-informatique-sauvegarde-supports-q4",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert d'enregistrer toutes les quelques minutes ?",
+   "choices": [
+    "À gagner de la mémoire vive",
+    "À éteindre l'écran",
+    "À chauffer le processeur",
+    "À ne pas tout perdre en cas de coupure"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est un réflexe de sécurité.",
+   "id": "6e-informatique-sauvegarde-supports-q5",
+   "tier": "autoeval",
+   "lesson": "6e-informatique-sauvegarde-supports",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

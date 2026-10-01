@@ -1,0 +1,881 @@
+{
+ "chapter": "5e-pct-eau-air",
+ "lessons": [
+  {
+   "id": "5e-pct-eau-potable",
+   "title": "L'eau : propriétés et traitement",
+   "minutes": 25,
+   "programRef": "5e — L'eau : propriétés, solutions, traitement et potabilité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer des propriétés de l'eau.",
+    "Décrire les étapes du traitement de l'eau potable.",
+    "Connaître les règles d'hygiène de l'eau."
+   ],
+   "prerequisites": [
+    "5e-pct-separation"
+   ],
+   "exercises": [
+    "5e-pct-eau-potable-01",
+    "5e-pct-eau-potable-02",
+    "5e-pct-eau-potable-03",
+    "5e-pct-eau-potable-04",
+    "5e-pct-eau-potable-05",
+    "5e-pct-eau-potable-06"
+   ],
+   "selfCheck": [
+    "5e-pct-eau-potable-q1",
+    "5e-pct-eau-potable-q2",
+    "5e-pct-eau-potable-q3",
+    "5e-pct-eau-potable-q4",
+    "5e-pct-eau-potable-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Eau pure et eau potable",
+     "md": "L'**eau pure** (distillée) ne contient que de l'eau. L'**eau potable** peut être bue sans danger : elle est limpide, sans microbes dangereux, et contient de petites quantités de sels minéraux. Une eau claire n'est pas forcément potable."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelques propriétés de l'eau",
+     "md": "- Incolore, inodore, sans saveur (eau pure).\n- Fusion à 0 °C, ébullition à 100 °C (niveau de la mer).\n- Masse de 1 kg pour 1 L d'eau.\n- Excellent solvant : de nombreuses substances s'y dissolvent.\n- Elle prend la forme du récipient et sa surface libre est horizontale."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Étapes du traitement",
+     "md": "1. **Dégrillage** : retirer les gros déchets.\n2. **Décantation** (parfois avec un produit qui rassemble les impuretés).\n3. **Filtration** sur sable.\n4. **Désinfection** (chlore) pour détruire les microbes.\n5. **Distribution** par les canalisations."
+    },
+    {
+     "type": "illustration",
+     "caption": "Chaîne de traitement simplifiée de l'eau potable.",
+     "alt": "Cinq cases reliées par des flèches : dégrillage, décantation, filtration, chlore, robinet.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 90,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 115,
+        "y": 40,
+        "w": 90,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 40,
+        "w": 90,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 325,
+        "y": 40,
+        "w": 90,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 40,
+        "w": 80,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 70,
+        "text": "dégrillage",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 70,
+        "text": "décantation",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 70,
+        "text": "filtration",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 70,
+        "text": "chlore",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 470,
+        "y": 70,
+        "text": "robinet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 65,
+        "x2": 115,
+        "y2": 65,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 65,
+        "x2": 220,
+        "y2": 65,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 65,
+        "x2": 325,
+        "y2": 65,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 415,
+        "y1": 65,
+        "x2": 430,
+        "y2": 65,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 20,
+        "text": "eau brute → eau potable",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : eau d'un puits",
+     "statement": "L'eau d'un puits est claire. Peut-on la boire sans précaution ?",
+     "steps": [
+      {
+       "md": "Claire ne veut pas dire sans microbes."
+      },
+      {
+       "md": "On la fait bouillir (quelques minutes) ou on la traite avant de la boire."
+      }
+     ],
+     "answer": "**Non : il faut la traiter (par exemple l'ébullition)**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : masse de l'eau",
+     "statement": "Quelle est la masse de 5 L d'eau pure ? (1 L d'eau a une masse d'environ 1 kg)",
+     "steps": [
+      {
+       "md": "1 L d'eau pèse environ 1 kg."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "5 \\times 1 = 5\\ \\text{kg}"
+      }
+     ],
+     "answer": "**Environ 5 kg**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre eau potable et eau pure.\n- Penser qu'une eau claire est sans danger.\n- Stocker l'eau potable dans un récipient sale.\n- Oublier que l'eau stagnante peut transmettre des maladies (choléra, fièvre typhoïde)."
+    }
+   ],
+   "reviewNotes": [
+    "Étapes du traitement présentées de façon générale ; la filière réelle dépend de la station.",
+    "Pas de dosage de chlore indiqué volontairement."
+   ]
+  },
+  {
+   "id": "5e-pct-air-combustion",
+   "title": "L'air et les combustions",
+   "minutes": 30,
+   "programRef": "5e — L'air ; les combustions (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Donner la composition de l'air.",
+    "Décrire une combustion (triangle du feu) et ses produits.",
+    "Connaître les règles de sécurité."
+   ],
+   "prerequisites": [
+    "5e-pct-melanges-corps-purs"
+   ],
+   "exercises": [
+    "5e-pct-air-combustion-01",
+    "5e-pct-air-combustion-02",
+    "5e-pct-air-combustion-03",
+    "5e-pct-air-combustion-04",
+    "5e-pct-air-combustion-05",
+    "5e-pct-air-combustion-06"
+   ],
+   "selfCheck": [
+    "5e-pct-air-combustion-q1",
+    "5e-pct-air-combustion-q2",
+    "5e-pct-air-combustion-q3",
+    "5e-pct-air-combustion-q4",
+    "5e-pct-air-combustion-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'air est un mélange",
+     "md": "L'air est un **mélange de gaz**, homogène : environ **78 %** de diazote (« azote »), **21 %** de dioxygène et **1 %** d'autres gaz (dont un peu de dioxyde de carbone et de vapeur d'eau). Seul le **dioxygène** entretient les combustions et la respiration."
+    },
+    {
+     "type": "illustration",
+     "caption": "Composition de l'air en volume (valeurs arrondies).",
+     "alt": "Diagramme en barres : diazote 78 %, dioxygène 21 %, autres gaz 1 %.",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Diazote",
+        "value": 78,
+        "color": "blue"
+       },
+       {
+        "label": "Dioxygène",
+        "value": 21,
+        "color": "orange"
+       },
+       {
+        "label": "Autres",
+        "value": 1,
+        "color": "grey"
+       }
+      ],
+      "unit": "%"
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La combustion",
+     "md": "Une combustion est une transformation où un **combustible** (bois, charbon, gaz butane) brûle avec le **comburant** (le dioxygène de l'air). Il faut aussi de la **chaleur** : c'est le **triangle du feu**. Si l'un des trois manque, le feu s'éteint. Une combustion produit surtout du **dioxyde de carbone** et de la **vapeur d'eau**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le triangle du feu.",
+     "alt": "Un triangle dont les sommets portent chaleur, combustible et comburant.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         30,
+         60,
+         230,
+         340,
+         230
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "chaleur",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 255,
+        "text": "combustible",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 255,
+        "text": "comburant",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 185,
+        "text": "feu",
+        "size": 20,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 210,
+        "text": "3 conditions réunies",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Combustion incomplète : danger",
+     "md": "Quand le dioxygène manque (pièce fermée, braises dans une chambre), il se forme du **monoxyde de carbone**, gaz **toxique, inodore et invisible**. Ne jamais faire brûler du charbon ou du bois dans une pièce fermée. Un feu d'huile ne s'éteint pas avec de l'eau : on le couvre."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : éteindre une bougie",
+     "statement": "On pose un verre renversé sur une bougie allumée. Elle s'éteint au bout de quelques secondes. Pourquoi ?",
+     "steps": [
+      {
+       "md": "Dans le verre fermé, le dioxygène est peu à peu consommé."
+      },
+      {
+       "md": "Sans comburant, le triangle du feu est incomplet : la flamme s'éteint."
+      }
+     ],
+     "answer": "**Le dioxygène de l'air enfermé est épuisé**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : volume de dioxygène",
+     "statement": "Un volume d'air de 5 L contient environ 21 % de dioxygène. Quel volume de dioxygène environ ?",
+     "steps": [
+      {
+       "md": "21 % de 5 L : on multiplie 5 par 21 puis on divise par 100."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "5 \\times \\frac{21}{100} = 1{,}05\\ \\text{L}"
+      }
+     ],
+     "answer": "**Environ 1 L**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'air est du dioxygène pur : le dioxygène n'en représente qu'un cinquième environ.\n- Penser que le feu brûle sans air.\n- Jeter de l'eau sur un feu d'huile ou sur un appareil électrique.\n- Dire que le feu « consomme » la matière : elle est transformée en d'autres substances."
+    }
+   ],
+   "reviewNotes": [
+    "Composition arrondie : environ 78 % de diazote, 21 % de dioxygène, 1 % d'autres gaz.",
+    "L'expérience de la bougie sous cloche est une démonstration du professeur (flamme) : ne pas la faire seul.",
+    "Les formules chimiques sont réservées à la 4e : seuls les noms sont utilisés ici."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle étape retire les microbes ?",
+   "choices": [
+    "Le dégrillage",
+    "La désinfection au chlore",
+    "La décantation",
+    "La distribution"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le chlore détruit les microbes.",
+   "id": "5e-pct-eau-potable-01",
+   "tier": "application",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la masse de 3 L d'eau (en kg) ?",
+   "answer": 3,
+   "unit": "kg",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 L d'eau a une masse de 1 kg : 3 L → 3 kg.",
+   "id": "5e-pct-eau-potable-02",
+   "tier": "application",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une eau limpide est toujours potable.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle peut contenir des microbes invisibles.",
+   "id": "5e-pct-eau-potable-03",
+   "tier": "application",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi dit-on que l'eau est un bon solvant ?",
+   "choices": [
+    "Beaucoup de substances s'y dissolvent",
+    "Elle ne bout jamais",
+    "Elle est toujours solide",
+    "Elle est plus légère que l'air"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Sel, sucre, etc. se dissolvent dans l'eau.",
+   "id": "5e-pct-eau-potable-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe l'étape à son rôle.",
+   "pairs": [
+    [
+     "dégrillage",
+     "retirer les gros déchets"
+    ],
+    [
+     "décantation",
+     "déposer les impuretés"
+    ],
+    [
+     "filtration",
+     "retenir les fines particules"
+    ],
+    [
+     "chlore",
+     "détruire les microbes"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque étape a un rôle propre.",
+   "id": "5e-pct-eau-potable-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un village, Amina doit rendre potable l'eau d'un ruisseau trouble.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Propose une succession d'étapes réalisables à la maison pour améliorer cette eau.",
+     "model": "Laisser décanter, filtrer avec un tissu propre et du sable, puis faire bouillir quelques minutes avant de boire.",
+     "rubric": [
+      "Décantation",
+      "Filtration",
+      "Ébullition pour tuer les microbes"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-pct-eau-potable-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Pourquoi garder l'eau potable dans un récipient propre et couvert ?",
+     "choices": [
+      "Pour éviter une nouvelle contamination",
+      "Pour qu'elle devienne plus chaude",
+      "Pour la rendre pure",
+      "Pour qu'elle bouille"
+     ],
+     "answer": 0,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Un récipient sale recontamine l'eau.",
+     "id": "5e-pct-eau-potable-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-eau-potable-06",
+   "tier": "examen",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'eau potable est :",
+   "choices": [
+    "une eau qu'on peut boire sans danger",
+    "une eau forcément pure",
+    "une eau chaude",
+    "une eau salée"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition de l'eau potable.",
+   "id": "5e-pct-eau-potable-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la première étape du traitement ?",
+   "choices": [
+    "La désinfection",
+    "Le dégrillage",
+    "La distribution",
+    "La liquéfaction"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On retire d'abord les gros déchets.",
+   "id": "5e-pct-eau-potable-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle de la filtration sur sable ?",
+   "choices": [
+    "Retenir de fines particules",
+    "Ajouter du sel",
+    "Chauffer l'eau",
+    "Congeler l'eau"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le sable retient les particules en suspension.",
+   "id": "5e-pct-eau-potable-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle maladie peut être transmise par une eau contaminée ?",
+   "choices": [
+    "La fracture",
+    "Le rhume des foins",
+    "La carie solaire",
+    "Le choléra"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le choléra est une maladie hydrique.",
+   "id": "5e-pct-eau-potable-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La masse d'un litre d'eau est d'environ :",
+   "choices": [
+    "10 g",
+    "100 g",
+    "1 kg",
+    "10 kg"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 L d'eau ≈ 1 kg.",
+   "id": "5e-pct-eau-potable-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-eau-potable",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel gaz est le plus abondant dans l'air ?",
+   "choices": [
+    "Le dioxygène",
+    "Le dioxyde de carbone",
+    "Le diazote",
+    "L'hydrogène"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Environ 78 % de diazote.",
+   "id": "5e-pct-air-combustion-01",
+   "tier": "application",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le comburant d'une combustion dans l'air ?",
+   "choices": [
+    "Le dioxygène",
+    "Le bois",
+    "La chaleur",
+    "Le diazote"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le comburant est le dioxygène.",
+   "id": "5e-pct-air-combustion-02",
+   "tier": "application",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel pourcentage environ de l'air est du dioxygène ?",
+   "answer": 21,
+   "tolerance": 1,
+   "unit": "%",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Environ 21 % de dioxygène.",
+   "id": "5e-pct-air-combustion-03",
+   "tier": "application",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une pièce contient 200 m³ d'air. Quel volume de dioxygène environ (en m³) ? (21 %)",
+   "answer": 42,
+   "tolerance": 0.5,
+   "unit": "m³",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "200 × 21/100 = 42 m³.",
+   "id": "5e-pct-air-combustion-04",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment éteindre un feu d'huile dans une poêle ?",
+   "choices": [
+    "Jeter de l'eau",
+    "Souffler fort",
+    "Le couvrir avec un couvercle",
+    "Ajouter de l'huile"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On prive le feu de dioxygène ; l'eau ferait éclabousser l'huile enflammée.",
+   "id": "5e-pct-air-combustion-05",
+   "tier": "approfondissement",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris veut dormir dans une chambre fermée avec un petit foyer de charbon allumé pour se réchauffer.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Pourquoi est-ce dangereux ?",
+     "choices": [
+      "Le charbon devient liquide",
+      "Le dioxygène devient toxique",
+      "Il peut se former du monoxyde de carbone toxique",
+      "L'air disparaît instantanément"
+     ],
+     "answer": 2,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "La combustion incomplète produit du monoxyde de carbone.",
+     "id": "5e-pct-air-combustion-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que conseilles-tu à Boris ?",
+     "model": "Ne jamais faire brûler du charbon dans une pièce fermée : sortir le foyer, aérer, utiliser d'autres moyens de chauffage ou une bonne ventilation.",
+     "rubric": [
+      "Interdire le foyer dans la chambre",
+      "Parler d'aération ou de ventilation"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-pct-air-combustion-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-pct-air-combustion-06",
+   "tier": "examen",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle proportion de dioxygène dans l'air environ ?",
+   "choices": [
+    "La moitié",
+    "Un cinquième",
+    "Les trois quarts",
+    "Un centième"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "21 % ≈ 1/5.",
+   "id": "5e-pct-air-combustion-q1",
+   "tier": "autoeval",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quels sont les trois éléments du triangle du feu ?",
+   "choices": [
+    "Eau, sel, sable",
+    "Bois, eau, glace",
+    "Combustible, comburant, chaleur",
+    "Air, huile, fumée"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut les trois pour qu'un feu brûle.",
+   "id": "5e-pct-air-combustion-q2",
+   "tier": "autoeval",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel produit principal d'une combustion complète trouble l'eau de chaux ?",
+   "choices": [
+    "Le diazote",
+    "Le dioxyde de carbone",
+    "Le dioxygène",
+    "L'eau"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dioxyde de carbone trouble l'eau de chaux.",
+   "id": "5e-pct-air-combustion-q3",
+   "tier": "autoeval",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faire si la bougie est couverte par un verre ?",
+   "choices": [
+    "Elle brille plus fort",
+    "Elle fond et brûle sans air",
+    "Elle s'éteint faute de dioxygène",
+    "Rien ne change"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dioxygène s'épuise.",
+   "id": "5e-pct-air-combustion-q4",
+   "tier": "autoeval",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le monoxyde de carbone est :",
+   "choices": [
+    "inoffensif",
+    "rouge",
+    "liquide",
+    "toxique et inodore"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ne le sent pas : danger.",
+   "id": "5e-pct-air-combustion-q5",
+   "tier": "autoeval",
+   "lesson": "5e-pct-air-combustion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

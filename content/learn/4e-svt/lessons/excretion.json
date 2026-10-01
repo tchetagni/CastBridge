@@ -1,0 +1,443 @@
+{
+ "chapter": "4e-svt-excretion",
+ "lessons": [
+  {
+   "id": "4e-svt-excretion",
+   "title": "L'excrétion : reins, peau et poumons",
+   "minutes": 25,
+   "programRef": "4e — Excrétion (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir l'excrétion.",
+    "Décrire l'appareil urinaire et la formation de l'urine.",
+    "Citer les organes excréteurs et ce qu'ils éliminent."
+   ],
+   "prerequisites": [
+    "4e-svt-circulation"
+   ],
+   "exercises": [
+    "4e-svt-excretion-01",
+    "4e-svt-excretion-02",
+    "4e-svt-excretion-03",
+    "4e-svt-excretion-04",
+    "4e-svt-excretion-05",
+    "4e-svt-excretion-06"
+   ],
+   "selfCheck": [
+    "4e-svt-excretion-q1",
+    "4e-svt-excretion-q2",
+    "4e-svt-excretion-q3",
+    "4e-svt-excretion-q4",
+    "4e-svt-excretion-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Excrétion",
+     "md": "L'**excrétion** est l'élimination hors du corps des déchets produits par les cellules (urée, dioxyde de carbone, excès d'eau et de sels). Ne pas confondre avec la défécation, qui élimine les restes non digérés."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les organes excréteurs",
+     "md": "- **Les reins** : filtrent le sang et fabriquent l'**urine** (eau, urée, sels).\n- **Les poumons** : éliminent le dioxyde de carbone et de la vapeur d'eau.\n- **La peau** : élimine de la sueur (eau, sels, un peu d'urée) et aide à régler la température."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'appareil urinaire simplifié.",
+     "alt": "Suite : reins, uretères, vessie, urètre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 300,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 120,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 32.0,
+        "text": "Reins (2)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 44,
+        "x2": 210,
+        "y2": 72,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 72,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 94.0,
+        "text": "Uretères",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 106,
+        "x2": 210,
+        "y2": 134,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 134,
+        "w": 120,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 156.0,
+        "text": "Vessie",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 168,
+        "x2": 210,
+        "y2": 196,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 196,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 218.0,
+        "text": "Urètre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 260,
+        "text": "Urine éliminée à l'extérieur",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le trajet de l'urine",
+     "statement": "Donne l'ordre des organes traversés par l'urine.",
+     "steps": [
+      {
+       "md": "Le sang est filtré dans les reins."
+      },
+      {
+       "md": "L'urine descend par les uretères."
+      },
+      {
+       "md": "Elle est stockée dans la vessie puis éliminée par l'urètre."
+      }
+     ],
+     "answer": "**Reins → uretères → vessie → urètre.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : bilan d'eau",
+     "statement": "Par forte chaleur, une personne transpire beaucoup et urine peu. Pourquoi ?",
+     "steps": [
+      {
+       "md": "La sueur élimine de l'eau."
+      },
+      {
+       "md": "Pour garder l'équilibre en eau, les reins éliminent moins d'eau : l'urine est moins abondante et plus concentrée."
+      }
+     ],
+     "answer": "**Le corps économise l'eau.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre excrétion et défécation.\n- Croire que l'urine est fabriquée dans la vessie : elle est fabriquée dans les reins.\n- Croire que seuls les reins excrètent : poumons et peau aussi."
+    }
+   ],
+   "reviewNotes": [
+    "À faire relire par un agent de santé pour les conseils d'hygiène et d'hydratation.",
+    "Composition de l'urine : environ 95 % d'eau ; chiffre arrondi à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe fabrique l'urine ?",
+   "choices": [
+    "La vessie",
+    "Le rein",
+    "L'estomac",
+    "Le foie seulement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les reins filtrent le sang.",
+   "id": "4e-svt-excretion-01",
+   "tier": "application",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La sueur est éliminée par :",
+   "choices": [
+    "La peau",
+    "Les poumons",
+    "Les reins",
+    "L'intestin"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle sort par les glandes sudoripares.",
+   "id": "4e-svt-excretion-02",
+   "tier": "application",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les poumons éliminent du dioxyde de carbone.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est une excrétion.",
+   "id": "4e-svt-excretion-03",
+   "tier": "application",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe organe et déchet éliminé.",
+   "pairs": [
+    [
+     "Poumons",
+     "Dioxyde de carbone"
+    ],
+    [
+     "Reins",
+     "Urée"
+    ],
+    [
+     "Peau",
+     "Sueur"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque organe élimine des déchets.",
+   "id": "4e-svt-excretion-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Pourquoi boire de l'eau est-il important pour les reins ?",
+   "model": "L'eau aide à éliminer les déchets dans l'urine et à compenser les pertes d'eau.",
+   "rubric": [
+    "Lier l'eau à l'élimination",
+    "Lier aux pertes d'eau"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-excretion-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina remarque que son urine est très foncée après une journée de travail sous le soleil sans boire.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Que peut indiquer une urine très concentrée ?",
+     "choices": [
+      "Un excès de vitamines",
+      "Un trop plein de dioxygène",
+      "Une absence de reins",
+      "Un manque d'eau"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le corps retient l'eau.",
+     "id": "4e-svt-excretion-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que doit-elle faire et que faire si cela persiste ?",
+     "model": "Boire de l'eau potable ; consulter un agent de santé si cela dure ou en cas de douleur.",
+     "rubric": [
+      "Boire de l'eau",
+      "Consulter si persistance"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-excretion-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-excretion-06",
+   "tier": "examen",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le nom de l'organe qui stocke l'urine ?",
+   "choices": [
+    "La vessie",
+    "Le rein",
+    "L'urètre",
+    "L'uretère"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La vessie est le réservoir.",
+   "id": "4e-svt-excretion-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le CO₂ est surtout éliminé par :",
+   "choices": [
+    "Les reins",
+    "La peau seulement",
+    "Les poumons",
+    "Le cœur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "À l'expiration.",
+   "id": "4e-svt-excretion-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'urée est :",
+   "choices": [
+    "Un nutriment utile",
+    "Un gaz",
+    "Un déchet éliminé dans l'urine",
+    "Un aliment"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle est produite par les cellules.",
+   "id": "4e-svt-excretion-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les reins sont au nombre de :",
+   "choices": [
+    "Deux",
+    "Un",
+    "Trois",
+    "Quatre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il y a deux reins.",
+   "id": "4e-svt-excretion-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'excrétion est :",
+   "choices": [
+    "L'absorption des nutriments",
+    "La digestion",
+    "La fécondation",
+    "L'élimination des déchets des cellules"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Excrétion = déchets du métabolisme.",
+   "id": "4e-svt-excretion-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-excretion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

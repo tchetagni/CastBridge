@@ -1,0 +1,751 @@
+{
+ "chapter": "bepc-francais-methodes",
+ "lessons": [
+  {
+   "id": "bepc-francais-resume",
+   "title": "Le résumé de texte : méthode",
+   "minutes": 35,
+   "programRef": "3e — Expression : résumé de texte (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Repérer les idées essentielles d'un texte.",
+    "Supprimer exemples et répétitions, reformuler.",
+    "Respecter la longueur demandée."
+   ],
+   "prerequisites": [
+    "bepc-francais-comprehension-questions"
+   ],
+   "exercises": [
+    "bepc-francais-resume-01",
+    "bepc-francais-resume-02",
+    "bepc-francais-resume-03",
+    "bepc-francais-resume-04",
+    "bepc-francais-resume-05",
+    "bepc-francais-resume-06"
+   ],
+   "selfCheck": [
+    "bepc-francais-resume-q1",
+    "bepc-francais-resume-q2",
+    "bepc-francais-resume-q3",
+    "bepc-francais-resume-q4",
+    "bepc-francais-resume-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Résumer",
+     "md": "Résumer, c'est **redire l'essentiel** d'un texte en **moins de mots**, avec **tes propres mots**, **sans rien ajouter** ni donner ton avis. Le résumé garde le **système d'énonciation** du texte (même personne, même temps) et la logique de ses idées."
+    },
+    {
+     "type": "text",
+     "md": "**Texte à résumer (original).** *Dans beaucoup de villages, l'eau potable manque encore. Les femmes et les enfants parcourent chaque matin plusieurs kilomètres pour remplir leurs seaux à la rivière. Ce travail épuisant leur prend du temps : les enfants arrivent en retard à l'école, parfois ils n'y vont pas. De plus, l'eau de la rivière est souvent sale et provoque des maladies. Boire une eau non traitée met la santé en danger.*"
+    },
+    {
+     "type": "text",
+     "md": "*Pour résoudre ce problème, des associations et des communes construisent des forages équipés de pompes. Un forage permet de puiser une eau propre à quelques pas des maisons. Les familles gagnent du temps, les enfants retrouvent le chemin de l'école et les maladies reculent. Mais il faut aussi entretenir les pompes : un comité de village peut collecter une petite cotisation pour payer les réparations. Ainsi, l'eau potable devient un bien durable pour tous.*"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les étapes",
+     "md": "1. Lire le texte en entier ; en trouver le sujet et le plan (ici : le problème, la solution).\n2. Souligner les **idées essentielles** de chaque paragraphe.\n3. **Barrer** : exemples, détails, répétitions, images.\n4. Rédiger en **reformulant** (pas de copier-coller), avec des connecteurs.\n5. **Compter les mots** et ajuster à la longueur demandée (par exemple un quart du texte)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un résumé au quart garde environ le quart du texte.",
+     "alt": "Deux barres : le texte complet et une barre quatre fois plus courte pour le résumé.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 400,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 40,
+        "text": "Texte : 100 %",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 62,
+        "w": 100,
+        "h": 30,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 82,
+        "text": "Résumé : 25 %",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : idées essentielles",
+     "statement": "Quelles sont les idées essentielles du premier paragraphe du texte à résumer ?",
+     "steps": [
+      {
+       "md": "Problème : manque d'eau potable. Conséquence 1 : corvée d'eau qui retarde les enfants. Conséquence 2 : maladies."
+      },
+      {
+       "md": "À supprimer : « plusieurs kilomètres », « seaux à la rivière » (détails)."
+      }
+     ],
+     "answer": "**Le manque d'eau potable fait perdre du temps et expose aux maladies.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : résumé rédigé",
+     "statement": "Résume tout le texte en une trentaine de mots (le quart du texte compte environ 37 mots).",
+     "steps": [
+      {
+       "md": "Paragraphe 1 en une phrase : le manque d'eau potable fait perdre du temps aux villageois et menace leur santé."
+      },
+      {
+       "md": "Paragraphe 2 : les forages règlent le problème si les villageois entretiennent les pompes."
+      }
+     ],
+     "answer": "**Faute d'eau potable, les villageois, surtout les enfants, perdent du temps et tombent malades. Des forages apportent une eau propre près des maisons, à condition que le village entretienne les pompes.** (32 mots)"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Recopier des phrases du texte au lieu de reformuler.\n- Garder les exemples ou les chiffres.\n- Ajouter son avis (« à mon avis ») ou changer le temps ou la personne.\n- Ne pas respecter la longueur (trop court ou trop long)."
+    }
+   ],
+   "reviewNotes": [
+    "La proportion demandée (souvent un quart du texte, avec une marge) et la présence du résumé au BEPC sont à confirmer sur les textes officiels.",
+    "Le texte d'étude est original."
+   ]
+  },
+  {
+   "id": "bepc-francais-contraction-discussion",
+   "title": "Contraction de texte et discussion : initiation",
+   "minutes": 40,
+   "programRef": "3e — Expression : contraction et discussion (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Contracter un texte argumentatif en gardant ses idées et leur ordre.",
+    "Rédiger une discussion argumentée à partir d'une thèse du texte."
+   ],
+   "prerequisites": [
+    "bepc-francais-resume",
+    "bepc-francais-argumentation"
+   ],
+   "exercises": [
+    "bepc-francais-contraction-discussion-01",
+    "bepc-francais-contraction-discussion-02",
+    "bepc-francais-contraction-discussion-03",
+    "bepc-francais-contraction-discussion-04",
+    "bepc-francais-contraction-discussion-05",
+    "bepc-francais-contraction-discussion-06"
+   ],
+   "selfCheck": [
+    "bepc-francais-contraction-discussion-q1",
+    "bepc-francais-contraction-discussion-q2",
+    "bepc-francais-contraction-discussion-q3",
+    "bepc-francais-contraction-discussion-q4",
+    "bepc-francais-contraction-discussion-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Contraction et discussion",
+     "md": "La **contraction** est un résumé d'un texte **argumentatif** : on garde ses idées dans l'ordre, avec la même logique, en ramenant le texte à une **longueur imposée** (souvent le quart, avec une tolérance d'environ 10 %). La **discussion** est un second travail : on **donne son avis** sur une idée du texte, en argumentant."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Contracter",
+     "md": "1. Lire, dégager la **thèse** et les **grandes articulations** (arguments, concession, conclusion).\n2. Rédiger une phrase par idée essentielle, avec ses **connecteurs logiques**.\n3. Ne **pas** recopier, ne pas citer d'exemples.\n4. Garder le même système d'énonciation.\n5. Indiquer le nombre de mots et relire."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Discuter",
+     "md": "1. **Reformuler** l'idée à discuter.\n2. Donner son avis : accord, désaccord ou **accord nuancé**.\n3. Développer deux arguments avec des exemples **personnels** (hors texte).\n4. Concéder une limite, puis conclure.\n5. Respecter les paragraphes : introduction, arguments, conclusion."
+    },
+    {
+     "type": "illustration",
+     "caption": "Contraction : redire l'auteur ; discussion : donner son avis.",
+     "alt": "Trois cases en ligne : texte, contraction, discussion.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 111,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 114.66666666666667,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 67.33333333333334,
+        "y": 43,
+        "text": "Texte",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 127.66666666666667,
+        "y1": 37,
+        "x2": 149.66666666666669,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 67.33333333333334,
+        "y": 80,
+        "text": "lire",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 152.66666666666669,
+        "y": 15,
+        "w": 114.66666666666667,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 210.00000000000003,
+        "y": 43,
+        "text": "Contraction",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 270.33333333333337,
+        "y1": 37,
+        "x2": 292.33333333333337,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210.00000000000003,
+        "y": 80,
+        "text": "redire",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 295.33333333333337,
+        "y": 15,
+        "w": 114.66666666666667,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 352.6666666666667,
+        "y": 43,
+        "text": "Discussion",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 352.6666666666667,
+        "y": 80,
+        "text": "donner son avis",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : contraction d'un passage",
+     "statement": "Contracte en une phrase : « Les téléphones portables distraient souvent les élèves : ils lisent des messages en classe, perdent le fil et gênent leurs voisins. Pourtant, bien utilisés, ils permettent de chercher un mot ou de réviser. Il faut donc apprendre à s'en servir. »",
+     "steps": [
+      {
+       "md": "Idées : dangers (distraction), avantages (outil de travail), conclusion (apprendre à s'en servir)."
+      },
+      {
+       "md": "On les relie par des connecteurs logiques."
+      }
+     ],
+     "answer": "**Le téléphone distrait les élèves, mais il peut aussi les aider : il faut donc leur apprendre à bien l'utiliser.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : amorce de discussion",
+     "statement": "L'auteur affirme que « lire développe l'imagination ». Rédige une amorce de discussion.",
+     "steps": [
+      {
+       "md": "Reformuler : l'auteur pense que la lecture nourrit l'imagination."
+      },
+      {
+       "md": "Donner un avis nuancé et annoncer un exemple personnel."
+      }
+     ],
+     "answer": "**Je suis en grande partie d'accord : quand je lis, je me représente les lieux et les personnages. Mais d'autres activités, comme écouter les contes du soir, développent aussi l'imagination.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger contraction et discussion : dans la contraction, on ne donne **jamais** son avis.\n- Utiliser les exemples du texte dans la discussion : on cite des exemples personnels.\n- Écrire « l'auteur dit que » à chaque phrase : reformule directement.\n- Ne pas respecter la longueur."
+    }
+   ],
+   "reviewNotes": [
+    "DOUTE IMPORTANT : la présence de la contraction de texte et de la discussion au programme de 3e / à l'épreuve du BEPC n'est pas certaine ; cette fiche est une initiation à confirmer. La dissertation n'est pas traitée.",
+    "Longueur de la contraction (un quart, tolérance de 10 %) donnée comme usage courant, à vérifier."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Que doit-on supprimer en priorité dans un résumé ?",
+   "choices": [
+    "la thèse",
+    "les idées essentielles",
+    "les exemples et les détails",
+    "tous les verbes"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le résumé garde l'essentiel.",
+   "id": "bepc-francais-resume-01",
+   "tier": "application",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour résumer un texte de 200 mots au quart, il faut environ :",
+   "choices": [
+    "25 mots",
+    "100 mots",
+    "50 mots",
+    "150 mots"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "200 ÷ 4 = 50.",
+   "id": "bepc-francais-resume-02",
+   "tier": "application",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut donner son avis personnel dans un résumé.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le résumé reste fidèle au texte, sans commentaire.",
+   "id": "bepc-francais-resume-03",
+   "tier": "application",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un texte compte 320 mots. Combien de mots aura un résumé au quart ?",
+   "answer": 80,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "320 ÷ 4 = 80 mots.",
+   "id": "bepc-francais-resume-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase résume le mieux « Le matin, Boris se lève, se lave, mange, prend son sac et part à l'école » ?",
+   "choices": [
+    "Boris dort.",
+    "Boris mange du pain.",
+    "Boris se lave avec du savon.",
+    "Boris se prépare et part à l'école."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On regroupe une suite d'actions en une idée plus générale.",
+   "id": "bepc-francais-resume-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Résume en 30 à 40 mots ce texte : « Beaucoup d'élèves arrivent en retard. Certains habitent loin, d'autres se lèvent trop tard. Le retard fait perdre le début des leçons et dérange la classe. Pour y remédier, le collège propose des horaires plus souples pour les élèves éloignés et demande à chacun de préparer son sac la veille. »",
+   "model": "Le retard des élèves, dû à la distance ou au sommeil, perturbe les cours. Pour le limiter, le collège assouplit les horaires des élèves éloignés et recommande de préparer son sac la veille. (33 mots)",
+   "rubric": [
+    "Idées essentielles conservées (problème, causes, solutions) : 2 points.",
+    "Reformulation, pas de copie : 1 point.",
+    "Longueur respectée : 1 point.",
+    "Langue : 1 point."
+   ],
+   "points": 5,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "method": "Souligne, barre, puis rédige en regroupant.",
+   "id": "bepc-francais-resume-06",
+   "tier": "examen",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un résumé doit être :",
+   "choices": [
+    "plus long que le texte",
+    "une critique du texte",
+    "une copie de la première phrase",
+    "fidèle au texte et plus court"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On redit l'essentiel.",
+   "id": "bepc-francais-resume-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel élément du texte supprime-t-on ?",
+   "choices": [
+    "la thèse",
+    "le problème posé",
+    "la solution proposée",
+    "les exemples"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les exemples illustrent mais ne sont pas essentiels.",
+   "id": "bepc-francais-resume-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le résumé garde en principe :",
+   "choices": [
+    "toujours le « je »",
+    "toujours le passé simple",
+    "le style familier",
+    "le même système d'énonciation que le texte"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même personne, même temps.",
+   "id": "bepc-francais-resume-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un résumé au quart d'un texte de 400 mots compte environ :",
+   "choices": [
+    "100 mots",
+    "40 mots",
+    "200 mots",
+    "300 mots"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "400 ÷ 4 = 100.",
+   "id": "bepc-francais-resume-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour résumer, on doit :",
+   "choices": [
+    "recopier mot à mot",
+    "ajouter des exemples",
+    "écrire en vers",
+    "reformuler avec ses mots"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La reformulation montre qu'on a compris.",
+   "id": "bepc-francais-resume-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-resume",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une contraction, on :",
+   "choices": [
+    "ajoute son avis",
+    "change complètement le plan",
+    "ajoute des exemples",
+    "garde les idées dans l'ordre du texte"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La logique du texte doit rester visible.",
+   "id": "bepc-francais-contraction-discussion-01",
+   "tier": "application",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une contraction au quart d'un texte de 480 mots compte environ :",
+   "choices": [
+    "120 mots",
+    "48 mots",
+    "240 mots",
+    "360 mots"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "480 ÷ 4 = 120.",
+   "id": "bepc-francais-contraction-discussion-02",
+   "tier": "application",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la discussion permet de donner son propre avis.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On discute en argumentant.",
+   "id": "bepc-francais-contraction-discussion-03",
+   "tier": "application",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase relève de la discussion (et non de la contraction) ?",
+   "choices": [
+    "À mon avis, cette idée est trop optimiste.",
+    "L'auteur pense que le sport est utile.",
+    "Le texte défend la lecture.",
+    "Les arguments sont classés par importance."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Seule la première exprime un jugement personnel.",
+   "id": "bepc-francais-contraction-discussion-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque tâche à sa consigne.",
+   "pairs": [
+    [
+     "contraction",
+     "redire l'essentiel dans l'ordre"
+    ],
+    [
+     "discussion",
+     "donner son avis argumenté"
+    ],
+    [
+     "résumé",
+     "réduire en reformulant"
+    ],
+    [
+     "commentaire d'exemple",
+     "illustrer une idée par un fait"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Ces tâches ont des buts différents.",
+   "id": "bepc-francais-contraction-discussion-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Texte : « Beaucoup pensent que le jeu est une perte de temps. Pourtant, en jouant, l'enfant apprend les règles, la patience et le travail en équipe. Certes, certains jeux sont violents. Mais bien choisis, les jeux forment le caractère. Les parents devraient donc encourager le jeu raisonnable. » (a) Contracte ce texte en deux phrases (25 mots environ). (b) Donne ton avis en quatre à cinq lignes.",
+   "model": "(a) Le jeu semble inutile, mais il apprend les règles et l'esprit d'équipe ; bien choisi, il forme le caractère et doit être encouragé. (b) Je suis d'accord : en jouant au football avec mes cousins, j'ai appris à écouter les autres. Cependant, il faut limiter les jeux sur écran, qui isolent. Le jeu raisonnable reste un excellent apprentissage.",
+   "rubric": [
+    "Contraction : idées dans l'ordre, pas d'avis : 2 points.",
+    "Longueur respectée : 0,5 point.",
+    "Discussion : avis clair, exemple personnel : 2 points.",
+    "Langue : 0,5 point."
+   ],
+   "points": 5,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-francais-contraction-discussion-06",
+   "tier": "examen",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La contraction est surtout adaptée à un texte :",
+   "choices": [
+    "en vers",
+    "composé de dialogues seulement",
+    "purement descriptif",
+    "argumentatif"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle suit les articulations logiques.",
+   "id": "bepc-francais-contraction-discussion-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une discussion commence souvent par :",
+   "choices": [
+    "recopier le texte",
+    "écrire la conclusion",
+    "répéter le titre",
+    "reformuler l'idée à discuter"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On précise ce qu'on discute.",
+   "id": "bepc-francais-contraction-discussion-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un « accord nuancé » consiste à :",
+   "choices": [
+    "être d'accord en reconnaissant une limite",
+    "refuser tout",
+    "être d'accord sans raison",
+    "changer de sujet"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On concède une limite avant de conclure.",
+   "id": "bepc-francais-contraction-discussion-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une discussion, les exemples doivent être :",
+   "choices": [
+    "recopiés du texte",
+    "inventés au hasard",
+    "absents",
+    "personnels ou extérieurs au texte"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ne reprend pas les exemples de l'auteur.",
+   "id": "bepc-francais-contraction-discussion-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que ne fait-on jamais dans une contraction ?",
+   "choices": [
+    "donner son avis",
+    "relier les idées",
+    "compter les mots",
+    "reformuler"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle reste fidèle à l'auteur.",
+   "id": "bepc-francais-contraction-discussion-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-contraction-discussion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

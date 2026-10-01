@@ -1,0 +1,1968 @@
+{
+ "chapter": "4e-pct-elec",
+ "lessons": [
+  {
+   "id": "4e-pct-intensite",
+   "title": "Le courant électrique et l'intensité",
+   "minutes": 25,
+   "programRef": "4e — Intensité du courant électrique (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Mesurer une intensité avec un ampèremètre monté en série.",
+    "Convertir A et mA.",
+    "Lire un appareil à aiguille."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-pct-intensite-01",
+    "4e-pct-intensite-02",
+    "4e-pct-intensite-03",
+    "4e-pct-intensite-04",
+    "4e-pct-intensite-05",
+    "4e-pct-intensite-06"
+   ],
+   "selfCheck": [
+    "4e-pct-intensite-q1",
+    "4e-pct-intensite-q2",
+    "4e-pct-intensite-q3",
+    "4e-pct-intensite-q4",
+    "4e-pct-intensite-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Intensité du courant",
+     "md": "Le courant électrique est un déplacement de porteurs de charge (des électrons dans un métal). Son **intensité** $I$ mesure la quantité de courant qui circule. Unité : l'**ampère (A)** ; 1 A = 1 000 mA."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'ampèremètre se place en série dans le circuit.",
+     "alt": "Circuit : pile, lampe et ampèremètre sur la même boucle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 360,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 60,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 210,
+        "x2": 360,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 60,
+        "x2": 360,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 198,
+        "y": 56,
+        "w": 24,
+        "h": 8,
+        "fill": "white",
+        "stroke": "white",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 204,
+        "y1": 40,
+        "x2": 204,
+        "y2": 80,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 216,
+        "y1": 50,
+        "x2": 216,
+        "y2": 70,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "circle",
+        "cx": 360,
+        "cy": 135,
+        "r": 22,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 120,
+        "x2": 375,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 150,
+        "x2": 375,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 210,
+        "r": 18,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 216,
+        "text": "A",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 30,
+        "text": "pile",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 135,
+        "text": "lampe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 245,
+        "text": "ampèremètre (en série)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 90,
+        "text": "I",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 77,
+        "x2": 170,
+        "y2": 77,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mesurer avec un ampèremètre",
+     "md": "1. Ouvrir le circuit et y placer l'ampèremètre **en série**.\n2. Le courant entre par la borne **A (ou +)** et sort par la borne **COM**.\n3. Commencer par le **plus grand calibre**, puis diminuer pour plus de précision.\n4. Lecture sur un appareil à aiguille : $I = \\frac{\\text{lecture} \\times \\text{calibre}}{\\text{nombre de divisions}}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : convertir",
+     "statement": "Une lampe est traversée par un courant de 250 mA. Exprime l'intensité en ampères.",
+     "steps": [
+      {
+       "md": "1 A = 1 000 mA : on divise par 1 000."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "250 \\div 1\\,000 = 0{,}25\\ \\text{A}"
+      }
+     ],
+     "answer": "**0,25 A**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lecture à l'aiguille",
+     "statement": "Calibre 5 A ; l'aiguille s'arrête à 36 divisions sur 100. Quelle est l'intensité ?",
+     "steps": [
+      {
+       "md": "On applique I = lecture × calibre / nombre de divisions."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "I = \\frac{36 \\times 5}{100} = 1{,}8\\ \\text{A}"
+      }
+     ],
+     "answer": "**1,8 A**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Brancher l'ampèremètre en dérivation : court-circuit possible, l'appareil est détruit.\n- Oublier de convertir mA en A avant un calcul.\n- Choisir d'emblée un petit calibre : l'appareil peut être endommagé.\n- Croire que l'intensité diminue en traversant la lampe : dans un circuit simple elle est la même partout."
+    }
+   ],
+   "reviewNotes": [
+    "Courant = déplacement d'électrons dans un métal : présenté de façon simple.",
+    "Lecture sur appareil à aiguille : I = (lecture × calibre) / échelle."
+   ]
+  },
+  {
+   "id": "4e-pct-tension",
+   "title": "La tension électrique",
+   "minutes": 25,
+   "programRef": "4e — Tension électrique (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Mesurer une tension avec un voltmètre branché en dérivation.",
+    "Connaître des ordres de grandeur.",
+    "Additionner les tensions de piles en série."
+   ],
+   "prerequisites": [
+    "4e-pct-intensite"
+   ],
+   "exercises": [
+    "4e-pct-tension-01",
+    "4e-pct-tension-02",
+    "4e-pct-tension-03",
+    "4e-pct-tension-04",
+    "4e-pct-tension-05",
+    "4e-pct-tension-06"
+   ],
+   "selfCheck": [
+    "4e-pct-tension-q1",
+    "4e-pct-tension-q2",
+    "4e-pct-tension-q3",
+    "4e-pct-tension-q4",
+    "4e-pct-tension-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La tension",
+     "md": "La **tension électrique** $U$ est ce qui pousse le courant dans le circuit. On la mesure **entre deux points**, par exemple aux bornes d'un dipôle. Unité : le **volt (V)** ; 1 V = 1 000 mV ; 1 kV = 1 000 V."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le voltmètre se branche en dérivation, aux bornes de la lampe.",
+     "alt": "Circuit avec pile et lampe ; un voltmètre relie les deux bornes de la lampe.",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 360,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 60,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 210,
+        "x2": 360,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 60,
+        "x2": 360,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 60,
+        "x2": 440,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 440,
+        "y1": 60,
+        "x2": 440,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 440,
+        "y1": 160,
+        "x2": 440,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 440,
+        "y1": 210,
+        "x2": 360,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 198,
+        "y": 56,
+        "w": 24,
+        "h": 8,
+        "fill": "white",
+        "stroke": "white",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 204,
+        "y1": 40,
+        "x2": 204,
+        "y2": 80,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 216,
+        "y1": 50,
+        "x2": 216,
+        "y2": 70,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "circle",
+        "cx": 360,
+        "cy": 135,
+        "r": 22,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 120,
+        "x2": 375,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 150,
+        "x2": 375,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 440,
+        "cy": 130,
+        "r": 18,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 136,
+        "text": "V",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 360,
+        "cy": 60,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 360,
+        "cy": 210,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 30,
+        "text": "pile",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 135,
+        "text": "lampe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 245,
+        "text": "voltmètre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 225,
+        "text": "(en dérivation)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ordres de grandeur",
+     "md": "- Pile plate : 4,5 V ; pile ronde : 1,5 V.\n- Accumulateur de voiture : 12 V.\n- Prise du secteur : 220 V (dangereux).\nPlusieurs piles de 1,5 V montées **en série** : les tensions s'**additionnent** (3 piles → 4,5 V)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : piles en série",
+     "statement": "On monte en série quatre piles de 1,5 V. Quelle tension aux bornes de l'ensemble ?",
+     "steps": [
+      {
+       "md": "En série, les tensions s'additionnent."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "4 \\times 1{,}5 = 6\\ \\text{V}"
+      }
+     ],
+     "answer": "**6 V**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : brancher le voltmètre",
+     "statement": "On veut la tension aux bornes d'une lampe. Où brancher le voltmètre ?",
+     "steps": [
+      {
+       "md": "Le voltmètre se branche en dérivation, sur les deux bornes de la lampe."
+      },
+      {
+       "md": "Le circuit n'est pas ouvert : on ne le coupe pas."
+      }
+     ],
+     "answer": "**En dérivation, aux bornes de la lampe**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Brancher le voltmètre en série : il se comporte comme un interrupteur ouvert et la lampe s'éteint.\n- Confondre tension et intensité (V et A).\n- Dire que l'interrupteur ouvert a une tension nulle : elle est égale à celle de la pile.\n- Toucher des fils sous tension élevée."
+    }
+   ],
+   "reviewNotes": [
+    "Tension du secteur au Cameroun : 220 V (à confirmer).",
+    "Les tensions supérieures à 24 V sont dangereuses : à rappeler en classe."
+   ]
+  },
+  {
+   "id": "4e-pct-serie-derivation",
+   "title": "Circuits en série et en dérivation",
+   "minutes": 35,
+   "programRef": "4e — Circuits série et dérivation : lois d'additivité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître un circuit en série ou en dérivation.",
+    "Appliquer les lois des intensités et des tensions."
+   ],
+   "prerequisites": [
+    "4e-pct-intensite",
+    "4e-pct-tension"
+   ],
+   "exercises": [
+    "4e-pct-serie-derivation-01",
+    "4e-pct-serie-derivation-02",
+    "4e-pct-serie-derivation-03",
+    "4e-pct-serie-derivation-04",
+    "4e-pct-serie-derivation-05",
+    "4e-pct-serie-derivation-06"
+   ],
+   "selfCheck": [
+    "4e-pct-serie-derivation-q1",
+    "4e-pct-serie-derivation-q2",
+    "4e-pct-serie-derivation-q3",
+    "4e-pct-serie-derivation-q4",
+    "4e-pct-serie-derivation-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Circuit en série",
+     "md": "Les dipôles sont placés **l'un après l'autre**, sur une seule boucle.\n- L'**intensité** est la même en tout point.\n- La **tension** du générateur se partage : $U = U_1 + U_2$.\n- Si une lampe grille, toutes s'éteignent."
+    },
+    {
+     "type": "illustration",
+     "caption": "Deux lampes en série : même intensité I partout.",
+     "alt": "Boucle unique contenant une pile et deux lampes L1 et L2.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 360,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 60,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 210,
+        "x2": 360,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 60,
+        "x2": 360,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 198,
+        "y": 56,
+        "w": 24,
+        "h": 8,
+        "fill": "white",
+        "stroke": "white",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 204,
+        "y1": 40,
+        "x2": 204,
+        "y2": 80,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 216,
+        "y1": 50,
+        "x2": 216,
+        "y2": 70,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "circle",
+        "cx": 360,
+        "cy": 135,
+        "r": 22,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 120,
+        "x2": 375,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 345,
+        "y1": 150,
+        "x2": 375,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 210,
+        "r": 22,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 195,
+        "y1": 195,
+        "x2": 225,
+        "y2": 225,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 195,
+        "y1": 225,
+        "x2": 225,
+        "y2": 195,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 30,
+        "text": "pile",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 135,
+        "text": "L1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 250,
+        "text": "L2",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 135,
+        "text": "I",
+        "size": 18,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Circuit en dérivation",
+     "md": "Les dipôles sont dans des **branches** reliées aux mêmes points (nœuds).\n- La **tension** est la même aux bornes de chaque branche.\n- L'**intensité** du courant principal se partage : $I = I_1 + I_2$ (loi des nœuds).\n- Si une lampe grille, l'autre continue de briller (installations domestiques)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Deux lampes en dérivation : I = I₁ + I₂.",
+     "alt": "Une pile alimente deux branches, chacune avec une lampe.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 50,
+        "x2": 340,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 50,
+        "x2": 60,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 210,
+        "x2": 340,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 50,
+        "x2": 200,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 50,
+        "x2": 340,
+        "y2": 210,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 56,
+        "y": 118,
+        "w": 8,
+        "h": 24,
+        "fill": "white",
+        "stroke": "white",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 124,
+        "x2": 80,
+        "y2": 124,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 136,
+        "x2": 70,
+        "y2": 136,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 130,
+        "r": 22,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 115,
+        "x2": 215,
+        "y2": 145,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 145,
+        "x2": 215,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 340,
+        "cy": 130,
+        "r": 22,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 115,
+        "x2": 355,
+        "y2": 145,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 145,
+        "x2": 355,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 50,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 210,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 35,
+        "text": "I",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 165,
+        "y": 130,
+        "text": "L1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 130,
+        "text": "L2",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 90,
+        "text": "I₁",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 90,
+        "text": "I₂",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : série",
+     "statement": "Deux lampes en série sont alimentées par une pile de 6 V. La tension aux bornes de L1 est 2,5 V. Quelle est celle de L2 ?",
+     "steps": [
+      {
+       "md": "En série, U = U₁ + U₂ donc U₂ = U − U₁."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "U_2 = 6 - 2{,}5 = 3{,}5\\ \\text{V}"
+      }
+     ],
+     "answer": "**3,5 V**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dérivation",
+     "statement": "Le courant principal est I = 0,6 A. La branche 1 est traversée par 0,25 A. Quelle intensité dans la branche 2 ?",
+     "steps": [
+      {
+       "md": "Loi des nœuds : I = I₁ + I₂."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "I_2 = 0{,}6 - 0{,}25 = 0{,}35\\ \\text{A}"
+      }
+     ],
+     "answer": "**0,35 A**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que la tension se partage en dérivation : elle est identique sur chaque branche.\n- Penser que l'intensité se partage en série : elle est la même partout.\n- Mélanger mA et A dans les additions.\n- Croire qu'une seule lampe grillée éteint tout en dérivation."
+    }
+   ],
+   "reviewNotes": [
+    "Lois d'additivité des tensions (série) et des intensités (nœud) : à confirmer qu'elles sont au programme de 4e."
+   ]
+  },
+  {
+   "id": "4e-pct-resistance-ohm",
+   "title": "Résistance et loi d'Ohm",
+   "minutes": 35,
+   "programRef": "4e — Résistance électrique, loi d'Ohm (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Savoir qu'un conducteur ohmique a une résistance R en ohms.",
+    "Appliquer U = R × I.",
+    "Utiliser les unités et les associations en série."
+   ],
+   "prerequisites": [
+    "4e-pct-serie-derivation"
+   ],
+   "exercises": [
+    "4e-pct-resistance-ohm-01",
+    "4e-pct-resistance-ohm-02",
+    "4e-pct-resistance-ohm-03",
+    "4e-pct-resistance-ohm-04",
+    "4e-pct-resistance-ohm-05",
+    "4e-pct-resistance-ohm-06"
+   ],
+   "selfCheck": [
+    "4e-pct-resistance-ohm-q1",
+    "4e-pct-resistance-ohm-q2",
+    "4e-pct-resistance-ohm-q3",
+    "4e-pct-resistance-ohm-q4",
+    "4e-pct-resistance-ohm-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Résistance",
+     "md": "Une **résistance** s'oppose au passage du courant. On note $R$ sa valeur, en **ohms (Ω)** ; 1 kΩ = 1 000 Ω. Elle se mesure avec un ohmmètre, hors circuit."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Loi d'Ohm",
+     "md": "Pour un conducteur ohmique : la tension $U$ (en V) est proportionnelle à l'intensité $I$ (en A) : $U = R \\times I$. On en déduit $I = \\frac{U}{R}$ et $R = \\frac{U}{I}$.",
+     "tex": "U = R \\times I"
+    },
+    {
+     "type": "illustration",
+     "caption": "Caractéristique d'un conducteur ohmique : une droite passant par l'origine.",
+     "alt": "Graphique U en fonction de I : une droite passant par l'origine, de pente R.",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 100,
+      "ymin": 0,
+      "ymax": 10,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "0.1*x",
+        "color": "blue",
+        "label": "R = 100 Ω"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "I (mA)",
+      "ylabel": "U (V)"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calcul d'une tension",
+     "statement": "Une résistance de 100 Ω est traversée par 0,05 A. Quelle est la tension à ses bornes ?",
+     "steps": [
+      {
+       "md": "Résistance en Ω, intensité en A : on peut appliquer U = R × I."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "U = 100 \\times 0{,}05 = 5\\ \\text{V}"
+      }
+     ],
+     "answer": "**5 V**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : calcul d'une résistance",
+     "statement": "Un fer à repasser de résistance inconnue : sous 12 V il passe 0,5 A. Quelle est sa résistance ?",
+     "steps": [
+      {
+       "md": "On isole R : R = U / I."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "R = \\frac{12}{0{,}5} = 24\\ \\Omega"
+      }
+     ],
+     "answer": "**24 Ω**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mettre I en mA dans la formule : toujours convertir en A.\n- Oublier l'unité (Ω).\n- Mesurer R avec l'ohmmètre alors que le circuit est alimenté.\n- Inverser la formule : $R = \\frac{I}{U}$ est faux."
+    }
+   ],
+   "reviewNotes": [
+    "La loi d'Ohm est traitée dans le pack bepc-pct (3e) : sa place en 4e est à vérifier ; adapter ou retirer la fiche si besoin.",
+    "Association de résistances en série : R = R₁ + R₂ (hors programme possible)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 1,2 A en mA.",
+   "answer": 1200,
+   "unit": "mA",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1,2 × 1 000 = 1 200 mA.",
+   "id": "4e-pct-intensite-01",
+   "tier": "application",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment monte-t-on un ampèremètre ?",
+   "choices": [
+    "En dérivation",
+    "Aux bornes de la pile uniquement",
+    "Hors du circuit",
+    "En série"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il doit être traversé par le courant à mesurer.",
+   "id": "4e-pct-intensite-02",
+   "tier": "application",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 80 mA en ampères.",
+   "answer": 0.08,
+   "tolerance": 0.0001,
+   "unit": "A",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "80 ÷ 1 000 = 0,08 A.",
+   "id": "4e-pct-intensite-03",
+   "tier": "application",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calibre 3 A, aiguille à 40 divisions sur 100 : quelle est l'intensité (en A) ?",
+   "answer": 1.2,
+   "tolerance": 0.001,
+   "unit": "A",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "40 × 3 / 100 = 1,2 A.",
+   "id": "4e-pct-intensite-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi commence-t-on par le plus grand calibre ?",
+   "choices": [
+    "Pour avoir un résultat plus précis",
+    "Pour éteindre la lampe",
+    "Pour protéger l'appareil d'un courant trop fort",
+    "Pour augmenter I"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On diminue ensuite le calibre si l'intensité est faible.",
+   "id": "4e-pct-intensite-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris mesure l'intensité du courant dans un circuit simple (pile, lampe, ampèremètre) : l'aiguille indique 25 divisions sur 50, calibre 1 A.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'intensité mesurée ? (en A)",
+     "answer": 0.5,
+     "tolerance": 0.001,
+     "unit": "A",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "25 × 1 / 50 = 0,5 A.",
+     "id": "4e-pct-intensite-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Exprime-la en mA.",
+     "answer": 500,
+     "unit": "mA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "0,5 × 1 000 = 500 mA.",
+     "id": "4e-pct-intensite-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Il déplace l'ampèremètre de l'autre côté de la lampe. Que lira-t-il ?",
+     "choices": [
+      "Une valeur plus grande",
+      "Zéro",
+      "La même valeur",
+      "Une valeur plus petite"
+     ],
+     "answer": 2,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Dans un circuit simple (série), l'intensité est la même partout.",
+     "id": "4e-pct-intensite-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-intensite-06",
+   "tier": "examen",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le symbole de l'unité d'intensité ?",
+   "choices": [
+    "V",
+    "Ω",
+    "N",
+    "A"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ampère.",
+   "id": "4e-pct-intensite-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 A est égal à :",
+   "choices": [
+    "100 mA",
+    "10 mA",
+    "1 000 mA",
+    "10 000 mA"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conversion standard.",
+   "id": "4e-pct-intensite-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel appareil mesure l'intensité ?",
+   "choices": [
+    "Le voltmètre",
+    "L'ohmmètre",
+    "Le thermomètre",
+    "L'ampèremètre"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Intensité : ampèremètre.",
+   "id": "4e-pct-intensite-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un circuit en série, l'intensité est :",
+   "choices": [
+    "la même en tout point",
+    "plus grande près de la pile",
+    "nulle",
+    "plus faible après la lampe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le courant ne se « consomme » pas.",
+   "id": "4e-pct-intensite-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un ampèremètre dans un circuit se branche :",
+   "choices": [
+    "en dérivation",
+    "en série",
+    "au hasard",
+    "sans fil"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Traversé par le courant.",
+   "id": "4e-pct-intensite-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-intensite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 1 500 mV en volts.",
+   "answer": 1.5,
+   "tolerance": 0.001,
+   "unit": "V",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 500 ÷ 1 000 = 1,5 V.",
+   "id": "4e-pct-tension-01",
+   "tier": "application",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel appareil mesure la tension ?",
+   "choices": [
+    "L'ampèremètre",
+    "Le thermomètre",
+    "Le voltmètre",
+    "La balance"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tension : voltmètre.",
+   "id": "4e-pct-tension-02",
+   "tier": "application",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Trois piles de 1,5 V en série : tension totale ? (en V)",
+   "answer": 4.5,
+   "tolerance": 0.001,
+   "unit": "V",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 1,5 = 4,5 V.",
+   "id": "4e-pct-tension-03",
+   "tier": "application",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où branche-t-on un voltmètre pour mesurer la tension d'un dipôle ?",
+   "choices": [
+    "En dérivation, aux bornes du dipôle",
+    "En série avec lui",
+    "Loin de lui",
+    "Sur la table"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La tension se mesure entre deux points.",
+   "id": "4e-pct-tension-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un chargeur délivre 0,005 kV. Quelle tension en V ?",
+   "answer": 5,
+   "unit": "V",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "0,005 × 1 000 = 5 V.",
+   "id": "4e-pct-tension-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina dispose de piles de 1,5 V. Elle veut alimenter une lampe prévue pour 6 V.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de piles de 1,5 V doit-elle monter en série ?",
+     "answer": 4,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "6 ÷ 1,5 = 4 piles.",
+     "id": "4e-pct-tension-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Le voltmètre est branché aux bornes de la lampe allumée ; il indique environ :",
+     "choices": [
+      "6 V",
+      "0 V",
+      "1,5 V",
+      "220 V"
+     ],
+     "answer": 0,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "La tension de la lampe est celle fournie par les piles en série.",
+     "id": "4e-pct-tension-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pourquoi ne doit-elle pas utiliser la prise du secteur (220 V) pour cette lampe ?",
+     "model": "La lampe de 6 V serait détruite et le secteur est dangereux pour l'élève.",
+     "rubric": [
+      "Cite la destruction de la lampe",
+      "Cite le danger"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-pct-tension-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-tension-06",
+   "tier": "examen",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité de tension ?",
+   "choices": [
+    "L'ampère",
+    "L'ohm",
+    "Le volt",
+    "Le newton"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Symbole V.",
+   "id": "4e-pct-tension-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un voltmètre se branche :",
+   "choices": [
+    "en dérivation",
+    "en série",
+    "au hasard",
+    "à l'intérieur de la pile"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sur les deux bornes à mesurer.",
+   "id": "4e-pct-tension-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "2 piles de 1,5 V en série donnent :",
+   "choices": [
+    "3 V",
+    "1,5 V",
+    "0 V",
+    "30 V"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1,5 + 1,5 = 3 V.",
+   "id": "4e-pct-tension-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle tension a la prise du secteur ?",
+   "choices": [
+    "1,5 V",
+    "4,5 V",
+    "Environ 220 V",
+    "12 V"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dangereuse.",
+   "id": "4e-pct-tension-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 kV =",
+   "choices": [
+    "10 V",
+    "100 V",
+    "1 000 V",
+    "1 V"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Kilo = mille.",
+   "id": "4e-pct-tension-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-tension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un circuit en série, si une lampe grille :",
+   "choices": [
+    "les autres continuent",
+    "seule la pile s'éteint",
+    "toutes les lampes s'éteignent",
+    "l'intensité double"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le circuit est ouvert.",
+   "id": "4e-pct-serie-derivation-01",
+   "tier": "application",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Pile de 9 V, deux lampes en série : U₁ = 4 V. U₂ ? (en V)",
+   "answer": 5,
+   "unit": "V",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "9 − 4 = 5 V.",
+   "id": "4e-pct-serie-derivation-02",
+   "tier": "application",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "En dérivation : I₁ = 0,2 A et I₂ = 0,3 A. Quelle est I ? (en A)",
+   "answer": 0.5,
+   "tolerance": 0.001,
+   "unit": "A",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "I = 0,2 + 0,3 = 0,5 A.",
+   "id": "4e-pct-serie-derivation-03",
+   "tier": "application",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi les appareils d'une maison sont-ils branchés en dérivation ?",
+   "choices": [
+    "Chacun reçoit la même tension et fonctionne indépendamment",
+    "Pour consommer plus",
+    "Pour économiser les fils uniquement",
+    "Pour que tous s'éteignent ensemble"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La tension du secteur est la même pour tous.",
+   "id": "4e-pct-serie-derivation-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Trois branches : I₁ = 150 mA, I₂ = 250 mA, I₃ = 100 mA. Courant principal en A ?",
+   "answer": 0.5,
+   "tolerance": 0.001,
+   "unit": "A",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "150 + 250 + 100 = 500 mA = 0,5 A.",
+   "id": "4e-pct-serie-derivation-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un circuit en dérivation alimenté par une pile de 4,5 V, deux lampes L1 et L2 sont placées dans deux branches. L'ampèremètre principal indique 0,9 A, et la branche L1 est traversée par 0,4 A.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la tension aux bornes de L2 ? (en V)",
+     "answer": 4.5,
+     "tolerance": 0.01,
+     "unit": "V",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "La tension est la même sur toutes les branches : 4,5 V.",
+     "id": "4e-pct-serie-derivation-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'intensité dans la branche L2 ? (en A)",
+     "answer": 0.5,
+     "tolerance": 0.001,
+     "unit": "A",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "0,9 − 0,4 = 0,5 A.",
+     "id": "4e-pct-serie-derivation-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Si L1 grille, L2 :",
+     "choices": [
+      "continue de briller",
+      "s'éteint",
+      "brille plus fort que la pile",
+      "explose"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les branches sont indépendantes.",
+     "id": "4e-pct-serie-derivation-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-serie-derivation-06",
+   "tier": "examen",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "En série, l'intensité :",
+   "choices": [
+    "se partage entre les lampes",
+    "est la même partout",
+    "double après chaque lampe",
+    "est nulle"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une seule boucle.",
+   "id": "4e-pct-serie-derivation-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "En dérivation, la tension est :",
+   "choices": [
+    "la même sur chaque branche",
+    "partagée entre les branches",
+    "nulle",
+    "maximale seulement près de la pile"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Branches reliées aux mêmes nœuds.",
+   "id": "4e-pct-serie-derivation-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Loi des nœuds : I =",
+   "choices": [
+    "I₁ + I₂",
+    "I₁ × I₂",
+    "I₁ − I₂",
+    "I₁ ÷ I₂"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Somme des courants dans les branches.",
+   "id": "4e-pct-serie-derivation-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Loi des tensions en série : U =",
+   "choices": [
+    "U₁ + U₂",
+    "U₁ × U₂",
+    "U₁ − U₂",
+    "U₁ ÷ U₂"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La tension se partage.",
+   "id": "4e-pct-serie-derivation-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un « nœud » est :",
+   "choices": [
+    "un point où plusieurs fils se rejoignent",
+    "un fil coupé",
+    "une pile usée",
+    "un voltmètre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Point de jonction.",
+   "id": "4e-pct-serie-derivation-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-serie-derivation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "R = 50 Ω, I = 0,2 A. Quelle est U ? (en V)",
+   "answer": 10,
+   "unit": "V",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "U = 50 × 0,2 = 10 V.",
+   "id": "4e-pct-resistance-ohm-01",
+   "tier": "application",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "U = 9 V, R = 45 Ω. Quelle est I ? (en A)",
+   "answer": 0.2,
+   "tolerance": 0.001,
+   "unit": "A",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "I = 9 ÷ 45 = 0,2 A.",
+   "id": "4e-pct-resistance-ohm-02",
+   "tier": "application",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "U = 6 V, I = 0,03 A. Quelle est R ? (en Ω)",
+   "answer": 200,
+   "unit": "Ω",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "R = 6 ÷ 0,03 = 200 Ω.",
+   "id": "4e-pct-resistance-ohm-03",
+   "tier": "application",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une résistance de 2 kΩ est parcourue par 5 mA. Quelle tension à ses bornes ? (en V)",
+   "answer": 10,
+   "unit": "V",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "R = 2 000 Ω ; I = 0,005 A ; U = 2 000 × 0,005 = 10 V.",
+   "id": "4e-pct-resistance-ohm-04",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Deux résistances de 30 Ω et 70 Ω en série ont une résistance totale de ? (en Ω)",
+   "answer": 100,
+   "unit": "Ω",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "R = R₁ + R₂ = 100 Ω.",
+   "id": "4e-pct-resistance-ohm-05",
+   "tier": "approfondissement",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng relève pour un conducteur ohmique : sous 3 V, I = 0,03 A ; sous 6 V, I = 0,06 A.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule R à partir de la première mesure. (en Ω)",
+     "answer": 100,
+     "unit": "Ω",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "R = 3 ÷ 0,03 = 100 Ω.",
+     "id": "4e-pct-resistance-ohm-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que peut-on dire de la tension et de l'intensité ?",
+     "choices": [
+      "U est proportionnelle à I",
+      "U est indépendante de I",
+      "U = I",
+      "U diminue quand I augmente"
+     ],
+     "answer": 0,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Rapport constant U/I = 100 Ω.",
+     "id": "4e-pct-resistance-ohm-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle tension donnerait I = 0,15 A ? (en V)",
+     "answer": 15,
+     "unit": "V",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "U = 100 × 0,15 = 15 V.",
+     "id": "4e-pct-resistance-ohm-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-pct-resistance-ohm-06",
+   "tier": "examen",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'unité de résistance est :",
+   "choices": [
+    "le volt",
+    "l'ohm",
+    "l'ampère",
+    "le watt"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Symbole Ω.",
+   "id": "4e-pct-resistance-ohm-q1",
+   "tier": "autoeval",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la loi d'Ohm ?",
+   "choices": [
+    "U = R / I",
+    "U = I / R",
+    "U = R + I",
+    "U = R × I"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tension = résistance × intensité.",
+   "id": "4e-pct-resistance-ohm-q2",
+   "tier": "autoeval",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 kΩ vaut :",
+   "choices": [
+    "1 000 Ω",
+    "10 Ω",
+    "100 Ω",
+    "1 Ω"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Kilo = mille.",
+   "id": "4e-pct-resistance-ohm-q3",
+   "tier": "autoeval",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec R constante, si U double, I :",
+   "choices": [
+    "est divisée par deux",
+    "reste égale",
+    "double",
+    "devient nulle"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Proportionnalité.",
+   "id": "4e-pct-resistance-ohm-q4",
+   "tier": "autoeval",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour mesurer une résistance à l'ohmmètre, le circuit doit être :",
+   "choices": [
+    "alimenté",
+    "en court-circuit",
+    "non alimenté",
+    "ouvert sur la pile en marche"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On mesure hors tension.",
+   "id": "4e-pct-resistance-ohm-q5",
+   "tier": "autoeval",
+   "lesson": "4e-pct-resistance-ohm",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

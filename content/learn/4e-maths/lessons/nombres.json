@@ -1,0 +1,1685 @@
+{
+ "chapter": "4e-maths-nombres",
+ "lessons": [
+  {
+   "id": "4e-maths-relatifs",
+   "title": "Calculer avec les nombres relatifs",
+   "minutes": 25,
+   "programRef": "4e — Nombres relatifs : opérations (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Additionner, soustraire, multiplier et diviser des nombres relatifs.",
+    "Appliquer la règle des signes."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-maths-relatifs-01",
+    "4e-maths-relatifs-02",
+    "4e-maths-relatifs-03",
+    "4e-maths-relatifs-04",
+    "4e-maths-relatifs-05",
+    "4e-maths-relatifs-06"
+   ],
+   "selfCheck": [
+    "4e-maths-relatifs-q1",
+    "4e-maths-relatifs-q2",
+    "4e-maths-relatifs-q3",
+    "4e-maths-relatifs-q4",
+    "4e-maths-relatifs-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nombre relatif",
+     "md": "Un nombre relatif est un nombre précédé d'un signe : $+3$ (positif) ou $-5$ (négatif). Sur une droite graduée, les positifs sont à droite de 0, les négatifs à gauche. L'**opposé** de $a$ est $-a$ : la somme d'un nombre et de son opposé vaut 0."
+    },
+    {
+     "type": "illustration",
+     "caption": "Droite graduée : −3 et +3 sont opposés, à la même distance de 0.",
+     "alt": "Une droite graduée de −5 à 5 avec les points −3 et +3 marqués.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 100,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 60,
+        "x2": 380,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 54,
+        "x2": 40,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 86,
+        "text": "−5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 74,
+        "y1": 54,
+        "x2": 74,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 74,
+        "y": 86,
+        "text": "−4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 108,
+        "y1": 54,
+        "x2": 108,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 108,
+        "y": 86,
+        "text": "−3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 142,
+        "y1": 54,
+        "x2": 142,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 142,
+        "y": 86,
+        "text": "−2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 176,
+        "y1": 54,
+        "x2": 176,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 176,
+        "y": 86,
+        "text": "−1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 54,
+        "x2": 210,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 86,
+        "text": "0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 244,
+        "y1": 54,
+        "x2": 244,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 244,
+        "y": 86,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 278,
+        "y1": 54,
+        "x2": 278,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 278,
+        "y": 86,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 312,
+        "y1": 54,
+        "x2": 312,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 86,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 346,
+        "y1": 54,
+        "x2": 346,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 346,
+        "y": 86,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 54,
+        "x2": 380,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 86,
+        "text": "5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 88,
+        "cy": 60,
+        "r": 6,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 292,
+        "cy": 60,
+        "r": 6,
+        "fill": "blue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 88,
+        "y": 24,
+        "text": "−3",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 292,
+        "y": 24,
+        "text": "+3",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Additionner et soustraire",
+     "md": "- **Même signe** : on additionne les valeurs sans signe et on garde le signe : $(-4)+(-3)=-7$.\n- **Signes différents** : on soustrait la petite valeur de la grande et on garde le signe de la plus grande : $(-9)+(+5)=-4$.\n- **Soustraire**, c'est ajouter l'opposé : $a-b=a+(-b)$, donc $5-(-2)=5+2=7$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Multiplier et diviser : règle des signes",
+     "md": "- Même signe : le résultat est positif. Signes différents : le résultat est négatif.\n- Pour un produit de plusieurs facteurs, on compte les facteurs négatifs : nombre pair, résultat positif ; nombre impair, résultat négatif.\n- Même règle pour la division : $(-12)\\div(-4)=3$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : somme et différence",
+     "statement": "Calcule $A=(-7)+(+3)$ et $B=(-4)-(-9)$.",
+     "steps": [
+      {
+       "md": "Signes différents : on calcule $7-3=4$ et on garde le signe de 7, qui est négatif."
+      },
+      {
+       "md": "Donc :",
+       "tex": "A=-4"
+      },
+      {
+       "md": "Pour B, on ajoute l'opposé de $-9$ :",
+       "tex": "B=-4+9=5"
+      }
+     ],
+     "answer": "**A = −4 et B = 5**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : produit de trois facteurs",
+     "statement": "Calcule $C=(-3)\\times(-5)\\times(-2)$.",
+     "steps": [
+      {
+       "md": "Il y a trois facteurs négatifs : un nombre impair, le résultat sera négatif."
+      },
+      {
+       "md": "On multiplie les valeurs sans signe :",
+       "tex": "3\\times5\\times2=30"
+      }
+     ],
+     "answer": "**C = −30**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $-3-5=2$ : en fait $-3-5=-8$.\n- Oublier que $-(-a)=+a$.\n- Confondre « moins » opération et « moins » signe : $4-(-1)=5$, pas 3.\n- Dans un produit, oublier de compter les facteurs négatifs."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier la notation utilisée en classe : (+3), (−5) avec parenthèses, ou 3 et −5 directement."
+   ]
+  },
+  {
+   "id": "4e-maths-fractions",
+   "title": "Calculer avec des fractions",
+   "minutes": 25,
+   "programRef": "4e — Fractions : simplification et opérations (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Simplifier une fraction.",
+    "Additionner, soustraire, multiplier et diviser des fractions.",
+    "Calculer une fraction d'une quantité."
+   ],
+   "prerequisites": [
+    "4e-maths-relatifs"
+   ],
+   "exercises": [
+    "4e-maths-fractions-01",
+    "4e-maths-fractions-02",
+    "4e-maths-fractions-03",
+    "4e-maths-fractions-04",
+    "4e-maths-fractions-05",
+    "4e-maths-fractions-06"
+   ],
+   "selfCheck": [
+    "4e-maths-fractions-q1",
+    "4e-maths-fractions-q2",
+    "4e-maths-fractions-q3",
+    "4e-maths-fractions-q4",
+    "4e-maths-fractions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fraction",
+     "md": "Une fraction $\\frac{a}{b}$ (avec $b\\neq0$) représente $a$ divisé par $b$. On ne change pas sa valeur en multipliant ou en divisant le numérateur et le dénominateur par le même nombre non nul : $\\frac{6}{8}=\\frac{3}{4}$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les trois quarts d'un segment.",
+     "alt": "Un segment coupé en 4 parts égales dont 3 sont colorées.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 360,
+        "h": 50,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 270,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 30,
+        "x2": 110,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 200,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 30,
+        "x2": 290,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 62,
+        "text": "3 parts sur 4",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 62,
+        "text": "1 part",
+        "size": 16,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 20,
+        "text": "Fraction 3/4 du segment",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les quatre opérations",
+     "md": "- **Addition / soustraction** : mettre au même dénominateur : $\\frac{a}{c}+\\frac{b}{c}=\\frac{a+b}{c}$.\n- **Multiplication** : numérateur × numérateur, dénominateur × dénominateur : $\\frac{a}{b}\\times\\frac{c}{d}=\\frac{a\\times c}{b\\times d}$.\n- **Division** : multiplier par l'inverse : $\\frac{a}{b}\\div\\frac{c}{d}=\\frac{a}{b}\\times\\frac{d}{c}$.\n- **Fraction d'une quantité** : $\\frac{2}{5}$ de 60 = $60\\times\\frac{2}{5}=24$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : addition",
+     "statement": "Calcule $\\frac{3}{4}+\\frac{5}{6}$.",
+     "steps": [
+      {
+       "md": "Le plus petit dénominateur commun est 12."
+      },
+      {
+       "md": "On convertit :",
+       "tex": "\\frac{9}{12}+\\frac{10}{12}"
+      },
+      {
+       "md": "On additionne :",
+       "tex": "\\frac{19}{12}"
+      }
+     ],
+     "answer": "**$\\frac{19}{12}$** (déjà irréductible)"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : produit et quotient",
+     "statement": "Calcule $\\frac{2}{3}\\times\\frac{9}{10}$ puis $\\frac{5}{6}\\div\\frac{10}{9}$.",
+     "steps": [
+      {
+       "md": "Produit, avec simplification :",
+       "tex": "\\frac{2\\times9}{3\\times10}=\\frac{18}{30}=\\frac{3}{5}"
+      },
+      {
+       "md": "Quotient : on multiplie par l'inverse :",
+       "tex": "\\frac{5}{6}\\times\\frac{9}{10}=\\frac{45}{60}=\\frac{3}{4}"
+      }
+     ],
+     "answer": "**$\\frac{3}{5}$ et $\\frac{3}{4}$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner les dénominateurs : $\\frac{1}{2}+\\frac{1}{3}\\neq\\frac{2}{5}$ ; la bonne réponse est $\\frac{5}{6}$.\n- Mettre au même dénominateur pour un produit : inutile.\n- Inverser la mauvaise fraction dans une division : on inverse la deuxième."
+    }
+   ],
+   "reviewNotes": [
+    "Les fractions négatives sont traitées avec les règles de signes de la fiche précédente ; vérifier le niveau attendu en 4e."
+   ]
+  },
+  {
+   "id": "4e-maths-puissances",
+   "title": "Les puissances d'un nombre et l'écriture scientifique",
+   "minutes": 25,
+   "programRef": "4e — Puissances d'exposant entier ; puissances de 10 ; écriture scientifique (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une puissance entière d'un nombre.",
+    "Utiliser les règles sur les puissances de même base.",
+    "Écrire un nombre en notation scientifique."
+   ],
+   "prerequisites": [
+    "4e-maths-relatifs"
+   ],
+   "exercises": [
+    "4e-maths-puissances-01",
+    "4e-maths-puissances-02",
+    "4e-maths-puissances-03",
+    "4e-maths-puissances-04",
+    "4e-maths-puissances-05",
+    "4e-maths-puissances-06"
+   ],
+   "selfCheck": [
+    "4e-maths-puissances-q1",
+    "4e-maths-puissances-q2",
+    "4e-maths-puissances-q3",
+    "4e-maths-puissances-q4",
+    "4e-maths-puissances-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Puissance",
+     "md": "Pour un entier $n\\geq1$ : $a^n=a\\times a\\times\\dots\\times a$ ($n$ facteurs). Par convention $a^0=1$ et $a^{-n}=\\frac{1}{a^n}$ (si $a\\neq0$). Exemples : $2^3=8$, $10^{-2}=0{,}01$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les puissances de 2 doublent à chaque étape.",
+     "alt": "Un diagramme en bâtons des puissances de 2 de 1 à 32.",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "2⁰",
+        "value": 1,
+        "color": "blue"
+       },
+       {
+        "label": "2¹",
+        "value": 2,
+        "color": "blue"
+       },
+       {
+        "label": "2²",
+        "value": 4,
+        "color": "blue"
+       },
+       {
+        "label": "2³",
+        "value": 8,
+        "color": "blue"
+       },
+       {
+        "label": "2⁴",
+        "value": 16,
+        "color": "blue"
+       },
+       {
+        "label": "2⁵",
+        "value": 32,
+        "color": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Règles de calcul",
+     "md": "- $a^m\\times a^n=a^{m+n}$\n- $\\frac{a^m}{a^n}=a^{m-n}$\n- $(a^m)^n=a^{m\\times n}$\n- $(a\\times b)^n=a^n\\times b^n$\n\nCes règles s'appliquent à des puissances de **même base** (sauf la dernière)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : règles",
+     "statement": "Calcule $2^3\\times2^4$ puis $(3^2)^3$.",
+     "steps": [
+      {
+       "md": "Même base : on additionne les exposants :",
+       "tex": "2^3\\times2^4=2^7=128"
+      },
+      {
+       "md": "Puissance de puissance : on multiplie les exposants :",
+       "tex": "(3^2)^3=3^6=729"
+      }
+     ],
+     "answer": "**128 et 729**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : écriture scientifique",
+     "statement": "Écris 5 400 000 et $0{,}00032$ sous la forme $a\\times10^n$ avec $1\\leq a<10$.",
+     "steps": [
+      {
+       "md": "On place la virgule après le premier chiffre non nul : 5,4. On a déplacé la virgule de 6 rangs :",
+       "tex": "5\\,400\\,000=5{,}4\\times10^{6}"
+      },
+      {
+       "md": "Pour 0,00032 : 3,2 et la virgule se déplace de 4 rangs vers la droite :",
+       "tex": "0{,}00032=3{,}2\\times10^{-4}"
+      }
+     ],
+     "answer": "**$5{,}4\\times10^6$ et $3{,}2\\times10^{-4}$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- $2^3\\neq2\\times3$ : $2^3=8$, pas 6.\n- $2^3\\times2^4\\neq4^7$ : on garde la base et on additionne les exposants.\n- $(-2)^2=4$ mais $-2^2=-4$ : le signe moins n'est pas élevé au carré s'il n'est pas entre parenthèses.\n- Écriture scientifique : $a$ doit être compris entre 1 et 10 (10 exclu)."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si les exposants négatifs sont au programme de 4e ou de 3e selon les manuels."
+   ]
+  },
+  {
+   "id": "4e-maths-racines",
+   "title": "Initiation aux racines carrées",
+   "minutes": 20,
+   "programRef": "4e — Racine carrée d'un nombre positif : initiation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Connaître les carrés parfaits jusqu'à 15².",
+    "Définir et calculer la racine carrée d'un nombre positif.",
+    "Encadrer une racine carrée entre deux entiers."
+   ],
+   "prerequisites": [
+    "4e-maths-puissances"
+   ],
+   "exercises": [
+    "4e-maths-racines-01",
+    "4e-maths-racines-02",
+    "4e-maths-racines-03",
+    "4e-maths-racines-04",
+    "4e-maths-racines-05",
+    "4e-maths-racines-06"
+   ],
+   "selfCheck": [
+    "4e-maths-racines-q1",
+    "4e-maths-racines-q2",
+    "4e-maths-racines-q3",
+    "4e-maths-racines-q4",
+    "4e-maths-racines-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Racine carrée",
+     "md": "La racine carrée d'un nombre positif $a$, notée $\\sqrt{a}$, est **le nombre positif dont le carré est $a$**. Ainsi $\\sqrt{49}=7$ car $7^2=49$. On a toujours $(\\sqrt{a})^2=a$ et $\\sqrt{a^2}=a$ pour $a\\geq0$. Un nombre négatif n'a pas de racine carrée."
+    },
+    {
+     "type": "illustration",
+     "caption": "Si l'aire d'un carré est 49, son côté vaut 7 (la racine carrée de 49).",
+     "alt": "Deux carrés : l'un d'aire 49 et de côté 7, l'autre d'aire 25 et de côté 5.",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 120,
+        "h": 120,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 98,
+        "text": "aire 49",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 22,
+        "text": "7",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 95,
+        "text": "7",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 50,
+        "w": 80,
+        "h": 80,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 98,
+        "text": "aire 25",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 42,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 95,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Carrés parfaits à connaître",
+     "md": "$1,\\ 4,\\ 9,\\ 16,\\ 25,\\ 36,\\ 49,\\ 64,\\ 81,\\ 100,\\ 121,\\ 144,\\ 169,\\ 196,\\ 225$ sont les carrés de 1 à 15. Pour un autre nombre, on encadre : $\\sqrt{20}$ est entre 4 et 5 car $16<20<25$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer",
+     "statement": "Calcule $\\sqrt{81}$, $\\sqrt{0{,}25}$ et $(\\sqrt{7})^2$.",
+     "steps": [
+      {
+       "md": "$9^2=81$, donc $\\sqrt{81}=9$."
+      },
+      {
+       "md": "$0{,}5^2=0{,}25$, donc $\\sqrt{0{,}25}=0{,}5$."
+      },
+      {
+       "md": "Le carré annule la racine : $(\\sqrt{7})^2=7$."
+      }
+     ],
+     "answer": "**9 ; 0,5 ; 7**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : encadrer",
+     "statement": "Encadre $\\sqrt{50}$ entre deux entiers consécutifs.",
+     "steps": [
+      {
+       "md": "On cherche deux carrés parfaits autour de 50 :",
+       "tex": "49<50<64"
+      },
+      {
+       "md": "On prend les racines (qui conservent l'ordre) :",
+       "tex": "7<\\sqrt{50}<8"
+      }
+     ],
+     "answer": "**$7<\\sqrt{50}<8$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- $\\sqrt{9+16}\\neq\\sqrt{9}+\\sqrt{16}$ : $\\sqrt{25}=5$ mais $3+4=7$.\n- $\\sqrt{-4}$ n'existe pas.\n- Dire que $\\sqrt{16}=\\pm4$ : la racine carrée est toujours positive ; l'équation $x^2=16$ a deux solutions, 4 et −4.\n- Confondre $\\sqrt{a}$ et $\\frac{a}{2}$."
+    }
+   ],
+   "reviewNotes": [
+    "Le programme officiel de 4e peut limiter l'étude aux carrés parfaits et à l'usage de la calculatrice ; les règles de calcul sur les radicaux sont traitées en 3e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $(-8)+(+5)$.",
+   "answer": -3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Signes différents : $8-5=3$, avec le signe de 8, qui est négatif. Résultat : −3.",
+   "method": "Comparer les valeurs sans signe.",
+   "id": "4e-maths-relatifs-01",
+   "tier": "application",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $7-12$.",
+   "answer": -5,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$7-12=7+(-12)$ ; $12-7=5$ avec le signe de 12 : −5.",
+   "id": "4e-maths-relatifs-02",
+   "tier": "application",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le signe du produit $(-4)\\times(-3)\\times(-2)$ ?",
+   "choices": [
+    "Positif",
+    "Négatif",
+    "Nul",
+    "On ne peut pas savoir"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il y a trois facteurs négatifs, un nombre impair : le résultat est négatif ($-24$).",
+   "id": "4e-maths-relatifs-03",
+   "tier": "application",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $(-2)\\times(+5)-(-3)\\times(+4)$.",
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$(-2)\\times5=-10$ et $(-3)\\times4=-12$. Donc $-10-(-12)=-10+12=2$.",
+   "mistakes": [
+    "Oublier de changer le signe en soustrayant −12."
+   ],
+   "id": "4e-maths-relatifs-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque calcul à son résultat.",
+   "pairs": [
+    [
+     "$(-3)+(-4)$",
+     "−7"
+    ],
+    [
+     "$(-3)-(-4)$",
+     "1"
+    ],
+    [
+     "$(-3)\\times(-4)$",
+     "12"
+    ],
+    [
+     "$(-12)\\div 4$",
+     "−3"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Somme de deux négatifs : −7 ; $-3+4=1$ ; produit de deux négatifs : 12 ; division de signes différents : −3.",
+   "id": "4e-maths-relatifs-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Le compte d'Amina présente un solde de −12 500 FCFA (elle doit cette somme). Elle retire encore 8 000 FCFA puis dépose 15 000 FCFA.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le solde après le retrait (en FCFA) ?",
+     "answer": -20500,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$-12\\,500-8\\,000=-20\\,500$.",
+     "id": "4e-maths-relatifs-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le solde final (en FCFA) ?",
+     "answer": -5500,
+     "unit": "FCFA",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$-20\\,500+15\\,000=-5\\,500$ : le compte est encore négatif.",
+     "id": "4e-maths-relatifs-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Traduire chaque opération par un nombre relatif : retrait = négatif, dépôt = positif.",
+   "id": "4e-maths-relatifs-06",
+   "tier": "examen",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien vaut $(-5)+(-7)$ ?",
+   "choices": [
+    "12",
+    "−2",
+    "−12",
+    "2"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même signe : on additionne 5 et 7 et on garde le signe moins.",
+   "id": "4e-maths-relatifs-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien vaut $(-9)-(-9)$ ?",
+   "choices": [
+    "−18",
+    "18",
+    "−9",
+    "0"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$-9+9=0$ : un nombre moins lui-même donne 0.",
+   "id": "4e-maths-relatifs-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien vaut $(+6)\\times(-3)$ ?",
+   "choices": [
+    "18",
+    "−18",
+    "−3",
+    "3"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Signes différents : résultat négatif, $6\\times3=18$.",
+   "id": "4e-maths-relatifs-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien vaut $(-20)\\div(-5)$ ?",
+   "choices": [
+    "−4",
+    "25",
+    "4",
+    "−25"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux négatifs : quotient positif, $20\\div5=4$.",
+   "id": "4e-maths-relatifs-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'opposé de $-7{,}5$ ?",
+   "choices": [
+    "−7,5",
+    "0,75",
+    "−0,75",
+    "7,5"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'opposé de $-a$ est $a$.",
+   "id": "4e-maths-relatifs-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-relatifs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme irréductible de $\\frac{18}{24}$ ?",
+   "choices": [
+    "$\\frac{9}{12}$",
+    "$\\frac{2}{3}$",
+    "$\\frac{3}{4}$",
+    "$\\frac{6}{8}$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On divise par 6 : $\\frac{18}{24}=\\frac{3}{4}$ ; 3 et 4 n'ont aucun diviseur commun autre que 1.",
+   "id": "4e-maths-fractions-01",
+   "tier": "application",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule $\\frac{1}{2}+\\frac{1}{3}$.",
+   "choices": [
+    "$\\frac{2}{5}$",
+    "$\\frac{1}{5}$",
+    "$\\frac{5}{6}$",
+    "$\\frac{2}{6}$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dénominateur commun 6 : $\\frac{3}{6}+\\frac{2}{6}=\\frac{5}{6}$.",
+   "id": "4e-maths-fractions-02",
+   "tier": "application",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quels sont les $\\frac{3}{5}$ de 40 ?",
+   "answer": 24,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$40\\times\\frac{3}{5}=\\frac{120}{5}=24$.",
+   "method": "Diviser par le dénominateur puis multiplier par le numérateur : $40\\div5=8$, $8\\times3=24$.",
+   "id": "4e-maths-fractions-03",
+   "tier": "application",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule $\\frac{7}{4}-\\frac{5}{6}$.",
+   "choices": [
+    "$\\frac{2}{2}$",
+    "$\\frac{11}{12}$",
+    "$\\frac{1}{2}$",
+    "$\\frac{13}{12}$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$\\frac{21}{12}-\\frac{10}{12}=\\frac{11}{12}$.",
+   "id": "4e-maths-fractions-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule $\\frac{4}{9}\\div\\frac{8}{3}$.",
+   "choices": [
+    "$\\frac{32}{27}$",
+    "$\\frac{3}{2}$",
+    "$\\frac{2}{3}$",
+    "$\\frac{1}{6}$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$\\frac{4}{9}\\times\\frac{3}{8}=\\frac{12}{72}=\\frac{1}{6}$.",
+   "id": "4e-maths-fractions-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa a un champ de 120 ares. Il en consacre les $\\frac{1}{3}$ au manioc, puis les $\\frac{3}{8}$ du champ au maïs ; le reste est en jachère.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle surface (en ares) est plantée en manioc ?",
+     "answer": 40,
+     "unit": "ares",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$120\\times\\frac{1}{3}=40$ ares.",
+     "id": "4e-maths-fractions-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle surface (en ares) est plantée en maïs ?",
+     "answer": 45,
+     "unit": "ares",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$120\\times\\frac{3}{8}=45$ ares.",
+     "id": "4e-maths-fractions-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle surface (en ares) reste en jachère ?",
+     "answer": 35,
+     "unit": "ares",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$120-40-45=35$ ares.",
+     "id": "4e-maths-fractions-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Calculer chaque fraction du champ entier, puis soustraire.",
+   "id": "4e-maths-fractions-06",
+   "tier": "examen",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel dénominateur commun faut-il pour $\\frac{1}{4}+\\frac{1}{6}$ (le plus petit) ?",
+   "choices": [
+    "12",
+    "10",
+    "24",
+    "6"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le plus petit multiple commun de 4 et 6 est 12.",
+   "id": "4e-maths-fractions-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien vaut $\\frac{2}{5}\\times\\frac{5}{2}$ ?",
+   "choices": [
+    "$\\frac{4}{10}$",
+    "1",
+    "0",
+    "$\\frac{10}{4}$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ce sont deux inverses l'un de l'autre : le produit vaut 1.",
+   "id": "4e-maths-fractions-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut $\\frac{6}{15}$ simplifiée ?",
+   "choices": [
+    "$\\frac{2}{5}$",
+    "$\\frac{3}{5}$",
+    "$\\frac{3}{8}$",
+    "$\\frac{1}{3}$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On divise par 3 en haut et en bas.",
+   "id": "4e-maths-fractions-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut $\\frac{3}{7}$ de 70 ?",
+   "choices": [
+    "30",
+    "10",
+    "21",
+    "49"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$70\\div7=10$ puis $10\\times3=30$.",
+   "id": "4e-maths-fractions-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour diviser par $\\frac{3}{4}$ on multiplie par...",
+   "choices": [
+    "$\\frac{4}{3}$",
+    "$\\frac{3}{4}$",
+    "$-\\frac{3}{4}$",
+    "$\\frac{1}{4}$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Diviser par une fraction revient à multiplier par son inverse.",
+   "id": "4e-maths-fractions-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-fractions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $2^5$.",
+   "answer": 32,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$2^5=2\\times2\\times2\\times2\\times2=32$.",
+   "id": "4e-maths-puissances-01",
+   "tier": "application",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $(-2)^3$.",
+   "answer": -8,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$(-2)\\times(-2)\\times(-2)=4\\times(-2)=-8$ : trois facteurs négatifs, résultat négatif.",
+   "id": "4e-maths-puissances-02",
+   "tier": "application",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la valeur de $10^{-2}$ ?",
+   "choices": [
+    "−20",
+    "0,01",
+    "0,1",
+    "0,001"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$10^{-2}=\\frac{1}{10^2}=\\frac{1}{100}=0{,}01$.",
+   "id": "4e-maths-puissances-03",
+   "tier": "application",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $\\frac{2^3\\times2^5}{2^6}$.",
+   "answer": 4,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Au numérateur $2^{3+5}=2^8$ ; puis $\\frac{2^8}{2^6}=2^2=4$.",
+   "id": "4e-maths-puissances-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque nombre à son écriture scientifique.",
+   "pairs": [
+    [
+     "45 000",
+     "$4{,}5\\times10^4$"
+    ],
+    [
+     "0,0045",
+     "$4{,}5\\times10^{-3}$"
+    ],
+    [
+     "450 000",
+     "$4{,}5\\times10^5$"
+    ],
+    [
+     "4,5",
+     "$4{,}5\\times10^0$"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "On déplace la virgule jusqu'à obtenir un nombre entre 1 et 10 et on compte le nombre de rangs.",
+   "id": "4e-maths-puissances-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une usine produit $4{,}5\\times10^4$ sachets de farine par mois. Chaque sachet contient $2\\times10^2$ g de farine.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le nombre de sachets produits ?",
+     "answer": 45000,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$4{,}5\\times10^4=45\\,000$.",
+     "id": "4e-maths-puissances-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle masse totale de farine (en grammes) est conditionnée en un mois ?",
+     "answer": 9000000,
+     "unit": "g",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$4{,}5\\times10^4\\times2\\times10^2=9\\times10^6$ g, soit 9 000 000 g.",
+     "id": "4e-maths-puissances-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est cette masse en kilogrammes ?",
+     "answer": 9000,
+     "unit": "kg",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$9\\,000\\,000\\div1\\,000=9\\,000$ kg.",
+     "id": "4e-maths-puissances-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Multiplier les nombres entre eux et les puissances de 10 entre elles.",
+   "id": "4e-maths-puissances-06",
+   "tier": "examen",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut $5^0$ ?",
+   "choices": [
+    "0",
+    "5",
+    "On ne peut pas savoir",
+    "1"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tout nombre non nul à la puissance 0 vaut 1.",
+   "id": "4e-maths-puissances-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la valeur de $3^4$ ?",
+   "choices": [
+    "12",
+    "81",
+    "64",
+    "7"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$3\\times3\\times3\\times3=81$.",
+   "id": "4e-maths-puissances-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment écrit-on $7^2\\times7^5$ ?",
+   "choices": [
+    "$7^7$",
+    "$7^{10}$",
+    "$49^7$",
+    "$14^7$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même base : on additionne les exposants, $2+5=7$.",
+   "id": "4e-maths-puissances-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle égalité est exacte ?",
+   "choices": [
+    "$(2^3)^2=2^5$",
+    "$(2^3)^2=4^3$",
+    "$(2^3)^2=2^6$",
+    "$(2^3)^2=2^9$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Puissance de puissance : on multiplie les exposants, $3\\times2=6$.",
+   "id": "4e-maths-puissances-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle écriture est une notation scientifique ?",
+   "choices": [
+    "$2{,}7\\times10^3$",
+    "$27\\times10^2$",
+    "$0{,}27\\times10^4$",
+    "$2700\\times10^0$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut un facteur entre 1 et 10 : 2,7.",
+   "id": "4e-maths-puissances-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $\\sqrt{81}$.",
+   "answer": 9,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On cherche le nombre positif dont le carré est 81 : $9^2=81$.",
+   "id": "4e-maths-racines-01",
+   "tier": "application",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule $\\sqrt{144}$.",
+   "answer": 12,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$12^2=144$.",
+   "id": "4e-maths-racines-02",
+   "tier": "application",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : $\\sqrt{25}=\\pm5$.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La racine carrée est un nombre positif : $\\sqrt{25}=5$. C'est l'équation $x^2=25$ qui a deux solutions.",
+   "id": "4e-maths-racines-03",
+   "tier": "application",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Entre quels entiers consécutifs se trouve $\\sqrt{90}$ ?",
+   "choices": [
+    "8 et 9",
+    "10 et 11",
+    "9 et 10",
+    "45 et 46"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$81<90<100$, donc $9<\\sqrt{90}<10$.",
+   "id": "4e-maths-racines-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : $\\sqrt{9+16}=\\sqrt{9}+\\sqrt{16}$.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$\\sqrt{25}=5$ alors que $\\sqrt{9}+\\sqrt{16}=3+4=7$.",
+   "mistakes": [
+    "Croire que la racine carrée « distribue » sur une somme."
+   ],
+   "id": "4e-maths-racines-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un terrain carré a une aire de 2 500 m². Le propriétaire veut le clôturer avec du grillage vendu 1 500 FCFA le mètre.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur du côté du terrain (en m) ?",
+     "answer": 50,
+     "unit": "m",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le côté est $\\sqrt{2500}=50$ m car $50^2=2\\,500$.",
+     "id": "4e-maths-racines-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le périmètre (en m) ?",
+     "answer": 200,
+     "unit": "m",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$4\\times50=200$ m.",
+     "id": "4e-maths-racines-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le prix du grillage (en FCFA) ?",
+     "answer": 300000,
+     "unit": "FCFA",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$200\\times1\\,500=300\\,000$ FCFA.",
+     "id": "4e-maths-racines-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Le côté d'un carré d'aire $A$ est $\\sqrt{A}$.",
+   "id": "4e-maths-racines-06",
+   "tier": "examen",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la racine carrée de 64 ?",
+   "choices": [
+    "32",
+    "6",
+    "8",
+    "4"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$8^2=64$.",
+   "id": "4e-maths-racines-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien vaut $(\\sqrt{11})^2$ ?",
+   "choices": [
+    "121",
+    "11",
+    "5,5",
+    "22"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le carré d'une racine carrée redonne le nombre.",
+   "id": "4e-maths-racines-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est un carré parfait ?",
+   "choices": [
+    "169",
+    "150",
+    "200",
+    "99"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$13^2=169$.",
+   "id": "4e-maths-racines-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$\\sqrt{30}$ est compris entre...",
+   "choices": [
+    "4 et 5",
+    "6 et 7",
+    "5 et 6",
+    "15 et 16"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$25<30<36$.",
+   "id": "4e-maths-racines-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expression n'a pas de sens dans les nombres que tu connais ?",
+   "choices": [
+    "$\\sqrt{0}$",
+    "$\\sqrt{9}$",
+    "$\\sqrt{0{,}09}$",
+    "$\\sqrt{-9}$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un carré n'est jamais négatif : −9 n'a pas de racine carrée.",
+   "id": "4e-maths-racines-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-racines",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

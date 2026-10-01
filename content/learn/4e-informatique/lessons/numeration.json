@@ -1,0 +1,1793 @@
+{
+ "chapter": "4e-informatique-numeration",
+ "lessons": [
+  {
+   "id": "4e-informatique-binaire",
+   "title": "Le système binaire",
+   "minutes": 30,
+   "programRef": "4e — Numération binaire (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer pourquoi l'ordinateur utilise 0 et 1.",
+    "Convertir un nombre binaire en décimal et inversement."
+   ],
+   "prerequisites": [
+    "4e-informatique-os-fichiers"
+   ],
+   "exercises": [
+    "4e-informatique-binaire-01",
+    "4e-informatique-binaire-02",
+    "4e-informatique-binaire-03",
+    "4e-informatique-binaire-04",
+    "4e-informatique-binaire-05",
+    "4e-informatique-binaire-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-binaire-q1",
+    "4e-informatique-binaire-q2",
+    "4e-informatique-binaire-q3",
+    "4e-informatique-binaire-q4",
+    "4e-informatique-binaire-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Bit et système binaire",
+     "md": "Un ordinateur ne connaît que deux états (courant ou pas de courant). On les note **0** et **1**. Un chiffre binaire s'appelle un **bit**. Un nombre écrit avec seulement 0 et 1 est en **base 2**. Un groupe de 8 bits s'appelle un **octet**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les valeurs des positions en binaire : des puissances de 2.",
+     "alt": "Tableau : de droite à gauche 1, 2, 4, 8, 16, 32, 64, 128.",
+     "figure": {
+      "kind": "shapes",
+      "w": 448,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 60,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 40.0,
+        "text": "Rang",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 10,
+        "w": 46,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 93.0,
+        "y": 40.0,
+        "text": "7",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 116,
+        "y": 10,
+        "w": 46,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139.0,
+        "y": 40.0,
+        "text": "6",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 162,
+        "y": 10,
+        "w": 46,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 185.0,
+        "y": 40.0,
+        "text": "5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 208,
+        "y": 10,
+        "w": 46,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 231.0,
+        "y": 40.0,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 254,
+        "y": 10,
+        "w": 46,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 277.0,
+        "y": 40.0,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 10,
+        "w": 46,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 323.0,
+        "y": 40.0,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 346,
+        "y": 10,
+        "w": 46,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 369.0,
+        "y": 40.0,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 392,
+        "y": 10,
+        "w": 46,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 415.0,
+        "y": 40.0,
+        "text": "0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 60,
+        "w": 60,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 90.0,
+        "text": "Valeur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 60,
+        "w": 46,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 93.0,
+        "y": 90.0,
+        "text": "128",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 116,
+        "y": 60,
+        "w": 46,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139.0,
+        "y": 90.0,
+        "text": "64",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 162,
+        "y": 60,
+        "w": 46,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 185.0,
+        "y": 90.0,
+        "text": "32",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 208,
+        "y": 60,
+        "w": 46,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 231.0,
+        "y": 90.0,
+        "text": "16",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 254,
+        "y": 60,
+        "w": 46,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 277.0,
+        "y": 90.0,
+        "text": "8",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 60,
+        "w": 46,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 323.0,
+        "y": 90.0,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 346,
+        "y": 60,
+        "w": 46,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 369.0,
+        "y": 90.0,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 392,
+        "y": 60,
+        "w": 46,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 415.0,
+        "y": 90.0,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Binaire vers décimal et décimal vers binaire",
+     "md": "**Binaire vers décimal** : on additionne les valeurs des positions où il y a un 1.\n**Décimal vers binaire** : on place dans le tableau les plus grandes valeurs possibles (128, 64, 32…) sans dépasser le nombre : 1 si on la prend, 0 sinon ; on continue avec le reste."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : binaire vers décimal",
+     "statement": "Convertis 1101 (base 2) en décimal.",
+     "steps": [
+      {
+       "md": "Les positions de droite à gauche valent 1, 2, 4, 8."
+      },
+      {
+       "md": "Les 1 sont en positions 8, 4 et 1 :",
+       "tex": "8 + 4 + 1 = 13"
+      }
+     ],
+     "answer": "**1101 en base 2 vaut 13**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : décimal vers binaire",
+     "statement": "Convertis 45 en binaire.",
+     "steps": [
+      {
+       "md": "Plus grande valeur ≤ 45 : 32. Reste 45 − 32 = 13."
+      },
+      {
+       "md": "Ensuite 16 est trop grand (0), 8 convient : reste 5 ; 4 convient : reste 1 ; 2 non ; 1 oui."
+      },
+      {
+       "md": "On lit 32, 16, 8, 4, 2, 1 : 1 0 1 1 0 1."
+      }
+     ],
+     "answer": "**45 s'écrit 101101 en base 2**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Lire de gauche à droite avec les valeurs 1, 2, 4… : le chiffre de droite a la valeur 1.\n- Écrire un chiffre 2 en binaire : seuls 0 et 1 existent.\n- Oublier un zéro en position intermédiaire : 101 n'est pas 11."
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact non vérifié : limiter aux nombres inférieurs à 256 pour garder des calculs simples."
+   ]
+  },
+  {
+   "id": "4e-informatique-hexadecimal",
+   "title": "Le système hexadécimal",
+   "minutes": 25,
+   "programRef": "4e — Numération hexadécimale (à vérifier : peut relever plutôt de la 3e ou du lycée)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Lire les chiffres hexadécimaux 0 à 9 et A à F.",
+    "Passer de l'hexadécimal au décimal et du binaire à l'hexadécimal."
+   ],
+   "prerequisites": [
+    "4e-informatique-binaire"
+   ],
+   "exercises": [
+    "4e-informatique-hexadecimal-01",
+    "4e-informatique-hexadecimal-02",
+    "4e-informatique-hexadecimal-03",
+    "4e-informatique-hexadecimal-04",
+    "4e-informatique-hexadecimal-05",
+    "4e-informatique-hexadecimal-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-hexadecimal-q1",
+    "4e-informatique-hexadecimal-q2",
+    "4e-informatique-hexadecimal-q3",
+    "4e-informatique-hexadecimal-q4",
+    "4e-informatique-hexadecimal-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Base 16",
+     "md": "Le **système hexadécimal** utilise 16 symboles : les chiffres 0 à 9, puis les lettres A, B, C, D, E, F qui valent 10, 11, 12, 13, 14, 15. Un nombre hexadécimal s'écrit avec ces symboles ; la valeur de chaque position est multipliée par 16 en allant vers la gauche (1, 16, 256…). Il sert à écrire les nombres binaires plus court (couleurs des pages web, adresses)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les six lettres hexadécimales.",
+     "alt": "Tableau : 10=A, 11=B, 12=C, 13=D, 14=E, 15=F.",
+     "figure": {
+      "kind": "shapes",
+      "w": 392,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 60,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 40.0,
+        "text": "Déc.",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 10,
+        "w": 52,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 96.0,
+        "y": 40.0,
+        "text": "10",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 122,
+        "y": 10,
+        "w": 52,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 40.0,
+        "text": "11",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 174,
+        "y": 10,
+        "w": 52,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 40.0,
+        "text": "12",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 226,
+        "y": 10,
+        "w": 52,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 252.0,
+        "y": 40.0,
+        "text": "13",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 278,
+        "y": 10,
+        "w": 52,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 304.0,
+        "y": 40.0,
+        "text": "14",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 10,
+        "w": 52,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 356.0,
+        "y": 40.0,
+        "text": "15",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 60,
+        "w": 60,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 90.0,
+        "text": "Hexa",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 96.0,
+        "y": 90.0,
+        "text": "A",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 122,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 90.0,
+        "text": "B",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 174,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 90.0,
+        "text": "C",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 226,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 252.0,
+        "y": 90.0,
+        "text": "D",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 278,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 304.0,
+        "y": 90.0,
+        "text": "E",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 356.0,
+        "y": 90.0,
+        "text": "F",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Conversions",
+     "md": "**Hexa vers décimal** : chiffre de gauche × 16 + chiffre de droite (pour deux chiffres).\n**Binaire vers hexa** : on coupe en groupes de 4 bits en partant de la droite, puis on remplace chaque groupe par son symbole (0000 = 0, 1001 = 9, 1010 = A, 1111 = F)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : hexa vers décimal",
+     "statement": "Convertis 2F en décimal.",
+     "steps": [
+      {
+       "md": "2 est en position 16 et F vaut 15."
+      },
+      {
+       "md": "On calcule :",
+       "tex": "2 \\times 16 + 15 = 32 + 15 = 47"
+      }
+     ],
+     "answer": "**2F vaut 47**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : binaire vers hexa",
+     "statement": "Écris 10111100 (base 2) en hexadécimal.",
+     "steps": [
+      {
+       "md": "On coupe en deux groupes de 4 bits : 1011 et 1100."
+      },
+      {
+       "md": "1011 = 8 + 2 + 1 = 11 donc B ; 1100 = 8 + 4 = 12 donc C."
+      }
+     ],
+     "answer": "**BC**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Lire A comme 1 : la lettre A vaut dix.\n- Découper les groupes de 4 bits en partant de la gauche : on part de la droite.\n- Écrire « 2F = 2 + 15 = 17 » : il faut multiplier le premier chiffre par 16."
+    }
+   ],
+   "reviewNotes": [
+    "Doute : l'hexadécimal n'est pas certain d'être au programme de 4e ; fiche proposée comme approfondissement."
+   ]
+  },
+  {
+   "id": "4e-informatique-representation",
+   "title": "Représenter texte, image et son",
+   "minutes": 30,
+   "programRef": "4e — Codage de l'information : texte, image, son ; unités (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer comment un texte, une image et un son sont codés par des nombres.",
+    "Calculer la taille simple d'une image en noir et blanc.",
+    "Utiliser les unités octet, Ko, Mo."
+   ],
+   "prerequisites": [
+    "4e-informatique-binaire"
+   ],
+   "exercises": [
+    "4e-informatique-representation-01",
+    "4e-informatique-representation-02",
+    "4e-informatique-representation-03",
+    "4e-informatique-representation-04",
+    "4e-informatique-representation-05",
+    "4e-informatique-representation-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-representation-q1",
+    "4e-informatique-representation-q2",
+    "4e-informatique-representation-q3",
+    "4e-informatique-representation-q4",
+    "4e-informatique-representation-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Tout est codé en nombres",
+     "md": "Pour l'ordinateur, texte, images et sons sont des suites de bits.\n- **Texte** : chaque caractère a un numéro (ex. A = 65, B = 66 dans le code ASCII) écrit en binaire.\n- **Image** : une grille de petits carrés, les **pixels** ; chaque pixel a un code de couleur.\n- **Son** : on mesure le signal très souvent par seconde (**échantillonnage**) et on code chaque mesure."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une image noir et blanc de 5 × 5 pixels (le chiffre 1).",
+     "alt": "Grille de 25 carrés noirs ou blancs formant un chiffre un.",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 20,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 20,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 20,
+        "w": 30,
+        "h": 30,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 20,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 20,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 50,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 50,
+        "w": 30,
+        "h": 30,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 50,
+        "w": 30,
+        "h": 30,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 50,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 50,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 80,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 80,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 80,
+        "w": 30,
+        "h": 30,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 80,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 80,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 110,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 110,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 110,
+        "w": 30,
+        "h": 30,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 110,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 110,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 140,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 140,
+        "w": 30,
+        "h": 30,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 140,
+        "w": 30,
+        "h": 30,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 140,
+        "w": 30,
+        "h": 30,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 140,
+        "w": 30,
+        "h": 30,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 105,
+        "text": "image 5 × 5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 130,
+        "text": "25 pixels",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Unités et tailles",
+     "md": "1 octet = 8 bits. 1 Ko (kilo-octet) = 1 000 octets ; 1 Mo = 1 000 Ko ; 1 Go = 1 000 Mo. Une image noir et blanc utilise 1 bit par pixel : taille en bits = largeur × hauteur. Avec n bits on peut coder 2 puissance n valeurs différentes."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : taille d'une image",
+     "statement": "Une image noir et blanc fait 100 pixels de large et 50 de haut. Quelle est sa taille en octets (1 bit par pixel) ?",
+     "steps": [
+      {
+       "md": "Nombre de pixels : 100 × 50 = 5 000, donc 5 000 bits."
+      },
+      {
+       "md": "En octets : 5 000 ÷ 8 = 625."
+      }
+     ],
+     "answer": "**625 octets**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : code d'une lettre",
+     "statement": "Dans le code ASCII, A vaut 65. Quelle est la lettre de code 68 ? Quel est le code binaire de A ?",
+     "steps": [
+      {
+       "md": "A=65, B=66, C=67, D=68 : la lettre est D."
+      },
+      {
+       "md": "65 = 64 + 1 : en binaire 1000001 (sur un octet : 01000001)."
+      }
+     ],
+     "answer": "**D ; A = 01000001**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre bit (b) et octet (o) : un octet = 8 bits.\n- Diviser par 8 pour passer des octets aux bits : c'est l'inverse, des bits aux octets.\n- Croire qu'une photo « contient » des couleurs : elle contient des nombres décrivant chaque pixel."
+    }
+   ],
+   "reviewNotes": [
+    "Les préfixes Ko/Mo : 1 Ko = 1000 octets (convention décimale) ; certains manuels utilisent 1024. À harmoniser avec le manuel officiel.",
+    "Le code ASCII (A = 65) est classique et sûr ; les détails Unicode sont omis."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 1010 (base 2) en décimal.",
+   "answer": 10,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "8 + 2 = 10.",
+   "id": "4e-informatique-binaire-01",
+   "tier": "application",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 11111 (base 2) en décimal.",
+   "answer": 31,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "16 + 8 + 4 + 2 + 1 = 31.",
+   "id": "4e-informatique-binaire-02",
+   "tier": "application",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'écriture binaire de 6 ?",
+   "choices": [
+    "110",
+    "101",
+    "111",
+    "1001"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "6 = 4 + 2 donc 110.",
+   "id": "4e-informatique-binaire-03",
+   "tier": "application",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 77 en binaire. Donne le nombre de 1 qu'il contient.",
+   "answer": 4,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "77 = 64 + 8 + 4 + 1, soit 1001101 en binaire : 4 chiffres 1.",
+   "method": "Décompose 77 en valeurs 64, 32, 16, 8, 4, 2, 1.",
+   "id": "4e-informatique-binaire-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la plus grande valeur qu'on peut écrire avec un octet (8 bits), en décimal ?",
+   "answer": 255,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "11111111 = 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255.",
+   "id": "4e-informatique-binaire-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng veut coder son âge, 14 ans, en binaire sur un octet.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel nombre décimal vaut 00001110 en binaire ?",
+     "answer": 14,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "8 + 4 + 2 = 14. Il a donc bien codé 14.",
+     "id": "4e-informatique-binaire-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Combien de zéros y a-t-il au début de 00001110 ?",
+     "choices": [
+      "3",
+      "5",
+      "4",
+      "8"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les quatre premiers bits sont 0, puis 1110.",
+     "id": "4e-informatique-binaire-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de valeurs différentes peut-on écrire sur un octet (de 0 à 255) ?",
+     "answer": 256,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "2 puissance 8 = 256 combinaisons.",
+     "id": "4e-informatique-binaire-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-binaire-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel chiffre n'existe pas en binaire ?",
+   "choices": [
+    "0",
+    "1",
+    "Aucun des trois",
+    "2"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "En base 2, seuls 0 et 1 sont des chiffres.",
+   "id": "4e-informatique-binaire-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de bits dans un octet ?",
+   "choices": [
+    "4",
+    "16",
+    "8",
+    "10"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un octet est un groupe de 8 bits.",
+   "id": "4e-informatique-binaire-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 100 en base 2 ?",
+   "choices": [
+    "4",
+    "2",
+    "8",
+    "100"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le 1 est en position 4 : valeur 4.",
+   "id": "4e-informatique-binaire-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut le chiffre 1 le plus à droite dans un nombre binaire ?",
+   "choices": [
+    "2",
+    "0",
+    "10",
+    "1"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La dernière position vaut 1.",
+   "id": "4e-informatique-binaire-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle écriture binaire représente 9 ?",
+   "choices": [
+    "1001",
+    "1010",
+    "110",
+    "1111"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "9 = 8 + 1, donc 1001.",
+   "id": "4e-informatique-binaire-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-binaire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Que vaut la lettre C en décimal ?",
+   "answer": 12,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "A=10, B=11, C=12.",
+   "id": "4e-informatique-hexadecimal-01",
+   "tier": "application",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 3A (hexa) en décimal.",
+   "answer": 58,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 16 + 10 = 48 + 10 = 58.",
+   "id": "4e-informatique-hexadecimal-02",
+   "tier": "application",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle valeur binaire correspond à F ?",
+   "choices": [
+    "1010",
+    "1100",
+    "1111",
+    "0111"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "F = 15 = 8 + 4 + 2 + 1 = 1111.",
+   "id": "4e-informatique-hexadecimal-03",
+   "tier": "application",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis FF (hexa) en décimal.",
+   "answer": 255,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "15 × 16 + 15 = 255, la plus grande valeur d'un octet.",
+   "id": "4e-informatique-hexadecimal-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 0110 1001 (binaire) en hexadécimal ?",
+   "choices": [
+    "96",
+    "61",
+    "6A",
+    "69"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "0110 = 6 et 1001 = 9, donc 69.",
+   "id": "4e-informatique-hexadecimal-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une couleur d'un site web s'écrit avec trois octets : rouge, vert, bleu. Amina lit la valeur du rouge : 1E.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Convertis 1E en décimal.",
+     "answer": 30,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "1 × 16 + 14 = 30.",
+     "id": "4e-informatique-hexadecimal-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Combien de chiffres hexadécimaux faut-il pour un octet ?",
+     "choices": [
+      "1",
+      "4",
+      "8",
+      "2"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Un octet = 8 bits = 2 groupes de 4 bits = 2 chiffres hexa.",
+     "id": "4e-informatique-hexadecimal-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Convertis 00011110 en décimal pour vérifier.",
+     "answer": 30,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "16 + 8 + 4 + 2 = 30.",
+     "id": "4e-informatique-hexadecimal-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-hexadecimal-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de symboles utilise l'hexadécimal ?",
+   "choices": [
+    "10",
+    "8",
+    "16",
+    "2"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Base 16 : 16 symboles.",
+   "id": "4e-informatique-hexadecimal-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut B en décimal ?",
+   "choices": [
+    "11",
+    "10",
+    "12",
+    "2"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "A=10 donc B=11.",
+   "id": "4e-informatique-hexadecimal-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un groupe de 4 bits correspond à :",
+   "choices": [
+    "Un octet",
+    "Deux chiffres",
+    "Un pixel",
+    "Un chiffre hexadécimal"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 bits donnent 16 combinaisons, comme 16 symboles.",
+   "id": "4e-informatique-hexadecimal-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle valeur décimale a 10 en hexadécimal ?",
+   "choices": [
+    "16",
+    "10",
+    "2",
+    "8"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 × 16 + 0 = 16.",
+   "id": "4e-informatique-hexadecimal-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 1010 en hexa ?",
+   "choices": [
+    "C",
+    "A",
+    "5",
+    "10"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1010 = 10 = A.",
+   "id": "4e-informatique-hexadecimal-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-hexadecimal",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de bits dans 5 octets ?",
+   "answer": 40,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "5 × 8 = 40 bits.",
+   "id": "4e-informatique-representation-01",
+   "tier": "application",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de pixels dans une image de 10 sur 20 pixels ?",
+   "answer": 200,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10 × 20 = 200.",
+   "id": "4e-informatique-representation-02",
+   "tier": "application",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans le code ASCII, A = 65. Quel est le code de B ?",
+   "choices": [
+    "64",
+    "66",
+    "67",
+    "98"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les lettres se suivent : B = 66.",
+   "id": "4e-informatique-representation-03",
+   "tier": "application",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la taille en octets d'une image noir et blanc de 16 sur 16 pixels (1 bit par pixel) ?",
+   "answer": 32,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "16 × 16 = 256 bits ; 256 ÷ 8 = 32 octets.",
+   "id": "4e-informatique-representation-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de valeurs différentes peut-on coder avec 3 bits ?",
+   "answer": 8,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "2 × 2 × 2 = 8 combinaisons (000 à 111).",
+   "id": "4e-informatique-representation-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris veut enregistrer un petit message de 120 caractères, un caractère étant codé sur 1 octet.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la taille du message en octets ?",
+     "answer": 120,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "120 caractères × 1 octet = 120 octets.",
+     "id": "4e-informatique-representation-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de messages de ce type tiennent dans 1 Ko (1 000 octets) ? (arrondis à l'entier inférieur)",
+     "answer": 8,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "1 000 ÷ 120 ≈ 8,3 : 8 messages entiers.",
+     "id": "4e-informatique-representation-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique en deux phrases pourquoi une photo prend plus de place qu'un message écrit.",
+     "model": "Une photo contient des milliers de pixels, chacun codé par un ou plusieurs octets, alors qu'un texte n'a que quelques octets par mot.",
+     "rubric": [
+      "Idée de beaucoup de pixels",
+      "Idée de plusieurs octets par pixel"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-informatique-representation-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-representation-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un pixel est :",
+   "choices": [
+    "Un son",
+    "Une lettre",
+    "Un point d'une image",
+    "Un fichier"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une image est une grille de pixels.",
+   "id": "4e-informatique-representation-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 octet vaut :",
+   "choices": [
+    "1 bit",
+    "10 bits",
+    "8 bits",
+    "1 000 bits"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition de l'octet.",
+   "id": "4e-informatique-representation-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment l'ordinateur mémorise-t-il un son ?",
+   "choices": [
+    "Il garde l'air",
+    "Il écrit les paroles seulement",
+    "Il enregistre une photo",
+    "Par des mesures du signal codées en nombres"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est l'échantillonnage.",
+   "id": "4e-informatique-representation-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de valeurs avec 1 bit ?",
+   "choices": [
+    "1",
+    "8",
+    "2",
+    "10"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un bit vaut 0 ou 1.",
+   "id": "4e-informatique-representation-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle unité est la plus grande ?",
+   "choices": [
+    "Ko",
+    "Octet",
+    "Bit",
+    "Mo"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 Mo = 1 000 Ko.",
+   "id": "4e-informatique-representation-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-representation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

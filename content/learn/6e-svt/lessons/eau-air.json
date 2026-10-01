@@ -1,0 +1,822 @@
+{
+ "chapter": "6e-svt-eau-air",
+ "lessons": [
+  {
+   "id": "6e-svt-eau",
+   "title": "L'eau : cycle, usages et pollution",
+   "minutes": 25,
+   "programRef": "6e — L'eau (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Décrire le cycle de l'eau.",
+    "Citer les rôles de l'eau.",
+    "Reconnaître des sources de pollution et des moyens de rendre l'eau potable."
+   ],
+   "prerequisites": [
+    "6e-svt-vivant-non-vivant"
+   ],
+   "exercises": [
+    "6e-svt-eau-01",
+    "6e-svt-eau-02",
+    "6e-svt-eau-03",
+    "6e-svt-eau-04",
+    "6e-svt-eau-05",
+    "6e-svt-eau-06"
+   ],
+   "selfCheck": [
+    "6e-svt-eau-q1",
+    "6e-svt-eau-q2",
+    "6e-svt-eau-q3",
+    "6e-svt-eau-q4",
+    "6e-svt-eau-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le cycle de l'eau",
+     "md": "Sous l'effet de la chaleur du soleil, l'eau des mers et des fleuves **s'évapore**. En altitude, la vapeur se **condense** en nuages. Les nuages donnent des **précipitations** (pluie). L'eau **ruisselle** vers les rivières ou **s'infiltre** dans le sol, puis le cycle recommence."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le cycle de l'eau dans la nature.",
+     "alt": "Un schéma avec le soleil, l'évaporation depuis la mer, la condensation en nuage, la pluie et le ruissellement vers la mer.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 280,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 50,
+        "cy": 45,
+        "r": 24,
+        "fill": "yellow",
+        "stroke": "orange",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 270,
+        "cy": 60,
+        "r": 24,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 310,
+        "cy": 60,
+        "r": 24,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 290,
+        "cy": 45,
+        "r": 28,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 62,
+        "text": "nuage",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 0,
+        "y": 220,
+        "w": 200,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 255,
+        "text": "mer, fleuve",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         280,
+         200,
+         215,
+         300,
+         190,
+         360,
+         140,
+         460,
+         170,
+         460,
+         280
+        ],
+        "fill": "lightgreen",
+        "stroke": "green",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 215,
+        "x2": 195,
+        "y2": 90,
+        "color": "red",
+        "width": 3,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 150,
+        "text": "évaporation",
+        "size": 14,
+        "color": "red",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 18,
+        "text": "condensation",
+        "size": 14,
+        "color": "purple",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 92,
+        "x2": 285,
+        "y2": 125,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 92,
+        "x2": 305,
+        "y2": 125,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 115,
+        "text": "pluie",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 200,
+        "x2": 230,
+        "y2": 235,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 212,
+        "text": "ruissellement",
+        "size": 14,
+        "color": "blue",
+        "anchor": "end",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'eau et la vie",
+     "md": "Tous les êtres vivants ont besoin d'eau : le corps humain en contient une grande partie (environ les deux tiers de sa masse). L'eau sert à boire, cuisiner, se laver, arroser, faire pousser les plantes. Une eau **potable** peut être bue sans danger ; il faut protéger les sources et les puits contre les déchets."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pollution et eau potable",
+     "md": "L'eau est polluée par les déchets jetés, les huiles de vidange, les excréments ou certains produits chimiques. Une eau sale peut transmettre des maladies. On rend l'eau plus sûre en la **filtrant**, en la **faisant bouillir** ou en la traitant avec un produit adapté.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : ordre des étapes",
+     "statement": "Remets dans l'ordre : condensation, pluie, évaporation, ruissellement.",
+     "steps": [
+      {
+       "md": "L'eau d'abord s'évapore sous l'effet du soleil."
+      },
+      {
+       "md": "La vapeur se condense en nuages, puis tombe en pluie, puis ruisselle."
+      }
+     ],
+     "answer": "**évaporation → condensation → pluie → ruissellement**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une eau de puits",
+     "statement": "Un puits est situé tout près de latrines ouvertes. Pourquoi est-ce dangereux ?",
+     "steps": [
+      {
+       "md": "L'eau qui s'infiltre peut entraîner des matières sales jusque dans la nappe."
+      },
+      {
+       "md": "L'eau du puits risque d'être contaminée par des microbes."
+      }
+     ],
+     "answer": "**L'eau peut être polluée et transmettre des maladies ; il faut éloigner les latrines et couvrir le puits.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'une eau claire est toujours **potable**.\n- Confondre évaporation (liquide → vapeur) et condensation (vapeur → liquide).\n- Jeter ses déchets dans une rivière « parce que l'eau les emporte »."
+    }
+   ],
+   "reviewNotes": [
+    "Traitements de l'eau (chloration, ébullition) : à faire relire par un agent de santé pour la formulation. Les maladies de l'eau sont traitées dans la fiche santé."
+   ]
+  },
+  {
+   "id": "6e-svt-air",
+   "title": "L'air : composition, rôle et pollution",
+   "minutes": 25,
+   "programRef": "6e — L'air (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer les principaux constituants de l'air.",
+    "Dire pourquoi l'air est indispensable à la vie.",
+    "Reconnaître des sources de pollution de l'air."
+   ],
+   "prerequisites": [
+    "6e-svt-eau"
+   ],
+   "exercises": [
+    "6e-svt-air-01",
+    "6e-svt-air-02",
+    "6e-svt-air-03",
+    "6e-svt-air-04",
+    "6e-svt-air-05",
+    "6e-svt-air-06"
+   ],
+   "selfCheck": [
+    "6e-svt-air-q1",
+    "6e-svt-air-q2",
+    "6e-svt-air-q3",
+    "6e-svt-air-q4",
+    "6e-svt-air-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'air",
+     "md": "L'air est un **mélange de gaz** incolore et sans odeur. Il contient environ **78 %** de **diazote** (azote), environ **21 %** de **dioxygène** et un peu de dioxyde de carbone, de vapeur d'eau et d'autres gaz. L'air a une masse et occupe de la place."
+    },
+    {
+     "type": "illustration",
+     "caption": "Composition de l'air en pourcentage (valeurs approchées).",
+     "alt": "Diagramme en barres : environ 78 pour cent de diazote, 21 pour cent de dioxygène, environ 1 pour cent d'autres gaz.",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "diazote",
+        "value": 78,
+        "color": "blue"
+       },
+       {
+        "label": "dioxygène",
+        "value": 21,
+        "color": "red"
+       },
+       {
+        "label": "autres",
+        "value": 1,
+        "color": "grey"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pourquoi l'air est indispensable",
+     "md": "Le **dioxygène** est nécessaire à la **respiration** des êtres vivants et à la **combustion** (feu). Les plantes vertes rejettent du dioxygène à la lumière. L'air en mouvement s'appelle le **vent**."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pollution de l'air",
+     "md": "Fumées d'usine, gaz d'échappement des véhicules, brûlis des déchets et poussières polluent l'air. Respirer un air pollué peut provoquer toux et problèmes respiratoires. On réduit la pollution en évitant de brûler les déchets, en entretenant les moteurs et en plantant des arbres.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : montrer que l'air a une masse",
+     "statement": "Un ballon dégonflé et le même ballon gonflé sont posés successivement sur une balance. Le ballon gonflé indique quelques grammes de plus. Que conclure ?",
+     "steps": [
+      {
+       "md": "Le ballon gonflé contient de l'air en plus."
+      },
+      {
+       "md": "La balance indique une masse plus grande : l'air a une masse."
+      }
+     ],
+     "answer": "**L'air a une masse.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : l'air et le feu",
+     "statement": "Une bougie allumée est recouverte d'un verre renversé : elle s'éteint au bout de quelques instants. Pourquoi ?",
+     "steps": [
+      {
+       "md": "La flamme consomme le dioxygène de l'air enfermé sous le verre."
+      },
+      {
+       "md": "Quand il n'y en a plus assez, elle s'éteint."
+      }
+     ],
+     "answer": "**Le feu a besoin de dioxygène pour brûler.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'air est du dioxygène pur : le dioxygène n'est qu'environ un cinquième de l'air.\n- Croire que « l'air n'existe pas » parce qu'on ne le voit pas.\n- Confondre dioxygène (nécessaire à la vie) et dioxyde de carbone (rejeté par la respiration)."
+    }
+   ],
+   "reviewNotes": [
+    "Composition de l'air : valeurs arrondies (environ 78 %, 21 %), à confirmer. La combustion est liée à un programme de physique-chimie."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'appelle le passage de l'eau liquide à la vapeur ?",
+   "choices": [
+    "La condensation",
+    "Le ruissellement",
+    "La précipitation",
+    "L'évaporation"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le soleil chauffe l'eau, qui s'évapore.",
+   "id": "6e-svt-eau-01",
+   "tier": "application",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une eau limpide est forcément potable.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle peut contenir des microbes invisibles.",
+   "id": "6e-svt-eau-02",
+   "tier": "application",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque étape à sa description.",
+   "pairs": [
+    [
+     "Évaporation",
+     "L'eau devient vapeur"
+    ],
+    [
+     "Condensation",
+     "La vapeur forme des nuages"
+    ],
+    [
+     "Précipitation",
+     "L'eau tombe du ciel"
+    ],
+    [
+     "Infiltration",
+     "L'eau pénètre dans le sol"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque mot décrit une étape du cycle.",
+   "id": "6e-svt-eau-03",
+   "tier": "application",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle habitude réduit la pollution d'un cours d'eau ?",
+   "choices": [
+    "Jeter les déchets dans une poubelle",
+    "Vider l'huile de moteur dans le ruisseau",
+    "Laver les sacs plastiques au bord",
+    "Brûler les ordures sur la berge"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les déchets ne doivent pas atteindre l'eau.",
+   "id": "6e-svt-eau-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi fait-on bouillir une eau suspecte ?",
+   "choices": [
+    "Pour la colorer",
+    "Pour la rendre salée",
+    "Pour tuer beaucoup de microbes",
+    "Pour augmenter son volume"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La chaleur détruit de nombreux microbes (faire bouillir quelques minutes).",
+   "review": true,
+   "reviewNote": "Durée d'ébullition à confirmer par un agent de santé.",
+   "id": "6e-svt-eau-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans le quartier de Nkeng, l'eau de la rivière est utilisée pour boire, laver et jeter les ordures.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Cite deux risques de cette situation.",
+     "model": "Pollution de l'eau et maladies (diarrhées, etc.) ; mort des poissons.",
+     "rubric": [
+      "Deux risques cités"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-eau-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose deux gestes pour mieux protéger l'eau du quartier.",
+     "model": "Ne pas jeter les déchets dans la rivière, prévoir des poubelles et un point d'eau protégé, faire bouillir ou traiter l'eau de boisson.",
+     "rubric": [
+      "Deux gestes réalistes"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-eau-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-svt-eau-06",
+   "tier": "examen",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans le cycle de l'eau, quelle énergie provoque l'évaporation ?",
+   "choices": [
+    "Le vent uniquement",
+    "La chaleur du soleil",
+    "La nuit",
+    "Le sel"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le soleil chauffe les mers et fleuves.",
+   "id": "6e-svt-eau-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme de l'eau dans un nuage ?",
+   "choices": [
+    "Une roche",
+    "De fines gouttelettes ou cristaux",
+    "Un gaz toxique",
+    "Du sable"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les nuages sont formés de minuscules gouttelettes d'eau.",
+   "id": "6e-svt-eau-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient la pluie qui s'infiltre dans le sol ?",
+   "choices": [
+    "Elle disparaît",
+    "Elle devient du sable",
+    "Elle remonte aux nuages immédiatement",
+    "Elle peut alimenter une nappe d'eau"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle alimente les nappes et les sources.",
+   "id": "6e-svt-eau-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une eau potable :",
+   "choices": [
+    "Contient forcément du sel",
+    "Peut être bue sans danger",
+    "Est toujours colorée",
+    "Est toujours chaude"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle est propre et sans microbes dangereux.",
+   "id": "6e-svt-eau-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle action pollue l'eau ?",
+   "choices": [
+    "Planter des arbres au bord",
+    "Jeter des déchets dans la rivière",
+    "Couvrir le puits",
+    "Récupérer la pluie dans un seau propre"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les déchets salissent et contaminent l'eau.",
+   "id": "6e-svt-eau-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-eau",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel gaz est le plus abondant dans l'air ?",
+   "choices": [
+    "Le dioxygène",
+    "Le dioxyde de carbone",
+    "Le diazote",
+    "La vapeur d'eau"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il représente environ 78 % de l'air.",
+   "id": "6e-svt-air-01",
+   "tier": "application",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le dioxygène est nécessaire à la respiration.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les êtres vivants respirent du dioxygène.",
+   "id": "6e-svt-air-02",
+   "tier": "application",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Environ quel pourcentage de l'air est du dioxygène ? (valeur arrondie à l'unité)",
+   "answer": 21,
+   "tolerance": 1,
+   "unit": "%",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Environ 21 %.",
+   "id": "6e-svt-air-03",
+   "tier": "application",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une bougie s'éteint sous un verre fermé parce que :",
+   "choices": [
+    "La bougie manque de lumière",
+    "Le dioxygène est consommé",
+    "Le verre est froid",
+    "L'air est devenu de l'eau"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Sans dioxygène, pas de combustion.",
+   "id": "6e-svt-air-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel geste améliore la qualité de l'air autour de la maison ?",
+   "choices": [
+    "Éviter de brûler les ordures",
+    "Faire de gros feux de déchets",
+    "Laisser tourner un moteur dans un garage fermé",
+    "Couper tous les arbres"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La fumée contient des gaz et particules nocifs.",
+   "id": "6e-svt-air-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Autour d'un marché très fréquenté, Amina remarque beaucoup de fumée de moteurs et de déchets brûlés.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Cite deux sources de pollution de l'air visibles dans cette situation.",
+     "model": "Les gaz d'échappement des véhicules et les fumées des déchets brûlés.",
+     "rubric": [
+      "Deux sources citées"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-air-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Quelles conséquences possibles sur la santé et que proposer ?",
+     "model": "Toux, irritation des yeux, difficultés à respirer. On peut ne pas brûler les déchets, mieux les collecter et entretenir les moteurs.",
+     "rubric": [
+      "Une conséquence",
+      "Une proposition"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-air-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Pense à la source, la conséquence, puis à la solution.",
+   "id": "6e-svt-air-06",
+   "tier": "examen",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'air est :",
+   "choices": [
+    "Un mélange de gaz",
+    "Un solide",
+    "Un liquide",
+    "Un seul gaz pur"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il contient plusieurs gaz.",
+   "id": "6e-svt-air-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Environ quelle part de l'air est du diazote ?",
+   "choices": [
+    "Un dixième",
+    "La totalité",
+    "Un centième",
+    "Les quatre cinquièmes"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Environ 78 %, soit près des quatre cinquièmes.",
+   "id": "6e-svt-air-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le vent est :",
+   "choices": [
+    "De l'eau qui bouge",
+    "Un solide",
+    "Un être vivant",
+    "De l'air en mouvement"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le déplacement de l'air forme le vent.",
+   "id": "6e-svt-air-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle source pollue l'air ?",
+   "choices": [
+    "Les arbres",
+    "Les nuages",
+    "Le sable propre",
+    "Les gaz d'échappement"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les moteurs rejettent des gaz polluants.",
+   "id": "6e-svt-air-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que consomme une flamme pour brûler ?",
+   "choices": [
+    "Du dioxygène",
+    "Du diazote",
+    "De l'eau",
+    "De l'argile"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dioxygène permet la combustion.",
+   "id": "6e-svt-air-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-air",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

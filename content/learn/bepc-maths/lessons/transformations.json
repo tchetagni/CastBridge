@@ -1,0 +1,855 @@
+{
+ "chapter": "bepc-maths-transformations",
+ "lessons": [
+  {
+   "id": "bepc-maths-vecteurs",
+   "title": "Vecteurs et coordonnées",
+   "minutes": 35,
+   "programRef": "3e — Vecteurs : coordonnées, norme, somme, translation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer les coordonnées d'un vecteur, sa norme, une somme.",
+    "Montrer qu'un quadrilatère est un parallélogramme.",
+    "Construire l'image d'un point par une translation."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-maths-vecteurs-01",
+    "bepc-maths-vecteurs-02",
+    "bepc-maths-vecteurs-03",
+    "bepc-maths-vecteurs-04",
+    "bepc-maths-vecteurs-05",
+    "bepc-maths-vecteurs-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-vecteurs-q1",
+    "bepc-maths-vecteurs-q2",
+    "bepc-maths-vecteurs-q3",
+    "bepc-maths-vecteurs-q4",
+    "bepc-maths-vecteurs-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Coordonnées d'un vecteur",
+     "md": "Dans un repère orthonormé, si $A(x_A\\,;\\,y_A)$ et $B(x_B\\,;\\,y_B)$ :",
+     "tex": "\\vec{AB}\\,(x_B-x_A\\,;\\,y_B-y_A)\\qquad AB=\\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le vecteur AB a pour coordonnées (4 ; 3) : sa norme vaut 5.",
+     "alt": "Un repère avec les points A(1 ; 1) et B(5 ; 4) et le triangle rectangle de côtés 4 et 3.",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 6,
+      "ymin": -1,
+      "ymax": 6,
+      "grid": 1,
+      "w": 380,
+      "h": 290,
+      "curves": [],
+      "points": [
+       {
+        "x": 1,
+        "y": 1,
+        "label": "A",
+        "color": "blue"
+       },
+       {
+        "x": 5,
+        "y": 4,
+        "label": "B",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 1,
+        "y1": 1,
+        "x2": 5,
+        "y2": 1,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 5,
+        "y1": 1,
+        "x2": 5,
+        "y2": 4,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 1,
+        "y1": 1,
+        "x2": 5,
+        "y2": 4,
+        "color": "blue",
+        "dash": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Opérations et parallélogramme",
+     "md": "- $\\vec{u}\\,(x\\,;\\,y)+\\vec{v}\\,(x'\\,;\\,y')=(x+x'\\,;\\,y+y')$ et $k\\vec{u}=(kx\\,;\\,ky)$.\n- $\\vec{AB}=\\vec{DC}$ si et seulement si $ABCD$ est un parallélogramme.\n- L'image de $M$ par la translation de vecteur $\\vec{u}$ est le point $M'$ tel que $\\vec{MM'}=\\vec{u}$.\n- Milieu de $[AB]$ : $\\left(\\frac{x_A+x_B}{2}\\,;\\,\\frac{y_A+y_B}{2}\\right)$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : coordonnées et norme",
+     "statement": "Soit $A(1\\,;\\,1)$ et $B(5\\,;\\,4)$. Calcule les coordonnées de $\\vec{AB}$ et la longueur $AB$.",
+     "steps": [
+      {
+       "md": "Coordonnées :",
+       "tex": "\\vec{AB}\\,(5-1\\,;\\,4-1)=(4\\,;\\,3)"
+      },
+      {
+       "md": "Norme :",
+       "tex": "AB=\\sqrt{16+9}=\\sqrt{25}=5"
+      }
+     ],
+     "answer": "**$\\vec{AB}\\,(4\\,;\\,3)$ et $AB=5$**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : parallélogramme",
+     "statement": "$A(0\\,;\\,0)$, $B(4\\,;\\,1)$, $C(5\\,;\\,4)$. Trouve $D$ pour que $ABCD$ soit un parallélogramme.",
+     "steps": [
+      {
+       "md": "On veut $\\vec{AB}=\\vec{DC}$. Or $\\vec{AB}\\,(4\\,;\\,1)$."
+      },
+      {
+       "md": "Si $D(x\\,;\\,y)$ : $\\vec{DC}\\,(5-x\\,;\\,4-y)$, donc :",
+       "tex": "5-x=4\\text{ et }4-y=1"
+      }
+     ],
+     "answer": "**$D(1\\,;\\,3)$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Inverser les points : $\\vec{AB}$ se calcule « arrivée moins départ » : $x_B-x_A$.\n- Oublier la racine dans la norme.\n- Écrire $\\vec{AB}=\\vec{CD}$ pour le parallélogramme $ABCD$ : c'est $\\vec{AB}=\\vec{DC}$.\n- Oublier de vérifier que les points ne sont pas alignés."
+    }
+   ],
+   "reviewNotes": [
+    "La colinéarité de deux vecteurs n'est pas traitée (programme de 2nde ?) : à confirmer.",
+    "Repère orthonormé supposé."
+   ]
+  },
+  {
+   "id": "bepc-maths-homotheties",
+   "title": "Homothéties : agrandissement et réduction",
+   "minutes": 30,
+   "programRef": "3e — Homothétie : définition, propriétés, rapports de longueurs, aires, volumes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Construire l'image d'un point ou d'une figure par une homothétie.",
+    "Utiliser les rapports $k$, $k^2$ et $k^3$ pour longueurs, aires et volumes."
+   ],
+   "prerequisites": [
+    "bepc-maths-vecteurs",
+    "bepc-maths-thales"
+   ],
+   "exercises": [
+    "bepc-maths-homotheties-01",
+    "bepc-maths-homotheties-02",
+    "bepc-maths-homotheties-03",
+    "bepc-maths-homotheties-04",
+    "bepc-maths-homotheties-05",
+    "bepc-maths-homotheties-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-homotheties-q1",
+    "bepc-maths-homotheties-q2",
+    "bepc-maths-homotheties-q3",
+    "bepc-maths-homotheties-q4",
+    "bepc-maths-homotheties-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Homothétie",
+     "md": "L'homothétie de centre $O$ et de rapport $k$ ($k\\neq0$) transforme tout point $M$ en le point $M'$ tel que $\\vec{OM'}=k\\,\\vec{OM}$. Si $k>0$, $M'$ est du même côté de $O$ que $M$ ; si $k<0$, de l'autre côté. Si $|k|>1$ c'est un agrandissement ; si $|k|<1$, une réduction."
+    },
+    {
+     "type": "illustration",
+     "caption": "Homothétie de centre O et de rapport 2 : le triangle A'B'C' est un agrandissement de ABC.",
+     "alt": "Un petit triangle ABC et son image A'B'C' deux fois plus grande, alignés avec le centre O.",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 120,
+        "y2": 140,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 220,
+        "y2": 140,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 160,
+        "y2": 60,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         80,
+         170,
+         130,
+         170,
+         100,
+         130
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         120,
+         140,
+         220,
+         140,
+         160,
+         60
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 216,
+        "text": "O",
+        "size": 17,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 68,
+        "y": 176,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 188,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 116,
+        "text": "C",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 158,
+        "text": "A'",
+        "size": 16,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 156,
+        "text": "B'",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 50,
+        "text": "C'",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Conséquences du rapport k",
+     "md": "- Les longueurs sont multipliées par $|k|$.\n- Les angles et le parallélisme sont conservés.\n- Les aires sont multipliées par $k^2$.\n- Les volumes sont multipliés par $|k|^3$.\n- C'est la situation du théorème de Thalès : $\\frac{OA'}{OA}=|k|$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : longueurs et aire",
+     "statement": "Une homothétie de rapport $k=3$ transforme un triangle d'aire 8 cm² dont un côté mesure 4 cm. Donne la longueur de l'image du côté et l'aire de l'image.",
+     "steps": [
+      {
+       "md": "Longueur :",
+       "tex": "4\\times3=12\\text{ cm}"
+      },
+      {
+       "md": "Aire :",
+       "tex": "8\\times3^2=72\\text{ cm}^2"
+      }
+     ],
+     "answer": "**12 cm et 72 cm²**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : rapport négatif",
+     "statement": "Homothétie de centre $O$ et de rapport $-2$. $OA=3$ cm. Où est $A'$ ?",
+     "steps": [
+      {
+       "md": "$k<0$ : $A'$ est de l'autre côté de $O$ par rapport à $A$."
+      },
+      {
+       "md": "Distance :",
+       "tex": "OA'=|-2|\\times3=6\\text{ cm}"
+      }
+     ],
+     "answer": "**$A'$ est sur la droite $(OA)$, de l'autre côté de $O$, avec $OA'=6$ cm.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Multiplier les aires par $k$ au lieu de $k^2$.\n- Oublier la valeur absolue pour les longueurs avec $k<0$.\n- Penser que l'image d'un cercle est toujours un cercle de même rayon.\n- Placer $M'$ du mauvais côté de $O$ quand $k$ est négatif."
+    }
+   ],
+   "reviewNotes": [
+    "L'homothétie peut n'être qu'introduite par les agrandissements et réductions ; à vérifier."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "$A(2\\,;\\,1)$ et $B(5\\,;\\,5)$. Calcule la norme $AB$.",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\vec{AB}\\,(3\\,;\\,4)$ et $AB=\\sqrt{9+16}=5$.",
+   "id": "bepc-maths-vecteurs-01",
+   "tier": "application",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$A(-1\\,;\\,3)$ et $B(4\\,;\\,-1)$. Quelles sont les coordonnées de $\\vec{AB}$ ?",
+   "choices": [
+    "$(3\\,;\\,2)$",
+    "$(-5\\,;\\,4)$",
+    "$(5\\,;\\,-4)$",
+    "$(5\\,;\\,4)$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$4-(-1)=5$ et $-1-3=-4$.",
+   "id": "bepc-maths-vecteurs-02",
+   "tier": "application",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$\\vec{u}\\,(2\\,;\\,-3)$ et $\\vec{v}\\,(-1\\,;\\,5)$. Quelle est l'ordonnée de $\\vec{u}+\\vec{v}$ ?",
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$-3+5=2$.",
+   "id": "bepc-maths-vecteurs-03",
+   "tier": "application",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$A(-2\\,;\\,1)$, $B(3\\,;\\,2)$, $C(5\\,;\\,6)$. $ABCD$ est un parallélogramme. Quelle est l'ordonnée de $D$ ?",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$\\vec{AB}=\\vec{DC}$ : $\\vec{AB}\\,(5\\,;\\,1)$ donc $D=C-(5\\,;\\,1)=(0\\,;\\,5)$.",
+   "id": "bepc-maths-vecteurs-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$\\vec{u}\\,(3\\,;\\,1)$ et $\\vec{v}\\,(1\\,;\\,-2)$. Quelle est la somme des deux coordonnées de $2\\vec{u}-\\vec{v}$ ?",
+   "answer": 9,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$2\\vec{u}\\,(6\\,;\\,2)$, $-\\vec{v}\\,(-1\\,;\\,2)$, donc $2\\vec{u}-\\vec{v}\\,(5\\,;\\,4)$ et $5+4=9$.",
+   "id": "bepc-maths-vecteurs-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un repère orthonormé, on donne $A(0\\,;\\,0)$, $B(4\\,;\\,2)$ et $C(-1\\,;\\,2)$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule $BC$.",
+     "answer": 5,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\vec{BC}\\,(-5\\,;\\,0)$ donc $BC=5$.",
+     "id": "bepc-maths-vecteurs-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature du triangle $ABC$ ?",
+     "choices": [
+      "Rectangle en A",
+      "Équilatéral",
+      "Rectangle en B",
+      "Isocèle en A"
+     ],
+     "answer": 0,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$AB^2=20$, $AC^2=5$, $BC^2=25$ et $20+5=25$ : réciproque de Pythagore, angle droit en A.",
+     "id": "bepc-maths-vecteurs-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On complète en rectangle $ABDC$ (de côtés $[AB]$ et $[AC]$). Quelle est l'abscisse de $D$ ?",
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$ABDC$ est un parallélogramme (avec un angle droit en $A$, c'est un rectangle) : $\\vec{AB}=\\vec{CD}$, donc $D=C+\\vec{AB}=(-1+4\\,;\\,2+2)=(3\\,;\\,4)$.",
+     "id": "bepc-maths-vecteurs-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire du rectangle (en unités d'aire) ?",
+     "answer": 10,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$AB\\times AC=\\sqrt{20}\\times\\sqrt{5}=\\sqrt{100}=10$.",
+     "id": "bepc-maths-vecteurs-06-d"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Calculer les trois carrés des côtés et appliquer la réciproque de Pythagore.",
+   "figure": {
+    "kind": "plot",
+    "xmin": -2,
+    "xmax": 5,
+    "ymin": -1,
+    "ymax": 5,
+    "grid": 1,
+    "w": 380,
+    "h": 290,
+    "curves": [],
+    "points": [
+     {
+      "x": 0,
+      "y": 0,
+      "label": "A",
+      "color": "blue"
+     },
+     {
+      "x": 4,
+      "y": 2,
+      "label": "B",
+      "color": "blue"
+     },
+     {
+      "x": -1,
+      "y": 2,
+      "label": "C",
+      "color": "blue"
+     }
+    ],
+    "segments": [
+     {
+      "x1": 0,
+      "y1": 0,
+      "x2": 4,
+      "y2": 2,
+      "color": "ink",
+      "dash": true
+     },
+     {
+      "x1": 0,
+      "y1": 0,
+      "x2": -1,
+      "y2": 2,
+      "color": "ink",
+      "dash": true
+     },
+     {
+      "x1": 4,
+      "y1": 2,
+      "x2": -1,
+      "y2": 2,
+      "color": "ink",
+      "dash": true
+     }
+    ]
+   },
+   "id": "bepc-maths-vecteurs-06",
+   "tier": "examen",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les coordonnées de $\\vec{AB}$ s'obtiennent par...",
+   "choices": [
+    "départ − arrivée",
+    "départ + arrivée",
+    "arrivée − départ",
+    "départ × arrivée"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$x_B-x_A$ et $y_B-y_A$.",
+   "id": "bepc-maths-vecteurs-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La norme du vecteur $(6\\,;\\,8)$ est...",
+   "choices": [
+    "10",
+    "14",
+    "48",
+    "2"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\sqrt{36+64}=10$.",
+   "id": "bepc-maths-vecteurs-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le milieu de $[AB]$ pour $A(2\\,;\\,-1)$ et $B(8\\,;\\,5)$ est...",
+   "choices": [
+    "$(5\\,;\\,2)$",
+    "$(10\\,;\\,4)$",
+    "$(3\\,;\\,3)$",
+    "$(6\\,;\\,6)$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\frac{2+8}{2}=5$ et $\\frac{-1+5}{2}=2$.",
+   "id": "bepc-maths-vecteurs-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$ABCD$ est un parallélogramme si...",
+   "choices": [
+    "$\\vec{AB}=\\vec{CD}$",
+    "$\\vec{AB}=\\vec{DC}$",
+    "$AB=CD$ seulement",
+    "$\\vec{AB}=\\vec{AC}$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la caractérisation par les vecteurs.",
+   "id": "bepc-maths-vecteurs-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'image de $(1\\,;\\,2)$ par la translation de vecteur $(3\\,;\\,-5)$ ?",
+   "choices": [
+    "$(-2\\,;\\,7)$",
+    "$(3\\,;\\,-10)$",
+    "$(4\\,;\\,3)$",
+    "$(4\\,;\\,-3)$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$1+3=4$ et $2-5=-3$.",
+   "id": "bepc-maths-vecteurs-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Rapport $k=3$ : un segment mesure 4 cm. Quelle est la longueur de son image (en cm) ?",
+   "answer": 12,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$4\\times3=12$ cm.",
+   "id": "bepc-maths-homotheties-01",
+   "tier": "application",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Homothétie de centre $O$ et de rapport $-2$ ; $OM=5$ cm. Calcule $OM'$ (en cm).",
+   "answer": 10,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$OM'=|-2|\\times5=10$ cm.",
+   "id": "bepc-maths-homotheties-02",
+   "tier": "application",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans une homothétie de rapport $k$, les aires sont multipliées par $k$.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les aires sont multipliées par $k^2$.",
+   "mistakes": [
+    "Confondre rapport des longueurs et rapport des aires."
+   ],
+   "id": "bepc-maths-homotheties-03",
+   "tier": "application",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un motif d'aire 8 cm² est réduit avec un rapport $k=0{,}5$. Quelle est l'aire de l'image (en cm²) ?",
+   "answer": 2,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$8\\times0{,}5^2=8\\times0{,}25=2$ cm².",
+   "id": "bepc-maths-homotheties-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une figure d'aire 4 cm² a pour image une figure d'aire 36 cm². Quelle est la valeur positive du rapport $k$ ?",
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$k^2=\\frac{36}{4}=9$ donc $k=3$.",
+   "id": "bepc-maths-homotheties-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une homothétie $h$ de centre $O$ et de rapport $-2$ transforme $A$ en $A'$ et $B$ en $B'$. On donne $OA=3$ cm, $OB=4$ cm et $AB=5$ cm ; le triangle $OAB$ est rectangle en $O$ (car $9+16=25$).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule $A'B'$ (en cm).",
+     "answer": 10,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$A'B'=|k|\\times AB=2\\times5=10$ cm.",
+     "id": "bepc-maths-homotheties-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'aire de $OAB$ (en cm²).",
+     "answer": 6,
+     "unit": "cm²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$\\frac{3\\times4}{2}=6$ cm².",
+     "id": "bepc-maths-homotheties-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'aire de $OA'B'$ (en cm²).",
+     "answer": 24,
+     "unit": "cm²",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Les aires sont multipliées par $k^2=4$ : $6\\times4=24$ cm².",
+     "id": "bepc-maths-homotheties-06-c"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Où est $O$ par rapport à $A$ et $A'$ ?",
+     "choices": [
+      "À l'extérieur du segment $[AA']$",
+      "Entre $A$ et $A'$",
+      "Au milieu de $[A'B']$",
+      "Confondu avec $A$"
+     ],
+     "answer": 1,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Le rapport est négatif : $A$ et $A'$ sont de part et d'autre de $O$.",
+     "id": "bepc-maths-homotheties-06-d"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Longueurs × |k| ; aires × k².",
+   "id": "bepc-maths-homotheties-06",
+   "tier": "examen",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'homothétie de rapport 1 est...",
+   "choices": [
+    "une symétrie",
+    "un agrandissement",
+    "une rotation",
+    "l'identité"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tout point reste à sa place.",
+   "id": "bepc-maths-homotheties-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un agrandissement de rapport 4 multiplie les volumes par...",
+   "choices": [
+    "4",
+    "64",
+    "16",
+    "12"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$4^3=64$.",
+   "id": "bepc-maths-homotheties-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une homothétie conserve...",
+   "choices": [
+    "les aires",
+    "les angles",
+    "les longueurs",
+    "rien"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les angles et le parallélisme sont conservés.",
+   "id": "bepc-maths-homotheties-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si $\\vec{OM'}=-3\\vec{OM}$, alors $OM'=$",
+   "choices": [
+    "$-3\\,OM$",
+    "$OM/3$",
+    "$3\\,OM$",
+    "$OM-3$"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une longueur est multipliée par $|k|=3$.",
+   "id": "bepc-maths-homotheties-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le rapport des aires entre deux figures homothétiques de rapport 5 est...",
+   "choices": [
+    "5",
+    "10",
+    "125",
+    "25"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$5^2=25$.",
+   "id": "bepc-maths-homotheties-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-homotheties",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

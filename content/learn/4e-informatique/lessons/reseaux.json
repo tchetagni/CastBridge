@@ -1,0 +1,495 @@
+{
+ "chapter": "4e-informatique-reseaux",
+ "lessons": [
+  {
+   "id": "4e-informatique-reseau-internet",
+   "title": "Réseaux, Internet et courriel",
+   "minutes": 30,
+   "programRef": "4e — Notions de réseau, Internet, navigateur, courrier électronique (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer réseau local et Internet.",
+    "Expliquer le rôle d'une adresse, d'un navigateur et d'un moteur de recherche.",
+    "Écrire et lire une adresse de courriel."
+   ],
+   "prerequisites": [
+    "4e-informatique-os-fichiers"
+   ],
+   "exercises": [
+    "4e-informatique-reseau-internet-01",
+    "4e-informatique-reseau-internet-02",
+    "4e-informatique-reseau-internet-03",
+    "4e-informatique-reseau-internet-04",
+    "4e-informatique-reseau-internet-05",
+    "4e-informatique-reseau-internet-06"
+   ],
+   "selfCheck": [
+    "4e-informatique-reseau-internet-q1",
+    "4e-informatique-reseau-internet-q2",
+    "4e-informatique-reseau-internet-q3",
+    "4e-informatique-reseau-internet-q4",
+    "4e-informatique-reseau-internet-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Réseau local et Internet",
+     "md": "Un **réseau** relie des appareils pour échanger des données. Un **réseau local** (LAN) relie des appareils proches (salle informatique, maison). **Internet** est le réseau mondial qui relie des millions de réseaux. Un **serveur** fournit des services ou des pages ; un **client** (ton ordinateur ou ton téléphone) les demande."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un réseau local relié à Internet par un routeur.",
+     "alt": "Schéma : trois appareils reliés à un commutateur, puis à un routeur et à Internet.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 230,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 40,
+        "r": 32,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 46,
+        "text": "Internet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 72,
+        "x2": 230,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 100,
+        "w": 90,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 122,
+        "text": "Routeur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 134,
+        "x2": 230,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 160,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 182,
+        "text": "Commutateur",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 194,
+        "x2": 70,
+        "y2": 205,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 255,
+        "y1": 194,
+        "x2": 390,
+        "y2": 205,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 194,
+        "x2": 230,
+        "y2": 205,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 205,
+        "w": 100,
+        "h": 22,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 222,
+        "text": "Ordinateur",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 205,
+        "w": 100,
+        "h": 22,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 222,
+        "text": "Imprimante",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 205,
+        "w": 100,
+        "h": 22,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 222,
+        "text": "Téléphone",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Adresse, navigateur, courriel",
+     "md": "- Chaque appareil a une **adresse IP** : quatre nombres de 0 à 255 séparés par des points (ex. 192.168.1.10).\n- Un site a une adresse web (**URL**), comme https://www.exemple.cm/accueil : protocole, nom de domaine, page.\n- Le **navigateur** affiche les pages ; le **moteur de recherche** trouve des pages à partir de mots-clés.\n- Une adresse de **courriel** a la forme nom@domaine ; on peut joindre des fichiers (pièces jointes)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : adresse IP valide ?",
+     "statement": "Les adresses 192.168.0.25 et 172.16.300.4 sont-elles valides (format IPv4) ?",
+     "steps": [
+      {
+       "md": "Chaque nombre doit être entre 0 et 255."
+      },
+      {
+       "md": "192.168.0.25 : tous les nombres conviennent. 172.16.300.4 : 300 dépasse 255."
+      }
+     ],
+     "answer": "**La première est valide, la seconde non**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire une adresse",
+     "statement": "Dans https://www.ecole.cm/cours/maths, que sont « https », « www.ecole.cm » et « /cours/maths » ?",
+     "steps": [
+      {
+       "md": "https est le protocole (échange sécurisé)."
+      },
+      {
+       "md": "www.ecole.cm est le nom du site (domaine). /cours/maths est le chemin de la page."
+      }
+     ],
+     "answer": "**protocole ; nom de domaine ; chemin**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre navigateur (logiciel pour voir les pages) et moteur de recherche (service qui trouve les pages).\n- Croire que tout ce qui est sur Internet est vrai.\n- Ouvrir une pièce jointe d'un inconnu : risque de virus.\n- Oublier le @ dans une adresse de courriel."
+    }
+   ],
+   "reviewNotes": [
+    "Notions volontairement générales : pas de nom de fournisseur ni de logiciel.",
+    "Adresses IP : on se limite au format IPv4 (4 nombres de 0 à 255)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est une adresse de courriel valide ?",
+   "choices": [
+    "amina.exemple.cm",
+    "amina@",
+    "@amina exemple",
+    "amina@exemple.cm"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une adresse a la forme nom@domaine.",
+   "id": "4e-informatique-reseau-internet-01",
+   "tier": "application",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle adresse IPv4 est valide ?",
+   "choices": [
+    "10.0.0.256",
+    "10.0.0.7",
+    "10.0.0",
+    "300.1.1.1"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Quatre nombres entre 0 et 255.",
+   "id": "4e-informatique-reseau-internet-02",
+   "tier": "application",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque terme à son rôle.",
+   "pairs": [
+    [
+     "Navigateur",
+     "Afficher les pages web"
+    ],
+    [
+     "Moteur de recherche",
+     "Trouver des pages avec des mots-clés"
+    ],
+    [
+     "Serveur",
+     "Fournir des pages ou des services"
+    ],
+    [
+     "Routeur",
+     "Relier un réseau à Internet"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque élément a un rôle différent.",
+   "id": "4e-informatique-reseau-internet-03",
+   "tier": "application",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la différence entre un LAN et Internet ?",
+   "choices": [
+    "Le LAN est mondial",
+    "Internet n'a pas d'adresses",
+    "Le LAN est local, Internet est mondial",
+    "Il n'y en a pas"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Local = proche, Internet = réseau de réseaux.",
+   "id": "4e-informatique-reseau-internet-04",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans http://www.ecole.cm, le nom de domaine est :",
+   "choices": [
+    "http",
+    "ecole seulement",
+    "www.ecole.cm",
+    "cm@www"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Après le protocole se trouve le nom de domaine.",
+   "id": "4e-informatique-reseau-internet-05",
+   "tier": "approfondissement",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa veut envoyer son devoir à son enseignant par courriel.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Cite trois éléments à renseigner dans le message (adresse, objet, etc.).",
+     "model": "Adresse du destinataire ; objet clair ; texte poli ; pièce jointe.",
+     "rubric": [
+      "Destinataire",
+      "Objet",
+      "Pièce jointe ou message"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-informatique-reseau-internet-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que doit-il faire avant d'envoyer ?",
+     "choices": [
+      "Supprimer le devoir",
+      "Changer l'extension",
+      "Vérifier l'adresse et la pièce jointe",
+      "Donner son mot de passe"
+     ],
+     "answer": 2,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "On évite d'envoyer au mauvais destinataire ou un mauvais fichier.",
+     "id": "4e-informatique-reseau-internet-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-informatique-reseau-internet-06",
+   "tier": "examen",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un client est :",
+   "choices": [
+    "Un appareil qui demande un service",
+    "Un câble",
+    "Un virus",
+    "Une pièce jointe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le client demande, le serveur répond.",
+   "id": "4e-informatique-reseau-internet-q1",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une adresse IP contient :",
+   "choices": [
+    "Un nom",
+    "Du texte libre",
+    "Quatre nombres",
+    "Un seul chiffre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Format IPv4 : quatre nombres séparés par des points.",
+   "id": "4e-informatique-reseau-internet-q2",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans nom@domaine, que signifie @ ?",
+   "choices": [
+    "Il multiplie",
+    "Il sépare le nom d'utilisateur du domaine",
+    "Il est inutile",
+    "Il efface"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "@ lit « arobase ».",
+   "id": "4e-informatique-reseau-internet-q3",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un outil qui trouve des pages à partir de mots est :",
+   "choices": [
+    "Un routeur",
+    "Un clavier",
+    "Un moteur de recherche",
+    "Un pixel"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il indexe des pages.",
+   "id": "4e-informatique-reseau-internet-q4",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un réseau local relie :",
+   "choices": [
+    "Tous les pays",
+    "Des fichiers seulement",
+    "Des appareils proches",
+    "Des images"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Local signifie proche.",
+   "id": "4e-informatique-reseau-internet-q5",
+   "tier": "autoeval",
+   "lesson": "4e-informatique-reseau-internet",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

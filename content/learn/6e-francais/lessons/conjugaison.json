@@ -1,0 +1,7207 @@
+{
+ "chapter": "6e-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "6e-francais-present-groupes",
+   "title": "Le présent : verbes du 1er et du 2e groupe",
+   "minutes": 25,
+   "programRef": "6e — Conjugaison : le présent de l'indicatif (1er et 2e groupes) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître le groupe d'un verbe à son infinitif.",
+    "Conjuguer au présent les verbes du 1er et du 2e groupe, avec les particularités en -cer, -ger, -yer."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "6e-francais-present-groupes-01",
+    "6e-francais-present-groupes-02",
+    "6e-francais-present-groupes-03",
+    "6e-francais-present-groupes-04",
+    "6e-francais-present-groupes-05",
+    "6e-francais-present-groupes-06"
+   ],
+   "selfCheck": [
+    "6e-francais-present-groupes-q1",
+    "6e-francais-present-groupes-q2",
+    "6e-francais-present-groupes-q3",
+    "6e-francais-present-groupes-q4",
+    "6e-francais-present-groupes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les trois groupes de verbes",
+     "md": "- **1er groupe** : infinitif en **-er** (*chanter, manger, danser*). Attention : le verbe *aller* appartient au 3e groupe.\n- **2e groupe** : infinitif en **-ir** avec le participe en *-issant* (*finir → finissant*).\n- **3e groupe** : tous les autres verbes (*aller, venir, prendre, faire, dire, pouvoir…*)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le présent des verbes du 1er et du 2e groupe.",
+     "alt": "Un tableau de conjugaison de chanter et finir au présent, pour les six personnes.",
+     "figure": {
+      "kind": "shapes",
+      "w": 369,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Personne",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 135,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 188.5,
+        "y": 28,
+        "text": "chanter (1er)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 256,
+        "y": 4,
+        "w": 109,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 310.5,
+        "y": 28,
+        "text": "finir (2e)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 135,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 188.5,
+        "y": 64,
+        "text": "chante",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 256,
+        "y": 40,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.5,
+        "y": 64,
+        "text": "finis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 135,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 188.5,
+        "y": 100,
+        "text": "chantes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 256,
+        "y": 76,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.5,
+        "y": 100,
+        "text": "finis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 136,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 112,
+        "w": 135,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 188.5,
+        "y": 136,
+        "text": "chante",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 256,
+        "y": 112,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.5,
+        "y": 136,
+        "text": "finit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 172,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 148,
+        "w": 135,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 188.5,
+        "y": 172,
+        "text": "chantons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 256,
+        "y": 148,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.5,
+        "y": 172,
+        "text": "finissons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 208,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 184,
+        "w": 135,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 188.5,
+        "y": 208,
+        "text": "chantez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 256,
+        "y": 184,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.5,
+        "y": 208,
+        "text": "finissez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 244,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 220,
+        "w": 135,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 188.5,
+        "y": 244,
+        "text": "chantent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 256,
+        "y": 220,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.5,
+        "y": 244,
+        "text": "finissent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les terminaisons",
+     "md": "- 1er groupe : **-e, -es, -e, -ons, -ez, -ent**.\n- 2e groupe : **-is, -is, -it, -issons, -issez, -issent**.\n\nParticularités : *manger → nous mangeons* (on garde le « e » devant o) ; *commencer → nous commençons* (cédille devant o) ; *payer → je paie ou je paye* ; *appeler → j'appelle*."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Conjugue « grandir » au présent avec « ils » puis « tu ».",
+     "steps": [
+      {
+       "md": "« grandir » finit par -ir, participe « grandissant » : 2e groupe."
+      },
+      {
+       "md": "Ils grandissent (-issent). Tu grandis (-is)."
+      }
+     ],
+     "answer": "**ils grandissent ; tu grandis**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : particularité",
+     "statement": "Écris « nous » + « ranger » et « nous » + « lancer » au présent.",
+     "steps": [
+      {
+       "md": "Avant la terminaison -ons, « ranger » garde un « e » pour que le g reste doux : nous rangeons."
+      },
+      {
+       "md": "« lancer » prend une cédille : nous lançons."
+      }
+     ],
+     "answer": "**nous rangeons ; nous lançons**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire *je chantes* : à la 1re personne du 1er groupe, la terminaison est -e (*je chante*).\n- Écrire *ils chantes* au lieu de *ils chantent*.\n- Oublier le « e » de *nous mangeons* ou la cédille de *nous commençons*.\n- Écrire *il finis* au lieu de *il finit*."
+    }
+   ],
+   "reviewNotes": [
+    "Les verbes en -eler / -eter (appeler, jeter) et en -e-er (acheter) sont mentionnés brièvement ; la progression officielle peut les reporter."
+   ]
+  },
+  {
+   "id": "6e-francais-present-irreguliers",
+   "title": "Le présent : être, avoir et les verbes courants du 3e groupe",
+   "minutes": 30,
+   "programRef": "6e — Conjugaison : présent des verbes être, avoir et 3e groupe (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Conjuguer au présent être, avoir, aller, faire, dire, venir, prendre, pouvoir, vouloir.",
+    "Distinguer les formes d'un même verbe à l'oral et à l'écrit."
+   ],
+   "prerequisites": [
+    "6e-francais-present-groupes"
+   ],
+   "exercises": [
+    "6e-francais-present-irreguliers-01",
+    "6e-francais-present-irreguliers-02",
+    "6e-francais-present-irreguliers-03",
+    "6e-francais-present-irreguliers-04",
+    "6e-francais-present-irreguliers-05",
+    "6e-francais-present-irreguliers-06"
+   ],
+   "selfCheck": [
+    "6e-francais-present-irreguliers-q1",
+    "6e-francais-present-irreguliers-q2",
+    "6e-francais-present-irreguliers-q3",
+    "6e-francais-present-irreguliers-q4",
+    "6e-francais-present-irreguliers-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Être, avoir, aller et faire au présent.",
+     "alt": "Un tableau de conjugaison au présent des verbes être, avoir, aller et faire.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 28,
+        "text": "être",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 4,
+        "w": 65,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 227.5,
+        "y": 28,
+        "text": "avoir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 297.0,
+        "y": 28,
+        "text": "aller",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 334,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 28,
+        "text": "faire",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 64,
+        "text": "suis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 40,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 227.5,
+        "y": 64,
+        "text": "ai",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 297.0,
+        "y": 64,
+        "text": "vais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 334,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 64,
+        "text": "fais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 100,
+        "text": "es",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 76,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 227.5,
+        "y": 100,
+        "text": "as",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 297.0,
+        "y": 100,
+        "text": "vas",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 334,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 100,
+        "text": "fais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 136,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 136,
+        "text": "est",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 112,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 227.5,
+        "y": 136,
+        "text": "a",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 297.0,
+        "y": 136,
+        "text": "va",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 334,
+        "y": 112,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 136,
+        "text": "fait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 172,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 148,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 172,
+        "text": "sommes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 148,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 227.5,
+        "y": 172,
+        "text": "avons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 148,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 297.0,
+        "y": 172,
+        "text": "allons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 334,
+        "y": 148,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 172,
+        "text": "faisons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 208,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 184,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 208,
+        "text": "êtes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 184,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 227.5,
+        "y": 208,
+        "text": "avez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 184,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 297.0,
+        "y": 208,
+        "text": "allez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 334,
+        "y": 184,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 208,
+        "text": "faites",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 244,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 220,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 244,
+        "text": "sont",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 220,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 227.5,
+        "y": 244,
+        "text": "ont",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 220,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 297.0,
+        "y": 244,
+        "text": "vont",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 334,
+        "y": 220,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 244,
+        "text": "font",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "illustration",
+     "caption": "Cinq autres verbes très employés.",
+     "alt": "Un tableau de conjugaison au présent de dire, venir, prendre, pouvoir et vouloir.",
+     "figure": {
+      "kind": "shapes",
+      "w": 545,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 28,
+        "text": "dire",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 28,
+        "text": "venir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 286,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 331.5,
+        "y": 28,
+        "text": "prendre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 418.0,
+        "y": 28,
+        "text": "pouvoir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 459,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 500.0,
+        "y": 28,
+        "text": "vouloir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 64,
+        "text": "dis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 64,
+        "text": "viens",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 286,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 331.5,
+        "y": 64,
+        "text": "prends",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 418.0,
+        "y": 64,
+        "text": "peux",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 459,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 500.0,
+        "y": 64,
+        "text": "veux",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 100,
+        "text": "dis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 100,
+        "text": "viens",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 286,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 331.5,
+        "y": 100,
+        "text": "prends",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 418.0,
+        "y": 100,
+        "text": "peux",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 459,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 500.0,
+        "y": 100,
+        "text": "veux",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 136,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 136,
+        "text": "dit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 112,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 136,
+        "text": "vient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 286,
+        "y": 112,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 331.5,
+        "y": 136,
+        "text": "prend",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 112,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 418.0,
+        "y": 136,
+        "text": "peut",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 459,
+        "y": 112,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 500.0,
+        "y": 136,
+        "text": "veut",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 172,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 148,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 172,
+        "text": "disons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 148,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 172,
+        "text": "venons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 286,
+        "y": 148,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 331.5,
+        "y": 172,
+        "text": "prenons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 148,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 418.0,
+        "y": 172,
+        "text": "pouvons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 459,
+        "y": 148,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 500.0,
+        "y": 172,
+        "text": "voulons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 208,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 184,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 208,
+        "text": "dites",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 184,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 208,
+        "text": "venez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 286,
+        "y": 184,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 331.5,
+        "y": 208,
+        "text": "prenez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 184,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 418.0,
+        "y": 208,
+        "text": "pouvez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 459,
+        "y": 184,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 500.0,
+        "y": 208,
+        "text": "voulez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 244,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 220,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 244,
+        "text": "disent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 220,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.5,
+        "y": 244,
+        "text": "viennent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 286,
+        "y": 220,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 331.5,
+        "y": 244,
+        "text": "prennent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 377,
+        "y": 220,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 418.0,
+        "y": 244,
+        "text": "peuvent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 459,
+        "y": 220,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 500.0,
+        "y": 244,
+        "text": "veulent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ce qu'il faut remarquer",
+     "md": "- Les verbes du 3e groupe ont souvent un radical qui change : *il prend / ils prennent*, *il vient / ils viennent*.\n- À « vous » : *vous êtes, vous faites, vous dites* (et non *vous faisez*, *vous disez*).\n- Terminaisons fréquentes du 3e groupe : **-s, -s, -t** (*je prends, tu prends, il prend*) ; *-x, -x, -t* pour pouvoir et vouloir (*je peux, tu peux, il peut*)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : compléter",
+     "statement": "Écris les verbes au présent : « Nous (aller) au marché et vous (prendre) le taxi. »",
+     "steps": [
+      {
+       "md": "« aller » avec « nous » : allons."
+      },
+      {
+       "md": "« prendre » avec « vous » : prenez."
+      }
+     ],
+     "answer": "**Nous allons au marché et vous prenez le taxi.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir la bonne forme",
+     "statement": "Complète : « Ils (pouvoir) venir et elles (vouloir) rester. »",
+     "steps": [
+      {
+       "md": "« pouvoir » à la 3e personne du pluriel : ils peuvent."
+      },
+      {
+       "md": "« vouloir » à la 3e personne du pluriel : elles veulent."
+      }
+     ],
+     "answer": "**Ils peuvent venir et elles veulent rester.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- *Il a* (verbe avoir) ne s'écrit pas comme *à* (préposition) : *Il a un livre. Il va à l'école.*\n- *Ils ont* (avoir) et *ils sont* (être) : ne pas les confondre avec les homophones *on* et *son*.\n- *Je peut, tu peut* : avec « je » et « tu » on écrit *peux* (comme *veux*)."
+    }
+   ],
+   "reviewNotes": [
+    "Choix des verbes du 3e groupe : les plus fréquents ; l'ordre officiel peut différer."
+   ]
+  },
+  {
+   "id": "6e-francais-imparfait",
+   "title": "L'imparfait de l'indicatif",
+   "minutes": 25,
+   "programRef": "6e — Conjugaison : l'imparfait de l'indicatif (formation et emplois) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Conjuguer un verbe à l'imparfait.",
+    "Employer l'imparfait pour décrire, pour dire une habitude ou une action qui dure dans le passé."
+   ],
+   "prerequisites": [
+    "6e-francais-present-groupes"
+   ],
+   "exercises": [
+    "6e-francais-imparfait-01",
+    "6e-francais-imparfait-02",
+    "6e-francais-imparfait-03",
+    "6e-francais-imparfait-04",
+    "6e-francais-imparfait-05",
+    "6e-francais-imparfait-06"
+   ],
+   "selfCheck": [
+    "6e-francais-imparfait-q1",
+    "6e-francais-imparfait-q2",
+    "6e-francais-imparfait-q3",
+    "6e-francais-imparfait-q4",
+    "6e-francais-imparfait-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Former l'imparfait",
+     "md": "1. Prends le verbe au présent avec **nous** : *nous chantons, nous finissons, nous prenons*.\n2. Enlève **-ons** pour obtenir le radical : *chant-, finiss-, pren-*.\n3. Ajoute les terminaisons : **-ais, -ais, -ait, -ions, -iez, -aient**.\n\nExceptions : *être* → *j'étais* ; *manger* → *je mangeais* ; *commencer* → *je commençais*."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'imparfait de quatre verbes.",
+     "alt": "Un tableau de conjugaison à l'imparfait de chanter, finir, être et avoir.",
+     "figure": {
+      "kind": "shapes",
+      "w": 515,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 109,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 28,
+        "text": "chanter",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 288.5,
+        "y": 28,
+        "text": "finir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 347,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 388.0,
+        "y": 28,
+        "text": "être",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 429,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 28,
+        "text": "avoir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 64,
+        "text": "chantais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 288.5,
+        "y": 64,
+        "text": "finissais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 347,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 388.0,
+        "y": 64,
+        "text": "étais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 429,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 64,
+        "text": "avais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 100,
+        "text": "chantais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 288.5,
+        "y": 100,
+        "text": "finissais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 347,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 388.0,
+        "y": 100,
+        "text": "étais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 429,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 100,
+        "text": "avais",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 136,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 112,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 136,
+        "text": "chantait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 288.5,
+        "y": 136,
+        "text": "finissait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 347,
+        "y": 112,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 388.0,
+        "y": 136,
+        "text": "était",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 429,
+        "y": 112,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 136,
+        "text": "avait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 172,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 148,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 172,
+        "text": "chantions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 288.5,
+        "y": 172,
+        "text": "finissions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 347,
+        "y": 148,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 388.0,
+        "y": 172,
+        "text": "étions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 429,
+        "y": 148,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 172,
+        "text": "avions",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 208,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 184,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 208,
+        "text": "chantiez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 288.5,
+        "y": 208,
+        "text": "finissiez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 347,
+        "y": 184,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 388.0,
+        "y": 208,
+        "text": "étiez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 429,
+        "y": 184,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 208,
+        "text": "aviez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 244,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 220,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 244,
+        "text": "chantaient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 288.5,
+        "y": 244,
+        "text": "finissaient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 347,
+        "y": 220,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 388.0,
+        "y": 244,
+        "text": "étaient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 429,
+        "y": 220,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 244,
+        "text": "avaient",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "À quoi sert l'imparfait ?",
+     "md": "- Il **décrit** un décor, un personnage : *Le ciel était gris.*\n- Il exprime une **habitude** : *Chaque dimanche, nous allions au village.*\n- Il présente une **action qui dure** ou qui est en cours dans le passé : *Pendant que Mballa dormait, il pleuvait.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Conjugue « prendre » à l'imparfait avec « nous » et « ils ».",
+     "steps": [
+      {
+       "md": "Présent avec « nous » : nous prenons → radical « pren- »."
+      },
+      {
+       "md": "Nous prenions ; ils prenaient."
+      }
+     ],
+     "answer": "**nous prenions ; ils prenaient**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir le temps",
+     "statement": "Complète avec l'imparfait : « Quand j'étais petit, ma grand-mère me (raconter) souvent des contes. »",
+     "steps": [
+      {
+       "md": "L'habitude dans le passé s'exprime à l'imparfait."
+      },
+      {
+       "md": "« raconter » avec « ma grand-mère » (il/elle) : racontait."
+      }
+     ],
+     "answer": "**ma grand-mère me racontait souvent des contes.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre *-ais/-ait* (imparfait) et *-é* (passé composé) : *Il chantait* / *Il a chanté*.\n- Oublier le « e » de *je mangeais* et la cédille de *je commençais*.\n- Écrire *nous chantions* sans le « i » : il y a bien **-ions** après le radical.\n- Pour *ils*, la terminaison est **-aient** (et pas -ait)."
+    }
+   ],
+   "reviewNotes": [
+    "Verbes en -ier (étudiions, riions) : à garder ou à retirer selon le niveau attendu."
+   ]
+  },
+  {
+   "id": "6e-francais-futur",
+   "title": "Le futur simple",
+   "minutes": 25,
+   "programRef": "6e — Conjugaison : le futur simple de l'indicatif (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Conjuguer un verbe au futur simple.",
+    "Connaître le radical irrégulier des verbes fréquents."
+   ],
+   "prerequisites": [
+    "6e-francais-present-irreguliers"
+   ],
+   "exercises": [
+    "6e-francais-futur-01",
+    "6e-francais-futur-02",
+    "6e-francais-futur-03",
+    "6e-francais-futur-04",
+    "6e-francais-futur-05",
+    "6e-francais-futur-06"
+   ],
+   "selfCheck": [
+    "6e-francais-futur-q1",
+    "6e-francais-futur-q2",
+    "6e-francais-futur-q3",
+    "6e-francais-futur-q4",
+    "6e-francais-futur-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Former le futur",
+     "md": "Pour la plupart des verbes : **infinitif + terminaisons** de l'auxiliaire avoir : **-ai, -as, -a, -ons, -ez, -ont**.\n\n*chanter → je chanterai ; finir → tu finiras ; prendre → il prendra* (le « e » final de l'infinitif disparaît pour les verbes en -re)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le futur de cinq verbes.",
+     "alt": "Un tableau de conjugaison au futur simple de chanter, finir, être, avoir et aller.",
+     "figure": {
+      "kind": "shapes",
+      "w": 538,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 109,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 28,
+        "text": "chanter",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 28,
+        "text": "finir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 28,
+        "text": "être",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 28,
+        "text": "avoir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 4,
+        "w": 65,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 501.5,
+        "y": 28,
+        "text": "aller",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 64,
+        "text": "chanterai",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 64,
+        "text": "finirai",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 64,
+        "text": "serai",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 64,
+        "text": "aurai",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 40,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 501.5,
+        "y": 64,
+        "text": "irai",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 100,
+        "text": "chanteras",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 100,
+        "text": "finiras",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 100,
+        "text": "seras",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 100,
+        "text": "auras",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 76,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 501.5,
+        "y": 100,
+        "text": "iras",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 136,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 112,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 136,
+        "text": "chantera",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 112,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 136,
+        "text": "finira",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 136,
+        "text": "sera",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 136,
+        "text": "aura",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 112,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 501.5,
+        "y": 136,
+        "text": "ira",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 172,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 148,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 172,
+        "text": "chanterons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 148,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 172,
+        "text": "finirons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 148,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 172,
+        "text": "serons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 148,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 172,
+        "text": "aurons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 148,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 501.5,
+        "y": 172,
+        "text": "irons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 208,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 184,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 208,
+        "text": "chanterez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 184,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 208,
+        "text": "finirez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 184,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 208,
+        "text": "serez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 184,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 208,
+        "text": "aurez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 184,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 501.5,
+        "y": 208,
+        "text": "irez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 244,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 220,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 244,
+        "text": "chanteront",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 220,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 244,
+        "text": "finiront",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 220,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 244,
+        "text": "seront",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 220,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 244,
+        "text": "auront",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 220,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 501.5,
+        "y": 244,
+        "text": "iront",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Radicaux irréguliers à connaître",
+     "md": "*faire → je ferai* ; *venir → je viendrai* ; *pouvoir → je pourrai* ; *voir → je verrai* ; *vouloir → je voudrai* ; *savoir → je saurai* ; *envoyer → j'enverrai* ; *courir → je courrai*.\n\nLe futur exprime une action qui aura lieu **après** le moment où l'on parle : *Demain, nous irons au village.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Conjugue « partir » et « faire » au futur avec « nous ».",
+     "steps": [
+      {
+       "md": "« partir » : infinitif + ons → nous partirons."
+      },
+      {
+       "md": "« faire » a un radical irrégulier « fer- » : nous ferons."
+      }
+     ],
+     "answer": "**nous partirons ; nous ferons**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : transposer",
+     "statement": "Mets au futur : « Ce matin, Boris lit et il va au marché. »",
+     "steps": [
+      {
+       "md": "« lit » (lire) devient « lira » ; « va » (aller) devient « ira »."
+      },
+      {
+       "md": "On change aussi « Ce matin » en « Demain matin »."
+      }
+     ],
+     "answer": "**Demain matin, Boris lira et il ira au marché.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre futur (*je chanterai*) et conditionnel (*je chanterais*) : -ai/-ras/-ra au futur.\n- Oublier le « r » : *tu chanteras*, *ils chanteront*.\n- Écrire *je serai / je saurai* au hasard : *serai* (être), *saurai* (savoir).\n- Mal écrire *j'irai* (verbe aller) et *je courrai*."
+    }
+   ],
+   "reviewNotes": [
+    "Le conditionnel présent n'est pas traité ici : il est prévu en 5e (à vérifier)."
+   ]
+  },
+  {
+   "id": "6e-francais-passe-compose",
+   "title": "Le passé composé",
+   "minutes": 30,
+   "programRef": "6e — Conjugaison : le passé composé (auxiliaires être et avoir, participe passé) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Former le passé composé avec avoir ou être.",
+    "Connaître les participes passés des verbes fréquents et accorder le participe avec « être »."
+   ],
+   "prerequisites": [
+    "6e-francais-present-irreguliers"
+   ],
+   "exercises": [
+    "6e-francais-passe-compose-01",
+    "6e-francais-passe-compose-02",
+    "6e-francais-passe-compose-03",
+    "6e-francais-passe-compose-04",
+    "6e-francais-passe-compose-05",
+    "6e-francais-passe-compose-06"
+   ],
+   "selfCheck": [
+    "6e-francais-passe-compose-q1",
+    "6e-francais-passe-compose-q2",
+    "6e-francais-passe-compose-q3",
+    "6e-francais-passe-compose-q4",
+    "6e-francais-passe-compose-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Former le passé composé",
+     "md": "**auxiliaire (avoir ou être) au présent + participe passé** : *j'ai chanté, tu as fini, il est parti, nous sommes arrivés.*\n\nParticipes passés : 1er groupe **-é** (*chanté*), 2e groupe **-i** (*fini*), 3e groupe : **-i, -u, -s, -t** (*parti, vu, pris, fait*), et irréguliers (*été, eu*)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Avoir ou être ?",
+     "md": "- La plupart des verbes se conjuguent avec **avoir**.\n- Avec **être** : les verbes **aller, venir, arriver, partir, entrer, sortir, monter, descendre, tomber, naître, mourir, rester, devenir** et tous les verbes **pronominaux** (*se laver*).\n- Avec **être**, le participe s'accorde avec le sujet : *Elle est partie. Ils sont arrivés. Elles sont allées.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le passé composé avec avoir et avec être.",
+     "alt": "Un tableau du passé composé de chanter avec avoir et de aller avec être.",
+     "figure": {
+      "kind": "shapes",
+      "w": 611,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 169,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.5,
+        "y": 28,
+        "text": "chanter (avoir)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 4,
+        "w": 317,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 448.5,
+        "y": 28,
+        "text": "aller (être)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 205.5,
+        "y": 64,
+        "text": "j'ai chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 40,
+        "w": 317,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 448.5,
+        "y": 64,
+        "text": "je suis allé(e)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 205.5,
+        "y": 100,
+        "text": "tu as chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 76,
+        "w": 317,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 448.5,
+        "y": 100,
+        "text": "tu es allé(e)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 136,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 112,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 205.5,
+        "y": 136,
+        "text": "il a chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 112,
+        "w": 317,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 448.5,
+        "y": 136,
+        "text": "il est allé / elle est allée",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 148,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 172,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 148,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 205.5,
+        "y": 172,
+        "text": "nous avons chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 148,
+        "w": 317,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 448.5,
+        "y": 172,
+        "text": "nous sommes allé(e)s",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 184,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 208,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 184,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 205.5,
+        "y": 208,
+        "text": "vous avez chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 184,
+        "w": 317,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 448.5,
+        "y": 208,
+        "text": "vous êtes allé(e)(s)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 220,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 244,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 220,
+        "w": 169,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 205.5,
+        "y": 244,
+        "text": "ils ont chanté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 220,
+        "w": 317,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 448.5,
+        "y": 244,
+        "text": "ils sont allés / elles sont allées",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : former",
+     "statement": "Mets au passé composé : « Amina (finir) son travail, puis elle (partir). »",
+     "steps": [
+      {
+       "md": "« finir » : avoir + fini → a fini."
+      },
+      {
+       "md": "« partir » : verbe de mouvement → être + parti, accord avec « elle » : est partie."
+      }
+     ],
+     "answer": "**Amina a fini son travail, puis elle est partie.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : accorder",
+     "statement": "Complète : « Les filles sont (arriver) en retard. »",
+     "steps": [
+      {
+       "md": "Le verbe « arriver » se conjugue avec être."
+      },
+      {
+       "md": "Le participe s'accorde avec le sujet « les filles » : féminin pluriel."
+      }
+     ],
+     "answer": "**Les filles sont arrivées en retard.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre participe en -é et infinitif en -er : *Il a mangé* (participe) / *Il veut manger* (infinitif). Remplace par « vendu » / « vendre ».\n- Oublier l'accord avec « être » : *Elle est parti* (faux).\n- Utiliser « avoir » pour aller ou venir : *j'ai allé* est faux."
+    }
+   ],
+   "reviewNotes": [
+    "L'accord du participe passé avec avoir (COD placé avant) est volontairement renvoyé à la 5e."
+   ]
+  },
+  {
+   "id": "6e-francais-passe-simple",
+   "title": "Le passé simple (3e personne)",
+   "minutes": 25,
+   "programRef": "6e — Conjugaison : le passé simple, 3es personnes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître et conjuguer le passé simple aux 3es personnes.",
+    "Distinguer l'emploi du passé simple et de l'imparfait dans un récit."
+   ],
+   "prerequisites": [
+    "6e-francais-imparfait"
+   ],
+   "exercises": [
+    "6e-francais-passe-simple-01",
+    "6e-francais-passe-simple-02",
+    "6e-francais-passe-simple-03",
+    "6e-francais-passe-simple-04",
+    "6e-francais-passe-simple-05",
+    "6e-francais-passe-simple-06"
+   ],
+   "selfCheck": [
+    "6e-francais-passe-simple-q1",
+    "6e-francais-passe-simple-q2",
+    "6e-francais-passe-simple-q3",
+    "6e-francais-passe-simple-q4",
+    "6e-francais-passe-simple-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le passé simple dans un récit",
+     "md": "Le **passé simple** exprime des actions **terminées**, qui font avancer l'histoire (**premier plan**). L'**imparfait** décrit le décor et les actions qui durent (**arrière-plan**).\n\n*Il pleuvait (décor) quand le chef **arriva** (action) et **frappa** à la porte (action).*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Les 3es personnes du passé simple.",
+     "alt": "Un tableau avec le passé simple à il/elle et ils/elles de chanter, finir, être, avoir et aller.",
+     "figure": {
+      "kind": "shapes",
+      "w": 564,
+      "h": 149,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 109,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 28,
+        "text": "chanter",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 28,
+        "text": "finir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 28,
+        "text": "être",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 28,
+        "text": "avoir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 514.5,
+        "y": 28,
+        "text": "aller",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 64,
+        "text": "chanta",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 64,
+        "text": "finit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 64,
+        "text": "fut",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 64,
+        "text": "eut",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 514.5,
+        "y": 64,
+        "text": "alla",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 109,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 175.5,
+        "y": 100,
+        "text": "chantèrent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 275.5,
+        "y": 100,
+        "text": "finirent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 321,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 100,
+        "text": "furent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 395,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 432.0,
+        "y": 100,
+        "text": "eurent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 469,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 514.5,
+        "y": 100,
+        "text": "allèrent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "illustration",
+     "caption": "Autres verbes fréquents au passé simple.",
+     "alt": "Un tableau avec le passé simple à il/elle et ils/elles de faire, dire, venir, prendre et voir.",
+     "figure": {
+      "kind": "shapes",
+      "w": 511,
+      "h": 135,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 117,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 28,
+        "text": "faire",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 232.0,
+        "y": 28,
+        "text": "dire",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 269,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 28,
+        "text": "venir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 351,
+        "y": 4,
+        "w": 82,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 392.0,
+        "y": 28,
+        "text": "prendre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 433,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 28,
+        "text": "voir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 64,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 64,
+        "text": "fit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 232.0,
+        "y": 64,
+        "text": "dit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 269,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 64,
+        "text": "vint",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 351,
+        "y": 40,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 392.0,
+        "y": 64,
+        "text": "prit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 433,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 64,
+        "text": "vit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 117,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 62.5,
+        "y": 100,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 121,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 100,
+        "text": "firent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 232.0,
+        "y": 100,
+        "text": "dirent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 269,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 100,
+        "text": "vinrent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 351,
+        "y": 76,
+        "w": 82,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 392.0,
+        "y": 100,
+        "text": "prirent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 433,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 470.0,
+        "y": 100,
+        "text": "virent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les terminaisons aux 3es personnes",
+     "md": "- 1er groupe : **-a / -èrent** (*il chanta, ils chantèrent*).\n- 2e groupe et beaucoup de verbes du 3e : **-it / -irent** (*il finit, ils finirent*).\n- D'autres verbes : **-ut / -urent** (*il put, ils purent ; il voulut, ils voulurent*).\n- Particuliers : *il vint / ils vinrent*, *il tint / ils tinrent*."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Écris au passé simple : « Le lion (rugir) et les animaux (fuir). »",
+     "steps": [
+      {
+       "md": "« rugir » est du 2e groupe : il rugit."
+      },
+      {
+       "md": "« fuir » : ils fuirent."
+      }
+     ],
+     "answer": "**Le lion rugit et les animaux fuirent.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : imparfait ou passé simple ?",
+     "statement": "Complète : « Le soleil (se lever) quand le pêcheur (partir) en pirogue. »",
+     "steps": [
+      {
+       "md": "« se lever » : décor, action qui dure → imparfait : se levait."
+      },
+      {
+       "md": "« partir » : action qui fait avancer le récit → passé simple : partit."
+      }
+     ],
+     "answer": "**Le soleil se levait quand le pêcheur partit en pirogue.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre *il chanta* (passé simple) et *il chantait* (imparfait).\n- Confondre *il finit* (présent) et *il finit* (passé simple) : le contexte le dit (récit au passé = passé simple).\n- Écrire *il prendra* ou *il pris* : on écrit **il prit**."
+    }
+   ],
+   "reviewNotes": [
+    "Seules les 3es personnes sont proposées ; les autres personnes sont reportées à la 5e (à vérifier)."
+   ]
+  },
+  {
+   "id": "6e-francais-imperatif",
+   "title": "L'impératif présent",
+   "minutes": 20,
+   "programRef": "6e — Conjugaison : l'impératif présent (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Conjuguer un verbe à l'impératif présent.",
+    "Écrire correctement les formes de être, avoir, aller et du 1er groupe."
+   ],
+   "prerequisites": [
+    "6e-francais-present-groupes",
+    "6e-francais-phrase"
+   ],
+   "exercises": [
+    "6e-francais-imperatif-01",
+    "6e-francais-imperatif-02",
+    "6e-francais-imperatif-03",
+    "6e-francais-imperatif-04",
+    "6e-francais-imperatif-05",
+    "6e-francais-imperatif-06"
+   ],
+   "selfCheck": [
+    "6e-francais-imperatif-q1",
+    "6e-francais-imperatif-q2",
+    "6e-francais-imperatif-q3",
+    "6e-francais-imperatif-q4",
+    "6e-francais-imperatif-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'impératif",
+     "md": "L'**impératif** sert à donner un **ordre**, un **conseil**, une **défense**. Il n'a que **trois personnes** : *tu, nous, vous*, et on **n'écrit pas le pronom sujet** : *Chante ! Chantons ! Chantez !*"
+    },
+    {
+     "type": "illustration",
+     "caption": "L'impératif présent de cinq verbes.",
+     "alt": "Un tableau de l'impératif présent à tu, nous et vous pour chanter, finir, être, avoir et aller.",
+     "figure": {
+      "kind": "shapes",
+      "w": 486,
+      "h": 152,
+      "items": [
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 41.0,
+        "y": 28,
+        "text": "Pronom",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 78,
+        "y": 4,
+        "w": 91,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 28,
+        "text": "chanter",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 169,
+        "y": 4,
+        "w": 100,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 28,
+        "text": "finir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 269,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 306.0,
+        "y": 28,
+        "text": "être",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 343,
+        "y": 4,
+        "w": 65,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 375.5,
+        "y": 28,
+        "text": "avoir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 408,
+        "y": 4,
+        "w": 74,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 445.0,
+        "y": 28,
+        "text": "aller",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 41.0,
+        "y": 64,
+        "text": "(tu)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 78,
+        "y": 40,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 64,
+        "text": "chante",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 169,
+        "y": 40,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 64,
+        "text": "finis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 269,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 306.0,
+        "y": 64,
+        "text": "sois",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 343,
+        "y": 40,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 375.5,
+        "y": 64,
+        "text": "aie",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 408,
+        "y": 40,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 445.0,
+        "y": 64,
+        "text": "va",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 41.0,
+        "y": 100,
+        "text": "(nous)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 78,
+        "y": 76,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 100,
+        "text": "chantons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 169,
+        "y": 76,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 100,
+        "text": "finissons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 269,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 306.0,
+        "y": 100,
+        "text": "soyons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 343,
+        "y": 76,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 375.5,
+        "y": 100,
+        "text": "ayons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 408,
+        "y": 76,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 445.0,
+        "y": 100,
+        "text": "allons",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 4,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 41.0,
+        "y": 136,
+        "text": "(vous)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 78,
+        "y": 112,
+        "w": 91,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.5,
+        "y": 136,
+        "text": "chantez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 169,
+        "y": 112,
+        "w": 100,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 219.0,
+        "y": 136,
+        "text": "finissez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 269,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 306.0,
+        "y": 136,
+        "text": "soyez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 343,
+        "y": 112,
+        "w": 65,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 375.5,
+        "y": 136,
+        "text": "ayez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 408,
+        "y": 112,
+        "w": 74,
+        "h": 36,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 445.0,
+        "y": 136,
+        "text": "allez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Particularités",
+     "md": "- Pour les verbes en **-er** (et *aller*, *ouvrir*, *offrir*, *cueillir*), la forme en « tu » perd son **s** : *chante, va, ouvre, offre*.\n- On remet le **s** devant **en** et **y** : *Manges-en ! Vas-y !*\n- À la forme négative, on encadre le verbe : *Ne cours pas !*\n- Après le verbe, le pronom se relie par un trait d'union : *Lève-toi ! Écoute-moi.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Écris à l'impératif : « Tu (finir) tes devoirs » et « vous (être) sages ».",
+     "steps": [
+      {
+       "md": "« finir » (2e groupe) avec tu : finis."
+      },
+      {
+       "md": "« être » avec vous : soyez."
+      }
+     ],
+     "answer": "**Finis tes devoirs ! Soyez sages !**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : s devant en",
+     "statement": "Écris à l'impératif : « Tu (manger) de ces mangues » en les remplaçant par « en ».",
+     "steps": [
+      {
+       "md": "Sans « en », le 1er groupe perd son s : mange."
+      },
+      {
+       "md": "Devant « en », on remet le s : Manges-en."
+      }
+     ],
+     "answer": "**Manges-en !**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire *tu chantes !* au lieu de *chante !*, ou *aies / soit* au lieu de *aie / sois*.\n- Écrire le pronom sujet : *Tu viens ici !* est une phrase déclarative ; *Viens ici !* est impérative.\n- Oublier le trait d'union : *Lève toi* (faux) / *Lève-toi*."
+    }
+   ],
+   "reviewNotes": [
+    "L'ordre des pronoms après l'impératif (« donne-le-moi ») est volontairement laissé en 5e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe est du 2e groupe ?",
+   "choices": [
+    "réussir",
+    "aller",
+    "danser",
+    "partir"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« réussir » → participe « réussissant » : 2e groupe. « partir » (partant) est du 3e groupe.",
+   "id": "6e-francais-present-groupes-01",
+   "tier": "application",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Nous ______ (manger) du riz. »",
+   "choices": [
+    "mangons",
+    "mangeons",
+    "mangeont",
+    "mangions"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Devant la terminaison -ons, on garde le « e » : mangeons.",
+   "id": "6e-francais-present-groupes-02",
+   "tier": "application",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Les élèves ______ (finir) leurs devoirs. »",
+   "choices": [
+    "finient",
+    "finit",
+    "finisent",
+    "finissent"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2e groupe, 3e personne du pluriel : -issent.",
+   "id": "6e-francais-present-groupes-03",
+   "tier": "application",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Tu chante très bien.",
+    "Tu chantes très bien.",
+    "Tu chantent très bien.",
+    "Tu chantez très bien."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Avec « tu », le verbe du 1er groupe se termine par -es.",
+   "id": "6e-francais-present-groupes-04",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque pronom à la forme de « réussir » au présent.",
+   "pairs": [
+    [
+     "je",
+     "réussis"
+    ],
+    [
+     "il",
+     "réussit"
+    ],
+    [
+     "nous",
+     "réussissons"
+    ],
+    [
+     "elles",
+     "réussissent"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Radical « réuss- » + -is, -it, -issons, -issent.",
+   "id": "6e-francais-present-groupes-05",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris trois phrases au présent dans lesquelles tu emploies un verbe du 1er groupe, un verbe du 2e groupe et le verbe « manger » avec « nous ».",
+   "model": "Exemples : « Je chante dans la chorale. » (chanter, 1er groupe) ; « Les enfants grandissent vite. » (grandir, 2e groupe) ; « Nous mangeons du poisson. »",
+   "rubric": [
+    "Les trois phrases sont au présent.",
+    "Un verbe du 1er groupe correctement conjugué.",
+    "Un verbe du 2e groupe en -issons/-issent… correctement conjugué.",
+    "« nous mangeons » avec le « e »."
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "6e-francais-present-groupes-06",
+   "tier": "examen",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la terminaison de « tu » au présent pour un verbe du 1er groupe ?",
+   "choices": [
+    "-e",
+    "-s",
+    "-ent",
+    "-es"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tu chantes : -es.",
+   "id": "6e-francais-present-groupes-q1",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'écrit « nous commencer » au présent ?",
+   "choices": [
+    "nous commençons",
+    "nous commencons",
+    "nous commenceons",
+    "nous commencions"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut la cédille devant -ons pour garder le son [s].",
+   "id": "6e-francais-present-groupes-q2",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le verbe « finir » appartient au…",
+   "choices": [
+    "1er groupe",
+    "2e groupe",
+    "3e groupe",
+    "groupe des auxiliaires"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Infinitif en -ir et participe présent en -issant : 2e groupe.",
+   "id": "6e-francais-present-groupes-q3",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est correcte ?",
+   "choices": [
+    "ils choisissent",
+    "ils choisit",
+    "ils choisient",
+    "ils choisisent"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Choisir (2e groupe) : -issent à la 3e personne du pluriel.",
+   "id": "6e-francais-present-groupes-q4",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le verbe « aller » est du…",
+   "choices": [
+    "1er groupe",
+    "2e groupe",
+    "3e groupe",
+    "groupe des verbes en -er réguliers"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« aller » est irrégulier, malgré son infinitif en -er : 3e groupe.",
+   "id": "6e-francais-present-groupes-q5",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-groupes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Ils ______ (être) en retard. »",
+   "choices": [
+    "ont",
+    "sont",
+    "est",
+    "sommes"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« être » à la 3e personne du pluriel : ils sont.",
+   "id": "6e-francais-present-irreguliers-01",
+   "tier": "application",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Vous ______ (faire) vos devoirs. »",
+   "choices": [
+    "faites",
+    "faisez",
+    "faisons",
+    "font"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "À « vous » : faites.",
+   "id": "6e-francais-present-irreguliers-02",
+   "tier": "application",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Tu ______ (vouloir) un jus ? »",
+   "choices": [
+    "veut",
+    "veux",
+    "voulons",
+    "veulent"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avec « tu » : veux.",
+   "id": "6e-francais-present-irreguliers-03",
+   "tier": "application",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Elles vient et nous venons.",
+    "Elles viennent et nous venons.",
+    "Elles viennent et nous viennons.",
+    "Elles viennent et nous venez."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« viennent » à elles ; « venons » à nous.",
+   "id": "6e-francais-present-irreguliers-04",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque forme au pronom qui convient.",
+   "pairs": [
+    [
+     "prends",
+     "tu"
+    ],
+    [
+     "prenons",
+     "nous"
+    ],
+    [
+     "prennent",
+     "ils"
+    ],
+    [
+     "prend",
+     "elle"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Prendre : prends (je/tu), prend (il), prenons (nous), prennent (ils).",
+   "id": "6e-francais-present-irreguliers-05",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Complète au présent : « Mon cousin (aller) au stade, (prendre) son ballon et (dire) : « Nous (pouvoir) jouer ! »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "« Mon cousin (aller) »",
+     "choices": [
+      "vas",
+      "vont",
+      "va",
+      "allons"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3e personne du singulier : il va.",
+     "id": "6e-francais-present-irreguliers-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« (prendre) son ballon » avec « Mon cousin »",
+     "choices": [
+      "prends",
+      "prend",
+      "prennent",
+      "prenons"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3e personne du singulier : il prend.",
+     "id": "6e-francais-present-irreguliers-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« Nous (pouvoir) »",
+     "choices": [
+      "peuvent",
+      "peut",
+      "pouvons",
+      "pouvez"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "1re personne du pluriel : nous pouvons.",
+     "id": "6e-francais-present-irreguliers-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-francais-present-irreguliers-06",
+   "tier": "examen",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme de « avoir » avec « ils » ?",
+   "choices": [
+    "sont",
+    "ont",
+    "avons",
+    "a"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils ont : 3e personne du pluriel d'avoir.",
+   "id": "6e-francais-present-irreguliers-q1",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme de « aller » avec « vous » ?",
+   "choices": [
+    "allons",
+    "allez",
+    "vont",
+    "va"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Vous allez.",
+   "id": "6e-francais-present-irreguliers-q2",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme de « dire » est correcte avec « vous » ?",
+   "choices": [
+    "vous disez",
+    "vous disent",
+    "vous dis",
+    "vous dites"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dire fait « vous dites ».",
+   "id": "6e-francais-present-irreguliers-q3",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'écrit « il (venir) » au présent ?",
+   "choices": [
+    "il vien",
+    "il viens",
+    "il vienne",
+    "il vient"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il vient : -t à la 3e personne.",
+   "id": "6e-francais-present-irreguliers-q4",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme de « être » avec « tu » ?",
+   "choices": [
+    "est",
+    "êtes",
+    "suis",
+    "es"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tu es.",
+   "id": "6e-francais-present-irreguliers-q5",
+   "tier": "autoeval",
+   "lesson": "6e-francais-present-irreguliers",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme de « jouer » à l'imparfait avec « nous » ?",
+   "choices": [
+    "jouions",
+    "jouons",
+    "jouerons",
+    "jouait"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nous jouons → radical « jou- » + -ions.",
+   "id": "6e-francais-imparfait-01",
+   "tier": "application",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Autrefois, les enfants ______ (aller) à pied. »",
+   "choices": [
+    "allait",
+    "allaient",
+    "allions",
+    "iront"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Imparfait, 3e personne du pluriel : -aient.",
+   "id": "6e-francais-imparfait-02",
+   "tier": "application",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Il pleuvait quand nous sommes sortis. » contient un verbe à l'imparfait.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« pleuvait » est à l'imparfait ; « sommes sortis » est un passé composé.",
+   "id": "6e-francais-imparfait-03",
+   "tier": "application",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la bonne écriture ?",
+   "choices": [
+    "Nous commencons la leçon.",
+    "Nous commençions la leçon.",
+    "Nous commençaient la leçon.",
+    "Nous commencions la leçon."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Commencer fait « nous commencions » : devant « i », le c reste doux, pas de cédille.",
+   "method": "La cédille se met devant a, o, u, jamais devant e ou i.",
+   "id": "6e-francais-imparfait-04",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à l'emploi de l'imparfait.",
+   "pairs": [
+    [
+     "Le ciel était gris.",
+     "description"
+    ],
+    [
+     "Chaque matin, il courait.",
+     "habitude"
+    ],
+    [
+     "Il lisait quand le téléphone a sonné.",
+     "action en cours"
+    ],
+    [
+     "Autrefois, on écrivait avec une plume.",
+     "habitude passée"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Description (décor), habitude (répétition), action en cours (qui dure).",
+   "id": "6e-francais-imparfait-05",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Décris en cinq lignes environ, à l'imparfait, un marché de ton quartier quand tu étais plus petit.",
+   "model": "Quand j'étais petit, le marché de mon quartier me paraissait immense. Les vendeuses étaient assises derrière des tas de tomates et de plantains. Des enfants criaient, des motos klaxonnaient et la radio jouait de la musique. Ma mère marchandait toujours avec le sourire.",
+   "rubric": [
+    "Les verbes de description sont à l'imparfait.",
+    "Les terminaisons -ais, -ait, -aient sont correctes.",
+    "On trouve au moins trois détails (lieu, personnes, bruits ou odeurs).",
+    "Les phrases sont complètes et bien ponctuées."
+   ],
+   "points": 4,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "6e-francais-imparfait-06",
+   "tier": "examen",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles sont les terminaisons de l'imparfait ?",
+   "choices": [
+    "-e, -es, -e, -ons, -ez, -ent",
+    "-ais, -ais, -ait, -ions, -iez, -aient",
+    "-ai, -as, -a, -âmes, -âtes, -èrent",
+    "-rai, -ras, -ra, -rons, -rez, -ront"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ce sont les terminaisons de l'imparfait ; les autres lignes sont présent, passé simple et futur.",
+   "id": "6e-francais-imparfait-q1",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment obtient-on le radical de l'imparfait ?",
+   "choices": [
+    "Avec « vous » au futur",
+    "Avec l'infinitif seulement",
+    "Avec « nous » au présent, sans -ons",
+    "Avec « il » au passé simple"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nous finissons → finiss- → je finissais.",
+   "id": "6e-francais-imparfait-q2",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase contient un verbe à l'imparfait ?",
+   "choices": [
+    "Elle a chanté hier.",
+    "Elle chantera demain.",
+    "Elle chante maintenant.",
+    "Elle chantait chaque soir."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« chantait » est à l'imparfait.",
+   "id": "6e-francais-imparfait-q3",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'écrit « nous (étudier) » à l'imparfait ?",
+   "choices": [
+    "nous étudions",
+    "nous étudiions",
+    "nous étudiyons",
+    "nous étudiaient"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Radical « étudi- » + -ions : deux « i ».",
+   "id": "6e-francais-imparfait-q4",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme de « être » à l'imparfait avec « elles » ?",
+   "choices": [
+    "étais",
+    "était",
+    "étaient",
+    "serait"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils / elles étaient.",
+   "id": "6e-francais-imparfait-q5",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imparfait",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme de « chanter » au futur avec « tu » ?",
+   "choices": [
+    "chantera",
+    "chantes",
+    "chanteras",
+    "chantais"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Infinitif + as : tu chanteras.",
+   "id": "6e-francais-futur-01",
+   "tier": "application",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Demain, nous ______ (aller) à la plage. »",
+   "choices": [
+    "allons",
+    "allions",
+    "aillons",
+    "irons"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le futur d'aller a le radical « ir- » : nous irons.",
+   "id": "6e-francais-futur-02",
+   "tier": "application",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est celle de « avoir » avec « ils » au futur ?",
+   "choices": [
+    "ont",
+    "auront",
+    "auraient",
+    "aurons"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils auront.",
+   "id": "6e-francais-futur-03",
+   "tier": "application",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est au futur ?",
+   "choices": [
+    "Vous verrez la mer.",
+    "Vous voyez la mer.",
+    "Vous voyiez la mer.",
+    "Vous avez vu la mer."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« verrez » : futur de voir.",
+   "id": "6e-francais-futur-04",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à sa forme du futur avec « je ».",
+   "pairs": [
+    [
+     "faire",
+     "ferai"
+    ],
+    [
+     "venir",
+     "viendrai"
+    ],
+    [
+     "pouvoir",
+     "pourrai"
+    ],
+    [
+     "vouloir",
+     "voudrai"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Les radicaux irréguliers : fer-, viendr-, pourr-, voudr-.",
+   "id": "6e-francais-futur-05",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mets les verbes au futur : « L'an prochain, nous (partir) en vacances à Kribi. Mon père (conduire) et je (prendre) des photos. Vous (venir) nous voir. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "« nous (partir) »",
+     "choices": [
+      "partons",
+      "partions",
+      "partirons",
+      "partiront"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Infinitif + ons.",
+     "id": "6e-francais-futur-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« je (prendre) »",
+     "choices": [
+      "prendrais",
+      "prendrai",
+      "prenderai",
+      "prends"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "« prendre » perd son e : prendrai.",
+     "id": "6e-francais-futur-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« Vous (venir) »",
+     "choices": [
+      "viendrez",
+      "venirez",
+      "viendrons",
+      "venez"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Radical « viendr- » + ez.",
+     "id": "6e-francais-futur-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-francais-futur-06",
+   "tier": "examen",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles sont les terminaisons du futur ?",
+   "choices": [
+    "-ais, -ais, -ait, -ions, -iez, -aient",
+    "-e, -es, -e, -ons, -ez, -ent",
+    "-is, -is, -it, -issons, -issez, -issent",
+    "-ai, -as, -a, -ons, -ez, -ont"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ce sont celles de « avoir » au présent, ajoutées à l'infinitif.",
+   "id": "6e-francais-futur-q1",
+   "tier": "autoeval",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme de « être » au futur avec « je » ?",
+   "choices": [
+    "suis",
+    "étais",
+    "serais",
+    "serai"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Je serai.",
+   "id": "6e-francais-futur-q2",
+   "tier": "autoeval",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est celle de « faire » avec « nous » au futur ?",
+   "choices": [
+    "ferons",
+    "faisons",
+    "ferions",
+    "fairons"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Faire a le radical « fer- ».",
+   "id": "6e-francais-futur-q3",
+   "tier": "autoeval",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une action au futur se situe…",
+   "choices": [
+    "après le moment où l'on parle",
+    "avant le moment où l'on parle",
+    "au moment même",
+    "dans un passé lointain"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le futur dit ce qui arrivera.",
+   "id": "6e-francais-futur-q4",
+   "tier": "autoeval",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment écrit-on « ils (voir) » au futur ?",
+   "choices": [
+    "ils voiront",
+    "ils verront",
+    "ils voient",
+    "ils verraient"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Voir : verr- + ont.",
+   "id": "6e-francais-futur-q5",
+   "tier": "autoeval",
+   "lesson": "6e-francais-futur",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le passé composé de « nous chantons » ?",
+   "choices": [
+    "nous chantions",
+    "nous avons chanté",
+    "nous chanterons",
+    "nous sommes chanté"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Auxiliaire avoir au présent + participe « chanté ».",
+   "id": "6e-francais-passe-compose-01",
+   "tier": "application",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Mes parents ______ (arriver) hier. »",
+   "choices": [
+    "ont arrivé",
+    "est arrivé",
+    "sont arrivés",
+    "ont arrivés"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« arriver » prend être ; accord avec « mes parents » : arrivés.",
+   "id": "6e-francais-passe-compose-02",
+   "tier": "application",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le participe passé de « prendre » ?",
+   "choices": [
+    "prendu",
+    "prené",
+    "prit",
+    "pris"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« prendre » → pris.",
+   "id": "6e-francais-passe-compose-03",
+   "tier": "application",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Elle a tombé dans la cour.",
+    "Elle est tombée dans la cour.",
+    "Elle est tombé dans la cour.",
+    "Elle est tombées dans la cour."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« tomber » : être ; sujet féminin singulier → tombée.",
+   "id": "6e-francais-passe-compose-04",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque infinitif à son participe passé.",
+   "pairs": [
+    [
+     "faire",
+     "fait"
+    ],
+    [
+     "voir",
+     "vu"
+    ],
+    [
+     "mettre",
+     "mis"
+    ],
+    [
+     "avoir",
+     "eu"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Participes irréguliers à apprendre par cœur.",
+   "id": "6e-francais-passe-compose-05",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mets au passé composé : « Hier, mon frère (se lever) tôt, il (prendre) le bus et il (arriver) à l'école. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "« il (se lever) »",
+     "choices": [
+      "s'a levé",
+      "s'est levé",
+      "se lève",
+      "s'est lever"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les verbes pronominaux prennent être.",
+     "id": "6e-francais-passe-compose-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« il (prendre) »",
+     "choices": [
+      "est pris",
+      "a pris",
+      "a prendu",
+      "a prenu"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Avoir + pris.",
+     "id": "6e-francais-passe-compose-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« il (arriver) »",
+     "choices": [
+      "a arrivé",
+      "est arrivés",
+      "est arrivé",
+      "est arrivée"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Être + arrivé, sujet masculin singulier.",
+     "id": "6e-francais-passe-compose-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-francais-passe-compose-06",
+   "tier": "examen",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment forme-t-on le passé composé ?",
+   "choices": [
+    "Auxiliaire au présent + participe passé",
+    "Infinitif + terminaisons d'avoir",
+    "Radical de « nous » + -ais",
+    "Auxiliaire à l'imparfait seul"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Exemple : j'ai mangé.",
+   "id": "6e-francais-passe-compose-q1",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe se conjugue avec être au passé composé ?",
+   "choices": [
+    "chanter",
+    "finir",
+    "partir",
+    "prendre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« partir » est un verbe de mouvement : il est parti.",
+   "id": "6e-francais-passe-compose-q2",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Participe passé du verbe « finir » :",
+   "choices": [
+    "finit",
+    "finé",
+    "finu",
+    "fini"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les verbes du 2e groupe forment leur participe en -i.",
+   "id": "6e-francais-passe-compose-q3",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est écrite correctement ?",
+   "choices": [
+    "Nous avons sortis tard.",
+    "Nous sommes sorti tard.",
+    "Nous sommes sortis tard.",
+    "Nous sommes sortit tard."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sortir : être ; accord masculin pluriel.",
+   "id": "6e-francais-passe-compose-q4",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le passé composé de « elle va » ?",
+   "choices": [
+    "elle a allé",
+    "elle est allé",
+    "elle est allée",
+    "elle allait"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Aller : être + allée (féminin).",
+   "id": "6e-francais-passe-compose-q5",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-compose",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « il parle » :",
+   "choices": [
+    "il parlait",
+    "il parla",
+    "il parlera",
+    "il a parlé"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Verbe du 1er groupe : -a.",
+   "id": "6e-francais-passe-simple-01",
+   "tier": "application",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « ils font » :",
+   "choices": [
+    "ils faisaient",
+    "ils firent",
+    "ils feront",
+    "ils ont fait"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Faire fait « fit / firent ».",
+   "id": "6e-francais-passe-simple-02",
+   "tier": "application",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « il est » :",
+   "choices": [
+    "il fut",
+    "il était",
+    "il sera",
+    "il a été"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Être : fut / furent.",
+   "id": "6e-francais-passe-simple-03",
+   "tier": "application",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Mballa (ouvrir) la porte et (entrer). »",
+   "choices": [
+    "ouvrait … entrait",
+    "ouvrit … entra",
+    "ouvrira … entrera",
+    "a ouvert … est entré"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les deux actions se suivent : passé simple (ouvrit, entra).",
+   "id": "6e-francais-passe-simple-04",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à son passé simple avec « ils ».",
+   "pairs": [
+    [
+     "prendre",
+     "prirent"
+    ],
+    [
+     "voir",
+     "virent"
+    ],
+    [
+     "venir",
+     "vinrent"
+    ],
+    [
+     "avoir",
+     "eurent"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Formes irrégulières fréquentes du passé simple.",
+   "id": "6e-francais-passe-simple-05",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris 4 phrases d'un petit récit qui commence par « Un soir, la pluie… » en employant l'imparfait pour le décor et le passé simple pour les actions.",
+   "model": "Un soir, la pluie tombait sur le village et les rues étaient désertes. Nkeng entendit un bruit. Il ouvrit la porte et vit un petit chat qui tremblait. Il le prit dans ses bras et rentra.",
+   "rubric": [
+    "Le décor est à l'imparfait.",
+    "Les actions sont au passé simple correctement conjugué.",
+    "Le récit est cohérent.",
+    "La ponctuation est correcte."
+   ],
+   "points": 4,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "6e-francais-passe-simple-06",
+   "tier": "examen",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la terminaison du passé simple à la 3e personne du singulier pour un verbe en -er ?",
+   "choices": [
+    "-a",
+    "-it",
+    "-ait",
+    "-e"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il chanta.",
+   "id": "6e-francais-passe-simple-q1",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un récit, le passé simple sert à…",
+   "choices": [
+    "décrire le décor",
+    "faire une description durable",
+    "faire avancer l'action",
+    "exprimer un ordre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il présente les actions principales.",
+   "id": "6e-francais-passe-simple-q2",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le passé simple de « ils viennent » ?",
+   "choices": [
+    "ils vinrent",
+    "ils venaient",
+    "ils viendront",
+    "ils sont venus"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Venir : vint / vinrent.",
+   "id": "6e-francais-passe-simple-q3",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est au passé simple ?",
+   "choices": [
+    "Il sortait et fermait la porte.",
+    "Il sortit et ferma la porte.",
+    "Il sort et ferme la porte.",
+    "Il est sorti et a fermé la porte."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« sortit » et « ferma » sont au passé simple.",
+   "id": "6e-francais-passe-simple-q4",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « il peut » :",
+   "choices": [
+    "il put",
+    "il pouvait",
+    "il pourra",
+    "il peut"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pouvoir : put / purent.",
+   "id": "6e-francais-passe-simple-q5",
+   "tier": "autoeval",
+   "lesson": "6e-francais-passe-simple",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme de « chanter » à l'impératif avec « tu » ?",
+   "choices": [
+    "Chante",
+    "Chantes",
+    "Chantez",
+    "Tu chantes"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Verbe du 1er groupe : pas de s à « tu ».",
+   "id": "6e-francais-imperatif-01",
+   "tier": "application",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Impératif de « être » avec « vous » :",
+   "choices": [
+    "Êtes",
+    "Soyiez",
+    "Serez",
+    "Soyez"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« être » : sois, soyons, soyez.",
+   "id": "6e-francais-imperatif-02",
+   "tier": "application",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Impératif de « avoir » avec « tu » :",
+   "choices": [
+    "As",
+    "Aie",
+    "Ais",
+    "Aies"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« avoir » : aie, ayons, ayez.",
+   "id": "6e-francais-imperatif-03",
+   "tier": "application",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Ces mangues sont délicieuses : (manger)-en ! » avec tu.",
+   "choices": [
+    "Mange",
+    "Mangez",
+    "Mangent",
+    "Manges"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On remet le s devant « en ».",
+   "id": "6e-francais-imperatif-04",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à sa forme correcte.",
+   "pairs": [
+    [
+     "(aller) à l'école, tu es en retard.",
+     "Va"
+    ],
+    [
+     "(finir) ton travail.",
+     "Finis"
+    ],
+    [
+     "(ouvrir) la fenêtre.",
+     "Ouvre"
+    ],
+    [
+     "(être) courageux, Boris.",
+     "Sois"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Aller → va ; finir → finis ; ouvrir → ouvre ; être → sois.",
+   "id": "6e-francais-imperatif-05",
+   "tier": "approfondissement",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris cinq conseils à ton petit frère pour bien se comporter à l'école. Utilise l'impératif présent (avec tu).",
+   "model": "Écoute bien ton maître. Lève la main avant de parler. Range ton cahier dans ton sac. Sois poli avec tes camarades. N'oublie pas de faire tes devoirs.",
+   "rubric": [
+    "Cinq phrases à l'impératif.",
+    "Les verbes en -er sans « s » à tu.",
+    "Aucun pronom sujet devant le verbe.",
+    "Ponctuation correcte (point ou point d'exclamation)."
+   ],
+   "points": 5,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "6e-francais-imperatif-06",
+   "tier": "examen",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de personnes l'impératif possède-t-il ?",
+   "choices": [
+    "Six",
+    "Deux",
+    "Trois",
+    "Quatre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tu, nous, vous.",
+   "id": "6e-francais-imperatif-q1",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle écriture est celle de l'impératif réfléchi correct ?",
+   "choices": [
+    "Lève toi !",
+    "Tu lèves-toi !",
+    "Lèves-toi !",
+    "Lève-toi !"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le « s » tombe pour les verbes en -er ; trait d'union avant le pronom.",
+   "id": "6e-francais-imperatif-q2",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Impératif de « aller » avec « tu » :",
+   "choices": [
+    "vas",
+    "va",
+    "allez",
+    "ailles"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Va ; mais « Vas-y ! » avec y.",
+   "id": "6e-francais-imperatif-q3",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe est à l'impératif ?",
+   "choices": [
+    "Vous écoutez la leçon.",
+    "Écoutez la leçon.",
+    "Ils écoutent la leçon.",
+    "Vous avez écouté la leçon."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sans pronom sujet, avec un ordre : impératif.",
+   "id": "6e-francais-imperatif-q4",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Forme négative de « Cours ! » :",
+   "choices": [
+    "Ne pas cours !",
+    "Cours pas !",
+    "Ne courir pas !",
+    "Ne cours pas !"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On encadre le verbe : ne + verbe + pas.",
+   "id": "6e-francais-imperatif-q5",
+   "tier": "autoeval",
+   "lesson": "6e-francais-imperatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

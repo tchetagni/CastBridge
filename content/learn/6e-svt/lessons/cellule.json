@@ -1,0 +1,512 @@
+{
+ "chapter": "6e-svt-cellule",
+ "lessons": [
+  {
+   "id": "6e-svt-cellule",
+   "title": "La cellule, unité du vivant",
+   "minutes": 25,
+   "programRef": "6e — Initiation à la cellule : observation microscopique, parties de la cellule (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dire ce qu'est une cellule et comment on l'observe.",
+    "Nommer les parties d'une cellule animale et d'une cellule végétale.",
+    "Distinguer êtres unicellulaires et pluricellulaires."
+   ],
+   "prerequisites": [
+    "6e-svt-vivant-non-vivant"
+   ],
+   "exercises": [
+    "6e-svt-cellule-01",
+    "6e-svt-cellule-02",
+    "6e-svt-cellule-03",
+    "6e-svt-cellule-04",
+    "6e-svt-cellule-05",
+    "6e-svt-cellule-06"
+   ],
+   "selfCheck": [
+    "6e-svt-cellule-q1",
+    "6e-svt-cellule-q2",
+    "6e-svt-cellule-q3",
+    "6e-svt-cellule-q4",
+    "6e-svt-cellule-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La cellule",
+     "md": "Les êtres vivants sont formés de **cellules**, trop petites pour être vues à l'œil nu : on les observe au **microscope**. La cellule est l'unité de base du vivant. Elle comprend une **membrane**, un **cytoplasme** et un **noyau**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une cellule animale et une cellule végétale (schémas très simplifiés).",
+     "alt": "À gauche une cellule ronde avec noyau, cytoplasme et membrane ; à droite une cellule végétale avec paroi, noyau et chloroplastes verts.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 270,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 120,
+        "r": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 105,
+        "r": 24,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 110,
+        "text": "noyau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 170,
+        "text": "cytoplasme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 26,
+        "text": "membrane",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 32,
+        "x2": 130,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 250,
+        "text": "Cellule animale",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 45,
+        "w": 220,
+        "h": 140,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "width": 5
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 100,
+        "r": 24,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 105,
+        "text": "noyau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 430,
+        "cy": 85,
+        "r": 9,
+        "fill": "green",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 455,
+        "cy": 125,
+        "r": 9,
+        "fill": "green",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 420,
+        "cy": 155,
+        "r": 9,
+        "fill": "green",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 325,
+        "cy": 155,
+        "r": 9,
+        "fill": "green",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 26,
+        "text": "paroi",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 390,
+        "y1": 32,
+        "x2": 390,
+        "y2": 45,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 215,
+        "text": "chloroplastes",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 412,
+        "y1": 200,
+        "x2": 420,
+        "y2": 168,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 250,
+        "text": "Cellule végétale",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Cellule animale et cellule végétale",
+     "md": "- Les deux ont une membrane, un cytoplasme et un noyau.\n- La cellule **végétale** a en plus une **paroi** (qui lui donne sa forme) et, dans les parties vertes, des **chloroplastes** qui contiennent la chlorophylle.\n- Un être **unicellulaire** n'a qu'une cellule ; un être **pluricellulaire** en a un très grand nombre."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : observer une pellicule d'oignon",
+     "statement": "Comment observer des cellules d'oignon au microscope ?",
+     "steps": [
+      {
+       "md": "On détache une très fine pellicule de l'oignon et on la pose dans une goutte d'eau sur une lame."
+      },
+      {
+       "md": "On recouvre d'une lamelle, on peut colorer (par exemple à l'eau iodée), puis on observe d'abord au faible grossissement."
+      },
+      {
+       "md": "On voit de petites cases accolées : ce sont les cellules, avec leur paroi et leur noyau."
+      }
+     ],
+     "answer": "**Les cellules sont visibles au microscope sous forme de petites cases.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : reconnaître le type de cellule",
+     "statement": "Une cellule observée est verte, entourée d'une paroi, avec un noyau et de petits grains verts. Est-elle animale ou végétale ?",
+     "steps": [
+      {
+       "md": "La paroi et les petits grains verts (chloroplastes) n'existent pas dans les cellules animales."
+      },
+      {
+       "md": "La cellule observée possède les deux : elle vient d'une plante."
+      }
+     ],
+     "answer": "**C'est une cellule végétale.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'on voit les cellules à l'œil nu : il faut un microscope.\n- Croire que tous les êtres vivants ont plusieurs cellules : certains n'en ont qu'une.\n- Attribuer des chloroplastes aux cellules animales."
+    }
+   ],
+   "reviewNotes": [
+    "Selon le programme officiel, la vacuole ou le noyau peuvent être traités en détail ou non. Aucune dimension chiffrée donnée volontairement."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Avec quel instrument observe-t-on une cellule ?",
+   "choices": [
+    "La règle",
+    "Le thermomètre",
+    "Le microscope",
+    "Le chronomètre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les cellules sont trop petites pour l'œil nu.",
+   "id": "6e-svt-cellule-01",
+   "tier": "application",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la cellule animale possède des chloroplastes.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les chloroplastes se trouvent dans les cellules végétales vertes.",
+   "id": "6e-svt-cellule-02",
+   "tier": "application",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque partie à son rôle ou sa description.",
+   "pairs": [
+    [
+     "Noyau",
+     "Dirige la cellule"
+    ],
+    [
+     "Membrane",
+     "Enveloppe la cellule"
+    ],
+    [
+     "Paroi",
+     "Donne sa forme à la cellule végétale"
+    ],
+    [
+     "Chloroplastes",
+     "Contiennent la chlorophylle"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Le noyau est le « centre de commande » ; la paroi existe seulement chez les végétaux.",
+   "id": "6e-svt-cellule-03",
+   "tier": "application",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel de ces êtres est formé d'une seule cellule ?",
+   "choices": [
+    "Un manguier",
+    "Une bactérie",
+    "Une poule",
+    "Un poisson"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Une bactérie est unicellulaire.",
+   "id": "6e-svt-cellule-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une cellule possède une paroi, des chloroplastes et un noyau. Où a-t-on pu la prélever ?",
+   "choices": [
+    "Dans la peau d'un enfant",
+    "Dans le sang d'un poisson",
+    "Dans un muscle de poulet",
+    "Dans une feuille de plante"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Seules les cellules végétales vertes ont paroi et chloroplastes.",
+   "id": "6e-svt-cellule-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina observe au microscope deux préparations : A (pellicule d'oignon) et B (cellules de la joue prélevées avec un coton-tige).",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle préparation montre des cellules avec une paroi nette ?",
+     "choices": [
+      "La préparation B",
+      "Les deux",
+      "La préparation A",
+      "Aucune"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La pellicule d'oignon est végétale, donc avec paroi.",
+     "id": "6e-svt-cellule-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Fais un schéma d'observation d'une cellule de la préparation B, en décrivant les légendes (titre, parties).",
+     "model": "Titre : cellule animale (joue), vue au microscope. Légendes : membrane, cytoplasme, noyau. Pas de paroi, pas de chloroplastes. Indiquer le grossissement.",
+     "rubric": [
+      "Titre présent",
+      "Membrane, cytoplasme, noyau légendés",
+      "Absence de paroi et de chloroplastes"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-cellule-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-svt-cellule-06",
+   "tier": "examen",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La partie qui dirige la cellule est :",
+   "choices": [
+    "La paroi",
+    "La membrane",
+    "Le chloroplaste",
+    "Le noyau"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le noyau contrôle le fonctionnement de la cellule.",
+   "id": "6e-svt-cellule-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les chloroplastes sont de couleur :",
+   "choices": [
+    "Verte",
+    "Rouge",
+    "Noire",
+    "Blanche"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils contiennent la chlorophylle, pigment vert.",
+   "id": "6e-svt-cellule-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un être pluricellulaire est formé :",
+   "choices": [
+    "De très nombreuses cellules",
+    "D'une seule cellule",
+    "D'aucune cellule",
+    "D'une paroi seulement"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un poisson ou un arbre sont pluricellulaires.",
+   "id": "6e-svt-cellule-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie existe seulement dans la cellule végétale ?",
+   "choices": [
+    "Le noyau",
+    "Le cytoplasme",
+    "La membrane",
+    "La paroi"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les cellules animales n'ont pas de paroi.",
+   "id": "6e-svt-cellule-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La cellule est :",
+   "choices": [
+    "L'unité de base du vivant",
+    "Un organe",
+    "Un squelette",
+    "Une maladie"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Tous les êtres vivants sont constitués de cellules.",
+   "id": "6e-svt-cellule-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-cellule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

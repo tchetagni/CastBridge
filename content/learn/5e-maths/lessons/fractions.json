@@ -1,0 +1,1332 @@
+{
+ "chapter": "5e-maths-fractions",
+ "lessons": [
+  {
+   "id": "5e-maths-fractions-simplifier-additionner",
+   "title": "Fractions : simplifier, additionner et soustraire",
+   "minutes": 30,
+   "programRef": "5e — Fractions : simplification, comparaison, addition et soustraction (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Simplifier une fraction et la réduire au même dénominateur.",
+    "Additionner et soustraire des fractions de dénominateurs différents."
+   ],
+   "prerequisites": [
+    "5e-maths-relatifs-comparaison"
+   ],
+   "exercises": [
+    "5e-maths-fractions-simplifier-additionner-01",
+    "5e-maths-fractions-simplifier-additionner-02",
+    "5e-maths-fractions-simplifier-additionner-03",
+    "5e-maths-fractions-simplifier-additionner-04",
+    "5e-maths-fractions-simplifier-additionner-05",
+    "5e-maths-fractions-simplifier-additionner-06"
+   ],
+   "selfCheck": [
+    "5e-maths-fractions-simplifier-additionner-q1",
+    "5e-maths-fractions-simplifier-additionner-q2",
+    "5e-maths-fractions-simplifier-additionner-q3",
+    "5e-maths-fractions-simplifier-additionner-q4",
+    "5e-maths-fractions-simplifier-additionner-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Simplifier",
+     "md": "On ne change pas la valeur d'une fraction en divisant le numérateur et le dénominateur par un même nombre non nul : $\\frac{18}{24} = \\frac{18 \\div 6}{24 \\div 6} = \\frac{3}{4}$. La fraction est **irréductible** quand on ne peut plus simplifier."
+    },
+    {
+     "type": "illustration",
+     "caption": "6/8 et 3/4 représentent la même quantité.",
+     "alt": "Deux bandes : six huitièmes coloriés et trois quarts coloriés, de même longueur.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 25,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 45,
+        "y": 20,
+        "w": 25,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 20,
+        "w": 25,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 20,
+        "w": 25,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 20,
+        "w": 25,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 20,
+        "w": 25,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 20,
+        "w": 25,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 20,
+        "w": 25,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 60,
+        "w": 25,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 45,
+        "y": 60,
+        "w": 25,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 60,
+        "w": 25,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 60,
+        "w": 25,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 60,
+        "w": 100,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 40,
+        "text": "6/8",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 85,
+        "text": "3/4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 62,
+        "text": "=",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Additionner avec des dénominateurs différents",
+     "md": "1. On trouve un dénominateur commun (un multiple de chaque dénominateur).\n2. On réécrit chaque fraction avec ce dénominateur.\n3. On additionne (ou soustrait) les numérateurs, on garde le dénominateur.\n4. On simplifie si possible. Exemple : $\\frac{1}{6} + \\frac{3}{4} = \\frac{2}{12} + \\frac{9}{12} = \\frac{11}{12}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : simplifier",
+     "statement": "Simplifie $\\frac{36}{48}$ au maximum.",
+     "steps": [
+      {
+       "md": "36 et 48 sont divisibles par 12 : 36 ÷ 12 = 3 ; 48 ÷ 12 = 4."
+      },
+      {
+       "md": "La fraction 3/4 est irréductible."
+      }
+     ],
+     "answer": "**3/4**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : soustraire",
+     "statement": "Calcule $\\frac{5}{6} - \\frac{1}{4}$.",
+     "steps": [
+      {
+       "md": "Dénominateur commun 12 : 5/6 = 10/12 et 1/4 = 3/12."
+      },
+      {
+       "md": "On soustrait les numérateurs :",
+       "tex": "\\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}"
+      }
+     ],
+     "answer": "**7/12**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner numérateurs et dénominateurs : $\\frac{1}{2} + \\frac{1}{3}$ n'est pas $\\frac{2}{5}$.\n- Simplifier en retirant le même nombre au numérateur et au dénominateur : on divise, on ne soustrait pas.\n- S'arrêter trop tôt : $\\frac{6}{8}$ peut encore se simplifier en $\\frac{3}{4}$."
+    }
+   ],
+   "reviewNotes": [
+    "Les fractions négatives sont évitées ici ; vérifier la progression du programme.",
+    "Le PGCD est abordé informellement (diviser par un diviseur commun)."
+   ]
+  },
+  {
+   "id": "5e-maths-fractions-produit",
+   "title": "Produit de fractions et fraction d'une fraction",
+   "minutes": 25,
+   "programRef": "5e — Fractions : multiplication, fraction d'une fraction (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Multiplier deux fractions et simplifier le résultat.",
+    "Calculer une fraction d'une quantité ou d'une fraction."
+   ],
+   "prerequisites": [
+    "5e-maths-fractions-simplifier-additionner"
+   ],
+   "exercises": [
+    "5e-maths-fractions-produit-01",
+    "5e-maths-fractions-produit-02",
+    "5e-maths-fractions-produit-03",
+    "5e-maths-fractions-produit-04",
+    "5e-maths-fractions-produit-05",
+    "5e-maths-fractions-produit-06"
+   ],
+   "selfCheck": [
+    "5e-maths-fractions-produit-q1",
+    "5e-maths-fractions-produit-q2",
+    "5e-maths-fractions-produit-q3",
+    "5e-maths-fractions-produit-q4",
+    "5e-maths-fractions-produit-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Produit de deux fractions",
+     "md": "$\\frac{a}{b} \\times \\frac{c}{d} = \\frac{a \\times c}{b \\times d}$. On multiplie les numérateurs entre eux et les dénominateurs entre eux. On peut simplifier avant de multiplier."
+    },
+    {
+     "type": "illustration",
+     "caption": "La moitié de la moitié d'un carré en est le quart.",
+     "alt": "Un carré partagé en quatre : une partie coloriée en orange représente un quart.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 160,
+        "h": 120,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 160,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 20,
+        "x2": 100,
+        "y2": 140,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 80,
+        "x2": 180,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 80,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 160,
+        "text": "1/2 de 1/2 = 1/4",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 50,
+        "text": "1/2 × 1/2",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 90,
+        "text": "= 1/4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : produit",
+     "statement": "Calcule $\\frac{2}{3} \\times \\frac{5}{7}$.",
+     "steps": [
+      {
+       "md": "On multiplie les numérateurs : 2 × 5 = 10."
+      },
+      {
+       "md": "On multiplie les dénominateurs : 3 × 7 = 21."
+      }
+     ],
+     "answer": "**10/21**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : simplifier avant",
+     "statement": "Calcule $\\frac{4}{9} \\times \\frac{3}{8}$.",
+     "steps": [
+      {
+       "md": "On simplifie : 4 et 8 par 4, 3 et 9 par 3."
+      },
+      {
+       "md": "Il reste :",
+       "tex": "\\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}"
+      }
+     ],
+     "answer": "**1/6**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Chercher un dénominateur commun avant de multiplier : ce n'est utile que pour additionner.\n- Multiplier un numérateur par un dénominateur : on multiplie « en ligne ».\n- Croire que le produit de deux fractions plus petites que 1 est plus grand : $\\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}$ est plus petit."
+    }
+   ],
+   "reviewNotes": [
+    "Le quotient de deux fractions (inverse) n'est pas traité : à vérifier s'il est au programme de 5e."
+   ]
+  },
+  {
+   "id": "5e-maths-puissances",
+   "title": "Puissances d'un nombre : carré, cube et puissances de 10",
+   "minutes": 25,
+   "programRef": "5e — Puissances d'exposant entier positif (carré, cube, puissances de 10) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Écrire et calculer a² , a³ et aⁿ avec un exposant entier positif.",
+    "Calculer avec les puissances de 10 et en déduire l'écriture d'un grand nombre."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-maths-puissances-01",
+    "5e-maths-puissances-02",
+    "5e-maths-puissances-03",
+    "5e-maths-puissances-04",
+    "5e-maths-puissances-05",
+    "5e-maths-puissances-06"
+   ],
+   "selfCheck": [
+    "5e-maths-puissances-q1",
+    "5e-maths-puissances-q2",
+    "5e-maths-puissances-q3",
+    "5e-maths-puissances-q4",
+    "5e-maths-puissances-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Puissance",
+     "md": "Pour un nombre $a$ et un entier $n \\geq 2$ : $a^n = a \\times a \\times \\cdots \\times a$ ($n$ facteurs). $a^2$ est le **carré** de $a$, $a^3$ son **cube**. Par convention $a^1 = a$ et $a^0 = 1$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un carré de côté 4 est formé de 4² = 16 petits carrés.",
+     "alt": "Une grille de 4 sur 4 petits carrés.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 50,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 80,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 110,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 20,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 50,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 80,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 110,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 20,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 50,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 80,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 110,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 20,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 50,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 80,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 110,
+        "w": 30,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 145,
+        "text": "4² = 16",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 70,
+        "text": "2³ = 2 × 2 × 2",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 100,
+        "text": "= 8",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Puissances de 10",
+     "md": "$10^n$ s'écrit avec un 1 suivi de $n$ zéros : $10^3 = 1\\,000$ ; $10^6 = 1\\,000\\,000$. Ainsi $5 \\times 10^4 = 50\\,000$ et $3{,}2 \\times 10^3 = 3\\,200$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer",
+     "statement": "Calcule $3^2$, $2^5$ et $(-2)^3$.",
+     "steps": [
+      {
+       "md": "3² = 3 × 3 = 9 et 2⁵ = 2 × 2 × 2 × 2 × 2 = 32."
+      },
+      {
+       "md": "(−2)³ = (−2) × (−2) × (−2) : (−2) × (−2) = 4, puis 4 × (−2) = −8."
+      }
+     ],
+     "answer": "**9 ; 32 ; −8**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : puissances de 10",
+     "statement": "Écris 7 200 000 avec une puissance de 10.",
+     "steps": [
+      {
+       "md": "7 200 000 = 72 × 100 000."
+      },
+      {
+       "md": "Soit :",
+       "tex": "7\\,200\\,000 = 72 \\times 10^5 = 7{,}2 \\times 10^6"
+      }
+     ],
+     "answer": "**7,2 × 10⁶**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre $a^n$ et $a \\times n$ : $2^3 = 8$ et non 6.\n- Écrire $10^3 = 30$ ou $100$ : il y a trois zéros, donc 1 000.\n- Oublier les parenthèses : $(-3)^2 = 9$ mais $-3^2 = -9$."
+    }
+   ],
+   "reviewNotes": [
+    "Les règles de calcul sur les puissances (produits de puissances) sont probablement vues en 4e : seulement présentées sur des exemples ici.",
+    "Les exposants négatifs ne sont pas traités."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Simplifie 12/18 au maximum.",
+   "choices": [
+    "3/4",
+    "6/9",
+    "4/9",
+    "2/3"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "12 et 18 sont divisibles par 6 : 12/18 = 2/3.",
+   "method": "Chercher le plus grand diviseur commun.",
+   "id": "5e-maths-fractions-simplifier-additionner-01",
+   "tier": "application",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule 1/3 + 1/4.",
+   "choices": [
+    "7/12",
+    "2/7",
+    "2/12",
+    "1/12"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4/12 + 3/12 = 7/12.",
+   "id": "5e-maths-fractions-simplifier-additionner-02",
+   "tier": "application",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule 7/8 − 3/4.",
+   "choices": [
+    "1/8",
+    "4/4",
+    "4/8",
+    "1/4"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3/4 = 6/8 ; 7/8 − 6/8 = 1/8.",
+   "id": "5e-maths-fractions-simplifier-additionner-03",
+   "tier": "application",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule 2/3 + 5/6 − 1/2.",
+   "choices": [
+    "7/6",
+    "2/3",
+    "1",
+    "5/6"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Sixièmes : 4/6 + 5/6 − 3/6 = 6/6 = 1.",
+   "id": "5e-maths-fractions-simplifier-additionner-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel dénominateur commun le plus petit peut-on utiliser pour 5/12 et 3/8 ?",
+   "answer": 24,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le plus petit multiple commun de 12 et 8 est 24.",
+   "id": "5e-maths-fractions-simplifier-additionner-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une famille dépense les 2/5 de son budget pour la nourriture et le 1/4 pour le logement.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle fraction du budget (en vingtièmes, donne le numérateur) est dépensée en tout ?",
+     "answer": 13,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "2/5 = 8/20 ; 1/4 = 5/20 ; 8 + 5 = 13, soit 13/20.",
+     "id": "5e-maths-fractions-simplifier-additionner-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle fraction reste-t-il (numérateur sur 20) ?",
+     "answer": 7,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "20/20 − 13/20 = 7/20.",
+     "id": "5e-maths-fractions-simplifier-additionner-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Le budget est de 200 000 FCFA. Combien reste-t-il (FCFA) ?",
+     "answer": 70000,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "200 000 ÷ 20 = 10 000 ; × 7 = 70 000.",
+     "id": "5e-maths-fractions-simplifier-additionner-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-fractions-simplifier-additionner-06",
+   "tier": "examen",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction est irréductible ?",
+   "choices": [
+    "6/9",
+    "7/9",
+    "8/12",
+    "10/15"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "7 et 9 n'ont aucun diviseur commun autre que 1.",
+   "id": "5e-maths-fractions-simplifier-additionner-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 3/10 + 1/5 ?",
+   "choices": [
+    "4/15",
+    "1/2",
+    "4/10",
+    "3/50"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1/5 = 2/10 ; 3/10 + 2/10 = 5/10 = 1/2.",
+   "id": "5e-maths-fractions-simplifier-additionner-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "24/36 simplifié au maximum donne",
+   "choices": [
+    "6/9",
+    "12/18",
+    "4/6",
+    "2/3"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "24 et 36 divisés par 12 : 2/3.",
+   "id": "5e-maths-fractions-simplifier-additionner-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un dénominateur commun à 6 et 15 est",
+   "choices": [
+    "21",
+    "30",
+    "45 seulement",
+    "9"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "30 est un multiple de 6 et de 15.",
+   "id": "5e-maths-fractions-simplifier-additionner-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 1 − 2/7 ?",
+   "choices": [
+    "1/7",
+    "2/7",
+    "5/7",
+    "3/7"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "7/7 − 2/7 = 5/7.",
+   "id": "5e-maths-fractions-simplifier-additionner-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-simplifier-additionner",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule 3/4 × 2/5.",
+   "choices": [
+    "3/10",
+    "5/9",
+    "6/9",
+    "1/2"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 2 = 6 ; 4 × 5 = 20 ; 6/20 = 3/10.",
+   "id": "5e-maths-fractions-produit-01",
+   "tier": "application",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule 1/3 × 1/5.",
+   "choices": [
+    "1/15",
+    "2/8",
+    "1/8",
+    "5/3"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 × 1 = 1 ; 3 × 5 = 15.",
+   "id": "5e-maths-fractions-produit-02",
+   "tier": "application",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule les 2/3 de 45.",
+   "answer": 30,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "45 ÷ 3 = 15 ; 15 × 2 = 30.",
+   "id": "5e-maths-fractions-produit-03",
+   "tier": "application",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Calcule 6/7 × 14/9.",
+   "choices": [
+    "20/16",
+    "4/3",
+    "3/2",
+    "2/3"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "6 × 14 = 84 ; 7 × 9 = 63 ; 84/63 = 4/3 (divisé par 21).",
+   "id": "5e-maths-fractions-produit-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Les 3/4 des 2/3 d'un champ de 120 ares : combien d'ares ?",
+   "answer": 60,
+   "unit": "ares",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "2/3 de 120 = 80 ; 3/4 de 80 = 60.",
+   "method": "Calculer étape par étape.",
+   "id": "5e-maths-fractions-produit-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa a un terrain de 600 m². Il en cultive les 3/5. Sur la partie cultivée, la moitié est plantée en manioc.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire cultivée (m²) ?",
+     "answer": 360,
+     "unit": "m²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "600 ÷ 5 = 120 ; × 3 = 360.",
+     "id": "5e-maths-fractions-produit-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire plantée en manioc (m²) ?",
+     "answer": 180,
+     "unit": "m²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "360 ÷ 2 = 180.",
+     "id": "5e-maths-fractions-produit-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle fraction du terrain total cela représente-t-il ?",
+     "choices": [
+      "1/2",
+      "3/10",
+      "3/5",
+      "2/5"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3/5 × 1/2 = 3/10 (et 180/600 = 3/10).",
+     "id": "5e-maths-fractions-produit-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-fractions-produit-06",
+   "tier": "examen",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 2/5 × 5/2 ?",
+   "choices": [
+    "0",
+    "4/25",
+    "1",
+    "10/7"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 5 = 10 ; 5 × 2 = 10 ; 10/10 = 1.",
+   "id": "5e-maths-fractions-produit-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le produit 1/2 × 1/4 est égal à",
+   "choices": [
+    "1/6",
+    "2/6",
+    "3/4",
+    "1/8"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 × 1 = 1 ; 2 × 4 = 8.",
+   "id": "5e-maths-fractions-produit-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les 3/10 de 50 valent",
+   "choices": [
+    "150",
+    "5",
+    "15",
+    "30"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "50 ÷ 10 = 5 ; 5 × 3 = 15.",
+   "id": "5e-maths-fractions-produit-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel produit vaut 1/6 ?",
+   "choices": [
+    "1/2 × 1/3",
+    "1/2 + 1/3",
+    "1/6 + 1/6",
+    "2/3 × 3/2"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1/2 × 1/3 = 1/6.",
+   "id": "5e-maths-fractions-produit-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour multiplier deux fractions, on",
+   "choices": [
+    "cherche un dénominateur commun",
+    "additionne les numérateurs",
+    "retourne la deuxième fraction",
+    "multiplie les numérateurs et les dénominateurs"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Règle du produit en ligne.",
+   "id": "5e-maths-fractions-produit-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-fractions-produit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 5².",
+   "answer": 25,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "5 × 5 = 25.",
+   "id": "5e-maths-puissances-01",
+   "tier": "application",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 2⁴.",
+   "answer": 16,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 2 × 2 × 2 = 16.",
+   "id": "5e-maths-puissances-02",
+   "tier": "application",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 10⁵.",
+   "answer": 100000,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 suivi de cinq zéros : 100 000.",
+   "id": "5e-maths-puissances-03",
+   "tier": "application",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule (−3)².",
+   "answer": 9,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "(−3) × (−3) = 9.",
+   "id": "5e-maths-puissances-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 4,5 × 10³.",
+   "answer": 4500,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On avance la virgule de 3 rangs.",
+   "id": "5e-maths-puissances-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un champ de culture est un carré de 30 m de côté. Un autre est un carré de 60 m de côté.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire du premier champ (m²) ?",
+     "answer": 900,
+     "unit": "m²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "30² = 900.",
+     "id": "5e-maths-puissances-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire du second champ (m²) ?",
+     "answer": 3600,
+     "unit": "m²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "60² = 3 600.",
+     "id": "5e-maths-puissances-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de fois la seconde aire contient-elle la première ?",
+     "answer": 4,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3 600 ÷ 900 = 4 : doubler le côté multiplie l'aire par 4.",
+     "id": "5e-maths-puissances-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-puissances-06",
+   "tier": "examen",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 7² ?",
+   "choices": [
+    "14",
+    "77",
+    "9",
+    "49"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "7 × 7 = 49.",
+   "id": "5e-maths-puissances-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 2³ + 3² ?",
+   "choices": [
+    "13",
+    "17",
+    "15",
+    "25"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "8 + 9 = 17.",
+   "id": "5e-maths-puissances-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 10⁶ ?",
+   "choices": [
+    "100 000",
+    "10 000 000",
+    "1 000 000",
+    "60"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un 1 suivi de six zéros.",
+   "id": "5e-maths-puissances-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle égalité est exacte ?",
+   "choices": [
+    "2⁵ = 10",
+    "2⁵ = 25",
+    "2⁵ = 32",
+    "2⁵ = 7"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 2 × 2 × 2 × 2 = 32.",
+   "id": "5e-maths-puissances-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le cube de 4 ?",
+   "choices": [
+    "12",
+    "64",
+    "16",
+    "81"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 × 4 × 4 = 64.",
+   "id": "5e-maths-puissances-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-puissances",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

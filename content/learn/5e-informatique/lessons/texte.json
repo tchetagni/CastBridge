@@ -1,0 +1,510 @@
+{
+ "chapter": "5e-informatique-texte",
+ "lessons": [
+  {
+   "id": "5e-informatique-texte-avance",
+   "title": "Traitement de texte : tableaux, images et mise en page",
+   "minutes": 30,
+   "programRef": "Programme d'informatique de 5e (MINESEC) — découpage exact à vérifier sur le texte officiel — traitement de texte avancé",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Insérer et mettre en forme un tableau dans un document.",
+    "Insérer une image, régler les marges, l'orientation et préparer l'impression d'un document de plusieurs pages."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-informatique-texte-avance-01",
+    "5e-informatique-texte-avance-02",
+    "5e-informatique-texte-avance-03",
+    "5e-informatique-texte-avance-04",
+    "5e-informatique-texte-avance-05",
+    "5e-informatique-texte-avance-06"
+   ],
+   "selfCheck": [
+    "5e-informatique-texte-avance-q1",
+    "5e-informatique-texte-avance-q2",
+    "5e-informatique-texte-avance-q3",
+    "5e-informatique-texte-avance-q4",
+    "5e-informatique-texte-avance-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Tableau, image, mise en page",
+     "md": "Un **tableau** range l'information en **lignes** et **colonnes** ; l'intersection d'une ligne et d'une colonne est une **cellule**. Une **image** peut être insérée dans le texte. La **mise en page** règle l'aspect de la page : marges, orientation (portrait ou paysage), numéros de page, en-tête et pied de page."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Créer un tableau",
+     "md": "1. Compter le nombre de **colonnes** et de **lignes** nécessaires (par exemple 3 colonnes et 4 lignes).\n2. Insérer le tableau, puis cliquer dans chaque cellule pour saisir le contenu.\n3. Mettre la première ligne en gras (les titres des colonnes).\n4. Ajuster la largeur des colonnes et les bordures ; centrer les nombres.\n5. Ajouter ou supprimer une ligne ou une colonne avec le clic droit."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un tableau de 3 colonnes et 4 lignes (la première ligne contient les titres).",
+     "alt": "Un tableau avec les colonnes Article, Prix, Quantité et trois lignes de données : cahier, stylo, règle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 380,
+        "h": 140,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 60,
+        "x2": 400,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 100,
+        "x2": 400,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 130,
+        "x2": 400,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 20,
+        "x2": 150,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 20,
+        "x2": 280,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 380,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 46,
+        "text": "Article",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 46,
+        "text": "Prix",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 46,
+        "text": "Quantité",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 86,
+        "text": "Cahier",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 86,
+        "text": "300",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 86,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 121,
+        "text": "Stylo",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 121,
+        "text": "100",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 121,
+        "text": "10",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 151,
+        "text": "Règle",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 151,
+        "text": "150",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 151,
+        "text": "2",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Images et mise en page",
+     "md": "- **Image** : on l'insère depuis un fichier, puis on la redimensionne en tirant un **coin** (pas un côté) pour ne pas la déformer.\n- **Habillage** : l'image peut être posée « avec le texte » ou autour de lui.\n- **Marges** : l'espace blanc autour du texte.\n- **Portrait** (page debout) ou **paysage** (page couchée).\n- **Numéros de page**, **en-tête** et **pied de page** pour les documents de plusieurs pages."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : taille du tableau",
+     "statement": "Amina doit présenter les notes de 5 élèves dans trois matières (avec les noms et les titres de colonnes). Quelle taille de tableau ?",
+     "steps": [
+      {
+       "md": "Colonnes : 1 pour les noms + 3 matières =",
+       "tex": "1 + 3 = 4"
+      },
+      {
+       "md": "Lignes : 1 pour les titres + 5 élèves =",
+       "tex": "1 + 5 = 6"
+      }
+     ],
+     "answer": "**Un tableau de 4 colonnes et 6 lignes.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une image déformée",
+     "statement": "Boris étire une photo par le côté droit : les visages deviennent trop larges. Comment éviter cela ?",
+     "steps": [
+      {
+       "md": "Tirer par un côté change une seule dimension : l'image est déformée."
+      },
+      {
+       "md": "Pour garder les proportions, on tire un **coin**."
+      }
+     ],
+     "answer": "**Redimensionner par un coin.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Faire un « faux tableau » avec des espaces : il se déforme dès qu'on change la police.\n- Insérer une photo énorme sans la redimensionner : le fichier devient très lourd.\n- Oublier l'aperçu avant impression : le tableau peut déborder de la page."
+    }
+   ],
+   "reviewNotes": [
+    "Le découpage exact du programme officiel d'informatique de 5e (et son volume horaire) n'a pas pu être vérifié : titres et ordre à confronter au texte officiel.",
+    "Cours générique « un traitement de texte » (aucun nom de logiciel, aucune capture d'écran). Supposé : les bases du traitement de texte de 6e sont acquises."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Comment appelle-t-on l'intersection d'une ligne et d'une colonne ?",
+   "choices": [
+    "Une marge",
+    "Une cellule",
+    "Une extension",
+    "Un pied de page"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chaque case d'un tableau est une cellule.",
+   "id": "5e-informatique-texte-avance-01",
+   "tier": "application",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : pour ne pas déformer une image, on la redimensionne en tirant un coin.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un coin conserve le rapport largeur/hauteur.",
+   "id": "5e-informatique-texte-avance-02",
+   "tier": "application",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque terme à sa définition.",
+   "pairs": [
+    [
+     "Portrait",
+     "Page orientée en hauteur"
+    ],
+    [
+     "Paysage",
+     "Page orientée en largeur"
+    ],
+    [
+     "Marge",
+     "Blanc autour du texte"
+    ],
+    [
+     "Pied de page",
+     "Zone en bas de chaque page"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Vocabulaire de la mise en page.",
+   "id": "5e-informatique-texte-avance-03",
+   "tier": "application",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un tableau de pointage a 1 ligne de titres et 8 lignes d'élèves. Combien de lignes en tout ?",
+   "answer": 9,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "1 ligne de titres + 8 lignes de données = 9 lignes.",
+   "id": "5e-informatique-texte-avance-04",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un tableau très large ne tient pas dans la page. Quelle solution est la plus adaptée ?",
+   "choices": [
+    "Mettre le texte en rouge",
+    "Supprimer les titres",
+    "Imprimer deux fois",
+    "Passer la page en paysage"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'orientation paysage offre plus de largeur.",
+   "id": "5e-informatique-texte-avance-05",
+   "tier": "approfondissement",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng prépare le programme d'une fête de classe : un titre, un tableau (activité, heure, responsable), une photo de la classe, puis impression de 2 pages.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Il prévoit 6 activités. Combien de lignes pour le tableau, titres compris ?",
+     "answer": 7,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "6 activités + 1 ligne de titres = 7 lignes.",
+     "id": "5e-informatique-texte-avance-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Combien de colonnes faut-il ?",
+     "choices": [
+      "3",
+      "2",
+      "4",
+      "6"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Activité, heure et responsable : 3 colonnes.",
+     "id": "5e-informatique-texte-avance-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Cite trois réglages de mise en page utiles avant l'impression.",
+     "model": "Marges adaptées, numéros de page, orientation (portrait ou paysage), aperçu avant impression, taille de l'image.",
+     "rubric": [
+      "Trois réglages pertinents"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-informatique-texte-avance-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-informatique-texte-avance-06",
+   "tier": "examen",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faut-il saisir sur la première ligne d'un tableau de données ?",
+   "choices": [
+    "Les titres des colonnes",
+    "Le total uniquement",
+    "Rien du tout",
+    "Le nom du fichier"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La première ligne explique ce que contient chaque colonne.",
+   "id": "5e-informatique-texte-avance-q1",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle page convient à un long tableau de nombreuses colonnes ?",
+   "choices": [
+    "La page en portrait",
+    "La page en paysage",
+    "La page sans marge obligatoire",
+    "Une page sans texte"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le paysage donne plus de largeur.",
+   "id": "5e-informatique-texte-avance-q2",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert le numéro de page ?",
+   "choices": [
+    "À changer de police",
+    "À agrandir une image",
+    "À se repérer dans un document de plusieurs pages",
+    "À éteindre l'ordinateur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il aide à retrouver et ordonner les pages.",
+   "id": "5e-informatique-texte-avance-q3",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait-on pour supprimer une ligne d'un tableau ?",
+   "choices": [
+    "On l'écrase à la gomme",
+    "On la sélectionne puis on utilise la commande « supprimer la ligne »",
+    "On ferme le logiciel",
+    "On change la police"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les commandes du tableau permettent d'ajouter ou supprimer des lignes.",
+   "id": "5e-informatique-texte-avance-q4",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi redimensionne-t-on une photo trop grande ?",
+   "choices": [
+    "Pour changer son nom",
+    "Pour qu'elle tienne dans la page et alléger le document",
+    "Pour la rendre plus colorée",
+    "Pour l'envoyer à l'imprimante en premier"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une image trop grande déborde et alourdit le fichier.",
+   "id": "5e-informatique-texte-avance-q5",
+   "tier": "autoeval",
+   "lesson": "5e-informatique-texte-avance",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

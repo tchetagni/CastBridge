@@ -1,0 +1,2899 @@
+{
+ "chapter": "4e-english-structures",
+ "lessons": [
+  {
+   "id": "4e-english-passive-voice",
+   "title": "La voix passive (initiation)",
+   "minutes": 25,
+   "programRef": "4e — Passive voice : present simple et past simple (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Former le passif au présent simple et au past simple.",
+    "Passer d'une phrase active à une phrase passive."
+   ],
+   "prerequisites": [
+    "4e-english-past-simple-continuous"
+   ],
+   "exercises": [
+    "4e-english-passive-voice-01",
+    "4e-english-passive-voice-02",
+    "4e-english-passive-voice-03",
+    "4e-english-passive-voice-04",
+    "4e-english-passive-voice-05",
+    "4e-english-passive-voice-06"
+   ],
+   "selfCheck": [
+    "4e-english-passive-voice-q1",
+    "4e-english-passive-voice-q2",
+    "4e-english-passive-voice-q3",
+    "4e-english-passive-voice-q4",
+    "4e-english-passive-voice-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le passif",
+     "md": "Au passif, on met en avant **ce qui subit l'action**.\nForme : **be (am / is / are / was / were) + participe passé**.\n- Active : Farmers grow cocoa. → Passive : Cocoa **is grown** by farmers.\n- Active : The teacher gave the books. → Passive : The books **were given** by the teacher."
+    },
+    {
+     "type": "illustration",
+     "caption": "Passif au présent et au passé.",
+     "alt": "Tableau du passif au présent simple et au past simple avec un exemple chacun.",
+     "figure": {
+      "kind": "shapes",
+      "w": 637,
+      "h": 168,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 166,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Tense",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 176,
+        "y": 10,
+        "w": 196,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 188,
+        "y": 35,
+        "text": "Form",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 372,
+        "y": 10,
+        "w": 255,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 384,
+        "y": 35,
+        "text": "Example",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 166,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "Present simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 176,
+        "y": 48,
+        "w": 196,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 188,
+        "y": 73,
+        "text": "is / are + p.p.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 372,
+        "y": 48,
+        "w": 255,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 384,
+        "y": 73,
+        "text": "English is spoken here.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 166,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "Past simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 176,
+        "y": 86,
+        "w": 196,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 188,
+        "y": 111,
+        "text": "was / were + p.p.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 372,
+        "y": 86,
+        "w": 255,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 384,
+        "y": 111,
+        "text": "The door was closed.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Passer de l'actif au passif",
+     "md": "1. L'objet de la phrase active devient le sujet.\n2. On garde le temps de la phrase active : on met **be** au même temps.\n3. On ajoute le participe passé.\n4. Le sujet actif devient **by + agent** (facultatif si inutile)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : présent",
+     "statement": "Mets au passif : The cook prepares the meal.",
+     "steps": [
+      {
+       "md": "L'objet « the meal » devient sujet."
+      },
+      {
+       "md": "Présent simple → is + participe passé (prepared)."
+      },
+      {
+       "md": "Agent : by the cook."
+      }
+     ],
+     "answer": "**The meal is prepared by the cook.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : passé",
+     "statement": "Mets au passif : Mballa broke the window.",
+     "steps": [
+      {
+       "md": "« the window » devient sujet."
+      },
+      {
+       "md": "Past simple → was + participe passé (broken)."
+      }
+     ],
+     "answer": "**The window was broken by Mballa.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier be : « The window broken ».\n- Utiliser le passé simple au lieu du participe : « was broke » → was **broken**.\n- Accord : The books **were** (pluriel) / The book **was** (singulier)."
+    }
+   ],
+   "reviewNotes": [
+    "Le programme de 4e peut se limiter au présent simple et au past simple passifs : on s'y limite ici."
+   ]
+  },
+  {
+   "id": "4e-english-reported-speech",
+   "title": "Le discours rapporté (initiation)",
+   "minutes": 25,
+   "programRef": "4e — Reported speech : statements (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Rapporter une phrase déclarative avec said / told.",
+    "Appliquer le changement des temps, pronoms et indicateurs de temps."
+   ],
+   "prerequisites": [
+    "4e-english-past-simple-continuous"
+   ],
+   "exercises": [
+    "4e-english-reported-speech-01",
+    "4e-english-reported-speech-02",
+    "4e-english-reported-speech-03",
+    "4e-english-reported-speech-04",
+    "4e-english-reported-speech-05",
+    "4e-english-reported-speech-06"
+   ],
+   "selfCheck": [
+    "4e-english-reported-speech-q1",
+    "4e-english-reported-speech-q2",
+    "4e-english-reported-speech-q3",
+    "4e-english-reported-speech-q4",
+    "4e-english-reported-speech-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Discours rapporté",
+     "md": "On rapporte ce que quelqu'un a dit sans citer ses mots exacts.\n- Direct : Amina said, “I am tired.”\n- Indirect : Amina said **that she was tired.**\nOn recule d'un temps (backshift) quand le verbe introducteur est au passé."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le recul des temps.",
+     "alt": "Tableau montrant le changement des temps du discours direct au discours indirect.",
+     "figure": {
+      "kind": "shapes",
+      "w": 312,
+      "h": 248,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 156,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Direct",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 10,
+        "w": 136,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 35,
+        "text": "Reported",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "am / is / are",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 48,
+        "w": 136,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 73,
+        "text": "was / were",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "play / plays",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 86,
+        "w": 136,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 111,
+        "text": "played",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "am playing",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 124,
+        "w": 136,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 149,
+        "text": "was playing",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "will",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 162,
+        "w": 136,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 187,
+        "text": "would",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 156,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "can",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 200,
+        "w": 136,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 225,
+        "text": "could",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pronoms et indicateurs de temps",
+     "md": "- I → he / she ; we → they ; my → his / her.\n- today → that day ; tomorrow → the next day ; yesterday → the day before ; now → then ; here → there.\n- **tell** exige une personne : He told **me** that… ; **say** non : He said that…"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : présent",
+     "statement": "Boris said, “I like football.” Rapporte.",
+     "steps": [
+      {
+       "md": "Boris → he ; I → he."
+      },
+      {
+       "md": "like → liked (recul)."
+      }
+     ],
+     "answer": "**Boris said that he liked football.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : futur",
+     "statement": "Amina said, “I will call you tomorrow.” Rapporte.",
+     "steps": [
+      {
+       "md": "will → would ; tomorrow → the next day ; you → me (selon qui parle)."
+      },
+      {
+       "md": "On garde that facultatif."
+      }
+     ],
+     "answer": "**Amina said that she would call me the next day.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Garder le temps du direct : « He said that he is tired » (en principe : was tired).\n- Oublier de changer les pronoms.\n- « He told that… » : dire told + personne : He told **Amina** that…"
+    }
+   ],
+   "reviewNotes": [
+    "Questions et ordres rapportés considérés comme programme de 3e : non traités ici. À confirmer."
+   ]
+  },
+  {
+   "id": "4e-english-relative-pronouns",
+   "title": "Les pronoms relatifs : who, which, that, whose, where",
+   "minutes": 22,
+   "programRef": "4e — Relative pronouns (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Choisir le bon pronom relatif.",
+    "Relier deux phrases avec un pronom relatif."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-english-relative-pronouns-01",
+    "4e-english-relative-pronouns-02",
+    "4e-english-relative-pronouns-03",
+    "4e-english-relative-pronouns-04",
+    "4e-english-relative-pronouns-05",
+    "4e-english-relative-pronouns-06"
+   ],
+   "selfCheck": [
+    "4e-english-relative-pronouns-q1",
+    "4e-english-relative-pronouns-q2",
+    "4e-english-relative-pronouns-q3",
+    "4e-english-relative-pronouns-q4",
+    "4e-english-relative-pronouns-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les relatifs",
+     "md": "- **who** : personnes. The girl **who** sits near me is Amina.\n- **which** : choses / animaux. The book **which** I read was good.\n- **that** : personnes ou choses (dans les relatives définies).\n- **whose** : possession. The boy **whose** bike was stolen is sad.\n- **where** : lieu. This is the school **where** I study."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les relatifs et leur emploi.",
+     "alt": "Tableau des pronoms relatifs who, which, whose et where avec exemples.",
+     "figure": {
+      "kind": "shapes",
+      "w": 568,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 77,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Word",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 87,
+        "y": 10,
+        "w": 127,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 99,
+        "y": 35,
+        "text": "Use",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 214,
+        "y": 10,
+        "w": 344,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 226,
+        "y": 35,
+        "text": "Example",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 77,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "who",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 87,
+        "y": 48,
+        "w": 127,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 99,
+        "y": 73,
+        "text": "people",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 214,
+        "y": 48,
+        "w": 344,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 226,
+        "y": 73,
+        "text": "the man who sells fish",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 77,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "which",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 87,
+        "y": 86,
+        "w": 127,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 99,
+        "y": 111,
+        "text": "things",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 214,
+        "y": 86,
+        "w": 344,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 226,
+        "y": 111,
+        "text": "the bag which is on the desk",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 77,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "whose",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 87,
+        "y": 124,
+        "w": 127,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 99,
+        "y": 149,
+        "text": "possession",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 214,
+        "y": 124,
+        "w": 344,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 226,
+        "y": 149,
+        "text": "the girl whose mother is a nurse",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 77,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "where",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 87,
+        "y": 162,
+        "w": 127,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 99,
+        "y": 187,
+        "text": "place",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 214,
+        "y": 162,
+        "w": 344,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 226,
+        "y": 187,
+        "text": "the town where I was born",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : relier",
+     "statement": "Relie : I have a friend. He lives in Kribi.",
+     "steps": [
+      {
+       "md": "Le mot repris est une personne : who."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**I have a friend who lives in Kribi.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lieu",
+     "statement": "Relie : This is the market. We buy fruit there.",
+     "steps": [
+      {
+       "md": "Un lieu : where."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**This is the market where we buy fruit.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « The man which… » : pour une personne : who.\n- « The boy who his bike… » : possession → whose.\n- N'ajoute pas de pronom répété : « The man who he sells fish » est faux."
+    }
+   ],
+   "reviewNotes": [
+    "Les relatifs non définis (avec virgules) sont laissés à la 3e."
+   ]
+  },
+  {
+   "id": "4e-english-connectors",
+   "title": "Les connecteurs logiques",
+   "minutes": 22,
+   "programRef": "4e — Linking words / connectors (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Relier des idées avec and, but, because, so, although, however.",
+    "Organiser un texte avec first, then, after that, finally."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-english-connectors-01",
+    "4e-english-connectors-02",
+    "4e-english-connectors-03",
+    "4e-english-connectors-04",
+    "4e-english-connectors-05",
+    "4e-english-connectors-06"
+   ],
+   "selfCheck": [
+    "4e-english-connectors-q1",
+    "4e-english-connectors-q2",
+    "4e-english-connectors-q3",
+    "4e-english-connectors-q4",
+    "4e-english-connectors-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Les connecteurs par idée.",
+     "alt": "Tableau des connecteurs par type d'idée : addition, opposition, cause, conséquence et ordre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 471,
+      "h": 248,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 107,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Idea",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 10,
+        "w": 344,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 35,
+        "text": "Linking words",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "addition",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 48,
+        "w": 344,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 73,
+        "text": "and, also, moreover",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "contrast",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 86,
+        "w": 344,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 111,
+        "text": "but, however, although",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "cause",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 124,
+        "w": 344,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 149,
+        "text": "because, since",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "result",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 162,
+        "w": 344,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 187,
+        "text": "so, therefore",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "order",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 200,
+        "w": 344,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 225,
+        "text": "first, then, after that, finally",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Emploi",
+     "md": "- **because** + cause : I stayed home **because** I was ill.\n- **so** + conséquence : I was ill, **so** I stayed home.\n- **but / however** : contraste. However commence une phrase et est suivi d'une virgule.\n- **although** + sujet + verbe : **Although** it was raining, we played."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : cause ou conséquence",
+     "statement": "Complète : Amina was tired, ____ she went to bed early.",
+     "steps": [
+      {
+       "md": "Aller se coucher est la conséquence : so."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**so**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : contraste",
+     "statement": "Relie : It was hot. We played football. (although)",
+     "steps": [
+      {
+       "md": "although + première idée."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**Although it was hot, we played football.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « Although… but… » : on ne met pas les deux : « Although it was hot, we played » ou « It was hot, but we played ».\n- Confondre because (cause) et so (conséquence)."
+    }
+   ],
+   "reviewNotes": [
+    "Liste de connecteurs à ajuster selon le programme officiel."
+   ]
+  },
+  {
+   "id": "4e-english-phrasal-verbs",
+   "title": "Les phrasal verbs courants",
+   "minutes": 22,
+   "programRef": "4e — Phrasal verbs courants (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Comprendre et utiliser une douzaine de phrasal verbs courants."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-english-phrasal-verbs-01",
+    "4e-english-phrasal-verbs-02",
+    "4e-english-phrasal-verbs-03",
+    "4e-english-phrasal-verbs-04",
+    "4e-english-phrasal-verbs-05",
+    "4e-english-phrasal-verbs-06"
+   ],
+   "selfCheck": [
+    "4e-english-phrasal-verbs-q1",
+    "4e-english-phrasal-verbs-q2",
+    "4e-english-phrasal-verbs-q3",
+    "4e-english-phrasal-verbs-q4",
+    "4e-english-phrasal-verbs-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Phrasal verb",
+     "md": "Un phrasal verb = verbe + particule (up, off, on, out, for…). Le **sens change** souvent : look = regarder ; look for = chercher."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quelques phrasal verbs courants.",
+     "alt": "Tableau de neuf phrasal verbs avec leur traduction en français.",
+     "figure": {
+      "kind": "shapes",
+      "w": 422,
+      "h": 400,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 196,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Phrasal verb",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 10,
+        "w": 206,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 35,
+        "text": "Sens",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "get up",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 48,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 73,
+        "text": "se lever",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "wake up",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 86,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 111,
+        "text": "se réveiller",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "look for",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 124,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 149,
+        "text": "chercher",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "look after",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 162,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 187,
+        "text": "s'occuper de",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "give up",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 200,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 225,
+        "text": "abandonner",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 238,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 263,
+        "text": "turn on / off",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 238,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 263,
+        "text": "allumer / éteindre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 276,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 301,
+        "text": "put on / take off",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 276,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 301,
+        "text": "mettre / enlever",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 314,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 339,
+        "text": "find out",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 314,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 339,
+        "text": "découvrir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 352,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 377,
+        "text": "set off",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 352,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 377,
+        "text": "partir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1",
+     "statement": "Amina is searching for her keys. Remplace searching for par un phrasal verb.",
+     "steps": [
+      {
+       "md": "chercher = look for."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**Amina is looking for her keys.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2",
+     "statement": "Complète : Please ____ the light. It's dark. (allumer)",
+     "steps": [
+      {
+       "md": "allumer = turn on."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**turn on**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Traduire mot à mot : look for ≠ look.\n- Avec un pronom, on le place entre le verbe et la particule pour les verbes séparables : turn **it** off (pas turn off it).\n- take off (enlever) ≠ put on (mettre)."
+    }
+   ],
+   "reviewNotes": [
+    "La liste de phrasal verbs du programme officiel n'est pas connue précisément : sélection de verbes fréquents."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Complète : English ____ in many countries.",
+   "choices": [
+    "speaks",
+    "is spoken",
+    "is speak",
+    "was speaking"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Présent passif : is + participe passé.",
+   "id": "4e-english-passive-voice-01",
+   "tier": "application",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : The letters ____ yesterday.",
+   "choices": [
+    "were written",
+    "are written",
+    "was wrote",
+    "were write"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pluriel + hier : were + written.",
+   "id": "4e-english-passive-voice-02",
+   "tier": "application",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le participe passé de « steal » ?",
+   "choices": [
+    "stole",
+    "stealed",
+    "stealing",
+    "stolen"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "steal – stole – stolen.",
+   "id": "4e-english-passive-voice-03",
+   "tier": "application",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Mets au passif : They clean the classroom every day.",
+   "choices": [
+    "The classroom cleans every day.",
+    "The classroom is cleaned every day.",
+    "The classroom was cleaned every day.",
+    "The classroom is clean every day."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Présent actif → is + cleaned.",
+   "id": "4e-english-passive-voice-04",
+   "tier": "approfondissement",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Mets au passif : Amina wrote this poem.",
+   "choices": [
+    "This poem is written by Amina.",
+    "This poem was written by Amina.",
+    "This poem was wrote by Amina.",
+    "This poem written by Amina."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Past simple → was + written.",
+   "id": "4e-english-passive-voice-05",
+   "tier": "approfondissement",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Lis : « Cocoa is grown in several regions of Cameroon. The beans are dried in the sun, then they are sold at the market. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle phrase est au passif ?",
+     "choices": [
+      "The sun dries the beans.",
+      "Cocoa grows in Cameroon.",
+      "Farmers work hard.",
+      "The beans are dried in the sun."
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "are dried = are + participe passé.",
+     "id": "4e-english-passive-voice-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Mets au passif : The farmers sell the cocoa.",
+     "model": "The cocoa is sold by the farmers.",
+     "rubric": [
+      "Objet devient sujet",
+      "is + sold",
+      "by the farmers (facultatif)"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-english-passive-voice-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-english-passive-voice-06",
+   "tier": "examen",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est au passif ?",
+   "choices": [
+    "The choir sang the song.",
+    "The choir was singing.",
+    "The choir sings.",
+    "The song was sung by the choir."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "was + participe passé (sung).",
+   "id": "4e-english-passive-voice-q1",
+   "tier": "autoeval",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passif de « Boris repairs bikes » :",
+   "choices": [
+    "Bikes repair Boris.",
+    "Bikes were repaired by Boris.",
+    "Bikes is repaired by Boris.",
+    "Bikes are repaired by Boris."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Présent, pluriel : are repaired.",
+   "id": "4e-english-passive-voice-q2",
+   "tier": "autoeval",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« The thief ____ by the police yesterday. »",
+   "choices": [
+    "is caught",
+    "was catch",
+    "was caught",
+    "caught"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Past passif : was caught.",
+   "id": "4e-english-passive-voice-q3",
+   "tier": "autoeval",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « The room is cleaned », l'agent est…",
+   "choices": [
+    "the room",
+    "absent (non précisé)",
+    "cleaned",
+    "is"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pas de by : l'agent n'est pas précisé.",
+   "id": "4e-english-passive-voice-q4",
+   "tier": "autoeval",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Participe passé de « break » :",
+   "choices": [
+    "broke",
+    "broken",
+    "breaked",
+    "breaking"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "break – broke – broken.",
+   "id": "4e-english-passive-voice-q5",
+   "tier": "autoeval",
+   "lesson": "4e-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Rapporte : She said, “I am hungry.”",
+   "choices": [
+    "She said that I am hungry.",
+    "She said that she was hungry.",
+    "She said that she is hungry.",
+    "She said she were hungry."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "am → was ; I → she.",
+   "id": "4e-english-reported-speech-01",
+   "tier": "application",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : He told ____ that he was late.",
+   "choices": [
+    "to me",
+    "that",
+    "I",
+    "me"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "tell + personne directement.",
+   "id": "4e-english-reported-speech-02",
+   "tier": "application",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« tomorrow » devient dans le discours rapporté :",
+   "choices": [
+    "yesterday",
+    "the day before",
+    "today",
+    "the next day"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "tomorrow → the next day.",
+   "id": "4e-english-reported-speech-03",
+   "tier": "application",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Rapporte : Nkeng said, “I can swim.”",
+   "choices": [
+    "Nkeng said that he could swim.",
+    "Nkeng said that he can swim.",
+    "Nkeng said that I could swim.",
+    "Nkeng said that he cans swim."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "can → could.",
+   "id": "4e-english-reported-speech-04",
+   "tier": "approfondissement",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Rapporte : “We are playing now,” they said.",
+   "choices": [
+    "They said that we were playing now.",
+    "They said that they are playing then.",
+    "They said that they were playing then.",
+    "They said that they were playing now."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "we → they ; are playing → were playing ; now → then.",
+   "id": "4e-english-reported-speech-05",
+   "tier": "approfondissement",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa raconte : « My teacher said, “You will take the test tomorrow.” »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle phrase rapporte correctement ?",
+     "choices": [
+      "The teacher said that I would take the test the next day.",
+      "The teacher said that I will take the test tomorrow.",
+      "The teacher said that you would take the test tomorrow.",
+      "The teacher said that I would took the test."
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "will → would ; tomorrow → the next day ; you → I.",
+     "id": "4e-english-reported-speech-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Rapporte cette phrase de ton professeur : « We will start at 8. » (commence par : The teacher said that…)",
+     "model": "The teacher said that we would start at 8.",
+     "rubric": [
+      "said that + recul des temps",
+      "Pronoms changés",
+      "Phrase correcte"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-english-reported-speech-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-english-reported-speech-06",
+   "tier": "examen",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« I will help » (direct) devient dans le discours rapporté :",
+   "choices": [
+    "he will help",
+    "he helps",
+    "he helped will",
+    "he would help"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "will → would.",
+   "id": "4e-english-reported-speech-q1",
+   "tier": "autoeval",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« here » devient :",
+   "choices": [
+    "now",
+    "there",
+    "then",
+    "that day"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "here → there.",
+   "id": "4e-english-reported-speech-q2",
+   "tier": "autoeval",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase rapporte correctement un propos ?",
+   "choices": [
+    "She told me that she was ill.",
+    "She told that she was ill.",
+    "She said me that she was ill.",
+    "She told me that she is ill yesterday."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "told + me ; was.",
+   "id": "4e-english-reported-speech-q3",
+   "tier": "autoeval",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« yesterday » devient :",
+   "choices": [
+    "the next day",
+    "the day before",
+    "that day",
+    "then"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "yesterday → the day before.",
+   "id": "4e-english-reported-speech-q4",
+   "tier": "autoeval",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« They play » rapporté au passé devient :",
+   "choices": [
+    "they played",
+    "they play",
+    "they were play",
+    "they would play"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Présent simple → past simple.",
+   "id": "4e-english-reported-speech-q5",
+   "tier": "autoeval",
+   "lesson": "4e-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : The woman ____ teaches us English is kind.",
+   "choices": [
+    "which",
+    "who",
+    "where",
+    "whose"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Personne sujet : who.",
+   "id": "4e-english-relative-pronouns-01",
+   "tier": "application",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : This is the house ____ I was born.",
+   "choices": [
+    "who",
+    "which is",
+    "whose",
+    "where"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Lieu : where.",
+   "id": "4e-english-relative-pronouns-02",
+   "tier": "application",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : The pen ____ is on the table is mine.",
+   "choices": [
+    "who",
+    "which",
+    "where",
+    "whose"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chose : which / that.",
+   "id": "4e-english-relative-pronouns-03",
+   "tier": "application",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : The girl ____ bag was lost is crying.",
+   "choices": [
+    "who",
+    "whose",
+    "which",
+    "where"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Possession : whose.",
+   "id": "4e-english-relative-pronouns-04",
+   "tier": "approfondissement",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Relie : I met a boy. He plays football.",
+   "choices": [
+    "I met a boy who plays football.",
+    "I met a boy who he plays football.",
+    "I met a boy which plays football.",
+    "I met a boy where plays football."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "who remplace he.",
+   "id": "4e-english-relative-pronouns-05",
+   "tier": "approfondissement",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Deux phrases sur Yaoundé, ville où vivent de nombreux élèves.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Complète : Yaoundé is a city ____ many students live.",
+     "choices": [
+      "who",
+      "where",
+      "which is",
+      "whose"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Lieu : where.",
+     "id": "4e-english-relative-pronouns-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris deux phrases sur ton école avec who et where.",
+     "model": "Mr Mballa is the teacher who teaches us maths. This is the room where we have lessons.",
+     "rubric": [
+      "Relatif choisi correctement",
+      "Phrases complètes"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-english-relative-pronouns-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-english-relative-pronouns-06",
+   "tier": "examen",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« The man ____ lives next door is a doctor. »",
+   "choices": [
+    "which",
+    "who",
+    "where",
+    "whose"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Personne.",
+   "id": "4e-english-relative-pronouns-q1",
+   "tier": "autoeval",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel relatif exprime la possession ?",
+   "choices": [
+    "who",
+    "whose",
+    "which",
+    "where"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "whose = dont / de qui.",
+   "id": "4e-english-relative-pronouns-q2",
+   "tier": "autoeval",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« This is the book ____ I told you about. »",
+   "choices": [
+    "who",
+    "where",
+    "whose",
+    "that"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "that remplace which pour une chose.",
+   "id": "4e-english-relative-pronouns-q3",
+   "tier": "autoeval",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis la phrase avec le bon relatif :",
+   "choices": [
+    "The girl who she is singing is my sister.",
+    "The girl who is singing is my sister.",
+    "The girl which is singing is my sister.",
+    "The girl whose is singing is my sister."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "who sans pronom répété.",
+   "id": "4e-english-relative-pronouns-q4",
+   "tier": "autoeval",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« That is the village ____ my grandfather lives. »",
+   "choices": [
+    "where",
+    "who",
+    "which",
+    "whose"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Lieu : where.",
+   "id": "4e-english-relative-pronouns-q5",
+   "tier": "autoeval",
+   "lesson": "4e-english-relative-pronouns",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : I took an umbrella ____ it was raining.",
+   "choices": [
+    "so",
+    "but",
+    "because",
+    "although"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Cause : because.",
+   "id": "4e-english-connectors-01",
+   "tier": "application",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : It was late, ____ we went home.",
+   "choices": [
+    "because",
+    "although",
+    "so",
+    "however"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conséquence : so.",
+   "id": "4e-english-connectors-02",
+   "tier": "application",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : He is rich, ____ he is not happy.",
+   "choices": [
+    "but",
+    "so",
+    "because",
+    "and then"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Contraste : but.",
+   "id": "4e-english-connectors-03",
+   "tier": "application",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : ____ she studied a lot, she failed.",
+   "choices": [
+    "Because",
+    "So",
+    "Although",
+    "And"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Contraste inattendu : although.",
+   "id": "4e-english-connectors-04",
+   "tier": "approfondissement",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Classe correctement : « First, … Then, … Finally, … » Quel est le dernier mot de la série ?",
+   "choices": [
+    "First",
+    "Then",
+    "Finally",
+    "However"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Finally = pour terminer.",
+   "id": "4e-english-connectors-05",
+   "tier": "approfondissement",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Relie les phrases avec le connecteur proposé : (1) I was hungry. I ate rice. (so) (2) It was cold. We went out. (although)",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Phrase 1 :",
+     "choices": [
+      "I was hungry because I ate rice.",
+      "I was hungry, so I ate rice.",
+      "I was hungry although I ate rice.",
+      "I was hungry so because I ate rice."
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "so exprime la conséquence.",
+     "id": "4e-english-connectors-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris la phrase 2 avec although, puis une phrase avec because.",
+     "model": "Although it was cold, we went out. I stayed at home because I was ill.",
+     "rubric": [
+      "although + sujet + verbe",
+      "because + cause",
+      "Phrases complètes"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-english-connectors-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-english-connectors-06",
+   "tier": "examen",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« I like tea ____ I don't like coffee. »",
+   "choices": [
+    "so",
+    "because",
+    "moreover",
+    "but"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Contraste.",
+   "id": "4e-english-connectors-q1",
+   "tier": "autoeval",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot introduit la cause ?",
+   "choices": [
+    "so",
+    "because",
+    "however",
+    "finally"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "because = parce que.",
+   "id": "4e-english-connectors-q2",
+   "tier": "autoeval",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« ____, I washed my hands. Then I ate. » Quel mot au début ?",
+   "choices": [
+    "However",
+    "First",
+    "Because",
+    "Although"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ordre : First.",
+   "id": "4e-english-connectors-q3",
+   "tier": "autoeval",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« He was sick. ____, he went to school. »",
+   "choices": [
+    "Because",
+    "However",
+    "So",
+    "And so"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "However introduit un contraste.",
+   "id": "4e-english-connectors-q4",
+   "tier": "autoeval",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis la phrase correcte avec although :",
+   "choices": [
+    "Although he was tired, but he worked.",
+    "Although he was tired so he worked.",
+    "Although he was tired, he worked.",
+    "He worked although so tired."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pas de but avec although.",
+   "id": "4e-english-connectors-q5",
+   "tier": "autoeval",
+   "lesson": "4e-english-connectors",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« to give up » signifie :",
+   "choices": [
+    "donner",
+    "se lever",
+    "chercher",
+    "abandonner"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "give up = abandonner.",
+   "id": "4e-english-phrasal-verbs-01",
+   "tier": "application",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : I ____ at 6 every morning.",
+   "choices": [
+    "give up",
+    "get up",
+    "look for",
+    "turn off"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "se lever = get up.",
+   "id": "4e-english-phrasal-verbs-02",
+   "tier": "application",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Please ____ your shoes before entering.",
+   "choices": [
+    "take up",
+    "put on",
+    "look after",
+    "take off"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "enlever = take off.",
+   "id": "4e-english-phrasal-verbs-03",
+   "tier": "application",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : She ____ her little brother while her mother is at work.",
+   "choices": [
+    "looks after",
+    "looks for",
+    "gets up",
+    "sets off"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "look after = s'occuper de.",
+   "id": "4e-english-phrasal-verbs-04",
+   "tier": "approfondissement",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : We ____ at dawn and arrived at noon.",
+   "choices": [
+    "set off",
+    "set on",
+    "give up",
+    "find in"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "set off = partir.",
+   "id": "4e-english-phrasal-verbs-05",
+   "tier": "approfondissement",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Complète le texte : « Every day, Mballa ____ at 5 a.m. and ____ his school uniform. Today he can't ____ his book. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Premier blanc :",
+     "choices": [
+      "gets up",
+      "looks for",
+      "gives up",
+      "turns on"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "se lever.",
+     "id": "4e-english-phrasal-verbs-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Deuxième blanc :",
+     "choices": [
+      "puts on",
+      "takes off",
+      "looks after",
+      "finds out"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "mettre = put on.",
+     "id": "4e-english-phrasal-verbs-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Troisième blanc :",
+     "choices": [
+      "give",
+      "find",
+      "turn",
+      "take"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "He can't find his book (ou look for).",
+     "id": "4e-english-phrasal-verbs-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-english-phrasal-verbs-06",
+   "tier": "examen",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "look for =",
+   "choices": [
+    "chercher",
+    "regarder",
+    "trouver",
+    "garder"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "look for = chercher.",
+   "id": "4e-english-phrasal-verbs-q1",
+   "tier": "autoeval",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Turn it ____ » (éteins-le)",
+   "choices": [
+    "on",
+    "up",
+    "in",
+    "off"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "turn off.",
+   "id": "4e-english-phrasal-verbs-q2",
+   "tier": "autoeval",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "find out =",
+   "choices": [
+    "découvrir",
+    "perdre",
+    "sortir",
+    "trouver un objet"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "find out = apprendre un fait.",
+   "id": "4e-english-phrasal-verbs-q3",
+   "tier": "autoeval",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Don't ____ ! Keep trying. »",
+   "choices": [
+    "give in",
+    "give up",
+    "put on",
+    "look at"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "give up = abandonner.",
+   "id": "4e-english-phrasal-verbs-q4",
+   "tier": "autoeval",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe signifie « mettre un vêtement » ?",
+   "choices": [
+    "take off",
+    "put off",
+    "wake up",
+    "put on"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "put on.",
+   "id": "4e-english-phrasal-verbs-q5",
+   "tier": "autoeval",
+   "lesson": "4e-english-phrasal-verbs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

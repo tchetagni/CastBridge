@@ -1,0 +1,480 @@
+{
+ "chapter": "bepc-svt-environnement",
+ "lessons": [
+  {
+   "id": "bepc-svt-ressources-pollution",
+   "title": "Ressources, déforestation et pollution",
+   "minutes": 35,
+   "programRef": "3e — Ressources naturelles, déforestation, pollution, gestion de l'environnement (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer ressources renouvelables et non renouvelables.",
+    "Expliquer les causes et conséquences de la déforestation et de la pollution.",
+    "Proposer des moyens de gestion durable de l'environnement."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-svt-ressources-pollution-01",
+    "bepc-svt-ressources-pollution-02",
+    "bepc-svt-ressources-pollution-03",
+    "bepc-svt-ressources-pollution-04",
+    "bepc-svt-ressources-pollution-05",
+    "bepc-svt-ressources-pollution-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-ressources-pollution-q1",
+    "bepc-svt-ressources-pollution-q2",
+    "bepc-svt-ressources-pollution-q3",
+    "bepc-svt-ressources-pollution-q4",
+    "bepc-svt-ressources-pollution-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ressources naturelles",
+     "md": "Une **ressource naturelle** est un élément de la nature utile à l'homme. Les ressources **renouvelables** se reconstituent à l'échelle humaine si on ne les épuise pas (eau, forêt, sol, poissons, vent, soleil). Les ressources **non renouvelables** (pétrole, gaz, minerais) mettent des millions d'années à se former : leur stock diminue quand on les utilise."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Déforestation",
+     "md": "La **déforestation** est la disparition de la forêt. Causes : agriculture sur brûlis, bois d'œuvre et bois de chauffe, charbon de bois, plantations, routes et villes. Conséquences : **érosion** du sol, perte de **biodiversité**, moins de pluie locale, plus de CO₂ dans l'air, perte de ressources pour les populations."
+    },
+    {
+     "type": "illustration",
+     "caption": "Déforestation puis érosion : un enchaînement fréquent.",
+     "alt": "Forêt coupée, sol nu, érosion, sol appauvri.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 170,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 35.0,
+        "text": "Forêt coupée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 105.0,
+        "y1": 50,
+        "x2": 105.0,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 70,
+        "w": 170,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 95.0,
+        "text": "Sol nu",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 105.0,
+        "y1": 110,
+        "x2": 105.0,
+        "y2": 130,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 130,
+        "w": 170,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 155.0,
+        "text": "Érosion",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 105.0,
+        "y1": 170,
+        "x2": 105.0,
+        "y2": 190,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 190,
+        "w": 170,
+        "h": 40,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 215.0,
+        "text": "Sol appauvri",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 38,
+        "text": "perte des arbres",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 98,
+        "text": "pluie qui entraîne la terre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 158,
+        "text": "rendements plus faibles",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 258,
+        "text": "Un enchaînement possible",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pollution",
+     "md": "- **Eau** : eaux usées, déchets, engrais et pesticides, hydrocarbures.\n- **Air** : fumées, gaz d'échappement, brûlage de déchets.\n- **Sol** : sacs plastiques, produits chimiques, décharges sauvages.\nL'excès de **CO₂** et d'autres gaz renforce l'**effet de serre** et contribue au réchauffement du climat."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Gérer durablement",
+     "md": "- **Reboiser**, planter des arbres, pratiquer l'agroforesterie et la **jachère**.\n- **Trier** et recycler les déchets, éviter le plastique à usage unique.\n- Protéger des zones : **parcs nationaux et réserves**.\n- **Éduquer** : agir au niveau de la famille, de l'école et de la commune."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : agriculture sur brûlis",
+     "statement": "Une famille défriche et brûle une parcelle de forêt chaque année. Quels problèmes peut-on prévoir ?",
+     "steps": [
+      {
+       "md": "Le sol, sans arbres, est exposé à la pluie : érosion."
+      },
+      {
+       "md": "Les cendres enrichissent le sol peu de temps ; il s'appauvrit vite."
+      },
+      {
+       "md": "Il faut défricher de nouvelles parcelles : la forêt recule."
+      }
+     ],
+     "answer": "**Érosion, appauvrissement du sol et recul de la forêt.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une solution locale",
+     "statement": "Dans un quartier, les déchets bouchent le caniveau. Propose une solution.",
+     "steps": [
+      {
+       "md": "Les déchets bloquent l'eau et favorisent maladies et inondations."
+      },
+      {
+       "md": "On organise le tri, la collecte et le nettoyage régulier avec la commune."
+      }
+     ],
+     "answer": "**Collecte, tri et nettoyage organisés.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que les ressources renouvelables sont illimitées : la surexploitation les épuise.\n- Croire que la pollution est un problème des seuls pays industrialisés.\n- Croire qu'un seul geste ne sert à rien : les gestes collectifs comptent."
+    }
+   ],
+   "reviewNotes": [
+    "Aucun chiffre de superficie forestière, de pollution ou de température donné pour éviter toute erreur.",
+    "Vérifier si le programme parle de l'effet de serre, du réchauffement et des lois camerounaises."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Laquelle est une ressource non renouvelable ?",
+   "choices": [
+    "Le pétrole",
+    "Le vent",
+    "Le soleil",
+    "La forêt bien gérée"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il se forme en millions d'années.",
+   "id": "bepc-svt-ressources-pollution-01",
+   "tier": "application",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une conséquence directe de la déforestation est :",
+   "choices": [
+    "Plus de fossiles",
+    "L'érosion du sol",
+    "Plus de biodiversité",
+    "Moins de CO₂"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le sol n'est plus protégé.",
+   "id": "bepc-svt-ressources-pollution-02",
+   "tier": "application",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les sacs plastiques sont une cause de pollution du sol.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils se dégradent très lentement.",
+   "id": "bepc-svt-ressources-pollution-03",
+   "tier": "application",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque cause à une pollution.",
+   "pairs": [
+    [
+     "Eaux usées rejetées au ruisseau",
+     "Eau"
+    ],
+    [
+     "Fumées des brûlis",
+     "Air"
+    ],
+    [
+     "Décharge sauvage",
+     "Sol"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque pollution touche un milieu.",
+   "id": "bepc-svt-ressources-pollution-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Donne deux actions de gestion durable d'une forêt.",
+   "model": "Couper moins que la forêt ne repousse, reboiser, protéger des zones, utiliser des foyers économes.",
+   "rubric": [
+    "Première action",
+    "Seconde action"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-svt-ressources-pollution-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un village, la source d'eau est polluée par des déchets et des engrais. Des enfants ont des diarrhées.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel type de pollution est en cause ?",
+     "choices": [
+      "Pollution de l'eau",
+      "Pollution de l'air seulement",
+      "Pollution sonore",
+      "Pollution du ciel"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les déchets contaminent l'eau.",
+     "id": "bepc-svt-ressources-pollution-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose deux mesures pour protéger la source et la santé.",
+     "model": "Éloigner les déchets, protéger la source, traiter l'eau avant de la boire, sensibiliser, consulter un agent de santé pour les enfants.",
+     "rubric": [
+      "Une mesure sur la source",
+      "Une mesure de santé"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-ressources-pollution-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-svt-ressources-pollution-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La jachère consiste à :",
+   "choices": [
+    "Laisser reposer une terre",
+    "Brûler la forêt",
+    "Planter du plastique",
+    "Pomper l'eau"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le sol se reconstitue.",
+   "id": "bepc-svt-ressources-pollution-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'effet de serre renforcé est lié à :",
+   "choices": [
+    "Un excès de gaz comme le CO₂",
+    "Le manque de pluie",
+    "La lune",
+    "Le vent faible"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Gaz qui retiennent la chaleur.",
+   "id": "bepc-svt-ressources-pollution-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Reboiser permet de :",
+   "choices": [
+    "Protéger le sol et le climat local",
+    "Polluer l'eau",
+    "Détruire les habitats",
+    "Augmenter l'érosion"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les racines retiennent le sol.",
+   "id": "bepc-svt-ressources-pollution-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un parc national sert à :",
+   "choices": [
+    "Construire des routes",
+    "Récolter sans limite",
+    "Protéger des milieux et des espèces",
+    "Polluer"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Zone protégée.",
+   "id": "bepc-svt-ressources-pollution-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle ressource est renouvelable ?",
+   "choices": [
+    "Le charbon",
+    "Le gaz",
+    "Le pétrole",
+    "Le vent"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il ne s'épuise pas.",
+   "id": "bepc-svt-ressources-pollution-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-ressources-pollution",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

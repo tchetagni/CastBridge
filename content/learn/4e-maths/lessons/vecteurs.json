@@ -1,0 +1,408 @@
+{
+ "chapter": "4e-maths-vecteurs",
+ "lessons": [
+  {
+   "id": "4e-maths-vecteurs",
+   "title": "Translations et vecteurs",
+   "minutes": 30,
+   "programRef": "4e — Translation, vecteur, parallélogramme, relation de Chasles (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Construire l'image d'un point ou d'une figure par une translation.",
+    "Reconnaître des vecteurs égaux et utiliser la relation de Chasles."
+   ],
+   "prerequisites": [
+    "4e-maths-relatifs"
+   ],
+   "exercises": [
+    "4e-maths-vecteurs-01",
+    "4e-maths-vecteurs-02",
+    "4e-maths-vecteurs-03",
+    "4e-maths-vecteurs-04",
+    "4e-maths-vecteurs-05",
+    "4e-maths-vecteurs-06"
+   ],
+   "selfCheck": [
+    "4e-maths-vecteurs-q1",
+    "4e-maths-vecteurs-q2",
+    "4e-maths-vecteurs-q3",
+    "4e-maths-vecteurs-q4",
+    "4e-maths-vecteurs-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Translation et vecteur",
+     "md": "Une **translation** fait glisser tous les points de la même manière : même direction, même sens, même longueur. On la décrit par un **vecteur** $\\vec{u}$ (ou $\\vec{AA'}$ si elle envoie $A$ sur $A'$). Un vecteur a une **direction**, un **sens** et une **norme** (sa longueur)."
+    },
+    {
+     "type": "illustration",
+     "caption": "La translation de vecteur u envoie A en A' et B en B' : ABB'A' est un parallélogramme.",
+     "alt": "Un parallélogramme ABB'A' avec les flèches AA' et BB' égales.",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 250,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         150,
+         160,
+         90,
+         260,
+         140,
+         140,
+         200
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 150,
+        "x2": 160,
+        "y2": 90,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 150,
+        "x2": 140,
+        "y2": 200,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 90,
+        "x2": 260,
+        "y2": 140,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 150,
+        "text": "A",
+        "size": 17,
+        "color": "ink",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 80,
+        "text": "B",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 272,
+        "y": 142,
+        "text": "B'",
+        "size": 17,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 222,
+        "text": "A'",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 196,
+        "text": "u",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Égalité de vecteurs et Chasles",
+     "md": "- $\\vec{AB}=\\vec{DC}$ si et seulement si $ABCD$ est un **parallélogramme** (attention à l'ordre des lettres).\n- Le vecteur opposé : $\\vec{BA}=-\\vec{AB}$.\n- **Relation de Chasles** : $\\vec{AB}+\\vec{BC}=\\vec{AC}$ (l'extrémité du premier est l'origine du second)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : image par translation",
+     "statement": "La translation qui déplace de 3 unités vers la droite et de 2 vers le bas envoie $A(1\\,;\\,4)$ sur $A'$. Donne les coordonnées de $A'$.",
+     "steps": [
+      {
+       "md": "Vers la droite : on ajoute 3 à l'abscisse : $1+3=4$."
+      },
+      {
+       "md": "Vers le bas : on retranche 2 à l'ordonnée : $4-2=2$."
+      }
+     ],
+     "answer": "**$A'(4\\,;\\,2)$**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : Chasles",
+     "statement": "Simplifie $\\vec{AB}+\\vec{BC}+\\vec{CD}$.",
+     "steps": [
+      {
+       "md": "On applique Chasles une première fois :",
+       "tex": "\\vec{AB}+\\vec{BC}=\\vec{AC}"
+      },
+      {
+       "md": "Puis une seconde fois :",
+       "tex": "\\vec{AC}+\\vec{CD}=\\vec{AD}"
+      }
+     ],
+     "answer": "**$\\vec{AD}$**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $\\vec{AB}=\\vec{BA}$ : ces deux vecteurs sont opposés (sens contraire).\n- Écrire $\\vec{AB}=\\vec{CD}$ pour $ABCD$ parallélogramme : c'est $\\vec{AB}=\\vec{DC}$.\n- Chasles avec des lettres qui ne s'enchaînent pas : $\\vec{AB}+\\vec{CD}$ ne se simplifie pas directement.\n- Confondre vecteur et segment : un vecteur est orienté."
+    }
+   ],
+   "reviewNotes": [
+    "Selon les manuels, la notion de vecteur est introduite en 4e ou en 3e ; le programme officiel doit être vérifié.",
+    "Le calcul avec les coordonnées des vecteurs n'est pas traité ici."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans un parallélogramme $ABCD$, $\\vec{AB}=\\vec{DC}$.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les côtés opposés ont même direction, même sens et même longueur.",
+   "id": "4e-maths-vecteurs-01",
+   "tier": "application",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$\\vec{AB}+\\vec{BC}$ est égal à...",
+   "choices": [
+    "$\\vec{CA}$",
+    "$\\vec{BA}$",
+    "$\\vec{AB}-\\vec{BC}$",
+    "$\\vec{AC}$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la relation de Chasles.",
+   "id": "4e-maths-vecteurs-02",
+   "tier": "application",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "La translation de 3 unités vers la droite et 2 vers le bas envoie $A(1\\,;\\,4)$ sur $A'$. Quelle est l'ordonnée de $A'$ ?",
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$4-2=2$.",
+   "id": "4e-maths-vecteurs-03",
+   "tier": "application",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Simplifie $\\vec{AB}+\\vec{BC}+\\vec{CD}$.",
+   "choices": [
+    "$\\vec{AD}$",
+    "$\\vec{DA}$",
+    "$\\vec{AC}$",
+    "$\\vec{BD}$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Chasles : $\\vec{AB}+\\vec{BC}=\\vec{AC}$, puis $\\vec{AC}+\\vec{CD}=\\vec{AD}$.",
+   "id": "4e-maths-vecteurs-04",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "$A(1\\,;\\,1)$, $B(5\\,;\\,2)$, $C(6\\,;\\,5)$. $ABCD$ est un parallélogramme. Quelle est l'abscisse de $D$ ?",
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$\\vec{AB}=\\vec{DC}$ : de $A$ à $B$ on se déplace de 4 vers la droite et de 1 vers le haut ; donc $D=C-(4\\,;\\,1)=(2\\,;\\,4)$.",
+   "method": "Écrire $\\vec{AB}=\\vec{DC}$ et défaire le déplacement à partir de $C$.",
+   "id": "4e-maths-vecteurs-05",
+   "tier": "approfondissement",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un repère, la translation $t$ déplace chaque point de 2 unités vers la gauche et de 3 vers le haut. On considère $A(4\\,;\\,1)$ et $B(0\\,;\\,-2)$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'abscisse de $A'=t(A)$ ?",
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$4-2=2$.",
+     "id": "4e-maths-vecteurs-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'ordonnée de $B'=t(B)$ ?",
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$-2+3=1$.",
+     "id": "4e-maths-vecteurs-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature du quadrilatère $ABB'A'$ ?",
+     "choices": [
+      "Un cercle",
+      "Un trapèze rectangle",
+      "Un parallélogramme",
+      "Un losange quelconque"
+     ],
+     "answer": 2,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$\\vec{AA'}=\\vec{BB'}$ (même translation), donc $ABB'A'$ est un parallélogramme.",
+     "id": "4e-maths-vecteurs-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Une translation déplace tous les points de la même façon.",
+   "id": "4e-maths-vecteurs-06",
+   "tier": "examen",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quels sont les trois éléments qui définissent un vecteur ?",
+   "choices": [
+    "couleur, sens, aire",
+    "milieu, rayon, angle",
+    "point, hauteur, base",
+    "direction, sens, norme"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un vecteur a une direction, un sens et une longueur (norme).",
+   "id": "4e-maths-vecteurs-q1",
+   "tier": "autoeval",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "$\\vec{BA}$ est le... de $\\vec{AB}$.",
+   "choices": [
+    "double",
+    "opposé",
+    "carré",
+    "même vecteur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$\\vec{BA}=-\\vec{AB}$.",
+   "id": "4e-maths-vecteurs-q2",
+   "tier": "autoeval",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si $\\vec{AB}=\\vec{CD}$, alors...",
+   "choices": [
+    "ABCD est un parallélogramme",
+    "ABCD est un cercle",
+    "ABDC est un parallélogramme",
+    "A est le milieu de [CD]"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avec $\\vec{AB}=\\vec{CD}$, le quadrilatère $A\\,B\\,D\\,C$ (dans cet ordre) est un parallélogramme.",
+   "id": "4e-maths-vecteurs-q3",
+   "tier": "autoeval",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'image de $(2\\,;\\,2)$ par la translation de 1 vers la droite et 4 vers le haut ?",
+   "choices": [
+    "$(1\\,;\\,-2)$",
+    "$(3\\,;\\,-2)$",
+    "$(6\\,;\\,3)$",
+    "$(3\\,;\\,6)$"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$2+1=3$ et $2+4=6$.",
+   "id": "4e-maths-vecteurs-q4",
+   "tier": "autoeval",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une translation conserve...",
+   "choices": [
+    "seulement les angles",
+    "les longueurs et les angles",
+    "seulement les aires",
+    "rien de particulier"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle transforme une figure en une figure superposable.",
+   "id": "4e-maths-vecteurs-q5",
+   "tier": "autoeval",
+   "lesson": "4e-maths-vecteurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

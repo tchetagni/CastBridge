@@ -1,0 +1,628 @@
+{
+ "chapter": "6e-svt-nutrition-plantes",
+ "lessons": [
+  {
+   "id": "6e-svt-plantes-vertes",
+   "title": "Comment se nourrit une plante verte ?",
+   "minutes": 30,
+   "programRef": "6e — Nutrition des plantes vertes : absorption, photosynthèse (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dire ce que la plante prélève dans le sol et dans l'air.",
+    "Expliquer la photosynthèse de façon simple.",
+    "Interpréter le test à l'eau iodée (amidon)."
+   ],
+   "prerequisites": [
+    "6e-svt-cellule"
+   ],
+   "exercises": [
+    "6e-svt-plantes-vertes-01",
+    "6e-svt-plantes-vertes-02",
+    "6e-svt-plantes-vertes-03",
+    "6e-svt-plantes-vertes-04",
+    "6e-svt-plantes-vertes-05",
+    "6e-svt-plantes-vertes-06"
+   ],
+   "selfCheck": [
+    "6e-svt-plantes-vertes-q1",
+    "6e-svt-plantes-vertes-q2",
+    "6e-svt-plantes-vertes-q3",
+    "6e-svt-plantes-vertes-q4",
+    "6e-svt-plantes-vertes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nutrition de la plante verte",
+     "md": "La plante verte prélève dans le **sol** de l'**eau** et des **sels minéraux** par ses **racines**, et dans l'**air** du **dioxyde de carbone** par ses **feuilles**. Grâce à la **lumière** et à la **chlorophylle**, elle fabrique sa propre matière organique (sucres, amidon) : c'est la **photosynthèse**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Ce que la plante verte prend et rejette.",
+     "alt": "Une plante avec ses racines dans le sol absorbant eau et sels minéraux, ses feuilles recevant la lumière et le dioxyde de carbone et rejetant du dioxygène.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 300,
+      "items": [
+       {
+        "t": "rect",
+        "x": 0,
+        "y": 190,
+        "w": 440,
+        "h": 110,
+        "fill": "lightorange",
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 190,
+        "x2": 220,
+        "y2": 70,
+        "color": "green",
+        "width": 6
+       },
+       {
+        "t": "poly",
+        "pts": [
+         220,
+         130,
+         160,
+         105,
+         150,
+         135,
+         205,
+         145
+        ],
+        "fill": "lightgreen",
+        "stroke": "green",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         220,
+         120,
+         280,
+         95,
+         290,
+         125,
+         235,
+         135
+        ],
+        "fill": "lightgreen",
+        "stroke": "green",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 192,
+        "x2": 170,
+        "y2": 265,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 192,
+        "x2": 220,
+        "y2": 275,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 192,
+        "x2": 275,
+        "y2": 265,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 50,
+        "cy": 45,
+        "r": 24,
+        "fill": "yellow",
+        "stroke": "orange",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 100,
+        "text": "lumière",
+        "size": 14,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 62,
+        "x2": 150,
+        "y2": 110,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 55,
+        "text": "dioxyde de carbone",
+        "size": 14,
+        "color": "purple",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 65,
+        "x2": 292,
+        "y2": 100,
+        "color": "purple",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 135,
+        "x2": 350,
+        "y2": 160,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 180,
+        "text": "dioxygène",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 245,
+        "text": "eau et sels minéraux",
+        "size": 14,
+        "color": "brown",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 250,
+        "x2": 205,
+        "y2": 215,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Bilan de la photosynthèse",
+     "md": "À la lumière, dans les parties vertes : **eau + sels minéraux (venus des racines) + dioxyde de carbone → matière organique (amidon, sucres) + dioxygène**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une feuille dont une partie a été cachée de la lumière, puis colorée à l'eau iodée.",
+     "alt": "Une feuille partagée en deux : la partie cachée reste jaune-brun, la partie éclairée devient bleu-noir.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         20,
+         100,
+         100,
+         40,
+         220,
+         30,
+         220,
+         170,
+         100,
+         160
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         220,
+         30,
+         340,
+         40,
+         420,
+         100,
+         340,
+         160,
+         220,
+         170
+        ],
+        "fill": "blue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 100,
+        "text": "zone cachée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 122,
+        "text": "jaune-brun",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 100,
+        "text": "zone éclairée",
+        "size": 14,
+        "color": "white",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 122,
+        "text": "bleu-noir",
+        "size": 14,
+        "color": "white",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 18,
+        "text": "Après l'eau iodée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 190,
+        "text": "amidon uniquement là où il y a eu de la lumière",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reconnaître l'amidon",
+     "md": "L'**eau iodée** (jaune-brun) devient **bleu-noir** en présence d'amidon. Si une partie de feuille cachée de la lumière ne bleuit pas, c'est que sans lumière, la plante ne fabrique pas d'amidon."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire une expérience",
+     "statement": "On couvre la moitié d'une feuille d'une bande noire pendant plusieurs jours, puis on la plonge dans l'eau iodée. La partie couverte reste brune, l'autre devient bleu-noir. Que conclure ?",
+     "steps": [
+      {
+       "md": "La partie éclairée contient de l'amidon (bleu-noir)."
+      },
+      {
+       "md": "La partie cachée n'en contient pas : elle n'en a pas fabriqué."
+      }
+     ],
+     "answer": "**La lumière est nécessaire à la fabrication de l'amidon.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : à quoi servent les racines ?",
+     "statement": "Un jeune plant est placé dans de l'eau colorée en rouge. La tige se colore peu à peu. Que montre cette expérience ?",
+     "steps": [
+      {
+       "md": "La couleur monte dans la tige : l'eau est montée depuis les racines."
+      },
+      {
+       "md": "Les racines absorbent l'eau, qui circule dans la tige vers les feuilles."
+      }
+     ],
+     "answer": "**Les racines absorbent l'eau et la tige la fait monter.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que la plante « mange la terre » : elle prélève seulement de l'eau et des sels minéraux.\n- Croire que la photosynthèse a lieu la nuit : elle demande de la **lumière**.\n- Confondre dioxygène (rejeté à la lumière) et dioxyde de carbone (absorbé)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La nuit, la plante respire comme tous les êtres vivants : elle utilise du dioxygène et rejette du dioxyde de carbone.",
+      "Les feuilles prennent le dioxyde de carbone par de minuscules ouvertures appelées stomates.",
+      "L'eau et les sels minéraux montent dans la plante dans la « sève brute » ; les sucres fabriqués sont distribués dans la « sève élaborée »."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le vocabulaire « sève brute / sève élaborée » est donné dans « Pour aller plus loin » : à adapter au programme.",
+    "Dans l'expérience de l'amidon, il faut au préalable détruire l'amidon de la feuille (plante laissée à l'obscurité) : simplifié ici."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Par quelle partie la plante absorbe-t-elle l'eau et les sels minéraux ?",
+   "choices": [
+    "Les racines",
+    "Les fleurs",
+    "Les fruits",
+    "Les feuilles uniquement"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les racines (poils absorbants) puisent l'eau et les sels minéraux du sol.",
+   "id": "6e-svt-plantes-vertes-01",
+   "tier": "application",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la plante verte fabrique de la matière organique grâce à la lumière.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la photosynthèse.",
+   "id": "6e-svt-plantes-vertes-02",
+   "tier": "application",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque élément à son origine ou sa fonction.",
+   "pairs": [
+    [
+     "Eau",
+     "Absorbée par les racines"
+    ],
+    [
+     "Dioxyde de carbone",
+     "Pris dans l'air par les feuilles"
+    ],
+    [
+     "Chlorophylle",
+     "Pigment vert qui capte la lumière"
+    ],
+    [
+     "Dioxygène",
+     "Rejeté à la lumière"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque substance a une origine précise.",
+   "id": "6e-svt-plantes-vertes-03",
+   "tier": "application",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le test à l'eau iodée est positif quand la couleur devient :",
+   "choices": [
+    "Rouge",
+    "Blanche",
+    "Bleu-noir",
+    "Verte"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'amidon colore l'eau iodée en bleu-noir.",
+   "id": "6e-svt-plantes-vertes-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une plante verte placée plusieurs jours dans le noir complet :",
+   "choices": [
+    "Ne peut plus fabriquer de matière organique",
+    "Fabrique encore plus d'amidon",
+    "Rejette beaucoup de dioxygène",
+    "Devient plus verte"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Sans lumière, pas de photosynthèse.",
+   "id": "6e-svt-plantes-vertes-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina place deux plants de haricot identiques : l'un à la lumière, l'autre dans une boîte noire. Elle les arrose de la même façon. Après quelques jours, elle teste une feuille de chaque plant à l'eau iodée.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel résultat attend-on pour la feuille du plant à la lumière ?",
+     "choices": [
+      "Aucune coloration",
+      "Coloration rouge",
+      "Coloration bleu-noir",
+      "Elle devient transparente"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Elle a fabriqué de l'amidon.",
+     "id": "6e-svt-plantes-vertes-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que se passe-t-il pour la feuille du plant dans la boîte noire ?",
+     "choices": [
+      "Elle devient bleu-noir",
+      "Elle devient rouge",
+      "Elle reste jaune-brun (peu ou pas d'amidon)",
+      "Elle se couvre de dioxygène"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Sans lumière, pas d'amidon fabriqué.",
+     "id": "6e-svt-plantes-vertes-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Quelle conclusion tires-tu ? Quel est le facteur étudié ?",
+     "model": "Le facteur étudié est la lumière. Elle est nécessaire à la fabrication d'amidon (photosynthèse).",
+     "rubric": [
+      "Facteur : lumière",
+      "Conclusion cohérente avec les résultats"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-plantes-vertes-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-svt-plantes-vertes-06",
+   "tier": "examen",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le gaz que la plante absorbe dans l'air pour fabriquer sa matière est :",
+   "choices": [
+    "Le dioxygène",
+    "L'azote",
+    "La vapeur d'eau",
+    "Le dioxyde de carbone"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dioxyde de carbone entre par les feuilles.",
+   "id": "6e-svt-plantes-vertes-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La photosynthèse se déroule dans :",
+   "choices": [
+    "Les racines",
+    "Les parties vertes",
+    "Le sol",
+    "Les graines sèches"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les chloroplastes sont dans les cellules vertes.",
+   "id": "6e-svt-plantes-vertes-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le pigment vert de la plante se nomme :",
+   "choices": [
+    "L'amidon",
+    "La chlorophylle",
+    "La paroi",
+    "L'iode"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La chlorophylle capte l'énergie lumineuse.",
+   "id": "6e-svt-plantes-vertes-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À la lumière, la plante verte rejette :",
+   "choices": [
+    "Du dioxyde de carbone uniquement",
+    "Du dioxygène",
+    "De l'amidon",
+    "Des sels minéraux"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dioxygène est un déchet de la photosynthèse.",
+   "id": "6e-svt-plantes-vertes-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que prélèvent les racines dans le sol ?",
+   "choices": [
+    "De l'eau et des sels minéraux",
+    "Du dioxygène",
+    "De l'amidon",
+    "De la lumière"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ce sont les matières minérales.",
+   "id": "6e-svt-plantes-vertes-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-plantes-vertes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

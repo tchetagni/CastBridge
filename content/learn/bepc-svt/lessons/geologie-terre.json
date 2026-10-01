@@ -1,0 +1,397 @@
+{
+ "chapter": "bepc-svt-geologie-terre",
+ "lessons": [
+  {
+   "id": "bepc-svt-histoire-terre",
+   "title": "Histoire de la Terre et fossiles",
+   "minutes": 30,
+   "programRef": "3e — Histoire de la Terre : temps géologiques, fossiles (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Situer quelques grands événements de l'histoire de la Terre.",
+    "Distinguer datation relative et absolue (principe).",
+    "Utiliser les fossiles pour reconstituer des milieux et des âges."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-svt-histoire-terre-01",
+    "bepc-svt-histoire-terre-02",
+    "bepc-svt-histoire-terre-03",
+    "bepc-svt-histoire-terre-04",
+    "bepc-svt-histoire-terre-05",
+    "bepc-svt-histoire-terre-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-histoire-terre-q1",
+    "bepc-svt-histoire-terre-q2",
+    "bepc-svt-histoire-terre-q3",
+    "bepc-svt-histoire-terre-q4",
+    "bepc-svt-histoire-terre-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les temps géologiques",
+     "md": "La Terre s'est formée il y a environ **4,6 milliards d'années**. Les premiers êtres vivants (organismes microscopiques) sont très anciens (plus de 3 milliards d'années environ). Les dinosaures ont disparu il y a environ **66 millions d'années** ; l'espèce humaine actuelle n'existe que depuis environ **300 000 ans** : une durée très courte à l'échelle de la Terre."
+    },
+    {
+     "type": "illustration",
+     "caption": "Frise simplifiée : l'histoire humaine occupe un trait très fin à la fin.",
+     "alt": "Barre horizontale avec repères pour la formation de la Terre, les premiers êtres vivants et la disparition des dinosaures.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 120,
+        "w": 400,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 105,
+        "x2": 20,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 116,
+        "y1": 105,
+        "x2": 116,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 404,
+        "y1": 105,
+        "x2": 404,
+        "y2": 150,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 95,
+        "text": "Terre formée",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 95,
+        "text": "premiers êtres vivants",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 55,
+        "text": "dinosaures disparus",
+        "size": 13,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "line",
+        "x1": 404,
+        "y1": 62,
+        "x2": 404,
+        "y2": 105,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 175,
+        "text": "Frise proportionnelle : 4,6 milliards d'années",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dater les roches et les fossiles",
+     "md": "- **Datation relative** : on classe les couches : la plus profonde est la plus ancienne (si elles n'ont pas été renversées). Un fossile permet de dater les couches où on le retrouve s'il a vécu peu de temps et partout (**fossile stratigraphique**).\n- **Datation absolue** : elle donne un âge en années, grâce à des éléments radioactifs qui se transforment à vitesse connue (principe).\n- Les fossiles révèlent aussi le **milieu** (mer, forêt, climat)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer des couches",
+     "statement": "Dans une falaise, un fossile de trilobite se trouve dans une couche profonde, un fossile de mammifère dans une couche proche de la surface. Lequel est le plus ancien ?",
+     "steps": [
+      {
+       "md": "La couche profonde s'est déposée avant."
+      },
+      {
+       "md": "Le trilobite est donc plus ancien que le mammifère."
+      }
+     ],
+     "answer": "**Le trilobite.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : reconstituer un milieu",
+     "statement": "On trouve dans une roche en altitude des coquilles de mollusques marins. Que conclure ?",
+     "steps": [
+      {
+       "md": "Ces êtres vivaient dans la mer."
+      },
+      {
+       "md": "Le milieu était marin à l'époque : la roche a ensuite été soulevée."
+      }
+     ],
+     "answer": "**Une mer ancienne a existé à cet endroit.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que les hommes ont vécu avec les dinosaures : ils sont séparés par des dizaines de millions d'années.\n- Confondre fossile et roche.\n- Croire que les âges des fossiles sont donnés au hasard : la datation repose sur des méthodes précises, mais ici on ne retient que les ordres de grandeur."
+    }
+   ],
+   "reviewNotes": [
+    "Âges arrondis (« environ ») : Terre environ 4,6 milliards d'années ; dinosaures disparus il y a environ 66 millions d'années ; Homo sapiens environ 300 000 ans.",
+    "Vérifier le vocabulaire des ères (primaire, secondaire, tertiaire, quaternaire ou paléozoïque, mésozoïque, cénozoïque) attendu."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "La Terre s'est formée il y a environ :",
+   "choices": [
+    "4,6 milliards d'années",
+    "4,6 millions d'années",
+    "46 000 ans",
+    "300 ans"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ordre de grandeur classique.",
+   "id": "bepc-svt-histoire-terre-01",
+   "tier": "application",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans des couches non perturbées, la plus ancienne est :",
+   "choices": [
+    "La plus claire",
+    "La plus profonde",
+    "La plus épaisse",
+    "La plus haute"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Principe de superposition.",
+   "id": "bepc-svt-histoire-terre-02",
+   "tier": "application",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les fossiles peuvent renseigner sur le milieu de vie ancien.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Mer, forêt, climat...",
+   "id": "bepc-svt-histoire-terre-03",
+   "tier": "application",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque méthode à son principe.",
+   "pairs": [
+    [
+     "Datation relative",
+     "Classer les couches du plus ancien au plus récent"
+    ],
+    [
+     "Datation absolue",
+     "Donner un âge en années grâce à la radioactivité"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Deux approches complémentaires.",
+   "id": "bepc-svt-histoire-terre-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi l'espèce humaine est « récente » à l'échelle de la Terre.",
+   "model": "Elle existe depuis environ 300 000 ans, très peu face aux 4,6 milliards d'années d'histoire de la Terre.",
+   "rubric": [
+    "Compare les ordres de grandeur",
+    "Conclusion"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-svt-histoire-terre-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans une carrière, la couche A (en haut) contient des fossiles de poissons, la couche B (au milieu) des fossiles de fougères, la couche C (en bas) des fossiles de coquillages marins.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle couche est la plus récente ?",
+     "choices": [
+      "B",
+      "C",
+      "On ne peut rien dire",
+      "A"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La plus haute est la plus récente.",
+     "id": "bepc-svt-histoire-terre-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que peut-on dire des milieux successifs ?",
+     "model": "Du plus ancien au plus récent : un milieu marin (C), puis un milieu terrestre ou de forêt humide (B), puis un milieu aquatique (A).",
+     "rubric": [
+      "Ordre des couches",
+      "Déduction des milieux"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-histoire-terre-06-b"
+    }
+   ],
+   "difficulty": 3,
+   "id": "bepc-svt-histoire-terre-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un fossile stratigraphique sert à :",
+   "choices": [
+    "Mesurer la pluie",
+    "Faire du feu",
+    "Nourrir",
+    "Dater des couches"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il est caractéristique d'une période.",
+   "id": "bepc-svt-histoire-terre-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les dinosaures ont disparu il y a environ :",
+   "choices": [
+    "66 ans",
+    "300 000 ans",
+    "66 millions d'années",
+    "4,6 milliards d'années"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fait classique arrondi.",
+   "id": "bepc-svt-histoire-terre-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les roches profondes sont, en général :",
+   "choices": [
+    "Plus récentes",
+    "Plus chaudes seulement",
+    "Plus anciennes",
+    "Toujours magmatiques"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dans des couches non perturbées.",
+   "id": "bepc-svt-histoire-terre-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La datation absolue utilise :",
+   "choices": [
+    "Un chronomètre",
+    "Des éléments radioactifs",
+    "Un mètre",
+    "Une balance"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Leur transformation est régulière.",
+   "id": "bepc-svt-histoire-terre-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Des coquillages marins en altitude montrent :",
+   "choices": [
+    "Qu'il y a eu un désert",
+    "Qu'ils sont vivants",
+    "Qu'il y a eu une mer",
+    "Rien"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Milieu marin ancien.",
+   "id": "bepc-svt-histoire-terre-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-histoire-terre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

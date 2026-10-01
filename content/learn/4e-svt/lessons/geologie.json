@@ -1,0 +1,934 @@
+{
+ "chapter": "4e-svt-geologie",
+ "lessons": [
+  {
+   "id": "4e-svt-roches",
+   "title": "Les roches et les fossiles",
+   "minutes": 30,
+   "programRef": "4e — Les roches ; les fossiles (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer roches sédimentaires, magmatiques et métamorphiques.",
+    "Expliquer la formation des roches sédimentaires.",
+    "Définir un fossile et son utilité."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-svt-roches-01",
+    "4e-svt-roches-02",
+    "4e-svt-roches-03",
+    "4e-svt-roches-04",
+    "4e-svt-roches-05",
+    "4e-svt-roches-06"
+   ],
+   "selfCheck": [
+    "4e-svt-roches-q1",
+    "4e-svt-roches-q2",
+    "4e-svt-roches-q3",
+    "4e-svt-roches-q4",
+    "4e-svt-roches-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trois grandes familles",
+     "md": "- **Roches sédimentaires** : formées par dépôt, tassement et durcissement de sédiments en couches ; grès, calcaire, argile.\n- **Roches magmatiques** : formées par refroidissement du magma ; granite (en profondeur, cristaux visibles), basalte (en surface, refroidissement rapide).\n- **Roches métamorphiques** : roches transformées par la chaleur et la pression sans fondre ; gneiss, marbre."
+    },
+    {
+     "type": "illustration",
+     "caption": "Des couches (strates) superposées de roche sédimentaire.",
+     "alt": "Quatre couches empilées, la plus ancienne en bas, la plus récente en haut.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 20,
+        "w": 300,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 60,
+        "w": 300,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 100,
+        "w": 300,
+        "h": 40,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 140,
+        "w": 300,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 46,
+        "text": "Couche 4 (la plus récente)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 86,
+        "text": "Couche 3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 126,
+        "text": "Couche 2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 166,
+        "text": "Couche 1 (la plus ancienne)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 160,
+        "r": 8,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 164,
+        "r": 6,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 215,
+        "text": "Strates d'une roche sédimentaire",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Formation d'une roche sédimentaire et fossiles",
+     "md": "Des débris de roches et d'êtres vivants sont transportés (eau, vent), s'accumulent au fond d'une mer ou d'un lac, se tassent puis durcissent. Les couches se forment les unes sur les autres : en général, la **plus profonde est la plus ancienne**. Un **fossile** est le reste (coquille, os, empreinte) d'un être vivant ancien conservé dans une roche, surtout sédimentaire. Il renseigne sur les milieux et les êtres vivants d'autrefois."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer des roches",
+     "statement": "Un morceau de roche montre des cristaux visibles et aucune couche. D'où vient-elle ?",
+     "steps": [
+      {
+       "md": "Pas de couches : ce n'est pas sédimentaire."
+      },
+      {
+       "md": "Des cristaux bien visibles : refroidissement lent du magma en profondeur."
+      }
+     ],
+     "answer": "**Roche magmatique de type granite.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire des couches",
+     "statement": "Dans une carrière, on trouve des coquilles dans la couche 1 (en bas) et des feuilles fossiles dans la couche 4 (en haut). Quelle est la plus ancienne ?",
+     "steps": [
+      {
+       "md": "En général, les couches du bas se sont déposées d'abord."
+      },
+      {
+       "md": "La couche 1 est la plus ancienne."
+      }
+     ],
+     "answer": "**La couche 1 (coquilles).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que tous les fossiles sont des os de dinosaures : ce sont aussi des coquilles, des feuilles, des empreintes.\n- Croire que le fossile est un être vivant : c'est seulement une trace.\n- Chercher des fossiles dans le granite : ils sont presque toujours dans des roches sédimentaires."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier les exemples de roches utilisés au programme.",
+    "Les exemples camerounais de roches ne sont pas précisés pour éviter toute erreur."
+   ]
+  },
+  {
+   "id": "4e-svt-volcans-seismes",
+   "title": "Structure du globe, volcans et séismes",
+   "minutes": 30,
+   "programRef": "4e — Structure du globe, tectonique des plaques (initiation), volcanisme, séismes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Décrire la structure de la Terre.",
+    "Décrire un volcan et une éruption.",
+    "Définir un séisme (foyer, épicentre) et citer des précautions."
+   ],
+   "prerequisites": [
+    "4e-svt-roches"
+   ],
+   "exercises": [
+    "4e-svt-volcans-seismes-01",
+    "4e-svt-volcans-seismes-02",
+    "4e-svt-volcans-seismes-03",
+    "4e-svt-volcans-seismes-04",
+    "4e-svt-volcans-seismes-05",
+    "4e-svt-volcans-seismes-06"
+   ],
+   "selfCheck": [
+    "4e-svt-volcans-seismes-q1",
+    "4e-svt-volcans-seismes-q2",
+    "4e-svt-volcans-seismes-q3",
+    "4e-svt-volcans-seismes-q4",
+    "4e-svt-volcans-seismes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Structure de la Terre",
+     "md": "La Terre comprend de l'extérieur vers l'intérieur : la **croûte** (mince, rocheuse), le **manteau** (roches chaudes, épais) et le **noyau** (métallique, très chaud). La croûte et le haut du manteau forment la **lithosphère**, découpée en grandes **plaques** qui bougent très lentement (quelques centimètres par an environ)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Coupe très simplifiée de la Terre.",
+     "alt": "Trois cercles emboîtés : noyau, manteau, croûte.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 300,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 150,
+        "r": 130,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 150,
+        "r": 95,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 150,
+        "r": 45,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 156,
+        "text": "Noyau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 78,
+        "text": "Manteau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 38,
+        "text": "Croûte",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 40,
+        "text": "croûte : mince",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 150,
+        "text": "manteau : épais",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 260,
+        "text": "noyau : central",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Volcans et séismes",
+     "md": "- **Volcan** : du **magma** monte, sort par le cratère comme **lave**, avec cendres et gaz. Les cendres et coulées peuvent enrichir les sols mais détruisent cultures et habitations.\n- **Séisme** : secousse due à une rupture brutale de roches en profondeur, au **foyer** ; l'**épicentre** est le point de la surface juste au-dessus du foyer. Un sismographe enregistre les ondes."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un volcan simplifié en coupe.",
+     "alt": "Triangle avec cratère, cheminée centrale rouge, chambre magmatique au pied et panache au sommet.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 300,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         260,
+         360,
+         260,
+         240,
+         110,
+         180,
+         110
+        ],
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         180,
+         110,
+         240,
+         110,
+         225,
+         95,
+         195,
+         95
+        ],
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 95,
+        "x2": 205,
+        "y2": 40,
+        "color": "orange",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 95,
+        "x2": 235,
+        "y2": 45,
+        "color": "orange",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 260,
+        "x2": 210,
+        "y2": 110,
+        "color": "red",
+        "width": 6
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 250,
+        "r": 22,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 70,
+        "text": "cratère",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 160,
+        "text": "cheminée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 215,
+        "text": "magma",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 285,
+        "text": "chambre magmatique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : foyer et épicentre",
+     "statement": "Un séisme a son foyer à 10 km de profondeur. Où est l'épicentre ?",
+     "steps": [
+      {
+       "md": "L'épicentre est à la surface."
+      },
+      {
+       "md": "Il est à la verticale du foyer."
+      }
+     ],
+     "answer": "**À la surface, juste au-dessus du foyer.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : éruption",
+     "statement": "Cite deux produits d'une éruption.",
+     "steps": [
+      {
+       "md": "Le magma sort par le cratère : c'est la lave."
+      },
+      {
+       "md": "Le volcan projette aussi des cendres et des gaz."
+      }
+     ],
+     "answer": "**Lave, cendres (et gaz).**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Prudence en cas de séisme",
+     "md": "Si la terre tremble : s'éloigner des murs et des fenêtres, se protéger sous une table solide, et ne pas utiliser l'ascenseur. Ces conseils sont généraux ; il faut suivre les consignes des autorités locales."
+    }
+   ],
+   "reviewNotes": [
+    "Mont Cameroun : volcan actif, dernières éruptions au XXe siècle (années 1999-2000 environ) : à confirmer.",
+    "Niveau de détail de la tectonique des plaques à confirmer pour la 4e.",
+    "Conseils de sécurité en cas de séisme : à faire relire par un spécialiste."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle roche est sédimentaire ?",
+   "choices": [
+    "Le calcaire",
+    "Le granite",
+    "Le basalte",
+    "Le gneiss"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le calcaire provient de dépôts.",
+   "id": "4e-svt-roches-01",
+   "tier": "application",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le granite est une roche :",
+   "choices": [
+    "Sédimentaire",
+    "Métamorphique",
+    "Vivante",
+    "Magmatique"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle vient du refroidissement du magma.",
+   "id": "4e-svt-roches-02",
+   "tier": "application",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un fossile est la trace d'un être vivant ancien.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la définition.",
+   "id": "4e-svt-roches-03",
+   "tier": "application",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe roche et famille.",
+   "pairs": [
+    [
+     "Grès",
+     "Sédimentaire"
+    ],
+    [
+     "Basalte",
+     "Magmatique"
+    ],
+    [
+     "Marbre",
+     "Métamorphique"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque roche s'est formée différemment.",
+   "id": "4e-svt-roches-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi on trouve des fossiles marins parfois loin de la mer.",
+   "model": "La roche s'est formée dans une mer ancienne ; ensuite, des mouvements de la Terre ou un recul de la mer ont placé cette roche sur la terre ferme.",
+   "rubric": [
+    "Une mer ancienne",
+    "Changements après la formation"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-roches-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans une falaise, quatre couches A (haut), B, C, D (bas) sont visibles. Un fossile de poisson se trouve dans B, un de feuille dans D.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle couche est la plus ancienne ?",
+     "choices": [
+      "D",
+      "A",
+      "B",
+      "C"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La couche du bas est la plus ancienne en général.",
+     "id": "4e-svt-roches-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que peut-on dire du milieu à l'époque de la couche B ?",
+     "model": "Un poisson fossile suggère un milieu aquatique (mer, lac ou rivière).",
+     "rubric": [
+      "Milieu aquatique",
+      "Lien avec le fossile"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-roches-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-roches-06",
+   "tier": "examen",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une roche métamorphique est :",
+   "choices": [
+    "Formée de couches seulement",
+    "Transformée par chaleur et pression",
+    "Un fossile",
+    "Formée dans l'air"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle a changé sans fondre.",
+   "id": "4e-svt-roches-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les strates sont :",
+   "choices": [
+    "Des cristaux",
+    "Des couches superposées",
+    "Des fossiles vivants",
+    "Des cratères"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elles se déposent par couches.",
+   "id": "4e-svt-roches-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle roche contient souvent des fossiles ?",
+   "choices": [
+    "Une roche sédimentaire",
+    "Le granite",
+    "Une lave récente",
+    "Le basalte"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les fossiles s'y conservent.",
+   "id": "4e-svt-roches-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le basalte se forme :",
+   "choices": [
+    "Par dépôt de sable",
+    "Dans la mer",
+    "Par pression seulement",
+    "Par refroidissement rapide de lave"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il vient des volcans.",
+   "id": "4e-svt-roches-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans des couches non perturbées, la plus ancienne est :",
+   "choices": [
+    "La plus haute",
+    "La plus profonde",
+    "La plus claire",
+    "La plus épaisse"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle s'est déposée en premier.",
+   "id": "4e-svt-roches-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-roches",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle couche de la Terre est la plus mince ?",
+   "choices": [
+    "Le manteau",
+    "Le noyau",
+    "La lithosphère entière",
+    "La croûte"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La croûte est très mince par rapport au rayon de la Terre.",
+   "id": "4e-svt-volcans-seismes-01",
+   "tier": "application",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le point où le séisme se produit en profondeur est :",
+   "choices": [
+    "L'épicentre",
+    "Le cratère",
+    "La lave",
+    "Le foyer"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Foyer en profondeur ; épicentre en surface.",
+   "id": "4e-svt-volcans-seismes-02",
+   "tier": "application",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la lave est du magma arrivé en surface.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le magma devient lave à la sortie.",
+   "id": "4e-svt-volcans-seismes-03",
+   "tier": "application",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque terme à sa définition.",
+   "pairs": [
+    [
+     "Foyer",
+     "Lieu de la rupture en profondeur"
+    ],
+    [
+     "Épicentre",
+     "Point en surface au-dessus du foyer"
+    ],
+    [
+     "Cratère",
+     "Ouverture au sommet du volcan"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque terme se situe à un endroit différent.",
+   "id": "4e-svt-volcans-seismes-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Pourquoi des populations vivent-elles près des volcans malgré le danger ?",
+   "model": "Les sols volcaniques sont souvent fertiles, ce qui permet de cultiver ; le risque est géré par la surveillance et la prévention.",
+   "rubric": [
+    "Fertilité des sols",
+    "Lien avec les cultures"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-volcans-seismes-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un village situé près d'un volcan reçoit une alerte : le volcan émet des gaz et de petits séismes.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel outil enregistre les ondes d'un séisme ?",
+     "choices": [
+      "Le thermomètre",
+      "La boussole",
+      "Le sismographe",
+      "Le baromètre"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Il mesure les secousses.",
+     "id": "4e-svt-volcans-seismes-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que doivent faire les habitants ?",
+     "model": "Suivre les consignes des autorités, préparer l'évacuation si elle est demandée.",
+     "rubric": [
+      "Suivre les consignes",
+      "Se préparer à partir"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-volcans-seismes-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-volcans-seismes-06",
+   "tier": "examen",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le noyau de la Terre est :",
+   "choices": [
+    "Très chaud et métallique",
+    "Mince et froid",
+    "Fait d'eau",
+    "Fait d'air"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il est au centre.",
+   "id": "4e-svt-volcans-seismes-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un volcan rejette :",
+   "choices": [
+    "De l'eau potable",
+    "Des fossiles",
+    "De la glace",
+    "De la lave, des cendres et des gaz"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Produits d'éruption.",
+   "id": "4e-svt-volcans-seismes-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les plaques de la lithosphère :",
+   "choices": [
+    "Sont immobiles",
+    "Bougent très vite",
+    "N'existent pas",
+    "Bougent très lentement"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Quelques cm par an environ.",
+   "id": "4e-svt-volcans-seismes-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'épicentre se trouve :",
+   "choices": [
+    "Au centre de la Terre",
+    "Dans l'air",
+    "Dans le noyau",
+    "À la surface du sol"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il est au-dessus du foyer.",
+   "id": "4e-svt-volcans-seismes-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le magma est :",
+   "choices": [
+    "De la roche fondue",
+    "De l'eau chaude",
+    "Un gaz",
+    "Un fossile"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il se trouve sous la surface.",
+   "id": "4e-svt-volcans-seismes-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,1521 @@
+{
+ "chapter": "bepc-english-reading-writing",
+ "lessons": [
+  {
+   "id": "bepc-english-reading-comprehension",
+   "title": "Compréhension de texte : méthode et entraînement",
+   "minutes": 35,
+   "programRef": "3e — Reading comprehension (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Repérer l'idée générale et les informations précises d'un texte.",
+    "Répondre aux types de questions de l'épreuve : QCM, vrai/faux + justification, vocabulaire, pronoms, questions ouvertes."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-english-reading-comprehension-01",
+    "bepc-english-reading-comprehension-02",
+    "bepc-english-reading-comprehension-03",
+    "bepc-english-reading-comprehension-04",
+    "bepc-english-reading-comprehension-05",
+    "bepc-english-reading-comprehension-06"
+   ],
+   "selfCheck": [
+    "bepc-english-reading-comprehension-q1",
+    "bepc-english-reading-comprehension-q2",
+    "bepc-english-reading-comprehension-q3",
+    "bepc-english-reading-comprehension-q4",
+    "bepc-english-reading-comprehension-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Quatre réflexes de lecture.",
+     "alt": "Tableau de quatre méthodes de lecture : skimming, scanning, justify, reformulation.",
+     "figure": {
+      "kind": "shapes",
+      "w": 501,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 117,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Skill",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 10,
+        "w": 364,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 35,
+        "text": "What to do",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "Skimming",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 48,
+        "w": 364,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 73,
+        "text": "Lire vite : titre, première phrase",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "Scanning",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 86,
+        "w": 364,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 111,
+        "text": "Chercher un mot ou un chiffre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "Justify",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 124,
+        "w": 364,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 149,
+        "text": "Citer la phrase exacte",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "Own words",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 162,
+        "w": 364,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 187,
+        "text": "Reformuler sans copier",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode en 5 étapes",
+     "md": "1. **Skimming** : lis le titre et le texte une première fois sans t'arrêter.\n2. Lis les questions.\n3. **Scanning** : relis le texte et souligne les phrases utiles.\n4. Réponds par une **phrase complète** avec tes mots (« own words ») sauf si on demande de citer.\n5. Relis : orthographe, temps, sens."
+    },
+    {
+     "type": "text",
+     "md": "**Texte d'entraînement.** Last year, Mballa's village was short of water. The river dried up in February, so people had to walk five kilometres to the next village. Then the villagers decided to dig a well. Every family gave some money, and the young men dug for three weeks. Now the whole village has clean water, and nobody needs to walk far. “We did it together,” said the chief proudly."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : question de cause",
+     "statement": "Why did people walk five kilometres ?",
+     "steps": [
+      {
+       "md": "Cherche « five kilometres » : « The river dried up… so people had to walk »."
+      },
+      {
+       "md": "Reformule la cause avec tes mots."
+      }
+     ],
+     "answer": "**Because the river had dried up and there was no water in the village.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : justify",
+     "statement": "True or false ? The chief was disappointed. Justify.",
+     "steps": [
+      {
+       "md": "Cherche l'attitude du chef : « said the chief proudly »."
+      },
+      {
+       "md": "proudly = avec fierté, donc la phrase est fausse."
+      }
+     ],
+     "answer": "**False. « said the chief proudly. »**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Recopier trois lignes au lieu de la phrase utile.\n- Mettre un mauvais temps (le texte est au passé : réponds au passé).\n- Répondre « because… » sans phrase complète.\n- Confondre « Who » (personne) et « What » (chose)."
+    }
+   ],
+   "reviewNotes": [
+    "Le format des questions de compréhension au BEPC (nombre de questions, barème) est à confirmer ; ici les types classiques.",
+    "Textes originaux courts rédigés pour la fiche."
+   ]
+  },
+  {
+   "id": "bepc-english-composition-letter-dialogue",
+   "title": "Expression écrite : lettre informelle et dialogue",
+   "minutes": 35,
+   "programRef": "3e — Guided composition : informal letter, dialogue (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Rédiger une lettre informelle complète (structure, formules, temps).",
+    "Écrire un dialogue court et correctement présenté."
+   ],
+   "prerequisites": [
+    "bepc-english-futures-review"
+   ],
+   "exercises": [
+    "bepc-english-composition-letter-dialogue-01",
+    "bepc-english-composition-letter-dialogue-02",
+    "bepc-english-composition-letter-dialogue-03",
+    "bepc-english-composition-letter-dialogue-04",
+    "bepc-english-composition-letter-dialogue-05",
+    "bepc-english-composition-letter-dialogue-06"
+   ],
+   "selfCheck": [
+    "bepc-english-composition-letter-dialogue-q1",
+    "bepc-english-composition-letter-dialogue-q2",
+    "bepc-english-composition-letter-dialogue-q3",
+    "bepc-english-composition-letter-dialogue-q4",
+    "bepc-english-composition-letter-dialogue-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Structure d'une lettre informelle.",
+     "alt": "Tableau des parties d'une lettre informelle de l'adresse à la formule finale.",
+     "figure": {
+      "kind": "shapes",
+      "w": 600,
+      "h": 248,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 117,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Part",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 10,
+        "w": 463,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 35,
+        "text": "Content",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "Top right",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 48,
+        "w": 463,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 73,
+        "text": "Your address and date",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "Left",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 86,
+        "w": 463,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 111,
+        "text": "Dear Amina,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "Opening",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 124,
+        "w": 463,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 149,
+        "text": "Thanks for your letter. I hope you are fine.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "Body",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 162,
+        "w": 463,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 187,
+        "text": "2 or 3 paragraphs",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "Closing",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 200,
+        "w": 463,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 225,
+        "text": "Write soon. Best wishes, Boris",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "La lettre informelle",
+     "md": "- Ton **amical** : contractions (I'm, don't), expressions simples.\n- Ouverture : *Thanks for your letter. I hope you are well.*\n- Raison de la lettre : *I'm writing to tell you about…* / *to invite you to…*\n- Fermeture : *Write soon.* / *Give my love to your family.*\n- Fin : **Best wishes, / Yours, / Your friend,** + prénom."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Le dialogue",
+     "md": "- On met le **nom du locuteur** suivi de deux-points : Amina: Hello, Boris!\n- Une réplique par ligne, courte, naturelle.\n- Utilise des formules : Excuse me, Thank you, Of course, I'm sorry, Would you like…?\n- Pas de narration : seulement les paroles."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lettre",
+     "statement": "Écris à un ami pour l'inviter à venir pendant les vacances (extrait).",
+     "steps": [
+      {
+       "md": "Ouverture : Dear Nkeng, Thanks for your letter."
+      },
+      {
+       "md": "Invitation : I'm writing to invite you to spend the holidays with us in Kribi. We will swim and visit the market."
+      },
+      {
+       "md": "Fermeture : Write soon. Your friend, Amina."
+      }
+     ],
+     "answer": "**Lettre avec ouverture, invitation (quand, où, quoi) et fermeture.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dialogue",
+     "statement": "Écris un court dialogue au marché.",
+     "steps": [
+      {
+       "md": "Chaque réplique : nom + deux-points."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**Boris: Good morning. How much are these tomatoes ?\nSeller: Five hundred francs a kilo.\nBoris: That's expensive. Can you reduce the price ?**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la salutation (Dear…) ou la signature.\n- Écrire un dialogue avec des guillemets partout et sans noms.\n- Mélanger les temps sans raison.\n- Texte trop court : développe chaque idée par un détail."
+    }
+   ],
+   "reviewNotes": [
+    "Longueur attendue (nombre de mots) et critères de notation du BEPC à confirmer ; ici 100 à 120 mots pour une lettre."
+   ]
+  },
+  {
+   "id": "bepc-english-composition-essay",
+   "title": "Expression écrite : le court essai",
+   "minutes": 35,
+   "programRef": "3e — Guided composition : short essay (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Organiser un essai en introduction, développement, conclusion.",
+    "Donner et justifier une opinion avec des connecteurs."
+   ],
+   "prerequisites": [
+    "bepc-english-linking-words"
+   ],
+   "exercises": [
+    "bepc-english-composition-essay-01",
+    "bepc-english-composition-essay-02",
+    "bepc-english-composition-essay-03",
+    "bepc-english-composition-essay-04",
+    "bepc-english-composition-essay-05",
+    "bepc-english-composition-essay-06"
+   ],
+   "selfCheck": [
+    "bepc-english-composition-essay-q1",
+    "bepc-english-composition-essay-q2",
+    "bepc-english-composition-essay-q3",
+    "bepc-english-composition-essay-q4",
+    "bepc-english-composition-essay-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Plan d'un essai.",
+     "alt": "Tableau du plan d'un essai : introduction, deux parties de développement, conclusion.",
+     "figure": {
+      "kind": "shapes",
+      "w": 550,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 146,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Part",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 10,
+        "w": 384,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 35,
+        "text": "Content",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 146,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "Introduction",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 48,
+        "w": 384,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 73,
+        "text": "Present the topic, give your opinion",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 146,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "Body 1",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 86,
+        "w": 384,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 111,
+        "text": "First reason + example",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 146,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "Body 2",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 124,
+        "w": 384,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 149,
+        "text": "Second reason + example",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 146,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "Conclusion",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 162,
+        "w": 384,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 187,
+        "text": "Summarize, final thought",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Plan en quatre paragraphes",
+     "md": "1. **Introduction** : présente le sujet et ton opinion : « Nowadays, many students use phones. In my opinion, this has advantages and disadvantages. »\n2. **Paragraphe 1** : première idée + exemple.\n3. **Paragraphe 2** : deuxième idée (ou contre-argument) + exemple.\n4. **Conclusion** : résume : « In conclusion, … »."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Mots utiles",
+     "md": "- Opinion : *In my opinion, I think that, I believe…*\n- Ordre : *First of all, Secondly, Finally.*\n- Addition : *Moreover, In addition.*\n- Opposition : *However, On the other hand.*\n- Conclusion : *In conclusion, To sum up.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : introduction",
+     "statement": "Écris une introduction sur « Should students wear uniform ? ».",
+     "steps": [
+      {
+       "md": "Présente le sujet."
+      },
+      {
+       "md": "Donne ton opinion en une phrase claire."
+      }
+     ],
+     "answer": "**Many schools ask students to wear a uniform. In my opinion, uniforms are useful because they make everybody equal.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : conclusion",
+     "statement": "Écris une conclusion.",
+     "steps": [
+      {
+       "md": "Commence par In conclusion."
+      },
+      {
+       "md": "Rappelle l'opinion en d'autres mots."
+      }
+     ],
+     "answer": "**In conclusion, I believe that uniforms help students to feel equal and to concentrate on their studies.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Pas de plan : idées mélangées.\n- Opinion absente ou contradictoire.\n- Connecteurs répétés (and, and, and).\n- Copier la question : reformule.\n- Phrases très longues sans ponctuation."
+    }
+   ],
+   "reviewNotes": [
+    "Type exact de sujets (narratif, descriptif, argumentatif) à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Texte : Nkeng sells peanuts at the bus station every morning. He starts at six and finishes at noon. With the money, he pays his school fees. He hopes to become a pilot one day. À quelle heure Nkeng commence-t-il ?",
+   "choices": [
+    "At noon",
+    "At eight",
+    "At night",
+    "At six"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "He starts at six.",
+   "id": "bepc-english-reading-comprehension-01",
+   "tier": "application",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Texte : Nkeng sells peanuts at the bus station every morning. He starts at six and finishes at noon. With the money, he pays his school fees. He hopes to become a pilot one day. Que fait-il avec l'argent ?",
+   "choices": [
+    "He buys a bus.",
+    "He builds a house.",
+    "He pays his school fees.",
+    "He pays a pilot."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "With the money, he pays his school fees.",
+   "id": "bepc-english-reading-comprehension-02",
+   "tier": "application",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Texte : Nkeng sells peanuts at the bus station every morning. He starts at six and finishes at noon. With the money, he pays his school fees. He hopes to become a pilot one day. Nkeng veut devenir pilote.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "He hopes to become a pilot.",
+   "id": "bepc-english-reading-comprehension-03",
+   "tier": "application",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Texte : Boris was nervous before the speech contest. His hands were shaking, but he took a deep breath and walked to the stage. When he finished, everyone clapped. His teacher said it was the best speech she had heard that year. Que signifie « nervous » ?",
+   "choices": [
+    "fier",
+    "fatigué",
+    "en retard",
+    "inquiet, anxieux"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les mains tremblent : il avait peur.",
+   "id": "bepc-english-reading-comprehension-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Texte : Boris was nervous before the speech contest. His hands were shaking, but he took a deep breath and walked to the stage. When he finished, everyone clapped. His teacher said it was the best speech she had heard that year. À quoi se réfère « it » dans « it was the best speech » ?",
+   "choices": [
+    "The contest",
+    "The speech",
+    "The stage",
+    "The teacher"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "it = Boris's speech.",
+   "id": "bepc-english-reading-comprehension-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Texte : Boris was nervous before the speech contest. His hands were shaking, but he took a deep breath and walked to the stage. When he finished, everyone clapped. His teacher said it was the best speech she had heard that year.",
+   "parts": [
+    {
+     "kind": "truefalse",
+     "prompt": "Boris a été applaudi.",
+     "answer": true,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Everyone clapped.",
+     "id": "bepc-english-reading-comprehension-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Why was Boris nervous at first ? Justifie avec une phrase du texte.",
+     "model": "Because he was going to speak in a contest. « His hands were shaking. »",
+     "rubric": [
+      "Cause identifiée",
+      "Citation exacte",
+      "Phrase en anglais"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-english-reading-comprehension-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-english-reading-comprehension-06",
+   "tier": "examen",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Skimming » consiste à…",
+   "choices": [
+    "lire rapidement pour l'idée générale",
+    "chercher un mot précis",
+    "traduire tout le texte",
+    "recopier le titre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Lecture globale.",
+   "id": "bepc-english-reading-comprehension-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Scanning » consiste à…",
+   "choices": [
+    "chercher une information précise",
+    "lire lentement tout le texte",
+    "deviner la fin",
+    "écrire un résumé"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chercher un mot ou un chiffre.",
+   "id": "bepc-english-reading-comprehension-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour « Justify », on…",
+   "choices": [
+    "donne son avis",
+    "cite la phrase du texte",
+    "traduit",
+    "répond oui ou non seulement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Citation.",
+   "id": "bepc-english-reading-comprehension-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Who » demande…",
+   "choices": [
+    "une personne",
+    "un lieu",
+    "une raison",
+    "un moment"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Who = qui.",
+   "id": "bepc-english-reading-comprehension-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "On répond « in your own words » : on…",
+   "choices": [
+    "recopie",
+    "traduit en français",
+    "laisse vide",
+    "reformule"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Reformulation.",
+   "id": "bepc-english-reading-comprehension-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reading-comprehension",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule de fin convient à une lettre à un ami ?",
+   "choices": [
+    "Yours faithfully,",
+    "Best wishes,",
+    "Respectfully,",
+    "Sincerely yours the end"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Informel : Best wishes / Your friend.",
+   "id": "bepc-english-composition-letter-dialogue-01",
+   "tier": "application",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle ouverture convient ?",
+   "choices": [
+    "To whom it may concern,",
+    "Dear Sir,",
+    "In conclusion,",
+    "Thanks for your letter."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Réponse à une lettre amicale.",
+   "id": "bepc-english-composition-letter-dialogue-02",
+   "tier": "application",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un dialogue, on écrit…",
+   "choices": [
+    "des paragraphes de narration",
+    "le nom du locuteur suivi de deux-points",
+    "seulement des guillemets",
+    "des numéros"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Amina: …",
+   "id": "bepc-english-composition-letter-dialogue-03",
+   "tier": "application",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : I am writing ____ you to my party.",
+   "choices": [
+    "to invite",
+    "inviting",
+    "invite",
+    "for inviting"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "I am writing to + verbe.",
+   "id": "bepc-english-composition-letter-dialogue-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle réplique est polie ?",
+   "choices": [
+    "Give me help.",
+    "You help me.",
+    "Excuse me, could you help me ?",
+    "Help now."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Politesse.",
+   "id": "bepc-english-composition-letter-dialogue-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris à un ami (100 à 120 mots) pour lui raconter ta dernière sortie scolaire (past simple), puis invite-le à une fête (futur).",
+   "model": "Dear Boris, Thanks for your letter. Last Friday, my class visited a museum in Yaoundé. We saw old objects and learnt about history. I took many photos. By the way, I'm having a small party on Saturday at 3 p.m. Will you come? Write soon. Best wishes, Amina",
+   "rubric": [
+    "Structure de lettre complète",
+    "Past simple correct",
+    "Futur / invitation",
+    "Cohérence, orthographe et ponctuation"
+   ],
+   "points": 8,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-english-composition-letter-dialogue-06",
+   "tier": "examen",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une lettre informelle, on peut employer…",
+   "choices": [
+    "aucune contraction",
+    "des contractions",
+    "seulement le passif",
+    "un ton administratif"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "I'm, don't…",
+   "id": "bepc-english-composition-letter-dialogue-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Write soon » se place…",
+   "choices": [
+    "à la fin",
+    "au début",
+    "dans l'adresse",
+    "avant la date"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fermeture.",
+   "id": "bepc-english-composition-letter-dialogue-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un dialogue contient surtout…",
+   "choices": [
+    "des répliques courtes",
+    "des descriptions longues",
+    "des définitions",
+    "des listes"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Paroles seulement.",
+   "id": "bepc-english-composition-letter-dialogue-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où met-on la date d'une lettre ?",
+   "choices": [
+    "En haut",
+    "À la fin",
+    "Après la signature",
+    "Au milieu"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Adresse et date en haut à droite.",
+   "id": "bepc-english-composition-letter-dialogue-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle salutation est correcte ?",
+   "choices": [
+    "Dear Nkeng,",
+    "Hello Nkeng.",
+    "To Nkeng:",
+    "Nkeng, Dear"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dear + prénom + virgule.",
+   "id": "bepc-english-composition-letter-dialogue-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-letter-dialogue",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expression introduit une opinion ?",
+   "choices": [
+    "In my opinion,",
+    "In conclusion,",
+    "Moreover,",
+    "Finally,"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Opinion.",
+   "id": "bepc-english-composition-essay-01",
+   "tier": "application",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expression sert à conclure ?",
+   "choices": [
+    "First of all,",
+    "For example,",
+    "To sum up,",
+    "However,"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conclusion.",
+   "id": "bepc-english-composition-essay-02",
+   "tier": "application",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de parties a un essai simple ?",
+   "choices": [
+    "Une",
+    "Deux",
+    "Dix",
+    "Quatre (intro, 2 idées, conclusion)"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plan classique.",
+   "id": "bepc-english-composition-essay-03",
+   "tier": "application",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel connecteur ajoute une idée ?",
+   "choices": [
+    "However",
+    "Moreover",
+    "Therefore",
+    "Although"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Moreover = de plus.",
+   "id": "bepc-english-composition-essay-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis le meilleur début d'essai sur « Mobile phones at school ».",
+   "choices": [
+    "Phones.",
+    "I like football.",
+    "First, wash your hands.",
+    "Nowadays, many students bring phones to school. In my opinion, this is not a good idea."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Sujet + opinion.",
+   "id": "bepc-english-composition-essay-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Sujet : « Is it better to live in a town or in a village ? » Écris un essai de 100 à 120 mots avec introduction, 2 idées, conclusion.",
+   "model": "Many people ask whether it is better to live in a town or a village. In my opinion, a village is better. First of all, the air is cleaner and life is calmer. Moreover, people know each other and help one another. However, towns have more jobs and hospitals. In conclusion, I prefer the village but I would like to visit towns often.",
+   "rubric": [
+    "Introduction + opinion",
+    "Deux idées illustrées",
+    "Connecteurs",
+    "Conclusion",
+    "Langue correcte"
+   ],
+   "points": 8,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-english-composition-essay-06",
+   "tier": "examen",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un bon essai commence par…",
+   "choices": [
+    "une introduction avec l'opinion",
+    "la conclusion",
+    "une liste de mots",
+    "une formule de lettre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Introduction.",
+   "id": "bepc-english-composition-essay-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« On the other hand » exprime…",
+   "choices": [
+    "une addition",
+    "une cause",
+    "un résumé",
+    "un contraste"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Opposition.",
+   "id": "bepc-english-composition-essay-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la conclusion, on…",
+   "choices": [
+    "résume sans nouvelle idée majeure",
+    "ajoute dix idées",
+    "copie l'introduction",
+    "pose une question"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conclusion.",
+   "id": "bepc-english-composition-essay-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Firstly, Secondly, Finally » servent à…",
+   "choices": [
+    "s'opposer",
+    "donner la cause",
+    "saluer",
+    "ordonner les idées"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ordre.",
+   "id": "bepc-english-composition-essay-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« I strongly believe that… » exprime…",
+   "choices": [
+    "une obligation",
+    "une description",
+    "un ordre",
+    "une opinion"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Opinion.",
+   "id": "bepc-english-composition-essay-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-composition-essay",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

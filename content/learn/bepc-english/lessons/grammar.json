@@ -1,0 +1,4502 @@
+{
+ "chapter": "bepc-english-grammar",
+ "lessons": [
+  {
+   "id": "bepc-english-conditionals",
+   "title": "Les conditionnels 0, 1 et 2",
+   "minutes": 30,
+   "programRef": "3e — Conditional sentences types 0, 1, 2 (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Former les trois types de phrases conditionnelles.",
+    "Choisir le type selon le sens (vérité générale, possible, hypothétique)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-english-conditionals-01",
+    "bepc-english-conditionals-02",
+    "bepc-english-conditionals-03",
+    "bepc-english-conditionals-04",
+    "bepc-english-conditionals-05",
+    "bepc-english-conditionals-06"
+   ],
+   "selfCheck": [
+    "bepc-english-conditionals-q1",
+    "bepc-english-conditionals-q2",
+    "bepc-english-conditionals-q3",
+    "bepc-english-conditionals-q4",
+    "bepc-english-conditionals-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Les trois types.",
+     "alt": "Tableau des conditionnels de type 0, 1 et 2 avec structures et exemples.",
+     "figure": {
+      "kind": "shapes",
+      "w": 753,
+      "h": 199,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 67,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Type",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 77,
+        "y": 10,
+        "w": 186,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 89,
+        "y": 35,
+        "text": "If-clause",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 263,
+        "y": 10,
+        "w": 146,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 35,
+        "text": "Main clause",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 409,
+        "y": 10,
+        "w": 334,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 421,
+        "y": 35,
+        "text": "Example",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 67,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "0",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 77,
+        "y": 48,
+        "w": 186,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 89,
+        "y": 73,
+        "text": "If + present",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 263,
+        "y": 48,
+        "w": 146,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 73,
+        "text": "present",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 409,
+        "y": 48,
+        "w": 334,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 421,
+        "y": 73,
+        "text": "If you heat ice, it melts.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 67,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "1",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 77,
+        "y": 86,
+        "w": 186,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 89,
+        "y": 111,
+        "text": "If + present",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 263,
+        "y": 86,
+        "w": 146,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 111,
+        "text": "will + base",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 409,
+        "y": 86,
+        "w": 334,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 421,
+        "y": 111,
+        "text": "If it rains, I will stay.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 67,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "2",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 77,
+        "y": 124,
+        "w": 186,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 89,
+        "y": 149,
+        "text": "If + past simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 263,
+        "y": 124,
+        "w": 146,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 149,
+        "text": "would + base",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 409,
+        "y": 124,
+        "w": 334,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 421,
+        "y": 149,
+        "text": "If I were rich, I would travel.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Type 0, 1, 2",
+     "md": "- **Type 0** : vérité générale : If you **heat** water, it **boils**.\n- **Type 1** : condition possible : If he **studies**, he **will pass**.\n- **Type 2** : irréel / peu probable dans le présent : If I **had** a car, I **would drive** to Douala."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Notes importantes",
+     "md": "- Type 2 : on utilise **were** pour tous les sujets (If I **were** you, I **would** accept). \n- **unless** = if … not.\n- Pas de will / would dans la proposition en if."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir le type",
+     "statement": "Complète : If I (be) you, I (study) harder.",
+     "steps": [
+      {
+       "md": "« If I were you » : conseil, situation irréelle = type 2."
+      },
+      {
+       "md": "were + would study."
+      }
+     ],
+     "answer": "**If I were you, I would study harder.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : type 1",
+     "statement": "Complète : If Nkeng (work) hard, he (succeed).",
+     "steps": [
+      {
+       "md": "Condition possible : type 1."
+      },
+      {
+       "md": "present simple + will."
+      }
+     ],
+     "answer": "**If Nkeng works hard, he will succeed.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « If I would have money » → If I **had** money.\n- « If he will come » → If he **comes**.\n- Mélanger les types : « If I had money, I will buy » → I **would** buy."
+    }
+   ],
+   "reviewNotes": [
+    "Le type 3 (past perfect + would have) est peut-être hors programme de 3e : non traité."
+   ]
+  },
+  {
+   "id": "bepc-english-passive-voice",
+   "title": "La voix passive à tous les temps",
+   "minutes": 30,
+   "programRef": "3e — Passive voice (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Former le passif à plusieurs temps.",
+    "Transformer une phrase active en phrase passive (et inversement)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-english-passive-voice-01",
+    "bepc-english-passive-voice-02",
+    "bepc-english-passive-voice-03",
+    "bepc-english-passive-voice-04",
+    "bepc-english-passive-voice-05",
+    "bepc-english-passive-voice-06"
+   ],
+   "selfCheck": [
+    "bepc-english-passive-voice-q1",
+    "bepc-english-passive-voice-q2",
+    "bepc-english-passive-voice-q3",
+    "bepc-english-passive-voice-q4",
+    "bepc-english-passive-voice-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Le passif selon les temps.",
+     "alt": "Tableau du passif au présent, passé, present perfect, futur et avec modal.",
+     "figure": {
+      "kind": "shapes",
+      "w": 676,
+      "h": 248,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 176,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Tense",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 10,
+        "w": 245,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 35,
+        "text": "Passive form",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 431,
+        "y": 10,
+        "w": 235,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 443,
+        "y": 35,
+        "text": "Example",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "present simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 48,
+        "w": 245,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 73,
+        "text": "is / are + p.p.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 431,
+        "y": 48,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 443,
+        "y": 73,
+        "text": "Rice is sold here.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "past simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 86,
+        "w": 245,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 111,
+        "text": "was / were + p.p.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 431,
+        "y": 86,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 443,
+        "y": 111,
+        "text": "The test was written.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "present perfect",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 124,
+        "w": 245,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 149,
+        "text": "has / have been + p.p.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 431,
+        "y": 124,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 443,
+        "y": 149,
+        "text": "It has been done.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "future",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 162,
+        "w": 245,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 187,
+        "text": "will be + p.p.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 431,
+        "y": 162,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 443,
+        "y": 187,
+        "text": "It will be finished.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "modal",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 200,
+        "w": 245,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 225,
+        "text": "must / can be + p.p.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 431,
+        "y": 200,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 443,
+        "y": 225,
+        "text": "It must be paid.",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Passif : be + participe passé",
+     "md": "On garde le **temps** de la phrase active et on met **be** à ce temps.\n- Active : The farmers **harvest** the cocoa. → Passive : The cocoa **is harvested** by the farmers.\n- Active : They **will build** a bridge. → Passive : A bridge **will be built**.\n- Active : They **have repaired** the road. → The road **has been repaired**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : present perfect",
+     "statement": "Passif : The police have arrested the thief.",
+     "steps": [
+      {
+       "md": "L'objet « the thief » devient sujet."
+      },
+      {
+       "md": "have + p.p. → has been + p.p. (arrested)."
+      }
+     ],
+     "answer": "**The thief has been arrested by the police.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : modal",
+     "statement": "Passif : You must finish this work today.",
+     "steps": [
+      {
+       "md": "must + base → must be + p.p."
+      },
+      {
+       "md": "L'agent « you » est inutile : on le supprime."
+      }
+     ],
+     "answer": "**This work must be finished today.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Changer le temps du verbe : garde le même temps.\n- Oublier be : « The road repaired » est faux.\n- Utiliser un participe passé faux : written (pas wrote), broken (pas broke).\n- Verbes qui n'ont pas de passif (intransitifs) : arrive, go, die."
+    }
+   ],
+   "reviewNotes": [
+    "Les temps du passif exigés au BEPC ne sont pas connus précisément : présent, passé, present perfect, futur et modaux sont traités."
+   ]
+  },
+  {
+   "id": "bepc-english-reported-speech",
+   "title": "Le discours rapporté : phrases, questions, ordres",
+   "minutes": 35,
+   "programRef": "3e — Reported speech : statements, questions, commands (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Rapporter des phrases déclaratives, des questions et des ordres.",
+    "Adapter temps, pronoms et indicateurs de temps et de lieu."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-english-reported-speech-01",
+    "bepc-english-reported-speech-02",
+    "bepc-english-reported-speech-03",
+    "bepc-english-reported-speech-04",
+    "bepc-english-reported-speech-05",
+    "bepc-english-reported-speech-06"
+   ],
+   "selfCheck": [
+    "bepc-english-reported-speech-q1",
+    "bepc-english-reported-speech-q2",
+    "bepc-english-reported-speech-q3",
+    "bepc-english-reported-speech-q4",
+    "bepc-english-reported-speech-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Changements du direct au rapporté.",
+     "alt": "Tableau des changements de temps, de pronoms et d'indicateurs de temps.",
+     "figure": {
+      "kind": "shapes",
+      "w": 372,
+      "h": 324,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 176,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Direct",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 10,
+        "w": 176,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 35,
+        "text": "Reported",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "am / is / are",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 48,
+        "w": 176,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 73,
+        "text": "was / were",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "present simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 86,
+        "w": 176,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 111,
+        "text": "past simple",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "present perfect",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 124,
+        "w": 176,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 149,
+        "text": "past perfect",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "will / can",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 162,
+        "w": 176,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 187,
+        "text": "would / could",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "today / now",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 200,
+        "w": 176,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 225,
+        "text": "that day / then",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 238,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 263,
+        "text": "tomorrow",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 238,
+        "w": 176,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 263,
+        "text": "the next day",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 276,
+        "w": 176,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 301,
+        "text": "yesterday",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 186,
+        "y": 276,
+        "w": 176,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 301,
+        "text": "the day before",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Phrases déclaratives",
+     "md": "said / told + **that** + recul d'un temps.\n- “I am tired,” said Amina. → Amina said (that) she **was** tired.\n- “We will win,” they said. → They said they **would** win.\nAprès **told**, on ajoute la personne : told **me**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Questions",
+     "md": "Pas d'inversion et pas de do. Verbe introducteur : **asked** (+ if / whether pour oui/non ; mot interrogatif sinon).\n- “Do you like rice ?” → He asked **if** I **liked** rice.\n- “Where do you live ?” → She asked **where** I **lived**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ordres",
+     "md": "**told / asked + personne + to + verbe** ; négatif : **not to + verbe**.\n- “Open the door,” said the teacher. → The teacher told us **to open** the door.\n- “Don't run,” she said. → She told us **not to run**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : question",
+     "statement": "“Are you ready ?” the teacher asked Boris. Rapporte.",
+     "steps": [
+      {
+       "md": "Question oui/non : if."
+      },
+      {
+       "md": "are → was ; you → he."
+      }
+     ],
+     "answer": "**The teacher asked Boris if he was ready.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ordre",
+     "statement": "“Don't be late,” Mum told me. Rapporte.",
+     "steps": [
+      {
+       "md": "Ordre négatif : told + personne + not to + verbe."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**Mum told me not to be late.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « He asked me where did I live » → where **I lived**.\n- « She told me to not run » → told me **not to run**.\n- Oublier de changer les pronoms et now, today, here.\n- « He said me » → He told **me** / He said **to me**."
+    }
+   ],
+   "reviewNotes": [
+    "Les verbes introducteurs variés (advise, warn, suggest) pourraient dépasser le programme."
+   ]
+  },
+  {
+   "id": "bepc-english-relative-clauses",
+   "title": "Les propositions relatives",
+   "minutes": 28,
+   "programRef": "3e — Relative clauses : defining / non-defining (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer relatives déterminatives et explicatives.",
+    "Utiliser who, which, that, whose, where, when ; savoir supprimer le pronom."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-english-relative-clauses-01",
+    "bepc-english-relative-clauses-02",
+    "bepc-english-relative-clauses-03",
+    "bepc-english-relative-clauses-04",
+    "bepc-english-relative-clauses-05",
+    "bepc-english-relative-clauses-06"
+   ],
+   "selfCheck": [
+    "bepc-english-relative-clauses-q1",
+    "bepc-english-relative-clauses-q2",
+    "bepc-english-relative-clauses-q3",
+    "bepc-english-relative-clauses-q4",
+    "bepc-english-relative-clauses-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Les pronoms relatifs.",
+     "alt": "Tableau des pronoms relatifs who, which, that, whose, where et when.",
+     "figure": {
+      "kind": "shapes",
+      "w": 686,
+      "h": 248,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 146,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Word",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 10,
+        "w": 285,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 35,
+        "text": "Use",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 441,
+        "y": 10,
+        "w": 235,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 453,
+        "y": 35,
+        "text": "Example",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 146,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "who",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 48,
+        "w": 285,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 73,
+        "text": "people",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 441,
+        "y": 48,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 453,
+        "y": 73,
+        "text": "the girl who sings",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 146,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "which",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 86,
+        "w": 285,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 111,
+        "text": "things",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 441,
+        "y": 86,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 453,
+        "y": 111,
+        "text": "the book which I read",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 146,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "that",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 124,
+        "w": 285,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 149,
+        "text": "people / things (defining)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 441,
+        "y": 124,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 453,
+        "y": 149,
+        "text": "the bag that I bought",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 146,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "whose",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 162,
+        "w": 285,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 187,
+        "text": "possession",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 441,
+        "y": 162,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 453,
+        "y": 187,
+        "text": "the boy whose bike…",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 146,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "where / when",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 200,
+        "w": 285,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 225,
+        "text": "place / time",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 441,
+        "y": 200,
+        "w": 235,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 453,
+        "y": 225,
+        "text": "the town where I live",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Defining ou non-defining ?",
+     "md": "- **Defining** (nécessaire pour identifier) : pas de virgules, that possible : The man **who/that** lives next door is a vet.\n- **Non-defining** (information en plus) : entre virgules, **that interdit** : Mr Nkeng, **who** lives next door, is a vet."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Supprimer le pronom",
+     "md": "Quand le relatif est **complément** (pas sujet) d'une relative définie, on peut le supprimer :\n- The book **(which / that)** I bought is good. → The book I bought is good.\n- Impossible si le pronom est sujet : The man **who** called is my uncle (on ne peut pas dire « The man called… »)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : non-defining",
+     "statement": "Relie : Mr Mballa is my teacher. He comes from Maroua.",
+     "steps": [
+      {
+       "md": "Information supplémentaire : relative explicative avec virgules."
+      },
+      {
+       "md": "who remplace He."
+      }
+     ],
+     "answer": "**Mr Mballa, who comes from Maroua, is my teacher.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : possession",
+     "statement": "Relie : I know a girl. Her father is a pilot.",
+     "steps": [
+      {
+       "md": "« Her » exprime la possession : whose."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**I know a girl whose father is a pilot.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « The man who he is… » : pas de pronom répété.\n- Utiliser **that** dans une explicative : « Douala, that is big » est faux → which.\n- Confondre whose et who's (who is).\n- Utiliser which pour une personne."
+    }
+   ],
+   "reviewNotes": [
+    "Les relatives explicatives (non-defining) sont peut-être limitées au programme de 3e / seconde : à confirmer."
+   ]
+  },
+  {
+   "id": "bepc-english-question-tags",
+   "title": "Les question tags",
+   "minutes": 22,
+   "programRef": "3e — Question tags (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Former un question tag (auxiliaire + pronom).",
+    "Appliquer la règle « positif → négatif, négatif → positif »."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-english-question-tags-01",
+    "bepc-english-question-tags-02",
+    "bepc-english-question-tags-03",
+    "bepc-english-question-tags-04",
+    "bepc-english-question-tags-05",
+    "bepc-english-question-tags-06"
+   ],
+   "selfCheck": [
+    "bepc-english-question-tags-q1",
+    "bepc-english-question-tags-q2",
+    "bepc-english-question-tags-q3",
+    "bepc-english-question-tags-q4",
+    "bepc-english-question-tags-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La règle",
+     "md": "Phrase **affirmative** → tag **négatif** ; phrase **négative** → tag **affirmatif**. Le tag reprend l'auxiliaire (ou do / does / did) et le **pronom sujet**.\n- She is a nurse, **isn't she** ?\n- They don't live here, **do they** ?\n- You went home, **didn't you** ?"
+    },
+    {
+     "type": "illustration",
+     "caption": "Quelques question tags.",
+     "alt": "Tableau de phrases et de leurs question tags.",
+     "figure": {
+      "kind": "shapes",
+      "w": 372,
+      "h": 286,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 196,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Sentence",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 10,
+        "w": 156,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 35,
+        "text": "Tag",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "He can swim,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 48,
+        "w": 156,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 73,
+        "text": "can't he ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "She doesn't cook,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 86,
+        "w": 156,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 111,
+        "text": "does she ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "You like tea,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 124,
+        "w": 156,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 149,
+        "text": "don't you ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "They went out,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 162,
+        "w": 156,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 187,
+        "text": "didn't they ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "I am late,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 200,
+        "w": 156,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 225,
+        "text": "aren't I ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 238,
+        "w": 196,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 263,
+        "text": "Let's go,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 238,
+        "w": 156,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 218,
+        "y": 263,
+        "text": "shall we ?",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : auxiliaire présent",
+     "statement": "Complète : Boris plays football, ____ ?",
+     "steps": [
+      {
+       "md": "Présent simple sans auxiliaire : do/does."
+      },
+      {
+       "md": "Phrase affirmative → tag négatif ; sujet Boris = he."
+      }
+     ],
+     "answer": "**doesn't he ?**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : phrase négative",
+     "statement": "Complète : You haven't finished, ____ ?",
+     "steps": [
+      {
+       "md": "Phrase négative → tag affirmatif ; auxiliaire have."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**have you ?**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « He is tall, is he ? » : phrase positive → tag négatif.\n- Utiliser un nom dans le tag : « Amina is late, isn't Amina ? » → isn't **she** ?\n- Oublier l'auxiliaire modal : can / will / must.\n- I am → **aren't I ?** ; Let's → **shall we ?** ; ordre → **will you ?**"
+    }
+   ],
+   "reviewNotes": [
+    "Cas particuliers (I am → aren't I ; let's → shall we) : à confirmer comme exigibles."
+   ]
+  },
+  {
+   "id": "bepc-english-comparison",
+   "title": "La comparaison : comparatifs et superlatifs",
+   "minutes": 25,
+   "programRef": "3e — Comparison of adjectives and adverbs (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Former le comparatif et le superlatif des adjectifs courts et longs.",
+    "Utiliser as … as, less … than, the … the."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-english-comparison-01",
+    "bepc-english-comparison-02",
+    "bepc-english-comparison-03",
+    "bepc-english-comparison-04",
+    "bepc-english-comparison-05",
+    "bepc-english-comparison-06"
+   ],
+   "selfCheck": [
+    "bepc-english-comparison-q1",
+    "bepc-english-comparison-q2",
+    "bepc-english-comparison-q3",
+    "bepc-english-comparison-q4",
+    "bepc-english-comparison-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Comparatifs et superlatifs.",
+     "alt": "Tableau des adjectifs et de leurs formes de comparatif et superlatif.",
+     "figure": {
+      "kind": "shapes",
+      "w": 509,
+      "h": 286,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 117,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Adjective",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 10,
+        "w": 166,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 35,
+        "text": "Comparative",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 293,
+        "y": 10,
+        "w": 206,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 35,
+        "text": "Superlative",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "tall",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 48,
+        "w": 166,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 73,
+        "text": "taller",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 293,
+        "y": 48,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 73,
+        "text": "the tallest",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "big",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 86,
+        "w": 166,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 111,
+        "text": "bigger",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 293,
+        "y": 86,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 111,
+        "text": "the biggest",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "happy",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 124,
+        "w": 166,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 149,
+        "text": "happier",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 293,
+        "y": 124,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 149,
+        "text": "the happiest",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "beautiful",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 162,
+        "w": 166,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 187,
+        "text": "more beautiful",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 293,
+        "y": 162,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 187,
+        "text": "the most beautiful",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "good",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 200,
+        "w": 166,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 225,
+        "text": "better",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 293,
+        "y": 200,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 225,
+        "text": "the best",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 238,
+        "w": 117,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 263,
+        "text": "bad",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 127,
+        "y": 238,
+        "w": 166,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 139,
+        "y": 263,
+        "text": "worse",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 293,
+        "y": 238,
+        "w": 206,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 263,
+        "text": "the worst",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Règles",
+     "md": "- Adjectif court : **-er / the -est** (tall → taller → the tallest) ; consonne finale doublée (big → bigger) ; y → i (happy → happier).\n- Adjectif long (2 syllabes ou plus) : **more … / the most …**.\n- Comparatif + **than** : Douala is bigger **than** Buea.\n- Égalité : **as … as** : She is **as tall as** me."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Autres tournures",
+     "md": "- **less … than** / **the least** : This bag is less expensive than that one.\n- **not as … as** : Buea is not as hot as Garoua.\n- **the + comparatif, the + comparatif** : The more you practise, the better you speak."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : comparatif",
+     "statement": "Complète : Amina is (tall) than Boris.",
+     "steps": [
+      {
+       "md": "Adjectif court : taller + than."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**Amina is taller than Boris.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : superlatif",
+     "statement": "Complète : This is (beautiful) place in the village.",
+     "steps": [
+      {
+       "md": "Adjectif long : the most beautiful."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**This is the most beautiful place in the village.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « more taller » : double comparatif. → taller.\n- « the most tall » → the **tallest**.\n- « good → gooder » : irrégulier → better / best.\n- « than » et pas « that »."
+    }
+   ],
+   "reviewNotes": [
+    "Comparatif des adverbes seulement effleuré."
+   ]
+  },
+  {
+   "id": "bepc-english-linking-words",
+   "title": "Les mots de liaison",
+   "minutes": 25,
+   "programRef": "3e — Linking words and expressions (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Relier des idées de façon logique (cause, conséquence, opposition, but, addition).",
+    "Utiliser although, despite, however, so that, in order to."
+   ],
+   "prerequisites": [
+    "bepc-english-conditionals"
+   ],
+   "exercises": [
+    "bepc-english-linking-words-01",
+    "bepc-english-linking-words-02",
+    "bepc-english-linking-words-03",
+    "bepc-english-linking-words-04",
+    "bepc-english-linking-words-05",
+    "bepc-english-linking-words-06"
+   ],
+   "selfCheck": [
+    "bepc-english-linking-words-q1",
+    "bepc-english-linking-words-q2",
+    "bepc-english-linking-words-q3",
+    "bepc-english-linking-words-q4",
+    "bepc-english-linking-words-q5"
+   ],
+   "blocks": [
+    {
+     "type": "illustration",
+     "caption": "Les mots de liaison par fonction.",
+     "alt": "Tableau des mots de liaison classés par idée.",
+     "figure": {
+      "kind": "shapes",
+      "w": 501,
+      "h": 248,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 107,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 35,
+        "text": "Idea",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 10,
+        "w": 374,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 35,
+        "text": "Linking words",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 73,
+        "text": "cause",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 48,
+        "w": 374,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 73,
+        "text": "because, since, as",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 111,
+        "text": "result",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 86,
+        "w": 374,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 111,
+        "text": "so, therefore, as a result",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 149,
+        "text": "contrast",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 124,
+        "w": 374,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 149,
+        "text": "but, however, although, despite",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 187,
+        "text": "purpose",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 162,
+        "w": 374,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 187,
+        "text": "to, in order to, so that",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 200,
+        "w": 107,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 22,
+        "y": 225,
+        "text": "addition",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 117,
+        "y": 200,
+        "w": 374,
+        "h": 38,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129,
+        "y": 225,
+        "text": "and, moreover, besides, in addition",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Opposition",
+     "md": "- **although / though / even though** + sujet + verbe : **Although** it was late, we went out.\n- **despite / in spite of** + nom ou verbe en -ing : **Despite** the rain, we played. / **Despite** being tired, she worked.\n- **however** (début de phrase, virgule) : She is poor. **However**, she is happy."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "But, cause, conséquence",
+     "md": "- But : **to / in order to + verbe** : He studies **to** pass. ; **so that** + sujet + verbe : She spoke slowly **so that** we understood.\n- Cause : **because** + proposition ; **because of** + nom : because of the rain.\n- Conséquence : **so**, **therefore**, **as a result**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : despite",
+     "statement": "Réécris avec despite : Although it was raining, we played football.",
+     "steps": [
+      {
+       "md": "despite + nom : « the rain »."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**Despite the rain, we played football.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : but",
+     "statement": "Complète : I save money ____ buy a bicycle.",
+     "steps": [
+      {
+       "md": "But exprimé par un verbe : in order to / to."
+      },
+      {
+       "md": "On relit la phrase obtenue pour vérifier la forme du verbe et le sens."
+      }
+     ],
+     "answer": "**I save money in order to buy a bicycle.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « Despite of » → despite (sans of) ; in spite **of**.\n- « Although… but… » : un seul mot d'opposition.\n- Confondre because (+ proposition) et because of (+ nom).\n- Oublier la virgule après however."
+    }
+   ],
+   "reviewNotes": [
+    "Liste de connecteurs du programme officiel à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Complète : If you heat ice, it ____.",
+   "choices": [
+    "will melt",
+    "melts",
+    "would melts",
+    "melting"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Vérité générale : type 0.",
+   "id": "bepc-english-conditionals-01",
+   "tier": "application",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : If she ____ more, she would pass.",
+   "choices": [
+    "studies",
+    "will study",
+    "studied",
+    "had studied"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Type 2 : past simple.",
+   "id": "bepc-english-conditionals-02",
+   "tier": "application",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : If it ____ tomorrow, we will cancel the game.",
+   "choices": [
+    "will rain",
+    "rained",
+    "would rain",
+    "rains"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Type 1.",
+   "id": "bepc-english-conditionals-03",
+   "tier": "application",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : If I ____ you, I would apologise.",
+   "choices": [
+    "were",
+    "am",
+    "will be",
+    "would be"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Type 2 : were.",
+   "id": "bepc-english-conditionals-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : If he ____ rich, he would build a hospital.",
+   "choices": [
+    "is",
+    "will be",
+    "were",
+    "be to"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Type 2.",
+   "id": "bepc-english-conditionals-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Lis : « If I had a bicycle, I would go to school faster. If it rains tomorrow, I will take a taxi. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle phrase est au type 2 ?",
+     "choices": [
+      "If it rains tomorrow, I will take a taxi.",
+      "If I had a bicycle, I would go to school faster.",
+      "If you heat ice, it melts.",
+      "If it rained, I took a taxi."
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "If + past simple, would + base.",
+     "id": "bepc-english-conditionals-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris une phrase de type 1 et une phrase de type 2 sur ton avenir.",
+     "model": "If I pass my exam, I will go to high school. If I were a doctor, I would help sick people.",
+     "rubric": [
+      "Type 1 correct",
+      "Type 2 correct",
+      "Phrases cohérentes"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-english-conditionals-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-english-conditionals-06",
+   "tier": "examen",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel type exprime une situation imaginaire au présent ?",
+   "choices": [
+    "Type 2",
+    "Type 0",
+    "Type 1",
+    "Aucun type"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Type 2 = irréel présent.",
+   "id": "bepc-english-conditionals-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« If you mix red and blue, you ____ purple. »",
+   "choices": [
+    "will to get",
+    "would get to",
+    "getting",
+    "get"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Vérité générale : présent.",
+   "id": "bepc-english-conditionals-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis la phrase de type 2 correcte :",
+   "choices": [
+    "If I would be a bird, I would fly.",
+    "If I were a bird, I would fly.",
+    "If I am a bird, I would fly.",
+    "If I was a bird, I will fly."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "If I were…, I would…",
+   "id": "bepc-english-conditionals-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Unless » signifie…",
+   "choices": [
+    "because",
+    "if … not",
+    "although",
+    "while"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "unless = si … ne pas.",
+   "id": "bepc-english-conditionals-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « If it rains, I will stay », il s'agit du type…",
+   "choices": [
+    "1",
+    "0",
+    "2",
+    "3"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Present + will.",
+   "id": "bepc-english-conditionals-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-conditionals",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : A new school ____ next year.",
+   "choices": [
+    "will build",
+    "is build",
+    "will be built",
+    "was built"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Futur passif : will be + p.p.",
+   "id": "bepc-english-passive-voice-01",
+   "tier": "application",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : The windows ____ by the boys yesterday.",
+   "choices": [
+    "were cleaned",
+    "was cleaned",
+    "are cleaned",
+    "were cleaning"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pluriel + passé.",
+   "id": "bepc-english-passive-voice-02",
+   "tier": "application",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : The homework ____ already ____.",
+   "choices": [
+    "have / done",
+    "is / did",
+    "has / been done",
+    "was / do"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Present perfect passif.",
+   "id": "bepc-english-passive-voice-03",
+   "tier": "application",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passif : Mballa is painting the wall.",
+   "choices": [
+    "The wall is painted by Mballa.",
+    "The wall is being painted by Mballa.",
+    "The wall was being painted by Mballa.",
+    "The wall is painting by Mballa."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 3,
+   "explanation": "Present continuous : is being + p.p.",
+   "id": "bepc-english-passive-voice-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passif : People speak French in Gabon.",
+   "choices": [
+    "French is spoken in Gabon.",
+    "French speaks in Gabon.",
+    "French was spoken in Gabon.",
+    "French is spoke in Gabon."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Agent « people » supprimé.",
+   "id": "bepc-english-passive-voice-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Transforme en phrases passives : (1) Teachers will correct the tests. (2) The students have cleaned the classroom.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Phrase (1) :",
+     "choices": [
+      "The tests will correct by the teachers.",
+      "The tests are corrected by the teachers.",
+      "The tests would be corrected.",
+      "The tests will be corrected by the teachers."
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "will be + p.p.",
+     "id": "bepc-english-passive-voice-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Phrase (2) :",
+     "choices": [
+      "The classroom has been cleaned by the students.",
+      "The classroom is cleaned by the students.",
+      "The classroom has cleaned by the students.",
+      "The classroom was been cleaned."
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "has been + p.p.",
+     "id": "bepc-english-passive-voice-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris une phrase passive sur ton école (présent ou passé).",
+     "model": "Our school was built in 1990. English is taught every day.",
+     "rubric": [
+      "be + participe passé correct",
+      "Sens clair"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-english-passive-voice-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-english-passive-voice-06",
+   "tier": "examen",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passif de « They are building a house » :",
+   "choices": [
+    "A house is being built.",
+    "A house builds.",
+    "A house was built being.",
+    "A house is build."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "is being + built.",
+   "id": "bepc-english-passive-voice-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« The letter ____ yesterday. »",
+   "choices": [
+    "is sent",
+    "sent",
+    "was sent",
+    "has send"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Passé : was sent.",
+   "id": "bepc-english-passive-voice-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe n'a pas de passif ?",
+   "choices": [
+    "build",
+    "write",
+    "arrive",
+    "make"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Verbe intransitif.",
+   "id": "bepc-english-passive-voice-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« by + agent » est…",
+   "choices": [
+    "toujours obligatoire",
+    "interdit",
+    "seulement au futur",
+    "facultatif quand l'agent est évident"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On l'omet si inutile.",
+   "id": "bepc-english-passive-voice-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passif correct :",
+   "choices": [
+    "The bridge must be repaired.",
+    "The bridge must repaired.",
+    "The bridge must be repair.",
+    "The bridge must been repaired."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "must be + p.p.",
+   "id": "bepc-english-passive-voice-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-passive-voice",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Rapporte : “I like tea,” said Amina.",
+   "choices": [
+    "Amina said that she likes tea.",
+    "Amina said that she liked tea.",
+    "Amina said that I liked tea.",
+    "Amina said me she liked tea."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "like → liked ; I → she.",
+   "id": "bepc-english-reported-speech-01",
+   "tier": "application",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Rapporte : “Where do you live ?” he asked me.",
+   "choices": [
+    "He asked me where I lived.",
+    "He asked me where did I live.",
+    "He asked me where I live now.",
+    "He asked me that where I lived."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pas d'inversion.",
+   "id": "bepc-english-reported-speech-02",
+   "tier": "application",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Rapporte : “Close the window,” she said to him.",
+   "choices": [
+    "She told him close the window.",
+    "She told him to close the window.",
+    "She said him to close the window.",
+    "She asked him that closes the window."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "told + personne + to + verbe.",
+   "id": "bepc-english-reported-speech-03",
+   "tier": "application",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Rapporte : “Have you finished ?” she asked.",
+   "choices": [
+    "She asked if I have finished.",
+    "She asked have I finished.",
+    "She asked if had I finished.",
+    "She asked if I had finished."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 3,
+   "explanation": "present perfect → past perfect.",
+   "id": "bepc-english-reported-speech-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Rapporte : “I will come tomorrow,” Boris said.",
+   "choices": [
+    "Boris said that he will come tomorrow.",
+    "Boris said that he would come the next day.",
+    "Boris said that I would come the next day.",
+    "Boris said that he would come tomorrow."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "will → would ; tomorrow → the next day.",
+   "id": "bepc-english-reported-speech-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Rapporte les phrases suivantes : (1) “I am writing a letter,” said Nkeng. (2) “Do you speak English ?” the officer asked her. (3) “Don't touch the wire,” the electrician told us.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Phrase (1) :",
+     "choices": [
+      "Nkeng said that he is writing a letter.",
+      "Nkeng said I was writing a letter.",
+      "Nkeng told that he was writing.",
+      "Nkeng said that he was writing a letter."
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "is writing → was writing.",
+     "id": "bepc-english-reported-speech-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Phrase (2) :",
+     "choices": [
+      "The officer asked her if she spoke English.",
+      "The officer asked her do she speak English.",
+      "The officer asked her if does she speak English.",
+      "The officer asked her if she speaks English now."
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "if + pas d'inversion.",
+     "id": "bepc-english-reported-speech-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Phrase (3) :",
+     "choices": [
+      "The electrician told us to not touching the wire.",
+      "The electrician said us don't touch the wire.",
+      "The electrician told not to touch.",
+      "The electrician told us not to touch the wire."
+     ],
+     "answer": 3,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "told + us + not to + base.",
+     "id": "bepc-english-reported-speech-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-english-reported-speech-06",
+   "tier": "examen",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« now » devient dans le discours rapporté :",
+   "choices": [
+    "today",
+    "then",
+    "here",
+    "tomorrow"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "now → then.",
+   "id": "bepc-english-reported-speech-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Question oui/non rapportée : on utilise…",
+   "choices": [
+    "that",
+    "to",
+    "if ou whether",
+    "not to"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "asked if.",
+   "id": "bepc-english-reported-speech-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Ordre négatif rapporté :",
+   "choices": [
+    "said + don't",
+    "asked that not",
+    "told + personne + not to + verbe",
+    "told + personne + to not"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "not to + verbe.",
+   "id": "bepc-english-reported-speech-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« She said, “I can swim.” » →",
+   "choices": [
+    "She said that I can swim.",
+    "She said that she can to swim.",
+    "She said that she could swim.",
+    "She said she cans swim."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "can → could.",
+   "id": "bepc-english-reported-speech-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« “Why are you crying ?” he asked » →",
+   "choices": [
+    "He asked why was I crying.",
+    "He asked why I am crying.",
+    "He asked why I was crying.",
+    "He asked if why I was crying."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Mot interrogatif + ordre normal.",
+   "id": "bepc-english-reported-speech-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-reported-speech",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : The boy ____ is singing is my cousin.",
+   "choices": [
+    "which",
+    "whose",
+    "where",
+    "who"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Personne sujet.",
+   "id": "bepc-english-relative-clauses-01",
+   "tier": "application",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Douala, ____ is a big port, is in the Littoral.",
+   "choices": [
+    "which",
+    "that",
+    "who",
+    "where is"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Non-defining : which (jamais that).",
+   "id": "bepc-english-relative-clauses-02",
+   "tier": "application",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : The woman ____ car was stolen called the police.",
+   "choices": [
+    "who",
+    "which",
+    "that",
+    "whose"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Possession : whose.",
+   "id": "bepc-english-relative-clauses-03",
+   "tier": "application",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans quelle phrase peut-on supprimer le relatif ?",
+   "choices": [
+    "The song (that) she sang was lovely.",
+    "The girl (who) sang is my sister.",
+    "The man (who) called is here.",
+    "The dog (which) barked ran away."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 3,
+   "explanation": "Le relatif est complément dans la première.",
+   "id": "bepc-english-relative-clauses-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Relie : I live in a town. It is near the sea.",
+   "choices": [
+    "I live in a town who is near the sea.",
+    "I live in a town where it is near the sea.",
+    "I live in a town which is near the sea.",
+    "I live in a town whose near the sea."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Chose sujet : which.",
+   "id": "bepc-english-relative-clauses-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Relie les phrases : (1) This is the house. I was born there. (2) Amina is my best friend. She lives in Ngaoundéré.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Phrase (1) :",
+     "choices": [
+      "This is the house who I was born.",
+      "This is the house which where I was born.",
+      "This is the house whose I was born.",
+      "This is the house where I was born."
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Lieu : where.",
+     "id": "bepc-english-relative-clauses-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Phrase (2) :",
+     "choices": [
+      "Amina, who lives in Ngaoundéré, is my best friend.",
+      "Amina, that lives in Ngaoundéré, is my best friend.",
+      "Amina, which lives in Ngaoundéré, is my best friend.",
+      "Amina who she lives in Ngaoundéré is my best friend."
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Explicative : who avec virgules.",
+     "id": "bepc-english-relative-clauses-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris deux phrases sur ta ville avec where et which.",
+     "model": "Bamenda is a city where I have many friends. It has a market which is very busy.",
+     "rubric": [
+      "2 relatifs corrects",
+      "Phrases complètes"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-english-relative-clauses-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-english-relative-clauses-06",
+   "tier": "examen",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une relative explicative, that est…",
+   "choices": [
+    "obligatoire",
+    "impossible",
+    "toujours possible",
+    "remplacé par whose"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Non-defining : who / which.",
+   "id": "bepc-english-relative-clauses-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« The book ____ I bought is red. » On peut supprimer…",
+   "choices": [
+    "The",
+    "book",
+    "which / that",
+    "is"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Relatif complément : supprimable.",
+   "id": "bepc-english-relative-clauses-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« whose » exprime…",
+   "choices": [
+    "la possession",
+    "le lieu",
+    "le temps",
+    "la cause"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "whose = dont.",
+   "id": "bepc-english-relative-clauses-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« This is the day ____ we met. »",
+   "choices": [
+    "who",
+    "when",
+    "whose",
+    "what is"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Temps : when.",
+   "id": "bepc-english-relative-clauses-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les virgules entourent une relative…",
+   "choices": [
+    "définie",
+    "au passé",
+    "au passif",
+    "explicative (non-defining)"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Information en plus.",
+   "id": "bepc-english-relative-clauses-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-relative-clauses",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : She is tired, ____ ?",
+   "choices": [
+    "is she",
+    "doesn't she",
+    "isn't he",
+    "isn't she"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Affirmatif → tag négatif.",
+   "id": "bepc-english-question-tags-01",
+   "tier": "application",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : They don't speak French, ____ ?",
+   "choices": [
+    "don't they",
+    "are they",
+    "do they",
+    "did they"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Négatif → tag affirmatif.",
+   "id": "bepc-english-question-tags-02",
+   "tier": "application",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : You went to the market, ____ ?",
+   "choices": [
+    "weren't you",
+    "didn't you",
+    "did you",
+    "don't you"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Past simple : didn't.",
+   "id": "bepc-english-question-tags-03",
+   "tier": "application",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Let's play, ____ ?",
+   "choices": [
+    "will we",
+    "don't we",
+    "shall we",
+    "let us"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Let's → shall we ?",
+   "id": "bepc-english-question-tags-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Open the door, ____ ?",
+   "choices": [
+    "do you",
+    "did you",
+    "will you",
+    "are you"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Ordre → will you ?",
+   "id": "bepc-english-question-tags-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Complète les tags : (1) Amina can swim, ____ ? (2) Nkeng hasn't come, ____ ? (3) There are many students, ____ ?",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "(1)",
+     "choices": [
+      "can she",
+      "can't she",
+      "doesn't she",
+      "is she"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "can → can't she.",
+     "id": "bepc-english-question-tags-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "(2)",
+     "choices": [
+      "hasn't he",
+      "has he",
+      "does he",
+      "is he"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Négatif → has he.",
+     "id": "bepc-english-question-tags-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "(3)",
+     "choices": [
+      "don't there",
+      "aren't there",
+      "aren't they",
+      "are there"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "There are → aren't there ?",
+     "id": "bepc-english-question-tags-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-english-question-tags-06",
+   "tier": "examen",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« He likes rice, ____ ? »",
+   "choices": [
+    "isn't he",
+    "doesn't he",
+    "does he",
+    "didn't he"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Présent simple he → doesn't he.",
+   "id": "bepc-english-question-tags-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« You aren't ready, ____ ? »",
+   "choices": [
+    "are you",
+    "aren't you",
+    "do you",
+    "were you"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Négatif → affirmatif.",
+   "id": "bepc-english-question-tags-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« I am right, ____ ? »",
+   "choices": [
+    "amn't I",
+    "aren't I",
+    "am not I",
+    "isn't I"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Forme spéciale : aren't I ?",
+   "id": "bepc-english-question-tags-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« She will come, ____ ? »",
+   "choices": [
+    "won't she",
+    "doesn't she",
+    "will she",
+    "isn't she"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "will → won't.",
+   "id": "bepc-english-question-tags-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le pronom du tag remplace…",
+   "choices": [
+    "le verbe",
+    "le complément",
+    "l'adjectif",
+    "le sujet"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pronom sujet.",
+   "id": "bepc-english-question-tags-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-question-tags",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Mount Cameroon is ____ than Mount Oku.",
+   "choices": [
+    "more high",
+    "the highest",
+    "high",
+    "higher"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Adjectif court : higher.",
+   "id": "bepc-english-comparison-01",
+   "tier": "application",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : This is the ____ day of the year.",
+   "choices": [
+    "hotter",
+    "hottest",
+    "most hot",
+    "more hot"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Superlatif : hot → hottest.",
+   "id": "bepc-english-comparison-02",
+   "tier": "application",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : She is ____ intelligent than her brother.",
+   "choices": [
+    "most",
+    "intelligenter",
+    "as",
+    "more"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Adjectif long : more.",
+   "id": "bepc-english-comparison-03",
+   "tier": "application",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : His English is ____ than mine.",
+   "choices": [
+    "better",
+    "gooder",
+    "more good",
+    "best"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "good → better.",
+   "id": "bepc-english-comparison-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : The more you read, ____ you learn.",
+   "choices": [
+    "more",
+    "the most",
+    "much",
+    "the more"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "The more…, the more…",
+   "id": "bepc-english-comparison-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Voici des informations : Boris is 1.60 m tall. Amina is 1.65 m tall. Nkeng is 1.70 m tall.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Complète : Nkeng is ____ of the three.",
+     "choices": [
+      "taller",
+      "the tallest",
+      "the most tall",
+      "more tall"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Superlatif.",
+     "id": "bepc-english-comparison-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Complète : Boris is ____ Amina.",
+     "choices": [
+      "more short than",
+      "as tall as",
+      "the shortest than",
+      "shorter than"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Comparatif de short.",
+     "id": "bepc-english-comparison-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Compare deux personnes ou deux lieux que tu connais en deux phrases (comparatif et superlatif).",
+     "model": "My brother is older than me. He is the tallest in my family.",
+     "rubric": [
+      "Comparatif correct",
+      "Superlatif correct"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-english-comparison-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-english-comparison-06",
+   "tier": "examen",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comparatif de « good » :",
+   "choices": [
+    "gooder",
+    "better",
+    "more good",
+    "best"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Irrégulier.",
+   "id": "bepc-english-comparison-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Superlatif de « beautiful » :",
+   "choices": [
+    "the most beautiful",
+    "the beautifulest",
+    "more beautiful",
+    "beautifuller"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Adjectif long.",
+   "id": "bepc-english-comparison-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« as … as » exprime…",
+   "choices": [
+    "l'égalité",
+    "la supériorité",
+    "l'infériorité",
+    "la cause"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "as tall as = aussi grand que.",
+   "id": "bepc-english-comparison-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comparatif de « big » :",
+   "choices": [
+    "biger",
+    "more big",
+    "bigest",
+    "bigger"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Consonne doublée.",
+   "id": "bepc-english-comparison-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Buea is ____ Garoua.",
+   "choices": [
+    "hot than less",
+    "less hot than",
+    "least hot than",
+    "less hot that"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "less … than.",
+   "id": "bepc-english-comparison-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-comparison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : ____ he was ill, he went to school.",
+   "choices": [
+    "Although",
+    "Because",
+    "Despite",
+    "So"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "although + proposition.",
+   "id": "bepc-english-linking-words-01",
+   "tier": "application",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : She stayed at home ____ the rain.",
+   "choices": [
+    "because",
+    "although",
+    "despite of",
+    "because of"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "because of + nom.",
+   "id": "bepc-english-linking-words-02",
+   "tier": "application",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : He was late. ____, he got a good mark.",
+   "choices": [
+    "Because",
+    "However",
+    "Therefore",
+    "Moreover"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Contraste.",
+   "id": "bepc-english-linking-words-03",
+   "tier": "application",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : ____ the heavy traffic, we arrived on time.",
+   "choices": [
+    "Despite",
+    "Although",
+    "Because",
+    "Despite of"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Despite + nom.",
+   "id": "bepc-english-linking-words-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : I speak slowly ____ everybody understands.",
+   "choices": [
+    "so",
+    "in order",
+    "so that",
+    "because of"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "but : so that + proposition.",
+   "id": "bepc-english-linking-words-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Relie les phrases : (1) It was cold. We went swimming. (although) (2) Amina studied hard. She wanted to pass. (in order to)",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Phrase (1) :",
+     "choices": [
+      "Although it was cold, but we went swimming.",
+      "Despite it was cold, we went swimming.",
+      "Because it was cold, we went swimming.",
+      "Although it was cold, we went swimming."
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "although + proposition.",
+     "id": "bepc-english-linking-words-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris la phrase (2) avec in order to, puis une phrase avec because of.",
+     "model": "Amina studied hard in order to pass. We stayed home because of the rain.",
+     "rubric": [
+      "in order to + base",
+      "because of + nom",
+      "Phrases correctes"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-english-linking-words-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-english-linking-words-06",
+   "tier": "examen",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« in spite of » s'utilise avec…",
+   "choices": [
+    "un nom ou -ing",
+    "une proposition entière avec sujet",
+    "un adjectif seul",
+    "un futur"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "in spite of + nom / -ing.",
+   "id": "bepc-english-linking-words-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Therefore » exprime…",
+   "choices": [
+    "l'opposition",
+    "la conséquence",
+    "la cause",
+    "le but"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Therefore = donc.",
+   "id": "bepc-english-linking-words-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« He ran ____ catch the bus. »",
+   "choices": [
+    "because",
+    "although",
+    "in order to",
+    "so"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "But : in order to + verbe.",
+   "id": "bepc-english-linking-words-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis la phrase correcte avec despite :",
+   "choices": [
+    "Despite the noise, he slept.",
+    "Despite of the noise, he slept.",
+    "Although the noise, he slept.",
+    "Despite the noise, but he slept."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "despite + nom.",
+   "id": "bepc-english-linking-words-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Moreover » sert à…",
+   "choices": [
+    "ajouter une idée",
+    "s'opposer",
+    "conclure",
+    "donner la cause"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Moreover = de plus.",
+   "id": "bepc-english-linking-words-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-english-linking-words",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

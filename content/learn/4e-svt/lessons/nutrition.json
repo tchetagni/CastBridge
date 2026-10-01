@@ -1,0 +1,898 @@
+{
+ "chapter": "4e-svt-nutrition",
+ "lessons": [
+  {
+   "id": "4e-svt-digestion",
+   "title": "Aliments, digestion et absorption",
+   "minutes": 30,
+   "programRef": "4e — Digestion, absorption, rôle des aliments (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Classer les aliments et nommer les nutriments.",
+    "Décrire le trajet des aliments dans le tube digestif.",
+    "Expliquer la digestion (transformation en nutriments) et l'absorption intestinale."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-svt-digestion-01",
+    "4e-svt-digestion-02",
+    "4e-svt-digestion-03",
+    "4e-svt-digestion-04",
+    "4e-svt-digestion-05",
+    "4e-svt-digestion-06"
+   ],
+   "selfCheck": [
+    "4e-svt-digestion-q1",
+    "4e-svt-digestion-q2",
+    "4e-svt-digestion-q3",
+    "4e-svt-digestion-q4",
+    "4e-svt-digestion-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Aliments et nutriments",
+     "md": "Un **aliment** (riz, poisson, banane plantain, huile) est un produit que l'on mange. Il contient des substances : glucides (sucres, amidon), lipides (graisses), protides (protéines), eau, sels minéraux et vitamines. Les **nutriments** sont les petites substances, issues de la digestion, qui passent dans le sang : glucose, acides aminés, acides gras et glycérol."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Rôle des aliments",
+     "md": "- **Aliments énergétiques** : glucides et lipides (manioc, igname, huile de palme) — ils donnent de l'énergie.\n- **Aliments bâtisseurs** : protides (poisson, œufs, haricots, viande) — ils font grandir et réparent le corps.\n- **Aliments protecteurs** : fruits et légumes (vitamines, sels minéraux) — ils protègent contre les maladies.\n- L'**eau** est indispensable à toutes les fonctions."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le tube digestif simplifié, de la bouche à l'anus.",
+     "alt": "Six cases reliées par des flèches : bouche, œsophage, estomac, intestin grêle, gros intestin, anus, avec le rôle de chaque organe.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 340,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 150,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 32.0,
+        "text": "Bouche",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 95.0,
+        "y1": 44,
+        "x2": 95.0,
+        "y2": 62,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 62,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 84.0,
+        "text": "Œsophage",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 95.0,
+        "y1": 96,
+        "x2": 95.0,
+        "y2": 114,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 114,
+        "w": 150,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 136.0,
+        "text": "Estomac",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 95.0,
+        "y1": 148,
+        "x2": 95.0,
+        "y2": 166,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 166,
+        "w": 150,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 188.0,
+        "text": "Intestin grêle",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 95.0,
+        "y1": 200,
+        "x2": 95.0,
+        "y2": 218,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 218,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 240.0,
+        "text": "Gros intestin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 95.0,
+        "y1": 252,
+        "x2": 95.0,
+        "y2": 270,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 270,
+        "w": 150,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 292.0,
+        "text": "Anus",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 33,
+        "text": "mastication, salive",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 85,
+        "text": "passage vers l'estomac",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 137,
+        "text": "brassage, suc gastrique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 189,
+        "text": "absorption des nutriments",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 241,
+        "text": "absorption de l'eau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 293,
+        "text": "sortie des selles",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Digestion et absorption",
+     "md": "La **digestion** est la transformation des aliments en nutriments, grâce à des **enzymes** présentes dans les sucs digestifs (salive, suc gastrique, suc pancréatique, bile…). Par exemple, la salive transforme l'amidon en sucres plus simples. L'**absorption** est le passage des nutriments, dans l'intestin grêle, vers le sang : la paroi est très plissée (villosités), ce qui donne une grande surface d'échange."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le trajet d'un repas",
+     "statement": "Boris mange du riz avec du poisson. Indique le trajet et ce qui devient du riz.",
+     "steps": [
+      {
+       "md": "Bouche : mastication, la salive commence à transformer l'amidon du riz."
+      },
+      {
+       "md": "Œsophage, puis estomac : brassage avec le suc gastrique, les protéines du poisson commencent à être digérées."
+      },
+      {
+       "md": "Intestin grêle : fin de la digestion ; le glucose et les acides aminés passent dans le sang."
+      },
+      {
+       "md": "Gros intestin : absorption de l'eau ; les restes non digérés forment les selles."
+      }
+     ],
+     "answer": "**Bouche → œsophage → estomac → intestin grêle → gros intestin → anus.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : l'eau iodée",
+     "statement": "On verse de l'eau iodée (brun-orangé) sur un morceau de pain, puis sur du sucre. Que voit-on ?",
+     "steps": [
+      {
+       "md": "L'eau iodée est un réactif de l'amidon : elle devient bleu-violet en sa présence."
+      },
+      {
+       "md": "Le pain contient de l'amidon : la tache devient bleu-violet."
+      },
+      {
+       "md": "Le sucre ne contient pas d'amidon : la couleur reste brun-orangé."
+      }
+     ],
+     "answer": "**Bleu-violet sur le pain (amidon), pas de changement sur le sucre.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **aliment** et **nutriment** : le riz est un aliment, le glucose est un nutriment.\n- Croire que la digestion se fait seulement dans l'estomac : elle se termine dans l'intestin grêle.\n- Croire que l'absorption a lieu à l'anus ou dans l'estomac : elle a lieu surtout dans l'intestin grêle."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire exigé (nutriments, aliments simples, enzymes) et le niveau de détail sur les enzymes (amylase, pepsine).",
+    "Les dosages de besoins énergétiques ne sont pas donnés volontairement."
+   ]
+  },
+  {
+   "id": "4e-svt-equilibre",
+   "title": "Alimentation équilibrée et maladies de la nutrition",
+   "minutes": 25,
+   "programRef": "4e — Alimentation équilibrée, malnutrition (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir une ration équilibrée.",
+    "Reconnaître des carences et des excès alimentaires.",
+    "Proposer un repas équilibré avec des produits locaux."
+   ],
+   "prerequisites": [
+    "4e-svt-digestion"
+   ],
+   "exercises": [
+    "4e-svt-equilibre-01",
+    "4e-svt-equilibre-02",
+    "4e-svt-equilibre-03",
+    "4e-svt-equilibre-04",
+    "4e-svt-equilibre-05",
+    "4e-svt-equilibre-06"
+   ],
+   "selfCheck": [
+    "4e-svt-equilibre-q1",
+    "4e-svt-equilibre-q2",
+    "4e-svt-equilibre-q3",
+    "4e-svt-equilibre-q4",
+    "4e-svt-equilibre-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ration alimentaire équilibrée",
+     "md": "Une ration est **équilibrée** quand elle couvre les besoins du corps en énergie, en matériaux de construction et en protection, en quantité suffisante et en variété. Les besoins varient avec l'âge, l'activité et l'état de santé (un adolescent, une femme enceinte ou un travailleur de force n'ont pas les mêmes besoins)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un repas équilibré associe des aliments de chaque famille (proportions indicatives, schéma).",
+     "alt": "Diagramme en barres : plus d'aliments énergétiques, puis eau, aliments bâtisseurs et protecteurs.",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Énergie",
+        "value": 5,
+        "color": "orange"
+       },
+       {
+        "label": "Bâtir",
+        "value": 3,
+        "color": "red"
+       },
+       {
+        "label": "Protéger",
+        "value": 3,
+        "color": "green"
+       },
+       {
+        "label": "Eau",
+        "value": 4,
+        "color": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Carences et excès",
+     "md": "- **Carence** : manque d'un nutriment. Exemples : manque de protéines chez le jeune enfant (kwashiorkor), manque de fer (anémie), manque de vitamine A (troubles de la vue), manque d'iode (goitre).\n- **Excès** : trop de sucres et de graisses favorise l'obésité et le diabète.\n- **Sous-alimentation** : trop peu de nourriture, le corps maigrit et s'affaiblit."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : composer un repas",
+     "statement": "Amina propose : du manioc et de l'huile de palme. Que lui manque-t-il ?",
+     "steps": [
+      {
+       "md": "Le manioc et l'huile sont énergétiques."
+      },
+      {
+       "md": "Il manque un aliment bâtisseur (poisson, haricots, œuf) et un aliment protecteur (légumes, fruits)."
+      }
+     ],
+     "answer": "**Ajouter du poisson ou des haricots, et des légumes ou un fruit.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : reconnaître une carence",
+     "statement": "Un enfant ne mange presque que du manioc ; son ventre gonfle et il est fatigué. Quel type de problème est possible ?",
+     "steps": [
+      {
+       "md": "Son repas est riche en glucides mais pauvre en protéines."
+      },
+      {
+       "md": "Une carence en protéines est possible (par exemple le kwashiorkor)."
+      },
+      {
+       "md": "Seul un agent de santé peut poser un diagnostic : on le consulte."
+      }
+     ],
+     "answer": "**Une carence en protéines est possible ; consulter un agent de santé.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'une grande quantité suffit : la **variété** compte autant.\n- Croire que le même repas convient à tous.\n- Penser qu'on peut se soigner d'une carence sans avis médical : l'aliment aide, mais le diagnostic revient au personnel de santé."
+    }
+   ],
+   "reviewNotes": [
+    "Santé : formulation prudente. À faire relire par un agent de santé (kwashiorkor, anémie, carence en iode).",
+    "Aucun chiffre de ration journalière volontairement indiqué."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe est le lieu principal de l'absorption des nutriments ?",
+   "choices": [
+    "L'estomac",
+    "L'œsophage",
+    "La bouche",
+    "L'intestin grêle"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les nutriments passent dans le sang à travers la paroi de l'intestin grêle, très plissée.",
+   "id": "4e-svt-digestion-01",
+   "tier": "application",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque aliment à son rôle principal.",
+   "pairs": [
+    [
+     "Huile de palme",
+     "Énergétique"
+    ],
+    [
+     "Poisson",
+     "Bâtisseur"
+    ],
+    [
+     "Orange",
+     "Protecteur"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Les lipides et glucides donnent l'énergie ; les protides construisent ; les fruits apportent vitamines et sels minéraux.",
+   "id": "4e-svt-digestion-02",
+   "tier": "application",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le glucose est un nutriment.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le glucose résulte de la digestion des glucides et passe dans le sang.",
+   "id": "4e-svt-digestion-03",
+   "tier": "application",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un réactif devient bleu-violet sur une purée de manioc. Que contient-elle ?",
+   "choices": [
+    "Des protéines",
+    "De l'amidon",
+    "Des vitamines",
+    "Du sel"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'eau iodée devient bleu-violet en présence d'amidon, abondant dans le manioc.",
+   "id": "4e-svt-digestion-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi la grande surface de l'intestin grêle est utile.",
+   "model": "La paroi de l'intestin grêle est très plissée (villosités) : la surface de contact avec les nutriments est très grande, donc beaucoup de nutriments passent rapidement dans le sang.",
+   "rubric": [
+    "Parle des plis ou villosités",
+    "Parle de la grande surface d'échange",
+    "Relie à l'absorption vers le sang"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-digestion-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng avale un morceau de pain. Pendant la mastication, la salive agit sur l'amidon.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le nom de ces substances de la salive qui transforment les aliments ?",
+     "choices": [
+      "Des vitamines",
+      "Des sels minéraux",
+      "Des enzymes",
+      "Des fibres"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les sucs digestifs contiennent des enzymes.",
+     "id": "4e-svt-digestion-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique la différence entre digestion et absorption.",
+     "model": "La digestion transforme les aliments en nutriments simples ; l'absorption est le passage de ces nutriments vers le sang à travers la paroi de l'intestin grêle.",
+     "rubric": [
+      "Définir la digestion",
+      "Définir l'absorption",
+      "Citer l'intestin grêle"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-digestion-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-digestion-06",
+   "tier": "examen",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel aliment est surtout un aliment bâtisseur ?",
+   "choices": [
+    "L'huile",
+    "Les haricots",
+    "Le sucre",
+    "Le sel"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les haricots sont riches en protides.",
+   "id": "4e-svt-digestion-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle principal du gros intestin ?",
+   "choices": [
+    "Absorber le glucose",
+    "Fabriquer la bile",
+    "Broyer les aliments",
+    "Absorber l'eau"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le gros intestin récupère l'eau et forme les selles.",
+   "id": "4e-svt-digestion-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'appelle le passage des nutriments dans le sang ?",
+   "choices": [
+    "L'absorption",
+    "La mastication",
+    "L'excrétion",
+    "La fécondation"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'absorption fait passer les nutriments de l'intestin vers le sang.",
+   "id": "4e-svt-digestion-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nutriment provient de la digestion de l'amidon ?",
+   "choices": [
+    "Le glucose",
+    "Les acides aminés",
+    "Le glycérol",
+    "L'eau"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'amidon est un glucide : il donne des sucres simples dont le glucose.",
+   "id": "4e-svt-digestion-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans quel ordre trouve-t-on ces organes ?",
+   "choices": [
+    "Estomac, œsophage, intestin grêle",
+    "Œsophage, estomac, intestin grêle",
+    "Intestin grêle, estomac, œsophage",
+    "Œsophage, intestin grêle, estomac"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le bol alimentaire descend par l'œsophage, puis l'estomac, puis l'intestin grêle.",
+   "id": "4e-svt-digestion-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un manque de protéines chez un jeune enfant peut causer :",
+   "choices": [
+    "Le paludisme",
+    "Le kwashiorkor",
+    "La rougeole",
+    "Le goitre"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le kwashiorkor est une forme de malnutrition due surtout à un manque de protéines.",
+   "id": "4e-svt-equilibre-01",
+   "tier": "application",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les fruits et légumes sont des aliments protecteurs.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils apportent vitamines et sels minéraux.",
+   "id": "4e-svt-equilibre-02",
+   "tier": "application",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel repas est le plus équilibré ?",
+   "choices": [
+    "Plantain seul",
+    "Plantain, poisson et légumes",
+    "Beignets et sucre",
+    "Huile et sel"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il associe énergie, protéines et protection.",
+   "id": "4e-svt-equilibre-03",
+   "tier": "application",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque carence à sa conséquence possible.",
+   "pairs": [
+    [
+     "Manque de fer",
+     "Anémie"
+    ],
+    [
+     "Manque d'iode",
+     "Goitre"
+    ],
+    [
+     "Manque de protéines",
+     "Kwashiorkor"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque carence est liée à l'absence d'un nutriment précis.",
+   "id": "4e-svt-equilibre-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Propose un repas équilibré avec des aliments disponibles dans ta région et classe chaque aliment.",
+   "model": "Exemple : riz (énergétique), sauce arachide et poisson (bâtisseurs), feuilles de légumes et papaye (protecteurs), eau.",
+   "rubric": [
+    "Au moins un aliment de chaque catégorie",
+    "Aliments réalistes",
+    "Classement correct"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-equilibre-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa mange chaque jour beaucoup de beignets sucrés et de boissons sucrées, peu de légumes.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel risque est lié à un excès de sucres et de graisses ?",
+     "choices": [
+      "L'obésité",
+      "L'anémie par manque de fer",
+      "Le goitre",
+      "La rougeole"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les sucres et graisses en excès sont stockés.",
+     "id": "4e-svt-equilibre-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Donne deux conseils pour rééquilibrer son alimentation.",
+     "model": "Manger plus de légumes et de fruits, réduire les boissons sucrées, ajouter une source de protéines comme le poisson ou les haricots.",
+     "rubric": [
+      "Un premier conseil pertinent",
+      "Un second conseil pertinent"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-equilibre-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-equilibre-06",
+   "tier": "examen",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une alimentation équilibrée est :",
+   "choices": [
+    "Variée et adaptée aux besoins",
+    "Composée d'un seul aliment",
+    "Faite seulement de viande",
+    "Riche surtout en sucre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle couvre énergie, construction et protection.",
+   "id": "4e-svt-equilibre-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le manque de vitamines et sels minéraux se corrige surtout avec :",
+   "choices": [
+    "Des fruits et légumes",
+    "Du sucre",
+    "De l'huile",
+    "Du sel de cuisine seul"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils sont les aliments protecteurs.",
+   "id": "4e-svt-equilibre-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel groupe a des besoins énergétiques souvent plus élevés ?",
+   "choices": [
+    "Un bébé de quelques jours",
+    "Une personne alitée",
+    "Un travailleur de force",
+    "Un objet"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les besoins dépendent de l'activité.",
+   "id": "4e-svt-equilibre-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie « carence » ?",
+   "choices": [
+    "Excès de sucre",
+    "Une maladie contagieuse",
+    "Un type de digestion",
+    "Manque d'un nutriment"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une carence est une insuffisance en un nutriment.",
+   "id": "4e-svt-equilibre-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui peut poser un diagnostic de maladie nutritionnelle ?",
+   "choices": [
+    "Un voisin",
+    "Un vendeur",
+    "Un agent de santé",
+    "Un ami"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Seul un professionnel de santé fait un diagnostic.",
+   "id": "4e-svt-equilibre-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-equilibre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,404 @@
+{
+ "chapter": "bepc-francais-poesie",
+ "lessons": [
+  {
+   "id": "bepc-francais-lecture-poeme",
+   "title": "Lire un poème : vers, strophes, rimes, rythme",
+   "minutes": 35,
+   "programRef": "3e — Lecture : le poème, versification (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Repérer vers, strophes et rimes.",
+    "Compter les syllabes d'un alexandrin.",
+    "Étudier le rythme, les figures et le thème d'un poème."
+   ],
+   "prerequisites": [
+    "bepc-francais-figures-style"
+   ],
+   "exercises": [
+    "bepc-francais-lecture-poeme-01",
+    "bepc-francais-lecture-poeme-02",
+    "bepc-francais-lecture-poeme-03",
+    "bepc-francais-lecture-poeme-04",
+    "bepc-francais-lecture-poeme-05",
+    "bepc-francais-lecture-poeme-06"
+   ],
+   "selfCheck": [
+    "bepc-francais-lecture-poeme-q1",
+    "bepc-francais-lecture-poeme-q2",
+    "bepc-francais-lecture-poeme-q3",
+    "bepc-francais-lecture-poeme-q4",
+    "bepc-francais-lecture-poeme-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire du poème",
+     "md": "Un poème est composé de **vers** (lignes) regroupés en **strophes**. Les vers ont une **mesure** (nombre de syllabes) et se terminent par des **rimes** (même son final). Le **rythme** vient des accents, des pauses, des répétitions."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Compter les syllabes",
+     "md": "- Une syllabe = un son vocalique prononcé.\n- Le **e muet** (sans accent) se compte devant une consonne (*ve-nue* : 2 syllabes), mais **pas** devant une voyelle (élision) ni **à la fin du vers**.\n- L'**alexandrin** a 12 syllabes, souvent coupées en deux **hémistiches** de 6 (césure). L'octosyllabe : 8 ; le décasyllabe : 10.\n- **Rimes** : plates (AABB), croisées (ABAB), embrassées (ABBA)."
+    },
+    {
+     "type": "text",
+     "md": "**Poème d'étude (original).** *Le soleil se lève sur la colline verte,\nEt le village entier s'étire dans la brise ;\nLes enfants vont, légers, d'un pas vif et alerte,\nEt toutes leurs voix montent vers la vieille église.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Scansion du premier vers : 6 + 6 syllabes.",
+     "alt": "Le premier vers du poème découpé en douze syllabes, séparé par une césure après la sixième.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "text",
+        "x": 20,
+        "y": 30,
+        "text": "Le so-leil se lè-ve",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 172,
+        "y1": 12,
+        "x2": 172,
+        "y2": 85,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 30,
+        "text": "sur la co-li-ne ver-te",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 70,
+        "text": "1  2   3   4  5  6",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 70,
+        "text": "7   8  9  10 11 12",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 110,
+        "text": "hémistiche 1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 110,
+        "text": "hémistiche 2 (e final non compté)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : les rimes",
+     "statement": "Quel est le schéma de rimes du poème d'étude ?",
+     "steps": [
+      {
+       "md": "Fins de vers : verte (A), brise (B), alerte (A), église (B)."
+      },
+      {
+       "md": "Les rimes alternent : ABAB."
+      }
+     ],
+     "answer": "**Rimes croisées (ABAB).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la mesure",
+     "statement": "Combien de syllabes a le vers « Les enfants vont, légers, d'un pas vif et alerte » ?",
+     "steps": [
+      {
+       "md": "Les(1) en(2) fants(3) vont(4) lé(5) gers(6) d'un(7) pas(8) vif(9) et(10) a(11) ler(12) te."
+      },
+      {
+       "md": "Le e final de « alerte » n'est pas compté."
+      }
+     ],
+     "answer": "**12 syllabes : c'est un alexandrin.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Compter le e muet à la fin du vers.\n- Ne pas compter un e muet devant une consonne (« lève sur » : lè-ve-sur).\n- Confondre strophe (groupe de vers) et vers (une ligne).\n- Dire « poème » sans analyser le thème, les images et le rythme."
+    }
+   ],
+   "reviewNotes": [
+    "Le poème d'étude est une composition originale en alexandrins ; scansion à faire relire (e muet, diérèse).",
+    "Les règles du e muet sont données dans les grandes lignes (e final non compté en fin de vers)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Combien de vers contient le poème d'étude ?",
+   "answer": 4,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il compte quatre lignes, donc quatre vers.",
+   "id": "bepc-francais-lecture-poeme-01",
+   "tier": "application",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un alexandrin compte :",
+   "choices": [
+    "8 syllabes",
+    "12 syllabes",
+    "10 syllabes",
+    "14 syllabes"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la mesure de l'alexandrin.",
+   "id": "bepc-francais-lecture-poeme-02",
+   "tier": "application",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans « ABAB », on parle de rimes croisées.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les rimes A et B alternent.",
+   "id": "bepc-francais-lecture-poeme-03",
+   "tier": "application",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque schéma à son nom.",
+   "pairs": [
+    [
+     "AABB",
+     "rimes plates"
+    ],
+    [
+     "ABAB",
+     "rimes croisées"
+    ],
+    [
+     "ABBA",
+     "rimes embrassées"
+    ],
+    [
+     "12 syllabes",
+     "alexandrin"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Retiens la forme de chaque schéma.",
+   "id": "bepc-francais-lecture-poeme-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Et le village entier s'étire dans la brise », quelle figure apparaît ?",
+   "choices": [
+    "une litote",
+    "une antithèse",
+    "un euphémisme",
+    "une personnification"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le village « s'étire » comme un être qui se réveille.",
+   "id": "bepc-francais-lecture-poeme-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Strophe : « Le soleil se lève sur la colline verte, / Et le village entier s'étire dans la brise ; / Les enfants vont, légers, d'un pas vif et alerte, / Et toutes leurs voix montent vers la vieille église. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le thème du poème ?",
+     "choices": [
+      "la peur de la nuit",
+      "la guerre",
+      "le réveil joyeux d'un village",
+      "un voyage en mer"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "On voit le lever du jour et les enfants qui chantent.",
+     "id": "bepc-francais-lecture-poeme-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel registre domine ?",
+     "choices": [
+      "tragique",
+      "lyrique, avec une tonalité joyeuse",
+      "satirique",
+      "épique"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le poète exprime son plaisir devant le matin.",
+     "id": "bepc-francais-lecture-poeme-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Cite un procédé qui donne une impression de mouvement et explique l'effet.",
+     "model": "Les verbes « se lève », « s'étire », « vont », « montent » donnent une impression de mouvement qui accompagne le réveil du village.",
+     "rubric": [
+      "Procédé cité (verbes d'action, énumération…) : 1 point.",
+      "Effet expliqué : 1 point."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-francais-lecture-poeme-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-francais-lecture-poeme-06",
+   "tier": "examen",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un groupe de vers s'appelle :",
+   "choices": [
+    "une rime",
+    "un hémistiche",
+    "une césure",
+    "une strophe"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La strophe regroupe plusieurs vers.",
+   "id": "bepc-francais-lecture-poeme-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que désigne la césure dans un alexandrin ?",
+   "choices": [
+    "la dernière syllabe",
+    "la coupure après la sixième syllabe",
+    "la rime",
+    "le titre"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle sépare les deux hémistiches.",
+   "id": "bepc-francais-lecture-poeme-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les rimes plates suivent le schéma :",
+   "choices": [
+    "ABAB",
+    "ABBA",
+    "ABCD",
+    "AABB"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux vers qui riment, puis les deux suivants.",
+   "id": "bepc-francais-lecture-poeme-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À la fin d'un vers, le e muet est :",
+   "choices": [
+    "toujours compté",
+    "non compté",
+    "prononcé fortement",
+    "remplacé par une rime"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ex. : « verte » compte pour une syllabe seule (ver).",
+   "id": "bepc-francais-lecture-poeme-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel élément contribue au rythme d'un poème ?",
+   "choices": [
+    "la couleur de l'encre",
+    "les répétitions et les pauses",
+    "le nombre de pages",
+    "la date de publication"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le rythme naît des sons, des accents et des pauses.",
+   "id": "bepc-francais-lecture-poeme-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-lecture-poeme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

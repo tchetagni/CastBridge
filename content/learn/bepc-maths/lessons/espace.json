@@ -1,0 +1,561 @@
+{
+ "chapter": "bepc-maths-espace",
+ "lessons": [
+  {
+   "id": "bepc-maths-espace",
+   "title": "Pyramide, cône et sphère : aires et volumes",
+   "minutes": 35,
+   "programRef": "3e — Solides : pyramide, cône de révolution, sphère ; aires et volumes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer le volume d'une pyramide, d'un cône et d'une sphère.",
+    "Calculer l'aire latérale d'un cône et l'aire d'une sphère.",
+    "Utiliser Pythagore pour passer de la hauteur à la génératrice."
+   ],
+   "prerequisites": [
+    "bepc-maths-pythagore"
+   ],
+   "exercises": [
+    "bepc-maths-espace-01",
+    "bepc-maths-espace-02",
+    "bepc-maths-espace-03",
+    "bepc-maths-espace-04",
+    "bepc-maths-espace-05",
+    "bepc-maths-espace-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-espace-q1",
+    "bepc-maths-espace-q2",
+    "bepc-maths-espace-q3",
+    "bepc-maths-espace-q4",
+    "bepc-maths-espace-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Volumes",
+     "md": "- Pyramide ou cône : $V=\\frac{1}{3}\\times\\text{aire de la base}\\times h$.\n- Cône de révolution : $V=\\frac{1}{3}\\pi r^2h$.\n- Sphère de rayon $r$ : $V=\\frac{4}{3}\\pi r^3$.\n- Rappel : prisme et cylindre : $V=\\text{aire de la base}\\times h$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Aires",
+     "md": "- Aire latérale d'un cône de révolution (génératrice $l$) : $\\pi\\,r\\,l$.\n- Aire d'une sphère : $4\\pi r^2$.\n- Pour le cône, $l^2=r^2+h^2$ (Pythagore dans le triangle formé par la hauteur, le rayon et la génératrice)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un cône de révolution (hauteur h, rayon r, génératrice l) et une pyramide de hauteur h.",
+     "alt": "Un cône et une pyramide à base quadrangulaire avec leur hauteur en pointillés.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 220,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         20,
+         30,
+         170,
+         170,
+         170
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "path",
+        "d": "M30 170 A70 18 0 0 0 170 170",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "path",
+        "d": "M30 170 A70 18 0 0 1 170 170",
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 20,
+        "x2": 100,
+        "y2": 170,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 170,
+        "x2": 170,
+        "y2": 170,
+        "color": "blue",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 100,
+        "text": "h",
+        "size": 16,
+        "color": "red",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 136,
+        "y": 164,
+        "text": "r",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 148,
+        "y": 92,
+        "text": "l",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         230,
+         170,
+         330,
+         170,
+         370,
+         140,
+         270,
+         140
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 30,
+        "x2": 230,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 30,
+        "x2": 330,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 30,
+        "x2": 370,
+        "y2": 140,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 30,
+        "x2": 270,
+        "y2": 140,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 30,
+        "x2": 300,
+        "y2": 155,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 292,
+        "y": 100,
+        "text": "h",
+        "size": 16,
+        "color": "red",
+        "anchor": "end",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 205,
+        "text": "cône",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 205,
+        "text": "pyramide",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : cône",
+     "statement": "Un cône a pour rayon 3 cm et pour hauteur 4 cm. Calcule sa génératrice et son volume (valeur exacte puis approchée au centième).",
+     "steps": [
+      {
+       "md": "Génératrice :",
+       "tex": "l^2=3^2+4^2=25\\Rightarrow l=5"
+      },
+      {
+       "md": "Volume :",
+       "tex": "V=\\frac{1}{3}\\pi\\times9\\times4=12\\pi\\approx37{,}70"
+      }
+     ],
+     "answer": "**$l=5$ cm et $V=12\\pi\\approx37{,}70$ cm³**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : pyramide et sphère",
+     "statement": "Une pyramide a pour base un carré de côté 6 cm et pour hauteur 5 cm. Une sphère a pour rayon 3 cm. Calcule le volume de la pyramide et l'aire de la sphère.",
+     "steps": [
+      {
+       "md": "Volume de la pyramide :",
+       "tex": "V=\\frac{1}{3}\\times6^2\\times5=60"
+      },
+      {
+       "md": "Aire de la sphère :",
+       "tex": "A=4\\pi\\times3^2=36\\pi\\approx113{,}10"
+      }
+     ],
+     "answer": "**60 cm³ et $36\\pi\\approx113{,}1$ cm²**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le facteur $\\frac{1}{3}$ pour la pyramide et le cône.\n- Confondre la hauteur $h$ et la génératrice $l$ du cône.\n- Mélanger unités : cm, cm², cm³ ; 1 m³ = 1 000 L.\n- Écrire $r^3$ en $r\\times3$ pour la sphère."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier la liste exacte des formules exigibles (aire latérale du cône, volume de la sphère).",
+    "Valeurs approchées avec $\\pi\\approx3{,}14159$ ; arrondis indiqués dans les tolérances."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Une pyramide a pour base un carré de côté 6 cm et pour hauteur 5 cm. Calcule son volume (en cm³).",
+   "answer": 60,
+   "unit": "cm³",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$V=\\frac{1}{3}\\times36\\times5=60$ cm³.",
+   "id": "bepc-maths-espace-01",
+   "tier": "application",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un cône a pour rayon 3 cm et pour hauteur 4 cm. Calcule son volume, arrondi au centième (en cm³).",
+   "answer": 37.7,
+   "tolerance": 0.01,
+   "unit": "cm³",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$V=\\frac{1}{3}\\pi\\times9\\times4=12\\pi\\approx37{,}70$ cm³.",
+   "id": "bepc-maths-espace-02",
+   "tier": "application",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est l'aire d'une sphère de rayon 3 cm, arrondie au dixième (en cm²) ?",
+   "answer": 113.1,
+   "tolerance": 0.1,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$4\\pi\\times9=36\\pi\\approx113{,}1$ cm².",
+   "id": "bepc-maths-espace-03",
+   "tier": "application",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un cône a pour génératrice 13 cm et pour rayon 5 cm. Calcule sa hauteur (en cm).",
+   "answer": 12,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$h^2=13^2-5^2=169-25=144$ donc $h=12$ cm.",
+   "id": "bepc-maths-espace-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule l'aire latérale d'un cône de rayon 5 cm et de génératrice 13 cm, arrondie au dixième (en cm²).",
+   "answer": 204.2,
+   "tolerance": 0.1,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "$\\pi\\times5\\times13=65\\pi\\approx204{,}2$ cm².",
+   "id": "bepc-maths-espace-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un tas de sable a la forme d'un cône de révolution de rayon 1,5 m et de hauteur 2 m.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur de la génératrice du cône (en m) ?",
+     "answer": 2.5,
+     "unit": "m",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "$l^2=1{,}5^2+2^2=2{,}25+4=6{,}25$ donc $l=2{,}5$ m.",
+     "id": "bepc-maths-espace-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le volume du tas, arrondi au centième (en m³) ?",
+     "answer": 4.71,
+     "tolerance": 0.01,
+     "unit": "m³",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$V=\\frac{1}{3}\\pi\\times2{,}25\\times2=1{,}5\\pi\\approx4{,}71$ m³.",
+     "id": "bepc-maths-espace-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On le recouvre d'une bâche sur la surface latérale. Quelle est son aire, arrondie au centième (en m²) ?",
+     "answer": 11.78,
+     "tolerance": 0.02,
+     "unit": "m²",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "$\\pi\\times1{,}5\\times2{,}5=3{,}75\\pi\\approx11{,}78$ m².",
+     "id": "bepc-maths-espace-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "La génératrice se déduit de Pythagore ; les formules du cône donnent ensuite volume et aire latérale.",
+   "figure": {
+    "kind": "shapes",
+    "w": 260,
+    "h": 220,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       130,
+       20,
+       60,
+       170,
+       200,
+       170
+      ],
+      "fill": "lightyellow",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "path",
+      "d": "M60 170 A70 18 0 0 0 200 170",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "path",
+      "d": "M60 170 A70 18 0 0 1 200 170",
+      "stroke": "grey",
+      "width": 1
+     },
+     {
+      "t": "line",
+      "x1": 130,
+      "y1": 20,
+      "x2": 130,
+      "y2": 170,
+      "color": "red",
+      "width": 2,
+      "dash": true
+     },
+     {
+      "t": "line",
+      "x1": 130,
+      "y1": 170,
+      "x2": 200,
+      "y2": 170,
+      "color": "blue",
+      "width": 2,
+      "dash": true
+     },
+     {
+      "t": "text",
+      "x": 122,
+      "y": 100,
+      "text": "h",
+      "size": 16,
+      "color": "red",
+      "anchor": "end",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 166,
+      "y": 164,
+      "text": "r",
+      "size": 16,
+      "color": "blue",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 178,
+      "y": 92,
+      "text": "l",
+      "size": 16,
+      "color": "ink",
+      "anchor": "start",
+      "bold": true
+     }
+    ]
+   },
+   "id": "bepc-maths-espace-06",
+   "tier": "examen",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule donne le volume d'une pyramide ?",
+   "choices": [
+    "$\\frac{1}{3}\\times\\text{aire de la base}\\times h$",
+    "aire de la base $\\times h$",
+    "$\\frac{1}{2}\\times\\text{aire de la base}\\times h$",
+    "$4\\pi r^2$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le volume est le tiers du produit base × hauteur.",
+   "id": "bepc-maths-espace-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'aire d'une sphère de rayon $r$ ?",
+   "choices": [
+    "$\\frac{4}{3}\\pi r^3$",
+    "$4\\pi r^2$",
+    "$\\pi r^2$",
+    "$2\\pi r$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'aire est $4\\pi r^2$ ; $\\frac{4}{3}\\pi r^3$ est le volume.",
+   "id": "bepc-maths-espace-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un cône de révolution, laquelle de ces égalités est vraie ?",
+   "choices": [
+    "$l^2=r^2+h^2$",
+    "$l=r+h$",
+    "$h^2=r^2+l^2$",
+    "$r^2=l^2+h^2$"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La génératrice est l'hypoténuse.",
+   "id": "bepc-maths-espace-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un volume de 2 m³ correspond à...",
+   "choices": [
+    "2 000 L",
+    "20 L",
+    "200 L",
+    "20 000 L"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 m³ = 1 000 L.",
+   "id": "bepc-maths-espace-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si on double le rayon d'une sphère, son volume est multiplié par...",
+   "choices": [
+    "2",
+    "4",
+    "8",
+    "6"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "$2^3=8$.",
+   "id": "bepc-maths-espace-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-maths-espace",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

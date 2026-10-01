@@ -1,0 +1,930 @@
+{
+ "chapter": "bepc-pct-elec2",
+ "lessons": [
+  {
+   "id": "bepc-pct-joule",
+   "title": "Effet Joule et protection des circuits",
+   "minutes": 25,
+   "programRef": "3e — Électricité : effet thermique du courant, effet Joule (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer l'effet Joule et citer des appareils qui l'utilisent.",
+    "Calculer la chaleur dégagée par un conducteur et la puissance dissipée.",
+    "Expliquer le rôle d'un fusible."
+   ],
+   "prerequisites": [
+    "bepc-pct-electricite"
+   ],
+   "exercises": [
+    "bepc-pct-joule-01",
+    "bepc-pct-joule-02",
+    "bepc-pct-joule-03",
+    "bepc-pct-joule-04",
+    "bepc-pct-joule-05",
+    "bepc-pct-joule-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-joule-q1",
+    "bepc-pct-joule-q2",
+    "bepc-pct-joule-q3",
+    "bepc-pct-joule-q4",
+    "bepc-pct-joule-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'effet Joule",
+     "md": "Quand un courant électrique traverse un conducteur, celui-ci **chauffe**. Ce dégagement de chaleur s'appelle l'**effet Joule**. Il est utile dans un fer à repasser, un grille-pain, une bouilloire ou un chauffe-eau, et gênant dans les câbles et les appareils qui ne doivent pas chauffer."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Chaleur dégagée et puissance dissipée",
+     "md": "Un conducteur de résistance $R$ traversé par un courant $I$ pendant une durée $t$ dégage la chaleur $Q$ (en joules). La puissance correspondante est $P = R \\times I^2$ (en watts). Avec la loi d'Ohm $U = R \\times I$, on retrouve aussi $P = U \\times I$ et $P = \\frac{U^2}{R}$.",
+     "tex": "Q = R \\times I^2 \\times t \\qquad P = R \\times I^2"
+    },
+    {
+     "type": "illustration",
+     "caption": "Un courant traverse un fil résistant : le fil chauffe.",
+     "alt": "Un fil en zigzag, traversé par un courant, qui dégage de la chaleur.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 110,
+        "x2": 120,
+        "y2": 110,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 110,
+        "x2": 380,
+        "y2": 110,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 110,
+        "x2": 135,
+        "y2": 80,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 135,
+        "y1": 80,
+        "x2": 160,
+        "y2": 140,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 140,
+        "x2": 185,
+        "y2": 80,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 80,
+        "x2": 210,
+        "y2": 140,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 140,
+        "x2": 235,
+        "y2": 80,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 235,
+        "y1": 80,
+        "x2": 260,
+        "y2": 140,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 140,
+        "x2": 285,
+        "y2": 110,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 285,
+        "y1": 110,
+        "x2": 300,
+        "y2": 110,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 80,
+        "x2": 100,
+        "y2": 80,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 65,
+        "text": "courant I",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 40,
+        "text": "fil résistant (R)",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 175,
+        "text": "chaleur Q dégagée",
+        "size": 16,
+        "color": "orange",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Le fusible",
+     "md": "Plus l'intensité $I$ est grande, plus la chaleur dégagée est grande, et elle augmente comme le **carré** de $I$ : si $I$ double, la chaleur est multipliée par 4. Un **fusible** contient un fil fin qui fond quand l'intensité dépasse sa valeur limite (le **calibre**) : le circuit s'ouvre et le courant s'arrête avant que les fils ne brûlent."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Écris la grandeur cherchée (Q, P ou I).\n2. Convertis : minutes en secondes, kilowatts en watts.\n3. Choisis la formule avec les données que tu as : $R$ et $I$ → $P = R \\times I^2$ ; $U$ et $R$ → $P = \\frac{U^2}{R}$.\n4. Donne le résultat avec son unité (W, J)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : chaleur dans un résistor",
+     "statement": "Un résistor de 50 Ω est traversé par un courant de 2 A pendant 10 minutes. Quelle chaleur dégage-t-il ?",
+     "steps": [
+      {
+       "md": "On convertit la durée : 10 min = 600 s."
+      },
+      {
+       "md": "Puissance dissipée :",
+       "tex": "P = 50 \\times 2^2 = 50 \\times 4 = 200 \\text{ W}"
+      },
+      {
+       "md": "Chaleur :",
+       "tex": "Q = 200 \\times 600 = 120\\,000 \\text{ J}"
+      }
+     ],
+     "answer": "**Q = 120 000 J = 120 kJ**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un fer à repasser",
+     "statement": "Un fer à repasser de résistance 44 Ω est branché sous 220 V. Calcule l'intensité, la puissance, puis l'énergie consommée en 30 minutes (en kWh).",
+     "steps": [
+      {
+       "md": "Loi d'Ohm :",
+       "tex": "I = \\frac{220}{44} = 5 \\text{ A}"
+      },
+      {
+       "md": "Puissance :",
+       "tex": "P = U \\times I = 220 \\times 5 = 1\\,100 \\text{ W} = 1{,}1 \\text{ kW}"
+      },
+      {
+       "md": "30 min = 0,5 h, donc :",
+       "tex": "E = 1{,}1 \\times 0{,}5 = 0{,}55 \\text{ kWh}"
+      }
+     ],
+     "answer": "**I = 5 A ; P = 1 100 W ; E = 0,55 kWh**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de mettre l'intensité **au carré** dans $R \\times I^2$.\n- Garder la durée en minutes : pour obtenir des joules, il faut des **secondes**.\n- Remplacer un fusible grillé par un fil de cuivre ou un fusible de plus gros calibre : c'est dangereux, les fils peuvent alors chauffer jusqu'à l'incendie."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si la formule Q = R × I² × t est exigée telle quelle au programme de 3e ou seulement sous la forme E = P × t.",
+    "Les valeurs de tension (220 V) suivent l'usage courant au Cameroun ; certains textes parlent de 230 V."
+   ]
+  },
+  {
+   "id": "bepc-pct-domestique",
+   "title": "Courant alternatif, sécurité domestique et facture d'électricité",
+   "minutes": 30,
+   "programRef": "3e — Électricité : courant alternatif, installation domestique, sécurité, consommation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer le courant continu du courant alternatif.",
+    "Citer les règles de sécurité dans une installation domestique.",
+    "Calculer l'énergie consommée en kWh et le coût d'une consommation."
+   ],
+   "prerequisites": [
+    "bepc-pct-joule"
+   ],
+   "exercises": [
+    "bepc-pct-domestique-01",
+    "bepc-pct-domestique-02",
+    "bepc-pct-domestique-03",
+    "bepc-pct-domestique-04",
+    "bepc-pct-domestique-05",
+    "bepc-pct-domestique-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-domestique-q1",
+    "bepc-pct-domestique-q2",
+    "bepc-pct-domestique-q3",
+    "bepc-pct-domestique-q4",
+    "bepc-pct-domestique-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Courant continu et courant alternatif",
+     "md": "Une pile ou une batterie fournit un **courant continu** : il circule toujours dans le même sens. Le réseau électrique de la maison fournit un **courant alternatif** : sa tension change de sens très régulièrement. Au Cameroun, la fréquence du secteur est de **50 Hz** : la tension se répète 50 fois par seconde. La tension du secteur est d'environ 220 V."
+    },
+    {
+     "type": "illustration",
+     "caption": "La tension du secteur change de signe : c'est une tension alternative.",
+     "alt": "Une courbe sinusoïdale qui monte puis descend de part et d'autre de l'axe du temps.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 200,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 100,
+        "x2": 400,
+        "y2": 100,
+        "color": "grey",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 30,
+        "x2": 60,
+        "y2": 170,
+        "color": "grey",
+        "width": 1.5
+       },
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         100,
+         66,
+         91,
+         72,
+         81,
+         78,
+         73,
+         84,
+         65,
+         90,
+         58,
+         96,
+         51,
+         102,
+         47,
+         108,
+         43,
+         114,
+         41,
+         120,
+         40,
+         126,
+         41,
+         132,
+         43,
+         138,
+         47,
+         144,
+         51,
+         150,
+         58,
+         156,
+         65,
+         162,
+         73,
+         168,
+         81,
+         174,
+         91,
+         180,
+         100,
+         186,
+         109,
+         192,
+         119,
+         198,
+         127,
+         204,
+         135,
+         210,
+         142,
+         216,
+         149,
+         222,
+         153,
+         228,
+         157,
+         234,
+         159,
+         240,
+         160,
+         246,
+         159,
+         252,
+         157,
+         258,
+         153,
+         264,
+         149,
+         270,
+         142,
+         276,
+         135,
+         282,
+         127,
+         288,
+         119,
+         294,
+         109,
+         300,
+         100
+        ],
+        "stroke": "blue",
+        "width": 3,
+        "closed": false
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 32,
+        "text": "U",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 125,
+        "text": "temps",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 185,
+        "x2": 300,
+        "y2": 185,
+        "color": "orange",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 168,
+        "text": "une période",
+        "size": 16,
+        "color": "orange",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sécurité : les règles de base",
+     "md": "- Ne jamais toucher un fil nu ou une prise avec les mains mouillées.\n- Brancher les appareils métalliques sur une prise avec **terre** : en cas de défaut, le courant est dérivé vers le sol.\n- Le **disjoncteur** (ou le fusible) coupe le circuit quand l'intensité est trop grande.\n- Ne pas brancher trop d'appareils sur la même prise (multiprise surchargée = surchauffe).\n- Couper le courant avant de réparer une installation."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Énergie consommée et facture",
+     "md": "L'énergie électrique consommée est $E = P \\times t$. Pour les factures, on l'exprime en **kilowattheures** (kWh) avec $P$ en kW et $t$ en heures. Le prix à payer est l'énergie multipliée par le prix du kWh. Et $1\\text{ kWh} = 3\\,600\\,000\\text{ J}$. Les appareils à gros $P$ (fer, bouilloire) coûtent cher s'ils fonctionnent longtemps.",
+     "tex": "\\text{Prix} = E \\text{ (kWh)} \\times \\text{prix du kWh}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : calculer une consommation",
+     "md": "1. Pour chaque appareil : puissance (W) × durée par jour (h) = énergie par jour (Wh).\n2. Additionne, puis multiplie par le nombre de jours.\n3. Divise par 1 000 pour passer des Wh aux kWh.\n4. Multiplie par le prix du kWh."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : quatre lampes",
+     "statement": "Quatre lampes de 20 W restent allumées 6 h par jour pendant 30 jours. Quelle énergie consomment-elles (en kWh) ? Quel est le prix à 100 FCFA le kWh (prix fictif pour l'exercice) ?",
+     "steps": [
+      {
+       "md": "Énergie par jour :",
+       "tex": "4 \\times 20 \\times 6 = 480 \\text{ Wh}"
+      },
+      {
+       "md": "Sur 30 jours :",
+       "tex": "480 \\times 30 = 14\\,400 \\text{ Wh} = 14{,}4 \\text{ kWh}"
+      },
+      {
+       "md": "Prix :",
+       "tex": "14{,}4 \\times 100 = 1\\,440 \\text{ FCFA}"
+      }
+     ],
+     "answer": "**14,4 kWh, soit 1 440 FCFA**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : disjoncteur qui saute",
+     "statement": "Une prise est protégée par un disjoncteur de 10 A sous 220 V. On y branche un fer de 1 100 W et une bouilloire de 1 500 W. Que se passe-t-il ?",
+     "steps": [
+      {
+       "md": "Puissance totale :",
+       "tex": "P = 1\\,100 + 1\\,500 = 2\\,600 \\text{ W}"
+      },
+      {
+       "md": "Intensité totale :",
+       "tex": "I = \\frac{P}{U} = \\frac{2\\,600}{220} \\approx 11{,}8 \\text{ A}"
+      },
+      {
+       "md": "Cette valeur dépasse 10 A : le disjoncteur coupe le circuit."
+      }
+     ],
+     "answer": "**I ≈ 11,8 A > 10 A : le disjoncteur saute.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre watt (puissance) et wattheure ou kWh (énergie).\n- Oublier de convertir : 480 Wh = 0,48 kWh, pas 480 kWh.\n- Croire que le disjoncteur sert à « économiser » l'électricité : il sert à protéger.\n- Se croire protégé parce qu'on porte des chaussures : ne jamais toucher un fil nu quand le courant est branché."
+    }
+   ],
+   "reviewNotes": [
+    "Prix du kWh : les prix utilisés sont FICTIFS (aucun tarif officiel cité) ; l'énoncé le précise.",
+    "Tension et fréquence du secteur citées : environ 220 V et 50 Hz (à vérifier).",
+    "Les couleurs des fils (phase, neutre, terre) sont volontairement omises car variables."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Un résistor de 20 Ω est traversé par un courant de 3 A. Calcule la puissance dissipée (en W).",
+   "answer": 180,
+   "unit": "W",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "P = R × I² = 20 × 3² = 20 × 9 = 180 W.",
+   "method": "Utilise P = R × I² : n'oublie pas le carré.",
+   "id": "bepc-pct-joule-01",
+   "tier": "application",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une plaque chauffante a une résistance de 100 Ω et fonctionne sous 220 V. Calcule sa puissance (en W).",
+   "answer": 484,
+   "tolerance": 0.5,
+   "unit": "W",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "P = U² / R = 220² / 100 = 48 400 / 100 = 484 W.",
+   "id": "bepc-pct-joule-02",
+   "tier": "application",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel de ces appareils utilise principalement l'effet Joule pour fonctionner ?",
+   "choices": [
+    "Un ventilateur",
+    "Un haut-parleur",
+    "Un grille-pain",
+    "Une pile"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dans un grille-pain, un fil résistant chauffe jusqu'au rouge pour griller le pain. Les autres appareils ne sont pas faits pour chauffer.",
+   "id": "bepc-pct-joule-03",
+   "tier": "application",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un résistor de 30 Ω est traversé par un courant de 2 A pendant 5 minutes. Quelle chaleur dégage-t-il (en J) ?",
+   "answer": 36000,
+   "unit": "J",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "P = 30 × 2² = 120 W ; t = 5 × 60 = 300 s ; Q = 120 × 300 = 36 000 J.",
+   "mistakes": [
+    "Garder t = 5 min : on obtiendrait 600 J, faux."
+   ],
+   "id": "bepc-pct-joule-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : si l'on double l'intensité du courant dans un même résistor, la chaleur dégagée pendant la même durée est multipliée par 4.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Q = R × I² × t : si I est multiplié par 2, I² est multiplié par 4, donc Q aussi.",
+   "id": "bepc-pct-joule-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une résistance chauffante de 55 Ω est alimentée sous 220 V.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'intensité du courant (en A).",
+     "answer": 4,
+     "unit": "A",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "I = U / R = 220 / 55 = 4 A.",
+     "id": "bepc-pct-joule-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la puissance de la résistance (en W).",
+     "answer": 880,
+     "unit": "W",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "P = U × I = 220 × 4 = 880 W.",
+     "id": "bepc-pct-joule-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle chaleur dégage-t-elle en 15 minutes (en J) ?",
+     "answer": 792000,
+     "unit": "J",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "15 min = 900 s ; Q = P × t = 880 × 900 = 792 000 J.",
+     "id": "bepc-pct-joule-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Loi d'Ohm d'abord, puis la puissance, puis l'énergie avec le temps en secondes.",
+   "id": "bepc-pct-joule-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'appelle le dégagement de chaleur dans un conducteur traversé par un courant ?",
+   "choices": [
+    "L'effet Ohm",
+    "L'effet Joule",
+    "L'effet Volta",
+    "La dérivation"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est l'effet Joule, du nom du physicien qui l'a étudié.",
+   "id": "bepc-pct-joule-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expression donne la puissance dissipée par un résistor R traversé par un courant I ?",
+   "choices": [
+    "P = R / I²",
+    "P = R + I",
+    "P = R × I²",
+    "P = I / R"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La puissance dissipée par effet Joule vaut R × I².",
+   "id": "bepc-pct-joule-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un circuit, l'intensité passe de 1 A à 3 A, la résistance restant la même. Par combien la puissance dissipée est-elle multipliée ?",
+   "choices": [
+    "3",
+    "6",
+    "1/3",
+    "9"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "P = R × I² : I est multiplié par 3, donc I² par 9.",
+   "id": "bepc-pct-joule-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait un fusible quand l'intensité dépasse son calibre ?",
+   "choices": [
+    "Il augmente la tension",
+    "Il fait chauffer les fils",
+    "Son fil fond et coupe le circuit",
+    "Il refroidit le circuit"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le fil fin du fusible fond et le courant s'arrête : il protège l'installation.",
+   "id": "bepc-pct-joule-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi un câble trop fin pour un gros appareil est-il dangereux ?",
+   "choices": [
+    "Il fait baisser la tension du secteur",
+    "Il refroidit l'appareil",
+    "Il ne laisse passer aucun courant",
+    "Il chauffe trop et peut s'enflammer"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un fil fin a une plus grande résistance et chauffe beaucoup avec une forte intensité.",
+   "id": "bepc-pct-joule-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-joule",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une ampoule de 10 W reste allumée 8 h par jour pendant 30 jours. Calcule l'énergie consommée (en kWh).",
+   "answer": 2.4,
+   "tolerance": 0.01,
+   "unit": "kWh",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10 × 8 × 30 = 2 400 Wh = 2,4 kWh.",
+   "id": "bepc-pct-domestique-01",
+   "tier": "application",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une famille consomme 25 kWh dans le mois. Le kWh est facturé 90 FCFA (prix fictif). Quel est le montant (en FCFA) ?",
+   "answer": 2250,
+   "unit": "FCFA",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "25 × 90 = 2 250 FCFA.",
+   "id": "bepc-pct-domestique-02",
+   "tier": "application",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert la prise de terre d'un appareil métallique ?",
+   "choices": [
+    "À augmenter la puissance",
+    "À transformer le courant alternatif en courant continu",
+    "À évacuer vers le sol un courant de défaut",
+    "À économiser de l'énergie"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "En cas de fuite de courant sur la carcasse, la terre dirige ce courant vers le sol au lieu de traverser la personne qui touche l'appareil.",
+   "id": "bepc-pct-domestique-03",
+   "tier": "application",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un disjoncteur de 16 A est installé sur un circuit sous 220 V. Quelle puissance maximale (en W) peut-on y brancher en même temps ?",
+   "answer": 3520,
+   "unit": "W",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "P max = U × I = 220 × 16 = 3 520 W.",
+   "id": "bepc-pct-domestique-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un fusible de 5 A protège correctement un appareil de 1 500 W branché sous 220 V.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "I = P / U = 1 500 / 220 ≈ 6,8 A, supérieur à 5 A : le fusible fondrait dès la mise en marche. Il faut un calibre adapté (supérieur à 6,8 A).",
+   "id": "bepc-pct-domestique-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "À Ebolowa, un ménage allume chaque jour : 3 lampes de 15 W pendant 5 h, un téléviseur de 90 W pendant 4 h et un réfrigérateur qui fonctionne en moyenne 10 h par jour avec 120 W. Le mois compte 30 jours. Prix du kWh : 80 FCFA (prix fictif).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle énergie consomment les 3 lampes en un jour (en Wh) ?",
+     "answer": 225,
+     "unit": "Wh",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3 × 15 × 5 = 225 Wh.",
+     "id": "bepc-pct-domestique-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'énergie totale consommée en 30 jours (en kWh) ?",
+     "answer": 53.55,
+     "tolerance": 0.01,
+     "unit": "kWh",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Par jour : 225 + 90 × 4 + 120 × 10 = 225 + 360 + 1 200 = 1 785 Wh. Sur 30 jours : 53 550 Wh = 53,55 kWh.",
+     "id": "bepc-pct-domestique-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le montant à payer (en FCFA) ?",
+     "answer": 4284,
+     "tolerance": 1,
+     "unit": "FCFA",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "53,55 × 80 = 4 284 FCFA.",
+     "id": "bepc-pct-domestique-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Calcule l'énergie journalière de chaque appareil (W × h), additionne, puis passe au mois et aux kWh.",
+   "id": "bepc-pct-domestique-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la fréquence du courant du secteur au Cameroun ?",
+   "choices": [
+    "5 Hz",
+    "500 Hz",
+    "220 Hz",
+    "50 Hz"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le secteur est à 50 Hz : 50 périodes par seconde.",
+   "id": "bepc-pct-domestique-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une pile délivre :",
+   "choices": [
+    "Un courant alternatif de 50 Hz",
+    "Un courant continu",
+    "Un courant sans tension",
+    "Un courant triphasé"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une pile impose toujours le même sens de courant : c'est un courant continu.",
+   "id": "bepc-pct-domestique-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle consommation correspond à 1 kWh ?",
+   "choices": [
+    "Un appareil de 1 000 W qui fonctionne 1 heure",
+    "Un appareil de 1 W qui fonctionne 1 heure",
+    "Un appareil de 100 W qui fonctionne 1 minute",
+    "Un appareil de 10 W qui fonctionne 1 seconde"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 kWh = 1 kW × 1 h = 1 000 W pendant 1 heure.",
+   "id": "bepc-pct-domestique-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un appareil de 1 100 W fonctionne sous 220 V. Quelle est l'intensité qui le traverse ?",
+   "choices": [
+    "0,2 A",
+    "5 A",
+    "50 A",
+    "242 000 A"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "I = P / U = 1 100 / 220 = 5 A.",
+   "id": "bepc-pct-domestique-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle attitude est dangereuse ?",
+   "choices": [
+    "Débrancher un appareil avant de le nettoyer",
+    "Utiliser une prise avec terre pour un frigo",
+    "Changer une ampoule sans couper le courant, pieds nus et mains mouillées",
+    "Faire changer un fusible grillé par un électricien"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les mains mouillées et le contact avec le sol augmentent fortement le risque d'électrocution.",
+   "id": "bepc-pct-domestique-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

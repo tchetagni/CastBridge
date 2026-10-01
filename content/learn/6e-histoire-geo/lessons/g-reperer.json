@@ -1,0 +1,1206 @@
+{
+ "chapter": "6e-histoire-geo-g-reperer",
+ "lessons": [
+  {
+   "id": "6e-histoire-geo-cardinaux-plan",
+   "title": "Points cardinaux et plan",
+   "minutes": 20,
+   "programRef": "6e — Géographie : se repérer (à vérifier sur le programme officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Nommer les points cardinaux et utiliser la rose des vents.",
+    "Lire un plan simple (classe, quartier) avec sa légende."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "6e-histoire-geo-cardinaux-plan-01",
+    "6e-histoire-geo-cardinaux-plan-02",
+    "6e-histoire-geo-cardinaux-plan-03",
+    "6e-histoire-geo-cardinaux-plan-04",
+    "6e-histoire-geo-cardinaux-plan-05",
+    "6e-histoire-geo-cardinaux-plan-06"
+   ],
+   "selfCheck": [
+    "6e-histoire-geo-cardinaux-plan-q1",
+    "6e-histoire-geo-cardinaux-plan-q2",
+    "6e-histoire-geo-cardinaux-plan-q3",
+    "6e-histoire-geo-cardinaux-plan-q4",
+    "6e-histoire-geo-cardinaux-plan-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les points cardinaux",
+     "md": "Les quatre **points cardinaux** sont le **Nord** (N), le **Sud** (S), l'**Est** (E) et l'**Ouest** (O). L'Est est du côté où le soleil se lève, l'Ouest du côté où il se couche. La **rose des vents** les représente ; on y ajoute les directions intermédiaires : nord-est, sud-est, sud-ouest, nord-ouest."
+    },
+    {
+     "type": "illustration",
+     "caption": "La rose des vents avec les quatre points cardinaux.",
+     "alt": "Quatre flèches partant du centre vers N, S, E et O.",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 130,
+        "x2": 150,
+        "y2": 40,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 130,
+        "x2": 150,
+        "y2": 220,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 130,
+        "x2": 60,
+        "y2": 130,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 130,
+        "x2": 240,
+        "y2": 130,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 28,
+        "text": "N",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 246,
+        "text": "S",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 38,
+        "y": 136,
+        "text": "O",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 268,
+        "y": 136,
+        "text": "E",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 130,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Un plan",
+     "md": "Un **plan** est un dessin d'un petit espace (classe, cour, quartier) vu **de dessus**, avec une **légende** qui explique les signes et un **titre**. Le plan est à grande échelle : on y voit beaucoup de détails."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : s'orienter avec le soleil",
+     "statement": "Le matin, le soleil se lève derrière toi. Dans quelle direction regardes-tu ?",
+     "steps": [
+      {
+       "md": "Le soleil se lève à l'Est."
+      },
+      {
+       "md": "Il est derrière toi : tu tournes donc le dos à l'Est et tu regardes vers l'Ouest."
+      }
+     ],
+     "answer": "**Vers l'Ouest**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire un plan de classe",
+     "statement": "Sur le plan de la classe (nord en haut), le tableau est dessiné en haut du plan et la porte à droite. Où est la porte par rapport au tableau ?",
+     "steps": [
+      {
+       "md": "En haut = Nord, à droite = Est."
+      },
+      {
+       "md": "Le tableau est donc au nord de la salle et la porte du côté est."
+      }
+     ],
+     "answer": "**La porte est du côté est, le tableau au nord.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le nord est toujours « en haut » : il faut regarder la rose des vents ou la flèche du nord.\n- Mélanger Est et Ouest : « Est = soleil levant ».\n- Oublier la légende : sans elle, on ne comprend pas les signes du plan."
+    }
+   ],
+   "reviewNotes": [
+    "Programme officiel : vérifier si le plan et la carte sont traités ensemble ou séparément."
+   ]
+  },
+  {
+   "id": "6e-histoire-geo-carte-echelle",
+   "title": "La carte et l'échelle",
+   "minutes": 22,
+   "programRef": "6e — Géographie : se repérer (à vérifier sur le programme officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Lire une carte avec sa légende.",
+    "Utiliser l'échelle pour calculer une distance réelle."
+   ],
+   "prerequisites": [
+    "6e-histoire-geo-cardinaux-plan"
+   ],
+   "exercises": [
+    "6e-histoire-geo-carte-echelle-01",
+    "6e-histoire-geo-carte-echelle-02",
+    "6e-histoire-geo-carte-echelle-03",
+    "6e-histoire-geo-carte-echelle-04",
+    "6e-histoire-geo-carte-echelle-05",
+    "6e-histoire-geo-carte-echelle-06"
+   ],
+   "selfCheck": [
+    "6e-histoire-geo-carte-echelle-q1",
+    "6e-histoire-geo-carte-echelle-q2",
+    "6e-histoire-geo-carte-echelle-q3",
+    "6e-histoire-geo-carte-echelle-q4",
+    "6e-histoire-geo-carte-echelle-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Une carte",
+     "md": "Une **carte** représente un territoire plus grand (région, pays, continent) à **échelle réduite**. Elle a un titre, une légende, une orientation et une **échelle**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une échelle graphique : la règle indique des kilomètres réels.",
+     "alt": "Une règle graduée de 0 à 4 km.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 130,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 60,
+        "x2": 380,
+        "y2": 60,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 50,
+        "x2": 40,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 125,
+        "y1": 50,
+        "x2": 125,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 50,
+        "x2": 210,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 295,
+        "y1": 50,
+        "x2": 295,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 50,
+        "x2": 380,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 95,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 95,
+        "text": "2 km",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 95,
+        "text": "4 km",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 30,
+        "text": "Échelle graphique",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "L'échelle",
+     "md": "L'**échelle** compare une longueur sur la carte à la longueur réelle. Une échelle de 1/50 000 signifie : **1 cm sur la carte = 50 000 cm sur le terrain**, soit 500 m. Plus le dénominateur est grand, plus la carte est à **petite échelle** (peu de détails)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Calculer une distance",
+     "md": "1. Mesure la distance sur la carte (en cm).\n2. Multiplie par le dénominateur de l'échelle.\n3. Convertis : 100 000 cm = 1 km."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calcul avec 1/50 000",
+     "statement": "Sur une carte à l'échelle 1/50 000, deux villages sont séparés de 4 cm. Quelle est la distance réelle ?",
+     "steps": [
+      {
+       "md": "4 cm × 50 000 = 200 000 cm."
+      },
+      {
+       "md": "Conversion : 200 000 cm = 2 000 m",
+       "tex": "200\\,000 \\text{ cm} = 2\\,000 \\text{ m} = 2 \\text{ km}"
+      }
+     ],
+     "answer": "**2 km**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : échelle exprimée en km",
+     "statement": "Sur une carte, 1 cm représente 10 km. Deux villes sont à 3,5 cm sur la carte. Quelle distance les sépare ?",
+     "steps": [
+      {
+       "md": "Chaque centimètre vaut 10 km."
+      },
+      {
+       "md": "On multiplie :",
+       "tex": "3{,}5 \\times 10 = 35"
+      }
+     ],
+     "answer": "**35 km**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de convertir les centimètres en kilomètres.\n- Croire qu'une carte à grande échelle couvre un grand territoire : c'est l'inverse, elle montre un petit territoire avec beaucoup de détails.\n- Mesurer avec une règle sans vérifier l'échelle de la carte."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier les unités attendues (cm, m, km) et si l'échelle graphique est au programme."
+   ]
+  },
+  {
+   "id": "6e-histoire-geo-coordonnees",
+   "title": "Latitude, longitude et hémisphères",
+   "minutes": 20,
+   "programRef": "6e — Géographie : se repérer (à vérifier sur le programme officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir l'équateur et le méridien de Greenwich.",
+    "Situer un point par sa latitude et sa longitude."
+   ],
+   "prerequisites": [
+    "6e-histoire-geo-cardinaux-plan"
+   ],
+   "exercises": [
+    "6e-histoire-geo-coordonnees-01",
+    "6e-histoire-geo-coordonnees-02",
+    "6e-histoire-geo-coordonnees-03",
+    "6e-histoire-geo-coordonnees-04",
+    "6e-histoire-geo-coordonnees-05",
+    "6e-histoire-geo-coordonnees-06"
+   ],
+   "selfCheck": [
+    "6e-histoire-geo-coordonnees-q1",
+    "6e-histoire-geo-coordonnees-q2",
+    "6e-histoire-geo-coordonnees-q3",
+    "6e-histoire-geo-coordonnees-q4",
+    "6e-histoire-geo-coordonnees-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Équateur et méridien de Greenwich",
+     "md": "L'**équateur** est le grand cercle imaginaire qui partage la Terre en deux **hémisphères** : Nord et Sud. Le **méridien de Greenwich** (0°) partage la Terre en hémisphères Est et Ouest."
+    },
+    {
+     "type": "illustration",
+     "caption": "Schéma de la Terre avec l'équateur et le méridien de Greenwich.",
+     "alt": "Un cercle avec une ligne horizontale pour l'équateur et une verticale pour Greenwich.",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 260,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 130,
+        "r": 100,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 130,
+        "x2": 260,
+        "y2": 130,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 30,
+        "x2": 160,
+        "y2": 230,
+        "color": "green",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 20,
+        "text": "Pôle Nord",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 252,
+        "text": "Pôle Sud",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 126,
+        "text": "Équateur",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 148,
+        "text": "Greenwich",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Latitude et longitude",
+     "md": "La **latitude** mesure la distance à l'équateur, de 0° à 90° vers le Nord (N) ou vers le Sud (S). La **longitude** mesure la distance au méridien de Greenwich, de 0° à 180° vers l'Est (E) ou vers l'Ouest (O). Ces deux nombres forment les **coordonnées géographiques**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le Cameroun",
+     "md": "Le Cameroun est situé dans l'**hémisphère Nord**, à l'**Est** du méridien de Greenwich, assez près de l'équateur : sa latitude va d'environ 2° N à 13° N. La région du lac Tchad est tout au nord, la côte atlantique au sud-ouest."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire une latitude",
+     "statement": "Une ville a pour latitude 4° N. Dans quel hémisphère est-elle ?",
+     "steps": [
+      {
+       "md": "N signifie Nord."
+      },
+      {
+       "md": "Elle est donc au nord de l'équateur."
+      }
+     ],
+     "answer": "**Hémisphère Nord**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire une longitude",
+     "statement": "Un lieu a pour longitude 12° E. Où se trouve-t-il par rapport à Greenwich ?",
+     "steps": [
+      {
+       "md": "E signifie Est."
+      },
+      {
+       "md": "Le lieu est à 12° à l'Est du méridien de Greenwich."
+      }
+     ],
+     "answer": "**À l'Est de Greenwich**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre latitude (lignes parallèles à l'équateur) et longitude (lignes qui vont d'un pôle à l'autre).\n- Oublier la lettre N, S, E ou O : sans elle, la coordonnée est incomplète.\n- Croire que l'équateur est le méridien 0° : ce sont deux lignes différentes."
+    }
+   ],
+   "reviewNotes": [
+    "La latitude/longitude du Cameroun est donnée en valeurs arrondies (« environ »), à vérifier sur un atlas.",
+    "Vérifier si le programme parle de coordonnées ou seulement d'hémisphères en 6e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Où le soleil se lève-t-il ?",
+   "choices": [
+    "à l'Ouest",
+    "au Nord",
+    "au Sud",
+    "à l'Est"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le soleil se lève à l'Est et se couche à l'Ouest.",
+   "id": "6e-histoire-geo-cardinaux-plan-01",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel point cardinal est opposé au Nord ?",
+   "choices": [
+    "l'Est",
+    "le Sud",
+    "l'Ouest",
+    "le nord-est"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nord et Sud sont opposés.",
+   "id": "6e-histoire-geo-cardinaux-plan-02",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un plan est vu de dessus.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On dessine l'espace comme si on le regardait d'en haut.",
+   "id": "6e-histoire-geo-cardinaux-plan-03",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle direction est entre le Nord et l'Est ?",
+   "choices": [
+    "le sud-ouest",
+    "le nord-ouest",
+    "le sud-est",
+    "le nord-est"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Elle se situe à mi-chemin entre N et E.",
+   "id": "6e-histoire-geo-cardinaux-plan-04",
+   "tier": "approfondissement",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque signe ou mot à son rôle.",
+   "pairs": [
+    [
+     "Rose des vents",
+     "indique les directions"
+    ],
+    [
+     "Légende",
+     "explique les signes"
+    ],
+    [
+     "Titre",
+     "dit ce que représente le plan"
+    ],
+    [
+     "Plan",
+     "vue de dessus d'un petit espace"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Éléments de lecture d'un plan.",
+   "id": "6e-histoire-geo-cardinaux-plan-05",
+   "tier": "approfondissement",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Sur un plan de la cour d'école, le nord est en haut. Le portail est tout à gauche et le terrain de sport tout en bas.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Dans quelle direction est le portail par rapport au centre ?",
+     "choices": [
+      "à l'Ouest",
+      "à l'Est",
+      "au Nord",
+      "au Sud"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "À gauche = Ouest quand le nord est en haut.",
+     "id": "6e-histoire-geo-cardinaux-plan-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Le terrain de sport est...",
+     "choices": [
+      "au Nord",
+      "à l'Est",
+      "à l'Ouest",
+      "au Sud"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "En bas = Sud.",
+     "id": "6e-histoire-geo-cardinaux-plan-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique comment indiquer à un camarade le chemin du portail au terrain de sport avec les points cardinaux.",
+     "model": "Du portail (à l'Ouest), on marche vers l'Est jusqu'au milieu de la cour, puis on tourne vers le Sud jusqu'au terrain.",
+     "rubric": [
+      "Utilise au moins deux points cardinaux",
+      "Donne un ordre cohérent des déplacements"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-histoire-geo-cardinaux-plan-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-histoire-geo-cardinaux-plan-06",
+   "tier": "examen",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien y a-t-il de points cardinaux principaux ?",
+   "choices": [
+    "2",
+    "6",
+    "4",
+    "8"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nord, Sud, Est, Ouest.",
+   "id": "6e-histoire-geo-cardinaux-plan-q1",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La légende d'un plan sert à...",
+   "choices": [
+    "mesurer le temps",
+    "donner la date",
+    "expliquer les signes utilisés",
+    "dessiner la rose des vents"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle donne la signification des symboles.",
+   "id": "6e-histoire-geo-cardinaux-plan-q2",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si tu tournes le dos au Nord, tu regardes vers...",
+   "choices": [
+    "l'Est",
+    "le Nord",
+    "l'Ouest",
+    "le Sud"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Face à toi se trouve la direction opposée.",
+   "id": "6e-histoire-geo-cardinaux-plan-q3",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le soleil se couche à...",
+   "choices": [
+    "l'Est",
+    "le Nord",
+    "l'Ouest",
+    "le Sud"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le couchant se trouve à l'Ouest.",
+   "id": "6e-histoire-geo-cardinaux-plan-q4",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un plan représente...",
+   "choices": [
+    "un continent entier",
+    "le monde",
+    "un petit espace en détail",
+    "un océan"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il a une grande échelle.",
+   "id": "6e-histoire-geo-cardinaux-plan-q5",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-cardinaux-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Échelle 1/100 000 : 3 cm sur la carte représentent combien de km ?",
+   "answer": 3,
+   "unit": "km",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 100 000 = 300 000 cm = 3 km.",
+   "id": "6e-histoire-geo-carte-echelle-01",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une échelle de 1/10 000 signifie que 1 cm représente...",
+   "choices": [
+    "10 000 cm réels",
+    "10 000 km réels",
+    "1 000 cm réels",
+    "100 cm réels"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 cm sur la carte vaut 10 000 cm sur le terrain, soit 100 m.",
+   "id": "6e-histoire-geo-carte-echelle-02",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle carte est à plus grande échelle ?",
+   "choices": [
+    "1/500 000",
+    "1/50 000 000",
+    "1/5 000 000",
+    "1/5 000"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plus le dénominateur est petit, plus l'échelle est grande.",
+   "id": "6e-histoire-geo-carte-echelle-03",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur une carte au 1/25 000, une route mesure 8 cm. Quelle est sa longueur réelle en km ?",
+   "answer": 2,
+   "unit": "km",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "8 × 25 000 = 200 000 cm = 2 km.",
+   "id": "6e-histoire-geo-carte-echelle-04",
+   "tier": "approfondissement",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Deux villes sont distantes de 60 km. Sur une carte, 1 cm représente 20 km. Quelle distance sur la carte (en cm) ?",
+   "answer": 3,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "60 ÷ 20 = 3 cm.",
+   "id": "6e-histoire-geo-carte-echelle-05",
+   "tier": "approfondissement",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une carte est à l'échelle 1/200 000. Amina mesure 6 cm entre son village et le marché.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la distance réelle en km ?",
+     "answer": 12,
+     "unit": "km",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "6 × 200 000 = 1 200 000 cm = 12 km.",
+     "id": "6e-histoire-geo-carte-echelle-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Le bus roule à 24 km par heure en moyenne : combien de minutes pour parcourir cette distance ?",
+     "answer": 30,
+     "unit": "min",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "12 km à 24 km/h = 0,5 h = 30 min.",
+     "id": "6e-histoire-geo-carte-echelle-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-histoire-geo-carte-echelle-06",
+   "tier": "examen",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une carte sans échelle...",
+   "choices": [
+    "est plus précise",
+    "est un plan",
+    "ne permet pas de calculer les distances",
+    "n'existe pas"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sans échelle, impossible de convertir.",
+   "id": "6e-histoire-geo-carte-echelle-q1",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de mètres contient 1 km ?",
+   "choices": [
+    "1 000 m",
+    "100 m",
+    "10 000 m",
+    "10 m"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 km = 1 000 m.",
+   "id": "6e-histoire-geo-carte-echelle-q2",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que représente la légende d'une carte ?",
+   "choices": [
+    "le sens des signes et des couleurs",
+    "la date de naissance de l'auteur",
+    "le prix",
+    "le temps de trajet"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle explique les symboles.",
+   "id": "6e-histoire-geo-carte-echelle-q3",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une carte du monde est en général...",
+   "choices": [
+    "à grande échelle",
+    "sans échelle",
+    "un plan",
+    "à petite échelle"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle couvre un très grand territoire avec peu de détails.",
+   "id": "6e-histoire-geo-carte-echelle-q4",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec une échelle 1/50 000, 2 cm représentent...",
+   "choices": [
+    "100 m",
+    "10 km",
+    "1 km",
+    "2 km"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 50 000 = 100 000 cm = 1 km.",
+   "id": "6e-histoire-geo-carte-echelle-q5",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-carte-echelle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'équateur partage la Terre en...",
+   "choices": [
+    "hémisphère Nord et hémisphère Sud",
+    "hémisphère Est et Ouest",
+    "deux océans",
+    "quatre continents"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il est à 0° de latitude.",
+   "id": "6e-histoire-geo-coordonnees-01",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La latitude se mesure à partir...",
+   "choices": [
+    "du méridien de Greenwich",
+    "de l'Atlantique",
+    "de l'équateur",
+    "du pôle Sud seulement"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La latitude compte les degrés au Nord ou au Sud de l'équateur.",
+   "id": "6e-histoire-geo-coordonnees-02",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le Cameroun se situe dans l'hémisphère...",
+   "choices": [
+    "Sud",
+    "Ouest",
+    "polaire",
+    "Nord"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il est au nord de l'équateur.",
+   "id": "6e-histoire-geo-coordonnees-03",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle valeur ne peut pas être une latitude ?",
+   "choices": [
+    "40° N",
+    "120° N",
+    "0°",
+    "90° S"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La latitude va de 0° à 90°.",
+   "id": "6e-histoire-geo-coordonnees-04",
+   "tier": "approfondissement",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque terme à sa description.",
+   "pairs": [
+    [
+     "Latitude",
+     "distance à l'équateur"
+    ],
+    [
+     "Longitude",
+     "distance à Greenwich"
+    ],
+    [
+     "Équateur",
+     "latitude 0°"
+    ],
+    [
+     "Greenwich",
+     "longitude 0°"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Quatre notions de base.",
+   "id": "6e-histoire-geo-coordonnees-05",
+   "tier": "approfondissement",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un point A est à 5° N de latitude et 10° E de longitude. Un point B est à 5° S et 10° E.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Lequel est dans l'hémisphère Nord ?",
+     "choices": [
+      "B",
+      "A",
+      "Les deux",
+      "Aucun"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "A est à 5° N.",
+     "id": "6e-histoire-geo-coordonnees-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle différence de latitude (en degrés) entre A et B ?",
+     "answer": 10,
+     "unit": "°",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "De 5° N à 5° S on traverse l'équateur : 5 + 5 = 10°.",
+     "id": "6e-histoire-geo-coordonnees-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-histoire-geo-coordonnees-06",
+   "tier": "examen",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La longitude va de 0° à...",
+   "choices": [
+    "90°",
+    "360° uniquement vers l'Est",
+    "45°",
+    "180°"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "0 à 180° Est ou Ouest.",
+   "id": "6e-histoire-geo-coordonnees-q1",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Greenwich est...",
+   "choices": [
+    "un océan",
+    "le méridien d'origine",
+    "une ville du Cameroun",
+    "l'équateur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le méridien 0° passe par Greenwich.",
+   "id": "6e-histoire-geo-coordonnees-q2",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les coordonnées géographiques sont...",
+   "choices": [
+    "l'altitude et la densité",
+    "la latitude et la longitude",
+    "l'échelle et le titre",
+    "le nord et le sud seulement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elles localisent un point sur Terre.",
+   "id": "6e-histoire-geo-coordonnees-q3",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un point à 0° de latitude est...",
+   "choices": [
+    "au pôle Nord",
+    "sur le méridien de Greenwich",
+    "sur l'équateur",
+    "dans l'hémisphère Sud"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Latitude 0° = équateur.",
+   "id": "6e-histoire-geo-coordonnees-q4",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un point à 15° O est...",
+   "choices": [
+    "à l'Est de Greenwich",
+    "au Nord",
+    "au Sud",
+    "à l'Ouest de Greenwich"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "O = Ouest.",
+   "id": "6e-histoire-geo-coordonnees-q5",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-coordonnees",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
